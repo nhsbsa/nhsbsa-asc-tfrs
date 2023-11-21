@@ -4,6 +4,19 @@
   GOV.UK page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
+{% block beforeContent %}
+  <div class="govuk-breadcrumbs">
+    <ol class="govuk-breadcrumbs__list">
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="/">Home</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="/claims/claims-index">Claims</a>
+      </li>
+    </ol>
+  </div>
+{% endblock %}
+
 {% block content %}
 
 <div class="govuk-grid-row">
@@ -15,6 +28,14 @@
     <p class="govuk-body"> 
       The part of the digital service that allows employers to make and manage training reimbursment claims.
     </p>
+    <p class="govuk-body-s">Current version:
+      <strong class="govuk-tag govuk-tag--purple">
+        v0.1
+      </strong>
+    </p>
+    <button class="govuk-button" data-module="govuk-button" href="prototypes/v1/overview.html">
+      View current prototype
+    </button>
   </div>  
 </div>
 
@@ -58,7 +79,7 @@
       </div>
     </details>
     <p class="govuk-body"> 
-      <a href="claims/prototypes/v0.1">View v0.1 prototype</a>
+      <a href="prototypes/v1/overview.html">View v0.1 prototype</a>
     </p>
     <hr class="govuk-!-margin-top-7 govuk-!-margin-bottom-7">
   </div>  
