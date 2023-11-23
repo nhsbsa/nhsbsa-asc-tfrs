@@ -26,7 +26,7 @@
         <div class="moj-page-header-actions">
 
             <div class="moj-page-header-actions__title">
-                <h1 class="govuk-heading-xl">Jane Doe <span class="govuk-caption-l">Care worker<br> #000200 </span></h1>
+                <h1 class="govuk-heading-xl">Jane Doe <span class="govuk-caption-l">Care worker<br>#000200 </span></h1>
             </div>
           
             <div class="moj-page-header-actions__actions">
@@ -48,64 +48,169 @@
           </div>
     </div>
 </div>
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-third">
-        {% include "../claim-items/_includes/filter.html" %}
-    </div>
-    <div class="govuk-grid-column-two-thirds">
-        <div class="govuk-summary-card">
-            <div class="govuk-summary-card__title-wrapper">
-              <h2 class="govuk-summary-card__title">Dementia Training</h2>
-              <span><strong class="govuk-tag govuk-tag--red">
-                Incomplete
-                </strong></span>
+
+<div class="govuk-width-container">
+    <main class="govuk-main-wrapper">
+        <div class="govuk-tabs" data-module="govuk-tabs">
+            <h2 class="govuk-tabs__title">
+              Contents
+            </h2>
+            <ul class="govuk-tabs__list">
+              <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+                <a class="govuk-tabs__tab" href="#inprogress">
+                  In-progress claim items
+                </a>
+              </li>
+              <li class="govuk-tabs__list-item">
+                <a class="govuk-tabs__tab" href="#submitted">
+                  Submitted claim items
+                </a>
+              </li>
+            </ul>
+            <div class="govuk-tabs__panel" id="inprogress">
+                <div class="govuk-grid-row">
+                    <div class="govuk-grid-column-one-third">
+                        <!--Filter Start-->
+                        {% include "../claim-items/_includes/filter.html" %}
+                        <!--Filter End-->  
+                    </div>
+                    <div class="govuk-grid-column-two-thirds">
+                        <div class="govuk-grid-row">
+                            <div class="govuk-grid-column-full">
+                                  <div class="govuk-summary-card">
+                                    <div class="govuk-summary-card__title-wrapper">
+                                        <h2 class="govuk-summary-card__title"><span class="govuk-caption-m">#0102931</span>Dementia Training<span class="govuk-caption-m">23 November 2023</span></h2>
+                                        <span><ul class="govuk-summary-card__actions">
+                                              <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="#">
+                                                  View activity details<span class="govuk-visually-hidden"> number 0102931</span>
+                                              </a>
+                                              </li>
+                                              <li class="govuk-summary-card__action"> <a class="govuk-link govuk-link--no-visited-state" href="#">
+                                                  Add evidence<span class="govuk-visually-hidden">number 0102931</span>
+                                              </a>
+                                              </li>
+                                          </ul></span>
+                                      </div>
+                                    <div class="govuk-summary-card__content">
+                                      <dl class="govuk-summary-list">
+                                        <div class="govuk-summary-list__row">
+                                          <dt class="govuk-summary-list__key">
+                                            Evidence of payment
+                                          </dt>
+                                          <dd class="govuk-summary-list__value">
+                                            invoice.png
+                                          </dd>
+                                        </div>
+                                        <div class="govuk-summary-list__row">
+                                          <dt class="govuk-summary-list__key">
+                                            Evidence of completion
+                                          </dt>
+                                          <dd class="govuk-summary-list__value">
+                                            <span><strong class="govuk-tag govuk-tag--red">
+                                                Required
+                                                </strong></span>
+                                          </dd>
+                                        </div>
+                                        <div class="govuk-summary-list__row">
+                                            <dt class="govuk-summary-list__key">
+                                              Other learners
+                                            </dt>
+                                            <dd class="govuk-summary-list__value">
+                                              John Smith<br>Susie Wu<br>Zara Williams<br>Zhang Wei
+                                            </dd>
+                                          </div>
+                                      </dl>
+                                    </div>
+                                  </div>
+
+
+                                <nav class="govuk-pagination" role="navigation" aria-label="results">
+                                  <div class="govuk-pagination__prev">
+                                    <a class="govuk-link govuk-pagination__link" href="#" rel="prev">
+                                      <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                                        <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+                                      </svg>
+                                      <span class="govuk-pagination__link-title">Previous</span></a>
+                                  </div>
+                                  <ul class="govuk-pagination__list">
+                                    <li class="govuk-pagination__item govuk-pagination__item--current">
+                                      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
+                                        1
+                                      </a>
+                                    </li>
+                                    <li class="govuk-pagination__item">
+                                      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2">
+                                        2
+                                      </a>
+                                    </li>
+                                    <li class="govuk-pagination__item">
+                                      <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+                                        3
+                                      </a>
+                                    </li>
+                                  </ul>
+                                  <div class="govuk-pagination__next">
+                                    <a class="govuk-link govuk-pagination__link" href="#" rel="next"> <span class="govuk-pagination__link-title">Next</span> <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                                        <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+                                      </svg></a>
+                                  </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="govuk-summary-card__content">
-              <dl class="govuk-summary-list">
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Date
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    23 November 2023
-                  </dd>
-                  <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="#">
-                      Change<span class="govuk-visually-hidden"> date</span>
-                    </a>
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Evidence of payment
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    invoice.pdf
-                  </dd>
-                  <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="#">
-                      Change<span class="govuk-visually-hidden"> nationality</span>
-                    </a>
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Working situation
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    Part time – less than 30 hours a week
-                  </dd>
-                  <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="#">
-                      Change<span class="govuk-visually-hidden"> working situation</span>
-                    </a>
-                  </dd>
-                </div>
-              </dl>
-            </div>
+            <div class="govuk-tabs__panel" id="submitted">
+              <div class="govuk-grid-row">
+                  <div class="govuk-grid-column-one-third">
+                      <!--Filter Start-->
+                      {% include "../claim-items/_includes/filter.html" %}
+                      <!--Filter End-->  
+                  </div>
+                  <div class="govuk-grid-column-two-thirds">
+                      <div class="govuk-grid-row">
+                          <div class="govuk-grid-column-full">
+
+                              <nav class="govuk-pagination" role="navigation" aria-label="results">
+                                <div class="govuk-pagination__prev">
+                                  <a class="govuk-link govuk-pagination__link" href="#" rel="prev">
+                                    <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                                      <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+                                    </svg>
+                                    <span class="govuk-pagination__link-title">Previous</span></a>
+                                </div>
+                                <ul class="govuk-pagination__list">
+                                  <li class="govuk-pagination__item govuk-pagination__item--current">
+                                    <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1" aria-current="page">
+                                      1
+                                    </a>
+                                  </li>
+                                  <li class="govuk-pagination__item">
+                                    <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2">
+                                      2
+                                    </a>
+                                  </li>
+                                  <li class="govuk-pagination__item">
+                                    <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+                                      3
+                                    </a>
+                                  </li>
+                                </ul>
+                                <div class="govuk-pagination__next">
+                                  <a class="govuk-link govuk-pagination__link" href="#" rel="next"> <span class="govuk-pagination__link-title">Next</span> <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                                      <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+                                    </svg></a>
+                                </div>
+                              </nav>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
-    </div>
-</div>
+
+        </div>
+    </main>
+  </div>
 
 
 {% endblock %}
