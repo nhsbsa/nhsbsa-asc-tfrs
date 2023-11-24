@@ -1,0 +1,41 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Start a new claim item</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">Do you want to add a claim item by learner or by event?</p>
+        <h2 class="govuk-heading-m">By learner</h2>
+        <p class="govuk-body">This is best if you have one or more activities to add for a specific member of staff.</p>
+        <h2 class="govuk-heading-m">By event</h2>
+        <p class="govuk-body">This allows you to quickly add multiple members of staff to the same activity, for example if 10 people attended the same course.</p>
+        <div class="govuk-form-group">
+            <form action="/v3/claim-item-start-point" method="post" class="form">
+                <fieldset class="govuk-fieldset govuk-!-margin-bottom-5">
+                <div class="govuk-radios" data-module="govuk-radios">
+                    <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="startingpoint" name="startingpoint" type="radio" value="bylearner">
+                    <label class="govuk-label govuk-radios__label" for="startingpoint">
+                        By learner
+                    </label>
+                    </div>
+                    <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="startingpoint-2" name="startingpoint" type="radio" value="byevent">
+                    <label class="govuk-label govuk-radios__label" for="startingpoint-2">
+                        By event
+                    </label>
+                    </div>
+                </div>
+                </fieldset>
+                <button class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+            </form>
+          </div>
+    </div>
+</div> 
+{% endblock %}
