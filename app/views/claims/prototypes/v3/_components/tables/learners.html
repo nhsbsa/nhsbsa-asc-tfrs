@@ -1,0 +1,78 @@
+<table class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th scope="col" class="govuk-table__header">ID</th>
+        <th scope="col" class="govuk-table__header">Surname</th>
+        <th scope="col" class="govuk-table__header">First name</th>
+        <th scope="col" class="govuk-table__header">Role</th>
+        <th scope="col" class="govuk-table__header">Location</th>
+        <th scope="col" class="govuk-table__header">Eligible for</th>
+        <th scope="col" class="govuk-table__header"></th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">0001</th>
+        <td class="govuk-table__cell">Smith</td>
+        <td class="govuk-table__cell">John</td>
+        <td class="govuk-table__cell">Nurse</td>
+        <td class="govuk-table__cell">Old Trafford Care Home</td>
+        <td class="govuk-table__cell">CPD</td>
+        {% if lens =='event' %}
+        <td class="govuk-table__cell"><a class="govuk-button" data-module="govuk-button" href="cpd/check-learners.html">
+            Add learner
+        </a>
+        </td>
+        {% elif lens =='learner' %}
+        <td class="govuk-table__cell"><a class="govuk-button" data-module="govuk-button" href="cpd/select-course.html">
+            Select
+        </a>
+        </td>
+        {% else %}
+        <td class="govuk-table__cell">Error</td>
+        {% endif %}
+      </tr>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">0002</th>
+        <td class="govuk-table__cell">Jones</td>
+        <td class="govuk-table__cell">James</td>
+        <td class="govuk-table__cell">Nurse</td>
+        <td class="govuk-table__cell">Old Trafford Care Home</td>
+        <td class="govuk-table__cell">CPD</td>
+        {% if lens =='event' %}
+        <td class="govuk-table__cell"><a class="govuk-button" data-module="govuk-button" href="cpd/check-learners.html">
+            Add learner
+        </a>
+        </td>
+        {% elif lens =='learner' %}
+        <td class="govuk-table__cell"><a class="govuk-button" data-module="govuk-button" href="cpd/select-course.html">
+            Select
+        </a>
+        </td>
+        {% else %}
+        <td class="govuk-table__cell">Error</td>
+        {% endif %}
+      </tr>
+      <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">0003</th>
+        <td class="govuk-table__cell">Khan</td>
+        <td class="govuk-table__cell">Sameer</td>
+        <td class="govuk-table__cell">OT</td>
+        <td class="govuk-table__cell">Withington Care Home</td>
+        <td class="govuk-table__cell">TU</td>
+        {% if lens =='event' %}
+        <td class="govuk-table__cell"><a class="govuk-button" data-module="govuk-button" href="tu/check-learners.html">
+            Add learner
+        </a>
+        </td>
+        {% elif lens =='learner' %}
+        <td class="govuk-table__cell"><a class="govuk-button" data-module="govuk-button" href="tu/select-course.html">
+            Select
+        </a>
+        </td>
+        {% else %}
+        <td class="govuk-table__cell">Error</td>
+        {% endif %}
+      </tr>
+    </tbody>
+</table>

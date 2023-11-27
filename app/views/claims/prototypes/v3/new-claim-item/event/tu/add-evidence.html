@@ -1,0 +1,77 @@
+{% extends "../../../layouts/claims-main.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-xl">Add claim item by event</span>
+        <h1 class="govuk-heading-xl">Type of evidence</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend">
+                What type of evidence is this?
+              </legend>
+              <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="evidence-type" name="evidence-type" type="radio" value="payment">
+                  <label class="govuk-label govuk-radios__label" for="evidence-type">
+                    Payment
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="evidence-type-2" name="evidence-type" type="radio" value="enrollment">
+                  <label class="govuk-label govuk-radios__label" for="evidence-type-2">
+                    Enrollment
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="evidence-type-3" name="evidence-type" type="radio" value="completion">
+                  <label class="govuk-label govuk-radios__label" for="evidence-type-3">
+                    Completion
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+        </div>
+        <div class="govuk-form-group">
+            <label class="govuk-label" for="file-upload-1">
+              Upload a file
+            </label>
+            <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
+        </div>
+        <div class="govuk-form-group">
+          <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend">
+              Does this evidence apply to all learners for this event?
+            </legend>
+            <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="evidence-application" name="evidence-application" type="radio" value="england">
+                <label class="govuk-label govuk-radios__label" for="evidence-application">
+                  Yes
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="evidence-application-2" name="evidence-application" type="radio" value="scotland">
+                <label class="govuk-label govuk-radios__label" for="evidence-application-2">
+                  No
+                </label>
+              </div>
+            </div>
+          </fieldset>
+      </div>
+        <div class="govuk-button-group">
+            <a class="govuk-button" data-module="govuk-button" href="check-your-answers.html">
+              Save and continue
+            </a>
+            <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#">
+              Add another piece of evidence
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

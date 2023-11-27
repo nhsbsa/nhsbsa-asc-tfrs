@@ -1,16 +1,17 @@
-{% extends "../../layouts/claims-main.html" %}
+{% extends "../../../layouts/claims-main.html" %}
 
-{% set lens = "learner" %}
+{% set lens = "event" %}
 
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <span class="govuk-caption-xl">Add claim item by learner</span>
-        <h1 class="govuk-heading-xl">Who completed the L&D activity?</h1>
+        <h1 class="govuk-heading-xl">Who attended the training?</h1>
     </div>
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">You are adding a claim item for the Becoming a better manager course on 23 November 2023. Select the members of staff who attended this training.</p>
         <div class="moj-search govuk-!-padding-bottom-2">
 
             <form action="#" method="post">
@@ -51,19 +52,29 @@
             <tbody class="govuk-table__body">
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">0001</th>
-                <td class="govuk-table__cell">Khan</td>
-                <td class="govuk-table__cell">Sameer</td>
-                <td class="govuk-table__cell">OT</td>
+                <td class="govuk-table__cell">Smith</td>
+                <td class="govuk-table__cell">John</td>
+                <td class="govuk-table__cell">Nurse</td>
                 <td class="govuk-table__cell">Old Trafford Care Home</td>
                 <td class="govuk-table__cell">TU</td>
-                <td class="govuk-table__cell"><a class="govuk-button" data-module="govuk-button" href="tu/select-course.html">
-                    Select
+                <td class="govuk-table__cell"><a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#">
+                    Add learner
                 </a>
                 </td>
               </tr>
             </tbody>
         </table>
+        <p class="govuk-body">You have now added these learners to this L&D event:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>Angie Smith (<a href="#" class="govuk-link">remove</a>)</li>
+            <li>James Jones (<a href="#" class="govuk-link">remove</a>)</li>
+        </ul>
+        <a class="govuk-button" data-module="govuk-button" href="evidence.html">
+            Continue
+        </a>
+
     </div>
 </div>
+
 
 {% endblock %}
