@@ -1,0 +1,114 @@
+[
+    {
+        "rolename": "Permanent nurse",
+        "description": "Nurses in a long-term position that is secured by a contract.",
+        "eligibility": {
+            "isTUeligible": true,
+            "isCPDeligible": false
+        },
+        "distribution":0.01
+
+    },
+
+    {
+        "rolename": "Temporary nurse",
+        "description": "Nurses employed on temporary/short-term fixed contracts.",
+        "eligibility": {
+            "isTUeligible": true,
+            "isCPDeligible": false
+        },
+        "distribution":0.01
+
+    },
+
+    {
+        "rolename": "Bank registered nurse",
+        "description": "Nurses who provide cover to cover planned or unplanned workforce shortfalls (e.g. sickness absence, vacancies, annual or maternity leave).",
+        "eligibility": {
+            "isTUeligible": false,
+            "isCPDeligible": true
+        },
+        "distribution":0.00
+
+    },
+
+    {
+        "rolename": "Allied health professional",
+        "description": "MUTLIPLE SUB ROLES",
+        "eligibility": {
+            "isTUeligible": true,
+            "isCPDeligible": false
+        },
+        "distribution":0.01
+
+    },
+
+    {
+        "rolename": "Agency staff",
+        "description": "Care employees brought in by care providers on short-term contracts to help with periods of short staffing. Require qualifications and competencies to deliver specific roles.",
+        "eligibility": {
+            "isTUeligible": false,
+            "isCPDeligible": true
+        },
+        "distribution":0.10
+
+    },
+
+    {
+        "rolename": "Non-regulated managerial",
+        "description": "Manager in a non-regulated setting.",
+        "eligibility": {
+            "isTUeligible": false,
+            "isCPDeligible": true
+        },
+        "distribution":0.10
+
+    },
+
+    {
+        "rolename": "Non-regulated direct care",
+        "description": "e.g. Personal Assistant",
+        "eligibility": {
+            "isTUeligible": false,
+            "isCPDeligible": true
+        },
+        "distribution":0.20
+        
+
+    },
+
+    {
+        "rolename": "Personal assistants",
+        "description": "Someone employed to provide personal and domestic everyday support needed to help people to lead an independent personal and social life at home.",
+        "eligibility": {
+            "isTUeligible": false,
+            "isCPDeligible": true
+        },
+        "distribution":0.00
+
+    },
+
+    {
+        "rolename": "Direct care",
+        "description": "Someone who delivers direct intimate care in any care setting.",
+        "eligibility": {
+            "isTUeligible": false,
+            "isCPDeligible": true
+        },
+        "distribution":0.37
+
+    },
+
+    {
+        "rolename": "Local authority direct care",
+        "description": "Someone who delivers direct intimate care in a local authority setting.",
+        "eligibility": {
+            "isTUeligible": false,
+            "isCPDeligible": true
+        },
+        "distribution":0.20
+        
+
+    }
+
+]

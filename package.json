@@ -9,5 +9,8 @@
     "@ministryofjustice/frontend": "^1.8.1",
     "govuk-frontend": "4.7.0",
     "govuk-prototype-kit": "13.13.5"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.3.1"
   }
 }
