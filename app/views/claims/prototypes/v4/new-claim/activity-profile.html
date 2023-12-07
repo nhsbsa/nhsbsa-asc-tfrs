@@ -1,0 +1,20 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="start" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">Start new claim</span>
+        <h1 class="govuk-heading-l">{{ data['activity-selection'] }}</h1>
+    </div>
+</div>
+
+<form method="post" action="start-date" class="govuk-!-margin-0">
+    <input type="hidden" name="activity-choice" value= "{{ data['activity-selection'] }}">
+    <button type="submit" class="govuk-button">Select</button>
+</form>
+
+{% endblock %}

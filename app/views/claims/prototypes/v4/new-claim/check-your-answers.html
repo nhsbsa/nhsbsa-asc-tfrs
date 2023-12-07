@@ -1,0 +1,110 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="learner-summary" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+<div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-l">Start new claim</span>
+    <h1 class="govuk-heading-l">Check your answers before creating {{ "the claim" if data['learnersSelected'] | length == 1 else "claims" }}</h1>
+    <h2 class="govuk-heading-m">Activity details</h2>
+    <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+          <h2 class="govuk-summary-card__title">{{ data['activity-selection'] }}</h2>
+          <ul class="govuk-summary-card__actions">
+            <li class="govuk-summary-card__action"> <a class="govuk-link" href="#">
+                Change<span class="govuk-visually-hidden"> {{ data['activity-selection'] }}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-summary-card__content">
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Start Date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                   {{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Type
+              </dt>
+              <dd class="govuk-summary-list__value">
+                e-learning module
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Reimbursement rate
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  £200
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Funding Model
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  100% of reimbursement rate on completion
+                </dd>
+            </div>
+        </div>
+    </div>
+    <h2 class="govuk-heading-m">Participant details</h2>
+    <dl class="govuk-summary-list hmrc-list-with-actions hmrc-list-with-actions--short">
+        {% for l in data['learnersSelected'] %}
+        {% for learner in data['learners'] %}
+        {% if l == learner.id %}
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+              <h2 class="govuk-summary-card__title">{{ learner.fullName }}<span class="govuk-caption-m">{{ learner.id }}</span></h2>
+              <ul class="govuk-summary-card__actions">
+                <li class="govuk-summary-card__action"> <a class="govuk-link" href="#">
+                    Remove<span class="govuk-visually-hidden"> {{ learner.fullName }}</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="govuk-summary-card__content">
+              <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                      Date of Birth
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ learner.dateOfBirth }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                      Role Type
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ learner.roleType }}
+                    </dd>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    </dl>
+    <h2 class="govuk-heading-m">Now create your claims</h2>
+    <p class="govuk-body">The service will create {{ data['learnersSelected'] | length }} claims. One for each participant for this activity. Before you submit you will be required to add evidence, which you will be able to do once claims are created.</p>
+    <form action="confirmation" method="post" novalidate>
+    <input type="hidden" name="answers-checked" value="true">
+    <button class="govuk-button" data-module="govuk-button">
+        Accept and create
+    </button>
+    </form>
+</div>
+</div>
+
+{% endblock %}
