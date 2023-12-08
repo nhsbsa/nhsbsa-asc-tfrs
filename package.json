@@ -10,9 +10,7 @@
     "@x-govuk/govuk-prototype-filters": "^1.2.1",
     "fs": "^0.0.1-security",
     "govuk-frontend": "4.7.0",
-    "govuk-prototype-kit": "13.13.5"
-  },
-  "devDependencies": {
+    "govuk-prototype-kit": "13.13.5",
     "@faker-js/faker": "^8.3.1"
   }
 }
