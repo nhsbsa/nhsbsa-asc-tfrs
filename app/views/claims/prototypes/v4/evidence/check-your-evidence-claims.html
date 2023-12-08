@@ -6,10 +6,57 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">Start new claim</span>
-        <h1 class="govuk-heading-l">{{ data['selectedOptions'] }}</h1>
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Add evidence</span>
+        <h1 class="govuk-heading-l">Check your evidence and claims before submitting</h1>
     </div>
 </div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+        <p class="govuk-body">{{ data['evidenceFile'] }}, 2MB</p>
+        <img src="/public/images/fake-invoice.png" alt="{{ data['evidenceFile'] }}" width="100%">
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">Please check your evidence of {{ data['evidenceType'] }} includes the following:
+            <ul class="govuk-list govuk-list--bullet">
+                <li>Point 1</li>
+                <li>Point 2</li>
+                <li>Point 3</li>
+              </ul>
+        </p>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th class="govuk-table__header" scope="col">Claim Reference Number</th>
+                <th class="govuk-table__header" scope="col">Activity</th>
+                <th class="govuk-table__header" scope="col">Start Date</th>
+                <th class="govuk-table__header" scope="col">Participant ID</th>
+                <th class="govuk-table__header" scope="col">Participant name</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+            {% for selected in data['selectedClaims'] %}
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">HDJ2123F</td>
+                <td class="govuk-table__cell">{{ data['activity-selection'] }}</td>
+                <td class="govuk-table__cell">{{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}</td>
+                <td class="govuk-table__cell">00388</td>
+                <td class="govuk-table__cell">John Doe</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table> 
+    </div>
+</div>
+
+<a class="govuk-button" data-module="govuk-button" href="confirmation">
+    Add evidence to claims
+</a>
 
 {% endblock %}

@@ -31,10 +31,18 @@
               </tr>
             </thead>
             <tbody class="govuk-table__body">
-              <tr class="govuk-table__row govuk-table__row--selected">
+              <tr class="govuk-table__row">
                 <td class="govuk-table__cell">
                   <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                    <input type="checkbox" class="govuk-checkboxes__input" name="selectedClaims" id="mountain-aconcagua" value="mountain-aconcagua">
+                    <input type="checkbox" class="govuk-checkboxes__input" name="selectedClaims" id="mountain-aconcagua" value="mountain-aconcagua" checked="
+                    {% for selected in data['selectedClaims'] %}
+                        {% if selected == 'mountain-aconcagua'%}
+                            true 
+                        {% else %}       
+                            false
+                        {% endif %}
+                    {% endfor %}
+                    ">
                     <label class="govuk-label govuk-checkboxes__label" for="mountain-aconcagua">
                       <span class="govuk-visually-hidden">Select Aconcagua</span>
                     </label>
@@ -46,23 +54,9 @@
                 <td class="govuk-table__cell">00388</td>
                 <td class="govuk-table__cell">John Doe</td>
               </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">
-                  <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                    <input type="checkbox" class="govuk-checkboxes__input" name="selectedClaims" id="mountain-denali" value="denali">
-                    <label class="govuk-label govuk-checkboxes__label" for="mountain-denali">
-                      <span class="govuk-visually-hidden">Select Denali</span>
-                    </label>
-                  </div>
-                </td>
-                </td>
-                <td class="govuk-table__cell">Denali</td>
-                <td class="govuk-table__cell">6,194 meters</td>
-                <td class="govuk-table__cell">North America</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric">1913</td>
-              </tr>
             </tbody>
         </table>    
+        <p class="govuk-body"><a href="#" class="govuk-link">Select from all claims</a> if this piece of evidence applies to other claims not listed here.</p>
         {% endif %}
         <button class="govuk-button" data-module="govuk-button">
             Save and continue
