@@ -24,9 +24,9 @@
         <p class="govuk-body">
         Before submitting your claims you will need provide evidence appropriate to activity that you are claiming for. You can add evidence at any time from <a href="#" class="govuk-link">manage your claims</a>. Alternatively you can add evidence now if you have it ready.
         </p>
-        <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="../evidence/evidence-type.html">
-            Add evidence now
-        </a>
+        <form method="post" action="/v4/evidence-in-claim-process" class="govuk-!-margin-0">
+            <button type="submit" class="govuk-button govuk-button--secondary">Add evidence now</button>
+        </form>
         <p class="govuk-body">
             If you are not ready to add evidence go back to managing your claims.
         </p>

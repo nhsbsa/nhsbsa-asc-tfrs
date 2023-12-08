@@ -1,0 +1,74 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="upload.html" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Add evidence</span>
+        <h1 class="govuk-heading-l">What claims does this evidence apply to?</h1>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        {% if data['addEvidenceInClaimProcess'] %}
+        <p class="govuk-body">Select from the following claims that were added for the {{ data['activity-selection'] }} course on {{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}:</p>
+        {% endif %}
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full"> 
+        <form action="check-your-evidence-claims" method="post" novalidate>
+        {% if data['addEvidenceInClaimProcess'] %}
+        <table class="govuk-table" data-module="moj-multi-select" data-multi-select-checkbox="#select-all">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th class="govuk-table__header" scope="col" id="select-all"></th>
+                <th class="govuk-table__header" scope="col">Claim Reference Number</th>
+                <th class="govuk-table__header" scope="col">Activity</th>
+                <th class="govuk-table__header" scope="col">Start Date</th>
+                <th class="govuk-table__header" scope="col">Participant ID</th>
+                <th class="govuk-table__header" scope="col">Particpant name</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row govuk-table__row--selected">
+                <td class="govuk-table__cell">
+                  <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                    <input type="checkbox" class="govuk-checkboxes__input" name="selectedClaims" id="mountain-aconcagua" value="mountain-aconcagua">
+                    <label class="govuk-label govuk-checkboxes__label" for="mountain-aconcagua">
+                      <span class="govuk-visually-hidden">Select Aconcagua</span>
+                    </label>
+                  </div>
+                </td>
+                <td class="govuk-table__cell">HDJ2123F</td>
+                <td class="govuk-table__cell">{{ data['activity-selection'] }}</td>
+                <td class="govuk-table__cell">{{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}</td>
+                <td class="govuk-table__cell">00388</td>
+                <td class="govuk-table__cell">John Doe</td>
+              </tr>
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">
+                  <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                    <input type="checkbox" class="govuk-checkboxes__input" name="selectedClaims" id="mountain-denali" value="denali">
+                    <label class="govuk-label govuk-checkboxes__label" for="mountain-denali">
+                      <span class="govuk-visually-hidden">Select Denali</span>
+                    </label>
+                  </div>
+                </td>
+                </td>
+                <td class="govuk-table__cell">Denali</td>
+                <td class="govuk-table__cell">6,194 meters</td>
+                <td class="govuk-table__cell">North America</td>
+                <td class="govuk-table__cell govuk-table__cell--numeric">1913</td>
+              </tr>
+            </tbody>
+        </table>    
+        {% endif %}
+        <button class="govuk-button" data-module="govuk-button">
+            Save and continue
+        </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -47,12 +47,18 @@ function loadData(req) {
   return console.log('learners data updated')
 }
 
+function resetVariables(req) {
+  req.session.data['addEvidenceInClaimProcess'] = false
+  
+  return console.log('variables reset')
+}
 
 
 
 router.get('/', function (req, res) {
   //Load data from JSON files
-  loadData(req, res);
+  loadData(req);
+  resetVariables(req);
   res.render('index')
 })
 
