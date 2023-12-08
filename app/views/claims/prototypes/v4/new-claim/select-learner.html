@@ -75,7 +75,7 @@
                         <td class="govuk-table__cell">
                             {% set learnerAdded = false %}
                             {% for l in data['learnersSelected'] %}
-                                {% if l == learner.id%}
+                                {% if l.id == learner.id%}
                                     {% set learnerAdded = true %}
                                 {% endif %}
                             {% endfor %}

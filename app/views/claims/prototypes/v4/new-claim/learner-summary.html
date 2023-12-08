@@ -16,9 +16,7 @@
         <p class="govuk-body">You are creating a claim for the below participants for the {{ data['activity-selection'] }} course on {{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}.</p>
         <div class="govuk-form-group">
             <dl class="govuk-summary-list hmrc-list-with-actions hmrc-list-with-actions--short">
-            {% for l in data['learnersSelected'] %}
-            {% for learner in data['learners'] %}
-            {% if l == learner.id %}
+            {% for learner in data['learnersSelected'] %}
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key govuk-!-font-weight-regular hmrc-summary-list__key">
                 {{ learner.fullName }}
@@ -29,8 +27,6 @@
                 </ul>
             </dd>
             </div>
-            {% endif %}
-            {% endfor %}
             {% endfor %}
             </dl>
         </div>

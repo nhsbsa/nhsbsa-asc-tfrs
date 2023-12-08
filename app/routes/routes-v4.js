@@ -4,8 +4,14 @@ const router = govukPrototypeKit.requests.setupRouter()
 // V4 Prototype routes
 
 router.post('/v4/add-learner', function (req, res) {
-    var learner = req.session.data['learner-choice']
+    var learnerID = req.session.data['learner-choice']
     
+    for (const l of req.session.data['learners']) {
+        if (learnerID == l.id) {
+            var learner = l
+        }
+    }
+
 
     if (req.session.data.learnersSelected){
         console.log(learner)
@@ -30,6 +36,21 @@ router.post('/v4/add-more-learners-answer', function (req, res) {
         res.redirect('../claims/prototypes/v4/new-claim/check-your-answers')
       }
     
+})
+
+router.post('/v4/evidence-choice', function (req, res) {
+    var evidenceType = req.session.data['evidenceType']
+    
+
+    if (evidenceType == "payment"){
+        // Send user to actual amount page
+        req.session.data['search-input'] = ""
+        res.redirect('../claims/prototypes/v4/evidence/actual-amount')
+      } else {
+        // Send user to file upload page
+        res.redirect('../claims/prototypes/v4/evidence/upload')
+      }
+
 })
 
 module.exports = router

@@ -1,0 +1,48 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="../new-claim/confirmation" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+<div class="govuk-grid-column-two-thirds">
+    <form action="/v4/evidence-choice" method="post" novalidate>
+    <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <span class="govuk-caption-l">Add evidence</span>
+            <h1 class="govuk-fieldset__heading">
+            What type of evidence do you want to add?
+            </h1>
+        </legend>
+        <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="evidenceType" name="evidenceType" type="radio" value="payment">
+            <label class="govuk-label govuk-radios__label" for="evidenceType">
+                Evidence of payment
+            </label>
+            </div>
+            <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="evidenceType-2" name="evidenceType" type="radio" value="enrollment">
+                <label class="govuk-label govuk-radios__label" for="evidenceType-2">
+                    Evidence of enrollment
+                </label>
+                </div>
+            <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="evidenceType-2" name="evidenceType" type="radio" value="completion">
+            <label class="govuk-label govuk-radios__label" for="evidenceType-2">
+                Evidence of completion
+            </label>
+            </div>
+        </div>
+        </fieldset>
+    </div>
+    <button class="govuk-button" data-module="govuk-button">
+        Save and continue
+    </button>
+    </form>
+</div>
+</div>
+
+{% endblock %}

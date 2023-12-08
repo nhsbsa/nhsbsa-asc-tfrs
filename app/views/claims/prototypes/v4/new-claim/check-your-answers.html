@@ -59,9 +59,7 @@
     </div>
     <h2 class="govuk-heading-m">Participant details</h2>
     <dl class="govuk-summary-list hmrc-list-with-actions hmrc-list-with-actions--short">
-        {% for l in data['learnersSelected'] %}
-        {% for learner in data['learners'] %}
-        {% if l == learner.id %}
+        {% for learner in data['learnersSelected'] %}
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
               <h2 class="govuk-summary-card__title">{{ learner.fullName }}<span class="govuk-caption-m">{{ learner.id }}</span></h2>
@@ -92,8 +90,6 @@
                 </div>
             </div>
         </div>
-        {% endif %}
-        {% endfor %}
         {% endfor %}
     </dl>
     <h2 class="govuk-heading-m">Now create your claims</h2>
