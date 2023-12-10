@@ -13,10 +13,10 @@
     <h2 class="govuk-heading-m">Activity details</h2>
     <div class="govuk-summary-card">
         <div class="govuk-summary-card__title-wrapper">
-          <h2 class="govuk-summary-card__title">{{ data['activity-selection'] }}</h2>
+          <h2 class="govuk-summary-card__title">[{{ data.trainingChoice.code }}] {{ data.trainingChoice.title }}</h2>
           <ul class="govuk-summary-card__actions">
-            <li class="govuk-summary-card__action"> <a class="govuk-link" href="#">
-                Change<span class="govuk-visually-hidden"> {{ data['activity-selection'] }}</span>
+            <li class="govuk-summary-card__action"> <a class="govuk-link" href="select-training">
+                Change<span class="govuk-visually-hidden"> {{ data.trainingChoice.title }}</span>
               </a>
             </li>
           </ul>
@@ -36,15 +36,15 @@
                 Type
               </dt>
               <dd class="govuk-summary-list__value">
-                e-learning module
+                {{ data.trainingChoice.type | capitalize }}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                  Reimbursement rate
+                  Reimbursement amount
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  £200
+                  £{{ data.trainingChoice.reimbursementAmount }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -52,7 +52,11 @@
                   Funding Model
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  100% of reimbursement rate on completion
+                  {% if data.trainingChoice.fundingModel == "full" %}
+                  100% of reimbursement amount on completion
+                  {% elif data.trainingChoice.fundingModel == "split" %}
+                  60% of reimbursement amount on enrollment and the remaining 40% on completion
+                  {% endif %}
                 </dd>
             </div>
         </div>

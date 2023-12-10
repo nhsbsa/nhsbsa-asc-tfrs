@@ -34,6 +34,16 @@ function loadData(req) {
   let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
 
   var learnersFile = 'learners.json'
+  var trainingFile = 'training.json'
+
+  if (req.session.data.training) {
+    console.log('training file already loaded')
+  } else {
+    console.log('loading in training file')
+    let path = 'app/data/'
+    req.session.data['training'] = loadJSONFromFile(trainingFile, path)
+    console.log('training file loaded')
+  }
 
   if (req.session.data.learners) {
     console.log('learners file already loaded')
@@ -44,7 +54,7 @@ function loadData(req) {
     console.log('learners file loaded')
   }
 
-  return console.log('learners data updated')
+  return console.log('data updated')
 }
 
 function resetVariables(req) {

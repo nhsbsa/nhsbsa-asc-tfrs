@@ -3,6 +3,21 @@ const router = govukPrototypeKit.requests.setupRouter()
 
 // V4 Prototype routes
 
+router.post('/v4/add-training', function (req, res) {
+    var trainingCode = req.session.data['training-selection']
+    
+    for (const t of req.session.data['training']) {
+        if (trainingCode == t.code) {
+            var training = t
+        }
+    }
+    
+    req.session.data['trainingChoice'] = training
+
+    res.redirect('../claims/prototypes/v4/new-claim/activity-profile')
+})
+
+
 router.post('/v4/add-learner', function (req, res) {
     var learnerID = req.session.data['learner-choice']
     
@@ -35,7 +50,7 @@ router.post('/v4/add-more-learners-answer', function (req, res) {
 
     if (addAnother == "Yes"){
         // Send user to learner search page
-        req.session.data['search-input'] = ""
+        req.session.data['learner-input'] = ""
         res.redirect('../claims/prototypes/v4/new-claim/select-learner')
       } else if (addAnother == "No") {
         // Send user to check your answers

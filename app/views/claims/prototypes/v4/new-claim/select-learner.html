@@ -13,7 +13,7 @@
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">You are adding a claim item for the {{ data['activity-selection'] }} course on {{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}. Select the members of staff who attended this training.</p>
+        <p class="govuk-body">You are adding a claim item for the {{ data.trainingChoice.title }} {{ data.trainingChoice.type }} on {{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}. Select the members of staff who attended this training.</p>
         <div class="moj-search govuk-!-padding-bottom-2">
 
             <form action="select-learner" method="post">
@@ -27,7 +27,7 @@
                 You can search by a person's name or ID
                 </div>
         
-                <input class="govuk-input moj-search__input " id="search" name="search-input" type="search" aria-describedby="search-hint" value="{{ data['search-input'] }}">
+                <input class="govuk-input moj-search__input " id="search" name="learner-input" type="search" aria-describedby="search-hint" value="{{ data['learner-input'] }}">
         
             </div>
         
@@ -44,14 +44,14 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        {% if data['search-input'] %}
+        {% if data['learner-input'] %}
         <h2 class="govuk-heading-m">Search results</h2>
                 {% set hasResults = false %}
                 {% set addHeader = true %}
                 {% for learner in data['learners'] %}
-                    {% set lowercasedsearch = data['search-input'] | lower %}
+                    {% set lowercasedsearch = data['learner-input'] | lower %}
                     {% set lowercasedname = learner.fullName | lower %}
-                    {% if lowercasedname == lowercasedsearch or learner.id == data['search-input'] or lowercasedsearch in lowercasedname %}
+                    {% if lowercasedname == lowercasedsearch or learner.id == data['learner-input'] or lowercasedsearch in lowercasedname %}
                             {% set hasResults = true %}
                             {% if addHeader %}
                                 <table class="govuk-table">
@@ -83,7 +83,7 @@
                             {% if not learnerAdded %}
                             <form method="post" action="learner-profile" class="govuk-!-margin-0">
                                 <input type="hidden" name="learner-selection" value="{{ learner.id }}">
-                                <button type="submit" class="govuk-button">View learner</button>
+                                <button type="submit" class="govuk-button">View details</button>
                             </form>
                             {% else %}
                             <p class="govuk-body">Already added to claim</p>
@@ -96,7 +96,7 @@
             </tbody>
         </table>
         {% if not hasResults %}
-        <p class="govuk-body">{{ data['search-input'] }} does not currently exist in the system. Do you want to <a href="#" class="govuk-link">add a new learner</a>?</p> </p>
+        <p class="govuk-body">{{ data['learner-input'] }} does not currently exist in the system. Do you want to <a href="#" class="govuk-link">add a new learner</a>?</p>
         {% endif %}
         {% endif %}
     </div>
