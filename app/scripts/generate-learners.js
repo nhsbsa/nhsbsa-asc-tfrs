@@ -2,7 +2,6 @@ const { faker } = require('@faker-js/faker');
 const { fakerEN_GB } = require('@faker-js/faker');
 const fs = require('fs');
 
-module.exports = (router) => {
 // Function to generate a random date of birth for individuals between 18 and 65 years old
 function generateDOB() {
   
@@ -17,7 +16,7 @@ function generateDOB() {
   const eighteenYearsAgo = new Date();
   eighteenYearsAgo.setFullYear(currentDate.getFullYear() - 18);
 
-  return faker.date.between({from: sixtyFiveYearsAgo, to: eighteenYearsAgo}).toISOString().split('T')[0];
+  return faker.date.between({from: sixtyFiveYearsAgo, to: eighteenYearsAgo});
 }
 // funtion to load in data files
 function loadJSONFromFile(fileName, path = 'app/data/') {
@@ -48,16 +47,62 @@ function getRandomRole() {
   return rolesData[rolesData.length - 1].rolename;
 }
 
+function generateGDSDate(date) {
+  const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const GDSDate = date.getDate().toString().concat(" ", month[date.getMonth()], " ", date.getFullYear());
+  return GDSDate
+}
+
 
 function generateLearners (quantity) {
   // Generate data for JSON objects
   const data = [];
   //Load data from JSON file
 
-  for (let i = 1; i <= quantity; i++) {
+  //Define set people for usability testing
+  const person1 = {
+    id: "00001",
+    fullName: "Aron Effertz-Stroman",
+    dateOfBirth: "1969-03-18T05:58:19.627Z",
+    dateOfBirthStr: "18 March 1969",
+    roleType: "Local authority direct care"
+  };
+  data.push(person1);
+  
+  const person2 = {
+    id: "00002",
+    fullName: "Roy Kub",
+    dateOfBirth: "1992-10-08T15:59:08.977Z",
+    dateOfBirthStr: "8 October 1992",
+    roleType: "Non-regulated direct care"
+  };
+  data.push(person2);
+
+  const person3 = {
+    id: "00003",
+    fullName: "Malinda Mayer",
+    dateOfBirth: "1988-05-16T10:24:37.451Z",
+    dateOfBirthStr: "16 May 1988",
+    roleType: "Local authority direct care"
+  };
+  data.push(person3);
+
+  const person4 = {
+    id: "00004",
+    fullName: "Casey Simonis",
+    dateOfBirth: "1970-12-01T00:32:51.465Z",
+    dateOfBirthStr: "1 December 1970",
+    roleType: "Non-regulated direct care"
+  };
+  data.push(person4);
+
+
+
+  for (let i = 5; i <= quantity; i++) {
     const id = i.toString().padStart(5, '0');
     const fullName = fakerEN_GB.person.firstName() + ' ' + fakerEN_GB.person.lastName();
     const dateOfBirth = generateDOB();
+    const dateOfBirthStr = generateGDSDate(dateOfBirth);
     const roleType = getRandomRole();
     //const workplace = fakerEN_GB.location.city();
 
@@ -65,6 +110,7 @@ function generateLearners (quantity) {
       id,
       fullName,
       dateOfBirth,
+      dateOfBirthStr,
       roleType,
       //workplace,
     };
@@ -80,9 +126,4 @@ function generateLearners (quantity) {
 
 }
 
-router.get('/generate', function (req, res) {
-  generateLearners(400);
-  res.redirect('../')
-})
-
-}
+module.exports = { generateLearners }

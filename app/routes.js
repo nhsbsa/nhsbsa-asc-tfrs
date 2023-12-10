@@ -6,12 +6,14 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const fs = require('fs');
+const { generateClaims } = require('./scripts/generate-claims.js');
+const { generateLearners } = require('./scripts/generate-learners.js');
 
-require("./scripts/generate-learners.js")(router)
 router.use('/', require('./routes/routes-v3.js'))
 router.use('/', require('./routes/routes-v4.js'))
 
 // Add your routes here
+
 router.use((req, res, next) => {
   const log = {
     method: req.method,
@@ -35,6 +37,7 @@ function loadData(req) {
 
   var learnersFile = 'learners.json'
   var trainingFile = 'training.json'
+  var claimsFile = 'claims.json'
 
   if (req.session.data.training) {
     console.log('training file already loaded')
@@ -43,6 +46,15 @@ function loadData(req) {
     let path = 'app/data/'
     req.session.data['training'] = loadJSONFromFile(trainingFile, path)
     console.log('training file loaded')
+  }
+
+  if (req.session.data.claims) {
+    console.log('claims file already loaded')
+  } else {
+    console.log('loading in claims file')
+    let path = 'app/data/'
+    req.session.data['claims'] = loadJSONFromFile(claimsFile, path)
+    console.log('claims file loaded')
   }
 
   if (req.session.data.learners) {
@@ -62,6 +74,15 @@ function resetVariables(req) {
   
   return console.log('variables reset')
 }
+
+//generate data
+router.get('/generate', function (req, res) {
+  generateLearners(200);
+  generateClaims(1000);
+  loadData(req);
+  resetVariables(req);
+  res.redirect('../')
+})
 
 
 

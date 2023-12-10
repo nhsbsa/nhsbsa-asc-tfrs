@@ -81,7 +81,7 @@
                       Date of Birth
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ learner.dateOfBirth }}
+                        {{ learner.dateOfBirthStr }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -98,7 +98,7 @@
     </dl>
     <h2 class="govuk-heading-m">Now create your claims</h2>
     <p class="govuk-body">The service will create {{ data['learnersSelected'] | length }} claims. One for each participant for this activity. Before you submit you will be required to add evidence, which you will be able to do once claims are created.</p>
-    <form action="confirmation" method="post" novalidate>
+    <form action="/v4/create-claims" method="post" novalidate>
     <input type="hidden" name="answers-checked" value="true">
     <button class="govuk-button" data-module="govuk-button">
         Accept and create

@@ -29,7 +29,6 @@ router.post('/v4/add-learner', function (req, res) {
 
 
     if (req.session.data.learnersSelected){
-        console.log(learner)
         req.session.data['learnersSelected'].push(learner)
     } else {
         req.session.data['learnersSelected'] = [learner]
@@ -94,6 +93,60 @@ router.post('/v4/update-session-data', (req, res) => {
       // you can enable this in your .env file
       console.log(JSON.stringify(log, null, 2))
   });
+
+  router.post('/v4/create-claims', (req, res) => {
+
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+    for (const learner of req.session.data.learnersSelected) { 
+    let selectedTraining = null
+
+    for (const trainingItem of req.session.data.training){
+        if ( trainingItem.code == req.session.data.trainingChoice.code) {
+            selectedTraining = trainingItem
+        }
+    }
+
+    const claim = {
+        claimID: ("2").concat(learner.id),
+        learner: learner,
+        training: selectedTraining,
+        startDate: null,
+        startDateStr: (req.session.data['activity-date-started-day']).concat(" ", months[req.session.data['activity-date-started-month']-1] , " ", req.session.data['activity-date-started-year'] ),
+        status: "incomplete",
+        createdDate: null,
+        createdDateStr: null,
+        createdBy: null,
+        submittedDate: null,
+        submittedDateStr: null,
+        paidDate: null,
+        paidDateStr: null,
+        evidenceOfPayment: null,
+        evidenceOfEnrollment: null,
+        evidenceOfCompletion: null,
+      };
+
+      req.session.data.claims.push(claim)
+
+    }
+
+    res.redirect('../claims/prototypes/v4/new-claim/confirmation')
+    
+  });
+
   
+router.post('/v4/claims-choice', function (req, res) {
+    let claims = []
+
+    for (const claim of req.session.data.selectedClaims) { 
+        for ( const claimItem of req.session.data.claims) {
+            if (claim == claimItem.claimID) {
+                claims.push(claimItem)
+            }
+        }
+    }
+    req.session.data.selectedClaimsConfirmed = claims
+    res.redirect('../claims/prototypes/v4/evidence/check-your-evidence-claims')
+})
 
 module.exports = router

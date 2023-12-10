@@ -9,15 +9,16 @@
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Add evidence</span>
         <h1 class="govuk-heading-l">What claims does this evidence apply to?</h1>
-        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p class="govuk-body">Select the relevent claims for this peice of evidence you have uploaded.</p>
         {% if data['addEvidenceInClaimProcess'] %}
-        <p class="govuk-body">Select from the following claims that were added for the {{ data['activity-selection'] }} course on {{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}:</p>
+        <p class="govuk-body">You have just started the following claims for the {{ data.trainingChoice.title }} course that took place on {{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}:</p>
+        <p class="govuk-body">If this piece of evidence applies to other claims not listed here you can <a href="#" class="govuk-link">select from all claims</a>.</p>
         {% endif %}
     </div>
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full"> 
-        <form action="check-your-evidence-claims" method="post" novalidate>
+        <form action="/v4/claims-choice" method="post" novalidate>
         {% if data['addEvidenceInClaimProcess'] %}
         <table class="govuk-table" data-module="moj-multi-select" data-multi-select-checkbox="#select-all">
             <thead class="govuk-table__head">
@@ -31,32 +32,28 @@
               </tr>
             </thead>
             <tbody class="govuk-table__body">
+              {% for claim in data['claims'] %}
+              {% set claimsDate = [data['activity-date-started-day'], " " , (data['activity-date-started-month'] | monthName)," ", data['activity-date-started-year']] | join %}
+              {% if claim.training.code == data.trainingChoice.code and claim.startDateStr == claimsDate %}
               <tr class="govuk-table__row">
                 <td class="govuk-table__cell">
                   <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                    <input type="checkbox" class="govuk-checkboxes__input" name="selectedClaims" id="mountain-aconcagua" value="mountain-aconcagua" checked="
-                    {% for selected in data['selectedClaims'] %}
-                        {% if selected == 'mountain-aconcagua'%}
-                            true 
-                        {% else %}       
-                            false
-                        {% endif %}
-                    {% endfor %}
-                    ">
-                    <label class="govuk-label govuk-checkboxes__label" for="mountain-aconcagua">
-                      <span class="govuk-visually-hidden">Select Aconcagua</span>
+                    <input type="checkbox" class="govuk-checkboxes__input" name="selectedClaims" id="{{ claim.claimID }}" value="{{ claim.claimID }}">
+                    <label class="govuk-label govuk-checkboxes__label" for="{{ claim.training.code }}">
+                      <span class="govuk-visually-hidden">Select {{ claim.training.code }}</span>
                     </label>
                   </div>
                 </td>
-                <td class="govuk-table__cell">HDJ2123F</td>
-                <td class="govuk-table__cell">{{ data['activity-selection'] }}</td>
-                <td class="govuk-table__cell">{{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}</td>
-                <td class="govuk-table__cell">00388</td>
-                <td class="govuk-table__cell">John Doe</td>
+                <td class="govuk-table__cell"> {{ claim.claimID }} </td>
+                <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                <td class="govuk-table__cell">{{ claim.startDateStr }}</td>
+                <td class="govuk-table__cell">{{ claim.learner.id }}</td>
+                <td class="govuk-table__cell">{{ claim.learner.fullName }}</td>
               </tr>
+              {% endif %}
+              {% endfor %}
             </tbody>
-        </table>    
-        <p class="govuk-body"><a href="#" class="govuk-link">Select from all claims</a> if this piece of evidence applies to other claims not listed here.</p>
+        </table>
         {% endif %}
         <button class="govuk-button" data-module="govuk-button">
             Save and continue

@@ -11,7 +11,8 @@
         <div class="govuk-panel__body">
             Your claim numbers
             {% for learner in data['learnersSelected'] %}
-            <br><strong>HDJ2123F</strong>
+            {% set claimRef = ["2", learner.id] | join %}
+            <br><strong>{{ claimRef }}</strong>
             {% endfor %}
         </div>
         </div>
