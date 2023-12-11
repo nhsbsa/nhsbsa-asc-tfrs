@@ -19,7 +19,7 @@
             {% for learner in data['learnersSelected'] %}
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key govuk-!-font-weight-regular hmrc-summary-list__key">
-                {{ learner.fullName }}
+                [{{ learner.id }}] {{ learner.fullName }}
             </dt>
             <dd class="govuk-summary-list__actions hmrc-summary-list__actions">
                 <ul class="govuk-summary-list__actions-list">
