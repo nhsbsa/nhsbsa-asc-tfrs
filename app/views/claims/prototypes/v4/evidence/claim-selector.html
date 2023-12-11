@@ -11,8 +11,8 @@
         <h1 class="govuk-heading-l">What claims does this evidence apply to?</h1>
         <p class="govuk-body">Select the relevent claims for this peice of evidence you have uploaded.</p>
         {% if data['addEvidenceInClaimProcess'] %}
-        <p class="govuk-body">You have just started the following claims for the {{ data.trainingChoice.title }} course that took place on {{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}:</p>
-        <p class="govuk-body">If this piece of evidence applies to other claims not listed here you can <a href="#" class="govuk-link">select from all claims</a>.</p>
+        <p class="govuk-body">You have started the following claims for the {{ data.trainingChoice.title }} course on {{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}.</p>
+        <p class="govuk-body">If this piece of evidence applies to other claims you can <a href="#" class="govuk-link">show all claims</a>.</p>
         {% endif %}
     </div>
 </div>
