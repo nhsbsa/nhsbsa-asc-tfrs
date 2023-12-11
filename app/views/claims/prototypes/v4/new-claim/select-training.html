@@ -7,13 +7,13 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">Start a new claim</span>
+        <span class="govuk-caption-l">Start a new claim (direct care)</span>
         <h1 class="govuk-heading-l">Select training</h1>
     </div>
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p class="govuk-body">Select the training course or qualification you are claiming for.</p>
         <div class="moj-search govuk-!-padding-bottom-2">
 
             <form action="select-training" method="post">
@@ -82,7 +82,7 @@
             </tbody>
         </table>
         {% if not hasResults %}
-        <p class="govuk-body">{{ data['training-input'] }} has not returned any results. This may mean that the piece of training you are searching is not eligible for funding.</p>
+        <p class="govuk-body">{{ data['training-input'] }} has not returned any results. This may mean the activity you are searching for is not eligible for funding.</p>
         {% endif %}
         {% endif %}
     </div>
