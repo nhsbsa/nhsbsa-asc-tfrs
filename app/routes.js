@@ -15,10 +15,21 @@ router.use('/', require('./routes/routes-v4.js'))
 // Add your routes here
 
 router.use((req, res, next) => {
+  // Define keys to exclude from logging
+  const excludeKeys = ['training', 'claims', 'learners'];
+
+  // Create a copy of req.session.data with excluded keys removed
+  const filteredData = Object.keys(req.session.data)
+    .filter(key => !excludeKeys.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = req.session.data[key];
+      return obj;
+    }, {});
+  
   const log = {
     method: req.method,
     url: req.originalUrl,
-    data: req.session.data
+    data: filteredData
   }
   // you can enable this in your .env file
   console.log(JSON.stringify(log, null, 2))

@@ -8,7 +8,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <span class="govuk-caption-l">Start a new claim</span>
-        <h1 class="govuk-heading-l">Select training participants</h1>
+        <h1 class="govuk-heading-l">Select learners</h1>
     </div>
 </div>
 <div class="govuk-grid-row">
@@ -81,7 +81,7 @@
                             {% endfor %}
 
                             {% if not learnerAdded %}
-                            <form method="post" action="learner-profile" class="govuk-!-margin-0">
+                            <form method="post" action="/v4/select-learner" class="govuk-!-margin-0">
                                 <input type="hidden" name="learner-selection" value="{{ learner.id }}">
                                 <button type="submit" class="govuk-button">View details</button>
                             </form>

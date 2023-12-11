@@ -8,13 +8,91 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <span class="govuk-caption-l">Start new claim</span>
-        <h1 class="govuk-heading-l">{{ data['learner-selection'] }}</h1>
+        <h1 class="govuk-heading-l">{{ data.learnerSelected.fullName }}</h1>
     </div>
 </div>
 
-<form method="post" action="/v4/add-learner" class="govuk-!-margin-0">
-    <input type="hidden" name="learner-choice" value= "{{ data['learner-selection'] }}">
-    <button type="submit" class="govuk-button">Select</button>
-</form>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m">Learner overview</h2>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Learner ID
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data.learnerSelected.id }}
+              </dd>
+            </div><div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Full name
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data.learnerSelected.fullName }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Date of birth
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data.learnerSelected.dateOfBirthStr }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Role type
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data.learnerSelected.roleType }}
+                </dd>
+              </div>
+        </dl>
+        <form method="post" action="/v4/add-learner" class="govuk-!-margin-0">
+            <input type="hidden" name="learner-choice" value= "{{ data['learner-selection'] }}">
+            <button type="submit" class="govuk-button">Add learner to claim</button>
+        </form>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m">Recent claims for {{ data.learnerSelected.fullName }}</h2>
+            {% set addHeader = true %}
+            {% for claim in data.claims %}
+                {% if data.learnerSelected.id == claim.learner.id %}
+                    {% set learnerAdded = true %}
+                    {% if addHeader %}
+                        <table class="govuk-table">
+                            <thead class="govuk-table__head">
+                            <tr class="govuk-table__row">
+                                <th class="govuk-table__header" scope="col">Claim Reference Number</th>
+                                <th class="govuk-table__header" scope="col">Activity</th>
+                                <th class="govuk-table__header" scope="col">Start Date</th>
+                                <th class="govuk-table__header" scope="col">Status</th>
+                                <th class="govuk-table__header" scope="col">Created on</th>
+                                <th class="govuk-table__header" scope="col">Created by</th>
+                            </tr>
+                            </thead>
+                            <tbody class="govuk-table__body">
+                        {% set addHeader = false %}
+                    {% endif %}
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">{{ claim.claimID }}</td>
+                        <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                        <td class="govuk-table__cell">{{ claim.startDateStr }}</td>
+                        <td class="govuk-table__cell">{{ claim.status }}</td>
+                        <td class="govuk-table__cell">{{ claim.createdDateStr }}</td>
+                        <td class="govuk-table__cell">{{ claim.createdBy }}</td>
+                    </tr>
+                    {% endif %}
+
+            {% endfor %}
+                        </tbody>
+                    </table>
+    </div>
+</div>
+
+
 
 {% endblock %}

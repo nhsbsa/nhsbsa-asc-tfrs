@@ -38,8 +38,8 @@
                 <th class="govuk-table__header" scope="col">Claim Reference Number</th>
                 <th class="govuk-table__header" scope="col">Activity</th>
                 <th class="govuk-table__header" scope="col">Start Date</th>
-                <th class="govuk-table__header" scope="col">Participant ID</th>
-                <th class="govuk-table__header" scope="col">Participant name</th>
+                <th class="govuk-table__header" scope="col">Learner ID</th>
+                <th class="govuk-table__header" scope="col">Learner name</th>
               </tr>
             </thead>
             <tbody class="govuk-table__body">
@@ -58,7 +58,7 @@
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m">Now create your claims</h2>
+        <h2 class="govuk-heading-m">Now add the evidence to your claims</h2>
         <p class="govuk-body">The service will add the uploaded evidence to {{ data['selectedClaimsConfirmed'] | length }} claims. Before you submit you will be required to add all relevent evidence.</p>
         <form action="confirmation" method="post" novalidate>
         <button class="govuk-button" data-module="govuk-button">

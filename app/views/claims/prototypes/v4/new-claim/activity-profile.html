@@ -8,11 +8,101 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <span class="govuk-caption-l">Start new claim</span>
-        <h1 class="govuk-heading-l">[{{ data.trainingChoice.code }}] {{ data.trainingChoice.title  }}</h1>
+        <h1 class="govuk-heading-l">{{ data.trainingChoice.title  }}</h1>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m">Overview</h2>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Title
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data.trainingChoice.title }}
+              </dd>
+            </div><div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Code
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data.trainingChoice.code }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Type
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data.trainingChoice.type | capitalize }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Category
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data.trainingChoice.category | capitalize }}
+                </dd>
+              </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Description
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data.trainingChoice.description }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Awarding organisation
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ data.trainingChoice.awardingOrganisation }}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Total learning time
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ data.trainingChoice.totalLearningTime }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Reimbursement amount
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  £{{ data.trainingChoice.reimbursementAmount }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Funding Model
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {% if data.trainingChoice.fundingModel == "full" %}
+                    100% of reimbursement amount on completion
+                    {% elif data.trainingChoice.fundingModel == "split" %}
+                    60% of reimbursement amount on enrollment and the remaining 40% on completion
+                    {% endif %}
+                </dd>
+            </div>
+          </dl>
+          <a type="submit" class="govuk-button" href="start-date">Add training to claim</a>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <hr class="govuk-!-margin-bottom-5">
+        <h2 class="govuk-heading-m">Guidance</h2>
+        <p class="govuk-body"><a href="#" class="govuk-link">Find out more about reimbursement amounts</a></p>
+        <p class="govuk-body"><a href="#" class="govuk-link">Find out more about funding models</a>
     </div>
 </div>
 
 
-    <a type="submit" class="govuk-button" href="start-date">Select</a>
+
 
 {% endblock %}

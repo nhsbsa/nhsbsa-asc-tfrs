@@ -17,9 +17,8 @@ router.post('/v4/add-training', function (req, res) {
     res.redirect('../claims/prototypes/v4/new-claim/activity-profile')
 })
 
-
-router.post('/v4/add-learner', function (req, res) {
-    var learnerID = req.session.data['learner-choice']
+router.post('/v4/select-learner', function (req, res) {
+    var learnerID = req.session.data['learner-selection']
     
     for (const l of req.session.data['learners']) {
         if (learnerID == l.id) {
@@ -27,11 +26,17 @@ router.post('/v4/add-learner', function (req, res) {
         }
     }
 
+    req.session.data['learnerSelected'] = learner
+    
+    res.redirect('../claims/prototypes/v4/new-claim/learner-profile')
+})
+
+router.post('/v4/add-learner', function (req, res) {
 
     if (req.session.data.learnersSelected){
-        req.session.data['learnersSelected'].push(learner)
+        req.session.data['learnersSelected'].push(req.session.data['learnerSelected'])
     } else {
-        req.session.data['learnersSelected'] = [learner]
+        req.session.data['learnersSelected'] = [req.session.data['learnerSelected']]
     }
 
     res.redirect('../claims/prototypes/v4/new-claim/learner-summary')
