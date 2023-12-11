@@ -1,7 +1,15 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block beforeContent %}
-<a href="../new-claim/confirmation" class="govuk-back-link">Back</a>
+
+
+<a href="
+{% if req.session.data['addEvidenceInClaimProcess']%}
+../new-claim/confirmation  
+{% else %}       
+../manage-claim-items
+{% endif %}
+" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}

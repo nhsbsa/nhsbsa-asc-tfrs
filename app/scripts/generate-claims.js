@@ -25,7 +25,7 @@ function generateClaims(quantity) {
 const data = [];
 
 for (let i = 1; i <= quantity; i++) {
-  const claimID = i.toString().padStart(5, '0');
+  const claimID = i.toString().padStart(6, '0');
   const learner = faker.helpers.arrayElement(learners);
   const trainingItem = faker.helpers.arrayElement(training);
   const startDate = faker.date.past();
