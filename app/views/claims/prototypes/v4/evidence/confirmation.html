@@ -17,19 +17,16 @@
         <p class="govuk-body">We have sent you a confirmation email.</p>
         <h2 class="govuk-heading-m">What happens next</h2>
         <p class="govuk-body">
-        We have added evidence of {{ data['evidenceType'] }} to {{ data['selectedClaimsConfirmed'] | length }} claims.</p>
-        <h3 class="govuk-heading-s">Evidence</h3>
-        <p class="govuk-body">
-        Before submitting your claims you will need provide all evidence appropriate to activity that you are claiming for. You can add evidence at any time from <a href="#" class="govuk-link">manage your claims</a>. Alternatively you can add more evidence now if you have it ready.
+        Before you submit the claims for payment you will need to add any remaining supporting evidence. You can do this now or later.
         </p>
         <form method="post" action="/v4/evidence-in-claim-process" class="govuk-!-margin-0">
             <button type="submit" class="govuk-button govuk-button--secondary">Add more evidence now</button>
         </form>
         <p class="govuk-body">
-            If you are not ready to add more evidence go back to managing your claims.
+            If you are not ready to add more evidence, or these claims do not require more evidence, go back to managing your claims.
         </p>
         <a class="govuk-button" data-module="govuk-button" href="../manage-claim-items">
-            Manage my claims
+            Manage claims
         </a>
     </div>
 </div>
