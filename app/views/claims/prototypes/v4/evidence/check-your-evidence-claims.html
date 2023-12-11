@@ -19,11 +19,12 @@
         <img src="/public/images/fake-invoice.png" alt="{{ data['evidenceFile'] }}" width="100%">
     </div>
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">Please check your evidence of {{ data['evidenceType'] }} includes the following:
+        <p class="govuk-body">Please check your evidence of {{ data['evidenceType'] }} includes:
             <ul class="govuk-list govuk-list--bullet">
-                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
-                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
-                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+                <li>your organisation name, which should be the same as the name in your account for this service</li>
+                <li>the name of the activity you are claiming for</li>
+                <li>the date the activity took place</li>
+                <li>the names of all the learners you are adding the evidence to (as listed below)</li>
               </ul>
         </p>
     </div>
@@ -35,9 +36,9 @@
         <table class="govuk-table">
             <thead class="govuk-table__head">
               <tr class="govuk-table__row">
-                <th class="govuk-table__header" scope="col">Claim Reference Number</th>
+                <th class="govuk-table__header" scope="col">Claim reference number</th>
                 <th class="govuk-table__header" scope="col">Activity</th>
-                <th class="govuk-table__header" scope="col">Start Date</th>
+                <th class="govuk-table__header" scope="col">Start date</th>
                 <th class="govuk-table__header" scope="col">Learner ID</th>
                 <th class="govuk-table__header" scope="col">Learner name</th>
               </tr>
@@ -58,11 +59,16 @@
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m">Now add the evidence to your claims</h2>
-        <p class="govuk-body">The service will add the uploaded evidence to {{ data['selectedClaimsConfirmed'] | length }} claims. Before you submit you will be required to add all relevent evidence.</p>
+        <h2 class="govuk-heading-m">Do you want to continue?</h2>
+        <p class="govuk-body">The evidence will be added to {{ data['selectedClaimsConfirmed'] | length }} claims.</p>
         <form action="confirmation" method="post" novalidate>
         <button class="govuk-button" data-module="govuk-button">
             Accept and add
+        </button>
+        </form>
+        <form action="../manage-claim-items" method="post" novalidate>
+        <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Cancel
         </button>
         </form>
     </div>
