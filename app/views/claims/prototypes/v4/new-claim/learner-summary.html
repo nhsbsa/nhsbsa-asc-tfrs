@@ -13,7 +13,7 @@
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">You are creating a claim for the below learners for the {{ data.trainingChoice.title }} {{ data.trainingChoice.type }} on {{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}.</p>
+        <p class="govuk-body">You are creating a claim for these learners for the {{ data.trainingChoice.title }} {{ data.trainingChoice.type }} on {{ data['activity-date-started-day'] }} {{ data['activity-date-started-month'] | monthName }} {{ data['activity-date-started-year'] }}.</p>
         <div class="govuk-form-group">
             <dl class="govuk-summary-list hmrc-list-with-actions hmrc-list-with-actions--short">
             {% for learner in data['learnersSelected'] %}
@@ -37,7 +37,7 @@
                 Do you need to add another learner?
             </legend>
             <div id="add-another-hint" class="govuk-hint">
-                Add multiple learners to quickly create mutliple claims for this activity.
+                Add multiple learners to quickly create multiple claims for this activity.
             </div>
             <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
                 <div class="govuk-radios__item">

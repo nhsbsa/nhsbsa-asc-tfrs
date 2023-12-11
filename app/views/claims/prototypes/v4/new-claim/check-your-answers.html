@@ -96,8 +96,8 @@
         </div>
         {% endfor %}
     </dl>
-    <h2 class="govuk-heading-m">Now create your claims</h2>
-    <p class="govuk-body">The service will create {{ data['learnersSelected'] | length }} new claims. One for each learner for this activity. Before you submit you will be required to add evidence, which you will be able to do once claims are created.</p>
+    <h2 class="govuk-heading-m">What happens next</h2>
+    <p class="govuk-body">This will create {{ data['learnersSelected'] | length }} new claims, one for each learner for this activity.</p>
     <form action="/v4/create-claims" method="post" novalidate>
     <input type="hidden" name="answers-checked" value="true">
     <button class="govuk-button" data-module="govuk-button">
