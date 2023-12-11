@@ -15,7 +15,7 @@ router.post('/v4/add-training', function (req, res) {
     req.session.data['trainingChoice'] = training
 
     res.redirect('../claims/prototypes/v4/new-claim/activity-profile')
-})
+});
 
 router.post('/v4/select-learner', function (req, res) {
     var learnerID = req.session.data['learner-selection']
@@ -29,7 +29,7 @@ router.post('/v4/select-learner', function (req, res) {
     req.session.data['learnerSelected'] = learner
     
     res.redirect('../claims/prototypes/v4/new-claim/learner-profile')
-})
+});
 
 router.post('/v4/add-learner', function (req, res) {
 
@@ -40,13 +40,13 @@ router.post('/v4/add-learner', function (req, res) {
     }
 
     res.redirect('../claims/prototypes/v4/new-claim/learner-summary')
-})
+});
 
 router.post('/v4/evidence-for-claims', function (req, res) {
    
 
     res.redirect('../claims/prototypes/v4/evidence/check-your-evidence-claims')
-})
+});
 
 router.post('/v4/add-more-learners-answer', function (req, res) {
     var addAnother = req.session.data['add-another']
@@ -61,7 +61,7 @@ router.post('/v4/add-more-learners-answer', function (req, res) {
         res.redirect('../claims/prototypes/v4/new-claim/check-your-answers')
       }
     
-})
+});
 
 router.post('/v4/evidence-in-claim-process', function (req, res) {
     req.session.data['addEvidenceInClaimProcess'] = true
@@ -69,7 +69,7 @@ router.post('/v4/evidence-in-claim-process', function (req, res) {
     res.redirect('../claims/prototypes/v4/evidence/evidence-type')
 
 
-})
+});
 
 router.post('/v4/evidence-choice', function (req, res) {
     var evidenceType = req.session.data['evidenceType']
@@ -84,7 +84,7 @@ router.post('/v4/evidence-choice', function (req, res) {
         res.redirect('../claims/prototypes/v4/evidence/upload')
       }
 
-})
+});
 
 router.post('/v4/update-session-data', (req, res) => {
     const selectedOptions = req.body.selectedOptions; 
@@ -152,6 +152,46 @@ router.post('/v4/claims-choice', function (req, res) {
     }
     req.session.data.selectedClaimsConfirmed = claims
     res.redirect('../claims/prototypes/v4/evidence/check-your-evidence-claims')
-})
+});
+
+router.post('/v4/new-claim-reset', function (req, res) {
+    req.session.data['addEvidenceInClaimProcess'] = false;
+    delete req.session.data['training-input'];
+    delete req.session.data['training-selection'];
+    delete req.session.data['trainingChoice'];
+    delete req.session.data['activity-date-started-day'];
+    delete req.session.data['activity-date-started-month'];
+    delete req.session.data['activity-date-started-year'];
+    delete req.session.data['learner-input'];
+    delete req.session.data['learner-selection'];
+    delete req.session.data['learnerSelected'];
+    delete req.session.data['learner-choice'];
+    delete req.session.data['learnersSelected'];
+    delete req.session.data['add-another'];
+    delete req.session.data['answers-checked'];
+    delete req.session.data['evidenceType'];
+    delete req.session.data['search-input'];
+    delete req.session.data['totalAmount'];
+    delete req.session.data['EvidenceNoLearners'];
+    delete req.session.data['evidenceFile'];
+    delete req.session.data['selectedClaims'];
+    delete req.session.data['selectedClaimsConfirmed'];
+
+    res.redirect('../claims/prototypes/v4/new-claim/select-training.html')
+});
+
+router.post('/v4/new-evidence-reset', function (req, res) {
+    req.session.data['addEvidenceInClaimProcess'] = false;
+    delete req.session.data['evidenceType'];
+    delete req.session.data['search-input'];
+    delete req.session.data['totalAmount'];
+    delete req.session.data['EvidenceNoLearners'];
+    delete req.session.data['evidenceFile'];
+    delete req.session.data['claimSearch'];
+    delete req.session.data['selectedClaims'];
+    delete req.session.data['selectedClaimsConfirmed'];
+
+    res.redirect('../claims/prototypes/v4/evidence/evidence-type')
+});
 
 module.exports = router
