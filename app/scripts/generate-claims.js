@@ -16,7 +16,7 @@ function getRandomPastDate() {
 
 function generateGDSDate(date) {
     const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    const GDSDate = date.getDate().toString().concat(" ", month[date.getMonth()-1], " ", date.getFullYear());
+    const GDSDate = date.getDate().toString().concat(" ", month[date.getMonth()], " ", date.getFullYear());
     return GDSDate
 }
 
