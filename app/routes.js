@@ -104,4 +104,11 @@ router.get('/', function (req, res) {
   res.render('index')
 })
 
+router.get('/v4/load-data', function (req, res) {
+  //Load data from JSON files
+  loadData(req);
+  resetVariables(req);
+  res.redirect('../claims/prototypes/v4/index')
+})
+
 module.exports = router;
