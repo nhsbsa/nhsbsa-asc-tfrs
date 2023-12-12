@@ -22,9 +22,42 @@
           </div>
       
         </div>
+        
       
-    </div>      
-    <div class="govuk-width-container">
+    </div>  
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <div class="moj-search govuk-!-padding-bottom-6">
+              
+      <form action="#" method="post">
+
+      <div class="govuk-form-group">
+          <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+          Search for a learner or activity
+          </label>
+
+          <div id="search-hint" class="govuk-hint moj-search__hint ">
+          You can search by a learner's name or by a course name
+          </div>
+
+          <input class="govuk-input moj-search__input " id="search" name="search" type="search" aria-describedby="search-hint">
+
+      </div>
+
+      <button class="govuk-button moj-search__button govuk-button--secondary" data-module="govuk-button">
+          Search
+      </button>
+
+      </form>
+    </div>
+  </div>
+</div>
+    
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
       <div class="govuk-tabs" data-module="govuk-tabs">
           <h2 class="govuk-tabs__title">
             Contents
@@ -70,8 +103,6 @@
                     
                     <div class="moj-action-bar">
                 
-                      <div class="moj-action-bar__filter"></div>
-                
                       <div class="moj-button-menu">
                         <div class="moj-button-menu__wrapper">
                           
@@ -93,44 +124,30 @@
             </div>
             <div class="govuk-grid-row">
               <div class="govuk-grid-column-full">
-                <div class="moj-filter-layout">
-          
-                  <div class="moj-filter-layout__filter">
-                    {% include "./_components/filter/filter-claim-items.html" %}
-                  </div>
-                
-                  <div class="moj-filter-layout__content">
-                
-                    <div class="moj-scrollable-pane">
-                            <div class="moj-search govuk-!-padding-bottom-6">
-          
-                                <form action="#" method="post">
-                            
-                                <div class="govuk-form-group">
-                                    <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
-                                    Search for a learner or activity
-                                    </label>
-                            
-                                    <div id="search-hint" class="govuk-hint moj-search__hint ">
-                                    You can search by a person's name or by a course name
-                                    </div>
-                            
-                                    <input class="govuk-input moj-search__input " id="search" name="search" type="search" aria-describedby="search-hint">
-                            
-                                </div>
-                            
-                                <button class="govuk-button moj-search__button " data-module="govuk-button">
-                                    Search
-                                </button>
-                            
-                                </form>
-                            </div>
-          
-                      {% include "./_components/cards/learner/mock-learner-cards-inprogress.html" %}
-                    </div>
-                  </div>
-                
-              </div>
+                <table class="govuk-table">
+                  <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                      <th class="govuk-table__header" scope="col">Claim ID</th>
+                      <th class="govuk-table__header govuk-!-width-one-third" scope="col">Activity</th>
+                      <th class="govuk-table__header" scope="col">Start Date</th>
+                      <th class="govuk-table__header" scope="col">Learner ID</th>
+                      <th class="govuk-table__header" scope="col">Learner name</th>
+                    </tr>
+                  </thead>
+                  <tbody class="govuk-table__body">
+                    {% for claim in data['claims'] %}
+                    {% if claim.status == 'incomplete' %}
+                    <tr class="govuk-table__row">
+                      <td class="govuk-table__cell"> {{ claim.claimID }} </td>
+                      <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                      <td class="govuk-table__cell">{{ claim.startDateStr }}</td>
+                      <td class="govuk-table__cell">{{ claim.learner.id }}</td>
+                      <td class="govuk-table__cell">{{ claim.learner.fullName }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
             </div>
             </div>
           </div>
@@ -147,8 +164,6 @@
                   <div class="moj-page-header-actions__actions">
                     
                     <div class="moj-action-bar">
-                
-                      <div class="moj-action-bar__filter"></div>
                 
                       <div class="moj-button-menu">
                         <div class="moj-button-menu__wrapper">
@@ -171,44 +186,30 @@
             </div>
             <div class="govuk-grid-row">
               <div class="govuk-grid-column-full">
-                <div class="moj-filter-layout">
-          
-                  <div class="moj-filter-layout__filter">
-                    {% include "./_components/filter/filter-claim-items.html" %}
-                  </div>
-                
-                  <div class="moj-filter-layout__content">
-                
-                    <div class="moj-scrollable-pane">
-                            <div class="moj-search govuk-!-padding-bottom-6">
-          
-                                <form action="#" method="post">
-                            
-                                <div class="govuk-form-group">
-                                    <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
-                                    Search for a learner or activity
-                                    </label>
-                            
-                                    <div id="search-hint" class="govuk-hint moj-search__hint ">
-                                    You can search by a person's name or by a course name
-                                    </div>
-                            
-                                    <input class="govuk-input moj-search__input " id="search" name="search" type="search" aria-describedby="search-hint">
-                            
-                                </div>
-                            
-                                <button class="govuk-button moj-search__button " data-module="govuk-button">
-                                    Search
-                                </button>
-                            
-                                </form>
-                            </div>
-          
-                      {% include "./_components/cards/learner/mock-learner-cards-readytosubmit.html" %}
-                    </div>
-                  </div>
-                
-              </div>
+                <table class="govuk-table">
+                  <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                      <th class="govuk-table__header" scope="col">Claim ID</th>
+                      <th class="govuk-table__header govuk-!-width-one-third" scope="col">Activity</th>
+                      <th class="govuk-table__header" scope="col">Start Date</th>
+                      <th class="govuk-table__header" scope="col">Learner ID</th>
+                      <th class="govuk-table__header" scope="col">Learner name</th>
+                    </tr>
+                  </thead>
+                  <tbody class="govuk-table__body">
+                    {% for claim in data['claims'] %}
+                    {% if claim.status == 'ready-to-submit' %}
+                    <tr class="govuk-table__row">
+                      <td class="govuk-table__cell"> {{ claim.claimID }} </td>
+                      <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                      <td class="govuk-table__cell">{{ claim.startDateStr }}</td>
+                      <td class="govuk-table__cell">{{ claim.learner.id }}</td>
+                      <td class="govuk-table__cell">{{ claim.learner.fullName }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
             </div>
             </div>
           </div>
@@ -226,8 +227,6 @@
                     
                     <div class="moj-action-bar">
                 
-                      <div class="moj-action-bar__filter"></div>
-                
                     </div>
           
                   </div>
@@ -239,44 +238,30 @@
             </div>
             <div class="govuk-grid-row">
               <div class="govuk-grid-column-full">
-                <div class="moj-filter-layout">
-          
-                  <div class="moj-filter-layout__filter">
-                    {% include "./_components/filter/filter-claim-items.html" %}
-                  </div>
-                
-                  <div class="moj-filter-layout__content">
-                
-                    <div class="moj-scrollable-pane">
-                            <div class="moj-search govuk-!-padding-bottom-6">
-          
-                                <form action="#" method="post">
-                            
-                                <div class="govuk-form-group">
-                                    <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
-                                    Search for a learner or activity
-                                    </label>
-                            
-                                    <div id="search-hint" class="govuk-hint moj-search__hint ">
-                                    You can search by a person's name or by a course name
-                                    </div>
-                            
-                                    <input class="govuk-input moj-search__input " id="search" name="search" type="search" aria-describedby="search-hint">
-                            
-                                </div>
-                            
-                                <button class="govuk-button moj-search__button " data-module="govuk-button">
-                                    Search
-                                </button>
-                            
-                                </form>
-                            </div>
-          
-                      {% include "./_components/cards/learner/mock-learner-cards-submitted.html" %}
-                    </div>
-                  </div>
-                
-              </div>
+                <table class="govuk-table">
+                  <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                      <th class="govuk-table__header" scope="col">Claim ID</th>
+                      <th class="govuk-table__header govuk-!-width-one-third" scope="col">Activity</th>
+                      <th class="govuk-table__header" scope="col">Start Date</th>
+                      <th class="govuk-table__header" scope="col">Learner ID</th>
+                      <th class="govuk-table__header" scope="col">Learner name</th>
+                    </tr>
+                  </thead>
+                  <tbody class="govuk-table__body">
+                    {% for claim in data['claims'] %}
+                    {% if claim.status == 'submitted' %}
+                    <tr class="govuk-table__row">
+                      <td class="govuk-table__cell"> {{ claim.claimID }} </td>
+                      <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                      <td class="govuk-table__cell">{{ claim.startDateStr }}</td>
+                      <td class="govuk-table__cell">{{ claim.learner.id }}</td>
+                      <td class="govuk-table__cell">{{ claim.learner.fullName }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
             </div>
             </div>
           </div>
@@ -294,7 +279,6 @@
                     
                     <div class="moj-action-bar">
                 
-                      <div class="moj-action-bar__filter"></div>
                 
                     </div>
           
@@ -307,44 +291,30 @@
             </div>
             <div class="govuk-grid-row">
               <div class="govuk-grid-column-full">
-                <div class="moj-filter-layout">
-          
-                  <div class="moj-filter-layout__filter">
-                    {% include "./_components/filter/filter-claim-items.html" %}
-                  </div>
-                
-                  <div class="moj-filter-layout__content">
-                
-                    <div class="moj-scrollable-pane">
-                            <div class="moj-search govuk-!-padding-bottom-6">
-          
-                                <form action="#" method="post">
-                            
-                                <div class="govuk-form-group">
-                                    <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
-                                    Search for a learner or activity
-                                    </label>
-                            
-                                    <div id="search-hint" class="govuk-hint moj-search__hint ">
-                                    You can search by a person's name or by a course name
-                                    </div>
-                            
-                                    <input class="govuk-input moj-search__input " id="search" name="search" type="search" aria-describedby="search-hint">
-                            
-                                </div>
-                            
-                                <button class="govuk-button moj-search__button " data-module="govuk-button">
-                                    Search
-                                </button>
-                            
-                                </form>
-                            </div>
-          
-                      {% include "./_components/cards/learner/mock-learner-cards-insufficientevidence.html" %}
-                    </div>
-                  </div>
-                
-              </div>
+                <table class="govuk-table">
+                  <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                      <th class="govuk-table__header" scope="col">Claim ID</th>
+                      <th class="govuk-table__header govuk-!-width-one-third" scope="col">Activity</th>
+                      <th class="govuk-table__header" scope="col">Start Date</th>
+                      <th class="govuk-table__header" scope="col">Learner ID</th>
+                      <th class="govuk-table__header" scope="col">Learner name</th>
+                    </tr>
+                  </thead>
+                  <tbody class="govuk-table__body">
+                    {% for claim in data['claims'] %}
+                    {% if claim.status == 'insufficient-evidence' %}
+                    <tr class="govuk-table__row">
+                      <td class="govuk-table__cell"> {{ claim.claimID }} </td>
+                      <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                      <td class="govuk-table__cell">{{ claim.startDateStr }}</td>
+                      <td class="govuk-table__cell">{{ claim.learner.id }}</td>
+                      <td class="govuk-table__cell">{{ claim.learner.fullName }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
             </div>
             </div>
           </div>
@@ -361,8 +331,7 @@
                   <div class="moj-page-header-actions__actions">
                     
                     <div class="moj-action-bar">
-                
-                      <div class="moj-action-bar__filter"></div>
+
                 
                     </div>
           
@@ -375,44 +344,30 @@
             </div>
             <div class="govuk-grid-row">
               <div class="govuk-grid-column-full">
-                <div class="moj-filter-layout">
-          
-                  <div class="moj-filter-layout__filter">
-                    {% include "./_components/filter/filter-claim-items.html" %}
-                  </div>
-                
-                  <div class="moj-filter-layout__content">
-                
-                    <div class="moj-scrollable-pane">
-                            <div class="moj-search govuk-!-padding-bottom-6">
-          
-                                <form action="#" method="post">
-                            
-                                <div class="govuk-form-group">
-                                    <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
-                                    Search for a person or activity
-                                    </label>
-                            
-                                    <div id="search-hint" class="govuk-hint moj-search__hint ">
-                                    You can search by a person's name or by a course name
-                                    </div>
-                            
-                                    <input class="govuk-input moj-search__input " id="search" name="search" type="search" aria-describedby="search-hint">
-                            
-                                </div>
-                            
-                                <button class="govuk-button moj-search__button " data-module="govuk-button">
-                                    Search
-                                </button>
-                            
-                                </form>
-                            </div>
-          
-                      {% include "./_components/cards/learner/mock-learner-cards-paid.html" %}
-                    </div>
-                  </div>
-                
-              </div>
+                <table class="govuk-table">
+                  <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                      <th class="govuk-table__header" scope="col">Claim ID</th>
+                      <th class="govuk-table__header govuk-!-width-one-third" scope="col">Activity</th>
+                      <th class="govuk-table__header" scope="col">Start Date</th>
+                      <th class="govuk-table__header" scope="col">Learner ID</th>
+                      <th class="govuk-table__header" scope="col">Learner name</th>
+                    </tr>
+                  </thead>
+                  <tbody class="govuk-table__body">
+                    {% for claim in data['claims'] %}
+                    {% if claim.status == 'paid' %}
+                    <tr class="govuk-table__row">
+                      <td class="govuk-table__cell"> {{ claim.claimID }} </td>
+                      <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                      <td class="govuk-table__cell">{{ claim.startDateStr }}</td>
+                      <td class="govuk-table__cell">{{ claim.learner.id }}</td>
+                      <td class="govuk-table__cell">{{ claim.learner.fullName }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                  </tbody>
+                </table>
             </div>
             </div>
           </div>
