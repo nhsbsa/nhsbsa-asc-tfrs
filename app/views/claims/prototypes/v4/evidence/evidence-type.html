@@ -4,7 +4,7 @@
 
 
 <a href="
-{% if req.session.data['addEvidenceInClaimProcess']%}
+{% if not req.session.data['addEvidenceInClaimProcess'] %}
 ../new-claim/confirmation  
 {% else %}       
 ../manage-claim-items
