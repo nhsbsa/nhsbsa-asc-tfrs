@@ -108,7 +108,7 @@ router.get('/v4/load-data', function (req, res) {
   //Load data from JSON files
   loadData(req);
   resetVariables(req);
-  res.redirect('../claims/prototypes/v4/index')
+  res.redirect('../claims/prototypes/v4/before-you-start.html')
 })
 
 module.exports = router;
