@@ -11,12 +11,13 @@ const { generateLearners } = require('./scripts/generate-learners.js');
 
 router.use('/', require('./routes/routes-v3.js'))
 router.use('/', require('./routes/routes-v4.js'))
+router.use('/', require('./routes/routes-v5.js'))
 
 // Add your routes here
 
 router.use((req, res, next) => {
   // Define keys to exclude from logging
-  const excludeKeys = ['training', 'claims', 'learners'];
+  const excludeKeys = ['training', 'claims', 'learners', 'statuses'];
 
   // Create a copy of req.session.data with excluded keys removed
   const filteredData = Object.keys(req.session.data)
@@ -36,79 +37,14 @@ router.use((req, res, next) => {
   next()
 })
 
-// funtion to load in data files
-function loadJSONFromFile(fileName, path = 'app/data/') {
-  let jsonFile = fs.readFileSync(path + fileName)
-  return JSON.parse(jsonFile) // Return JSON as object
-}
-
-function loadData(req) {
-  // pull in the prototype data object and see if it contains a datafile reference
-  let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
-
-  var learnersFile = 'learners.json'
-  var trainingFile = 'training.json'
-  var claimsFile = 'claims.json'
-
-  if (req.session.data.training) {
-    console.log('training file already loaded')
-  } else {
-    console.log('loading in training file')
-    let path = 'app/data/'
-    req.session.data['training'] = loadJSONFromFile(trainingFile, path)
-    console.log('training file loaded')
-  }
-
-  if (req.session.data.claims) {
-    console.log('claims file already loaded')
-  } else {
-    console.log('loading in claims file')
-    let path = 'app/data/'
-    req.session.data['claims'] = loadJSONFromFile(claimsFile, path)
-    console.log('claims file loaded')
-  }
-
-  if (req.session.data.learners) {
-    console.log('learners file already loaded')
-  } else {
-    console.log('loading in learners file')
-    let path = 'app/data/'
-    req.session.data['learners'] = loadJSONFromFile(learnersFile, path)
-    console.log('learners file loaded')
-  }
-
-  return console.log('data updated')
-}
-
-function resetVariables(req) {
-  req.session.data['addEvidenceInClaimProcess'] = false
-  
-  return console.log('variables reset')
-}
-
 //generate data
 router.get('/generate', function (req, res) {
   generateLearners(200);
   generateClaims(1000);
-  loadData(req);
-  resetVariables(req);
   res.redirect('../')
 })
 
 
 
-router.get('/', function (req, res) {
-  //Load data from JSON files
-  loadData(req);
-  resetVariables(req);
-  res.render('index')
-})
-
-router.get('/v4/load-data', function (req, res) {
-  //Load data from JSON files
-  loadData(req);
-  resetVariables(req);
-  res.redirect('../claims/prototypes/v4/before-you-start.html')
-})
 
 module.exports = router;

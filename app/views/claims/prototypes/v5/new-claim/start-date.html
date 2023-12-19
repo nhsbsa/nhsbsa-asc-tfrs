@@ -1,0 +1,57 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="activity-profile" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="/v5/create-date" method="post" class="form">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <span class="govuk-caption-l">Start new claim (direct care)</span>
+                    <h1 class="govuk-fieldset__heading">
+                        Start date
+                    </h1>
+                </legend>
+                <div id="start-date-issued-hint" class="govuk-hint">
+                    For example, 27 3 2007
+                  </div>
+                <div class="govuk-date-input" id="activity-date-started">
+                    <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                        <label class="govuk-label govuk-date-input__label" for="activity-date-started-day">
+                        Day
+                        </label>
+                        <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="activity-date-started-day" name="activity-date-started-day" type="text" inputmode="numeric">
+                    </div>
+                    </div>
+                    <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                        <label class="govuk-label govuk-date-input__label" for="activity-date-started-month">
+                        Month
+                        </label>
+                        <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="activity-date-started-month" name="activity-date-started-month" type="text" inputmode="numeric">
+                    </div>
+                    </div>
+                    <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                        <label class="govuk-label govuk-date-input__label" for="activity-date-started-year">
+                        Year
+                        </label>
+                        <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="activity-date-started-year" name="activity-date-started-year" type="text" inputmode="numeric">
+                    </div>
+                    </div>
+                </div>
+                </fieldset>
+            </div>
+          <button class="govuk-button" data-module="govuk-button">
+            Save and continue
+          </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -14,39 +14,29 @@ function getRandomPastDate() {
   return faker.date.between(pastDate, new Date());
 }
 
-function generateGDSDate(date) {
-    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    const GDSDate = date.getDate().toString().concat(" ", date.toLocaleString('default', { month: 'short' }), " ", date.getFullYear());
-    return GDSDate
-}
-
 // Function to generate a random claim object
 function generateClaims(quantity) {
 const data = [];
+const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
 
 for (let i = 1; i <= quantity; i++) {
-  const claimID = i.toString().padStart(6, '0');
+  faker.seed(i);
+  const claimID = faker.finance.accountNumber(6);
   const learner = faker.helpers.arrayElement(learners);
   const trainingItem = faker.helpers.arrayElement(training);
   const startDate = faker.date.past();
-  const startDateStr = generateGDSDate(startDate);
-  const status = faker.helpers.arrayElement(statuses);
+  const status = (faker.helpers.arrayElement(statuses)).id;
   const createdDate = faker.date.past();
-  const createdDateStr = generateGDSDate(createdDate);
-  const createdBy = faker.person.fullName();
+  const createdBy = faker.helpers.arrayElement(creators);
 
   let submittedDate = null;
-  let submittedDateStr = null;
   if (['submitted', 'insufficient-evidence', 'paid'].includes(status)) {
     submittedDate = faker.date.between({from: createdDate,to:  new Date()});
-    submittedDateStr = generateGDSDate(submittedDate);
   }
   let paidDate = null;
-  let paidDateStr = null;
 
   if (status === 'paid') {
     paidDate = faker.date.between({from: submittedDate, to: new Date()});
-    paidDateStr = generateGDSDate(paidDate);
   }
 
   let evidenceOfPayment = null;
@@ -64,15 +54,11 @@ for (let i = 1; i <= quantity; i++) {
     learner,
     training: trainingItem,
     startDate,
-    startDateStr,
     status,
     createdDate,
-    createdDateStr,
     createdBy,
     submittedDate,
-    submittedDateStr,
     paidDate,
-    paidDateStr,
     evidenceOfPayment,
     evidenceOfEnrollment,
     evidenceOfCompletion,
@@ -86,6 +72,9 @@ for (let i = 1; i <= quantity; i++) {
  const jsonFilePath = './app/data/claims.json';
  fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
 
+ //reset seed
+ faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
+ 
  return console.log(`JSON data written to ${jsonFilePath}`);
 
 }

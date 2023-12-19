@@ -1,0 +1,92 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="../manage-claim-items" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">Start a new claim (direct care)</span>
+        <h1 class="govuk-heading-l">Select training</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">Select the training course or qualification you are claiming for.</p>
+        <div class="moj-search govuk-!-padding-bottom-2">
+
+            <form action="select-training" method="post">
+        
+            <div class="govuk-form-group">
+                <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+                Search for training
+                </label>
+        
+                <div id="search-hint" class="govuk-hint moj-search__hint ">
+                You can search by a name of the training or the code
+                </div>
+        
+                <input class="govuk-input moj-search__input " id="search" name="training-input" type="search" aria-describedby="search-hint" value="{{ data['training-input'] }}">
+        
+            </div>
+        
+            <button class="govuk-button moj-search__button govuk-button--secondary" data-module="govuk-button">
+                Search
+            </button>
+        
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% if data['training-input'] %}
+        <h2 class="govuk-heading-m">Search results</h2>
+                {% set hasResults = false %}
+                {% set addHeader = true %}
+                {% for training in data['training'] %}
+                    {% set lowercasedsearch = data['training-input'] | lower %}
+                    {% set lowercasedname = training.title | lower %}
+                    {% if lowercasedname == lowercasedsearch or training.code == data['training-input'] or lowercasedsearch in lowercasedname %}
+                            {% set hasResults = true %}
+                            {% if addHeader %}
+                                <table class="govuk-table">
+                                    <thead class="govuk-table__head">
+                                    <tr class="govuk-table__row">
+                                        <th scope="col" class="govuk-table__header">Training Code</th>
+                                        <th scope="col" class="govuk-table__header">Training name</th>
+                                        <th scope="col" class="govuk-table__header">Awarding Organisation</th>
+                                        <th scope="col" class="govuk-table__header"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="govuk-table__body">
+                            {% set addHeader = false %}
+                            {% endif %}
+                        <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">{{ training.code }}</th>
+                        <td class="govuk-table__cell">{{ training.title }}</td>
+                        <td class="govuk-table__cell">{{ training.awardingOrganisation }}</td>
+                        <td class="govuk-table__cell">
+                            <form method="post" action="/v5/add-training" class="govuk-!-margin-0">
+                                <input type="hidden" name="training-selection" value="{{ training.code }}">
+                                <button type="submit" class="govuk-button">View details</button>
+                            </form>
+                        </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+            </tbody>
+        </table>
+        {% if not hasResults %}
+        <p class="govuk-body">{{ data['training-input'] }} has not returned any results. This may mean the activity you are searching for is not eligible for funding.</p>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

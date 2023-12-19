@@ -1,0 +1,67 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="select-learner.html" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">Start new claim (direct care)</span>
+        <h1 class="govuk-heading-l">You have added {{ data['learnersSelected'] | length }} learners</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">You are creating a claim for these learners for the {{ data.trainingChoice.title }} {{ data.trainingChoice.type }} on {{ data.date | govukDate }}.</p>
+        <div class="govuk-form-group">
+            <dl class="govuk-summary-list hmrc-list-with-actions hmrc-list-with-actions--short">
+            {% for learner in data['learnersSelected'] %}
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key govuk-!-font-weight-regular hmrc-summary-list__key">
+                [{{ learner.id }}] {{ learner.fullName }}
+            </dt>
+            <dd class="govuk-summary-list__actions hmrc-summary-list__actions">
+                <ul class="govuk-summary-list__actions-list">
+                <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="#"><span aria-hidden="true">Remove</span><span class="govuk-visually-hidden">Remove Sydney Russell from the list</span></a></li>
+                </ul>
+            </dd>
+            </div>
+            {% endfor %}
+            </dl>
+        </div>
+        <form method="post" action="/v5/add-more-learners-answer">
+        <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset" aria-describedby="add-another-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend govuk-fieldset__legend--m">
+                Do you need to add another learner?
+            </legend>
+            <div id="add-another-hint" class="govuk-hint">
+                Add multiple learners to quickly create multiple claims for this activity.
+            </div>
+            <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="add-another" name="add-another" type="radio" value="Yes">
+                <label class="govuk-label govuk-radios__label" for="add-another">
+                    Yes
+                </label>
+                </div>
+                <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="add-another-2" name="add-another" type="radio" value="No">
+                <label class="govuk-label govuk-radios__label" for="add-another-2">
+                    No
+                </label>
+                </div>
+            </div>
+            </fieldset>
+        </div>
+
+        <button class="govuk-button" data-module="govuk-button">
+            Save and continue
+        </button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

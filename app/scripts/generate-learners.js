@@ -53,56 +53,72 @@ function generateGDSDate(date) {
   return GDSDate
 }
 
+// Function to generate a unique 9-digit code
+function generateUniqueID(seed) {
+  faker.seed(seed)
+  const startLetters = faker.string.alpha({
+    casing: 'upper',
+    length: 2});
+  const oneNumbers = faker.string.numeric(2);
+  const twoNumbers = faker.string.numeric(1).concat("F");
+  const threeNumbers = faker.string.numeric(2);
+  const endLetter = faker.string.alpha({
+    casing: 'upper',
+    length: 1});
+  const id = startLetters.concat(" ", oneNumbers," ",twoNumbers," ",threeNumbers," ",endLetter)
+  return id;
+}
+
 
 function generateLearners (quantity) {
   // Generate data for JSON objects
   const data = [];
+  const idList = [];
   //Load data from JSON file
 
   //Define set people for usability testing
   const person1 = {
-    id: "00001",
+    id: "KZ 79 0F 13 Z",
     fullName: "Aron Effertz-Stroman",
     dateOfBirth: "1969-03-18T05:58:19.627Z",
-    dateOfBirthStr: "18 March 1969",
     roleType: "Local authority direct care"
   };
   data.push(person1);
+  idList.push(person1.id);
   
   const person2 = {
-    id: "00002",
+    id: "LE 09 5F 94 M",
     fullName: "Roy Kub",
     dateOfBirth: "1992-10-08T15:59:08.977Z",
-    dateOfBirthStr: "8 October 1992",
     roleType: "Non-regulated direct care"
   };
   data.push(person2);
+  idList.push(person2.id)
 
   const person3 = {
-    id: "00003",
+    id: "OB 78 2F 15 O",
     fullName: "Malinda Mayer",
     dateOfBirth: "1988-05-16T10:24:37.451Z",
-    dateOfBirthStr: "16 May 1988",
     roleType: "Local authority direct care"
   };
   data.push(person3);
+  idList.push(person3.id);
 
   const person4 = {
-    id: "00004",
+    id: "ZX 51 9F 87 P",
     fullName: "Casey Simonis",
     dateOfBirth: "1970-12-01T00:32:51.465Z",
-    dateOfBirthStr: "1 December 1970",
     roleType: "Non-regulated direct care"
   };
   data.push(person4);
+  idList.push(person4.id);
 
 
 
   for (let i = 5; i <= quantity; i++) {
-    const id = i.toString().padStart(5, '0');
+    const id = generateUniqueID(i);
     const fullName = fakerEN_GB.person.firstName() + ' ' + fakerEN_GB.person.lastName();
     const dateOfBirth = generateDOB();
-    const dateOfBirthStr = generateGDSDate(dateOfBirth);
     const roleType = getRandomRole();
     //const workplace = fakerEN_GB.location.city();
 
@@ -110,7 +126,6 @@ function generateLearners (quantity) {
       id,
       fullName,
       dateOfBirth,
-      dateOfBirthStr,
       roleType,
       //workplace,
     };
@@ -121,6 +136,8 @@ function generateLearners (quantity) {
   // Write data to learners.json
   const jsonFilePath = './app/data/learners.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
+  //reset seed
+  faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
 
   return console.log(`JSON data written to ${jsonFilePath}`);
 

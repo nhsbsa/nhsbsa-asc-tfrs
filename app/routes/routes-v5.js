@@ -1,10 +1,11 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../scripts/JSONfileloaders.js');
+const { faker } = require('@faker-js/faker');
 
-// V4 Prototype routes
+// v5 Prototype routes
 
-router.post('/v4/add-training', function (req, res) {
+router.post('/v5/add-training', function (req, res) {
     var trainingCode = req.session.data['training-selection']
     
     for (const t of req.session.data['training']) {
@@ -15,10 +16,20 @@ router.post('/v4/add-training', function (req, res) {
     
     req.session.data['trainingChoice'] = training
 
-    res.redirect('../claims/prototypes/v4/new-claim/activity-profile')
+    res.redirect('../claims/prototypes/v5/new-claim/activity-profile')
 });
 
-router.post('/v4/select-learner', function (req, res) {
+router.post('/v5/create-date', function (req, res) {
+  var day = req.session.data['activity-date-started-day']
+  var month = req.session.data['activity-date-started-month']
+  var year = req.session.data['activity-date-started-year']
+  
+  req.session.data['date'] = year.concat("-",month,"-",day,"T00:00:00.000Z")
+  
+  res.redirect('../claims/prototypes/v5/new-claim/select-learner')
+});
+
+router.post('/v5/select-learner', function (req, res) {
     var learnerID = req.session.data['learner-selection']
     
     for (const l of req.session.data['learners']) {
@@ -29,10 +40,10 @@ router.post('/v4/select-learner', function (req, res) {
 
     req.session.data['learnerSelected'] = learner
     
-    res.redirect('../claims/prototypes/v4/new-claim/learner-profile')
+    res.redirect('../claims/prototypes/v5/new-claim/learner-profile')
 });
 
-router.post('/v4/add-learner', function (req, res) {
+router.post('/v5/add-learner', function (req, res) {
 
     if (req.session.data.learnersSelected){
         req.session.data['learnersSelected'].push(req.session.data['learnerSelected'])
@@ -40,54 +51,54 @@ router.post('/v4/add-learner', function (req, res) {
         req.session.data['learnersSelected'] = [req.session.data['learnerSelected']]
     }
 
-    res.redirect('../claims/prototypes/v4/new-claim/learner-summary')
+    res.redirect('../claims/prototypes/v5/new-claim/learner-summary')
 });
 
-router.post('/v4/evidence-for-claims', function (req, res) {
+router.post('/v5/evidence-for-claims', function (req, res) {
    
 
-    res.redirect('../claims/prototypes/v4/evidence/check-your-evidence-claims')
+    res.redirect('../claims/prototypes/v5/evidence/check-your-evidence-claims')
 });
 
-router.post('/v4/add-more-learners-answer', function (req, res) {
+router.post('/v5/add-more-learners-answer', function (req, res) {
     var addAnother = req.session.data['add-another']
     
 
     if (addAnother == "Yes"){
         // Send user to learner search page
         req.session.data['learner-input'] = ""
-        res.redirect('../claims/prototypes/v4/new-claim/select-learner')
+        res.redirect('../claims/prototypes/v5/new-claim/select-learner')
       } else if (addAnother == "No") {
         // Send user to check your answers
-        res.redirect('../claims/prototypes/v4/new-claim/check-your-answers')
+        res.redirect('../claims/prototypes/v5/new-claim/check-your-answers')
       }
     
 });
 
-router.post('/v4/evidence-in-claim-process', function (req, res) {
+router.post('/v5/evidence-in-claim-process', function (req, res) {
     req.session.data['addEvidenceInClaimProcess'] = true
 
-    res.redirect('../claims/prototypes/v4/evidence/evidence-type')
+    res.redirect('../claims/prototypes/v5/evidence/evidence-type')
 
 
 });
 
-router.post('/v4/evidence-choice', function (req, res) {
+router.post('/v5/evidence-choice', function (req, res) {
     var evidenceType = req.session.data['evidenceType']
     
 
     if (evidenceType == "payment"){
         // Send user to actual amount page
         req.session.data['search-input'] = ""
-        res.redirect('../claims/prototypes/v4/evidence/actual-amount')
+        res.redirect('../claims/prototypes/v5/evidence/actual-amount')
       } else {
         // Send user to file upload page
-        res.redirect('../claims/prototypes/v4/evidence/upload')
+        res.redirect('../claims/prototypes/v5/evidence/upload')
       }
 
 });
 
-router.post('/v4/update-session-data', (req, res) => {
+router.post('/v5/update-session-data', (req, res) => {
     const selectedOptions = req.body.selectedOptions; 
     // Assuming selectedOptions is sent in the request body
     req.session.data['selectedOptions'] = selectedOptions;
@@ -100,12 +111,14 @@ router.post('/v4/update-session-data', (req, res) => {
       console.log(JSON.stringify(log, null, 2))
   });
 
-  router.post('/v4/create-claims', (req, res) => {
+  router.post('/v5/create-claims', (req, res) => {
+    const newClaims = [];
 
-    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-
-    for (const learner of req.session.data.learnersSelected) { 
-    let selectedTraining = null
+    for (const learner of req.session.data.learnersSelected) {
+    let i = 10000;
+    let selectedTraining = null;
+    faker.seed(i);
+    i++;
 
     for (const trainingItem of req.session.data.training){
         if ( trainingItem.code == req.session.data.trainingChoice.code) {
@@ -113,35 +126,39 @@ router.post('/v4/update-session-data', (req, res) => {
         }
     }
 
+    const d = new Date();
+    const dStr = d.toISOString();
+    const claimID = faker.finance.accountNumber(6);
+    newClaims.push(claimID);
+
     const claim = {
-        claimID: ("2").concat(learner.id),
+        claimID: claimID,
         learner: learner,
         training: selectedTraining,
-        startDate: null,
-        startDateStr: (req.session.data['activity-date-started-day']).concat(" ", months[req.session.data['activity-date-started-month']-1] , " ", req.session.data['activity-date-started-year'] ),
+        startDate: req.session.data.date,
         status: "incomplete",
-        createdDate: null,
-        createdDateStr: null,
-        createdBy: null,
+        createdDate: dStr,
+        createdBy: "Testing Participant",
         submittedDate: null,
-        submittedDateStr: null,
         paidDate: null,
-        paidDateStr: null,
         evidenceOfPayment: null,
         evidenceOfEnrollment: null,
         evidenceOfCompletion: null,
       };
 
       req.session.data.claims.push(claim)
+      
 
     }
 
-    res.redirect('../claims/prototypes/v4/new-claim/confirmation')
+
+    req.session.data['newClaims'] = newClaims;
+    res.redirect('../claims/prototypes/v5/new-claim/confirmation')
     
   });
 
   
-router.post('/v4/claims-choice', function (req, res) {
+router.post('/v5/claims-choice', function (req, res) {
     let claims = []
 
     for (const claim of req.session.data.selectedClaims) { 
@@ -152,10 +169,10 @@ router.post('/v4/claims-choice', function (req, res) {
         }
     }
     req.session.data.selectedClaimsConfirmed = claims
-    res.redirect('../claims/prototypes/v4/evidence/check-your-evidence-claims')
+    res.redirect('../claims/prototypes/v5/evidence/check-your-evidence-claims')
 });
 
-router.post('/v4/new-claim-reset', function (req, res) {
+router.post('/v5/new-claim-reset', function (req, res) {
     req.session.data['addEvidenceInClaimProcess'] = false;
     delete req.session.data['training-input'];
     delete req.session.data['training-selection'];
@@ -178,10 +195,10 @@ router.post('/v4/new-claim-reset', function (req, res) {
     delete req.session.data['selectedClaims'];
     delete req.session.data['selectedClaimsConfirmed'];
 
-    res.redirect('../claims/prototypes/v4/new-claim/select-training.html')
+    res.redirect('../claims/prototypes/v5/new-claim/select-training.html')
 });
 
-router.post('/v4/new-evidence-reset', function (req, res) {
+router.post('/v5/new-evidence-reset', function (req, res) {
     req.session.data['addEvidenceInClaimProcess'] = false;
     delete req.session.data['evidenceType'];
     delete req.session.data['search-input'];
@@ -192,17 +209,18 @@ router.post('/v4/new-evidence-reset', function (req, res) {
     delete req.session.data['selectedClaims'];
     delete req.session.data['selectedClaimsConfirmed'];
 
-    res.redirect('../claims/prototypes/v4/evidence/evidence-type')
+    res.redirect('../claims/prototypes/v5/evidence/evidence-type')
 });
 
 function loadData(req) {
     // pull in the prototype data object and see if it contains a datafile reference
     let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
-    const path = 'app/data/v4/'
+    const path = 'app/data/v5/'
   
     var learnersFile = 'learners.json'
     var trainingFile = 'training.json'
     var claimsFile = 'claims.json'
+    var statusFile = 'claim-item-statuses.json'
   
     if (req.session.data.training) {
       console.log('training file already loaded')
@@ -227,15 +245,23 @@ function loadData(req) {
       req.session.data['learners'] = loadJSONFromFile(learnersFile, path)
       console.log('learners file loaded')
     }
+
+    if (req.session.data.statuses) {
+      console.log('statuses file already loaded')
+    } else {
+      console.log('loading in statuses file')
+      req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
+      console.log('statuses file loaded')
+    }
   
     return console.log('data updated')
   }
 
 
-router.get('/v4/load-data', function (req, res) {
+router.get('/v5/load-data', function (req, res) {
     //Load data from JSON files
     loadData(req);
-    res.redirect('../claims/prototypes/v4/before-you-start.html')
+    res.redirect('../claims/prototypes/v5/before-you-start.html')
   })
 
 
