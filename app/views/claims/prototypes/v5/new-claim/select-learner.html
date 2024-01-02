@@ -37,8 +37,12 @@
         
             </form>
         </div>
-        <p class="govuk-body"><a href="#" class="govuk-link">Add a new learner</a> if they are not in the list.</p>
-        
+        <form action="/v5/new-learner-reset" method="post">
+            <p class="govuk-body">
+              <label for="addLearner">Add a new learner</label>
+              <input type="submit" id="addLearner" class="govuk-link" value="if they are not in the list.">
+            </p>
+        </form>
     </div>
 </div>
 

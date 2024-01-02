@@ -1,0 +1,51 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="job-title" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="/v5/role-type-choice" method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="role-type-hint">
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <span class="govuk-caption-l">New learner</span>
+                    <h1 class="govuk-fieldset__heading">
+                      What role group does {{ data.fullName }} belong to?
+                    </h1>
+                  </legend>
+                  <div id="role-type-hint" class="govuk-hint">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </div>
+                  <div class="govuk-radios" data-module="govuk-radios">
+                    {% set counter = 1 %}
+                    {% for role in data.roleTypes %}
+                    <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="role-type-{{ counter }}" name="roleType" type="radio" value="{{ role.rolename }}" aria-describedby="{{ role.rolename }}-item-hint">
+                      <label class="govuk-label govuk-radios__label" for="role-type-{{ counter }}">
+                        {{ role.rolename }}
+                      </label>
+                      <div id="{{ role.rolename }}-item-hint" class="govuk-hint govuk-radios__hint">
+                        {{ role.description }}
+                      </div>
+                    </div>
+                    {% set counter = counter + 1 %}
+                    {% endfor %}
+                  </div>
+                </fieldset>
+              </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Save and continue
+            </button>
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <hr class="govuk-!-margin-bottom-5">
+        <h2 class="govuk-heading-m">Related content</h2>
+        <p class="govuk-body"><a href="#" class="govuk-link">Find out more about role groups</a></p>
+    </div>
+</div>
+
+{% endblock %}

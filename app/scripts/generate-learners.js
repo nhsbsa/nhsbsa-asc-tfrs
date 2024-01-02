@@ -47,6 +47,23 @@ function getRandomRole() {
   return rolesData[rolesData.length - 1].rolename;
 }
 
+// Function to get a random role name based on distribution
+function getRandomjobTitle(roleType) {
+  const rolesData = loadJSONFromFile('role-types.json')
+  
+  for (const role of rolesData) {
+
+      // Check if the random value falls within the range of the current role
+      if (role.rolename == roleType) {
+          
+        return faker.helpers.arrayElement(role.jobTitles);
+      }
+  }
+
+  // If no role is found (which should be rare), return the last role as a fallback
+  return rolesData[rolesData.length - 1].rolename;
+}
+
 function generateGDSDate(date) {
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const GDSDate = date.getDate().toString().concat(" ", month[date.getMonth()], " ", date.getFullYear());
@@ -80,7 +97,8 @@ function generateLearners (quantity) {
   const person1 = {
     id: "KZ 79 0F 13 Z",
     fullName: "Aron Effertz-Stroman",
-    dateOfBirth: "1969-03-18T05:58:19.627Z",
+    //dateOfBirth: "1969-03-18T05:58:19.627Z",
+    jobTitle: "Council Care Assistant",
     roleType: "Local authority direct care"
   };
   data.push(person1);
@@ -89,7 +107,8 @@ function generateLearners (quantity) {
   const person2 = {
     id: "LE 09 5F 94 M",
     fullName: "Roy Kub",
-    dateOfBirth: "1992-10-08T15:59:08.977Z",
+    //dateOfBirth: "1992-10-08T15:59:08.977Z",
+    jobTitle: "Care Aide",
     roleType: "Non-regulated direct care"
   };
   data.push(person2);
@@ -98,7 +117,8 @@ function generateLearners (quantity) {
   const person3 = {
     id: "OB 78 2F 15 O",
     fullName: "Malinda Mayer",
-    dateOfBirth: "1988-05-16T10:24:37.451Z",
+    //dateOfBirth: "1988-05-16T10:24:37.451Z",
+    jobTitle: "Local Authority Care Worker",
     roleType: "Local authority direct care"
   };
   data.push(person3);
@@ -107,7 +127,8 @@ function generateLearners (quantity) {
   const person4 = {
     id: "ZX 51 9F 87 P",
     fullName: "Casey Simonis",
-    dateOfBirth: "1970-12-01T00:32:51.465Z",
+    //dateOfBirth: "1970-12-01T00:32:51.465Z",
+    jobTitle: "Support Worker",
     roleType: "Non-regulated direct care"
   };
   data.push(person4);
@@ -118,14 +139,16 @@ function generateLearners (quantity) {
   for (let i = 5; i <= quantity; i++) {
     const id = generateUniqueID(i);
     const fullName = fakerEN_GB.person.firstName() + ' ' + fakerEN_GB.person.lastName();
-    const dateOfBirth = generateDOB();
+    //const dateOfBirth = generateDOB();
     const roleType = getRandomRole();
+    const jobTitle = getRandomjobTitle(roleType);
     //const workplace = fakerEN_GB.location.city();
 
     const person = {
       id,
       fullName,
-      dateOfBirth,
+      //dateOfBirth,
+      jobTitle,
       roleType,
       //workplace,
     };

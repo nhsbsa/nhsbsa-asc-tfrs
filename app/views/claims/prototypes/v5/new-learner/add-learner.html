@@ -1,0 +1,54 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="../new-claim/select-learner" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <!--<span class="govuk-caption-l">Start a new claim (direct care)</span>-->
+        <h1 class="govuk-heading-l">Learner details</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <form action="/v5/new-learner-handler" method="post" novalidate>
+            <div class="govuk-form-group">
+                <label class="govuk-label govuk-label--s" for="full-name">
+                  Full name
+                </label>
+                <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false" autocomplete="name">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label govuk-label--s" for="national-insurance-number">
+                  National Insurance number
+                </label>
+                <div id="national-insurance-number-hint" class="govuk-hint">
+                  It’s on your National Insurance card, benefit letter, payslip or P60. For example, ‘QQ 12 34 56 C’.
+                </div>
+                <input class="govuk-input govuk-input--width-10 govuk-input--extra-letter-spacing" id="national-insurance-number" name="nationalInsuranceNumber" type="text" spellcheck="false" aria-describedby="national-insurance-number-hint">
+                <details class="govuk-details govuk-!-padding-top-2">
+                    <summary class="govuk-details__summary">
+                      <span class="govuk-details__summary-text">
+                        Why do we need this?
+                      </span>
+                    </summary>
+                    <div class="govuk-details__text">
+                      We need to know your nationality so we can work out which elections you’re entitled to vote in. If you cannot provide your nationality, you’ll have to send copies of identity documents through the post.
+                    </div>
+                </details>
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label govuk-label--s" for="event-name">
+                  Job title
+                </label>
+                <input class="govuk-input" id="event-name" name="eventName" type="text">
+            </div>
+            
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Save and continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

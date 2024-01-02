@@ -17,7 +17,7 @@ router.use('/', require('./routes/routes-v5.js'))
 
 router.use((req, res, next) => {
   // Define keys to exclude from logging
-  const excludeKeys = ['training', 'claims', 'learners', 'statuses'];
+  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes'];
 
   // Create a copy of req.session.data with excluded keys removed
   const filteredData = Object.keys(req.session.data)

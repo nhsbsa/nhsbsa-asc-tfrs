@@ -172,6 +172,51 @@ router.post('/v5/claims-choice', function (req, res) {
     res.redirect('../claims/prototypes/v5/evidence/check-your-evidence-claims')
 });
 
+router.post('/v5/role-type-choice', function (req, res) {
+  
+  for (const role of req.session.data.roleTypes) {
+    if (req.session.data.roleType == role.rolename) {
+      if (role.eligibility.isCPDeligible) {
+        res.redirect('../claims/prototypes/v5/new-learner/registration')
+      } else {
+        res.redirect('../claims/prototypes/v5/new-learner/check-your-answers')
+      }
+    } 
+}
+
+});
+
+router.post('/v5/create-learner', function (req, res) {
+  
+  const learner = {
+    id: req.session.data.nationalInsuranceNumber,
+    fullName: req.session.data.fullName,
+    jobTitle: req.session.data.jobTitle,
+    roleType: req.session.data.roleType,
+  };
+
+  req.session.data.learners.push(learner)
+
+  if (req.session.data.learnersSelected){
+    req.session.data['learnersSelected'].push(learner)
+} else {
+    req.session.data['learnersSelected'] = [learner]
+}
+
+res.redirect('../claims/prototypes/v5/new-claim/learner-summary')
+
+});
+
+router.post('/v5/new-learner-reset', function (req, res) {
+  delete req.session.data.fullName;
+  delete req.session.data.nationalInsuranceNumber;
+  delete req.session.data.jobTitle;
+  delete req.session.data.roleType;
+
+  res.redirect('../claims/prototypes/v5/new-learner/full-name.html')
+});
+
+
 router.post('/v5/new-claim-reset', function (req, res) {
     req.session.data['addEvidenceInClaimProcess'] = false;
     delete req.session.data['training-input'];
@@ -198,7 +243,7 @@ router.post('/v5/new-claim-reset', function (req, res) {
     res.redirect('../claims/prototypes/v5/new-claim/select-training.html')
 });
 
-router.post('/v5/new-evidence-reset', function (req, res) {
+router.get('/v5/new-evidence-reset', function (req, res) {
     req.session.data['addEvidenceInClaimProcess'] = false;
     delete req.session.data['evidenceType'];
     delete req.session.data['search-input'];
@@ -212,6 +257,7 @@ router.post('/v5/new-evidence-reset', function (req, res) {
     res.redirect('../claims/prototypes/v5/evidence/evidence-type')
 });
 
+
 function loadData(req) {
     // pull in the prototype data object and see if it contains a datafile reference
     let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
@@ -221,6 +267,7 @@ function loadData(req) {
     var trainingFile = 'training.json'
     var claimsFile = 'claims.json'
     var statusFile = 'claim-item-statuses.json'
+    var roleTypes = 'role-types.json'
   
     if (req.session.data.training) {
       console.log('training file already loaded')
@@ -252,6 +299,14 @@ function loadData(req) {
       console.log('loading in statuses file')
       req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
       console.log('statuses file loaded')
+    }
+
+    if (req.session.data.roleTypes) {
+      console.log('role types file already loaded')
+    } else {
+      console.log('loading in role types file')
+      req.session.data['roleTypes'] = loadJSONFromFile(roleTypes, path)
+      console.log('role types file loaded')
     }
   
     return console.log('data updated')
