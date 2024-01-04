@@ -1,13 +1,19 @@
 {% extends "../layouts/claims-main.html" %}
+{% set claim = null %}
+{% for c in data.claims %}
+  {% if c.claimID == data.id %}
+    {% set claim = c %}
+  {% endif %}
+{% endfor %}
 
 {% block beforeContent %}
-<a href="start-date" class="govuk-back-link">Back</a>
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">Start a new claim (direct care)</span>
+        <span class="govuk-caption-l">Claim ID: {{ claim.claimID }}</span>
         <h1 class="govuk-heading-l">Select learners</h1>
     </div>
 </div>
@@ -27,7 +33,7 @@
                 You can search by a person's name or ID
                 </div>
         
-                <input class="govuk-input moj-search__input " id="search" name="learner-input" type="search" aria-describedby="search-hint" value="{{ data['learner-input'] }}">
+                <input class="govuk-input moj-search__input " id="search" name="learnerInput" type="search" aria-describedby="search-hint" value="{{ data['learnerInput'] }}">
         
             </div>
         
@@ -39,8 +45,8 @@
         </div>
         <form action="/v5/new-learner-reset" method="post">
             <p class="govuk-body">
-              <label for="addLearner">Add a new learner</label>
-              <input type="submit" id="addLearner" class="govuk-link" value="if they are not in the list.">
+                <button class="unstyle-button">Add new learner</button>
+                if they are not in the list.
             </p>
         </form>
     </div>
@@ -48,14 +54,14 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        {% if data['learner-input'] %}
+        {% if data['learnerInput'] %}
         <h2 class="govuk-heading-m">Search results</h2>
                 {% set hasResults = false %}
                 {% set addHeader = true %}
                 {% for learner in data['learners'] %}
-                    {% set lowercasedsearch = data['learner-input'] | lower %}
+                    {% set lowercasedsearch = data['learnerInput'] | lower %}
                     {% set lowercasedname = learner.fullName | lower %}
-                    {% if lowercasedname == lowercasedsearch or learner.id == data['learner-input'] or lowercasedsearch in lowercasedname %}
+                    {% if lowercasedname == lowercasedsearch or learner.id == data['learnerInput'] or lowercasedsearch in lowercasedname %}
                             {% set hasResults = true %}
                             {% if addHeader %}
                                 <table class="govuk-table">
@@ -78,16 +84,16 @@
                         <td class="govuk-table__cell">{{ learner.roleType }}</td>
                         <td class="govuk-table__cell">
                             {% set learnerAdded = false %}
-                            {% for l in data['learnersSelected'] %}
+                            {% for l in claim.learners %}
                                 {% if l.id == learner.id%}
                                     {% set learnerAdded = true %}
                                 {% endif %}
                             {% endfor %}
 
                             {% if not learnerAdded %}
-                            <form method="post" action="/v5/select-learner" class="govuk-!-margin-0">
-                                <input type="hidden" name="learner-selection" value="{{ learner.id }}">
-                                <button type="submit" class="govuk-button">View details</button>
+                            <form method="post" action="/v5/add-learner" class="govuk-!-margin-0">
+                                <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
+                                <button type="submit" class="govuk-button">Add to claim</button>
                             </form>
                             {% else %}
                             <p class="govuk-body">Already added to claim</p>
@@ -100,7 +106,7 @@
             </tbody>
         </table>
         {% if not hasResults %}
-        <p class="govuk-body">{{ data['learner-input'] }} does not currently exist in the system. Do you want to <a href="#" class="govuk-link">add a new learner</a>?</p>
+        <p class="govuk-body">{{ data['learnerInput'] }} does not currently exist in the system. Do you want to <a href="#" class="govuk-link">add a new learner</a>?</p>
         {% endif %}
         {% endif %}
     </div>

@@ -1,14 +1,26 @@
 {% extends "../layouts/claims-main.html" %}
+{% set training = null %}
+{% for t in data.training %}
+  {% if t.code == data.trainingSelection %}
+    {% set training = t %}
+  {% endif %}
+{% endfor %}
+{% set claim = null %}
+{% for c in data.claims %}
+  {% if c.claimID == data.id %}
+    {% set claim = c %}
+  {% endif %}
+{% endfor %}
 
 {% block beforeContent %}
-<a href="select-training" class="govuk-back-link">Back</a>
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">Start new claim (direct care)</span>
-        <h1 class="govuk-heading-l">{{ data.trainingChoice.title  }}</h1>
+      <span class="govuk-caption-l">Claim ID: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">{{ training.title  }}</h1>
     </div>
 </div>
 
@@ -21,14 +33,14 @@
                 Title
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data.trainingChoice.title }}
+                {{ training.title }}
               </dd>
             </div><div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Code
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data.trainingChoice.code }}
+                {{ training.code }}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -36,7 +48,7 @@
                 Type
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data.trainingChoice.type | capitalize }}
+                {{ training.type | capitalize }}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -44,7 +56,7 @@
                   Category
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {{ data.trainingChoice.category | capitalize }}
+                  {{ training.category | capitalize }}
                 </dd>
               </div>
             <div class="govuk-summary-list__row">
@@ -52,7 +64,7 @@
                 Description
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data.trainingChoice.description }}
+                {{ training.description }}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -60,7 +72,7 @@
                 Awarding organisation
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data.trainingChoice.awardingOrganisation }}
+                {{ training.awardingOrganisation }}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -68,7 +80,7 @@
                   Total learning time
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {{ data.trainingChoice.totalLearningTime }}
+                  {{ training.totalLearningTime }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -76,7 +88,7 @@
                   Reimbursement amount
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  £{{ data.trainingChoice.reimbursementAmount }}
+                  £{{ training.reimbursementAmount }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -84,15 +96,19 @@
                   Funding Model
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {% if data.trainingChoice.fundingModel == "full" %}
+                    {% if training.fundingModel == "full" %}
                     100% of reimbursement amount on completion
-                    {% elif data.trainingChoice.fundingModel == "split" %}
+                    {% elif training.fundingModel == "split" %}
                     60% of reimbursement amount on enrollment and the remaining 40% on completion
                     {% endif %}
                 </dd>
             </div>
           </dl>
-          <a type="submit" class="govuk-button" href="start-date">Add training to claim</a>
+          {% if data.viewOnly == 'false' %}
+          <form method="post" action="/v5/add-training" class="govuk-!-margin-0">
+            <button class="govuk-button" data-module="govuk-button" type="submit">Add training to claim</button>
+          </form>
+          {% endif %}
     </div>
     <div class="govuk-grid-column-one-third">
         <hr class="govuk-!-margin-bottom-5">

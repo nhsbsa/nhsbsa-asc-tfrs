@@ -23,3 +23,17 @@
 .course-search-body{
     padding: govuk-spacing(5);
 }
+
+.unstyle-button {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    font-family: "GDS Transport", Arial, sans-serif;
+    font-size: 18px;
+    color: #1d70b8;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .unstyle-button:hover {
+    color: #003078;
+  }

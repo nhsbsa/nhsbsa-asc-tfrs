@@ -1,14 +1,20 @@
 {% extends "../layouts/claims-main.html" %}
+{% set learner = null %}
+{% for l in data.learners %}
+  {% if l.id == data.learnerID %}
+    {% set learner = l %}
+  {% endif %}
+{% endfor %}
+
 
 {% block beforeContent %}
-<a href="select-learner" class="govuk-back-link">Back</a>
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">Start new claim (direct care)</span>
-        <h1 class="govuk-heading-l">{{ data.learnerSelected.fullName }}</h1>
+        <h1 class="govuk-heading-l">{{ learner.fullName }}</h1>
     </div>
 </div>
 
@@ -21,14 +27,14 @@
                 Learner ID
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data.learnerSelected.id }}
+                {{ learner.id }}
               </dd>
             </div><div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Full name
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data.learnerSelected.fullName }}
+                {{ learner.fullName }}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -36,7 +42,7 @@
                 Date of birth
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ data.learnerSelected.dateOfBirth | govukDate }}
+                {{ learner.dateOfBirth | govukDate }}
               </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -44,23 +50,20 @@
                   Role type
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {{ data.learnerSelected.roleType }}
+                  {{ learner.roleType }}
                 </dd>
               </div>
         </dl>
-        <form method="post" action="/v5/add-learner" class="govuk-!-margin-0">
-            <input type="hidden" name="learner-choice" value= "{{ data['learner-selection'] }}">
-            <button type="submit" class="govuk-button">Add learner to claim</button>
-        </form>
     </div>
 </div>
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <h2 class="govuk-heading-m">Recent claims for {{ data.learnerSelected.fullName }}</h2>
+        <h2 class="govuk-heading-m">Recent claims for {{ learner.fullName }}</h2>
             {% set addHeader = true %}
             {% for claim in data.claims %}
-                {% if data.learnerSelected.id == claim.learner.id %}
+              {% for l in claim.learners %}
+                {% if learner.id == l.id %}
                     {% set learnerAdded = true %}
                     {% if addHeader %}
                         <table class="govuk-table">
@@ -86,7 +89,7 @@
                         <td class="govuk-table__cell">{{ claim.createdBy }}</td>
                     </tr>
                     {% endif %}
-
+                {% endfor %}
             {% endfor %}
                         </tbody>
                     </table>

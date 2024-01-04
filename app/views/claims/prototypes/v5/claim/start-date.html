@@ -1,7 +1,13 @@
 {% extends "../layouts/claims-main.html" %}
+{% set claim = null %}
+{% for c in data.claims %}
+  {% if c.claimID == data.id %}
+    {% set claim = c %}
+  {% endif %}
+{% endfor %}
 
 {% block beforeContent %}
-<a href="activity-profile" class="govuk-back-link">Back</a>
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -11,9 +17,9 @@
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <span class="govuk-caption-l">Start new claim (direct care)</span>
+                    <span class="govuk-caption-l">Claim ID: {{ claim.claimID }}</span>
                     <h1 class="govuk-fieldset__heading">
-                        Start date
+                        Activity start date
                     </h1>
                 </legend>
                 <div id="start-date-issued-hint" class="govuk-hint">
@@ -48,7 +54,7 @@
                 </fieldset>
             </div>
           <button class="govuk-button" data-module="govuk-button">
-            Save and continue
+            Add to claim
           </button>
         </form>
     </div>

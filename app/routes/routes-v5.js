@@ -5,172 +5,189 @@ const { faker } = require('@faker-js/faker');
 
 // v5 Prototype routes
 
+router.post('/v5/new-claim-reset', function (req, res) {
+  
+  const d = new Date();
+  const dStr = d.toISOString();
+
+  faker.seed(req.session.data.claims.length+1);
+  const claim = {
+    claimID: faker.finance.accountNumber(6),
+    learners: [],
+    training: null,
+    startDate: null,
+    status: "new",
+    createdDate: dStr,
+    createdBy: "Test Participant",
+    submittedDate: null,
+    paidDate: null,
+    costPerLearner: null,
+    evidenceOfPayment: null,
+    notes: []
+  };
+  req.session.data.claims.push(claim)
+  //reset seed
+  faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
+  delete req.session.data['training-input'];
+  delete req.session.data['trainingSelection'];
+  delete req.session.data['activity-date-started-day'];
+  delete req.session.data['activity-date-started-month'];
+  delete req.session.data['activity-date-started-year'];
+  delete req.session.data['learner-input'];
+  delete req.session.data['learner-selection'];
+  delete req.session.data['learnerSelected'];
+  delete req.session.data['learner-choice'];
+  delete req.session.data['learnersSelected'];
+  delete req.session.data['add-another'];
+  delete req.session.data['answers-checked'];
+  delete req.session.data['evidenceType'];
+  delete req.session.data['search-input'];
+  delete req.session.data['totalAmount'];
+  delete req.session.data['EvidenceNoLearners'];
+  delete req.session.data['evidenceFile'];
+  delete req.session.data['selectedClaims'];
+  delete req.session.data['selectedClaimsConfirmed'];
+
+  res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claim.claimID)
+});
+
 router.post('/v5/add-training', function (req, res) {
-    var trainingCode = req.session.data['training-selection']
+    var trainingCode = req.session.data.trainingSelection
+    var claimID = req.session.data.id
     
-    for (const t of req.session.data['training']) {
+    for (const t of req.session.data.training) {
         if (trainingCode == t.code) {
-            var training = t
+            var trainingChoice = t
         }
     }
-    
-    req.session.data['trainingChoice'] = training
 
-    res.redirect('../claims/prototypes/v5/new-claim/activity-profile')
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+          c.training = trainingChoice
+      }
+    }
+
+    delete req.session.data['training-input'];
+    delete req.session.data['trainingSelection'];
+
+    res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
 });
 
 router.post('/v5/create-date', function (req, res) {
   var day = req.session.data['activity-date-started-day']
   var month = req.session.data['activity-date-started-month']
   var year = req.session.data['activity-date-started-year']
+  var claimID = req.session.data.id
   
-  req.session.data['date'] = year.concat("-",month,"-",day,"T00:00:00.000Z")
-  
-  res.redirect('../claims/prototypes/v5/new-claim/select-learner')
-});
-
-router.post('/v5/select-learner', function (req, res) {
-    var learnerID = req.session.data['learner-selection']
-    
-    for (const l of req.session.data['learners']) {
-        if (learnerID == l.id) {
-            var learner = l
-        }
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        c.startDate = year+"-"+month+"-"+day+"T00:00:00.000Z"
     }
+  }
 
-    req.session.data['learnerSelected'] = learner
-    
-    res.redirect('../claims/prototypes/v5/new-claim/learner-profile')
+  delete req.session.data['activity-date-started-day'];
+  delete req.session.data['activity-date-started-month'];
+  delete req.session.data['activity-date-started-year'];
+  
+  res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
 });
 
 router.post('/v5/add-learner', function (req, res) {
+    var claimID = req.session.data.id
+    console.log(req.session.data.learnerSelection);
+    
 
-    if (req.session.data.learnersSelected){
-        req.session.data['learnersSelected'].push(req.session.data['learnerSelected'])
-    } else {
-        req.session.data['learnersSelected'] = [req.session.data['learnerSelected']]
+    for (const l of req.session.data.learners) {
+      if (req.session.data.learnerSelection == l.id) {
+        var learner = l
+        break;
+    }
     }
 
-    res.redirect('../claims/prototypes/v5/new-claim/learner-summary')
-});
-
-router.post('/v5/evidence-for-claims', function (req, res) {
-   
-
-    res.redirect('../claims/prototypes/v5/evidence/check-your-evidence-claims')
-});
-
-router.post('/v5/add-more-learners-answer', function (req, res) {
-    var addAnother = req.session.data['add-another']
-    
-
-    if (addAnother == "Yes"){
-        // Send user to learner search page
-        req.session.data['learner-input'] = ""
-        res.redirect('../claims/prototypes/v5/new-claim/select-learner')
-      } else if (addAnother == "No") {
-        // Send user to check your answers
-        res.redirect('../claims/prototypes/v5/new-claim/check-your-answers')
-      }
-    
-});
-
-router.post('/v5/evidence-in-claim-process', function (req, res) {
-    req.session.data['addEvidenceInClaimProcess'] = true
-
-    res.redirect('../claims/prototypes/v5/evidence/evidence-type')
-
-
-});
-
-router.post('/v5/evidence-choice', function (req, res) {
-    var evidenceType = req.session.data['evidenceType']
-    
-
-    if (evidenceType == "payment"){
-        // Send user to actual amount page
-        req.session.data['search-input'] = ""
-        res.redirect('../claims/prototypes/v5/evidence/actual-amount')
-      } else {
-        // Send user to file upload page
-        res.redirect('../claims/prototypes/v5/evidence/upload')
-      }
-
-});
-
-router.post('/v5/update-session-data', (req, res) => {
-    const selectedOptions = req.body.selectedOptions; 
-    // Assuming selectedOptions is sent in the request body
-    req.session.data['selectedOptions'] = selectedOptions;
-    const log = {
-        method: req.method,
-        url: req.originalUrl,
-        data: req.session.data
-      }
-      // you can enable this in your .env file
-      console.log(JSON.stringify(log, null, 2))
-  });
-
-  router.post('/v5/create-claims', (req, res) => {
-    const newClaims = [];
-
-    for (const learner of req.session.data.learnersSelected) {
-    let i = 10000;
-    let selectedTraining = null;
-    faker.seed(i);
-    i++;
-
-    for (const trainingItem of req.session.data.training){
-        if ( trainingItem.code == req.session.data.trainingChoice.code) {
-            selectedTraining = trainingItem
-        }
+    learner.evidence = {
+      evidenceOfEnrollment: null,
+      evidenceOfCompletion: null
     }
 
-    const d = new Date();
-    const dStr = d.toISOString();
-    const claimID = faker.finance.accountNumber(6);
-    newClaims.push(claimID);
-
-    const claim = {
-        claimID: claimID,
-        learner: learner,
-        training: selectedTraining,
-        startDate: req.session.data.date,
-        status: "incomplete",
-        createdDate: dStr,
-        createdBy: "Testing Participant",
-        submittedDate: null,
-        paidDate: null,
-        evidenceOfPayment: null,
-        evidenceOfEnrollment: null,
-        evidenceOfCompletion: null,
-      };
-
-      req.session.data.claims.push(claim)
-      
-
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+          c.learners.push(learner)
+          break;
+      }
     }
 
-
-    req.session.data['newClaims'] = newClaims;
-    res.redirect('../claims/prototypes/v5/new-claim/confirmation')
+    delete req.session.data.learnerInput;
+    delete req.session.data.learnerSelection;
     
-  });
+    res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
+});
 
+router.post('/v5/add-cost', function (req, res) {
+  var cost = req.session.data.cost
+  var claimID = req.session.data.id
   
-router.post('/v5/claims-choice', function (req, res) {
-    let claims = []
-
-    for (const claim of req.session.data.selectedClaims) { 
-        for ( const claimItem of req.session.data.claims) {
-            if (claim == claimItem.claimID) {
-                claims.push(claimItem)
-            }
-        }
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        c.costPerLearner = cost
+        break;
     }
-    req.session.data.selectedClaimsConfirmed = claims
-    res.redirect('../claims/prototypes/v5/evidence/check-your-evidence-claims')
+  }
+
+  delete req.session.data.cost;
+
+  res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
 });
+
+router.post('/v5/add-note', function (req, res) {
+  var note = req.session.data.note
+  var claimID = req.session.data.id
+  
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        c.notes.push(note)
+        break;
+    }
+  }
+
+  delete req.session.data.note;
+
+  res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
+});
+
+router.post('/v5/add-evidence', function (req, res) {
+  var evidence = req.session.data.evidenceFile
+  var type = req.session.data.type
+  var claimID = req.session.data.id
+  
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        if (type=='payment') {
+          c.evidenceOfPayment = evidence
+        } else if (type=='enrollment') {
+          for (const l of c.learners) {
+            if (l.id==req.session.data.learnerID) {
+              l.evidence.evidenceOfEnrollment = evidence
+            }
+          }
+        } else if (type=='completion') {
+          for (const l of c.learners) {
+            if (l.id==req.session.data.learnerID) {
+              l.evidence.evidenceOfCompletion = evidence
+            }
+          }
+        }
+        break;
+    }
+  }
+
+  delete req.session.data.evidenceFile;
+  delete req.session.data.type;
+  delete req.session.data.learnerID;
+
+  res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
+
+})
+
 
 router.post('/v5/role-type-choice', function (req, res) {
   
@@ -203,9 +220,8 @@ router.post('/v5/create-learner', function (req, res) {
     req.session.data['learnersSelected'] = [learner]
 }
 
-res.redirect('../claims/prototypes/v5/new-claim/learner-summary')
-
 });
+
 
 router.post('/v5/new-learner-reset', function (req, res) {
   delete req.session.data.fullName;
@@ -215,48 +231,6 @@ router.post('/v5/new-learner-reset', function (req, res) {
 
   res.redirect('../claims/prototypes/v5/new-learner/full-name.html')
 });
-
-
-router.post('/v5/new-claim-reset', function (req, res) {
-    req.session.data['addEvidenceInClaimProcess'] = false;
-    delete req.session.data['training-input'];
-    delete req.session.data['training-selection'];
-    delete req.session.data['trainingChoice'];
-    delete req.session.data['activity-date-started-day'];
-    delete req.session.data['activity-date-started-month'];
-    delete req.session.data['activity-date-started-year'];
-    delete req.session.data['learner-input'];
-    delete req.session.data['learner-selection'];
-    delete req.session.data['learnerSelected'];
-    delete req.session.data['learner-choice'];
-    delete req.session.data['learnersSelected'];
-    delete req.session.data['add-another'];
-    delete req.session.data['answers-checked'];
-    delete req.session.data['evidenceType'];
-    delete req.session.data['search-input'];
-    delete req.session.data['totalAmount'];
-    delete req.session.data['EvidenceNoLearners'];
-    delete req.session.data['evidenceFile'];
-    delete req.session.data['selectedClaims'];
-    delete req.session.data['selectedClaimsConfirmed'];
-
-    res.redirect('../claims/prototypes/v5/new-claim/select-training.html')
-});
-
-router.get('/v5/new-evidence-reset', function (req, res) {
-    req.session.data['addEvidenceInClaimProcess'] = false;
-    delete req.session.data['evidenceType'];
-    delete req.session.data['search-input'];
-    delete req.session.data['totalAmount'];
-    delete req.session.data['EvidenceNoLearners'];
-    delete req.session.data['evidenceFile'];
-    delete req.session.data['claimSearch'];
-    delete req.session.data['selectedClaims'];
-    delete req.session.data['selectedClaimsConfirmed'];
-
-    res.redirect('../claims/prototypes/v5/evidence/evidence-type')
-});
-
 
 function loadData(req) {
     // pull in the prototype data object and see if it contains a datafile reference

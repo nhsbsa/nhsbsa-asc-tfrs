@@ -1,0 +1,40 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = null %}
+{% for c in data.claims %}
+  {% if c.claimID == data.id %}
+    {% set claim = c %}
+  {% endif %}
+{% endfor %}
+
+{% block beforeContent %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Claim ID: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">
+            Cost per learner
+        </h1>
+        <p class="govuk-body">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <form action="/v5/add-cost" method="post" novalidate>
+        <div class="govuk-form-group">
+            <label class="govuk-label govuk-label--m" for="cost">
+                What is the cost per learner for the activity?
+            </label>
+            <div class="govuk-input__wrapper">
+                <div class="govuk-input__prefix" aria-hidden="true">£</div>
+                <input class="govuk-input govuk-!-width-one-third" id="cost" name="cost" type="text">
+            </div>
+        </div>
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Add to claim
+        </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

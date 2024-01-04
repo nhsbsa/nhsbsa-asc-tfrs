@@ -14,6 +14,43 @@ function getRandomPastDate() {
   return faker.date.between(pastDate, new Date());
 }
 
+function getRandomLearners(learnerList, x) {
+  // Make a copy of the original array to avoid modifying it
+  const copyLearners = [...learnerList];
+  
+  // Check if x is greater than the array length
+  if (x > copyLearners.length) {
+    console.error("Error: Number of learners to select is greater than the total number of learners.");
+    return;
+  }
+
+  // Initialize the array to store the selected learners
+  var selectedLearners = [];
+
+  // Loop to select x unique random learners
+  for (let i = 0; i < x; i++) {
+    // Generate a random index within the remaining array length
+    const randomIndex = Math.floor(Math.random() * copyLearners.length);
+
+    var learner = copyLearners[randomIndex];
+    // Remove the selected learner from the original array to ensure uniqueness
+    copyLearners.splice(randomIndex, 1);
+
+    learner.evidence = {
+      evidenceOfEnrollment: null,
+      evidenceOfCompletion: null
+    }
+
+    // Add the selected learner to the new array
+    selectedLearners.push(learner);
+
+  }
+
+  return selectedLearners;
+}
+
+
+
 // Function to generate a random claim object
 function generateClaims(quantity) {
 const data = [];
@@ -21,13 +58,15 @@ const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
 
 for (let i = 1; i <= quantity; i++) {
   faker.seed(i);
+  const nolearners = faker.number.int({ min: 1, max: 10 });
   const claimID = faker.finance.accountNumber(6);
-  const learner = faker.helpers.arrayElement(learners);
+  const selectedLearners = getRandomLearners(learners, nolearners);
   const trainingItem = faker.helpers.arrayElement(training);
   const startDate = faker.date.past();
   const status = (faker.helpers.arrayElement(statuses)).id;
   const createdDate = faker.date.past();
   const createdBy = faker.helpers.arrayElement(creators);
+  const costPerLearner = trainingItem.reimbursementAmount;
 
   let submittedDate = null;
   if (['submitted', 'insufficient-evidence', 'paid'].includes(status)) {
@@ -40,18 +79,24 @@ for (let i = 1; i <= quantity; i++) {
   }
 
   let evidenceOfPayment = null;
-  let evidenceOfEnrollment = null;
-  let evidenceOfCompletion = null;
-
   if (['ready-to-submit', 'submitted', 'insufficient-evidence', 'paid'].includes(status)) {
     evidenceOfPayment = ('invoice').concat('00', i.toString(), '.pdf');
-    evidenceOfCompletion = ('certficate').concat('00', i.toString(), '.pdf');
+
+    let x = 1;
+    
+      for (const l of selectedLearners) {
+        if (trainingItem.fundingModel == 'split'){
+          l.evidence.evidenceOfEnrollment = 'registeration'+'00'+i.toString()+x.toString()+'.pdf';
+        }
+        l.evidence.evidenceOfCompletion = 'certficate'+'00'+i.toString()+x.toString()+'.pdf';
+        x++
+      }
   }
 
 
   const claim = {
     claimID,
-    learner,
+    learners: selectedLearners,
     training: trainingItem,
     startDate,
     status,
@@ -59,9 +104,9 @@ for (let i = 1; i <= quantity; i++) {
     createdBy,
     submittedDate,
     paidDate,
+    costPerLearner,
     evidenceOfPayment,
-    evidenceOfEnrollment,
-    evidenceOfCompletion,
+    notes: []
   };
 
   data.push(claim);
