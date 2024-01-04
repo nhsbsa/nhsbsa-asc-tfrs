@@ -13,7 +13,7 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <strong class="govuk-tag govuk-tag--green">New</strong>
+      {{ claim.status | statusTag }}
       <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}</h1>
     </div>
     <div class="govuk-grid-column-one-third">
@@ -90,7 +90,7 @@
             <h2 class="govuk-summary-card__title">Learner {{ counter }}</h2>
             <ul class="govuk-summary-card__actions">
               <ul class="govuk-summary-list__actions-list">
-                <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="learner-profile?learnerID={{ l.id }}">View learner details<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>
+                <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="learner/learner-profile?learnerID={{ l.id }}">View learner details<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>
                 <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>
               </ul>
               </li>
@@ -270,7 +270,8 @@
           <p class="govuk-body"><a class="govuk-link" href="add-note">Add another note</a></p>
         {% endif %}
         <h2 class="govuk-heading-m">What happens next</h2>
-        <p class="govuk-body">test</p>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         <div class="govuk-button-group">
           <form action="/v5/submit-claim" method="post" novalidate>
             <button type="submit" class="govuk-button" data-module="govuk-button">
@@ -289,6 +290,6 @@
       <h2 class="govuk-heading-m">Get help with your claim</h2>
       <p class="govuk-body"><a href="#" class="govuk-link">Evidence Guidance</a></p>
       <p class="govuk-body"><a href="#" class="govuk-link">Eligibility guidance</a>
-  </div>
+    </div>
 </div>
 {% endblock %}

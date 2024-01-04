@@ -13,7 +13,7 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">Claim ID: {{ claim.claimID }}</span>
+        <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
         <h1 class="govuk-heading-l">Select learners</h1>
     </div>
 </div>
@@ -43,7 +43,7 @@
         
             </form>
         </div>
-        <form action="/v5/new-learner-reset" method="post">
+        <form action="../learner/add-learner?inClaim=true" method="post">
             <p class="govuk-body">
                 <button class="unstyle-button">Add new learner</button>
                 if they are not in the list.
@@ -106,7 +106,13 @@
             </tbody>
         </table>
         {% if not hasResults %}
-        <p class="govuk-body">{{ data['learnerInput'] }} does not currently exist in the system. Do you want to <a href="#" class="govuk-link">add a new learner</a>?</p>
+            <form action="../learner/add-learner?inClaim=true" method="post">
+                <p class="govuk-body">
+                    {{ data['learnerInput'] }} does not currently exist in the system. Do you want to 
+                    <button class="unstyle-button">Add new learner</button>
+                    ?
+                </p>
+            </form>
         {% endif %}
         {% endif %}
     </div>

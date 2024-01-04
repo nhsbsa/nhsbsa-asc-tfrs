@@ -188,48 +188,79 @@ router.post('/v5/add-evidence', function (req, res) {
 
 })
 
-
-router.post('/v5/role-type-choice', function (req, res) {
+router.post('/v5/save-claim', function (req, res) {
+  var claimID = req.session.data.id
   
-  for (const role of req.session.data.roleTypes) {
-    if (req.session.data.roleType == role.rolename) {
-      if (role.eligibility.isCPDeligible) {
-        res.redirect('../claims/prototypes/v5/new-learner/registration')
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      console.log('found claim')
+      if (c.learners.length > 0 && c.training != null && c.startDate != null && c.costPerLearner != null && c.evidenceOfPayment != null) {
+        let evidenceComplete = true
+        for (const l of c.learners) {
+          if (l.evidenceOfCompletion == null && (l.evidenceOfEnrollment == null || c.training.fundingModel =='split'))  {
+            evidenceComplete = false
+          }
+        }
+        if (evidenceComplete) {
+          console.log('claim ready to submit')
+          c.status = "ready-to-submit"
+        }
       } else {
-        res.redirect('../claims/prototypes/v5/new-learner/check-your-answers')
+        console.log('claim incomplete')
+        c.status = "incomplete"
       }
-    } 
-}
+      break;
+    }
+  }
+  delete req.session.data.id
+  res.redirect('../claims/prototypes/v5/manage-claims')
 
 });
 
+
 router.post('/v5/create-learner', function (req, res) {
-  
+  var claimID = req.session.data.id
   const learner = {
     id: req.session.data.nationalInsuranceNumber,
     fullName: req.session.data.fullName,
     jobTitle: req.session.data.jobTitle,
     roleType: req.session.data.roleType,
   };
-
   req.session.data.learners.push(learner)
 
-  if (req.session.data.learnersSelected){
-    req.session.data['learnersSelected'].push(learner)
-} else {
-    req.session.data['learnersSelected'] = [learner]
-}
+  if (req.session.data.inClaim=='true'){
+    
+    learner.evidence = {
+      evidenceOfEnrollment: null,
+      evidenceOfCompletion: null
+    }
 
-});
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+          c.learners.push(learner)
+          break;
+      }
+    }
+    delete req.session.data.inClaim
+    delete req.session.data.fullName
+    delete req.session.data.jobTitle
+    delete req.session.data.nationalInsuranceNumber
+    delete req.session.data.regOrg
+    delete req.session.data.regID
+    delete req.session.data.roleType
+    delete req.session.data.learnerInput
+    res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
+  } else{
+    delete req.session.data.fullName
+    delete req.session.data.jobTitle
+    delete req.session.data.nationalInsuranceNumber
+    delete req.session.data.regOrg
+    delete req.session.data.regID
+    delete req.session.data.roleType
+    delete req.session.data.learnerInput
+    res.redirect('../claims/prototypes/v5/manage-claims')
+  }
 
-
-router.post('/v5/new-learner-reset', function (req, res) {
-  delete req.session.data.fullName;
-  delete req.session.data.nationalInsuranceNumber;
-  delete req.session.data.jobTitle;
-  delete req.session.data.roleType;
-
-  res.redirect('../claims/prototypes/v5/new-learner/full-name.html')
 });
 
 function loadData(req) {
