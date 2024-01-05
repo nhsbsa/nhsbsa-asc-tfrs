@@ -263,6 +263,16 @@ router.post('/v5/create-learner', function (req, res) {
 
 });
 
+router.post('/v5/update-filters', (req, res) => {
+  const filters = req.body.filters; 
+  // Assuming selectedOptions is sent in the request body
+  req.session.data['filters'] = filters;
+
+  console.log('Filters updated')
+  //res.status(200).json({ message: 'Filters updated successfully' });
+  res.send(req.session.data)
+});
+
 function loadData(req) {
     // pull in the prototype data object and see if it contains a datafile reference
     let prototype = {} || req.session.data['prototype'] // set up if doesn't exist

@@ -49,6 +49,26 @@ function getRandomLearners(learnerList, x) {
   return selectedLearners;
 }
 
+// Function to get a random role name based on distribution
+function getRandomStatus() {
+  // Generate a random number between 0 and 1
+  const randomValue = Math.random();
+  
+  // Accumulate the distribution values to determine the range
+  let cumulativeDistribution = 0;
+  
+  for (const status of statuses) {
+      cumulativeDistribution += status.distribution;
+
+      // Check if the random value falls within the range of the current role
+      if (randomValue <= cumulativeDistribution) {
+          return status.id;
+      }
+  }
+
+  // If no role is found (which should be rare), return the last role as a fallback
+  return statuses[statuses.length - 1].id;
+}
 
 
 // Function to generate a random claim object
@@ -63,7 +83,7 @@ for (let i = 1; i <= quantity; i++) {
   const selectedLearners = getRandomLearners(learners, nolearners);
   const trainingItem = faker.helpers.arrayElement(training);
   const startDate = faker.date.past();
-  const status = (faker.helpers.arrayElement(statuses)).id;
+  const status = getRandomStatus();
   const createdDate = faker.date.past();
   const createdBy = faker.helpers.arrayElement(creators);
   const costPerLearner = trainingItem.reimbursementAmount;
