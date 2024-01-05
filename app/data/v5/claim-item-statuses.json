@@ -1,22 +1,27 @@
 [
     {
         "id": "incomplete",
-        "name": "Incomplete"
+        "name": "Incomplete",
+        "distribution": 0.20
     },
     {
         "id": "ready-to-submit",
-        "name": "Ready to submit"
+        "name": "Ready to submit",
+        "distribution": 0.10
     },
     {
         "id": "submitted",
-        "name": "Submitted"
+        "name": "Submitted",
+        "distribution": 0.30
     },
     {
         "id": "insufficient-evidence",
-        "name": "Queried"
+        "name": "Queried",
+        "distribution": 0.10
     },
     {
         "id": "paid",
-        "name": "Paid"
+        "name": "Paid",
+        "distribution": 0.30
     }
 ]

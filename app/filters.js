@@ -6,11 +6,10 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const fs = require('fs');
-const statuses = JSON.parse(fs.readFileSync('./app/data/claim-item-statuses.json', 'utf8'));
 
 // Add your filters here
 
-addFilter('statusTag', function (content) {
+addFilter('statusTag', function (content, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == content) {
@@ -33,3 +32,13 @@ addFilter('statusTag', function (content) {
         return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
     }
   }, { renderAsHtml: true })
+
+  addFilter('claimCount', function (content, claims) {
+    let i = 0
+    for (const c of claims) {
+        if (c.status == content) {
+            i++
+        }
+    }
+    return i
+  })

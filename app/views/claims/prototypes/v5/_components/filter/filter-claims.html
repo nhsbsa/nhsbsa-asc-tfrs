@@ -50,9 +50,23 @@
     -->
     <div class="moj-filter__options">
 
+        <form id="filterForm"  onsubmit="applyFilters(event,'{{ status.id }}')">
         <button class="govuk-button" data-module="govuk-button" data-test-id="submit-button">
         Apply filters
         </button>
+
+
+        <div class="govuk-form-group">
+            <label class="govuk-label" for="perPage">
+              Claims per page
+            </label>
+            <select class="govuk-select" id="perPage" name="perPage">
+              <option value="10" selected>10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
         
         <div class="govuk-form-group">
             <label class="govuk-label govuk-label--m" for="keywords">
@@ -187,8 +201,9 @@
 
         </div>
 
+        </form>
     </div>
-
+    
     </div>
 
 </div>
