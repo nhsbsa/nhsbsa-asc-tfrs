@@ -26,7 +26,13 @@
     <div class="govuk-grid-column-two-thirds">
         <form action="/v5/add-evidence" method="post" novalidate>
             <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
-            <h1 class="govuk-heading-l">Upload evidence of {{ data.type }} {% if data.type == 'completion' or data.type == 'enrollment'  %} for {{ learner.fullName }}{% endif %}</h1>
+            <h1 class="govuk-heading-l">Add evidence of {{ data.type }} {% if data.type == 'completion' or data.type == 'enrollment'  %} for {{ learner.fullName }}{% endif %}</h1>
+            <p class="govuk-body">
+                You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' or data.type == 'enrollment'  %} for {{ learner.fullName }}{% endif %}. This could be a PDF or image file.
+            </p>
+            <p class="govuk-body">
+                If you need to add an email as evidence, save the email as a PDF file and then upload that.
+            </p>
             <div class="govuk-form-group">
                 <label class="govuk-label" for="evidenceFile">
                 Upload a file

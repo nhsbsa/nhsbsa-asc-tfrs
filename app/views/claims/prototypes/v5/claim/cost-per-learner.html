@@ -15,15 +15,15 @@
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
         <h1 class="govuk-heading-l">
-            Cost per learner
+            Add cost
         </h1>
         <p class="govuk-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            This is the cost you paid per learner. So if the course cost £600 for 4 learners, the cost per learner is £150.
         </p>
         <form action="/v5/add-cost" method="post" novalidate>
         <div class="govuk-form-group">
             <label class="govuk-label govuk-label--m" for="cost">
-                What is the cost per learner for the activity?
+                Cost per learner
             </label>
             <div class="govuk-input__wrapper">
                 <div class="govuk-input__prefix" aria-hidden="true">£</div>

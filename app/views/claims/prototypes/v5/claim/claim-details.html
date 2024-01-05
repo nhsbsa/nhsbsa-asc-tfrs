@@ -26,12 +26,12 @@
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m">Training details</h2>
+        <h2 class="govuk-heading-m">Course</h2>
         <dl class="govuk-summary-list">
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Training
+                Name
               </dt>
               {% if not claim.training %}
               <dd class="govuk-summary-list__value">
@@ -40,7 +40,7 @@
                 </strong>
               </dd>
               <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="select-training">Select training</a>
+                <a class="govuk-link" href="select-training">Select course</a>
               </dd>
               {% else %}
               <dd class="govuk-summary-list__value">
@@ -57,7 +57,7 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Training start date
+                Start date
               </dt>
               {% if not claim.startDate %}
               <dd class="govuk-summary-list__value">
@@ -81,7 +81,7 @@
 
         <h2 class="govuk-heading-m">Learners</h2>
         {% if claim.learners.length === 0 %}
-        <p class="govuk-body">Before you can submit you will need to <a class="govuk-link" href="select-learner">add learners to claim.</a></p>
+        <p class="govuk-body"><a class="govuk-link" href="select-learner">Add learners</a> to the claim.</p>
         {% else %}
         {% set counter = 1 %}
         {% for l in claim.learners %}
@@ -198,7 +198,7 @@
         {% endfor %}
         <p class="govuk-body"><a class="govuk-link" href="select-learner">Add another learner</a></p>
         {% endif %}
-        <h2 class="govuk-heading-m">Cost details</h2>
+        <h2 class="govuk-heading-m">Cost</h2>
         <dl class="govuk-summary-list">
           
             <div class="govuk-summary-list__row">
@@ -251,7 +251,7 @@
             </div>
         </dl>
 
-        <h2 class="govuk-heading-m">Notes to support your claim</h2>
+        <h2 class="govuk-heading-m">Supporting notes</h2>
         {% if claim.notes.length === 0 %}
         <p class="govuk-body"><a class="govuk-link" href="add-note">Add note</a></p>
         {% else %}
@@ -270,8 +270,8 @@
           <p class="govuk-body"><a class="govuk-link" href="add-note">Add another note</a></p>
         {% endif %}
         <h2 class="govuk-heading-m">What happens next</h2>
-        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p class="govuk-body">When you have added all the necessary information to this claim you can submit it for processing. Check that nothing is showing as 'incomplete' and that you have added all the learners you need to.</p>
+        <p class="govuk-body">If there is still information to add, you can save and finish the claim later.</p>
         <div class="govuk-button-group">
           <form action="/v5/submit-claim" method="post" novalidate>
             <button type="submit" class="govuk-button" data-module="govuk-button">

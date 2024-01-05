@@ -15,7 +15,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
-        <h1 class="govuk-heading-l">Select training</h1>
+        <h1 class="govuk-heading-l">Select course</h1>
     </div>
 </div>
 <div class="govuk-grid-row">
@@ -27,11 +27,11 @@
         
             <div class="govuk-form-group">
                 <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
-                Search for training
+                Search for course
                 </label>
         
                 <div id="search-hint" class="govuk-hint moj-search__hint ">
-                You can search by a name of the training or the code
+                You can search by course name or code
                 </div>
         
                 <input class="govuk-input moj-search__input " id="search" name="training-input" type="search" aria-describedby="search-hint" value="{{ data['training-input'] }}">
