@@ -2,18 +2,6 @@ const fs = require('fs');
 const { faker } = require('@faker-js/faker');
 const { fakerEN_GB } = require('@faker-js/faker');
 
-// Load JSON files
-const learners = JSON.parse(fs.readFileSync('./app/data/learners.json', 'utf8'));
-const training = JSON.parse(fs.readFileSync('./app/data/training.json', 'utf8'));
-const statuses = JSON.parse(fs.readFileSync('./app/data/claim-item-statuses.json', 'utf8'));
-
-// Function to generate a random date in the past year
-function getRandomPastDate() {
-  const pastDate = new Date();
-  pastDate.setFullYear(pastDate.getFullYear() - 1);
-  return faker.date.between(pastDate, new Date());
-}
-
 function getRandomLearners(learnerList, x) {
   // Make a copy of the original array to avoid modifying it
   const copyLearners = [...learnerList];
@@ -50,7 +38,7 @@ function getRandomLearners(learnerList, x) {
 }
 
 // Function to get a random role name based on distribution
-function getRandomStatus() {
+function getRandomStatus(statuses) {
   // Generate a random number between 0 and 1
   const randomValue = Math.random();
   
@@ -76,6 +64,11 @@ function generateClaims(quantity, version) {
 const data = [];
 const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
 
+// Load JSON files
+const learners = JSON.parse(fs.readFileSync('./app/data/' + version + '/learners.json', 'utf8'));
+const training = JSON.parse(fs.readFileSync('./app/data/' + version + '/training.json', 'utf8'));
+const statuses = JSON.parse(fs.readFileSync('./app/data/' + version + '/claim-item-statuses.json', 'utf8'));
+
 for (let i = 1; i <= quantity; i++) {
   faker.seed(i);
   const nolearners = faker.number.int({ min: 1, max: 10 });
@@ -83,7 +76,7 @@ for (let i = 1; i <= quantity; i++) {
   const selectedLearners = getRandomLearners(learners, nolearners);
   const trainingItem = faker.helpers.arrayElement(training);
   const startDate = faker.date.past();
-  const status = getRandomStatus();
+  const status = getRandomStatus(statuses);
   const createdDate = faker.date.past();
   const createdBy = faker.helpers.arrayElement(creators);
   const costPerLearner = trainingItem.reimbursementAmount;

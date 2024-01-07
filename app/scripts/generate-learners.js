@@ -18,18 +18,11 @@ function generateDOB() {
 
   return faker.date.between({from: sixtyFiveYearsAgo, to: eighteenYearsAgo});
 }
-// funtion to load in data files
-function loadJSONFromFile(fileName, path = 'app/data/') {
-  let jsonFile = fs.readFileSync(path + fileName)
-  return JSON.parse(jsonFile) // Return JSON as object
-}
-
 
 // Function to get a random role name based on distribution
-function getRandomRole() {
+function getRandomRole(rolesData) {
   // Generate a random number between 0 and 1
   const randomValue = Math.random();
-  const rolesData = loadJSONFromFile('role-types.json')
   
   // Accumulate the distribution values to determine the range
   let cumulativeDistribution = 0;
@@ -48,8 +41,7 @@ function getRandomRole() {
 }
 
 // Function to get a random role name based on distribution
-function getRandomjobTitle(roleType) {
-  const rolesData = loadJSONFromFile('role-types.json')
+function getRandomjobTitle(roleType, rolesData) {
   
   for (const role of rolesData) {
 
@@ -62,12 +54,6 @@ function getRandomjobTitle(roleType) {
 
   // If no role is found (which should be rare), return the last role as a fallback
   return rolesData[rolesData.length - 1].rolename;
-}
-
-function generateGDSDate(date) {
-  const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const GDSDate = date.getDate().toString().concat(" ", month[date.getMonth()], " ", date.getFullYear());
-  return GDSDate
 }
 
 // Function to generate a unique 9-digit code
@@ -92,6 +78,8 @@ function generateLearners (quantity, version) {
   const data = [];
   const idList = [];
   //Load data from JSON file
+
+  const rolesData = JSON.parse(fs.readFileSync('./app/data/' + version + '/role-types.json', 'utf8'));
 
   //Define set people for usability testing
   const person1 = {
@@ -140,8 +128,8 @@ function generateLearners (quantity, version) {
     const id = generateUniqueID(i);
     const fullName = fakerEN_GB.person.firstName() + ' ' + fakerEN_GB.person.lastName();
     //const dateOfBirth = generateDOB();
-    const roleType = getRandomRole();
-    const jobTitle = getRandomjobTitle(roleType);
+    const roleType = getRandomRole(rolesData);
+    const jobTitle = getRandomjobTitle(roleType, rolesData);
     //const workplace = fakerEN_GB.location.city();
 
     const person = {

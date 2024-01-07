@@ -2,6 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
+const { updateClaimStatus, checkClaim } = require('../scripts/checkers.js');
 
 // v5 Prototype routes
 
@@ -64,11 +65,14 @@ router.post('/v5/add-training', function (req, res) {
     for (const c of req.session.data.claims) {
       if (claimID == c.claimID) {
           c.training = trainingChoice
+          updateClaimStatus(claimID, req.session.data.claims)
       }
     }
 
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
+
+    
 
     res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
 });
@@ -82,6 +86,7 @@ router.post('/v5/create-date', function (req, res) {
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
         c.startDate = year+"-"+month+"-"+day+"T00:00:00.000Z"
+        updateClaimStatus(claimID, req.session.data.claims)
     }
   }
 
@@ -112,6 +117,7 @@ router.post('/v5/add-learner', function (req, res) {
     for (const c of req.session.data.claims) {
       if (claimID == c.claimID) {
           c.learners.push(learner)
+          updateClaimStatus(claimID, req.session.data.claims)
           break;
       }
     }
@@ -129,6 +135,7 @@ router.post('/v5/add-cost', function (req, res) {
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
         c.costPerLearner = cost
+        updateClaimStatus(claimID, req.session.data.claims)
         break;
     }
   }
@@ -176,6 +183,7 @@ router.post('/v5/add-evidence', function (req, res) {
             }
           }
         }
+        updateClaimStatus(claimID, req.session.data.claims)
         break;
     }
   }
@@ -193,28 +201,30 @@ router.post('/v5/save-claim', function (req, res) {
   
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
-      console.log('found claim')
-      if (c.learners.length > 0 && c.training != null && c.startDate != null && c.costPerLearner != null && c.evidenceOfPayment != null) {
-        let evidenceComplete = true
-        for (const l of c.learners) {
-          if (l.evidenceOfCompletion == null && (l.evidenceOfEnrollment == null || c.training.fundingModel =='split'))  {
-            evidenceComplete = false
-          }
-        }
-        if (evidenceComplete) {
-          console.log('claim ready to submit')
-          c.status = "ready-to-submit"
-        }
-      } else {
-        console.log('claim incomplete')
-        c.status = "incomplete"
-      }
+      c.status = 'incomplete'
+      updateClaimStatus(claimID, req.session.data.claims)
       break;
     }
   }
   delete req.session.data.id
   res.redirect('../claims/prototypes/v5/manage-claims')
 
+});
+
+router.post('/v5/submit-claim', function (req, res) {
+  var claimID = req.session.data.id
+  
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      if (checkClaim(c)) {
+        c.status = 'submitted'
+        delete req.session.data.id
+        res.redirect('../claims/prototypes/v5/manage-claims')
+      } else {
+        res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
+      }
+    }
+  }
 });
 
 

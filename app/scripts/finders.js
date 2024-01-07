@@ -10,8 +10,7 @@ function findClaim(id, claims) {
       return index
 
 }
-
-
+ 
 
 
 module.exports = { findClaim, findLearner, findTraining }

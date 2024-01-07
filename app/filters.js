@@ -72,3 +72,27 @@ addFilter('uniqueDates', function (content,dateType) {
     return formattedDates;
 
 })
+
+addFilter('statusName', function (content, statuses) {
+    var statusName = null
+    for (const s of statuses) {
+        if (s.id == content) {
+            statusName = s.name
+        }
+    }
+    return statusName
+})
+
+addFilter('findClaim', function (content, claims) {
+    let claim = {}
+    for (const c of claims) {
+        if (c.id == content) {
+            claim = c
+            break;
+        }
+    }
+
+    return claim;
+})
+
+

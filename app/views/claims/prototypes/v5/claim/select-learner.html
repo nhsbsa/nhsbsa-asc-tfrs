@@ -13,13 +13,13 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
+        <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
         <h1 class="govuk-heading-l">Select learners</h1>
     </div>
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">You are adding a claim for the {{ data.trainingChoice.title }} {{ data.trainingChoice.type }} on {{ data.date | govukDate }}. Select the members of staff who attended this training.</p>
+        <p class="govuk-body">Select the members of staff who attended this training.</p>
         <div class="moj-search govuk-!-padding-bottom-2">
 
             <form action="select-learner" method="post">
@@ -67,9 +67,9 @@
                                 <table class="govuk-table">
                                     <thead class="govuk-table__head">
                                     <tr class="govuk-table__row">
-                                        <th scope="col" class="govuk-table__header">ID</th>
+                                        <th scope="col" class="govuk-table__header">National Insurance number</th>
                                         <th scope="col" class="govuk-table__header">Full name</th>
-                                        <th scope="col" class="govuk-table__header">Date of Birth</th>
+                                        <th scope="col" class="govuk-table__header">Job title</th>
                                         <th scope="col" class="govuk-table__header">Role</th>
                                         <th scope="col" class="govuk-table__header"></th>
                                     </tr>
@@ -80,7 +80,7 @@
                         <tr class="govuk-table__row">
                         <th scope="row" class="govuk-table__header">{{ learner.id }}</th>
                         <td class="govuk-table__cell">{{ learner.fullName }}</td>
-                        <td class="govuk-table__cell">{{ learner.dateOfBirth | govukDate("truncate") }}</td>
+                        <td class="govuk-table__cell">{{ learner.jobTitle }}</td>
                         <td class="govuk-table__cell">{{ learner.roleType }}</td>
                         <td class="govuk-table__cell">
                             {% set learnerAdded = false %}
