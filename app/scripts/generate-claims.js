@@ -72,7 +72,7 @@ function getRandomStatus() {
 
 
 // Function to generate a random claim object
-function generateClaims(quantity) {
+function generateClaims(quantity, version) {
 const data = [];
 const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
 
@@ -134,7 +134,7 @@ for (let i = 1; i <= quantity; i++) {
 }
 
  // Write data to learners.json
- const jsonFilePath = './app/data/claims.json';
+ const jsonFilePath = './app/data/'+version+'/claims.json';
  fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
 
  //reset seed

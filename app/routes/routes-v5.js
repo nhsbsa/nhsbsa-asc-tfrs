@@ -268,8 +268,25 @@ router.post('/v5/update-filters', (req, res) => {
   // Assuming selectedOptions is sent in the request body
   req.session.data['filters'] = filters;
 
-  console.log('Filters updated')
-  //res.status(200).json({ message: 'Filters updated successfully' });
+  // Define keys to exclude from logging
+  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes'];
+
+  // Create a copy of req.session.data with excluded keys removed
+  const filteredData = Object.keys(req.session.data)
+    .filter(key => !excludeKeys.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = req.session.data[key];
+      return obj;
+    }, {});
+  
+  const log = {
+    method: req.method,
+    url: req.originalUrl,
+    data: filteredData
+  }
+  // you can enable this in your .env file
+  console.log(JSON.stringify(log, null, 2))
+  
   res.send(req.session.data)
 });
 

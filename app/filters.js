@@ -31,9 +31,9 @@ addFilter('statusTag', function (content, statuses) {
     } else {
         return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
     }
-  }, { renderAsHtml: true })
+}, { renderAsHtml: true })
 
-  addFilter('claimCount', function (content, claims) {
+addFilter('claimCount', function (content, claims) {
     let i = 0
     for (const c of claims) {
         if (c.status == content) {
@@ -41,4 +41,34 @@ addFilter('statusTag', function (content, statuses) {
         }
     }
     return i
-  })
+})
+
+addFilter('pageCount', function (content, perPage) {
+    return Math.ceil(content/perPage)
+})
+
+addFilter('uniqueDates', function (content,dateType) {
+    
+    const uniqueMonthYears = new Set();
+
+    content.forEach(claim => {
+    const startDate = new Date(claim[dateType]);
+    const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
+
+    uniqueMonthYears.add(monthYear);
+    });
+
+    const sortedMonthYears = Array.from(uniqueMonthYears).sort();
+
+    const formattedDates = sortedMonthYears.map((dateString) => {
+        const [year, month] = dateString.split('-');
+        const formattedDate = new Date(year, month - 1); // Month is 0-indexed in JavaScript
+        const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' });
+        return formatter.format(formattedDate);
+
+    });
+    
+
+    return formattedDates;
+
+})

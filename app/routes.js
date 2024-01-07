@@ -37,10 +37,14 @@ router.use((req, res, next) => {
   next()
 })
 
+router.get('/getLocalData', (req, res) => {
+  res.send(req.session.data)
+});
+
 //generate data
 router.get('/generate', function (req, res) {
-  generateLearners(200);
-  generateClaims(1000);
+  generateLearners(50, 'v5');
+  generateClaims(200, 'v5');
   res.redirect('../')
 })
 

@@ -87,7 +87,7 @@ function generateUniqueID(seed) {
 }
 
 
-function generateLearners (quantity) {
+function generateLearners (quantity, version) {
   // Generate data for JSON objects
   const data = [];
   const idList = [];
@@ -157,7 +157,7 @@ function generateLearners (quantity) {
   }
 
   // Write data to learners.json
-  const jsonFilePath = './app/data/learners.json';
+  const jsonFilePath = './app/data/'+ version+ '/learners.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
   //reset seed
   faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
