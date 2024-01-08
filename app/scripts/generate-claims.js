@@ -20,7 +20,7 @@ function getRandomLearners(learnerList, x) {
     // Generate a random index within the remaining array length
     const randomIndex = Math.floor(Math.random() * copyLearners.length);
 
-    var learner = copyLearners[randomIndex];
+    const learner = copyLearners[randomIndex];
     // Remove the selected learner from the original array to ensure uniqueness
     copyLearners.splice(randomIndex, 1);
 
@@ -33,7 +33,6 @@ function getRandomLearners(learnerList, x) {
     selectedLearners.push(learner);
 
   }
-
   return selectedLearners;
 }
 
@@ -79,7 +78,7 @@ for (let i = 1; i <= quantity; i++) {
   const status = getRandomStatus(statuses);
   const createdDate = faker.date.past();
   const createdBy = faker.helpers.arrayElement(creators);
-  const costPerLearner = trainingItem.reimbursementAmount;
+  const costPerLearner = (trainingItem.reimbursementAmount*0.9);
 
   let submittedDate = null;
   if (['submitted', 'insufficient-evidence', 'paid'].includes(status)) {
@@ -100,12 +99,19 @@ for (let i = 1; i <= quantity; i++) {
       for (const l of selectedLearners) {
         if (trainingItem.fundingModel == 'split'){
           l.evidence.evidenceOfEnrollment = 'registeration'+'00'+i.toString()+x.toString()+'.pdf';
+        } else {
+          l.evidence.evidenceOfEnrollment = null
         }
         l.evidence.evidenceOfCompletion = 'certficate'+'00'+i.toString()+x.toString()+'.pdf';
         x++
       }
+  } else {
+    for (const l of selectedLearners) {
+      l.evidence.evidenceOfEnrollment = null
+      l.evidence.evidenceOfCompletion = null
+    }
   }
-
+  console.log(JSON.stringify(selectedLearners, null, 2))
 
   const claim = {
     claimID,

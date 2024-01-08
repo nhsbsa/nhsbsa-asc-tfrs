@@ -212,12 +212,15 @@ router.post('/v5/save-claim', function (req, res) {
 });
 
 router.post('/v5/submit-claim', function (req, res) {
-  var claimID = req.session.data.id
+  const claimID = req.session.data.id
+  const d = new Date()
+  const dStr = d.toISOString();
   
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       if (checkClaim(c)) {
         c.status = 'submitted'
+        c.submittedDate = dStr
         res.redirect('../claims/prototypes/v5/claim/confirmation')
       } else {
         res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)

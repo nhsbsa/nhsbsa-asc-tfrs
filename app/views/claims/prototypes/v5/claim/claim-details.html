@@ -107,6 +107,17 @@
 
       </dl>
 
+      {% if claim.status == "insufficient-evidence" %}
+      <h2 class="govuk-heading-m">Claim query</h2>
+        <p class="govuk-body">The evidence of payment doesn't not show the correct course code.</p>
+        <p class="govuk-body">Please review the evidence and edit the selected course or upload a more suitable piece of evidence.</p>
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Review claim
+        </button>
+      {% endif %}
+
+
+
         <h2 class="govuk-heading-m">Course</h2>
         <dl class="govuk-summary-list">
 
@@ -172,7 +183,7 @@
         {% for l in claim.learners %}
         <div class="govuk-summary-card">
           <div class="govuk-summary-card__title-wrapper">
-            <h2 class="govuk-summary-card__title"><span class="govuk-caption-m">{{ l.id }}</span>{{ l.fullName }}</h2>
+            <h2 class="govuk-summary-card__title">{{ l.fullName }}<span class="govuk-caption-m">{{ l.id }}</span></h2>
             <ul class="govuk-summary-card__actions">
               <ul class="govuk-summary-list__actions-list">
                 <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="../learner/learner-profile?learnerID={{ l.id }}">View learner details<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>
@@ -248,7 +259,9 @@
         </div>
         {% set counter = counter + 1 %}
         {% endfor %}
+        {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
         <p class="govuk-body"><a class="govuk-link" href="select-learner">Add another learner</a></p>
+        {% endif %}
         {% endif %}
         <h2 class="govuk-heading-m">Cost</h2>
         <dl class="govuk-summary-list">
@@ -331,13 +344,16 @@
             </div>
             {% endfor %}
           </dl>
+          {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
           <p class="govuk-body"><a class="govuk-link" href="add-note">Add another note</a></p>
+          {% endif %}
         {% endif %}
 
         {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
         <h2 class="govuk-heading-m">What happens next</h2>
         <p class="govuk-body">When you have added all the necessary information to this claim you can submit it for processing. Check that nothing is showing as 'incomplete' and that you have added all the learners you need to.</p>
         <p class="govuk-body">If there is still information to add, you can save and finish the claim later.</p>
+        <p class="govuk-body">By submitting this claim you are confirming that, to the best of your knowledge, the details you are providing are correct and that the learners were employed byb your organisation at the time when the course was started.</p>
         <div class="govuk-button-group">
           <form action="/v5/submit-claim" method="post" novalidate>
             <button type="submit" class="govuk-button" data-module="govuk-button">
