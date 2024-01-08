@@ -1,4 +1,7 @@
 {% set formattedStartDates = data.claims | uniqueDates("startDate") %}
+{% set variableDate = status.id | variableDateType %}
+{% set formattedVariableDates = data.claims | uniqueDates(variableDate) %}
+
 
 <div class="moj-filter">
     <div class="moj-filter__header">
@@ -9,7 +12,7 @@
     <div class="moj-filter__content">
         <div class="moj-filter__options">
 
-            <form id="filterForm"  onsubmit="applyFilters(event,'{{ status.id }}')">
+            <form id="filterForm-{{ status.id }}"  onsubmit="applyFilters(event,'{{ status.id }}')">
             <button class="govuk-button" data-module="govuk-button" data-test-id="submit-button">
             Apply filters
             </button>
@@ -57,21 +60,24 @@
 
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
 
-                Course Category
+                    {{ status.id | variableDate }}
 
                 </legend>
-
                 <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
-
-                <div class="govuk-checkboxes__item">
-                    <input class="govuk-checkboxes__input" id="type-0" name="variabledate" type="checkbox" value="0">
-                    <label class="govuk-label govuk-checkboxes__label" for="type-0">
-                    Dementia (18)
-                    </label>
-
+                    {% set loopIndex = 0 %}
+                    {% for monthYear in formattedVariableDates %}
+                    {% set checkboxId = 'variabledate-' + loopIndex %}
+                    <div class="govuk-checkboxes__item">
+                        <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="variabledate" type="checkbox" value="{{ monthYear }}">
+                        <label class="govuk-label govuk-checkboxes__label" for="{{ checkboxId }}">
+                            {{ monthYear }}
+                        </label>
+        
+                    </div>
+                    {% set loopIndex = loopIndex + 1 %}
+                    {% endfor %}
                 </div>
-
-                </div>
+                
 
             </fieldset>
 

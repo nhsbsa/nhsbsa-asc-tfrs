@@ -9,34 +9,34 @@ const fs = require('fs');
 
 // Add your filters here
 
-addFilter('statusTag', function (content, statuses) {
+addFilter('statusTag', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
-        if (s.id == content) {
+        if (s.id == statusID) {
             statusName = s.name
         }
     }
-    if (content == 'new') {
+    if (statusID == 'new') {
         return '<strong class="govuk-tag govuk-tag--green">New</strong>'
-    } else if (content == 'incomplete') {
+    } else if (statusID == 'incomplete') {
         return '<strong class="govuk-tag govuk-tag--blue">'+statusName+'</strong>'
-    } else if (content == 'ready-to-submit') {
+    } else if (statusID == 'ready-to-submit') {
         return '<strong class="govuk-tag govuk-tag--light-blue">'+statusName+'</strong>'
-    } else if (content == 'submitted') {
+    } else if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--turquoise">'+statusName+'</strong>'
-    } else if (content == 'insufficient-evidence') {
+    } else if (statusID == 'insufficient-evidence') {
         return '<strong class="govuk-tag govuk-tag--red">'+statusName+'</strong>'
-    } else if (content == 'paid') {
+    } else if (statusID == 'paid') {
         return '<strong class="govuk-tag govuk-tag--purple">'+statusName+'</strong>'
     } else {
         return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
     }
 }, { renderAsHtml: true })
 
-addFilter('claimCount', function (content, claims) {
+addFilter('claimCount', function (statusID, claims) {
     let i = 0
     for (const c of claims) {
-        if (c.status == content) {
+        if (c.status == statusID) {
             i++
         }
     }
@@ -47,11 +47,11 @@ addFilter('pageCount', function (content, perPage) {
     return Math.ceil(content/perPage)
 })
 
-addFilter('uniqueDates', function (content,dateType) {
+addFilter('uniqueDates', function (claims,dateType) {
     
     const uniqueMonthYears = new Set();
 
-    content.forEach(claim => {
+    claims.forEach(claim => {
     const startDate = new Date(claim[dateType]);
     const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
 
@@ -73,20 +73,20 @@ addFilter('uniqueDates', function (content,dateType) {
 
 })
 
-addFilter('statusName', function (content, statuses) {
+addFilter('statusName', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
-        if (s.id == content) {
+        if (s.id == statusID) {
             statusName = s.name
         }
     }
     return statusName
 })
 
-addFilter('findClaim', function (content, claims) {
+addFilter('findClaim', function (ClaimID, claims) {
     let claim = {}
     for (const c of claims) {
-        if (c.id == content) {
+        if (c.id == ClaimID) {
             claim = c
             break;
         }
@@ -95,4 +95,37 @@ addFilter('findClaim', function (content, claims) {
     return claim;
 })
 
+addFilter('variableDate', function (statusID) {
+    if (statusID == 'incomplete') {
+        return 'Created date'
+    } else if (statusID == 'ready-to-submit') {
+        return 'Created date'
+    } else if (statusID == 'submitted') {
+        return 'Submitted date'
+    } else if (statusID == 'insufficient-evidence') {
+        return 'Submitted date'
+    } else if (statusID == 'paid') {
+        return 'Paid date'
+    } else {
+        return 'Created date'
+    }
+
+})
+
+addFilter('variableDateType', function (statusID) {
+    if (statusID == 'incomplete') {
+        return 'createdDate'
+    } else if (statusID == 'ready-to-submit') {
+        return 'createdDate'
+    } else if (statusID == 'submitted') {
+        return 'submittedDate'
+    } else if (statusID == 'insufficient-evidence') {
+        return 'submittedDate'
+    } else if (statusID == 'paid') {
+        return 'paidDate'
+    } else {
+        return 'createdDate'
+    }
+
+})
 

@@ -30,7 +30,7 @@
                         <th class="govuk-table__header govuk-!-width-one-third" scope="col" aria-sort="none">Activity name</th>
                         <th class="govuk-table__header" scope="col" aria-sort="none">Start date</th>
                         <th class="govuk-table__header" scope="col" aria-sort="none">Learners</th>
-                        <th class="govuk-table__header" scope="col" aria-sort="descending">Created date</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="descending">{{ status.id | variableDate }}</th>
                         </tr>
                     </thead>
                     <tbody class="govuk-table__body">
@@ -55,7 +55,17 @@
                             </div>
                             </details>
                         </td>
-                        <td class="govuk-table__cell" data-sort-value="{{ claim.createdDate }}">{{ claim.createdDate | govukDate("truncate")}}</td>
+                        {% if status.id == 'incomplete' %}
+                        <td class="govuk-table__cell" data-sort-value="{{ claim.createdDate }}">{{ claim.createdDate | govukDate("truncate") }}</td>
+                        {% elif status.id == 'ready-to-submit' %}
+                        <td class="govuk-table__cell" data-sort-value="{{ claim.createdDate }}">{{ claim.createdDate | govukDate("truncate") }}</td>
+                        {% elif status.id == 'submitted' %}
+                        <td class="govuk-table__cell" data-sort-value="{{ claim.submittedDate }}">{{ claim.submittedDate | govukDate("truncate") }}</td>
+                        {% elif status.id == 'insufficient-evidence' %}
+                        <td class="govuk-table__cell" data-sort-value="{{ claim.submittedDate }}">{{ claim.submittedDate | govukDate("truncate") }}</td>
+                        {% elif status.id == 'paid' %}
+                        <td class="govuk-table__cell" data-sort-value="{{ claim.paidDate }}">{{ claim.paidDate | govukDate("truncate") }}</td>
+                        {% endif %}
                         </tr>
                         {% set loopCounter = loopCounter + 1 %}
                         {% endif %}

@@ -25,7 +25,7 @@ function toggleFilter(id) {
     
     event.preventDefault();
     // Get form data
-    const formData = new FormData(document.getElementById('filterForm'));
+    const formData = new FormData(document.getElementById('filterForm-'+id));
     // Get the element with the ID "claimsTables"
     
      
@@ -33,12 +33,12 @@ function toggleFilter(id) {
     const filters= {};
     formData.forEach((value, key) => {
       if (filters.hasOwnProperty(key)) {
-        if (Array.isArray(filters[key])) {
+        if (Array.isArray(filters[key]) && !(value=="_unchecked")) {
             filters[key].push(value);
-        } else {
+        } else if (!(value=="_unchecked")) {
           filters[key] = [filters[key], value];
         }
-      } else {
+      } else if (!(value=="_unchecked")) {
         filters[key] = value;
       }
     });
@@ -63,8 +63,11 @@ function toggleFilter(id) {
 
         tableRows.forEach(function(row, index) {
           let keywordsCheck = false
+          let hasKeywords = false
           let startDateCheck = false
+          let hasStartDate = false
           let variableDateCheck = false
+          let hasvariableDate = false
           let claim = null
     
           for (const c of data.claims) {
@@ -75,8 +78,23 @@ function toggleFilter(id) {
           
           
           const title = claim.training.title.toLowerCase()
-          const date = new Date(claim.startDate)
-          const dateStr = month[date.getMonth()] + ' ' + date.getFullYear()
+          const startdate = new Date(claim.startDate)
+          const startdateStr = month[startdate.getMonth()] + ' ' + startdate.getFullYear()
+
+          let  variabledate = null
+          let variabledateStr = null
+
+          if (id == 'incomplete' || id == 'ready-to-submit') {
+            variabledate = new Date(claim.createdDate)
+            variabledateStr = month[variabledate.getMonth()] + ' ' + variabledate.getFullYear()
+          } else if (id == 'submitted' || id == 'insufficient-evidence') {
+            variabledate = new Date(claim.submittedDate)
+            variabledateStr = month[variabledate.getMonth()] + ' ' + variabledate.getFullYear()
+          } else if (id == 'paid') {
+            variabledate = new Date(claim.paidDate)
+            variabledateStr = month[variabledate.getMonth()] + ' ' + variabledate.getFullYear()
+          }
+
           let learners = ""
           for (const learner of claim.learners) {
             learners = learners.concat(' ',learner.fullName.toLowerCase())
@@ -84,28 +102,49 @@ function toggleFilter(id) {
           
           if (filters.keywords != "" && (title.includes(keywords) ||  learners.includes(keywords) || claim.claimID.includes(keywords))) {
             keywordsCheck = true
+            hasKeywords = true
           }
 
     
           if (filters.startdate !== undefined && filters.startdate !== null) {
+            hasStartDate = true
             if (Array.isArray(filters.startdate)) {
               // It's an array, loop through each value
               for (const d of filters.startdate) {
-                if (dateStr == d) {
+                if (startdateStr == d) {
                   startDateCheck = true;
                   break; // Exit the loop since we found a match
                 }
               }
             } else {
               // It's not an array, check against the single value
-              if (dateStr == filters.startdate) {
+              if (startdateStr == filters.startdate) {
                 startDateCheck = true;
               }
             }
           }
+
+          if (filters.variabledate !== undefined && filters.variabledate !== null) {
+            hasvariableDate = true
+            if (Array.isArray(filters.variabledate)) {
+              // It's an array, loop through each value
+              for (const d of filters.variabledate) {
+                if (variabledateStr == d) {
+                  variableDateCheck = true;
+                  break; // Exit the loop since we found a match
+                }
+              }
+            } else {
+              // It's not an array, check against the single value
+              if (variabledateStr == filters.variabledate) {
+                variableDateCheck = true;
+              }
+            }
+          }
+
           
           
-          if ((keywordsCheck || startDateCheck || variableDateCheck) && counter<=10) {
+          if (((keywordsCheck || !hasKeywords) && (startDateCheck || !hasStartDate) && (variableDateCheck || !hasvariableDate)) && counter<=10) {
             counter++
             console.log('match')
             if ((row.classList.contains('govuk-!-display-none'))) {

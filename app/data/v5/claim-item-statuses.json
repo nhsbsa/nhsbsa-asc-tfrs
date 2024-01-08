@@ -2,17 +2,17 @@
     {
         "id": "incomplete",
         "name": "Incomplete",
-        "distribution": 0.20
+        "distribution": 0.15
     },
     {
         "id": "ready-to-submit",
         "name": "Ready to submit",
-        "distribution": 0.10
+        "distribution": 0.05
     },
     {
         "id": "submitted",
         "name": "Submitted",
-        "distribution": 0.30
+        "distribution": 0.40
     },
     {
         "id": "insufficient-evidence",
