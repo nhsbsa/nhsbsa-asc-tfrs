@@ -218,8 +218,7 @@ router.post('/v5/submit-claim', function (req, res) {
     if (claimID == c.claimID) {
       if (checkClaim(c)) {
         c.status = 'submitted'
-        delete req.session.data.id
-        res.redirect('../claims/prototypes/v5/manage-claims')
+        res.redirect('../claims/prototypes/v5/claim/confirmation')
       } else {
         res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
       }
