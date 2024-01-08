@@ -37,3 +37,19 @@
   .unstyle-button:hover {
     color: #003078;
   }
+
+  .unstyle-card-button {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    font-family: "GDS Transport", Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: #1d70b8;
+    text-decoration: underline;
+    text-underline-offset: 2.9982px;
+    cursor: pointer;
+  }
+  .unstyle-card-button:hover {
+    color: #003078;
+  }

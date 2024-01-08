@@ -1,20 +1,19 @@
-
-
 document.addEventListener("DOMContentLoaded", function() {
-    /*var tabs = document.querySelectorAll('.govuk-tabs__panel')
+    var tabs = document.querySelectorAll('.govuk-tabs__panel')
     tabs.forEach(function(tab) {
 
       var tableRows = tab.querySelectorAll('.claim-row')
       let counter  = 0
 
       tableRows.forEach(function(row, index) {
-        if (counter<=10 && !row.classList.contains('govuk-!-display-none')) {
+        if (!row.classList.contains('govuk-!-display-none')) {
+          if (counter>=10) {
+            row.classList.add('govuk-!-display-none')
+          }
           counter++
-        } else if (!row.classList.contains('govuk-!-display-none')) {
-          row.classList.add('govuk-!-display-none')
         }
       })
-  })*/
+  })
 })
 
 function hideRows(data, filters, id) {
@@ -135,7 +134,7 @@ function hideRows(data, filters, id) {
 
 function toggleFilter(id) {
     var filterDiv = document.getElementById('filter'+id);
-    var toggleButton = document.getElementById('toggleFilterButton');
+    var toggleButton = document.getElementById('toggleFilterButton'+id);
 
 
 

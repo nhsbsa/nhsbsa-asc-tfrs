@@ -17,6 +17,46 @@
         <h1 class="govuk-heading-l">New learner details</h1>
     </div>
     <div class="govuk-grid-column-two-thirds">
+      {% if data.existingLearner == 'true' %}
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+          Learner already exists in service
+          </h2>
+          <div class="govuk-error-summary__body">
+            <p>
+              Two learners cannot share the same National Insurance number and the following learner already exists:
+            </p>
+              <p>
+              {% set learner = null %}
+              {% for l in data.learners %}
+                {% if l.id == data.nationalInsuranceNumber %}
+                  {% set learner = l %}
+                {% endif %}
+              {% endfor %}
+              National Insurance number: {{learner.id}} <br>
+              Full name: {{learner.fullName}} <br>
+              Job title: {{learner.jobTitle}} <br>
+              Role type: {{learner.roleType}} <br>
+              {% if data.inClaim == 'true' %}
+              <form method="post" action="/v5/add-learner" class="govuk-!-margin-0">
+                <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
+                <button type="submit" class="unstyle-card-button">Add the existing learner to claim</button>
+              </form>
+              </p>
+              <p>or</p>
+              <p>
+              <form method="post" action="#" class="govuk-!-margin-0">
+                <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
+                <button type="submit" class="unstyle-card-button">Update existing learners details</button>
+              </form>
+            </p>
+              {% endif %}
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
         <form action="/v5/create-learner" method="post" novalidate>
             <div class="govuk-form-group">
                 <label class="govuk-label govuk-label--s" for="full-name" aria-describedby="full-name-hint">

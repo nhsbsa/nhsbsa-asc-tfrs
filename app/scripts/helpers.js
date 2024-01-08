@@ -25,5 +25,25 @@ function updateClaimStatus(claimID, claims) {
       }
   }
 
+function removeSpacesAndLowerCase(inputString) {
+// Remove spaces using regular expression
+let stringWithoutSpaces = inputString.replace(/\s/g, '');
 
-module.exports = { updateClaimStatus, checkClaim }
+// Convert the string to lowercase
+let lowercaseString = stringWithoutSpaces.toLowerCase();
+
+return lowercaseString;
+}
+
+function compareNINumbers(ni_1,learners) {
+    let check = false
+    for (const l of learners) {
+        if (removeSpacesAndLowerCase(ni_1)==removeSpacesAndLowerCase(l.id)) {
+            check = true 
+            break;
+        }
+    }
+    return check
+}
+
+module.exports = { updateClaimStatus, checkClaim, compareNINumbers }

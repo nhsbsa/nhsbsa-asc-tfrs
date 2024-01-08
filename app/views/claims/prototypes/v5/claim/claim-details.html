@@ -132,7 +132,7 @@
                 </strong>
               </dd>
               <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="select-training">Select course</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="select-training">Select course</a>
               </dd>
               {% else %}
               <dd class="govuk-summary-list__value">
@@ -141,8 +141,8 @@
               {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
               <dd class="govuk-summary-list__actions">
                 <ul class="govuk-summary-list__actions-list">
-                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="activity-profile?viewOnly=true&trainingSelection={{ claim.training.code }}">View<span class="govuk-visually-hidden"> training</span></a></li>
-                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="select-training">Change<span class="govuk-visually-hidden"> training</span></a></li>
+                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="activity-profile?viewOnly=true&trainingSelection={{ claim.training.code }}">View<span class="govuk-visually-hidden"> training</span></a></li>
+                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="select-training">Change<span class="govuk-visually-hidden"> training</span></a></li>
                 </ul>
               </dd>
               {% endif %}
@@ -160,7 +160,7 @@
                 </strong>
               </dd>
               <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="start-date">Add start date</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="start-date">Add start date</a>
               </dd>
               {% else %}
               <dd class="govuk-summary-list__value">
@@ -168,7 +168,7 @@
               </dd>
               {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
               <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="start-date">Change<span class="govuk-visually-hidden"> activity start date</span></a>
+                <a class="govuk-link govuk-link--no-visited-state" href="start-date">Change<span class="govuk-visually-hidden"> activity start date</span></a>
               </dd>
               {% endif %}
               {% endif %}
@@ -177,7 +177,7 @@
 
         <h2 class="govuk-heading-m">Learners</h2>
         {% if claim.learners.length === 0 %}
-        <p class="govuk-body"><a class="govuk-link" href="select-learner">Add learners</a> to the claim.</p>
+        <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add learners</a> to the claim.</p>
         {% else %}
         {% set counter = 1 %}
         {% for l in claim.learners %}
@@ -186,8 +186,16 @@
             <h2 class="govuk-summary-card__title">{{ l.fullName }}<span class="govuk-caption-m">{{ l.id }}</span></h2>
             <ul class="govuk-summary-card__actions">
               <ul class="govuk-summary-list__actions-list">
-                <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="../learner/learner-profile?learnerID={{ l.id }}">View learner details<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>
-                {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}<li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>{% endif %}
+                <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="../learner/learner-profile?learnerID={{ l.id }}">View learner details<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>
+                {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+                <li class="govuk-summary-list__actions-list-item">
+                  <form action="/v5/remove-learner?learnerID={{ l.id }}" method="post">
+                    <p class="govuk-body">
+                        <button class="unstyle-card-button">Remove<span class="govuk-visually-hidden"> {{ l.fullName }}</span></button>
+                    </p>
+                </form>
+                </li>
+                {% endif %}
               </ul>
               </li>
             </ul>
@@ -207,7 +215,7 @@
                 </dd>
                 {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
                 <dd class="govuk-summary-list__actions">
-                  <a class="govuk-link" href="add-evidence?type=enrollment&learnerID={{ l.id }}">Add evidence</a>
+                  <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=enrollment&learnerID={{ l.id }}">Add evidence</a>
                 </dd>
                 {% endif %}
                 {% else %}
@@ -217,8 +225,8 @@
                 {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
                 <dd class="govuk-summary-list__actions">
                   <ul class="govuk-summary-list__actions-list">
-                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="#">View<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
-                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="add-evidence?type=enrollment&learnerID={{ l.id }}">Change<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
+                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="#">View<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
+                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=enrollment&learnerID={{ l.id }}">Change<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
                   </ul>
                 </dd>
                 {% endif %}
@@ -237,7 +245,7 @@
                 </dd>
                 {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
                 <dd class="govuk-summary-list__actions">
-                  <a class="govuk-link" href="add-evidence?type=completion&learnerID={{ l.id }}">Add evidence</a>
+                  <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{ l.id }}">Add evidence</a>
                 </dd>
                 {% endif %}
                 {% else %}
@@ -247,8 +255,8 @@
                 {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
                 <dd class="govuk-summary-list__actions">
                   <ul class="govuk-summary-list__actions-list">
-                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="#">View<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
-                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="add-evidence?type=completion&learnerID={{ l.id }}">Change<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
+                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="#">View<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
+                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{ l.id }}">Change<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
                   </ul>
                 </dd>
                 {% endif %}
@@ -260,7 +268,7 @@
         {% set counter = counter + 1 %}
         {% endfor %}
         {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
-        <p class="govuk-body"><a class="govuk-link" href="select-learner">Add another learner</a></p>
+        <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another learner</a></p>
         {% endif %}
         {% endif %}
         <h2 class="govuk-heading-m">Cost</h2>
@@ -278,7 +286,7 @@
               </dd>
               {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
               <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="cost-per-learner">Add cost</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="cost-per-learner">Add cost</a>
               </dd>
               {% endif %}
               {% else %}
@@ -287,7 +295,7 @@
               </dd>
               {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
               <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="cost-per-learner">Change<span class="govuk-visually-hidden"> cost</span></a>
+                <a class="govuk-link govuk-link--no-visited-state" href="cost-per-learner">Change<span class="govuk-visually-hidden"> cost</span></a>
               </dd>
               {% endif %}
               {% endif %}
@@ -305,7 +313,7 @@
               </dd>
               {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
               <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="add-evidence?type=payment">Add evidence</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=payment">Add evidence</a>
               </dd>
               {% endif %}
               {% else %}
@@ -315,8 +323,8 @@
               {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
               <dd class="govuk-summary-list__actions">
                 <ul class="govuk-summary-list__actions-list">
-                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="#">View<span class="govuk-visually-hidden"> evidence of payment</span></a></li>
-                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link" href="add-evidence?type=payment">Change<span class="govuk-visually-hidden"> evidence of payment</span></a></li>
+                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="#">View<span class="govuk-visually-hidden"> evidence of payment</span></a></li>
+                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=payment">Change<span class="govuk-visually-hidden"> evidence of payment</span></a></li>
                 </ul>
               </dd>
               {% endif %}
@@ -326,7 +334,7 @@
 
         <h2 class="govuk-heading-m">Supporting notes</h2>
         {% if claim.notes.length === 0 and (claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit") %}
-        <p class="govuk-body"><a class="govuk-link" href="add-note">Add note</a></p>
+        <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Add note</a></p>
         {% elif claim.notes.length > 0 and not (claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit") %}
         <p class="govuk-body">No supporting notes added to claim before submission.</p>
         {% else %}
@@ -338,14 +346,14 @@
               </dd>
               {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
               <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="delete-note">Delete</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="delete-note">Delete</a>
               </dd>
               {% endif %}
             </div>
             {% endfor %}
           </dl>
           {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
-          <p class="govuk-body"><a class="govuk-link" href="add-note">Add another note</a></p>
+          <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Add another note</a></p>
           {% endif %}
         {% endif %}
 

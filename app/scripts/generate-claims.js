@@ -20,7 +20,7 @@ function getRandomLearners(learnerList, x) {
     // Generate a random index within the remaining array length
     const randomIndex = Math.floor(Math.random() * copyLearners.length);
 
-    const learner = copyLearners[randomIndex];
+    const learner = JSON.parse(JSON.stringify(copyLearners[randomIndex]));
     // Remove the selected learner from the original array to ensure uniqueness
     copyLearners.splice(randomIndex, 1);
 
@@ -111,7 +111,6 @@ for (let i = 1; i <= quantity; i++) {
       l.evidence.evidenceOfCompletion = null
     }
   }
-  console.log(JSON.stringify(selectedLearners, null, 2))
 
   const claim = {
     claimID,

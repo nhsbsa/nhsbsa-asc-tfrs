@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { updateClaimStatus, checkClaim } = require('../scripts/checkers.js');
+const { updateClaimStatus, checkClaim, compareNINumbers } = require('../scripts/helpers.js');
 
 // v5 Prototype routes
 
@@ -99,7 +99,6 @@ router.post('/v5/create-date', function (req, res) {
 
 router.post('/v5/add-learner', function (req, res) {
     var claimID = req.session.data.id
-    console.log(req.session.data.learnerSelection);
     
 
     for (const l of req.session.data.learners) {
@@ -127,6 +126,27 @@ router.post('/v5/add-learner', function (req, res) {
     
     res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
 });
+
+router.post('/v5/remove-learner', function (req, res) {
+  var claimID = req.session.data.id
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      let index=0
+      for (const l of c.learners) {
+        if (req.session.data.learnerID == l.id) {
+          c.learners.splice(index,1)
+          delete req.session.data.learnerID
+          break;
+        }
+        index++
+      }
+        break;
+    }
+  }
+  res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
+});
+
 
 router.post('/v5/add-cost', function (req, res) {
   var cost = req.session.data.cost
@@ -232,6 +252,7 @@ router.post('/v5/submit-claim', function (req, res) {
 
 router.post('/v5/create-learner', function (req, res) {
   var claimID = req.session.data.id
+
   const learner = {
     id: req.session.data.nationalInsuranceNumber,
     fullName: req.session.data.fullName,
@@ -240,7 +261,7 @@ router.post('/v5/create-learner', function (req, res) {
   };
   req.session.data.learners.push(learner)
 
-  if (req.session.data.inClaim=='true'){
+  if (req.session.data.inClaim=='true' && !compareNINumbers(req.session.data.nationalInsuranceNumber, req.session.data.learners)){
     
     learner.evidence = {
       evidenceOfEnrollment: null,
@@ -265,12 +286,11 @@ router.post('/v5/create-learner', function (req, res) {
   } else{
     delete req.session.data.fullName
     delete req.session.data.jobTitle
-    delete req.session.data.nationalInsuranceNumber
     delete req.session.data.regOrg
     delete req.session.data.regID
     delete req.session.data.roleType
     delete req.session.data.learnerInput
-    res.redirect('../claims/prototypes/v5/manage-claims')
+    res.redirect('../claims/prototypes/v5/learner/add-learner?inClaim='+req.session.data.inClaim+'&existingLearner=true')
   }
 
 });
