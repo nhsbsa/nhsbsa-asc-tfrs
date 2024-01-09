@@ -82,7 +82,7 @@ for (let i = 1; i <= quantity; i++) {
   const status = getRandomStatus(statuses);
   const createdDate = faker.date.past();
   const createdBy = faker.helpers.arrayElement(creators);
-  const costPerLearner = (trainingItem.reimbursementAmount*0.9);
+  const costPerLearner = (trainingItem.reimbursementAmount*1.1);
 
   let submittedDate = null;
   if (['submitted', 'insufficient-evidence', 'paid'].includes(status)) {
