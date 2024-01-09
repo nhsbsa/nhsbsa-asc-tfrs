@@ -129,3 +129,15 @@ addFilter('variableDateType', function (statusID) {
 
 })
 
+addFilter('removeSpacesAndLowerCase', function (inputString) {
+
+    // Remove spaces using regular expression
+    let stringWithoutSpaces = inputString.replace(/\s/g, '');
+
+    // Convert the string to lowercase
+    let lowercaseString = stringWithoutSpaces.toLowerCase();
+
+    return lowercaseString;
+
+})
+

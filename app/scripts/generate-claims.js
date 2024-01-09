@@ -60,13 +60,17 @@ function getRandomStatus(statuses) {
 
 // Function to generate a random claim object
 function generateClaims(quantity, version) {
-const data = [];
+let data = [];
 const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
 
 // Load JSON files
 const learners = JSON.parse(fs.readFileSync('./app/data/' + version + '/learners.json', 'utf8'));
 const training = JSON.parse(fs.readFileSync('./app/data/' + version + '/training.json', 'utf8'));
 const statuses = JSON.parse(fs.readFileSync('./app/data/' + version + '/claim-item-statuses.json', 'utf8'));
+
+
+const preSetClaims = JSON.parse(fs.readFileSync('./app/data/' + version + '/pre-set-claims.json', 'utf8'));
+data = data.concat(preSetClaims)
 
 for (let i = 1; i <= quantity; i++) {
   faker.seed(i);

@@ -61,7 +61,9 @@
                 {% for learner in data['learners'] %}
                     {% set lowercasedsearch = data['learnerInput'] | lower %}
                     {% set lowercasedname = learner.fullName | lower %}
-                    {% if lowercasedname == lowercasedsearch or learner.id == data['learnerInput'] or lowercasedsearch in lowercasedname %}
+                    {% set formattedSearch = data['learnerInput'] | removeSpacesAndLowerCase %}
+                    {% set formattedID = learner.id | removeSpacesAndLowerCase %}
+                    {% if lowercasedname == lowercasedsearch or learner.id == data['learnerInput'] or lowercasedsearch in lowercasedname or formattedSearch in formattedID %}
                             {% set hasResults = true %}
                             {% if addHeader %}
                                 <table class="govuk-table">

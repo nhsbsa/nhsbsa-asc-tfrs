@@ -1,0 +1,187 @@
+[
+    {
+        "claimID": "859403",
+        "learners": [
+          {
+            "id": "KZ 79 0F 13 Z",
+            "fullName": "Aron Effertz-Stroman",
+            "jobTitle": "Caregiver",
+            "roleType": "Direct care",
+            "evidence": {
+              "evidenceOfEnrollment": null,
+              "evidenceOfCompletion": "certficate0020001.pdf"
+            }
+          },
+          {
+            "id": "LE 09 5F 94 M",
+            "fullName": "Roy Kub",
+            "jobTitle": "Caregiver",
+            "roleType": "Direct care",
+            "evidence": {
+              "evidenceOfEnrollment": null,
+              "evidenceOfCompletion": "certficate0020002.pdf"
+            }
+          },
+          {
+            "id": "OB 78 2F 15 O",
+            "fullName": "Malinda Mayer",
+            "jobTitle": "Caregiver",
+            "roleType": "Direct care",
+            "evidence": {
+              "evidenceOfEnrollment": null,
+              "evidenceOfCompletion": "certficate0020003.pdf"
+            }
+          },
+          {
+            "id": "ZX 51 9F 87 P",
+            "fullName": "Casey Simonis",
+            "jobTitle": "Caregiver",
+            "roleType": "Direct care",
+            "evidence": {
+              "evidenceOfEnrollment": null,
+              "evidenceOfCompletion": "certficate0020004.pdf"
+            }
+          }
+        ],
+        "training": {
+          "code": "Z8A1B3",
+          "title": "Effective Time Management for Social Care Professionals",
+          "description": "Learn time management strategies tailored to the demands of social care, ensuring efficiency and effectiveness in daily tasks and responsibilities.",
+          "type": "course",
+          "category": "time management",
+          "awardingOrganisation": "Open College Network",
+          "reimbursementAmount": 300,
+          "fundingModel": "full",
+          "totalLearningTime": "50 hours"
+        },
+        "startDate": "2023-08-25T03:54:57.397Z",
+        "status": "submitted",
+        "createdDate": "2023-03-03T20:33:07.870Z",
+        "createdBy": "Allan Connelly",
+        "submittedDate": "2023-12-15T23:04:20.365Z",
+        "paidDate": null,
+        "costPerLearner": 270,
+        "evidenceOfPayment": "invoice002000.pdf",
+        "notes": []
+      },
+      {
+        "claimID": "542552",
+        "learners": [
+          {
+            "id": "KZ 79 0F 13 Z",
+            "fullName": "Aron Effertz-Stroman",
+            "jobTitle": "Caregiver",
+            "roleType": "Direct care",
+            "evidence": {
+              "evidenceOfEnrollment": null,
+              "evidenceOfCompletion": "certficate0019021.pdf"
+            }
+          },
+          {
+            "id": "LE 09 5F 94 M",
+            "fullName": "Roy Kub",
+            "jobTitle": "Caregiver",
+            "roleType": "Direct care",
+            "evidence": {
+              "evidenceOfEnrollment": null,
+              "evidenceOfCompletion": "certficate0019022.pdf"
+            }
+          },
+          {
+            "id": "OB 78 2F 15 O",
+            "fullName": "Malinda Mayer",
+            "jobTitle": "Caregiver",
+            "roleType": "Direct care",
+            "evidence": {
+              "evidenceOfEnrollment": null,
+              "evidenceOfCompletion": "certficate0019023.pdf"
+            }
+          }
+        ],
+        "training": {
+          "code": "W9X2Y4",
+          "title": "Effective Time Management for Care Professionals",
+          "description": "Learn time management strategies tailored to the demands of care professionals, ensuring efficiency and effectiveness in daily tasks and responsibilities.",
+          "type": "qualification",
+          "category": "time management",
+          "awardingOrganisation": "Highfield Qualifications",
+          "reimbursementAmount": 480,
+          "fundingModel": "full",
+          "totalLearningTime": "75 hours"
+        },
+        "startDate": "2023-10-05T21:29:07.013Z",
+        "status": "ready-to-submit",
+        "createdDate": "2023-05-26T23:52:59.116Z",
+        "createdBy": "Allan Connelly",
+        "submittedDate": null,
+        "paidDate": null,
+        "costPerLearner": 432,
+        "evidenceOfPayment": "invoice001902.pdf",
+        "notes": []
+      },
+      {
+        "claimID": "706486",
+        "learners": [
+          {
+            "id": "KZ 79 0F 13 Z",
+            "fullName": "Aron Effertz-Stroman",
+            "jobTitle": "Caregiver",
+            "roleType": "Direct care",
+            "evidence": {
+              "evidenceOfEnrollment": null,
+              "evidenceOfCompletion": "certficate0019961.pdf"
+            }
+          },
+          {
+            "id": "LE 09 5F 94 M",
+            "fullName": "Roy Kub",
+            "jobTitle": "Caregiver",
+            "roleType": "Direct care",
+            "evidence": {
+              "evidenceOfEnrollment": null,
+              "evidenceOfCompletion": "certficate0019962.pdf"
+            }
+          },
+          {
+            "id": "OB 78 2F 15 O",
+            "fullName": "Malinda Mayer",
+            "jobTitle": "Caregiver",
+            "roleType": "Direct care",
+            "evidence": {
+              "evidenceOfEnrollment": null,
+              "evidenceOfCompletion": "certficate0019963.pdf"
+            }
+          },
+          {
+            "id": "ZX 51 9F 87 P",
+            "fullName": "Casey Simonis",
+            "jobTitle": "Caregiver",
+            "roleType": "Direct care",
+            "evidence": {
+              "evidenceOfEnrollment": null,
+              "evidenceOfCompletion": "certficate0019964.pdf"
+            }
+          }
+        ],
+        "training": {
+          "code": "R1S3T5",
+          "title": "Advanced Geriatric Care",
+          "description": "Deepen your understanding of geriatric care principles, including holistic care, mobility support, and cognitive stimulation for older adults.",
+          "type": "e-learning module",
+          "category": "geriatric care",
+          "awardingOrganisation": "Skills for Health",
+          "reimbursementAmount": 180,
+          "fundingModel": "full",
+          "totalLearningTime": "60 minutes"
+        },
+        "startDate": "2023-12-16T06:12:35.678Z",
+        "status": "paid",
+        "createdDate": "2023-07-15T19:57:28.309Z",
+        "createdBy": "Flossie Gleason",
+        "submittedDate": "2023-12-08T22:20:12.104Z",
+        "paidDate": "2023-11-28T00:39:19.359Z",
+        "costPerLearner": 162,
+        "evidenceOfPayment": "invoice001996.pdf",
+        "notes": []
+      }
+]

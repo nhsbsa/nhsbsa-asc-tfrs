@@ -75,53 +75,14 @@ function generateUniqueID(seed) {
 
 function generateLearners (quantity, version) {
   // Generate data for JSON objects
-  const data = [];
-  const idList = [];
+  let data = [];
   //Load data from JSON file
 
   const rolesData = JSON.parse(fs.readFileSync('./app/data/' + version + '/role-types.json', 'utf8'));
 
-  //Define set people for usability testing
-  const person1 = {
-    id: "KZ 79 0F 13 Z",
-    fullName: "Aron Effertz-Stroman",
-    //dateOfBirth: "1969-03-18T05:58:19.627Z",
-    jobTitle: "Council Care Assistant",
-    roleType: "Local authority direct care"
-  };
-  data.push(person1);
-  idList.push(person1.id);
-  
-  const person2 = {
-    id: "LE 09 5F 94 M",
-    fullName: "Roy Kub",
-    //dateOfBirth: "1992-10-08T15:59:08.977Z",
-    jobTitle: "Care Aide",
-    roleType: "Non-regulated direct care"
-  };
-  data.push(person2);
-  idList.push(person2.id)
+  const preSetLearners = JSON.parse(fs.readFileSync('./app/data/' + version + '/pre-set-learners.json', 'utf8'));
 
-  const person3 = {
-    id: "OB 78 2F 15 O",
-    fullName: "Malinda Mayer",
-    //dateOfBirth: "1988-05-16T10:24:37.451Z",
-    jobTitle: "Local Authority Care Worker",
-    roleType: "Local authority direct care"
-  };
-  data.push(person3);
-  idList.push(person3.id);
-
-  const person4 = {
-    id: "ZX 51 9F 87 P",
-    fullName: "Casey Simonis",
-    //dateOfBirth: "1970-12-01T00:32:51.465Z",
-    jobTitle: "Support Worker",
-    roleType: "Non-regulated direct care"
-  };
-  data.push(person4);
-  idList.push(person4.id);
-
+  data = data.concat(preSetLearners);
 
 
   for (let i = 5; i <= quantity; i++) {
