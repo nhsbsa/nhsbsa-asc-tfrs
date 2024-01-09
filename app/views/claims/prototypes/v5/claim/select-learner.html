@@ -43,12 +43,6 @@
         
             </form>
         </div>
-        <form action="../learner/add-learner?inClaim=true" method="post">
-            <p class="govuk-body">
-                <button class="unstyle-button">Add new learner</button>
-                if they are not in the list.
-            </p>
-        </form>
     </div>
 </div>
 
@@ -110,8 +104,8 @@
         {% if not hasResults %}
             <form action="../learner/add-learner?inClaim=true" method="post">
                 <p class="govuk-body">
-                    {{ data['learnerInput'] }} does not currently exist in the system. Do you want to 
-                    <button class="unstyle-button">Add new learner</button>
+                    No matches returned for your search: <q>{{ data['learnerInput'] }}"</q>. This may mean they do not exist in the service. Do you want to 
+                    <button class="unstyle-button">add new learner</button>
                     ?
                 </p>
             </form>
