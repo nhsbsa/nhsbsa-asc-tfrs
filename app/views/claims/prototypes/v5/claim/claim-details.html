@@ -375,7 +375,14 @@
         <h2 class="govuk-heading-m">What happens next</h2>
         <p class="govuk-body">When you have added all the necessary information to this claim you can submit it for processing. Check that nothing is showing as 'incomplete' and that you have added all the learners you need to.</p>
         <p class="govuk-body">If there is still information to add, you can save and finish the claim later.</p>
-        <p class="govuk-body">By submitting this claim you are confirming that, to the best of your knowledge, the details you are providing are correct and that the learners were employed by your organisation when the course started.</p>
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-visually-hidden">Warning</span>
+            By submitting this claim you are confirming that, to the best of your knowledge, the details you are providing are correct and that the learners were employed by your organisation when the course started.
+          </strong>
+        </div>
+        <p class="govuk-body"></p>
         <div class="govuk-button-group">
           <form action="/v5/submit-claim" method="post" novalidate>
             <button type="submit" class="govuk-button" data-module="govuk-button">
