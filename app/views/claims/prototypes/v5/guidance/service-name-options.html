@@ -1,0 +1,21 @@
+{% extends "../layouts/main.html" %}
+
+{% set nameOptions = ['Get help with adult social care training costs', 'Claim for adult social care training and development', 'Get money back for staff learning and training in adult social care', 'Claim funding to support skills in adult social care']%}
+{% set nameOptions = nameOptions | randomizeOrder %}
+
+{% block content %}
+<div class="govuk-grid-row govuk-!-margin-bottom-9">
+    <h1 class="govuk-heading-l">Service name options</h1>
+</div>
+
+{% set counter = 1 %}
+{% for name in nameOptions %}
+    <div class="govuk-grid-row govuk-!-margin-bottom-9">
+        <span class="govuk-caption-m">Option {{ counter }}</span>
+        <h2 class="govuk-heading-m">{{ name }}</h2>
+    </div>
+{% set counter = counter + 1 %}
+{% endfor %}
+
+
+{% endblock %}
