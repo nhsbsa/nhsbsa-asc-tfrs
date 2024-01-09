@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
 {% if claim.status != 'new' %}
-<a href="../manage-claims" class="govuk-back-link">Back</a>
+<a href="../manage-claims#{{ claim.status }}" class="govuk-back-link">Back</a>
 {% endif %}
 {% endblock %}
 
