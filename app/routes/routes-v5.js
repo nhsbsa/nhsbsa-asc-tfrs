@@ -186,22 +186,27 @@ router.post('/v5/add-evidence', function (req, res) {
   var evidence = req.session.data.evidenceFile
   var type = req.session.data.type
   var claimID = req.session.data.id
-  
+  let i = 1
+
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
         if (type=='payment') {
-          c.evidenceOfPayment = evidence
+          c.evidenceOfPayment = 'invoice01.pdf'
         } else if (type=='enrollment') {
+          
           for (const l of c.learners) {
             if (l.id==req.session.data.learnerID) {
-              l.evidence.evidenceOfEnrollment = evidence
+              l.evidence.evidenceOfEnrollment = 'enrollment'+ i + '.pdf'
             }
+            i++
           }
         } else if (type=='completion') {
+          i = 1
           for (const l of c.learners) {
             if (l.id==req.session.data.learnerID) {
-              l.evidence.evidenceOfCompletion = evidence
+              l.evidence.evidenceOfCompletion = 'certficate' + i + '.pdf'
             }
+            i++
           }
         }
         updateClaimStatus(claimID, req.session.data.claims)
