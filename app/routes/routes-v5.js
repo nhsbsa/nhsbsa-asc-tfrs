@@ -120,7 +120,8 @@ router.post('/v5/add-learner', function (req, res) {
           break;
       }
     }
-
+    
+    delete req.session.data.existingLearner
     delete req.session.data.learnerInput;
     delete req.session.data.learnerSelection;
     
@@ -253,16 +254,18 @@ router.post('/v5/submit-claim', function (req, res) {
 router.post('/v5/create-learner', function (req, res) {
   var claimID = req.session.data.id
 
-  const learner = {
-    id: req.session.data.nationalInsuranceNumber,
-    fullName: req.session.data.fullName,
-    jobTitle: req.session.data.jobTitle,
-    roleType: req.session.data.roleType,
-  };
-  req.session.data.learners.push(learner)
+  delete req.session.data.existingLearner
 
   if (req.session.data.inClaim=='true' && !compareNINumbers(req.session.data.nationalInsuranceNumber, req.session.data.learners)){
     
+    const learner = {
+      id: req.session.data.nationalInsuranceNumber,
+      fullName: req.session.data.fullName,
+      jobTitle: req.session.data.jobTitle,
+      roleType: req.session.data.roleType,
+    };
+    req.session.data.learners.push(learner)
+
     learner.evidence = {
       evidenceOfEnrollment: null,
       evidenceOfCompletion: null
@@ -284,6 +287,7 @@ router.post('/v5/create-learner', function (req, res) {
     delete req.session.data.learnerInput
     res.redirect('../claims/prototypes/v5/claim/claim-details'+'?id='+claimID)
   } else{
+    console.log('match')
     delete req.session.data.fullName
     delete req.session.data.jobTitle
     delete req.session.data.regOrg
