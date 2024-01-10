@@ -58,18 +58,31 @@
         <h3 class="govuk-heading-s">
           Tested with users?
         </h3>
-        <p class="govuk-body"></p>
+        <p class="govuk-body">Yes, w/c 8 Jan 2024</p>
         <h3 class="govuk-heading-s">
           What we created
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li></li>
+          <li>improved the start screen to make it make it clear this service isn't for booking training</li>
+          <li>explored further ways to describe the funding pots
+          <li>removed the service name so that users could vote on their preference without being swayed</li>
+          <li>introduced a new claim screen to make it much easier for users to see what claim information they'd alredy added and what was incomplete or missing</li>
+          <li>changed the concept of a 'claim' to relate to a set of learners doing a course on a particular date (rather than a claim only ever being for one learner) which massively shortens the claims list and relates better to users' mental models</li>
+          <li>got the filters working on each tab of the 'manage claims' screen</li>
+          <li>changed the 'insufficient evidence' status backed to 'queried' as this had caused confusion</li>
+          <li>tidied up the data to make it more realistic and got the numbers of claims in each status working dynamically</li>
+          <li>added column sorting and dummy pagination links to the 'manage claims' screen</li>
         </ul>
         <h3 class="govuk-heading-s">
-          What we plan to test
+          We aimed to understand
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li></li>
+          <li>whether the new ways of describing the funding pots worked better for users</li>
+          <li>if the improved way of starting and editing claims was more intuitive and allowed users to understand better the different components that make up a claim</li>
+          <li>if the new definition of a claim works better than every learner on a course needing a separate claim</li>
+          <li>how users would manage claims once they've been added and if they could progress a claim to the point at which it's paid</li>
+          <li>whether the 'ready to submit' claim status is useful or if it could lead to confusion</li>
+          <li>whether users were comfortable with National Insurance numbers being used for the unique learner ID</li>
         </ul>
         <h3 class="govuk-heading-s">
           What we learnt
@@ -96,24 +109,44 @@
         <h3 class="govuk-heading-s">
           Tested with users?
         </h3>
-        <p class="govuk-body"></p>
+        <p class="govuk-body">Yes - w/c 11 December 2023</p>
         <h3 class="govuk-heading-s">
           What we created
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li></li>
+          <li>added large volumes of realistic data on learners, courses and claims</li>
+            <li>introduced much more realistic ways to interact with the data, so that true usability testing could take place</li>
+            <li>changed the way we described the 2 funding pots and removed the references to 'targeted upskilling' and 'CPD'</li>
+            <li>improved the guidance on eligibility</li>
+            <li>created new guidance to provide more information and help on the service</li>
+            <li>replaced the 'claim items' terminology with just 'claims'</li>
+            <li>combined the 2 flows to add a new claim by learner or event into a single flow</li>
+            <li>made use of the GDS 'add a new item' pattern when adding multiple learners to a claim</li>
+            <li>introduced new confirmation pages and emails</li>
+            <li>split the 'add evidence' flow from the 'add claim' flow</li>
         </ul>
         <h3 class="govuk-heading-s">
-          What we plan to test
+          We aimed to understand
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li></li>
+          <li>if we could set clear and realistic expectations about the service from its name and initial guidance</li>
+          <li>whether our new ways of describing the 2 fundings pots made sense to users</li>
+          <li>if the 'start a new claim' workflow is usable, intuitive and not too time consuming when adding multiple learners</li>
+          <li>how to support users to add high quality evidence to claims</li>
+          <li>whether the confirmation screens provide reassurance of what users have done on the system</li>
         </ul>
         <h3 class="govuk-heading-s">
           What we learnt
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li></li>      
+          <li>the descriptions of the 2 funding pots were better received (though 'direct care' isn't specific enough as it also relates to nurses and AHPs)</li>
+          <li>many users incorrectly expected the service to allow them to book the training rather than just claim reimbursement</li>
+          <li>users are much happier thinking about 'claims' rather than 'claim items'</li>
+          <li>the combined 'start a new claim' flow generally worked well, though many users felt there were some unecessary steps (for instance, having to view course and learner details when adding them)</li>
+          <li>users were often unclear what the learner ID referred to and whether it related to their internal systems</li>
+          <li>the confirmation emails were seen as helpful</li>
+          <li>the process of adding evidence was confusing as users were unsure what they needed to upload and when</li>
+          <li>in general, as users went through the flow to start a claim they seemed unsure about how far through the process they were, what happens next and whether their progress had been saved</li>      
         </ul>
       </div>
     </details>
@@ -148,7 +181,7 @@
           <li>introduced the workflows for starting a new claim item, either by learner or event</li>
         </ul>
         <h3 class="govuk-heading-s">
-          What we plan to test
+          We aimed to understand
         </h3>
         <ul class="govuk-list govuk-list--bullet">
           <li>the mental models users have around training and reimbursement</li>
@@ -160,7 +193,15 @@
           What we learnt
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li>Awaiting test</li>      
+          <li>many users instinctively compared our service to their experience of the Workforce Development Fund</li>
+          <li>eligibility is a key concern of users</li>
+            <li>it is important that the language in the service does not reinforce the perception that registered staff are more important than non-registered</li>
+            <li>there was concern around the potential for duplication of claims, especially for learners with the same name</li>
+            <li>no-one had heard of 'targeted upskilling' and the term 'claim items' caused considerable confusion</li>
+            <li>the claim item statuses were well liked and understood</li>
+            <li>the concept of an 'L&D event' was popular, though the terminology was less so</li>
+            <li>the different types of evidence weren't understood, or the reasons they were needed</li>
+            <li>the wording of the button on the check your answers page was confusing as people thought it would add further claims rather than finishing the current one</li>      
         </ul>
       </div>
     </details>
@@ -192,7 +233,7 @@
           <li>added the 'view learner' option</li>      
         </ul>
         <h3 class="govuk-heading-s">
-          What we plan to test
+          We aimed to understand
         </h3>
         <p class="govuk-body">N/A</p>
         <h3 class="govuk-heading-s">
@@ -228,7 +269,7 @@
           <li>introduced filter options including the ability to group claim items by learner or L&D event</li>          
         </ul>
         <h3 class="govuk-heading-s">
-          What we plan to test
+          We aimed to understand
         </h3>
         <p class="govuk-body">N/A</p>
         <h3 class="govuk-heading-s">
