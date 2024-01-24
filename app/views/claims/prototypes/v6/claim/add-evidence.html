@@ -1,0 +1,51 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = null %}
+{% for c in data.claims %}
+  {% if c.claimID == data.id %}
+    {% set claim = c %}
+  {% endif %}
+{% endfor %}
+
+{% if data.type == 'completion' or data.type == 'enrollment'  %}
+    {% set learner = null %}
+    {% for l in data.learners %}
+        {% if l.id == data.learnerID %}
+            {% set learner = l %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+
+
+{% block beforeContent %}
+<a href="claim-details?id={{ claim.claimID }}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="/v6/add-evidence" method="post" novalidate>
+            <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
+            <h1 class="govuk-heading-l">Add evidence of {{ data.type }} {% if data.type == 'completion' or data.type == 'enrollment'  %} for {{ learner.fullName }}{% endif %}</h1>
+            <p class="govuk-body">
+                You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' or data.type == 'enrollment'  %} for {{ learner.fullName }}{% endif %}. This could be a PDF or image file.
+            </p>
+            <p class="govuk-body">
+                If you need to add an email as evidence, save the email as a PDF file and then upload that.
+            </p>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="evidenceFile">
+                Upload a file
+                </label>
+                <input class="govuk-file-upload" id="evidenceFile" name="evidenceFile" type="file">
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Add to claim
+            </button>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

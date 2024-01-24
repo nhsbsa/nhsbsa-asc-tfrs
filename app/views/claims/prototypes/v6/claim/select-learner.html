@@ -1,0 +1,118 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = null %}
+{% for c in data.claims %}
+  {% if c.claimID == data.id %}
+    {% set claim = c %}
+  {% endif %}
+{% endfor %}
+
+{% block beforeContent %}
+<a href="claim-details?id={{ claim.claimID }}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">Select learners</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">Select the members of staff who attended this training.</p>
+        <div class="moj-search govuk-!-padding-bottom-2">
+
+            <form action="select-learner" method="post">
+        
+            <div class="govuk-form-group">
+                <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+                Search for a person
+                </label>
+        
+                <div id="search-hint" class="govuk-hint moj-search__hint ">
+                You can search by a person's name or national insurance number
+                </div>
+        
+                <input class="govuk-input moj-search__input " id="search" name="learnerInput" type="search" aria-describedby="search-hint" value="{{ data['learnerInput'] }}">
+        
+            </div>
+        
+            <button class="govuk-button moj-search__button govuk-button--secondary" data-module="govuk-button">
+                Search
+            </button>
+        
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% if data['learnerInput'] %}
+        <h2 class="govuk-heading-m">Search results</h2>
+                {% set hasResults = false %}
+                {% set addHeader = true %}
+                {% for learner in data['learners'] %}
+                    {% set lowercasedsearch = data['learnerInput'] | lower %}
+                    {% set lowercasedname = learner.fullName | lower %}
+                    {% set formattedSearch = data['learnerInput'] | removeSpacesAndLowerCase %}
+                    {% set formattedID = learner.id | removeSpacesAndLowerCase %}
+                    {% if lowercasedname == lowercasedsearch or learner.id == data['learnerInput'] or lowercasedsearch in lowercasedname or formattedSearch in formattedID %}
+                            {% set hasResults = true %}
+                            {% if addHeader %}
+                                <table class="govuk-table">
+                                    <thead class="govuk-table__head">
+                                    <tr class="govuk-table__row">
+                                        <th scope="col" class="govuk-table__header">National Insurance number</th>
+                                        <th scope="col" class="govuk-table__header">Full name</th>
+                                        <th scope="col" class="govuk-table__header">Job title</th>
+                                        <th scope="col" class="govuk-table__header">Role</th>
+                                        <th scope="col" class="govuk-table__header"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="govuk-table__body">
+                            {% set addHeader = false %}
+                            {% endif %}
+                        <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">{{ learner.id }}</th>
+                        <td class="govuk-table__cell">{{ learner.fullName }}</td>
+                        <td class="govuk-table__cell">{{ learner.jobTitle }}</td>
+                        <td class="govuk-table__cell">{{ learner.roleType }}</td>
+                        <td class="govuk-table__cell">
+                            {% set learnerAdded = false %}
+                            {% for l in claim.learners %}
+                                {% if l.id == learner.id%}
+                                    {% set learnerAdded = true %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if not learnerAdded %}
+                            <form method="post" action="/v6/add-learner" class="govuk-!-margin-0">
+                                <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
+                                <button type="submit" class="govuk-button">Add to claim</button>
+                            </form>
+                            {% else %}
+                            <p class="govuk-body">Already added to claim</p>
+                            {% endif %}
+                        </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+            </tbody>
+        </table>
+        {% if not hasResults %}
+            <form action="../learner/add-learner?inClaim=true" method="post">
+                <p class="govuk-body">
+                    No matches returned for your search: <q>{{ data['learnerInput'] }}"</q>. This may mean they do not exist in the service. Do you want to 
+                    <button class="unstyle-button">add new learner</button>
+                    ?
+                </p>
+            </form>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
