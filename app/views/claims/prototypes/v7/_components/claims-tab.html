@@ -1,0 +1,101 @@
+{% set noClaims = status.id | claimCount(data.claims) %}
+
+<div class="govuk-tabs__panel" id="{{ status.id }}" noClaims="{{ noClaims }}">
+            <div class="govuk-grid-row">
+              <div class="govuk-grid-column-full">
+                <div class="moj-page-header-actions">
+                  <div class="moj-page-header-actions__title">
+                    <h2 class="govuk-heading-l">{{ status.name }} ({{ noClaims }})</h2>
+                      </div>
+                </div>
+                <div class="govuk-grid-row">
+                  <div class="govuk-grid-column-full">
+                    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" id="toggleFilterButton{{ status.id }}" onclick="toggleFilter('{{ status.id }}')">
+                      Show filters
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="govuk-grid-row">
+              <div class="govuk-grid-column-one-third govuk-!-display-none" id="filter{{ status.id }}">
+                {% include "./filter/filter-claims.html" %}
+                </div>
+            <div class="moj-scrollable-pane">
+                <div class="govuk-grid-column-full">
+                    <table class="govuk-table" data-module="moj-sortable-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Claim reference number</th>
+                        <th class="govuk-table__header govuk-!-width-one-third" scope="col" aria-sort="none">Activity name</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Start date</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="none">Learners</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="descending">{{ status.id | variableDate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        {% set loopCounter = 0 %}
+                        {% for claim in data['claims'] %}
+                        {% if claim.status == status.id %}
+                        <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
+                        <td class="govuk-table__header" scope="row"><a class="govuk-link" href="claim/claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
+                        <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                        <td class="govuk-table__cell" data-sort-value="{{ claim.startDate }}">{{ claim.startDate | govukDate("truncate") }}</td>
+                        <td class="govuk-table__cell" data-sort-value="{{claim.learners.length}}">
+                            <details class="govuk-details">
+                            <summary class="govuk-details__summary">
+                                <span class="govuk-details__summary-text">
+                                {{claim.learners.length}} learners
+                                </span>
+                            </summary>
+                            <div class="govuk-details__text">
+                                {% for learner in claim.learners %}
+                                {{learner.fullName}}<br>
+                                {% endfor %}
+                            </div>
+                            </details>
+                        </td>
+                        {% if status.id == 'incomplete' %}
+                        <td class="govuk-table__cell" data-sort-value="{{ claim.createdDate }}">{{ claim.createdDate | govukDate("truncate") }}</td>
+                        {% elif status.id == 'ready-to-submit' %}
+                        <td class="govuk-table__cell" data-sort-value="{{ claim.createdDate }}">{{ claim.createdDate | govukDate("truncate") }}</td>
+                        {% elif status.id == 'submitted' %}
+                        <td class="govuk-table__cell" data-sort-value="{{ claim.submittedDate }}">{{ claim.submittedDate | govukDate("truncate") }}</td>
+                        {% elif status.id == 'insufficient-evidence' %}
+                        <td class="govuk-table__cell" data-sort-value="{{ claim.submittedDate }}">{{ claim.submittedDate | govukDate("truncate") }}</td>
+                        {% elif status.id == 'paid' %}
+                        <td class="govuk-table__cell" data-sort-value="{{ claim.paidDate }}">{{ claim.paidDate | govukDate("truncate") }}</td>
+                        {% endif %}
+                        </tr>
+                        {% set loopCounter = loopCounter + 1 %}
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                    <nav class="moj-pagination" aria-label="Pagination navigation">
+            
+                        <ul class="moj-pagination__list">
+                        
+
+                    
+                        <li class="moj-pagination__item moj-pagination__item--active" aria-label="Page 1 of 30" aria-current="page">1</li>
+
+                        <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 2 of 30">2</a></li>
+                    
+                        <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 3 of 30">3</a></li>
+                    
+                        <li class="moj-pagination__item moj-pagination__item--dots">…</li>
+                    
+                        <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 5 of 30">{{ noClaims | pageCount(data.filters.perPage | default (10)) }}</a></li>
+
+                    
+                        <li class="moj-pagination__item  moj-pagination__item--next">
+                            <a class="moj-pagination__link" href="">Next<span class="govuk-visually-hidden"> page</span></a>
+                        </li>
+                        </ul>
+                        <p class="moj-pagination__results">Showing <b>1</b> to <b>10</b> of <b>{{ noClaims }}</b> claims</p>
+                    </nav> 
+                </div>         
+            </div>
+            </div>
+</div>
