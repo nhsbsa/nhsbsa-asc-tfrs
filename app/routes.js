@@ -12,6 +12,8 @@ const { generateLearners } = require('./scripts/generate-learners.js');
 router.use('/', require('./routes/routes-v3.js'))
 router.use('/', require('./routes/routes-v4.js'))
 router.use('/', require('./routes/routes-v5.js'))
+router.use('/', require('./routes/routes-v6.js'))
+router.use('/', require('./routes/routes-v7.js'))
 
 // Add your routes here
 
