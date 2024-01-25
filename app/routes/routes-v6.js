@@ -389,7 +389,7 @@ function loadData(req) {
 router.get('/v6/load-data', function (req, res) {
     //Load data from JSON files
     loadData(req);
-    res.redirect('../claims/prototypes/v6/before-you-start.html')
+    res.redirect('../claims/prototypes/v6/sign-in')
   })
 
 
