@@ -6,8 +6,22 @@ const { updateClaimStatus, checkClaim, compareNINumbers } = require('../scripts/
 
 // v6 Prototype routes
 
-router.post('/v6/new-claim-reset', function (req, res) {
-  
+router.post('/v6/first-start', function (req, res) {
+
+  // Make a variable and give it the value from 'startingpoint'
+  var claimGuidance = req.session.data['claimGuidance']
+
+  // Check whether the variable matches a condition
+  if (claimGuidance == "yes"){
+
+    res.redirect('../claims/prototypes/v6/guidance/help-start-claim')
+  } else if (claimGuidance == "no") {
+    newClaim(req, res)
+  }
+
+})
+
+function newClaim(req, res) {
   const d = new Date();
   const dStr = d.toISOString();
 
@@ -50,6 +64,10 @@ router.post('/v6/new-claim-reset', function (req, res) {
   delete req.session.data['selectedClaimsConfirmed'];
 
   res.redirect('../claims/prototypes/v6/claim/claim-details'+'?id='+claim.claimID)
+}
+
+router.post('/v6/new-claim-reset', function (req, res) {
+  newClaim(req, res)
 });
 
 router.post('/v6/add-training', function (req, res) {
