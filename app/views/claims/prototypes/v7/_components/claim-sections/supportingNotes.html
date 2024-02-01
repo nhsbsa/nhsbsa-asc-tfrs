@@ -1,0 +1,25 @@
+<h2 class="govuk-heading-m" id="notes">Supporting notes</h2>
+{% if claim.notes.length === 0 and (claim.status == "new" or claim.status == "not-yet-submitted") %}
+<p class="govuk-body">Add notes that might help NHS BSA staff when proccessing your claim.</p>
+<p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Add note</a></p>
+{% elif claim.notes.length === 0 and not (claim.status == "new" or claim.status == "not-yet-submitted") %}
+<p class="govuk-body">No supporting notes added to claim before submission.</p>
+{% else %}
+<dl class="govuk-summary-list">
+    {% for n in claim.notes %}
+    <div class="govuk-summary-list__row">
+        <dd class="govuk-summary-list__value">
+        {{ n }}
+        </dd>
+        {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+        <dd class="govuk-summary-list__actions">
+        <a class="govuk-link govuk-link--no-visited-state" href="delete-note">Delete</a>
+        </dd>
+        {% endif %}
+    </div>
+    {% endfor %}
+    </dl>
+    {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Add another note</a></p>
+    {% endif %}
+{% endif %}

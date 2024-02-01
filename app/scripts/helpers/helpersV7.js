@@ -1,29 +1,30 @@
 function checkClaim(claim) {
     let check = false
-            if ( claim.learners.length>0 &&
-                claim.startDate != null && 
-                claim.costPerLearner != null && 
+            if ( claim.type == "TU" &&
+                claim.learners.length>0 &&
+                claim.startDate != null &&
+                claim.training != null && 
+                claim.costDate != null && 
                 claim.evidenceOfPayment != null && 
                 claim.learners.every(learner => learner.evidence.evidenceOfCompletion != null) && 
                 ( claim.learners.every(learner => learner.evidence.evidenceOfEnrollment != null) || claim.training.fundingModel == "full") )
                 {
                     check = true
+            } else if (
+                claim.type == "CPD" &&
+                claim.learners.length>0 &&
+                ((claim.startDate != null && claim.learners.every(learner => learner.evidence.evidenceOfCompletion != null)) || claim.categoryName != "Courses" ) && 
+                claim.claimAmount != null && 
+                claim.description != null && 
+                claim.evidenceOfPayment != null && 
+                claim.costDate != null
+            )
+            {
+                check = true
             }
             return check
 }
 
-function updateClaimStatus(claimID, claims) {
-    for (const claim of claims) {
-        if (claimID == claim.claimID) {
-            if (checkClaim(claim))
-                {
-                    console.log('update claim')
-                    claim.status = 'ready-to-submit'
-            }
-            break;
-        }
-      }
-}
 
 function removeSpacesAndLowerCase(input) {
 
@@ -49,4 +50,4 @@ function compareNINumbers(ni_1,learners) {
     return check
 }
 
-module.exports = { updateClaimStatus, checkClaim, compareNINumbers, removeSpacesAndLowerCase }
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase }

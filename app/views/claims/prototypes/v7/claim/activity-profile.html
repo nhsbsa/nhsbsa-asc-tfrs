@@ -1,10 +1,13 @@
 {% extends "../layouts/claims-main.html" %}
 {% set training = null %}
-{% for t in data.training %}
-  {% if t.code == data.trainingSelection %}
-    {% set training = t %}
-  {% endif %}
+{% for trainingGroup in data.training %}
+  {% for t in trainingGroup.courses %}
+    {% if t.code == data.trainingSelection %}
+      {% set training = t %}
+    {% endif %}
+  {% endfor %}
 {% endfor %}
+
 {% set claim = null %}
 {% for c in data.claims %}
   {% if c.claimID == data.id %}
@@ -30,19 +33,30 @@
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Name
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ training.title }}
-              </dd>
-            </div><div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
                 Code
               </dt>
               <dd class="govuk-summary-list__value">
                 {{ training.code }}
               </dd>
             </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Name
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <a class="govuk-link" href="{{ training.link }}">{{ training.title }}</a>
+              </dd>
+            </div>
+            {% if training.description %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Description
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ training.description }}
+              </dd>
+            </div>
+            {% endif %}
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Type
@@ -61,14 +75,6 @@
               </div>
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Description
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ training.description }}
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
                 Awarding organisation
               </dt>
               <dd class="govuk-summary-list__value">
@@ -85,7 +91,7 @@
             </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                  Reimbursement amount
+                  Maximum reimbursement amount per learner
                 </dt>
                 <dd class="govuk-summary-list__value">
                   £{{ training.reimbursementAmount }}

@@ -2,30 +2,57 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { updateClaimStatus, checkClaim, compareNINumbers } = require('../scripts/helpers.js');
+const { checkClaim, compareNINumbers } = require('../scripts/helpers/helpersV7.js');
 
 // v7 Prototype routes
 
 router.post('/v7/new-claim-reset', function (req, res) {
-  
+  const claimType = req.session.data.claimType
+  const categoryName =  req.session.data.activityType
+  let claim = {};
   const d = new Date();
   const dStr = d.toISOString();
 
   faker.seed(req.session.data.claims.length+1);
-  const claim = {
-    claimID: faker.finance.accountNumber(6),
-    learners: [],
-    training: null,
-    startDate: null,
-    status: "new",
-    createdDate: dStr,
-    createdBy: "Test Participant",
-    submittedDate: null,
-    paidDate: null,
-    costPerLearner: null,
-    evidenceOfPayment: null,
-    notes: []
-  };
+
+  if (claimType == "TU") {
+    claim = {
+      claimID: faker.finance.accountNumber(6),
+      type: "TU",
+      learners: [],
+      training: null,
+      startDate: null,
+      status: "new",
+      createdDate: dStr,
+      createdBy: "Test Participant",
+      submittedDate: null,
+      paidDate: null,
+      costDate: null,
+      evidenceOfPayment: null,
+      notes: []
+    };
+  } else if (claimType == "CPD") {
+    claim = {
+      claimID: faker.finance.accountNumber(6),
+      type: "CPD",
+      learners: [],
+      categoryName,
+      description: null,
+      startDate: null,
+      status: "new",
+      createdDate: dStr,
+      createdBy: "Test Participant",
+      submittedDate: null,
+      paidDate: null,
+      costDate: null,
+      claimAmount: null,
+      evidenceOfPayment: null,
+      notes: []
+    };
+
+  }
+
+  
   req.session.data.claims.push(claim)
   //reset seed
   faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
@@ -48,6 +75,7 @@ router.post('/v7/new-claim-reset', function (req, res) {
   delete req.session.data['evidenceFile'];
   delete req.session.data['selectedClaims'];
   delete req.session.data['selectedClaimsConfirmed'];
+  delete req.session.data['activityType'];
 
   res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claim.claimID)
 });
@@ -56,25 +84,25 @@ router.post('/v7/add-training', function (req, res) {
     var trainingCode = req.session.data.trainingSelection
     var claimID = req.session.data.id
     
-    for (const t of req.session.data.training) {
+    for (const trainingGroup of req.session.data.training) {
+      for (const t of trainingGroup.courses) {
         if (trainingCode == t.code) {
-            var trainingChoice = t
+          var trainingChoice = t
         }
+      }
     }
 
     for (const c of req.session.data.claims) {
       if (claimID == c.claimID) {
           c.training = trainingChoice
-          updateClaimStatus(claimID, req.session.data.claims)
+          
       }
     }
 
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
 
-    
-
-    res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID)
+    res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#training')
 });
 
 router.post('/v7/create-date', function (req, res) {
@@ -86,7 +114,7 @@ router.post('/v7/create-date', function (req, res) {
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
         c.startDate = year+"-"+month+"-"+day+"T00:00:00.000Z"
-        updateClaimStatus(claimID, req.session.data.claims)
+        
     }
   }
 
@@ -94,7 +122,60 @@ router.post('/v7/create-date', function (req, res) {
   delete req.session.data['activity-date-started-month'];
   delete req.session.data['activity-date-started-year'];
   
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID)
+  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#training')
+});
+
+router.post('/v7/add-description', function (req, res) {
+  var description = req.session.data.description
+  var claimID = req.session.data.id
+  
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        c.description = description
+        break;
+    }
+  }
+
+  delete req.session.data.description;
+
+  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#activity')
+});
+
+router.post('/v7/add-cost', function (req, res) {
+  var cost = req.session.data.cost
+  var claimID = req.session.data.id
+  
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        c.claimAmount = cost
+        
+        console.log(JSON.stringify(c, null, 2))
+        break;
+    }
+  }
+  delete req.session.data.cost;
+
+  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#activity')
+});
+
+router.post('/v7/cost-date', function (req, res) {
+  var day = req.session.data['payment-date-started-day']
+  var month = req.session.data['payment-date-started-month']
+  var year = req.session.data['payment-date-started-year']
+  var claimID = req.session.data.id
+  
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        c.costDate = year+"-"+month+"-"+day+"T00:00:00.000Z"
+        
+    }
+  }
+
+  delete req.session.data['payment-date-started-day'];
+  delete req.session.data['payment-date-started-month'];
+  delete req.session.data['payment-date-started-year'];
+  
+  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#payment')
 });
 
 router.post('/v7/add-learner', function (req, res) {
@@ -116,7 +197,7 @@ router.post('/v7/add-learner', function (req, res) {
     for (const c of req.session.data.claims) {
       if (claimID == c.claimID) {
           c.learners.push(learner)
-          updateClaimStatus(claimID, req.session.data.claims)
+          
           break;
       }
     }
@@ -125,7 +206,7 @@ router.post('/v7/add-learner', function (req, res) {
     delete req.session.data.learnerInput;
     delete req.session.data.learnerSelection;
     
-    res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID)
+    res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#learners')
 });
 
 router.post('/v7/remove-learner', function (req, res) {
@@ -145,25 +226,7 @@ router.post('/v7/remove-learner', function (req, res) {
         break;
     }
   }
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID)
-});
-
-
-router.post('/v7/add-cost', function (req, res) {
-  var cost = req.session.data.cost
-  var claimID = req.session.data.id
-  
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-        c.costPerLearner = cost
-        updateClaimStatus(claimID, req.session.data.claims)
-        break;
-    }
-  }
-
-  delete req.session.data.cost;
-
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID)
+  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#learners')
 });
 
 router.post('/v7/add-note', function (req, res) {
@@ -179,7 +242,7 @@ router.post('/v7/add-note', function (req, res) {
 
   delete req.session.data.note;
 
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID)
+  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#notes')
 });
 
 router.post('/v7/add-evidence', function (req, res) {
@@ -209,7 +272,7 @@ router.post('/v7/add-evidence', function (req, res) {
             i++
           }
         }
-        updateClaimStatus(claimID, req.session.data.claims)
+        
         break;
     }
   }
@@ -218,7 +281,7 @@ router.post('/v7/add-evidence', function (req, res) {
   delete req.session.data.type;
   delete req.session.data.learnerID;
 
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID)
+  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#'+type)
 
 })
 
@@ -227,8 +290,8 @@ router.post('/v7/save-claim', function (req, res) {
   
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
-      c.status = 'incomplete'
-      updateClaimStatus(claimID, req.session.data.claims)
+      c.status = 'not-yet-submitted'
+      
       break;
     }
   }
@@ -341,6 +404,7 @@ function loadData(req) {
     var claimsFile = 'claims.json'
     var statusFile = 'claim-item-statuses.json'
     var roleTypes = 'role-types.json'
+    var CPDActivities = 'cpd-activities.json'
   
     if (req.session.data.training) {
       console.log('training file already loaded')
@@ -381,6 +445,14 @@ function loadData(req) {
       req.session.data['roleTypes'] = loadJSONFromFile(roleTypes, path)
       console.log('role types file loaded')
     }
+
+    if (req.session.data.CPDActivities) {
+      console.log('CPDActivities file already loaded')
+    } else {
+      console.log('loading in CPDActivities file')
+      req.session.data['CPDActivities'] = loadJSONFromFile(CPDActivities, path)
+      console.log('CPDActivities file loaded')
+    }
   
     return console.log('data updated')
   }
@@ -390,7 +462,7 @@ router.get('/v7/load-data', function (req, res) {
     //Load data from JSON files
     loadData(req);
     res.redirect('../claims/prototypes/v7/before-you-start.html')
-  })
+})
 
 
 module.exports = router

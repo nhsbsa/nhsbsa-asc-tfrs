@@ -4,10 +4,10 @@
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="#">Home</a>
+      <a class="govuk-breadcrumbs__link" href="home">Home</a>
     </li>
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="manage-claims">Manage claims (non-registered professionals)</a>
+      <a class="govuk-breadcrumbs__link" href="manage-claims?claimType=TU">Manage claims ({{ data.claimType | potName }})</a>
     </li>
   </ol>
 </div>
@@ -18,21 +18,57 @@
   <div class="govuk-grid-column-full">
     <div class="moj-page-header-actions">
         <div class="moj-page-header-actions__title">
-          <span class="govuk-caption-xl">Non-registered professionals</span>
+          <span class="govuk-caption-xl">{{ data.claimType | potName }}</span>
           <h1 class="govuk-heading-xl">Manage claims</h1>
         </div>
         <div class="moj-page-header-actions__actions">
           <div class="moj-button-menu">
             <div class="moj-button-menu__wrapper">  
-            <form method="post" action="/v7/new-claim-reset" class="govuk-!-margin-0">
-                <button class="govuk-button moj-button-menu__item govuk-button--primary moj-page-header-actions__action" data-module="govuk-button" type="submit">Start a new claim</button>
-            </form>
+              <form method="post" action="{{ data.claimType | newClaimLink }}" class="govuk-!-margin-0">
+                  <button class="govuk-button moj-button-menu__item govuk-button--primary moj-page-header-actions__action" data-module="govuk-button" type="submit">Start a new claim</button>
+              </form>
             </div>
           </div>
         </div>
-    </div>  
+    </div>
+    
   </div>
 </div>
+
+<div class="govuk-grid-row govuk-!-margin-bottom-5">
+  <div class="govuk-grid-column-two-thirds">
+    <div class="moj-search">
+
+      <form action="search-results" method="post">
+
+        <div class="govuk-form-group">
+          <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+            Find a claim
+          </label>
+
+          <div id="search-hint" class="govuk-hint moj-search__hint ">
+            {% if data.claimType == "TU" %}
+              You can search by claim reference, training or learner
+            {% elif data.claimType == "CPD" %}
+              You can search by claim reference, activity or learner
+            {% endif %}
+            
+          </div>
+
+          <input class="govuk-input moj-search__input " id="search" name="search" type="search" aria-describedby="search-hint">
+
+        </div>
+
+        <button type="submit" class="govuk-button moj-search__button govuk-button--secondary" data-module="govuk-button">
+          Search
+        </button>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
   
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
@@ -41,17 +77,17 @@
             Contents
           </h2>
           <ul class="govuk-tabs__list">
-            {% for status in data['statuses'] %}
+            {% for status in data.statuses %}
             <li class="govuk-tabs__list-item">
               <a class="govuk-tabs__tab" href="#{{ status.id }}">
-                {{ status.name }} ({{ status.id | claimCount(data.claims) }})
+                {{ status.name }} ({{ status.id | claimCountV7(data.claims, data.claimType) }})
               </a>
             </li>
             {% endfor %}
           </ul>
-          {% for status in data['statuses'] %}
           <!--Tabs-->
-          {% include "./_components/claims-tab.html" %}
+          {% for status in data['statuses'] %}
+            {% include "./_components/claims-tab.html" %}
           {% endfor %}
       </div>
     </div>
@@ -59,8 +95,3 @@
 
 {% endblock %}
 
-{% block pageScripts %}
-<script type="text/javascript" src="/public/javascripts/jquery-3.7.1.js"></script>
-<script type="text/javascript" src="/public/javascripts/v7/filter.js"></script>
-<!--<script type="text/javascript" src="/public/javascripts/v7/claimsTables.js"></script>-->
-{% endblock %}

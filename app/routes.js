@@ -19,7 +19,7 @@ router.use('/', require('./routes/routes-v7.js'))
 
 router.use((req, res, next) => {
   // Define keys to exclude from logging
-  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes'];
+  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes', 'CPDActivities'];
 
   // Create a copy of req.session.data with excluded keys removed
   const filteredData = Object.keys(req.session.data)
@@ -45,8 +45,8 @@ router.get('/getLocalData', (req, res) => {
 
 //generate data
 router.get('/generate', function (req, res) {
-  generateLearners(50, 'v5');
-  generateClaims(200, 'v5');
+  generateLearners(50, 'v7');
+  generateClaims(200, 'v7');
   res.redirect('../')
 })
 

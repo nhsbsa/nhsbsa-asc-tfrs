@@ -1,0 +1,75 @@
+<h2 class="govuk-heading-m" id="activity">Activity</h2>
+<dl class="govuk-summary-list">
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Type
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ claim.categoryName }}<br>
+      </dd>
+    </div>
+
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Description
+        </dt>
+        {% if not claim.description %}
+        <dd class="govuk-summary-list__value">
+          <a class="govuk-link govuk-link--no-visited-state" href="add-description">Add description</a>
+        </dd>
+        {% else %}
+        <dd class="govuk-summary-list__value">
+          {{ claim.description }}
+        </dd>
+        {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link govuk-link--no-visited-state" href="add-description">Change<span class="govuk-visually-hidden"> activity description</span></a>
+        </dd>
+        {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key" >
+        Cost
+      </dt>
+      {% if not claim.claimAmount %}
+      <dd class="govuk-summary-list__value">
+        <a class="govuk-link govuk-link--no-visited-state" href="add-claim-amount">Add cost</a>
+      </dd>
+      {% else %}
+      <dd class="govuk-summary-list__value">
+        £{{ claim.claimAmount }}
+      </dd>
+      {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link govuk-link--no-visited-state" href="add-claim-amount">Change<span class="govuk-visually-hidden"> claim amount</span></a>
+      </dd>
+      {% endif %}
+      {% endif %}
+    </div>
+
+    {% if claim.categoryName == "Courses" %}
+        <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Start date
+        </dt>
+        {% if not claim.startDate %}
+        <dd class="govuk-summary-list__value">
+            <a class="govuk-link govuk-link--no-visited-state" href="start-date">Add start date</a>
+        </dd>
+        {% else %}
+        <dd class="govuk-summary-list__value">
+            {{ claim.startDate | govukDate }}
+        </dd>
+        {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+        <dd class="govuk-summary-list__actions">
+            <a class="govuk-link govuk-link--no-visited-state" href="start-date">Change<span class="govuk-visually-hidden"> activity start date</span></a>
+        </dd>
+        {% endif %}
+        {% endif %}
+        </div>
+    {% endif %}
+
+</dl>

@@ -1,0 +1,33 @@
+<h2 class="govuk-heading-m" id="enrollment">Evidence of Enrollment</h2>
+<dl class="govuk-summary-list">
+    {% if claim.learners.length === 0 %}
+    <p class="govuk-body">Once you add learners you will be able to start adding evidence of enrollment for each learner. </p>
+    {% else %}
+    {% set counter = 1 %}
+    {% for l in claim.learners %}
+    <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__value">
+        {{ l.fullName }}<br> {{ l.id }}
+    </dt>
+    {% if l.evidence.evidenceOfEnrollment == null %}
+    <dd class="govuk-summary-list__value">
+        <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{ l.id }}">Add evidence</a>
+    </dd>
+    {% else %}
+    <dd class="govuk-summary-list__value">
+        {{ l.evidence.evidenceOfEnrollment }}
+    </dd>
+    {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+    <dd class="govuk-summary-list__actions">
+        <ul class="govuk-summary-list__actions-list">
+        <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="#">View<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullName }}</span></a></li>
+        <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="#">Change<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullName }}</span></a></li>
+        </ul>
+    </dd>
+    {% endif %}
+    {% endif %}
+    </div>
+    {% set counter = counter + 1 %}
+    {% endfor %}
+    {% endif %}
+</dl>

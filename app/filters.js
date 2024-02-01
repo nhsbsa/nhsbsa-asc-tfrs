@@ -5,6 +5,8 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
+const { removeSpacesAndLowerCase } = require('./scripts/helpers.js');
+
 const fs = require('fs');
 
 // Add your filters here
@@ -33,10 +35,44 @@ addFilter('statusTag', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
+addFilter('statusTagV7', function (statusID, statuses) {
+    var statusName = null
+    for (const s of statuses) {
+        if (s.id == statusID) {
+            statusName = s.name
+        }
+    }
+    if (statusID == 'new') {
+        return '<strong class="govuk-tag govuk-tag--turquoise">New</strong>'
+    } else if (statusID == 'not-yet-submitted') {
+        return '<strong class="govuk-tag govuk-tag--blue">'+statusName+'</strong>'
+    } else if (statusID == 'submitted') {
+        return '<strong class="govuk-tag govuk-tag--pink">'+statusName+'</strong>'
+    } else if (statusID == 'queried') {
+        return '<strong class="govuk-tag govuk-tag--red">'+statusName+'</strong>'
+    } else if (statusID == 'approved') {
+        return '<strong class="govuk-tag govuk-tag--green">'+statusName+'</strong>'
+    } else if (statusID == 'paid') {
+        return '<strong class="govuk-tag govuk-tag--purple">'+statusName+'</strong>'
+    } else {
+        return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
+    }
+}, { renderAsHtml: true })
+
 addFilter('claimCount', function (statusID, claims) {
     let i = 0
     for (const c of claims) {
         if (c.status == statusID) {
+            i++
+        }
+    }
+    return i
+})
+
+addFilter('claimCountV7', function (statusID, claims, claimType) {
+    let i = 0
+    for (const c of claims) {
+        if (c.status == statusID && c.type == claimType) {
             i++
         }
     }
@@ -112,6 +148,23 @@ addFilter('variableDate', function (statusID) {
 
 })
 
+addFilter('variableDateV7', function (statusID) {
+    if (statusID == 'not-yet-submitted') {
+        return 'Created'
+    } else if (statusID == 'submitted') {
+        return 'Submitted'
+    } else if (statusID == 'queried') {
+        return 'Queried'
+    } else if (statusID == 'approved') {
+        return 'Approved'
+    } else if (statusID == 'paid') {
+        return 'Paid'
+    } else {
+        return 'Created'
+    }
+
+})
+
 addFilter('variableDateType', function (statusID) {
     if (statusID == 'incomplete') {
         return 'createdDate'
@@ -131,13 +184,10 @@ addFilter('variableDateType', function (statusID) {
 
 addFilter('removeSpacesAndLowerCase', function (inputString) {
 
-    // Remove spaces using regular expression
-    let stringWithoutSpaces = inputString.replace(/\s/g, '');
-
     // Convert the string to lowercase
-    let lowercaseString = stringWithoutSpaces.toLowerCase();
+    let outputString = removeSpacesAndLowerCase(inputString);
 
-    return lowercaseString;
+    return outputString;
 
 })
 
@@ -151,3 +201,98 @@ addFilter('randomizeOrder', function (array) {
 
   return array;
 })
+
+addFilter('claimMatch', function (claim, search, claimType) {
+    let check = false;
+
+    const formattedSearch = removeSpacesAndLowerCase(search);
+    
+    if (claimType == "TU" && claim.type == "TU") {
+        if (claim.claimID != null) {
+            const formattedClaimID = removeSpacesAndLowerCase(claim.ClaimID);
+            if (formattedClaimID.includes(formattedSearch)){
+                check = true
+            }
+        }
+    
+        if (claim.training != null) {
+            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
+            if (formattedActivity.includes(formattedSearch)){
+                check = true
+            }
+        }
+        if (claim.learners != null) {
+            for (const l of claim.learners) {
+                const formattedName = removeSpacesAndLowerCase(l.fullName);
+                if (formattedName.includes(formattedSearch)){
+                    check = true
+                }
+            }
+        }
+    } else if (claimType == "CPD" && claim.type == "CPD") {
+        if (claim.claimID != null) {
+            const formattedClaimID = removeSpacesAndLowerCase(claim.ClaimID);
+            if (formattedClaimID.includes(formattedSearch)){
+                check = true
+            }
+        }
+    
+        if (claim.categoryName != null) {
+            const formattedActivity = removeSpacesAndLowerCase(claim.categoryName);
+            if (formattedActivity.includes(formattedSearch)){
+                check = true
+            }
+        }
+        if (claim.learners != null) {
+            for (const l of claim.learners) {
+                const formattedName = removeSpacesAndLowerCase(l.fullName);
+                if (formattedName.includes(formattedSearch)){
+                    check = true
+                }
+            }
+        }
+
+    }
+    
+    return check;
+})
+
+addFilter('potName', function (type) {
+    let potName = "Pot Naming Error"
+    if (type=="TU") {
+       potName = "Care skills funding"
+    } else if (type=="CPD") {
+        potName = "Revalidation funding"
+    }
+
+    return potName
+
+})
+
+addFilter('newClaimLink', function (type) {
+    let claimLink = "#"
+    if (type=="TU") {
+        claimLink = "/v7/new-claim-reset"
+    } else if (type=="CPD") {
+        claimLink = "claim/select-activity-type"
+    }
+
+    return claimLink
+
+})
+
+addFilter('checkEligible', function (learner, type, roleTypes) {
+    let eligibleRoles = []
+
+    if (type=="TU") {
+        const eligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
+    } else if (type=="CPD") {
+        const eligibleRoles = roleTypes.filter(role => role.eligibility.isCPDeligible).map(role => role.rolename);
+
+    }
+
+    return eligibleRoles.includes(learner.roleType)
+
+})
+
+
