@@ -1,5 +1,9 @@
 {% extends "./layouts/claims-main.html" %}
 
+{% block pageTitle %}
+    {{ ["Manage claims - ", (data.claimType | potName)] | join }}
+{% endblock %}
+
 {% block beforeContent %}
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">

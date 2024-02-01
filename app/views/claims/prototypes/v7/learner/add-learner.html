@@ -6,6 +6,11 @@
   {% endif %}
 {% endfor %}
 
+{% block pageTitle %}
+    {{ ["Add new learner - ", serviceName] | join }}
+{% endblock %}
+
+
 {% block beforeContent %}
 <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 {% endblock %}

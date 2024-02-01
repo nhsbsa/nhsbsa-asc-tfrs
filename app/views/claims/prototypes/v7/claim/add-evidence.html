@@ -15,6 +15,9 @@
     {% endfor %}
 {% endif %}
 
+{% block pageTitle %}
+    {{ ["Add evidence  - Claim: ", claim.claimID] | join }}
+{% endblock %}
 
 
 {% block beforeContent %}
@@ -44,6 +47,11 @@
             </button>
         </form>
     </div>
+    <div class="govuk-grid-column-one-third">        
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        <h2 class="govuk-heading-m">Related content</h2>
+        <p class="govuk-body"><a href="#" class="govuk-link">Find out more about evidence requirements</a></p>
+      </div>
 </div>
 
 

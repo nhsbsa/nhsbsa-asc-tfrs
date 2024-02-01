@@ -6,6 +6,10 @@
   {% endif %}
 {% endfor %}
 
+{% block pageTitle %}
+    {{ ["Add start date - Claim: ", claim.claimID] | join }}
+{% endblock %}
+
 {% block beforeContent %}
 <a href="claim-details?id={{ claim.claimID }}" class="govuk-back-link">Back</a>
 {% endblock %}

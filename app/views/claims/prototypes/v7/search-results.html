@@ -7,6 +7,10 @@
     {% endif %}
 {% endfor %}
 
+{% block pageTitle %}
+    {{ ["Search results - ", (data.claimType | potName)] | join }}
+{% endblock %}
+
 
 {% block beforeContent %}
 <a href="manage-claims" class="govuk-back-link">Back</a>

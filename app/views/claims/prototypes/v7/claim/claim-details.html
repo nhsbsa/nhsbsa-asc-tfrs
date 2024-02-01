@@ -6,6 +6,10 @@
   {% endif %}
 {% endfor %}
 
+{% block pageTitle %}
+    {{ ["Claim: ", claim.claimID, " - ", (data.claimType | potName)] | join }}
+{% endblock %}
+
 {% block beforeContent %}
 {% if claim.status != 'new' %}
 <a href="../manage-claims#{{ claim.status }}" class="govuk-back-link">Back</a>
@@ -15,9 +19,11 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      {% if data.submitError %}
+      {% include "../_components/claim-sections/errorCatch.html" %}
+      {% endif %}
       <span class="govuk-caption-l">{{ data.claimType | potName }}</span>
-      {{ claim.status | statusTagV7(data.statuses) }}
-      <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}</h1>
+      <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | statusTagV7(data.statuses) }}</h1>
     </div>
 </div>
 <div class="govuk-grid-row">

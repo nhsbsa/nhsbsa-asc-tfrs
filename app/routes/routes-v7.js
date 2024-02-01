@@ -296,6 +296,7 @@ router.post('/v7/save-claim', function (req, res) {
     }
   }
   delete req.session.data.id
+  delete req.session.data.submitError
   res.redirect('../claims/prototypes/v7/manage-claims')
 
 });
@@ -310,9 +311,10 @@ router.post('/v7/submit-claim', function (req, res) {
       if (checkClaim(c)) {
         c.status = 'submitted'
         c.submittedDate = dStr
+        delete req.session.data.submitError
         res.redirect('../claims/prototypes/v7/claim/confirmation')
       } else {
-        res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID)
+        res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'&submitError=true')
       }
     }
   }

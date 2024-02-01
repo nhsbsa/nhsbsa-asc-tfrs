@@ -2,7 +2,7 @@
 {% set addHeader = true %}
     {% set loopCounter = 0 %}
     {% for claim in data['claims'] %}
-    {% if claim.status == status.id and claim.type == data.claimType %}
+    {% if claim.status == status.id and claim.type == data.claimType and (loopCounter < 10) %}
     {% set hasResults = true %}
     {% if addHeader %}
     <table class="govuk-table" data-module="moj-sortable-table">

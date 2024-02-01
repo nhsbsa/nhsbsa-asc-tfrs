@@ -1,5 +1,9 @@
 {% extends "../layouts/claims-main.html" %}
 
+{% block pageTitle %}
+    {{ ["Claim submitted - Claim: ", data.id] | join }}
+{% endblock %}
+
 {% block content %}
 
 <div class="govuk-grid-row">

@@ -6,6 +6,10 @@
   {% endif %}
 {% endfor %}
 
+{% block pageTitle %}
+    {{ ["Select learner - Claim: ", claim.claimID] | join }}
+{% endblock %}
+
 {% block beforeContent %}
 <a href="claim-details?id={{ claim.claimID }}" class="govuk-back-link">Back</a>
 {% endblock %}
@@ -59,7 +63,8 @@
                     {% set lowercasedname = learner.fullName | lower %}
                     {% set formattedSearch = data['learnerInput'] | removeSpacesAndLowerCase %}
                     {% set formattedID = learner.id | removeSpacesAndLowerCase %}
-                    {% if lowercasedname == lowercasedsearch or learner.id == data['learnerInput'] or lowercasedsearch in lowercasedname or formattedSearch in formattedID %}
+                    {% set eligibleCheck = learner | checkEligible(data.claimType, data.roleTypes) %}
+                    {% if (lowercasedname == lowercasedsearch or learner.id == data['learnerInput'] or lowercasedsearch in lowercasedname or formattedSearch in formattedID) and eligibleCheck %}
                             {% set hasResults = true %}
                             {% if addHeader %}
                                 <table class="govuk-table">
@@ -69,6 +74,9 @@
                                         <th scope="col" class="govuk-table__header">Full name</th>
                                         <th scope="col" class="govuk-table__header">Job title</th>
                                         <th scope="col" class="govuk-table__header">Role</th>
+                                        {% if data.claimType == "CPD" %}
+                                        <th scope="col" class="govuk-table__header govuk-table__header--numeric">Budget remaining</th>
+                                        {% endif %}
                                         <th scope="col" class="govuk-table__header"></th>
                                     </tr>
                                     </thead>
@@ -80,6 +88,9 @@
                         <td class="govuk-table__cell">{{ learner.fullName }}</td>
                         <td class="govuk-table__cell">{{ learner.jobTitle }}</td>
                         <td class="govuk-table__cell">{{ learner.roleType }}</td>
+                        {% if data.claimType == "CPD" %}
+                            <th scope="col" class="govuk-table__cell govuk-table__cell--numeric">£400</th>
+                        {% endif %}
                         <td class="govuk-table__cell">
                             {% set learnerAdded = false %}
                             {% for l in claim.learners %}
@@ -87,7 +98,6 @@
                                     {% set learnerAdded = true %}
                                 {% endif %}
                             {% endfor %}
-                            {% set eligibleCheck = learner | checkEligible(data.claimType, data.roleTypes) %}
                             {% if not learnerAdded and eligibleCheck %}
                             <form method="post" action="/v7/add-learner" class="govuk-!-margin-0">
                                 <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
@@ -110,7 +120,7 @@
                 </tbody>
             </table>
             <form action="../learner/add-learner?inClaim=true" method="post">
-                <p class="govuk-body">If you can't find the member of staff this may mean they do not exist in the service.</p>
+                <p class="govuk-body">If you can't find the member of staff this may mean they do not exist in the service or they are not eligible for this funding pot.</p>
                 <button class="govuk-button govuk-button--secondary">Add new learner</button>
             </form>
         {% else %}
@@ -118,7 +128,7 @@
                 <p class="govuk-body">
                     No matches returned for your search: <q>{{ data['learnerInput'] }}"</q>.               
                 </p>
-                <p class="govuk-body">This may mean they do not exist in the service.</p>
+                <p class="govuk-body">This may mean they do not exist in the service or they are not eligible for this funding pot.</p>
                 <button class="govuk-button govuk-button--secondary">Add new learner</button>
             </form>
         {% endif %}

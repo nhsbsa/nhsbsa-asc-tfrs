@@ -207,7 +207,7 @@ addFilter('claimMatch', function (claim, search, claimType) {
 
     const formattedSearch = removeSpacesAndLowerCase(search);
     
-    if (claimType == "TU" && claim.type == "TU") {
+    if (claim.type == claimType) {
         if (claim.claimID != null) {
             const formattedClaimID = removeSpacesAndLowerCase(claim.ClaimID);
             if (formattedClaimID.includes(formattedSearch)){
@@ -229,7 +229,7 @@ addFilter('claimMatch', function (claim, search, claimType) {
                 }
             }
         }
-    } else if (claimType == "CPD" && claim.type == "CPD") {
+    } else if (claim.type == claimType) {
         if (claim.claimID != null) {
             const formattedClaimID = removeSpacesAndLowerCase(claim.ClaimID);
             if (formattedClaimID.includes(formattedSearch)){
@@ -283,16 +283,64 @@ addFilter('newClaimLink', function (type) {
 
 addFilter('checkEligible', function (learner, type, roleTypes) {
     let eligibleRoles = []
-
     if (type=="TU") {
-        const eligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
+        eligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
     } else if (type=="CPD") {
-        const eligibleRoles = roleTypes.filter(role => role.eligibility.isCPDeligible).map(role => role.rolename);
-
+        eligibleRoles = roleTypes.filter(role => role.eligibility.isCPDeligible).map(role => role.rolename);
     }
+    
 
     return eligibleRoles.includes(learner.roleType)
 
 })
 
+addFilter('errorSummary', function (claim) {
+    let errorSummaryStr = '' 
 
+    if ( claim.type == "TU") {
+        if (claim.training == null) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Select training</a></li>')
+        }
+        if (claim.startDate == null) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add training start date</a></li>')
+        }
+        if (claim.learners.length<1) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add at least one learner</a></li>')
+        }
+        if (claim.costDate == null) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add payment date</a></li>')
+        }
+        if (claim.evidenceOfPayment == null) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
+        }
+        if (claim.learners.every(learner => learner.evidence.evidenceOfCompletion == null)) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion for all learners</a></li>')
+        }
+        if (claim.learners.every(learner => learner.evidence.evidenceOfEnrollment == null) || claim.training.fundingModel == "full") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of enrollment for all learners</a></li>')
+        }
+    } else if (claim.type == "CPD") {
+        if (claim.description == null) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add a description</a></li>')
+        }
+        if (claim.startDate == null && claim.categoryName == "Courses") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add training start date</a></li>')
+        }
+        if (claim.claimAmount == null) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add cost</a></li>')
+        }
+        if (claim.learners.length<1) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add a learner</a></li>')
+        }
+        if (claim.costDate == null) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add payment date</a></li>')
+        }
+        if (claim.evidenceOfPayment == null) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
+        }
+        if (claim.learners.every(learner => learner.evidence.evidenceOfCompletion == null)  && claim.categoryName == "Courses") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion for the learner</a></li>')
+        }
+    }
+    return errorSummaryStr
+}, { renderAsHtml: true })

@@ -15,6 +15,10 @@
   {% endif %}
 {% endfor %}
 
+{% block pageTitle %}
+    {{ ["Training profile - ", (data.claimType | potName)] | join }}
+{% endblock %}
+
 {% block beforeContent %}
 <a href="javascript:history.back()" class="govuk-back-link">Back</a>
 {% endblock %}

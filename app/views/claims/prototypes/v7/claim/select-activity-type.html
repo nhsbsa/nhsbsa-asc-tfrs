@@ -1,5 +1,8 @@
 {% extends "../layouts/claims-main.html" %}
 
+{% block pageTitle %}
+    {{ ["Select activity type - ", (data.claimType | potName)] | join }}
+{% endblock %}
 
 {% block beforeContent %}
 <a href="../manage-claims" class="govuk-back-link">Back</a>
