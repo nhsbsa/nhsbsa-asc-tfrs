@@ -206,10 +206,10 @@ addFilter('claimMatch', function (claim, search, claimType) {
     let check = false;
 
     const formattedSearch = removeSpacesAndLowerCase(search);
-    
+
     if (claim.type == claimType) {
         if (claim.claimID != null) {
-            const formattedClaimID = removeSpacesAndLowerCase(claim.ClaimID);
+            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
             if (formattedClaimID.includes(formattedSearch)){
                 check = true
             }
@@ -344,3 +344,15 @@ addFilter('errorSummary', function (claim) {
     }
     return errorSummaryStr
 }, { renderAsHtml: true })
+
+addFilter('reorderClaims', function (claims) {
+// Use the sort method to reorder the array based on the createdDate property
+claims.sort((a, b) => {
+    const dateA = new Date(a.createdDate);
+    const dateB = new Date(b.createdDate);
+    return dateA - dateB;
+  });
+
+  return claims;
+  
+})

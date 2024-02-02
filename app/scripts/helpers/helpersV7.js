@@ -50,4 +50,15 @@ function compareNINumbers(ni_1,learners) {
     return check
 }
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase }
+function sortByCreatedDate(array) {
+    // Use the sort method to reorder the array based on the createdDate property
+    array.sort((a, b) => {
+      const dateA = new Date(b.createdDate);
+      const dateB = new Date(a.createdDate);
+      return dateA - dateB;
+    });
+  
+    return array;
+  }
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate }

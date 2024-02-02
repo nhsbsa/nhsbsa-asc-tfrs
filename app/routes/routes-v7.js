@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers } = require('../scripts/helpers/helpersV7.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../scripts/helpers/helpersV7.js');
 
 // v7 Prototype routes
 
@@ -295,6 +295,9 @@ router.post('/v7/save-claim', function (req, res) {
       break;
     }
   }
+
+  req.session.data.claims = sortByCreatedDate(req.session.data.claims);
+
   delete req.session.data.id
   delete req.session.data.submitError
   res.redirect('../claims/prototypes/v7/manage-claims')
@@ -312,6 +315,7 @@ router.post('/v7/submit-claim', function (req, res) {
         c.status = 'submitted'
         c.submittedDate = dStr
         delete req.session.data.submitError
+        req.session.data.claims = sortByCreatedDate(req.session.data.claims);
         res.redirect('../claims/prototypes/v7/claim/confirmation')
       } else {
         res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'&submitError=true')
