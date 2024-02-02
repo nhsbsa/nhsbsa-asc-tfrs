@@ -1,13 +1,9 @@
 {% extends "./layouts/main.html" %}
 
-{% block pageTitle %}
-    {{ serviceName }}
-{% endblock %}
-
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l">Service name goes here</h1>
+        <h1 class="govuk-heading-l">Claim for adult social care training and development</h1>
     </div>
 </div>
 <div class="govuk-grid-row">
@@ -20,14 +16,15 @@
               </ul>
         </p>
         <p>There are 2 types of funding:</p>
-        <h2 class="govuk-heading-m">Non-registered professionals</h2>
+        <h2 class="govuk-heading-m">Care skills funding</h2>
         <p class="govuk-body">
-            You can claim the costs of training courses and qualifications for upskilling staff who provide direct care and are not registered with a professional body.
+            You can claim the costs of training courses and qualifications for:
+            <ul class="govuk-list govuk-list--bullet">
+                <li>staff who provide direct care and are not registered with a professional body</li>
+                <li>registered managers, including aspiring managers who are working towards registration</li>
+            </ul>
         </p>
-        <p class="govuk-body">
-            This funding also covers registered managers, including aspiring managers who are working towards registration.
-        </p>
-        <h2 class="govuk-heading-m">Registered professionals</h2>
+        <h2 class="govuk-heading-m">Revalidation funding</h2>
         <p class="govuk-body">
             You can claim the costs of activities relating to professional revalidation (renewal of a registration) for:
             <ul class="govuk-list govuk-list--bullet">
@@ -42,29 +39,28 @@
             </svg>
         </a>
         <h2 class="govuk-heading-m">Before you start</h2>
-        <p class="govuk-body">You must have an up to date <a href="https://www.skillsforcare.org.uk/Adult-Social-Care-Workforce-Data/Adult-Social-Care-Workforce-Data-Set/Adult-Social-Care-Workforce-Data-Set.aspx" class="govuk-link">Adult Social Care Workforce Data Set</a> account for your organisation.</p>
-        <p class="govuk-body">You'll also need to have an account to use this reimbursement service. You can <a href="#" class="govuk-link">register for one</a> if you need to.</p>
-        <p class="govuk-body">To make a claim you'll need to check that the course or activity and members of staff are <a href="./guidance/eligibility" class="govuk-link">eligible</a>.</p>
-        <p class="govuk-body">You'll need to be able to enter:
+        <p class="govuk-body">You'll need to have an account to use this reimbursement service. You can <a href="#" class="govuk-link">register for one</a> if you need to.</p>
+        <p class="govuk-body">You must also have an up to date <a href="https://www.skillsforcare.org.uk/Adult-Social-Care-Workforce-Data/Adult-Social-Care-Workforce-Data-Set/Adult-Social-Care-Workforce-Data-Set.aspx" class="govuk-link">Adult Social Care Workforce Data Set</a> account for your organisation.</p>
+        <p class="govuk-body">To make a claim you'll need to be able to enter:
             <ul class="govuk-list govuk-list--bullet">
-                <li>the details of the people who completed the activity</li>
                 <li>what the activity was</li>
+                <li>the details of the people who completed the activity</li>
                 <li>evidence relating to the activity</li>
             </ul>
         </p>
-        <p class="govuk-body">Evidence will be required of payment for the activity, for example an invoice. For training courses and qualifications, evidence of completing the course will be required. For qualifications, evidence of enrolment will also be needed.</p>
+        <p class="govuk-body">You will need to provide evidence of payment for the activity, for example an invoice. For training courses and qualifications, you will need to provide evidence of completing the course. For qualifications, you will also need to submit evidence of enrolment.</p>
         <p class="govuk-body">You will not need to enter all the information in one go. You can start a claim and then return to complete missing information later.</p>
         <h2 class="govuk-heading-m">If you need help using this service</h2>
-        <p class="govuk-body">Watch some <a href="./guidance/help" class="govuk-link">short videos</a> demonstrating different parts of the service. You can also get in touch with the NHS Business Services Authority contact centre:</p>
+        <p class="govuk-body">You can get in touch with the NHS Business Services Authority contact centre:</p>
         <div class="govuk-inset-text">
             Email: <a href="#" class="govuk-link">xxxx@bsa.nhs.uk</a> <br>Phone: 01234 567890
-          </div>
+        </div>
     </div>
     <div class="govuk-grid-column-one-third">
         <hr class="govuk-!-margin-bottom-5">
         <h2 class="govuk-heading-m">Related content</h2>
-        <p class="govuk-body"><a href="./guidance/find-out-more" class="govuk-link">Find out more about this service</a></p>
-        <p class="govuk-body"><a href="./guidance/help" class="govuk-link">Help with using this service</a>
+        <p class="govuk-body"><a href="./guidance/eligibility" class="govuk-link">Eligibility checker</a></p>
+        <p class="govuk-body"><a href="#" class="govuk-link">Register for this service</a>
     </div>
 </div> 
 {% endblock %}
