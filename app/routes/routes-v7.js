@@ -6,7 +6,28 @@ const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../scripts/
 
 // v7 Prototype routes
 
+
+router.post('/v7/first-start', function (req, res) {
+
+  // Make a variable and give it the value from 'startingpoint'
+  var claimGuidance = req.session.data['claimGuidance']
+
+  // Check whether the variable matches a condition
+  if (claimGuidance == "yes"){
+
+    res.redirect('../claims/prototypes/v7/guidance/help-start-claim')
+  } else if (claimGuidance == "no") {
+    newClaim(req, res)
+  }
+
+})
+
 router.post('/v7/new-claim-reset', function (req, res) {
+  newClaim(req, res)
+});
+
+
+function newClaim(req, res) {
   const claimType = req.session.data.claimType
   const categoryName =  req.session.data.activityType
   let claim = {};
@@ -78,7 +99,7 @@ router.post('/v7/new-claim-reset', function (req, res) {
   delete req.session.data['activityType'];
 
   res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claim.claimID)
-});
+}
 
 router.post('/v7/add-training', function (req, res) {
     var trainingCode = req.session.data.trainingSelection

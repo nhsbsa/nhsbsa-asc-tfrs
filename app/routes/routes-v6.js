@@ -14,7 +14,7 @@ router.post('/v6/first-start', function (req, res) {
   // Check whether the variable matches a condition
   if (claimGuidance == "yes"){
 
-    res.redirect('../claims/prototypes/v6/guidance/help-start-claim')
+    res.redirect('../claims/prototypes/v7/guidance/help-start-claim')
   } else if (claimGuidance == "no") {
     newClaim(req, res)
   }

@@ -152,17 +152,18 @@
   font-size: 16px;
   font-size: 1rem;
   line-height: 1.25;
+  height: 100%;
 }
 
 .dashboard-card__middle {
-  margin-left: 2px;
-  margin-right: 2px;
+  margin-left: -2px;
+  margin-right: -2px;
 }
 
 .dashboard-card__left {
-  margin-right: 4px;
+  margin-right: -4px;
 }
 
 .dashboard-card__right {
-  margin-left: 4px;
+  margin-left: -4px;
 }

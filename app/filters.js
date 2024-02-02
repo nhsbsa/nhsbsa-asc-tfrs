@@ -272,7 +272,7 @@ addFilter('potName', function (type) {
 addFilter('newClaimLink', function (type) {
     let claimLink = "#"
     if (type=="TU") {
-        claimLink = "/v7/new-claim-reset"
+        claimLink = "claim/first-claim"
     } else if (type=="CPD") {
         claimLink = "claim/select-activity-type"
     }
