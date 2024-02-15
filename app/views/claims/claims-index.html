@@ -30,10 +30,10 @@
     </p>
     <p class="govuk-body-s">Current version:
       <strong class="govuk-tag govuk-tag--purple">
-        v6
+        v7
       </strong>
     </p>
-    <a class="govuk-button" data-module="govuk-button" href="prototypes/v6/">
+    <a class="govuk-button" data-module="govuk-button" href="prototypes/v7/">
       View current prototype
     </a>
   </div>  
@@ -46,7 +46,7 @@
     </h2>
     <hr class="govuk-!-margin-top-7 govuk-!-margin-bottom-7">
     <h2 class="govuk-heading-m">
-      Version 7 [WIP]
+      Version 7
     </h2>
     <details class="govuk-details" data-module="govuk-details">
       <summary class="govuk-details__summary">
@@ -58,24 +58,33 @@
         <h3 class="govuk-heading-s">
           Tested with users?
         </h3>
-        <p class="govuk-body"></p>
+        <p class="govuk-body">Not yet. It will be tested at the start of beta.</p>
         <h3 class="govuk-heading-s">
           What we created
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li></li>
+          <li>added a new dashboard screen after sign in to indicate how we could show live data about an organisation's claims, and to present the 3 main user options (eligibility checker, manage care skills claims, manage revalidation claims)</li>
+          <li>replaced the filters on each tab with a cross-status search function</li>
+          <li>shortened the table headings (for example, changing 'claim reference number' to just 'claim reference')</li>
+          <li>changed the claim details page to bring it in line with the GDS check answers pattern and removed the incomplete tags</li>
+          <li>changed how learners were displayed to remove the summary card component</li>
+          <li>removed the 'cost per learner' field and added the 'payment date' field to indicate when the employer paid for the training</li>
+          <li>introduced the new 'maximum reimbursable amount per learner' element in the top right of the claim details screen (on approval this changes to show actual reimbursed amount)</li>
+          <li>added the claim history timeline component for submitted claims</li>
+          <li>added the manage and start claim screens for revalidation (CPD) funding</li>
+          <li>started to consider the implications of split claims, where 60% of the reimbursement is provided upfront and 40% on completion</li>
         </ul>
         <h3 class="govuk-heading-s">
           We aimed to understand
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li></li>
+          <li>TBC</li>
         </ul>
         <h3 class="govuk-heading-s">
           What we learnt
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li></li>      
+          <li>TBC</li>      
         </ul>
       </div>
     </details>
@@ -96,24 +105,36 @@
         <h3 class="govuk-heading-s">
           Tested with users?
         </h3>
-        <p class="govuk-body"></p>
+        <p class="govuk-body">Yes, w/c 29 Jan 2024</p>
         <h3 class="govuk-heading-s">
           What we created
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li></li>
+          <li>included the agreed service name</li>
+          <li>combined our insights about funding pot names into 2 possible start pages so users could pick their preferred wording</li>
+          <li>introduced an optioanl help page when a user starts a new claim for the first time</li>
+          <li>iterated the declaration text that someone must agree to when submitting a claim</li>
         </ul>
         <h3 class="govuk-heading-s">
           We aimed to understand
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li></li>
+          <li>discuss and agree the funding pot names</li>
+          <li>test the scope information (above "Start now")</li>
+          <li>discuss the user understanding of eligibility throughout the pages</li>
+          <li>explore the "Help" page with video content and when this might be more useful</li>
+          <li>understand when text-based guidance might be most useful to users</li>
         </ul>
         <h3 class="govuk-heading-s">
           What we learnt
         </h3>
         <ul class="govuk-list govuk-list--bullet">
-          <li></li>      
+          <li>users preferred version A of the start page ('care skills' and 'revalidation' funding)</li>
+          <li>we could improve the wording to clarify that booking training is outside the scope of the service</li>
+          <li>eligibility information is generally clear</li>
+          <li>the help content when starting a new claim is much appreciated and some users may prefer the video or text content</li>
+          <li>similar help content around evidence requirements would also be useful</li>
+          <li>the declaration text was clear, though users wanted a link to the grant award letter and also to potentially see more information about the types of checks that will be carried out</li>    
         </ul>
       </div>
     </details>
@@ -162,6 +183,15 @@
         </ul>
         <h3 class="govuk-heading-s">
           What we learnt
+          <li>the new funding pot names still didn't work well, as participants found it confusing to have registered managers included in the 'non-registered professionals' funding</li>
+          <li>the difference between the 'incomplete' and 'ready to submit' claim statuses was not clear, especially when claims automatically moved to 'ready to submit' when there might be additional learners to add</li>
+          <li>users thought the 'queried' tab was for claims they had queried, rather than claims queried by NHSBSA</li>
+          <li>many participants struggled to find the search filters</li>
+          <li>they found it confusing that they could only filter within a status and there was no way to search for a claim across all statuses</li>
+          <li>feedback on the new claim screen was generally very positive, though a few users thought the use of 'incomplete' tags to indicate missing data was confusing as it made them think the claim had already been started</li>
+          <li>the new claim definition (a single activity with potentially multiple learners) worked well for everyone</li>
+          <li>the role groups when adding a new learner need further investigation as some participants felt they were not mutually exclusive</li>
+          <li>not everyone spotted the notes field when adding a claim and if they did they weren't sure what it was for</li>
         </h3>
         <ul class="govuk-list govuk-list--bullet">
           <li></li>      
