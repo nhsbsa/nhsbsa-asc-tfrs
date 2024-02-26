@@ -1,5 +1,5 @@
 
-{% if data.claimType == "TU" %}
+{% if claim.type == "TU" %}
     {% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.training != null %}
     <p class="govuk-body">The maximum reimburseable amount per learner for this activity is <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}</strong></p>
     {% elif (claim.status == "submitted" or claim.status == "queried") %}
@@ -27,7 +27,7 @@
     </div>
     </details>
     {% endif %}
-{% elif data.claimType == "CPD" %}
+{% elif claim.type == "CPD" %}
 
     {% if (claim.status == "new" or claim.status == "not-yet-submitted" or claim.status == "submitted" or claim.status == "queried") and claim.claimAmount != null %}
     <p class="govuk-body">The amount you should revieve for this claim is: <br><strong class="govuk-!-font-size-36">£{{ claim.claimAmount }}</strong></p>

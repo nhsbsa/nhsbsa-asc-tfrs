@@ -7,7 +7,7 @@
 {% endfor %}
 
 {% block pageTitle %}
-    {{ ["Claim: ", claim.claimID, " - ", (data.claimType | potName)] | join }}
+    {{ ["Claim: ", claim.claimID, " - ", (claim.type | potName)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
@@ -22,7 +22,7 @@
       {% if data.submitError %}
       {% include "../_components/claim-sections/errorCatch.html" %}
       {% endif %}
-      <span class="govuk-caption-l">{{ data.claimType | potName }}</span>
+      <span class="govuk-caption-l">{{ claim.type | potName }}</span>
       <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | statusTagV7(data.statuses) }}</h1>
     </div>
 </div>
@@ -39,9 +39,9 @@
       {% endif %}
 
 
-      {% if data.claimType == "TU" %}
+      {% if claim.type == "TU" %}
         {% include "../_components/claim-sections/training.html" %}
-      {% elif data.claimType == "CPD" %}
+      {% elif claim.type == "CPD" %}
         {% include "../_components/claim-sections/activity.html" %}
       {% endif %}
 
@@ -53,7 +53,7 @@
         {% include "../_components/claim-sections/evidenceEnrollment.html" %}
       {% endif %}
 
-      {% if data.claimType == "TU" or claim.categoryName == "Courses" %}
+      {% if claim.type == "TU" or claim.categoryName == "Courses" %}
         {% include "../_components/claim-sections/evidenceCompletion.html" %}
       {% endif %}
 
