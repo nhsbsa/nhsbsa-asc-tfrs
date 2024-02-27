@@ -1,0 +1,131 @@
+{% extends "../layouts/main.html" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l">Help with starting a new care skills claim</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <p class="govuk-body-l">
+            Completing a claim effectively will help to ensure you get reimbursement from the NHS Business Services Authority (NHSBSA) as quickly as possible. This guidance will help you to do that.
+        </p>
+
+        <p class="govuk-body">
+            Watch this short video or read the transcript below to see how to quickly fill in a new care skills claim.
+        </p>
+
+        <style>.embed-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            margin: 28px 0;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        .embed-container iframe, .embed-container object, .embed-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        </style>
+        
+        <div class='embed-container'>
+          <iframe allowfullscreen frameborder='0' src='https://www.youtube-nocookie.com/embed/XiHqkhnCaig'></iframe>
+        </div>
+        
+        <details class="govuk-details" data-module="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+              Video transcript: Starting a new care skills claim
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+
+            <h2 class="govuk-heading-m">Care skills claims</h2>
+            <p class="govuk-body">
+                A care skills claim is made up of:
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>the name of the activity (the course or qualification)</li>
+                    <li>the date the activity took place or started</li>
+                    <li>one or more learners (the people who attended the activity)</li>
+                    <li>evidence that you paid for the activity and that the learners completed it</li>
+                    <li>any supporting notes to help with processing</li>
+                </ul>
+            </p>
+            <p class="govuk-body">
+                A claim cannot consist of more than one activity. So if one learner completed several courses you would need to submit a separate claim for each course.
+            </p>
+    
+            <h2 class="govuk-heading-m">Filling in claim information</h2>
+            <p class="govuk-body">
+                To start a new claim, click on the ‘start a new claim’ button in the top right of the ‘manage claims’ screen. 
+            </p>
+            <p class="govuk-body">
+                You can add information to the claim in whatever order is best for you – you don’t need to start at the top of the screen.
+            </p>
+            <h2 class="govuk-heading-s">Name</h2>
+            <p class="govuk-body">
+                Select the course or qualification. You can search by course name or code. If you search by just part of the name you might get lots of results. You can check you’ve got the right one by clicking ‘View details’. Click ‘add to claim’ to select the appropriate one.
+            </p>
+            <p class="govuk-body">
+                If you’ve made a mistake you can always click on ‘change’ to select something else.
+            </p>
+            <h2 class="govuk-heading-s">Start date</h2>
+            <p class="govuk-body">
+                This is the date that the course took place or started.
+            </p>
+            <h2 class="govuk-heading-s">Learners</h2>
+            <p class="govuk-body">
+                You'll need to add at least one learner to the claim. Click ‘add learner’ to add the first person. Search by name or national insurance number to see if they’re already on the system. If they are, it’s easy to add them to the claim by clicking ‘add to claim’.
+            </p>
+            <p class="govuk-body">
+                You can then add as many additional learners as you need to by clicking ‘add another learner’ at the bottom of the list.
+            </p>
+            <p class="govuk-body">
+                If a learner isn’t already in the system, you can add them. Fill in the new learner details and click ‘Save and add to claim’.
+            </p>
+            <h2 class="govuk-heading-s">Evidence of payment</h2>
+            <p class="govuk-body">
+                The evidence of payment would be the invoice showing your payment to the training provider. If you don’t have this digitally you’ll need to scan it or take a photo of it.
+            </p>
+            <p class="govuk-body">
+                You can only provide one piece of evidence of payment for a claim. So if you paid for a course in 2 separate invoices you would need to submit 2 claims, one for each invoice.
+            </p>
+            <h2 class="govuk-heading-s">Evidence of completion</h2>
+            <p class="govuk-body">
+                You’ll need to add evidence that each learner has completed the activity. This should be their certificate from the training provider.
+            </p>
+            <h2 class="govuk-heading-s">Supporting notes</h2>
+            <p class="govuk-body">
+                You can add any notes that would help the NHSBSA processing team to understand your claim.
+            </p>
+            <h2 class="govuk-heading-s">Saving or submitting</h2>
+            <p class="govuk-body">
+                If there's still information to add another time, press 'save and finish later'. The claim will be saved to the 'Not yet completed' tab on the 'Manage claims' screen.
+            </p>
+            <p class="govuk-body">
+                If you've finished adding everything to the claim you can press 'Submit claim' to send it to the NHSBSA processing team. You'll get an error message if anything is missing. Otherwise the claim will move to the 'Submitted' tab on the 'Manage claims' screen and you will no longer be able to edit it.
+            </p>
+    
+
+          </div>
+        </details>
+
+        <div class="moj-button-menu">
+            <div class="moj-button-menu__wrapper">  
+            <form method="post" action="/v7/new-claim-reset" class="govuk-!-margin-0">
+                <button class="govuk-button moj-button-menu__item govuk-button--primary moj-page-header-actions__action" data-module="govuk-button" type="submit">Start a new claim</button>
+            </form>
+            </div>
+          </div>
+
+    </div>
+</div>
+</div>
+
+{% endblock %}
