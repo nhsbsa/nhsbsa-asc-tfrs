@@ -1,13 +1,13 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
-const { loadJSONFromFile } = require('../scripts/JSONfileloaders.js');
+const { loadJSONFromFile } = require('../../../../../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../scripts/helpers/helpersV7.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../../../../../scripts/helpers/helpersV7.js');
 
 // v7 Prototype routes
 
 
-router.post('/v7/first-start', function (req, res) {
+router.post('/first-start', function (req, res) {
 
   // Make a variable and give it the value from 'startingpoint'
   var claimGuidance = req.session.data['claimGuidance']
@@ -22,7 +22,7 @@ router.post('/v7/first-start', function (req, res) {
 
 })
 
-router.post('/v7/new-claim-reset', function (req, res) {
+router.post('/new-claim-reset', function (req, res) {
   newClaim(req, res)
 });
 
@@ -101,7 +101,7 @@ function newClaim(req, res) {
   res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claim.claimID)
 }
 
-router.post('/v7/add-training', function (req, res) {
+router.post('/add-training', function (req, res) {
     var trainingCode = req.session.data.trainingSelection
     var claimID = req.session.data.id
     
@@ -126,7 +126,7 @@ router.post('/v7/add-training', function (req, res) {
     res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#training')
 });
 
-router.post('/v7/create-date', function (req, res) {
+router.post('/create-date', function (req, res) {
   var day = req.session.data['activity-date-started-day']
   var month = req.session.data['activity-date-started-month']
   var year = req.session.data['activity-date-started-year']
@@ -146,7 +146,7 @@ router.post('/v7/create-date', function (req, res) {
   res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#training')
 });
 
-router.post('/v7/add-description', function (req, res) {
+router.post('/add-description', function (req, res) {
   var description = req.session.data.description
   var claimID = req.session.data.id
   
@@ -162,7 +162,7 @@ router.post('/v7/add-description', function (req, res) {
   res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#activity')
 });
 
-router.post('/v7/add-cost', function (req, res) {
+router.post('/add-cost', function (req, res) {
   var cost = req.session.data.cost
   var claimID = req.session.data.id
   
@@ -179,7 +179,7 @@ router.post('/v7/add-cost', function (req, res) {
   res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#activity')
 });
 
-router.post('/v7/cost-date', function (req, res) {
+router.post('/cost-date', function (req, res) {
   var day = req.session.data['payment-date-started-day']
   var month = req.session.data['payment-date-started-month']
   var year = req.session.data['payment-date-started-year']
@@ -199,7 +199,7 @@ router.post('/v7/cost-date', function (req, res) {
   res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#payment')
 });
 
-router.post('/v7/add-learner', function (req, res) {
+router.post('/add-learner', function (req, res) {
     var claimID = req.session.data.id
     
 
@@ -230,7 +230,7 @@ router.post('/v7/add-learner', function (req, res) {
     res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#learners')
 });
 
-router.post('/v7/remove-learner', function (req, res) {
+router.post('/remove-learner', function (req, res) {
   var claimID = req.session.data.id
 
   for (const c of req.session.data.claims) {
@@ -250,7 +250,7 @@ router.post('/v7/remove-learner', function (req, res) {
   res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#learners')
 });
 
-router.post('/v7/add-note', function (req, res) {
+router.post('/add-note', function (req, res) {
   var note = req.session.data.note
   var claimID = req.session.data.id
   
@@ -266,7 +266,7 @@ router.post('/v7/add-note', function (req, res) {
   res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#notes')
 });
 
-router.post('/v7/add-evidence', function (req, res) {
+router.post('/add-evidence', function (req, res) {
   var evidence = req.session.data.evidenceFile
   var type = req.session.data.type
   var claimID = req.session.data.id
@@ -306,7 +306,7 @@ router.post('/v7/add-evidence', function (req, res) {
 
 })
 
-router.post('/v7/save-claim', function (req, res) {
+router.post('/save-claim', function (req, res) {
   var claimID = req.session.data.id
   
   for (const c of req.session.data.claims) {
@@ -325,7 +325,7 @@ router.post('/v7/save-claim', function (req, res) {
 
 });
 
-router.post('/v7/submit-claim', function (req, res) {
+router.post('/submit-claim', function (req, res) {
   const claimID = req.session.data.id
   const d = new Date()
   const dStr = d.toISOString();
@@ -346,7 +346,7 @@ router.post('/v7/submit-claim', function (req, res) {
 });
 
 
-router.post('/v7/create-learner', function (req, res) {
+router.post('/create-learner', function (req, res) {
   var claimID = req.session.data.id
 
   delete req.session.data.existingLearner
@@ -394,7 +394,7 @@ router.post('/v7/create-learner', function (req, res) {
 
 });
 
-router.post('/v7/update-filters', (req, res) => {
+router.post('/update-filters', (req, res) => {
   const filters = req.body.filters; 
   // Assuming selectedOptions is sent in the request body
   req.session.data['filters'] = filters;
@@ -485,7 +485,7 @@ function loadData(req) {
   }
 
 
-router.get('/v7/load-data', function (req, res) {
+router.get('/load-data', function (req, res) {
     //Load data from JSON files
     loadData(req);
     res.redirect('../claims/prototypes/v7/before-you-start.html')

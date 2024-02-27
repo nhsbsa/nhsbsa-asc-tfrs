@@ -4,7 +4,7 @@ const router = govukPrototypeKit.requests.setupRouter()
 // V3 Prototype routes
 
 // Run this code when a form is submitted to 'claim-item-start-point'
-router.post('/v3/claim-item-start-point', function (req, res) {
+router.post('/claim-item-start-point', function (req, res) {
 
     // Make a variable and give it the value from 'startingpoint'
     var startingpoint = req.session.data['startingpoint']
@@ -20,7 +20,7 @@ router.post('/v3/claim-item-start-point', function (req, res) {
   
   })
 
-  router.post('/v3/evidence-answer', function (req, res) {
+  router.post('/evidence-answer', function (req, res) {
 
     // Make a variable and give it the value from 'startingpoint'
     var evidence = req.session.data['evidence']
@@ -42,7 +42,7 @@ router.post('/v3/claim-item-start-point', function (req, res) {
   
   })
 
-  router.post('/v3/event-type-answer', function (req, res) {
+  router.post('/event-type-answer', function (req, res) {
 
     // Make a variable and give it the value from 'startingpoint'
     var eventtype = req.session.data['event-type']

@@ -1,22 +1,17 @@
 {% extends "../layouts/claims-main.html" %}
 {% set training = null %}
 {% for trainingGroup in data.training %}
-  {% for t in trainingGroup.courses %}
-    {% if t.code == data.trainingSelection %}
-      {% set training = t %}
-    {% endif %}
-  {% endfor %}
+{% for t in trainingGroup.courses %}
+{% if t.code == data.trainingSelection %}
+{% set training = t %}
+{% endif %}
+{% endfor %}
 {% endfor %}
 
-{% set claim = null %}
-{% for c in data.claims %}
-  {% if c.claimID == data.id %}
-    {% set claim = c %}
-  {% endif %}
-{% endfor %}
+{% set claim = data.id | findClaim_V7(data.claims) %}
 
 {% block pageTitle %}
-    {{ ["Training profile - ", (data.claimType | potName)] | join }}
+{{ ["Training profile - ", (data.claimType | potName_V7)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
@@ -25,107 +20,107 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-      <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
-        <h1 class="govuk-heading-l">{{ training.title  }}</h1>
-    </div>
+  <div class="govuk-grid-column-full">
+    <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
+    <h1 class="govuk-heading-l">{{ training.title }}</h1>
+  </div>
 </div>
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m">Overview</h2>
-        <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Code
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ training.code }}
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Name
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <a class="govuk-link" href="{{ training.link }}">{{ training.title }}</a>
-              </dd>
-            </div>
-            {% if training.description %}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Description
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ training.description }}
-              </dd>
-            </div>
-            {% endif %}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Type
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ training.type | capitalize }}
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Category
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  {{ training.category | capitalize }}
-                </dd>
-              </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Awarding organisation
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ training.awardingOrganisation }}
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Total learning time
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  {{ training.totalLearningTime }}
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Maximum reimbursement amount per learner
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  £{{ training.reimbursementAmount }}
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Funding model
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    {% if training.fundingModel == "full" %}
-                    100% of reimbursement amount on completion
-                    {% elif training.fundingModel == "split" %}
-                    60% of reimbursement amount on enrollment and the remaining 40% on completion
-                    {% endif %}
-                </dd>
-            </div>
-          </dl>
-          {% if data.viewOnly == 'false' %}
-          <form method="post" action="/v7/add-training" class="govuk-!-margin-0">
-            <button class="govuk-button" data-module="govuk-button" type="submit">Add training to claim</button>
-          </form>
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-m">Overview</h2>
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Code
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ training.code }}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Name
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <a class="govuk-link" href="{{ training.link }}">{{ training.title }}</a>
+        </dd>
+      </div>
+      {% if training.description %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Description
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ training.description }}
+        </dd>
+      </div>
+      {% endif %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ training.type | capitalize }}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Category
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ training.category | capitalize }}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Awarding organisation
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ training.awardingOrganisation }}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Total learning time
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ training.totalLearningTime }}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Maximum reimbursement amount per learner
+        </dt>
+        <dd class="govuk-summary-list__value">
+          £{{ training.reimbursementAmount }}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Funding model
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% if training.fundingModel == "full" %}
+          100% of reimbursement amount on completion
+          {% elif training.fundingModel == "split" %}
+          60% of reimbursement amount on enrollment and the remaining 40% on completion
           {% endif %}
-    </div>
-    <div class="govuk-grid-column-one-third">
-        <hr class="govuk-!-margin-bottom-5">
-        <h2 class="govuk-heading-m">Guidance</h2>
-        <p class="govuk-body"><a href="#" class="govuk-link">Find out more about reimbursement amounts</a></p>
-        <p class="govuk-body"><a href="#" class="govuk-link">Find out more about funding models</a>
-    </div>
+        </dd>
+      </div>
+    </dl>
+    {% if data.viewOnly == 'false' %}
+    <form method="post" action="/v7/add-training" class="govuk-!-margin-0">
+      <button class="govuk-button" data-module="govuk-button" type="submit">Add training to claim</button>
+    </form>
+    {% endif %}
+  </div>
+  <div class="govuk-grid-column-one-third">
+    <hr class="govuk-!-margin-bottom-5">
+    <h2 class="govuk-heading-m">Guidance</h2>
+    <p class="govuk-body"><a href="#" class="govuk-link">Find out more about reimbursement amounts</a></p>
+    <p class="govuk-body"><a href="#" class="govuk-link">Find out more about funding models</a>
+  </div>
 </div>
 
 

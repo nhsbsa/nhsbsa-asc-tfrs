@@ -24,7 +24,7 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="/v6/add-evidence" method="post" novalidate>
+        <form action="/add-evidence" method="post" novalidate>
             <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
             <h1 class="govuk-heading-l">Add evidence of {{ data.type }} {% if data.type == 'completion' or data.type == 'enrollment'  %} for {{ learner.fullName }}{% endif %}</h1>
             <p class="govuk-body">

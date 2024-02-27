@@ -1,10 +1,10 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
-const { loadJSONFromFile } = require('../scripts/JSONfileloaders.js');
+const { loadJSONFromFile } = require('../../../../../scripts/JSONfileloaders.js');
 
 // V4 Prototype routes
 
-router.post('/v4/add-training', function (req, res) {
+router.post('/add-training', function (req, res) {
     var trainingCode = req.session.data['training-selection']
     
     for (const t of req.session.data['training']) {
@@ -18,7 +18,7 @@ router.post('/v4/add-training', function (req, res) {
     res.redirect('../claims/prototypes/v4/new-claim/activity-profile')
 });
 
-router.post('/v4/select-learner', function (req, res) {
+router.post('/select-learner', function (req, res) {
     var learnerID = req.session.data['learner-selection']
     
     for (const l of req.session.data['learners']) {
@@ -32,7 +32,7 @@ router.post('/v4/select-learner', function (req, res) {
     res.redirect('../claims/prototypes/v4/new-claim/learner-profile')
 });
 
-router.post('/v4/add-learner', function (req, res) {
+router.post('/add-learner', function (req, res) {
 
     if (req.session.data.learnersSelected){
         req.session.data['learnersSelected'].push(req.session.data['learnerSelected'])
@@ -43,13 +43,13 @@ router.post('/v4/add-learner', function (req, res) {
     res.redirect('../claims/prototypes/v4/new-claim/learner-summary')
 });
 
-router.post('/v4/evidence-for-claims', function (req, res) {
+router.post('/evidence-for-claims', function (req, res) {
    
 
     res.redirect('../claims/prototypes/v4/evidence/check-your-evidence-claims')
 });
 
-router.post('/v4/add-more-learners-answer', function (req, res) {
+router.post('/add-more-learners-answer', function (req, res) {
     var addAnother = req.session.data['add-another']
     
 
@@ -64,7 +64,7 @@ router.post('/v4/add-more-learners-answer', function (req, res) {
     
 });
 
-router.post('/v4/evidence-in-claim-process', function (req, res) {
+router.post('/evidence-in-claim-process', function (req, res) {
     req.session.data['addEvidenceInClaimProcess'] = true
 
     res.redirect('../claims/prototypes/v4/evidence/evidence-type')
@@ -72,7 +72,7 @@ router.post('/v4/evidence-in-claim-process', function (req, res) {
 
 });
 
-router.post('/v4/evidence-choice', function (req, res) {
+router.post('/evidence-choice', function (req, res) {
     var evidenceType = req.session.data['evidenceType']
     
 
@@ -87,7 +87,7 @@ router.post('/v4/evidence-choice', function (req, res) {
 
 });
 
-router.post('/v4/update-session-data', (req, res) => {
+router.post('/update-session-data', (req, res) => {
     const selectedOptions = req.body.selectedOptions; 
     // Assuming selectedOptions is sent in the request body
     req.session.data['selectedOptions'] = selectedOptions;
@@ -100,7 +100,7 @@ router.post('/v4/update-session-data', (req, res) => {
       console.log(JSON.stringify(log, null, 2))
   });
 
-  router.post('/v4/create-claims', (req, res) => {
+  router.post('/create-claims', (req, res) => {
 
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -141,7 +141,7 @@ router.post('/v4/update-session-data', (req, res) => {
   });
 
   
-router.post('/v4/claims-choice', function (req, res) {
+router.post('/claims-choice', function (req, res) {
     let claims = []
 
     for (const claim of req.session.data.selectedClaims) { 
@@ -155,7 +155,7 @@ router.post('/v4/claims-choice', function (req, res) {
     res.redirect('../claims/prototypes/v4/evidence/check-your-evidence-claims')
 });
 
-router.post('/v4/new-claim-reset', function (req, res) {
+router.post('/new-claim-reset', function (req, res) {
     req.session.data['addEvidenceInClaimProcess'] = false;
     delete req.session.data['training-input'];
     delete req.session.data['training-selection'];
@@ -181,7 +181,7 @@ router.post('/v4/new-claim-reset', function (req, res) {
     res.redirect('../claims/prototypes/v4/new-claim/select-training.html')
 });
 
-router.post('/v4/new-evidence-reset', function (req, res) {
+router.post('/new-evidence-reset', function (req, res) {
     req.session.data['addEvidenceInClaimProcess'] = false;
     delete req.session.data['evidenceType'];
     delete req.session.data['search-input'];
@@ -232,7 +232,7 @@ function loadData(req) {
   }
 
 
-router.get('/v4/load-data', function (req, res) {
+router.get('/load-data', function (req, res) {
     //Load data from JSON files
     loadData(req);
     res.redirect('../claims/prototypes/v4/before-you-start.html')

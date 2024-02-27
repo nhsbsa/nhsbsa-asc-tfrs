@@ -15,14 +15,15 @@
     </dd>
     {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
     <dd class="govuk-summary-list__actions">
-      <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden"> payment date</span></a>
+      <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">
+          payment date</span></a>
     </dd>
     {% endif %}
     {% endif %}
   </div>
 
   <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key" >
+    <dt class="govuk-summary-list__key">
       Evidence of payment
     </dt>
     {% if not claim.evidenceOfPayment %}
@@ -36,8 +37,11 @@
     {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
     <dd class="govuk-summary-list__actions">
       <ul class="govuk-summary-list__actions-list">
-        <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="#">View<span class="govuk-visually-hidden"> evidence of payment</span></a></li>
-        <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=payment">Change<span class="govuk-visually-hidden"> evidence of payment</span></a></li>
+        <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
+            href="#">View<span class="govuk-visually-hidden"> evidence of payment</span></a></li>
+        <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
+            href="add-evidence?type=payment">Change<span class="govuk-visually-hidden"> evidence of payment</span></a>
+        </li>
       </ul>
     </dd>
     {% endif %}

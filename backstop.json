@@ -127,7 +127,7 @@
             "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=706486"
         },
         {
-            "label": "30-manage-claims-CPD",
+            "label": "30-CPD-manage-claims",
             "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=CPD"
         },
         {

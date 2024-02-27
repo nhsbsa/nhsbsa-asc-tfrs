@@ -16,8 +16,11 @@
     {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
     <dd class="govuk-summary-list__actions">
       <ul class="govuk-summary-list__actions-list">
-        <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="../learner/learner-profile?learnerID={{ l.id }}">View<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>
-        <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="#">Remove<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>
+        <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
+            href="../learner/learner-profile?learnerID={{ l.id }}">View<span class="govuk-visually-hidden"> {{
+              l.fullName }}</span></a></li>
+        <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
+            href="#">Remove<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>
       </ul>
     </dd>
     {% endif %}
@@ -27,6 +30,8 @@
   {% endif %}
 </dl>
 
-{% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.learners.length !== 0 and data.claimType == "TU" %}
-<p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another learner</a></p>
+{% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.learners.length !== 0 and data.claimType
+== "TU" %}
+<p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another learner</a>
+</p>
 {% endif %}

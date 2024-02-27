@@ -7,7 +7,8 @@
       <p class="moj-timeline__byline">by {{ claim.createdBy }}</p>
     </div>
     <p class="moj-timeline__date">
-      <time datetime="{{ claim.createdDate }}">{{ claim.createdDate | govukDate }} at {{ claim.createdDate | govukTime }}</time>
+      <time datetime="{{ claim.createdDate }}">{{ claim.createdDate | govukDate }} at {{ claim.createdDate | govukTime
+        }}</time>
     </p>
   </div>
   <div class="moj-timeline__item">
@@ -16,7 +17,8 @@
       <p class="moj-timeline__byline">by {{ claim.createdBy }}</p>
     </div>
     <p class="moj-timeline__date">
-      <time datetime="{{ claim.createdDate }}">{{ claim.submittedDate | govukDate }} at {{ claim.submittedDate | govukTime }}</time>
+      <time datetime="{{ claim.createdDate }}">{{ claim.submittedDate | govukDate }} at {{ claim.submittedDate |
+        govukTime }}</time>
     </p>
     <div class="moj-timeline__description">Your claim is being reviewed by a member of our processing staff.</div>
   </div>
@@ -27,9 +29,11 @@
       <p class="moj-timeline__byline">by NHS BSA</p>
     </div>
     <p class="moj-timeline__date">
-      <time datetime="{{ claim.createdDate }}">{{ claim.queriedDate | govukDate }} at {{ claim.queriedDate | govukTime }}</time>
+      <time datetime="{{ claim.createdDate }}">{{ claim.queriedDate | govukDate }} at {{ claim.queriedDate | govukTime
+        }}</time>
     </p>
-    <div class="moj-timeline__description">Your claim has been reviewed by NHS BSA and they have returned it with query against the evidence provided.</div>
+    <div class="moj-timeline__description">Your claim has been reviewed by NHS BSA and they have returned it with query
+      against the evidence provided.</div>
   </div>
   {% endif %}
   {% if (claim.status == "approved" or claim.status == "paid") %}
@@ -39,9 +43,11 @@
       <p class="moj-timeline__byline">by NHS BSA</p>
     </div>
     <p class="moj-timeline__date">
-      <time datetime="{{ claim.createdDate }}">{{ claim.approvedDate | govukDate }} at {{ claim.approvedDate | govukTime }}</time>
+      <time datetime="{{ claim.createdDate }}">{{ claim.approvedDate | govukDate }} at {{ claim.approvedDate | govukTime
+        }}</time>
     </p>
-    <div class="moj-timeline__description">Your claim has been reviewed by NHS BSA and approved. You will recieve £{{ claim.training.reimbursementAmount * claim.learners.length}}.</div>
+    <div class="moj-timeline__description">Your claim has been reviewed by NHS BSA and approved. You will recieve £{{
+      claim.training.reimbursementAmount * claim.learners.length}}.</div>
   </div>
   {% endif %}
   {% if ( claim.status == "paid") %}
@@ -51,9 +57,11 @@
       <p class="moj-timeline__byline">by NHS BSA</p>
     </div>
     <p class="moj-timeline__date">
-      <time datetime="{{ claim.createdDate }}">{{ claim.paidDate | govukDate }} at {{ claim.paidDate | govukTime }}</time>
+      <time datetime="{{ claim.createdDate }}">{{ claim.paidDate | govukDate }} at {{ claim.paidDate | govukTime
+        }}</time>
     </p>
-    <div class="moj-timeline__description">Your claim has been paid by NHS BSA. You should have recieved £{{ claim.training.reimbursementAmount * claim.learners.length}}.</div>
+    <div class="moj-timeline__description">Your claim has been paid by NHS BSA. You should have recieved £{{
+      claim.training.reimbursementAmount * claim.learners.length}}.</div>
   </div>
   {% endif %}
 </div>

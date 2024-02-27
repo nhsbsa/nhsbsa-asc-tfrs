@@ -1,6 +1,6 @@
-{% set formattedStartDates = data.claims | uniqueDates("startDate") %}
-{% set variableDate = status.id | variableDateType %}
-{% set formattedVariableDates = data.claims | uniqueDates(variableDate) %}
+{% set formattedStartDates = data.claims | uniqueDates_V6("startDate") %}
+{% set variableDate_V6 = status.id | variableDateType_V6 %}
+{% set formattedvariableDate_V6s = data.claims | uniqueDates_V6(variableDate_V6) %}
 
 
 <div class="moj-filter">
@@ -60,15 +60,15 @@
 
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
 
-                    {{ status.id | variableDate }}
+                    {{ status.id | variableDate_V6 }}
 
                 </legend>
                 <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
                     {% set loopIndex = 0 %}
-                    {% for monthYear in formattedVariableDates %}
-                    {% set checkboxId = 'variabledate-' + loopIndex %}
+                    {% for monthYear in formattedvariableDate_V6s %}
+                    {% set checkboxId = 'variableDate_V6-' + loopIndex %}
                     <div class="govuk-checkboxes__item">
-                        <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="variabledate" type="checkbox" value="{{ monthYear }}">
+                        <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="variableDate_V6" type="checkbox" value="{{ monthYear }}">
                         <label class="govuk-label govuk-checkboxes__label" for="{{ checkboxId }}">
                             {{ monthYear }}
                         </label>

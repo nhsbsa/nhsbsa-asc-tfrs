@@ -1,22 +1,17 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = null %}
-{% for c in data.claims %}
-  {% if c.claimID == data.id %}
-    {% set claim = c %}
-  {% endif %}
-{% endfor %}
+{% set claim = data.id | findClaim_V7(data.claims) %}
 
-{% if data.type == 'completion' or data.type == 'enrollment'  %}
-    {% set learner = null %}
-    {% for l in data.learners %}
-        {% if l.id == data.learnerID %}
-            {% set learner = l %}
-        {% endif %}
-    {% endfor %}
+{% if data.type == 'completion' or data.type == 'enrollment' %}
+{% set learner = null %}
+{% for l in data.learners %}
+{% if l.id == data.learnerID %}
+{% set learner = l %}
+{% endif %}
+{% endfor %}
 {% endif %}
 
 {% block pageTitle %}
-    {{ ["Add evidence  - Claim: ", claim.claimID] | join }}
+{{ ["Add evidence - Claim: ", claim.claimID] | join }}
 {% endblock %}
 
 
@@ -29,16 +24,18 @@
     <div class="govuk-grid-column-two-thirds">
         <form action="/v7/add-evidence" method="post" novalidate>
             <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
-            <h1 class="govuk-heading-l">Add evidence of {{ data.type }} {% if data.type == 'completion' or data.type == 'enrollment'  %} for {{ learner.fullName }}{% endif %}</h1>
+            <h1 class="govuk-heading-l">Add evidence of {{ data.type }} {% if data.type == 'completion' or data.type ==
+                'enrollment' %} for {{ learner.fullName }}{% endif %}</h1>
             <p class="govuk-body">
-                You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' or data.type == 'enrollment'  %} for {{ learner.fullName }}{% endif %}. This could be a PDF or image file.
+                You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' or
+                data.type == 'enrollment' %} for {{ learner.fullName }}{% endif %}. This could be a PDF or image file.
             </p>
             <p class="govuk-body">
                 If you need to add an email as evidence, save the email as a PDF file and then upload that.
             </p>
             <div class="govuk-form-group">
                 <label class="govuk-label" for="evidenceFile">
-                Upload a file
+                    Upload a file
                 </label>
                 <input class="govuk-file-upload" id="evidenceFile" name="evidenceFile" type="file">
             </div>
@@ -47,11 +44,11 @@
             </button>
         </form>
     </div>
-    <div class="govuk-grid-column-one-third">        
+    <div class="govuk-grid-column-one-third">
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
         <h2 class="govuk-heading-m">Related content</h2>
         <p class="govuk-body"><a href="#" class="govuk-link">Find out more about evidence requirements</a></p>
-      </div>
+    </div>
 </div>
 
 

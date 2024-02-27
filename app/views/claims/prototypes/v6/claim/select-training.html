@@ -58,8 +58,8 @@
                 {% for training in data['training'] %}
                     {% set lowercasedsearch = data['training-input'] | lower %}
                     {% set lowercasedname = training.title | lower %}
-                    {% set formattedSearch = data['training-input'] | removeSpacesAndLowerCase %}
-                    {% set formattedCode = training.code | removeSpacesAndLowerCase %}
+                    {% set formattedSearch = data['training-input'] | removeSpacesAndLowerCase_V6 %}
+                    {% set formattedCode = training.code | removeSpacesAndLowerCase_V6 %}
                     {% if lowercasedname == lowercasedsearch or training.code == data['training-input'] or lowercasedsearch in lowercasedname or formattedSearch in formattedCode %}
                             {% set hasResults = true %}
                             {% if addHeader %}

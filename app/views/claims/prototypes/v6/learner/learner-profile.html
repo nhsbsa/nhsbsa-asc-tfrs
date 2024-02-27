@@ -84,7 +84,7 @@
                         <td class="govuk-table__cell">{{ claim.claimID }}</td>
                         <td class="govuk-table__cell">{{ claim.training.title }}</td>
                         <td class="govuk-table__cell">{{ claim.startDate | govukDate("truncate") }}</td>
-                        <td class="govuk-table__cell">{{ claim.status | statusName(data.statuses) }}</td>
+                        <td class="govuk-table__cell">{{ claim.status | statusName_V6(data.statuses) }}</td>
                         <td class="govuk-table__cell">{{ claim.createdDate | govukDate("truncate") }}</td>
                         <td class="govuk-table__cell">{{ claim.createdBy }}</td>
                     </tr>
