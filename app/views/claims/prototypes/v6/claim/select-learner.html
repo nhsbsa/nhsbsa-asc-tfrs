@@ -87,7 +87,7 @@
                             {% endfor %}
 
                             {% if not learnerAdded %}
-                            <form method="post" action="/add-learner" class="govuk-!-margin-0">
+                            <form method="post" action="/v6/add-learner" class="govuk-!-margin-0">
                                 <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
                                 <button type="submit" class="govuk-button">Add to claim</button>
                             </form>
