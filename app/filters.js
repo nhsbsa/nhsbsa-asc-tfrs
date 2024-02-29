@@ -5,7 +5,6 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndLowerCase } = require('./scripts/helpers.js');
 
 const fs = require('fs');
 
