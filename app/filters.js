@@ -10,6 +10,6 @@ const { removeSpacesAndLowerCase } = require('./scripts/helpers.js');
 const fs = require('fs');
 
 // Add your filters here
-require('../app/views/claims/prototypes/v5/filters/filters.js')
-require('../app/views/claims/prototypes/v6/filters/filters.js')
-require('../app/views/claims/prototypes/v7/filters/filters.js')
+require('../app/views/claims/prototypes/design/v5/filters/filters.js')
+require('../app/views/claims/prototypes/design/v6/filters/filters.js')
+require('../app/views/claims/prototypes/design/v7/filters/filters.js')

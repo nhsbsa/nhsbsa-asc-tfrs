@@ -16,211 +16,211 @@
         },
         {
             "label": "2-eligibility",
-            "url": "http://localhost:3000/claims/prototypes/v7/guidance/eligibility"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/guidance/eligibility"
         },
         {
             "label": "3-sign-in",
-            "url": "http://localhost:3000/claims/prototypes/v7/sign-in"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/sign-in"
         },
         {
             "label": "4-home",
-            "url": "http://localhost:3000/claims/prototypes/v7/home"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/home"
         },
         {
             "label": "5-TU-manage-claims-not-yet-submitted",
-            "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=TU#not-yet-submitted"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=TU#not-yet-submitted"
         },
         {
             "label": "6-TU-manage-claims-submitted",
-            "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=TU#submitted"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=TU#submitted"
         },
         {
             "label": "7-TU-manage-claims-queried",
-            "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=TU#queried"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=TU#queried"
         },
         {
             "label": "8-TU-manage-claims-approved",
-            "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=TU#approved"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=TU#approved"
         },
         {
             "label": "9-TU-manage-claims-paid",
-            "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=TU#paid"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=TU#paid"
         },
         {
             "label": "10-TU-manage-claims-search",
-            "url": "http://localhost:3000/claims/prototypes/v7/search-results?search=roy&claimType=TU"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/search-results?search=roy&claimType=TU"
         },
         {
             "label": "11-TU-first-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/first-claim"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/first-claim"
         },
         {
             "label": "12-TU-first-claim-help",
-            "url": "http://localhost:3000/claims/prototypes/v7/guidance/help-start-claim"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/guidance/help-start-claim"
         },
         {
             "label": "13-TU-new-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=963866"
         },
         {
             "label": "14-TU-new-claim-training",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/select-training?id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/select-training?id=963866"
         },
         {
             "label": "15-TU-new-claim-training-input",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/select-training?training-input=health&?id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/select-training?training-input=health&?id=963866"
         },
         {
             "label": "16-TU-new-claim-start-date",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/start-date?id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/start-date?id=963866"
         },
         {
             "label": "17-TU-new-claim-learner",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/select-learner?id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/select-learner?id=963866"
         },
         {
             "label": "18-TU-new-claim-learner-input",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/select-learner?learnerInput=roy&?id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/select-learner?learnerInput=roy&?id=963866"
         },
         {
             "label": "19-TU-new-claim-new-learner",
-            "url": "http://localhost:3000/claims/prototypes/v7/learner/add-learner?inClaim=true"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/learner/add-learner?inClaim=true"
         },
         {
             "label": "20-TU-new-claim-payment-date",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/cost-date?id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/cost-date?id=963866"
         },
         {
             "label": "21-TU-new-claim-evidence-payment",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/add-evidence?type=payment&id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/add-evidence?type=payment&id=963866"
         },
         {
             "label": "22-TU-new-claim-evidence-completion",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/add-evidence?type=completion&learnerID=LE%2009%205F%2094%20M&id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/add-evidence?type=completion&learnerID=LE%2009%205F%2094%20M&id=963866"
         },
         {
             "label": "23-TU-new-claim-add-note",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/add-note?id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/add-note?id=963866"
         },
         {
             "label": "24-TU-new-claim-confirmation",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/confirmation?id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/confirmation?id=963866"
         },
         {
             "label": "25-TU-not-yet-submitted-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=131118"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=131118"
         },
         {
             "label": "26-TU-submitted-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=859403"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=859403"
         },
         {
             "label": "27-TU-queried-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=063677"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=063677"
         },
         {
             "label": "28-TU-approved-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=542552"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=542552"
         },
         {
             "label": "29-TU-paid-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=706486"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=706486"
         },
         {
             "label": "30-CPD-manage-claims",
-            "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=CPD"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD"
         },
         {
             "label": "31-CPD-manage-claims-not-yet-submitted",
-            "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=CPD#not-yet-submitted"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD#not-yet-submitted"
         },
         {
             "label": "32-CPD-manage-claims-submitted",
-            "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=CPD#submitted"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD#submitted"
         },
         {
             "label": "33-CPD-manage-claims-queried",
-            "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=CPD#queried"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD#queried"
         },
         {
             "label": "34-CPD-manage-claims-approved",
-            "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=CPD#approved"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD#approved"
         },
         {
             "label": "35-CPD-manage-claims-paid",
-            "url": "http://localhost:3000/claims/prototypes/v7/manage-claims?claimType=CPD#paid"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD#paid"
         },
         {
             "label": "36-CPD-new-claim-activity-type",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/select-activity-type?claimType=CPD"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/select-activity-type?claimType=CPD"
         },
         {
             "label": "37-CPD-new-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=915391"
         },
         {
             "label": "38-CPD-new-claim-description",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/add-description?claimType=CPD&id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/add-description?claimType=CPD&id=915391"
         },
         {
             "label": "39-CPD-new-claim-claim-amount",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/add-claim-amount?id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/add-claim-amount?id=915391"
         },
         {
             "label": "40-CPD-new-claim-start-date",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/start-date?id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/start-date?id=915391"
         },
         {
             "label": "41-CPD-new-claim-learner",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/select-learner?id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/select-learner?id=915391"
         },
         {
             "label": "42-CPD-new-claim-learner-input",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/select-learner?learnerInput=kub&id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/select-learner?learnerInput=kub&id=915391"
         },
         {
             "label": "43-CPD-new-claim-add-learner",
-            "url": "http://localhost:3000/claims/prototypes/v7/learner/add-learner?inClaim=true&id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/learner/add-learner?inClaim=true&id=915391"
         },
         {
             "label": "44-CPD-new-claim-payment-date",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/cost-date?id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/cost-date?id=915391"
         },
         {
             "label": "45-CPD-new-claim-evidence-payment",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/add-evidence?type=payment&id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/add-evidence?type=payment&id=915391"
         },
         {
             "label": "46-CPD-new-claim-evidence-completion",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/add-evidence?type=completion&learnerID=AL%2082%202F%2062%20C&id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/add-evidence?type=completion&learnerID=AL%2082%202F%2062%20C&id=915391"
         },
         {
             "label": "47-CPD-new-claim-add-note",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/add-note?id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/add-note?id=915391"
         },
         {
             "label": "48-CPD-new-claim-confirmation",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/confirmation?id=915391"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/confirmation?id=915391"
         },
         {
             "label": "49-CPD-not-yet-submitted-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=131118"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=131118"
         },
         {
             "label": "50-CPD-submitted-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=859403"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=859403"
         },
         {
             "label": "51-CPD-queried-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=063677"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=063677"
         },
         {
             "label": "52-CPD-approved-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=542552"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=542552"
         },
         {
             "label": "53-CPD-paid-claim",
-            "url": "http://localhost:3000/claims/prototypes/v7/claim/claim-details?id=706486"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=706486"
         }
     ],
     "paths": {

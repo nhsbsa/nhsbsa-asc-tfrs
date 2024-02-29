@@ -9,11 +9,11 @@ const fs = require('fs');
 const { generateClaims } = require('./scripts/generate-claims.js');
 const { generateLearners } = require('./scripts/generate-learners.js');
 
-router.use('/v3/', require('./views/claims/prototypes/v3/routes/routes.js'))
-router.use('/v4/', require('./views/claims/prototypes/v4/routes/routes.js'))
-router.use('/v5/', require('./views/claims/prototypes/v5/routes/routes.js'))
-router.use('/v6/', require('./views/claims/prototypes/v6/routes/routes.js'))
-router.use('/claims/prototypes/v7/', require('./views/claims/prototypes/v7/routes/routes.js'))
+router.use('/v3/', require('./views/claims/prototypes/design/v3/routes/routes.js'))
+router.use('/v4/', require('./views/claims/prototypes/design/v4/routes/routes.js'))
+router.use('/v5/', require('./views/claims/prototypes/design/v5/routes/routes.js'))
+router.use('/v6/', require('./views/claims/prototypes/design/v6/routes/routes.js'))
+router.use('/claims/prototypes/design/v7/', require('./views/claims/prototypes/design/v7/routes/routes.js'))
 
 // Add your routes here
 
