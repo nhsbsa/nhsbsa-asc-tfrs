@@ -15,7 +15,7 @@ router.post('/first-start', function (req, res) {
   // Check whether the variable matches a condition
   if (claimGuidance == "yes"){
 
-    res.redirect('../claims/prototypes/v7/guidance/help-start-claim')
+    res.redirect('guidance/help-start-claim')
   } else if (claimGuidance == "no") {
     newClaim(req, res)
   }
@@ -98,7 +98,7 @@ function newClaim(req, res) {
   delete req.session.data['selectedClaimsConfirmed'];
   delete req.session.data['activityType'];
 
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claim.claimID)
+  res.redirect('claim/claim-details'+'?id='+claim.claimID)
 }
 
 router.post('/add-training', function (req, res) {
@@ -123,7 +123,7 @@ router.post('/add-training', function (req, res) {
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
 
-    res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#training')
+    res.redirect('claim/claim-details'+'?id='+claimID+'#training')
 });
 
 router.post('/create-date', function (req, res) {
@@ -143,7 +143,7 @@ router.post('/create-date', function (req, res) {
   delete req.session.data['activity-date-started-month'];
   delete req.session.data['activity-date-started-year'];
   
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#training')
+  res.redirect('claim/claim-details'+'?id='+claimID+'#training')
 });
 
 router.post('/add-description', function (req, res) {
@@ -159,7 +159,7 @@ router.post('/add-description', function (req, res) {
 
   delete req.session.data.description;
 
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#activity')
+  res.redirect('claim/claim-details'+'?id='+claimID+'#activity')
 });
 
 router.post('/add-cost', function (req, res) {
@@ -176,7 +176,7 @@ router.post('/add-cost', function (req, res) {
   }
   delete req.session.data.cost;
 
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#activity')
+  res.redirect('claim/claim-details'+'?id='+claimID+'#activity')
 });
 
 router.post('/cost-date', function (req, res) {
@@ -196,7 +196,7 @@ router.post('/cost-date', function (req, res) {
   delete req.session.data['payment-date-started-month'];
   delete req.session.data['payment-date-started-year'];
   
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#payment')
+  res.redirect('claim/claim-details'+'?id='+claimID+'#payment')
 });
 
 router.post('/add-learner', function (req, res) {
@@ -227,7 +227,7 @@ router.post('/add-learner', function (req, res) {
     delete req.session.data.learnerInput;
     delete req.session.data.learnerSelection;
     
-    res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#learners')
+    res.redirect('claim/claim-details'+'?id='+claimID+'#learners')
 });
 
 router.post('/remove-learner', function (req, res) {
@@ -247,7 +247,7 @@ router.post('/remove-learner', function (req, res) {
         break;
     }
   }
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#learners')
+  res.redirect('claim/claim-details'+'?id='+claimID+'#learners')
 });
 
 router.post('/add-note', function (req, res) {
@@ -263,7 +263,7 @@ router.post('/add-note', function (req, res) {
 
   delete req.session.data.note;
 
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#notes')
+  res.redirect('claim/claim-details'+'?id='+claimID+'#notes')
 });
 
 router.post('/add-evidence', function (req, res) {
@@ -302,7 +302,7 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.type;
   delete req.session.data.learnerID;
 
-  res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'#'+type)
+  res.redirect('claim/claim-details'+'?id='+claimID+'#'+type)
 
 })
 
@@ -321,7 +321,7 @@ router.post('/save-claim', function (req, res) {
 
   delete req.session.data.id
   delete req.session.data.submitError
-  res.redirect('../claims/prototypes/v7/manage-claims')
+  res.redirect('manage-claims')
 
 });
 
@@ -337,9 +337,9 @@ router.post('/submit-claim', function (req, res) {
         c.submittedDate = dStr
         delete req.session.data.submitError
         req.session.data.claims = sortByCreatedDate(req.session.data.claims);
-        res.redirect('../claims/prototypes/v7/claim/confirmation')
+        res.redirect('claim/confirmation')
       } else {
-        res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID+'&submitError=true')
+        res.redirect('claim/claim-details'+'?id='+claimID+'&submitError=true')
       }
     }
   }
@@ -380,7 +380,7 @@ router.post('/create-learner', function (req, res) {
     delete req.session.data.regID
     delete req.session.data.roleType
     delete req.session.data.learnerInput
-    res.redirect('../claims/prototypes/v7/claim/claim-details'+'?id='+claimID)
+    res.redirect('claim/claim-details'+'?id='+claimID)
   } else{
     console.log('match')
     delete req.session.data.fullName
@@ -389,7 +389,7 @@ router.post('/create-learner', function (req, res) {
     delete req.session.data.regID
     delete req.session.data.roleType
     delete req.session.data.learnerInput
-    res.redirect('../claims/prototypes/v7/learner/add-learner?inClaim='+req.session.data.inClaim+'&existingLearner=true')
+    res.redirect('learner/add-learner?inClaim='+req.session.data.inClaim+'&existingLearner=true')
   }
 
 });
@@ -488,7 +488,7 @@ function loadData(req) {
 router.get('/load-data', function (req, res) {
     //Load data from JSON files
     loadData(req);
-    res.redirect('../claims/prototypes/v7/before-you-start.html')
+    res.redirect('before-you-start.html')
 })
 
 

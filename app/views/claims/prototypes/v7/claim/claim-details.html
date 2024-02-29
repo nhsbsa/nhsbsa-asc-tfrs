@@ -81,19 +81,19 @@
     <p class="govuk-body"></p>
     <div class="govuk-button-group">
       {% if claim.training.fundingModel == "split" %}
-      <form action="/v7/submit-split-claim" method="post" novalidate>
+      <form action="../submit-split-claim" method="post" novalidate>
         <button type="submit" class="govuk-button" data-module="govuk-button">
           Submit claim
         </button>
       </form>
       {% else %}
-      <form action="/v7/submit-claim" method="post" novalidate>
+      <form action="../submit-claim" method="post" novalidate>
         <button type="submit" class="govuk-button" data-module="govuk-button">
           Submit claim
         </button>
       </form>
       {% endif %}
-      <form action="/v7/save-claim" method="post" novalidate>
+      <form action="../save-claim" method="post" novalidate>
         <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
           Save and finish later
         </button>
