@@ -1,5 +1,8 @@
 {% extends "../layouts/main.html" %}
 
+{% set qualitificationCourses = data.training | getUniqueQualificationCourseTypes_V7 %}
+
+
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -97,9 +100,9 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full"> 
         {% for trainingGroup in data.training %}
+            {% if trainingGroup.groupTitle != "Qualifications" %}
             <h2 class="govuk-heading-s">{{ trainingGroup.groupTitle }}</h2>
-            {% for training in trainingGroup.courses %}
-                
+                {% for training in trainingGroup.courses %}
                 <details class="govuk-details">
                     <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
@@ -110,7 +113,15 @@
                         {{ training.code }}
                     </div>
                 </details>
-            {% endfor %}
+                {% endfor %}
+            {% endif %}
+            {% if trainingGroup.groupTitle == "Qualifications" %}
+                <h2 class="govuk-heading-s">{{ trainingGroup.groupTitle }}</h2>
+                {% for courseType in qualitificationCourses %}
+                    <p>{{ courseType}}</p>
+                {% endfor %}
+                
+            {% endif %}
         {% endfor %}
     </div>
 </div>

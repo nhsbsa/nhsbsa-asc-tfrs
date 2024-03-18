@@ -253,14 +253,21 @@ addFilter('errorSummary_V7', function (claim) {
 
 addFilter('findClaim_V7', function (claimID, claims) {
     let claim  = null;
-
     for (let c of claims) {
         if (c.claimID==claimID) {
             claim = c
         }
-
     } 
-
     return claim;
+})
 
+addFilter('getUniqueQualificationCourseTypes_V7', function(trainingData){
+    const qualificationsObject = trainingData.find(obj => obj.groupTitle === "Qualifications");
+    const uniqueTypes = [];
+    qualificationsObject.courses.forEach(course => {
+      if (!uniqueTypes.includes(course.type)) {
+        uniqueTypes.push(course.type);
+      }
+    });
+    return uniqueTypes;
 })
