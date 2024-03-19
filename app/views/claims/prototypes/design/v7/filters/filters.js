@@ -8,109 +8,88 @@ const addFilter = govukPrototypeKit.views.addFilter
 const { removeSpacesAndLowerCase } = require('../../../../../../scripts/helpers/helpersV7.js');
 
 const fs = require('fs');
-addFilter('statusTag_V7', function (statusID, statuses) {
-    var statusName = null
-    for (const s of statuses) {
-        if (s.id == statusID) {
-            statusName = s.name
-        }
-    }
-    if (statusID == 'new') {
-        return '<strong class="govuk-tag govuk-tag--turquoise">New</strong>'
-    } else if (statusID == 'not-yet-submitted') {
-        return '<strong class="govuk-tag govuk-tag--blue">' + statusName + '</strong>'
-    } else if (statusID == 'submitted') {
-        return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
-    } else if (statusID == 'queried') {
-        return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
-    } else if (statusID == 'approved') {
-        return '<strong class="govuk-tag govuk-tag--green">' + statusName + '</strong>'
-    } else if (statusID == 'paid') {
-        return '<strong class="govuk-tag govuk-tag--purple">' + statusName + '</strong>'
-    } else {
-        return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
-    }
+
+// can we group any of these filters into the sections they are used in?
+
+// MARK: // Style helpers
+addFilter('removeSpacesAndLowerCase_V7', function (inputString) {
+    return removeSpacesAndLowerCase(inputString);
+})
+
+addFilter('statusTag_V7', function (statusID, statuses) { // is new status ever used?
+    const status = statuses.find(s => s.id === statusID);
+    const tagClasses = {
+        'new': 'turquoise',
+        'not-yet-submitted': 'blue',
+        'submitted': 'pink',
+        'queried': 'red',
+        'approved': 'green',
+        'paid': 'purple'
+    };
+    const tagColor = tagClasses[statusID] || 'grey';
+    const tagText = status ? status.name : 'Invalid Status';
+    return `<strong class="govuk-tag govuk-tag--${tagColor}">${tagText}</strong>`;
 }, { renderAsHtml: true })
 
+// MARK: // count filters
 addFilter('claimCount_V7', function (statusID, claims, claimType) {
-    let i = 0
+    let claimsCounted = 0
     for (const c of claims) {
         if (c.status == statusID && c.type == claimType) {
-            i++
+            claimsCounted++
         }
     }
-    return i
+    return claimsCounted
 })
 
 addFilter('pageCount_V7', function (content, perPage) {
     return Math.ceil(content / perPage)
 })
 
+
 addFilter('uniqueDates_V7', function (claims, dateType) {
-
     const uniqueMonthYears = new Set();
-
     claims.forEach(claim => {
         const startDate = new Date(claim[dateType]);
         const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
-
         uniqueMonthYears.add(monthYear);
     });
-
-    const sortedMonthYears = Array.from(uniqueMonthYears).sort();
-
-    const formattedDates = sortedMonthYears.map((dateString) => {
-        const [year, month] = dateString.split('-');
-        const formattedDate = new Date(year, month - 1); // Month is 0-indexed in JavaScript
-        const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' });
-        return formatter.format(formattedDate);
-
-    });
-
-
-    return formattedDates;
-
+    return Array.from(uniqueMonthYears)
+        .sort()
+        .map(dateString => {
+            const [year, month] = dateString.split('-');
+            const formattedDate = new Date(year, month - 1); // Month is 0-indexed in JavaScript
+            const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' });
+            return formatter.format(formattedDate);
+        });
 })
 
+// check this one is working
 addFilter('statusName_V7', function (statusID, statuses) {
-    var statusName = null
-    for (const s of statuses) {
-        if (s.id == statusID) {
-            statusName = s.name
-        }
-    }
-    return statusName
+    const status = statuses.find(s => s.id === statusID);
+    return status ? status.name : null;
 })
 
+// Manage claims
 addFilter('variableDate_V7', function (statusID) {
-    if (statusID == 'not-yet-submitted') {
-        return 'Created'
-    } else if (statusID == 'submitted') {
-        return 'Submitted'
-    } else if (statusID == 'queried') {
-        return 'Queried'
-    } else if (statusID == 'approved') {
-        return 'Approved'
-    } else if (statusID == 'paid') {
-        return 'Paid'
-    } else {
-        return 'Created'
+    switch (statusID) {
+        case 'not-yet-submitted':
+            return 'Created';
+        case 'submitted':
+            return 'Submitted';
+        case 'queried':
+            return 'Queried';
+        case 'approved':
+            return 'Approved';
+        case 'paid':
+            return 'Paid';
+        default:
+            return 'Created';
     }
-
-})
-
-addFilter('removeSpacesAndLowerCase_V7', function (inputString) {
-
-    // Convert the string to lowercase
-    let outputString = removeSpacesAndLowerCase(inputString);
-
-    return outputString;
-
 })
 
 addFilter('claimMatch_V7', function (claim, search, claimType) {
     let check = false;
-
     const formattedSearch = removeSpacesAndLowerCase(search);
 
     if (claim.type == claimType) {
@@ -120,7 +99,6 @@ addFilter('claimMatch_V7', function (claim, search, claimType) {
                 check = true
             }
         }
-
         if (claim.training != null) {
             const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
             if (formattedActivity.includes(formattedSearch)) {
@@ -142,7 +120,6 @@ addFilter('claimMatch_V7', function (claim, search, claimType) {
                 check = true
             }
         }
-
         if (claim.categoryName != null) {
             const formattedActivity = removeSpacesAndLowerCase(claim.categoryName);
             if (formattedActivity.includes(formattedSearch)) {
@@ -157,34 +134,30 @@ addFilter('claimMatch_V7', function (claim, search, claimType) {
                 }
             }
         }
-
     }
-
     return check;
 })
 
 addFilter('potName_V7', function (type) {
-    let name = "Pot Naming Error"
-    if (type == "TU") {
-        name = "Care skills funding"
-    } else if (type == "CPD") {
-        name = "Revalidation funding"
+    switch (type) {
+        case "TU":
+            return "Care skills funding";
+        case "CPD":
+            return "Revalidation funding";
+        default:
+            return "Pot Naming Error";
     }
-
-    return name
-
 })
 
 addFilter('newClaimLink_V7', function (type) {
-    let claimLink = "#"
-    if (type == "TU") {
-        claimLink = "claim/first-claim"
-    } else if (type == "CPD") {
-        claimLink = "claim/select-activity-type"
+    switch (type) {
+        case "TU":
+            return "claim/first-claim";
+        case "CPD":
+            return "claim/select-activity-type";
+        default:
+            return "#";
     }
-
-    return claimLink
-
 })
 
 addFilter('checkEligible_V7', function (learner, type, roleTypes) {
@@ -194,10 +167,7 @@ addFilter('checkEligible_V7', function (learner, type, roleTypes) {
     } else if (type == "CPD") {
         eligibleRoles = roleTypes.filter(role => role.eligibility.isCPDeligible).map(role => role.rolename);
     }
-
-
     return eligibleRoles.includes(learner.roleType)
-
 })
 
 addFilter('errorSummary_V7', function (claim) {
@@ -261,13 +231,36 @@ addFilter('findClaim_V7', function (claimID, claims) {
     return claim;
 })
 
-addFilter('getUniqueQualificationCourseTypes_V7', function(trainingData){
-    const qualificationsObject = trainingData.find(obj => obj.groupTitle === "Qualifications");
-    const uniqueTypes = [];
-    qualificationsObject.courses.forEach(course => {
-      if (!uniqueTypes.includes(course.type)) {
-        uniqueTypes.push(course.type);
-      }
-    });
-    return uniqueTypes;
+addFilter('groupByTitle_V7', function(training) {
+    const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
+    const organizedData = {};
+    for (const course of qualificationsObject.courses) {
+        const title = course.title;
+        if (!organizedData[title]) {
+            organizedData[title] = [];
+        }
+        organizedData[title].push(course);
+    }
+    return organizedData;
 })
+
+addFilter('getUniqueCourseTitles_V7', function(training) {
+    const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
+    const uniqueTitles = [];
+
+    for (let course of qualificationsObject.courses) {
+        if (!uniqueTitles.includes(course.title)) {
+            uniqueTitles.push(course.title);
+        }
+    }
+    return uniqueTitles
+})
+
+addFilter('coursesCount_V7', function(courses) {
+    let count  = 0;
+    for (const c of courses) {
+        count ++
+    } 
+    return count;
+})
+

@@ -1,7 +1,7 @@
 {% extends "../layouts/main.html" %}
 
-{% set qualitificationCourses = data.training | getUniqueQualificationCourseTypes_V7 %}
-
+{% set sortedCourseData = data.training | groupByTitle_V7 %}
+{% set uniqueCourseTitles = data.training | getUniqueCourseTitles_V7 %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -52,56 +52,54 @@
     </div>
 </div>
 
+<br></br>
+
 <div class="govuk-grid-row">
-    <div class="govuk-grid-full">
+    <div class="govuk-grid-column-full">
         <h1 class="govuk-heading-l">Approved activities for care skills funding</h1>
     </div>
 </div>
 
 <div class="govuk-grid-row">
-    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Introductory modules for managers (5)</a></p>
-    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Digital learning for managers (1)</a></p>
-    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Digital learning for CQC inspection preparation (1)</a></p>
-    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Creating an inclusive organisation digital learning modules  (2)</a></p>
-    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Digital learning for Care Certificate Assessors  (1)</a></p>
-    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Learning programmes (3) </a></p>
-    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Mental Health First Aid (1) </a></p>
-    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Positive Behavioural Support (2)</a></p>
-    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Qualifications (50)</a></p>    
+    <div class="govuk-grid-column-full">
+        <h2 class="govuk-body-m">Contents</h2>
+        <h2 class="govuk-heading-m">Courses</h2>
+        {% for trainingGroup in data.training %}
+            {% if trainingGroup.groupTitle != "Qualifications" %}
+            <p class="govuk-body">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li><a class="govuk-link govuk-link--no-visited-state" href="#{{ trainingGroup.groupTitle }}">{{ trainingGroup.groupTitle }} ({{ trainingGroup.courses | coursesCount_V7 }})</a></p></li>
+                </ul>
+            </p>
+            {% endif %}
+        {% endfor %}
+        <br />
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m">Qualifications</h2>
+        {% for course in uniqueCourseTitles %}
+            <p class="govuk-body">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li><a class="govuk-link govuk-link--no-visited-state" href="#{{course}}">{{course}} (4 providers)</a></p></li>
+                </ul>
+            </p>
+        {% endfor %}
+    </div>
 </div>
 
 
-<!-- <br></br> -->
 
-<!-- <h2 class="govuk-heading-s">Introductory modules for managers</h2>
-<details class="govuk-details">
-    <summary class="govuk-details__summary">
-      <span class="govuk-details__summary-text">
-        Leading and managing in adult social care
-      </span>
-    </summary>
-    <div class="govuk-details__text">
-      We need to know your nationality so we can work out which elections you’re entitled to vote in. If you cannot provide your nationality, you’ll have to send copies of identity documents through the post.
-    </div>
-</details>
-
-<h2 class="govuk-heading-s">Digital learning for managers</h2>
-<details class="govuk-details">
-    <summary class="govuk-details__summary">
-      <span class="govuk-details__summary-text">
-        Leading and managing in adult social care
-      </span>
-    </summary>
-    <div class="govuk-details__text">
-      We need to know your nationality so we can work out which elections you’re entitled to vote in. If you cannot provide your nationality, you’ll have to send copies of identity documents through the post.
-    </div>
-</details> -->
+<br></br>
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full"> 
+        <h2 class="govuk-heading-m">Courses</h2>
         {% for trainingGroup in data.training %}
             {% if trainingGroup.groupTitle != "Qualifications" %}
-            <h2 class="govuk-heading-s">{{ trainingGroup.groupTitle }}</h2>
+            <h3 class="govuk-heading-s" id="{{ trainingGroup.groupTitle }}">{{ trainingGroup.groupTitle }}</h3>
                 {% for training in trainingGroup.courses %}
                 <details class="govuk-details">
                     <summary class="govuk-details__summary">
@@ -110,22 +108,53 @@
                     </span>
                     </summary>
                     <div class="govuk-details__text">
-                        {{ training.code }}
+                        <p class="govuk-body">Code: {{training.code}}</p>
+                        <p class="govuk-body">Type: {{training.type}}</p>
+                        <p class="govuk-body">Category: {{training.category}}</p>
+                        <p class="govuk-body">Awarding Organisation: {{training.awardingOrganisation}}</p>
+                        <p class="govuk-body">Total Learning Time: {{training.totalLearningTime}}</p>
+                        <p class="govuk-body">Maximum reimbursement amount per learner: £{{training.reimbursementAmount}}</p>
+                        <p class="govuk-body">Funding Model: {{training.fundingModel}}</p>
+                        <a href="{{training.link}}">Learn more here</a> 
                     </div>
                 </details>
                 {% endfor %}
             {% endif %}
-            {% if trainingGroup.groupTitle == "Qualifications" %}
-                <h2 class="govuk-heading-s">{{ trainingGroup.groupTitle }}</h2>
-                {% for courseType in qualitificationCourses %}
-                    <p>{{ courseType}}</p>
-                {% endfor %}
-                
-            {% endif %}
+            <br></br>
         {% endfor %}
     </div>
 </div>
 
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full"> 
+        <h2 class="govuk-heading-m">Qualifications</h2>
+        {% for title in uniqueCourseTitles %}
+            <h3 class="govuk-heading-s" id="{{ title }}">{{ title }}</h3>
+            
+            {% for provider in sortedCourseData[title] %}
+                <details class="govuk-details">
+                    <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        [{{provider.code}}] {{title}} ({{provider.awardingOrganisation}}) 
+                    </span>
+                    </summary>
+                    <div class="govuk-details__text">
+                        <p class="govuk-body">Code: {{provider.code}}</p>
+                        <p class="govuk-body">Type: {{provider.type}}</p>
+                        <p class="govuk-body">Awarding Organisation: {{provider.awardingOrganisation}}</p>
+                        <p class="govuk-body">Total Learning Time: {{provider.totalLearningTime}}</p>
+                        <p class="govuk-body">Maximum reimbursement amount per learner: {{provider.reimbursementAmount}}</p>
+                        <p class="govuk-body">Funding Model: {{provider.fundingModel}}</p>
+                        <a href="{{provider.link}}">Learn more here</a> 
+                    </div>
+                </details>
+            {% endfor %}
+            <br></br>
+        {% endfor %}
+
+    </div>
+</div>
 
 
 {% endblock %}
