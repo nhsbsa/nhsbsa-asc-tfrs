@@ -264,3 +264,12 @@ addFilter('coursesCount_V7', function(courses) {
     return count;
 })
 
+addFilter('formatCount_V7', function (courses) {
+    let count = courses.length;
+    let text = count + " provider";
+    if (count > 1) {
+        text += "s"
+    };
+    return text;
+}) 
+
