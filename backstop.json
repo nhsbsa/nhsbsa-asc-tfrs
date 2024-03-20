@@ -12,7 +12,7 @@
     "scenarios": [
         {
             "label": "1-start",
-            "url": "http://localhost:3000/v7/load-data"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/before-you-start"
         },
         {
             "label": "2-eligibility",
@@ -80,7 +80,7 @@
         },
         {
             "label": "18-TU-new-claim-learner-input",
-            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/select-learner?learnerInput=roy&?id=963866"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/select-learner?learnerInput=roy&id=963866&claimType=TU"
         },
         {
             "label": "19-TU-new-claim-new-learner",
@@ -204,11 +204,11 @@
         },
         {
             "label": "49-CPD-not-yet-submitted-claim",
-            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=131118"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=040998"
         },
         {
             "label": "50-CPD-submitted-claim",
-            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=859403"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=995093"
         },
         {
             "label": "51-CPD-queried-claim",
@@ -216,11 +216,11 @@
         },
         {
             "label": "52-CPD-approved-claim",
-            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=542552"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=930429"
         },
         {
             "label": "53-CPD-paid-claim",
-            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=706486"
+            "url": "http://localhost:3000/claims/prototypes/design/v7/claim/claim-details?id=891176"
         }
     ],
     "paths": {
