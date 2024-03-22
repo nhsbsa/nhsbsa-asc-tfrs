@@ -1,223 +1,237 @@
 {% extends "../layouts/main.html" %}
 
+{% set sortedCourseData = data.training | groupByTitle_V7 %}
+{% set uniqueCourseTitles = data.training | getUniqueCourseTitles_V7 %}
+
 {% block content %}
+
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l">Approved training for care skills funding</h1>
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l">Approved activities for care skills funding</h1>
     </div>
 </div>
+
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-third">
-        <div class="moj-filter">
+    <div class="govuk-grid-column-full">
+        <h2 class="govuk-body-m">Explore the courses and qualitifications offered. Click to skip to the section to find out more.</h2>
+        <h2 class="govuk-heading-m">Courses</h2>
+        {% for trainingGroup in data.training %}
+            {% if trainingGroup.groupTitle != "Qualifications" %}
+            <p class="govuk-body">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li><a class="govuk-link govuk-link--no-visited-state" href="#{{ trainingGroup.groupTitle }}">{{ trainingGroup.groupTitle }} ({{ trainingGroup.courses | coursesCount_V7 }})</a></p></li>
+                </ul>
+            </p>
+            {% endif %}
+        {% endfor %}
+        <br />
+    </div>
+</div>
 
-            <div class="moj-filter__header">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m">Qualifications</h2>
+        {% for course in uniqueCourseTitles %}
+            <p class="govuk-body">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li><a class="govuk-link govuk-link--no-visited-state" href="#{{course}}">{{course}} ({{sortedCourseData[course] | formatCount_V7}})</a></p></li>
+                </ul>
+            </p>
+        {% endfor %}
+    </div>
+</div>
 
-                <div class="moj-filter__header-title">
-                    <h2 class="govuk-heading-m">Filter</h2>
-                </div>
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-                <div class="moj-filter__header-action">
 
-                </div>
+<br></br>
 
-            </div>
-
-            <div class="moj-filter__content">
-
-                <div class="moj-filter__selected">
-
-                    <div class="moj-filter__selected-heading">
-
-                        <div class="moj-filter__heading-title">
-                            <h2 class="govuk-heading-m">Selected filters</h2>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full"> 
+        <h2 class="govuk-body-m">Courses</h2>
+        {% for trainingGroup in data.training %}
+            {% if trainingGroup.groupTitle != "Qualifications" %}
+            <h3 class="govuk-heading-s" id="{{ trainingGroup.groupTitle }}">{{ trainingGroup.groupTitle }}</h3>
+                {% for training in trainingGroup.courses %}
+                <details class="govuk-details">
+                    <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        {{ training.title }}
+                    </span>
+                    </summary>
+                    
+                    <br></br>
+                    <div class="govuk-summary-card">
+                        <div class="govuk-summary-card__title-wrapper">
+                          <h2 class="govuk-summary-card__title">
+                            <!-- {{training.title}}  -->
+                          </h2>
+                          <ul class="govuk-summary-card__actions">
+                            <li class="govuk-summary-card__action">
+                                <a href="{{training.link}}">Learn more here</a> 
+                            </li>
+                          </ul>
                         </div>
+                        <div class="govuk-summary-card__content">
+                          <dl class="govuk-summary-list">
+                            <div class="govuk-summary-list__row">
+                              <dt class="govuk-summary-list__key">
+                                Code
+                              </dt>
+                              <dd class="govuk-summary-list__value">
+                                {{training.code}}
+                              </dd>
+                            </div>
 
-                        <div class="moj-filter__heading-action">
-                            <p><a class="govuk-link govuk-link--no-visited-state" href="">Clear filters</a></p>
-                        </div>
-
-                    </div>
-
-                    <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Type</h3>
-
-                    <ul class="moj-filter-tags">
-
-                        <li><a class="moj-filter__tag" href="/path/to/remove/this"><span
-                                    class="govuk-visually-hidden">Remove this filter</span> Leadership</a></li>
-
-                        <li><a class="moj-filter__tag" href="/path/to/remove/this"><span
-                                    class="govuk-visually-hidden">Remove this filter</span> Dementia</a></li>
-
-                        <li><a class="moj-filter__tag" href="/path/to/remove/this"><span
-                                    class="govuk-visually-hidden">Remove this filter</span>Neurodivergence & complex
-                                needs</a></li>
-
-                    </ul>
-
-                </div>
-
-                <div class="moj-filter__options">
-
-                    <button class="govuk-button" data-module="govuk-button" data-test-id="submit-button">
-                        Apply filters
-                    </button>
-
-                    <div class="govuk-form-group">
-                        <label class="govuk-label govuk-label--m" for="keywords">
-                            Keywords
-                        </label>
-
-                        <input class="govuk-input" id="keywords" name="keywords" type="text">
-
-                    </div>
-
-                    <div class="govuk-form-group">
-
-                        <fieldset class="govuk-fieldset">
-
-                            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-
+                            <div class="govuk-summary-list__row">
+                              <dt class="govuk-summary-list__key">
                                 Type
-
-                            </legend>
-
-                            <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
-
-                                <div class="govuk-checkboxes__item">
-                                    <input class="govuk-checkboxes__input" id="type" name="type" type="checkbox"
-                                        value="1" checked>
-                                    <label class="govuk-label govuk-checkboxes__label" for="type">
-                                        Dementia (18)
-                                    </label>
-
-                                </div>
-
-                                <div class="govuk-checkboxes__item">
-                                    <input class="govuk-checkboxes__input" id="type-2" name="type" type="checkbox"
-                                        value="2">
-                                    <label class="govuk-label govuk-checkboxes__label" for="type-2">
-                                        Digital (5)
-                                    </label>
-
-                                </div>
-
-                                <div class="govuk-checkboxes__item">
-                                    <input class="govuk-checkboxes__input" id="type-3" name="type" type="checkbox"
-                                        value="3" checked>
-                                    <label class="govuk-label govuk-checkboxes__label" for="type-3">
-                                        Leadership (2)
-                                    </label>
-
-                                </div>
-
-                                <div class="govuk-checkboxes__item">
-                                    <input class="govuk-checkboxes__input" id="type-3" name="type" type="checkbox"
-                                        value="3">
-                                    <label class="govuk-label govuk-checkboxes__label" for="type-3">
-                                        Delegated healthcare tasks (22)
-                                    </label>
-
-                                </div>
-
-                                <div class="govuk-checkboxes__item">
-                                    <input class="govuk-checkboxes__input" id="type-3" name="type" type="checkbox"
-                                        value="3" checked>
-                                    <label class="govuk-label govuk-checkboxes__label" for="type-3">
-                                        Neurodivergence & complex needs (6)
-                                    </label>
-
-                                </div>
-
-                                <div class="govuk-checkboxes__item">
-                                    <input class="govuk-checkboxes__input" id="type-3" name="type" type="checkbox"
-                                        value="3">
-                                    <label class="govuk-label govuk-checkboxes__label" for="type-3">
-                                        Other (13)
-                                    </label>
-
-                                </div>
+                              </dt>
+                              <dd class="govuk-summary-list__value">
+                                {{training.type}}
+                              </dd>
                             </div>
 
-                        </fieldset>
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                  Awarding organisation
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{training.awardingOrganisation}}
+                                </dd>
+                              </div>
 
-                    </div>
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Total learning time
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{training.totalLearningTime}}
+                                </dd>
+                              </div>
 
-                </div>
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Maximum reimbursement amount per learner
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                  £{{training.reimbursementAmount}}
+                                </dd>
+                              </div>
 
-            </div>
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Funding model
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{training.fundingModel}}
+                                </dd>
+                              </div>
 
-        </div>
-
-    </div>
-    <div class="govuk-grid-column-two-thirds">
-        <table class="govuk-table">
-            <thead class="govuk-table__head">
-                <tr class="govuk-table__row">
-                    <th scope="col" class="govuk-table__header">Course</th>
-                    <th scope="col" class="govuk-table__header">Category</th>
-                </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">
-                        <details class="govuk-details" data-module="govuk-details">
-                            <summary class="govuk-details__summary">
-                                <span class="govuk-details__summary-text">
-                                    Becoming a manager
-                                </span>
-                            </summary>
-                            <div class="govuk-details__text">
-                                New and improved course for 2023.<br>
-                                Cost: £200<br>
-                                Reimbursable cost: £180<br>
-                                Provider: Training 101<br>
-                                <a href="#" class="govuk-link">Read more</a> about this course.
-                            </div>
-                        </details>
-                    </td>
-                    <td class="govuk-table__cell">Leadership</td>
-                </tr>
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">
-                        <details class="govuk-details" data-module="govuk-details">
-                            <summary class="govuk-details__summary">
-                                <span class="govuk-details__summary-text">
-                                    Dementia Basics
-                                </span>
-                            </summary>
-                            <div class="govuk-details__text">
-                                New and improved course for 2023.<br>
-                                Cost: £200<br>
-                                Reimbursable cost: £180<br>
-                                Provider: Training 101<br>
-                                <a href="#" class="govuk-link">Read more</a> about this course.
-                            </div>
-                        </details>
-                    </td>
-                    <td class="govuk-table__cell">Dementia</td>
-                </tr>
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">
-                        <details class="govuk-details" data-module="govuk-details">
-                            <summary class="govuk-details__summary">
-                                <span class="govuk-details__summary-text">
-                                    Intro to autism
-                                </span>
-                            </summary>
-                            <div class="govuk-details__text">
-                                New and improved course for 2023.<br>
-                                Cost: £200<br>
-                                Reimbursable cost: £180<br>
-                                Provider: Training 101<br>
-                                <a href="#" class="govuk-link">Read more</a> about this course.
-                            </div>
-                        </details>
-                    </td>
-                    <td class="govuk-table__cell">Neurodivergence & complex needs</td>
-                </tr>
-            </tbody>
-        </table>
+                          </dl>
+                        </div>
+                      </div>
+                </details>
+                {% endfor %}
+            {% endif %}
+            <br></br>
+        {% endfor %}
     </div>
 </div>
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full"> 
+        <h2 class="govuk-body-m">Qualifications</h2>
+        {% for title in uniqueCourseTitles %}
+            <h3 class="govuk-heading-s" id="{{ title }}">{{ title }}</h3>
+            
+            {% for provider in sortedCourseData[title] %}
+                <details class="govuk-details">
+                    <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                    [{{provider.code}}] {{title}} ({{provider.awardingOrganisation}}) 
+                    </span>
+                    </summary>
+                    <br></br>
+                    <div class="govuk-summary-card">
+                        <div class="govuk-summary-card__title-wrapper">
+                          <h2 class="govuk-summary-card__title">
+                            {{title}} 
+                          </h2>
+                          <ul class="govuk-summary-card__actions">
+                            <li class="govuk-summary-card__action">
+                                <a href="{{provider.link}}">Learn more here</a> 
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="govuk-summary-card__content">
+                          <dl class="govuk-summary-list">
+                            <div class="govuk-summary-list__row">
+                              <dt class="govuk-summary-list__key">
+                                Code
+                              </dt>
+                              <dd class="govuk-summary-list__value">
+                                {{provider.code}}
+                              </dd>
+                            </div>
+
+                            <div class="govuk-summary-list__row">
+                              <dt class="govuk-summary-list__key">
+                                Type
+                              </dt>
+                              <dd class="govuk-summary-list__value">
+                                {{provider.type}}
+                              </dd>
+                            </div>
+
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                  Awarding organisation
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                  {{provider.awardingOrganisation}}
+                                </dd>
+                              </div>
+
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Total learning time
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                  {{provider.totalLearningTime}}
+                                </dd>
+                              </div>
+
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Maximum reimbursement amount per learner:
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                  £{{provider.reimbursementAmount}}
+                                </dd>
+                              </div>
+
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Funding model: 
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                  {{provider.fundingModel}}
+                                </dd>
+                              </div>
+
+                          </dl>
+                        </div>
+                      </div>
+                </details>
+            {% endfor %}
+            <br></br>
+        {% endfor %}
+
+    </div>
+</div>
+
 
 {% endblock %}
+

@@ -264,3 +264,46 @@ addFilter('findClaim_V8', function (claimID, claims) {
     return claim;
 
 })
+
+
+addFilter('groupByTitle_V7', function(training) {
+    const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
+    const organizedData = {};
+    for (const course of qualificationsObject.courses) {
+        const title = course.title;
+        if (!organizedData[title]) {
+            organizedData[title] = [];
+        }
+        organizedData[title].push(course);
+    }
+    return organizedData;
+})
+
+addFilter('getUniqueCourseTitles_V7', function(training) {
+    const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
+    const uniqueTitles = [];
+
+    for (let course of qualificationsObject.courses) {
+        if (!uniqueTitles.includes(course.title)) {
+            uniqueTitles.push(course.title);
+        }
+    }
+    return uniqueTitles
+})
+
+addFilter('coursesCount_V7', function(courses) {
+    let count  = 0;
+    for (const c of courses) {
+        count ++
+    } 
+    return count;
+})
+
+addFilter('formatCount_V7', function (courses) {
+    let count = courses.length;
+    let text = count + " provider";
+    if (count > 1) {
+        text += "s"
+    };
+    return text;
+}) 
