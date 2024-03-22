@@ -1,0 +1,117 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim_V8(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Claim: ", claim.claimID, " - ", (claim.type | potName_V8)] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+{% if claim.status != 'new' %}
+<a href="../manage-claims#{{ claim.status }}" class="govuk-back-link">Back</a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {% if data.submitError %}
+    {% include "../_components/claim-sections/errorCatch.html" %}
+    {% endif %}
+    <span class="govuk-caption-l">{{ claim.type | potName_V8 }}</span>
+    <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | statusTag_V8(data.statuses) }}</h1>
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% if claim.status == "queried" %}
+    <h2 class="govuk-heading-m">Claim query</h2>
+    <p class="govuk-body">The evidence of payment doesn't not show the correct course code.</p>
+    <p class="govuk-body">Please review the evidence and edit the selected course or upload a more suitable piece of
+      evidence.</p>
+    <button type="submit" class="govuk-button" data-module="govuk-button">
+      Review claim
+    </button>
+    {% endif %}
+
+
+    {% if claim.type == "TU" %}
+    {% include "../_components/claim-sections/training.html" %}
+    {% elif claim.type == "CPD" %}
+    {% include "../_components/claim-sections/activity.html" %}
+    {% endif %}
+
+    {% include "../_components/claim-sections/learners.html" %}
+
+    {% include "../_components/claim-sections/evidencePayment.html" %}
+
+    {% if claim.training.fundingModel == "split" %}
+    {% include "../_components/claim-sections/evidenceEnrollment.html" %}
+    {% endif %}
+
+    {% if claim.type == "TU" or claim.categoryName == "Courses" %}
+    {% include "../_components/claim-sections/evidenceCompletion.html" %}
+    {% endif %}
+
+    {% include "../_components/claim-sections/supportingNotes.html" %}
+
+
+    {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+    <h2 class="govuk-heading-m">What happens next</h2>
+    <p class="govuk-body">When you have added all the necessary information to this claim you can submit it for
+      processing. Check that nothing is showing as 'incomplete' and that you have added all the learners you need to.
+    </p>
+    <p class="govuk-body">If there is still information to add, you can save and finish the claim later.</p>
+    <div class="govuk-warning-text">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-visually-hidden">Warning</span>
+        <p><strong>I declare that the information I have given in this claim is correct and complete. It also meets the
+            rules set out in the grant award letter.</strong></p>
+
+        <p><strong>I understand that it may be subject to:</strong></p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li><strong>verification checks</strong></li>
+          <li><strong>audit review</strong></li>
+          <li><strong>counter fraud checks</strong></li>
+        </ul>
+      </strong>
+    </div>
+    <p class="govuk-body"></p>
+    <div class="govuk-button-group">
+      {% if claim.training.fundingModel == "split" %}
+      <form action="../submit-split-claim" method="post" novalidate>
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Submit claim
+        </button>
+      </form>
+      {% else %}
+      <form action="../submit-claim" method="post" novalidate>
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Submit claim
+        </button>
+      </form>
+      {% endif %}
+      <form action="../save-claim" method="post" novalidate>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Save and finish later
+        </button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+  <div class="govuk-grid-column-one-third">
+    {% include "../_components/claim-sections/claimAmount.html" %}
+
+    {% if not (claim.status == "new" or claim.status == "not-yet-submitted") %}
+    {% include "../_components/claim-sections/claimHistory.html" %}
+    {% endif %}
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <h2 class="govuk-heading-m">Related content</h2>
+    <p class="govuk-body"><a href="#" class="govuk-link">Find out more about evidence requirements</a></p>
+    <p class="govuk-body"><a href="#" class="govuk-link">Find out more about eligibility requirements</a>
+  </div>
+</div>
+{% endblock %}

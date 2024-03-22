@@ -1,0 +1,46 @@
+{% if claim.type == "TU" %}
+{% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.training != null %}
+<p class="govuk-body">The maximum reimburseable amount per learner for this activity is <br><strong
+        class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}</strong></p>
+{% elif (claim.status == "submitted" or claim.status == "queried") %}
+<p class="govuk-body">For {{ claim.learners.length }} learner{% if claim.learners.length > 1 %}s{% endif %} you could
+    get back up to <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount *
+        claim.learners.length}}</strong><br> for this claim.</p>
+<details class="govuk-details">
+    <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+            What does this mean?
+        </span>
+    </summary>
+    <div class="govuk-details__text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+    </div>
+</details>
+{% elif (claim.status == "approved" or claim.status == "paid") %}
+<p class="govuk-body">You will receive <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount *
+        claim.learners.length}}</strong><br> for this claim.</p>
+<details class="govuk-details">
+    <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+            How was this calculated?
+        </span>
+    </summary>
+    <div class="govuk-details__text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+    </div>
+</details>
+{% endif %}
+{% elif claim.type == "CPD" %}
+
+{% if (claim.status == "new" or claim.status == "not-yet-submitted" or claim.status == "submitted" or claim.status ==
+"queried") and claim.claimAmount != null %}
+<p class="govuk-body">The amount you should revieve for this claim is: <br><strong class="govuk-!-font-size-36">£{{
+        claim.claimAmount }}</strong></p>
+{% elif (claim.status == "approved" or claim.status == "paid") %}
+<p class="govuk-body">You will receive <br><strong class="govuk-!-font-size-36">£{{ claim.claimAmount}}</strong><br> for
+    this claim.</p>
+{% endif %}
+
+{% endif %}
