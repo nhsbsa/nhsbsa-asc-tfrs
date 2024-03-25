@@ -81,25 +81,20 @@ function generateLearners (quantity, version) {
   const rolesData = JSON.parse(fs.readFileSync('./app/data/' + version + '/role-types.json', 'utf8'));
 
   const preSetLearners = JSON.parse(fs.readFileSync('./app/data/' + version + '/pre-set-learners.json', 'utf8'));
-
   data = data.concat(preSetLearners);
 
 
   for (let i = 5; i <= quantity; i++) {
     const id = generateUniqueID(i);
     const fullName = fakerEN_GB.person.firstName() + ' ' + fakerEN_GB.person.lastName();
-    //const dateOfBirth = generateDOB();
     const roleType = getRandomRole(rolesData);
     const jobTitle = getRandomjobTitle(roleType, rolesData);
-    //const workplace = fakerEN_GB.location.city();
 
     const person = {
       id,
       fullName,
-      //dateOfBirth,
       jobTitle,
       roleType,
-      //workplace,
     };
 
     data.push(person);

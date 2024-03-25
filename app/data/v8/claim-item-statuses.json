@@ -2,7 +2,7 @@
     {
         "id": "not-yet-submitted",
         "name": "Not yet submitted",
-        "distribution": 0.15
+        "distribution": 0.25
     },
     {
         "id": "submitted",
@@ -10,18 +10,13 @@
         "distribution": 0.40
     },
     {
-        "id": "queried",
-        "name": "Queried by BSA",
+        "id": "rejected",
+        "name": "Rejected",
         "distribution": 0.05
     },
     {
         "id": "approved",
         "name": "Approved",
-        "distribution": 0.10
-    },
-    {
-        "id": "paid",
-        "name": "Paid",
         "distribution": 0.30
     }
 ]

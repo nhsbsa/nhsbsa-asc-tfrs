@@ -1,15 +1,20 @@
 <h2 class="govuk-heading-m" id="payment">Evidence of payment</h2>
 <dl class="govuk-summary-list">
 
+  {% if not claim.costDate %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+    <dt class="govuk-summary-list__key">
+      Payment date
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Add payment date</a>
+    </dd>
+  </div>
+  {% else %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
       Payment date
     </dt>
-    {% if not claim.costDate %}
-    <dd class="govuk-summary-list__value">
-      <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Add payment date</a>
-    </dd>
-    {% else %}
     <dd class="govuk-summary-list__value">
       {{ claim.costDate | govukDate }}
     </dd>
@@ -19,18 +24,23 @@
           payment date</span></a>
     </dd>
     {% endif %}
-    {% endif %}
   </div>
+  {% endif %}
 
+  {% if not claim.evidenceOfPayment %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+    <dt class="govuk-summary-list__key">
+      Evidence of payment
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=payment">Add evidence</a>
+    </dd>
+  </div>
+  {% else %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
       Evidence of payment
     </dt>
-    {% if not claim.evidenceOfPayment %}
-    <dd class="govuk-summary-list__value">
-      <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=payment">Add evidence</a>
-    </dd>
-    {% else %}
     <dd class="govuk-summary-list__value">
       {{ claim.evidenceOfPayment }}
     </dd>
@@ -45,6 +55,6 @@
       </ul>
     </dd>
     {% endif %}
-    {% endif %}
   </div>
+  {% endif %}
 </dl>

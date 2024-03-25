@@ -1,0 +1,30 @@
+<h2 class="govuk-heading-m" id="learner">Learner</h2>
+<dl class="govuk-summary-list">
+  {% if not claim.learner %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+    <dt class="govuk-summary-list__key">
+      Learner
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add learner</a>
+    </dd>
+  </div>
+  {% else %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Learner
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <p class="govuk-body">{{ claim.learner.fullName }}</p>
+      <p class="govuk-body">{{ claim.learner.id }}</p>
+      {% if data.claimType == "CPD" %}<p class="govuk-body">Budget remaining: £395</p>{% endif %}
+    </dd>
+    {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Change<span
+          class="govuk-visually-hidden"> learner</span></a>
+    </dd>
+    {% endif %}
+  </div>
+  {% endif %}
+</dl>

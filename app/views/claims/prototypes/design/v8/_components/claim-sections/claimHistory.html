@@ -47,7 +47,7 @@
         }}</time>
     </p>
     <div class="moj-timeline__description">Your claim has been reviewed by NHS BSA and approved. You will recieve £{{
-      claim.training.reimbursementAmount * claim.learners.length}}.</div>
+      claim.training.reimbursementAmount }}.</div>
   </div>
   {% endif %}
   {% if ( claim.status == "paid") %}
@@ -61,7 +61,7 @@
         }}</time>
     </p>
     <div class="moj-timeline__description">Your claim has been paid by NHS BSA. You should have recieved £{{
-      claim.training.reimbursementAmount * claim.learners.length}}.</div>
+      claim.training.reimbursementAmount }}.</div>
   </div>
   {% endif %}
 </div>

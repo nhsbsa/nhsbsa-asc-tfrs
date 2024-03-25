@@ -44,7 +44,7 @@
                     <th class="govuk-table__header govuk-!-width-one-third" scope="col" aria-sort="none">Activity name
                     </th>
                     <th class="govuk-table__header" scope="col" aria-sort="none">Start date</th>
-                    <th class="govuk-table__header" scope="col" aria-sort="none">Learners</th>
+                    <th class="govuk-table__header" scope="col" aria-sort="none">Learner</th>
                     <th class="govuk-table__header" scope="col" aria-sort="descending">Status</th>
                 </tr>
             </thead>
@@ -57,20 +57,7 @@
                     <td class="govuk-table__cell">{{ claim.training.title }}</td>
                     <td class="govuk-table__cell" data-sort-value="{{ claim.startDate }}">{{ claim.startDate |
                         govukDate("truncate") }}</td>
-                    <td class="govuk-table__cell" data-sort-value="{{claim.learners.length}}">
-                        <details class="govuk-details">
-                            <summary class="govuk-details__summary">
-                                <span class="govuk-details__summary-text">
-                                    {{claim.learners.length}} learners
-                                </span>
-                            </summary>
-                            <div class="govuk-details__text">
-                                {% for learner in claim.learners %}
-                                {{learner.fullName}}<br>
-                                {% endfor %}
-                            </div>
-                        </details>
-                    </td>
+                    <td class="govuk-table__cell" data-sort-value="{{claim.learner}}">{{claim.learner.fullName}}</td>
                     <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
                         statusTag_V8(data.statuses) }}</td>
                 </tr>

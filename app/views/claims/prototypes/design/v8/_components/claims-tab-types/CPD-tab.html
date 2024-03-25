@@ -19,8 +19,8 @@
             <td class="govuk-table__header" scope="row"><a class="govuk-link"
                     href="claim/claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a></td>
             <td class="govuk-table__cell">{{ claim.categoryName}}</td>
-            <td class="govuk-table__cell" data-sort-value="{{claim.learners[0].fullName}}">
-                {{claim.learners[0].fullName}}</td>
+            <td class="govuk-table__cell" data-sort-value="{{claim.learner.fullName}}">
+                {{claim.learner.fullName}}</td>
             {% if status.id == 'not-yet-submitted' %}
             <td class="govuk-table__cell" data-sort-value="{{ claim.createdDate }}">{{ claim.createdDate |
                 govukDate("truncate") }}</td>

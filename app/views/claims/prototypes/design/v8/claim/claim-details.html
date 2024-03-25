@@ -24,14 +24,9 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    {% if claim.status == "queried" %}
-    <h2 class="govuk-heading-m">Claim query</h2>
-    <p class="govuk-body">The evidence of payment doesn't not show the correct course code.</p>
-    <p class="govuk-body">Please review the evidence and edit the selected course or upload a more suitable piece of
-      evidence.</p>
-    <button type="submit" class="govuk-button" data-module="govuk-button">
-      Review claim
-    </button>
+    {% if claim.status == "rejected" %}
+    <h2 class="govuk-heading-m">Claim rejected</h2>
+    <p class="govuk-body">{{claim.rejectedNote}}</p>
     {% endif %}
 
 
@@ -41,13 +36,9 @@
     {% include "../_components/claim-sections/activity.html" %}
     {% endif %}
 
-    {% include "../_components/claim-sections/learners.html" %}
+    {% include "../_components/claim-sections/learner.html" %}
 
     {% include "../_components/claim-sections/evidencePayment.html" %}
-
-    {% if claim.training.fundingModel == "split" %}
-    {% include "../_components/claim-sections/evidenceEnrollment.html" %}
-    {% endif %}
 
     {% if claim.type == "TU" or claim.categoryName == "Courses" %}
     {% include "../_components/claim-sections/evidenceCompletion.html" %}

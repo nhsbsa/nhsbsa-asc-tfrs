@@ -1,15 +1,6 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim_V8(data.claims) %}
 
-{% if data.type == 'completion' or data.type == 'enrollment' %}
-{% set learner = null %}
-{% for l in data.learners %}
-{% if l.id == data.learnerID %}
-{% set learner = l %}
-{% endif %}
-{% endfor %}
-{% endif %}
-
 {% block pageTitle %}
 {{ ["Add evidence - Claim: ", claim.claimID] | join }}
 {% endblock %}
@@ -25,10 +16,10 @@
         <form action="../add-evidence" method="post" novalidate>
             <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
             <h1 class="govuk-heading-l">Add evidence of {{ data.type }} {% if data.type == 'completion' or data.type ==
-                'enrollment' %} for {{ learner.fullName }}{% endif %}</h1>
+                'enrollment' %} for {{ claim.learner.fullName }}{% endif %}</h1>
             <p class="govuk-body">
                 You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' or
-                data.type == 'enrollment' %} for {{ learner.fullName }}{% endif %}. This could be a PDF or image file.
+                data.type == 'enrollment' %} for {{ claim.learner.fullName }}{% endif %}. This could be a PDF or image file.
             </p>
             <p class="govuk-body">
                 If you need to add an email as evidence, save the email as a PDF file and then upload that.
