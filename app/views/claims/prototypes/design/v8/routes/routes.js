@@ -6,100 +6,6 @@ const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../../../..
 
 // v8 Prototype routes
 
-
-router.post('/first-start', function (req, res) {
-
-  // Make a variable and give it the value from 'startingpoint'
-  var claimGuidance = req.session.data['claimGuidance']
-
-  // Check whether the variable matches a condition
-  if (claimGuidance == "yes") {
-
-    res.redirect('guidance/help-start-claim')
-  } else if (claimGuidance == "no") {
-    newClaim(req, res)
-  }
-
-})
-
-router.post('/new-claim-reset', function (req, res) {
-  newClaim(req, res)
-});
-
-
-function newClaim(req, res) {
-  const claimType = req.session.data.claimType
-  const categoryName = req.session.data.activityType
-  let claim = {};
-  const d = new Date();
-  const dStr = d.toISOString();
-
-  faker.seed(req.session.data.claims.length + 1);
-
-  if (claimType == "TU") {
-    claim = {
-      claimID: faker.finance.accountNumber(6),
-      type: "TU",
-      learner: null,
-      training: null,
-      startDate: null,
-      status: "new",
-      createdDate: dStr,
-      createdBy: "Test Participant",
-      submittedDate: null,
-      paidDate: null,
-      costDate: null,
-      evidenceOfPayment: null,
-      notes: []
-    };
-  } else if (claimType == "CPD") {
-    claim = {
-      claimID: faker.finance.accountNumber(6),
-      type: "CPD",
-      learner: null,
-      categoryName,
-      description: null,
-      startDate: null,
-      status: "new",
-      createdDate: dStr,
-      createdBy: "Test Participant",
-      submittedDate: null,
-      paidDate: null,
-      costDate: null,
-      claimAmount: null,
-      evidenceOfPayment: null,
-      notes: []
-    };
-
-  }
-
-
-  req.session.data.claims.push(claim)
-  //reset seed
-  faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
-  delete req.session.data['training-input'];
-  delete req.session.data['trainingSelection'];
-  delete req.session.data['activity-date-started-day'];
-  delete req.session.data['activity-date-started-month'];
-  delete req.session.data['activity-date-started-year'];
-  delete req.session.data['learner-input'];
-  delete req.session.data['learner-selection'];
-  delete req.session.data['learnerSelected'];
-  delete req.session.data['learner-choice'];
-  delete req.session.data['add-another'];
-  delete req.session.data['answers-checked'];
-  delete req.session.data['evidenceType'];
-  delete req.session.data['search-input'];
-  delete req.session.data['totalAmount'];
-  delete req.session.data['EvidenceNoLearners'];
-  delete req.session.data['evidenceFile'];
-  delete req.session.data['selectedClaims'];
-  delete req.session.data['selectedClaimsConfirmed'];
-  delete req.session.data['activityType'];
-
-  res.redirect('claim/claim-details' + '?id=' + claim.claimID)
-}
-
 router.post('/add-training', function (req, res) {
   var trainingCode = req.session.data.trainingSelection
   var claimID = req.session.data.id
@@ -122,8 +28,79 @@ router.post('/add-training', function (req, res) {
   delete req.session.data['training-input'];
   delete req.session.data['trainingSelection'];
 
-  res.redirect('claim/claim-details' + '?id=' + claimID + '#training')
+  newClaim(req, res, trainingChoice)
+
 });
+
+function newClaim(req, res, training) {
+  const claimType = req.session.data.claimType
+  const categoryName = req.session.data.activityType
+  let claim = {};
+  const d = new Date();
+  const dStr = d.toISOString();
+
+  faker.seed(req.session.data.claims.length + 1);
+
+  if (claimType == "TU") {
+    claim = {
+      claimID: faker.finance.accountNumber(6),
+      type: "TU",
+      learner: null,
+      training: training,
+      startDate: null,
+      status: "new",
+      createdDate: dStr,
+      createdBy: "Test Participant",
+      submittedDate: null,
+      paidDate: null,
+      costDate: null,
+      evidenceOfPayment: null,
+    };
+  } else if (claimType == "CPD") {
+    claim = {
+      claimID: faker.finance.accountNumber(6),
+      type: "CPD",
+      learner: null,
+      categoryName,
+      description: null,
+      startDate: null,
+      status: "new",
+      createdDate: dStr,
+      createdBy: "Test Participant",
+      submittedDate: null,
+      paidDate: null,
+      costDate: null,
+      claimAmount: null,
+      evidenceOfPayment: null,
+    };
+
+  }
+
+
+  req.session.data.claims.push(claim)
+  //reset seed
+  faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
+  delete req.session.data['training-input'];
+  delete req.session.data['trainingSelection'];
+  delete req.session.data['activity-date-started-day'];
+  delete req.session.data['activity-date-started-month'];
+  delete req.session.data['activity-date-started-year'];
+  delete req.session.data['learner-input'];
+  delete req.session.data['learner-selection'];
+  delete req.session.data['learnerSelected'];
+  delete req.session.data['learner-choice'];
+  delete req.session.data['add-another'];
+  delete req.session.data['answers-checked'];
+  delete req.session.data['evidenceType'];
+  delete req.session.data['totalAmount'];
+  delete req.session.data['EvidenceNoLearners'];
+  delete req.session.data['evidenceFile'];
+  delete req.session.data['selectedClaims'];
+  delete req.session.data['selectedClaimsConfirmed'];
+  delete req.session.data['activityType'];
+
+  res.redirect('claim/claim-details' + '?id=' + claim.claimID)
+}
 
 router.post('/create-date', function (req, res) {
   var day = req.session.data['activity-date-started-day']
@@ -229,22 +206,6 @@ router.post('/add-learner', function (req, res) {
   res.redirect('claim/claim-details' + '?id=' + claimID + '#learner')
 });
 
-router.post('/add-note', function (req, res) {
-  var note = req.session.data.note
-  var claimID = req.session.data.id
-
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      c.notes.push(note)
-      break;
-    }
-  }
-
-  delete req.session.data.note;
-
-  res.redirect('claim/claim-details' + '?id=' + claimID + '#notes')
-});
-
 router.post('/add-evidence', function (req, res) {
   var evidence = req.session.data.evidenceFile
   var type = req.session.data.type
@@ -256,7 +217,7 @@ router.post('/add-evidence', function (req, res) {
       if (type == 'payment') {
         c.evidenceOfPayment = 'invoice01.pdf'
       } else if (type == 'completion') {
-        l.evidence.evidenceOfCompletion = 'certficate01.pdf'
+        c.learner.evidence.evidenceOfCompletion = 'certficate01.pdf'
       }
       break;
     }
@@ -285,7 +246,7 @@ router.post('/save-claim', function (req, res) {
 
   delete req.session.data.id
   delete req.session.data.submitError
-  res.redirect('manage-claims')
+  res.redirect('manage-claims?claimType=TU&statusID=not-yet-submitted')
 
 });
 

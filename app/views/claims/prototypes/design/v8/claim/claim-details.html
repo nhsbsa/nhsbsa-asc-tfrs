@@ -7,7 +7,7 @@
 
 {% block beforeContent %}
 {% if claim.status != 'new' %}
-<a href="../manage-claims#{{ claim.status }}" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home#{{ claim.status }}" class="govuk-back-link">Back</a>
 {% endif %}
 {% endblock %}
 
@@ -44,9 +44,6 @@
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
     {% endif %}
 
-    {% include "../_components/claim-sections/supportingNotes.html" %}
-
-
     {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
     <h2 class="govuk-heading-m">What happens next</h2>
     <p class="govuk-body">When you have added all the necessary information to this claim you can submit it for
@@ -62,7 +59,7 @@
 
         <p><strong>I understand that it may be subject to:</strong></p>
 
-        <ul class="govuk-list govuk-list--bullet">
+        <ul class="govuk-list govuk-list--bullet"> 
           <li><strong>verification checks</strong></li>
           <li><strong>audit review</strong></li>
           <li><strong>counter fraud checks</strong></li>
@@ -94,15 +91,11 @@
   </div>
   <div class="govuk-grid-column-one-third">
     {% include "../_components/claim-sections/claimAmount.html" %}
-
-    {% if not (claim.status == "new" or claim.status == "not-yet-submitted") %}
-    {% include "../_components/claim-sections/claimHistory.html" %}
-    {% endif %}
-
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     <h2 class="govuk-heading-m">Related content</h2>
+    <p class="govuk-body"><a href="../guidance/help-start-claim" class="govuk-link">Help with starting a new care skills claim</a></p>
     <p class="govuk-body"><a href="#" class="govuk-link">Find out more about evidence requirements</a></p>
-    <p class="govuk-body"><a href="#" class="govuk-link">Find out more about eligibility requirements</a>
+    <p class="govuk-body"><a href="../guidance/eligibility" class="govuk-link">Eligibility for adult social care staff training and development claims</a></p>
   </div>
 </div>
 {% endblock %}

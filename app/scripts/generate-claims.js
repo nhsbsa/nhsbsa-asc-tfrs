@@ -72,8 +72,8 @@ function generateTUClaims(quantity, version) {
   const tuEligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
 
 
-  //const preSetClaims = JSON.parse(fs.readFileSync('./app/data/' + version + '/pre-set-claims.json', 'utf8'));
-  //data = data.concat(preSetClaims)
+  const preSetClaims = JSON.parse(fs.readFileSync('./app/data/' + version + '/pre-set-claims.json', 'utf8'));
+  data = data.concat(preSetClaims)
 
   for (let i = 1; i <= quantity; i++) {
     faker.seed(i);
@@ -215,7 +215,6 @@ function generateCPDClaims(quantity, version) {
       claimAmount,
       evidenceOfPayment,
       costDate,
-      notes: []
     };
 
     data.push(claim);

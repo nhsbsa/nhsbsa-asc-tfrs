@@ -80,6 +80,16 @@ addFilter('statusName_V8', function (statusID, statuses) {
     return statusName
 })
 
+addFilter('statusDetails_V8', function (statusID, statuses) {
+    let status = null
+    for (const s of statuses) {
+        if (s.id == statusID) {
+            status = s
+        }
+    }
+    return status
+})
+
 addFilter('variableDate_V8', function (statusID) {
     if (statusID == 'not-yet-submitted') {
         return 'Created'
@@ -169,7 +179,7 @@ addFilter('potName_V8', function (type) {
 addFilter('newClaimLink_V8', function (type) {
     let claimLink = "#"
     if (type == "TU") {
-        claimLink = "claim/first-claim"
+        claimLink = "claim/select-training"
     } else if (type == "CPD") {
         claimLink = "claim/select-activity-type"
     }

@@ -6,13 +6,13 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="claim-details?id={{ claim.claimID }}" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
+        <span class="govuk-caption-l">New claim</span>
         <h1 class="govuk-heading-l">Select training</h1>
     </div>
 </div>
@@ -83,18 +83,11 @@
                     <td class="govuk-table__cell">{{ training.title }}</td>
                     <td class="govuk-table__cell">{{ training.awardingOrganisation }}</td>
                     <td class="govuk-table__cell">
-                        <div class="govuk-button-group">
                             <form method="post" action="../add-training" class="govuk-!-margin-0">
                                 <input type="hidden" name="trainingSelection" value="{{ training.code }}">
                                 <input type="hidden" name="viewOnly" value='false'>
                                 <button type="submit" class="govuk-button">Add to claim</button>
                             </form>
-                            <form method="post" action="activity-profile" class="govuk-!-margin-0">
-                                <input type="hidden" name="trainingSelection" value="{{ training.code }}">
-                                <input type="hidden" name="viewOnly" value='false'>
-                                <button type="submit" class="govuk-button govuk-button--secondary">View details</button>
-                            </form>
-                        </div>
                     </td>
                 </tr>
                 {% endif %}

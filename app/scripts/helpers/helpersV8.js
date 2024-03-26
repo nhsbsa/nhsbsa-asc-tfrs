@@ -1,49 +1,49 @@
 function checkClaim(claim) {
     let check = false
-            if ( claim.type == "TU" &&
-                claim.learners.length>0 &&
-                claim.startDate != null &&
-                claim.training != null && 
-                claim.costDate != null && 
-                claim.evidenceOfPayment != null && 
-                claim.learners.every(learner => learner.evidence.evidenceOfCompletion != null) && 
-                ( claim.learners.every(learner => learner.evidence.evidenceOfEnrollment != null) || claim.training.fundingModel == "full") )
-                {
-                    check = true
-            } else if (
-                claim.type == "CPD" &&
-                claim.learners.length>0 &&
-                ((claim.startDate != null && claim.learners.every(learner => learner.evidence.evidenceOfCompletion != null)) || claim.categoryName != "Courses" ) && 
-                claim.claimAmount != null && 
-                claim.description != null && 
-                claim.evidenceOfPayment != null && 
-                claim.costDate != null
-            )
-            {
-                check = true
-            }
-            return check
+    console.log(claim)
+    if (claim.type == "TU" &&
+        claim.learner != null &&
+        claim.startDate != null &&
+        claim.training != null &&
+        claim.costDate != null &&
+        claim.evidenceOfPayment != null &&
+        claim.learner.evidence.evidenceOfCompletion != null /*&& 
+        claim.learner.evidence.completionDate != null*/
+    ) {
+        check = true
+    } else if (
+        claim.type == "CPD" &&
+        claim.learners.length > 0 &&
+        ((claim.startDate != null && claim.learners.every(learner => learner.evidence.evidenceOfCompletion != null)) || claim.categoryName != "Courses") &&
+        claim.claimAmount != null &&
+        claim.description != null &&
+        claim.evidenceOfPayment != null &&
+        claim.costDate != null
+    ) {
+        check = true
+    }
+    return check
 }
 
 
 function removeSpacesAndLowerCase(input) {
 
-let inputString = String(input);
-// Remove spaces using regular expression
+    let inputString = String(input);
+    // Remove spaces using regular expression
 
-let stringWithoutSpaces = inputString.replace(/\s/g, '');
+    let stringWithoutSpaces = inputString.replace(/\s/g, '');
 
-// Convert the string to lowercase
-let lowercaseString = stringWithoutSpaces.toLowerCase();
+    // Convert the string to lowercase
+    let lowercaseString = stringWithoutSpaces.toLowerCase();
 
-return lowercaseString;
+    return lowercaseString;
 }
 
-function compareNINumbers(ni_1,learners) {
+function compareNINumbers(ni_1, learners) {
     let check = false
     for (const l of learners) {
-        if (removeSpacesAndLowerCase(ni_1)==removeSpacesAndLowerCase(l.id)) {
-            check = true 
+        if (removeSpacesAndLowerCase(ni_1) == removeSpacesAndLowerCase(l.id)) {
+            check = true
             break;
         }
     }
@@ -53,12 +53,12 @@ function compareNINumbers(ni_1,learners) {
 function sortByCreatedDate(array) {
     // Use the sort method to reorder the array based on the createdDate property
     array.sort((a, b) => {
-      const dateA = new Date(b.createdDate);
-      const dateB = new Date(a.createdDate);
-      return dateA - dateB;
+        const dateA = new Date(b.createdDate);
+        const dateB = new Date(a.createdDate);
+        return dateA - dateB;
     });
-  
+
     return array;
-  }
+}
 
 module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate }
