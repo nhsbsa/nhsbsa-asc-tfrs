@@ -17,11 +17,6 @@ function getRandomLearners(learnerList, x, eligibleRoles) {
     const learner = JSON.parse(JSON.stringify(eligibleLearners[randomIndex]));
     eligibleLearners.splice(randomIndex, 1);
 
-    learner.evidence = {
-      evidenceOfCompletion: null,
-      completionDate: null
-    }
-
   return learner;
 }
 
@@ -90,11 +85,14 @@ function generateTUClaims(quantity, version) {
 
     let submittedDate = null;
     let evidenceOfPayment = null;
+    let evidenceOfCompletion = null;
+    let completionDate = null;
+
     if (['submitted', 'rejected', 'approved'].includes(status)) {
       submittedDate = faker.date.between({ from: startDate, to: new Date() });
       evidenceOfPayment = 'invoice' + '00' + i.toString() + '.pdf';
-      selectedLearner.evidence.evidenceOfCompletion = 'certficate' + '00' + i.toString() + '.pdf';
-      selectedLearner.evidence.completionDate = faker.date.between({ from: startDate, to: submittedDate });
+      evidenceOfCompletion = 'certficate' + '00' + i.toString() + '.pdf';
+      completionDate = faker.date.between({ from: startDate, to: submittedDate });
     }
 
     let approvedDate = null;
@@ -123,6 +121,8 @@ function generateTUClaims(quantity, version) {
       rejectedDate,
       rejectedNote,
       evidenceOfPayment,
+      evidenceOfCompletion,
+      completionDate,
       costDate,
     };
 

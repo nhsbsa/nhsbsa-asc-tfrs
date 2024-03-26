@@ -55,6 +55,8 @@ function newClaim(req, res, training) {
       paidDate: null,
       costDate: null,
       evidenceOfPayment: null,
+      evidenceOfCompletion: null,
+      completionDate: null
     };
   } else if (claimType == "CPD") {
     claim = {
@@ -186,11 +188,6 @@ router.post('/add-learner', function (req, res) {
     }
   }
 
-  learner.evidence = {
-    evidenceOfEnrollment: null,
-    evidenceOfCompletion: null
-  }
-
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       c.learner = learner
@@ -217,7 +214,7 @@ router.post('/add-evidence', function (req, res) {
       if (type == 'payment') {
         c.evidenceOfPayment = 'invoice01.pdf'
       } else if (type == 'completion') {
-        c.learner.evidence.evidenceOfCompletion = 'certficate01.pdf'
+        c.evidenceOfCompletion = 'certficate01.pdf'
       }
       break;
     }
@@ -285,11 +282,6 @@ router.post('/create-learner', function (req, res) {
       roleType: req.session.data.roleType,
     };
     req.session.data.learners.push(learner)
-
-    learner.evidence = {
-      evidenceOfEnrollment: null,
-      evidenceOfCompletion: null
-    }
 
     for (const c of req.session.data.claims) {
       if (claimID == c.claimID) {

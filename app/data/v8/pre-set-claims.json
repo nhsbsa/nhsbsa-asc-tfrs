@@ -6,11 +6,7 @@
       "id": "OB 78 2F 15 O",
       "fullName": "Malinda Mayer",
       "jobTitle": "Caregiver",
-      "roleType": "Direct care",
-      "evidence": {
-        "evidenceOfCompletion": null,
-        "completionDate": null
-      }
+      "roleType": "Direct care"
     },
     "training": {
       "code": "DLCCA",
@@ -33,6 +29,8 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": null,
+    "evidenceOfCompletion": null,
+    "completionDate": null,
     "costDate": "2022-06-11T14:50:59.964Z"
   },
   {
@@ -42,11 +40,7 @@
       "id": "KZ 79 0F 13 Z",
       "fullName": "Aron Effertz-Stroman",
       "jobTitle": "Caregiver",
-      "roleType": "Direct care",
-      "evidence": {
-        "evidenceOfCompletion": "certficate001.pdf",
-        "completionDate": "2024-02-05T20:22:11.308Z"
-      }
+      "roleType": "Direct care"
     },
     "training": {
       "code": "DLDOC",
@@ -69,6 +63,8 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": "invoice001.pdf",
+    "evidenceOfCompletion": "certficate001.pdf",
+    "completionDate": "2024-02-05T20:22:11.308Z",
     "costDate": "2023-08-08T07:55:32.615Z"
   },
   {
@@ -78,11 +74,7 @@
       "id": "LE 09 5F 94 M",
       "fullName": "Roy Kub",
       "jobTitle": "Caregiver",
-      "roleType": "Direct care",
-      "evidence": {
-        "evidenceOfCompletion": "certficate002.pdf",
-        "completionDate": "2023-11-16T01:18:28.980Z"
-      }
+      "roleType": "Direct care"
     },
     "training": {
       "code": "DLEDI",
@@ -105,6 +97,8 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": "invoice002.pdf",
+    "evidenceOfCompletion": "certficate002.pdf",
+    "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2023-10-04T12:09:57.600Z"
   },
   {
@@ -114,11 +108,7 @@
       "id": "ZX 51 9F 87 P",
       "fullName": "Casey Simonis",
       "jobTitle": "Caregiver",
-      "roleType": "Direct care",
-      "evidence": {
-        "evidenceOfCompletion": "certficate007.pdf",
-        "completionDate": "2023-11-03T05:51:56.177Z"
-      }
+      "roleType": "Direct care"
     },
     "training": {
       "code": "MHFA",
@@ -141,6 +131,8 @@
     "rejectedDate": "2023-12-05T18:04:04.173Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": "invoice007.pdf",
+    "evidenceOfCompletion": "certficate007.pdf",
+    "completionDate": "2023-11-03T05:51:56.177Z",
     "costDate": "2022-09-19T13:52:37.929Z"
   }
 ]

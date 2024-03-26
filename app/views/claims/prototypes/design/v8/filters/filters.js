@@ -205,9 +205,6 @@ addFilter('errorSummary_V8', function (claim) {
     let errorSummaryStr = ''
 
     if (claim.type == "TU") {
-        if (claim.training == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Select training</a></li>')
-        }
         if (claim.startDate == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add training start date</a></li>')
         }
@@ -220,7 +217,7 @@ addFilter('errorSummary_V8', function (claim) {
         if (claim.evidenceOfPayment == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
         }
-        if (claim.learner.evidence.evidenceOfCompletion == null) {
+        if (claim.evidenceOfCompletion == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion</a></li>')
         }
     } else if (claim.type == "CPD") {
@@ -242,7 +239,7 @@ addFilter('errorSummary_V8', function (claim) {
         if (claim.evidenceOfPayment == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
         }
-        if (claim.learner.evidence.evidenceOfCompletion == null) {
+        if (claim.evidenceOfCompletion == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion</a></li>')
         }
     }

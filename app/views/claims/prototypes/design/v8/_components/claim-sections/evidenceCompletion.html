@@ -1,7 +1,7 @@
 <h2 class="govuk-heading-m" id="payment">Evidence of completion</h2>
 <dl class="govuk-summary-list">
 
-  {% if not claim.learner.evidence.completionDate %}
+  {% if not claim.completionDate %}
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
     <dt class="govuk-summary-list__key">
       Completion date
@@ -16,7 +16,7 @@
       Completion date
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ claim.learner.evidence.completionDate | govukDate }}
+      {{ claim.completionDate | govukDate }}
     </dd>
     {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
     <dd class="govuk-summary-list__actions">
@@ -27,7 +27,7 @@
   </div>
   {% endif %}
 
-  {% if not claim.learner.evidence.evidenceOfCompletion %}
+  {% if not claim.evidenceOfCompletion %}
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
     <dt class="govuk-summary-list__key">
       Evidence of completion
@@ -42,7 +42,7 @@
       Evidence of completion
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ claim.learner.evidence.evidenceOfCompletion }}
+      {{ claim.evidenceOfCompletion }}
     </dd>
     {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
     <dd class="govuk-summary-list__actions">

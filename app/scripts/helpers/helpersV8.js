@@ -7,8 +7,8 @@ function checkClaim(claim) {
         claim.training != null &&
         claim.costDate != null &&
         claim.evidenceOfPayment != null &&
-        claim.learner.evidence.evidenceOfCompletion != null /*&& 
-        claim.learner.evidence.completionDate != null*/
+        claim.evidenceOfCompletion != null /*&& 
+        claim.completionDate != null*/
     ) {
         check = true
     } else if (
