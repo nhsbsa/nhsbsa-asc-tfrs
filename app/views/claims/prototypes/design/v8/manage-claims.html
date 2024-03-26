@@ -4,7 +4,7 @@
 {% set noClaims = status.id | claimCount_V8(data.claims, data.claimType) %}
 
 {% block pageTitle %}
-{{ ["{{ status.name }} claims - ", (data.claimType | potName_V8)] | join }}
+{{ [status.name, " claims - ", (data.claimType | potName_V8)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
