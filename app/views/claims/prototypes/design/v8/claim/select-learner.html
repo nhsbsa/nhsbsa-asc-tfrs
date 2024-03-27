@@ -90,19 +90,11 @@
                     <th scope="col" class="govuk-table__cell govuk-table__cell--numeric">£400</th>
                     {% endif %}
                     <td class="govuk-table__cell">
-                        {% set learnerAdded = false %}
-                        {% for l in claim.learners %}
-                        {% if l.id == learner.id%}
-                        {% set learnerAdded = true %}
-                        {% endif %}
-                        {% endfor %}
-                        {% if not learnerAdded and eligibleCheck %}
+                        {% if eligibleCheck %}
                         <form method="post" action="../add-learner" class="govuk-!-margin-0">
                             <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
                             <button type="submit" class="govuk-button">Add to claim</button>
                         </form>
-                        {% elif learnerAdded and eligibleCheck %}
-                        <p class="govuk-body">Already added to claim</p>
                         {% elif not eligibleCheck %}
                         <p class="govuk-body">Not eligible for {{ data.claimType | potName_V8 }}<br><a href="#"
                                 class="govuk-link">What does this mean?</a></p>

@@ -21,12 +21,10 @@ addFilter('statusTag_V8', function (statusID, statuses) {
         return '<strong class="govuk-tag govuk-tag--blue">' + statusName + '</strong>'
     } else if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
-    } else if (statusID == 'queried') {
+    } else if (statusID == 'rejected') {
         return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
     } else if (statusID == 'approved') {
         return '<strong class="govuk-tag govuk-tag--green">' + statusName + '</strong>'
-    } else if (statusID == 'paid') {
-        return '<strong class="govuk-tag govuk-tag--purple">' + statusName + '</strong>'
     } else {
         return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
     }
@@ -82,17 +80,25 @@ addFilter('statusName_V8', function (statusID, statuses) {
     return statusName
 })
 
+addFilter('statusDetails_V8', function (statusID, statuses) {
+    let status = null
+    for (const s of statuses) {
+        if (s.id == statusID) {
+            status = s
+        }
+    }
+    return status
+})
+
 addFilter('variableDate_V8', function (statusID) {
     if (statusID == 'not-yet-submitted') {
         return 'Created'
     } else if (statusID == 'submitted') {
         return 'Submitted'
-    } else if (statusID == 'queried') {
-        return 'Queried'
+    } else if (statusID == 'rejected') {
+        return 'Rejected'
     } else if (statusID == 'approved') {
         return 'Approved'
-    } else if (statusID == 'paid') {
-        return 'Paid'
     } else {
         return 'Created'
     }
@@ -127,12 +133,10 @@ addFilter('claimMatch_V8', function (claim, search, claimType) {
                 check = true
             }
         }
-        if (claim.learners != null) {
-            for (const l of claim.learners) {
-                const formattedName = removeSpacesAndLowerCase(l.fullName);
-                if (formattedName.includes(formattedSearch)) {
-                    check = true
-                }
+        if (claim.learner != null) {
+            const formattedName = removeSpacesAndLowerCase(claim.learner.fullName);
+            if (formattedName.includes(formattedSearch)) {
+                check = true
             }
         }
     } else if (claim.type == claimType) {
@@ -149,15 +153,12 @@ addFilter('claimMatch_V8', function (claim, search, claimType) {
                 check = true
             }
         }
-        if (claim.learners != null) {
-            for (const l of claim.learners) {
-                const formattedName = removeSpacesAndLowerCase(l.fullName);
-                if (formattedName.includes(formattedSearch)) {
-                    check = true
-                }
+        if (claim.learner != null) {
+            const formattedName = removeSpacesAndLowerCase(claim.learner.fullName);
+            if (formattedName.includes(formattedSearch)) {
+                check = true
             }
         }
-
     }
 
     return check;
@@ -178,7 +179,7 @@ addFilter('potName_V8', function (type) {
 addFilter('newClaimLink_V8', function (type) {
     let claimLink = "#"
     if (type == "TU") {
-        claimLink = "claim/first-claim"
+        claimLink = "claim/select-training"
     } else if (type == "CPD") {
         claimLink = "claim/select-activity-type"
     }
@@ -204,14 +205,11 @@ addFilter('errorSummary_V8', function (claim) {
     let errorSummaryStr = ''
 
     if (claim.type == "TU") {
-        if (claim.training == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Select training</a></li>')
-        }
         if (claim.startDate == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add training start date</a></li>')
         }
-        if (claim.learners.length < 1) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add at least one learner</a></li>')
+        if (claim.learner == null) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add a learner</a></li>')
         }
         if (claim.costDate == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add payment date</a></li>')
@@ -219,11 +217,8 @@ addFilter('errorSummary_V8', function (claim) {
         if (claim.evidenceOfPayment == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
         }
-        if (claim.learners.every(learner => learner.evidence.evidenceOfCompletion == null)) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion for all learners</a></li>')
-        }
-        if (claim.learners.every(learner => learner.evidence.evidenceOfEnrollment == null) || claim.training.fundingModel == "full") {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of enrollment for all learners</a></li>')
+        if (claim.evidenceOfCompletion == null) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion</a></li>')
         }
     } else if (claim.type == "CPD") {
         if (claim.description == null) {
@@ -235,7 +230,7 @@ addFilter('errorSummary_V8', function (claim) {
         if (claim.claimAmount == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add cost</a></li>')
         }
-        if (claim.learners.length < 1) {
+        if (claim.learner == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add a learner</a></li>')
         }
         if (claim.costDate == null) {
@@ -244,22 +239,22 @@ addFilter('errorSummary_V8', function (claim) {
         if (claim.evidenceOfPayment == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
         }
-        if (claim.learners.every(learner => learner.evidence.evidenceOfCompletion == null) && claim.categoryName == "Courses") {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion for the learner</a></li>')
+        if (claim.evidenceOfCompletion == null) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion</a></li>')
         }
     }
     return errorSummaryStr
 }, { renderAsHtml: true })
 
 addFilter('findClaim_V8', function (claimID, claims) {
-    let claim  = null;
+    let claim = null;
 
     for (let c of claims) {
-        if (c.claimID==claimID) {
+        if (c.claimID == claimID) {
             claim = c
         }
 
-    } 
+    }
 
     return claim;
 

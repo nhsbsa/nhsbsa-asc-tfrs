@@ -2,26 +2,25 @@
     {
         "id": "not-yet-submitted",
         "name": "Not yet submitted",
-        "distribution": 0.15
+        "description": "Claims that have not yet been submitted. These claims may still need information adding to the claim before they can be submitted.",
+        "distribution": 0.25
     },
     {
         "id": "submitted",
         "name": "Submitted",
+        "description": "Claims that have been submitted. These claims are now with NHS BSA for processing.",
         "distribution": 0.40
     },
     {
-        "id": "queried",
-        "name": "Queried by BSA",
+        "id": "rejected",
+        "name": "Rejected",
+        "description": "Claims that have been rejected by NHS BSA.",
         "distribution": 0.05
     },
     {
         "id": "approved",
         "name": "Approved",
-        "distribution": 0.10
-    },
-    {
-        "id": "paid",
-        "name": "Paid",
+        "description": "Claims that have been approved by NHS BSA.",
         "distribution": 0.30
     }
 ]

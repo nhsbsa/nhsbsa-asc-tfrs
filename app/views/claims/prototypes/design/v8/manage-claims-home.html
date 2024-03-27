@@ -1,0 +1,69 @@
+{% extends "./layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{{ ["Manage claims - ", (data.claimType | potName_V8)] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="home">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=TU">Manage claims ({{ data.claimType | potName_V8
+        }})</a>
+    </li>
+  </ol>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div class="moj-page-header-actions">
+      <div class="moj-page-header-actions__title">
+        <span class="govuk-caption-l">{{ data.claimType | potName_V8 }}</span>
+        <h1 class="govuk-heading-l">Manage claims</h1>
+      </div>
+      <div class="moj-page-header-actions__actions">
+        <div class="moj-button-menu">
+          <div class="moj-button-menu__wrapper">
+            <form method="post" action="{{ data.claimType | newClaimLink_V8 }}" class="govuk-!-margin-0">
+              <button class="govuk-button moj-button-menu__item govuk-button--primary moj-page-header-actions__action"
+                data-module="govuk-button" type="submit">Start a new claim</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <ul class="homepage-services-and-info__list">
+        {% for status in data.statuses %}
+        {% set noClaims = status.id | claimCount_V8(data.claims, data.claimType) %}
+        <li class="chevron-card">
+          <div class="chevron-card__wrapper">
+              <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
+                  <a class="govuk-link chevron-card__link" data-track-label="{{ status.id }}" href="manage-claims?statusID={{ status.id }}">{{ status.name }} claims ({{ noClaims }})</a>
+              </h3>
+              <p class="govuk-body chevron-card__description">{{ status.description }}</p>
+          </div>
+      </li>
+        {% endfor %}
+    </ul>
+  </div>
+  <div class="govuk-grid-column-one-third">
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <h2 class="govuk-heading-m">Related content</h2>
+    <p class="govuk-body"><a href="../guidance/help-start-claim" class="govuk-link">Help with starting a new care skills claim</a></p>
+    <p class="govuk-body"><a href="#" class="govuk-link">Find out more about evidence requirements</a></p>
+    <p class="govuk-body"><a href="../guidance/eligibility" class="govuk-link">Eligibility for adult social care staff training and development claims</a></p>
+  </div>
+</div>
+
+{% endblock %}

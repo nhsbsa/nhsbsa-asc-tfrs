@@ -1,186 +1,138 @@
 [
-    {
-        "claimID": "859403",
-        "type": "TU",
-        "learners": [
-          {
-            "id": "KZ 79 0F 13 Z",
-            "fullName": "Aron Effertz-Stroman",
-            "jobTitle": "Caregiver",
-            "roleType": "Direct care",
-            "evidence": {
-              "evidenceOfEnrollment": null,
-              "evidenceOfCompletion": "certficate0020001.pdf"
-            }
-          },
-          {
-            "id": "LE 09 5F 94 M",
-            "fullName": "Roy Kub",
-            "jobTitle": "Caregiver",
-            "roleType": "Direct care",
-            "evidence": {
-              "evidenceOfEnrollment": null,
-              "evidenceOfCompletion": "certficate0020002.pdf"
-            }
-          },
-          {
-            "id": "OB 78 2F 15 O",
-            "fullName": "Malinda Mayer",
-            "jobTitle": "Caregiver",
-            "roleType": "Direct care",
-            "evidence": {
-              "evidenceOfEnrollment": null,
-              "evidenceOfCompletion": "certficate0020003.pdf"
-            }
-          },
-          {
-            "id": "ZX 51 9F 87 P",
-            "fullName": "Casey Simonis",
-            "jobTitle": "Caregiver",
-            "roleType": "Direct care",
-            "evidence": {
-              "evidenceOfEnrollment": null,
-              "evidenceOfCompletion": "certficate0020004.pdf"
-            }
-          }
-        ],
-        "training": {
-          "code": "Z8A1B3",
-          "title": "Effective Time Management for Social Care Professionals",
-          "description": "Learn time management strategies tailored to the demands of social care, ensuring efficiency and effectiveness in daily tasks and responsibilities.",
-          "type": "course",
-          "category": "time management",
-          "awardingOrganisation": "Open College Network",
-          "reimbursementAmount": 300,
-          "fundingModel": "full",
-          "totalLearningTime": "50 hours"
-        },
-        "startDate": "2023-10-25T03:54:57.397Z",
-        "status": "submitted",
-        "createdDate": "2023-10-03T20:33:07.870Z",
-        "createdBy": "Allan Connelly",
-        "submittedDate": "2023-12-15T23:04:20.365Z",
-        "approvedDate": null,
-        "queriedDate": null,
-        "paidDate": null,
-        "costPerLearner": 330,
-        "evidenceOfPayment": "invoice002000.pdf",
-        "notes": []
-      },
-      {
-        "claimID": "542552",
-        "type": "TU",
-        "learners": [
-          {
-            "id": "KZ 79 0F 13 Z",
-            "fullName": "Aron Effertz-Stroman",
-            "jobTitle": "Caregiver",
-            "roleType": "Direct care",
-            "evidence": {
-              "evidenceOfEnrollment": null,
-              "evidenceOfCompletion": "certficate0019021.pdf"
-            }
-          },
-          {
-            "id": "LE 09 5F 94 M",
-            "fullName": "Roy Kub",
-            "jobTitle": "Caregiver",
-            "roleType": "Direct care",
-            "evidence": {
-              "evidenceOfEnrollment": null,
-              "evidenceOfCompletion": "certficate0019022.pdf"
-            }
-          },
-          {
-            "id": "OB 78 2F 15 O",
-            "fullName": "Malinda Mayer",
-            "jobTitle": "Caregiver",
-            "roleType": "Direct care",
-            "evidence": {
-              "evidenceOfEnrollment": null,
-              "evidenceOfCompletion": "certficate0019023.pdf"
-            }
-          }
-        ],
-        "training": {
-          "code": "W9X2Y4",
-          "title": "Effective Time Management for Care Professionals",
-          "description": "Learn time management strategies tailored to the demands of care professionals, ensuring efficiency and effectiveness in daily tasks and responsibilities.",
-          "type": "qualification",
-          "category": "time management",
-          "awardingOrganisation": "Highfield Qualifications",
-          "reimbursementAmount": 480,
-          "fundingModel": "full",
-          "totalLearningTime": "75 hours"
-        },
-        "startDate": "2023-10-05T21:29:07.013Z",
-        "status": "approved",
-        "createdDate": "2023-05-26T23:52:59.116Z",
-        "createdBy": "Allan Connelly",
-        "submittedDate": "2023-12-04T07:51:30.327Z",
-        "approvedDate": "2024-01-02T15:46:01.277Z",
-        "queriedDate": null,
-        "paidDate": null,
-        "costPerLearner": 520,
-        "evidenceOfPayment": "invoice001902.pdf",
-        "notes": []
-      },
-      {
-        "claimID": "706486",
-        "type": "TU",
-        "learners": [
-          {
-            "id": "KZ 79 0F 13 Z",
-            "fullName": "Aron Effertz-Stroman",
-            "jobTitle": "Caregiver",
-            "roleType": "Direct care",
-            "evidence": {
-              "evidenceOfEnrollment": null,
-              "evidenceOfCompletion": "certficate0019961.pdf"
-            }
-          },
-          {
-            "id": "OB 78 2F 15 O",
-            "fullName": "Malinda Mayer",
-            "jobTitle": "Caregiver",
-            "roleType": "Direct care",
-            "evidence": {
-              "evidenceOfEnrollment": null,
-              "evidenceOfCompletion": "certficate0019963.pdf"
-            }
-          },
-          {
-            "id": "ZX 51 9F 87 P",
-            "fullName": "Casey Simonis",
-            "jobTitle": "Caregiver",
-            "roleType": "Direct care",
-            "evidence": {
-              "evidenceOfEnrollment": null,
-              "evidenceOfCompletion": "certficate0019964.pdf"
-            }
-          }
-        ],
-        "training": {
-          "code": "R1S3T5",
-          "title": "Advanced Geriatric Care",
-          "description": "Deepen your understanding of geriatric care principles, including holistic care, mobility support, and cognitive stimulation for older adults.",
-          "type": "e-learning module",
-          "category": "geriatric care",
-          "awardingOrganisation": "Skills for Health",
-          "reimbursementAmount": 180,
-          "fundingModel": "full",
-          "totalLearningTime": "60 minutes"
-        },
-        "startDate": "2023-10-16T06:12:35.678Z",
-        "status": "paid",
-        "createdDate": "2023-07-15T19:57:28.309Z",
-        "createdBy": "Flossie Gleason",
-        "submittedDate": "2023-12-08T22:20:12.104Z",
-        "approvedDate": "2023-12-25T19:17:49.839Z",
-        "queriedDate": null,
-        "paidDate": "2024-01-07T00:39:19.359Z",
-        "costPerLearner": 200,
-        "evidenceOfPayment": "invoice001996.pdf",
-        "notes": []
-      }
+  {
+    "claimID": "508821",
+    "type": "TU",
+    "learner": {
+      "id": "OB 78 2F 15 O",
+      "fullName": "Malinda Mayer",
+      "jobTitle": "Caregiver",
+      "roleType": "Direct care"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2023-08-31T17:53:52.937Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-05-05T14:50:59.964Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": null,
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-06-11T14:50:59.964Z"
+  },
+  {
+    "claimID": "487901",
+    "type": "TU",
+    "learner": {
+      "id": "KZ 79 0F 13 Z",
+      "fullName": "Aron Effertz-Stroman",
+      "jobTitle": "Caregiver",
+      "roleType": "Direct care"
+    },
+    "training": {
+      "code": "DLDOC",
+      "reimbursementAmount": 50,
+      "title": "Delivering outstanding care",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+    },
+    "startDate": "2024-02-01T23:29:00.654Z",
+    "status": "submitted",
+    "createdDate": "2023-12-31T08:55:32.615Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-11T22:56:10.547Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": "invoice001.pdf",
+    "evidenceOfCompletion": "certficate001.pdf",
+    "completionDate": "2024-02-05T20:22:11.308Z",
+    "costDate": "2023-08-08T07:55:32.615Z"
+  },
+  {
+    "claimID": "412959",
+    "type": "TU",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "fullName": "Roy Kub",
+      "jobTitle": "Caregiver",
+      "roleType": "Direct care"
+    },
+    "training": {
+      "code": "DLEDI",
+      "reimbursementAmount": 50,
+      "title": "Module 1 – Equality, diversity and inclusion",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-10-25T02:38:35.764Z",
+    "status": "approved",
+    "createdDate": "2023-11-30T13:09:57.600Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T12:14:45.342Z",
+    "approvedDate": "2024-02-09T01:58:43.631Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": "invoice002.pdf",
+    "evidenceOfCompletion": "certficate002.pdf",
+    "completionDate": "2023-11-16T01:18:28.980Z",
+    "costDate": "2023-10-04T12:09:57.600Z"
+  },
+  {
+    "claimID": "127349",
+    "type": "TU",
+    "learner": {
+      "id": "ZX 51 9F 87 P",
+      "fullName": "Casey Simonis",
+      "jobTitle": "Caregiver",
+      "roleType": "Direct care"
+    },
+    "training": {
+      "code": "MHFA",
+      "reimbursementAmount": 100,
+      "title": "Mental Health First Aid",
+      "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Mental Health",
+      "description": null,
+      "awardingOrganisation": "MHFA England",
+      "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "rejected",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T03:13:47.582Z",
+    "approvedDate": null,
+    "rejectedDate": "2023-12-05T18:04:04.173Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": "invoice007.pdf",
+    "evidenceOfCompletion": "certficate007.pdf",
+    "completionDate": "2023-11-03T05:51:56.177Z",
+    "costDate": "2022-09-19T13:52:37.929Z"
+  }
 ]

@@ -1,39 +1,60 @@
-<h2 class="govuk-heading-m" id="completion">Evidence of Completion</h2>
+<h2 class="govuk-heading-m" id="payment">Evidence of completion</h2>
 <dl class="govuk-summary-list">
-  {% if claim.learners.length === 0 %}
-  <p class="govuk-body">Once you add learners you will be able to start adding evidence of completion for each learner.
-  </p>
-  {% else %}
-  {% set counter = 1 %}
-  {% for l in claim.learners %}
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__value">
-      {{ l.fullName }}<br> {{ l.id }}
+
+  {% if not claim.completionDate %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+    <dt class="govuk-summary-list__key">
+      Completion date
     </dt>
-    {% if l.evidence.evidenceOfCompletion == null %}
     <dd class="govuk-summary-list__value">
-      <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{ l.id }}">Add
-        evidence</a>
+      <a class="govuk-link govuk-link--no-visited-state" href="#">Add completion date</a>
     </dd>
-    {% else %}
+  </div>
+  {% else %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Completion date
+    </dt>
     <dd class="govuk-summary-list__value">
-      {{ l.evidence.evidenceOfCompletion }}
+      {{ claim.completionDate | govukDate }}
+    </dd>
+    {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="#">Change<span class="govuk-visually-hidden">
+        completion date</span></a>
+    </dd>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if not claim.evidenceOfCompletion %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+    <dt class="govuk-summary-list__key">
+      Evidence of completion
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion">Add evidence</a>
+    </dd>
+  </div>
+  {% else %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Evidence of completion
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ claim.evidenceOfCompletion }}
     </dd>
     {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
     <dd class="govuk-summary-list__actions">
       <ul class="govuk-summary-list__actions-list">
         <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
-            href="#">View<span class="govuk-visually-hidden"> evidence of completion for {{ l.fullName }}</span></a>
-        </li>
+            href="#">View<span class="govuk-visually-hidden"> evidence of completion</span></a></li>
         <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
-            href="#">Change<span class="govuk-visually-hidden"> evidence of completion for {{ l.fullName }}</span></a>
+            href="add-evidence?type=completion">Change<span class="govuk-visually-hidden"> evidence of completion</span></a>
         </li>
       </ul>
     </dd>
     {% endif %}
-    {% endif %}
   </div>
-  {% set counter = counter + 1 %}
-  {% endfor %}
   {% endif %}
 </dl>
