@@ -121,6 +121,14 @@
         {
             "label": "28-TU-claim-submit-error",
             "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=876362&submitError=true"
+        },
+        {
+            "label": "29-TU-claim-decleration",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/decleration?id=876362"
+        },
+        {
+            "label": "30-TU-claim-decleration-error",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/decleration?id=876362&submitError=true"
         }
         
     ],

@@ -120,6 +120,7 @@ router.post('/create-date', function (req, res) {
   delete req.session.data['activity-date-started-day'];
   delete req.session.data['activity-date-started-month'];
   delete req.session.data['activity-date-started-year'];
+  delete req.session.data.submitError
 
   res.redirect('claim/claim-details' + '?id=' + claimID + '#training')
 });
@@ -136,6 +137,7 @@ router.post('/add-description', function (req, res) {
   }
 
   delete req.session.data.description;
+  delete req.session.data.submitError
 
   res.redirect('claim/claim-details' + '?id=' + claimID + '#activity')
 });
@@ -153,6 +155,7 @@ router.post('/add-cost', function (req, res) {
     }
   }
   delete req.session.data.cost;
+  delete req.session.data.submitError
 
   res.redirect('claim/claim-details' + '?id=' + claimID + '#activity')
 });
@@ -173,6 +176,7 @@ router.post('/cost-date', function (req, res) {
   delete req.session.data['payment-date-started-day'];
   delete req.session.data['payment-date-started-month'];
   delete req.session.data['payment-date-started-year'];
+  delete req.session.data.submitError
 
   res.redirect('claim/claim-details' + '?id=' + claimID + '#payment')
 });
@@ -199,6 +203,7 @@ router.post('/add-learner', function (req, res) {
   delete req.session.data.existingLearner
   delete req.session.data.learnerInput;
   delete req.session.data.learnerSelection;
+  delete req.session.data.submitError
 
   res.redirect('claim/claim-details' + '?id=' + claimID + '#learner')
 });
@@ -223,6 +228,7 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.evidenceFile;
   delete req.session.data.type;
   delete req.session.data.learnerID;
+  delete req.session.data.submitError
 
   res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
 
@@ -247,19 +253,14 @@ router.post('/save-claim', function (req, res) {
 
 });
 
-router.post('/submit-claim', function (req, res) {
+router.post('/ready-to-declare', function (req, res) {
   const claimID = req.session.data.id
-  const d = new Date()
-  const dStr = d.toISOString();
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       if (checkClaim(c)) {
-        c.status = 'submitted'
-        c.submittedDate = dStr
         delete req.session.data.submitError
-        req.session.data.claims = sortByCreatedDate(req.session.data.claims);
-        res.redirect('claim/confirmation')
+        res.redirect('claim/decleration')
       } else {
         res.redirect('claim/claim-details' + '?id=' + claimID + '&submitError=true')
       }
@@ -267,6 +268,25 @@ router.post('/submit-claim', function (req, res) {
   }
 });
 
+router.post('/submit-claim', function (req, res) {
+  const claimID = req.session.data.id
+  const d = new Date()
+  const dStr = d.toISOString();
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      if (req.session.data.confirmation) {
+        c.status = 'submitted'
+        c.submittedDate = dStr
+        delete req.session.data.submitError
+        req.session.data.claims = sortByCreatedDate(req.session.data.claims);
+        res.redirect('claim/confirmation')
+      } else {
+        res.redirect('claim/decleration?submitError=true')
+      }
+    }
+  }
+});
 
 router.post('/create-learner', function (req, res) {
   var claimID = req.session.data.id
@@ -297,6 +317,7 @@ router.post('/create-learner', function (req, res) {
     delete req.session.data.regID
     delete req.session.data.roleType
     delete req.session.data.learnerInput
+    delete req.session.data.submitError
     res.redirect('claim/claim-details' + '?id=' + claimID)
   } else {
     console.log('match')
@@ -309,33 +330,6 @@ router.post('/create-learner', function (req, res) {
     res.redirect('learner/add-learner?inClaim=' + req.session.data.inClaim + '&existingLearner=true')
   }
 
-});
-
-router.post('/update-filters', (req, res) => {
-  const filters = req.body.filters;
-  // Assuming selectedOptions is sent in the request body
-  req.session.data['filters'] = filters;
-
-  // Define keys to exclude from logging
-  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes'];
-
-  // Create a copy of req.session.data with excluded keys removed
-  const filteredData = Object.keys(req.session.data)
-    .filter(key => !excludeKeys.includes(key))
-    .reduce((obj, key) => {
-      obj[key] = req.session.data[key];
-      return obj;
-    }, {});
-
-  const log = {
-    method: req.method,
-    url: req.originalUrl,
-    data: filteredData
-  }
-  // you can enable this in your .env file
-  console.log(JSON.stringify(log, null, 2))
-
-  res.send(req.session.data)
 });
 
 function loadData(req) {
