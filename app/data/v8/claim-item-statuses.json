@@ -8,19 +8,19 @@
     {
         "id": "submitted",
         "name": "Submitted",
-        "description": "Claims that have been submitted. These claims are now with NHS BSA for processing.",
+        "description": "Claims that have been submitted. These claims are now with NHS Business Services Authority for processing.",
         "distribution": 0.40
     },
     {
         "id": "rejected",
         "name": "Rejected",
-        "description": "Claims that have been rejected by NHS BSA.",
+        "description": "Claims that have been rejected by NHS Business Services Authority.",
         "distribution": 0.05
     },
     {
         "id": "approved",
         "name": "Approved",
-        "description": "Claims that have been approved by NHS BSA.",
+        "description": "Claims that have been approved by NHS Business Services Authority.",
         "distribution": 0.30
     }
 ]

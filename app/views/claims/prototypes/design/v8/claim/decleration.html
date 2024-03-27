@@ -2,7 +2,7 @@
 {% set claim = data.id | findClaim_V8(data.claims) %}
 
 {% block pageTitle %}
-{{ ["Decleration - Claim: ", data.id] | join }}
+{{ ["Declaration - Claim: ", data.id] | join }}
 {% endblock %}
 
 {% block beforeContent %}
@@ -29,8 +29,8 @@
             </div>
         </div>
         {% endif %}
-        <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
-        <h1 class="govuk-heading-l">Decleration</h1>
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">Declaration</h1>
     </div>
     <div class="govuk-grid-column-two-thirds">
         <div class="govuk-warning-text">
@@ -67,7 +67,7 @@
                             <input class="govuk-checkboxes__input" id="confirmation" name="confirmation" type="checkbox"
                                 value="confirmation">
                             <label class="govuk-label govuk-checkboxes__label" for="confirmation">
-                                I confirm that I understand and accept this decleration.
+                                I confirm that I understand and accept this declaration.
                             </label>
                         </div>
                     </div>

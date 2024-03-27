@@ -40,14 +40,13 @@
 
     {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
     <h2 class="govuk-heading-m">What happens next</h2>
-    <p class="govuk-body">When you have added all the necessary information to this claim you can submit it for
-      processing. Check that nothing is showing as 'incomplete' and that you have added all the learners you need to.
+    <p class="govuk-body">    When you have added all the necessary information to this claim you can confirm the details and submit the claim for processing.
     </p>
-    <p class="govuk-body">If there is still information to add, you can save and finish the claim later.</p>
+    <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
     <div class="govuk-button-group">
       <form action="../ready-to-declare" method="post" novalidate>
         <button type="submit" class="govuk-button" data-module="govuk-button">
-          Submit claim
+          Confirm details
         </button>
       </form>
       <form action="../save-claim" method="post" novalidate>
