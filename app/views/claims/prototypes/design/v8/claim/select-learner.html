@@ -12,27 +12,25 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
-        <h1 class="govuk-heading-l">Select learners</h1>
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">Course or qualification learner</h1>
     </div>
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">Select the members of staff who attended this training.</p>
-        <p class="govuk-body">If you have claimed for a member of staff before their details should be saved in the
-            service so you can reuse them for other claims.</p>
-        <p class="govuk-body">Check if the member of staff is in the service by using the search below.</p>
+        <p class="govuk-body">If you have previously claimed for this learner their details should be saved so you can reuse them.</p>
+        <p class="govuk-body">Check using the search below.</p>
         <div class="moj-search govuk-!-padding-bottom-2">
 
             <form action="select-learner" method="post">
 
                 <div class="govuk-form-group">
                     <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
-                        Search for a member of staff
+                        Search for a learner
                     </label>
 
                     <div id="search-hint" class="govuk-hint moj-search__hint ">
-                        You can search by a member of staffs's name or national insurance number
+                        You can search by name or national insurance number
                     </div>
 
                     <input class="govuk-input moj-search__input " id="search" name="learnerInput" type="search"
