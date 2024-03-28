@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { faker } = require('@faker-js/faker');
 const { fakerEN_GB } = require('@faker-js/faker');
+const { generateUniqueID } = require('./helpers/helpersV8.js');
 
 function getRandomLearners(learnerList, x, eligibleRoles) {
   const copyLearners = [...learnerList];
@@ -72,7 +73,7 @@ function generateTUClaims(quantity, version) {
 
   for (let i = 1; i <= quantity; i++) {
     faker.seed(i);
-    const claimID = faker.finance.accountNumber(6);
+    const claimID = generateUniqueID() + "-C";
     const selectedLearner = getRandomLearners(learners, 1, tuEligibleRoles);
     const trainingGroup = faker.helpers.arrayElement(training);
     const trainingItem = faker.helpers.arrayElement(trainingGroup.courses);

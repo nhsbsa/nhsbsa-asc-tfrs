@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../../../../../../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../../../../../../scripts/helpers/helpersV8.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID } = require('../../../../../../scripts/helpers/helpersV8.js');
 
 // v8 Prototype routes
 
@@ -43,7 +43,7 @@ function newClaim(req, res, training) {
 
   if (claimType == "TU") {
     claim = {
-      claimID: faker.finance.accountNumber(6),
+      claimID: generateUniqueID() + "-C",
       type: "TU",
       learner: null,
       training: training,

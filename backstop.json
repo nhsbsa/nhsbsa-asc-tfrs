@@ -64,19 +64,19 @@
         },
         {
             "label": "14-TU-new-claim",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=876362"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=V9TK-4HDD-4LJI-C"
         },
         {
             "label": "15-TU-new-claim-start-date",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/start-date?id=876362"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/start-date?id=V9TK-4HDD-4LJI-C"
         },
         {
             "label": "16-TU-new-claim-learner",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?id=876362"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?id=V9TK-4HDD-4LJI-C"
         },
         {
             "label": "17-TU-new-claim-learner-results",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=roy&id=876362&claimType=TU"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=roy&id=V9TK-4HDD-4LJI-C&claimType=TU"
         },
         {
             "label": "18-TU-new-claim-new-learner",
@@ -84,51 +84,51 @@
         },
         {
             "label": "19-TU-new-claim-payment-date",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/cost-date?id=876362"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/cost-date?id=V9TK-4HDD-4LJI-C"
         },
         {
             "label": "20-TU-new-claim-evidence-payment",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=payment&id=876362"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=payment&id=V9TK-4HDD-4LJI-C"
         },
         {
             "label": "21-TU-new-claim-evidence-completion",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=completion&learnerID=LE%2009%205F%2094%20M&id=876362"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=completion&learnerID=LE%2009%205F%2094%20M&id=V9TK-4HDD-4LJI-C"
         },
         {
             "label": "22-TU-new-claim-confirmation",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/confirmation?id=876362"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/confirmation?id=V9TK-4HDD-4LJI-C"
         },
         {
             "label": "23-TU-not-yet-submitted-claim",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=508821"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=Z8S-F3K6-3XF7-C"
         },
         {
             "label": "24-TU-submitted-claim",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=487901"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=Z1Z-F1J6-3XF7-C"
         },
         {
             "label": "25-TU-rejected-claim",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=127349"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=Z8S-F1J6-9VGH-C"
         },
         {
             "label": "26-TU-approved-claim",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=412959"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=Z8S-F1J6-4GH7-C"
         },
         {
             "label": "27-TU-new-claim-learner-no-results",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=test&id=876362&claimType=TU"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=test&id=V9TK-4HDD-4LJI-C&claimType=TU"
         },
         {
             "label": "28-TU-claim-submit-error",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=876362&submitError=true"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=V9TK-4HDD-4LJI-C&submitError=true"
         },
         {
             "label": "29-TU-claim-decleration",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/decleration?id=876362"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/decleration?id=V9TK-4HDD-4LJI-C"
         },
         {
             "label": "30-TU-claim-decleration-error",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/decleration?id=876362&submitError=true"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/decleration?id=V9TK-4HDD-4LJI-C&submitError=true"
         }
         
     ],
