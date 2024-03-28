@@ -301,4 +301,5 @@ addFilter('formatCount_V7', function (courses) {
         text += "s"
     };
     return text;
-}) 
+})
+
