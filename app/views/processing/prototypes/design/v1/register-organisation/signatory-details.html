@@ -1,0 +1,40 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% block pageTitle %}
+Signatory details - Register an organisation
+{% endblock %}
+
+{% block beforeContent %}
+<a href="confirm-organisation-details" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Signatory details</h1>
+        <form action="confirm-signatory-details" method="post" novalidate>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="full-name">
+                    Full name
+                </label>
+                <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false"
+                    autocomplete="name">
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="email">
+                    Email address
+                </label>
+                <div id="email-hint" class="govuk-hint">
+                    We’ll send the invite to this address
+                </div>
+                <input class="govuk-input" id="email" name="email" type="email" spellcheck="false"
+                    aria-describedby="email-hint" autocomplete="email">
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
