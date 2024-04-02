@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../../../../../../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../../../../../../scripts/helpers/helpersV8.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID } = require('../../../../../../scripts/helpers/helpersV8.js');
 
 // v8 Prototype routes
 
@@ -43,7 +43,7 @@ function newClaim(req, res, training) {
 
   if (claimType == "TU") {
     claim = {
-      claimID: faker.finance.accountNumber(6),
+      claimID: generateUniqueID() + "-C",
       type: "TU",
       learner: null,
       training: training,
@@ -281,7 +281,7 @@ router.post('/ready-to-declare', function (req, res) {
     if (claimID == c.claimID) {
       if (checkClaim(c)) {
         delete req.session.data.submitError
-        res.redirect('claim/decleration')
+        res.redirect('claim/declaration')
       } else {
         res.redirect('claim/claim-details' + '?id=' + claimID + '&submitError=true')
       }
@@ -303,7 +303,7 @@ router.post('/submit-claim', function (req, res) {
         req.session.data.claims = sortByCreatedDate(req.session.data.claims);
         res.redirect('claim/confirmation')
       } else {
-        res.redirect('claim/decleration?submitError=true')
+        res.redirect('claim/declaration?submitError=true')
       }
     }
   }
