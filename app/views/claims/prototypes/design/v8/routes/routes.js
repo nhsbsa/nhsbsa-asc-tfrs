@@ -260,7 +260,7 @@ router.post('/ready-to-declare', function (req, res) {
     if (claimID == c.claimID) {
       if (checkClaim(c)) {
         delete req.session.data.submitError
-        res.redirect('claim/decleration')
+        res.redirect('claim/declaration')
       } else {
         res.redirect('claim/claim-details' + '?id=' + claimID + '&submitError=true')
       }
@@ -282,7 +282,7 @@ router.post('/submit-claim', function (req, res) {
         req.session.data.claims = sortByCreatedDate(req.session.data.claims);
         res.redirect('claim/confirmation')
       } else {
-        res.redirect('claim/decleration?submitError=true')
+        res.redirect('claim/declaration?submitError=true')
       }
     }
   }

@@ -20,4 +20,11 @@ addFilter('default', function (value, defaultValue) {
     } else {
         return defaultValue
     }
-}) 
+})
+
+addFilter('toLowerCase', function (str) {
+    if (!str || typeof str !== 'string') {
+        return str;
+    }
+    return str.toLowerCase();
+})

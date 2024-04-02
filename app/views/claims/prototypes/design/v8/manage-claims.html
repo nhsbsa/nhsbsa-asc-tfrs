@@ -36,15 +36,24 @@
     </div>
 </div>
 <div class="govuk-grid-row">
+    {% if noClaims == 0 %}
+    <div class="govuk-grid-column-full">
+            <div class="govuk-warning-text">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-visually-hidden">Warning</span>
+                    There are not currently any {{ status.name | toLowerCase }} claims.
+                </strong>
+            </div>
+        </div>
+            {% else %}
     <div class="moj-scrollable-pane">
         <div class="govuk-grid-column-full">
-            {% if data.claimType == "TU" %}
             {% include "./_components/claims-lists/TU-claim-list.html" %}
-            {% elif data.claimType == "CPD" %}
-            {% include "./_components/claims-lists/CPD-claim-list.html" %}
-            {% endif %}
+            
         </div>
     </div>
+    {% endif %}
 </div>
 
 
