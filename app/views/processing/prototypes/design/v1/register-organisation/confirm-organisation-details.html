@@ -1,0 +1,55 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% block pageTitle %}
+Check organsiation details - Register an organisation
+{% endblock %}
+
+{% block beforeContent %}
+<a href="organisation-details" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.state == "valid" %}
+        <h1 class="govuk-heading-l">Check organisation details are correct</h1>
+        <p class="govuk-body">Below is the information returned from the ASC-WDS based on the workplace ID you provided. Please confirm that these details are correct before continueing.</p>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    123456
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Organisation name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Testing care home
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Organisation address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    72 Guild Street<br>London<br>SE23 6FH
+                </dd>
+            </div>
+        </dl>
+        <form action="signatory-details" method="post" novalidate>
+            <input type="hidden" name="answers-checked" value="true">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Confirm and continue
+            </button>
+        </form>
+        {% else %}
+
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
