@@ -181,6 +181,27 @@ router.post('/cost-date', function (req, res) {
   res.redirect('claim/claim-details' + '?id=' + claimID + '#payment')
 });
 
+router.post('/completion-date', function (req, res) {
+  var day = req.session.data['completion-date-started-day']
+  var month = req.session.data['completion-date-started-month']
+  var year = req.session.data['completion-date-started-year']
+  var claimID = req.session.data.id
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      c.completionDate = year + "-" + month + "-" + day + "T00:00:00.000Z"
+
+    }
+  }
+
+  delete req.session.data['completion-date-started-day'];
+  delete req.session.data['completion-date-started-month'];
+  delete req.session.data['completion-date-started-year'];
+  delete req.session.data.submitError
+
+  res.redirect('claim/claim-details' + '?id=' + claimID + '#completion')
+});
+
 router.post('/add-learner', function (req, res) {
   var claimID = req.session.data.id
 
