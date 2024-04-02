@@ -1,0 +1,43 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% block pageTitle %}
+Check signatory details - Register an organisation
+{% endblock %}
+
+{% block beforeContent %}
+<a href="signatory-details.html" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Check signatory details are correct</h1>
+        <p class="govuk-body">Check the below information is correct before sending the invite.</p>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Full name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.fullName }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Email address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.email }}
+                </dd>
+            </div>
+        </dl>
+        <form action="confirmation" method="post" novalidate>
+            <input type="hidden" name="answers-checked" value="true">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Confirm and send invite
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
