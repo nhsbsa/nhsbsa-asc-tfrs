@@ -1,0 +1,69 @@
+{% set hasResults = false %}
+{% set addHeader = true %}
+{% set loopCounter = 0 %}
+{% for claim in data['claims'] %}
+{% if claim.status == status.id and claim.type == data.claimType and (loopCounter < 10) %} {% set hasResults=true %} {%
+    if addHeader %} 
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+        <div>
+            <p class="govuk-heading-m">
+                <a href="#" class="govuk-link">Claim: {{ claim.claimID }}</a>
+              </p>
+              <p>PBS Foundation level  - UBD provider</p>
+              <p>Jerry Parker</p>
+              <p>Training dates: 23 January - 28 June 24</p>
+
+          <!-- <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dd class="govuk-summary-list__value">
+                Part time – less than 30 hours a week
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                Change
+              </dd>
+            </div>
+          </dl> -->
+        </div>
+      
+    {% endif %}
+    {% set loopCounter = loopCounter + 1 %}
+{% endif %}
+
+{% endfor %}
+
+{% if hasResults %}
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+   
+    <nav class="moj-pagination" aria-label="Pagination navigation">
+
+        <ul class="moj-pagination__list">
+
+
+
+            <li class="moj-pagination__item moj-pagination__item--active" aria-label="Page 1 of 30" aria-current="page">
+                1</li>
+
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 2 of 30">2</a>
+            </li>
+
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 3 of 30">3</a>
+            </li>
+
+            <li class="moj-pagination__item moj-pagination__item--dots">…</li>
+
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 5 of 30">{{
+                    noClaims | pageCount_V8(data.filters.perPage | default (10)) }}</a></li>
+
+
+            <li class="moj-pagination__item  moj-pagination__item--next">
+                <a class="moj-pagination__link" href="">Next<span class="govuk-visually-hidden"> page</span></a>
+            </li>
+        </ul>
+        <p class="moj-pagination__results">Showing <b>1</b> to <b>10</b> of <b>{{ noClaims }}</b> claims</p>
+    </nav>
+    {% else %}
+
+    <p class="govuk-body">There are currerntly no claims {{ status.name }}.</p>
+{% endif %}
