@@ -1,31 +1,86 @@
 {% set hasResults = false %}
 {% set addHeader = true %}
 {% set loopCounter = 0 %}
+
+<!-- <div class="govuk-width-container">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <button type="button" class="govuk-button govuk-button--inverse" data-module="govuk-button">
+                Sort by
+              </button>
+        </div>
+      </div>
+  </div> -->
+
 {% for claim in data['claims'] %}
 {% if claim.status == status.id and claim.type == data.claimType and (loopCounter < 10) %} {% set hasResults=true %} {%
     if addHeader %} 
 
-        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-        <div>
-            <p class="govuk-heading-m">
-                <a href="#" class="govuk-link">Claim: {{ claim.claimID }}</a>
-              </p>
-              <p>PBS Foundation level  - UBD provider</p>
-              <p>Jerry Parker</p>
-              <p>Training dates: 23 January - 28 June 24</p>
+    <div class="govuk-main-wrapper" style="background-color: #fff; padding: 0;">
+        <!-- <div class="govuk-width-container"> -->
+          <div class="govuk-grid-row">
 
-          <!-- <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-              <dd class="govuk-summary-list__value">
-                Part time – less than 30 hours a week
-              </dd>
-              <dd class="govuk-summary-list__actions">
-                Change
-              </dd>
+            <div class="govuk-grid-column-two-thirds">
+      
+                <h2 class="govuk-heading-m"><a href="#" class="govuk-link">Claim: {{ claim.claimID }}</a></h2>
+      
+                  <div class="nhsuk-card nhsuk-card--clickable nhsuk-card--secondary">
+                    <div class="nhsuk-card__content nhsuk-card__content--secondary">
+                        
+                        <p class="govuk-body" style="margin-bottom: 0;">{{ claim.training.title }} - provided by {{ claim.training.awardingOrganisation }}</p>
+                        <p class="govuk-!-font-size-18 nhsuk-u-margin-bottom-1" style="color: #354550; padding: 0">{{ claim.learner.fullName }}</p>
+
+                        <p class="nhsuk-card__description nhsuk-u-reading-width" style="margin-bottom: 0;">Training dates: {{claim.startDate}} - {{claim.completionDate}} not complete</p>
+                    </div>
+                  </div>
+
             </div>
-          </dl> -->
-        </div>
+            <div class="govuk-grid-column-one-third">
+                <p class="nhsuk-card__description nhsuk-u-reading-width">Relative date</p>
+                <p class="nhsuk-card__description nhsuk-u-reading-width">Created on {{claim.createdDate}}</p>
+
+            </div>
+
+          </div>
+        <!-- </div> -->
+      </div>
+
+    <!-- <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+        
+                <div class="govuk-grid-column-two-thirds">
+                    <h2 class="govuk-heading-m">Claim reference:<a href="#" class="govuk-link"> {{ claim.claimID }}</a></h2>
+
+                    <p class="govuk-body">{{ claim.training.title }} - {{ claim.training.awardingOrganisation }}</p>
+                    <p class="govuk-!-font-size-18 nhsuk-u-margin-bottom-1" style="color: #354550;">{{ claim.learner.fullName }}</p>
+                </div>
+                <div class="govuk-grid-column-one-third">
+                    <p class="govuk-body">This is a paragraph inside a one-third wide column</p>
+                </div>
+                
+                </div>
+            </div>
+    </div> -->
+          <!-- <ul class="govuk-grid-row nhsuk-card-group">
+            
+            <li class="govuk-grid-column-two-thirds nhsuk-card-group__item">
+              <div class="nhsuk-card nhsuk-card--clickable nhsuk-card--secondary">
+                <div class="nhsuk-card__content nhsuk-card__content--secondary">
+                  <p class="govuk-!-font-size-16 nhsuk-u-margin-bottom-1" style="color: #354550;">
+                    <strong>06 March 2024</strong></p>
+                  <h2 class="nhsuk-card__heading nhsuk-heading-m nhsuk-u-margin-bottom-3 nhsuk-u-padding-top-0">
+                    <a class="nhsuk-card__link" href="#">Is adult social care for you?</a>
+                  </h2>
+                  <p class="nhsuk-card__description nhsuk-u-reading-width">You don’t necessarily need qualifications or experience to work in social care. What’s really important is your values and attitude.</p>
+                </div>
+              </div>
+            </li>
+  
+          </ul> -->
+
       
     {% endif %}
     {% set loopCounter = loopCounter + 1 %}
