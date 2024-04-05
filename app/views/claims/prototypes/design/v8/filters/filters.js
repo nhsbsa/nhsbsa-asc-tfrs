@@ -102,7 +102,6 @@ addFilter('variableDate_V8', function (statusID) {
     } else {
         return 'Created'
     }
-
 })
 
 addFilter('removeSpacesAndLowerCase_V8', function (inputString) {
@@ -303,3 +302,53 @@ addFilter('formatCount_V7', function (courses) {
     return text;
 })
 
+addFilter('listItemVariableDate_V8', function (statusID, claim) {
+    if (statusID == 'not-yet-submitted') {
+        return 'Created ' + formatDate(claim.createdDate)
+    } else if (statusID == 'submitted') {
+        return 'Submitted ' + formatDate(claim.submittedDate)
+    } else if (statusID == 'rejected') {
+        return 'Rejected ' + formatDate(claim.rejectedDate)
+    } else if (statusID == 'approved') {
+        return 'Approved ' + formatDate(claim.approvedDate)
+    } else {
+        return 'Created ' + formatDate(claim.createdDate)
+    }
+})
+
+function formatDate(dateStr) {
+    // Convert the string to a Date object
+    let dateObj = new Date(dateStr);
+    // Define month names
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+    // Extract day, month, and year
+    let day = dateObj.getUTCDate();
+    let monthIndex = dateObj.getUTCMonth();
+    let year = dateObj.getUTCFullYear();
+    // Format the date
+    let formattedDate = day + ' ' + monthNames[monthIndex] + ' ' + year;
+    return formattedDate;
+}
+
+addFilter('relativeDateFromDateToToday', function (dateStr) {
+    // Convert the input date string to a Date object
+    const inputDate = new Date(dateStr);
+    
+    // Get the current date
+    const currentDate = new Date();
+    
+    // Calculate the difference in milliseconds between the input date and today
+    const differenceInMs = currentDate - inputDate;
+
+    // Convert milliseconds to days
+    const differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+
+    // If difference is more than 7 days, calculate weeks
+    if (differenceInDays > 14) {
+        const differenceInWeeks = Math.floor(differenceInDays / 7);
+        return differenceInWeeks + ' weeks ago';
+    } else {
+        return differenceInDays + ' days ago';
+    }
+})

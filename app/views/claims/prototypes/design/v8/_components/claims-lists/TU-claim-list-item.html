@@ -2,85 +2,50 @@
 {% set addHeader = true %}
 {% set loopCounter = 0 %}
 
-<!-- <div class="govuk-width-container">
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
-            <button type="button" class="govuk-button govuk-button--inverse" data-module="govuk-button">
-                Sort by
-              </button>
-        </div>
-      </div>
-  </div> -->
+<div class="govuk-form-group" style="display: flex;">
+    <label class="govuk-label" for="sort">
+      Sort by
+    </label>
+    <select class="govuk-select" id="sort" name="sort" style="padding: 10em;">
+      <option value="created" selected>Recently created</option>
+      <option value="oldest">Oldest</option>
+      <option value="training">Alphabetical by training</option>
+      <option value="learner">Alphabetical by learner</option>
+    </select>
+    <p>hello</p>
+  </div>
 
 {% for claim in data['claims'] %}
 {% if claim.status == status.id and claim.type == data.claimType and (loopCounter < 10) %} {% set hasResults=true %} {%
     if addHeader %} 
 
-    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-    <div class="govuk-main-wrapper" style="background-color: #fff; padding: 0;">
-        <!-- <div class="govuk-width-container"> -->
-          <div class="govuk-grid-row">
+    <div class="govuk-main-wrapper " style="padding: 0;">
+          
+        <div class="govuk-grid-row">
 
             <div class="govuk-grid-column-two-thirds">
-      
-                <h2 class="govuk-heading-m"><a href="#" class="govuk-link">Claim: {{ claim.claimID }}</a></h2>
-      
-                  <div class="nhsuk-card nhsuk-card--clickable nhsuk-card--secondary">
-                    <div class="nhsuk-card__content nhsuk-card__content--secondary">
-                        
-                        <p class="govuk-body" style="margin-bottom: 0;">{{ claim.training.title }} - provided by {{ claim.training.awardingOrganisation }}</p>
-                        <p class="govuk-!-font-size-18 nhsuk-u-margin-bottom-1" style="color: #354550; padding: 0">{{ claim.learner.fullName }}</p>
 
-                        <p class="nhsuk-card__description nhsuk-u-reading-width" style="margin-bottom: 0;">Training dates: {{claim.startDate}} - {{claim.completionDate}} not complete</p>
-                    </div>
-                  </div>
-
-            </div>
-            <div class="govuk-grid-column-one-third">
-                <p class="nhsuk-card__description nhsuk-u-reading-width">Relative date</p>
-                <p class="nhsuk-card__description nhsuk-u-reading-width">Created on {{claim.createdDate}}</p>
-
-            </div>
-
-          </div>
-        <!-- </div> -->
-      </div>
-
-    <!-- <div class="govuk-width-container">
-            <div class="govuk-grid-row">
-                <div class="govuk-grid-column-full">
-        
-                <div class="govuk-grid-column-two-thirds">
-                    <h2 class="govuk-heading-m">Claim reference:<a href="#" class="govuk-link"> {{ claim.claimID }}</a></h2>
-
-                    <p class="govuk-body">{{ claim.training.title }} - {{ claim.training.awardingOrganisation }}</p>
-                    <p class="govuk-!-font-size-18 nhsuk-u-margin-bottom-1" style="color: #354550;">{{ claim.learner.fullName }}</p>
-                </div>
-                <div class="govuk-grid-column-one-third">
-                    <p class="govuk-body">This is a paragraph inside a one-third wide column</p>
-                </div>
+                <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
                 
-                </div>
-            </div>
-    </div> -->
-          <!-- <ul class="govuk-grid-row nhsuk-card-group">
-            
-            <li class="govuk-grid-column-two-thirds nhsuk-card-group__item">
-              <div class="nhsuk-card nhsuk-card--clickable nhsuk-card--secondary">
-                <div class="nhsuk-card__content nhsuk-card__content--secondary">
-                  <p class="govuk-!-font-size-16 nhsuk-u-margin-bottom-1" style="color: #354550;">
-                    <strong>06 March 2024</strong></p>
-                  <h2 class="nhsuk-card__heading nhsuk-heading-m nhsuk-u-margin-bottom-3 nhsuk-u-padding-top-0">
-                    <a class="nhsuk-card__link" href="#">Is adult social care for you?</a>
-                  </h2>
-                  <p class="nhsuk-card__description nhsuk-u-reading-width">You don’t necessarily need qualifications or experience to work in social care. What’s really important is your values and attitude.</p>
-                </div>
-              </div>
-            </li>
-  
-          </ul> -->
+                <div class="govuk-grid-column-two-thirds">
+                    <p class="govuk-body" style="margin-bottom: 0;"><a href="claim/claim-details?id={{ claim.claimID }}" class="govuk-link">{{ claim.claimID }}</a></p>
+                    <p class="govuk-body" style="margin-bottom: 0;">{{ claim.training.title }}</p>
+                    <p class="govuk-body" style="margin-bottom: 0;">Provided by {{ claim.training.awardingOrganisation }}</p>
 
+                    <p class="govuk-body" style="margin-bottom: 0;">{{ claim.learner.fullName }}</p>
+                    <p class="govuk-body" style="margin-bottom: 0;">Training dates: {{ claim.startDate | govukDate("truncate") }} to {{ claim.completionDate | govukDate("truncate") }}</p>
+                </div>
+                <div class="govuk-grid-column-one-third" style="display: flex; flex-direction: column; align-items: end;">
+                    <p style="margin-bottom: 0;" class="nhsuk-card__description nhsuk-u-reading-width">{{status.id | listItemVariableDate_V8(claim)}}</p>
+                    {% if status.id == "not-yet-submitted"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">{{claim.createdDate | relativeDateFromDateToToday}}</p>{% endif %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
       
     {% endif %}
     {% set loopCounter = loopCounter + 1 %}
@@ -88,37 +53,52 @@
 
 {% endfor %}
 
-{% if hasResults %}
-<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+<!-- <div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds">
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <div class="govuk-grid-column-two-thirds">
+            <p class="govuk-body" style="margin-bottom: 0;"><a href="claim/claim-details?id={{ claim.claimID }}" class="govuk-link">Claim: hello</a></p>
+            <p class="govuk-body" style="margin-bottom: 0;"> something - Provided by someone</p>
+            <p class="govuk-body" style="margin-bottom: 0;">person</p>
+            <p class="govuk-body" style="margin-bottom: 0;">Training dates: a time - to a time</p>
+        </div>
+        <div class="govuk-grid-column-one-third">
+            <p style="margin-bottom: 0;" class="nhsuk-card__description nhsuk-u-reading-width">status</p>
+            {% if status.id == "not-yet-submitted"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">created date</p>{% endif %}
+        </div>
+       
+
+    </div>
    
+</div> -->
+
+{% if hasResults %}
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds">
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
     <nav class="moj-pagination" aria-label="Pagination navigation">
-
         <ul class="moj-pagination__list">
-
-
-
-            <li class="moj-pagination__item moj-pagination__item--active" aria-label="Page 1 of 30" aria-current="page">
-                1</li>
-
-            <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 2 of 30">2</a>
-            </li>
-
-            <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 3 of 30">3</a>
-            </li>
-
+            <li class="moj-pagination__item moj-pagination__item--active" aria-label="Page 1 of 30" aria-current="page">1</li>
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 2 of 30">2</a></li>
+            <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 3 of 30">3</a></li>
             <li class="moj-pagination__item moj-pagination__item--dots">…</li>
-
             <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 5 of 30">{{
                     noClaims | pageCount_V8(data.filters.perPage | default (10)) }}</a></li>
-
-
             <li class="moj-pagination__item  moj-pagination__item--next">
                 <a class="moj-pagination__link" href="">Next<span class="govuk-visually-hidden"> page</span></a>
             </li>
         </ul>
         <p class="moj-pagination__results">Showing <b>1</b> to <b>10</b> of <b>{{ noClaims }}</b> claims</p>
     </nav>
+
     {% else %}
 
-    <p class="govuk-body">There are currerntly no claims {{ status.name }}.</p>
+    <p class="govuk-body">There are currently no claims {{ status.name }}.</p>
 {% endif %}
+</div>
+   
+</div>
