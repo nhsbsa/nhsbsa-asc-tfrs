@@ -1,7 +1,11 @@
-{% extends "./layouts/main.html" %}
+{% extends "../layouts/main.html" %}
 
 {% block pageTitle %}
 {{ ["Sign in - ", serviceName] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="account-question" class="govuk-back-link">Back</a>
 {% endblock %}
 
 
@@ -10,7 +14,7 @@
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl">Sign in</h1>
         <p class="govuk-body">Please click "Sign in" button to continue.</p>
-        <a class="govuk-button" data-module="govuk-button" href="home">
+        <a class="govuk-button" data-module="govuk-button" href="../home">
             Sign-in
         </a>
     </div>

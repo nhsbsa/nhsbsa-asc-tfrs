@@ -17,11 +17,22 @@ router.post('/check-org', function (req, res) {
   if(orgID == "123456") {
     res.redirect('register-organisation/confirm-organisation-details?state=valid')
   } else if (orgID == "timeout") {
-    res.redirect('confirm-organisation-details?state=timeout')
+    res.redirect('register-organisation/confirm-organisation-details?state=timeout')
   } else if (orgID == "dupe") {
-    res.redirect('confirm-organisation-details?state=duplicate')
+    res.redirect('register-organisation/confirm-organisation-details?state=duplicate')
   } else {
-    res.redirect('confirm-organisation-details?state=invalid')
+    res.redirect('register-organisation/confirm-organisation-details?state=invalid')
+  }
+
+});
+
+router.post('/confirm-org-handler', function (req, res) {
+  const confirmation = req.session.data.confirmation
+
+  if(confirmation == "yes") {
+    res.redirect('register-organisation/signatory-details')
+  } else if (confirmation == "no") {
+    res.redirect('register-organisation/incorrect-org-details')
   }
 
 });

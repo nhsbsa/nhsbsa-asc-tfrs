@@ -1,0 +1,24 @@
+{% extends "../layouts/main.html" %}
+
+{% block pageTitle %}
+{{ ["Sign in - ", serviceName] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="account-question" class="govuk-back-link">Back</a>
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Email:</h1>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis orci a scelerisque purus semper eget duis. Magna fermentum iaculis eu non diam.</p>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis orci a scelerisque purus semper eget duis. Magna fermentum iaculis eu non diam.</p>
+        <p class="govuk-body"><a class="govuk-link" href="../home">
+            https://sign-up-link-here
+        </a></p>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis orci a scelerisque purus semper eget duis. Magna fermentum iaculis eu non diam.</p>
+    </div>
+</div>
+{% endblock %}

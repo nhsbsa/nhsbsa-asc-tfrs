@@ -6,6 +6,25 @@ const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID } = re
 
 // v8 Prototype routes
 
+router.post('/account-handler', function (req, res) {
+  const accountAnswer = req.session.data.account
+  const journey = req.session.data.journey
+
+  if (accountAnswer == "yes") {
+    if ( journey == 'creation') {
+      res.redirect('authentication/creation-link')
+    } else {
+      res.redirect('authentication/sign-in')
+    }
+  } else if (accountAnswer == "no") {
+    res.redirect('register')
+  } else if (accountAnswer == "dont-know") {
+    res.redirect('register')
+  }
+
+});
+
+
 router.post('/add-training', function (req, res) {
   var trainingCode = req.session.data.trainingSelection
   var claimID = req.session.data.id
