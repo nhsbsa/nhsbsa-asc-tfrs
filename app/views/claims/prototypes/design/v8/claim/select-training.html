@@ -19,6 +19,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <p class="govuk-body">Select the training course or qualification you are claiming for.</p>
+        <p class="govuk-body">If the course you are expecting does not show up in the search results, check that you’ve entered the correct name or course code. If it is still missing, it may mean it is not on the <a href="#">list of eligible courses</a>.</p>
         <div class="moj-search govuk-!-padding-bottom-2">
 
             <form action="select-training" method="post">
@@ -99,8 +100,7 @@
         {% endfor %}
 
         {% if not hasResults %}
-        <p class="govuk-body">{{ data['training-input'] }} has not returned any results. This may mean the activity you
-            are searching for is not eligible for funding.</p>
+        <p class="govuk-body">This search returned no results.</p>
         {% endif %}
         {% endif %}
     </div>
