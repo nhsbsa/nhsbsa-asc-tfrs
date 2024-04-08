@@ -33,6 +33,13 @@
                     </legend>
                     <p class="govuk-body">This is the date that the course took place. For qualifications and longer
                         courses it is the date it started on.</p>
+                    <div class="govuk-warning-text">
+                        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                        <strong class="govuk-warning-text__text">
+                            <span class="govuk-visually-hidden">Warning</span>
+                            You cannot claim for training that started or was paid for before 10 April 2024. <a class="govuk-link" href="#">Find out more</a>.
+                        </strong>
+                    </div>
                     <div id="start-date-issued-hint" class="govuk-hint">
                         For example, 27 3 2007
                     </div>
@@ -45,9 +52,10 @@
                                 <label class="govuk-label govuk-date-input__label" for="activity-date-started-day">
                                     Day
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat('day') ) %} govuk-input--error {% endif %}"
-                                    id="activity-date-started-day" name="activity-date-started-day" type="text" value="{{ data['activity-date-started-day'] | default ('') }}"
-                                    inputmode="numeric">
+                                <input
+                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat('day') ) %} govuk-input--error {% endif %}"
+                                    id="activity-date-started-day" name="activity-date-started-day" type="text"
+                                    value="{{ data['activity-date-started-day'] | default ('') }}" inputmode="numeric">
                             </div>
                         </div>
                         <div class="govuk-date-input__item">
@@ -55,8 +63,10 @@
                                 <label class="govuk-label govuk-date-input__label" for="activity-date-started-month">
                                     Month
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat('month') ) %} govuk-input--error {% endif %}"
-                                    id="activity-date-started-month" name="activity-date-started-month" type="text" value="{{ data['activity-date-started-month'] | default ('') }}"
+                                <input
+                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat('month') ) %} govuk-input--error {% endif %}"
+                                    id="activity-date-started-month" name="activity-date-started-month" type="text"
+                                    value="{{ data['activity-date-started-month'] | default ('') }}"
                                     inputmode="numeric">
                             </div>
                         </div>
@@ -65,9 +75,10 @@
                                 <label class="govuk-label govuk-date-input__label" for="activity-date-started-year">
                                     Year
                                 </label>
-                                <input class="govuk-input govuk-date-input__input govuk-input--width-4 {% if (data.submitError | dateErrorFormat('year') ) %} govuk-input--error {% endif %}"
-                                    id="activity-date-started-year" name="activity-date-started-year" type="text" value="{{ data['activity-date-started-year'] | default ('') }}"
-                                    inputmode="numeric">
+                                <input
+                                    class="govuk-input govuk-date-input__input govuk-input--width-4 {% if (data.submitError | dateErrorFormat('year') ) %} govuk-input--error {% endif %}"
+                                    id="activity-date-started-year" name="activity-date-started-year" type="text"
+                                    value="{{ data['activity-date-started-year'] | default ('') }}" inputmode="numeric">
                             </div>
                         </div>
                     </div>
@@ -77,8 +88,7 @@
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Add to claim
                 </button>
-                <a class="govuk-link govuk-link--no-visited-state"
-                    href="../cancel-handler">Cancel</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler">Cancel</a>
             </div>
         </form>
     </div>
