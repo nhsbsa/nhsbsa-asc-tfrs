@@ -80,4 +80,67 @@ function generateUniqueID() {
     return id;
 }
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID }
+function isValidISODate(dateString) {
+    // Create a new Date object from the given date string
+    const date = new Date(dateString);
+    
+    // Check if the date object is valid
+    // The date is considered valid if it's not 'Invalid Date'
+    // and the input date string matches the parsed date
+    return !isNaN(date.getTime()) && dateString === date.toISOString().slice(0, 10);
+}
+
+function validateDate(day, month, year) {
+    const result = {};
+
+    const startDate = year + "-" + month + "-" + day;
+    console.log(startDate)
+    console.log(isValidISODate(startDate))
+
+    // Validate year
+    if (year == "" || isNaN(year)) {
+        result.year = 'missing';
+    } else {
+        result.year = 'valid'; // Set year to valid if it exists
+    }
+
+    // Validate month
+    if (month == "" || isNaN(month)) {
+        result.month = 'missing';
+    } else if (month < 1 || month > 12) { 
+        result.month = 'invalid';
+    } else {
+        result.month = 'valid';
+    }
+
+    // Validate day
+    if (day == "" || isNaN(day)) {
+        result.day = 'missing';
+    } else {
+        const daysInMonth = new Date(year, month, 0).getDate();
+        if (day < 1 || day > daysInMonth) {
+            result.day = 'invalid';
+        } else {
+            result.day = 'valid';
+        }
+    }
+
+    // Validate whole date
+    if (result.day == 'missing' && result.month == 'missing' && result.year == 'missing') {
+        result.date = 'allMissing';
+    } else if (result.day == 'missing' || result.month == 'missing' || result.year == 'missing') {
+        result.date = 'partMissing';
+    } else if (isValidISODate(startDate)) {
+        result.date = 'valid';
+    } else {
+        result.date = 'invalid';
+    }
+
+    // Determine overall validity
+    result.valid = result.date === 'valid' && result.day === 'valid' && result.month === 'valid' && result.year === 'valid';
+
+    return result;
+}
+
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate }

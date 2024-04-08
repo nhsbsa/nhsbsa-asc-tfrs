@@ -49,4 +49,23 @@ function compareNINumbers(ni_1,learners) {
     return check
 }
 
-module.exports = { updateClaimStatus, checkClaim, compareNINumbers, removeSpacesAndLowerCase }
+function generateUniqueID() {
+    const characters = 'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789'; // Excluding 'O'
+    const sections = [3, 4, 4]; // Length of each section
+
+    let id = '';
+
+    for (let i = 0; i < sections.length; i++) {
+        for (let j = 0; j < sections[i]; j++) {
+            const randomIndex = Math.floor(Math.random() * characters.length);
+            id += characters.charAt(randomIndex);
+        }
+        if (i < sections.length - 1) {
+            id += '-';
+        }
+    }
+
+    return id;
+}
+
+module.exports = { updateClaimStatus, checkClaim, compareNINumbers, removeSpacesAndLowerCase, generateUniqueID }

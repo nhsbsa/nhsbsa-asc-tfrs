@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndLowerCase } = require('../../../../../../scripts/helpers/helpersV8.js');
+const { removeSpacesAndLowerCase } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag_V8', function (statusID, statuses) {
@@ -50,7 +50,7 @@ addFilter('uniqueDates_V8', function (claims, dateType) {
 
     claims.forEach(claim => {
         const startDate = new Date(claim[dateType]);
-        const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
+        const monthYear = '${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, `0`)}';
 
         uniqueMonthYears.add(monthYear);
     });
@@ -261,7 +261,7 @@ addFilter('findClaim_V8', function (claimID, claims) {
 })
 
 
-addFilter('groupByTitle_V7', function(training) {
+addFilter('groupByTitle_V7', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const organizedData = {};
     for (const course of qualificationsObject.courses) {
@@ -274,7 +274,7 @@ addFilter('groupByTitle_V7', function(training) {
     return organizedData;
 })
 
-addFilter('getUniqueCourseTitles_V7', function(training) {
+addFilter('getUniqueCourseTitles_V7', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const uniqueTitles = [];
 
@@ -286,11 +286,11 @@ addFilter('getUniqueCourseTitles_V7', function(training) {
     return uniqueTitles
 })
 
-addFilter('coursesCount_V7', function(courses) {
-    let count  = 0;
+addFilter('coursesCount_V7', function (courses) {
+    let count = 0;
     for (const c of courses) {
-        count ++
-    } 
+        count++
+    }
     return count;
 })
 
@@ -301,5 +301,68 @@ addFilter('formatCount_V7', function (courses) {
         text += "s"
     };
     return text;
+})
+
+
+addFilter('dateErrorMessage_V8', function (dateErrorObject, dateType, errorSection) {
+    const errorMessages = [];
+
+    if (errorSection == 'summary') {
+        if (dateErrorObject.day === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must include a day</a></li>');
+        }
+        if (dateErrorObject.month === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must include a month</a></li>');
+        }
+        if (dateErrorObject.year === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must include a year</a></li>');
+        }
+        if (dateErrorObject.date === 'invalid') {
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be a real date</a></li>');
+        }
+        if (dateErrorObject.date === 'allMissing') {
+            errorMessages.push('<li><a href="#input-error">Enter the ' + dateType.toLowerCase() + '</a></li>');
+        }
+    } else if (errorSection == 'input') {
+        errorMessages.push('<p id="input-error" class="govuk-error-message">')
+        if (dateErrorObject.day === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must include a day<br>');
+        }
+        if (dateErrorObject.month === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must include a month<br>');
+        }
+        if (dateErrorObject.year === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must include a year<br>');
+        }
+        if (dateErrorObject.date === 'invalid') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be a real date<br>');
+        }
+        if (dateErrorObject.date === 'allMissing') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>Enter the ' + dateType.toLowerCase() + '<br>');
+        }
+        errorMessages.push('</p>')
+    }
+
+    return errorMessages.join('');
+}, { renderAsHtml: true })
+
+addFilter('dateErrorFormat', function (dateErrorObject, type) {
+    let state = false
+    if (dateErrorObject) {
+        if (type == "day") {
+            if (dateErrorObject.day == 'missing' || (dateErrorObject.day == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid') {
+                state = true
+            }
+        } else if (type == "month") {
+            if (dateErrorObject.month == 'missing' || (dateErrorObject.month == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid') {
+                state = true
+            }
+        } else if (type == "year") {
+            if (dateErrorObject.year == 'missing' || (dateErrorObject.year == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid') {
+                state = true
+            }
+        }
+    }
+    return state;
 })
 

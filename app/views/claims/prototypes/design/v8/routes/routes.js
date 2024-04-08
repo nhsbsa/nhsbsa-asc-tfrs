@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../../../../../../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID } = require('../../../../../../scripts/helpers/helpersV8.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate } = require('../helpers/helpers.js');
 
 // v8 Prototype routes
 
@@ -104,25 +104,36 @@ function newClaim(req, res, training) {
   res.redirect('claim/claim-details' + '?id=' + claim.claimID)
 }
 
-router.post('/create-date', function (req, res) {
-  var day = req.session.data['activity-date-started-day']
-  var month = req.session.data['activity-date-started-month']
-  var year = req.session.data['activity-date-started-year']
-  var claimID = req.session.data.id
+router.post('/add-start-date', function (req, res) {
+  const day = req.session.data['activity-date-started-day']
+  const month = req.session.data['activity-date-started-month']
+  const year = req.session.data['activity-date-started-year']
+  const claimID = req.session.data.id
+  const startDate = year + "-" + month + "-" + day + "T00:00:00.000Z"
 
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      c.startDate = year + "-" + month + "-" + day + "T00:00:00.000Z"
-
-    }
-  }
-
-  delete req.session.data['activity-date-started-day'];
-  delete req.session.data['activity-date-started-month'];
-  delete req.session.data['activity-date-started-year'];
   delete req.session.data.submitError
 
-  res.redirect('claim/claim-details' + '?id=' + claimID + '#training')
+  const error = validateDate(day, month, year);
+
+  if (error.valid == true) {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+        c.startDate = startDate
+      }
+    }
+    
+    delete req.session.data['activity-date-started-day'];
+    delete req.session.data['activity-date-started-month'];
+    delete req.session.data['activity-date-started-year'];
+
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#training')
+
+  } else {
+    req.session.data.submitError = error
+    res.redirect('claim/start-date')
+
+  }
+  
 });
 
 router.post('/add-description', function (req, res) {
