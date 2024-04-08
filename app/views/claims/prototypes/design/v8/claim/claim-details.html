@@ -8,7 +8,7 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    {% if data.submitError %}
+    {% if data.submitError == true %}
     {% include "../_components/claim-sections/errorCatch.html" %}
     {% endif %}
     <span class="govuk-caption-l">{{ claim.type | potName_V8 }}</span>
