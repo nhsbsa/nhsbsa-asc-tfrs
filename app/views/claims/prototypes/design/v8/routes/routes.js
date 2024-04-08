@@ -109,9 +109,8 @@ router.post('/add-start-date', function (req, res) {
   const month = req.session.data['activity-date-started-month']
   const year = req.session.data['activity-date-started-year']
   const claimID = req.session.data.id
-  const startDate = new Date(year + "-" + month + "-" + day)
-  const april10th2024 = new Date('2024-04-10');
-
+  const startDate = new Date(year + "-" + month + "-" + day + "T00:00:00.000Z")
+  
   delete req.session.data.submitError
 
   const error = validateDate(day, month, year);
@@ -181,29 +180,24 @@ router.post('/cost-date', function (req, res) {
   const month = req.session.data['payment-date-started-month']
   const year = req.session.data['payment-date-started-year']
   const claimID = req.session.data.id
-  const costDate = new Date(year + "-" + month + "-" + day)
-  const april10th2024 = new Date('2024-04-10');
+  const costDate = new Date(year + "-" + month + "-" + day + "T00:00:00.000Z")
 
   delete req.session.data.submitError
 
   const error = validateDate(day, month, year);
 
   if (error.valid == true) {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+        c.costDate = costDate
+      }
+    }
+
     delete req.session.data['payment-date-started-day'];
     delete req.session.data['payment-date-started-month'];
     delete req.session.data['payment-date-started-year'];
 
-    if (startDate.getTime() < april10th2024.getTime()) {
-      res.redirect('claim/invalid-date')
-    } else {
-      for (const c of req.session.data.claims) {
-        if (claimID == c.claimID) {
-          c.costDate = costDate
-        }
-      }
-
-      res.redirect('claim/claim-details' + '?id=' + claimID + '#payment')
-    }
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#payment')
 
   } else {
     req.session.data.submitError = error
@@ -218,29 +212,25 @@ router.post('/completion-date', function (req, res) {
   const month = req.session.data['completion-date-started-month']
   const year = req.session.data['completion-date-started-year']
   const claimID = req.session.data.id
-  const completionDate = new Date(year + "-" + month + "-" + day)
-  const april10th2024 = new Date('2024-04-10');
+  const completionDate = new Date(year + "-" + month + "-" + day + "T00:00:00.000Z")
 
   delete req.session.data.submitError
 
   const error = validateDate(day, month, year);
 
   if (error.valid == true) {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+        c.completionDate = completionDate
+      }
+    }
+
     delete req.session.data['completion-date-started-day'];
     delete req.session.data['completion-date-started-month'];
     delete req.session.data['completion-date-started-year'];
 
-    if (startDate.getTime() < april10th2024.getTime()) {
-      res.redirect('claim/invalid-date')
-    } else {
-      for (const c of req.session.data.claims) {
-        if (claimID == c.claimID) {
-          c.completionDate = completionDate
-        }
-      }
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#completion')
 
-      res.redirect('claim/claim-details' + '?id=' + claimID + '#completion')
-    }
   } else {
     req.session.data.submitError = error
     res.redirect('claim/add-completion-date')

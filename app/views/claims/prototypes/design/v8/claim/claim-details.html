@@ -6,6 +6,27 @@
 {% endblock %}
 
 {% block content %}
+{% if (claim.startDate | policyDateCheck) or (claim.costDate | policyDateCheck) %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title"
+      data-module="govuk-notification-banner">
+      <div class="govuk-notification-banner__header">
+        <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+          Important
+        </h2>
+      </div>
+      <div class="govuk-notification-banner__content">
+        <p class="govuk-notification-banner__heading">
+          You cannot submit a claim for training that started or was paid for before 10 April 2024.
+          <a class="govuk-notification-banner__link" href="#">Why can't I claim?</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     {% if data.submitError == true %}
@@ -40,7 +61,8 @@
 
     {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
     <h2 class="govuk-heading-m">What happens next</h2>
-    <p class="govuk-body">    When you have added all the necessary information to this claim you can confirm the details and submit the claim for processing.
+    <p class="govuk-body"> When you have added all the necessary information to this claim you can confirm the details
+      and submit the claim for processing.
     </p>
     <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
     <div class="govuk-button-group">
@@ -61,9 +83,11 @@
     {% include "../_components/claim-sections/claimAmount.html" %}
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     <h2 class="govuk-heading-m">Related content</h2>
-    <p class="govuk-body"><a href="../guidance/help-start-claim" class="govuk-link">Help with starting a new care skills claim</a></p>
+    <p class="govuk-body"><a href="../guidance/help-start-claim" class="govuk-link">Help with starting a new care skills
+        claim</a></p>
     <p class="govuk-body"><a href="#" class="govuk-link">Find out more about evidence requirements</a></p>
-    <p class="govuk-body"><a href="../guidance/eligibility" class="govuk-link">Eligibility for adult social care staff training and development claims</a></p>
+    <p class="govuk-body"><a href="../guidance/eligibility" class="govuk-link">Eligibility for adult social care staff
+        training and development claims</a></p>
   </div>
 </div>
 {% endblock %}

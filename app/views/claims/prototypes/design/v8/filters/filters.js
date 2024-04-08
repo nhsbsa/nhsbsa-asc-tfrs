@@ -366,3 +366,10 @@ addFilter('dateErrorFormat', function (dateErrorObject, type) {
     return state;
 })
 
+addFilter('policyDateCheck', function (date) {
+    const policyDate = new Date("2024-04-10");
+    const checkDate = new Date(date)
+
+    return checkDate.getTime() < policyDate.getTime();
+})
+
