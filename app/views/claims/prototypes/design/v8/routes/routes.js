@@ -121,7 +121,7 @@ router.post('/add-start-date', function (req, res) {
         c.startDate = startDate
       }
     }
-    
+
     delete req.session.data['activity-date-started-day'];
     delete req.session.data['activity-date-started-month'];
     delete req.session.data['activity-date-started-year'];
@@ -133,7 +133,7 @@ router.post('/add-start-date', function (req, res) {
     res.redirect('claim/start-date')
 
   }
-  
+
 });
 
 router.post('/add-description', function (req, res) {
@@ -188,7 +188,7 @@ router.post('/cost-date', function (req, res) {
         c.costDate = costDate
       }
     }
-    
+
     delete req.session.data['payment-date-started-day'];
     delete req.session.data['payment-date-started-month'];
     delete req.session.data['payment-date-started-year'];
@@ -220,7 +220,7 @@ router.post('/completion-date', function (req, res) {
         c.completionDate = completionDate
       }
     }
-    
+
     delete req.session.data['completion-date-started-day'];
     delete req.session.data['completion-date-started-month'];
     delete req.session.data['completion-date-started-year'];
@@ -302,6 +302,16 @@ router.post('/save-claim', function (req, res) {
 
   delete req.session.data.id
   delete req.session.data.submitError
+  delete req.session.data['completion-date-started-day'];
+  delete req.session.data['completion-date-started-month'];
+  delete req.session.data['completion-date-started-year'];
+  delete req.session.data['payment-date-started-day'];
+  delete req.session.data['payment-date-started-month'];
+  delete req.session.data['payment-date-started-year'];
+  delete req.session.data['activity-date-started-day'];
+  delete req.session.data['activity-date-started-month'];
+  delete req.session.data['activity-date-started-year'];
+
   res.redirect('manage-claims?claimType=TU&statusID=not-yet-submitted')
 
 });
