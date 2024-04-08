@@ -90,10 +90,11 @@ function isValidISODate(dateString) {
     return !isNaN(date.getTime()) && dateString === date.toISOString().slice(0, 10);
 }
 
-function validateDate(day, month, year) {
+function validateDate(day, month, year, type) {
     const result = {};
-
-    const startDate = year + "-" + month + "-" + day;
+    const policyDate = new Date("2024-04-10");
+    const date = year + "-" + month + "-" + day;
+    const checkDate = new Date(date);
 
     // Validate year
     if (year == "" || isNaN(year)) {
@@ -128,8 +129,10 @@ function validateDate(day, month, year) {
         result.date = 'allMissing';
     } else if (result.day == 'missing' || result.month == 'missing' || result.year == 'missing') {
         result.date = 'partMissing';
-    } else if (isValidISODate(startDate)) {
+    } else if (isValidISODate(date) && !((checkDate.getTime() < policyDate.getTime()) && (type=="start" || type=="payment"))) {
         result.date = 'valid';
+    } else if ((checkDate.getTime() < policyDate.getTime()) && (type=="start" || type=="payment")) {
+        result.date = 'invalidPolicy'
     } else {
         result.date = 'invalid';
     }

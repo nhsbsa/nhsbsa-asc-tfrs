@@ -110,10 +110,10 @@ router.post('/add-start-date', function (req, res) {
   const year = req.session.data['activity-date-started-year']
   const claimID = req.session.data.id
   const startDate = new Date(year + "-" + month + "-" + day + "T00:00:00.000Z")
-  
+
   delete req.session.data.submitError
 
-  const error = validateDate(day, month, year);
+  const error = validateDate(day, month, year, "start");
 
   if (error.valid == true) {
     delete req.session.data['activity-date-started-day'];
@@ -184,7 +184,7 @@ router.post('/cost-date', function (req, res) {
 
   delete req.session.data.submitError
 
-  const error = validateDate(day, month, year);
+  const error = validateDate(day, month, year, "payment");
 
   if (error.valid == true) {
     for (const c of req.session.data.claims) {
@@ -216,7 +216,7 @@ router.post('/completion-date', function (req, res) {
 
   delete req.session.data.submitError
 
-  const error = validateDate(day, month, year);
+  const error = validateDate(day, month, year, "completion");
 
   if (error.valid == true) {
     for (const c of req.session.data.claims) {
