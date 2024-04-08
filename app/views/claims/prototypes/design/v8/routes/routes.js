@@ -87,6 +87,12 @@ function newClaim(req, res, training) {
   delete req.session.data['activity-date-started-day'];
   delete req.session.data['activity-date-started-month'];
   delete req.session.data['activity-date-started-year'];
+  delete req.session.data['payment-date-started-day'];
+  delete req.session.data['payment-date-started-month'];
+  delete req.session.data['payment-date-started-year'];
+  delete req.session.data['completion-date-started-day'];
+  delete req.session.data['completion-date-started-month'];
+  delete req.session.data['completion-date-started-year'];
   delete req.session.data['learner-input'];
   delete req.session.data['learner-selection'];
   delete req.session.data['learnerSelected'];
@@ -100,6 +106,7 @@ function newClaim(req, res, training) {
   delete req.session.data['selectedClaims'];
   delete req.session.data['selectedClaimsConfirmed'];
   delete req.session.data['activityType'];
+  delete req.session.data['submitError'];
 
   res.redirect('claim/claim-details' + '?id=' + claim.claimID)
 }
@@ -354,6 +361,41 @@ router.post('/submit-claim', function (req, res) {
     }
   }
 });
+
+router.get('/cancel-handler', function (req, res) {
+  const claimID = req.session.data.id
+  
+  delete req.session.data['training-input'];
+  delete req.session.data['trainingSelection'];
+  delete req.session.data['activity-date-started-day'];
+  delete req.session.data['activity-date-started-month'];
+  delete req.session.data['activity-date-started-year'];
+  delete req.session.data['payment-date-started-day'];
+  delete req.session.data['payment-date-started-month'];
+  delete req.session.data['payment-date-started-year'];
+  delete req.session.data['completion-date-started-day'];
+  delete req.session.data['completion-date-started-month'];
+  delete req.session.data['completion-date-started-year'];
+  delete req.session.data['learner-input'];
+  delete req.session.data['learner-selection'];
+  delete req.session.data['learnerSelected'];
+  delete req.session.data['learner-choice'];
+  delete req.session.data['add-another'];
+  delete req.session.data['answers-checked'];
+  delete req.session.data['evidenceType'];
+  delete req.session.data['totalAmount'];
+  delete req.session.data['EvidenceNoLearners'];
+  delete req.session.data['evidenceFile'];
+  delete req.session.data['selectedClaims'];
+  delete req.session.data['selectedClaimsConfirmed'];
+  delete req.session.data['activityType'];
+  delete req.session.data['submitError'];
+
+  res.redirect('claim/claim-details' + '?id=' + claimID)
+
+});
+
+
 
 router.post('/create-learner', function (req, res) {
   var claimID = req.session.data.id
