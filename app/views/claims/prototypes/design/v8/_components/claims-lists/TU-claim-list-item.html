@@ -7,13 +7,8 @@
       Order by
     </label>
     <select class="govuk-select" id="sort" name="sort" style="margin-left: 10;">
-    {% if status.id == "not-yet-submitted"%}
-      <option value="created">{{status.id | listItemVariableSort_V8(claim)}}</option>
-      <option value="oldest" selected>Oldest</option>
-      {% elif status.id != "not-yet-submitted"%}
       <option value="created" selected>{{status.id | listItemVariableSort_V8(claim)}}</option>
       <option value="oldest">Oldest</option>
-      {% endif %}
     </select>
     <button type="submit" class="govuk-button" data-module="govuk-button" style="margin-bottom: 0px; margin-left: 10px;">
         Refresh sort
@@ -34,7 +29,7 @@
                         <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;"><a href="claim/claim-details?id={{ claim.claimID }}" class="govuk-link">{{ claim.claimID }}</a></p>
                         <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim.training.title }}</p>
                     </div>
-                    <div class="govuk-grid-column-one-half" style="display: flex; flex-direction: column; align-items: end; padding: 0;">
+                    <div class="govuk-grid-column-one-half govuk-!-text-align-right" style="padding: 0;">
                             <p style="margin-bottom: 0;">{{status.id | listItemVariableDate_V8(claim)}}</p>
                             {% if status.id == "not-yet-submitted"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">{{claim.createdDate | relativeDateFromDateToToday}}</p>{% endif %}
                             {% if status.id == "submitted"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">{{claim.submittedDate | relativeDateFromDateToToday}}</p>{% endif %}
@@ -53,8 +48,8 @@
                     <div class="govuk-grid-column-two-thirds" style="padding: 0;">
                         <p class="govuk-body" style="margin-bottom: 0;">Training dates: {{ claim.startDate | govukDate }} to {{ claim.completionDate | govukDate }}</p>
                     </div>
-                    <div class="govuk-grid-column-one-third" style="display: flex; justify-content: flex-end; padding: 0px; margin-bottom: 0px;">
-                            {% if claim.type == "TU"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-tag govuk-tag--blue">Care skills</p>{% endif %}  
+                    <div class="govuk-grid-column-one-third govuk-!-text-align-right" style="padding: 0px; margin-bottom: 0px;">
+                            {% if claim.type == "TU"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-tag govuk-tag--blue govuk-!-text-align-right">Care skills</p>{% endif %}  
                     </div>
                 </div>
 
@@ -75,7 +70,7 @@
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         <div>
             <div class="govuk-grid-column-one-half" style="padding: 0;">
-                <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;"><a href="claim/claim-details?id={{ claim.claimID }}" class="govuk-link">8KW-3L2K-9P0P-C</a></p>
+                <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;"><a href="claim/claim-details?id=Z8S-F3K6-3XF7-C" class="govuk-link">8KW-3L2K-9P0P-C</a></p>
                 <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Being prepared for CQC inspection</p>
             </div>
             <div class="govuk-grid-column-one-half" style="display: flex; flex-direction: column; align-items: end; padding: 0;">
@@ -118,26 +113,12 @@
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         <div>
             <div class="govuk-grid-column-one-half" style="padding: 0;">
-                <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;"><a href="claim/claim-details?id={{ claim.claimID }}" class="govuk-link">ZG3-W2IE-5KMP-C</a></p>
+                <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;"><a href="claim/claim-details?id=Z8S-F3K6-3XF7-C" class="govuk-link">ZG3-W2IE-5KMP-C</a></p>
                 <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Care Certificate Assessors</p>
             </div>
             <div class="govuk-grid-column-one-half" style="display: flex; flex-direction: column; align-items: end; padding: 0;">
-                    {% if status.id == "not-yet-submitted"%} 
                     <p style="margin-bottom: 0;">Created 10 April 2024</p>
                     <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">2 days ago</p>
-                    {% endif %}
-                    {% if status.id == "submitted"%} 
-                    <p style="margin-bottom: 0;">Submitted 10 April 2024</p>
-                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">2 days ago</p>
-                    {% endif %}
-                    {% if status.id == "approved"%} 
-                    <p style="margin-bottom: 0;">Approved 10 April 2024</p>
-                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">2 days ago</p>
-                    {% endif %}
-                    {% if status.id == "rejected"%}
-                    <p style="margin-bottom: 0;">Rejected 10 April 2024</p> 
-                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">2 days ago</p>
-                    {% endif %}
             </div>
         </div>
         <div class="govuk-grid-column-full" style="padding: 0;">
@@ -160,26 +141,12 @@
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         <div>
             <div class="govuk-grid-column-one-half" style="padding: 0;">
-                <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;"><a href="claim/claim-details?id={{ claim.claimID }}" class="govuk-link">ZG3-W2IE-5KMP-C</a></p>
+                <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;"><a href="claim/claim-details?id=Z8S-F3K6-3XF7-C" class="govuk-link">ZG3-W2IE-5KMP-C</a></p>
                 <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Care Certificate Assessors</p>
             </div>
             <div class="govuk-grid-column-one-half" style="display: flex; flex-direction: column; align-items: end; padding: 0;">
-                    {% if status.id == "not-yet-submitted"%} 
-                    <p style="margin-bottom: 0;">Created 22 March 2024</p>
-                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">37 days ago</p>
-                    {% endif %}
-                    {% if status.id == "submitted"%} 
-                    <p style="margin-bottom: 0;">Submitted 7 May 2023</p>
-                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">1 month ago</p>
-                    {% endif %}
-                    {% if status.id == "approved"%} 
-                    <p style="margin-bottom: 0;">Approved 7 April 2023</p>
-                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">5 months ago</p>
-                    {% endif %}
-                    {% if status.id == "rejected"%}
-                    <p style="margin-bottom: 0;">Rejected 7 March 2023</p> 
-                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">8 days ago</p>
-                    {% endif %}
+                    <p style="margin-bottom: 0;">Created 27 March 2024</p>
+                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">13 days ago</p>
             </div>
         </div>
         <div class="govuk-grid-column-full" style="padding: 0;">
@@ -202,25 +169,25 @@
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         <div>
             <div class="govuk-grid-column-one-half" style="padding: 0;">
-                <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;"><a href="claim/claim-details?id={{ claim.claimID }}" class="govuk-link">2K8-2D54-7HDES-C</a></p>
+                <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;"><a href="claim/claim-details?id=Z8S-F3K6-3XF7-C" class="govuk-link">2K8-2D54-7HDES-C</a></p>
                 <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Mental Health First Aid</p>
             </div>
             <div class="govuk-grid-column-one-half" style="display: flex; flex-direction: column; align-items: end; padding: 0;">
                     {% if status.id == "not-yet-submitted"%} 
-                    <p style="margin-bottom: 0;">Created 25 Jun 2023</p>
-                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">1 month ago</p>
+                    <p style="margin-bottom: 0;">Created 25 June 2023</p>
+                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">10 months ago</p>
                     {% endif %}
                     {% if status.id == "submitted"%} 
-                    <p style="margin-bottom: 0;">Submitted 25 Jun 2023</p>
-                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">1 month ago</p>
+                    <p style="margin-bottom: 0;">Submitted 25 June 2023</p>
+                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">10 months ago</p>
                     {% endif %}
                     {% if status.id == "approved"%} 
-                    <p style="margin-bottom: 0;">Approved 25 Jun 2023</p>
-                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">1 month ago</p>
+                    <p style="margin-bottom: 0;">Approved 25 June 2023</p>
+                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">10 months ago</p>
                     {% endif %}
                     {% if status.id == "rejected"%}
-                    <p style="margin-bottom: 0;">Rejected 25 Jun 2023</p> 
-                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">1 month ago</p>
+                    <p style="margin-bottom: 0;">Rejected 25 June 2023</p> 
+                    <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">10 months ago</p>
                     {% endif %}  
             </div>
         </div>
