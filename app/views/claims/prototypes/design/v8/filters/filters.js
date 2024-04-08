@@ -316,6 +316,20 @@ addFilter('listItemVariableDate_V8', function (statusID, claim) {
     }
 })
 
+addFilter('listItemVariableSort_V8', function (statusID, claim) {
+    if (statusID == 'not-yet-submitted') {
+        return 'Recently created'
+    } else if (statusID == 'submitted') {
+        return 'Recently submitted'
+    } else if (statusID == 'rejected') {
+        return 'Recently rejected'
+    } else if (statusID == 'approved') {
+        return 'Recently approved'
+    } else {
+        return 'Recently created'
+    }
+})
+
 function formatDate(dateStr) {
     // Convert the string to a Date object
     let dateObj = new Date(dateStr);

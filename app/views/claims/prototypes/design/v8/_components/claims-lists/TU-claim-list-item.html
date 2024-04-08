@@ -2,21 +2,21 @@
 {% set addHeader = true %}
 {% set loopCounter = 0 %}
 
-<div class="govuk-form-group" style="display: flex;">
-    <label class="govuk-label" for="sort">
-      Sort by
+<div class="govuk-form-group" style="display: flex; padding: 0px; margin-bottom: 0px;">
+    <label class="govuk-label" for="sort" style="padding: 10px 10px 0px 0px; margin-bottom: 0px;">
+      Order by
     </label>
-    <select class="govuk-select" id="sort" name="sort" style="padding: 10em;">
-      <option value="created" selected>Recently created</option>
+    <select class="govuk-select" id="sort" name="sort" style="margin-left: 10;">
+      <option value="created" selected>{{status.id | listItemVariableSort_V8(claim)}}</option>
       <option value="oldest">Oldest</option>
-      <option value="training">Alphabetical by training</option>
-      <option value="learner">Alphabetical by learner</option>
     </select>
-    <p>hello</p>
-  </div>
+    <button type="submit" class="govuk-button" data-module="govuk-button" style="margin-left: 10;">
+        Refresh sort
+      </button>
+</div>
 
 {% for claim in data['claims'] %}
-{% if claim.status == status.id and claim.type == data.claimType and (loopCounter < 10) %} {% set hasResults=true %} {%
+{% if claim.status == status.id and claim.type == data.claimType and (loopCounter < 3) %} {% set hasResults=true %} {%
     if addHeader %} 
 
 
@@ -27,18 +27,37 @@
             <div class="govuk-grid-column-two-thirds">
 
                 <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-                
-                <div class="govuk-grid-column-two-thirds">
-                    <p class="govuk-body" style="margin-bottom: 0;"><a href="claim/claim-details?id={{ claim.claimID }}" class="govuk-link">{{ claim.claimID }}</a></p>
-                    <p class="govuk-body" style="margin-bottom: 0;">{{ claim.training.title }}</p>
-                    <p class="govuk-body" style="margin-bottom: 0;">Provided by {{ claim.training.awardingOrganisation }}</p>
 
-                    <p class="govuk-body" style="margin-bottom: 0;">{{ claim.learner.fullName }}</p>
-                    <p class="govuk-body" style="margin-bottom: 0;">Training dates: {{ claim.startDate | govukDate("truncate") }} to {{ claim.completionDate | govukDate("truncate") }}</p>
+                <div>
+                    <div class="govuk-grid-column-one-half" style="padding: 0;">
+                        <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;"><a href="claim/claim-details?id={{ claim.claimID }}" class="govuk-link">{{ claim.claimID }}</a></p>
+                        <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim.training.title }}</p>
+
+                    </div>
+                    <div class="govuk-grid-column-one-half" style="display: flex; flex-direction: column; align-items: end; padding: 0;">
+                            <p style="margin-bottom: 0;">{{status.id | listItemVariableDate_V8(claim)}}</p>
+                            {% if status.id == "not-yet-submitted"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">{{claim.createdDate | relativeDateFromDateToToday}}</p>{% endif %}
+                            {% if status.id == "submitted"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">{{claim.submittedDate | relativeDateFromDateToToday}}</p>{% endif %}
+                            {% if status.id == "approved"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">{{claim.approvedDate | relativeDateFromDateToToday}}</p>{% endif %}
+                            {% if status.id == "rejected"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">{{claim.rejectedDate | relativeDateFromDateToToday}}</p>{% endif %}
+                            
+                    </div>
                 </div>
-                <div class="govuk-grid-column-one-third" style="display: flex; flex-direction: column; align-items: end;">
-                    <p style="margin-bottom: 0;" class="nhsuk-card__description nhsuk-u-reading-width">{{status.id | listItemVariableDate_V8(claim)}}</p>
-                    {% if status.id == "not-yet-submitted"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">{{claim.createdDate | relativeDateFromDateToToday}}</p>{% endif %}
+
+                <div class="govuk-grid-column-full" style="padding: 0;">
+                    {% if claim.training %}<p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Provided by {{ claim.training.awardingOrganisation }} - {{ claim.training.type }}</p>{% endif %}
+                    <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim.learner.fullName }}</p>
+                   
+                </div>
+
+                <div>
+                    <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+                        <p class="govuk-body" style="margin-bottom: 0;">Training dates: {{ claim.startDate | govukDate }} to {{ claim.completionDate | govukDate }}</p>
+
+                    </div>
+                    <div class="govuk-grid-column-one-third" style="display: flex; justify-content: flex-end; padding: 0px; margin-bottom: 0px;">
+                            {% if claim.type == "TU"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-tag govuk-tag--blue">Care skills</p>{% endif %}  
+                    </div>
                 </div>
 
             </div>
@@ -52,27 +71,6 @@
 {% endif %}
 
 {% endfor %}
-
-<!-- <div class="govuk-grid-row">
-
-    <div class="govuk-grid-column-two-thirds">
-
-        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-        <div class="govuk-grid-column-two-thirds">
-            <p class="govuk-body" style="margin-bottom: 0;"><a href="claim/claim-details?id={{ claim.claimID }}" class="govuk-link">Claim: hello</a></p>
-            <p class="govuk-body" style="margin-bottom: 0;"> something - Provided by someone</p>
-            <p class="govuk-body" style="margin-bottom: 0;">person</p>
-            <p class="govuk-body" style="margin-bottom: 0;">Training dates: a time - to a time</p>
-        </div>
-        <div class="govuk-grid-column-one-third">
-            <p style="margin-bottom: 0;" class="nhsuk-card__description nhsuk-u-reading-width">status</p>
-            {% if status.id == "not-yet-submitted"%} <p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">created date</p>{% endif %}
-        </div>
-       
-
-    </div>
-   
-</div> -->
 
 {% if hasResults %}
 
