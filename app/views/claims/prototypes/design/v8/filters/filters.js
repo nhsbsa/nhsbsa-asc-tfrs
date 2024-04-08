@@ -359,7 +359,13 @@ addFilter('relativeDateFromDateToToday', function (dateStr) {
     const differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
 
     // If difference is more than 7 days, calculate weeks
-    if (differenceInDays > 14) {
+    if (differenceInDays > 730) {
+        const differenceInYears = Math.floor(differenceInDays / 365);
+        return differenceInYears + (differenceInYears === 1 ? ' year' : ' years') + ' ago';
+    } else if (differenceInDays > 70) {
+        const differenceInMonths = Math.floor(differenceInDays / 30);
+        return differenceInMonths + (differenceInMonths === 1 ? ' month' : ' months') + ' ago';
+    } else if (differenceInDays > 14) {
         const differenceInWeeks = Math.floor(differenceInDays / 7);
         return differenceInWeeks + ' weeks ago';
     } else if (differenceInDays == 1) {
