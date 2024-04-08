@@ -362,6 +362,8 @@ addFilter('relativeDateFromDateToToday', function (dateStr) {
     if (differenceInDays > 14) {
         const differenceInWeeks = Math.floor(differenceInDays / 7);
         return differenceInWeeks + ' weeks ago';
+    } else if (differenceInDays == 1) {
+        return differenceInDays + ' day ago';
     } else {
         return differenceInDays + ' days ago';
     }
