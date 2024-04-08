@@ -94,8 +94,6 @@ function validateDate(day, month, year) {
     const result = {};
 
     const startDate = year + "-" + month + "-" + day;
-    console.log(startDate)
-    console.log(isValidISODate(startDate))
 
     // Validate year
     if (year == "" || isNaN(year)) {
