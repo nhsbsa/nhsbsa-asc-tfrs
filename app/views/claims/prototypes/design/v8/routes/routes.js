@@ -204,24 +204,34 @@ router.post('/cost-date', function (req, res) {
 });
 
 router.post('/completion-date', function (req, res) {
-  var day = req.session.data['completion-date-started-day']
-  var month = req.session.data['completion-date-started-month']
-  var year = req.session.data['completion-date-started-year']
-  var claimID = req.session.data.id
+  const day = req.session.data['completion-date-started-day']
+  const month = req.session.data['completion-date-started-month']
+  const year = req.session.data['completion-date-started-year']
+  const claimID = req.session.data.id
+  const completionDate = year + "-" + month + "-" + day + "T00:00:00.000Z"
 
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      c.completionDate = year + "-" + month + "-" + day + "T00:00:00.000Z"
-
-    }
-  }
-
-  delete req.session.data['completion-date-started-day'];
-  delete req.session.data['completion-date-started-month'];
-  delete req.session.data['completion-date-started-year'];
   delete req.session.data.submitError
 
-  res.redirect('claim/claim-details' + '?id=' + claimID + '#completion')
+  const error = validateDate(day, month, year);
+
+  if (error.valid == true) {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+        c.completionDate = completionDate
+      }
+    }
+    
+    delete req.session.data['completion-date-started-day'];
+    delete req.session.data['completion-date-started-month'];
+    delete req.session.data['completion-date-started-year'];
+
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#completion')
+
+  } else {
+    req.session.data.submitError = error
+    res.redirect('claim/add-completion-date')
+
+  }
 });
 
 router.post('/add-learner', function (req, res) {

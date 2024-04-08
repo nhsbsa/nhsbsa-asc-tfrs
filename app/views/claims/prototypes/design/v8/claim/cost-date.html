@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="claim-details?id={{ claim.claimID }}" class="govuk-back-link">Back</a>
+<a href="claim-details?id={{ claim.claimID }}&submitError" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -40,7 +40,7 @@
                         For example, 27 3 2007
                     </div>
                     {% if data.submitError %}
-                    {{data.submitError | dateErrorMessage_V8("Start date", "input") }}
+                    {{data.submitError | dateErrorMessage_V8("Payment date", "input") }}
                     {% endif %}
                     <div class="govuk-date-input" id="payment-date-started">
                         <div class="govuk-date-input__item">
