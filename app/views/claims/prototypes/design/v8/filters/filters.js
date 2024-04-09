@@ -373,7 +373,7 @@ addFilter('findMatchingTraining', function (claim, training) {
     // Iterating over claims to find matching titles
 
         if (qualificationTitles.includes(claim.training.title)) {
-            return `Provided by ${claim.training.awardingOrganisation} - ${claim.training.type}`;
+            return true;
     }
-    return "";
+    return false;
 })
