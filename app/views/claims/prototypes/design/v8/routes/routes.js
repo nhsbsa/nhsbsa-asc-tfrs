@@ -24,6 +24,17 @@ router.post('/account-handler', function (req, res) {
 
 });
 
+router.post('/verify-details-handler', function (req, res) {
+  const confirmationAnswer = req.session.data.confirmation
+
+  if (confirmationAnswer == "yes") {
+      res.redirect('account-setup/job-title')
+  } else if (confirmationAnswer == "no") {
+    res.redirect('account-issue')
+  }
+
+});
+
 
 router.post('/add-training', function (req, res) {
   var trainingCode = req.session.data.trainingSelection

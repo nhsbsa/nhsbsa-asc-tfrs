@@ -4,15 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Details</title>
+    <title>Clickable Image Link</title>
     <style>
         body {
             background-color: #b1b4b6;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+        }
+
+        #yellow-banner {
+            background-color: yellow;
+            color: black;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         #image-link {
@@ -28,9 +40,14 @@
 </head>
 
 <body>
-    <a id="image-link" href="../manage-claims-home?claimType=TU">
-        <img src="/public/images/mfa-code.png" alt="Clickable Image">
-    </a>
+    <div id="yellow-banner">
+        <p>This screen is for testing only. There is no interaction. Please click the form image to continue.</p>
+    </div>
+    <div id="image-link">
+        <a id="image-link" href="../account-setup/verify-details">
+            <img src="/public/images/mfa-code.png" alt="Clickable Image">
+        </a>
+    </div>
 </body>
 
 </html>
