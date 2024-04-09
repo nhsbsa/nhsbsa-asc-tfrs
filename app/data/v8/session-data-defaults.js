@@ -13490,5 +13490,12 @@ module.exports = {
     ],
     "claimType": "TU",
     "viewOnly": "false",
-    "id": "MTT-L12K-K4D2-C"
+    "id": "MTT-L12K-K4D2-C",
+    "submitError": {
+        "year": "missing",
+        "month": "missing",
+        "day": "missing",
+        "date": "allMissing",
+        "valid": false
+    }
 }
