@@ -5,6 +5,12 @@
 {{ ["Claim: ", claim.claimID, " - ", (claim.type | potName_V8)] | join }}
 {% endblock %}
 
+{% block beforeContent %}
+{% if not (claim.status == "new" or claim.status == "not-yet-submitted") %}
+<a href="../manage-claims-home" class="govuk-back-link">Back</a>
+{% endif %}
+{% endblock %}
+
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
