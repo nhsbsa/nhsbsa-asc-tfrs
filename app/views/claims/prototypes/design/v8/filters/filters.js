@@ -369,11 +369,21 @@ addFilter('findMatchingTraining', function (claim, training) {
         }
         return acc;
     }, []);
-
     // Iterating over claims to find matching titles
-
         if (qualificationTitles.includes(claim.training.title)) {
             return true;
     }
     return false;
+})
+
+addFilter('formatTrainingDates', function(start, end) {
+    let startDate = "Not yet added"
+    let endDate = "not yet added"
+    if (start != "Invalid DateTime") {
+        startDate = start
+    }
+    if (end != "Invalid DateTime") {
+        endDate = end
+    }
+    return "Training dates: " + startDate + " to " + endDate
 })
