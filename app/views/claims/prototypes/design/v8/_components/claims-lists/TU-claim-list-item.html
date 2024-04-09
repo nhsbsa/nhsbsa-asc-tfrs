@@ -48,7 +48,6 @@
 
 {% endfor %}
 
-{% if status.id == "not-yet-submitted"%} 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
@@ -79,11 +78,14 @@
         <div class="govuk-grid-column-full" style="padding: 0;">
             <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Provided by TQUK - Level 2 Certificate Oral Care for Health and Social Care</p>
             <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Casey Simonis</p>
+            {% if status.id == "not-yet-submitted"%} 
             <p class="govuk-body" style="margin-bottom: 0;">Training dates: Not yet added to 11 December 2023</p>
+            {% else %}
+            <p class="govuk-body" style="margin-bottom: 0;">Training dates: 3 May 2022 to 11 December 2023</p>
+            {% endif%}
         </div>
     </div>
 </div>
-{% endif%}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -113,14 +115,12 @@
             </div>
         </div>
         <div class="govuk-grid-column-full" style="padding: 0;">
-            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Pursuing further training to expand your role in leading community outreach programs</p>
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Reading journals or articles</p>
             <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Malinda Mayer</p>
-            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Start date: 3 May 2023</p>
         </div>
     </div>
 </div>
 
-{% if status.id == "not-yet-submitted"%} 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
@@ -137,8 +137,14 @@
         <div class="govuk-grid-column-full" style="padding: 0;">
             <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Education and Training</p>
             <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Provided by Highfield - Level 3 Award Education and Training</p>
+
+            {% if status.id == "not-yet-submitted"%} 
             <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px; color: #6f7a82;">Learner not yet added</p>
             <p class="govuk-body" style="margin-bottom: 0; color: #6f7a82;">Training dates not yet added</p>
+            {% else %} 
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Ron Hopper</p>
+            <p class="govuk-body" style="margin-bottom: 0;">Training dates: 9 June 2022 to 15 July 2023</p>
+            {% endif %} 
         </div>
     </div>
 </div>
@@ -172,11 +178,14 @@
         <div class="govuk-grid-column-full" style="padding: 0;">
             <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Mental Health First Aid</p>
             <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Skye Johnson</p>
+            {% if status.id == "not-yet-submitted"%} 
             <div style="display: flex;"><p class="govuk-body" style="margin-bottom: 0;">Training dates:&nbsp</p><p style="margin-bottom: 0; color: #6f7a82;" class="govuk-body">Not yet added</p><p>&nbspto 5 May 2023</p></div>
+            {% else %} 
+            <p class="govuk-body" style="margin-bottom: 0;">Training dates: 29 April 2021 to 2 September 2021</p>
+            {% endif %} 
         </div>
     </div>
 </div>
-{% endif%}
 
 
 {% if hasResults == false %}
