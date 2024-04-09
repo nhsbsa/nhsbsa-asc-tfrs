@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="govuk-grid-column-full" style="padding: 0;">
-                    {% if claim.training %}<p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Provided by {{ claim.training.awardingOrganisation }}</p>{% endif %}
+                    {% if claim.training %}<p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim | findMatchingTraining(data['training']) }}</p>{% endif %}
                     <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim.learner.fullName }}</p>
                     <p class="govuk-body" style="margin-bottom: 0;">Training dates: {{ claim.startDate | govukDate }} to {{ claim.completionDate | govukDate }}</p>
                 </div>

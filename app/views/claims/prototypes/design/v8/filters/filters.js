@@ -259,7 +259,6 @@ addFilter('findClaim_V8', function (claimID, claims) {
 
 })
 
-
 addFilter('groupByTitle_V7', function(training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const organizedData = {};
@@ -360,4 +359,21 @@ addFilter('relativeDateFromDateToToday', function (dateStr) {
     } else {
         return differenceInDays + ' days ago';
     }
+})
+
+addFilter('findMatchingTraining', function (claim, training) {
+    // Extracting titles from training array's Qualifications courses
+    const qualificationTitles = training.reduce((acc, group) => {
+        if (group.groupTitle == "Qualifications") {
+            return acc.concat(group.courses.map(course => course.title));
+        }
+        return acc;
+    }, []);
+
+    // Iterating over claims to find matching titles
+
+        if (qualificationTitles.includes(claim.training.title)) {
+            return `Provided by ${claim.training.awardingOrganisation} - ${claim.training.type}`;
+    }
+    return "";
 })
