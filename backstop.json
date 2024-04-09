@@ -11,126 +11,129 @@
     "onReadyScript": "puppet/onReady.js",
     "scenarios": [
         {
-            "label": "1-start",
+            "label": "start",
             "url": "http://localhost:3000/claims/prototypes/design/v8/before-you-start"
         },
         {
-            "label": "2-eligibility",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/guidance/eligibility"
-        },
-        {
-            "label": "3-training-list",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/guidance/training-list"
-        },
-        {
-            "label": "4-sign-in",
+            "label": "sign-in",
             "url": "http://localhost:3000/claims/prototypes/design/v8/sign-in"
         },
         {
-            "label": "5-home",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/home"
-        },
-        {
-            "label": "6-TU-manage-claims-home",
+            "label": "TU-manage-claims-home",
             "url": "http://localhost:3000/claims/prototypes/design/v8/manage-claims-home?claimType=TU"
         },
         {
-            "label": "7-TU-manage-claims-not-yet-submitted",
+            "label": "TU-manage-claims-not-yet-submitted",
             "url": "http://localhost:3000/claims/prototypes/design/v8/manage-claims?claimType=TU&statusID=not-yet-submitted"
         },
         {
-            "label": "8-TU-manage-claims-submitted",
+            "label": "TU-manage-claims-submitted",
             "url": "http://localhost:3000/claims/prototypes/design/v8/manage-claims?claimType=TU&statusID=submitted"
         },
         {
-            "label": "9-TU-manage-claims-rejected",
+            "label": "TU-manage-claims-rejected",
             "url": "http://localhost:3000/claims/prototypes/design/v8/manage-claims?claimType=TU&statusID=rejected"
         },
         {
-            "label": "10-TU-manage-claims-approved",
+            "label": "TU-manage-claims-approved",
             "url": "http://localhost:3000/claims/prototypes/design/v8/manage-claims?claimType=TU&statusID=approved"
         },
         {
-            "label": "11-TU-first-claim-help",
+            "label": "TU-first-claim-help",
             "url": "http://localhost:3000/claims/prototypes/design/v8/guidance/help-start-claim"
         },
         {
-            "label": "12-TU-new-claim-training",
+            "label": "TU-new-claim-training",
             "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-training"
         },
         {
-            "label": "13-TU-new-claim-training-input",
+            "label": "TU-new-claim-training-input",
             "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-training?training-input=health"
         },
         {
-            "label": "14-TU-new-claim",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=V9TK-4HDD-4LJI-C"
+            "label": "TU-new-claim",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=MTT-L12K-K4D2-C"
         },
         {
-            "label": "15-TU-new-claim-start-date",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/start-date?id=V9TK-4HDD-4LJI-C"
+            "label": "TU-new-claim-start-date",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/start-date?id=MTT-L12K-K4D2-C&submitError"
         },
         {
-            "label": "16-TU-new-claim-learner",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?id=V9TK-4HDD-4LJI-C"
+            "label": "TU-new-claim-learner",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?id=MTT-L12K-K4D2-C"
         },
         {
-            "label": "17-TU-new-claim-learner-results",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=roy&id=V9TK-4HDD-4LJI-C&claimType=TU"
+            "label": "TU-new-claim-learner-results",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=roy&id=MTT-L12K-K4D2-C&claimType=TU"
         },
         {
-            "label": "18-TU-new-claim-new-learner",
+            "label": "TU-new-claim-new-learner",
             "url": "http://localhost:3000/claims/prototypes/design/v8/learner/add-learner?inClaim=true"
         },
         {
-            "label": "19-TU-new-claim-payment-date",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/cost-date?id=V9TK-4HDD-4LJI-C"
+            "label": "TU-new-claim-payment-date",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/cost-date?id=MTT-L12K-K4D2-C&submitError"
         },
         {
-            "label": "20-TU-new-claim-evidence-payment",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=payment&id=V9TK-4HDD-4LJI-C"
+            "label": "TU-new-claim-evidence-payment",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=payment&id=MTT-L12K-K4D2-C"
         },
         {
-            "label": "21-TU-new-claim-evidence-completion",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=completion&learnerID=LE%2009%205F%2094%20M&id=V9TK-4HDD-4LJI-C"
+            "label": "TU-new-claim-evidence-completion",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=completion&learnerID=LE%2009%205F%2094%20M&id=MTT-L12K-K4D2-C"
         },
         {
-            "label": "22-TU-new-claim-confirmation",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/confirmation?id=V9TK-4HDD-4LJI-C"
+            "label": "TU-new-claim-completion-date",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-completion-date?id=MTT-L12K-K4D2-C&submitError"
         },
         {
-            "label": "23-TU-not-yet-submitted-claim",
+            "label": "TU-new-claim-confirmation",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/confirmation?id=MTT-L12K-K4D2-C"
+        },
+        {
+            "label": "TU-not-yet-submitted-claim",
             "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=Z8S-F3K6-3XF7-C"
         },
         {
-            "label": "24-TU-submitted-claim",
+            "label": "TU-submitted-claim",
             "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=Z1Z-F1J6-3XF7-C"
         },
         {
-            "label": "25-TU-rejected-claim",
+            "label": "TU-rejected-claim",
             "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=Z8S-F1J6-9VGH-C"
         },
         {
-            "label": "26-TU-approved-claim",
+            "label": "TU-approved-claim",
             "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=Z8S-F1J6-4GH7-C"
         },
         {
-            "label": "27-TU-new-claim-learner-no-results",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=test&id=V9TK-4HDD-4LJI-C&claimType=TU"
+            "label": "TU-new-claim-learner-no-results",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=test&id=MTT-L12K-K4D2-C&claimType=TU"
         },
         {
-            "label": "28-TU-claim-submit-error",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=V9TK-4HDD-4LJI-C&submitError=true"
+            "label": "TU-claim-submit-error",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=MTT-L12K-K4D2-C&submitError=true"
         },
         {
-            "label": "29-TU-claim-decleration",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/decleration?id=V9TK-4HDD-4LJI-C"
+            "label": "TU-claim-decleration",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/declaration?id=MTT-L12K-K4D2-C&submitError"
         },
         {
-            "label": "30-TU-claim-decleration-error",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/decleration?id=V9TK-4HDD-4LJI-C&submitError=true"
+            "label": "TU-claim-decleration-error",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/declaration?id=MTT-L12K-K4D2-C&submitError=true"
+        },
+        {
+            "label": "TU-new-claim-start-date-error-example",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/start-date?id=MTT-L12K-K4D2-C"
+        },
+        {
+            "label": "TU-new-claim-payment-date-error-example",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/cost-date?id=MTT-L12K-K4D2-C"
+        },
+        {
+            "label": "TU-new-claim-completion-date-error-example",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-completion-date?id=MTT-L12K-K4D2-C"
         }
-        
     ],
     "paths": {
         "bitmaps_reference": "backstop_data/bitmaps_reference",

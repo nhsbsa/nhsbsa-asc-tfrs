@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-m" id="payment">Evidence of completion</h2>
+<h2 class="govuk-heading-m" id="completion">Training completion by learner</h2>
 <dl class="govuk-summary-list">
 
   {% if not claim.completionDate %}
@@ -7,7 +7,7 @@
       Completion date
     </dt>
     <dd class="govuk-summary-list__value">
-      <a class="govuk-link govuk-link--no-visited-state" href="#">Add completion date</a>
+      <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date">Add completion date</a>
     </dd>
   </div>
   {% else %}
@@ -20,7 +20,7 @@
     </dd>
     {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
     <dd class="govuk-summary-list__actions">
-      <a class="govuk-link govuk-link--no-visited-state" href="#">Change<span class="govuk-visually-hidden">
+      <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date">Change<span class="govuk-visually-hidden">
         completion date</span></a>
     </dd>
     {% endif %}
