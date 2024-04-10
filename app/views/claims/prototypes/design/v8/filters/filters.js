@@ -201,48 +201,31 @@ addFilter('checkEligible_V8', function (learner, type, roleTypes) {
 
 })
 
-addFilter('errorSummary_V8', function (claim) {
+addFilter('errorSummary_V8', function (claim, submitError) {
     let errorSummaryStr = ''
 
-    if (claim.type == "TU") {
-        if (claim.startDate == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add training start date</a></li>')
+        if (submitError.startDate == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#start-date-error">Add a start date</a></li>')
         }
-        if (claim.learner == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add a learner</a></li>')
+        if (submitError.learner == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#learner-error">Add a learner</a></li>')
         }
-        if (claim.costDate == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add payment date</a></li>')
+        if (submitError.paymentDate == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-date-error">Add a payment date</a></li>')
         }
-        if (claim.evidenceOfPayment == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
+        if (submitError.evidenceOfPayment == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-evidence-error">Add evidence of payment</a></li>')
         }
-        if (claim.evidenceOfCompletion == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion</a></li>')
+        if (submitError.completionDate == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Add a completion date</a></li>')
         }
-    } else if (claim.type == "CPD") {
-        if (claim.description == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add a description</a></li>')
+        if (submitError.evidenceOfCompletion == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-evidence-error">Add evidence of completion</a></li>')
         }
-        if (claim.startDate == null && claim.categoryName == "Courses") {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add training start date</a></li>')
-        }
-        if (claim.claimAmount == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add cost</a></li>')
-        }
-        if (claim.learner == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add a learner</a></li>')
-        }
-        if (claim.costDate == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add payment date</a></li>')
-        }
-        if (claim.evidenceOfPayment == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
-        }
-        if (claim.evidenceOfCompletion == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion</a></li>')
-        }
-    }
+        if (submitError.completionDate == "invalid" || submitError.startDate == "invalid") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be after the start date</a></li>')
+        } 
+
     return errorSummaryStr
 }, { renderAsHtml: true })
 
@@ -377,5 +360,100 @@ addFilter('policyDateCheck', function (date) {
     const checkDate = new Date(date)
 
     return checkDate.getTime() < policyDate.getTime();
+})
+
+addFilter('listItemVariableDate_V8', function (statusID, claim) {
+    if (statusID == 'not-yet-submitted') {
+        return 'Created ' + formatDate(claim.createdDate)
+    } else if (statusID == 'submitted') {
+        return 'Submitted ' + formatDate(claim.submittedDate)
+    } else if (statusID == 'rejected') {
+        return 'Rejected ' + formatDate(claim.rejectedDate)
+    } else if (statusID == 'approved') {
+        return 'Approved ' + formatDate(claim.approvedDate)
+    } else {
+        return 'Created ' + formatDate(claim.createdDate)
+    }
+})
+
+addFilter('listItemVariableSort_V8', function (statusID, claim) {
+    if (statusID == 'not-yet-submitted') {
+        return 'Recently created'
+    } else if (statusID == 'submitted') {
+        return 'Recently submitted'
+    } else if (statusID == 'rejected') {
+        return 'Recently rejected'
+    } else if (statusID == 'approved') {
+        return 'Recently approved'
+    } else {
+        return 'Recently created'
+    }
+})
+
+function formatDate(dateStr) {
+    let dateObj = new Date(dateStr);
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+    let day = dateObj.getUTCDate();
+    let monthIndex = dateObj.getUTCMonth();
+    let year = dateObj.getUTCFullYear();
+    let formattedDate = day + ' ' + monthNames[monthIndex] + ' ' + year;
+    return formattedDate;
+}
+
+addFilter('relativeDateFromDateToToday', function (dateStr) {
+    const inputDate = new Date(dateStr);
+    const currentDate = new Date();
+    const differenceInMs = currentDate - inputDate;
+    const differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+    if (differenceInDays > 730) {
+        const differenceInYears = Math.floor(differenceInDays / 365);
+        return differenceInYears + (differenceInYears === 1 ? ' year' : ' years') + ' ago';
+    } else if (differenceInDays > 70) {
+        const differenceInMonths = Math.floor(differenceInDays / 30);
+        return differenceInMonths + (differenceInMonths === 1 ? ' month' : ' months') + ' ago';
+    } else if (differenceInDays > 14) {
+        const differenceInWeeks = Math.floor(differenceInDays / 7);
+        return differenceInWeeks + ' weeks ago';
+    } else if (differenceInDays == 1) {
+        return differenceInDays + ' day ago';
+    } else {
+        return differenceInDays + ' days ago';
+    }
+})
+
+addFilter('findMatchingTraining', function (claim, training) {
+    // Extracting titles from training array's Qualifications courses
+    const qualificationTitles = training.reduce((acc, group) => {
+        if (group.groupTitle == "Qualifications") {
+            return acc.concat(group.courses.map(course => course.title));
+        }
+        return acc;
+    }, []);
+    // Iterating over claims to find matching titles
+        if (qualificationTitles.includes(claim.training.title)) {
+            return true;
+    }
+    return false;
+})
+
+addFilter('formatTrainingDates', function(start, end) {
+    let startDate = "Not yet added"
+    let endDate = "not yet added"
+    if (start != "Invalid DateTime") {
+        startDate = start
+    }
+    if (end != "Invalid DateTime") {
+        endDate = end
+    }
+    return "Training dates: " + startDate + " to " + endDate
+})
+
+addFilter('formatTrainingDate', function(date) {
+    let isValidDate = false
+    if (date != "Invalid DateTime") {
+        isValidDate = true
+    }
+    return isValidDate
 })
 

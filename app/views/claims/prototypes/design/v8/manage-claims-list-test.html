@@ -8,18 +8,8 @@
 {% endblock %}
 
 {% block beforeContent %}
-<div class="govuk-breadcrumbs">
-    <ol class="govuk-breadcrumbs__list">
-        <li class="govuk-breadcrumbs__list-item">
-            <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=TU">Manage claims ({{ data.claimType |
-                potName_V8
-                }})</a>
-        </li>
-        <li class="govuk-breadcrumbs__list-item">
-            <a class="govuk-breadcrumbs__link" href="manage-claims?claimType=TU&statusID={{ status.id }}">{{ status.name
-                }} claims</a>
-        </li>
-    </ol>
+<div >
+    <a href="/claims/prototypes/design/v8/manage-claims-buttons-test" class="govuk-back-link">Back</a>
 </div>
 {% endblock %}
 
@@ -44,9 +34,11 @@
             </div>
         </div>
             {% else %}
+    <div class="moj-scrollable-pane">
         <div class="govuk-grid-column-full">
-            {% include "./_components/claims-lists/TU-claim-list.html" %}
+            {% include "./_components/claims-lists/userResearchTest/TU-claim-list-item-test.html" %}
         </div>
+    </div>
     {% endif %}
 </div>
 
