@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { faker } = require('@faker-js/faker');
 const { fakerEN_GB } = require('@faker-js/faker');
-const { generateUniqueID } = require('./helpers/helpersV8.js');
+const { generateUniqueID } = require('./helpers.js');
 
 function getRandomLearners(learnerList, x, eligibleRoles) {
   const copyLearners = [...learnerList];

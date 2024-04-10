@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndLowerCase } = require('../../../../../../scripts/helpers/helpersV8.js');
+const { removeSpacesAndLowerCase } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag_V8', function (statusID, statuses) {
@@ -50,7 +50,7 @@ addFilter('uniqueDates_V8', function (claims, dateType) {
 
     claims.forEach(claim => {
         const startDate = new Date(claim[dateType]);
-        const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
+        const monthYear = '${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, `0`)}';
 
         uniqueMonthYears.add(monthYear);
     });
@@ -102,6 +102,7 @@ addFilter('variableDate_V8', function (statusID) {
     } else {
         return 'Created'
     }
+
 })
 
 addFilter('removeSpacesAndLowerCase_V8', function (inputString) {
@@ -259,7 +260,8 @@ addFilter('findClaim_V8', function (claimID, claims) {
 
 })
 
-addFilter('groupByTitle_V7', function(training) {
+
+addFilter('groupByTitle_V7', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const organizedData = {};
     for (const course of qualificationsObject.courses) {
@@ -272,7 +274,7 @@ addFilter('groupByTitle_V7', function(training) {
     return organizedData;
 })
 
-addFilter('getUniqueCourseTitles_V7', function(training) {
+addFilter('getUniqueCourseTitles_V7', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const uniqueTitles = [];
 
@@ -284,11 +286,11 @@ addFilter('getUniqueCourseTitles_V7', function(training) {
     return uniqueTitles
 })
 
-addFilter('coursesCount_V7', function(courses) {
-    let count  = 0;
+addFilter('coursesCount_V7', function (courses) {
+    let count = 0;
     for (const c of courses) {
-        count ++
-    } 
+        count++
+    }
     return count;
 })
 
@@ -301,97 +303,79 @@ addFilter('formatCount_V7', function (courses) {
     return text;
 })
 
-addFilter('listItemVariableDate_V8', function (statusID, claim) {
-    if (statusID == 'not-yet-submitted') {
-        return 'Created ' + formatDate(claim.createdDate)
-    } else if (statusID == 'submitted') {
-        return 'Submitted ' + formatDate(claim.submittedDate)
-    } else if (statusID == 'rejected') {
-        return 'Rejected ' + formatDate(claim.rejectedDate)
-    } else if (statusID == 'approved') {
-        return 'Approved ' + formatDate(claim.approvedDate)
-    } else {
-        return 'Created ' + formatDate(claim.createdDate)
-    }
-})
 
-addFilter('listItemVariableSort_V8', function (statusID, claim) {
-    if (statusID == 'not-yet-submitted') {
-        return 'Recently created'
-    } else if (statusID == 'submitted') {
-        return 'Recently submitted'
-    } else if (statusID == 'rejected') {
-        return 'Recently rejected'
-    } else if (statusID == 'approved') {
-        return 'Recently approved'
-    } else {
-        return 'Recently created'
-    }
-})
+addFilter('dateErrorMessage_V8', function (dateErrorObject, dateType, errorSection) {
+    const errorMessages = [];
 
-function formatDate(dateStr) {
-    let dateObj = new Date(dateStr);
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
-    let day = dateObj.getUTCDate();
-    let monthIndex = dateObj.getUTCMonth();
-    let year = dateObj.getUTCFullYear();
-    let formattedDate = day + ' ' + monthNames[monthIndex] + ' ' + year;
-    return formattedDate;
-}
-
-addFilter('relativeDateFromDateToToday', function (dateStr) {
-    const inputDate = new Date(dateStr);
-    const currentDate = new Date();
-    const differenceInMs = currentDate - inputDate;
-    const differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
-    if (differenceInDays > 730) {
-        const differenceInYears = Math.floor(differenceInDays / 365);
-        return differenceInYears + (differenceInYears === 1 ? ' year' : ' years') + ' ago';
-    } else if (differenceInDays > 70) {
-        const differenceInMonths = Math.floor(differenceInDays / 30);
-        return differenceInMonths + (differenceInMonths === 1 ? ' month' : ' months') + ' ago';
-    } else if (differenceInDays > 14) {
-        const differenceInWeeks = Math.floor(differenceInDays / 7);
-        return differenceInWeeks + ' weeks ago';
-    } else if (differenceInDays == 1) {
-        return differenceInDays + ' day ago';
-    } else {
-        return differenceInDays + ' days ago';
-    }
-})
-
-addFilter('findMatchingTraining', function (claim, training) {
-    // Extracting titles from training array's Qualifications courses
-    const qualificationTitles = training.reduce((acc, group) => {
-        if (group.groupTitle == "Qualifications") {
-            return acc.concat(group.courses.map(course => course.title));
+    if (errorSection == 'summary') {
+        if (dateErrorObject.day === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must include a day</a></li>');
         }
-        return acc;
-    }, []);
-    // Iterating over claims to find matching titles
-        if (qualificationTitles.includes(claim.training.title)) {
-            return true;
+        if (dateErrorObject.month === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must include a month</a></li>');
+        }
+        if (dateErrorObject.year === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must include a year</a></li>');
+        }
+        if (dateErrorObject.date === 'invalid') {
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be a real date</a></li>');
+        }
+        if (dateErrorObject.date === 'allMissing') {
+            errorMessages.push('<li><a href="#input-error">Enter the ' + dateType.toLowerCase() + '</a></li>');
+        } 
+        if (dateErrorObject.date === 'invalidPolicy') {
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be after 10 April 2024</a></li>');
+        }
+    } else if (errorSection == 'input') {
+        errorMessages.push('<p id="input-error" class="govuk-error-message">')
+        if (dateErrorObject.day === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must include a day<br>');
+        }
+        if (dateErrorObject.month === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must include a month<br>');
+        }
+        if (dateErrorObject.year === 'missing' && dateErrorObject.date !== 'allMissing') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must include a year<br>');
+        }
+        if (dateErrorObject.date === 'invalid') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be a real date<br>');
+        }
+        if (dateErrorObject.date === 'allMissing') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>Enter the ' + dateType.toLowerCase() + '<br>');
+        }
+        if (dateErrorObject.date === 'invalidPolicy') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be after 10 April 2024<br>');
+        }
+        errorMessages.push('</p>')
     }
-    return false;
+
+    return errorMessages.join('');
+}, { renderAsHtml: true })
+
+addFilter('dateErrorFormat', function (dateErrorObject, type) {
+    let state = false
+    if (dateErrorObject) {
+        if (type == "day") {
+            if (dateErrorObject.day == 'missing' || (dateErrorObject.day == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid') {
+                state = true
+            }
+        } else if (type == "month") {
+            if (dateErrorObject.month == 'missing' || (dateErrorObject.month == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid') {
+                state = true
+            }
+        } else if (type == "year") {
+            if (dateErrorObject.year == 'missing' || (dateErrorObject.year == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid') {
+                state = true
+            }
+        }
+    }
+    return state;
 })
 
-addFilter('formatTrainingDates', function(start, end) {
-    let startDate = "Not yet added"
-    let endDate = "not yet added"
-    if (start != "Invalid DateTime") {
-        startDate = start
-    }
-    if (end != "Invalid DateTime") {
-        endDate = end
-    }
-    return "Training dates: " + startDate + " to " + endDate
+addFilter('policyDateCheck', function (date) {
+    const policyDate = new Date("2024-04-10");
+    const checkDate = new Date(date)
+
+    return checkDate.getTime() < policyDate.getTime();
 })
 
-addFilter('formatTrainingDate', function(date) {
-    let isValidDate = false
-    if (date != "Invalid DateTime") {
-        isValidDate = true
-    }
-    return isValidDate
-})
