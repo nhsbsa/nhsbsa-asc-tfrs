@@ -201,48 +201,31 @@ addFilter('checkEligible_V8', function (learner, type, roleTypes) {
 
 })
 
-addFilter('errorSummary_V8', function (claim) {
+addFilter('errorSummary_V8', function (claim, submitError) {
     let errorSummaryStr = ''
 
-    if (claim.type == "TU") {
-        if (claim.startDate == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add training start date</a></li>')
+        if (submitError.startDate == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#start-date-error">Add a start date</a></li>')
         }
-        if (claim.learner == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add a learner</a></li>')
+        if (submitError.learner == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#learner-error">Add a learner</a></li>')
         }
-        if (claim.costDate == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add payment date</a></li>')
+        if (submitError.paymentDate == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-date-error">Add a payment date</a></li>')
         }
-        if (claim.evidenceOfPayment == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
+        if (submitError.evidenceOfPayment == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-evidence-error">Add evidence of payment</a></li>')
         }
-        if (claim.evidenceOfCompletion == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion</a></li>')
+        if (submitError.completionDate == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Add a completion date</a></li>')
         }
-    } else if (claim.type == "CPD") {
-        if (claim.description == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add a description</a></li>')
+        if (submitError.evidenceOfCompletion == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-evidence-error">Add evidence of completion</a></li>')
         }
-        if (claim.startDate == null && claim.categoryName == "Courses") {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add training start date</a></li>')
-        }
-        if (claim.claimAmount == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add cost</a></li>')
-        }
-        if (claim.learner == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add a learner</a></li>')
-        }
-        if (claim.costDate == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add payment date</a></li>')
-        }
-        if (claim.evidenceOfPayment == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
-        }
-        if (claim.evidenceOfCompletion == null) {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of completion</a></li>')
-        }
-    }
+        if (submitError.completionDate == "invalid" || submitError.startDate == "invalid") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be after the start date</a></li>')
+        } 
+
     return errorSummaryStr
 }, { renderAsHtml: true })
 

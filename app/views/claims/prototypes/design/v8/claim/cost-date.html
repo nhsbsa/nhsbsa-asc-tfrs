@@ -8,7 +8,7 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.submitError %}
+        {% if data.submitError.dateValid != null and not data.submitError.dateValid %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
             <div role="alert">
                 <h2 class="govuk-error-summary__title">
@@ -23,7 +23,7 @@
         </div>
         {% endif %}
         <form action="../cost-date" method="post" class="form">
-            <div class="govuk-form-group {% if data.submitError %} govuk-form-group--error {% endif %}">
+            <div class="govuk-form-group {% if data.submitError.dateValid != null and not data.submitError.dateValid %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
@@ -42,7 +42,7 @@
                     <div id="start-date-issued-hint" class="govuk-hint">
                         For example, 27 3 2007
                     </div>
-                    {% if data.submitError %}
+                    {% if data.submitError.dateValid != null and not data.submitError.dateValid %}
                     {{data.submitError | dateErrorMessage_V8("Payment date", "input") }}
                     {% endif %}
                     <div class="govuk-date-input" id="payment-date-started">

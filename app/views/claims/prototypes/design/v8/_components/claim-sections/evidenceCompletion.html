@@ -1,9 +1,15 @@
 <h2 class="govuk-heading-m" id="completion">Training completion by learner</h2>
 <dl class="govuk-summary-list">
-
   {% if not claim.completionDate %}
-  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-    <dt class="govuk-summary-list__key">
+  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "missing" %}
+  <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
+      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a completion date </p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-key--error {% endif %}">
       Completion date
     </dt>
     <dd class="govuk-summary-list__value">
@@ -11,8 +17,15 @@
     </dd>
   </div>
   {% else %}
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
+  {% if data.submitError.claimValid != null and not data.submitError.claimValid and  data.submitError.completionDate == "invalid" %}
+  <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
+      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Completion date must be after the start date </p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='invalid' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='invalid' %} govuk-summary-key--error {% endif %}">
       Completion date
     </dt>
     <dd class="govuk-summary-list__value">
@@ -28,8 +41,15 @@
   {% endif %}
 
   {% if not claim.evidenceOfCompletion %}
-  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-    <dt class="govuk-summary-list__key">
+  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =="missing" %}
+  <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-evidence-error">
+      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add evidence of completion</p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' %} govuk-summary-key--error {% endif %}">
       Evidence of completion
     </dt>
     <dd class="govuk-summary-list__value">
