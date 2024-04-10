@@ -387,3 +387,11 @@ addFilter('formatTrainingDates', function(start, end) {
     }
     return "Training dates: " + startDate + " to " + endDate
 })
+
+addFilter('formatTrainingDate', function(date) {
+    let isValidDate = false
+    if (date != "Invalid DateTime") {
+        isValidDate = true
+    }
+    return isValidDate
+})
