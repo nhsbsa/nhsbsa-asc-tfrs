@@ -559,6 +559,12 @@ router.get('/load-data-list-test', function (req, res) {
   res.redirect('manage-claims-buttons-test.html')
 })
 
+router.get('/load-data-account-test', function (req, res) {
+  //Load data from JSON files
+  loadData(req);
+  res.redirect('./authentication/creation-link?journey=creation')
+})
+
 
 
 module.exports = router
