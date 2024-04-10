@@ -10,7 +10,7 @@
     <div class="govuk-grid-column-two-thirds">
         <form action="../add-evidence" method="post" novalidate>
             <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-            <h1 class="govuk-heading-l">Add evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.fullName }}{% endif %}</h1>
+            <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
             <p class="govuk-body">
                 You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.fullName }}{% endif %}. This could be a PDF or image file.
             </p>
