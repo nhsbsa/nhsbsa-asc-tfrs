@@ -379,3 +379,98 @@ addFilter('policyDateCheck', function (date) {
     return checkDate.getTime() < policyDate.getTime();
 })
 
+addFilter('listItemVariableDate_V8', function (statusID, claim) {
+    if (statusID == 'not-yet-submitted') {
+        return 'Created ' + formatDate(claim.createdDate)
+    } else if (statusID == 'submitted') {
+        return 'Submitted ' + formatDate(claim.submittedDate)
+    } else if (statusID == 'rejected') {
+        return 'Rejected ' + formatDate(claim.rejectedDate)
+    } else if (statusID == 'approved') {
+        return 'Approved ' + formatDate(claim.approvedDate)
+    } else {
+        return 'Created ' + formatDate(claim.createdDate)
+    }
+})
+
+addFilter('listItemVariableSort_V8', function (statusID, claim) {
+    if (statusID == 'not-yet-submitted') {
+        return 'Recently created'
+    } else if (statusID == 'submitted') {
+        return 'Recently submitted'
+    } else if (statusID == 'rejected') {
+        return 'Recently rejected'
+    } else if (statusID == 'approved') {
+        return 'Recently approved'
+    } else {
+        return 'Recently created'
+    }
+})
+
+function formatDate(dateStr) {
+    let dateObj = new Date(dateStr);
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+    let day = dateObj.getUTCDate();
+    let monthIndex = dateObj.getUTCMonth();
+    let year = dateObj.getUTCFullYear();
+    let formattedDate = day + ' ' + monthNames[monthIndex] + ' ' + year;
+    return formattedDate;
+}
+
+addFilter('relativeDateFromDateToToday', function (dateStr) {
+    const inputDate = new Date(dateStr);
+    const currentDate = new Date();
+    const differenceInMs = currentDate - inputDate;
+    const differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+    if (differenceInDays > 730) {
+        const differenceInYears = Math.floor(differenceInDays / 365);
+        return differenceInYears + (differenceInYears === 1 ? ' year' : ' years') + ' ago';
+    } else if (differenceInDays > 70) {
+        const differenceInMonths = Math.floor(differenceInDays / 30);
+        return differenceInMonths + (differenceInMonths === 1 ? ' month' : ' months') + ' ago';
+    } else if (differenceInDays > 14) {
+        const differenceInWeeks = Math.floor(differenceInDays / 7);
+        return differenceInWeeks + ' weeks ago';
+    } else if (differenceInDays == 1) {
+        return differenceInDays + ' day ago';
+    } else {
+        return differenceInDays + ' days ago';
+    }
+})
+
+addFilter('findMatchingTraining', function (claim, training) {
+    // Extracting titles from training array's Qualifications courses
+    const qualificationTitles = training.reduce((acc, group) => {
+        if (group.groupTitle == "Qualifications") {
+            return acc.concat(group.courses.map(course => course.title));
+        }
+        return acc;
+    }, []);
+    // Iterating over claims to find matching titles
+        if (qualificationTitles.includes(claim.training.title)) {
+            return true;
+    }
+    return false;
+})
+
+addFilter('formatTrainingDates', function(start, end) {
+    let startDate = "Not yet added"
+    let endDate = "not yet added"
+    if (start != "Invalid DateTime") {
+        startDate = start
+    }
+    if (end != "Invalid DateTime") {
+        endDate = end
+    }
+    return "Training dates: " + startDate + " to " + endDate
+})
+
+addFilter('formatTrainingDate', function(date) {
+    let isValidDate = false
+    if (date != "Invalid DateTime") {
+        isValidDate = true
+    }
+    return isValidDate
+})
+
