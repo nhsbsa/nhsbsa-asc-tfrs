@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../../../../../../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate } = require('../helpers/helpers.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate, checkDuplicates } = require('../helpers/helpers.js');
 
 // v8 Prototype routes
 
@@ -122,7 +122,7 @@ router.post('/add-start-date', function (req, res) {
 
   const error = validateDate(day, month, year, "start");
 
-  if (error.valid == true) {
+  if (error.dateValid == true) {
     delete req.session.data['activity-date-started-day'];
     delete req.session.data['activity-date-started-month'];
     delete req.session.data['activity-date-started-year'];
@@ -193,7 +193,7 @@ router.post('/cost-date', function (req, res) {
 
   const error = validateDate(day, month, year, "payment");
 
-  if (error.valid == true) {
+  if (error.dateValid == true) {
     for (const c of req.session.data.claims) {
       if (claimID == c.claimID) {
         c.costDate = costDate
@@ -225,7 +225,7 @@ router.post('/completion-date', function (req, res) {
 
   const error = validateDate(day, month, year, "completion");
 
-  if (error.valid == true) {
+  if (error.dateValid == true) {
     for (const c of req.session.data.claims) {
       if (claimID == c.claimID) {
         c.completionDate = completionDate
@@ -329,17 +329,29 @@ router.post('/save-claim', function (req, res) {
 
 router.post('/ready-to-declare', function (req, res) {
   const claimID = req.session.data.id
+  let claim = {}
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
-      if (checkClaim(c)) {
-        delete req.session.data.submitError
-        res.redirect('claim/declaration')
-      } else {
-        res.redirect('claim/claim-details' + '?id=' + claimID + '&submitError=true')
-      }
+      claim = c
     }
   }
+
+  const submitError = checkClaim(claim)
+
+  if (submitError.claimValid) {
+    if (checkDuplicates(claim, req.session.data.claims)) {
+      delete req.session.data.submitError
+      res.redirect('claim/duplication')
+    } else {
+      delete req.session.data.submitError
+    res.redirect('claim/declaration')
+    }
+  } else {
+    req.session.data.submitError = submitError
+    res.redirect('claim/claim-details' + '?id=' + claimID)
+  }
+
 });
 
 router.post('/submit-claim', function (req, res) {
@@ -364,7 +376,7 @@ router.post('/submit-claim', function (req, res) {
 
 router.get('/cancel-handler', function (req, res) {
   const claimID = req.session.data.id
-  
+
   delete req.session.data['training-input'];
   delete req.session.data['trainingSelection'];
   delete req.session.data['activity-date-started-day'];

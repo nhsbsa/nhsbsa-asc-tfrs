@@ -1,19 +1,6 @@
 <h2 class="govuk-heading-m" id="training">Training</h2>
 <dl class="govuk-summary-list">
-
-
-  {% if not claim.training %}
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-    <dt class="govuk-summary-list__key">
-      Name
-    </dt>
-    <dd class="govuk-summary-list__value">
-      <a class="govuk-link govuk-link--no-visited-state" href="select-training">Select training</a>
-    </dd>
-  </div>
-
-  {% else %}
-  <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
       Name
     </dt>
@@ -23,13 +10,17 @@
       <p class="govuk-body">{{ claim.training.awardingOrganisation }}</p>
     </dd>
   </div>
-  {% endif %}
-
-
 
   {% if not claim.startDate %}
-  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-    <dt class="govuk-summary-list__key">
+  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =="missing" %}
+  <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="start-date-error">
+      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a start date</p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='missing' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='missing' %} govuk-summary-key--error {% endif %}">
       Start date
     </dt>
     <dd class="govuk-summary-list__value">

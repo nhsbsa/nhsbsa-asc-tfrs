@@ -1,8 +1,15 @@
 <h2 class="govuk-heading-m" id="learner">Learner</h2>
 <dl class="govuk-summary-list">
   {% if not claim.learner %}
-  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-    <dt class="govuk-summary-list__key">
+  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =="missing" %}
+  <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="learner-error">
+      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a learner</p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-key--error {% endif %}">
       Learner
     </dt>
     <dd class="govuk-summary-list__value">

@@ -1,0 +1,53 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim_V8(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Duplicate claim - Claim: ", data.id] | join }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">A claim already exists for this training and learner</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Vitae purus faucibus ornare suspendisse sed nisi lacus sed. Metus aliquam
+            eleifend mi in nulla posuere sollicitudin aliquam.</p>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Vitae purus faucibus ornare suspendisse sed nisi lacus sed. Metus aliquam
+            eleifend mi in nulla posuere sollicitudin aliquam.</p>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <form action="../duplication-handler" method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        What would you like to do?
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="action" name="action" type="radio" value="change">
+                            <label class="govuk-label govuk-radios__label" for="action">
+                                Change details of the claim
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="action-2" name="action" type="radio" value="delete">
+                            <label class="govuk-label govuk-radios__label" for="action-2">
+                                Delete the claim
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

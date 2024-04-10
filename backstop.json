@@ -137,6 +137,10 @@
         {
             "label": "TU-new-claim-completion-date-error-example",
             "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-completion-date?id=MTT-L12K-K4D2-C"
+        },
+        {
+            "label": "TU-new-claim-duplication",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/duplication?id=3R1-83BW-4S6G-C"
         }
     ],
     "paths": {
