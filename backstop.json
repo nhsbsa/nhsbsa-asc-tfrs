@@ -51,6 +51,10 @@
             "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-training?training-input=health"
         },
         {
+            "label": "TU-new-claim-training-no-results",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-training?training-input=test"
+        },
+        {
             "label": "TU-new-claim",
             "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=MTT-L12K-K4D2-C"
         },
