@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../../../../../../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate, checkDuplicates } = require('../helpers/helpers.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicates, checkLearnerForm } = require('../helpers/helpers.js');
 
 // v8 Prototype routes
 
@@ -446,42 +446,53 @@ router.post('/create-learner', function (req, res) {
 
   delete req.session.data.existingLearner
 
-  if (req.session.data.inClaim == 'true' && !compareNINumbers(req.session.data.nationalInsuranceNumber, req.session.data.learners)) {
+  delete req.session.data.submitError
 
-    const learner = {
-      id: req.session.data.nationalInsuranceNumber,
-      fullName: req.session.data.fullName,
-      jobTitle: req.session.data.jobTitle,
-      roleType: req.session.data.roleType,
-    };
-    req.session.data.learners.push(learner)
+  const nationalInsuranceNumber = req.session.data.nationalInsuranceNumber
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const jobTitle = req.session.data.jobTitle
+  const roleType =  req.session.data.roleType
 
-    for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        c.learner = learner
-        break;
+  const submitError = checkLearnerForm(nationalInsuranceNumber,familyName, givenName, jobTitle, roleType)
+
+  if (submitError.learnerValid) {
+    if (req.session.data.inClaim == 'true' && !compareNINumbers(req.session.data.nationalInsuranceNumber, req.session.data.learners)) {
+      
+      const learner = {
+        id: nationalInsuranceNumber,
+        fullName: givenName + familyName,
+        jobTitle: jobTitle,
+        roleType: roleType,
+      };
+      req.session.data.learners.push(learner)
+  
+      for (const c of req.session.data.claims) {
+        if (claimID == c.claimID) {
+          c.learner = learner
+          break;
+        }
       }
+      delete req.session.data.inClaim
+      delete req.session.data.familyName
+      delete req.session.data.givenName
+      delete req.session.data.jobTitle
+      delete req.session.data.nationalInsuranceNumber
+      delete req.session.data.regOrg
+      delete req.session.data.regID
+      delete req.session.data.roleType
+      delete req.session.data.learnerInput
+      res.redirect('claim/claim-details' + '?id=' + claimID)
+    } else {
+      res.redirect('learner/add-learner?inClaim=' + req.session.data.inClaim + '&existingLearner=true')
     }
-    delete req.session.data.inClaim
-    delete req.session.data.fullName
-    delete req.session.data.jobTitle
-    delete req.session.data.nationalInsuranceNumber
-    delete req.session.data.regOrg
-    delete req.session.data.regID
-    delete req.session.data.roleType
-    delete req.session.data.learnerInput
-    delete req.session.data.submitError
-    res.redirect('claim/claim-details' + '?id=' + claimID)
+
   } else {
-    console.log('match')
-    delete req.session.data.fullName
-    delete req.session.data.jobTitle
-    delete req.session.data.regOrg
-    delete req.session.data.regID
-    delete req.session.data.roleType
-    delete req.session.data.learnerInput
-    res.redirect('learner/add-learner?inClaim=' + req.session.data.inClaim + '&existingLearner=true')
+    req.session.data.submitError = submitError
+    res.redirect('learner/add-learner?inClaim=' + req.session.data.inClaim)
   }
+
+  
 
 });
 

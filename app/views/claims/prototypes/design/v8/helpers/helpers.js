@@ -185,4 +185,56 @@ function checkDuplicates(claim, claimList) {
 
 }
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate, checkDuplicates }
+function isNIFormat(input) {
+    // Remove spaces from the input string
+    const cleanedInput = input.replace(/\s/g, '');
+
+    // Check if the cleaned input matches the specified format
+    const regex = /^[A-Za-z]{2}\d{6}[A-D]$/;
+    return regex.test(cleanedInput);
+}
+
+function checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle, roleType) {
+    const result = {};
+    console.log(nationalInsuranceNumber)
+
+    if (nationalInsuranceNumber == "" || nationalInsuranceNumber === undefined || nationalInsuranceNumber == null ) {
+        result.nationalInsuranceNumber = "missing"
+    } else if (!(isNIFormat(nationalInsuranceNumber))) {
+        result.nationalInsuranceNumber = "invalid"
+    } else {
+        result.nationalInsuranceNumber = "valid"
+    }
+
+    if (familyName == "" || familyName === undefined || familyName == null ) {
+        result.familyName = "missing"
+    } else {
+        result.familyName = "valid"
+    }
+
+    if (givenName == "" || givenName === undefined || givenName == null ) {
+        result.givenName = "missing"
+    } else {
+        result.givenName = "valid"
+    }
+
+    if (jobTitle == "" || jobTitle === undefined || jobTitle == null ) {
+        result.jobTitle = "missing"
+    } else {
+        result.jobTitle = "valid"
+    }
+
+    if (roleType == "" || roleType === undefined || roleType == null ) {
+        result.roleType = "missing"
+    } else {
+        result.roleType = "valid"
+    }
+
+    result.learnerValid = result.nationalInsuranceNumber == "valid" && result.familyName == "valid" && result.givenName == "valid" && result.jobTitle == "valid" && result.roleType == "valid"
+
+    return result
+
+}
+
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate, checkDuplicates, checkLearnerForm }

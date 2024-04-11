@@ -204,27 +204,27 @@ addFilter('checkEligible_V8', function (learner, type, roleTypes) {
 addFilter('errorSummary_V8', function (claim, submitError) {
     let errorSummaryStr = ''
 
-        if (submitError.startDate == "missing") {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#start-date-error">Add a start date</a></li>')
-        }
-        if (submitError.learner == "missing") {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#learner-error">Add a learner</a></li>')
-        }
-        if (submitError.paymentDate == "missing") {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-date-error">Add a payment date</a></li>')
-        }
-        if (submitError.evidenceOfPayment == "missing") {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-evidence-error">Add evidence of payment</a></li>')
-        }
-        if (submitError.completionDate == "missing") {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Add a completion date</a></li>')
-        }
-        if (submitError.evidenceOfCompletion == "missing") {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-evidence-error">Add evidence of completion</a></li>')
-        }
-        if (submitError.completionDate == "invalid" || submitError.startDate == "invalid") {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be after the start date</a></li>')
-        } 
+    if (submitError.startDate == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#start-date-error">Add a start date</a></li>')
+    }
+    if (submitError.learner == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#learner-error">Add a learner</a></li>')
+    }
+    if (submitError.paymentDate == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-date-error">Add a payment date</a></li>')
+    }
+    if (submitError.evidenceOfPayment == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-evidence-error">Add evidence of payment</a></li>')
+    }
+    if (submitError.completionDate == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Add a completion date</a></li>')
+    }
+    if (submitError.evidenceOfCompletion == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-evidence-error">Add evidence of completion</a></li>')
+    }
+    if (submitError.completionDate == "invalid" || submitError.startDate == "invalid") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be after the start date</a></li>')
+    }
 
     return errorSummaryStr
 }, { renderAsHtml: true })
@@ -305,7 +305,7 @@ addFilter('dateErrorMessage_V8', function (dateErrorObject, dateType, errorSecti
         }
         if (dateErrorObject.date === 'allMissing') {
             errorMessages.push('<li><a href="#input-error">Enter the ' + dateType.toLowerCase() + '</a></li>');
-        } 
+        }
         if (dateErrorObject.date === 'invalidPolicy') {
             errorMessages.push('<li><a href="#input-error">' + dateType + ' must be after 10 April 2024</a></li>');
         }
@@ -393,7 +393,7 @@ addFilter('listItemVariableSort_V8', function (statusID, claim) {
 function formatDate(dateStr) {
     let dateObj = new Date(dateStr);
     const monthNames = ["January", "February", "March", "April", "May", "June",
-                        "July", "August", "September", "October", "November", "December"];
+        "July", "August", "September", "October", "November", "December"];
     let day = dateObj.getUTCDate();
     let monthIndex = dateObj.getUTCMonth();
     let year = dateObj.getUTCFullYear();
@@ -431,13 +431,13 @@ addFilter('findMatchingTraining', function (claim, training) {
         return acc;
     }, []);
     // Iterating over claims to find matching titles
-        if (qualificationTitles.includes(claim.training.title)) {
-            return true;
+    if (qualificationTitles.includes(claim.training.title)) {
+        return true;
     }
     return false;
 })
 
-addFilter('formatTrainingDates', function(start, end) {
+addFilter('formatTrainingDates', function (start, end) {
     let startDate = "Not yet added"
     let endDate = "not yet added"
     if (start != "Invalid DateTime") {
@@ -449,11 +449,36 @@ addFilter('formatTrainingDates', function(start, end) {
     return "Training dates: " + startDate + " to " + endDate
 })
 
-addFilter('formatTrainingDate', function(date) {
+addFilter('formatTrainingDate', function (date) {
     let isValidDate = false
     if (date != "Invalid DateTime") {
         isValidDate = true
     }
     return isValidDate
 })
+
+addFilter('learnerErrorMessage_V8', function (submitError) {
+    let errorSummaryStr = ''
+
+    if (submitError.familyName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a family name</a></li>')
+    }
+    if (submitError.givenName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a given name</a></li>')
+    }
+    if (submitError.nationalInsuranceNumber == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#nationalInsuranceNumber-error">Enter a national insurance number</a></li>')
+    } else if (submitError.nationalInsuranceNumber == "invalid") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#nationalInsuranceNumber-error">Enter a National Insurance number in the correct format</a></li>')
+    }
+    if (submitError.jobTitle == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#jobTitle-error">Enter a job title</a></li>')
+    }
+    if (submitError.roleType == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#roleType-error">Select the role group the learner belongs to</a></li>')
+    }
+
+
+    return errorSummaryStr
+}, { renderAsHtml: true })
 
