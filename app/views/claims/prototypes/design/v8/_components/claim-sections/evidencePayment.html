@@ -1,6 +1,8 @@
 <h2 class="govuk-heading-m" id="payment">Payment to training provider</h2>
 <dl class="govuk-summary-list">
 
+  {% set evidenceCount = claim.evidenceOfPayment | coursesCount_V7 %}
+
   {% if not claim.costDate %}
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
     <dt class="govuk-summary-list__key">
@@ -27,7 +29,7 @@
   </div>
   {% endif %}
 
-  {% if not claim.evidenceOfPayment %}
+  {% if evidenceCount == 0 %}
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
     <dt class="govuk-summary-list__key">
       Evidence of payment
@@ -42,8 +44,11 @@
       Evidence of payment
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ claim.evidenceOfPayment }}
+      {% for payment in claim.evidenceOfPayment %}
+      <p class="govuk-body">{{ payment }}</p>
+      {% endfor %}
     </dd>
+    
     {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
     <dd class="govuk-summary-list__actions">
       <ul class="govuk-summary-list__actions-list">

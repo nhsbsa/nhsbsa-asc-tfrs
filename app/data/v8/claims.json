@@ -28,7 +28,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-06-11T14:50:59.964Z"
@@ -232,7 +232,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-04-02T21:00:44.744Z"
@@ -300,7 +300,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-03-05T13:46:20.705Z"
@@ -470,7 +470,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-08-06T17:36:00.391Z"
@@ -572,7 +572,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-03-11T15:31:34.209Z"
@@ -606,7 +606,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-08-11T03:27:41.516Z"
@@ -708,7 +708,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-07-09T04:53:56.158Z"
@@ -912,7 +912,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-07-16T16:59:42.019Z"
@@ -1150,7 +1150,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-08-16T15:27:24.345Z"
@@ -1218,7 +1218,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-07-02T15:05:40.305Z"
@@ -1286,7 +1286,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-05-30T18:37:02.169Z"
@@ -1354,7 +1354,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-09-12T18:14:48.514Z"
@@ -1728,7 +1728,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-07-20T15:54:56.046Z"
@@ -1864,7 +1864,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-11-12T00:42:30.529Z"
@@ -1898,7 +1898,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-09-07T22:12:24.508Z"
@@ -1966,7 +1966,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-04-05T10:20:27.435Z"
@@ -2000,7 +2000,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-01-10T03:16:58.181Z"
@@ -2136,7 +2136,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-08-20T16:34:51.797Z"
@@ -2306,7 +2306,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-11-02T23:30:51.980Z"
@@ -2748,7 +2748,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-11-10T08:48:21.636Z"
@@ -2816,7 +2816,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-04-14T12:06:59.944Z"
@@ -2850,7 +2850,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-04-14T01:35:15.375Z"
@@ -2884,7 +2884,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-10-07T20:01:00.843Z"
@@ -3020,7 +3020,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-09-03T02:11:15.703Z"
@@ -3190,7 +3190,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-02-09T19:03:38.846Z"
@@ -3326,7 +3326,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-12-15T18:07:47.538Z"
@@ -3462,7 +3462,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-05-21T07:48:41.418Z"
@@ -3666,7 +3666,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-03-21T00:29:37.033Z"
@@ -3700,7 +3700,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-10-02T00:19:43.606Z"
@@ -3870,7 +3870,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-03-21T01:19:05.394Z"
@@ -3972,7 +3972,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-03-21T18:20:04.970Z"
@@ -4006,7 +4006,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-06-17T06:10:43.628Z"
@@ -4244,7 +4244,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-10-22T09:03:47.946Z"
@@ -4278,7 +4278,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-04-16T01:01:38.634Z"
@@ -4346,7 +4346,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-09-02T22:49:10.498Z"
@@ -4482,7 +4482,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-01-09T22:04:33.105Z"
@@ -4516,7 +4516,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-01-24T19:15:16.153Z"
@@ -4652,7 +4652,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-05-17T21:18:56.833Z"
@@ -4686,7 +4686,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-11-28T23:44:10.072Z"
@@ -4720,7 +4720,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-11-30T20:54:45.553Z"
@@ -4754,7 +4754,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-11-22T06:26:13.154Z"
@@ -4788,7 +4788,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-07-30T03:53:08.560Z"
@@ -4890,7 +4890,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2024-02-21T15:53:31.515Z"
@@ -5060,7 +5060,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-05-14T22:06:57.565Z"
@@ -5094,7 +5094,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-05-02T10:45:44.402Z"
@@ -5230,7 +5230,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-03-26T12:07:45.518Z"
@@ -5298,7 +5298,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-10-15T22:14:21.512Z"
@@ -5434,7 +5434,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-09-18T07:24:20.631Z"
@@ -5570,7 +5570,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-10-04T06:44:09.401Z"
@@ -5604,7 +5604,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-09-27T10:23:05.647Z"
@@ -5672,7 +5672,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-05-01T07:21:42.711Z"
@@ -5706,7 +5706,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-03-24T10:14:28.247Z"
@@ -5842,7 +5842,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-07-11T10:52:24.874Z"
@@ -6012,7 +6012,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-05-03T11:26:49.284Z"
@@ -6250,7 +6250,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-08-08T23:29:03.882Z"
@@ -6386,7 +6386,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-07-02T18:05:12.776Z"
@@ -6964,7 +6964,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-11-22T09:57:05.123Z"
@@ -7032,7 +7032,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-06-17T01:10:30.321Z"
@@ -7066,7 +7066,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-11-02T09:24:27.308Z"
@@ -7168,7 +7168,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-06-09T17:01:46.423Z"
@@ -7270,7 +7270,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-11-24T11:39:56.537Z"
@@ -7338,7 +7338,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-11-05T00:50:52.579Z"
@@ -7746,7 +7746,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-10-16T19:50:38.968Z"
@@ -8154,7 +8154,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-02-07T03:11:26.456Z"
@@ -8494,7 +8494,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-08-25T07:10:53.149Z"
@@ -8562,7 +8562,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-09-27T07:28:50.239Z"
@@ -8664,7 +8664,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-11-21T19:48:44.210Z"
@@ -8902,7 +8902,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-01-18T15:34:07.653Z"
@@ -9072,7 +9072,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-09-16T16:40:40.175Z"
@@ -9242,7 +9242,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-07-30T14:14:30.129Z"
@@ -9310,7 +9310,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-05-25T06:32:42.562Z"
@@ -9344,7 +9344,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-02-03T16:50:19.771Z"
@@ -9378,7 +9378,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-02-17T11:43:08.888Z"
@@ -9446,7 +9446,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-06-24T20:02:45.807Z"
@@ -9480,7 +9480,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-01-01T02:40:47.250Z"
@@ -9582,7 +9582,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-10-29T05:04:06.200Z"
@@ -9650,7 +9650,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-07-07T03:33:32.233Z"
@@ -9786,7 +9786,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-12-10T19:31:54.411Z"
@@ -9888,7 +9888,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-08-31T22:11:24.245Z"
@@ -9922,7 +9922,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": null,
+    "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-09-22T08:42:10.633Z"

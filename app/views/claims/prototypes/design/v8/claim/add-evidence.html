@@ -1,5 +1,6 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim_V8(data.claims) %}
+{% set evidenceCount = claim.evidenceOfPayment | coursesCount_V7 %}
 
 {% block pageTitle %}
 {{ ["Add evidence - Claim: ", claim.claimID] | join }}
@@ -8,29 +9,81 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+
         <form action="../add-evidence" method="post" novalidate>
-            <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-            <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
-            <p class="govuk-body">
-                You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.fullName }}{% endif %}. This could be a PDF or image file.
-            </p>
-            <p class="govuk-body">
-                If you need to add an email as evidence, save the email as a PDF file and then upload that.
-            </p>
-            <div class="govuk-form-group">
-                <label class="govuk-label" for="evidenceFile">
-                    Upload a file
-                </label>
-                <input class="govuk-file-upload" id="evidenceFile" name="evidenceFile" type="file">
-            </div>
-            <div class="govuk-button-group">
-                <button type="submit" class="govuk-button" data-module="govuk-button">
-                    Add to claim
-                </button>
-                <a class="govuk-link govuk-link--no-visited-state"
-                    href="../cancel-handler">Cancel</a>
-            </div>
+
+                    <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+                    <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
+              
+                    <p class="govuk-body">
+                    You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.fullName }}{% endif %}. This could be a PDF or image file.
+                    </p>
+                  <div id="file-upload-1-hint" class="govuk-hint">
+                    If you need to add an email as evidence, save the email as a PDF file and then upload that. You may upload up to 4 files.
+                  </div>
+              
+                  <p class="govuk-body" aria-live="polite">1 of 2 files uploaded</p>
+              
+                  <div class="govuk-form-group">
+                    <label class="govuk-label govuk-visually-hidden" for="evidenceFile">
+                        Upload a file
+                    </label>
+                    <input class="govuk-file-upload" id="evidenceFile" name="evidenceFile" type="file">
+                  </div>
+              
+                  <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
+              
+                  {% if evidenceCount == 0 %} 
+                  <p></p>
+                  {% else %}
+                  <dl class="govuk-summary-list govuk-summary-list--long-key">
+                    <div class="govuk-summary-list__row">
+                      <dt class="govuk-summary-list__key">
+                        invoice.pdf
+                      </dt>
+                      <dd class="govuk-summary-list__value">
+                        <strong class="govuk-tag govuk-tag--yellow">
+                Uploading
+              </strong>
+              
+                      </dd>
+                      <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> invoice01.pdf</span></a>
+                      </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                      <dt class="govuk-summary-list__key">
+                        <a class="govuk-link" href="#">invoice.pdf</a>
+                      </dt>
+                      <dd class="govuk-summary-list__value">
+                        <strong class="govuk-tag govuk-tag--green">
+                Uploaded
+              </strong>
+              
+                      </dd>
+                      <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden">invoice.pdf</span></a>
+                      </dd>
+                    </div>
+                  </dl>
+                  
+                  {% endif %}
+                  <div class="govuk-button-group">
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Continue
+                    </button>
+                    <a class="govuk-link govuk-link--no-visited-state"
+                        href="../cancel-handler">Cancel</a>
+                </div>
+                
+
         </form>
+
+
+
+
+
+
     </div>
     <div class="govuk-grid-column-one-third">
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
