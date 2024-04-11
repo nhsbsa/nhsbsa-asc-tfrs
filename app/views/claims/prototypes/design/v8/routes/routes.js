@@ -291,6 +291,7 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.type;
   delete req.session.data.learnerID;
   delete req.session.data.submitError
+  delete req.session.data.deleteSuccess
   if (type == 'payment') {
   res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
   } else if (type == 'completion') {
@@ -317,10 +318,11 @@ router.post('/remove-evidence', function (req, res) {
   delete req.session.data.type;
   delete req.session.data.learnerID;
   delete req.session.data.submitError
+  delete req.session.data.deleteSuccess
   if (paymentCount == 0) {
-    res.redirect('claim/add-evidence' + '?id=' + claimID + '&type=' + type)
+    res.redirect('claim/add-evidence' + '?id=' + claimID + '&type=' + type + '&allDeleteSuccess=true')
   } else {
-    res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
+    res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type + '&deleteSuccess=true')
   }
 })
 
