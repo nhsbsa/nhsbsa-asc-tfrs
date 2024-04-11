@@ -54,7 +54,7 @@ function newClaim(req, res, training) {
       submittedDate: null,
       paidDate: null,
       costDate: null,
-      evidenceOfPayment: null,
+      evidenceOfPayment: [],
       evidenceOfCompletion: null,
       completionDate: null
     };
@@ -73,7 +73,7 @@ function newClaim(req, res, training) {
       paidDate: null,
       costDate: null,
       claimAmount: null,
-      evidenceOfPayment: null,
+      evidenceOfPayment: [],
     };
 
   }
@@ -291,18 +291,18 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.type;
   delete req.session.data.learnerID;
   delete req.session.data.submitError
-  res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
+  res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '#' + type)
+
 })
 
 router.post('/remove-evidence', function (req, res) {
   var type = req.session.data.type
   var claimID = req.session.data.id
-  let i = 1
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       if (type == 'payment') {
-        c.evidenceOfPayment.push('invoice.pdf')
+        c.evidenceOfPayment.pop()
       } else if (type == 'completion') {
         c.evidenceOfCompletion = 'certficate01.pdf'
       }

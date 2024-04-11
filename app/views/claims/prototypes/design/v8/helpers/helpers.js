@@ -6,7 +6,7 @@ function checkClaim(claim) {
         claim.startDate != null &&
         claim.training != null &&
         claim.costDate != null &&
-        claim.evidenceOfPayment != null &&
+        claim.evidenceOfPayment.length >0 &&
         claim.evidenceOfCompletion != null /*&& 
         claim.completionDate != null*/
     ) {
@@ -17,7 +17,7 @@ function checkClaim(claim) {
         ((claim.startDate != null && claim.learners.every(learner => learner.evidence.evidenceOfCompletion != null)) || claim.categoryName != "Courses") &&
         claim.claimAmount != null &&
         claim.description != null &&
-        claim.evidenceOfPayment != null &&
+        claim.evidenceOfPayment.length >0 &&
         claim.costDate != null
     ) {
         check = true

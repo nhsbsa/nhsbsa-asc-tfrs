@@ -214,7 +214,7 @@ addFilter('errorSummary_V8', function (claim) {
         if (claim.costDate == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add payment date</a></li>')
         }
-        if (claim.evidenceOfPayment == null) {
+        if (claim.evidenceOfPayment.length == 0) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
         }
         if (claim.evidenceOfCompletion == null) {
@@ -236,7 +236,7 @@ addFilter('errorSummary_V8', function (claim) {
         if (claim.costDate == null) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add payment date</a></li>')
         }
-        if (claim.evidenceOfPayment == null) {
+        if (claim.evidenceOfPayment.length == 0) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#">Add evidence of payment</a></li>')
         }
         if (claim.evidenceOfCompletion == null) {

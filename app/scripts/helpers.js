@@ -3,7 +3,7 @@ function checkClaim(claim) {
             if ( claim.learners.length>0 &&
                 claim.startDate != null && 
                 claim.costPerLearner != null && 
-                claim.evidenceOfPayment != null && 
+                claim.evidenceOfPayment.length>0 && 
                 claim.learners.every(learner => learner.evidence.evidenceOfCompletion != null) && 
                 ( claim.learners.every(learner => learner.evidence.evidenceOfEnrollment != null) || claim.training.fundingModel == "full") )
                 {

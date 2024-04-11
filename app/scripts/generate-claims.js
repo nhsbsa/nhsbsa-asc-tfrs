@@ -85,13 +85,16 @@ function generateTUClaims(quantity, version) {
 
 
     let submittedDate = null;
-    let evidenceOfPayment = null;
+    let evidenceOfPayment = [];
     let evidenceOfCompletion = null;
     let completionDate = null;
 
     if (['submitted', 'rejected', 'approved'].includes(status)) {
       submittedDate = faker.date.between({ from: startDate, to: new Date() });
-      evidenceOfPayment = 'invoice' + '00' + i.toString() + '.pdf';
+      let randomNumber = Math.floor(Math.random() * 4) + 1;
+      for (let i = 0; i < randomNumber; i++) {
+        evidenceOfPayment.push("invoice.pdf")
+      }
       evidenceOfCompletion = 'certficate' + '00' + i.toString() + '.pdf';
       completionDate = faker.date.between({ from: startDate, to: submittedDate });
     }
@@ -190,7 +193,7 @@ function generateCPDClaims(quantity, version) {
       paidDate = faker.date.between({ from: approvedDate, to: new Date() });
     }
 
-    const evidenceOfPayment = ('invoice').concat('00', i.toString(), '.pdf');
+    const evidenceOfPayment = [('invoice').concat('00', i.toString(), '.pdf')];
 
     if (['submitted', 'queried', 'paid', 'approved'].includes(status)) {
 
