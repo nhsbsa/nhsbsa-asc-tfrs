@@ -1,7 +1,7 @@
 <h2 class="govuk-heading-m" id="payment">Payment to training provider</h2>
 <dl class="govuk-summary-list">
 
-  {% set evidenceCount = claim.evidenceOfPayment | coursesCount_V7 %}
+  {% set evidenceOfPaymentCount = claim.evidenceOfPayment | coursesCount_V7 %}
 
   {% if not claim.costDate %}
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
@@ -29,7 +29,8 @@
   </div>
   {% endif %}
 
-  {% if evidenceCount == 0 %}
+
+  {% if evidenceOfPaymentCount == 0 %}
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
     <dt class="govuk-summary-list__key">
       Evidence of payment

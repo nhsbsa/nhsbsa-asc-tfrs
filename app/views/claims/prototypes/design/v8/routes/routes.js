@@ -279,41 +279,49 @@ router.post('/add-evidence', function (req, res) {
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
+      let numberOfEvidence = c.evidenceOfPayment.length + 1
       if (type == 'payment') {
-        c.evidenceOfPayment.push('invoice.pdf')
+        c.evidenceOfPayment.push('invoice' + numberOfEvidence + '.pdf')
       } else if (type == 'completion') {
         c.evidenceOfCompletion = 'certficate01.pdf'
       }
       break;
     }
   }
-  delete req.session.data.evidenceFile;
   delete req.session.data.type;
   delete req.session.data.learnerID;
   delete req.session.data.submitError
-  res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '#' + type)
-
+  if (type == 'payment') {
+  res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
+  } else if (type == 'completion') {
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
+  }
 })
 
 router.post('/remove-evidence', function (req, res) {
   var type = req.session.data.type
   var claimID = req.session.data.id
+  let paymentCount = 0
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       if (type == 'payment') {
         c.evidenceOfPayment.pop()
+        paymentCount = c.evidenceOfPayment.length
       } else if (type == 'completion') {
         c.evidenceOfCompletion = 'certficate01.pdf'
       }
       break;
     }
   }
-  delete req.session.data.evidenceFile;
   delete req.session.data.type;
   delete req.session.data.learnerID;
   delete req.session.data.submitError
-  res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
+  if (paymentCount == 0) {
+    res.redirect('claim/add-evidence' + '?id=' + claimID + '&type=' + type)
+  } else {
+    res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
+  }
 })
 
 router.post('/save-claim', function (req, res) {

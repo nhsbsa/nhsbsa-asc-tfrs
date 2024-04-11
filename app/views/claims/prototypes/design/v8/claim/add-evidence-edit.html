@@ -34,7 +34,9 @@
                                 <a download href="/" class="govuk-link">invoice.png</a>, 2MB
                                 </dd>
                                 <dd class="govuk-summary-list__actions">
-                                <a class="govuk-link" href="#">Delete<span class="govuk-visually-hidden"> file 1</span></a>
+                                  <form action="../remove-evidence" method="post" novalidate>
+                                    <button class="unstyle-button">Delete</button>
+                                  </form>
                                 </dd>
                             </div>
                             {% endfor %}
@@ -66,12 +68,11 @@
                     </fieldset>
                     </div>
 
-                    <form action="add-evidence.html" >
+                    <form action="add-evidence?type=payment">
                       <button class="govuk-button" data-module="govuk-button">
                           Continue
                       </button>
                       </form>
-
 
 
     </div>
