@@ -30,7 +30,9 @@ router.post('/verify-details-handler', function (req, res) {
   if (confirmationAnswer == "yes") {
       res.redirect('account-setup/job-title')
   } else if (confirmationAnswer == "no") {
-    res.redirect('account-issue')
+    res.redirect('account-setup/account-issue')
+  } else {
+    res.redirect('account-setup/job-title')
   }
 
 });

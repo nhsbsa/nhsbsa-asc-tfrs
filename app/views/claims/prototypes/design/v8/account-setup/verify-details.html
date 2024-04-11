@@ -4,6 +4,12 @@
 {{ ["Verify details - ", (data.claimType | potName_V8)] | join }}
 {% endblock %}
 
+{% block beforeContent %}
+<div >
+    <a href="../authentication/mfa-code" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">

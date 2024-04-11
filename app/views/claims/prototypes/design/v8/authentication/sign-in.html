@@ -19,7 +19,6 @@
         #yellow-banner {
             background-color: yellow;
             color: black;
-            padding: 10px;
             width: 100%;
             text-align: center;
             position: absolute;
@@ -30,6 +29,7 @@
         #image-link {
             display: block;
             text-align: center;
+            margin-top: 6em;
         }
 
         #image-link img {
@@ -41,13 +41,14 @@
 
 <body>
     <div id="yellow-banner">
-        <p>This screen is for testing only. There is no interaction. Please click the form image to continue.</p>
+        <p>This screen is for testing only. There is no interaction. Please click the form image to continue or <a class="govuk-link" href="verify-details">go back</a>.</p>
     </div>
     <div id="image-link">
-        <a id="image-link" href="MFA">
+        <a id="image-link" href="{% if data.journey == 'creation'%} MFA {% else %} mfa-code  {% endif %}">
             <img src="/public/images/sign-in.png" alt="Clickable Image">
         </a>
     </div>
 </body>
 
 </html>
+

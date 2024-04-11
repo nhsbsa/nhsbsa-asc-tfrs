@@ -4,11 +4,25 @@
 {{ ["Enter job title - ", (data.claimType | potName_V8)] | join }}
 {% endblock %}
 
+{% block beforeContent %}
+<div>
+    <a href="declaration" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="../manage-claims-home?claimType=TU" method="post" class="form">
+        <form action="../index" method="post" class="form">
             <h1 class="govuk-heading-l">Organisation bank or building society account details</h1>
+            <div class="govuk-warning-text">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-visually-hidden">Warning</span>
+                    You provide must provide bank details for the organisation your represent. Personal bank accounts must not be used.
+                </strong>
+            </div>
             <div class="govuk-form-group">
                 <label class="govuk-label" for="name-on-the-account">
                     Name on the account

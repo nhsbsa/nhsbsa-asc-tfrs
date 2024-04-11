@@ -4,6 +4,12 @@
 {{ ["Grant decleration - ", (data.claimType | potName_V8)] | join }}
 {% endblock %}
 
+{% block beforeContent %}
+<div >
+    <a href="job-title" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
 {% block content %}
 
 <div class="govuk-grid-row">
@@ -25,7 +31,7 @@
         </div>
         {% endif %}
         <span class="govuk-caption-l">Complete registration</span>
-        <h1 class="govuk-heading-l">Declaration</h1>
+        <h1 class="govuk-heading-l">Grant decleration</h1>
     </div>
     <div class="govuk-grid-column-two-thirds">
         <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
