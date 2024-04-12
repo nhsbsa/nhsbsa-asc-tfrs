@@ -1,0 +1,95 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim_V8(data.claims) %}
+{% set evidenceCount = claim.evidenceOfPayment | coursesCount_V7 %}
+
+{% block pageTitle %}
+{{ ["Add evidence - Claim: ", claim.claimID] | join }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if data.deleteSuccess %}
+        <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+              <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+            </svg>
+          
+            <div class="moj-banner__message">File named invoice.png has been deleted</div>
+          
+          </div>
+        {% endif %}
+
+                    <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+                    <h1 class="govuk-heading-l">Add evidence of payment</h1>
+              
+                    <p class="govuk-body">
+                    You need to upload a file containing the evidence of payment. This could be a PDF or image file.
+                    </p>
+                    <p class="govuk-body">
+                    If you need to add an email as evidence, save the email as a PDF file and then upload that. You may upload up to 4 files.
+                    </p>
+              
+                            <h2 class="govuk-heading-m" style="padding-top: 10px;">Files added</h2>
+
+                            <dl class="govuk-summary-list">
+                              {% for payment in claim.evidenceOfPayment %}
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                {{payment}}
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                2MB
+                                </dd>
+                                <dd class="govuk-summary-list__actions">
+                                  <form action="../remove-evidence" method="post" novalidate>
+                                    <button class="unstyle-button">Delete</button>
+                                  </form>
+                                </dd>
+                            </div>
+                            {% endfor %}
+
+                            </dl>
+
+                    <form action="../radioButton?type=payment&deleteSuccess&allDeleteSuccess" method="post" novalidate>
+                    <div class="govuk-form-group">
+                      <fieldset class="govuk-fieldset">
+                          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                          Do you want to upload another piece of payment evidence?
+                          </legend>
+                          <div class="govuk-radios" data-module="govuk-radios">
+                          <div class="govuk-radios__item">
+                              <input class="govuk-radios__input" id="another" name="another" type="radio" value="yes">
+                              <label class="govuk-label govuk-radios__label" for="another">
+                              Yes
+                              </label>
+                          </div>
+                          <div class="govuk-radios__item">
+                              <input class="govuk-radios__input" id="another-2" name="another" type="radio" value="no">
+                              <label class="govuk-label govuk-radios__label" for="another-2">
+                              No
+                              </label>
+                          </div>
+                          </div>
+                      </fieldset>
+                    </div>
+
+                      <button class="govuk-button" data-module="govuk-button" type="submit">
+                          Continue
+                      </button>
+                      </form>
+
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        <h2 class="govuk-heading-m">Related content</h2>
+        <p class="govuk-body"><a href="#" class="govuk-link">Find out more about evidence requirements</a></p>
+    </div>
+</div>
+
+
+
+{% endblock %}

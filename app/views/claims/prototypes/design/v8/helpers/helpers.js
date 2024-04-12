@@ -20,7 +20,7 @@ function checkClaim(claim) {
         result.paymentDate = "valid"
     }
 
-    if (claim.evidenceOfPayment == null) {
+    if (claim.evidenceOfPayment.length == 0) {
         result.evidenceOfPayment = "missing"
     } else {
         result.evidenceOfPayment = "valid"
