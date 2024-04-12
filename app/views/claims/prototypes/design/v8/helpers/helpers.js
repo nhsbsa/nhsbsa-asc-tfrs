@@ -1,28 +1,56 @@
 function checkClaim(claim) {
-    let check = false
-    console.log(claim)
-    if (claim.type == "TU" &&
-        claim.learner != null &&
-        claim.startDate != null &&
-        claim.training != null &&
-        claim.costDate != null &&
-        claim.evidenceOfPayment.length >0 &&
-        claim.evidenceOfCompletion != null /*&& 
-        claim.completionDate != null*/
-    ) {
-        check = true
-    } else if (
-        claim.type == "CPD" &&
-        claim.learners.length > 0 &&
-        ((claim.startDate != null && claim.learners.every(learner => learner.evidence.evidenceOfCompletion != null)) || claim.categoryName != "Courses") &&
-        claim.claimAmount != null &&
-        claim.description != null &&
-        claim.evidenceOfPayment.length >0 &&
-        claim.costDate != null
-    ) {
-        check = true
+
+    const result = {};
+
+    if (claim.learner == null) {
+        result.learner = "missing"
+    } else {
+        result.learner = "valid"
     }
-    return check
+
+    if (claim.startDate == null) {
+        result.startDate = "missing"
+    } else {
+        result.startDate = "valid"
+    }
+
+    if (claim.costDate == null) {
+        result.paymentDate = "missing"
+    } else {
+        result.paymentDate = "valid"
+    }
+
+    if (claim.evidenceOfPayment.length == 0) {
+        result.evidenceOfPayment = "missing"
+    } else {
+        result.evidenceOfPayment = "valid"
+    }
+
+    if (claim.evidenceOfCompletion == null) {
+        result.evidenceOfCompletion = "missing"
+    } else {
+        result.evidenceOfCompletion = "valid"
+    }
+
+    if (claim.completionDate == null) {
+        result.completionDate = "missing"
+    } else {
+        result.completionDate = "valid"
+    }
+
+    result.claimValid = result.learner == "valid" && result.startDate == "valid" && result.paymentDate == "valid" && result.evidenceOfPayment == "valid" && result.evidenceOfCompletion == "valid" && result.completionDate == "valid";
+        
+    if (result.completionDate == "valid" && result.startDate == "valid") {
+        const startDate = new Date(claim.startDate)
+        const completionDate = new Date(claim.completionDate)
+        if (startDate.getTime() > completionDate.getTime()) {
+            result.startDate = "invalid"
+            result.completionDate = "invalid"
+            result.claimValid = false
+        }
+    }
+
+    return result
 }
 
 
@@ -138,10 +166,75 @@ function validateDate(day, month, year, type) {
     }
 
     // Determine overall validity
-    result.valid = result.date === 'valid' && result.day === 'valid' && result.month === 'valid' && result.year === 'valid';
+    result.dateValid = result.date === 'valid' && result.day === 'valid' && result.month === 'valid' && result.year === 'valid';
 
     return result;
 }
 
+function checkDuplicates(claim, claimList) {
+    let check = false
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate }
+    for (const c of claimList) {
+        if (c.training.code == claim.training.code && c.learner.id == claim.learner.id) {
+            check = true;
+            break;
+        }
+    }
+
+    return check
+
+}
+
+function isNIFormat(input) {
+    // Remove spaces from the input string
+    const cleanedInput = input.replace(/\s/g, '');
+
+    // Check if the cleaned input matches the specified format
+    const regex = /^[A-Za-z]{2}\d{6}[A-D]$/;
+    return regex.test(cleanedInput);
+}
+
+function checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle, roleType) {
+    const result = {};
+    console.log(nationalInsuranceNumber)
+
+    if (nationalInsuranceNumber == "" || nationalInsuranceNumber === undefined || nationalInsuranceNumber == null ) {
+        result.nationalInsuranceNumber = "missing"
+    } else if (!(isNIFormat(nationalInsuranceNumber))) {
+        result.nationalInsuranceNumber = "invalid"
+    } else {
+        result.nationalInsuranceNumber = "valid"
+    }
+
+    if (familyName == "" || familyName === undefined || familyName == null ) {
+        result.familyName = "missing"
+    } else {
+        result.familyName = "valid"
+    }
+
+    if (givenName == "" || givenName === undefined || givenName == null ) {
+        result.givenName = "missing"
+    } else {
+        result.givenName = "valid"
+    }
+
+    if (jobTitle == "" || jobTitle === undefined || jobTitle == null ) {
+        result.jobTitle = "missing"
+    } else {
+        result.jobTitle = "valid"
+    }
+
+    if (roleType == "" || roleType === undefined || roleType == null ) {
+        result.roleType = "missing"
+    } else {
+        result.roleType = "valid"
+    }
+
+    result.learnerValid = result.nationalInsuranceNumber == "valid" && result.familyName == "valid" && result.givenName == "valid" && result.jobTitle == "valid" && result.roleType == "valid"
+
+    return result
+
+}
+
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate, checkDuplicates, checkLearnerForm }

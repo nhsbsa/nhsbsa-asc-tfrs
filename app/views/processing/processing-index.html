@@ -1,89 +1,70 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  GOV.UK page template – {{ serviceName }} – GOV.UK Prototype Kit
+GOV.UK page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
-  <div class="govuk-breadcrumbs">
-    <ol class="govuk-breadcrumbs__list">
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/">Home</a>
-      </li>
-      <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="/processing/processing-index">Processing</a>
-      </li>
-    </ol>
-  </div>
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/">Home</a>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="/claims/claims-index">Processing</a>
+    </li>
+  </ol>
+</div>
 {% endblock %}
 
 {% block content %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <span class="govuk-caption-l">{{ serviceName }}</span>
     <h1 class="govuk-heading-l">
       Processing
     </h1>
-    <p class="govuk-body"> 
-      The part of the digital service that allows BSA staff to process claims submitted by employers.
+    <p class="govuk-body">
+      The part of the digital service that allows NHS BSA to process claims and register organisations.
     </p>
-    <p class="govuk-body-s">Current version: This will be the focus early beta.
-      <!--<strong class="govuk-tag govuk-tag--purple">
-        v0.1
-      </strong>-->
-    </p>
-    <!--<button class="govuk-button" data-module="govuk-button" href="processing/prototypes/design/v0.1">
-      View current prototype
-    </button>-->
-  </div>  
+
+  </div>
 </div>
 
-<!--
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <h2 class="govuk-heading-m govuk-!-padding-top-5">
-      Prototype History
-    </h2>
-    <hr class="govuk-!-margin-top-5 govuk-!-margin-bottom-5">
+  <div class="govuk-grid-column-one-half">
     <h2 class="govuk-heading-m">
-      Version 0.1
+      Design iterations
     </h2>
-    <details class="govuk-details" data-module="govuk-details">
-      <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-          Version Information
-        </span>
-      </summary>
-      <div class="govuk-details__text">
-        <h3 class="govuk-heading-s">
-          What we created
-        </h3>
-        <ul class="govuk-list govuk-list--bullet">
-          <li>apples</li>
-          <li>oranges</li>          
-        </ul>
-        <h3 class="govuk-heading-s">
-          What we plan to test
-        </h3>
-        <ul class="govuk-list govuk-list--bullet">
-          <li>apples</li>
-          <li>oranges</li>          
-        </ul>
-        <h3 class="govuk-heading-s">
-          What we learnt
-        </h3>
-        <ul class="govuk-list govuk-list--bullet">
-          <li>apples</li>
-          <li>oranges</li>      
-        </ul>
-      </div>
-    </details>
-    <p class="govuk-body"> 
-      <a href="processing/prototypes/design/v0.1">View v0.1 prototype</a>
+    <p class="govuk-body-s">Current design version:
+      <strong class="govuk-tag govuk-tag--purple">
+        v1
+      </strong>
     </p>
-    <hr class="govuk-!-margin-top-5 govuk-!-margin-bottom-5">
-  </div>  
+    <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="prototypes/design/v1/">
+      View current design prototype
+    </a>
+    <p class="govuk-body">
+      <a href="design-iterations">View previous design iterations</a>
+  </p>
+  </div>
+  <div class="govuk-grid-column-one-half">
+    <h2 class="govuk-heading-m">
+      DEV ready iterations
+    </h2>
+    <p class="govuk-body-s">Current design version:
+      <strong class="govuk-tag govuk-tag--purple">
+        v1
+      </strong>
+    </p>
+    <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="prototypes/dev/v1/">
+      View current DEV ready prototype
+    </a>
+    <p class="govuk-body">
+      <a href="dev-ready-iterations">View previous DEV ready iterations</a>
+  </p>
+  </div>
 </div>
--->
 
 {% endblock %}

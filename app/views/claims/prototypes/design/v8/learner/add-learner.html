@@ -12,16 +12,12 @@
 
 
 {% block beforeContent %}
-<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+<a href="../claim/select-learner?submitError" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    {% if data.inClaim == 'true' %}<span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>{% endif %}
-    <h1 class="govuk-heading-l">New learner details</h1>
-  </div>
-  <div class="govuk-grid-column-two-thirds">
     {% if data.existingLearner == 'true' %}
     <div class="govuk-error-summary" data-module="govuk-error-summary">
       <div role="alert">
@@ -62,26 +58,75 @@
       </div>
     </div>
     {% endif %}
+
+    {% if data.submitError.learnerValid != null and not data.submitError.learnerValid %}
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+          <h2 class="govuk-error-summary__title">
+              There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                  {{ data.submitError | learnerErrorMessage_V8 }}
+              </ul>
+          </div>
+      </div>
+  </div>
+    {% endif %}
+
+    {% if data.inClaim == 'true' %}<span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>{% endif %}
+    <h1 class="govuk-heading-l">New learner details</h1>
+  </div>
+  <div class="govuk-grid-column-two-thirds">
     <form action="../create-learner" method="post" novalidate>
-      <div class="govuk-form-group">
-        <label class="govuk-label govuk-label--s" for="full-name" aria-describedby="full-name-hint">
-          Full name
+      <div class="govuk-form-group {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
+        <label class="govuk-label govuk-label--s" for="familyName" aria-describedby="full-name-hint">
+          Family name
         </label>
         <div id="role-type-hint" class="govuk-hint">
-          Their full name as it would appear on a completion certificate.
+          Their family name as it would appear on a training certificate.
         </div>
-        <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false" autocomplete="name">
+        {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.familyName == 'missing' %}
+        <p id="familyName-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Enter a family name
+        </p>
+        {% endif %}
+        <input class="govuk-input {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.familyName == 'missing' %} govuk-input--error {% endif %}" id="familyName" name="familyName" type="text" spellcheck="false" autocomplete="name" value="{{ data.familyName | default ('') }}">
       </div>
-      <div class="govuk-form-group">
-        <label class="govuk-label govuk-label--s" for="national-insurance-number">
+      <div class="govuk-form-group {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.givenName == 'missing' %} govuk-form-group--error {% endif %}">
+        <label class="govuk-label govuk-label--s" for="givenName" aria-describedby="full-name-hint">
+          Given name
+        </label>
+        <div id="role-type-hint" class="govuk-hint">
+          Their given name as it would appear on a training certificate.
+        </div>
+        {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.givenName == 'missing' %}
+        <p id="givenName-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Enter a given name
+        </p>
+        {% endif %}
+        <input class="govuk-input {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.givenName == 'missing' %} govuk-input--error {% endif %}" id="givenName" name="givenName" type="text" spellcheck="false" autocomplete="name" value="{{ data.givenName | default ('') }}">
+      </div>
+      <div class="govuk-form-group {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and (data.submitError.nationalInsuranceNumber == 'missing' or data.submitError.nationalInsuranceNumber == 'invalid' ) %} govuk-form-group--error {% endif %}">
+        <label class="govuk-label govuk-label--s" for="nationalInsuranceNumber">
           National Insurance number
         </label>
-        <div id="national-insurance-number-hint" class="govuk-hint">
+        <div id="nationalInsuranceNumber-hint" class="govuk-hint">
           For example, ‘QQ 12 34 56 C’.
         </div>
-        <input class="govuk-input govuk-input--width-10 govuk-input--extra-letter-spacing"
-          id="national-insurance-number" name="nationalInsuranceNumber" type="text" spellcheck="false"
-          aria-describedby="national-insurance-number-hint">
+        {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.nationalInsuranceNumber == 'missing' %}
+        <p id="nationalInsuranceNumber-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Enter a national insurance number
+        </p>
+        {% elif data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.nationalInsuranceNumber == 'invalid' %}
+        <p id="nationalInsuranceNumber-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Enter a National Insurance number in the correct format
+        </p>
+
+        {% endif %}
+        <input class="govuk-input govuk-input--width-10 govuk-input--extra-letter-spacing {% if data.submitError.learnerValid != null and not data.submitError.learnerValid and (data.submitError.nationalInsuranceNumber == 'missing' or data.submitError.nationalInsuranceNumber == 'invalid' ) %} govuk-input--error {% endif %}"
+          id="nationalInsuranceNumber" name="nationalInsuranceNumber" type="text" spellcheck="false"
+          aria-describedby="nationalInsuranceNumber-hint" value="{{ data.nationalInsuranceNumber | default ('') }}">
         <details class="govuk-details govuk-!-padding-top-2">
           <summary class="govuk-details__summary">
             <span class="govuk-details__summary-text">
@@ -94,11 +139,16 @@
           </div>
         </details>
       </div>
-      <div class="govuk-form-group">
+      <div class="govuk-form-group {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.jobTitle == 'missing' %} govuk-form-group--error {% endif %}">
         <label class="govuk-label govuk-label--s" for="jobTitle">
           Job title
         </label>
-        <input class="govuk-input" id="jobTitle" name="jobTitle" type="text">
+        {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.jobTitle == 'missing' %}
+        <p id="jobTitle-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Enter a job title
+        </p>
+        {% endif %}
+        <input class="govuk-input {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.jobTitle == 'missing' %} govuk-input--error {% endif %}" id="jobTitle" name="jobTitle" type="text" value="{{ data.jobTitle | default ('') }}">
         <details class="govuk-details govuk-!-padding-top-2">
           <summary class="govuk-details__summary">
             <span class="govuk-details__summary-text">
@@ -110,7 +160,7 @@
           </div>
         </details>
       </div>
-      <div class="govuk-form-group">
+      <div class="govuk-form-group {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.roleType == 'missing' %} govuk-form-group--error {% endif %}">
         <fieldset class="govuk-fieldset" aria-describedby="role-type-hint">
           <label class="govuk-label govuk-label--s" for="jobTitle">
             Role group
@@ -118,6 +168,11 @@
           <div id="role-type-hint" class="govuk-hint">
             Select one option
           </div>
+          {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.roleType == 'missing' %}
+        <p id="roleType-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Select the role group the learner belongs to
+        </p>
+        {% endif %}
           <div class="govuk-radios" data-module="govuk-radios">
             {% set counter = 1 %}
             {% for role in data.roleTypes %}

@@ -1,0 +1,97 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{{ ["Verify details - ", (data.claimType | potName_V8)] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="../authentication/mfa-code" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Complete registration</span>
+        <h1 class="govuk-heading-l">Check the details we have for you are correct</h1>
+        <p class="govuk-body">Below is the information we have for your account.
+        </p>
+        <h2 class="govuk-heading-m" id="completion">Your details</h2>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Full name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Test particpant
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Email address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    test.particpant@carehome.com
+                </dd>
+            </div>
+        </dl>
+        <h2 class="govuk-heading-m" id="completion">Your organisation details</h2>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    123456
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Organisation name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    Fake care home
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Organisation address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    72 Guild Street<br>London<br>SE23 6FH
+                </dd>
+            </div>
+        </dl>
+        <form action="../verify-details-handler" method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Are all these details correct?
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmation" name="confirmation" type="radio"
+                                value="yes">
+                            <label class="govuk-label govuk-radios__label" for="confirmation">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmation-2" name="confirmation" type="radio"
+                                value="no">
+                            <label class="govuk-label govuk-radios__label" for="confirmation-2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

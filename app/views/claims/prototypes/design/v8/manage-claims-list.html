@@ -1,0 +1,60 @@
+{% extends "./layouts/claims-main.html" %}
+
+{% set status = data.statusID | statusDetails_V8(data.statuses) %}
+{% set noClaims = status.id | claimCount_V8(data.claims, data.claimType) %}
+
+{% block pageTitle %}
+{{ [status.name, " claims - ", (data.claimType | potName_V8)] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-breadcrumbs">
+    <ol class="govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item">
+            <a class="govuk-breadcrumbs__link" href="home">Home</a>
+        </li>
+        <li class="govuk-breadcrumbs__list-item">
+            <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=TU">Manage claims ({{ data.claimType |
+                potName_V8
+                }})</a>
+        </li>
+        <li class="govuk-breadcrumbs__list-item">
+            <a class="govuk-breadcrumbs__link" href="manage-claims?claimType=TU&statusID={{ status.id }}">{{ status.name
+                }} claims</a>
+        </li>
+    </ol>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">{{ data.claimType | potName_V8 }}</span>
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3">{{ status.name }} claims ({{ noClaims }})</h2>
+        <p class="govuk-body">{{status.description}}</p>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    {% if noClaims == 0 %}
+    <div class="govuk-grid-column-full">
+            <div class="govuk-warning-text">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-visually-hidden">Warning</span>
+                    There are not currently any {{ status.name | toLowerCase }} claims.
+                </strong>
+            </div>
+        </div>
+            {% else %}
+    <div class="moj-scrollable-pane">
+        <div class="govuk-grid-column-full">
+            {% include "./_components/claims-lists/TU-claim-list-item.html" %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+
+
+{% endblock %}

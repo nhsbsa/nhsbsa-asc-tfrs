@@ -13,6 +13,7 @@ require('../app/views/claims/prototypes/design/v5/filters/filters.js')
 require('../app/views/claims/prototypes/design/v6/filters/filters.js')
 require('../app/views/claims/prototypes/design/v7/filters/filters.js')
 require('../app/views/claims/prototypes/design/v8/filters/filters.js')
+require('../app/views/processing/prototypes/design/v1/filters/filters.js')
 
 addFilter('default', function (value, defaultValue) {
     if (value != null) {
