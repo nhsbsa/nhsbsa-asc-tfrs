@@ -43,7 +43,7 @@
                                 {{payment}}
                                 </dt>
                                 <dd class="govuk-summary-list__value">
-                                <a download href="/" class="govuk-link">invoice.png</a>, 2MB
+                                2MB
                                 </dd>
                                 <dd class="govuk-summary-list__actions">
                                   <form action="../remove-evidence" method="post" novalidate>
@@ -58,30 +58,30 @@
                         </div>
                     </div>
 
+                    <form action="add-evidence?type=payment&deleteSuccess&allDeleteSuccess" method="post" novalidate>
                     <div class="govuk-form-group">
-                    <fieldset class="govuk-fieldset">
-                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        Do you want to upload another piece of payment evidence?
-                        </legend>
-                        <div class="govuk-radios" data-module="govuk-radios">
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="another" name="another" type="radio" value="yes">
-                            <label class="govuk-label govuk-radios__label" for="another">
-                            Yes
-                            </label>
-                        </div>
-                        <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="another-2" name="another" type="radio" value="no">
-                            <label class="govuk-label govuk-radios__label" for="another-2">
-                            No
-                            </label>
-                        </div>
-                        </div>
-                    </fieldset>
+                      <fieldset class="govuk-fieldset">
+                          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                          Do you want to upload another piece of payment evidence?
+                          </legend>
+                          <div class="govuk-radios" data-module="govuk-radios">
+                          <div class="govuk-radios__item">
+                              <input class="govuk-radios__input" id="another" name="another" type="radio" value="yes">
+                              <label class="govuk-label govuk-radios__label" for="another">
+                              Yes
+                              </label>
+                          </div>
+                          <div class="govuk-radios__item">
+                              <input class="govuk-radios__input" id="another-2" name="another" type="radio" value="no">
+                              <label class="govuk-label govuk-radios__label" for="another-2">
+                              No
+                              </label>
+                          </div>
+                          </div>
+                      </fieldset>
                     </div>
 
-                    <form action="add-evidence?type=payment">
-                      <button class="govuk-button" data-module="govuk-button">
+                      <button class="govuk-button" data-module="govuk-button" type="submit">
                           Continue
                       </button>
                       </form>

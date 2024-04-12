@@ -273,6 +273,8 @@ router.post('/add-learner', function (req, res) {
 });
 
 router.post('/add-evidence', function (req, res) {
+  delete req.session.data.deleteSuccess
+  var radioButtonValue = req.session.data.another
   var type = req.session.data.type
   var claimID = req.session.data.id
   let i = 1
@@ -291,10 +293,10 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.type;
   delete req.session.data.learnerID;
   delete req.session.data.submitError
-  delete req.session.data.deleteSuccess
-  if (type == 'payment') {
+
+if (type == 'payment') {
   res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
-  } else if (type == 'completion') {
+  } else if (type == 'completion' || radioButtonValue == "no") {
     res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
   }
 })
