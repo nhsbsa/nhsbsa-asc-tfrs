@@ -28,12 +28,10 @@
                     <p class="govuk-body">
                     You need to upload a file containing the evidence of payment. This could be a PDF or image file.
                     </p>
-                  <div id="file-upload-1-hint" class="govuk-hint">
+                    <p class="govuk-body">
                     If you need to add an email as evidence, save the email as a PDF file and then upload that. You may upload up to 4 files.
-                  </div>
+                    </p>
               
-                    <div class="govuk-grid-row">
-                        <div class="govuk-grid-column-two-thirds">
                             <h2 class="govuk-heading-m" style="padding-top: 10px;">Files added</h2>
 
                             <dl class="govuk-summary-list">
@@ -54,9 +52,6 @@
                             {% endfor %}
 
                             </dl>
-                            
-                        </div>
-                    </div>
 
                     <form action="../radioButton?type=payment&deleteSuccess&allDeleteSuccess" method="post" novalidate>
                     <div class="govuk-form-group">
