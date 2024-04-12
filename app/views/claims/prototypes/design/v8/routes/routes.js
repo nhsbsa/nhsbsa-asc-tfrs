@@ -277,7 +277,6 @@ router.post('/add-evidence', function (req, res) {
   var radioButtonValue = req.session.data.another
   var type = req.session.data.type
   var claimID = req.session.data.id
-  let i = 1
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
@@ -297,6 +296,18 @@ router.post('/add-evidence', function (req, res) {
 if (type == 'payment') {
   res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
   } else if (type == 'completion' || radioButtonValue == "no") {
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
+  }
+})
+
+router.post('/radioButton', function (req, res) {
+  delete req.session.data.deleteSuccess
+  var type = req.session.data.type
+  var claimID = req.session.data.id
+
+  if (req.body.another == 'yes') {
+    res.redirect('claim/add-evidence' + '?id=' + claimID + '&type=' + type)
+  } else {
     res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
   }
 })
