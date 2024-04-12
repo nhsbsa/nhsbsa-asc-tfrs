@@ -93,7 +93,8 @@ function generateTUClaims(quantity, version) {
       submittedDate = faker.date.between({ from: startDate, to: new Date() });
       let randomNumber = Math.floor(Math.random() * 4) + 1;
       for (let i = 0; i < randomNumber; i++) {
-        evidenceOfPayment.push("invoice.pdf")
+        let string = "invoice00" + i.toString() + ".pdf";
+        evidenceOfPayment.push(string);
       }
       evidenceOfCompletion = 'certficate' + '00' + i.toString() + '.pdf';
       completionDate = faker.date.between({ from: startDate, to: submittedDate });
