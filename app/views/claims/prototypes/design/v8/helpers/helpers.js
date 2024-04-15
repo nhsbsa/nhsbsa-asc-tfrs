@@ -171,17 +171,20 @@ function validateDate(day, month, year, type) {
     return result;
 }
 
-function checkDuplicates(claim, claimList) {
-    let check = false
+function checkDuplicateClaim(learnerID, trainingID, claimList) {
+    let result = {}
+    result.check = false
+    result.id = ''
 
     for (const c of claimList) {
-        if (c.training.code == claim.training.code && c.learner.id == claim.learner.id) {
-            check = true;
+        if (c.training.code == trainingID && c.learner.id == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
+            result.check = true;
+            result.id = c.claimID
             break;
         }
     }
 
-    return check
+    return result
 
 }
 
@@ -237,4 +240,4 @@ function checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTit
 }
 
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate, checkDuplicates, checkLearnerForm }
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate, checkDuplicateClaim, checkLearnerForm }

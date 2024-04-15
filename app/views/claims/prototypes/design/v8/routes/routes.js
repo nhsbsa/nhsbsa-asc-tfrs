@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../../../../../../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicates, checkLearnerForm } = require('../helpers/helpers.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm } = require('../helpers/helpers.js');
 
 // v8 Prototype routes
 
@@ -11,7 +11,7 @@ router.post('/account-handler', function (req, res) {
   const journey = req.session.data.journey
 
   if (accountAnswer == "yes") {
-    if ( journey == 'creation') {
+    if (journey == 'creation') {
       res.redirect('authentication/creation-link')
     } else {
       res.redirect('authentication/sign-in')
@@ -28,7 +28,7 @@ router.post('/verify-details-handler', function (req, res) {
   const confirmationAnswer = req.session.data.confirmation
 
   if (confirmationAnswer == "yes") {
-      res.redirect('account-setup/job-title')
+    res.redirect('account-setup/job-title')
   } else if (confirmationAnswer == "no") {
     res.redirect('account-setup/account-issue')
   } else {
@@ -288,20 +288,22 @@ router.post('/add-learner', function (req, res) {
     }
   }
 
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      c.learner = learner
-
-      break;
-    }
-  }
-
   delete req.session.data.existingLearner
   delete req.session.data.learnerInput;
   delete req.session.data.learnerSelection;
   delete req.session.data.submitError
 
-  res.redirect('claim/claim-details' + '?id=' + claimID + '#learner')
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      duplicateCheck = checkDuplicateClaim(learner.id,c.training.code, req.session.data.claims);
+        if (duplicateCheck.check) {
+          res.redirect('claim/duplication?dupeID=' + duplicateCheck.id)
+        } else {
+          c.learner = learner
+          res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        }
+    }
+  }
 });
 
 router.post('/add-evidence', function (req, res) {
@@ -372,13 +374,8 @@ router.post('/ready-to-declare', function (req, res) {
   const submitError = checkClaim(claim)
 
   if (submitError.claimValid) {
-    if (checkDuplicates(claim, req.session.data.claims)) {
-      delete req.session.data.submitError
-      res.redirect('claim/duplication')
-    } else {
-      delete req.session.data.submitError
+    delete req.session.data.submitError
     res.redirect('claim/declaration')
-    }
   } else {
     req.session.data.submitError = submitError
     res.redirect('claim/claim-details' + '?id=' + claimID)
@@ -452,13 +449,13 @@ router.post('/create-learner', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
   const jobTitle = req.session.data.jobTitle
-  const roleType =  req.session.data.roleType
+  const roleType = req.session.data.roleType
 
-  const submitError = checkLearnerForm(nationalInsuranceNumber,familyName, givenName, jobTitle, roleType)
+  const submitError = checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle, roleType)
 
   if (submitError.learnerValid) {
     if (req.session.data.inClaim == 'true' && !compareNINumbers(req.session.data.nationalInsuranceNumber, req.session.data.learners)) {
-      
+
       const learner = {
         id: nationalInsuranceNumber,
         fullName: givenName + familyName,
@@ -466,7 +463,7 @@ router.post('/create-learner', function (req, res) {
         roleType: roleType,
       };
       req.session.data.learners.push(learner)
-  
+
       for (const c of req.session.data.claims) {
         if (claimID == c.claimID) {
           c.learner = learner
@@ -492,7 +489,7 @@ router.post('/create-learner', function (req, res) {
     res.redirect('learner/add-learner?inClaim=' + req.session.data.inClaim)
   }
 
-  
+
 
 });
 
