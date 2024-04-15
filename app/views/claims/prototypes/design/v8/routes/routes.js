@@ -453,9 +453,10 @@ router.post('/create-learner', function (req, res) {
 
   const submitError = checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle, roleType)
 
-  if (submitError.learnerValid) {
-    if (req.session.data.inClaim == 'true' && !compareNINumbers(req.session.data.nationalInsuranceNumber, req.session.data.learners)) {
+  const dupeLearner = compareNINumbers(req.session.data.nationalInsuranceNumber, req.session.data.learners)
 
+  if (submitError.learnerValid) {
+    if (req.session.data.inClaim == 'true' && !dupeLearner.check) {
       const learner = {
         id: nationalInsuranceNumber,
         fullName: givenName + familyName,
@@ -481,7 +482,8 @@ router.post('/create-learner', function (req, res) {
       delete req.session.data.learnerInput
       res.redirect('claim/claim-details' + '?id=' + claimID)
     } else {
-      res.redirect('learner/add-learner?inClaim=' + req.session.data.inClaim + '&existingLearner=true')
+      req.session.data.learnerMatch = dupeLearner.learner
+      res.redirect('learner/duplication')
     }
 
   } else {

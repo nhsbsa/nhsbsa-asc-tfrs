@@ -68,14 +68,18 @@ function removeSpacesAndLowerCase(input) {
 }
 
 function compareNINumbers(ni_1, learners) {
-    let check = false
+    let result = {}
+    result.check = false
+    result.learner = {}
+
     for (const l of learners) {
         if (removeSpacesAndLowerCase(ni_1) == removeSpacesAndLowerCase(l.id)) {
-            check = true
+            result.check = true
+            result.learner = l
             break;
         }
     }
-    return check
+    return result
 }
 
 function sortByCreatedDate(array) {
