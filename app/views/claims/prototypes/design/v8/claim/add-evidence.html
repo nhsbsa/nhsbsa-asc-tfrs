@@ -35,12 +35,22 @@
                     You may upload up to 4 files.
                     {% endif %}
                   </p>
-              
-                  <div class="govuk-form-group">
+
+                  <div class="govuk-form-group {% if data.errorFileTooBig or date.errorWrongFileFormat %} govuk-form-group--error {% endif %}">
                     <label class="govuk-label" for="evidenceFile">
-                        Upload a file
+                      Upload a file
                     </label>
-                    <input class="govuk-file-upload" id="evidenceFile" name="evidenceFile" type="file">
+                    {% if data.errorFileTooBig %}
+                      <p id="file-upload-1-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> The CSV must be smaller than 2MB
+                      </p>
+                    {% endif %}
+                    {% if data.errorWrongFileFormat %}
+                      <p id="file-upload-1-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> The selected file must be a JPG, BMP, PNG, TIF or PDF
+                      </p>
+                    {% endif %}
+                    <input class="govuk-file-upload {% if data.errorFileTooBig or date.errorWrongFileFormat %} govuk-file-upload--error {% endif %}" id="evidenceFile" name="evidenceFile" type="file" aria-describedby="evidenceFile-error">
                   </div>
                   <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
               

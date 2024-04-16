@@ -31,27 +31,35 @@
                     <p class="govuk-body">
                     If you need to add an email as evidence, save the email as a PDF file and then upload that. You may upload up to 4 files.
                     </p>
-              
-                            <h2 class="govuk-heading-m" style="padding-top: 10px;">Files added</h2>
 
-                            <dl class="govuk-summary-list">
-                              {% for payment in claim.evidenceOfPayment %}
-                            <div class="govuk-summary-list__row">
-                                <dt class="govuk-summary-list__key">
-                                {{payment}}
-                                </dt>
-                                <dd class="govuk-summary-list__value">
-                                2MB
-                                </dd>
-                                <dd class="govuk-summary-list__actions">
-                                  <form action="../remove-evidence" method="post" novalidate>
-                                    <button class="unstyle-button">Delete</button>
-                                  </form>
-                                </dd>
-                            </div>
-                            {% endfor %}
+                    <p class="govuk-body">{{claim.evidenceOfPayment.length}} of 4 files uploaded.</p>
 
-                            </dl>
+                    <h2 class="govuk-heading-m" style="padding-top: 10px;">Files added</h2>
+
+                    {% if data.deleteError %}
+                    <p class="govuk-error-message">
+                      <span class="govuk-visually-hidden">Gwall:</span> Error deleting file, please try again
+                    </p>
+                    {% endif %}
+
+                    <dl class="govuk-summary-list">
+                        {% for payment in claim.evidenceOfPayment %}
+                        <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key">
+                            {{payment}}
+                          </dt>
+                          <dd class="govuk-summary-list__value">
+                            2MB
+                          </dd>
+                          <dd class="govuk-summary-list__actions">
+                            <form action="../remove-evidence" method="post" novalidate>
+                              <button class="unstyle-button">Delete</button>
+                            </form>
+                          </dd>
+                        </div>
+                        {% endfor %}
+
+                     </dl>
 
                     <form action="../radioButton?type=payment&deleteSuccess&allDeleteSuccess" method="post" novalidate>
                     <div class="govuk-form-group">
@@ -59,6 +67,12 @@
                           <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                           Do you want to upload another piece of payment evidence?
                           </legend>
+
+                                {% if data.maxUploadReached %}
+                                <p class="govuk-error-message">
+                                  <span class="govuk-visually-hidden">Gwall:</span> Max file upload reached. If you want to upload another file, please first delete one of your uploads.
+                                </p>
+                                {% endif %}
                           <div class="govuk-radios" data-module="govuk-radios">
                           <div class="govuk-radios__item">
                               <input class="govuk-radios__input" id="another" name="another" type="radio" value="yes">
