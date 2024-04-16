@@ -482,3 +482,21 @@ addFilter('learnerErrorMessage_V8', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true })
 
+addFilter('learnerMatch_V8', function (newField, matchField, type) {
+    let result = ''
+
+    if (newField != matchField) {
+        if (type == "new") {
+            result = "<mark class='hods-highlight'><strong>" + newField + "</strong></mark>"
+        } else if(type=="match") {
+            result = "<mark class='hods-highlight'><strong>" + matchField + "</strong></mark>"
+        }
+    } else {
+        result = newField
+    }
+
+
+    return result
+}, { renderAsHtml: true })
+
+

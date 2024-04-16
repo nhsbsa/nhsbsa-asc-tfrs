@@ -10,19 +10,19 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-        <h1 class="govuk-heading-l">A learner with national insurance number already exists</h1>
+        <h1 class="govuk-heading-l">A learner already exists</h1>
         <p class="govuk-body">You have tried to add a learner that already exists with a national insurance number that
             already exists in the system. Below is the existing learner record and the new learner record you are trying
             to add. Differences are <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
     </div>
     <div class="govuk-grid-column-one-half">
-        <dl class="govuk-summary-list">∏
+        <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Family name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    Philips
+                    {{ data.familyName }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -30,7 +30,7 @@
                     Given name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    Sandra
+                    {{ data.givenName }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -38,23 +38,54 @@
                     National insurance number
                 </dt>
                 <dd class="govuk-summary-list__value">
-
+                    {{ data.nationalInsuranceNumber }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Contact details
+                    Job title
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    <p class="govuk-body">07700 900457</p>
-                    <p class="govuk-body">sarah.phillips@example.com</p>
+                    {{ data.jobTitle }}
                 </dd>
             </div>
         </dl>
     </div>
     <div class="govuk-grid-column-one-half">
-
-
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Family name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.learnerMatch.fullName }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Given name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.learnerMatch.fullName }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    National insurance number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.learnerMatch.nationalInsuranceNumber }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Job title
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.learnerMatch.jobTitle }}
+                </dd>
+            </div>
+        </dl>
     </div>
     <div class="govuk-grid-column-two-thirds">
         <p class="govuk-body">It is currently not possible to update learner records. If this is an issue get in touch
