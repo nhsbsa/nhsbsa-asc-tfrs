@@ -112,14 +112,16 @@ function generateUniqueID() {
     return id;
 }
 
-function isValidISODate(dateString) {
-    // Create a new Date object from the given date string
-    const date = new Date(dateString);
-    
-    // Check if the date object is valid
-    // The date is considered valid if it's not 'Invalid Date'
-    // and the input date string matches the parsed date
-    return !isNaN(date.getTime()) && dateString === date.toISOString().slice(0, 10);
+
+function isValidDate(day, month, year) {
+    // Month is 0-indexed in JavaScript Date object, so we need to subtract 1 from the month
+
+    const date = new Date(year, month - 1, day);
+    return (
+        date.getFullYear() === Number(year) &&
+        date.getMonth() === Number(month) - 1 &&
+        date.getDate() === Number(day)
+    );
 }
 
 function validateDate(day, month, year, type) {
@@ -161,10 +163,10 @@ function validateDate(day, month, year, type) {
         result.date = 'allMissing';
     } else if (result.day == 'missing' || result.month == 'missing' || result.year == 'missing') {
         result.date = 'partMissing';
-    } else if (isValidISODate(date) && !((checkDate.getTime() < policyDate.getTime()) && (type=="start" || type=="payment"))) {
-        result.date = 'valid';
     } else if ((checkDate.getTime() < policyDate.getTime()) && (type=="start" || type=="payment")) {
         result.date = 'invalidPolicy'
+    } else if (isValidDate(day, month, year)) {
+        result.date = 'valid';
     } else {
         result.date = 'invalid';
     }
@@ -244,4 +246,4 @@ function checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTit
 }
 
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, isValidISODate, validateDate, checkDuplicateClaim, checkLearnerForm }
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm }

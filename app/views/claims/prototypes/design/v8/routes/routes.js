@@ -148,27 +148,22 @@ router.post('/add-start-date', function (req, res) {
   const month = req.session.data['activity-date-started-month']
   const year = req.session.data['activity-date-started-year']
   const claimID = req.session.data.id
-  const startDate = new Date(year + "-" + month + "-" + day + "T00:00:00.000Z")
+  const startDate = new Date(year,month-1,day)
 
   delete req.session.data.submitError
 
   const error = validateDate(day, month, year, "start");
-
+  console.log(startDate)
   if (error.dateValid == true) {
     delete req.session.data['activity-date-started-day'];
     delete req.session.data['activity-date-started-month'];
     delete req.session.data['activity-date-started-year'];
-
-    if (startDate.getTime() < april10th2024.getTime()) {
-      res.redirect('claim/invalid-date')
-    } else {
-      for (const c of req.session.data.claims) {
-        if (claimID == c.claimID) {
-          c.startDate = startDate
-        }
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+        c.startDate = startDate
       }
-      res.redirect('claim/claim-details' + '?id=' + claimID + '#training')
     }
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#training')
 
 
   } else {
@@ -219,7 +214,7 @@ router.post('/cost-date', function (req, res) {
   const month = req.session.data['payment-date-started-month']
   const year = req.session.data['payment-date-started-year']
   const claimID = req.session.data.id
-  const costDate = new Date(year + "-" + month + "-" + day + "T00:00:00.000Z")
+  const costDate = new Date(year,month-1,day)
 
   delete req.session.data.submitError
 
@@ -251,7 +246,7 @@ router.post('/completion-date', function (req, res) {
   const month = req.session.data['completion-date-started-month']
   const year = req.session.data['completion-date-started-year']
   const claimID = req.session.data.id
-  const completionDate = new Date(year + "-" + month + "-" + day + "T00:00:00.000Z")
+  const completionDate = new Date(year,month-1,day)
 
   delete req.session.data.submitError
 
@@ -295,13 +290,13 @@ router.post('/add-learner', function (req, res) {
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
-      duplicateCheck = checkDuplicateClaim(learner.id,c.training.code, req.session.data.claims);
-        if (duplicateCheck.check) {
-          res.redirect('claim/duplication?dupeID=' + duplicateCheck.id)
-        } else {
-          c.learner = learner
-          res.redirect('claim/claim-details?id=' + claimID + '#learner')
-        }
+      duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims);
+      if (duplicateCheck.check) {
+        res.redirect('claim/duplication?dupeID=' + duplicateCheck.id)
+      } else {
+        c.learner = learner
+        res.redirect('claim/claim-details?id=' + claimID + '#learner')
+      }
     }
   }
 });
