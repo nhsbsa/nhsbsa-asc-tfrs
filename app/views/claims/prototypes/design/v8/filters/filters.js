@@ -114,55 +114,6 @@ addFilter('removeSpacesAndLowerCase_V8', function (inputString) {
 
 })
 
-addFilter('claimMatch_V8', function (claim, search, claimType) {
-    let check = false;
-
-    const formattedSearch = removeSpacesAndLowerCase(search);
-
-    if (claim.type == claimType) {
-        if (claim.claimID != null) {
-            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
-            if (formattedClaimID.includes(formattedSearch)) {
-                check = true
-            }
-        }
-
-        if (claim.training != null) {
-            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
-            if (formattedActivity.includes(formattedSearch)) {
-                check = true
-            }
-        }
-        if (claim.learner != null) {
-            const formattedName = removeSpacesAndLowerCase(claim.learner.fullName);
-            if (formattedName.includes(formattedSearch)) {
-                check = true
-            }
-        }
-    } else if (claim.type == claimType) {
-        if (claim.claimID != null) {
-            const formattedClaimID = removeSpacesAndLowerCase(claim.ClaimID);
-            if (formattedClaimID.includes(formattedSearch)) {
-                check = true
-            }
-        }
-
-        if (claim.categoryName != null) {
-            const formattedActivity = removeSpacesAndLowerCase(claim.categoryName);
-            if (formattedActivity.includes(formattedSearch)) {
-                check = true
-            }
-        }
-        if (claim.learner != null) {
-            const formattedName = removeSpacesAndLowerCase(claim.learner.fullName);
-            if (formattedName.includes(formattedSearch)) {
-                check = true
-            }
-        }
-    }
-
-    return check;
-})
 
 addFilter('potName_V8', function (type) {
     let name = "Pot Naming Error"
@@ -481,4 +432,42 @@ addFilter('learnerErrorMessage_V8', function (submitError) {
 
     return errorSummaryStr
 }, { renderAsHtml: true })
+
+addFilter('learnerMatch_V8', function (newField, matchField, type) {
+    let result = ''
+
+    if (newField != matchField) {
+        if (type == "new") {
+            result = "<mark class='hods-highlight'><strong>" + newField + "</strong></mark>"
+        } else if (type == "match") {
+            result = "<mark class='hods-highlight'><strong>" + matchField + "</strong></mark>"
+        }
+    } else {
+        result = newField
+    }
+
+
+    return result
+}, { renderAsHtml: true })
+
+addFilter('learnerSearch', function (search, learner) {
+    let match = false
+    const formattedgivenName = removeSpacesAndLowerCase(learner.givenName);
+    const formattedfamilyName = removeSpacesAndLowerCase(learner.familyName);
+    const formattedfullName = formattedgivenName + formattedfamilyName;
+    const formattedSearch = removeSpacesAndLowerCase(search);
+    const formattedID = removeSpacesAndLowerCase(learner.id);
+
+    if (formattedgivenName.includes(formattedSearch) || formattedfamilyName.includes(formattedSearch) || formattedfullName.includes(formattedSearch) || formattedID.includes(formattedSearch)) {
+        console.log(formattedgivenName)
+    console.log(formattedfamilyName)
+    console.log(formattedfullName)
+    console.log(formattedSearch)
+    console.log(formattedID)
+        match = true
+    }
+
+    return match
+})
+
 

@@ -60,7 +60,7 @@
                     <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
               
                     <p class="govuk-body">
-                    You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.fullName }}{% endif %}. This could be a PDF or image file.
+                    You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.givenName }} {{ claim.learner.familyName }}{% endif %}. This could be a PDF or image file.
                     </p>
                   <p class="govuk-body">
                     If you need to add an email as evidence, save the email as a PDF file and then upload that. 
