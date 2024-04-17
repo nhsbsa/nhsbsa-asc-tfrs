@@ -2,25 +2,25 @@
     {
         "id": "not-yet-submitted",
         "name": "Not yet submitted",
-        "description": "Claims that have not yet been submitted. These claims may still need information adding to the claim before they can be submitted.",
+        "description": "Claims that have not yet been submitted. They may still need information adding.",
         "distribution": 0.25
     },
     {
         "id": "submitted",
         "name": "Submitted",
-        "description": "Claims that have been submitted. These claims are now with NHS Business Services Authority for processing.",
+        "description": "Claims that have been submitted for processing.",
         "distribution": 0.40
     },
     {
         "id": "rejected",
         "name": "Rejected",
-        "description": "Claims that have been rejected by NHS Business Services Authority.",
+        "description": "Claims that have been rejected.",
         "distribution": 0.05
     },
     {
         "id": "approved",
         "name": "Approved",
-        "description": "Claims that have been approved by NHS Business Services Authority.",
+        "description": "Claims that have been approved for payment.",
         "distribution": 0.30
     }
 ]
