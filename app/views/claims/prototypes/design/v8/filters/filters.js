@@ -439,7 +439,7 @@ addFilter('learnerMatch_V8', function (newField, matchField, type) {
     if (newField != matchField) {
         if (type == "new") {
             result = "<mark class='hods-highlight'><strong>" + newField + "</strong></mark>"
-        } else if(type=="match") {
+        } else if (type == "match") {
             result = "<mark class='hods-highlight'><strong>" + matchField + "</strong></mark>"
         }
     } else {
@@ -449,5 +449,18 @@ addFilter('learnerMatch_V8', function (newField, matchField, type) {
 
     return result
 }, { renderAsHtml: true })
+
+addFilter('learnerSearch', function (search, learner) {
+    const formattedgivenName = removeSpacesAndLowerCase(learner.givenName);
+    const formattedfamilyName = removeSpacesAndLowerCase(learner.familyName);
+    const formattedfullName = formattedgivenName + formattedfamilyName;
+    const formattedSearch = removeSpacesAndLowerCase(search);
+    const formattedID = removeSpacesAndLowerCase(learner.id);
+
+    return formattedgivenName.includes(formattedSearch) ||
+        formattedfamilyName.includes(formattedSearch) ||
+        formattedfullName.includes(formattedSearch) ||
+        formattedID.includes(formattedSearch)
+})
 
 

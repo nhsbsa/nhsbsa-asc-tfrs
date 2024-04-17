@@ -24,7 +24,7 @@
                 {% if claim.startDate %} {{ claim.startDate | govukDate("truncate") }} {% else %} Not yet added {% endif %}
             </td>
             <td class="govuk-table__cell" data-sort-value="{{ claim.learner.givenName }} {{ claim.learner.familyName }}">
-                {{claim.learner.fullName | default("Not yet added")}}
+                {% if claim.learner %} {{ claim.learner.givenName }} {{ claim.learner.familyName }} {% else %} Not yet added {% endif %}
             </td>
             {% if status.id == 'not-yet-submitted' %}
             <td class="govuk-table__cell" data-sort-value="{{ claim.createdDate }}">{{ claim.createdDate |

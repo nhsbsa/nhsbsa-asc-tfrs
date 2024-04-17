@@ -25,7 +25,7 @@
                     Family name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.familyName | learnerMatch_V8(data.learnerMatch.fullName, "new") }}
+                    {{ data.familyName | learnerMatch_V8(data.learnerMatch.familyName, "new") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -33,7 +33,7 @@
                     Given name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.givenName | learnerMatch_V8(data.learnerMatch.fullName, "new") }}
+                    {{ data.givenName | learnerMatch_V8(data.learnerMatch.givenName, "new") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -62,7 +62,7 @@
                     Family name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.familyName | learnerMatch_V8(data.learnerMatch.fullName, "match") }}
+                    {{ data.familyName | learnerMatch_V8(data.learnerMatch.familyName, "match") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -70,7 +70,7 @@
                     Given name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.givenName | learnerMatch_V8(data.learnerMatch.fullName, "match") }}
+                    {{ data.givenName | learnerMatch_V8(data.learnerMatch.givenName, "match") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
