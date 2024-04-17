@@ -1,36 +1,73 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim_V8(data.claims) %}
+{% set evidenceCount = claim.evidenceOfPayment | coursesCount_V7 %}
 
 {% block pageTitle %}
 {{ ["Add evidence - Claim: ", claim.claimID] | join }}
 {% endblock %}
 
 {% block content %}
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="../add-evidence" method="post" novalidate>
-            <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-            <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
-            <p class="govuk-body">
-                You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.fullName }}{% endif %}. This could be a PDF or image file.
-            </p>
-            <p class="govuk-body">
-                If you need to add an email as evidence, save the email as a PDF file and then upload that.
-            </p>
-            <div class="govuk-form-group">
-                <label class="govuk-label" for="evidenceFile">
-                    Upload a file
-                </label>
-                <input class="govuk-file-upload" id="evidenceFile" name="evidenceFile" type="file">
-            </div>
-            <div class="govuk-button-group">
-                <button type="submit" class="govuk-button" data-module="govuk-button">
-                    Add to claim
-                </button>
-                <a class="govuk-link govuk-link--no-visited-state"
-                    href="../cancel-handler">Cancel</a>
-            </div>
-        </form>
+
+        {% if data.allDeleteSuccess %}
+        <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+              <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+            </svg>
+          
+            <div class="moj-banner__message">File named invoice.png has been deleted</div>
+          
+          </div>
+        {% endif %}
+
+                    <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+                    <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
+              
+                    <p class="govuk-body">
+                    You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.fullName }}{% endif %}. This could be a PDF or image file.
+                    </p>
+                  <p class="govuk-body">
+                    If you need to add an email as evidence, save the email as a PDF file and then upload that. 
+                    {% if data.type == "payment"%}
+                    You may upload up to 4 files.
+                    {% endif %}
+                  </p>
+              
+                  <div class="govuk-form-group">
+                    <label class="govuk-label" for="evidenceFile">
+                        Upload a file
+                    </label>
+                    <input class="govuk-file-upload" id="evidenceFile" name="evidenceFile" type="file">
+                  </div>
+                  <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
+              
+                  {% if data.type == "payment"%}
+                  <form action="../add-evidence?type=payment" method="post" novalidate>
+                    <div class="govuk-button-group">
+                        <button type="submit" class="govuk-button" data-module="govuk-button">
+                          Continue
+                        </button>
+                        <a class="govuk-link govuk-link--no-visited-state"
+                          href="../cancel-handler">Cancel</a>
+                    </div>
+                </form>
+                {% else %}
+                <form action="../add-evidence?type=completion" method="post" novalidate>
+                    <div class="govuk-button-group">
+                        <button type="submit" class="govuk-button" data-module="govuk-button">
+                          Add to claim
+                        </button>
+                        <a class="govuk-link govuk-link--no-visited-state"
+                          href="../cancel-handler">Cancel</a>
+                    </div>
+                </form>
+                {% endif %}
+
+                
+
     </div>
     <div class="govuk-grid-column-one-third">
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
