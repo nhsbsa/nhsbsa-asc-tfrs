@@ -477,6 +477,9 @@ router.get('/cancel-handler', function (req, res) {
   delete req.session.data['submitError'];
   delete req.session.data['deleteSuccess'];
   delete req.session.data['allDeleteSuccess'];
+  delete req.session.data['errorWrongFileFormat'];
+  delete req.session.data['errorFileTooBig'];
+  delete req.session.data['deleteError'];
 
   res.redirect('claim/claim-details' + '?id=' + claimID)
 
