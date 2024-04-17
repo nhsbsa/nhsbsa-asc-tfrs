@@ -451,16 +451,23 @@ addFilter('learnerMatch_V8', function (newField, matchField, type) {
 }, { renderAsHtml: true })
 
 addFilter('learnerSearch', function (search, learner) {
+    let match = false
     const formattedgivenName = removeSpacesAndLowerCase(learner.givenName);
     const formattedfamilyName = removeSpacesAndLowerCase(learner.familyName);
     const formattedfullName = formattedgivenName + formattedfamilyName;
     const formattedSearch = removeSpacesAndLowerCase(search);
     const formattedID = removeSpacesAndLowerCase(learner.id);
 
-    return formattedgivenName.includes(formattedSearch) ||
-        formattedfamilyName.includes(formattedSearch) ||
-        formattedfullName.includes(formattedSearch) ||
-        formattedID.includes(formattedSearch)
+    if (formattedgivenName.includes(formattedSearch) || formattedfamilyName.includes(formattedSearch) || formattedfullName.includes(formattedSearch) || formattedID.includes(formattedSearch)) {
+        console.log(formattedgivenName)
+    console.log(formattedfamilyName)
+    console.log(formattedfullName)
+    console.log(formattedSearch)
+    console.log(formattedID)
+        match = true
+    }
+
+    return match
 })
 
 
