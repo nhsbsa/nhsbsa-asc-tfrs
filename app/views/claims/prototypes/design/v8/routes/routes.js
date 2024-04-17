@@ -287,6 +287,12 @@ router.post('/add-learner', function (req, res) {
   delete req.session.data.learnerSelection;
   delete req.session.data.submitError
 
+  delete req.session.data.inClaim
+  delete req.session.data.familyName
+  delete req.session.data.givenName
+  delete req.session.data.jobTitle
+  delete req.session.data.nationalInsuranceNumber
+
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims);
@@ -489,9 +495,8 @@ router.post('/create-learner', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
   const jobTitle = req.session.data.jobTitle
-  const roleType = req.session.data.roleType
 
-  const submitError = checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle, roleType)
+  const submitError = checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle)
 
   const dupeLearner = compareNINumbers(req.session.data.nationalInsuranceNumber, req.session.data.learners)
 
@@ -502,7 +507,6 @@ router.post('/create-learner', function (req, res) {
         familyName: familyName,
         givenName: givenName,
         jobTitle: jobTitle,
-        roleType: roleType,
       };
       req.session.data.learners.push(learner)
 
@@ -517,9 +521,6 @@ router.post('/create-learner', function (req, res) {
       delete req.session.data.givenName
       delete req.session.data.jobTitle
       delete req.session.data.nationalInsuranceNumber
-      delete req.session.data.regOrg
-      delete req.session.data.regID
-      delete req.session.data.roleType
       delete req.session.data.learnerInput
       res.redirect('claim/claim-details' + '?id=' + claimID)
     } else {

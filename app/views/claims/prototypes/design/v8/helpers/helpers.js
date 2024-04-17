@@ -203,13 +203,13 @@ function isNIFormat(input) {
     return regex.test(cleanedInput);
 }
 
-function checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle, roleType) {
+function checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle) {
     const result = {};
 
     if (nationalInsuranceNumber == "" || nationalInsuranceNumber === undefined || nationalInsuranceNumber == null ) {
         result.nationalInsuranceNumber = "missing"
-    //} else if (!(isNIFormat(nationalInsuranceNumber))) {
-    //     result.nationalInsuranceNumber = "invalid"
+    } else if (!(isNIFormat(nationalInsuranceNumber))) {
+    result.nationalInsuranceNumber = "invalid"
     } else {
         result.nationalInsuranceNumber = "valid"
     }
@@ -232,13 +232,7 @@ function checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTit
         result.jobTitle = "valid"
     }
 
-    if (roleType == "" || roleType === undefined || roleType == null ) {
-        result.roleType = "missing"
-    } else {
-        result.roleType = "valid"
-    }
-
-    result.learnerValid = result.nationalInsuranceNumber == "valid" && result.familyName == "valid" && result.givenName == "valid" && result.jobTitle == "valid" && result.roleType == "valid"
+    result.learnerValid = result.nationalInsuranceNumber == "valid" && result.familyName == "valid" && result.givenName == "valid" && result.jobTitle == "valid"
 
     return result
 

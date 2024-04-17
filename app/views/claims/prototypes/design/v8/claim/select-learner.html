@@ -64,10 +64,6 @@
                     <th scope="col" class="govuk-table__header">National Insurance number</th>
                     <th scope="col" class="govuk-table__header">Full name</th>
                     <th scope="col" class="govuk-table__header">Job title</th>
-                    <th scope="col" class="govuk-table__header">Role</th>
-                    {% if data.claimType == "CPD" %}
-                    <th scope="col" class="govuk-table__header govuk-table__header--numeric">Budget remaining</th>
-                    {% endif %}
                     <th scope="col" class="govuk-table__header"></th>
                 </tr>
             </thead>
@@ -78,7 +74,6 @@
                     <th scope="row" class="govuk-table__header">{{ learner.id }}</th>
                     <td class="govuk-table__cell">{{ learner.givenName }} {{ learner.familyName }}</td>
                     <td class="govuk-table__cell">{{ learner.jobTitle }}</td>
-                    <td class="govuk-table__cell">{{ learner.roleType }}</td>
                     <td class="govuk-table__cell">
                         <form method="post" action="../add-learner" class="govuk-!-margin-0">
                             <input type="hidden" name="learnerSelection" value="{{ learner.id }}">

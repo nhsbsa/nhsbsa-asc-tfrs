@@ -425,9 +425,6 @@ addFilter('learnerErrorMessage_V8', function (submitError) {
     if (submitError.jobTitle == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#jobTitle-error">Enter a job title</a></li>')
     }
-    if (submitError.roleType == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#roleType-error">Select the role group the learner belongs to</a></li>')
-    }
 
 
     return errorSummaryStr
