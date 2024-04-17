@@ -338,17 +338,8 @@ router.post('/radioButton', function (req, res) {
   var claimID = req.session.data.id
 
   if (req.body.another == 'yes') {
-    for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        let numberOfEvidence = c.evidenceOfPayment.length
-        if (numberOfEvidence == 4) {
-          res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type + '&maxUploadReached=true')
-        }
-      }
-    }
     res.redirect('claim/add-evidence' + '?id=' + claimID + '&type=' + type)
   } else {
-    delete req.session.data.maxUploadReached
     res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
   }
 })
@@ -373,7 +364,6 @@ router.post('/remove-evidence', function (req, res) {
   delete req.session.data.learnerID;
   delete req.session.data.submitError
   delete req.session.data.deleteSuccess
-  delete req.session.data.maxUploadReached
   if (paymentCount == 0) {
     res.redirect('claim/add-evidence' + '?id=' + claimID + '&type=' + type + '&allDeleteSuccess=true')
   } else {
@@ -487,6 +477,9 @@ router.get('/cancel-handler', function (req, res) {
   delete req.session.data['submitError'];
   delete req.session.data['deleteSuccess'];
   delete req.session.data['allDeleteSuccess'];
+  delete req.session.data['errorWrongFileFormat'];
+  delete req.session.data['errorFileTooBig'];
+  delete req.session.data['deleteError'];
 
   res.redirect('claim/claim-details' + '?id=' + claimID)
 

@@ -22,6 +22,38 @@
             </div>
         </div>
         {% endif %}
+        {% if data.errorFileTooBig %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                <li>
+                  <a href="#upload">The selected file must be smaller than 2MB</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if data.errorWrongFileFormat %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                <li>
+                  <a href="#upload">The selected file must be a JPG, PNG, or PDF.</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
         <form action="../completion-date" method="post" class="form">
             <div class="govuk-form-group {% if data.submitError.dateValid != null and not data.submitError.dateValid %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
