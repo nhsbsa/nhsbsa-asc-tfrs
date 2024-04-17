@@ -205,12 +205,11 @@ function isNIFormat(input) {
 
 function checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle, roleType) {
     const result = {};
-    console.log(nationalInsuranceNumber)
 
     if (nationalInsuranceNumber == "" || nationalInsuranceNumber === undefined || nationalInsuranceNumber == null ) {
         result.nationalInsuranceNumber = "missing"
-    } else if (!(isNIFormat(nationalInsuranceNumber))) {
-        result.nationalInsuranceNumber = "invalid"
+    //} else if (!(isNIFormat(nationalInsuranceNumber))) {
+    //     result.nationalInsuranceNumber = "invalid"
     } else {
         result.nationalInsuranceNumber = "valid"
     }
