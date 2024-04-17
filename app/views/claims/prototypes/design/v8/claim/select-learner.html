@@ -18,7 +18,8 @@
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">If you have previously claimed for this learner their details should be saved so you can reuse them.</p>
+        <p class="govuk-body">If you have previously claimed for this learner their details should be saved so you can
+            reuse them.</p>
         <p class="govuk-body">Check using the search below.</p>
         <div class="moj-search govuk-!-padding-bottom-2">
 
@@ -30,7 +31,7 @@
                     </label>
 
                     <div id="search-hint" class="govuk-hint moj-search__hint ">
-                        You can search by name or national insurance number
+                        You can search by name or National Insurance number
                     </div>
 
                     <input class="govuk-input moj-search__input " id="search" name="learnerInput" type="search"
@@ -109,8 +110,7 @@
             </tbody>
         </table>
         <form action="../learner/add-learner?inClaim=true" method="post">
-            <p class="govuk-body">If you can't find the member of staff this may mean they do not exist in the service
-                or they are not eligible for this funding pot.</p>
+            <p class="govuk-body">If you cannot find the learner this may mean they have not yet been added.</p>
             <button class="govuk-button govuk-button--secondary">Add new learner</button>
         </form>
         {% else %}
