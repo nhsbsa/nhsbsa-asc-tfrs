@@ -23,6 +23,39 @@
           </div>
         {% endif %}
 
+        {% if data.errorFileTooBig %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                <li>
+                  <a href="#upload">The selected file must be smaller than 2MB</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if data.errorWrongFileFormat %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                <li>
+                  <a href="#upload">The selected file must be a JPG, PNG, or PDF.</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
                     <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
                     <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
               
@@ -36,18 +69,18 @@
                     {% endif %}
                   </p>
 
-                  <div class="govuk-form-group {% if data.errorFileTooBig or data.errorWrongFileFormat %} govuk-form-group--error {% endif %}">
+                  <div id="upload" class="govuk-form-group {% if data.errorFileTooBig or data.errorWrongFileFormat %} govuk-form-group--error {% endif %}">
                     <label class="govuk-label" for="evidenceFile">
                       Upload a file
                     </label>
                     {% if data.errorFileTooBig %}
                       <p id="file-upload-1-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span> The CSV must be smaller than 2MB
+                        <span class="govuk-visually-hidden">Error:</span> The selected file must be smaller than 2MB
                       </p>
                     {% endif %}
                     {% if data.errorWrongFileFormat %}
                       <p id="file-upload-1-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span> The selected file must be a JPG, BMP, PNG, TIF or PDF
+                        <span class="govuk-visually-hidden">Error:</span> The selected file must be a JPG, PNG or PDF
                       </p>
                     {% endif %}
                     <input class="govuk-file-upload {% if data.errorFileTooBig or data.errorWrongFileFormat %} govuk-file-upload--error {% endif %}" id="evidenceFile" name="evidenceFile" type="file" aria-describedby="evidenceFile-error">
