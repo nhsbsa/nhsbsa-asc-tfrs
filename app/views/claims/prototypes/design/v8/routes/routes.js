@@ -496,7 +496,8 @@ router.post('/create-learner', function (req, res) {
     if (req.session.data.inClaim == 'true' && !dupeLearner.check) {
       const learner = {
         id: nationalInsuranceNumber,
-        fullName: givenName + familyName,
+        familyName: familyName,
+        givenName: givenName,
         jobTitle: jobTitle,
         roleType: roleType,
       };

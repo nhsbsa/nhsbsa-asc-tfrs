@@ -114,55 +114,6 @@ addFilter('removeSpacesAndLowerCase_V8', function (inputString) {
 
 })
 
-addFilter('claimMatch_V8', function (claim, search, claimType) {
-    let check = false;
-
-    const formattedSearch = removeSpacesAndLowerCase(search);
-
-    if (claim.type == claimType) {
-        if (claim.claimID != null) {
-            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
-            if (formattedClaimID.includes(formattedSearch)) {
-                check = true
-            }
-        }
-
-        if (claim.training != null) {
-            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
-            if (formattedActivity.includes(formattedSearch)) {
-                check = true
-            }
-        }
-        if (claim.learner != null) {
-            const formattedName = removeSpacesAndLowerCase(claim.learner.fullName);
-            if (formattedName.includes(formattedSearch)) {
-                check = true
-            }
-        }
-    } else if (claim.type == claimType) {
-        if (claim.claimID != null) {
-            const formattedClaimID = removeSpacesAndLowerCase(claim.ClaimID);
-            if (formattedClaimID.includes(formattedSearch)) {
-                check = true
-            }
-        }
-
-        if (claim.categoryName != null) {
-            const formattedActivity = removeSpacesAndLowerCase(claim.categoryName);
-            if (formattedActivity.includes(formattedSearch)) {
-                check = true
-            }
-        }
-        if (claim.learner != null) {
-            const formattedName = removeSpacesAndLowerCase(claim.learner.fullName);
-            if (formattedName.includes(formattedSearch)) {
-                check = true
-            }
-        }
-    }
-
-    return check;
-})
 
 addFilter('potName_V8', function (type) {
     let name = "Pot Naming Error"

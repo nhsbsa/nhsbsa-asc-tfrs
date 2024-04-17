@@ -16,7 +16,7 @@
                     </p>
                     <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim.training.title }}</p>
                     {% if claim | findMatchingTraining(data['training']) == true %}<p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Provided by {{ claim.training.awardingOrganisation}} - {{ claim.training.type}}</p>{% endif %}
-                    <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim.learner.fullName }}</p>
+                    <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</p>
                     
                     <div style="display: flex;">
                         <p class="govuk-body" style="margin-bottom: 0;">Training dates:&nbsp</p>
