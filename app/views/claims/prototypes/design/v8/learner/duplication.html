@@ -11,18 +11,21 @@
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
         <h1 class="govuk-heading-l">A learner already exists</h1>
-        <p class="govuk-body">You have tried to add a learner that already exists with a national insurance number that
-            already exists in the system. Below is the existing learner record and the new learner record you are trying
-            to add. Differences are <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
+        <p class="govuk-body">You have tried to add a learner with a national insurance number that
+            already exists in the system. Below are the details of the existing learner and details of the learner you
+            are trying
+            to add. The differences between the two are <mark
+                class="hods-highlight"><strong>highlighted</strong></mark>.</p>
     </div>
     <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-m">New learner details</h2>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Family name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.familyName }}
+                    {{ data.familyName | learnerMatch_V8(data.learnerMatch.fullName, "new") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -30,7 +33,7 @@
                     Given name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.givenName }}
+                    {{ data.givenName | learnerMatch_V8(data.learnerMatch.fullName, "new") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -38,7 +41,7 @@
                     National insurance number
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.nationalInsuranceNumber }}
+                    {{ data.nationalInsuranceNumber | learnerMatch_V8(data.learnerMatch.id, "new") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -46,19 +49,20 @@
                     Job title
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.jobTitle }}
+                    {{ data.jobTitle | learnerMatch_V8(data.learnerMatch.jobTitle, "new") }}
                 </dd>
             </div>
         </dl>
     </div>
     <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-m">Existing learner details</h2>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Family name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.learnerMatch.fullName }}
+                    {{ data.familyName | learnerMatch_V8(data.learnerMatch.fullName, "match") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -66,7 +70,7 @@
                     Given name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.learnerMatch.fullName }}
+                    {{ data.givenName | learnerMatch_V8(data.learnerMatch.fullName, "match") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -74,7 +78,7 @@
                     National insurance number
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.learnerMatch.id }}
+                    {{ data.nationalInsuranceNumber | learnerMatch_V8(data.learnerMatch.id, "match") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -82,22 +86,27 @@
                     Job title
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.learnerMatch.jobTitle }}
+                    {{ data.jobTitle | learnerMatch_V8(data.learnerMatch.jobTitle, "match") }}
                 </dd>
             </div>
         </dl>
     </div>
     <div class="govuk-grid-column-two-thirds">
+
+        <form action="../add-learner?learnerSelection={{ data.learnerMatch.id }}" method="post" novalidate>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Add existing learner to claim
+                </button>
+                <a class="govuk-link govuk-link--no-visited-state" href="add-learner">Cancel</a>
+            </div>
+        </form>
+
         <p class="govuk-body">It is currently not possible to update learner records. If this is an issue get in touch
             with the NHS Business Services Authority contact centre:</p>
         <div class="govuk-inset-text">
             Email: <a href="#" class="govuk-link">xxxx@bsa.nhs.uk</a> <br>Phone: 01234 567890
         </div>
-
-
-        <a type="submit" class="govuk-button" href="claim-details?id={{data.id}}">
-            Go back to claim
-        </a>
     </div>
 </div>
 

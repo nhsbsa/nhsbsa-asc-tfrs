@@ -275,7 +275,6 @@ router.post('/completion-date', function (req, res) {
 router.post('/add-learner', function (req, res) {
   var claimID = req.session.data.id
 
-
   for (const l of req.session.data.learners) {
     if (req.session.data.learnerSelection == l.id) {
       var learner = l
