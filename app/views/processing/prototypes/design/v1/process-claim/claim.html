@@ -1,0 +1,56 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% set claim = data.id | findClaim_V8(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Claim: ", claim.claimID, " - process a claim"] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="start-process" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Process a claim</span>
+        <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | processorstatusTag_V1 }}</h1>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if claim.status == "submitted" %}
+        <h2 class="govuk-heading-m">Check evidence</h2>
+        <ul class="govuk-task-list">
+            <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                <div class="govuk-task-list__name-and-hint">
+                    <a class="govuk-link govuk-task-list__link" href="#" aria-describedby="company-details-1-status">
+                        Evidence of payment
+                    </a>
+                </div>
+                <div class="govuk-task-list__status" id="company-details-1-status">
+                    Completed
+                </div>
+            </li>
+            <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                <div class="govuk-task-list__name-and-hint">
+                    <a class="govuk-link govuk-task-list__link" href="#" aria-describedby="company-details-2-status">
+                        Evidence of completion
+                    </a>
+                </div>
+                <div class="govuk-task-list__status" id="company-details-2-status">
+                    <strong class="govuk-tag govuk-tag--blue">
+                        Incomplete
+                    </strong>
+                </div>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m">Claim notes</h2>
+    </div>
+</div>
+
+{% endblock %}
