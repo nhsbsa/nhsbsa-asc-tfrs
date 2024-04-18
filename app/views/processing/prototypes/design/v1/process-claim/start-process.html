@@ -1,0 +1,37 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% block pageTitle %}
+Workplace ID - Register an organisation
+{% endblock %}
+
+{% block beforeContent %}
+<a href="../home" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="../search-claim-id" method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <span class="govuk-caption-l">Find a claim</span>
+                        <h1 class="govuk-fieldset__heading" for="orgID">
+                            Your claim
+                        </h1>
+                    </legend>
+                    <p class="govuk-body">This is the claim ID exactly as it appears in OM.</p>
+                    <div id="claim-id-hint" class="govuk-hint">
+                        For example, AB3-CDE4-FGH4-A
+                    </div>
+                    <input class="govuk-input govuk-input--width-10" aria-describedby="claim-id-hint" id="claimID" name="claimID" type="text">
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button" type="submit">
+                Search
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
