@@ -38,7 +38,6 @@ router.post('/confirm-org-handler', function (req, res) {
 });
 
 router.post('/search-claim-id', function (req, res) {
-  // delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];
   delete req.session.data['errorType'];
 
@@ -53,7 +52,7 @@ router.post('/search-claim-id', function (req, res) {
   
   // if claim id is invalid return why
   else if (validClaimId == false) {
-    var whyInvalid = whyInvalidReason()
+    var whyInvalid = whyInvalidReason(claimID)
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&invalidIDError=true' + '&errorType=' + whyInvalid)
   }
 })
@@ -62,7 +61,7 @@ function whyInvalidReason(claimID) {
 
   // if claim id is empty
   const emptyRegex = /\S/;
-  if (emptyRegex.test(claimID)) {
+  if (!emptyRegex.test(claimID)) {
     return "A";
   } 
   const letterORegex = /o/i;

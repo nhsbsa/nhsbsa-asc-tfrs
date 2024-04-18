@@ -11,8 +11,18 @@ Claim ID - Find a claim for processing
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+        {% if data.emptyError %}
+
+        {% endif %}
         <form action="../search-claim-id" method="post" novalidate>
-            <div class="govuk-form-group {% if data.emptyError %} govuk-form-group--error {% endif %}">
+            {% if (data.errorType == 'B') %}
+                <p>The letter O is not allowed</p>
+            {% endif %}
+            {% if (data.errorType == 'C') %}
+                <p>The last character must be the letter A, B or C</p>
+            {% endif %}
+
+            <div class="govuk-form-group {% if (data.errorType == 'A') %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <span class="govuk-caption-l">Find a claim</span>
@@ -24,12 +34,12 @@ Claim ID - Find a claim for processing
                     <div id="claim-id-hint" class="govuk-hint">
                         For example, AB3-CDE4-FGH4-A
                     </div>
-                    {% if data.emptyError %}
+                    {% if (data.errorType == 'A') %}
                     <p id="event-name-error" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span> Enter a claim ID
                       </p>
                       {% endif %}
-                    <input class="govuk-input govuk-input--width-10 {% if data.emptyError %} govuk-input--error {% endif %} " aria-describedby="claim-id-hint {% if data.emptyError %} event-name-error {% endif %}" id="claimID" name="claimID" type="text">
+                    <input class="govuk-input govuk-input--width-10 {% if (data.errorType == 'A') %} govuk-input--error {% endif %} " aria-describedby="claim-id-hint {% if data.emptyError %} event-name-error {% endif %}" id="claimID" name="claimID" type="text">
                 </fieldset>
             </div>
             <button class="govuk-button" data-module="govuk-button" type="submit">
