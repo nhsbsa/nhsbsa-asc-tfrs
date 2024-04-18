@@ -12,7 +12,7 @@ Workplace ID - Register an organisation
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <form action="../search-claim-id" method="post" novalidate>
-            <div class="govuk-form-group">
+            <div class="govuk-form-group {% if data.emptyError %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <span class="govuk-caption-l">Find a claim</span>
@@ -24,7 +24,12 @@ Workplace ID - Register an organisation
                     <div id="claim-id-hint" class="govuk-hint">
                         For example, AB3-CDE4-FGH4-A
                     </div>
-                    <input class="govuk-input govuk-input--width-10" aria-describedby="claim-id-hint" id="claimID" name="claimID" type="text">
+                    {% if data.emptyError %}
+                    <p id="event-name-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> Enter a claim ID
+                      </p>
+                      {% endif %}
+                    <input class="govuk-input govuk-input--width-10 {% if data.emptyError %} govuk-input--error {% endif %} " aria-describedby="claim-id-hint {% if data.emptyError %} event-name-error {% endif %}" id="claimID" name="claimID" type="text">
                 </fieldset>
             </div>
             <button class="govuk-button" data-module="govuk-button" type="submit">

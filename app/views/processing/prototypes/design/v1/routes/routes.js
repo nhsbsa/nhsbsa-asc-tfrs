@@ -41,9 +41,9 @@ router.post('/search-claim-id', function (req, res) {
   var claimID = req.session.data.claimID
   var validClaimId = false
 
-  if (claimID == "") {
-    res.redirect('process-claim/start-process' + '?id=' + claimID + '&emptyError=true')
-  } if (validClaimId == false) {
+  if (claimID.length == 0) {
+    res.redirect('process-claim/start-process?emptyError=true')
+  } else if (validClaimId == false) {
     res.redirect('process-claim/start-process' + '?id=' + claimID + '&invalidIDError=true')
   } else {
     res.redirect('process-claim/found-claim' + '?id=' + claimID)
