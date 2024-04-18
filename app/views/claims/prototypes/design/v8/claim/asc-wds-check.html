@@ -1,0 +1,31 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim_V8(data.claims) %}
+
+{% block pageTitle %}
+ASC-WDS account not up to date
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">Your ASC-WDS account is not up to date</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">You you cannot submit claims until your ASC-WDS account is brought up to date.
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Vitae purus faucibus ornare suspendisse sed nisi lacus sed. Metus aliquam
+            eleifend mi in nulla posuere sollicitudin aliquam.</p>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Vitae purus faucibus ornare suspendisse sed nisi lacus sed. Metus aliquam
+            eleifend mi in nulla posuere sollicitudin aliquam.</p>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <a type="submit" class="govuk-button" href="claim-details?id={{data.id}}">
+            Go back to claim
+        </a>
+    </div>
+</div>
+
+{% endblock %}
