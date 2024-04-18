@@ -47,7 +47,7 @@ router.post('/search-claim-id', function (req, res) {
 
   // if claim id is valid, navigate to next screen
   if (validClaimId) {
-    res.redirect('process-claim/found-claim' + '?id=' + claimID)
+    res.redirect('process-claim/found-claim' + '?id=' + claimID + '&validClaim=true')
   }
   
   // if claim id is invalid return why
