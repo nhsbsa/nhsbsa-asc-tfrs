@@ -60,13 +60,17 @@
                     <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
               
                     <p class="govuk-body">
-                    You need to upload a file containing the evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.givenName }} {{ claim.learner.familyName }}{% endif %}. This could be a PDF or image file.
+                    You need to provide evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.givenName }} {{ claim.learner.familyName }}{% endif %}. 
+                    
+                    {% if data.type == "payment"%}
+                    You may upload up to 4 files. These can be in PDF, JPG or PNG format.
+                    {% else %}
+                    The file can be in PDF, JPG or PNG format.
+                    {% endif %} 
                     </p>
                   <p class="govuk-body">
                     If you need to add an email as evidence, save the email as a PDF file and then upload that. 
-                    {% if data.type == "payment"%}
-                    You may upload up to 4 files.
-                    {% endif %}
+
                   </p>
 
                   <div id="upload" class="govuk-form-group {% if data.errorFileTooBig or data.errorWrongFileFormat %} govuk-form-group--error {% endif %}">
@@ -115,7 +119,7 @@
     <div class="govuk-grid-column-one-third">
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
         <h2 class="govuk-heading-m">Related content</h2>
-        <p class="govuk-body"><a href="#" class="govuk-link">Find out more about evidence requirements</a></p>
+        <p class="govuk-body"><a href="#" class="govuk-link">Help with evidence requirements</a></p>
     </div>
 </div>
 

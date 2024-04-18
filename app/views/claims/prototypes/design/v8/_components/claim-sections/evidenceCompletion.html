@@ -1,4 +1,7 @@
 <h2 class="govuk-heading-m" id="completion">Training completion by learner</h2>
+{% if not claim.learner %}
+<span class="govuk-caption-m">Add a learner to this claim before filling in this section.</span><br>
+{% endif %}
 <dl class="govuk-summary-list">
   {% if not claim.completionDate %}
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "missing" %}
@@ -16,7 +19,7 @@
       {% if claim.learner %}
       <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date">Add completion date</a>
       {% else %}
-      Add a learner first before adding completion date
+      <span class="govuk-caption-m">Cannot start yet</span>
       {% endif %}
     </dd>
   </div>
@@ -60,7 +63,7 @@
       {% if claim.learner %}
       <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion">Add evidence</a>
       {% else %}
-      Add a learner first before adding evidence of completion
+      <span class="govuk-caption-m">Cannot start yet</span>
       {% endif %}
     </dd>
   </div>
