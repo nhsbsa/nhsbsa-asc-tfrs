@@ -2,7 +2,7 @@
 {% set claim = data.id | findClaim_V8(data.claims) %}
 
 {% block pageTitle %}
-{{ ["Duplicate claim - Claim: ", data.id] | join }}
+ASC-WDS account not up to date
 {% endblock %}
 
 {% block content %}
@@ -10,11 +10,10 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-        <h1 class="govuk-heading-l">A claim already exists for this training and learner</h1>
+        <h1 class="govuk-heading-l">Your ASC-WDS account is not up to date</h1>
     </div>
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">You have already submitted a claim for this training and learner. The reference for that claim is: <a class="govuk-link"
-            href="claim-details?id={{ data.dupeID }}">{{ data.dupeID }}</a></p>
+        <p class="govuk-body">You you cannot submit claims until your ASC-WDS account is brought up to date.
         <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
             ut labore et dolore magna aliqua. Vitae purus faucibus ornare suspendisse sed nisi lacus sed. Metus aliquam
             eleifend mi in nulla posuere sollicitudin aliquam.</p>

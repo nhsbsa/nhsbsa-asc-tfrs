@@ -3,20 +3,16 @@ const { faker } = require('@faker-js/faker');
 const { fakerEN_GB } = require('@faker-js/faker');
 const { generateUniqueID } = require('./helpers.js');
 
-function getRandomLearners(learnerList, x, eligibleRoles) {
+function getRandomLearners(learnerList, x) {
   const copyLearners = [...learnerList];
 
-  const eligibleLearners = copyLearners.filter(learner => {
-    return eligibleRoles.includes(learner.roleType);
-  });
-
-  if (x > eligibleLearners.length) {
+  if (x > copyLearners.length) {
     console.error("Error: Number of TU-eligible learners to select is greater than the total number of TU-eligible learners.");
     return;
   }
-    const randomIndex = Math.floor(Math.random() * eligibleLearners.length);
-    const learner = JSON.parse(JSON.stringify(eligibleLearners[randomIndex]));
-    eligibleLearners.splice(randomIndex, 1);
+    const randomIndex = Math.floor(Math.random() * copyLearners.length);
+    const learner = JSON.parse(JSON.stringify(copyLearners[randomIndex]));
+    copyLearners.splice(randomIndex, 1);
 
   return learner;
 }
@@ -63,10 +59,6 @@ function generateTUClaims(quantity, version) {
   const learners = JSON.parse(fs.readFileSync('./app/data/' + version + '/learners.json', 'utf8'));
   const training = JSON.parse(fs.readFileSync('./app/data/' + version + '/training.json', 'utf8'));
   const statuses = JSON.parse(fs.readFileSync('./app/data/' + version + '/claim-item-statuses.json', 'utf8'));
-  const roleTypes = JSON.parse(fs.readFileSync('./app/data/' + version + '/role-types.json', 'utf8'));
-
-  const tuEligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
-
 
   const preSetClaims = JSON.parse(fs.readFileSync('./app/data/' + version + '/pre-set-claims.json', 'utf8'));
   data = data.concat(preSetClaims)
@@ -74,7 +66,7 @@ function generateTUClaims(quantity, version) {
   for (let i = 1; i <= quantity; i++) {
     faker.seed(i);
     const claimID = generateUniqueID() + "-C";
-    const selectedLearner = getRandomLearners(learners, 1, tuEligibleRoles);
+    const selectedLearner = getRandomLearners(learners, 1);
     const trainingGroup = faker.helpers.arrayElement(training);
     const trainingItem = faker.helpers.arrayElement(trainingGroup.courses);
     const startDate = faker.date.past();
