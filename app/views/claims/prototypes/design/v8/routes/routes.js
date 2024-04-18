@@ -333,13 +333,20 @@ if (type == 'payment') {
 
 router.post('/radioButton', function (req, res) {
   delete req.session.data.deleteSuccess
+  delete req.session.data.allDeleteSuccess
+  delete req.session.data.missingOption
   var type = req.session.data.type
   var claimID = req.session.data.id
 
-  if (req.body.another == 'yes') {
+  if (req.session.data.another == 'yes') {
+    delete req.session.data.another
     res.redirect('claim/add-evidence' + '?id=' + claimID + '&type=' + type)
-  } else {
+  } else if (req.session.data.another == 'no') {
+    delete req.session.data.another
     res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
+  } else {
+    req.session.data.missingOption = true
+    res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
   }
 })
 
@@ -473,6 +480,7 @@ router.get('/cancel-handler', function (req, res) {
   delete req.session.data['allDeleteSuccess'];
   delete req.session.data['errorWrongFileFormat'];
   delete req.session.data['errorFileTooBig'];
+  delete req.session.data['errorFileMissing'];
   delete req.session.data['deleteError'];
 
   res.redirect('claim/claim-details' + '?id=' + claimID)
