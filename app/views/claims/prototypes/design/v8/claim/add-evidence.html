@@ -60,7 +60,7 @@
                     <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
               
                     <p class="govuk-body">
-                    You need to provide evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.givenName }} {{ claim.learner.familyName }}{% endif %}. 
+                    You need to provide evidence of {{ data.type }}{% if data.type == 'completion' %} for {{ claim.learner.givenName }} {{ claim.learner.familyName }}{% endif %}. 
                     
                     {% if data.type == "payment"%}
                     You may upload up to 4 files. These can be in PDF, JPG or PNG format.
@@ -68,10 +68,6 @@
                     The file can be in PDF, JPG or PNG format.
                     {% endif %} 
                     </p>
-                  <p class="govuk-body">
-                    If you need to add an email as evidence, save the email as a PDF file and then upload that. 
-
-                  </p>
 
                   <div id="upload" class="govuk-form-group {% if data.errorFileTooBig or data.errorWrongFileFormat %} govuk-form-group--error {% endif %}">
                     <label class="govuk-label" for="evidenceFile">
