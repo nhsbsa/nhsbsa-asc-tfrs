@@ -126,7 +126,7 @@ function isValidDate(day, month, year) {
 
 function validateDate(day, month, year, type) {
     const result = {};
-    const policyDate = new Date("2024-04-10");
+    const policyDate = new Date("2024-04-01");
     const date = year + "-" + month + "-" + day;
     const checkDate = new Date(date);
 
@@ -183,10 +183,12 @@ function checkDuplicateClaim(learnerID, trainingID, claimList) {
     result.id = ''
 
     for (const c of claimList) {
-        if (c.training.code == trainingID && c.learner.id == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
-            result.check = true;
-            result.id = c.claimID
-            break;
+        if (c.learner != null) {
+            if (c.training.code == trainingID && c.learner.id == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
+                result.check = true;
+                result.id = c.claimID
+                break;
+            }
         }
     }
 

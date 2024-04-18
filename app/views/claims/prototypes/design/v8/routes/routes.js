@@ -153,7 +153,6 @@ router.post('/add-start-date', function (req, res) {
   delete req.session.data.submitError
 
   const error = validateDate(day, month, year, "start");
-  console.log(startDate)
   if (error.dateValid == true) {
     delete req.session.data['activity-date-started-day'];
     delete req.session.data['activity-date-started-month'];
@@ -198,8 +197,6 @@ router.post('/add-cost', function (req, res) {
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       c.claimAmount = cost
-
-      console.log(JSON.stringify(c, null, 2))
       break;
     }
   }

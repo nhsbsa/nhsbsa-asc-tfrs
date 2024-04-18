@@ -62,7 +62,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": ["invoice001.pdf"],
+    "evidenceOfPayment": ["invoice001.pdf", "invoice002.pdf", "invoice003.pdf"],
     "evidenceOfCompletion": "certficate001.pdf",
     "completionDate": "2024-02-05T20:22:11.308Z",
     "costDate": "2023-08-08T07:55:32.615Z"
@@ -105,7 +105,7 @@
     "claimID": "Z8S-F1J6-9VGH-C",
     "type": "TU",
     "learner": {
-      "id": "ZX 51 96 87 P",
+      "id": "ZX 51 96 87 D",
       "familyName": "Simonis",
       "givenName": "Casey",
       "jobTitle": "Caregiver"
