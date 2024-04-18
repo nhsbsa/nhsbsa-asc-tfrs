@@ -13,7 +13,11 @@
       Completion date
     </dt>
     <dd class="govuk-summary-list__value">
+      {% if claim.learner %}
       <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date">Add completion date</a>
+      {% else %}
+      Add a learner first before adding completion date
+      {% endif %}
     </dd>
   </div>
   {% else %}
@@ -53,7 +57,11 @@
       Evidence of completion
     </dt>
     <dd class="govuk-summary-list__value">
+      {% if claim.learner %}
       <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion">Add evidence</a>
+      {% else %}
+      Add a learner first before adding evidence of completion
+      {% endif %}
     </dd>
   </div>
   {% else %}

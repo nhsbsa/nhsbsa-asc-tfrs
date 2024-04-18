@@ -142,8 +142,14 @@
     "costDate": "2022-09-19T13:52:37.929Z"
   },
   {
-    "claimID": "DTJ-N55F-6KDK-C",
+    "claimID": "38J-GY6D-7SFE-C",
     "type": "TU",
+    "learner": {
+      "id": "LM 89 7F 48 J",
+      "familyName": "Kailee",
+      "givenName": "Metz",
+      "jobTitle": "Support Worker"
+    },
     "training": {
       "code": "DLLDCP",
       "reimbursementAmount": 50,
@@ -156,24 +162,33 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
     },
-    "startDate": "2023-07-29T16:44:04.684Z",
+    "startDate": "2023-07-30T10:26:26.979Z",
     "status": "approved",
-    "createdDate": "2023-05-13T05:34:29.047Z",
+    "createdDate": "2023-05-13T23:16:51.342Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-10-17T04:27:57.663Z",
-    "approvedDate": "2023-11-13T02:31:52.068Z",
+    "submittedDate": "2023-10-17T22:10:19.958Z",
+    "approvedDate": "2023-11-13T20:14:14.363Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate001.pdf",
-    "completionDate": "2023-10-17T02:38:08.083Z",
-    "costDate": "2023-03-27T05:34:29.047Z"
+    "completionDate": "2023-10-17T20:20:30.378Z",
+    "costDate": "2023-03-27T23:16:51.342Z"
   },
   {
-    "claimID": "2D3-YMAI-1RDE-C",
+    "claimID": "NJ3-8S6D-3WN9-C",
     "type": "TU",
+    "learner": {
+      "id": "NR 91 7F 72 O",
+      "familyName": "Donavon",
+      "givenName": "Hamill",
+      "jobTitle": "Local Authority Care Worker"
+    },
     "training": {
       "code": "DLEDI",
       "reimbursementAmount": 50,
@@ -186,9 +201,9 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
     },
-    "startDate": "2024-04-08T03:39:47.561Z",
+    "startDate": "2024-04-08T21:22:09.856Z",
     "status": "not-yet-submitted",
-    "createdDate": "2023-05-13T14:28:45.315Z",
+    "createdDate": "2023-05-14T08:11:07.610Z",
     "createdBy": "Allan Connelly",
     "submittedDate": null,
     "approvedDate": null,
@@ -197,11 +212,17 @@
     "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
-    "costDate": "2022-06-01T14:28:45.315Z"
+    "costDate": "2022-06-02T08:11:07.610Z"
   },
   {
-    "claimID": "A1L-BPJX-IAAQ-C",
+    "claimID": "3EQ-INTL-HP44-C",
     "type": "TU",
+    "learner": {
+      "id": "VL 10 7F 63 E",
+      "familyName": "Casimer",
+      "givenName": "Fahey",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "DLCCA",
       "reimbursementAmount": 100,
@@ -214,22 +235,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
     },
-    "startDate": "2024-03-22T19:13:37.303Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2023-08-03T03:24:08.046Z",
+    "startDate": "2024-03-23T12:55:59.598Z",
+    "status": "approved",
+    "createdDate": "2023-08-03T21:06:30.341Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": null,
-    "approvedDate": null,
+    "submittedDate": "2024-03-26T16:06:08.526Z",
+    "approvedDate": "2024-04-08T14:01:28.823Z",
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2023-04-18T03:24:08.046Z"
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate003.pdf",
+    "completionDate": "2024-03-25T03:19:54.107Z",
+    "costDate": "2023-04-18T21:06:30.341Z"
   },
   {
-    "claimID": "827-4ZAT-9YPH-C",
+    "claimID": "A75-93L5-P3UN-C",
     "type": "TU",
+    "learner": {
+      "id": "KQ 01 7F 72 D",
+      "familyName": "Grover",
+      "givenName": "Bechtelar",
+      "jobTitle": "Healthcare Assistant"
+    },
     "training": {
       "type": "Level 2 Certificate Oral Care for Health and Social Care",
       "code": "603/6251/0",
@@ -242,11 +273,11 @@
       "link": null,
       "fundingModel": "split"
     },
-    "startDate": "2023-09-30T21:01:21.268Z",
+    "startDate": "2023-10-01T14:43:43.563Z",
     "status": "submitted",
-    "createdDate": "2024-02-14T13:57:57.463Z",
+    "createdDate": "2024-02-15T07:40:19.758Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-02-20T15:40:30.296Z",
+    "submittedDate": "2024-02-21T09:22:52.591Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -254,12 +285,18 @@
       "invoice000.pdf"
     ],
     "evidenceOfCompletion": "certficate004.pdf",
-    "completionDate": "2023-12-26T19:58:33.363Z",
-    "costDate": "2023-04-07T12:57:57.463Z"
+    "completionDate": "2023-12-27T13:40:55.658Z",
+    "costDate": "2023-04-08T06:40:19.758Z"
   },
   {
-    "claimID": "8TH-536J-D6ZD-C",
+    "claimID": "G8T-5KTB-BEVV-C",
     "type": "TU",
+    "learner": {
+      "id": "WV 15 0F 13 V",
+      "familyName": "Heidi",
+      "givenName": "Reinger-Christiansen",
+      "jobTitle": "Care Assistant (Agency)"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -272,26 +309,28 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2024-03-28T11:23:56.827Z",
-    "status": "approved",
-    "createdDate": "2023-06-04T19:09:44.007Z",
+    "startDate": "2024-03-29T05:06:19.122Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-06-05T12:52:06.302Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-04-04T19:13:17.671Z",
-    "approvedDate": "2024-04-17T08:27:19.553Z",
+    "submittedDate": null,
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf"
-    ],
-    "evidenceOfCompletion": "certficate005.pdf",
-    "completionDate": "2024-04-04T04:54:41.561Z",
-    "costDate": "2023-03-20T20:09:44.007Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-03-21T13:52:06.302Z"
   },
   {
-    "claimID": "CP9-8EEE-69U6-C",
+    "claimID": "M4I-MK12-L4N1-C",
     "type": "TU",
+    "learner": {
+      "id": "UH 04 6F 47 V",
+      "familyName": "Beatrice",
+      "givenName": "Fay",
+      "jobTitle": "Healthcare Assistant"
+    },
     "training": {
       "type": "Level 3 Award Education and Training",
       "code": "601/1636/5",
@@ -304,22 +343,30 @@
       "link": null,
       "fundingModel": "split"
     },
-    "startDate": "2023-12-18T10:38:02.278Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2024-02-01T04:22:38.122Z",
+    "startDate": "2023-12-19T04:20:24.573Z",
+    "status": "approved",
+    "createdDate": "2024-02-01T22:05:00.417Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": null,
-    "approvedDate": null,
+    "submittedDate": "2023-12-24T05:35:59.722Z",
+    "approvedDate": "2024-01-05T17:37:35.539Z",
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2024-01-08T04:22:38.122Z"
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate006.pdf",
+    "completionDate": "2023-12-21T01:13:10.337Z",
+    "costDate": "2024-01-08T22:05:00.417Z"
   },
   {
-    "claimID": "Y31-BLLZ-MCXZ-C",
+    "claimID": "H3G-YPNP-ZJ5T-C",
     "type": "TU",
+    "learner": {
+      "id": "WS 54 2F 01 E",
+      "familyName": "Elvera",
+      "givenName": "Dach",
+      "jobTitle": "Support Worker"
+    },
     "training": {
       "code": "IMRG",
       "reimbursementAmount": 50,
@@ -332,26 +379,28 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2023-07-07T22:41:18.698Z",
-    "status": "approved",
-    "createdDate": "2023-12-23T04:34:49.208Z",
+    "startDate": "2023-07-08T16:23:40.993Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-12-23T22:17:11.503Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2024-01-29T21:28:00.535Z",
-    "approvedDate": "2024-04-15T21:11:33.368Z",
+    "submittedDate": null,
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf"
-    ],
-    "evidenceOfCompletion": "certficate007.pdf",
-    "completionDate": "2023-10-09T18:32:37.382Z",
-    "costDate": "2022-12-30T04:34:49.208Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-12-30T22:17:11.503Z"
   },
   {
-    "claimID": "UHU-AK58-Q5LW-C",
+    "claimID": "GWM-M97Z-D3IX-C",
     "type": "TU",
+    "learner": {
+      "id": "AL 82 2F 62 C",
+      "familyName": "Elias",
+      "givenName": "Dibbert",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "code": "PBSFS",
       "reimbursementAmount": 50,
@@ -364,24 +413,31 @@
       "awardingOrganisation": null,
       "link": "https://www.skillsforcare.org.uk/resources/documents/Developing-your-workforce/Care-topics/Supporting-people-with-challenging-or-distressed/First-step-to-foundation-Competence-Framework.docx"
     },
-    "startDate": "2023-04-30T02:21:39.617Z",
+    "startDate": "2023-04-30T20:04:01.911Z",
     "status": "approved",
-    "createdDate": "2024-01-21T05:17:10.973Z",
+    "createdDate": "2024-01-21T22:59:33.267Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2023-11-03T18:21:41.819Z",
-    "approvedDate": "2023-12-12T08:43:01.501Z",
+    "submittedDate": "2023-11-04T12:04:04.113Z",
+    "approvedDate": "2023-12-13T02:25:23.795Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate008.pdf",
-    "completionDate": "2023-09-30T07:42:11.265Z",
-    "costDate": "2023-09-05T04:17:10.973Z"
+    "completionDate": "2023-10-01T01:24:33.559Z",
+    "costDate": "2023-09-05T21:59:33.267Z"
   },
   {
-    "claimID": "495-RRVL-HV1K-C",
+    "claimID": "ZJT-12T9-T55Y-C",
     "type": "TU",
+    "learner": {
+      "id": "LL 36 2F 22 A",
+      "familyName": "Irving",
+      "givenName": "Schmeler",
+      "jobTitle": "Municipal Caregiver"
+    },
     "training": {
       "code": "IMWP",
       "reimbursementAmount": 50,
@@ -394,22 +450,33 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2023-10-17T10:21:20.321Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2023-10-18T10:23:42.347Z",
+    "startDate": "2023-10-18T04:03:42.615Z",
+    "status": "approved",
+    "createdDate": "2023-10-19T04:06:04.641Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": null,
-    "approvedDate": null,
+    "submittedDate": "2023-11-11T16:25:58.389Z",
+    "approvedDate": "2023-12-04T05:35:56.787Z",
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2023-10-15T10:23:42.347Z"
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate009.pdf",
+    "completionDate": "2023-10-25T22:07:08.643Z",
+    "costDate": "2023-10-16T04:06:04.641Z"
   },
   {
-    "claimID": "V4N-ZF1J-A66U-C",
+    "claimID": "ELJ-ACYJ-CN4N-C",
     "type": "TU",
+    "learner": {
+      "id": "YH 60 9F 32 Z",
+      "familyName": "Liza",
+      "givenName": "Breitenberg",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "MHFA",
       "reimbursementAmount": 100,
@@ -422,26 +489,31 @@
       "awardingOrganisation": "MHFA England",
       "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
     },
-    "startDate": "2023-12-30T13:37:45.465Z",
-    "status": "approved",
-    "createdDate": "2024-04-10T00:59:23.693Z",
+    "startDate": "2023-12-31T07:20:07.760Z",
+    "status": "submitted",
+    "createdDate": "2024-04-10T18:41:45.988Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2024-02-16T21:03:53.822Z",
-    "approvedDate": "2024-04-07T09:45:08.516Z",
+    "submittedDate": "2024-02-17T14:46:16.117Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0010.pdf",
-    "completionDate": "2024-02-04T17:49:09.177Z",
-    "costDate": "2023-08-22T00:59:23.693Z"
+    "completionDate": "2024-02-05T11:31:31.472Z",
+    "costDate": "2023-08-22T18:41:45.988Z"
   },
   {
-    "claimID": "4GC-6YVV-E1V2-C",
+    "claimID": "J1Y-H6VW-IVVX-C",
     "type": "TU",
+    "learner": {
+      "id": "SE 52 1F 13 K",
+      "familyName": "Coralie",
+      "givenName": "Auer",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -454,54 +526,70 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2024-03-23T16:24:32.365Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2024-04-10T12:10:25.903Z",
-    "createdBy": "Allan Connelly",
-    "submittedDate": null,
-    "approvedDate": null,
-    "rejectedDate": null,
-    "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2023-10-23T12:10:25.903Z"
-  },
-  {
-    "claimID": "T67-ZRPA-SECS-C",
-    "type": "TU",
-    "training": {
-      "code": "DLFE",
-      "reimbursementAmount": 50,
-      "title": "Learning from Events",
-      "totalLearningTime": "35 mins",
-      "fundingModel": "full",
-      "type": "e-Learning Module",
-      "category": "Support for leaders and managers",
-      "description": null,
-      "awardingOrganisation": "Skills for Care",
-      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
-    },
-    "startDate": "2023-11-06T17:52:28.546Z",
+    "startDate": "2024-03-24T10:06:54.660Z",
     "status": "approved",
-    "createdDate": "2023-07-22T11:56:30.733Z",
-    "createdBy": "Mara Monahan",
-    "submittedDate": "2023-11-20T19:44:15.948Z",
-    "approvedDate": "2024-03-07T11:44:54.131Z",
+    "createdDate": "2024-04-11T05:52:48.198Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-03-29T06:16:04.108Z",
+    "approvedDate": "2024-04-16T20:56:09.325Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
-      "invoice002.pdf"
+      "invoice002.pdf",
+      "invoice003.pdf"
     ],
-    "evidenceOfCompletion": "certficate0012.pdf",
-    "completionDate": "2023-11-14T06:12:19.715Z",
-    "costDate": "2023-04-16T11:56:30.733Z"
+    "evidenceOfCompletion": "certficate0011.pdf",
+    "completionDate": "2024-03-27T22:19:05.381Z",
+    "costDate": "2023-10-24T05:52:48.198Z"
   },
   {
-    "claimID": "7S8-WH2B-PQSC-C",
+    "claimID": "VJ3-ADJJ-XQ4E-C",
     "type": "TU",
+    "learner": {
+      "id": "BF 74 0F 46 L",
+      "familyName": "Melany",
+      "givenName": "Hills",
+      "jobTitle": "Staff Nurse"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-11-07T11:34:50.840Z",
+    "status": "submitted",
+    "createdDate": "2023-07-23T05:38:53.027Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-11-21T13:26:38.242Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0012.pdf",
+    "completionDate": "2023-11-14T23:54:42.009Z",
+    "costDate": "2023-04-17T05:38:53.027Z"
+  },
+  {
+    "claimID": "Y8G-ZY3H-S13W-C",
+    "type": "TU",
+    "learner": {
+      "id": "OA 78 8F 31 V",
+      "familyName": "Wilhelmine",
+      "givenName": "Heidenreich",
+      "jobTitle": "Healthcare Assistant"
+    },
     "training": {
       "code": "MHFA",
       "reimbursementAmount": 100,
@@ -514,24 +602,32 @@
       "awardingOrganisation": "MHFA England",
       "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
     },
-    "startDate": "2023-09-08T22:28:01.470Z",
-    "status": "approved",
-    "createdDate": "2024-01-21T21:54:57.512Z",
+    "startDate": "2023-09-09T16:10:23.764Z",
+    "status": "submitted",
+    "createdDate": "2024-01-22T15:37:19.806Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-03-24T21:24:42.941Z",
-    "approvedDate": "2024-03-29T03:24:56.533Z",
+    "submittedDate": "2024-03-25T15:07:05.235Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0013.pdf",
-    "completionDate": "2024-03-18T02:41:17.782Z",
-    "costDate": "2023-03-26T20:54:57.512Z"
+    "completionDate": "2024-03-18T20:23:40.076Z",
+    "costDate": "2023-03-27T14:37:19.806Z"
   },
   {
-    "claimID": "MSJ-ENWG-M664-C",
+    "claimID": "T6G-ERCB-YJ8E-C",
     "type": "TU",
+    "learner": {
+      "id": "SC 67 9F 81 W",
+      "familyName": "Brock",
+      "givenName": "Lebsack",
+      "jobTitle": "Facility Manager"
+    },
     "training": {
       "code": "DLCCA",
       "reimbursementAmount": 100,
@@ -544,26 +640,28 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
     },
-    "startDate": "2023-05-17T02:59:26.511Z",
-    "status": "approved",
-    "createdDate": "2023-07-10T09:51:04.818Z",
+    "startDate": "2023-05-17T20:41:48.805Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-07-11T03:33:27.112Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-09-17T09:00:33.079Z",
-    "approvedDate": "2023-10-19T03:34:58.006Z",
+    "submittedDate": null,
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0014.pdf",
-    "completionDate": "2023-05-18T02:47:37.395Z",
-    "costDate": "2022-08-26T09:51:04.818Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-08-27T03:33:27.112Z"
   },
   {
-    "claimID": "JLV-CCJQ-W5PE-C",
+    "claimID": "B53-D7ZM-C8CN-C",
     "type": "TU",
+    "learner": {
+      "id": "FI 50 5F 30 D",
+      "familyName": "Sister",
+      "givenName": "Reinger-Murphy",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "PBSAL",
       "reimbursementAmount": 450,
@@ -576,27 +674,32 @@
       "awardingOrganisation": null,
       "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
     },
-    "startDate": "2024-02-12T07:38:55.403Z",
+    "startDate": "2024-02-13T01:21:17.697Z",
     "status": "submitted",
-    "createdDate": "2023-09-14T18:30:26.463Z",
+    "createdDate": "2023-09-15T12:12:48.757Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-03-06T22:13:33.356Z",
+    "submittedDate": "2024-03-07T15:55:55.650Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0015.pdf",
-    "completionDate": "2024-03-02T15:27:19.797Z",
-    "costDate": "2023-08-04T18:30:26.463Z"
+    "completionDate": "2024-03-03T09:09:42.091Z",
+    "costDate": "2023-08-05T12:12:48.757Z"
   },
   {
-    "claimID": "BKC-VFAJ-2UGL-C",
+    "claimID": "CDJ-KHJK-W8M4-C",
     "type": "TU",
+    "learner": {
+      "id": "FB 88 2F 39 Z",
+      "familyName": "Jennyfer",
+      "givenName": "Harvey",
+      "jobTitle": "Support Worker"
+    },
     "training": {
       "code": "DLBPCI",
       "reimbursementAmount": 50,
@@ -609,39 +712,11 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Preparing-for-CQC-inspection.aspx"
     },
-    "startDate": "2023-10-09T15:51:58.279Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2024-03-28T06:57:29.174Z",
-    "createdBy": "Allan Connelly",
-    "submittedDate": null,
-    "approvedDate": null,
-    "rejectedDate": null,
-    "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2023-12-06T06:57:29.174Z"
-  },
-  {
-    "claimID": "27Q-MPZK-T2RP-C",
-    "type": "TU",
-    "training": {
-      "code": "DLBPCI",
-      "reimbursementAmount": 50,
-      "title": "Being prepared for CQC inspection",
-      "totalLearningTime": "60 mins",
-      "fundingModel": "full",
-      "type": "e-Learning Module",
-      "category": "Support for leaders and managers",
-      "description": null,
-      "awardingOrganisation": "Skills for Care",
-      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Preparing-for-CQC-inspection.aspx"
-    },
-    "startDate": "2023-10-06T22:50:13.756Z",
+    "startDate": "2023-10-10T09:34:20.574Z",
     "status": "submitted",
-    "createdDate": "2023-06-14T11:17:19.461Z",
-    "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-10-20T02:26:02.185Z",
+    "createdDate": "2024-03-29T00:39:51.469Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2023-10-19T02:33:43.424Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -649,13 +724,53 @@
       "invoice000.pdf",
       "invoice001.pdf"
     ],
-    "evidenceOfCompletion": "certficate0017.pdf",
-    "completionDate": "2023-10-17T13:28:02.539Z",
-    "costDate": "2022-07-24T11:17:19.461Z"
+    "evidenceOfCompletion": "certficate0016.pdf",
+    "completionDate": "2023-10-11T14:39:45.402Z",
+    "costDate": "2023-12-07T00:39:51.469Z"
   },
   {
-    "claimID": "ATI-HULU-RXDC-C",
+    "claimID": "6ST-VQGQ-17SX-C",
     "type": "TU",
+    "learner": {
+      "id": "WS 54 2F 01 E",
+      "familyName": "Elvera",
+      "givenName": "Dach",
+      "jobTitle": "Support Worker"
+    },
+    "training": {
+      "code": "DLBPCI",
+      "reimbursementAmount": 50,
+      "title": "Being prepared for CQC inspection",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Preparing-for-CQC-inspection.aspx"
+    },
+    "startDate": "2023-10-07T16:32:36.050Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-06-15T04:59:41.755Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-07-25T04:59:41.755Z"
+  },
+  {
+    "claimID": "9Z1-LQAQ-YDIT-C",
+    "type": "TU",
+    "learner": {
+      "id": "QX 32 6F 41 Q",
+      "familyName": "Clemmie",
+      "givenName": "Kohler",
+      "jobTitle": "Nursing Assistant"
+    },
     "training": {
       "code": "DLP",
       "reimbursementAmount": 500,
@@ -668,24 +783,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Managing-a-service/Digital-technology-and-social-care/Digital-leadership-programme.aspx"
     },
-    "startDate": "2023-10-16T03:00:19.899Z",
+    "startDate": "2023-10-16T20:42:42.193Z",
     "status": "approved",
-    "createdDate": "2023-11-11T16:58:40.086Z",
+    "createdDate": "2023-11-12T10:41:02.380Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2023-11-18T16:09:09.064Z",
-    "approvedDate": "2024-03-26T07:28:23.150Z",
+    "submittedDate": "2023-11-19T09:51:31.358Z",
+    "approvedDate": "2024-03-27T01:10:45.444Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0018.pdf",
-    "completionDate": "2023-11-15T14:22:52.256Z",
-    "costDate": "2023-08-13T15:58:40.086Z"
+    "completionDate": "2023-11-16T08:05:14.550Z",
+    "costDate": "2023-08-14T09:41:02.380Z"
   },
   {
-    "claimID": "A7F-59UZ-TX3S-C",
+    "claimID": "WTY-WNF8-1ZW6-C",
     "type": "TU",
+    "learner": {
+      "id": "HE 58 1F 80 U",
+      "familyName": "Dashawn",
+      "givenName": "Spencer",
+      "jobTitle": "Nursing Assistant"
+    },
     "training": {
       "code": "IMWP",
       "reimbursementAmount": 50,
@@ -698,26 +821,28 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2023-07-14T18:13:46.701Z",
-    "status": "submitted",
-    "createdDate": "2023-11-18T23:08:56.258Z",
+    "startDate": "2023-07-15T11:56:08.995Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-11-19T16:51:18.552Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-08-22T03:22:02.605Z",
+    "submittedDate": null,
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0019.pdf",
-    "completionDate": "2023-07-24T15:46:13.770Z",
-    "costDate": "2023-03-01T23:08:56.258Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-03-02T16:51:18.552Z"
   },
   {
-    "claimID": "MUT-RSUZ-RUH1-C",
+    "claimID": "JYU-USU7-LHVE-C",
     "type": "TU",
+    "learner": {
+      "id": "NR 91 7F 72 O",
+      "familyName": "Donavon",
+      "givenName": "Hamill",
+      "jobTitle": "Local Authority Care Worker"
+    },
     "training": {
       "code": "UWC",
       "reimbursementAmount": 125,
@@ -730,24 +855,33 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Understanding-workplace-culture.pdf"
     },
-    "startDate": "2023-05-25T22:48:17.950Z",
-    "status": "submitted",
-    "createdDate": "2023-05-05T06:07:32.548Z",
+    "startDate": "2023-05-26T16:30:40.244Z",
+    "status": "approved",
+    "createdDate": "2023-05-05T23:49:54.842Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-02-17T06:31:41.704Z",
-    "approvedDate": null,
+    "submittedDate": "2024-02-18T00:14:03.998Z",
+    "approvedDate": "2024-02-20T04:12:41.388Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0020.pdf",
-    "completionDate": "2023-11-08T02:06:20.895Z",
-    "costDate": "2022-05-22T06:07:32.548Z"
+    "completionDate": "2023-11-08T19:48:43.189Z",
+    "costDate": "2022-05-22T23:49:54.842Z"
   },
   {
-    "claimID": "BJK-7HW7-1DGZ-C",
+    "claimID": "BX8-J4A2-S5X4-C",
     "type": "TU",
+    "learner": {
+      "id": "CM 61 1F 12 E",
+      "familyName": "Moises",
+      "givenName": "Larson",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "IMMR",
       "reimbursementAmount": 50,
@@ -760,24 +894,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2024-01-03T02:10:35.106Z",
-    "status": "approved",
-    "createdDate": "2023-08-13T11:21:34.913Z",
+    "startDate": "2024-01-03T19:52:57.398Z",
+    "status": "submitted",
+    "createdDate": "2023-08-14T05:03:57.205Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-01-05T08:55:18.288Z",
-    "approvedDate": "2024-01-26T15:10:06.978Z",
+    "submittedDate": "2024-01-06T02:37:40.580Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0021.pdf",
-    "completionDate": "2024-01-05T06:16:19.261Z",
-    "costDate": "2023-07-30T11:21:34.913Z"
+    "completionDate": "2024-01-05T23:58:41.553Z",
+    "costDate": "2023-07-31T05:03:57.205Z"
   },
   {
-    "claimID": "6M1-BGD8-AJG8-C",
+    "claimID": "79Y-XNSK-P1HL-C",
     "type": "TU",
+    "learner": {
+      "id": "AL 82 2F 62 C",
+      "familyName": "Elias",
+      "givenName": "Dibbert",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -790,24 +932,33 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2023-08-05T09:34:53.273Z",
+    "startDate": "2023-08-06T03:17:15.565Z",
     "status": "approved",
-    "createdDate": "2023-10-24T19:15:03.665Z",
+    "createdDate": "2023-10-25T12:57:25.957Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-01-15T17:33:56.023Z",
-    "approvedDate": "2024-03-28T04:25:36.712Z",
+    "submittedDate": "2024-01-16T11:16:18.315Z",
+    "approvedDate": "2024-03-28T22:07:59.004Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0022.pdf",
-    "completionDate": "2023-12-23T17:33:40.439Z",
-    "costDate": "2023-05-23T19:15:03.665Z"
+    "completionDate": "2023-12-24T11:16:02.731Z",
+    "costDate": "2023-05-24T12:57:25.957Z"
   },
   {
-    "claimID": "LB2-53Y8-RH2M-C",
+    "claimID": "FCX-NY4W-GUSH-C",
     "type": "TU",
+    "learner": {
+      "id": "AL 82 2F 62 C",
+      "familyName": "Elias",
+      "givenName": "Dibbert",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "code": "DLCCA",
       "reimbursementAmount": 100,
@@ -820,27 +971,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
     },
-    "startDate": "2023-08-17T09:29:10.973Z",
-    "status": "approved",
-    "createdDate": "2023-05-07T23:23:05.321Z",
+    "startDate": "2023-08-18T03:11:33.266Z",
+    "status": "submitted",
+    "createdDate": "2023-05-08T17:05:27.614Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-02-24T07:08:14.357Z",
-    "approvedDate": "2024-03-25T21:32:00.238Z",
+    "submittedDate": "2024-02-25T00:50:36.650Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0023.pdf",
-    "completionDate": "2023-10-10T07:19:32.084Z",
-    "costDate": "2022-07-31T23:23:05.321Z"
+    "completionDate": "2023-10-11T01:01:54.377Z",
+    "costDate": "2022-08-01T17:05:27.614Z"
   },
   {
-    "claimID": "HIU-G7UG-YBUM-C",
+    "claimID": "MDI-JH9Q-7SV4-C",
     "type": "TU",
+    "learner": {
+      "id": "PX 89 8F 98 Q",
+      "familyName": "Peggie",
+      "givenName": "Moore",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "type": "Level 3 Certificate",
       "code": "603/1609/3",
@@ -853,26 +1009,31 @@
       "link": null,
       "fundingModel": "split"
     },
-    "startDate": "2023-08-06T07:03:05.770Z",
-    "status": "rejected",
-    "createdDate": "2024-03-29T07:46:13.891Z",
+    "startDate": "2023-08-07T00:45:28.062Z",
+    "status": "approved",
+    "createdDate": "2024-03-30T01:28:36.183Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2023-10-01T11:33:48.939Z",
-    "approvedDate": null,
-    "rejectedDate": "2023-12-12T09:07:44.616Z",
-    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "submittedDate": "2023-10-02T05:16:11.231Z",
+    "approvedDate": "2023-12-13T02:50:06.908Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0024.pdf",
-    "completionDate": "2023-09-30T13:55:08.360Z",
-    "costDate": "2023-12-04T07:46:13.891Z"
+    "completionDate": "2023-10-01T07:37:30.652Z",
+    "costDate": "2023-12-05T01:28:36.183Z"
   },
   {
-    "claimID": "SLK-S1IR-UY2A-C",
+    "claimID": "E4Y-HG1P-DWBF-C",
     "type": "TU",
+    "learner": {
+      "id": "LM 89 7F 48 J",
+      "familyName": "Kailee",
+      "givenName": "Metz",
+      "jobTitle": "Support Worker"
+    },
     "training": {
       "code": "PBSIL",
       "reimbursementAmount": 300,
@@ -885,24 +1046,30 @@
       "awardingOrganisation": null,
       "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
     },
-    "startDate": "2023-09-18T02:01:52.335Z",
+    "startDate": "2023-09-18T19:44:14.627Z",
     "status": "approved",
-    "createdDate": "2023-11-11T11:30:56.087Z",
+    "createdDate": "2023-11-12T05:13:18.379Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-10-27T14:19:01.971Z",
-    "approvedDate": "2024-01-06T17:23:38.648Z",
+    "submittedDate": "2023-10-28T08:01:24.263Z",
+    "approvedDate": "2024-01-07T11:06:00.940Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf"
     ],
     "evidenceOfCompletion": "certficate0025.pdf",
-    "completionDate": "2023-09-25T05:30:16.554Z",
-    "costDate": "2023-10-05T10:30:56.087Z"
+    "completionDate": "2023-09-25T23:12:38.846Z",
+    "costDate": "2023-10-06T04:13:18.379Z"
   },
   {
-    "claimID": "RZL-J7W1-FP88-C",
+    "claimID": "87C-NIDA-2L6Z-C",
     "type": "TU",
+    "learner": {
+      "id": "FI 50 5F 30 D",
+      "familyName": "Sister",
+      "givenName": "Reinger-Murphy",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "DLDOC",
       "reimbursementAmount": 50,
@@ -915,25 +1082,28 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
     },
-    "startDate": "2023-10-11T00:54:27.918Z",
-    "status": "approved",
-    "createdDate": "2023-12-31T23:18:30.870Z",
+    "startDate": "2023-10-11T18:36:50.210Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2024-01-01T17:00:53.162Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-03-08T15:45:32.819Z",
-    "approvedDate": "2024-04-12T10:38:38.103Z",
+    "submittedDate": null,
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0026.pdf",
-    "completionDate": "2023-10-25T21:37:25.368Z",
-    "costDate": "2023-06-09T22:18:30.870Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-06-10T16:00:53.162Z"
   },
   {
-    "claimID": "APE-Z2FT-M2XF-C",
+    "claimID": "N3N-AL4E-1FRG-C",
     "type": "TU",
+    "learner": {
+      "id": "LL 36 2F 22 A",
+      "familyName": "Irving",
+      "givenName": "Schmeler",
+      "jobTitle": "Municipal Caregiver"
+    },
     "training": {
       "code": "DLEDI",
       "reimbursementAmount": 50,
@@ -946,11 +1116,11 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
     },
-    "startDate": "2023-06-25T07:01:25.195Z",
+    "startDate": "2023-06-26T00:43:47.487Z",
     "status": "submitted",
-    "createdDate": "2023-05-19T16:04:26.464Z",
+    "createdDate": "2023-05-20T09:46:48.756Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-03-09T08:52:50.124Z",
+    "submittedDate": "2024-03-10T02:35:12.416Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -960,12 +1130,18 @@
       "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0027.pdf",
-    "completionDate": "2023-10-02T13:06:24.359Z",
-    "costDate": "2022-11-29T17:04:26.464Z"
+    "completionDate": "2023-10-03T06:48:46.651Z",
+    "costDate": "2022-11-30T10:46:48.756Z"
   },
   {
-    "claimID": "2XU-DEDQ-D5Z1-C",
+    "claimID": "TYJ-A2DX-H32K-C",
     "type": "TU",
+    "learner": {
+      "id": "BU 26 7F 00 Y",
+      "familyName": "Melvin",
+      "givenName": "Koelpin",
+      "jobTitle": "Local Authority Care Worker"
+    },
     "training": {
       "code": "MHFA",
       "reimbursementAmount": 100,
@@ -978,24 +1154,31 @@
       "awardingOrganisation": "MHFA England",
       "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
     },
-    "startDate": "2024-02-15T06:22:00.093Z",
+    "startDate": "2024-02-16T00:04:22.385Z",
     "status": "submitted",
-    "createdDate": "2023-09-25T18:19:05.558Z",
+    "createdDate": "2023-09-26T12:01:27.850Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-02-25T12:08:53.007Z",
+    "submittedDate": "2024-02-26T05:51:15.299Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0028.pdf",
-    "completionDate": "2024-02-19T08:05:14.953Z",
-    "costDate": "2023-08-10T18:19:05.558Z"
+    "completionDate": "2024-02-20T01:47:37.245Z",
+    "costDate": "2023-08-11T12:01:27.850Z"
   },
   {
-    "claimID": "6GX-49A8-V5W6-C",
+    "claimID": "5G4-PNTM-EQ7M-C",
     "type": "TU",
+    "learner": {
+      "id": "YD 45 1F 75 I",
+      "familyName": "Rowena",
+      "givenName": "Gusikowski-Prosacco",
+      "jobTitle": "Council Care Assistant"
+    },
     "training": {
       "code": "PBSAL",
       "reimbursementAmount": 450,
@@ -1008,22 +1191,30 @@
       "awardingOrganisation": null,
       "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
     },
-    "startDate": "2024-01-04T15:00:02.825Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2023-12-13T03:26:42.277Z",
+    "startDate": "2024-01-05T08:42:25.117Z",
+    "status": "approved",
+    "createdDate": "2023-12-13T21:09:04.569Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": null,
-    "approvedDate": null,
+    "submittedDate": "2024-03-24T17:34:35.086Z",
+    "approvedDate": "2024-04-04T21:05:28.618Z",
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2022-12-23T03:26:42.277Z"
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0029.pdf",
+    "completionDate": "2024-02-13T06:37:52.874Z",
+    "costDate": "2022-12-23T21:09:04.569Z"
   },
   {
-    "claimID": "6RB-NPLQ-2CG5-C",
+    "claimID": "XL6-HNN9-I6WR-C",
     "type": "TU",
+    "learner": {
+      "id": "MD 20 2F 63 A",
+      "familyName": "Mara",
+      "givenName": "Haag",
+      "jobTitle": "Healthcare Assistant"
+    },
     "training": {
       "code": "WL",
       "reimbursementAmount": 500,
@@ -1036,11 +1227,11 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Well-led.pdf"
     },
-    "startDate": "2023-11-30T15:25:13.034Z",
+    "startDate": "2023-12-01T09:07:35.326Z",
     "status": "submitted",
-    "createdDate": "2024-01-28T22:50:47.647Z",
+    "createdDate": "2024-01-29T16:33:09.939Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-12-23T09:15:13.954Z",
+    "submittedDate": "2023-12-24T02:57:36.246Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -1050,12 +1241,18 @@
       "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0030.pdf",
-    "completionDate": "2023-12-15T06:25:30.155Z",
-    "costDate": "2023-08-31T21:50:47.647Z"
+    "completionDate": "2023-12-16T00:07:52.447Z",
+    "costDate": "2023-09-01T15:33:09.939Z"
   },
   {
-    "claimID": "7L8-8SQA-AUH9-C",
+    "claimID": "1T8-NQ75-2QB3-C",
     "type": "TU",
+    "learner": {
+      "id": "JU 91 7F 75 P",
+      "familyName": "Fernando",
+      "givenName": "Toy-Schoen",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "DLBPCI",
       "reimbursementAmount": 50,
@@ -1068,27 +1265,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Preparing-for-CQC-inspection.aspx"
     },
-    "startDate": "2023-05-03T21:46:20.836Z",
+    "startDate": "2023-05-04T15:28:43.128Z",
     "status": "submitted",
-    "createdDate": "2023-12-21T23:08:21.782Z",
+    "createdDate": "2023-12-22T16:50:44.074Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-04-13T00:34:37.647Z",
+    "submittedDate": "2024-04-13T18:16:59.939Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0031.pdf",
-    "completionDate": "2023-12-12T23:58:14.759Z",
-    "costDate": "2023-05-11T22:08:21.782Z"
+    "completionDate": "2023-12-13T17:40:37.051Z",
+    "costDate": "2023-05-12T15:50:44.074Z"
   },
   {
-    "claimID": "ZDX-G6UJ-Z31Z-C",
+    "claimID": "3P9-A52K-4MKB-C",
     "type": "TU",
+    "learner": {
+      "id": "PX 89 8F 98 Q",
+      "familyName": "Peggie",
+      "givenName": "Moore",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "PBSFS",
       "reimbursementAmount": 50,
@@ -1101,11 +1303,11 @@
       "awardingOrganisation": null,
       "link": "https://www.skillsforcare.org.uk/resources/documents/Developing-your-workforce/Care-topics/Supporting-people-with-challenging-or-distressed/First-step-to-foundation-Competence-Framework.docx"
     },
-    "startDate": "2023-12-03T13:49:38.518Z",
+    "startDate": "2023-12-04T07:32:00.810Z",
     "status": "submitted",
-    "createdDate": "2023-11-15T22:29:03.606Z",
+    "createdDate": "2023-11-16T16:11:25.898Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2024-04-11T13:59:53.145Z",
+    "submittedDate": "2024-04-12T07:42:15.437Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -1116,12 +1318,18 @@
       "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0032.pdf",
-    "completionDate": "2024-03-10T14:25:22.217Z",
-    "costDate": "2023-07-17T21:29:03.606Z"
+    "completionDate": "2024-03-11T08:07:44.509Z",
+    "costDate": "2023-07-18T15:11:25.898Z"
   },
   {
-    "claimID": "NGM-MZMU-VTES-C",
+    "claimID": "YKY-CEZM-1XQY-C",
     "type": "TU",
+    "learner": {
+      "id": "WS 54 2F 01 E",
+      "familyName": "Elvera",
+      "givenName": "Dach",
+      "jobTitle": "Support Worker"
+    },
     "training": {
       "code": "DLDOC",
       "reimbursementAmount": 50,
@@ -1134,24 +1342,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
     },
-    "startDate": "2023-11-05T08:59:32.619Z",
-    "status": "submitted",
-    "createdDate": "2023-08-17T07:52:27.690Z",
+    "startDate": "2023-11-06T02:41:54.911Z",
+    "status": "approved",
+    "createdDate": "2023-08-18T01:34:49.982Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-12-18T03:02:16.047Z",
-    "approvedDate": null,
+    "submittedDate": "2023-12-18T20:44:38.339Z",
+    "approvedDate": "2024-04-02T14:35:27.659Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0033.pdf",
-    "completionDate": "2023-11-10T01:47:52.375Z",
-    "costDate": "2022-09-14T07:52:27.690Z"
+    "completionDate": "2023-11-10T19:30:14.667Z",
+    "costDate": "2022-09-15T01:34:49.982Z"
   },
   {
-    "claimID": "EIL-B5NG-M5XL-C",
+    "claimID": "5VR-FC15-3MQT-C",
     "type": "TU",
+    "learner": {
+      "id": "OB 78 2F 15 O",
+      "familyName": "Mayer",
+      "givenName": "Malinda",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "IMRG",
       "reimbursementAmount": 50,
@@ -1164,22 +1380,31 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2023-07-07T21:05:49.749Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2023-11-15T02:00:25.470Z",
+    "startDate": "2023-07-08T14:48:12.041Z",
+    "status": "submitted",
+    "createdDate": "2023-11-15T19:42:47.762Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": null,
+    "submittedDate": "2024-01-04T19:47:22.120Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2023-06-15T01:00:25.470Z"
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0034.pdf",
+    "completionDate": "2023-09-27T07:22:17.342Z",
+    "costDate": "2023-06-15T18:42:47.762Z"
   },
   {
-    "claimID": "X2V-VR7Y-GCXI-C",
+    "claimID": "Z8R-LFX4-VBJK-C",
     "type": "TU",
+    "learner": {
+      "id": "QB 54 8F 21 X",
+      "familyName": "Mable",
+      "givenName": "Block",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "code": "DLCCA",
       "reimbursementAmount": 100,
@@ -1192,12 +1417,12 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
     },
-    "startDate": "2023-11-05T10:34:20.164Z",
-    "status": "approved",
-    "createdDate": "2023-12-27T01:38:04.241Z",
+    "startDate": "2023-11-06T04:16:42.455Z",
+    "status": "submitted",
+    "createdDate": "2023-12-27T19:20:26.532Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2023-12-15T20:17:01.446Z",
-    "approvedDate": "2023-12-19T07:49:50.638Z",
+    "submittedDate": "2023-12-16T13:59:23.737Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
@@ -1207,12 +1432,18 @@
       "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0035.pdf",
-    "completionDate": "2023-11-16T15:35:38.557Z",
-    "costDate": "2023-10-03T00:38:04.241Z"
+    "completionDate": "2023-11-17T09:18:00.848Z",
+    "costDate": "2023-10-03T18:20:26.532Z"
   },
   {
-    "claimID": "4W8-NFP5-1UPD-C",
+    "claimID": "BZH-9HDU-FY1N-C",
     "type": "TU",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "MHFA",
       "reimbursementAmount": 100,
@@ -1225,12 +1456,12 @@
       "awardingOrganisation": "MHFA England",
       "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
     },
-    "startDate": "2024-03-16T15:03:33.745Z",
+    "startDate": "2024-03-17T08:45:56.037Z",
     "status": "approved",
-    "createdDate": "2023-09-11T00:38:11.815Z",
+    "createdDate": "2023-09-11T18:20:34.107Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-04-12T00:14:29.259Z",
-    "approvedDate": "2024-04-16T20:21:06.088Z",
+    "submittedDate": "2024-04-12T17:56:51.551Z",
+    "approvedDate": "2024-04-17T14:03:28.380Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
@@ -1238,12 +1469,18 @@
       "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0036.pdf",
-    "completionDate": "2024-03-20T09:42:51.249Z",
-    "costDate": "2022-09-28T00:38:11.815Z"
+    "completionDate": "2024-03-21T03:25:13.541Z",
+    "costDate": "2022-09-28T18:20:34.107Z"
   },
   {
-    "claimID": "WIN-G3AL-3UPY-C",
+    "claimID": "9E2-K3MS-TBNJ-C",
     "type": "TU",
+    "learner": {
+      "id": "MD 20 2F 63 A",
+      "familyName": "Mara",
+      "givenName": "Haag",
+      "jobTitle": "Healthcare Assistant"
+    },
     "training": {
       "type": "Autism Level 2 Certificate",
       "code": "603/5139/1",
@@ -1256,26 +1493,33 @@
       "link": null,
       "fundingModel": "split"
     },
-    "startDate": "2023-10-31T05:16:37.541Z",
+    "startDate": "2023-10-31T22:58:59.833Z",
     "status": "approved",
-    "createdDate": "2023-10-09T07:47:14.736Z",
+    "createdDate": "2023-10-10T01:29:37.028Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-02-06T18:58:14.927Z",
-    "approvedDate": "2024-03-21T16:59:38.147Z",
+    "submittedDate": "2024-02-07T12:40:37.219Z",
+    "approvedDate": "2024-03-22T10:42:00.439Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
-      "invoice002.pdf"
+      "invoice002.pdf",
+      "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0037.pdf",
-    "completionDate": "2023-11-30T17:52:00.575Z",
-    "costDate": "2023-01-05T08:47:14.736Z"
+    "completionDate": "2023-12-01T11:34:22.867Z",
+    "costDate": "2023-01-06T02:29:37.028Z"
   },
   {
-    "claimID": "9RD-YS13-DYKV-C",
+    "claimID": "2KU-ZLM5-JPB7-C",
     "type": "TU",
+    "learner": {
+      "id": "BF 74 0F 46 L",
+      "familyName": "Melany",
+      "givenName": "Hills",
+      "jobTitle": "Staff Nurse"
+    },
     "training": {
       "code": "DLLDCP",
       "reimbursementAmount": 50,
@@ -1288,27 +1532,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
     },
-    "startDate": "2023-06-08T19:44:11.337Z",
+    "startDate": "2023-06-09T13:26:33.629Z",
     "status": "approved",
-    "createdDate": "2023-05-20T07:26:52.676Z",
+    "createdDate": "2023-05-21T01:09:14.968Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-01-15T08:44:21.780Z",
-    "approvedDate": "2024-03-14T10:50:11.319Z",
+    "submittedDate": "2024-01-16T02:26:44.072Z",
+    "approvedDate": "2024-03-15T04:32:33.611Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0038.pdf",
-    "completionDate": "2023-09-05T12:58:22.848Z",
-    "costDate": "2022-06-26T07:26:52.676Z"
+    "completionDate": "2023-09-06T06:40:45.140Z",
+    "costDate": "2022-06-27T01:09:14.968Z"
   },
   {
-    "claimID": "PNV-YKJ9-KT1K-C",
+    "claimID": "AQI-NRPZ-55N3-C",
     "type": "TU",
+    "learner": {
+      "id": "WV 15 0F 13 V",
+      "familyName": "Heidi",
+      "givenName": "Reinger-Christiansen",
+      "jobTitle": "Care Assistant (Agency)"
+    },
     "training": {
       "code": "DLCCA",
       "reimbursementAmount": 100,
@@ -1321,26 +1570,30 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
     },
-    "startDate": "2024-04-15T13:08:10.217Z",
+    "startDate": "2024-04-16T06:50:32.509Z",
     "status": "approved",
-    "createdDate": "2023-07-01T09:10:54.454Z",
+    "createdDate": "2023-07-02T02:53:16.746Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-04-16T07:20:56.271Z",
-    "approvedDate": "2024-04-17T09:23:31.466Z",
+    "submittedDate": "2024-04-17T01:03:18.563Z",
+    "approvedDate": "2024-04-18T03:05:53.758Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "invoice000.pdf"
     ],
     "evidenceOfCompletion": "certficate0039.pdf",
-    "completionDate": "2024-04-15T15:21:32.544Z",
-    "costDate": "2022-09-04T09:10:54.454Z"
+    "completionDate": "2024-04-16T09:03:54.836Z",
+    "costDate": "2022-09-05T02:53:16.746Z"
   },
   {
-    "claimID": "I4N-6Z8J-CFNP-C",
+    "claimID": "PID-QRCU-JAA7-C",
     "type": "TU",
+    "learner": {
+      "id": "SE 52 1F 13 K",
+      "familyName": "Coralie",
+      "givenName": "Auer",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "code": "DLLDCP",
       "reimbursementAmount": 50,
@@ -1353,24 +1606,33 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
     },
-    "startDate": "2024-03-28T09:46:13.658Z",
+    "startDate": "2024-03-29T03:28:35.949Z",
     "status": "approved",
-    "createdDate": "2024-03-07T16:09:40.892Z",
+    "createdDate": "2024-03-08T09:52:03.183Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-04-03T05:06:55.529Z",
-    "approvedDate": "2024-04-09T16:47:03.934Z",
+    "submittedDate": "2024-04-03T22:49:17.820Z",
+    "approvedDate": "2024-04-10T10:29:26.225Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0040.pdf",
-    "completionDate": "2024-03-29T05:58:54.885Z",
-    "costDate": "2023-06-23T15:09:40.892Z"
+    "completionDate": "2024-03-29T23:41:17.176Z",
+    "costDate": "2023-06-24T08:52:03.183Z"
   },
   {
-    "claimID": "DJ3-HQ1F-TLFW-C",
+    "claimID": "KRS-T2WA-W1J7-C",
     "type": "TU",
+    "learner": {
+      "id": "PX 89 8F 98 Q",
+      "familyName": "Peggie",
+      "givenName": "Moore",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "DLDOC",
       "reimbursementAmount": 50,
@@ -1383,22 +1645,31 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
     },
-    "startDate": "2024-03-31T18:58:39.301Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2023-12-22T11:03:00.584Z",
+    "startDate": "2024-04-01T12:41:01.592Z",
+    "status": "rejected",
+    "createdDate": "2023-12-23T04:45:22.875Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": null,
+    "submittedDate": "2024-04-02T06:14:12.260Z",
     "approvedDate": null,
-    "rejectedDate": null,
-    "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2023-10-26T10:03:00.584Z"
+    "rejectedDate": "2024-04-04T03:12:18.031Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0041.pdf",
+    "completionDate": "2024-04-01T23:13:31.837Z",
+    "costDate": "2023-10-27T03:45:22.875Z"
   },
   {
-    "claimID": "SQB-XPSN-PE86-C",
+    "claimID": "GB2-SJPS-YSLU-C",
     "type": "TU",
+    "learner": {
+      "id": "UP 28 8F 89 E",
+      "familyName": "Leopold",
+      "givenName": "Carroll",
+      "jobTitle": "Nursing Assistant"
+    },
     "training": {
       "code": "DLLDCP",
       "reimbursementAmount": 50,
@@ -1411,25 +1682,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
     },
-    "startDate": "2023-05-06T14:31:11.489Z",
+    "startDate": "2023-05-07T08:13:33.780Z",
     "status": "submitted",
-    "createdDate": "2024-02-10T15:53:17.788Z",
+    "createdDate": "2024-02-11T09:35:40.079Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2023-11-30T08:18:06.539Z",
+    "submittedDate": "2023-12-01T02:00:28.830Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf"
+      "invoice001.pdf",
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0042.pdf",
-    "completionDate": "2023-09-07T14:17:04.649Z",
-    "costDate": "2023-05-01T14:53:17.788Z"
+    "completionDate": "2023-09-08T07:59:26.940Z",
+    "costDate": "2023-05-02T08:35:40.079Z"
   },
   {
-    "claimID": "WYB-1XS4-R4U7-C",
+    "claimID": "7Q9-5TGN-61GF-C",
     "type": "TU",
+    "learner": {
+      "id": "AJ 54 4F 01 I",
+      "familyName": "Vivien",
+      "givenName": "Swift",
+      "jobTitle": "Care Assistant (Agency)"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -1442,12 +1720,12 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2023-10-19T06:16:19.801Z",
-    "status": "approved",
-    "createdDate": "2023-09-08T07:21:15.092Z",
+    "startDate": "2023-10-19T23:58:42.091Z",
+    "status": "submitted",
+    "createdDate": "2023-09-09T01:03:37.382Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-11-15T05:48:22.425Z",
-    "approvedDate": "2023-12-11T19:33:08.594Z",
+    "submittedDate": "2023-11-15T23:30:44.715Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
@@ -1457,12 +1735,18 @@
       "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0043.pdf",
-    "completionDate": "2023-10-25T18:03:43.713Z",
-    "costDate": "2023-07-21T07:21:15.092Z"
+    "completionDate": "2023-10-26T11:46:06.003Z",
+    "costDate": "2023-07-22T01:03:37.382Z"
   },
   {
-    "claimID": "SYU-8LXQ-VR2U-C",
+    "claimID": "SJ5-27CT-JACS-C",
     "type": "TU",
+    "learner": {
+      "id": "GR 03 6F 10 P",
+      "familyName": "Nathanael",
+      "givenName": "Wilkinson",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "PBSFL",
       "reimbursementAmount": 150,
@@ -1475,24 +1759,32 @@
       "awardingOrganisation": null,
       "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
     },
-    "startDate": "2024-03-10T08:45:47.109Z",
-    "status": "rejected",
-    "createdDate": "2024-04-06T00:25:47.022Z",
+    "startDate": "2024-03-11T02:28:09.400Z",
+    "status": "approved",
+    "createdDate": "2024-04-06T18:08:09.313Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-03-24T03:42:28.639Z",
-    "approvedDate": null,
-    "rejectedDate": "2024-04-01T22:38:53.921Z",
-    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "submittedDate": "2024-03-24T21:24:50.930Z",
+    "approvedDate": "2024-04-02T16:21:16.212Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0044.pdf",
-    "completionDate": "2024-03-12T21:47:43.827Z",
-    "costDate": "2023-08-20T00:25:47.022Z"
+    "completionDate": "2024-03-13T15:30:06.118Z",
+    "costDate": "2023-08-20T18:08:09.313Z"
   },
   {
-    "claimID": "6CX-S1ZH-BP7I-C",
+    "claimID": "H5X-RPVT-RWSG-C",
     "type": "TU",
+    "learner": {
+      "id": "QB 54 8F 21 X",
+      "familyName": "Mable",
+      "givenName": "Block",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "type": "Level 2 Award",
       "code": "601/4586/9",
@@ -1505,25 +1797,28 @@
       "link": null,
       "fundingModel": "split"
     },
-    "startDate": "2023-09-30T00:45:55.248Z",
-    "status": "submitted",
-    "createdDate": "2023-08-16T12:36:54.827Z",
+    "startDate": "2023-09-30T18:28:17.539Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-08-17T06:19:17.118Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-10-15T12:50:17.647Z",
+    "submittedDate": null,
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0045.pdf",
-    "completionDate": "2023-10-14T20:55:58.889Z",
-    "costDate": "2023-03-15T13:36:54.827Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-03-16T07:19:17.118Z"
   },
   {
-    "claimID": "ZKN-MJV3-Y1KU-C",
+    "claimID": "MYK-I2CE-ITFZ-C",
     "type": "TU",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "PBSFL",
       "reimbursementAmount": 150,
@@ -1536,25 +1831,33 @@
       "awardingOrganisation": null,
       "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
     },
-    "startDate": "2023-08-29T21:38:02.052Z",
-    "status": "submitted",
-    "createdDate": "2023-08-11T21:02:00.942Z",
+    "startDate": "2023-08-30T15:20:24.343Z",
+    "status": "approved",
+    "createdDate": "2023-08-12T14:44:23.233Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-02-21T13:24:08.866Z",
-    "approvedDate": null,
+    "submittedDate": "2024-02-22T07:06:31.157Z",
+    "approvedDate": "2024-03-10T20:18:52.080Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf"
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0046.pdf",
-    "completionDate": "2023-10-04T21:35:18.314Z",
-    "costDate": "2022-09-10T21:02:00.942Z"
+    "completionDate": "2023-10-05T15:17:40.605Z",
+    "costDate": "2022-09-11T14:44:23.233Z"
   },
   {
-    "claimID": "T1B-6TYU-U5JX-C",
+    "claimID": "3KE-XUQQ-Y3DL-C",
     "type": "TU",
+    "learner": {
+      "id": "GR 03 6F 10 P",
+      "familyName": "Nathanael",
+      "givenName": "Wilkinson",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -1567,25 +1870,30 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2023-06-11T17:22:53.464Z",
-    "status": "rejected",
-    "createdDate": "2023-04-27T22:18:19.339Z",
+    "startDate": "2023-06-12T11:05:15.755Z",
+    "status": "submitted",
+    "createdDate": "2023-04-28T16:00:41.630Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-02-22T17:19:38.541Z",
+    "submittedDate": "2024-02-23T11:02:00.832Z",
     "approvedDate": null,
-    "rejectedDate": "2024-03-14T03:30:08.118Z",
-    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "rejectedDate": null,
+    "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf"
+      "invoice000.pdf"
     ],
     "evidenceOfCompletion": "certficate0047.pdf",
-    "completionDate": "2023-09-09T16:46:50.494Z",
-    "costDate": "2022-08-04T22:18:19.339Z"
+    "completionDate": "2023-09-10T10:29:12.785Z",
+    "costDate": "2022-08-05T16:00:41.630Z"
   },
   {
-    "claimID": "FHX-68DF-UA84-C",
+    "claimID": "XGH-XVZ8-37BM-C",
     "type": "TU",
+    "learner": {
+      "id": "QX 32 6F 41 Q",
+      "familyName": "Clemmie",
+      "givenName": "Kohler",
+      "jobTitle": "Nursing Assistant"
+    },
     "training": {
       "code": "IMWP",
       "reimbursementAmount": 50,
@@ -1598,25 +1906,28 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2023-05-28T04:35:43.344Z",
-    "status": "approved",
-    "createdDate": "2024-01-11T08:29:19.908Z",
+    "startDate": "2023-05-28T22:18:05.635Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2024-01-12T02:11:42.199Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-09-02T11:39:18.897Z",
-    "approvedDate": "2024-03-01T04:08:21.900Z",
+    "submittedDate": null,
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0048.pdf",
-    "completionDate": "2023-06-07T17:16:34.574Z",
-    "costDate": "2023-05-02T07:29:19.908Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-05-03T01:11:42.199Z"
   },
   {
-    "claimID": "5PI-MSNR-XRDF-C",
+    "claimID": "B3F-TDKW-WTEI-C",
     "type": "TU",
+    "learner": {
+      "id": "OB 78 2F 15 O",
+      "familyName": "Mayer",
+      "givenName": "Malinda",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "DLICR",
       "reimbursementAmount": 50,
@@ -1629,24 +1940,31 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Improve-your-CQC-rating.aspx"
     },
-    "startDate": "2024-01-18T10:30:55.505Z",
+    "startDate": "2024-01-19T04:13:17.795Z",
     "status": "approved",
-    "createdDate": "2023-07-14T16:37:41.693Z",
+    "createdDate": "2023-07-15T10:20:03.983Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-04-07T20:10:43.314Z",
-    "approvedDate": "2024-04-14T12:28:27.950Z",
+    "submittedDate": "2024-04-08T13:53:05.604Z",
+    "approvedDate": "2024-04-15T06:10:50.240Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0049.pdf",
-    "completionDate": "2024-03-19T18:08:02.350Z",
-    "costDate": "2023-05-04T16:37:41.693Z"
+    "completionDate": "2024-03-20T11:50:24.640Z",
+    "costDate": "2023-05-05T10:20:03.983Z"
   },
   {
-    "claimID": "YYX-DR7E-KJXK-C",
+    "claimID": "NGF-PI9Q-ET2S-C",
     "type": "TU",
+    "learner": {
+      "id": "SE 52 1F 13 K",
+      "familyName": "Coralie",
+      "givenName": "Auer",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "code": "DLCCA",
       "reimbursementAmount": 100,
@@ -1659,9 +1977,9 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
     },
-    "startDate": "2024-03-01T11:12:27.561Z",
+    "startDate": "2024-03-02T04:54:49.851Z",
     "status": "not-yet-submitted",
-    "createdDate": "2024-01-25T08:46:08.453Z",
+    "createdDate": "2024-01-26T02:28:30.743Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": null,
     "approvedDate": null,
@@ -1670,11 +1988,17 @@
     "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
-    "costDate": "2023-10-23T07:46:08.453Z"
+    "costDate": "2023-10-24T01:28:30.743Z"
   },
   {
-    "claimID": "LKI-EGBA-TV1W-C",
+    "claimID": "RDM-EZY5-DZUL-C",
     "type": "TU",
+    "learner": {
+      "id": "JU 91 7F 75 P",
+      "familyName": "Fernando",
+      "givenName": "Toy-Schoen",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "MHFA",
       "reimbursementAmount": 100,
@@ -1687,24 +2011,31 @@
       "awardingOrganisation": "MHFA England",
       "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
     },
-    "startDate": "2023-12-20T05:17:11.819Z",
-    "status": "approved",
-    "createdDate": "2024-04-01T07:05:53.820Z",
+    "startDate": "2023-12-20T22:59:34.109Z",
+    "status": "submitted",
+    "createdDate": "2024-04-02T00:48:16.110Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2024-04-10T18:38:59.080Z",
-    "approvedDate": "2024-04-14T12:33:20.952Z",
+    "submittedDate": "2024-04-11T12:21:21.370Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0051.pdf",
-    "completionDate": "2024-03-01T17:01:03.935Z",
-    "costDate": "2023-11-27T08:05:53.820Z"
+    "completionDate": "2024-03-02T10:43:26.225Z",
+    "costDate": "2023-11-28T01:48:16.110Z"
   },
   {
-    "claimID": "YF1-CEEW-PHX3-C",
+    "claimID": "Q4E-7UA1-MFT1-C",
     "type": "TU",
+    "learner": {
+      "id": "HA 93 7F 69 Q",
+      "familyName": "Lyda",
+      "givenName": "Cole",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "PBSAL",
       "reimbursementAmount": 450,
@@ -1717,24 +2048,28 @@
       "awardingOrganisation": null,
       "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
     },
-    "startDate": "2024-04-08T01:59:00.383Z",
-    "status": "approved",
-    "createdDate": "2024-02-24T05:35:47.798Z",
+    "startDate": "2024-04-08T19:41:22.674Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2024-02-24T23:18:10.089Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-04-13T23:28:28.228Z",
-    "approvedDate": "2024-04-14T08:03:18.035Z",
+    "submittedDate": null,
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0052.pdf",
-    "completionDate": "2024-04-12T23:06:57.873Z",
-    "costDate": "2023-09-23T04:35:47.798Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-09-23T22:18:10.089Z"
   },
   {
-    "claimID": "J85-YNCF-WJB7-C",
+    "claimID": "Z5T-66E3-HVJF-C",
     "type": "TU",
+    "learner": {
+      "id": "EL 78 2F 05 S",
+      "familyName": "Ned",
+      "givenName": "Zieme",
+      "jobTitle": "Local Authority Care Worker"
+    },
     "training": {
       "code": "PBSIL",
       "reimbursementAmount": 300,
@@ -1747,25 +2082,33 @@
       "awardingOrganisation": null,
       "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
     },
-    "startDate": "2023-09-25T18:58:01.198Z",
-    "status": "approved",
-    "createdDate": "2023-06-13T17:29:31.819Z",
+    "startDate": "2023-09-26T12:40:23.489Z",
+    "status": "submitted",
+    "createdDate": "2023-06-14T11:11:54.110Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-12-06T22:11:31.358Z",
-    "approvedDate": "2024-02-22T15:53:08.505Z",
+    "submittedDate": "2023-12-07T15:53:53.649Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf"
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0053.pdf",
-    "completionDate": "2023-11-20T15:30:30.894Z",
-    "costDate": "2023-05-31T17:29:31.819Z"
+    "completionDate": "2023-11-21T09:12:53.185Z",
+    "costDate": "2023-06-01T11:11:54.110Z"
   },
   {
-    "claimID": "VHK-NS4L-HQDS-C",
+    "claimID": "3B1-M2FU-QH8D-C",
     "type": "TU",
+    "learner": {
+      "id": "SC 67 9F 81 W",
+      "familyName": "Brock",
+      "givenName": "Lebsack",
+      "jobTitle": "Facility Manager"
+    },
     "training": {
       "code": "DLEDI",
       "reimbursementAmount": 50,
@@ -1778,9 +2121,9 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
     },
-    "startDate": "2023-12-07T00:47:56.643Z",
+    "startDate": "2023-12-07T18:30:18.934Z",
     "status": "not-yet-submitted",
-    "createdDate": "2024-04-16T16:43:50.724Z",
+    "createdDate": "2024-04-17T10:26:13.015Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": null,
     "approvedDate": null,
@@ -1789,11 +2132,17 @@
     "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
-    "costDate": "2023-04-20T16:43:50.724Z"
+    "costDate": "2023-04-21T10:26:13.015Z"
   },
   {
-    "claimID": "DXR-6L9S-C8IV-C",
+    "claimID": "DXU-FF66-I1S6-C",
     "type": "TU",
+    "learner": {
+      "id": "QB 54 8F 21 X",
+      "familyName": "Mable",
+      "givenName": "Block",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "code": "IMMD",
       "reimbursementAmount": 50,
@@ -1806,24 +2155,28 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2023-04-28T23:04:17.128Z",
-    "status": "approved",
-    "createdDate": "2023-04-26T08:40:21.471Z",
+    "startDate": "2023-04-29T16:46:39.418Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-04-27T02:22:43.761Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-07-23T23:21:11.911Z",
-    "approvedDate": "2023-12-13T15:44:01.681Z",
+    "submittedDate": null,
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0055.pdf",
-    "completionDate": "2023-07-22T13:16:36.852Z",
-    "costDate": "2023-01-25T09:40:21.471Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-01-26T03:22:43.761Z"
   },
   {
-    "claimID": "FJ3-NGEN-5HDY-C",
+    "claimID": "TTJ-7U39-A5SC-C",
     "type": "TU",
+    "learner": {
+      "id": "YD 45 1F 75 I",
+      "familyName": "Rowena",
+      "givenName": "Gusikowski-Prosacco",
+      "jobTitle": "Council Care Assistant"
+    },
     "training": {
       "type": "Level 4 Award",
       "code": "501/2178/9",
@@ -1836,26 +2189,31 @@
       "link": null,
       "fundingModel": "split"
     },
-    "startDate": "2023-12-17T22:05:08.269Z",
+    "startDate": "2023-12-18T15:47:30.559Z",
     "status": "submitted",
-    "createdDate": "2023-06-19T00:02:53.253Z",
+    "createdDate": "2023-06-19T17:45:15.543Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-01-10T19:40:53.324Z",
+    "submittedDate": "2024-01-11T13:23:15.614Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0056.pdf",
-    "completionDate": "2024-01-01T05:57:34.345Z",
-    "costDate": "2023-01-19T01:02:53.253Z"
+    "completionDate": "2024-01-01T23:39:56.635Z",
+    "costDate": "2023-01-19T18:45:15.543Z"
   },
   {
-    "claimID": "UBV-W8GT-AJC4-C",
+    "claimID": "4W9-QZT1-DYMT-C",
     "type": "TU",
+    "learner": {
+      "id": "EB 06 4F 17 Y",
+      "familyName": "Ramon",
+      "givenName": "Nitzsche",
+      "jobTitle": "Healthcare Assistant"
+    },
     "training": {
       "code": "IMSMC",
       "reimbursementAmount": 50,
@@ -1868,24 +2226,28 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2024-01-24T11:47:51.608Z",
-    "status": "approved",
-    "createdDate": "2023-08-21T11:53:57.799Z",
+    "startDate": "2024-01-25T05:30:13.898Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-08-22T05:36:20.089Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2024-02-19T15:15:41.685Z",
-    "approvedDate": "2024-03-23T10:47:53.015Z",
+    "submittedDate": null,
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0057.pdf",
-    "completionDate": "2024-02-11T20:33:20.802Z",
-    "costDate": "2022-08-31T11:53:57.799Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-09-01T05:36:20.089Z"
   },
   {
-    "claimID": "J9I-E1RA-1ZGY-C",
+    "claimID": "4AJ-G8ZM-D473-C",
     "type": "TU",
+    "learner": {
+      "id": "FI 50 5F 30 D",
+      "familyName": "Sister",
+      "givenName": "Reinger-Murphy",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "DLLDCP",
       "reimbursementAmount": 50,
@@ -1898,22 +2260,33 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
     },
-    "startDate": "2023-11-04T22:12:47.799Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2023-05-28T06:26:17.190Z",
+    "startDate": "2023-11-05T15:55:10.089Z",
+    "status": "submitted",
+    "createdDate": "2023-05-29T00:08:39.480Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": null,
+    "submittedDate": "2023-11-18T02:49:13.795Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2022-06-10T06:26:17.190Z"
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0058.pdf",
+    "completionDate": "2023-11-17T16:22:41.118Z",
+    "costDate": "2022-06-11T00:08:39.480Z"
   },
   {
-    "claimID": "A3E-GTKU-CVHW-C",
+    "claimID": "QEW-Q13J-X5CY-C",
     "type": "TU",
+    "learner": {
+      "id": "QB 54 8F 21 X",
+      "familyName": "Mable",
+      "givenName": "Block",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "type": "Level 2 Certificate Understanding the Safe Handling of Medicines",
       "code": "600/5591/1",
@@ -1926,26 +2299,31 @@
       "link": null,
       "fundingModel": "split"
     },
-    "startDate": "2024-02-19T23:49:50.656Z",
-    "status": "approved",
-    "createdDate": "2023-08-28T22:58:15.086Z",
+    "startDate": "2024-02-20T17:32:12.947Z",
+    "status": "submitted",
+    "createdDate": "2023-08-29T16:40:37.377Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-02-24T20:12:55.035Z",
-    "approvedDate": "2024-03-26T02:40:54.793Z",
+    "submittedDate": "2024-02-25T13:55:17.326Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0059.pdf",
-    "completionDate": "2024-02-21T22:08:05.810Z",
-    "costDate": "2022-09-04T22:58:15.086Z"
+    "completionDate": "2024-02-22T15:50:28.101Z",
+    "costDate": "2022-09-05T16:40:37.377Z"
   },
   {
-    "claimID": "PCT-EG9F-WK8M-C",
+    "claimID": "5C8-BHPS-96XJ-C",
     "type": "TU",
+    "learner": {
+      "id": "PX 89 8F 98 Q",
+      "familyName": "Peggie",
+      "givenName": "Moore",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "DLDOC",
       "reimbursementAmount": 50,
@@ -1958,24 +2336,28 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
     },
-    "startDate": "2024-02-09T09:07:54.121Z",
-    "status": "submitted",
-    "createdDate": "2023-07-26T17:00:38.938Z",
+    "startDate": "2024-02-10T02:50:16.412Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-07-27T10:43:01.229Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-03-25T19:23:36.636Z",
+    "submittedDate": null,
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0060.pdf",
-    "completionDate": "2024-03-14T01:05:43.673Z",
-    "costDate": "2022-12-07T18:00:38.938Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-12-08T11:43:01.229Z"
   },
   {
-    "claimID": "M2J-Q9Y6-DG6I-C",
+    "claimID": "F6L-6R1Y-8BJ7-C",
     "type": "TU",
+    "learner": {
+      "id": "NX 76 8F 30 D",
+      "familyName": "Lysanne",
+      "givenName": "Lowe",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "PBSAL",
       "reimbursementAmount": 450,
@@ -1988,12 +2370,12 @@
       "awardingOrganisation": null,
       "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
     },
-    "startDate": "2024-02-11T10:09:12.091Z",
-    "status": "submitted",
-    "createdDate": "2024-03-23T08:44:36.023Z",
+    "startDate": "2024-02-12T03:51:34.381Z",
+    "status": "approved",
+    "createdDate": "2024-03-24T02:26:58.313Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-03-15T11:45:08.969Z",
-    "approvedDate": null,
+    "submittedDate": "2024-03-16T05:27:31.259Z",
+    "approvedDate": "2024-04-17T04:35:56.684Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
@@ -2001,12 +2383,18 @@
       "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0061.pdf",
-    "completionDate": "2024-02-27T16:12:13.934Z",
-    "costDate": "2023-09-07T07:44:36.023Z"
+    "completionDate": "2024-02-28T09:54:36.224Z",
+    "costDate": "2023-09-08T01:26:58.313Z"
   },
   {
-    "claimID": "2JV-I3M1-Y1UI-C",
+    "claimID": "UQX-R5R8-DCTJ-C",
     "type": "TU",
+    "learner": {
+      "id": "WA 92 8F 35 V",
+      "familyName": "Rickie",
+      "givenName": "Klocko",
+      "jobTitle": "Care Assistant (Agency)"
+    },
     "training": {
       "code": "IMLPCS",
       "reimbursementAmount": 50,
@@ -2019,26 +2407,33 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2023-10-22T02:11:43.175Z",
-    "status": "submitted",
-    "createdDate": "2023-10-30T04:53:05.406Z",
+    "startDate": "2023-10-22T19:54:05.465Z",
+    "status": "approved",
+    "createdDate": "2023-10-30T22:35:27.696Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-01-03T12:52:51.233Z",
-    "approvedDate": null,
+    "submittedDate": "2024-01-04T06:35:13.523Z",
+    "approvedDate": "2024-03-10T14:57:04.341Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
-      "invoice002.pdf"
+      "invoice002.pdf",
+      "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0062.pdf",
-    "completionDate": "2023-12-13T04:09:31.032Z",
-    "costDate": "2023-05-18T03:53:05.406Z"
+    "completionDate": "2023-12-13T21:51:53.322Z",
+    "costDate": "2023-05-18T21:35:27.696Z"
   },
   {
-    "claimID": "877-MW23-X3HC-C",
+    "claimID": "LB2-AS38-E99A-C",
     "type": "TU",
+    "learner": {
+      "id": "CM 61 1F 12 E",
+      "familyName": "Moises",
+      "givenName": "Larson",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "DLCCA",
       "reimbursementAmount": 100,
@@ -2051,25 +2446,28 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
     },
-    "startDate": "2023-10-23T05:11:34.273Z",
-    "status": "submitted",
-    "createdDate": "2023-11-24T23:38:43.816Z",
+    "startDate": "2023-10-23T22:53:56.563Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-11-25T17:21:06.106Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-11-04T22:20:11.321Z",
+    "submittedDate": null,
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0063.pdf",
-    "completionDate": "2023-10-29T21:35:54.541Z",
-    "costDate": "2023-11-06T23:38:43.816Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-11-07T17:21:06.106Z"
   },
   {
-    "claimID": "UPK-SH38-X13R-C",
+    "claimID": "TTI-JC36-Q61M-C",
     "type": "TU",
+    "learner": {
+      "id": "ZH 56 2F 40 Y",
+      "familyName": "Daryl",
+      "givenName": "Lind",
+      "jobTitle": "Healthcare Assistant"
+    },
     "training": {
       "code": "DLLDCP",
       "reimbursementAmount": 50,
@@ -2082,27 +2480,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
     },
-    "startDate": "2023-09-23T14:59:49.800Z",
-    "status": "approved",
-    "createdDate": "2023-09-29T04:54:15.269Z",
+    "startDate": "2023-09-24T08:42:12.090Z",
+    "status": "submitted",
+    "createdDate": "2023-09-29T22:36:37.559Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-12-25T17:47:50.108Z",
-    "approvedDate": "2024-02-15T18:49:23.847Z",
+    "submittedDate": "2023-12-26T11:30:12.398Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0064.pdf",
-    "completionDate": "2023-10-23T21:13:09.406Z",
-    "costDate": "2022-11-18T05:54:15.269Z"
+    "completionDate": "2023-10-24T14:55:31.696Z",
+    "costDate": "2022-11-18T23:36:37.559Z"
   },
   {
-    "claimID": "AYY-EDBV-5ZET-C",
+    "claimID": "XMV-A1TV-Y3NI-C",
     "type": "TU",
+    "learner": {
+      "id": "FI 50 5F 30 D",
+      "familyName": "Sister",
+      "givenName": "Reinger-Murphy",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -2115,54 +2518,68 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2023-06-05T08:32:58.339Z",
-    "status": "rejected",
-    "createdDate": "2024-04-06T03:41:20.870Z",
+    "startDate": "2023-06-06T02:15:20.629Z",
+    "status": "approved",
+    "createdDate": "2024-04-06T21:23:43.160Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-10-02T14:46:29.456Z",
-    "approvedDate": null,
-    "rejectedDate": "2023-12-24T18:26:13.810Z",
-    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0065.pdf",
-    "completionDate": "2023-06-25T22:41:50.814Z",
-    "costDate": "2023-12-23T04:41:20.870Z"
-  },
-  {
-    "claimID": "HS3-651X-97SE-C",
-    "type": "TU",
-    "training": {
-      "code": "DLFE",
-      "reimbursementAmount": 50,
-      "title": "Learning from Events",
-      "totalLearningTime": "35 mins",
-      "fundingModel": "full",
-      "type": "e-Learning Module",
-      "category": "Support for leaders and managers",
-      "description": null,
-      "awardingOrganisation": "Skills for Care",
-      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
-    },
-    "startDate": "2024-02-06T07:03:09.131Z",
-    "status": "submitted",
-    "createdDate": "2024-02-28T19:34:07.755Z",
-    "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-02-24T01:04:16.324Z",
-    "approvedDate": null,
+    "submittedDate": "2023-10-03T08:28:51.746Z",
+    "approvedDate": "2023-12-25T12:08:36.100Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice000.pdf",
+      "invoice001.pdf"
     ],
-    "evidenceOfCompletion": "certficate0066.pdf",
-    "completionDate": "2024-02-18T08:21:56.136Z",
-    "costDate": "2023-10-18T18:34:07.755Z"
+    "evidenceOfCompletion": "certficate0065.pdf",
+    "completionDate": "2023-06-26T16:24:13.104Z",
+    "costDate": "2023-12-23T22:23:43.160Z"
   },
   {
-    "claimID": "FK3-L9JX-75JN-C",
+    "claimID": "KKL-JSQA-NA7M-C",
     "type": "TU",
+    "learner": {
+      "id": "UH 04 6F 47 V",
+      "familyName": "Beatrice",
+      "givenName": "Fay",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2024-02-07T00:45:31.421Z",
+    "status": "approved",
+    "createdDate": "2024-02-29T13:16:30.045Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-24T18:46:38.614Z",
+    "approvedDate": "2024-03-13T07:08:09.463Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0066.pdf",
+    "completionDate": "2024-02-19T02:04:18.426Z",
+    "costDate": "2023-10-19T12:16:30.045Z"
+  },
+  {
+    "claimID": "4XU-4AET-C8L1-C",
+    "type": "TU",
+    "learner": {
+      "id": "YD 45 1F 75 I",
+      "familyName": "Rowena",
+      "givenName": "Gusikowski-Prosacco",
+      "jobTitle": "Council Care Assistant"
+    },
     "training": {
       "code": "DLCCA",
       "reimbursementAmount": 100,
@@ -2175,11 +2592,11 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
     },
-    "startDate": "2023-07-18T08:18:09.712Z",
+    "startDate": "2023-07-19T02:00:32.002Z",
     "status": "submitted",
-    "createdDate": "2023-06-09T03:11:36.010Z",
+    "createdDate": "2023-06-09T20:53:58.300Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-01-04T16:04:56.801Z",
+    "submittedDate": "2024-01-05T09:47:19.091Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -2190,12 +2607,18 @@
       "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0067.pdf",
-    "completionDate": "2023-09-12T19:46:37.239Z",
-    "costDate": "2022-10-01T03:11:36.010Z"
+    "completionDate": "2023-09-13T13:28:59.529Z",
+    "costDate": "2022-10-01T20:53:58.300Z"
   },
   {
-    "claimID": "83B-GHNL-C452-C",
+    "claimID": "KNN-36AP-IBXF-C",
     "type": "TU",
+    "learner": {
+      "id": "KX 89 9F 87 K",
+      "familyName": "Eugene",
+      "givenName": "Gottlieb",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "DLICR",
       "reimbursementAmount": 50,
@@ -2208,55 +2631,66 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Improve-your-CQC-rating.aspx"
     },
-    "startDate": "2024-04-01T18:56:03.137Z",
+    "startDate": "2024-04-02T12:38:25.427Z",
     "status": "submitted",
-    "createdDate": "2023-07-11T07:57:11.077Z",
+    "createdDate": "2023-07-12T01:39:33.367Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2024-04-03T13:40:16.205Z",
-    "approvedDate": null,
-    "rejectedDate": null,
-    "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0068.pdf",
-    "completionDate": "2024-04-02T17:50:22.759Z",
-    "costDate": "2023-05-18T07:57:11.077Z"
-  },
-  {
-    "claimID": "SKQ-4ZBP-51LY-C",
-    "type": "TU",
-    "training": {
-      "code": "DLICR",
-      "reimbursementAmount": 50,
-      "title": "Improving your CQC rating",
-      "totalLearningTime": "60 mins",
-      "fundingModel": "full",
-      "type": "e-Learning Module",
-      "category": "Support for leaders and managers",
-      "description": null,
-      "awardingOrganisation": "Skills for Care",
-      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Improve-your-CQC-rating.aspx"
-    },
-    "startDate": "2023-06-27T07:20:38.474Z",
-    "status": "submitted",
-    "createdDate": "2023-09-13T03:21:34.877Z",
-    "createdBy": "Allan Connelly",
-    "submittedDate": "2024-02-15T10:13:45.833Z",
+    "submittedDate": "2024-04-04T07:22:38.495Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf"
+      "invoice001.pdf",
+      "invoice002.pdf"
     ],
-    "evidenceOfCompletion": "certficate0069.pdf",
-    "completionDate": "2024-01-13T20:45:25.412Z",
-    "costDate": "2023-07-15T03:21:34.877Z"
+    "evidenceOfCompletion": "certficate0068.pdf",
+    "completionDate": "2024-04-03T11:32:45.049Z",
+    "costDate": "2023-05-19T01:39:33.367Z"
   },
   {
-    "claimID": "394-MRWU-975E-C",
+    "claimID": "EQM-J6F1-223K-C",
     "type": "TU",
+    "learner": {
+      "id": "HE 58 1F 80 U",
+      "familyName": "Dashawn",
+      "givenName": "Spencer",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "DLICR",
+      "reimbursementAmount": 50,
+      "title": "Improving your CQC rating",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Improve-your-CQC-rating.aspx"
+    },
+    "startDate": "2023-06-28T01:03:00.764Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-09-13T21:03:57.167Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-07-15T21:03:57.167Z"
+  },
+  {
+    "claimID": "4V2-Q3VT-KL8Y-C",
+    "type": "TU",
+    "learner": {
+      "id": "LL 36 2F 22 A",
+      "familyName": "Irving",
+      "givenName": "Schmeler",
+      "jobTitle": "Municipal Caregiver"
+    },
     "training": {
       "type": "Level 4 Certificate in Principles of Leadership and Management in Adult Care",
       "code": "603/0676/2",
@@ -2269,25 +2703,33 @@
       "link": null,
       "fundingModel": "split"
     },
-    "startDate": "2023-06-04T04:19:22.212Z",
-    "status": "submitted",
-    "createdDate": "2024-03-18T07:08:10.056Z",
+    "startDate": "2023-06-04T22:01:44.503Z",
+    "status": "approved",
+    "createdDate": "2024-03-19T00:50:32.347Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2024-03-18T10:02:40.593Z",
-    "approvedDate": null,
+    "submittedDate": "2024-03-19T03:45:02.884Z",
+    "approvedDate": "2024-03-28T17:22:10.933Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf"
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0070.pdf",
-    "completionDate": "2023-07-23T08:18:06.182Z",
-    "costDate": "2024-02-01T07:08:10.056Z"
+    "completionDate": "2023-07-24T02:00:28.473Z",
+    "costDate": "2024-02-02T00:50:32.347Z"
   },
   {
-    "claimID": "IAR-CF9Q-AKLZ-C",
+    "claimID": "FXY-5E2L-Y17Z-C",
     "type": "TU",
+    "learner": {
+      "id": "JU 91 7F 75 P",
+      "familyName": "Fernando",
+      "givenName": "Toy-Schoen",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -2300,25 +2742,30 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2023-07-15T12:53:10.516Z",
-    "status": "approved",
-    "createdDate": "2023-11-28T12:10:01.782Z",
+    "startDate": "2023-07-16T06:35:32.807Z",
+    "status": "submitted",
+    "createdDate": "2023-11-29T05:52:24.073Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-01-29T01:42:38.924Z",
-    "approvedDate": "2024-02-11T13:21:09.017Z",
+    "submittedDate": "2024-01-29T19:25:01.215Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf"
+      "invoice000.pdf"
     ],
     "evidenceOfCompletion": "certficate0071.pdf",
-    "completionDate": "2023-08-23T18:52:33.651Z",
-    "costDate": "2023-01-28T12:10:01.782Z"
+    "completionDate": "2023-08-24T12:34:55.942Z",
+    "costDate": "2023-01-29T05:52:24.073Z"
   },
   {
-    "claimID": "423-E62W-HXWF-C",
+    "claimID": "XQ7-FPRI-Z1VF-C",
     "type": "TU",
+    "learner": {
+      "id": "AJ 54 4F 01 I",
+      "familyName": "Vivien",
+      "givenName": "Swift",
+      "jobTitle": "Care Assistant (Agency)"
+    },
     "training": {
       "code": "IMPDW",
       "reimbursementAmount": 50,
@@ -2331,24 +2778,30 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2023-08-11T19:56:08.469Z",
+    "startDate": "2023-08-12T13:38:30.759Z",
     "status": "approved",
-    "createdDate": "2023-11-19T03:52:55.855Z",
+    "createdDate": "2023-11-19T21:35:18.145Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-11-12T01:09:13.298Z",
-    "approvedDate": "2024-01-16T01:30:25.090Z",
+    "submittedDate": "2023-11-12T18:51:35.588Z",
+    "approvedDate": "2024-01-16T19:12:47.380Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf"
     ],
     "evidenceOfCompletion": "certficate0072.pdf",
-    "completionDate": "2023-10-10T14:51:27.893Z",
-    "costDate": "2023-10-24T02:52:55.855Z"
+    "completionDate": "2023-10-11T08:33:50.183Z",
+    "costDate": "2023-10-24T20:35:18.145Z"
   },
   {
-    "claimID": "TS3-I3QK-63P7-C",
+    "claimID": "WTT-5NQ7-H2FE-C",
     "type": "TU",
+    "learner": {
+      "id": "KX 89 9F 87 K",
+      "familyName": "Eugene",
+      "givenName": "Gottlieb",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "LTS",
       "reimbursementAmount": 500,
@@ -2361,22 +2814,33 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/resources/documents/Developing-your-workforce/Endorsement/Licenced-programmes/Lead-to-succeed.pdf"
     },
-    "startDate": "2023-10-04T00:27:27.974Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2023-09-08T17:36:01.152Z",
+    "startDate": "2023-10-04T18:09:50.264Z",
+    "status": "submitted",
+    "createdDate": "2023-09-09T11:18:23.442Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": null,
+    "submittedDate": "2024-02-01T17:33:09.018Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2023-07-06T17:36:01.152Z"
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0073.pdf",
+    "completionDate": "2023-12-05T23:39:48.785Z",
+    "costDate": "2023-07-07T11:18:23.442Z"
   },
   {
-    "claimID": "KXE-SRBX-SMNL-C",
+    "claimID": "W2W-T4WB-ZZY9-C",
     "type": "TU",
+    "learner": {
+      "id": "YH 60 9F 32 Z",
+      "familyName": "Liza",
+      "givenName": "Breitenberg",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -2389,26 +2853,33 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2023-11-16T02:21:11.861Z",
+    "startDate": "2023-11-16T20:03:34.151Z",
     "status": "submitted",
-    "createdDate": "2023-07-06T06:08:24.768Z",
+    "createdDate": "2023-07-06T23:50:47.058Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2023-12-02T22:51:15.605Z",
+    "submittedDate": "2023-12-03T16:33:37.895Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
-      "invoice002.pdf"
+      "invoice002.pdf",
+      "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0074.pdf",
-    "completionDate": "2023-11-21T14:39:34.552Z",
-    "costDate": "2022-08-25T06:08:24.768Z"
+    "completionDate": "2023-11-22T08:21:56.842Z",
+    "costDate": "2022-08-25T23:50:47.058Z"
   },
   {
-    "claimID": "5MM-KGF2-MWMY-C",
+    "claimID": "B57-S8DL-WXBN-C",
     "type": "TU",
+    "learner": {
+      "id": "GR 03 6F 10 P",
+      "familyName": "Nathanael",
+      "givenName": "Wilkinson",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "USMS",
       "reimbursementAmount": 125,
@@ -2421,22 +2892,30 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Understanding-self-management-skills.pdf"
     },
-    "startDate": "2024-03-24T12:55:49.297Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2023-07-16T13:19:38.636Z",
+    "startDate": "2024-03-25T06:38:11.587Z",
+    "status": "submitted",
+    "createdDate": "2023-07-17T07:02:00.926Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": null,
+    "submittedDate": "2024-04-16T15:50:11.881Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2023-03-18T14:19:38.636Z"
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0075.pdf",
+    "completionDate": "2024-04-02T06:22:36.082Z",
+    "costDate": "2023-03-19T08:02:00.926Z"
   },
   {
-    "claimID": "CHS-KLI4-32BE-C",
+    "claimID": "NXT-Y4BG-Z7D2-C",
     "type": "TU",
+    "learner": {
+      "id": "PX 89 8F 98 Q",
+      "familyName": "Peggie",
+      "givenName": "Moore",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "DLICR",
       "reimbursementAmount": 50,
@@ -2449,11 +2928,11 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Improve-your-CQC-rating.aspx"
     },
-    "startDate": "2023-06-23T16:26:56.855Z",
+    "startDate": "2023-06-24T10:09:19.145Z",
     "status": "submitted",
-    "createdDate": "2024-04-08T03:43:48.978Z",
+    "createdDate": "2024-04-08T21:26:11.268Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-08-20T14:12:48.428Z",
+    "submittedDate": "2023-08-21T07:55:10.718Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -2463,12 +2942,18 @@
       "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0076.pdf",
-    "completionDate": "2023-07-14T11:43:11.441Z",
-    "costDate": "2023-07-23T03:43:48.978Z"
+    "completionDate": "2023-07-15T05:25:33.731Z",
+    "costDate": "2023-07-23T21:26:11.268Z"
   },
   {
-    "claimID": "TS7-8MTP-C5SK-C",
+    "claimID": "JGV-QT6X-8V6R-C",
     "type": "TU",
+    "learner": {
+      "id": "NR 91 7F 72 O",
+      "familyName": "Donavon",
+      "givenName": "Hamill",
+      "jobTitle": "Local Authority Care Worker"
+    },
     "training": {
       "code": "601/5865/7",
       "reimbursementAmount": 150,
@@ -2481,26 +2966,31 @@
       "link": null,
       "fundingModel": "split"
     },
-    "startDate": "2023-08-27T05:08:37.213Z",
+    "startDate": "2023-08-27T22:50:59.504Z",
     "status": "submitted",
-    "createdDate": "2023-12-10T15:11:44.924Z",
+    "createdDate": "2023-12-11T08:54:07.215Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2023-09-28T20:52:34.965Z",
+    "submittedDate": "2023-09-29T14:34:57.256Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0077.pdf",
-    "completionDate": "2023-09-22T14:26:21.037Z",
-    "costDate": "2023-11-25T15:11:44.924Z"
+    "completionDate": "2023-09-23T08:08:43.328Z",
+    "costDate": "2023-11-26T08:54:07.215Z"
   },
   {
-    "claimID": "32E-EFIJ-BUUF-C",
+    "claimID": "995-JZCS-3LEX-C",
     "type": "TU",
+    "learner": {
+      "id": "BU 26 7F 00 Y",
+      "familyName": "Melvin",
+      "givenName": "Koelpin",
+      "jobTitle": "Local Authority Care Worker"
+    },
     "training": {
       "code": "IMLI",
       "reimbursementAmount": 50,
@@ -2513,25 +3003,70 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2023-08-13T01:32:28.115Z",
-    "status": "approved",
-    "createdDate": "2023-09-21T08:09:52.645Z",
+    "startDate": "2023-08-13T19:14:50.406Z",
+    "status": "rejected",
+    "createdDate": "2023-09-22T01:52:14.936Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-02-27T22:22:40.140Z",
-    "approvedDate": "2024-04-15T21:23:51.730Z",
+    "submittedDate": "2024-02-28T16:05:02.431Z",
+    "approvedDate": null,
+    "rejectedDate": "2024-04-16T15:06:14.021Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0078.pdf",
+    "completionDate": "2023-10-17T13:17:11.529Z",
+    "costDate": "2023-02-16T02:52:14.936Z"
+  },
+  {
+    "claimID": "E66-ISDI-14PQ-C",
+    "type": "TU",
+    "learner": {
+      "id": "LL 36 2F 22 A",
+      "familyName": "Irving",
+      "givenName": "Schmeler",
+      "jobTitle": "Municipal Caregiver"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2023-11-24T13:32:18.307Z",
+    "status": "approved",
+    "createdDate": "2023-10-30T12:12:45.523Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-03-22T04:59:14.918Z",
+    "approvedDate": "2024-04-02T23:51:37.964Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf"
     ],
-    "evidenceOfCompletion": "certficate0078.pdf",
-    "completionDate": "2023-10-16T19:34:49.238Z",
-    "costDate": "2023-02-15T09:09:52.645Z"
+    "evidenceOfCompletion": "certficate0079.pdf",
+    "completionDate": "2023-12-12T06:18:56.333Z",
+    "costDate": "2023-04-30T11:12:45.523Z"
   },
   {
-    "claimID": "RV8-URZU-77S8-C",
+    "claimID": "2LP-NYYW-KDBQ-C",
     "type": "TU",
+    "learner": {
+      "id": "FI 50 5F 30 D",
+      "familyName": "Sister",
+      "givenName": "Reinger-Murphy",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "DLCCA",
       "reimbursementAmount": 100,
@@ -2544,9 +3079,9 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
     },
-    "startDate": "2023-11-23T19:49:56.017Z",
+    "startDate": "2023-08-15T13:21:14.138Z",
     "status": "not-yet-submitted",
-    "createdDate": "2023-10-29T18:30:23.233Z",
+    "createdDate": "2023-08-07T01:41:00.954Z",
     "createdBy": "Allan Connelly",
     "submittedDate": null,
     "approvedDate": null,
@@ -2555,39 +3090,17 @@
     "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
-    "costDate": "2023-04-29T17:30:23.233Z"
+    "costDate": "2023-04-30T01:41:00.954Z"
   },
   {
-    "claimID": "XC2-S2H3-8QFM-C",
+    "claimID": "TQV-8FNI-WN4K-C",
     "type": "TU",
-    "training": {
-      "code": "DLCCA",
-      "reimbursementAmount": 100,
-      "title": "Care Certificate Assessors",
-      "totalLearningTime": "50 mins",
-      "fundingModel": "full",
-      "type": "e-Learning Module",
-      "category": "Developing your workforce",
-      "description": null,
-      "awardingOrganisation": "Skills for Care",
-      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    "learner": {
+      "id": "QX 32 6F 41 Q",
+      "familyName": "Clemmie",
+      "givenName": "Kohler",
+      "jobTitle": "Nursing Assistant"
     },
-    "startDate": "2023-08-14T19:38:51.848Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2023-08-06T07:58:38.664Z",
-    "createdBy": "Allan Connelly",
-    "submittedDate": null,
-    "approvedDate": null,
-    "rejectedDate": null,
-    "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2023-04-29T07:58:38.664Z"
-  },
-  {
-    "claimID": "UKF-MUN8-KIHI-C",
-    "type": "TU",
     "training": {
       "code": "DLEDI",
       "reimbursementAmount": 50,
@@ -2600,22 +3113,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
     },
-    "startDate": "2023-12-15T04:56:27.257Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2023-06-23T02:24:24.132Z",
+    "startDate": "2023-12-15T22:38:49.547Z",
+    "status": "approved",
+    "createdDate": "2023-06-23T20:06:46.422Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": null,
-    "approvedDate": null,
+    "submittedDate": "2024-04-07T15:09:41.795Z",
+    "approvedDate": "2024-04-16T14:39:34.426Z",
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2022-10-23T02:24:24.132Z"
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0081.pdf",
+    "completionDate": "2024-03-27T06:32:38.216Z",
+    "costDate": "2022-10-23T20:06:46.422Z"
   },
   {
-    "claimID": "V9E-L3LZ-73V3-C",
+    "claimID": "BQF-7T2C-8LPY-C",
     "type": "TU",
+    "learner": {
+      "id": "FS 47 4F 68 U",
+      "familyName": "Eleonore",
+      "givenName": "Nicolas",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "DLBPCI",
       "reimbursementAmount": 50,
@@ -2628,25 +3151,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Preparing-for-CQC-inspection.aspx"
     },
-    "startDate": "2023-08-28T07:06:56.509Z",
+    "startDate": "2023-08-29T00:49:18.799Z",
     "status": "submitted",
-    "createdDate": "2023-11-23T22:39:12.243Z",
+    "createdDate": "2023-11-24T16:21:34.533Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2024-02-25T19:53:21.418Z",
+    "submittedDate": "2024-02-26T13:35:43.708Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf"
+      "invoice001.pdf",
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0082.pdf",
-    "completionDate": "2024-01-16T02:53:43.732Z",
-    "costDate": "2023-02-11T22:39:12.243Z"
+    "completionDate": "2024-01-16T20:36:06.022Z",
+    "costDate": "2023-02-12T16:21:34.533Z"
   },
   {
-    "claimID": "1HP-S8CR-BBX3-C",
+    "claimID": "9DW-BX7Z-R83I-C",
     "type": "TU",
+    "learner": {
+      "id": "JU 91 7F 75 P",
+      "familyName": "Fernando",
+      "givenName": "Toy-Schoen",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "DLICR",
       "reimbursementAmount": 50,
@@ -2659,25 +3189,30 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Improve-your-CQC-rating.aspx"
     },
-    "startDate": "2023-08-12T00:47:52.676Z",
-    "status": "rejected",
-    "createdDate": "2023-06-18T01:20:24.695Z",
+    "startDate": "2023-08-12T18:30:14.966Z",
+    "status": "submitted",
+    "createdDate": "2023-06-18T19:02:46.985Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2024-02-21T23:47:35.387Z",
+    "submittedDate": "2024-02-22T17:29:57.677Z",
     "approvedDate": null,
-    "rejectedDate": "2024-04-08T00:18:52.014Z",
-    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "rejectedDate": null,
+    "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf"
+      "invoice000.pdf"
     ],
     "evidenceOfCompletion": "certficate0083.pdf",
-    "completionDate": "2023-10-04T03:01:26.900Z",
-    "costDate": "2022-07-21T01:20:24.695Z"
+    "completionDate": "2023-10-04T20:43:49.190Z",
+    "costDate": "2022-07-21T19:02:46.985Z"
   },
   {
-    "claimID": "UGI-AKDT-6SNX-C",
+    "claimID": "7WF-NMF3-VSD2-C",
     "type": "TU",
+    "learner": {
+      "id": "XY 32 8F 00 J",
+      "familyName": "Isidro",
+      "givenName": "Howell",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "IMSMC",
       "reimbursementAmount": 50,
@@ -2690,24 +3225,28 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
     },
-    "startDate": "2023-12-04T11:27:15.693Z",
-    "status": "submitted",
-    "createdDate": "2023-10-25T23:10:25.758Z",
+    "startDate": "2023-12-05T05:09:37.983Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-10-26T16:52:48.048Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-02-27T09:49:04.596Z",
+    "submittedDate": null,
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
-    "evidenceOfCompletion": "certficate0084.pdf",
-    "completionDate": "2024-01-04T22:41:38.597Z",
-    "costDate": "2023-07-01T23:10:25.758Z"
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-07-02T16:52:48.048Z"
   },
   {
-    "claimID": "99R-X1J1-EFNJ-C",
+    "claimID": "9AH-UMT4-KGW6-C",
     "type": "TU",
+    "learner": {
+      "id": "QB 54 8F 21 X",
+      "familyName": "Mable",
+      "givenName": "Block",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "code": "WL",
       "reimbursementAmount": 500,
@@ -2720,26 +3259,31 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Well-led.pdf"
     },
-    "startDate": "2023-10-14T20:20:53.642Z",
-    "status": "submitted",
-    "createdDate": "2023-10-06T08:34:38.992Z",
+    "startDate": "2023-10-15T14:03:15.932Z",
+    "status": "rejected",
+    "createdDate": "2023-10-07T02:17:01.282Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-02-13T07:15:48.152Z",
+    "submittedDate": "2024-02-14T00:58:10.442Z",
     "approvedDate": null,
-    "rejectedDate": null,
-    "rejectedNote": null,
+    "rejectedDate": "2024-03-02T15:07:50.485Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
       "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0085.pdf",
-    "completionDate": "2024-01-13T12:47:51.973Z",
-    "costDate": "2023-09-18T08:34:38.992Z"
+    "completionDate": "2024-01-14T06:30:14.263Z",
+    "costDate": "2023-09-19T02:17:01.282Z"
   },
   {
-    "claimID": "VAT-ICPE-TP86-C",
+    "claimID": "XHG-FHD2-F29M-C",
     "type": "TU",
+    "learner": {
+      "id": "AJ 54 4F 01 I",
+      "familyName": "Vivien",
+      "givenName": "Swift",
+      "jobTitle": "Care Assistant (Agency)"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -2752,9 +3296,9 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2023-04-21T03:28:29.688Z",
+    "startDate": "2023-04-21T21:10:51.978Z",
     "status": "not-yet-submitted",
-    "createdDate": "2024-02-02T00:38:29.280Z",
+    "createdDate": "2024-02-02T18:20:51.570Z",
     "createdBy": "Mara Monahan",
     "submittedDate": null,
     "approvedDate": null,
@@ -2763,11 +3307,17 @@
     "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
-    "costDate": "2023-12-08T00:38:29.280Z"
+    "costDate": "2023-12-08T18:20:51.570Z"
   },
   {
-    "claimID": "S84-UL9S-3TE7-C",
+    "claimID": "VIA-I39D-DDPV-C",
     "type": "TU",
+    "learner": {
+      "id": "VL 10 7F 63 E",
+      "familyName": "Casimer",
+      "givenName": "Fahey",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "WL",
       "reimbursementAmount": 500,
@@ -2780,25 +3330,30 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Well-led.pdf"
     },
-    "startDate": "2023-05-05T01:50:28.074Z",
-    "status": "approved",
-    "createdDate": "2024-01-08T20:05:57.005Z",
+    "startDate": "2023-05-05T19:32:50.364Z",
+    "status": "submitted",
+    "createdDate": "2024-01-09T13:48:19.295Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2023-06-08T04:12:03.675Z",
-    "approvedDate": "2023-08-22T21:00:03.034Z",
+    "submittedDate": "2023-06-08T21:54:25.965Z",
+    "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf"
+      "invoice000.pdf"
     ],
     "evidenceOfCompletion": "certficate0087.pdf",
-    "completionDate": "2023-05-24T07:51:28.825Z",
-    "costDate": "2023-06-07T19:05:57.005Z"
+    "completionDate": "2023-05-25T01:33:51.115Z",
+    "costDate": "2023-06-08T12:48:19.295Z"
   },
   {
-    "claimID": "IGM-UVP3-VFT9-C",
+    "claimID": "9C1-KVBE-PFXQ-C",
     "type": "TU",
+    "learner": {
+      "id": "CW 99 7F 83 J",
+      "familyName": "Jaylin",
+      "givenName": "Larson",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "code": "UPM",
       "reimbursementAmount": 125,
@@ -2811,22 +3366,31 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Understanding-performance-management.pdf"
     },
-    "startDate": "2023-10-15T12:08:45.119Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2023-05-22T05:51:12.442Z",
+    "startDate": "2023-10-16T05:51:07.409Z",
+    "status": "approved",
+    "createdDate": "2023-05-22T23:33:34.732Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": null,
-    "approvedDate": null,
+    "submittedDate": "2024-03-30T03:43:00.514Z",
+    "approvedDate": "2024-04-12T14:14:57.796Z",
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2022-09-25T05:51:12.442Z"
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0088.pdf",
+    "completionDate": "2024-02-13T01:38:56.286Z",
+    "costDate": "2022-09-25T23:33:34.732Z"
   },
   {
-    "claimID": "WYG-WFTB-CKS8-C",
+    "claimID": "RYA-T4PR-TYDR-C",
     "type": "TU",
+    "learner": {
+      "id": "ZH 56 2F 40 Y",
+      "familyName": "Daryl",
+      "givenName": "Lind",
+      "jobTitle": "Healthcare Assistant"
+    },
     "training": {
       "code": "DLCCA",
       "reimbursementAmount": 100,
@@ -2839,22 +3403,30 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
     },
-    "startDate": "2023-11-28T01:22:45.329Z",
-    "status": "not-yet-submitted",
-    "createdDate": "2024-01-15T04:46:03.994Z",
+    "startDate": "2023-11-28T19:05:07.619Z",
+    "status": "submitted",
+    "createdDate": "2024-01-15T22:28:26.284Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": null,
+    "submittedDate": "2024-01-08T08:57:33.635Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2023-10-12T03:46:03.994Z"
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0089.pdf",
+    "completionDate": "2023-12-02T17:28:29.887Z",
+    "costDate": "2023-10-12T21:28:26.284Z"
   },
   {
-    "claimID": "8VL-U763-M1P9-C",
+    "claimID": "ZAQ-MJJX-JZMD-C",
     "type": "TU",
+    "learner": {
+      "id": "NX 76 8F 30 D",
+      "familyName": "Lysanne",
+      "givenName": "Lowe",
+      "jobTitle": "Personal Assistant"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -2867,9 +3439,9 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2023-06-23T14:07:26.427Z",
+    "startDate": "2023-06-24T07:49:48.717Z",
     "status": "not-yet-submitted",
-    "createdDate": "2024-02-20T01:27:02.134Z",
+    "createdDate": "2024-02-20T19:09:24.424Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": null,
     "approvedDate": null,
@@ -2878,11 +3450,17 @@
     "evidenceOfPayment": [],
     "evidenceOfCompletion": null,
     "completionDate": null,
-    "costDate": "2023-02-25T01:27:02.134Z"
+    "costDate": "2023-02-25T19:09:24.424Z"
   },
   {
-    "claimID": "XNI-VFDZ-R63Z-C",
+    "claimID": "ZJ6-5U57-R2XX-C",
     "type": "TU",
+    "learner": {
+      "id": "AJ 54 4F 01 I",
+      "familyName": "Vivien",
+      "givenName": "Swift",
+      "jobTitle": "Care Assistant (Agency)"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -2895,27 +3473,32 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2023-04-21T23:30:31.019Z",
-    "status": "submitted",
-    "createdDate": "2023-12-19T12:33:28.014Z",
+    "startDate": "2023-04-22T17:12:53.308Z",
+    "status": "approved",
+    "createdDate": "2023-12-20T06:15:50.303Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-11-14T04:07:31.487Z",
-    "approvedDate": null,
+    "submittedDate": "2023-11-14T21:49:53.776Z",
+    "approvedDate": "2024-04-07T09:04:35.748Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "invoice002.pdf"
     ],
     "evidenceOfCompletion": "certficate0091.pdf",
-    "completionDate": "2023-05-11T05:22:52.230Z",
-    "costDate": "2023-09-01T11:33:28.014Z"
+    "completionDate": "2023-05-11T23:05:14.519Z",
+    "costDate": "2023-09-02T05:15:50.303Z"
   },
   {
-    "claimID": "BBY-V116-WUI3-C",
+    "claimID": "SBB-EUX5-I39R-C",
     "type": "TU",
+    "learner": {
+      "id": "MD 20 2F 63 A",
+      "familyName": "Mara",
+      "givenName": "Haag",
+      "jobTitle": "Healthcare Assistant"
+    },
     "training": {
       "code": "PBSAL",
       "reimbursementAmount": 450,
@@ -2928,11 +3511,11 @@
       "awardingOrganisation": null,
       "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
     },
-    "startDate": "2023-07-04T18:48:09.609Z",
+    "startDate": "2023-07-05T12:30:31.898Z",
     "status": "submitted",
-    "createdDate": "2024-01-21T08:28:12.111Z",
+    "createdDate": "2024-01-22T02:10:34.400Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-11-19T14:49:19.336Z",
+    "submittedDate": "2023-11-20T08:31:41.625Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -2943,12 +3526,18 @@
       "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0092.pdf",
-    "completionDate": "2023-07-05T21:14:26.785Z",
-    "costDate": "2023-03-26T07:28:12.111Z"
+    "completionDate": "2023-07-06T14:56:49.074Z",
+    "costDate": "2023-03-27T01:10:34.400Z"
   },
   {
-    "claimID": "622-9ZX7-IEWW-C",
+    "claimID": "BTZ-4WI8-V6Z4-C",
     "type": "TU",
+    "learner": {
+      "id": "KX 89 9F 87 K",
+      "familyName": "Eugene",
+      "givenName": "Gottlieb",
+      "jobTitle": "Support Worker (Agency)"
+    },
     "training": {
       "code": "UPM",
       "reimbursementAmount": 125,
@@ -2961,12 +3550,12 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Understanding-performance-management.pdf"
     },
-    "startDate": "2023-08-21T14:58:33.082Z",
-    "status": "submitted",
-    "createdDate": "2023-06-03T18:02:49.598Z",
+    "startDate": "2023-08-22T08:40:55.372Z",
+    "status": "approved",
+    "createdDate": "2023-06-04T11:45:11.888Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-04-08T11:55:29.598Z",
-    "approvedDate": null,
+    "submittedDate": "2024-04-09T05:37:51.888Z",
+    "approvedDate": "2024-04-14T02:55:05.504Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
@@ -2976,12 +3565,18 @@
       "invoice003.pdf"
     ],
     "evidenceOfCompletion": "certficate0093.pdf",
-    "completionDate": "2023-09-14T20:55:46.474Z",
-    "costDate": "2023-03-13T19:02:49.598Z"
+    "completionDate": "2023-09-15T14:38:08.764Z",
+    "costDate": "2023-03-14T12:45:11.888Z"
   },
   {
-    "claimID": "5AR-FJHG-E4VW-C",
+    "claimID": "V7V-ZDUD-3ERR-C",
     "type": "TU",
+    "learner": {
+      "id": "OB 78 2F 15 O",
+      "familyName": "Mayer",
+      "givenName": "Malinda",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "MHFA",
       "reimbursementAmount": 100,
@@ -2994,24 +3589,30 @@
       "awardingOrganisation": "MHFA England",
       "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
     },
-    "startDate": "2023-07-06T00:47:42.767Z",
+    "startDate": "2023-07-06T18:30:05.057Z",
     "status": "approved",
-    "createdDate": "2023-09-08T23:31:10.827Z",
+    "createdDate": "2023-09-09T17:13:33.117Z",
     "createdBy": "Allan Connelly",
-    "submittedDate": "2023-12-08T16:43:54.427Z",
-    "approvedDate": "2024-01-28T12:47:36.748Z",
+    "submittedDate": "2023-12-09T10:26:16.717Z",
+    "approvedDate": "2024-01-29T06:29:59.038Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
       "invoice000.pdf"
     ],
     "evidenceOfCompletion": "certficate0094.pdf",
-    "completionDate": "2023-09-09T22:42:50.303Z",
-    "costDate": "2022-12-31T00:31:10.827Z"
+    "completionDate": "2023-09-10T16:25:12.593Z",
+    "costDate": "2022-12-31T18:13:33.117Z"
   },
   {
-    "claimID": "L1C-C446-DRHS-C",
+    "claimID": "LDU-2JN9-6PM9-C",
     "type": "TU",
+    "learner": {
+      "id": "PX 89 8F 98 Q",
+      "familyName": "Peggie",
+      "givenName": "Moore",
+      "jobTitle": "Caregiver"
+    },
     "training": {
       "code": "DLBPCI",
       "reimbursementAmount": 50,
@@ -3024,12 +3625,12 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Preparing-for-CQC-inspection.aspx"
     },
-    "startDate": "2024-02-08T00:20:59.918Z",
+    "startDate": "2024-02-08T18:03:22.208Z",
     "status": "approved",
-    "createdDate": "2023-09-05T13:42:56.263Z",
+    "createdDate": "2023-09-06T07:25:18.553Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2024-03-29T01:15:48.214Z",
-    "approvedDate": "2024-04-08T11:30:23.304Z",
+    "submittedDate": "2024-03-29T18:58:10.504Z",
+    "approvedDate": "2024-04-09T05:12:45.594Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
@@ -3037,12 +3638,18 @@
       "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0095.pdf",
-    "completionDate": "2024-02-23T08:16:48.938Z",
-    "costDate": "2023-06-13T13:42:56.263Z"
+    "completionDate": "2024-02-24T01:59:11.228Z",
+    "costDate": "2023-06-14T07:25:18.553Z"
   },
   {
-    "claimID": "1RU-445N-YFDT-C",
+    "claimID": "WTA-A8HK-NPIS-C",
     "type": "TU",
+    "learner": {
+      "id": "AL 82 2F 62 C",
+      "familyName": "Elias",
+      "givenName": "Dibbert",
+      "jobTitle": "Care Aide"
+    },
     "training": {
       "code": "DLFE",
       "reimbursementAmount": 50,
@@ -3055,12 +3662,12 @@
       "awardingOrganisation": "Skills for Care",
       "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
     },
-    "startDate": "2023-10-27T03:47:30.490Z",
+    "startDate": "2023-10-27T21:29:52.780Z",
     "status": "approved",
-    "createdDate": "2023-05-21T15:32:11.369Z",
+    "createdDate": "2023-05-22T09:14:33.659Z",
     "createdBy": "Mara Monahan",
-    "submittedDate": "2023-10-31T21:09:19.982Z",
-    "approvedDate": "2024-02-27T10:02:42.748Z",
+    "submittedDate": "2023-11-01T14:51:42.272Z",
+    "approvedDate": "2024-02-28T03:45:05.038Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
@@ -3068,7 +3675,7 @@
       "invoice001.pdf"
     ],
     "evidenceOfCompletion": "certficate0096.pdf",
-    "completionDate": "2023-10-31T10:15:32.690Z",
-    "costDate": "2022-07-26T15:32:11.369Z"
+    "completionDate": "2023-11-01T03:57:54.980Z",
+    "costDate": "2022-07-27T09:14:33.659Z"
   }
 ]
