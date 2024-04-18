@@ -38,16 +38,43 @@ router.post('/confirm-org-handler', function (req, res) {
 });
 
 router.post('/search-claim-id', function (req, res) {
-  var claimID = req.session.data.claimID
-  var validClaimId = false
+  // delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['errorType'];
 
-  if (claimID.length == 0) {
-    res.redirect('process-claim/start-process?emptyError=true')
-  } else if (validClaimId == false) {
-    res.redirect('process-claim/start-process' + '?id=' + claimID + '&invalidIDError=true')
-  } else {
+  var claimID = req.session.data.claimID
+  const regex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  var validClaimId = regex.test(claimID);
+
+  // if claim id is valid, navigate to next screen
+  if (validClaimId) {
     res.redirect('process-claim/found-claim' + '?id=' + claimID)
   }
+  
+  // if claim id is invalid return why
+  else if (validClaimId == false) {
+    var whyInvalid = whyInvalidReason()
+    return res.redirect('process-claim/start-process' + '?id=' + claimID + '&invalidIDError=true' + '&errorType=' + whyInvalid)
+  }
 })
+
+function whyInvalidReason(claimID) {
+
+  // if claim id is empty
+  const emptyRegex = /\S/;
+  if (emptyRegex.test(claimID)) {
+    return "A";
+  } 
+  const letterORegex = /o/i;
+  if (letterORegex.test(claimID)) {
+    return "B";
+  }
+
+  const lastChar = claimID.charAt(claimID.length - 1);
+  if (lastChar !== 'A' && lastChar !== 'B' && lastChar !== 'C') {
+    return "C";
+  }
+  return "Z";
+}
 
 module.exports = router
