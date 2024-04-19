@@ -30,7 +30,7 @@
                     </a>
                 </div>
                 <div class="govuk-task-list__status" id="company-details-1-status">
-                    Completed
+                    {{ claim.evidenceOfPaymentreview.complete | sectionCheck_V1 }}
                 </div>
             </li>
             <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -40,16 +40,39 @@
                     </a>
                 </div>
                 <div class="govuk-task-list__status" id="company-details-2-status">
-                    <strong class="govuk-tag govuk-tag--blue">
-                        Incomplete
-                    </strong>
+                    {{ claim.evidenceOfCompletionreview.complete | sectionCheck_V1 }}
                 </div>
             </li>
         </ul>
+
+        <form method="post" action="../claim-process-handler" class="govuk-!-margin-0">
+            <button class="govuk-button govuk-button--primary" data-module="govuk-button" type="submit">Continue</button>
+        </form>
+
         {% endif %}
     </div>
     <div class="govuk-grid-column-one-third">
-        <h2 class="govuk-heading-m">Claim notes</h2>
+        <div class="moj-page-header-actions">
+            <div class="moj-page-header-actions__title">
+                <h2 class="govuk-heading-m">Claim notes</h2>
+            </div>
+            <div class="moj-page-header-actions__actions">
+                <div class="moj-button-menu">
+                    <div class="moj-button-menu__wrapper">
+                        <button type="submit"
+                            class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action"
+                            data-module="govuk-button">
+                            Add note
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include "../_components/note.html" %}
+        {% include "../_components/note.html" %}
+        {% include "../_components/note.html" %}
+        {% include "../_components/note.html" %}
     </div>
 </div>
 

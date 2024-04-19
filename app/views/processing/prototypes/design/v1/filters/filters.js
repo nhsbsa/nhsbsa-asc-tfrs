@@ -18,3 +18,13 @@ addFilter('processorstatusTag_V1', function (statusID) {
         return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
     }
 }, { renderAsHtml: true })
+
+addFilter('sectionCheck_V1', function (state) {
+    if (state) {
+        return "Completed"
+    } else if (!state) {
+        return '<strong class="govuk-tag govuk-tag--blue">Incomplete</strong>'
+    } else {
+        return "Error"
+    }
+}, { renderAsHtml: true })

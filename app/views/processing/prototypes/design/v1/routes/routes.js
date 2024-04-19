@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadJSONFromFile, loadData } = require('../helpers/helpers.js');
+const { loadData, checkCriteria } = require('../helpers/helpers.js');
 
 // v1 Prototype routes
 
@@ -36,5 +36,31 @@ router.post('/confirm-org-handler', function (req, res) {
   }
 
 });
+
+router.post('/claim-process-handler', function (req, res) {
+  const claimID = req.session.data.id
+  delete req.session.data.error
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      if(c.evidenceOfPaymentreview.complete && c.evidenceOfCompletionreview.complete) {
+        if (checkCriteria(claim)) {
+          res.redirect('process-claim/approve')
+        } else {
+          res.redirect('process-claim/reject')
+        }
+      } else {
+        req.session.data.error = true
+        res.redirect('process-claim/claim')
+      }
+
+    }
+  }
+  
+
+
+});
+
+
 
 module.exports = router
