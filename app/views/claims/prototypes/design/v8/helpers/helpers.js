@@ -43,7 +43,7 @@ function checkClaim(claim) {
     if (result.completionDate == "valid" && result.startDate == "valid") {
         const startDate = new Date(claim.startDate)
         const completionDate = new Date(claim.completionDate)
-        if (startDate.getTime() > completionDate.getTime()) {
+        if (startDate.getTime() >= completionDate.getTime()) {
             result.startDate = "invalid"
             result.completionDate = "invalid"
             result.claimValid = false
