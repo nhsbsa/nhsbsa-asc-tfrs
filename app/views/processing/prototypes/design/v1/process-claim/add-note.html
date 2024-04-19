@@ -1,0 +1,41 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% block pageTitle %}
+note making
+{% endblock %}
+
+{% block beforeContent %}
+<a href="./claim?id={{data.id}}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="../search-claim-id" method="post" novalidate>
+            <div class="govuk-form-group">
+                <h1 class="govuk-label-wrapper">
+                  <label class="govuk-label govuk-label--l" for="more-detail">
+                    Write a note
+                  </label>
+                </h1>
+                <div id="more-detail-hint" class="govuk-hint">
+                  This note will be added to the claim.
+                </div>
+                <div class="govuk-form-group" style="padding-bottom: 20px; padding-top: 20px;">
+                <label class="govuk-label" for="sort">
+                    Please select a category that applies best to your note
+                  </label>
+                  <select class="govuk-select" id="sort" name="sort">
+                    <option value="published">Adding context</option>
+                    <option value="updated" selected>Query on claim</option>
+                  </select>
+                  </div>
+                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="8" aria-describedby="more-detail-hint"></textarea>
+              </div>
+        </form>
+
+    </div>
+</div>
+
+
+{% endblock %}
