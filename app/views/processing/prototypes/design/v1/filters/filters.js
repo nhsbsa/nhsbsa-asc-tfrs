@@ -8,7 +8,6 @@ const addFilter = govukPrototypeKit.views.addFilter
 const { } = require('../helpers/helpers.js');
 const fs = require('fs');
 
-
 addFilter('processorstatusTag_V1', function (statusID) {
     if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Not yet processed</strong>'
@@ -28,3 +27,13 @@ addFilter('sectionCheck_V1', function (state) {
         return "Error"
     }
 }, { renderAsHtml: true })
+
+addFilter('findClaim_V1', function (claims, id) {
+    var foundClaim = null
+    for (const claim of claims) {
+        if (claim.claimID == id) {
+            foundClaim = claim
+        }
+    }
+    return foundClaim
+})

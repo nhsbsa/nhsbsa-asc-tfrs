@@ -56,11 +56,45 @@ router.post('/claim-process-handler', function (req, res) {
 
     }
   }
-  
-
-
 });
 
+router.post('/search-claim-id', function (req, res) {
+  delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['notFound'];
 
+  var claimID = req.session.data.claimID.replace(/\s/g,'');
+  
+  const emptyRegex = /\S/;
+  if (!emptyRegex.test(claimID)) {
+    return res.redirect('process-claim/start-process?invalidIDError=true&emptyError=true')
+  } 
+
+  const letterORegex = /o/i;
+  if (letterORegex.test(claimID)) {
+     return res.redirect('process-claim/start-process?invalidIDError=true')
+  }
+
+  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  if (!lengthRegex.test(claimID)) {
+    return res.redirect('process-claim/start-process?invalidIDError=true')
+  }
+
+  var foundClaim = null
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
+    } 
+  }
+  if (foundClaim == null) {
+    return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
+  } 
+  if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
+    return res.redirect('process-claim/claim' + '?id=' + claimID)
+  } else {
+    return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
+  }
+
+});
 
 module.exports = router
