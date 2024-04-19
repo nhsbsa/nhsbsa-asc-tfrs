@@ -38,42 +38,43 @@ router.post('/confirm-org-handler', function (req, res) {
 });
 
 router.post('/search-claim-id', function (req, res) {
+  delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];
-  delete req.session.data['errorType'];
+  delete req.session.data['notFound'];
 
-  var claimID = req.session.data.claimID
-  const regex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
-  var validClaimId = regex.test(claimID);
-
-  // if claim id is valid, navigate to next screen
-  if (validClaimId) {
-    res.redirect('process-claim/found-claim' + '?id=' + claimID + '&validClaim=true')
-  }
+  var claimID = req.session.data.claimID.replace(/\s/g,'');
   
-  // if claim id is invalid return why
-  else if (validClaimId == false) {
-    var whyInvalid = whyInvalidReason(claimID)
-    return res.redirect('process-claim/start-process' + '?id=' + claimID + '&invalidIDError=true' + '&errorType=' + whyInvalid)
-  }
-})
-
-function whyInvalidReason(claimID) {
-
-  // if claim id is empty
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
-    return "A";
+    return res.redirect('process-claim/start-process?invalidIDError=true&emptyError=true')
   } 
+
   const letterORegex = /o/i;
   if (letterORegex.test(claimID)) {
-    return "B";
+     return res.redirect('process-claim/start-process?invalidIDError=true')
   }
 
-  const lastChar = claimID.charAt(claimID.length - 1);
-  if (lastChar !== 'A' && lastChar !== 'B' && lastChar !== 'C') {
-    return "C";
+  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  if (!lengthRegex.test(claimID)) {
+    return res.redirect('process-claim/start-process?invalidIDError=true')
   }
-  return "Z";
-}
+
+  var foundClaim = null
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
+    } 
+  }
+  if (foundClaim == null) {
+    return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
+  } 
+  if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
+    return res.redirect('process-claim/found-claim' + '?id=' + claimID)
+  } else {
+    return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
+  }
+
+})
 
 module.exports = router
+

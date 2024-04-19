@@ -11,47 +11,50 @@ Claim ID - Find a claim for processing
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.emptyError %}
-
-        {% endif %}
-        <form action="../search-claim-id" method="post" novalidate>
-
-            <div class="govuk-form-group {% if (data.invalidIDError) %} govuk-form-group--error {% endif %}">
-                <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        <span class="govuk-caption-l">Find a claim</span>
-                        <h1 class="govuk-fieldset__heading" for="orgID">
-                            Your claim
-                        </h1>
-                    </legend>
-                    <p class="govuk-body">This is the claim ID exactly as it appears in OM.</p>
-                    <div id="claim-id-hint" class="govuk-hint">
-                        For example, AB3-CDE4-FGH4-A
-                    </div>
-                    {% if (data.invalidIDError) %}
-                        <p id="event-name-error" class="govuk-error-message">
-                            {% if (data.errorType == 'A') %}
-                            <span class="govuk-visually-hidden">Error:</span> Enter a claim ID
-                            {% endif %}
-                            {% if (data.errorType == 'B') %}
-                            <span class="govuk-visually-hidden">Error:</span> The letter O is not allowed
-                            {% endif %}
-                            {% if (data.errorType == 'C') %}
-                            <span class="govuk-visually-hidden">Error:</span> The last character must be the letter A, B or C
-                            {% endif %}
-                            {% if (data.errorType == 'Z') %}
-                            <span class="govuk-visually-hidden">Error:</span> Other error: please check the id is correct.
-                            {% endif %}
-                        </p>
-                    {% endif %}
-                    <input class="govuk-input govuk-input--width-10 {% if (data.invalidIDError) %} govuk-input--error {% endif %} " aria-describedby="claim-id-hint {% if data.invalidIDError %} event-name-error {% endif %}" id="claimID" name="claimID" type="text">
-                </fieldset>
-            </div>
-            <button class="govuk-button" data-module="govuk-button" type="submit">
-                Search
-            </button>
-        </form>
+        <div class="moj-search govuk-!-padding-bottom-2">
+            <form action="../search-claim-id" method="post" novalidate>
+                <div class="govuk-form-group {% if (data.invalidIDError) %} govuk-form-group--error {% endif %}">
+                    <fieldset class="govuk-fieldset" role="group" aria-describedby="claim-id-hint">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                            <span class="govuk-caption-l">Find a claim</span>
+                            <h1 class="govuk-fieldset__heading" for="claimID">
+                                What is the claim ID for the claim you want to process?
+                            </h1>
+                        </legend>
+                        <p class="govuk-body">This is the claim ID exactly as it appears in OM.</p>
+                        <div id="claim-id-hint" class="govuk-hint">
+                            For example, TQV-8FNI-WN4K-C
+                        </div>
+                        {% if (data.invalidIDError) %}
+                            <p id="event-name-error" class="govuk-error-message">
+                                {% if (data.emptyError) %}
+                                <span class="govuk-visually-hidden">Error:</span> Enter a claim ID
+                                {% else %}
+                                <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number in the correct format
+                                {% endif %}
+                            </p>
+                        {% endif %}
+                        <input class="govuk-input {% if (data.invalidIDError) %} govuk-input--error {% endif %} " aria-describedby="claim-id-hint {% if data.invalidIDError %} event-name-error {% endif %}" id="claimID" name="claimID" type="text">
+                    </fieldset>
+                </div>
+                <button class="govuk-button moj-search__button govuk-button--secondary" data-module="govuk-button" type="submit">
+                    Search
+                </button>
+            </form>
+        </div>
     </div>
 </div>
+
+{% if data.notFound %}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h2 class="govuk-heading-m">Search result</h2>
+            <p class="govuk-body">
+                No match returned for your search: <q>{{ data.id }}</q>.
+            </p>
+
+        </div>
+    </div>
+{% endif %}
 
 {% endblock %}
