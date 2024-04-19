@@ -412,13 +412,13 @@ addFilter('learnerErrorMessage_V8', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a family name</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a last (family) name</a></li>')
     }
     if (submitError.givenName == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a given name</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a first (given) name</a></li>')
     }
     if (submitError.nationalInsuranceNumber == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#nationalInsuranceNumber-error">Enter a national insurance number</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#nationalInsuranceNumber-error">Enter a National Insurance number</a></li>')
     } else if (submitError.nationalInsuranceNumber == "invalid") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#nationalInsuranceNumber-error">Enter a National Insurance number in the correct format</a></li>')
     }

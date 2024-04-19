@@ -41,15 +41,15 @@
       <div
         class="govuk-form-group {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
         <label class="govuk-label govuk-label--s" for="familyName" aria-describedby="full-name-hint">
-          Family name
+          Last (family) name
         </label>
         <div id="role-type-hint" class="govuk-hint">
-          Their family name as it would appear on a training certificate.
+          Their last (family) name as it would appear on a training certificate.
         </div>
         {% if data.submitError.learnerValid != null and not data.submitError.learnerValid and
         data.submitError.familyName == 'missing' %}
         <p id="familyName-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> Enter a family name
+          <span class="govuk-visually-hidden">Error:</span> Enter a last (family) name
         </p>
         {% endif %}
         <input
@@ -60,15 +60,15 @@
       <div
         class="govuk-form-group {% if data.submitError.learnerValid != null and not data.submitError.learnerValid  and data.submitError.givenName == 'missing' %} govuk-form-group--error {% endif %}">
         <label class="govuk-label govuk-label--s" for="givenName" aria-describedby="full-name-hint">
-          Given name
+          First (given) name
         </label>
         <div id="role-type-hint" class="govuk-hint">
-          Their given name as it would appear on a training certificate.
+          Their first (given) name as it would appear on a training certificate.
         </div>
         {% if data.submitError.learnerValid != null and not data.submitError.learnerValid and data.submitError.givenName
         == 'missing' %}
         <p id="givenName-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> Enter a given name
+          <span class="govuk-visually-hidden">Error:</span> Enter a first (given) name
         </p>
         {% endif %}
         <input
@@ -87,7 +87,7 @@
         {% if data.submitError.learnerValid != null and not data.submitError.learnerValid and
         data.submitError.nationalInsuranceNumber == 'missing' %}
         <p id="nationalInsuranceNumber-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> Enter a national insurance number
+          <span class="govuk-visually-hidden">Error:</span> Enter a National Insurance number
         </p>
         {% elif data.submitError.learnerValid != null and not data.submitError.learnerValid and
         data.submitError.nationalInsuranceNumber == 'invalid' %}
