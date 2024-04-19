@@ -258,7 +258,7 @@ addFilter('dateErrorMessage_V8', function (dateErrorObject, dateType, errorSecti
             errorMessages.push('<li><a href="#input-error">Enter the ' + dateType.toLowerCase() + '</a></li>');
         }
         if (dateErrorObject.date === 'invalidPolicy') {
-            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be after 10 April 2024</a></li>');
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be after 1 April 2024</a></li>');
         }
     } else if (errorSection == 'input') {
         errorMessages.push('<p id="input-error" class="govuk-error-message">')
@@ -278,7 +278,7 @@ addFilter('dateErrorMessage_V8', function (dateErrorObject, dateType, errorSecti
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>Enter the ' + dateType.toLowerCase() + '<br>');
         }
         if (dateErrorObject.date === 'invalidPolicy') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be after 10 April 2024<br>');
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be after 1 April 2024<br>');
         }
         errorMessages.push('</p>')
     }

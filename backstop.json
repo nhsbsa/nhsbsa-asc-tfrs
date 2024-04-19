@@ -16,7 +16,11 @@
         },
         {
             "label": "sign-in",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/sign-in"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/authentication/sign-in"
+        },
+        {
+            "label": "mfa-code",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/authentication/mfa-code"
         },
         {
             "label": "TU-manage-claims-home",
@@ -56,19 +60,19 @@
         },
         {
             "label": "TU-new-claim",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=MTT-L12K-K4D2-C"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=STY-2EBD-KDAY-C"
         },
         {
             "label": "TU-new-claim-start-date",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/start-date?id=MTT-L12K-K4D2-C&submitError"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/start-date?id=STY-2EBD-KDAY-C"
         },
         {
             "label": "TU-new-claim-learner",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?id=MTT-L12K-K4D2-C"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?id=STY-2EBD-KDAY-C"
         },
         {
             "label": "TU-new-claim-learner-results",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=roy&id=MTT-L12K-K4D2-C&claimType=TU"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=roy&id=STY-2EBD-KDAY-C&claimType=TU"
         },
         {
             "label": "TU-new-claim-new-learner",
@@ -76,23 +80,23 @@
         },
         {
             "label": "TU-new-claim-payment-date",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/cost-date?id=MTT-L12K-K4D2-C&submitError"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/cost-date?id=STY-2EBD-KDAY-C"
         },
         {
             "label": "TU-new-claim-evidence-payment",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=payment&id=MTT-L12K-K4D2-C"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=payment&id=STY-2EBD-KDAY-C"
         },
         {
             "label": "TU-new-claim-evidence-completion",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=completion&learnerID=LE%2009%205F%2094%20M&id=MTT-L12K-K4D2-C"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-evidence?type=completion&learnerID=LE%2009%205F%2094%20M&id=STY-2EBD-KDAY-C"
         },
         {
             "label": "TU-new-claim-completion-date",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-completion-date?id=MTT-L12K-K4D2-C&submitError"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-completion-date?id=STY-2EBD-KDAY-C"
         },
         {
             "label": "TU-new-claim-confirmation",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/confirmation?id=MTT-L12K-K4D2-C"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/confirmation?id=STY-2EBD-KDAY-C"
         },
         {
             "label": "TU-not-yet-submitted-claim",
@@ -112,36 +116,29 @@
         },
         {
             "label": "TU-new-claim-learner-no-results",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=test&id=MTT-L12K-K4D2-C&claimType=TU"
-        },
-        {
-            "label": "TU-claim-submit-error",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/claim-details?id=MTT-L12K-K4D2-C&submitError=true"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/select-learner?learnerInput=test&id=STY-2EBD-KDAY-C&claimType=TU"
         },
         {
             "label": "TU-claim-decleration",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/declaration?id=MTT-L12K-K4D2-C&submitError"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/declaration?id=STY-2EBD-KDAY-C"
         },
         {
             "label": "TU-claim-decleration-error",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/declaration?id=MTT-L12K-K4D2-C&submitError=true"
-        },
-        {
-            "label": "TU-new-claim-start-date-error-example",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/start-date?id=MTT-L12K-K4D2-C"
-        },
-        {
-            "label": "TU-new-claim-payment-date-error-example",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/cost-date?id=MTT-L12K-K4D2-C"
-        },
-        {
-            "label": "TU-new-claim-completion-date-error-example",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/add-completion-date?id=MTT-L12K-K4D2-C"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/declaration?id=STY-2EBD-KDAY-C&submitError=true"
         },
         {
             "label": "TU-new-claim-duplication",
-            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/duplication?id=3R1-83BW-4S6G-C"
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/duplication?id=STY-2EBD-KDAY-C&dupeID=ELJ-ACYJ-CN4N-C"
+        },
+        {
+            "label": "TU-evidence-guidance",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/guidance/evidence-requirements"
+        },
+        {
+            "label": "TU-asc-wds-check-fail",
+            "url": "http://localhost:3000/claims/prototypes/design/v8/claim/asc-wds-check?id=STY-2EBD-KDAY-C"
         }
+        
     ],
     "paths": {
         "bitmaps_reference": "backstop_data/bitmaps_reference",

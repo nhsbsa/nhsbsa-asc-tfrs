@@ -2,7 +2,7 @@
 {% set claim = data.id | findClaim_V8(data.claims) %}
 
 {% block pageTitle %}
-{{ ["Select training - Claim: ", claim.claimID] | join }}
+Select training - new claim
 {% endblock %}
 
 {% block beforeContent %}
@@ -12,6 +12,22 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
+        {% if data["training-input"] == "" %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#search-error">Search cannot be empty</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         <span class="govuk-caption-l">New claim</span>
         <h1 class="govuk-heading-l">What course or qualification are you claiming for?</h1>
     </div>
@@ -19,12 +35,15 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <p class="govuk-body">Select the training course or qualification you are claiming for.</p>
-        <p class="govuk-body">If the course you are expecting does not show up in the search results, check that you’ve entered the correct name or course code. If it is still missing, it may mean it is not on the <a href="https://www.gov.uk/government/publications/adult-social-care-training-and-development-fund/adult-social-care-training-and-development-fund-a-guide-for-employers#appendix-a-list-of-eligible-training-courses-and-qualifications">list of eligible courses</a>.</p>
+        <p class="govuk-body">If the course you are expecting does not show up in the search results, check that you’ve
+            entered the correct name or course code. If it is still missing, it may mean it is not on the <a
+                href="https://www.gov.uk/government/publications/adult-social-care-training-and-development-fund/adult-social-care-training-and-development-fund-a-guide-for-employers#appendix-a-list-of-eligible-training-courses-and-qualifications">list
+                of eligible courses</a>.</p>
         <div class="moj-search govuk-!-padding-bottom-2">
 
             <form action="select-training" method="post">
 
-                <div class="govuk-form-group">
+                <div class="govuk-form-group {% if data['training-input'] == '' %}govuk-form-group--error{% endif %}">
                     <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
                         Search
                     </label>
@@ -32,8 +51,12 @@
                     <div id="search-hint" class="govuk-hint moj-search__hint ">
                         You can search by name or course code
                     </div>
-
-                    <input class="govuk-input moj-search__input " id="search" name="training-input" type="search"
+                    {% if data["training-input"] == "" %}
+                    <p id="search-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> Search cannot be empty
+                    </p>
+                    {% endif %}
+                    <input class="govuk-input moj-search__input {% if data['training-input'] == '' %}govuk-input--error{% endif %}" id="search" name="training-input" type="search"
                         aria-describedby="search-hint" value="{{ data['training-input'] }}">
 
                 </div>
@@ -84,11 +107,11 @@
                     <td class="govuk-table__cell">{{ training.title }}</td>
                     <td class="govuk-table__cell">{{ training.awardingOrganisation }}</td>
                     <td class="govuk-table__cell">
-                            <form method="post" action="../add-training" class="govuk-!-margin-0">
-                                <input type="hidden" name="trainingSelection" value="{{ training.code }}">
-                                <input type="hidden" name="viewOnly" value='false'>
-                                <button type="submit" class="govuk-button">Add to claim</button>
-                            </form>
+                        <form method="post" action="../add-training" class="govuk-!-margin-0">
+                            <input type="hidden" name="trainingSelection" value="{{ training.code }}">
+                            <input type="hidden" name="viewOnly" value='false'>
+                            <button type="submit" class="govuk-button">Add to claim</button>
+                        </form>
                     </td>
                 </tr>
                 {% endif %}
