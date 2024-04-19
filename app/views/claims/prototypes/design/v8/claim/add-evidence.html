@@ -36,11 +36,11 @@
             <li>
               <a href="#upload">
                 {% if data.errorFileTooBig %}
-                The selected file must be smaller than 2MB
+                The file must be smaller than 2MB
                 {% elif data.errorWrongFileFormat %}
-                The selected file must be a JPG, PNG, or PDF.
+                The file must be a PDF, JPG or PNG.
                 {% elif data.errorFileMissing %}
-                Select an evidence of {{data.type}}
+                Select a file as evidence of {{data.type}}
                 {% endif %}
               </a>
             </li>
@@ -73,9 +73,9 @@
       <p id="upload" class="govuk-error-message">
         <span class="govuk-visually-hidden">Error:</span>
         {% if data.errorFileTooBig %}
-        The selected file must be smaller than 2MB
+        The file must be smaller than 2MB
         {% elif data.errorWrongFileFormat %}
-        The selected file must be a JPG, PNG, or PDF.
+        The file must be a PDF, JPG or PNG.
         {% elif data.errorFileMissing %}
         Select an evidence of {{data.type}}
         {% endif %}
