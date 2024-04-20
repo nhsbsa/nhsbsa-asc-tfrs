@@ -28,34 +28,54 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": ["invoice001.pdf", "invoice002.pdf", "invoice003.pdf"],
+    "evidenceOfPayment": ["invoice.pdf", "receipt.png", "bankstatement.png"],
     "evidenceOfPaymentreview": {
       "complete": false,
-      "criteria1": false,
-      "criteria2": false,
-      "criteria3": false,
-      "criteria4": false,
-      "criteria5": false,
-      "criteria6": false,
-      "criteria7": false,
-      "criteria8": false,
-      "criteria9": false,
-      "criteria10": false
+      "criteria1": {
+        "result": false,
+        "note": null
+      },
+      "criteria2": {
+        "result": false,
+        "note": null
+      },
+      "criteria3": {
+        "result": false,
+        "note": null
+      },
+      "criteria4": {
+        "result": false,
+        "note": null
+      },
+      "criteria5": {
+        "result": false,
+        "note": null
+      }
 
     },
-    "evidenceOfCompletion": "certficate001.pdf",
+    "evidenceOfCompletion": "certficate.pdf",
     "evidenceOfCompletionreview": {
       "complete": false,
-      "criteria1": false,
-      "criteria2": false,
-      "criteria3": false,
-      "criteria4": false,
-      "criteria5": false,
-      "criteria6": false,
-      "criteria7": false,
-      "criteria8": false,
-      "criteria9": false,
-      "criteria10": false
+      "criteria1": {
+        "result": false,
+        "note": null
+      },
+      "criteria2": {
+        "result": false,
+        "note": null
+      },
+      "criteria3": {
+        "result": false,
+        "note": null
+      },
+      "criteria4": {
+        "result": false,
+        "note": null
+      },
+      "criteria5": {
+        "result": false,
+        "note": null
+      }
 
     },
     "completionDate": "2024-02-05T20:22:11.308Z",
