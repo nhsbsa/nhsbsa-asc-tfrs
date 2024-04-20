@@ -26,35 +26,48 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function checkCriteria(claim) {
-    let result = false
+function updateClaim(claim) {
 
     if (
-        claim.evidenceOfPaymentreview.criteria1 &&
-        claim.evidenceOfPaymentreview.criteria2 &&
-        claim.evidenceOfPaymentreview.criteria3 &&
-        claim.evidenceOfPaymentreview.criteria4 &&
-        claim.evidenceOfPaymentreview.criteria5 &&
-        claim.evidenceOfPaymentreview.criteria6 &&
-        claim.evidenceOfPaymentreview.criteria7 &&
-        claim.evidenceOfPaymentreview.criteria8 &&
-        claim.evidenceOfPaymentreview.criteria9 &&
-        claim.evidenceOfPaymentreview.criteria10 &&
-        claim.evidenceOfCompletionreview.criteria1 &&
-        claim.evidenceOfCompletionreview.criteria2 &&
-        claim.evidenceOfCompletionreview.criteria3 &&
-        claim.evidenceOfCompletionreview.criteria4 &&
-        claim.evidenceOfCompletionreview.criteria5 &&
-        claim.evidenceOfCompletionreview.criteria6 &&
-        claim.evidenceOfCompletionreview.criteria7 &&
-        claim.evidenceOfCompletionreview.criteria8 &&
-        claim.evidenceOfCompletionreview.criteria9 &&
-        claim.evidenceOfCompletionreview.criteria10
+        claim.evidenceOfPaymentreview.criteria1.result != null &&
+        claim.evidenceOfPaymentreview.criteria2.result != null &&
+        claim.evidenceOfPaymentreview.criteria3.result != null &&
+        claim.evidenceOfPaymentreview.criteria4.result != null &&
+        claim.evidenceOfPaymentreview.criteria5.result != null
     ) {
-        result = true
+        if (claim.evidenceOfPaymentreview.criteria1.result &&
+            claim.evidenceOfPaymentreview.criteria2.result &&
+            claim.evidenceOfPaymentreview.criteria3.result &&
+            claim.evidenceOfPaymentreview.criteria4.result &&
+            claim.evidenceOfPaymentreview.criteria5.result) {
+            claim.evidenceOfPaymentreview.pass = true
+        } else {
+            claim.evidenceOfPaymentreview.pass = false
+        }
+    } 
+    
+    if (
+        claim.evidenceOfCompletionreview.criteria1.result != null &&
+        claim.evidenceOfCompletionreview.criteria2.result != null &&
+        claim.evidenceOfCompletionreview.criteria3.result != null &&
+        claim.evidenceOfCompletionreview.criteria4.result != null &&
+        claim.evidenceOfCompletionreview.criteria5.result != null
+    ) {
+        console.log("not null")
+        if (claim.evidenceOfCompletionreview.criteria1.result &&
+            claim.evidenceOfCompletionreview.criteria2.result &&
+            claim.evidenceOfCompletionreview.criteria3.result &&
+            claim.evidenceOfCompletionreview.criteria4.result &&
+            claim.evidenceOfCompletionreview.criteria5.result) {
+                console.log(true)
+            claim.evidenceOfCompletionreview.pass = true
+        } else {
+            console.log(false)
+            claim.evidenceOfCompletionreview.pass = false
+        }
     }
-
-    return result
 }
 
-module.exports = { loadJSONFromFile, loadData, checkCriteria }
+
+
+module.exports = { loadJSONFromFile, loadData, updateClaim }

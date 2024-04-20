@@ -30,50 +30,50 @@
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice.pdf", "receipt.png", "bankstatement.png"],
     "evidenceOfPaymentreview": {
-      "complete": false,
+      "pass": null,
       "criteria1": {
-        "result": false,
+        "result": null,
         "note": null
       },
       "criteria2": {
-        "result": false,
+        "result": null,
         "note": null
       },
       "criteria3": {
-        "result": false,
+        "result": null,
         "note": null
       },
       "criteria4": {
-        "result": false,
+        "result": null,
         "note": null
       },
       "criteria5": {
-        "result": false,
+        "result": null,
         "note": null
       }
 
     },
     "evidenceOfCompletion": "certficate.pdf",
     "evidenceOfCompletionreview": {
-      "complete": false,
+      "pass": null,
       "criteria1": {
-        "result": false,
+        "result": null,
         "note": null
       },
       "criteria2": {
-        "result": false,
+        "result": null,
         "note": null
       },
       "criteria3": {
-        "result": false,
+        "result": null,
         "note": null
       },
       "criteria4": {
-        "result": false,
+        "result": null,
         "note": null
       },
       "criteria5": {
-        "result": false,
+        "result": null,
         "note": null
       }
 

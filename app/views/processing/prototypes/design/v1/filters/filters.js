@@ -112,3 +112,11 @@ addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
 addFilter('checkPDF_V1',function (str) {
     return str.endsWith(".pdf");
 })
+
+addFilter('evidenceBackLink_V1',function (criteriaNo, type) {
+    if (criteriaNo=="1") {
+        return "claim"
+    } else {
+        return "review-evidence?type=" + type + "&criteria=" + criteriaNo
+    }
+})

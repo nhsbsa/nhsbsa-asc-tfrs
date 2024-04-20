@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="claim" class="govuk-back-link">Back</a>
+<a href="{{ data.criteria | evidenceBackLink_V1(data.type)}}" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
