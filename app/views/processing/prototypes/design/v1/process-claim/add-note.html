@@ -11,29 +11,35 @@ note making
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form action="../search-claim-id" method="post" novalidate>
+        <form action="../add-note" method="post" novalidate>
             <div class="govuk-form-group">
                 <h1 class="govuk-label-wrapper">
-                  <label class="govuk-label govuk-label--l" for="more-detail">
-                    Write a note
+                  <label class="govuk-label govuk-label--l" for="adding-a-note">
+                    Add a note
                   </label>
                 </h1>
-                <div id="more-detail-hint" class="govuk-hint">
-                  This note will be added to the claim.
+                <div id="note-input-hint" class="govuk-hint">
+                  This note will be added to the claim: {{data.id}}
                 </div>
-                <div class="govuk-form-group" style="padding-bottom: 20px; padding-top: 20px;">
+                <div class="govuk-form-group" style="padding-bottom: 30px; padding-top: 10px;">
                 <label class="govuk-label" for="sort">
                     Please select a category that applies best to your note
                   </label>
-                  <select class="govuk-select" id="sort" name="sort">
-                    <option value="published">Adding context</option>
-                    <option value="updated" selected>Query on claim</option>
+                  <select class="govuk-select" id="category" name="category">
+                    <option value="addingContext">Adding context</option>
+                    <option value="query" selected>Query on claim</option>
+                    <option value="rejectionReason" selected>Rejection reason</option>
                   </select>
                   </div>
-                <textarea class="govuk-textarea" id="more-detail" name="moreDetail" rows="8" aria-describedby="more-detail-hint"></textarea>
+                <textarea class="govuk-textarea" id="noteInput" name="noteInput" rows="8" aria-describedby="note-input-hint"></textarea>
               </div>
+                <div class="govuk-button-group">
+                  <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Add note to claim
+                  </button>
+                  <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler">Cancel</a>
+                </div>
         </form>
-
     </div>
 </div>
 
