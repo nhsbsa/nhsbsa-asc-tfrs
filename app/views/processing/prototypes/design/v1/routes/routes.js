@@ -107,40 +107,73 @@ router.post('/evidence-check-handler', function (req, res) {
   claimID = req.session.data.id
 
   if (evidenceCheck != null) {
-  for (const claim of req.session.data.claims) {
-    if (claim.claimID == claimID) {
-      if (evidenceCheck == "yes") {
-        if (type == "payment") {
-          claim.evidenceOfPaymentreview["criteria"+criteria].result = true
-        } else if (type == "completion") {
-          claim.evidenceOfCompletionreview["criteria"+criteria].result = true
+    for (const claim of req.session.data.claims) {
+      if (claim.claimID == claimID) {
+        if (evidenceCheck == "yes") {
+          if (type == "payment") {
+            claim.evidenceOfPaymentreview["criteria" + criteria].result = true
+          } else if (type == "completion") {
+            claim.evidenceOfCompletionreview["criteria" + criteria].result = true
+          }
+        } else if (evidenceCheck == "no") {
+          if (type == "payment") {
+            claim.evidenceOfPaymentreview["criteria" + criteria].result = false
+            claim.evidenceOfPaymentreview["criteria" + criteria].note = req.session.data.note
+          } else if (type == "completion") {
+            claim.evidenceOfCompletionreview["criteria" + criteria].result = false
+            claim.evidenceOfCompletionreview["criteria" + criteria].note = req.session.data.note
+          }
         }
-      } else if (evidenceCheck == "no") {
-        if (type == "payment") {
-          claim.evidenceOfPaymentreview["criteria"+criteria].result = false
-          claim.evidenceOfPaymentreview["criteria"+criteria].note = req.session.data.note
-        } else if (type == "completion") {
-          claim.evidenceOfCompletionreview["criteria"+criteria].result = false
-          claim.evidenceOfCompletionreview["criteria"+criteria].note = req.session.data.note
+        updateClaim(claim)
+        if ((claim.evidenceOfPaymentreview.pass != null && type == "payment") || (claim.evidenceOfCompletionreview.pass != null && type == "completion")) {
+          delete req.session.data.criteria;
+          delete req.session.data.evidenceCheck;
+          res.redirect('process-claim/check-evidence-answers')
+        } else {
+          delete req.session.data.evidenceCheck;
+          const nextCriteria = String(Number(criteria) + 1)
+          res.redirect('process-claim/review-evidence?type=' + type + '&criteria=' + nextCriteria)
         }
       }
-      updateClaim(claim)
-      if ((claim.evidenceOfPaymentreview.pass && type == "payment") || (claim.evidenceOfCompletionreview.pass && type == "completion")) {
+    }
+  } else {
+    res.redirect('process-claim/review-evidence?type=' + type + '&criteria=' + criteria + '&submitError=true')
+  }
+});
+
+
+router.get('/evidence-check-start-handler', function (req, res) {
+  const type = req.session.data.type
+  claimID = req.session.data.id
+
+  for (const claim of req.session.data.claims) {
+    if (claim.claimID == claimID) {
+      if ((claim.evidenceOfPaymentreview.pass != null && type == "payment") || (claim.evidenceOfCompletionreview.pass != null && type == "completion")) {
         delete req.session.data.criteria;
-        delete req.session.data.type;
         delete req.session.data.evidenceCheck;
-        res.redirect('process-claim/claim')
+        res.redirect('process-claim/check-evidence-answers')
       } else {
         delete req.session.data.evidenceCheck;
-        const nextCriteria = String(Number(criteria)+1)
-        res.redirect('process-claim/review-evidence?type='+ type +'&criteria=' + nextCriteria)
+        res.redirect('process-claim/review-evidence?type=' + type + '&criteria=1')
       }
     }
   }
-} else {
-  res.redirect('process-claim/review-evidence?type='+ type +'&criteria=' + criteria + '&submitError=true')
-}
+});
+
+
+router.post('/claim-process-handler', function (req, res) {
+  claimID = req.session.data.id
+  for (const claim of req.session.data.claims) {
+    if (claim.claimID == claimID) {
+      if (claim.evidenceOfPaymentreview.pass && claim.evidenceOfCompletionreview.pass) {
+        res.redirect('process-claim/approve')
+      } else {
+        res.redirect('process-claim/reject')
+      }
+    }
+  }
 
 });
+
 
 module.exports = router

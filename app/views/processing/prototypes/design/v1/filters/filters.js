@@ -19,9 +19,9 @@ addFilter('processorstatusTag_V1', function (statusID) {
 }, { renderAsHtml: true })
 
 addFilter('sectionCheck_V1', function (state) {
-    if (state) {
+    if (state != null) {
         return "Completed"
-    } else if (!state) {
+    } else if (state == null) {
         return '<strong class="govuk-tag govuk-tag--blue">Incomplete</strong>'
     } else {
         return "Error"
@@ -108,13 +108,30 @@ addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
     }
 })
 
+addFilter('criteriaAnswer_V1', function (criteria, type, claim) {
+    console.log(claim)
+    if (type == "payment") {
+        if (claim.evidenceOfPaymentreview["criteria" + criteria].result) {
+            return "Yes"
+        } else {
+            return "No<br>" + claim.evidenceOfPaymentreview["criteria" + criteria].note
+        }
+    } else if (type == "completion") {
+        if (claim.evidenceOfCompletionreview["criteria" + criteria].result) {
+            return "Yes"
+        } else {
+            return "No<br>" + claim.evidenceOfCompletionreview["criteria" + criteria].note
+        }
+    }
+}, { renderAsHtml: true })
 
-addFilter('checkPDF_V1',function (str) {
+
+addFilter('checkPDF_V1', function (str) {
     return str.endsWith(".pdf");
 })
 
-addFilter('evidenceBackLink_V1',function (criteriaNo, type) {
-    if (criteriaNo=="1") {
+addFilter('evidenceBackLink_V1', function (criteriaNo, type) {
+    if (criteriaNo == "1") {
         return "claim"
     } else {
         return "review-evidence?type=" + type + "&criteria=" + criteriaNo

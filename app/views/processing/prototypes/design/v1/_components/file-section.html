@@ -1,30 +1,12 @@
 <h2 class="govuk-heading-s">File {% if data.type == "payment" and (claim.evidenceOfPayment | length ) > 1
     %}{{loop.index}}{% endif %}</h2>
+<p class="govuk-body">{{evidence}}</p>
 <p class="govuk-body">
     <a href="/public/images/{{evidence}}" class="govuk-link" rel="noreferrer noopener" target="_blank">View file (opens
         in new
         tab)</a>
 </p>
-<h2 class="govuk-heading-s">File overview</h2>
-<dl class="govuk-summary-list">
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Filename
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {{evidence}}
-        </dd>
-    </div>
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            File type
-        </dt>
-        <dd class="govuk-summary-list__value">
-            PNG
-        </dd>
-    </div>
-</dl>
 {% if not (evidence | checkPDF_V1) %}
-<h2 class="govuk-heading-s">File preview</h2>
+<h2 class="govuk-heading-s">Preview</h2>
 <img src="/public/images/fake-invoice.png" alt="User icon" style="width:100%;height:auto;">
 {% endif %}
