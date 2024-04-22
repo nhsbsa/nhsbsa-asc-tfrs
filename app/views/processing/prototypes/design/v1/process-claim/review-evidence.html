@@ -30,10 +30,29 @@
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="evidenceCheck" name="evidenceCheck" type="radio"
-                                value="yes">
+                                value="yes" data-aria-controls="conditional-reimbursementAmount">
                             <label class="govuk-label govuk-radios__label" for="evidenceCheck">
                                 Yes
                             </label>
+                            {% if data.criteria == "3" and data.type == "payment" %}
+                            <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                                id="conditional-reimbursementAmount">
+                                <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count"
+                                    data-maxlength="200">
+                                    <label class="govuk-label" for="note">
+                                        How much was paid?
+                                    </label>
+                                    <div id="note-hint" class="govuk-hint">
+                                        Add the amount that was paid for this training. If the evidence shows payment for multiple learners add the amount paid for a single learner.
+                                    </div>
+                                    <div class="govuk-input__wrapper">
+                                        <div class="govuk-input__prefix" aria-hidden="true">£</div>
+                                        <input class="govuk-input govuk-input--width-5" id="costPerLearner"
+                                            name="costPerLearner" type="text" spellcheck="false">
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
                         </div>
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="evidenceCheck-2" name="evidenceCheck" type="radio"

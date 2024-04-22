@@ -113,6 +113,9 @@ router.post('/evidence-check-handler', function (req, res) {
       if (claim.claimID == claimID) {
         if (evidenceCheck == "yes") {
           if (type == "payment") {
+            if (criteria == "3") {
+              claim.reimbursementAmount = req.session.data.costPerLearner
+            }
             claim.evidenceOfPaymentreview["criteria" + criteria].result = true
           } else if (type == "completion") {
             claim.evidenceOfCompletionreview["criteria" + criteria].result = true
@@ -130,9 +133,11 @@ router.post('/evidence-check-handler', function (req, res) {
         if ((claim.evidenceOfPaymentreview.pass != null && type == "payment") || (claim.evidenceOfCompletionreview.pass != null && type == "completion")) {
           delete req.session.data.criteria;
           delete req.session.data.evidenceCheck;
+          delete req.session.data.costPerLearner;
           res.redirect('process-claim/check-evidence-answers')
         } else {
           delete req.session.data.evidenceCheck;
+          delete req.session.data.costPerLearner;
           const nextCriteria = String(Number(criteria) + 1)
           res.redirect('process-claim/review-evidence?type=' + type + '&criteria=' + nextCriteria)
         }

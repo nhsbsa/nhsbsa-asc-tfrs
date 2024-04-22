@@ -45,7 +45,7 @@ addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
                 if (header == "true") {
                     return "Course or qualification name"
                 } else {
-                    return "Does the evidence refers to " + claim.training.title + "?"
+                    return "Does the evidence refer to " + claim.training.title + "?"
                 }
             case "2":
                 if (header == "true") {
