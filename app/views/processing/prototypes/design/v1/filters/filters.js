@@ -126,17 +126,6 @@ addFilter('dateSort_V1', function (notes) {
     return sortedData
 })
 
-addFilter('formatCategory_V1', function (category) {
-
-    switch (category) {
-        case "query":
-            return "Query";
-        case "addingContext":
-            return "Adding Context";
-    }
-});
-
-
 addFilter('reimbursement_V1', function (claim) {
     if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
         return claim.reimbursementAmount
