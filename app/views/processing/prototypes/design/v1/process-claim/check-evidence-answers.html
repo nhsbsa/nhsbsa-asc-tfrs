@@ -1,0 +1,79 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% set claim = data.id | findClaim_V8(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Review evidence claim: ", claim.claimID, " - process a claim"] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="{{ data.criteria | evidenceBackLink_V1(data.type)}}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Review evidence of {{data.type}}</span>
+        <h1 class="govuk-heading-l">Check your answers before continuing</h1>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.type == "payment" %}
+        {% set noCriteria = ['1', '2', '3', '4', '5'] %}
+        {% elif data.type == "completion" %}
+        {% set noCriteria = ['1', '2', '3', '4', '5'] %}
+        {% endif %}
+        <dl class="govuk-summary-list">
+            {% for i in noCriteria %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    {{ i | criteriaQuestions_V1(data.type, claim, "false") }}
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ i | criteriaAnswer_V1(data.type, claim) }}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="review-evidence?type={{data.type}}&criteria={{i}}">Change</a>
+                </dd>
+            </div>
+            {% endfor %}
+        </dl>
+        <form action="claim" method="post" novalidate>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m">Evidence of {{data.type}}</h2>
+        <dl class="govuk-summary-list">
+            {% if data.type == "payment" and (claim.evidenceOfPayment | length ) > 1 %}
+            <div class="govuk-tabs" data-module="govuk-tabs">
+                <h2 class="govuk-tabs__title">
+                    Contents
+                </h2>
+                <ul class="govuk-tabs__list">
+                    {% for evidence in claim.evidenceOfPayment %}
+                    <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+                        <a class="govuk-tabs__tab" href="#evidence{{ loop.index }}">
+                            File {{ loop.index }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% for evidence in claim.evidenceOfPayment %}
+                <div class="govuk-tabs__panel" id="evidence{{ loop.index }}">
+                    {% include "../_components/file-section.html" %}
+                </div>
+                {% endfor %}
+            </div>
+            {% elif data.type == "completion" %}
+            {% set evidence = claim.evidenceOfCompletion %}
+            {% include "../_components/file-section.html" %}
+            {% endif %}
+    </div>
+</div>
+
+{% endblock %}
