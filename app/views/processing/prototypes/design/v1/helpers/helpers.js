@@ -67,6 +67,15 @@ function updateClaim(claim) {
     }
 }
 
+function formatDate(isoDate) {
+    const date = new Date(isoDate);
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'short' });
+    const year = date.getFullYear();
+
+    return `${day} ${month} ${year}`;
+}
 
 
-module.exports = { loadJSONFromFile, loadData, updateClaim }
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate }

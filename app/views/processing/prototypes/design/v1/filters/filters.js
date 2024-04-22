@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { } = require('../helpers/helpers.js');
+const { formatDate } = require('../helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag_V1', function (statusID) {
@@ -63,7 +63,7 @@ addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
                 if (header == "true") {
                     return "When the payment was made"
                 } else {
-                    return "Does the evidence show the payment date of  " + claim.training.costDate + "?"
+                    return "Does the evidence show the payment date of  " + claim.costDate + "?"
                 }
         }
     } else if (type == "completion") {
@@ -72,7 +72,7 @@ addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
                 if (header == "true") {
                     return "Date the training took place or started"
                 } else {
-                    return "Does the evidence show the training start of " + claim.training.startDate + "?"
+                    return "Does the evidence show the training start of " + formatDate(claim.startDate) + "?"
                 }
             case "2":
                 if (header == "true") {
@@ -88,7 +88,7 @@ addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
                 }
         }
     }
-})
+}, { renderAsHtml: true })
 
 addFilter('criteriaAnswer_V1', function (criteria, type, claim) {
     console.log(claim)
