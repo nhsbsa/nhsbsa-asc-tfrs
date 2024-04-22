@@ -14,31 +14,34 @@ note making
         <form action="../add-note" method="post" novalidate>
             <div class="govuk-form-group">
                 <h1 class="govuk-label-wrapper">
-                  <label class="govuk-label govuk-label--l" for="adding-a-note">
-                    Add a note
-                  </label>
+                    <label class="govuk-label govuk-label--l" for="noteInput">
+                        Add a note?
+                    </label>
                 </h1>
-                <div id="note-input-hint" class="govuk-hint">
-                  This note will be added to the claim: {{data.id}}
-                </div>
-                <div class="govuk-form-group" style="padding-bottom: 30px; padding-top: 10px;">
+                <p class="govuk-body">
+                  This note will be added to the claim: {{data.id}}.
+                </p>
+                <div class="govuk-form-group govuk-!-padding-top-2 govuk-!-padding-bottom-5">
                 <label class="govuk-label" for="sort">
                     Please select a category that applies best to your note
                   </label>
                   <select class="govuk-select" id="category" name="category">
-                    <option value="addingContext">Adding context</option>
-                    <option value="query" selected>Query on claim</option>
-                    <option value="rejectionReason" selected>Rejection reason</option>
+                    <option value="addingContext" selected>Adding context</option>
+                    <option value="query">Query on claim</option>
+                    <option value="rejectionReason">Rejection reason</option>
                   </select>
                   </div>
+                  <label class="govuk-label" for="noteInput">
+                    What is the note you would like to add?
+                </label>
                 <textarea class="govuk-textarea" id="noteInput" name="noteInput" rows="8" aria-describedby="note-input-hint"></textarea>
-              </div>
-                <div class="govuk-button-group">
-                  <button type="submit" class="govuk-button" data-module="govuk-button">
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
                     Add note to claim
-                  </button>
-                  <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler">Cancel</a>
-                </div>
+                </button>
+                <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler">Cancel</a>
+            </div>
         </form>
     </div>
 </div>
