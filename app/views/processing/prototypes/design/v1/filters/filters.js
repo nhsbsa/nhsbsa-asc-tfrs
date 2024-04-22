@@ -43,66 +43,48 @@ addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
         switch (criteria) {
             case "1":
                 if (header == "true") {
-                    return "Criteria 1"
+                    return "Course or qualification name"
                 } else {
-                    return "This is the payment criteria for criteria 1 " + claim.training.title
+                    return "Does the evidence refers to " + claim.training.title + "?"
                 }
             case "2":
                 if (header == "true") {
-                    return "Criteria 2"
+                    return "Training provider or awarding body name"
                 } else {
-                    return "This is the payment criteria for criteria 2 " + claim.training.title
+                    return "Does the evidence show " + claim.training.awardingOrganisation + "?"
                 }
             case "3":
                 if (header == "true") {
-                    return "Criteria 3"
+                    return "How much was paid"
                 } else {
-                    return "This is the payment criteria for criteria 3 " + claim.training.title
+                    return "Does the evidence shows how much was paid?"
                 }
             case "4":
                 if (header == "true") {
-                    return "Criteria 4"
+                    return "When the payment was made"
                 } else {
-                    return "This is the payment criteria for criteria 4 " + claim.training.title
-                }
-            case "5":
-                if (header == "true") {
-                    return "Criteria 5"
-                } else {
-                    return "This is the payment criteria for criteria 5 " + claim.training.title
+                    return "Does the evidence show the payment date of  " + claim.training.costDate + "?"
                 }
         }
     } else if (type == "completion") {
         switch (criteria) {
             case "1":
                 if (header == "true") {
-                    return "Criteria 1"
+                    return "Date the training took place or started"
                 } else {
-                    return "This is the completion criteria for criteria 1 " + claim.training.title
+                    return "Does the evidence show the training start of " + claim.training.startDate + "?"
                 }
             case "2":
                 if (header == "true") {
-                    return "Criteria 2"
+                    return "Learner’s name"
                 } else {
-                    return "This is the completion criteria for criteria 2 " + claim.training.title
+                    return "Does the evidence show the learner was " + claim.learner.givenName + claim.learner.familyName + "?"
                 }
             case "3":
                 if (header == "true") {
-                    return "Criteria 3"
+                    return "Training provider or awarding body name"
                 } else {
-                    return "This is the completion criteria for criteria 3 " + claim.training.title
-                }
-            case "4":
-                if (header == "true") {
-                    return "Criteria 4"
-                } else {
-                    return "This is the completion criteria for criteria 4 " + claim.training.title
-                }
-            case "5":
-                if (header == "true") {
-                    return "Criteria 5"
-                } else {
-                    return "This is the completion criteria for criteria 5 " + claim.training.title
+                    return "Does the evidence show " + claim.training.awardingOrganisation + "?"
                 }
         }
     }
@@ -154,4 +136,14 @@ addFilter('formatCategory_V1', function (category) {
         case "addingContext":
             return "Adding Context";
     }
+});
+
+
+addFilter('reimbursement_V1', function (claim) {
+    if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
+        return claim.reimbursementAmount
+    } else {
+        return claim.training.reimbursementAmount
+    }
+
 });

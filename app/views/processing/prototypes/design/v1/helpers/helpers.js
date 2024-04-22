@@ -37,14 +37,12 @@ function updateClaim(claim) {
         claim.evidenceOfPaymentreview.criteria1.result != null &&
         claim.evidenceOfPaymentreview.criteria2.result != null &&
         claim.evidenceOfPaymentreview.criteria3.result != null &&
-        claim.evidenceOfPaymentreview.criteria4.result != null &&
-        claim.evidenceOfPaymentreview.criteria5.result != null
+        claim.evidenceOfPaymentreview.criteria4.result != null
     ) {
         if (claim.evidenceOfPaymentreview.criteria1.result &&
             claim.evidenceOfPaymentreview.criteria2.result &&
             claim.evidenceOfPaymentreview.criteria3.result &&
-            claim.evidenceOfPaymentreview.criteria4.result &&
-            claim.evidenceOfPaymentreview.criteria5.result) {
+            claim.evidenceOfPaymentreview.criteria4.result) {
             claim.evidenceOfPaymentreview.pass = true
         } else {
             claim.evidenceOfPaymentreview.pass = false
@@ -54,16 +52,12 @@ function updateClaim(claim) {
     if (
         claim.evidenceOfCompletionreview.criteria1.result != null &&
         claim.evidenceOfCompletionreview.criteria2.result != null &&
-        claim.evidenceOfCompletionreview.criteria3.result != null &&
-        claim.evidenceOfCompletionreview.criteria4.result != null &&
-        claim.evidenceOfCompletionreview.criteria5.result != null
+        claim.evidenceOfCompletionreview.criteria3.result != null
     ) {
         console.log("not null")
         if (claim.evidenceOfCompletionreview.criteria1.result &&
             claim.evidenceOfCompletionreview.criteria2.result &&
-            claim.evidenceOfCompletionreview.criteria3.result &&
-            claim.evidenceOfCompletionreview.criteria4.result &&
-            claim.evidenceOfCompletionreview.criteria5.result) {
+            claim.evidenceOfCompletionreview.criteria3.result) {
                 console.log(true)
             claim.evidenceOfCompletionreview.pass = true
         } else {

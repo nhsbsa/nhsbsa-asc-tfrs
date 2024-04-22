@@ -37,27 +37,6 @@ router.post('/confirm-org-handler', function (req, res) {
 
 });
 
-router.post('/claim-process-handler', function (req, res) {
-  const claimID = req.session.data.id
-  delete req.session.data.error
-
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      if (c.evidenceOfPaymentreview.pass != null && c.evidenceOfCompletionreview.pass != null) {
-        if (c.evidenceOfPaymentreview.pass && c.evidenceOfCompletionreview.pass) {
-          res.redirect('process-claim/approve')
-        } else {
-          res.redirect('process-claim/reject')
-        }
-      } else {
-        req.session.data.error = true
-        res.redirect('process-claim/claim')
-      }
-
-    }
-  }
-});
-
 router.post('/search-claim-id', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];
@@ -189,9 +168,9 @@ router.post('/claim-process-handler', function (req, res) {
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
       if (claim.evidenceOfPaymentreview.pass && claim.evidenceOfCompletionreview.pass) {
-        res.redirect('process-claim/approve')
+        res.redirect('process-claim/outcome?result=approve')
       } else {
-        res.redirect('process-claim/reject')
+        res.redirect('process-claim/outcome?result=reject')
       }
     }
   }

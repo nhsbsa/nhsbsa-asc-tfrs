@@ -1,0 +1,29 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% set claim = data.id | findClaim_V8(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Confirm outcome: ", claim.claimID, " - process a claim"] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="./claim?id={{data.id}}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-l">Process a claim</span>
+    {% if data.result == "approve" %}
+    {% include "../_components/approve.html" %}
+    {% elif data.result == "reject" %}
+    {% include "../_components/reject.html" %}
+    {% endif %}
+    <a type="submit" class="govuk-button" data-module="govuk-button">
+      Continue
+    </a>
+  </div>
+</div>
+
+
+{% endblock %}

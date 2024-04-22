@@ -21,9 +21,9 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         {% if data.type == "payment" %}
-        {% set noCriteria = ['1', '2', '3', '4', '5'] %}
+        {% set noCriteria = ['1', '2', '3', '4'] %}
         {% elif data.type == "completion" %}
-        {% set noCriteria = ['1', '2', '3', '4', '5'] %}
+        {% set noCriteria = ['1', '2', '3'] %}
         {% endif %}
         <dl class="govuk-summary-list">
             {% for i in noCriteria %}
