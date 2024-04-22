@@ -36,11 +36,11 @@
             <li>
               <a href="#upload">
                 {% if data.errorFileTooBig %}
-                The selected file must be smaller than 2MB
+                The file must be smaller than 2MB
                 {% elif data.errorWrongFileFormat %}
-                The selected file must be a JPG, PNG, or PDF.
+                The file must be a PDF, JPG or PNG.
                 {% elif data.errorFileMissing %}
-                Select an evidence of {{data.type}}
+                Select a file as evidence of {{data.type}}
                 {% endif %}
               </a>
             </li>
@@ -52,7 +52,10 @@
 
     <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
     <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
-
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
     <p class="govuk-body">
       You need to provide evidence of {{ data.type }}{% if data.type == 'completion' %} for {{ claim.learner.givenName
       }} {{ claim.learner.familyName }}{% endif %}.
@@ -73,9 +76,9 @@
       <p id="upload" class="govuk-error-message">
         <span class="govuk-visually-hidden">Error:</span>
         {% if data.errorFileTooBig %}
-        The selected file must be smaller than 2MB
+        The file must be smaller than 2MB
         {% elif data.errorWrongFileFormat %}
-        The selected file must be a JPG, PNG, or PDF.
+        The file must be a PDF, JPG or PNG.
         {% elif data.errorFileMissing %}
         Select an evidence of {{data.type}}
         {% endif %}

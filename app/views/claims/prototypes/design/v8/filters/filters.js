@@ -174,7 +174,7 @@ addFilter('errorSummary_V8', function (claim, submitError) {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-evidence-error">Add evidence of completion</a></li>')
     }
     if (submitError.completionDate == "invalid" || submitError.startDate == "invalid") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be after the start date</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be on or after the start date</a></li>')
     }
 
     return errorSummaryStr
@@ -258,7 +258,7 @@ addFilter('dateErrorMessage_V8', function (dateErrorObject, dateType, errorSecti
             errorMessages.push('<li><a href="#input-error">Enter the ' + dateType.toLowerCase() + '</a></li>');
         }
         if (dateErrorObject.date === 'invalidPolicy') {
-            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be after 1 April 2024</a></li>');
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be on or after 1 April 2024</a></li>');
         }
     } else if (errorSection == 'input') {
         errorMessages.push('<p id="input-error" class="govuk-error-message">')
@@ -278,7 +278,7 @@ addFilter('dateErrorMessage_V8', function (dateErrorObject, dateType, errorSecti
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>Enter the ' + dateType.toLowerCase() + '<br>');
         }
         if (dateErrorObject.date === 'invalidPolicy') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be after 1 April 2024<br>');
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be on or after 1 April 2024<br>');
         }
         errorMessages.push('</p>')
     }
@@ -290,15 +290,15 @@ addFilter('dateErrorFormat', function (dateErrorObject, type) {
     let state = false
     if (dateErrorObject) {
         if (type == "day") {
-            if (dateErrorObject.day == 'missing' || (dateErrorObject.day == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid') {
+            if (dateErrorObject.day == 'missing' || (dateErrorObject.day == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid'|| dateErrorObject.date == 'invalidPolicy') {
                 state = true
             }
         } else if (type == "month") {
-            if (dateErrorObject.month == 'missing' || (dateErrorObject.month == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid') {
+            if (dateErrorObject.month == 'missing' || (dateErrorObject.month == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.date == 'invalidPolicy') {
                 state = true
             }
         } else if (type == "year") {
-            if (dateErrorObject.year == 'missing' || (dateErrorObject.year == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid') {
+            if (dateErrorObject.year == 'missing' || (dateErrorObject.year == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.date == 'invalidPolicy') {
                 state = true
             }
         }
@@ -412,13 +412,13 @@ addFilter('learnerErrorMessage_V8', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a family name</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a last (family) name</a></li>')
     }
     if (submitError.givenName == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a given name</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a first (given) name</a></li>')
     }
     if (submitError.nationalInsuranceNumber == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#nationalInsuranceNumber-error">Enter a national insurance number</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#nationalInsuranceNumber-error">Enter a National Insurance number</a></li>')
     } else if (submitError.nationalInsuranceNumber == "invalid") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#nationalInsuranceNumber-error">Enter a National Insurance number in the correct format</a></li>')
     }
