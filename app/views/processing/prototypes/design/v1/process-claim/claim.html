@@ -66,11 +66,11 @@
                 </div>
             </div>
         </div>
+        {% for note in data['notes']| dateSort_V1 %}
+                    
+            {% include "../_components/note.html" %}
 
-        {% include "../_components/note.html" %}
-        {% include "../_components/note.html" %}
-        {% include "../_components/note.html" %}
-        {% include "../_components/note.html" %}
+        {% endfor %}
     </div>
 </div>
 

@@ -37,3 +37,20 @@ addFilter('findClaim_V1', function (claims, id) {
     }
     return foundClaim
 })
+
+addFilter('dateSort_V1', function (notes) {
+    const sortedData = notes.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return sortedData
+})
+
+addFilter('formatCategory_V1', function (category) {
+
+    switch (category) {
+        case "rejectionReason":
+            return "Rejection Reason";
+        case "query":
+            return "Query";
+        case "addingContext":
+            return "Adding Context";
+    }
+})
