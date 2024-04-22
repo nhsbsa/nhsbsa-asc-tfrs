@@ -129,8 +129,6 @@ addFilter('dateSort_V1', function (notes) {
 addFilter('formatCategory_V1', function (category) {
 
     switch (category) {
-        case "rejectionReason":
-            return "Rejection Reason";
         case "query":
             return "Query";
         case "addingContext":

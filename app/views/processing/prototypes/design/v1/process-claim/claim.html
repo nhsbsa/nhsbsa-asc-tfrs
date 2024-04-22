@@ -51,9 +51,14 @@
 
         {% endif %}
     </div>
-    <div class="govuk-grid-column-one-third">
+</div>
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" style="margin-bottom: 40px;">
         <div class="moj-page-header-actions">
-            <div class="moj-page-header-actions__title">
+            <div class="moj-page-header-actions__title" >
                 <h2 class="govuk-heading-m">Claim notes</h2>
             </div>
             <div class="moj-page-header-actions__actions">
@@ -66,10 +71,8 @@
                 </div>
             </div>
         </div>
-        {% for note in data['notes']| dateSort_V1 %}
-                    
+        {% for note in data['notes']| dateSort_V1 %}     
             {% include "../_components/note.html" %}
-
         {% endfor %}
     </div>
 </div>
