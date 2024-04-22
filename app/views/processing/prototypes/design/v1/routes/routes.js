@@ -97,6 +97,27 @@ router.post('/search-claim-id', function (req, res) {
 
 });
 
+router.get('/cancel-handler', function (req, res) {
+  const claimID = req.session.data.id
+  res.redirect('process-claim/claim' + '?id=' + claimID)
+});
+
+router.post('/add-note', function (req, res) {
+  const claimID = req.session.data.id
+  var notes = req.session.data.notes
+  var newCategory = req.session.data.category
+  var newNoteInput = req.session.data.noteInput
+  var currentDate = new Date().toISOString();
+  var newNote = {
+    "author": "test participant",
+    "date": currentDate,
+    "category": newCategory,
+    "note": newNoteInput
+};
+  notes.push(newNote);
+  res.redirect('process-claim/claim' + '?id=' + claimID + "&noteAddedSuccess")
+});
+
 router.post('/evidence-check-handler', function (req, res) {
   const evidenceCheck = req.session.data.evidenceCheck
   const criteria = req.session.data.criteria
