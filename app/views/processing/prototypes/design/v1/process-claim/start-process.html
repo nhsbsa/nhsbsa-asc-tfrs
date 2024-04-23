@@ -22,7 +22,7 @@ Claim ID - Find a claim for processing
                 <ul class="govuk-list govuk-error-summary__list">
                   <li>
                     {% if (data.emptyError) %}
-                    <a href="#claimID"> Enter a claim ID.</a>
+                    <a href="#claimID"> Enter a claim reference number.</a>
                     {% elif (data.notFound) %}
                     <a href="#claimID">No match returned for your search: <q>{{ data.id }}.</a>
                     {% else %}
@@ -41,10 +41,10 @@ Claim ID - Find a claim for processing
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                             <span class="govuk-caption-l">Find a claim</span>
                             <h1 class="govuk-fieldset__heading" for="claimID">
-                                What is the claim ID for the claim you want to process?
+                                What is the claim reference number for the claim you want to process?
                             </h1>
                         </legend>
-                        <p class="govuk-body">This is the claim ID exactly as it appears in OM.</p>
+                        <p class="govuk-body">This is the claim reference number exactly as it appears in operations manager.</p>
                         <div id="claim-id-hint" class="govuk-hint">
                             For example, Z1Z-F1J6-3XF7-C
                         </div>
@@ -52,7 +52,7 @@ Claim ID - Find a claim for processing
                             {% if (data.invalidIDError) %}
                                 <p id="event-name-error" class="govuk-error-message">
                                     {% if (data.emptyError) %}
-                                    <span class="govuk-visually-hidden">Error:</span> Enter a claim ID
+                                    <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number
                                     {% else %}
                                     <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number in the correct format
                                     {% endif %}
@@ -63,7 +63,7 @@ Claim ID - Find a claim for processing
                     </fieldset>
                 </div>
                 <button class="govuk-button moj-search__button" data-module="govuk-button" type="submit" style="margin-left: 0px;">
-                    Find
+                    Find claim
                 </button>
             </form>
 

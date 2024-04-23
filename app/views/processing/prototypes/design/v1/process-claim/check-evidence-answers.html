@@ -46,34 +46,6 @@
             </button>
         </form>
     </div>
-    <div class="govuk-grid-column-one-third">
-        <h2 class="govuk-heading-m">Evidence of {{data.type}}</h2>
-        <dl class="govuk-summary-list">
-            {% if data.type == "payment" and (claim.evidenceOfPayment | length ) > 1 %}
-            <div class="govuk-tabs" data-module="govuk-tabs">
-                <h2 class="govuk-tabs__title">
-                    Contents
-                </h2>
-                <ul class="govuk-tabs__list">
-                    {% for evidence in claim.evidenceOfPayment %}
-                    <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-                        <a class="govuk-tabs__tab" href="#evidence{{ loop.index }}">
-                            File {{ loop.index }}
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% for evidence in claim.evidenceOfPayment %}
-                <div class="govuk-tabs__panel" id="evidence{{ loop.index }}">
-                    {% include "../_components/file-section.html" %}
-                </div>
-                {% endfor %}
-            </div>
-            {% elif data.type == "completion" %}
-            {% set evidence = claim.evidenceOfCompletion %}
-            {% include "../_components/file-section.html" %}
-            {% endif %}
-    </div>
 </div>
 
 {% endblock %}
