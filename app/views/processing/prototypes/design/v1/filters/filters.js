@@ -45,25 +45,25 @@ addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
                 if (header == "true") {
                     return "Course or qualification name"
                 } else {
-                    return "Does the evidence refer to " + claim.training.title + "?"
+                    return "Does the payment evidence show the training was " + claim.training.title + "?"
                 }
             case "2":
                 if (header == "true") {
                     return "Training provider or awarding body name"
                 } else {
-                    return "Does the evidence show " + claim.training.awardingOrganisation + "?"
+                    return "Does the payment evidence show the provider was " + claim.training.awardingOrganisation + "?"
                 }
             case "3":
                 if (header == "true") {
                     return "How much was paid"
                 } else {
-                    return "Does the evidence shows how much was paid?"
+                    return "Does the payment evidence show how much was paid?"
                 }
             case "4":
                 if (header == "true") {
                     return "When the payment was made"
                 } else {
-                    return "Does the evidence show the payment date of  " + formatDate(claim.costDate) + "?"
+                    return "Does the payment evidence show the payment date of  " + formatDate(claim.costDate) + "?"
                 }
         }
     } else if (type == "completion") {
@@ -72,19 +72,19 @@ addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
                 if (header == "true") {
                     return "Date the training took place or started"
                 } else {
-                    return "Does the evidence show the training start of " + formatDate(claim.startDate) + "?"
+                    return "Does the completion evidence show the training start of " + formatDate(claim.startDate) + "?"
                 }
             case "2":
                 if (header == "true") {
                     return "Learner’s name"
                 } else {
-                    return "Does the evidence show the learner was " + claim.learner.givenName + " " + claim.learner.familyName + "?"
+                    return "Does the completion evidence show the learner was " + claim.learner.givenName + " " + claim.learner.familyName + "?"
                 }
             case "3":
                 if (header == "true") {
                     return "Training provider or awarding body name"
                 } else {
-                    return "Does the evidence show " + claim.training.awardingOrganisation + "?"
+                    return "Does the completion evidence show the provider was " + claim.training.awardingOrganisation + "?"
                 }
         }
     }
@@ -139,26 +139,26 @@ addFilter('reimbursement_V1', function (claim) {
 addFilter('rejectionNote_V1', function (claim) {
     rejectionNote = "<div class='govuk-inset-text'><h3 class='govuk-heading-s'>Claim rejected</h3>"
     if (!claim.evidenceOfPaymentreview.criteria1.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of payment did not refer to " + claim.training.title + "<br>" + claim.evidenceOfPaymentreview.criteria1.note + "</p>"
+        rejectionNote = rejectionNote + "<p class='govuk-body'>The payment evidence does not show the training was " + claim.training.title + ".<br>" + claim.evidenceOfPaymentreview.criteria1.note + "</p>"
     }
     if (!claim.evidenceOfPaymentreview.criteria2.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of payment did not show " + claim.training.awardingOrganisation + "<br>" + claim.evidenceOfPaymentreview.criteria2.note + "</p>"
+        rejectionNote = rejectionNote + "<p class='govuk-body'>The payment evidence does not show the provider was " + claim.training.awardingOrganisation + ".<br>" + claim.evidenceOfPaymentreview.criteria2.note + "</p>"
     }
     if (!claim.evidenceOfPaymentreview.criteria3.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of payment did not show how much was paid"  + "<br>" + claim.evidenceOfPaymentreview.criteria3.note + "</p>"
+        rejectionNote = rejectionNote + "<p class='govuk-body'>The payment evidence does not show how much was paid."  + "<br>" + claim.evidenceOfPaymentreview.criteria3.note + "</p>"
     }
     if (!claim.evidenceOfPaymentreview.criteria4.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of payment did not show the payment date of  " + formatDate(claim.costDate) + "<br>" + claim.evidenceOfPaymentreview.criteria4.note + "</p>"
+        rejectionNote = rejectionNote + "<p class='govuk-body'>The payment evidence does not show the payment date of  " + formatDate(claim.costDate) + ".<br>" + claim.evidenceOfPaymentreview.criteria4.note + "</p>"
     }
 
     if (!claim.evidenceOfCompletionreview.criteria1.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>Does the evidence of completion did not show the training start of " + formatDate(claim.startDate) + "<br>" + claim.evidenceOfCompletionreview.criteria1.note + "</p>"
+        rejectionNote = rejectionNote + "<p class='govuk-body'>The completion evidence does not show the training start date of " + formatDate(claim.startDate) + ".<br>" + claim.evidenceOfCompletionreview.criteria1.note + "</p>"
     }
     if (!claim.evidenceOfCompletionreview.criteria2.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of completion did not show the learner was " + claim.learner.givenName + " " + claim.learner.familyName  + "<br>" + claim.evidenceOfCompletionreview.criteria2.note + "</p>"
+        rejectionNote = rejectionNote + "<p class='govuk-body'>The completion evidence does not show the learner was " + claim.learner.givenName + " " + claim.learner.familyName  + ".<br>" + claim.evidenceOfCompletionreview.criteria2.note + "</p>"
     }
     if (!claim.evidenceOfCompletionreview.criteria3.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of completion did not show " + claim.training.awardingOrganisation  + "<br>" + claim.evidenceOfCompletionreview.criteria3.note + "</p>"
+        rejectionNote = rejectionNote + "<p class='govuk-body'>The completion evidence does not show the provider was " + claim.training.awardingOrganisation  + ".<br>" + claim.evidenceOfCompletionreview.criteria3.note + "</p>"
     }
 
     rejectionNote = rejectionNote + "</div>"
