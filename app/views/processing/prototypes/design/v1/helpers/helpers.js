@@ -54,14 +54,11 @@ function updateClaim(claim) {
         claim.evidenceOfCompletionreview.criteria2.result != null &&
         claim.evidenceOfCompletionreview.criteria3.result != null
     ) {
-        console.log("not null")
         if (claim.evidenceOfCompletionreview.criteria1.result &&
             claim.evidenceOfCompletionreview.criteria2.result &&
             claim.evidenceOfCompletionreview.criteria3.result) {
-                console.log(true)
             claim.evidenceOfCompletionreview.pass = true
         } else {
-            console.log(false)
             claim.evidenceOfCompletionreview.pass = false
         }
     }

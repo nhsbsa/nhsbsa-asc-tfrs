@@ -91,7 +91,6 @@ addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
 }, { renderAsHtml: true })
 
 addFilter('criteriaAnswer_V1', function (criteria, type, claim) {
-    console.log(claim)
     if (type == "payment") {
         if (claim.evidenceOfPaymentreview["criteria" + criteria].result) {
             return "Yes"
