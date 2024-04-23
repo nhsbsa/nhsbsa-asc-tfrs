@@ -25,7 +25,7 @@ function loadData(req) {
     console.log('statuses file loaded')
 
     console.log('loading in notes file')
-    req.session.data['notes'] = loadJSONFromFile(notesFile, path)
+    req.session.data['notes'] = [];
     console.log('notes file loaded')
 
     return console.log('data updated')

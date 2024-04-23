@@ -71,9 +71,13 @@
                 </div>
             </div>
         </div>
-        {% for note in data['notes']| dateSort_V1 %}     
-            {% include "../_components/note.html" %}
-        {% endfor %}
+        {% if data['notes'].length > 0 %}     
+            {% for note in data['notes']| dateSort_V1 %}     
+                {% include "../_components/note.html" %}
+            {% endfor %}
+        {% else %}  
+            <p>There are currently no notes for this claim.</p>   
+        {% endif %}     
     </div>
 </div>
 
