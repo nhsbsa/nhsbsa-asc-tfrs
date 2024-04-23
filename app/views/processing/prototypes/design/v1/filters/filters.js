@@ -116,6 +116,7 @@ addFilter('evidenceBackLink_V1', function (criteriaNo, type) {
     if (criteriaNo == "1") {
         return "claim"
     } else {
+        criteriaNo = String(Number(criteriaNo)+1)
         return "review-evidence?type=" + type + "&criteria=" + criteriaNo
     }
 })
