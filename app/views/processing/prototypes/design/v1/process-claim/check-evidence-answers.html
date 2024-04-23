@@ -6,10 +6,6 @@
 {{ ["Review evidence claim: ", claim.claimID, " - process a claim"] | join }}
 {% endblock %}
 
-{% block beforeContent %}
-<a href="{{ data.criteria | evidenceBackLink_V1(data.type)}}" class="govuk-back-link">Back</a>
-{% endblock %}
-
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
