@@ -14,7 +14,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-        {% if data.emptyError or data.invalid %}
+        {% if data.jobTitleEmptyError or data.jobTitleInvalid %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
           <div role="alert">
             <h2 class="govuk-error-summary__title">
@@ -24,9 +24,9 @@
               <ul class="govuk-list govuk-error-summary__list">
                 <li>
                   <a href="#jobTitle">
-                    {% if data.emptyError %}
+                    {% if data.jobTitleEmptyError %}
                     The job title must not be empty
-                    {% elif data.invalid %}
+                    {% elif data.jobTitleInvalid %}
                     The job title must not include invalid characters
                     {% endif %}
                   </a>
@@ -38,7 +38,7 @@
         {% endif %}
 
         <form action="../validate-job-title" method="post" class="form">
-            <div class="govuk-form-group {% if data.emptyError or data.invalid %} govuk-form-group--error {% endif %}">
+            <div class="govuk-form-group {% if data.jobTitleEmptyError or data.jobTitleInvalid %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <span class="govuk-caption-l">Complete registration</span>
@@ -57,12 +57,12 @@
                             labore et dolore magna aliqua.
                         </div>
                     </details>
-                    {% if data.emptyError or data.invalid %}
+                    {% if data.jobTitleEmptyError or data.jobTitleInvalid %}
                     <p id="jobTitle" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
-                        {% if data.emptyError %}
+                        {% if data.jobTitleEmptyError %}
                         The job title must not be empty
-                        {% elif data.invalid %}
+                        {% elif data.jobTitleInvalid %}
                         The job title must not include invalid characters
                         {% endif %}
                     </p>
