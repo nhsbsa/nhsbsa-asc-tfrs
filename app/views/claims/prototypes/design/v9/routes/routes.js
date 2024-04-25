@@ -26,13 +26,15 @@ router.post('/account-handler', function (req, res) {
 
 router.post('/verify-details-handler', function (req, res) {
   const confirmationAnswer = req.session.data.confirmation
+  delete req.session.data.confirmation
+  delete req.session.data.submitError
 
   if (confirmationAnswer == "yes") {
     res.redirect('account-setup/job-title')
   } else if (confirmationAnswer == "no") {
     res.redirect('account-setup/account-issue')
   } else {
-    res.redirect('account-setup/job-title')
+    res.redirect('account-setup/verify-details?submitError=true')
   }
 
 });
