@@ -577,7 +577,7 @@ router.post('/declaration-confirmation', function (req, res) {
 function loadData(req) {
   // pull in the prototype data object and see if it contains a datafile reference
   let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
-  const path = 'app/data/v9/'
+  const path = 'app/data/claims/v9/'
 
   var learnersFile = 'learners.json'
   var trainingFile = 'training.json'

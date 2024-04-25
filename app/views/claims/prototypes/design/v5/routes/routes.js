@@ -334,7 +334,7 @@ router.post('/update-filters', (req, res) => {
 function loadData(req) {
     // pull in the prototype data object and see if it contains a datafile reference
     let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
-    const path = 'app/data/v5/'
+    const path = 'app/data/claims/v5/'
   
     var learnersFile = 'learners.json'
     var trainingFile = 'training.json'

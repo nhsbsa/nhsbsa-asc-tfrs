@@ -1,0 +1,37 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% block pageTitle %}
+Workplace ID - Register an organisation
+{% endblock %}
+
+{% block beforeContent %}
+<a href="../home" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="../check-org" method="post" class="form">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <span class="govuk-caption-l">Register an organisation</span>
+                        <h1 class="govuk-fieldset__heading" for="orgID">
+                            What is the workplace ID for the organisation?
+                        </h1>
+                    </legend>
+                    <p class="govuk-body">This is workplace ID for the organisation as it appears in the Adult Social Care Workforce Dataset (ASC-WDS)</p>
+                    <div id="asc-wds-id-hint" class="govuk-hint">
+                        For example, G03944234
+                    </div>
+                    <input class="govuk-input govuk-input--width-10" aria-describedby="asc-wds-id-hint" id="orgID" name="orgID" type="text">
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
