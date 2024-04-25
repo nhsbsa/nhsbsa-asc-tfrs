@@ -15,18 +15,18 @@
                         <a href="#" class="govuk-link"><strong>{{ claim.claimID }}</strong></a><span class="govuk-caption-m" style="padding: 0px 0px 0px 10px;">Type A</span>
                     </p>
                     <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim.training.title }}</p>
-                    {% if claim | findMatchingTraining(data['training']) == true %}<p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Provided by {{ claim.training.awardingOrganisation}} - {{ claim.training.type}}</p>{% endif %}
+                    {% if claim | findMatchingTraining_V8(data['training']) == true %}<p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Provided by {{ claim.training.awardingOrganisation}} - {{ claim.training.type}}</p>{% endif %}
                     <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</p>
                     
                     <div style="display: flex;">
                         <p class="govuk-body" style="margin-bottom: 0;">Training dates:&nbsp</p>
-                        {% if (claim.startDate | govukDate) | formatTrainingDate %}
+                        {% if (claim.startDate | govukDate) | formatTrainingDate_V8 %}
                         <p class="govuk-body" style="margin-bottom: 0;"> {{(claim.startDate | govukDate)}}</p>
                         {% else %}
                         <p class="govuk-caption-m" style="margin-bottom: 0;">not yet added </p>
                         {% endif %}
                         <p class="govuk-body" style="margin-bottom: 0;">&nbspto&nbsp</p>
-                        {% if (claim.endDate | govukDate) | formatTrainingDate %}
+                        {% if (claim.endDate | govukDate) | formatTrainingDate_V8 %}
                         <p class="govuk-body" style="margin-bottom: 0;">{{(claim.endDate | govukDate)}}</p>
                         {% else %}
                         <p class="govuk-caption-m" style="margin-bottom: 0;">not yet added </p>
@@ -36,10 +36,10 @@
 
                 <div class="govuk-grid-column-one-third govuk-!-text-align-right" style="padding: 0;">
                     <p style="margin-bottom: 0;">{{status.id | listItemVariableDate_V8(claim)}}</p>
-                    {% if status.id == "not-yet-submitted"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.createdDate | relativeDateFromDateToToday}}</span>{% endif %}
-                    {% if status.id == "submitted"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.submittedDate | relativeDateFromDateToToday}}</span>{% endif %}
-                    {% if status.id == "approved"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.approvedDate | relativeDateFromDateToToday}}</span>{% endif %}
-                    {% if status.id == "rejected"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.rejectedDate | relativeDateFromDateToToday}}</span>{% endif %}
+                    {% if status.id == "not-yet-submitted"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.createdDate | relativeDateFromDateToToday_V8}}</span>{% endif %}
+                    {% if status.id == "submitted"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.submittedDate | relativeDateFromDateToToday_V8}}</span>{% endif %}
+                    {% if status.id == "approved"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.approvedDate | relativeDateFromDateToToday_V8}}</span>{% endif %}
+                    {% if status.id == "rejected"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.rejectedDate | relativeDateFromDateToToday_V8}}</span>{% endif %}
                 </div>
 
             </div>

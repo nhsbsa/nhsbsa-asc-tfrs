@@ -64,10 +64,7 @@ addFilter('uniqueDates_V8', function (claims, dateType) {
         return formatter.format(formattedDate);
 
     });
-
-
     return formattedDates;
-
 })
 
 addFilter('statusName_V8', function (statusID, statuses) {
@@ -102,18 +99,13 @@ addFilter('variableDate_V8', function (statusID) {
     } else {
         return 'Created'
     }
-
 })
 
 addFilter('removeSpacesAndLowerCase_V8', function (inputString) {
-
     // Convert the string to lowercase
     let outputString = removeSpacesAndLowerCase(inputString);
-
     return outputString;
-
 })
-
 
 addFilter('potName_V8', function (type) {
     let name = "Pot Naming Error"
@@ -122,9 +114,7 @@ addFilter('potName_V8', function (type) {
     } else if (type == "CPD") {
         name = "Revalidation funding"
     }
-
     return name
-
 })
 
 addFilter('newClaimLink_V8', function (type) {
@@ -134,9 +124,7 @@ addFilter('newClaimLink_V8', function (type) {
     } else if (type == "CPD") {
         claimLink = "claim/select-activity-type"
     }
-
     return claimLink
-
 })
 
 addFilter('checkEligible_V8', function (learner, type, roleTypes) {
@@ -146,10 +134,7 @@ addFilter('checkEligible_V8', function (learner, type, roleTypes) {
     } else if (type == "CPD") {
         eligibleRoles = roleTypes.filter(role => role.eligibility.isCPDeligible).map(role => role.rolename);
     }
-
-
     return eligibleRoles.includes(learner.roleType)
-
 })
 
 addFilter('errorSummary_V8', function (claim, submitError) {
@@ -176,7 +161,6 @@ addFilter('errorSummary_V8', function (claim, submitError) {
     if (submitError.completionDate == "invalid" || submitError.startDate == "invalid") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be on or after the start date</a></li>')
     }
-
     return errorSummaryStr
 }, { renderAsHtml: true })
 
@@ -187,15 +171,11 @@ addFilter('findClaim_V8', function (claimID, claims) {
         if (c.claimID == claimID) {
             claim = c
         }
-
     }
-
     return claim;
-
 })
 
-
-addFilter('groupByTitle_V7', function (training) {
+addFilter('groupByTitle_V8', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const organizedData = {};
     for (const course of qualificationsObject.courses) {
@@ -208,7 +188,7 @@ addFilter('groupByTitle_V7', function (training) {
     return organizedData;
 })
 
-addFilter('getUniqueCourseTitles_V7', function (training) {
+addFilter('getUniqueCourseTitles_V8', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const uniqueTitles = [];
 
@@ -220,7 +200,7 @@ addFilter('getUniqueCourseTitles_V7', function (training) {
     return uniqueTitles
 })
 
-addFilter('coursesCount_V7', function (courses) {
+addFilter('coursesCount_V8', function (courses) {
     let count = 0;
     for (const c of courses) {
         count++
@@ -228,7 +208,7 @@ addFilter('coursesCount_V7', function (courses) {
     return count;
 })
 
-addFilter('formatCount_V7', function (courses) {
+addFilter('formatCount_V8', function (courses) {
     let count = courses.length;
     let text = count + " provider";
     if (count > 1) {
@@ -286,7 +266,7 @@ addFilter('dateErrorMessage_V8', function (dateErrorObject, dateType, errorSecti
     return errorMessages.join('');
 }, { renderAsHtml: true })
 
-addFilter('dateErrorFormat', function (dateErrorObject, type) {
+addFilter('dateErrorFormat_V8', function (dateErrorObject, type) {
     let state = false
     if (dateErrorObject) {
         if (type == "day") {
@@ -304,13 +284,6 @@ addFilter('dateErrorFormat', function (dateErrorObject, type) {
         }
     }
     return state;
-})
-
-addFilter('policyDateCheck', function (date) {
-    const policyDate = new Date("2024-04-10");
-    const checkDate = new Date(date)
-
-    return checkDate.getTime() < policyDate.getTime();
 })
 
 addFilter('listItemVariableDate_V8', function (statusID, claim) {
@@ -352,7 +325,7 @@ function formatDate(dateStr) {
     return formattedDate;
 }
 
-addFilter('relativeDateFromDateToToday', function (dateStr) {
+addFilter('relativeDateFromDateToToday_V8', function (dateStr) {
     const inputDate = new Date(dateStr);
     const currentDate = new Date();
     const differenceInMs = currentDate - inputDate;
@@ -373,7 +346,7 @@ addFilter('relativeDateFromDateToToday', function (dateStr) {
     }
 })
 
-addFilter('findMatchingTraining', function (claim, training) {
+addFilter('findMatchingTraining_V8', function (claim, training) {
     // Extracting titles from training array's Qualifications courses
     const qualificationTitles = training.reduce((acc, group) => {
         if (group.groupTitle == "Qualifications") {
@@ -388,19 +361,7 @@ addFilter('findMatchingTraining', function (claim, training) {
     return false;
 })
 
-addFilter('formatTrainingDates', function (start, end) {
-    let startDate = "Not yet added"
-    let endDate = "not yet added"
-    if (start != "Invalid DateTime") {
-        startDate = start
-    }
-    if (end != "Invalid DateTime") {
-        endDate = end
-    }
-    return "Training dates: " + startDate + " to " + endDate
-})
-
-addFilter('formatTrainingDate', function (date) {
+addFilter('formatTrainingDate_V8', function (date) {
     let isValidDate = false
     if (date != "Invalid DateTime") {
         isValidDate = true
@@ -447,7 +408,7 @@ addFilter('learnerMatch_V8', function (newField, matchField, type) {
     return result
 }, { renderAsHtml: true })
 
-addFilter('learnerSearch_v8', function (search, learner) {
+addFilter('learnerSearch_V8', function (search, learner) {
     let match = false
     const formattedgivenName = removeSpacesAndLowerCase(learner.givenName);
     const formattedfamilyName = removeSpacesAndLowerCase(learner.familyName);

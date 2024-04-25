@@ -1,0 +1,55 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{{ ["Select activity type - ", (data.claimType | potName_V9)] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="../manage-claims-home" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="../new-claim-reset" method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="activityType-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <span class="govuk-caption-l">{{ data.claimType | potName_V9 }}</span>
+                        <h1 class="govuk-fieldset__heading">
+                            What type of activity would you like to start a claim for?
+                        </h1>
+                    </legend>
+                    <div id="activityType-hint" class="govuk-hint">
+                        The activities are split into sections to make it easier to find the one you need. Select one
+                        type of activity.
+                    </div>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        {% set counter = 1 %}
+                        {% for group in data.CPDActivities %}
+                        <h2 class="govuk-heading-m">{{ group.groupTitle }}</h1>
+
+                            {% for category in group.categories %}
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="activityType-{{ counter }}" name="activityType"
+                                    type="radio" value="{{ category.name }}">
+                                <label class="govuk-label govuk-radios__label" for="activityType-{{ counter }}">
+                                    {{ category.name }}
+                                </label>
+                            </div>
+                            {% set counter = counter + 1 %}
+                            {% endfor %}
+
+                            {% endfor %}
+
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends "../layouts/main.html" %}
 
-{% set sortedCourseData = data.training | groupByTitle_V7 %}
-{% set uniqueCourseTitles = data.training | getUniqueCourseTitles_V7 %}
+{% set sortedCourseData = data.training | groupByTitle_V8 %}
+{% set uniqueCourseTitles = data.training | getUniqueCourseTitles_V8 %}
 
 {% block content %}
 
@@ -19,7 +19,7 @@
             {% if trainingGroup.groupTitle != "Qualifications" %}
             <p class="govuk-body">
                 <ul class="govuk-list govuk-list--bullet">
-                    <li><a class="govuk-link govuk-link--no-visited-state" href="#{{ trainingGroup.groupTitle }}">{{ trainingGroup.groupTitle }} ({{ trainingGroup.courses | coursesCount_V7 }})</a></p></li>
+                    <li><a class="govuk-link govuk-link--no-visited-state" href="#{{ trainingGroup.groupTitle }}">{{ trainingGroup.groupTitle }} ({{ trainingGroup.courses | coursesCount_V8 }})</a></p></li>
                 </ul>
             </p>
             {% endif %}
@@ -34,7 +34,7 @@
         {% for course in uniqueCourseTitles %}
             <p class="govuk-body">
                 <ul class="govuk-list govuk-list--bullet">
-                    <li><a class="govuk-link govuk-link--no-visited-state" href="#{{course}}">{{course}} ({{sortedCourseData[course] | formatCount_V7}})</a></p></li>
+                    <li><a class="govuk-link govuk-link--no-visited-state" href="#{{course}}">{{course}} ({{sortedCourseData[course] | formatCount_V8}})</a></p></li>
                 </ul>
             </p>
         {% endfor %}

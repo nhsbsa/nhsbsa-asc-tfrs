@@ -1,0 +1,197 @@
+{% set hasResults = false %}
+{% set addHeader = true %}
+{% set loopCounter = 0 %}
+
+{% for claim in data['claims'] %}
+{% if claim.status == status.id and claim.type == data.claimType and (loopCounter < 3) %} {% set hasResults=true %} {%
+    if addHeader %} 
+ <div class="govuk-main-wrapper " style="padding: 0;">
+
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+                <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+                    <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px; display: flex;">
+                        <a href="#" class="govuk-link"><strong>{{ claim.claimID }}</strong></a><span class="govuk-caption-m" style="padding: 0px 0px 0px 10px;">Type A</span>
+                    </p>
+                    <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim.training.title }}</p>
+                    {% if claim | findMatchingTraining_V9(data['training']) == true %}<p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Provided by {{ claim.training.awardingOrganisation}} - {{ claim.training.type}}</p>{% endif %}
+                    <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</p>
+                    
+                    <div style="display: flex;">
+                        <p class="govuk-body" style="margin-bottom: 0;">Training dates:&nbsp</p>
+                        {% if (claim.startDate | govukDate) | formatTrainingDate_V9 %}
+                        <p class="govuk-body" style="margin-bottom: 0;"> {{(claim.startDate | govukDate)}}</p>
+                        {% else %}
+                        <p class="govuk-caption-m" style="margin-bottom: 0;">not yet added </p>
+                        {% endif %}
+                        <p class="govuk-body" style="margin-bottom: 0;">&nbspto&nbsp</p>
+                        {% if (claim.endDate | govukDate) | formatTrainingDate_V9 %}
+                        <p class="govuk-body" style="margin-bottom: 0;">{{(claim.endDate | govukDate)}}</p>
+                        {% else %}
+                        <p class="govuk-caption-m" style="margin-bottom: 0;">not yet added </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="govuk-grid-column-one-third govuk-!-text-align-right" style="padding: 0;">
+                    <p style="margin-bottom: 0;">{{status.id | listItemVariableDate_V9(claim)}}</p>
+                    {% if status.id == "not-yet-submitted"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.createdDate | relativeDateFromDateToToday_V9}}</span>{% endif %}
+                    {% if status.id == "submitted"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.submittedDate | relativeDateFromDateToToday_V9}}</span>{% endif %}
+                    {% if status.id == "approved"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.approvedDate | relativeDateFromDateToToday_V9}}</span>{% endif %}
+                    {% if status.id == "rejected"%} <span style="margin-bottom: 0;" class="govuk-caption-m">{{claim.rejectedDate | relativeDateFromDateToToday_V9}}</span>{% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% set loopCounter = loopCounter + 1 %}
+{% endif %}
+{% endfor %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px; display: flex;">
+                <a href="#" class="govuk-link"><strong>5GT-5H92-JRBI-C</strong></a><span class="govuk-caption-m" style="padding: 0px 0px 0px 10px;">Type A</span>
+            </p>
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Oral Care for Health and Social Care</p>
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Provided by TQUK - Level 2 Certificate Oral Care for Health and Social Care</p>
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Casey Simonis</p>
+            <div style="display: flex;"><p class="govuk-body" style="margin-bottom: 0;">Training dates:&nbsp</p><span style="margin-bottom: 0;" class="govuk-caption-m">Not yet added</span><p class="govuk-body" style="margin-bottom: 0;">&nbspto 10 December 2023</p></div>
+        </div>
+
+        <div class="govuk-grid-column-one-third govuk-!-text-align-right" style="padding: 0;">
+            {% if status.id == "not-yet-submitted"%} 
+            <p style="margin-bottom: 0;">Created 30 Jan 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">4 months ago</span>
+            {% endif %}
+            {% if status.id == "submitted"%} 
+            <p style="margin-bottom: 0;">Submitted 30 Jan 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">4 months ago</span>
+            {% endif %}
+            {% if status.id == "approved"%} 
+            <p style="margin-bottom: 0;">Approved 30 Jan 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">4 months ago</span>
+            {% endif %}
+            {% if status.id == "rejected"%} 
+            <p style="margin-bottom: 0;">Rejected 30 Jan 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">4 months ago</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px; display: flex;">
+                <a href="#" class="govuk-link"><strong>8KW-3L2K-9P0P-C</strong></a><span class="govuk-caption-m" style="padding: 0px 0px 0px 10px;">Type B</span>
+            </p>
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Reading journals or articles</p>
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Malinda Mayer</p>
+        </div>
+
+        <div class="govuk-grid-column-one-third govuk-!-text-align-right" style="padding: 0;">
+            {% if status.id == "not-yet-submitted"%} 
+            <p style="margin-bottom: 0;">Created 1 March 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">1 month ago</span>
+            {% endif %}
+            {% if status.id == "submitted"%} 
+            <p style="margin-bottom: 0;">Submitted 1 March 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">1 month ago</span>
+            {% endif %}
+            {% if status.id == "approved"%} 
+            <p style="margin-bottom: 0;">Approved 1 March 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">1 month ago</span>
+            {% endif %}
+            {% if status.id == "rejected"%} 
+            <p style="margin-bottom: 0;">Rejected 1 March 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">1 month ago</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px; display: flex;">
+                <a href="#" class="govuk-link"><strong>ZG3-W2IE-5KMP-C</strong></a><span class="govuk-caption-m" style="padding: 0px 0px 0px 10px;">Type A</span>
+            </p>
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Education and Training</p>
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Provided by Highfield - Level 3 Award Education and Training</p>
+            {% if status.id == "not-yet-submitted"%} 
+            <span class="govuk-caption-m" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Learner not yet added</span>
+            <span class="govuk-caption-m" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Training dates not yet added</span>
+            {% else %}
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Ron Hopper</p>
+            <p class="govuk-body" style="margin-bottom: 0;">Training dates: 9 June 2022 to 15 July 2023</p>            
+            {% endif %}
+        </div>
+        <div class="govuk-grid-column-one-third govuk-!-text-align-right" style="padding: 0;">
+            {% if status.id == "not-yet-submitted"%} 
+            <p style="margin-bottom: 0;">Created 10 April 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">2 days ago</span>
+            {% endif %}
+            {% if status.id == "submitted"%} 
+            <p style="margin-bottom: 0;">Submitted 10 April 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">2 days ago</span>
+            {% endif %}
+            {% if status.id == "approved"%} 
+            <p style="margin-bottom: 0;">Approved 10 April 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">2 days ago</span>
+            {% endif %}
+            {% if status.id == "rejected"%} 
+            <p style="margin-bottom: 0;">Rejected 10 April 2024</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">2 days ago</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <div class="govuk-grid-column-two-thirds" style="padding: 0;">
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px; display: flex;">
+                <a href="#" class="govuk-link"><strong>2K8-2D54-7HDES-C</strong></a><span class="govuk-caption-m" style="padding: 0px 0px 0px 10px;">Type A</span>
+            </p>
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Mental Health First Aid</p>
+            <p class="govuk-body" style="margin-bottom: 0; padding: 0px 0px 7px 0px;">Skye Johnson</p>
+            {% if status.id == "not-yet-submitted"%} 
+            <div style="display: flex;"><p class="govuk-body" style="margin-bottom: 0;">Training dates:&nbsp</p><span style="margin-bottom: 0;" class="govuk-caption-m">Not yet added</span><p class="govuk-body" style="margin-bottom: 0;">&nbspto 5 May 2023</p></div>
+            {% else %}
+            <p class="govuk-body" style="margin-bottom: 0;">Training dates: 29 April 2021 to 2 September 2021</p>            
+            {% endif %}
+        </div>
+        <div class="govuk-grid-column-one-third govuk-!-text-align-right" style="padding: 0;">
+            {% if status.id == "not-yet-submitted"%} 
+            <p style="margin-bottom: 0;">Created 25 June 2023</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">10 months ago</span>
+            {% endif %}
+            {% if status.id == "submitted"%} 
+            <p style="margin-bottom: 0;">Submitted 25 June 2023</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">10 months ago</span>
+            {% endif %}
+            {% if status.id == "approved"%} 
+            <p style="margin-bottom: 0;">Approved 25 June 2023</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">10 months ago</span>
+            {% endif %}
+            {% if status.id == "rejected"%} 
+            <p style="margin-bottom: 0;">Rejected 25 June 2023</p>
+            <span style="margin-bottom: 0;" class="govuk-caption-m">10 months ago</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% if hasResults == false %}
+    <p class="govuk-body">There are currently no claims {{ status.name }}.</p>
+{% endif %}

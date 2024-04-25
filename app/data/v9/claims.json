@@ -1,0 +1,3628 @@
+[
+  {
+    "claimID": "Z8S-F3K6-3XF7-C",
+    "type": "TU",
+    "learner": {
+      "id": "OB 78 2F 15 O",
+      "familyName": "Mayer",
+      "givenName": "Malinda",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2023-08-31T17:53:52.937Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-05-05T14:50:59.964Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-06-11T14:50:59.964Z"
+  },
+  {
+    "claimID": "Z1Z-F1J6-3XF7-C",
+    "type": "TU",
+    "learner": {
+      "id": "KZ 79 0F 13 Z",
+      "familyName": "Effertz-Stroman",
+      "givenName": "Aron",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLDOC",
+      "reimbursementAmount": 50,
+      "title": "Delivering outstanding care",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+    },
+    "startDate": "2024-02-01T23:29:00.654Z",
+    "status": "submitted",
+    "createdDate": "2023-12-31T08:55:32.615Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-11T22:56:10.547Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate001.pdf",
+    "completionDate": "2024-02-05T20:22:11.308Z",
+    "costDate": "2023-08-08T07:55:32.615Z"
+  },
+  {
+    "claimID": "Z8S-F1J6-4GH7-C",
+    "type": "TU",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLEDI",
+      "reimbursementAmount": 50,
+      "title": "Module 1 – Equality, diversity and inclusion",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-10-25T02:38:35.764Z",
+    "status": "approved",
+    "createdDate": "2023-11-30T13:09:57.600Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T12:14:45.342Z",
+    "approvedDate": "2024-02-09T01:58:43.631Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate002.pdf",
+    "completionDate": "2023-11-16T01:18:28.980Z",
+    "costDate": "2023-10-04T12:09:57.600Z"
+  },
+  {
+    "claimID": "Z8S-F1J6-9VGH-C",
+    "type": "TU",
+    "learner": {
+      "id": "ZX 51 96 87 D",
+      "familyName": "Simonis",
+      "givenName": "Casey",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "MHFA",
+      "reimbursementAmount": 100,
+      "title": "Mental Health First Aid",
+      "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Mental Health",
+      "description": null,
+      "awardingOrganisation": "MHFA England",
+      "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "rejected",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T03:13:47.582Z",
+    "approvedDate": null,
+    "rejectedDate": "2023-12-05T18:04:04.173Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": [
+      "invoice007.pdf"
+    ],
+    "evidenceOfCompletion": "certficate007.pdf",
+    "completionDate": "2023-11-03T05:51:56.177Z",
+    "costDate": "2022-09-19T13:52:37.929Z"
+  },
+  {
+    "claimID": "K87-RKQD-GI2B-C",
+    "type": "TU",
+    "learner": {
+      "id": "IS 52 7F 57 C",
+      "familyName": "Dayana",
+      "givenName": "Kemmer",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "DLLDCP",
+      "reimbursementAmount": 50,
+      "title": "Module 2 – Leadership development and career progression",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-07-30T14:33:29.864Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-05-14T03:23:54.227Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-03-28T03:23:54.227Z"
+  },
+  {
+    "claimID": "ZMW-RRRP-8LTL-C",
+    "type": "TU",
+    "learner": {
+      "id": "SC 67 9F 81 W",
+      "familyName": "Deion",
+      "givenName": "Wunsch",
+      "jobTitle": "Facility Manager"
+    },
+    "training": {
+      "code": "DLEDI",
+      "reimbursementAmount": 50,
+      "title": "Module 1 – Equality, diversity and inclusion",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2024-04-09T01:29:12.741Z",
+    "status": "approved",
+    "createdDate": "2023-05-14T12:18:10.495Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-04-13T04:21:16.899Z",
+    "approvedDate": "2024-04-15T10:15:54.970Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate002.pdf",
+    "completionDate": "2024-04-11T01:24:46.655Z",
+    "costDate": "2022-06-02T12:18:10.495Z"
+  },
+  {
+    "claimID": "QWW-NUXD-IG1P-C",
+    "type": "TU",
+    "learner": {
+      "id": "QX 32 6F 41 Q",
+      "familyName": "Jerrell",
+      "givenName": "Nienow",
+      "jobTitle": "Care Aide"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2024-03-23T17:03:02.484Z",
+    "status": "approved",
+    "createdDate": "2023-08-04T01:13:33.227Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-03-26T20:13:11.412Z",
+    "approvedDate": "2024-04-08T18:08:31.709Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate003.pdf",
+    "completionDate": "2024-03-25T07:26:56.993Z",
+    "costDate": "2023-04-19T01:13:33.227Z"
+  },
+  {
+    "claimID": "HN1-URGW-P3CE-C",
+    "type": "TU",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 2 Certificate Oral Care for Health and Social Care",
+      "code": "603/6251/0",
+      "reimbursementAmount": 300,
+      "title": "Oral Care for Health and Social Care",
+      "totalLearningTime": "170 hours",
+      "awardingOrganisation": "TQUK",
+      "category": "Oral Care",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-10-01T18:50:46.448Z",
+    "status": "submitted",
+    "createdDate": "2024-02-15T11:47:22.643Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-02-21T13:29:55.476Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate004.pdf",
+    "completionDate": "2023-12-27T17:47:58.543Z",
+    "costDate": "2023-04-08T10:47:22.643Z"
+  },
+  {
+    "claimID": "6I5-3RNW-TGSI-C",
+    "type": "TU",
+    "learner": {
+      "id": "WB 34 5F 39 T",
+      "familyName": "Dejah",
+      "givenName": "Sipes",
+      "jobTitle": "Municipal Caregiver"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2024-03-29T09:13:22.007Z",
+    "status": "rejected",
+    "createdDate": "2023-06-05T16:59:09.187Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-04-05T17:02:42.851Z",
+    "approvedDate": null,
+    "rejectedDate": "2024-04-18T06:16:44.733Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate005.pdf",
+    "completionDate": "2024-04-05T02:44:06.741Z",
+    "costDate": "2023-03-21T17:59:09.187Z"
+  },
+  {
+    "claimID": "1F1-PG1F-C5JG-C",
+    "type": "TU",
+    "learner": {
+      "id": "CM 61 1F 12 E",
+      "familyName": "Iva",
+      "givenName": "Fay",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 3 Award Education and Training",
+      "code": "601/1636/5",
+      "reimbursementAmount": 180,
+      "title": "Education and Training",
+      "totalLearningTime": "120 hours",
+      "awardingOrganisation": "Highfield",
+      "category": "Train the Trainer",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-12-19T08:27:27.458Z",
+    "status": "submitted",
+    "createdDate": "2024-02-02T02:12:03.302Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-12-24T09:43:02.607Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate006.pdf",
+    "completionDate": "2023-12-21T05:20:13.222Z",
+    "costDate": "2024-01-09T02:12:03.302Z"
+  },
+  {
+    "claimID": "139-PN2I-LVZC-C",
+    "type": "TU",
+    "learner": {
+      "id": "CL 74 2F 71 G",
+      "familyName": "Abigale",
+      "givenName": "Wilderman",
+      "jobTitle": "Personal Assistant"
+    },
+    "training": {
+      "code": "IMRG",
+      "reimbursementAmount": 50,
+      "title": "Regulation and governance",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-07-08T20:30:43.878Z",
+    "status": "submitted",
+    "createdDate": "2023-12-24T02:24:14.388Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-01-30T19:17:25.715Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate007.pdf",
+    "completionDate": "2023-10-10T16:22:02.562Z",
+    "costDate": "2022-12-31T02:24:14.388Z"
+  },
+  {
+    "claimID": "QMR-8ILH-7KF3-C",
+    "type": "TU",
+    "learner": {
+      "id": "HE 58 1F 80 U",
+      "familyName": "Floyd",
+      "givenName": "Zieme",
+      "jobTitle": "Care Aide"
+    },
+    "training": {
+      "code": "PBSFS",
+      "reimbursementAmount": 50,
+      "title": "First step to foundation",
+      "totalLearningTime": "40 learning hours (8 taught)",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Positive Behavioural Support",
+      "description": null,
+      "awardingOrganisation": null,
+      "link": "https://www.skillsforcare.org.uk/resources/documents/Developing-your-workforce/Care-topics/Supporting-people-with-challenging-or-distressed/First-step-to-foundation-Competence-Framework.docx"
+    },
+    "startDate": "2023-05-01T00:11:04.796Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2024-01-22T03:06:36.153Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-09-06T02:06:36.153Z"
+  },
+  {
+    "claimID": "MDK-RXN9-3PKI-C",
+    "type": "TU",
+    "learner": {
+      "id": "UG 66 2F 97 F",
+      "familyName": "Johnny",
+      "givenName": "Connelly",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "IMWP",
+      "reimbursementAmount": 50,
+      "title": "Working with partners",
+      "totalLearningTime": "45 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-10-18T08:10:45.501Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-10-19T08:13:07.527Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-10-16T08:13:07.527Z"
+  },
+  {
+    "claimID": "8RZ-3QAP-38G8-C",
+    "type": "TU",
+    "learner": {
+      "id": "HM 27 9F 18 T",
+      "familyName": "Aubree",
+      "givenName": "Ebert",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "MHFA",
+      "reimbursementAmount": 100,
+      "title": "Mental Health First Aid",
+      "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Mental Health",
+      "description": null,
+      "awardingOrganisation": "MHFA England",
+      "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
+    },
+    "startDate": "2023-12-31T11:27:10.645Z",
+    "status": "submitted",
+    "createdDate": "2024-04-10T22:48:48.873Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-02-17T18:53:19.002Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0010.pdf",
+    "completionDate": "2024-02-05T15:38:34.357Z",
+    "costDate": "2023-08-22T22:48:48.873Z"
+  },
+  {
+    "claimID": "Y5X-1Z9I-RIZL-C",
+    "type": "TU",
+    "learner": {
+      "id": "EL 78 2F 05 S",
+      "familyName": "Durward",
+      "givenName": "Rohan-Treutel",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2024-03-24T14:13:57.545Z",
+    "status": "submitted",
+    "createdDate": "2024-04-11T09:59:51.083Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-03-29T10:23:06.993Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0011.pdf",
+    "completionDate": "2024-03-28T02:26:08.266Z",
+    "costDate": "2023-10-24T09:59:51.083Z"
+  },
+  {
+    "claimID": "6GL-XRQQ-YZPG-C",
+    "type": "TU",
+    "learner": {
+      "id": "BF 74 0F 46 L",
+      "familyName": "Rafael",
+      "givenName": "Beatty",
+      "jobTitle": "Care Manager"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-11-07T15:41:53.725Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-07-23T09:45:55.912Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-04-17T09:45:55.912Z"
+  },
+  {
+    "claimID": "C22-871T-PUAH-C",
+    "type": "TU",
+    "learner": {
+      "id": "LM 89 7F 48 J",
+      "familyName": "Pansy",
+      "givenName": "Carter",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "MHFA",
+      "reimbursementAmount": 100,
+      "title": "Mental Health First Aid",
+      "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Mental Health",
+      "description": null,
+      "awardingOrganisation": "MHFA England",
+      "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
+    },
+    "startDate": "2023-09-09T20:17:26.649Z",
+    "status": "approved",
+    "createdDate": "2024-01-22T19:44:22.691Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-03-25T19:14:08.120Z",
+    "approvedDate": "2024-03-30T01:14:21.712Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0013.pdf",
+    "completionDate": "2024-03-19T00:30:42.961Z",
+    "costDate": "2023-03-27T18:44:22.691Z"
+  },
+  {
+    "claimID": "U1Y-AXUY-2GYC-C",
+    "type": "TU",
+    "learner": {
+      "id": "KZ 79 0F 13 Z",
+      "familyName": "Effertz-Stroman",
+      "givenName": "Aron",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2023-05-18T00:48:51.691Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-07-11T07:40:29.998Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-08-27T07:40:29.998Z"
+  },
+  {
+    "claimID": "M2G-64DI-5PL3-C",
+    "type": "TU",
+    "learner": {
+      "id": "HA 93 7F 69 Q",
+      "familyName": "Jaylan",
+      "givenName": "Konopelski-Goyette",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "PBSAL",
+      "reimbursementAmount": 450,
+      "title": "PBS Advanced level",
+      "totalLearningTime": "360 learning hours (72 taught), progressive – building on intermediate",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Positive Behavioural Support",
+      "description": null,
+      "awardingOrganisation": null,
+      "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
+    },
+    "startDate": "2024-02-13T05:28:20.583Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-09-15T16:19:51.643Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-08-05T16:19:51.643Z"
+  },
+  {
+    "claimID": "QGW-VBUT-7HAG-C",
+    "type": "TU",
+    "learner": {
+      "id": "BF 73 4F 97 L",
+      "familyName": "Elva",
+      "givenName": "Windler",
+      "jobTitle": "Municipal Caregiver"
+    },
+    "training": {
+      "code": "DLBPCI",
+      "reimbursementAmount": 50,
+      "title": "Being prepared for CQC inspection",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Preparing-for-CQC-inspection.aspx"
+    },
+    "startDate": "2023-10-10T13:41:23.459Z",
+    "status": "approved",
+    "createdDate": "2024-03-29T04:46:54.354Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2023-10-19T06:40:46.309Z",
+    "approvedDate": "2023-12-24T00:28:44.762Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0016.pdf",
+    "completionDate": "2023-10-11T18:46:48.287Z",
+    "costDate": "2023-12-07T04:46:54.354Z"
+  },
+  {
+    "claimID": "VPQ-22L3-25GS-C",
+    "type": "TU",
+    "learner": {
+      "id": "HA 93 7F 69 Q",
+      "familyName": "Jaylan",
+      "givenName": "Konopelski-Goyette",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLBPCI",
+      "reimbursementAmount": 50,
+      "title": "Being prepared for CQC inspection",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Preparing-for-CQC-inspection.aspx"
+    },
+    "startDate": "2023-10-07T20:39:38.935Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-06-15T09:06:44.640Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-07-25T09:06:44.640Z"
+  },
+  {
+    "claimID": "3KN-4XU6-Y1ZY-C",
+    "type": "TU",
+    "learner": {
+      "id": "UH 04 6F 47 V",
+      "familyName": "Davonte",
+      "givenName": "O'Reilly",
+      "jobTitle": "Occupational Therapist"
+    },
+    "training": {
+      "code": "DLP",
+      "reimbursementAmount": 500,
+      "title": "Digital Leadership Programme",
+      "totalLearningTime": "4 modules",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Developing your workforce",
+      "description": "Registered Managers will engage in a Digital Leadership Programme consisting of 4 modules.",
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Managing-a-service/Digital-technology-and-social-care/Digital-leadership-programme.aspx"
+    },
+    "startDate": "2023-10-17T00:49:45.079Z",
+    "status": "approved",
+    "createdDate": "2023-11-12T14:48:05.266Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-11-19T13:58:34.244Z",
+    "approvedDate": "2024-03-27T05:17:48.330Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0018.pdf",
+    "completionDate": "2023-11-16T12:12:17.436Z",
+    "costDate": "2023-08-14T13:48:05.266Z"
+  },
+  {
+    "claimID": "Q9U-J4FN-A4FG-C",
+    "type": "TU",
+    "learner": {
+      "id": "EL 78 2F 05 S",
+      "familyName": "Durward",
+      "givenName": "Rohan-Treutel",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "IMWP",
+      "reimbursementAmount": 50,
+      "title": "Working with partners",
+      "totalLearningTime": "45 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-07-15T16:03:11.881Z",
+    "status": "rejected",
+    "createdDate": "2023-11-19T20:58:21.438Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-08-23T01:11:27.785Z",
+    "approvedDate": null,
+    "rejectedDate": "2023-11-10T10:09:01.102Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0019.pdf",
+    "completionDate": "2023-07-25T13:35:38.950Z",
+    "costDate": "2023-03-02T20:58:21.438Z"
+  },
+  {
+    "claimID": "2MZ-FV3Y-XTCD-C",
+    "type": "TU",
+    "learner": {
+      "id": "KX 89 9F 87 K",
+      "familyName": "Fausto",
+      "givenName": "Howell",
+      "jobTitle": "Support Worker"
+    },
+    "training": {
+      "code": "UWC",
+      "reimbursementAmount": 125,
+      "title": "Understanding workplace culture",
+      "totalLearningTime": "1 module",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Developing your workforce",
+      "description": "Registered managers and service managers will explore Understanding Workplace Culture through a single module.",
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Understanding-workplace-culture.pdf"
+    },
+    "startDate": "2023-05-26T20:37:43.130Z",
+    "status": "submitted",
+    "createdDate": "2023-05-06T03:56:57.728Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-02-18T04:21:06.884Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0020.pdf",
+    "completionDate": "2023-11-08T23:55:46.075Z",
+    "costDate": "2022-05-23T03:56:57.728Z"
+  },
+  {
+    "claimID": "WB4-V141-CG7N-C",
+    "type": "TU",
+    "learner": {
+      "id": "JU 91 7F 75 P",
+      "familyName": "Telly",
+      "givenName": "Denesik",
+      "jobTitle": "Care Manager"
+    },
+    "training": {
+      "code": "IMMR",
+      "reimbursementAmount": 50,
+      "title": "Managing resources",
+      "totalLearningTime": "45 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2024-01-04T00:00:00.284Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-08-14T09:11:00.091Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-07-31T09:11:00.091Z"
+  },
+  {
+    "claimID": "E6K-4T1Q-MUB9-C",
+    "type": "TU",
+    "learner": {
+      "id": "WU 23 0F 97 M",
+      "familyName": "Allan",
+      "givenName": "Wuckert",
+      "jobTitle": "Council Care Assistant"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-08-06T07:24:18.451Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-10-25T17:04:28.843Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-05-24T17:04:28.843Z"
+  },
+  {
+    "claimID": "IZK-XHIU-2LP3-C",
+    "type": "TU",
+    "learner": {
+      "id": "EL 78 2F 05 S",
+      "familyName": "Durward",
+      "givenName": "Rohan-Treutel",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2023-08-18T07:18:36.151Z",
+    "status": "submitted",
+    "createdDate": "2023-05-08T21:12:30.499Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-25T04:57:39.535Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0023.pdf",
+    "completionDate": "2023-10-11T05:08:57.262Z",
+    "costDate": "2022-08-01T21:12:30.499Z"
+  },
+  {
+    "claimID": "FIG-C1DD-B4JB-C",
+    "type": "TU",
+    "learner": {
+      "id": "SE 52 1F 13 K",
+      "familyName": "Kay",
+      "givenName": "Kohler-Kulas",
+      "jobTitle": "Healthcare Assistant (Agency)"
+    },
+    "training": {
+      "type": "Level 3 Certificate",
+      "code": "603/1609/3",
+      "reimbursementAmount": 300,
+      "title": "Understanding the Care and Management of Diabetes",
+      "totalLearningTime": "180 hours",
+      "awardingOrganisation": "NCFE/CACHE",
+      "category": "Diabetes",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-08-07T04:52:30.948Z",
+    "status": "approved",
+    "createdDate": "2024-03-30T05:35:39.069Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-10-02T09:23:14.117Z",
+    "approvedDate": "2023-12-13T06:57:09.794Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0024.pdf",
+    "completionDate": "2023-10-01T11:44:33.538Z",
+    "costDate": "2023-12-05T05:35:39.069Z"
+  },
+  {
+    "claimID": "DFB-VK3U-TZ1X-C",
+    "type": "TU",
+    "learner": {
+      "id": "YH 60 9F 32 Z",
+      "familyName": "Tressie",
+      "givenName": "Lemke",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "PBSIL",
+      "reimbursementAmount": 300,
+      "title": "PBS Intermediate level",
+      "totalLearningTime": "240 learning hours (48 taught), progressive – building on foundation",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Positive Behavioural Support",
+      "description": null,
+      "awardingOrganisation": null,
+      "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
+    },
+    "startDate": "2023-09-18T23:51:17.513Z",
+    "status": "submitted",
+    "createdDate": "2023-11-12T09:20:21.265Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-10-28T12:08:27.149Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0025.pdf",
+    "completionDate": "2023-09-26T03:19:41.732Z",
+    "costDate": "2023-10-06T08:20:21.265Z"
+  },
+  {
+    "claimID": "JI2-759A-11JD-C",
+    "type": "TU",
+    "learner": {
+      "id": "LL 36 2F 22 A",
+      "familyName": "Cecelia",
+      "givenName": "Lowe",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "DLDOC",
+      "reimbursementAmount": 50,
+      "title": "Delivering outstanding care",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+    },
+    "startDate": "2023-10-11T22:43:53.096Z",
+    "status": "submitted",
+    "createdDate": "2024-01-01T21:07:56.048Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-03-09T13:34:57.997Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0026.pdf",
+    "completionDate": "2023-10-26T19:26:50.546Z",
+    "costDate": "2023-06-10T20:07:56.048Z"
+  },
+  {
+    "claimID": "5H3-I4T4-NDJF-C",
+    "type": "TU",
+    "learner": {
+      "id": "MD 20 2F 63 A",
+      "familyName": "Monserrat",
+      "givenName": "Stanton",
+      "jobTitle": "Council Care Assistant"
+    },
+    "training": {
+      "code": "DLEDI",
+      "reimbursementAmount": 50,
+      "title": "Module 1 – Equality, diversity and inclusion",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-06-26T04:50:50.373Z",
+    "status": "approved",
+    "createdDate": "2023-05-20T13:53:51.642Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-03-10T06:42:15.302Z",
+    "approvedDate": "2024-03-25T07:48:33.551Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0027.pdf",
+    "completionDate": "2023-10-03T10:55:49.537Z",
+    "costDate": "2022-11-30T14:53:51.642Z"
+  },
+  {
+    "claimID": "MFT-N535-LYCJ-C",
+    "type": "TU",
+    "learner": {
+      "id": "HE 58 1F 80 U",
+      "familyName": "Floyd",
+      "givenName": "Zieme",
+      "jobTitle": "Care Aide"
+    },
+    "training": {
+      "code": "MHFA",
+      "reimbursementAmount": 100,
+      "title": "Mental Health First Aid",
+      "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Mental Health",
+      "description": null,
+      "awardingOrganisation": "MHFA England",
+      "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
+    },
+    "startDate": "2024-02-16T04:11:25.271Z",
+    "status": "approved",
+    "createdDate": "2023-09-26T16:08:30.736Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-26T09:58:18.185Z",
+    "approvedDate": "2024-03-18T02:33:23.765Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0028.pdf",
+    "completionDate": "2024-02-20T05:54:40.131Z",
+    "costDate": "2023-08-11T16:08:30.736Z"
+  },
+  {
+    "claimID": "2XX-S766-VWJH-C",
+    "type": "TU",
+    "learner": {
+      "id": "BF 73 4F 97 L",
+      "familyName": "Elva",
+      "givenName": "Windler",
+      "jobTitle": "Municipal Caregiver"
+    },
+    "training": {
+      "code": "PBSAL",
+      "reimbursementAmount": 450,
+      "title": "PBS Advanced level",
+      "totalLearningTime": "360 learning hours (72 taught), progressive – building on intermediate",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Positive Behavioural Support",
+      "description": null,
+      "awardingOrganisation": null,
+      "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
+    },
+    "startDate": "2024-01-05T12:49:28.002Z",
+    "status": "approved",
+    "createdDate": "2023-12-14T01:16:07.454Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-03-24T21:41:37.971Z",
+    "approvedDate": "2024-04-05T01:12:31.503Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0029.pdf",
+    "completionDate": "2024-02-13T10:44:55.759Z",
+    "costDate": "2022-12-24T01:16:07.454Z"
+  },
+  {
+    "claimID": "Y9H-73NY-YDQC-C",
+    "type": "TU",
+    "learner": {
+      "id": "BU 26 7F 00 Y",
+      "familyName": "Bo",
+      "givenName": "Wehner",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "WL",
+      "reimbursementAmount": 500,
+      "title": "Well-led",
+      "totalLearningTime": "4 modules",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Developing your workforce",
+      "description": "Registered managers and service managers will be part of the Well-led program, consisting of 4 modules.",
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Well-led.pdf"
+    },
+    "startDate": "2023-12-01T13:14:38.212Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2024-01-29T20:40:12.825Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-09-01T19:40:12.825Z"
+  },
+  {
+    "claimID": "XP1-58LS-H5H4-C",
+    "type": "TU",
+    "learner": {
+      "id": "YH 60 9F 32 Z",
+      "familyName": "Tressie",
+      "givenName": "Lemke",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "DLBPCI",
+      "reimbursementAmount": 50,
+      "title": "Being prepared for CQC inspection",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Preparing-for-CQC-inspection.aspx"
+    },
+    "startDate": "2023-05-04T19:35:46.014Z",
+    "status": "approved",
+    "createdDate": "2023-12-22T20:57:46.960Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-04-13T22:24:02.825Z",
+    "approvedDate": "2024-04-14T21:20:26.316Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0031.pdf",
+    "completionDate": "2023-12-13T21:47:39.937Z",
+    "costDate": "2023-05-12T19:57:46.960Z"
+  },
+  {
+    "claimID": "845-VKN8-GKJ5-C",
+    "type": "TU",
+    "learner": {
+      "id": "WV 15 0F 13 V",
+      "familyName": "Roberto",
+      "givenName": "Rodriguez",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "PBSFS",
+      "reimbursementAmount": 50,
+      "title": "First step to foundation",
+      "totalLearningTime": "40 learning hours (8 taught)",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Positive Behavioural Support",
+      "description": null,
+      "awardingOrganisation": null,
+      "link": "https://www.skillsforcare.org.uk/resources/documents/Developing-your-workforce/Care-topics/Supporting-people-with-challenging-or-distressed/First-step-to-foundation-Competence-Framework.docx"
+    },
+    "startDate": "2023-12-04T11:39:03.696Z",
+    "status": "submitted",
+    "createdDate": "2023-11-16T20:18:28.784Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-04-12T11:49:18.323Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0032.pdf",
+    "completionDate": "2024-03-11T12:14:47.395Z",
+    "costDate": "2023-07-18T19:18:28.784Z"
+  },
+  {
+    "claimID": "UIC-F5JK-Y52B-C",
+    "type": "TU",
+    "learner": {
+      "id": "SE 52 1F 13 K",
+      "familyName": "Kay",
+      "givenName": "Kohler-Kulas",
+      "jobTitle": "Healthcare Assistant (Agency)"
+    },
+    "training": {
+      "code": "DLDOC",
+      "reimbursementAmount": 50,
+      "title": "Delivering outstanding care",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+    },
+    "startDate": "2023-11-06T06:48:57.797Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-08-18T05:41:52.868Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-09-15T05:41:52.868Z"
+  },
+  {
+    "claimID": "RKG-12F8-K4ER-C",
+    "type": "TU",
+    "learner": {
+      "id": "FB 88 2F 39 Z",
+      "familyName": "Waylon",
+      "givenName": "Ruecker",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "IMRG",
+      "reimbursementAmount": 50,
+      "title": "Regulation and governance",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-07-08T18:55:14.927Z",
+    "status": "submitted",
+    "createdDate": "2023-11-15T23:49:50.648Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-01-04T23:54:25.006Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0034.pdf",
+    "completionDate": "2023-09-27T11:29:20.228Z",
+    "costDate": "2023-06-15T22:49:50.648Z"
+  },
+  {
+    "claimID": "JUH-U66G-SRS9-C",
+    "type": "TU",
+    "learner": {
+      "id": "OA 78 8F 31 V",
+      "familyName": "Francis",
+      "givenName": "Bartell",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2023-11-06T08:23:45.341Z",
+    "status": "approved",
+    "createdDate": "2023-12-27T23:27:29.418Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-12-16T18:06:26.623Z",
+    "approvedDate": "2023-12-20T05:39:15.815Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0035.pdf",
+    "completionDate": "2023-11-17T13:25:03.734Z",
+    "costDate": "2023-10-03T22:27:29.418Z"
+  },
+  {
+    "claimID": "FZ4-MDWA-AJBH-C",
+    "type": "TU",
+    "learner": {
+      "id": "BF 73 4F 97 L",
+      "familyName": "Elva",
+      "givenName": "Windler",
+      "jobTitle": "Municipal Caregiver"
+    },
+    "training": {
+      "code": "MHFA",
+      "reimbursementAmount": 100,
+      "title": "Mental Health First Aid",
+      "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Mental Health",
+      "description": null,
+      "awardingOrganisation": "MHFA England",
+      "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
+    },
+    "startDate": "2024-03-17T12:52:58.923Z",
+    "status": "submitted",
+    "createdDate": "2023-09-11T22:27:36.993Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-04-12T22:03:54.437Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0036.pdf",
+    "completionDate": "2024-03-21T07:32:16.427Z",
+    "costDate": "2022-09-28T22:27:36.993Z"
+  },
+  {
+    "claimID": "UU7-WHDI-7GDG-C",
+    "type": "TU",
+    "learner": {
+      "id": "FI 50 5F 30 D",
+      "familyName": "Kim",
+      "givenName": "Koepp",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "type": "Autism Level 2 Certificate",
+      "code": "603/5139/1",
+      "reimbursementAmount": 300,
+      "title": "Understanding Autism",
+      "totalLearningTime": "200 hours",
+      "awardingOrganisation": "ICQ",
+      "category": "Autism",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-11-01T03:06:02.719Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-10-10T05:36:39.914Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-01-06T06:36:39.914Z"
+  },
+  {
+    "claimID": "CZH-WP9U-LAG8-C",
+    "type": "TU",
+    "learner": {
+      "id": "AJ 54 4F 01 I",
+      "familyName": "Carmine",
+      "givenName": "Spencer",
+      "jobTitle": "Local Authority Care Worker"
+    },
+    "training": {
+      "code": "DLLDCP",
+      "reimbursementAmount": 50,
+      "title": "Module 2 – Leadership development and career progression",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-06-09T17:33:36.515Z",
+    "status": "approved",
+    "createdDate": "2023-05-21T05:16:17.854Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-01-16T06:33:46.958Z",
+    "approvedDate": "2024-03-15T08:39:36.497Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0038.pdf",
+    "completionDate": "2023-09-06T10:47:48.026Z",
+    "costDate": "2022-06-27T05:16:17.854Z"
+  },
+  {
+    "claimID": "7UI-IJ5L-P76D-C",
+    "type": "TU",
+    "learner": {
+      "id": "LL 36 2F 22 A",
+      "familyName": "Cecelia",
+      "givenName": "Lowe",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2024-04-16T10:57:35.395Z",
+    "status": "approved",
+    "createdDate": "2023-07-02T07:00:19.632Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-04-17T05:10:21.449Z",
+    "approvedDate": "2024-04-18T07:12:56.644Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0039.pdf",
+    "completionDate": "2024-04-16T13:10:57.722Z",
+    "costDate": "2022-09-05T07:00:19.632Z"
+  },
+  {
+    "claimID": "CE4-FU9N-8H55-C",
+    "type": "TU",
+    "learner": {
+      "id": "WB 34 5F 39 T",
+      "familyName": "Dejah",
+      "givenName": "Sipes",
+      "jobTitle": "Municipal Caregiver"
+    },
+    "training": {
+      "code": "DLLDCP",
+      "reimbursementAmount": 50,
+      "title": "Module 2 – Leadership development and career progression",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2024-03-29T07:35:38.835Z",
+    "status": "submitted",
+    "createdDate": "2024-03-08T13:59:06.069Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-04-04T02:56:20.706Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0040.pdf",
+    "completionDate": "2024-03-30T03:48:20.062Z",
+    "costDate": "2023-06-24T12:59:06.069Z"
+  },
+  {
+    "claimID": "SXG-5EMS-IDX6-C",
+    "type": "TU",
+    "learner": {
+      "id": "BF 73 4F 97 L",
+      "familyName": "Elva",
+      "givenName": "Windler",
+      "jobTitle": "Municipal Caregiver"
+    },
+    "training": {
+      "code": "DLDOC",
+      "reimbursementAmount": 50,
+      "title": "Delivering outstanding care",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+    },
+    "startDate": "2024-04-01T16:48:04.479Z",
+    "status": "submitted",
+    "createdDate": "2023-12-23T08:52:25.762Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-04-02T10:21:15.147Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0041.pdf",
+    "completionDate": "2024-04-02T03:20:34.724Z",
+    "costDate": "2023-10-27T07:52:25.762Z"
+  },
+  {
+    "claimID": "3R7-1AQX-TYUU-C",
+    "type": "TU",
+    "learner": {
+      "id": "OB 78 2F 15 O",
+      "familyName": "Mayer",
+      "givenName": "Malinda",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLLDCP",
+      "reimbursementAmount": 50,
+      "title": "Module 2 – Leadership development and career progression",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-05-07T12:20:36.667Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2024-02-11T13:42:42.966Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-05-02T12:42:42.966Z"
+  },
+  {
+    "claimID": "BC4-UZDJ-EGVW-C",
+    "type": "TU",
+    "learner": {
+      "id": "AL 82 2F 62 C",
+      "familyName": "Gilbert",
+      "givenName": "Wilkinson",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-10-20T04:05:44.978Z",
+    "status": "submitted",
+    "createdDate": "2023-09-09T05:10:40.269Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-16T03:37:47.602Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0043.pdf",
+    "completionDate": "2023-10-26T15:53:08.890Z",
+    "costDate": "2023-07-22T05:10:40.269Z"
+  },
+  {
+    "claimID": "GMP-MIYY-NPQQ-C",
+    "type": "TU",
+    "learner": {
+      "id": "AJ 54 4F 01 I",
+      "familyName": "Carmine",
+      "givenName": "Spencer",
+      "jobTitle": "Local Authority Care Worker"
+    },
+    "training": {
+      "code": "PBSFL",
+      "reimbursementAmount": 150,
+      "title": "PBS Foundation level",
+      "totalLearningTime": "120 learning hours (24 taught), excludes hours of prior levels",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Positive Behavioural Support",
+      "description": null,
+      "awardingOrganisation": null,
+      "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
+    },
+    "startDate": "2024-03-11T06:35:12.286Z",
+    "status": "submitted",
+    "createdDate": "2024-04-06T22:15:12.199Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-03-25T01:31:53.816Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0044.pdf",
+    "completionDate": "2024-03-13T19:37:09.004Z",
+    "costDate": "2023-08-20T22:15:12.199Z"
+  },
+  {
+    "claimID": "U9J-BMUY-A111-C",
+    "type": "TU",
+    "learner": {
+      "id": "YH 60 9F 32 Z",
+      "familyName": "Tressie",
+      "givenName": "Lemke",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "type": "Level 2 Award",
+      "code": "601/4586/9",
+      "reimbursementAmount": 60,
+      "title": "Awareness of End of Life Care",
+      "totalLearningTime": "30 hours",
+      "awardingOrganisation": "Highfield",
+      "category": "End of Life Care",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-09-30T22:35:20.425Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-08-17T10:26:20.004Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-03-16T11:26:20.004Z"
+  },
+  {
+    "claimID": "1A9-7S27-G31Y-C",
+    "type": "TU",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "PBSFL",
+      "reimbursementAmount": 150,
+      "title": "PBS Foundation level",
+      "totalLearningTime": "120 learning hours (24 taught), excludes hours of prior levels",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Positive Behavioural Support",
+      "description": null,
+      "awardingOrganisation": null,
+      "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
+    },
+    "startDate": "2023-08-30T19:27:27.230Z",
+    "status": "rejected",
+    "createdDate": "2023-08-12T18:51:26.120Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-22T11:13:34.044Z",
+    "approvedDate": null,
+    "rejectedDate": "2024-03-11T00:25:54.967Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0046.pdf",
+    "completionDate": "2023-10-05T19:24:43.492Z",
+    "costDate": "2022-09-11T18:51:26.120Z"
+  },
+  {
+    "claimID": "9L1-LAZM-P138-C",
+    "type": "TU",
+    "learner": {
+      "id": "KX 89 9F 87 K",
+      "familyName": "Fausto",
+      "givenName": "Howell",
+      "jobTitle": "Support Worker"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-06-12T15:12:18.642Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-04-28T20:07:44.517Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-08-05T20:07:44.517Z"
+  },
+  {
+    "claimID": "GSF-6LHP-VFE8-C",
+    "type": "TU",
+    "learner": {
+      "id": "LM 89 7F 48 J",
+      "familyName": "Pansy",
+      "givenName": "Carter",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "IMWP",
+      "reimbursementAmount": 50,
+      "title": "Working with partners",
+      "totalLearningTime": "45 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-05-29T02:25:08.522Z",
+    "status": "submitted",
+    "createdDate": "2024-01-12T06:18:45.086Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-09-03T09:28:44.075Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0048.pdf",
+    "completionDate": "2023-06-08T15:05:59.752Z",
+    "costDate": "2023-05-03T05:18:45.086Z"
+  },
+  {
+    "claimID": "XG1-QELS-6F1D-C",
+    "type": "TU",
+    "learner": {
+      "id": "UH 04 6F 47 V",
+      "familyName": "Davonte",
+      "givenName": "O'Reilly",
+      "jobTitle": "Occupational Therapist"
+    },
+    "training": {
+      "code": "DLICR",
+      "reimbursementAmount": 50,
+      "title": "Improving your CQC rating",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Improve-your-CQC-rating.aspx"
+    },
+    "startDate": "2024-01-19T08:20:20.682Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-07-15T14:27:06.870Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-05-05T14:27:06.870Z"
+  },
+  {
+    "claimID": "XZH-8CIC-AJPV-C",
+    "type": "TU",
+    "learner": {
+      "id": "PX 89 8F 98 Q",
+      "familyName": "Sigurd",
+      "givenName": "McLaughlin",
+      "jobTitle": "Local Authority Care Worker"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2024-03-02T09:01:52.738Z",
+    "status": "submitted",
+    "createdDate": "2024-01-26T06:35:33.630Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-03-31T03:13:07.539Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0050.pdf",
+    "completionDate": "2024-03-13T18:34:23.679Z",
+    "costDate": "2023-10-24T05:35:33.630Z"
+  },
+  {
+    "claimID": "22N-5N34-LDAL-C",
+    "type": "TU",
+    "learner": {
+      "id": "UG 66 2F 97 F",
+      "familyName": "Johnny",
+      "givenName": "Connelly",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "MHFA",
+      "reimbursementAmount": 100,
+      "title": "Mental Health First Aid",
+      "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Mental Health",
+      "description": null,
+      "awardingOrganisation": "MHFA England",
+      "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
+    },
+    "startDate": "2023-12-21T03:06:36.997Z",
+    "status": "submitted",
+    "createdDate": "2024-04-02T04:55:18.998Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-04-11T16:28:24.258Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0051.pdf",
+    "completionDate": "2024-03-02T14:50:29.113Z",
+    "costDate": "2023-11-28T05:55:18.998Z"
+  },
+  {
+    "claimID": "BLR-LAR3-VXCZ-C",
+    "type": "TU",
+    "learner": {
+      "id": "YH 60 9F 32 Z",
+      "familyName": "Tressie",
+      "givenName": "Lemke",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "PBSAL",
+      "reimbursementAmount": 450,
+      "title": "PBS Advanced level",
+      "totalLearningTime": "360 learning hours (72 taught), progressive – building on intermediate",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Positive Behavioural Support",
+      "description": null,
+      "awardingOrganisation": null,
+      "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
+    },
+    "startDate": "2024-04-08T23:48:25.561Z",
+    "status": "submitted",
+    "createdDate": "2024-02-25T03:25:12.976Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-04-14T21:17:53.406Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0052.pdf",
+    "completionDate": "2024-04-13T20:56:23.051Z",
+    "costDate": "2023-09-24T02:25:12.976Z"
+  },
+  {
+    "claimID": "9PQ-1R35-JAGK-C",
+    "type": "TU",
+    "learner": {
+      "id": "GR 46 4F 92 C",
+      "familyName": "Alva",
+      "givenName": "Little",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "PBSIL",
+      "reimbursementAmount": 300,
+      "title": "PBS Intermediate level",
+      "totalLearningTime": "240 learning hours (48 taught), progressive – building on foundation",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Positive Behavioural Support",
+      "description": null,
+      "awardingOrganisation": null,
+      "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
+    },
+    "startDate": "2023-09-26T16:47:26.376Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-06-14T15:18:56.997Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-06-01T15:18:56.997Z"
+  },
+  {
+    "claimID": "Q6M-APD5-5R9H-C",
+    "type": "TU",
+    "learner": {
+      "id": "YD 45 1F 75 I",
+      "familyName": "Krista",
+      "givenName": "Hauck",
+      "jobTitle": "Support Worker"
+    },
+    "training": {
+      "code": "DLEDI",
+      "reimbursementAmount": 50,
+      "title": "Module 1 – Equality, diversity and inclusion",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-12-07T22:37:21.821Z",
+    "status": "submitted",
+    "createdDate": "2024-04-17T14:33:15.902Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-14T15:47:13.386Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0054.pdf",
+    "completionDate": "2023-12-24T04:17:15.823Z",
+    "costDate": "2023-04-21T14:33:15.902Z"
+  },
+  {
+    "claimID": "LC9-NPI7-DSAX-C",
+    "type": "TU",
+    "learner": {
+      "id": "WS 54 2F 01 E",
+      "familyName": "Jadyn",
+      "givenName": "Osinski",
+      "jobTitle": "Council Care Assistant"
+    },
+    "training": {
+      "code": "IMMD",
+      "reimbursementAmount": 50,
+      "title": "Making decisions",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-04-29T20:53:42.305Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-04-27T06:29:46.648Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-01-26T07:29:46.648Z"
+  },
+  {
+    "claimID": "LJ4-5MND-CM8N-C",
+    "type": "TU",
+    "learner": {
+      "id": "HA 93 7F 69 Q",
+      "familyName": "Jaylan",
+      "givenName": "Konopelski-Goyette",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 4 Award",
+      "code": "501/2178/9",
+      "reimbursementAmount": 200,
+      "title": "Understanding the Internal Quality Assurance of Assessment Processes and Practice",
+      "totalLearningTime": "60 hours",
+      "awardingOrganisation": "Futurequals",
+      "category": "Assessment",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-12-18T19:54:33.447Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-06-19T21:52:18.431Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-01-19T22:52:18.431Z"
+  },
+  {
+    "claimID": "EDH-DFSV-VV97-C",
+    "type": "TU",
+    "learner": {
+      "id": "ZX 51 96 87 D",
+      "familyName": "Simonis",
+      "givenName": "Casey",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "IMSMC",
+      "reimbursementAmount": 50,
+      "title": "Safeguarding and mental capacity",
+      "totalLearningTime": "45 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2024-01-25T09:37:16.786Z",
+    "status": "approved",
+    "createdDate": "2023-08-22T09:43:22.977Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-02-20T13:05:06.863Z",
+    "approvedDate": "2024-03-24T08:37:18.193Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0057.pdf",
+    "completionDate": "2024-02-12T18:22:45.980Z",
+    "costDate": "2022-09-01T09:43:22.977Z"
+  },
+  {
+    "claimID": "V9E-9WU9-XTBU-C",
+    "type": "TU",
+    "learner": {
+      "id": "HM 27 9F 18 T",
+      "familyName": "Aubree",
+      "givenName": "Ebert",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "DLLDCP",
+      "reimbursementAmount": 50,
+      "title": "Module 2 – Leadership development and career progression",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-11-05T20:02:12.977Z",
+    "status": "rejected",
+    "createdDate": "2023-05-29T04:15:42.368Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2023-11-18T06:56:16.683Z",
+    "approvedDate": null,
+    "rejectedDate": "2024-02-13T07:57:43.471Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0058.pdf",
+    "completionDate": "2023-11-17T20:29:44.006Z",
+    "costDate": "2022-06-11T04:15:42.368Z"
+  },
+  {
+    "claimID": "BN9-M8Y1-EAZT-C",
+    "type": "TU",
+    "learner": {
+      "id": "WV 15 0F 13 V",
+      "familyName": "Roberto",
+      "givenName": "Rodriguez",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 2 Certificate Understanding the Safe Handling of Medicines",
+      "code": "600/5591/1",
+      "reimbursementAmount": 300,
+      "title": "Understanding the Safe Handling of Medicines",
+      "totalLearningTime": "130 hours",
+      "awardingOrganisation": "VTCT",
+      "category": "Safe Handling of Medicines",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2024-02-20T21:39:15.834Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-08-29T20:47:40.264Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-09-05T20:47:40.264Z"
+  },
+  {
+    "claimID": "RE2-ZDJX-7V6K-C",
+    "type": "TU",
+    "learner": {
+      "id": "FB 88 2F 39 Z",
+      "familyName": "Waylon",
+      "givenName": "Ruecker",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "DLDOC",
+      "reimbursementAmount": 50,
+      "title": "Delivering outstanding care",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+    },
+    "startDate": "2024-02-10T06:57:19.299Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-07-27T14:50:04.116Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-12-08T15:50:04.116Z"
+  },
+  {
+    "claimID": "NIN-EKCY-VI6Q-C",
+    "type": "TU",
+    "learner": {
+      "id": "GR 03 6F 10 P",
+      "familyName": "Mozelle",
+      "givenName": "Klein",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "PBSAL",
+      "reimbursementAmount": 450,
+      "title": "PBS Advanced level",
+      "totalLearningTime": "360 learning hours (72 taught), progressive – building on intermediate",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Positive Behavioural Support",
+      "description": null,
+      "awardingOrganisation": null,
+      "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
+    },
+    "startDate": "2024-02-12T07:58:37.269Z",
+    "status": "submitted",
+    "createdDate": "2024-03-24T06:34:01.201Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-03-16T09:34:34.147Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0061.pdf",
+    "completionDate": "2024-02-28T14:01:39.112Z",
+    "costDate": "2023-09-08T05:34:01.201Z"
+  },
+  {
+    "claimID": "5KR-N3VM-51KD-C",
+    "type": "TU",
+    "learner": {
+      "id": "OB 78 2F 15 O",
+      "familyName": "Mayer",
+      "givenName": "Malinda",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "IMLPCS",
+      "reimbursementAmount": 50,
+      "title": "Leading a person-centred service",
+      "totalLearningTime": "45 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-10-23T00:01:08.353Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-10-31T02:42:30.584Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-05-19T01:42:30.584Z"
+  },
+  {
+    "claimID": "G1M-T3LF-E81X-C",
+    "type": "TU",
+    "learner": {
+      "id": "NR 91 7F 72 O",
+      "familyName": "Fiona",
+      "givenName": "Will-Kulas",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2023-10-24T03:00:59.451Z",
+    "status": "approved",
+    "createdDate": "2023-11-25T21:28:08.994Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-05T20:09:36.499Z",
+    "approvedDate": "2024-03-20T04:22:13.448Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0063.pdf",
+    "completionDate": "2023-10-30T19:25:19.719Z",
+    "costDate": "2023-11-07T21:28:08.994Z"
+  },
+  {
+    "claimID": "Y2Y-Z6VB-9ABL-C",
+    "type": "TU",
+    "learner": {
+      "id": "QX 32 6F 41 Q",
+      "familyName": "Jerrell",
+      "givenName": "Nienow",
+      "jobTitle": "Care Aide"
+    },
+    "training": {
+      "code": "DLLDCP",
+      "reimbursementAmount": 50,
+      "title": "Module 2 – Leadership development and career progression",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-09-24T12:49:14.978Z",
+    "status": "submitted",
+    "createdDate": "2023-09-30T02:43:40.447Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2023-12-26T15:37:15.286Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0064.pdf",
+    "completionDate": "2023-10-24T19:02:34.584Z",
+    "costDate": "2022-11-19T03:43:40.447Z"
+  },
+  {
+    "claimID": "HK9-ZFPA-CEW5-C",
+    "type": "TU",
+    "learner": {
+      "id": "AJ 54 4F 01 I",
+      "familyName": "Carmine",
+      "givenName": "Spencer",
+      "jobTitle": "Local Authority Care Worker"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-06-06T06:22:23.517Z",
+    "status": "submitted",
+    "createdDate": "2024-04-07T01:30:46.048Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2023-10-03T12:35:54.634Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0065.pdf",
+    "completionDate": "2023-06-26T20:31:15.992Z",
+    "costDate": "2023-12-24T02:30:46.048Z"
+  },
+  {
+    "claimID": "ATP-4GJE-HKQU-C",
+    "type": "TU",
+    "learner": {
+      "id": "UP 28 8F 89 E",
+      "familyName": "Darrell",
+      "givenName": "Ziemann-Lynch",
+      "jobTitle": "Care Aide"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2024-02-07T04:52:34.310Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2024-02-29T17:23:32.934Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-10-19T16:23:32.934Z"
+  },
+  {
+    "claimID": "MKJ-AF9J-HRPV-C",
+    "type": "TU",
+    "learner": {
+      "id": "MD 20 2F 63 A",
+      "familyName": "Monserrat",
+      "givenName": "Stanton",
+      "jobTitle": "Council Care Assistant"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2023-07-19T06:07:34.890Z",
+    "status": "approved",
+    "createdDate": "2023-06-10T01:01:01.188Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-01-05T13:54:21.979Z",
+    "approvedDate": "2024-04-01T20:57:54.984Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0067.pdf",
+    "completionDate": "2023-09-13T17:36:02.417Z",
+    "costDate": "2022-10-02T01:01:01.188Z"
+  },
+  {
+    "claimID": "Z1K-FXC4-7D6T-C",
+    "type": "TU",
+    "learner": {
+      "id": "FI 50 5F 30 D",
+      "familyName": "Kim",
+      "givenName": "Koepp",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "DLICR",
+      "reimbursementAmount": 50,
+      "title": "Improving your CQC rating",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Improve-your-CQC-rating.aspx"
+    },
+    "startDate": "2024-04-02T16:45:28.315Z",
+    "status": "submitted",
+    "createdDate": "2023-07-12T05:46:36.255Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-04-04T11:29:41.383Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0068.pdf",
+    "completionDate": "2024-04-03T15:39:47.937Z",
+    "costDate": "2023-05-19T05:46:36.255Z"
+  },
+  {
+    "claimID": "MGL-2753-XKN8-C",
+    "type": "TU",
+    "learner": {
+      "id": "SC 67 9F 81 W",
+      "familyName": "Deion",
+      "givenName": "Wunsch",
+      "jobTitle": "Facility Manager"
+    },
+    "training": {
+      "code": "DLICR",
+      "reimbursementAmount": 50,
+      "title": "Improving your CQC rating",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Improve-your-CQC-rating.aspx"
+    },
+    "startDate": "2023-06-28T05:10:03.652Z",
+    "status": "submitted",
+    "createdDate": "2023-09-14T01:11:00.055Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-02-16T08:03:11.011Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0069.pdf",
+    "completionDate": "2024-01-14T18:34:50.590Z",
+    "costDate": "2023-07-16T01:11:00.055Z"
+  },
+  {
+    "claimID": "XXY-QBCL-71QV-C",
+    "type": "TU",
+    "learner": {
+      "id": "BF 73 4F 97 L",
+      "familyName": "Elva",
+      "givenName": "Windler",
+      "jobTitle": "Municipal Caregiver"
+    },
+    "training": {
+      "type": "Level 4 Certificate in Principles of Leadership and Management in Adult Care",
+      "code": "603/0676/2",
+      "reimbursementAmount": 600,
+      "title": "Certificate in Principles of Leadership and Management in Adult Care",
+      "totalLearningTime": "280 hours",
+      "awardingOrganisation": "Innovate Awarding",
+      "category": "Leadership and Management",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-06-05T02:08:47.390Z",
+    "status": "submitted",
+    "createdDate": "2024-03-19T04:57:35.234Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-03-19T07:52:05.771Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0070.pdf",
+    "completionDate": "2023-07-24T06:07:31.360Z",
+    "costDate": "2024-02-02T04:57:35.234Z"
+  },
+  {
+    "claimID": "M2P-8PEI-QBSM-C",
+    "type": "TU",
+    "learner": {
+      "id": "ZH 56 2F 40 Y",
+      "familyName": "Alvah",
+      "givenName": "Weissnat",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-07-16T10:42:35.695Z",
+    "status": "submitted",
+    "createdDate": "2023-11-29T09:59:26.961Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-01-29T23:32:04.103Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0071.pdf",
+    "completionDate": "2023-08-24T16:41:58.830Z",
+    "costDate": "2023-01-29T09:59:26.961Z"
+  },
+  {
+    "claimID": "QQL-YQ9T-191F-C",
+    "type": "TU",
+    "learner": {
+      "id": "BU 26 7F 00 Y",
+      "familyName": "Bo",
+      "givenName": "Wehner",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "IMPDW",
+      "reimbursementAmount": 50,
+      "title": "Personal development and wellbeing",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-08-12T17:45:33.647Z",
+    "status": "approved",
+    "createdDate": "2023-11-20T01:42:21.033Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2023-11-12T22:58:38.476Z",
+    "approvedDate": "2024-01-16T23:19:50.268Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0072.pdf",
+    "completionDate": "2023-10-11T12:40:53.071Z",
+    "costDate": "2023-10-25T00:42:21.033Z"
+  },
+  {
+    "claimID": "R9Q-TJ96-ECHZ-C",
+    "type": "TU",
+    "learner": {
+      "id": "LL 36 2F 22 A",
+      "familyName": "Cecelia",
+      "givenName": "Lowe",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "LTS",
+      "reimbursementAmount": 500,
+      "title": "Lead to Succeed",
+      "totalLearningTime": "5 modules",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Developing your workforce",
+      "description": "Aspiring and deputy managers will take part in the Lead to Succeed program, comprising 5 modules.",
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/resources/documents/Developing-your-workforce/Endorsement/Licenced-programmes/Lead-to-succeed.pdf"
+    },
+    "startDate": "2023-10-04T22:16:53.152Z",
+    "status": "approved",
+    "createdDate": "2023-09-09T15:25:26.330Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-02-01T21:40:11.906Z",
+    "approvedDate": "2024-03-10T16:14:33.583Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0073.pdf",
+    "completionDate": "2023-12-06T03:46:51.673Z",
+    "costDate": "2023-07-07T15:25:26.330Z"
+  },
+  {
+    "claimID": "7I2-E3V2-2D3Y-C",
+    "type": "TU",
+    "learner": {
+      "id": "YD 45 1F 75 I",
+      "familyName": "Krista",
+      "givenName": "Hauck",
+      "jobTitle": "Support Worker"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-11-17T00:10:37.039Z",
+    "status": "approved",
+    "createdDate": "2023-07-07T03:57:49.946Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-12-03T20:40:40.783Z",
+    "approvedDate": "2024-02-17T05:47:45.382Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0074.pdf",
+    "completionDate": "2023-11-22T12:28:59.730Z",
+    "costDate": "2022-08-26T03:57:49.946Z"
+  },
+  {
+    "claimID": "IEF-26C1-YD5E-C",
+    "type": "TU",
+    "learner": {
+      "id": "NX 76 8F 30 D",
+      "familyName": "Caden",
+      "givenName": "Witting",
+      "jobTitle": "Local Authority Care Worker"
+    },
+    "training": {
+      "code": "USMS",
+      "reimbursementAmount": 125,
+      "title": "Understanding self-management skills",
+      "totalLearningTime": "1 module",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Developing your workforce",
+      "description": "Registered managers and service managers will gain insights into Understanding Self-Management Skills through a single module.",
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Understanding-self-management-skills.pdf"
+    },
+    "startDate": "2024-03-25T10:45:14.476Z",
+    "status": "submitted",
+    "createdDate": "2023-07-17T11:09:03.815Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-04-16T19:57:14.770Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0075.pdf",
+    "completionDate": "2024-04-02T10:29:38.971Z",
+    "costDate": "2023-03-19T12:09:03.815Z"
+  },
+  {
+    "claimID": "H2D-2PNR-17KH-C",
+    "type": "TU",
+    "learner": {
+      "id": "FI 50 5F 30 D",
+      "familyName": "Kim",
+      "givenName": "Koepp",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "DLICR",
+      "reimbursementAmount": 50,
+      "title": "Improving your CQC rating",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Improve-your-CQC-rating.aspx"
+    },
+    "startDate": "2023-06-24T14:16:22.034Z",
+    "status": "submitted",
+    "createdDate": "2024-04-09T01:33:14.157Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2023-08-21T12:02:13.607Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0076.pdf",
+    "completionDate": "2023-07-15T09:32:36.620Z",
+    "costDate": "2023-07-24T01:33:14.157Z"
+  },
+  {
+    "claimID": "QTH-YUPQ-8XVR-C",
+    "type": "TU",
+    "learner": {
+      "id": "JU 91 7F 75 P",
+      "familyName": "Telly",
+      "givenName": "Denesik",
+      "jobTitle": "Care Manager"
+    },
+    "training": {
+      "code": "601/5865/7",
+      "reimbursementAmount": 150,
+      "type": "Level 3 Award",
+      "title": "Understanding the Principles and Practices of Assessment",
+      "totalLearningTime": "30 hours",
+      "awardingOrganisation": "Focus Awards",
+      "category": "Assessment",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-08-28T02:58:02.392Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-12-11T13:01:10.103Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-11-26T13:01:10.103Z"
+  },
+  {
+    "claimID": "H9N-H6DQ-ZPR8-C",
+    "type": "TU",
+    "learner": {
+      "id": "CL 74 2F 71 G",
+      "familyName": "Abigale",
+      "givenName": "Wilderman",
+      "jobTitle": "Personal Assistant"
+    },
+    "training": {
+      "code": "IMLI",
+      "reimbursementAmount": 50,
+      "title": "Learning and innovating",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-08-13T23:21:53.294Z",
+    "status": "approved",
+    "createdDate": "2023-09-22T05:59:17.824Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-02-28T20:12:05.319Z",
+    "approvedDate": "2024-04-16T19:13:16.909Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0078.pdf",
+    "completionDate": "2023-10-17T17:24:14.417Z",
+    "costDate": "2023-02-16T06:59:17.824Z"
+  },
+  {
+    "claimID": "N22-6LJP-3UYZ-C",
+    "type": "TU",
+    "learner": {
+      "id": "ZX 51 96 87 D",
+      "familyName": "Simonis",
+      "givenName": "Casey",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2023-11-24T17:39:21.196Z",
+    "status": "submitted",
+    "createdDate": "2023-10-30T16:19:48.412Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-03-22T09:06:17.807Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0079.pdf",
+    "completionDate": "2023-12-12T10:25:59.222Z",
+    "costDate": "2023-04-30T15:19:48.412Z"
+  },
+  {
+    "claimID": "GV7-CWIG-NDCN-C",
+    "type": "TU",
+    "learner": {
+      "id": "CW 99 7F 83 J",
+      "familyName": "Stone",
+      "givenName": "Ruecker",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2023-08-15T17:28:17.027Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-08-07T05:48:03.843Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-04-30T05:48:03.843Z"
+  },
+  {
+    "claimID": "1HX-9BUG-GKR9-C",
+    "type": "TU",
+    "learner": {
+      "id": "BF 74 0F 46 L",
+      "familyName": "Rafael",
+      "givenName": "Beatty",
+      "jobTitle": "Care Manager"
+    },
+    "training": {
+      "code": "DLEDI",
+      "reimbursementAmount": 50,
+      "title": "Module 1 – Equality, diversity and inclusion",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-12-16T02:45:52.436Z",
+    "status": "approved",
+    "createdDate": "2023-06-24T00:13:49.311Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-04-07T19:16:44.684Z",
+    "approvedDate": "2024-04-16T18:46:37.315Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0081.pdf",
+    "completionDate": "2024-03-27T10:39:41.105Z",
+    "costDate": "2022-10-24T00:13:49.311Z"
+  },
+  {
+    "claimID": "MU3-XYJG-GYRD-C",
+    "type": "TU",
+    "learner": {
+      "id": "HM 27 9F 18 T",
+      "familyName": "Aubree",
+      "givenName": "Ebert",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "DLBPCI",
+      "reimbursementAmount": 50,
+      "title": "Being prepared for CQC inspection",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Preparing-for-CQC-inspection.aspx"
+    },
+    "startDate": "2023-08-29T04:56:21.688Z",
+    "status": "submitted",
+    "createdDate": "2023-11-24T20:28:37.422Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-02-26T17:42:46.597Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0082.pdf",
+    "completionDate": "2024-01-17T00:43:08.911Z",
+    "costDate": "2023-02-12T20:28:37.422Z"
+  },
+  {
+    "claimID": "WS3-TQUN-APB5-C",
+    "type": "TU",
+    "learner": {
+      "id": "OA 78 8F 31 V",
+      "familyName": "Francis",
+      "givenName": "Bartell",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "DLICR",
+      "reimbursementAmount": 50,
+      "title": "Improving your CQC rating",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Improve-your-CQC-rating.aspx"
+    },
+    "startDate": "2023-08-12T22:37:17.856Z",
+    "status": "approved",
+    "createdDate": "2023-06-18T23:09:49.875Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2024-02-22T21:37:00.567Z",
+    "approvedDate": "2024-04-08T22:08:17.194Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0083.pdf",
+    "completionDate": "2023-10-05T00:50:52.080Z",
+    "costDate": "2022-07-21T23:09:49.875Z"
+  },
+  {
+    "claimID": "AUT-QHTM-X8U2-C",
+    "type": "TU",
+    "learner": {
+      "id": "WU 23 0F 97 M",
+      "familyName": "Allan",
+      "givenName": "Wuckert",
+      "jobTitle": "Council Care Assistant"
+    },
+    "training": {
+      "code": "IMSMC",
+      "reimbursementAmount": 50,
+      "title": "Safeguarding and mental capacity",
+      "totalLearningTime": "45 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-12-05T09:16:40.873Z",
+    "status": "submitted",
+    "createdDate": "2023-10-26T20:59:50.938Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-28T07:38:29.776Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0084.pdf",
+    "completionDate": "2024-01-05T20:31:03.777Z",
+    "costDate": "2023-07-02T20:59:50.938Z"
+  },
+  {
+    "claimID": "UI1-ZADB-IG2K-C",
+    "type": "TU",
+    "learner": {
+      "id": "LL 36 2F 22 A",
+      "familyName": "Cecelia",
+      "givenName": "Lowe",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "WL",
+      "reimbursementAmount": 500,
+      "title": "Well-led",
+      "totalLearningTime": "4 modules",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Developing your workforce",
+      "description": "Registered managers and service managers will be part of the Well-led program, consisting of 4 modules.",
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Well-led.pdf"
+    },
+    "startDate": "2023-10-15T18:10:18.821Z",
+    "status": "submitted",
+    "createdDate": "2023-10-07T06:24:04.171Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-14T05:05:13.331Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0085.pdf",
+    "completionDate": "2024-01-14T10:37:17.152Z",
+    "costDate": "2023-09-19T06:24:04.171Z"
+  },
+  {
+    "claimID": "26Q-VX71-SW6K-C",
+    "type": "TU",
+    "learner": {
+      "id": "FS 47 4F 68 U",
+      "familyName": "Jed",
+      "givenName": "Weber",
+      "jobTitle": "Local Authority Care Worker"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-04-22T01:17:54.867Z",
+    "status": "submitted",
+    "createdDate": "2024-02-02T22:27:54.459Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-06-01T22:38:02.981Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0086.pdf",
+    "completionDate": "2023-05-22T21:48:26.463Z",
+    "costDate": "2023-12-08T22:27:54.459Z"
+  },
+  {
+    "claimID": "GWV-1CHT-Z6Q1-C",
+    "type": "TU",
+    "learner": {
+      "id": "OB 78 2F 15 O",
+      "familyName": "Mayer",
+      "givenName": "Malinda",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "WL",
+      "reimbursementAmount": 500,
+      "title": "Well-led",
+      "totalLearningTime": "4 modules",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Developing your workforce",
+      "description": "Registered managers and service managers will be part of the Well-led program, consisting of 4 modules.",
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Well-led.pdf"
+    },
+    "startDate": "2023-05-05T23:39:53.258Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2024-01-09T17:55:22.189Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-06-08T16:55:22.189Z"
+  },
+  {
+    "claimID": "LPK-XEAK-VZW9-C",
+    "type": "TU",
+    "learner": {
+      "id": "UH 04 6F 47 V",
+      "familyName": "Davonte",
+      "givenName": "O'Reilly",
+      "jobTitle": "Occupational Therapist"
+    },
+    "training": {
+      "code": "UPM",
+      "reimbursementAmount": 125,
+      "title": "Understanding performance management",
+      "totalLearningTime": "1 module",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Developing your workforce",
+      "description": "Registered managers and service managers will enhance their skills in Understanding Performance Management through a single module.",
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Understanding-performance-management.pdf"
+    },
+    "startDate": "2023-10-16T09:58:10.304Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-05-23T03:40:37.627Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-09-26T03:40:37.627Z"
+  },
+  {
+    "claimID": "UUS-KJAB-DV4I-C",
+    "type": "TU",
+    "learner": {
+      "id": "YH 60 9F 32 Z",
+      "familyName": "Tressie",
+      "givenName": "Lemke",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "DLCCA",
+      "reimbursementAmount": 100,
+      "title": "Care Certificate Assessors",
+      "totalLearningTime": "50 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
+    },
+    "startDate": "2023-11-28T23:12:10.514Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2024-01-16T02:35:29.179Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-10-13T01:35:29.179Z"
+  },
+  {
+    "claimID": "6VN-1XFN-IH84-C",
+    "type": "TU",
+    "learner": {
+      "id": "QX 32 6F 41 Q",
+      "familyName": "Jerrell",
+      "givenName": "Nienow",
+      "jobTitle": "Care Aide"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-06-24T11:56:51.612Z",
+    "status": "rejected",
+    "createdDate": "2024-02-20T23:16:27.319Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-09-25T03:38:35.532Z",
+    "approvedDate": null,
+    "rejectedDate": "2023-12-18T17:34:26.480Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0090.pdf",
+    "completionDate": "2023-09-16T07:16:30.825Z",
+    "costDate": "2023-02-25T23:16:27.319Z"
+  },
+  {
+    "claimID": "6PI-41BX-9672-C",
+    "type": "TU",
+    "learner": {
+      "id": "YD 45 1F 75 I",
+      "familyName": "Krista",
+      "givenName": "Hauck",
+      "jobTitle": "Support Worker"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-04-22T21:19:56.203Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-12-20T10:22:53.198Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-09-02T09:22:53.198Z"
+  },
+  {
+    "claimID": "S9U-MLYX-HMYL-C",
+    "type": "TU",
+    "learner": {
+      "id": "ZX 51 96 87 D",
+      "familyName": "Simonis",
+      "givenName": "Casey",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "PBSAL",
+      "reimbursementAmount": 450,
+      "title": "PBS Advanced level",
+      "totalLearningTime": "360 learning hours (72 taught), progressive – building on intermediate",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Positive Behavioural Support",
+      "description": null,
+      "awardingOrganisation": null,
+      "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
+    },
+    "startDate": "2023-07-05T16:37:34.793Z",
+    "status": "rejected",
+    "createdDate": "2024-01-22T06:17:37.295Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2023-11-20T12:38:44.520Z",
+    "approvedDate": null,
+    "rejectedDate": "2023-11-20T13:55:13.146Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0092.pdf",
+    "completionDate": "2023-07-06T19:03:51.969Z",
+    "costDate": "2023-03-27T05:17:37.295Z"
+  },
+  {
+    "claimID": "64G-SUBE-KIB5-C",
+    "type": "TU",
+    "learner": {
+      "id": "GR 46 4F 92 C",
+      "familyName": "Alva",
+      "givenName": "Little",
+      "jobTitle": "Nursing Assistant"
+    },
+    "training": {
+      "code": "UPM",
+      "reimbursementAmount": 125,
+      "title": "Understanding performance management",
+      "totalLearningTime": "1 module",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Developing your workforce",
+      "description": "Registered managers and service managers will enhance their skills in Understanding Performance Management through a single module.",
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Understanding-performance-management.pdf"
+    },
+    "startDate": "2023-08-22T12:47:58.267Z",
+    "status": "approved",
+    "createdDate": "2023-06-04T15:52:14.783Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-04-09T09:44:54.783Z",
+    "approvedDate": "2024-04-14T07:02:08.399Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0093.pdf",
+    "completionDate": "2023-09-15T18:45:11.659Z",
+    "costDate": "2023-03-14T16:52:14.783Z"
+  },
+  {
+    "claimID": "T3R-5DHK-N9WS-C",
+    "type": "TU",
+    "learner": {
+      "id": "QX 32 6F 41 Q",
+      "familyName": "Jerrell",
+      "givenName": "Nienow",
+      "jobTitle": "Care Aide"
+    },
+    "training": {
+      "code": "MHFA",
+      "reimbursementAmount": 100,
+      "title": "Mental Health First Aid",
+      "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Mental Health",
+      "description": null,
+      "awardingOrganisation": "MHFA England",
+      "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
+    },
+    "startDate": "2023-07-06T22:37:07.952Z",
+    "status": "submitted",
+    "createdDate": "2023-09-09T21:20:36.012Z",
+    "createdBy": "Allan Connelly",
+    "submittedDate": "2023-12-09T14:33:19.612Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0094.pdf",
+    "completionDate": "2023-09-10T20:32:15.488Z",
+    "costDate": "2022-12-31T22:20:36.012Z"
+  },
+  {
+    "claimID": "SJI-1WLI-1NRW-C",
+    "type": "TU",
+    "learner": {
+      "id": "KX 89 9F 87 K",
+      "familyName": "Fausto",
+      "givenName": "Howell",
+      "jobTitle": "Support Worker"
+    },
+    "training": {
+      "code": "DLBPCI",
+      "reimbursementAmount": 50,
+      "title": "Being prepared for CQC inspection",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Preparing-for-CQC-inspection.aspx"
+    },
+    "startDate": "2024-02-08T22:10:25.103Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-09-06T11:32:21.448Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2023-06-14T11:32:21.448Z"
+  },
+  {
+    "claimID": "VY4-KJVW-W2U2-C",
+    "type": "TU",
+    "learner": {
+      "id": "OA 78 8F 31 V",
+      "familyName": "Francis",
+      "givenName": "Bartell",
+      "jobTitle": "Healthcare Assistant"
+    },
+    "training": {
+      "code": "DLFE",
+      "reimbursementAmount": 50,
+      "title": "Learning from Events",
+      "totalLearningTime": "35 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
+    },
+    "startDate": "2023-10-28T01:36:55.675Z",
+    "status": "approved",
+    "createdDate": "2023-05-22T13:21:36.554Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-11-01T18:58:45.167Z",
+    "approvedDate": "2024-02-28T07:52:07.933Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice000.pdf"
+    ],
+    "evidenceOfCompletion": "certficate0096.pdf",
+    "completionDate": "2023-11-01T08:04:57.875Z",
+    "costDate": "2022-07-27T13:21:36.554Z"
+  }
+]
