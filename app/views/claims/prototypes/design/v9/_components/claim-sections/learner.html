@@ -1,0 +1,37 @@
+<h2 class="govuk-heading-m" id="learner">Learner</h2>
+<dl class="govuk-summary-list">
+  {% if not claim.learner %}
+  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =="missing" %}
+  <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="learner-error">
+      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a learner</p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-key--error {% endif %}">
+      Name
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add learner</a>
+    </dd>
+  </div>
+  {% else %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Name
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <p class="govuk-body">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</p>
+      <p class="govuk-body">{{ claim.learner.id }}</p>
+      {% if data.claimType == "CPD" %}<p class="govuk-body">Budget remaining: £395</p>{% endif %}
+    </dd>
+    {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Change<span
+          class="govuk-visually-hidden"> learner</span></a>
+    </dd>
+    {% endif %}
+  </div>
+  {% endif %}
+</dl>

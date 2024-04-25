@@ -1,0 +1,237 @@
+{% extends "../layouts/main.html" %}
+
+{% set sortedCourseData = data.training | groupByTitle_V9 %}
+{% set uniqueCourseTitles = data.training | getUniqueCourseTitles_V9 %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l">Approved activities for care skills funding</h1>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h2 class="govuk-body-m">Explore the courses and qualitifications offered. Click to skip to the section to find out more.</h2>
+        <h2 class="govuk-heading-m">Courses</h2>
+        {% for trainingGroup in data.training %}
+            {% if trainingGroup.groupTitle != "Qualifications" %}
+            <p class="govuk-body">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li><a class="govuk-link govuk-link--no-visited-state" href="#{{ trainingGroup.groupTitle }}">{{ trainingGroup.groupTitle }} ({{ trainingGroup.courses | coursesCount_V9 }})</a></p></li>
+                </ul>
+            </p>
+            {% endif %}
+        {% endfor %}
+        <br />
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m">Qualifications</h2>
+        {% for course in uniqueCourseTitles %}
+            <p class="govuk-body">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li><a class="govuk-link govuk-link--no-visited-state" href="#{{course}}">{{course}} ({{sortedCourseData[course] | formatCount_V9}})</a></p></li>
+                </ul>
+            </p>
+        {% endfor %}
+    </div>
+</div>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+
+<br></br>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full"> 
+        <h2 class="govuk-body-m">Courses</h2>
+        {% for trainingGroup in data.training %}
+            {% if trainingGroup.groupTitle != "Qualifications" %}
+            <h3 class="govuk-heading-s" id="{{ trainingGroup.groupTitle }}">{{ trainingGroup.groupTitle }}</h3>
+                {% for training in trainingGroup.courses %}
+                <details class="govuk-details">
+                    <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        {{ training.title }}
+                    </span>
+                    </summary>
+                    
+                    <br></br>
+                    <div class="govuk-summary-card">
+                        <div class="govuk-summary-card__title-wrapper">
+                          <h2 class="govuk-summary-card__title">
+                            <!-- {{training.title}}  -->
+                          </h2>
+                          <ul class="govuk-summary-card__actions">
+                            <li class="govuk-summary-card__action">
+                                <a href="{{training.link}}">Learn more here</a> 
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="govuk-summary-card__content">
+                          <dl class="govuk-summary-list">
+                            <div class="govuk-summary-list__row">
+                              <dt class="govuk-summary-list__key">
+                                Code
+                              </dt>
+                              <dd class="govuk-summary-list__value">
+                                {{training.code}}
+                              </dd>
+                            </div>
+
+                            <div class="govuk-summary-list__row">
+                              <dt class="govuk-summary-list__key">
+                                Type
+                              </dt>
+                              <dd class="govuk-summary-list__value">
+                                {{training.type}}
+                              </dd>
+                            </div>
+
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                  Awarding organisation
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{training.awardingOrganisation}}
+                                </dd>
+                              </div>
+
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Total learning time
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{training.totalLearningTime}}
+                                </dd>
+                              </div>
+
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Maximum reimbursement amount per learner
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                  £{{training.reimbursementAmount}}
+                                </dd>
+                              </div>
+
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Funding model
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                    {{training.fundingModel}}
+                                </dd>
+                              </div>
+
+                          </dl>
+                        </div>
+                      </div>
+                </details>
+                {% endfor %}
+            {% endif %}
+            <br></br>
+        {% endfor %}
+    </div>
+</div>
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full"> 
+        <h2 class="govuk-body-m">Qualifications</h2>
+        {% for title in uniqueCourseTitles %}
+            <h3 class="govuk-heading-s" id="{{ title }}">{{ title }}</h3>
+            
+            {% for provider in sortedCourseData[title] %}
+                <details class="govuk-details">
+                    <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                    [{{provider.code}}] {{title}} ({{provider.awardingOrganisation}}) 
+                    </span>
+                    </summary>
+                    <br></br>
+                    <div class="govuk-summary-card">
+                        <div class="govuk-summary-card__title-wrapper">
+                          <h2 class="govuk-summary-card__title">
+                            {{title}} 
+                          </h2>
+                          <ul class="govuk-summary-card__actions">
+                            <li class="govuk-summary-card__action">
+                                <a href="{{provider.link}}">Learn more here</a> 
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="govuk-summary-card__content">
+                          <dl class="govuk-summary-list">
+                            <div class="govuk-summary-list__row">
+                              <dt class="govuk-summary-list__key">
+                                Code
+                              </dt>
+                              <dd class="govuk-summary-list__value">
+                                {{provider.code}}
+                              </dd>
+                            </div>
+
+                            <div class="govuk-summary-list__row">
+                              <dt class="govuk-summary-list__key">
+                                Type
+                              </dt>
+                              <dd class="govuk-summary-list__value">
+                                {{provider.type}}
+                              </dd>
+                            </div>
+
+                            <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                  Awarding organisation
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                  {{provider.awardingOrganisation}}
+                                </dd>
+                              </div>
+
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Total learning time
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                  {{provider.totalLearningTime}}
+                                </dd>
+                              </div>
+
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Maximum reimbursement amount per learner:
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                  £{{provider.reimbursementAmount}}
+                                </dd>
+                              </div>
+
+                              <div class="govuk-summary-list__row">
+                                <dt class="govuk-summary-list__key">
+                                    Funding model: 
+                                </dt>
+                                <dd class="govuk-summary-list__value">
+                                  {{provider.fundingModel}}
+                                </dd>
+                              </div>
+
+                          </dl>
+                        </div>
+                      </div>
+                </details>
+            {% endfor %}
+            <br></br>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock %}
+

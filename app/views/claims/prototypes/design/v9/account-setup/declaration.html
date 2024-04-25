@@ -1,0 +1,85 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{{ ["Grant decleration - ", (data.claimType | potName_V9)] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="job-title" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% if data.submitError %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#declare-checkbox">You must confirm you understand before submitting.</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Complete registration</span>
+        <h1 class="govuk-heading-l">Grant decleration</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Sagittis orci a scelerisque purus semper eget duis. Magna fermentum
+            iaculis eu non diam.</p>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Sagittis orci a scelerisque purus semper eget duis. Magna fermentum
+            iaculis eu non diam.</p>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Sagittis orci a scelerisque purus semper eget duis. Magna fermentum
+            iaculis eu non diam.</p>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Sagittis orci a scelerisque purus semper eget duis. Magna fermentum
+            iaculis eu non diam.</p>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Sagittis orci a scelerisque purus semper eget duis. Magna fermentum
+            iaculis eu non diam.</p>
+        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Sagittis orci a scelerisque purus semper eget duis. Magna fermentum
+            iaculis eu non diam.</p>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <form action="bank-details" method="post" novalidate>
+            <div class="govuk-button-group {% if data.submitError %} govuk-form-group--error {% endif %}"
+                id="declare-checkbox">
+                <fieldset class="govuk-fieldset" aria-describedby="{% if data.submitError %} declare-error {% endif %}">
+                    {% if data.submitError %}
+                    <p id="declare-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> You must confirm you understand before
+                        submitting.
+                    </p>
+                    {% endif %}
+                    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="declaration" name="declaration" type="checkbox"
+                                value="declaration">
+                            <label class="govuk-label govuk-checkboxes__label" for="declaration">
+                                I confirm that I understand and accept this declaration.
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
