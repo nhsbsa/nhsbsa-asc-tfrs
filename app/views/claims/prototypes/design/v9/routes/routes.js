@@ -36,7 +36,7 @@ router.post('/verify-details-handler', function (req, res) {
   } else {
     res.redirect('account-setup/verify-details?submitError=true')
   }
-
+  delete req.session.data['confirmation'];
 });
 
 
@@ -484,6 +484,10 @@ router.get('/cancel-handler', function (req, res) {
   delete req.session.data['errorFileTooBig'];
   delete req.session.data['errorFileMissing'];
   delete req.session.data['deleteError'];
+  delete req.session.data['jobTitleEmptyError'];
+  delete req.session.data['jobTitle'];
+  delete req.session.data['jobTitleInvalid'];
+  delete req.session.data['declarationSubmitError'];
 
   res.redirect('claim/claim-details' + '?id=' + claimID)
 
@@ -539,9 +543,33 @@ router.post('/create-learner', function (req, res) {
     req.session.data.submitError = submitError
     res.redirect('learner/add-learner?inClaim=' + req.session.data.inClaim)
   }
+});
 
+router.post('/validate-job-title', function (req, res) {
+  delete req.session.data.jobTitleEmptyError
+  delete req.session.data.jobTitleInvalid
+  delete req.session.data['declarationSubmitError'];
+  const jobTitle = req.session.data.jobTitle
 
+  var validCharactersRegex = /^[a-zA-Z0-9-]+$/;
 
+  if (jobTitle == "") {
+    res.redirect('account-setup/job-title?jobTitleEmptyError=true')
+  } else if (validCharactersRegex.test(jobTitle) == true) {
+    res.redirect('account-setup/declaration')
+  } else {
+    res.redirect('account-setup/job-title?jobTitleInvalid=true')
+  }
+});
+
+router.post('/declaration-confirmation', function (req, res) {
+  delete req.session.data.declarationSubmitError
+  const declarationConfirmed = req.session.data.declaration
+  if (declarationConfirmed != null) {
+    res.redirect('account-setup/bank-details')
+  } else {
+    res.redirect('account-setup/declaration?declarationSubmitError=true')
+  }
 });
 
 
