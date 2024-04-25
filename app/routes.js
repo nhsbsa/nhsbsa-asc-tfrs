@@ -20,6 +20,7 @@ router.use('/claims/prototypes/design/v9/', require('./views/claims/prototypes/d
 
 // Add your processing routes here
 router.use('/processing/prototypes/design/v1/', require('./views/processing/prototypes/design/v1/routes/routes.js'))
+router.use('/processing/prototypes/design/v2/', require('./views/processing/prototypes/design/v2/routes/routes.js'))
 
 // Add your routes here
 router.use((req, res, next) => {

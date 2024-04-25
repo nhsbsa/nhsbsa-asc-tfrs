@@ -17,6 +17,7 @@ require('../app/views/claims/prototypes/design/v9/filters/filters.js')
 
 // Add your processing filters here
 require('../app/views/processing/prototypes/design/v1/filters/filters.js')
+require('../app/views/processing/prototypes/design/v2/filters/filters.js')
 
 addFilter('default', function (value, defaultValue) {
     if (value != null) {

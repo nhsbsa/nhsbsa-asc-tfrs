@@ -25,10 +25,10 @@
             {% for i in noCriteria %}
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key" style="width: 50%;">
-                    {{ i | criteriaQuestions_V1(data.type, claim, "false") }}
+                    {{ i | criteriaQuestions_V2(data.type, claim, "false") }}
                 </dt>
                 <dd class="govuk-summary-list__value" style="width: 40%;">
-                    {{ i | criteriaAnswer_V1(data.type, claim) }}
+                    {{ i | criteriaAnswer_V2(data.type, claim) }}
                 </dd>
                 <dd class="govuk-summary-list__actions" style="width: 10%;">
                     <a class="govuk-link" href="review-evidence?type={{data.type}}&criteria={{i}}">Change</a>
