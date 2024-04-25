@@ -270,7 +270,7 @@ addFilter('dateErrorFormat_V9', function (dateErrorObject, type) {
     let state = false
     if (dateErrorObject) {
         if (type == "day") {
-            if (dateErrorObject.day == 'missing' || (dateErrorObject.day == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid'|| dateErrorObject.date == 'invalidPolicy') {
+            if (dateErrorObject.day == 'missing' || (dateErrorObject.day == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.date == 'invalidPolicy') {
                 state = true
             }
         } else if (type == "month") {
@@ -435,3 +435,31 @@ addFilter('trainingSearch_V9', function (search, training) {
 
     return match
 })
+
+
+addFilter('bankErrorMessage_V9', function (bankErrorObject) {
+    const errorMessages = [];
+
+    if (bankErrorObject.accountName === 'missing') {
+        errorMessages.push('<li><a href="#accountName-error">Enter the name on the account</a></li>');
+    }
+    if (bankErrorObject.sortCode === 'missing') {
+        errorMessages.push('<li><a href="#sortCode-error">Enter a sort code</a></li>');
+    } else if (bankErrorObject.sortCode === 'invalid') {
+        errorMessages.push('<li><a href="#sortCode-error">Enter a valid sort code like 309430</a></li>');
+    }
+    if (bankErrorObject.accountNumber === 'missing') {
+        errorMessages.push('<li><a href="#accountNumber-error">Enter an account number</a></li>');
+    } else if (bankErrorObject.accountNumber === 'invalid') {
+        errorMessages.push('<li><a href="#accountNumber-error">Enter a valid account number like 00733445</a></li>');
+    } else if (bankErrorObject.accountNumber === 'lengthIssue') {
+        errorMessages.push('<li><a href="#accountNumber-error">Account number must be between 6 and 8 digits</a></li>');
+    }
+    if (bankErrorObject.buildingSociety === 'lengthIssue') {
+        errorMessages.push('<li><a href="#buildingSociety-error">Building society roll number must be between 1 and 18 characters</a></li>');
+    } else if (bankErrorObject.buildingSociety === 'invalid') {
+        errorMessages.push('<li><a href="#buildingSociety-error">Building society roll number must only include letters a to z, numbers, hyphens, spaces, forward slashes and full stops</a></li>');
+    }
+
+    return errorMessages.join('');
+}, { renderAsHtml: true })

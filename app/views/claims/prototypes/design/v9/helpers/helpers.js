@@ -241,4 +241,45 @@ function checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTit
 }
 
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm }
+function checkBankDetailsForm(accountName, sortCode, accountNumber, buildingSociety) {
+    const result = {};
+
+    if (accountName == "" || accountName === undefined || accountName == null ) {
+        result.accountName = "missing"
+    } else {
+        result.accountName = "valid"
+    }
+
+    if (sortCode == "" || sortCode === undefined || sortCode == null ) {
+        result.sortCode = "missing"
+    } else if (!(/^\d{6}$/.test(sortCode))) {
+        result.sortCode = "invalid"
+    } else {
+        result.sortCode = "valid"
+    }
+
+    if (accountNumber == "" || accountNumber === undefined || accountNumber == null ) {
+        result.accountNumber = "missing"
+    } else if (!(/^\d+$/.test(accountNumber))) {
+        result.accountNumber = "invalid"
+    } else if (!(accountNumber.length >= 6 && accountNumber.length <= 8)) {
+        result.accountNumber = "lengthIssue"
+    } else {
+        result.accountNumber = "valid"
+    }
+
+    if (!(/^[a-zA-Z0-9\-\/ .]+$/.test(buildingSociety)) && buildingSociety != "" ) {
+        result.buildingSociety = "invalid"
+    } else if (!(buildingSociety.length >= 1 && buildingSociety.length <= 18) && buildingSociety != "" ) {
+        result.buildingSociety = "lengthIssue"
+    } else {
+        result.buildingSociety = "valid"
+    }
+
+    result.bankDetailsValid = result.accountName == "valid" && result.sortCode == "valid" && result.accountNumber == "valid" && result.buildingSociety == "valid"
+
+    return result
+
+}
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm }

@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { loadJSONFromFile } = require('../../../../../../scripts/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm } = require('../helpers/helpers.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm } = require('../helpers/helpers.js');
 
 // v9 Prototype routes
 
@@ -36,6 +36,29 @@ router.post('/verify-details-handler', function (req, res) {
   } else {
     res.redirect('account-setup/verify-details?submitError=true')
   }
+
+});
+
+router.post('/bank-details-handler', function (req, res) {
+const accountName = req.session.data.nameOnTheAccount
+const sortCode = req.session.data.sortCode
+const accountNumber = req.session.data.accountNumber
+const buildingSociety = req.session.data.rollNumber
+
+delete req.session.data.submitError
+
+const check = checkBankDetailsForm(accountName,sortCode,accountNumber,buildingSociety)
+
+if (check.bankDetailsValid) {
+  delete req.session.data.nameOnTheAccount
+  delete req.session.data.sortCode
+  delete req.session.data.accountNumber
+  delete req.session.data.rollNumber
+  res.redirect('./index')
+} else {
+  req.session.data.submitError = check
+  res.redirect('account-setup/bank-details')
+}
 
 });
 
