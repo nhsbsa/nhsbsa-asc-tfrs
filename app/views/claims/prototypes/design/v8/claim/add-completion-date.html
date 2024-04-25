@@ -45,7 +45,7 @@
                                     Day
                                 </label>
                                 <input
-                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat('day') ) %} govuk-input--error {% endif %}"
+                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat_V8('day') ) %} govuk-input--error {% endif %}"
                                     id="completion-date-started-day" name="completion-date-started-day" type="text"
                                     value="{{ data['completion-date-started-day'] | default ('') }}"
                                     inputmode="numeric">
@@ -57,7 +57,7 @@
                                     Month
                                 </label>
                                 <input
-                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat('month') ) %} govuk-input--error {% endif %}"
+                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat_V8('month') ) %} govuk-input--error {% endif %}"
                                     id="completion-date-started-month" name="completion-date-started-month" type="text"
                                     value="{{ data['completion-date-started-month'] | default ('') }}"
                                     inputmode="numeric">
@@ -69,7 +69,7 @@
                                     Year
                                 </label>
                                 <input
-                                    class="govuk-input govuk-date-input__input govuk-input--width-4 {% if (data.submitError | dateErrorFormat('year') ) %} govuk-input--error {% endif %}"
+                                    class="govuk-input govuk-date-input__input govuk-input--width-4 {% if (data.submitError | dateErrorFormat_V8('year') ) %} govuk-input--error {% endif %}"
                                     id="completion-date-started-year" name="completion-date-started-year" type="text"
                                     value="{{ data['completion-date-started-year'] | default ('') }}"
                                     inputmode="numeric">

@@ -1,6 +1,6 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim_V8(data.claims) %}
-{% set evidenceCount = claim.evidenceOfPayment | coursesCount_V7 %}
+{% set evidenceCount = claim.evidenceOfPayment | coursesCount_V8 %}
 
 {% block pageTitle %}
 {{ ["Add evidence - Claim: ", claim.claimID] | join }}
