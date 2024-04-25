@@ -1,12 +1,11 @@
 [
   {
-    "groupTitle": "Introductory modules for managers",
-    "groupDescription": null,
-    "audience": "These development modules are for aspiring, new and experienced leaders and managers.",
+    "groupTitle": "Courses",
     "courses": [
       {
         "code": "IMLM",
         "reimbursementAmount": 50,
+        "groupCategory": "Introductory modules for managers",
         "title": "Leading and managing in adult social care",
         "totalLearningTime": "60 mins",
         "fundingModel": "full",
@@ -19,6 +18,7 @@
       {
         "code": "IMSDT",
         "reimbursementAmount": 50,
+        "groupCategory": "Introductory modules for managers",
         "title": "Supporting and developing teams",
         "totalLearningTime": "45 mins + 30 mins = 75 mins",
         "fundingModel": "full",
@@ -31,6 +31,7 @@
       {
         "code": "IMRG",
         "reimbursementAmount": 50,
+        "groupCategory": "Introductory modules for managers",
         "title": "Regulation and governance",
         "totalLearningTime": "60 mins",
         "fundingModel": "full",
@@ -43,6 +44,7 @@
       {
         "code": "IMEC",
         "reimbursementAmount": 50,
+        "groupCategory": "Introductory modules for managers",
         "title": "Effective communication",
         "totalLearningTime": "50 mins",
         "fundingModel": "full",
@@ -55,6 +57,7 @@
       {
         "code": "IMWP",
         "reimbursementAmount": 50,
+        "groupCategory": "Introductory modules for managers",
         "title": "Working with partners",
         "totalLearningTime": "45 mins",
         "fundingModel": "full",
@@ -67,6 +70,7 @@
       {
         "code": "IMLPCS",
         "reimbursementAmount": 50,
+        "groupCategory": "Introductory modules for managers",
         "title": "Leading a person-centred service",
         "totalLearningTime": "45 mins",
         "fundingModel": "full",
@@ -79,6 +83,7 @@
       {
         "code": "IMSMC",
         "reimbursementAmount": 50,
+        "groupCategory": "Introductory modules for managers",
         "title": "Safeguarding and mental capacity",
         "totalLearningTime": "45 mins",
         "fundingModel": "full",
@@ -91,6 +96,7 @@
       {
         "code": "IMMD",
         "reimbursementAmount": 50,
+        "groupCategory": "Introductory modules for managers",
         "title": "Making decisions",
         "totalLearningTime": "60 mins",
         "fundingModel": "full",
@@ -103,6 +109,7 @@
       {
         "code": "IMMR",
         "reimbursementAmount": 50,
+        "groupCategory": "Introductory modules for managers",
         "title": "Managing resources",
         "totalLearningTime": "45 mins",
         "fundingModel": "full",
@@ -115,6 +122,7 @@
       {
         "code": "IMLI",
         "reimbursementAmount": 50,
+        "groupCategory": "Introductory modules for managers",
         "title": "Learning and innovating",
         "totalLearningTime": "60 mins",
         "fundingModel": "full",
@@ -127,6 +135,7 @@
       {
         "code": "IMPDW",
         "reimbursementAmount": 50,
+        "groupCategory": "Introductory modules for managers",
         "title": "Personal development and wellbeing",
         "totalLearningTime": "50 mins",
         "fundingModel": "full",
@@ -135,17 +144,11 @@
         "description": null,
         "awardingOrganisation": "Skills for Care",
         "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
-      }
-    ]
-  },
-  {
-    "groupTitle": "Digital learning for managers",
-    "groupDescription": null,
-    "audience": "These development modules are for aspiring, new and experienced leaders and managers.",
-    "courses": [
+      },
       {
         "code": "DLFE",
         "reimbursementAmount": 50,
+        "groupCategory": "Digital learning for managers",
         "title": "Learning from Events",
         "totalLearningTime": "35 mins",
         "fundingModel": "full",
@@ -154,17 +157,11 @@
         "description": null,
         "awardingOrganisation": "Skills for Care",
         "link": "https://www.skillsforcare.org.uk/Learning-development/ongoing-learning-and-development/Learning-from-events/Learning-from-events.aspx"
-      }
-    ]
-  },
-  {
-    "groupTitle": "Digital learning for CQC inspection preparation",
-    "groupDescription": null,
-    "audience": "These development modules are for new managers, new providers, quality & compliance leads and others preparing for CQC inspection and those within or helping CQC regulated services recover from falling below national standards",
-    "courses": [
+      },
       {
         "code": "DLBPCI",
         "reimbursementAmount": 50,
+        "groupCategory": "Digital learning for CQC inspection preparation",
         "title": "Being prepared for CQC inspection",
         "totalLearningTime": "60 mins",
         "fundingModel": "full",
@@ -177,6 +174,7 @@
       {
         "code": "DLICR",
         "reimbursementAmount": 50,
+        "groupCategory": "Digital learning for CQC inspection preparation",
         "title": "Improving your CQC rating",
         "totalLearningTime": "60 mins",
         "fundingModel": "full",
@@ -189,6 +187,7 @@
       {
         "code": "DLDOC",
         "reimbursementAmount": 50,
+        "groupCategory": "Digital learning for CQC inspection preparation",
         "title": "Delivering outstanding care",
         "totalLearningTime": "60 mins",
         "fundingModel": "full",
@@ -197,17 +196,11 @@
         "description": null,
         "awardingOrganisation": "Skills for Care",
         "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
-      }
-    ]
-  },
-  {
-    "groupTitle": "Creating an inclusive organisation digital learning modules",
-    "groupDescription": null,
-    "audience": "These development modules are primarily for frontline workers from diverse ethnic backgrounds but may be of interest to anyone at any level who is interested in equality, diversity and inclusion.",
-    "courses": [
+      },
       {
         "code": "DLEDI",
         "reimbursementAmount": 50,
+        "groupCategory": "Creating an inclusive organisation digital learning modules",
         "title": "Module 1 – Equality, diversity and inclusion",
         "totalLearningTime": "4 hours",
         "fundingModel": "full",
@@ -220,6 +213,7 @@
       {
         "code": "DLLDCP",
         "reimbursementAmount": 50,
+        "groupCategory": "Creating an inclusive organisation digital learning modules",
         "title": "Module 2 – Leadership development and career progression",
         "totalLearningTime": "4 hours",
         "fundingModel": "full",
@@ -228,17 +222,11 @@
         "description": null,
         "awardingOrganisation": "Skills for Care",
         "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
-      }
-    ]
-  },
-  {
-    "groupTitle": "Digital learning for Care Certificate Assessors",
-    "groupDescription": null,
-    "audience": "This learning programme is for individuals who will be assessing the Care Certificate in the workplace.",
-    "courses": [
+      },
       {
         "code": "DLCCA",
         "reimbursementAmount": 100,
+        "groupCategory": "Digital learning for Care Certificate Assessors",
         "title": "Care Certificate Assessors",
         "totalLearningTime": "50 mins",
         "fundingModel": "full",
@@ -247,17 +235,11 @@
         "description": null,
         "awardingOrganisation": "Skills for Care",
         "link": "https://www.skillsforcare.org.uk/Learning-development/inducting-staff/care-certificate/Assessing-and-the-Care-Certificate.aspx"
-      }
-    ]
-  },
-  {
-    "groupTitle": "Learning programmes",
-    "groupDescription": null,
-    "audience": null,
-    "courses": [
+      },
       {
         "code": "DLP",
         "reimbursementAmount": 500,
+        "groupCategory": "Learning programmes",
         "title": "Digital Leadership Programme",
         "totalLearningTime": "4 modules",
         "fundingModel": "full",
@@ -270,6 +252,7 @@
       {
         "code": "LCIC",
         "reimbursementAmount": 500,
+        "groupCategory": "Learning programmes",
         "title": "Leading Change Improving Care",
         "totalLearningTime": "5 modules",
         "fundingModel": "full",
@@ -282,6 +265,7 @@
       {
         "code": "LTS",
         "reimbursementAmount": 500,
+        "groupCategory": "Learning programmes",
         "title": "Lead to Succeed",
         "totalLearningTime": "5 modules",
         "fundingModel": "full",
@@ -294,6 +278,7 @@
       {
         "code": "MU",
         "reimbursementAmount": 500,
+        "groupCategory": "Learning programmes",
         "title": "Moving up",
         "totalLearningTime": "4 self-learning modules and 3 live sessions",
         "fundingModel": "full",
@@ -306,6 +291,7 @@
       {
         "code": "ND",
         "reimbursementAmount": 500,
+        "groupCategory": "Learning programmes",
         "title": "New Directors",
         "totalLearningTime": "6 days",
         "fundingModel": "full",
@@ -318,6 +304,7 @@
       {
         "code": "UPM",
         "reimbursementAmount": 125,
+        "groupCategory": "Learning programmes",
         "title": "Understanding performance management",
         "totalLearningTime": "1 module",
         "fundingModel": "full",
@@ -330,6 +317,7 @@
       {
         "code": "USMS",
         "reimbursementAmount": 125,
+        "groupCategory": "Learning programmes",
         "title": "Understanding self-management skills",
         "totalLearningTime": "1 module",
         "fundingModel": "full",
@@ -342,6 +330,7 @@
       {
         "code": "UWC",
         "reimbursementAmount": 125,
+        "groupCategory": "Learning programmes",
         "title": "Understanding workplace culture",
         "totalLearningTime": "1 module",
         "fundingModel": "full",
@@ -354,6 +343,7 @@
       {
         "code": "WL",
         "reimbursementAmount": 500,
+        "groupCategory": "Learning programmes",
         "title": "Well-led",
         "totalLearningTime": "4 modules",
         "fundingModel": "full",
@@ -362,17 +352,11 @@
         "description": "Registered managers and service managers will be part of the Well-led program, consisting of 4 modules.",
         "awardingOrganisation": "Skills for Care",
         "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Well-led.pdf"
-      }
-    ]
-  },
-  {
-    "groupTitle": "Mental Health First Aid",
-    "groupDescription": null,
-    "audience": null,
-    "courses": [
+      },
       {
         "code": "MHFA",
         "reimbursementAmount": 100,
+        "groupCategory": "Mental Health First Aid",
         "title": "Mental Health First Aid",
         "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
         "fundingModel": "full",
@@ -381,17 +365,11 @@
         "description": null,
         "awardingOrganisation": "MHFA England",
         "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
-      }
-    ]
-  },
-  {
-    "groupTitle": "Positive Behavioural Support",
-    "groupDescription": null,
-    "audience": null,
-    "courses": [
+      },
       {
         "code": "PBSFS",
         "reimbursementAmount": 50,
+        "groupCategory": "Positive Behavioural Support",
         "title": "First step to foundation",
         "totalLearningTime": "40 learning hours (8 taught)",
         "fundingModel": "full",
@@ -404,6 +382,7 @@
       {
         "code": "PBSFL",
         "reimbursementAmount": 150,
+        "groupCategory": "Positive Behavioural Support",
         "title": "PBS Foundation level",
         "totalLearningTime": "120 learning hours (24 taught), excludes hours of prior levels",
         "fundingModel": "full",
@@ -416,6 +395,7 @@
       {
         "code": "PBSIL",
         "reimbursementAmount": 300,
+        "groupCategory": "Positive Behavioural Support",
         "title": "PBS Intermediate level",
         "totalLearningTime": "240 learning hours (48 taught), progressive – building on foundation",
         "fundingModel": "full",
@@ -428,6 +408,7 @@
       {
         "code": "PBSAL",
         "reimbursementAmount": 450,
+        "groupCategory": "Positive Behavioural Support",
         "title": "PBS Advanced level",
         "totalLearningTime": "360 learning hours (72 taught), progressive – building on intermediate",
         "fundingModel": "full",
@@ -441,8 +422,6 @@
   },
   {
     "groupTitle": "Qualifications",
-    "groupDescription": null,
-    "audience": null,
     "courses": [
       {
         "code": "600/9559/3",
@@ -769,7 +748,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Autism Level 2 Certificate",
+        "type": "Level 2 Certificate",
         "code": "603/4453/2",
         "reimbursementAmount": 300,
         "title": "Introduction to Autistic Spectrum Conditions",
@@ -781,7 +760,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Autism Level 2 Certificate",
+        "type": "Level 2 Certificate",
         "code": "603/5139/1",
         "reimbursementAmount": 300,
         "title": "Understanding Autism",
@@ -1885,7 +1864,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Leadership and Management",
+        "type": "Level 3  Diploma",
         "code": "603/2877/0",
         "reimbursementAmount": 1050,
         "title": "Diploma in Adult Care",
@@ -1897,7 +1876,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Diploma in Adult Care (England)",
+        "type": "Level 4 Diploma",
         "code": "601/5641/7",
         "reimbursementAmount": 1050,
         "title": "Diploma in Adult Care",
@@ -1909,7 +1888,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Diploma in Adult Care",
+        "type": "Level 4 Diploma",
         "code": "603/4986/4",
         "reimbursementAmount": 1050,
         "title": "Diploma in Adult Care",
@@ -1921,7 +1900,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Diploma in Adult Care",
+        "type": "Level 4 Diploma",
         "code": "603/2829/0",
         "reimbursementAmount": 1050,
         "title": "Diploma in Adult Care",
@@ -1933,7 +1912,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Diploma in Adult Care",
+        "type": "Level 4 Diploma",
         "code": "603/3181/1",
         "reimbursementAmount": 1050,
         "title": "Diploma in Adult Care",
@@ -1945,7 +1924,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Diploma in Adult Care",
+        "type": "Level 4 Diploma",
         "code": "603/2517/3",
         "reimbursementAmount": 1050,
         "title": "Diploma in Adult Care",
@@ -1957,7 +1936,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Diploma in Adult Care",
+        "type": "Level 4 Diploma",
         "code": "603/2614/1",
         "reimbursementAmount": 1050,
         "title": "Diploma in Adult Care",
@@ -1969,7 +1948,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Diploma in Adult Care",
+        "type": "Level 4 Diploma",
         "code": "610/2969/5",
         "reimbursementAmount": 1050,
         "title": "Diploma in Adult Care",
@@ -1981,7 +1960,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Diploma in Adult Care",
+        "type": "Level 4 Diploma",
         "code": "603/2780/7",
         "reimbursementAmount": 1050,
         "title": "Diploma in Adult Care",
@@ -1993,7 +1972,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Diploma in Adult Care",
+        "type": "Level 4 Diploma",
         "code": "603/2809/5",
         "reimbursementAmount": 1050,
         "title": "Diploma in Adult Care",
@@ -2005,7 +1984,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Diploma in Adult Care",
+        "type": "Level 4 Diploma",
         "code": "603/2901/4",
         "reimbursementAmount": 1050,
         "title": "Diploma in Adult Care",
@@ -2017,7 +1996,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Certificate in principles of leadership and management in adult care",
+        "type": "Level 4 Certificate",
         "code": "603/0974/X",
         "reimbursementAmount": 600,
         "title": "Certificate in Principles of Leadership and Management in Adult Care",
@@ -2029,7 +2008,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 4 Certificate in Principles of Leadership and Management in Adult Care",
+        "type": "Level 4 Certificate",
         "code": "603/0676/2",
         "reimbursementAmount": 600,
         "title": "Certificate in Principles of Leadership and Management in Adult Care",
@@ -2041,7 +2020,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "610/1838/7",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2053,7 +2032,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care (England)",
+        "type": "Level 5 Diploma",
         "code": "610/0977/5",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care (England)",
@@ -2065,7 +2044,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "610/1628/7",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2077,7 +2056,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "610/1880/6",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2089,7 +2068,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leading and Managing an Adult Care Service",
+        "type": "Level 5 Diploma",
         "code": "610/2987/7",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leading and Managing an Adult Care Service",
@@ -2101,7 +2080,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "610/0536/8",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2113,7 +2092,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "610/0673/7",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2125,7 +2104,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "610/2986/5",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2137,7 +2116,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "610/1580/5",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2149,7 +2128,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "610/0210/0",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2161,7 +2140,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "610/0955/6",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2173,7 +2152,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "603/3518/X",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2185,7 +2164,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "603/3462/9",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2197,7 +2176,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "603/4684/X",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2209,7 +2188,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5  Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5  Diploma",
         "code": "603/2681/5",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2221,7 +2200,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "603/3594/4",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2233,7 +2212,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "603/4136/1",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2245,7 +2224,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "603/3056/9",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2257,7 +2236,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "603/2422/3",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2269,7 +2248,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "603/3496/4",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2281,7 +2260,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "603/3534/8",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2293,7 +2272,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 5 Diploma in Leadership and Management for Adult Care",
+        "type": "Level 5 Diploma",
         "code": "603/2564/1",
         "reimbursementAmount": 1500,
         "title": "Diploma in Leadership and Management for Adult Care",
@@ -2305,7 +2284,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Learning Disability",
+        "type": "Level 5 Diploma",
         "code": "600/4041/5",
         "reimbursementAmount": 180,
         "title": "Supporting Individuals with Learning Disabilities",
@@ -2317,7 +2296,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Learning Disability",
+        "type": "Level 5 Diploma",
         "code": "603/5280/2",
         "reimbursementAmount": 300,
         "title": "Principles of Working with Individuals with Learning Disabilities",
@@ -2329,7 +2308,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Learning Disability",
+        "type": "Level 5 Diploma",
         "code": "601/7429/8",
         "reimbursementAmount": 420,
         "title": "Supporting Individuals with Learning Disabilities",
@@ -2341,7 +2320,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Learning Disability",
+        "type": "Level 5 Diploma",
         "code": "600/4037/3",
         "reimbursementAmount": 180,
         "title": "Supporting Individuals with Learning Disabilities",
@@ -2353,7 +2332,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Understanding the Safe Handling of Medicines",
+        "type": "Level 2 Certificate",
         "code": "601/6133/4",
         "reimbursementAmount": 300,
         "title": "Understanding the Safe Handling of Medicines",
@@ -2365,7 +2344,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate  Understanding the Safe Handling of Medicines",
+        "type": "Level 2 Certificate",
         "code": "601/2010/1",
         "reimbursementAmount": 300,
         "title": "Understanding the Safe Handling of Medicines",
@@ -2377,7 +2356,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Understanding the Safe Handling of Medicines",
+        "type": "Level 2 Certificate",
         "code": "501/0037/3",
         "reimbursementAmount": 300,
         "title": "Understanding the Safe Handling of Medicines",
@@ -2389,7 +2368,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Understanding the Safe Handling of Medicines",
+        "type": "Level 2 Certificate",
         "code": "600/5591/1",
         "reimbursementAmount": 300,
         "title": "Understanding the Safe Handling of Medicines",
@@ -2401,7 +2380,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Understanding the Safe Handling of Medication in Health and Social Care",
+        "type": "Level 2 Certificate",
         "code": "601/3404/5",
         "reimbursementAmount": 300,
         "title": "Understanding the Safe Handling of Medication in Health and Social Care",
@@ -2413,7 +2392,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Understanding the Safe Handling of Medication in Health and Social Care",
+        "type": "Level 2 Certificate",
         "code": "603/3217/7",
         "reimbursementAmount": 300,
         "title": "Understanding the Safe Handling of Medication in Health and Social Care",
@@ -2425,7 +2404,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Principles of Medication Handling and Administration for Care Settings",
+        "type": "Level 2 Certificate",
         "code": "603/4455/6",
         "reimbursementAmount": 300,
         "title": "Principles of Medication Handling and Administration for Care Settings",
@@ -2437,7 +2416,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Principles of Medication Administration",
+        "type": "Level 2 Certificate",
         "code": "603/4699/1",
         "reimbursementAmount": 300,
         "title": "Principles of Medication Administration",
@@ -2449,7 +2428,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Mental Capacity Act 2005",
+        "type": "Level 2 Certificate",
         "code": "601/6128/0",
         "reimbursementAmount": 60,
         "title": "Awareness of the Mental Capacity Act 2005",
@@ -2461,7 +2440,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Mental Capacity Act 2005",
+        "type": "Level 2 Certificate",
         "code": "601/3621/2",
         "reimbursementAmount": 60,
         "title": "Awareness of the Mental Capacity Act 2005",
@@ -2473,7 +2452,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Mental Capacity Act 2005",
+        "type": "Level 2 Certificate",
         "code": "601/1464/2",
         "reimbursementAmount": 60,
         "title": "Awareness of the Mental Capacity Act 2005",
@@ -2485,7 +2464,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Mental Capacity Act 2005",
+        "type": "Level 2 Certificate",
         "code": "601/7946/6",
         "reimbursementAmount": 60,
         "title": "Awareness of the Mental Capacity Act 2005",
@@ -2497,7 +2476,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Awareness of Mental Health Problems",
+        "type": "Level 2 Certificate",
         "code": "601/3438/0",
         "reimbursementAmount": 300,
         "title": "Awareness of Mental Health Problems",
@@ -2509,7 +2488,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Awareness of Mental Health Problems",
+        "type": "Level 2 Certificate",
         "code": "603/2958/0",
         "reimbursementAmount": 300,
         "title": "Awareness of Mental Health Problems",
@@ -2521,7 +2500,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Mental Health Awareness",
+        "type": "Level 2 Certificate",
         "code": "603/4694/2",
         "reimbursementAmount": 300,
         "title": "Mental Health Awareness",
@@ -2533,7 +2512,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Mental Health Awareness",
+        "type": "Level 2 Certificate",
         "code": "600/6134/0",
         "reimbursementAmount": 300,
         "title": "Mental Health Awareness",
@@ -2545,7 +2524,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Mental Health Awareness",
+        "type": "Level 2 Certificate",
         "code": "603/0156/9",
         "reimbursementAmount": 300,
         "title": "Mental Health Awareness",
@@ -2557,7 +2536,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Understanding Working in Mental Health",
+        "type": "Level 2 Certificate",
         "code": "601/6126/7",
         "reimbursementAmount": 300,
         "title": "Understanding Working in Mental Health",
@@ -2569,7 +2548,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Understanding Working in Mental Health",
+        "type": "Level 2 Certificate",
         "code": "601/5435/4",
         "reimbursementAmount": 300,
         "title": "Understanding Working in Mental Health",
@@ -2581,7 +2560,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Understanding Working with People with Mental Health Needs",
+        "type": "Level 2 Certificate",
         "code": "601/3434/3",
         "reimbursementAmount": 300,
         "title": "Understanding Working with People with Mental Health Needs",
@@ -2593,7 +2572,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Certificate Understanding Mental Health",
+        "type": "Level 3 Certificate",
         "code": "601/8968/X",
         "reimbursementAmount": 420,
         "title": "Understanding Mental Health",
@@ -2605,7 +2584,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Certificate Understanding Mental Health Care",
+        "type": "Level 3 Certificate",
         "code": "601/4647/3",
         "reimbursementAmount": 300,
         "title": "Understanding Mental Health Care",
@@ -2617,7 +2596,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Certificate Oral Care for Health and Social Care",
+        "type": "Level 2 Certificate",
         "code": "603/6251/0",
         "reimbursementAmount": 300,
         "title": "Oral Care for Health and Social Care",
@@ -2629,7 +2608,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Certificate Social Prescribing",
+        "type": "Level 3 Certificate",
         "code": "603/3269/4",
         "reimbursementAmount": 420,
         "title": "Social Prescribing",
@@ -2641,7 +2620,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Award Stroke Awareness",
+        "type": "Level 2 Award",
         "code": "600/4762/8",
         "reimbursementAmount": 60,
         "title": "Stroke Awareness",
@@ -2653,7 +2632,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 2 Award Stroke Awareness",
+        "type": "Level 2 Award",
         "code": "601/7939/9",
         "reimbursementAmount": 60,
         "title": "Stroke Awareness",
@@ -2665,7 +2644,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Certificate Stroke Care Management",
+        "type": "Level 3 Certificate",
         "code": "600/4763/X",
         "reimbursementAmount": 420,
         "title": "Stroke Care Management",
@@ -2677,7 +2656,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/5960/1",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2689,7 +2668,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "600/9554/4",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2701,7 +2680,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/0129/5",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2713,7 +2692,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/6099/8",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2725,7 +2704,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/2324/2",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2737,7 +2716,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/1636/5",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2749,7 +2728,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/4415/4",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2761,7 +2740,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/6202/8",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2773,7 +2752,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/1620/1",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2785,7 +2764,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/0619/0",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2797,7 +2776,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/5774/4",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2809,7 +2788,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/0685/2",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2821,7 +2800,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/1206/2",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2833,7 +2812,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/0281/0",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2845,7 +2824,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/1831/3",
         "reimbursementAmount": 180,
         "title": "Education and Training",
@@ -2857,7 +2836,7 @@
         "fundingModel": "split"
       },
       {
-        "type": "Level 3 Award Education and Training",
+        "type": "Level 3 Award",
         "code": "601/2758/2",
         "reimbursementAmount": 180,
         "title": "Education and Training",

@@ -447,7 +447,7 @@ addFilter('learnerMatch_V8', function (newField, matchField, type) {
     return result
 }, { renderAsHtml: true })
 
-addFilter('learnerSearch', function (search, learner) {
+addFilter('learnerSearch_v8', function (search, learner) {
     let match = false
     const formattedgivenName = removeSpacesAndLowerCase(learner.givenName);
     const formattedfamilyName = removeSpacesAndLowerCase(learner.familyName);
@@ -456,15 +456,21 @@ addFilter('learnerSearch', function (search, learner) {
     const formattedID = removeSpacesAndLowerCase(learner.id);
 
     if (formattedgivenName.includes(formattedSearch) || formattedfamilyName.includes(formattedSearch) || formattedfullName.includes(formattedSearch) || formattedID.includes(formattedSearch)) {
-        console.log(formattedgivenName)
-    console.log(formattedfamilyName)
-    console.log(formattedfullName)
-    console.log(formattedSearch)
-    console.log(formattedID)
         match = true
     }
 
     return match
 })
 
+addFilter('trainingSearch_V8', function (search, training) {
+    let match = false
+    const formattedSearch = removeSpacesAndLowerCase(search);
+    const formattedTrainingTitle = removeSpacesAndLowerCase(training.title);
+    const formattedTrainingCode = removeSpacesAndLowerCase(training.code);
 
+    if (formattedTrainingTitle.includes(formattedSearch) || formattedTrainingCode.includes(formattedSearch)) {
+        match = true
+    }
+
+    return match
+})

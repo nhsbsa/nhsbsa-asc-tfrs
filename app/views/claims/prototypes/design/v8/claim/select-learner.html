@@ -75,7 +75,7 @@
         {% set hasResults = false %}
         {% set addHeader = true %}
         {% for learner in data['learners'] %}
-        {% set match = data['learnerInput'] | learnerSearch(learner) %}
+        {% set match = data['learnerInput'] | learnerSearch_V8(learner) %}
         {% if match %}
         {% set hasResults = true %}
         {% if addHeader %}

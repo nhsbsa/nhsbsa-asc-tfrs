@@ -556,53 +556,35 @@ function loadData(req) {
   var roleTypes = 'role-types.json'
   var CPDActivities = 'cpd-activities.json'
 
-  if (req.session.data.training) {
-    console.log('training file already loaded')
-  } else {
     console.log('loading in training file')
     req.session.data['training'] = loadJSONFromFile(trainingFile, path)
     console.log('training file loaded')
-  }
 
-  if (req.session.data.claims) {
-    console.log('claims file already loaded')
-  } else {
+
     console.log('loading in claims file')
     req.session.data['claims'] = loadJSONFromFile(claimsFile, path)
     console.log('claims file loaded')
-  }
 
-  if (req.session.data.learners) {
-    console.log('learners file already loaded')
-  } else {
+
     console.log('loading in learners file')
     req.session.data['learners'] = loadJSONFromFile(learnersFile, path)
     console.log('learners file loaded')
-  }
 
-  if (req.session.data.statuses) {
-    console.log('statuses file already loaded')
-  } else {
+
     console.log('loading in statuses file')
     req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
     console.log('statuses file loaded')
-  }
 
-  if (req.session.data.roleTypes) {
-    console.log('role types file already loaded')
-  } else {
+
     console.log('loading in role types file')
     req.session.data['roleTypes'] = loadJSONFromFile(roleTypes, path)
     console.log('role types file loaded')
-  }
 
-  if (req.session.data.CPDActivities) {
-    console.log('CPDActivities file already loaded')
-  } else {
+
     console.log('loading in CPDActivities file')
     req.session.data['CPDActivities'] = loadJSONFromFile(CPDActivities, path)
     console.log('CPDActivities file loaded')
-  }
+
 
   return console.log('data updated')
 }

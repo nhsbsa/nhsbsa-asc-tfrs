@@ -49,7 +49,7 @@ Select training - new claim
                     </label>
 
                     <div id="search-hint" class="govuk-hint moj-search__hint ">
-                        You can search by name or course code
+                        You can search by title or qualification number
                     </div>
                     {% if data["training-input"] == "" %}
                     <p id="search-error" class="govuk-error-message">
@@ -75,48 +75,25 @@ Select training - new claim
     <div class="govuk-grid-column-full">
         {% if data['training-input'] %}
         <h2 class="govuk-heading-m">Search results</h2>
-        {% set lowercasedsearch = data['training-input'] | lower %}
-        {% set formattedSearch = data['training-input'] | removeSpacesAndLowerCase_V8 %}
         {% set hasResults = false %}
         {% for trainingGroup in data.training %}
         {% set addHeader = true %}
+
         {% for training in trainingGroup.courses %}
-        {% set lowercasedname = training.title | lower %}
-        {% set formattedCode = training.code | removeSpacesAndLowerCase_V8 %}
-        {% if lowercasedname == lowercasedsearch or training.code == data['training-input'] or lowercasedsearch in
-        lowercasedname or formattedSearch in formattedCode %}
+        {% set match = data['training-input'] | trainingSearch_V8(training) %}
+
+        {% if match %}
         {% set hasResults = true %}
+
         {% if addHeader %}
-        <h1 class="govuk-heading-m">{{ trainingGroup.groupTitle }}</h1>
-        <p class="govuk-body">{{ trainingGroup.groupDescription | default('') }}</p>
-        <p class="govuk-body">{{ trainingGroup.audience | default('') }}</p>
-        <table class="govuk-table">
-            <thead class="govuk-table__head">
-                <tr class="govuk-table__row">
-                    <th scope="col" class="govuk-table__header">Course code</th>
-                    <th scope="col" class="govuk-table__header">Course name</th>
-                    <th scope="col" class="govuk-table__header">Awarding organisation</th>
-                    <th scope="col" class="govuk-table__header"></th>
-                </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-                {% set addHeader = false %}
-                {% endif %}
-                <tr class="govuk-table__row">
-                    <th scope="row" class="govuk-table__header">{{ training.code }}</th>
-                    <td class="govuk-table__cell">{{ training.title }}</td>
-                    <td class="govuk-table__cell">{{ training.awardingOrganisation }}</td>
-                    <td class="govuk-table__cell">
-                        <form method="post" action="../add-training" class="govuk-!-margin-0">
-                            <input type="hidden" name="trainingSelection" value="{{ training.code }}">
-                            <input type="hidden" name="viewOnly" value='false'>
-                            <button type="submit" class="govuk-button">Add to claim</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endif %}
-                {% endfor %}
-                {% if not addHeader %}
+        {% include "../_components/select-training/select-training-header.html" %}
+        {% set addHeader = false %}
+        {% endif %}
+
+        {% include "../_components/select-training/select-training-row.html" %}
+        {% endif %}
+        {% endfor %}
+        {% if not addHeader %}
             </tbody>
         </table>
         {% endif %}
