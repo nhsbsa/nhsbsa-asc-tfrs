@@ -34,7 +34,6 @@ router.post('/verify-details-handler', function (req, res) {
   } else {
     res.redirect('account-setup/job-title')
   }
-
 });
 
 
@@ -537,9 +536,22 @@ router.post('/create-learner', function (req, res) {
     req.session.data.submitError = submitError
     res.redirect('learner/add-learner?inClaim=' + req.session.data.inClaim)
   }
+});
 
+router.post('/validate-job-title', function (req, res) {
+  delete req.session.data.emptyError
+  delete req.session.data.invalid
+  const jobTitle = req.session.data.jobTitle
 
+  var validCharactersRegex = /^[a-zA-Z0-9-]+$/;
 
+  if (jobTitle == "") {
+    res.redirect('account-setup/job-title?emptyError=true')
+  } else if (validCharactersRegex.test(jobTitle) == true) {
+    res.redirect('account-setup/declaration')
+  } else {
+    res.redirect('account-setup/job-title?invalid=true')
+  }
 });
 
 
