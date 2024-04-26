@@ -52,7 +52,7 @@
                 {% endif %}
                 <input
                     class="govuk-input {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountName != 'valid' %}govuk-input--error{% endif %}"
-                    id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="false" autocomplete="name">
+                    id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="false" autocomplete="name" value="{{ data.nameOnTheAccount | default ('') }}">
             </div>
             <div class="govuk-form-group {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.sortCode != 'valid' %}govuk-form-group--error{% endif %}">
                 <label class="govuk-label" for="sort-code">
@@ -68,7 +68,7 @@
                 {% endif %}
                 <input class="govuk-input govuk-input--width-5 govuk-input--extra-letter-spacing {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.sortCode != 'valid' %}govuk-input--error{% endif %}" id="sort-code"
                     name="sortCode" type="text" spellcheck="false" aria-describedby="sort-code-hint"
-                    inputmode="numeric">
+                    inputmode="numeric" value="{{ data.sortCode | default ('') }}">
             </div>
             <div class="govuk-form-group {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountNumber != 'valid' %}govuk-form-group--error{% endif %}">
                 <label class="govuk-label" for="account-number">
@@ -84,7 +84,7 @@
                 {% endif %}
                 <input class="govuk-input govuk-input--width-10 govuk-input--extra-letter-spacing {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountNumber != 'valid' %}govuk-input--error{% endif %}" id="account-number"
                     name="accountNumber" type="text" spellcheck="false" aria-describedby="account-number-hint"
-                    inputmode="numeric">
+                    inputmode="numeric" value="{{ data.accountNumber | default ('') }}">
             </div>
             <div class="govuk-form-group {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.buildingSociety != 'valid' %}govuk-form-group--error{% endif %}">
                 <label class="govuk-label" for="roll-number">
@@ -99,7 +99,7 @@
                 </p>
                 {% endif %}
                 <input class="govuk-input govuk-input--width-10 govuk-input--extra-letter-spacing {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.buildingSociety != 'valid' %}govuk-input--error{% endif %}" id="roll-number"
-                    name="rollNumber" type="text" spellcheck="false" aria-describedby="roll-number-hint">
+                    name="rollNumber" type="text" spellcheck="false" aria-describedby="roll-number-hint" value="{{ data.rollNumber | default ('') }}">
             </div>
             <button type="submit" class="govuk-button" data-module="govuk-button">
                 Continue
