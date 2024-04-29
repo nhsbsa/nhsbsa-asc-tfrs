@@ -7,7 +7,6 @@
     <dd class="govuk-summary-list__value">
       {% if claim.training.code | trainingTypeCheck_V9(data.training, "Courses") %}
       <p class="govuk-body">{{ claim.training.code }}</p>
-      <p class="govuk-body">{{ claim.training.groupCategory }}</p>
       <p class="govuk-body">{{ claim.training.title }}</p>
       {% elif claim.training.code | trainingTypeCheck_V9(data.training, "Qualifications") %}
       <p class="govuk-body">{{ claim.training.code }}</p>
