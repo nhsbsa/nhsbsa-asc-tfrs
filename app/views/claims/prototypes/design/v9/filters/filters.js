@@ -463,3 +463,15 @@ addFilter('bankErrorMessage_V9', function (bankErrorObject) {
 
     return errorMessages.join('');
 }, { renderAsHtml: true })
+
+addFilter('trainingTypeCheck_V9', function (trainingCode, trainingList, matchType) {
+
+    for (let trainingGroup of trainingList ) {
+        for (let training of trainingGroup.courses ) {
+            if (trainingCode == training.code) {
+                return trainingGroup.groupTitle == matchType;
+            }
+        }
+    }
+    
+    })

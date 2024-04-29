@@ -435,3 +435,17 @@ addFilter('trainingSearch_V8', function (search, training) {
 
     return match
 })
+
+
+addFilter('trainingTypeCheck_V8', function (trainingCode, trainingList, matchType) {
+
+for (let trainingGroup of trainingList ) {
+    for (let training of trainingGroup.courses ) {
+        if (trainingCode == training.code) {
+            return trainingGroup.groupTitle == matchType;
+        }
+    }
+}
+
+})
+

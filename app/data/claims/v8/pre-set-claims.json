@@ -11,6 +11,7 @@
     "training": {
       "code": "DLCCA",
       "reimbursementAmount": 100,
+      "groupCategory": "Digital learning for Care Certificate Assessors",
       "title": "Care Certificate Assessors",
       "totalLearningTime": "50 mins",
       "fundingModel": "full",
@@ -45,6 +46,7 @@
     "training": {
       "code": "DLDOC",
       "reimbursementAmount": 50,
+      "groupCategory": "Digital learning for CQC inspection preparation",
       "title": "Delivering outstanding care",
       "totalLearningTime": "60 mins",
       "fundingModel": "full",
@@ -79,6 +81,7 @@
     "training": {
       "code": "DLEDI",
       "reimbursementAmount": 50,
+      "groupCategory": "Creating an inclusive organisation digital learning modules",
       "title": "Module 1 – Equality, diversity and inclusion",
       "totalLearningTime": "4 hours",
       "fundingModel": "full",
@@ -113,6 +116,7 @@
     "training": {
       "code": "MHFA",
       "reimbursementAmount": 100,
+      "groupCategory": "Mental Health First Aid",
       "title": "Mental Health First Aid",
       "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
       "fundingModel": "full",

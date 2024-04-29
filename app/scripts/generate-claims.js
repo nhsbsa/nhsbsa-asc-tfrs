@@ -56,11 +56,11 @@ function generateTUClaims(quantity, version) {
   const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
 
   // Load JSON files
-  const learners = JSON.parse(fs.readFileSync('./app/data/' + version + '/learners.json', 'utf8'));
-  const training = JSON.parse(fs.readFileSync('./app/data/' + version + '/training.json', 'utf8'));
-  const statuses = JSON.parse(fs.readFileSync('./app/data/' + version + '/claim-item-statuses.json', 'utf8'));
+  const learners = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/learners.json', 'utf8'));
+  const training = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/training.json', 'utf8'));
+  const statuses = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/claim-item-statuses.json', 'utf8'));
 
-  const preSetClaims = JSON.parse(fs.readFileSync('./app/data/' + version + '/pre-set-claims.json', 'utf8'));
+  const preSetClaims = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/pre-set-claims.json', 'utf8'));
   data = data.concat(preSetClaims)
 
   for (let i = 1; i <= quantity; i++) {
@@ -139,10 +139,10 @@ function generateCPDClaims(quantity, version) {
   const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
 
   // Load JSON files
-  const learners = JSON.parse(fs.readFileSync('./app/data/' + version + '/learners.json', 'utf8'));
-  const activities = JSON.parse(fs.readFileSync('./app/data/' + version + '/cpd-activities.json', 'utf8'));
-  const statuses = JSON.parse(fs.readFileSync('./app/data/' + version + '/claim-item-statuses.json', 'utf8'));
-  const roleTypes = JSON.parse(fs.readFileSync('./app/data/' + version + '/role-types.json', 'utf8'));
+  const learners = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/learners.json', 'utf8'));
+  const activities = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/cpd-activities.json', 'utf8'));
+  const statuses = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/claim-item-statuses.json', 'utf8'));
+  const roleTypes = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/role-types.json', 'utf8'));
 
   const CPDEligibleRoles = roleTypes.filter(role => role.eligibility.isCPDeligible).map(role => role.rolename);
 
@@ -234,7 +234,7 @@ function generateClaims(quantity, version) {
   data = data.concat(TUClaims, CPDClaims);
 
   // Write data to learners.json
-  const jsonFilePath = './app/data/' + version + '/claims.json';
+  const jsonFilePath = './app/data/claims/' + version + '/claims.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
 
 
