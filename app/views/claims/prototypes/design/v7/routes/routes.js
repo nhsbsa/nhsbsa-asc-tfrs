@@ -4,7 +4,7 @@ const { loadJSONFromFile } = require('../../../../../../scripts/JSONfileloaders.
 const { faker } = require('@faker-js/faker');
 const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../../../../../../scripts/helpers/helpersV7.js');
 
-// v8 Prototype routes
+// v7 Prototype routes
 
 
 router.post('/first-start', function (req, res) {
@@ -424,7 +424,7 @@ router.post('/update-filters', (req, res) => {
 function loadData(req) {
     // pull in the prototype data object and see if it contains a datafile reference
     let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
-    const path = 'app/data/v8/'
+    const path = 'app/data/v7/'
   
     var learnersFile = 'learners.json'
     var trainingFile = 'training.json'
