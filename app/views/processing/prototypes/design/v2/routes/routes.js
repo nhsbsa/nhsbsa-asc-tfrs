@@ -86,6 +86,12 @@ router.get('/cancel-handler', function (req, res) {
 router.post('/add-note', function (req, res) {
   const claimID = req.session.data.id
   var notes = req.session.data.notes
+  var foundClaim = null 
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
+    }
+  }
   var newCategory = req.session.data.category
   var newNoteInput = req.session.data.noteInput
   var currentDate = new Date().toISOString();
@@ -95,7 +101,7 @@ router.post('/add-note', function (req, res) {
     "category": newCategory,
     "note": newNoteInput
 };
-  notes.push(newNote);
+foundClaim.notes.push(newNote);
   res.redirect('process-claim/claim' + '?id=' + claimID + "&noteAddedSuccess")
 });
 
