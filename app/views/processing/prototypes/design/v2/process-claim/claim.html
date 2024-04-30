@@ -75,6 +75,70 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-summary-card">
+            <!-- <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">
+                Claim information
+            </h2>
+            </div> -->
+            <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Training
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{claim.training.title}}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                    Provider
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{claim.training.awardingOrganisation}}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Maximum reimbursable amount
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        £50
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Learner
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{claim.training.title}}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Employer
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        Oaktree Care Home Ltd
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Training date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ claim.startDate | govukDate("truncate") }} to {{ claim.completionDate | govukDate("truncate") }}
+                    </dd>
+                </div>
+            </dl>
+            </div>
+        </div>
+        </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
         {% if claim.status == "submitted" %}
         <h2 class="govuk-heading-m">Check evidence</h2>
         <ul class="govuk-task-list">
