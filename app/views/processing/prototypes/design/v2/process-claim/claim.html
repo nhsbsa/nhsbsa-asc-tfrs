@@ -20,6 +20,61 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+        <dl class="govuk-summary-list govuk-summary-list--no-border">
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Training
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{claim.training.title}}
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Provider
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{claim.training.awardingOrganisation}}
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Maximum reimbursable amount
+            </dt>
+            <dd class="govuk-summary-list__value">
+                £{{claim.training.reimbursementAmount}}
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Learner
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{claim.learner.givenName}} {{claim.learner.familyName}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Employer
+                </dt>
+                <dd class="govuk-summary-list__value">
+                Oaktree Care Home Ltd
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Training date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ claim.startDate | govukDate("truncate") }} to {{ claim.completionDate | govukDate("truncate") }}
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
         {% if claim.status == "submitted" %}
         <h2 class="govuk-heading-m">Check evidence</h2>
         <ul class="govuk-task-list">
@@ -45,9 +100,18 @@
             </li>
         </ul>
 
-        <form method="post" action="../claim-process-handler" class="govuk-!-margin-0">
-            <button class="govuk-button govuk-button--primary" data-module="govuk-button" type="submit">Continue</button>
-        </form>
+        <div class="govuk-button-group">
+            <form action="../claim-process-handler" method="post" novalidate>
+              <button type="submit" class="govuk-button" data-module="govuk-button">
+                Complete claim
+              </button>
+            </form>
+            <form method="post" novalidate>
+              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Save and exit
+              </button>
+            </form>
+          </div>
 
         {% endif %}
     </div>
