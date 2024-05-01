@@ -68,7 +68,15 @@
     },
     "reimbursementAmount": null,
     "completionDate": "2024-02-05T20:22:11.308Z",
-    "costDate": "2023-08-08T07:55:32.615Z"
+    "costDate": "2023-08-08T07:55:32.615Z",
+    "notes": [
+      {
+      "author": "System-generated",
+      "date": "2024-02-11T22:56:10.547Z",
+      "category": "System",
+      "note": "Claim was submitted."
+    }
+  ]
   },
   {
     "claimID": "AB1-C12D-3XF7-C",
@@ -139,9 +147,16 @@
     },
     "reimbursementAmount": null,
     "completionDate": "2024-02-05T20:22:11.308Z",
-    "costDate": "2023-08-08T07:55:32.615Z"
+    "costDate": "2023-08-08T07:55:32.615Z",
+    "notes": [
+      {
+      "author": "System-generated",
+      "date": "2024-02-11T22:56:10.547Z",
+      "category": "System",
+      "note": "Claim was submitted."
+    }
+  ]
   },
-
   {
     "claimID": "Z8S-F1J6-4GH7-C",
     "type": "TU",
@@ -168,7 +183,7 @@
     "createdDate": "2023-11-30T13:09:57.600Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-11-25T12:14:45.342Z",
-    "approvedDate": "2024-02-09T01:58:43.631Z",
+    "approvedDate": "2024-02-09T14:52:43.631Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice002.pdf"],
@@ -211,7 +226,27 @@
     },
     "reimbursementAmount": null,
     "completionDate": "2023-11-16T01:18:28.980Z",
-    "costDate": "2023-10-04T12:09:57.600Z"
+    "costDate": "2023-10-04T12:09:57.600Z",
+    "notes": [
+      {
+        "author": "System-generated",
+        "date": "2023-11-25T12:14:45.342Z",
+        "category": "System",
+        "note": "Claim was submitted."
+      }, 
+      {
+        "author": "Donald Marvin",
+        "date": "2024-02-05T08:58:43.631Z",
+        "category": "General",
+        "note": "Had to go check with my manager the exact amount to reimburse."
+      },
+      {
+        "author": "System-generated",
+        "date": "2024-02-09T10:12:46.631Z",
+        "category": "System",
+        "note": "Claim was approved."
+      }
+  ]
   },
   {
     "claimID": "Z8S-F1J6-9VGH-C",
@@ -282,6 +317,32 @@
     },
     "reimbursementAmount": null,
     "completionDate": "2023-11-03T05:51:56.177Z",
-    "costDate": "2022-09-19T13:52:37.929Z"
+    "costDate": "2022-09-19T13:52:37.929Z",
+    "notes": [
+      {
+        "author": "System-generated",
+        "date": "2023-11-25T13:13:47.582Z",
+        "category": "System",
+        "note": "Claim was submitted."
+      }, 
+      {
+        "author": "Donald Marvin",
+        "date": "2024-02-05T17:53:43.631Z",
+        "category": "General",
+        "note": "The evidence for payment I have flagged as potentially fraud to my manager."
+      },
+      {
+        "author": "Donald Marvin",
+        "date": "2024-02-10T11:28:48.631Z",
+        "category": "Fraud",
+        "note": "Escalated for fraud."
+      },
+      {
+        "author": "System-generated",
+        "date": "2024-06-05T18:04:04.173Z",
+        "category": "System",
+        "note": "Claim was rejected."
+      }
+  ]
   }
 ]

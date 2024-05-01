@@ -71,8 +71,8 @@
                 </div>
             </div>
         </div>
-        {% if data['notes'].length > 0 %}     
-            {% for note in data['notes']| dateSort_V2 %}     
+        {% if claim.notes.length > 0 %}     
+            {% for note in claim.notes| dateSort_V2 %}     
                 {% include "../_components/note.html" %}
             {% endfor %}
         {% else %}  
