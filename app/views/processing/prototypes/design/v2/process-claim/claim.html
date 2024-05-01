@@ -1,3 +1,5 @@
+5
+
 {% extends "../layouts/processing-main.html" %}
 
 {% set claim = data.id | findClaim_V8(data.claims) %}
@@ -15,106 +17,6 @@
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Process a claim</span>
         <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | processorstatusTag_V2 }}</h1>
-    </div>
-</div>
-
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-        <div class="govuk-summary-card">
-            <div class="govuk-summary-card__title-wrapper">
-            <h2 class="govuk-summary-card__title">
-                Organisation overview
-            </h2>
-            </div>
-            <div class="govuk-summary-card__content">
-            <dl class="govuk-summary-list">
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key" style="width:  50%;">
-                        Employer
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        Oaktree Care Home Ltd
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key" style="width:  50%;">
-                        ASC-WDS ID
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        09787w487t8
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key" style="width:  50%;">
-                        Email
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        oaktreecarehome@email.com
-                    </dd>
-                </div>
-            </dl>
-            </div>
-        </div>
-
-        <div class="govuk-summary-card">
-            <div class="govuk-summary-card__title-wrapper">
-            <h2 class="govuk-summary-card__title">
-                Claim information
-            </h2>
-            </div>
-            <div class="govuk-summary-card__content">
-            <dl class="govuk-summary-list">
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key" style="width:  50%;">
-                        Learner
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{claim.learner.givenName}} {{claim.learner.familyName}}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key" style="width: 50%;">
-                        Training
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{claim.training.title}}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key" style="width:  50%;">
-                    Provider
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{claim.training.awardingOrganisation}}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key" style="width:  50%;">
-                        Maximum reimbursable amount
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        £50
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key" style="width:  50%;">
-                        Training start date
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{ claim.startDate | govukDate }}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key" style="width:  50%;">
-                        Training end date
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                         {{ claim.completionDate | govukDate }}
-                    </dd>
-                </div>
-            </dl>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -159,13 +61,130 @@
           </div>
 
         {% endif %}
+    
+        <!-- <div class="govuk-summary-card"> -->
+            <!-- <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">
+                Organisation overview
+            </h2>
+            </div> -->
+            <!-- <div class="govuk-summary-card__content"> -->
+            <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" style="margin-bottom: 40px;">
+
+            <h2 class="govuk-heading-m">Organisation overview</h2>
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Organisation
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        Oaktree Care Home Ltd
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        ASC-WDS ID
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        09787w487t8
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Submitter
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        Steve Jobs
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Submitter's email
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        steve.jobs@apple.com
+                    </dd>
+                </div>
+            </dl>
+            <!-- </div> -->
+        <!-- </div> -->
+
+        <!-- <div class="govuk-summary-card"> -->
+            <!-- <div class="govuk-summary-card__title-wrapper"> -->
+            <!-- <h2 class="govuk-summary-card__title">
+                Claim information
+            </h2> -->
+            <!-- </div> -->
+            <!-- <div class="govuk-summary-card__content"> -->
+            <h2 class="govuk-heading-m">Claim overview</h2>
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Training
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{claim.training.title}}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                    Provider
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{claim.training.awardingOrganisation}}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Learner
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{claim.learner.givenName}} {{claim.learner.familyName}}
+                    </dd>
+                </div>
+                <!-- <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Start date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ claim.startDate | govukDate }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Completion date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                         {{ claim.completionDate | govukDate }}
+                    </dd>
+                </div> -->
+                <!-- <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Payment date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                         {{ claim.costDate | govukDate }}
+                    </dd>
+                </div> -->
+            </dl>
+            <!-- </div> -->
+        <!-- </div> -->
+    
     </div>
-</div>
+<!-- </div> -->
 
-
-<div class="govuk-grid-row">
+<!-- <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" style="margin-bottom: 40px;">
+
+    </div>
+</div> -->
+
+
+
+
+<!-- <div class="govuk-grid-row"> -->
+    <div class="govuk-grid-column-one-third">
+        <!-- <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" style="margin-bottom: 40px;"> -->
         <div class="moj-page-header-actions">
             <div class="moj-page-header-actions__title" >
                 <h2 class="govuk-heading-m">Claim notes</h2>
@@ -180,7 +199,8 @@
                 </div>
             </div>
         </div>
-        {% if claim.notes.length > 0 %}     
+        {% if claim.notes.length > 0 %}    
+        <!-- <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" style="margin-bottom: 40px;">  -->
             {% for note in claim.notes| dateSort_V2 %}     
                 {% include "../_components/note.html" %}
             {% endfor %}
