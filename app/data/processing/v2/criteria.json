@@ -1,0 +1,49 @@
+[
+    {
+        "type": "payment",
+        "quantity": 4,
+        "criteriaList": [
+            {
+                "no": "0",
+                "id": "trainingName",
+                "question": "Does the title of the training match?"
+            },
+            {
+                "no": "1",
+                "id": "awardingOrganisation",
+                "question": "Does the awarding organisation match?"
+            },
+            {
+                "no": "2",
+                "id": "paymentAmount",
+                "question": "Does the evidence show how much was paid?"
+            },
+            {
+                "no": "3",
+                "id": "paymentDate",
+                "question": "Does the payment date match?"
+            }
+        ]
+    },
+    {
+        "type": "completion",
+        "quantity": 3,
+        "criteriaList": [
+            {
+                "no": "0",
+                "id": "completionDate",
+                "question": "Does the completion date match?"
+            },
+            {
+                "no": "1",
+                "id": "learner",
+                "question": "Does the learner match?"
+            },
+            {
+                "no": "2",
+                "id": "awardingOrganisation",
+                "question": "Does the awarding organisation match?"
+            }
+        ]
+    }
+]

@@ -1,20 +1,21 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% set claim = data.id | findClaim_V8(data.claims) %}
+{% set criteriaList = data.type | returnCriteria_V2(data.criteria) %}
 
 {% block pageTitle %}
 {{ ["Review evidence claim: ", claim.claimID, " - process a claim"] | join }}
 {% endblock %}
 
 {% block beforeContent %}
-<a href="{{ data.criteria | evidenceBackLink_V2(data.type)}}" class="govuk-back-link">Back</a>
+<a href="claim" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <span class="govuk-caption-l">Review evidence of {{data.type}}</span>
-        <h1 class="govuk-heading-l">{{ data.criteria | criteriaQuestions_V2(data.type, claim, "true") }}</h1>
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">Review evidence of {{data.type}}</h1>
     </div>
 </div>
 
@@ -22,82 +23,63 @@
     <div class="govuk-grid-column-two-thirds">
         <p class="govuk-body">Review the evidence of {{data.type}} provided for this claim.</p>
         <h3 class="govuk-heading-s">Evidence of {{data.type}}</h3>
-            <dl class="govuk-summary-list">
-                {% if data.type == "payment" %}
-                {% for evidence in claim.evidenceOfPayment %}
-                {% include "../_components/file-section.html" %}
-                {% endfor %}
-                {% elif data.type == "completion" %}
-                {% set evidence = claim.evidenceOfCompletion %}
-                {% include "../_components/file-section.html" %}
-                {% endif %}
-            </dl>
-            <form action="../evidence-check-handler" method="post" novalidate>
-                <div class="govuk-form-group">
-                    <fieldset class="govuk-fieldset">
-                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                            {{ data.criteria | criteriaQuestions_V2(data.type, claim, "false") }}
-                        </legend>
-                        <div class="govuk-radios" data-module="govuk-radios">
-                            <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="evidenceCheck" name="evidenceCheck" type="radio"
-                                    value="yes"
-                                    data-aria-controls="{% if data.criteria == '3' and data.type == 'payment' %}conditional-reimbursementAmount{% endif %}">
-                                <label class="govuk-label govuk-radios__label" for="evidenceCheck">
-                                    Yes
-                                </label>
-                                {% if data.criteria == "3" and data.type == "payment" %}
-                                <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
-                                    id="conditional-reimbursementAmount">
-                                    <div class="govuk-form-group govuk-character-count"
-                                        data-module="govuk-character-count" data-maxlength="200">
-                                        <label class="govuk-label" for="note">
-                                            How much was paid?
-                                        </label>
-                                        <div id="note-hint" class="govuk-hint">
-                                            Add the amount that was paid for this training. If the evidence shows
-                                            payment for multiple learners add the amount paid for a single learner.
-                                        </div>
-                                        <div class="govuk-input__wrapper">
-                                            <div class="govuk-input__prefix" aria-hidden="true">£</div>
-                                            <input class="govuk-input govuk-input--width-5" id="costPerLearner"
-                                                name="costPerLearner" type="text" spellcheck="false">
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endif %}
-                            </div>
-                            <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="evidenceCheck-2" name="evidenceCheck"
-                                    type="radio" value="no" data-aria-controls="conditional-evidenceCheck">
-                                <label class="govuk-label govuk-radios__label" for="evidenceCheck-2">
-                                    No
-                                </label>
-                            </div>
-                            <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
-                                id="conditional-evidenceCheck">
-                                <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count"
-                                    data-maxlength="200">
-                                    <label class="govuk-label" for="note">
-                                        Explanation
-                                    </label>
-                                    <div id="note-hint" class="govuk-hint">
-                                        Add explanation as to why the evidence has not met this criteria.
-                                    </div>
-                                    <textarea class="govuk-textarea govuk-js-character-count" id="note" name="note"
-                                        rows="5" aria-describedby="note-info note"></textarea>
-                                    <div id="note-info" class="govuk-hint govuk-character-count__message">
-                                        You can enter up to 200 characters
-                                    </div>
-                                </div>
-                            </div>
+        <dl class="govuk-summary-list">
+            {% if data.type == "payment" %}
+            {% for evidence in claim.evidenceOfPayment %}
+            {% include "../_components/file-section.html" %}
+            {% endfor %}
+            {% elif data.type == "completion" %}
+            {% set evidence = claim.evidenceOfCompletion %}
+            {% include "../_components/file-section.html" %}
+            {% endif %}
+        </dl>
+        <form action="../evidence-check-handler" method="post" novalidate>
+
+            {% for item in criteriaList %}
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend">
+                        {{ item.question }}
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="criteria{{item.id}}" name="criteria{{item.id}}"
+                                type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="criteria{{item.id}}">
+                                Yes
+                            </label>
                         </div>
-                    </fieldset>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="criteria{{item.id}}-2" name="criteria{{item.id}}"
+                                type="radio" value="no">
+                            <label class="govuk-label govuk-radios__label" for="criteria{{item.id}}-2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            {% endfor %}
+            <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count"
+                data-maxlength="200">
+                <h1 class="govuk-label-wrapper">
+                    <label class="govuk-label" for="notes">
+                        Additional notes for the submitter? (optional)
+                    </label>
+                </h1>
+                <div id="with-hint-hint" class="govuk-hint">
+                    These notes will be added to the system generated note that is sent to the submitter.
                 </div>
-                <button type="submit" class="govuk-button" data-module="govuk-button">
-                    Continue
-                </button>
-            </form>
+                <textarea class="govuk-textarea govuk-js-character-count" id="notes" name="notes" rows="5"
+                    aria-describedby="with-hint-info with-hint-hint"></textarea>
+                <div id="with-hint-info" class="govuk-hint govuk-character-count__message">
+                    You can enter up to 200 characters
+                </div>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
     </div>
     <div class="govuk-grid-column-one-half">
     </div>

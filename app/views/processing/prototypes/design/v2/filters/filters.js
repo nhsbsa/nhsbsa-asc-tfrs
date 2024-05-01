@@ -166,3 +166,12 @@ addFilter('rejectionNote_V2', function (claim) {
     return rejectionNote
 
 }, { renderAsHtml: true })
+
+
+addFilter('returnCriteria_V2', function (type, criteria) {
+    for (const group of criteria) {
+        if (group.type == type) {
+            return group.criteriaList
+        }
+    }
+});

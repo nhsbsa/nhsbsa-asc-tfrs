@@ -31,6 +31,10 @@
     "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
     "evidenceOfPaymentreview": {
       "pass": null,
+      "criteria0": {
+        "result": null,
+        "rejectionNote": null
+      },
       "criteria1": {
         "result": null,
         "note": null
@@ -40,26 +44,24 @@
         "note": null
       },
       "criteria3": {
-        "result": null,
-        "note": null
-      },
-      "criteria4": {
         "result": null,
         "note": null
       }
     },
+    "paymentNote": null,
+    "completionNote": null,
     "evidenceOfCompletion": "certificate.pdf",
     "evidenceOfCompletionreview": {
       "pass": null,
+      "criteria0": {
+        "result": null,
+        "note": null
+      },
       "criteria1": {
         "result": null,
         "note": null
       },
       "criteria2": {
-        "result": null,
-        "note": null
-      },
-      "criteria3": {
         "result": null,
         "note": null
       }
@@ -100,6 +102,10 @@
     "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
     "evidenceOfPaymentreview": {
       "pass": null,
+      "criteria0": {
+        "result": null,
+        "note": null
+      },
       "criteria1": {
         "result": null,
         "note": null
@@ -109,26 +115,24 @@
         "note": null
       },
       "criteria3": {
-        "result": null,
-        "note": null
-      },
-      "criteria4": {
         "result": null,
         "note": null
       }
     },
+    "paymentNote": null,
+    "completionNote": null,
     "evidenceOfCompletion": "certificate.pdf",
     "evidenceOfCompletionreview": {
       "pass": null,
+      "criteria0": {
+        "result": null,
+        "note": null
+      },
       "criteria1": {
         "result": null,
         "note": null
       },
       "criteria2": {
-        "result": null,
-        "note": null
-      },
-      "criteria3": {
         "result": null,
         "note": null
       }
@@ -169,34 +173,43 @@
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice002.pdf"],
     "evidenceOfPaymentreview": {
-      "complete": false,
-      "criteria-1": false,
-      "criteria-2": false,
-      "criteria-3": false,
-      "criteria-4": false,
-      "criteria-5": false,
-      "criteria-6": false,
-      "criteria-7": false,
-      "criteria-8": false,
-      "criteria-9": false,
-      "criteria-10": false
-
+      "pass": null,
+      "criteria0": {
+        "result": null,
+        "note": null
+      },
+      "criteria1": {
+        "result": null,
+        "note": null
+      },
+      "criteria2": {
+        "result": null,
+        "note": null
+      },
+      "criteria3": {
+        "result": null,
+        "note": null
+      }
     },
+    "paymentNote": null,
+    "completionNote": null,
     "evidenceOfCompletion": "certficate002.pdf",
     "evidenceOfCompletionreview": {
-      "complete": false,
-      "criteria-1": false,
-      "criteria-2": false,
-      "criteria-3": false,
-      "criteria-4": false,
-      "criteria-5": false,
-      "criteria-6": false,
-      "criteria-7": false,
-      "criteria-8": false,
-      "criteria-9": false,
-      "criteria-10": false
-
+      "pass": null,
+      "criteria0": {
+        "result": null,
+        "note": null
+      },
+      "criteria1": {
+        "result": null,
+        "note": null
+      },
+      "criteria2": {
+        "result": null,
+        "note": null
+      }
     },
+    "reimbursementAmount": null,
     "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2023-10-04T12:09:57.600Z"
   },
@@ -231,34 +244,43 @@
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": ["invoice007.pdf"],
     "evidenceOfPaymentreview": {
-      "complete": false,
-      "criteria-1": false,
-      "criteria-2": false,
-      "criteria-3": false,
-      "criteria-4": false,
-      "criteria-5": false,
-      "criteria-6": false,
-      "criteria-7": false,
-      "criteria-8": false,
-      "criteria-9": false,
-      "criteria-10": false
-
+      "pass": null,
+      "criteria0": {
+        "result": null,
+        "note": null
+      },
+      "criteria1": {
+        "result": null,
+        "note": null
+      },
+      "criteria2": {
+        "result": null,
+        "note": null
+      },
+      "criteria3": {
+        "result": null,
+        "note": null
+      }
     },
+    "paymentNote": null,
+    "completionNote": null,
     "evidenceOfCompletion": "certficate007.pdf",
     "evidenceOfCompletionreview": {
-      "complete": false,
-      "criteria-1": false,
-      "criteria-2": false,
-      "criteria-3": false,
-      "criteria-4": false,
-      "criteria-5": false,
-      "criteria-6": false,
-      "criteria-7": false,
-      "criteria-8": false,
-      "criteria-9": false,
-      "criteria-10": false
-
+      "pass": null,
+      "criteria0": {
+        "result": null,
+        "note": null
+      },
+      "criteria1": {
+        "result": null,
+        "note": null
+      },
+      "criteria2": {
+        "result": null,
+        "note": null
+      }
     },
+    "reimbursementAmount": null,
     "completionDate": "2023-11-03T05:51:56.177Z",
     "costDate": "2022-09-19T13:52:37.929Z"
   }

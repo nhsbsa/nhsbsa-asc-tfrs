@@ -15,6 +15,7 @@ function loadData(req) {
     var claimsFile = 'processing-claims.json'
     var statusFile = 'claim-item-statuses.json'
     var notesFile = 'processing-notes.json'
+    var criteria = 'criteria.json'
 
     console.log('loading in claims file')
     req.session.data['claims'] = loadJSONFromFile(claimsFile, path)
@@ -24,6 +25,11 @@ function loadData(req) {
     req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
     console.log('statuses file loaded')
 
+    console.log('loading in crtieria file')
+    req.session.data['criteria'] = loadJSONFromFile(criteria, path)
+    console.log(req.session.data['criteria'])
+    console.log('crtieria file loaded')
+
     console.log('loading in notes file')
     req.session.data['notes'] = [];
     console.log('notes file loaded')
@@ -31,35 +37,25 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(claim) {
+function updateClaim(claim, results) {
 
-    if (
-        claim.evidenceOfPaymentreview.criteria1.result != null &&
-        claim.evidenceOfPaymentreview.criteria2.result != null &&
-        claim.evidenceOfPaymentreview.criteria3.result != null &&
-        claim.evidenceOfPaymentreview.criteria4.result != null
-    ) {
-        if (claim.evidenceOfPaymentreview.criteria1.result &&
-            claim.evidenceOfPaymentreview.criteria2.result &&
-            claim.evidenceOfPaymentreview.criteria3.result &&
-            claim.evidenceOfPaymentreview.criteria4.result) {
-            claim.evidenceOfPaymentreview.pass = true
-        } else {
-            claim.evidenceOfPaymentreview.pass = false
+    if (results.type == "payment") {
+        claim.evidenceOfPaymentreview.pass = true
+        claim.paymentNote = results.notes
+        for (let i = 0; i < (results.quantity-1); i++) {
+            claim.evidenceOfPaymentreview["criteria"+i].result = result["criteria"+i]
+            if (!(result["criteria"+i])) {
+                claim.evidenceOfPaymentreview.pass = false
+            }
         }
-    } 
-    
-    if (
-        claim.evidenceOfCompletionreview.criteria1.result != null &&
-        claim.evidenceOfCompletionreview.criteria2.result != null &&
-        claim.evidenceOfCompletionreview.criteria3.result != null
-    ) {
-        if (claim.evidenceOfCompletionreview.criteria1.result &&
-            claim.evidenceOfCompletionreview.criteria2.result &&
-            claim.evidenceOfCompletionreview.criteria3.result) {
-            claim.evidenceOfCompletionreview.pass = true
-        } else {
-            claim.evidenceOfCompletionreview.pass = false
+    } else if (results.type == "completion") {
+        claim.evidenceOfCompletionreview.pass = true
+        claim.completionNote = results.notes
+        for (let i = 0; i < (results.quantity-1); i++) {
+            claim.evidenceOfCompletionreview["criteria"+i].result = result["criteria"+i]
+            if (!(result["criteria"+i])) {
+                claim.evidenceOfCompletionreview.pass = false
+            }
         }
     }
 }
@@ -73,6 +69,38 @@ function formatDate(isoDate) {
     return `${day} ${month} ${year}`;
 }
 
+function checkEvidenceAnswers(data) {
+    let results = {}
+    let criteriaGroup = null
+
+    for (const group of data.criteria) {
+        if (group.type == data.type) {
+            criteriaGroup = group
+        }
+    }
+
+    results.type = data.type
+    results.quantity = criteriaGroup.quantity
+    results.evidenceCheckValid = true
+    results.notes = data.notes
+
+    for (let i = 0; i < (criteriaGroup.quantity-1); i++) {
+        if (data['criteria'+i]== "") {
+            results['criteria'+i] = "invalid"
+            results.evidenceCheckValid = false
+        } else if (data['criteria'+i]== "yes") {
+            results['criteria'+i] = true
+        } else if (data['criteria'+i]== "no") {
+            results['criteria'+i] = false
+        }
+    }
+
+    return results
+
+}
 
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate }
+
+
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkEvidenceAnswers }

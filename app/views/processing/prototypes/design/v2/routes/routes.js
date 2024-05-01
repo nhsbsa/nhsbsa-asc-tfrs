@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim } = require('../helpers/helpers.js');
+const { loadData, updateClaim, checkEvidenceAnswers } = require('../helpers/helpers.js');
 
 // v1 Prototype routes
 
@@ -100,73 +100,27 @@ router.post('/add-note', function (req, res) {
 });
 
 router.post('/evidence-check-handler', function (req, res) {
-  const evidenceCheck = req.session.data.evidenceCheck
   const criteria = req.session.data.criteria
   const type = req.session.data.type
 
   delete req.session.data.submitError;
 
+  const results = checkEvidenceAnswers(req.session.data)
+
   claimID = req.session.data.id
 
-  if (evidenceCheck != null) {
+  if (results.evidenceCheckValid) {
     for (const claim of req.session.data.claims) {
       if (claim.claimID == claimID) {
-        if (evidenceCheck == "yes") {
-          if (type == "payment") {
-            if (criteria == "3") {
-              claim.reimbursementAmount = req.session.data.costPerLearner
-            }
-            claim.evidenceOfPaymentreview["criteria" + criteria].result = true
-          } else if (type == "completion") {
-            claim.evidenceOfCompletionreview["criteria" + criteria].result = true
-          }
-        } else if (evidenceCheck == "no") {
-          if (type == "payment") {
-            claim.evidenceOfPaymentreview["criteria" + criteria].result = false
-            claim.evidenceOfPaymentreview["criteria" + criteria].note = req.session.data.note
-          } else if (type == "completion") {
-            claim.evidenceOfCompletionreview["criteria" + criteria].result = false
-            claim.evidenceOfCompletionreview["criteria" + criteria].note = req.session.data.note
-          }
-        }
-        updateClaim(claim)
-        if ((claim.evidenceOfPaymentreview.pass != null && type == "payment") || (claim.evidenceOfCompletionreview.pass != null && type == "completion")) {
-          delete req.session.data.criteria;
-          delete req.session.data.evidenceCheck;
-          delete req.session.data.costPerLearner;
-          res.redirect('process-claim/check-evidence-answers')
-        } else {
-          delete req.session.data.evidenceCheck;
-          delete req.session.data.costPerLearner;
-          const nextCriteria = String(Number(criteria) + 1)
-          res.redirect('process-claim/review-evidence?type=' + type + '&criteria=' + nextCriteria)
-        }
+        updateClaim(claim, results)
+        res.redirect('process-claim/claim')
       }
     }
   } else {
-    res.redirect('process-claim/review-evidence?type=' + type + '&criteria=' + criteria + '&submitError=true')
+    req.session.data.submitError = results
+    res.redirect('process-claim/review-evidence?type=' + type)
   }
 });
-
-
-router.get('/evidence-check-start-handler', function (req, res) {
-  const type = req.session.data.type
-  claimID = req.session.data.id
-
-  for (const claim of req.session.data.claims) {
-    if (claim.claimID == claimID) {
-      if ((claim.evidenceOfPaymentreview.pass != null && type == "payment") || (claim.evidenceOfCompletionreview.pass != null && type == "completion")) {
-        delete req.session.data.criteria;
-        delete req.session.data.evidenceCheck;
-        res.redirect('process-claim/check-evidence-answers')
-      } else {
-        delete req.session.data.evidenceCheck;
-        res.redirect('process-claim/review-evidence?type=' + type + '&criteria=1')
-      }
-    }
-  }
-});
-
 
 router.post('/claim-process-handler', function (req, res) {
   claimID = req.session.data.id
