@@ -38,7 +38,7 @@
                 </div>
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key" style="width:  50%;">
-                        Number
+                        ASC-WDS ID
                     </dt>
                     <dd class="govuk-summary-list__value">
                         09787w487t8
@@ -49,7 +49,7 @@
                         Email
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        oaktreecarehome@testemail.com
+                        oaktreecarehome@email.com
                     </dd>
                 </div>
             </dl>
@@ -101,7 +101,7 @@
                         Start date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ claim.startDate | govukDate("truncate") }}
+                        {{ claim.startDate | govukDate }}
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -109,7 +109,7 @@
                         End date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                         {{ claim.completionDate | govukDate("truncate") }}
+                         {{ claim.completionDate | govukDate }}
                     </dd>
                 </div>
             </dl>
