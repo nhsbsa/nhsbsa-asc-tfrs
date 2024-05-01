@@ -20,103 +20,16 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <dl class="govuk-summary-list govuk-summary-list--no-border">
-            <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-                Training
-            </dt>
-            <dd class="govuk-summary-list__value">
-                {{claim.training.title}}
-            </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-                Provider
-            </dt>
-            <dd class="govuk-summary-list__value">
-                {{claim.training.awardingOrganisation}}
-            </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-                Maximum reimbursable amount
-            </dt>
-            <dd class="govuk-summary-list__value">
-                £{{claim.training.reimbursementAmount}}
-            </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                Learner
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    {{claim.learner.givenName}} {{claim.learner.familyName}}
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                Employer
-                </dt>
-                <dd class="govuk-summary-list__value">
-                Oaktree Care Home Ltd
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                Training date
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    {{ claim.startDate | govukDate("truncate") }} to {{ claim.completionDate | govukDate("truncate") }}
-                </dd>
-            </div>
-        </dl>
-    </div>
-</div>
-
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
         <div class="govuk-summary-card">
-            <!-- <div class="govuk-summary-card__title-wrapper">
+            <div class="govuk-summary-card__title-wrapper">
             <h2 class="govuk-summary-card__title">
-                Claim information
+                Organisation overview
             </h2>
-            </div> -->
+            </div>
             <div class="govuk-summary-card__content">
             <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Training
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{claim.training.title}}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                    Provider
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{claim.training.awardingOrganisation}}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Maximum reimbursable amount
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        £50
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Learner
-                    </dt>
-                    <dd class="govuk-summary-list__value">
-                        {{claim.training.title}}
-                    </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
+                    <dt class="govuk-summary-list__key" style="width:  50%;">
                         Employer
                     </dt>
                     <dd class="govuk-summary-list__value">
@@ -124,17 +37,85 @@
                     </dd>
                 </div>
                 <div class="govuk-summary-list__row">
-                    <dt class="govuk-summary-list__key">
-                        Training date
+                    <dt class="govuk-summary-list__key" style="width:  50%;">
+                        Number
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{ claim.startDate | govukDate("truncate") }} to {{ claim.completionDate | govukDate("truncate") }}
+                        09787w487t8
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key" style="width:  50%;">
+                        Email
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        oaktreecarehome@testemail.com
                     </dd>
                 </div>
             </dl>
             </div>
         </div>
+
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">
+                Claim information
+            </h2>
+            </div>
+            <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key" style="width:  50%;">
+                        Learner
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{claim.learner.givenName}} {{claim.learner.familyName}}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key" style="width: 50%;">
+                        Training
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{claim.training.title}}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key" style="width:  50%;">
+                    Provider
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{claim.training.awardingOrganisation}}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key" style="width:  50%;">
+                        Maximum reimbursable amount
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        £50
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key" style="width:  50%;">
+                        Start date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{ claim.startDate | govukDate("truncate") }}
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key" style="width:  50%;">
+                        End date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                         {{ claim.completionDate | govukDate("truncate") }}
+                    </dd>
+                </div>
+            </dl>
+            </div>
         </div>
+    </div>
 </div>
 
 <div class="govuk-grid-row">
