@@ -135,3 +135,19 @@ addFilter('reimbursement_V2', function (claim) {
     }
 
 });
+
+addFilter('rejectionNote_V2', function (claim) {
+    let rejectionNote = "<div class='govuk-inset-text'><h3 class='govuk-heading-s'>Claim rejected</h3>"
+    if (!claim.evidenceOfPaymentreview.pass) {
+        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>"
+        rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfPaymentreview.note + "</p>"
+    }
+    if (!claim.evidenceOfCompletionreview.pass) {
+        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>"
+        rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfCompletionreview.note + "</p>"
+    }
+
+    rejectionNote = rejectionNote + "</div>"
+
+    return rejectionNote
+}, { renderAsHtml: true });
