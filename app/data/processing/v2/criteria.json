@@ -6,22 +6,26 @@
             {
                 "no": "0",
                 "id": "trainingName",
-                "question": "Does the title of the training match?"
+                "question": "Does the payment evidence show the training was <span class='govuk-!-font-weight-bold'>'{{ claim.training.title }}'</span>?",
+                "rejection": "The title of the training does not match."
             },
             {
                 "no": "1",
                 "id": "awardingOrganisation",
-                "question": "Does the awarding organisation match?"
+                "question": "Does the payment evidence show the awarding organisation was <span class='govuk-!-font-weight-bold'>'{{ claim.training.awardingOrganisation }}'</span>?",
+                "rejection": "The awarding organisation does not match."
             },
             {
                 "no": "2",
                 "id": "paymentAmount",
-                "question": "Does the evidence show how much was paid?"
+                "question": "Does the payment evidence show how much the employer paid?",
+                "rejection": "The evidence does not show how much was paid."
             },
             {
                 "no": "3",
                 "id": "paymentDate",
-                "question": "Does the payment date match?"
+                "question": "Does the payment evidence show the payment date was <span class='govuk-!-font-weight-bold'>'{{ claim.costDate }}'</span>?",
+                "rejection": "The payment date does not match."
             }
         ]
     },
@@ -32,17 +36,20 @@
             {
                 "no": "0",
                 "id": "completionDate",
-                "question": "Does the completion date match?"
+                "question": "Does the completion date match?",
+                "rejection": "The completion date does not match."
             },
             {
                 "no": "1",
                 "id": "learner",
-                "question": "Does the learner match?"
+                "question": "Does the learner match?",
+                "rejection": "The learner does not match."
             },
             {
                 "no": "2",
                 "id": "awardingOrganisation",
-                "question": "Does the awarding organisation match?"
+                "question": "Does the awarding organisation match?",
+                "rejection": "The awarding organisation does not match."
             }
         ]
     }

@@ -3,7 +3,6 @@
 {% set claim = data.id | findClaim_V8(data.claims) %}
 {% set criteriaList = data.type | returnCriteria_V2(data.criteria) %}
 
-
 {% block pageTitle %}
 {{ ["Review evidence claim: ", claim.claimID, " - process a claim"] | join }}
 {% endblock %}
@@ -39,6 +38,40 @@
                     {% include "../_components/file-section.html" %}
                     {% endif %}
                 </dl>
+            </div>
+        </div>
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title">
+                    Claim information
+                </h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Training title
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ claim.training.title }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Awarding organisation
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ claim.training.awardingOrganisation }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Payment date
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ claim.costDate  | govukDate }}
+                        </dd>
+                    </div>
             </div>
         </div>
     </div>

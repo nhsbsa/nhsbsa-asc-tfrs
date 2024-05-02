@@ -25,10 +25,10 @@ function loadData(req) {
     req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
     console.log('statuses file loaded')
 
-    console.log('loading in crtieria file')
+    console.log('loading in criteria file')
     req.session.data['criteria'] = loadJSONFromFile(criteria, path)
     console.log(req.session.data['criteria'])
-    console.log('crtieria file loaded')
+    console.log('criteria file loaded')
 
     console.log('loading in notes file')
     req.session.data['notes'] = [];
@@ -43,8 +43,8 @@ function updateClaim(claim, results) {
         claim.evidenceOfPaymentreview.pass = true
         claim.paymentNote = results.notes
         for (let i = 0; i < (results.quantity-1); i++) {
-            claim.evidenceOfPaymentreview["criteria"+i].result = result["criteria"+i]
-            if (!(result["criteria"+i])) {
+            claim.evidenceOfPaymentreview["criteria"+i].result = results["criteria"+i]
+            if (!(results["criteria"+i])) {
                 claim.evidenceOfPaymentreview.pass = false
             }
         }
@@ -52,8 +52,8 @@ function updateClaim(claim, results) {
         claim.evidenceOfCompletionreview.pass = true
         claim.completionNote = results.notes
         for (let i = 0; i < (results.quantity-1); i++) {
-            claim.evidenceOfCompletionreview["criteria"+i].result = result["criteria"+i]
-            if (!(result["criteria"+i])) {
+            claim.evidenceOfCompletionreview["criteria"+i].result = results["criteria"+i]
+            if (!(results["criteria"+i])) {
                 claim.evidenceOfCompletionreview.pass = false
             }
         }
