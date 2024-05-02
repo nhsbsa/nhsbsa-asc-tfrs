@@ -230,6 +230,18 @@
       {
         "author": "Donald Marvin",
         "date": "2024-02-05T08:58:43.631Z",
+        "category": "Criteria review",
+        "note": "The evidence of payment met all of the criteria requirements."
+      },
+      {
+        "author": "Donald Marvin",
+        "date": "2024-02-05T09:02:43.631Z",
+        "category": "Criteria review",
+        "note": "The evidence of completion met all of the criteria requirements."
+      },
+      {
+        "author": "Donald Marvin",
+        "date": "2024-02-05T10:32:43.631Z",
         "category": "General",
         "note": "Have to go check with my manager the exact amount to reimburse."
       },
@@ -274,19 +286,19 @@
     "evidenceOfPaymentreview": {
       "pass": "Completed",
       "criteria1": {
-        "result": null,
-        "note": null
+        "result": false,
+        "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for."
       },
       "criteria2": {
-        "result": null,
+        "result": true,
         "note": null
       },
       "criteria3": {
-        "result": null,
+        "result": true,
         "note": null
       },
       "criteria4": {
-        "result": null,
+        "result": true,
         "note": null
       }
     },
@@ -294,15 +306,15 @@
     "evidenceOfCompletionreview": {
       "pass": "Completed",
       "criteria1": {
-        "result": null,
+        "result": true,
         "note": null
       },
       "criteria2": {
-        "result": null,
+        "result": true,
         "note": null
       },
       "criteria3": {
-        "result": null,
+        "result": true,
         "note": null
       }
     },
@@ -362,19 +374,19 @@
     "evidenceOfPaymentreview": {
       "pass": "Completed",
       "criteria1": {
-        "result": null,
+        "result": true,
         "note": null
       },
       "criteria2": {
-        "result": null,
+        "result": true,
         "note": null
       },
       "criteria3": {
-        "result": null,
+        "result": true,
         "note": null
       },
       "criteria4": {
-        "result": null,
+        "result": true,
         "note": null
       }
     },
@@ -382,15 +394,15 @@
     "evidenceOfCompletionreview": {
       "pass": "Completed",
       "criteria1": {
-        "result": null,
+        "result": true,
         "note": null
       },
       "criteria2": {
-        "result": null,
+        "result": true,
         "note": null
       },
       "criteria3": {
-        "result": null,
+        "result": true,
         "note": null
       }
     },
