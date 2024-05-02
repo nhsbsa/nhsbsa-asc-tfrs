@@ -5,6 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
+const { renderString } = require('nunjucks')
 const { formatDate } = require('../helpers/helpers.js');
 const fs = require('fs');
 
@@ -43,25 +44,25 @@ addFilter('findClaim_V2', function (claims, id) {
 addFilter('criteriaQuestions_V2', function (criteria, type, claim, header) {
     if (type == "payment") {
         switch (criteria) {
-            case "1":
+            case "0":
                 if (header == "true") {
                     return "Course or qualification name"
                 } else {
                     return "Does the payment evidence show the training was " + claim.training.title + "?"
                 }
-            case "2":
+            case "1":
                 if (header == "true") {
                     return "Training provider or awarding body name"
                 } else {
                     return "Does the payment evidence show the provider was " + claim.training.awardingOrganisation + "?"
                 }
-            case "3":
+            case "2":
                 if (header == "true") {
                     return "How much was paid"
                 } else {
                     return "Does the payment evidence show how much was paid?"
                 }
-            case "4":
+            case "3":
                 if (header == "true") {
                     return "When the payment was made"
                 } else {
@@ -70,19 +71,19 @@ addFilter('criteriaQuestions_V2', function (criteria, type, claim, header) {
         }
     } else if (type == "completion") {
         switch (criteria) {
-            case "1":
+            case "0":
                 if (header == "true") {
                     return "Date the training took place or started"
                 } else {
                     return "Does the completion evidence show the training start of " + formatDate(claim.startDate) + "?"
                 }
-            case "2":
+            case "1":
                 if (header == "true") {
                     return "Learner’s name"
                 } else {
                     return "Does the completion evidence show the learner was " + claim.learner.givenName + " " + claim.learner.familyName + "?"
                 }
-            case "3":
+            case "2":
                 if (header == "true") {
                     return "Training provider or awarding body name"
                 } else {
@@ -137,34 +138,45 @@ addFilter('reimbursement_V2', function (claim) {
 
 });
 
-
 addFilter('rejectionNote_V2', function (claim) {
-    rejectionNote = "<div class='govuk-inset-text'><h3 class='govuk-heading-s'>Claim rejected</h3>"
-    if (!claim.evidenceOfPaymentreview.criteria1.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The payment evidence does not show the training was " + claim.training.title + ".<br>" + claim.evidenceOfPaymentreview.criteria1.note + "</p>"
+    let rejectionNote = "<div class='govuk-inset-text'><h3 class='govuk-heading-s'>Claim rejected</h3>"
+    if (!claim.evidenceOfPaymentreview.pass) {
+        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>"
+        rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfPaymentreview.note + "</p>"
     }
-    if (!claim.evidenceOfPaymentreview.criteria2.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The payment evidence does not show the provider was " + claim.training.awardingOrganisation + ".<br>" + claim.evidenceOfPaymentreview.criteria2.note + "</p>"
-    }
-    if (!claim.evidenceOfPaymentreview.criteria3.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The payment evidence does not show how much was paid."  + "<br>" + claim.evidenceOfPaymentreview.criteria3.note + "</p>"
-    }
-    if (!claim.evidenceOfPaymentreview.criteria4.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The payment evidence does not show the payment date of  " + formatDate(claim.costDate) + ".<br>" + claim.evidenceOfPaymentreview.criteria4.note + "</p>"
-    }
-
-    if (!claim.evidenceOfCompletionreview.criteria1.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The completion evidence does not show the training start date of " + formatDate(claim.startDate) + ".<br>" + claim.evidenceOfCompletionreview.criteria1.note + "</p>"
-    }
-    if (!claim.evidenceOfCompletionreview.criteria2.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The completion evidence does not show the learner was " + claim.learner.givenName + " " + claim.learner.familyName  + ".<br>" + claim.evidenceOfCompletionreview.criteria2.note + "</p>"
-    }
-    if (!claim.evidenceOfCompletionreview.criteria3.result) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The completion evidence does not show the provider was " + claim.training.awardingOrganisation  + ".<br>" + claim.evidenceOfCompletionreview.criteria3.note + "</p>"
+    if (!claim.evidenceOfCompletionreview.pass) {
+        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>"
+        rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfCompletionreview.note + "</p>"
     }
 
     rejectionNote = rejectionNote + "</div>"
 
     return rejectionNote
-
 }, { renderAsHtml: true })
+
+addFilter('orgErrorMessage_V2', function (error) {
+    if (error == "invalid") {
+        return "Enter a valid workplace ID"
+    } else if ( error == "missing") {
+        return "Enter a workplace ID"
+    }
+})
+
+addFilter('signatoryErrorMessage_V9', function (submitError) {
+    let errorSummaryStr = ''
+
+    if (submitError.familyName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a last (family) name</a></li>')
+    }
+    if (submitError.givenName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a first (given) name</a></li>')
+    }
+    if (submitError.email == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address</a></li>')
+    } else if (submitError.email == "invalid") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address in the correct format, like name@example.com</a></li>')
+    }
+
+
+    return errorSummaryStr
+}, { renderAsHtml: true });

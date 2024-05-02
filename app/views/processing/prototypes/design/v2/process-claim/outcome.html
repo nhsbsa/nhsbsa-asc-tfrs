@@ -16,7 +16,7 @@
     <span class="govuk-caption-l">Process a claim</span>
     <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}</h1>
     <p class="govuk-body">The claim has <span class="govuk-!-font-weight-bold">{% if data.result == "reject" %}not{%
-        endif %} met</span> all criteria and therefore the claim must be <span class="govuk-!-font-weight-bold">{% if
+        endif %} met</span> all the required evidence criteria and therefore the claim must be <span class="govuk-!-font-weight-bold">{% if
         data.result == "approve" %}approved{% elif data.result ==
         "reject" %}rejected{% endif %}</span>.</p>
     {% if data.result == "approve" %}
@@ -35,12 +35,13 @@
     <p class="govuk-body">The organisation will receive the following note to explain why it was rejected. This is based
       on the answers and notes given to the criteria checks.</p>
     {{ claim | rejectionNote_V2 }}
+    <p class="govuk-body"><a class="govuk-link" href="#">Edit rejection note</a></p>
     {% endif %}
     <p class="govuk-body">Confirm that the evidence provided did{% if data.result == "reject" %} not{%
       endif %} meet all the criteria and that this claim should be {% if data.result == "approve" %}approved{% elif
       data.result ==
       "reject" %}rejected{% endif %}.</p>
-    <a type="submit" class="govuk-button" href="confirmation">
+    <a type="submit" class="govuk-button" href="../outcome-handler">
       Confirm and {% if data.result == "approve" %}approve{% elif data.result ==
       "reject" %}reject{% endif %}
     </a>

@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim } = require('../helpers/helpers.js');
+const { loadData, updateClaim, checkWDSFormat, signatoryCheck } = require('../helpers/helpers.js');
 
 // v1 Prototype routes
 
@@ -13,27 +13,59 @@ router.get('/load-data', function (req, res) {
 
 router.post('/check-org', function (req, res) {
   const orgID = req.session.data.orgID
+  delete req.session.data.confirmation
+  delete req.session.data.familyName
+  delete req.session.data.givenName
+  delete req.session.data.email
 
-  if (orgID == "123456") {
-    res.redirect('register-organisation/confirm-organisation-details?state=valid')
+  if (orgID == "") {
+    res.redirect('register-organisation/organisation-details?submitError=missing')
+  } else if (checkWDSFormat(orgID)) {
+    delete req.session.data.submitError
+    res.redirect('register-organisation/confirm-organisation-details')
   } else if (orgID == "timeout") {
-    res.redirect('register-organisation/confirm-organisation-details?state=timeout')
+    res.redirect('register-organisation/org-issue?submitError=timeout')
   } else if (orgID == "dupe") {
-    res.redirect('register-organisation/confirm-organisation-details?state=duplicate')
+    res.redirect('register-organisation/org-issue?submitError=duplicate')
   } else {
-    res.redirect('register-organisation/confirm-organisation-details?state=invalid')
+    res.redirect('register-organisation/organisation-details?submitError=invalid')
   }
 
 });
 
 router.post('/confirm-org-handler', function (req, res) {
   const confirmation = req.session.data.confirmation
+  delete req.session.data.submitError
+  delete req.session.data.confirmation
+  
 
   if (confirmation == "yes") {
     res.redirect('register-organisation/signatory-details')
   } else if (confirmation == "no") {
-    res.redirect('register-organisation/incorrect-org-details')
+    res.redirect('register-organisation/org-issue?submitError=incorrect')
+  } else if (confirmation == null) {
+    res.redirect('register-organisation/confirm-organisation-details?submitError=missing')
   }
+
+});
+
+router.post('/signatory-handler', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+  delete req.session.data.orgID
+
+  const result = signatoryCheck(familyName, givenName, email)
+
+  if (result.signatoryValid) {
+    delete req.session.data.submitError
+    res.redirect('register-organisation/confirm-signatory-details')
+  } else {
+    req.session.data.submitError = result
+    res.redirect('register-organisation/signatory-details')
+  }
+
+
 
 });
 
@@ -41,6 +73,10 @@ router.post('/search-claim-id', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];
   delete req.session.data['notFound'];
+  delete req.session.data.confirmation
+  delete req.session.data.familyName
+  delete req.session.data.givenName
+  delete req.session.data.email
 
   var claimID = req.session.data.claimID.replace(/\s/g, '');
 
@@ -106,73 +142,38 @@ foundClaim.notes.push(newNote);
 });
 
 router.post('/evidence-check-handler', function (req, res) {
-  const evidenceCheck = req.session.data.evidenceCheck
-  const criteria = req.session.data.criteria
+  const response = req.session.data.criteriaCheck
+  const note = req.session.data.note
   const type = req.session.data.type
 
   delete req.session.data.submitError;
 
   claimID = req.session.data.id
 
-  if (evidenceCheck != null) {
-    for (const claim of req.session.data.claims) {
-      if (claim.claimID == claimID) {
-        if (evidenceCheck == "yes") {
-          if (type == "payment") {
-            if (criteria == "3") {
-              claim.reimbursementAmount = req.session.data.costPerLearner
-            }
-            claim.evidenceOfPaymentreview["criteria" + criteria].result = true
-          } else if (type == "completion") {
-            claim.evidenceOfCompletionreview["criteria" + criteria].result = true
-          }
-        } else if (evidenceCheck == "no") {
-          if (type == "payment") {
-            claim.evidenceOfPaymentreview["criteria" + criteria].result = false
-            claim.evidenceOfPaymentreview["criteria" + criteria].note = req.session.data.note
-          } else if (type == "completion") {
-            claim.evidenceOfCompletionreview["criteria" + criteria].result = false
-            claim.evidenceOfCompletionreview["criteria" + criteria].note = req.session.data.note
-          }
-        }
-        updateClaim(claim)
-        if ((claim.evidenceOfPaymentreview.pass != null && type == "payment") || (claim.evidenceOfCompletionreview.pass != null && type == "completion")) {
-          delete req.session.data.criteria;
-          delete req.session.data.evidenceCheck;
-          delete req.session.data.costPerLearner;
-          res.redirect('process-claim/check-evidence-answers')
-        } else {
-          delete req.session.data.evidenceCheck;
-          delete req.session.data.costPerLearner;
-          const nextCriteria = String(Number(criteria) + 1)
-          res.redirect('process-claim/review-evidence?type=' + type + '&criteria=' + nextCriteria)
-        }
-      }
-    }
-  } else {
-    res.redirect('process-claim/review-evidence?type=' + type + '&criteria=' + criteria + '&submitError=true')
-  }
-});
-
-
-router.get('/evidence-check-start-handler', function (req, res) {
-  const type = req.session.data.type
-  claimID = req.session.data.id
-
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
-      if ((claim.evidenceOfPaymentreview.pass != null && type == "payment") || (claim.evidenceOfCompletionreview.pass != null && type == "completion")) {
-        delete req.session.data.criteria;
-        delete req.session.data.evidenceCheck;
-        res.redirect('process-claim/check-evidence-answers')
-      } else {
-        delete req.session.data.evidenceCheck;
-        res.redirect('process-claim/review-evidence?type=' + type + '&criteria=1')
+        if (response == null) {
+          res.redirect('process-claim/review-evidence?type=' + type + '&submitError=missing')
+        } else if (response == "yes") {
+          delete req.session.data.criteriaCheck
+          delete req.session.data.note
+          delete req.session.data.type
+          updateClaim(claim, type, response, note)
+          res.redirect('process-claim/claim')
+        } else if (response == "no") {
+            if (note == "") {
+              res.redirect('process-claim/review-evidence?type=' + type + '&submitError=notemissing')
+            } else {
+              delete req.session.data.criteriaCheck
+              delete req.session.data.note
+              delete req.session.data.type
+              updateClaim(claim, type, response, note)
+              res.redirect('process-claim/claim')
+            }
+        }
       }
     }
-  }
 });
-
 
 router.post('/claim-process-handler', function (req, res) {
   claimID = req.session.data.id
@@ -185,6 +186,12 @@ router.post('/claim-process-handler', function (req, res) {
       }
     }
   }
+
+});
+
+router.get('/outcome-handler', function (req, res) {
+  
+        res.redirect('process-claim/claim')
 
 });
 

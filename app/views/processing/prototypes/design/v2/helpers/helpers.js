@@ -14,7 +14,6 @@ function loadData(req) {
 
     var claimsFile = 'processing-claims.json'
     var statusFile = 'claim-item-statuses.json'
-    var notesFile = 'processing-notes.json'
 
     console.log('loading in claims file')
     req.session.data['claims'] = loadJSONFromFile(claimsFile, path)
@@ -24,42 +23,24 @@ function loadData(req) {
     req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
     console.log('statuses file loaded')
 
-    console.log('loading in notes file')
-    req.session.data['notes'] = [];
-    console.log('notes file loaded')
-
     return console.log('data updated')
 }
 
-function updateClaim(claim) {
+function updateClaim(claim, type, response, note) {
 
-    if (
-        claim.evidenceOfPaymentreview.criteria1.result != null &&
-        claim.evidenceOfPaymentreview.criteria2.result != null &&
-        claim.evidenceOfPaymentreview.criteria3.result != null &&
-        claim.evidenceOfPaymentreview.criteria4.result != null
-    ) {
-        if (claim.evidenceOfPaymentreview.criteria1.result &&
-            claim.evidenceOfPaymentreview.criteria2.result &&
-            claim.evidenceOfPaymentreview.criteria3.result &&
-            claim.evidenceOfPaymentreview.criteria4.result) {
+    if (type == "payment") {
+        if (response == "yes") {
             claim.evidenceOfPaymentreview.pass = true
-        } else {
+        } else if (response == "no") {
             claim.evidenceOfPaymentreview.pass = false
+            claim.evidenceOfPaymentreview.note = note
         }
-    } 
-    
-    if (
-        claim.evidenceOfCompletionreview.criteria1.result != null &&
-        claim.evidenceOfCompletionreview.criteria2.result != null &&
-        claim.evidenceOfCompletionreview.criteria3.result != null
-    ) {
-        if (claim.evidenceOfCompletionreview.criteria1.result &&
-            claim.evidenceOfCompletionreview.criteria2.result &&
-            claim.evidenceOfCompletionreview.criteria3.result) {
+    } else if (type == "completion") {
+        if (response == "yes") {
             claim.evidenceOfCompletionreview.pass = true
-        } else {
+        } else if (response == "no") {
             claim.evidenceOfCompletionreview.pass = false
+            claim.evidenceOfCompletionreview.note = note
         }
     }
 }
@@ -73,6 +54,44 @@ function formatDate(isoDate) {
     return `${day} ${month} ${year}`;
 }
 
+function checkWDSFormat(id) {
 
+    var pattern = /^[B-I]\d{5,8}$/;
+    return pattern.test(id);
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate }
+}
+
+function signatoryCheck(familyName, givenName, email) {
+    const result = {}
+
+    if (familyName =="") {
+        result.familyName = "missing"
+    } else {
+        result.familyName = "valid"
+    }
+
+    if (givenName =="") {
+        result.givenName = "missing"
+    } else {
+        result.givenName = "valid"
+    }
+
+    if (email =="") {
+        result.email = "missing"
+    } else if (!(emailFormat(email))) {
+        result.email = "invalid"
+    } else {
+        result.email = "valid"
+    }
+    
+    result.signatoryValid = result.familyName == "valid" && result.givenName == "valid" && result.email == "valid"
+
+    return result
+}
+
+function emailFormat(string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(string);
+}
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck }

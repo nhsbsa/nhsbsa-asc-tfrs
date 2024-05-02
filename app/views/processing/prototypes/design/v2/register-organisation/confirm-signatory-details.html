@@ -30,10 +30,18 @@ Check signatory details - Register an organisation
                 <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row">
                         <dt class="govuk-summary-list__key">
-                            Full name
+                            Last (family) name
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ data.fullName }}
+                            {{ data.familyName }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            First (given) name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.givenName }}
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
@@ -47,7 +55,7 @@ Check signatory details - Register an organisation
                 </dl>
             </div>
           </div>
-        <form action="confirmation" method="post" novalidate>
+        <form action="../home?confirmation=register" method="post" novalidate>
             <input type="hidden" name="answers-checked" value="true">
             <button type="submit" class="govuk-button" data-module="govuk-button">
                 Confirm and send invite

@@ -11,9 +11,28 @@ Check organsiation details - Register an organisation
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.state == "valid" %}
+        {% if data.submitError == "missing" %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#error">Select whether the details are correct</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         <span class="govuk-caption-l">Register an organisation</span>
         <h1 class="govuk-heading-l">Check organisation details are correct</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
         <p class="govuk-body">Below is the information returned from the ASC-WDS based on the workplace ID you provided.
         </p>
         <dl class="govuk-summary-list">
@@ -22,7 +41,7 @@ Check organsiation details - Register an organisation
                     Workplace ID
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    123456
+                    {{data.orgID}}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -43,11 +62,17 @@ Check organsiation details - Register an organisation
             </div>
         </dl>
         <form action="../confirm-org-handler" method="post" novalidate>
-            <div class="govuk-form-group">
+            <div class="govuk-form-group {% if data.submitError == 'missing' %}govuk-form-group--error{% endif %}">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        Do these details match the details for the organisation your want to register?
+                        Do these details match the details for the organisation you want to register?
                     </legend>
+                    {% if data.submitError == "missing" %}
+                    <p id="error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        Select whether the details are correct
+                    </p>
+                    {% endif %}
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="confirmation" name="confirmation" type="radio"
@@ -70,9 +95,6 @@ Check organsiation details - Register an organisation
                 Continue
             </button>
         </form>
-        {% else %}
-
-        {% endif %}
     </div>
 </div>
 
