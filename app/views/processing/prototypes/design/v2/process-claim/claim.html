@@ -16,7 +16,7 @@
         {% if claim.status == "submitted" %}
         <span class="govuk-caption-l">Process a claim</span>
         {% else %}
-        <span class="govuk-caption-l">Claim complete</span>
+        <span class="govuk-caption-l">Claim processing complete</span>
         {% endif %}
         <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | processorstatusTag_V2 }}</h1>
     </div>
