@@ -184,32 +184,32 @@
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice002.pdf"],
     "evidenceOfPaymentreview": {
-      "complete": false,
-      "criteria-1": false,
-      "criteria-2": false,
-      "criteria-3": false,
-      "criteria-4": false,
-      "criteria-5": false,
-      "criteria-6": false,
-      "criteria-7": false,
-      "criteria-8": false,
-      "criteria-9": false,
-      "criteria-10": false
+      "complete": true,
+      "criteria-1": true,
+      "criteria-2": true,
+      "criteria-3": true,
+      "criteria-4": true,
+      "criteria-5": true,
+      "criteria-6": true,
+      "criteria-7": true,
+      "criteria-8": true,
+      "criteria-9": true,
+      "criteria-10": true
 
     },
     "evidenceOfCompletion": "certficate002.pdf",
     "evidenceOfCompletionreview": {
-      "complete": false,
-      "criteria-1": false,
-      "criteria-2": false,
-      "criteria-3": false,
-      "criteria-4": false,
-      "criteria-5": false,
-      "criteria-6": false,
-      "criteria-7": false,
-      "criteria-8": false,
-      "criteria-9": false,
-      "criteria-10": false
+      "complete": true,
+      "criteria-1": true,
+      "criteria-2": true,
+      "criteria-3": true,
+      "criteria-4": true,
+      "criteria-5": true,
+      "criteria-6": true,
+      "criteria-7": true,
+      "criteria-8": true,
+      "criteria-9": true,
+      "criteria-10": true
 
     },
     "completionDate": "2023-11-16T01:18:28.980Z",
@@ -225,18 +225,18 @@
         "author": "Donald Marvin",
         "date": "2024-02-05T08:58:43.631Z",
         "category": "General",
-        "note": "Had to go check with my manager the exact amount to reimburse."
+        "note": "Have to go check with my manager the exact amount to reimburse."
       },
       {
         "author": "System-generated",
-        "date": "2024-02-09T10:12:46.631Z",
+        "date": "2024-02-09T14:52:43.631Z",
         "category": "System",
         "note": "Claim was approved."
       }
   ]
   },
   {
-    "claimID": "Z8S-F1J6-9VGH-C",
+    "claimID": "K93-SK68-3S2K-C",
     "type": "TU",
     "learner": {
       "id": "ZX 51 96 87 D",
@@ -262,36 +262,118 @@
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-11-25T03:13:47.582Z",
     "approvedDate": null,
-    "rejectedDate": "2023-12-05T18:04:04.173Z",
+    "rejectedDate": "2024-02-05T14:53:43.631Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": ["invoice007.pdf"],
     "evidenceOfPaymentreview": {
-      "complete": false,
+      "complete": true,
       "criteria-1": false,
       "criteria-2": false,
-      "criteria-3": false,
-      "criteria-4": false,
-      "criteria-5": false,
-      "criteria-6": false,
-      "criteria-7": false,
-      "criteria-8": false,
-      "criteria-9": false,
-      "criteria-10": false
+      "criteria-3": true,
+      "criteria-4": true,
+      "criteria-5": true,
+      "criteria-6": true,
+      "criteria-7": true,
+      "criteria-8": true,
+      "criteria-9": true,
+      "criteria-10": true
 
     },
     "evidenceOfCompletion": "certficate007.pdf",
     "evidenceOfCompletionreview": {
-      "complete": false,
-      "criteria-1": false,
-      "criteria-2": false,
-      "criteria-3": false,
-      "criteria-4": false,
-      "criteria-5": false,
-      "criteria-6": false,
-      "criteria-7": false,
-      "criteria-8": false,
-      "criteria-9": false,
-      "criteria-10": false
+      "complete": true,
+      "criteria-1": true,
+      "criteria-2": true,
+      "criteria-3": true,
+      "criteria-4": true,
+      "criteria-5": true,
+      "criteria-6": true,
+      "criteria-7": true,
+      "criteria-8": true,
+      "criteria-9": true,
+      "criteria-10": true
+
+    },
+    "completionDate": "2023-11-03T05:51:56.177Z",
+    "costDate": "2022-09-19T13:52:37.929Z",
+    "notes": [
+      {
+        "author": "System-generated",
+        "date": "2023-11-25T13:13:47.582Z",
+        "category": "System",
+        "note": "Claim was submitted."
+      }, 
+      {
+        "author": "test participant",
+        "date": "2024-02-05T11:12:43.631Z",
+        "category": "Criteria review",
+        "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for."
+      },
+      {
+        "author": "System-generated",
+        "date": "2024-02-05T14:53:43.631Z",
+        "category": "System",
+        "note": "Claim was rejected."
+      }
+  ]
+  }, 
+  {
+    "claimID": "W1J-BEDE-8LCQ-C",
+    "type": "TU",
+    "learner": {
+      "id": "ZX 51 96 87 D",
+      "familyName": "Sydnee",
+      "givenName": "Turner",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "IMSDT",
+      "reimbursementAmount": 50,
+      "title": "Supporting and developing teams",
+      "totalLearningTime": "45 mins + 30 mins = 75 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-06-16T12:49:27.956Z",
+    "status": "rejected",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-04-03T11:38:05.132Z",
+    "approvedDate": null,
+    "rejectedDate": "2024-05-11T12:12:05.132Z",
+    "rejectedNote": "This claim has been escalated for fraud.",
+    "evidenceOfPayment": ["invoice007.pdf"],
+    "evidenceOfPaymentreview": {
+      "complete": true,
+      "criteria-1": true,
+      "criteria-2": true,
+      "criteria-3": true,
+      "criteria-4": true,
+      "criteria-5": true,
+      "criteria-6": true,
+      "criteria-7": true,
+      "criteria-8": true,
+      "criteria-9": true,
+      "criteria-10": true
+
+    },
+    "evidenceOfCompletion": "certficate007.pdf",
+    "evidenceOfCompletionreview": {
+      "complete": true,
+      "criteria-1": true,
+      "criteria-2": true,
+      "criteria-3": true,
+      "criteria-4": true,
+      "criteria-5": true,
+      "criteria-6": true,
+      "criteria-7": true,
+      "criteria-8": true,
+      "criteria-9": true,
+      "criteria-10": true
 
     },
     "completionDate": "2023-11-03T05:51:56.177Z",

@@ -11,8 +11,10 @@ const fs = require('fs');
 addFilter('processorstatusTag_V2', function (statusID) {
     if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Not yet processed</strong>'
-    } else if (statusID == 'rejected' || statusID == 'approved') {
-        return '<strong class="govuk-tag govuk-tag--green">Processed</strong>'
+    } else if (statusID == 'approved') {
+        return '<strong class="govuk-tag govuk-tag--green">Approved</strong>' 
+    }else if (statusID == 'rejected') {
+        return '<strong class="govuk-tag govuk-tag--red">Rejected</strong>' 
     } else {
         return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
     }
