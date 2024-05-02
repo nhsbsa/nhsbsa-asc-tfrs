@@ -153,7 +153,7 @@ router.post('/claim-process-handler', function (req, res) {
 
 });
 
-router.post('/outcome-handler', function (req, res) {
+router.get('/outcome-handler', function (req, res) {
   
         res.redirect('process-claim/claim')
 
