@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim } = require('../helpers/helpers.js');
+const { loadData, updateClaim, checkWDSFormat, signatoryCheck } = require('../helpers/helpers.js');
 
 // v1 Prototype routes
 
@@ -13,27 +13,59 @@ router.get('/load-data', function (req, res) {
 
 router.post('/check-org', function (req, res) {
   const orgID = req.session.data.orgID
+  delete req.session.data.confirmation
+  delete req.session.data.familyName
+  delete req.session.data.givenName
+  delete req.session.data.email
 
-  if (orgID == "123456") {
-    res.redirect('register-organisation/confirm-organisation-details?state=valid')
+  if (orgID == "") {
+    res.redirect('register-organisation/organisation-details?submitError=missing')
+  } else if (checkWDSFormat(orgID)) {
+    delete req.session.data.submitError
+    res.redirect('register-organisation/confirm-organisation-details')
   } else if (orgID == "timeout") {
-    res.redirect('register-organisation/confirm-organisation-details?state=timeout')
+    res.redirect('register-organisation/org-issue?submitError=timeout')
   } else if (orgID == "dupe") {
-    res.redirect('register-organisation/confirm-organisation-details?state=duplicate')
+    res.redirect('register-organisation/org-issue?submitError=duplicate')
   } else {
-    res.redirect('register-organisation/confirm-organisation-details?state=invalid')
+    res.redirect('register-organisation/organisation-details?submitError=invalid')
   }
 
 });
 
 router.post('/confirm-org-handler', function (req, res) {
   const confirmation = req.session.data.confirmation
+  delete req.session.data.submitError
+  delete req.session.data.confirmation
+  
 
   if (confirmation == "yes") {
     res.redirect('register-organisation/signatory-details')
   } else if (confirmation == "no") {
-    res.redirect('register-organisation/incorrect-org-details')
+    res.redirect('register-organisation/org-issue?submitError=incorrect')
+  } else if (confirmation == null) {
+    res.redirect('register-organisation/confirm-organisation-details?submitError=missing')
   }
+
+});
+
+router.post('/signatory-handler', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+  delete req.session.data.orgID
+
+  const result = signatoryCheck(familyName, givenName, email)
+
+  if (result.signatoryValid) {
+    delete req.session.data.submitError
+    res.redirect('register-organisation/confirm-signatory-details')
+  } else {
+    req.session.data.submitError = result
+    res.redirect('register-organisation/signatory-details')
+  }
+
+
 
 });
 
@@ -41,6 +73,10 @@ router.post('/search-claim-id', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];
   delete req.session.data['notFound'];
+  delete req.session.data.confirmation
+  delete req.session.data.familyName
+  delete req.session.data.givenName
+  delete req.session.data.email
 
   var claimID = req.session.data.claimID.replace(/\s/g, '');
 

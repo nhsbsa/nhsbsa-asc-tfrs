@@ -166,3 +166,30 @@ addFilter('rejectionNote_V2', function (claim) {
     return rejectionNote
 
 }, { renderAsHtml: true })
+
+addFilter('orgErrorMessage_V2', function (error) {
+    if (error == "invalid") {
+        return "Enter a valid workplace ID"
+    } else if ( error == "missing") {
+        return "Enter a workplace ID"
+    }
+})
+
+addFilter('signatoryErrorMessage_V9', function (submitError) {
+    let errorSummaryStr = ''
+
+    if (submitError.familyName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a last (family) name</a></li>')
+    }
+    if (submitError.givenName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a first (given) name</a></li>')
+    }
+    if (submitError.email == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address</a></li>')
+    } else if (submitError.email == "invalid") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address in the correct format, like name@example.com</a></li>')
+    }
+
+
+    return errorSummaryStr
+}, { renderAsHtml: true })
