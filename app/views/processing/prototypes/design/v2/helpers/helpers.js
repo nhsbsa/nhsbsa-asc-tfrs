@@ -65,8 +65,44 @@ function formatDate(isoDate) {
     return `${day} ${month} ${year}`;
 }
 
+function checkWDSFormat(id) {
 
+    var pattern = /^[B-I]\d{5,8}$/;
+    return pattern.test(id);
 
+}
 
+function signatoryCheck(familyName, givenName, email) {
+    const result = {}
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate }
+    if (familyName =="") {
+        result.familyName = "missing"
+    } else {
+        result.familyName = "valid"
+    }
+
+    if (givenName =="") {
+        result.givenName = "missing"
+    } else {
+        result.givenName = "valid"
+    }
+
+    if (email =="") {
+        result.email = "missing"
+    } else if (!(emailFormat(email))) {
+        result.email = "invalid"
+    } else {
+        result.email = "valid"
+    }
+    
+    result.signatoryValid = result.familyName == "valid" && result.givenName == "valid" && result.email == "valid"
+
+    return result
+}
+
+function emailFormat(string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(string);
+}
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck }
