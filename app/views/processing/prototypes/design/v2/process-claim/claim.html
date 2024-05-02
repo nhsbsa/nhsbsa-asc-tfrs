@@ -114,7 +114,7 @@
     </div>
 
     <div class="govuk-grid-column-one-half">
-        {% if claim.status == "submitted" %}
+
             <h2 class="govuk-heading-m">Check evidence</h2>
             <ul class="govuk-task-list">
                 <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -138,6 +138,7 @@
                     </div>
                 </li>
             </ul>
+            {% if claim.status == "submitted" %}
             <div class="govuk-button-group">
                 <form action="../claim-process-handler" method="post" novalidate>
                 <button type="submit" class="govuk-button" data-module="govuk-button">
@@ -151,30 +152,6 @@
                 </form>
             </div>
             <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-        {% else %}
-        <h2 class="govuk-heading-m">Check evidence</h2>
-            <ul class="govuk-task-list">
-                <li class="govuk-task-list__item govuk-task-list__item--with-link">
-                    <div class="govuk-task-list__name-and-hint">
-                        <a class="govuk-link govuk-task-list__link" href="review-evidence?type=payment" aria-describedby="company-details-1-status">
-                            Evidence of payment
-                        </a>
-                    </div>
-                    <div class="govuk-task-list__status" id="company-details-1-status">
-                        {{ claim.evidenceOfPaymentreview.pass | sectionCheck_V2 }}
-                    </div>
-                </li>
-                <li class="govuk-task-list__item govuk-task-list__item--with-link">
-                    <div class="govuk-task-list__name-and-hint">
-                        <a class="govuk-link govuk-task-list__link" href="review-evidence?type=completion" aria-describedby="company-details-2-status">
-                            Evidence of completion
-                        </a>
-                    </div>
-                    <div class="govuk-task-list__status" id="company-details-2-status">
-                        {{ claim.evidenceOfCompletionreview.pass | sectionCheck_V2 }}
-                    </div>
-                </li>
-            </ul>
         {% endif %}
         
             <div class="moj-page-header-actions" style="margin-bottom: 20px;">
