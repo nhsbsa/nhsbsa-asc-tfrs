@@ -37,25 +37,21 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(claim, results) {
+function updateClaim(claim, type, response, note) {
 
-    if (results.type == "payment") {
-        claim.evidenceOfPaymentreview.pass = true
-        claim.paymentNote = results.notes
-        for (let i = 0; i < (results.quantity-1); i++) {
-            claim.evidenceOfPaymentreview["criteria"+i].result = results["criteria"+i]
-            if (!(results["criteria"+i])) {
-                claim.evidenceOfPaymentreview.pass = false
-            }
+    if (type == "payment") {
+        if (response == "yes") {
+            claim.evidenceOfPaymentreview.pass = true
+        } else if (response == "no") {
+            claim.evidenceOfPaymentreview.pass = false
+            claim.evidenceOfPaymentreview.note = note
         }
-    } else if (results.type == "completion") {
-        claim.evidenceOfCompletionreview.pass = true
-        claim.completionNote = results.notes
-        for (let i = 0; i < (results.quantity-1); i++) {
-            claim.evidenceOfCompletionreview["criteria"+i].result = results["criteria"+i]
-            if (!(results["criteria"+i])) {
-                claim.evidenceOfCompletionreview.pass = false
-            }
+    } else if (type == "completion") {
+        if (response == "yes") {
+            claim.evidenceOfCompletionreview.pass = true
+        } else if (response == "no") {
+            claim.evidenceOfCompletionreview.pass = false
+            claim.evidenceOfCompletionreview.note = note
         }
     }
 }
@@ -69,38 +65,8 @@ function formatDate(isoDate) {
     return `${day} ${month} ${year}`;
 }
 
-function checkEvidenceAnswers(data) {
-    let results = {}
-    let criteriaGroup = null
-
-    for (const group of data.criteria) {
-        if (group.type == data.type) {
-            criteriaGroup = group
-        }
-    }
-
-    results.type = data.type
-    results.quantity = criteriaGroup.quantity
-    results.evidenceCheckValid = true
-    results.notes = data.notes
-
-    for (let i = 0; i < (criteriaGroup.quantity-1); i++) {
-        if (data['criteria'+i]== "") {
-            results['criteria'+i] = "invalid"
-            results.evidenceCheckValid = false
-        } else if (data['criteria'+i]== "yes") {
-            results['criteria'+i] = true
-        } else if (data['criteria'+i]== "no") {
-            results['criteria'+i] = false
-        }
-    }
-
-    return results
-
-}
 
 
 
 
-
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkEvidenceAnswers }
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate }

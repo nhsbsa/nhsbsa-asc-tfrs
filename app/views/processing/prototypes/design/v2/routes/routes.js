@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim, checkEvidenceAnswers } = require('../helpers/helpers.js');
+const { loadData, updateClaim } = require('../helpers/helpers.js');
 
 // v1 Prototype routes
 
@@ -106,26 +106,37 @@ foundClaim.notes.push(newNote);
 });
 
 router.post('/evidence-check-handler', function (req, res) {
-  const criteria = req.session.data.criteria
+  const response = req.session.data.criteriaCheck
+  const note = req.session.data.note
   const type = req.session.data.type
 
   delete req.session.data.submitError;
 
-  const results = checkEvidenceAnswers(req.session.data)
-
   claimID = req.session.data.id
 
-  if (results.evidenceCheckValid) {
-    for (const claim of req.session.data.claims) {
-      if (claim.claimID == claimID) {
-        updateClaim(claim, results)
-        res.redirect('process-claim/claim')
+  for (const claim of req.session.data.claims) {
+    if (claim.claimID == claimID) {
+        if (response == null) {
+          res.redirect('process-claim/review-evidence?type=' + type + '&submitError=missing')
+        } else if (response == "yes") {
+          delete req.session.data.criteriaCheck
+          delete req.session.data.note
+          delete req.session.data.type
+          updateClaim(claim, type, response, note)
+          res.redirect('process-claim/claim')
+        } else if (response == "no") {
+            if (note == "") {
+              res.redirect('process-claim/review-evidence?type=' + type + '&submitError=notemissing')
+            } else {
+              delete req.session.data.criteriaCheck
+              delete req.session.data.note
+              delete req.session.data.type
+              updateClaim(claim, type, response, note)
+              res.redirect('process-claim/claim')
+            }
+        }
       }
     }
-  } else {
-    req.session.data.submitError = results
-    res.redirect('process-claim/review-evidence?type=' + type)
-  }
 });
 
 router.post('/claim-process-handler', function (req, res) {

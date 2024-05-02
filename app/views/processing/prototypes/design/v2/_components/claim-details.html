@@ -1,0 +1,95 @@
+<h2 class="govuk-heading-m" id="payment">Organisation details</h2>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            Oaktree Care Home Ltd
+        </dd>
+    </div>
+    {% if details == "overview" %}
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Workplace ID
+        </dt>
+        <dd class="govuk-summary-list__value">
+            G03944234
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Submitter
+        </dt>
+        <dd class="govuk-summary-list__value">
+            Casey Simonis
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Submitter's email
+        </dt>
+        <dd class="govuk-summary-list__value">
+            casey.simonis@oaktree.com
+        </dd>
+    </div>
+    {% endif %}
+</dl>
+
+<h2 class="govuk-heading-m" id="payment">Claim details</h2>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Training title
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{claim.training.title}}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Awarding organisation
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{claim.training.awardingOrganisation}}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Learner
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{claim.learner.givenName}} {{claim.learner.familyName}}
+        </dd>
+    </div>
+    {% if details == "overview" %}
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Start date
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ claim.startDate | govukDate }}
+        </dd>
+    </div>
+    {% endif %}
+    {% if details == "payment" %}
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Payment date
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ claim.costDate | govukDate }}
+        </dd>
+    </div>
+    {% endif %}
+    {% if details == "completion" %}
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ claim.completionDate | govukDate }}
+        </dd>
+    </div>
+    {% endif %}
+</dl>
