@@ -1,0 +1,43 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% set claim = data.id | findClaim_V8(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Edit rejection notes: ", claim.claimID, "- process a claim"] | join }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        
+        <form action="../update-rejection-notes" method="post" novalidate>
+            <div class="govuk-form-group">
+            <h1 class="govuk-label-wrapper">
+              <label class="govuk-label govuk-label--l" for="more-detail">
+                Edit rejection note?
+              </label>
+            </h1>
+            <div id="more-detail-hint" class="govuk-hint">
+                Update your note and click upload.
+              </div>
+            <h2 class="govuk-heading-m">Evidence of payment</h2>
+            <textarea class="govuk-textarea" id="paymentRejectionNote" name="paymentRejectionNote" rows="5" aria-describedby="payment-rejection-note-hint">{{claim.evidenceOfPaymentreview.note}}</textarea>
+
+            <h2 class="govuk-heading-m">Evidence of completion</h2>
+            <textarea class="govuk-textarea" id="completionRejectionNote" name="completionRejectionNote" rows="5" aria-describedby="completion-rejection-note-hint">{{claim.evidenceOfCompletionreview.note}}</textarea>
+          </div>
+
+          <div class="govuk-button-group">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Update note
+            </button>
+            <a class="govuk-link govuk-link--no-visited-state" href="./outcome">Cancel</a>
+        </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+{% endblock %}
