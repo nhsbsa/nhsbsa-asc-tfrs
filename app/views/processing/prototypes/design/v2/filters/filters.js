@@ -176,7 +176,5 @@ addFilter('signatoryErrorMessage_V9', function (submitError) {
     } else if (submitError.email == "invalid") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address in the correct format, like name@example.com</a></li>')
     }
-
-
     return errorSummaryStr
 }, { renderAsHtml: true });
