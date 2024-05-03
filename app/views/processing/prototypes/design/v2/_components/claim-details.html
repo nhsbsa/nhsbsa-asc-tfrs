@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-m" id="payment">Organisation details</h2>
+<h3 class="govuk-heading-m" id="payment">Organisation</h3>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
@@ -8,7 +8,6 @@
             Oaktree Care Home Ltd
         </dd>
     </div>
-    {% if details == "overview" %}
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
             Workplace ID
@@ -19,7 +18,18 @@
     </div>
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Submitter
+            Organisation address
+        </dt>
+        <dd class="govuk-summary-list__value">
+            72 Guild Street<br>London<br>SE23 6FH
+        </dd>
+    </div>
+</dl>
+<h3 class="govuk-heading-m" id="payment">Submitter</h3>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Name
         </dt>
         <dd class="govuk-summary-list__value">
             Casey Simonis
@@ -27,20 +37,20 @@
     </div>
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Submitter's email
+            Email
         </dt>
         <dd class="govuk-summary-list__value">
-            casey.simonis@oaktree.com
+            <a class="govuk-link" href="mailto:example@example.com">casey.simonis@oaktree.com</a>
         </dd>
     </div>
-    {% endif %}
+
 </dl>
 
-<h2 class="govuk-heading-m" id="payment">Claim details</h2>
+<h3 class="govuk-heading-m" id="payment">Training</h3>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Training title
+            Title
         </dt>
         <dd class="govuk-summary-list__value">
             {{claim.training.title}}
@@ -56,13 +66,12 @@
     </div>
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Learner
+            Payment date
         </dt>
         <dd class="govuk-summary-list__value">
-            {{claim.learner.givenName}} {{claim.learner.familyName}}
+            {{ claim.costDate | govukDate }}
         </dd>
     </div>
-    {% if details == "overview" %}
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
             Start date
@@ -71,18 +80,6 @@
             {{ claim.startDate | govukDate }}
         </dd>
     </div>
-    {% endif %}
-    {% if details == "payment" %}
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Payment date
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {{ claim.costDate | govukDate }}
-        </dd>
-    </div>
-    {% endif %}
-    {% if details == "completion" %}
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
             Completion date
@@ -91,5 +88,15 @@
             {{ claim.completionDate | govukDate }}
         </dd>
     </div>
-    {% endif %}
+</dl>
+<h3 class="govuk-heading-m" id="payment">Learner</h3>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{claim.learner.givenName}} {{claim.learner.familyName}}
+        </dd>
+    </div>
 </dl>

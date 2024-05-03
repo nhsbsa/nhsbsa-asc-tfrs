@@ -10,10 +10,6 @@
 {% endif %}
 
 
-
-{% set details = data.type %}
-
-
 {% block pageTitle %}
 {{ ["Review evidence claim: ", claim.claimID, " - process a claim"] | join }}
 {% endblock %}
@@ -57,6 +53,10 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
 
+        {% include "../_components/claim-details.html" %}
+
+    </div>
+    <div class="govuk-grid-column-one-half">
         <h2 class="govuk-heading-m">
             Evidence of {{data.type}}
         </h2>
@@ -71,16 +71,11 @@
             {% include "../_components/file-section.html" %}
             {% endif %}
         </dl>
-
-        {% include "../_components/claim-details.html" %}
-
-    </div>
-    <div class="govuk-grid-column-one-half">
         <form action="../evidence-check-handler" method="post" novalidate>
             <div class="govuk-form-group {% if data.submitError =='missing' %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        Does the evidence of {{data.type}} meet the required criteria? {{note}}
+                        Does the evidence of {{data.type}} meet the required criteria?
                     </legend>
                     {% if data.submitError =='missing' %}
                     <p id="answer-error" class="govuk-error-message">

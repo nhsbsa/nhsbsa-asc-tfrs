@@ -190,9 +190,32 @@ router.post('/claim-process-handler', function (req, res) {
 });
 
 router.get('/outcome-handler', function (req, res) {
-  
-        res.redirect('process-claim/claim')
-
+  date = new Date();
+  claimID = req.session.data.id
+  for (const claim of req.session.data.claims) {
+    if (claim.claimID == claimID) {
+      if (req.session.data.result == "reject") {
+        claim.status = "rejected"
+        note = {
+          "author": "John Smith",
+          "date": date,
+          "category": "System",
+          "note": "Claim was rejected."
+        }
+        claim.notes.push(note)
+      } else if (req.session.data.result == "approve") {
+        claim.status = "approved"
+        note = {
+          "author": "John Smith",
+          "date": date,
+          "category": "System",
+          "note": "Claim was approved."
+        }
+        claim.notes.push(note)
+      }
+    }
+  }
+        res.redirect('process-claim/claim?processSuccess=true')
 });
 
 
