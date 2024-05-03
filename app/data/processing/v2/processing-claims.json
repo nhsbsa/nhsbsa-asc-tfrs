@@ -214,7 +214,7 @@
     "evidenceOfPayment": ["invoice007.pdf"],
     "evidenceOfPaymentreview": {
       "pass": "Completed",
-      "note": null
+      "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for."
     },
 	"paymentNote": null,
     "completionNote": null,

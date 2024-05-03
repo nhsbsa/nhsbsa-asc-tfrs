@@ -71,6 +71,7 @@
             {% include "../_components/file-section.html" %}
             {% endif %}
         </dl>
+        {% if (claim.status == "submitted") or (data.type == "payment" and claim.evidenceOfPaymentreview.pass == null) or (data.type == "completion" and claim.evidenceOfCompletionreview.pass == null) %}
         <form action="../evidence-check-handler" method="post" novalidate>
             <div class="govuk-form-group {% if data.submitError =='missing' %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset">
@@ -128,6 +129,25 @@
                 Continue
             </button>
         </form>
+
+        {% else %}
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                Does the evidence of {{data.type}} meet the required criteria?
+            </legend>
+            {% if (data.type == "payment" and claim.evidenceOfPaymentreview.note == null) or (data.type == "completion" and claim.evidenceOfCompletionreview.note == null)  %}
+                <p>Yes</p>
+                {% else %}
+                <p>No</p>
+                {% if data.type == "payment" %}
+                    <p>{{claim.evidenceOfPaymentreview.note}}</p>
+                    {% else %}
+                    <p>{{claim.evidenceOfCompletionreview.note}}</p>
+                {% endif %}
+            {% endif %}
+
+        {% endif %}
+
     </div>
 </div>
 
