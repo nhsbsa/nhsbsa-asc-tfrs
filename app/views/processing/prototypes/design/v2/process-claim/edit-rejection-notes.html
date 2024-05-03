@@ -12,20 +12,28 @@
         
         <form action="../update-rejection-notes" method="post" novalidate>
             <div class="govuk-form-group">
-            <h1 class="govuk-label-wrapper">
-              <label class="govuk-label govuk-label--l" for="more-detail">
-                Edit rejection note?
-              </label>
-            </h1>
-            <div id="more-detail-hint" class="govuk-hint">
-                Update your note and click upload.
-              </div>
-            <h2 class="govuk-heading-m">Evidence of payment</h2>
-            <textarea class="govuk-textarea" id="paymentRejectionNote" name="paymentRejectionNote" rows="5" aria-describedby="payment-rejection-note-hint">{{claim.evidenceOfPaymentreview.note}}</textarea>
-
-            <h2 class="govuk-heading-m">Evidence of completion</h2>
-            <textarea class="govuk-textarea" id="completionRejectionNote" name="completionRejectionNote" rows="5" aria-describedby="completion-rejection-note-hint">{{claim.evidenceOfCompletionreview.note}}</textarea>
-          </div>
+                <h1 class="govuk-label-wrapper">
+                <label class="govuk-label govuk-label--l" for="more-detail">
+                    Edit rejection note?
+                </label>
+                </h1>
+                {% if claim.evidenceOfPaymentreview.note %}
+                <h2 class="govuk-heading-m" style="margin-bottom: 10px;">Evidence of payment</h2>
+                <p class="govuk-body" style="margin-top: 5px;">The evidence of payment did not meet the required criteria.</p>
+                <label class="govuk-label" for="paymentRejectionNote">
+                    Rejection note
+                </label>
+                <textarea class="govuk-textarea" id="paymentRejectionNote" name="paymentRejectionNote" rows="5" aria-describedby="payment-rejection-note-hint">{{claim.evidenceOfPaymentreview.note}}</textarea>
+                {% endif %}
+                {% if claim.evidenceOfCompletionreview.note %}
+                <h2 class="govuk-heading-m" style="margin-bottom: 10px;">Evidence of completion</h2>
+                <p class="govuk-body" style="margin-top: 5px;">The evidence of completion did not meet the required criteria.</p>
+                <label class="govuk-label" for="completionRejectionNote">
+                    Rejection note
+                </label>
+                <textarea class="govuk-textarea" id="completionRejectionNote" name="completionRejectionNote" rows="5" aria-describedby="completion-rejection-note-hint">{{claim.evidenceOfCompletionreview.note}}</textarea>
+                {% endif %}
+            </div>
 
           <div class="govuk-button-group">
             <button type="submit" class="govuk-button" data-module="govuk-button">
