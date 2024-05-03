@@ -132,19 +132,46 @@
 
         {% else %}
 
+
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                 Does the evidence of {{data.type}} meet the required criteria?
             </legend>
+            <dl class="govuk-summary-list">
             {% if (data.type == "payment" and claim.evidenceOfPaymentreview.note == null) or (data.type == "completion" and claim.evidenceOfCompletionreview.note == null)  %}
-                <p>Yes</p>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Verdict
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        Yes
+                    </dd>
+                </div>
                 {% else %}
-                <p>No</p>
-                {% if data.type == "payment" %}
-                    <p>{{claim.evidenceOfPaymentreview.note}}</p>
-                    {% else %}
-                    <p>{{claim.evidenceOfCompletionreview.note}}</p>
-                {% endif %}
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Verdict
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        No
+                    </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Note
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if data.type == "payment" %}
+                            {{claim.evidenceOfPaymentreview.note}}
+                        {% else %}
+                            {{claim.evidenceOfCompletionreview.note}}
+                        {% endif %}
+                    </dd>
+                </div>
+                
             {% endif %}
+            </dl>
+
+
 
         {% endif %}
 
