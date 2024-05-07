@@ -13,6 +13,7 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+
     <span class="govuk-caption-l">Process a claim</span>
     <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}</h1>
     <p class="govuk-body">The claim has <span class="govuk-!-font-weight-bold">{% if data.result == "reject" %}not{%
@@ -35,7 +36,7 @@
     <p class="govuk-body">The organisation will receive the following note to explain why it was rejected. This is based
       on the answers and notes given to the criteria checks.</p>
     {{ claim | rejectionNote_V2 }}
-    <p class="govuk-body"><a class="govuk-link" href="#">Edit rejection note</a></p>
+    <p class="govuk-body"><a class="govuk-link" href="./edit-rejection-notes.html">Edit rejection note</a></p>
     {% endif %}
     <p class="govuk-body">Confirm that the evidence provided did{% if data.result == "reject" %} not{%
       endif %} meet all the criteria and that this claim should be {% if data.result == "approve" %}approved{% elif

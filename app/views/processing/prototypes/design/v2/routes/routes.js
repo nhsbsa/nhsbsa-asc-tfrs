@@ -221,5 +221,35 @@ router.post('/saveAndExit', function (req, res) {
   res.redirect('process-claim/start-process?processSuccess')
 });
 
+router.post('/update-rejection-notes', function (req, res) {
+  delete req.session.data.paymentEmptyInput
+    delete req.session.data.completionEmptyInput
+  const claimID = req.session.data.id
+  var foundClaim = null 
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
+    }
+  }
+
+  foundClaim.evidenceOfPaymentreview.note = req.session.data.paymentRejectionNote
+  foundClaim.evidenceOfCompletionreview.note = req.session.data.completionRejectionNote
+
+  var baseErrorURL = 'process-claim/edit-rejection-notes' + '?id=' + claimID
+  if (foundClaim.evidenceOfPaymentreview.note == "") {
+    baseErrorURL += "&paymentEmptyInput=true"
+  }
+  if (foundClaim.evidenceOfCompletionreview.note == "") {
+    baseErrorURL += "&completionEmptyInput=true"
+  }
+  if (foundClaim.evidenceOfPaymentreview.note != null && foundClaim.evidenceOfPaymentreview.note != "" && foundClaim.evidenceOfCompletionreview.note != "" && foundClaim.evidenceOfCompletionreview.note != "") {
+    res.redirect("process-claim/outcome")
+    delete req.session.data.paymentEmptyInput
+    delete req.session.data.completionEmptyInput
+  } else {
+    res.redirect(baseErrorURL)
+  }
+});
+
 
 module.exports = router
