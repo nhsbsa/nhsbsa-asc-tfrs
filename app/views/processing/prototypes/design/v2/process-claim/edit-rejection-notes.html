@@ -45,22 +45,36 @@
                     Edit rejection note?
                 </label>
                 </h1>
-                {% if (claim.evidenceOfPaymentreview.note != null or data.paymentEmptyInput == true) %}
-                <h2 class="govuk-heading-m" style="margin-bottom: 10px;">Evidence of payment</h2>
-                <p class="govuk-body" style="margin-top: 5px;">The evidence of payment did not meet the required criteria.</p>
-                <label class="govuk-label" for="paymentRejectionNote">
-                    Rejection note
-                </label>
-                <textarea class="govuk-textarea" id="paymentRejectionNote" name="paymentRejectionNote" rows="5" aria-describedby="payment-rejection-note-hint">{{claim.evidenceOfPaymentreview.note}}</textarea>
-                {% endif %}
-                {% if (claim.evidenceOfCompletionreview.note != null or data.completionEmptyInput == true) %}
-                <h2 class="govuk-heading-m" style="margin-bottom: 10px;">Evidence of completion</h2>
-                <p class="govuk-body" style="margin-top: 5px;">The evidence of completion did not meet the required criteria.</p>
-                <label class="govuk-label" for="completionRejectionNote">
-                    Rejection note
-                </label>
-                <textarea class="govuk-textarea" id="completionRejectionNote" name="completionRejectionNote" rows="5" aria-describedby="completion-rejection-note-hint">{{claim.evidenceOfCompletionreview.note}}</textarea>
-                {% endif %}
+                <div class="{% if (data.paymentEmptyInput) %} govuk-form-group--error {% endif %}">
+                    {% if (claim.evidenceOfPaymentreview.note != null or data.paymentEmptyInput == true) %}
+                        <h2 class="govuk-heading-m" style="margin-bottom: 10px;">Evidence of payment</h2>
+                        <p class="govuk-body" style="margin-top: 5px;">The evidence of payment did not meet the required criteria.</p>
+                        {% if (data.paymentEmptyInput) %}
+                            <p id="passport-issued-error" class="govuk-error-message">
+                                <span class="govuk-visually-hidden">Error:</span>Enter a rejection note for evidence of payment.
+                            </p>
+                        {% endif %}
+                        <label class="govuk-label" for="paymentRejectionNote">
+                            Rejection note
+                        </label>
+                        <textarea class="govuk-textarea" id="paymentRejectionNote" name="paymentRejectionNote" rows="5" aria-describedby="payment-rejection-note-hint">{{claim.evidenceOfPaymentreview.note}}</textarea>
+                    {% endif %}
+                </div>
+                <div class="{% if (data.completionEmptyInput) %} govuk-form-group--error {% endif %}">
+                    {% if (claim.evidenceOfCompletionreview.note != null or data.completionEmptyInput == true) %}
+                        <h2 class="govuk-heading-m" style="margin-bottom: 10px;">Evidence of completion</h2>
+                        <p class="govuk-body" style="margin-top: 5px;">The evidence of completion did not meet the required criteria.</p>
+                        {% if (data.completionEmptyInput) %}
+                                <p id="passport-issued-error" class="govuk-error-message">
+                                    <span class="govuk-visually-hidden">Error:</span>Enter a rejection note for evidence of completion.
+                                </p>
+                            {% endif %}
+                        <label class="govuk-label" for="completionRejectionNote">
+                            Rejection note
+                        </label>
+                        <textarea class="govuk-textarea" id="completionRejectionNote" name="completionRejectionNote" rows="5" aria-describedby="completion-rejection-note-hint">{{claim.evidenceOfCompletionreview.note}}</textarea>
+                    {% endif %}
+                </div>
             </div>
 
           <div class="govuk-button-group">

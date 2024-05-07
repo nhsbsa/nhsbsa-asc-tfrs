@@ -222,6 +222,8 @@ router.post('/saveAndExit', function (req, res) {
 });
 
 router.post('/update-rejection-notes', function (req, res) {
+  delete req.session.data.paymentEmptyInput
+    delete req.session.data.completionEmptyInput
   const claimID = req.session.data.id
   var foundClaim = null 
   for (const c of req.session.data['claims']) {
