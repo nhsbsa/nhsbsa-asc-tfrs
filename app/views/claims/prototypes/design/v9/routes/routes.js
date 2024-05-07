@@ -574,7 +574,7 @@ router.post('/validate-job-title', function (req, res) {
   delete req.session.data['declarationSubmitError'];
   const jobTitle = req.session.data.jobTitle
 
-  var validCharactersRegex = /^[a-zA-Z0-9-]+$/;
+  var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
 
   if (jobTitle == "") {
     res.redirect('account-setup/job-title?jobTitleEmptyError=true')
