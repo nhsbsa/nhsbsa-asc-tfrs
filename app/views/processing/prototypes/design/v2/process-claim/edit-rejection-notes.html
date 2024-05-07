@@ -9,6 +9,34 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+
+        {% if data.paymentEmptyInput or data.completionEmptyInput %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                {% if data.paymentEmptyInput %}
+                <li>
+                  <a href="#paymentRejectionNote">
+                    Enter a rejection note for evidence of payment.
+                  </a>
+                </li>
+                {% endif %}
+                {% if data.completionEmptyInput %}
+                <li>
+                  <a href="#completionRejectionNote">
+                    Enter a completion note for evidence of completion.
+                  </a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
         
         <form action="../update-rejection-notes" method="post" novalidate>
             <div class="govuk-form-group">
@@ -17,7 +45,7 @@
                     Edit rejection note?
                 </label>
                 </h1>
-                {% if claim.evidenceOfPaymentreview.note %}
+                {% if (claim.evidenceOfPaymentreview.note != null or data.paymentEmptyInput == true) %}
                 <h2 class="govuk-heading-m" style="margin-bottom: 10px;">Evidence of payment</h2>
                 <p class="govuk-body" style="margin-top: 5px;">The evidence of payment did not meet the required criteria.</p>
                 <label class="govuk-label" for="paymentRejectionNote">
@@ -25,7 +53,7 @@
                 </label>
                 <textarea class="govuk-textarea" id="paymentRejectionNote" name="paymentRejectionNote" rows="5" aria-describedby="payment-rejection-note-hint">{{claim.evidenceOfPaymentreview.note}}</textarea>
                 {% endif %}
-                {% if claim.evidenceOfCompletionreview.note %}
+                {% if (claim.evidenceOfCompletionreview.note != null or data.completionEmptyInput == true) %}
                 <h2 class="govuk-heading-m" style="margin-bottom: 10px;">Evidence of completion</h2>
                 <p class="govuk-body" style="margin-top: 5px;">The evidence of completion did not meet the required criteria.</p>
                 <label class="govuk-label" for="completionRejectionNote">

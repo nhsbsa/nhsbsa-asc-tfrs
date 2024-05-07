@@ -230,15 +230,23 @@ router.post('/update-rejection-notes', function (req, res) {
     }
   }
 
-  var newPaymentRejectionNote = req.session.data.paymentRejectionNote
-  var newCompletionRejectionNote = req.session.data.completionRejectionNote
-  if (newPaymentRejectionNote != null) {
-    foundClaim.evidenceOfPaymentreview.note = newPaymentRejectionNote
+  foundClaim.evidenceOfPaymentreview.note = req.session.data.paymentRejectionNote
+  foundClaim.evidenceOfCompletionreview.note = req.session.data.completionRejectionNote
+
+  var baseErrorURL = 'process-claim/edit-rejection-notes' + '?id=' + claimID
+  if (foundClaim.evidenceOfPaymentreview.note == "") {
+    baseErrorURL += "&paymentEmptyInput=true"
   }
-  if (newCompletionRejectionNote != null) {
-    foundClaim.evidenceOfCompletionreview.note = newCompletionRejectionNote
+  if (foundClaim.evidenceOfCompletionreview.note == "") {
+    baseErrorURL += "&completionEmptyInput=true"
   }
-  res.redirect('process-claim/outcome' + '?id=' + claimID)
+  if (foundClaim.evidenceOfPaymentreview.note != null && foundClaim.evidenceOfPaymentreview.note != "" && foundClaim.evidenceOfCompletionreview.note != "" && foundClaim.evidenceOfCompletionreview.note != "") {
+    res.redirect("process-claim/outcome")
+    delete req.session.data.paymentEmptyInput
+    delete req.session.data.completionEmptyInput
+  } else {
+    res.redirect(baseErrorURL)
+  }
 });
 
 
