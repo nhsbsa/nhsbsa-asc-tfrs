@@ -1,0 +1,36 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% set claim = data.id | findClaim_V8(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Calculate Reimbursement amount: ", claim.claimID, " - process a claim"] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="./claim?id={{data.id}}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+            <form action="../calculate-reimbursement-amount" method="post" novalidate>
+              <div class="govuk-form-group">
+                <h1 class="govuk-label-wrapper">
+                  <label class="govuk-label govuk-label--l" for="postcode">
+                    Calculate the reimbursement amount
+                  </label>
+                </h1>
+                <div id="event-name-hint" class="govuk-hint">
+                  How much are you reimbursing for?
+                </div>
+                <input class="govuk-input govuk-input--width-10" id="reimbursementAmount" name="reimbursementAmount" type="text">
+              </div>
+              <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+              </button>
+            </form>
+  </div>
+</div>
+
+
+{% endblock %}

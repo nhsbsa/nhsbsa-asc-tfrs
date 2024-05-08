@@ -180,7 +180,7 @@ router.post('/claim-process-handler', function (req, res) {
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
       if (claim.evidenceOfPaymentreview.pass && claim.evidenceOfCompletionreview.pass) {
-        res.redirect('process-claim/outcome?result=approve')
+        res.redirect('process-claim/reimbursement-amount')
       } else {
         res.redirect('process-claim/outcome?result=reject')
       }
@@ -248,6 +248,17 @@ router.post('/update-rejection-notes', function (req, res) {
     delete req.session.data.completionEmptyInput
   } else {
     res.redirect(baseErrorURL)
+  }
+});
+
+router.post('/calculate-reimbursement-amount', function (req, res) {
+  claimID = req.session.data.id
+  var reimbursementAmount = req.session.data.reimbursementAmount
+  for (const claim of req.session.data.claims) {
+    if (claim.claimID == claimID) {
+      claim.reimbursementAmount = reimbursementAmount
+      res.redirect('process-claim/outcome?result=approve')
+    }
   }
 });
 
