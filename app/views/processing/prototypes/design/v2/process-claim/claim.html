@@ -41,12 +41,12 @@
               <ul class="govuk-list govuk-error-summary__list">
                 {% if data.incompletePayment %}
                 <li>
-                  <a href="#">Please complete processing evidence of payment</a>
+                  <a href="#company-details-1-status"> Complete check on evidence of payment</a>
                 </li>
                 {% endif %}
                 {% if data.incompleteCompletion %}
                 <li>
-                  <a href="#">Please complete processing evidence of completion</a>
+                  <a href="#company-details-2-status"> Complete check on evidence of completion</a>
                 </li>
                 {% endif %}
               </ul>
@@ -69,15 +69,22 @@
     </div>
 
     <div class="govuk-grid-column-one-half">
-
+        <!-- <div class=" {% if data.incompletePayment or data.incompleteCompletion %} govuk-form-group--error {% endif %}"> -->
         {% if claim.status == "submitted" or claim.status == "partlyProcessed" %}
         <h2 class="govuk-heading-m">Perform checks on evidence</h2>
         {% else %}
         <h2 class="govuk-heading-m">Completed checks on evidence</h2>
         {% endif %}
+        
         <ul class="govuk-task-list">
+            <div class=" {% if data.incompletePayment %} govuk-form-group--error {% endif %}">
             <li class="govuk-task-list__item govuk-task-list__item--with-link">
                 <div class="govuk-task-list__name-and-hint">
+                    {% if data.incompletePayment%}
+                    <p id="answer-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> Complete check on evidence of completion
+                    </p>
+                {% endif %} 
                     <a class="govuk-link govuk-task-list__link" href="review-evidence?type=payment&processSuccess"
                         aria-describedby="company-details-1-status">
                         Evidence of payment
@@ -87,8 +94,15 @@
                     {{ claim.evidenceOfPaymentreview.pass | sectionCheck_V2 }}
                 </div>
             </li>
+        </div>
+        <div class=" {% if data.incompleteCompletion %} govuk-form-group--error {% endif %}">
             <li class="govuk-task-list__item govuk-task-list__item--with-link">
                 <div class="govuk-task-list__name-and-hint">
+                {% if data.incompleteCompletion%}
+                    <p id="answer-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> Complete check on evidence of completion
+                    </p>
+                {% endif %} 
                     <a class="govuk-link govuk-task-list__link" href="review-evidence?type=completion&processSuccess"
                         aria-describedby="company-details-2-status">
                         Evidence of completion
@@ -98,7 +112,10 @@
                     {{ claim.evidenceOfCompletionreview.pass | sectionCheck_V2 }}
                 </div>
             </li>
+        </div>
         </ul>
+        
+
         {% if claim.status == "submitted" or claim.status == "partlyProcessed" %}
         <div class="govuk-button-group">
             <form action="../claim-process-handler?processSuccess" method="post" novalidate>
@@ -112,6 +129,7 @@
                 </button>
             </form>
         </div>
+    <!-- </div> -->
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
         {% endif %}
 
