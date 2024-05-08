@@ -104,7 +104,7 @@ router.post('/search-claim-id', function (req, res) {
   if (foundClaim == null) {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
   }
-  if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
+  if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected"  || foundClaim.status == "partlyProcessed") {
     return res.redirect('process-claim/claim' + '?id=' + claimID)
   } else {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
@@ -218,6 +218,14 @@ router.get('/outcome-handler', function (req, res) {
 });
 
 router.post('/saveAndExit', function (req, res) {
+  const claimID = req.session.data.id
+  var foundClaim = null 
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
+    }
+  }
+  foundClaim.status = "partlyProcessed"
   res.redirect('process-claim/start-process?processSuccess')
 });
 

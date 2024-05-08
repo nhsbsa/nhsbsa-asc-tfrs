@@ -32,7 +32,7 @@
         {% endif %}
 
 
-        {% if claim.status == "submitted" %}
+        {% if claim.status == "submitted" or claim.status == "partlyProcessed" %}
         <span class="govuk-caption-l">Process a claim</span>
         {% endif %}
         <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | processorstatusTag_V2 }}</h1>
@@ -46,7 +46,7 @@
 
     <div class="govuk-grid-column-one-half">
 
-        {% if claim.status == "submitted" %}
+        {% if claim.status == "submitted" or claim.status == "partlyProcessed" %}
         <h2 class="govuk-heading-m">Perform checks on evidence</h2>
         {% else %}
         <h2 class="govuk-heading-m">Completed checks on evidence</h2>
@@ -75,7 +75,7 @@
                 </div>
             </li>
         </ul>
-        {% if claim.status == "submitted" %}
+        {% if claim.status == "submitted" or claim.status == "partlyProcessed" %}
         <div class="govuk-button-group">
             <form action="../claim-process-handler?processSuccess" method="post" novalidate>
                 <button type="submit" class="govuk-button" data-module="govuk-button">
