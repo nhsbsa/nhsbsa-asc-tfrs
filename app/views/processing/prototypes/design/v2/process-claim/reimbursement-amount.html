@@ -13,22 +13,37 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-            <form action="../calculate-reimbursement-amount" method="post" novalidate>
-              <div class="govuk-form-group">
-                <h1 class="govuk-label-wrapper">
-                  <label class="govuk-label govuk-label--l" for="postcode">
-                    Calculate the reimbursement amount
-                  </label>
-                </h1>
-                <div id="event-name-hint" class="govuk-hint">
-                  How much are you reimbursing for?
-                </div>
-                <input class="govuk-input govuk-input--width-10" id="reimbursementAmount" name="reimbursementAmount" type="text">
-              </div>
-              <button type="submit" class="govuk-button" data-module="govuk-button">
-                Continue
-              </button>
-            </form>
+    <h1 class="govuk-heading-l">
+      Reimbursement amount 
+    </h1>
+    <p class="govuk-body">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua. Enim sit amet venenatis urna    
+    </p>
+    <p class="govuk-body">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua. Enim sit amet venenatis urna
+    </p>
+    <p class="govuk-body">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua. Enim sit amet venenatis urna
+    </p>
+    <form action="../calculate-reimbursement-amount" method="post" novalidate>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            What is the reimbursement amount for training?
+          </legend>
+          <div class="govuk-input__wrapper">
+            <div class="govuk-input__prefix" aria-hidden="true">£</div>
+            <input class="govuk-input govuk-input--width-5" id="reimbursementAmount" name="reimbursementAmount" type="text" spellcheck="false">
+          </div>
+        </fieldset>
+      </div>
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+    </form>
   </div>
 </div>
 
