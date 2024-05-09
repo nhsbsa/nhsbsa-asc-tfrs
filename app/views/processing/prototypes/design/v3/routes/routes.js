@@ -141,9 +141,11 @@ router.post('/claim-process-handler', function (req, res) {
   var baseURL = "process-claim/claim?id=" + claimID
   var errorParamaters = ""
   var foundClaim = null
+
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
       foundClaim = claim
+      updateClaim(foundClaim, paymentResponse, paymentReimbursementAmount, paymentNoNote, completionResponse, completionNoNote)
       if (paymentResponse == null) {
         errorParamaters += "&paymentResponseIncomplete=true";
       } else if (paymentResponse == "yes" && paymentReimbursementAmount == null) {
@@ -165,7 +167,6 @@ router.post('/claim-process-handler', function (req, res) {
       }
       
       if (errorParamaters == "") {
-        updateClaim(foundClaim, paymentResponse, paymentReimbursementAmount, paymentNoNote, completionResponse, completionNoNote)
         if (paymentResponse == "yes" && completionResponse == "yes") {
           res.redirect('process-claim/outcome?result=approve')
         } else {
