@@ -93,136 +93,134 @@
     </div>
 
     <div class="govuk-grid-column-one-half">
-        {% if claim.status == "submitted" or claim.status == "partlyProcessed" %}
-        <h2 class="govuk-heading-m">Perform review of evidence</h2>
-        {% else %}
-        <h2 class="govuk-heading-m">Completed review of evidence</h2>
-        {% endif %}
-        
-        <!-- evidence of payment -->
-        <div class="govuk-form-group">
-            <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                    Does the evidence of payment meet the required criteria?
-                </legend>
-              <div class="govuk-radios" data-module="govuk-radios">
-                <div class="govuk-radios__item">
+        <form action="../claim-process-handler?processSuccess" method="post" novalidate>
+            {% if claim.status == "submitted" or claim.status == "partlyProcessed" %}
+            <h2 class="govuk-heading-m">Perform review of evidence</h2>
+            {% else %}
+            <h2 class="govuk-heading-m">Completed review of evidence</h2>
+            {% endif %}
+            
+            <!-- evidence of payment -->
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                        Does the evidence of payment meet the required criteria?
+                    </legend>
+                <div class="govuk-radios" data-module="govuk-radios">
+                    <div class="govuk-radios__item">
 
-                  <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="yes" data-aria-controls="conditional-payment-yes">
-                  <label class="govuk-label govuk-radios__label" for="paymentYes">
-                    Yes
-                  </label>
-
-                </div>
-                <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-payment-yes" data-maxlength="1000">
-                  <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count">
-                    <label class="govuk-label" for="payment-yes">
-                        What was the cost per learner?
-                    </label>
-                    <div id="payment-note-hint" class="govuk-hint">
-                        Enter the amount the training cost for a single learner. </br>
-                        For instance, if the organisation paid £200 for 4 learners then the cost per learner is £50.</br>
-                        The maximum reimbursable amount for this training is £{{claim.training.reimbursementAmount}}. </br>
-                        The organisation will not get back more than they actually paid.</br>
-                        <a class="govuk-link">View more guidance on calculating cost per learner.</a>
-                    </div>
-
-                    <div class="govuk-input__wrapper">
-                        <div class="govuk-input__prefix" aria-hidden="true">£</div>
-                        <input class="govuk-input govuk-input--width-5" id="payment-yes" name="payment-yes" type="text">
-                      </div>
-
-                  </div>
-                </div>
-
-                <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no" data-aria-controls="conditional-payment-no">
-                    <label class="govuk-label govuk-radios__label" for="paymentNo">
-                      No
-                    </label>
-                  </div>
-                  <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-payment-no" data-maxlength="1000">
-                    <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count">
-                      <label class="govuk-label" for="payment-no">
-                        Why did the evidence not meet the required criteria?
-                      </label>
-                      <div id="payment-note-hint" class="govuk-hint">
-                          This will be seen by the submitter when the claim is processed.
-                      </div>
-                      <textarea class="govuk-textarea govuk-js-character-count" id="payment-no" name="payment-no"
-                              rows="21"
-                              aria-describedby="payment-no-note-info note-hint">{{ note | default ('') }}
-                      </textarea>
-                      <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
-                          You can enter up to 1000 characters
-                      </div>
-                    </div>
-                  </div>
-              </div>
-            </fieldset>
-          </div>
-
-        <!-- evidence of completion -->
-        <div class="govuk-form-group">
-            <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                    Does the evidence of completion meet the required criteria?
-                </legend>
-              <div class="govuk-radios" data-module="govuk-radios">
-                <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="completionYes" name="completion" type="radio"
-                        value="yes" {% if completed !=null and completed  or data.criteriaCheck=='yes'%}checked{% endif %}>
-                    <label class="govuk-label govuk-radios__label" for="completionYes">
+                    <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="yes" data-aria-controls="conditional-paymentReimbursementAmount">
+                    <label class="govuk-label govuk-radios__label" for="paymentYes">
                         Yes
                     </label>
-                </div>
-                <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="completionNo" name="completion" type="radio"
-                        value="no" data-aria-controls="conditional-notes" {% if completed !=null and not
-                        completed or data.criteriaCheck=='no' %}checked{% endif %}>
-                    <label class="govuk-label govuk-radios__label" for="completionNo">
+
+                    </div>
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-paymentReimbursementAmount" data-maxlength="1000">
+                    <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count">
+                        <label class="govuk-label" for="paymentReimbursementAmount">
+                            What was the cost per learner?
+                        </label>
+                        <div id="payment-note-hint" class="govuk-hint">
+                            Enter the amount the training cost for a single learner. </br>
+                            For instance, if the organisation paid £200 for 4 learners then the cost per learner is £50.</br>
+                            The maximum reimbursable amount for this training is £{{claim.training.reimbursementAmount}}. </br>
+                            The organisation will not get back more than they actually paid.</br>
+                            <a class="govuk-link">View more guidance on calculating cost per learner.</a>
+                        </div>
+
+                        <div class="govuk-input__wrapper">
+                            <div class="govuk-input__prefix" aria-hidden="true">£</div>
+                            <input class="govuk-input govuk-input--width-5" id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text">
+                        </div>
+
+                    </div>
+                    </div>
+
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no" data-aria-controls="conditional-payment-no">
+                        <label class="govuk-label govuk-radios__label" for="paymentNo">
                         No
-                    </label>
-                </div>
-                
-                <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-notes">
-                    <div class="govuk-form-group govuk-character-count {% if data.submitError =='notemissing' %}govuk-form-group--error{% endif %}" data-module="govuk-character-count"
-                        data-maxlength="1000">
-                        <label class="govuk-label" for="completionNote">
+                        </label>
+                    </div>
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-payment-no" data-maxlength="1000">
+                        <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count">
+                        <label class="govuk-label" for="payment-no">
                             Why did the evidence not meet the required criteria?
                         </label>
-                        <div id="completionNote-hint" class="govuk-hint">
+                        <div id="payment-note-hint" class="govuk-hint">
                             This will be seen by the submitter when the claim is processed.
                         </div>
-                        {% if data.submitError =='notemissing' %}
-                        <p id="note-error" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span> Enter why the evidence didn't meet
-                            the required criteria
-                        </p>
-                        {% endif %}
-                        <textarea class="govuk-textarea govuk-js-character-count {% if data.submitError =='missing' %}govuk-textarea--error{% endif %}" id="completionNote" name="completionNote"
-                            rows="21"
-                            aria-describedby="completionNote-info completionNote-hint">{{ note | default ('') }}</textarea>
-                        <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
+                        <textarea class="govuk-textarea govuk-js-character-count" id="payment-no" name="payment-no"
+                                rows="21"
+                                aria-describedby="payment-no-note-info note-hint">{{ note | default ('') }}
+                        </textarea>
+                        <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
                             You can enter up to 1000 characters
+                        </div>
                         </div>
                     </div>
                 </div>
+                </fieldset>
             </div>
-            </fieldset>
-          </div>
 
-        
-        {% if claim.status == "submitted" or claim.status == "partlyProcessed" %}
-        <div class="govuk-button-group">
-            <form action="../claim-process-handler?processSuccess" method="post" novalidate>
+            <!-- evidence of completion -->
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                        Does the evidence of completion meet the required criteria?
+                    </legend>
+                <div class="govuk-radios" data-module="govuk-radios">
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="completionYes" name="completion" type="radio"
+                            value="yes" {% if completed !=null and completed  or data.criteriaCheck=='yes'%}checked{% endif %}>
+                        <label class="govuk-label govuk-radios__label" for="completionYes">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="govuk-radios__item">
+                        <input class="govuk-radios__input" id="completionNo" name="completion" type="radio"
+                            value="no" data-aria-controls="conditional-notes" {% if completed !=null and not
+                            completed or data.criteriaCheck=='no' %}checked{% endif %}>
+                        <label class="govuk-label govuk-radios__label" for="completionNo">
+                            No
+                        </label>
+                    </div>
+                    
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-notes">
+                        <div class="govuk-form-group govuk-character-count {% if data.submitError =='notemissing' %}govuk-form-group--error{% endif %}" data-module="govuk-character-count"
+                            data-maxlength="1000">
+                            <label class="govuk-label" for="completionNote">
+                                Why did the evidence not meet the required criteria?
+                            </label>
+                            <div id="completionNote-hint" class="govuk-hint">
+                                This will be seen by the submitter when the claim is processed.
+                            </div>
+                            {% if data.submitError =='notemissing' %}
+                            <p id="note-error" class="govuk-error-message">
+                                <span class="govuk-visually-hidden">Error:</span> Enter why the evidence didn't meet
+                                the required criteria
+                            </p>
+                            {% endif %}
+                            <textarea class="govuk-textarea govuk-js-character-count {% if data.submitError =='missing' %}govuk-textarea--error{% endif %}" id="completionNote" name="completionNote"
+                                rows="21"
+                                aria-describedby="completionNote-info completionNote-hint">{{ note | default ('') }}</textarea>
+                            <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
+                                You can enter up to 1000 characters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </fieldset>
+            </div>
+
+            {% if claim.status == "submitted" or claim.status == "partlyProcessed" %}
+            <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Complete claim
                 </button>
-            </form>
-        </div>
-        {% endif %}
-
+            </div>
+            {% endif %}
+        </form>
     </div>
 </div>
 

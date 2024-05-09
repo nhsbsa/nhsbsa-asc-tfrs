@@ -7,11 +7,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-{% if data.result == "approve" %}
-  <a href="./reimbursement-amount" class="govuk-back-link">Back</a>
-  {% else %}
-  <a href="./claim?id={{data.id}}" class="govuk-back-link">Back</a>
-{% endif %}
+  <a href="./claim?id={{claim.id}}" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}

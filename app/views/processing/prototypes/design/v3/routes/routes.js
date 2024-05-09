@@ -135,61 +135,53 @@ foundClaim.notes.push(newNote);
   res.redirect('process-claim/claim' + '?id=' + claimID + "&noteAddedSuccess")
 });
 
-router.post('/evidence-check-handler', function (req, res) {
-  const response = req.session.data.criteriaCheck
-  const note = req.session.data.note
-  const type = req.session.data.type
-
-  delete req.session.data.submitError;
-  delete req.session.data.incompletePayment
-  delete req.session.data.incompleteCompletion
-
-  claimID = req.session.data.id
-
-  for (const claim of req.session.data.claims) {
-    if (claim.claimID == claimID) {
-        if (response == null) {
-          res.redirect('process-claim/review-evidence?type=' + type + '&submitError=missing')
-        } else if (response == "yes") {
-          delete req.session.data.criteriaCheck
-          delete req.session.data.note
-          delete req.session.data.type
-          updateClaim(claim, type, response, note)
-          res.redirect('process-claim/claim')
-        } else if (response == "no") {
-            if (note == "") {
-              res.redirect('process-claim/review-evidence?type=' + type + '&submitError=notemissing')
-            } else {
-              delete req.session.data.criteriaCheck
-              delete req.session.data.note
-              delete req.session.data.type
-              updateClaim(claim, type, response, note)
-              res.redirect('process-claim/claim')
-            }
-        }
-      }
-    }
-});
-
 router.post('/claim-process-handler', function (req, res) {
-  delete req.session.data.incompletePayment
-  delete req.session.data.incompleteCompletion
+  // delete req.session.data.incompletePayment
+  // delete req.session.data.incompleteCompletion
+
   claimID = req.session.data.id
-  var errorURL = "process-claim/claim?"
+  const paymentResponse = req.session.data.payment
+  const paymentReimbursementNote = req.session.data.paymentReimbursementAmount
+  const paymentNoNote = req.session.data.note
+  const completionResponse = req.session.data.completion
+  const completionNoNote = req.session.data.note
+
+
+  var baseURL = "process-claim/claim?id=" + claimID
+  var errorParamaters = ""
+  var foundClaim = null
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
-      if (claim.evidenceOfPaymentreview.pass && claim.evidenceOfCompletionreview.pass) {
-        res.redirect('process-claim/reimbursement-amount')
-      } else if (claim.evidenceOfPaymentreview.pass == false || claim.evidenceOfCompletionreview.pass == false) {
-        res.redirect('process-claim/outcome?result=reject')
+      foundClaim = claim
+      if (paymentResponse == null) {
+        errorParamaters += "&paymentResponseIncomplete";
+      } else if (paymentResponse == "yes" && paymentReimbursementNote == null) {
+        errorParamaters += "&paymentNoteIncomplete";
+      } else if (paymentResponse == "yes" && paymentReimbursementNote == "") {
+        errorParamaters += "&paymentReimbursementNoteEmpty";
+      } else if (paymentResponse == "no" && paymentNoNote == null) {
+        errorParamaters += "&paymentNoNoteIncomplete";
+      } else if (paymentResponse == "no" && paymentNoNote == "") {
+        errorParamaters += "&paymentNoNoteEmpty";
+      }
+
+      if (completionResponse == null) {
+        errorParamaters += "&completionResponseIncomplete";
+      } else if (completionResponse == "no" && completionNoNote == null) {
+        errorParamaters += "&completionNoNoteIncomplete";
+      } else if (completionResponse == "no" && completionNoNote == "") {
+        errorParamaters += "&completionNoNoteEmpty";
+      }
+      
+      if (errorParamaters == "") {
+        updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentNoNote, completionResponse, completionNoNote)
+        if (paymentResponse == "yes" && completionResponse == "yes") {
+          res.redirect('process-claim/outcome?result=approve')
+        } else {
+          res.redirect('process-claim/outcome?result=reject')
+        }
       } else {
-        if (claim.evidenceOfPaymentreview.pass == null) {
-          errorURL += "incompletePayment=true"
-        } 
-        if (claim.evidenceOfCompletionreview.pass == null) {
-          errorURL += "&incompleteCompletion=true"
-        } 
-        res.redirect(errorURL)
+        res.redirect('process-claim/claim' + errorParamaters)
       }
     }
   }
