@@ -26,23 +26,21 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(claim, type, response, note) {
+function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentNoNote, completionResponse, completionNoNote) {
+        if (paymentResponse == "yes") {
+            foundClaim.evidenceOfPaymentreview.pass = true
+            foundClaim.reimbursementAmount = paymentReimbursementNote
+        } else if (paymentResponse == "no") {
+            foundClaim.evidenceOfPaymentreview.pass = false
+            foundClaim.evidenceOfPaymentreview.note = paymentNoNote
+        }
 
-    if (type == "payment") {
-        if (response == "yes") {
-            claim.evidenceOfPaymentreview.pass = true
-        } else if (response == "no") {
-            claim.evidenceOfPaymentreview.pass = false
-            claim.evidenceOfPaymentreview.note = note
+        if (completionResponse == "yes") {
+            foundClaim.evidenceOfCompletionreview.pass = true
+        } else if (completionResponse == "no") {
+            foundClaim.evidenceOfCompletionreview.pass = false
+            foundClaim.evidenceOfCompletionreview.note = completionNoNote
         }
-    } else if (type == "completion") {
-        if (response == "yes") {
-            claim.evidenceOfCompletionreview.pass = true
-        } else if (response == "no") {
-            claim.evidenceOfCompletionreview.pass = false
-            claim.evidenceOfCompletionreview.note = note
-        }
-    }
 }
 
 function formatDate(isoDate) {

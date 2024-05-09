@@ -2,13 +2,12 @@
 
 {% set claim = data.id | findClaim_V8(data.claims) %}
 {% if data.type == "payment" %}
-{% set completed = claim.evidenceOfPaymentreview.pass %}
-{% set note = claim.evidenceOfPaymentreview.note %}
+    {% set completed = claim.evidenceOfPaymentreview.pass %}
+    {% set note = claim.evidenceOfPaymentreview.note %}
 {% elif data.type == "completion" %}
-{% set completed = claim.evidenceOfCompletionreview.pass %}
-{% set note = claim.evidenceOfCompletionreview.note %}
+    {% set completed = claim.evidenceOfCompletionreview.pass %}
+    {% set note = claim.evidenceOfCompletionreview.note %}
 {% endif %}
-
 
 {% block pageTitle %}
 {{ ["Review evidence claim: ", claim.claimID, " - process a claim"] | join }}
