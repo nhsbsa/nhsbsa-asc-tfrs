@@ -102,7 +102,7 @@
         <!-- evidence of payment -->
         <div class="govuk-form-group">
             <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                     Does the evidence of payment meet the required criteria?
                 </legend>
               <div class="govuk-radios" data-module="govuk-radios">
@@ -117,19 +117,21 @@
                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-payment-yes" data-maxlength="1000">
                   <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count">
                     <label class="govuk-label" for="payment-yes">
-                      Reimbursement amount
+                        What was the cost per learner?
                     </label>
                     <div id="payment-note-hint" class="govuk-hint">
-                        This will be seen by the submitter when the claim is processed.
+                        Enter the amount the training cost for a single learner. </br>
+                        For instance, if the organisation paid £200 for 4 learners then the cost per learner is £50.</br>
+                        The maximum reimbursable amount for this training is £{{claim.training.reimbursementAmount}}. </br>
+                        The organisation will not get back more than they actually paid.</br>
+                        <a class="govuk-link">View more guidance on calculating cost per learner.</a>
                     </div>
-                    <!-- <input class="govuk-input" id="payment-yes" name="payment-yes" type="yes"> -->
-                    <textarea class="govuk-textarea govuk-js-character-count" id="payment-yes" name="payment-yes"
-                            rows="21"
-                            aria-describedby="payment-yes-note-info note-hint">{{ note | default ('') }}
-                    </textarea>
-                    <div id="payment-yes-note-info" class="govuk-hint govuk-character-count__message">
-                        You can enter up to 1000 characters
-                    </div>
+
+                    <div class="govuk-input__wrapper">
+                        <div class="govuk-input__prefix" aria-hidden="true">£</div>
+                        <input class="govuk-input govuk-input--width-5" id="payment-yes" name="payment-yes" type="text">
+                      </div>
+
                   </div>
                 </div>
 
@@ -147,7 +149,6 @@
                       <div id="payment-note-hint" class="govuk-hint">
                           This will be seen by the submitter when the claim is processed.
                       </div>
-                      <!-- <input class="govuk-input" id="payment-no" name="payment-no" type="no"> -->
                       <textarea class="govuk-textarea govuk-js-character-count" id="payment-no" name="payment-no"
                               rows="21"
                               aria-describedby="payment-no-note-info note-hint">{{ note | default ('') }}
@@ -164,7 +165,7 @@
         <!-- evidence of completion -->
         <div class="govuk-form-group">
             <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
-                <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                     Does the evidence of completion meet the required criteria?
                 </legend>
               <div class="govuk-radios" data-module="govuk-radios">
@@ -177,21 +178,6 @@
 
                 </div>
                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-completion-yes" data-maxlength="1000">
-                  <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count">
-                    <label class="govuk-label" for="completion-yes">
-                      Reimbursement amount
-                    </label>
-                    <div id="completion-note-hint" class="govuk-hint">
-                        This will be seen by the submitter when the claim is processed.
-                    </div>
-                    <textarea class="govuk-textarea govuk-js-character-count" id="completion-yes" name="completion-yes"
-                            rows="21"
-                            aria-describedby="completion-yes-note-info note-hint">{{ note | default ('') }}
-                    </textarea>
-                    <div id="completion-yes-note-info" class="govuk-hint govuk-character-count__message">
-                        You can enter up to 1000 characters
-                    </div>
-                  </div>
                 </div>
 
                 <div class="govuk-radios__item">
