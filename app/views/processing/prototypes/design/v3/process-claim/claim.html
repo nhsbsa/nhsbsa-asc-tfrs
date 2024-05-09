@@ -35,7 +35,7 @@
         </div>
         {% endif %}
 
-        {% if data.incompletePayment or data.incompleteCompletion %}
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementEmpty or data.paymentNoNoteIncomplete or data.paymentNoNoteEmpty or data.completionResponseIncomplete or data.completionNoNoteIncomplete or data.completionNoNoteEmpty %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
           <div role="alert">
             <h2 class="govuk-error-summary__title">
@@ -43,14 +43,29 @@
             </h2>
             <div class="govuk-error-summary__body">
               <ul class="govuk-list govuk-error-summary__list">
-                {% if data.incompletePayment %}
+                {% if data.paymentResponseIncomplete %}
                 <li>
-                  <a href="#company-details-1-status"> Complete check on evidence of payment</a>
+                  <a href="#company-details-1-status">Complete check on evidence of payment</a>
                 </li>
                 {% endif %}
-                {% if data.incompleteCompletion %}
+                {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementEmpty %}
                 <li>
-                  <a href="#company-details-2-status"> Complete check on evidence of completion</a>
+                  <a href="#company-details-1-status">Complete amount of reimbursement</a>
+                </li>
+                {% endif %}
+                {% if data.paymentNoNoteIncomplete or data.paymentNoNoteEmpty %}
+                <li>
+                  <a href="#company-details-2-status"> Complete note for evidence of payment</a>
+                </li>
+                {% endif %}
+                {% if data.completionResponseIncomplete %}
+                <li>
+                  <a href="#company-details-2-status">Complete note for evidence of completion</a>
+                </li>
+                {% endif %}
+                {% if data.completionNoNoteIncomplete or data.completionNoNoteEmpty%}
+                <li>
+                  <a href="#company-details-2-status">Complete note for evidence of completion</a>
                 </li>
                 {% endif %}
               </ul>
@@ -106,6 +121,7 @@
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                         Does the evidence of payment meet the required criteria?
                     </legend>
+                {% if claim.status == "submitted" %}
                 <div class="govuk-radios" data-module="govuk-radios">
                     <div class="govuk-radios__item">
 
@@ -150,16 +166,48 @@
                         <div id="payment-note-hint" class="govuk-hint">
                             This will be seen by the submitter when the claim is processed.
                         </div>
-                        <textarea class="govuk-textarea govuk-js-character-count" id="paymentNoNote" name="paymentNoNote"
-                                rows="21"
-                                aria-describedby="payment-no-note-info note-hint">{{ claim.evidenceOfPaymentreview.note | default ('') }}
-                        </textarea>
+                        <textarea class="govuk-textarea govuk-js-character-count" id="paymentNoNote" name="paymentNoNote" rows="21" aria-describedby="payment-no-note-info note-hint">{{ claim.evidenceOfPaymentreview.note | default ('') }}</textarea>
                         <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
                             You can enter up to 1000 characters
                         </div>
                         </div>
                     </div>
                 </div>
+                {% else %}
+
+                    {% if claim.evidenceOfPaymentreview.note == null %}
+                    <dl class="govuk-summary-list">
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Answer
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                Yes
+                            </dd>
+                        </div>
+                    </dl>
+                    {% else %}
+                    <dl class="govuk-summary-list">
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Answer
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                No
+                            </dd>
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Note
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{claim.evidenceOfPaymentreview.note}}
+                            </dd>
+                        </div>
+                    </dl>
+                    {% endif %}
+
+                {% endif %}
                 </fieldset>
             </div>
 
@@ -169,6 +217,7 @@
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                         Does the evidence of completion meet the required criteria?
                     </legend>
+                    {% if claim.status == "submitted" %}
                 <div class="govuk-radios" data-module="govuk-radios">
                     <div class="govuk-radios__item">
                         <input class="govuk-radios__input" id="completionYes" name="completion" type="radio"
@@ -209,6 +258,44 @@
                         </div>
                     </div>
                 </div>
+                {% else %}
+
+
+                {% if claim.evidenceOfCompletionreview.note == null %}
+                    <dl class="govuk-summary-list">
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Answer
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                Yes
+                            </dd>
+                        </div>
+                    </dl>
+                    {% else %}
+                    <dl class="govuk-summary-list">
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Answer
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                No
+                            </dd>
+                        </div>
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key">
+                                Note
+                            </dt>
+                            <dd class="govuk-summary-list__value">
+                                {{claim.evidenceOfCompletionreview.note}}
+                            </dd>
+                        </div>
+                    </dl>
+                    {% endif %}
+
+
+
+                {% endif %}
                 </fieldset>
             </div>
 
