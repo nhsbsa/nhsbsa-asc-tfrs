@@ -71,8 +71,15 @@ router.post('/search-claim-id', function (req, res) {
   delete req.session.data.familyName
   delete req.session.data.givenName
   delete req.session.data.email
-  delete req.session.data.paymentEmptyInput
-  delete req.session.data.completionEmptyInput
+  delete req.session.data.paymentResponseIncomplete
+  delete req.session.data.paymentReimbursementAmountIncomplete
+  delete req.session.data.paymentReimbursementEmpty
+  delete req.session.data.paymentNoNoteIncomplete
+  delete req.session.data.paymentNoNoteEmpty
+
+  delete req.session.data.completionResponseIncomplete
+  delete req.session.data.completionNoNoteIncomplete
+  delete req.session.data.completionNoNoteEmpty
 
   var claimID = req.session.data.claimID.replace(/\s/g, '');
 
@@ -136,15 +143,22 @@ foundClaim.notes.push(newNote);
 });
 
 router.post('/claim-process-handler', function (req, res) {
-  // delete req.session.data.incompletePayment
-  // delete req.session.data.incompleteCompletion
+  delete req.session.data.paymentResponseIncomplete
+  delete req.session.data.paymentReimbursementAmountIncomplete
+  delete req.session.data.paymentReimbursementEmpty
+  delete req.session.data.paymentNoNoteIncomplete
+  delete req.session.data.paymentNoNoteEmpty
+
+  delete req.session.data.completionResponseIncomplete
+  delete req.session.data.completionNoNoteIncomplete
+  delete req.session.data.completionNoNoteEmpty
 
   claimID = req.session.data.id
   const paymentResponse = req.session.data.payment
-  const paymentReimbursementNote = req.session.data.paymentReimbursementAmount
-  const paymentNoNote = req.session.data.note
+  const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
+  const paymentNoNote = req.session.data.paymentNoNote
   const completionResponse = req.session.data.completion
-  const completionNoNote = req.session.data.note
+  const completionNoNote = req.session.data.completionNoNote
 
 
   var baseURL = "process-claim/claim?id=" + claimID
@@ -154,34 +168,34 @@ router.post('/claim-process-handler', function (req, res) {
     if (claim.claimID == claimID) {
       foundClaim = claim
       if (paymentResponse == null) {
-        errorParamaters += "&paymentResponseIncomplete";
-      } else if (paymentResponse == "yes" && paymentReimbursementNote == null) {
-        errorParamaters += "&paymentNoteIncomplete";
-      } else if (paymentResponse == "yes" && paymentReimbursementNote == "") {
-        errorParamaters += "&paymentReimbursementNoteEmpty";
+        errorParamaters += "&paymentResponseIncomplete=true";
+      } else if (paymentResponse == "yes" && paymentReimbursementAmount == null) {
+        errorParamaters += "&paymentReimbursementAmountIncomplete=true";
+      } else if (paymentResponse == "yes" && paymentReimbursementAmount == "") {
+        errorParamaters += "&paymentReimbursementEmpty=true";
       } else if (paymentResponse == "no" && paymentNoNote == null) {
-        errorParamaters += "&paymentNoNoteIncomplete";
+        errorParamaters += "&paymentNoNoteIncomplete=true";
       } else if (paymentResponse == "no" && paymentNoNote == "") {
-        errorParamaters += "&paymentNoNoteEmpty";
+        errorParamaters += "&paymentNoNoteEmpty=true";
       }
 
       if (completionResponse == null) {
-        errorParamaters += "&completionResponseIncomplete";
+        errorParamaters += "&completionResponseIncomplete=true";
       } else if (completionResponse == "no" && completionNoNote == null) {
-        errorParamaters += "&completionNoNoteIncomplete";
+        errorParamaters += "&completionNoNoteIncomplete=true";
       } else if (completionResponse == "no" && completionNoNote == "") {
-        errorParamaters += "&completionNoNoteEmpty";
+        errorParamaters += "&completionNoNoteEmpty=true";
       }
       
       if (errorParamaters == "") {
-        updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentNoNote, completionResponse, completionNoNote)
+        updateClaim(foundClaim, paymentResponse, paymentReimbursementAmount, paymentNoNote, completionResponse, completionNoNote)
         if (paymentResponse == "yes" && completionResponse == "yes") {
           res.redirect('process-claim/outcome?result=approve')
         } else {
           res.redirect('process-claim/outcome?result=reject')
         }
       } else {
-        res.redirect('process-claim/claim' + errorParamaters)
+        res.redirect("process-claim/claim?id=" + claimID + errorParamaters)
       }
     }
   }
