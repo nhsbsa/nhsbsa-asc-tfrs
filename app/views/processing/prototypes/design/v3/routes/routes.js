@@ -224,20 +224,6 @@ router.get('/outcome-handler', function (req, res) {
   res.redirect('process-claim/claim?processSuccess=true')
 });
 
-router.post('/saveAndExit', function (req, res) {
-  delete req.session.data.incompletePayment
-  delete req.session.data.incompleteCompletion
-  const claimID = req.session.data.id
-  var foundClaim = null 
-  for (const c of req.session.data['claims']) {
-    if (c.claimID == claimID) {
-      foundClaim = c
-    }
-  }
-  foundClaim.status = "partlyProcessed"
-  res.redirect('process-claim/start-process?processSuccess')
-});
-
 router.post('/update-rejection-notes', function (req, res) {
   delete req.session.data.paymentEmptyInput
   delete req.session.data.completionEmptyInput
