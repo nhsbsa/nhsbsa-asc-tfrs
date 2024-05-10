@@ -92,4 +92,11 @@ function emailFormat(string) {
     return emailRegex.test(string);
 }
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck }
+function validNumberCheck(string) {
+    var isValid = false
+    if (!isNaN(Number(string))) {
+        isValid = true
+    }
+    return isValid
+}
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck }

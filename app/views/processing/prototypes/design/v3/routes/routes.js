@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim, checkWDSFormat, signatoryCheck } = require('../helpers/helpers.js');
+const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck } = require('../helpers/helpers.js');
 
 // v3 Prototype routes
 
@@ -71,15 +71,15 @@ router.post('/search-claim-id', function (req, res) {
   delete req.session.data.familyName
   delete req.session.data.givenName
   delete req.session.data.email
+
   delete req.session.data.paymentResponseIncomplete
   delete req.session.data.paymentReimbursementAmountIncomplete
-  delete req.session.data.paymentReimbursementEmpty
+  delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
-  delete req.session.data.paymentNoNoteEmpty
 
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
-  delete req.session.data.completionNoNoteEmpty
+
 
   var claimID = req.session.data.claimID.replace(/\s/g, '');
 
@@ -123,6 +123,7 @@ router.get('/cancel-handler', function (req, res) {
 router.post('/claim-process-handler', function (req, res) {
   delete req.session.data.paymentResponseIncomplete
   delete req.session.data.paymentReimbursementAmountIncomplete
+  delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
 
   delete req.session.data.completionResponseIncomplete
@@ -139,6 +140,8 @@ router.post('/claim-process-handler', function (req, res) {
   var errorParamaters = ""
   var foundClaim = null
 
+  var validAmount = validNumberCheck(paymentReimbursementAmount)
+
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
       foundClaim = claim
@@ -148,6 +151,8 @@ router.post('/claim-process-handler', function (req, res) {
         errorParamaters += "&paymentResponseIncomplete=true";
       } else if (paymentResponse == "yes" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
         errorParamaters += "&paymentReimbursementAmountIncomplete=true";
+      } else if (paymentResponse == "yes" && ( !validAmount )) {
+        errorParamaters += "&paymentReimbursementAmountInvalid=true";
       } else if (paymentResponse == "no" && (paymentNoNote == null || paymentNoNote == "")) {
         errorParamaters += "&paymentNoNoteIncomplete=true";
       }
@@ -160,8 +165,10 @@ router.post('/claim-process-handler', function (req, res) {
       
       if (errorParamaters == "") {
         if (paymentResponse == "yes" && completionResponse == "yes") {
+          foundClaim.approvedDate = new Date()
           res.redirect('process-claim/outcome?result=approve')
         } else {
+          foundClaim.rejectedDate = new Date()
           res.redirect('process-claim/outcome?result=reject')
         }
       } else {
