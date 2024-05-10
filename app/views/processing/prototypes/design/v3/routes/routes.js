@@ -71,15 +71,13 @@ router.post('/search-claim-id', function (req, res) {
   delete req.session.data.familyName
   delete req.session.data.givenName
   delete req.session.data.email
+  
   delete req.session.data.paymentResponseIncomplete
   delete req.session.data.paymentReimbursementAmountIncomplete
-  delete req.session.data.paymentReimbursementEmpty
   delete req.session.data.paymentNoNoteIncomplete
-  delete req.session.data.paymentNoNoteEmpty
-
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
-  delete req.session.data.completionNoNoteEmpty
+
 
   var claimID = req.session.data.claimID.replace(/\s/g, '');
 
