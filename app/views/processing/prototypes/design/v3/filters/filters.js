@@ -16,8 +16,6 @@ addFilter('processorstatusTag_V3', function (statusID) {
         return '<strong class="govuk-tag govuk-tag--green">Approved</strong>' 
     }else if (statusID == 'rejected') {
         return '<strong class="govuk-tag govuk-tag--red">Rejected</strong>' 
-    } else if (statusID == 'partlyProcessed') {
-        return '<strong class="govuk-tag govuk-tag--yellow">In progress</strong>' 
     } else {
         return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
     }

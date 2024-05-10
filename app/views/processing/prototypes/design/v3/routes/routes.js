@@ -107,7 +107,7 @@ router.post('/search-claim-id', function (req, res) {
   if (foundClaim == null) {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
   }
-  if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected"  || foundClaim.status == "partlyProcessed") {
+  if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
     return res.redirect('process-claim/claim' + '?id=' + claimID)
   } else {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
@@ -123,13 +123,10 @@ router.get('/cancel-handler', function (req, res) {
 router.post('/claim-process-handler', function (req, res) {
   delete req.session.data.paymentResponseIncomplete
   delete req.session.data.paymentReimbursementAmountIncomplete
-  delete req.session.data.paymentReimbursementEmpty
   delete req.session.data.paymentNoNoteIncomplete
-  delete req.session.data.paymentNoNoteEmpty
 
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
-  delete req.session.data.completionNoNoteEmpty
 
   claimID = req.session.data.id
   const paymentResponse = req.session.data.payment
@@ -146,25 +143,20 @@ router.post('/claim-process-handler', function (req, res) {
     if (claim.claimID == claimID) {
       foundClaim = claim
       updateClaim(foundClaim, paymentResponse, paymentReimbursementAmount, paymentNoNote, completionResponse, completionNoNote)
+      
       if (paymentResponse == null) {
         errorParamaters += "&paymentResponseIncomplete=true";
-      } else if (paymentResponse == "yes" && paymentReimbursementAmount == null) {
+      } else if (paymentResponse == "yes" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
         errorParamaters += "&paymentReimbursementAmountIncomplete=true";
-      } else if (paymentResponse == "yes" && paymentReimbursementAmount == "") {
-        errorParamaters += "&paymentReimbursementEmpty=true";
-      } else if (paymentResponse == "no" && paymentNoNote == null) {
+      } else if (paymentResponse == "no" && (paymentNoNote == null || paymentNoNote == "")) {
         errorParamaters += "&paymentNoNoteIncomplete=true";
-      } else if (paymentResponse == "no" && paymentNoNote == "") {
-        errorParamaters += "&paymentNoNoteEmpty=true";
       }
 
       if (completionResponse == null) {
         errorParamaters += "&completionResponseIncomplete=true";
-      } else if (completionResponse == "no" && completionNoNote == null) {
+      } else if (completionResponse == "no" && (completionNoNote == null || completionNoNote == "" )) {
         errorParamaters += "&completionNoNoteIncomplete=true";
-      } else if (completionResponse == "no" && completionNoNote == "") {
-        errorParamaters += "&completionNoNoteEmpty=true";
-      }
+      } 
       
       if (errorParamaters == "") {
         if (paymentResponse == "yes" && completionResponse == "yes") {
