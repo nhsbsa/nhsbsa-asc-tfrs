@@ -115,9 +115,8 @@ router.post('/search-claim-id', function (req, res) {
 });
 
 router.get('/cancel-handler', function (req, res) {
-  delete req.session.data['noteAddedSuccess'];
   const claimID = req.session.data.id
-  res.redirect('process-claim/claim' + '?id=' + claimID)
+  res.redirect('process-claim/start-process')
 });
 
 router.post('/claim-process-handler', function (req, res) {

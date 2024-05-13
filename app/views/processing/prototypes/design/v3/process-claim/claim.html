@@ -202,9 +202,9 @@
                     {% else %}
 
                         {% if claim.evidenceOfPaymentreview.note == null %}
-                        <p class="govuk-body"><strong>Yes</strong></br>The reimbursement amount was £{{claim.reimbursementAmount}}.</p>
+                        <p class="govuk-body">Yes</br>The reimbursement amount was £{{claim.reimbursementAmount}}.</p>
                         {% else %}
-                        <p class="govuk-body"><strong>No</strong></br>{{claim.evidenceOfPaymentreview.note}}</p>
+                        <p class="govuk-body">No</br>{{claim.evidenceOfPaymentreview.note}}</p>
                         {% endif %}
 
                     {% endif %}
@@ -269,9 +269,9 @@
 
 
                     {% if claim.evidenceOfCompletionreview.note == null %}
-                        <p class="govuk-body"><strong>Yes</strong></br></p>
+                        <p class="govuk-body">Yes</br></p>
                         {% else %}
-                        <p class="govuk-body"><strong>No</strong></br>{{claim.evidenceOfCompletionreview.note}}</p>
+                        <p class="govuk-body">No</br>{{claim.evidenceOfCompletionreview.note}}</p>
                         {% endif %}
 
                     {% endif %}
@@ -284,6 +284,7 @@
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Complete claim
                 </button>
+                <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler">Cancel</a>
             </div>
             {% endif %}
         </form>
