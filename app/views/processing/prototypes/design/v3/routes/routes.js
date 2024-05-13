@@ -166,6 +166,7 @@ router.post('/claim-process-handler', function (req, res) {
       if (errorParamaters == "") {
         if (paymentResponse == "yes" && completionResponse == "yes") {
           foundClaim.approvedDate = new Date()
+          foundClaim.reimbursementAmount = paymentReimbursementAmount
           res.redirect('process-claim/outcome?result=approve')
         } else {
           foundClaim.rejectedDate = new Date()
