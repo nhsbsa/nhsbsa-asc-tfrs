@@ -1,5 +1,12 @@
 <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
+        {% if (isPayment)%}
+            {% if ((claim.evidenceOfPayment | length ) == 1) %}
+                <span class="govuk-visually-hidden">Evidence of payment</span>
+            {% endif %}
+        {% else %}
+            <span class="govuk-visually-hidden">Evidence of completion</span>
+        {% endif %}
         File {% if (claim.evidenceOfPayment | length ) > 1
         %}{{loop.index}}{% endif %}
     </dt>
@@ -8,6 +15,6 @@
     </dd>
     <dd class="govuk-summary-list__actions">
         <a class="govuk-link" href="/public/images/{{evidence}}" rel="noreferrer noopener" target="_blank">View file<span class="govuk-visually-hidden">
-                {{evidence}}</span></a>
+                {{loop.index}}</span></a>
     </dd>
 </div>
