@@ -6,10 +6,6 @@
 {{ ["Confirm outcome: ", claim.claimID, " - process a claim"] | join }}
 {% endblock %}
 
-{% block beforeContent %}
-  <a href="./claim?id={{data.id}}" class="govuk-back-link">Back</a>
-{% endblock %}
-
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -41,10 +37,13 @@
       endif %} meet all the criteria and that this claim should be {% if data.result == "approve" %}approved{% elif
       data.result ==
       "reject" %}rejected{% endif %}.</p>
-    <a type="submit" class="govuk-button" href="../outcome-handler">
-      Confirm and {% if data.result == "approve" %}approve{% elif data.result ==
-      "reject" %}reject{% endif %}
-    </a>
+      <div class="govuk-button-group">
+        <a type="submit" class="govuk-button" href="../outcome-handler">
+          Confirm and {% if data.result == "approve" %}approve{% elif data.result ==
+          "reject" %}reject{% endif %}
+        </a>
+        <a class="govuk-link govuk-link--no-visited-state" href="../cancel-outcome">Cancel</a>
+    </div>
   </div>
 </div>
 

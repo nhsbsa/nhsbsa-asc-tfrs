@@ -119,6 +119,11 @@ router.get('/cancel-handler', function (req, res) {
   res.redirect('process-claim/start-process')
 });
 
+router.get('/cancel-outcome', function (req, res) {
+  const claimID = req.session.data.id
+  res.redirect('process-claim/claim?id=' + claimID)
+});
+
 router.post('/claim-process-handler', function (req, res) {
   delete req.session.data.paymentResponseIncomplete
   delete req.session.data.paymentReimbursementAmountIncomplete
