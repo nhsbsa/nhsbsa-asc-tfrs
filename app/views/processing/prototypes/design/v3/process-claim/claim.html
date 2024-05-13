@@ -84,7 +84,7 @@
         <span class="govuk-caption-l">Process a claim</span>
         {% endif %}
         <h1 class="govuk-heading-l" style="margin-bottom: 15px;">Claim: {{ claim.claimID }}</h1>
-        <p class="govuk-body" style="margin-bottom: 30px;">{{ claim.status | processorstatusTag_V3 }} </p>
+        <p class="govuk-body" style="margin-bottom: 30px;">{{ claim.status | processorstatusTag_V3 }} {% if claim.status == "approved"%} on {{ claim.approvedDate | govukDate }}{% endif %}{% if claim.status == "rejected"%}on {{ claim.rejectedDate | govukDate }}{% endif %}</p>
     </div>
 </div>
 
