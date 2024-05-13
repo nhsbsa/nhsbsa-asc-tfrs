@@ -22,11 +22,11 @@ Claim ID - Find a claim for processing
                     <ul class="govuk-list govuk-error-summary__list">
                         <li>
                             {% if (data.emptyError) %}
-                            <a href="#claimID"> Enter a claim reference number.</a>
+                            <a href="#claimID"> Enter a claim reference number</a>
                             {% elif (data.notFound) %}
-                            <a href="#claimID">No match returned for your search: <q>{{ data.id }}.</a>
+                            <a href="#claimID">No match returned for your search: <q>{{ data.id }}</a>
                             {% else %}
-                            <a href="#claimID">Enter a claim reference number in the correct format.</a>
+                            <a href="#claimID">Enter a claim reference number in the correct format</a>
                             {% endif %}
                         </li>
                     </ul>
@@ -49,11 +49,13 @@ Claim ID - Find a claim for processing
                     <div id="claim-id-hint" class="govuk-hint">
                         For example, H2T-C813-3XF7-C
                     </div>
-                    <div class="{% if (data.invalidIDError) %} govuk-form-group--error {% endif %}">
-                        {% if (data.invalidIDError) %}
+                    <div class="{% if (data.invalidIDError or data.notFound) %} govuk-form-group--error {% endif %}">
+                        {% if (data.invalidIDError or data.notFound) %}
                         <p id="event-name-error" class="govuk-error-message">
                             {% if (data.emptyError) %}
                             <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number
+                            {% elif (data.notFound) %}
+                            <span class="govuk-visually-hidden">Error:</span> No match returned for your search: <q>{{ data.id }}
                             {% else %}
                             <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number in the
                             correct format
@@ -61,8 +63,8 @@ Claim ID - Find a claim for processing
                         </p>
                         {% endif %}
                         <input
-                            class="govuk-input govuk-input--width-10 {% if (data.invalidIDError) %} govuk-input--error {% endif %} "
-                            aria-describedby="claim-id-hint {% if data.invalidIDError %} event-name-error {% endif %}"
+                            class="govuk-input govuk-input--width-10 {% if (data.invalidIDError or data.notFound) %} govuk-input--error {% endif %} "
+                            aria-describedby="claim-id-hint {% if (data.invalidIDError or data.notFound) %} event-name-error {% endif %}"
                             id="claimID" name="claimID" type="text">
                     </div>
                 </fieldset>
