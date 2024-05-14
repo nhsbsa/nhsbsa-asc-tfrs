@@ -38,14 +38,11 @@
         {% endif %}
         <span class="govuk-caption-l">Complete registration</span>
         <h1 class="govuk-heading-l">
-          Job title
+          What is your job title?
         </h1>
-        <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Sagittis orci a scelerisque purus semper eget duis. Magna fermentum
-          iaculis eu non diam.</p>
-          <p class="govuk-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua. Sagittis orci a scelerisque purus semper eget duis. Magna fermentum
-            iaculis eu non diam.</p>
+        <p class="govuk-body">This is required to confirm that you meet the requirement of having sufficient authority to make legally binding contracts on behalf of your organisation.</p>
+        <p class="govuk-body">It would normally be someone very senior, such as a chief executive or director.</p>
+        <p class="govuk-body">We may perform checks on this.</p>
 
         <form action="../validate-job-title" method="post" class="form">
             <div class="govuk-form-group {% if data.jobTitleEmptyError or data.jobTitleInvalid %} govuk-form-group--error {% endif %}">

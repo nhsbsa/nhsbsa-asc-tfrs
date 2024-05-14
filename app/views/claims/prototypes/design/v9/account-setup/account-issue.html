@@ -12,8 +12,20 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-xl">There is an issue with your details</h1>
-        <p class="govuk-body">This page needs populating with guidance</p>
+        <h1 class="govuk-heading-xl">Account details are not correct</h1>
+
+        <h2 class="govuk-heading-m">If the problem is with your details</h2>
+        <p class="govuk-body">For instance if your name is not correct, contact the NHS Business Services Authority:</p>
+        <div class="govuk-inset-text">
+            Use our <a href="https://faq.nhsbsa.nhs.uk/contact-us/" class="govuk-link">contact form</a> <br>Phone: 0300 330 208
+        </div>
+
+        <h2 class="govuk-heading-m">If the problem is with your organisation</h2>
+        <p class="govuk-body">For instance if the address is not correct, you should put this right in the <a href="https://adult-social-care-7fe9bafd955a.herokuapp.com/claims/prototypes/design/v9/contact">Adult Social Care Workforce Dataset</a> (ASC-WDS). You can then start your account creation process again.</p>
+        <div class="govuk-inset-text">
+            Use the <a href="https://skillsforcare.zohodesk.eu/portal/en/home">ASC-WDS help centre</a><br>
+            Contact <a href="https://asc-wds.skillsforcare.org.uk/contact-us-or-leave-feedback">Skills for Care</a>
+        </div>
     </div>
 </div>
 {% endblock %}
