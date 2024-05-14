@@ -1,0 +1,321 @@
+[
+  {
+    "claimID": "Z1Z-F1J6-3XF7-C",
+    "type": "TU",
+    "learner": {
+      "id": "KZ 79 0F 13 Z",
+      "familyName": "Effertz-Stroman",
+      "givenName": "Aron",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLDOC",
+      "reimbursementAmount": 50,
+      "title": "Delivering outstanding care",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+    },
+    "startDate": "2024-02-01T23:29:00.654Z",
+    "status": "submitted",
+    "createdDate": "2023-12-31T08:55:32.615Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-11T12:56:10.547Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+    "evidenceOfPaymentreview": {
+      "pass": null,
+      "note": null
+    },
+    "paymentNote": null,
+    "completionNote": null,
+    "evidenceOfCompletion": "certificate.pdf",
+    "evidenceOfCompletionreview": {
+      "pass": null,
+      "note": null
+    },
+    "reimbursementAmount": null,
+    "completionDate": "2024-02-05T20:22:11.308Z",
+    "costDate": "2023-08-08T07:55:32.615Z",
+    "notes": [
+      {
+      "author": "System-generated",
+      "date": "2024-02-11T12:56:10.547Z",
+      "category": "System",
+      "note": "Claim was submitted."
+    }
+  ]
+  },
+  {
+    "claimID": "AB1-C12D-3XF7-C",
+    "type": "TU",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLDOC",
+      "reimbursementAmount": 50,
+      "title": "Delivering outstanding care",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+    },
+    "startDate": "2024-02-01T23:29:00.654Z",
+    "status": "submitted",
+    "createdDate": "2023-12-31T08:55:32.615Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-11T13:56:10.547Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+    "evidenceOfPaymentreview": {
+      "pass": null,
+      "note": null
+    },
+    "paymentNote": null,
+    "completionNote": null,
+    "evidenceOfCompletion": "certificate.pdf",
+    "evidenceOfCompletionreview": {
+      "pass": null,
+      "note": null
+    },
+    "reimbursementAmount": null,
+    "completionDate": "2024-02-05T20:22:11.308Z",
+    "costDate": "2023-08-08T07:55:32.615Z",
+    "notes": [
+      {
+      "author": "System-generated",
+      "date": "2024-02-11T13:56:10.547Z",
+      "category": "System",
+      "note": "Claim was submitted."
+    }
+  ]
+  },
+  {
+    "claimID": "Z8S-F1J6-4GH7-C",
+    "type": "TU",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLEDI",
+      "reimbursementAmount": 50,
+      "title": "Module 1 – Equality, diversity and inclusion",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-10-25T02:38:35.764Z",
+    "status": "approved",
+    "createdDate": "2023-11-30T13:09:57.600Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T12:14:45.342Z",
+    "approvedDate": "2024-02-09T14:52:43.631Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": ["invoice002.pdf"],
+    "evidenceOfPaymentreview": {
+      "pass": "Completed",
+      "note": null
+    },
+	"paymentNote": null,
+    "completionNote": null,
+    "evidenceOfCompletion": "certficate002.pdf",
+    "evidenceOfCompletionreview": {
+      "pass": "Completed",
+      "note": null
+    },
+    "reimbursementAmount": 37,
+    "completionDate": "2023-11-16T01:18:28.980Z",
+    "costDate": "2023-10-04T12:09:57.600Z",
+    "notes": [
+      {
+        "author": "System-generated",
+        "date": "2023-11-25T12:14:45.342Z",
+        "category": "System",
+        "note": "Claim was submitted."
+      }, 
+      {
+        "author": "Donald Marvin",
+        "date": "2024-02-05T08:58:43.631Z",
+        "category": "Criteria review",
+        "note": "The evidence of payment met all of the criteria requirements."
+      },
+      {
+        "author": "Donald Marvin",
+        "date": "2024-02-05T09:02:43.631Z",
+        "category": "Criteria review",
+        "note": "The evidence of completion met all of the criteria requirements."
+      },
+      {
+        "author": "Donald Marvin",
+        "date": "2024-02-05T10:32:43.631Z",
+        "category": "General",
+        "note": "Have to go check with my manager the exact amount to reimburse."
+      },
+      {
+        "author": "System-generated",
+        "date": "2024-02-09T14:52:43.631Z",
+        "category": "System",
+        "note": "Claim was approved."
+      }
+  ]
+  },
+  {
+    "claimID": "K93-SK68-3S2K-C",
+    "type": "TU",
+    "learner": {
+      "id": "ZX 51 96 87 D",
+      "familyName": "Simonis",
+      "givenName": "Casey",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "MHFA",
+      "reimbursementAmount": 100,
+      "title": "Mental Health First Aid",
+      "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Mental Health",
+      "description": null,
+      "awardingOrganisation": "MHFA England",
+      "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "rejected",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T03:13:47.582Z",
+    "approvedDate": null,
+    "rejectedDate": "2024-02-05T14:53:43.631Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": ["invoice007.pdf"],
+    "evidenceOfPaymentreview": {
+      "pass": "Completed",
+      "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for."
+    },
+	"paymentNote": null,
+    "completionNote": null,
+    "evidenceOfCompletion": "certficate007.pdf",
+    "evidenceOfCompletionreview": {
+      "pass": "Completed",
+      "note": null
+    },
+    "reimbursementAmount": null,
+    "completionDate": "2023-11-03T05:51:56.177Z",
+    "costDate": "2022-09-19T13:52:37.929Z",
+    "notes": [
+      {
+        "author": "System-generated",
+        "date": "2023-11-25T13:13:47.582Z",
+        "category": "System",
+        "note": "Claim was submitted."
+      }, 
+      {
+        "author": "test participant",
+        "date": "2024-02-05T11:12:43.631Z",
+        "category": "Criteria review",
+        "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for."
+      },
+      {
+        "author": "System-generated",
+        "date": "2024-02-05T14:53:43.631Z",
+        "category": "System",
+        "note": "Claim was rejected."
+      }
+  ]
+  }, 
+  {
+    "claimID": "W1J-BEDE-8LCQ-C",
+    "type": "TU",
+    "learner": {
+      "id": "ZX 51 96 87 D",
+      "familyName": "Sydnee",
+      "givenName": "Turner",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "IMSDT",
+      "reimbursementAmount": 50,
+      "title": "Supporting and developing teams",
+      "totalLearningTime": "45 mins + 30 mins = 75 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Developing-leaders-and-managers/Introductory-modules-for-managers.aspx"
+    },
+    "startDate": "2023-06-16T12:49:27.956Z",
+    "status": "rejected",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-04-03T11:38:05.132Z",
+    "approvedDate": null,
+    "rejectedDate": "2024-05-11T12:12:05.132Z",
+    "rejectedNote": "This claim has been escalated for fraud.",
+    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+    "evidenceOfPaymentreview": {
+      "pass": "Completed",
+      "note": null
+    },
+	"paymentNote": null,
+    "completionNote": null,
+    "evidenceOfCompletion": "certficate007.pdf",
+    "evidenceOfCompletionreview": {
+      "pass": "Completed",
+      "note": null
+    },
+	"reimbursementAmount": null,
+    "completionDate": "2023-11-03T05:51:56.177Z",
+    "costDate": "2022-09-19T13:52:37.929Z",
+    "notes": [
+      {
+        "author": "System-generated",
+        "date": "2023-11-25T13:13:47.582Z",
+        "category": "System",
+        "note": "Claim was submitted."
+      }, 
+      {
+        "author": "Donald Marvin",
+        "date": "2024-02-05T17:53:43.631Z",
+        "category": "General",
+        "note": "The evidence for payment I have flagged as potentially fraud to my manager."
+      },
+      {
+        "author": "Donald Marvin",
+        "date": "2024-02-10T11:28:48.631Z",
+        "category": "Fraud",
+        "note": "Escalated for fraud."
+      },
+      {
+        "author": "System-generated",
+        "date": "2024-06-05T18:04:04.173Z",
+        "category": "System",
+        "note": "Claim was rejected."
+      }
+  ]
+  }
+]
