@@ -104,7 +104,7 @@ router.post('/search-claim-id', function (req, res) {
   if (foundClaim == null) {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
   }
-  if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
+  if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected"  || foundClaim.status == "partlyProcessed") {
     return res.redirect('process-claim/claim' + '?id=' + claimID)
   } else {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
@@ -147,6 +147,8 @@ router.post('/evidence-check-handler', function (req, res) {
   const type = req.session.data.type
 
   delete req.session.data.submitError;
+  delete req.session.data.incompletePayment
+  delete req.session.data.incompleteCompletion
 
   claimID = req.session.data.id
 
@@ -176,18 +178,28 @@ router.post('/evidence-check-handler', function (req, res) {
 });
 
 router.post('/claim-process-handler', function (req, res) {
+  delete req.session.data.incompletePayment
+  delete req.session.data.incompleteCompletion
   claimID = req.session.data.id
+  var errorURL = "process-claim/claim?"
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
       if (claim.evidenceOfPaymentreview.pass && claim.evidenceOfCompletionreview.pass) {
-        res.redirect('process-claim/outcome?result=approve')
-      } else {
+        res.redirect('process-claim/reimbursement-amount')
+      } else if (claim.evidenceOfPaymentreview.pass == false || claim.evidenceOfCompletionreview.pass == false) {
         res.redirect('process-claim/outcome?result=reject')
+      } else {
+        if (claim.evidenceOfPaymentreview.pass == null) {
+          errorURL += "incompletePayment=true"
+        } 
+        if (claim.evidenceOfCompletionreview.pass == null) {
+          errorURL += "&incompleteCompletion=true"
+        } 
+        res.redirect(errorURL)
       }
     }
   }
 });
-
 router.get('/outcome-handler', function (req, res) {
   date = new Date();
   claimID = req.session.data.id
@@ -214,11 +226,62 @@ router.get('/outcome-handler', function (req, res) {
       }
     }
   }
-        res.redirect('process-claim/claim?processSuccess=true')
+  res.redirect('process-claim/claim?processSuccess=true')
 });
 
 router.post('/saveAndExit', function (req, res) {
+  delete req.session.data.incompletePayment
+  delete req.session.data.incompleteCompletion
+  const claimID = req.session.data.id
+  var foundClaim = null 
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
+    }
+  }
+  foundClaim.status = "partlyProcessed"
   res.redirect('process-claim/start-process?processSuccess')
+});
+
+router.post('/update-rejection-notes', function (req, res) {
+  delete req.session.data.paymentEmptyInput
+    delete req.session.data.completionEmptyInput
+  const claimID = req.session.data.id
+  var foundClaim = null 
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
+    }
+  }
+
+  foundClaim.evidenceOfPaymentreview.note = req.session.data.paymentRejectionNote
+  foundClaim.evidenceOfCompletionreview.note = req.session.data.completionRejectionNote
+
+  var baseErrorURL = 'process-claim/edit-rejection-notes' + '?id=' + claimID
+  if (foundClaim.evidenceOfPaymentreview.note == "") {
+    baseErrorURL += "&paymentEmptyInput=true"
+  }
+  if (foundClaim.evidenceOfCompletionreview.note == "") {
+    baseErrorURL += "&completionEmptyInput=true"
+  }
+  if (foundClaim.evidenceOfPaymentreview.note != null && foundClaim.evidenceOfPaymentreview.note != "" && foundClaim.evidenceOfCompletionreview.note != "" && foundClaim.evidenceOfCompletionreview.note != "") {
+    res.redirect("process-claim/outcome")
+    delete req.session.data.paymentEmptyInput
+    delete req.session.data.completionEmptyInput
+  } else {
+    res.redirect(baseErrorURL)
+  }
+});
+
+router.post('/calculate-reimbursement-amount', function (req, res) {
+  claimID = req.session.data.id
+  var reimbursementAmount = req.session.data.reimbursementAmount
+  for (const claim of req.session.data.claims) {
+    if (claim.claimID == claimID) {
+      claim.reimbursementAmount = reimbursementAmount
+      res.redirect('process-claim/outcome?result=approve')
+    }
+  }
 });
 
 

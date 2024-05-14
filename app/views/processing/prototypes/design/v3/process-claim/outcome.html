@@ -6,14 +6,6 @@
 {{ ["Confirm outcome: ", claim.claimID, " - process a claim"] | join }}
 {% endblock %}
 
-{% block beforeContent %}
-{% if data.result == "approve" %}
-  <a href="./reimbursement-amount" class="govuk-back-link">Back</a>
-  {% else %}
-  <a href="./claim?id={{data.id}}" class="govuk-back-link">Back</a>
-{% endif %}
-{% endblock %}
-
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -25,7 +17,7 @@
         data.result == "approve" %}approved{% elif data.result ==
         "reject" %}rejected{% endif %}</span>.</p>
     {% if data.result == "approve" %}
-    <p class="govuk-body">The organisation will receive the following reimbursement amount: <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V2 }}</span></p>
+    <p class="govuk-body">The organisation will receive the following reimbursement amount: <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V3 }}</span></p>
     <details class="govuk-details">
       <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
@@ -39,17 +31,19 @@
     {% elif data.result == "reject" %}
     <p class="govuk-body">The organisation will receive the following note to explain why it was rejected. This is based
       on the answers and notes given to the criteria checks.</p>
-    {{ claim | rejectionNote_V2 }}
-    <p class="govuk-body"><a class="govuk-link" href="./edit-rejection-notes.html">Edit rejection note</a></p>
+    {{ claim | rejectionNote_V3 }}
     {% endif %}
     <p class="govuk-body">Confirm that the evidence provided did{% if data.result == "reject" %} not{%
       endif %} meet all the criteria and that this claim should be {% if data.result == "approve" %}approved{% elif
       data.result ==
       "reject" %}rejected{% endif %}.</p>
-    <a type="submit" class="govuk-button" href="../outcome-handler">
-      Confirm and {% if data.result == "approve" %}approve{% elif data.result ==
-      "reject" %}reject{% endif %}
-    </a>
+      <div class="govuk-button-group">
+        <a type="submit" class="govuk-button" href="../outcome-handler">
+          Confirm and {% if data.result == "approve" %}approve{% elif data.result ==
+          "reject" %}reject{% endif %}
+        </a>
+        <a class="govuk-link govuk-link--no-visited-state" href="../cancel-outcome">Cancel</a>
+    </div>
   </div>
 </div>
 
