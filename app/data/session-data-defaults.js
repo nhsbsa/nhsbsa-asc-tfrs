@@ -21,7 +21,14 @@ module.exports = {
                 "status": "dev",
                 "tested": "w/c 8 April 2024, 6 May 2024",
                 "created": [
-                    "TODO"
+                    "account creation journey for the signatory that will be invited to the service based on minimal tech effort process flow",
+                    "Improve accessibility of manage claims views by remove tabular view for each status and putting onto seperate pages",
+                    "Manage claims concept test looking at the option of dsiplayed claims in a list pattern rather than a table that may better cater for 60/40 and CPD claims",
+                    "Added awareness information through journey articulating policy start date",
+                    "Removed references to CPD for MVP",
+                    "Revised new claim flow to start with select training to accomodate 60/40 claims in the future with less rework",
+                    "Removed paid status for MVP due to technical feasibility",
+                    "[TOFINISH]"
                 ],
                 "aims": [
                     "TODO"
