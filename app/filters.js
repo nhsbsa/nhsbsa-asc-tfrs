@@ -34,3 +34,25 @@ addFilter('toLowerCase', function (str) {
     }
     return str.toLowerCase();
 })
+
+addFilter('designstatusTag', function (statusID) {
+
+    switch (statusID) {
+        case "retired":
+            return '<strong class="govuk-tag govuk-tag--red">Retired</strong>'
+            break;
+        case "design":
+            return '<strong class="govuk-tag govuk-tag--yellow">Design</strong>'
+            break;
+        case "UR":
+            return '<strong class="govuk-tag govuk-tag--pink">UR</strong>'
+            break;
+        case "dev":
+            return '<strong class="govuk-tag govuk-tag--blue">Dev</strong>'
+            break;
+        case "live":
+            return '<strong class="govuk-tag govuk-tag--green">Live</strong>'
+            break;
+    }
+
+}, { renderAsHtml: true })
