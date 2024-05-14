@@ -1,0 +1,122 @@
+{% extends "layouts/main.html" %}
+
+{% if data.area == "Claims" %}
+{% set current = data.versionHistory.claimsCurrent %}
+{% set versions = data.versionHistory.claimVersions %}
+{% set description = "The part of the digital service that allows employers to make and manage training reimbursment
+claims." %}
+{% elif data.area == "Processing" %}
+{% set current = data.versionHistory.processingCurrent %}
+{% set versions = data.versionHistory.processingVersions %}
+{% set description = "The part of the digital service that allows NHS BSA to process claims and register
+organisations."%}
+{% endif %}
+
+
+{% block pageTitle %}
+{{data.area}} – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-breadcrumbs">
+    <ol class="govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item">
+            <a class="govuk-breadcrumbs__link" href="/">Home</a>
+        </li>
+        <li class="govuk-breadcrumbs__list-item">
+            <a class="govuk-breadcrumbs__link" href="/claims/claims-index">{{data.area}}</a>
+        </li>
+    </ol>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">{{ serviceName }}</span>
+        <h1 class="govuk-heading-l">
+            {{data.area}}
+        </h1>
+        <p class="govuk-body">
+            {{description}}
+        </p>
+
+    </div>
+</div>
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-s">
+            Current design version: <strong class="govuk-tag govuk-tag--purple">
+                {{current}}
+            </strong>
+        </h2>
+        <a class="govuk-button" data-module="govuk-button"
+            href="{{ data.area | toLowerCase }}/prototypes/design/{{current}}/">
+            View current prototype
+        </a>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-l">
+            Version History
+        </h2>
+
+        {% for version in versions %}
+        <h2 class="govuk-heading-m">
+            Version {{ version.versionNo }}
+        </h2>
+        <p class="govuk-body">{{version.status | designstatusTag}}</p>
+        <p class="govuk-body">
+            <a href="{{ data.area | toLowerCase }}/prototypes/design/v{{ version.versionNo }}/">View v{{
+                version.versionNo }} prototype</a>
+        </p>
+        <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    Version Information
+                </span>
+            </summary>
+            <div class="govuk-details__text">
+                <h3 class="govuk-heading-s">
+                    Tested
+                </h3>
+                <p class="govuk-body">{{ version.tested }}</p>
+                <h3 class="govuk-heading-s">
+                    What we created
+                </h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    {% for item in version.created %}
+                    <li>{{item}}</li>
+                    {% endfor %}
+                </ul>
+                <h3 class="govuk-heading-s">
+                    We aimed to understand
+                </h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    {% for item in version.aims %}
+                    <li>{{item}}</li>
+                    {% endfor %}
+                </ul>
+                <h3 class="govuk-heading-s">
+                    What we learnt
+                </h3>
+                <ul class="govuk-list govuk-list--bullet">
+                    {% for item in version.learnt %}
+                    <li>{{item}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </details>
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock %}
