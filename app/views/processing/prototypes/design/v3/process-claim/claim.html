@@ -103,7 +103,7 @@
                     {% include "../_components/file-section.html" %}
                 {% endfor %}
             </dl>
-
+            {% if (claim.training.fundingModel == "full") and (claim.completionDate != null)%}
             <h2 class="govuk-heading-m">
                 Evidence of completion
             </h2>
@@ -112,6 +112,7 @@
                 {% set isPayment = false %}
                 {% include "../_components/file-section.html" %}
             </dl>
+            {% endif %}
         </div>
     </div>
 
@@ -123,7 +124,6 @@
             <h2 class="govuk-heading-m">Completed review of evidence</h2>
             {% endif %}
             
-
             <div class="govuk-form-group {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentNoNoteIncomplete %}govuk-form-group--error {% endif %}">
                 <div class="govuk-form-group">
                     <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
@@ -217,7 +217,7 @@
                 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
             </div>
 
-
+            {% if (claim.training.fundingModel == "full") and (claim.completionDate != null)%}
             <div class="govuk-form-group {% if data.completionResponseIncomplete or data.completionNoNoteIncomplete %}govuk-form-group--error {% endif %}">
                 <div class="govuk-form-group">
                     <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
@@ -282,6 +282,7 @@
                     </fieldset>
                 </div>
             </div>
+            {% endif %}
 
             {% if (claim.status == "approved") %}
                 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" style="margin-top: 0px;">
