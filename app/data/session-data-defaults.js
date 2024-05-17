@@ -4,7 +4,7 @@ module.exports = {
         "claimVersions": [
             {
                 "versionNo": "9",
-                "status": "design",
+                "status": ["design", "dev"],
                 "tested": "TBC",
                 "created": [
                     "added error states to the account creation flow",
@@ -19,7 +19,7 @@ module.exports = {
             },
             {
                 "versionNo": "8",
-                "status": "dev",
+                "status": ["dev", "UR"],
                 "tested": "Account creation (Signatory) - w/c 8 April 2024, Manage and start claims (TU 100) 6 May 2024",
                 "created": [
                     "account creation journey for the signatory that will be invited to the service based on minimal tech effort process flow",
@@ -63,7 +63,7 @@ module.exports = {
             },
             {
                 "versionNo": "7",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "Untested",
                 "created": [
                     "added a new dashboard screen after sign in to indicate how we could show live data about an organisation's claims, and to present the 3 main user options (eligibility checker, manage care skills claims, manage revalidation claims)",
@@ -93,7 +93,7 @@ module.exports = {
             },
             {
                 "versionNo": "6",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "w/c 29 January 2024",
                 "created": [
                     "included the agreed service name",
@@ -119,7 +119,7 @@ module.exports = {
             },
             {
                 "versionNo": "5",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "w/c 8 Jan 2024",
                 "created": [
                     "improved the start screen to make it make it clear this service isn't for booking training",
@@ -154,7 +154,7 @@ module.exports = {
             },
             {
                 "versionNo": "4",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "w/c 11 December 2023",
                 "created": [
                     "added large volumes of realistic data on learners, courses and claims",
@@ -189,7 +189,7 @@ module.exports = {
             },
             {
                 "versionNo": "3",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "w/c 27 November 2023",
                 "created": [
                     "PLEASE NOTE: This version does not include dynamic data that carries through transactions.",
@@ -220,7 +220,7 @@ module.exports = {
             },
             {
                 "versionNo": "2",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "Untested",
                 "created": [
                     "simplified the 'claim items' screen by removing the CPD/TU split",
@@ -237,7 +237,7 @@ module.exports = {
             },
             {
                 "versionNo": "1",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "Untested",
                 "created": [
                     "created the 'claim items' screen to start exploring a way to represent and manage claims",
@@ -256,7 +256,7 @@ module.exports = {
         "processingVersions": [
             {
                 "versionNo": "3",
-                "status": "dev",
+                "status": ["dev", "UR", "design"],
                 "tested": "w/c 15 May 2024",
                 "created": [
                     "due to MVP decisions stripped back many of the design decisions to accomodate quicker technical delivery to allow for other priority MVP workstreams",
@@ -276,7 +276,7 @@ module.exports = {
             },
             {
                 "versionNo": "2",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "Untested",
                 "created": [
                     "combined criteria onto a single screen, but due to the lack of more complete criteria definitions and the complexity identified for MVP this was stripped back to a single quesiton with the complete checks being moved offline",
@@ -302,7 +302,7 @@ module.exports = {
             },
             {
                 "versionNo": "1",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "Process a claim  - w/c 22 April 2024",
                 "created": [
                     "landing screen that signposts to two core user actions; registers and org and process a claim",
