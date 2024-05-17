@@ -1,45 +1,69 @@
 module.exports = {
     "versionHistory": {
-        "claimsCurrent": "v8",
+        "claimsCurrent": "v9",
         "claimVersions": [
             {
                 "versionNo": "9",
-                "status": "design",
+                "status": ["design", "dev"],
                 "tested": "TBC",
                 "created": [
-                    "TODO"
+                    "added error states to the account creation flow",
+                    "updated copy text in the account creation flow to better support users given the product restriction in place that this journey cannot change for MVP only content"
                 ],
                 "aims": [
-                    "TODO"
+                    "TBC - changes so far in this version have been made to thing that can't be affected by UR feedback due to delivery committments"
                 ],
                 "learnt": [
-                    "TODO"
+                    "TBC"
                 ]
             },
             {
                 "versionNo": "8",
-                "status": "dev",
-                "tested": "w/c 8 April 2024, 6 May 2024",
+                "status": ["dev", "UR"],
+                "tested": "Account creation (Signatory) - w/c 8 April 2024, Manage and start claims (TU 100) 6 May 2024",
                 "created": [
                     "account creation journey for the signatory that will be invited to the service based on minimal tech effort process flow",
-                    "Improve accessibility of manage claims views by remove tabular view for each status and putting onto seperate pages",
-                    "Manage claims concept test looking at the option of dsiplayed claims in a list pattern rather than a table that may better cater for 60/40 and CPD claims",
-                    "Added awareness information through journey articulating policy start date",
-                    "Removed references to CPD for MVP",
-                    "Revised new claim flow to start with select training to accomodate 60/40 claims in the future with less rework",
-                    "Removed paid status for MVP due to technical feasibility",
-                    "[TOFINISH]"
+                    "improve accessibility of manage claims views by removing tabular view for each status and putting onto seperate pages",
+                    "added patterns to allow users to add multiple piece of payment evidence",
+                    "manage claims concept test looking at the option of dsiplayed claims in a list pattern rather than a table that may better cater for 60/40 and CPD claims",
+                    "added completion date to claim to allow for policy restrictions in the future",
+                    "added awareness information through journey articulating policy start date",
+                    "updated copy text throughout to better articulate requirements of the service",
+                    "removed references to CPD for MVP (PO/Delivery decision)",
+                    "revised new claim flow to start with select training to accomodate 60/40 claims in the future with less rework",
+                    "removed paid status for MVP due to technical feasibility",
+                    "removed claim history from claim details screen for MVP (PO/Delivery decision)",
+                    "added unhappy path handlers for ASC-WDS account checks, errors checks and claim/learner duplication checks",
+                    "moved start a new claim guidance out of core journey",
+                    "removed role groups from add new learner"
                 ],
                 "aims": [
-                    "TODO"
+                    "this version of prototype has the MVP version of the Claims journey for TU 100. It is a stripped back version of the previous versions tested and therefore needs revalidating in usability testing with users.",
+                    "test multiple file upload pattern",
+                    "test account creation journey for signatory",
+                    "test error states copy for understanding by the user",
+                    "test understanding of service requirements particularly around ASC-WDS",
+                    "test different options to present list of claims to users"
                 ],
                 "learnt": [
-                    "TODO"
+                    "account creation - users felt it was fairly straight forward process on the whole",
+                    "account creation - user unsure where pre-populated data would come from",
+                    "account creation - authenticator app wasn't well understood and it would likely cause the most challenge and friction in the journey",
+                    "account creation - bank details wouldn't usually be to hand for the signatory they would need to get this from colleagues and therefore may need to leave the journey and co,me back to it",
+                    "manage claims concept testing - table view was still the preffered options for users, they preffered the simpler more compact view",
+                    "manage claims concept testing - users gave posed questions aroudn the value of the started field",
+                    "manage claims concept testing - as before users expressed the need to sort, filter and/or search claims",
+                    "MVP claims journey - users found it very easy to make and submit claims still despite changes. Minimal confusion and little to suggest they would struggle to do this independently",
+                    "MVP claims journey - evidence of payment seemed to be a point of dicussion with users taking longer to identify what evidence would meet the requirements",
+                    "MVP claims journey - a shift to pages for the claims tables instead of tabs meant users were able to pick up quicker what was going on that before",
+                    "MVP claims journey - interesting feedback around the status 'submitted' with some users prefering the term 'pending'",
+                    "MVP claims journey - users expressed the desire to see not just when a claim was approved but when they could expect to receive payment",
+                    "MVP claims journey - feedback showing the desire for many of the features that were cut for private beta such as, editing rejected claims and adding multiple learners but these were seen more as 'nice-to-have'"
                 ]
             },
             {
                 "versionNo": "7",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "Untested",
                 "created": [
                     "added a new dashboard screen after sign in to indicate how we could show live data about an organisation's claims, and to present the 3 main user options (eligibility checker, manage care skills claims, manage revalidation claims)",
@@ -69,7 +93,7 @@ module.exports = {
             },
             {
                 "versionNo": "6",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "w/c 29 January 2024",
                 "created": [
                     "included the agreed service name",
@@ -95,7 +119,7 @@ module.exports = {
             },
             {
                 "versionNo": "5",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "w/c 8 Jan 2024",
                 "created": [
                     "improved the start screen to make it make it clear this service isn't for booking training",
@@ -130,7 +154,7 @@ module.exports = {
             },
             {
                 "versionNo": "4",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "w/c 11 December 2023",
                 "created": [
                     "added large volumes of realistic data on learners, courses and claims",
@@ -165,7 +189,7 @@ module.exports = {
             },
             {
                 "versionNo": "3",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "w/c 27 November 2023",
                 "created": [
                     "PLEASE NOTE: This version does not include dynamic data that carries through transactions.",
@@ -196,7 +220,7 @@ module.exports = {
             },
             {
                 "versionNo": "2",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "Untested",
                 "created": [
                     "simplified the 'claim items' screen by removing the CPD/TU split",
@@ -213,7 +237,7 @@ module.exports = {
             },
             {
                 "versionNo": "1",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "Untested",
                 "created": [
                     "created the 'claim items' screen to start exploring a way to represent and manage claims",
@@ -232,44 +256,75 @@ module.exports = {
         "processingVersions": [
             {
                 "versionNo": "3",
-                "status": "dev",
-                "tested": "Untested",
+                "status": ["dev", "UR", "design"],
+                "tested": "w/c 15 May 2024",
                 "created": [
-                    "TODO"
+                    "due to MVP decisions stripped back many of the design decisions to accomodate quicker technical delivery to allow for other priority MVP workstreams",
+                    "combined critiera question onto claim details screen for MVP",
+                    "removed seperate screen for capturing reimbursement amount and returned it conditional input on criteria radio button input for MVP",
+                    "removed ability to save claim mid processing for MVP",
+                    "removed ability to edit rejection note from claim outcome screen for MVP",
+                    "removed claim notes for MVP",
+                    "added rejected/approved date next to status tag",
                 ],
                 "aims": [
-                    "TODO"
+                    "understand the impact of MVP changes"
                 ],
                 "learnt": [
-                    "TODO"
+                    "TBC"
                 ]
             },
             {
                 "versionNo": "2",
-                "status": "retired",
+                "status": ["retired"],
                 "tested": "Untested",
                 "created": [
-                    "TODO"
+                    "combined criteria onto a single screen, but due to the lack of more complete criteria definitions and the complexity identified for MVP this was stripped back to a single quesiton with the complete checks being moved offline",
+                    "added error states to entire journeys for both process a claim and register an org",
+                    "added claim details to the claim overview screen",
+                    "simplified notes category options",
+                    "added option to save and exit",
+                    "moved reimbursement amount to seperate screen beofer approve outcome",
+                    "added the ability to edit rejection note on the outcome screen",
+                    "removed confirmation screen and pass user back to claim screen with updated status",
+                    "added states for rejected and approved",
+                    "added system log notes"
                 ],
                 "aims": [
-                    "TODO"
+                    "understand whether combining the critiera onto one screen improve usability",
+                    "understand whether seperating out the reimbursement question reduce the liklihood of errors",
+                    "understand whether the claims details presented help orientate users on what the claim is for and by whome",
+                    "understand whether removing the confirmation screen and landing the users back on the claim screen met user expectations"
                 ],
                 "learnt": [
-                    "TODO"
+                    "This version was retired as soon as it was finished to create a more stripped back version to allow another workstream to be released for MVP. Therefore this version was not tested with users."
                 ]
             },
             {
                 "versionNo": "1",
-                "status": "retired",
-                "tested": "w/c 22 April 2024",
+                "status": ["retired"],
+                "tested": "Process a claim  - w/c 22 April 2024",
                 "created": [
-                    "TODO"
+                    "landing screen that signposts to two core user actions; registers and org and process a claim",
+                    "basic register an org flow allowing users to check ASC-WDS details and input signatory details for email invite",
+                    "basic process a claim flow with notes, criteria checking and outcome decision"
                 ],
                 "aims": [
-                    "TODO"
+                    "understand whether crtieria checking with one question per page is usable",
+                    "understand whether users need any additional information about the claim beyond information provided in criteria checks",
+                    "understand whether opening files in new tabs will pose usability issues",
+                    "understand how users perceive prescriptive criteria checks that lead to a predetermined outcome",
+                    "understand how to help users identify cost paid by organisation",
+                    "understand how best to capture notes when criteria aren't met"
                 ],
                 "learnt": [
-                    "TODO"
+                    "people weren't expecting a series of questions with led to confusion around the evidence presented on each page",
+                    "users wanted to see more details about the claim to help orientate themselves on what the submitters has submitted",
+                    "confusion between total cost paid by organisation for an invoice vs what was paid per learner",
+                    "it was unclear to processers that comments left when a criteria was met would end up being past to the submitter",
+                    "processors would want to edit messages before they were sent to submitters",
+                    "confirmation screen was of limited use and processors were keen to check that the caim status has been updated",
+                    "register an org will not be tested with users before release due to time pressures and low risks given this nature of the process"
                 ]
             }
         ]

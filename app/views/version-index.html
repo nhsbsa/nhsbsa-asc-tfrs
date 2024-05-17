@@ -14,7 +14,7 @@ organisations."%}
 
 
 {% block pageTitle %}
-{{data.area}} – {{ serviceName }} – GOV.UK Prototype Kit
+{{da}} – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
@@ -70,7 +70,11 @@ organisations."%}
         <h2 class="govuk-heading-m">
             Version {{ version.versionNo }}
         </h2>
-        <p class="govuk-body">{{version.status | designstatusTag}}</p>
+        <p class="govuk-body">
+            {% for status in version.status %}
+            {{status | designstatusTag}}
+            {% endfor %}
+        </p>
         <p class="govuk-body">
             <a href="{{ data.area | toLowerCase }}/prototypes/design/v{{ version.versionNo }}/">View v{{
                 version.versionNo }} prototype</a>
@@ -114,6 +118,46 @@ organisations."%}
         </details>
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         {% endfor %}
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m">Key</h2>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                <strong class="govuk-tag govuk-tag--red">Retired</strong>
+              </dt>
+              <dd class="govuk-summary-list__value">
+                Version was retired and no parts of the version are currently in design, UR or development.
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    <strong class="govuk-tag govuk-tag--blue">Dev</strong>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  All or parts of the version are in current development.
+                </dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    <strong class="govuk-tag govuk-tag--yellow">Design</strong>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    All or parts of the version are still being designed.
+                </dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    <strong class="govuk-tag govuk-tag--pink">UR</strong>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    All or parts of the version are currently with UR for usbaility testing.
+                </dd>
+              </div>
+          </dl>
+        
+        
+        
     </div>
 </div>
 
