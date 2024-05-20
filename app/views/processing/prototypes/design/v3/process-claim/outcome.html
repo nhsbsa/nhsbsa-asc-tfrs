@@ -13,11 +13,11 @@
     <span class="govuk-caption-l">Process a claim</span>
     <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}</h1>
     <p class="govuk-body">The claim has <span class="govuk-!-font-weight-bold">{% if data.result == "reject" %}not{%
-        endif %} met</span> all the required evidence criteria and therefore the claim must be <span class="govuk-!-font-weight-bold">{% if
+        endif %} met</span> the evidence criteria and therefore should be <span class="govuk-!-font-weight-bold">{% if
         data.result == "approve" %}approved{% elif data.result ==
         "reject" %}rejected{% endif %}</span>.</p>
     {% if data.result == "approve" %}
-    <p class="govuk-body">The organisation will receive the following reimbursement amount: <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V3 }}</span></p>
+    <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V3 }}</span> in reimbursement.</p>
     <details class="govuk-details">
       <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
@@ -25,22 +25,22 @@
         </span>
       </summary>
       <div class="govuk-details__text">
-        Organisations cannot claim back more than they paid for training. Therefore if the organisation paid more than the maximum funding amount they will only get back what they paid. This is the value you inputted against the criteria "how much was paid". If the organisation paid equal or more than the maximum reimbursement amount then they will recieve the maximum reimbursement amount.
+        <p>Organisations cannot get back more than they paid for training.</p>
+        <p>Therefore if the organisation paid less than the maximum reimbursable amount they will only get back what they paid. This is the value you specified on the last screen as the <strong>cost per learner</strong>.</p>
+        <p>If the organisation paid the same or more than the maximum reimbursable amount then they will get back this full amount.</p>
       </div>
     </details>
     {% elif data.result == "reject" %}
-    <p class="govuk-body">The organisation will receive the following note to explain why it was rejected. This is based
-      on the answers and notes given to the criteria checks.</p>
+    <p class="govuk-body">The organisation will receive the following note to explain why it was rejected. The wording is taken from what you entered on the previous screen.</p>
     {{ claim | rejectionNote_V3 }}
     {% endif %}
-    <p class="govuk-body">Confirm that the evidence provided did{% if data.result == "reject" %} not{%
-      endif %} meet all the criteria and that this claim should be {% if data.result == "approve" %}approved{% elif
+    <p class="govuk-body">Confirm that this claim should be {% if data.result == "approve" %}approved{% elif
       data.result ==
       "reject" %}rejected{% endif %}.</p>
       <div class="govuk-button-group">
         <a type="submit" class="govuk-button" href="../outcome-handler">
-          Confirm and {% if data.result == "approve" %}approve{% elif data.result ==
-          "reject" %}reject{% endif %}
+          {% if data.result == "approve" %}Approve{% elif data.result ==
+          "reject" %}Reject{% endif %} claim
         </a>
         <a class="govuk-link govuk-link--no-visited-state" href="../cancel-outcome">Cancel</a>
     </div>

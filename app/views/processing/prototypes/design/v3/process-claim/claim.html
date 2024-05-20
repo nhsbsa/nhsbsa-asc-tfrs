@@ -50,12 +50,12 @@
                 {% endif %}
                 {% if data.paymentReimbursementAmountIncomplete %}
                 <li>
-                  <a href="#company-details-1-status">Complete amount of reimbursement</a>
+                  <a href="#company-details-1-status">Complete cost per learner</a>
                 </li>
                 {% endif %}
                 {% if data.paymentReimbursementAmountInvalid %}
                 <li>
-                  <a href="#company-details-1-status">Enter a valid reimbursement amount</a>
+                  <a href="#company-details-1-status">Enter a valid cost per learner</a>
                 </li>
                 {% endif %}
                 {% if data.paymentNoNoteIncomplete %}
@@ -119,7 +119,7 @@
     <div class="govuk-grid-column-one-half">
         <form action="../claim-process-handler?processSuccess" method="post" novalidate>
             {% if claim.status == "submitted" %}
-            <h2 class="govuk-heading-m">Perform review of evidence</h2>
+            <h2 class="govuk-heading-m">Review of evidence</h2>
             {% else %}
             <h2 class="govuk-heading-m">Completed review of evidence</h2>
             {% endif %}
@@ -153,20 +153,20 @@
                                         What was the cost per learner?
                                     </label>
                                     <div id="payment-note-hint" class="govuk-hint">
-                                        <p class="govuk-hint">Enter the amount the training cost for a single learner.</p>
-                                        <p class="govuk-hint">For instance, if the organisation paid £200 for 4 learners then the cost per learner is £50.</p>
-                                        <p class="govuk-hint">The maximum reimbursable amount for this training is £{{claim.training.reimbursementAmount}}. The organisation will not get back more than they actually paid.</p>
-                                        <p class="govuk-hint"><a class="govuk-link">View more guidance on calculating cost per learner.</a></p>
-                                    </div>
+                                      <p class="govuk-hint">Enter the amount the training cost for a single learner.</p>
+                                      <p class="govuk-hint">For instance, if the organisation paid £100 for 4 learners then the cost per learner is £25.</p>
+                                      <p class="govuk-hint"><strong>The maximum reimbursable amount for this training is £{{claim.training.reimbursementAmount}}.</strong> The organisation will not get back more than they actually paid.</p>
+                                      <p class="govuk-hint"><a class="govuk-link">View more guidance on calculating cost per learner.</a></p>
+                                  </div>
 
                                     {% if data.paymentReimbursementAmountIncomplete %}
                                         <p id="note-error" class="govuk-error-message">
-                                            <span class="govuk-visually-hidden">Error:</span> Complete amount of reimbursement
+                                            <span class="govuk-visually-hidden">Error:</span> Complete cost per learner
                                         </p>
                                     {% endif %}
                                     {% if data.paymentReimbursementAmountInvalid %}
                                         <p id="note-error" class="govuk-error-message">
-                                            <span class="govuk-visually-hidden">Error:</span> Enter a valid reimbursement amount
+                                            <span class="govuk-visually-hidden">Error:</span> Enter a valid cost per learner
                                         </p>
                                     {% endif %}
                                     <div class="govuk-input__wrapper">
