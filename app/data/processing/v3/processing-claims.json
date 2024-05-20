@@ -317,5 +317,58 @@
         "note": "Claim was rejected."
       }
   ]
+  },
+  {
+    "claimID": "WR5-R2P4-DSL4-A",
+    "type": "TU",
+    "learner": {
+      "id": "LM 89 7F 48 J",
+      "familyName": "Harrison",
+      "givenName": "Herzog",
+      "jobTitle": "Council Care Assistant"
+    },
+    "training": {
+      "code": "603/6251/0",
+      "reimbursementAmount": 300,
+      "title": "Oral Care for Health and Social Care",
+      "totalLearningTime": "170 hours",
+      "fundingModel": "split",
+      "type": "Level 2 Certificate",
+      "category": "Oral Care",
+      "description": null,
+      "awardingOrganisation": "TQUK",
+      "link": null
+    },
+    "startDate": "2024-02-01T23:29:00.654Z",
+    "status": "submitted",
+    "createdDate": "2023-12-31T08:55:32.615Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-11T12:56:10.547Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+    "evidenceOfPaymentreview": {
+      "pass": null,
+      "note": null
+    },
+    "paymentNote": null,
+    "completionNote": null,
+    "evidenceOfCompletion": null,
+    "evidenceOfCompletionreview": {
+      "pass": null,
+      "note": null
+    },
+    "reimbursementAmount": null,
+    "completionDate": null,
+    "costDate": "2023-08-08T07:55:32.615Z",
+    "notes": [
+      {
+      "author": "System-generated",
+      "date": "2024-02-11T12:56:10.547Z",
+      "category": "System",
+      "note": "Claim was submitted."
+    }
+  ]
   }
 ]
