@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate } = require('../helpers/helpers.js');
+const { formatDate, isFullClaimCheck } = require('../helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag_V3', function (statusID) {
@@ -130,12 +130,19 @@ addFilter('dateSort_V3', function (notes) {
 })
 
 addFilter('reimbursement_V3', function (claim) {
-    if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
+    if (claim.training.fundingModel == "split" && claim.completionDate == null) {
+        if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
+            return claim.reimbursementAmount * 0.6
+        } else {
+            return claim.training.reimbursementAmount * 0.6
+        }
+    } 
+    
+    else if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
         return claim.reimbursementAmount
     } else {
         return claim.training.reimbursementAmount
     }
-
 });
 
 addFilter('rejectionNote_V3', function (claim) {
@@ -144,7 +151,7 @@ addFilter('rejectionNote_V3', function (claim) {
         rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>"
         rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfPaymentreview.note + "</p>"
     }
-    if (!claim.evidenceOfCompletionreview.pass) {
+    if (isFullClaimCheck(claim) && !claim.evidenceOfCompletionreview.pass) {
         rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>"
         rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfCompletionreview.note + "</p>"
     }
