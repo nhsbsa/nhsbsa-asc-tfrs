@@ -101,6 +101,9 @@
                 <input class="govuk-input govuk-input--width-10 govuk-input--extra-letter-spacing {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.buildingSociety != 'valid' %}govuk-input--error{% endif %}" id="roll-number"
                     name="rollNumber" type="text" spellcheck="false" aria-describedby="roll-number-hint" value="{{ data.rollNumber | default ('') }}">
             </div>
+
+            <h2 class="govuk-heading-m">What happens next</h2>
+            <p class="govuk-body">This will complete the registration process and allow you to start submitting claims for adult social care training and development.</p>
             <button type="submit" class="govuk-button" data-module="govuk-button">
                 Continue
             </button>
