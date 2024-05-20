@@ -229,39 +229,6 @@ router.post('/add-start-date', function (req, res) {
 
 });
 
-router.post('/add-description', function (req, res) {
-  var description = req.session.data.description
-  var claimID = req.session.data.id
-
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      c.description = description
-      break;
-    }
-  }
-
-  delete req.session.data.description;
-  delete req.session.data.submitError
-
-  res.redirect('claim/claim-details' + '?id=' + claimID + '#activity')
-});
-
-router.post('/add-cost', function (req, res) {
-  var cost = req.session.data.cost
-  var claimID = req.session.data.id
-
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      c.claimAmount = cost
-      break;
-    }
-  }
-  delete req.session.data.cost;
-  delete req.session.data.submitError
-
-  res.redirect('claim/claim-details' + '?id=' + claimID + '#activity')
-});
-
 router.post('/cost-date', function (req, res) {
   const day = req.session.data['payment-date-started-day']
   const month = req.session.data['payment-date-started-month']
@@ -350,7 +317,7 @@ router.post('/add-learner', function (req, res) {
     if (claimID == c.claimID) {
       duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims);
       if (duplicateCheck.check) {
-        res.redirect('claim/duplication?dupeID=' + duplicateCheck.id)
+        res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
       } else {
         c.learner = learner
         res.redirect('claim/claim-details?id=' + claimID + '#learner')

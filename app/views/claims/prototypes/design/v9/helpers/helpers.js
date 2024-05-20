@@ -185,6 +185,7 @@ function checkDuplicateClaim(learnerID, trainingID, claimList) {
     for (const c of claimList) {
         if (c.learner != null) {
             if (c.training.code == trainingID && c.learner.id == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
+                result.matchType = c.claimType
                 result.check = true;
                 result.id = c.claimID
                 break;
