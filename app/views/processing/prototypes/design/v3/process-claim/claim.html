@@ -293,11 +293,7 @@
 
             {% if (claim.status == "approved") %}
                 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" style="margin-top: 0px;">
-                {% if (claim.reimbursementAmount >= claim.training.reimbursementAmount) %}
-                    <p class="govuk-body">The amount to be reimbursed is £{{claim.training.reimbursementAmount}}.</p>
-                {% else %}
-                    <p class="govuk-body">The amount to be reimbursed is £{{claim.reimbursementAmount}}.</p>
-                {% endif %}
+                <p class="govuk-body">The amount to be reimbursed is £{{ claim | reimbursement_V3 }}.</p>
             {% endif %}
 
             {% if claim.status == "submitted" %}
