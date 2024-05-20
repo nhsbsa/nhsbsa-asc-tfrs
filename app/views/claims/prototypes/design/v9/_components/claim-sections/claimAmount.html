@@ -1,4 +1,4 @@
-{% if claim.type == "TU" %}
+{% if claim.fundingType == "TU" %}
 {% if (claim.status == "new" or claim.status == "not-yet-submitted" or claim.status == "submitted" or claim.status == "queried") and claim.training != null %}
 <p class="govuk-body">You could get back up to <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}</strong><br> for this claim.</p>
 <details class="govuk-details">
@@ -29,15 +29,4 @@
     </div>
 </details>
 {% endif %}
-{% elif claim.type == "CPD" %}
-
-{% if (claim.status == "new" or claim.status == "not-yet-submitted" or claim.status == "submitted" or claim.status ==
-"rejected") and claim.claimAmount != null %}
-<p class="govuk-body">The amount you should revieve for this claim is: <br><strong class="govuk-!-font-size-36">£{{
-        claim.claimAmount }}</strong></p>
-{% elif claim.status == "approved" %}
-<p class="govuk-body">You will receive <br><strong class="govuk-!-font-size-36">£{{ claim.claimAmount}}</strong><br> for
-    this claim.</p>
-{% endif %}
-
 {% endif %}

@@ -33,7 +33,7 @@ addFilter('statusTag_V9', function (statusID, statuses) {
 addFilter('claimCount_V9', function (statusID, claims, claimType) {
     let i = 0
     for (const c of claims) {
-        if (c.status == statusID && c.type == claimType) {
+        if (c.status == statusID && c.fundingType == claimType) {
             i++
         }
     }

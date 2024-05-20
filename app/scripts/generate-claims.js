@@ -65,157 +65,155 @@ function generateTUClaims(quantity, version) {
 
   for (let i = 1; i <= quantity; i++) {
     faker.seed(i);
-    const claimID = generateUniqueID() + "-C";
-    const selectedLearner = getRandomLearners(learners, 1);
+    const createdDate = faker.date.past();
+    let claimID = generateUniqueID();
+    const status = getRandomStatus(statuses);
     const trainingGroup = faker.helpers.arrayElement(training);
     const trainingItem = faker.helpers.arrayElement(trainingGroup.courses);
+    const selectedLearner = getRandomLearners(learners, 1);
     const startDate = faker.date.past();
-    const status = getRandomStatus(statuses);
-    const createdDate = faker.date.past();
     const createdBy = faker.helpers.arrayElement(creators);
     const costDate = generateDateBefore(createdDate);
 
-
-    let submittedDate = null;
-    let evidenceOfPayment = [];
-    let evidenceOfCompletion = null;
-    let completionDate = null;
-
-    if (['submitted', 'rejected', 'approved'].includes(status)) {
-      submittedDate = faker.date.between({ from: startDate, to: new Date() });
-      let randomNumber = Math.floor(Math.random() * 4) + 1;
-      for (let i = 0; i < randomNumber; i++) {
-        let string = "invoice00" + i.toString() + ".pdf";
-        evidenceOfPayment.push(string);
+    if (trainingItem.fundingModel == "full" || (['not-yet-submitted'].includes(status) && trainingItem.fundingModel == "split" )) {
+      let append = null
+      let claimType = null
+      if (trainingItem.fundingModel == "full") {
+        append = "-A"
+        claimType = "100"
+      } else if (trainingItem.fundingModel == "split") {
+        append = "-B"
+        claimType = "60"
       }
-      evidenceOfCompletion = 'certficate' + '00' + i.toString() + '.pdf';
-      completionDate = faker.date.between({ from: startDate, to: submittedDate });
-    }
-
-    let approvedDate = null;
-    if (['approved'].includes(status)) {
-      approvedDate = faker.date.between({ from: submittedDate, to: new Date() });
-    }
-
-    let rejectedDate = null;
-    let rejectedNote = null
-    if (['rejected'].includes(status)) {
-      rejectedDate = faker.date.between({ from: submittedDate, to: new Date() });
-      rejectedNote = "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.";
-    }
-
-    const claim = {
-      claimID,
-      type: "TU",
-      learner: selectedLearner,
-      training: trainingItem,
-      startDate,
-      status,
-      createdDate,
-      createdBy,
-      submittedDate,
-      approvedDate,
-      rejectedDate,
-      rejectedNote,
-      evidenceOfPayment,
-      evidenceOfCompletion,
-      completionDate,
-      costDate,
-    };
-
-    data.push(claim);
-
-  }
-
-  //reset seed
-  faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
-
-  return data;
-
-}
-//CPD Claim Generator
-function generateCPDClaims(quantity, version) {
-  let data = [];
-  const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
-
-  // Load JSON files
-  const learners = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/learners.json', 'utf8'));
-  const activities = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/cpd-activities.json', 'utf8'));
-  const statuses = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/claim-item-statuses.json', 'utf8'));
-  const roleTypes = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/role-types.json', 'utf8'));
-
-  const CPDEligibleRoles = roleTypes.filter(role => role.eligibility.isCPDeligible).map(role => role.rolename);
-
-  for (let i = 1; i <= quantity; i++) {
-    faker.seed(i + 10000);
-    const claimID = faker.finance.accountNumber(6);
-    const selectedLearner = getRandomLearners(learners, 1, CPDEligibleRoles);
-    const activityGroup = faker.helpers.arrayElement(activities);
-    const category = faker.helpers.arrayElement(activityGroup.categories);
-    const categoryName = category.name;
-    const description = faker.helpers.arrayElement(category.examples);
-    const claimAmount = faker.number.int({ min: 10, max: 100 });
-
-    let startDate = null;
-    if (categoryName == "Courses") {
-      startDate = faker.date.past();
-    }
-
-    const status = getRandomStatus(statuses);
-    const createdDate = faker.date.past();
-    const createdBy = faker.helpers.arrayElement(creators);
-    const costDate = generateDateBefore(createdDate);
-
-    let submittedDate = null;
-    if (['submitted', 'queried', 'paid', 'approved'].includes(status)) {
-      submittedDate = faker.date.between({ from: createdDate, to: new Date() });
-    }
-
-    let approvedDate = null;
-    if (['paid', 'approved'].includes(status)) {
-      approvedDate = faker.date.between({ from: submittedDate, to: new Date() });
-    }
-
-    let queriedDate = null;
-    if (['queried'].includes(status)) {
-      queriedDate = faker.date.between({ from: submittedDate, to: new Date() });
-    }
-
-    let paidDate = null;
-    if (status === 'paid') {
-      paidDate = faker.date.between({ from: approvedDate, to: new Date() });
-    }
-
-    const evidenceOfPayment = [('invoice').concat('00', i.toString(), '.pdf')];
-
-    if (['submitted', 'queried', 'paid', 'approved'].includes(status)) {
-
-      for (const l of selectedLearners) {
-        l.evidence.evidenceOfCompletion = 'certficate' + '00' + i.toString() + '.pdf';
+      claimID = claimID + append
+      
+  
+  
+      let submittedDate = null;
+      let evidenceOfPayment = [];
+      let evidenceOfCompletion = null;
+      let completionDate = null;
+  
+      if (['submitted', 'rejected', 'approved'].includes(status)) {
+        submittedDate = faker.date.between({ from: startDate, to: new Date() });
+        let randomNumber = Math.floor(Math.random() * 4) + 1;
+        for (let i = 0; i < randomNumber; i++) {
+          let string = "invoice00" + i.toString() + ".pdf";
+          evidenceOfPayment.push(string);
+        }
+        evidenceOfCompletion = 'certficate' + '00' + i.toString() + '.pdf';
+        completionDate = faker.date.between({ from: startDate, to: submittedDate });
       }
+  
+      let approvedDate = null;
+      if (['approved'].includes(status)) {
+        approvedDate = faker.date.between({ from: submittedDate, to: new Date() });
+      }
+  
+      let rejectedDate = null;
+      let rejectedNote = null
+      if (['rejected'].includes(status)) {
+        rejectedDate = faker.date.between({ from: submittedDate, to: new Date() });
+        rejectedNote = "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.";
+      }
+  
+      const claim = {
+        claimID,
+        claimType,
+        fundingType: "TU",
+        learner: selectedLearner,
+        training: trainingItem,
+        startDate,
+        status,
+        createdDate,
+        createdBy,
+        submittedDate,
+        approvedDate,
+        rejectedDate,
+        rejectedNote,
+        evidenceOfPayment,
+        evidenceOfCompletion,
+        completionDate,
+        costDate,
+      };
+  
+      data.push(claim);
+
+    } else if (trainingItem.fundingModel == "split") {
+      const claimIDA = claimID + "-B"
+      const claimIDB = claimID + "-C"
+  
+  
+      let submittedDateA = null;
+      let submittedDateB = null;
+      let evidenceOfPayment = [];
+      let evidenceOfCompletion = null;
+      let completionDate = null;
+  
+      if (['submitted', 'rejected', 'approved'].includes(status)) {
+        submittedDateA = faker.date.between({ from: startDate, to: new Date() });
+        submittedDateB = faker.date.between({ from: submittedDateA, to: new Date() });
+        let randomNumber = Math.floor(Math.random() * 4) + 1;
+        for (let i = 0; i < randomNumber; i++) {
+          let string = "invoice00" + i.toString() + ".pdf";
+          evidenceOfPayment.push(string);
+        }
+        evidenceOfCompletion = 'certficate' + '00' + i.toString() + '.pdf';
+        completionDate = faker.date.between({ from: startDate, to: submittedDateB });
+      }
+  
+      let approvedDateA = null;
+      let approvedDateB = null;
+      if (['approved'].includes(status)) {
+        approvedDateA = faker.date.between({ from: submittedDateA, to: new Date() });
+        approvedDateB = faker.date.between({ from: submittedDateB, to: new Date() });
+      }
+  
+      const claimA = {
+        claimID: claimIDA,
+        claimType: "60",
+        fundingType: "TU",
+        learner: selectedLearner,
+        training: trainingItem,
+        startDate,
+        status: "approved",
+        createdDate,
+        createdBy,
+        submittedDate: submittedDateA,
+        approvedDate: approvedDateA,
+        rejectedDate: null,
+        rejectedNote: null,
+        evidenceOfPayment,
+        evidenceOfCompletion: null,
+        completionDate: null,
+        costDate,
+      };
+
+      const claimB = {
+        claimID: claimIDB,
+        claimType: "40",
+        fundingType: "TU",
+        learner: selectedLearner,
+        training: trainingItem,
+        startDate,
+        status,
+        createdDate,
+        createdBy,
+        submittedDate: submittedDateB,
+        approvedDate: approvedDateB,
+        rejectedDate: null,
+        rejectedNote: null,
+        evidenceOfPayment,
+        evidenceOfCompletion,
+        completionDate,
+        costDate,
+      };
+  
+      data.push(claimA);
+      data.push(claimB);
+
+
     }
-
-    const claim = {
-      claimID,
-      type: "CPD",
-      learner: selectedLearner,
-      categoryName,
-      description,
-      startDate,
-      status,
-      createdDate,
-      createdBy,
-      submittedDate,
-      approvedDate,
-      queriedDate,
-      paidDate,
-      claimAmount,
-      evidenceOfPayment,
-      costDate,
-    };
-
-    data.push(claim);
-
   }
 
   //reset seed
@@ -227,11 +225,9 @@ function generateCPDClaims(quantity, version) {
 
 function generateClaims(quantity, version) {
   let data = [];
-  const TUClaims = generateTUClaims(Math.floor(quantity * 0.96), version);
-  //const CPDClaims = generateCPDClaims(Math.floor(quantity * 0.04), version);
-  const CPDClaims = []
+  const TUClaims = generateTUClaims(Math.floor(quantity * 1), version);
 
-  data = data.concat(TUClaims, CPDClaims);
+  data = data.concat(TUClaims);
 
   // Write data to learners.json
   const jsonFilePath = './app/data/claims/' + version + '/claims.json';
