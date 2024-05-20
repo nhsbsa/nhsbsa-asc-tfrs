@@ -466,20 +466,15 @@ addFilter('trainingTypeCheck_V9', function (trainingCode, trainingList, matchTyp
 
 })
 
-addFilter('findPair_V9', function (claimID) {
-    // Check if the string is not empty
-    if (claimID.length > 0) {
-        // Get the last character
-        let lastChar = claimID.charAt(claimID.length - 1);
-        // Check if the last character is 'B' or 'C'
-        if (lastChar === 'B') {
-            // Change 'B' to 'C'
-            return claimID.slice(0, -1) + 'C';
-        } else if (lastChar === 'C') {
-            // Change 'C' to 'B'
-            return claimID.slice(0, -1) + 'B';
+addFilter('findPair_V9', function (claimID, claims) {
+
+    for (let claim of claims) {
+        const id = claim.claimID;
+        // Check if the ID is not the same as the existing ID and
+        // if the first part of the ID (excluding the last 2 characters) matches the existing ID
+        if (id !== claimID && id.slice(0, -2) === claimID.slice(0, -2)) {
+            return id;
         }
     }
-    // Return the original string if it's empty or doesn't end with 'B' or 'C'
-    return claimID;
+    return null; // Return null if no match is found
 })
