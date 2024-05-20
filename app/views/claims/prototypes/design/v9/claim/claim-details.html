@@ -31,11 +31,18 @@
 
     {% if claim.claimType == "60" %}
     <p class="govuk-body">This is a 60% claim.</p>
-    
+    {% if claim.status == "approved" %}
+    {% set pairID = claim.claimID | findPair_V9 %}
+    <p class="govuk-body">The linked claim for this:<a class="govuk-link" href="claim-details?id={{ pairID }}">{{ pairID }}</a></p>
+    {% endif %}
     {% endif %}
 
     {% if claim.claimType == "40" %}
     <p class="govuk-body">This is a 40% claim.</p>
+    {% if claim.status == "approved" %}
+    {% set pairID = claim.claimID | findPair_V9 %}
+    <p class="govuk-body">The linked claim for this:<a class="govuk-link" href="claim-details?id={{ pairID }}">{{ pairID }}</a></p>
+    {% endif %}
     {% endif %}
 
 

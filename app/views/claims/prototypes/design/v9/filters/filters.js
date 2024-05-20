@@ -466,12 +466,30 @@ addFilter('bankErrorMessage_V9', function (bankErrorObject) {
 
 addFilter('trainingTypeCheck_V9', function (trainingCode, trainingList, matchType) {
 
-    for (let trainingGroup of trainingList ) {
-        for (let training of trainingGroup.courses ) {
+    for (let trainingGroup of trainingList) {
+        for (let training of trainingGroup.courses) {
             if (trainingCode == training.code) {
                 return trainingGroup.groupTitle == matchType;
             }
         }
     }
-    
-    })
+
+})
+
+addFilter('findPair_V9', function (claimID) {
+    // Check if the string is not empty
+    if (claimID.length > 0) {
+        // Get the last character
+        let lastChar = claimID.charAt(claimID.length - 1);
+        // Check if the last character is 'B' or 'C'
+        if (lastChar === 'B') {
+            // Change 'B' to 'C'
+            return claimID.slice(0, -1) + 'C';
+        } else if (lastChar === 'C') {
+            // Change 'C' to 'B'
+            return claimID.slice(0, -1) + 'B';
+        }
+    }
+    // Return the original string if it's empty or doesn't end with 'B' or 'C'
+    return claimID;
+})
