@@ -117,16 +117,6 @@ addFilter('potName_V9', function (type) {
     return name
 })
 
-addFilter('newClaimLink_V9', function (type) {
-    let claimLink = "#"
-    if (type == "TU") {
-        claimLink = "claim/select-training"
-    } else if (type == "CPD") {
-        claimLink = "claim/select-activity-type"
-    }
-    return claimLink
-})
-
 addFilter('checkEligible_V9', function (learner, type, roleTypes) {
     let eligibleRoles = []
     if (type == "TU") {
