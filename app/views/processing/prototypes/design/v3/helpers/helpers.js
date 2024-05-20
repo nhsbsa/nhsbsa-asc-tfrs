@@ -99,4 +99,13 @@ function validNumberCheck(string) {
     }
     return isValid
 }
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck }
+
+function isFullClaimCheck(claim) {
+    if (claim.training.fundingModel == "full" && claim.completionDate != null) {
+        return true
+    } else { 
+        return false
+    }
+}
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck }
