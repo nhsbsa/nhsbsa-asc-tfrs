@@ -1,6 +1,13 @@
-{% if claim.type == "TU" %}
 {% if (claim.status == "new" or claim.status == "not-yet-submitted" or claim.status == "submitted" or claim.status == "queried") and claim.training != null %}
+{% if claim.claimType == "100" %}
 <p class="govuk-body">You could get back up to <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}</strong><br> for this claim.</p>
+{% elif claim.claimType == "60" %}
+<p class="govuk-body">You could get back up to <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.6 }}</strong><br> for this 60 claim.</p>
+<p class="govuk-body">When you submit the 40 claim you could get back up to <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong>.</p>
+{% elif claim.claimType == "40" %}
+<p class="govuk-body">You could get back <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.6 }}</strong><br> for this 40 claim.</p>
+<p class="govuk-body">For the 60 claim you have already recieved <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong>.</p>
+{% endif %}
 <details class="govuk-details">
     <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
@@ -9,11 +16,24 @@
     </summary>
     <div class="govuk-details__text">
         <p class="govuk-body">The maximum amount you could get back may be lower than the course or qualification cost.</p>
+        {% if claim.claimType == "60" %}
+        <p class="govuk-body">For a 60 claim this will be up to 60% of that maximum amount.</p>
+        {% elif claim.claimType == "40" %}
+        <p class="govuk-body">For a 40 claim this will be up to 40% of that maximum amount.</p>
+        {% endif %}
         <p class="govuk-body">You will never get back more than you actually paid. So if you paid less than the maximum, you will be paid the lower amount.</p>
     </div>
 </details>
 {% elif claim.status == "approved" %}
+{% if claim.claimType == "100" %}
 <p class="govuk-body">You will receive <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}</strong><br> for this claim.</p>
+{% elif claim.claimType == "60" %}
+<p class="govuk-body">You will receive<br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.6 }}</strong><br> for this 60 claim.</p>
+<p class="govuk-body">When you submit the 40 claim you will recieve <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong>.</p>
+{% elif claim.claimType == "40" %}
+<p class="govuk-body">You will receive<br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.6 }}</strong><br> for this 40 claim.</p>
+<p class="govuk-body">For the 60 claim you have already recieved <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong>.</p>
+{% endif %}
 <details class="govuk-details">
     <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
@@ -21,23 +41,11 @@
         </span>
     </summary>
     <div class="govuk-details__text">
-        <p class="govuk-body">This amount is the lower of:</p>
+        <p class="govuk-body">This amount is {% if claim.claimType == "60" %}60% of{% elif claim.claimType == "40" %}40% of{% endif %} the lower of:</p>
         <ul class="govuk-list govuk-list--bullet">
             <li>the maximum amount set in the funding for this course or qualification</li>
             <li>what you paid</li>
         </ul>
     </div>
 </details>
-{% endif %}
-{% elif claim.type == "CPD" %}
-
-{% if (claim.status == "new" or claim.status == "not-yet-submitted" or claim.status == "submitted" or claim.status ==
-"rejected") and claim.claimAmount != null %}
-<p class="govuk-body">The amount you should revieve for this claim is: <br><strong class="govuk-!-font-size-36">£{{
-        claim.claimAmount }}</strong></p>
-{% elif claim.status == "approved" %}
-<p class="govuk-body">You will receive <br><strong class="govuk-!-font-size-36">£{{ claim.claimAmount}}</strong><br> for
-    this claim.</p>
-{% endif %}
-
 {% endif %}

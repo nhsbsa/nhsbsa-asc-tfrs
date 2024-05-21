@@ -35,7 +35,7 @@
   </div>
   {% else %}
   
-    {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+    {% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType != "40" %}
     <div class="govuk-summary-list__row ">
       <dt class="govuk-summary-list__key">
         Start date
