@@ -5,8 +5,8 @@
 <p class="govuk-body">You could get back up to <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.6 }}</strong><br> for this 60 claim.</p>
 <p class="govuk-body">When you submit the 40 claim you could get back up to <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong>.</p>
 {% elif claim.claimType == "40" %}
-<p class="govuk-body">You could get back <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.6 }}</strong><br> for this 40 claim.</p>
-<p class="govuk-body">For the 60 claim you have already recieved <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong>.</p>
+<p class="govuk-body">You could get back <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.4 }}</strong><br> for this 40 claim.</p>
+<p class="govuk-body">For the 60 claim you have already recieved <strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong>.</p>
 {% endif %}
 <details class="govuk-details">
     <summary class="govuk-details__summary">
@@ -31,8 +31,8 @@
 <p class="govuk-body">You will receive<br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.6 }}</strong><br> for this 60 claim.</p>
 <p class="govuk-body">When you submit the 40 claim you will recieve <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong>.</p>
 {% elif claim.claimType == "40" %}
-<p class="govuk-body">You will receive<br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.6 }}</strong><br> for this 40 claim.</p>
-<p class="govuk-body">For the 60 claim you have already recieved <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong>.</p>
+<p class="govuk-body">You will receive<br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.4 }}</strong><br> for this 40 claim.</p>
+<p class="govuk-body">For the 60 claim you have already recieved <strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong>.</p>
 {% endif %}
 <details class="govuk-details">
     <summary class="govuk-details__summary">
