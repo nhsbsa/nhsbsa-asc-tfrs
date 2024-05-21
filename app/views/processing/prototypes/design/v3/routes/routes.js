@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck } = require('../helpers/helpers.js');
+const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck } = require('../helpers/helpers.js');
 
 // v3 Prototype routes
 
@@ -143,6 +143,7 @@ router.post('/claim-process-handler', function (req, res) {
   var baseURL = "process-claim/claim?id=" + claimID
   var errorParamaters = ""
   var foundClaim = null
+  var isFullClaim = false
 
   var validAmount = validNumberCheck(paymentReimbursementAmount)
 
@@ -150,25 +151,28 @@ router.post('/claim-process-handler', function (req, res) {
     if (claim.claimID == claimID) {
       foundClaim = claim
       updateClaim(foundClaim, paymentResponse, paymentReimbursementAmount, paymentNoNote, completionResponse, completionNoNote)
-      
+      isFullClaim = isFullClaimCheck(foundClaim)
+
       if (paymentResponse == null) {
         errorParamaters += "&paymentResponseIncomplete=true";
       } else if (paymentResponse == "yes" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
         errorParamaters += "&paymentReimbursementAmountIncomplete=true";
-      } else if (paymentResponse == "yes" && ( !validAmount )) {
+      } else if (paymentResponse == "yes" && (!validAmount)) {
         errorParamaters += "&paymentReimbursementAmountInvalid=true";
       } else if (paymentResponse == "no" && (paymentNoNote == null || paymentNoNote == "")) {
         errorParamaters += "&paymentNoNoteIncomplete=true";
       }
 
-      if (completionResponse == null) {
-        errorParamaters += "&completionResponseIncomplete=true";
-      } else if (completionResponse == "no" && (completionNoNote == null || completionNoNote == "" )) {
-        errorParamaters += "&completionNoNoteIncomplete=true";
-      } 
-      
+      if (isFullClaim) {
+        if (completionResponse == null) {
+          errorParamaters += "&completionResponseIncomplete=true";
+        } else if (completionResponse == "no" && (completionNoNote == null || completionNoNote == "" )) {
+          errorParamaters += "&completionNoNoteIncomplete=true";
+        } 
+      }
+
       if (errorParamaters == "") {
-        if (paymentResponse == "yes" && completionResponse == "yes") {
+        if ((paymentResponse == "yes" && isFullClaim == false) || (isFullClaim && paymentResponse == "yes" && completionResponse == "yes")) {
           foundClaim.approvedDate = new Date()
           foundClaim.reimbursementAmount = paymentReimbursementAmount
           res.redirect('process-claim/outcome?result=approve')

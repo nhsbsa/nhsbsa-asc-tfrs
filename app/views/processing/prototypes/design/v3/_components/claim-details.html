@@ -1,3 +1,9 @@
+{% if (claim.training.fundingModel == "split") and (claim.completionDate == null)%}
+<div style = "padding-bottom: 10px;">
+    <h3 class="govuk-heading-s" style="margin-bottom: 5px;" id="payment">Part A - 60 claim</h3>
+    <p id="payment-no-note-info" class="govuk-hint" style="margin-top: 0px;">This is the 60 part of a 60/40 split claim. This means the training has not yet been completed.</p>
+</div>
+{% endif %}
 <h3 class="govuk-heading-m" id="payment">Organisation</h3>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
@@ -80,6 +86,7 @@
             {{ claim.startDate | govukDate }}
         </dd>
     </div>
+    {% if (claim.training.fundingModel == "full") and (claim.completionDate != null)%}
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
             Completion date
@@ -88,6 +95,7 @@
             {{ claim.completionDate | govukDate }}
         </dd>
     </div>
+    {% endif %}
 </dl>
 <h3 class="govuk-heading-m" id="payment">Learner</h3>
 <dl class="govuk-summary-list">
