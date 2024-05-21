@@ -185,3 +185,8 @@ addFilter('signatoryErrorMessage_V9', function (submitError) {
     }
     return errorSummaryStr
 }, { renderAsHtml: true });
+
+
+addFilter('qualificationCheck_V3', function (claim) {
+    return "qualification"
+});
