@@ -16,49 +16,71 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-full">
+
+    {% if (claim.claimType == "60" or claim.claimType == "40") and pairID == null and claim.status== "approved" %}
+    <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+      <div class="govuk-notification-banner__header">
+        <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+          Important
+        </h2>
+      </div>
+      <div class="govuk-notification-banner__content">
+        <p class="govuk-notification-banner__heading">
+          You have not yet started the 40 claim related to this 60 claim.
+          <a class="govuk-notification-banner__link" href="../start-40-claim">Start 40 claim</a>.
+        </p>
+      </div>
+    </div>
+    {% endif %}
+    
     {% if data.submitError.claimValid != null and not data.submitError.claimValid %}
     {% include "../_components/claim-sections/errorCatch.html" %}
     {% endif %}
     <span class="govuk-caption-l">{{ claim.fundingType | potName_V9 }}</span>
-    <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | statusTag_V9(data.statuses) }}</h1>
+    <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}</h1>
   </div>
 </div>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+        <dt class="govuk-summary-list__key">
+          Status
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ claim.status | statusTag_V9(data.statuses) }}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row {% if pairID == null %}govuk-summary-list__row--no-actions{% endif %}">
+        <dt class="govuk-summary-list__key">
+          Type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ claim.claimType | typeTag_V9 }}
+        </dd>
+        {% if pairID != null %}
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link govuk-body" href="claim-details?id={{ pairID }}">View {% if claim.claimType == "60"%}40{%
+            elif claim.claimType == "40"%}60{% endif %} claim</a>
+        </dd>
+        {% endif %}
+      </div>
+    </dl>
 
     {% if claim.status == "rejected" %}
     <h2 class="govuk-heading-m">Claim rejected</h2>
     <p class="govuk-body">{{claim.rejectedNote}}</p>
     {% endif %}
 
-    {% if claim.claimType == "60" %}
-    <p class="govuk-body">This is a 60% claim.</p>
-    {% endif %}
-
-    {% if claim.claimType == "40" %}
-    <p class="govuk-body">This is a 40% claim.</p>
-    {% endif %}
-
-    {% if claim.claimType == "60" or claim.claimType == "40" %}
-    {% if pairID != null %}
-    <p class="govuk-body">The linked claim for this:<a class="govuk-link" href="claim-details?id={{ pairID }}">{{ pairID
-        }}</a></p>
-    {% else %}
-    <form method="post" action="../start-40-claim">
-      <button class="govuk-button govuk-button--primary" data-module="govuk-button" type="submit">Start 40%
-        claim</button>
-    </form>
-    {% endif %}
-    {% endif %}
-
-
     {% include "../_components/claim-sections/training.html" %}
-
 
     {% include "../_components/claim-sections/learner.html" %}
 
+    {% if claim.claimType != "40" %}
     {% include "../_components/claim-sections/evidencePayment.html" %}
+    {% endif %}
 
     {% if claim.claimType != "60" %}
     {% include "../_components/claim-sections/evidenceCompletion.html" %}

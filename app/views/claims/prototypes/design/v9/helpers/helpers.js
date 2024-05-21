@@ -14,25 +14,25 @@ function checkClaim(claim) {
         result.startDate = "valid"
     }
 
-    if (claim.costDate == null) {
+    if (claim.costDate == null && ! claim.claimType != "40") {
         result.paymentDate = "missing"
     } else {
         result.paymentDate = "valid"
     }
 
-    if (claim.evidenceOfPayment.length == 0) {
+    if (claim.evidenceOfPayment.length == 0 && claim.claimType != "40") {
         result.evidenceOfPayment = "missing"
     } else {
         result.evidenceOfPayment = "valid"
     }
 
-    if (claim.evidenceOfCompletion == null && ! claim.claimType == "60") {
+    if (claim.evidenceOfCompletion == null && claim.claimType != "60") {
         result.evidenceOfCompletion = "missing"
     } else {
         result.evidenceOfCompletion = "valid"
     }
 
-    if (claim.completionDate == null && ! claim.claimType == "60") {
+    if (claim.completionDate == null && claim.claimType != "60") {
         result.completionDate = "missing"
     } else {
         result.completionDate = "valid"
@@ -40,7 +40,7 @@ function checkClaim(claim) {
 
     result.claimValid = result.learner == "valid" && result.startDate == "valid" && result.paymentDate == "valid" && result.evidenceOfPayment == "valid" && result.evidenceOfCompletion == "valid" && result.completionDate == "valid";
         
-    if (result.completionDate == "valid" && result.startDate == "valid" && ! claim.claimType == "60") {
+    if (result.completionDate == "valid" && result.startDate == "valid" && claim.claimType != "60") {
         const startDate = new Date(claim.startDate)
         const completionDate = new Date(claim.completionDate)
         if (startDate.getTime() >= completionDate.getTime()) {

@@ -121,7 +121,7 @@ router.post('/split-decision-handler', function (req, res) {
 
 });
 
-function newClaim(req, training, type) {
+function newClaim(req, input, type) {
   let claim = {};
   const d = new Date();
   const dStr = d.toISOString();
@@ -134,7 +134,7 @@ function newClaim(req, training, type) {
       claimType: "100",
       fundingType: "TU",
       learner: null,
-      training: training,
+      training: input,
       startDate: null,
       status: "new",
       createdDate: dStr,
@@ -152,7 +152,7 @@ function newClaim(req, training, type) {
       claimType: "60",
       fundingType: "TU",
       learner: null,
-      training: training,
+      training: input,
       startDate: null,
       status: "new",
       createdDate: dStr,
@@ -161,6 +161,43 @@ function newClaim(req, training, type) {
       paidDate: null,
       costDate: null,
       evidenceOfPayment: [],
+      evidenceOfCompletion: null,
+      completionDate: null
+    };
+  } else if (type == "40") {
+
+    let training = null
+    let learner = null
+    let startDate = null
+    let costDate = null
+    let evidenceOfPayment = null
+
+    for (const c of req.session.data.claims) {
+      if (input == c.claimID) {
+        training = c.training
+        learner = c.learner
+        startDate = c.startDate
+        costDate = c.costDate
+        evidenceOfPayment = c.evidenceOfPayment
+
+
+      }
+    }
+
+    claim = {
+      claimID: input.slice(0, -1) + "C",
+      claimType: "40",
+      fundingType: "TU",
+      learner,
+      training,
+      startDate,
+      status: "new",
+      createdDate: dStr,
+      createdBy: "Test Participant",
+      submittedDate: null,
+      paidDate: null,
+      costDate,
+      evidenceOfPayment,
       evidenceOfCompletion: null,
       completionDate: null
     };
@@ -198,6 +235,17 @@ function newClaim(req, training, type) {
 
   return claim.claimID
 }
+
+
+router.get('/start-40-claim', function (req, res) {
+  claimID = req.session.data.id
+
+  const newID = newClaim(req, claimID, "40")
+
+  res.redirect('claim/claim-details' + '?id=' + newID)
+});
+
+
 
 router.post('/add-start-date', function (req, res) {
   const day = req.session.data['activity-date-started-day']

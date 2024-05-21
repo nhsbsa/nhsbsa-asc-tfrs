@@ -29,29 +29,23 @@ Select funding method - new claim
 
         <span class="govuk-caption-l">New claim</span>
         <h1 class="govuk-heading-l">
-            Funding method
+            Funding model
         </h1>
-        <p class="govuk-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut porttitor leo a diam sollicitudin tempor id.
+        <p class="govuk-body">This qualification is eligible for the 60/40 funding model.</p>
+        <p class="govuk-body">This means that you would receive:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>60% of the reimbursable amount when you submit evidence of payment</li>
+            <li>40% when you submit evidence of completion</li>
+        </ul>
+        <p class="govuk-body">You can choose whether you want to use this funding model. The alternative is to receive
+            100% of the reimbursable amount when you have the evidence of completion.</p>
         </p>
-        <p class="govuk-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
-        </p>
-        <p class="govuk-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
-        </p>
-        <p class="govuk-body">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
-        </p>
+
         <form action="../split-decision-handler" method="post" novalidate>
             <div class="govuk-form-group {% if data.submitError %}govuk-form-group--error{% endif %}">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        Do you want to make use of the split funding model?
+                        Do you want to make use of the 60/40 funding model?
                     </legend>
                     {% if data.submitError %}
                     <p id="error" class="govuk-error-message">

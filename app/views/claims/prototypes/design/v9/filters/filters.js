@@ -478,3 +478,16 @@ addFilter('findPair_V9', function (claimID, claims) {
     }
     return null; // Return null if no match is found
 })
+
+addFilter('typeTag_V9', function (type) {
+
+    switch (type) {
+        case "100":
+            return '<strong class="govuk-tag govuk-tag--orange">100</strong>'
+        case "60":
+            return '<strong class="govuk-tag govuk-tag--yellow">60</strong>'
+        case "40":
+            return '<strong class="govuk-tag govuk-tag--purple">40</strong>'
+    }
+
+}, { renderAsHtml: true })
