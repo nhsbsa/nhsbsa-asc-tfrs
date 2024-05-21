@@ -33,6 +33,7 @@
         </div>
         {% endif %}
 
+        {% if not data.submitError %}
         <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
             <div class="govuk-notification-banner__header">
               <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
@@ -45,7 +46,7 @@
               </p>
             </div>
           </div>
-
+          {% endif %}
         <span class="govuk-caption-l">Complete registration</span>
         <h1 class="govuk-heading-l">Check your details are correct</h1>
         <p class="govuk-body">This is the information we have for your account.
