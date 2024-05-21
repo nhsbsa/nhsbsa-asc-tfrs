@@ -33,7 +33,7 @@ addFilter('statusTag_V9', function (statusID, statuses) {
 addFilter('claimCount_V9', function (statusID, claims, claimType) {
     let i = 0
     for (const c of claims) {
-        if (c.status == statusID && c.type == claimType) {
+        if (c.status == statusID && c.fundingType == claimType) {
             i++
         }
     }
@@ -115,16 +115,6 @@ addFilter('potName_V9', function (type) {
         name = "Revalidation funding"
     }
     return name
-})
-
-addFilter('newClaimLink_V9', function (type) {
-    let claimLink = "#"
-    if (type == "TU") {
-        claimLink = "claim/select-training"
-    } else if (type == "CPD") {
-        claimLink = "claim/select-activity-type"
-    }
-    return claimLink
 })
 
 addFilter('checkEligible_V9', function (learner, type, roleTypes) {
@@ -466,12 +456,38 @@ addFilter('bankErrorMessage_V9', function (bankErrorObject) {
 
 addFilter('trainingTypeCheck_V9', function (trainingCode, trainingList, matchType) {
 
-    for (let trainingGroup of trainingList ) {
-        for (let training of trainingGroup.courses ) {
+    for (let trainingGroup of trainingList) {
+        for (let training of trainingGroup.courses) {
             if (trainingCode == training.code) {
                 return trainingGroup.groupTitle == matchType;
             }
         }
     }
-    
-    })
+
+})
+
+addFilter('findPair_V9', function (claimID, claims) {
+
+    for (let claim of claims) {
+        const id = claim.claimID;
+        // Check if the ID is not the same as the existing ID and
+        // if the first part of the ID (excluding the last 2 characters) matches the existing ID
+        if (id !== claimID && id.slice(0, -2) === claimID.slice(0, -2)) {
+            return id;
+        }
+    }
+    return null; // Return null if no match is found
+})
+
+addFilter('typeTag_V9', function (type) {
+
+    switch (type) {
+        case "100":
+            return '<strong class="govuk-tag govuk-tag--orange">100</strong>'
+        case "60":
+            return '<strong class="govuk-tag govuk-tag--yellow">60</strong>'
+        case "40":
+            return '<strong class="govuk-tag govuk-tag--purple">40</strong>'
+    }
+
+}, { renderAsHtml: true })

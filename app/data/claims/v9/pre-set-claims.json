@@ -1,7 +1,8 @@
 [
   {
-    "claimID": "Z8S-F3K6-3XF7-C",
-    "type": "TU",
+    "claimID": "Z8S-F3K6-3XF7-A",
+    "fundingType": "TU",
+    "claimType": "100",
     "learner": {
       "id": "OB 78 2F 15 O",
       "familyName": "Mayer",
@@ -35,8 +36,8 @@
     "costDate": "2022-06-11T14:50:59.964Z"
   },
   {
-    "claimID": "Z1Z-F1J6-3XF7-C",
-    "type": "TU",
+    "claimID": "Z1Z-F1J6-3XF7-A",
+    "fundingType": "TU",
     "learner": {
       "id": "KZ 79 0F 13 Z",
       "familyName": "Effertz-Stroman",
@@ -64,14 +65,19 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": ["invoice001.pdf", "invoice002.pdf", "invoice003.pdf"],
+    "evidenceOfPayment": [
+      "invoice001.pdf",
+      "invoice002.pdf",
+      "invoice003.pdf"
+    ],
     "evidenceOfCompletion": "certficate001.pdf",
     "completionDate": "2024-02-05T20:22:11.308Z",
     "costDate": "2023-08-08T07:55:32.615Z"
   },
   {
-    "claimID": "Z8S-F1J6-4GH7-C",
-    "type": "TU",
+    "claimID": "Z8S-F1J6-4GH7-A",
+    "fundingType": "TU",
+    "claimType": "100",
     "learner": {
       "id": "LE 09 5F 94 M",
       "familyName": "Kub",
@@ -99,14 +105,17 @@
     "approvedDate": "2024-02-09T01:58:43.631Z",
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": ["invoice002.pdf"],
+    "evidenceOfPayment": [
+      "invoice002.pdf"
+    ],
     "evidenceOfCompletion": "certficate002.pdf",
     "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2023-10-04T12:09:57.600Z"
   },
   {
-    "claimID": "Z8S-F1J6-9VGH-C",
-    "type": "TU",
+    "claimID": "Z8S-F1J6-9VGH-A",
+    "fundingType": "TU",
+    "claimType": "100",
     "learner": {
       "id": "ZX 51 96 87 D",
       "familyName": "Simonis",
@@ -134,9 +143,309 @@
     "approvedDate": null,
     "rejectedDate": "2023-12-05T18:04:04.173Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
-    "evidenceOfPayment": ["invoice007.pdf"],
+    "evidenceOfPayment": [
+      "invoice007.pdf"
+    ],
     "evidenceOfCompletion": "certficate007.pdf",
     "completionDate": "2023-11-03T05:51:56.177Z",
     "costDate": "2022-09-19T13:52:37.929Z"
+  },
+  {
+    "claimID": "Z8S-F1J6-4GH7-B",
+    "fundingType": "TU",
+    "claimType": "100",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLEDI",
+      "reimbursementAmount": 50,
+      "groupCategory": "Creating an inclusive organisation digital learning modules",
+      "title": "Module 1 – Equality, diversity and inclusion",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-10-25T02:38:35.764Z",
+    "status": "approved",
+    "createdDate": "2023-11-30T13:09:57.600Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T12:14:45.342Z",
+    "approvedDate": "2024-02-09T01:58:43.631Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate002.pdf",
+    "completionDate": "2023-11-16T01:18:28.980Z",
+    "costDate": "2023-10-04T12:09:57.600Z"
+  },
+  {
+    "claimID": "Z6F-TTG3-95JG-B",
+    "fundingType": "TU",
+    "claimType": "60",
+    "learner": {
+      "id": "OB 78 2F 15 O",
+      "familyName": "Mayer",
+      "givenName": "Malinda",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 3 Diploma",
+      "code": "610/1093/5",
+      "reimbursementAmount": 800,
+      "title": "Diploma in Adult Care",
+      "totalLearningTime": "580 hours",
+      "awardingOrganisation": "BIIAB",
+      "category": "Health and Social Care Diplomas",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice007.pdf"
+    ],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-09-19T13:52:37.929Z"
+  },
+  {
+    "claimID": "Z6F-BD42-9KHD-B",
+    "fundingType": "TU",
+    "claimType": "60",
+    "learner": {
+      "id": "ZX 51 96 87 D",
+      "familyName": "Simonis",
+      "givenName": "Casey",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 3 Diploma",
+      "code": "610/1093/5",
+      "reimbursementAmount": 800,
+      "title": "Diploma in Adult Care",
+      "totalLearningTime": "580 hours",
+      "awardingOrganisation": "BIIAB",
+      "category": "Health and Social Care Diplomas",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "submitted",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T03:13:47.582Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice007.pdf"
+    ],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-09-19T13:52:37.929Z"
+  },
+  {
+    "claimID": "J3N-TTG3-GHSC-B",
+    "fundingType": "TU",
+    "claimType": "60",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 4 Certificate",
+      "code": "603/0676/2",
+      "reimbursementAmount": 600,
+      "title": "Certificate in Principles of Leadership and Management in Adult Care",
+      "totalLearningTime": "280 hours",
+      "awardingOrganisation": "Innovate Awarding",
+      "category": "Leadership and Management",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "approved",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T03:13:47.582Z",
+    "approvedDate": "2023-12-05T18:04:04.173Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice007.pdf"
+    ],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-09-19T13:52:37.929Z"
+  },
+  {
+    "claimID": "J45-BB25-GFD2-B",
+    "fundingType": "TU",
+    "claimType": "60",
+    "learner": {
+      "id": "KZ 79 0F 13 Z",
+      "familyName": "Effertz-Stroman",
+      "givenName": "Aron",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 4 Certificate",
+      "code": "603/0676/2",
+      "reimbursementAmount": 600,
+      "title": "Certificate in Principles of Leadership and Management in Adult Care",
+      "totalLearningTime": "280 hours",
+      "awardingOrganisation": "Innovate Awarding",
+      "category": "Leadership and Management",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "approved",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T03:13:47.582Z",
+    "approvedDate": "2023-12-05T18:04:04.173Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice007.pdf"
+    ],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-09-19T13:52:37.929Z"
+  },
+  {
+    "claimID": "J45-BB25-GFD2-C",
+    "fundingType": "TU",
+    "claimType": "40",
+    "learner": {
+      "id": "KZ 79 0F 13 Z",
+      "familyName": "Effertz-Stroman",
+      "givenName": "Aron",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 4 Certificate",
+      "code": "603/0676/2",
+      "reimbursementAmount": 600,
+      "title": "Certificate in Principles of Leadership and Management in Adult Care",
+      "totalLearningTime": "280 hours",
+      "awardingOrganisation": "Innovate Awarding",
+      "category": "Leadership and Management",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice007.pdf"
+    ],
+    "evidenceOfCompletion": "certficate002.pdf",
+    "completionDate": "2023-11-16T01:18:28.980Z",
+    "costDate": "2022-09-19T13:52:37.929Z"
+  },
+  {
+    "claimID": "VF2-TTG3-GFD2-B",
+    "fundingType": "TU",
+    "claimType": "60",
+    "learner": {
+      "id": "KZ 79 0F 13 Z",
+      "familyName": "Effertz-Stroman",
+      "givenName": "Aron",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 4 Certificate",
+      "code": "603/0676/2",
+      "reimbursementAmount": 600,
+      "title": "Certificate in Principles of Leadership and Management in Adult Care",
+      "totalLearningTime": "280 hours",
+      "awardingOrganisation": "Innovate Awarding",
+      "category": "Leadership and Management",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "approved",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T03:13:47.582Z",
+    "approvedDate": "2023-12-05T18:04:04.173Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice007.pdf"
+    ],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-09-19T13:52:37.929Z"
+  },
+  {
+    "claimID": "VF2-TTG3-GFD2-C",
+    "fundingType": "TU",
+    "claimType": "40",
+    "learner": {
+      "id": "KZ 79 0F 13 Z",
+      "familyName": "Effertz-Stroman",
+      "givenName": "Aron",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 4 Certificate",
+      "code": "603/0676/2",
+      "reimbursementAmount": 600,
+      "title": "Certificate in Principles of Leadership and Management in Adult Care",
+      "totalLearningTime": "280 hours",
+      "awardingOrganisation": "Innovate Awarding",
+      "category": "Leadership and Management",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "submitted",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T03:13:47.582Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": [
+      "invoice007.pdf"
+    ],
+    "evidenceOfCompletion": "certficate002.pdf",
+    "completionDate": "2023-11-16T01:18:28.980Z",
+    "costDate": "2022-09-19T13:52:37.929Z"
   }
 ]
+  

@@ -8,7 +8,11 @@ module.exports = {
                 "tested": "TBC",
                 "created": [
                     "added error states to the account creation flow",
-                    "updated copy text in the account creation flow to better support users given the product restriction in place that this journey cannot change for MVP only content"
+                    "updated copy text in the account creation flow to better support users given the product restriction in place that this journey cannot change for MVP only content",
+                    "added support for 60/40 funding model",
+                    "added 60/40 claims data",
+                    "adapted claim details design to be consistent across 60/40/100 claim types",
+                    "remove started columns from claims tables and added claim type"
                 ],
                 "aims": [
                     "TBC - changes so far in this version have been made to thing that can't be affected by UR feedback due to delivery committments"

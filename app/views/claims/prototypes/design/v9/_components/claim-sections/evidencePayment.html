@@ -27,7 +27,7 @@
     <dd class="govuk-summary-list__value">
       {{ claim.costDate | govukDate }}
     </dd>
-    {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+    {% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType != "40" %}
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">
           payment date</span></a>
@@ -62,7 +62,7 @@
       <p class="govuk-body">{{ payment }}</p>
       {% endfor %}
     </dd>
-    {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+    {% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType != "40" %}
     <dd class="govuk-summary-list__actions">
       <ul class="govuk-summary-list__actions-list">
         <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
