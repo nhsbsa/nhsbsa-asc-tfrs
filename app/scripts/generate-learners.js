@@ -86,8 +86,8 @@ function generateLearners (quantity, version) {
 
   for (let i = 5; i <= quantity; i++) {
     const id = generateUniqueID(i);
-    const familyName = fakerEN_GB.person.firstName();
-    const givenName = fakerEN_GB.person.lastName();
+    const givenName = fakerEN_GB.person.firstName();
+    const familyName = fakerEN_GB.person.lastName();
     const roleType = getRandomRole(rolesData);
     const jobTitle = getRandomjobTitle(roleType, rolesData);
 

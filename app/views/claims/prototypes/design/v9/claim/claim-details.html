@@ -41,7 +41,6 @@
     {% endif %}
 
     {% if claim.claimType == "60" or claim.claimType == "40" %}
-    {% if claim.status == "approved" %}
     {% if pairID != null %}
     <p class="govuk-body">The linked claim for this:<a class="govuk-link" href="claim-details?id={{ pairID }}">{{ pairID
         }}</a></p>
@@ -50,7 +49,6 @@
       <button class="govuk-button govuk-button--primary" data-module="govuk-button" type="submit">Start 40%
         claim</button>
     </form>
-    {% endif %}
     {% endif %}
     {% endif %}
 
@@ -62,7 +60,7 @@
 
     {% include "../_components/claim-sections/evidencePayment.html" %}
 
-    {% if not claim.claimType == "60"%}
+    {% if claim.claimType != "60" %}
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
     {% endif %}
 

@@ -149,7 +149,10 @@ function generateTUClaims(quantity, version) {
       let evidenceOfPayment = [];
       let evidenceOfCompletion = null;
       let completionDate = null;
-  
+      
+      let statusA = "approved"
+      let statusB = "submitted"
+
       if (['submitted', 'rejected', 'approved'].includes(status)) {
         submittedDateA = faker.date.between({ from: startDate, to: new Date() });
         submittedDateB = faker.date.between({ from: submittedDateA, to: new Date() });
@@ -162,11 +165,20 @@ function generateTUClaims(quantity, version) {
         completionDate = faker.date.between({ from: startDate, to: submittedDateB });
       }
   
-      let approvedDateA = null;
+      let approvedDateA = faker.date.between({ from: submittedDateA, to: new Date() });
+
       let approvedDateB = null;
       if (['approved'].includes(status)) {
-        approvedDateA = faker.date.between({ from: submittedDateA, to: new Date() });
+        statusB = "approved"
         approvedDateB = faker.date.between({ from: submittedDateB, to: new Date() });
+      }
+
+      let rejectedNote = null;
+      let rejectedDateB = null;
+      if (['rejected'].includes(status)) {
+        statusB = "rejected"
+        rejectedDateB = faker.date.between({ from: submittedDateB, to: new Date() });
+        rejectedNote = "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.";
       }
   
       const claimA = {
@@ -176,7 +188,7 @@ function generateTUClaims(quantity, version) {
         learner: selectedLearner,
         training: trainingItem,
         startDate,
-        status: "approved",
+        status: statusA,
         createdDate,
         createdBy,
         submittedDate: submittedDateA,
@@ -196,13 +208,13 @@ function generateTUClaims(quantity, version) {
         learner: selectedLearner,
         training: trainingItem,
         startDate,
-        status,
+        status: statusB,
         createdDate,
         createdBy,
         submittedDate: submittedDateB,
         approvedDate: approvedDateB,
-        rejectedDate: null,
-        rejectedNote: null,
+        rejectedDate: rejectedDateB,
+        rejectedNote,
         evidenceOfPayment,
         evidenceOfCompletion,
         completionDate,
