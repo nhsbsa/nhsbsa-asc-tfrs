@@ -185,3 +185,19 @@ addFilter('signatoryErrorMessage_V9', function (submitError) {
     }
     return errorSummaryStr
 }, { renderAsHtml: true });
+
+addFilter('qualificationCheck_V3', function(claim, training, value) {
+    const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
+    let isQualification = false;
+
+    for (let course of qualificationsObject.courses) {
+        if (course.title == claim.training.title) {
+            isQualification = true
+        }
+    }
+    if (isQualification) {
+        return value
+    } else {
+        return "Not applicable"
+    }
+})
