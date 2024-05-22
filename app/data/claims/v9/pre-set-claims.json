@@ -446,6 +446,43 @@
     "evidenceOfCompletion": "certficate002.pdf",
     "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2022-09-19T13:52:37.929Z"
+  },
+  {
+    "claimID": "D2F-GBDS-9VGH-A",
+    "fundingType": "TU",
+    "claimType": "60",
+    "learner": {
+      "id": "ZX 51 96 87 D",
+      "familyName": "Simonis",
+      "givenName": "Casey",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "type": "Level 4 Award",
+      "code": "601/6152/8",
+      "reimbursementAmount": 200,
+      "title": "Understanding the Internal Quality Assurance of Assessment Processes and Practice",
+      "totalLearningTime": "60 hours",
+      "awardingOrganisation": "Focus Awards",
+      "category": "Assessment",
+      "description": null,
+      "link": null,
+      "fundingModel": "split"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "rejected",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T03:13:47.582Z",
+    "approvedDate": null,
+    "rejectedDate": "2023-12-05T18:04:04.173Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": [
+      "invoice007.pdf"
+    ],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-09-19T13:52:37.929Z"
   }
 ]
   
