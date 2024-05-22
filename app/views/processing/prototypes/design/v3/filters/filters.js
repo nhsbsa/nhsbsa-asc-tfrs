@@ -186,7 +186,7 @@ addFilter('signatoryErrorMessage_V9', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true });
 
-addFilter('qualificationCheck_V3', function(claim, training) {
+addFilter('qualificationCheck_V3', function(claim, training, value) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     let isQualification = false;
 
@@ -196,7 +196,7 @@ addFilter('qualificationCheck_V3', function(claim, training) {
         }
     }
     if (isQualification) {
-        return claim.training.type
+        return value
     } else {
         return "Not applicable"
     }
