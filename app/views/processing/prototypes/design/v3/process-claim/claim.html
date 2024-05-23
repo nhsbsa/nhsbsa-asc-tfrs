@@ -45,32 +45,32 @@
               <ul class="govuk-list govuk-error-summary__list">
                 {% if data.paymentResponseIncomplete %}
                 <li>
-                  <a href="#company-details-1-status">Complete check on evidence of payment</a>
+                  <a href="#payment-review">Complete check on evidence of payment</a>
                 </li>
                 {% endif %}
                 {% if data.paymentReimbursementAmountIncomplete %}
                 <li>
-                  <a href="#company-details-1-status">Complete cost per learner</a>
+                  <a href="#cost-per-learner-error">Complete cost per learner</a>
                 </li>
                 {% endif %}
                 {% if data.paymentReimbursementAmountInvalid %}
                 <li>
-                  <a href="#company-details-1-status">Enter a valid cost per learner</a>
+                  <a href="#cost-per-learner-error">Enter a valid cost per learner</a>
                 </li>
                 {% endif %}
                 {% if data.paymentNoNoteIncomplete %}
                 <li>
-                  <a href="#company-details-2-status"> Complete note for evidence of payment</a>
+                  <a href="#payment-note-error"> Complete note for evidence of payment</a>
                 </li>
                 {% endif %}
                 {% if data.completionResponseIncomplete %}
                 <li>
-                  <a href="#company-details-2-status">Complete check on evidence of completion</a>
+                  <a href="#completion-review">Complete check on evidence of completion</a>
                 </li>
                 {% endif %}
                 {% if data.completionNoNoteIncomplete %}
                 <li>
-                  <a href="#company-details-2-status">Complete note for evidence of completion</a>
+                  <a href="#completion-note-error">Complete note for evidence of completion</a>
                 </li>
                 {% endif %}
               </ul>
@@ -125,7 +125,7 @@
             {% endif %}
             
             <div class="govuk-form-group {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentNoNoteIncomplete %}govuk-form-group--error {% endif %}">
-                <div class="govuk-form-group" >
+                <div class="govuk-form-group" id="payment-review">
                     <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                             Does the evidence of payment meet the required criteria?
@@ -160,7 +160,7 @@
                                   </div>
 
                                     {% if data.paymentReimbursementAmountIncomplete %}
-                                        <p id="note-error" class="govuk-error-message">
+                                        <p id="cost-per-learner-error" class="govuk-error-message">
                                             <span class="govuk-visually-hidden">Error:</span> Complete cost per learner
                                         </p>
                                     {% endif %}
@@ -169,7 +169,7 @@
                                             <span class="govuk-visually-hidden">Error:</span> Enter a valid cost per learner
                                         </p>
                                     {% endif %}
-                                    <div class="govuk-input__wrapper">
+                                    <div class="govuk-input__wrapper" id="cost-per-learner">
                                         <div class="govuk-input__prefix" aria-hidden="true">£</div>
                                         <input class="govuk-input govuk-input--width-5 {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %} govuk-input--error {% endif %}" id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text" value={{claim.reimbursementAmount}}>
                                     </div>
@@ -192,7 +192,7 @@
                                         This will be seen by the submitter when the claim is processed.
                                     </div>
                                     {% if data.paymentNoNoteIncomplete %}
-                                        <p id="note-error" class="govuk-error-message">
+                                        <p id="payment-note-error" class="govuk-error-message">
                                             <span class="govuk-visually-hidden">Error:</span>Complete note for evidence of payment
                                         </p>
                                     {% endif %}
@@ -226,7 +226,7 @@
             {% if (claim.training.fundingModel == "full") and (claim.completionDate != null)%}
             <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
             <div class="govuk-form-group {% if data.completionResponseIncomplete or data.completionNoNoteIncomplete %}govuk-form-group--error {% endif %}">
-                <div class="govuk-form-group">
+                <div class="govuk-form-group" id="completion-review">
                     <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                             Does the evidence of completion meet the required criteria?
@@ -263,7 +263,7 @@
                                     This will be seen by the submitter when the claim is processed.
                                 </div>
                                 {% if data.completionNoNoteIncomplete %}
-                                <p id="note-error" class="govuk-error-message">
+                                <p id="completion-note-error" class="govuk-error-message">
                                     <span class="govuk-visually-hidden">Error:</span> Complete note for evidence of completion
                                 </p>
                                 {% endif %}
