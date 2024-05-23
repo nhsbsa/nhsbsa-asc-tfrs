@@ -33,7 +33,7 @@ Check organsiation details - Register an organisation
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">Below is the information returned from the ASC-WDS based on the workplace ID you provided.
+        <p class="govuk-body">This is the information returned from the ASC-WDS based on the workplace ID you entered.
         </p>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
@@ -65,7 +65,7 @@ Check organsiation details - Register an organisation
             <div class="govuk-form-group {% if data.submitError == 'missing' %}govuk-form-group--error{% endif %}">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        Do these details match the details for the organisation you want to register?
+                        Do these details match those of the organisation you want to register?
                     </legend>
                     {% if data.submitError == "missing" %}
                     <p id="error" class="govuk-error-message">
