@@ -33,17 +33,17 @@ function loadData(req) {
 
 function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentNoNote, completionResponse, completionNoNote) {
         if (paymentResponse == "yes") {
-            foundClaim.evidenceOfPaymentreview.pass = true
+            foundClaim.evidenceOfPaymentreview.pass = "Approved"
             foundClaim.reimbursementAmount = paymentReimbursementNote
         } else if (paymentResponse == "no") {
-            foundClaim.evidenceOfPaymentreview.pass = false
+            foundClaim.evidenceOfPaymentreview.pass = "Rejected"
             foundClaim.evidenceOfPaymentreview.note = paymentNoNote
         }
 
         if (completionResponse == "yes") {
-            foundClaim.evidenceOfCompletionreview.pass = true
+            foundClaim.evidenceOfCompletionreview.pass = "Approved"
         } else if (completionResponse == "no") {
-            foundClaim.evidenceOfCompletionreview.pass = false
+            foundClaim.evidenceOfCompletionreview.pass = "Rejected"
             foundClaim.evidenceOfCompletionreview.note = completionNoNote
         }
 }

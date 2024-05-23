@@ -1,9 +1,9 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% set claim = data.id | findClaim_V8(data.claims) %}
-{% set paymentCompleted = claim.evidenceOfPaymentreview.pass %}
+{% set paymentCompleted = claim.evidenceOfPaymentreview.pass != null %}
 {% set paymentNote = claim.evidenceOfPaymentreview.note %}
-{% set completionCompleted = claim.evidenceOfCompletionreview.pass %}
+{% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
 {% set completionNote = claim.evidenceOfCompletionreview.note %}
 
 {% block pageTitle %}
@@ -141,7 +141,7 @@
                             <div class="govuk-radios" data-module="govuk-radios">
                                 <div class="govuk-radios__item">
 
-                                <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="yes" data-aria-controls="conditional-paymentReimbursementAmount"  {% if claim.evidenceOfPaymentreview.pass ==true%}checked{% endif %}>
+                                <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="yes" data-aria-controls="conditional-paymentReimbursementAmount"  {% if claim.evidenceOfPaymentreview.pass != null and claim.evidenceOfPaymentreview.pass == "Approved" %}checked{% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="paymentYes">
                                     Yes
                                 </label>
@@ -178,7 +178,7 @@
                                 </div>
 
                                 <div class="govuk-radios__item">
-                                    <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no" data-aria-controls="conditional-payment-no" {% if claim.evidenceOfPaymentreview.pass == false%}checked{% endif %}>
+                                    <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no" data-aria-controls="conditional-payment-no" {% if claim.evidenceOfPaymentreview.pass != null and claim.evidenceOfPaymentreview.pass == "Rejected" %}checked{% endif %}>
                                     <label class="govuk-label govuk-radios__label" for="paymentNo">
                                     No
                                     </label>
@@ -206,7 +206,7 @@
 
                         {% else %}
 
-                            {% if claim.evidenceOfPaymentreview.note == null %}
+                            {% if claim.evidenceOfPaymentreview.pass == "Approved" %}
                             <p class="govuk-body">
                                 Yes</br>
                                 The cost per learner was £{{claim.reimbursementAmount}}.
@@ -240,14 +240,14 @@
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input " id="completionYes" name="completion" type="radio"
-                                value="yes"  {% if claim.evidenceOfCompletionreview.pass ==true%}checked{% endif %}>
+                                value="yes"  {% if claim.evidenceOfCompletionreview.pass != null and claim.evidenceOfCompletionreview.pass == "Approved"%}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="completionYes">
                                 Yes
                             </label>
                         </div>
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="completionNo" name="completion" type="radio"
-                                value="no" data-aria-controls="conditional-notes"  {% if claim.evidenceOfCompletionreview.pass ==false%}checked{% endif %}>
+                                value="no" data-aria-controls="conditional-notes"  {% if claim.evidenceOfCompletionreview.pass != null and claim.evidenceOfCompletionreview.pass == "Rejected" %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="completionNo">
                                 No
                             </label>
@@ -279,7 +279,7 @@
                     {% else %}
 
 
-                    {% if claim.evidenceOfCompletionreview.note == null %}
+                    {% if claim.evidenceOfCompletionreview.pass == "Approved" %}
                         <p class="govuk-body">Yes</br></p>
                         {% else %}
                         <p class="govuk-body">No</br>{{claim.evidenceOfCompletionreview.note}}</p>

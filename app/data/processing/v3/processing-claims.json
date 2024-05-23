@@ -136,14 +136,14 @@
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice002.pdf"],
     "evidenceOfPaymentreview": {
-      "pass": "Completed",
+      "pass": "Approved",
       "note": null
     },
 	"paymentNote": null,
     "completionNote": null,
     "evidenceOfCompletion": "certficate002.pdf",
     "evidenceOfCompletionreview": {
-      "pass": "Completed",
+      "pass": "Approved",
       "note": null
     },
     "reimbursementAmount": 37,
@@ -213,14 +213,14 @@
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": ["invoice007.pdf"],
     "evidenceOfPaymentreview": {
-      "pass": "Completed",
+      "pass": "Rejected",
       "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for."
     },
 	"paymentNote": null,
     "completionNote": null,
     "evidenceOfCompletion": "certficate007.pdf",
     "evidenceOfCompletionreview": {
-      "pass": "Completed",
+      "pass": "Approved",
       "note": null
     },
     "reimbursementAmount": null,
@@ -278,14 +278,14 @@
     "rejectedNote": "This claim has been escalated for fraud.",
     "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
     "evidenceOfPaymentreview": {
-      "pass": "Completed",
+      "pass": "Approved",
       "note": null
     },
 	"paymentNote": null,
     "completionNote": null,
     "evidenceOfCompletion": "certficate007.pdf",
     "evidenceOfCompletionreview": {
-      "pass": "Completed",
+      "pass": "Approved",
       "note": null
     },
 	"reimbursementAmount": null,
