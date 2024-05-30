@@ -109,10 +109,10 @@
     "claimID": "Z8S-F1J6-4GH7-C",
     "type": "TU",
     "learner": {
-      "id": "VL 10 7F 63 E",
-      "familyName": "Heber",
-      "givenName": "Stark",
-      "jobTitle": "Support Worker (Agency)"
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
     },
     "training": {
       "code": "DLEDI",
@@ -134,19 +134,19 @@
     "approvedDate": "2024-02-09T14:52:43.631Z",
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": ["invoice003.pdf", "bankstatement003.pdf"],
+    "evidenceOfPayment": ["invoice002.pdf"],
     "evidenceOfPaymentreview": {
-      "pass": "Completed",
+      "pass": "Approved",
       "note": null
     },
-  "paymentNote": null,
+	"paymentNote": null,
     "completionNote": null,
-    "evidenceOfCompletion": "certificate002.pdf",
+    "evidenceOfCompletion": "certficate002.pdf",
     "evidenceOfCompletionreview": {
-      "pass": "Completed",
+      "pass": "Approved",
       "note": null
     },
-    "reimbursementAmount": 110,
+    "reimbursementAmount": 37,
     "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2023-10-04T12:09:57.600Z",
     "notes": [
@@ -211,16 +211,16 @@
     "approvedDate": null,
     "rejectedDate": "2024-02-05T14:53:43.631Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
-    "evidenceOfPayment": ["invoice004.pdf"],
+    "evidenceOfPayment": ["invoice007.pdf"],
     "evidenceOfPaymentreview": {
-      "pass": "Completed",
+      "pass": "Rejected",
       "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for."
     },
-  "paymentNote": null,
+	"paymentNote": null,
     "completionNote": null,
-    "evidenceOfCompletion": "certficate003.pdf",
+    "evidenceOfCompletion": "certficate007.pdf",
     "evidenceOfCompletionreview": {
-      "pass": "Completed",
+      "pass": "Approved",
       "note": null
     },
     "reimbursementAmount": null,
@@ -251,7 +251,7 @@
     "claimID": "W1J-BEDE-8LCQ-C",
     "type": "TU",
     "learner": {
-      "id": "UG 66 2F 97 F",
+      "id": "ZX 51 96 87 D",
       "familyName": "Sydnee",
       "givenName": "Turner",
       "jobTitle": "Caregiver"
@@ -276,19 +276,19 @@
     "approvedDate": null,
     "rejectedDate": "2024-05-11T12:12:05.132Z",
     "rejectedNote": "This claim has been escalated for fraud.",
-    "evidenceOfPayment": ["invoice004.pdf"],
+    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
     "evidenceOfPaymentreview": {
       "pass": "Approved",
       "note": null
     },
-  "paymentNote": null,
+	"paymentNote": null,
     "completionNote": null,
-    "evidenceOfCompletion": "certficate004.pdf",
+    "evidenceOfCompletion": "certficate007.pdf",
     "evidenceOfCompletionreview": {
-      "pass": "Rejected",
+      "pass": "Approved",
       "note": null
     },
-  "reimbursementAmount": null,
+	"reimbursementAmount": null,
     "completionDate": "2023-11-03T05:51:56.177Z",
     "costDate": "2022-09-19T13:52:37.929Z",
     "notes": [
@@ -347,7 +347,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": ["invoice006.pdf"],
+    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
     "evidenceOfPaymentreview": {
       "pass": null,
       "note": null
@@ -370,240 +370,5 @@
       "note": "Claim was submitted."
     }
   ]
-  }, 
-  {
-    "claimID": "R4Y-NL7G-D967-C",
-    "type": "TU",
-    "learner": {
-      "id": "KQ 01 7F 72 D",
-      "familyName": "Jairo",
-      "givenName": "Kuphal",
-      "jobTitle": "Council Care Assistant"
-    },
-    "training": {
-      "code": "600/9319/5",
-      "reimbursementAmount": 150,
-      "title": "Understanding the Principles and Practices of Assessment",
-      "totalLearningTime": "30 hours",
-      "fundingModel": "split",
-      "type": "Level 3 Award",
-      "category": "Assessment",
-      "description": null,
-      "awardingOrganisation": "SEG Awards",
-      "link": null
-    },
-    "startDate": "2023-08-14T21:03:51.996Z",
-    "status": "approved",
-    "createdDate": "2023-06-27T18:29:08.850Z",
-    "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-12-24T21:55:10.611Z",
-    "approvedDate": "2024-04-15T19:35:05.522Z",
-    "rejectedDate": null,
-    "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
-    ],
-    "evidenceOfPaymentreview": {
-      "pass": null,
-      "note": null
-    },
-    "paymentNote": null,
-    "completionNote": null,
-    "evidenceOfCompletion": "certficate003.pdf",
-    "evidenceOfCompletionreview": {
-      "pass": null,
-      "note": null
-    },
-    "reimbursementAmount": null,
-    "completionDate": null,
-    "costDate": "2023-05-13T18:29:08.850Z",
-    "notes": [
-      {
-      "author": "System-generated",
-      "date": "2023-12-24T21:55:10.611Z",
-      "category": "System",
-      "note": "Claim was submitted."
-    }, 
-    {
-      "author": "System-generated",
-      "date": "2024-04-15T19:35:05.522Z",
-      "category": "System",
-      "note": "Claim was approved."
-    }
-    ]
-  }, 
-  {
-    "claimID": "F9B-EK2N-ELH8-C",
-    "type": "TU",
-    "learner": {
-      "id": "FS 47 4F 68 U",
-      "familyName": "Ezequiel",
-      "givenName": "VonRueden",
-      "jobTitle": "Care Assistant (Agency)"
-    },
-    "training": {
-      "code": "601/1636/5",
-      "reimbursementAmount": 180,
-      "title": "Education and Training",
-      "totalLearningTime": "120 hours",
-      "fundingModel": "split",
-      "type": "Level 3 Award",
-      "category": "Train the Trainer",
-      "description": null,
-      "awardingOrganisation": "Highfield",
-      "link": null
-    },
-    "startDate": "2023-12-30T04:17:46.227Z",
-    "status": "submitted",
-    "createdDate": "2024-02-12T22:02:22.071Z",
-    "createdBy": "Mara Monahan",
-    "submittedDate": "2024-01-04T05:33:21.376Z",
-    "approvedDate": null,
-    "rejectedDate": null,
-    "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
-    "evidenceOfPaymentreview": {
-      "pass": null,
-      "note": null
-    },
-    "paymentNote": null,
-    "completionNote": null,
-    "evidenceOfCompletion": null,
-    "evidenceOfCompletionreview": {
-      "pass": null,
-      "note": null
-    },
-    "reimbursementAmount": null,
-    "completionDate": null,
-    "costDate": "2023-05-13T18:29:08.850Z",
-    "notes": [
-      {
-      "author": "System-generated",
-      "date": "2023-12-24T21:55:10.611Z",
-      "category": "System",
-      "note": "Claim was submitted."
-    }
-    ]
-  },
-  {
-    "claimID": "Y6M-5DYB-TRCL-C",
-    "type": "TU",
-    "learner": {
-      "id": "NX 76 8F 30 D",
-      "familyName": "Lucius",
-      "givenName": "Hauck",
-      "jobTitle": "Care Assistant (Agency)"
-    },
-    "training": {
-      "code": "USMS",
-      "reimbursementAmount": 125,
-      "title": "Understanding self-management skills",
-      "totalLearningTime": "1 module",
-      "fundingModel": "full",
-      "type": "Course",
-      "category": "Developing your workforce",
-      "description": "Registered managers and service managers will gain insights into Understanding Self-Management Skills through a single module.",
-      "awardingOrganisation": "Skills for Care",
-      "link": "https://www.skillsforcare.org.uk/Documents/Learning-and-development/Endorsement/Understanding-self-management-skills.pdf"
-    },
-    "startDate": "2023-12-10T05:49:45.727Z",
-    "status": "submitted",
-    "createdDate": "2024-03-23T14:23:36.888Z",
-    "createdBy": "Mara Monahan",
-    "submittedDate": "2024-01-07T06:44:24.585Z",
-    "approvedDate": null,
-    "rejectedDate": null,
-    "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
-    "evidenceOfPaymentreview": {
-      "pass": null,
-      "note": null
-    },
-    "paymentNote": null,
-    "completionNote": null,
-    "evidenceOfCompletion": "certficate0071.pdf",
-    "evidenceOfCompletionreview": {
-      "pass": null,
-      "note": null
-    },
-    "reimbursementAmount": null,
-    "completionDate": "2023-12-14T23:54:25.599Z",
-    "costDate": "2023-07-06T13:23:36.888Z",
-    "notes": [
-      {
-      "author": "System-generated",
-      "date": "2023-12-24T21:55:10.611Z",
-      "category": "System",
-      "note": "Claim was submitted."
-    }
-    ]
-  }, 
-  {
-    "claimID": "NLE-BMDT-68ZI-C",
-    "type": "TU",
-    "learner": {
-      "id": "HM 27 9F 18 T",
-      "familyName": "Julio",
-      "givenName": "Considine",
-      "jobTitle": "Healthcare Assistant (Agency)"
-    },
-    "training": {
-      "code": "610/0955/6",
-      "reimbursementAmount": 1500,
-      "title": "Diploma in Leadership and Management for Adult Care",
-      "totalLearningTime": "950 hours",
-      "fundingModel": "split",
-      "type": "Level 5 Diploma",
-      "awardingOrganisation": "TQUK",
-      "category": "Leadership and Management",
-      "description": null,
-      "link": null
-    },
-     "startDate": "2024-04-05T06:35:33.241Z",
-    "status": "rejected",
-    "createdDate": "2023-07-28T06:59:22.580Z",
-    "createdBy": "Mara Monahan",
-    "submittedDate": "2024-04-27T15:47:33.535Z",
-    "approvedDate": null,
-    "rejectedDate": "2024-04-28T19:25:11.840Z",
-    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
-    "evidenceOfPaymentreview": {
-      "pass": null,
-      "note": null
-    },
-    "paymentNote": null,
-    "completionNote": null,
-    "evidenceOfCompletion": null,
-    "evidenceOfCompletionreview": {
-      "pass": null,
-      "note": null
-    },
-    "reimbursementAmount": null,
-    "completionDate": null,
-    "costDate": "2023-03-30T06:59:22.580Z",
-    "notes": [
-      {
-      "author": "System-generated",
-      "date": "2023-12-24T21:55:10.611Z",
-      "category": "System",
-      "note": "Claim was submitted."
-    },
-    {
-      "author": "System-generated",
-      "date": "2024-04-28T19:25:11.840Z",
-      "category": "System",
-      "note": "Claim was rejected."
-    }
-    ]
   }
 ]

@@ -14,6 +14,7 @@ function loadData(req) {
 
     var claimsFile = 'processing-claims.json'
     var statusFile = 'claim-item-statuses.json'
+    var trainingFile = 'training.json'
 
     console.log('loading in claims file')
     req.session.data['claims'] = loadJSONFromFile(claimsFile, path)
@@ -23,22 +24,26 @@ function loadData(req) {
     req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
     console.log('statuses file loaded')
 
+    console.log('loading in training file')
+    req.session.data['training'] = loadJSONFromFile(trainingFile, path)
+    console.log('training file loaded')
+
     return console.log('data updated')
 }
 
 function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentNoNote, completionResponse, completionNoNote) {
         if (paymentResponse == "yes") {
-            foundClaim.evidenceOfPaymentreview.pass = true
+            foundClaim.evidenceOfPaymentreview.pass = "Approved"
             foundClaim.reimbursementAmount = paymentReimbursementNote
         } else if (paymentResponse == "no") {
-            foundClaim.evidenceOfPaymentreview.pass = false
+            foundClaim.evidenceOfPaymentreview.pass = "Rejected"
             foundClaim.evidenceOfPaymentreview.note = paymentNoNote
         }
 
         if (completionResponse == "yes") {
-            foundClaim.evidenceOfCompletionreview.pass = true
+            foundClaim.evidenceOfCompletionreview.pass = "Approved"
         } else if (completionResponse == "no") {
-            foundClaim.evidenceOfCompletionreview.pass = false
+            foundClaim.evidenceOfCompletionreview.pass = "Rejected"
             foundClaim.evidenceOfCompletionreview.note = completionNoNote
         }
 }

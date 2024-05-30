@@ -147,11 +147,11 @@ addFilter('reimbursement_V3', function (claim) {
 
 addFilter('rejectionNote_V3', function (claim) {
     let rejectionNote = "<div class='govuk-inset-text'><h3 class='govuk-heading-s'>Claim rejected</h3>"
-    if (!claim.evidenceOfPaymentreview.pass) {
+    if (!claim.evidenceOfPaymentreview.pass || claim.evidenceOfPaymentreview.pass == "Rejected") {
         rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>"
         rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfPaymentreview.note + "</p>"
     }
-    if (isFullClaimCheck(claim) && !claim.evidenceOfCompletionreview.pass) {
+    if (isFullClaimCheck(claim) && (!claim.evidenceOfCompletionreview.pass || claim.evidenceOfCompletionreview.pass == "Rejected")) {
         rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>"
         rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfCompletionreview.note + "</p>"
     }
@@ -185,3 +185,19 @@ addFilter('signatoryErrorMessage_V9', function (submitError) {
     }
     return errorSummaryStr
 }, { renderAsHtml: true });
+
+addFilter('qualificationCheck_V3', function(claim, training, value) {
+    const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
+    let isQualification = false;
+
+    for (let course of qualificationsObject.courses) {
+        if (course.title == claim.training.title) {
+            isQualification = true
+        }
+    }
+    if (isQualification) {
+        return value
+    } else {
+        return "Not applicable"
+    }
+})

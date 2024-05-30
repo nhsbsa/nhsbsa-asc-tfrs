@@ -76,6 +76,7 @@ router.post('/search-claim-id', function (req, res) {
   delete req.session.data.paymentReimbursementAmountIncomplete
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
+  delete req.session.data.processSuccess
 
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
@@ -129,6 +130,7 @@ router.post('/claim-process-handler', function (req, res) {
   delete req.session.data.paymentReimbursementAmountIncomplete
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
+  delete req.session.data.processSuccess
 
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
