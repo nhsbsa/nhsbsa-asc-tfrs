@@ -134,19 +134,19 @@
     "approvedDate": "2024-02-09T14:52:43.631Z",
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": ["invoice002.pdf"],
+    "evidenceOfPayment": ["invoice003.pdf", "bankstatement003.pdf"],
     "evidenceOfPaymentreview": {
       "pass": "Completed",
       "note": null
     },
   "paymentNote": null,
     "completionNote": null,
-    "evidenceOfCompletion": "certficate002.pdf",
+    "evidenceOfCompletion": "certificate002.pdf",
     "evidenceOfCompletionreview": {
       "pass": "Completed",
       "note": null
     },
-    "reimbursementAmount": 37,
+    "reimbursementAmount": 110,
     "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2023-10-04T12:09:57.600Z",
     "notes": [
@@ -211,14 +211,14 @@
     "approvedDate": null,
     "rejectedDate": "2024-02-05T14:53:43.631Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
-    "evidenceOfPayment": ["invoice007.pdf"],
+    "evidenceOfPayment": ["invoice004.pdf"],
     "evidenceOfPaymentreview": {
       "pass": "Completed",
       "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for."
     },
   "paymentNote": null,
     "completionNote": null,
-    "evidenceOfCompletion": "certficate007.pdf",
+    "evidenceOfCompletion": "certficate003.pdf",
     "evidenceOfCompletionreview": {
       "pass": "Completed",
       "note": null
@@ -276,16 +276,16 @@
     "approvedDate": null,
     "rejectedDate": "2024-05-11T12:12:05.132Z",
     "rejectedNote": "This claim has been escalated for fraud.",
-    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+    "evidenceOfPayment": ["invoice004.pdf"],
     "evidenceOfPaymentreview": {
-      "pass": "Completed",
+      "pass": "Approved",
       "note": null
     },
   "paymentNote": null,
     "completionNote": null,
-    "evidenceOfCompletion": "certficate007.pdf",
+    "evidenceOfCompletion": "certficate004.pdf",
     "evidenceOfCompletionreview": {
-      "pass": "Completed",
+      "pass": "Rejected",
       "note": null
     },
   "reimbursementAmount": null,
@@ -347,7 +347,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+    "evidenceOfPayment": ["invoice006.pdf"],
     "evidenceOfPaymentreview": {
       "pass": null,
       "note": null
