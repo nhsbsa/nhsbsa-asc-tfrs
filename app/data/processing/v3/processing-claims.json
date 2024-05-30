@@ -210,7 +210,7 @@
     "submittedDate": "2023-11-25T03:13:47.582Z",
     "approvedDate": null,
     "rejectedDate": "2024-02-05T14:53:43.631Z",
-    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for. The evidence of completion provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": ["invoice004.pdf"],
     "evidenceOfPaymentreview": {
       "pass": "Rejected",
@@ -220,8 +220,8 @@
     "completionNote": null,
     "evidenceOfCompletion": "certficate003.pdf",
     "evidenceOfCompletionreview": {
-      "pass": "Approved",
-      "note": null
+      "pass": "Rejected",
+      "note": "The evidence of completion provided did not meet our requirements because it did not refer to the correct training that was paid for."
     },
     "reimbursementAmount": null,
     "completionDate": "2023-11-03T05:51:56.177Z",
@@ -237,7 +237,7 @@
         "author": "test participant",
         "date": "2024-02-05T11:12:43.631Z",
         "category": "Criteria review",
-        "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for."
+        "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for. The evidence of completion provided did not meet our requirements because it did not refer to the training that was paid for. "
       },
       {
         "author": "System-generated",
@@ -279,7 +279,7 @@
     "evidenceOfPayment": ["invoice004.pdf"],
     "evidenceOfPaymentreview": {
       "pass": "Rejected",
-      "note": null
+      "note": "There was no evidence to show the payment was made, only a invoice for the amount of training."
     },
   "paymentNote": null,
     "completionNote": null,
@@ -414,7 +414,7 @@
     "completionNote": null,
     "evidenceOfCompletion": "certficate003.pdf",
     "evidenceOfCompletionreview": {
-      "pass": "Approved",
+      "pass": null,
       "note": null
     },
     "reimbursementAmount": null,
@@ -575,11 +575,11 @@
     "rejectedDate": "2024-04-28T19:25:11.840Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "invoice004.pdf"
     ],
     "evidenceOfPaymentreview": {
       "pass": "Rejected",
-      "note": null
+      "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for."
     },
     "paymentNote": null,
     "completionNote": null,
