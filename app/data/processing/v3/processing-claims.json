@@ -211,7 +211,7 @@
     "approvedDate": null,
     "rejectedDate": "2024-02-05T14:53:43.631Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for. The evidence of completion provided did not meet our requirements because it did not refer to the training that was paid for.",
-    "evidenceOfPayment": ["invoice004.pdf"],
+    "evidenceOfPayment": ["invoice003.pdf", "bankstatement003.pdf"],
     "evidenceOfPaymentreview": {
       "pass": "Rejected",
       "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for."
@@ -347,7 +347,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": ["invoice006.pdf"],
+    "evidenceOfPayment": ["invoice007.pdf", "bankstatement007.pdf", "receipt007.pdf"],
     "evidenceOfPaymentreview": {
       "pass": null,
       "note": null
@@ -400,12 +400,7 @@
     "approvedDate": "2024-04-15T19:35:05.522Z",
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf",
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
-    ],
+    "evidenceOfPayment": ["invoice008.pdf", "bankstatement008.pdf", "receipt008.pdf"],
     "evidenceOfPaymentreview": {
       "pass": "Approved",
       "note": null
@@ -464,9 +459,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
+    "evidenceOfPayment": ["invoice009.pdf", "bankstatement009.pdf"],
     "evidenceOfPaymentreview": {
       "pass": null,
       "note": null
@@ -519,16 +512,14 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice000.pdf"
-    ],
+    "evidenceOfPayment": ["invoice010.pdf", "bankstatement010.pdf", "receipt010.pdf"],
     "evidenceOfPaymentreview": {
       "pass": null,
       "note": null
     },
     "paymentNote": null,
     "completionNote": null,
-    "evidenceOfCompletion": "certficate0071.pdf",
+    "evidenceOfCompletion": "certficate005.pdf",
     "evidenceOfCompletionreview": {
       "pass": null,
       "note": null
