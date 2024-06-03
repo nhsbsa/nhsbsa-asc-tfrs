@@ -18,7 +18,7 @@ Select funding method - new claim
                     <ul class="govuk-list govuk-error-summary__list">
                         <li>
                             <a href="#error">
-                                Select whether the you want to make use of the split funding model
+                                Select whether the you want to make use of the 60/40 funding model
                             </a>
                         </li>
                     </ul>
@@ -32,13 +32,12 @@ Select funding method - new claim
             Funding model
         </h1>
         <p class="govuk-body">This qualification is eligible for the 60/40 funding model.</p>
-        <p class="govuk-body">This means that you would receive:</p>
+        <p class="govuk-body">This means that you would get back:</p>
         <ul class="govuk-list govuk-list--bullet">
-            <li>60% of the reimbursable amount when you submit evidence of payment</li>
-            <li>40% when you submit evidence of completion</li>
+            <li>60% of the reimbursement amount up front when you submit evidence of payment</li>
+            <li>40% when you submit evidence of training completion</li>
         </ul>
-        <p class="govuk-body">You can choose whether you want to use this funding model. The alternative is to receive
-            100% of the reimbursable amount when you have the evidence of completion.</p>
+        <p class="govuk-body">You can choose whether you want to use this funding model. The alternative is to get 100% of the reimbursement amount when the training is completed.</p>
         </p>
 
         <form action="../split-decision-handler" method="post" novalidate>
@@ -50,7 +49,7 @@ Select funding method - new claim
                     {% if data.submitError %}
                     <p id="error" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
-                        Select whether the you want to make use of the split funding model
+                        Select whether the you want to make use of the 60/40 funding model
                     </p>
                     {% endif %}
                     <div class="govuk-radios" data-module="govuk-radios">
