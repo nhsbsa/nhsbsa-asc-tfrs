@@ -1,3 +1,6 @@
+const fs = require('fs');
+
+
 function checkClaim(claim) {
 
     const result = {};
@@ -240,5 +243,11 @@ function checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTit
 
 }
 
+// funtion to load in data files
+function loadJSONFromFile(fileName, path = 'app/data/') {
+    let jsonFile = fs.readFileSync(path + fileName)
+    return JSON.parse(jsonFile) // Return JSON as object
+  }
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm }
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, loadJSONFromFile }
