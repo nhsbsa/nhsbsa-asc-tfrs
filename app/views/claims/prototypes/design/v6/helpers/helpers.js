@@ -61,4 +61,17 @@ function sortByCreatedDate(array) {
     return array;
   }
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate }
+  function updateClaimStatus(claimID, claims) {
+    for (const claim of claims) {
+        if (claimID == claim.claimID) {
+            if (checkClaim(claim))
+                {
+                    console.log('update claim')
+                    claim.status = 'ready-to-submit'
+            }
+            break;
+        }
+      }
+}
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, updateClaimStatus }
