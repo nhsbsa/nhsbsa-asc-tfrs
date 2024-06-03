@@ -1,8 +1,8 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
-const { loadJSONFromFile } = require('../../../../../../scripts/JSONfileloaders.js');
+const { loadJSONFromFile } = require('../helpers/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../../../../../../scripts/helpers/helpersV7.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../helpers/helpers.js');
 
 // v7 Prototype routes
 
@@ -424,7 +424,7 @@ router.post('/update-filters', (req, res) => {
 function loadData(req) {
     // pull in the prototype data object and see if it contains a datafile reference
     let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
-    const path = 'app/data/claims/v7/'
+    const path = 'app/views/claims/prototypes/design/v7/data/'
   
     var learnersFile = 'learners.json'
     var trainingFile = 'training.json'

@@ -1,7 +1,6 @@
 const fs = require('fs');
 const { faker } = require('@faker-js/faker');
 const { fakerEN_GB } = require('@faker-js/faker');
-const { generateUniqueID } = require('./helpers.js');
 
 function getRandomLearners(learnerList, x) {
   const copyLearners = [...learnerList];
@@ -50,17 +49,36 @@ function generateDateBefore(referenceDate) {
   return newDate;
 }
 
+function generateUniqueID() {
+  const characters = 'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789'; // Excluding 'O'
+  const sections = [3, 4, 4]; // Length of each section
+
+  let id = '';
+
+  for (let i = 0; i < sections.length; i++) {
+      for (let j = 0; j < sections[i]; j++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          id += characters.charAt(randomIndex);
+      }
+      if (i < sections.length - 1) {
+          id += '-';
+      }
+  }
+
+  return id;
+}
+
 // Tu Claim Generator
 function generateTUClaims(quantity, version) {
   let data = [];
   const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
 
   // Load JSON files
-  const learners = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/learners.json', 'utf8'));
-  const training = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/training.json', 'utf8'));
-  const statuses = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/claim-item-statuses.json', 'utf8'));
+  const learners = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/learners.json', 'utf8'));
+  const training = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/training.json', 'utf8'));
+  const statuses = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/claim-item-statuses.json', 'utf8'));
 
-  const preSetClaims = JSON.parse(fs.readFileSync('./app/data/claims/' + version + '/pre-set-claims.json', 'utf8'));
+  const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/pre-set-claims.json', 'utf8'));
   data = data.concat(preSetClaims)
 
   for (let i = 1; i <= quantity; i++) {
@@ -242,7 +260,7 @@ function generateClaims(quantity, version) {
   data = data.concat(TUClaims);
 
   // Write data to learners.json
-  const jsonFilePath = './app/data/claims/' + version + '/claims.json';
+  const jsonFilePath = './app/views/claims/prototypes/design/' + version + '/data/claims.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
 
 
