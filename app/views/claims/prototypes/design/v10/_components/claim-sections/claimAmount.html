@@ -5,21 +5,21 @@
 {% endif %} 
 
 {% if claim.claimType == "100" %}
-<p class="govuk-body">This is the most you could get back. It’s usually lower than the training actually cost, meaning that you’ll cover the difference.</p>
-<p class="govuk-body">If you paid less than the maximum, you’ll get back the lower amount.</p>
+<p class="govuk-body">This is the most you could get back. It’s usually less than the training actually cost, meaning that you’ll cover the difference.</p>
+<p class="govuk-body">If you paid less than the maximum reimbursement amount, you’ll get back what you paid.</p>
 {% elif claim.claimType == "60" %}
 <p class="govuk-body">Using the 60/40 funding model, you could get back up to:</p>
 <ul class="govuk-list govuk-list--bullet">
-    <li><strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong> up front for this 60 claim (60% of £{{ claim.training.reimbursementAmount }}) and</li>
-    <li><strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong> on completion of training for the 40 claim (40% of £{{ claim.training.reimbursementAmount }})</li>
+    <li><strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong> up front for this 60 claim and</li>
+    <li><strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong> on completion of training for the 40 claim </li>
 </ul>
-<p class="govuk-body">The maximum reimbursement amount is the most you could get back. It’s usually lower than the training actually cost, meaning that you’ll cover the difference.</p>
-<p class="govuk-body">If you paid less than the maximum, you’ll get back the lower amount.</p>
+<p class="govuk-body">The maximum reimbursement amount is the most you could get back. It’s usually less than the training actually cost, meaning that you’ll cover the difference.</p>
+<p class="govuk-body">If you paid less than the maximum reimbursement amount, you’ll get back what you paid.</p>
 
 {% elif claim.claimType == "40" %}
-<p class="govuk-body"><strong>Using the 60/40 funding model, in total for this training you'll get</strong><br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}.</strong></p>
-<p class="govuk-body">You have already got <strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong> (60% of £{{ claim.training.reimbursementAmount }}) for the 60 claim.</p>
-<p class="govuk-body">You'll get a further <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong> (40% of £{{ claim.training.reimbursementAmount }}) on approval of this 40 claim.</p>
+<p class="govuk-body"><strong>In total for this training you'll get</strong><br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}.</strong></p>
+<p class="govuk-body">You have already got <strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong> for the 60 claim.</p>
+<p class="govuk-body">You'll get a further <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong> on approval of this 40 claim.</p>
 {% endif %}
 
 {% if claim.claimType != "40" %}
@@ -30,7 +30,7 @@
             </span>
         </summary>
         <div class="govuk-details__text">
-            <p class="govuk-body">If you paid £200 and the maximum reimbursement amount is £160, the training will end up costing you £40.</p>
+            <p class="govuk-body">If you paid £200 and the maximum reimbursement amount is £160, you'll get back £160.</p>
             <p class="govuk-body">If you paid £150 and the maximum reimbursement amount is £160, you'll get back £150.</p>
         </div>
     </details>
