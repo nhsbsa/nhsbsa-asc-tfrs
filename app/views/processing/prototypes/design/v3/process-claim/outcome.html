@@ -25,9 +25,17 @@
         </span>
       </summary>
       <div class="govuk-details__text">
+        {% if (claim.training.fundingModel == "split") %}
+          <p><strong>£{{ claim | reimbursement_V3 }} is 60% of £{{claim.reimbursementAmount}}.</strong></p>
+        {% endif %}
+
         <p>Organisations cannot get back more than they paid for training.</p>
-        <p>Therefore if the organisation paid less than the maximum reimbursable amount they will only get back what they paid. This is the value you specified on the last screen as the <strong>cost per learner</strong>.</p>
-        <p>If the organisation paid the same or more than the maximum reimbursable amount then they will get back this full amount.</p>
+        <p>Therefore if the organisation paid less than the maximum reimbursement amount they will only get back what they paid. This is the value you specified on the last screen as the <strong>cost per learner</strong>.</p>
+        <p>Otherwise they will get back the maximum reimbursement amount.</p>
+
+        {% if (claim.training.fundingModel == "split") %}
+          <p>For this 60 claim, the organisation will get back 60% of the reimbursement amount. When the 40 claim is approved they'll get back the remaining 40%.</p>
+        {% endif %}
       </div>
     </details>
     {% elif data.result == "reject" %}
