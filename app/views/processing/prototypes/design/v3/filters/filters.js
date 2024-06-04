@@ -145,6 +145,14 @@ addFilter('reimbursement_V3', function (claim) {
     }
 });
 
+addFilter('original_reimbursement_amount_V3', function (claim) {
+    if (claim.reimbursementAmount > claim.training.reimbursementAmount) {
+        return claim.training.reimbursementAmount
+    } else {
+        return claim.reimbursementAmount
+    }
+});
+
 addFilter('rejectionNote_V3', function (claim) {
     let rejectionNote = "<div class='govuk-inset-text'><h3 class='govuk-heading-s'>Claim rejected</h3>"
     if (!claim.evidenceOfPaymentreview.pass || claim.evidenceOfPaymentreview.pass == "Rejected") {
