@@ -38,13 +38,13 @@
 
 {% elif claim.status == "approved" %}
 {% if claim.claimType == "100" %}
-<p class="govuk-body">You will receive <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}</strong><br> for this claim.</p>
+<p class="govuk-body">You will get back <br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}</strong><br> for this claim.</p>
 {% elif claim.claimType == "60" %}
-<p class="govuk-body">You will receive<br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.6 }}</strong><br> for this 60 claim.</p>
-<p class="govuk-body">When you submit the 40 claim you will recieve <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong>.</p>
+<p class="govuk-body">You will get back<br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.6 }}</strong><br> for this 60 claim.</p>
+<p class="govuk-body">When you submit the 40 claim you will get an additional <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong>.</p>
 {% elif claim.claimType == "40" %}
-<p class="govuk-body">You will receive<br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.4 }}</strong><br> for this 40 claim.</p>
-<p class="govuk-body">For the 60 claim you have already recieved <strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong>.</p>
+<p class="govuk-body">You will get back<br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount * 0.4 }}</strong><br> for this 40 claim.</p>
+<p class="govuk-body">For the 60 claim you have already got <strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong>.</p>
 {% endif %}
 <details class="govuk-details">
     <summary class="govuk-details__summary">
@@ -55,7 +55,7 @@
     <div class="govuk-details__text">
         <p class="govuk-body">This amount is {% if claim.claimType == "60" %}60% of{% elif claim.claimType == "40" %}40% of{% endif %} the lower of:</p>
         <ul class="govuk-list govuk-list--bullet">
-            <li>the maximum amount set in the funding for this course or qualification</li>
+            <li>the maximum reimbursement amount for this training</li>
             <li>what you paid</li>
         </ul>
     </div>
