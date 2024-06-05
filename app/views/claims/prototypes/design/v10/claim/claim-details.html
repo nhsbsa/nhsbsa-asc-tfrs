@@ -64,15 +64,15 @@
         <dt class="govuk-summary-list__key">
           Type
         </dt>
-        <dd class="govuk-summary-list__value">
+        <dd class="govuk-summary-list__value {% if pairID == null %}govuk-summary-list__row--no-actions{% endif %}">
           {{ claim.claimType | typeTag_V10 }}
 
           {% if claim.claimType == "100" %}
-          <p class="govuk-caption-m" style="padding-top: 5px;">Single reimbursement on training completion</p>
+          <p class="govuk-caption-m" style="padding-top: 5px;" aria-describedby="100-claim-type-hint">Single reimbursement on training completion</p>
           {% elif claim.claimType == "60" %}
-            <p class="govuk-caption-m" style="padding-top: 5px;">Split reimbursement, 60% up front after payment</p>
+            <p class="govuk-caption-m" style="padding-top: 5px;" aria-describedby="60-claim-type-hint">Split reimbursement, 60% up front after payment</p>
           {% elif claim.claimType == "40" %}
-          <p class="govuk-caption-m" style="padding-top: 5px;">Split reimbursement, 40% on training completion</p>
+          <p class="govuk-caption-m" style="padding-top: 5px;" aria-describedby="40-claim-type-hint">Split reimbursement, 40% on training completion</p>
           {% endif %}
         </dd>
         {% if pairID != null %}
