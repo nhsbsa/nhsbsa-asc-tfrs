@@ -44,6 +44,13 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+
+    {% if claim.claimType != "100" %}
+      <div class="govuk-inset-text" style="margin-top: 0px;">
+        This {% if claim.claimType == "60" %}60{% elif claim.claimType == "40"%}40{% endif %} claim relates to training using the 60/40 funding model. Find out more about reimbursement amounts and claim types in the <a href="../guidance/evidence-requirements" class="govuk-link">help with starting a new care skills claim</a>.
+      </div>
+    {% endif %}
+
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
         <dt class="govuk-summary-list__key">
@@ -59,6 +66,14 @@
         </dt>
         <dd class="govuk-summary-list__value">
           {{ claim.claimType | typeTag_V10 }}
+
+          {% if claim.claimType == "100" %}
+          <p class="govuk-caption-m" style="padding-top: 5px;" aria-describedby="100-claim-type-hint">Single reimbursement on training completion</p>
+          {% elif claim.claimType == "60" %}
+            <p class="govuk-caption-m" style="padding-top: 5px;" aria-describedby="60-claim-type-hint">Split reimbursement, 60% up front after payment</p>
+          {% elif claim.claimType == "40" %}
+          <p class="govuk-caption-m" style="padding-top: 5px;" aria-describedby="40-claim-type-hint">Split reimbursement, 40% on training completion</p>
+          {% endif %}
         </dd>
         {% if pairID != null %}
         <dd class="govuk-summary-list__actions">
