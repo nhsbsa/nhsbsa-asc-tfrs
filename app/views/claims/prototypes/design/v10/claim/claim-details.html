@@ -64,7 +64,7 @@
         <dt class="govuk-summary-list__key">
           Type
         </dt>
-        <dd class="govuk-summary-list__value {% if pairID == null %}govuk-summary-list__row--no-actions{% endif %}">
+        <dd class="govuk-summary-list__value">
           {{ claim.claimType | typeTag_V10 }}
 
           {% if claim.claimType == "100" %}
