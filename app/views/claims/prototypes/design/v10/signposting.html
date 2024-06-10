@@ -1,0 +1,41 @@
+{% extends "./layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{{ "Choose a claim type" }}
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=TU">Choose a claim type</a>
+    </li>
+  </ol>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <ul class="homepage-services-and-info__list">
+        <li class="chevron-card">
+          <div class="chevron-card__wrapper">
+              <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
+                  <a class="govuk-link chevron-card__link" data-track-label="{{ status.id }}" href="manage-claims-home?claimType=TU">CARE SKILLS</a>
+              </h3>
+              <p class="govuk-body chevron-card__description">something something</p>
+          </div>
+        </li>
+        <li class="chevron-card">
+          <div class="chevron-card__wrapper">
+              <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
+                  <a class="govuk-link chevron-card__link" data-track-label="{{ status.id }}" href="manage-claims-home?claimType=CPD">REVALIDATION FUNDING</a>
+              </h3>
+              <p class="govuk-body chevron-card__description">something something</p>
+          </div>
+        </li>
+    </ul>
+  </div>
+
+{% endblock %}
