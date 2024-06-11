@@ -192,8 +192,10 @@ addFilter('getUniqueCourseTitles_V10', function (training) {
 
 addFilter('coursesCount_V10', function (courses) {
     let count = 0;
-    for (const c of courses) {
-        count++
+    if (courses != null) {
+        for (const c of courses) {
+            count++
+        }
     }
     return count;
 })

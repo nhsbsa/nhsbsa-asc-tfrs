@@ -60,13 +60,14 @@
           {{ claim.status | statusTag_V10(data.statuses) }}
         </dd>
       </div>
+
+      {% if claim.fundingType == "TU" %}
       <div class="govuk-summary-list__row {% if pairID == null %}govuk-summary-list__row--no-actions{% endif %}">
         <dt class="govuk-summary-list__key">
           Type
         </dt>
         <dd class="govuk-summary-list__value">
           {{ claim.claimType | typeTag_V10 }}
-
           {% if claim.claimType == "100" %}
           <p class="govuk-caption-m" style="padding-top: 5px;" aria-describedby="100-claim-type-hint">Single reimbursement on training completion</p>
           {% elif claim.claimType == "60" %}
@@ -75,6 +76,7 @@
           <p class="govuk-caption-m" style="padding-top: 5px;" aria-describedby="40-claim-type-hint">Split reimbursement, 40% on training completion</p>
           {% endif %}
         </dd>
+
         {% if pairID != null %}
         <dd class="govuk-summary-list__actions">
           <a class="govuk-link govuk-body" href="claim-details?id={{ pairID }}">View {% if claim.claimType == "60"%}40{%
@@ -82,6 +84,7 @@
         </dd>
         {% endif %}
       </div>
+      {% endif %}
     </dl>
 
     {% if claim.status == "rejected" %}

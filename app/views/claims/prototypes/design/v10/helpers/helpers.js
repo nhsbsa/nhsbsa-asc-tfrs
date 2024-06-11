@@ -179,18 +179,31 @@ function validateDate(day, month, year, type) {
     return result;
 }
 
-function checkDuplicateClaim(learnerID, trainingID, claimList) {
+function checkDuplicateClaim(learnerID, trainingID, claimList, claimType) {
     let result = {}
     result.check = false
     result.id = ''
 
-    for (const c of claimList) {
-        if (c.learner != null) {
-            if (c.training.code == trainingID && c.learner.id == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
-                result.matchType = c.claimType
-                result.check = true;
-                result.id = c.claimID
-                break;
+    if (claimType == "TU") {
+        for (const c of claimList) {
+            if (c.learner != null) {
+                if (c.training.code == trainingID && c.learner.id == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
+                    result.matchType = c.claimType
+                    result.check = true;
+                    result.id = c.claimID
+                    break;
+                }
+            }
+        }
+    } else if (claimType == "CPD") {
+        for (const c of claimList) {
+            if (c.learner != null) {
+                if (c.categoryName == trainingID && c.learner.id == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
+                    result.matchType = c.claimType
+                    result.check = true;
+                    result.id = c.claimID
+                    break;
+                }
             }
         }
     }

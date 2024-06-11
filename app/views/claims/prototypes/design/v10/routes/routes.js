@@ -370,6 +370,7 @@ router.post('/completion-date', function (req, res) {
 });
 
 router.post('/add-learner', function (req, res) {
+  var claimType = req.session.data.claimType
   var claimID = req.session.data.id
   for (const l of req.session.data.learners) {
     if (req.session.data.learnerSelection == l.id) {
@@ -389,7 +390,12 @@ router.post('/add-learner', function (req, res) {
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
-      duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims);
+      if (claimType == "TU") {
+        duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims, "TU");
+      } else if (claimType == "CPD") {
+        duplicateCheck = checkDuplicateClaim(learner.id, c.categoryName, req.session.data.claims, "CPD");
+      }
+      
       if (duplicateCheck.check) {
         res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
       } else {
@@ -475,6 +481,7 @@ router.post('/remove-evidence', function (req, res) {
 })
 
 router.post('/save-claim', function (req, res) {
+  var claimType = req.session.data.claimType
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
@@ -496,7 +503,12 @@ router.post('/save-claim', function (req, res) {
   delete req.session.data['activity-date-started-month'];
   delete req.session.data['activity-date-started-year'];
 
-  res.redirect('manage-claims?claimType=TU&statusID=not-yet-submitted')
+  if (claimType == "TU") {
+    res.redirect('manage-claims?claimType=TU&statusID=not-yet-submitted')
+  } else {
+    res.redirect('manage-claims?claimType=CPD&statusID=not-yet-submitted')
+  }
+  
 
 });
 
