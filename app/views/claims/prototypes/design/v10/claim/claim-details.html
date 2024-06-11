@@ -45,7 +45,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    {% if claim.claimType != "100" %}
+    {% if claim.fundingType == "TU" and claim.claimType != "100" %}
       <div class="govuk-inset-text" style="margin-top: 0px;">
         This {% if claim.claimType == "60" %}60{% elif claim.claimType == "40"%}40{% endif %} claim relates to training using the 60/40 funding model. Find out more about reimbursement amounts and claim types in the <a href="../guidance/evidence-requirements" class="govuk-link">help with starting a new care skills claim</a>.
       </div>

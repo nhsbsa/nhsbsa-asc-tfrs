@@ -107,13 +107,10 @@ router.post('/split-decision-handler', function (req, res) {
 });
 
 function newTUClaim(req, input, type) {
-
   let claim = {};
   const d = new Date();
   const dStr = d.toISOString();
-
   faker.seed(req.session.data.claims.length + 1);
-
   if (type == "100") {
     claim = {
       claimID: generateUniqueID() + "-A",
@@ -215,31 +212,47 @@ function newTUClaim(req, input, type) {
   return claim.claimID
 }
 
-function newCPDClaim(req, input) {
+router.post('/add-activity', function (req, res) {
+  const activityType = req.session.data.activityType
+  const description = "to find"
+  // var activityChoice = null
+  // for (const trainingGroup of req.session.data.CPDActivities) {
+  //   for (const activity of trainingGroup.activities) {
+      // if (activityType == activity.code) {
+      //   activityChoice = t
+      // }
+  //   }
+  // }
 
+    delete req.session.data['activityType'];
+    const claimID = newCPDClaim(req, activityType, description)
+    res.redirect('claim/claim-details' + '?id=' + claimID)
+
+});
+
+function newCPDClaim(req, activityType, description) {
   let claim = {};
   const d = new Date();
   const dStr = d.toISOString();
-
   faker.seed(req.session.data.claims.length+1);
-  
-    claim = {
-      claimID: generateUniqueID() + "-D",
-      fundingType: "CPD",
-      learner: null,
-      categoryName: input,
-      description: null,
-      startDate: null,
-      status: "new",
-      createdDate: dStr,
-      createdBy: "Test Participant",
-      submittedDate: null,
-      paidDate: null,
-      costDate: null,
-      evidenceOfPayment: null,
-      evidenceOfCompletion: null,
-      completionDate: null
-    };
+  claim = {
+    claimID: generateUniqueID() + "-D",
+    fundingType: "CPD",
+    claimType: null,
+    learner: null,
+    categoryName: activityType,
+    description: description,
+    startDate: null,
+    status: "new",
+    createdDate: dStr,
+    createdBy: "Test Participant",
+    submittedDate: null,
+    paidDate: null,
+    costDate: null,
+    evidenceOfPayment: null,
+    evidenceOfCompletion: null,
+    completionDate: null
+  };
 
   req.session.data.claims.push(claim)
   //reset seed
@@ -265,7 +278,6 @@ function newCPDClaim(req, input) {
   delete req.session.data['selectedClaimsConfirmed'];
   delete req.session.data['activityType'];
 
-  // res.redirect('claim/claim-details'+'?id='+claim.claimID)
   return claim.claimID
 }
 
