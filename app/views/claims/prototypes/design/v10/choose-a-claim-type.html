@@ -1,0 +1,48 @@
+{% extends "./layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{{ "Choose a claim type" }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+      <h2 class="govuk-heading-l">Choose a claim type</h2>
+
+      <ul class="homepage-services-and-info__list">
+
+          <li class="chevron-card">
+              <div class="chevron-card__wrapper">
+                  <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
+                      <a class="govuk-link chevron-card__link" data-track-action="topicsLink"
+                          data-track-category="homepageClicked" data-track-dimension-index="29"
+                          data-track-dimension="Benefits" data-track-label="manage-tu-claims" data-track-value="1"
+                          data-ga4-link="{&quot;event_name&quot;:&quot;navigation&quot;,&quot;type&quot;:&quot;homepage&quot;,&quot;index_link&quot;:1,&quot;index_section&quot;:3,&quot;index_section_count&quot;:6,&quot;index_total&quot;:16,&quot;section&quot;:&quot;Services and information&quot;}"
+                          href="manage-claims-home?claimType=TU">{{ "TU" | potName_V7 }}</a>
+                  </h3>
+                  <p class="govuk-body chevron-card__description">Manage claims, or start a new claim, for {{ "TU" |
+                      potName_V7 }}.</p>
+              </div>
+          </li>
+
+          <li class="chevron-card">
+              <div class="chevron-card__wrapper">
+                  <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
+                      <a class="govuk-link chevron-card__link" data-track-action="topicsLink"
+                          data-track-category="homepageClicked" data-track-dimension-index="29"
+                          data-track-dimension="Benefits" data-track-label="manage-cpd-claims" data-track-value="1"
+                          data-ga4-link="{&quot;event_name&quot;:&quot;navigation&quot;,&quot;type&quot;:&quot;homepage&quot;,&quot;index_link&quot;:1,&quot;index_section&quot;:3,&quot;index_section_count&quot;:6,&quot;index_total&quot;:16,&quot;section&quot;:&quot;Services and information&quot;}"
+                          href="manage-claims-home?claimType=CPD">{{ "CPD" | potName_V7 }}</a>
+                  </h3>
+                  <p class="govuk-body chevron-card__description">Manage claims, or start a new claim, for {{ "CPD" |
+                      potName_V7 }}.</p>
+              </div>
+          </li>
+
+      </ul>
+  </div>
+</div>
+
+{% endblock %}

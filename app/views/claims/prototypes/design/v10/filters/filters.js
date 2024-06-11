@@ -480,7 +480,6 @@ addFilter('findPair_V10', function (claimID, claims) {
 })
 
 addFilter('typeTag_V10', function (type) {
-
     switch (type) {
         case "100":
             return '<strong class="govuk-tag govuk-tag--orange">100</strong>'
@@ -489,5 +488,14 @@ addFilter('typeTag_V10', function (type) {
         case "40":
             return '<strong class="govuk-tag govuk-tag--purple">40</strong>'
     }
-
 }, { renderAsHtml: true })
+
+addFilter('newClaimLink_V7', function (type) {
+    let claimLink = "#"
+    if (type == "TU") {
+        claimLink = "claim/select-training"
+    } else if (type == "CPD") {
+        claimLink = "claim/select-activity-type"
+    }
+    return claimLink
+})
