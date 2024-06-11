@@ -78,7 +78,6 @@ const roleTypes = JSON.parse(fs.readFileSync('./app/data/' + version + '/role-ty
 
 const tuEligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
 
-
 const preSetClaims = JSON.parse(fs.readFileSync('./app/data/' + version + '/pre-set-claims.json', 'utf8'));
 data = data.concat(preSetClaims)
 
@@ -272,10 +271,7 @@ function generateCPDClaims(quantity, version) {
   // Write data to learners.json
    const jsonFilePath = './app/data/'+version+'/claims.json';
    fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
-
-
   }
-
 
 module.exports = { generateClaims }
 

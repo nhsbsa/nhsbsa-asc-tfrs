@@ -104,9 +104,6 @@ function generateTUClaims(quantity, version) {
         claimType = "60"
       }
       claimID = claimID + append
-      
-  
-  
       let submittedDate = null;
       let evidenceOfPayment = [];
       let evidenceOfCompletion = null;
@@ -154,20 +151,16 @@ function generateTUClaims(quantity, version) {
         completionDate,
         costDate,
       };
-  
       data.push(claim);
 
     } else if (trainingItem.fundingModel == "split") {
       const claimIDA = claimID + "-B"
       const claimIDB = claimID + "-C"
-  
-  
       let submittedDateA = null;
       let submittedDateB = null;
       let evidenceOfPayment = [];
       let evidenceOfCompletion = null;
       let completionDate = null;
-      
       let statusA = "approved"
       let statusB = "submitted"
 
@@ -238,32 +231,112 @@ function generateTUClaims(quantity, version) {
         completionDate,
         costDate,
       };
-  
       data.push(claimA);
       data.push(claimB);
-
-
     }
   }
-
   //reset seed
   faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
-
   return data;
-
 }
+
+function generateCPDClaims(quantity, version) {
+  let data = [];
+  const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
+  
+  // Load JSON files
+  const learners = JSON.parse(fs.readFileSync('./app/data/' + version + '/learners.json', 'utf8'));
+  const activities = JSON.parse(fs.readFileSync('./app/data/' + version + '/cpd-activities.json', 'utf8'));
+  const statuses = JSON.parse(fs.readFileSync('./app/data/' + version + '/claim-item-statuses.json', 'utf8'));
+  const roleTypes = JSON.parse(fs.readFileSync('./app/data/' + version + '/role-types.json', 'utf8'));
+  
+  const CPDEligibleRoles = roleTypes.filter(role => role.eligibility.isCPDeligible).map(role => role.rolename);
+  
+  for (let i = 1; i <= quantity; i++) {
+    faker.seed(i+10000);
+    const claimID = faker.finance.accountNumber(6);
+    const selectedLearners = getRandomLearners(learners, 1, CPDEligibleRoles);
+    const activityGroup = faker.helpers.arrayElement(activities);
+    const category = faker.helpers.arrayElement(activityGroup.categories);
+    const categoryName = category.name;
+    const description = faker.helpers.arrayElement(category.examples);
+    const claimAmount = faker.number.int({ min: 10, max: 100 });
+
+    let startDate = null;
+    if (categoryName =="Courses") {
+      startDate = faker.date.past();
+    }
+    
+    const status = getRandomStatus(statuses);
+    const createdDate = faker.date.past();
+    const createdBy = faker.helpers.arrayElement(creators);
+    const costDate = generateDateBefore(createdDate);
+  
+    let submittedDate = null;
+    if (['submitted', 'queried', 'paid', 'approved'].includes(status)) {
+      submittedDate = faker.date.between({from: createdDate,to:  new Date()});
+    }
+  
+    let approvedDate = null;
+    if (['paid', 'approved'].includes(status)) {
+      approvedDate = faker.date.between({from: submittedDate,to:  new Date()});
+    }
+  
+    let queriedDate = null;
+    if (['queried'].includes(status)) {
+      queriedDate = faker.date.between({from: submittedDate,to:  new Date()});
+    }
+  
+    let paidDate = null;
+    if (status === 'paid') {
+      paidDate = faker.date.between({from: approvedDate, to: new Date()});
+    }
+  
+    const evidenceOfPayment = ('invoice').concat('00', i.toString(), '.pdf');
+  
+    if (['submitted', 'queried', 'paid', 'approved'].includes(status)) {
+      
+        for (const l of selectedLearners) {
+          l.evidence.evidenceOfCompletion = 'certficate'+'00'+i.toString()+'.pdf';
+        }
+    }
+  
+    const claim = {
+      claimID,
+      type: "CPD",
+      learners: selectedLearners,
+      categoryName,
+      description,
+      startDate,
+      status,
+      createdDate,
+      createdBy,
+      submittedDate,
+      approvedDate,
+      queriedDate,
+      paidDate,
+      claimAmount,
+      evidenceOfPayment,
+      costDate,
+      notes: []
+    };
+    data.push(claim);
+  }
+   //reset seed
+   faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
+   return data;
+  }
 
 function generateClaims(quantity, version) {
   let data = [];
-  const TUClaims = generateTUClaims(Math.floor(quantity * 1), version);
+  const TUClaims = generateTUClaims(Math.floor(quantity * 0.96), version);
+  const CPDClaims = generateCPDClaims(Math.floor(quantity*0.04), version);
 
-  data = data.concat(TUClaims);
+  data = data.concat(TUClaims, CPDClaims);
 
   // Write data to learners.json
   const jsonFilePath = './app/views/claims/prototypes/design/' + version + '/data/claims.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
-
-
 }
 
 
