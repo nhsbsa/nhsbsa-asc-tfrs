@@ -214,23 +214,12 @@ function newTUClaim(req, input, type) {
 
 router.post('/add-activity', function (req, res) {
   const activityType = req.session.data.activityType
-  const description = "to find"
-  // var activityChoice = null
-  // for (const trainingGroup of req.session.data.CPDActivities) {
-  //   for (const activity of trainingGroup.activities) {
-      // if (activityType == activity.code) {
-      //   activityChoice = t
-      // }
-  //   }
-  // }
-
-    delete req.session.data['activityType'];
-    const claimID = newCPDClaim(req, activityType, description)
-    res.redirect('claim/claim-details' + '?id=' + claimID)
-
+  delete req.session.data['activityType'];
+  const claimID = newCPDClaim(req, activityType)
+  res.redirect('claim/claim-details' + '?id=' + claimID)
 });
 
-function newCPDClaim(req, activityType, description) {
+function newCPDClaim(req, activityType) {
   let claim = {};
   const d = new Date();
   const dStr = d.toISOString();
@@ -241,7 +230,7 @@ function newCPDClaim(req, activityType, description) {
     claimType: null,
     learner: null,
     categoryName: activityType,
-    description: description,
+    description: null,
     startDate: null,
     status: "new",
     createdDate: dStr,

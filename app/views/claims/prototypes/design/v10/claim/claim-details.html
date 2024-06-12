@@ -92,7 +92,11 @@
     <p class="govuk-body">{{claim.rejectedNote}}</p>
     {% endif %}
 
+  {% if claim.fundingType == "TU" %}
     {% include "../_components/claim-sections/training.html" %}
+  {% elif claim.fundingType == "CPD" %}
+    {% include "../_components/claim-sections/activity.html" %}
+  {% endif %}
 
     {% include "../_components/claim-sections/learner.html" %}
 
@@ -100,7 +104,7 @@
     {% include "../_components/claim-sections/evidencePayment.html" %}
     {% endif %}
 
-    {% if claim.claimType != "60" %}
+    {% if claim.fundingType == "TU" and claim.claimType != "60" %}
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
     {% endif %}
 
@@ -116,6 +120,9 @@
       <p class="govuk-body">Once the 60 claim is approved and the learner has completed the training you'll need to submit the 40 claim for the rest of the reimbursement amount.</p>
     {% elif claim.claimType == "100" %}
       <p class="govuk-body">When you have added all the necessary information to the claim you can confirm the details and submit this 100 claim for processing.</p>
+      <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
+    {% elif claim.fundingType == "CPD" %}
+      <p class="govuk-body">When you have added all the necessary information to the claim you can confirm the details and submit this claim for processing.</p>
       <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
     {% endif %}
 
