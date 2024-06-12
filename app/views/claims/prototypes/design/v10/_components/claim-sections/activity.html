@@ -10,7 +10,7 @@
     </dd>
   </div>
 
-  <div class="govuk-summary-list__row {% if not claim.description %} govuk-summary-list__row--no-actions {% endif %}">
+  <div class="govuk-summary-list__row {% if not claim.description or claim.status != 'not-yet-submitted' %} govuk-summary-list__row--no-actions {% endif %}">
     <dt class="govuk-summary-list__key">
       Description
     </dt>
@@ -31,7 +31,7 @@
     {% endif %}
   </div>
 
-  <div class="govuk-summary-list__row {% if not claim.claimAmount %} govuk-summary-list__row--no-actions {% endif %}">
+  <div class="govuk-summary-list__row {% if not claim.claimAmount or claim.status != 'not-yet-submitted' %} govuk-summary-list__row--no-actions {% endif %}">
     <dt class="govuk-summary-list__key">
       Cost
     </dt>
@@ -53,7 +53,7 @@
   </div>
 
   {% if claim.categoryName == "Courses" %}
-  <div class="govuk-summary-list__row">
+  <div class="govuk-summary-list__row {% if not claim.startDate or claim.status != 'not-yet-submitted' %} govuk-summary-list__row--no-actions {% endif %}">
     <dt class="govuk-summary-list__key">
       Start date
     </dt>
