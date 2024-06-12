@@ -270,6 +270,38 @@ function newCPDClaim(req, activityType) {
   return claim.claimID
 }
 
+router.post('/add-cost', function (req, res) {
+  var cost = req.session.data.cost
+  var claimID = req.session.data.id
+  
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        c.claimAmount = cost
+        console.log(JSON.stringify(c, null, 2))
+        break;
+    }
+  }
+  delete req.session.data.cost;
+
+  res.redirect('claim/claim-details'+'?id='+claimID+'#activity')
+});
+
+router.post('/add-description', function (req, res) {
+  var description = req.session.data.description
+  var claimID = req.session.data.id
+  
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        c.description = description
+        break;
+    }
+  }
+
+  delete req.session.data.description;
+
+  res.redirect('claim/claim-details'+'?id='+claimID+'#activity')
+});
+
 
 router.get('/start-40-claim', function (req, res) {
   claimID = req.session.data.id

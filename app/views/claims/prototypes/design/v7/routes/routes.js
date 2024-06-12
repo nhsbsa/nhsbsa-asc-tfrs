@@ -6,7 +6,6 @@ const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../helpers/
 
 // v7 Prototype routes
 
-
 router.post('/first-start', function (req, res) {
 
   // Make a variable and give it the value from 'startingpoint'
@@ -14,18 +13,15 @@ router.post('/first-start', function (req, res) {
 
   // Check whether the variable matches a condition
   if (claimGuidance == "yes"){
-
     res.redirect('guidance/help-start-claim')
   } else if (claimGuidance == "no") {
     newClaim(req, res)
   }
-
 })
 
 router.post('/new-claim-reset', function (req, res) {
   newClaim(req, res)
 });
-
 
 function newClaim(req, res) {
   const claimType = req.session.data.claimType
@@ -70,10 +66,7 @@ function newClaim(req, res) {
       evidenceOfPayment: null,
       notes: []
     };
-
   }
-
-  
   req.session.data.claims.push(claim)
   //reset seed
   faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
@@ -169,7 +162,6 @@ router.post('/add-cost', function (req, res) {
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
         c.claimAmount = cost
-        
         console.log(JSON.stringify(c, null, 2))
         break;
     }
