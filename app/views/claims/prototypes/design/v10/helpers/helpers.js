@@ -10,7 +10,7 @@ function checkClaim(claim) {
         result.learner = "valid"
     }
 
-    if (claim.startDate == null) {
+    if (claim.startDate == null && ( claim.fundingType == "TU" || claim.categoryName == "Courses") ) {
         result.startDate = "missing"
     } else {
         result.startDate = "valid"
@@ -28,13 +28,13 @@ function checkClaim(claim) {
         result.evidenceOfPayment = "valid"
     }
 
-    if (claim.evidenceOfCompletion == null && claim.claimType != "60") {
+    if (claim.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100" || claim.categoryName == "Courses") ) {
         result.evidenceOfCompletion = "missing"
     } else {
         result.evidenceOfCompletion = "valid"
     }
 
-    if (claim.completionDate == null && claim.claimType != "60") {
+    if (claim.completionDate == null && (claim.claimType == "40" || claim.claimType == "100" || claim.categoryName == "Courses")) {
         result.completionDate = "missing"
     } else {
         result.completionDate = "valid"
@@ -42,7 +42,7 @@ function checkClaim(claim) {
 
     result.claimValid = result.learner == "valid" && result.startDate == "valid" && result.paymentDate == "valid" && result.evidenceOfPayment == "valid" && result.evidenceOfCompletion == "valid" && result.completionDate == "valid";
         
-    if (result.completionDate == "valid" && result.startDate == "valid" && claim.claimType != "60") {
+    if (result.completionDate == "valid" && result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "40" ||claim.categoryName == "Courses")) {
         const startDate = new Date(claim.startDate)
         const completionDate = new Date(claim.completionDate)
         if (startDate.getTime() >= completionDate.getTime()) {
