@@ -14,7 +14,7 @@
     <dt class="govuk-summary-list__key">
       Description
     </dt>
-    {% if not claim.description %}
+    {% if not claim.description or claim.description == "" %}
     <dd class="govuk-summary-list__value">
       <a class="govuk-link govuk-link--no-visited-state" href="add-description">Add description</a>
     </dd>
@@ -35,7 +35,7 @@
     <dt class="govuk-summary-list__key">
       Cost
     </dt>
-    {% if not claim.claimAmount %}
+    {% if not claim.claimAmount or claim.claimAmount == "" %}
     <dd class="govuk-summary-list__value">
       <a class="govuk-link govuk-link--no-visited-state" href="add-claim-amount">Add cost</a>
     </dd>

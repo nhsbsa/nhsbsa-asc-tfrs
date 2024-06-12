@@ -238,7 +238,7 @@ function newCPDClaim(req, activityType) {
     submittedDate: null,
     paidDate: null,
     costDate: null,
-    evidenceOfPayment: null,
+    evidenceOfPayment: [],
     evidenceOfCompletion: null,
     completionDate: null
   };
