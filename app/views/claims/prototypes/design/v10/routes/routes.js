@@ -236,11 +236,14 @@ function newCPDClaim(req, activityType) {
     createdDate: dStr,
     createdBy: "Test Participant",
     submittedDate: null,
-    paidDate: null,
-    costDate: null,
+    approvedDate: null,
+    rejectedDate: null,
+    rejectedNote: null,
+    claimAmount: null,
     evidenceOfPayment: [],
     evidenceOfCompletion: null,
-    completionDate: null
+    completionDate: null,
+    costDate: null
   };
 
   req.session.data.claims.push(claim)
