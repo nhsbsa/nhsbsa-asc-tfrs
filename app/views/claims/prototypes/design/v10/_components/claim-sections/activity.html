@@ -10,26 +10,36 @@
     </dd>
   </div>
 
-  <div class="govuk-summary-list__row {% if not claim.description or (claim.status == 'submitted' or claim.status == 'approved' or claim.status == 'rejected') %} govuk-summary-list__row--no-actions {% endif %} {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.description =='missing' %} govuk-summary-list-row--error {% endif %}">
-    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.description =='missing' %} govuk-summary-key--error {% endif %}">
-      Description
-    </dt>
-    {% if not claim.description or claim.description == "" %}
-    <dd class="govuk-summary-list__value">
-      <a class="govuk-link govuk-link--no-visited-state" href="add-description">Add description</a>
-    </dd>
+  {% if not claim.description %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.description =="missing" %}
+      <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+        <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="description-error">
+          <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a description</p>
+        </div>
+      </div>
+    {% endif %}
+    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.description =='missing' %} govuk-summary-list-row--error {% endif %}">
+      <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.description =='missing' %} govuk-summary-key--error {% endif %}">
+        Description
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <a class="govuk-link govuk-link--no-visited-state" href="add-description">Add description</a>
+      </dd>
+    </div>
     {% else %}
-    <dd class="govuk-summary-list__value">
-      {{ claim.description }}
-    </dd>
-    {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+    <div class="govuk-summary-list__row ">
+      <dt class="govuk-summary-list__key">
+        Description
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ claim.description }}
+      </dd>
     <dd class="govuk-summary-list__actions">
-      <a class="govuk-link govuk-link--no-visited-state" href="add-description">Change<span
-          class="govuk-visually-hidden"> activity description</span></a>
+      <a class="govuk-link govuk-link--no-visited-state" href="add-description">Change<span class="govuk-visually-hidden">
+          description</span></a>
     </dd>
-    {% endif %}
-    {% endif %}
   </div>
+  {% endif %}
 
   <div class="govuk-summary-list__row {% if not claim.claimAmount or (claim.status == 'submitted' or claim.status == 'approved' or claim.status == 'rejected') %} govuk-summary-list__row--no-actions {% endif %} {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.claimAmount =='missing' %} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.claimAmount =='missing' %} govuk-summary-key--error {% endif %}">
