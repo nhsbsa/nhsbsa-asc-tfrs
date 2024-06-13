@@ -285,6 +285,7 @@ router.post('/add-cost', function (req, res) {
     }
   }
   delete req.session.data.cost;
+  delete req.session.data.submitError
 
   res.redirect('claim/claim-details'+'?id='+claimID+'#activity')
 });
@@ -301,6 +302,7 @@ router.post('/add-description', function (req, res) {
   }
 
   delete req.session.data.description;
+  delete req.session.data.submitError
 
   res.redirect('claim/claim-details'+'?id='+claimID+'#activity')
 });

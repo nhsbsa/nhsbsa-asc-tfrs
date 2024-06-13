@@ -1,14 +1,10 @@
-{% if claim.fundingType == "TU" %}
-  <h2 class="govuk-heading-m" id="training">Training</h2>
-{% elif claim.fundingType == "CPD" %}
-  <h2 class="govuk-heading-m" id="activity">Activity</h2>
-{% endif %}
+
+<h2 class="govuk-heading-m" id="training">Training</h2>
 <dl class="govuk-summary-list">
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
     <dt class="govuk-summary-list__key">
       Name
     </dt>
-    {% if claim.fundingType == "TU" %}
     <dd class="govuk-summary-list__value">
       {% if claim.training.code | trainingTypeCheck_V10(data.training, "Courses") %}
       <p class="govuk-body">{{ claim.training.code }}</p>
@@ -20,11 +16,6 @@
       <p class="govuk-body">{{ claim.training.awardingOrganisation }}</p>
       {% endif %}
     </dd>
-    {% elif claim.fundingType == "CPD" %}
-    <dd class="govuk-summary-list__value">
-      <p class="govuk-body">{{ claim.categoryName }}</p>
-    </dd>
-    {% endif %}
   </div>
 
   {% if not claim.startDate %}

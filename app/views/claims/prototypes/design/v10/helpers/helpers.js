@@ -4,6 +4,18 @@ function checkClaim(claim) {
 
     const result = {};
 
+    if (claim.description == null && claim.fundingType == "CPD") {
+        result.description = "missing"
+    } else {
+        result.description = "valid"
+    }
+
+    if (claim.claimAmount == null && claim.fundingType == "CPD") {
+        result.claimAmount = "missing"
+    } else {
+        result.claimAmount = "valid"
+    }
+
     if (claim.learner == null) {
         result.learner = "missing"
     } else {

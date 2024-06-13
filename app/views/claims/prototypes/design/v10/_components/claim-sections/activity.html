@@ -10,8 +10,8 @@
     </dd>
   </div>
 
-  <div class="govuk-summary-list__row {% if not claim.description or (claim.status == 'submitted' or claim.status == 'approved' or claim.status == 'rejected') %} govuk-summary-list__row--no-actions {% endif %}">
-    <dt class="govuk-summary-list__key">
+  <div class="govuk-summary-list__row {% if not claim.description or (claim.status == 'submitted' or claim.status == 'approved' or claim.status == 'rejected') %} govuk-summary-list__row--no-actions {% endif %} {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.description =='missing' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.description =='missing' %} govuk-summary-key--error {% endif %}">
       Description
     </dt>
     {% if not claim.description or claim.description == "" %}
@@ -31,8 +31,8 @@
     {% endif %}
   </div>
 
-  <div class="govuk-summary-list__row {% if not claim.claimAmount or (claim.status == 'submitted' or claim.status == 'approved' or claim.status == 'rejected') %} govuk-summary-list__row--no-actions {% endif %}">
-    <dt class="govuk-summary-list__key">
+  <div class="govuk-summary-list__row {% if not claim.claimAmount or (claim.status == 'submitted' or claim.status == 'approved' or claim.status == 'rejected') %} govuk-summary-list__row--no-actions {% endif %} {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.claimAmount =='missing' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.claimAmount =='missing' %} govuk-summary-key--error {% endif %}">
       Cost
     </dt>
     {% if not claim.claimAmount or claim.claimAmount == "" %}
@@ -53,8 +53,8 @@
   </div>
 
   {% if claim.categoryName == "Courses" %}
-  <div class="govuk-summary-list__row {% if not claim.startDate or (claim.status == 'submitted' or claim.status == 'approved' or claim.status == 'rejected')%} govuk-summary-list__row--no-actions {% endif %}">
-    <dt class="govuk-summary-list__key">
+  <div class="govuk-summary-list__row {% if not claim.startDate or (claim.status == 'submitted' or claim.status == 'approved' or claim.status == 'rejected')%} govuk-summary-list__row--no-actions {% endif %} {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='missing' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='missing' %} govuk-summary-key--error {% endif %}">
       Start date
     </dt>
     {% if not claim.startDate %}

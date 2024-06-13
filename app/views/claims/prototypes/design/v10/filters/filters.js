@@ -130,6 +130,12 @@ addFilter('checkEligible_V10', function (learner, type, roleTypes) {
 addFilter('errorSummary_V10', function (claim, submitError) {
     let errorSummaryStr = ''
 
+    if (submitError.description == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#description-error">Add a description</a></li>')
+    }
+    if (submitError.claimAmount == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#claim-amount-error">Add a cost</a></li>')
+    }
     if (submitError.startDate == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#start-date-error">Add a start date</a></li>')
     }
