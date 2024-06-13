@@ -14,16 +14,29 @@
             <a class="govuk-breadcrumbs__link" href="choose-a-claim-type">Choose a claim type
             </a>
         </li>
-        <li class="govuk-breadcrumbs__list-item">
-            <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=TU">Manage claims ({{ data.claimType |
-                potName_V10
-                }})
-            </a>
-        </li>
-        <li class="govuk-breadcrumbs__list-item">
-            <a class="govuk-breadcrumbs__link" href="manage-claims?claimType=TU&statusID={{ status.id }}">{{ status.name
-                }} claimssss</a>
-        </li>
+        {% if data.claimType == "TU" %}
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=TU">Manage claims ({{ data.claimType |
+                    potName_V10
+                    }})
+                </a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="manage-claims?claimType=TU&statusID={{ status.id }}">{{ status.name
+                    }} claimssss</a>
+            </li>
+        {% else %}
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=CPD">Manage claims ({{ data.claimType |
+                    potName_V10
+                    }})
+                </a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="manage-claims?claimType=CPD&statusID={{ status.id }}">{{ status.name
+                    }} claimssss</a>
+            </li>
+        {% endif %}
     </ol>
 </div>
 {% endblock %}
@@ -51,20 +64,25 @@
             {% else %}
         <div class="govuk-grid-column-full">
 
-            <details class="govuk-details">
-                <summary class="govuk-details__summary">
-                  <span class="govuk-details__summary-text">
-                    Understand claim types
-                  </span>
-                </summary>
-                <div class="govuk-details__text">
-                    <p class="govuk-body"><strong class="govuk-tag govuk-tag--orange">100</strong> claims &ndash; single reimbursement on training completion</p>
-                    <p class="govuk-body"><strong class="govuk-tag govuk-tag--yellow">60</strong> claims &ndash; split reimbursement, 60% up front after payment</p>
-                    <p class="govuk-body"><strong class="govuk-tag govuk-tag--purple">40</strong> claims &ndash; split reimbursement, 40% on training completion</p>
-                </div>
-              </details>
+            {% if data.claimType == "TU" %}
+                <details class="govuk-details">
+                    <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        Understand claim types
+                    </span>
+                    </summary>
+                    <div class="govuk-details__text">
+                        <p class="govuk-body"><strong class="govuk-tag govuk-tag--orange">100</strong> claims &ndash; single reimbursement on training completion</p>
+                        <p class="govuk-body"><strong class="govuk-tag govuk-tag--yellow">60</strong> claims &ndash; split reimbursement, 60% up front after payment</p>
+                        <p class="govuk-body"><strong class="govuk-tag govuk-tag--purple">40</strong> claims &ndash; split reimbursement, 40% on training completion</p>
+                    </div>
+                </details>
+                {% include "./_components/claims-lists/TU-claim-list.html" %}
+              {% else %}
+                {% include "./_components/claims-lists/CPD-claim-list.html" %}
+              {% endif %}
 
-            {% include "./_components/claims-lists/TU-claim-list.html" %}
+            
         </div>
     {% endif %}
 </div>
