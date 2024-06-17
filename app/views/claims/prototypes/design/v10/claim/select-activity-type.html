@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Select activity type - ", (data.claimType | potName_V7)] | join }}
+{{ ["Select activity type - ", (data.fundingPot | potName_V7)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
@@ -15,7 +15,7 @@
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" aria-describedby="activityType-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        <span class="govuk-caption-l">{{ data.claimType | potName_V7 }}</span>
+                        <span class="govuk-caption-l">{{ data.fundingPot | potName_V7 }}</span>
                         <h1 class="govuk-fieldset__heading">
                             What type of activity would you like to start a claim for?
                         </h1>

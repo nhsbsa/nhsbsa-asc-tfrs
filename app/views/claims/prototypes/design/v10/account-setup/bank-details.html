@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Enter job title - ", (data.claimType | potName_V10)] | join }}
+{{ ["Enter job title - ", (data.fundingPot | potName_V10)] | join }}
 {% endblock %}
 
 {% block beforeContent %}

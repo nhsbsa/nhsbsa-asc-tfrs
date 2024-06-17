@@ -396,7 +396,7 @@ router.post('/completion-date', function (req, res) {
 });
 
 router.post('/add-learner', function (req, res) {
-  var claimType = req.session.data.claimType
+  var claimType = req.session.data.fundingPot
   var claimID = req.session.data.id
   for (const l of req.session.data.learners) {
     if (req.session.data.learnerSelection == l.id) {
@@ -507,7 +507,7 @@ router.post('/remove-evidence', function (req, res) {
 })
 
 router.post('/save-claim', function (req, res) {
-  var claimType = req.session.data.claimType
+  var fundingPot = req.session.data.fundingPot
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
@@ -529,10 +529,10 @@ router.post('/save-claim', function (req, res) {
   delete req.session.data['activity-date-started-month'];
   delete req.session.data['activity-date-started-year'];
 
-  if (claimType == "TU") {
-    res.redirect('manage-claims?claimType=TU&statusID=not-yet-submitted')
+  if (fundingPot == "TU") {
+    res.redirect('manage-claims?fundingPot=TU&statusID=not-yet-submitted')
   } else {
-    res.redirect('manage-claims?claimType=CPD&statusID=not-yet-submitted')
+    res.redirect('manage-claims?fundingPot=CPD&statusID=not-yet-submitted')
   }
   
 

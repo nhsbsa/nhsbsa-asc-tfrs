@@ -1,10 +1,10 @@
 {% extends "./layouts/claims-main.html" %}
 
 {% set status = data.statusID | statusDetails_V10(data.statuses) %}
-{% set numClaims = status.id | claimCount_V10(data.claims, data.claimType) %}
+{% set numClaims = status.id | claimCount_V10(data.claims, data.fundingPot) %}
 
 {% block pageTitle %}
-{{ [status.name, " claims - ", (data.claimType | potName_V10)] | join }}
+{{ [status.name, " claims - ", (data.fundingPot | potName_V10)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
@@ -14,26 +14,26 @@
             <a class="govuk-breadcrumbs__link" href="choose-a-claim-type">Choose a claim type
             </a>
         </li>
-        {% if data.claimType == "TU" %}
+        {% if data.fundingPot == "TU" %}
             <li class="govuk-breadcrumbs__list-item">
-                <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=TU">Manage claims ({{ data.claimType |
+                <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=TU">Manage claims ({{ data.fundingPot |
                     potName_V10
                     }})
                 </a>
             </li>
             <li class="govuk-breadcrumbs__list-item">
-                <a class="govuk-breadcrumbs__link" href="manage-claims?claimType=TU&statusID={{ status.id }}">{{ status.name
+                <a class="govuk-breadcrumbs__link" href="manage-claims?fundingPot=TU&statusID={{ status.id }}">{{ status.name
                     }} claims</a>
             </li>
         {% else %}
             <li class="govuk-breadcrumbs__list-item">
-                <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=CPD">Manage claims ({{ data.claimType |
+                <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=CPD">Manage claims ({{ data.fundingPot |
                     potName_V10
                     }})
                 </a>
             </li>
             <li class="govuk-breadcrumbs__list-item">
-                <a class="govuk-breadcrumbs__link" href="manage-claims?claimType=CPD&statusID={{ status.id }}">{{ status.name
+                <a class="govuk-breadcrumbs__link" href="manage-claims?fundingPot=CPD&statusID={{ status.id }}">{{ status.name
                     }} claims</a>
             </li>
         {% endif %}
@@ -45,7 +45,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">{{ data.claimType | potName_V10 }}</span>
+        <span class="govuk-caption-l">{{ data.fundingPot | potName_V10 }}</span>
         <h2 class="govuk-heading-l govuk-!-margin-bottom-3">{{ status.name }} claims ({{ numClaims }})</h2>
         <p class="govuk-body">{{status.description}}</p>
     </div>
@@ -64,7 +64,7 @@
             {% else %}
         <div class="govuk-grid-column-full">
 
-            {% if data.claimType == "TU" %}
+            {% if data.fundingPot == "TU" %}
                 <details class="govuk-details">
                     <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">

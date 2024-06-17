@@ -5,10 +5,6 @@
 {{ ["Add description - Claim: ", claim.claimID] | join }}
 {% endblock %}
 
-{% block beforeContent %}
-<a href="claim-details?id={{ claim.claimID }}" class="govuk-back-link">Back</a>
-{% endblock %}
-
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -26,9 +22,13 @@
         <textarea class="govuk-textarea" id="description" name="description" rows="3"
           aria-describedby="more-detail-hint">{%if claim.description != null%}{{claim.description}}{% endif %}</textarea>
       </div>
-      <button class="govuk-button" data-module="govuk-button">
-        Add to claim
-      </button>
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Add to claim
+        </button>
+        <a class="govuk-link govuk-link--no-visited-state"
+            href="../cancel-handler">Cancel</a>
+    </div>
     </form>
   </div>
 </div>
