@@ -4,7 +4,6 @@ const { fakerEN_GB } = require('@faker-js/faker');
 
 function getRandomLearners(learnerList, x) {
   const copyLearners = [...learnerList];
-
   if (x > copyLearners.length) {
     console.error("Error: Number of TU-eligible learners to select is greater than the total number of TU-eligible learners.");
     return;
@@ -12,7 +11,6 @@ function getRandomLearners(learnerList, x) {
     const randomIndex = Math.floor(Math.random() * copyLearners.length);
     const learner = JSON.parse(JSON.stringify(copyLearners[randomIndex]));
     copyLearners.splice(randomIndex, 1);
-
   return learner;
 }
 
@@ -64,7 +62,6 @@ function generateUniqueID() {
           id += '-';
       }
   }
-
   return id;
 }
 
@@ -245,17 +242,17 @@ function generateCPDClaims(quantity, version) {
   const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
   
   // Load JSON files
-  const learners = JSON.parse(fs.readFileSync('./app/data/' + version + '/learners.json', 'utf8'));
-  const activities = JSON.parse(fs.readFileSync('./app/data/' + version + '/cpd-activities.json', 'utf8'));
-  const statuses = JSON.parse(fs.readFileSync('./app/data/' + version + '/claim-item-statuses.json', 'utf8'));
-  const roleTypes = JSON.parse(fs.readFileSync('./app/data/' + version + '/role-types.json', 'utf8'));
-  
-  const CPDEligibleRoles = roleTypes.filter(role => role.eligibility.isCPDeligible).map(role => role.rolename);
+  const learners = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/learners.json', 'utf8'));
+  const activities = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/cpd-activities.json', 'utf8'));
+  const statuses = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/claim-item-statuses.json', 'utf8'));
+
+  const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/pre-set-claims.json', 'utf8'));
+  data = data.concat(preSetClaims)
   
   for (let i = 1; i <= quantity; i++) {
     faker.seed(i+10000);
-    const claimID = faker.finance.accountNumber(6);
-    const selectedLearners = getRandomLearners(learners, 1, CPDEligibleRoles);
+    let claimID = generateUniqueID();
+    const selectedLearner = getRandomLearners(learners, 1);
     const activityGroup = faker.helpers.arrayElement(activities);
     const category = faker.helpers.arrayElement(activityGroup.categories);
     const categoryName = category.name;
@@ -273,29 +270,24 @@ function generateCPDClaims(quantity, version) {
     const costDate = generateDateBefore(createdDate);
   
     let submittedDate = null;
-    if (['submitted', 'queried', 'paid', 'approved'].includes(status)) {
+    if (['submitted', 'approved', 'rejected'].includes(status)) {
       submittedDate = faker.date.between({from: createdDate,to:  new Date()});
     }
   
     let approvedDate = null;
-    if (['paid', 'approved'].includes(status)) {
+    if (status === 'approved') {
       approvedDate = faker.date.between({from: submittedDate,to:  new Date()});
     }
-  
-    let queriedDate = null;
-    if (['queried'].includes(status)) {
-      queriedDate = faker.date.between({from: submittedDate,to:  new Date()});
-    }
-  
-    let paidDate = null;
-    if (status === 'paid') {
-      paidDate = faker.date.between({from: approvedDate, to: new Date()});
+
+    let rejectedDate = null;
+    if (status === 'rejected') {
+      rejectedDate = faker.date.between({from: submittedDate, to: new Date()});
     }
   
     const evidenceOfPayment = ('invoice').concat('00', i.toString(), '.pdf');
+    const evidenceOfCompletion = 'certficate'+'00'+i.toString()+'.pdf';
   
     if (['submitted', 'queried', 'paid', 'approved'].includes(status)) {
-      
         for (const l of selectedLearners) {
           l.evidence.evidenceOfCompletion = 'certficate'+'00'+i.toString()+'.pdf';
         }
@@ -303,8 +295,9 @@ function generateCPDClaims(quantity, version) {
   
     const claim = {
       claimID,
-      type: "CPD",
-      learners: selectedLearners,
+      fundingType: "CPD",
+      claimType: null,
+      learner: selectedLearner,
       categoryName,
       description,
       startDate,
@@ -313,12 +306,13 @@ function generateCPDClaims(quantity, version) {
       createdBy,
       submittedDate,
       approvedDate,
-      queriedDate,
-      paidDate,
+      rejectedDate,
+      rejectedNote: null,
       claimAmount,
-      evidenceOfPayment,
-      costDate,
-      notes: []
+      evidenceOfPayment: [evidenceOfPayment],
+      evidenceOfCompletion,
+      completionDate,
+      costDate
     };
     data.push(claim);
   }
