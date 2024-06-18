@@ -1,6 +1,6 @@
 {% set hasResults = false %}
 {% set addHeader = true %}
-{% for claim in data['claims'] %}
+{% for claim in data['claims'] | sortByDate_V10(status.id) %}
 {% if claim.status == status.id and claim.fundingType == data.fundingPot %} {% set hasResults=true %} {%
     if addHeader %} <table class="govuk-table">
     <thead class="govuk-table__head">

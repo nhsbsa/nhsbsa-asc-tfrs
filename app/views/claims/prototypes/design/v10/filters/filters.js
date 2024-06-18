@@ -507,3 +507,17 @@ addFilter('newClaimLink_V7', function (type) {
     }
     return claimLink
 })
+
+addFilter('sortByDate_V10', function (claims, statusID) {
+    if (statusID == 'not-yet-submitted') {
+        return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
+    } else if (statusID == 'submitted') {
+        return claims.sort((a, b) => new Date(b.submittedDate) - new Date(a.submittedDate));
+    } else if (statusID == 'rejected') {
+        return claims.sort((a, b) => new Date(b.rejectedDate) - new Date(a.rejectedDate));
+    } else if (statusID == 'approved') {
+        return claims.sort((a, b) => new Date(b.approvedDate) - new Date(a.approvedDate));
+    } else {
+        return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
+    }
+})
