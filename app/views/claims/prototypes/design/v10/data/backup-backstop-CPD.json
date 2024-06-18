@@ -1,31 +1,31 @@
 [
     {
     "label": "30-CPD-manage-claims",
-    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD"
+    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?fundingPot=CPD"
 },
 {
     "label": "31-CPD-manage-claims-not-yet-submitted",
-    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD#not-yet-submitted"
+    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?fundingPot=CPD#not-yet-submitted"
 },
 {
     "label": "32-CPD-manage-claims-submitted",
-    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD#submitted"
+    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?fundingPot=CPD#submitted"
 },
 {
     "label": "33-CPD-manage-claims-queried",
-    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD#queried"
+    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?fundingPot=CPD#queried"
 },
 {
     "label": "34-CPD-manage-claims-approved",
-    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD#approved"
+    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?fundingPot=CPD#approved"
 },
 {
     "label": "35-CPD-manage-claims-paid",
-    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?claimType=CPD#paid"
+    "url": "http://localhost:3000/claims/prototypes/design/v7/manage-claims?fundingPot=CPD#paid"
 },
 {
     "label": "36-CPD-new-claim-activity-type",
-    "url": "http://localhost:3000/claims/prototypes/design/v7/claim/select-activity-type?claimType=CPD"
+    "url": "http://localhost:3000/claims/prototypes/design/v7/claim/select-activity-type?fundingPot=CPD"
 },
 {
     "label": "37-CPD-new-claim",
@@ -33,7 +33,7 @@
 },
 {
     "label": "38-CPD-new-claim-description",
-    "url": "http://localhost:3000/claims/prototypes/design/v7/claim/add-description?claimType=CPD&id=915391"
+    "url": "http://localhost:3000/claims/prototypes/design/v7/claim/add-description?fundingPot=CPD&id=915391"
 },
 {
     "label": "39-CPD-new-claim-claim-amount",

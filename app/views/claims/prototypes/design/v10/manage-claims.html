@@ -1,24 +1,42 @@
 {% extends "./layouts/claims-main.html" %}
 
 {% set status = data.statusID | statusDetails_V10(data.statuses) %}
-{% set noClaims = status.id | claimCount_V10(data.claims, data.claimType) %}
+{% set numClaims = status.id | claimCount_V10(data.claims, data.fundingPot) %}
 
 {% block pageTitle %}
-{{ [status.name, " claims - ", (data.claimType | potName_V10)] | join }}
+{{ [status.name, " claims - ", (data.fundingPot | potName_V10)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
 <div class="govuk-breadcrumbs">
     <ol class="govuk-breadcrumbs__list">
         <li class="govuk-breadcrumbs__list-item">
-            <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=TU">Manage claims ({{ data.claimType |
-                potName_V10
-                }})</a>
+            <a class="govuk-breadcrumbs__link" href="choose-a-claim-type">Choose a claim type
+            </a>
         </li>
-        <li class="govuk-breadcrumbs__list-item">
-            <a class="govuk-breadcrumbs__link" href="manage-claims?claimType=TU&statusID={{ status.id }}">{{ status.name
-                }} claims</a>
-        </li>
+        {% if data.fundingPot == "TU" %}
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=TU">Manage claims ({{ data.fundingPot |
+                    potName_V10
+                    }})
+                </a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="manage-claims?fundingPot=TU&statusID={{ status.id }}">{{ status.name
+                    }} claims</a>
+            </li>
+        {% else %}
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=CPD">Manage claims ({{ data.fundingPot |
+                    potName_V10
+                    }})
+                </a>
+            </li>
+            <li class="govuk-breadcrumbs__list-item">
+                <a class="govuk-breadcrumbs__link" href="manage-claims?fundingPot=CPD&statusID={{ status.id }}">{{ status.name
+                    }} claims</a>
+            </li>
+        {% endif %}
     </ol>
 </div>
 {% endblock %}
@@ -27,13 +45,13 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">{{ data.claimType | potName_V10 }}</span>
-        <h2 class="govuk-heading-l govuk-!-margin-bottom-3">{{ status.name }} claims ({{ noClaims }})</h2>
+        <span class="govuk-caption-l">{{ data.fundingPot | potName_V10 }}</span>
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3">{{ status.name }} claims ({{ numClaims }})</h2>
         <p class="govuk-body">{{status.description}}</p>
     </div>
 </div>
 <div class="govuk-grid-row">
-    {% if noClaims == 0 %}
+    {% if numClaims == 0 %}
     <div class="govuk-grid-column-full">
             <div class="govuk-warning-text">
                 <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
@@ -46,24 +64,27 @@
             {% else %}
         <div class="govuk-grid-column-full">
 
-            <details class="govuk-details">
-                <summary class="govuk-details__summary">
-                  <span class="govuk-details__summary-text">
-                    Understand claim types
-                  </span>
-                </summary>
-                <div class="govuk-details__text">
-                    <p class="govuk-body"><strong class="govuk-tag govuk-tag--orange">100</strong> claims &ndash; single reimbursement on training completion</p>
-                    <p class="govuk-body"><strong class="govuk-tag govuk-tag--yellow">60</strong> claims &ndash; split reimbursement, 60% up front after payment</p>
-                    <p class="govuk-body"><strong class="govuk-tag govuk-tag--purple">40</strong> claims &ndash; split reimbursement, 40% on training completion</p>
-                </div>
-              </details>
+            {% if data.fundingPot == "TU" %}
+                <details class="govuk-details">
+                    <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        Understand claim types
+                    </span>
+                    </summary>
+                    <div class="govuk-details__text">
+                        <p class="govuk-body"><strong class="govuk-tag govuk-tag--orange">100</strong> claims &ndash; single reimbursement on training completion</p>
+                        <p class="govuk-body"><strong class="govuk-tag govuk-tag--yellow">60</strong> claims &ndash; split reimbursement, 60% up front after payment</p>
+                        <p class="govuk-body"><strong class="govuk-tag govuk-tag--purple">40</strong> claims &ndash; split reimbursement, 40% on training completion</p>
+                    </div>
+                </details>
+                {% include "./_components/claims-lists/TU-claim-list.html" %}
+              {% else %}
+                {% include "./_components/claims-lists/CPD-claim-list.html" %}
+              {% endif %}
 
-            {% include "./_components/claims-lists/TU-claim-list.html" %}
+            
         </div>
     {% endif %}
 </div>
-
-
 
 {% endblock %}

@@ -1,15 +1,24 @@
 {% extends "./layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Manage claims - ", (data.claimType | potName_V10)] | join }}
+{{ ["Manage claims - ", (data.fundingPot | potName_V10)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=TU">Manage claims ({{ data.claimType | potName_V10
-        }})</a>
+      <a class="govuk-breadcrumbs__link" href="choose-a-claim-type">Choose a claim type
+      </a>
+  </li>
+    <li class="govuk-breadcrumbs__list-item">
+      {% if data.fundingPot == "TU" %}
+        <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=TU">Manage claims ({{ data.fundingPot | potName_V10
+          }})</a>
+      {% else %}
+          <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=CPD">Manage claims ({{ data.fundingPot | potName_V10
+          }})</a>
+      {% endif %}
     </li>
   </ol>
 </div>
@@ -33,13 +42,13 @@
         </div>
     <div class="moj-page-header-actions">
       <div class="moj-page-header-actions__title">
-        <span class="govuk-caption-l">{{ data.claimType | potName_V10 }}</span>
+        <span class="govuk-caption-l">{{ data.fundingPot | potName_V10 }}</span>
         <h1 class="govuk-heading-l">Manage claims</h1>
       </div>
       <div class="moj-page-header-actions__actions">
         <div class="moj-button-menu">
           <div class="moj-button-menu__wrapper">
-            <form method="post" action="claim/select-training" class="govuk-!-margin-0">
+            <form method="post" action="{{ data.fundingPot | newClaimLink_V7 }}" class="govuk-!-margin-0">
               <button class="govuk-button moj-button-menu__item govuk-button--primary moj-page-header-actions__action"
                 data-module="govuk-button" type="submit">Start a new claim</button>
             </form>
@@ -55,7 +64,7 @@
   <div class="govuk-grid-column-two-thirds">
     <ul class="homepage-services-and-info__list">
         {% for status in data.statuses %}
-        {% set noClaims = status.id | claimCount_V10(data.claims, data.claimType) %}
+        {% set noClaims = status.id | claimCount_V10(data.claims, data.fundingPot) %}
         <li class="chevron-card">
           <div class="chevron-card__wrapper">
               <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">

@@ -20,14 +20,12 @@ router.post('/account-handler', function (req, res) {
   } else if (accountAnswer == "dont-know") {
     res.redirect('register')
   }
-
 });
 
 router.post('/verify-details-handler', function (req, res) {
   const confirmationAnswer = req.session.data.confirmation
   delete req.session.data.confirmation
   delete req.session.data.submitError
-
   if (confirmationAnswer == "yes") {
     res.redirect('account-setup/job-title')
   } else if (confirmationAnswer == "no") {
@@ -43,9 +41,7 @@ router.post('/bank-details-handler', function (req, res) {
   const sortCode = req.session.data.sortCode
   const accountNumber = req.session.data.accountNumber
   const buildingSociety = req.session.data.rollNumber
-
   delete req.session.data.submitError
-
   const check = checkBankDetailsForm(accountName, sortCode, accountNumber, buildingSociety)
 
   if (check.bankDetailsValid) {
@@ -58,33 +54,26 @@ router.post('/bank-details-handler', function (req, res) {
     req.session.data.submitError = check
     res.redirect('account-setup/bank-details')
   }
-
 });
-
 
 router.post('/add-training', function (req, res) {
   const trainingCode = req.session.data.trainingSelection
-
+  var trainingChoice = null
   for (const trainingGroup of req.session.data.training) {
     for (const t of trainingGroup.courses) {
       if (trainingCode == t.code) {
-        var trainingChoice = t
+        trainingChoice = t
       }
     }
   }
-
   if (trainingChoice.fundingModel == "full") {
-
-
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
-
-    const claimID = newClaim(req, trainingChoice, "100")
+    const claimID = newTUClaim(req, trainingChoice, "100")
     res.redirect('claim/claim-details' + '?id=' + claimID)
   } else {
     res.redirect('claim/split-decision')
   }
-
 });
 
 router.post('/split-decision-handler', function (req, res) {
@@ -98,35 +87,30 @@ router.post('/split-decision-handler', function (req, res) {
       }
     }
   }
-
   if (choice == "no") {
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
     delete req.session.data.splitDecision;
-
-    const claimID = newClaim(req, trainingChoice, "100")
+    const claimID = newTUClaim(req, trainingChoice, "100")
     res.redirect('claim/claim-details' + '?id=' + claimID)
   } else if (choice == "yes") {
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
     delete req.session.data.splitDecision;
 
-    const claimID = newClaim(req, trainingChoice, "60")
+    const claimID = newTUClaim(req, trainingChoice, "60")
     res.redirect('claim/claim-details' + '?id=' + claimID)
 
   } else {
     res.redirect('claim/split-decision?submitError=true')
   }
-
 });
 
-function newClaim(req, input, type) {
+function newTUClaim(req, input, type) {
   let claim = {};
   const d = new Date();
   const dStr = d.toISOString();
-
   faker.seed(req.session.data.claims.length + 1);
-
   if (type == "100") {
     claim = {
       claimID: generateUniqueID() + "-A",
@@ -164,13 +148,11 @@ function newClaim(req, input, type) {
       completionDate: null
     };
   } else if (type == "40") {
-
     let training = null
     let learner = null
     let startDate = null
     let costDate = null
     let evidenceOfPayment = null
-
     for (const c of req.session.data.claims) {
       if (input == c.claimID) {
         training = c.training
@@ -178,11 +160,8 @@ function newClaim(req, input, type) {
         startDate = c.startDate
         costDate = c.costDate
         evidenceOfPayment = c.evidenceOfPayment
-
-
       }
     }
-
     claim = {
       claimID: input.slice(0, -1) + "C",
       claimType: "40",
@@ -201,7 +180,6 @@ function newClaim(req, input, type) {
       completionDate: null
     };
   }
-
 
   req.session.data.claims.push(claim)
   //reset seed
@@ -231,28 +209,118 @@ function newClaim(req, input, type) {
   delete req.session.data['selectedClaimsConfirmed'];
   delete req.session.data['activityType'];
   delete req.session.data['submitError'];
+  return claim.claimID
+}
+
+router.post('/add-activity', function (req, res) {
+  const activityType = req.session.data.activityType
+  delete req.session.data['activityType'];
+  const claimID = newCPDClaim(req, activityType)
+  res.redirect('claim/claim-details' + '?id=' + claimID)
+});
+
+function newCPDClaim(req, activityType) {
+  let claim = {};
+  const d = new Date();
+  const dStr = d.toISOString();
+  faker.seed(req.session.data.claims.length+1);
+  claim = {
+    claimID: generateUniqueID() + "-D",
+    fundingType: "CPD",
+    claimType: null,
+    learner: null,
+    categoryName: activityType,
+    description: null,
+    startDate: null,
+    status: "new",
+    createdDate: dStr,
+    createdBy: "Test Participant",
+    submittedDate: null,
+    approvedDate: null,
+    rejectedDate: null,
+    rejectedNote: null,
+    claimAmount: null,
+    evidenceOfPayment: [],
+    evidenceOfCompletion: null,
+    completionDate: null,
+    costDate: null
+  };
+
+  req.session.data.claims.push(claim)
+  //reset seed
+  faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
+  delete req.session.data['training-input'];
+  delete req.session.data['trainingSelection'];
+  delete req.session.data['activity-date-started-day'];
+  delete req.session.data['activity-date-started-month'];
+  delete req.session.data['activity-date-started-year'];
+  delete req.session.data['learner-input'];
+  delete req.session.data['learner-selection'];
+  delete req.session.data['learnerSelected'];
+  delete req.session.data['learner-choice'];
+  delete req.session.data['learnersSelected'];
+  delete req.session.data['add-another'];
+  delete req.session.data['answers-checked'];
+  delete req.session.data['evidenceType'];
+  delete req.session.data['search-input'];
+  delete req.session.data['totalAmount'];
+  delete req.session.data['EvidenceNoLearners'];
+  delete req.session.data['evidenceFile'];
+  delete req.session.data['selectedClaims'];
+  delete req.session.data['selectedClaimsConfirmed'];
+  delete req.session.data['activityType'];
 
   return claim.claimID
 }
 
+router.post('/add-cost', function (req, res) {
+  var cost = req.session.data.cost
+  var claimID = req.session.data.id
+  
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        c.claimAmount = cost
+        console.log(JSON.stringify(c, null, 2))
+        break;
+    }
+  }
+  delete req.session.data.cost;
+  delete req.session.data.submitError
 
-router.get('/start-40-claim', function (req, res) {
-  claimID = req.session.data.id
+  res.redirect('claim/claim-details'+'?id='+claimID+'#activity')
+});
 
-  const newID = newClaim(req, claimID, "40")
+router.post('/add-description', function (req, res) {
+  var description = req.session.data.description
+  var claimID = req.session.data.id
+  
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        c.description = description
+        break;
+    }
+  }
 
-  res.redirect('claim/claim-details' + '?id=' + newID)
+  delete req.session.data.description;
+  delete req.session.data.submitError
+
+  res.redirect('claim/claim-details'+'?id='+claimID+'#activity')
 });
 
 
+router.get('/start-40-claim', function (req, res) {
+  claimID = req.session.data.id
+  const newID = newTUClaim(req, claimID, "40")
+  res.redirect('claim/claim-details' + '?id=' + newID)
+});
 
 router.post('/add-start-date', function (req, res) {
   const day = req.session.data['activity-date-started-day']
   const month = req.session.data['activity-date-started-month']
   const year = req.session.data['activity-date-started-year']
   const claimID = req.session.data.id
-  const startDate = new Date(year, month - 1, day)
 
+  const startDate = new Date(year, month - 1, day)
   delete req.session.data.submitError
 
   const error = validateDate(day, month, year, "start");
@@ -267,13 +335,10 @@ router.post('/add-start-date', function (req, res) {
     }
     res.redirect('claim/claim-details' + '?id=' + claimID + '#training')
 
-
   } else {
     req.session.data.submitError = error
     res.redirect('claim/start-date')
-
   }
-
 });
 
 router.post('/cost-date', function (req, res) {
@@ -293,19 +358,14 @@ router.post('/cost-date', function (req, res) {
         c.costDate = costDate
       }
     }
-
     delete req.session.data['payment-date-started-day'];
     delete req.session.data['payment-date-started-month'];
     delete req.session.data['payment-date-started-year'];
-
     res.redirect('claim/claim-details' + '?id=' + claimID + '#payment')
-
   } else {
     req.session.data.submitError = error
     res.redirect('claim/cost-date')
-
   }
-
 });
 
 router.post('/completion-date', function (req, res) {
@@ -325,35 +385,29 @@ router.post('/completion-date', function (req, res) {
         c.completionDate = completionDate
       }
     }
-
     delete req.session.data['completion-date-started-day'];
     delete req.session.data['completion-date-started-month'];
     delete req.session.data['completion-date-started-year'];
-
     res.redirect('claim/claim-details' + '?id=' + claimID + '#completion')
-
   } else {
     req.session.data.submitError = error
     res.redirect('claim/add-completion-date')
-
   }
 });
 
 router.post('/add-learner', function (req, res) {
+  var claimType = req.session.data.fundingPot
   var claimID = req.session.data.id
-
   for (const l of req.session.data.learners) {
     if (req.session.data.learnerSelection == l.id) {
       var learner = l
       break;
     }
   }
-
   delete req.session.data.existingLearner
   delete req.session.data.learnerInput;
   delete req.session.data.learnerSelection;
   delete req.session.data.submitError
-
   delete req.session.data.inClaim
   delete req.session.data.familyName
   delete req.session.data.givenName
@@ -362,7 +416,12 @@ router.post('/add-learner', function (req, res) {
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
-      duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims);
+      if (claimType == "TU") {
+        duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims, "TU");
+      } else if (claimType == "CPD") {
+        duplicateCheck = checkDuplicateClaim(learner.id, c.categoryName, req.session.data.claims, "CPD");
+      }
+      
       if (duplicateCheck.check) {
         res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
       } else {
@@ -448,16 +507,14 @@ router.post('/remove-evidence', function (req, res) {
 })
 
 router.post('/save-claim', function (req, res) {
+  var fundingPot = req.session.data.fundingPot
   var claimID = req.session.data.id
-
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       c.status = 'not-yet-submitted'
-
       break;
     }
   }
-
   req.session.data.claims = sortByCreatedDate(req.session.data.claims);
 
   delete req.session.data.id
@@ -472,22 +529,24 @@ router.post('/save-claim', function (req, res) {
   delete req.session.data['activity-date-started-month'];
   delete req.session.data['activity-date-started-year'];
 
-  res.redirect('manage-claims?claimType=TU&statusID=not-yet-submitted')
+  if (fundingPot == "TU") {
+    res.redirect('manage-claims?fundingPot=TU&statusID=not-yet-submitted')
+  } else {
+    res.redirect('manage-claims?fundingPot=CPD&statusID=not-yet-submitted')
+  }
+  
 
 });
 
 router.post('/ready-to-declare', function (req, res) {
   const claimID = req.session.data.id
   let claim = {}
-
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       claim = c
     }
   }
-
   const submitError = checkClaim(claim)
-
   if (submitError.claimValid) {
     delete req.session.data.submitError
     res.redirect('claim/declaration')
@@ -495,7 +554,6 @@ router.post('/ready-to-declare', function (req, res) {
     req.session.data.submitError = submitError
     res.redirect('claim/claim-details' + '?id=' + claimID)
   }
-
 });
 
 router.post('/submit-claim', function (req, res) {
@@ -561,22 +619,16 @@ router.get('/cancel-handler', function (req, res) {
 
 });
 
-
-
 router.post('/create-learner', function (req, res) {
   var claimID = req.session.data.id
-
   delete req.session.data.existingLearner
-
   delete req.session.data.submitError
-
   const nationalInsuranceNumber = req.session.data.nationalInsuranceNumber
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
   const jobTitle = req.session.data.jobTitle
 
   const submitError = checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle)
-
   const dupeLearner = compareNINumbers(req.session.data.nationalInsuranceNumber, req.session.data.learners)
 
   if (submitError.learnerValid) {
@@ -606,7 +658,6 @@ router.post('/create-learner', function (req, res) {
       req.session.data.learnerMatch = dupeLearner.learner
       res.redirect('learner/duplication')
     }
-
   } else {
     req.session.data.submitError = submitError
     res.redirect('learner/add-learner?inClaim=' + req.session.data.inClaim)
@@ -618,9 +669,7 @@ router.post('/validate-job-title', function (req, res) {
   delete req.session.data.jobTitleInvalid
   delete req.session.data['declarationSubmitError'];
   const jobTitle = req.session.data.jobTitle
-
   var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
-
   if (jobTitle == "") {
     res.redirect('account-setup/job-title?jobTitleEmptyError=true')
   } else if (validCharactersRegex.test(jobTitle) == true) {
@@ -640,8 +689,6 @@ router.post('/declaration-confirmation', function (req, res) {
   }
 });
 
-
-
 function loadData(req) {
   // pull in the prototype data object and see if it contains a datafile reference
   let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
@@ -658,35 +705,28 @@ function loadData(req) {
   req.session.data['training'] = loadJSONFromFile(trainingFile, path)
   console.log('training file loaded')
 
-
   console.log('loading in claims file')
   req.session.data['claims'] = loadJSONFromFile(claimsFile, path)
   console.log('claims file loaded')
-
 
   console.log('loading in learners file')
   req.session.data['learners'] = loadJSONFromFile(learnersFile, path)
   console.log('learners file loaded')
 
-
   console.log('loading in statuses file')
   req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
   console.log('statuses file loaded')
-
 
   console.log('loading in role types file')
   req.session.data['roleTypes'] = loadJSONFromFile(roleTypes, path)
   console.log('role types file loaded')
 
-
   console.log('loading in CPDActivities file')
   req.session.data['CPDActivities'] = loadJSONFromFile(CPDActivities, path)
   console.log('CPDActivities file loaded')
 
-
   return console.log('data updated')
 }
-
 
 router.get('/load-data', function (req, res) {
   //Load data from JSON files
@@ -705,7 +745,5 @@ router.get('/load-data-account-test', function (req, res) {
   loadData(req);
   res.redirect('./authentication/creation-link?journey=creation')
 })
-
-
 
 module.exports = router

@@ -130,6 +130,12 @@ addFilter('checkEligible_V10', function (learner, type, roleTypes) {
 addFilter('errorSummary_V10', function (claim, submitError) {
     let errorSummaryStr = ''
 
+    if (submitError.description == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#description-error">Add a description</a></li>')
+    }
+    if (submitError.claimAmount == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#claim-amount-error">Add a cost</a></li>')
+    }
     if (submitError.startDate == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#start-date-error">Add a start date</a></li>')
     }
@@ -192,8 +198,10 @@ addFilter('getUniqueCourseTitles_V10', function (training) {
 
 addFilter('coursesCount_V10', function (courses) {
     let count = 0;
-    for (const c of courses) {
-        count++
+    if (courses != null) {
+        for (const c of courses) {
+            count++
+        }
     }
     return count;
 })
@@ -480,7 +488,6 @@ addFilter('findPair_V10', function (claimID, claims) {
 })
 
 addFilter('typeTag_V10', function (type) {
-
     switch (type) {
         case "100":
             return '<strong class="govuk-tag govuk-tag--orange">100</strong>'
@@ -489,5 +496,14 @@ addFilter('typeTag_V10', function (type) {
         case "40":
             return '<strong class="govuk-tag govuk-tag--purple">40</strong>'
     }
-
 }, { renderAsHtml: true })
+
+addFilter('newClaimLink_V7', function (type) {
+    let claimLink = "#"
+    if (type == "TU") {
+        claimLink = "claim/select-training"
+    } else if (type == "CPD") {
+        claimLink = "claim/select-activity-type"
+    }
+    return claimLink
+})

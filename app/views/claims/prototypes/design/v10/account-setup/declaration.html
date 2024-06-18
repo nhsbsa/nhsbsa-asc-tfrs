@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Grant decleration - ", (data.claimType | potName_V10)] | join }}
+{{ ["Grant decleration - ", (data.fundingPot | potName_V10)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
