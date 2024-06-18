@@ -251,7 +251,7 @@ function generateCPDClaims(quantity, version) {
   
   for (let i = 1; i <= quantity; i++) {
     faker.seed(i+10000);
-    let claimID = generateUniqueID();
+    let claimID = generateUniqueID() + "-C";
     const selectedLearner = getRandomLearners(learners, 1);
     const activityGroup = faker.helpers.arrayElement(activities);
     const category = faker.helpers.arrayElement(activityGroup.categories);
@@ -285,12 +285,12 @@ function generateCPDClaims(quantity, version) {
     }
   
     const evidenceOfPayment = ('invoice').concat('00', i.toString(), '.pdf');
-    const evidenceOfCompletion = 'certficate'+'00'+i.toString()+'.pdf';
-  
-    if (['submitted', 'queried', 'paid', 'approved'].includes(status)) {
-        for (const l of selectedLearners) {
-          l.evidence.evidenceOfCompletion = 'certficate'+'00'+i.toString()+'.pdf';
-        }
+
+    let evidenceOfCompletion = null;
+    let completionDate = null;
+    if (categoryName =="Courses") {
+      evidenceOfCompletion = 'certficate'+'00'+i.toString()+'.pdf';
+      completionDate = faker.date.between({ from: startDate, to: submittedDate });
     }
   
     const claim = {
