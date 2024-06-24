@@ -17,9 +17,23 @@
             <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
                 <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Full Prototype</h2>
                 <p class="govuk-body">This will take to the full version of the prototype.</p>
-                <a class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="./load-data">
+                <form action="./load-data" method="post" novalidate>
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="user-type">
+                          Choose user type
+                        </label>
+                        <div id="user-type-hint" class="govuk-hint">
+                          This will simulate the full version of the prototype as it would appear for that user type
+                        </div>
+                        <select class="govuk-select" id="location" name="location" aria-describedby="user-type-hint">
+                          <option value="submitter" selected>Submitter</option>
+                          <option value="signatory">Signatory</option>
+                        </select>
+                      </div>
+                <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="./load-data">
                     Start full prototype
-                </a>
+                </button>
+                </form>
             </section>
         </article>
         <article class="moj-ticket-panel" aria-label="Sub navigation 1">

@@ -728,7 +728,7 @@ function loadData(req) {
   return console.log('data updated')
 }
 
-router.get('/load-data', function (req, res) {
+router.post('/load-data', function (req, res) {
   //Load data from JSON files
   loadData(req);
   res.redirect('before-you-start.html')
