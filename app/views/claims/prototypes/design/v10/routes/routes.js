@@ -426,7 +426,12 @@ router.post('/add-learner', function (req, res) {
         res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
       } else {
         c.learner = learner
-        res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        if (claimType == "CPD") {
+          res.redirect('claim/cpd-eligibility-check' + '?id=' + claimID)
+        } else {
+          res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        }
+        
       }
     }
   }
@@ -638,6 +643,7 @@ router.post('/create-learner', function (req, res) {
         familyName: familyName,
         givenName: givenName,
         jobTitle: jobTitle,
+        cpdBudget: -1
       };
       req.session.data.learners.push(learner)
 
@@ -653,7 +659,11 @@ router.post('/create-learner', function (req, res) {
       delete req.session.data.jobTitle
       delete req.session.data.nationalInsuranceNumber
       delete req.session.data.learnerInput
-      res.redirect('claim/claim-details' + '?id=' + claimID)
+      if (req.session.data.fundingPot == "CPD") {
+        res.redirect('claim/cpd-eligibility-check' + '?id=' + claimID)
+      } else if (req.session.data.fundingPot == "TU") {
+        res.redirect('claim/claim-details' + '?id=' + claimID)
+      }
     } else {
       req.session.data.learnerMatch = dupeLearner.learner
       res.redirect('learner/duplication')
@@ -686,6 +696,36 @@ router.post('/declaration-confirmation', function (req, res) {
     res.redirect('account-setup/bank-details')
   } else {
     res.redirect('account-setup/declaration?declarationSubmitError=true')
+  }
+});
+
+router.post('/cpd-eligibility', function (req, res) {
+  var claimID = req.session.data.id
+  const learnerEligible = req.session.data.eligibility
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      if (learnerEligible == "yes") {
+        // check if learner already has a budget, if not set to 500
+        if (c.learner.cpdBudget == -1 | c.learner.cpdBudget == null) {
+          c.learner.cpdBudget = 500
+        } 
+        res.redirect('claim/claim-details' + '?id=' + claimID)
+      } else {
+        // redirect to learner isn't able to be added to claim view
+        res.redirect('claim/cpd-ineligible' + '?id=' + claimID)
+      }
+    }
+  }
+});
+
+router.get('/clear-learner', function (req, res) {
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      c.learner = null
+      res.redirect('claim/claim-details' + '?id=' + claimID)
+    }
   }
 });
 
