@@ -14,7 +14,7 @@ organisations."%}
 
 
 {% block pageTitle %}
-{{da}} – {{ serviceName }} – GOV.UK Prototype Kit
+{{da}} – {{ data.processingServiceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
@@ -34,7 +34,7 @@ organisations."%}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <span class="govuk-caption-l">{{ serviceName }}</span>
+        <span class="govuk-caption-l">{{ data.processingServiceName }}</span>
         <h1 class="govuk-heading-l">
             {{data.area}}
         </h1>

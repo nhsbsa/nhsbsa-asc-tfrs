@@ -7242,5 +7242,6 @@ module.exports = {
     "journey": "signin",
     "claimType": "TU",
     "viewOnly": "false",
-    "id": "STY-2EBD-KDAY-C"
+    "id": "STY-2EBD-KDAY-C",
+    "processingServiceName": "Process claim for ASC training and development"
 }
