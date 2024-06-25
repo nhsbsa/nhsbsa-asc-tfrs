@@ -45,7 +45,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    {% if claim.claimType != "100" %}
+    {% if claim.fundingType == "TU" and claim.claimType != "100" %}
       <div class="govuk-inset-text" style="margin-top: 0px;">
         This {% if claim.claimType == "60" %}60{% elif claim.claimType == "40"%}40{% endif %} claim relates to training using the 60/40 funding model. Find out more about reimbursement amounts and claim types in the <a href="../guidance/evidence-requirements" class="govuk-link">help with starting a new care skills claim</a>.
       </div>
@@ -60,13 +60,14 @@
           {{ claim.status | statusTag_V10(data.statuses) }}
         </dd>
       </div>
+
+      {% if claim.fundingType == "TU" %}
       <div class="govuk-summary-list__row {% if pairID == null %}govuk-summary-list__row--no-actions{% endif %}">
         <dt class="govuk-summary-list__key">
           Type
         </dt>
         <dd class="govuk-summary-list__value">
           {{ claim.claimType | typeTag_V10 }}
-
           {% if claim.claimType == "100" %}
           <p class="govuk-caption-m" style="padding-top: 5px;" aria-describedby="100-claim-type-hint">Single reimbursement on training completion</p>
           {% elif claim.claimType == "60" %}
@@ -75,6 +76,7 @@
           <p class="govuk-caption-m" style="padding-top: 5px;" aria-describedby="40-claim-type-hint">Split reimbursement, 40% on training completion</p>
           {% endif %}
         </dd>
+
         {% if pairID != null %}
         <dd class="govuk-summary-list__actions">
           <a class="govuk-link govuk-body" href="claim-details?id={{ pairID }}">View {% if claim.claimType == "60"%}40{%
@@ -82,6 +84,7 @@
         </dd>
         {% endif %}
       </div>
+      {% endif %}
     </dl>
 
     {% if claim.status == "rejected" %}
@@ -89,7 +92,11 @@
     <p class="govuk-body">{{claim.rejectedNote}}</p>
     {% endif %}
 
+  {% if claim.fundingType == "TU" %}
     {% include "../_components/claim-sections/training.html" %}
+  {% elif claim.fundingType == "CPD" %}
+    {% include "../_components/claim-sections/activity.html" %}
+  {% endif %}
 
     {% include "../_components/claim-sections/learner.html" %}
 
@@ -97,7 +104,7 @@
     {% include "../_components/claim-sections/evidencePayment.html" %}
     {% endif %}
 
-    {% if claim.claimType != "60" %}
+    {% if claim.fundingType == "TU" and claim.claimType != "60"  or claim.categoryName == "Courses" %}
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
     {% endif %}
 
@@ -113,6 +120,9 @@
       <p class="govuk-body">Once the 60 claim is approved and the learner has completed the training you'll need to submit the 40 claim for the rest of the reimbursement amount.</p>
     {% elif claim.claimType == "100" %}
       <p class="govuk-body">When you have added all the necessary information to the claim you can confirm the details and submit this 100 claim for processing.</p>
+      <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
+    {% elif claim.fundingType == "CPD" %}
+      <p class="govuk-body">When you have added all the necessary information to the claim you can confirm the details and submit this claim for processing.</p>
       <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
     {% endif %}
 

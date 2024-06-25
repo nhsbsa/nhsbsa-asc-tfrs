@@ -4,7 +4,6 @@ const { fakerEN_GB } = require('@faker-js/faker');
 
 function getRandomLearners(learnerList, x) {
   const copyLearners = [...learnerList];
-
   if (x > copyLearners.length) {
     console.error("Error: Number of TU-eligible learners to select is greater than the total number of TU-eligible learners.");
     return;
@@ -12,7 +11,6 @@ function getRandomLearners(learnerList, x) {
     const randomIndex = Math.floor(Math.random() * copyLearners.length);
     const learner = JSON.parse(JSON.stringify(copyLearners[randomIndex]));
     copyLearners.splice(randomIndex, 1);
-
   return learner;
 }
 
@@ -64,7 +62,6 @@ function generateUniqueID() {
           id += '-';
       }
   }
-
   return id;
 }
 
@@ -104,9 +101,6 @@ function generateTUClaims(quantity, version) {
         claimType = "60"
       }
       claimID = claimID + append
-      
-  
-  
       let submittedDate = null;
       let evidenceOfPayment = [];
       let evidenceOfCompletion = null;
@@ -154,20 +148,16 @@ function generateTUClaims(quantity, version) {
         completionDate,
         costDate,
       };
-  
       data.push(claim);
 
     } else if (trainingItem.fundingModel == "split") {
       const claimIDA = claimID + "-B"
       const claimIDB = claimID + "-C"
-  
-  
       let submittedDateA = null;
       let submittedDateB = null;
       let evidenceOfPayment = [];
       let evidenceOfCompletion = null;
       let completionDate = null;
-      
       let statusA = "approved"
       let statusB = "submitted"
 
@@ -238,32 +228,109 @@ function generateTUClaims(quantity, version) {
         completionDate,
         costDate,
       };
-  
       data.push(claimA);
       data.push(claimB);
-
-
     }
   }
-
   //reset seed
   faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
-
   return data;
-
 }
+
+function generateCPDClaims(quantity, version) {
+  let data = [];
+  const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
+  
+  // Load JSON files
+  const learners = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/learners.json', 'utf8'));
+  const activities = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/cpd-activities.json', 'utf8'));
+  const statuses = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/claim-item-statuses.json', 'utf8'));
+
+  const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/pre-set-claims.json', 'utf8'));
+  data = data.concat(preSetClaims)
+  
+  for (let i = 1; i <= quantity; i++) {
+    faker.seed(i+10000);
+    let claimID = generateUniqueID() + "-C";
+    const selectedLearner = getRandomLearners(learners, 1);
+    const activityGroup = faker.helpers.arrayElement(activities);
+    const category = faker.helpers.arrayElement(activityGroup.categories);
+    const categoryName = category.name;
+    const description = faker.helpers.arrayElement(category.examples);
+    const claimAmount = faker.number.int({ min: 10, max: 100 });
+
+    let startDate = null;
+    if (categoryName =="Courses") {
+      startDate = faker.date.past();
+    }
+    
+    const status = getRandomStatus(statuses);
+    const createdDate = faker.date.past();
+    const createdBy = faker.helpers.arrayElement(creators);
+    const costDate = generateDateBefore(createdDate);
+  
+    let submittedDate = null;
+    if (['submitted', 'approved', 'rejected'].includes(status)) {
+      submittedDate = faker.date.between({from: createdDate,to:  new Date()});
+    }
+  
+    let approvedDate = null;
+    if (status === 'approved') {
+      approvedDate = faker.date.between({from: submittedDate,to:  new Date()});
+    }
+
+    let rejectedDate = null;
+    if (status === 'rejected') {
+      rejectedDate = faker.date.between({from: submittedDate, to: new Date()});
+    }
+  
+    const evidenceOfPayment = ('invoice').concat('00', i.toString(), '.pdf');
+
+    let evidenceOfCompletion = null;
+    let completionDate = null;
+    if (categoryName =="Courses") {
+      evidenceOfCompletion = 'certficate'+'00'+i.toString()+'.pdf';
+      completionDate = faker.date.between({ from: startDate, to: submittedDate });
+    }
+  
+    const claim = {
+      claimID,
+      fundingType: "CPD",
+      claimType: null,
+      learner: selectedLearner,
+      categoryName,
+      description,
+      startDate,
+      status,
+      createdDate,
+      createdBy,
+      submittedDate,
+      approvedDate,
+      rejectedDate,
+      rejectedNote: null,
+      claimAmount,
+      evidenceOfPayment: [evidenceOfPayment],
+      evidenceOfCompletion,
+      completionDate,
+      costDate
+    };
+    data.push(claim);
+  }
+   //reset seed
+   faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
+   return data;
+  }
 
 function generateClaims(quantity, version) {
   let data = [];
-  const TUClaims = generateTUClaims(Math.floor(quantity * 1), version);
+  const TUClaims = generateTUClaims(Math.floor(quantity * 0.96), version);
+  const CPDClaims = generateCPDClaims(Math.floor(quantity*0.04), version);
 
-  data = data.concat(TUClaims);
+  data = data.concat(TUClaims, CPDClaims);
 
   // Write data to learners.json
   const jsonFilePath = './app/views/claims/prototypes/design/' + version + '/data/claims.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
-
-
 }
 
 

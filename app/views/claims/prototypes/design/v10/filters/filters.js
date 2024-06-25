@@ -130,6 +130,12 @@ addFilter('checkEligible_V10', function (learner, type, roleTypes) {
 addFilter('errorSummary_V10', function (claim, submitError) {
     let errorSummaryStr = ''
 
+    if (submitError.description == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#description-error">Add a description</a></li>')
+    }
+    if (submitError.claimAmount == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#claim-amount-error">Add a cost</a></li>')
+    }
     if (submitError.startDate == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#start-date-error">Add a start date</a></li>')
     }
@@ -192,8 +198,10 @@ addFilter('getUniqueCourseTitles_V10', function (training) {
 
 addFilter('coursesCount_V10', function (courses) {
     let count = 0;
-    for (const c of courses) {
-        count++
+    if (courses != null) {
+        for (const c of courses) {
+            count++
+        }
     }
     return count;
 })
@@ -480,7 +488,6 @@ addFilter('findPair_V10', function (claimID, claims) {
 })
 
 addFilter('typeTag_V10', function (type) {
-
     switch (type) {
         case "100":
             return '<strong class="govuk-tag govuk-tag--orange">100</strong>'
@@ -489,5 +496,99 @@ addFilter('typeTag_V10', function (type) {
         case "40":
             return '<strong class="govuk-tag govuk-tag--purple">40</strong>'
     }
-
 }, { renderAsHtml: true })
+
+addFilter('newClaimLink_V7', function (type) {
+    let claimLink = "#"
+    if (type == "TU") {
+        claimLink = "claim/select-training"
+    } else if (type == "CPD") {
+        claimLink = "claim/select-activity-type"
+    }
+    return claimLink
+})
+
+addFilter('sortByDate_V10', function (claims, statusID) {
+    if (statusID == 'not-yet-submitted') {
+        return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
+    } else if (statusID == 'submitted') {
+        return claims.sort((a, b) => new Date(b.submittedDate) - new Date(a.submittedDate));
+    } else if (statusID == 'rejected') {
+        return claims.sort((a, b) => new Date(b.rejectedDate) - new Date(a.rejectedDate));
+    } else if (statusID == 'approved') {
+        return claims.sort((a, b) => new Date(b.approvedDate) - new Date(a.approvedDate));
+    } else {
+        return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
+    }
+})
+
+
+addFilter('userType_V10', function (type) {
+    switch(type) {
+        case "signatory":
+        return "Signatory"
+        break;
+
+        case "submitter":
+        return "Submitter"
+        break;
+
+    }
+})
+
+addFilter('userStatusTag_V10', function (status) {
+    switch(status) {
+        case "active":
+        return '<strong class="govuk-tag govuk-tag--turquoise">Active</strong>'
+        break;
+
+        case "expired":
+        return '<strong class="govuk-tag govuk-tag--orange">Invite expired</strong>'
+        break;
+
+        case "pending":
+        return '<strong class="govuk-tag govuk-tag--pink">Invite sent</strong>'
+        break;
+
+    }
+}, { renderAsHtml: true })
+
+addFilter('userErrorMessage_V10', function (submitError) {
+    let errorSummaryStr = ''
+
+    if (submitError.familyName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a last (family) name</a></li>')
+    }
+    if (submitError.givenName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a first (given) name</a></li>')
+    }
+    if (submitError.email == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address</a></li>')
+    } else if (submitError.email == "match") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">An invitation has already been sent to this email</a></li>')
+    }
+
+
+    return errorSummaryStr
+}, { renderAsHtml: true })
+
+addFilter('matchResend_V10', function (resendList, email) {
+    if (resendList != null && resendList != "") {
+        for (const e of resendList) {
+            if (e === email) {
+                return true
+                break;
+            }
+        }
+    }
+    
+    return false
+})
+
+addFilter('inviteName_V10', function (email, users) {
+    for (const user of users) {
+        if (user.email === email) {
+            return user.givenName + " " + user.familyName
+        }
+    }
+})

@@ -182,9 +182,7 @@ addFilter('newClaimLink_V7', function (type) {
     } else if (type == "CPD") {
         claimLink = "claim/select-activity-type"
     }
-
     return claimLink
-
 })
 
 addFilter('checkEligible_V7', function (learner, type, roleTypes) {

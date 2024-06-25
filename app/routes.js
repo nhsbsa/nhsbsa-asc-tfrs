@@ -28,7 +28,7 @@ router.use('/processing/prototypes/design/v3/', require('./views/processing/prot
 // Add your routes here
 router.use((req, res, next) => {
   // Define keys to exclude from logging
-  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes', 'CPDActivities', 'versionHistory'];
+  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes', 'CPDActivities', 'versionHistory', 'users'];
 
   // Create a copy of req.session.data with excluded keys removed
   const filteredData = Object.keys(req.session.data)
@@ -54,8 +54,8 @@ router.get('/getLocalData', (req, res) => {
 
 //generate data
 router.get('/generate', function (req, res) {
-  generateLearners(50, 'v9');
-  generateClaims(100, 'v9');
+  generateLearners(50, 'v10');
+  generateClaims(100, 'v10');
   res.redirect('../')
 })
 

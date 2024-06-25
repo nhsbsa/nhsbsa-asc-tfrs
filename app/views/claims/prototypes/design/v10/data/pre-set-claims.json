@@ -483,6 +483,156 @@
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2022-09-19T13:52:37.929Z"
+  }, 
+  {
+    "claimID": "PD2-MMGH-2VJU-D",
+    "fundingType": "CPD",
+    "claimType": null,
+    "learner": {
+      "id": "WB 34 5F 39 T",
+      "familyName": "Upton",
+      "givenName": "Johnny",
+      "jobTitle": "Healthcare Assistant (Agency)"
+    },
+    "categoryName": "Courses",
+    "description": "Attending a course on the latest advancements in geriatric care.",
+    "startDate": "2024-03-20T07:31:33.123Z",
+    "status": "approved",
+    "createdDate": "2023-03-12T19:46:09.120Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-05-08T09:34:13.002Z",
+    "approvedDate": "2024-01-05T16:50:15.963Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "claimAmount": 14,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate00100.pdf",
+    "completionDate": "2023-08-01T09:34:13.002Z",
+    "costDate": "2022-07-01T18:46:09.120Z"
+  },
+  {
+    "claimID": "KS-4GDN-2VJU-D",
+    "fundingType": "CPD",
+    "claimType": null,
+    "learner": {
+        "id": "ZH 56 2F 40 Y",
+        "familyName": "Kunze",
+        "givenName": "Xzavier",
+        "jobTitle": "Occupational Therapist"
+    },
+    "categoryName": "Reading journals or articles",
+    "description": "Staying informed by regularly reading journals on the latest developments in adult social care.",
+    "startDate": "2024-03-20T07:31:33.123Z",
+    "status": "rejected",
+    "createdDate": "2023-03-12T19:46:09.120Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-05-08T09:34:13.002Z",
+    "approvedDate": null,
+    "rejectedDate": "2024-01-05T16:50:15.963Z",
+    "rejectedNote": "Payment amount did not correspond to payment evidence",
+    "claimAmount": 11.99,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-07-01T18:46:09.120Z"
+  },
+  {
+    "claimID": "HSJ-3JDK-9SN2-D",
+    "fundingType": "CPD",
+    "claimType": null,
+    "learner": {
+      "id": "AL 82 2F 62 C",
+      "familyName": "Norwood",
+      "givenName": "Kub",
+      "jobTitle": "Clinical Nurse"
+    },
+    "categoryName": "Supervising research or students",
+    "description": "Guiding students in their exploration of mental health interventions within adult social care.",
+    "startDate": "2024-02-04T10:12:33.123Z",
+    "status": "submitted",
+    "createdDate": "2024-03-04T10:12:33.123Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2024-05-08T09:34:13.002Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "claimAmount": 120,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2024-05-08T09:34:13.002Z"
+  },
+  {
+    "claimID": "SH8-3DJF-28SJ-D",
+    "fundingType": "CPD",
+    "claimType": null,
+    "learner": {
+      "id": "AL 82 2F 62 C",
+      "familyName": "Macmillan",
+      "givenName": "Lila",
+      "jobTitle": "Healthcare Assistant (Agency)"
+    },
+    "categoryName": "Courses",
+    "description": "Completing a course on effective communication in adult social care.",
+    "startDate": "2024-03-20T07:31:33.123Z",
+    "status": "submitted",
+    "createdDate": "2023-03-12T19:46:09.120Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-05-08T09:34:13.002Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "claimAmount": 112.50,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate00100.pdf",
+    "completionDate": "2023-08-01T09:34:13.002Z",
+    "costDate": "2022-07-01T18:46:09.120Z"
+  },
+  {
+    "claimID": "IS7-2JE9-177J-D",
+    "fundingType": "CPD",
+    "claimType": null,
+    "learner": {
+      "id": "KS 82 2F 62 C",
+      "familyName": "Holmes",
+      "givenName": "Sarah",
+      "jobTitle": "Occupational Therapist"
+    },
+    "categoryName": "Courses",
+    "description": "Participating in a course focused on dementia care strategies.",
+    "startDate": "2024-03-20T07:31:33.123Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-03-12T19:46:09.120Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-05-08T09:34:13.002Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "claimAmount": 112.50,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": null,
+    "completionDate": null,
+    "costDate": "2022-07-01T18:46:09.120Z"
   }
 ]
   
