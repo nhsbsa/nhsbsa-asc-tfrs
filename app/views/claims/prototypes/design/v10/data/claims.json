@@ -495,7 +495,8 @@
       "jobTitle": "Caregiver",
       "cpdBudget": 486
     },
-    "categoryName": "Courses",
+    "categoryName": "Formal and educational",
+    "isACourse": true,
     "description": "Attending a course on the latest advancements in geriatric care.",
     "startDate": "2024-03-20T07:31:33.123Z",
     "status": "approved",
@@ -527,6 +528,7 @@
       "cpdBudget": 500
     },
     "categoryName": "Professional activities",
+    "isACourse": false,
     "description": "Joining other healthcare professionals in a collaborative group dedicated to enhancing elderly care services.",
     "startDate": "2024-03-20T07:31:33.123Z",
     "status": "rejected",
@@ -558,6 +560,7 @@
       "cpdBudget": 500
     },
     "categoryName": "Professional activities",
+    "isACourse": false,
     "description": "Guiding students in their exploration of mental health interventions within adult social care.",
     "startDate": "2024-02-04T10:12:33.123Z",
     "status": "submitted",
@@ -588,7 +591,8 @@
       "jobTitle": "Healthcare Assistant (Agency)",
       "cpdBudget": 500
     },
-    "categoryName": "Courses",
+    "categoryName": "Formal and educational",
+    "isACourse": true,
     "description": "Completing a course on effective communication in adult social care.",
     "startDate": "2024-03-20T07:31:33.123Z",
     "status": "submitted",
@@ -619,7 +623,8 @@
       "jobTitle": "Occupational Therapist",
       "cpdBudget": 385
     },
-    "categoryName": "Courses",
+    "categoryName": "Formal and educational",
+    "isACourse": true,
     "description": "Participating in a course focused on dementia care strategies.",
     "startDate": "2024-03-20T07:31:33.123Z",
     "status": "not-yet-submitted",
@@ -6371,7 +6376,8 @@
       "jobTitle": "Healthcare Assistant (Agency)",
       "cpdBudget": 454
     },
-    "categoryName": "Courses",
+    "categoryName": "Formal and educational",
+    "isACourse": true,
     "description": "Participating in a course focused on dementia care strategies.",
     "startDate": "2024-03-20T07:31:33.123Z",
     "status": "approved",
@@ -6403,6 +6409,7 @@
       "cpdBudget": 500
     },
     "categoryName": "Self-directed",
+    "isACourse": false,
     "description": "Staying informed by regularly reading journals on the latest developments in adult social care.",
     "startDate": "2024-03-20T07:31:33.123Z",
     "status": "rejected",
@@ -6434,6 +6441,7 @@
       "cpdBudget": 436
     },
     "categoryName": "Self-directed",
+    "isACourse": false,
     "description": "Engaging in scholarly articles to deepen understanding of evidence-based practices.",
     "startDate": "2024-02-04T10:12:33.123Z",
     "status": "submitted",
@@ -6464,7 +6472,8 @@
       "jobTitle": "Healthcare Assistant (Agency)",
       "cpdBudget": 385
     },
-    "categoryName": "Courses",
+    "categoryName": "Formal and educational",
+    "isACourse": true,
     "description": "Completing a course on effective communication in adult social care.",
     "startDate": "2024-03-20T07:31:33.123Z",
     "status": "submitted",
@@ -6496,6 +6505,7 @@
       "cpdBudget": 385
     },
     "categoryName": "Professional activities",
+    "isACourse": false,
     "description": "Mentoring aspiring professionals, investing in learning materials to ensure comprehensive support.",
     "startDate": "2024-03-20T07:31:33.123Z",
     "status": "not-yet-submitted",
@@ -6527,6 +6537,7 @@
       "cpdBudget": 475
     },
     "categoryName": "Other",
+    "isACourse": false,
     "description": "Attending community events or forums to gain insights into diverse perspectives on social care.",
     "startDate": null,
     "status": "not-yet-submitted",
@@ -6556,6 +6567,7 @@
       "cpdBudget": 350
     },
     "categoryName": "Professional activities",
+    "isACourse": false,
     "description": "Leading a group focused on ethical dilemmas in healthcare, investing in relevant learning materials.",
     "startDate": null,
     "status": "submitted",
@@ -6585,6 +6597,7 @@
       "cpdBudget": 500
     },
     "categoryName": "Other",
+    "isACourse": false,
     "description": "Attending community events or forums to gain insights into diverse perspectives on social care.",
     "startDate": null,
     "status": "submitted",
@@ -6614,6 +6627,7 @@
       "cpdBudget": 400
     },
     "categoryName": "Self-directed",
+    "isACourse": false,
     "description": "Investing in online courses to acquire in-depth knowledge about specific areas of social care.",
     "startDate": null,
     "status": "not-yet-submitted",
@@ -6643,6 +6657,7 @@
       "cpdBudget": 454
     },
     "categoryName": "Self-directed",
+    "isACourse": false,
     "description": "Staying informed by regularly reading journals on the latest developments in adult social care.",
     "startDate": "2024-03-20T07:31:33.123Z",
     "status": "submitted",
@@ -6674,6 +6689,7 @@
       "cpdBudget": 0
     },
     "categoryName": "Self-directed",
+    "isACourse": false,
     "description": "Staying informed by regularly reading journals on the latest developments in adult social care.",
     "startDate": "2023-06-21T07:31:33.123Z",
     "status": "not-yet-submitted",
@@ -6689,8 +6705,8 @@
       "invoice001.pdf",
       "invoice002.pdf"
     ],
-    "evidenceOfCompletion": "certficate00100.pdf",
-    "completionDate": "2023-10-18T09:34:13.002Z",
+    "evidenceOfCompletion": null,
+    "completionDate": null,
     "costDate": "2022-07-01T18:46:09.120Z"
   }
 ]

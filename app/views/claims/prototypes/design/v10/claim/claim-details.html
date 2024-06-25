@@ -104,7 +104,7 @@
     {% include "../_components/claim-sections/evidencePayment.html" %}
     {% endif %}
 
-    {% if claim.fundingType == "TU" and claim.claimType != "60"  or claim.categoryName == "Courses" %}
+    {% if claim.fundingType == "TU" and claim.claimType != "60"  or claim.isACourse == true %}
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
     {% endif %}
 

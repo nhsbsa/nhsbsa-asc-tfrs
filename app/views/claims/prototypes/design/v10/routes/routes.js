@@ -745,7 +745,7 @@ router.post('/track-course', function (req, res) {
   if (isACourse) {
     for (const c of req.session.data.claims) {
       if (claimID == c.claimID) {
-        c.categoryName = "Courses"
+        c.isACourse = true
       }
     }
   }
