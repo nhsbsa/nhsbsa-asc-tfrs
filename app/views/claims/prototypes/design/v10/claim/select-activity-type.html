@@ -27,19 +27,15 @@
                     <div class="govuk-radios" data-module="govuk-radios">
                         {% set counter = 1 %}
                         {% for group in data.CPDActivities %}
-                        <h2 class="govuk-heading-m">{{ group.groupTitle }}</h1>
-
-                            {% for category in group.categories %}
                             <div class="govuk-radios__item">
                                 <input class="govuk-radios__input" id="activityType-{{ counter }}" name="activityType"
-                                    type="radio" value="{{ category.name }}">
+                                    type="radio" value="{{ group.groupTitle }}">
                                 <label class="govuk-label govuk-radios__label" for="activityType-{{ counter }}">
-                                    {{ category.name }}
+                                    <h2 class="govuk-heading-s"> {{ group.groupTitle }}</h2>
+                                    <p class="govuk-body">{{ group.examples }}</p>
                                 </label>
                             </div>
                             {% set counter = counter + 1 %}
-                            {% endfor %}
-
                             {% endfor %}
 
                     </div>

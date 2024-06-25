@@ -162,7 +162,6 @@ addFilter('errorSummary_V10', function (claim, submitError) {
 
 addFilter('findClaim_V10', function (claimID, claims) {
     let claim = null;
-
     for (let c of claims) {
         if (c.claimID == claimID) {
             claim = c
@@ -214,7 +213,6 @@ addFilter('formatCount_V10', function (courses) {
     };
     return text;
 })
-
 
 addFilter('dateErrorMessage_V10', function (dateErrorObject, dateType, errorSection) {
     const errorMessages = [];
@@ -521,3 +519,23 @@ addFilter('sortByDate_V10', function (claims, statusID) {
         return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
     }
 })
+
+addFilter('pendingAmount_V10', function (learnerId, claims) {
+    let pendingAmount = 0;
+    for (let claim of claims) {
+        if (claim.fundingType == "CPD" && claim.learner.id == learnerId && claim.status == "submitted") {
+            pendingAmount += claim.claimAmount
+        }
+    }
+    return pendingAmount;
+})
+
+addFilter('availableAmount_V10', function (learnerId, budget, claims) {
+    let pendingAmount = 0;
+    for (let claim of claims) {
+        if (claim.fundingType == "CPD" && claim.learner.id == learnerId && claim.status == "submitted") {
+            pendingAmount += claim.claimAmount
+        }
+    }
+    return budget - pendingAmount;
+});

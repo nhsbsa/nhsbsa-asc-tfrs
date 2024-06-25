@@ -489,10 +489,11 @@
     "fundingType": "CPD",
     "claimType": null,
     "learner": {
-      "id": "WB 34 5F 39 T",
+      "id": "WB 35 5F 39 T",
       "familyName": "Upton",
       "givenName": "Johnny",
-      "jobTitle": "Healthcare Assistant (Agency)"
+      "jobTitle": "Healthcare Assistant (Agency)",
+      "cpdBudget": 472
     },
     "categoryName": "Courses",
     "description": "Attending a course on the latest advancements in geriatric care.",
@@ -522,7 +523,8 @@
       "id": "ZH 56 2F 40 Y",
       "familyName": "Kunze",
       "givenName": "Xzavier",
-      "jobTitle": "Occupational Therapist"
+      "jobTitle": "Occupational Therapist",
+      "cpdBudget": 500
     },
     "categoryName": "Reading journals or articles",
     "description": "Staying informed by regularly reading journals on the latest developments in adult social care.",
@@ -549,10 +551,11 @@
     "fundingType": "CPD",
     "claimType": null,
     "learner": {
-      "id": "AL 82 2F 62 C",
+      "id": "AL 82 2F 63 C",
       "familyName": "Norwood",
       "givenName": "Kub",
-      "jobTitle": "Clinical Nurse"
+      "jobTitle": "Clinical Nurse",
+      "cpdBudget": 500
     },
     "categoryName": "Supervising research or students",
     "description": "Guiding students in their exploration of mental health interventions within adult social care.",
@@ -579,10 +582,11 @@
     "fundingType": "CPD",
     "claimType": null,
     "learner": {
-      "id": "AL 82 2F 62 C",
+      "id": "BL 83 2F 62 C",
       "familyName": "Macmillan",
       "givenName": "Lila",
-      "jobTitle": "Healthcare Assistant (Agency)"
+      "jobTitle": "Healthcare Assistant (Agency)",
+      "cpdBudget": 500
     },
     "categoryName": "Courses",
     "description": "Completing a course on effective communication in adult social care.",
@@ -612,7 +616,8 @@
       "id": "KS 82 2F 62 C",
       "familyName": "Holmes",
       "givenName": "Sarah",
-      "jobTitle": "Occupational Therapist"
+      "jobTitle": "Occupational Therapist",
+      "cpdBudget": 500
     },
     "categoryName": "Courses",
     "description": "Participating in a course focused on dementia care strategies.",
@@ -6360,10 +6365,11 @@
     "fundingType": "CPD",
     "claimType": null,
     "learner": {
-      "id": "WB 34 5F 39 T",
+      "id": "WB 35 5F 39 T",
       "familyName": "Upton",
       "givenName": "Johnny",
-      "jobTitle": "Healthcare Assistant (Agency)"
+      "jobTitle": "Healthcare Assistant (Agency)",
+      "cpdBudget": 472
     },
     "categoryName": "Courses",
     "description": "Attending a course on the latest advancements in geriatric care.",
@@ -6390,10 +6396,11 @@
     "fundingType": "CPD",
     "claimType": null,
     "learner": {
-      "id": "ZH 56 2F 40 Y",
+      "id": "ZK 52 2F 40 Y",
       "familyName": "Kunze",
       "givenName": "Xzavier",
-      "jobTitle": "Occupational Therapist"
+      "jobTitle": "Occupational Therapist",
+      "cpdBudget": 500
     },
     "categoryName": "Reading journals or articles",
     "description": "Staying informed by regularly reading journals on the latest developments in adult social care.",
@@ -6420,10 +6427,11 @@
     "fundingType": "CPD",
     "claimType": null,
     "learner": {
-      "id": "AL 82 2F 62 C",
+      "id": "AL 82 2F 63 C",
       "familyName": "Norwood",
       "givenName": "Kub",
-      "jobTitle": "Clinical Nurse"
+      "jobTitle": "Clinical Nurse",
+      "cpdBudget": 436
     },
     "categoryName": "Supervising research or students",
     "description": "Guiding students in their exploration of mental health interventions within adult social care.",
@@ -6450,10 +6458,11 @@
     "fundingType": "CPD",
     "claimType": null,
     "learner": {
-      "id": "AL 82 2F 62 C",
+      "id": "BL 83 2F 62 C",
       "familyName": "Macmillan",
       "givenName": "Lila",
-      "jobTitle": "Healthcare Assistant (Agency)"
+      "jobTitle": "Healthcare Assistant (Agency)",
+      "cpdBudget": 365
     },
     "categoryName": "Courses",
     "description": "Completing a course on effective communication in adult social care.",
@@ -6483,7 +6492,8 @@
       "id": "KS 82 2F 62 C",
       "familyName": "Holmes",
       "givenName": "Sarah",
-      "jobTitle": "Occupational Therapist"
+      "jobTitle": "Occupational Therapist",
+      "cpdBudget": 385
     },
     "categoryName": "Courses",
     "description": "Participating in a course focused on dementia care strategies.",
@@ -6510,10 +6520,11 @@
     "fundingType": "CPD",
     "claimType": null,
     "learner": {
-      "id": "SC 67 9F 81 W",
+      "id": "SD 67 9F 81 W",
       "familyName": "Yost",
       "givenName": "Neha",
-      "jobTitle": "Care Aide"
+      "jobTitle": "Care Aide",
+      "cpdBudget": 475
     },
     "categoryName": "Other - a CPD activity not covered in the list",
     "description": "Attending community events or forums to gain insights into diverse perspectives on social care.",
@@ -6541,7 +6552,8 @@
       "id": "SC 67 9F 81 W",
       "familyName": "Yost",
       "givenName": "Neha",
-      "jobTitle": "Care Aide"
+      "jobTitle": "Care Aide",
+      "cpdBudget": 350
     },
     "categoryName": "Organising journal clubs or other specialist groups",
     "description": "Leading a group focused on ethical dilemmas in healthcare, investing in relevant learning materials.",
@@ -6569,7 +6581,8 @@
       "id": "FI 50 5F 30 D",
       "familyName": "Kessler",
       "givenName": "Dortha",
-      "jobTitle": "Council Care Assistant"
+      "jobTitle": "Council Care Assistant",
+      "cpdBudget": 500
     },
     "categoryName": "Other - a CPD activity not covered in the list",
     "description": "Attending community events or forums to gain insights into diverse perspectives on social care.",
@@ -6597,7 +6610,8 @@
       "id": "SE 52 1F 13 K",
       "familyName": "King",
       "givenName": "Orrin",
-      "jobTitle": "Facility Manager"
+      "jobTitle": "Facility Manager",
+      "cpdBudget": 400
     },
     "categoryName": "Enquiry-based research",
     "description": "Investing in online courses to acquire in-depth knowledge about specific areas of social care.",
@@ -6616,5 +6630,36 @@
     "evidenceOfCompletion": null,
     "completionDate": null,
     "costDate": "2023-11-23T11:07:32.318Z"
+  }, 
+  {
+    "claimID": "KLS-3KDM-2LD5-D",
+    "fundingType": "CPD",
+    "claimType": null,
+    "learner": {
+      "id": "WB 35 5F 39 T",
+      "familyName": "Upton",
+      "givenName": "Johnny",
+      "jobTitle": "Healthcare Assistant (Agency)",
+      "cpdBudget": 472
+    },
+    "categoryName": "Courses",
+    "description": "Attending a course on the latest advancements in geriatric care.",
+    "startDate": "2024-03-20T07:31:33.123Z",
+    "status": "submitted",
+    "createdDate": "2023-03-12T19:46:09.120Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": "2023-05-08T09:34:13.002Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "claimAmount": 14,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate00100.pdf",
+    "completionDate": "2023-08-01T09:34:13.002Z",
+    "costDate": "2022-07-01T18:46:09.120Z"
   }
 ]

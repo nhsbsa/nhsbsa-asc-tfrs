@@ -1,0 +1,53 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = null %}
+{% for c in data.claims %}
+{% if c.claimID == data.id %}
+{% set claim = c %}
+{% endif %}
+{% endfor %}
+
+{% block pageTitle %}
+{{ ["Add new learner - ", serviceName] | join }}
+{% endblock %}
+
+
+{% block beforeContent %}
+<a href="../claim/select-learner?submitError" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
+    <h1 class="govuk-heading-l">Is this formal and educational activity a course?</h1>
+  </div>
+  <div class="govuk-grid-column-two-thirds">
+    <form action="../cpd-eligibility" method="post" novalidate>
+
+      <p class="govuk-body">This means its got some form of evidence of completion.</p>
+      <div class="govuk-radios" data-module="govuk-radios">
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="eligible" name="eligibility" type="radio" value="yes">
+          <label class="govuk-label govuk-radios__label" for="eligible">
+            Yes
+          </label>
+        </div>
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="ineligible" name="eligibility" type="radio" value="no">
+          <label class="govuk-label govuk-radios__label" for="ineligible">
+            No
+          </label>
+        </div>
+      </div>
+
+      <div class="govuk-button-group" style="padding-top: 20px;">
+        <button type="submit" class="govuk-button" data-module="govuk-button" >
+          Add to claim
+        </button>
+        <a class="govuk-link govuk-link--no-visited-state" href="../claim/select-learner">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

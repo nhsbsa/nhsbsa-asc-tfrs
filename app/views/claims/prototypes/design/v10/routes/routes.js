@@ -216,7 +216,11 @@ router.post('/add-activity', function (req, res) {
   const activityType = req.session.data.activityType
   delete req.session.data['activityType'];
   const claimID = newCPDClaim(req, activityType)
-  res.redirect('claim/claim-details' + '?id=' + claimID)
+  if (activityType == "Formal and educational") {
+    res.redirect('claim/cpd-course-check' + '?id=' + claimID)
+  } else {
+    res.redirect('claim/claim-details' + '?id=' + claimID)
+  }
 });
 
 function newCPDClaim(req, activityType) {
