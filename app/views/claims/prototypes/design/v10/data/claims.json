@@ -6661,5 +6661,36 @@
     "evidenceOfCompletion": "certficate00100.pdf",
     "completionDate": "2023-08-01T09:34:13.002Z",
     "costDate": "2022-07-01T18:46:09.120Z"
+  },
+  {
+    "claimID": "BE2-8SND-92NN-D",
+    "fundingType": "CPD",
+    "claimType": null,
+    "learner": {
+      "id": "XY 32 8F 00 J",
+      "familyName": "Little",
+      "givenName": "Dixie",
+      "jobTitle": "Caregiver",
+      "cpdBudget": 0
+    },
+    "categoryName": "Self-directed",
+    "description": "Staying informed by regularly reading journals on the latest developments in adult social care.",
+    "startDate": "2023-06-21T07:31:33.123Z",
+    "status": "not-yet-submitted",
+    "createdDate": "2023-09-14T19:46:09.120Z",
+    "createdBy": "Mara Monahan",
+    "submittedDate": null,
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "claimAmount": 14,
+    "evidenceOfPayment": [
+      "invoice000.pdf",
+      "invoice001.pdf",
+      "invoice002.pdf"
+    ],
+    "evidenceOfCompletion": "certficate00100.pdf",
+    "completionDate": "2023-10-18T09:34:13.002Z",
+    "costDate": "2022-07-01T18:46:09.120Z"
   }
 ]

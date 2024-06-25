@@ -141,8 +141,13 @@
     {% endif %}
   </div>
   <div class="govuk-grid-column-one-third">
-    {% include "../_components/claim-sections/claimAmount.html" %}
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% if (data.fundingPot == "TU") %}
+      {% include "../_components/claim-sections/claimAmount.html" %}
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% else %}
+      {% include "../_components/claim-sections/cpdClaimAmount.html" %}
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
     <h2 class="govuk-heading-m">Related content</h2>
     <p class="govuk-body"><a href="../guidance/help-start-claim" class="govuk-link">Help with starting a new care skills
         claim</a></p>

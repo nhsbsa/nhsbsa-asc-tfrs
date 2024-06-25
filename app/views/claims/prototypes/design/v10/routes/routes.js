@@ -558,7 +558,12 @@ router.post('/ready-to-declare', function (req, res) {
   const submitError = checkClaim(claim)
   if (submitError.claimValid) {
     delete req.session.data.submitError
-    res.redirect('claim/declaration')
+    if (claim.learner.cpdBudget == 0) {
+      res.redirect('claim/no-budget-to-claim')
+    } else {
+      res.redirect('claim/declaration')
+    }
+    
   } else {
     req.session.data.submitError = submitError
     res.redirect('claim/claim-details' + '?id=' + claimID)
