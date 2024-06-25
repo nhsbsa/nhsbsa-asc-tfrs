@@ -421,9 +421,10 @@ router.post('/add-learner', function (req, res) {
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       if (claimType == "TU") {
-        duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims, "TU");
+        duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims);
       } else if (claimType == "CPD") {
-        duplicateCheck = checkDuplicateClaim(learner.id, c.categoryName, req.session.data.claims, "CPD");
+        // CPD claims can't be duplicate
+        duplicateCheck.check =  false
       }
       
       if (duplicateCheck.check) {
