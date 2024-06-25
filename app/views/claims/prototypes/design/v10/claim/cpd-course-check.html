@@ -19,12 +19,17 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
-    <h1 class="govuk-heading-l">Is this formal and educational activity a course?</h1>
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">
+        Is this formal and educational activity a course?
+      </h1>
+    </legend>
   </div>
   <div class="govuk-grid-column-two-thirds">
     <form action="../track-course" method="post" novalidate>
-
-      <p class="govuk-body">This means its got some form of evidence of completion.</p>
+      <div id="changedName-hint" class="govuk-hint">
+        This means its got some form of evidence of completion.
+      </div>
       <div class="govuk-radios" data-module="govuk-radios">
         <div class="govuk-radios__item">
           <input class="govuk-radios__input" id="course" name="isACourse" type="radio" value="yes">

@@ -524,7 +524,7 @@ addFilter('pendingAmount_V10', function (learnerId, claims) {
     let pendingAmount = 0;
     for (let claim of claims) {
         if (claim.fundingType == "CPD" && claim.learner.id == learnerId && claim.status == "submitted") {
-            pendingAmount += claim.claimAmount
+            pendingAmount = pendingAmount + Number(claim.claimAmount);
         }
     }
     return pendingAmount;
@@ -534,7 +534,7 @@ addFilter('availableAmount_V10', function (learnerId, budget, claims) {
     let pendingAmount = 0;
     for (let claim of claims) {
         if (claim.fundingType == "CPD" && claim.learner.id == learnerId && claim.status == "submitted") {
-            pendingAmount += claim.claimAmount
+            pendingAmount = pendingAmount + Number(claim.claimAmount);
         }
     }
     return budget - pendingAmount;

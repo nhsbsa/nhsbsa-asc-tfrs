@@ -19,7 +19,11 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
-    <h1 class="govuk-heading-l">Is this learner eligible for revalidation funding?</h1>
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">
+        Is this learner eligible for revalidation funding?
+      </h1>
+    </legend>
   </div>
   <div class="govuk-grid-column-two-thirds">
     <form action="../cpd-eligibility" method="post" novalidate>
