@@ -489,11 +489,11 @@
     "fundingType": "CPD",
     "claimType": null,
     "learner": {
-      "id": "WB 35 5F 39 T",
-      "familyName": "Upton",
-      "givenName": "Johnny",
-      "jobTitle": "Healthcare Assistant (Agency)",
-      "cpdBudget": 454
+      "id": "ZX 51 96 87 D",
+      "familyName": "Simonis",
+      "givenName": "Casey",
+      "jobTitle": "Caregiver",
+      "cpdBudget": 486
     },
     "categoryName": "Formal and educational",
     "description": "Attending a course on the latest advancements in geriatric care.",
@@ -520,10 +520,10 @@
     "fundingType": "CPD",
     "claimType": null,
     "learner": {
-      "id": "ZH 56 2F 40 Y",
-      "familyName": "Kunze",
-      "givenName": "Xzavier",
-      "jobTitle": "Occupational Therapist",
+      "id": "FB 88 2F 39 Z",
+      "familyName": "Shanahan",
+      "givenName": "Kaylin",
+      "jobTitle": "Healthcare Assistant",
       "cpdBudget": 500
     },
     "categoryName": "Professional activities",
@@ -6454,15 +6454,15 @@
     "costDate": "2024-05-08T09:34:13.002Z"
   },
   {
-    "claimID": "SH8-3DJF-28SJ-D",
+    "claimID": "KJS-2SNS-2JSJ-D",
     "fundingType": "CPD",
     "claimType": null,
     "learner": {
-      "id": "BL 83 2F 62 C",
-      "familyName": "Macmillan",
-      "givenName": "Lila",
+      "id": "KS 82 2F 62 C",
+      "familyName": "Holmes",
+      "givenName": "Sarah",
       "jobTitle": "Healthcare Assistant (Agency)",
-      "cpdBudget": 365
+      "cpdBudget": 385
     },
     "categoryName": "Formal and educational",
     "description": "Completing a course on effective communication in adult social care.",
@@ -6474,7 +6474,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "claimAmount": 112.5,
+    "claimAmount": 85,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
