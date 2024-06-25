@@ -733,6 +733,19 @@ router.get('/clear-learner', function (req, res) {
   }
 });
 
+router.post('/track-course', function (req, res) {
+  var claimID = req.session.data.id
+  const isACourse = req.session.data.isACourse == "yes"
+  if (isACourse) {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+        c.categoryName = "Courses"
+      }
+    }
+  }
+  res.redirect('claim/claim-details' + '?id=' + claimID)
+});
+
 function loadData(req) {
   // pull in the prototype data object and see if it contains a datafile reference
   let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
