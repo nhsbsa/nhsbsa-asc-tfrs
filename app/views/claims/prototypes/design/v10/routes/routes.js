@@ -422,20 +422,15 @@ router.post('/add-learner', function (req, res) {
     if (claimID == c.claimID) {
       if (claimType == "TU") {
         duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims);
-      } else if (claimType == "CPD") {
-        // CPD claims can't be duplicate
-        duplicateCheck.check =  false
-      }
-      
-      if (duplicateCheck.check) {
-        res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
-      } else {
-        c.learner = learner
-        if (claimType == "CPD") {
-          res.redirect('claim/cpd-eligibility-check' + '?id=' + claimID)
+        if (duplicateCheck.check) {
+          res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
         } else {
+          c.learner = learner
           res.redirect('claim/claim-details?id=' + claimID + '#learner')
         }
+      } else if (claimType == "CPD") {
+        c.learner = learner
+        res.redirect('claim/cpd-eligibility-check' + '?id=' + claimID)
         
       }
     }
