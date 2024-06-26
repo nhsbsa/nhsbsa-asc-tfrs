@@ -304,4 +304,40 @@ function loadJSONFromFile(fileName, path = 'app/data/') {
     return JSON.parse(jsonFile) // Return JSON as object
   }
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile }
+  function checkUserForm(familyName, givenName, email, users) {
+    const result = {};
+
+    if (familyName == "" || familyName === undefined || familyName == null ) {
+        result.familyName = "missing"
+    } else {
+        result.familyName = "valid"
+    }
+
+    if (givenName == "" || givenName === undefined || givenName == null ) {
+        result.givenName = "missing"
+    } else {
+        result.givenName = "valid"
+    }
+
+    let emailMatch = false
+    for (const user of users) {
+        if (user.email == email) {
+            emailMatch = true
+        }
+    }
+
+    if (email == "" || email === undefined || email == null ) {
+        result.email = "missing"
+    } else if(emailMatch) {
+        result.email = "match"
+    } else {
+        result.email = "valid"
+    }
+
+    result.userValid = result.familyName == "valid" && result.givenName == "valid" && result.email == "valid"
+
+    return result
+
+}
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm }

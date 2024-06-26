@@ -539,3 +539,74 @@ addFilter('availableAmount_V10', function (learnerId, budget, claims) {
     }
     return budget - pendingAmount;
 });
+
+
+addFilter('userType_V10', function (type) {
+    switch(type) {
+        case "signatory":
+        return "Signatory"
+        break;
+
+        case "submitter":
+        return "Submitter"
+        break;
+
+    }
+})
+
+addFilter('userStatusTag_V10', function (status) {
+    switch(status) {
+        case "active":
+        return '<strong class="govuk-tag govuk-tag--turquoise">Active</strong>'
+        break;
+
+        case "expired":
+        return '<strong class="govuk-tag govuk-tag--orange">Invite expired</strong>'
+        break;
+
+        case "pending":
+        return '<strong class="govuk-tag govuk-tag--pink">Invite sent</strong>'
+        break;
+
+    }
+}, { renderAsHtml: true })
+
+addFilter('userErrorMessage_V10', function (submitError) {
+    let errorSummaryStr = ''
+
+    if (submitError.familyName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a last (family) name</a></li>')
+    }
+    if (submitError.givenName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a first (given) name</a></li>')
+    }
+    if (submitError.email == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address</a></li>')
+    } else if (submitError.email == "match") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">An invitation has already been sent to this email</a></li>')
+    }
+
+
+    return errorSummaryStr
+}, { renderAsHtml: true })
+
+addFilter('matchResend_V10', function (resendList, email) {
+    if (resendList != null && resendList != "") {
+        for (const e of resendList) {
+            if (e === email) {
+                return true
+                break;
+            }
+        }
+    }
+    
+    return false
+})
+
+addFilter('inviteName_V10', function (email, users) {
+    for (const user of users) {
+        if (user.email === email) {
+            return user.givenName + " " + user.familyName
+        }
+    }
+})

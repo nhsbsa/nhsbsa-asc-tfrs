@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile } = require('../helpers/helpers.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm } = require('../helpers/helpers.js');
 
 // v10 Prototype routes
 
@@ -734,6 +734,60 @@ router.post('/declaration-confirmation', function (req, res) {
   }
 });
 
+
+router.post('/invite-user', function (req, res) {
+  delete req.session.data.submitError
+  delete req.session.data.name
+  delete req.session.data.invite
+  const email = req.session.data.email
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+
+  const submitError = checkUserForm(familyName, givenName, email, req.session.data.users)
+
+  if (submitError.userValid) {
+      const user = {
+        familyName: familyName,
+        givenName: givenName,
+        email: email,
+        type: "submitter",
+        status: "pending"
+      };
+      req.session.data.users.push(user)
+
+      if(req.session.data.resendList) {
+        req.session.data.resendList.push(user.email)
+      } else {
+        req.session.data.resendList = [user.email]
+      }
+
+      delete req.session.data.familyName
+      delete req.session.data.givenName
+      delete req.session.data.email
+      delete req.session.data.submitError
+      req.session.data.name = email
+      res.redirect('org-admin/manage-team?invite=success')
+  
+  } else {
+    req.session.data.submitError = submitError
+    res.redirect('org-admin/invite-user')
+  }
+});
+
+router.post('/reinvite-user', function (req, res) {
+req.session.data.invite = "success"
+
+
+if(req.session.data.resendList) {
+  req.session.data.resendList.push(req.session.data.name)
+} else {
+  req.session.data.resendList = [req.session.data.name]
+}
+
+res.redirect('org-admin/manage-team')
+
+});
+
 router.post('/cpd-eligibility', function (req, res) {
   var claimID = req.session.data.id
   const learnerEligible = req.session.data.eligibility
@@ -775,6 +829,7 @@ function loadData(req) {
   var statusFile = 'claim-item-statuses.json'
   var roleTypes = 'role-types.json'
   var CPDActivities = 'cpd-activities.json'
+  var users = 'users.json'
 
   console.log('loading in training file')
   req.session.data['training'] = loadJSONFromFile(trainingFile, path)
@@ -800,10 +855,14 @@ function loadData(req) {
   req.session.data['CPDActivities'] = loadJSONFromFile(CPDActivities, path)
   console.log('CPDActivities file loaded')
 
+  console.log('loading in users file')
+  req.session.data['users'] = loadJSONFromFile(users, path)
+  console.log('users file loaded')
+
   return console.log('data updated')
 }
 
-router.get('/load-data', function (req, res) {
+router.post('/load-data', function (req, res) {
   //Load data from JSON files
   loadData(req);
   res.redirect('before-you-start.html')
