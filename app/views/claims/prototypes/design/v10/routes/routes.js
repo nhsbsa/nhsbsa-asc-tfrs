@@ -221,14 +221,36 @@ router.post('/add-activity', function (req, res) {
     req.session.data.submitError = true
     res.redirect('claim/select-activity-type')
   } else {
-    const claimID = newCPDClaim(req, activityType)
     if (activityType == "Formal and educational") {
-      res.redirect('claim/cpd-course-check' + '?id=' + claimID)
+      res.redirect('claim/cpd-course-check')
     } else {
+      const claimID = newCPDClaim(req, activityType)
       res.redirect('claim/claim-details' + '?id=' + claimID)
     }
   }
 
+});
+
+router.post('/track-course', function (req, res) {
+  const isACourse = req.session.data.isACourse
+  //delete req.session.data.isACourse;
+  delete req.session.data.submitError;
+
+  if (isACourse == null) {
+    req.session.data.submitError = true
+    res.redirect('claim/cpd-course-check')
+  } else {
+    const claimID = newCPDClaim(req, "Formal and educational")
+    console.log(isACourse)
+    if (isACourse == "yes") {
+      for (const c of req.session.data.claims) {
+        if (claimID == c.claimID) {
+          c.isACourse = true
+        }
+      }
+    }
+  res.redirect('claim/claim-details' + '?id=' + claimID)
+  }
 });
 
 function newCPDClaim(req, activityType) {
@@ -740,19 +762,6 @@ router.get('/clear-learner', function (req, res) {
       res.redirect('claim/claim-details' + '?id=' + claimID)
     }
   }
-});
-
-router.post('/track-course', function (req, res) {
-  var claimID = req.session.data.id
-  const isACourse = req.session.data.isACourse == "yes"
-  if (isACourse) {
-    for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        c.isACourse = true
-      }
-    }
-  }
-  res.redirect('claim/claim-details' + '?id=' + claimID)
 });
 
 function loadData(req) {
