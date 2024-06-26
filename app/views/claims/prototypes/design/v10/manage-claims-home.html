@@ -36,7 +36,11 @@
           </div>
           <div class="govuk-notification-banner__content">
             <p class="govuk-notification-banner__heading">
+              {% if data.fundingPot == "TU" %}
               You can only claim for training that started and was paid for on or after 1 April 2024.
+              {% elif data.fundingPot == "CPD" %}
+              You can only claim for activities that you paid for on or after 1 April 2024. Courses or training must also have started on or after that date.
+              {% endif %}
             </p>
           </div>
         </div>
