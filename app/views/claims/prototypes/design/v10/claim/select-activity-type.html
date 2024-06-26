@@ -29,11 +29,13 @@
                         {% for group in data.CPDActivities %}
                             <div class="govuk-radios__item">
                                 <input class="govuk-radios__input" id="activityType-{{ counter }}" name="activityType"
-                                    type="radio" value="{{ group.groupTitle }}">
+                                    type="radio" value="{{ group.groupTitle }}" aria-describedby="activityType-{{ counter }}-item-hint">
                                 <label class="govuk-label govuk-radios__label" for="activityType-{{ counter }}">
-                                    <h2 class="govuk-heading-s"> {{ group.groupTitle }}</h2>
-                                    <p class="govuk-body">{{ group.examples }}</p>
+                                    {{ group.groupTitle }}
                                 </label>
+                                <div id="activityType-{{ counter }}-item-hint" class="govuk-hint govuk-radios__hint">
+                                    {{ group.examples }}
+                                </div>
                             </div>
                             {% set counter = counter + 1 %}
                             {% endfor %}
