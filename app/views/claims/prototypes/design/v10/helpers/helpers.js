@@ -22,7 +22,7 @@ function checkClaim(claim) {
         result.learner = "valid"
     }
 
-    if (claim.startDate == null && ( claim.fundingType == "TU" || claim.categoryName == "Courses") ) {
+    if (claim.startDate == null && ( claim.fundingType == "TU" || claim.isACourse == true) ) {
         result.startDate = "missing"
     } else {
         result.startDate = "valid"
@@ -40,13 +40,13 @@ function checkClaim(claim) {
         result.evidenceOfPayment = "valid"
     }
 
-    if (claim.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100" || claim.categoryName == "Courses") ) {
+    if (claim.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100" || claim.isACourse == true) ) {
         result.evidenceOfCompletion = "missing"
     } else {
         result.evidenceOfCompletion = "valid"
     }
 
-    if (claim.completionDate == null && (claim.claimType == "40" || claim.claimType == "100" || claim.categoryName == "Courses")) {
+    if (claim.completionDate == null && (claim.claimType == "40" || claim.claimType == "100" || claim.isACourse == true)) {
         result.completionDate = "missing"
     } else {
         result.completionDate = "valid"
@@ -54,7 +54,7 @@ function checkClaim(claim) {
 
     result.claimValid = result.learner == "valid" && result.startDate == "valid" && result.paymentDate == "valid" && result.evidenceOfPayment == "valid" && result.evidenceOfCompletion == "valid" && result.completionDate == "valid";
         
-    if (result.completionDate == "valid" && result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "40" ||claim.categoryName == "Courses")) {
+    if (result.completionDate == "valid" && result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "40" || claim.isACourse == true)) {
         const startDate = new Date(claim.startDate)
         const completionDate = new Date(claim.completionDate)
         if (startDate.getTime() >= completionDate.getTime()) {
@@ -191,14 +191,13 @@ function validateDate(day, month, year, type) {
     return result;
 }
 
-function checkDuplicateClaim(learnerID, trainingID, claimList, claimType) {
+function checkDuplicateClaim(learnerID, trainingID, claimList) {
     let result = {}
     result.check = false
     result.id = ''
 
-    if (claimType == "TU") {
         for (const c of claimList) {
-            if (c.learner != null) {
+            if (c.learner != null && c.fundingType == "TU") {
                 if (c.training.code == trainingID && c.learner.id == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
                     result.matchType = c.claimType
                     result.check = true;
@@ -207,18 +206,7 @@ function checkDuplicateClaim(learnerID, trainingID, claimList, claimType) {
                 }
             }
         }
-    } else if (claimType == "CPD") {
-        for (const c of claimList) {
-            if (c.learner != null) {
-                if (c.categoryName == trainingID && c.learner.id == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
-                    result.matchType = c.claimType
-                    result.check = true;
-                    result.id = c.claimID
-                    break;
-                }
-            }
-        }
-    }
+
 
     return result
 

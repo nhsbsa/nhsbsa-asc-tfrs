@@ -45,7 +45,7 @@
     </div>
   </div>
   {% endif %}
-  {% if claim.categoryName == "Courses" %}
+  {% if claim.isACourse == true %}
   <div class="govuk-summary-list__row {% if not claim.startDate or (claim.status == 'submitted' or claim.status == 'approved' or claim.status == 'rejected')%} govuk-summary-list__row--no-actions {% endif %} {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='missing' %} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='missing' %} govuk-summary-key--error {% endif %}">
       Start date

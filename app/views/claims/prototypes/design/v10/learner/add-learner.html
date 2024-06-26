@@ -149,7 +149,7 @@
       {% if data.inClaim == 'true' %}
       <div class="govuk-button-group">
         <button type="submit" class="govuk-button" data-module="govuk-button">
-          Save and add to claim
+          {% if data.fundingPot == 'TU' %}Save and add to claim{% else %}Save and continue{% endif %}
         </button>
         <a class="govuk-link govuk-link--no-visited-state" href="../claim/select-learner">Cancel</a>
       </div>
