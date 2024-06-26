@@ -233,7 +233,7 @@ router.post('/add-activity', function (req, res) {
 
 router.post('/track-course', function (req, res) {
   const isACourse = req.session.data.isACourse
-  //delete req.session.data.isACourse;
+  delete req.session.data.isACourse;
   delete req.session.data.submitError;
 
   if (isACourse == null) {
@@ -792,17 +792,26 @@ router.post('/cpd-eligibility', function (req, res) {
   var claimID = req.session.data.id
   const learnerEligible = req.session.data.eligibility
 
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      if (learnerEligible == "yes") {
-        // check if learner already has a budget, if not set to 500
-        if (c.learner.cpdBudget == -1 | c.learner.cpdBudget == null) {
-          c.learner.cpdBudget = 500
+  delete req.session.data.eligibility
+  delete req.session.data.submitError
+
+  if (learnerEligible == null) {
+    req.session.data.submitError = true
+    res.redirect('claim/cpd-eligibility-check?id=' + claimID)
+  } else {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+        if (learnerEligible == "yes") {
+          // check if learner already has a budget, if not set to 500
+          if (c.learner.cpdBudget == -1 | c.learner.cpdBudget == null) {
+            c.learner.cpdBudget = 500
+          }
+          console.log(c.learner)
+          res.redirect('claim/claim-details' + '?id=' + claimID)
+        } else {
+          // redirect to learner isn't able to be added to claim view
+          res.redirect('claim/cpd-ineligible' + '?id=' + claimID)
         }
-        res.redirect('claim/claim-details' + '?id=' + claimID)
-      } else {
-        // redirect to learner isn't able to be added to claim view
-        res.redirect('claim/cpd-ineligible' + '?id=' + claimID)
       }
     }
   }
