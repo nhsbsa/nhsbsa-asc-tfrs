@@ -52,10 +52,19 @@
     
     <h1 class="govuk-heading-l">Manage team members</h1>
 
+    {% if (data.users | length) < 10 %}
+
+    <p class="govuk-body">You have {{ data.users | length }} team members. You can have up to 10 additional team members.</p>
+
     <a type="submit" href="invite-user" class="govuk-button" data-module="govuk-button">
         Invite new team member
     </a>
 
+    {% else %}
+
+    <p class="govuk-body">You have reached the maximum of 10 team members.</p>
+
+    {% endif %}
     <table class="govuk-table">
         <caption class="govuk-table__caption govuk-table__caption--m">Current team members</caption>
         <tbody class="govuk-table__body">
