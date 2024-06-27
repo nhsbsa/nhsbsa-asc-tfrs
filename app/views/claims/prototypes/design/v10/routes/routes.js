@@ -249,7 +249,7 @@ router.post('/track-course', function (req, res) {
         }
       }
     }
-  res.redirect('claim/claim-details' + '?id=' + claimID)
+    res.redirect('claim/claim-details' + '?id=' + claimID)
   }
 });
 
@@ -310,35 +310,44 @@ function newCPDClaim(req, activityType) {
 router.post('/add-cost', function (req, res) {
   var cost = req.session.data.cost
   var claimID = req.session.data.id
-
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      c.claimAmount = cost
-      console.log(JSON.stringify(c, null, 2))
-      break;
-    }
-  }
-  delete req.session.data.cost;
   delete req.session.data.submitError
 
-  res.redirect('claim/claim-details' + '?id=' + claimID + '#activity')
+  if (cost == null || cost == "") {
+    req.session.data.submitError = true
+    res.redirect('claim/add-claim-amount')
+  } else {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+        c.claimAmount = cost
+        break;
+      }
+    }
+    delete req.session.data.cost;
+    delete req.session.data.submitError
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#payment')
+  }
 });
 
 router.post('/add-description', function (req, res) {
   var description = req.session.data.description
   var claimID = req.session.data.id
-
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      c.description = description
-      break;
-    }
-  }
-
-  delete req.session.data.description;
   delete req.session.data.submitError
 
-  res.redirect('claim/claim-details' + '?id=' + claimID + '#activity')
+  if (description == null || description == "") {
+    req.session.data.submitError = true
+    res.redirect('claim/add-description')
+  } else {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+        c.description = description
+        break;
+      }
+    }
+    delete req.session.data.description;
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#activity')
+  }
+
+
 });
 
 
@@ -584,7 +593,7 @@ router.post('/ready-to-declare', function (req, res) {
   const submitError = checkClaim(claim)
   if (submitError.claimValid) {
     delete req.session.data.submitError
-    if (claim.learner.cpdBudget == 0) {
+    if (claim.learner.cpdBudget == 0 && claim.fundingType == "CPD") {
       res.redirect('claim/no-budget-to-claim')
     } else {
       res.redirect('claim/declaration')
@@ -746,28 +755,28 @@ router.post('/invite-user', function (req, res) {
   const submitError = checkUserForm(familyName, givenName, email, req.session.data.users)
 
   if (submitError.userValid) {
-      const user = {
-        familyName: familyName,
-        givenName: givenName,
-        email: email,
-        type: "submitter",
-        status: "pending"
-      };
-      req.session.data.users.push(user)
+    const user = {
+      familyName: familyName,
+      givenName: givenName,
+      email: email,
+      type: "submitter",
+      status: "pending"
+    };
+    req.session.data.users.push(user)
 
-      if(req.session.data.resendList) {
-        req.session.data.resendList.push(user.email)
-      } else {
-        req.session.data.resendList = [user.email]
-      }
+    if (req.session.data.resendList) {
+      req.session.data.resendList.push(user.email)
+    } else {
+      req.session.data.resendList = [user.email]
+    }
 
-      delete req.session.data.familyName
-      delete req.session.data.givenName
-      delete req.session.data.email
-      delete req.session.data.submitError
-      req.session.data.name = email
-      res.redirect('org-admin/manage-team?invite=success')
-  
+    delete req.session.data.familyName
+    delete req.session.data.givenName
+    delete req.session.data.email
+    delete req.session.data.submitError
+    req.session.data.name = email
+    res.redirect('org-admin/manage-team?invite=success')
+
   } else {
     req.session.data.submitError = submitError
     res.redirect('org-admin/invite-user')
@@ -775,16 +784,16 @@ router.post('/invite-user', function (req, res) {
 });
 
 router.post('/reinvite-user', function (req, res) {
-req.session.data.invite = "success"
+  req.session.data.invite = "success"
 
 
-if(req.session.data.resendList) {
-  req.session.data.resendList.push(req.session.data.name)
-} else {
-  req.session.data.resendList = [req.session.data.name]
-}
+  if (req.session.data.resendList) {
+    req.session.data.resendList.push(req.session.data.name)
+  } else {
+    req.session.data.resendList = [req.session.data.name]
+  }
 
-res.redirect('org-admin/manage-team')
+  res.redirect('org-admin/manage-team')
 
 });
 

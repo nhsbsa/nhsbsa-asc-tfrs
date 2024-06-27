@@ -523,7 +523,7 @@ addFilter('sortByDate_V10', function (claims, statusID) {
 addFilter('pendingAmount_V10', function (learnerId, claims) {
     let pendingAmount = 0;
     for (let claim of claims) {
-        if (claim.fundingType == "CPD" && claim.learner.id == learnerId && claim.status == "submitted") {
+        if (claim.fundingType == "CPD" && claim.learner != null && claim.learner.id == learnerId && claim.status == "submitted") {
             pendingAmount = pendingAmount + Number(claim.claimAmount);
         }
     }
@@ -533,7 +533,7 @@ addFilter('pendingAmount_V10', function (learnerId, claims) {
 addFilter('availableAmount_V10', function (learnerId, budget, claims) {
     let pendingAmount = 0;
     for (let claim of claims) {
-        if (claim.fundingType == "CPD" && claim.learner.id == learnerId && claim.status == "submitted") {
+        if (claim.fundingType == "CPD" && claim.learner != null && claim.learner.id == learnerId && claim.status == "submitted") {
             pendingAmount = pendingAmount + Number(claim.claimAmount);
         }
     }
