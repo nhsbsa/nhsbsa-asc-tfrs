@@ -328,6 +328,8 @@ function loadJSONFromFile(fileName, path = 'app/data/') {
 
     if (email == "" || email === undefined || email == null ) {
         result.email = "missing"
+    }  else if (!(emailFormat(email))) {
+        result.email = "invalid"
     } else if(emailMatch) {
         result.email = "match"
     } else {
@@ -338,6 +340,11 @@ function loadJSONFromFile(fileName, path = 'app/data/') {
 
     return result
 
+}
+
+function emailFormat(string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(string);
 }
 
 module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm }

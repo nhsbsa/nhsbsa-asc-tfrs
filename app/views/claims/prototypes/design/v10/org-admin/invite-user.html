@@ -68,7 +68,12 @@
         {% if data.submitError.userValid != null and not data.submitError.userValid and
           data.submitError.email == 'missing' %}
           <p id="email-error" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Enter an email address
+            <span class="govuk-visually-hidden">Error:</span>
+            {% if data.submitError.email == 'missing' %}
+                        Enter an email address
+                    {% elif data.submitError.email == 'invalid' %}
+                        Enter an email address in the correct format, like name@example.com
+                    {% endif %}
           </p>
           {% elif data.submitError.userValid != null and not data.submitError.userValid and
           data.submitError.email == 'match' %}
