@@ -886,12 +886,6 @@ router.post('/load-data', function (req, res) {
   res.redirect('before-you-start.html')
 })
 
-router.get('/load-data-list-test', function (req, res) {
-  //Load data from JSON files
-  loadData(req);
-  res.redirect('manage-claims-buttons-test.html')
-})
-
 router.get('/load-data-account-test', function (req, res) {
   //Load data from JSON files
   loadData(req);
