@@ -58,7 +58,7 @@
           value="{{ data.givenName | default ('') }}">
       </div>
       <div
-        class="govuk-form-group {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.email == 'missing' or data.submitError.email == 'match') %} govuk-form-group--error {% endif %}">
+        class="govuk-form-group {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.email == 'missing' or data.submitError.email == 'match' or data.submitError.email == 'invalid') %} govuk-form-group--error {% endif %}">
         <label class="govuk-label govuk-label--s" for="email">
           Email address
         </label>
@@ -66,23 +66,20 @@
           We’ll only use this to send the invitation to the service
         </div>
         {% if data.submitError.userValid != null and not data.submitError.userValid and
-          data.submitError.email == 'missing' %}
+          (data.submitError.email == 'missing' or data.submitError.email == 'invalid' or data.submitError.email == 'match')  %}
           <p id="email-error" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span>
             {% if data.submitError.email == 'missing' %}
-                        Enter an email address
-                    {% elif data.submitError.email == 'invalid' %}
-                        Enter an email address in the correct format, like name@example.com
-                    {% endif %}
-          </p>
-          {% elif data.submitError.userValid != null and not data.submitError.userValid and
-          data.submitError.email == 'match' %}
-          <p id="email-error" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> An invitation has already been sent to this email
+                Enter an email address
+            {% elif data.submitError.email == 'match' %}
+            An invitation has already been sent to this email
+            {% elif data.submitError.email == 'invalid' %}
+                Enter an email address in the correct format, like name@example.com
+            {% endif %}
           </p>
           {% endif %}
         <input
-          class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.email == 'missing'  or data.submitError.email == 'match') %} govuk-input--error {% endif %}"
+          class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.email == 'missing'  or data.submitError.email == 'match' or data.submitError.email == 'invalid') %} govuk-input--error {% endif %}"
           id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint" autocomplete="email" value="{{ data.email | default ('') }}">
       </div>
 

@@ -584,6 +584,8 @@ addFilter('userErrorMessage_V10', function (submitError) {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address</a></li>')
     } else if (submitError.email == "match") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">An invitation has already been sent to this email</a></li>')
+    } else if (submitError.email == "invalid") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address in the correct format, like name@example.com</a></li>')
     }
 
 
