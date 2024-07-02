@@ -760,21 +760,16 @@ router.post('/invite-user', function (req, res) {
       givenName: givenName,
       email: email,
       type: "submitter",
-      status: "pending"
+      status: "pending",
+      invited: new Date()
     };
     req.session.data.users.push(user)
-
-    if (req.session.data.resendList) {
-      req.session.data.resendList.push(user.email)
-    } else {
-      req.session.data.resendList = [user.email]
-    }
 
     delete req.session.data.familyName
     delete req.session.data.givenName
     delete req.session.data.email
     delete req.session.data.submitError
-    req.session.data.name = email
+    req.session.data.resendEmail = email
     res.redirect('org-admin/manage-team?invite=success')
 
   } else {
@@ -787,10 +782,11 @@ router.post('/reinvite-user', function (req, res) {
   req.session.data.invite = "success"
 
 
-  if (req.session.data.resendList) {
-    req.session.data.resendList.push(req.session.data.name)
-  } else {
-    req.session.data.resendList = [req.session.data.name]
+  for (const user of req.session.data.users) {
+    if (req.session.data.resendEmail == user.email) {
+      user.status = "pending"
+      user.invited = new Date()
+    }
   }
 
   res.redirect('org-admin/manage-team')
