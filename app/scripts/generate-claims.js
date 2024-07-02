@@ -75,9 +75,6 @@ function generateTUClaims(quantity, version) {
   const training = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/training.json', 'utf8'));
   const statuses = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/claim-item-statuses.json', 'utf8'));
 
-  const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/pre-set-claims.json', 'utf8'));
-  data = data.concat(preSetClaims)
-
   for (let i = 1; i <= quantity; i++) {
     faker.seed(i);
     const createdDate = faker.date.past();
@@ -245,9 +242,6 @@ function generateCPDClaims(quantity, version) {
   const learners = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/learners.json', 'utf8'));
   const activities = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/cpd-activities.json', 'utf8'));
   const statuses = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/claim-item-statuses.json', 'utf8'));
-
-  const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/pre-set-claims.json', 'utf8'));
-  data = data.concat(preSetClaims)
   
   for (let i = 1; i <= quantity; i++) {
     faker.seed(i+10000);
@@ -323,6 +317,10 @@ function generateCPDClaims(quantity, version) {
 
 function generateClaims(quantity, version) {
   let data = [];
+
+  const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/' + version + '/data/pre-set-claims.json', 'utf8'));
+  data = data.concat(preSetClaims)
+
   const TUClaims = generateTUClaims(Math.floor(quantity * 0.96), version);
   const CPDClaims = generateCPDClaims(Math.floor(quantity*0.04), version);
 
