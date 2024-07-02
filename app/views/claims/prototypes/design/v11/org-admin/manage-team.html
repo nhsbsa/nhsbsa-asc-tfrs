@@ -1,0 +1,101 @@
+{% extends "../layouts/claims-main.html" %} 
+
+
+{% set matchName = data.name | inviteName_V11 (data.users) %}
+
+
+{% block pageTitle %} 
+{{ ["Mange team members - ", serviceName] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="../choose-a-claim-type?invite&name&type&resendList">Home
+      </a>
+  </li>
+    <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="#">Manage team members</a>
+    </li>
+  </ol>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    {% if data.invite == "success" %}
+    <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+
+      <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+        <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+      </svg>
+    
+      <div class="moj-banner__message">Invitation to {{matchName}} successfully sent</div>
+    
+    </div>
+    {% elif data.invite == "failure" %}
+
+    <div class="moj-banner moj-banner--warning" role="region" aria-label="Warning">
+
+      <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+        <path d="M13.6,15.4h-2.3v-4.5h2.3V15.4z M13.6,19.8h-2.3v-2.2h2.3V19.8z M0,23.2h25L12.5,2L0,23.2z" />
+      </svg>
+    
+      <div class="moj-banner__message">Invitation {{matchName}} wasn't sent - try again</div>
+    
+    </div>
+
+    {% endif %}
+    
+    <h1 class="govuk-heading-l">Manage team members</h1>
+
+    {% if (data.users | length) < 10 %}
+
+    <p class="govuk-body">You have {{ data.users | length }} team members. You can have up to 10 additional team members.</p>
+
+    <a type="submit" href="invite-user" class="govuk-button" data-module="govuk-button">
+        Invite new team member
+    </a>
+
+    {% else %}
+
+    <p class="govuk-body">You have reached the maximum of 10 team members.</p>
+
+    {% endif %}
+    <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--m">Current team members</caption>
+        <tbody class="govuk-table__body">
+            {% for user in data.users %}
+            {% if user.status == "active" %}
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
+            <td class="govuk-table__cell" width="15%">{{ user.type | userType_V11 }}</td>
+            <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
+            <td class="govuk-table__cell" width="20%"></td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--m">Invited team members</caption>
+        <tbody class="govuk-table__body">
+            {% for user in data.users %}
+            {% if user.status != "active" %}
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
+            <td class="govuk-table__cell" width="15%">{{ user.type | userType_V11 }}</td>
+            <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
+            <td class="govuk-table__cell" width="20%">{% if not (data.resendList | matchResend_V11(user.email)) %}<form action="../reinvite-user?name={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+
+{% endblock %}

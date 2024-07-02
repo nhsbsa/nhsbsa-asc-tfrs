@@ -1,0 +1,31 @@
+[
+    {
+        "familyName": "Gleason",
+        "givenName": "Flossie",
+        "email": "flossie.gleason@homecase.co.uk",
+        "type": "signatory",
+        "status": "active"
+    },
+    {
+        "familyName": "Monahan",
+        "givenName": "Mara",
+        "email": "mara.monahan@homecase.co.uk",
+        "type": "submitter",
+        "status": "expired"
+    },
+    {
+        "familyName": "Upton",
+        "givenName": "Johnny",
+        "email": "johnny.upton@homecase.co.uk",
+        "type": "submitter",
+        "status": "active"
+    },
+    {
+        "familyName": "Connelly",
+        "givenName": "Allan",
+        "email": "allan.connelly@homecase.co.uk",
+        "type": "submitter",
+        "status": "pending"
+    }
+
+]

@@ -1,0 +1,26 @@
+{% extends "../../../../../layouts/main.html" %}
+
+{% block pageTitle %}
+Cannot log in
+{% endblock %}
+
+{% block beforeContent %}
+<a href="../home" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">You cannot log in yet</h1>
+        <p class="govuk-body">You must finish setting up your account before you can log in.</p>
+        <p class="govuk-body">Do this by clicking on the link in the email inviting you to sign up. If the link has expired you can request a new one by <a href="mailto:asc.onboarding@nhsbsa.nhs.uk">emailing</a> the NHS Business Services Authority account support team.</p>
+
+        <form action="../register-organisation/organisation-details" method="post" novalidate>
+            <input type="hidden" name="answers-checked" value="true">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Back
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

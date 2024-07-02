@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Presentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #505a5f;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .footer {
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-top: 1px solid #dddddd;
+            border-radius: 0 0 8px 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a class="govuk-link" href="../index">Back</a> <a class="govuk-link" href="email-expiry">Link expired screen</a>
+
+    <div class="container">
+        <div class="header">
+            <h2>Sign up to claim for adult social care training and development costs</h2>
+            <p>From: sender@example.com</p>
+            <p>To: receiver@example.com</p>
+            <p>Date: 10 April 2024</p>
+        </div>
+        <div class="content">
+            {% if data.userType == 'signatory'%}
+            <p>Dear [first name] [last name],</p>
+            <p>Thank you for agreeing to be an early user of the new <strong>Claim for adult social care training and development</strong> service being developed by the NHS Business Services Authority. </p>
+            <p>This email explains how to create your user account to start using the service.</p>
+            <p>Before you start, be aware that:</p>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>you’ll need to sign a declaration about providing accurate information and not using the service fraudulently</li>
+                <li>initially each care provider will only be able to have one user of the service - this would be you as the expected signatory</li>
+                <li>to limit the amount of new information you’ll need to enter, some information in your account has come from the Adult Social Care Workforce Dataset (ASC-WDS)</li>
+                <li>for additional security, sign in will require two-factor authentication (2FA) using Microsoft Authenticator (<a href="https://www.microsoft.com/en-us/security/mobile-authenticator-app">get help with this)</a></li>
+                <li>you’ll need to have your organisation bank account details to hand</li>
+            </ul>
+            <h3>Next steps</h3>
+            <p><a class="govuk-link" href="verify-details">Create your user account</a>. This link will expire in 24 hours.</p>
+            <p><strong>Do not share this link with anyone else. Only you will be able to create an account. You must not share user accounts but in due course you will be able to add additional users.</strong></p>
+            <p>If you do not think you are the right person to sign the legally binding declaration on behalf of your organisation please contact us at [email] before continuing.</p>
+            <p>We look forward to working with you.</p>
+            <p>[Name]<br>[Position]<br>NHS Business Services Authority</p>
+            {% else %}
+            <p>Dear [first name] [last name],</p>
+            <p>Thank you for agreeing to be an early user of the new <strong>Claim for adult social care training and development</strong> service being developed by the NHS Business Services Authority. </p>
+            <p>This email explains how to create your user account to start using the service.</p>
+            <p>Before you start, be aware that:</p>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>you’ll need to sign a declaration about providing accurate information and not using the service fraudulently</li>
+                <li>initially each care provider will only be able to have one user of the service - this would be you as the expected signatory</li>
+                <li>to limit the amount of new information you’ll need to enter, some information in your account has come from the Adult Social Care Workforce Dataset (ASC-WDS)</li>
+                <li>for additional security, sign in will require two-factor authentication (2FA) using Microsoft Authenticator (<a href="https://www.microsoft.com/en-us/security/mobile-authenticator-app">get help with this)</a></li>
+                <li>you’ll need to have your organisation bank account details to hand</li>
+            </ul>
+            <h3>Next steps</h3>
+            <p><a class="govuk-link" href="verify-details">Create your user account</a>. This link will expire in 24 hours.</p>
+            <p><strong>Do not share this link with anyone else. Only you will be able to create an account. You must not share user accounts but in due course you will be able to add additional users.</strong></p>
+            <p>If you do not think you are the right person to sign the legally binding declaration on behalf of your organisation please contact us at [email] before continuing.</p>
+            <p>We look forward to working with you.</p>
+            <p>[Name]<br>[Position]<br>NHS Business Services Authority</p>
+            {% endif %}"
+        </div>
+        <div class="footer">
+            <p>This is the footer of your email.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
