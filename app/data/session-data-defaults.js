@@ -1,9 +1,9 @@
 module.exports = {
     "versionHistory": {
-        "claimsCurrent": "v10",
+        "claimsCurrent": "v11",
         "claimVersions": [
             {
-                "versionNo": "10",
+                "versionNo": "11",
                 "status": ["design"],
                 "tested": "TBC",
                 "created": [
@@ -17,8 +17,22 @@ module.exports = {
                 ]
             },
             {
+                "versionNo": "10",
+                "status": ["UR"],
+                "tested": "TBC",
+                "created": [
+                    "TBC"
+                ],
+                "aims": [
+                    "TBC"
+                ],
+                "learnt": [
+                    "TBC"
+                ]
+            },
+            {
                 "versionNo": "9",
-                "status": ["design", "dev"],
+                "status": ["dev"],
                 "tested": "TBC",
                 "created": [
                     "added error states to the account creation flow",
@@ -29,7 +43,7 @@ module.exports = {
                     "remove started columns from claims tables and added claim type"
                 ],
                 "aims": [
-                    "TBC - changes so far in this version have been made to thing that can't be affected by UR feedback due to delivery committments"
+                    "TBC"
                 ],
                 "learnt": [
                     "TBC"
@@ -37,7 +51,7 @@ module.exports = {
             },
             {
                 "versionNo": "8",
-                "status": ["dev", "UR"],
+                "status": ["dev"],
                 "tested": "Account creation (Signatory) - w/c 8 April 2024, Manage and start claims (TU 100) 6 May 2024",
                 "created": [
                     "account creation journey for the signatory that will be invited to the service based on minimal tech effort process flow",

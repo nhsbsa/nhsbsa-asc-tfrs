@@ -1,0 +1,41 @@
+<h2 class="govuk-heading-m" id="learner">Learner</h2>
+<dl class="govuk-summary-list">
+  {% if not claim.learner %}
+  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =="missing" %}
+  <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="learner-error">
+      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a learner</p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-key--error {% endif %}">
+      Names
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add learner</a>
+    </dd>
+  </div>
+  {% else %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Name
+    </dt>
+    <dd class="govuk-summary-list__value">
+      <p class="govuk-body">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</p>
+      <p class="govuk-body">{{ claim.learner.id }}</p>
+      {% if data.fundingPot == "CPD" and claim.learner.cpdBudget != null and claim.learner.cpdBudget != -1 and (claim.status == "not-yet-submitted" or claim.status == "new")%}
+        <p class="govuk-body">Budget available to learner: £{{ claim.learner.id | availableAmount_V11(claim.learner.cpdBudget, data.claims) }}</p>
+        <p class="govuk-body">Pending claims amount: £{{ claim.learner.id | pendingAmount_V11(data.claims) }}</p>
+        <p class="govuk-body">Budget remaining (not including pending): £{{ claim.learner.cpdBudget }}</p>
+      {% endif %}
+    </dd>
+    {% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType != "40"%}
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Change<span
+          class="govuk-visually-hidden"> learner</span></a>
+    </dd>
+    {% endif %}
+  </div>
+  {% endif %}
+</dl>

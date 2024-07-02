@@ -1,0 +1,38 @@
+{% extends "../layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{{ ["Claim submitted - Claim: ", data.id] | join }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+                Claim submitted
+            </h1>
+            <div class="govuk-panel__body">
+                Your claim number
+                <br><strong>{{ data.id }}</strong>
+            </div>
+        </div>
+        <h2 class="govuk-heading-m">What happens next</h2>
+        <p class="govuk-body">
+            We will process your claim as quickly as we can, in accordance with scheme rules.
+        </p>
+        <div class="govuk-inset-text">
+            It usually takes around 2 weeks for the claim to be paid. In busy periods it can take up to 6 weeks.
+            <br><br>
+            Please do not contact us to ask about payments until at least 6 weeks after submission.
+        </div>
+        <p class="govuk-body">
+            You can check the status of your claim from the manage claims screen.
+        </p>
+        <a class="govuk-button" data-module="govuk-button" href="../manage-claims-home?fundingPot={{data.fundingPot}}">
+            Manage claims
+        </a>
+    </div>
+</div>
+
+{% endblock %}

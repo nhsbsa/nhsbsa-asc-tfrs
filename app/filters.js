@@ -15,6 +15,7 @@ require('../app/views/claims/prototypes/design/v7/filters/filters.js')
 require('../app/views/claims/prototypes/design/v8/filters/filters.js')
 require('../app/views/claims/prototypes/design/v9/filters/filters.js')
 require('../app/views/claims/prototypes/design/v10/filters/filters.js')
+require('../app/views/claims/prototypes/design/v11/filters/filters.js')
 
 // Add your processing filters here
 require('../app/views/processing/prototypes/design/v1/filters/filters.js')

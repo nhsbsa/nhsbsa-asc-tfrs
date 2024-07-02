@@ -1,0 +1,40 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim_V11(data.claims) %}
+
+{% block pageTitle %}
+ASC-WDS account not up to date
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">Your Adult Social Care Workforce Data Set (ASC-WDS) account is not up-to-date</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-visually-hidden">Warning</span>
+                The <a href="https://www.skillsforcare.org.uk/Adult-Social-Care-Workforce-Data/Adult-Social-Care-Workforce-Data-Set/Adult-Social-Care-Workforce-Data-Set.aspx">ASC-WDS</a> account for your organisation is not currently up-to-date. This means that you cannot currently submit your claim.
+            </strong>
+        </div>
+
+        <p class="govuk-body">
+            Once your ASC-WDS account is up-to-date, you can return and submit the claim.
+        </p>
+        <h2 class="govuk-heading-m">If you need support with your ASC-WDS account:</h2>
+        <div class="govuk-inset-text">
+            <p class="govuk-body">Use the <a href="https://skillsforcare.zohodesk.eu/portal/en/home">ASC-WDS help centre</a></p>
+            <p class="govuk-body"></p>Contact <a href="https://asc-wds.skillsforcare.org.uk/contact-us-or-leave-feedback">Skills for Care</a></p>
+        </div>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <a type="submit" class="govuk-button" href="claim-details?id={{data.id}}">
+            Go back to claim
+        </a>
+    </div>
+</div>
+
+{% endblock %}
