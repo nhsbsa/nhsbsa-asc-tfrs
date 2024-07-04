@@ -743,8 +743,7 @@ router.post('/declaration-confirmation', function (req, res) {
   }
 });
 
-
-router.post('/invite-user', function (req, res) {
+router.post('/check-user', function (req, res) {
   delete req.session.data.submitError
   delete req.session.data.name
   delete req.session.data.invite
@@ -755,6 +754,21 @@ router.post('/invite-user', function (req, res) {
   const submitError = checkUserForm(familyName, givenName, email, req.session.data.users)
 
   if (submitError.userValid) {
+    res.redirect('org-admin/confirm-user-details')
+  } else {
+    req.session.data.submitError = submitError
+    res.redirect('org-admin/user-details')
+  }
+});
+
+router.post('/invite-user', function (req, res) {
+  delete req.session.data.submitError
+  delete req.session.data.name
+  delete req.session.data.invite
+  const email = req.session.data.email
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+
     const user = {
       familyName: familyName,
       givenName: givenName,
@@ -771,11 +785,6 @@ router.post('/invite-user', function (req, res) {
     delete req.session.data.submitError
     req.session.data.resendEmail = email
     res.redirect('org-admin/manage-team?invite=success')
-
-  } else {
-    req.session.data.submitError = submitError
-    res.redirect('org-admin/invite-user')
-  }
 });
 
 router.post('/reinvite-user', function (req, res) {
