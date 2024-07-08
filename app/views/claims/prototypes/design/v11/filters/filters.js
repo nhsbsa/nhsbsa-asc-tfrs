@@ -612,3 +612,50 @@ addFilter('inviteName_V11', function (email, users) {
         }
     }
 })
+
+addFilter('expireTime_V10', function (isoDateTime) {
+    const inputDateTime = new Date(isoDateTime);
+    const currentDateTime = new Date();
+    const oneDayInMillis = 24 * 60 * 60 * 1000;
+
+    // Check if the input date-time is within 24 hours of the current date-time
+    if (Math.abs(inputDateTime - currentDateTime) > oneDayInMillis) {
+        // If not, adjust it to the current date-time
+        inputDateTime.setTime(currentDateTime.getTime());
+    }
+
+    // Calculate the date-time 24 hours after the (possibly adjusted) input date-time
+    const futureDateTime = new Date(inputDateTime.getTime() + oneDayInMillis);
+
+    // Format the future date-time
+    const day = futureDateTime.getDate();
+    const month = futureDateTime.toLocaleString('en-GB', { month: 'long' });
+    const year = futureDateTime.getFullYear();
+    const hours = futureDateTime.getHours();
+    const minutes = futureDateTime.getMinutes();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+    const formattedFutureDateTime = `${day} ${month} ${year} at ${formattedHours}:${formattedMinutes}${ampm}`;
+
+    return formattedFutureDateTime;
+})
+
+
+addFilter('countMatchingStatus_V10', function (objectsArray, statusString) {
+    // Initialize a counter to keep track of the matching objects
+    let count = 0;
+
+    // Loop through each object in the array
+    objectsArray.forEach((obj) => {
+        // Check if the status attribute matches the provided string
+        if (obj.status === statusString) {
+            // Increment the counter if there is a match
+            count++;
+        }
+    });
+
+    // Return the final count
+    return count;
+})

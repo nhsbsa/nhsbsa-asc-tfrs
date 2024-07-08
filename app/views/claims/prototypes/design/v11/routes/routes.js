@@ -743,8 +743,7 @@ router.post('/declaration-confirmation', function (req, res) {
   }
 });
 
-
-router.post('/invite-user', function (req, res) {
+router.post('/check-user', function (req, res) {
   delete req.session.data.submitError
   delete req.session.data.name
   delete req.session.data.invite
@@ -755,42 +754,48 @@ router.post('/invite-user', function (req, res) {
   const submitError = checkUserForm(familyName, givenName, email, req.session.data.users)
 
   if (submitError.userValid) {
+    res.redirect('org-admin/confirm-user-details')
+  } else {
+    req.session.data.submitError = submitError
+    res.redirect('org-admin/user-details')
+  }
+});
+
+router.post('/invite-user', function (req, res) {
+  delete req.session.data.submitError
+  delete req.session.data.name
+  delete req.session.data.invite
+  const email = req.session.data.email
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+
     const user = {
       familyName: familyName,
       givenName: givenName,
       email: email,
       type: "submitter",
-      status: "pending"
+      status: "pending",
+      invited: new Date()
     };
     req.session.data.users.push(user)
-
-    if (req.session.data.resendList) {
-      req.session.data.resendList.push(user.email)
-    } else {
-      req.session.data.resendList = [user.email]
-    }
 
     delete req.session.data.familyName
     delete req.session.data.givenName
     delete req.session.data.email
     delete req.session.data.submitError
-    req.session.data.name = email
+    req.session.data.resendEmail = email
     res.redirect('org-admin/manage-team?invite=success')
-
-  } else {
-    req.session.data.submitError = submitError
-    res.redirect('org-admin/invite-user')
-  }
 });
 
 router.post('/reinvite-user', function (req, res) {
   req.session.data.invite = "success"
 
 
-  if (req.session.data.resendList) {
-    req.session.data.resendList.push(req.session.data.name)
-  } else {
-    req.session.data.resendList = [req.session.data.name]
+  for (const user of req.session.data.users) {
+    if (req.session.data.resendEmail == user.email) {
+      user.status = "pending"
+      user.invited = new Date()
+    }
   }
 
   res.redirect('org-admin/manage-team')

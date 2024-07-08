@@ -4,28 +4,32 @@
         "givenName": "Flossie",
         "email": "flossie.gleason@homecase.co.uk",
         "type": "signatory",
-        "status": "active"
+        "status": "active",
+        "invited": "2023-06-21T07:31:33.123Z"
     },
     {
         "familyName": "Monahan",
         "givenName": "Mara",
         "email": "mara.monahan@homecase.co.uk",
         "type": "submitter",
-        "status": "expired"
+        "status": "expired",
+        "invited": "2023-06-21T07:31:33.123Z"
     },
     {
         "familyName": "Upton",
         "givenName": "Johnny",
         "email": "johnny.upton@homecase.co.uk",
         "type": "submitter",
-        "status": "active"
+        "status": "active",
+        "invited": "2023-06-21T07:31:33.123Z"
     },
     {
         "familyName": "Connelly",
         "givenName": "Allan",
         "email": "allan.connelly@homecase.co.uk",
         "type": "submitter",
-        "status": "pending"
+        "status": "pending",
+        "invited": "2024-07-01T07:31:33.123Z"
     }
 
 ]
