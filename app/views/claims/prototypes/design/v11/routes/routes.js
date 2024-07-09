@@ -762,29 +762,34 @@ router.post('/check-user', function (req, res) {
 });
 
 router.post('/invite-user', function (req, res) {
-  delete req.session.data.submitError
+  delete req.session.data.checkBoxSubmitError
   delete req.session.data.name
   delete req.session.data.invite
+  
   const email = req.session.data.email
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
 
+  const confirmationChecked = req.session.data.confirmation
+
+  req.session.data.resendEmail = email
+  if (confirmationChecked != null) {
     const user = {
-      familyName: familyName,
-      givenName: givenName,
-      email: email,
-      type: "submitter",
-      status: "pending",
-      invited: new Date()
+        familyName: familyName,
+        givenName: givenName,
+        email: email,
+        type: "submitter",
+        status: "pending",
+        invited: new Date()
     };
     req.session.data.users.push(user)
-
     delete req.session.data.familyName
     delete req.session.data.givenName
     delete req.session.data.email
-    delete req.session.data.submitError
-    req.session.data.resendEmail = email
     res.redirect('org-admin/manage-team?invite=success')
+  } else {
+    res.redirect('org-admin/confirm-user-details?checkBoxSubmitError=true')
+  }
 });
 
 router.post('/reinvite-user', function (req, res) {
