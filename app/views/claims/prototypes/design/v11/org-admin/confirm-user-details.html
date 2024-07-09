@@ -11,10 +11,10 @@ Check signatory details - Register an organisation
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <span class="govuk-caption-l">Invite a user</span>
-        <h1 class="govuk-heading-l">Check user details are correct</h1>
-        <p class="govuk-body">Check this information is correct before sending the invitation.</p>
-        <p class="govuk-body">When you send this invitation, the user will receive an email from [email address] so they can finish setting up their account. The link will invitation link in the email will expire in 24 hours.</p>
+        <span class="govuk-caption-l">Invite new team member</span>
+        <h1 class="govuk-heading-l">Check details are correct</h1>
+        <p class="govuk-body">When you send this invitation, the team member will receive an email from [email address] so they can finish setting up their account. The invitation link in the email will expire in 24 hours.</p>
+        <p class="govuk-body">Some emails might not arrive straight away. You can resend the email after 24 hours if necessary.</p>
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
               <h2 class="govuk-summary-card__title">
@@ -55,12 +55,46 @@ Check signatory details - Register an organisation
                 </dl>
             </div>
           </div>
-        <form action="../invite-user" method="post" novalidate>
-            <input type="hidden" name="answers-checked" value="true">
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-                Confirm and send invite
-            </button>
-        </form>
+
+
+            <div class="govuk-warning-text">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-visually-hidden">Warning</span>
+                    <p><strong>I declare that the team member I'm adding is aware of their need to make accurate and complete claims as set out in the grant determination letter. I am happy to delegate my authority to them to make claims on behalf of my organisation.</strong></p>
+                </strong>
+            </div>
+
+
+            <form action="../invite-user" method="post" novalidate>
+                <div class="govuk-button-group {% if data.submitError %} govuk-form-group--error {% endif %}"
+                    id="declare-checkbox">
+                    <fieldset class="govuk-fieldset" aria-describedby="{% if data.submitError %} declare-error {% endif %}">
+                        {% if data.submitError %}
+                        <p id="declare-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span> You must confirm you understand before
+                            submitting
+                        </p>
+                        {% endif %}
+                        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                            <div class="govuk-checkboxes__item">
+                                <input class="govuk-checkboxes__input" id="confirmation" name="confirmation" type="checkbox"
+                                    value="confirmation">
+                                <label class="govuk-label govuk-checkboxes__label" for="confirmation">
+                                    I confirm that I understand and accept this declaration.
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="govuk-button-group">
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Confirm and send invite
+                    </button>
+                    <a class="govuk-link govuk-link--no-visited-state"
+                        href="manage-team">Cancel</a>
+                </div>
+            </form>
     </div>
 </div>
 

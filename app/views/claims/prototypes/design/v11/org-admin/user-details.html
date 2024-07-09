@@ -22,9 +22,9 @@
       </div>
     </div>
     {% endif %}
-    <span class="govuk-caption-l">Invite a user</span>
-    <h1 class="govuk-heading-l">User details</h1>
-    <p class="govuk-body">Input the details of the user you would like to invite.</p>
+    <span class="govuk-caption-l">Invite new team member</span>
+    <h1 class="govuk-heading-l">Enter contact details</h1>
+    <p class="govuk-body">Enter the details of the team member you would like to invite. They will be able to add and manage claims.</p>
     <form action="../check-user" method="post" novalidate>
       <div
         class="govuk-form-group {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
@@ -64,7 +64,7 @@
           Email address
         </label>
         <div id="email-hint" class="govuk-hint">
-          We’ll only use this to send the invitation to the service
+          We’ll only use this to send the invitation
         </div>
         {% if data.submitError.userValid != null and not data.submitError.userValid and
           (data.submitError.email == 'missing' or data.submitError.email == 'invalid' or data.submitError.email == 'match')  %}
