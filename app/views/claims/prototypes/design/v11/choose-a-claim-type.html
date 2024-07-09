@@ -19,9 +19,9 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <h1 class="govuk-heading-l">Claim for adult social care training and development</h1>
+    <h1 class="govuk-heading-l">Manage claims or start a new claim</h1>
 
-    <h2 class="govuk-heading-m">Manage claims</h2>
+    <!--<h2 class="govuk-heading-m">Manage claims</h2>-->
 
     <ul class="homepage-services-and-info__list">
 
@@ -30,7 +30,7 @@
                 <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
                     <a class="govuk-link chevron-card__link" data-track-label="manage-tu-claims" href="manage-claims-home?fundingPot=TU">{{ "TU" | potName_V7 }}</a>
                 </h3>
-                <p class="govuk-body chevron-card__description">Manage claims, or start a new claim, for {{ "TU" | potName_V7 }}.</p>
+                <p class="govuk-body chevron-card__description">This is for staff who provide direct care and are not registered with a professional body, as well as registered and aspiring managers.</p>
             </div>
         </li>
 
@@ -39,13 +39,13 @@
                 <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
                     <a class="govuk-link chevron-card__link" data-track-label="manage-cpd-claims" href="manage-claims-home?fundingPot=CPD">{{ "CPD" | potName_V7 }}</a>
                 </h3>
-                <p class="govuk-body chevron-card__description">Manage claims, or start a new claim, for {{ "CPD" | potName_V7 }}.</p>
+                <p class="govuk-body chevron-card__description">This is for nurses and allied health professionals to support their professional revalidation.</p>
             </div>
         </li>
 
     </ul>
 
-    {% if data.userType == "signatory" %}
+    <!--{% if data.userType == "signatory" %}
     <div class="govuk-!-padding-bottom-5"></div>
 
     <h2 class="govuk-heading-m">Manage organisation account</h2>
@@ -56,7 +56,7 @@
         </li>
       </ul>
 
-      {% endif %}
+      {% endif %}-->
 
   </div>
 </div>
