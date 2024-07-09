@@ -92,8 +92,7 @@ Check signatory details - Register an organisation
                     <fieldset class="govuk-fieldset" aria-describedby="{% if data.checkBoxSubmitError %} declare-error {% endif %}">
                         {% if data.checkBoxSubmitError %}
                         <p id="declare-error" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span> You must confirm you understand before
-                            submitting
+                            <span class="govuk-visually-hidden">Error:</span> You must confirm you understand and accept before continuing.
                         </p>
                         {% endif %}
                         <div class="govuk-checkboxes" data-module="govuk-checkboxes">
