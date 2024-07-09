@@ -27,7 +27,7 @@
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and  data.submitError.completionDate == "invalid" %}
   <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
     <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
-      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Completion date must be after the start date </p>
+      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Completion date must be on or after the start date </p>
     </div>
   </div>
   {% endif %}
