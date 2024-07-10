@@ -29,7 +29,7 @@ router.use('/processing/prototypes/design/v3/', require('./views/processing/prot
 // Add your routes here
 router.use((req, res, next) => {
   // Define keys to exclude from logging
-  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes', 'CPDActivities', 'versionHistory', 'users'];
+  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes', 'CPDActivities', 'versionHistory', 'users', 'processingServiceName'];
 
   // Create a copy of req.session.data with excluded keys removed
   const filteredData = Object.keys(req.session.data)

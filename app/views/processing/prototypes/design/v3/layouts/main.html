@@ -1,7 +1,7 @@
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
 {% block pageTitle %}
-{{ serviceName }} – GOV.UK Prototype Kit
+{{data.processingServiceName}} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block header %}
@@ -19,7 +19,7 @@
       </a>
     </div>
     <div class="govuk-header__content">
-      <a href="#" class="govuk-header__link govuk-header__service-name">{{ serviceName }}
+      <a href="#" class="govuk-header__link govuk-header__service-name">{{data.processingServiceName}}
       </a>
     </div>
   </div>
