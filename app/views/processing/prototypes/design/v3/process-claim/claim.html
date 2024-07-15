@@ -293,7 +293,12 @@
 
             {% if (claim.status == "approved") %}
                 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" style="margin-top: 0px;">
-                <p class="govuk-body">The amount to be reimbursed is £{{ claim | reimbursement_V3 }}.</p>
+                <p class="govuk-body">The maximum reimbursement amount for this training was £{{claim.training.reimbursementAmount}}.</p>
+                <p class="govuk-body">The amount to be reimbursed is £{{ claim | reimbursement_V3 }}. This is 60% of the lower of the:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>maximum reimbursement amount</li>
+                    <li>cost per learner</li>
+                </ul>
             {% endif %}
 
             {% if claim.status == "submitted" %}

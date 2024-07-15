@@ -360,6 +360,7 @@ module.exports = {
                 ]
             }
         ]
-    }
+    }, 
+    "processingServiceName": "Process claim for ASC training and development"
 }
 
