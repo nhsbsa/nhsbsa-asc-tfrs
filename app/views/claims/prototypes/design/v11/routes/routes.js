@@ -228,7 +228,15 @@ router.post('/add-activity', function (req, res) {
       res.redirect('claim/claim-details' + '?id=' + claimID)
     }
   }
+});
 
+router.get('/new-claim', function (req, res) {
+  if (req.session.data.fundingPot == "TU") {
+    res.redirect('claims/prototypes/design/v11/claim/select-training')
+  } else if (req.session.data.fundingPot == "CPD") {
+    const claimID = newCPDClaim(req)
+    res.redirect('claims/prototypes/design/v11/claim/claim-details' + '?id=' + claimID )
+  }
 });
 
 router.post('/track-course', function (req, res) {
@@ -253,7 +261,7 @@ router.post('/track-course', function (req, res) {
   }
 });
 
-function newCPDClaim(req, activityType) {
+function newCPDClaim(req) {
   let claim = {};
   const d = new Date();
   const dStr = d.toISOString();
@@ -263,7 +271,7 @@ function newCPDClaim(req, activityType) {
     fundingType: "CPD",
     claimType: null,
     learner: null,
-    categoryName: activityType,
+    categoryName: null,
     description: null,
     startDate: null,
     status: "new",
@@ -839,15 +847,6 @@ router.get('/clear-learner', function (req, res) {
       c.learner = null
       res.redirect('claim/claim-details' + '?id=' + claimID)
     }
-  }
-});
-
-router.get('/new-claim', function (req, res) {
-  let claimID = req.session.data.id
-  if (req.session.data.fundingPot == "TU") {
-    res.redirect('claim/select-training')
-  } else if (req.session.data.fundingPot == "CPD") {
-    res.redirect('claim/claim-details' + '?id=' + claimID)
   }
 });
 
