@@ -831,9 +831,12 @@ router.post('/cpd-eligibility', function (req, res) {
           }
           console.log(c.learner)
           res.redirect('claim/claim-details' + '?id=' + claimID)
-        } else {
+        } else if (learnerEligible == "no") {
           // redirect to learner isn't able to be added to claim view
           res.redirect('claim/cpd-ineligible' + '?id=' + claimID)
+        } else if (learnerEligible == "unsure") {
+          // redirect to need to find out if learner is eligible
+          res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID)
         }
       }
     }

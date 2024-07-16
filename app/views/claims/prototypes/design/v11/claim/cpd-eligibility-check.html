@@ -27,8 +27,7 @@
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
             <li>
-              <a href="#check-error">Select whether this learner is eligible for revalidation funding
-                course</a>
+              <a href="#check-error">Select whether this learner is registered with the body</a>
             </li>
           </ul>
         </div>
@@ -42,12 +41,12 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
           <h1 class="govuk-fieldset__heading">
-            Is this learner eligible for revalidation funding?
+            Is this learner registered with the body?
           </h1>
         </legend>
         {% if data.submitError != null and data.submitError %}
         <p id="check-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> Select whether this learner is eligible for revalidation funding
+          <span class="govuk-visually-hidden">Error:</span>Select whether this learner is registered with the body
         </p>
         {% endif %}
         <div class="govuk-radios" data-module="govuk-radios">
@@ -61,6 +60,12 @@
             <input class="govuk-radios__input" id="eligibility-2" name="eligibility" type="radio" value="no">
             <label class="govuk-label govuk-radios__label" for="eligibility-2">
               No
+            </label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="eligibility-3" name="eligibility" type="radio" value="unsure">
+            <label class="govuk-label govuk-radios__label" for="eligibility-3">
+              Don't know
             </label>
           </div>
         </div>
