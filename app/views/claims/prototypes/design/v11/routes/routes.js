@@ -794,17 +794,13 @@ router.post('/invite-user', function (req, res) {
 
 router.post('/reinvite-user', function (req, res) {
   req.session.data.invite = "success"
-
-
   for (const user of req.session.data.users) {
     if (req.session.data.resendEmail == user.email) {
       user.status = "pending"
       user.invited = new Date()
     }
   }
-
   res.redirect('org-admin/manage-team')
-
 });
 
 router.post('/cpd-eligibility', function (req, res) {
@@ -843,6 +839,15 @@ router.get('/clear-learner', function (req, res) {
       c.learner = null
       res.redirect('claim/claim-details' + '?id=' + claimID)
     }
+  }
+});
+
+router.get('/new-claim', function (req, res) {
+  let claimID = req.session.data.id
+  if (req.session.data.fundingPot == "TU") {
+    res.redirect('claim/select-training')
+  } else if (req.session.data.fundingPot == "CPD") {
+    res.redirect('claim/claim-details' + '?id=' + claimID)
   }
 });
 
