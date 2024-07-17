@@ -1,15 +1,6 @@
 <h2 class="govuk-heading-m" id="activity">Activity</h2>
 <dl class="govuk-summary-list">
 
-  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-    <dt class="govuk-summary-list__key">
-      Type
-    </dt>
-    <dd class="govuk-summary-list__value">
-      {{ claim.categoryName }}<br>
-    </dd>
-  </div>
-
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.description =="missing" %}
   <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
     <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="description-error">
