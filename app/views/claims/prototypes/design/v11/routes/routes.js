@@ -477,7 +477,7 @@ router.post('/add-learner', function (req, res) {
         }
       } else if (claimType == "CPD") {
         c.learner = learner
-        res.redirect('claim/cpd-eligibility-check' + '?id=' + claimID)
+        res.redirect('claim/cpd-eligibility-check-one' + '?id=' + claimID)
 
       }
     }
@@ -712,7 +712,7 @@ router.post('/create-learner', function (req, res) {
       delete req.session.data.nationalInsuranceNumber
       delete req.session.data.learnerInput
       if (req.session.data.fundingPot == "CPD") {
-        res.redirect('claim/cpd-eligibility-check' + '?id=' + claimID)
+        res.redirect('claim/cpd-eligibility-check-one' + '?id=' + claimID)
       } else if (req.session.data.fundingPot == "TU") {
         res.redirect('claim/claim-details' + '?id=' + claimID)
       }
@@ -813,34 +813,84 @@ router.post('/reinvite-user', function (req, res) {
 
 router.post('/cpd-eligibility', function (req, res) {
   var claimID = req.session.data.id
-  const learnerEligible = req.session.data.eligibility
+  var checkOne = req.session.data.eligibilityCheckOne
+  var checkTwo = req.session.data.eligibilityCheckTwo
+  var checkThree = req.session.data.eligibilityCheckThree
 
-  delete req.session.data.eligibility
-  delete req.session.data.submitError
-
-  if (learnerEligible == null) {
-    req.session.data.submitError = true
-    res.redirect('claim/cpd-eligibility-check?id=' + claimID)
-  } else {
-    for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        if (learnerEligible == "yes") {
-          // check if learner already has a budget, if not set to 500
-          if (c.learner.cpdBudget == -1 | c.learner.cpdBudget == null) {
-            c.learner.cpdBudget = 500
+  if (req.session.data.question == "one") {
+    if (checkOne == null) {
+      req.session.data.submitError = true
+      res.redirect('claim/cpd-eligibility-check-one?id=' + claimID)
+    } else {
+      for (const c of req.session.data.claims) {
+        if (claimID == c.claimID) {
+          if (checkOne == "yes") {
+            res.redirect('claim/cpd-eligibility-check-two?id=' + claimID)
+          } else if (checkOne == "no") {
+            // redirect to learner isn't able to be added to claim view
+            res.redirect('claim/cpd-ineligible' + '?id=' + claimID)
+          } else if (checkOne == "unsure") {
+            // redirect to need to find out if learner is eligible
+            res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID)
           }
-          console.log(c.learner)
-          res.redirect('claim/claim-details' + '?id=' + claimID)
-        } else if (learnerEligible == "no") {
-          // redirect to learner isn't able to be added to claim view
-          res.redirect('claim/cpd-ineligible' + '?id=' + claimID)
-        } else if (learnerEligible == "unsure") {
-          // redirect to need to find out if learner is eligible
-          res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID)
         }
       }
     }
   }
+
+  if (req.session.data.question == "two") {
+    if (checkTwo == null) {
+      req.session.data.submitError = true
+      res.redirect('claim/cpd-eligibility-check-two?id=' + claimID)
+    } else {
+      for (const c of req.session.data.claims) {
+        if (claimID == c.claimID) {
+          if (checkTwo == "yes") {
+            res.redirect('claim/cpd-eligibility-check-three?id=' + claimID)
+          } else if (checkTwo == "no") {
+            // redirect to learner isn't able to be added to claim view
+            res.redirect('claim/cpd-ineligible' + '?id=' + claimID)
+          } else if (checkTwo == "unsure") {
+            // redirect to need to find out if learner is eligible
+            res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID)
+          }
+        }
+      }
+    }
+  }
+
+  if (req.session.data.question == "three") {
+    if (checkThree == null) {
+      req.session.data.submitError = true
+      res.redirect('claim/cpd-eligibility-check-three?id=' + claimID)
+    } else {
+      for (const c of req.session.data.claims) {
+        if (claimID == c.claimID) {
+          if (checkThree == "yes") {
+            // check if learner already has a budget, if not set to 500
+            if (c.learner.cpdBudget == -1 | c.learner.cpdBudget == null) {
+              c.learner.cpdBudget = 500
+            }
+            console.log(c.learner)
+            res.redirect('claim/claim-details' + '?id=' + claimID)
+          } else if (checkThree == "no") {
+            // redirect to learner isn't able to be added to claim view
+            res.redirect('claim/cpd-ineligible' + '?id=' + claimID)
+          } else if (checkThree == "unsure") {
+            // redirect to need to find out if learner is eligible
+            res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID)
+          }
+        }
+      }
+    }
+  }
+
+  delete req.session.data.eligibilityCheckOne
+  delete req.session.data.eligibilityCheckTwo
+  delete req.session.data.eligibilityCheckThree
+  delete req.session.data.submitError
+  delete req.session.data.question
+
 });
 
 router.get('/clear-learner', function (req, res) {

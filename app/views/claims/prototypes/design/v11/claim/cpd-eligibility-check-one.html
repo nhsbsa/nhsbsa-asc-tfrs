@@ -34,7 +34,7 @@
       </div>
     </div>
     {% endif %}
-    <form action="../cpd-eligibility" method="post" novalidate>
+    <form action="../cpd-eligibility?question=one" method="post" novalidate>
       <div
         class="govuk-form-group {% if data.submitError != null and data.submitError %} govuk-form-group--error {% endif %}"">
         <fieldset class=" govuk-fieldset" aria-describedby="isACourse-hint">
@@ -51,20 +51,20 @@
         {% endif %}
         <div class="govuk-radios" data-module="govuk-radios">
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="eligibility" name="eligibility" type="radio" value="yes">
-            <label class="govuk-label govuk-radios__label" for="eligibility">
+            <input class="govuk-radios__input" id="question-one" name="eligibilityCheckOne" type="radio" value="yes">
+            <label class="govuk-label govuk-radios__label" for="question-one">
               Yes
             </label>
           </div>
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="eligibility-2" name="eligibility" type="radio" value="no">
-            <label class="govuk-label govuk-radios__label" for="eligibility-2">
+            <input class="govuk-radios__input" id="question-one-2" name="eligibilityCheckOne" type="radio" value="no">
+            <label class="govuk-label govuk-radios__label" for="question-one-2">
               No
             </label>
           </div>
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="eligibility-3" name="eligibility" type="radio" value="unsure">
-            <label class="govuk-label govuk-radios__label" for="eligibility-3">
+            <input class="govuk-radios__input" id="question-one-3" name="eligibilityCheckOne" type="radio" value="unsure">
+            <label class="govuk-label govuk-radios__label" for="question-one-3">
               Don't know
             </label>
           </div>
