@@ -816,12 +816,13 @@ router.post('/cpd-eligibility', function (req, res) {
   var checkOne = req.session.data.eligibilityCheckOne
   var checkTwo = req.session.data.eligibilityCheckTwo
   var checkThree = req.session.data.eligibilityCheckThree
+  var question = req.session.data.question
 
   delete req.session.data.submitErrorOne
   delete req.session.data.submitErrorTwo
   delete req.session.data.submitErrorThree
 
-  if (req.session.data.question == "one") {
+  if (question == "one") {
     if (checkOne == null) {
       req.session.data.submitErrorOne = true
       res.redirect('claim/cpd-eligibility-check-one?id=' + claimID)
@@ -832,17 +833,17 @@ router.post('/cpd-eligibility', function (req, res) {
             res.redirect('claim/cpd-eligibility-check-two?id=' + claimID)
           } else if (checkOne == "no") {
             // redirect to learner isn't able to be added to claim view
-            res.redirect('claim/cpd-ineligible' + '?id=' + claimID)
+            res.redirect('claim/cpd-ineligible' + '?id=' + claimID + '&question=' + question)
           } else if (checkOne == "unsure") {
             // redirect to need to find out if learner is eligible
-            res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID)
+            res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID + '&question=' + question)
           }
         }
       }
     }
   }
 
-  if (req.session.data.question == "two") {
+  if (question == "two") {
     if (checkTwo == null) {
       req.session.data.submitErrorTwo = true
       res.redirect('claim/cpd-eligibility-check-two?id=' + claimID)
@@ -853,17 +854,17 @@ router.post('/cpd-eligibility', function (req, res) {
             res.redirect('claim/cpd-eligibility-check-three?id=' + claimID)
           } else if (checkTwo == "no") {
             // redirect to learner isn't able to be added to claim view
-            res.redirect('claim/cpd-ineligible' + '?id=' + claimID)
+            res.redirect('claim/cpd-ineligible' + '?id=' + claimID + '&question=' + question)
           } else if (checkTwo == "unsure") {
             // redirect to need to find out if learner is eligible
-            res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID)
+            res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID + '&question=' + question)
           }
         }
       }
     }
   }
 
-  if (req.session.data.question == "three") {
+  if (question == "three") {
     if (checkThree == null) {
       req.session.data.submitErrorThree = true
       res.redirect('claim/cpd-eligibility-check-three?id=' + claimID)
@@ -879,10 +880,10 @@ router.post('/cpd-eligibility', function (req, res) {
             res.redirect('claim/claim-details' + '?id=' + claimID)
           } else if (checkThree == "no") {
             // redirect to learner isn't able to be added to claim view
-            res.redirect('claim/cpd-ineligible' + '?id=' + claimID)
+            res.redirect('claim/cpd-ineligible' + '?id=' + claimID + '&question=' + question)
           } else if (checkThree == "unsure") {
             // redirect to need to find out if learner is eligible
-            res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID)
+            res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID + '&question=' + question)
           }
         }
       }

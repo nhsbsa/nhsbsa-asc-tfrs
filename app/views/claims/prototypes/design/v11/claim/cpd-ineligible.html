@@ -6,7 +6,13 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../claim/cpd-eligibility-check-one.html" class="govuk-back-link">Back</a>
+    {% if data.question != null and data.question == "one" %}
+        <a href="../claim/cpd-eligibility-check-one" class="govuk-back-link">Back</a>
+    {% elif data.question != null and data.question == "two" %}
+        <a href="../claim/cpd-eligibility-check-two" class="govuk-back-link">Back</a>
+    {% elif data.question != null and data.question == "three" %}
+        <a href="../claim/cpd-eligibility-check-three" class="govuk-back-link">Back</a>                
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -22,7 +28,14 @@
             <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
             <strong class="govuk-warning-text__text">
                 <span class="govuk-visually-hidden">Warning</span>
-                This learner is not eligible for revalidation funding.
+                
+                {% if data.question != null and data.question == "one" %}
+                    This learner is not registered with the NMC or HCPC
+                {% elif data.question != null and data.question == "two" %}
+                    This learner does not have one of the required registered roles
+                {% elif data.question != null and data.question == "three" %}
+                    This learner is not employed in their capacity as a registered professional
+                {% endif %}
             </strong>
         </div>
 
