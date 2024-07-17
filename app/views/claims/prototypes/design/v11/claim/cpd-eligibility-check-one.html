@@ -27,7 +27,7 @@
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
             <li>
-              <a href="#check-error">Select whether this learner is registered with the body</a>
+              <a href="#check-error">Select whether this learner is registered with the NMC or HCPC</a>
             </li>
           </ul>
         </div>
@@ -36,17 +36,17 @@
     {% endif %}
     <form action="../cpd-eligibility?question=one" method="post" novalidate>
       <div
-        class="govuk-form-group {% if data.submitErrorOne != null and data.submitErrorOne %} govuk-form-group--error {% endif %}"">
+        class="govuk-form-group {% if data.submitErrorOne != null and data.submitErrorOne %} govuk-form-group--error {% endif %}">
         <fieldset class=" govuk-fieldset" aria-describedby="isACourse-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
           <h1 class="govuk-fieldset__heading">
-            Is this learner registered with the body?
+            Is this learner registered with the NMC or HCPC?
           </h1>
         </legend>
         {% if data.submitErrorOne != null and data.submitErrorOne %}
         <p id="check-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span>Select whether this learner is registered with the body
+          <span class="govuk-visually-hidden">Error:</span>Select whether this learner is registered with the NMC or HCPC
         </p>
         {% endif %}
         <div class="govuk-radios" data-module="govuk-radios">

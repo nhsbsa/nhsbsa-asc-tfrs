@@ -27,7 +27,7 @@
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
             <li>
-              <a href="#check-error">Question 2</a>
+              <a href="#check-error">Select if the learner have one of the following registered roles</a>
             </li>
           </ul>
         </div>
@@ -36,17 +36,23 @@
     {% endif %}
     <form action="../cpd-eligibility?question=two" method="post" novalidate>
       <div
-        class="govuk-form-group {% if data.submitErrorTwo != null and data.submitErrorTwo %} govuk-form-group--error {% endif %}"">
+        class="govuk-form-group {% if data.submitErrorTwo != null and data.submitErrorTwo %} govuk-form-group--error {% endif %}">
         <fieldset class=" govuk-fieldset" aria-describedby="isACourse-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
           <h1 class="govuk-fieldset__heading">
-            Question 2
+            Does the learner have one of the following registered roles?
           </h1>
         </legend>
+
+        <p class="govuk-body-l">Eligibile roles:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Nurse</li>
+          <li>Manager</li>
+        </ul>
         {% if data.submitErrorTwo != null and data.submitErrorTwo %}
         <p id="check-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span>Question 2
+          <span class="govuk-visually-hidden">Error:</span>Select if the learner have one of the following registered roles
         </p>
         {% endif %}
         <div class="govuk-radios" data-module="govuk-radios">
