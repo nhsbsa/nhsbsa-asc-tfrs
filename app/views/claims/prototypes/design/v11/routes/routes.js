@@ -817,9 +817,13 @@ router.post('/cpd-eligibility', function (req, res) {
   var checkTwo = req.session.data.eligibilityCheckTwo
   var checkThree = req.session.data.eligibilityCheckThree
 
+  delete req.session.data.submitErrorOne
+  delete req.session.data.submitErrorTwo
+  delete req.session.data.submitErrorThree
+
   if (req.session.data.question == "one") {
     if (checkOne == null) {
-      req.session.data.submitError = true
+      req.session.data.submitErrorOne = true
       res.redirect('claim/cpd-eligibility-check-one?id=' + claimID)
     } else {
       for (const c of req.session.data.claims) {
@@ -840,7 +844,7 @@ router.post('/cpd-eligibility', function (req, res) {
 
   if (req.session.data.question == "two") {
     if (checkTwo == null) {
-      req.session.data.submitError = true
+      req.session.data.submitErrorTwo = true
       res.redirect('claim/cpd-eligibility-check-two?id=' + claimID)
     } else {
       for (const c of req.session.data.claims) {
@@ -861,7 +865,7 @@ router.post('/cpd-eligibility', function (req, res) {
 
   if (req.session.data.question == "three") {
     if (checkThree == null) {
-      req.session.data.submitError = true
+      req.session.data.submitErrorThree = true
       res.redirect('claim/cpd-eligibility-check-three?id=' + claimID)
     } else {
       for (const c of req.session.data.claims) {
@@ -888,7 +892,6 @@ router.post('/cpd-eligibility', function (req, res) {
   delete req.session.data.eligibilityCheckOne
   delete req.session.data.eligibilityCheckTwo
   delete req.session.data.eligibilityCheckThree
-  delete req.session.data.submitError
   delete req.session.data.question
 
 });
