@@ -41,9 +41,9 @@
           <span class="govuk-visually-hidden">Error:</span> Add a description of the activity
         </p>
         {% endif %}
-        <textarea class="govuk-textarea govuk-js-character-count {% if data.submitError != null and data.submitError %}govuk-textarea--error{% endif %}" id="with-hint" name="withHint" rows="3" aria-describedby="with-hint-info with-hint-hint"
+        <textarea class="govuk-textarea govuk-js-character-count {% if data.submitError != null and data.submitError %}govuk-textarea--error{% endif %}" id="description" name="description" rows="3" aria-describedby="description-info description-hint"
           aria-describedby="more-detail-hint">{%if claim.description != null%}{{claim.description}}{% endif %}</textarea>
-          <div id="with-hint-info" class="govuk-hint govuk-character-count__message">
+          <div id="description-info" class="govuk-hint govuk-character-count__message">
             You can enter up to 200 characters
           </div>
         </div>
