@@ -496,7 +496,7 @@ addFilter('typeTag_V11', function (type) {
     }
 }, { renderAsHtml: true })
 
-addFilter('newClaimLink_V7', function (type) {
+addFilter('newClaimLink_V11', function (type) {
     let claimLink = "#"
     if (type == "TU") {
         claimLink = "claim/select-training"

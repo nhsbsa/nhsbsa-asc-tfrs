@@ -12,13 +12,13 @@
 
 
 {% block beforeContent %}
-<a href="../claim/select-learner?submitError" class="govuk-back-link">Back</a>
+<a href="../claim/cpd-eligibility-check-two?submitErrorThree" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    {% if data.submitError != null and data.submitError %}
+    {% if data.submitErrorThree != null and data.submitErrorThree %}
     <div class="govuk-error-summary" data-module="govuk-error-summary">
       <div role="alert">
         <h2 class="govuk-error-summary__title">
@@ -27,40 +27,46 @@
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
             <li>
-              <a href="#check-error">Select whether this learner is eligible for revalidation funding
-                course</a>
+              <a href="#check-error">Select if the learner employed in their capacity as a registered professional</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
     {% endif %}
-    <form action="../cpd-eligibility" method="post" novalidate>
+    <form action="../cpd-eligibility?question=three" method="post" novalidate>
       <div
-        class="govuk-form-group {% if data.submitError != null and data.submitError %} govuk-form-group--error {% endif %}"">
+        class="govuk-form-group {% if data.submitErrorThree != null and data.submitErrorThree %} govuk-form-group--error {% endif %}">
         <fieldset class=" govuk-fieldset" aria-describedby="isACourse-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
           <h1 class="govuk-fieldset__heading">
-            Is this learner eligible for revalidation funding?
+            Is the learner employed in their capacity as a registered professional?
           </h1>
         </legend>
-        {% if data.submitError != null and data.submitError %}
+        {% if data.submitErrorThree != null and data.submitErrorThree %}
         <p id="check-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> Select whether this learner is eligible for revalidation funding
+          <span class="govuk-visually-hidden">Error:</span>Select if the learner employed in their capacity as a registered professional
         </p>
         {% endif %}
         <div class="govuk-radios" data-module="govuk-radios">
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="eligibility" name="eligibility" type="radio" value="yes">
-            <label class="govuk-label govuk-radios__label" for="eligibility">
+            <input class="govuk-radios__input" id="question-three" name="eligibilityCheckThree" type="radio" value="yes">
+            <label class="govuk-label govuk-radios__label" for="question-three">
               Yes
             </label>
           </div>
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="eligibility-2" name="eligibility" type="radio" value="no">
-            <label class="govuk-label govuk-radios__label" for="eligibility-2">
+            <input class="govuk-radios__input" id="question-three-2" name="eligibilityCheckThree" type="radio" value="no">
+            <label class="govuk-label govuk-radios__label" for="question-three-2">
               No
+            </label>
+          </div>
+          <div class="govuk-radios__divider">or</div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="question-three-3" name="eligibilityCheckThree" type="radio" value="unsure">
+            <label class="govuk-label govuk-radios__label" for="question-three-3">
+              Don't know
             </label>
           </div>
         </div>
