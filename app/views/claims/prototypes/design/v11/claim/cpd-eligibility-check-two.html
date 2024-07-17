@@ -44,17 +44,16 @@
             Does the learner have one of the following registered roles?
           </h1>
         </legend>
-
-        <p class="govuk-body-l">Eligibile roles:</p>
-        <ul class="govuk-list govuk-list--bullet">
-          <li>Nurse</li>
-          <li>Manager</li>
-        </ul>
         {% if data.submitErrorTwo != null and data.submitErrorTwo %}
         <p id="check-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span>Select if the learner have one of the following registered roles
         </p>
         {% endif %}
+        <p class="govuk-body-m">Eligibile roles:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Nurse</li>
+          <li>Manager</li>
+        </ul>
         <div class="govuk-radios" data-module="govuk-radios">
           <div class="govuk-radios__item">
             <input class="govuk-radios__input" id="question-two" name="eligibilityCheckTwo" type="radio" value="yes">
