@@ -659,3 +659,22 @@ addFilter('countMatchingStatus_V10', function (objectsArray, statusString) {
     // Return the final count
     return count;
 })
+
+
+addFilter('75CharacterCount_V11', function (description) {
+
+    let limit = 75
+    if (description.length <= limit) {
+        return description;
+    }
+    let words = description.split(' ');
+    let truncated = words[0];
+
+    for (let i = 1; i < words.length; i++) {
+        if ((truncated + ' ' + words[i]).length > limit) {
+            break;
+        }
+        truncated += ' ' + words[i];
+    }
+    return truncated + "...";
+})
