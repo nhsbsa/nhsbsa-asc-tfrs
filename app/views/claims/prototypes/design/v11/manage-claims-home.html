@@ -27,6 +27,7 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
+    {% if data.fundingPot == "TU" %}
         <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title"
           data-module="govuk-notification-banner">
           <div class="govuk-notification-banner__header">
@@ -44,6 +45,7 @@
             </p>
           </div>
         </div>
+    {% endif %}
     <div class="moj-page-header-actions">
       <div class="moj-page-header-actions__title">
         <span class="govuk-caption-l">{{ data.fundingPot | potName_V11 }}</span>
