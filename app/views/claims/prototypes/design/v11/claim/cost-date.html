@@ -32,15 +32,15 @@
                         </h1>
                     </legend>
                     <p class="govuk-body">This should match up with the date on the payment evidence.</p>
-                    {% if data.fundingPot == "TU" %}
-                        <div class="govuk-warning-text">
-                            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                            <strong class="govuk-warning-text__text">
-                                <span class="govuk-visually-hidden">Warning</span>
-                                You can only claim for training that started and was paid for on or after 1 April 2024.
-                            </strong>
-                        </div>
-                    {% endif %}
+
+                    <div class="govuk-warning-text">
+                        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                        <strong class="govuk-warning-text__text">
+                            <span class="govuk-visually-hidden">Warning</span>
+                                {% if data.fundingPot == "TU" %}You can only claim for training that started and was paid for on or after 1 April 2024.{% elif data.fundingPot == "TU" %}You can only claim for an activity that started and was paid for on or after 1 April 2024.{% endif %}
+                        </strong>
+                    </div>
+                    
                     <div id="start-date-issued-hint" class="govuk-hint">
                         For example, 12 5 2024
                     </div>

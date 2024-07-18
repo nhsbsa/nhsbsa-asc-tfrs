@@ -41,13 +41,13 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
           <h1 class="govuk-fieldset__heading">
-            Is the learner registered with a professional body?
+            Is the learner registered with the NMC or HCPC?
           </h1>
         </legend>
-        <p class="govuk-body">Select whether the learner is registered with the:</p>
+        <p class="govuk-body">Is the learner is registered with the:</p>
         <ul class="govuk-list govuk-list--bullet">
           <li>Nursing and Midwifery Council (NMC) or</li>
-          <li>Health & Care Professions Council (HCPC)</li>
+          <li>Health & Care Professions Council (HCPC)?</li>
         </ul>
         {% if data.submitErrorOne != null and data.submitErrorOne %}
         <p id="check-error" class="govuk-error-message">

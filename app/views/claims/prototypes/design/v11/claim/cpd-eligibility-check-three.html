@@ -41,10 +41,14 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
           <h1 class="govuk-fieldset__heading">
-            Is the learner employed in their capacity as a registered professional?
+            Is the learner required to be a registered professional to do their role?
           </h1>
         </legend>
-        <p class="govuk-body">This means that they that can only do their role because they are a registered professional and would not otherwise have been employed.</p>
+        
+        <div id="more-detail-hint" class="govuk-hint">
+          This means that they that can only do their role because they are a registered professional and would not otherwise have been employed.
+        </div>
+
         {% if data.submitErrorThree != null and data.submitErrorThree %}
         <p id="check-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span>Select whether the learner is employed in their capacity as a registered professional
