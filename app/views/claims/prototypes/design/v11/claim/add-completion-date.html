@@ -26,7 +26,7 @@
             <div class="govuk-form-group {% if data.submitError.dateValid != null and not data.submitError.dateValid %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+                        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
                         <h1 class="govuk-fieldset__heading">
                             Add completion date
                         </h1>

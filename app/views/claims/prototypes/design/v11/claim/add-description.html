@@ -28,7 +28,7 @@
     <form action="../add-description" method="post" class="form">
       <div class="govuk-form-group govuk-character-count {% if data.submitError != null and data.submitError %} govuk-form-group--error {% endif %}" data-module="govuk-character-count" data-maxlength="200">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
+          <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
           <h1 class="govuk-fieldset__heading">
             Add description
           </h1>

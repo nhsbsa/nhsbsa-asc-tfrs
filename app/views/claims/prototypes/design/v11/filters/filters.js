@@ -479,7 +479,7 @@ addFilter('findPair_V11', function (claimID, claims) {
         // Check if the ID is not the same as the existing ID and
         // if the first part of the ID (excluding the last 2 characters) matches the existing ID
         if (id !== claimID && id.slice(0, -2) === claimID.slice(0, -2)) {
-            return id;
+            return claim;
         }
     }
     return null; // Return null if no match is found
@@ -677,4 +677,17 @@ addFilter('75CharacterCount_V11', function (description) {
         truncated += ' ' + words[i];
     }
     return truncated + "...";
+})
+
+
+addFilter('removeClaimSuffix_V11', function (claimID) {
+
+    // Check if the string has at least two characters
+    if (claimID.length < 2) {
+        return ''; // Return an empty string if there are less than two characters
+    }
+
+    // Use the slice method to remove the last two characters
+    return claimID.slice(0, -2);
+
 })

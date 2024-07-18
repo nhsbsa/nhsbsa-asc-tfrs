@@ -14,8 +14,8 @@
     <tbody class="govuk-table__body">
         {% set addHeader = false %}
         {% endif %}
-        <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
-            <td class="govuk-table__header" scope="row"><a class="govuk-link" href="claim/claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a></td>
+        <tr class="govuk-table__row claim-row" id="{{ claim.claimID | removeClaimSuffix_V11 }}">
+            <td class="govuk-table__header" scope="row"><a class="govuk-link" href="claim/claim-details?id={{ claim.claimID }}">{{ claim.claimID | removeClaimSuffix_V11 }}</a></td>
             <td class="govuk-table__cell">{{ claim.description | 75CharacterCount_V11 }}</td>
             <td class="govuk-table__cell" data-sort-value="{{ claim.learner.givenName }} {{ claim.learner.familyName }}">
                 {% if claim.learner %} {{ claim.learner.givenName }} {{ claim.learner.familyName }} {% else %} Not yet added {% endif %}

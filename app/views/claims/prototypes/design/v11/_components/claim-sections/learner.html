@@ -30,7 +30,7 @@
         <p class="govuk-body">Budget remaining (not including pending): £{{ claim.learner.cpdBudget }}</p>
       {% endif %}
     </dd>
-    {% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType != "40"%}
+    {% if (claim.status == "new" or claim.status == "not-yet-submitted")%}
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Change<span
           class="govuk-visually-hidden"> learner</span></a>
