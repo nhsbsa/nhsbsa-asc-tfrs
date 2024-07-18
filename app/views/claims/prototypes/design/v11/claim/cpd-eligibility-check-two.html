@@ -27,7 +27,7 @@
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
             <li>
-              <a href="#check-error">Select if the learner have one of the following registered roles</a>
+              <a href="#check-error">Select whether the learner is in an eligible role</a>
             </li>
           </ul>
         </div>
@@ -41,18 +41,26 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
           <h1 class="govuk-fieldset__heading">
-            Does the learner have one of the following registered roles?
+            Is the learner in an eligible role?
           </h1>
         </legend>
         {% if data.submitErrorTwo != null and data.submitErrorTwo %}
         <p id="check-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span>Select if the learner have one of the following registered roles
+          <span class="govuk-visually-hidden">Error:</span>Select whether the learner is in an eligible role
         </p>
         {% endif %}
-        <p class="govuk-body-m">Eligibile roles:</p>
+        <p class="govuk-body-m">Eligible roles are:</p>
         <ul class="govuk-list govuk-list--bullet">
-          <li>Nurse</li>
-          <li>Manager</li>
+          <li>nurse (permanent or temporary)</li>
+          <li>art therapist</li>
+          <li>drama therapist</li>
+          <li>music therapist</li>
+          <li>dietician</li>
+          <li>occupational therapist</li>
+          <li>orthoptist</li>
+          <li>osteopath</li>
+          <li>physiotherapist</li>
+          <li>speech and language therapist</li>
         </ul>
         <div class="govuk-radios" data-module="govuk-radios">
           <div class="govuk-radios__item">
@@ -71,7 +79,7 @@
           <div class="govuk-radios__item">
             <input class="govuk-radios__input" id="question-two-3" name="eligibilityCheckTwo" type="radio" value="unsure">
             <label class="govuk-label govuk-radios__label" for="question-two-3">
-              Don't know
+              Not sure
             </label>
           </div>
         </div>

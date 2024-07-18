@@ -149,10 +149,15 @@
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% endif %}
     <h2 class="govuk-heading-m">Related content</h2>
-    <p class="govuk-body"><a href="../guidance/help-start-claim" class="govuk-link">Help with starting a new care skills
-        claim</a></p>
-    <p class="govuk-body"><a href="../guidance/evidence-requirements" class="govuk-link">Help with evidence
-        requirements</a></p>
+    {% if data.fundingPot == "TU" %}
+      <p class="govuk-body"><a href="../guidance/help-start-claim" class="govuk-link">Help with starting a new care skills
+          claim</a></p>
+      <p class="govuk-body"><a href="../guidance/evidence-requirements" class="govuk-link">Help with care skills evidence
+          requirements</a></p>
+      {% elif data.fundingPot == "CPD" %}
+        <p class="govuk-body"><a href="./guidance/help-start-claim" class="govuk-link">Help with starting a new revalidation claim</a></p>
+        <p class="govuk-body"><a href="./guidance/evidence-requirements" class="govuk-link">Help with revalidation evidence requirements</a></p>
+      {% endif %}
   </div>
 </div>
 {% endblock %}
