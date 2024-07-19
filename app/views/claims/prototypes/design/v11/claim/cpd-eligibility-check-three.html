@@ -27,7 +27,7 @@
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
             <li>
-              <a href="#check-error">Select if the learner employed in their capacity as a registered professional</a>
+              <a href="#check-error">Select whether the learner is employed in their capacity as a registered professional</a>
             </li>
           </ul>
         </div>
@@ -41,12 +41,17 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <span class="govuk-caption-l">Claim: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
           <h1 class="govuk-fieldset__heading">
-            Is the learner employed in their capacity as a registered professional?
+            Is the learner required to be a registered professional to do their role?
           </h1>
         </legend>
+        
+        <div id="more-detail-hint" class="govuk-hint">
+          This means that they that can only do their role because they are a registered professional and would not otherwise have been employed.
+        </div>
+
         {% if data.submitErrorThree != null and data.submitErrorThree %}
         <p id="check-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span>Select if the learner employed in their capacity as a registered professional
+          <span class="govuk-visually-hidden">Error:</span>Select whether the learner is employed in their capacity as a registered professional
         </p>
         {% endif %}
         <div class="govuk-radios" data-module="govuk-radios">
@@ -66,7 +71,7 @@
           <div class="govuk-radios__item">
             <input class="govuk-radios__input" id="question-three-3" name="eligibilityCheckThree" type="radio" value="unsure">
             <label class="govuk-label govuk-radios__label" for="question-three-3">
-              Don't know
+              Not sure
             </label>
           </div>
         </div>

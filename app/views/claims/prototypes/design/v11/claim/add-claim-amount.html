@@ -37,6 +37,16 @@
                 <div id="cost-hint" class="govuk-hint">
                     This is the cost of the activity that you wish to claim for.
                 </div>
+                {% if data.fundingPot == "CPD" %}
+                    <p>You can only claims for the costs of the activity itself. You cannot claim for supporting costs such as:</p>
+                    <ul class="govuk-list govuk-list--bullet">
+                      <li>backfill for learner time</li>
+                      <li>travel costs</li>
+                      <li>childcare</li>
+                      <li>food and accommodation expenses</li>
+                      <li>equipment (laptops/mobile phones/notepads/pens) </li>
+                    </ul>
+                {% endif %}
                 {% if data.submitError != null and data.submitError %}
                 <p id="cost-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span> Add cost of the activity

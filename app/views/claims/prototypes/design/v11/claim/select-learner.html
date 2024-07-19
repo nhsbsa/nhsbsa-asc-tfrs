@@ -29,7 +29,7 @@
         </div>
         {% endif %}
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
-        <h1 class="govuk-heading-l">Course or qualification learner</h1>
+        <h1 class="govuk-heading-l">{% if data.fundingPot == "TU" %}Course or qualification learner{% elif data.fundingPot == "CPD" %}Learner{% endif %}</h1>
     </div>
 </div>
 <div class="govuk-grid-row">

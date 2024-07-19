@@ -27,7 +27,7 @@
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
             <li>
-              <a href="#check-error">Select whether this learner is registered with the NMC or HCPC</a>
+              <a href="#check-error">Select whether the learner is registered with the NMC or HCPC</a>
             </li>
           </ul>
         </div>
@@ -41,12 +41,17 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <span class="govuk-caption-l">Claim: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
           <h1 class="govuk-fieldset__heading">
-            Is this learner registered with the NMC or HCPC?
+            Is the learner registered with the NMC or HCPC?
           </h1>
         </legend>
+        <p class="govuk-body">Is the learner is registered with the:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>Nursing and Midwifery Council (NMC) or</li>
+          <li>Health & Care Professions Council (HCPC)?</li>
+        </ul>
         {% if data.submitErrorOne != null and data.submitErrorOne %}
         <p id="check-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span>Select whether this learner is registered with the NMC or HCPC
+          <span class="govuk-visually-hidden">Error:</span>Select whether the learner is registered with the NMC or HCPC
         </p>
         {% endif %}
         <div class="govuk-radios" data-module="govuk-radios">
@@ -66,7 +71,7 @@
           <div class="govuk-radios__item">
             <input class="govuk-radios__input" id="question-one-3" name="eligibilityCheckOne" type="radio" value="unsure">
             <label class="govuk-label govuk-radios__label" for="question-one-3">
-              Don't know
+              Not sure
             </label>
           </div>
         </div>

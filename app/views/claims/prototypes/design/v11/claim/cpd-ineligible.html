@@ -20,7 +20,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
-        <h1 class="govuk-heading-l">This learner is ineligible for this funding</h1>
+        <h1 class="govuk-heading-l">Learner is not eligible for this funding</h1>
     </div>
     <div class="govuk-grid-column-two-thirds">
 
@@ -30,16 +30,16 @@
                 <span class="govuk-visually-hidden">Warning</span>
                 
                 {% if data.question != null and data.question == "one" %}
-                    This learner is not registered with the NMC or HCPC
+                    The learner is not registered with the NMC or HCPC
                 {% elif data.question != null and data.question == "two" %}
-                    This learner does not have one of the required registered roles
+                    The learner is not in an eligible role
                 {% elif data.question != null and data.question == "three" %}
-                    This learner is not employed in their capacity as a registered professional
+                    The learner is not employed in their capacity as a registered professional
                 {% endif %}
             </strong>
         </div>
 
-        <p class="govuk-body">You cannot claim revalidation funding for an activity for a ineligible learner. If this is a mistake go back and update your response.</p>
+        <p class="govuk-body">You cannot claim revalidation funding for a learner who is not eligible. If this is a mistake you can go back and update your response.</p>
     </div>
     <div class="govuk-grid-column-two-thirds">
         <a type="submit" class="govuk-button" href="../clear-learner">
