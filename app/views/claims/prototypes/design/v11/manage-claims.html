@@ -14,16 +14,18 @@
             <a class="govuk-breadcrumbs__link" href="choose-a-claim-type">Home
             </a>
         </li>
-            <li class="govuk-breadcrumbs__list-item">
-                <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot={{ data.fundingPot }}">Manage claims ({{ data.fundingPot |
-                    potName_V11
-                    }})
-                </a>
-            </li>
-            <li class="govuk-breadcrumbs__list-item">
-                <a class="govuk-breadcrumbs__link" href="manage-claims?fundingPot={{ data.fundingPot }}&statusID={{ status.id }}">{{ status.name
-                    }} claims</a>
-            </li>
+        <li class="govuk-breadcrumbs__list-item">
+            <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot={{ data.fundingPot }}">Manage claims
+                ({{ data.fundingPot |
+                potName_V11
+                }})
+            </a>
+        </li>
+        <li class="govuk-breadcrumbs__list-item">
+            <a class="govuk-breadcrumbs__link"
+                href="manage-claims?fundingPot={{ data.fundingPot }}&statusID={{ status.id }}">{{ status.name
+                }} claims</a>
+        </li>
     </ol>
 </div>
 {% endblock %}
@@ -40,37 +42,40 @@
 <div class="govuk-grid-row">
     {% if numClaims == 0 %}
     <div class="govuk-grid-column-full">
-            <div class="govuk-warning-text">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                    <span class="govuk-visually-hidden">Warning</span>
-                    There are not currently any {{ status.name | toLowerCase }} claims.
-                </strong>
+        <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-visually-hidden">Warning</span>
+                There are not currently any {{ status.name | toLowerCase }} claims.
+            </strong>
+        </div>
+    </div>
+    {% else %}
+    <div class="govuk-grid-column-full">
+
+        {% if data.fundingPot == "TU" %}
+        <details class="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    Understand claim types
+                </span>
+            </summary>
+            <div class="govuk-details__text">
+                <p class="govuk-body"><strong class="govuk-tag govuk-tag--orange">100</strong> claims &ndash; single
+                    reimbursement on training completion</p>
+                <p class="govuk-body"><strong class="govuk-tag govuk-tag--yellow">60</strong> claims &ndash; split
+                    reimbursement, 60% up front after payment</p>
+                <p class="govuk-body"><strong class="govuk-tag govuk-tag--purple">40</strong> claims &ndash; split
+                    reimbursement, 40% on training completion</p>
             </div>
-        </div>
-            {% else %}
-        <div class="govuk-grid-column-full">
+        </details>
+        {% include "./_components/claims-lists/TU-claim-list.html" %}
+        {% else %}
+        {% include "./_components/claims-lists/CPD-claim-list.html" %}
+        {% endif %}
 
-            {% if data.fundingPot == "TU" %}
-                <details class="govuk-details">
-                    <summary class="govuk-details__summary">
-                    <span class="govuk-details__summary-text">
-                        Understand claim types
-                    </span>
-                    </summary>
-                    <div class="govuk-details__text">
-                        <p class="govuk-body"><strong class="govuk-tag govuk-tag--orange">100</strong> claims &ndash; single reimbursement on training completion</p>
-                        <p class="govuk-body"><strong class="govuk-tag govuk-tag--yellow">60</strong> claims &ndash; split reimbursement, 60% up front after payment</p>
-                        <p class="govuk-body"><strong class="govuk-tag govuk-tag--purple">40</strong> claims &ndash; split reimbursement, 40% on training completion</p>
-                    </div>
-                </details>
-                {% include "./_components/claims-lists/TU-claim-list.html" %}
-              {% else %}
-                {% include "./_components/claims-lists/CPD-claim-list.html" %}
-              {% endif %}
 
-            
-        </div>
+    </div>
     {% endif %}
 </div>
 
