@@ -1,7 +1,7 @@
 <h2 class="govuk-heading-m" id="completion">{% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}{{ "40" | typeTag_V11 }} {% endif %}Training completion by learner</h2>
-{% if not claim.learner and claim.claimType != "60" %}
+{% if not claim.learner and claim.claimType == "100" %}
 <span class="govuk-caption-m">Add a learner to this claim before filling in this section.</span><br>
-{% elif pairClaim == null  %}
+{% elif pairClaim == null and claim.claimType == "60"  %}
 <span class="govuk-caption-m">This part cannot be started until the 60 part is approved.</span><br>
 {% endif %}
 <dl class="govuk-summary-list">

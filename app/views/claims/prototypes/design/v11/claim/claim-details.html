@@ -13,8 +13,8 @@
 {% endblock %}
 
 {% block beforeContent %}
-{% if not (claim.status == "new" or claim.status == "not-yet-submitted") %}
-<a href="../manage-claims-home" class="govuk-back-link">Back</a>
+{% if not (claim.status == "new") %}
+<a href="../manage-claims?statusID={{ data.statusID }}" class="govuk-back-link">Back</a>
 {% endif %}
 {% endblock %}
 
@@ -74,7 +74,7 @@
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
     {% endif %}
 
-    {% if ((claim.status == "new" or claim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.fundingType == "CPD")) or (pairClaim != null and (pairClaim.status == "new" or pairClaim.status == "not-yet-submitted") and pairClaim.claimType == "40")  %}
+    {% if ((claim.status == "new" or claim.status == "not-yet-submitted" or pairClaim.status == "new" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.fundingType == "CPD" or pairClaim.claimType == "40"))  %}
     {% include "../_components/claim-sections/cta-section.html" %}
     {% endif %}
 
