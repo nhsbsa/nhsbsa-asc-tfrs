@@ -589,12 +589,7 @@ router.post('/save-claim', function (req, res) {
   delete req.session.data['activity-date-started-month'];
   delete req.session.data['activity-date-started-year'];
 
-  if (fundingPot == "TU") {
-    res.redirect('manage-claims?fundingPot=TU&statusID='+req.session.data.statusID)
-  } else {
-    res.redirect('manage-claims?fundingPot=CPD&statusID='+req.session.data.statusID)
-  }
-
+  res.redirect('manage-claims?fundingPot=' + fundingPot + '&statusID='+req.session.data.statusID)
 
 });
 

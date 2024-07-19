@@ -14,29 +14,16 @@
             <a class="govuk-breadcrumbs__link" href="choose-a-claim-type">Home
             </a>
         </li>
-        {% if data.fundingPot == "TU" %}
             <li class="govuk-breadcrumbs__list-item">
-                <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=TU">Manage claims ({{ data.fundingPot |
+                <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot={{ data.fundingPot }}">Manage claims ({{ data.fundingPot |
                     potName_V11
                     }})
                 </a>
             </li>
             <li class="govuk-breadcrumbs__list-item">
-                <a class="govuk-breadcrumbs__link" href="manage-claims?fundingPot=TU&statusID={{ status.id }}">{{ status.name
+                <a class="govuk-breadcrumbs__link" href="manage-claims?fundingPot={{ data.fundingPot }}&statusID={{ status.id }}">{{ status.name
                     }} claims</a>
             </li>
-        {% else %}
-            <li class="govuk-breadcrumbs__list-item">
-                <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=CPD">Manage claims ({{ data.fundingPot |
-                    potName_V11
-                    }})
-                </a>
-            </li>
-            <li class="govuk-breadcrumbs__list-item">
-                <a class="govuk-breadcrumbs__link" href="manage-claims?fundingPot=CPD&statusID={{ status.id }}">{{ status.name
-                    }} claims</a>
-            </li>
-        {% endif %}
     </ol>
 </div>
 {% endblock %}
