@@ -38,13 +38,14 @@
                     This is the cost of the activity that you wish to claim for.
                 </div>
                 {% if data.fundingPot == "CPD" %}
-                    <p>You can only claims for the costs of the activity itself. You cannot claim for supporting costs such as:</p>
+                    <p>You <strong>can only</strong> claims for the costs of the activity itself.</p>
+                    <p>You <strong>cannot</strong> claim for supporting costs such as:</p>
                     <ul class="govuk-list govuk-list--bullet">
                       <li>backfill for learner time</li>
                       <li>travel costs</li>
                       <li>childcare</li>
                       <li>food and accommodation expenses</li>
-                      <li>equipment (laptops/mobile phones/notepads/pens) </li>
+                      <li>equipment (such as laptops, mobile phones, notepads and pens) </li>
                     </ul>
                 {% endif %}
                 {% if data.submitError != null and data.submitError %}
