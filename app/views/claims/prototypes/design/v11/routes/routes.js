@@ -340,9 +340,13 @@ router.post('/add-description', function (req, res) {
   var description = req.session.data.description
   var claimID = req.session.data.id
   delete req.session.data.submitError
+  delete req.session.data.characterCountError
 
-  if (description == null || description == "") {
+  if (description == null || description == "" ) {
     req.session.data.submitError = true
+    res.redirect('claim/add-description')
+  } else if (description.length > 80) {
+    req.session.data.characterCountError = true
     res.redirect('claim/add-description')
   } else {
     for (const c of req.session.data.claims) {
