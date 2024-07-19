@@ -342,6 +342,12 @@ router.post('/add-description', function (req, res) {
   delete req.session.data.submitError
   delete req.session.data.characterCountError
 
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      c.description = description
+      break;
+    }
+  }
   if (description == null || description == "" ) {
     req.session.data.submitError = true
     res.redirect('claim/add-description')
@@ -349,12 +355,6 @@ router.post('/add-description', function (req, res) {
     req.session.data.characterCountError = true
     res.redirect('claim/add-description')
   } else {
-    for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        c.description = description
-        break;
-      }
-    }
     delete req.session.data.description;
     res.redirect('claim/claim-details' + '?id=' + claimID + '#activity')
   }
