@@ -26,7 +26,7 @@
     {% endif %}
 
     <form action="../add-description" method="post" class="form">
-      <div class="govuk-form-group govuk-character-count {% if data.submitError != null and data.submitError %} govuk-form-group--error {% endif %}" data-module="govuk-character-count" data-maxlength="90">
+      <div class="govuk-form-group govuk-character-count {% if data.submitError != null and data.submitError %} govuk-form-group--error {% endif %}" data-module="govuk-character-count" data-maxlength="80">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
           <h1 class="govuk-fieldset__heading">
@@ -44,7 +44,7 @@
         <textarea class="govuk-textarea govuk-js-character-count {% if data.submitError != null and data.submitError %}govuk-textarea--error{% endif %}" id="description" name="description" rows="2" aria-describedby="description-info description-hint"
           aria-describedby="more-detail-hint">{%if claim.description != null%}{{claim.description}}{% endif %}</textarea>
           <div id="description-info" class="govuk-hint govuk-character-count__message">
-            You can enter up to 90 characters
+            You can enter up to 80 characters
           </div>
         </div>
       <div class="govuk-button-group">

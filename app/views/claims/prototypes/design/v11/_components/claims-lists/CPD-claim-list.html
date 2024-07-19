@@ -16,7 +16,9 @@
         {% endif %}
         <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
             <td class="govuk-table__header" scope="row"><a class="govuk-link" href="claim/claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a></td>
-            <td class="govuk-table__cell">{{ claim.description }}</td>
+            <td class="govuk-table__cell">
+                {% if claim.description %} {{ claim.description }} {% else %} Not yet added {% endif %}
+            </td>
             <td class="govuk-table__cell" data-sort-value="{{ claim.learner.givenName }} {{ claim.learner.familyName }}">
                 {% if claim.learner %} {{ claim.learner.givenName }} {{ claim.learner.familyName }} {% else %} Not yet added {% endif %}
             </td>
