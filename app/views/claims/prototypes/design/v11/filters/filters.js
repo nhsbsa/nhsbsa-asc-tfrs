@@ -678,3 +678,11 @@ addFilter('75CharacterCount_V11', function (description) {
     }
     return truncated + "...";
 })
+
+addFilter('isCostMoreThanMax_V11', function (amount) {
+    if (amount > 500) {
+        return true
+    } else {
+        return false
+    }
+})
