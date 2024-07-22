@@ -19,7 +19,7 @@
 {% elif claim.claimType == "40" %}
 <p class="govuk-body"><strong>In total for this training you'll get</strong><br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}.</strong></p>
 <p class="govuk-body">You have already got <strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong> for the 60 part claim.</p>
-<p class="govuk-body">You'll get a further <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong> on approval of this 40 claim.</p>
+<p class="govuk-body">You'll get a further <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong> on approval of the 40 part claim.</p>
 {% endif %}
 
 {% if claim.claimType != "40" %}
