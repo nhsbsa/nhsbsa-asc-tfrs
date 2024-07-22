@@ -693,3 +693,11 @@ addFilter('removeClaimSuffix_V11', function (claimID) {
     return claimID.slice(0, -2);
 
 })
+
+addFilter('isCostMoreThanMax_V11', function (amount) {
+    if (amount > 500) {
+        return true
+    } else {
+        return false
+    }
+})

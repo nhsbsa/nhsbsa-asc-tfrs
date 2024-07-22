@@ -8,7 +8,7 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    {% if data.submitError != null and data.submitError %}
+    {% if (data.submitError != null and data.submitError) or (data.characterCountError != null and data.characterCountError) %}
     <div class="govuk-error-summary" data-module="govuk-error-summary">
       <div role="alert">
         <h2 class="govuk-error-summary__title">
@@ -16,9 +16,15 @@
         </h2>
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
+            {% if (data.submitError != null and data.submitError) %}
             <li>
               <a href="#description-error">Add a description of the activity</a>
             </li>
+            {% elif (data.characterCountError != null and data.characterCountError)%}
+            <li>
+              <a href="#description-count-error">Description must be 80 characters or less</a>
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -42,7 +48,7 @@
         </p>
         {% endif %}
         {% if data.characterCountError != null and data.characterCountError %}
-        <p id="description-error" class="govuk-error-message">
+        <p id="description-count-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span> Description must be 80 characters or less
         </p>
         {% endif %}
