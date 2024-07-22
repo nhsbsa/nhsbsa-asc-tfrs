@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-m" id="payment">{% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}{{ "60" | typeTag_V11 }} {% endif %}Payment for activity</h2>
+<h2 class="govuk-heading-m" id="payment">Payment for activity</h2>
 <dl class="govuk-summary-list">
 
   {% set evidenceOfPaymentCount = claim.evidenceOfPayment | coursesCount_V11 %}

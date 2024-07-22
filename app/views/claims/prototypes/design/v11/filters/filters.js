@@ -487,6 +487,8 @@ addFilter('findPair_V11', function (claimID, claims) {
 
 addFilter('typeTag_V11', function (type) {
     switch (type) {
+        case null:
+            return ""
         case "100":
             return '<strong class="govuk-tag govuk-tag--orange">100</strong>'
         case "60":

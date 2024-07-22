@@ -25,8 +25,8 @@
     {% if data.submitError.claimValid != null and not data.submitError.claimValid %}
     {% include "../_components/claim-sections/errorCatch.html" %}
     {% endif %}
-    <span class="govuk-caption-l">{{ claim.fundingType | potName_V11 }}</span>
-    <h1 class="govuk-heading-l">Claim: {{ claim.claimID | removeClaimSuffix_V11 }}</h1>
+    <span class="govuk-caption-xl">{{ claim.fundingType | potName_V11 }}</span>
+    <h1 class="govuk-heading-xl">Claim: {{ claim.claimID | removeClaimSuffix_V11 }}</h1>
   </div>
 </div>
 
@@ -39,19 +39,44 @@
       </div>
     {% endif %}
 
-    {% if claim.fundingType == "TU" and claim.claimType == "100" %}
+    {% if (claim.fundingType == "TU" and claim.claimType == "100") or claim.fundingType == "CPD" %}
+
     <p class="govuk-body">This {{ claim.claimType | typeTag_V11 }} claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
-    {% elif claim.fundingType == "CPD" %}
-    <p class="govuk-body">This claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
-    {% elif claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
-    <p class="govuk-body">The {{ "60" | typeTag_V11 }} part of this claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
-    <p class="govuk-body">The {{ "40" | typeTag_V11 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V11(data.statuses) }} {% else %}cannot be started until the 60 part is approved.{% endif %}</p>
-    {% endif %}
 
     {% if claim.status == "rejected" %}
-    <h2 class="govuk-heading-m">Claim rejected</h2>
+    <h2 class="govuk-heading-s">Rejection note</h2>
     <p class="govuk-body">{{claim.rejectedNote}}</p>
     {% endif %}
+
+    {% elif claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
+
+    <p class="govuk-body">The {{ "60" | typeTag_V11 }} part of this claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
+
+    {% if claim.status == "rejected" %}
+    <h2 class="govuk-heading-s">Rejection note</h2>
+    <p class="govuk-body">{{claim.rejectedNote}}</p>
+    {% endif %}
+
+    <p class="govuk-body">The {{ "40" | typeTag_V11 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V11(data.statuses) }} {% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+
+    {% if pairClaim.status == "rejected" %}
+    <h2 class="govuk-heading-s">Rejection note</h2>
+    <p class="govuk-body">{{pairClaim.rejectedNote}}</p>
+    {% endif %}
+
+    {% endif %}
+
+    {% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
+    <div class="content-container">
+      <div class="vertical-line-container">
+        <div class="circle">
+          <span class="govuk-heading-s section-number">1</span>
+        </div>
+        <div class="vertical-line"></div>
+      </div>
+      <div class="content"> 
+        <h2 class="govuk-heading-l">Complete the 60 part</h2>
+        {% endif %}
 
   {% if claim.fundingType == "TU" %}
     {% include "../_components/claim-sections/training.html" %}
@@ -64,12 +89,29 @@
     {% include "../_components/claim-sections/evidencePayment.html" %}
 
     {% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType == "60" %}
-    <div class="govuk-inset-text">
     {% include "../_components/claim-sections/cta-section.html" %}
-    </div>
     {% endif %}
+    
+    {% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
+  </div>
+</div>
+{% endif %}
 
-
+{% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
+    <div class="content-container govuk-!-padding-bottom-6">
+      <div class="vertical-line-container">
+        <div class="circle">
+          <span class="govuk-heading-s section-number">2</span>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="horizontal-line"></div>
+      </div>
+      <div class="content">
+        <h2 class="govuk-heading-l">Complete the 40 part</h2>
+        {% if pairClaim == null and claim.claimType == "60"  %}
+        <p class="govuk-body"><span class="govuk-caption-m">This part cannot be started until the 60 part is approved.</span></p>
+        {% endif %}
+        {% endif %}
     {% if claim.fundingType == "TU" %}
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
     {% endif %}
@@ -77,6 +119,11 @@
     {% if ((claim.status == "new" or claim.status == "not-yet-submitted" or pairClaim.status == "new" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.fundingType == "CPD" or pairClaim.claimType == "40"))  %}
     {% include "../_components/claim-sections/cta-section.html" %}
     {% endif %}
+
+    {% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
+  </div>
+</div>
+{% endif %}
 
   </div>
   <div class="govuk-grid-column-one-third">

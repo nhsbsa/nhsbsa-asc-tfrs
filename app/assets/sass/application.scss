@@ -221,3 +221,52 @@
     content: " [highlight end] ";
   }
 }
+
+.content-container {
+  display: flex;
+  position: relative; /* Ensure the container's height is considered for child positioning */
+}
+
+.vertical-line-container {
+  position: relative;
+  width: 50px; /* Adjust the width of the padding area as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vertical-line {
+  position: absolute;
+  top: 37px; /* Adjust the distance below the tag */
+  width: 1px;
+  height: calc(100% - 37px); /* Ensure the line spans the full height minus the tag */
+  background-color:  $govuk-border-colour; /* Adjust the line color */
+}
+
+.content {
+  padding-left: 5%; /* Should match the width of the padding area */
+  padding-bottom: govuk-spacing(6);
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid $govuk-border-colour; /* Single pixel border */
+  border-radius: 50%;
+  background-color: white;
+}
+
+.section-number {
+  margin: 0;
+}
+
+.horizontal-line {
+  width: 50%; /* Two-thirds of the container width */
+  height: 1px;
+  background-color: $govuk-border-colour; /* Adjust the line color */
+  position: absolute;
+  bottom: 0;
+}
