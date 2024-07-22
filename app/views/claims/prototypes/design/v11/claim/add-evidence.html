@@ -38,7 +38,7 @@
                 {% if data.errorFileTooBig %}
                 The file must be smaller than 2MB
                 {% elif data.errorWrongFileFormat %}
-                The file must be a PDF, JPG or PNG.
+                The file must be a PDF, JPG, JPEG or PNG.
                 {% elif data.errorFileMissing %}
                 Select a file as evidence of {{data.type}}
                 {% endif %}
@@ -61,9 +61,9 @@
       }} {{ claim.learner.familyName }}{% endif %}.
 
       {% if data.type == "payment"%}
-      You may upload up to 4 files. These can be in PDF, JPG or PNG format.
+      You may upload up to 4 files. These can be in PDF, JPG, JPEG or PNG format.
       {% else %}
-      The file can be in PDF, JPG or PNG format.
+      The file can be in PDF, JPG, JPEG or PNG format.
       {% endif %}
     </p>
 
@@ -78,7 +78,7 @@
         {% if data.errorFileTooBig %}
         The file must be smaller than 2MB
         {% elif data.errorWrongFileFormat %}
-        The file must be a PDF, JPG or PNG.
+        The file must be a PDF, JPG, JPEG or PNG.
         {% elif data.errorFileMissing %}
         Select an evidence of {{data.type}}
         {% endif %}
