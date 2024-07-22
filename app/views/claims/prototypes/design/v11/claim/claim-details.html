@@ -52,12 +52,12 @@
 
     <p class="govuk-body">The {{ "60" | typeTag_V11 }} part of this claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
 
+    <p class="govuk-body">The {{ "40" | typeTag_V11 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V11(data.statuses) }} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+
     {% if claim.status == "rejected" %}
     <h2 class="govuk-heading-s">Rejection note</h2>
     <p class="govuk-body">{{claim.rejectedNote}}</p>
     {% endif %}
-
-    <p class="govuk-body">The {{ "40" | typeTag_V11 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V11(data.statuses) }} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
 
     {% if pairClaim.status == "rejected" %}
     <h2 class="govuk-heading-s">Rejection note</h2>
@@ -108,10 +108,16 @@
       </div>
       <div class="content">
         <h2 class="govuk-heading-l">Complete the 40 part</h2>
-        {% if pairClaim == null and claim.claimType == "60"  %}
+        {% if pairClaim == null and claim.claimType == "60" %}
+        {% if claim.status != "rejected" %}
         <p class="govuk-body"><span class="govuk-caption-m">This part cannot be started until the 60 part is approved.</span></p>
+        {% elif claim.status == "rejected" %}
+        <p class="govuk-body"><span class="govuk-caption-m">The 60 part was rejected therefore the 40 part cannot be started.</span></p>
         {% endif %}
         {% endif %}
+        {% endif %}
+
+
     {% if claim.fundingType == "TU" %}
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
     {% endif %}
