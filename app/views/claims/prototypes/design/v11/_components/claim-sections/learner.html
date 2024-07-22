@@ -38,8 +38,10 @@
         Revalidation budget remaining
       </dt>
       <dd class="govuk-summary-list__value">
-        <p class="govuk-body" style="margin-bottom: 5px;">£{{ claim.learner.cpdBudget }}</p>
-        <p class="govuk-hint">This does not include claims currently being processed.</p>
+        <p class="govuk-body" style="margin-bottom: 5px;">£{{claim.learner.cpdBudget}}</p>
+        {% if claim.status == "not-yet-submitted" or claim.status == "new" %}
+          <p class="govuk-hint">This does not include claims currently being processed.</p>
+        {% endif %}
       </dd>
     </div>
     {% endif %}
