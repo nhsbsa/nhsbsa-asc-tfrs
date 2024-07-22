@@ -822,12 +822,10 @@ router.post('/cpd-eligibility', function (req, res) {
   var claimID = req.session.data.id
   var checkOne = req.session.data.eligibilityCheckOne
   var checkTwo = req.session.data.eligibilityCheckTwo
-  var checkThree = req.session.data.eligibilityCheckThree
   var question = req.session.data.question
 
   delete req.session.data.submitErrorOne
   delete req.session.data.submitErrorTwo
-  delete req.session.data.submitErrorThree
 
   if (question == "one") {
     if (checkOne == null) {
@@ -858,7 +856,12 @@ router.post('/cpd-eligibility', function (req, res) {
       for (const c of req.session.data.claims) {
         if (claimID == c.claimID) {
           if (checkTwo == "yes") {
-            res.redirect('claim/cpd-eligibility-check-three?id=' + claimID)
+            // check if learner already has a budget, if not set to 500
+            if (c.learner.cpdBudget == -1 | c.learner.cpdBudget == null) {
+              c.learner.cpdBudget = 500
+            }
+            console.log(c.learner)
+            res.redirect('claim/claim-details' + '?id=' + claimID)
           } else if (checkTwo == "no") {
             // redirect to learner isn't able to be added to claim view
             res.redirect('claim/cpd-ineligible' + '?id=' + claimID + '&question=' + question)
@@ -871,35 +874,8 @@ router.post('/cpd-eligibility', function (req, res) {
     }
   }
 
-  if (question == "three") {
-    if (checkThree == null) {
-      req.session.data.submitErrorThree = true
-      res.redirect('claim/cpd-eligibility-check-three?id=' + claimID)
-    } else {
-      for (const c of req.session.data.claims) {
-        if (claimID == c.claimID) {
-          if (checkThree == "yes") {
-            // check if learner already has a budget, if not set to 500
-            if (c.learner.cpdBudget == -1 | c.learner.cpdBudget == null) {
-              c.learner.cpdBudget = 500
-            }
-            console.log(c.learner)
-            res.redirect('claim/claim-details' + '?id=' + claimID)
-          } else if (checkThree == "no") {
-            // redirect to learner isn't able to be added to claim view
-            res.redirect('claim/cpd-ineligible' + '?id=' + claimID + '&question=' + question)
-          } else if (checkThree == "unsure") {
-            // redirect to need to find out if learner is eligible
-            res.redirect('claim/cpd-eligibility-unsure' + '?id=' + claimID + '&question=' + question)
-          }
-        }
-      }
-    }
-  }
-
   delete req.session.data.eligibilityCheckOne
   delete req.session.data.eligibilityCheckTwo
-  delete req.session.data.eligibilityCheckThree
   delete req.session.data.question
 
 });

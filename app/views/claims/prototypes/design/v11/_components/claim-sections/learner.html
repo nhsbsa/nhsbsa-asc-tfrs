@@ -35,11 +35,11 @@
     {% if data.fundingPot == "CPD" and claim.learner.cpdBudget != null and claim.learner.cpdBudget != -1 and (claim.status == "not-yet-submitted" or claim.status == "new")%}
     <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
       <dt class="govuk-summary-list__key">
-        Budget
+        Revalidation budget remaining
       </dt>
       <dd class="govuk-summary-list__value">
-        <p class="govuk-body">£{{ claim.learner.cpdBudget }}</p>
-        <p class="govuk-hint">Not including claims yet to be processed so may be subject to change</p>
+        <p class="govuk-body" style="margin-bottom: 5px;">£{{ claim.learner.cpdBudget }}</p>
+        <p class="govuk-hint">This does not include claims currently being processed.</p>
       </dd>
     </div>
     {% endif %}
