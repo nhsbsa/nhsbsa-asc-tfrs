@@ -33,20 +33,20 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
+    {% if claim.fundingType == "TU" and claim.claimType != "100" %}
+      <div class="govuk-inset-text" style="margin-top: 0px;">
+        This claim relates to training using the 60/40 funding model. Find out more about reimbursement amounts and claim types in the <a href="../guidance/evidence-requirements" class="govuk-link">help with starting a new care skills claim</a>.
+      </div>
+    {% endif %}
 
-  <div class="govuk-inset-text" style="margin-top: 0px;">
-      {% if claim.fundingType == "TU" and claim.claimType == "100" %}
-        <p class="govuk-body">100 claims have single reimbursement on training completion.</p>
-        <p class="govuk-body">This {{ claim.claimType | typeTag_V11 }} claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
-      {% elif claim.fundingType == "CPD" %}
-        <p class="govuk-body">This claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
-      {% elif claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
-        <p class="govuk-body">This claim uses the 60/40 funding model. 60% of reimbursement is up front after payment and 40% is on training completion.</p>
-        <p class="govuk-body">The {{ "60" | typeTag_V11 }} part of this claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
-        <p class="govuk-body">The {{ "40" | typeTag_V11 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V11(data.statuses) }} {% else %}cannot be started until the 60 part is approved.{% endif %}</p>
-      {% endif %}
-  </div>
-
+    {% if claim.fundingType == "TU" and claim.claimType == "100" %}
+    <p class="govuk-body">This {{ claim.claimType | typeTag_V11 }} claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
+    {% elif claim.fundingType == "CPD" %}
+    <p class="govuk-body">This claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
+    {% elif claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
+    <p class="govuk-body">The {{ "60" | typeTag_V11 }} part of this claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
+    <p class="govuk-body">The {{ "40" | typeTag_V11 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V11(data.statuses) }} {% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+    {% endif %}
 
     {% if claim.status == "rejected" %}
     <h2 class="govuk-heading-m">Claim rejected</h2>
