@@ -557,7 +557,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "claimAmount": 112.5,
+    "claimAmount": 112.50,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
@@ -575,7 +575,8 @@
       "id": "KS 82 2F 62 C",
       "familyName": "Holmes",
       "givenName": "Sarah",
-      "jobTitle": "Occupational Therapist"
+      "jobTitle": "Occupational Therapist",
+      "cpdBudget": 300
     },
     "categoryName": "Courses",
     "description": "Participating in a course focused on dementia care strategies.",
@@ -587,7 +588,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "claimAmount": 112.5,
+    "claimAmount": 112.50,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
@@ -5547,7 +5548,7 @@
       "jobTitle": "Support Worker (Agency)"
     },
     "categoryName": "Enquiry-based research",
-    "description": "Investing in online course to acquire in-depth knowledge about specific areas of social care.",
+    "description": "Investing in online course to acquire more knowledge about areas of social care.",
     "startDate": null,
     "status": "submitted",
     "createdDate": "2024-01-02T08:56:19.791Z",
