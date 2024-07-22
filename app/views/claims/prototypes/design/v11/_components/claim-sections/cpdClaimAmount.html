@@ -1,25 +1,8 @@
 {% if (claim.status == "submitted") %}
-    <p class="govuk-body"><strong>This activity cost</strong><br><strong class="govuk-!-font-size-36">£{{claim.claimAmount}}</strong></p>    
-    <p class="govuk-body">which is the maximum amount you could get back.</p>
+<p class="govuk-body">This activity cost <br><strong class="govuk-!-font-size-36">£{{ claim.claimAmount }}</strong><br> which is the maximum amount you could get back.</p>
     <p class="govuk-body">Every learner has £500 of revalidation funding. Depending how much of this has already been used you might get less back than the activity cost.</p>
 {% elif (claim.status == "approved") %}
-    <p class="govuk-body"><strong>You will get back</strong><br><strong class="govuk-!-font-size-36">£{{claim.claimAmount}}</strong></p>    
-    <p class="govuk-body">for this claim.</p>
+<p class="govuk-body">You will get back <br><strong class="govuk-!-font-size-36">£{{ claim.claimAmount }}</strong><br> for this claim.</p>
     <p class="govuk-body">If this is less than the activity cost it means that there was not enough left in the learner's £500 of revalidation funding to cover the full amount.</p>
 {% endif %}
-{% if (claim.status == "submitted" or claim.status == "approved") %}
-<details class="govuk-details">
-    <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-            How was this calculated?
-        </span>
-    </summary>
-    <div class="govuk-details__text">
-        <p class="govuk-body">This amount is {% if claim.claimType == "60" %}60% of{% elif claim.claimType == "40" %}40% of{% endif %} the lower of:</p>
-        <ul class="govuk-list govuk-list--bullet">
-            <li>the maximum reimbursement amount for this training</li>
-            <li>what you paid</li>
-        </ul>
-    </div>
-</details>
-{% endif %}
+
