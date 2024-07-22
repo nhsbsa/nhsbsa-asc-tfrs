@@ -34,7 +34,7 @@
     <form action="../add-description" method="post" class="form">
       <div class="govuk-form-group govuk-character-count {% if (data.submitError != null and data.submitError) or (data.characterCountError != null and data.characterCountError) %} govuk-form-group--error {% endif %}" data-module="govuk-character-count" data-maxlength="80">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
+          <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
           <h1 class="govuk-fieldset__heading">
             Describe the activity
           </h1>

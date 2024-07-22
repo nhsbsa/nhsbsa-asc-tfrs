@@ -39,7 +39,7 @@
         class="govuk-form-group {% if data.submitErrorOne != null and data.submitErrorOne %} govuk-form-group--error {% endif %}">
         <fieldset class=" govuk-fieldset" aria-describedby="isACourse-hint">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
+          <span class="govuk-caption-l">Claim: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
           <h1 class="govuk-fieldset__heading">
             Is the learner registered with the NMC or HCPC?
           </h1>

@@ -95,7 +95,7 @@
       <p class="govuk-body">{{ payment }}</p>
       {% endfor %}
     </dd>
-    {% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType != "40" %}
+    {% if (claim.status == "new" or claim.status == "not-yet-submitted") %}
     <dd class="govuk-summary-list__actions">
       <ul class="govuk-summary-list__actions-list">
         <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"

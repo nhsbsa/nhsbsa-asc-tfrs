@@ -427,8 +427,12 @@ router.post('/completion-date', function (req, res) {
   const day = req.session.data['completion-date-started-day']
   const month = req.session.data['completion-date-started-month']
   const year = req.session.data['completion-date-started-year']
-  const claimID = req.session.data.id
+  let claimID = req.session.data.id
   const completionDate = new Date(year, month - 1, day)
+
+  if (claimID[claimID.length - 1] === 'B') {
+    claimID =  claimID.slice(0, -1) + 'C';
+  }
 
   delete req.session.data.submitError
 
@@ -492,7 +496,11 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.deleteSuccess
   var radioButtonValue = req.session.data.another
   var type = req.session.data.type
-  var claimID = req.session.data.id
+  var claimID = req.session.data.id 
+
+  if (claimID[claimID.length - 1] === 'B' && type == 'completion') {
+    claimID =  claimID.slice(0, -1) + 'C';
+  }
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
@@ -585,12 +593,7 @@ router.post('/save-claim', function (req, res) {
   delete req.session.data['activity-date-started-month'];
   delete req.session.data['activity-date-started-year'];
 
-  if (fundingPot == "TU") {
-    res.redirect('manage-claims?fundingPot=TU&statusID=not-yet-submitted')
-  } else {
-    res.redirect('manage-claims?fundingPot=CPD&statusID=not-yet-submitted')
-  }
-
+  res.redirect('manage-claims?fundingPot=' + fundingPot + '&statusID='+req.session.data.statusID)
 
 });
 
