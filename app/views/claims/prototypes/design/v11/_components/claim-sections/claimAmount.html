@@ -1,4 +1,4 @@
-{% if (claim.status == "new" or claim.status == "not-yet-submitted" or claim.status == "submitted" or claim.status == "queried") and claim.training != null %}
+{% if (claim.status == "new" or claim.status == "not-yet-submitted" or claim.status == "submitted") and claim.training != null %}
 
 {% if claim.claimType != "40" %}
     <p class="govuk-body"><strong>The maximum reimbursement amount for this training is</strong><br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}.</strong></p>
@@ -10,15 +10,15 @@
 {% elif claim.claimType == "60" %}
 <p class="govuk-body">Using the 60/40 funding model, you could get back up to:</p>
 <ul class="govuk-list govuk-list--bullet">
-    <li><strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong> up front for this 60 claim and</li>
-    <li><strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong> on completion of training for the 40 claim </li>
+    <li><strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong> up front for the 60 part claim and</li>
+    <li><strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong> on completion of training for the 40 part claim </li>
 </ul>
 <p class="govuk-body">The maximum reimbursement amount is the most you could get back. It’s usually less than the training actually cost, meaning that you’ll cover the difference.</p>
 <p class="govuk-body">If you paid less than the maximum reimbursement amount, you’ll get back what you paid.</p>
 
 {% elif claim.claimType == "40" %}
 <p class="govuk-body"><strong>In total for this training you'll get</strong><br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}.</strong></p>
-<p class="govuk-body">You have already got <strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong> for the 60 claim.</p>
+<p class="govuk-body">You have already got <strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong> for the 60 part claim.</p>
 <p class="govuk-body">You'll get a further <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong> on approval of this 40 claim.</p>
 {% endif %}
 

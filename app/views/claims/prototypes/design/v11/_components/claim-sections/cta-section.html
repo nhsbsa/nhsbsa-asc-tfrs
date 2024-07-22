@@ -1,15 +1,12 @@
 <h2 class="govuk-heading-m">What happens next</h2>
 
 {% if claim.claimType == "40" %}
-<p class="govuk-body">When you have added all the necessary information to the claim you can confirm the details and
-    submit this 40 claim for processing.</p>
+<p class="govuk-body">When you have added all the necessary information, you can confirm the details and submit this 40 part of the claim for processing.</p>
 <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
 {% elif claim.claimType == "60" %}
-<p class="govuk-body">When you have added all the necessary information to the claim you can confirm the details and
-    submit this 60 claim for processing.</p>
+<p class="govuk-body">When you have added all the necessary information, you can confirm the details and submit this 60 part of the claim for processing.</p>
 <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
-<p class="govuk-body">Once the 60 claim is approved and the learner has completed the training you'll need to submit the
-    40 claim for the rest of the reimbursement amount.</p>
+<p class="govuk-body">Once the 60 part is approved and the learner has completed the training, you'll need to submit the 40 part for the rest of the reimbursement amount.</p>
 {% elif claim.claimType == "100" %}
 <p class="govuk-body">When you have added all the necessary information to the claim you can confirm the details and
     submit this 100 claim for processing.</p>

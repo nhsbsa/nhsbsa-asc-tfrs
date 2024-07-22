@@ -32,11 +32,12 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-inset-text" style="margin-top: 0px;">
 
     {% if claim.fundingType == "TU" and claim.claimType != "100" %}
-      <div class="govuk-inset-text" style="margin-top: 0px;">
-        This claim relates to training using the 60/40 funding model. Find out more about reimbursement amounts and claim types in the <a href="../guidance/tu-evidence-requirements" class="govuk-link">help with starting a new care skills claim</a>.
-      </div>
+    <p class="govuk-body">This claim uses the 60/40 funding model. 60% of reimbursement is upfront after payment and 40% is on training completion.</p>
+    {% elif claim.fundingType == "TU" and claim.claimType == "100"  %}
+    <p class="govuk-body">100 claims have a single reimbursement on training completion.</p>
     {% endif %}
 
     {% if (claim.fundingType == "TU" and claim.claimType == "100") or claim.fundingType == "CPD" %}
@@ -57,7 +58,7 @@
     <p class="govuk-body">{{claim.rejectedNote}}</p>
     {% endif %}
 
-    <p class="govuk-body">The {{ "40" | typeTag_V11 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V11(data.statuses) }} {% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+    <p class="govuk-body">The {{ "40" | typeTag_V11 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V11(data.statuses) }} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
 
     {% if pairClaim.status == "rejected" %}
     <h2 class="govuk-heading-s">Rejection note</h2>
@@ -65,6 +66,8 @@
     {% endif %}
 
     {% endif %}
+
+  </div>
 
     {% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
     <div class="content-container">
