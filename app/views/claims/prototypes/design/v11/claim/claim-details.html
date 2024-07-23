@@ -43,7 +43,9 @@
 
     <p class="govuk-body">This {{ claim.claimType | typeTag_V11 }} claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
 
-    {% if claim.status == "rejected" %}
+    {% if claim.status == "not-yet-submitted" %}
+    <p class="govuk-body">Claims must each be for a single revalidation activity. Claims for multiple activities will be rejected. Start a separate claim for each activity.</p>
+    {% elif claim.status == "rejected" %}
     <h2 class="govuk-heading-s">Rejection note</h2>
     <p class="govuk-body">{{claim.rejectedNote}}</p>
     {% endif %}

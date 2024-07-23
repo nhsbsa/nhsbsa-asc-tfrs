@@ -1,4 +1,5 @@
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
 
 {% block pageTitle %}
 {{ serviceName }} – GOV.UK Prototype Kit
@@ -36,4 +37,33 @@
     </p>
   </div>
 </div>
+{% endblock %}
+
+{% block footer %}
+  {{ govukFooter({
+    meta: {
+      items: [
+      {
+        href: "",
+        text: "Contact us"
+      }, {
+        href: "",
+        text: "Cookies"
+      }, {
+        href: "",
+        text: "Accessibility"
+      }, {
+        href: "",
+        text: "Terms of Use"
+      }, {
+        href: "",
+        text: "Privacy notice"
+      }, {
+        href: "/manage-prototype/clear-data",
+        text: "Clear data"
+      }
+    ] ,
+      visuallyHiddenTitle: "Footer links"
+    }
+  }) }}
 {% endblock %}
