@@ -8,7 +8,7 @@
 {% block content %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    {% if data.submitError != null and data.submitError %}
+    {% if (data.submitError != null and data.submitError) or (data.characterCountError != null and data.characterCountError) %}
     <div class="govuk-error-summary" data-module="govuk-error-summary">
       <div role="alert">
         <h2 class="govuk-error-summary__title">
@@ -16,9 +16,15 @@
         </h2>
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
+            {% if (data.submitError != null and data.submitError) %}
             <li>
               <a href="#description-error">Add a description of the activity</a>
             </li>
+            {% elif (data.characterCountError != null and data.characterCountError)%}
+            <li>
+              <a href="#description-count-error">Description must be 80 characters or less</a>
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -26,11 +32,11 @@
     {% endif %}
 
     <form action="../add-description" method="post" class="form">
-      <div class="govuk-form-group {% if data.submitError != null and data.submitError %} govuk-form-group--error {% endif %}">
+      <div class="govuk-form-group govuk-character-count {% if (data.submitError != null and data.submitError) or (data.characterCountError != null and data.characterCountError) %} govuk-form-group--error {% endif %}" data-module="govuk-character-count" data-maxlength="80">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-          <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
+          <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
           <h1 class="govuk-fieldset__heading">
-            Add description
+            Describe the activity
           </h1>
         </legend>
         <div id="more-detail-hint" class="govuk-hint">
@@ -41,9 +47,18 @@
           <span class="govuk-visually-hidden">Error:</span> Add a description of the activity
         </p>
         {% endif %}
-        <textarea class="govuk-textarea {% if data.submitError != null and data.submitError %}govuk-textarea--error{% endif %}" id="description" name="description" rows="3"
+        {% if data.characterCountError != null and data.characterCountError %}
+        <p id="description-count-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Description must be 80 characters or less
+        </p>
+        {% endif %}
+        
+        <textarea class="govuk-textarea govuk-js-character-count {% if (data.submitError != null and data.submitError) or (data.characterCountError != null and data.characterCountError) %}govuk-textarea--error{% endif %}" id="description" name="description" rows="2" aria-describedby="description-info description-hint"
           aria-describedby="more-detail-hint">{%if claim.description != null%}{{claim.description}}{% endif %}</textarea>
-      </div>
+          <div id="description-info" class="govuk-hint govuk-character-count__message">
+            You can enter up to 80 characters
+          </div>
+        </div>
       <div class="govuk-button-group">
         <button type="submit" class="govuk-button" data-module="govuk-button">
             Add to claim

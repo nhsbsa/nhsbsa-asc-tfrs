@@ -479,7 +479,7 @@ addFilter('findPair_V11', function (claimID, claims) {
         // Check if the ID is not the same as the existing ID and
         // if the first part of the ID (excluding the last 2 characters) matches the existing ID
         if (id !== claimID && id.slice(0, -2) === claimID.slice(0, -2)) {
-            return id;
+            return claim;
         }
     }
     return null; // Return null if no match is found
@@ -487,6 +487,8 @@ addFilter('findPair_V11', function (claimID, claims) {
 
 addFilter('typeTag_V11', function (type) {
     switch (type) {
+        case null:
+            return ""
         case "100":
             return '<strong class="govuk-tag govuk-tag--orange">100</strong>'
         case "60":
@@ -496,7 +498,7 @@ addFilter('typeTag_V11', function (type) {
     }
 }, { renderAsHtml: true })
 
-addFilter('newClaimLink_V7', function (type) {
+addFilter('newClaimLink_V11', function (type) {
     let claimLink = "#"
     if (type == "TU") {
         claimLink = "claim/select-training"
@@ -658,4 +660,44 @@ addFilter('countMatchingStatus_V10', function (objectsArray, statusString) {
 
     // Return the final count
     return count;
+})
+
+
+addFilter('75CharacterCount_V11', function (description) {
+
+    let limit = 75
+    if (description.length <= limit) {
+        return description;
+    }
+    let words = description.split(' ');
+    let truncated = words[0];
+
+    for (let i = 1; i < words.length; i++) {
+        if ((truncated + ' ' + words[i]).length > limit) {
+            break;
+        }
+        truncated += ' ' + words[i];
+    }
+    return truncated + "...";
+})
+
+
+addFilter('removeClaimSuffix_V11', function (claimID) {
+
+    // Check if the string has at least two characters
+    if (claimID.length < 2) {
+        return ''; // Return an empty string if there are less than two characters
+    }
+
+    // Use the slice method to remove the last two characters
+    return claimID.slice(0, -2);
+
+})
+
+addFilter('isCostMoreThanMax_V11', function (amount) {
+    if (amount > 500) {
+        return true
+    } else {
+        return false
+    }
 })

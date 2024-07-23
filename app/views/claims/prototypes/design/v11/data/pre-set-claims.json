@@ -263,43 +263,6 @@
     "costDate": "2022-09-19T13:52:37.929Z"
   },
   {
-    "claimID": "J3N-TTG3-GHSC-B",
-    "fundingType": "TU",
-    "claimType": "60",
-    "learner": {
-      "id": "LE 09 5F 94 M",
-      "familyName": "Kub",
-      "givenName": "Roy",
-      "jobTitle": "Caregiver"
-    },
-    "training": {
-      "type": "Level 4 Certificate",
-      "code": "603/0676/2",
-      "reimbursementAmount": 600,
-      "title": "Certificate in Principles of Leadership and Management in Adult Care",
-      "totalLearningTime": "280 hours",
-      "awardingOrganisation": "Innovate Awarding",
-      "category": "Leadership and Management",
-      "description": null,
-      "link": null,
-      "fundingModel": "split"
-    },
-    "startDate": "2023-10-12T06:08:29.142Z",
-    "status": "approved",
-    "createdDate": "2023-04-04T13:52:37.929Z",
-    "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-11-25T03:13:47.582Z",
-    "approvedDate": "2023-12-05T18:04:04.173Z",
-    "rejectedDate": null,
-    "rejectedNote": null,
-    "evidenceOfPayment": [
-      "invoice007.pdf"
-    ],
-    "evidenceOfCompletion": null,
-    "completionDate": null,
-    "costDate": "2022-09-19T13:52:37.929Z"
-  },
-  {
     "claimID": "J45-BB25-GFD2-B",
     "fundingType": "TU",
     "claimType": "60",
@@ -369,8 +332,8 @@
     "evidenceOfPayment": [
       "invoice007.pdf"
     ],
-    "evidenceOfCompletion": "certficate002.pdf",
-    "completionDate": "2023-11-16T01:18:28.980Z",
+    "evidenceOfCompletion": null,
+    "completionDate": null,
     "costDate": "2022-09-19T13:52:37.929Z"
   },
   {
@@ -594,7 +557,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "claimAmount": 112.50,
+    "claimAmount": 112.55,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",
@@ -624,7 +587,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "claimAmount": 112.50,
+    "claimAmount": 112.55,
     "evidenceOfPayment": [
       "invoice000.pdf",
       "invoice001.pdf",

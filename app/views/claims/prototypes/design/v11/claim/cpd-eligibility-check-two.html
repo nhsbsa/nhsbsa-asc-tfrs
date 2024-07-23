@@ -1,0 +1,97 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = null %}
+{% for c in data.claims %}
+{% if c.claimID == data.id %}
+{% set claim = c %}
+{% endif %}
+{% endfor %}
+
+{% block pageTitle %}
+{{ ["Add new learner - ", serviceName] | join }}
+{% endblock %}
+
+
+{% block beforeContent %}
+<a href="../claim/cpd-eligibility-check-one?submitErrorTwo" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {% if data.submitErrorTwo != null and data.submitErrorTwo %}
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            <li>
+              <a href="#check-error">Select whether the learner is in an eligible role</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <form action="../cpd-eligibility?question=two" method="post" novalidate>
+      <div
+        class="govuk-form-group {% if data.submitErrorTwo != null and data.submitErrorTwo %} govuk-form-group--error {% endif %}">
+        <fieldset class=" govuk-fieldset" aria-describedby="isACourse-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <span class="govuk-caption-l">Claim: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
+          <h1 class="govuk-fieldset__heading">
+            Is the learner in an eligible role?
+          </h1>
+        </legend>
+        {% if data.submitErrorTwo != null and data.submitErrorTwo %}
+        <p id="check-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span>Select whether the learner is in an eligible role
+        </p>
+        {% endif %}
+        <p class="govuk-body-m">Eligible roles are:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>nurse (permanent nurses in long-term positions and temporary nurses employed on short-term fixed contracts)</li>
+          <li>art therapist</li>
+          <li>drama therapist</li>
+          <li>music therapist</li>
+          <li>dietician</li>
+          <li>occupational therapist</li>
+          <li>orthoptist</li>
+          <li>osteopath</li>
+          <li>physiotherapist</li>
+          <li>speech and language therapist</li>
+        </ul>
+        <div class="govuk-radios" data-module="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="question-two" name="eligibilityCheckTwo" type="radio" value="yes">
+            <label class="govuk-label govuk-radios__label" for="question-two">
+              Yes
+            </label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="question-two-2" name="eligibilityCheckTwo" type="radio" value="no">
+            <label class="govuk-label govuk-radios__label" for="question-two-2">
+              No
+            </label>
+          </div>
+          <div class="govuk-radios__divider">or</div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="question-two-3" name="eligibilityCheckTwo" type="radio" value="unsure">
+            <label class="govuk-label govuk-radios__label" for="question-two-3">
+              Not sure
+            </label>
+          </div>
+        </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Add to claim
+      </button>
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

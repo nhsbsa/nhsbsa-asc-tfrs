@@ -55,8 +55,8 @@ router.get('/getLocalData', (req, res) => {
 
 //generate data
 router.get('/generate', function (req, res) {
-  generateLearners(50, 'v10');
-  generateClaims(100, 'v10');
+  generateLearners(50, 'v11');
+  generateClaims(100, 'v11');
   res.redirect('../')
 })
 
