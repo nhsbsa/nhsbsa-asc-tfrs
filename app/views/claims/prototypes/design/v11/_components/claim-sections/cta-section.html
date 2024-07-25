@@ -1,6 +1,6 @@
 <h2 class="govuk-heading-m">What happens next</h2>
 
-{% if claim.claimType == "40" %}
+{% if claim.claimType == "60" and claim.status == "approved" and pairClaim.claimType == "40" %}
 <p class="govuk-body">When you have added all the necessary information, you can confirm the details and submit this 40 part of the claim for processing.</p>
 <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
 {% elif claim.claimType == "60" %}
