@@ -25,6 +25,8 @@ router.post('/check-org', function (req, res) {
     res.redirect('register-organisation/confirm-organisation-details')
   } else if (orgID == "timeout") {
     res.redirect('register-organisation/org-issue?submitError=timeout')
+  } else if (orgID == "resend") {
+    res.redirect('register-organisation/org-issue?submitError=resend')
   } else if (orgID == "dupe") {
     res.redirect('register-organisation/org-issue?submitError=duplicate')
   } else {
