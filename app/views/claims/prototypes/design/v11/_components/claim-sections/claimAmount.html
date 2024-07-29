@@ -98,7 +98,7 @@
 
         {% elif pairClaim.status == "approved" %}
 
-        <p class="govuk-body"><strong>The total you could get back for this training is</strong><br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}.</strong></p>
+        <p class="govuk-body"><strong>In total for this training you'll get back </strong><br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}.</strong></p>
         <p class="govuk-body">For the 60 part of the claim you've already got <strong>£{{ claim.training.reimbursementAmount * 0.6 }}</strong>.</p>
         <p class="govuk-body">You'll get <strong>£{{ claim.training.reimbursementAmount * 0.4 }}</strong> for the 40 part of the claim.</p>
 
