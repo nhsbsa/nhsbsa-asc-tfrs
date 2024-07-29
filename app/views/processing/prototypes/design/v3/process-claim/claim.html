@@ -124,7 +124,7 @@
             <h2 class="govuk-heading-m">Completed review of evidence</h2>
             {% endif %}
             
-            <div class="govuk-form-group {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentNoNoteIncomplete %}govuk-form-group--error {% endif %}">
+            <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}">
                 <div class="govuk-form-group" id="payment-review">
                     <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
@@ -148,7 +148,7 @@
 
                                 </div>
                                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-paymentReimbursementAmount" data-maxlength="1000">
-                                <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count">
+                                <div class="govuk-form-group govuk-character-count {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %}govuk-form-group--error {% endif %}" data-module="govuk-character-count">
                                     <label class="govuk-label" for="paymentReimbursementAmount">
                                         What was the cost per learner?
                                     </label>
@@ -184,7 +184,7 @@
                                     </label>
                                 </div>
                                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-payment-no" data-maxlength="1000">
-                                    <div class="govuk-form-group govuk-character-count" data-module="govuk-character-count">
+                                    <div class="govuk-form-group govuk-character-count {% if data.paymentNoNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
                                     <label class="govuk-label" for="payment-no">
                                         Why did the evidence not meet the required criteria?
                                     </label>
@@ -225,7 +225,7 @@
 
             {% if (claim.training.fundingModel == "full") and (claim.completionDate != null)%}
             <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-            <div class="govuk-form-group {% if data.completionResponseIncomplete or data.completionNoNoteIncomplete %}govuk-form-group--error {% endif %}">
+            <div class="govuk-form-group {% if data.completionResponseIncomplete %}govuk-form-group--error {% endif %}">
                 <div class="govuk-form-group" id="completion-review">
                     <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
@@ -254,7 +254,7 @@
                         </div>
                         
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-notes">
-                            <div class="govuk-form-group govuk-character-count {% if data.submitError =='notemissing' %}govuk-form-group--error{% endif %}" data-module="govuk-character-count"
+                            <div class="govuk-form-group govuk-character-count {% if data.completionNoNoteIncomplete %}govuk-form-group--error {% endif %}" data-module="govuk-character-count"
                                 data-maxlength="1000">
                                 <label class="govuk-label" for="completionNote">
                                     Why did the evidence not meet the required criteria?
