@@ -31,20 +31,20 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentNoNote, completionResponse, completionNoNote) {
+function updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentNoNote, completionResponse, completionNoNote) {
         if (paymentResponse == "yes") {
-            foundClaim.evidenceOfPaymentreview.pass = "Approved"
-            foundClaim.reimbursementAmount = paymentReimbursementNote
+            claim.evidenceOfPaymentreview.pass = "Approved"
+            claim.reimbursementAmount = paymentReimbursementAmount
         } else if (paymentResponse == "no") {
-            foundClaim.evidenceOfPaymentreview.pass = "Rejected"
-            foundClaim.evidenceOfPaymentreview.note = paymentNoNote
+            claim.evidenceOfPaymentreview.pass = "Rejected"
+            claim.evidenceOfPaymentreview.note = paymentNoNote
         }
 
         if (completionResponse == "yes") {
-            foundClaim.evidenceOfCompletionreview.pass = "Approved"
+            claim.evidenceOfCompletionreview.pass = "Approved"
         } else if (completionResponse == "no") {
-            foundClaim.evidenceOfCompletionreview.pass = "Rejected"
-            foundClaim.evidenceOfCompletionreview.note = completionNoNote
+            claim.evidenceOfCompletionreview.pass = "Rejected"
+            claim.evidenceOfCompletionreview.note = completionNoNote
         }
 }
 

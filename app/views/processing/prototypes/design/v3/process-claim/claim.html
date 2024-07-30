@@ -119,7 +119,7 @@
     
     <div class="govuk-grid-column-one-half">
         {% if claim.status == "submitted" %}
-        <form action="../claim-process-handler?processSuccess" method="post" novalidate>
+        <form action="../claim-process-handler" method="post" novalidate>
             <h2 class="govuk-heading-m">Review of evidence</h2>
             {% if (claim.fundingType == "TU") and (claim.claimType != "40")%}
             <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}" id="payment-review">
@@ -135,7 +135,7 @@
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
 
-                        <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="yes" data-aria-controls="conditional-paymentReimbursementAmount"  {% if claim.evidenceOfPaymentreview.pass != null and claim.evidenceOfPaymentreview.pass == "Approved" %}checked{% endif %}>
+                        <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="yes" data-aria-controls="conditional-paymentReimbursementAmount"  {% if data.payment=='yes' %}checked{% endif %}>
                         <label class="govuk-label govuk-radios__label" for="paymentYes">
                             Yes
                         </label>
@@ -165,14 +165,14 @@
                             {% endif %}
                             <div class="govuk-input__wrapper" id="cost-per-learner">
                                 <div class="govuk-input__prefix" aria-hidden="true">£</div>
-                                <input class="govuk-input govuk-input--width-5 {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %} govuk-input--error {% endif %}" id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text" value={{claim.reimbursementAmount}}>
+                                <input class="govuk-input govuk-input--width-5 {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %} govuk-input--error {% endif %}" id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text" value="{{ data.paymentReimbursementAmount | default ('') }}">
                             </div>
 
                         </div>
                         </div>
 
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no" data-aria-controls="conditional-payment-no" {% if claim.evidenceOfPaymentreview.pass != null and claim.evidenceOfPaymentreview.pass == "Rejected" %}checked{% endif %}>
+                            <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no" data-aria-controls="conditional-payment-no" {% if data.payment=='no' %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="paymentNo">
                             No
                             </label>
@@ -190,7 +190,7 @@
                                     <span class="govuk-visually-hidden">Error:</span>Complete note for evidence of payment
                                 </p>
                             {% endif %}
-                            <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentNoNoteIncomplete %}govuk-textarea--error{% endif %}" id="paymentNoNote" name="paymentNoNote" rows="21" aria-describedby="payment-no-note-info note-hint">{{ claim.evidenceOfPaymentreview.note | default ('') }}</textarea>
+                            <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentNoNoteIncomplete %}govuk-textarea--error{% endif %}" id="paymentNoNote" name="paymentNoNote" rows="21" aria-describedby="payment-no-note-info note-hint">{{ data.paymentNoNote | default ('') }}</textarea>
                             <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
                                 You can enter up to 1000 characters
                             </div>
@@ -219,14 +219,14 @@
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input " id="completionYes" name="completion" type="radio"
-                                value="yes"  {% if claim.evidenceOfCompletionreview.pass != null and claim.evidenceOfCompletionreview.pass == "Approved"%}checked{% endif %}>
+                                value="yes"  {% if data.completion=='yes' %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="completionYes">
                                 Yes
                             </label>
                         </div>
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="completionNo" name="completion" type="radio"
-                                value="no" data-aria-controls="conditional-notes"  {% if claim.evidenceOfCompletionreview.pass != null and claim.evidenceOfCompletionreview.pass == "Rejected" %}checked{% endif %}>
+                                value="no" data-aria-controls="conditional-notes"  {% if data.completion=='no' %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="completionNo">
                                 No
                             </label>
@@ -248,7 +248,7 @@
                                 {% endif %}
                                 <textarea class="govuk-textarea govuk-js-character-count {% if data.completionNoNoteIncomplete %}govuk-textarea--error{% endif %}" id="completionNoNote" name="completionNoNote"
                                     rows="21"
-                                    aria-describedby="completionNote-info completionNote-hint">{{ claim.evidenceOfCompletionreview.note | default ('') }}</textarea>
+                                    aria-describedby="completionNote-info completionNote-hint">{{ data.completionNoNote | default ('') }}</textarea>
                                 <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
                                     You can enter up to 1000 characters
                                 </div>
@@ -301,7 +301,7 @@
         {% if (claim.status == "approved") %}
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
             <p class="govuk-body">The maximum reimbursement amount for this training was £{{claim.training.reimbursementAmount}}.</p>
-            <p class="govuk-body">The amount to be reimbursed is £{{ claim | reimbursement_V3 }}. This is {% if (claim.fundingType == "TU") and (claim.claimType == "60") %}60% of{% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}40% of{% endif %} the lower of the:</p>
+            <p class="govuk-body">The amount to be reimbursed is £{{ claim | reimbursement_V3(data.paymentReimbursementAmount) }}. This is {% if (claim.fundingType == "TU") and (claim.claimType == "60") %}60% of{% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}40% of{% endif %} the lower of the:</p>
             <ul class="govuk-list govuk-list--bullet">
                 <li>maximum reimbursement amount</li>
                 <li>cost per learner</li>

@@ -129,45 +129,37 @@ addFilter('dateSort_V3', function (notes) {
     return sortedData
 })
 
-addFilter('reimbursement_V3', function (claim) {
-    if (claim.training.fundingModel == "split" && claim.completionDate == null) {
-        if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
-            return claim.reimbursementAmount * 0.6
+addFilter('reimbursement_V3', function (claim, paymentReimbursementAmount) {
+    if ((claim.fundingType == "TU") && (claim.claimType == "60")) {
+        if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
+            return paymentReimbursementAmount * 0.6
         } else {
             return claim.training.reimbursementAmount * 0.6
         }
-    } 
-    
-    else if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
-        return claim.reimbursementAmount
+    } else if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
+        if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
+            return claim.reimbursementAmount * 0.4
+        } else {
+            return claim.training.reimbursementAmount * 0.4
+        }
+    } else if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
+        return paymentReimbursementAmount
     } else {
         return claim.training.reimbursementAmount
     }
 });
 
-addFilter('original_reimbursement_amount_V3', function (claim) {
-    if (claim.reimbursementAmount > claim.training.reimbursementAmount) {
+addFilter('original_reimbursement_amount_V3', function (claim,paymentReimbursementAmount) {
+    if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
+        paymentReimbursementAmount = claim.reimbursementAmount
+    }
+
+    if (paymentReimbursementAmount > claim.training.reimbursementAmount) {
         return claim.training.reimbursementAmount
     } else {
-        return claim.reimbursementAmount
+        return paymentReimbursementAmount
     }
 });
-
-addFilter('rejectionNote_V3', function (claim) {
-    let rejectionNote = "<div class='govuk-inset-text'><h2 class='govuk-heading-s'>Claim rejected</h2>"
-    if (!claim.evidenceOfPaymentreview.pass || claim.evidenceOfPaymentreview.pass == "Rejected") {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>"
-        rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfPaymentreview.note + "</p>"
-    }
-    if (isFullClaimCheck(claim) && (!claim.evidenceOfCompletionreview.pass || claim.evidenceOfCompletionreview.pass == "Rejected")) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>"
-        rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfCompletionreview.note + "</p>"
-    }
-
-    rejectionNote = rejectionNote + "</div>"
-
-    return rejectionNote
-}, { renderAsHtml: true })
 
 addFilter('orgErrorMessage_V3', function (error) {
     if (error == "invalid") {

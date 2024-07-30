@@ -17,7 +17,7 @@
         data.result == "approve" %}approved{% elif data.result ==
         "reject" %}rejected{% endif %}</span>.</p>
     {% if data.result == "approve" %}
-    <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V3 }}</span> in reimbursement.</p>
+    <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V3(data.paymentReimbursementAmount) }}</span> in reimbursement.</p>
     <details class="govuk-details">
       <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
@@ -25,22 +25,38 @@
         </span>
       </summary>
       <div class="govuk-details__text">
-        {% if (claim.training.fundingModel == "split") %}
-          <p><strong>£{{ claim | reimbursement_V3 }} is 60% of £{{ claim | original_reimbursement_amount_V3}}.</strong></p>
+        {% if (claim.fundingType == "TU") and (claim.claimType == "60")  %}
+          <p><strong>£{{ claim | reimbursement_V3(data.paymentReimbursementAmount) }} is 60% of £{{ claim | original_reimbursement_amount_V3(data.paymentReimbursementAmount)}}.</strong></p>
+        {% elif (claim.fundingType == "TU") and (claim.claimType == "40")  %}
+          <p><strong>£{{ claim | reimbursement_V3(data.paymentReimbursementAmount) }} is 40% of £{{ claim | original_reimbursement_amount_V3(data.paymentReimbursementAmount)}}.</strong></p>
         {% endif %}
 
         <p>Organisations cannot get back more than they paid for training.</p>
-        <p>Therefore if the organisation paid less than the maximum reimbursement amount they will only get back what they paid. This is the value you specified on the last screen as the <strong>cost per learner</strong>.</p>
+        <p>Therefore if the organisation paid less than the maximum reimbursement amount they will only get back what they paid. {% if (claim.fundingType == "TU") and ((claim.claimType == "60") or (claim.claimType == "100"))  %}This is the value you specified on the last screen as the <strong>cost per learner</strong>.{% elif (claim.fundingType == "TU") and (claim.claimType == "40")  %}This is the value specified as the <strong>cost per learner</strong> when the 60 claim was approved.{% endif %}</p>
         <p>Otherwise they will get back the maximum reimbursement amount.</p>
 
-        {% if (claim.training.fundingModel == "split") %}
+        {% if (claim.fundingType == "TU") and (claim.claimType == "60")  %}
           <p>For this 60 claim, the organisation will get back 60% of the reimbursement amount. When the 40 claim is approved they'll get back the remaining 40%.</p>
+        {% elif (claim.fundingType == "TU") and (claim.claimType == "40")  %}
+          <p>For this 40 claim, the organisation will get back 40% of the reimbursement amount. The organisation will have already recieved the 60%.</p>
         {% endif %}
       </div>
     </details>
+
     {% elif data.result == "reject" %}
     <p class="govuk-body">The organisation will receive the following note to explain why it was rejected. The wording is taken from what you entered on the previous screen.</p>
-    {{ claim | rejectionNote_V3 }}
+    <div class='govuk-inset-text'><h2 class='govuk-heading-s'>Claim rejected</h2>
+    
+      {% if (data.payment == "no") %}
+        <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
+        <p class='govuk-body'>{{data.paymentNoNote}}</p>
+    {% endif %}
+
+    {% if (data.completion == "no") %}
+        <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
+        <p class='govuk-body'>{{data.completionNoNote}}</p>
+    {% endif %}
+    </div>
     {% endif %}
     <p class="govuk-body">Confirm that this claim should be {% if data.result == "approve" %}approved{% elif
       data.result ==
