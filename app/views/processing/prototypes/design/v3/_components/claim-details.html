@@ -1,10 +1,16 @@
-{% if (claim.training.fundingModel == "split") and (claim.completionDate == null)%}
+{% if (claim.fundingType == "TU") and (claim.claimType == "60") %}
 <div style = "padding-bottom: 10px;">
     <h3 class="govuk-heading-s" style="margin-bottom: 5px;" id="payment">60 claim</h3>
     <p id="payment-no-note-info" class="govuk-hint" style="margin-top: 0px;">This 60 claim relates to training where the submitter has chosen to use the 60/40 funding model.</p>
     <p id="payment-no-note-info" class="govuk-hint" style="margin-top: 0px;">This means that payment has been made but the training has not yet been completed.</p>
 </div>
-{% elif (claim.training.fundingModel != "split") %}
+{% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}
+<div style = "padding-bottom: 10px;">
+    <h3 class="govuk-heading-s" style="margin-bottom: 5px;" id="payment">40 claim</h3>
+    <p id="payment-no-note-info" class="govuk-hint" style="margin-top: 0px;">This 40 claim relates to training where the submitter has chosen to use the 60/40 funding model.</p>
+    <p id="payment-no-note-info" class="govuk-hint" style="margin-top: 0px;">This means that the training has been completed.</p>
+</div>
+{% elif (claim.fundingType == "TU") and (claim.claimType == "100") %}
     <h3 class="govuk-heading-s" style="margin-bottom: 5px;" id="payment">100 claim</h3>
     <p id="payment-no-note-info" class="govuk-hint" style="margin-top: 0px;">This is a 100 claim, so the submitter has provided both payment and completion evidence.</p>
 {% endif %}
@@ -98,7 +104,7 @@
             {{ claim.startDate | govukDate }}
         </dd>
     </div>
-    {% if (claim.training.fundingModel == "full") and (claim.completionDate != null)%}
+    {% if (claim.fundingType == "TU") and (claim.claimType != "60")%}
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
             Completion date
