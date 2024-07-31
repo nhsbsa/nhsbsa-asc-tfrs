@@ -48,15 +48,28 @@
                   <a href="#payment-review">Complete check on evidence of payment</a>
                 </li>
                 {% endif %}
-                {% if data.paymentReimbursementAmountIncomplete %}
-                <li>
-                  <a href="#cost-per-learner-error">Complete cost per learner</a>
-                </li>
-                {% endif %}
-                {% if data.paymentReimbursementAmountInvalid %}
-                <li>
-                  <a href="#cost-per-learner-error">Enter a valid cost per learner</a>
-                </li>
+                {% if (claim.fundingType == "TU") %}
+                    {% if data.paymentReimbursementAmountIncomplete %}
+                    <li>
+                    <a href="#cost-per-learner-error">Complete cost per learner</a>
+                    </li>
+                    {% endif %}
+                    {% if data.paymentReimbursementAmountInvalid %}
+                    <li>
+                    <a href="#cost-per-learner-error">Enter a valid cost per learner</a>
+                    </li>
+                    {% endif %}
+                {% elif (claim.fundingType == "CPD") %}
+                    {% if data.paymentReimbursementAmountIncomplete %}
+                        <li>
+                        <a href="#cost-per-learner-error">Complete reimbursement amount</a>
+                        </li>
+                        {% endif %}
+                        {% if data.paymentReimbursementAmountInvalid %}
+                        <li>
+                        <a href="#cost-per-learner-error">Enter a valid reimbursement amount</a>
+                        </li>
+                    {% endif %}
                 {% endif %}
                 {% if data.paymentReimbursementAmountTooMuch %}
                 <li>

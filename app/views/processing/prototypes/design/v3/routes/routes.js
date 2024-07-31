@@ -76,6 +76,7 @@ router.post('/search-claim-id', function (req, res) {
 
   delete req.session.data.paymentResponseIncomplete
   delete req.session.data.paymentReimbursementAmountIncomplete
+  delete req.session.data.paymentReimbursementAmountTooMuch
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
   delete req.session.data.processSuccess
@@ -185,7 +186,7 @@ router.post('/claim-process-handler', function (req, res) {
       }
 
       if (errorParamaters == "") {
-        if ((paymentResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "40"))) && (completionResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "60")))) {
+        if (((claim.fundingType == "CPD") && (paymentResponse == "yes")) || (paymentResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "40"))) && (completionResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "60")))) {
           res.redirect('process-claim/outcome?result=approve')
         } else {
           res.redirect('process-claim/outcome?result=reject')
