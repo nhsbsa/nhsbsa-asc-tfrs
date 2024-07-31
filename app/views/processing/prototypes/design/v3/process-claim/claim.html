@@ -90,10 +90,14 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
-        {% include "../_components/claim-details.html" %}
+        {% if claim.fundingType == "TU"%}
+             {% include "../_components/claim-details.html" %}
++        {% elif claim.fundingType == "CPD"%}
+             {% include "../_components/cpd-claim-details.html" %}
+         {% endif %}
 
         <div style="padding-top: 10px;">
-            {% if (claim.fundingType == "TU") and (claim.claimType != "40")%}
+            {% if ((claim.fundingType == "TU") and (claim.claimType != "40")) or (claim.fundingType == "CPD")%}
             <h2 class="govuk-heading-m">
                 Evidence of payment
             </h2>
@@ -104,6 +108,7 @@
                 {% endfor %}
             </dl>
             {% endif %}
+
             {% if (claim.fundingType == "TU") and (claim.claimType != "60")%}
             <h2 class="govuk-heading-m">
                 Evidence of completion
@@ -121,7 +126,7 @@
         {% if claim.status == "submitted" %}
         <form action="../claim-process-handler" method="post" novalidate>
             <h2 class="govuk-heading-m">Review of evidence</h2>
-            {% if (claim.fundingType == "TU") and (claim.claimType != "40")%}
+           {% if ((claim.fundingType == "TU") and (claim.claimType != "40")) or (claim.fundingType == "CPD")%}
             <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}" id="payment-review">
                 <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
@@ -143,15 +148,25 @@
                         </div>
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-paymentReimbursementAmount" data-maxlength="1000">
                         <div class="govuk-form-group govuk-character-count {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %}govuk-form-group--error {% endif %}" data-module="govuk-character-count">
-                            <label class="govuk-label" for="paymentReimbursementAmount">
-                                What was the cost per learner?
-                            </label>
-                            <div id="payment-note-hint" class="govuk-hint">
-                                <p class="govuk-hint">Enter the amount the training cost for a single learner.</p>
-                                <p class="govuk-hint">For instance, if the organisation paid £100 for 4 learners then the cost per learner is £25.</p>
-                                <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is £{{claim.training.reimbursementAmount}}.</strong></p>
-                                <p class="govuk-hint">The organisation will not get back more than they actually paid.</p>
-                            </div>
+                            
+                            {% if (claim.fundingType == "TU")%}
+                                <label class="govuk-label" for="paymentReimbursementAmount">
+                                    What was the cost per learner?
+                                </label>
+                                <div id="payment-note-hint" class="govuk-hint">
+                                    <p class="govuk-hint">Enter the amount the training cost for a single learner.</p>
+                                    <p class="govuk-hint">For instance, if the organisation paid £100 for 4 learners then the cost per learner is £25.</p>
+                                    <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is £{{claim.training.reimbursementAmount}}.</strong></p>
+                                    <p class="govuk-hint">The organisation will not get back more than they actually paid.</p>
+                                </div>
+                            {% elif (claim.fundingType == "CPD")%}
+                                <label class="govuk-label" for="paymentReimbursementAmount">
+                                    What was the reimbursement amount?
+                                </label>
+                                <div id="payment-note-hint" class="govuk-hint">
+                                    <p class="govuk-hint">Enter the amount the organisation should get back considering the amount the activity cost and the amount of revalidation funding the learner has left.</p>
+                                </div>
+                            {% endif %}
 
                             {% if data.paymentReimbursementAmountIncomplete %}
                                 <p id="cost-per-learner-error" class="govuk-error-message">

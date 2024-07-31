@@ -96,7 +96,7 @@ router.post('/search-claim-id', function (req, res) {
     return res.redirect('process-claim/start-process?invalidIDError=true')
   }
 
-  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C|D)$/;
   if (!lengthRegex.test(claimID)) {
     return res.redirect('process-claim/start-process?invalidIDError=true')
   }
