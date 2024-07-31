@@ -1,3 +1,5 @@
+<h3 class="govuk-heading-s">Revalidation funding</h3>
+<p class="govuk-body">Explanation</p>
 
 <h3 class="govuk-heading-m" id="payment">Organisation</h3>
 <dl class="govuk-summary-list">
@@ -85,13 +87,15 @@
             {{claim.learner.givenName}} {{claim.learner.familyName}}
         </dd>
     </div>
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Revalidation budget remaining
-        </dt>
-        <dd class="govuk-summary-list__value">
-            £{{ claim.learner.cpdBudget }}
-        </dd>
-    </div>
-    
+
+    {% if (claim.status == "submitted") %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Revalidation budget remaining
+            </dt>
+            <dd class="govuk-summary-list__value">
+                £{{ claim.learner.cpdBudget }}
+            </dd>
+        </div>
+    {% endif %}
 </dl>
