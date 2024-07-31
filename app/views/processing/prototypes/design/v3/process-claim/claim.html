@@ -35,7 +35,7 @@
         </div>
         {% endif %}
 
-        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentNoNoteIncomplete or data.completionResponseIncomplete or data.completionNoNoteIncomplete %}
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentReimbursementAmountTooMuch or data.paymentNoNoteIncomplete or data.completionResponseIncomplete or data.completionNoNoteIncomplete %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
           <div role="alert">
             <h2 class="govuk-error-summary__title">
@@ -58,6 +58,12 @@
                   <a href="#cost-per-learner-error">Enter a valid cost per learner</a>
                 </li>
                 {% endif %}
+                {% if data.paymentReimbursementAmountTooMuch %}
+                <li>
+                  <a href="#cost-per-learner-too-big-error">Enter a reimbursement amount that is less than or equal to budget left on learner</a>
+                </li>
+                {% endif %}
+                
                 {% if data.paymentNoNoteIncomplete %}
                 <li>
                   <a href="#payment-note-error"> Complete note for evidence of payment</a>
@@ -181,6 +187,8 @@
                                     <p class="govuk-hint">Enter the amount the organisation should get back considering the amount the activity cost and the amount of revalidation funding the learner has left.</p>
                                 </div>
 
+                                
+
                                 {% if data.paymentReimbursementAmountIncomplete %}
                                     <p id="cost-per-learner-error" class="govuk-error-message">
                                         <span class="govuk-visually-hidden">Error:</span> Complete reimbursement amount
@@ -189,6 +197,11 @@
                                 {% if data.paymentReimbursementAmountInvalid %}
                                     <p id="note-error" class="govuk-error-message">
                                         <span class="govuk-visually-hidden">Error:</span> Enter a valid reimbursement amount
+                                    </p>
+                                {% endif %}
+                                {% if data.paymentReimbursementAmountTooMuch %}
+                                    <p id="cost-per-learner-too-big-error" class="govuk-error-message">
+                                        <span class="govuk-visually-hidden">Error:</span> Enter a reimbursement amount that is less than or equal to budget left on learner
                                     </p>
                                 {% endif %}
 
