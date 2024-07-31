@@ -201,3 +201,27 @@ addFilter('qualificationCheck_V3', function(claim, training, value) {
         return "Not applicable"
     }
 })
+
+addFilter('matchPairClaim_V3', function(claimID, claims) {
+    var pairID = null
+    var pairClaim = null
+    if (claimID.length === 0) return claimID; // Check if the string is empty
+
+    let lastChar = claimID.charAt(claimID.length - 1); // Get the last character of the string
+
+    if (lastChar === 'B') {
+      pairID = claimID.slice(0, -1) + 'C'; // Change 'B' to 'C'
+    } else if (lastChar === 'C') {
+      pairID =  claimID.slice(0, -1) + 'B'; // Change 'C' to 'B'
+    } 
+
+    for (const c of claims) {
+        if (c.claimID = pairID) {
+            pairClaim = c
+            break;
+        }
+    }
+
+    return pairClaim
+
+})
