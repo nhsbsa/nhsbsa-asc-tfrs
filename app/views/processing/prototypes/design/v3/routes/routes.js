@@ -157,7 +157,7 @@ router.post('/claim-process-handler', function (req, res) {
   }
       isFullClaim = isFullClaimCheck(claim)
 
-      if ((claim.fundingType == "TU") && (claim.claimType == "60" || claim.claimType == "100")) {
+      if (((claim.fundingType == "TU") && (claim.claimType == "60" || claim.claimType == "100")) || (claim.fundingType == "CPD")) {
         if (paymentResponse == null) {
           errorParamaters += "&paymentResponseIncomplete=true";
         } else if (paymentResponse == "yes" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {

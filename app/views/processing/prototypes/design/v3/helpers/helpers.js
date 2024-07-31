@@ -106,7 +106,7 @@ function validNumberCheck(string) {
 }
 
 function isFullClaimCheck(claim) {
-    if (claim.training.fundingModel == "full" && claim.completionDate != null) {
+    if ((claim.fundingType == "CPD" && claim.paymentDate != null) || (claim.fundingType != "CPD" && claim.training.fundingModel == "full" && claim.completionDate != null)) {
         return true
     } else { 
         return false
