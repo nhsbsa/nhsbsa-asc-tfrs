@@ -625,14 +625,16 @@ router.post('/submit-claim', function (req, res) {
   const d = new Date()
   const dStr = d.toISOString();
 
+
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
+      let learner = getLearner(req.session.data.learners, c.learner.id)
       if (req.session.data.confirmation) {
         c.status = 'submitted'
-        if (c.claimAmount > c.learner.cpdBudget) {
+        if (c.claimAmount > learner.cpdBudget) {
           c.learner.cpdBudget = 0
         } else {
-          c.learner.cpdBudget -= c.claimAmount
+          learner.cpdBudget -= c.claimAmount
         }
         c.submittedDate = dStr
         delete req.session.data.submitError
