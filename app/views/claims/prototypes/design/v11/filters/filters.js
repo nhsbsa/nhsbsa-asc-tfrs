@@ -693,7 +693,7 @@ addFilter('formatLearnerBudget_V11', function (learnerID, learners) {
     for (let learner of learners) {
         if (learner.id == learnerID) {
             if (learner.cpdBudget == 0) {
-                return "No budget remaining to learner"
+                return "None"
             } else {
                 return "£" + learner.cpdBudget
             }
