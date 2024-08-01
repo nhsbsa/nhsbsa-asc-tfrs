@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm } = require('../helpers/helpers.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getLearner } = require('../helpers/helpers.js');
 
 // v11 Prototype routes
 
@@ -861,11 +861,12 @@ router.post('/cpd-eligibility', function (req, res) {
       for (const c of req.session.data.claims) {
         if (claimID == c.claimID) {
           if (checkTwo == "yes") {
+            let learner = getLearner(req.session.data.learners, c.learner.id)
             // check if learner already has a budget, if not set to 500
-            if (c.learner.cpdBudget == -1 | c.learner.cpdBudget == null) {
-              c.learner.cpdBudget = 500
+            if (learner.cpdBudget == -1 | learner.cpdBudget == null) {
+              learner.cpdBudget = 500
             }
-            console.log(c.learner)
+            console.log(learner)
             res.redirect('claim/claim-details' + '?id=' + claimID)
           } else if (checkTwo == "no") {
             // redirect to learner isn't able to be added to claim view
