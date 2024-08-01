@@ -629,6 +629,11 @@ router.post('/submit-claim', function (req, res) {
     if (claimID == c.claimID) {
       if (req.session.data.confirmation) {
         c.status = 'submitted'
+        if (c.claimAmount > c.learner.cpdBudget) {
+          c.learner.cpdBudget = 0
+        } else {
+          c.learner.cpdBudget -= c.claimAmount
+        }
         c.submittedDate = dStr
         delete req.session.data.submitError
         req.session.data.claims = sortByCreatedDate(req.session.data.claims);
