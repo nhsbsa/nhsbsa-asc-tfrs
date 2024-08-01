@@ -689,6 +689,18 @@ addFilter('getLearnerBudget_V11', function (learnerID, learners) {
     }
 })
 
+addFilter('formatLearnerBudget_V11', function (learnerID, learners) {
+    for (let learner of learners) {
+        if (learner.id == learnerID) {
+            if (learner.cpdBudget == 0) {
+                return "No budget remaining to learner"
+            } else {
+                return "£" + learner.cpdBudget
+            }
+            
+        }
+    }
+})
 addFilter('availableAmount_V11', function (learnerId, budget, claims) {
     let pendingAmount = 0;
     for (let claim of claims) {

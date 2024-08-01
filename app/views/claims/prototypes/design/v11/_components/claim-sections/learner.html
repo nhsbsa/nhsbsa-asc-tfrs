@@ -38,8 +38,8 @@
         Revalidation budget remaining
       </dt>
       <dd class="govuk-summary-list__value">
-        <p class="govuk-body" style="margin-bottom: 5px;">£{{ claim.learner.id | getLearnerBudget_V11(data['learners']) }}</p>
-        {% if claim.status == "not-yet-submitted" or claim.status == "new" %}
+        <p class="govuk-body" style="margin-bottom: 5px;">{{ claim.learner.id | formatLearnerBudget_V11(data['learners']) }}</p>
+        {% if claim.status == "not-yet-submitted" or claim.status == "new" and (claim.learner.id | getLearnerBudget_V11(data['learners'])) != 0  %}
           <p class="govuk-hint">This amount may include claims currently being processed.</p>
         {% endif %}
       </dd>
