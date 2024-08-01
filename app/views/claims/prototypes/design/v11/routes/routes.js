@@ -600,15 +600,17 @@ router.post('/save-claim', function (req, res) {
 router.post('/ready-to-declare', function (req, res) {
   const claimID = req.session.data.id
   let claim = {}
+  let learner = null
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       claim = c
+      learner = getLearner(req.session.data.learners, c.learner.id)
     }
   }
   const submitError = checkClaim(claim)
   if (submitError.claimValid) {
     delete req.session.data.submitError
-    if (claim.learner.cpdBudget == 0 && claim.fundingType == "CPD") {
+    if (learner.cpdBudget == 0 && claim.fundingType == "CPD") {
       res.redirect('claim/no-budget-to-claim')
     } else {
       res.redirect('claim/declaration')
@@ -632,7 +634,7 @@ router.post('/submit-claim', function (req, res) {
       if (req.session.data.confirmation) {
         c.status = 'submitted'
         if (c.claimAmount > learner.cpdBudget) {
-          c.learner.cpdBudget = 0
+          learner.cpdBudget = 0
         } else {
           learner.cpdBudget -= c.claimAmount
         }

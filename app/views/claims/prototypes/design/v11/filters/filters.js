@@ -689,14 +689,6 @@ addFilter('getLearnerBudget_V11', function (learnerID, learners) {
     }
 })
 
-addFilter('updateLearnerBudget_V11', function (reimbursementAmount, learnerID, learners) {
-    for (let learner of learners) {
-        if (learner.id == learnerID) {
-            learner.cpdBudget -= reimbursementAmount
-        }
-    }
-})
-
 addFilter('availableAmount_V11', function (learnerId, budget, claims) {
     let pendingAmount = 0;
     for (let claim of claims) {
