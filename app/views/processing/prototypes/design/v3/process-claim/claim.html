@@ -111,9 +111,9 @@
     <div class="govuk-grid-column-one-half">
         {% if claim.fundingType == "TU"%}
              {% include "../_components/claim-details.html" %}
-+        {% elif claim.fundingType == "CPD"%}
+        {% elif claim.fundingType == "CPD"%}
              {% include "../_components/cpd-claim-details.html" %}
-         {% endif %}
+        {% endif %}
 
         <div style="padding-top: 10px;">
             {% if ((claim.fundingType == "TU") and (claim.claimType != "40")) or (claim.fundingType == "CPD")%}

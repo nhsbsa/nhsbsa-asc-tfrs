@@ -1,22 +1,23 @@
 {% set pairClaim = data.id | matchPairClaim_V3(data.claims) %}
 {% if (claim.fundingType == "TU") and (claim.claimType == "60") %}
-    <h3 class="govuk-heading-s">60 claim</h3>
-    <p class="govuk-body">This 60 claim relates to training where the submitter has chosen to use the 60/40 funding model.</p>
-    <p class="govuk-body">This means that payment has been made but the training has not yet been completed.</p>
+    <h3 class="govuk-heading-s">Care skills 60 part claim</h3>
+    <p class="govuk-body">This is the 60 part of a claim which uses the 60/40 funding model.</p>
+    <p class="govuk-body">It covers evidence of payment.</p>
     {% if pairClaim != null %}
-    <p class="govuk-body">The 40 claim which covers the evidence of completion is <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">{{pairClaim.claimID}}</a></p>
+    <p class="govuk-body">View the <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">40 part of the claim</a>, which covers evidence of training completion.</p>
     {% else %}
-    <p class="govuk-body">The 40 claim which covers the evidence of completion has not been submitted yet.</p>
+    <p class="govuk-body">The 40 part of the claim which covers the evidence of training completion has not been submitted yet.</p>
     {% endif %}
 
 {% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}
-    <h3 class="govuk-heading-s">40 claim</h3>
-    <p class="govuk-body">This 40 claim relates to training where the submitter has chosen to use the 60/40 funding model.</p>
-    <p class="govuk-body">This means that the training has been completed.</p>
-    <p class="govuk-body">The 60 claim which covers the evidence of payment is <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">{{pairClaim.claimID}}</a></p>
+    <h3 class="govuk-heading-s">Care skills 40 part claim</h3>
+    <p class="govuk-body">This is the 40 part of a claim which uses the 60/40 funding model.</p>
+    <p class="govuk-body">It covers evidence of training completion.</p>
+    <p class="govuk-body">View the <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">60 part of the claim</a>, which covers evidence of payment.</p>
+
 {% elif (claim.fundingType == "TU") and (claim.claimType == "100") %}
-    <h3 class="govuk-heading-s">100 claim</h3>
-    <p class="govuk-body">This is a 100 claim, so the submitter has provided both payment and completion evidence.</p>
+    <h3 class="govuk-heading-s">Care skills 100 claim</h3>
+    <p class="govuk-body">This is a care skills 100 claim. It covers both evidence of payment and evidence of training completion.</p>
 {% endif %}
 
 <h3 class="govuk-heading-m" id="payment">Organisation</h3>
