@@ -31,20 +31,20 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentNoNote, completionResponse, completionNoNote) {
+function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentNoNote, completionResponse, completionNoNote) {
         if (paymentResponse == "yes") {
-            claim.evidenceOfPaymentreview.pass = "Approved"
-            claim.reimbursementAmount = paymentReimbursementAmount
+            foundClaim.evidenceOfPaymentreview.pass = "Approved"
+            foundClaim.reimbursementAmount = paymentReimbursementNote
         } else if (paymentResponse == "no") {
-            claim.evidenceOfPaymentreview.pass = "Rejected"
-            claim.evidenceOfPaymentreview.note = paymentNoNote
+            foundClaim.evidenceOfPaymentreview.pass = "Rejected"
+            foundClaim.evidenceOfPaymentreview.note = paymentNoNote
         }
 
         if (completionResponse == "yes") {
-            claim.evidenceOfCompletionreview.pass = "Approved"
+            foundClaim.evidenceOfCompletionreview.pass = "Approved"
         } else if (completionResponse == "no") {
-            claim.evidenceOfCompletionreview.pass = "Rejected"
-            claim.evidenceOfCompletionreview.note = completionNoNote
+            foundClaim.evidenceOfCompletionreview.pass = "Rejected"
+            foundClaim.evidenceOfCompletionreview.note = completionNoNote
         }
 }
 
@@ -106,7 +106,7 @@ function validNumberCheck(string) {
 }
 
 function isFullClaimCheck(claim) {
-    if ((claim.fundingType == "CPD" && claim.paymentDate != null) || (claim.fundingType != "CPD" && claim.training.fundingModel == "full" && claim.completionDate != null)) {
+    if (claim.training.fundingModel == "full" && claim.completionDate != null) {
         return true
     } else { 
         return false
