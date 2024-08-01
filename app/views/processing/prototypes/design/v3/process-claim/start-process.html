@@ -46,8 +46,12 @@ Claim ID - Find a claim for processing
                     </legend>
                     <p class="govuk-body">This is the claim reference number exactly as it appears in operations
                         manager.</p>
+                    <p class="govuk-body">This is the claim reference number as it appears in Operations
+                        Manager.</p>
                     <div id="claim-id-hint" class="govuk-hint">
-                        For example, H2T-C813-3XF7-C
+                        You can enter reference numbers with or without the -A, -B, -C or -D suffix.<br><br>
+                        If you search for a 60/40 claim without the -B or -C suffix it will return whichever part was submitted most recently.<br><br>
+                        Example with suffix: H2T-C813-3XF7-C<br>Example without suffix: WR5-R2P4-DSL4
                     </div>
                     <div class="{% if (data.invalidIDError or data.notFound) %} govuk-form-group--error {% endif %}">
                         {% if (data.invalidIDError or data.notFound) %}
