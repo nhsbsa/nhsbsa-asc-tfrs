@@ -24,21 +24,34 @@
           How was this calculated?
         </span>
       </summary>
-      <div class="govuk-details__text">
-        {% if (claim.fundingType == "TU") and (claim.claimType == "60")  %}
-          <p><strong>£{{ claim | reimbursement_V3(data.paymentReimbursementAmount) }} is 60% of £{{ claim | original_reimbursement_amount_V3(data.paymentReimbursementAmount)}}.</strong></p>
-        {% elif (claim.fundingType == "TU") and (claim.claimType == "40")  %}
-          <p><strong>£{{ claim | reimbursement_V3(data.paymentReimbursementAmount) }} is 40% of £{{ claim | original_reimbursement_amount_V3(data.paymentReimbursementAmount)}}.</strong></p>
-        {% endif %}
+      
+    <div class="govuk-details__text">
+        {% if (claim.training.fundingModel != "split") %}
+          <p>This amount is whichever is the lower of:</p>
+          <ul>
+            <li>the maximum reimbursement amount for this training (£{{ claim.training.reimbursementAmount }})</li>
+            <li>what the organisation actually paid (£{{claim.reimbursementAmount}}) &ndash; this was the <strong>cost per learner</strong> value you entered on the last screen
+            </li>
+          </ul>
 
-        <p>Organisations cannot get back more than they paid for training.</p>
-        <p>Therefore if the organisation paid less than the maximum reimbursement amount they will only get back what they paid. {% if (claim.fundingType == "TU") and ((claim.claimType == "60") or (claim.claimType == "100"))  %}This is the value you specified on the last screen as the <strong>cost per learner</strong>.{% elif (claim.fundingType == "TU") and (claim.claimType == "40")  %}This is the value specified as the <strong>cost per learner</strong> when the 60 claim was approved.{% endif %}</p>
-        <p>Otherwise they will get back the maximum reimbursement amount.</p>
+        {% elif (claim.training.fundingModel == "split" and claim.completionDate == null) %}
+          <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3 / 0.6 }}.</p>
+          <p>This is whichever is the lower of:</p>
+          <ul class="govuk-list govuk-list--bullet">
+              <li>the maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
+              <li>what the organisation actually paid (£{{ claim | reimbursement_V3 / 0.6}}) &ndash; this was the <strong>cost per learner</strong> value you entered on the last screen</li>
+          </ul>
+          <p>For this 60 part of the claim the organisation will get 60% of this total amount, which is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
+          <p>When the 40 claim is approved they'll get back the remaining 40% (£{{ claim | reimbursement_V3 *4/6}}).</p>
 
-        {% if (claim.fundingType == "TU") and (claim.claimType == "60")  %}
-          <p>For this 60 claim, the organisation will get back 60% of the reimbursement amount. When the 40 claim is approved they'll get back the remaining 40%.</p>
-        {% elif (claim.fundingType == "TU") and (claim.claimType == "40")  %}
-          <p>For this 40 claim, the organisation will get back 40% of the reimbursement amount. The organisation will have already recieved the 60%.</p>
+        {% elif (claim.training.fundingModel == "split" and claim.completionDate != null) %}
+          <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3 / 0.6 }}.</p>
+          <p>This is whichever is the lower of:</p>
+          <ul class="govuk-list govuk-list--bullet">
+              <li>the maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
+              <li>what the organisation actually paid (£{{ claim | reimbursement_V3 / 0.4}})</li>
+          </ul>
+          <p>For this 40 part of the claim the organisation will get 40% of this total amount, which is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
         {% endif %}
       </div>
     </details>
