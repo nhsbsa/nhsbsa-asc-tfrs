@@ -112,6 +112,8 @@
             </dl>
             {% endif %}
 
+            
+
             {% if (claim.fundingType == "TU") and (claim.claimType != "60")%}
             <h2 class="govuk-heading-m">
                 Evidence of completion
@@ -317,34 +319,47 @@
 
 
         {% if (claim.status == "approved") %}
-        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-        {% if (claim.training.fundingModel == "split") and (claim.completionDate == null)%}
-            <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3 / 0.6 }}.</p>
-            <p>This is whichever is the lower of the:</p>
-            <ul class="govuk-list govuk-list--bullet">
-                <li>maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
-                <li>cost per learner (£{{ claim | reimbursement_V3 / 0.6}})</li>
-            </ul>
-            <p>For this 60 part of the claim the organisation will get 60% of this total amount, which is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
-        {% elif (claim.training.fundingModel == "split") and (claim.completionDate != null)%}
-            <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3 / 0.6 }}.</p>
-            <p>This is whichever is the lower of the:</p>
-            <ul class="govuk-list govuk-list--bullet">
-                <li>maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
-                <li>cost per learner (£{{ claim | reimbursement_V3 / 0.4}})</li>
-            </ul>
-            <p>For this 40 part of the claim the organisation will get 40% of this total amount, which is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
-        {% elif (claim.training.fundingModel != "split") %}
-            <p class="govuk-body">The amount to be reimbursed is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
-            <p>This is whichever is the lower of the:</p>
-            <ul class="govuk-list govuk-list--bullet">
-                <li>maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
-                <li>cost per learner (£{{claim.reimbursementAmount}})</li>
-            </ul>
+
+            {% if (claim.fundingType == "TU") %}
+                <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+                {% if (claim.training.fundingModel == "split") and (claim.completionDate == null) %}
+                    <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3 / 0.6 }}.</p>
+                    <p>This is whichever is the lower of the:</p>
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
+                        <li>cost per learner (£{{ claim | reimbursement_V3 / 0.6}})</li>
+                    </ul>
+                    <p>For this 60 part of the claim the organisation will get 60% of this total amount, which is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
+                {% elif (claim.training.fundingModel == "split") and (claim.completionDate != null)%}
+                    <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3 / 0.6 }}.</p>
+                    <p>This is whichever is the lower of the:</p>
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
+                        <li>cost per learner (£{{ claim | reimbursement_V3 / 0.4}})</li>
+                    </ul>
+                    <p>For this 40 part of the claim the organisation will get 40% of this total amount, which is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
+                {% elif (claim.training.fundingModel != "split") %}
+                    <p class="govuk-body">The amount to be reimbursed is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
+                    <p>This is whichever is the lower of the:</p>
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
+                        <li>cost per learner (£{{claim.reimbursementAmount}})</li>
+                    </ul>
+                {% endif %}
+
+            {% elif (claim.fundingType == "CPD") %}
+                <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                <p class="govuk-body">The total amount to be reimbursed for this revalidation claim might have been less than was paid depending on the remaining amount of learner budget.</p>
+
+
+            {% endif %}
+        
         {% endif %}
-    {% endif %}
 
         {% endif %}
-</div>
+
+
+    </div>
 
 {% endblock %}
