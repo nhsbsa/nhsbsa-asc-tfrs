@@ -12,6 +12,7 @@ function loadData(req) {
     let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
     const path = 'app/views/processing/prototypes/design/v3/data/'
 
+    var learnersFile = 'learners.json'
     var claimsFile = 'processing-claims.json'
     var statusFile = 'claim-item-statuses.json'
     var trainingFile = 'training.json'
@@ -28,21 +29,25 @@ function loadData(req) {
     req.session.data['training'] = loadJSONFromFile(trainingFile, path)
     console.log('training file loaded')
 
+    console.log('loading in learners file')
+    req.session.data['learners'] = loadJSONFromFile(learnersFile, path)
+    console.log('learners file loaded')
+
     return console.log('data updated')
 }
 
-function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentNoNote, completionResponse, completionNoNote) {
+function updateClaim(foundClaim, learner, paymentResponse, paymentReimbursementNote, paymentNoNote, completionResponse, completionNoNote) {
         if (paymentResponse == "yes") {
             foundClaim.evidenceOfPaymentreview.pass = "Approved"
             if (foundClaim.fundingType == "TU") {
                 foundClaim.reimbursementAmount = paymentReimbursementNote
             } else if (foundClaim.fundingType == "CPD"){
-                if (foundClaim.paymentAmount <= foundClaim.learner.cpdBudget) {
-                    foundClaim.learner.cpdBudget -= foundClaim.paymentAmount
+                if (foundClaim.paymentAmount <= learner.cpdBudget) {
+                    learner.cpdBudget -= foundClaim.paymentAmount
                     foundClaim.reimbursementAmount = foundClaim.paymentAmount
                 } else {
-                    foundClaim.reimbursementAmount = foundClaim.learner.cpdBudget
-                    foundClaim.learner.cpdBudget = 0
+                    foundClaim.reimbursementAmount = learner.cpdBudget
+                    learner.cpdBudget = 0
                 }
             }
         } else if (paymentResponse == "no") {

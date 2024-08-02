@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck } = require('../helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getLearner } = require('../helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag_V3', function (statusID) {
@@ -129,14 +129,32 @@ addFilter('dateSort_V3', function (notes) {
     return sortedData
 })
 
-addFilter('reimbursement_V3', function (claim, paymentReimbursementAmount) {
+addFilter('reimbursementCPD_V3', function (claim, learners) {
     if (claim.fundingType == "CPD") {
-        if (claim.paymentAmount <= claim.learner.cpdBudget) {
+        let learner = getLearner(learners, claim.learner.id)
+        if (claim.paymentAmount <= learner.cpdBudget) {
             return claim.paymentAmount
         } else {
-            return claim.learner.cpdBudget
+            return learner.cpdBudget
         }
-    } else if ((claim.fundingType == "TU") && (claim.claimType == "60")) {
+    }
+})
+
+addFilter('formatLearnerBudget_V11', function (learnerID, learners) {
+    for (let learner of learners) {
+        if (learner.id == learnerID) {
+            if (learner.cpdBudget == 0) {
+                return "None"
+            } else {
+                return "£" + learner.cpdBudget
+            }
+            
+        }
+    }
+})
+
+addFilter('reimbursement_V3', function (claim, paymentReimbursementAmount) {
+    if ((claim.fundingType == "TU") && (claim.claimType == "60")) {
         if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
             return paymentReimbursementAmount * 0.6
         } else {

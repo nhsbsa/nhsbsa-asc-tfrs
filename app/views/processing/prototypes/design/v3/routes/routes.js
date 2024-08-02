@@ -207,7 +207,8 @@ router.get('/outcome-handler', function (req, res) {
 
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
-      updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentNoNote, completionResponse, completionNoNote)
+      learner = getLearner(req.session.data.learners, c.learner.id)
+      updateClaim(claim, learner, paymentResponse, paymentReimbursementAmount, paymentNoNote, completionResponse, completionNoNote)
       if (req.session.data.result == "reject") {
         claim.rejectedDate = new Date()
         claim.status = "rejected"

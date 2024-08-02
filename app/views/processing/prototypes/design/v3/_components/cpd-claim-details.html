@@ -94,7 +94,7 @@
                 Revalidation budget remaining
             </dt>
             <dd class="govuk-summary-list__value">
-                £{{ claim.learner.cpdBudget }}
+                {{ claim.learner.id | formatLearnerBudget_V11(data['learners']) }}
             </dd>
         </div>
     {% endif %}
