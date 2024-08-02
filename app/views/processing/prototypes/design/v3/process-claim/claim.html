@@ -35,7 +35,7 @@
         </div>
         {% endif %}
 
-        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentNoNoteIncomplete or data.completionResponseIncomplete or data.completionNoNoteIncomplete %}
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentReimbursementAmountTooMuch or data.paymentNoNoteIncomplete or data.completionResponseIncomplete or data.completionNoNoteIncomplete %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
           <div role="alert">
             <h2 class="govuk-error-summary__title">
@@ -59,6 +59,22 @@
                     <a href="#cost-per-learner-error">Enter a valid cost per learner</a>
                     </li>
                     {% endif %}
+                {% elif (claim.fundingType == "CPD") %}
+                    {% if data.paymentReimbursementAmountIncomplete %}
+                        <li>
+                        <a href="#cost-per-learner-error">Complete reimbursement amount</a>
+                        </li>
+                        {% endif %}
+                        {% if data.paymentReimbursementAmountInvalid %}
+                        <li>
+                        <a href="#cost-per-learner-error">Enter a valid reimbursement amount</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+                {% if data.paymentReimbursementAmountTooMuch %}
+                <li>
+                  <a href="#cost-per-learner-too-big-error">Enter a reimbursement amount that is less than or equal to budget left on learner</a>
+                </li>
                 {% endif %}
                 
                 {% if data.paymentNoNoteIncomplete %}
@@ -112,8 +128,6 @@
             </dl>
             {% endif %}
 
-            
-
             {% if (claim.fundingType == "TU") and (claim.claimType != "60")%}
             <h2 class="govuk-heading-m">
                 Evidence of completion
@@ -164,6 +178,8 @@
                                     <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is £{{claim.training.reimbursementAmount}}.</strong></p>
                                     <p class="govuk-hint">The organisation will not get back more than they actually paid.</p>
                                 </div>
+                            
+
                                 {% if data.paymentReimbursementAmountIncomplete %}
                                     <p id="cost-per-learner-error" class="govuk-error-message">
                                         <span class="govuk-visually-hidden">Error:</span> Complete cost per learner
@@ -174,11 +190,41 @@
                                         <span class="govuk-visually-hidden">Error:</span> Enter a valid cost per learner
                                     </p>
                                 {% endif %}
+
+                            {% elif (claim.fundingType == "CPD")%}
+
+                                <label class="govuk-label" for="paymentReimbursementAmount">
+                                    What is the reimbursement amount?
+                                </label>
+                                <div id="payment-note-hint" class="govuk-hint">
+                                    <p class="govuk-hint">Enter the amount the organisation should get back considering the amount the activity cost and the amount of revalidation funding the learner has left.</p>
+                                </div>
+
+                                
+
+                                {% if data.paymentReimbursementAmountIncomplete %}
+                                    <p id="cost-per-learner-error" class="govuk-error-message">
+                                        <span class="govuk-visually-hidden">Error:</span> Complete reimbursement amount
+                                    </p>
+                                {% endif %}
+                                {% if data.paymentReimbursementAmountInvalid %}
+                                    <p id="note-error" class="govuk-error-message">
+                                        <span class="govuk-visually-hidden">Error:</span> Enter a valid reimbursement amount
+                                    </p>
+                                {% endif %}
+                                {% if data.paymentReimbursementAmountTooMuch %}
+                                    <p id="cost-per-learner-too-big-error" class="govuk-error-message">
+                                        <span class="govuk-visually-hidden">Error:</span> Enter a reimbursement amount that is less than or equal to budget left on learner
+                                    </p>
+                                {% endif %}
+
+                            {% endif %}
+
+
                             <div class="govuk-input__wrapper" id="cost-per-learner">
                                 <div class="govuk-input__prefix" aria-hidden="true">£</div>
                                 <input class="govuk-input govuk-input--width-5 {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %} govuk-input--error {% endif %}" id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text" value="{{ data.paymentReimbursementAmount | default ('') }}">
                             </div>
-                            {% endif %}
 
                         </div>
                         </div>
@@ -319,47 +365,36 @@
 
 
         {% if (claim.status == "approved") %}
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        {% if (claim.fundingType == "TU") and (claim.claimType == "100")  %}
+          <p class="govuk-body">This amount is whichever is the lower of:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>the maximum reimbursement amount for this training (£{{ claim.training.reimbursementAmount }})</li>
+            <li>what the organisation actually paid (£{{claim.reimbursementAmount}}) &ndash; this was the <strong>cost per learner</strong> value you entered on the last screen</li>
+          </ul>
 
-            {% if (claim.fundingType == "TU") %}
-                <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        {% elif (claim.fundingType == "TU") and (claim.claimType == "60")  %}
+          <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3(claim.reimbursementAmount) }}.</p>
+          <p class="govuk-body">This is whichever is the lower of:</p>
+          <ul class="govuk-list govuk-list--bullet">
+              <li>the maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
+              <li>what the organisation actually paid (£{{ claim.reimbursementAmount }}) &ndash; this was the <strong>cost per learner</strong> value you entered on the last screen</li>
+          </ul>
+          <p class="govuk-body">For this 60 part of the claim the organisation will get 60% of this total amount, which is <strong>£{{ (claim | reimbursement_V3(claim.reimbursementAmount) * 0.6) }}</strong>.</p>
+          <p class="govuk-body">When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim | reimbursement_V3(claim.reimbursementAmount) * 0.4)}}).</p>
 
-                {% if (claim.training.fundingModel == "split") and (claim.completionDate == null) %}
-                    <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3 / 0.6 }}.</p>
-                    <p>This is whichever is the lower of the:</p>
-                    <ul class="govuk-list govuk-list--bullet">
-                        <li>maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
-                        <li>cost per learner (£{{ claim | reimbursement_V3 / 0.6}})</li>
-                    </ul>
-                    <p>For this 60 part of the claim the organisation will get 60% of this total amount, which is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
-                {% elif (claim.training.fundingModel == "split") and (claim.completionDate != null)%}
-                    <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3 / 0.6 }}.</p>
-                    <p>This is whichever is the lower of the:</p>
-                    <ul class="govuk-list govuk-list--bullet">
-                        <li>maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
-                        <li>cost per learner (£{{ claim | reimbursement_V3 / 0.4}})</li>
-                    </ul>
-                    <p>For this 40 part of the claim the organisation will get 40% of this total amount, which is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
-                {% elif (claim.training.fundingModel != "split") %}
-                    <p class="govuk-body">The amount to be reimbursed is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
-                    <p>This is whichever is the lower of the:</p>
-                    <ul class="govuk-list govuk-list--bullet">
-                        <li>maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
-                        <li>cost per learner (£{{claim.reimbursementAmount}})</li>
-                    </ul>
-                {% endif %}
-
-            {% elif (claim.fundingType == "CPD") %}
-                <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-                <p class="govuk-body">The total amount to be reimbursed for this revalidation claim might have been less than was paid depending on the remaining amount of learner budget.</p>
-
-
-            {% endif %}
-        
+        {% elif (claim.fundingType == "TU") and (claim.claimType == "40")  %}
+          <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim | reimbursement_V3(claim.reimbursementAmount) * 0.6) }}.</p>
+          <p class="govuk-body">This is whichever is the lower of:</p>
+          <ul class="govuk-list govuk-list--bullet">
+              <li>the maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
+              <li>what the organisation actually paid (£{{claim.reimbursementAmount}})</li>
+          </ul>
+          <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of this total amount, which is <strong>£{{ (claim | reimbursement_V3(claim.reimbursementAmount)) * 0.4 }}</strong>.</p>
         {% endif %}
+    {% endif %}
 
         {% endif %}
-
-
-    </div>
+</div>
 
 {% endblock %}
