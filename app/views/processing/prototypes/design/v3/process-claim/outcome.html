@@ -24,22 +24,36 @@
           How was this calculated?
         </span>
       </summary>
+
       <div class="govuk-details__text">
-        {% if (claim.training.fundingModel == "split" and claim.claimType == "60") %}
-          <p><strong>£{{ claim | reimbursement_V3 }} is 60% of £{{ claim | original_reimbursement_amount_V3}}.</strong></p>
+        {% if (claim.training.fundingModel != "split") %}
+          <p>This amount is whichever is the lower of:</p>
+          <ul>
+            <li>the maximum reimbursement amount for this training (£{{ claim.training.reimbursementAmount }})</li>
+            <li>what the organisation actually paid (£{{claim.reimbursementAmount}}) &ndash; this was the <strong>cost per learner</strong> value you entered on the last screen
+            </li>
+          </ul>
+
+        {% elif (claim.training.fundingModel == "split" and claim.completionDate == null) %}
+          <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3 / 0.6 }}.</p>
+          <p>This is whichever is the lower of:</p>
+          <ul class="govuk-list govuk-list--bullet">
+              <li>the maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
+              <li>what the organisation actually paid (£{{ claim | reimbursement_V3 / 0.6}}) &ndash; this was the <strong>cost per learner</strong> value you entered on the last screen</li>
+          </ul>
+          <p>For this 60 part of the claim the organisation will get 60% of this total amount, which is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
+          <p>When the 40 claim is approved they'll get back the remaining 40% (£{{ claim | reimbursement_V3 *4/6}}).</p>
+
+        {% elif (claim.training.fundingModel == "split" and claim.completionDate != null) %}
+          <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3 / 0.6 }}.</p>
+          <p>This is whichever is the lower of:</p>
+          <ul class="govuk-list govuk-list--bullet">
+              <li>the maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
+              <li>what the organisation actually paid (£{{ claim | reimbursement_V3 / 0.4}})</li>
+          </ul>
+          <p>For this 40 part of the claim the organisation will get 40% of this total amount, which is <strong>£{{ claim | reimbursement_V3 }}</strong>.</p>
         {% endif %}
       
-        <p>This amount is whichever is the lower of:</p>
-        <ul>
-          <li>the maximum reimbursement amount for this training (£{{ claim.training.reimbursementAmount }})</li>
-          <li>what the organisation actually paid (£{{claim.reimbursementAmount}})
-          </li>
-        </ul>
-        <p>What the organisation  paid was the <strong>cost per learner</strong> value you entered on the last screen.</p>
-
-        {% if (claim.training.fundingModel == "split" and claim.claimType == "60") %}
-          <p>For this 60 claim, the organisation will get back 60% of the reimbursement amount. When the 40 claim is approved they'll get back the remaining 40%.</p>
-        {% endif %}
       </div>
     </details>
     {% elif data.result == "reject" %}
