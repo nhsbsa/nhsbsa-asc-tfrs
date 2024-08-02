@@ -218,7 +218,7 @@ addFilter('matchPairClaim_V3', function(claimID, claims) {
     } 
 
     for (const c of claims) {
-        if (c.claimID = pairID) {
+        if (c.claimID == pairID) {
             pairClaim = c
             break;
         }
