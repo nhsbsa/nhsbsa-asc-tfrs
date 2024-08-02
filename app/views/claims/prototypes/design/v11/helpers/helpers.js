@@ -347,4 +347,12 @@ function emailFormat(string) {
     return emailRegex.test(string);
 }
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm }
+function getLearner(learners, learnerID) {
+    for (let learner of learners) {
+        if (learner.id == learnerID) {
+            return learner
+        }
+    }
+}
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getLearner }

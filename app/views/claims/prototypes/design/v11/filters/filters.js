@@ -522,27 +522,6 @@ addFilter('sortByDate_V11', function (claims, statusID) {
     }
 })
 
-addFilter('pendingAmount_V11', function (learnerId, claims) {
-    let pendingAmount = 0;
-    for (let claim of claims) {
-        if (claim.fundingType == "CPD" && claim.learner != null && claim.learner.id == learnerId && claim.status == "submitted") {
-            pendingAmount = pendingAmount + Number(claim.claimAmount);
-        }
-    }
-    return pendingAmount;
-})
-
-addFilter('availableAmount_V11', function (learnerId, budget, claims) {
-    let pendingAmount = 0;
-    for (let claim of claims) {
-        if (claim.fundingType == "CPD" && claim.learner != null && claim.learner.id == learnerId && claim.status == "submitted") {
-            pendingAmount = pendingAmount + Number(claim.claimAmount);
-        }
-    }
-    return budget - pendingAmount;
-});
-
-
 addFilter('userType_V11', function (type) {
     switch(type) {
         case "signatory":
@@ -701,3 +680,33 @@ addFilter('isCostMoreThanMax_V11', function (amount) {
         return false
     }
 })
+
+addFilter('getLearnerBudget_V11', function (learnerID, learners) {
+    for (let learner of learners) {
+        if (learner.id == learnerID) {
+            return learner.cpdBudget
+        }
+    }
+})
+
+addFilter('formatLearnerBudget_V11', function (learnerID, learners) {
+    for (let learner of learners) {
+        if (learner.id == learnerID) {
+            if (learner.cpdBudget == 0) {
+                return "None"
+            } else {
+                return "£" + learner.cpdBudget
+            }
+            
+        }
+    }
+})
+addFilter('availableAmount_V11', function (learnerId, budget, claims) {
+    let pendingAmount = 0;
+    for (let claim of claims) {
+        if (claim.fundingType == "CPD" && claim.learner != null && claim.learner.id == learnerId && claim.status == "submitted") {
+            pendingAmount = pendingAmount + Number(claim.claimAmount);
+        }
+    }
+    return budget - pendingAmount;
+});
