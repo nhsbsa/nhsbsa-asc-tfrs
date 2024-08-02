@@ -347,8 +347,9 @@
                 No</br>
                 {{claim.evidenceOfPaymentreview.note}}</p>
             {% endif %}
-
+            {% if (claim.fundingType == "TU") and (claim.claimType != "60") %}
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            {% endif %}
             {% endif %}
 
             {% if (claim.fundingType == "TU") and (claim.claimType != "60") %}
@@ -364,7 +365,7 @@
 
 
         {% if (claim.status == "approved") %}
-        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" style="margin-top: 0px;">
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
         {% if (claim.training.fundingModel == "split") and (claim.completionDate == null)%}
             <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3 / 0.6 }}.</p>
             <p>This is whichever is the lower of the:</p>
