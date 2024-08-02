@@ -32,15 +32,15 @@
     </dd>
     {% endif %}
   </div>
-    {% if data.fundingPot == "CPD" and claim.learner.cpdBudget != null and claim.learner.cpdBudget != -1 and (claim.status == "not-yet-submitted" or claim.status == "new")%}
+    {% if data.fundingPot == "CPD" and (claim.learner.id | getLearnerBudget_V11(data['learners'])) != null and (claim.learner.id | getLearnerBudget_V11(data['claims'])) != -1 and (claim.status == "not-yet-submitted" or claim.status == "new")%}
     <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
       <dt class="govuk-summary-list__key">
         Revalidation budget remaining
       </dt>
       <dd class="govuk-summary-list__value">
-        <p class="govuk-body" style="margin-bottom: 5px;">£{{claim.learner.cpdBudget}}</p>
-        {% if claim.status == "not-yet-submitted" or claim.status == "new" %}
-          <p class="govuk-hint">This does not include claims currently being processed.</p>
+        <p class="govuk-body" style="margin-bottom: 5px;">{{ claim.learner.id | formatLearnerBudget_V11(data['learners']) }}</p>
+        {% if (claim.status == "not-yet-submitted" or claim.status == "new") and (claim.learner.id | getLearnerBudget_V11(data['learners']) != 500) %}
+          <p class="govuk-hint">This amount assumes that claims currently being processed will be approved.</p>
         {% endif %}
       </dd>
     </div>

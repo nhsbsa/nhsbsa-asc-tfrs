@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm } = require('../helpers/helpers.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getLearner } = require('../helpers/helpers.js');
 
 // v11 Prototype routes
 
@@ -600,15 +600,17 @@ router.post('/save-claim', function (req, res) {
 router.post('/ready-to-declare', function (req, res) {
   const claimID = req.session.data.id
   let claim = {}
+  let learner = null
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       claim = c
+      learner = getLearner(req.session.data.learners, c.learner.id)
     }
   }
   const submitError = checkClaim(claim)
   if (submitError.claimValid) {
     delete req.session.data.submitError
-    if (claim.learner.cpdBudget == 0 && claim.fundingType == "CPD") {
+    if (learner.cpdBudget == 0 && claim.fundingType == "CPD") {
       res.redirect('claim/no-budget-to-claim')
     } else {
       res.redirect('claim/declaration')
@@ -625,10 +627,17 @@ router.post('/submit-claim', function (req, res) {
   const d = new Date()
   const dStr = d.toISOString();
 
+
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
+      let learner = getLearner(req.session.data.learners, c.learner.id)
       if (req.session.data.confirmation) {
         c.status = 'submitted'
+        if (c.claimAmount > learner.cpdBudget) {
+          learner.cpdBudget = 0
+        } else {
+          learner.cpdBudget -= c.claimAmount
+        }
         c.submittedDate = dStr
         delete req.session.data.submitError
         req.session.data.claims = sortByCreatedDate(req.session.data.claims);
@@ -856,11 +865,12 @@ router.post('/cpd-eligibility', function (req, res) {
       for (const c of req.session.data.claims) {
         if (claimID == c.claimID) {
           if (checkTwo == "yes") {
+            let learner = getLearner(req.session.data.learners, c.learner.id)
             // check if learner already has a budget, if not set to 500
-            if (c.learner.cpdBudget == -1 | c.learner.cpdBudget == null) {
-              c.learner.cpdBudget = 500
+            if (learner.cpdBudget == -1 | learner.cpdBudget == null) {
+              learner.cpdBudget = 500
             }
-            console.log(c.learner)
+            console.log(learner)
             res.redirect('claim/claim-details' + '?id=' + claimID)
           } else if (checkTwo == "no") {
             // redirect to learner isn't able to be added to claim view
