@@ -207,7 +207,6 @@ addFilter('qualificationCheck_V3', function(claim, training, value) {
 addFilter('matchPairClaim_V3', function(claimID, claims) {
     var pairID = null
     var pairClaim = null
-    if (claimID.length === 0) return claimID; // Check if the string is empty
 
     let lastChar = claimID.charAt(claimID.length - 1); // Get the last character of the string
 
