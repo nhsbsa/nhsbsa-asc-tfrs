@@ -35,7 +35,7 @@
         </div>
         {% endif %}
 
-        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentReimbursementAmountTooMuch or data.paymentNoNoteIncomplete or data.completionResponseIncomplete or data.completionNoNoteIncomplete %}
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentNoNoteIncomplete or data.completionResponseIncomplete or data.completionNoNoteIncomplete %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
           <div role="alert">
             <h2 class="govuk-error-summary__title">
@@ -59,22 +59,6 @@
                     <a href="#cost-per-learner-error">Enter a valid cost per learner</a>
                     </li>
                     {% endif %}
-                {% elif (claim.fundingType == "CPD") %}
-                    {% if data.paymentReimbursementAmountIncomplete %}
-                        <li>
-                        <a href="#cost-per-learner-error">Complete reimbursement amount</a>
-                        </li>
-                        {% endif %}
-                        {% if data.paymentReimbursementAmountInvalid %}
-                        <li>
-                        <a href="#cost-per-learner-error">Enter a valid reimbursement amount</a>
-                        </li>
-                    {% endif %}
-                {% endif %}
-                {% if data.paymentReimbursementAmountTooMuch %}
-                <li>
-                  <a href="#cost-per-learner-too-big-error">Enter a reimbursement amount that is less than or equal to budget left on learner</a>
-                </li>
                 {% endif %}
                 
                 {% if data.paymentNoNoteIncomplete %}
@@ -178,8 +162,6 @@
                                     <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is £{{claim.training.reimbursementAmount}}.</strong></p>
                                     <p class="govuk-hint">The organisation will not get back more than they actually paid.</p>
                                 </div>
-                            
-
                                 {% if data.paymentReimbursementAmountIncomplete %}
                                     <p id="cost-per-learner-error" class="govuk-error-message">
                                         <span class="govuk-visually-hidden">Error:</span> Complete cost per learner
@@ -190,41 +172,11 @@
                                         <span class="govuk-visually-hidden">Error:</span> Enter a valid cost per learner
                                     </p>
                                 {% endif %}
-
-                            {% elif (claim.fundingType == "CPD")%}
-
-                                <label class="govuk-label" for="paymentReimbursementAmount">
-                                    What is the reimbursement amount?
-                                </label>
-                                <div id="payment-note-hint" class="govuk-hint">
-                                    <p class="govuk-hint">Enter the amount the organisation should get back considering the amount the activity cost and the amount of revalidation funding the learner has left.</p>
-                                </div>
-
-                                
-
-                                {% if data.paymentReimbursementAmountIncomplete %}
-                                    <p id="cost-per-learner-error" class="govuk-error-message">
-                                        <span class="govuk-visually-hidden">Error:</span> Complete reimbursement amount
-                                    </p>
-                                {% endif %}
-                                {% if data.paymentReimbursementAmountInvalid %}
-                                    <p id="note-error" class="govuk-error-message">
-                                        <span class="govuk-visually-hidden">Error:</span> Enter a valid reimbursement amount
-                                    </p>
-                                {% endif %}
-                                {% if data.paymentReimbursementAmountTooMuch %}
-                                    <p id="cost-per-learner-too-big-error" class="govuk-error-message">
-                                        <span class="govuk-visually-hidden">Error:</span> Enter a reimbursement amount that is less than or equal to budget left on learner
-                                    </p>
-                                {% endif %}
-
-                            {% endif %}
-
-
                             <div class="govuk-input__wrapper" id="cost-per-learner">
                                 <div class="govuk-input__prefix" aria-hidden="true">£</div>
                                 <input class="govuk-input govuk-input--width-5 {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %} govuk-input--error {% endif %}" id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text" value="{{ data.paymentReimbursementAmount | default ('') }}">
                             </div>
+                            {% endif %}
 
                         </div>
                         </div>

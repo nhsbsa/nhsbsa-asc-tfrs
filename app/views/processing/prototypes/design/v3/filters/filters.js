@@ -131,7 +131,11 @@ addFilter('dateSort_V3', function (notes) {
 
 addFilter('reimbursement_V3', function (claim, paymentReimbursementAmount) {
     if (claim.fundingType == "CPD") {
-        return paymentReimbursementAmount 
+        if (claim.paymentAmount <= claim.learner.cpdBudget) {
+            return claim.paymentAmount
+        } else {
+            return claim.learner.cpdBudget
+        }
     } else if ((claim.fundingType == "TU") && (claim.claimType == "60")) {
         if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
             return paymentReimbursementAmount * 0.6

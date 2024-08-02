@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck } = require('../helpers/helpers.js');
+const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, getLearner } = require('../helpers/helpers.js');
 
 // v3 Prototype routes
 
@@ -133,7 +133,6 @@ router.post('/claim-process-handler', function (req, res) {
   delete req.session.data.paymentReimbursementAmountIncomplete
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
-  delete req.session.data.paymentReimbursementAmountTooMuch
   delete req.session.data.processSuccess
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
@@ -159,7 +158,7 @@ router.post('/claim-process-handler', function (req, res) {
   }
       isFullClaim = isFullClaimCheck(claim)
 
-      if (((claim.fundingType == "TU") && (claim.claimType == "60" || claim.claimType == "100")) || (claim.fundingType == "CPD")) {
+      if (((claim.fundingType == "TU") && (claim.claimType == "60" || claim.claimType == "100"))) {
         if (paymentResponse == null) {
           errorParamaters += "&paymentResponseIncomplete=true";
         } else if (paymentResponse == "yes" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
@@ -172,8 +171,10 @@ router.post('/claim-process-handler', function (req, res) {
       }
 
       if (claim.fundingType == "CPD") {
-        if (paymentReimbursementAmount > claim.learner.cpdBudget ) {
-          errorParamaters += "&paymentReimbursementAmountTooMuch=true";
+        if (paymentResponse == null) {
+          errorParamaters += "&paymentResponseIncomplete=true";
+        } else if (paymentResponse == "no" && (paymentNoNote == null || paymentNoNote == "")) {
+          errorParamaters += "&paymentNoNoteIncomplete=true";
         }
       }
 
