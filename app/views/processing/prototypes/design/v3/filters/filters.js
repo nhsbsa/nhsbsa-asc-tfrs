@@ -129,9 +129,8 @@ addFilter('dateSort_V3', function (notes) {
     return sortedData
 })
 
-addFilter('reimbursementCPD_V3', function (claim, learners) {
+addFilter('reimbursementCPD_V3', function (claim, learner) {
     if (claim.fundingType == "CPD") {
-        let learner = getLearner(learners, claim.learner.id)
         if (claim.paymentAmount <= learner.cpdBudget) {
             return claim.paymentAmount
         } else {
@@ -148,7 +147,6 @@ addFilter('formatLearnerBudget_V11', function (learnerID, learners) {
             } else {
                 return "£" + learner.cpdBudget
             }
-            
         }
     }
 })
@@ -173,11 +171,38 @@ addFilter('reimbursement_V3', function (claim, paymentReimbursementAmount) {
     }
 });
 
+addFilter('findLearner_V3', function (learnerID, learners) {
+    for (let learner of learners) {
+        if (learner.id == learnerID) {
+            return learner
+        }
+    }
+});
+
+addFilter('reimbursementExplanation_V3', function (claim, learner) {
+    if (learner.cpdBudget > claim.paymentAmount) {
+        return "enough budget"
+    } else if (learner.cpdBudget > 0) {
+        return "part covered budget"
+    } else {
+        return "no budsget"
+    }
+});
+
+addFilter('reimbursementApprovedExplanation_V3', function (claim) {
+    if (claim.reimbursementAmount == 0) {
+        return "no budsget"
+    } else if (claim.paymentAmount > claim.reimbursementAmount) {
+        return "part covered budget"
+    } else {
+        return "budget"
+    }
+});
+
 addFilter('original_reimbursement_amount_V3', function (claim,paymentReimbursementAmount) {
     if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
         paymentReimbursementAmount = claim.reimbursementAmount
     }
-
     if (paymentReimbursementAmount > claim.training.reimbursementAmount) {
         return claim.training.reimbursementAmount
     } else {

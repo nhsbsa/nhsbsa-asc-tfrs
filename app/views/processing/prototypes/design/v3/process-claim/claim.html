@@ -1,6 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% set claim = data.id | findClaim_V8(data.claims) %}
+{% set learner = claim.learner.id | findLearner_V3(data.learners) %}
 {% set paymentCompleted = claim.evidenceOfPaymentreview.pass != null %}
 {% set paymentNote = claim.evidenceOfPaymentreview.note %}
 {% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
@@ -350,9 +351,9 @@
               </ul>
               <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of this total amount, which is <strong>£{{ (claim | reimbursement_V3(claim.reimbursementAmount))}}</strong>.</p>
               <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement_V3(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>
-              {% elif (claim.fundingType == "CPD") %}
-
-                <p class="govuk-body">The total amount to be reimbursed for this revalidation claim might have been less than was paid depending on the remaining amount of learner budget.</p>
+            
+            {% elif (claim.fundingType == "CPD") %}
+                <p class="govuk-body">{{claim | reimbursementApprovedExplanation_V3}}</p>
             {% endif %}
 
 

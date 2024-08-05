@@ -1,6 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% set claim = data.id | findClaim_V8(data.claims) %}
+{% set learner = claim.learner.id | findLearner_V3(data.learners) %}
 
 {% block pageTitle %}
 {{ ["Confirm outcome: ", claim.claimID, " - process a claim"] | join }}
@@ -20,7 +21,7 @@
       {% if claim.fundingType == "TU" %}
         <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V3(data.paymentReimbursementAmount) }}</span> in reimbursement.</p>
       {% elif claim.fundingType == "CPD" %}
-        <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursementCPD_V3(data['learners']) }}</span> in reimbursement.</p>
+        <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursementCPD_V3(learner) }}</span> in reimbursement.</p>
       {% endif %}
     <details class="govuk-details">
       <summary class="govuk-details__summary">
@@ -57,7 +58,9 @@
           </ul>
           <p>For this 40 part of the claim the organisation will get 40% of this total amount, which is <strong>£{{ (claim | reimbursement_V3(data.paymentReimbursementAmount)) }}</strong>.</p>
           <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement_V3(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>
-          {% elif (claim.fundingType == "CPD") %}
+          
+        {% elif (claim.fundingType == "CPD") %}
+          <p class="govuk-body">{{claim | reimbursementExplanation_V3(learner)}}</p>
         {% endif %}
       </div>
     </details>

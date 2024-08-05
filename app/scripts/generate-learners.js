@@ -90,12 +90,14 @@ function generateLearners (quantity, version) {
     const familyName = fakerEN_GB.person.lastName();
     const roleType = getRandomRole(rolesData);
     const jobTitle = getRandomjobTitle(roleType, rolesData);
+    const cpdBudget = -1;
 
     const person = {
       id,
       familyName,
       givenName,
       jobTitle,
+      cpdBudget
     };
 
     data.push(person);
