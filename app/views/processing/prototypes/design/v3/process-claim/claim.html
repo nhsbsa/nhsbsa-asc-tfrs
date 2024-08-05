@@ -353,7 +353,7 @@
               <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement_V3(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>
             
             {% elif (claim.fundingType == "CPD") %}
-                <p class="govuk-body">{{claim | reimbursementApprovedExplanation_V3(learner)}}</p>
+                {{claim | reimbursementApprovedExplanation_V3(learner)}}
             {% endif %}
 
 
