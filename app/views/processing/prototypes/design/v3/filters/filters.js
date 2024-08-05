@@ -181,22 +181,22 @@ addFilter('findLearner_V3', function (learnerID, learners) {
 
 addFilter('reimbursementExplanation_V3', function (claim, learner) {
     if (learner.cpdBudget > claim.paymentAmount) {
-        return "The learner's remaining revalidation budget is £" + learner.cpdBudget + ". So the organisation will get back the full cost of the activity - £" + claim.paymentAmount + "."
+        return 'The learner"s remaining revalidation budget is £' + learner.cpdBudget + '.<br>So the organisation will get back the full cost of the activity - <strong>£' + claim.paymentAmount + '</strong>.'
     } else if (learner.cpdBudget > 0) {
         let amountPaidBack = claim.paymentAmount - learner.cpdBudget
-        return "The learner's remaining revalidation budget is £" + learner.cpdBudget + ". The activity cost £" + claim.paymentAmount + ". So the organisation will get back some of the cost - £" + amountPaidBack + "."
+        return 'The learner"s remaining revalidation budget is £' + learner.cpdBudget + '. The activity cost £' + claim.paymentAmount + '. <br>So the organisation will get back some of the cost - <strong>£' + amountPaidBack + '</strong>.'
     } else {
-        return "The learner has no remaining revalidation budget. So the organisation will not get back any reimbursement for this claim."
+        return 'The learner has no remaining revalidation budget. <br>So the organisation will not get back any reimbursement for this claim.'
     }
 });
 
 addFilter('reimbursementApprovedExplanation_V3', function (claim, learner) {
     if (claim.reimbursementAmount == 0) {
-        return "The learner has no remaining revalidation budget. So the organisation will not get back any reimbursement for this claim."
+        return 'The learner has no remaining revalidation budget.<br>So the organisation will not get back any reimbursement for this claim.'
     } else if (claim.paymentAmount > claim.reimbursementAmount) {
-        return "The learner's remaining revalidation budget when processing this claim was £" + learner.cpdBudget + ". The activity cost £" + claim.paymentAmount + ". So the organisation will get back some of the cost - £" + amountPaidBack + "."
+        return 'The learner"s remaining revalidation budget when processing this claim was £' + learner.cpdBudget + '. The activity cost £' + claim.paymentAmount + '. <br>So the organisation will get back some of the cost - <strong>£' + amountPaidBack + '</strong>.'
     } else {
-        return "The learner's remaining revalidation budget when processing this claim was £" + learner.cpdBudget + ". So the organisation will get back the full cost of the activity - £" + claim.paymentAmount + "."
+        return 'The learner"s remaining revalidation budget when processing this claim was £' + learner.cpdBudget + '. <br>So the organisation will get back the full cost of the activity - <strong>£' + claim.paymentAmount + '</strong>.'
     }
 });
 
