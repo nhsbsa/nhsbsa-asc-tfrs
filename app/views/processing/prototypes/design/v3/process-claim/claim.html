@@ -332,7 +332,7 @@
               </ul>
 
             {% elif (claim.fundingType == "TU") and (claim.claimType == "60")  %}
-              <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3(claim.reimbursementAmount) / 0.6 }}.</p>
+              <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3(claim.reimbursementAmount) / 0.6 }}.</p>
               <p class="govuk-body">This is whichever is the lower of:</p>
               <ul class="govuk-list govuk-list--bullet">
                   <li>the maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
@@ -349,6 +349,7 @@
                   <li>what the organisation actually paid (£{{claim.reimbursementAmount}})</li>
               </ul>
               <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of this total amount, which is <strong>£{{ (claim | reimbursement_V3(claim.reimbursementAmount))}}</strong>.</p>
+              <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement_V3(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>
               {% elif (claim.fundingType == "CPD") %}
 
                 <p class="govuk-body">The total amount to be reimbursed for this revalidation claim might have been less than was paid depending on the remaining amount of learner budget.</p>
