@@ -21,7 +21,7 @@
       {% if claim.fundingType == "TU" %}
         <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V3(data.paymentReimbursementAmount) }}</span> in reimbursement.</p>
       {% elif claim.fundingType == "CPD" %}
-        <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursementCPD_V3(learner) }}</span> in reimbursement.</p>
+        {{ claim | reimbursementCPD_V3(learner)}}
       {% endif %}
     <details class="govuk-details">
       <summary class="govuk-details__summary">

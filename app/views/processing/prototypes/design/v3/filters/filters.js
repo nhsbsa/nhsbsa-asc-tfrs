@@ -130,14 +130,16 @@ addFilter('dateSort_V3', function (notes) {
 })
 
 addFilter('reimbursementCPD_V3', function (claim, learner) {
-    if (claim.fundingType == "CPD") {
-        if (claim.paymentAmount <= learner.cpdBudget) {
-            return claim.paymentAmount
-        } else {
-            return learner.cpdBudget
-        }
+    if (learner.cpdBudget == 0) {
+        return `The organisation will not receive reimbursement.`
+    } else if (claim.paymentAmount <= learner.cpdBudget) {
+        return `<p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£${claim.paymentAmount}</span> in reimbursement.</p>
+        </p>`
+    } else {
+        return `<p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£${learner.cpdBudget}</span> in reimbursement.</p>
+        </p>`
     }
-})
+}, { renderAsHtml: true })
 
 addFilter('formatLearnerBudget_V11', function (learnerID, learners) {
     for (let learner of learners) {
@@ -183,8 +185,7 @@ addFilter('reimbursementExplanation_V3', function (claim, learner) {
     if (learner.cpdBudget > claim.paymentAmount) {
         return `<p>The learner's remaining revalidation budget is £${learner.cpdBudget}.<br>So the organisation will get back the full cost of the activity - <strong>£${claim.paymentAmount}</strong>.</p>`
     } else if (learner.cpdBudget > 0) {
-        let amountPaidBack = claim.paymentAmount - learner.cpdBudget
-        return `<p>The learner's remaining revalidation budget is £${learner.cpdBudget}. The activity cost £${claim.paymentAmount}. <br>So the organisation will get back some of the cost - <strong>£${amountPaidBack}</strong>.</p>`
+        return `<p>The learner's remaining revalidation budget is £${learner.cpdBudget}. The activity cost £${claim.paymentAmount}. <br>So the organisation will get back some of the cost - <strong>£${learner.cpdBudget}</strong>.</p>`
     } else {
         return `<p>The learner has no remaining revalidation budget. <br>So the organisation will not get back any reimbursement for this claim.</p>`
     }
@@ -194,9 +195,11 @@ addFilter('reimbursementApprovedExplanation_V3', function (claim, learner) {
     if (claim.reimbursementAmount == 0) {
         return `<p>The learner has no remaining revalidation budget.<br>So the organisation will not get back any reimbursement for this claim.</p>`
     } else if (claim.paymentAmount > claim.reimbursementAmount) {
-        return `<p>The learner's remaining revalidation budget when processing this claim was £${learner.cpdBudget}. The activity cost £' + claim.paymentAmount + '. <br>So the organisation will get back some of the cost - <strong>${amountPaidBack}</strong>.</p>`
+        let originalBudget = learner.cpdBudget + claim.reimbursementAmount
+        return `<p>The learner's remaining revalidation budget when processing this claim was £${originalBudget}. The activity cost £${claim.paymentAmount}. <br>So the organisation will get back some of the cost - <strong>£${claim.reimbursementAmount}</strong>.</p>`
     } else {
-        return `<p>The learner's remaining revalidation budget when processing this claim was £${learner.cpdBudget}.<br>So the organisation will get back the full cost of the activity - <strong>£${claim.paymentAmount}</strong>.</p>`
+        let originalBudget = learner.cpdBudget + claim.reimbursementAmount
+        return `<p>The learner's remaining revalidation budget when processing this claim was £${originalBudget}.<br>So the organisation will get back the full cost of the activity - <strong>£${claim.paymentAmount}</strong>.</p>`
     }
 }, { renderAsHtml: true });
 
