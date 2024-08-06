@@ -131,7 +131,7 @@ addFilter('dateSort_V3', function (notes) {
 
 addFilter('reimbursementCPD_V3', function (claim, learner) {
     if (learner.cpdBudget == 0) {
-        return `The organisation will not receive reimbursement.`
+        return `<p class="govuk-body">The organisation will not receive reimbursement.</p>`
     } else if (claim.paymentAmount <= learner.cpdBudget) {
         return `<p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£${claim.paymentAmount}</span> in reimbursement.</p>
         </p>`
