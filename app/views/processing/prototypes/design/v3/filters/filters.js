@@ -183,23 +183,23 @@ addFilter('findLearner_V3', function (learnerID, learners) {
 
 addFilter('reimbursementExplanation_V3', function (claim, learner) {
     if (learner.cpdBudget > claim.paymentAmount) {
-        return `<p class="govuk-body">The learner's remaining revalidation budget is £${learner.cpdBudget}.<br>So the organisation will get back the full cost of the activity - <strong>£${claim.paymentAmount}</strong>.</p>`
+        return `<p class="govuk-body">The learner's remaining revalidation budget is £${learner.cpdBudget}.</p><p>So the organisation will get back the full cost of the activity: <strong>£${claim.paymentAmount}</strong>.</p>`
     } else if (learner.cpdBudget > 0) {
-        return `<p class="govuk-body">The learner's remaining revalidation budget is £${learner.cpdBudget}. The activity cost £${claim.paymentAmount}. <br>So the organisation will get back some of the cost - <strong>£${learner.cpdBudget}</strong>.</p>`
+        return `<p class="govuk-body">The learner's remaining revalidation budget is £${learner.cpdBudget}. The activity cost £${claim.paymentAmount}.</p><p>So the organisation will get back some of the cost: <strong>£${learner.cpdBudget}</strong>.</p>`
     } else {
-        return `<p class="govuk-body">The learner has no remaining revalidation budget. <br>So the organisation will not get back any reimbursement for this claim.</p>`
+        return `<p class="govuk-body">The learner has no remaining revalidation budget.</p><p>So the organisation will not get back any reimbursement for this claim.</p>`
     }
 }, { renderAsHtml: true });
 
 addFilter('reimbursementApprovedExplanation_V3', function (claim, learner) {
     if (claim.reimbursementAmount == 0) {
-        return `<p class="govuk-body">The learner has no remaining revalidation budget.<br>So the organisation will not get back any reimbursement for this claim.</p>`
+        return `<p class="govuk-body">The learner has no remaining revalidation budget.</p><p>So the organisation will not get back any reimbursement for this claim.</p>`
     } else if (claim.paymentAmount > claim.reimbursementAmount) {
         let originalBudget = learner.cpdBudget + claim.reimbursementAmount
-        return `<p class="govuk-body">The learner's remaining revalidation budget when processing this claim was £${originalBudget}. The activity cost £${claim.paymentAmount}. <br>So the organisation will get back some of the cost - <strong>£${claim.reimbursementAmount}</strong>.</p>`
+        return `<p class="govuk-body">The learner's remaining revalidation budget when processing this claim was £${originalBudget}. The activity cost £${claim.paymentAmount}.</p><p>So the organisation will get back some of the cost: <strong>£${claim.reimbursementAmount}</strong>.</p>`
     } else {
         let originalBudget = learner.cpdBudget + claim.reimbursementAmount
-        return `<p class="govuk-body">The learner's remaining revalidation budget when processing this claim was £${originalBudget}.<br>So the organisation will get back the full cost of the activity - <strong>£${claim.paymentAmount}</strong>.</p>`
+        return `<p class="govuk-body">The learner's remaining revalidation budget when processing this claim was £${originalBudget}.</p><p>So the organisation will get back the full cost of the activity: <strong>£${claim.paymentAmount}</strong>.</p>`
     }
 }, { renderAsHtml: true });
 
