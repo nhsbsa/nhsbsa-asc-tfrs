@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck } = require('../helpers/helpers.js');
+const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, getLearner } = require('../helpers/helpers.js');
 
 // v3 Prototype routes
 
@@ -76,6 +76,7 @@ router.post('/search-claim-id', function (req, res) {
 
   delete req.session.data.paymentResponseIncomplete
   delete req.session.data.paymentReimbursementAmountIncomplete
+  delete req.session.data.paymentReimbursementAmountTooMuch
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
   delete req.session.data.processSuccess
@@ -96,7 +97,7 @@ router.post('/search-claim-id', function (req, res) {
     return res.redirect('process-claim/start-process?invalidIDError=true')
   }
 
-  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C|D)$/;
   if (!lengthRegex.test(claimID)) {
     return res.redirect('process-claim/start-process?invalidIDError=true')
   }
@@ -133,7 +134,6 @@ router.post('/claim-process-handler', function (req, res) {
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
   delete req.session.data.processSuccess
-
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
 
@@ -144,30 +144,41 @@ router.post('/claim-process-handler', function (req, res) {
   const completionResponse = req.session.data.completion
   const completionNoNote = req.session.data.completionNoNote
 
-  var baseURL = "process-claim/claim?id=" + claimID
   var errorParamaters = ""
-  var foundClaim = null
+  var claim = null
   var isFullClaim = false
 
   var validAmount = validNumberCheck(paymentReimbursementAmount)
 
-  for (const claim of req.session.data.claims) {
-    if (claim.claimID == claimID) {
-      foundClaim = claim
-      updateClaim(foundClaim, paymentResponse, paymentReimbursementAmount, paymentNoNote, completionResponse, completionNoNote)
-      isFullClaim = isFullClaimCheck(foundClaim)
+  for (const c of req.session.data.claims) {
+    if (c.claimID == claimID) {
+      claim = c
+      break;
+    }
+  }
+      isFullClaim = isFullClaimCheck(claim)
 
-      if (paymentResponse == null) {
-        errorParamaters += "&paymentResponseIncomplete=true";
-      } else if (paymentResponse == "yes" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
-        errorParamaters += "&paymentReimbursementAmountIncomplete=true";
-      } else if (paymentResponse == "yes" && (!validAmount)) {
-        errorParamaters += "&paymentReimbursementAmountInvalid=true";
-      } else if (paymentResponse == "no" && (paymentNoNote == null || paymentNoNote == "")) {
-        errorParamaters += "&paymentNoNoteIncomplete=true";
+      if (((claim.fundingType == "TU") && (claim.claimType == "60" || claim.claimType == "100"))) {
+        if (paymentResponse == null) {
+          errorParamaters += "&paymentResponseIncomplete=true";
+        } else if (paymentResponse == "yes" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
+          errorParamaters += "&paymentReimbursementAmountIncomplete=true";
+        } else if (paymentResponse == "yes" && (!validAmount)) {
+          errorParamaters += "&paymentReimbursementAmountInvalid=true";
+        } else if (paymentResponse == "no" && (paymentNoNote == null || paymentNoNote == "")) {
+          errorParamaters += "&paymentNoNoteIncomplete=true";
+        }
       }
 
-      if (isFullClaim) {
+      if (claim.fundingType == "CPD") {
+        if (paymentResponse == null) {
+          errorParamaters += "&paymentResponseIncomplete=true";
+        } else if (paymentResponse == "no" && (paymentNoNote == null || paymentNoNote == "")) {
+          errorParamaters += "&paymentNoNoteIncomplete=true";
+        }
+      }
+
+      if ((claim.fundingType == "TU") && (claim.claimType == "40" || claim.claimType == "100")) {
         if (completionResponse == null) {
           errorParamaters += "&completionResponseIncomplete=true";
         } else if (completionResponse == "no" && (completionNoNote == null || completionNoNote == "" )) {
@@ -176,32 +187,44 @@ router.post('/claim-process-handler', function (req, res) {
       }
 
       if (errorParamaters == "") {
-        if ((paymentResponse == "yes" && isFullClaim == false) || (isFullClaim && paymentResponse == "yes" && completionResponse == "yes")) {
-          foundClaim.approvedDate = new Date()
-          foundClaim.reimbursementAmount = paymentReimbursementAmount
+        if (((claim.fundingType == "CPD") && (paymentResponse == "yes")) || (paymentResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "40"))) && (completionResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "60")))) {
           res.redirect('process-claim/outcome?result=approve')
         } else {
-          foundClaim.rejectedDate = new Date()
           res.redirect('process-claim/outcome?result=reject')
         }
       } else {
         res.redirect("process-claim/claim?id=" + claimID + errorParamaters)
       }
-    }
-  }
 });
 
 router.get('/outcome-handler', function (req, res) {
   claimID = req.session.data.id
+  const paymentResponse = req.session.data.payment
+  const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
+  const paymentNoNote = req.session.data.paymentNoNote
+  const completionResponse = req.session.data.completion
+  const completionNoNote = req.session.data.completionNoNote
+
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
+      learner = getLearner(req.session.data.learners, claim.learner.id)
+      updateClaim(claim, learner, paymentResponse, paymentReimbursementAmount, paymentNoNote, completionResponse, completionNoNote)
       if (req.session.data.result == "reject") {
+        claim.rejectedDate = new Date()
         claim.status = "rejected"
       } else if (req.session.data.result == "approve") {
+        claim.approvedDate = new Date()
         claim.status = "approved"
       }
     }
   }
+
+  delete req.session.data.payment
+  delete req.session.data.paymentReimbursementAmount
+  delete req.session.data.paymentNoNote
+  delete req.session.data.completion
+  delete req.session.data.completionNoNote
+
   res.redirect('process-claim/claim?processSuccess=true')
 });
 

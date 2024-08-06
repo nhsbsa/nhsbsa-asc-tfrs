@@ -1,0 +1,101 @@
+<h3 class="govuk-heading-s">Revalidation claim</h3>
+<p class="govuk-body">This is a claim for an activity relating to professional revalidation.</p>
+
+<h3 class="govuk-heading-m" id="payment">Organisation</h3>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            <span class="govuk-visually-hidden">Organisation</span>Name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            Oaktree Care Home Ltd
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Workplace ID
+        </dt>
+        <dd class="govuk-summary-list__value">
+            G03944234
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Organisation address
+        </dt>
+        <dd class="govuk-summary-list__value">
+            72 Guild Street<br>London<br>SE23 6FH
+        </dd>
+    </div>
+</dl>
+<h3 class="govuk-heading-m" id="payment">Submitter</h3>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            <span class="govuk-visually-hidden">Submitter</span>Name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            Casey Simonis
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Email
+        </dt>
+        <dd class="govuk-summary-list__value">
+            <a class="govuk-link" href="mailto:example@example.com">casey.simonis@oaktree.com</a>
+        </dd>
+    </div>
+
+</dl>
+
+<h3 class="govuk-heading-m" id="payment">Activity</h3>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Description
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{claim.description}}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Payment date
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ claim.costDate | govukDate }}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Payment amount
+        </dt>
+        <dd class="govuk-summary-list__value">
+            £{{ claim.paymentAmount }}
+        </dd>
+    </div>
+
+</dl>
+<h3 class="govuk-heading-m" id="payment">Learner</h3>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            <span class="govuk-visually-hidden">Learner</span>Name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{claim.learner.givenName}} {{claim.learner.familyName}}
+        </dd>
+    </div>
+
+    {% if (claim.status == "submitted") %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Revalidation budget remaining
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ claim.learner.id | formatLearnerBudget_V11(data['learners']) }}
+            </dd>
+        </div>
+    {% endif %}
+</dl>
