@@ -1,0 +1,35 @@
+{% extends "../layouts/processing-main.html" %}
+{% set claim = data.id | findClaim_V11(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Duplicate claim - Claim: ", data.id] | join }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
+        <h1 class="govuk-heading-l">The learner's budget has changed</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-visually-hidden">Warning</span>
+                The budget for this learner has changed.
+            </strong>
+        </div>
+        <p class="govuk-body">This might be because another processor has processed a claim at the same time.</p>
+
+        <p class="govuk-body">Please go back to see updated budget and re-approve.</p>
+        
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <a type="submit" class="govuk-button" href="claim-details?id={{data.id}}">
+            Go back to see budget
+        </a>
+    </div>
+</div>
+
+{% endblock %}
