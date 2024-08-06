@@ -17,17 +17,17 @@
             <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
             <strong class="govuk-warning-text__text">
                 <span class="govuk-visually-hidden">Warning</span>
-                The budget for this learner has changed.
+                The budget for this learner has changed since you started processing the claim.
             </strong>
         </div>
-        <p class="govuk-body">This might be because another processor has processed a claim at the same time.</p>
+        <p class="govuk-body">This might be because someone else has been processing another claim for this learner at the same time.</p>
 
-        <p class="govuk-body">Please go back to see updated budget and re-approve.</p>
+        <p class="govuk-body">Go back to see the updated budget.</p>
         
     </div>
     <div class="govuk-grid-column-two-thirds">
-        <a type="submit" class="govuk-button" href="claim-details?id={{data.id}}">
-            Go back to see budget
+        <a type="submit" class="govuk-button" href="claim?id={{data.id}}">
+            Go back
         </a>
     </div>
 </div>
