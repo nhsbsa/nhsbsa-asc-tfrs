@@ -26,7 +26,13 @@
     {% include "../_components/claim-sections/errorCatch.html" %}
     {% endif %}
     <span class="govuk-caption-xl">{{ claim.fundingType | potName_V11 }}</span>
-    <h1 class="govuk-heading-xl">Claim: {{ claim.claimID | removeClaimSuffix_V11 }}</h1>
+    <h1 class="govuk-heading-xl">
+      {% if (claim.fundingType == "TU" and claim.claimType == "100") or (claim.fundingType == "CPD") %}
+        Claim: {{ claim.claimID }}
+      {% else %}
+        Combined claim: {{ claim.claimID | removeClaimSuffix_V11 }}
+      {% endif %}
+    </h1>
   </div>
 </div>
 
@@ -34,7 +40,7 @@
   <div class="govuk-grid-column-two-thirds">
 
     {% if claim.fundingType == "TU" and claim.claimType != "100" %}
-    <p class="govuk-body">This claim uses the 60/40 funding model. 60% of reimbursement is upfront after payment and 40% is on training completion.</p>
+    <p class="govuk-body">This is a combined claim using the 60/40 funding model. 60% of reimbursement is upfront after payment and 40% is on training completion.</p>
     {% elif claim.fundingType == "TU" and claim.claimType == "100"  %}
     <p class="govuk-body">100 claims have a single reimbursement on training completion.</p>
     {% endif %}
@@ -78,6 +84,7 @@
       </div>
       <div class="content"> 
         <h2 class="govuk-heading-l">Complete the 60 part</h2>
+        <p class="govuk-body">Claim reference for the 60 part: {{ claim.claimID }}</p>
         {% endif %}
 
   {% if claim.fundingType == "TU" %}
@@ -110,6 +117,11 @@
       </div>
       <div class="content">
         <h2 class="govuk-heading-l">Complete the 40 part</h2>
+
+        {% if ((claim.claimType == "60" and ((pairClaim.status != null))))  %}
+          <p class="govuk-body">Claim reference for the 40 part: {{ claim.claimID.slice(0, -1) + "C" }}</p>
+        {% endif %}
+
         {% if pairClaim == null and claim.claimType == "60" %}
         {% if claim.status != "rejected" %}
         <p class="govuk-body"><span class="govuk-caption-m">This part cannot be started until the 60 part is approved.</span></p>
