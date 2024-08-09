@@ -1,21 +1,5 @@
-{% if (claim.training.fundingModel == "split") and (claim.completionDate == null)%}
-    <h3 class="govuk-heading-s">Care skills 60 part claim</h3>
-    <p class="govuk-body">This is the 60 part of a claim which uses the 60/40 funding model.</p>
-    <p class="govuk-body">It covers evidence of payment.</p>
-    {% if pairClaim != null %}
-    <p class="govuk-body">View the <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">40 part of the claim</a>, which covers evidence of training completion.</p>
-    {% else %}
-    <p class="govuk-body">The 40 part of the claim which covers the evidence of training completion has not been submitted yet.</p>
-    {% endif %}
-{% elif (claim.training.fundingModel == "split") and (claim.completionDate != null)%}
-    <h3 class="govuk-heading-s">Care skills 40 part claim</h3>
-    <p class="govuk-body">This is the 40 part of a claim which uses the 60/40 funding model.</p>
-    <p class="govuk-body">It covers evidence of training completion.</p>
-    <p class="govuk-body">View the <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">60 part of the claim</a>, which covers evidence of payment.</p>
-{% elif (claim.training.fundingModel != "split") %}
-    <h3 class="govuk-heading-s">Care skills 100 claim</h3>
-    <p class="govuk-body">This is a care skills 100 claim. It covers both evidence of payment and evidence of training completion.</p>
-{% endif %}
+<h3 class="govuk-heading-s">Revalidation claim</h3>
+<p class="govuk-body">This is a claim for an activity relating to professional revalidation.</p>
 
 <h3 class="govuk-heading-m" id="payment">Organisation</h3>
 <dl class="govuk-summary-list">
@@ -65,30 +49,14 @@
 
 </dl>
 
-<h3 class="govuk-heading-m" id="payment">Training</h3>
+<h3 class="govuk-heading-m" id="payment">Activity</h3>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Title
+            Description
         </dt>
         <dd class="govuk-summary-list__value">
-            {{claim.training.title}}
-        </dd>
-    </div>
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Level and type
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {{ claim | qualificationCheck_V3(data.training, claim.training.type) }}
-        </dd>
-    </div>
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Awarding organisation
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {{ claim | qualificationCheck_V3(data.training, claim.training.awardingOrganisation) }}
+            {{claim.description}}
         </dd>
     </div>
     <div class="govuk-summary-list__row">
@@ -101,22 +69,13 @@
     </div>
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Start date
+            Payment amount
         </dt>
         <dd class="govuk-summary-list__value">
-            {{ claim.startDate | govukDate }}
+            £{{ claim.paymentAmount }}
         </dd>
     </div>
-    {% if (claim.fundingType == "TU") and (claim.claimType != "60")%}
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Completion date
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {{ claim.completionDate | govukDate }}
-        </dd>
-    </div>
-    {% endif %}
+
 </dl>
 <h3 class="govuk-heading-m" id="payment">Learner</h3>
 <dl class="govuk-summary-list">
@@ -128,4 +87,15 @@
             {{claim.learner.givenName}} {{claim.learner.familyName}}
         </dd>
     </div>
+
+    {% if (claim.status == "submitted") %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Revalidation budget remaining
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ claim.learner.id | formatLearnerBudget_V11(data['learners']) }}
+            </dd>
+        </div>
+    {% endif %}
 </dl>

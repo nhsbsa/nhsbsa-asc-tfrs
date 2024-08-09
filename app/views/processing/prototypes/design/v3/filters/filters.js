@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck } = require('../helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getLearner } = require('../helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag_V3', function (statusID) {
@@ -129,45 +129,90 @@ addFilter('dateSort_V3', function (notes) {
     return sortedData
 })
 
-addFilter('reimbursement_V3', function (claim) {
-    if (claim.training.fundingModel == "split" && claim.completionDate == null) {
-        if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
-            return claim.reimbursementAmount * 0.6
+addFilter('reimbursementCPD_V3', function (claim, learner) {
+    if (learner.cpdBudget == 0) {
+        return `<p class="govuk-body">The organisation will not receive reimbursement.</p>`
+    } else if (claim.paymentAmount <= learner.cpdBudget) {
+        return `<p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£${claim.paymentAmount}</span> in reimbursement.</p>
+        </p>`
+    } else {
+        return `<p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£${learner.cpdBudget}</span> in reimbursement.</p>
+        </p>`
+    }
+}, { renderAsHtml: true })
+
+addFilter('formatLearnerBudget_V11', function (learnerID, learners) {
+    for (let learner of learners) {
+        if (learner.id == learnerID) {
+            if (learner.cpdBudget == 0) {
+                return "None"
+            } else {
+                return "£" + learner.cpdBudget
+            }
+        }
+    }
+})
+
+addFilter('reimbursement_V3', function (claim, paymentReimbursementAmount) {
+    if ((claim.fundingType == "TU") && (claim.claimType == "60")) {
+        if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
+            return paymentReimbursementAmount * 0.6
         } else {
             return claim.training.reimbursementAmount * 0.6
         }
-    } 
-    
-    else if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
-        return claim.reimbursementAmount
+    } else if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
+        if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
+            return claim.reimbursementAmount * 0.4
+        } else {
+            return claim.training.reimbursementAmount * 0.4
+        }
+    } else if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
+        return paymentReimbursementAmount
     } else {
         return claim.training.reimbursementAmount
     }
 });
 
-addFilter('original_reimbursement_amount_V3', function (claim) {
-    if (claim.reimbursementAmount > claim.training.reimbursementAmount) {
-        return claim.training.reimbursementAmount
-    } else {
-        return claim.reimbursementAmount
+addFilter('findLearner_V3', function (learnerID, learners) {
+    for (let learner of learners) {
+        if (learner.id == learnerID) {
+            return learner
+        }
     }
 });
 
-addFilter('rejectionNote_V3', function (claim) {
-    let rejectionNote = "<div class='govuk-inset-text'><h2 class='govuk-heading-s'>Claim rejected</h2>"
-    if (!claim.evidenceOfPaymentreview.pass || claim.evidenceOfPaymentreview.pass == "Rejected") {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>"
-        rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfPaymentreview.note + "</p>"
+addFilter('reimbursementExplanation_V3', function (claim, learner) {
+    if (learner.cpdBudget > claim.paymentAmount) {
+        return `<p class="govuk-body">The learner's remaining revalidation budget is £${learner.cpdBudget}.</p><p>So the organisation will get back the full cost of the activity: <strong>£${claim.paymentAmount}</strong>.</p>`
+    } else if (learner.cpdBudget > 0) {
+        return `<p class="govuk-body">The learner's remaining revalidation budget is £${learner.cpdBudget}. The activity cost £${claim.paymentAmount}.</p><p>So the organisation will get back some of the cost: <strong>£${learner.cpdBudget}</strong>.</p>`
+    } else {
+        return `<p class="govuk-body">The learner has no remaining revalidation budget.</p><p>So the organisation will not get back any reimbursement for this claim.</p>`
     }
-    if (isFullClaimCheck(claim) && (!claim.evidenceOfCompletionreview.pass || claim.evidenceOfCompletionreview.pass == "Rejected")) {
-        rejectionNote = rejectionNote + "<p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>"
-        rejectionNote = rejectionNote + "<p class='govuk-body'>" + claim.evidenceOfCompletionreview.note + "</p>"
+}, { renderAsHtml: true });
+
+addFilter('reimbursementApprovedExplanation_V3', function (claim, learner) {
+    if (claim.reimbursementAmount == 0) {
+        return `<p class="govuk-body">The learner has no remaining revalidation budget.</p><p>So the organisation will not get back any reimbursement for this claim.</p>`
+    } else if (claim.paymentAmount > claim.reimbursementAmount) {
+        let originalBudget = learner.cpdBudget + claim.reimbursementAmount
+        return `<p class="govuk-body">The learner's remaining revalidation budget when processing this claim was £${originalBudget}. The activity cost £${claim.paymentAmount}.</p><p>So the organisation will get back some of the cost: <strong>£${claim.reimbursementAmount}</strong>.</p>`
+    } else {
+        let originalBudget = learner.cpdBudget + claim.reimbursementAmount
+        return `<p class="govuk-body">The learner's remaining revalidation budget when processing this claim was £${originalBudget}.</p><p>So the organisation will get back the full cost of the activity: <strong>£${claim.paymentAmount}</strong>.</p>`
     }
+}, { renderAsHtml: true });
 
-    rejectionNote = rejectionNote + "</div>"
-
-    return rejectionNote
-}, { renderAsHtml: true })
+addFilter('original_reimbursement_amount_V3', function (claim,paymentReimbursementAmount) {
+    if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
+        paymentReimbursementAmount = claim.reimbursementAmount
+    }
+    if (paymentReimbursementAmount > claim.training.reimbursementAmount) {
+        return claim.training.reimbursementAmount
+    } else {
+        return paymentReimbursementAmount
+    }
+});
 
 addFilter('orgErrorMessage_V3', function (error) {
     if (error == "invalid") {
@@ -208,4 +253,27 @@ addFilter('qualificationCheck_V3', function(claim, training, value) {
     } else {
         return "Not applicable"
     }
+})
+
+addFilter('matchPairClaim_V3', function(claimID, claims) {
+    var pairID = null
+    var pairClaim = null
+
+    let lastChar = claimID.charAt(claimID.length - 1); // Get the last character of the string
+
+    if (lastChar === 'B') {
+      pairID = claimID.slice(0, -1) + 'C'; // Change 'B' to 'C'
+    } else if (lastChar === 'C') {
+      pairID =  claimID.slice(0, -1) + 'B'; // Change 'C' to 'B'
+    } 
+
+    for (const c of claims) {
+        if (c.claimID == pairID) {
+            pairClaim = c
+            break;
+        }
+    }
+
+    return pairClaim
+
 })

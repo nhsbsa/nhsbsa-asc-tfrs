@@ -1,6 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% set claim = data.id | findClaim_V8(data.claims) %}
+{% set learner = claim.learner.id | findLearner_V3(data.learners) %}
 
 {% block pageTitle %}
 {{ ["Confirm outcome: ", claim.claimID, " - process a claim"] | join }}
@@ -17,7 +18,11 @@
         data.result == "approve" %}approved{% elif data.result ==
         "reject" %}rejected{% endif %}</span>.</p>
     {% if data.result == "approve" %}
-    <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V3 }}</span> in reimbursement.</p>
+      {% if claim.fundingType == "TU" %}
+        <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V3(data.paymentReimbursementAmount) }}</span> in reimbursement.</p>
+      {% elif claim.fundingType == "CPD" %}
+        {{ claim | reimbursementCPD_V3(learner)}}
+      {% endif %}
     <details class="govuk-details">
       <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
@@ -56,9 +61,21 @@
       
       </div>
     </details>
+
     {% elif data.result == "reject" %}
     <p class="govuk-body">The organisation will receive the following note to explain why it was rejected. The wording is taken from what you entered on the previous screen.</p>
-    {{ claim | rejectionNote_V3 }}
+    <div class='govuk-inset-text'><h2 class='govuk-heading-s'>Claim rejected</h2>
+    
+      {% if (data.payment == "no") %}
+        <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
+        <p class='govuk-body'>{{data.paymentNoNote}}</p>
+    {% endif %}
+
+    {% if (data.completion == "no") %}
+        <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
+        <p class='govuk-body'>{{data.completionNoNote}}</p>
+    {% endif %}
+    </div>
     {% endif %}
     <p class="govuk-body">Confirm that this claim should be {% if data.result == "approve" %}approved{% elif
       data.result ==
