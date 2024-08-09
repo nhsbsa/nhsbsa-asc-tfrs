@@ -27,9 +27,7 @@
     {% endif %}
     <span class="govuk-caption-xl">{{ claim.fundingType | potName_V11 }}</span>
     <h1 class="govuk-heading-xl">
-      {% if claim.fundingType == "TU" and claim.claimType == "100" %}
-        Claim: {{ claim.claimID }}
-      {% elif claim.fundingType == "CPD" %}
+      {% if (claim.fundingType == "TU" and claim.claimType == "100") or (claim.fundingType == "CPD") %}
         Claim: {{ claim.claimID }}
       {% else %}
         Combined claim: {{ claim.claimID | removeClaimSuffix_V11 }}
@@ -121,7 +119,7 @@
         <h2 class="govuk-heading-l">Complete the 40 part</h2>
 
         {% if ((claim.claimType == "60" and ((pairClaim.status != null))))  %}
-          <p class="govuk-body">Claim reference for the 40 part: {{ claim.claimID | changeClaimSuffixToC_V11}}</p>
+          <p class="govuk-body">Claim reference for the 40 part: {{ claim.claimID.slice(0, -1) + "C" }}</p>
         {% endif %}
 
         {% if pairClaim == null and claim.claimType == "60" %}
