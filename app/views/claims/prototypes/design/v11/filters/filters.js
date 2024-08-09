@@ -673,6 +673,19 @@ addFilter('removeClaimSuffix_V11', function (claimID) {
 
 })
 
+
+addFilter('changeClaimSuffixToC_V11', function (claimID) {
+
+    // Check the string is not null
+    if (claimID.length == null) {
+        return ''; // Return an empty string
+    }
+
+    // Use the slice method to remove the last character
+    return claimID.slice(0, -1) + "C";
+
+})
+
 addFilter('isCostMoreThanMax_V11', function (amount) {
     if (amount > 500) {
         return true
