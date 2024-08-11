@@ -604,7 +604,9 @@ router.post('/ready-to-declare', function (req, res) {
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       claim = c
-      learner = getLearner(req.session.data.learners, c.learner.id)
+      if (c.learner != null) {
+        learner = getLearner(req.session.data.learners, c.learner.id)
+      }
     }
   }
   const submitError = checkClaim(claim)
