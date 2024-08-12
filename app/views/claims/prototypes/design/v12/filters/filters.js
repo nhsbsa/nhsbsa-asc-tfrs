@@ -665,3 +665,58 @@ addFilter('isCostMoreThanMax_V12', function (amount) {
         return false
     }
 })
+
+addFilter('claimMatch_V12', function (claim, search, claimType) {
+    let check = false;
+
+    const formattedSearch = removeSpacesAndLowerCase(search);
+
+    if (claim.type == claimType) {
+        if (claim.claimID != null) {
+            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
+            if (formattedClaimID.includes(formattedSearch)) {
+                check = true
+            }
+        }
+
+        if (claim.training != null) {
+            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
+            if (formattedActivity.includes(formattedSearch)) {
+                check = true
+            }
+        }
+        if (claim.learners != null) {
+            for (const l of claim.learners) {
+                const formattedName = removeSpacesAndLowerCase(l.fullName);
+                if (formattedName.includes(formattedSearch)) {
+                    check = true
+                }
+            }
+        }
+    } else if (claim.type == claimType) {
+        if (claim.claimID != null) {
+            const formattedClaimID = removeSpacesAndLowerCase(claim.ClaimID);
+            if (formattedClaimID.includes(formattedSearch)) {
+                check = true
+            }
+        }
+
+        if (claim.categoryName != null) {
+            const formattedActivity = removeSpacesAndLowerCase(claim.categoryName);
+            if (formattedActivity.includes(formattedSearch)) {
+                check = true
+            }
+        }
+        if (claim.learners != null) {
+            for (const l of claim.learners) {
+                const formattedName = removeSpacesAndLowerCase(l.fullName);
+                if (formattedName.includes(formattedSearch)) {
+                    check = true
+                }
+            }
+        }
+
+    }
+
+    return check;
+})
