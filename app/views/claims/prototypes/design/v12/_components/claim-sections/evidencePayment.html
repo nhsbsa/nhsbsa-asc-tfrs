@@ -3,47 +3,14 @@
 
   {% set evidenceOfPaymentCount = claim.evidenceOfPayment | coursesCount_V12 %}
 
-  {% if claim.fundingType == "CPD" %}
-
-  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.claimAmount =="missing" %}
-  <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
-    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="claim-amount-error">
-      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a cost</p>
-    </div>
-  </div>
-  {% endif %}
-  <div class="govuk-summary-list__row {% if not claim.claimAmount or (claim.status == 'submitted' or claim.status == 'approved' or claim.status == 'rejected') %} govuk-summary-list__row--no-actions {% endif %} {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.claimAmount =='missing' %} govuk-summary-list-row--error {% endif %}">
-    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.claimAmount =='missing' %} govuk-summary-key--error {% endif %}">
-      Cost
-    </dt>
-    {% if not claim.claimAmount or claim.claimAmount == "" %}
-    <dd class="govuk-summary-list__value">
-      <a class="govuk-link govuk-link--no-visited-state" href="add-claim-amount">Add cost</a>
-    </dd>
-    {% else %}
-      <dd class="govuk-summary-list__value">
-        £{{ claim.claimAmount }}
-      </dd>
-      {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
-        <dd class="govuk-summary-list__actions">
-          <a class="govuk-link govuk-link--no-visited-state" href="add-claim-amount">Change<span
-              class="govuk-visually-hidden"> claim amount</span></a>
-        </dd>
-      {% endif %}
-    {% endif %}
-  </div>
-
-  {% endif %}
-
-
   {% if not claim.costDate %}
-  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =="missing" %}
-  <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
-    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
-      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a payment date</p>
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =="missing" %}
+    <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+      <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
+        <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a payment date</p>
+      </div>
     </div>
-  </div>
-  {% endif %}
+    {% endif %}
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='missing' %} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='missing' %} govuk-summary-key--error {% endif %}">
       Payment date

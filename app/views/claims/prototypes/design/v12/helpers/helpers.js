@@ -3,26 +3,14 @@ const fs = require('fs');
 function checkClaim(claim) {
 
     const result = {};
-
-    if (claim.description == null && claim.fundingType == "CPD") {
-        result.description = "missing"
-    } else {
-        result.description = "valid"
-    }
-
-    if (claim.claimAmount == null && claim.fundingType == "CPD") {
-        result.claimAmount = "missing"
-    } else {
-        result.claimAmount = "valid"
-    }
-
+    
     if (claim.learner == null) {
         result.learner = "missing"
     } else {
         result.learner = "valid"
     }
 
-    if (claim.startDate == null && ( claim.fundingType == "TU" || claim.isACourse == true) ) {
+    if (claim.startDate == null && ( claim.fundingType == "TU") ) {
         result.startDate = "missing"
     } else {
         result.startDate = "valid"
@@ -40,13 +28,13 @@ function checkClaim(claim) {
         result.evidenceOfPayment = "valid"
     }
 
-    if (claim.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100" || claim.isACourse == true) ) {
+    if (claim.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100") ) {
         result.evidenceOfCompletion = "missing"
     } else {
         result.evidenceOfCompletion = "valid"
     }
 
-    if (claim.completionDate == null && (claim.claimType == "40" || claim.claimType == "100" || claim.isACourse == true)) {
+    if (claim.completionDate == null && (claim.claimType == "40" || claim.claimType == "100")) {
         result.completionDate = "missing"
     } else {
         result.completionDate = "valid"
@@ -54,7 +42,7 @@ function checkClaim(claim) {
 
     result.claimValid = result.learner == "valid" && result.startDate == "valid" && result.paymentDate == "valid" && result.evidenceOfPayment == "valid" && result.evidenceOfCompletion == "valid" && result.completionDate == "valid";
         
-    if (result.completionDate == "valid" && result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "40" || claim.isACourse == true)) {
+    if (result.completionDate == "valid" && result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "40")) {
         const startDate = new Date(claim.startDate)
         const completionDate = new Date(claim.completionDate)
         if (startDate.getTime() > completionDate.getTime()) {
@@ -347,12 +335,5 @@ function emailFormat(string) {
     return emailRegex.test(string);
 }
 
-function getLearner(learners, learnerID) {
-    for (let learner of learners) {
-        if (learner.id == learnerID) {
-            return learner
-        }
-    }
-}
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getLearner }
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm }

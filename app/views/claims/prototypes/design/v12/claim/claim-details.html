@@ -27,7 +27,7 @@
     {% endif %}
     <span class="govuk-caption-xl">{{ claim.fundingType | potName_V12 }}</span>
     <h1 class="govuk-heading-xl">
-      {% if (claim.fundingType == "TU" and claim.claimType == "100") or (claim.fundingType == "CPD") %}
+      {% if (claim.fundingType == "TU" and claim.claimType == "100") %}
         Claim: {{ claim.claimID }}
       {% else %}
         Combined claim: {{ claim.claimID | removeClaimSuffix_V12 }}
@@ -45,32 +45,30 @@
     <p class="govuk-body">100 claims have a single reimbursement on training completion.</p>
     {% endif %}
 
-    {% if (claim.fundingType == "TU" and claim.claimType == "100") or claim.fundingType == "CPD" %}
+    {% if (claim.fundingType == "TU" and claim.claimType == "100") %}
 
-    <p class="govuk-body">This {{ claim.claimType | typeTag_V12 }} claim is {{ claim.status | statusTag_V12(data.statuses) }}</p>
+      <p class="govuk-body">This {{ claim.claimType | typeTag_V12 }} claim is {{ claim.status | statusTag_V12(data.statuses) }}</p>
 
-    {% if claim.fundingType == "CPD" and (claim.status == "not-yet-submitted" or claim.status == "new") %}
-    <p class="govuk-body">Claims must each be for a single revalidation activity. Claims for multiple activities will be rejected. Start a separate claim for each activity.</p>
-    {% elif claim.status == "rejected" %}
-    <h2 class="govuk-heading-s">Rejection note</h2>
-    <p class="govuk-body">{{claim.rejectedNote}}</p>
-    {% endif %}
+      {% if claim.status == "rejected" %}
+      <h2 class="govuk-heading-s">Rejection note</h2>
+      <p class="govuk-body">{{claim.rejectedNote}}</p>
+      {% endif %}
 
     {% elif claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
 
-    <p class="govuk-body">The {{ "60" | typeTag_V12 }} part of this claim is {{ claim.status | statusTag_V12(data.statuses) }}</p>
+      <p class="govuk-body">The {{ "60" | typeTag_V12 }} part of this claim is {{ claim.status | statusTag_V12(data.statuses) }}</p>
 
-    <p class="govuk-body">The {{ "40" | typeTag_V12 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V12(data.statuses) }} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+      <p class="govuk-body">The {{ "40" | typeTag_V12 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V12(data.statuses) }} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
 
-    {% if claim.status == "rejected" %}
-    <h2 class="govuk-heading-s">Rejection note</h2>
-    <p class="govuk-body">{{claim.rejectedNote}}</p>
-    {% endif %}
+      {% if claim.status == "rejected" %}
+      <h2 class="govuk-heading-s">Rejection note</h2>
+      <p class="govuk-body">{{claim.rejectedNote}}</p>
+      {% endif %}
 
-    {% if pairClaim.status == "rejected" %}
-    <h2 class="govuk-heading-s">Rejection note</h2>
-    <p class="govuk-body">{{pairClaim.rejectedNote}}</p>
-    {% endif %}
+      {% if pairClaim.status == "rejected" %}
+      <h2 class="govuk-heading-s">Rejection note</h2>
+      <p class="govuk-body">{{pairClaim.rejectedNote}}</p>
+      {% endif %}
 
     {% endif %}
 
@@ -85,13 +83,10 @@
       <div class="content"> 
         <h2 class="govuk-heading-l">Complete the 60 part</h2>
         <p class="govuk-body">Claim reference for the 60 part: {{ claim.claimID }}</p>
-        {% endif %}
+    {% endif %}
 
-  {% if claim.fundingType == "TU" %}
+
     {% include "../_components/claim-sections/training.html" %}
-  {% elif claim.fundingType == "CPD" %}
-    {% include "../_components/claim-sections/activity.html" %}
-  {% endif %}
 
     {% include "../_components/claim-sections/learner.html" %}
 
@@ -131,12 +126,9 @@
         {% endif %}
         {% endif %}
 
-
-    {% if claim.fundingType == "TU" %}
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
-    {% endif %}
 
-    {% if ((claim.status == "new" or claim.status == "not-yet-submitted" or pairClaim.status == "new" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.fundingType == "CPD" or pairClaim.claimType == "40"))  %}
+    {% if ((claim.status == "new" or claim.status == "not-yet-submitted" or pairClaim.status == "new" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}
     {% include "../_components/claim-sections/cta-section.html" %}
     {% endif %}
 
@@ -147,23 +139,17 @@
 
   </div>
   <div class="govuk-grid-column-one-third">
-    {% if (data.fundingPot == "TU") %}
-      {% include "../_components/claim-sections/claimAmount.html" %}
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-    {% else %}
-      {% include "../_components/claim-sections/cpdClaimAmount.html" %}
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-    {% endif %}
+
+    {% include "../_components/claim-sections/claimAmount.html" %}
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
     <h2 class="govuk-heading-m">Related content</h2>
-    {% if data.fundingPot == "TU" %}
+
       <p class="govuk-body"><a href="../guidance/help-start-tu-claim" class="govuk-link">Help with starting a new care skills
           claim</a></p>
       <p class="govuk-body"><a href="../guidance/tu-evidence-requirements" class="govuk-link">Help with care skills evidence
           requirements</a></p>
-      {% elif data.fundingPot == "CPD" %}
-        <p class="govuk-body"><a href="../guidance/help-start-cpd-claim" class="govuk-link">Help with starting a new revalidation claim</a></p>
-        <p class="govuk-body"><a href="../guidance/cpd-evidence-requirements" class="govuk-link">Help with revalidation evidence requirements</a></p>
-      {% endif %}
+
   </div>
 </div>
 {% endblock %}

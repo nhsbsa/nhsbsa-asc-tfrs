@@ -28,7 +28,7 @@
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID | removeClaimSuffix_V12 }}</span>
                         <h1 class="govuk-fieldset__heading">
-                            {% if data.fundingPot == "TU" %}When did you pay for the course or qualification?{% elif data.fundingPot == "CPD" %}When did you pay for the activity?{% endif %}
+                            When did you pay for the course or qualification?
                         </h1>
                     </legend>
                     <p class="govuk-body">This should match up with the date on the payment evidence.</p>
@@ -37,7 +37,7 @@
                         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
                         <strong class="govuk-warning-text__text">
                             <span class="govuk-visually-hidden">Warning</span>
-                                {% if data.fundingPot == "TU" %}You can only claim for training that started and was paid for on or after 1 April 2024.{% elif data.fundingPot == "CPD" %}You can only claim for an activity that started and was paid for on or after 1 April 2024.{% endif %}
+                                You can only claim for training that started and was paid for on or after 1 April 2024.
                         </strong>
                     </div>
                     

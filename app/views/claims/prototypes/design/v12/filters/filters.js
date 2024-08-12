@@ -111,19 +111,13 @@ addFilter('potName_V12', function (type) {
     let name = "Pot Naming Error"
     if (type == "TU") {
         name = "Care skills funding"
-    } else if (type == "CPD") {
-        name = "Revalidation funding"
     }
     return name
 })
 
 addFilter('checkEligible_V12', function (learner, type, roleTypes) {
     let eligibleRoles = []
-    if (type == "TU") {
-        eligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
-    } else if (type == "CPD") {
-        eligibleRoles = roleTypes.filter(role => role.eligibility.isCPDeligible).map(role => role.rolename);
-    }
+    eligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
     return eligibleRoles.includes(learner.roleType)
 })
 
@@ -498,16 +492,6 @@ addFilter('typeTag_V12', function (type) {
     }
 }, { renderAsHtml: true })
 
-addFilter('newClaimLink_V12', function (type) {
-    let claimLink = "#"
-    if (type == "TU") {
-        claimLink = "claim/select-training"
-    } else if (type == "CPD") {
-        claimLink = "claim/select-activity-type"
-    }
-    return claimLink
-})
-
 addFilter('sortByDate_V12', function (claims, statusID) {
     if (statusID == 'not-yet-submitted') {
         return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
@@ -681,33 +665,3 @@ addFilter('isCostMoreThanMax_V12', function (amount) {
         return false
     }
 })
-
-addFilter('getLearnerBudget_V12', function (learnerID, learners) {
-    for (let learner of learners) {
-        if (learner.id == learnerID) {
-            return learner.cpdBudget
-        }
-    }
-})
-
-addFilter('formatLearnerBudget_V12', function (learnerID, learners) {
-    for (let learner of learners) {
-        if (learner.id == learnerID) {
-            if (learner.cpdBudget == 0) {
-                return "None"
-            } else {
-                return "£" + learner.cpdBudget
-            }
-            
-        }
-    }
-})
-addFilter('availableAmount_V12', function (learnerId, budget, claims) {
-    let pendingAmount = 0;
-    for (let claim of claims) {
-        if (claim.fundingType == "CPD" && claim.learner != null && claim.learner.id == learnerId && claim.status == "submitted") {
-            pendingAmount = pendingAmount + Number(claim.claimAmount);
-        }
-    }
-    return budget - pendingAmount;
-});

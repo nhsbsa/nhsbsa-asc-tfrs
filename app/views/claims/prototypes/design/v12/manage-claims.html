@@ -53,7 +53,6 @@
     {% else %}
     <div class="govuk-grid-column-full">
 
-        {% if data.fundingPot == "TU" %}
         <details class="govuk-details">
             <summary class="govuk-details__summary">
                 <span class="govuk-details__summary-text">
@@ -69,11 +68,8 @@
                     reimbursement, 40% on training completion</p>
             </div>
         </details>
-        {% include "./_components/claims-lists/TU-claim-list.html" %}
-        {% else %}
-        {% include "./_components/claims-lists/CPD-claim-list.html" %}
-        {% endif %}
 
+        {% include "./_components/claims-lists/TU-claim-list.html" %}
 
     </div>
     {% endif %}
