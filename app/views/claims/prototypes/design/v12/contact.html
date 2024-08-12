@@ -1,0 +1,29 @@
+{% extends "./layouts/main.html" %}
+
+{% block beforeContent %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l">Contact</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m">If you need help using this service</h2>
+        <p class="govuk-body">You can get in touch with the NHS Business Services Authority:</p>
+        <div class="govuk-inset-text">
+            Use our <a href="https://faq.nhsbsa.nhs.uk/contact-us/" class="govuk-link">contact form</a> <br>Phone: 0300 330 208
+        </div>
+
+        <h2 class="govuk-heading-m">If you need support with your Adult Social Care Workforce Data Set (ASC-WDS) account</h2>
+        <div class="govuk-inset-text">
+            Use the <a href="https://skillsforcare.zohodesk.eu/portal/en/home">ASC-WDS help centre</a><br>
+            Contact <a href="https://asc-wds.skillsforcare.org.uk/contact-us-or-leave-feedback">Skills for Care</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

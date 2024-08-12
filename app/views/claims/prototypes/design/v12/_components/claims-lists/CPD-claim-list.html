@@ -1,0 +1,47 @@
+{% set hasResults = false %}
+{% set addHeader = true %}
+{% for claim in data['claims'] | sortByDate_V12(status.id) %}
+{% if claim.status == status.id and claim.fundingType == data.fundingPot %} {% set hasResults=true %} {%
+    if addHeader %} <table class="govuk-table">
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col" width="22%">Claim reference</th>
+            <th class="govuk-table__header" scope="col" width="40%">Activity description</th>
+            <th class="govuk-table__header" scope="col" width="23%">Learner</th>
+            <th class="govuk-table__header" scope="col" width="15%">{{ status.id | variableDate_V12 }}</th>
+        </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+        {% set addHeader = false %}
+        {% endif %}
+        <tr class="govuk-table__row claim-row" id="{{ claim.claimID | removeClaimSuffix_V12 }}">
+            <td class="govuk-table__header" scope="row"><a class="govuk-link" href="claim/claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a></td>
+            <td class="govuk-table__cell">
+                {% if claim.description %} {{ claim.description }} {% else %} Not yet added {% endif %}
+            </td>
+            <td class="govuk-table__cell" data-sort-value="{{ claim.learner.givenName }} {{ claim.learner.familyName }}">
+                {% if claim.learner %} {{ claim.learner.givenName }} {{ claim.learner.familyName }} {% else %} Not yet added {% endif %}
+            </td>
+            {% if status.id == 'not-yet-submitted' %}
+            <td class="govuk-table__cell" data-sort-value="{{ claim.createdDate }}">{{ claim.createdDate |
+                govukDate("truncate") }}</td>
+            {% elif status.id == 'submitted' %}
+            <td class="govuk-table__cell" data-sort-value="{{ claim.submittedDate }}">{{ claim.submittedDate |
+                govukDate("truncate") }}</td>
+            {% elif status.id == 'rejected' %}
+            <td class="govuk-table__cell" data-sort-value="{{ claim.rejectedDate }}">{{ claim.rejectedDate |
+                govukDate("truncate") }}</td>
+            {% elif status.id == 'approved' %}
+            <td class="govuk-table__cell" data-sort-value="{{ claim.submittedDate }}">{{ claim.approvedDate |
+                govukDate("truncate") }}</td>
+            {% endif %}
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+    </tbody>
+    </table>
+
+    {% if hasResults == false %}
+    <p class="govuk-body">There are currently no claims that are {{ status.name }}.</p>
+    {% endif %}

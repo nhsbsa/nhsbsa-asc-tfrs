@@ -1,0 +1,73 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim_V7(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Add cost - Claim: ", claim.claimID] | join }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.submitError != null and data.submitError %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#cost-error">Add cost of the activity</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <form action="../add-cost" method="post" novalidate>
+            <div
+                class="govuk-form-group {% if data.submitError != null and data.submitError %} govuk-form-group--error {% endif %}">
+                <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID | removeClaimSuffix_V12 }}</span>
+                <h1 class="govuk-label-wrapper">
+                    <label class="govuk-label govuk-label--l" for="postcode">
+                        Add cost
+                    </label>
+                </h1>
+                <div id="cost-hint" class="govuk-hint">
+                    <p class="govuk-hint">This is the cost of the activity that you wish to claim for.</p>
+                    <p class="govuk-hint">Enter the full cost, even if this exceeds the learner's budget. In this case, you'll get back less than was paid.</p>
+                </div>
+                {% if data.fundingPot == "CPD" %}
+                    <p>You <strong>can only</strong> claims for the costs of the activity itself.</p>
+                    <p>You <strong>cannot</strong> claim for supporting costs such as:</p>
+                    <ul class="govuk-list govuk-list--bullet">
+                      <li>backfill for learner time</li>
+                      <li>travel costs</li>
+                      <li>childcare</li>
+                      <li>food and accommodation expenses</li>
+                      <li>equipment (such as laptops, mobile phones, notepads and pens) </li>
+                    </ul>
+                {% endif %}
+                {% if data.submitError != null and data.submitError %}
+                <p id="cost-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Add cost of the activity
+                </p>
+                {% endif %}
+                <div class="govuk-input__wrapper">
+                    <div class="govuk-input__prefix" aria-hidden="true">£</div>
+                    <input class="govuk-input govuk-!-width-one-third {% if data.submitError != null and data.submitError %}govuk-input--error{% endif %}" id="cost" name="cost" type="text"
+                        value="{{claim.claimAmount}}">
+                </div>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Add to claim
+                </button>
+                <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

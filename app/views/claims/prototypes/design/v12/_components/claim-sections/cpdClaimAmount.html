@@ -1,0 +1,13 @@
+{% if (claim.status == "submitted") %}
+    {% if ( claim.claimAmount | isCostMoreThanMax_V12) %}
+        <p class="govuk-body">This activity cost <br><strong class="govuk-!-font-size-36">£{{ claim.claimAmount }}</strong><br> but the maximum amount you could get back is <strong>£500</strong>.</p>
+        <p class="govuk-body">This is because every learner has £500 of revalidation funding. Depending how much of this has already been used you might get back less.</p>
+    {% else %}
+        <p class="govuk-body">This activity cost <br><strong class="govuk-!-font-size-36">£{{ claim.claimAmount }}</strong><br> which is the maximum amount you could get back.</p>
+        <p class="govuk-body">Every learner has £500 of revalidation funding. Depending how much of this has already been used you might get less back than the activity cost.</p>
+    {% endif %}
+{% elif (claim.status == "approved") %}
+    <p class="govuk-body">You will get back <br><strong class="govuk-!-font-size-36">£{{ claim.claimAmount }}</strong><br> for this claim.</p>
+    <p class="govuk-body">If this is less than the activity cost it means that there was not enough left in the learner's £500 of revalidation funding to cover the full amount.</p>
+{% endif %}
+
