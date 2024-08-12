@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Presentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #505a5f;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .footer {
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-top: 1px solid #dddddd;
+            border-radius: 0 0 8px 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a class="govuk-link" href="../index">Back</a> <a class="govuk-link" href="email-expiry">Link expired screen</a>
+
+    <div class="container">
+        <div class="header">
+            <h2>Sign up to claim for adult social care training and development costs</h2>
+            <p>From: sender@example.com</p>
+            <p>To: receiver@example.com</p>
+            <p>Date: 10 April 2024</p>
+        </div>
+        <div class="content">
+            {% if data.userType == 'signatory'%}
+                <p>Dear [first name] [last name],</p>
+                <p>Thank you for agreeing to start using the <strong>Claim for adult social care training and development</strong> service being developed by the NHS Business Services Authority. </p>
+                <p>This email explains how to create your user account.</p>
+                <p>Before you start, be aware that:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>you’ll need to sign a declaration to confirm claims made by your organisation will be accurate and non-fraudulent</li>
+                    <li>to limit the amount of new information you’ll need to enter, some information in your account has come from the Adult Social Care Workforce Dataset (ASC-WDS)</li>
+                    <li>for additional security, sign in will require two-factor authentication (2FA) using Microsoft Authenticator (<a href="https://www.microsoft.com/en-us/security/mobile-authenticator-app">get help with this)</a></li>
+                    <li>you’ll need to have your organisation bank account details to hand</li>
+                </ul>
+                <h3>Next steps</h3>
+                <p>Create your user account using the link at the end of this email. The link will expire in 24 hours.</p>
+                <p><strong>Do not share this link with anyone else. Only you will be able to create an account. You must not share user accounts but you can add additional users to submit claims on your behalf.</strong></p>
+                <p>If you do not think you are the right person to sign the legally binding declaration on behalf of your organisation, or your sign up link has expired,  please contact us at [email] before continuing.</p>
+                <p>We look forward to working with you.</p>
+                <p>NHS Business Services Authority</p>
+                <h3>Sign up link</h3>
+                <p><a href="verify-details" style="word-break: break-all;">https://asctfrsb2cdev.b2clogin.com/asctfrsb2cdev.onmicrosoft.com/B2C_1A_SIGNUP_INVITATION/oauth2/v2.0/authorize?client_id=7269bec0-138b-4a4f-8897-fdc546b69c0c&nonce=NYeKezl7/EelaPYJrZZTHQ==&redirect_uri=https://test.claim-for-asc-training.nhsbsanhsbsa.net/claim/signin&scope=openid&response_type=code&id_token_hint=eyJhbGciOJSUzI1NilsinR5cC161kpXVCJ9eyJpc3MOJodHRwOi8vbG9jYWxob3N0OjgwODYvliwiZW138952ZWVSYW1AbmhzYnNhLoibmiraGI0aGEgc2VIbGFtliwiZXh0ZW5zaW9uX09yZ2FuaXNhdGlvbklEljoiMzU4MzkzMTMOWYOMу00ZmMzLTkwMGItZTQ5NzFhZmRiNWQ3liwiZXh0ZW5zaW9uX1VzZXJRCI6IjE2ZDczYzI1LTY4ZDINDUSMY05ZjM4LTEwMDExOGMzYzk0ZSIsImV4dGVuc2lvbl9PcmdhbmlzYXRpb25Sb2xlQ29kZSI6IKNMQUINX09GRKIDRVIiLCJIeHAIOE3MTg5ODU5OTMslm5iZ16MTcxODg5OTUSMywiYXVkljoiNzI20WJIYZAZjM4Y100YTRmLTg40TctZmTheRINTQ2YY5YzBjliwiaWF0ljoxNzE40Dk5NTkzfQ.eoltex4ySJNaWaJtQeZcH9TemcD3EYrY5mrgviuBK00K2ZgQ525854zJc1LIIVu5hyRmFVNFIEJMfDYrznw0iqVx36GKCAP980DdKalqLVxZdli2LVHhuyVkviZHDdCaTjCfWaxACbukR9iDk8CYNISuMKAOXESnjKmFFwMOUtX6VzAzMCawF9xM_GcW18OkfTi5s82NHvJ33WxxmZ_kUcmFpwNdKoTeDCAKtKQv1L5QC49hKY13FTq_R WR9iczPiRwtmXDvAGRw9T4RtlB0E1DgOPYPQcytX5ETXGm39a1SVGWF9ax111ZGHfffhhUdXtSzc</a></p>
+            {% else %}
+                <p>Dear [first name] [last name],</p>
+                <p>This is an invitation to start using the <strong>Claim for adult social care training and development</strong> service being developed by the NHS Business Services Authority.</p>
+                <p>Create your user account using the link at the end of this email. The link will expire in 24 hours.</p>
+                <p><strong>Do not share this link with anyone else. Only you will be able to create an account. You must not share user accounts but additional users can be added if required.</strong></p>
+                <p>For additional security, sign in will require two-factor authentication (2FA) using Microsoft Authenticator (<a href="https://www.microsoft.com/en-us/security/mobile-authenticator-app">get help with this</a>).</p>
+                <p>We recommend reading the <a href="https://www.gov.uk/government/publications/adult-social-care-training-and-development-fund">scheme guidance</a> before using the service for the first time. There is further help, including short video guides, within the service itself.</p>
+                <p>If the sign up link has expired, please contact [signatory first name] [signatory last name] in your organisation for a new one.</p>
+                <p>NHS Business Services Authority</p>
+                <h3>Sign up link</h3>
+                <p><a href="verify-details" style="word-break: break-all;">https://asctfrsb2cdev.b2clogin.com/asctfrsb2cdev.onmicrosoft.com/B2C_1A_SIGNUP_INVITATION/oauth2/v2.0/authorize?client_id=7269bec0-138b-4a4f-8897-fdc546b69c0c&nonce=NYeKezl7/EelaPYJrZZTHQ==&redirect_uri=https://test.claim-for-asc-training.nhsbsanhsbsa.net/claim/signin&scope=openid&response_type=code&id_token_hint=eyJhbGciOJSUzI1NilsinR5cC161kpXVCJ9eyJpc3MOJodHRwOi8vbG9jYWxob3N0OjgwODYvliwiZW138952ZWVSYW1AbmhzYnNhLoibmiraGI0aGEgc2VIbGFtliwiZXh0ZW5zaW9uX09yZ2FuaXNhdGlvbklEljoiMzU4MzkzMTMOWYOMу00ZmMzLTkwMGItZTQ5NzFhZmRiNWQ3liwiZXh0ZW5zaW9uX1VzZXJRCI6IjE2ZDczYzI1LTY4ZDINDUSMY05ZjM4LTEwMDExOGMzYzk0ZSIsImV4dGVuc2lvbl9PcmdhbmlzYXRpb25Sb2xlQ29kZSI6IKNMQUINX09GRKIDRVIiLCJIeHAIOE3MTg5ODU5OTMslm5iZ16MTcxODg5OTUSMywiYXVkljoiNzI20WJIYZAZjM4Y100YTRmLTg40TctZmTheRINTQ2YY5YzBjliwiaWF0ljoxNzE40Dk5NTkzfQ.eoltex4ySJNaWaJtQeZcH9TemcD3EYrY5mrgviuBK00K2ZgQ525854zJc1LIIVu5hyRmFVNFIEJMfDYrznw0iqVx36GKCAP980DdKalqLVxZdli2LVHhuyVkviZHDdCaTjCfWaxACbukR9iDk8CYNISuMKAOXESnjKmFFwMOUtX6VzAzMCawF9xM_GcW18OkfTi5s82NHvJ33WxxmZ_kUcmFpwNdKoTeDCAKtKQv1L5QC49hKY13FTq_R WR9iczPiRwtmXDvAGRw9T4RtlB0E1DgOPYPQcytX5ETXGm39a1SVGWF9ax111ZGHfffhhUdXtSzc</a></p>
+            {% endif %}
+        </div>
+        <div class="footer">
+            <p>This is the footer of your email.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

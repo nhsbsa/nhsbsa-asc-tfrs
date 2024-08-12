@@ -1,0 +1,26 @@
+{% if trainingGroup.groupTitle == "Courses" %}
+<h1 class="govuk-heading-m">Courses</h1>
+<table class="govuk-table">
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Course code</th>
+            <th scope="col" class="govuk-table__header">Course category</th>
+            <th scope="col" class="govuk-table__header">Course title</th>
+            <th scope="col" class="govuk-table__header"></th>
+        </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+{% elif trainingGroup.groupTitle == "Qualifications" %}
+<h1 class="govuk-heading-m">Qualifications</h1>
+<table class="govuk-table">
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Qualification number</th>
+            <th scope="col" class="govuk-table__header">Level and type</th>
+            <th scope="col" class="govuk-table__header">Qualification title</th>
+            <th scope="col" class="govuk-table__header">Awarding Organisation</th>
+            <th scope="col" class="govuk-table__header"></th>
+        </tr> 
+    </thead>
+    <tbody class="govuk-table__body">
+{% endif %}

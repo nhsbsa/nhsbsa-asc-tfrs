@@ -1,7 +1,21 @@
 module.exports = {
     "versionHistory": {
-        "claimsCurrent": "v11",
+        "claimsCurrent": "v12",
         "claimVersions": [
+            {
+                "versionNo": "12",
+                "status": ["design"],
+                "tested": "TBC",
+                "created": [
+                    "due to decision to remove CPD from the service"
+                ],
+                "aims": [
+                    "TBC"
+                ],
+                "learnt": [
+                    "TBC"
+                ]
+            },
             {
                 "versionNo": "11",
                 "status": ["design"],
@@ -284,8 +298,22 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v3",
+        "processingCurrent": "v4",
         "processingVersions": [
+            {
+                "versionNo": "4",
+                "status": ["dev", "UR", "design"],
+                "tested": "",
+                "created": [
+                    "due to decision to remove CPD from the service"
+                ],
+                "aims": [
+                    "TBC"
+                ],
+                "learnt": [
+                    "TBC"
+                ]
+            },
             {
                 "versionNo": "3",
                 "status": ["dev", "UR", "design"],

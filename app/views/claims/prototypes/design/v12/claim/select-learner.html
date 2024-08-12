@@ -1,0 +1,128 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim_V12(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Select learner - Claim: ", claim.claimID] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="claim-details?id={{ claim.claimID | removeClaimSuffix_V12 }}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% if data["learnerInput"] == "" %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#search-error">Search cannot be empty</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID | removeClaimSuffix_V12 }}</span>
+        <h1 class="govuk-heading-l">Course or qualification learner</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">If you have previously claimed for this learner their details will already be in the system.</p>
+        <p class="govuk-body">Check using the search below.</p>
+        <div class="moj-search govuk-!-padding-bottom-2">
+
+            <form action="select-learner" method="post">
+
+                <div class="govuk-form-group {% if data['learnerInput'] == '' %}govuk-form-group--error{% endif %}">
+                    <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+                        Search for a learner
+                    </label>
+
+                    <div id="search-hint" class="govuk-hint moj-search__hint ">
+                        You can search by name or National Insurance number
+                    </div>
+                    {% if data["learnerInput"] == "" %}
+                    <p id="search-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> Search cannot be empty
+                    </p>
+                    {% endif %}
+
+                    <input class="govuk-input moj-search__input {% if data['learnerInput'] == '' %}govuk-input--error{% endif %}" id="search" name="learnerInput" type="search"
+                        aria-describedby="search-hint" value="{{ data['learnerInput'] }}">
+
+                </div>
+
+                <button class="govuk-button moj-search__button govuk-button--secondary" data-module="govuk-button">
+                    Search
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% if data['learnerInput'] %}
+        <h2 class="govuk-heading-m">Search results</h2>
+        {% set hasResults = false %}
+        {% set addHeader = true %}
+        {% for learner in data['learners'] %}
+        {% set match = data['learnerInput'] | learnerSearch_V12(learner) %}
+        {% if match %}
+        {% set hasResults = true %}
+        {% if addHeader %}
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">National Insurance number</th>
+                    <th scope="col" class="govuk-table__header">Full name</th>
+                    <th scope="col" class="govuk-table__header">Job title</th>
+                    <th scope="col" class="govuk-table__header"></th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                {% set addHeader = false %}
+                {% endif %}
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">{{ learner.id }}</th>
+                    <td class="govuk-table__cell">{{ learner.givenName }} {{ learner.familyName }}</td>
+                    <td class="govuk-table__cell">{{ learner.jobTitle }}</td>
+                    <td class="govuk-table__cell">
+                        <form method="post" action="../add-learner" class="govuk-!-margin-0">
+                            <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
+                            <button type="submit" class="govuk-button">Select</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                {% if hasResults %}
+            </tbody>
+        </table>
+        <form action="../learner/add-learner?inClaim=true" method="post">
+            <p class="govuk-body">If you cannot find the learner this may mean they have not yet been added.</p>
+            <button class="govuk-button govuk-button--secondary">Add new learner</button>
+        </form>
+        {% else %}
+        <form action="../learner/add-learner?inClaim=true" method="post">
+            <p class="govuk-body">
+                No matches returned for your search: <q>{{ data['learnerInput'] }}</q>.
+            </p>
+            <p class="govuk-body">This may mean they have not yet been added.</p>
+            <button class="govuk-button govuk-button--secondary">Add new learner</button>
+        </form>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
