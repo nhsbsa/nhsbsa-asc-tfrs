@@ -715,8 +715,26 @@ addFilter('claimMatch_V12', function (claim, search, claimType) {
                 }
             }
         }
-
     }
-
     return check;
 })
+
+addFilter('statusTag_V7', function (statusID, statuses) {
+    var statusName = null
+    for (const s of statuses) {
+        if (s.id == statusID) {
+            statusName = s.name
+        }
+    }
+    if (statusID == 'not-yet-submitted') {
+        return '<strong class="govuk-tag govuk-tag--blue">' + statusName + '</strong>'
+    } else if (statusID == 'submitted') {
+        return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
+    } else if (statusID == 'approved') {
+        return '<strong class="govuk-tag govuk-tag--green">' + statusName + '</strong>'
+    } else if (statusID == 'rejected') {
+        return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
+    } else {
+        return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
+    }
+}, { renderAsHtml: true })
