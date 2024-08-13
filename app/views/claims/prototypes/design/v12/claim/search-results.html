@@ -43,8 +43,8 @@
                             <th class="govuk-table__header" scope="col" width="5%" aria-sort="none">Type</th>
                             <th class="govuk-table__header" scope="col" width="33%" aria-sort="none">Training</th>
                             <th class="govuk-table__header" scope="col" width="25%" aria-sort="none">Learner</th>
-                            <th class="govuk-table__header" scope="col" width="25%" aria-sort="descending">Status</th>
                             <th class="govuk-table__header" scope="col" width="15%" aria-sort="none">Start date</th>
+                            <th class="govuk-table__header" scope="col" width="25%" aria-sort="descending">Status</th>
                         </tr>
                     </thead>
                     <tbody class="govuk-table__body">
@@ -52,14 +52,14 @@
                         {% endif %}
                         <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
                             <td class="govuk-table__header" scope="row"><a class="govuk-link"
-                                    href="claim/claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
+                                    href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
                             <td class="govuk-table__cell">{{ claim.claimType | typeTag_V12 }}</td>
                             <td class="govuk-table__cell">{{ claim.training.title }}</td>
                             <td class="govuk-table__cell">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</td>
-                            <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
-                                statusTag_V12(data.statuses) }}</td>
                             <td class="govuk-table__cell" data-sort-value="{{ claim.startDate }}">{{ claim.startDate |
                                     govukDate("truncate") }}</td>
+                            <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
+                                        statusTag_V12(data.statuses) }}</td>
                         </tr>
                         {% endif %}
                     {% endfor %}
