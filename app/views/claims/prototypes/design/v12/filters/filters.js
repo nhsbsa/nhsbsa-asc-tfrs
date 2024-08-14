@@ -646,15 +646,12 @@ addFilter('75CharacterCount_V12', function (description) {
 
 
 addFilter('removeClaimSuffix_V12', function (claimID) {
-
     // Check if the string has at least two characters
     if (claimID.length < 2) {
         return ''; // Return an empty string if there are less than two characters
     }
-
     // Use the slice method to remove the last two characters
     return claimID.slice(0, -2);
-
 })
 
 
