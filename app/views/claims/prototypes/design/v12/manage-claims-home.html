@@ -47,13 +47,46 @@
           <div class="moj-button-menu__wrapper">
             <form method="post" action="/new-claim" class="govuk-!-margin-0">
               <button class="govuk-button moj-button-menu__item govuk-button--primary moj-page-header-actions__action"
-                data-module="govuk-button" type="submit">Start a new care skills claim</button>
+                data-module="govuk-button" type="submit">Start a new claim</button>
             </form>
           </div>
         </div>
       </div>
     </div>
 
+  </div>
+</div>
+
+<div class="govuk-grid-row govuk-!-margin-bottom-5">
+  <div class="govuk-grid-column-two-thirds">
+    <div class="moj-search">
+
+      <form action="./claim/search-results">
+
+        <div class="govuk-form-group">
+          <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+            Find a claim
+          </label>
+
+          <div id="search-hint" class="govuk-hint moj-search__hint ">
+
+            You can search by claim reference, training or learner
+
+          </div>
+
+          <input class="govuk-input moj-search__input " id="search" name="search" type="search"
+            aria-describedby="search-hint">
+
+        </div>
+
+        <button type="submit" class="govuk-button moj-search__button govuk-button--secondary"
+          data-module="govuk-button">
+          Search
+        </button>
+
+
+      </form>
+    </div>
   </div>
 </div>
 

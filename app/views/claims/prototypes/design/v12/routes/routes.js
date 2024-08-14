@@ -688,6 +688,11 @@ router.get('/clear-learner', function (req, res) {
   }
 });
 
+router.get('/delete-claim', function (req, res) {
+
+  res.redirect('claim/delete-confirmation')
+});
+
 function loadData(req) {
   // pull in the prototype data object and see if it contains a datafile reference
   let prototype = {} || req.session.data['prototype'] // set up if doesn't exist

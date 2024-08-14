@@ -646,15 +646,12 @@ addFilter('75CharacterCount_V12', function (description) {
 
 
 addFilter('removeClaimSuffix_V12', function (claimID) {
-
     // Check if the string has at least two characters
     if (claimID.length < 2) {
         return ''; // Return an empty string if there are less than two characters
     }
-
     // Use the slice method to remove the last two characters
     return claimID.slice(0, -2);
-
 })
 
 
@@ -665,3 +662,76 @@ addFilter('isCostMoreThanMax_V12', function (amount) {
         return false
     }
 })
+
+addFilter('claimMatch_V12', function (claim, search, claimType) {
+    let check = false;
+
+    const formattedSearch = removeSpacesAndLowerCase(search);
+
+    if (claim.type == claimType) {
+        if (claim.claimID != null) {
+            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
+            if (formattedClaimID.includes(formattedSearch)) {
+                check = true
+            }
+        }
+
+        if (claim.training != null) {
+            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
+            if (formattedActivity.includes(formattedSearch)) {
+                check = true
+            }
+        }
+        if (claim.learners != null) {
+            for (const l of claim.learners) {
+                const formattedName = removeSpacesAndLowerCase(l.fullName);
+                if (formattedName.includes(formattedSearch)) {
+                    check = true
+                }
+            }
+        }
+    } else if (claim.type == claimType) {
+        if (claim.claimID != null) {
+            const formattedClaimID = removeSpacesAndLowerCase(claim.ClaimID);
+            if (formattedClaimID.includes(formattedSearch)) {
+                check = true
+            }
+        }
+
+        if (claim.categoryName != null) {
+            const formattedActivity = removeSpacesAndLowerCase(claim.categoryName);
+            if (formattedActivity.includes(formattedSearch)) {
+                check = true
+            }
+        }
+        if (claim.learners != null) {
+            for (const l of claim.learners) {
+                const formattedName = removeSpacesAndLowerCase(l.fullName);
+                if (formattedName.includes(formattedSearch)) {
+                    check = true
+                }
+            }
+        }
+    }
+    return check;
+})
+
+addFilter('statusTag_V7', function (statusID, statuses) {
+    var statusName = null
+    for (const s of statuses) {
+        if (s.id == statusID) {
+            statusName = s.name
+        }
+    }
+    if (statusID == 'not-yet-submitted') {
+        return '<strong class="govuk-tag govuk-tag--blue">' + statusName + '</strong>'
+    } else if (statusID == 'submitted') {
+        return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
+    } else if (statusID == 'approved') {
+        return '<strong class="govuk-tag govuk-tag--green">' + statusName + '</strong>'
+    } else if (statusID == 'rejected') {
+        return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
+    } else {
+        return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
+    }
+}, { renderAsHtml: true })
