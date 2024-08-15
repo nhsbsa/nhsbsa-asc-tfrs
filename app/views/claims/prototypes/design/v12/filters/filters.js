@@ -701,16 +701,10 @@ addFilter('formatStatus_V12', function (status) {
     }
 })
 
-addFilter('searchedClaims_V12', function (claims, dateType) {
-
-const formattedSearch = removeSpacesAndLowerCase(data.search);
-
-});
-
 addFilter('claimsMatch_V12', function (claims, search) {
     const formattedSearch = removeSpacesAndLowerCase(search);
 
-    return claims.filter(claim => {
+    var filtered = claims.filter(claim => {
         let check = false;
 
         if (claim.claimID != null) {
@@ -745,4 +739,6 @@ addFilter('claimsMatch_V12', function (claims, search) {
 
         return check;
     });
+
+    return filtered;
 })
