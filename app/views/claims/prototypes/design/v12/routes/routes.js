@@ -212,7 +212,7 @@ function newTUClaim(req, input, type) {
   return claim.claimID
 }
 
-router.get('/new-claim', function (req, res) {
+router.get('/new-claim-v12', function (req, res) {
   res.redirect('claims/prototypes/design/v12/claim/select-training')
 });
 
