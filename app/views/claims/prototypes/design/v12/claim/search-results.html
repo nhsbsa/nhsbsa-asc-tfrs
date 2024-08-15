@@ -1,11 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
-{% set resultCount = 0 %}
-{% for claim in data.claims %}
-    {% set claimCheck = claim | claimMatch_V12(data.search) %}
-    {% if claimCheck %}
-    {% set resultCount = resultCount + 1 %}
-    {% endif %}
-{% endfor %}
+
+{% set matchedClaims = data.claims | claimsMatch_V12(data.search) %}
+{% set resultCount = matchedClaims.length %}
 
 {% block pageTitle %}
 {{ ["Search results - ", (data.fundingPot | potName_V12)] | join }}
@@ -30,13 +26,7 @@
         </div>
         <div class="govuk-grid-column-two-thirds">
             <table class="govuk-table" data-module="moj-sortable-table">
-                {% set hasResults = false %}
-                {% set addHeader = true %}
-                {% for claim in data.claims %}
-                    {% set claimCheck = claim | claimMatch_V12(data.search, data.claimType) %}
-                    {% if claimCheck %}
-                    {% set hasResults = true %}
-                    {% if addHeader %}
+
                     <thead class="govuk-table__head">
                         <tr class="govuk-table__row">
                             <th class="govuk-table__header" scope="col" width="20%" aria-sort="none">Claim reference</th>
@@ -47,9 +37,8 @@
                             <th class="govuk-table__header" scope="col" width="18%" aria-sort="descending">Status</th>
                         </tr>
                     </thead>
+                    {% for claim in matchedClaims %}
                     <tbody class="govuk-table__body">
-                        {% set addHeader = false %}
-                        {% endif %}
                         <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
                             <td class="govuk-table__header" scope="row"><a class="govuk-link"
                                     href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
@@ -61,7 +50,6 @@
                             <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
                                         statusTag_V12(data.statuses) }}</td>
                         </tr>
-                        {% endif %}
                     {% endfor %}
                 </tbody>
             </table>

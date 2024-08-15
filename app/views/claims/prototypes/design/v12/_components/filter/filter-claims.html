@@ -1,4 +1,6 @@
-{% set formattedStartDates = data.claims | uniqueDates_V7("startDate") %}
+{% set matchedClaims = data.claims | claimsMatch_V12(data.search) %}
+{% set formattedStartDates = matchedClaims | uniqueDates_V12("startDate") %}
+{% set availableStatus = matchedClaims | availableStatus_V12(data.search) %}
 
 
 <div class="moj-filter">
@@ -25,12 +27,12 @@
 
                         </legend>
                         <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
-                            {% for status in data.statuses %}
+                            {% for status in availableStatus %}
                             <div class="govuk-checkboxes__item">
                                 <input class="govuk-checkboxes__input" id="{{ status.id }}" name="status"
                                     type="checkbox" value="{{ status.id }}">
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ status.id }}">
-                                    {{ status.name }}
+                                    {{ status }}
                                 </label>
 
                             </div>
