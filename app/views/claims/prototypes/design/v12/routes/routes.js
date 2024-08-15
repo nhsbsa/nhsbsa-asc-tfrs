@@ -56,25 +56,36 @@ router.post('/bank-details-handler', function (req, res) {
   }
 });
 
-router.post('/add-training', function (req, res) {
-  const trainingCode = req.session.data.trainingSelection
-  var trainingChoice = null
-  for (const trainingGroup of req.session.data.training) {
-    for (const t of trainingGroup.courses) {
-      if (trainingCode == t.code) {
-        trainingChoice = t
-      }
+router.post('/search-results_V12', function (req, res) {
+  const statuses = req.session.data.filterStatus
+  const startDates = req.session.data.filterStartDate
+  const search = req.session.data.search
+
+  res.redirect('claims/prototypes/design/v12/claim/search-results?search=' + search);
+});
+
+router.post('/apply-filters_V12', function (req, res) {
+  const statuses = req.session.data.filterStatus
+  const startDates = req.session.data.filterStartDate
+  const search = req.session.data.search
+
+  let query = '?search=' + search
+  if (statuses != null) {
+    for (const status of statuses) {
+      query += '&status=' + status
     }
   }
-  if (trainingChoice.fundingModel == "full") {
-    delete req.session.data['training-input'];
-    delete req.session.data['trainingSelection'];
-    const claimID = newTUClaim(req, trainingChoice, "100")
-    res.redirect('claim/claim-details' + '?id=' + claimID)
-  } else {
-    res.redirect('claim/split-decision')
+  if (startDates != null) {
+    for (const date of startDates) {
+      query += '&startDate=' + date
+    }
   }
+
+  res.redirect('claim/search-results' + query);
 });
+
+
+
 
 router.post('/split-decision-handler', function (req, res) {
   const trainingCode = req.session.data.trainingSelection

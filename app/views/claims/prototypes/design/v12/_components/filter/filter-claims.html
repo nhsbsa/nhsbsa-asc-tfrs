@@ -11,7 +11,7 @@
     <div class="moj-filter__content">
         <div class="moj-filter__options">
 
-            <form id="filterForm-{{ status.id }}">
+            <form id="filterForm" action="../apply-filters_V12" method="post">
                 <button class="govuk-button" data-module="govuk-button" data-test-id="submit-button">
                     Apply filters
                 </button>
@@ -28,9 +28,9 @@
                         <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
                             {% for status in availableStatus %}
                             <div class="govuk-checkboxes__item">
-                                <input class="govuk-checkboxes__input" id="{{ status.id }}" name="status"
-                                    type="checkbox" value="{{ status.id }}">
-                                <label class="govuk-label govuk-checkboxes__label" for="{{ status.id }}">
+                                <input class="govuk-checkboxes__input" id="{{ status }}" name="filterStatus"
+                                    type="checkbox" value="{{ status }}">
+                                <label class="govuk-label govuk-checkboxes__label" for="{{ status }}">
                                     {{ status | formatStatus_V12 }}
                                 </label>
 
@@ -56,7 +56,7 @@
                             {% for monthYear in formattedStartDates %}
                             {% set checkboxId = 'startdate-' + loopIndex %}
                             <div class="govuk-checkboxes__item">
-                                <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="startdate"
+                                <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="filterStartDate"
                                     type="checkbox" value="{{ monthYear }}">
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ checkboxId }}">
                                     {{ monthYear }}

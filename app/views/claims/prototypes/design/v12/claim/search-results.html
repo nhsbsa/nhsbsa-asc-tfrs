@@ -1,6 +1,6 @@
 {% extends "../layouts/claims-main.html" %}
 
-{% set matchedClaims = data.claims | claimsMatch_V12(data.search) %}
+{% set matchedClaims = data.claims | claimsMatch_V12(data.search, data.status) %}
 {% set resultCount = matchedClaims.length %}
 
 {% block pageTitle %}

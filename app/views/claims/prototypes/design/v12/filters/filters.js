@@ -701,7 +701,7 @@ addFilter('formatStatus_V12', function (status) {
     }
 })
 
-addFilter('claimsMatch_V12', function (claims, search) {
+addFilter('claimsMatch_V12', function (claims, search, status) {
     const formattedSearch = removeSpacesAndLowerCase(search);
 
     var filtered = claims.filter(claim => {
@@ -729,11 +729,9 @@ addFilter('claimsMatch_V12', function (claims, search) {
                 }
             }
         }
-
-        if (claim.categoryName != null) {
-            const formattedCategory = removeSpacesAndLowerCase(claim.categoryName);
-            if (formattedCategory.includes(formattedSearch)) {
-                check = true;
+        if (status != null) {
+            if (claim.status != status) {
+                check = false;
             }
         }
 
@@ -742,3 +740,4 @@ addFilter('claimsMatch_V12', function (claims, search) {
 
     return filtered;
 })
+
