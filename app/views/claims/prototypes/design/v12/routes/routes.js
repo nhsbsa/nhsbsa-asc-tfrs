@@ -216,27 +216,6 @@ router.get('/new-claim-v12', function (req, res) {
   res.redirect('claims/prototypes/design/v12/claim/select-training')
 });
 
-router.post('/add-cost', function (req, res) {
-  var cost = req.session.data.cost
-  var claimID = req.session.data.id
-  delete req.session.data.submitError
-
-  if (cost == null || cost == "") {
-    req.session.data.submitError = true
-    res.redirect('claim/add-claim-amount')
-  } else {
-    for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        c.claimAmount = cost
-        break;
-      }
-    }
-    delete req.session.data.cost;
-    delete req.session.data.submitError
-    res.redirect('claim/claim-details' + '?id=' + claimID + '#payment')
-  }
-});
-
 router.get('/start-40-claim', function (req, res) {
   claimID = req.session.data.id
   const newID = newTUClaim(req, claimID, "40")
