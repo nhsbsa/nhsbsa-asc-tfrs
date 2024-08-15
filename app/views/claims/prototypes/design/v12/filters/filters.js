@@ -683,13 +683,22 @@ addFilter('uniqueDates_V12', function (claims, dateType) {
 
 addFilter('availableStatus_V12', function (claims) {
     const uniqueStatuses = new Set();
-
     claims.forEach(claim => {
         uniqueStatuses.add(claim.status);
     });
-
     return Array.from(uniqueStatuses);
+})
 
+addFilter('formatStatus_V12', function (status) {
+    if (status === "not-yet-submitted") {
+        return "Not yet submitted"
+    } else if (status === "submitted") {
+        return "Submitted"
+    } else if (status === "approved") {
+        return "Approved"
+    } else if (status === "rejected") {
+        return "Rejected"
+    }
 })
 
 addFilter('searchedClaims_V12', function (claims, dateType) {

@@ -32,7 +32,7 @@
                                 <input class="govuk-checkboxes__input" id="{{ status.id }}" name="status"
                                     type="checkbox" value="{{ status.id }}">
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ status.id }}">
-                                    {{ status }}
+                                    {{ status | formatStatus_V12 }}
                                 </label>
 
                             </div>
