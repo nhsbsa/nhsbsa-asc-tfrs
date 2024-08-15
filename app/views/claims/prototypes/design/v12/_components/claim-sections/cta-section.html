@@ -14,7 +14,7 @@
 {% endif %}
 
 <div class="govuk-button-group">
-    <div class="govuk-button-group">
+
     {% if (claim.claimType == "60" or claim.claimType == "100") and (claim.status == "new"
     or claim.status == "not-yet-submitted") %}
         <form action="../ready-to-declare?id={{claim.claimID}}" method="post" novalidate>
@@ -29,13 +29,14 @@
             </button>
         </form>
     {% endif %}
+
+    <form action="../save-claim" method="post" novalidate>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Save and finish later
+        </button>
+    </form>
     
-        <form action="../save-claim" method="post" novalidate>
-            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-                Save and finish later
-            </button>
-            <a class="govuk-link govuk-link--no-visited-state" href="../delete-claim">Delete claim</a>
-        </form>
-       
-    </div>
+    {% if not (claim.claimType == "60" and claim.status == "approved") %}
+        <a class="govuk-link govuk-link--no-visited-state" href="../delete-claim">Delete claim</a>
+    {% endif %}
 </div>
