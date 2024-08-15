@@ -689,8 +689,18 @@ router.get('/clear-learner', function (req, res) {
 });
 
 router.get('/delete-claim', function (req, res) {
-
   res.redirect('claim/delete-confirmation')
+});
+
+router.get('/confirm-delete-claim', function (req, res) {
+  var claimID = req.session.data.id
+  var claims = req.session.data.claims
+  for (let i = 0; i < claims.length; i++) {
+    if (claims[i].claimID === claimID) {
+        claims.splice(i, 1);
+        res.redirect('manage-claims?fundingPot=TU')
+    }
+  }
 });
 
 function loadData(req) {
