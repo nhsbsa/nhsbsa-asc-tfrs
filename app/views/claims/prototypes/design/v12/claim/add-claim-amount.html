@@ -28,7 +28,7 @@
         <form action="../add-cost" method="post" novalidate>
             <div
                 class="govuk-form-group {% if data.submitError != null and data.submitError %} govuk-form-group--error {% endif %}">
-                <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID | removeClaimSuffix_V12 }}</span>
+                <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID }}</span>
                 <h1 class="govuk-label-wrapper">
                     <label class="govuk-label govuk-label--l" for="postcode">
                         Add cost
