@@ -739,5 +739,40 @@ addFilter('claimsMatch_V12', function (claims, search, status) {
     });
 
     return filtered;
+});
+
+
+addFilter('claimsMatchSearch_V12', function (claims, search) {
+    const formattedSearch = removeSpacesAndLowerCase(search);
+
+    var filtered = claims.filter(claim => {
+        let check = false;
+
+        if (claim.claimID != null) {
+            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
+            if (formattedClaimID.includes(formattedSearch)) {
+                check = true;
+            }
+        }
+
+        if (claim.training != null) {
+            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
+            if (formattedActivity.includes(formattedSearch)) {
+                check = true;
+            }
+        }
+
+        if (claim.learners != null) {
+            for (const l of claim.learners) {
+                const formattedName = removeSpacesAndLowerCase(l.fullName);
+                if (formattedName.includes(formattedSearch)) {
+                    check = true;
+                }
+            }
+        }
+        return check;
+    });
+
+    return filtered;
 })
 

@@ -61,6 +61,9 @@ router.post('/search-results_V12', function (req, res) {
   const startDates = req.session.data.filterStartDate
   const search = req.session.data.search
 
+  delete req.session.data.filterStatus
+  delete req.session.data.filterStartDate
+
   res.redirect('claims/prototypes/design/v12/claim/search-results?search=' + search);
 });
 
@@ -68,6 +71,9 @@ router.post('/apply-filters_V12', function (req, res) {
   const statuses = req.session.data.filterStatus
   const startDates = req.session.data.filterStartDate
   const search = req.session.data.search
+
+  delete req.session.data.filterStatus
+  delete req.session.data.filterStartDate
 
   let query = '?search=' + search
   if (statuses != null) {
