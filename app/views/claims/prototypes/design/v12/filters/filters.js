@@ -701,7 +701,7 @@ addFilter('formatStatus_V12', function (status) {
     }
 })
 
-addFilter('claimsMatch_V12', function (claims, search, status) {
+addFilter('claimsMatch_V12', function (claims, search, statuses) {
     const formattedSearch = removeSpacesAndLowerCase(search);
 
     var filtered = claims.filter(claim => {
@@ -729,12 +729,12 @@ addFilter('claimsMatch_V12', function (claims, search, status) {
                 }
             }
         }
-        if (status != null && status != "") {
-            if (claim.status != status) {
+        if (statuses != null && statuses != "") {
+            let statusesArray = statuses.split("&");
+            if (!statusesArray.includes(claim.status)) {
                 check = false;
             }
         }
-
         return check;
     });
 
@@ -775,4 +775,18 @@ addFilter('claimsMatchSearch_V12', function (claims, search) {
 
     return filtered;
 })
+
+addFilter('statusArray_V12', function (statusString) { 
+    if (statusString != null && statusString != "") {
+        return statusString.split("&");
+    }
+ 
+});
+
+
+addFilter('startDateArray_V12', function (startDateString) { 
+    if (startDateString != null && startDateString != "") {
+        return startDateString.split("&");
+    }
+});
 

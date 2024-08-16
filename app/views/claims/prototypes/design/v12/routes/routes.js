@@ -77,14 +77,14 @@ router.post('/apply-filters_V12', function (req, res) {
 
   let query = '?search=' + search
   if (statuses != null) {
-    for (const status of statuses) {
-      query += '&status=' + status
-    }
+    query += "&status="
+    const statusString = statuses.join("&");
+    query += statusString;
   }
   if (startDates != null) {
-    for (const date of startDates) {
-      query += '&startDate=' + date
-    }
+    query += '&startDate='
+    const startDatesString = startDates.join("&");
+    query += startDatesString;
   }
 
   res.redirect('claim/search-results' + query);

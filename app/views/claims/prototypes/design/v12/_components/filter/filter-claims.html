@@ -2,8 +2,8 @@
 {% set formattedStartDates = matchedClaims | uniqueDates_V12("startDate") %}
 {% set availableStatus = matchedClaims | availableStatus_V12(data.search) %}
 
-{% set selectedStatusFilters = (data.statuses) %}
-{% set selectedDateFilters = (data.startDates) %}
+{% set selectedStatusFilters = (data.status | statusArray_V12) %}
+{% set selectedDateFilters = (data.startDate | startDateArray_V12) %}
 
 <div class="moj-filter">
     <div class="moj-filter__header">
@@ -30,10 +30,10 @@
             <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Status</h3>
       
             <ul class="moj-filter-tags">
-      
-              <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>Submitted x</a></li>
-      
-              <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>Not yet submitted x</a></li>
+                
+                {% for status in selectedStatusFilters %}
+                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>{{status}} x</a></li>
+                {% endfor %}
       
             </ul>
       
