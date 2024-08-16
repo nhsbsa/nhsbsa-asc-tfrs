@@ -32,7 +32,7 @@
             <ul class="moj-filter-tags">
                 
                 {% for status in selectedStatusFilters %}
-                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>{{status}} x</a></li>
+                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>{{status | formatStatus_V12}} x</a></li>
                 {% endfor %}
       
             </ul>

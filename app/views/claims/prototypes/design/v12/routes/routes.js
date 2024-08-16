@@ -36,6 +36,26 @@ router.post('/verify-details-handler', function (req, res) {
   delete req.session.data['confirmation'];
 });
 
+router.post('/add-training', function (req, res) {
+  const trainingCode = req.session.data.trainingSelection
+  var trainingChoice = null
+  for (const trainingGroup of req.session.data.training) {
+    for (const t of trainingGroup.courses) {
+      if (trainingCode == t.code) {
+        trainingChoice = t
+      }
+    }
+  }
+  if (trainingChoice.fundingModel == "full") {
+    delete req.session.data['training-input'];
+    delete req.session.data['trainingSelection'];
+    const claimID = newTUClaim(req, trainingChoice, "100")
+    res.redirect('claim/claim-details' + '?id=' + claimID)
+  } else {
+    res.redirect('claim/split-decision')
+  }
+});
+
 router.post('/bank-details-handler', function (req, res) {
   const accountName = req.session.data.nameOnTheAccount
   const sortCode = req.session.data.sortCode
