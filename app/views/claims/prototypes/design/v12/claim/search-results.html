@@ -26,28 +26,19 @@
   
         <form action="/search-results_V12" method="post">
   
-          <div class="govuk-form-group">
-            <!-- <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
-              Find a claim
-            </label> -->
-  
+          <div class="govuk-form-group">  
             <div id="search-hint" class="govuk-hint moj-search__hint ">
-  
               You can search by claim reference, training or learner
-  
             </div>
   
             <input class="govuk-input moj-search__input " id="search" name="search" type="search"
               aria-describedby="search-hint" value="{{data.search}}">
-  
           </div>
   
           <button type="submit" class="govuk-button moj-search__button govuk-button--secondary"
             data-module="govuk-button">
             Search
           </button>
-  
-  
         </form>
       </div>
     </div>
@@ -59,7 +50,7 @@
         </div>
         <div class="govuk-grid-column-two-thirds">
 
-            <p class="govuk-heading-m">{{ resultCount }} result</p>
+            <p class="govuk-heading-m">{{ resultCount }} {% if resultCount == 1 %}result{% else %}results{% endif %}</p>
 
             <table class="govuk-table" data-module="moj-sortable-table">
 

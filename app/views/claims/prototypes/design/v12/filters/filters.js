@@ -729,7 +729,7 @@ addFilter('claimsMatch_V12', function (claims, search, status) {
                 }
             }
         }
-        if (status != null) {
+        if (status != null && status != "") {
             if (claim.status != status) {
                 check = false;
             }

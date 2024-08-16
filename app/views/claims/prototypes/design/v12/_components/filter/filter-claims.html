@@ -2,6 +2,9 @@
 {% set formattedStartDates = matchedClaims | uniqueDates_V12("startDate") %}
 {% set availableStatus = matchedClaims | availableStatus_V12(data.search) %}
 
+{% set selectedStatusFilters = (data.statuses) %}
+{% set selectedDateFilters = (data.startDates) %}
+
 <div class="moj-filter">
     <div class="moj-filter__header">
         <div class="moj-filter__header-title">
@@ -19,7 +22,7 @@
               </div>
       
               <div class="moj-filter__heading-action">
-                <p><a class="govuk-link govuk-link--no-visited-state" href="">Clear filters</a></p>
+                <p><a class="govuk-link govuk-link--no-visited-state" href="search-results?status=">Clear filters</a></p>
               </div>
       
             </div>
@@ -28,9 +31,9 @@
       
             <ul class="moj-filter-tags">
       
-              <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> Submitted</a></li>
+              <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>Submitted x</a></li>
       
-              <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> Not yet submitted</a></li>
+              <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>Not yet submitted x</a></li>
       
             </ul>
       
@@ -56,10 +59,9 @@
                     <fieldset class="govuk-fieldset">
 
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-
                             Status
-
                         </legend>
+
                         <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
                             {% for status in availableStatus %}
                             <div class="govuk-checkboxes__item">
