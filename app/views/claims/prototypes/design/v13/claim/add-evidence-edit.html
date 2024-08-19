@@ -1,0 +1,152 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim_V13(data.claims) %}
+{% set evidenceCount = claim.evidenceOfPayment | coursesCount_V13 %}
+
+{% block pageTitle %}
+{{ ["Add evidence - Claim: ", claim.claimID] | join }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% if data.deleteSuccess %}
+    <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+
+      <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+        <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+      </svg>
+
+      <div class="moj-banner__message">File named invoice.png has been deleted</div>
+
+    </div>
+    {% endif %}
+
+    {% if data.deleteError %}
+    <div class="moj-banner moj-banner--warning" role="region" aria-label="Warning">
+
+      <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+        <path d="M13.6,15.4h-2.3v-4.5h2.3V15.4z M13.6,19.8h-2.3v-2.2h2.3V19.8z M0,23.2h25L12.5,2L0,23.2z" />
+      </svg>
+
+      <div class="moj-banner__message">Error deleting invoice.png, please try again</div>
+
+    </div>
+
+    {% endif %}
+
+    {% if data.missingOption %}
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            <li>
+              <a href="#error">
+                Select whether you want to add another file
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+
+    <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+    <h1 class="govuk-heading-l">Add evidence of payment</h1>
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <p class="govuk-body">
+      You need to provide evidence of {{ data.type }} {% if data.type == 'completion' %} for {{ claim.learner.fullName
+      }}{% endif %}.
+    </p>
+    <p class="govuk-body">
+      You may upload up to 4 files. These can be in PDF, JPG, JPEG or PNG format.
+    </p>
+
+    <p class="govuk-body">{{claim.evidenceOfPayment.length}} {% if claim.evidenceOfPayment.length == 1 %}file{% else
+      %}files{% endif %} uploaded. {% if claim.evidenceOfPayment.length == 4 %} If you want to upload another file,
+      first delete one of your uploads. {% endif %}</p>
+
+    <div class="govuk-form-group">
+      <h2 class="govuk-heading-m" style="padding-top: 10px;">Files added</h2>
+
+      <dl class="govuk-summary-list" id="delete">
+        {% for payment in claim.evidenceOfPayment %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            {{payment}}
+          </dt>
+          <dd class="govuk-summary-list__value">
+            2MB
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <form action="../remove-evidence" method="post" novalidate>
+              <button class="unstyle-button">Delete</button>
+            </form>
+          </dd>
+        </div>
+        {% endfor %}
+
+      </dl>
+    </div>
+
+    {% if claim.evidenceOfPayment.length != 4 %}
+    <form action="../radioButton?type=payment" method="post" novalidate>
+      <div class="govuk-form-group {% if data.missingOption %} govuk-form-group--error {% endif %}">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            Do you want to upload another file?
+          </legend>
+          {% if data.missingOption %}
+          <p id="error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span>
+            Select whether you want to add another file or not
+          </p>
+          {% endif %}
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="another" name="another" type="radio" value="yes">
+              <label class="govuk-label govuk-radios__label" for="another">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="another-2" name="another" type="radio" value="no">
+              <label class="govuk-label govuk-radios__label" for="another-2">
+                No
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <button class="govuk-button" data-module="govuk-button" type="submit">
+        Continue
+      </button>
+    </form>
+    {% else %}
+    <a class="govuk-button" data-module="govuk-button" href="claim-details?id={{data.id}}#{{data.type}}">
+      Continue
+    </a>
+    {% endif %}
+
+
+
+  </div>
+  <div class="govuk-grid-column-one-third">
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <h2 class="govuk-heading-m">Related content</h2>
+    <p class="govuk-body"><a href="#" class="govuk-link">Help with evidence requirements</a></p>
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim_V12(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Duplicate claim - Claim: ", data.id] | join }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">A claim already exists for this training and learner</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+
+        <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-visually-hidden">Warning</span>
+                You have already submitted a claim for this training and learner so you will not be able submit this new claim.
+            </strong>
+        </div>
+
+        <p class="govuk-body"> The reference for the original claim is: <a class="govuk-link"
+            href="claim-details?id={{ data.dupeID }}">{{ data.dupeID }}</a></p>
+        <p class="govuk-body">You cannot claim again for the same learner and training. If you think this is a mistake, you might have entered the wrong training or learner on the new claim.</p>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <a type="submit" class="govuk-button" href="claim-details?id={{data.id}}">
+            Go back to claim
+        </a>
+    </div>
+</div>
+
+{% endblock %}

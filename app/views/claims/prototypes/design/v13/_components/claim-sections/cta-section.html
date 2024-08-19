@@ -1,0 +1,42 @@
+<h2 class="govuk-heading-m">What happens next</h2>
+
+{% if claim.claimType == "60" and claim.status == "approved" and pairClaim.claimType == "40" %}
+    <p class="govuk-body">When you have added all the necessary information, you can confirm the details and submit this 40 part of the claim for processing.</p>
+    <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
+{% elif claim.claimType == "60" %}
+    <p class="govuk-body">When you have added all the necessary information, you can confirm the details and submit this 60 part of the claim for processing.</p>
+    <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
+    <p class="govuk-body">Once the 60 part is approved and the learner has completed the training, you'll need to submit the 40 part for the rest of the reimbursement amount.</p>
+{% elif claim.claimType == "100" %}
+    <p class="govuk-body">When you have added all the necessary information to the claim you can confirm the details and
+        submit this 100 claim for processing.</p>
+    <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
+{% endif %}
+
+<div class="govuk-button-group" style="align-items: center;">
+
+    {% if (claim.claimType == "60" or claim.claimType == "100") and (claim.status == "new"
+    or claim.status == "not-yet-submitted") %}
+        <form action="../ready-to-declare?id={{claim.claimID}}" method="post" novalidate>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Confirm details
+            </button>
+        </form>
+    {% else %}
+        <form action="../ready-to-declare?id={{pairClaim.claimID}}" method="post" novalidate>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Confirm details
+            </button>
+        </form>
+    {% endif %}
+
+    <form action="../save-claim" method="post" novalidate>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Save and finish later
+        </button>
+    </form>
+    
+    {% if not (claim.claimType == "60" and claim.status == "approved") %}
+        <a class="govuk-link govuk-link--no-visited-state" href="../delete-claim">Delete claim</a>
+    {% endif %}
+</div>

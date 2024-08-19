@@ -1,0 +1,55 @@
+{% extends "./layouts/claims-main.html" %} 
+
+{% block pageTitle %} 
+{{ ["Home - ", serviceName] | join }}
+{% endblock %} 
+
+{% block beforeContent %}
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="choose-a-claim-type">Home
+      </a>
+  </li>
+  </ol>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">Manage claims or start a new claim</h1>
+
+    <!--<h2 class="govuk-heading-m">Manage claims</h2>-->
+
+    <ul class="homepage-services-and-info__list">
+
+        <li class="chevron-card">
+            <div class="chevron-card__wrapper">
+                <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
+                    <a class="govuk-link chevron-card__link" data-track-label="manage-tu-claims" href="manage-claims-home?fundingPot=TU">{{ "TU" | potName_V12 }}</a>
+                </h3>
+                <p class="govuk-body chevron-card__description">This is for staff who provide direct care and are not registered with a professional body, as well as registered and aspiring managers.</p>
+            </div>
+        </li>
+
+    </ul>
+
+    {% if data.userType == "signatory" %}
+    <div class="govuk-!-padding-bottom-5"></div>
+
+    <h2 class="govuk-heading-m">Admin options</h2>
+
+    <ul class="govuk-list">
+        <li>
+          <a class="govuk-link" href="./org-admin/manage-team">Manage team members</a>
+        </li>
+    </ul>
+
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}
