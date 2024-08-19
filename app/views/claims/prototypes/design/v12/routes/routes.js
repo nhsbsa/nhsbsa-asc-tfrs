@@ -76,43 +76,6 @@ router.post('/bank-details-handler', function (req, res) {
   }
 });
 
-router.post('/search-results_V12', function (req, res) {
-  const statuses = req.session.data.filterStatus
-  const startDates = req.session.data.filterStartDate
-  const search = req.session.data.search
-
-  delete req.session.data.filterStatus
-  delete req.session.data.filterStartDate
-
-  res.redirect('claims/prototypes/design/v12/claim/search-results?search=' + search);
-});
-
-router.post('/apply-filters_V12', function (req, res) {
-  const statuses = req.session.data.filterStatus
-  const startDates = req.session.data.filterStartDate
-  const search = req.session.data.search
-
-  delete req.session.data.filterStatus
-  delete req.session.data.filterStartDate
-
-  let query = '?search=' + search
-  if (statuses != null) {
-    query += "&status="
-    const statusString = statuses.join("&");
-    query += statusString;
-  }
-  if (startDates != null) {
-    query += '&startDate='
-    const startDatesString = startDates.join("&");
-    query += startDatesString;
-  }
-
-  res.redirect('claim/search-results' + query);
-});
-
-
-
-
 router.post('/split-decision-handler', function (req, res) {
   const trainingCode = req.session.data.trainingSelection
   const choice = req.session.data.splitDecision
