@@ -704,94 +704,7 @@ addFilter('formatStatus_V13', function (status) {
     }
 })
 
-addFilter('claimsMatchWithFilter_V13', function (claims, search, statuses, dates) {
-    const formattedSearch = removeSpacesAndLowerCase(search);
-
-    var filtered = claims.filter(claim => {
-        let check = false;
-
-        if (claim.claimID != null) {
-            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
-            if (formattedClaimID.includes(formattedSearch)) {
-                check = true;
-            }
-        }
-
-        if (claim.training != null) {
-            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
-            if (formattedActivity.includes(formattedSearch)) {
-                check = true;
-            }
-        }
-
-        if (claim.learners != null) {
-            for (const l of claim.learners) {
-                const formattedName = removeSpacesAndLowerCase(l.fullName);
-                if (formattedName.includes(formattedSearch)) {
-                    check = true;
-                }
-            }
-        }
-        if (statuses != null && statuses != "") {
-            let statusesArray = statuses.split("&");
-            if (statusesArray.includes(claim.status)) {
-                check = true;
-            } else {
-                check = false
-            }
-        }
-        
-        if (dates != null && dates != "") {
-            let datesArray = dates.split("&");
-            const startDate = new Date(claim.startDate);
-            const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
-            if (datesArray.includes(monthYear)) {
-                check = true;
-            } else {
-                check = false
-            }
-        }
-        return check;
-    });
-
-    return filtered;
-});
-
-addFilter('filteredClaims_V13', function (claims, statuses, dates) {
-    const formattedSearch = removeSpacesAndLowerCase(search);
-
-    var filtered = claims.filter(claim => {
-        let check = false;
-
-        if (statuses != null && statuses != "") {
-            let statusesArray = statuses.split("&");
-            if (statusesArray.includes(claim.status)) {
-                check = true;
-            } else {
-                check = false
-            }
-        }
-        
-        if (dates != null && dates != "") {
-            let datesArray = dates.split("&");
-            const startDate = new Date(claim.startDate);
-            const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
-            if (datesArray.includes(monthYear)) {
-                check = true;
-            } else {
-                check = false
-            }
-        }
-        return check;
-    });
-
-    return filtered;
-});
-
-
-
-
-addFilter('claimsMatchSearch_V13', function (claims, search) {
+addFilter('claimsMatchSearchWithoutFilter_V13', function (claims, search) {
     const formattedSearch = removeSpacesAndLowerCase(search);
 
     var filtered = claims.filter(claim => {
@@ -825,17 +738,44 @@ addFilter('claimsMatchSearch_V13', function (claims, search) {
     return filtered;
 })
 
+addFilter('filteredClaims_V13', function (claims, statuses, dates) {
+
+    var filtered = claims.filter(claim => {
+        let statusCheck = true;
+
+        if (statuses != null && statuses != "") {
+            if (statuses.includes(claim.status)) {
+                statusCheck = true;
+            } else {
+                statusCheck = false
+            }
+        }
+        let dateCheck = true;
+        if (dates != null && dates != "") {
+            const startDate = new Date(claim.startDate);
+            const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
+            if (dates.includes(monthYear)) {
+                dateCheck = true;
+            } else {
+                dateCheck = false
+            }
+        }
+        return statusCheck && dateCheck;
+    });
+
+    return filtered;
+});
+
 addFilter('statusArray_V13', function (statusString) { 
     if (statusString != null && statusString != "") {
-        return statusString.split("&");
+        return statusString.split("+");
     }
- 
 });
 
 
 addFilter('startDateArray_V13', function (startDateString) { 
     if (startDateString != null && startDateString != "") {
-        return startDateString.split("&");
+        return startDateString.split("+");
     }
 });
 

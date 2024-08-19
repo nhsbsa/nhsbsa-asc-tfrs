@@ -96,14 +96,14 @@ router.post('/apply-filters_V13', function (req, res) {
   delete req.session.data.filterStartDate
 
   let query = '?search=' + search
-  if (statuses != null) {
+  if (statuses != null && statuses != "") {
     query += "&status="
-    const statusString = statuses.join("&");
+    const statusString = statuses.join("+");
     query += statusString;
   }
-  if (startDates != null) {
+  if (startDates != null && startDates != "") {
     query += '&startDate='
-    const startDatesString = startDates.join("&");
+    const startDatesString = startDates.join("+");
     query += startDatesString;
   }
 

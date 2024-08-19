@@ -1,4 +1,4 @@
-{% set matchedClaimsBeforeFilter = data.claims | claimsMatchSearch_V13(data.search) %}
+{% set matchedClaimsBeforeFilter = data.claims | claimsMatchSearchWithoutFilter_V13(data.search) %}
 {% set uniqueStartDates = matchedClaimsBeforeFilter | uniqueDates_V13("startDate") %}
 {% set availableStatus = matchedClaimsBeforeFilter | availableStatus_V13(data.search) %}
 
