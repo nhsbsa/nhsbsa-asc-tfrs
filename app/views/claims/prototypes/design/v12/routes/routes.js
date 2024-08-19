@@ -694,6 +694,15 @@ router.post('/reinvite-user', function (req, res) {
   res.redirect('org-admin/manage-team')
 });
 
+router.post('/delete-user', function (req, res) {
+  var email = req.session.data.email
+  const index = req.session.data.users.findIndex(user => user.email == email);
+  if (index !== -1) {
+    req.session.data.users.splice(index, 1);
+  }
+  res.redirect('org-admin/manage-team')
+});
+
 router.get('/clear-learner', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
