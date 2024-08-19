@@ -1,5 +1,5 @@
 {% set matchedClaims = data.claims | claimsMatchSearch_V13(data.search) %}
-{% set formattedStartDates = matchedClaims | uniqueDates_V13("startDate") %}
+{% set uniqueStartDates = matchedClaims | uniqueDates_V13("startDate") %}
 {% set availableStatus = matchedClaims | availableStatus_V13(data.search) %}
 
 {% set selectedStatusFilters = (data.status | statusArray_V13) %}
@@ -30,19 +30,17 @@
             <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Status</h3>
       
             <ul class="moj-filter-tags">
-                
                 {% for status in selectedStatusFilters %}
                     <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>{{status | formatStatus_V13}} x</a></li>
                 {% endfor %}
-      
             </ul>
       
             <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Start date</h3>
       
             <ul class="moj-filter-tags">
-      
-              <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> August 2023 x</a></li>
-      
+                {% for status in selectedDateFilters %}
+                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> {{status | formatDate_V13}}</a></li>
+                {% endfor %}
             </ul>
       
           </div>
@@ -90,13 +88,13 @@
                         </legend>
                         <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
                             {% set loopIndex = 0 %}
-                            {% for monthYear in formattedStartDates %}
+                            {% for monthYear in uniqueStartDates %}
                             {% set checkboxId = 'startdate-' + loopIndex %}
                             <div class="govuk-checkboxes__item">
                                 <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="filterStartDate"
                                     type="checkbox" value="{{ monthYear }}">
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ checkboxId }}">
-                                    {{ monthYear }}
+                                    {{ monthYear | formatDate_V13 }}
                                 </label>
 
                             </div>

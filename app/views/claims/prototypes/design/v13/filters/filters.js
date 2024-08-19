@@ -671,14 +671,17 @@ addFilter('uniqueDates_V13', function (claims, dateType) {
         uniqueMonthYears.add(monthYear);
     });
     const sortedMonthYears = Array.from(uniqueMonthYears).sort();
-    const formattedDates = sortedMonthYears.map((dateString) => {
-        const [year, month] = dateString.split('-');
-        const formattedDate = new Date(year, month - 1); // Month is 0-indexed in JavaScript
-        const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' });
-        return formatter.format(formattedDate);
 
-    });
-    return formattedDates;
+    return sortedMonthYears
+})
+
+addFilter('formatDate_V13', function (date) {
+    const startDate = new Date(date);
+    const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
+    const [year, month] = monthYear.split('-');
+    const formattedDate = new Date(year, month - 1); // Month is 0-indexed in JavaScript
+    const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' });
+    return formatter.format(formattedDate);
 })
 
 addFilter('availableStatus_V13', function (claims) {
