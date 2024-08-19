@@ -704,7 +704,7 @@ addFilter('formatStatus_V13', function (status) {
     }
 })
 
-addFilter('claimsMatch_V13', function (claims, search, statuses) {
+addFilter('claimsMatchWithFilter_V13', function (claims, search, statuses, dates) {
     const formattedSearch = removeSpacesAndLowerCase(search);
 
     var filtered = claims.filter(claim => {
@@ -734,8 +734,21 @@ addFilter('claimsMatch_V13', function (claims, search, statuses) {
         }
         if (statuses != null && statuses != "") {
             let statusesArray = statuses.split("&");
-            if (!statusesArray.includes(claim.status)) {
-                check = false;
+            if (statusesArray.includes(claim.status)) {
+                check = true;
+            } else {
+                check = false
+            }
+        }
+        
+        if (dates != null && dates != "") {
+            let datesArray = dates.split("&");
+            const startDate = new Date(claim.startDate);
+            const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
+            if (datesArray.includes(monthYear)) {
+                check = true;
+            } else {
+                check = false
             }
         }
         return check;
@@ -743,6 +756,39 @@ addFilter('claimsMatch_V13', function (claims, search, statuses) {
 
     return filtered;
 });
+
+addFilter('filteredClaims_V13', function (claims, statuses, dates) {
+    const formattedSearch = removeSpacesAndLowerCase(search);
+
+    var filtered = claims.filter(claim => {
+        let check = false;
+
+        if (statuses != null && statuses != "") {
+            let statusesArray = statuses.split("&");
+            if (statusesArray.includes(claim.status)) {
+                check = true;
+            } else {
+                check = false
+            }
+        }
+        
+        if (dates != null && dates != "") {
+            let datesArray = dates.split("&");
+            const startDate = new Date(claim.startDate);
+            const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
+            if (datesArray.includes(monthYear)) {
+                check = true;
+            } else {
+                check = false
+            }
+        }
+        return check;
+    });
+
+    return filtered;
+});
+
+
 
 
 addFilter('claimsMatchSearch_V13', function (claims, search) {

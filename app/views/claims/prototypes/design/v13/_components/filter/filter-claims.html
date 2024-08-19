@@ -1,6 +1,6 @@
-{% set matchedClaims = data.claims | claimsMatchSearch_V13(data.search) %}
-{% set uniqueStartDates = matchedClaims | uniqueDates_V13("startDate") %}
-{% set availableStatus = matchedClaims | availableStatus_V13(data.search) %}
+{% set matchedClaimsBeforeFilter = data.claims | claimsMatchSearch_V13(data.search) %}
+{% set uniqueStartDates = matchedClaimsBeforeFilter | uniqueDates_V13("startDate") %}
+{% set availableStatus = matchedClaimsBeforeFilter | availableStatus_V13(data.search) %}
 
 {% set selectedStatusFilters = (data.status | statusArray_V13) %}
 {% set selectedDateFilters = (data.startDate | startDateArray_V13) %}
@@ -21,7 +21,7 @@
                 <h2 class="govuk-heading-m">Selected filters</h2>
               </div>
               <div class="moj-filter__heading-action">
-                <p><a class="govuk-link govuk-link--no-visited-state" href="search-results?status=">Clear filters</a></p>
+                <p><a class="govuk-link govuk-link--no-visited-state" href="search-results?status=&startDate=">Clear filters</a></p>
               </div>
             </div>
             {% if (selectedStatusFilters.length > 0 ) %}
