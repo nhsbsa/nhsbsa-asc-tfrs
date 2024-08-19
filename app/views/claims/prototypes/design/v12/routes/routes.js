@@ -36,6 +36,26 @@ router.post('/verify-details-handler', function (req, res) {
   delete req.session.data['confirmation'];
 });
 
+router.post('/add-training', function (req, res) {
+  const trainingCode = req.session.data.trainingSelection
+  var trainingChoice = null
+  for (const trainingGroup of req.session.data.training) {
+    for (const t of trainingGroup.courses) {
+      if (trainingCode == t.code) {
+        trainingChoice = t
+      }
+    }
+  }
+  if (trainingChoice.fundingModel == "full") {
+    delete req.session.data['training-input'];
+    delete req.session.data['trainingSelection'];
+    const claimID = newTUClaim(req, trainingChoice, "100")
+    res.redirect('claim/claim-details' + '?id=' + claimID)
+  } else {
+    res.redirect('claim/split-decision')
+  }
+});
+
 router.post('/bank-details-handler', function (req, res) {
   const accountName = req.session.data.nameOnTheAccount
   const sortCode = req.session.data.sortCode
@@ -56,25 +76,42 @@ router.post('/bank-details-handler', function (req, res) {
   }
 });
 
-router.post('/add-training', function (req, res) {
-  const trainingCode = req.session.data.trainingSelection
-  var trainingChoice = null
-  for (const trainingGroup of req.session.data.training) {
-    for (const t of trainingGroup.courses) {
-      if (trainingCode == t.code) {
-        trainingChoice = t
-      }
-    }
-  }
-  if (trainingChoice.fundingModel == "full") {
-    delete req.session.data['training-input'];
-    delete req.session.data['trainingSelection'];
-    const claimID = newTUClaim(req, trainingChoice, "100")
-    res.redirect('claim/claim-details' + '?id=' + claimID)
-  } else {
-    res.redirect('claim/split-decision')
-  }
+router.post('/search-results_V12', function (req, res) {
+  const statuses = req.session.data.filterStatus
+  const startDates = req.session.data.filterStartDate
+  const search = req.session.data.search
+
+  delete req.session.data.filterStatus
+  delete req.session.data.filterStartDate
+
+  res.redirect('claims/prototypes/design/v12/claim/search-results?search=' + search);
 });
+
+router.post('/apply-filters_V12', function (req, res) {
+  const statuses = req.session.data.filterStatus
+  const startDates = req.session.data.filterStartDate
+  const search = req.session.data.search
+
+  delete req.session.data.filterStatus
+  delete req.session.data.filterStartDate
+
+  let query = '?search=' + search
+  if (statuses != null) {
+    query += "&status="
+    const statusString = statuses.join("&");
+    query += statusString;
+  }
+  if (startDates != null) {
+    query += '&startDate='
+    const startDatesString = startDates.join("&");
+    query += startDatesString;
+  }
+
+  res.redirect('claim/search-results' + query);
+});
+
+
+
 
 router.post('/split-decision-handler', function (req, res) {
   const trainingCode = req.session.data.trainingSelection
@@ -212,29 +249,8 @@ function newTUClaim(req, input, type) {
   return claim.claimID
 }
 
-router.get('/new-claim', function (req, res) {
+router.get('/new-claim-v12', function (req, res) {
   res.redirect('claims/prototypes/design/v12/claim/select-training')
-});
-
-router.post('/add-cost', function (req, res) {
-  var cost = req.session.data.cost
-  var claimID = req.session.data.id
-  delete req.session.data.submitError
-
-  if (cost == null || cost == "") {
-    req.session.data.submitError = true
-    res.redirect('claim/add-claim-amount')
-  } else {
-    for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        c.claimAmount = cost
-        break;
-      }
-    }
-    delete req.session.data.cost;
-    delete req.session.data.submitError
-    res.redirect('claim/claim-details' + '?id=' + claimID + '#payment')
-  }
 });
 
 router.get('/start-40-claim', function (req, res) {
@@ -689,8 +705,18 @@ router.get('/clear-learner', function (req, res) {
 });
 
 router.get('/delete-claim', function (req, res) {
-
   res.redirect('claim/delete-confirmation')
+});
+
+router.get('/confirm-delete-claim', function (req, res) {
+  var claimID = req.session.data.id
+  var claims = req.session.data.claims
+  for (let i = 0; i < claims.length; i++) {
+    if (claims[i].claimID === claimID) {
+        claims.splice(i, 1);
+        res.redirect('manage-claims?fundingPot=TU')
+    }
+  }
 });
 
 function loadData(req) {

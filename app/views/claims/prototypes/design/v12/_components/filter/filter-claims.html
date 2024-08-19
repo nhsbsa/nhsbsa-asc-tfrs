@@ -1,5 +1,9 @@
-{% set formattedStartDates = data.claims | uniqueDates_V7("startDate") %}
+{% set matchedClaims = data.claims | claimsMatchSearch_V12(data.search) %}
+{% set formattedStartDates = matchedClaims | uniqueDates_V12("startDate") %}
+{% set availableStatus = matchedClaims | availableStatus_V12(data.search) %}
 
+{% set selectedStatusFilters = (data.status | statusArray_V12) %}
+{% set selectedDateFilters = (data.startDate | startDateArray_V12) %}
 
 <div class="moj-filter">
     <div class="moj-filter__header">
@@ -7,10 +11,45 @@
             <h2 class="govuk-heading-m">Filter</h2>
         </div>
     </div>
+
     <div class="moj-filter__content">
+        <div class="moj-filter__selected">
+
+            <div class="moj-filter__selected-heading">
+      
+              <div class="moj-filter__heading-title">
+                <h2 class="govuk-heading-m">Selected filters</h2>
+              </div>
+      
+              <div class="moj-filter__heading-action">
+                <p><a class="govuk-link govuk-link--no-visited-state" href="search-results?status=">Clear filters</a></p>
+              </div>
+      
+            </div>
+      
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Status</h3>
+      
+            <ul class="moj-filter-tags">
+                
+                {% for status in selectedStatusFilters %}
+                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>{{status | formatStatus_V12}} x</a></li>
+                {% endfor %}
+      
+            </ul>
+      
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Start date</h3>
+      
+            <ul class="moj-filter-tags">
+      
+              <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> August 2023 x</a></li>
+      
+            </ul>
+      
+          </div>
+
         <div class="moj-filter__options">
 
-            <form id="filterForm-{{ status.id }}">
+            <form id="filterForm" action="../apply-filters_V12" method="post">
                 <button class="govuk-button" data-module="govuk-button" data-test-id="submit-button">
                     Apply filters
                 </button>
@@ -20,17 +59,16 @@
                     <fieldset class="govuk-fieldset">
 
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-
                             Status
-
                         </legend>
+
                         <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
-                            {% for status in data.statuses %}
+                            {% for status in availableStatus %}
                             <div class="govuk-checkboxes__item">
-                                <input class="govuk-checkboxes__input" id="{{ status.id }}" name="status"
-                                    type="checkbox" value="{{ status.id }}">
-                                <label class="govuk-label govuk-checkboxes__label" for="{{ status.id }}">
-                                    {{ status.name }}
+                                <input class="govuk-checkboxes__input" id="{{ status }}" name="filterStatus"
+                                    type="checkbox" value="{{ status }}">
+                                <label class="govuk-label govuk-checkboxes__label" for="{{ status }}">
+                                    {{ status | formatStatus_V12 }}
                                 </label>
 
                             </div>
@@ -55,7 +93,7 @@
                             {% for monthYear in formattedStartDates %}
                             {% set checkboxId = 'startdate-' + loopIndex %}
                             <div class="govuk-checkboxes__item">
-                                <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="startdate"
+                                <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="filterStartDate"
                                     type="checkbox" value="{{ monthYear }}">
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ checkboxId }}">
                                     {{ monthYear }}

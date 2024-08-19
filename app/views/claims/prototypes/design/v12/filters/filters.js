@@ -44,29 +44,6 @@ addFilter('pageCount_V12', function (content, perPage) {
     return Math.ceil(content / perPage)
 })
 
-addFilter('uniqueDates_V12', function (claims, dateType) {
-
-    const uniqueMonthYears = new Set();
-
-    claims.forEach(claim => {
-        const startDate = new Date(claim[dateType]);
-        const monthYear = '${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, `0`)}';
-
-        uniqueMonthYears.add(monthYear);
-    });
-
-    const sortedMonthYears = Array.from(uniqueMonthYears).sort();
-
-    const formattedDates = sortedMonthYears.map((dateString) => {
-        const [year, month] = dateString.split('-');
-        const formattedDate = new Date(year, month - 1); // Month is 0-indexed in JavaScript
-        const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' });
-        return formatter.format(formattedDate);
-
-    });
-    return formattedDates;
-})
-
 addFilter('statusName_V12', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
@@ -663,59 +640,6 @@ addFilter('isCostMoreThanMax_V12', function (amount) {
     }
 })
 
-addFilter('claimMatch_V12', function (claim, search, claimType) {
-    let check = false;
-
-    const formattedSearch = removeSpacesAndLowerCase(search);
-
-    if (claim.type == claimType) {
-        if (claim.claimID != null) {
-            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
-            if (formattedClaimID.includes(formattedSearch)) {
-                check = true
-            }
-        }
-
-        if (claim.training != null) {
-            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
-            if (formattedActivity.includes(formattedSearch)) {
-                check = true
-            }
-        }
-        if (claim.learners != null) {
-            for (const l of claim.learners) {
-                const formattedName = removeSpacesAndLowerCase(l.fullName);
-                if (formattedName.includes(formattedSearch)) {
-                    check = true
-                }
-            }
-        }
-    } else if (claim.type == claimType) {
-        if (claim.claimID != null) {
-            const formattedClaimID = removeSpacesAndLowerCase(claim.ClaimID);
-            if (formattedClaimID.includes(formattedSearch)) {
-                check = true
-            }
-        }
-
-        if (claim.categoryName != null) {
-            const formattedActivity = removeSpacesAndLowerCase(claim.categoryName);
-            if (formattedActivity.includes(formattedSearch)) {
-                check = true
-            }
-        }
-        if (claim.learners != null) {
-            for (const l of claim.learners) {
-                const formattedName = removeSpacesAndLowerCase(l.fullName);
-                if (formattedName.includes(formattedSearch)) {
-                    check = true
-                }
-            }
-        }
-    }
-    return check;
-})
-
 addFilter('statusTag_V7', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
@@ -735,3 +659,134 @@ addFilter('statusTag_V7', function (statusID, statuses) {
         return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
     }
 }, { renderAsHtml: true })
+
+addFilter('uniqueDates_V12', function (claims, dateType) {
+
+    const uniqueMonthYears = new Set();
+
+    claims.forEach(claim => {
+        const startDate = new Date(claim[dateType]);
+        const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
+
+        uniqueMonthYears.add(monthYear);
+    });
+    const sortedMonthYears = Array.from(uniqueMonthYears).sort();
+    const formattedDates = sortedMonthYears.map((dateString) => {
+        const [year, month] = dateString.split('-');
+        const formattedDate = new Date(year, month - 1); // Month is 0-indexed in JavaScript
+        const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' });
+        return formatter.format(formattedDate);
+
+    });
+    return formattedDates;
+})
+
+addFilter('availableStatus_V12', function (claims) {
+    const uniqueStatuses = new Set();
+    claims.forEach(claim => {
+        uniqueStatuses.add(claim.status);
+    });
+    return Array.from(uniqueStatuses);
+})
+
+addFilter('formatStatus_V12', function (status) {
+    if (status === "not-yet-submitted") {
+        return "Not yet submitted"
+    } else if (status === "submitted") {
+        return "Submitted"
+    } else if (status === "approved") {
+        return "Approved"
+    } else if (status === "rejected") {
+        return "Rejected"
+    }
+})
+
+addFilter('claimsMatch_V12', function (claims, search, statuses) {
+    const formattedSearch = removeSpacesAndLowerCase(search);
+
+    var filtered = claims.filter(claim => {
+        let check = false;
+
+        if (claim.claimID != null) {
+            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
+            if (formattedClaimID.includes(formattedSearch)) {
+                check = true;
+            }
+        }
+
+        if (claim.training != null) {
+            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
+            if (formattedActivity.includes(formattedSearch)) {
+                check = true;
+            }
+        }
+
+        if (claim.learners != null) {
+            for (const l of claim.learners) {
+                const formattedName = removeSpacesAndLowerCase(l.fullName);
+                if (formattedName.includes(formattedSearch)) {
+                    check = true;
+                }
+            }
+        }
+        if (statuses != null && statuses != "") {
+            let statusesArray = statuses.split("&");
+            if (!statusesArray.includes(claim.status)) {
+                check = false;
+            }
+        }
+        return check;
+    });
+
+    return filtered;
+});
+
+
+addFilter('claimsMatchSearch_V12', function (claims, search) {
+    const formattedSearch = removeSpacesAndLowerCase(search);
+
+    var filtered = claims.filter(claim => {
+        let check = false;
+
+        if (claim.claimID != null) {
+            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
+            if (formattedClaimID.includes(formattedSearch)) {
+                check = true;
+            }
+        }
+
+        if (claim.training != null) {
+            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
+            if (formattedActivity.includes(formattedSearch)) {
+                check = true;
+            }
+        }
+
+        if (claim.learners != null) {
+            for (const l of claim.learners) {
+                const formattedName = removeSpacesAndLowerCase(l.fullName);
+                if (formattedName.includes(formattedSearch)) {
+                    check = true;
+                }
+            }
+        }
+        return check;
+    });
+
+    return filtered;
+})
+
+addFilter('statusArray_V12', function (statusString) { 
+    if (statusString != null && statusString != "") {
+        return statusString.split("&");
+    }
+ 
+});
+
+
+addFilter('startDateArray_V12', function (startDateString) { 
+    if (startDateString != null && startDateString != "") {
+        return startDateString.split("&");
+    }
+});
+
