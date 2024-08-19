@@ -1,9 +1,9 @@
-{% set matchedClaims = data.claims | claimsMatchSearch_V12(data.search) %}
-{% set formattedStartDates = matchedClaims | uniqueDates_V12("startDate") %}
-{% set availableStatus = matchedClaims | availableStatus_V12(data.search) %}
+{% set matchedClaims = data.claims | claimsMatchSearch_V13(data.search) %}
+{% set formattedStartDates = matchedClaims | uniqueDates_V13("startDate") %}
+{% set availableStatus = matchedClaims | availableStatus_V13(data.search) %}
 
-{% set selectedStatusFilters = (data.status | statusArray_V12) %}
-{% set selectedDateFilters = (data.startDate | startDateArray_V12) %}
+{% set selectedStatusFilters = (data.status | statusArray_V13) %}
+{% set selectedDateFilters = (data.startDate | startDateArray_V13) %}
 
 <div class="moj-filter">
     <div class="moj-filter__header">
@@ -32,7 +32,7 @@
             <ul class="moj-filter-tags">
                 
                 {% for status in selectedStatusFilters %}
-                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>{{status | formatStatus_V12}} x</a></li>
+                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>{{status | formatStatus_V13}} x</a></li>
                 {% endfor %}
       
             </ul>
@@ -49,7 +49,7 @@
 
         <div class="moj-filter__options">
 
-            <form id="filterForm" action="../apply-filters_V12" method="post">
+            <form id="filterForm" action="../apply-filters_V13" method="post">
                 <button class="govuk-button" data-module="govuk-button" data-test-id="submit-button">
                     Apply filters
                 </button>
@@ -68,7 +68,7 @@
                                 <input class="govuk-checkboxes__input" id="{{ status }}" name="filterStatus"
                                     type="checkbox" value="{{ status }}">
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ status }}">
-                                    {{ status | formatStatus_V12 }}
+                                    {{ status | formatStatus_V13 }}
                                 </label>
 
                             </div>

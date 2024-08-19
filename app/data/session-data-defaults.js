@@ -3,6 +3,20 @@ module.exports = {
         "claimsCurrent": "v12",
         "claimVersions": [
             {
+                "versionNo": "13",
+                "status": ["design"],
+                "tested": "TBC",
+                "created": [
+                    "including post MVP work"
+                ],
+                "aims": [
+                    "TBC"
+                ],
+                "learnt": [
+                    "TBC"
+                ]
+            },
+            {
                 "versionNo": "12",
                 "status": ["design"],
                 "tested": "TBC",
@@ -10,7 +24,8 @@ module.exports = {
                     "due to decision to remove CPD from the service"
                 ],
                 "aims": [
-                    "TBC"
+                    "to act as MVP",
+                    "to include changes due to decision to remove CPD"
                 ],
                 "learnt": [
                     "TBC"

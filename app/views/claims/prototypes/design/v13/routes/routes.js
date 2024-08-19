@@ -3,7 +3,7 @@ const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm } = require('../helpers/helpers.js');
 
-// v12 Prototype routes
+// v13 Prototype routes
 
 router.post('/account-handler', function (req, res) {
   const accountAnswer = req.session.data.account
@@ -75,6 +75,43 @@ router.post('/bank-details-handler', function (req, res) {
     res.redirect('account-setup/bank-details')
   }
 });
+
+router.post('/search-results_V13', function (req, res) {
+  const statuses = req.session.data.filterStatus
+  const startDates = req.session.data.filterStartDate
+  const search = req.session.data.search
+
+  delete req.session.data.filterStatus
+  delete req.session.data.filterStartDate
+
+  res.redirect('claims/prototypes/design/v13/claim/search-results?search=' + search);
+});
+
+router.post('/apply-filters_V13', function (req, res) {
+  const statuses = req.session.data.filterStatus
+  const startDates = req.session.data.filterStartDate
+  const search = req.session.data.search
+
+  delete req.session.data.filterStatus
+  delete req.session.data.filterStartDate
+
+  let query = '?search=' + search
+  if (statuses != null) {
+    query += "&status="
+    const statusString = statuses.join("&");
+    query += statusString;
+  }
+  if (startDates != null) {
+    query += '&startDate='
+    const startDatesString = startDates.join("&");
+    query += startDatesString;
+  }
+
+  res.redirect('claim/search-results' + query);
+});
+
+
+
 
 router.post('/split-decision-handler', function (req, res) {
   const trainingCode = req.session.data.trainingSelection
@@ -212,8 +249,8 @@ function newTUClaim(req, input, type) {
   return claim.claimID
 }
 
-router.get('/new-claim-v12', function (req, res) {
-  res.redirect('claims/prototypes/design/v12/claim/select-training')
+router.get('/new-claim-v13', function (req, res) {
+  res.redirect('claims/prototypes/design/v13/claim/select-training')
 });
 
 router.get('/start-40-claim', function (req, res) {
@@ -657,6 +694,15 @@ router.post('/reinvite-user', function (req, res) {
   res.redirect('org-admin/manage-team')
 });
 
+router.post('/delete-user', function (req, res) {
+  var email = req.session.data.email
+  const index = req.session.data.users.findIndex(user => user.email == email);
+  if (index !== -1) {
+    req.session.data.users.splice(index, 1);
+  }
+  res.redirect('org-admin/manage-team')
+});
+
 router.get('/clear-learner', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
@@ -667,10 +713,25 @@ router.get('/clear-learner', function (req, res) {
   }
 });
 
+router.get('/delete-claim', function (req, res) {
+  res.redirect('claim/delete-confirmation')
+});
+
+router.get('/confirm-delete-claim', function (req, res) {
+  var claimID = req.session.data.id
+  var claims = req.session.data.claims
+  for (let i = 0; i < claims.length; i++) {
+    if (claims[i].claimID === claimID) {
+        claims.splice(i, 1);
+        res.redirect('manage-claims?fundingPot=TU')
+    }
+  }
+});
+
 function loadData(req) {
   // pull in the prototype data object and see if it contains a datafile reference
   let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
-  const path = 'app/views/claims/prototypes/design/v12/data/'
+  const path = 'app/views/claims/prototypes/design/v13/data/'
 
   var learnersFile = 'learners.json'
   var trainingFile = 'training.json'
