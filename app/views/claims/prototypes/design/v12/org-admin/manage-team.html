@@ -77,13 +77,12 @@
             {% if user.status == "active" %}
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
-            <td class="govuk-table__cell" width="40%">{{ user.email }}</td>
+            <!--<td class="govuk-table__cell" width="15%">{{ user.type | userType_V10 }}</td>-->
+            <td class="govuk-table__cell" width="45%">{{ user.email }}</td>
             <td class="govuk-table__cell" width="30%"></td>
-            <td class="govuk-table__cell" width="5%"><form action="../delete-user?email={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Delete</button></form></td>
           </tr>
           {% endif %}
           {% endfor %}
-         
         </tbody>
       </table>
       {% endif %}
@@ -95,9 +94,9 @@
             {% if user.status == "pending" %}
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
-            <td class="govuk-table__cell" width="40%">{{ user.email }}</td>
-            <td class="govuk-table__cell" width="30%">You can resend this invite from {{ user.invited | expireTime_V10 }}</td>
-            <td class="govuk-table__cell" width="5%"><form action="../delete-user?email={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Delete</button></form></td>
+            <!--<td class="govuk-table__cell" width="15%">{{ user.type | userType_V10 }}</td>-->
+            <td class="govuk-table__cell" width="45%">{{ user.email }}</td>
+            <td class="govuk-table__cell" width="30%">You can resend this invite from<br>{{ user.invited | expireTime_V10 }}</td>
           </tr>
           {% endif %}
           {% endfor %}
@@ -113,9 +112,8 @@
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
             <!--<td class="govuk-table__cell" width="15%">{{ user.type | userType_V10 }}</td>-->
-            <td class="govuk-table__cell" width="40%">{{ user.email }}</td>
+            <td class="govuk-table__cell" width="45%">{{ user.email }}</td>
             <td class="govuk-table__cell" width="30%">{% if not (data.resendList | matchResend_V10(user.email)) %}<form action="../reinvite-user?resendEmail={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
-            <td class="govuk-table__cell" width="5%"><form action="../delete-user?email={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Delete</button></form></td>
           </tr>
           {% endif %}
           {% endfor %}
