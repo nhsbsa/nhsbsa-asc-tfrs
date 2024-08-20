@@ -767,9 +767,16 @@ addFilter('filteredClaims_V13', function (claims, statuses, dates) {
 });
 
 addFilter('statusArray_V13', function (statusString) { 
+    let availableStatus = ["not-yet-submitted", "submitted", "rejected", "approved"]
+    let returnedArray = []
     if (statusString != null && statusString != "") {
-        return statusString.split("+");
+        for (const s of availableStatus) {
+            if (statusString.includes(s)) {
+                returnedArray.push(s)
+            }
+        }
     }
+    return returnedArray
 });
 
 

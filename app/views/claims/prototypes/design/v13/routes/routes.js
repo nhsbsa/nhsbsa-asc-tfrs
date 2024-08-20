@@ -93,6 +93,7 @@ router.post('/apply-filters_V13', function (req, res) {
   const search = req.session.data.search
 
   delete req.session.data.filterStatus
+  delete req.session.data.status
   delete req.session.data.filterStartDate
 
   let query = '?search=' + search
