@@ -695,13 +695,14 @@ router.post('/reinvite-user', function (req, res) {
   res.redirect('org-admin/manage-team')
 });
 
-router.post('/delete-user', function (req, res) {
+
+router.get('/confirm-delete-user', function (req, res) {
   var email = req.session.data.email
   const index = req.session.data.users.findIndex(user => user.email == email);
   if (index !== -1) {
     req.session.data.users.splice(index, 1);
   }
-  res.redirect('org-admin/manage-team')
+  res.redirect('org-admin/manage-team?deleteSuccess=true')
 });
 
 router.get('/clear-learner', function (req, res) {
@@ -712,10 +713,6 @@ router.get('/clear-learner', function (req, res) {
       res.redirect('claim/claim-details' + '?id=' + claimID)
     }
   }
-});
-
-router.get('/delete-claim', function (req, res) {
-  res.redirect('claim/delete-confirmation')
 });
 
 router.get('/confirm-delete-claim', function (req, res) {
