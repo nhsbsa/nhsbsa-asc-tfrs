@@ -141,6 +141,16 @@ addFilter('findClaim_V13', function (claimID, claims) {
     return claim;
 })
 
+addFilter('findUser_V13', function (email, users) {
+    let user = null;
+    for (let u of users) {
+        if (u.email == email) {
+            user = u
+        }
+    }
+    return user;
+})
+
 addFilter('groupByTitle_V13', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const organizedData = {};
