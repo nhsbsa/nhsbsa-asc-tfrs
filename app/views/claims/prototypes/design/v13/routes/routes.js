@@ -721,7 +721,7 @@ router.get('/confirm-delete-claim', function (req, res) {
   for (let i = 0; i < claims.length; i++) {
     if (claims[i].claimID === claimID) {
         claims.splice(i, 1);
-        res.redirect('manage-claims?fundingPot=TU')
+        res.redirect('manage-claims?fundingPot=TU&deleteSuccess=true')
     }
   }
 });
