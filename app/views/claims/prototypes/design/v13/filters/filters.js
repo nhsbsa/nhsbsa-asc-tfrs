@@ -702,6 +702,16 @@ addFilter('availableStatus_V13', function (claims) {
     return Array.from(uniqueStatuses);
 })
 
+addFilter('uniqueTypes_V13', function (claims) {
+    const uniqueTypes = new Set();
+    claims.forEach(claim => {
+
+        uniqueTypes.add(claim.claimType);
+    });
+    const sortedTypes = Array.from(uniqueTypes).sort();
+    return sortedTypes
+})
+
 addFilter('formatStatus_V13', function (status) {
     if (status === "not-yet-submitted") {
         return "Not yet submitted"
