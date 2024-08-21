@@ -1,7 +1,14 @@
 {% extends "../layouts/claims-main.html" %}
 
-{% set matchedClaims = data.claims | claimsMatch_V13(data.search, data.status) %}
-{% set resultCount = matchedClaims.length %}
+{% set matchedClaimsWithoutFilter = data.claims | claimsMatchSearchWithoutFilter_V13(data.search) %}
+
+{% set selectedStatusFilters = (data.status | statusArray_V13) %}
+{% set selectedDateFilters = (data.startDate | startDateArray_V13) %}
+
+{% set filteredClaims = matchedClaimsWithoutFilter | filteredClaims_V13(selectedStatusFilters, selectedDateFilters) %}
+
+{% set resultCount = filteredClaims.length %}
+
 
 {% block pageTitle %}
 {{ ["Search results - ", (data.fundingPot | potName_V13)] | join }}
@@ -65,7 +72,7 @@
                         </tr>
                     </thead>
                     <tbody class="govuk-table__body">
-                        {% for claim in matchedClaims %}
+                        {% for claim in filteredClaims %}
                         <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
                             <td class="govuk-table__header" scope="row"><a class="govuk-link"
                                     href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>

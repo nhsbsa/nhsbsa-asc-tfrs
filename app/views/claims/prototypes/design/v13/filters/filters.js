@@ -141,6 +141,16 @@ addFilter('findClaim_V13', function (claimID, claims) {
     return claim;
 })
 
+addFilter('findUser_V13', function (email, users) {
+    let user = null;
+    for (let u of users) {
+        if (u.email == email) {
+            user = u
+        }
+    }
+    return user;
+})
+
 addFilter('groupByTitle_V13', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const organizedData = {};
@@ -671,14 +681,17 @@ addFilter('uniqueDates_V13', function (claims, dateType) {
         uniqueMonthYears.add(monthYear);
     });
     const sortedMonthYears = Array.from(uniqueMonthYears).sort();
-    const formattedDates = sortedMonthYears.map((dateString) => {
-        const [year, month] = dateString.split('-');
-        const formattedDate = new Date(year, month - 1); // Month is 0-indexed in JavaScript
-        const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' });
-        return formatter.format(formattedDate);
 
-    });
-    return formattedDates;
+    return sortedMonthYears
+})
+
+addFilter('formatDate_V13', function (date) {
+    const startDate = new Date(date);
+    const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
+    const [year, month] = monthYear.split('-');
+    const formattedDate = new Date(year, month - 1); // Month is 0-indexed in JavaScript
+    const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' });
+    return formatter.format(formattedDate);
 })
 
 addFilter('availableStatus_V13', function (claims) {
@@ -687,6 +700,16 @@ addFilter('availableStatus_V13', function (claims) {
         uniqueStatuses.add(claim.status);
     });
     return Array.from(uniqueStatuses);
+})
+
+addFilter('uniqueTypes_V13', function (claims) {
+    const uniqueTypes = new Set();
+    claims.forEach(claim => {
+
+        uniqueTypes.add(claim.claimType);
+    });
+    const sortedTypes = Array.from(uniqueTypes).sort();
+    return sortedTypes
 })
 
 addFilter('formatStatus_V13', function (status) {
@@ -701,48 +724,7 @@ addFilter('formatStatus_V13', function (status) {
     }
 })
 
-addFilter('claimsMatch_V13', function (claims, search, statuses) {
-    const formattedSearch = removeSpacesAndLowerCase(search);
-
-    var filtered = claims.filter(claim => {
-        let check = false;
-
-        if (claim.claimID != null) {
-            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
-            if (formattedClaimID.includes(formattedSearch)) {
-                check = true;
-            }
-        }
-
-        if (claim.training != null) {
-            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
-            if (formattedActivity.includes(formattedSearch)) {
-                check = true;
-            }
-        }
-
-        if (claim.learners != null) {
-            for (const l of claim.learners) {
-                const formattedName = removeSpacesAndLowerCase(l.fullName);
-                if (formattedName.includes(formattedSearch)) {
-                    check = true;
-                }
-            }
-        }
-        if (statuses != null && statuses != "") {
-            let statusesArray = statuses.split("&");
-            if (!statusesArray.includes(claim.status)) {
-                check = false;
-            }
-        }
-        return check;
-    });
-
-    return filtered;
-});
-
-
-addFilter('claimsMatchSearch_V13', function (claims, search) {
+addFilter('claimsMatchSearchWithoutFilter_V13', function (claims, search) {
     const formattedSearch = removeSpacesAndLowerCase(search);
 
     var filtered = claims.filter(claim => {
@@ -776,17 +758,51 @@ addFilter('claimsMatchSearch_V13', function (claims, search) {
     return filtered;
 })
 
+addFilter('filteredClaims_V13', function (claims, statuses, dates) {
+
+    var filtered = claims.filter(claim => {
+        let statusCheck = true;
+
+        if (statuses != null && statuses != "") {
+            if (statuses.includes(claim.status)) {
+                statusCheck = true;
+            } else {
+                statusCheck = false
+            }
+        }
+        let dateCheck = true;
+        if (dates != null && dates != "") {
+            const startDate = new Date(claim.startDate);
+            const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
+            if (dates.includes(monthYear)) {
+                dateCheck = true;
+            } else {
+                dateCheck = false
+            }
+        }
+        return statusCheck && dateCheck;
+    });
+
+    return filtered;
+});
+
 addFilter('statusArray_V13', function (statusString) { 
+    let availableStatus = ["not-yet-submitted", "submitted", "rejected", "approved"]
+    let returnedArray = []
     if (statusString != null && statusString != "") {
-        return statusString.split("&");
+        for (const s of availableStatus) {
+            if (statusString.includes(s)) {
+                returnedArray.push(s)
+            }
+        }
     }
- 
+    return returnedArray
 });
 
 
 addFilter('startDateArray_V13', function (startDateString) { 
     if (startDateString != null && startDateString != "") {
-        return startDateString.split("&");
+        return startDateString.split("+");
     }
 });
 

@@ -93,7 +93,7 @@
     {% include "../_components/claim-sections/evidencePayment.html" %}
 
     {% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType == "60" %}
-    {% include "../_components/claim-sections/cta-section.html" %}
+      {% include "../_components/claim-sections/cta-section.html" %}
     {% endif %}
     
     {% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
