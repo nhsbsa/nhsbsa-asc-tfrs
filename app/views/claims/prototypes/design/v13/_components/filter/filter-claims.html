@@ -1,6 +1,7 @@
 {% set matchedClaimsBeforeFilter = data.claims | claimsMatchSearchWithoutFilter_V13(data.search) %}
 {% set uniqueStartDates = matchedClaimsBeforeFilter | uniqueDates_V13("startDate") %}
 {% set availableStatus = matchedClaimsBeforeFilter | availableStatus_V13(data.search) %}
+{% set uniqueTypes = matchedClaimsBeforeFilter | uniqueTypes_V13 %}
 
 {% set selectedStatusFilters = (data.status | statusArray_V13) %}
 {% set selectedDateFilters = (data.startDate | startDateArray_V13) %}
@@ -50,13 +51,10 @@
                 </button>
 
                 <div class="govuk-form-group">
-
                     <fieldset class="govuk-fieldset">
-
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                             Status
                         </legend>
-
                         <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
                             {% for status in availableStatus %}
                             <div class="govuk-checkboxes__item">
@@ -65,23 +63,38 @@
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ status }}">
                                     {{ status | formatStatus_V13 }}
                                 </label>
-
                             </div>
                             {% endfor %}
                         </div>
-
                     </fieldset>
-
                 </div>
 
                 <div class="govuk-form-group">
-
                     <fieldset class="govuk-fieldset">
-
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                            Type
+                        </legend>
+                        <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                            {% set loopIndex = 0 %}
+                            {% for type in uniqueTypes %}
+                            {% set checkboxId = 'type-' + loopIndex %}
+                            <div class="govuk-checkboxes__item">
+                                <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="filterType"
+                                    type="checkbox" value="{{ type }}">
+                                <label class="govuk-label govuk-checkboxes__label" for="{{ checkboxId }}">
+                                    {{ type }}
+                                </label>
+                            </div>
+                            {% set loopIndex = loopIndex + 1 %}
+                            {% endfor %}
+                        </div>
+                    </fieldset>
+                </div>
 
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                             Start date
-
                         </legend>
                         <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
                             {% set loopIndex = 0 %}
@@ -93,16 +106,12 @@
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ checkboxId }}">
                                     {{ monthYear | formatDate_V13 }}
                                 </label>
-
                             </div>
                             {% set loopIndex = loopIndex + 1 %}
                             {% endfor %}
                         </div>
-
                     </fieldset>
-
                 </div>
-
             </form>
         </div>
     </div>
