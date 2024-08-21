@@ -38,17 +38,24 @@
     </div>
 
     <div class="govuk-grid-column-two-thirds">
-        <table class="govuk-table">
-            <tbody class="govuk-table__body">
-
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
-                <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
-              </tr>
-             
-            </tbody>
-          </table>
-
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row govuk-summary-list__row--no-actions ">
+              <dt class="govuk-summary-list__key">
+                Name
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{user.givenName}} {{user.familyName}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row govuk-summary-list__row--no-actions ">
+              <dt class="govuk-summary-list__key">
+                Email
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{user.email}}
+              </dd>
+            </div>
+        </dl>
     </div>
 
     <div class="govuk-grid-column-two-thirds">

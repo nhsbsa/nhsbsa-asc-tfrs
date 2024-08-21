@@ -35,6 +35,25 @@
                 </strong>
             </div>
 
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row govuk-summary-list__row--no-actions ">
+                  <dt class="govuk-summary-list__key">
+                    Learner
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{claim.learner.givenName}} {{claim.learner.familyName}}
+                  </dd>
+                </div>
+                <div class="govuk-summary-list__row govuk-summary-list__row--no-actions ">
+                  <dt class="govuk-summary-list__key">
+                    Training
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{claim.training.title}}
+                  </dd>
+                </div>
+            </dl>
+
             <div class="govuk-button-group">
                 <a type="submit" class="govuk-button" href="../confirm-delete-claim">
                     Confirm delete
