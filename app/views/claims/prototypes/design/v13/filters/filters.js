@@ -734,12 +734,10 @@ addFilter('claimsMatchSearchWithoutFilter_V13', function (claims, search) {
             }
         }
 
-        if (claim.learners != null) {
-            for (const l of claim.learners) {
-                const formattedName = removeSpacesAndLowerCase(l.fullName);
-                if (formattedName.includes(formattedSearch)) {
-                    check = true;
-                }
+        if (claim.learner != null) {
+            const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
+            if (formattedName.includes(formattedSearch)) {
+                check = true;
             }
         }
         return check;
@@ -751,8 +749,8 @@ addFilter('claimsMatchSearchWithoutFilter_V13', function (claims, search) {
 addFilter('filteredClaims_V13', function (claims, statuses, dates) {
 
     var filtered = claims.filter(claim => {
-        let statusCheck = true;
 
+        let statusCheck = true;
         if (statuses != null && statuses != "") {
             if (statuses.includes(claim.status)) {
                 statusCheck = true;
@@ -760,6 +758,7 @@ addFilter('filteredClaims_V13', function (claims, statuses, dates) {
                 statusCheck = false
             }
         }
+
         let dateCheck = true;
         if (dates != null && dates != "") {
             const startDate = new Date(claim.startDate);
@@ -770,6 +769,7 @@ addFilter('filteredClaims_V13', function (claims, statuses, dates) {
                 dateCheck = false
             }
         }
+
         return statusCheck && dateCheck;
     });
 
@@ -788,7 +788,6 @@ addFilter('statusArray_V13', function (statusString) {
     }
     return returnedArray
 });
-
 
 addFilter('startDateArray_V13', function (startDateString) { 
     if (startDateString != null && startDateString != "") {
