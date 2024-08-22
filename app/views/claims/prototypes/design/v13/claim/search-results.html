@@ -4,8 +4,10 @@
 
 {% set selectedStatusFilters = (data.status | statusArray_V13) %}
 {% set selectedDateFilters = (data.startDate | startDateArray_V13) %}
+{% set selectedTypeFilters = (data.type | typeArray_V13) %}
 
-{% set filteredClaims = matchedClaimsWithoutFilter | filteredClaims_V13(selectedStatusFilters, selectedDateFilters) %}
+
+{% set filteredClaims = matchedClaimsWithoutFilter | filteredClaims_V13(selectedStatusFilters, selectedDateFilters, selectedTypeFilters) %}
 
 {% set resultCount = filteredClaims.length %}
 
