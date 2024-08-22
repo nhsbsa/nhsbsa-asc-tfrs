@@ -112,8 +112,6 @@ router.post('/apply-filters_V13', function (req, res) {
 });
 
 
-
-
 router.post('/split-decision-handler', function (req, res) {
   const trainingCode = req.session.data.trainingSelection
   const choice = req.session.data.splitDecision
@@ -697,12 +695,14 @@ router.post('/reinvite-user', function (req, res) {
 
 
 router.get('/confirm-delete-user', function (req, res) {
-  var email = req.session.data.email
-  const index = req.session.data.users.findIndex(user => user.email == email);
-  if (index !== -1) {
-    req.session.data.users.splice(index, 1);
+  var query = "registered"
+  for (const user of req.session.data.users) {
+    if (req.session.data.deletedEmail == user.email) {
+      query = user.status
+      user.status = "deleted"
+    }
   }
-  res.redirect('org-admin/manage-team?deleteSuccess=true')
+  res.redirect('org-admin/manage-team?deleteSuccess=true&deletedUser=' + query)
 });
 
 router.get('/clear-learner', function (req, res) {
