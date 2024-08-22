@@ -795,3 +795,13 @@ addFilter('startDateArray_V13', function (startDateString) {
     }
 });
 
+addFilter('isSelected_V13', function (valueArray, status) { 
+    var selected = false 
+    if (valueArray != null && valueArray != "") {
+            if (valueArray.includes(status)) {
+                selected = true
+            }
+    }
+    return selected
+});
+

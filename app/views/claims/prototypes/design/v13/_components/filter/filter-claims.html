@@ -59,7 +59,7 @@
                             {% for status in availableStatus %}
                             <div class="govuk-checkboxes__item">
                                 <input class="govuk-checkboxes__input" id="{{ status }}" name="filterStatus"
-                                    type="checkbox" value="{{ status }}">
+                                    type="checkbox" value="{{ status }}"  {% if ( selectedStatusFilters | isSelected_V13(status)) %}checked {% endif %}>
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ status }}">
                                     {{ status | formatStatus_V13 }}
                                 </label>
@@ -102,7 +102,7 @@
                             {% set checkboxId = 'startdate-' + loopIndex %}
                             <div class="govuk-checkboxes__item">
                                 <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="filterStartDate"
-                                    type="checkbox" value="{{ monthYear }}">
+                                    type="checkbox" value="{{ monthYear }}" {% if ( selectedDateFilters | isSelected_V13(monthYear)) %}checked {% endif %}>
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ checkboxId }}">
                                     {{ monthYear | formatDate_V13 }}
                                 </label>
