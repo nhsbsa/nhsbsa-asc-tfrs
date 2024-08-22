@@ -115,7 +115,7 @@
                 <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
                 <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
                 <td class="govuk-table__cell" width="27%">You can resend this invite from {{ user.invited | expireTime_V13 }}</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric" width="13%"><a class="govuk-link govuk-link--no-visited-state" href="delete-user-confirmation?deletedEmail={{user.email}}">Delete</a></td>
+                <td class="govuk-table__cell govuk-table__cell--numeric" width="13%"><a class="govuk-link govuk-link--no-visited-state" href="delete-user-confirmation?deletedEmail={{user.email}}&invite=">Delete</a></td>
               </tr>
             {% endif %}
           {% endfor %}
@@ -132,7 +132,7 @@
             <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
             <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
             <td class="govuk-table__cell" width="27%"></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric" width="13%">{% if not (data.resendList | matchResend_V13(user.email)) %}<form action="../reinvite-user?resendEmail={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
+            <td class="govuk-table__cell govuk-table__cell--numeric" width="13%">{% if not (data.resendList | matchResend_V13(user.email)) %}<form action="../reinvite-user?resendEmail={{user.email}}&deleteSuccess" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
           </tr>
           {% endif %}
           {% endfor %}
