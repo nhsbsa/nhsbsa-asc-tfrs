@@ -795,6 +795,19 @@ addFilter('startDateArray_V13', function (startDateString) {
     }
 });
 
+addFilter('typeArray_V13', function (typeString) { 
+    let availableTypes = ["100", "60", "40"]
+    let returnedArray = []
+    if (typeString != null && typeString != "") {
+        for (const t of availableTypes) {
+            if (typeString.includes(t)) {
+                returnedArray.push(t)
+            }
+        }
+    }
+    return returnedArray
+});
+
 addFilter('isSelected_V13', function (valueArray, status) { 
     var selected = false 
     if (valueArray != null && valueArray != "") {

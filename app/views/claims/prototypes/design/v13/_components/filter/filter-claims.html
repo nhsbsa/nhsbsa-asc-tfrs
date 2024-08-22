@@ -5,6 +5,8 @@
 
 {% set selectedStatusFilters = (data.status | statusArray_V13) %}
 {% set selectedDateFilters = (data.startDate | startDateArray_V13) %}
+{% set selectedTypeFilters = (data.type | typeArray_V13) %}
+
 
 <div class="moj-filter">
     <div class="moj-filter__header">
@@ -15,7 +17,7 @@
 
     <div class="moj-filter__content">
 
-        {% if (selectedStatusFilters.length > 0 or selectedDateFilters.length > 0)%}
+        {% if (selectedStatusFilters.length > 0 or selectedDateFilters.length > 0) or selectedTypeFilters.length > 0%}
         <div class="moj-filter__selected">
             <div class="moj-filter__selected-heading">
               <div class="moj-filter__heading-title">
@@ -38,6 +40,14 @@
             <ul class="moj-filter-tags">
                 {% for status in selectedDateFilters %}
                     <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> {{status | formatDate_V13}}</a></li>
+                {% endfor %}
+            </ul>
+            {% endif%}
+            {% if (selectedTypeFilters.length > 0 ) %}
+            <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Start date</h3>
+            <ul class="moj-filter-tags">
+                {% for type in selectedTypeFilters %}
+                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> {{type}}</a></li>
                 {% endfor %}
             </ul>
             {% endif%}
@@ -80,7 +90,7 @@
                             {% set checkboxId = 'type-' + loopIndex %}
                             <div class="govuk-checkboxes__item">
                                 <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="filterType"
-                                    type="checkbox" value="{{ type }}">
+                                    type="checkbox" value="{{ type }}"  {% if ( selectedTypeFilters | isSelected_V13(type)) %}checked {% endif %}>
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ checkboxId }}">
                                     {{ type }}
                                 </label>
