@@ -12,7 +12,7 @@
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="../choose-a-claim-type?invite&resendEmail">Home
+      <a class="govuk-breadcrumbs__link" href="../choose-a-claim-type?invite&resendEmail&deleteSuccess">Home
       </a>
   </li>
     <li class="govuk-breadcrumbs__list-item">
@@ -95,7 +95,7 @@
                 {% if user.type == "signatory" %}
                   <td class="govuk-table__cell govuk-table__cell--numeric" width="40%"></td>
                 {% else %}
-                  <td class="govuk-table__cell govuk-table__cell--numeric" width="40%"><a class="govuk-link govuk-link--no-visited-state" href="delete-user-confirmation?deletedEmail={{user.email}}">Delete</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric" width="40%"><a class="govuk-link govuk-link--no-visited-state" href="delete-user-confirmation?deletedEmail={{user.email}}&deleteSuccess">Delete</a></td>
                 {% endif %}
                 
               </tr>
