@@ -746,7 +746,7 @@ addFilter('claimsMatchSearchWithoutFilter_V13', function (claims, search) {
     return filtered;
 })
 
-addFilter('filteredClaims_V13', function (claims, statuses, dates) {
+addFilter('filteredClaims_V13', function (claims, statuses, dates, types) {
 
     var filtered = claims.filter(claim => {
 
@@ -770,7 +770,16 @@ addFilter('filteredClaims_V13', function (claims, statuses, dates) {
             }
         }
 
-        return statusCheck && dateCheck;
+        let typeCheck = true;
+        if (types != null && types != "") {
+            if (types.includes(claim.claimType)) {
+                typeCheck = true;
+            } else {
+                typeCheck = false
+            }
+        }
+
+        return statusCheck && dateCheck && typeCheck;
     });
 
     return filtered;
