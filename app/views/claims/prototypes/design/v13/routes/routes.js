@@ -90,11 +90,13 @@ router.post('/search-results_V13', function (req, res) {
 router.post('/apply-filters_V13', function (req, res) {
   const statuses = req.session.data.filterStatus
   const startDates = req.session.data.filterStartDate
+  const types = req.session.data.filterType
   const search = req.session.data.search
 
   delete req.session.data.filterStatus
   delete req.session.data.status
   delete req.session.data.filterStartDate
+  delete req.session.data.filterType
 
   let query = '?search=' + search
   if (statuses != null && statuses != "") {
@@ -107,11 +109,14 @@ router.post('/apply-filters_V13', function (req, res) {
     const startDatesString = startDates.join("+");
     query += startDatesString;
   }
+  if (types != null && types != "") {
+    query += '&type='
+    const typesString = types.join("+");
+    query += typesString;
+  }
 
   res.redirect('claim/search-results' + query);
 });
-
-
 
 
 router.post('/split-decision-handler', function (req, res) {
@@ -697,12 +702,14 @@ router.post('/reinvite-user', function (req, res) {
 
 
 router.get('/confirm-delete-user', function (req, res) {
-  var email = req.session.data.email
-  const index = req.session.data.users.findIndex(user => user.email == email);
-  if (index !== -1) {
-    req.session.data.users.splice(index, 1);
+  var query = "registered"
+  for (const user of req.session.data.users) {
+    if (req.session.data.deletedEmail == user.email) {
+      query = user.status
+      user.status = "deleted"
+    }
   }
-  res.redirect('org-admin/manage-team?deleteSuccess=true')
+  res.redirect('org-admin/manage-team?deleteSuccess=true&deletedUser=' + query)
 });
 
 router.get('/clear-learner', function (req, res) {
@@ -721,7 +728,7 @@ router.get('/confirm-delete-claim', function (req, res) {
   for (let i = 0; i < claims.length; i++) {
     if (claims[i].claimID === claimID) {
         claims.splice(i, 1);
-        res.redirect('manage-claims?fundingPot=TU&deleteSuccess=true')
+        res.redirect('manage-claims?fundingPot=TU&deleteSuccess=true&deletedID=' + claimID)
     }
   }
 });

@@ -1,6 +1,6 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim_V13(data.claims) %}
-{% set user = data.email | findUser_V13(data.users) %}
+{% set user = data.deletedEmail | findUser_V13(data.users) %}
 
 {% block pageTitle %}
 {{ ["Learner ineligible - Claim: ", data.id] | join }}
@@ -16,7 +16,7 @@
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
                 <path d="M13.6,15.4h-2.3v-4.5h2.3V15.4z M13.6,19.8h-2.3v-2.2h2.3V19.8z M0,23.2h25L12.5,2L0,23.2z" />
                 </svg>
-                <div class="moj-banner__message">Error deleting user Johnny Upton, please try again</div>
+                <div class="moj-banner__message">Error deleting {%if user.status == "pending" %} invitation to {% elif user.status == "active" %} registered {%endif%}user {{user.givenName}} {{user.familyName}}, please try again</div>
             </div>
         {% endif %}
     </div>
@@ -24,7 +24,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <h1 class="govuk-heading-l">Are you sure you want to delete this user?</h1>
+        <h1 class="govuk-heading-l">Are you sure you want to delete this {% if user.status == "active" %}registered{% else %}invited{% endif %} user?</h1>
     </div>
     <div class="govuk-grid-column-two-thirds">
 
@@ -63,7 +63,7 @@
             <a type="submit" class="govuk-button" href="../confirm-delete-user">
                 Confirm delete
             </a>
-            <a class="govuk-link govuk-link--no-visited-state" href="../org-admin/manage-team">
+            <a class="govuk-link govuk-link--no-visited-state" href="../org-admin/manage-team?deletedEmail">
                 Cancel
             </a>
         </div>
