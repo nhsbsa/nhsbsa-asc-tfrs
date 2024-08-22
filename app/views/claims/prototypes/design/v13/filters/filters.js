@@ -548,24 +548,14 @@ addFilter('matchResend_V13', function (resendList, email) {
     if (resendList != null && resendList != "") {
         for (const e of resendList) {
             if (e === email) {
-                return true
-                break;
+                return true;
             }
         }
     }
-    
     return false
 })
 
-addFilter('inviteName_V13', function (email, users) {
-    for (const user of users) {
-        if (user.email === email) {
-            return user.givenName + " " + user.familyName
-        }
-    }
-})
-
-addFilter('expireTime_V10', function (isoDateTime) {
+addFilter('expireTime_V13', function (isoDateTime) {
     const inputDateTime = new Date(isoDateTime);
     const currentDateTime = new Date();
     const oneDayInMillis = 24 * 60 * 60 * 1000;
@@ -595,7 +585,7 @@ addFilter('expireTime_V10', function (isoDateTime) {
 })
 
 
-addFilter('countMatchingStatus_V10', function (objectsArray, statusString) {
+addFilter('countMatchingStatus_V13', function (objectsArray, statusString) {
     // Initialize a counter to keep track of the matching objects
     let count = 0;
 

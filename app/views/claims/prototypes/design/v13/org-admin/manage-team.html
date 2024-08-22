@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %} 
 
-
-{% set matchName = data.resendEmail | inviteName_V10 (data.users) %}
+{% set matchResendUser = data.resendEmail | findUser_V13 (data.users) %}
+{% set matchDeletedUser = data.deletedEmail | findUser_V13 (data.users) %}
 
 
 {% block pageTitle %} 
@@ -33,7 +33,7 @@
         <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
       </svg>
     
-      <div class="moj-banner__message">Invitation to {{matchName}} sent.<br><br>Some emails might not arrive straight away. You can resend the email after 24 hours if necessary.</div>
+      <div class="moj-banner__message">Invitation to {{matchResendUser.givenName}} {{matchResendUser.familyName}} sent.<br><br>Some emails might not arrive straight away. You can resend the email after 24 hours if necessary.</div>
     
     </div>
     {% elif data.invite == "failure" %}
@@ -44,7 +44,7 @@
         <path d="M13.6,15.4h-2.3v-4.5h2.3V15.4z M13.6,19.8h-2.3v-2.2h2.3V19.8z M0,23.2h25L12.5,2L0,23.2z" />
       </svg>
     
-      <div class="moj-banner__message">Invitation {{matchName}} wasn't sent - try again</div>
+      <div class="moj-banner__message">Invitation {{matchResendUser.givenName}} {{matchResendUser.familyName}} wasn't sent - try again</div>
     
     </div>
 
@@ -56,7 +56,11 @@
         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
         <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
       </svg>
-      <div class="moj-banner__message">User Johnny Upton has been successfully deleted</div>
+      {% if (data.deletedUser == "active")%}
+        <div class="moj-banner__message">Registered user {{matchDeletedUser.givenName}} {{matchDeletedUser.familyName}} has been successfully deleted</div>
+      {% elif (data.deletedUser  == "pending") %}
+        <div class="moj-banner__message">Invite to user {{matchDeletedUser.givenName}} {{matchDeletedUser.familyName}} has been successfully deleted</div>
+      {% endif %}
     </div>
     {% endif %}
     
@@ -79,7 +83,7 @@
 
     {% endif %}
 
-    {% if (data.users | countMatchingStatus_V10("active"))>0 %}
+    {% if (data.users | countMatchingStatus_V13("active"))>0 %}
     <table class="govuk-table">
         <caption class="govuk-table__caption govuk-table__caption--m">Registered</caption>
         <tbody class="govuk-table__body">
@@ -91,7 +95,7 @@
                 {% if user.type == "signatory" %}
                   <td class="govuk-table__cell govuk-table__cell--numeric" width="40%"></td>
                 {% else %}
-                  <td class="govuk-table__cell govuk-table__cell--numeric" width="40%"><a class="govuk-link govuk-link--no-visited-state" href="delete-user-confirmation?email={{user.email}}">Delete</a></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric" width="40%"><a class="govuk-link govuk-link--no-visited-state" href="delete-user-confirmation?deletedEmail={{user.email}}">Delete</a></td>
                 {% endif %}
                 
               </tr>
@@ -101,7 +105,7 @@
         </tbody>
       </table>
       {% endif %}
-      {% if (data.users | countMatchingStatus_V10("pending"))>0 %}
+      {% if (data.users | countMatchingStatus_V13("pending"))>0 %}
       <table class="govuk-table">
         <caption class="govuk-table__caption govuk-table__caption--m">Invited</caption>
         <tbody class="govuk-table__body">
@@ -110,16 +114,15 @@
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
                 <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
-                <td class="govuk-table__cell" width="27%">You can resend this invite from {{ user.invited | expireTime_V10 }}</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric" width="13%"><a class="govuk-link govuk-link--no-visited-state" href="delete-user-confirmation?email={{user.email}}">Delete</a></td>
-
+                <td class="govuk-table__cell" width="27%">You can resend this invite from {{ user.invited | expireTime_V13 }}</td>
+                <td class="govuk-table__cell govuk-table__cell--numeric" width="13%"><a class="govuk-link govuk-link--no-visited-state" href="delete-user-confirmation?deletedEmail={{user.email}}">Delete</a></td>
               </tr>
             {% endif %}
           {% endfor %}
         </tbody>
       </table>
       {% endif %}
-      {% if (data.users | countMatchingStatus_V10("expired"))>0 %}
+      {% if (data.users | countMatchingStatus_V13("expired"))>0 %}
       <table class="govuk-table">
         <caption class="govuk-table__caption govuk-table__caption--m">Expired invites</caption>
         <tbody class="govuk-table__body">
@@ -129,7 +132,7 @@
             <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
             <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
             <td class="govuk-table__cell" width="27%"></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric" width="13%">{% if not (data.resendList | matchResend_V10(user.email)) %}<form action="../reinvite-user?resendEmail={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
+            <td class="govuk-table__cell govuk-table__cell--numeric" width="13%">{% if not (data.resendList | matchResend_V13(user.email)) %}<form action="../reinvite-user?resendEmail={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
           </tr>
           {% endif %}
           {% endfor %}
