@@ -827,3 +827,15 @@ addFilter('isSelected_V13', function (valueArray, status) {
     return selected
 });
 
+
+addFilter('userCountNotExpired_V13', function (users) { 
+    var count = false 
+    if (users != null && users != "") {
+        for (const u of users) {
+            if (u.status != "expired") {
+                count += 1
+            }
+        }
+    }
+    return count
+});

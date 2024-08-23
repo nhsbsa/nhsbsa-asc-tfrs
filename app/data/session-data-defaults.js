@@ -404,6 +404,6 @@ module.exports = {
             }
         ]
     }, 
-    "processingServiceName": "Process claim for ASC training and development"
+    "processingServiceName": "Process claim for ASC learning and development"
 }
 

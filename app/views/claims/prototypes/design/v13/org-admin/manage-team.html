@@ -2,6 +2,7 @@
 
 {% set matchResendUser = data.resendEmail | findUser_V13 (data.users) %}
 {% set matchDeletedUser = data.deletedEmail | findUser_V13 (data.users) %}
+{% set userCountNotInclExpired = data.users | userCountNotExpired_V13 %}
 
 
 {% block pageTitle %} 
@@ -67,10 +68,10 @@
     <h1 class="govuk-heading-l">Manage team</h1>
     <p>All registered team members can add and manage claims. Only you can invite new team members.</p>
 
-    {% if (data.users | length) < 10 %}
+    {% if (userCountNotInclExpired) < 10 %}
 
     <div class="govuk-inset-text">
-      You currently have {{ data.users | length }} team members out of a maximum of 10.
+      You currently have {{ userCountNotInclExpired }} registered or invited team members out of a maximum of 10.
     </div>
 
     <a type="submit" href="user-details" class="govuk-button" data-module="govuk-button">
@@ -79,7 +80,7 @@
 
     {% else %}
 
-    <p class="govuk-body">You have reached the maximum of 10 team members.</p>
+    <p class="govuk-body">You have reached the maximum of 10 team members. To invite someone else you need to delete either a registered or invited user.</p>
 
     {% endif %}
 
@@ -127,17 +128,18 @@
         <caption class="govuk-table__caption govuk-table__caption--m">Expired invites</caption>
         <tbody class="govuk-table__body">
             {% for user in data.users %}
-            {% if user.status == "expired" %}
-          <tr class="govuk-table__row">
-            <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
-            <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
-            <td class="govuk-table__cell" width="27%"></td>
-            <td class="govuk-table__cell govuk-table__cell--numeric" width="13%">{% if not (data.resendList | matchResend_V13(user.email)) %}<form action="../reinvite-user?resendEmail={{user.email}}&deleteSuccess" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
-          </tr>
-          {% endif %}
+              {% if user.status == "expired" %}
+                <tr class="govuk-table__row">
+                  <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
+                  <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
+                  <td class="govuk-table__cell" width="27%"></td>
+                  <td class="govuk-table__cell govuk-table__cell--numeric" width="13%">{% if not (data.resendList | matchResend_V13(user.email)) %}<form action="../reinvite-user?resendEmail={{user.email}}&deleteSuccess" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
+                </tr>
+            {% endif %}
           {% endfor %}
         </tbody>
       </table>
+      <span><p>Expired invites will be removed after 2 weeks.</p></span>
       {% endif %}
     </div>
 </div>
