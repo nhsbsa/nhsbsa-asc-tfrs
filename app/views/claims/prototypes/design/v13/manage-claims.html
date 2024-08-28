@@ -17,7 +17,7 @@
             </a>
         </li>
         <li class="govuk-breadcrumbs__list-item">
-            <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot={{ data.fundingPot }}">Manage claims
+            <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot={{ data.fundingPot }}&deleteSuccess=">Manage claims
                 ({{ data.fundingPot |
                 potName_V13
                 }})
@@ -25,7 +25,7 @@
         </li>
         <li class="govuk-breadcrumbs__list-item">
             <a class="govuk-breadcrumbs__link"
-                href="manage-claims?fundingPot={{ data.fundingPot }}&statusID={{ status.id }}">{{ status.name
+                href="manage-claims?fundingPot={{ data.fundingPot }}&statusID={{ status.id }}&deleteSuccess=">{{ status.name
                 }} claims</a>
         </li>
     </ol>

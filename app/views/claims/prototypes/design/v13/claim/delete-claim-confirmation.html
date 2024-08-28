@@ -36,6 +36,7 @@
             </div>
 
             <dl class="govuk-summary-list">
+                {% if (claim.learner.givenName) %}
                 <div class="govuk-summary-list__row govuk-summary-list__row--no-actions ">
                   <dt class="govuk-summary-list__key">
                     Learner
@@ -44,6 +45,7 @@
                     {{claim.learner.givenName}} {{claim.learner.familyName}}
                   </dd>
                 </div>
+                {% endif %}
                 <div class="govuk-summary-list__row govuk-summary-list__row--no-actions ">
                   <dt class="govuk-summary-list__key">
                     Training
