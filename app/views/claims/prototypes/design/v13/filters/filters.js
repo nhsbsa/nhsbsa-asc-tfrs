@@ -832,10 +832,10 @@ addFilter('userCountNotExpired_V13', function (users) {
     var count = false 
     if (users != null && users != "") {
         for (const u of users) {
-            if (u.status != "expired") {
+            if (u.status != "expired" && u.status != "deleted") {
                 count += 1
             }
         }
     }
-    return count
+    return count.toString()
 });
