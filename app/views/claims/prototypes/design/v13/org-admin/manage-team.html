@@ -71,7 +71,7 @@
     {% if (count) < 10 %}
 
     <div class="govuk-inset-text">
-      You currently have {{ count }} team members (registered or invited) out of a maximum of 10.
+      You currently have {{ count }} team member{%if (count) > 1 %}s{% endif %} (registered or invited) out of a maximum of 10.
     </div>
 
     <a type="submit" href="user-details" class="govuk-button" data-module="govuk-button">
