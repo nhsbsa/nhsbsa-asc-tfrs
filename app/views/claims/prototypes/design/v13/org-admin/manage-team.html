@@ -2,7 +2,7 @@
 
 {% set matchResendUser = data.resendEmail | findUser_V13 (data.users) %}
 {% set matchDeletedUser = data.deletedEmail | findUser_V13 (data.users) %}
-{% set userCountNotInclExpired = data.users | userCountNotExpired_V13 %}
+{% set count = data.users | userCountNotExpired_V13 %}
 
 
 {% block pageTitle %} 
@@ -68,10 +68,10 @@
     <h1 class="govuk-heading-l">Manage team</h1>
     <p>All registered team members can add and manage claims. Only you can invite new team members.</p>
 
-    {% if (userCountNotInclExpired) < 10 %}
+    {% if (count) < 10 %}
 
     <div class="govuk-inset-text">
-      You currently have {{ userCountNotInclExpired }} registered or invited team members out of a maximum of 10.
+      You currently have {{ count }} team members (registered or invited) out of a maximum of 10.
     </div>
 
     <a type="submit" href="user-details" class="govuk-button" data-module="govuk-button">
@@ -139,7 +139,6 @@
           {% endfor %}
         </tbody>
       </table>
-      <span><p>Expired invites will be removed after 2 weeks.</p></span>
       {% endif %}
     </div>
 </div>
