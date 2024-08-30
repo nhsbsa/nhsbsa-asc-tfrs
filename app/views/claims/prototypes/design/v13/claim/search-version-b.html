@@ -22,49 +22,155 @@
 
 {% block content %}
 
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
-        <h1 class="govuk-heading-l">Search for claim</h1>
+<div>
+  <div>
+    {% if data.noInputs %}
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            <li>
+              <a href="#jobTitle">
+                Need some value to search against? or will give a list of everything?
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+    {% endif %}
+  </div>
 </div>
 
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search for claim</h2>
+      <p class="govuk-body">Each search is optional, add values for the categories you wish to search by</p>
+  </div>
+</div>
 
-    <div class="govuk-grid-row">
-
-        <div class="govuk-grid-column-two-thirds">
-          <p>VERSION B</p>
-            <p class="govuk-heading-m">{{ resultCount }} {% if resultCount == 1 %}result{% else %}results{% endif %}</p>
-
-            <table class="govuk-table" data-module="moj-sortable-table">
-
-                    <thead class="govuk-table__head">
-                        <tr class="govuk-table__row">
-                            <th class="govuk-table__header" scope="col" width="20%" aria-sort="none">Claim reference</th>
-                            <th class="govuk-table__header" scope="col" width="3%" aria-sort="none">Type</th>
-                            <th class="govuk-table__header" scope="col" width="26%" aria-sort="none">Training</th>
-                            <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Learner</th>
-                            <th class="govuk-table__header" scope="col" width="11%" aria-sort="none">Start date</th>
-                            <th class="govuk-table__header" scope="col" width="18%" aria-sort="descending">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="govuk-table__body">
-                        {% for claim in filteredClaims %}
-                        <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
-                            <td class="govuk-table__header" scope="row"><a class="govuk-link"
-                                    href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
-                            <td class="govuk-table__cell">{{ claim.claimType | typeTag_V13 }}</td>
-                            <td class="govuk-table__cell">{{ claim.training.title }}</td>
-                            <td class="govuk-table__cell">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</td>
-                            <td class="govuk-table__cell" data-sort-value="{{ claim.startDate }}">{{ claim.startDate |
-                                    govukDate("truncate") }}</td>
-                            <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
-                                        statusTag_V13(data.statuses) }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="../advanced-search" method="post" class="form">
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="training">
+        <strong>Course or qualification name</strong>
+      </label>
+      <div id="course-name-hint" class="govuk-hint">
+        Enter keyword
+      </div>
+      <input class="govuk-input govuk-input--width-20" id="training" name="training" type="text">
     </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="learner">
+        <strong>Learner</strong>
+      </label>
+      <div id="learner-name-hint" class="govuk-hint">
+        Enter first or last name, or both, or national insurance?
+      </div>
+      <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text">
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="learner">
+        <strong>Submitter name</strong>
+      </label>
+      <div id="learner-name-hint" class="govuk-hint">
+        Enter first or last name, or both
+      </div>
+      <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text">
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="status-hint">
+        <label class="govuk-label" for="status">
+          <strong>Status</strong>
+        </label>
+        <div id="wastatusste-hint" class="govuk-hint">
+          Select all that apply.
+        </div>
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="not-yet-submitted" name="status-options" type="checkbox" value="not-yet-submitted">
+            <label class="govuk-label govuk-checkboxes__label" for="not-yet-submitted">
+             Not yet submitted
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="submitted" name="status-options" type="checkbox" value="submitted">
+            <label class="govuk-label govuk-checkboxes__label" for="submitted">
+              Submitted
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="approved" name="status-options" type="checkbox" value="approved">
+            <label class="govuk-label govuk-checkboxes__label" for="approved">
+              Approved
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="rejected" name="status-options" type="checkbox" value="rejected">
+            <label class="govuk-label govuk-checkboxes__label" for="rejected">
+              Rejected
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" aria-describedby="type-hint">
+        <label class="govuk-label" for="type">
+          <strong>Type</strong>
+        </label>
+        <div id="type-hint" class="govuk-hint">
+          Select all that apply.
+        </div>
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="100" name="type-options" type="checkbox" value="100">
+            <label class="govuk-label govuk-checkboxes__label" for="100">
+             100
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="60" name="type-options" type="checkbox" value="60">
+            <label class="govuk-label govuk-checkboxes__label" for="60">
+              60
+            </label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="40" name="type-options" type="checkbox" value="40">
+            <label class="govuk-label govuk-checkboxes__label" for="40">
+              40
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="type">
+        <strong>Date range</strong>
+      </label>
+      <div id="learner-name-hint" class="govuk-hint">
+        Enter the dates you wish to search between
+      </div>
+      <input class="govuk-input govuk-input--width-20" id="type" name="type" type="text">
+    </div>
+
+    <button type="submit" class="govuk-button" data-module="govuk-button">
+      Apply search
+    </button>
+
+  </form>
+    
+  </div>
+</div>
 
 {% endblock %}
