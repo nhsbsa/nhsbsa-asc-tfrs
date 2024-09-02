@@ -320,7 +320,7 @@ module.exports = {
                 "status": ["dev", "UR", "design"],
                 "tested": "",
                 "created": [
-                    "due to decision to remove CPD from the service"
+                    "Add processor notes back into prototype."
                 ],
                 "aims": [
                     "TBC"
