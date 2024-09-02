@@ -236,7 +236,7 @@ router.post('/add-note', function (req, res) {
   } else {
     var currentDate = new Date().toISOString();
     var newNote = {
-      "author": "test participant",
+      "author": "Test Participant (Processor)",
       "date": currentDate,
       "note": newNoteInput
     };

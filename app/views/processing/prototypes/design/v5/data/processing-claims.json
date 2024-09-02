@@ -45,6 +45,11 @@
     "completionDate": "2024-02-05T20:22:11.308Z",
     "costDate": "2023-08-08T07:55:32.615Z",
     "notes": [
+      {
+        "author": "Donald Marvin (CCs Agent)",
+        "date": "2024-02-05T09:02:43.631Z",
+        "note": "Submitter called to ask questions regarding this claim. Referral passed to processor."
+      }
   ]
   },
   {
@@ -142,21 +147,18 @@
     "costDate": "2023-10-04T12:09:57.600Z",
     "notes": [ 
       {
-        "author": "Donald Marvin",
+        "author": "Donald Marvin (Processor)",
         "date": "2024-02-05T08:58:43.631Z",
-        "category": "Criteria review",
         "note": "The evidence of payment met all of the criteria requirements."
       },
       {
-        "author": "Donald Marvin",
+        "author": "Donald Marvin (Processor)",
         "date": "2024-02-05T09:02:43.631Z",
-        "category": "Criteria review",
         "note": "The evidence of completion met all of the criteria requirements."
       },
       {
-        "author": "Donald Marvin",
+        "author": "Donald Marvin (Processor)",
         "date": "2024-02-05T10:32:43.631Z",
-        "category": "General",
         "note": "Have to go check with my manager the exact amount to reimburse."
       }
   ]
@@ -208,9 +210,8 @@
     "costDate": "2022-09-19T13:52:37.929Z",
     "notes": [
       {
-        "author": "test participant",
+        "author": "Test Participant (Processor)",
         "date": "2024-02-05T11:12:43.631Z",
-        "category": "Criteria review",
         "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for. The evidence of completion provided did not meet our requirements because it did not refer to the training that was paid for. "
       }
   ]
@@ -262,15 +263,13 @@
     "costDate": "2022-09-19T13:52:37.929Z",
     "notes": [
       {
-        "author": "Donald Marvin",
+        "author": "Donald Marvin (Processor)",
         "date": "2024-02-05T17:53:43.631Z",
-        "category": "General",
         "note": "The evidence for payment I have flagged as potentially fraud to my manager."
       },
       {
-        "author": "Donald Marvin",
+        "author": "Donald Marvin (Processor)",
         "date": "2024-02-10T11:28:48.631Z",
-        "category": "Fraud",
         "note": "Escalated for fraud."
       }
   ]
