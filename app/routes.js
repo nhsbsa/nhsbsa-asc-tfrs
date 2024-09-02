@@ -28,6 +28,7 @@ router.use('/processing/prototypes/design/v1/', require('./views/processing/prot
 router.use('/processing/prototypes/design/v2/', require('./views/processing/prototypes/design/v2/routes/routes.js'))
 router.use('/processing/prototypes/design/v3/', require('./views/processing/prototypes/design/v3/routes/routes.js'))
 router.use('/processing/prototypes/design/v4/', require('./views/processing/prototypes/design/v4/routes/routes.js'))
+router.use('/processing/prototypes/design/v5/', require('./views/processing/prototypes/design/v5/routes/routes.js'))
 
 
 // Add your routes here

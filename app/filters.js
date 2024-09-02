@@ -24,6 +24,7 @@ require('../app/views/processing/prototypes/design/v1/filters/filters.js')
 require('../app/views/processing/prototypes/design/v2/filters/filters.js')
 require('../app/views/processing/prototypes/design/v3/filters/filters.js')
 require('../app/views/processing/prototypes/design/v4/filters/filters.js')
+require('../app/views/processing/prototypes/design/v5/filters/filters.js')
 
 addFilter('default', function (value, defaultValue) {
     if (value != null) {
