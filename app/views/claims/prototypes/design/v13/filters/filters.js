@@ -716,24 +716,20 @@ addFilter('formatStatus_V13', function (status) {
 
 addFilter('claimsMatchSearchWithoutFilter_V13', function (claims, search) {
     const formattedSearch = removeSpacesAndLowerCase(search);
-
-    var filtered = claims.filter(claim => {
+    var searched = claims.filter(claim => {
         let check = false;
-
         if (claim.claimID != null) {
             const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
             if (formattedClaimID.includes(formattedSearch)) {
                 check = true;
             }
         }
-
         if (claim.training != null) {
             const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
             if (formattedActivity.includes(formattedSearch)) {
                 check = true;
             }
         }
-
         if (claim.learner != null) {
             const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
             if (formattedName.includes(formattedSearch)) {
@@ -742,8 +738,7 @@ addFilter('claimsMatchSearchWithoutFilter_V13', function (claims, search) {
         }
         return check;
     });
-
-    return filtered;
+    return searched;
 })
 
 addFilter('filteredClaims_V13', function (claims, statuses, dates, types) {
