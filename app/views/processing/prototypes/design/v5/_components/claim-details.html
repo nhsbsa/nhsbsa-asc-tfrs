@@ -59,10 +59,18 @@
     </div>
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Email
+            <span class="govuk-visually-hidden">Submitter</span>Email
         </dt>
         <dd class="govuk-summary-list__value">
             <a class="govuk-link" href="mailto:example@example.com">casey.simonis@oaktree.com</a>
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Submitted on
+        </dt>
+        <dd class="govuk-summary-list__value">
+                {{claim.submittedDate | govukDate}}
         </dd>
     </div>
 
