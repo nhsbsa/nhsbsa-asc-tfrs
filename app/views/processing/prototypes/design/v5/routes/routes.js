@@ -38,7 +38,7 @@ router.post('/confirm-org-handler', function (req, res) {
   const confirmation = req.session.data.confirmation
   delete req.session.data.submitError
   delete req.session.data.confirmation
-  
+
   if (confirmation == "yes") {
     res.redirect('register-organisation/signatory-details')
   } else if (confirmation == "no") {
@@ -156,37 +156,37 @@ router.post('/claim-process-handler', function (req, res) {
       break;
     }
   }
-      isFullClaim = isFullClaimCheck(claim)
+  isFullClaim = isFullClaimCheck(claim)
 
-      if (((claim.fundingType == "TU") && (claim.claimType == "60" || claim.claimType == "100"))) {
-        if (paymentResponse == null) {
-          errorParamaters += "&paymentResponseIncomplete=true";
-        } else if (paymentResponse == "yes" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
-          errorParamaters += "&paymentReimbursementAmountIncomplete=true";
-        } else if (paymentResponse == "yes" && (!validAmount)) {
-          errorParamaters += "&paymentReimbursementAmountInvalid=true";
-        } else if (paymentResponse == "no" && (paymentNoNote == null || paymentNoNote == "")) {
-          errorParamaters += "&paymentNoNoteIncomplete=true";
-        }
-      }
+  if (((claim.fundingType == "TU") && (claim.claimType == "60" || claim.claimType == "100"))) {
+    if (paymentResponse == null) {
+      errorParamaters += "&paymentResponseIncomplete=true";
+    } else if (paymentResponse == "yes" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
+      errorParamaters += "&paymentReimbursementAmountIncomplete=true";
+    } else if (paymentResponse == "yes" && (!validAmount)) {
+      errorParamaters += "&paymentReimbursementAmountInvalid=true";
+    } else if (paymentResponse == "no" && (paymentNoNote == null || paymentNoNote == "")) {
+      errorParamaters += "&paymentNoNoteIncomplete=true";
+    }
+  }
 
-      if ((claim.fundingType == "TU") && (claim.claimType == "40" || claim.claimType == "100")) {
-        if (completionResponse == null) {
-          errorParamaters += "&completionResponseIncomplete=true";
-        } else if (completionResponse == "no" && (completionNoNote == null || completionNoNote == "" )) {
-          errorParamaters += "&completionNoNoteIncomplete=true";
-        } 
-      }
+  if ((claim.fundingType == "TU") && (claim.claimType == "40" || claim.claimType == "100")) {
+    if (completionResponse == null) {
+      errorParamaters += "&completionResponseIncomplete=true";
+    } else if (completionResponse == "no" && (completionNoNote == null || completionNoNote == "")) {
+      errorParamaters += "&completionNoNoteIncomplete=true";
+    }
+  }
 
-      if (errorParamaters == "") {
-        if ((paymentResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "40"))) && (completionResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "60")))) {
-          res.redirect('process-claim/outcome?result=approve')
-        } else {
-          res.redirect('process-claim/outcome?result=reject')
-        }
-      } else {
-        res.redirect("process-claim/claim?id=" + claimID + errorParamaters)
-      }
+  if (errorParamaters == "") {
+    if ((paymentResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "40"))) && (completionResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "60")))) {
+      res.redirect('process-claim/outcome?result=approve')
+    } else {
+      res.redirect('process-claim/outcome?result=reject')
+    }
+  } else {
+    res.redirect("process-claim/claim?id=" + claimID + errorParamaters)
+  }
 });
 
 router.get('/outcome-handler', function (req, res) {
@@ -217,6 +217,40 @@ router.get('/outcome-handler', function (req, res) {
   delete req.session.data.completionNoNote
 
   res.redirect('process-claim/claim?processSuccess=true')
+});
+
+router.post('/add-note', function (req, res) {
+  const claimID = req.session.data.id
+  var foundClaim = null
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
+    }
+  }
+  var newNoteInput = req.session.data.notes
+
+  if (newNoteInput == null || newNoteInput == "") {
+    req.session.data.noteError = true  
+    res.redirect('process-claim/add-note?id=' + claimID)
+
+  } else {
+    var currentDate = new Date().toISOString();
+    var newNote = {
+      "author": "test participant",
+      "date": currentDate,
+      "note": newNoteInput
+    };
+
+    delete req.session.data.noteInput
+    delete req.session.data.noteError
+
+    foundClaim.notes.push(newNote);
+    res.redirect('process-claim/claim' + '?id=' + claimID + "&noteAddedSuccess")
+
+  }
+
+
+
 });
 
 module.exports = router
