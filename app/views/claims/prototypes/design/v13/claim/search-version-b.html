@@ -53,39 +53,104 @@
   </div>
 </div>
 
+<form action="../advanced-search" method="post" class="form">
+
+  <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="training">
+            <strong>Course or qualification name</strong>
+          </label>
+          <div id="course-name-hint" class="govuk-hint">
+            Enter keyword
+          </div>
+          <input class="govuk-input govuk-input--width-20" id="training" name="training" type="text">
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-half">
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="learner">
+            <strong>Learner</strong>
+          </label>
+          <div id="learner-name-hint" class="govuk-hint">
+            Enter name or National Insurance number
+          </div>
+          <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text">
+        </div>
+      </div>
+  </div>
+
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-    <form action="../advanced-search" method="post" class="form">
+  <div class="govuk-grid-column-one-half">
     <div class="govuk-form-group">
       <label class="govuk-label" for="training">
-        <strong>Course or qualification name</strong>
+        <strong>Submitter name</strong>
       </label>
       <div id="course-name-hint" class="govuk-hint">
-        Enter keyword
+        Enter name
       </div>
       <input class="govuk-input govuk-input--width-20" id="training" name="training" type="text">
     </div>
-
+  </div>
+  <div class="govuk-grid-column-one-half">
     <div class="govuk-form-group">
-      <label class="govuk-label" for="learner">
-        <strong>Learner</strong>
+      <label class="govuk-label" for="type">
+        <strong>Date range</strong>
       </label>
-      <div id="learner-name-hint" class="govuk-hint">
-        Enter first or last name, or both, or national insurance?
-      </div>
-      <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text">
-    </div>
+        <div id="learner-name-hint" class="govuk-hint">
+          Select what type of dates you want to search and the dates you wish to search between
+        </div>
+        <div class="govuk-form-group govuk-!-margin-bottom-4">
+          <label class="govuk-label" for="sort">
+            Type of date
+          </label>
+          <select class="govuk-select" id="sort" name="sort">
+            <option value="published">Created on</option>
+            <option value="updated" selected>Submitted on</option>
+            <option value="views">Approved on</option>
+            <option value="comments">Rejected on</option>
+          </select>
+        </div>
 
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="learner">
-        <strong>Submitter name</strong>
-      </label>
-      <div id="learner-name-hint" class="govuk-hint">
-        Enter first or last name, or both
-      </div>
-      <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text">
-    </div>
+        <div style="display: flex;">
+          
 
+          <div>
+            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
+              Month
+            </div>
+            <input class="govuk-input govuk-input--width-5 govuk-!-margin-right-3" id="type" name="type" type="text">
+          </div>
+          <div>
+            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
+              Year
+            </div>
+            <input class="govuk-input govuk-input--width-5" id="type" name="type" type="text">
+          
+          </div>
+
+          <p class="govuk-body govuk-!-margin-right-2 govuk-!-margin-left-2 govuk-!-padding-top-7">to</p>
+
+          <div>
+            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
+              Month
+            </div>
+            <input class="govuk-input govuk-input--width-5 govuk-!-margin-right-3" id="type" name="type" type="text">
+          </div>
+          <div>
+            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
+              Year
+            </div>
+            <input class="govuk-input govuk-input--width-5" id="type" name="type" type="text">
+          </div>
+
+        </div>
+
+    </div>
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset" aria-describedby="status-hint">
         <label class="govuk-label" for="status">
@@ -122,7 +187,8 @@
         </div>
       </fieldset>
     </div>
-
+  </div>
+  <div class="govuk-grid-column-one-half">
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset" aria-describedby="type-hint">
         <label class="govuk-label" for="type">
@@ -153,68 +219,19 @@
         </div>
       </fieldset>
     </div>
-
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="type">
-        <strong>Date range</strong>
-      </label>
-        <div id="learner-name-hint" class="govuk-hint">
-          Select what type of dates you want to search and the dates you wish to search between
-        </div>
-
-        <div style="display: flex;">
-          <div class="govuk-form-group govuk-!-margin-right-2">
-            <label class="govuk-label" for="sort">
-              Type of date
-            </label>
-            <select class="govuk-select" id="sort" name="sort">
-              <option value="published">Created on</option>
-              <option value="updated" selected>Submitted on</option>
-              <option value="views">Approved on</option>
-              <option value="comments">Rejected on</option>
-            </select>
-          </div>
-
-          <div>
-            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
-              Month
-            </div>
-            <input class="govuk-input govuk-input--width-5 govuk-!-margin-right-3" id="type" name="type" type="text">
-          </div>
-          <div>
-            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
-              Year
-            </div>
-            <input class="govuk-input govuk-input--width-5" id="type" name="type" type="text">
-          
-          </div>
-
-          <p class="govuk-body govuk-!-margin-right-2 govuk-!-margin-left-2 govuk-!-padding-top-7">to</p>
-
-          <div>
-            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
-              Month
-            </div>
-            <input class="govuk-input govuk-input--width-5 govuk-!-margin-right-3" id="type" name="type" type="text">
-          </div>
-          <div>
-            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
-              Year
-            </div>
-            <input class="govuk-input govuk-input--width-5" id="type" name="type" type="text">
-          </div>
-
-        </div>
-
-    </div>
-
-    <button type="submit" class="govuk-button" data-module="govuk-button">
-      Apply search
-    </button>
-
-  </form>
-    
   </div>
 </div>
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Apply search
+      </button>
+    </div>
+    <div class="govuk-grid-column-one-half">
+    </div>
+  </div>
+</form>
 
 {% endblock %}
