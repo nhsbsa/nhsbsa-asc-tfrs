@@ -57,16 +57,20 @@ function checkClaim(claim) {
 
 
 function removeSpacesAndLowerCase(input) {
-
-    let inputString = String(input);
-    // Remove spaces using regular expression
-
-    let stringWithoutSpaces = inputString.replace(/\s/g, '');
-
-    // Convert the string to lowercase
-    let lowercaseString = stringWithoutSpaces.toLowerCase();
-
-    return lowercaseString;
+    if (input == null) {
+        return ""
+    } else {
+        let inputString = String(input);
+        // Remove spaces using regular expression
+    
+        let stringWithoutSpaces = inputString.replace(/\s/g, '');
+    
+        // Convert the string to lowercase
+        let lowercaseString = stringWithoutSpaces.toLowerCase();
+    
+        return lowercaseString;
+    }
+    
 }
 
 function compareNINumbers(ni_1, learners) {

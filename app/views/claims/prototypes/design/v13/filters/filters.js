@@ -714,6 +714,30 @@ addFilter('formatStatus_V13', function (status) {
     }
 })
 
+addFilter('claimsMatchAdvancedSearch_V13', function (claims, training, learner) {
+    const formattedTraining = removeSpacesAndLowerCase(training);
+    const formattedLearner = removeSpacesAndLowerCase(learner);
+
+    var searched = claims.filter(claim => {
+        let check = false;
+        if (claim.training != null) {
+            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
+            if (formattedActivity.includes(formattedTraining)) {
+                check = true;
+            }
+        }
+        if (claim.learner != null) {
+            const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
+            if (formattedName.includes(formattedLearner)) {
+                check = true;
+            }
+        }
+        return check;
+    })
+    return searched
+})
+
+
 addFilter('claimsMatchSearchWithoutFilter_V13', function (claims, search) {
     const formattedSearch = removeSpacesAndLowerCase(search);
     var searched = claims.filter(claim => {
