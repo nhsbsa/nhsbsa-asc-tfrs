@@ -76,15 +76,23 @@ router.post('/bank-details-handler', function (req, res) {
   }
 });
 
-router.post('/search-results_V13', function (req, res) {
-  const statuses = req.session.data.filterStatus
-  const startDates = req.session.data.filterStartDate
-  const search = req.session.data.search
+router.post('/search_id_result_V13', function (req, res) {
+  const id = req.session.data.searchClaimId
 
-  delete req.session.data.filterStatus
-  delete req.session.data.filterStartDate
+  delete req.session.data.searchClaimId
 
-  res.redirect('claims/prototypes/design/v13/claim/search-results?search=' + search);
+  let claim = {}
+  for (const c of req.session.data.claims) {
+    if (id == c.claimID) {
+      claim = c
+    }
+  }
+  if (claim) {
+    res.redirect('claims/prototypes/design/v13/claim/claim-details?id=' + id);
+  } else {
+    res.redirect('claims/prototypes/design/v13/claim/search-results');
+  }
+  
 });
 
 router.post('/apply-filters_V13', function (req, res) {

@@ -80,149 +80,156 @@
       </div>
   </div>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-one-half">
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="training">
-        <strong>Submitter name</strong>
-      </label>
-      <div id="course-name-hint" class="govuk-hint">
-        Enter name
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="training">
+          <strong>Submitter name</strong>
+        </label>
+        <div id="course-name-hint" class="govuk-hint">
+          Enter name
+        </div>
+        <input class="govuk-input govuk-input--width-20" id="training" name="training" type="text">
       </div>
-      <input class="govuk-input govuk-input--width-20" id="training" name="training" type="text">
+    </div>
+    <div class="govuk-grid-column-one-half">
     </div>
   </div>
-  <div class="govuk-grid-column-one-half">
-    <div class="govuk-form-group">
-      <label class="govuk-label" for="type">
-        <strong>Date range</strong>
-      </label>
-        <div id="learner-name-hint" class="govuk-hint">
-          Select what type of dates you want to search and the dates you wish to search between
-        </div>
-        <div class="govuk-form-group govuk-!-margin-bottom-4">
-          <label class="govuk-label" for="sort">
-            Type of date
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="status-hint">
+          <label class="govuk-label" for="status">
+            <strong>Status</strong>
           </label>
-          <select class="govuk-select" id="sort" name="sort">
-            <option value="published">Created on</option>
-            <option value="updated" selected>Submitted on</option>
-            <option value="views">Approved on</option>
-            <option value="comments">Rejected on</option>
-          </select>
-        </div>
-
-        <div style="display: flex;">
-          
-
-          <div>
-            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
-              Month
-            </div>
-            <input class="govuk-input govuk-input--width-5 govuk-!-margin-right-3" id="type" name="type" type="text">
+          <div id="wastatusste-hint" class="govuk-hint">
+            Select all that apply.
           </div>
-          <div>
-            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
-              Year
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="not-yet-submitted" name="status-options" type="checkbox" value="not-yet-submitted">
+              <label class="govuk-label govuk-checkboxes__label" for="not-yet-submitted">
+              Not yet submitted
+              </label>
             </div>
-            <input class="govuk-input govuk-input--width-5" id="type" name="type" type="text">
-          
-          </div>
-
-          <p class="govuk-body govuk-!-margin-right-2 govuk-!-margin-left-2 govuk-!-padding-top-7">to</p>
-
-          <div>
-            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
-              Month
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="submitted" name="status-options" type="checkbox" value="submitted">
+              <label class="govuk-label govuk-checkboxes__label" for="submitted">
+                Submitted
+              </label>
             </div>
-            <input class="govuk-input govuk-input--width-5 govuk-!-margin-right-3" id="type" name="type" type="text">
-          </div>
-          <div>
-            <div id="learner-name-hint" class="govuk-hint govuk-!-margin-bottom-1">
-              Year
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="approved" name="status-options" type="checkbox" value="approved">
+              <label class="govuk-label govuk-checkboxes__label" for="approved">
+                Approved
+              </label>
             </div>
-            <input class="govuk-input govuk-input--width-5" id="type" name="type" type="text">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="rejected" name="status-options" type="checkbox" value="rejected">
+              <label class="govuk-label govuk-checkboxes__label" for="rejected">
+                Rejected
+              </label>
+            </div>
           </div>
-
-        </div>
-
+        </fieldset>
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-half">
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="type-hint">
+          <label class="govuk-label" for="type">
+            <strong>Type</strong>
+          </label>
+          <div id="type-hint" class="govuk-hint">
+            Select all that apply.
+          </div>
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="100" name="type-options" type="checkbox" value="100">
+              <label class="govuk-label govuk-checkboxes__label" for="100">
+              100
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="60" name="type-options" type="checkbox" value="60">
+              <label class="govuk-label govuk-checkboxes__label" for="60">
+                60
+              </label>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="40" name="type-options" type="checkbox" value="40">
+              <label class="govuk-label govuk-checkboxes__label" for="40">
+                40
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
     </div>
   </div>
-</div>
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-one-half">
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset" aria-describedby="status-hint">
-        <label class="govuk-label" for="status">
-          <strong>Status</strong>
-        </label>
-        <div id="wastatusste-hint" class="govuk-hint">
-          Select all that apply.
-        </div>
-        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="not-yet-submitted" name="status-options" type="checkbox" value="not-yet-submitted">
-            <label class="govuk-label govuk-checkboxes__label" for="not-yet-submitted">
-             Not yet submitted
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="submitted" name="status-options" type="checkbox" value="submitted">
-            <label class="govuk-label govuk-checkboxes__label" for="submitted">
-              Submitted
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="approved" name="status-options" type="checkbox" value="approved">
-            <label class="govuk-label govuk-checkboxes__label" for="approved">
-              Approved
-            </label>
-          </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="rejected" name="status-options" type="checkbox" value="rejected">
-            <label class="govuk-label govuk-checkboxes__label" for="rejected">
-              Rejected
-            </label>
-          </div>
-        </div>
-      </fieldset>
-    </div>
-  </div>
-  <div class="govuk-grid-column-one-half">
-    <div class="govuk-form-group">
-      <fieldset class="govuk-fieldset" aria-describedby="type-hint">
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <div class="govuk-form-group">
         <label class="govuk-label" for="type">
-          <strong>Type</strong>
+          <strong>Date range</strong>
         </label>
-        <div id="type-hint" class="govuk-hint">
-          Select all that apply.
-        </div>
-        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="100" name="type-options" type="checkbox" value="100">
-            <label class="govuk-label govuk-checkboxes__label" for="100">
-             100
-            </label>
+          <div id="learner-name-hint" class="govuk-hint">
+            Select what type of dates you want to search and the dates you wish to search between. For example, 3 2007
           </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="60" name="type-options" type="checkbox" value="60">
-            <label class="govuk-label govuk-checkboxes__label" for="60">
-              60
-            </label>
+          <div style="display: flex;">
+            <div class="govuk-form-group govuk-!-margin-right-4 ">
+              <label class="govuk-label" for="sort">
+                Type of date
+              </label>
+              <select class="govuk-select" id="sort" name="sort">
+                <option value="published">Created on</option>
+                <option value="updated" selected>Submitted on</option>
+                <option value="views">Approved on</option>
+                <option value="comments">Rejected on</option>
+              </select>
+            </div>
+            <div class="govuk-date-input" id="passport-issued">
+                  <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                      <label class="govuk-label govuk-date-input__label" for="passport-issued-month">
+                        Month
+                      </label>
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-month" name="passport-issued-month" type="text" inputmode="numeric">
+                    </div>
+                  </div>
+                  <div class="govuk-date-input__item">
+                    <div class="govuk-form-group">
+                      <label class="govuk-label govuk-date-input__label" for="passport-issued-year">
+                        Year
+                      </label>
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="passport-issued-year" name="passport-issued-year" type="text" inputmode="numeric">
+                    </div>
+                  </div>
+            </div>
+            <p class="govuk-body govuk-!-margin-right-4 govuk-!-padding-top-7">to</p>
+            <div class="govuk-date-input" id="passport-issued">
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="passport-issued-month">
+                    Month
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-month" name="passport-issued-month" type="text" inputmode="numeric">
+                </div>
+              </div>
+              <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                  <label class="govuk-label govuk-date-input__label" for="passport-issued-year">
+                    Year
+                  </label>
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="passport-issued-year" name="passport-issued-year" type="text" inputmode="numeric">
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="govuk-checkboxes__item">
-            <input class="govuk-checkboxes__input" id="40" name="type-options" type="checkbox" value="40">
-            <label class="govuk-label govuk-checkboxes__label" for="40">
-              40
-            </label>
-          </div>
-        </div>
-      </fieldset>
+      </div>
     </div>
   </div>
-</div>
-
-
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
       <button type="submit" class="govuk-button" data-module="govuk-button">
