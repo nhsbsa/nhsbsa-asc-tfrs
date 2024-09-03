@@ -2,7 +2,7 @@
 
 {% set matchedClaimsWithoutFilter = data.claims | claimsMatchSearchWithoutFilter_V13(data.search) %}
 
-{% set selectedStatusFilters = (data.status | statusArray_V13) %}
+{% set selectedStatusFilters = (data.status | statusArray_V13) %}noInputs
 {% set selectedDateFilters = (data.startDate | startDateArray_V13) %}
 {% set selectedTypeFilters = (data.type | typeArray_V13) %}
 
@@ -17,14 +17,14 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../manage-claims-home?fundingPot=TU" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home?fundingPot=TU&trainingNameEmpty&learnerEmpty" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 
 <div>
   <div>
-    {% if data.noInputs %}
+    {% if data.trainingNameEmpty or data.learnerEmpty %}
     <div class="govuk-error-summary" data-module="govuk-error-summary">
       <div role="alert">
         <h2 class="govuk-error-summary__title">
@@ -34,7 +34,7 @@
           <ul class="govuk-list govuk-error-summary__list">
             <li>
               <a href="#jobTitle">
-                Need some value to search against? or will give a list of everything?
+                Need at least one value to search against
               </a>
             </li>
           </ul>
