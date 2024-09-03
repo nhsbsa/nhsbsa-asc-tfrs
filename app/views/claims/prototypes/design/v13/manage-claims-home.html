@@ -57,32 +57,27 @@
   </div>
 </div>
 
-<div class="govuk-grid-row govuk-!-margin-bottom-5">
-  <div class="govuk-grid-column-full">
-      <div class="moj-search">
-        <form action="/search_id_result_V13" method="post">
-          <div class="govuk-form-group">
-            <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
-              Find a claim
-            </label>
-            <div id="search-hint" class="govuk-hint moj-search__hint ">
-              Enter a claim reference
-            </div>
-            <input class="govuk-input moj-search__input" id="search" name="search" type="search"
-              aria-describedby="search-hint">
-          </div>
-          <button type="submit" class="govuk-button moj-search__button govuk-button--secondary"
-            data-module="govuk-button">
-            Search
-          </button>
-          <p><a class="govuk-link govuk-link--no-visited-state govuk-!-margin-left-5" href="claim/search-version-{{data.searchType}}">Advanced search</a></p>
-        </form>
-      </div>
-  </div>
-</div>
-
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <div class="moj-search  govuk-!-margin-bottom-7">
+      <form action="/search_id_result_V13" method="post">
+        <div class="govuk-form-group">
+          <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+            Find a claim
+          </label>
+          <div id="search-hint" class="govuk-hint moj-search__hint ">
+            Enter a claim reference
+          </div>
+          <input class="govuk-input moj-search__input" id="searchClaimId" name="searchClaimId" type="search"
+            aria-describedby="search-hint">
+        </div>
+        <button type="submit" class="govuk-button moj-search__button govuk-button--secondary"
+          data-module="govuk-button">
+          Search
+        </button>
+        <p><a class="govuk-link govuk-link--no-visited-state govuk-!-margin-left-5" href="claim/search-version-{{data.searchType}}">Advanced search</a></p>
+      </form>
+    </div>
     <ul class="homepage-services-and-info__list">
         {% for status in data.statuses %}
         {% set noClaims = status.id | claimCount_V13(data.claims, data.fundingPot) %}
