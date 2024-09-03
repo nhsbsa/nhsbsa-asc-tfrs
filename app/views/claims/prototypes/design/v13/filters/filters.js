@@ -396,7 +396,6 @@ addFilter('learnerSearch_V13', function (search, learner) {
     if (formattedgivenName.includes(formattedSearch) || formattedfamilyName.includes(formattedSearch) || formattedfullName.includes(formattedSearch) || formattedID.includes(formattedSearch)) {
         match = true
     }
-
     return match
 })
 
@@ -719,56 +718,34 @@ addFilter('claimsMatchAdvancedSearch_V13', function (claims, training, learner) 
     const formattedLearner = removeSpacesAndLowerCase(learner);
 
     var searched = claims.filter(claim => {
-        let check = false;
+        let trainingCheck = false;
         if (claim.training != null) {
             const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
             if (formattedTraining != "" &&  formattedActivity.includes(formattedTraining)) {
-                check = true;
+                trainingCheck = true;
             }
         }
+        let learnerCheck = false;
         if (claim.learner != null) {
             const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
             if (formattedLearner != "" && formattedName.includes(formattedLearner)) {
-                check = true;
+                learnerCheck = true;
             }
         }
-        return check;
+        let check = false
+        if ((training != "" && trainingCheck) && (learner != "" && learnerCheck)) {
+            check = true
+        }
+        if ((training == "" && learnerCheck) || (learner == "" && trainingCheck)) {
+            check = true
+        }
+        return check
     })
     return searched
 })
 
-
-addFilter('claimsMatchSearchWithoutFilter_V13', function (claims, search) {
-    const formattedSearch = removeSpacesAndLowerCase(search);
-    var searched = claims.filter(claim => {
-        let check = false;
-        if (claim.claimID != null) {
-            const formattedClaimID = removeSpacesAndLowerCase(claim.claimID);
-            if (formattedClaimID.includes(formattedSearch)) {
-                check = true;
-            }
-        }
-        if (claim.training != null) {
-            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
-            if (formattedActivity.includes(formattedSearch)) {
-                check = true;
-            }
-        }
-        if (claim.learner != null) {
-            const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
-            if (formattedName.includes(formattedSearch)) {
-                check = true;
-            }
-        }
-        return check;
-    });
-    return searched;
-})
-
 addFilter('filteredClaims_V13', function (claims, statuses, dates, types) {
-
     var filtered = claims.filter(claim => {
-
         let statusCheck = true;
         if (statuses != null && statuses != "") {
             if (statuses.includes(claim.status)) {
@@ -777,7 +754,6 @@ addFilter('filteredClaims_V13', function (claims, statuses, dates, types) {
                 statusCheck = false
             }
         }
-
         let dateCheck = true;
         if (dates != null && dates != "") {
             const startDate = new Date(claim.startDate);
