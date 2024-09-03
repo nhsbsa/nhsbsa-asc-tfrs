@@ -722,13 +722,13 @@ addFilter('claimsMatchAdvancedSearch_V13', function (claims, training, learner) 
         let check = false;
         if (claim.training != null) {
             const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
-            if (formattedActivity.includes(formattedTraining)) {
+            if (formattedTraining != "" &&  formattedActivity.includes(formattedTraining)) {
                 check = true;
             }
         }
         if (claim.learner != null) {
             const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
-            if (formattedName.includes(formattedLearner)) {
+            if (formattedLearner != "" && formattedName.includes(formattedLearner)) {
                 check = true;
             }
         }

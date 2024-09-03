@@ -92,7 +92,24 @@ router.post('/search_id_result_V13', function (req, res) {
   } else {
     res.redirect('claims/prototypes/design/v13/claim/search-results');
   }
-  
+});
+
+router.post('/search_result_a_V13', function (req, res) {
+  const training = req.session.data.trainingName
+  const learner = req.session.data.learner
+
+  let query = "?"
+  if (training == "") {
+    query += "trainingNameEmpty=true&"
+  }
+  if (learner == "") {
+    query += "learnerEmpty=true"
+  }
+  if (training == "" && learner == "") {
+    res.redirect('claims/prototypes/design/v13/claim/search-version-a' + query);
+  } else {
+    res.redirect('claims/prototypes/design/v13/claim/search-results');
+  }
 });
 
 router.post('/apply-filters_V13', function (req, res) {
