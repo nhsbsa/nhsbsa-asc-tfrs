@@ -755,30 +755,41 @@ addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner,
 
         var searched = claims.filter(claim => {
             let trainingCheck = false;
-            if (training == "") { trainingCheck = true}
-            if (claim.training != null && formattedTraining != "") {
+            if (training == "") { 
+                trainingCheck = true
+            } else if (claim.training != null && formattedTraining != "") {
                 const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
                 if (formattedTraining != "" &&  formattedActivity.includes(formattedTraining)) {
                     trainingCheck = true;
                 }
             }
             let learnerCheck = false;
-            if (learner == "") { learnerCheck = true}
-            if (claim.learner != null && formattedLearner != "") {
+            if (learner == "") { 
+                learnerCheck = true
+            } else if (claim.learner != null && formattedLearner != "") {
                 const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
                 if (formattedLearner != "" && formattedName.includes(formattedLearner)) {
                     learnerCheck = true;
                 }
             }
             let submitterCheck = false;
-            if (submitter == "") { submitterCheck = true}
-            if (claim.createdBy != null && formattedSubmitter != "") {
+            if (submitter == "") { 
+                submitterCheck = true
+            } else if (claim.createdBy != null && formattedSubmitter != "") {
                 const formattedName = removeSpacesAndLowerCase(claim.createdBy);
                 if (formattedSubmitter != "" && formattedName.includes(formattedSubmitter)) {
                     submitterCheck = true;
                 }
             }
-            return trainingCheck && learnerCheck & submitterCheck
+            let statusCheck = false;
+            if (statuses == null) { 
+                statusCheck = true
+            } else if (claim.status != null) {
+                if (statuses.includes(claim.status)) {
+                    statusCheck = true;
+                }
+            }
+            return trainingCheck && learnerCheck & submitterCheck & statusCheck
         })
         return searched
     }
