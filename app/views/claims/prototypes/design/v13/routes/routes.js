@@ -77,11 +77,15 @@ router.post('/bank-details-handler', function (req, res) {
 });
 
 router.post('/search_id_result_V13', function (req, res) {
+  delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['notFound'];
+
   var claimID = req.session.data.searchClaimId.replace(/\s/g, '');
 
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
-    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&invalidIDError=true&emptyError=true');
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&emptyError=true');
   }
 
   const letterORegex = /o/i;
@@ -102,7 +106,7 @@ router.post('/search_id_result_V13', function (req, res) {
   }
 
   if (foundClaim == null) {
-    res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&notFound=true');
+    res.redirect('claims/prototypes/design/v13/claim/search-results?fundingPot=TU&searchId='+claimID + '&notFound=true');
   } else {
     res.redirect('claims/prototypes/design/v13/claim/claim-details?id=' + claimID);
   }
