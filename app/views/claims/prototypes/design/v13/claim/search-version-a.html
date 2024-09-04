@@ -1,5 +1,8 @@
 {% extends "../layouts/claims-main.html" %}
 
+{% set matchedClaims = data.claims | claimsMatchAdvancedSearchA_V13(data.training, data.learner) %}
+{% set resultCount = matchedClaims.length %}
+
 {% block pageTitle %}
 {{ ["Search results - ", (data.fundingPot | potName_V13)] | join }}
 {% endblock %}
@@ -45,7 +48,7 @@
   <div class="govuk-grid-column-two-thirds">
     <form action="/search_result_a_V13" method="post" class="form">    
       <div class="govuk-form-group {% if data.trainingNameEmpty %}govuk-form-group--error{% endif %}">
-      <label class="govuk-label" for="training">
+      <label class="govuk-label" for="trainingName">
         <strong>Course or qualification name</strong>
       </label>
       <div id="course-name-hint" class="govuk-hint">
@@ -56,7 +59,7 @@
               <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
           </p>
       {% endif %}
-      <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text">
+      <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text" value="{{ data.trainingName | default ('') }}">
     </div>
 
     <div class="govuk-form-group {% if data.learnerEmpty %}govuk-form-group--error{% endif %}">
@@ -71,7 +74,7 @@
               <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
           </p>
       {% endif %}
-      <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text">
+      <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text" value="{{ data.learner | default ('') }}">
     </div>
 
     <button type="submit" class="govuk-button" data-module="govuk-button">
@@ -82,5 +85,46 @@
     
   </div>
 </div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+      {% if (data['training'] or data['learner']) and (resultCount != 0) %}
+        <h2 class="govuk-heading-m">Search results</h2>
+        <p class="govuk-heading-m">{{ resultCount }} {% if resultCount == 1 %}result{% else %}results{% endif %}</p>
+        <table class="govuk-table" data-module="moj-sortable-table">
+          <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                  <th class="govuk-table__header" scope="col" width="20%" aria-sort="none">Claim reference</th>
+                  <th class="govuk-table__header" scope="col" width="3%" aria-sort="none">Type</th>
+                  <th class="govuk-table__header" scope="col" width="26%" aria-sort="none">Training</th>
+                  <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Learner</th>
+                  <th class="govuk-table__header" scope="col" width="11%" aria-sort="none">Start date</th>
+                  <th class="govuk-table__header" scope="col" width="18%" aria-sort="descending">Status</th>
+              </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+              {% for claim in matchedClaims %}
+              <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
+                  <td class="govuk-table__header" scope="row"><a class="govuk-link"
+                          href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
+                  <td class="govuk-table__cell">{{ claim.claimType | typeTag_V13 }}</td>
+                  <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                  <td class="govuk-table__cell">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</td>
+                  <td class="govuk-table__cell" data-sort-value="{{ claim.startDate }}">{{ claim.startDate |
+                          govukDate("truncate") }}</td>
+                  <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
+                              statusTag_V13(data.statuses) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  {% elif (data['training'] or data['learner']) and (resultCount == 0) %}
+    <p class="govuk-body">
+        No matches returned for your search.
+    </p>
+  {% endif %}
+  </div>
+</div>
+
 
 {% endblock %}

@@ -713,7 +713,7 @@ addFilter('formatStatus_V13', function (status) {
     }
 })
 
-addFilter('claimsMatchAdvancedSearch_V13', function (claims, training, learner) {
+addFilter('claimsMatchAdvancedSearchA_V13', function (claims, training, learner) {
     const formattedTraining = removeSpacesAndLowerCase(training);
     const formattedLearner = removeSpacesAndLowerCase(learner);
 
@@ -739,6 +739,40 @@ addFilter('claimsMatchAdvancedSearch_V13', function (claims, training, learner) 
         if ((training == "" && learnerCheck) || (learner == "" && trainingCheck)) {
             check = true
         }
+        return check
+    })
+    return searched
+})
+
+addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner, submitter, statuses, types, dataType, startMonth, startYear, endMonth, endYear) {
+    const formattedTraining = removeSpacesAndLowerCase(training);
+    const formattedLearner = removeSpacesAndLowerCase(learner);
+    const formattedSubmitter = removeSpacesAndLowerCase(submitter);
+
+    var searched = claims.filter(claim => {
+        let trainingCheck = false;
+        if (claim.training != null) {
+            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
+            if (formattedTraining != "" &&  formattedActivity.includes(formattedTraining)) {
+                trainingCheck = true;
+            }
+        }
+        let learnerCheck = false;
+        if (claim.learner != null) {
+            const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
+            if (formattedLearner != "" && formattedName.includes(formattedLearner)) {
+                learnerCheck = true;
+            }
+        }
+        let submitterCheck = false;
+        if (claim.createdBy != null) {
+            const formattedName = removeSpacesAndLowerCase(claim.createdBy);
+            if (formattedSubmitter != "" && formattedName.includes(formattedSubmitter)) {
+                submitterCheck = true;
+            }
+        }
+
+        let check = false
         return check
     })
     return searched

@@ -106,7 +106,7 @@ router.post('/search_id_result_V13', function (req, res) {
   }
 
   if (foundClaim == null) {
-    res.redirect('claims/prototypes/design/v13/claim/search-results?fundingPot=TU&searchId='+claimID + '&notFound=true');
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&notFound=true');
   } else {
     res.redirect('claims/prototypes/design/v13/claim/claim-details?id=' + claimID);
   }
@@ -128,7 +128,7 @@ router.post('/search_result_a_V13', function (req, res) {
   if (training == "" && learner == "") {
     res.redirect('claims/prototypes/design/v13/claim/search-version-a' + query);
   } else {
-    res.redirect('claims/prototypes/design/v13/claim/search-results');
+    res.redirect('claims/prototypes/design/v13/claim/search-version-a');
   }
 });
 
@@ -145,12 +145,11 @@ router.post('/search_result_b_V13', function (req, res) {
   delete req.session.data['dateInvalid'];
   delete req.session.data['noInputs'];
 
-  const training = req.session.data.training
+  const training = req.session.data.trainingName
   const learner = req.session.data.learner
   const submitter = req.session.data.submitter
   const statusArray = req.session.data.statusOptions
   const typeArray = req.session.data.typeOptions
-  const dateType = req.session.data.sort
   const startMonth = req.session.data.startMonth
   const startYear = req.session.data.startYear
   const endMonth = req.session.data.endMonth
@@ -190,7 +189,7 @@ router.post('/search_result_b_V13', function (req, res) {
   if (training == "" && learner == "" && submitter == "" && statusArray == null && typeArray == null && startMonth == "" && startYear == "" && endMonth == "" && endYear == "") {
     return res.redirect('claims/prototypes/design/v13/claim/search-version-b' + query + "noInputs=true");
   } else {
-    return res.redirect('claims/prototypes/design/v13/claim/search-results');
+    return res.redirect('claims/prototypes/design/v13/claim/search-version-b');
   }
 });
 
