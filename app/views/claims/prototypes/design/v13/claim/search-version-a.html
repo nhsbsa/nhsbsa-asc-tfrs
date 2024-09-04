@@ -25,7 +25,7 @@
             <ul class="govuk-list govuk-error-summary__list">
               <li>
                 <a href="#input-error">
-                  Need at least one value to search against
+                  You need to enter something to search on
                 </a>
               </li>
             </ul>
@@ -40,7 +40,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
-      <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search for claim</h2>
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search</h2>
     </div>
   </div>
   
@@ -49,7 +49,7 @@
         <p class="govuk-body">Each search is optional, add values for the categories you wish to search by</p>
         {% if data.noInputsA %}
         <p id="input-error" class="govuk-error-message">
-            <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
+            <span class="govuk-visually-hidden">Error:</span> You need to enter something to search on
         </p>
       {% endif %}
     </div>
@@ -63,7 +63,7 @@
           <strong>Course or qualification name</strong>
         </label>
         <div id="course-name-hint" class="govuk-hint">
-          Enter keyword
+          Enter all or part of the name
         </div>
         <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text" value="{{ data.trainingName | default ('') }}">
       </div>
@@ -73,12 +73,12 @@
           <strong>Learner</strong>
         </label>
         <div id="learner-name-hint" class="govuk-hint">
-          Enter name or National Insurance number
+          Enter all or part of the name, or the whole National Insurance number
         </div>
         <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text" value="{{ data.learner | default ('') }}">
       </div>
     <button type="submit" class="govuk-button" data-module="govuk-button">
-      Apply search
+      Search
     </button>
   </form>
   </div>
@@ -124,6 +124,13 @@
     <p class="govuk-body">
         No matches returned for your search.
     </p>
+    <p class="govuk-body">
+      Improve your search results by:
+    </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>double-checking your spelling</li>
+      <li>searching for something less specific</li>
+    </ul>
   </div>
 </div>
   {% endif %}

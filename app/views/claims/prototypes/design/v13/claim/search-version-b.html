@@ -33,13 +33,13 @@
             {% if (data.noInputsB)%}
             <li>
               <a href="#training">
-                Need at least one value to search against
+                You need to enter something to search on
               </a>
             </li>
             {% elif (data.dateInvalid == "notValidDates") %}
             <li>
               <a href="#dateType">
-                Need to enter two full valid dates
+                Enter 2 valid dates
               </a>
             </li>
             {% elif (data.dateInvalid == "startBeforeEnd") %}
@@ -60,11 +60,11 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
-      <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search for claim</h2>
-      <p class="govuk-body">Each search is optional, add values for the categories you wish to search by</p>
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search</h2>
+      <p class="govuk-body">You can search by a combination of any of the fields below</p>
       {% if data.noInputsB %}
       <p id="input-error" class="govuk-error-message">
-          <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
+          <span class="govuk-visually-hidden">Error:</span> You need to enter something to search on
       </p>
     {% endif %}
     </div>
@@ -78,7 +78,7 @@
             <strong>Course or qualification name</strong>
           </label>
           <div id="course-name-hint" class="govuk-hint">
-            Enter keyword
+            Enter all or part of the name
           </div>
           <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text" value="{{ data.trainingName | default ('') }}">
         </div>
@@ -89,7 +89,7 @@
             <strong>Learner</strong>
           </label>
           <div id="learner-name-hint" class="govuk-hint">
-            Enter name or National Insurance number
+            Enter all or part of the name, or the whole National Insurance number
           </div>
           <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text" value="{{ data.learner | default ('') }}">
         </div>
@@ -119,7 +119,7 @@
             <strong>Status</strong>
           </label>
           <div id="status-hint" class="govuk-hint">
-            Select all that apply.
+            Select all to include
           </div>
           <div class="govuk-checkboxes--small" data-module="govuk-checkboxes">
             {% for status in statusArray %}
@@ -142,7 +142,7 @@
             <strong>Type</strong>
           </label>
           <div id="type-hint" class="govuk-hint">
-            Select all that apply.
+            Select all to include
           </div>
           <div class="govuk-checkboxes--small" data-module="govuk-checkboxes">
 
@@ -168,11 +168,11 @@
           <strong>Date range</strong>
         </label>
           <div id="learner-name-hint" class="govuk-hint">
-            Select what type of dates you want to search and the dates you wish to search between. For example, 3 2007
+            Select the type of date and the dates to search between. For example, 4 2024 to 6 2024
           </div>
           {% if data.dateInvalid == "notValidDates" %}
             <p id="sortCode-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Need to enter two full valid dates
+                <span class="govuk-visually-hidden">Error:</span> Enter 2 valid dates
             </p>
           {% endif %}
           {% if data.dateInvalid == "startBeforeEnd"%}
@@ -235,7 +235,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
       <button type="submit" class="govuk-button" data-module="govuk-button">
-        Apply search
+        Search
       </button>
     </div>
     <div class="govuk-grid-column-one-half">
@@ -282,6 +282,13 @@
     <p class="govuk-body">
         No matches returned for your search.
     </p>
+    <p class="govuk-body">
+      Improve your search results by:
+    </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>double-checking your spelling</li>
+      <li>searching for something less specific</li>
+    </ul>
   </div>
 </div>
   {% endif %}
