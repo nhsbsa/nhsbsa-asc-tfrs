@@ -1,17 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
 
-{% set matchedClaimsWithoutFilter = data.claims | claimsMatchSearchWithoutFilter_V13(data.search) %}
-
-{% set selectedStatusFilters = (data.status | statusArray_V13) %}
-{% set selectedDateFilters = (data.startDate | startDateArray_V13) %}
-{% set selectedTypeFilters = (data.type | typeArray_V13) %}
-
-
-{% set filteredClaims = matchedClaimsWithoutFilter | filteredClaims_V13(selectedStatusFilters, selectedDateFilters, selectedTypeFilters) %}
-
-{% set resultCount = filteredClaims.length %}
-
-
 {% block pageTitle %}
 {{ ["Search results - ", (data.fundingPot | potName_V13)] | join }}
 {% endblock %}

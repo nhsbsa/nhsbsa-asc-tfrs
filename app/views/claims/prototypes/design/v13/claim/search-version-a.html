@@ -1,10 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
 
-{% set matchedClaims = data.claims | claimsMatchAdvancedSearch_V13(data.trainingName, data.learner) %}
-
-{% set resultCount = matchedClaims.length %}
-
-
 {% block pageTitle %}
 {{ ["Search results - ", (data.fundingPot | potName_V13)] | join }}
 {% endblock %}
