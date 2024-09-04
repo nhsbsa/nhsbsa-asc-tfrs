@@ -2,6 +2,9 @@
 
 {% set matchedClaims = data.claims | claimsMatchAdvancedSearchB_V13(data.trainingName, data.learner, data.submitter, data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear, data.endMonth, data.endYear) %}
 {% set resultCount = matchedClaims.length %}
+{% set statusArray = ["not-yet-submitted", "submitted", "approved", "rejected"] %}
+{% set typeArray = ["100", "60", "40"] %}
+
 
 {% block pageTitle %}
 {{ ["Search results - ", (data.fundingPot | potName_V13)] | join }}
@@ -58,7 +61,6 @@
 </div>
 
 <form action="/search_result_b_V13" method="post" class="form">  
-
   <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
         <div class="govuk-form-group">
@@ -109,31 +111,16 @@
           <div id="status-hint" class="govuk-hint">
             Select all that apply.
           </div>
-          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes--small" data-module="govuk-checkboxes">
+            {% for status in statusArray %}
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="not-yet-submitted" name="statusOptions" type="checkbox" value="not-yet-submitted">
-              <label class="govuk-label govuk-checkboxes__label" for="not-yet-submitted">
-              Not yet submitted
+              <input class="govuk-checkboxes__input" id={{status}} name="statusOptions" type="checkbox" value={{status}} {% if ( data.statusOptions | isSelected_V13(status)) %}checked {% endif %}>
+              <label class="govuk-label govuk-checkboxes__label" for={{status}} >
+              {{status | formatStatus_V13}}
               </label>
             </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="submitted" name="statusOptions" type="checkbox" value="submitted">
-              <label class="govuk-label govuk-checkboxes__label" for="submitted">
-                Submitted
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="approved" name="statusOptions" type="checkbox" value="approved">
-              <label class="govuk-label govuk-checkboxes__label" for="approved">
-                Approved
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="rejected" name="statusOptions" type="checkbox" value="rejected">
-              <label class="govuk-label govuk-checkboxes__label" for="rejected">
-                Rejected
-              </label>
-            </div>
+            {% endfor %}
+
           </div>
         </fieldset>
       </div>
@@ -147,25 +134,17 @@
           <div id="type-hint" class="govuk-hint">
             Select all that apply.
           </div>
-          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="100" name="typeOptions" type="checkbox" value="100">
-              <label class="govuk-label govuk-checkboxes__label" for="100">
-              100
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="60" name="typeOptions" type="checkbox" value="60">
-              <label class="govuk-label govuk-checkboxes__label" for="60">
-                60
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="40" name="typeOptions" type="checkbox" value="40">
-              <label class="govuk-label govuk-checkboxes__label" for="40">
-                40
-              </label>
-            </div>
+          <div class="govuk-checkboxes--small" data-module="govuk-checkboxes">
+
+            {% for type in typeArray %}
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id={{type}} name="typeOptions" type="checkbox" value={{type}}  {% if ( data.typeOptions | isSelected_V13(type)) %} checked {% endif %}>
+                <label class="govuk-label govuk-checkboxes__label" for={{type}}>
+                {{type}}
+                </label>
+              </div>
+            {% endfor %}
+
           </div>
         </fieldset>
       </div>
@@ -204,7 +183,7 @@
                       <label class="govuk-label govuk-date-input__label" for="startMonth">
                         Month
                       </label>
-                      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="startMonth" name="startMonth" type="text" inputmode="numeric">
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="startMonth" name="startMonth" type="text" inputmode="numeric" value="{{ data.startMonth | default ('') }}">
                     </div>
                   </div>
                   <div class="govuk-date-input__item">
@@ -212,7 +191,7 @@
                       <label class="govuk-label govuk-date-input__label" for="startYear">
                         Year
                       </label>
-                      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="startYear" name="startYear" type="text" inputmode="numeric">
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="startYear" name="startYear" type="text" inputmode="numeric" value="{{ data.startYear | default ('') }}">
                     </div>
                   </div>
             </div>
@@ -223,7 +202,7 @@
                   <label class="govuk-label govuk-date-input__label" for="endMonth">
                     Month
                   </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="endMonth" name="endMonth" type="text" inputmode="numeric">
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="endMonth" name="endMonth" type="text" inputmode="numeric" value="{{ data.endMonth | default ('') }}">
                 </div>
               </div>
               <div class="govuk-date-input__item">
@@ -231,7 +210,7 @@
                   <label class="govuk-label govuk-date-input__label" for="endYear">
                     Year
                   </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="endYear" name="endYear" type="text" inputmode="numeric">
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="endYear" name="endYear" type="text" inputmode="numeric" value="{{ data.endYear | default ('') }}">
                 </div>
               </div>
             </div>
