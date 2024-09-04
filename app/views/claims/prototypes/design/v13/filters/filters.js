@@ -789,7 +789,15 @@ addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner,
                     statusCheck = true;
                 }
             }
-            return trainingCheck && learnerCheck & submitterCheck & statusCheck
+            let typeCheck = false;
+            if (types == null) { 
+                typeCheck = true
+            } else if (claim.status != null) {
+                if (types.includes(claim.claimType)) {
+                    typeCheck = true;
+                }
+            }
+            return trainingCheck && learnerCheck & submitterCheck & statusCheck & typeCheck
         })
         return searched
     }
