@@ -21,7 +21,7 @@
 
 {% block content %}
 
-{% if data.invalidIDError or data.invalidIDError %}
+{% if data.emptyError or data.invalidIDError %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <div class="govuk-error-summary" data-module="govuk-error-summary">
@@ -34,13 +34,13 @@
               {% if (data.emptyError) %}
               <li>
                 <a href="#jobTitle">
-                  Claim reference can't be empty
+                  Enter a claim id
                 </a>
               </li>
               {% elif (data.invalidIDError) %}
               <li>
                 <a href="#jobTitle">
-                  Claim reference invalid
+                  Enter a valid claim id
                 </a>
               </li>
               {% endif %}
@@ -93,13 +93,18 @@
   <div class="govuk-grid-column-two-thirds">
     <div class="moj-search  govuk-!-margin-bottom-7">
       <form action="/search_id_result_V13" method="post">
-        <div class="govuk-form-group">
+        <div class="govuk-form-group {% if data.invalidIDError or data.emptyError %}govuk-form-group--error{% endif %}">
           <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
             Find a claim
           </label>
           <div id="search-hint" class="govuk-hint moj-search__hint ">
-            Enter a claim reference
+            Enter a valid claim reference
           </div>
+          {% if data.invalidIDError or data.emptyError %}
+                <p id="sortCode-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> {% if data.invalidIDError %} Enter a valid claim id like GUG-YZR9-BSUX-A{% elif data.emptyError %} Enter a claim id{% endif %}
+                </p>
+          {% endif %}
           <input class="govuk-input moj-search__input" id="searchClaimId" name="searchClaimId" type="search"
             aria-describedby="search-hint">
         </div>
