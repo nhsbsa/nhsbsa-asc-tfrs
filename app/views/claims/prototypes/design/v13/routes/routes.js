@@ -133,10 +133,13 @@ router.post('/search_result_b_V13', function (req, res) {
   const training = req.session.data.trainingName
   const learner = req.session.data.learner
   const submitter = req.session.data.submitter
-  const statusArray = req.session.data.status
-  const typeArray = req.session.data.type
-  const startDate = req.session.data.startDates
-  const endDate = req.session.data.endDates
+  const statusArray = req.session.data.statusOptions
+  const typeArray = req.session.data.typeOptions
+  const dateType = req.session.data.sort
+  const startMonth = req.session.data.startMonth
+  const startYear = req.session.data.startYear
+  const endMonth = req.session.data.endMonth
+  const endYear = req.session.data.endYear
 
   let query = "?"
   if (training == "") {
@@ -154,14 +157,20 @@ router.post('/search_result_b_V13', function (req, res) {
   if (typeArray == "") {
     query += "typeArrayEmpty=true"
   }
-  if (startDate == "") {
-    query += "startDateEmpty=true"
+  if (startMonth == "") {
+    query += "startMonthEmpty=true"
   }
-  if (endDate == "") {
-    query += "endDateEmpty=true"
+  if (startYear == "") {
+    query += "startYearEmpty=true"
   }
-  if (training == "" && learner == "" && submitter == "" && statusArray == "" && typeArray == "" && startDate == "" && endDate == "") {
-    res.redirect('claims/prototypes/design/v13/claim/search-version-a' + query);
+  if (endMonth == "") {
+    query += "endMonthEmpty=true"
+  }
+  if (endYear == "") {
+    query += "endYearEmpty=true"
+  }
+  if (training == "" && learner == "" && submitter == "" && statusArray == null && typeArray == null && startMonth == "" && startYear == "" && endMonth == "" && endYear == "") {
+    res.redirect('claims/prototypes/design/v13/claim/search-version-b' + query + "&noInputs=true");
   } else {
     res.redirect('claims/prototypes/design/v13/claim/search-results');
   }

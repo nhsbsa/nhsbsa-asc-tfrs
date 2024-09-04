@@ -87,7 +87,7 @@
     <div class="govuk-grid-column-one-half">
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset" aria-describedby="status-hint">
-          <label class="govuk-label" for="status">
+          <label class="govuk-label" for="statusOptions">
             <strong>Status</strong>
           </label>
           <div id="status-hint" class="govuk-hint">
@@ -95,25 +95,25 @@
           </div>
           <div class="govuk-checkboxes" data-module="govuk-checkboxes">
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="not-yet-submitted" name="status-options" type="checkbox" value="not-yet-submitted">
+              <input class="govuk-checkboxes__input" id="not-yet-submitted" name="statusOptions" type="checkbox" value="not-yet-submitted">
               <label class="govuk-label govuk-checkboxes__label" for="not-yet-submitted">
               Not yet submitted
               </label>
             </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="submitted" name="status-options" type="checkbox" value="submitted">
+              <input class="govuk-checkboxes__input" id="submitted" name="statusOptions" type="checkbox" value="submitted">
               <label class="govuk-label govuk-checkboxes__label" for="submitted">
                 Submitted
               </label>
             </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="approved" name="status-options" type="checkbox" value="approved">
+              <input class="govuk-checkboxes__input" id="approved" name="statusOptions" type="checkbox" value="approved">
               <label class="govuk-label govuk-checkboxes__label" for="approved">
                 Approved
               </label>
             </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="rejected" name="status-options" type="checkbox" value="rejected">
+              <input class="govuk-checkboxes__input" id="rejected" name="statusOptions" type="checkbox" value="rejected">
               <label class="govuk-label govuk-checkboxes__label" for="rejected">
                 Rejected
               </label>
@@ -125,7 +125,7 @@
     <div class="govuk-grid-column-one-half">
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset" aria-describedby="type-hint">
-          <label class="govuk-label" for="type">
+          <label class="govuk-label" for="typeOptions">
             <strong>Type</strong>
           </label>
           <div id="type-hint" class="govuk-hint">
@@ -133,19 +133,19 @@
           </div>
           <div class="govuk-checkboxes" data-module="govuk-checkboxes">
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="100" name="type-options" type="checkbox" value="100">
+              <input class="govuk-checkboxes__input" id="100" name="typeOptions" type="checkbox" value="100">
               <label class="govuk-label govuk-checkboxes__label" for="100">
               100
               </label>
             </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="60" name="type-options" type="checkbox" value="60">
+              <input class="govuk-checkboxes__input" id="60" name="typeOptions" type="checkbox" value="60">
               <label class="govuk-label govuk-checkboxes__label" for="60">
                 60
               </label>
             </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="40" name="type-options" type="checkbox" value="40">
+              <input class="govuk-checkboxes__input" id="40" name="typeOptions" type="checkbox" value="40">
               <label class="govuk-label govuk-checkboxes__label" for="40">
                 40
               </label>
@@ -159,7 +159,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <div class="govuk-form-group">
-        <label class="govuk-label" for="dates">
+        <label class="govuk-label" for="dateType">
           <strong>Date range</strong>
         </label>
           <div id="learner-name-hint" class="govuk-hint">
@@ -167,10 +167,10 @@
           </div>
           <div style="display: flex;">
             <div class="govuk-form-group govuk-!-margin-right-4 ">
-              <label class="govuk-label" for="sort">
+              <label class="govuk-label" for="dateType">
                 Type of date
               </label>
-              <select class="govuk-select" id="sort" name="sort">
+              <select class="govuk-select" id="dateType" name="sort">
                 <option value="created">Created on</option>
                 <option value="submitted" selected>Submitted on</option>
                 <option value="approved">Approved on</option>
@@ -180,18 +180,18 @@
             <div class="govuk-date-input" id="startDates">
                   <div class="govuk-date-input__item">
                     <div class="govuk-form-group">
-                      <label class="govuk-label govuk-date-input__label" for="start-month">
+                      <label class="govuk-label govuk-date-input__label" for="startMonth">
                         Month
                       </label>
-                      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="start-month" name="start-month" type="text" inputmode="numeric">
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="startMonth" name="startMonth" type="text" inputmode="numeric">
                     </div>
                   </div>
                   <div class="govuk-date-input__item">
                     <div class="govuk-form-group">
-                      <label class="govuk-label govuk-date-input__label" for="start-year">
+                      <label class="govuk-label govuk-date-input__label" for="startYear">
                         Year
                       </label>
-                      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="start-year" name="start-year" type="text" inputmode="numeric">
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="startYear" name="startYear" type="text" inputmode="numeric">
                     </div>
                   </div>
             </div>
@@ -199,18 +199,18 @@
             <div class="govuk-date-input" id="endDates">
               <div class="govuk-date-input__item">
                 <div class="govuk-form-group">
-                  <label class="govuk-label govuk-date-input__label" for="end-month">
+                  <label class="govuk-label govuk-date-input__label" for="endMonth">
                     Month
                   </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="end-month" name="end-month" type="text" inputmode="numeric">
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="endMonth" name="endMonth" type="text" inputmode="numeric">
                 </div>
               </div>
               <div class="govuk-date-input__item">
                 <div class="govuk-form-group">
-                  <label class="govuk-label govuk-date-input__label" for="end-year">
+                  <label class="govuk-label govuk-date-input__label" for="endYear">
                     Year
                   </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="end-year" name="end-year" type="text" inputmode="numeric">
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="endYear" name="endYear" type="text" inputmode="numeric">
                 </div>
               </div>
             </div>
