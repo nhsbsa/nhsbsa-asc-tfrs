@@ -746,7 +746,6 @@ addFilter('claimsMatchAdvancedSearchA_V13', function (claims, training, learner)
 
 addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner, submitter, statuses, types, dateType, startMonth, startYear, endMonth, endYear) {
     const formattedTraining = removeSpacesAndLowerCase(training);
-    const formattedLearner = removeSpacesAndLowerCase(learner);
     const formattedSubmitter = removeSpacesAndLowerCase(submitter);
 
     if (training == null && learner == null && submitter == null && statuses == null && types == null && startMonth == null && startYear == null && endMonth == null && endYear == null) {
@@ -766,9 +765,13 @@ addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner,
             let learnerCheck = false;
             if (learner == "") { 
                 learnerCheck = true
-            } else if (claim.learner != null && formattedLearner != "") {
-                const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
-                if (formattedLearner != "" && formattedName.includes(formattedLearner)) {
+            } else if (claim.learner != null) {
+                const formattedgivenName = removeSpacesAndLowerCase(claim.learner.givenName);
+                const formattedfamilyName = removeSpacesAndLowerCase(claim.learner.familyName);
+                const formattedfullName = formattedgivenName + formattedfamilyName;
+                const formattedLearner = removeSpacesAndLowerCase(learner);
+                const formattedID = removeSpacesAndLowerCase(claim.learner.id);
+                if (formattedgivenName.includes(formattedLearner) || formattedfamilyName.includes(formattedLearner) || formattedfullName.includes(formattedLearner) || formattedID.includes(formattedLearner)) {
                     learnerCheck = true;
                 }
             }
