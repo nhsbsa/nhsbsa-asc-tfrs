@@ -34,13 +34,13 @@
               {% if (data.emptyError) %}
               <li>
                 <a href="#jobTitle">
-                  Enter a claim id
+                  Enter a claim reference number
                 </a>
               </li>
               {% elif (data.invalidIDError) %}
               <li>
                 <a href="#jobTitle">
-                  Enter a valid claim id
+                  Enter a claim reference number in the correct format like H2T-C813-3XF7-C
                 </a>
               </li>
               {% endif %}
@@ -98,11 +98,11 @@
             Find a claim
           </label>
           <div id="search-hint" class="govuk-hint moj-search__hint ">
-            Enter a valid claim reference
+            Enter a claim reference
           </div>
           {% if data.invalidIDError or data.emptyError %}
                 <p id="sortCode-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> {% if data.invalidIDError %} Enter a valid claim id like GUG-YZR9-BSUX-A{% elif data.emptyError %} Enter a claim id{% endif %}
+                    <span class="govuk-visually-hidden">Error:</span> {% if data.invalidIDError %}Enter a claim reference number in the correct format like H2T-C813-3XF7-C{% elif data.emptyError %} Enter a claim reference number{% endif %}
                 </p>
           {% endif %}
           <input class="govuk-input moj-search__input" id="searchClaimId" name="searchClaimId" type="search"
