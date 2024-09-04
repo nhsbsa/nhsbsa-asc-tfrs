@@ -749,33 +749,39 @@ addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner,
     const formattedLearner = removeSpacesAndLowerCase(learner);
     const formattedSubmitter = removeSpacesAndLowerCase(submitter);
 
-    var searched = claims.filter(claim => {
-        let trainingCheck = false;
-        if (claim.training != null) {
-            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
-            if (formattedTraining != "" &&  formattedActivity.includes(formattedTraining)) {
-                trainingCheck = true;
-            }
-        }
-        let learnerCheck = false;
-        if (claim.learner != null) {
-            const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
-            if (formattedLearner != "" && formattedName.includes(formattedLearner)) {
-                learnerCheck = true;
-            }
-        }
-        let submitterCheck = false;
-        if (claim.createdBy != null) {
-            const formattedName = removeSpacesAndLowerCase(claim.createdBy);
-            if (formattedSubmitter != "" && formattedName.includes(formattedSubmitter)) {
-                submitterCheck = true;
-            }
-        }
+    if (training == null && learner == null && submitter == null && statuses == null && types == null && startMonth == null && startYear == null && endMonth == null && endYear == null) {
+        return false
+    } else {
 
-        let check = false
-        return check
-    })
-    return searched
+        var searched = claims.filter(claim => {
+            let trainingCheck = false;
+            if (training == "") { trainingCheck = true}
+            if (claim.training != null && formattedTraining != "") {
+                const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
+                if (formattedTraining != "" &&  formattedActivity.includes(formattedTraining)) {
+                    trainingCheck = true;
+                }
+            }
+            let learnerCheck = false;
+            if (learner == "") { learnerCheck = true}
+            if (claim.learner != null && formattedLearner != "") {
+                const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
+                if (formattedLearner != "" && formattedName.includes(formattedLearner)) {
+                    learnerCheck = true;
+                }
+            }
+            let submitterCheck = false;
+            if (submitter == "") { submitterCheck = true}
+            if (claim.createdBy != null && formattedSubmitter != "") {
+                const formattedName = removeSpacesAndLowerCase(claim.createdBy);
+                if (formattedSubmitter != "" && formattedName.includes(formattedSubmitter)) {
+                    submitterCheck = true;
+                }
+            }
+            return trainingCheck && learnerCheck & submitterCheck
+        })
+        return searched
+    }
 })
 
 addFilter('filteredClaims_V13', function (claims, statuses, dates, types) {
