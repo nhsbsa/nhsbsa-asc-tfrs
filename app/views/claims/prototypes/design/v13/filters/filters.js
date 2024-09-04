@@ -798,34 +798,41 @@ addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner,
                 }
             }
             let dateCheck = false;
-            if (dateType == null && startMonth == "" && startYear == "" && endMonth == "" && endYear == "") { 
+            if (startMonth == "" && startYear == "" && endMonth == "" && endYear == "") { 
                 dateCheck = true
             } else if (claim.status != null) {
                 let dateToCheck = null
+                if (dateType == "started") {
+                    if (claim.startDate == null) {
+                        dateCheck = false
+                    } else {
+                        dateToCheck = new Date(claim.startDate);
+                    }
+                }
                 if (dateType == "created") {
                     if (claim.createdDate == null) {
-                        return dateCheck = false
+                        dateCheck = false
                     } else {
                         dateToCheck = new Date(claim.createdDate);
                     }
                 }
                 if (dateType == "submitted") {
                     if (claim.submittedDate == null) {
-                        return dateCheck = false
+                        dateCheck = false
                     } else {
                         dateToCheck = new Date(claim.submittedDate);
                     }
                 }
                 if (dateType == "approved") {
                     if (claim.approvedDate == null) {
-                        return dateCheck = false
+                        dateCheck = false
                     } else {
                         dateToCheck = new Date(claim.approvedDate);
                     }
                 }
                 if (dateType == "rejected") {
                     if (claim.rejectedDate == null) {
-                        return dateCheck = false
+                        dateCheck = false
                     } else {
                         dateToCheck = new Date(claim.rejectedDate);
                     }
@@ -913,7 +920,9 @@ addFilter('typeArray_V13', function (typeString) {
 });
 
 addFilter('formatDateType_V13', function (status) {
-    if (status === "created") {
+    if (status === "started") {
+        return "Started from"
+    } else if (status === "created") {
         return "Created from"
     } else if (status === "submitted") {
         return "Submitted from"

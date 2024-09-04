@@ -146,18 +146,22 @@ router.post('/search_result_b_V13', function (req, res) {
 
   if (training == "" && learner == "" && submitter == "" && statusArray == null && typeArray == null && startMonth == "" && startYear == "" && endMonth == "" && endYear == "") {
     return res.redirect('claims/prototypes/design/v13/claim/search-version-b?noInputsB=true');
-  } else if (isNaN(startMonth) || isNaN(startYear) || isNaN(endMonth) || isNaN(endYear)) {
-    return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
-  } else if ((startMonth < 1 || startMonth > 12) || (endMonth < 1 || endMonth > 12) || (startYear < 1 || startYear > 2024) || (endYear < 1 || endYear > 2024)) {
-    return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
-  } else if (startDate > endDate) {
-    return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=startBeforeEnd');
-  }else if (startMonth == "" || startYear == "" || endMonth == "" || endYear == "") {
-    return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
+  } 
+  if (startMonth != "" || startYear != "" || endMonth != "" || endYear != "") {
+    if (isNaN(startMonth) || isNaN(startYear) || isNaN(endMonth) || isNaN(endYear)) {
+      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
+    } else if ((startMonth < 1 || startMonth > 12) || (endMonth < 1 || endMonth > 12) || (startYear < 1 || startYear > 2024) || (endYear < 1 || endYear > 2024)) {
+      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
+    } else if (startDate > endDate) {
+      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=startBeforeEnd');
+    }else if (startMonth == "" || startYear == "" || endMonth == "" || endYear == "") {
+      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
+    } 
   } else {
     return res.redirect('claims/prototypes/design/v13/claim/search-version-b');
   }
 });
+
 
 router.post('/apply-filters_V13', function (req, res) {
   const statuses = req.session.data.filterStatus
