@@ -263,7 +263,9 @@
     </table>
   </div>
 </div>
-  {% elif (data['noInputsB'] == false or data['dateInvalid'] == false) and (resultCount == 0) %}
+  {% elif (data['noInputsB'])  or (data['dateInvalid']) %}
+
+  {% elif (resultCount == 0) %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
     <p class="govuk-body">
