@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../manage-claims-home?fundingPot=TU" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home?fundingPot=TU&noInputsB&dateInvalid" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -49,7 +49,12 @@
       <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search for claim</h2>
       <p class="govuk-body">Each search is optional, add values for the categories you wish to search by</p>
-  </div>
+      {% if data.noInputsB %}
+      <p id="input-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
+      </p>
+    {% endif %}
+    </div>
 </div>
 
 <form action="/search_result_b_V13" method="post" class="form">  
