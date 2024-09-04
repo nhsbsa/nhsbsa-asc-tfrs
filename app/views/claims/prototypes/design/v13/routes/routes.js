@@ -146,31 +146,31 @@ router.post('/search_result_b_V13', function (req, res) {
     query += "trainingNameEmpty=true&"
   }
   if (learner == "") {
-    query += "learnerEmpty=true"
+    query += "learnerEmpty=true&"
   }
   if (submitter == "") {
     query += "submitterEmpty=true&"
   }
-  if (statusArray == "") {
-    query += "statusArrayEmpty=true"
+  if (statusArray == null) {
+    query += "statusArrayEmpty=true&"
   }
-  if (typeArray == "") {
-    query += "typeArrayEmpty=true"
+  if (typeArray == null) {
+    query += "typeArrayEmpty=true&"
   }
   if (startMonth == "") {
-    query += "startMonthEmpty=true"
+    query += "startMonthEmpty=true&"
   }
   if (startYear == "") {
-    query += "startYearEmpty=true"
+    query += "startYearEmpty=true&"
   }
   if (endMonth == "") {
-    query += "endMonthEmpty=true"
+    query += "endMonthEmpty=true&"
   }
   if (endYear == "") {
-    query += "endYearEmpty=true"
+    query += "endYearEmpty=true&"
   }
   if (training == "" && learner == "" && submitter == "" && statusArray == null && typeArray == null && startMonth == "" && startYear == "" && endMonth == "" && endYear == "") {
-    res.redirect('claims/prototypes/design/v13/claim/search-version-b' + query + "&noInputs=true");
+    res.redirect('claims/prototypes/design/v13/claim/search-version-b' + query + "noInputs=true");
   } else {
     res.redirect('claims/prototypes/design/v13/claim/search-results');
   }

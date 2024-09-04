@@ -45,24 +45,34 @@
 
   <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
-        <div class="govuk-form-group">
+        <div class="govuk-form-group {% if data.trainingNameEmpty %}govuk-form-group--error{% endif %}">
           <label class="govuk-label" for="training">
             <strong>Course or qualification name</strong>
           </label>
           <div id="course-name-hint" class="govuk-hint">
             Enter keyword
           </div>
+          {% if data.trainingNameEmpty %}
+            <p id="sortCode-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
+            </p>
+          {% endif %}
           <input class="govuk-input govuk-input--width-20" id="training" name="training" type="text">
         </div>
       </div>
       <div class="govuk-grid-column-one-half">
-        <div class="govuk-form-group">
+        <div class="govuk-form-group {% if data.learnerEmpty %}govuk-form-group--error{% endif %}">
           <label class="govuk-label" for="learner">
             <strong>Learner</strong>
           </label>
           <div id="learner-name-hint" class="govuk-hint">
             Enter name or National Insurance number
           </div>
+          {% if data.learnerEmpty %}
+            <p id="sortCode-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
+            </p>
+          {% endif %}
           <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text">
         </div>
       </div>
@@ -70,13 +80,18 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
-      <div class="govuk-form-group">
+      <div class="govuk-form-group {% if data.submitterEmpty %}govuk-form-group--error{% endif %}">
         <label class="govuk-label" for="submitter">
           <strong>Submitter name</strong>
         </label>
         <div id="course-name-hint" class="govuk-hint">
           Enter name
         </div>
+        {% if data.submitterEmpty %}
+            <p id="sortCode-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
+            </p>
+          {% endif %}
         <input class="govuk-input govuk-input--width-20" id="submitter" name="submitter" type="text">
       </div>
     </div>
@@ -85,7 +100,7 @@
   </div>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
-      <div class="govuk-form-group">
+      <div class="govuk-form-group {% if data.statusArrayEmpty %}govuk-form-group--error{% endif %}">
         <fieldset class="govuk-fieldset" aria-describedby="status-hint">
           <label class="govuk-label" for="statusOptions">
             <strong>Status</strong>
@@ -93,6 +108,11 @@
           <div id="status-hint" class="govuk-hint">
             Select all that apply.
           </div>
+          {% if data.statusArrayEmpty %}
+            <p id="sortCode-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
+            </p>
+          {% endif %}
           <div class="govuk-checkboxes" data-module="govuk-checkboxes">
             <div class="govuk-checkboxes__item">
               <input class="govuk-checkboxes__input" id="not-yet-submitted" name="statusOptions" type="checkbox" value="not-yet-submitted">
@@ -123,7 +143,7 @@
       </div>
     </div>
     <div class="govuk-grid-column-one-half">
-      <div class="govuk-form-group">
+      <div class="govuk-form-group {% if data.typeArrayEmpty %}govuk-form-group--error{% endif %}">
         <fieldset class="govuk-fieldset" aria-describedby="type-hint">
           <label class="govuk-label" for="typeOptions">
             <strong>Type</strong>
@@ -131,6 +151,11 @@
           <div id="type-hint" class="govuk-hint">
             Select all that apply.
           </div>
+          {% if data.typeArrayEmpty %}
+            <p id="sortCode-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
+            </p>
+          {% endif %}
           <div class="govuk-checkboxes" data-module="govuk-checkboxes">
             <div class="govuk-checkboxes__item">
               <input class="govuk-checkboxes__input" id="100" name="typeOptions" type="checkbox" value="100">
