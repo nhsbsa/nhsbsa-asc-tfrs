@@ -68,7 +68,7 @@
           <div id="course-name-hint" class="govuk-hint">
             Enter keyword
           </div>
-          <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text">
+          <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text" value="{{ data.trainingName | default ('') }}">
         </div>
       </div>
       <div class="govuk-grid-column-one-half">
@@ -79,7 +79,7 @@
           <div id="learner-name-hint" class="govuk-hint">
             Enter name or National Insurance number
           </div>
-          <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text">
+          <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text" value="{{ data.learner | default ('') }}">
         </div>
       </div>
   </div>
@@ -93,7 +93,7 @@
         <div id="course-name-hint" class="govuk-hint">
           Enter name
         </div>
-        <input class="govuk-input govuk-input--width-20" id="submitter" name="submitter" type="text">
+        <input class="govuk-input govuk-input--width-20" id="submitter" name="submitter" type="text" value="{{ data.submitter | default ('') }}">
       </div>
     </div>
     <div class="govuk-grid-column-one-half">

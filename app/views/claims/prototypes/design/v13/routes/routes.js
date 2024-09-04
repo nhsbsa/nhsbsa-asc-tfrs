@@ -129,6 +129,7 @@ router.post('/search_result_a_V13', function (req, res) {
 
 router.post('/search_result_b_V13', function (req, res) {
   delete req.session.data['noInputsB'];
+  delete req.session.data['dateInvalid'];
 
   const training = req.session.data.trainingName
   const learner = req.session.data.learner
@@ -315,10 +316,16 @@ function newTUClaim(req, input, type) {
   delete req.session.data['selectedClaimsConfirmed'];
   delete req.session.data['activityType'];
   delete req.session.data['submitError'];
+  delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['notFound'];
   return claim.claimID
 }
 
 router.get('/new-claim-v13', function (req, res) {
+  delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['notFound'];
   res.redirect('claims/prototypes/design/v13/claim/select-training')
 });
 
