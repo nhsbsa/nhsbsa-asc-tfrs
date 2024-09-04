@@ -157,8 +157,10 @@ router.post('/search_result_b_V13', function (req, res) {
       return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
     } else if (startDate > endDate) {
       return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=startBeforeEnd');
-    }else if (startMonth == "" || startYear == "" || endMonth == "" || endYear == "") {
+    } else if (startMonth == "" || startYear == "" || endMonth == "" || endYear == "") {
       return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
+    } else {
+      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?fromSearch=true#searchResults');
     }
   } else {
     return res.redirect('claims/prototypes/design/v13/claim/search-version-b?fromSearch=true#searchResults');
