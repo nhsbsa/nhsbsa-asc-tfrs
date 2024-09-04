@@ -1,6 +1,6 @@
 module.exports = {
     "versionHistory": {
-        "claimsCurrent": "v12",
+        "claimsCurrent": "v13",
         "claimVersions": [
             {
                 "versionNo": "13",
@@ -313,8 +313,22 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v4",
+        "processingCurrent": "v5",
         "processingVersions": [
+            {
+                "versionNo": "5",
+                "status": ["dev", "UR", "design"],
+                "tested": "",
+                "created": [
+                    "Add processor notes back into prototype."
+                ],
+                "aims": [
+                    "TBC"
+                ],
+                "learnt": [
+                    "TBC"
+                ]
+            },
             {
                 "versionNo": "4",
                 "status": ["dev", "UR", "design"],
@@ -323,7 +337,7 @@ module.exports = {
                     "due to decision to remove CPD from the service"
                 ],
                 "aims": [
-                    "TBC"
+                    "to act as MVP"
                 ],
                 "learnt": [
                     "TBC"
