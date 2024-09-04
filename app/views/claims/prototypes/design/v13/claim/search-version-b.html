@@ -22,7 +22,7 @@
           <ul class="govuk-list govuk-error-summary__list">
             <li>
               <a href="#jobTitle">
-                Need some value to search against? or will give a list of everything?
+                Need at least one value to search against
               </a>
             </li>
           </ul>
@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<form action="../advanced-search" method="post" class="form">
+<form action="/search_result_b_V13" method="post" class="form">  
 
   <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
@@ -71,13 +71,13 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
       <div class="govuk-form-group">
-        <label class="govuk-label" for="training">
+        <label class="govuk-label" for="submitter">
           <strong>Submitter name</strong>
         </label>
         <div id="course-name-hint" class="govuk-hint">
           Enter name
         </div>
-        <input class="govuk-input govuk-input--width-20" id="training" name="training" type="text">
+        <input class="govuk-input govuk-input--width-20" id="submitter" name="submitter" type="text">
       </div>
     </div>
     <div class="govuk-grid-column-one-half">
@@ -90,7 +90,7 @@
           <label class="govuk-label" for="status">
             <strong>Status</strong>
           </label>
-          <div id="wastatusste-hint" class="govuk-hint">
+          <div id="status-hint" class="govuk-hint">
             Select all that apply.
           </div>
           <div class="govuk-checkboxes" data-module="govuk-checkboxes">
@@ -159,7 +159,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <div class="govuk-form-group">
-        <label class="govuk-label" for="type">
+        <label class="govuk-label" for="dates">
           <strong>Date range</strong>
         </label>
           <div id="learner-name-hint" class="govuk-hint">
@@ -171,46 +171,46 @@
                 Type of date
               </label>
               <select class="govuk-select" id="sort" name="sort">
-                <option value="published">Created on</option>
-                <option value="updated" selected>Submitted on</option>
-                <option value="views">Approved on</option>
-                <option value="comments">Rejected on</option>
+                <option value="created">Created on</option>
+                <option value="submitted" selected>Submitted on</option>
+                <option value="approved">Approved on</option>
+                <option value="rejected">Rejected on</option>
               </select>
             </div>
-            <div class="govuk-date-input" id="passport-issued">
+            <div class="govuk-date-input" id="startDates">
                   <div class="govuk-date-input__item">
                     <div class="govuk-form-group">
-                      <label class="govuk-label govuk-date-input__label" for="passport-issued-month">
+                      <label class="govuk-label govuk-date-input__label" for="start-month">
                         Month
                       </label>
-                      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-month" name="passport-issued-month" type="text" inputmode="numeric">
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="start-month" name="start-month" type="text" inputmode="numeric">
                     </div>
                   </div>
                   <div class="govuk-date-input__item">
                     <div class="govuk-form-group">
-                      <label class="govuk-label govuk-date-input__label" for="passport-issued-year">
+                      <label class="govuk-label govuk-date-input__label" for="start-year">
                         Year
                       </label>
-                      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="passport-issued-year" name="passport-issued-year" type="text" inputmode="numeric">
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="start-year" name="start-year" type="text" inputmode="numeric">
                     </div>
                   </div>
             </div>
             <p class="govuk-body govuk-!-margin-right-4 govuk-!-padding-top-7">to</p>
-            <div class="govuk-date-input" id="passport-issued">
+            <div class="govuk-date-input" id="endDates">
               <div class="govuk-date-input__item">
                 <div class="govuk-form-group">
-                  <label class="govuk-label govuk-date-input__label" for="passport-issued-month">
+                  <label class="govuk-label govuk-date-input__label" for="end-month">
                     Month
                   </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="passport-issued-month" name="passport-issued-month" type="text" inputmode="numeric">
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="end-month" name="end-month" type="text" inputmode="numeric">
                 </div>
               </div>
               <div class="govuk-date-input__item">
                 <div class="govuk-form-group">
-                  <label class="govuk-label govuk-date-input__label" for="passport-issued-year">
+                  <label class="govuk-label govuk-date-input__label" for="end-year">
                     Year
                   </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="passport-issued-year" name="passport-issued-year" type="text" inputmode="numeric">
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="end-year" name="end-year" type="text" inputmode="numeric">
                 </div>
               </div>
             </div>

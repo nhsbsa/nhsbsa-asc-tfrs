@@ -115,7 +115,6 @@ router.post('/search_id_result_V13', function (req, res) {
 router.post('/search_result_a_V13', function (req, res) {
   const training = req.session.data.trainingName
   const learner = req.session.data.learner
-
   let query = "?"
   if (training == "") {
     query += "trainingNameEmpty=true&"
@@ -124,6 +123,44 @@ router.post('/search_result_a_V13', function (req, res) {
     query += "learnerEmpty=true"
   }
   if (training == "" && learner == "") {
+    res.redirect('claims/prototypes/design/v13/claim/search-version-a' + query);
+  } else {
+    res.redirect('claims/prototypes/design/v13/claim/search-results');
+  }
+});
+
+router.post('/search_result_b_V13', function (req, res) {
+  const training = req.session.data.trainingName
+  const learner = req.session.data.learner
+  const submitter = req.session.data.submitter
+  const statusArray = req.session.data.status
+  const typeArray = req.session.data.type
+  const startDate = req.session.data.startDates
+  const endDate = req.session.data.endDates
+
+  let query = "?"
+  if (training == "") {
+    query += "trainingNameEmpty=true&"
+  }
+  if (learner == "") {
+    query += "learnerEmpty=true"
+  }
+  if (submitter == "") {
+    query += "submitterEmpty=true&"
+  }
+  if (statusArray == "") {
+    query += "statusArrayEmpty=true"
+  }
+  if (typeArray == "") {
+    query += "typeArrayEmpty=true"
+  }
+  if (startDate == "") {
+    query += "startDateEmpty=true"
+  }
+  if (endDate == "") {
+    query += "endDateEmpty=true"
+  }
+  if (training == "" && learner == "" && submitter == "" && statusArray == "" && typeArray == "" && startDate == "" && endDate == "") {
     res.redirect('claims/prototypes/design/v13/claim/search-version-a' + query);
   } else {
     res.redirect('claims/prototypes/design/v13/claim/search-results');
