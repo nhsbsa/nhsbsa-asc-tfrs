@@ -115,6 +115,8 @@ router.post('/search_id_result_V13', function (req, res) {
 router.post('/search_result_a_V13', function (req, res) {
   delete req.session.data['trainingNameEmpty'];
   delete req.session.data['learnerEmpty'];
+  delete req.session.data['notFound'];
+  delete req.session.data['invalidIDError'];
 
   const training = req.session.data.trainingName
   const learner = req.session.data.learner
