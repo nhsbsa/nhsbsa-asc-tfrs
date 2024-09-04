@@ -20,9 +20,47 @@
 {% endblock %}
 
 {% block content %}
+
+{% if data.emptyError or data.invalidIDError or data.notFound %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {% if (data.emptyError) %}
+              <li>
+                <a href="#searchClaimId">
+                  Enter a claim reference number
+                </a>
+              </li>
+              {% elif (data.invalidIDError) %}
+              <li>
+                <a href="#searchClaimId">
+                  Enter a claim reference number in the correct format like H2T-C813-3XF7-C
+                </a>
+              </li>
+              {% elif (data.notFound) %}
+              <li>
+                <a href="#searchClaimId">
+                  No match returned for your search: "{{data.searchId}}"
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-
         <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title"
           data-module="govuk-notification-banner">
           <div class="govuk-notification-banner__header">
@@ -57,41 +95,38 @@
   </div>
 </div>
 
-<div class="govuk-grid-row govuk-!-margin-bottom-5">
+<div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <div class="moj-search">
-
-      <form action="/search-results_V13" method="post">
-
-        <div class="govuk-form-group">
+    <div class="moj-search  govuk-!-margin-bottom-7">
+      <form action="/search_id_result_V13" method="post">
+        <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">
           <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
             Find a claim
           </label>
-
           <div id="search-hint" class="govuk-hint moj-search__hint ">
-
-            You can search by claim reference, training or learner
-
+            Enter a claim reference
           </div>
-
-          <input class="govuk-input moj-search__input " id="search" name="search" type="search"
+          {% if data.invalidIDError or data.emptyError %}
+                <p id="sortCode-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> {% if data.invalidIDError %}Enter a claim reference number in the correct format like H2T-C813-3XF7-C{% elif data.emptyError %} Enter a claim reference number{% endif %}
+                </p>
+          {% endif %}
+          noClaimMatch
+          {% if data.notFound%}
+                <p id="sortCode-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>No match returned for your search: "{{data.searchId}}" 
+                </p>
+          {% endif %}
+          <input class="govuk-input moj-search__input" id="searchClaimId" name="searchClaimId" type="search"
             aria-describedby="search-hint">
-
         </div>
-
         <button type="submit" class="govuk-button moj-search__button govuk-button--secondary"
           data-module="govuk-button">
           Search
         </button>
-
-
+        <p><a class="govuk-link govuk-link--no-visited-state govuk-!-margin-left-5" href="claim/search-version-{{data.searchType}}?trainingName&learner&submitter&statusOptions&typeOptions">Advanced search</a></p>
       </form>
     </div>
-  </div>
-</div>
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
     <ul class="homepage-services-and-info__list">
         {% for status in data.statuses %}
         {% set noClaims = status.id | claimCount_V13(data.claims, data.fundingPot) %}

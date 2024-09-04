@@ -30,6 +30,18 @@
                             <option value="submitter">Submitter</option>
                         </select>
                       </div>
+                      <div class="govuk-form-group">
+                        <label class="govuk-label" for="search-type">
+                          Choose type of feature version
+                        </label>
+                        <div id="search-type-hint" class="govuk-hint">
+                          This will change the version of prototype to test features
+                        </div>
+                        <select class="govuk-select" id="searchType" name="searchType" aria-describedby="search-type-hint">
+                            <option value="a" selected>Version A</option>
+                            <option value="b">Version B</option>
+                        </select>
+                      </div>
                 <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="./load-data">
                     Start full prototype
                 </button>

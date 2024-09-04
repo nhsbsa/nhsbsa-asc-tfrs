@@ -60,15 +60,15 @@ function removeSpacesAndLowerCase(input) {
 
     let inputString = String(input);
     // Remove spaces using regular expression
-
+    
     let stringWithoutSpaces = inputString.replace(/\s/g, '');
-
+    
     // Convert the string to lowercase
     let lowercaseString = stringWithoutSpaces.toLowerCase();
-
+    
     return lowercaseString;
 }
-
+    
 function compareNINumbers(ni_1, learners) {
     let result = {}
     result.check = false
