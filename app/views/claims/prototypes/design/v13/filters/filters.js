@@ -798,20 +798,47 @@ addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner,
                 }
             }
             let dateCheck = false;
-            if (types == null) { 
-                let one = dateType
-                let two = startMonth
-                let three = startYear
-                let four = endMonth
-                let five = endYear
+            if (dateType == null && startMonth == "" && startYear == "" && endMonth == "" && endYear == "") { 
                 dateCheck = true
             } else if (claim.status != null) {
-                if (types.includes(claim.claimType)) {
+                let dateToCheck = null
+                if (dateType == "created") {
+                    if (claim.createdDate == null) {
+                        return dateCheck = false
+                    } else {
+                        dateToCheck = new Date(claim.createdDate);
+                    }
+                }
+                if (dateType == "submitted") {
+                    if (claim.submittedDate == null) {
+                        return dateCheck = false
+                    } else {
+                        dateToCheck = new Date(claim.submittedDate);
+                    }
+                }
+                if (dateType == "approved") {
+                    if (claim.approvedDate == null) {
+                        return dateCheck = false
+                    } else {
+                        dateToCheck = new Date(claim.approvedDate);
+                    }
+                }
+                if (dateType == "rejected") {
+                    if (claim.rejectedDate == null) {
+                        return dateCheck = false
+                    } else {
+                        dateToCheck = new Date(claim.rejectedDate);
+                    }
+                }
+                const startDate = new Date(startYear, startMonth - 1, 1);
+                const endDate = new Date(endYear, endMonth, 0);
+
+                if (dateToCheck >= startDate && dateToCheck <= endDate) {
                     dateCheck = true;
                 }
             }
 
-            return trainingCheck && learnerCheck & submitterCheck & statusCheck & typeCheck
+            return trainingCheck && learnerCheck & submitterCheck & statusCheck & typeCheck & dateCheck
         })
         return searched
     }

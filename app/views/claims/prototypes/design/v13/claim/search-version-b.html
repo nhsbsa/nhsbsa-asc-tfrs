@@ -36,10 +36,16 @@
                 Need at least one value to search against
               </a>
             </li>
-            {% elif (data.dateInvalid) %}
+            {% elif (data.dateInvalid == "notValidDates") %}
             <li>
               <a href="#dateType">
                 Need to enter two full valid dates
+              </a>
+            </li>
+            {% elif (data.dateInvalid == "startBeforeEnd") %}
+            <li>
+              <a href="#dateType">
+                Start date must be before end
               </a>
             </li>
             {% endif %}
@@ -164,9 +170,14 @@
           <div id="learner-name-hint" class="govuk-hint">
             Select what type of dates you want to search and the dates you wish to search between. For example, 3 2007
           </div>
-          {% if data.dateInvalid %}
+          {% if data.dateInvalid == "notValidDates" %}
             <p id="sortCode-error" class="govuk-error-message">
                 <span class="govuk-visually-hidden">Error:</span> Need to enter two full valid dates
+            </p>
+          {% endif %}
+          {% if data.dateInvalid == "startBeforeEnd"%}
+            <p id="sortCode-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Start date must be before end
             </p>
           {% endif %}
           <div style="display: flex;">
