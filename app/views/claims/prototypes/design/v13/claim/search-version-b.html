@@ -183,13 +183,18 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <div class="govuk-form-group">
+      <div class="govuk-form-group {% if data.startMonthEmpty and data.startYearEmpty and data.endMonthEmpty and data.endYearEmpty %}govuk-form-group--error{% endif %}">
         <label class="govuk-label" for="dateType">
           <strong>Date range</strong>
         </label>
           <div id="learner-name-hint" class="govuk-hint">
             Select what type of dates you want to search and the dates you wish to search between. For example, 3 2007
           </div>
+          {% if data.startMonthEmpty and data.startYearEmpty and data.endMonthEmpty and data.endYearEmpty %}
+            <p id="sortCode-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
+            </p>
+          {% endif %}
           <div style="display: flex;">
             <div class="govuk-form-group govuk-!-margin-right-4 ">
               <label class="govuk-label" for="dateType">
