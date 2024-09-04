@@ -12,7 +12,7 @@
 
 <div>
   <div>
-    {% if data.noInputs %}
+    {% if data.noInputs or data.dateInvalid %}
     <div class="govuk-error-summary" data-module="govuk-error-summary">
       <div role="alert">
         <h2 class="govuk-error-summary__title">
@@ -20,11 +20,19 @@
         </h2>
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
+            {% if (data.noInputs)%}
             <li>
               <a href="#jobTitle">
                 Need at least one value to search against
               </a>
             </li>
+            {% elif (data.dateInvalid) %}
+            <li>
+              <a href="#jobTitle">
+                Need to enter two full valid dates
+              </a>
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -183,7 +191,7 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <div class="govuk-form-group {% if data.startMonthEmpty and data.startYearEmpty and data.endMonthEmpty and data.endYearEmpty %}govuk-form-group--error{% endif %}">
+      <div class="govuk-form-group {% if (data.startMonthEmpty and data.startYearEmpty and data.endMonthEmpty and data.endYearEmpty) or (data.dateInvalid) %}govuk-form-group--error{% endif %}">
         <label class="govuk-label" for="dateType">
           <strong>Date range</strong>
         </label>
@@ -195,14 +203,19 @@
                 <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
             </p>
           {% endif %}
+          {% if data.dateInvalid %}
+            <p id="sortCode-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Need to enter two full valid dates
+            </p>
+          {% endif %}
           <div style="display: flex;">
             <div class="govuk-form-group govuk-!-margin-right-4 ">
               <label class="govuk-label" for="dateType">
                 Type of date
               </label>
               <select class="govuk-select" id="dateType" name="sort">
-                <option value="created">Created on</option>
-                <option value="submitted" selected>Submitted on</option>
+                <option value="created" selected>Created on</option>
+                <option value="submitted">Submitted on</option>
                 <option value="approved">Approved on</option>
                 <option value="rejected">Rejected on</option>
               </select>

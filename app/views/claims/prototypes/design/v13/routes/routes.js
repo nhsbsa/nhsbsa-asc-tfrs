@@ -113,6 +113,9 @@ router.post('/search_id_result_V13', function (req, res) {
 });
 
 router.post('/search_result_a_V13', function (req, res) {
+  delete req.session.data['trainingNameEmpty'];
+  delete req.session.data['learnerEmpty'];
+
   const training = req.session.data.trainingName
   const learner = req.session.data.learner
   let query = "?"
@@ -130,7 +133,19 @@ router.post('/search_result_a_V13', function (req, res) {
 });
 
 router.post('/search_result_b_V13', function (req, res) {
-  const training = req.session.data.trainingName
+  delete req.session.data['trainingNameEmpty'];
+  delete req.session.data['learnerEmpty'];
+  delete req.session.data['submitterEmpty'];
+  delete req.session.data['statusArrayEmpty'];
+  delete req.session.data['typeArrayEmpty'];
+  delete req.session.data['startMonthEmpty'];
+  delete req.session.data['startYearEmpty'];
+  delete req.session.data['endMonthEmpty'];
+  delete req.session.data['endYearEmpty'];
+  delete req.session.data['dateInvalid'];
+  delete req.session.data['noInputs'];
+
+  const training = req.session.data.training
   const learner = req.session.data.learner
   const submitter = req.session.data.submitter
   const statusArray = req.session.data.statusOptions
@@ -169,10 +184,13 @@ router.post('/search_result_b_V13', function (req, res) {
   if (endYear == "") {
     query += "endYearEmpty=true&"
   }
+  if (startMonth != "" | startYear != "" | endMonth != "" | endYear != "") {
+    return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=true');
+  }
   if (training == "" && learner == "" && submitter == "" && statusArray == null && typeArray == null && startMonth == "" && startYear == "" && endMonth == "" && endYear == "") {
-    res.redirect('claims/prototypes/design/v13/claim/search-version-b' + query + "noInputs=true");
+    return res.redirect('claims/prototypes/design/v13/claim/search-version-b' + query + "noInputs=true");
   } else {
-    res.redirect('claims/prototypes/design/v13/claim/search-results');
+    return res.redirect('claims/prototypes/design/v13/claim/search-results');
   }
 });
 
