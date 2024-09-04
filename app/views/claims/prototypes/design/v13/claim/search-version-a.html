@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../manage-claims-home?fundingPot=TU&trainingNameEmpty&learnerEmpty" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home?fundingPot=TU&trainingNameEmpty&learnerEmpty&emptyError" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -24,7 +24,7 @@
           <div class="govuk-error-summary__body">
             <ul class="govuk-list govuk-error-summary__list">
               <li>
-                <a href="#training">
+                <a href="#input-error">
                   Need at least one value to search against
                 </a>
               </li>
@@ -36,53 +36,53 @@
   </div>
 {% endif %}
 
-<div class="govuk-grid-row">
+
+  <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search for claim</h2>
-      <p class="govuk-body">Each search is optional, add values for the categories you wish to search by</p>
+    </div>
   </div>
-</div>
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <form action="/search_result_a_V13" method="post" class="form">    
-      <div class="govuk-form-group {% if data.trainingNameEmpty %}govuk-form-group--error{% endif %}">
-      <label class="govuk-label" for="trainingName">
-        <strong>Course or qualification name</strong>
-      </label>
-      <div id="course-name-hint" class="govuk-hint">
-        Enter keyword
-      </div>
-      {% if data.trainingNameEmpty %}
-          <p id="sortCode-error" class="govuk-error-message">
-              <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
-          </p>
+  
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <p class="govuk-body">Each search is optional, add values for the categories you wish to search by</p>
+        {% if data.trainingNameEmpty %}
+        <p id="input-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
+        </p>
       {% endif %}
-      <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text" value="{{ data.trainingName | default ('') }}">
     </div>
+  </div>
 
-    <div class="govuk-form-group {% if data.learnerEmpty %}govuk-form-group--error{% endif %}">
-      <label class="govuk-label" for="learner">
-        <strong>Learner</strong>
-      </label>
-      <div id="learner-name-hint" class="govuk-hint">
-        Enter name or National Insurance number
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/search_result_a_V13" method="post" class="form">    
+        <div class="govuk-form-group">
+        <label class="govuk-label" for="trainingName">
+          <strong>Course or qualification name</strong>
+        </label>
+        <div id="course-name-hint" class="govuk-hint">
+          Enter keyword
+        </div>
+        <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text" value="{{ data.trainingName | default ('') }}">
       </div>
-      {% if data.learnerEmpty %}
-          <p id="sortCode-error" class="govuk-error-message">
-              <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
-          </p>
-      {% endif %}
-      <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text" value="{{ data.learner | default ('') }}">
-    </div>
 
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="learner">
+          <strong>Learner</strong>
+        </label>
+        <div id="learner-name-hint" class="govuk-hint">
+          Enter name or National Insurance number
+        </div>
+        <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text" value="{{ data.learner | default ('') }}">
+      </div>
     <button type="submit" class="govuk-button" data-module="govuk-button">
       Apply search
     </button>
-
   </form>
-    
   </div>
 </div>
 
