@@ -846,6 +846,18 @@ addFilter('typeArray_V13', function (typeString) {
     return returnedArray
 });
 
+addFilter('formatDateType_V13', function (status) {
+    if (status === "created") {
+        return "Created from"
+    } else if (status === "submitted") {
+        return "Submitted from"
+    } else if (status === "approved") {
+        return "Approved from"
+    } else if (status === "rejected") {
+        return "Rejected from"
+    }
+})
+
 addFilter('isSelected_V13', function (valueArray, status) { 
     var selected = false 
     if (valueArray != null && valueArray != "") {
