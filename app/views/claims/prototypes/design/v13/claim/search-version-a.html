@@ -1,6 +1,6 @@
 {% extends "../layouts/claims-main.html" %}
 
-{% set matchedClaims = data.claims | claimsMatchAdvancedSearchA_V13(data.training, data.learner) %}
+{% set matchedClaims = data.claims | claimsMatchAdvancedSearchA_V13(data.trainingName, data.learner) %}
 {% set resultCount = matchedClaims.length %}
 
 {% block pageTitle %}
@@ -86,9 +86,9 @@
   </div>
 </div>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-      {% if (data['training'] or data['learner']) and (resultCount != 0) %}
+{% if (data['training'] or data['learner']) and (resultCount != 0) %}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
         <h2 class="govuk-heading-m">Search results</h2>
         <p class="govuk-heading-m">{{ resultCount }} {% if resultCount == 1 %}result{% else %}results{% endif %}</p>
         <table class="govuk-table" data-module="moj-sortable-table">
@@ -118,13 +118,18 @@
             {% endfor %}
         </tbody>
     </table>
-  {% elif (data['training'] or data['learner']) and (resultCount == 0) %}
+  </div>
+</div>
+  {% elif (data['trainingName'] or data['learner']) and (resultCount == 0) %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
     <p class="govuk-body">
         No matches returned for your search.
     </p>
-  {% endif %}
   </div>
 </div>
+  {% endif %}
+
 
 
 {% endblock %}
