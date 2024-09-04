@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-    <a href="search-version-{{data.searchType}}" class="govuk-back-link">Back</a>
+    <a href="search-version-{{data.searchType}}?searchId=&trainingName=&learner=" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -32,7 +32,7 @@
             {% endif %} 
 
             {% if (data.trainingName or data.learner) %} 
-                <p class="govuk-body">For {% if data.trainingName %}course: "{{data.trainingName}}"{% endif %} and {% if data.learner %}learner: "{{data.learner}}"{% endif %}</p>
+                <p class="govuk-body">For {% if data.trainingName %}course: "{{data.trainingName}}"{% endif %}, {% if data.learner %}learner: "{{data.learner}}"{% endif %}</p>
             
                 <table class="govuk-table" data-module="moj-sortable-table">
 
