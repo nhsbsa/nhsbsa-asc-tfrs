@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../manage-claims-home?fundingPot=TU&noInputsA" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home?fundingPot=TU&noInputsA&trainingName&learner" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -46,7 +46,7 @@
   
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <p class="govuk-body">Each search is optional, add values for the categories you wish to search by</p>
+        <p class="govuk-body">You can search by either course or qualification name, or learner, or a combination of both</p>
         {% if data.noInputsA %}
         <p id="input-error" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> You need to enter something to search on
@@ -85,7 +85,7 @@
 </div>
 
 {% if (data['training'] or data['learner']) and (resultCount != 0) %}
-      <div class="govuk-grid-row">
+      <div class="govuk-grid-row" id="searchResults">
         <div class="govuk-grid-column-full">
         <h2 class="govuk-heading-m">Search results</h2>
         <p class="govuk-heading-m">{{ resultCount }} {% if resultCount == 1 %}result{% else %}results{% endif %}</p>
@@ -96,7 +96,6 @@
                   <th class="govuk-table__header" scope="col" width="3%" aria-sort="none">Type</th>
                   <th class="govuk-table__header" scope="col" width="26%" aria-sort="none">Training</th>
                   <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Learner</th>
-                  <th class="govuk-table__header" scope="col" width="11%" aria-sort="none">Start date</th>
                   <th class="govuk-table__header" scope="col" width="18%" aria-sort="descending">Status</th>
               </tr>
           </thead>
@@ -108,8 +107,6 @@
                   <td class="govuk-table__cell">{{ claim.claimType | typeTag_V13 }}</td>
                   <td class="govuk-table__cell">{{ claim.training.title }}</td>
                   <td class="govuk-table__cell">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</td>
-                  <td class="govuk-table__cell" data-sort-value="{{ claim.startDate }}">{{ claim.startDate |
-                          govukDate("truncate") }}</td>
                   <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
                               statusTag_V13(data.statuses) }}</td>
                 </tr>
