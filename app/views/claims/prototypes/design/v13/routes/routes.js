@@ -76,15 +76,123 @@ router.post('/bank-details-handler', function (req, res) {
   }
 });
 
-router.post('/search-results_V13', function (req, res) {
-  const statuses = req.session.data.filterStatus
-  const startDates = req.session.data.filterStartDate
-  const search = req.session.data.search
+router.post('/search_id_result_V13', function (req, res) {
+  delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['notFound'];
 
-  delete req.session.data.filterStatus
-  delete req.session.data.filterStartDate
+  var claimID = req.session.data.searchClaimId.replace(/\s/g, '');
 
-  res.redirect('claims/prototypes/design/v13/claim/search-results?search=' + search);
+  const emptyRegex = /\S/;
+  if (!emptyRegex.test(claimID)) {
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&emptyError=true');
+  }
+
+  const letterORegex = /o/i;
+  if (letterORegex.test(claimID)) {
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&invalidIDError=true');
+  }
+
+  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  if (!lengthRegex.test(claimID)) {
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&invalidIDError=true');
+  }
+
+  var foundClaim = null
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
+    }
+  }
+
+  if (foundClaim == null) {
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&notFound=true');
+  } else {
+    res.redirect('claims/prototypes/design/v13/claim/claim-details?id=' + claimID);
+  }
+});
+
+router.post('/search_result_a_V13', function (req, res) {
+  delete req.session.data['trainingNameEmpty'];
+  delete req.session.data['learnerEmpty'];
+  delete req.session.data['notFound'];
+  delete req.session.data['invalidIDError'];
+
+  const training = req.session.data.trainingName
+  const learner = req.session.data.learner
+  let query = "?"
+  if (training == "") {
+    query += "trainingNameEmpty=true&"
+  }
+  if (learner == "") {
+    query += "learnerEmpty=true"
+  }
+  if (training == "" && learner == "") {
+    res.redirect('claims/prototypes/design/v13/claim/search-version-a' + query);
+  } else {
+    res.redirect('claims/prototypes/design/v13/claim/search-version-a');
+  }
+});
+
+router.post('/search_result_b_V13', function (req, res) {
+  delete req.session.data['trainingNameEmpty'];
+  delete req.session.data['learnerEmpty'];
+  delete req.session.data['submitterEmpty'];
+  delete req.session.data['statusArrayEmpty'];
+  delete req.session.data['typeArrayEmpty'];
+  delete req.session.data['startMonthEmpty'];
+  delete req.session.data['startYearEmpty'];
+  delete req.session.data['endMonthEmpty'];
+  delete req.session.data['endYearEmpty'];
+  delete req.session.data['dateInvalid'];
+  delete req.session.data['noInputs'];
+
+  const training = req.session.data.trainingName
+  const learner = req.session.data.learner
+  const submitter = req.session.data.submitter
+  const statusArray = req.session.data.statusOptions
+  const typeArray = req.session.data.typeOptions
+  const startMonth = req.session.data.startMonth
+  const startYear = req.session.data.startYear
+  const endMonth = req.session.data.endMonth
+  const endYear = req.session.data.endYear
+
+  let query = "?"
+  if (training == "") {
+    query += "trainingNameEmpty=true&"
+  }
+  if (learner == "") {
+    query += "learnerEmpty=true&"
+  }
+  if (submitter == "") {
+    query += "submitterEmpty=true&"
+  }
+  if (statusArray == null) {
+    query += "statusArrayEmpty=true&"
+  }
+  if (typeArray == null) {
+    query += "typeArrayEmpty=true&"
+  }
+  if (startMonth == "") {
+    query += "startMonthEmpty=true&"
+  }
+  if (startYear == "") {
+    query += "startYearEmpty=true&"
+  }
+  if (endMonth == "") {
+    query += "endMonthEmpty=true&"
+  }
+  if (endYear == "") {
+    query += "endYearEmpty=true&"
+  }
+  if (startMonth != "" | startYear != "" | endMonth != "" | endYear != "") {
+    return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=true');
+  }
+  if (training == "" && learner == "" && submitter == "" && statusArray == null && typeArray == null && startMonth == "" && startYear == "" && endMonth == "" && endYear == "") {
+    return res.redirect('claims/prototypes/design/v13/claim/search-version-b' + query + "noInputs=true");
+  } else {
+    return res.redirect('claims/prototypes/design/v13/claim/search-version-b');
+  }
 });
 
 router.post('/apply-filters_V13', function (req, res) {
