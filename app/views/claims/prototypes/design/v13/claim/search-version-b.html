@@ -45,7 +45,7 @@
             {% elif (data.dateInvalid == "startBeforeEnd") %}
             <li>
               <a href="#dateType">
-                Start date must be before end
+                Start date must be before end date
               </a>
             </li>
             {% endif %}
@@ -177,7 +177,7 @@
           {% endif %}
           {% if data.dateInvalid == "startBeforeEnd"%}
             <p id="sortCode-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Start date must be before end
+                <span class="govuk-visually-hidden">Error:</span> Start date must be before end date
             </p>
           {% endif %}
           <div style="display: flex;">
