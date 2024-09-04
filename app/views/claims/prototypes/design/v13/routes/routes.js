@@ -141,7 +141,7 @@ router.post('/search_result_b_V13', function (req, res) {
   const endMonth = req.session.data.endMonth
   const endYear = req.session.data.endYear
 
-  if (startMonth != "" | startYear != "" | endMonth != "" | endYear != "") {
+  if (startMonth == "" || startYear == "" || endMonth == "" || endYear == "") {
     return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=true');
   }
   if (training == "" && learner == "" && submitter == "" && statusArray == null && typeArray == null && startMonth == "" && startYear == "" && endMonth == "" && endYear == "") {

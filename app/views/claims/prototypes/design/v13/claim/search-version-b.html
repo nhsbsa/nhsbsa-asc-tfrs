@@ -1,6 +1,9 @@
 {% extends "../layouts/claims-main.html" %}
-
-{% set matchedClaims = data.claims | claimsMatchAdvancedSearchB_V13(data.trainingName, data.learner, data.submitter, data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear, data.endMonth, data.endYear) %}
+{% if (data.noInputsB) or (data.dateInvalid) %} 
+  {% set matchedClaims = [] %}
+{% else %} 
+  {% set matchedClaims = data.claims | claimsMatchAdvancedSearchB_V13(data.trainingName, data.learner, data.submitter, data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear, data.endMonth, data.endYear) %}
+{% endif %}
 {% set resultCount = matchedClaims.length %}
 {% set statusArray = ["not-yet-submitted", "submitted", "approved", "rejected"] %}
 {% set typeArray = ["100", "60", "40"] %}
@@ -260,7 +263,7 @@
     </table>
   </div>
 </div>
-  {% elif (data['trainingName'] or data['learner']) and (resultCount == 0) %}
+  {% elif (data['noInputsB'] == false or data['dateInvalid'] == false) and (resultCount == 0) %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
     <p class="govuk-body">

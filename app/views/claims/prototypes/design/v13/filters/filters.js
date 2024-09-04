@@ -744,7 +744,7 @@ addFilter('claimsMatchAdvancedSearchA_V13', function (claims, training, learner)
     return searched
 })
 
-addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner, submitter, statuses, types, dataType, startMonth, startYear, endMonth, endYear) {
+addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner, submitter, statuses, types, dateType, startMonth, startYear, endMonth, endYear) {
     const formattedTraining = removeSpacesAndLowerCase(training);
     const formattedLearner = removeSpacesAndLowerCase(learner);
     const formattedSubmitter = removeSpacesAndLowerCase(submitter);
@@ -797,6 +797,20 @@ addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner,
                     typeCheck = true;
                 }
             }
+            let dateCheck = false;
+            if (types == null) { 
+                let one = dateType
+                let two = startMonth
+                let three = startYear
+                let four = endMonth
+                let five = endYear
+                dateCheck = true
+            } else if (claim.status != null) {
+                if (types.includes(claim.claimType)) {
+                    dateCheck = true;
+                }
+            }
+
             return trainingCheck && learnerCheck & submitterCheck & statusCheck & typeCheck
         })
         return searched
