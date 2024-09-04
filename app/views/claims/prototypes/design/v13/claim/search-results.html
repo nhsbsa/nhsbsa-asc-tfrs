@@ -18,7 +18,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
-        <h1 class="govuk-heading-l">Search for claim</h1>
+        <h1 class="govuk-heading-l">Search results</h1>
     </div>
 </div>
 
@@ -30,6 +30,11 @@
             {% if (data.searchId) %} 
                 <p class="govuk-body">For search id: {{data.searchId}}</p>
             {% endif %} 
+
+            {% if (resultCount == 0) %} 
+                <p>There were no results for your searched values.</p>
+            {% endif %} 
+
 
             {% if (data.trainingName or data.learner) %} 
                 <p class="govuk-body">For {% if data.trainingName %}course: "{{data.trainingName}}"{% endif %}, {% if data.learner %}learner: "{{data.learner}}"{% endif %}</p>
