@@ -77,20 +77,34 @@ router.post('/bank-details-handler', function (req, res) {
 });
 
 router.post('/search_id_result_V13', function (req, res) {
-  const id = req.session.data.searchClaimId
+  var claimID = req.session.data.searchClaimId.replace(/\s/g, '');
 
-  delete req.session.data.searchClaimId
+  const emptyRegex = /\S/;
+  if (!emptyRegex.test(claimID)) {
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&invalidIDError=true&emptyError=true');
+  }
 
-  let claim = {}
-  for (const c of req.session.data.claims) {
-    if (id == c.claimID) {
-      claim = c
+  const letterORegex = /o/i;
+  if (letterORegex.test(claimID)) {
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&invalidIDError=true');
+  }
+
+  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  if (!lengthRegex.test(claimID)) {
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&invalidIDError=true');
+  }
+
+  var foundClaim = null
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
     }
   }
-  if (claim) {
-    res.redirect('claims/prototypes/design/v13/claim/claim-details?id=' + id);
+
+  if (foundClaim == null) {
+    res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&notFound=true');
   } else {
-    res.redirect('claims/prototypes/design/v13/claim/search-results');
+    res.redirect('claims/prototypes/design/v13/claim/claim-details?id=' + claimID);
   }
 });
 
