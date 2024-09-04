@@ -28,6 +28,8 @@
 
             <p class="govuk-heading-m">{{ resultCount }} {% if resultCount == 1 %}result{% else %}results{% endif %}</p>
 
+            <p class="govuk-body">For {% if data.trainingName %}course: "{{data.trainingName}}"{% endif %} and {% if data.learner %}learner: "{{data.learner}}"{% endif %}</p>
+
             <table class="govuk-table" data-module="moj-sortable-table">
 
                     <thead class="govuk-table__head">
