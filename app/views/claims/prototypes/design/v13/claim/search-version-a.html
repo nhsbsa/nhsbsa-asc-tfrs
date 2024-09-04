@@ -8,12 +8,12 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../manage-claims-home?fundingPot=TU&trainingNameEmpty&learnerEmpty&emptyError&invalidIDError&notFound" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home?fundingPot=TU&noInputsA" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 
-{% if data.trainingNameEmpty or data.learnerEmpty %}
+{% if data.noInputsA %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-error-summary" data-module="govuk-error-summary">
@@ -47,15 +47,13 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <p class="govuk-body">Each search is optional, add values for the categories you wish to search by</p>
-        {% if data.trainingNameEmpty %}
+        {% if data.noInputsA %}
         <p id="input-error" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
         </p>
       {% endif %}
     </div>
   </div>
-
-
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
