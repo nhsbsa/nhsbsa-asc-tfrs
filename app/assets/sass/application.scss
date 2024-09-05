@@ -270,3 +270,20 @@
   position: absolute;
   bottom: 0;
 }
+
+.search__container {
+  position: relative; /* Make sure the container is positioned */
+  height: 100%; /* Define the height of the container */
+  padding-bottom: govuk-spacing(5);
+}
+
+.search__button-group {
+  margin-left: govuk-spacing(2);
+  position: relative;
+  margin-bottom: 0;
+}
+
+.search__button-group .search__button {
+  margin-bottom: 0;
+  top: -2px; // Override default gov properties due to active pixel movement
+}
