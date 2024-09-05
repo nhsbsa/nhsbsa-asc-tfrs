@@ -744,38 +744,114 @@ addFilter('claimsMatchAdvancedSearchA_V13', function (claims, training, learner)
     return searched
 })
 
-addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner, submitter, statuses, types, dataType, startMonth, startYear, endMonth, endYear) {
+addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner, submitter, statuses, types, dateType, startMonth, startYear, endMonth, endYear) {
     const formattedTraining = removeSpacesAndLowerCase(training);
-    const formattedLearner = removeSpacesAndLowerCase(learner);
     const formattedSubmitter = removeSpacesAndLowerCase(submitter);
 
-    var searched = claims.filter(claim => {
-        let trainingCheck = false;
-        if (claim.training != null) {
-            const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
-            if (formattedTraining != "" &&  formattedActivity.includes(formattedTraining)) {
-                trainingCheck = true;
-            }
-        }
-        let learnerCheck = false;
-        if (claim.learner != null) {
-            const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
-            if (formattedLearner != "" && formattedName.includes(formattedLearner)) {
-                learnerCheck = true;
-            }
-        }
-        let submitterCheck = false;
-        if (claim.createdBy != null) {
-            const formattedName = removeSpacesAndLowerCase(claim.createdBy);
-            if (formattedSubmitter != "" && formattedName.includes(formattedSubmitter)) {
-                submitterCheck = true;
-            }
-        }
+    if (training == null && learner == null && submitter == null && statuses == null && types == null && startMonth == null && startYear == null && endMonth == null && endYear == null) {
+        return false
+    } else {
 
-        let check = false
-        return check
-    })
-    return searched
+        var searched = claims.filter(claim => {
+            let trainingCheck = false;
+            if (training == "") { 
+                trainingCheck = true
+            } else if (claim.training != null && formattedTraining != "") {
+                const formattedActivity = removeSpacesAndLowerCase(claim.training.title);
+                if (formattedTraining != "" &&  formattedActivity.includes(formattedTraining)) {
+                    trainingCheck = true;
+                }
+            }
+            let learnerCheck = false;
+            if (learner == "") { 
+                learnerCheck = true
+            } else if (claim.learner != null) {
+                const formattedgivenName = removeSpacesAndLowerCase(claim.learner.givenName);
+                const formattedfamilyName = removeSpacesAndLowerCase(claim.learner.familyName);
+                const formattedfullName = formattedgivenName + formattedfamilyName;
+                const formattedLearner = removeSpacesAndLowerCase(learner);
+                const formattedID = removeSpacesAndLowerCase(claim.learner.id);
+                if (formattedgivenName.includes(formattedLearner) || formattedfamilyName.includes(formattedLearner) || formattedfullName.includes(formattedLearner) || formattedID.includes(formattedLearner)) {
+                    learnerCheck = true;
+                }
+            }
+            let submitterCheck = false;
+            if (submitter == "") { 
+                submitterCheck = true
+            } else if (claim.createdBy != null && formattedSubmitter != "") {
+                const formattedName = removeSpacesAndLowerCase(claim.createdBy);
+                if (formattedSubmitter != "" && formattedName.includes(formattedSubmitter)) {
+                    submitterCheck = true;
+                }
+            }
+            let statusCheck = false;
+            if (statuses == null) { 
+                statusCheck = true
+            } else if (claim.status != null) {
+                if (statuses.includes(claim.status)) {
+                    statusCheck = true;
+                }
+            }
+            let typeCheck = false;
+            if (types == null) { 
+                typeCheck = true
+            } else if (claim.status != null) {
+                if (types.includes(claim.claimType)) {
+                    typeCheck = true;
+                }
+            }
+            let dateCheck = false;
+            if (startMonth == "" && startYear == "" && endMonth == "" && endYear == "") { 
+                dateCheck = true
+            } else if (claim.status != null) {
+                let dateToCheck = null
+                if (dateType == "started") {
+                    if (claim.startDate == null) {
+                        dateCheck = false
+                    } else {
+                        dateToCheck = new Date(claim.startDate);
+                    }
+                }
+                if (dateType == "created") {
+                    if (claim.createdDate == null) {
+                        dateCheck = false
+                    } else {
+                        dateToCheck = new Date(claim.createdDate);
+                    }
+                }
+                if (dateType == "submitted") {
+                    if (claim.submittedDate == null) {
+                        dateCheck = false
+                    } else {
+                        dateToCheck = new Date(claim.submittedDate);
+                    }
+                }
+                if (dateType == "approved") {
+                    if (claim.approvedDate == null) {
+                        dateCheck = false
+                    } else {
+                        dateToCheck = new Date(claim.approvedDate);
+                    }
+                }
+                if (dateType == "rejected") {
+                    if (claim.rejectedDate == null) {
+                        dateCheck = false
+                    } else {
+                        dateToCheck = new Date(claim.rejectedDate);
+                    }
+                }
+                const startDate = new Date(startYear, startMonth - 1, 1);
+                const endDate = new Date(endYear, endMonth, 0);
+
+                if (dateToCheck >= startDate && dateToCheck <= endDate) {
+                    dateCheck = true;
+                }
+            }
+
+            return trainingCheck && learnerCheck & submitterCheck & statusCheck & typeCheck & dateCheck
+        })
+        return searched
+    }
 })
 
 addFilter('filteredClaims_V13', function (claims, statuses, dates, types) {
@@ -845,6 +921,20 @@ addFilter('typeArray_V13', function (typeString) {
     }
     return returnedArray
 });
+
+addFilter('formatDateType_V13', function (status) {
+    if (status === "started") {
+        return "Started from"
+    } else if (status === "created") {
+        return "Created from"
+    } else if (status === "submitted") {
+        return "Submitted from"
+    } else if (status === "approved") {
+        return "Approved from"
+    } else if (status === "rejected") {
+        return "Rejected from"
+    }
+})
 
 addFilter('isSelected_V13', function (valueArray, status) { 
     var selected = false 
