@@ -76,16 +76,102 @@ router.post('/bank-details-handler', function (req, res) {
   }
 });
 
-router.post('/search-results_V13', function (req, res) {
-  const statuses = req.session.data.filterStatus
-  const startDates = req.session.data.filterStartDate
-  const search = req.session.data.search
+router.post('/search_id_result_V13', function (req, res) {
+  delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['notFound'];
+  delete req.session.data['fromSearchId'];
+  delete req.session.data['fromSearchResults'];
+  delete req.session.data['deleteSuccess'];
 
-  delete req.session.data.filterStatus
-  delete req.session.data.filterStartDate
+  var claimID = req.session.data.searchClaimId.replace(/\s/g, '');
 
-  res.redirect('claims/prototypes/design/v13/claim/search-results?search=' + search);
+  const emptyRegex = /\S/;
+  if (!emptyRegex.test(claimID)) {
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&emptyError=true');
+  }
+
+  const letterORegex = /o/i;
+  if (letterORegex.test(claimID)) {
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&invalidIDError=true');
+  }
+
+  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  if (!lengthRegex.test(claimID)) {
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&invalidIDError=true');
+  }
+
+  var foundClaim = null
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
+    }
+  }
+
+  if (foundClaim == null) {
+    return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&notFound=true');
+  } else {
+    res.redirect('claims/prototypes/design/v13/claim/claim-details?id=' + claimID +"&fromSearchId=true");
+  }
 });
+
+router.post('/search_result_a_V13', function (req, res) {
+  delete req.session.data['noInputsA'];
+  delete req.session.data['notFound'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['emptyError'];
+  delete req.session.data['fromSearchId'];
+  delete req.session.data['fromSearchResults'];
+
+
+  const training = req.session.data.trainingName
+  const learner = req.session.data.learner
+  if (training == "" && learner == "") {
+    res.redirect('claims/prototypes/design/v13/claim/search-version-a?noInputsA=true');
+  } else {
+    res.redirect('claims/prototypes/design/v13/claim/search-version-a?fromSearchResults=true#searchResults');
+  }
+});
+
+router.post('/search_result_b_V13', function (req, res) {
+  delete req.session.data['noInputsB'];
+  delete req.session.data['dateInvalid'];
+  delete req.session.data['fromSearchId'];
+  delete req.session.data['fromSearchResults'];
+
+  const training = req.session.data.trainingName
+  const learner = req.session.data.learner
+  const submitter = req.session.data.submitter
+  const statusArray = req.session.data.statusOptions
+  const typeArray = req.session.data.typeOptions
+  const startMonth = req.session.data.startMonth
+  const startYear = req.session.data.startYear
+  const endMonth = req.session.data.endMonth
+  const endYear = req.session.data.endYear
+
+  const startDate = new Date(startYear, startMonth - 1, 1);
+  const endDate = new Date(endYear, endMonth, 0);
+
+  if (training == "" && learner == "" && submitter == "" && statusArray == null && typeArray == null && startMonth == "" && startYear == "" && endMonth == "" && endYear == "") {
+    return res.redirect('claims/prototypes/design/v13/claim/search-version-b?noInputsB=true');
+  } 
+  if (startMonth != "" || startYear != "" || endMonth != "" || endYear != "") {
+    if (isNaN(startMonth) || isNaN(startYear) || isNaN(endMonth) || isNaN(endYear)) {
+      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
+    } else if ((startMonth < 1 || startMonth > 12) || (endMonth < 1 || endMonth > 12) || (startYear < 1 || startYear > 2024) || (endYear < 1 || endYear > 2024)) {
+      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
+    } else if (startDate > endDate) {
+      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=startBeforeEnd');
+    } else if (startMonth == "" || startYear == "" || endMonth == "" || endYear == "") {
+      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
+    } else {
+      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?fromSearchResults=true#searchResults');
+    }
+  } else {
+    return res.redirect('claims/prototypes/design/v13/claim/search-version-b?fromSearchResults=true#searchResults');
+  }
+});
+
 
 router.post('/apply-filters_V13', function (req, res) {
   const statuses = req.session.data.filterStatus
@@ -252,10 +338,16 @@ function newTUClaim(req, input, type) {
   delete req.session.data['selectedClaimsConfirmed'];
   delete req.session.data['activityType'];
   delete req.session.data['submitError'];
+  delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['notFound'];
   return claim.claimID
 }
 
 router.get('/new-claim-v13', function (req, res) {
+  delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['notFound'];
   res.redirect('claims/prototypes/design/v13/claim/select-training')
 });
 
@@ -725,10 +817,18 @@ router.get('/clear-learner', function (req, res) {
 router.get('/confirm-delete-claim', function (req, res) {
   var claimID = req.session.data.id
   var claims = req.session.data.claims
+  var fromSearchId = req.session.data.fromSearchId
+  var fromSearchResults = req.session.data.fromSearchResults
+
   for (let i = 0; i < claims.length; i++) {
     if (claims[i].claimID === claimID) {
         claims.splice(i, 1);
-        res.redirect('manage-claims?fundingPot=TU&deleteSuccess=true&deletedID=' + claimID)
+        if (fromSearchId || fromSearchResults) {
+          res.redirect('manage-claims-home?&deleteSuccess=true&fromSearchId&deletedID='+ claimID)
+        } else {
+          res.redirect('manage-claims?fundingPot=TU&deleteSuccess=true&deletedID=' + claimID)
+        }
+        
     }
   }
 });
