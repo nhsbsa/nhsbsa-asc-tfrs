@@ -80,7 +80,8 @@ router.post('/search_id_result_V13', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];
   delete req.session.data['notFound'];
-  delete req.session.data['fromSearch'];
+  delete req.session.data['fromSearchId'];
+  delete req.session.data['fromSearchResults'];
 
   var claimID = req.session.data.searchClaimId.replace(/\s/g, '');
 
@@ -109,7 +110,7 @@ router.post('/search_id_result_V13', function (req, res) {
   if (foundClaim == null) {
     return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&notFound=true');
   } else {
-    res.redirect('claims/prototypes/design/v13/claim/claim-details?id=' + claimID);
+    res.redirect('claims/prototypes/design/v13/claim/claim-details?id=' + claimID +"&fromSearchId=true");
   }
 });
 
@@ -118,21 +119,24 @@ router.post('/search_result_a_V13', function (req, res) {
   delete req.session.data['notFound'];
   delete req.session.data['invalidIDError'];
   delete req.session.data['emptyError'];
-  delete req.session.data['fromSearch'];
+  delete req.session.data['fromSearchId'];
+  delete req.session.data['fromSearchResults'];
+
 
   const training = req.session.data.trainingName
   const learner = req.session.data.learner
   if (training == "" && learner == "") {
     res.redirect('claims/prototypes/design/v13/claim/search-version-a?noInputsA=true');
   } else {
-    res.redirect('claims/prototypes/design/v13/claim/search-version-a?fromSearch=true#searchResults');
+    res.redirect('claims/prototypes/design/v13/claim/search-version-a?fromSearchResults=true#searchResults');
   }
 });
 
 router.post('/search_result_b_V13', function (req, res) {
   delete req.session.data['noInputsB'];
   delete req.session.data['dateInvalid'];
-  delete req.session.data['fromSearch'];
+  delete req.session.data['fromSearchId'];
+  delete req.session.data['fromSearchResults'];
 
   const training = req.session.data.trainingName
   const learner = req.session.data.learner
@@ -160,10 +164,10 @@ router.post('/search_result_b_V13', function (req, res) {
     } else if (startMonth == "" || startYear == "" || endMonth == "" || endYear == "") {
       return res.redirect('claims/prototypes/design/v13/claim/search-version-b?dateInvalid=notValidDates');
     } else {
-      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?fromSearch=true#searchResults');
+      return res.redirect('claims/prototypes/design/v13/claim/search-version-b?fromSearchResults=true#searchResults');
     }
   } else {
-    return res.redirect('claims/prototypes/design/v13/claim/search-version-b?fromSearch=true#searchResults');
+    return res.redirect('claims/prototypes/design/v13/claim/search-version-b?fromSearchResults=true#searchResults');
   }
 });
 
