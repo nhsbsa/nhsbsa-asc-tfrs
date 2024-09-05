@@ -12,7 +12,7 @@
       </a>
   </li>
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=TU">Manage claims ({{ data.fundingPot | potName_V13
+      <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=TU&deleteSuccess">Manage claims ({{ data.fundingPot | potName_V13
           }})</a>
     </li>
   </ol>
@@ -20,6 +20,19 @@
 {% endblock %}
 
 {% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+      {% if data.deleteSuccess %}
+          <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+          <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+              <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+          </svg>
+          <div class="moj-banner__message">Claim reference {{data.deletedID}} has been successfully deleted</div>
+          </div>
+      {% endif %}
+  </div>
+</div>
 
 {% if data.emptyError or data.invalidIDError or data.notFound %}
   <div class="govuk-grid-row">
@@ -125,7 +138,7 @@
           data-module="govuk-button">
           Search
         </button>
-        <a class="govuk-link govuk-link--no-visited-state search__button" href="claim/search-version-{{data.searchType}}?emptyError&invalidIDError&notFound">Advanced search</a>
+        <a class="govuk-link govuk-link--no-visited-state search__button" href="claim/search-version-{{data.searchType}}?emptyError&invalidIDError&notFound&deleteSuccess">Advanced search</a>
         </div>
       </form>
     </div>
@@ -136,7 +149,7 @@
         <li class="chevron-card">
           <div class="chevron-card__wrapper">
               <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
-                  <a class="govuk-link chevron-card__link" data-track-label="{{ status.id }}" href="manage-claims?statusID={{ status.id }}&emptyError&invalidIDError&notFound&fromSearchId&fromSearchResults">{{ status.name }} claims ({{ noClaims }})</a>
+                  <a class="govuk-link chevron-card__link" data-track-label="{{ status.id }}" href="manage-claims?statusID={{ status.id }}&emptyError&invalidIDError&notFound&fromSearchId&fromSearchResults&deleteSuccess">{{ status.name }} claims ({{ noClaims }})</a>
               </h3>
               <p class="govuk-body chevron-card__description">{{ status.description }}</p>
           </div>
