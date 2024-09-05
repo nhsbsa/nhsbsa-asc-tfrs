@@ -82,6 +82,7 @@ router.post('/search_id_result_V13', function (req, res) {
   delete req.session.data['notFound'];
   delete req.session.data['fromSearchId'];
   delete req.session.data['fromSearchResults'];
+  delete req.session.data['deleteSuccess'];
 
   var claimID = req.session.data.searchClaimId.replace(/\s/g, '');
 
@@ -816,10 +817,18 @@ router.get('/clear-learner', function (req, res) {
 router.get('/confirm-delete-claim', function (req, res) {
   var claimID = req.session.data.id
   var claims = req.session.data.claims
+  var fromSearchId = req.session.data.fromSearchId
+  var fromSearchResults = req.session.data.fromSearchResults
+
   for (let i = 0; i < claims.length; i++) {
     if (claims[i].claimID === claimID) {
         claims.splice(i, 1);
-        res.redirect('manage-claims?fundingPot=TU&deleteSuccess=true&deletedID=' + claimID)
+        if (fromSearchId || fromSearchResults) {
+          res.redirect('manage-claims-home?&deleteSuccess=true&fromSearchId&deletedID='+ claimID)
+        } else {
+          res.redirect('manage-claims?fundingPot=TU&deleteSuccess=true&deletedID=' + claimID)
+        }
+        
     }
   }
 });
