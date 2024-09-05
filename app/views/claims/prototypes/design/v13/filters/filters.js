@@ -726,9 +726,15 @@ addFilter('claimsMatchAdvancedSearchA_V13', function (claims, training, learner)
             }
         }
         let learnerCheck = false;
-        if (claim.learner != null) {
-            const formattedName = removeSpacesAndLowerCase(claim.learner.givenName + claim.learner.familyName);
-            if (formattedLearner != "" && formattedName.includes(formattedLearner)) {
+        if (learner == "") { 
+                learnerCheck = true
+        } else if (claim.learner != null) {
+            const formattedgivenName = removeSpacesAndLowerCase(claim.learner.givenName);
+            const formattedfamilyName = removeSpacesAndLowerCase(claim.learner.familyName);
+            const formattedfullName = formattedgivenName + formattedfamilyName;
+            const formattedLearner = removeSpacesAndLowerCase(learner);
+            const formattedID = removeSpacesAndLowerCase(claim.learner.id);
+            if (formattedgivenName.includes(formattedLearner) || formattedfamilyName.includes(formattedLearner) || formattedfullName.includes(formattedLearner) || formattedID.includes(formattedLearner)) {
                 learnerCheck = true;
             }
         }
