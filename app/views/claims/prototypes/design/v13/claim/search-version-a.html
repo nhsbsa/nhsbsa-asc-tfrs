@@ -1,16 +1,19 @@
 {% extends "../layouts/claims-main.html" %}
 
+{% set matchedClaims = data.claims | claimsMatchAdvancedSearchA_V13(data.trainingName, data.learner) %}
+{% set resultCount = matchedClaims.length %}
+
 {% block pageTitle %}
 {{ ["Search results - ", (data.fundingPot | potName_V13)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../manage-claims-home?fundingPot=TU&trainingNameEmpty&learnerEmpty" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home?fundingPot=TU&noInputsA&trainingName&learner" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 
-{% if data.trainingNameEmpty or data.learnerEmpty %}
+{% if data.noInputsA %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-error-summary" data-module="govuk-error-summary">
@@ -21,8 +24,8 @@
           <div class="govuk-error-summary__body">
             <ul class="govuk-list govuk-error-summary__list">
               <li>
-                <a href="#training">
-                  Need at least one value to search against
+                <a href="#input-error">
+                  You need to enter something to search on
                 </a>
               </li>
             </ul>
@@ -33,54 +36,102 @@
   </div>
 {% endif %}
 
-<div class="govuk-grid-row">
+
+  <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
-      <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search for claim</h2>
-      <p class="govuk-body">Each search is optional, add values for the categories you wish to search by</p>
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search</h2>
+    </div>
   </div>
-</div>
-
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
-    <form action="/search_result_a_V13" method="post" class="form">    
-      <div class="govuk-form-group {% if data.trainingNameEmpty %}govuk-form-group--error{% endif %}">
-      <label class="govuk-label" for="training">
-        <strong>Course or qualification name</strong>
-      </label>
-      <div id="course-name-hint" class="govuk-hint">
-        Enter keyword
-      </div>
-      {% if data.trainingNameEmpty %}
-          <p id="sortCode-error" class="govuk-error-message">
-              <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
-          </p>
+  
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <p class="govuk-body">You can search by either course or qualification name, or learner, or a combination of both</p>
+        {% if data.noInputsA %}
+        <p id="input-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span> You need to enter something to search on
+        </p>
       {% endif %}
-      <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text">
     </div>
+  </div>
 
-    <div class="govuk-form-group {% if data.learnerEmpty %}govuk-form-group--error{% endif %}">
-      <label class="govuk-label" for="learner">
-        <strong>Learner</strong>
-      </label>
-      <div id="learner-name-hint" class="govuk-hint">
-        Enter name or National Insurance number
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form action="/search_result_a_V13" method="post" class="form">    
+        <div class="govuk-form-group">
+        <label class="govuk-label" for="trainingName">
+          <strong>Course or qualification name</strong>
+        </label>
+        <div id="course-name-hint" class="govuk-hint">
+          Enter all or part of the name
+        </div>
+        <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text" value="{{ data.trainingName | default ('') }}">
       </div>
-      {% if data.learnerEmpty %}
-          <p id="sortCode-error" class="govuk-error-message">
-              <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
-          </p>
-      {% endif %}
-      <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text">
-    </div>
 
+      <div class="govuk-form-group ">
+        <label class="govuk-label" for="learner">
+          <strong>Learner</strong>
+        </label>
+        <div id="learner-name-hint" class="govuk-hint">
+          Enter all or part of the name, or the whole National Insurance number
+        </div>
+        <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text" value="{{ data.learner | default ('') }}">
+      </div>
     <button type="submit" class="govuk-button" data-module="govuk-button">
-      Apply search
+      Search
     </button>
-
   </form>
-    
   </div>
 </div>
+
+{% if (data['trainingName'] or data['learner']) and (resultCount != 0) %}
+      <div class="govuk-grid-row" id="searchResults">
+        <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m">Search results</h2>
+        <p class="govuk-heading-m">{{ resultCount }} {% if resultCount == 1 %}result{% else %}results{% endif %}</p>
+        <table class="govuk-table" data-module="moj-sortable-table">
+          <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                  <th class="govuk-table__header" scope="col" width="20%" aria-sort="none">Claim reference</th>
+                  <th class="govuk-table__header" scope="col" width="3%" aria-sort="none">Type</th>
+                  <th class="govuk-table__header" scope="col" width="26%" aria-sort="none">Training</th>
+                  <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Learner</th>
+                  <th class="govuk-table__header" scope="col" width="18%" aria-sort="descending">Status</th>
+              </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+              {% for claim in matchedClaims %}
+              <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
+                  <td class="govuk-table__header" scope="row"><a class="govuk-link"
+                          href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
+                  <td class="govuk-table__cell">{{ claim.claimType | typeTag_V13 }}</td>
+                  <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                  <td class="govuk-table__cell">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</td>
+                  <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
+                              statusTag_V13(data.statuses) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+</div>
+  {% elif (data['trainingName'] or data['learner']) and (resultCount == 0) %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+    <p class="govuk-body">
+        No matches returned for your search.
+    </p>
+    <p class="govuk-body">
+      Improve your search results by:
+    </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>double-checking your spelling</li>
+      <li>searching for something less specific</li>
+    </ul>
+  </div>
+</div>
+  {% endif %}
+
+
 
 {% endblock %}

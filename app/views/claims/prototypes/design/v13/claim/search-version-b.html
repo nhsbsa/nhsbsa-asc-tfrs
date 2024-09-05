@@ -1,18 +1,28 @@
 {% extends "../layouts/claims-main.html" %}
+{% if (data.noInputsB) or (data.dateInvalid) %} 
+  {% set matchedClaims = [] %}
+{% else %} 
+  {% set matchedClaims = data.claims | claimsMatchAdvancedSearchB_V13(data.trainingName, data.learner, data.submitter, data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear, data.endMonth, data.endYear) %}
+{% endif %}
+{% set resultCount = matchedClaims.length %}
+{% set statusArray = ["not-yet-submitted", "submitted", "approved", "rejected"] %}
+{% set typeArray = ["100", "60", "40"] %}
+{% set dateArray = ["started", "created", "submitted", "approved", "rejected"] %}
+
 
 {% block pageTitle %}
 {{ ["Search results - ", (data.fundingPot | potName_V13)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../manage-claims-home?fundingPot=TU" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home?fundingPot=TU&noInputsB&dateInvalid&trainingName&learner&submitter&statusOptions&typeOptions&sort&startMonth&startYear&endMonth&endYear" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 
 <div>
   <div>
-    {% if data.noInputs or data.dateInvalid %}
+    {% if data.noInputsB or data.dateInvalid %}
     <div class="govuk-error-summary" data-module="govuk-error-summary">
       <div role="alert">
         <h2 class="govuk-error-summary__title">
@@ -20,16 +30,22 @@
         </h2>
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
-            {% if (data.noInputs)%}
+            {% if (data.noInputsB)%}
             <li>
               <a href="#training">
-                Need at least one value to search against
+                You need to enter something to search on
               </a>
             </li>
-            {% elif (data.dateInvalid) %}
+            {% elif (data.dateInvalid == "notValidDates") %}
             <li>
               <a href="#dateType">
-                Need to enter two full valid dates
+                Enter 2 valid dates
+              </a>
+            </li>
+            {% elif (data.dateInvalid == "startBeforeEnd") %}
+            <li>
+              <a href="#dateType">
+                Start date must be before end date
               </a>
             </li>
             {% endif %}
@@ -44,63 +60,52 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
-      <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search for claim</h2>
-      <p class="govuk-body">Each search is optional, add values for the categories you wish to search by</p>
-  </div>
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search</h2>
+      <p class="govuk-body">You can search by a combination of any of the fields below</p>
+      {% if data.noInputsB %}
+      <p id="input-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> You need to enter something to search on
+      </p>
+    {% endif %}
+    </div>
 </div>
 
 <form action="/search_result_b_V13" method="post" class="form">  
-
   <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
-        <div class="govuk-form-group {% if data.trainingNameEmpty %}govuk-form-group--error{% endif %}">
-          <label class="govuk-label" for="training">
+        <div class="govuk-form-group">
+          <label class="govuk-label" for="trainingName">
             <strong>Course or qualification name</strong>
           </label>
           <div id="course-name-hint" class="govuk-hint">
-            Enter keyword
+            Enter all or part of the name
           </div>
-          {% if data.trainingNameEmpty %}
-            <p id="sortCode-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
-            </p>
-          {% endif %}
-          <input class="govuk-input govuk-input--width-20" id="training" name="training" type="text">
+          <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text" value="{{ data.trainingName | default ('') }}">
         </div>
       </div>
       <div class="govuk-grid-column-one-half">
-        <div class="govuk-form-group {% if data.learnerEmpty %}govuk-form-group--error{% endif %}">
+        <div class="govuk-form-group">
           <label class="govuk-label" for="learner">
             <strong>Learner</strong>
           </label>
           <div id="learner-name-hint" class="govuk-hint">
-            Enter name or National Insurance number
+            Enter all or part of the name, or the whole National Insurance number
           </div>
-          {% if data.learnerEmpty %}
-            <p id="sortCode-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
-            </p>
-          {% endif %}
-          <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text">
+          <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text" value="{{ data.learner | default ('') }}">
         </div>
       </div>
   </div>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
-      <div class="govuk-form-group {% if data.submitterEmpty %}govuk-form-group--error{% endif %}">
+      <div class="govuk-form-group">
         <label class="govuk-label" for="submitter">
           <strong>Submitter name</strong>
         </label>
         <div id="course-name-hint" class="govuk-hint">
           Enter name
         </div>
-        {% if data.submitterEmpty %}
-            <p id="sortCode-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
-            </p>
-          {% endif %}
-        <input class="govuk-input govuk-input--width-20" id="submitter" name="submitter" type="text">
+        <input class="govuk-input govuk-input--width-20" id="submitter" name="submitter" type="text" value="{{ data.submitter | default ('') }}">
       </div>
     </div>
     <div class="govuk-grid-column-one-half">
@@ -108,81 +113,48 @@
   </div>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
-      <div class="govuk-form-group {% if data.statusArrayEmpty %}govuk-form-group--error{% endif %}">
+      <div class="govuk-form-group">
         <fieldset class="govuk-fieldset" aria-describedby="status-hint">
           <label class="govuk-label" for="statusOptions">
             <strong>Status</strong>
           </label>
           <div id="status-hint" class="govuk-hint">
-            Select all that apply.
+            Select all to include
           </div>
-          {% if data.statusArrayEmpty %}
-            <p id="sortCode-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
-            </p>
-          {% endif %}
-          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes--small" data-module="govuk-checkboxes">
+            {% for status in statusArray %}
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="not-yet-submitted" name="statusOptions" type="checkbox" value="not-yet-submitted">
-              <label class="govuk-label govuk-checkboxes__label" for="not-yet-submitted">
-              Not yet submitted
+              <input class="govuk-checkboxes__input" id={{status}} name="statusOptions" type="checkbox" value={{status}} {% if ( data.statusOptions | isSelected_V13(status)) %}checked {% endif %}>
+              <label class="govuk-label govuk-checkboxes__label" for={{status}} >
+              {{status | formatStatus_V13}}
               </label>
             </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="submitted" name="statusOptions" type="checkbox" value="submitted">
-              <label class="govuk-label govuk-checkboxes__label" for="submitted">
-                Submitted
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="approved" name="statusOptions" type="checkbox" value="approved">
-              <label class="govuk-label govuk-checkboxes__label" for="approved">
-                Approved
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="rejected" name="statusOptions" type="checkbox" value="rejected">
-              <label class="govuk-label govuk-checkboxes__label" for="rejected">
-                Rejected
-              </label>
-            </div>
+            {% endfor %}
+
           </div>
         </fieldset>
       </div>
     </div>
     <div class="govuk-grid-column-one-half">
-      <div class="govuk-form-group {% if data.typeArrayEmpty %}govuk-form-group--error{% endif %}">
+      <div class="govuk-form-group">
         <fieldset class="govuk-fieldset" aria-describedby="type-hint">
           <label class="govuk-label" for="typeOptions">
             <strong>Type</strong>
           </label>
           <div id="type-hint" class="govuk-hint">
-            Select all that apply.
+            Select all to include
           </div>
-          {% if data.typeArrayEmpty %}
-            <p id="sortCode-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
-            </p>
-          {% endif %}
-          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="100" name="typeOptions" type="checkbox" value="100">
-              <label class="govuk-label govuk-checkboxes__label" for="100">
-              100
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="60" name="typeOptions" type="checkbox" value="60">
-              <label class="govuk-label govuk-checkboxes__label" for="60">
-                60
-              </label>
-            </div>
-            <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="40" name="typeOptions" type="checkbox" value="40">
-              <label class="govuk-label govuk-checkboxes__label" for="40">
-                40
-              </label>
-            </div>
+          <div class="govuk-checkboxes--small" data-module="govuk-checkboxes">
+
+            {% for type in typeArray %}
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id={{type}} name="typeOptions" type="checkbox" value={{type}} {% if ( data.typeOptions | isSelected_V13(type)) %} checked {% endif %}>
+                <label class="govuk-label govuk-checkboxes__label" for={{type}}>
+                {{type}}
+                </label>
+              </div>
+            {% endfor %}
+
           </div>
         </fieldset>
       </div>
@@ -191,21 +163,21 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <div class="govuk-form-group {% if (data.startMonthEmpty and data.startYearEmpty and data.endMonthEmpty and data.endYearEmpty) or (data.dateInvalid) %}govuk-form-group--error{% endif %}">
+      <div class="govuk-form-group {% if (data.dateInvalid) %}govuk-form-group--error{% endif %}">
         <label class="govuk-label" for="dateType">
           <strong>Date range</strong>
         </label>
           <div id="learner-name-hint" class="govuk-hint">
-            Select what type of dates you want to search and the dates you wish to search between. For example, 3 2007
+            Select the type of date and the dates to search between. For example, 4 2024 to 6 2024
           </div>
-          {% if data.startMonthEmpty and data.startYearEmpty and data.endMonthEmpty and data.endYearEmpty %}
+          {% if data.dateInvalid == "notValidDates" %}
             <p id="sortCode-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Need at least one value to search against
+                <span class="govuk-visually-hidden">Error:</span> Enter 2 valid dates
             </p>
           {% endif %}
-          {% if data.dateInvalid %}
+          {% if data.dateInvalid == "startBeforeEnd"%}
             <p id="sortCode-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Need to enter two full valid dates
+                <span class="govuk-visually-hidden">Error:</span> Start date must be before end date
             </p>
           {% endif %}
           <div style="display: flex;">
@@ -214,10 +186,9 @@
                 Type of date
               </label>
               <select class="govuk-select" id="dateType" name="sort">
-                <option value="created" selected>Created on</option>
-                <option value="submitted">Submitted on</option>
-                <option value="approved">Approved on</option>
-                <option value="rejected">Rejected on</option>
+                {% for dateType in dateArray %}
+                  <option value={{dateType}} {% if ( data.sort | isSelected_V13(dateType)) %} selected {% endif %}>{{dateType | formatDateType_V13}}</option>
+                {% endfor %}
               </select>
             </div>
             <div class="govuk-date-input" id="startDates">
@@ -226,7 +197,7 @@
                       <label class="govuk-label govuk-date-input__label" for="startMonth">
                         Month
                       </label>
-                      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="startMonth" name="startMonth" type="text" inputmode="numeric">
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="startMonth" name="startMonth" type="text" inputmode="numeric" value="{{ data.startMonth | default ('') }}">
                     </div>
                   </div>
                   <div class="govuk-date-input__item">
@@ -234,7 +205,7 @@
                       <label class="govuk-label govuk-date-input__label" for="startYear">
                         Year
                       </label>
-                      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="startYear" name="startYear" type="text" inputmode="numeric">
+                      <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="startYear" name="startYear" type="text" inputmode="numeric" value="{{ data.startYear | default ('') }}">
                     </div>
                   </div>
             </div>
@@ -245,7 +216,7 @@
                   <label class="govuk-label govuk-date-input__label" for="endMonth">
                     Month
                   </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="endMonth" name="endMonth" type="text" inputmode="numeric">
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="endMonth" name="endMonth" type="text" inputmode="numeric" value="{{ data.endMonth | default ('') }}">
                 </div>
               </div>
               <div class="govuk-date-input__item">
@@ -253,7 +224,7 @@
                   <label class="govuk-label govuk-date-input__label" for="endYear">
                     Year
                   </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="endYear" name="endYear" type="text" inputmode="numeric">
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="endYear" name="endYear" type="text" inputmode="numeric" value="{{ data.endYear | default ('') }}">
                 </div>
               </div>
             </div>
@@ -264,12 +235,62 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
       <button type="submit" class="govuk-button" data-module="govuk-button">
-        Apply search
+        Search
       </button>
     </div>
     <div class="govuk-grid-column-one-half">
     </div>
   </div>
 </form>
+
+{% if (resultCount != 0) and (resultCount != null) %}
+      <div class="govuk-grid-row" id="searchResults">
+        <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m">Search results</h2>
+        <p class="govuk-heading-m">{{ resultCount }} {% if resultCount == 1 %}result{% else %}results{% endif %}</p>
+        <table class="govuk-table" data-module="moj-sortable-table">
+          <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                  <th class="govuk-table__header" scope="col" width="20%" aria-sort="none">Claim reference</th>
+                  <th class="govuk-table__header" scope="col" width="3%" aria-sort="none">Type</th>
+                  <th class="govuk-table__header" scope="col" width="26%" aria-sort="none">Training</th>
+                  <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Learner</th>
+                  <th class="govuk-table__header" scope="col" width="18%" aria-sort="descending">Status</th>
+              </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+              {% for claim in matchedClaims %}
+              <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
+                  <td class="govuk-table__header" scope="row"><a class="govuk-link"
+                          href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
+                  <td class="govuk-table__cell">{{ claim.claimType | typeTag_V13 }}</td>
+                  <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                  <td class="govuk-table__cell">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</td>
+                  <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
+                              statusTag_V13(data.statuses) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+</div>
+  {% elif (data['noInputsB'])  or (data['dateInvalid']) %}
+
+  {% elif (resultCount == 0) %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+    <p class="govuk-body">
+        No matches returned for your search.
+    </p>
+    <p class="govuk-body">
+      Improve your search results by:
+    </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>double-checking your spelling</li>
+      <li>searching for something less specific</li>
+    </ul>
+  </div>
+</div>
+  {% endif %}
 
 {% endblock %}

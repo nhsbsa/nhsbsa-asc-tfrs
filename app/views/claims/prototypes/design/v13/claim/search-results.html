@@ -1,7 +1,10 @@
 {% extends "../layouts/claims-main.html" %}
 
-{% set matchedClaims = data.claims | claimsMatchAdvancedSearch_V13(data.trainingName, data.learner) %}
-
+{% if (data.searchType == 'a') %} 
+    {% set matchedClaims = data.claims | claimsMatchAdvancedSearchA_V13(data.training, data.learner) %}
+{% elif (data.searchType == 'b') %} 
+    {% set matchedClaims = data.claims | claimsMatchAdvancedSearchB_V13(data.training, data.learner, data.submitter, data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear, data.endMonth, data.endYear) %}
+{% endif %} 
 {% set resultCount = matchedClaims.length %}
 
 
@@ -37,7 +40,13 @@
 
 
             {% if (data.trainingName or data.learner) %} 
-                <p class="govuk-body">For {% if data.trainingName %}course: "{{data.trainingName}}"{% endif %}, {% if data.learner %}learner: "{{data.learner}}"{% endif %}</p>
+                <p class="govuk-body">Search values</p>
+                {% if data.training %}
+                    <p class="govuk-body">Course: {{data.training}}</p>
+                {% endif %} 
+                {% if data.learner %}
+                    <p class="govuk-body">Learner: {{data.learner}}</p>
+                {% endif %} 
             {% endif %} 
             
             {% if (resultCount != 0) %} 
