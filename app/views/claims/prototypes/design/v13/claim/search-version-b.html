@@ -294,7 +294,7 @@ data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear
 {% elif (data['noInputsB']) or (data['dateInvalid']) %}
 
 {% elif (resultCount == 0) %}
-<div class="govuk-grid-row">
+<div class="govuk-grid-row" id="searchResults">
   <div class="govuk-grid-column-full">
     <p class="govuk-body">
       No matches returned for your search.
