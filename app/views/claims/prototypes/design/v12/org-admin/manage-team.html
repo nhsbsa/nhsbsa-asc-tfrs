@@ -77,7 +77,7 @@
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
           <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
-          <td class="govuk-table__cell" width="20%"></td>
+          <td class="govuk-table__cell govuk-table__cell--numeric" width="20%"></td>
         </tr>
         {% endif %}
         {% endfor %}
@@ -91,7 +91,7 @@
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
           <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
-          <td class="govuk-table__cell" width="20%">{% if not (data.resendList | matchResend_V12(user.email)) %}<form action="../reinvite-user?name={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric" width="40%">{% if not (data.resendList | matchResend_V12(user.email)) %}<form action="../reinvite-user?name={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
         </tr>
         {% endif %}
         {% endfor %}
