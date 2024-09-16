@@ -70,7 +70,7 @@
     {% endif %}
 
     <table class="govuk-table">
-      <caption class="govuk-table__caption govuk-table__caption--m">Current team members</caption>
+      <caption class="govuk-table__caption govuk-table__caption--m">Registered</caption>
       <tbody class="govuk-table__body">
           {% for user in data.users %}
           {% if user.status == "active" %}
@@ -84,7 +84,7 @@
       </tbody>
     </table>
     <table class="govuk-table">
-      <caption class="govuk-table__caption govuk-table__caption--m">Invited team members</caption>
+      <caption class="govuk-table__caption govuk-table__caption--m">Invited</caption>
       <tbody class="govuk-table__body">
           {% for user in data.users %}
           {% if user.status != "active" %}
