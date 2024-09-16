@@ -775,13 +775,15 @@ router.post('/invite-user', function (req, res) {
     delete req.session.data.familyName
     delete req.session.data.givenName
     delete req.session.data.email
+    delete req.session.data.deleteSuccess
+    delete req.session.data.deletedUser
     res.redirect('org-admin/manage-team?invite=success')
   } else {
     res.redirect('org-admin/confirm-user-details?checkBoxSubmitError=true')
   }
 });
 
-router.post('/reinvite-user', function (req, res) {
+router.get('/reinvite-user', function (req, res) {
   req.session.data.invite = "success"
 
 
@@ -804,6 +806,7 @@ router.get('/confirm-delete-user', function (req, res) {
       user.status = "deleted"
     }
   }
+  delete req.session.data.invite
   res.redirect('org-admin/manage-team?deleteSuccess=true&deletedUser=' + query)
 });
 
