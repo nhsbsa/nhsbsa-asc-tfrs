@@ -648,13 +648,16 @@ router.post('/invite-user', function (req, res) {
 
 router.post('/reinvite-user', function (req, res) {
   req.session.data.invite = "success"
-  for (const user of req.session.data.users) {
-    if (req.session.data.resendEmail == user.email) {
-      user.status = "pending"
-      user.invited = new Date()
-    }
+
+
+  if (req.session.data.resendList) {
+    req.session.data.resendList.push(req.session.data.name)
+  } else {
+    req.session.data.resendList = [req.session.data.name]
   }
+
   res.redirect('org-admin/manage-team')
+
 });
 
 router.get('/clear-learner', function (req, res) {

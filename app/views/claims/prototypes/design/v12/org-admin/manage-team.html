@@ -69,57 +69,34 @@
 
     {% endif %}
 
-    {% if (data.users | countMatchingStatus_V10("active"))>0 %}
     <table class="govuk-table">
-        <caption class="govuk-table__caption govuk-table__caption--m">Registered</caption>
-        <tbody class="govuk-table__body">
-            {% for user in data.users %}
-            {% if user.status == "active" %}
-          <tr class="govuk-table__row">
-            <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
-            <!--<td class="govuk-table__cell" width="15%">{{ user.type | userType_V10 }}</td>-->
-            <td class="govuk-table__cell" width="45%">{{ user.email }}</td>
-            <td class="govuk-table__cell" width="30%"></td>
-          </tr>
-          {% endif %}
-          {% endfor %}
-        </tbody>
-      </table>
-      {% endif %}
-      {% if (data.users | countMatchingStatus_V10("pending"))>0 %}
-      <table class="govuk-table">
-        <caption class="govuk-table__caption govuk-table__caption--m">Invited</caption>
-        <tbody class="govuk-table__body">
-            {% for user in data.users %}
-            {% if user.status == "pending" %}
-          <tr class="govuk-table__row">
-            <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
-            <!--<td class="govuk-table__cell" width="15%">{{ user.type | userType_V10 }}</td>-->
-            <td class="govuk-table__cell" width="45%">{{ user.email }}</td>
-            <td class="govuk-table__cell" width="30%">You can resend this invite from<br>{{ user.invited | expireTime_V10 }}</td>
-          </tr>
-          {% endif %}
-          {% endfor %}
-        </tbody>
-      </table>
-      {% endif %}
-      {% if (data.users | countMatchingStatus_V10("expired"))>0 %}
-      <table class="govuk-table">
-        <caption class="govuk-table__caption govuk-table__caption--m">Expired invites</caption>
-        <tbody class="govuk-table__body">
-            {% for user in data.users %}
-            {% if user.status == "expired" %}
-          <tr class="govuk-table__row">
-            <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
-            <!--<td class="govuk-table__cell" width="15%">{{ user.type | userType_V10 }}</td>-->
-            <td class="govuk-table__cell" width="45%">{{ user.email }}</td>
-            <td class="govuk-table__cell" width="30%">{% if not (data.resendList | matchResend_V10(user.email)) %}<form action="../reinvite-user?resendEmail={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
-          </tr>
-          {% endif %}
-          {% endfor %}
-        </tbody>
-      </table>
-      {% endif %}
+      <caption class="govuk-table__caption govuk-table__caption--m">Current team members</caption>
+      <tbody class="govuk-table__body">
+          {% for user in data.users %}
+          {% if user.status == "active" %}
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
+          <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
+          <td class="govuk-table__cell" width="20%"></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+    <table class="govuk-table">
+      <caption class="govuk-table__caption govuk-table__caption--m">Invited team members</caption>
+      <tbody class="govuk-table__body">
+          {% for user in data.users %}
+          {% if user.status != "active" %}
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
+          <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
+          <td class="govuk-table__cell" width="20%">{% if not (data.resendList | matchResend_V12(user.email)) %}<form action="../reinvite-user?name={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
     </div>
 </div>
 
