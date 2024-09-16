@@ -10,8 +10,7 @@ Check signatory details - Register an organisation
 
 {% block content %}
 <div class="govuk-grid-row">
-
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
         {% if data.checkBoxSubmitError %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
             <div role="alert">
@@ -28,9 +27,6 @@ Check signatory details - Register an organisation
             </div>
         </div>
         {% endif %}
-    </div>
-
-    <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Invite new team member</span>
         <h1 class="govuk-heading-l">Check details are correct</h1>
         <p class="govuk-body">When you send this invitation, the team member will receive an email from [email address] so they can finish setting up their account. The invitation link in the email will expire in 24 hours.</p>
