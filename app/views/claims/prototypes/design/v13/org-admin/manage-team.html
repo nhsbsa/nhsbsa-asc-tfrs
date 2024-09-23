@@ -104,12 +104,12 @@
         {% endfor %}
       </tbody>
     </table>
-    {% if ((data.users | countMatchingStatus_V10("pending")) + (data.users | countMatchingStatus_V10("expired"))) >0 %}
+    {% if (data.users | countMatchingStatus_V10("pending")) >0 %}
     <table class="govuk-table">
       <caption class="govuk-table__caption govuk-table__caption--m">Invited</caption>
       <tbody class="govuk-table__body">
           {% for user in data.users %}
-          {% if user.status != "active" and user.status != "deleted" %}
+          {% if user.status == "pending" %}
         <tr class="govuk-table__row">
           <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
           <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
