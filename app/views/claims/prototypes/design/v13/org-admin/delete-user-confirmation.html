@@ -7,9 +7,8 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
         {% if data.deleteError %}
             <div class="moj-banner moj-banner--warning" role="region" aria-label="Warning">
                 <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
@@ -19,11 +18,6 @@
                 <div class="moj-banner__message">Error deleting {%if user.status == "pending" %} invitation to {% elif user.status == "active" %} registered {%endif%}user {{user.givenName}} {{user.familyName}}, please try again</div>
             </div>
         {% endif %}
-    </div>
-</div>
-
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">Are you sure you want to delete this {% if user.status == "active" %}registered{% else %}invited{% endif %} user?</h1>
         <div class="govuk-warning-text">
             <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
