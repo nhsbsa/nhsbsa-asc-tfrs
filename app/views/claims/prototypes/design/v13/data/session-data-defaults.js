@@ -6288,7 +6288,7 @@ module.exports = {
             "evidenceOfPayment": [
                 "invoice000.pdf"
             ],
-            "evidenceOfCompletion": ["certficate0089.pdf",
+            "evidenceOfCompletion": ["certficate0089.pdf"],
             "completionDate": "2023-12-02T17:28:29.887Z",
             "costDate": "2023-10-12T21:28:26.284Z"
         },
@@ -6360,7 +6360,7 @@ module.exports = {
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": ["certficate0091.pdf",
+            "evidenceOfCompletion": ["certficate0091.pdf"],
             "completionDate": "2023-05-11T23:05:14.519Z",
             "costDate": "2023-09-02T05:15:50.303Z"
         },

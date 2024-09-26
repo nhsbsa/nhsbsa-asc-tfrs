@@ -176,10 +176,10 @@ addFilter('getUniqueCourseTitles_V13', function (training) {
     return uniqueTitles
 })
 
-addFilter('coursesCount_V13', function (courses) {
+addFilter('getCount_V13', function (items) {
     let count = 0;
-    if (courses != null) {
-        for (const c of courses) {
+    if (items != null) {
+        for (const c of items) {
             count++
         }
     }
