@@ -488,9 +488,9 @@ router.post('/add-evidence', function (req, res) {
     if (claimID == c.claimID) {
       let numberOfEvidence = c.evidenceOfPayment.length + 1
       if (type == 'payment') {
-        c.evidenceOfPayment.push('invoice' + numberOfEvidence + '.pdf')
+        c.evidenceOfPayment.push('invoice0' + (c.evidenceOfPayment.length + 1) + '.pdf')
       } else if (type == 'completion') {
-        c.evidenceOfCompletion = 'certficate01.pdf'
+        c.evidenceOfCompletion.push('certificate0' + (c.evidenceOfCompletion.length + 1) + '.pdf')
       }
       break;
     }
@@ -499,9 +499,9 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.learnerID;
   delete req.session.data.submitError
 
-  if (type == 'payment') {
+  if (type == 'payment' || type == "completion") {
     res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
-  } else if (type == 'completion' || radioButtonValue == "no") {
+  } else if (radioButtonValue == "no") {
     res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
   }
 })
@@ -529,6 +529,7 @@ router.post('/remove-evidence', function (req, res) {
   var type = req.session.data.type
   var claimID = req.session.data.id
   let paymentCount = 0
+  let completionCount = 0
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
@@ -536,16 +537,16 @@ router.post('/remove-evidence', function (req, res) {
         c.evidenceOfPayment.pop()
         paymentCount = c.evidenceOfPayment.length
       } else if (type == 'completion') {
-        c.evidenceOfCompletion = 'certficate01.pdf'
+        c.evidenceOfCompletion.pop()
+        completionCount = c.evidenceOfCompletion.length
       }
       break;
     }
   }
-  delete req.session.data.type;
   delete req.session.data.learnerID;
   delete req.session.data.submitError
   delete req.session.data.deleteSuccess
-  if (paymentCount == 0) {
+  if ((type == "payment" && paymentCount == 0) || (type == "completion" && completionCount == 0)) {
     res.redirect('claim/add-evidence' + '?id=' + claimID + '&type=' + type + '&allDeleteSuccess=true')
   } else {
     res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type + '&deleteSuccess=true')
