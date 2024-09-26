@@ -31,7 +31,7 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [],
-    "evidenceOfCompletion": null,
+    "evidenceOfCompletion": [],
     "completionDate": null,
     "costDate": "2022-06-11T14:50:59.964Z"
   },
@@ -70,7 +70,7 @@
       "invoice002.pdf",
       "invoice003.pdf"
     ],
-    "evidenceOfCompletion": "certficate001.pdf",
+    "evidenceOfCompletion": ["certficate001.pdf"],
     "completionDate": "2024-02-05T20:22:11.308Z",
     "costDate": "2023-08-08T07:55:32.615Z"
   },
@@ -108,7 +108,7 @@
     "evidenceOfPayment": [
       "invoice002.pdf"
     ],
-    "evidenceOfCompletion": "certficate002.pdf",
+    "evidenceOfCompletion": ["certficate002.pdf"],
     "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2023-10-04T12:09:57.600Z"
   },
@@ -146,7 +146,7 @@
     "evidenceOfPayment": [
       "invoice007.pdf"
     ],
-    "evidenceOfCompletion": "certficate007.pdf",
+    "evidenceOfCompletion": ["certficate007.pdf"],
     "completionDate": "2023-11-03T05:51:56.177Z",
     "costDate": "2022-09-19T13:52:37.929Z"
   },
@@ -184,7 +184,7 @@
     "evidenceOfPayment": [
       "invoice002.pdf"
     ],
-    "evidenceOfCompletion": "certficate002.pdf",
+    "evidenceOfCompletion": ["certficate002.pdf"],
     "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2023-10-04T12:09:57.600Z"
   },
@@ -221,7 +221,7 @@
     "evidenceOfPayment": [
       "invoice007.pdf"
     ],
-    "evidenceOfCompletion": null,
+    "evidenceOfCompletion": [],
     "completionDate": null,
     "costDate": "2022-09-19T13:52:37.929Z"
   },
@@ -258,7 +258,7 @@
     "evidenceOfPayment": [
       "invoice007.pdf"
     ],
-    "evidenceOfCompletion": null,
+    "evidenceOfCompletion": [],
     "completionDate": null,
     "costDate": "2022-09-19T13:52:37.929Z"
   },
@@ -295,7 +295,7 @@
     "evidenceOfPayment": [
       "invoice007.pdf"
     ],
-    "evidenceOfCompletion": null,
+    "evidenceOfCompletion": [],
     "completionDate": null,
     "costDate": "2022-09-19T13:52:37.929Z"
   },
@@ -332,7 +332,7 @@
     "evidenceOfPayment": [
       "invoice007.pdf"
     ],
-    "evidenceOfCompletion": null,
+    "evidenceOfCompletion": [],
     "completionDate": null,
     "costDate": "2022-09-19T13:52:37.929Z"
   },
@@ -369,7 +369,7 @@
     "evidenceOfPayment": [
       "invoice007.pdf"
     ],
-    "evidenceOfCompletion": null,
+    "evidenceOfCompletion": [],
     "completionDate": null,
     "costDate": "2022-09-19T13:52:37.929Z"
   },
@@ -406,7 +406,7 @@
     "evidenceOfPayment": [
       "invoice007.pdf"
     ],
-    "evidenceOfCompletion": "certficate002.pdf",
+    "evidenceOfCompletion": ["certficate002.pdf"],
     "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2022-09-19T13:52:37.929Z"
   },
@@ -443,7 +443,7 @@
     "evidenceOfPayment": [
       "invoice007.pdf"
     ],
-    "evidenceOfCompletion": null,
+    "evidenceOfCompletion": [],
     "completionDate": null,
     "costDate": "2022-09-19T13:52:37.929Z"
   }

@@ -1,6 +1,6 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim_V13(data.claims) %}
-{% set evidenceCount = claim.evidenceOfPayment | coursesCount_V13 %}
+{% set evidenceCount = claim.evidenceOfPayment | getCount_V13 %}
 
 {% block pageTitle %}
 {{ ["Add evidence - Claim: ", claim.claimID] | join }}
@@ -13,18 +13,13 @@
 
     {% if data.allDeleteSuccess %}
     <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
-
       <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
         <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
       </svg>
-
-      <div class="moj-banner__message">File named invoice.png has been deleted</div>
-
+      <div class="moj-banner__message">File named file.png has been deleted</div>
     </div>
     {% endif %}
-
-
     {% if data.errorFileTooBig or data.errorWrongFileFormat or data.errorFileMissing %}
     <div class="govuk-error-summary" data-module="govuk-error-summary">
       <div role="alert">
@@ -54,17 +49,13 @@
     <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
   </div>
 </div>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <p class="govuk-body">
       You need to provide evidence of {{ data.type }}{% if data.type == 'completion' %} for {{ claim.learner.givenName
       }} {{ claim.learner.familyName }}{% endif %}.
-
-      {% if data.type == "payment"%}
       You may upload up to 4 files. These can be in PDF, JPG, JPEG or PNG format.
-      {% else %}
-      The file can be in PDF, JPG, JPEG or PNG format.
-      {% endif %}
     </p>
 
     <div id="upload"
@@ -73,25 +64,24 @@
         Upload a file
       </label>
       {% if data.errorFileTooBig or data.errorWrongFileFormat or data.errorFileMissing %}
-      <p id="upload" class="govuk-error-message">
-        <span class="govuk-visually-hidden">Error:</span>
-        {% if data.errorFileTooBig %}
-        The file must be smaller than 2MB
-        {% elif data.errorWrongFileFormat %}
-        The file must be a PDF, JPG, JPEG or PNG.
-        {% elif data.errorFileMissing %}
-        Select an evidence of {{data.type}}
-        {% endif %}
-      </p>
+        <p id="upload" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span>
+          {% if data.errorFileTooBig %}
+            The file must be smaller than 2MB
+          {% elif data.errorWrongFileFormat %}
+            The file must be a PDF, JPG, JPEG or PNG.
+          {% elif data.errorFileMissing %}
+            Select an evidence of {{data.type}}
+          {% endif %}
+        </p>
       {% endif %}
-
       <input
         class="govuk-file-upload {% if data.errorFileTooBig or data.errorWrongFileFormat  or data.errorFileMissing %} govuk-file-upload--error {% endif %}"
         id="evidenceFile" name="evidenceFile" type="file" aria-describedby="evidenceFile-error">
     </div>
     <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to
-        update file upload progress</a></p>
-
+        update file upload progress</a>
+      </p>
     {% if data.type == "payment"%}
     <form action="../add-evidence?type=payment" method="post" novalidate>
       <div class="govuk-button-group">
@@ -111,8 +101,6 @@
       </div>
     </form>
     {% endif %}
-
-
 
   </div>
   <div class="govuk-grid-column-one-third">

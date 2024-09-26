@@ -1,8 +1,6 @@
 <h2 class="govuk-heading-m" id="payment">Payment for activity</h2>
 <dl class="govuk-summary-list">
 
-  {% set evidenceOfPaymentCount = claim.evidenceOfPayment | coursesCount_V13 %}
-
   {% if not claim.costDate %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =="missing" %}
     <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
@@ -36,41 +34,41 @@
   </div>
   {% endif %}
 
-  {% if evidenceOfPaymentCount == 0 %}
-  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =="missing" %}
-  <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
-    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-evidence-error">
-      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add evidence of payment</p>
-    </div>
-  </div>
-  {% endif %}
-  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =='missing' %} govuk-summary-list-row--error {% endif %}">
-    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =='missing' %} govuk-summary-key--error {% endif %}">
-      Evidence of payment
-    </dt>
-    <dd class="govuk-summary-list__value">
-      <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=payment">Add evidence</a>
-    </dd>
-  </div>
-  {% else %}
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
-      Evidence of payment
-    </dt>
-    <dd class="govuk-summary-list__value">
-      {% for payment in claim.evidenceOfPayment %}
-      <p class="govuk-body">{{ payment }}</p>
-      {% endfor %}
-    </dd>
-    {% if (claim.status == "new" or claim.status == "not-yet-submitted") %}
-    <dd class="govuk-summary-list__actions">
-      <ul class="govuk-summary-list__actions-list">
-        <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
-            href="add-evidence-edit?type=payment">Change<span class="govuk-visually-hidden"> evidence of payment</span></a>
-        </li>
-      </ul>
-    </dd>
+  {% if ( claim.evidenceOfPayment | getCount_V13 == 0 ) %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =="missing" %}
+      <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+        <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-evidence-error">
+          <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add evidence of payment</p>
+        </div>
+      </div>
     {% endif %}
-  </div>
+    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =='missing' %} govuk-summary-list-row--error {% endif %}">
+      <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =='missing' %} govuk-summary-key--error {% endif %}">
+        Evidence of payment
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=payment">Add evidence</a>
+      </dd>
+    </div>
+  {% else %}
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Evidence of payment
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {% for payment in claim.evidenceOfPayment %}
+        <p class="govuk-body">{{ payment }}</p>
+        {% endfor %}
+      </dd>
+      {% if (claim.status == "new" or claim.status == "not-yet-submitted") %}
+        <dd class="govuk-summary-list__actions">
+          <ul class="govuk-summary-list__actions-list">
+            <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
+                href="add-evidence-edit?type=payment">Change<span class="govuk-visually-hidden"> evidence of payment</span></a>
+            </li>
+          </ul>
+        </dd>
+      {% endif %}
+    </div>
   {% endif %}
 </dl>
