@@ -57,7 +57,7 @@
       </dt>
       <dd class="govuk-summary-list__value">
         {% for payment in claim.evidenceOfPayment %}
-        <p class="govuk-body">{{ payment }}</p>
+         <p><a class="govuk-link" href="/public/images/{{payment}}" target="_blank">{{payment}}<span class="govuk-visually-hidden">{{payment}}</span></a></p>
         {% endfor %}
       </dd>
       {% if (claim.status == "new" or claim.status == "not-yet-submitted") %}
