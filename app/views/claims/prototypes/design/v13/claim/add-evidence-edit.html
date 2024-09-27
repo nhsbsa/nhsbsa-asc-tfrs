@@ -82,7 +82,7 @@
         {% for evidence in evidence %}
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            {{evidence}}
+            <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">{{evidence}}<span class="govuk-visually-hidden">{{evidence}}</span></a>
           </dt>
           <dd class="govuk-summary-list__value">
             2MB
