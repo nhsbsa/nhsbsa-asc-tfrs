@@ -186,6 +186,11 @@ addFilter('getCount_V13', function (items) {
     return count;
 })
 
+addFilter('pageCount_V13', function (contentCount) {
+    return Math.ceil(contentCount / 10)
+})
+
+
 addFilter('formatCount_V13', function (courses) {
     let count = courses.length;
     let text = count + " provider";
