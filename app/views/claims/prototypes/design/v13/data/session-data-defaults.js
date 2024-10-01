@@ -3045,7 +3045,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -3118,7 +3118,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -3296,7 +3296,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate008.pdf"],
@@ -3333,7 +3333,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -3372,7 +3372,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0010.pdf"],
@@ -3409,7 +3409,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -3448,7 +3448,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0012.pdf"],
@@ -3485,7 +3485,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -3557,7 +3557,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -3595,7 +3595,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0016.pdf"],
@@ -3666,7 +3666,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -3738,7 +3738,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -3777,7 +3777,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -3815,7 +3815,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -3854,7 +3854,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -3892,7 +3892,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0024.pdf"],
@@ -3999,7 +3999,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -4037,7 +4037,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0028.pdf"],
@@ -4110,7 +4110,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -4148,7 +4148,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -4186,7 +4186,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -4225,7 +4225,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -4263,7 +4263,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0034.pdf"],
@@ -4300,7 +4300,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -4339,7 +4339,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0036.pdf"],
@@ -4376,7 +4376,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -4415,7 +4415,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -4489,7 +4489,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -4528,7 +4528,7 @@ module.exports = {
             "rejectedDate": "2024-04-04T03:12:18.031Z",
             "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0041.pdf"],
@@ -4565,7 +4565,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -4603,7 +4603,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -4642,7 +4642,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -4714,7 +4714,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -4823,7 +4823,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0049.pdf"],
@@ -4894,7 +4894,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0051.pdf"],
@@ -4965,7 +4965,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -5072,7 +5072,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0056.pdf"],
@@ -5143,7 +5143,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -5182,7 +5182,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0059.pdf"],
@@ -5253,7 +5253,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0061.pdf"],
@@ -5290,7 +5290,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -5363,7 +5363,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -5401,7 +5401,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0065.pdf"],
@@ -5438,7 +5438,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0066.pdf"],
@@ -5475,7 +5475,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -5514,7 +5514,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -5586,7 +5586,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -5697,7 +5697,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -5736,7 +5736,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -5811,7 +5811,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -5849,7 +5849,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0077.pdf"],
@@ -5886,7 +5886,7 @@ module.exports = {
             "rejectedDate": "2024-04-16T15:06:14.021Z",
             "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -5925,7 +5925,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0079.pdf"],
@@ -5996,7 +5996,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -6034,7 +6034,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -6142,7 +6142,7 @@ module.exports = {
             "rejectedDate": "2024-03-02T15:07:50.485Z",
             "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0085.pdf"],
@@ -6249,7 +6249,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0088.pdf"],
@@ -6356,7 +6356,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
@@ -6394,7 +6394,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -6433,7 +6433,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
@@ -6508,7 +6508,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0095.pdf"],
@@ -6545,7 +6545,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
+                
                 "invoice001.pdf"
             ],
             "evidenceOfCompletion": ["certificate0096.pdf"],
