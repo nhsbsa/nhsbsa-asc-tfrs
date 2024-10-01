@@ -67,9 +67,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-02-05T20:22:11.308Z",
@@ -107,7 +107,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-11-16T01:18:28.980Z",
@@ -145,7 +147,9 @@
     "rejectedDate": "2023-12-05T18:04:04.173Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-11-03T05:51:56.177Z",
@@ -183,7 +187,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-11-16T01:18:28.980Z",
@@ -220,7 +226,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -257,7 +265,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -294,7 +304,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -331,7 +343,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -368,7 +382,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -405,7 +421,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-11-16T01:18:28.980Z",
@@ -442,7 +460,9 @@
     "rejectedDate": "2023-12-05T18:04:04.173Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -515,10 +535,9 @@
     "rejectedDate": "2024-03-29T03:41:14.971Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-10-24T04:18:07.159Z",
@@ -556,8 +575,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-12-14T00:28:56.757Z",
@@ -594,7 +614,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -631,7 +653,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-06-24T11:37:43.593Z",
@@ -704,7 +728,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -741,7 +767,9 @@
     "rejectedDate": "2024-06-29T18:12:03.007Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-05-06T06:28:28.194Z",
@@ -851,10 +879,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-01-25T23:15:15.088Z",
@@ -892,8 +919,9 @@
     "rejectedDate": "2024-06-25T16:48:16.007Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-05-11T08:56:11.889Z",
@@ -931,8 +959,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-04-29T17:43:19.494Z",
@@ -970,10 +999,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-01-04T18:36:16.650Z",
@@ -1010,9 +1038,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -1049,9 +1077,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-07-01T06:27:15.461Z",
@@ -1088,9 +1116,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -1127,9 +1155,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-12-02T11:43:21.157Z",
@@ -1166,8 +1194,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -1204,8 +1233,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-02-06T03:45:29.021Z",
@@ -1243,7 +1273,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-06-28T05:52:25.593Z",
@@ -1281,10 +1313,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-10-01T04:15:30.135Z",
@@ -1322,10 +1353,9 @@
     "rejectedDate": "2024-06-29T08:25:16.409Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-03-08T14:47:34.601Z",
@@ -1468,10 +1498,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -1508,10 +1537,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-12-09T00:44:04.380Z",
@@ -1584,8 +1612,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-07-03T07:50:48.935Z",
@@ -1657,7 +1686,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -1694,7 +1725,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-06-16T17:13:59.867Z",
@@ -1732,9 +1765,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-12-08T23:23:25.771Z",
@@ -1772,8 +1805,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-04-20T21:42:53.901Z",
@@ -1810,10 +1844,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -1850,10 +1883,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-05-03T07:34:52.901Z",
@@ -1890,8 +1922,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -1928,8 +1961,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-06-22T13:41:17.097Z",
@@ -1967,7 +2001,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-06-05T20:15:29.907Z",
@@ -2005,8 +2041,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-06-05T11:56:36.577Z",
@@ -2115,8 +2152,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-11-16T10:29:34.279Z",
@@ -2190,8 +2228,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-02-12T14:53:16.383Z",
@@ -2228,10 +2267,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -2268,10 +2306,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-02-09T19:34:27.821Z",
@@ -2309,10 +2346,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-10-26T16:49:14.624Z",
@@ -2349,8 +2385,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -2387,8 +2424,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-06-14T16:51:51.893Z",
@@ -2460,8 +2498,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -2498,8 +2537,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-05-21T05:50:52.515Z",
@@ -2537,9 +2577,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-06-12T10:23:54.180Z",
@@ -2577,7 +2617,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-07-07T14:45:15.663Z",
@@ -2615,10 +2657,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-12-04T11:37:47.569Z",
@@ -2656,7 +2697,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-12-20T12:00:51.094Z",
@@ -2693,10 +2736,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -2733,10 +2775,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-01-07T16:17:45.042Z",
@@ -2810,9 +2851,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-04-20T11:54:13.871Z",
@@ -2850,7 +2891,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-06-21T12:35:32.908Z",
@@ -2923,9 +2966,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -2962,9 +3005,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-05-30T23:03:51.101Z",
@@ -3001,7 +3044,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -3038,7 +3083,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-02-15T01:27:44.700Z",
@@ -3111,7 +3158,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -3148,7 +3197,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-01-30T13:27:37.115Z",
@@ -3326,7 +3377,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -3363,7 +3416,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-03-12T05:57:23.483Z",
@@ -3400,8 +3455,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -3438,8 +3494,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-07-11T08:31:34.141Z",
@@ -3476,10 +3533,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -3516,10 +3572,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf",
-      "invoice004.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-04-28T04:59:30.338Z",
@@ -3557,8 +3612,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-07-14T17:26:04.508Z",
@@ -3595,8 +3651,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -3633,8 +3690,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-02-25T21:29:04.295Z",
@@ -3671,10 +3729,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -3711,10 +3768,9 @@
     "rejectedDate": "2024-04-11T23:45:01.411Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-12-27T02:53:38.026Z",
@@ -3752,9 +3808,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-05-02T06:32:52.817Z",
@@ -3791,7 +3847,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -3828,7 +3886,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-08-24T19:13:10.080Z",
@@ -3866,9 +3926,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-10-28T02:51:47.743Z",
@@ -3941,9 +4001,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -3980,9 +4040,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-06-26T23:21:45.852Z",
@@ -4054,8 +4114,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -4092,8 +4153,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-04-07T07:06:09.352Z",
@@ -4131,9 +4193,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-02-17T19:00:32.380Z",
@@ -4241,8 +4303,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -4279,8 +4342,9 @@
     "rejectedDate": "2024-07-18T06:10:31.689Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-07-09T11:39:22.110Z",
@@ -4318,9 +4382,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-03-25T23:29:40.211Z",
@@ -4393,8 +4457,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-02-11T21:11:05.742Z",
@@ -4467,9 +4532,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-05-26T06:46:21.195Z",
@@ -4577,10 +4642,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -4617,10 +4681,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-06-06T06:33:30.584Z",
@@ -4692,9 +4755,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -4731,9 +4794,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-10-30T08:24:24.943Z",
@@ -4805,8 +4868,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -4843,8 +4907,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-04-03T08:16:02.432Z",
@@ -4882,7 +4947,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2023-11-29T03:33:31.966Z",
@@ -4919,10 +4986,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -4959,10 +5025,9 @@
     "rejectedDate": "2024-07-16T01:09:36.655Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-05-31T15:19:51.271Z",
@@ -4999,8 +5064,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -5037,8 +5103,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-03-20T08:14:25.653Z",
@@ -5110,8 +5177,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -5148,8 +5216,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      
-      "invoice001.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-02-15T15:38:34.767Z",
@@ -5186,7 +5255,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -5223,7 +5294,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-02-18T02:21:37.668Z",
@@ -5297,7 +5370,9 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice000.pdf"
+      "bankstatement-company.pdf",
+      "invoice-company.pdf",
+      "receipt-company.pdf"
     ],
     "evidenceOfCompletion": ["certificate.pdf"],
     "completionDate": "2024-03-21T14:05:32.382Z",
