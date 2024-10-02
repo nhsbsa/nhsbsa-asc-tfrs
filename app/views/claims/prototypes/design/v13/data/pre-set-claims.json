@@ -66,12 +66,13 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice001.pdf",
-      "invoice002.pdf",
-      "invoice003.pdf"
+      "bankStatement-august.pdf",
+      "bankStatement2.pdf",
+      "invoice-skillsforcare.pdf",
+      "receipt-skillsforcare.pdf"
     ],
     "evidenceOfCompletion": [
-      "certificate001.pdf", 
+      "certificate-deliveringoutstandingcare.pdf", 
       "nameChange.pdf"
     ],
     "completionDate": "2024-02-05T20:22:11.308Z",
@@ -109,9 +110,14 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice002.pdf"
+      "bankStatement-october.pdf",
+      "bankStatement2.pdf",
+      "invoice-skillsforcare.pdf",
+      "receipt-skillsforcare.pdf"
     ],
-    "evidenceOfCompletion": ["certificate002.pdf"],
+    "evidenceOfCompletion": [
+      "certificate-module1.pdf"
+    ],
     "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2023-10-04T12:09:57.600Z"
   },
@@ -147,9 +153,11 @@
     "rejectedDate": "2023-12-05T18:04:04.173Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankStatement-september.pdf",
+      "invoice-mhfa.pdf",
+      "receipt-mhfa.pdf"
     ],
-    "evidenceOfCompletion": ["certificate007.pdf"],
+    "evidenceOfCompletion": ["mentalhealth-certificate.pdf"],
     "completionDate": "2023-11-03T05:51:56.177Z",
     "costDate": "2022-09-19T13:52:37.929Z"
   },
@@ -185,9 +193,12 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice002.pdf"
+      "bankStatement1.pdf",
+      "bankStatement2.pdf",
+      "invoice1.pdf",
+      "receipt1.pdf"
     ],
-    "evidenceOfCompletion": ["certificate002.pdf"],
+    "evidenceOfCompletion": ["certificate1.pdf"],
     "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2023-10-04T12:09:57.600Z"
   },
@@ -222,9 +233,12 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankStatement1.pdf",
+      "bankStatement2.pdf",
+      "invoice1.pdf",
+      "receipt1.pdf"
     ],
-    "evidenceOfCompletion": [],
+    "evidenceOfCompletion": ["certificate1.pdf"],
     "completionDate": null,
     "costDate": "2022-09-19T13:52:37.929Z"
   },
@@ -259,9 +273,12 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankStatement1.pdf",
+      "bankStatement2.pdf",
+      "invoice1.pdf",
+      "receipt1.pdf"
     ],
-    "evidenceOfCompletion": [],
+    "evidenceOfCompletion": ["certificate1.pdf"],
     "completionDate": null,
     "costDate": "2022-09-19T13:52:37.929Z"
   },
@@ -296,7 +313,10 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankStatement1.pdf",
+      "bankStatement2.pdf",
+      "invoice1.pdf",
+      "receipt1.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -333,7 +353,10 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankStatement1.pdf",
+      "bankStatement2.pdf",
+      "invoice1.pdf",
+      "receipt1.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -370,7 +393,10 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankStatement1.pdf",
+      "bankStatement2.pdf",
+      "invoice1.pdf",
+      "receipt1.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
@@ -407,9 +433,12 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankStatement1.pdf",
+      "bankStatement2.pdf",
+      "invoice1.pdf",
+      "receipt1.pdf"
     ],
-    "evidenceOfCompletion": ["certificate002.pdf"],
+    "evidenceOfCompletion": ["certificate1.pdf"],
     "completionDate": "2023-11-16T01:18:28.980Z",
     "costDate": "2022-09-19T13:52:37.929Z"
   },
@@ -444,7 +473,10 @@
     "rejectedDate": "2023-12-05T18:04:04.173Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": [
-      "invoice007.pdf"
+      "bankStatement1.pdf",
+      "bankStatement2.pdf",
+      "invoice1.pdf",
+      "receipt1.pdf"
     ],
     "evidenceOfCompletion": [],
     "completionDate": null,
