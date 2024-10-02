@@ -106,8 +106,8 @@ function generateTUClaims(quantity, version) {
       if (['submitted', 'rejected', 'approved'].includes(status)) {
         submittedDate = faker.date.between({ from: startDate, to: new Date() });
        
-        evidenceOfPayment.push(["bankstatement-company.pdf", "invoice-company.pdf", "receipt-company.pdf"]);
-        evidenceOfCompletion.push(["certficate"]);
+        evidenceOfPayment.push(["bankStatement1.pdf", "bankStatement2.pdf", "invoice1.pdf", "receipt1.pdf"]);
+        evidenceOfCompletion.push(["certficate1", "certficate2"]);
         completionDate = faker.date.between({ from: startDate, to: submittedDate });
       }
   
@@ -158,8 +158,8 @@ function generateTUClaims(quantity, version) {
       if (['submitted', 'rejected', 'approved'].includes(status)) {
         submittedDateA = faker.date.between({ from: startDate, to: new Date() });
         submittedDateB = faker.date.between({ from: submittedDateA, to: new Date() });
-        evidenceOfPayment.push(["bankstatement-company.pdf", "invoice-company.pdf", "receipt-company.pdf"]);
-        evidenceOfCompletion.push(["certficate"]);
+        evidenceOfPayment.push(["bankStatement1.pdf", "bankStatement2.pdf", "invoice1.pdf", "receipt1.pdf"]);
+        evidenceOfCompletion.push(["certficate1", "certficate2"]);
         completionDate = faker.date.between({ from: startDate, to: submittedDateB });
       }
   
