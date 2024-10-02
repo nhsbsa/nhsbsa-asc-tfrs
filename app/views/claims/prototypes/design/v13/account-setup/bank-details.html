@@ -45,14 +45,17 @@
                 <label class="govuk-label" for="name-on-the-account">
                     Name on the account
                 </label>
+                <div id="account-name-hint" class="govuk-hint">
+                    Must be no more than 18 characters. If the name is longer, enter as much as you can
+                </div>
                 {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountName != 'valid' %}
                 <p id="accountName-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> Enter the name on the account
+                    <span class="govuk-visually-hidden">Error:</span> {% if data.submitError.accountName == 'missing' %}Enter the name on the account {% elif data.submitError.accountName == 'tooLong' %}Name on the account must be no more than 18 characters{% endif %}
                 </p>
                 {% endif %}
                 <input
                     class="govuk-input {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountName != 'valid' %}govuk-input--error{% endif %}"
-                    id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="false" autocomplete="name" value="{{ data.nameOnTheAccount | default ('') }}">
+                    id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="false" autocomplete="name" value="{{ data.nameOnTheAccount | default ('') }}" aria-describedby="account-name-hint">
             </div>
             <div class="govuk-form-group {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.sortCode != 'valid' %}govuk-form-group--error{% endif %}">
                 <label class="govuk-label" for="sort-code">
