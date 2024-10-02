@@ -488,9 +488,9 @@ router.post('/add-evidence', function (req, res) {
     if (claimID == c.claimID) {
       let numberOfEvidence = c.evidenceOfPayment.length + 1
       if (type == 'payment') {
-        c.evidenceOfPayment.push('invoice00' + (c.evidenceOfPayment.length + 1) + '.pdf')
+        c.evidenceOfPayment.push('invoice' + (c.evidenceOfPayment.length + 1) + '.pdf')
       } else if (type == 'completion') {
-        c.evidenceOfCompletion.push('certificate00' + (c.evidenceOfCompletion.length + 1) + '.pdf')
+        c.evidenceOfCompletion.push('certificate' + (c.evidenceOfCompletion.length + 1) + '.pdf')
       }
       break;
     }
