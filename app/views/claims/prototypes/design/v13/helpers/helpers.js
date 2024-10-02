@@ -250,6 +250,8 @@ function checkBankDetailsForm(accountName, sortCode, accountNumber, buildingSoci
 
     if (accountName == "" || accountName === undefined || accountName == null ) {
         result.accountName = "missing"
+    }  else if(accountName.length > 18 ) {
+        result.accountName = "tooLong"
     } else {
         result.accountName = "valid"
     }
