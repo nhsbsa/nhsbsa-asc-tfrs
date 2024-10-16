@@ -96,17 +96,19 @@ router.post('/search_id_result_V13', function (req, res) {
     return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&invalidIDError=true');
   }
 
-  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}(-[ABC])?$/;
   if (!lengthRegex.test(claimID)) {
     return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&invalidIDError=true');
   }
 
   var foundClaim = null
   for (const c of req.session.data['claims']) {
-    if (c.claimID == claimID) {
+    if (c.claimID.includes(claimID)) {
       foundClaim = c
     }
-  }
+}
+
+  // handle the claim id searched on won't be the one on a specific claim
 
   if (foundClaim == null) {
     return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&notFound=true');
@@ -488,9 +490,9 @@ router.post('/add-evidence', function (req, res) {
     if (claimID == c.claimID) {
       let numberOfEvidence = c.evidenceOfPayment.length + 1
       if (type == 'payment') {
-        c.evidenceOfPayment.push('invoice00' + (c.evidenceOfPayment.length + 1) + '.pdf')
+        c.evidenceOfPayment.push('invoice' + (c.evidenceOfPayment.length + 1) + '.pdf')
       } else if (type == 'completion') {
-        c.evidenceOfCompletion.push('certificate00' + (c.evidenceOfCompletion.length + 1) + '.pdf')
+        c.evidenceOfCompletion.push('certificate' + (c.evidenceOfCompletion.length + 1) + '.pdf')
       }
       break;
     }
