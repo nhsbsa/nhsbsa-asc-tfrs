@@ -103,12 +103,10 @@ router.post('/search_id_result_V13', function (req, res) {
 
   var foundClaim = null
   for (const c of req.session.data['claims']) {
-    var noSuffixClaim = c.claimID.replace(/-[ABC]$/, '');
-    var noSuffixSearchedID = claimID.replace(/-[ABC]$/, '');
-    if (noSuffixClaim == noSuffixSearchedID) {
+    if (c.claimID.includes(claimID)) {
       foundClaim = c
     }
-  }
+}
 
   // handle the claim id searched on won't be the one on a specific claim
 
