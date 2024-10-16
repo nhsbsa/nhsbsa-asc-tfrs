@@ -53,7 +53,7 @@
               {% elif (data.invalidIDError) %}
               <li>
                 <a href="#searchClaimId">
-                  Enter a claim reference number in the correct format like H2T-C813-3XF7-C
+                  Enter a claim reference number in the correct format. This could be with or without the -A, -B or -C suffix. Examples: H2T-C813-3XF7-C or WR5-R2P4-DSL4
                 </a>
               </li>
               {% elif (data.notFound) %}
@@ -121,7 +121,7 @@
           </div>
           {% if data.invalidIDError or data.emptyError %}
                 <p id="sortCode-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> {% if data.invalidIDError %}Enter a claim reference number in the correct format like H2T-C813-3XF7-C{% elif data.emptyError %} Enter a claim reference number{% endif %}
+                    <span class="govuk-visually-hidden">Error:</span> {% if data.invalidIDError %}Enter a claim reference number in the correct format. This could be with or without the -A, -B or -C suffix. Examples: H2T-C813-3XF7-C or WR5-R2P4-DSL4{% elif data.emptyError %} Enter a claim reference number{% endif %}
                 </p>
           {% endif %}
           noClaimMatch
