@@ -134,7 +134,7 @@ addFilter('errorSummary_V13', function (claim, submitError) {
 addFilter('findClaim_V13', function (claimID, claims) {
     let claim = null;
     for (let c of claims) {
-        if (c.claimID == claimID) {
+        if (c.claimID.includes(claimID)) {
             claim = c
         }
     }

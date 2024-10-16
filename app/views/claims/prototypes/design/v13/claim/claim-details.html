@@ -2,10 +2,10 @@
 {% set claim = data.id | findClaim_V13(data.claims) %}
 
 {% if claim.claimType == "60" %}
-{% set pairClaim = claim.claimID | findPair_V13(data.claims) %}
+  {% set pairClaim = claim.claimID | findPair_V13(data.claims) %}
 {% elif claim.claimType == "40" %}
-{% set pairClaim = claim %}
-{% set claim = pairClaim.claimID | findPair_V13(data.claims) %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair_V13(data.claims) %}
 {% endif %}
 
 {% block pageTitle %}
@@ -17,7 +17,7 @@
   {% if (data.fromSearchResults) %}
     <a href="search-version-{{data.searchType}}" class="govuk-back-link">Back</a>
   {% elif (data.fromSearchId) %}
-    <a href="../manage-claims-home" class="govuk-back-link">Back</a>
+    <a href="../manage-claims-home?searchId=" class="govuk-back-link">Back</a>
   {% elif not (claim.status == "new") %}
     <a href="../manage-claims?statusID={{ data.statusID }}" class="govuk-back-link">Back</a>
   {% endif %} 
