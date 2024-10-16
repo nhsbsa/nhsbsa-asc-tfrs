@@ -17,7 +17,7 @@
   {% if (data.fromSearchResults) %}
     <a href="search-version-{{data.searchType}}" class="govuk-back-link">Back</a>
   {% elif (data.fromSearchId) %}
-    <a href="../manage-claims-home" class="govuk-back-link">Back</a>
+    <a href="../manage-claims-home?searchId=" class="govuk-back-link">Back</a>
   {% elif not (claim.status == "new") %}
     <a href="../manage-claims?statusID={{ data.statusID }}" class="govuk-back-link">Back</a>
   {% endif %} 
