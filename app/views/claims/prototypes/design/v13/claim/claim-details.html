@@ -2,10 +2,10 @@
 {% set claim = data.id | findClaim_V13(data.claims) %}
 
 {% if claim.claimType == "60" %}
-{% set pairClaim = claim.claimID | findPair_V13(data.claims) %}
+  {% set pairClaim = claim.claimID | findPair_V13(data.claims) %}
 {% elif claim.claimType == "40" %}
-{% set pairClaim = claim %}
-{% set claim = pairClaim.claimID | findPair_V13(data.claims) %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair_V13(data.claims) %}
 {% endif %}
 
 {% block pageTitle %}
