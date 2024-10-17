@@ -179,13 +179,15 @@
 .govuk-summary-list-row--error {
   border-left: 5px solid #d4351c;
   position: relative;
+  display: flex;
 }
 
 .govuk-summary-key--error--inline {
   position: relative;
   top: 0.5em;
   display: inline-block;
-  width: 625px;
+  width: 100%;
+  flex-grow: 1;
 }
 
 .govuk-summary-key--error {
