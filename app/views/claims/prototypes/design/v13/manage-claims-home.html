@@ -1,7 +1,7 @@
 {% extends "./layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Manage claims - ", (data.fundingPot | potName_V13)] | join }}
+  Manage claims
 {% endblock %}
 
 {% block beforeContent %}
@@ -85,7 +85,6 @@
 
     <div class="moj-page-header-actions">
       <div class="moj-page-header-actions__title">
-        <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
         <h1 class="govuk-heading-l">Manage claims</h1>
       </div>
       <div class="moj-page-header-actions__actions">
@@ -162,8 +161,8 @@
   <div class="govuk-grid-column-one-third">
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     <h2 class="govuk-heading-m">Related content</h2>
-    <p class="govuk-body"><a href="./guidance/help-start-tu-claim" class="govuk-link">Help with starting a new care skills claim</a></p>
-    <p class="govuk-body"><a href="./guidance/tu-evidence-requirements" class="govuk-link">Help with care skills evidence requirements</a></p>
+    <p class="govuk-body"><a href="./guidance/help-start-tu-claim" class="govuk-link">Help with starting a new claim</a></p>
+    <p class="govuk-body"><a href="./guidance/tu-evidence-requirements" class="govuk-link">Help with evidence requirements</a></p>
   </div>
 </div>
 
