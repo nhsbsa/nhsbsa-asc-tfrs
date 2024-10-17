@@ -133,8 +133,10 @@ addFilter('errorSummary_V13', function (claim, submitError) {
 
 addFilter('findClaim_V13', function (claimID, claims) {
     let claim = null;
+    var searchedClaimID = claimID.replace(/[-\s]+/g, '');
     for (let c of claims) {
-        if (c.claimID.includes(claimID)) {
+        var removeSuffix = c.claimID.replace(/[-\s]+/g, '');
+        if (removeSuffix.includes(searchedClaimID)) {
             claim = c
         }
     }
