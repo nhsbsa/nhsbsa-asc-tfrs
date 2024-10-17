@@ -105,12 +105,9 @@ function generateTUClaims(quantity, version) {
   
       if (['submitted', 'rejected', 'approved'].includes(status)) {
         submittedDate = faker.date.between({ from: startDate, to: new Date() });
-        let randomNumber = Math.floor(Math.random() * 4) + 1;
-        for (let i = 0; i < randomNumber; i++) {
-          let string = "invoice00" + i.toString() + ".pdf";
-          evidenceOfPayment.push(string);
-        }
-        evidenceOfCompletion = 'certficate' + '00' + i.toString() + '.pdf';
+       
+        evidenceOfPayment.push(["bankStatement1.pdf", "bankStatement2.pdf", "invoice1.pdf", "receipt1.pdf"]);
+        evidenceOfCompletion.push(["certficate1", "certficate2"]);
         completionDate = faker.date.between({ from: startDate, to: submittedDate });
       }
   
@@ -153,7 +150,7 @@ function generateTUClaims(quantity, version) {
       let submittedDateA = null;
       let submittedDateB = null;
       let evidenceOfPayment = [];
-      let evidenceOfCompletion = null;
+      let evidenceOfCompletion = [];
       let completionDate = null;
       let statusA = "approved"
       let statusB = "submitted"
@@ -161,12 +158,8 @@ function generateTUClaims(quantity, version) {
       if (['submitted', 'rejected', 'approved'].includes(status)) {
         submittedDateA = faker.date.between({ from: startDate, to: new Date() });
         submittedDateB = faker.date.between({ from: submittedDateA, to: new Date() });
-        let randomNumber = Math.floor(Math.random() * 4) + 1;
-        for (let i = 0; i < randomNumber; i++) {
-          let string = "invoice00" + i.toString() + ".pdf";
-          evidenceOfPayment.push(string);
-        }
-        evidenceOfCompletion = 'certficate' + '00' + i.toString() + '.pdf';
+        evidenceOfPayment.push(["bankStatement1.pdf", "bankStatement2.pdf", "invoice1.pdf", "receipt1.pdf"]);
+        evidenceOfCompletion.push(["certficate1", "certficate2"]);
         completionDate = faker.date.between({ from: startDate, to: submittedDateB });
       }
   

@@ -5,11 +5,11 @@
     if addHeader %} <table class="govuk-table" data-module="moj-sortable-table">
     <thead class="govuk-table__head">
         <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col" width="22%">Claim reference</th>
-            <th class="govuk-table__header" scope="col" width="5%">Type</th>
-            <th class="govuk-table__header" scope="col" width="33%">Training</th>
-            <th class="govuk-table__header" scope="col" width="25%">Learner</th>
-            <th class="govuk-table__header" scope="col" width="15%">{{ claim.status | variableDate_V13 }}</th>
+            <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Claim reference</th>
+            <th class="govuk-table__header" scope="col" width="5%" aria-sort="none">Type</th>
+            <th class="govuk-table__header" scope="col" width="33%" aria-sort="none">Training</th>
+            <th class="govuk-table__header" scope="col" width="25%" aria-sort="none">Learner</th>
+            <th class="govuk-table__header" scope="col" width="15%" aria-sort="descending">{{ claim.status | variableDate_V13 }}</th>
         </tr>
     </thead>
     <tbody class="govuk-table__body">

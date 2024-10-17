@@ -28,7 +28,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement001.png"],
     "evidenceOfPaymentreview": {
       "pass": null,
       "criteria1": {
@@ -48,7 +48,7 @@
         "note": null
       }
     },
-    "evidenceOfCompletion": "certificate.pdf",
+    "evidenceOfCompletion": ["certificate001.pdf"],
     "evidenceOfCompletionreview": {
       "pass": null,
       "criteria1": {
@@ -97,7 +97,7 @@
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
-    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement001.png"],
     "evidenceOfPaymentreview": {
       "pass": null,
       "criteria1": {
@@ -117,7 +117,7 @@
         "note": null
       }
     },
-    "evidenceOfCompletion": "certificate.pdf",
+    "evidenceOfCompletion": ["certificate001.pdf"],
     "evidenceOfCompletionreview": {
       "pass": null,
       "criteria1": {
@@ -182,7 +182,7 @@
       "criteria-10": false
 
     },
-    "evidenceOfCompletion": "certficate002.pdf",
+    "evidenceOfCompletion": ["certificate002.pdf"],
     "evidenceOfCompletionreview": {
       "complete": false,
       "criteria-1": false,
@@ -244,7 +244,7 @@
       "criteria-10": false
 
     },
-    "evidenceOfCompletion": "certficate007.pdf",
+    "evidenceOfCompletion": ["certificate007.pdf"],
     "evidenceOfCompletionreview": {
       "complete": false,
       "criteria-1": false,
