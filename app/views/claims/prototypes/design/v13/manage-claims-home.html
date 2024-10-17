@@ -137,12 +137,12 @@
           <div style="display: flex; flex-direction: row;">
             <input class="govuk-input moj-search__input {% if data.invalidIDError or data.emptyError or data.notFound %} govuk-input--error {% endif %}" id="searchClaimId" name="searchClaimId" type="search"
               aria-describedby="search-hint" value="{{data.searchId}}" style="width: 300px;">
-            <div class="govuk-button-group  search__button-group" style="display: flex; flex-direction: row;">
-              <button type="submit" class="govuk-button govuk-button--secondary search__button"
+            <div class="govuk-button-group  search__button-group">
+              <button type="submit" class="govuk-button govuk-button--secondary"
                 data-module="govuk-button">
                 Search
               </button>
-              <a class="govuk-link govuk-link--no-visited-state search__button" href="claim/search-version-{{data.searchType}}?emptyError&invalidIDError&notFound&deleteSuccess">Advanced search</a>
+              <a class="govuk-link govuk-link--no-visited-state" href="claim/search-version-{{data.searchType}}?emptyError&invalidIDError&notFound&deleteSuccess">Advanced search</a>
             </div>
           </div>
 

@@ -84,7 +84,7 @@ router.post('/search_id_result_V13', function (req, res) {
   delete req.session.data['fromSearchResults'];
   delete req.session.data['deleteSuccess'];
 
-  var claimID = req.session.data.searchClaimId.replace(/\s/g, '');
+  var claimID = req.session.data.searchClaimId.replace(/[-\s]+/g, '');
 
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
@@ -96,14 +96,15 @@ router.post('/search_id_result_V13', function (req, res) {
     return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&invalidIDError=true');
   }
 
-  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}(-[ABC])?$/;
+  const lengthRegex = /^[A-NP-Z0-9]{3}(-)?[A-NP-Z0-9]{4}(-)?[A-NP-Z0-9]{4}(-)?([ABC])?$/;
   if (!lengthRegex.test(claimID)) {
     return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&invalidIDError=true');
   }
 
   var foundClaim = null
   for (const c of req.session.data['claims']) {
-    if (c.claimID.includes(claimID)) {
+    var removeDash = c.claimID.replace(/-/g, '')
+    if (removeDash.includes(claimID)) {
       foundClaim = c
     }
 }

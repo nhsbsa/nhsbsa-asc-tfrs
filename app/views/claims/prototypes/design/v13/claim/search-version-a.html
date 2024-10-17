@@ -42,10 +42,10 @@
     <div class="{% if data.noInputsA %}govuk-form-group--error{% endif %} govuk-!-padding-bottom-4">
       <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search</h2>
-        <p class="govuk-body">You can search by either learner, or course or qualification name, or a combination of
+        <p class="govuk-body govuk-!-margin-bottom-2">You can search by either learner, or course or qualification name, or a combination of
           both</p>
         {% if data.noInputsA %}
-        <p id="input-error" class="govuk-error-message govuk-!-margin-bottom-6">
+        <p id="input-error" class="govuk-error-message govuk-!-margin-bottom-3">
           <span class="govuk-visually-hidden">Error:</span> You need to enter something to search on
         </p>
         {% endif %}
