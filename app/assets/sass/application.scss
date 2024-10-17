@@ -185,7 +185,9 @@
   position: relative;
   top: 0.5em;
   display: inline-block;
-  width: 625px;
+  @include govuk-media-query($from: tablet) {
+  min-width: 250px;
+  }
 }
 
 .govuk-summary-key--error {
