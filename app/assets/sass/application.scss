@@ -192,6 +192,12 @@
   padding-left: 15px;
 }
 
+.govuk-summary-value--error {
+  @include govuk-media-query($until: tablet) {
+    padding-left: 15px;
+  }
+}
+
 .govuk-summary-list-row--error--message {
   border-bottom: none;
   margin-bottom: 0em;

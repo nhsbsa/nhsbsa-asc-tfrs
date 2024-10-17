@@ -29,7 +29,7 @@
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='missing' %} govuk-summary-key--error {% endif %}">
       Start date
     </dt>
-    <dd class="govuk-summary-list__value">
+    <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='missing' %} govuk-summary-value--error {% endif %}">
       <a class="govuk-link govuk-link--no-visited-state" href="start-date">Add start date</a>
     </dd>
   </div>
