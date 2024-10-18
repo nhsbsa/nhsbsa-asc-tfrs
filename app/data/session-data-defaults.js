@@ -4,7 +4,7 @@ module.exports = {
         "claimVersions": [
             {
                 "versionNo": "13",
-                "status": ["design"],
+                "status": ["design", "UR"],
                 "tested": "TBC",
                 "created": [
                     "including post MVP work"
@@ -18,7 +18,7 @@ module.exports = {
             },
             {
                 "versionNo": "12",
-                "status": ["design"],
+                "status": ["dev", "UR"],
                 "tested": "TBC",
                 "created": [
                     "due to decision to remove CPD from the service"
@@ -33,7 +33,7 @@ module.exports = {
             },
             {
                 "versionNo": "11",
-                "status": ["design"],
+                "status": ["retired"],
                 "tested": "TBC",
                 "created": [
                     "TBC"
@@ -47,7 +47,7 @@ module.exports = {
             },
             {
                 "versionNo": "10",
-                "status": ["UR"],
+                "status": ["retired"],
                 "tested": "TBC",
                 "created": [
                     "TBC"
@@ -61,7 +61,7 @@ module.exports = {
             },
             {
                 "versionNo": "9",
-                "status": ["dev"],
+                "status": ["retired"],
                 "tested": "TBC",
                 "created": [
                     "added error states to the account creation flow",
@@ -80,7 +80,7 @@ module.exports = {
             },
             {
                 "versionNo": "8",
-                "status": ["dev"],
+                "status": ["retired"],
                 "tested": "Account creation (Signatory) - w/c 8 April 2024, Manage and start claims (TU 100) 6 May 2024",
                 "created": [
                     "account creation journey for the signatory that will be invited to the service based on minimal tech effort process flow",
@@ -317,7 +317,7 @@ module.exports = {
         "processingVersions": [
             {
                 "versionNo": "5",
-                "status": ["dev", "UR", "design"],
+                "status": ["UR", "design"],
                 "tested": "",
                 "created": [
                     "Add processor notes back into prototype."
@@ -331,7 +331,7 @@ module.exports = {
             },
             {
                 "versionNo": "4",
-                "status": ["dev", "UR", "design"],
+                "status": ["dev", "UR"],
                 "tested": "",
                 "created": [
                     "due to decision to remove CPD from the service"
@@ -345,7 +345,7 @@ module.exports = {
             },
             {
                 "versionNo": "3",
-                "status": ["dev", "UR", "design"],
+                "status": ["retired"],
                 "tested": "w/c 15 May 2024",
                 "created": [
                     "due to MVP decisions stripped back many of the design decisions to accomodate quicker technical delivery to allow for other priority MVP workstreams",
