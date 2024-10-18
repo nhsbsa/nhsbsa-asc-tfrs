@@ -31,12 +31,12 @@
               {% endif %}
               {% if data.trainingSearchLengthInsufficient %}
                 <a href="#trainingSearch-error">
-                  You need to type in training search input of minimum 3 characters
+                  You need to enter at least 3 characters of a course or qualification name
                 </a>
               {% endif %}
               {% if data.learnerSearchLengthInsufficient %}
                 <a href="#learnerSearch-error">
-                  You need to type in learner search input of minimum 3 characters
+                  You need to enter at least 3 characters of a learner name
                 </a>
               {% endif %}
             </li>
@@ -78,7 +78,7 @@
           </div>
           {% if data.learnerSearchLengthInsufficient %}
             <p id="learnerSearch-error" class="govuk-error-message govuk-!-margin-bottom-3">
-              <span class="govuk-visually-hidden">Error:</span> You need to type in learner search input of minimum 3 characters
+              <span class="govuk-visually-hidden">Error:</span> You need to enter at least 3 characters of a learner name
             </p>
           {% endif %}
           <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text"
@@ -94,7 +94,7 @@
           </div>
           {% if data.trainingSearchLengthInsufficient %}
             <p id="trainingSearch-error" class="govuk-error-message govuk-!-margin-bottom-3">
-              <span class="govuk-visually-hidden">Error:</span> You need to type in training search input of minimum 3 characters
+              <span class="govuk-visually-hidden">Error:</span> You need to enter at least 3 characters of a course or qualification name
             </p>
           {% endif %}
           <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text"
