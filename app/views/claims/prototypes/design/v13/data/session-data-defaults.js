@@ -2903,7 +2903,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2022-06-11T14:50:59.964Z"
         },
@@ -2939,7 +2939,7 @@ module.exports = {
             "evidenceOfPayment": [
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate001.pdf",
+            "evidenceOfCompletion": ["certificate001.pdf"],
             "completionDate": "2024-02-05T20:22:11.308Z",
             "costDate": "2023-08-08T07:55:32.615Z"
         },
@@ -2975,7 +2975,7 @@ module.exports = {
             "evidenceOfPayment": [
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate002.pdf",
+            "evidenceOfCompletion": ["certificate002.pdf"],
             "completionDate": "2023-11-16T01:18:28.980Z",
             "costDate": "2023-10-04T12:09:57.600Z"
         },
@@ -3011,7 +3011,7 @@ module.exports = {
             "evidenceOfPayment": [
                 "invoice007.pdf"
             ],
-            "evidenceOfCompletion": "certficate007.pdf",
+            "evidenceOfCompletion": ["certificate007.pdf"],
             "completionDate": "2023-11-03T05:51:56.177Z",
             "costDate": "2022-09-19T13:52:37.929Z"
         },
@@ -3045,12 +3045,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate001.pdf",
+            "evidenceOfCompletion": ["certificate001.pdf"],
             "completionDate": "2023-10-17T20:20:30.378Z",
             "costDate": "2023-03-27T23:16:51.342Z"
         },
@@ -3084,7 +3083,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2022-06-02T08:11:07.610Z"
         },
@@ -3118,11 +3117,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate003.pdf",
+            "evidenceOfCompletion": ["certificate003.pdf"],
             "completionDate": "2024-03-25T03:19:54.107Z",
             "costDate": "2023-04-18T21:06:30.341Z"
         },
@@ -3156,9 +3154,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate004.pdf",
+            "evidenceOfCompletion": ["certificate004.pdf"],
             "completionDate": "2023-12-27T13:40:55.658Z",
             "costDate": "2023-04-08T06:40:19.758Z"
         },
@@ -3192,7 +3190,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-03-21T13:52:06.302Z"
         },
@@ -3226,9 +3224,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate006.pdf",
+            "evidenceOfCompletion": ["certificate006.pdf"],
             "completionDate": "2023-12-21T01:13:10.337Z",
             "costDate": "2024-01-08T22:05:00.417Z"
         },
@@ -3262,7 +3260,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2022-12-30T22:17:11.503Z"
         },
@@ -3296,10 +3294,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate008.pdf",
+            "evidenceOfCompletion": ["certificate008.pdf"],
             "completionDate": "2023-10-01T01:24:33.559Z",
             "costDate": "2023-09-05T21:59:33.267Z"
         },
@@ -3333,12 +3330,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate009.pdf",
+            "evidenceOfCompletion": ["certificate009.pdf"],
             "completionDate": "2023-10-25T22:07:08.643Z",
             "costDate": "2023-10-16T04:06:04.641Z"
         },
@@ -3372,10 +3368,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0010.pdf",
+            "evidenceOfCompletion": ["certificate0010.pdf"],
             "completionDate": "2024-02-05T11:31:31.472Z",
             "costDate": "2023-08-22T18:41:45.988Z"
         },
@@ -3409,12 +3404,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0011.pdf",
+            "evidenceOfCompletion": ["certificate0011.pdf"],
             "completionDate": "2024-03-27T22:19:05.381Z",
             "costDate": "2023-10-24T05:52:48.198Z"
         },
@@ -3448,10 +3442,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0012.pdf",
+            "evidenceOfCompletion": ["certificate0012.pdf"],
             "completionDate": "2023-11-14T23:54:42.009Z",
             "costDate": "2023-04-17T05:38:53.027Z"
         },
@@ -3485,11 +3478,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0013.pdf",
+            "evidenceOfCompletion": ["certificate0013.pdf"],
             "completionDate": "2024-03-18T20:23:40.076Z",
             "costDate": "2023-03-27T14:37:19.806Z"
         },
@@ -3523,7 +3515,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2022-08-27T03:33:27.112Z"
         },
@@ -3557,11 +3549,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0015.pdf",
+            "evidenceOfCompletion": ["certificate0015.pdf"],
             "completionDate": "2024-03-03T09:09:42.091Z",
             "costDate": "2023-08-05T12:12:48.757Z"
         },
@@ -3595,10 +3586,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0016.pdf",
+            "evidenceOfCompletion": ["certificate0016.pdf"],
             "completionDate": "2023-10-11T14:39:45.402Z",
             "costDate": "2023-12-07T00:39:51.469Z"
         },
@@ -3632,7 +3622,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2022-07-25T04:59:41.755Z"
         },
@@ -3666,11 +3656,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0018.pdf",
+            "evidenceOfCompletion": ["certificate0018.pdf"],
             "completionDate": "2023-11-16T08:05:14.550Z",
             "costDate": "2023-08-14T09:41:02.380Z"
         },
@@ -3704,7 +3693,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-03-02T16:51:18.552Z"
         },
@@ -3738,12 +3727,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0020.pdf",
+            "evidenceOfCompletion": ["certificate0020.pdf"],
             "completionDate": "2023-11-08T19:48:43.189Z",
             "costDate": "2022-05-22T23:49:54.842Z"
         },
@@ -3777,11 +3765,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0021.pdf",
+            "evidenceOfCompletion": ["certificate0021.pdf"],
             "completionDate": "2024-01-05T23:58:41.553Z",
             "costDate": "2023-07-31T05:03:57.205Z"
         },
@@ -3815,12 +3802,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0022.pdf",
+            "evidenceOfCompletion": ["certificate0022.pdf"],
             "completionDate": "2023-12-24T11:16:02.731Z",
             "costDate": "2023-05-24T12:57:25.957Z"
         },
@@ -3854,11 +3840,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0023.pdf",
+            "evidenceOfCompletion": ["certificate0023.pdf"],
             "completionDate": "2023-10-11T01:01:54.377Z",
             "costDate": "2022-08-01T17:05:27.614Z"
         },
@@ -3892,10 +3877,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0024.pdf",
+            "evidenceOfCompletion": ["certificate0024.pdf"],
             "completionDate": "2023-10-01T07:37:30.652Z",
             "costDate": "2023-12-05T01:28:36.183Z"
         },
@@ -3929,9 +3913,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0025.pdf",
+            "evidenceOfCompletion": ["certificate0025.pdf"],
             "completionDate": "2023-09-25T23:12:38.846Z",
             "costDate": "2023-10-06T04:13:18.379Z"
         },
@@ -3965,7 +3949,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-06-10T16:00:53.162Z"
         },
@@ -3999,11 +3983,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0027.pdf",
+            "evidenceOfCompletion": ["certificate0027.pdf"],
             "completionDate": "2023-10-03T06:48:46.651Z",
             "costDate": "2022-11-30T10:46:48.756Z"
         },
@@ -4037,10 +4020,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0028.pdf",
+            "evidenceOfCompletion": ["certificate0028.pdf"],
             "completionDate": "2024-02-20T01:47:37.245Z",
             "costDate": "2023-08-11T12:01:27.850Z"
         },
@@ -4074,9 +4056,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0029.pdf",
+            "evidenceOfCompletion": ["certificate0029.pdf"],
             "completionDate": "2024-02-13T06:37:52.874Z",
             "costDate": "2022-12-23T21:09:04.569Z"
         },
@@ -4110,11 +4092,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0030.pdf",
+            "evidenceOfCompletion": ["certificate0030.pdf"],
             "completionDate": "2023-12-16T00:07:52.447Z",
             "costDate": "2023-09-01T15:33:09.939Z"
         },
@@ -4148,11 +4129,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0031.pdf",
+            "evidenceOfCompletion": ["certificate0031.pdf"],
             "completionDate": "2023-12-13T17:40:37.051Z",
             "costDate": "2023-05-12T15:50:44.074Z"
         },
@@ -4186,12 +4166,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0032.pdf",
+            "evidenceOfCompletion": ["certificate0032.pdf"],
             "completionDate": "2024-03-11T08:07:44.509Z",
             "costDate": "2023-07-18T15:11:25.898Z"
         },
@@ -4225,11 +4204,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0033.pdf",
+            "evidenceOfCompletion": ["certificate0033.pdf"],
             "completionDate": "2023-11-10T19:30:14.667Z",
             "costDate": "2022-09-15T01:34:49.982Z"
         },
@@ -4263,10 +4241,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0034.pdf",
+            "evidenceOfCompletion": ["certificate0034.pdf"],
             "completionDate": "2023-09-27T07:22:17.342Z",
             "costDate": "2023-06-15T18:42:47.762Z"
         },
@@ -4300,12 +4277,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0035.pdf",
+            "evidenceOfCompletion": ["certificate0035.pdf"],
             "completionDate": "2023-11-17T09:18:00.848Z",
             "costDate": "2023-10-03T18:20:26.532Z"
         },
@@ -4339,10 +4315,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0036.pdf",
+            "evidenceOfCompletion": ["certificate0036.pdf"],
             "completionDate": "2024-03-21T03:25:13.541Z",
             "costDate": "2022-09-28T18:20:34.107Z"
         },
@@ -4376,12 +4351,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0037.pdf",
+            "evidenceOfCompletion": ["certificate0037.pdf"],
             "completionDate": "2023-12-01T11:34:22.867Z",
             "costDate": "2023-01-06T02:29:37.028Z"
         },
@@ -4415,11 +4389,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0038.pdf",
+            "evidenceOfCompletion": ["certificate0038.pdf"],
             "completionDate": "2023-09-06T06:40:45.140Z",
             "costDate": "2022-06-27T01:09:14.968Z"
         },
@@ -4453,9 +4426,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0039.pdf",
+            "evidenceOfCompletion": ["certificate0039.pdf"],
             "completionDate": "2024-04-16T09:03:54.836Z",
             "costDate": "2022-09-05T02:53:16.746Z"
         },
@@ -4489,12 +4462,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0040.pdf",
+            "evidenceOfCompletion": ["certificate0040.pdf"],
             "completionDate": "2024-03-29T23:41:17.176Z",
             "costDate": "2023-06-24T08:52:03.183Z"
         },
@@ -4528,10 +4500,9 @@ module.exports = {
             "rejectedDate": "2024-04-04T03:12:18.031Z",
             "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0041.pdf",
+            "evidenceOfCompletion": ["certificate0041.pdf"],
             "completionDate": "2024-04-01T23:13:31.837Z",
             "costDate": "2023-10-27T03:45:22.875Z"
         },
@@ -4565,11 +4536,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0042.pdf",
+            "evidenceOfCompletion": ["certificate0042.pdf"],
             "completionDate": "2023-09-08T07:59:26.940Z",
             "costDate": "2023-05-02T08:35:40.079Z"
         },
@@ -4603,12 +4573,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0043.pdf",
+            "evidenceOfCompletion": ["certificate0043.pdf"],
             "completionDate": "2023-10-26T11:46:06.003Z",
             "costDate": "2023-07-22T01:03:37.382Z"
         },
@@ -4642,11 +4611,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0044.pdf",
+            "evidenceOfCompletion": ["certificate0044.pdf"],
             "completionDate": "2024-03-13T15:30:06.118Z",
             "costDate": "2023-08-20T18:08:09.313Z"
         },
@@ -4680,7 +4648,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-03-16T07:19:17.118Z"
         },
@@ -4714,12 +4682,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0046.pdf",
+            "evidenceOfCompletion": ["certificate0046.pdf"],
             "completionDate": "2023-10-05T15:17:40.605Z",
             "costDate": "2022-09-11T14:44:23.233Z"
         },
@@ -4753,9 +4720,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0047.pdf",
+            "evidenceOfCompletion": ["certificate0047.pdf"],
             "completionDate": "2023-09-10T10:29:12.785Z",
             "costDate": "2022-08-05T16:00:41.630Z"
         },
@@ -4789,7 +4756,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-05-03T01:11:42.199Z"
         },
@@ -4823,10 +4790,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0049.pdf",
+            "evidenceOfCompletion": ["certificate0049.pdf"],
             "completionDate": "2024-03-20T11:50:24.640Z",
             "costDate": "2023-05-05T10:20:03.983Z"
         },
@@ -4860,7 +4826,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-10-24T01:28:30.743Z"
         },
@@ -4894,10 +4860,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0051.pdf",
+            "evidenceOfCompletion": ["certificate0051.pdf"],
             "completionDate": "2024-03-02T10:43:26.225Z",
             "costDate": "2023-11-28T01:48:16.110Z"
         },
@@ -4931,7 +4896,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-09-23T22:18:10.089Z"
         },
@@ -4965,12 +4930,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0053.pdf",
+            "evidenceOfCompletion": ["certificate0053.pdf"],
             "completionDate": "2023-11-21T09:12:53.185Z",
             "costDate": "2023-06-01T11:11:54.110Z"
         },
@@ -5004,7 +4968,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-04-21T10:26:13.015Z"
         },
@@ -5038,7 +5002,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-01-26T03:22:43.761Z"
         },
@@ -5072,10 +5036,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0056.pdf",
+            "evidenceOfCompletion": ["certificate0056.pdf"],
             "completionDate": "2024-01-01T23:39:56.635Z",
             "costDate": "2023-01-19T18:45:15.543Z"
         },
@@ -5109,7 +5072,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2022-09-01T05:36:20.089Z"
         },
@@ -5143,12 +5106,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0058.pdf",
+            "evidenceOfCompletion": ["certificate0058.pdf"],
             "completionDate": "2023-11-17T16:22:41.118Z",
             "costDate": "2022-06-11T00:08:39.480Z"
         },
@@ -5182,10 +5144,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0059.pdf",
+            "evidenceOfCompletion": ["certificate0059.pdf"],
             "completionDate": "2024-02-22T15:50:28.101Z",
             "costDate": "2022-09-05T16:40:37.377Z"
         },
@@ -5219,7 +5180,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2022-12-08T11:43:01.229Z"
         },
@@ -5253,10 +5214,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0061.pdf",
+            "evidenceOfCompletion": ["certificate0061.pdf"],
             "completionDate": "2024-02-28T09:54:36.224Z",
             "costDate": "2023-09-08T01:26:58.313Z"
         },
@@ -5290,12 +5250,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0062.pdf",
+            "evidenceOfCompletion": ["certificate0062.pdf"],
             "completionDate": "2023-12-13T21:51:53.322Z",
             "costDate": "2023-05-18T21:35:27.696Z"
         },
@@ -5329,7 +5288,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-11-07T17:21:06.106Z"
         },
@@ -5363,11 +5322,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0064.pdf",
+            "evidenceOfCompletion": ["certificate0064.pdf"],
             "completionDate": "2023-10-24T14:55:31.696Z",
             "costDate": "2022-11-18T23:36:37.559Z"
         },
@@ -5401,10 +5359,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0065.pdf",
+            "evidenceOfCompletion": ["certificate0065.pdf"],
             "completionDate": "2023-06-26T16:24:13.104Z",
             "costDate": "2023-12-23T22:23:43.160Z"
         },
@@ -5438,10 +5395,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0066.pdf",
+            "evidenceOfCompletion": ["certificate0066.pdf"],
             "completionDate": "2024-02-19T02:04:18.426Z",
             "costDate": "2023-10-19T12:16:30.045Z"
         },
@@ -5475,12 +5431,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0067.pdf",
+            "evidenceOfCompletion": ["certificate0067.pdf"],
             "completionDate": "2023-09-13T13:28:59.529Z",
             "costDate": "2022-10-01T20:53:58.300Z"
         },
@@ -5514,11 +5469,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0068.pdf",
+            "evidenceOfCompletion": ["certificate0068.pdf"],
             "completionDate": "2024-04-03T11:32:45.049Z",
             "costDate": "2023-05-19T01:39:33.367Z"
         },
@@ -5552,7 +5506,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-07-15T21:03:57.167Z"
         },
@@ -5586,12 +5540,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0070.pdf",
+            "evidenceOfCompletion": ["certificate0070.pdf"],
             "completionDate": "2023-07-24T02:00:28.473Z",
             "costDate": "2024-02-02T00:50:32.347Z"
         },
@@ -5625,9 +5578,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0071.pdf",
+            "evidenceOfCompletion": ["certificate0071.pdf"],
             "completionDate": "2023-08-24T12:34:55.942Z",
             "costDate": "2023-01-29T05:52:24.073Z"
         },
@@ -5661,9 +5614,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0072.pdf",
+            "evidenceOfCompletion": ["certificate0072.pdf"],
             "completionDate": "2023-10-11T08:33:50.183Z",
             "costDate": "2023-10-24T20:35:18.145Z"
         },
@@ -5697,12 +5650,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0073.pdf",
+            "evidenceOfCompletion": ["certificate0073.pdf"],
             "completionDate": "2023-12-05T23:39:48.785Z",
             "costDate": "2023-07-07T11:18:23.442Z"
         },
@@ -5736,12 +5688,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0074.pdf",
+            "evidenceOfCompletion": ["certificate0074.pdf"],
             "completionDate": "2023-11-22T08:21:56.842Z",
             "costDate": "2022-08-25T23:50:47.058Z"
         },
@@ -5775,9 +5726,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0075.pdf",
+            "evidenceOfCompletion": ["certificate0075.pdf"],
             "completionDate": "2024-04-02T06:22:36.082Z",
             "costDate": "2023-03-19T08:02:00.926Z"
         },
@@ -5811,11 +5762,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0076.pdf",
+            "evidenceOfCompletion": ["certificate0076.pdf"],
             "completionDate": "2023-07-15T05:25:33.731Z",
             "costDate": "2023-07-23T21:26:11.268Z"
         },
@@ -5849,10 +5799,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0077.pdf",
+            "evidenceOfCompletion": ["certificate0077.pdf"],
             "completionDate": "2023-09-23T08:08:43.328Z",
             "costDate": "2023-11-26T08:54:07.215Z"
         },
@@ -5886,12 +5835,11 @@ module.exports = {
             "rejectedDate": "2024-04-16T15:06:14.021Z",
             "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0078.pdf",
+            "evidenceOfCompletion": ["certificate0078.pdf"],
             "completionDate": "2023-10-17T13:17:11.529Z",
             "costDate": "2023-02-16T02:52:14.936Z"
         },
@@ -5925,10 +5873,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0079.pdf",
+            "evidenceOfCompletion": ["certificate0079.pdf"],
             "completionDate": "2023-12-12T06:18:56.333Z",
             "costDate": "2023-04-30T11:12:45.523Z"
         },
@@ -5962,7 +5909,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-04-30T01:41:00.954Z"
         },
@@ -5996,11 +5943,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0081.pdf",
+            "evidenceOfCompletion": ["certificate0081.pdf"],
             "completionDate": "2024-03-27T06:32:38.216Z",
             "costDate": "2022-10-23T20:06:46.422Z"
         },
@@ -6034,11 +5980,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0082.pdf",
+            "evidenceOfCompletion": ["certificate0082.pdf"],
             "completionDate": "2024-01-16T20:36:06.022Z",
             "costDate": "2023-02-12T16:21:34.533Z"
         },
@@ -6072,9 +6017,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0083.pdf",
+            "evidenceOfCompletion": ["certificate0083.pdf"],
             "completionDate": "2023-10-04T20:43:49.190Z",
             "costDate": "2022-07-21T19:02:46.985Z"
         },
@@ -6108,7 +6053,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-07-02T16:52:48.048Z"
         },
@@ -6142,10 +6087,9 @@ module.exports = {
             "rejectedDate": "2024-03-02T15:07:50.485Z",
             "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0085.pdf",
+            "evidenceOfCompletion": ["certificate0085.pdf"],
             "completionDate": "2024-01-14T06:30:14.263Z",
             "costDate": "2023-09-19T02:17:01.282Z"
         },
@@ -6179,7 +6123,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-12-08T18:20:51.570Z"
         },
@@ -6213,9 +6157,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0087.pdf",
+            "evidenceOfCompletion": ["certificate0087.pdf"],
             "completionDate": "2023-05-25T01:33:51.115Z",
             "costDate": "2023-06-08T12:48:19.295Z"
         },
@@ -6249,10 +6193,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0088.pdf",
+            "evidenceOfCompletion": ["certificate0088.pdf"],
             "completionDate": "2024-02-13T01:38:56.286Z",
             "costDate": "2022-09-25T23:33:34.732Z"
         },
@@ -6286,9 +6229,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0089.pdf",
+            "evidenceOfCompletion": ["certificate0089.pdf"],
             "completionDate": "2023-12-02T17:28:29.887Z",
             "costDate": "2023-10-12T21:28:26.284Z"
         },
@@ -6322,7 +6265,7 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null,
             "costDate": "2023-02-25T19:09:24.424Z"
         },
@@ -6356,11 +6299,10 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf"
             ],
-            "evidenceOfCompletion": "certficate0091.pdf",
+            "evidenceOfCompletion": ["certificate0091.pdf"],
             "completionDate": "2023-05-11T23:05:14.519Z",
             "costDate": "2023-09-02T05:15:50.303Z"
         },
@@ -6394,12 +6336,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0092.pdf",
+            "evidenceOfCompletion": ["certificate0092.pdf"],
             "completionDate": "2023-07-06T14:56:49.074Z",
             "costDate": "2023-03-27T01:10:34.400Z"
         },
@@ -6433,12 +6374,11 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf",
                 "invoice002.pdf",
                 "invoice003.pdf"
             ],
-            "evidenceOfCompletion": "certficate0093.pdf",
+            "evidenceOfCompletion": ["certificate0093.pdf"],
             "completionDate": "2023-09-15T14:38:08.764Z",
             "costDate": "2023-03-14T12:45:11.888Z"
         },
@@ -6472,9 +6412,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf"
+                "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0094.pdf",
+            "evidenceOfCompletion": ["certificate0094.pdf"],
             "completionDate": "2023-09-10T16:25:12.593Z",
             "costDate": "2022-12-31T18:13:33.117Z"
         },
@@ -6508,10 +6448,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0095.pdf",
+            "evidenceOfCompletion": ["certificate0095.pdf"],
             "completionDate": "2024-02-24T01:59:11.228Z",
             "costDate": "2023-06-14T07:25:18.553Z"
         },
@@ -6545,10 +6484,9 @@ module.exports = {
             "rejectedDate": null,
             "rejectedNote": null,
             "evidenceOfPayment": [
-                "invoice000.pdf",
                 "invoice001.pdf"
             ],
-            "evidenceOfCompletion": "certficate0096.pdf",
+            "evidenceOfCompletion": ["certificate0096.pdf"],
             "completionDate": "2023-11-01T03:57:54.980Z",
             "costDate": "2022-07-27T09:14:33.659Z"
         },
@@ -6576,7 +6514,7 @@ module.exports = {
             "paidDate": null,
             "costDate": null,
             "evidenceOfPayment": [],
-            "evidenceOfCompletion": null,
+            "evidenceOfCompletion": [],
             "completionDate": null
         }
     ],

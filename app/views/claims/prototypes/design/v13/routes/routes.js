@@ -84,7 +84,7 @@ router.post('/search_id_result_V13', function (req, res) {
   delete req.session.data['fromSearchResults'];
   delete req.session.data['deleteSuccess'];
 
-  var claimID = req.session.data.searchClaimId.replace(/\s/g, '');
+  var claimID = req.session.data.searchClaimId.replace(/[-\s]+/g, '');
 
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
@@ -96,17 +96,20 @@ router.post('/search_id_result_V13', function (req, res) {
     return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&invalidIDError=true');
   }
 
-  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  const lengthRegex = /^[A-NP-Z0-9]{3}(-)?[A-NP-Z0-9]{4}(-)?[A-NP-Z0-9]{4}(-)?([ABC])?$/;
   if (!lengthRegex.test(claimID)) {
     return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&invalidIDError=true');
   }
 
   var foundClaim = null
   for (const c of req.session.data['claims']) {
-    if (c.claimID == claimID) {
+    var removeDash = c.claimID.replace(/-/g, '')
+    if (removeDash.includes(claimID)) {
       foundClaim = c
     }
-  }
+}
+
+  // handle the claim id searched on won't be the one on a specific claim
 
   if (foundClaim == null) {
     return res.redirect('claims/prototypes/design/v13/manage-claims-home?fundingPot=TU&searchId='+claimID + '&notFound=true');
@@ -122,14 +125,26 @@ router.post('/search_result_a_V13', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['fromSearchId'];
   delete req.session.data['fromSearchResults'];
-
+  delete req.session.data['trainingSearchLengthInsufficient'];
+  delete req.session.data['learnerSearchLengthInsufficient'];
 
   const training = req.session.data.trainingName
   const learner = req.session.data.learner
+
+  let errorQuery = ""
   if (training == "" && learner == "") {
-    res.redirect('claims/prototypes/design/v13/claim/search-version-a?noInputsA=true');
-  } else {
+    errorQuery += "noInputsA=true&"
+  }
+  if ((training != "" && training.length < 3)) {
+    errorQuery += "trainingSearchLengthInsufficient=true&"
+  }
+  if ((learner != "" && learner.length < 3)) {
+    errorQuery += "learnerSearchLengthInsufficient=true&"
+  } 
+  if (errorQuery == "") {
     res.redirect('claims/prototypes/design/v13/claim/search-version-a?fromSearchResults=true#searchResults');
+  } else {
+    res.redirect('claims/prototypes/design/v13/claim/search-version-a?' + errorQuery)
   }
 });
 
@@ -488,9 +503,9 @@ router.post('/add-evidence', function (req, res) {
     if (claimID == c.claimID) {
       let numberOfEvidence = c.evidenceOfPayment.length + 1
       if (type == 'payment') {
-        c.evidenceOfPayment.push('invoice' + numberOfEvidence + '.pdf')
+        c.evidenceOfPayment.push('invoice' + (c.evidenceOfPayment.length + 1) + '.pdf')
       } else if (type == 'completion') {
-        c.evidenceOfCompletion = 'certficate01.pdf'
+        c.evidenceOfCompletion.push('certificate' + (c.evidenceOfCompletion.length + 1) + '.pdf')
       }
       break;
     }
@@ -499,9 +514,9 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.learnerID;
   delete req.session.data.submitError
 
-  if (type == 'payment') {
+  if (type == 'payment' || type == "completion") {
     res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
-  } else if (type == 'completion' || radioButtonValue == "no") {
+  } else if (radioButtonValue == "no") {
     res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
   }
 })
@@ -529,6 +544,7 @@ router.post('/remove-evidence', function (req, res) {
   var type = req.session.data.type
   var claimID = req.session.data.id
   let paymentCount = 0
+  let completionCount = 0
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
@@ -536,16 +552,16 @@ router.post('/remove-evidence', function (req, res) {
         c.evidenceOfPayment.pop()
         paymentCount = c.evidenceOfPayment.length
       } else if (type == 'completion') {
-        c.evidenceOfCompletion = 'certficate01.pdf'
+        c.evidenceOfCompletion.pop()
+        completionCount = c.evidenceOfCompletion.length
       }
       break;
     }
   }
-  delete req.session.data.type;
   delete req.session.data.learnerID;
   delete req.session.data.submitError
   delete req.session.data.deleteSuccess
-  if (paymentCount == 0) {
+  if ((type == "payment" && paymentCount == 0) || (type == "completion" && completionCount == 0)) {
     res.redirect('claim/add-evidence' + '?id=' + claimID + '&type=' + type + '&allDeleteSuccess=true')
   } else {
     res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type + '&deleteSuccess=true')

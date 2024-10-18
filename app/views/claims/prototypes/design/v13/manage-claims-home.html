@@ -53,7 +53,7 @@
               {% elif (data.invalidIDError) %}
               <li>
                 <a href="#searchClaimId">
-                  Enter a claim reference number in the correct format like H2T-C813-3XF7-C
+                  Enter a claim reference number in the correct format
                 </a>
               </li>
               {% elif (data.notFound) %}
@@ -117,28 +117,35 @@
             Find a claim
           </label>
           <div id="search-hint" class="govuk-hint moj-search__hint ">
-            Enter a claim reference
+            Enter a claim reference. This could be with or without the -A, -B or -C suffix. </br> Examples: H2T-C813-3XF7-C or WR5-R2P4-DSL4
           </div>
-          {% if data.invalidIDError or data.emptyError %}
+          {% if data.invalidIDError %}
                 <p id="sortCode-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> {% if data.invalidIDError %}Enter a claim reference number in the correct format like H2T-C813-3XF7-C{% elif data.emptyError %} Enter a claim reference number{% endif %}
+                    <span class="govuk-visually-hidden">Error:</span>Enter a claim reference number in the correct format
                 </p>
           {% endif %}
-          noClaimMatch
+          {% if data.emptyError %}
+                <p id="sortCode-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Enter a claim reference number
+                </p>
+          {% endif %}
           {% if data.notFound%}
                 <p id="sortCode-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span>No match returned for your search: "{{data.searchId}}" 
                 </p>
           {% endif %}
-          <input class="govuk-input moj-search__input" id="searchClaimId" name="searchClaimId" type="search"
-            aria-describedby="search-hint">
-        </div>
-        <div class="govuk-button-group  search__button-group">
-        <button type="submit" class="govuk-button govuk-button--secondary search__button"
-          data-module="govuk-button">
-          Search
-        </button>
-        <a class="govuk-link govuk-link--no-visited-state search__button" href="claim/search-version-{{data.searchType}}?emptyError&invalidIDError&notFound&deleteSuccess">Advanced search</a>
+          <div style="display: flex; flex-direction: row;">
+            <input class="govuk-input moj-search__input {% if data.invalidIDError or data.emptyError or data.notFound %} govuk-input--error {% endif %}" id="searchClaimId" name="searchClaimId" type="search"
+              aria-describedby="search-hint" value="{{data.searchId}}" style="width: 300px;">
+            <div class="govuk-button-group  search__button-group">
+              <button type="submit" class="govuk-button govuk-button--secondary"
+                data-module="govuk-button">
+                Search
+              </button>
+              <a class="govuk-link govuk-link--no-visited-state" href="claim/search-version-{{data.searchType}}?emptyError&invalidIDError&notFound&deleteSuccess">Advanced search</a>
+            </div>
+          </div>
+
         </div>
       </form>
     </div>
