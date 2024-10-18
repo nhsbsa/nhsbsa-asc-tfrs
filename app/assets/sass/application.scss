@@ -186,7 +186,10 @@
   top: 0.5em;
   display: inline-block;
   @include govuk-media-query($from: tablet) {
-  min-width: 250px;
+    min-width: 370px;
+    }
+  @include govuk-media-query($from: desktop) {
+    min-width: 625px;
   }
 }
 
