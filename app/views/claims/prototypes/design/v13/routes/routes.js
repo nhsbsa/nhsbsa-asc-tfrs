@@ -125,14 +125,26 @@ router.post('/search_result_a_V13', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['fromSearchId'];
   delete req.session.data['fromSearchResults'];
-
+  delete req.session.data['trainingSearchLengthInsufficient'];
+  delete req.session.data['learnerSearchLengthInsufficient'];
 
   const training = req.session.data.trainingName
   const learner = req.session.data.learner
+
+  let errorQuery = ""
   if (training == "" && learner == "") {
-    res.redirect('claims/prototypes/design/v13/claim/search-version-a?noInputsA=true');
-  } else {
+    errorQuery += "noInputsA=true&"
+  }
+  if ((training != "" && training.length < 3)) {
+    errorQuery += "trainingSearchLengthInsufficient=true&"
+  }
+  if ((learner != "" && learner.length < 3)) {
+    errorQuery += "learnerSearchLengthInsufficient=true&"
+  } 
+  if (errorQuery == "") {
     res.redirect('claims/prototypes/design/v13/claim/search-version-a?fromSearchResults=true#searchResults');
+  } else {
+    res.redirect('claims/prototypes/design/v13/claim/search-version-a?' + errorQuery)
   }
 });
 

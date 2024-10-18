@@ -8,12 +8,12 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../manage-claims-home?fundingPot=TU&noInputsA&trainingName&learner" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home?fundingPot=TU&noInputsA&trainingName&learner&trainingSearchLengthInsufficient&learnerSearchLengthInsufficient" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 
-{% if data.noInputsA %}
+{% if data.noInputsA or data.trainingSearchLengthInsufficient or data.learnerSearchLengthInsufficient %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <div class="govuk-error-summary" data-module="govuk-error-summary">
@@ -23,11 +23,27 @@
         </h2>
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
-            <li>
-              <a href="#input-error">
-                You need to enter something to search on
-              </a>
-            </li>
+              {% if data.noInputsA %}
+              <li>
+                <a href="#input-error">
+                  You need to enter something to search on
+                </a>
+              </li>
+              {% endif %}
+              {% if data.trainingSearchLengthInsufficient %}
+              <li>
+                <a href="#trainingSearch-error">
+                  You need to enter at least 3 characters of a course or qualification name
+                </a>
+              </li>
+              {% endif %}
+              {% if data.learnerSearchLengthInsufficient %}
+              <li>
+                <a href="#learnerSearch-error">
+                  You need to enter at least 3 characters of a learner name
+                </a>
+              </li>
+              {% endif %}
           </ul>
         </div>
       </div>
@@ -38,12 +54,12 @@
 
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
+  <div class="govuk-grid-column-two-thirds">
     <div class="{% if data.noInputsA %}govuk-form-group--error{% endif %} govuk-!-padding-bottom-4">
       <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search</h2>
         <p class="govuk-body govuk-!-margin-bottom-2">You can search by either learner, or course or qualification name, or a combination of
-          both</p>
+          both.</p>
         {% if data.noInputsA %}
         <p id="input-error" class="govuk-error-message govuk-!-margin-bottom-3">
           <span class="govuk-visually-hidden">Error:</span> You need to enter something to search on
@@ -57,25 +73,34 @@
   <div class="govuk-grid-column-two-thirds">
     <form action="/search_result_a_V13" method="post" class="form">
       <div class="{% if data.noInputsA %}govuk-form-group--error{% endif %} govuk-!-margin-bottom-6">
-
-        <div class="govuk-form-group ">
+        <div class="govuk-form-group {% if data.learnerSearchLengthInsufficient %}govuk-form-group--error{% endif %}">
           <label class="govuk-label" for="learner">
             <strong>Learner</strong>
           </label>
           <div id="learner-name-hint" class="govuk-hint">
-            Enter all or part of the name, or the whole National Insurance number
+            Enter all or part of the name, or the whole National Insurance number. Minimum of 3 characters.
           </div>
+          {% if data.learnerSearchLengthInsufficient %}
+            <p id="learnerSearch-error" class="govuk-error-message govuk-!-margin-bottom-3">
+              <span class="govuk-visually-hidden">Error:</span> You need to enter at least 3 characters of a learner name
+            </p>
+          {% endif %}
           <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text"
             value="{{ data.learner | default ('') }}">
         </div>
 
-        <div class="govuk-form-group">
+        <div class="govuk-form-group {% if data.trainingSearchLengthInsufficient %}govuk-form-group--error{% endif %}">
           <label class="govuk-label" for="trainingName">
             <strong>Course or qualification name</strong>
           </label>
           <div id="course-name-hint" class="govuk-hint">
-            Enter all or part of the name
+            Enter all or part of the name. Minimum of 3 characters.
           </div>
+          {% if data.trainingSearchLengthInsufficient %}
+            <p id="trainingSearch-error" class="govuk-error-message govuk-!-margin-bottom-3">
+              <span class="govuk-visually-hidden">Error:</span> You need to enter at least 3 characters of a course or qualification name
+            </p>
+          {% endif %}
           <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text"
             value="{{ data.trainingName | default ('') }}">
         </div>
@@ -104,9 +129,8 @@
         </tr>
       </thead>
       <tbody class="govuk-table__body">
-        {% set counter = 1 %}
+
         {% for claim in matchedClaims %} 
-          {% if (counter < 11) %} 
           <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
             <td class="govuk-table__header" scope="row"><a class="govuk-link"
                 href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
@@ -116,45 +140,16 @@
             <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
               statusTag_V13(data.statuses) }}</td>
           </tr>
-          {% set counter = counter + 1 %}
-          {% endif %} 
         {% endfor %}
         
       </tbody>
     </table>
-
-    {% if (resultCount > 10) %}
-      <nav class="moj-pagination" aria-label="Pagination navigation">
-
-        <ul class="moj-pagination__list">
-
-            <li class="moj-pagination__item moj-pagination__item--active" aria-label="Page 1 of 30" aria-current="page">
-                1</li>
-
-            <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 2 of 30">2</a>
-            </li>
-
-            <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 3 of 30">3</a>
-            </li>
-
-            <li class="moj-pagination__item moj-pagination__item--dots">…</li>
-
-            <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 4 of 30">{{
-              resultCount | pageCount_V13 }}</a>
-            </li>
-
-            <li class="moj-pagination__item  moj-pagination__item--next">
-                <a class="moj-pagination__link" href="">Next<span class="govuk-visually-hidden"> page</span></a>
-            </li>
-        </ul>
-        <p class="moj-pagination__results">Showing <b>1</b> to <b>10</b> of <b>{{ resultCount }}</b> claims</p>
-    </nav>
-    {% endif %}
   </div>
 </div>
-{% elif (data['trainingName'] or data['learner']) and (resultCount == 0) %}
+{% elif (data['trainingName'] or data['learner']) and (resultCount == 0) and (data.trainingSearchLengthInsufficient == null) and (data.learnerSearchLengthInsufficient == null)%}
 <div class="govuk-grid-row" id="searchResults">
   <div class="govuk-grid-column-full">
+    <h2 class="govuk-heading-m">Search results</h2>
     <p class="govuk-body">
       No matches returned for your search.
     </p>
