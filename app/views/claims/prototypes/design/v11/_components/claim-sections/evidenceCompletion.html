@@ -15,7 +15,7 @@
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-key--error {% endif %}">
       Completion date
     </dt>
-    <dd class="govuk-summary-list__value">
+    <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-value--error {% endif %}">
       {% if (claim.learner and claim.claimType != "60") or pairClaim != null %}
       <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date">Add completion date</a>
       {% else %}
@@ -35,7 +35,7 @@
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='invalid' %} govuk-summary-key--error {% endif %}">
       Completion date
     </dt>
-    <dd class="govuk-summary-list__value">
+    <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='invalid' %} govuk-summary-value--error {% endif %}">
       {% if claim.claimType == "100" %}
       {{ claim.completionDate | govukDate }}
       {% elif claim.claimType == "60" %}
@@ -43,7 +43,7 @@
       {% endif %}
     </dd>
     {% if ((claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "new" or pairClaim.status == "not-yet-submitted"))  %}
-    <dd class="govuk-summary-list__actions">
+    <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='invalid' %} govuk-summary-value--error {% endif %}">
       <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date">Change<span class="govuk-visually-hidden">
         completion date</span></a>
     </dd>
@@ -63,7 +63,7 @@
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' %} govuk-summary-key--error {% endif %}">
       Evidence of completion
     </dt>
-    <dd class="govuk-summary-list__value">
+    <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' %} govuk-summary-value--error {% endif %}">
       {% if (claim.learner and claim.claimType != "60") or pairClaim != null %}
       <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion">Add evidence</a>
       {% else %}
