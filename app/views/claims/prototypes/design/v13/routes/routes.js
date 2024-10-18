@@ -131,6 +131,8 @@ router.post('/search_result_a_V13', function (req, res) {
   const learner = req.session.data.learner
   if (training == "" && learner == "") {
     res.redirect('claims/prototypes/design/v13/claim/search-version-a?noInputsA=true');
+  } else if (training.length <3 || learner.length <3) {
+    res.redirect('claims/prototypes/design/v13/claim/search-version-a?searchLengthInsufficient=true');
   } else {
     res.redirect('claims/prototypes/design/v13/claim/search-version-a?fromSearchResults=true#searchResults');
   }

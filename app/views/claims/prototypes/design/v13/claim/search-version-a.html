@@ -13,7 +13,7 @@
 
 {% block content %}
 
-{% if data.noInputsA %}
+{% if data.noInputsA or data.searchLengthInsufficient %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <div class="govuk-error-summary" data-module="govuk-error-summary">
@@ -24,9 +24,15 @@
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
             <li>
-              <a href="#input-error">
-                You need to enter something to search on
-              </a>
+              {% if data.noInputsA %}
+                <a href="#input-error">
+                  You need to enter something to search on
+                </a>
+              {% elif data.searchLengthInsufficient %}
+                <a href="#input-error">
+                  You need to type in at least one search input of minimum 3 characters
+                </a>
+              {% endif %}
             </li>
           </ul>
         </div>
@@ -39,14 +45,18 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <div class="{% if data.noInputsA %}govuk-form-group--error{% endif %} govuk-!-padding-bottom-4">
+    <div class="{% if data.noInputsA or data.searchLengthInsufficient %}govuk-form-group--error{% endif %} govuk-!-padding-bottom-4">
       <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search</h2>
         <p class="govuk-body govuk-!-margin-bottom-2">You can search by either learner, or course or qualification name, or a combination of
-          both</p>
+          both. </br> Minimum of 3 characters in at least one search field.</p>
         {% if data.noInputsA %}
         <p id="input-error" class="govuk-error-message govuk-!-margin-bottom-3">
           <span class="govuk-visually-hidden">Error:</span> You need to enter something to search on
+        </p>
+        {% elif data.searchLengthInsufficient %}
+        <p id="input-error" class="govuk-error-message govuk-!-margin-bottom-3">
+          <span class="govuk-visually-hidden">Error:</span> You need to type in at least one search input of minimum 3 characters
         </p>
         {% endif %}
     </div>
@@ -56,14 +66,14 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <form action="/search_result_a_V13" method="post" class="form">
-      <div class="{% if data.noInputsA %}govuk-form-group--error{% endif %} govuk-!-margin-bottom-6">
+      <div class="{% if data.noInputsA or data.searchLengthInsufficient %}govuk-form-group--error{% endif %} govuk-!-margin-bottom-6">
 
         <div class="govuk-form-group ">
           <label class="govuk-label" for="learner">
             <strong>Learner</strong>
           </label>
           <div id="learner-name-hint" class="govuk-hint">
-            Enter all or part of the name, or the whole National Insurance number
+            Enter all or part of the name, or the whole National Insurance number.
           </div>
           <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text"
             value="{{ data.learner | default ('') }}">
@@ -74,7 +84,7 @@
             <strong>Course or qualification name</strong>
           </label>
           <div id="course-name-hint" class="govuk-hint">
-            Enter all or part of the name
+            Enter all or part of the name.
           </div>
           <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text"
             value="{{ data.trainingName | default ('') }}">
@@ -152,9 +162,10 @@
     {% endif %}
   </div>
 </div>
-{% elif (data['trainingName'] or data['learner']) and (resultCount == 0) %}
+{% elif (data['trainingName'] or data['learner']) and (resultCount == 0) and (data.searchLengthInsufficient == null)%}
 <div class="govuk-grid-row" id="searchResults">
   <div class="govuk-grid-column-full">
+    <h2 class="govuk-heading-m">Search results</h2>
     <p class="govuk-body">
       No matches returned for your search.
     </p>

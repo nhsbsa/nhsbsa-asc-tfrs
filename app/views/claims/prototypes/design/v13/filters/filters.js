@@ -726,6 +726,10 @@ addFilter('claimsMatchAdvancedSearchA_V13', function (claims, training, learner)
     const formattedTraining = removeSpacesAndLowerCase(training);
     const formattedLearner = removeSpacesAndLowerCase(learner);
 
+    if (training.length < 3 || learner.length < 3) {
+        return []
+    }
+
     var searched = claims.filter(claim => {
         let trainingCheck = false;
         if (claim.training != null) {
