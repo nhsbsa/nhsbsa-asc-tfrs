@@ -3,7 +3,7 @@
 
   {% if not claim.costDate %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =="missing" %}
-    <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+    <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
       <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
         <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a payment date</p>
       </div>
@@ -36,7 +36,7 @@
 
   {% if ( claim.evidenceOfPayment | getCount_V13 == 0 ) %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =="missing" %}
-      <div class="govuk-summary-list__row govuk-summary-list-row--error govuk-summary-list-row--error--message">
+      <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
         <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-evidence-error">
           <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add evidence of payment</p>
         </div>

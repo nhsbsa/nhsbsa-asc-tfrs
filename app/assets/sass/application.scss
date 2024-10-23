@@ -177,7 +177,7 @@
 }
 
 .govuk-summary-list-row--error {
-  border-left: 5px solid #d4351c;
+  box-shadow: inset 5px 0 0 0 #d4351c;
   position: relative;
 }
 
@@ -191,6 +191,11 @@
   @include govuk-media-query($from: desktop) {
     min-width: 625px;
   }
+}
+
+.govuk-summary-key--error.govuk-summary-key--error--inline {
+  padding-top: 5px;
+  padding-left: 15px;
 }
 
 .govuk-summary-key--error {
@@ -207,7 +212,23 @@
   border-bottom: none;
   margin-bottom: 0em;
   padding-bottom: 0em;
+  position: relative;
 }
+
+.govuk-summary-list-row--error--message:before {
+  content: "";
+  position: absolute;
+  top: 5px; /* This offsets the border 5px from the top */
+  @include govuk-media-query($from: tablet) {
+    left: 0px;
+  }
+  left: 0px;
+  width: 5px; /* Matches the border width */
+  height: calc(100% - 5px); /* Ensures the border stretches to the bottom */
+  background-color: #d4351c; /* Border color */
+}
+
+
 
 .hods-highlight {
   background-color: #FFE5CC;
