@@ -26,9 +26,9 @@ Signatory details - Register an organisation
         </div>
         {% endif %}
         <span class="govuk-caption-l">Register an organisation</span>
-        <h1 class="govuk-heading-l">Signatory details</h1>
-        <p class="govuk-body">Enter the details of the person in the organisation who will be the signatory for
-            the grant determination declaration.</p>
+        <h1 class="govuk-heading-l">Senior Responsible Officer details</h1>
+        <p class="govuk-body">Enter the details of the person in the organisation who will be the Senior Responsible Officer (SRO).</p>
+        <p class="govuk-body"> This person will sign the grant determination declaration.</p>
         <form action="../signatory-handler" method="post" novalidate>
             <div
                 class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
@@ -36,7 +36,7 @@ Signatory details - Register an organisation
                     Last (family) name
                 </label>
                 <div id="role-type-hint" class="govuk-hint">
-                    The last (family) name of the signatory
+                    The last (family) name of the SRO
                 </div>
                 {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
                 data.submitError.familyName == 'missing' %}
@@ -55,7 +55,7 @@ Signatory details - Register an organisation
                     First (given) name
                 </label>
                 <div id="role-type-hint" class="govuk-hint">
-                    The first (given) name of the signatory
+                    The first (given) name of the SRO
                 </div>
                 {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
                 data.submitError.givenName

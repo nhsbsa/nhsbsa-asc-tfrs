@@ -593,7 +593,7 @@ router.post('/save-claim', function (req, res) {
   delete req.session.data['activity-date-started-month'];
   delete req.session.data['activity-date-started-year'];
 
-  res.redirect('manage-claims?fundingPot=' + fundingPot + '&statusID='+req.session.data.statusID)
+  res.redirect('manage-claims?fundingPot=' + fundingPot + '&statusID=not-yet-submitted')
 
 });
 
