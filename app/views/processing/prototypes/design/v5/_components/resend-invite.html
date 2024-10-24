@@ -1,5 +1,58 @@
 <h1 class="govuk-heading-l">Invitation sent but sign up not completed</h1>
 <p class="govuk-body">This organisation has already been invited but their signatory has not completed the registration process.</p>
+
+<h2 class="govuk-heading-m" id="training">Organisation</h2>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Workplace ID
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{data.orgID}}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            Fake care home
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Address
+        </dt>
+        <dd class="govuk-summary-list__value">
+            72 Guild Street<br>London<br>SE23 6FH
+        </dd>
+    </div>
+</dl>
+
+<h2 class="govuk-heading-m" id="training">Signatory</h2>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+        <dt class="govuk-summary-list__key">
+            Name
+        </dt>
+        <dd class="govuk-summary-list__value">
+           Fake name
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Email
+        </dt>
+        <dd class="govuk-summary-list__value">
+           Fake-email@carehome.com
+        </dd>
+        <dd class="govuk-summary-list__actions">
+            <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Edit<span
+                class="govuk-visually-hidden"> learner</span></a>
+          </dd>
+    </div>
+</dl>
+
 <p class="govuk-body">You could remind the signatory to complete the process or resend the invite if required.</p>
 <form action="../home?confirmation=register" method="post" novalidate>
     <input type="hidden" name="answers-checked" value="true">
