@@ -113,7 +113,7 @@
     <div class="moj-search search__container">
       <form action="/search_id_result_V13" method="post">
         <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">
-          <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+          <label class="govuk-label moj-search__label govuk-!-font-weight-bold" style="padding-bottom: 10px;" for="search">
             Find a claim
           </label>
           <div id="search-hint" class="govuk-hint moj-search__hint ">
@@ -149,6 +149,8 @@
         </div>
       </form>
     </div>
+
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
     <ul class="homepage-services-and-info__list">
         {% for status in data.statuses %}
