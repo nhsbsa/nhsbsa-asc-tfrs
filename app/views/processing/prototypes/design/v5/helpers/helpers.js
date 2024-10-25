@@ -16,6 +16,7 @@ function loadData(req) {
     var claimsFile = 'processing-claims.json'
     var statusFile = 'claim-item-statuses.json'
     var trainingFile = 'training.json'
+    var organisationFile = 'organisation.json'
 
     console.log('loading in claims file')
     req.session.data['claims'] = loadJSONFromFile(claimsFile, path)
@@ -32,6 +33,10 @@ function loadData(req) {
     console.log('loading in learners file')
     req.session.data['learners'] = loadJSONFromFile(learnersFile, path)
     console.log('learners file loaded')
+
+    console.log('loading in organisation file')
+    req.session.data['organisation'] = loadJSONFromFile(organisationFile, path)
+    console.log('organisation file loaded')
 
     return console.log('data updated')
 }

@@ -341,6 +341,7 @@ function loadData(req) {
     var claimsFile = 'claims.json'
     var statusFile = 'claim-item-statuses.json'
     var roleTypes = 'role-types.json'
+    var organisationFile = 'organisation.json'
   
     if (req.session.data.training) {
       console.log('training file already loaded')
@@ -381,7 +382,15 @@ function loadData(req) {
       req.session.data['roleTypes'] = loadJSONFromFile(roleTypes, path)
       console.log('role types file loaded')
     }
-  
+
+    if (req.session.data.organisation) {
+      console.log('organisation file already loaded')
+    } else {
+      console.log('loading in organisation file')
+      req.session.data['organisation'] = loadJSONFromFile(organisationFile, path)
+      console.log('organisation file loaded')
+    }
+    
     return console.log('data updated')
   }
 
