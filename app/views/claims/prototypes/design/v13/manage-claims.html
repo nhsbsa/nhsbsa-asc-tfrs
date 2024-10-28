@@ -6,22 +6,14 @@
 
 
 {% block pageTitle %}
-{{ [status.name, " claims - ", (data.fundingPot | potName_V13)] | join }}
+{{ [status.name, " claims"] | join }}
 {% endblock %}
 
 {% block beforeContent %}
 <div class="govuk-breadcrumbs">
     <ol class="govuk-breadcrumbs__list">
         <li class="govuk-breadcrumbs__list-item">
-            <a class="govuk-breadcrumbs__link" href="choose-a-claim-type">Home
-            </a>
-        </li>
-        <li class="govuk-breadcrumbs__list-item">
-            <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot={{ data.fundingPot }}&deleteSuccess=">Manage claims
-                ({{ data.fundingPot |
-                potName_V13
-                }})
-            </a>
+            <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=TU">Home</a>
         </li>
         <li class="govuk-breadcrumbs__list-item">
             <a class="govuk-breadcrumbs__link"
@@ -49,7 +41,6 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
         <h2 class="govuk-heading-l govuk-!-margin-bottom-3">{{ status.name }} claims ({{ numClaims }})</h2>
         <p class="govuk-body">{{status.description}}</p>
     </div>

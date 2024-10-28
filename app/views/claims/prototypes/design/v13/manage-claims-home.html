@@ -1,19 +1,14 @@
 {% extends "./layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Manage claims - ", (data.fundingPot | potName_V13)] | join }}
+  Manage claims
 {% endblock %}
 
 {% block beforeContent %}
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="choose-a-claim-type">Home
-      </a>
-  </li>
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=TU&deleteSuccess">Manage claims ({{ data.fundingPot | potName_V13
-          }})</a>
+      <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=TU">Home</a>
     </li>
   </ol>
 </div>
@@ -90,7 +85,6 @@
 
     <div class="moj-page-header-actions">
       <div class="moj-page-header-actions__title">
-        <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
         <h1 class="govuk-heading-l">Manage claims</h1>
       </div>
       <div class="moj-page-header-actions__actions">
@@ -116,7 +110,7 @@
           <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
             Find a claim
           </label>
-          <div id="search-hint" class="govuk-hint moj-search__hint ">
+          <div id="search-hint" class="govuk-hint moj-search__hint">
             Enter a claim reference. This could be with or without the -A, -B or -C suffix. </br> Examples: H2T-C813-3XF7-C or WR5-R2P4-DSL4
           </div>
           {% if data.invalidIDError %}
@@ -134,17 +128,18 @@
                     <span class="govuk-visually-hidden">Error:</span>No match returned for your search: "{{data.searchId}}" 
                 </p>
           {% endif %}
-          <div style="display: flex; flex-direction: row;">
-            <input class="govuk-input moj-search__input {% if data.invalidIDError or data.emptyError or data.notFound %} govuk-input--error {% endif %}" id="searchClaimId" name="searchClaimId" type="search"
-              aria-describedby="search-hint" value="{{data.searchId}}" style="width: 300px;">
-            <div class="govuk-button-group  search__button-group">
-              <button type="submit" class="govuk-button govuk-button--secondary"
+
+            <div class="search__button-group">
+
+              <input class="govuk-input moj-search__input govuk-input--width-10 {% if data.invalidIDError or data.emptyError or data.notFound %} govuk-input--error {% endif %}" id="searchClaimId" name="searchClaimId" type="search"
+                aria-describedby="search-hint" value="{{data.searchId}}">
+              <button type="submit" class="govuk-button govuk-button--secondary moj-search__button"
                 data-module="govuk-button">
                 Search
               </button>
-              <a class="govuk-link govuk-link--no-visited-state" href="claim/search-version-{{data.searchType}}?emptyError&invalidIDError&notFound&deleteSuccess">Advanced search</a>
+
+            <div class="govuk-body advanced-search"><a class="govuk-link govuk-link--no-visited-state" href="claim/search-version-{{data.searchType}}?emptyError&invalidIDError&notFound&deleteSuccess">Advanced search</a></div>
             </div>
-          </div>
 
         </div>
       </form>
@@ -167,8 +162,8 @@
   <div class="govuk-grid-column-one-third">
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     <h2 class="govuk-heading-m">Related content</h2>
-    <p class="govuk-body"><a href="./guidance/help-start-tu-claim" class="govuk-link">Help with starting a new care skills claim</a></p>
-    <p class="govuk-body"><a href="./guidance/tu-evidence-requirements" class="govuk-link">Help with care skills evidence requirements</a></p>
+    <p class="govuk-body"><a href="./guidance/help-start-tu-claim" class="govuk-link">Help with starting a new claim</a></p>
+    <p class="govuk-body"><a href="./guidance/tu-evidence-requirements" class="govuk-link">Help with evidence requirements</a></p>
   </div>
 </div>
 
