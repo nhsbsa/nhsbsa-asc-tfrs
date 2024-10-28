@@ -110,7 +110,7 @@
           <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
             Find a claim
           </label>
-          <div id="search-hint" class="govuk-hint moj-search__hint ">
+          <div id="search-hint" class="govuk-hint moj-search__hint">
             Enter a claim reference. This could be with or without the -A, -B or -C suffix. </br> Examples: H2T-C813-3XF7-C or WR5-R2P4-DSL4
           </div>
           {% if data.invalidIDError %}
@@ -128,17 +128,18 @@
                     <span class="govuk-visually-hidden">Error:</span>No match returned for your search: "{{data.searchId}}" 
                 </p>
           {% endif %}
-          <div style="display: flex; flex-direction: row;">
-            <input class="govuk-input moj-search__input {% if data.invalidIDError or data.emptyError or data.notFound %} govuk-input--error {% endif %}" id="searchClaimId" name="searchClaimId" type="search"
-              aria-describedby="search-hint" value="{{data.searchId}}" style="width: 300px;">
-            <div class="govuk-button-group  search__button-group">
-              <button type="submit" class="govuk-button govuk-button--secondary"
+
+            <div class="search__button-group">
+
+              <input class="govuk-input moj-search__input govuk-input--width-10 {% if data.invalidIDError or data.emptyError or data.notFound %} govuk-input--error {% endif %}" id="searchClaimId" name="searchClaimId" type="search"
+                aria-describedby="search-hint" value="{{data.searchId}}">
+              <button type="submit" class="govuk-button govuk-button--secondary moj-search__button"
                 data-module="govuk-button">
                 Search
               </button>
-              <a class="govuk-link govuk-link--no-visited-state" href="claim/search-version-{{data.searchType}}?emptyError&invalidIDError&notFound&deleteSuccess">Advanced search</a>
+
+            <div class="govuk-body advanced-search"><a class="govuk-link govuk-link--no-visited-state" href="claim/search-version-{{data.searchType}}?emptyError&invalidIDError&notFound&deleteSuccess">Advanced search</a></div>
             </div>
-          </div>
 
         </div>
       </form>
