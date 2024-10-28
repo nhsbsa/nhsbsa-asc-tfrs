@@ -3,7 +3,7 @@
 {% set claim = data.id | findClaim_V8(data.claims) %}
 
 {% block pageTitle %}
-{{ ["Confirm outcome: ", claim.claimID, " - process a claim"] | join }}
+{{ ["Claim: ", claim.claimID, " — ", data.processingServiceName] | join }}
 {% endblock %}
 
 {% block content %}

@@ -9,7 +9,11 @@
 {% endif %}
 
 {% block pageTitle %}
-{{ ["Claim: ", claim.claimID] | join }}
+{% if (claim.fundingType == "TU" and claim.claimType == "100") %}
+{{ ["Claim: ", claim.claimID, " — ", serviceName, " — GOV.UK"] | join }}
+{% else %}
+{{ ["Combined claim: ", claim.claimID | removeClaimSuffix_V13, " — ", serviceName, " — GOV.UK"] | join }}
+{% endif %}
 {% endblock %}
 
 {% block beforeContent %}

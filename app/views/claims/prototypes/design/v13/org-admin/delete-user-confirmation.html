@@ -2,8 +2,14 @@
 {% set claim = data.id | findClaim_V13(data.claims) %}
 {% set user = data.deletedEmail | findUser_V13(data.users) %}
 
+{% if user.status == "active" %}
+  {% set usertype = "registered" %}
+{% else %}
+  {% set usertype = "invited" %}
+{% endif %}
+
 {% block pageTitle %}
-{{ ["Learner ineligible - Claim: ", data.id] | join }}
+{{ ["Are you sure you want to delete this ", usertype, " user? — ", serviceName, " — GOV.UK"] | join }}
 {% endblock %}
 
 {% block content %}

@@ -2,7 +2,7 @@
 {% set claim = data.id | findClaim_V13(data.claims) %}
 
 {% block pageTitle %}
-{{ ["Declaration - Claim: ", data.id] | join }}
+{{ ["Declaration — ", serviceName, " — GOV.UK"] | join }}
 {% endblock %}
 
 {% block content %}

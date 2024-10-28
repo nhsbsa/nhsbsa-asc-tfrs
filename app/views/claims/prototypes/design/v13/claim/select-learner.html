@@ -2,7 +2,7 @@
 {% set claim = data.id | findClaim_V13(data.claims) %}
 
 {% block pageTitle %}
-{{ ["Select learner - Claim: ", claim.claimID] | join }}
+{{ ["Course or qualification learner — ", serviceName, " — GOV.UK"] | join }}
 {% endblock %}
 
 {% block beforeContent %}

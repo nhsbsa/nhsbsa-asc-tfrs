@@ -3,7 +3,7 @@
 {% set evidenceCount = claim.evidenceOfPayment | getCount_V13 %}
 
 {% block pageTitle %}
-{{ ["Add evidence - Claim: ", claim.claimID] | join }}
+{{ ["Add evidence of ", data.type, " — ", serviceName, " — GOV.UK"] | join }}
 {% endblock %}
 
 {% block content %}

@@ -1,7 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% block pageTitle %}
-Claim ID - Find a claim for processing
+{{ ["Claim reference number — Find a claim — ", data.processingServiceName] | join }}
 {% endblock %}
 
 {% block beforeContent %}
