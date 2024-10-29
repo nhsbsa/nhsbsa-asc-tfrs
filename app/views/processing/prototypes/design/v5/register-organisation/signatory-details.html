@@ -1,7 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% set foundOrganisation = data.organisations | findOrg_V5(data.orgID) %}
-{% set detail = foundOrganisation.signatory.givenName | formatInformation(data.givenName) %}
+{% set detail = foundOrganisation.signatory.givenName | formatInformation_V5(data.givenName) %}
 
 {% block pageTitle %}
 Signatory details - Register an organisation
