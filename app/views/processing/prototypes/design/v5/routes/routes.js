@@ -40,7 +40,7 @@ router.post('/confirm-org-handler', function (req, res) {
   delete req.session.data.confirmation
 
   if (confirmation == "yes") {
-    res.redirect('register-organisation/signatory-details')
+    res.redirect('register-organisation/signatory-details?newOrg=true')
   } else if (confirmation == "no") {
     res.redirect('register-organisation/org-issue?submitError=incorrect')
   } else if (confirmation == null) {

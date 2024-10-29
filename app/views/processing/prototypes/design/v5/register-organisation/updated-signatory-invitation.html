@@ -1,4 +1,17 @@
-<h1 class="govuk-heading-l">Updated signatory to send details</h1>
+{% extends "../layouts/processing-main.html" %}
+
+{% block pageTitle %}
+Workplace ID - Register an organisation
+{% endblock %}
+
+{% block beforeContent %}
+<a href="../home" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Updated signatory to send details</h1>
 <p class="govuk-body">This organisation has already been invited but their signatory has not completed the registration process.</p>
 
 <h2 class="govuk-heading-m" id="training">Organisation</h2>
@@ -80,3 +93,7 @@
     </div>
 </form>
 
+
+    </div>
+</div>
+{% endblock %}

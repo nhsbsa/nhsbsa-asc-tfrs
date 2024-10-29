@@ -1,12 +1,20 @@
 {% extends "../layouts/processing-main.html" %}
 
+{% set foundOrganisation = data.organisations | findOrg_V5(data.orgID) %}
+{% set detail = foundOrganisation.signatory.givenName | formatInformation(data.givenName) %}
+
 {% block pageTitle %}
 Signatory details - Register an organisation
 {% endblock %}
 
 {% block beforeContent %}
-<a href="confirm-organisation-details" class="govuk-back-link">Back</a>
+    {% if data.newOrg %}
+        <a href="confirm-organisation-details" class="govuk-back-link">Back</a>
+    {% else %}
+        <a href="org-issue?submitError=resend" class="govuk-back-link">Back</a>
+    {% endif %}
 {% endblock %}
+
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -47,7 +55,7 @@ Signatory details - Register an organisation
                 <input
                     class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.familyName == 'missing' %} govuk-input--error {% endif %}"
                     id="familyName" name="familyName" type="text" spellcheck="false" autocomplete="name"
-                    value="{{ data.familyName | default ('') }}">
+                    value="{{ foundOrganisation.signatory.familyName | default ('') }}">
             </div>
             <div
                 class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.givenName == 'missing' %} govuk-form-group--error {% endif %}">
@@ -67,7 +75,7 @@ Signatory details - Register an organisation
                 <input
                     class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.givenName == 'missing' %} govuk-input--error {% endif %}"
                     id="givenName" name="givenName" type="text" spellcheck="false" autocomplete="name"
-                    value="{{ data.givenName | default ('') }}">
+                    value="{{foundOrganisation.signatory.givenName | default ('')}}">
             </div>
             <div
                 class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-form-group--error {% endif %}">
@@ -91,7 +99,7 @@ Signatory details - Register an organisation
                 <input
                     class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-input--error  {% endif %}"
                     id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint"
-                    autocomplete="email" value="{{ data.email | default ('') }}">
+                    autocomplete="email" value="{{ foundOrganisation.signatory.email | default ('') }}">
             </div>
             <button type="submit" class="govuk-button" data-module="govuk-button">
                 Continue

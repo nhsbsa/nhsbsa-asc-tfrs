@@ -223,3 +223,25 @@ addFilter('matchPairClaim_V5', function(claimID, claims) {
     return pairClaim
 
 })
+
+addFilter('findOrg_V5', function (organisations, id) {
+    var foundOrg = null
+    for (const org of organisations) {
+        if (org.workplaceId == id) {
+            foundOrg = org
+        }
+    }
+    return foundOrg
+})
+
+addFilter('formatInformation_V5', function (savedOrg, enteredInfo) {
+    var info = ""
+    if (savedOrg != null) {
+        info
+    }
+    return info
+})
+// need to handle if coming from new it is empty, if going back its saved
+// if invited sig getting updated it needs the current invited then gets updated with new deats, which need to be displayed on next page
+
+

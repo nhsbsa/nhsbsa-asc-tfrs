@@ -1,7 +1,9 @@
 <h1 class="govuk-heading-l">Invitation sent but sign up not completed</h1>
 <p class="govuk-body">This organisation has already been invited but their signatory has not completed the registration process.</p>
 
-<h2 class="govuk-heading-m" id="training">Organisation</h2>
+{% set foundOrganisation = data.organisations | findOrg_V5(data.orgID) %}
+
+<!-- <h2 class="govuk-heading-m" id="training">Organisation</h2>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
@@ -27,9 +29,45 @@
             {{data.organisation.address}}
         </dd>
     </div>
-</dl>
+</dl> -->
 
-<h2 class="govuk-heading-m" id="training">Signatory</h2>
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        Organisation details
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.workplaceId }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.name }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.address }}
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>
+
+<!-- <h2 class="govuk-heading-m" id="training">Signatory</h2>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
         <dt class="govuk-summary-list__key">
@@ -48,7 +86,43 @@
         </dd>
 
     </div>
-</dl>
+</dl> -->
+
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        Invited signatory details
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Last (family) name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.signatory.familyName }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    First (given) name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.signatory.givenName }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Email address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.signatory.email }}
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>
 
 <p class="govuk-body">You could remind the signatory to complete the process or resend the invite if required.</p>
 <form action="../home?confirmation=register" method="post" novalidate>
@@ -57,7 +131,7 @@
         <button type="submit" class="govuk-button" data-module="govuk-button">
             Resend invite
         </button>
-        <a class="govuk-link govuk-link--no-visited-state" href="signatory-details">Update invited signatory<span
+        <a class="govuk-link govuk-link--no-visited-state" href="signatory-details">Change invited signatory<span
             class="govuk-visually-hidden"> signatory</span></a>
     </div>
 </form>
