@@ -24,18 +24,25 @@
     </dd>
   </div>
   {% else %}
-  {% if data.submitError.claimValid != null and not data.submitError.claimValid and  data.submitError.completionDate == "invalid" %}
+  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "invalid" %}
   <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
     <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
       <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Completion date must be on or after the start date </p>
     </div>
   </div>
   {% endif %}
-  <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='invalid' %} govuk-summary-list-row--error {% endif %}">
-    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='invalid' %} govuk-summary-key--error {% endif %}">
+  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "inFuture" %}
+  <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
+    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
+      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Completion date must be in the past </p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-key--error {% endif %}">
       Completion date
     </dt>
-    <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='invalid' %} govuk-summary-value--error {% endif %}">
+    <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-value--error {% endif %}">
       {% if claim.claimType == "100" %}
       {{ claim.completionDate | govukDate }}
       {% elif claim.claimType == "60" %}
@@ -43,7 +50,7 @@
       {% endif %}
     </dd>
     {% if ((claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "new" or pairClaim.status == "not-yet-submitted"))  %}
-    <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='invalid' %} govuk-summary-value--error {% endif %}">
+    <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-value--error {% endif %}">
       <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date">Change<span class="govuk-visually-hidden">
         completion date</span></a>
     </dd>
