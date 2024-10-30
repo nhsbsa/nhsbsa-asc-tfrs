@@ -7,7 +7,7 @@
 {% set completionNote = claim.evidenceOfCompletionreview.note %}
 
 {% block pageTitle %}
-{{ ["Claim: ", claim.claimID, " — ", data.processingServiceName] | join }}
+Claim: {{claim.claimID}} — {{data.processingServiceName}}
 {% endblock %}
 
 {% block beforeContent %}
