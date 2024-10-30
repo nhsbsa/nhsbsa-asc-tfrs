@@ -4,7 +4,7 @@
 {% set criteriaList = data.type | returnCriteria_V5(data.criteria) %}
 
 {% block pageTitle %}
-{{ ["Review evidence claim: ", claim.claimID, " - process a claim"] | join }}
+Review evidence claim: {{claim.claimID}} - process a claim
 {% endblock %}
 
 {% block beforeContent %}
