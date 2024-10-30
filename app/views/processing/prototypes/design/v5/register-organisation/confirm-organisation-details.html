@@ -1,7 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% block pageTitle %}
-Check organisation details are correct — Register an organisation — {{data.processingServiceName}}
+{% if data.submitError == "missing" %}Error: {% endif %}Check organisation details are correct — Register an organisation — {{data.processingServiceName}}
 {% endblock %}
 
 {% block beforeContent %}

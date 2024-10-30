@@ -1,7 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% block pageTitle %}
-Claim reference number — Find a claim — {{data.processingServiceName}}
+{% if (data.invalidIDError) or (data.notFound) %}Error: {% endif %}Claim reference number — Find a claim — {{data.processingServiceName}}
 {% endblock %}
 
 {% block beforeContent %}

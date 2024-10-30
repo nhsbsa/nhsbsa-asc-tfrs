@@ -1,7 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% block pageTitle %}
-Senior Responsible Officer details — Register an organisation — {{data.processingServiceName}}
+{% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}Error: {% endif %}Senior Responsible Officer details — Register an organisation — {{data.processingServiceName}}
 {% endblock %}
 
 {% block beforeContent %}
