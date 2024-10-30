@@ -1,5 +1,4 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V13(data.claims) %}
 {% set user = data.deletedEmail | findUser_V13(data.users) %}
 
 {% if user.status == "active" %}
@@ -9,7 +8,7 @@
 {% endif %}
 
 {% block pageTitle %}
-{% if data.deleteError %}Error: {% endif %}Are you sure you want to delete this {{usertype}} user? — {{serviceName}} — GOV.UK"]
+{% if data.deleteError %}Error: {% endif %}Are you sure you want to delete this {{usertype}} user? — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block content %}
