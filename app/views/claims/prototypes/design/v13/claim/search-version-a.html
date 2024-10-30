@@ -4,7 +4,7 @@
 {% set resultCount = matchedClaims.length %}
 
 {% block pageTitle %}
-Advanced search — {{serviceName}} — GOV.UK
+{% if data.noInputsA or data.trainingSearchLengthInsufficient or data.learnerSearchLengthInsufficient %}Error: {% endif %}Advanced search — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}

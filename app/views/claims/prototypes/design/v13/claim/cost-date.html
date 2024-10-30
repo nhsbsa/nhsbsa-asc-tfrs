@@ -2,7 +2,7 @@
 {% set claim = data.id | findClaim_V13(data.claims) %}
 
 {% block pageTitle %}
-When did you pay for the course or qualification? — {{serviceName}} — GOV.UK
+{% if data.submitError.dateValid != null and not data.submitError.dateValid %}Error: {% endif %}When did you pay for the course or qualification? — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block content %}

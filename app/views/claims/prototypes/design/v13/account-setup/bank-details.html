@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-Organisation bank or building society account details — Complete registration — {{serviceName}} — GOV.UK
+{% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid  %}Error: {% endif %}Organisation bank or building society account details — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}

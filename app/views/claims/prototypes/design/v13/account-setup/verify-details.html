@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-Check your details are correct — Complete registration — {{serviceName}} — GOV.UK
+{% if data.submitError %}Error: {% endif %}Check your details are correct — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}

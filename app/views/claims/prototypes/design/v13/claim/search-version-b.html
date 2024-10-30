@@ -12,7 +12,7 @@ data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear
 
 
 {% block pageTitle %}
-Advanced search — {{serviceName}} — GOV.UK
+{% if data.noInputsB or data.dateInvalid %}Error: {% endif %}Advanced search — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}

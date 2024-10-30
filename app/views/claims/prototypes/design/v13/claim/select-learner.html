@@ -2,7 +2,7 @@
 {% set claim = data.id | findClaim_V13(data.claims) %}
 
 {% block pageTitle %}
-Course or qualification learner — {{serviceName}} — GOV.UK
+{% if data["learnerInput"] == "" %}Error: {% endif %}Course or qualification learner — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}

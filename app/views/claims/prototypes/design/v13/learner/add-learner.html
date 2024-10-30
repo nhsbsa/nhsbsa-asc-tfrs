@@ -7,7 +7,7 @@
 {% endfor %}
 
 {% block pageTitle %}
-New learner details — {{serviceName}} — GOV.UK
+{% if data.submitError.learnerValid != null and not data.submitError.learnerValid %}Error: {% endif %}New learner details — {{serviceName}} — GOV.UK
 {% endblock %}
 
 

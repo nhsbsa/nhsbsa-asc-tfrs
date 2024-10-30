@@ -2,7 +2,7 @@
 
 
 {% block pageTitle %}
-Enter contact details — Invite new team member — {{serviceName}} — GOV.UK
+{% if data.submitError.userValid != null and not data.submitError.userValid %}Error: {% endif %}Enter contact details — Invite new team member — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block content %}
