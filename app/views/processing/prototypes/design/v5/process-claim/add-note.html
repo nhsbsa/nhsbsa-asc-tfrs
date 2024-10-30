@@ -1,7 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% block pageTitle %}
-note making
+{% if data.noteError != null and data.noteError %}Error: {% endif %}Add a note — {{data.processingServiceName}}
 {% endblock %}
 
 {% block content %}

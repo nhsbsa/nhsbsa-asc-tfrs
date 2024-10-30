@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Verify details - ", (data.fundingPot | potName_V13)] | join }}
+{% if data.submitError %}Error: {% endif %}Check your details are correct — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}

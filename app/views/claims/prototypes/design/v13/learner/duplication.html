@@ -2,7 +2,7 @@
 {% set claim = data.id | findClaim_V13(data.claims) %}
 
 {% block pageTitle %}
-{{ ["Duplicate learner - Claim: ", data.id] | join }}
+Duplicate learner - Claim: {{data.id}}
 {% endblock %}
 
 {% block content %}

@@ -1,5 +1,9 @@
 {% extends "./layouts/main.html" %}
 
+{% block pageTitle %}
+{{serviceName}} - GOV.UK
+{% endblock %}
+
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -21,7 +25,6 @@
             You cannot book training using this service. You'll need to book directly with the training provider.
         </div>
         
-        <h2 class="govuk-heading-m">Care skills funding</h2>
         <p class="govuk-body">
             You can claim the costs of training courses and qualifications for:
         <ul class="govuk-list govuk-list--bullet">

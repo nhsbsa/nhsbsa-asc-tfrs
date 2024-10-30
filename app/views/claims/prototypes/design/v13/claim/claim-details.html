@@ -9,7 +9,11 @@
 {% endif %}
 
 {% block pageTitle %}
-{{ ["Claim: ", claim.claimID, " - ", (claim.fundingType | potName_V13)] | join }}
+{% if (claim.fundingType == "TU" and claim.claimType == "100") %}
+{% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Claim: {{claim.claimID}} — {{serviceName}} — GOV.UK
+{% else %}
+{% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Combined claim: {{claim.claimID | removeClaimSuffix_V13}} — {{serviceName}} — GOV.UK
+{% endif %}
 {% endblock %}
 
 {% block beforeContent %}
@@ -31,7 +35,6 @@
     {% if data.submitError.claimValid != null and not data.submitError.claimValid %}
     {% include "../_components/claim-sections/errorCatch.html" %}
     {% endif %}
-    <span class="govuk-caption-xl">{{ claim.fundingType | potName_V13 }}</span>
     <h1 class="govuk-heading-xl">
       {% if (claim.fundingType == "TU" and claim.claimType == "100") %}
         Claim: {{ claim.claimID }}
@@ -151,10 +154,8 @@
 
     <h2 class="govuk-heading-m">Related content</h2>
 
-      <p class="govuk-body"><a href="../guidance/help-start-tu-claim" class="govuk-link">Help with starting a new care skills
-          claim</a></p>
-      <p class="govuk-body"><a href="../guidance/tu-evidence-requirements" class="govuk-link">Help with care skills evidence
-          requirements</a></p>
+      <p class="govuk-body"><a href="../guidance/help-start-tu-claim" class="govuk-link">Help with starting a new claim</a></p>
+      <p class="govuk-body"><a href="../guidance/tu-evidence-requirements" class="govuk-link">Help with evidence requirements</a></p>
 
   </div>
 </div>

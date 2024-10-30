@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Enter job title - ", (data.fundingPot | potName_V13)] | join }}
+{% if data.jobTitleEmptyError or data.jobTitleInvalid %}Error: {% endif %}What is your job title? — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}

@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Grant declaration - ", (data.fundingPot | potName_V13)] | join }}
+{% if data.declarationSubmitError %}Error: {% endif %}Declaration — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
