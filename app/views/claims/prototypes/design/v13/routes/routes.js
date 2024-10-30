@@ -76,7 +76,7 @@ router.post('/bank-details-handler', function (req, res) {
   }
 });
 
-router.post('/search_id_result_V13', function (req, res) {
+router.post('/search_id_result', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];
   delete req.session.data['notFound'];
