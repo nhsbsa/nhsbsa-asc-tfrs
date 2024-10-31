@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-Select funding method - new claim
+{% if data.submitError %}Error: {% endif %}Funding model — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block content %}

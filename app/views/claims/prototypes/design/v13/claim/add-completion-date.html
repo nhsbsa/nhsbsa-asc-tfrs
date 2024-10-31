@@ -2,7 +2,7 @@
 {% set claim = data.id | findClaim_V13(data.claims) %}
 
 {% block pageTitle %}
-{{ ["Add completion date - Claim: ", claim.claimID] | join }}
+{% if data.submitError.dateValid != null and not data.submitError.dateValid %}Error: {% endif %}Add completion date — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block content %}
