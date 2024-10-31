@@ -56,7 +56,13 @@
 
       {% if claim.status == "rejected" %}
       <h2 class="govuk-heading-s">Rejection note</h2>
-      <p class="govuk-body">{{claim.rejectedNote}}</p>
+      <!--<div class="govuk-inset-text">!-->
+        <p class="govuk-body">
+          {{claim.rejectedNote}}
+        </p>
+        <h2 class="govuk-heading-s">What happens next?</h2>
+        <p class="govuk-body">If you can correct the problem you can resubmit this claim. Get help with <a href="../guidance/tu-evidence-requirements">evidence requirements</a> or <a href="../guidance/help-resubmit">resubmitting a claim</a>.</p>
+      <!--</div>!-->
       {% endif %}
 
     {% elif claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
@@ -67,12 +73,22 @@
 
       {% if claim.status == "rejected" %}
       <h2 class="govuk-heading-s">Rejection note</h2>
-      <p class="govuk-body">{{claim.rejectedNote}}</p>
+      <div class="govuk-inset-text">
+        <p class="govuk-body">
+          {{claim.rejectedNote}}
+        </p>
+        <p class="govuk-body">Our <a href="../guidance/tu-evidence-requirements">help with evidence requirements</a> provides more information, including how to resubmit the claim.</p>
+      </div>
       {% endif %}
 
       {% if pairClaim.status == "rejected" %}
       <h2 class="govuk-heading-s">Rejection note</h2>
-      <p class="govuk-body">{{pairClaim.rejectedNote}}</p>
+      <div class="govuk-inset-text">
+        <p class="govuk-body">
+          {{pairClaim.rejectedNote}}
+        </p>
+        <p class="govuk-body">Our <a href="../guidance/tu-evidence-requirements">help with evidence requirements</a> provides more information, including how to resubmit the claim.</p>
+      </div>/p>
       {% endif %}
 
     {% endif %}
@@ -151,7 +167,8 @@
     <h2 class="govuk-heading-m">Related content</h2>
 
       <p class="govuk-body"><a href="../guidance/help-start-tu-claim" class="govuk-link">Help with starting a new claim</a></p>
-      <p class="govuk-body"><a href="../guidance/tu-evidence-requirements" class="govuk-link">Help with evidence requirements</a></p>
+      <!--<p class="govuk-body"><a href="../guidance/tu-evidence-requirements" class="govuk-link">Help with evidence requirements</a></p>
+      <p class="govuk-body"><a href="../guidance/hep-resubmit" class="govuk-link">Help with resubmitting a claim</a></p>!-->
 
   </div>
 </div>
