@@ -40,17 +40,22 @@ function checkClaim(claim) {
         result.completionDate = "valid"
     }
 
-    result.claimValid = result.learner == "valid" && result.startDate == "valid" && result.paymentDate == "valid" && result.evidenceOfPayment == "valid" && result.evidenceOfCompletion == "valid" && result.completionDate == "valid";
-        
-    if (result.completionDate == "valid" && result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "40")) {
+    if (result.completionDate == "valid" && result.startDate == "valid") {
         const startDate = new Date(claim.startDate)
         const completionDate = new Date(claim.completionDate)
-        if (startDate.getTime() > completionDate.getTime()) {
+        const currentDate = new Date()
+        if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
             result.startDate = "invalid"
             result.completionDate = "invalid"
-            result.claimValid = false
+        } else if ((currentDate.getTime() < completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
+            result.completionDate = "inFuture"
+        } else if ((currentDate.getTime() < startDate.getTime()) && (claim.claimType == "60")) {
+            result.startDate = "inFuture"
         }
     }
+
+    result.claimValid = result.learner == "valid" && result.startDate == "valid" && result.paymentDate == "valid" && result.evidenceOfPayment == "valid" && result.evidenceOfCompletion == "valid" && result.completionDate == "valid";
+        
 
     return result
 }

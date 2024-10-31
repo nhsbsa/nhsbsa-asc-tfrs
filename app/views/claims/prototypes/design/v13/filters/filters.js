@@ -128,6 +128,12 @@ addFilter('errorSummary_V13', function (claim, submitError) {
     if (submitError.completionDate == "invalid" || submitError.startDate == "invalid") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be on or after the start date</a></li>')
     }
+    if (submitError.completionDate == "inFuture") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be in the past</a></li>')
+    }
+    if (submitError.startDate == "inFuture") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Start date must be in the past</a></li>')
+    }
     return errorSummaryStr
 }, { renderAsHtml: true })
 
