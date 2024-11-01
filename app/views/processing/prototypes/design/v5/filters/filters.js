@@ -243,12 +243,11 @@ addFilter('formatInformation_V5', function (foundOrg, enteredInfo, edited, goBac
             info = foundOrg
         }
     } else {
-        info = foundOrg
+        if (foundOrg != null) {
+            info = foundOrg
+        }
     }
     return info
 })
-// need to handle if coming from new it is empty, if going back its saved
-// if invited sig getting updated it needs the current invited then gets updated with new deats, which need to be displayed on next page
-
 
 
