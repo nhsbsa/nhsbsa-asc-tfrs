@@ -2,6 +2,7 @@
 <p class="govuk-body">This organisation has already been invited and their signatory has completed the registration process.</p>
 
 {% set foundOrganisation = data.organisations | findOrg_V5(data.orgID) %}
+
 <div class="govuk-summary-card">
     <div class="govuk-summary-card__title-wrapper">
       <h2 class="govuk-summary-card__title">
@@ -15,7 +16,7 @@
                     Workplace ID
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ foundOrganisation.workplaceId }}
+                    {{ foundOrganisation.workplaceId | default('') }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
