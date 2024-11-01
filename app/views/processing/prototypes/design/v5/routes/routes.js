@@ -52,13 +52,19 @@ router.post('/signatory-handler', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
   const email = req.session.data.email
-  delete req.session.data.orgID
+  const edited = req.session.data.edited
+  
 
   const result = signatoryCheck(familyName, givenName, email)
 
   if (result.signatoryValid) {
     delete req.session.data.submitError
-    res.redirect('register-organisation/confirm-signatory-details')
+    if (edited == "true") {
+      res.redirect('register-organisation/updated-signatory-invitation')
+    } else {
+      res.redirect('register-organisation/confirm-signatory-details')
+    }
+    
   } else {
     req.session.data.submitError = result
     res.redirect('register-organisation/signatory-details')

@@ -1,99 +1,107 @@
 {% extends "../layouts/processing-main.html" %}
 
-{% block pageTitle %}
-Workplace ID - Register an organisation
-{% endblock %}
+{% set foundOrganisation = data.organisations | findOrg_V5(data.orgID) %}
 
-{% block beforeContent %}
-<a href="../home" class="govuk-back-link">Back</a>
+
+{% block pageTitle %}
+    Workplace ID - Register an organisation
 {% endblock %}
 
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l">Updated signatory to send details</h1>
-<p class="govuk-body">This organisation has already been invited but their signatory has not completed the registration process.</p>
+        <span class="govuk-caption-l">Register an organisation</span>
+        <h1 class="govuk-heading-l">Updated Senior Responsible Officer details </h1>
+        <p class="govuk-body">Check this information is correct before sending a new invite.</p>
 
-<h2 class="govuk-heading-m" id="training">Organisation</h2>
-<dl class="govuk-summary-list">
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Workplace ID
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {{data.orgID}}
-        </dd>
-    </div>
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Name
-        </dt>
-        <dd class="govuk-summary-list__value">
-            Fake care home
-        </dd>
-    </div>
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Address
-        </dt>
-        <dd class="govuk-summary-list__value">
-            72 Guild Street<br>London<br>SE23 6FH
-        </dd>
-    </div>
-</dl>
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+              <h2 class="govuk-summary-card__title">
+                Organisation details
+              </h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Workplace ID
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ foundOrganisation.workplaceId }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ foundOrganisation.name }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Address
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {%for line in foundOrganisation.address %}
+                                {{ line }}<br>
+                            {% endfor %}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
 
-<h2 class="govuk-heading-m" id="training">Previous signatory details</h2>
-<dl class="govuk-summary-list">
-    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-        <dt class="govuk-summary-list__key">
-            Name
-        </dt>
-        <dd class="govuk-summary-list__value">
-           James Brown
-        </dd>
-    </div>
-    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-        <dt class="govuk-summary-list__key">
-            Email
-        </dt>
-        <dd class="govuk-summary-list__value">
-           James-brown@carehome.com
-        </dd>
-    </div>
-</dl>
-
-<h2 class="govuk-heading-m" id="training">Updated signatory details</h2>
-<dl class="govuk-summary-list">
-    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-        <dt class="govuk-summary-list__key">
-            Name
-        </dt>
-        <dd class="govuk-summary-list__value">
-           Frank Turner
-        </dd>
-    </div>
-    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-        <dt class="govuk-summary-list__key">
-            Email
-        </dt>
-        <dd class="govuk-summary-list__value">
-           Frank-turner@carehome.com
-        </dd>
-    </div>
-</dl>
-
-<p class="govuk-body">You could remind the signatory to complete the process or resend the invite if required.</p>
-<form action="../home?confirmation=register" method="post" novalidate>
-    <input type="hidden" name="answers-checked" value="true">
-    <div class="govuk-button-group">
-        <button type="submit" class="govuk-button" data-module="govuk-button">
-            Resend invite
-        </button>
-        <a class="govuk-link" href="../home">Update invited signatory</a>
-    </div>
-</form>
-
-
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+              <h2 class="govuk-summary-card__title">
+                Senior Responsible Officer details
+              </h2>
+              <ul class="govuk-summary-card__actions">
+                <li class="govuk-summary-card__action">
+                  <a class="govuk-link" href="signatory-details?goBack=true">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
+                </li>
+              </ul>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Last (family) name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.familyName }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            First (given) name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.givenName }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Email address
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.email }}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+        <p class="govuk-body">Sending a new invitation will deactivate the old invite and send a new one with the updated details.</p>
+        <form action="../home?confirmation=register" method="post" novalidate>
+            <input type="hidden" name="answers-checked" value="true">
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Resend invite
+                </button>
+                <a class="govuk-link" href="../home">Cancel</a>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}

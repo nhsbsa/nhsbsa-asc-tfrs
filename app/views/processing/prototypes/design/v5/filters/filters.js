@@ -234,14 +234,21 @@ addFilter('findOrg_V5', function (organisations, id) {
     return foundOrg
 })
 
-addFilter('formatInformation_V5', function (savedOrg, enteredInfo) {
+addFilter('formatInformation_V5', function (foundOrg, enteredInfo, edited, goBack) {
     var info = ""
-    if (savedOrg != null) {
-        info
+    if (edited != null ) {
+        if (enteredInfo != "" && enteredInfo != null) {
+            info = enteredInfo
+        } else {
+            info = foundOrg
+        }
+    } else {
+        info = foundOrg
     }
     return info
 })
 // need to handle if coming from new it is empty, if going back its saved
 // if invited sig getting updated it needs the current invited then gets updated with new deats, which need to be displayed on next page
+
 
 

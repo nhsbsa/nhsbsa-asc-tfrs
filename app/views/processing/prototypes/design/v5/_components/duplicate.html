@@ -1,51 +1,79 @@
 <h1 class="govuk-heading-l">Organisation is already registered</h1>
 <p class="govuk-body">This organisation has already been invited and their signatory has completed the registration process.</p>
-<h2 class="govuk-heading-m" id="training">Organisation</h2>
-<dl class="govuk-summary-list">
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Workplace ID
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {{data.orgID}}
-        </dd>
+
+{% set foundOrganisation = data.organisations | findOrg_V5(data.orgID) %}
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        Organisation details
+      </h2>
     </div>
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Name
-        </dt>
-        <dd class="govuk-summary-list__value">
-            Fake care home
-        </dd>
+    <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.workplaceId }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.name }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {%for line in foundOrganisation.address %}
+                        {{ line }}<br>
+                    {% endfor %}
+                </dd>
+            </div>
+        </dl>
     </div>
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Address
-        </dt>
-        <dd class="govuk-summary-list__value">
-            72 Guild Street<br>London<br>SE23 6FH
-        </dd>
+</div>
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+            Signatory details
+        </h2>
+      </div>
+    <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Last (family) name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.signatory.familyName }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    First (given) name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.signatory.givenName }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Email address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.signatory.email }}
+                </dd>
+            </div>
+        </dl>
     </div>
-</dl>
-<h2 class="govuk-heading-m" id="training">Signatory</h2>
-<dl class="govuk-summary-list">
-    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-        <dt class="govuk-summary-list__key">
-            Name
-        </dt>
-        <dd class="govuk-summary-list__value">
-           Fake name
-        </dd>
-    </div>
-    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-        <dt class="govuk-summary-list__key">
-            Email
-        </dt>
-        <dd class="govuk-summary-list__value">
-           Fake-email@carehome.com
-        </dd>
-    </div>
-</dl>
+</div>
 <p class="govuk-body">Let them know they can use the email address and password they registered with to log in. If they need to they can reset their password.</p>
 <p class="govuk-body">If they have a problem logging in they can get in touch with the NHS Business Services Authority account support team at <a href="email address">email address</a>.</p>
 <a type="submit" class="govuk-button" href="organisation-details">
