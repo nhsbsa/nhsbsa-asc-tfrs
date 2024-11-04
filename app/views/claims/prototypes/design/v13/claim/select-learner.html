@@ -22,11 +22,11 @@
                     <ul class="govuk-list govuk-error-summary__list">
                         {% if data["learnerInput"] == "" %}
                         <li>
-                            <a href="#search-error">Search cannot be empty</a>
+                            <a href="#search-error">You need to enter something to search on</a>
                         </li>
                         {% elif data["learnerInput"].length < 3 %}
                         <li>
-                            <a href="#search-error">Search input cannot be less than 3 characters</a>
+                            <a href="#search-error">You need to enter at least 3 characters of a learner name</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -56,11 +56,11 @@
                     </div>
                     {% if (data["learnerInput"] == "") %}
                         <p id="search-error" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span> Search cannot be empty
+                            <span class="govuk-visually-hidden">Error:</span>You need to enter something to search on
                         </p>
                     {% elif (data["learnerInput"].length < 3) %}
                         <p id="search-error" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span> Search input cannot be less than 3 characters
+                            <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of a learner name
                         </p>
                     {% endif %}
 
