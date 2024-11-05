@@ -1,5 +1,5 @@
 <h1 class="govuk-heading-l">Invitation sent but sign up not completed</h1>
-<p class="govuk-body">This organisation has already been invited but their signatory has not completed the registration process.</p>
+<p class="govuk-body">This organisation has already been invited but their Senior Responsible Officer (SRO) has not completed the registration process.</p>
 
 {% set foundOrganisation = data.organisations | findOrg_V5(data.orgID) %}
 
@@ -44,7 +44,7 @@
 <div class="govuk-summary-card">
     <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
-            Invited signatory details
+            Invited Senior Responsible Officer details
         </h2>
         <ul class="govuk-summary-card__actions">
           <li class="govuk-summary-card__action">
@@ -82,12 +82,17 @@
     </div>
 </div>
 
-<p class="govuk-body">You could remind the signatory to complete the process, resend the invite if required or update the signatory details to send a new invite.</p>
+<p class="govuk-body">
+    <ul class="govuk-list govuk-list--bullet">
+        <li>If the SRO details are correct, you could either remind the SRO to respond to their existing invite or send a new invite.</li>
+        <li>If the SRO details are not correct, you can edit them and then send an invite.</li>
+    </ul>
+</p>
 <form action="../home?confirmation=register" method="post" novalidate>
     <input type="hidden" name="answers-checked" value="true">
         <div class="govuk-button-group">
-            <a type="submit" class="govuk-button" href="signatory-details">
-                Resend invite
+            <a type="submit" class="govuk-button" href="../home?confirmation=register">
+                Send new invite
             </a>
             <a class="govuk-link" href="organisation-details">Go back</a>
         </div>
