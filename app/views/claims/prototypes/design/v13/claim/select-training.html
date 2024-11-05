@@ -27,7 +27,7 @@
                         </li>
                         {% elif data["training-input"].length < 3 %}
                         <li>
-                            <a href="#search-error">You need to enter at least 3 characters.</a>
+                            <a href="#search-error">You need to enter at least 3 characters of the title, or the whole course code or qualification number</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -55,7 +55,7 @@
                     </label>
 
                     <div id="search-hint" class="govuk-hint moj-search__hint ">
-                        Enter all or part of the title, course code or qualification number. Minimum of 3 characters.
+                        Enter at least 3 characters of the title, or the whole course code or qualification number
                     </div>
                     {% if data["training-input"] == "" %}
                         <p id="search-error" class="govuk-error-message">
@@ -63,7 +63,7 @@
                         </p>
                     {% elif data["training-input"].length < 3 %}
                         <p id="search-error" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters
+                            <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the title, or the whole course code or qualification number
                         </p>
                     {% endif %}
                     <input class="govuk-input moj-search__input {% if (data['training-input'] == ''  or data["training-input"].length < 3) %} govuk-input--error{% endif %}" id="search" name="training-input" type="search"

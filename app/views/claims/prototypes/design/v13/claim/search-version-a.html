@@ -30,17 +30,17 @@
                 </a>
               </li>
               {% endif %}
-              {% if data.trainingSearchLengthInsufficient %}
-              <li>
-                <a href="#trainingSearch-error">
-                  You need to enter at least 3 characters of a course or qualification name
-                </a>
-              </li>
-              {% endif %}
               {% if data.learnerSearchLengthInsufficient %}
               <li>
                 <a href="#learnerSearch-error">
-                  You need to enter at least 3 characters of a learner name
+                  You need to enter at least 3 characters of the learner name, or the whole National Insurance number
+                </a>
+              </li>
+              {% endif %}
+              {% if data.trainingSearchLengthInsufficient %}
+              <li>
+                <a href="#trainingSearch-error">
+                  You need to enter at least 3 characters of the title, or the whole course code or qualification number
                 </a>
               </li>
               {% endif %}
@@ -76,11 +76,11 @@
             <strong>Learner</strong>
           </label>
           <div id="learner-name-hint" class="govuk-hint">
-            Enter all or part of the name or National Insurance number. Minimum of 3 characters.
+            Enter at least 3 characters of the learner name, or the whole National Insurance number
           </div>
           {% if data.learnerSearchLengthInsufficient %}
             <p id="learnerSearch-error" class="govuk-error-message govuk-!-margin-bottom-3">
-              <span class="govuk-visually-hidden">Error:</span> You need to enter at least 3 characters of a learner name
+              <span class="govuk-visually-hidden">Error:</span> You need to enter at least 3 characters of the learner name, or the whole National Insurance number
             </p>
           {% endif %}
           <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text"
@@ -92,11 +92,11 @@
             <strong>Course or qualification name</strong>
           </label>
           <div id="course-name-hint" class="govuk-hint">
-            Enter all or part of the name. Minimum of 3 characters.
+            Enter at least 3 characters of the title, or the whole course code or qualification number
           </div>
           {% if data.trainingSearchLengthInsufficient %}
             <p id="trainingSearch-error" class="govuk-error-message govuk-!-margin-bottom-3">
-              <span class="govuk-visually-hidden">Error:</span> You need to enter at least 3 characters of a course or qualification name
+              <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the title, or the whole course code or qualification number
             </p>
           {% endif %}
           <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text"
