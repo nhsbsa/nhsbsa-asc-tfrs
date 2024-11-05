@@ -234,9 +234,9 @@ addFilter('findOrg_V5', function (organisations, id) {
     return foundOrg
 })
 
-addFilter('formatInformation_V5', function (foundOrg, enteredInfo, edited, goBack) {
+addFilter('formatInformation_V5', function (foundOrg, enteredInfo, isEdited, isNewOrg) {
     var info = ""
-    if (edited != null ) {
+    if (isEdited != null || isNewOrg == true) {
         if (enteredInfo != "" && enteredInfo != null) {
             info = enteredInfo
         } else {
