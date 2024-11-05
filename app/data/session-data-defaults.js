@@ -5,21 +5,17 @@ module.exports = {
             {
                 "versionNo": "13",
                 "status": ["design", "UR"],
-                "tested": "TBC",
+                "tested": null,
                 "created": [
                     "including post MVP work"
                 ],
-                "aims": [
-                    "TBC"
-                ],
-                "learnt": [
-                    "TBC"
-                ]
+                "aims": null,
+                "learnt": null
             },
             {
                 "versionNo": "12",
                 "status": ["dev", "UR"],
-                "tested": "TBC",
+                "tested": null,
                 "created": [
                     "due to decision to remove CPD from the service"
                 ],
@@ -27,42 +23,28 @@ module.exports = {
                     "to act as MVP",
                     "to include changes due to decision to remove CPD"
                 ],
-                "learnt": [
-                    "TBC"
-                ]
+                "learnt": null
             },
             {
                 "versionNo": "11",
                 "status": ["retired"],
-                "tested": "TBC",
-                "created": [
-                    "TBC"
-                ],
-                "aims": [
-                    "TBC"
-                ],
-                "learnt": [
-                    "TBC"
-                ]
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
             },
             {
                 "versionNo": "10",
                 "status": ["retired"],
-                "tested": "TBC",
-                "created": [
-                    "TBC"
-                ],
-                "aims": [
-                    "TBC"
-                ],
-                "learnt": [
-                    "TBC"
-                ]
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
             },
             {
                 "versionNo": "9",
                 "status": ["retired"],
-                "tested": "TBC",
+                "tested": null,
                 "created": [
                     "added error states to the account creation flow",
                     "updated copy text in the account creation flow to better support users given the product restriction in place that this journey cannot change for MVP only content",
@@ -71,12 +53,8 @@ module.exports = {
                     "adapted claim details design to be consistent across 60/40/100 claim types",
                     "remove started columns from claims tables and added claim type"
                 ],
-                "aims": [
-                    "TBC"
-                ],
-                "learnt": [
-                    "TBC"
-                ]
+                "aims": null,
+                "learnt": null
             },
             {
                 "versionNo": "8",
@@ -289,9 +267,7 @@ module.exports = {
                     "added dummy claim item data",
                     "added the 'view learner' option"
                 ],
-                "aims": [
-                    "N/A"
-                ],
+                "aims": null,
                 "learnt": [
                     "This second iteration, still just for internal use, removed some of the complexity from v1 and developed the core functions further. The team realised that the range of statuses was potentially overcomplicated and how they were grouped onto two tabs meant that the precense of these statuses against each claim items was visually overwhelming."
                 ]
@@ -305,9 +281,7 @@ module.exports = {
                     "split CPD and TU claim items into separate tabs",
                     "introduced filter options including the ability to group claim items by learner or L&D event"
                 ],
-                "aims": [
-                    "N/A"
-                ],
+                "aims": null,
                 "learnt": [
                     "This first prototype was meant to facilitate discussion between the designers on the team. What we realised is that splitting items by CPD/TU and by learner/event was introducing too much complexity without evidence to back this up."
                 ]
@@ -318,30 +292,24 @@ module.exports = {
             {
                 "versionNo": "5",
                 "status": ["UR", "design"],
-                "tested": "",
+                "tested": null,
                 "created": [
                     "Add processor notes back into prototype."
                 ],
-                "aims": [
-                    "TBC"
-                ],
-                "learnt": [
-                    "TBC"
-                ]
+                "aims": null,
+                "learnt": null
             },
             {
                 "versionNo": "4",
                 "status": ["dev", "UR"],
-                "tested": "",
+                "tested": null,
                 "created": [
                     "due to decision to remove CPD from the service"
                 ],
                 "aims": [
                     "to act as MVP"
                 ],
-                "learnt": [
-                    "TBC"
-                ]
+                "learnt": null
             },
             {
                 "versionNo": "3",
@@ -359,9 +327,7 @@ module.exports = {
                 "aims": [
                     "understand the impact of MVP changes"
                 ],
-                "learnt": [
-                    "TBC"
-                ]
+                "learnt": null
             },
             {
                 "versionNo": "2",

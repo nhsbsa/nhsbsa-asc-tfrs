@@ -14,7 +14,7 @@ organisations."%}
 
 
 {% block pageTitle %}
-{{da}} – {{ serviceName }} – GOV.UK Prototype Kit
+{{data.area}} – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
@@ -41,13 +41,9 @@ organisations."%}
         <p class="govuk-body">
             {{description}}
         </p>
-
-    </div>
-</div>
-
-
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body"> 
+            A summary is provided covering the core changes for each version, for a more detailed look at our design decisions during Beta, <a href="https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/">view our design history blog </a>. (Password: bsaasc123)
+          </p>
         <h2 class="govuk-heading-s">
             Current design version: <strong class="govuk-tag govuk-tag--purple">
                 {{current}}
@@ -62,14 +58,14 @@ organisations."%}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-l">
+        <h2 class="govuk-heading-m">
             Version History
         </h2>
 
         {% for version in versions %}
-        <h2 class="govuk-heading-m">
+        <h3 class="govuk-heading-s">
             Version {{ version.versionNo }}
-        </h2>
+        </h3>
         <p class="govuk-body">
             {% for status in version.status %}
             {{status | designstatusTag}}
@@ -86,41 +82,53 @@ organisations."%}
                 </span>
             </summary>
             <div class="govuk-details__text">
-                <h3 class="govuk-heading-s">
+                {% if version.tested != null %}
+                <h4 class="govuk-heading-s">
                     Tested
-                </h3>
+                </h4>
                 <p class="govuk-body">{{ version.tested }}</p>
-                <h3 class="govuk-heading-s">
+                {% endif %}
+
+                {% if version.created != null %}
+                <h4 class="govuk-heading-s">
                     What we created
-                </h3>
+                </h4>
                 <ul class="govuk-list govuk-list--bullet">
                     {% for item in version.created %}
                     <li>{{item}}</li>
                     {% endfor %}
                 </ul>
-                <h3 class="govuk-heading-s">
+                {% endif %}
+
+                {% if version.aims != null %}
+                <h4 class="govuk-heading-s">
                     We aimed to understand
-                </h3>
+                </h4>
                 <ul class="govuk-list govuk-list--bullet">
                     {% for item in version.aims %}
                     <li>{{item}}</li>
                     {% endfor %}
                 </ul>
-                <h3 class="govuk-heading-s">
+                {% endif %}
+                
+                {% if version.learnt != null %}
+                <h4 class="govuk-heading-s">
                     What we learnt
-                </h3>
+                </h4>
                 <ul class="govuk-list govuk-list--bullet">
                     {% for item in version.learnt %}
                     <li>{{item}}</li>
                     {% endfor %}
                 </ul>
+                {% endif %}
+
             </div>
         </details>
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         {% endfor %}
     </div>
     <div class="govuk-grid-column-one-third">
-        <h2 class="govuk-heading-m">Key</h2>
+        <h2 class="govuk-heading-s">Key</h2>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
@@ -151,13 +159,10 @@ organisations."%}
                     <strong class="govuk-tag govuk-tag--pink">UR</strong>
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    All or parts of the version are currently with UR for usbaility testing.
+                    All or parts of the version are currently with UR for usability testing.
                 </dd>
               </div>
           </dl>
-        
-        
-        
     </div>
 </div>
 
