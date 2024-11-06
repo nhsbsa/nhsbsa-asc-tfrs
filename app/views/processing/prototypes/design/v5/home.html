@@ -1,5 +1,7 @@
 {% extends "./layouts/processing-main.html" %}
 
+{% set foundOrganisation = data.organisations | findOrg_V5(data.orgID) %}
+
 {% block pageTitle %}
 What do you want to do? — {{data.processingServiceName}}
 {% endblock %}
@@ -19,8 +21,8 @@ What do you want to do? — {{data.processingServiceName}}
                 <h3 class="govuk-notification-banner__heading">
                     Invite sent
                 </h3>
-                <p class="govuk-body">{% if data.confirmation == "register" %}An email has been sent to {{ data.givenName }} {{
-                    data.familyName }} inviting Fake care home to the service.{% endif %}</p>
+                <p class="govuk-body">{% if data.confirmation == "register" %}An email has been sent to {{ data.givenName | default(foundOrganisation.signatory.givenName) }} {{
+                    data.familyName | default(foundOrganisation.signatory.familyName) }} inviting Fake care home to the service.{% endif %}</p>
             </div>
         </div>
         {% endif %}

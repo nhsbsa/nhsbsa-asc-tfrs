@@ -26,7 +26,7 @@
                         </li>
                         {% elif data["learnerInput"].length < 3 %}
                         <li>
-                            <a href="#search-error">You need to enter at least 3 characters of a learner name</a>
+                            <a href="#search-error">You need to enter at least 3 characters of the name, or the whole National Insurance number</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -52,7 +52,7 @@
                     </label>
 
                     <div id="search-hint" class="govuk-hint moj-search__hint ">
-                        You can search by name or National Insurance number
+                        Enter at least 3 characters of the name, or the whole National Insurance number
                     </div>
                     {% if (data["learnerInput"] == "") %}
                         <p id="search-error" class="govuk-error-message">
@@ -60,7 +60,7 @@
                         </p>
                     {% elif (data["learnerInput"].length < 3) %}
                         <p id="search-error" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of a learner name
+                            <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the name, or the whole National Insurance number
                         </p>
                     {% endif %}
 
