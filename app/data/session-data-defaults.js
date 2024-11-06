@@ -4,22 +4,22 @@ module.exports = {
         "claimVersions": [
             {
                 "versionNo": "13",
-                "status": ["design"],
-                "tested": "TBC",
+                "phase": "Beta",
+                "status": ["design", "UR"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-13/",
+                "tested": null,
                 "created": [
                     "including post MVP work"
                 ],
-                "aims": [
-                    "TBC"
-                ],
-                "learnt": [
-                    "TBC"
-                ]
+                "aims": null,
+                "learnt": null
             },
             {
                 "versionNo": "12",
-                "status": ["design"],
-                "tested": "TBC",
+                "phase": "Beta",
+                "status": ["dev", "UR"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-12/",
+                "tested": null,
                 "created": [
                     "due to decision to remove CPD from the service"
                 ],
@@ -27,42 +27,34 @@ module.exports = {
                     "to act as MVP",
                     "to include changes due to decision to remove CPD"
                 ],
-                "learnt": [
-                    "TBC"
-                ]
+                "learnt": null
             },
             {
                 "versionNo": "11",
-                "status": ["design"],
-                "tested": "TBC",
-                "created": [
-                    "TBC"
-                ],
-                "aims": [
-                    "TBC"
-                ],
-                "learnt": [
-                    "TBC"
-                ]
+                "phase": "Beta",
+                "status": ["retired"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-11/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
             },
             {
                 "versionNo": "10",
-                "status": ["UR"],
-                "tested": "TBC",
-                "created": [
-                    "TBC"
-                ],
-                "aims": [
-                    "TBC"
-                ],
-                "learnt": [
-                    "TBC"
-                ]
+                "phase": "Beta",
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-10/",
+                "status": ["retired"],
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
             },
             {
                 "versionNo": "9",
-                "status": ["dev"],
-                "tested": "TBC",
+                "phase": "Beta",
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-9/",
+                "status": ["retired"],
+                "tested": null,
                 "created": [
                     "added error states to the account creation flow",
                     "updated copy text in the account creation flow to better support users given the product restriction in place that this journey cannot change for MVP only content",
@@ -71,16 +63,14 @@ module.exports = {
                     "adapted claim details design to be consistent across 60/40/100 claim types",
                     "remove started columns from claims tables and added claim type"
                 ],
-                "aims": [
-                    "TBC"
-                ],
-                "learnt": [
-                    "TBC"
-                ]
+                "aims": null,
+                "learnt": null
             },
             {
                 "versionNo": "8",
-                "status": ["dev"],
+                "phase": "Beta",
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-8/",
+                "status": ["retired"],
                 "tested": "Account creation (Signatory) - w/c 8 April 2024, Manage and start claims (TU 100) 6 May 2024",
                 "created": [
                     "account creation journey for the signatory that will be invited to the service based on minimal tech effort process flow",
@@ -124,7 +114,9 @@ module.exports = {
             },
             {
                 "versionNo": "7",
+                "phase": "Alpha",
                 "status": ["retired"],
+                "designHistory": null,
                 "tested": "Untested",
                 "created": [
                     "added a new dashboard screen after sign in to indicate how we could show live data about an organisation's claims, and to present the 3 main user options (eligibility checker, manage care skills claims, manage revalidation claims)",
@@ -154,7 +146,9 @@ module.exports = {
             },
             {
                 "versionNo": "6",
+                "phase": "Alpha",
                 "status": ["retired"],
+                "designHistory": null,
                 "tested": "w/c 29 January 2024",
                 "created": [
                     "included the agreed service name",
@@ -180,7 +174,9 @@ module.exports = {
             },
             {
                 "versionNo": "5",
+                "phase": "Alpha",
                 "status": ["retired"],
+                "designHistory": null,
                 "tested": "w/c 8 Jan 2024",
                 "created": [
                     "improved the start screen to make it make it clear this service isn't for booking training",
@@ -215,7 +211,9 @@ module.exports = {
             },
             {
                 "versionNo": "4",
+                "phase": "Alpha",
                 "status": ["retired"],
+                "designHistory": null,
                 "tested": "w/c 11 December 2023",
                 "created": [
                     "added large volumes of realistic data on learners, courses and claims",
@@ -250,7 +248,9 @@ module.exports = {
             },
             {
                 "versionNo": "3",
+                "phase": "Alpha",
                 "status": ["retired"],
+                "designHistory": null,
                 "tested": "w/c 27 November 2023",
                 "created": [
                     "PLEASE NOTE: This version does not include dynamic data that carries through transactions.",
@@ -281,7 +281,9 @@ module.exports = {
             },
             {
                 "versionNo": "2",
+                "phase": "Alpha",
                 "status": ["retired"],
+                "designHistory": null,
                 "tested": "Untested",
                 "created": [
                     "simplified the 'claim items' screen by removing the CPD/TU split",
@@ -289,15 +291,14 @@ module.exports = {
                     "added dummy claim item data",
                     "added the 'view learner' option"
                 ],
-                "aims": [
-                    "N/A"
-                ],
+                "aims": null,
                 "learnt": [
                     "This second iteration, still just for internal use, removed some of the complexity from v1 and developed the core functions further. The team realised that the range of statuses was potentially overcomplicated and how they were grouped onto two tabs meant that the precense of these statuses against each claim items was visually overwhelming."
                 ]
             },
             {
                 "versionNo": "1",
+                "phase": "Alpha",
                 "status": ["retired"],
                 "tested": "Untested",
                 "created": [
@@ -305,9 +306,7 @@ module.exports = {
                     "split CPD and TU claim items into separate tabs",
                     "introduced filter options including the ability to group claim items by learner or L&D event"
                 ],
-                "aims": [
-                    "N/A"
-                ],
+                "aims": null,
                 "learnt": [
                     "This first prototype was meant to facilitate discussion between the designers on the team. What we realised is that splitting items by CPD/TU and by learner/event was introducing too much complexity without evidence to back this up."
                 ]
@@ -317,35 +316,35 @@ module.exports = {
         "processingVersions": [
             {
                 "versionNo": "5",
-                "status": ["dev", "UR", "design"],
-                "tested": "",
+                "phase": "Beta",
+                "status": ["UR", "design"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-5/",
+                "tested": null,
                 "created": [
                     "Add processor notes back into prototype."
                 ],
-                "aims": [
-                    "TBC"
-                ],
-                "learnt": [
-                    "TBC"
-                ]
+                "aims": null,
+                "learnt": null
             },
             {
                 "versionNo": "4",
-                "status": ["dev", "UR", "design"],
-                "tested": "",
+                "phase": "Beta",
+                "status": ["dev", "UR"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-4/",
+                "tested": null,
                 "created": [
                     "due to decision to remove CPD from the service"
                 ],
                 "aims": [
                     "to act as MVP"
                 ],
-                "learnt": [
-                    "TBC"
-                ]
+                "learnt": null
             },
             {
                 "versionNo": "3",
-                "status": ["dev", "UR", "design"],
+                "phase": "Beta",
+                "status": ["retired"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-3/",
                 "tested": "w/c 15 May 2024",
                 "created": [
                     "due to MVP decisions stripped back many of the design decisions to accomodate quicker technical delivery to allow for other priority MVP workstreams",
@@ -359,13 +358,13 @@ module.exports = {
                 "aims": [
                     "understand the impact of MVP changes"
                 ],
-                "learnt": [
-                    "TBC"
-                ]
+                "learnt": null
             },
             {
                 "versionNo": "2",
+                "phase": "Beta",
                 "status": ["retired"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-2/",
                 "tested": "Untested",
                 "created": [
                     "combined criteria onto a single screen, but due to the lack of more complete criteria definitions and the complexity identified for MVP this was stripped back to a single quesiton with the complete checks being moved offline",
@@ -391,7 +390,9 @@ module.exports = {
             },
             {
                 "versionNo": "1",
+                "phase": "Beta",
                 "status": ["retired"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-1/",
                 "tested": "Process a claim  - w/c 22 April 2024",
                 "created": [
                     "landing screen that signposts to two core user actions; registers and org and process a claim",
@@ -399,7 +400,7 @@ module.exports = {
                     "basic process a claim flow with notes, criteria checking and outcome decision"
                 ],
                 "aims": [
-                    "understand whether crtieria checking with one question per page is usable",
+                    "understand whether criteria checking with one question per page is usable",
                     "understand whether users need any additional information about the claim beyond information provided in criteria checks",
                     "understand whether opening files in new tabs will pose usability issues",
                     "understand how users perceive prescriptive criteria checks that lead to a predetermined outcome",
