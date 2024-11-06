@@ -40,7 +40,7 @@ router.post('/confirm-org-handler', function (req, res) {
   delete req.session.data.confirmation
 
   if (confirmation == "yes") {
-    res.redirect('register-organisation/signatory-details')
+    res.redirect('register-organisation/signatory-details?newOrg=true')
   } else if (confirmation == "no") {
     res.redirect('register-organisation/org-issue?submitError=incorrect')
   } else if (confirmation == null) {
@@ -52,13 +52,19 @@ router.post('/signatory-handler', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
   const email = req.session.data.email
-  delete req.session.data.orgID
+  const edited = req.session.data.edited
+  const newOrg = req.session.data.newOrg
 
   const result = signatoryCheck(familyName, givenName, email)
 
   if (result.signatoryValid) {
     delete req.session.data.submitError
-    res.redirect('register-organisation/confirm-signatory-details')
+    if (newOrg == "true") {
+      res.redirect('register-organisation/confirm-signatory-details')
+    } else {
+      res.redirect('register-organisation/updated-signatory-invitation')
+    }
+    
   } else {
     req.session.data.submitError = result
     res.redirect('register-organisation/signatory-details')
