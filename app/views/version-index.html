@@ -42,8 +42,8 @@ organisations."%}
             {{description}}
         </p>
         <p class="govuk-body"> 
-            A summary is provided covering the core changes for each version, for a more detailed look at our design decisions during Beta, <a href="https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/">view our design history blog </a>. (Password: bsaasc123)
-          </p>
+            A summary is provided covering the core changes for each version during Alpha, for Beta a link is provided to the relevant <a class="govuk-link" href="https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/">design history posts</a>. (Password: bsaasc123)
+        </p>
         <h2 class="govuk-heading-s">
             Current design version: <strong class="govuk-tag govuk-tag--purple">
                 {{current}}
@@ -64,7 +64,7 @@ organisations."%}
 
         {% for version in versions %}
         <h3 class="govuk-heading-s">
-            Version {{ version.versionNo }}
+            Version {{ version.versionNo }} <span class="govuk-caption-m">{{ version.phase }}</span>
         </h3>
         <p class="govuk-body">
             {% for status in version.status %}
@@ -72,9 +72,18 @@ organisations."%}
             {% endfor %}
         </p>
         <p class="govuk-body">
-            <a href="{{ data.area | toLowerCase }}/prototypes/design/v{{ version.versionNo }}/">View v{{
+            <a class="govuk-link" href="{{ data.area | toLowerCase }}/prototypes/design/v{{ version.versionNo }}/">View v{{
                 version.versionNo }} prototype</a>
         </p>
+
+
+        {% if version.designHistory != null %}
+        <p class="govuk-body"> 
+             <a class="govuk-link" target="_blank" href="{{ version.designHistory | safe }}"> View v{{ version.versionNo }} design history posts</a>
+        </p>
+
+
+        {% elif version.designHistory == null %}
         <details class="govuk-details" data-module="govuk-details">
             <summary class="govuk-details__summary">
                 <span class="govuk-details__summary-text">
@@ -124,6 +133,8 @@ organisations."%}
 
             </div>
         </details>
+        {% endif %}
+
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         {% endfor %}
     </div>
