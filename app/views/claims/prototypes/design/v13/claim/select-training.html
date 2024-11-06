@@ -1,17 +1,19 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{% if data["training-input"] == "" %}Error: {% endif %}What course or qualification are you claiming for? — {{serviceName}} — GOV.UK
+{% if (data["training-input"] == "" or data["training-input"].length < 3) %}Error: {% endif %}What course or qualification are you claiming for? — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../manage-claims-home" class="govuk-back-link">Back</a>
+    <a href="../manage-claims-home" class="govuk-back-link">Back</a>
 {% endblock %}
+
+
 
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        {% if data["training-input"] == "" %}
+        {% if data["training-input"] == "" or data["training-input"].length < 3 %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
             <div role="alert">
                 <h2 class="govuk-error-summary__title">
@@ -19,9 +21,15 @@
                 </h2>
                 <div class="govuk-error-summary__body">
                     <ul class="govuk-list govuk-error-summary__list">
+                        {% if data["training-input"] == "" %}
                         <li>
-                            <a href="#search-error">Search cannot be empty</a>
+                            <a href="#search-error">You need to enter something to search on</a>
                         </li>
+                        {% elif data["training-input"].length < 3 %}
+                        <li>
+                            <a href="#search-error">You need to enter at least 3 characters of the title, or the whole course code or qualification number</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -41,20 +49,24 @@
 
             <form action="select-training" method="post">
 
-                <div class="govuk-form-group {% if data['training-input'] == '' %}govuk-form-group--error{% endif %}">
+                <div class="govuk-form-group {% if (data['training-input'] == ''  or data["training-input"].length < 3) %} govuk-form-group--error{% endif %}">
                     <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
                         Search
                     </label>
 
                     <div id="search-hint" class="govuk-hint moj-search__hint ">
-                        You can search by title, course code or qualification number
+                        Enter at least 3 characters of the title, or the whole course code or qualification number
                     </div>
                     {% if data["training-input"] == "" %}
-                    <p id="search-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span> Search cannot be empty
-                    </p>
+                        <p id="search-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span>You need to enter something to search on
+                        </p>
+                    {% elif data["training-input"].length < 3 %}
+                        <p id="search-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the title, or the whole course code or qualification number
+                        </p>
                     {% endif %}
-                    <input class="govuk-input moj-search__input {% if data['training-input'] == '' %}govuk-input--error{% endif %}" id="search" name="training-input" type="search"
+                    <input class="govuk-input moj-search__input {% if (data['training-input'] == ''  or data["training-input"].length < 3) %} govuk-input--error{% endif %}" id="search" name="training-input" type="search"
                         aria-describedby="search-hint" value="{{ data['training-input'] }}">
 
                 </div>
@@ -71,35 +83,35 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        {% if data['training-input'] %}
-        <h2 class="govuk-heading-m">Search results</h2>
-        {% set hasResults = false %}
-        {% for trainingGroup in data.training %}
-        {% set addHeader = true %}
+        {% if (data['training-input'] and data["training-input"].length > 2) %}
+            <h2 class="govuk-heading-m">Search results</h2>
+            {% set hasResults = false %}
+            {% for trainingGroup in data.training %}
+                {% set addHeader = true %}
 
-        {% for training in trainingGroup.courses %}
-        {% set match = data['training-input'] | trainingSearch_V13(training) %}
+                {% for training in trainingGroup.courses %}
+                    {% set match = data['training-input'] | trainingSearch_V13(training) %}
 
-        {% if match %}
-        {% set hasResults = true %}
+                    {% if match %}
+                        {% set hasResults = true %}
 
-        {% if addHeader %}
-        {% include "../_components/select-training/select-training-header.html" %}
-        {% set addHeader = false %}
-        {% endif %}
+                        {% if addHeader %}
+                            {% include "../_components/select-training/select-training-header.html" %}
+                            {% set addHeader = false %}
+                        {% endif %}
 
-        {% include "../_components/select-training/select-training-row.html" %}
-        {% endif %}
-        {% endfor %}
-        {% if not addHeader %}
-            </tbody>
-        </table>
-        {% endif %}
-        {% endfor %}
+                        {% include "../_components/select-training/select-training-row.html" %}
+                    {% endif %}
+                {% endfor %}
+                {% if not addHeader %}
+                    </tbody>
+                    </table>
+                {% endif %}
+            {% endfor %}
 
-        {% if not hasResults %}
-        <p class="govuk-body">This search returned no results.</p>
-        {% endif %}
+            {% if not hasResults %}
+                <p class="govuk-body">This search returned no results.</p>
+            {% endif %}
         {% endif %}
     </div>
 </div>

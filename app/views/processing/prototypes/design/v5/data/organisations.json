@@ -1,0 +1,22 @@
+[
+  {
+      "workplaceId": "resend",
+      "name": "fake workplace name",
+      "address": ["72 Guild Street", "London", "SE23 6FH"],
+      "signatory": {
+        "givenName": "James",
+        "familyName": "Brown",
+        "email": "james-brown@carehome.com"
+      }
+    },
+    {
+      "workplaceId": "dupe",
+      "name": "fake workplace name",
+      "address": ["102 Marylebone Street", "London", "SW1 9SK"],
+      "signatory": {
+        "givenName": "James",
+        "familyName": "Brown",
+        "email": "james-brown@carehome.com"
+      }
+    }
+  ]

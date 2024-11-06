@@ -4,10 +4,6 @@
 {% if data.submitError == "missing" %}Error: {% endif %}Check organisation details are correct — Register an organisation — {{data.processingServiceName}}
 {% endblock %}
 
-{% block beforeContent %}
-<a href="organisation-details" class="govuk-back-link">Back</a>
-{% endblock %}
-
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -91,9 +87,12 @@
                     </div>
                 </fieldset>
             </div>
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+                <a class="govuk-link" href="organisation-details?newOrg=">Go back</a>
+            </div>
         </form>
     </div>
 </div>
