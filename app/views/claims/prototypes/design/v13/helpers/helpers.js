@@ -55,22 +55,15 @@ function checkClaim(claim) {
     }
 
     result.claimValid = result.learner == "valid" && result.startDate == "valid" && result.paymentDate == "valid" && result.evidenceOfPayment == "valid" && result.evidenceOfCompletion == "valid" && result.completionDate == "valid";
-        
-
     return result
 }
 
-
-function removeSpacesAndLowerCase(input) {
-
+function removeSpacesAndCharactersAndLowerCase(input) {
     let inputString = String(input);
     // Remove spaces using regular expression
-    
-    let stringWithoutSpaces = inputString.replace(/\s/g, '');
-    
+    let stringWithoutSpacesAndSlashes = inputString.replace(/[\s\/]/g, '');
     // Convert the string to lowercase
-    let lowercaseString = stringWithoutSpaces.toLowerCase();
-    
+    let lowercaseString = stringWithoutSpacesAndSlashes.toLowerCase();
     return lowercaseString;
 }
     
@@ -80,7 +73,7 @@ function compareNINumbers(ni_1, learners) {
     result.learner = {}
 
     for (const l of learners) {
-        if (removeSpacesAndLowerCase(ni_1) == removeSpacesAndLowerCase(l.id)) {
+        if (removeSpacesAndCharactersAndLowerCase(ni_1) == removeSpacesAndCharactersAndLowerCase(l.id)) {
             result.check = true
             result.learner = l
             break;
@@ -343,4 +336,4 @@ function emailFormat(string) {
 }
 
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm }
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm }
