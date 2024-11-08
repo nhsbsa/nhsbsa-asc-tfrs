@@ -741,7 +741,7 @@ addFilter('claimsMatchAdvancedSearchA_V13', function (claims, training, learner)
         if (claim.training != null) {
             const formattedTitle = removeSpacesAndCharactersAndLowerCase(claim.training.title);
             const code = claim.training.code;
-            const codeRegex = /^(?:\d{4,5}|\d{3}\/?\d{4}\/?\d)$/;
+            const codeRegex = /^(?:\d{3}\/?\d{4}\/?\d|[A-Za-z]{5})$/;
             if (formattedTraining != "") {
                 if (formattedTitle.includes(formattedTraining)) {
                     trainingCheck = true;
