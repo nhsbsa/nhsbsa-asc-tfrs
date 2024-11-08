@@ -10,6 +10,14 @@
 {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}Error: {% endif %}Senior Responsible Officer details — Register an organisation — {{data.processingServiceName}}
 {% endblock %}
 
+{% block beforeContent %}
+    {% if data.newOrg %}
+        <div >
+            <a class="govuk-back-link" href="confirm-organisation-details?familyName=&givenName=&email=">Back</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -99,10 +107,8 @@
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Continue
                 </button>
-                {% if data.newOrg %}
-                    <a class="govuk-link" href="confirm-organisation-details?familyName=&givenName=&email=">Go back</a>
-                {% else %}
-                    <a class="govuk-link" href="org-issue?submitError=resend&familyName=&givenName=&email=">Cancel</a>
+                {% if not data.newOrg %}
+                <a class="govuk-link" href="org-issue?submitError=resend">Cancel</a>
                 {% endif %}
             </div>
         </form>
