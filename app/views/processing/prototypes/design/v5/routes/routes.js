@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck } = require('../helpers/helpers.js');
+const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, findOrg_V5 } = require('../helpers/helpers.js');
 
 // v5 Prototype routes
 
@@ -20,15 +20,15 @@ router.post('/check-org', function (req, res) {
 
   if (orgID == "") {
     res.redirect('register-organisation/organisation-details?submitError=missing')
+  } else if (orgID == "timeout") {
+    res.redirect('register-organisation/org-issue?submitError=timeout')
+  } else if (orgID == "B02944934") {
+    res.redirect('register-organisation/org-issue?submitError=resend')
+  } else if (orgID == "D18946931") {
+    res.redirect('register-organisation/org-issue?submitError=duplicate')
   } else if (checkWDSFormat(orgID)) {
     delete req.session.data.submitError
     res.redirect('register-organisation/confirm-organisation-details')
-  } else if (orgID == "timeout") {
-    res.redirect('register-organisation/org-issue?submitError=timeout')
-  } else if (orgID == "resend") {
-    res.redirect('register-organisation/org-issue?submitError=resend')
-  } else if (orgID == "dupe") {
-    res.redirect('register-organisation/org-issue?submitError=duplicate')
   } else {
     res.redirect('register-organisation/organisation-details?submitError=invalid')
   }

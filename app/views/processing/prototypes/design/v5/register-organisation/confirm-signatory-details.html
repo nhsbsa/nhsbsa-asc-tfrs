@@ -1,7 +1,18 @@
 {% extends "../layouts/processing-main.html" %}
 
+{% set foundOrganisation = data.organisations | findOrg_V5(data.orgID) %}
+
+
 {% block pageTitle %}
 Check Senior Responsible Officer details are correct — Register an organisation — {{data.processingServiceName}}
+{% endblock %}
+
+{% block beforeContent %}
+    {% if data.newOrg %}
+        <div >
+            <a class="govuk-back-link" href="signatory-details">Back</a>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -93,7 +104,7 @@ Check Senior Responsible Officer details are correct — Register an organisatio
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Confirm and send invite
                 </button>
-                <a class="govuk-link" href="organisation-details?newOrg=&orgID=">Cancel</a>
+                <a class="govuk-link" href="organisation-details?newOrg=&orgID=&edited=">Cancel</a>
             </div>
         </form>
     </div>

@@ -11,7 +11,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Register an organisation</span>
-        <h1 class="govuk-heading-l">Updated Senior Responsible Officer details </h1>
+        <h1 class="govuk-heading-l">Check Senior Responsible Officer details are correct</h1>
         <p class="govuk-body">Check this information is correct before sending a new invite.</p>
 
         <div class="govuk-summary-card">
@@ -59,7 +59,7 @@
               </h2>
               <ul class="govuk-summary-card__actions">
                 <li class="govuk-summary-card__action">
-                  <a class="govuk-link" href="signatory-details?goBack=true">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
+                  <a class="govuk-link" href="signatory-details?goBack=true&edited=true">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
                 </li>
               </ul>
             </div>
@@ -97,9 +97,9 @@
             <input type="hidden" name="answers-checked" value="true">
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
-                    Send new invite
+                    Confirm and send invite
                 </button>
-                <a class="govuk-link" href="organisation-details?orgID=">Cancel</a>
+                <a class="govuk-link" href="org-issue?submitError=resend&familyName=&givenName=&email=&edited=">Cancel</a>
             </div>
         </form>
     </div>
