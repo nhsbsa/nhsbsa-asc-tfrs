@@ -157,6 +157,12 @@
     <ul class="govuk-list govuk-list--bullet">
       <li>double-checking your spelling</li>
       <li>searching for something less specific</li>
+      {% if (data['learner']) %}
+        <li>checking you have typed in the whole National Insurance number</li>
+      {% endif %}
+      {% if (data['trainingName']) %}
+        <li>checking you have typed in the whole course code or qualification number</li>
+      {% endif %}
     </ul>
   </div>
 </div>
