@@ -1,5 +1,8 @@
 {% extends "../layouts/processing-main.html" %}
 
+{% set foundOrganisation = data.organisations | findOrg_V5(data.orgID) %}
+
+
 {% block pageTitle %}
 Check Senior Responsible Officer details are correct — Register an organisation — {{data.processingServiceName}}
 {% endblock %}
