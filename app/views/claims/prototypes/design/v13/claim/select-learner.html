@@ -26,7 +26,7 @@
                         </li>
                         {% elif data["learnerInput"].length < 3 %}
                         <li>
-                            <a href="#search-error">You need to enter at least 3 characters of the name, or the whole National Insurance number</a>
+                            <a href="#search-error">You need to enter at least 3 characters of the name, or the whole NI number</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -52,7 +52,7 @@
                     </label>
 
                     <div id="search-hint" class="govuk-hint moj-search__hint ">
-                        Enter at least 3 characters of the name, or the whole National Insurance number
+                        Enter at least 3 characters of the name, or the whole National Insurance (NI) number
                     </div>
                     {% if (data["learnerInput"] == "") %}
                         <p id="search-error" class="govuk-error-message">
@@ -60,7 +60,7 @@
                         </p>
                     {% elif (data["learnerInput"].length < 3) %}
                         <p id="search-error" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the name, or the whole National Insurance number
+                            <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the name, or the whole NI number
                         </p>
                     {% endif %}
 
@@ -126,7 +126,7 @@
             <p class="govuk-body">
                 No matches returned for your search: <q>{{ data['learnerInput'] }}</q>.
             </p>
-            <p class="govuk-body">This may mean they have not yet been added.</p>
+            <p class="govuk-body">This may mean the learner you're trying to add has not yet been added.</p>
             <button class="govuk-button govuk-button--secondary">Add new learner</button>
 
             <p class="govuk-body">
@@ -135,7 +135,7 @@
               <ul class="govuk-list govuk-list--bullet">
                 <li>double-checking your spelling</li>
                 <li>searching for something less specific</li>
-                <li>checking you have typed in the whole National Insurance number</li>
+                <li>checking you entered the whole NI number</li>
               </ul>
         </form>
         {% endif %}

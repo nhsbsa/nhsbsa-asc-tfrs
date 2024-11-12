@@ -33,7 +33,7 @@
               {% if data.learnerSearchLengthInsufficient %}
               <li>
                 <a href="#learnerSearch-error">
-                  You need to enter at least 3 characters of the learner name, or the whole National Insurance number
+                  You need to enter at least 3 characters of the learner name, or the whole NI number
                 </a>
               </li>
               {% endif %}
@@ -76,11 +76,11 @@
             <strong>Learner</strong>
           </label>
           <div id="learner-name-hint" class="govuk-hint">
-            Enter at least 3 characters of the learner name, or the whole National Insurance number
+            Enter at least 3 characters of the learner name, or the whole National Insurance (NI) number
           </div>
           {% if data.learnerSearchLengthInsufficient %}
             <p id="learnerSearch-error" class="govuk-error-message govuk-!-margin-bottom-3">
-              <span class="govuk-visually-hidden">Error:</span> You need to enter at least 3 characters of the learner name, or the whole National Insurance number
+              <span class="govuk-visually-hidden">Error:</span> You need to enter at least 3 characters of the learner name, or the whole NI number
             </p>
           {% endif %}
           <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text"
@@ -157,12 +157,7 @@
     <ul class="govuk-list govuk-list--bullet">
       <li>double-checking your spelling</li>
       <li>searching for something less specific</li>
-      {% if (data['learner']) %}
-        <li>checking you have typed in the whole National Insurance number</li>
-      {% endif %}
-      {% if (data['trainingName']) %}
-        <li>checking you have typed in the whole course code or qualification number</li>
-      {% endif %}
+      <li>checking you entered the whole NI number, course code or qualification number</li>
     </ul>
   </div>
 </div>
