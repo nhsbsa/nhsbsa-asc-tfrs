@@ -1,0 +1,46 @@
+[
+  {
+      "workplaceId": "B02944934",
+      "name": "Evergreen Care",
+      "address": ["72 Guild Street", "London", "SE23 6FH"],
+      "signatory": {
+        "givenName": "James",
+        "familyName": "Brown",
+        "email": "james-brown@evergreencare.co.uk"
+      }
+    },
+    {
+      "workplaceId": "D18946931",
+      "name": "Bright Horizons",
+      "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
+      "signatory": {
+        "givenName": "Lionel",
+        "familyName": "Lowe",
+        "email": "Lionel-lowel@brighthorizons.co.uk"
+      }
+    },
+    {
+      "workplaceId": "dupe",
+      "name": "Serenity House Solutions",
+      "address": ["102 Marylebone Street", "London", "SW1 9SK"],
+      "signatory": {
+        "givenName": "Margie",
+        "familyName": "D'Souza",
+        "email": "margiedsouza@serenityhouse.com"
+      }
+    },
+    {
+      "workplaceId": "resend",
+      "name": "Forever Care",
+      "address": ["37 Watergate Street", "York", "N3 9SJ"],
+      "signatory": {
+        "givenName": "Sarah",
+        "familyName": "Cooper",
+        "email": "Sarah-Cooper@forevercare.co.uk"
+      }
+    }
+  ]
+
+
+
+  

@@ -1,0 +1,61 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% block pageTitle %}
+{% if data.submitError == "invalid" or data.submitError == "missing" %}Error: {% endif %}What is the workplace ID for the organisation? — Register an organisation — {{data.processingServiceName}}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="../home" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.submitError == "invalid" or data.submitError == "missing" %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#workplace-id-error">{{ data.submitError | orgErrorMessage_V6 }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <form action="../check-org" method="post" class="form">
+            <div
+                class="govuk-form-group {% if data.submitError == 'invalid' or data.submitError == 'missing' %}govuk-form-group--error{% endif %}">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <span class="govuk-caption-l">Register an organisation</span>
+                        <h1 class="govuk-fieldset__heading" for="orgID">
+                            What is the workplace ID for the organisation?
+                        </h1>
+                    </legend>
+                    <p class="govuk-body">Enter the workplace ID as it appears in the Adult Social Care Workforce Dataset (ASC-WDS).</p>
+                    <div id="asc-wds-id-hint" class="govuk-hint">
+                        For example, G03944234
+                    </div>
+                    {% if data.submitError == "invalid" or data.submitError == "missing" %}
+                    <p id="workplace-id-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> {{ data.submitError | orgErrorMessage_V6 }}
+                    </p>
+                    {% endif %}
+                    <input
+                        class="govuk-input govuk-input--width-10 {% if data.submitError == 'invalid' or data.submitError == 'missing' %}govuk-input--error{% endif %}"
+                        aria-describedby="asc-wds-id-hint" id="orgID" name="orgID" type="text" value="{{ data.orgID | default ('') }}">
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

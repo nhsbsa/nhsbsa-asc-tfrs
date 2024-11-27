@@ -1,0 +1,80 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% block pageTitle %}
+{% if (data.invalidIDError) or (data.notFound) %}Error: {% endif %}Claim reference number — Find a claim — {{data.processingServiceName}}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="../home" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if (data.invalidIDError) or (data.notFound) %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            {% if (data.emptyError) %}
+                            <a href="#claimID"> Enter a claim reference number</a>
+                            {% elif (data.notFound) %}
+                            <a href="#claimID">No match returned for your search: <q>{{ data.id }}</a>
+                            {% else %}
+                            <a href="#claimID">Enter a claim reference number in the correct format</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Find a claim</span>
+        <h1 class="govuk-heading-l">Claim reference number</h1>
+        <p class="govuk-body">This is the claim reference number as it appears in Operations Manager.</p>
+        <p class="govuk-body">You can enter reference numbers with or without the -A, -B or -C suffix.</p>
+        <p class="govuk-body">Searching for a 60/40 claim without the -B or -C suffix will return whichever part was submitted most recently.</p>
+        <form action="../search-claim-id" method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="claim-id-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        What is the claim reference number?
+                    </legend>
+                    <div id="claim-id-hint" class="govuk-hint">
+                        Example with suffix: H2T-C813-3XF7-C<br>Example without suffix: WR5-R2P4-DSL4
+                    </div>
+                    <div class="{% if (data.invalidIDError or data.notFound) %} govuk-form-group--error {% endif %}">
+                        {% if (data.invalidIDError or data.notFound) %}
+                        <p id="event-name-error" class="govuk-error-message">
+                            {% if (data.emptyError) %}
+                            <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number
+                            {% elif (data.notFound) %}
+                            <span class="govuk-visually-hidden">Error:</span> No match returned for your search: <q>{{ data.id }}
+                            {% else %}
+                            <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number in the
+                            correct format
+                            {% endif %}
+                        </p>
+                        {% endif %}
+                        <input
+                            class="govuk-input govuk-input--width-10 {% if (data.invalidIDError or data.notFound) %} govuk-input--error {% endif %} "
+                            aria-describedby="claim-id-hint {% if (data.invalidIDError or data.notFound) %} event-name-error {% endif %}"
+                            id="claimID" name="claimID" type="text">
+                    </div>
+                </fieldset>
+            </div>
+            <button class="govuk-button moj-search__button" data-module="govuk-button" type="submit"
+                style="margin-left: 0px;">
+                Find claim
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
