@@ -312,24 +312,31 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v5",
+        "processingCurrent": "v6",
         "processingVersions": [
             {
-                "versionNo": "5",
+                "versionNo": "6",
                 "phase": "Beta",
                 "status": ["UR", "design"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-6/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },{
+                "versionNo": "5",
+                "phase": "Beta",
+                "status": ["dev"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-5/",
                 "tested": null,
-                "created": [
-                    "Add processor notes back into prototype."
-                ],
+                "created": null,
                 "aims": null,
                 "learnt": null
             },
             {
                 "versionNo": "4",
                 "phase": "Beta",
-                "status": ["dev", "UR"],
+                "status": ["retired"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-4/",
                 "tested": null,
                 "created": [
