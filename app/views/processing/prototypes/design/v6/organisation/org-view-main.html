@@ -32,11 +32,11 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         {% if data.tab == "claims" %}
-            {% include "../_components/claims.html" %}
+            {% include "../_components/org-view/claims.html" %}
         {% elif data.tab == "users" %}
-            {% include "../_components/users.html" %}
+            {% include "../_components/org-view/users.html" %}
         {% elif data.tab == "bankDetails" %}
-            {% include "../_components/bank-details.html" %}
+            {% include "../_components/org-view/bank-details.html" %}
         {% endif %}
     </div>
 </div>
