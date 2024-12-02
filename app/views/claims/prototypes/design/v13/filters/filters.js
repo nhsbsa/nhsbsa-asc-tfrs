@@ -15,9 +15,7 @@ addFilter('statusTag_V13', function (statusID, statuses) {
             statusName = s.name
         }
     }
-    if (statusID == 'new') {
-        return '<strong class="govuk-tag govuk-tag--turquoise">New</strong>'
-    } else if (statusID == 'not-yet-submitted') {
+    if (statusID == 'not-yet-submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">' + statusName + '</strong>'
     } else if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'

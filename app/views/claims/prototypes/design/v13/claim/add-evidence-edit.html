@@ -13,7 +13,7 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-full">
 
     {% if data.deleteSuccess %}
     <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
@@ -84,9 +84,6 @@
           <dt class="govuk-summary-list__key">
             <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">{{evidence}}<span class="govuk-visually-hidden">{{evidence}}</span></a>
           </dt>
-          <dd class="govuk-summary-list__value">
-            2MB
-          </dd>
           <dd class="govuk-summary-list__actions">
             <form action="../remove-evidence?type={{data.type}}" method="post" novalidate>
               <button class="unstyle-button">Delete</button>

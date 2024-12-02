@@ -28,13 +28,13 @@ function checkClaim(claim) {
         result.evidenceOfPayment = "valid"
     }
 
-    if (claim.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100") ) {
+    if (claim.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100") && claim.learner) {
         result.evidenceOfCompletion = "missing"
     } else {
         result.evidenceOfCompletion = "valid"
     }
 
-    if (claim.completionDate == null && (claim.claimType == "40" || claim.claimType == "100")) {
+    if (claim.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && claim.learner) {
         result.completionDate = "missing"
     } else {
         result.completionDate = "valid"
