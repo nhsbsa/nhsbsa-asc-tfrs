@@ -1,0 +1,44 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% block beforeContent %}
+<a href="./find-organisation" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <span class="govuk-caption-l">Org view</span>
+        <h1 class="govuk-heading-l">Bright Horizons</h1>
+
+        <nav class="moj-sub-navigation" aria-label="Sub navigation">
+            <ul class="moj-sub-navigation__list">
+              <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" aria-current="page" href="#claims">Claims</a>
+              </li>
+          
+              <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" href="#users">Users</a>
+              </li>
+          
+              <li class="moj-sub-navigation__item">
+                <a class="moj-sub-navigation__link" href="#bankDetails">Bank details</a>
+              </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.claims %}
+            {% include "../_components/claims.html" %}
+        {% elif data.users %}
+            {% include "../_components/users.html" %}
+        {% elif data.bankDetails %}
+            {% include "../_components/bank-details.html" %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

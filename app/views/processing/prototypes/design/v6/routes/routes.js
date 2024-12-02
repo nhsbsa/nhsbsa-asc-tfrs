@@ -254,9 +254,10 @@ router.post('/add-note', function (req, res) {
     res.redirect('process-claim/claim' + '?id=' + claimID + "&noteAddedSuccess")
 
   }
+});
 
-
-
+router.post('/search-org-id', function (req, res) {
+  res.redirect('organisation/org-view-main')
 });
 
 module.exports = router
