@@ -257,7 +257,7 @@ router.post('/add-note', function (req, res) {
 });
 
 router.post('/search-org-id', function (req, res) {
-  res.redirect('organisation/org-view-main')
+  res.redirect('organisation/org-view-main?tab=claims')
 });
 
 module.exports = router
