@@ -118,7 +118,7 @@ router.post('/search-claim-id', function (req, res) {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
   }
   if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
-    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID)
+    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&claimTab=outcome')
   } else {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
   }

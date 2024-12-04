@@ -5,10 +5,6 @@
 {% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
 {% set completionNote = claim.evidenceOfCompletionreview.note %} 
 
-{% if claim.status != "submitted" %}
-<a href="start-process?processSuccess" class="govuk-back-link">Back</a>
-{% endif %} 
-
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
     {% if data.processSuccess == "true" %}
@@ -28,12 +24,12 @@
 
     </div>
     {% endif %}
-
-    <h1 class="govuk-heading-l" style="margin-bottom: 15px">
-        Claim: {{ claim.claimID }}
+    <span class="govuk-caption-l">Claim</span>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">
+        {{ claim.claimID }}
     </h1>
 
-    <p class="govuk-body" style="margin-bottom: 30px">
+    <p class="govuk-body govuk-!-margin-bottom-8">
         {{ claim.status | processorstatusTag_V6 }} {% if claim.status == "approved"%} on {{ claim.approvedDate | govukDate }}{% endif %}{% if claim.status == "rejected"%}on {{ claim.rejectedDate | govukDate }}{%endif%}
     </p>
 
@@ -51,48 +47,50 @@
 
     <nav class="moj-side-navigation" aria-label="Side navigation">
         <ul class="moj-side-navigation__list">
-            <li class="moj-side-navigation__item moj-side-navigation__item--active">
-            <a href="#1" aria-current="location">Outcome</a>
+            <li class="moj-side-navigation__item {% if data.claimTab == 'outcome' %}moj-side-navigation__item--active{% endif %}">
+                <a href="org-view-main?orgTab=singleClaim&id={{data.id}}&claimTab=outcome" aria-current="location">Outcome</a>
             </li>
 
-            <li class="moj-side-navigation__item">
-            <a href="#2">History</a>
+            <li class="moj-side-navigation__item {% if data.claimTab == 'history' %}moj-side-navigation__item--active{% endif %}">
+                <a href="org-view-main?orgTab=singleClaim&id={{data.id}}&claimTab=history" aria-current="location">History</a>
             </li>
     
-            <li class="moj-side-navigation__item">
-            <a href="#2">Details</a>
+            <li class="moj-side-navigation__item {% if data.claimTab == 'details' %}moj-side-navigation__item--active{% endif %}">
+                <a href="org-view-main?orgTab=singleClaim&id={{data.id}}&claimTab=details">Details</a>
             </li>
 
-            <li class="moj-side-navigation__item">
-            <a href="#2">Evidence</a>
+            <li class="moj-side-navigation__item {% if data.claimTab == 'evidence' %}moj-side-navigation__item--active{% endif %}">
+                <a href="org-view-main?orgTab=singleClaim&id={{data.id}}&claimTab=evidence">Evidence</a>
             </li>
 
-            <li class="moj-side-navigation__item">
-            <a href="#2">Notes</a>
+            <li class="moj-side-navigation__item {% if data.claimTab == 'notes' %}moj-side-navigation__item--active{% endif %}">
+                <a href="org-view-main?orgTab=singleClaim&id={{data.id}}&claimTab=notes">Notes</a>
             </li>
 
-            <li class="moj-side-navigation__item">
-            <a href="#2">Submitter</a>
+            <li class="moj-side-navigation__item {% if data.claimTab == 'submitter' %}moj-side-navigation__item--active{% endif %}">
+                <a href="org-view-main?orgTab=singleClaim&id={{data.id}}&claimTab=submitter">Submitter</a>
             </li>
             
         </ul>
         </nav>
-</div>
+    </div>
+
     <div class="govuk-grid-column-three-quarters">
 
-        {% include "./claim-outcome.html" %}
+        {% if data.claimTab == "outcome" %}
+            {% include "./claim-outcome.html" %}
+        {% elif data.claimTab == "history" %}
+            {% include "./claim-history.html" %}
+        {% elif data.claimTab == "details" %}
+            {% include "./claim-details.html" %}
+        {% elif data.claimTab == "evidence" %}
+            {% include "./claim-evidence.html" %}
+        {% elif data.claimTab == "notes" %}
+            {% include "./claim-notes.html" %}
+        {% elif data.claimTab == "submitter" %}
+            {% include "./claim-submitter.html" %}
+        {% endif %}
 
-        {% include "./claim-history.html" %}
-        
-        {% include "./claim-details.html" %}
+    </div>
 
-        {% include "./claim-evidence.html" %}
-
-        {% include "./claim-notes.html" %}
-
-        {% include "./claim-submitter.html" %}
-
-        </div>
-
-        
 </div>
