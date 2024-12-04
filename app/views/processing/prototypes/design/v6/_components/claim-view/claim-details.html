@@ -1,0 +1,55 @@
+<h3 class="govuk-heading-m" id="payment">Details</h3>
+    <dl class="govuk-summary-list">
+
+        <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Training</dt>
+        <dd class="govuk-summary-list__value">{% if claim.training.code | trainingTypeCheck_V13(data.training, "Courses") %}
+            <p class="govuk-body">{{ claim.training.code }}</p>
+            <p class="govuk-body">{{ claim.training.title }}</p>
+            {% elif claim.training.code | trainingTypeCheck_V13(data.training, "Qualifications") %}
+            <p class="govuk-body">{{ claim.training.code }}</p>
+            <p class="govuk-body">{{ claim.training.title }}</p>
+            <p class="govuk-body">{{ claim.training.type }}</p>
+            <p class="govuk-body">{{ claim.training.awardingOrganisation }}</p>
+            {% endif %}
+        </dd>
+        </div>
+
+
+        <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Start date
+        </dt>
+        <dd class="govuk-summary-list__value">
+            <p class="govuk-body">{{claim.startDate | govukDate}}</p>
+        </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+            <p class="govuk-body">{{claim.completionDate | govukDate}}</p>
+        </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Learner
+        </dt>
+        <dd class="govuk-summary-list__value">
+            <p class="govuk-body">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</p>
+            <p class="govuk-body">{{ claim.learner.id }}</p>
+        </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Payment date
+        </dt>
+        <dd class="govuk-summary-list__value">
+            <p class="govuk-body">{{claim.costDate | govukDate}}</p>
+        </dd>
+        </div>
+
+    </dl>

@@ -1,0 +1,71 @@
+<h3 class="govuk-heading-m">History</h3>
+        <div class="moj-timeline">
+            <div class="moj-timeline__item">
+        
+                <div class="moj-timeline__header">
+                <h2 class="moj-timeline__title">Note added</h2>
+            
+                <p class="moj-timeline__byline">by Donald Marvin (CCS Agent)</p>
+            
+                </div>
+            
+                <p class="moj-timeline__date">
+                <time datetime="2024-02-05T09:02:43.631Z">{{"2024-02-05T09:02:43.631Z" | govukDate}}</time>
+                </p>
+            
+                <div class="moj-timeline__description">
+                <p>Submitter called to ask questions regarding this claim. They think they might have uploaded... <a href="#" class="govuk-link">see more</a></p>
+                </div>
+            
+            </div>
+    
+            <div class="moj-timeline__item">
+        
+            <div class="moj-timeline__header">
+                <h2 class="moj-timeline__title">Claim submitted</h2>
+        
+                <p class="moj-timeline__byline">by Casey Simonis (Submitter)</p>
+        
+            </div>
+        
+            <p class="moj-timeline__date">
+                <time datetime="{{claim.submittedDate}}">{{claim.submittedDate | govukDate}}</time>
+            </p>
+        
+            </div>
+    
+            <div class="moj-timeline__item">
+        
+            <div class="moj-timeline__header">
+                <h2 class="moj-timeline__title">Note added</h2>
+        
+                <p class="moj-timeline__byline">by Donald Marvin (CCS Agent)</p>
+        
+            </div>
+        
+            <p class="moj-timeline__date">
+                <time datetime="2024-02-05T09:02:43.631Z">{{"2024-02-05T09:02:43.631Z" | govukDate}}</time>
+            </p>
+        
+            <div class="moj-timeline__description">
+                <p>Submitter called to ask questions regarding this claim. Referral passed to processor.</p>
+            </div>
+        
+        </div>
+    
+            <div class="moj-timeline__item">
+        
+                <div class="moj-timeline__header">
+                <h2 class="moj-timeline__title">Claim created</h2>
+            
+                <p class="moj-timeline__byline">by {{claim.createdBy}} (SRO)</p>
+            
+                </div>
+            
+                <p class="moj-timeline__date">
+                <time datetime="{{claim.createdDate}}">{{claim.createdDate | govukDate}}</time>
+                </p>
+            
+            </div>
+    
+        </div>      

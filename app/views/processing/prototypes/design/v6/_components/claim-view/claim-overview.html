@@ -1,0 +1,98 @@
+
+{% set claim = data.id | findClaim_V8(data.claims) %} 
+{% set paymentCompleted = claim.evidenceOfPaymentreview.pass != null %}
+{% set paymentNote = claim.evidenceOfPaymentreview.note %} 
+{% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
+{% set completionNote = claim.evidenceOfCompletionreview.note %} 
+
+{% if claim.status != "submitted" %}
+<a href="start-process?processSuccess" class="govuk-back-link">Back</a>
+{% endif %} 
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+    {% if data.processSuccess == "true" %}
+    <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+        
+        <div class="govuk-notification-banner__header">
+            <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                Success
+            </h2>
+        </div>
+
+        <div class="govuk-notification-banner__content">
+            <h3 class="govuk-notification-banner__heading">
+                Claim outcome recorded and returned to organisation
+            </h3>
+        </div>
+
+    </div>
+    {% endif %}
+
+    <h1 class="govuk-heading-l" style="margin-bottom: 15px">
+        Claim: {{ claim.claimID }}
+    </h1>
+
+    <p class="govuk-body" style="margin-bottom: 30px">
+        {{ claim.status | processorstatusTag_V6 }} {% if claim.status == "approved"%} on {{ claim.approvedDate | govukDate }}{% endif %}{% if claim.status == "rejected"%}on {{ claim.rejectedDate | govukDate }}{%endif%}
+    </p>
+
+    <p class="govuk-body">
+    This is a 100 claim. It covers both evidence of payment and evidence of
+    training completion.
+    </p>
+
+    </div>
+
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-quarter">
+
+    <nav class="moj-side-navigation" aria-label="Side navigation">
+        <ul class="moj-side-navigation__list">
+            <li class="moj-side-navigation__item moj-side-navigation__item--active">
+            <a href="#1" aria-current="location">Outcome</a>
+            </li>
+
+            <li class="moj-side-navigation__item">
+            <a href="#2">History</a>
+            </li>
+    
+            <li class="moj-side-navigation__item">
+            <a href="#2">Details</a>
+            </li>
+
+            <li class="moj-side-navigation__item">
+            <a href="#2">Evidence</a>
+            </li>
+
+            <li class="moj-side-navigation__item">
+            <a href="#2">Notes</a>
+            </li>
+
+            <li class="moj-side-navigation__item">
+            <a href="#2">Submitter</a>
+            </li>
+            
+        </ul>
+        </nav>
+</div>
+    <div class="govuk-grid-column-three-quarters">
+
+        {% include "./claim-outcome.html" %}
+
+        {% include "./claim-history.html" %}
+        
+        {% include "./claim-details.html" %}
+
+        {% include "./claim-evidence.html" %}
+
+        {% include "./claim-notes.html" %}
+
+        {% include "./claim-submitter.html" %}
+
+        </div>
+
+        
+</div>
