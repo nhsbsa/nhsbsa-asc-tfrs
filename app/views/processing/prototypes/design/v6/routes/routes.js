@@ -124,7 +124,7 @@ router.post('/search-claim-id', function (req, res) {
   }
 });
 
-router.get('/start-process', function (req, res) {
+router.get('/start-processing', function (req, res) {
   const claimID = req.session.data.id
   var foundClaim = null
   for (const c of req.session.data['claims']) {
@@ -138,6 +138,21 @@ router.get('/start-process', function (req, res) {
       return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=checkCompletion')
   }
 });
+
+router.get('/payment-check-handler', function (req, res) {
+  claimID = req.session.data.id
+  const paymentResponse = req.session.data.payment
+
+
+  if (paymentResponse == "yes") {
+    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=costPerLearner')
+  } else if (paymentResponse =="no") {
+    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=paymentRejectionNote')
+  }
+
+});
+
+
 
 router.get('/cancel-handler', function (req, res) {
   const claimID = req.session.data.id

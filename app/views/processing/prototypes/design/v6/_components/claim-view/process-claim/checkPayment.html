@@ -1,0 +1,139 @@
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h3 class="govuk-heading-m" id="payment">Step 1: Check payment evidence</h3>
+
+        <div class="govuk-summary-card">
+
+            <div class="govuk-summary-card__title-wrapper">
+
+                <h2 class="govuk-summary-card__title">
+                    Evidence of payment
+                </h2>
+
+            </div>
+
+            <div class="govuk-summary-card__content">
+            
+                <dl class="govuk-summary-list">
+                    {% for evidence in claim.evidenceOfPayment %}
+                        {% set isPayment = true %}
+                        {% include "../evidence/file-section.html" %}
+                    {% endfor %}
+                </dl>
+
+            </div>
+
+        </div>
+
+        <div class="govuk-summary-card">
+
+            <div class="govuk-summary-card__title-wrapper">
+
+                <h2 class="govuk-summary-card__title">
+                    Important claim details
+                </h2>
+
+            </div>
+
+            <div class="govuk-summary-card__content">
+
+                <dl class="govuk-summary-list">
+
+                    <div class="govuk-summary-list__row">
+
+                        <dt class="govuk-summary-list__key">
+                            Organisation name
+                        </dt>
+
+                        <dd class="govuk-summary-list__value">
+                            <p class="govuk-body">Oakhill Care Ltd</p>
+                        </dd>
+
+                    </div>
+
+
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Training
+                        </dt>
+
+                        <dd class="govuk-summary-list__value">
+                            {% if claim.training.code | trainingTypeCheck_V13(data.training, "Courses") %}
+                                <p class="govuk-body">{{ claim.training.title }}</p>
+                            {% elif claim.training.code | trainingTypeCheck_V13(data.training, "Qualifications") %}
+                                <p class="govuk-body">{{ claim.training.title }}</p>
+                                <p class="govuk-body">{{ claim.training.type }}</p>
+                            {% endif %}
+                        </dd>
+
+                    </div>
+
+                    <div class="govuk-summary-list__row">
+
+                        <dt class="govuk-summary-list__key">
+                            Payment date
+                        </dt>
+
+                        <dd class="govuk-summary-list__value">
+                            <p class="govuk-body">{{claim.costDate | govukDate}}</p>
+                        </dd>
+
+                    </div>
+
+                </dl>
+
+            </div>
+
+        </div>
+
+        
+
+        <form action="../payment-check-handler" method="post" novalidate>
+
+            <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}" id="payment-review">
+
+                <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                            Does the evidence of payment meet the required criteria?
+                    </legend>
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        
+                        <div class="govuk-radios__item">
+
+                            <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="yes" data-aria-controls="conditional-paymentReimbursementAmount" {% if data.payment=='yes'%}checked{% endif %}>
+
+                            <label class="govuk-label govuk-radios__label" for="paymentYes">
+                                Yes
+                            </label>
+
+                        </div>
+
+                        <div class="govuk-radios__item">
+
+                            <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no" data-aria-controls="conditional-payment-no" {% if data.payment=='no' %}checked{% endif%}>
+
+                            <label class="govuk-label govuk-radios__label" for="paymentNo">
+                                No
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+            </div>
+
+
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+                <a class="govuk-link govuk-link--no-visited-state" href="../process-claim-back-handler">Go back</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
