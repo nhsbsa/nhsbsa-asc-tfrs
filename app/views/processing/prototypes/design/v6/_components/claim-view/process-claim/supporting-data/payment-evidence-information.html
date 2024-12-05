@@ -1,0 +1,94 @@
+<div class="govuk-summary-card">
+
+    <div class="govuk-summary-card__title-wrapper">
+
+        <h2 class="govuk-summary-card__title">
+            Evidence of payment
+        </h2>
+
+    </div>
+
+    <div class="govuk-summary-card__content">
+    
+        <dl class="govuk-summary-list">
+            {% for evidence in claim.evidenceOfPayment %}
+                {% set isPayment = true %}
+                {% include "../../evidence/file-section.html" %}
+            {% endfor %}
+        </dl>
+
+    </div>
+
+</div>
+
+<div class="govuk-summary-card">
+
+    <div class="govuk-summary-card__title-wrapper">
+
+        <h2 class="govuk-summary-card__title">
+            Important claim details
+        </h2>
+
+    </div>
+
+    <div class="govuk-summary-card__content">
+
+        <dl class="govuk-summary-list">
+
+            <div class="govuk-summary-list__row">
+
+                <dt class="govuk-summary-list__key">
+                    Organisation name
+                </dt>
+
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">Oakhill Care Ltd</p>
+                </dd>
+
+            </div>
+
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Training
+                </dt>
+
+                <dd class="govuk-summary-list__value">
+                    {% if claim.training.code | trainingTypeCheck_V13(data.training, "Courses") %}
+                        <p class="govuk-body">{{ claim.training.title }}</p>
+                    {% elif claim.training.code | trainingTypeCheck_V13(data.training, "Qualifications") %}
+                        <p class="govuk-body">{{ claim.training.title }}</p>
+                        <p class="govuk-body">{{ claim.training.type }}</p>
+                    {% endif %}
+                </dd>
+
+            </div>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Max reimbursement amount
+                </dt>
+
+                <dd class="govuk-summary-list__value">
+                    £{{ claim.training.reimbursementAmount }}
+                </dd>
+
+            </div>
+
+            <div class="govuk-summary-list__row">
+
+                <dt class="govuk-summary-list__key">
+                    Payment date
+                </dt>
+
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{{claim.costDate | govukDate}}</p>
+                </dd>
+
+            </div>
+
+        </dl>
+
+    </div>
+
+</div>

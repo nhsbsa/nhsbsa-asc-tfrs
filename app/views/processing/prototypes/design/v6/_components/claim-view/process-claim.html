@@ -12,4 +12,8 @@
 
     {% include "./process-claim/checkPayment.html" %}
 
+{% elif (data.processClaimStep == "costPerLearner") %}
+
+    {% include "./process-claim/costPerLearner.html" %}
+
 {% endif %}
