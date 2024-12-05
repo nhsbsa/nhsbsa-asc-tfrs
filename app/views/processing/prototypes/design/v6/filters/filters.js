@@ -352,3 +352,21 @@ addFilter('createTimelineArray_V6', function (claim) {
     return events;
 })
 
+
+addFilter('countOccurrences_V6', function (events,string) {
+     // Validate input
+    if (!Array.isArray(events)) {
+        throw new Error("The first argument must be an array.");
+    }
+    if (typeof string !== "string") {
+        throw new Error("The second argument must be a string.");
+    }
+
+    // Count the objects
+    return events.reduce((count, obj) => {
+        if (string === "all" || obj.type === string) {
+            count++;
+        }
+        return count;
+    }, 0);
+})

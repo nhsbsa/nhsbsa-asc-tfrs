@@ -40,15 +40,9 @@
             <div class="moj-page-header-actions__actions">
               <div class="moj-button-group moj-button-group--inline">
           
-                <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-                  Add claim note
-                </button>
-
-                {% if claim.status == "submitted"%}
-                <button type="submit" class="govuk-button" data-module="govuk-button">
-                  Process claim
-                </button>
-                {% endif %}
+                <a href="add-note?id={{claim.claimID}}&processSuccess" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
+                    Add claim note
+                 </a>
           
               </div>
             </div>
@@ -89,7 +83,11 @@
         <nav class="moj-side-navigation" aria-label="Side navigation">
             <ul class="moj-side-navigation__list">
                 <li class="moj-side-navigation__item moj-side-navigation__item--active">
+                    {% if (claim.status == "submitted") %}
+                    <a href="#process">Process claim</a>
+                    {% elif (claim.status == "approved") or (claim.status == "rejected") %}
                     <a href="#outcome">Outcome</a>
+                    {% endif %}
                 </li>
 
                 <li class="moj-side-navigation__item">
@@ -114,10 +112,15 @@
     </div>
 
     <div class="govuk-grid-column-three-quarters govuk-!-padding-top-4">
-
+        {% if (claim.status == "submitted") %}
+        <div class="claim-tab" id="process">
+            {% include "./process-claim.html" %}
+        </div>
+        {% elif (claim.status == "approved") or (claim.status == "rejected") %}
         <div class="claim-tab" id="outcome">
             {% include "./claim-outcome.html" %}
         </div>
+        {% endif %}
         
         <div class="claim-tab claim-tab-hidden" id="history">
             {% include "./claim-history.html" %}

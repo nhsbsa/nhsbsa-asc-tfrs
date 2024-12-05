@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     // Show the target claim tab
                     targetTab.classList.remove('claim-tab-hidden');
+
+                    // Remove focus styling from the clicked link
+                    //clickedLink.blur();
                 }
             }
         });

@@ -1,0 +1,15 @@
+{% if (data.processClaimStep == "notStarted") %}
+    <h3 class="govuk-heading-m" id="payment">Process claim</h3>
+{% else %}
+    <span class="govuk-caption-m">Process claim</span>
+{% endif %}
+
+{% if (data.processClaimStep == "notStarted") %}
+
+    {% include "./process-claim/notStarted.html" %}
+
+{% elif (data.processClaimStep == "checkPayment") %}
+
+    {% include "./process-claim/checkPayment.html" %}
+
+{% endif %}

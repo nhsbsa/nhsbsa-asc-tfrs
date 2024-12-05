@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // Add 'selected' class to the clicked button
             button.classList.add("selected");
 
+            // Remove focus styling from the clicked button
+            //button.blur();
+
             // Get the target ID from the href of the clicked button
             const targetId = button.getAttribute("href").substring(1);
 
