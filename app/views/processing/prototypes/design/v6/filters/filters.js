@@ -250,4 +250,12 @@ addFilter('formatInformation_V6', function (foundOrg, enteredInfo, isFromCheckEd
     return info
 })
 
-
+addFilter('findOrganisation_V13', function (orgID, organisations) {
+    let organisation = null;
+    for (const org of organisations) {
+      if (org.workplaceId == orgID) {
+        organisation = org
+      }
+    }
+    return organisation;
+})

@@ -257,7 +257,14 @@ router.post('/add-note', function (req, res) {
 });
 
 router.post('/search-org-id', function (req, res) {
-  res.redirect('organisation/org-view-main?tab=claims')
+  const orgSearch = req.session.data.orgSearchInput
+  var foundOrg = null
+  for (const org of req.session.data['organisations']) {
+    if (org.workplaceId == orgSearch) {
+      foundOrg = org
+    }
+  }
+  res.redirect('organisation/org-view-main?tab=claims&orgId=' + foundOrg.workplaceId)
 });
 
 module.exports = router

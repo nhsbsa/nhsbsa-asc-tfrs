@@ -1,7 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% block pageTitle %}
-{% if (data.invalidIDError) or (data.notFound) %}Error: {% endif %}Claim reference number — Find a claim — {{data.processingServiceName}}
+{% if (data.invalidIDError) or (data.notFound) %}Error: {% endif %}Find a organisation — {{data.processingServiceName}}
 {% endblock %}
 
 {% block beforeContent %}
@@ -10,39 +10,46 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-column-two-thirds">
+      <span class="govuk-caption-l">Find a organisation</span>
+      <h1 class="govuk-heading-l">What organisation are you searching for?</h1>
+      <p class="govuk-body">You can search for a organisation using any of the following:
+        <ul class="govuk-list govuk-list--bullet">
+            <li>Workplace ID</li>
+            <li>Email address of the organisation's SRO or a submitter</li>
+            <li>Claim reference number</li>
+          </ul>
+    </p>
 
-        {% if (data.invalidIDError) or (data.notFound) %}
-        <div class="govuk-error-summary" data-module="govuk-error-summary">
-            <div role="alert">
-                <h2 class="govuk-error-summary__title">
-                    There is a problem
-                </h2>
-                <div class="govuk-error-summary__body">
-                    <ul class="govuk-list govuk-error-summary__list">
-                        <li>
-                            {% if (data.emptyError) %}
-                            <a href="#claimID"> Enter a claim reference number</a>
-                            {% elif (data.notFound) %}
-                            <a href="#claimID">No match returned for your search: <q>{{ data.id }}</a>
-                            {% else %}
-                            <a href="#claimID">Enter a claim reference number in the correct format</a>
-                            {% endif %}
-                        </li>
-                    </ul>
-                </div>
+      <form action="../search-org-id" method="post">
+
+        <div class="govuk-form-group {% if (data['training-input'] == ''  or data["training-input"].length < 3) %} govuk-form-group--error{% endif %}">
+            <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+                Search
+            </label>
+
+            <div id="search-hint" class="govuk-hint moj-search__hint ">
+                Enter the whole workplace ID, email address, or claim reference number
             </div>
-        </div>
-        {% endif %}
-        <span class="govuk-caption-l">Find a organisation</span>
-        <h1 class="govuk-heading-l">How would you prefer to search for a organisation?</h1>
-        <form action="../search-org-id" method="post" novalidate>
+            {% if data["training-input"] == "" %}
+                <p id="search-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>You need to enter something to search on
+                </p>
+            {% elif data["training-input"].length < 3 %}
+                <p id="search-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the name, or the whole course code or qualification number
+                </p>
+            {% endif %}
 
-            <button class="govuk-button moj-search__button" data-module="govuk-button" type="submit"
-                style="margin-left: 0px;">
-                Find org
-            </button>
-        </form>
+                <input class="govuk-input {% if (data.invalidIDError or data.notFound) %} govuk-input--error {% endif %} " aria-describedby="org-search-input-hint {% if (data.invalidIDError or data.notFound) %} event-name-error {% endif %}"
+                id="orgSearchInput" name="orgSearchInput" type="text">
+        </div>
+        <button class="govuk-button moj-search__button" data-module="govuk-button" type="submit"
+        style="margin-left: 0px;">
+        Find organisation
+        </button>
+
+      </form>
 
     </div>
 </div>
