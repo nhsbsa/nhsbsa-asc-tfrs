@@ -8,34 +8,52 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-        <span class="govuk-caption-l">Org view</span>
-        <h1 class="govuk-heading-l">Bright Horizons</h1>
+        <span class="govuk-caption-xl">Org view</span>
+        <h1 class="govuk-heading-xl">Bright Horizons</h1>
 
-        <nav class="moj-sub-navigation" aria-label="Sub navigation">
-            <ul class="moj-sub-navigation__list">
-              <li class="moj-sub-navigation__item">
-                <a class="moj-sub-navigation__link" aria-current="{% if data.tab == 'claims'%}page{%endif%}" href="org-view-main.html?tab=claims">Claims</a>
-              </li>
-          
-              <li class="moj-sub-navigation__item">
-                <a class="moj-sub-navigation__link" aria-current="{% if data.tab == 'users'%}page{%endif%}" href="org-view-main.html?tab=users">Users</a>
-              </li>
-          
-              <li class="moj-sub-navigation__item">
-                <a class="moj-sub-navigation__link" aria-current="{% if data.tab == 'bankDetails'%}page{%endif%}" href="org-view-main.html?tab=bankDetails">Bank details</a>
-              </li>
-            </ul>
-        </nav>
+
+        <div class="moj-primary-navigation govuk-!-margin-bottom-6">
+
+          <div class="moj-primary-navigation__container">
+        
+            <div class="moj-primary-navigation__nav">
+        
+              <nav class="moj-primary-navigation" aria-label="Primary navigation">
+        
+                <ul class="moj-primary-navigation__list">
+                  <li class="moj-primary-navigation__item">
+                    <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims">Claims</a>
+                  </li>
+        
+                  <li class="moj-primary-navigation__item">
+                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'users'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=users">Users</a>
+                  </li>
+        
+                  <li class="moj-primary-navigation__item">
+                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'bankDetails'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=bankDetails">Bank details</a>
+                  </li>
+                </ul>
+        
+              </nav>
+        
+            </div>
+          </div>
+        
+        </div>
+
     </div>
+
 </div>
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-        {% if data.tab == "claims" %}
+    <div class="govuk-grid-column-full">
+        {% if data.orgTab == "claims" %}
             {% include "../_components/org-view/claims.html" %}
-        {% elif data.tab == "users" %}
+          {% elif data.orgTab == "singleClaim" %}
+            {% include "../_components/claim-view/claim-overview.html" %}
+          {% elif data.orgTab == "users" %}
             {% include "../_components/org-view/users.html" %}
-        {% elif data.tab == "bankDetails" %}
+        {% elif data.orgTab == "bankDetails" %}
             {% include "../_components/org-view/bank-details.html" %}
         {% endif %}
     </div>
