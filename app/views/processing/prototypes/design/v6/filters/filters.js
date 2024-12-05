@@ -250,12 +250,123 @@ addFilter('formatInformation_V6', function (foundOrg, enteredInfo, isFromCheckEd
     return info
 })
 
-addFilter('findOrganisation_V13', function (orgID, organisations) {
-    let organisation = null;
-    for (const org of organisations) {
-      if (org.workplaceId == orgID) {
-        organisation = org
-      }
+
+addFilter('createTimelineArray_V6', function (claim) {
+    // Extract the timestamps and their associated data
+    const events = [];
+
+    // Add created date
+    if (claim.createdDate) {
+        events.push({
+            type: "statusDate",
+            title: "Claim created",
+            date: claim.createdDate,
+            description: null,
+            author: claim.createdBy + " (Submitter)"
+        });
     }
-    return organisation;
+
+    // Add submitted date
+    if (claim.submittedDate) {
+        events.push({
+            type: "statusDate",
+            title: "Claim submitted",
+            date: claim.submittedDate,
+            description: null,
+            author: claim.createdBy + " (Submitter)"
+        });
+    }
+
+    // Add completion date
+    if (claim.completionDate) {
+        events.push({
+            type: "trainingDate",
+            title: "Training completed",
+            date: claim.completionDate,
+            description: claim.completionNote || null,
+            author: null
+        });
+    }
+
+    // Add rejected date
+    if (claim.approvedDate) {
+        events.push({
+            type: "statusDate",
+            title: "Claim approved",
+            date: claim.approvedDate,
+            description:  null,
+            author: "Eren Yeager (Processor)"
+        });
+    }
+
+    // Add rejected date
+    if (claim.rejectedDate) {
+        events.push({
+            type: "statusDate",
+            title: "Claim rejected",
+            date: claim.rejectedDate,
+            description: claim.rejectedNote || null,
+            author: "Eren Yeager (Processor)"
+        });
+    }
+
+    // Add cost date
+    if (claim.costDate) {
+        events.push({
+            type: "trainingDate",
+            title: "Training paid for",
+            date: claim.costDate,
+            description: null,
+            author: null
+        });
+    }
+
+    // Add cost date
+    if (claim.startDate) {
+        events.push({
+            type: "trainingDate",
+            title: "Training started",
+            date: claim.startDate,
+            description: null,
+            author: null
+        });
+    }
+
+
+    // Add notes
+    if (claim.notes && Array.isArray(claim.notes)) {
+        claim.notes.forEach(note => {
+            events.push({
+                type: "note",
+                title: "Note added",
+                date: note.date,
+                description: note.note,
+                author: note.author
+            });
+        });
+    }
+
+    // Sort the events by date in descending order
+    events.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    return events;
+})
+
+
+addFilter('countOccurrences_V6', function (events,string) {
+     // Validate input
+    if (!Array.isArray(events)) {
+        throw new Error("The first argument must be an array.");
+    }
+    if (typeof string !== "string") {
+        throw new Error("The second argument must be a string.");
+    }
+
+    // Count the objects
+    return events.reduce((count, obj) => {
+        if (string === "all" || obj.type === string) {
+            count++;
+        }
+        return count;
+    }, 0);
 })

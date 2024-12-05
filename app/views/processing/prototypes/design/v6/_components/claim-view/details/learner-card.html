@@ -1,0 +1,35 @@
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h4 class="govuk-summary-card__title">
+        Learner
+      </h4>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Name
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ claim.learner.givenName }} {{ claim.learner.familyName }}
+            </dd>
+          </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            National insurance number
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ claim.learner.id }}
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Job title
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ claim.learner.jobTitle }}
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
