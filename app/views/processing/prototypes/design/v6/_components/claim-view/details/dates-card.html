@@ -1,0 +1,35 @@
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h4 class="govuk-summary-card__title">
+        Training Dates
+      </h4>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Payment date
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{claim.costDate | govukDate}}
+            </dd>
+          </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Start date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{claim.startDate | govukDate}}
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Completed date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{claim.completionDate | govukDate}}
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>

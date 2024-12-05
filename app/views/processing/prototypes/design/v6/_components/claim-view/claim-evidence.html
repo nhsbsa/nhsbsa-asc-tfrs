@@ -1,16 +1,39 @@
 <h3 class="govuk-heading-m">Evidence</h3>
 
+
 {% if ((claim.fundingType == "TU") and (claim.claimType != "40"))%}
-<h2 class="govuk-heading-s">Evidence of payment</h2>
-<dl class="govuk-summary-list">
-{% for evidence in claim.evidenceOfPayment %} {% set isPayment = true %}
-{% include "../file-section.html" %} {% endfor %}
-</dl>
-{% endif %} {% if (claim.fundingType == "TU") and (claim.claimType !=
-"60")%}
-<h2 class="govuk-heading-s">Evidence of completion</h2>
-<dl class="govuk-summary-list">
-{% set evidence = claim.evidenceOfCompletion %} {% set isPayment = false
-%} {% include "../file-section.html" %}
-</dl>
-{% endif %}
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h4 class="govuk-summary-card__title">
+        Evidence of payment
+      </h4>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        {% for evidence in claim.evidenceOfPayment %} 
+            {% set isPayment = true %}
+            {% include "./evidence/file-section.html" %} 
+        {% endfor %}
+      </dl>
+    </div>
+  </div>
+  {% endif %} 
+  
+
+
+{% if (claim.fundingType == "TU") and (claim.claimType != "60")%}
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h4 class="govuk-summary-card__title">
+        Evidence of Completion
+      </h4>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+            {% set evidence = claim.evidenceOfCompletion %} 
+            {% set isPayment = false%} 
+            {% include "./evidence/file-section.html" %}
+      </dl>
+    </div>
+</div>
+{% endif %} 
