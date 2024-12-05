@@ -1,24 +1,16 @@
 <div class="govuk-summary-card">
-
     <div class="govuk-summary-card__title-wrapper">
-
-        <h2 class="govuk-summary-card__title">
-            Evidence of payment
-        </h2>
-
+        <h4 class="govuk-summary-card__title">
+            Evidence of Completion
+        </h4>
     </div>
-
     <div class="govuk-summary-card__content">
-    
         <dl class="govuk-summary-list">
-            {% for evidence in claim.evidenceOfPayment %}
-                {% set isPayment = true %}
-                {% include "../../evidence/file-section.html" %}
-            {% endfor %}
+            {% set evidence = claim.evidenceOfCompletion %} 
+            {% set isPayment = false%} 
+            {% include "../../evidence/file-section.html" %}
         </dl>
-
     </div>
-
 </div>
 
 <div class="govuk-summary-card">
@@ -70,16 +62,27 @@
                 </dd>
 
             </div>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Awarding body
+                </dt>
+
+                <dd class="govuk-summary-list__value">
+                    {{ claim.training.awardingOrganisation }}
+                </dd>
+
+            </div>
                         
             {% endif %}
 
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Max reimbursement amount
+                    Learner name
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    £{{ claim.training.reimbursementAmount }}
+                    {{ claim.learner.givenName }} {{ claim.learner.familyName }}
                 </dd>
 
             </div>
@@ -87,11 +90,11 @@
             <div class="govuk-summary-list__row">
 
                 <dt class="govuk-summary-list__key">
-                    Payment date
+                    Completion date
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    {{claim.costDate | govukDate}}
+                    {{claim.completionDate | govukDate}}
                 </dd>
 
             </div>

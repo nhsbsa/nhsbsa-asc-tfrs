@@ -4,9 +4,9 @@
 
 <form action="../payment-check-handler" method="post" novalidate>
 
-    <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}" id="payment-review">
+    <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error{% endif %}" id="payment-review">
 
-        <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
+        <fieldset class="govuk-fieldset">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                     Does the evidence of payment meet the required criteria?
             </legend>
@@ -15,7 +15,7 @@
                 
                 <div class="govuk-radios__item">
 
-                    <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="yes" data-aria-controls="conditional-paymentReimbursementAmount" {% if data.payment=='yes'%}checked{% endif %}>
+                    <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="yes" {% if data.payment=='yes'%}checked{% endif %}>
 
                     <label class="govuk-label govuk-radios__label" for="paymentYes">
                         Yes
@@ -25,7 +25,7 @@
 
                 <div class="govuk-radios__item">
 
-                    <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no" data-aria-controls="conditional-payment-no" {% if data.payment=='no' %}checked{% endif%}>
+                    <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no" {% if data.payment=='no' %}checked{% endif%}>
 
                     <label class="govuk-label govuk-radios__label" for="paymentNo">
                         No

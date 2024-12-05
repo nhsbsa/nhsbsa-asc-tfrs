@@ -16,4 +16,16 @@
 
     {% include "./process-claim/costPerLearner.html" %}
 
+{% elif (data.processClaimStep == "paymentRejectionNote") %}
+
+    {% include "./process-claim/paymentRejectionNote.html" %}
+
+{% elif (data.processClaimStep == "checkCompletion") %}
+
+    {% include "./process-claim/checkCompletion.html" %}
+
+{% elif (data.processClaimStep == "completionRejectionNote") %}
+
+    {% include "./process-claim/completionRejectionNote.html" %}
+
 {% endif %}
