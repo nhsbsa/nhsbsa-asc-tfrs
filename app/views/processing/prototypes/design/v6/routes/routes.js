@@ -264,7 +264,12 @@ router.post('/search-org-id', function (req, res) {
       foundOrg = org
     }
   }
-  res.redirect('organisation/org-view-main?tab=claims&orgId=' + foundOrg.workplaceId)
+  if (foundOrg == null) {
+    res.redirect('organisation/org-view-main?orgTab=singleClaim&orgId=' + foundOrg.workplaceId)
+  }
+  else {
+    res.redirect('organisation/find-organisation?error=notFound')
+  }
 });
 
 module.exports = router

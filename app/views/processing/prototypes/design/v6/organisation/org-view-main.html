@@ -1,4 +1,5 @@
 {% extends "../layouts/processing-main.html" %}
+{% set org = data.orgId | findOrganisation_V13(data.organisations) %}
 
 {% block beforeContent %}
 <a href="./find-organisation" class="govuk-back-link">Back</a>
