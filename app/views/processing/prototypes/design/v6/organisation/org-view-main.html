@@ -1,18 +1,84 @@
 {% extends "../layouts/processing-main.html" %}
-
-{% block beforeContent %}
-<a href="./find-organisation" class="govuk-back-link">Back</a>
-{% endblock %}
+{% set org = data.orgId | findOrganisation_V13(data.organisations) %}
 
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
+      <div class="moj-page-header-actions">
 
-        <span class="govuk-caption-xl">Org view</span>
-        <h1 class="govuk-heading-xl">Bright Horizons</h1>
+          <div class="moj-page-header-actions__title">
+            <span class="govuk-caption-xl">Workplace Id: {{org.workplaceId}}</span>
+            <h1 class="govuk-heading-xl"> {{org.name}}</h1>
+          </div>
+        
+          <div class="moj-page-header-actions__actions">
+            <div class="moj-button-group moj-button-group--inline">
+               <p class="govuk-body">
+                <a href="../home" class="govuk-link">Back to start</a>
+              </p>
+            </div>
+          </div>
+
+        </div>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <p class="govuk-body">
+        <span class="govuk-!-font-weight-bold">Address:</span>
+        <br>
+        {{ org.address[0] }},  {{ org.address[1] }}, {{ org.address[2] }}       
+      </p>
+    <p class="govuk-body">
+      <span class="govuk-!-font-weight-bold">SRO:</span>
+      <br>
+      {{ org.signatory.givenName }} {{ org.signatory.familyName }}
+      <br>
+      {{ org.signatory.email }}
+  </p>
+    </div>
+
+    <div class="govuk-grid-column-one-half">
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            Help: Keep track of who I am speaking to 
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          <div class="govuk-form-group">
+            <label class="govuk-label" for="sort">
+              Select user from organisation
+            </label>
+            <div style="display: flex; align-content: center;">
+              <select class="govuk-select" id="sort" name="sort">
+                <option value="user" selected>No user selected</option>
+                <option value="user">{{ org.users.sro.name}} - SRO</option>
+                {% for submitter in org.users.submitters %}
+                  <option value="user">{{submitter.givenName}} {{submitter.familyName}} - submitter</option>
+                {% endfor %}
+                {% for learner in org.users.learners %}
+                  <option value="user">{{learner.givenName}} {{learner.familyName}} - learner</option>
+                {% endfor %}
+              </select>
+                
+              <p class="govuk-body" style="margin-left: 5px;">
+                <a href="org-view-main?orgId={{org.workplaceId}}&orgTab=users" class="govuk-link">View user</a>
+              </p>
+          </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+    
 
 
-        <div class="moj-primary-navigation govuk-!-margin-bottom-6">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <div class="moj-primary-navigation govuk-!-margin-bottom-2">
 
           <div class="moj-primary-navigation__container">
         

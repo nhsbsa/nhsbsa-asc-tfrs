@@ -357,7 +357,46 @@ router.post('/add-note', function (req, res) {
 });
 
 router.post('/search-org-id', function (req, res) {
-  res.redirect('organisation/org-view-main?tab=claims')
+  const orgSearch = req.session.data.orgSearchInput
+  var foundOrg = null
+  var viaClaim = false
+  var viaSROEmail = false
+  var viaSubmitterEmail = false
+  var viaOrgId = false
+  for (const org of req.session.data['organisations']) {
+    if (org.workplaceId == orgSearch) {
+      foundOrg = org
+      viaOrgId = true
+      break
+    } else if (org.signatory.email == orgSearch) {
+      foundOrg = org
+      viaSROEmail = true
+      break
+    } else {
+      for (const claim of org.claims) {
+        if (claim.claimID == orgSearch) {
+          foundOrg = org
+          viaClaim = true
+          break
+        } else if (claim.submitter.email == orgSearch) {
+          foundOrg = org
+          viaSubmitterEmail = true
+          break
+        }
+      }
+      break
+    } 
+  }
+  if (foundOrg == null) {
+    res.redirect('organisation/find-organisation?error=notFound')
+  }
+  else {
+    if (viaClaim) {
+      res.redirect('organisation/org-view-main?orgTab=singleClaim&orgId=' + foundOrg.workplaceId + '&id=' + orgSearch + '&processClaimStep=notStarted')
+    } else {
+      res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg.workplaceId)
+    } 
+  }
 });
 
 module.exports = router
