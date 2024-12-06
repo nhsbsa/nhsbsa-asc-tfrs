@@ -1,11 +1,31 @@
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l">All claims</h1>
-        {% for claim in org.claims %}
-        <p class="govuk-body">
-            <a href="org-view-main?orgId={{org.workplaceId}}&orgTab=singleClaim&id={{claim.claimID}}" class="govuk-link">{{claim.claimID}}</a>.
-          </p>
-        {% endfor %}
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l govuk-!-margin-top-6">Find a claim</h1>
+
+        <table class="govuk-table" data-module="moj-sortable-table">
+            <thead class="govuk-table__head govuk-!-margin-top-6">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Claim reference</th>
+                    <th class="govuk-table__header" scope="col" width="5%" aria-sort="none">Type</th>
+                    <th class="govuk-table__header" scope="col" width="33%" aria-sort="none">Training</th>
+                    <th class="govuk-table__header" scope="col" width="25%" aria-sort="none">Learner</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                {% for claim in org.claims %}
+                    <tr class="govuk-table__row claim-row" id="{{ claim.claimID | removeClaimSuffix_V13 }}">
+                        <td class="govuk-table__header" scope="row"><a class="govuk-link" href="org-view-main?orgId={{org.workplaceId}}&orgTab=singleClaim&id={{claim.claimID}}&processClaimStep=notStarted">{{ claim.claimID }}</a></td>
+                        <td class="govuk-table__cell">{{ claim.claimType | typeTag_V13 }}</td>
+                        <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                        <td class="govuk-table__cell">
+                            {% if claim.learner %} {{ claim.learner.givenName }} {{ claim.learner.familyName }} {% else %} Not yet added {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+        
+            </tbody>
+            </table>
+        
     </div>
 </div>
 

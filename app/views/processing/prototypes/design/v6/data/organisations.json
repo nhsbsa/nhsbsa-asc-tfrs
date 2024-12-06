@@ -8,6 +8,10 @@
         "familyName": "Brown",
         "email": "james-brown@evergreencare.co.uk"
       }, 
+      "bankDetails": {
+        "sortCode": "27-XX-XX",
+        "accountNumber": "12XXXXXX"
+      }, 
       "claims": [{
         "claimID": "AB1-C12D-3XF7-A",
         "fundingType": "TU",
@@ -184,7 +188,32 @@
           }
         ]
       }],
-      "users": []
+      "users": {
+        "learners": [
+          {
+            "id": "KZ 79 0F 13 Z",
+            "familyName": "Effertz-Stroman",
+            "givenName": "Aron",
+            "jobTitle": "Caregiver"
+          },
+          {
+            "id": "LE 09 5F 94 M",
+            "familyName": "Kub",
+            "givenName": "Roy",
+            "jobTitle": "Caregiver"
+          }
+        ], 
+        "submitters": [
+          {
+          "familyName": "José",
+          "givenName": "Avis"
+          }
+        ], 
+        "sro": {
+          "name": "Rachel Mcglee",
+          "email": "rachel.mcglee@organisation.com"
+        }
+      }
     },
     {
       "workplaceId": "D18946931",
@@ -194,6 +223,10 @@
         "givenName": "Lionel",
         "familyName": "Lowe",
         "email": "Lionel-lowel@brighthorizons.co.uk"
+      }, 
+      "bankDetails": {
+        "sortCode": "27-XX-XX",
+        "accountNumber": "12XXXXXX"
       }, 
       "claims": [
         {
@@ -316,31 +349,32 @@
           ]
         }
       ],
-      "users": []
-    },
-    {
-      "workplaceId": "dupe",
-      "name": "Serenity House Solutions",
-      "address": ["102 Marylebone Street", "London", "SW1 9SK"],
-      "signatory": {
-        "givenName": "Margie",
-        "familyName": "D'Souza",
-        "email": "margiedsouza@serenityhouse.com"
-      }, 
-      "claims": [],
-      "users": []
-    },
-    {
-      "workplaceId": "resend",
-      "name": "Forever Care",
-      "address": ["37 Watergate Street", "York", "N3 9SJ"],
-      "signatory": {
-        "givenName": "Sarah",
-        "familyName": "Cooper",
-        "email": "Sarah-Cooper@forevercare.co.uk"
-      }, 
-      "claims": [],
-      "users": []
+      "users": {
+        "learners": [
+          {
+            "id": "KZ 79 0F 13 Z",
+            "familyName": "Effertz-Stroman",
+            "givenName": "Aron",
+            "jobTitle": "Caregiver"
+          },
+          {
+            "id": "LE 09 5F 94 M",
+            "familyName": "Kub",
+            "givenName": "Roy",
+            "jobTitle": "Caregiver"
+          }
+        ], 
+        "submitters": [
+          {
+          "familyName": "José",
+          "givenName": "Avis"
+          }
+        ], 
+        "sro": {
+          "name": "Rachel Mcglee",
+          "email": "rachel.mcglee@organisation.com"
+        }
+      }
     }
   ]
 

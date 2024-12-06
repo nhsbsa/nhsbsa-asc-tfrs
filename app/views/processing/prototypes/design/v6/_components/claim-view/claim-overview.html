@@ -26,7 +26,10 @@
         </div>
         {% endif %}
 
+        <a href="org-view-main?orgTab=claims" class="govuk-back-link govuk-!-margin-bottom-6">Back to all claims</a>
+
     </div>
+
 
     <div class="govuk-grid-column-full">
         <div class="moj-page-header-actions govuk-!-margin-bottom-6">
@@ -39,14 +42,11 @@
           
             <div class="moj-page-header-actions__actions">
               <div class="moj-button-group moj-button-group--inline">
-          
                 <a href="add-note?id={{claim.claimID}}&processSuccess" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
                     Add claim note
                  </a>
-          
               </div>
             </div>
-          
           </div>
     </div>
 
