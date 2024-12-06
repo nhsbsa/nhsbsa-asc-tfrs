@@ -370,3 +370,13 @@ addFilter('countOccurrences_V6', function (events,string) {
         return count;
     }, 0);
 })
+
+addFilter('findOrganisation_V13', function (orgID, organisations) {
+    let organisation = null;
+    for (const org of organisations) {
+      if (org.workplaceId == orgID) {
+        organisation = org
+      }
+    }
+    return organisation;
+})
