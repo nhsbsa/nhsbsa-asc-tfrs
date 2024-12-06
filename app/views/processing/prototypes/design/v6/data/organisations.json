@@ -1,25 +1,203 @@
 [
   {
       "workplaceId": "B02944934",
-      "name": "Evergreen Care",
+      "name": "Evergreen Care home",
       "address": ["72 Guild Street", "London", "SE23 6FH"],
       "signatory": {
         "givenName": "James",
         "familyName": "Brown",
         "email": "james-brown@evergreencare.co.uk"
       }, 
-      "claims": []
+      "claims": [{
+        "claimID": "Z1Z-F1J6-3XF7-A",
+        "fundingType": "TU",
+        "claimType": "100",
+        "learner": {
+          "id": "KZ 79 0F 13 Z",
+          "familyName": "Effertz-Stroman",
+          "givenName": "Aron",
+          "jobTitle": "Caregiver"
+        },
+        "training": {
+          "code": "DLDOC",
+          "reimbursementAmount": 50,
+          "title": "Delivering outstanding care",
+          "totalLearningTime": "60 mins",
+          "fundingModel": "full",
+          "type": "e-Learning Module",
+          "category": "Support for leaders and managers",
+          "description": null,
+          "awardingOrganisation": "Skills for Care",
+          "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+        },
+        "startDate": "2024-02-01T23:29:00.654Z",
+        "status": "submitted",
+        "createdDate": "2023-12-31T08:55:32.615Z",
+        "createdBy": "Flossie Gleason",
+        "submitter": {
+          "name": "Rachel Mcglee",
+          "email": "rachel.mcglee@organisation.com"
+        },
+        "submittedDate": "2024-02-11T12:56:10.547Z",
+        "approvedDate": null,
+        "rejectedDate": null,
+        "rejectedNote": null,
+        "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+        "evidenceOfPaymentreview": {
+          "pass": null,
+          "note": null
+        },
+        "paymentNote": null,
+        "completionNote": null,
+        "evidenceOfCompletion": "certificate.pdf",
+        "evidenceOfCompletionreview": {
+          "pass": null,
+          "note": null
+        },
+        "reimbursementAmount": null,
+        "completionDate": "2024-02-05T20:22:11.308Z",
+        "costDate": "2023-08-08T07:55:32.615Z",
+        "notes": [
+          {
+            "author": "Donald Marvin (CCS Agent)",
+            "date": "2024-02-05T09:02:43.631Z",
+            "note": "Submitter called to ask questions regarding this claim. Referral passed to processor."
+          }
+        ]
+      }],
+      "users": []
     },
     {
       "workplaceId": "D18946931",
-      "name": "Bright Horizons",
+      "name": "Bright Horizons Care home",
       "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
       "signatory": {
         "givenName": "Lionel",
         "familyName": "Lowe",
         "email": "Lionel-lowel@brighthorizons.co.uk"
       }, 
-      "claims": []
+      "claims": [
+        {
+          "claimID": "AB1-C12D-3XF7-A",
+          "fundingType": "TU",
+          "claimType": "100",
+          "learner": {
+            "id": "LE 09 5F 94 M",
+            "familyName": "Kub",
+            "givenName": "Roy",
+            "jobTitle": "Caregiver"
+          },
+          "training": {
+            "code": "DLDOC",
+            "reimbursementAmount": 50,
+            "title": "Delivering outstanding care",
+            "totalLearningTime": "60 mins",
+            "fundingModel": "full",
+            "type": "e-Learning Module",
+            "category": "Support for leaders and managers",
+            "description": null,
+            "awardingOrganisation": "Skills for Care",
+            "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+          },
+          "startDate": "2024-02-01T23:29:00.654Z",
+          "status": "submitted",
+          "createdDate": "2023-12-31T08:55:32.615Z",
+          "createdBy": "Flossie Gleason",
+          "submittedDate": "2024-02-11T13:56:10.547Z",
+          "submitter": {
+            "name": "Rachel Mcglee",
+            "email": "rachel.mcglee@organisation.com"
+          },
+          "approvedDate": null,
+          "rejectedDate": null,
+          "rejectedNote": null,
+          "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+          "evidenceOfPaymentreview": {
+            "pass": null,
+            "note": null
+          },
+          "paymentNote": null,
+          "completionNote": null,
+          "evidenceOfCompletion": "certificate.pdf",
+          "evidenceOfCompletionreview": {
+            "pass": null,
+            "note": null
+          },
+          "reimbursementAmount": null,
+          "completionDate": "2024-02-05T20:22:11.308Z",
+          "costDate": "2023-08-08T07:55:32.615Z",
+          "notes": [
+          ]
+        },
+        {
+          "claimID": "Z8S-F1J6-4GH7-A",
+          "fundingType": "TU",
+          "claimType": "100",
+          "learner": {
+            "id": "VL 10 7F 63 E",
+            "familyName": "Heber",
+            "givenName": "Stark",
+            "jobTitle": "Support Worker (Agency)"
+          },
+          "training": {
+            "code": "DLEDI",
+            "reimbursementAmount": 50,
+            "title": "Module 1 – Equality, diversity and inclusion",
+            "totalLearningTime": "4 hours",
+            "fundingModel": "full",
+            "type": "e-Learning Module",
+            "category": "Developing your workforce",
+            "description": null,
+            "awardingOrganisation": "Skills for Care",
+            "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+          },
+          "startDate": "2023-10-25T02:38:35.764Z",
+          "status": "approved",
+          "createdDate": "2023-11-30T13:09:57.600Z",
+          "createdBy": "Flossie Gleason",
+          "submittedDate": "2023-11-25T12:14:45.342Z",
+          "submitter": {
+            "name": "Rachel Mcglee",
+            "email": "rachel.mcglee@organisation.com"
+          },
+          "approvedDate": "2024-02-09T14:52:43.631Z",
+          "rejectedDate": null,
+          "rejectedNote": null,
+          "evidenceOfPayment": ["invoice003.pdf", "bankstatement003.pdf"],
+          "evidenceOfPaymentreview": {
+            "pass": "Approved",
+            "note": null
+          },
+        "paymentNote": null,
+          "completionNote": null,
+          "evidenceOfCompletion": "certificate002.pdf",
+          "evidenceOfCompletionreview": {
+            "pass": "Approved",
+            "note": null
+          },
+          "reimbursementAmount": 110,
+          "completionDate": "2023-11-16T01:18:28.980Z",
+          "costDate": "2023-10-04T12:09:57.600Z",
+          "notes": [ 
+            {
+              "author": "Donald Marvin (Processor)",
+              "date": "2024-02-05T08:58:43.631Z",
+              "note": "The evidence of payment met all of the criteria requirements."
+            },
+            {
+              "author": "Donald Marvin (Processor)",
+              "date": "2024-02-05T09:02:43.631Z",
+              "note": "The evidence of completion met all of the criteria requirements."
+            },
+            {
+              "author": "Donald Marvin (Processor)",
+              "date": "2024-02-05T10:32:43.631Z",
+              "note": "Have to go check with my manager the exact amount to reimburse."
+            }
+          ]
+        }
+      ],
+      "users": []
     },
     {
       "workplaceId": "dupe",
@@ -30,7 +208,8 @@
         "familyName": "D'Souza",
         "email": "margiedsouza@serenityhouse.com"
       }, 
-      "claims": []
+      "claims": [],
+      "users": []
     },
     {
       "workplaceId": "resend",
@@ -41,7 +220,8 @@
         "familyName": "Cooper",
         "email": "Sarah-Cooper@forevercare.co.uk"
       }, 
-      "claims": []
+      "claims": [],
+      "users": []
     }
   ]
 

@@ -9,8 +9,18 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-        <span class="govuk-caption-xl">Org view</span>
-        <h1 class="govuk-heading-xl">Bright Horizons</h1>
+        <span class="govuk-caption-xl">Workplace ID: {{org.workplaceId}}</span>
+        <h1 class="govuk-heading-xl" style="margin-bottom: 20px;"> {{org.name}}</h1>
+        <p class="govuk-body">
+          <span class="govuk-!-font-weight-bold">Address:</span>
+          <br>
+          {{org.address[0]}}, {{org.address[1]}},  {{org.address[2]}}
+      </p>
+      <p class="govuk-body">
+          <span class="govuk-!-font-weight-bold">Submitter:</span>
+          <br>
+          {{ org.signatory.givenName }} {{ org.signatory.familyName }}
+      </p>
 
 
         <div class="moj-primary-navigation govuk-!-margin-bottom-6">
