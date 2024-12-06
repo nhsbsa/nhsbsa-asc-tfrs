@@ -1,5 +1,5 @@
 {% extends "../layouts/processing-main.html" %}
-{% set org = data.orgId | findOrganisation_V13(data.organisations) %}
+{% set org = data.orgId | findOrganisation_V13(data.organisations, data.id) %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -33,9 +33,9 @@
     <p class="govuk-body">
       <span class="govuk-!-font-weight-bold">SRO:</span>
       <br>
-      {{ org.signatory.givenName }} {{ org.signatory.familyName }}
+      {{ org.users.signatory.givenName }} {{ org.users.signatory.familyName }}
       <br>
-      {{ org.signatory.email }}
+      {{ org.users.signatory.email }}
   </p>
     </div>
 
@@ -54,12 +54,12 @@
             <div style="display: flex; align-content: center;">
               <select class="govuk-select" id="sort" name="sort">
                 <option value="user" selected>No user selected</option>
-                <option value="user">{{ org.users.sro.name}} - SRO</option>
+                <option value="user">{{ org.users.signatory.givenName}} {{ org.users.signatory.familyName}} - SRO</option>
                 {% for submitter in org.users.submitters %}
-                  <option value="user">{{submitter.givenName}} {{submitter.familyName}} - submitter</option>
+                  <option value="user">{{submitter.givenName}} {{submitter.familyName}} - Submitter</option>
                 {% endfor %}
                 {% for learner in org.users.learners %}
-                  <option value="user">{{learner.givenName}} {{learner.familyName}} - learner</option>
+                  <option value="user">{{learner.givenName}} {{learner.familyName}} - Learner</option>
                 {% endfor %}
               </select>
                 

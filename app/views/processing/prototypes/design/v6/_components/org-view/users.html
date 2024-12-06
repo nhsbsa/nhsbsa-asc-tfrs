@@ -33,9 +33,9 @@
                     </tr>
                 </thead>
                 <tbody class="govuk-table__body">
-                    <tr class="govuk-table__row claim-row" id="id">
-                        <td class="govuk-table__header" scope="row">{{org.users.sro.name}}</td>
-                        <td class="govuk-table__cell">{{org.users.sro.email}}</td>
+                    <tr class="govuk-table__row" id="id">
+                      <td class="govuk-table__cell">{{org.users.signatory.givenName}} {{org.users.signatory.familyName}}</td>
+                        <td class="govuk-table__cell">{{org.users.signatory.email}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -50,7 +50,7 @@
                 </thead>
                 <tbody class="govuk-table__body">
                     {% for submitter in org.users.submitters %}
-                    <tr class="govuk-table__row claim-row" id="id">
+                    <tr class="govuk-table__row" id="id">
                         <td class="govuk-table__cell">{{ submitter.givenName }} {{ submitter.familyName }}</td>
                     </tr>
                     {% endfor %}
