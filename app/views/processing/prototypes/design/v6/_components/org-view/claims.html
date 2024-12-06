@@ -1,5 +1,12 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">All claims</h1>
+        {% for claim in org.claims %}
+        <p class="govuk-body">
+            <a href="org-view-main?orgId={{org.workplaceId}}&orgTab=singleClaim&id={{claim.claimID}}" class="govuk-link">{{claim.claimID}}</a>.
+          </p>
+        {% endfor %}
     </div>
 </div>
+
+

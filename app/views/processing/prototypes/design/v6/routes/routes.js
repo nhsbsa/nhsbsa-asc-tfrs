@@ -392,7 +392,7 @@ router.post('/search-org-id', function (req, res) {
   }
   else {
     if (viaClaim) {
-      res.redirect('organisation/org-view-main?orgTab=singleClaim&orgId=' + foundOrg.workplaceId + '&id=' + orgSearch)
+      res.redirect('organisation/org-view-main?orgTab=singleClaim&orgId=' + foundOrg.workplaceId + '&id=' + orgSearch + '&processClaimStep=notStarted')
     } else {
       res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg.workplaceId)
     } 

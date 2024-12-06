@@ -8,21 +8,37 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-
         <span class="govuk-caption-xl">Workplace ID: {{org.workplaceId}}</span>
         <h1 class="govuk-heading-xl" style="margin-bottom: 20px;"> {{org.name}}</h1>
-        <p class="govuk-body">
-          <span class="govuk-!-font-weight-bold">Address:</span>
-          <br>
-          {{org.address[0]}}, {{org.address[1]}},  {{org.address[2]}}
-      </p>
-      <p class="govuk-body">
-          <span class="govuk-!-font-weight-bold">Submitter:</span>
-          <br>
-          {{ org.signatory.givenName }} {{ org.signatory.familyName }}
-      </p>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              72 Guild Street<br>London<br>SE23 6FH
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              SRO details
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{org.signatory.givenName}} {{org.signatory.familyName}}<br>{{org.signatory.email}}
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
 
 
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
         <div class="moj-primary-navigation govuk-!-margin-bottom-6">
 
           <div class="moj-primary-navigation__container">
