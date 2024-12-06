@@ -371,11 +371,17 @@ addFilter('countOccurrences_V6', function (events,string) {
     }, 0);
 })
 
-addFilter('findOrganisation_V13', function (orgID, organisations) {
+addFilter('findOrganisation_V13', function (orgID, organisations, claimID) {
     let organisation = null;
     for (const org of organisations) {
       if (org.workplaceId == orgID) {
         organisation = org
+      } else {
+        for (const claim of org.claims) {
+            if (claim.claimID == claimID) {
+                organisation = org
+            }
+        }
       }
     }
     return organisation;
