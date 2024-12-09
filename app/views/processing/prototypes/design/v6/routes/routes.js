@@ -136,9 +136,9 @@ router.get('/start-processing', function (req, res) {
   }
 
   if (claim.claimType == "100" || claim.claimType == "60") {
-      return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=checkPayment')
+      return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=checkPayment#claim-content')
   } else if (claim.claimType == "40")  {
-      return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=checkCompletion')
+      return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=checkCompletion#claim-content')
   }
 });
 
@@ -148,9 +148,9 @@ router.post('/payment-check-handler', function (req, res) {
 
 
   if (paymentResponse == "yes") {
-    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=costPerLearner')
+    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=costPerLearner#claim-content')
   } else if (paymentResponse =="no") {
-    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=paymentRejectionNote')
+    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=paymentRejectionNote#claim-content')
   }
 
 });
@@ -169,9 +169,9 @@ router.post('/cost-per-learner-handler', function (req, res) {
 
 
   if (claim.claimType == "100") {
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=checkCompletion')
+    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=checkCompletion#claim-content')
   } else if (claim.claimType == "60") {
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=confirmOutcome')
+    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=confirmOutcome#claim-content')
   }
 
 });
@@ -190,9 +190,9 @@ router.post('/payment-rejection-note-handler', function (req, res) {
 
 
   if (claim.claimType == "100") {
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=checkCompletion')
+    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=checkCompletion#claim-content')
   } else if (claim.claimType == "60") {
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=confirmOutcome')
+    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=confirmOutcome#claim-content')
   }
 
 });
@@ -203,9 +203,9 @@ router.post('/completion-check-handler', function (req, res) {
 
 
   if (completionResponse == "yes") {
-    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=confirmOutcome')
+    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=confirmOutcome#claim-content')
   } else if (completionResponse =="no") {
-    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=completionRejectionNote')
+    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=completionRejectionNote#claim-content')
   }
 
 });
@@ -216,7 +216,7 @@ router.post('/completion-rejection-note-handler', function (req, res) {
 
 
 
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=confirmOutcome')
+    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&processClaimStep=confirmOutcome#claim-content')
 
 });
 
