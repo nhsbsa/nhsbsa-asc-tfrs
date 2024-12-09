@@ -1,114 +1,47 @@
+{% set uniqueSubmitters = data.claims| findUniqueSubmitters_V6 %}
+
 <div class="govuk-grid-row">
+
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l govuk-!-margin-top-6">Users</h1>   
 
-        <div class="govuk-tabs" data-module="govuk-tabs">
-            <h2 class="govuk-tabs__title">
-              Contents
-            </h2>
-            <ul class="govuk-tabs__list">
-              <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-                <a class="govuk-tabs__tab" href="#sro">
-                  SRO
-                </a>
-              </li>
-              <li class="govuk-tabs__list-item">
-                <a class="govuk-tabs__tab" href="#submitters">
-                  Submitters
-                </a>
-              </li>
-              <li class="govuk-tabs__list-item">
-                <a class="govuk-tabs__tab" href="#learners">
-                  Learners
-                </a>
-              </li>
-            </ul>
-            <div class="govuk-tabs__panel" id="sro">
-              <h2 class="govuk-heading-m">Senior Responsible Officer</h2>
-              <table class="govuk-table" data-module="moj-sortable-table">
-                <thead class="govuk-table__head">
-                    <tr class="govuk-table__row">
-                        <th class="govuk-table__header" scope="col" width="35%" >Name</th>
-                        <th class="govuk-table__header" scope="col" width="50%" >Email</th>
+        <h2 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer</h1>  
+          
+          <table class="govuk-table" data-module="moj-sortable-table">
+            <thead class="govuk-table__head govuk-!-margin-top-6">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" width="30%">Name</th>
+                    <th class="govuk-table__header" scope="col" width="50%">Email</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row claim-row" id="{{ org.workplaceId }}">
+                        <td class="govuk-table__cell">{{ org.signatory.givenName}} {{ org.signatory.familyName}}</td>
+                        <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ org.signatory.email }}</a></td>
                     </tr>
-                </thead>
-                <tbody class="govuk-table__body">
-                    <tr class="govuk-table__row" id="id">
-                      <td class="govuk-table__cell">{{org.users.signatory.givenName}} {{org.users.signatory.familyName}}</td>
-                        <td class="govuk-table__cell">{{org.users.signatory.email}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="submitters">
-              <h2 class="govuk-heading-m">Submitters</h2>
-              <table class="govuk-table">
-                <thead class="govuk-table__head">
-                  <tr class="govuk-table__row">
-                    <th scope="col" class="govuk-table__header">Name</th>
-                  </tr>
-                </thead>
-                <tbody class="govuk-table__body">
-                    {% for submitter in org.users.submitters %}
-                    <tr class="govuk-table__row" id="id">
-                        <td class="govuk-table__cell">{{ submitter.givenName }} {{ submitter.familyName }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
+        
+            </tbody>
+        </table>
+          
 
-              </table>
-            </div>
-            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="learners">
-              <h2 class="govuk-heading-m">Learners</h2>
-              <table class="govuk-table">
-                <thead class="govuk-table__head">
-                  <tr class="govuk-table__row">
-                    <th scope="col" class="govuk-table__header">Name</th>
-                    <th scope="col" class="govuk-table__header">Id</th>
-                    <th scope="col" class="govuk-table__header">Job title</th>
+        <h2 class="govuk-heading-m govuk-!-margin-top-6">Submitters</h1>   
+        <table class="govuk-table" data-module="moj-sortable-table">
+          <thead class="govuk-table__head govuk-!-margin-top-6">
+              <tr class="govuk-table__row">
+                  <th class="govuk-table__header" scope="col" width="30%" aria-sort="none">Name</th>
+                  <th class="govuk-table__header" scope="col" width="50%" aria-sort="none">Email</th>
+              </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+              {% for submitter in uniqueSubmitters %}
+                  <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
+                      <td class="govuk-table__cell">{{ submitter.name}}</td>
+                      <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ submitter.email }}</a></td>
                   </tr>
-                </thead>
-                <tbody class="govuk-table__body">
-                        {% for learner in org.users.learners %}
-                        <tr class="govuk-table__row claim-row" id="id">
-                            <td class="govuk-table__cell">{{ learner.givenName }} {{ learner.familyName }}</td>
-                            <td class="govuk-table__cell">{{ learner.id }}</td>
-                            <td class="govuk-table__cell">{{ learner.jobTitle }}</td>
-                        </tr>
-                        {% endfor %}
-                </tbody>
-              </table>
-            </div>
-            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-year">
-              <h2 class="govuk-heading-l">Past year</h2>
-              <table class="govuk-table">
-                <thead class="govuk-table__head">
-                  <tr class="govuk-table__row">
-                    <th scope="col" class="govuk-table__header">Case manager</th>
-                    <th scope="col" class="govuk-table__header">Cases opened</th>
-                    <th scope="col" class="govuk-table__header">Cases closed</th>
-                  </tr>
-                </thead>
-                <tbody class="govuk-table__body">
-                  <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">David Francis</td>
-                    <td class="govuk-table__cell">1380</td>
-                    <td class="govuk-table__cell">1472</td>
-                  </tr>
-                  <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">Paul Farmer</td>
-                    <td class="govuk-table__cell">1129</td>
-                    <td class="govuk-table__cell">1083</td>
-                  </tr>
-                  <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">Rita Patel</td>
-                    <td class="govuk-table__cell">1539</td>
-                    <td class="govuk-table__cell">1265</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+              {% endfor %}
+      
+          </tbody>
+      </table>
 
      </div>
 </div>

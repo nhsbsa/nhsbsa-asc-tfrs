@@ -371,18 +371,35 @@ addFilter('countOccurrences_V6', function (events,string) {
     }, 0);
 })
 
-addFilter('findOrganisation_V13', function (orgID, organisations, claimID) {
+addFilter('findOrganisation_V13', function (orgID, organisations) {
     let organisation = null;
     for (const org of organisations) {
       if (org.workplaceId == orgID) {
         organisation = org
-      } else {
-        for (const claim of org.claims) {
-            if (claim.claimID == claimID) {
-                organisation = org
-            }
-        }
       }
     }
     return organisation;
+})
+
+addFilter('findOrgClaims_V13', function (orgID, claims) {
+    let orgClaims = [];
+    for (const claim of claims) {
+      if (claim.workplaceId == orgID) {
+        orgClaims.push(claim)
+      }
+    }
+    return orgClaims;
+})
+
+addFilter('findUniqueSubmitters_V6', function (claims) {
+    const uniqueSubmitters = [];
+
+    claims.forEach(claim => {
+        const submitter = claim.submitter;
+        if (!uniqueSubmitters.some(s => s.email === submitter.email)) {
+          uniqueSubmitters.push(submitter);
+        }
+      });
+    
+    return uniqueSubmitters;
 })
