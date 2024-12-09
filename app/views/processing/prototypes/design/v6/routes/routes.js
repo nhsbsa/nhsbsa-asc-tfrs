@@ -373,10 +373,14 @@ router.post('/search-org-id', function (req, res) {
       viaSROEmail = true
       break
     } else {
-      for (const claim of org.claims) {
+      for (const claim of req.session.data['claims']) {
         if (claim.claimID == orgSearch) {
-          foundOrg = org
-          viaClaim = true
+          for (const org of req.session.data['organisations']) {
+            if (org.workplaceId == claim.workplaceId) {
+              foundOrg = org
+              viaClaim = true
+            }
+          }
           break
         } else if (claim.submitter.email == orgSearch) {
           foundOrg = org

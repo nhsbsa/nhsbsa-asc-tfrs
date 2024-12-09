@@ -88,13 +88,11 @@ Manage claims - {{serviceName}} — GOV.UK
         <h1 class="govuk-heading-l">Manage claims</h1>
       </div>
       <div class="moj-page-header-actions__actions">
-        <div class="moj-button-menu">
-          <div class="moj-button-menu__wrapper">
+        <div class="moj-button-group moj-button-group--inline">
             <form method="post" action="/new-claim-v13" class="govuk-!-margin-0">
               <button class="govuk-button moj-button-menu__item govuk-button--primary moj-page-header-actions__action"
                 data-module="govuk-button" type="submit">Start a new claim</button>
             </form>
-          </div>
         </div>
       </div>
     </div>
@@ -151,7 +149,7 @@ Manage claims - {{serviceName}} — GOV.UK
         <li class="chevron-card">
           <div class="chevron-card__wrapper">
               <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
-                  <a class="govuk-link chevron-card__link" data-track-label="{{ status.id }}" href="manage-claims?statusID={{ status.id }}&emptyError&invalidIDError&notFound&fromSearchId&fromSearchResults&deleteSuccess">{{ status.name }} claims ({{ noClaims }})</a>
+                  <a class="govuk-link chevron-card__link" data-track-label="{{ status.id }}" href="manage-claims?statusID={{ status.id }}&emptyError&invalidIDError&notFound&fromSearchId&fromSearchResults&deleteSuccess&currentPage=1">{{ status.name }} claims ({{ noClaims }})</a>
               </h3>
               <p class="govuk-body chevron-card__description">{{ status.description }}</p>
           </div>
