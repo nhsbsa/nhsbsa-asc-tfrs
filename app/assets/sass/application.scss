@@ -380,3 +380,50 @@
       text-align: right;
   }
 }
+
+.pagination__results {
+  justify-content: center;
+  
+
+  @include govuk-media-query($from: tablet) {
+  margin: 0;
+  justify-content: left;
+  }
+
+  @include govuk-media-query($from: desktop) {
+    padding-left: govuk-spacing(3);
+    text-align: right;
+  }
+
+}
+
+.govuk-pagination__results {
+  flex-direction: column; /* Stack items vertically */
+  text-align: center;    /* Center text */
+
+
+  @include govuk-media-query($from: tablet) {
+    text-align: left;    /* Center text */
+  }
+
+
+  @include govuk-media-query($from: desktop) {
+    display: flex;
+    justify-content: space-between; /* Ensures left and right alignment */
+    align-items: center; /* Centers items vertically */
+    flex-direction: row; /* Stack items vertically */
+    text-align: center;    /* Center text */
+  }
+}
+
+.govuk-pagination__list__results {
+  @include govuk-media-query($from: desktop) {
+    margin: 0;
+  }
+}
+
+.govuk-pagination__item__hidden {
+  @include govuk-media-query($until: tablet) {
+    display: none;
+  }
+}

@@ -192,10 +192,6 @@ addFilter('getCount_V13', function (items) {
     return count;
 })
 
-addFilter('pageCount_V13', function (contentCount) {
-    return Math.ceil(contentCount / 10)
-})
-
 
 addFilter('formatCount_V13', function (courses) {
     let count = courses.length;
@@ -987,4 +983,12 @@ addFilter('userCountNotExpired_V13', function (users) {
         }
     }
     return count.toString()
+});
+
+addFilter('parseInt', function(value, radix = 10) {
+    return parseInt(value, radix);
+});
+
+addFilter('min', (value1, value2) => {
+    return Math.min(value1, value2);
 });
