@@ -5,7 +5,7 @@
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
                 <h4 class="govuk-summary-card__title">
-                  Bank name?
+                  {{org.bankDetails.nameOnAccount}}
                 </h4>
               </div>
             <div class="govuk-summary-card__content">
@@ -24,6 +24,14 @@
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {{ org.bankDetails.accountNumber }}
+                  </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Building society roll number
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ org.bankDetails.buildingSocietyNumber }}
                   </dd>
                 </div>
               </dl>

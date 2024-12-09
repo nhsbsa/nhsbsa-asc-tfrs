@@ -3,6 +3,7 @@
     "claimID": "Z1Z-F1J6-3XF7-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KZ 79 0F 13 Z",
       "familyName": "Effertz-Stroman",
@@ -24,10 +25,10 @@
     "startDate": "2024-02-01T23:29:00.654Z",
     "status": "submitted",
     "createdDate": "2023-12-31T08:55:32.615Z",
-    "createdBy": "Flossie Gleason",
+    "createdBy": "Daniel Jones",
     "submitter": {
-      "name": "Rachel Mcglee",
-      "email": "rachel.mcglee@organisation.com"
+      "name": "Daniel Jones",
+      "email": "d.jones@organisation.com"
     },
     "submittedDate": "2024-02-11T12:56:10.547Z",
     "approvedDate": null,
@@ -60,6 +61,7 @@
     "claimID": "AB1-C12D-3XF7-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "LE 09 5F 94 M",
       "familyName": "Kub",
@@ -81,7 +83,7 @@
     "startDate": "2024-02-01T23:29:00.654Z",
     "status": "submitted",
     "createdDate": "2023-12-31T08:55:32.615Z",
-    "createdBy": "Flossie Gleason",
+    "createdBy": "Rachel Mcglee",
     "submittedDate": "2024-02-11T13:56:10.547Z",
     "submitter": {
       "name": "Rachel Mcglee",
@@ -112,6 +114,7 @@
     "claimID": "Z8S-F1J6-4GH7-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "VL 10 7F 63 E",
       "familyName": "Heber",
@@ -136,8 +139,8 @@
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-11-25T12:14:45.342Z",
     "submitter": {
-      "name": "Rachel Mcglee",
-      "email": "rachel.mcglee@organisation.com"
+      "name": "Flossie Gleason",
+      "email": "flossie.gleason@organisation.com"
     },
     "approvedDate": "2024-02-09T14:52:43.631Z",
     "rejectedDate": null,
@@ -179,6 +182,7 @@
     "claimID": "K93-SK68-3S2K-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "ZX 51 96 87 D",
       "familyName": "Simonis",
@@ -203,8 +207,8 @@
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-11-25T03:13:47.582Z",
     "submitter": {
-      "name": "Rachel Mcglee",
-      "email": "rachel.mcglee@organisation.com"
+      "name": "Daniel Jones",
+      "email": "d.jones@organisation.com"
     },
     "approvedDate": null,
     "rejectedDate": "2024-02-05T14:53:43.631Z",
@@ -236,6 +240,7 @@
     "claimID": "W1J-BEDE-8LCQ-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "UG 66 2F 97 F",
       "familyName": "Turner",
@@ -260,8 +265,8 @@
     "createdBy": "Flossie Gleason",
     "submittedDate": "2024-04-03T11:38:05.132Z",
     "submitter": {
-      "name": "Rachel Mcglee",
-      "email": "rachel.mcglee@organisation.com"
+      "name": "Fredrick Smith",
+      "email": "fredrick.smith@organisation.com"
     },
     "approvedDate": null,
     "rejectedDate": "2024-05-11T12:12:05.132Z",
@@ -298,6 +303,7 @@
     "claimID": "Y6M-5DYB-TRCL-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "NX 76 8F 30 D",
       "familyName": "Lucius",
@@ -350,6 +356,7 @@
     "claimID": "WR5-R2P4-DSL4-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "LM 89 7F 48 J",
       "familyName": "Harrison",
@@ -402,6 +409,7 @@
     "claimID": "R4Y-NL7G-D967-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",
@@ -454,6 +462,7 @@
     "claimID": "F9B-EK2N-ELH8-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "FS 47 4F 68 U",
       "familyName": "Ezequiel",
@@ -506,6 +515,7 @@
     "claimID": "NLE-BMDT-68ZI-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "HM 27 9F 18 T",
       "familyName": "Julio",
@@ -560,6 +570,7 @@
     "claimID": "R7J-NC3G-D967-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",
@@ -612,6 +623,7 @@
     "claimID": "K92-HD52-7GD9-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",
@@ -664,6 +676,7 @@
     "claimID": "R7J-NC3G-D967-C",
     "fundingType": "TU",
     "claimType": "40",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",
@@ -716,6 +729,7 @@
     "claimID": "K92-HD52-7GD9-C",
     "fundingType": "TU",
     "claimType": "40",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",
@@ -768,6 +782,7 @@
     "claimID": "R4Y-NL7G-D967-C",
     "fundingType": "TU",
     "claimType": "40",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",

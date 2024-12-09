@@ -1,5 +1,6 @@
 {% extends "../layouts/processing-main.html" %}
-{% set org = data.orgId | findOrganisation_V13(data.organisations, data.id) %}
+{% set org = data.orgId | findOrganisation_V13(data.organisations) %}
+{% set claims = data.orgId | findOrgClaims_V13(data.claims) %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -28,53 +29,20 @@
       <p class="govuk-body">
         <span class="govuk-!-font-weight-bold">Address:</span>
         <br>
-        {{ org.address[0] }},  {{ org.address[1] }}, {{ org.address[2] }}       
+        {{ org.address[0] }}<br>  {{ org.address[1] }}<br> {{ org.address[2] }}       
       </p>
-    <p class="govuk-body">
-      <span class="govuk-!-font-weight-bold">SRO:</span>
-      <br>
-      {{ org.users.signatory.givenName }} {{ org.users.signatory.familyName }}
-      <br>
-      {{ org.users.signatory.email }}
-  </p>
     </div>
 
     <div class="govuk-grid-column-one-half">
-      <details class="govuk-details">
-        <summary class="govuk-details__summary">
-          <span class="govuk-details__summary-text">
-            Help: Keep track of who I am speaking to 
-          </span>
-        </summary>
-        <div class="govuk-details__text">
-          <div class="govuk-form-group">
-            <label class="govuk-label" for="sort">
-              Select user from organisation
-            </label>
-            <div style="display: flex; align-content: center;">
-              <select class="govuk-select" id="sort" name="sort">
-                <option value="user" selected>No user selected</option>
-                <option value="user">{{ org.users.signatory.givenName}} {{ org.users.signatory.familyName}} - SRO</option>
-                {% for submitter in org.users.submitters %}
-                  <option value="user">{{submitter.givenName}} {{submitter.familyName}} - Submitter</option>
-                {% endfor %}
-                {% for learner in org.users.learners %}
-                  <option value="user">{{learner.givenName}} {{learner.familyName}} - Learner</option>
-                {% endfor %}
-              </select>
-                
-              <p class="govuk-body" style="margin-left: 5px;">
-                <a href="org-view-main?orgId={{org.workplaceId}}&orgTab=users" class="govuk-link">View user</a>
-              </p>
-          </div>
-          </div>
-        </div>
-      </details>
+      <p class="govuk-body">
+        <span class="govuk-!-font-weight-bold">SRO:</span>
+        <br>
+        {{ org.signatory.givenName }} {{ org.signatory.familyName }}
+        <br>
+        <a href="#">{{ org.signatory.email }}</a>
+      </p>
     </div>
   </div>
-
-    
-
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
@@ -108,7 +76,6 @@
         </div>
 
     </div>
-
 </div>
 
 <div class="govuk-grid-row">
