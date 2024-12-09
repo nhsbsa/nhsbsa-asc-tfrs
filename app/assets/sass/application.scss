@@ -320,4 +320,110 @@
   margin-bottom: 0;
 }
 
+.note {
+  padding-left:govuk-spacing(3);
+  padding-right:govuk-spacing(3);
+  padding-bottom:govuk-spacing(2);
+  border-bottom: 1px solid #b1b4b6;
+  margin-bottom:govuk-spacing(4);
+}
 
+.history-filters {
+  margin-bottom: govuk-spacing(6);
+}
+
+.history-filters ul {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.history-filters ul li {
+  display: inline-block;
+  list-style-type: none;
+}
+
+.history-filters ul li .filter-button {
+  margin-bottom: 5px;
+  background: govuk-colour("light-grey");
+  color: govuk-colour("black");
+  box-shadow: 0 2px 0 govuk-shade(govuk-colour("light-grey"), 40%);
+  width: unset;
+}
+
+.history-filters ul li .filter-button:hover {
+  color: govuk-colour("black");
+  background-color: govuk-shade(govuk-colour("light-grey"), 10%);
+  box-shadow: 0 2px 0 govuk-shade(govuk-colour("light-grey"), 40%);
+}
+.history-filters ul li .filter-button.selected {
+  background: govuk-colour("purple");
+  color: #fff;
+  box-shadow: 0 2px 0 govuk-shade(govuk-colour("purple"), 60%);
+}
+
+.history-filters ul li .filter-button:focus {
+  color:  $govuk-focus-text-colour;
+  background-color: $govuk-focus-colour;
+}
+
+.claim-tab-hidden {
+  display: none;
+}
+
+.moj-timeline__item-hidden {
+  display: none;
+}
+
+@media (min-width: 40.0625em) {
+  .govuk-summary-list__actions-no-key {
+      width: 40%;
+      text-align: right;
+  }
+}
+
+.pagination__results {
+  justify-content: center;
+  
+
+  @include govuk-media-query($from: tablet) {
+  margin: 0;
+  justify-content: left;
+  }
+
+  @include govuk-media-query($from: desktop) {
+    padding-left: govuk-spacing(3);
+    text-align: right;
+  }
+
+}
+
+.govuk-pagination__results {
+  flex-direction: column; /* Stack items vertically */
+  text-align: center;    /* Center text */
+
+
+  @include govuk-media-query($from: tablet) {
+    text-align: left;    /* Center text */
+  }
+
+
+  @include govuk-media-query($from: desktop) {
+    display: flex;
+    justify-content: space-between; /* Ensures left and right alignment */
+    align-items: center; /* Centers items vertically */
+    flex-direction: row; /* Stack items vertically */
+    text-align: center;    /* Center text */
+  }
+}
+
+.govuk-pagination__list__results {
+  @include govuk-media-query($from: desktop) {
+    margin: 0;
+  }
+}
+
+.govuk-pagination__item__hidden {
+  @include govuk-media-query($until: tablet) {
+    display: none;
+  }
+}

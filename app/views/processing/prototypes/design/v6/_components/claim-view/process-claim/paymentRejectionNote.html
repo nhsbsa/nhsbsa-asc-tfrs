@@ -1,0 +1,33 @@
+<h3 class="govuk-heading-m">Step 2: Evidence of payment rejection reason</h3>
+
+{% include "./supporting-data/payment-evidence-information.html" %}
+
+<form action="../payment-rejection-note-handler" method="post" novalidate>
+
+    <div class="govuk-form-group govuk-character-count {% if data.paymentNoNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+            Why did the evidence of payment not meet the required criteria?
+        </legend>
+        
+        <div id="payment-note-hint" class="govuk-hint">
+            This will be seen by the submitter when the claim is processed.
+        </div>
+        
+        <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentNoNoteIncomplete %}govuk-textarea--error{% endif %}" id="paymentNoNote" name="paymentNoNote" rows="30" aria-describedby="payment-no-note-info note-hint">{{ data.paymentNoNote | default ('') }}</textarea>
+        
+        <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
+            You can enter up to 1000 characters
+        </div>
+
+</div>
+
+    <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Continue
+        </button>
+        <a class="govuk-link govuk-link--no-visited-state" href="../process-claim-back-handler">Go back</a>
+    </div>
+
+</form>
+
+

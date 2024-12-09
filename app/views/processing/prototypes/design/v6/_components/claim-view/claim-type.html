@@ -1,0 +1,17 @@
+{% if (claim.fundingType == "TU") and (claim.claimType == "60") %}
+    <p class="govuk-body">This is the 60 part of a claim which uses the 60/40 funding model.</p>
+    <p class="govuk-body">It covers evidence of payment.</p>
+    {% if pairClaim != null %}
+    <p class="govuk-body">View the <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">40 part of the claim</a>, which covers evidence of training completion.</p>
+    {% else %}
+    <p class="govuk-body">The 40 part of the claim which covers the evidence of training completion has not been submitted yet.</p>
+    {% endif %}
+
+{% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}
+    <p class="govuk-body">This is the 40 part of a claim which uses the 60/40 funding model.</p>
+    <p class="govuk-body">It covers evidence of training completion.</p>
+    <p class="govuk-body">View the <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">60 part of the claim</a>, which covers evidence of payment.</p>
+
+{% elif (claim.fundingType == "TU") and (claim.claimType == "100") %}
+    <p class="govuk-body">This is a 100 claim. It covers both evidence of payment and evidence of training completion.</p>
+{% endif %}

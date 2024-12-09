@@ -1,0 +1,95 @@
+{% extends "../layouts/processing-main.html" %}
+{% set org = data.orgId | findOrganisation_V13(data.organisations) %}
+{% set claims = data.orgId | findOrgClaims_V13(data.claims) %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <div class="moj-page-header-actions">
+
+          <div class="moj-page-header-actions__title">
+            <span class="govuk-caption-xl">Workplace Id: {{org.workplaceId}}</span>
+            <h1 class="govuk-heading-xl"> {{org.name}}</h1>
+          </div>
+        
+          <div class="moj-page-header-actions__actions">
+            <div class="moj-button-group moj-button-group--inline">
+               <p class="govuk-body">
+                <a href="../home" class="govuk-link">Back to start</a>
+              </p>
+            </div>
+          </div>
+
+        </div>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <p class="govuk-body">
+        <span class="govuk-!-font-weight-bold">Address:</span>
+        <br>
+        {{ org.address[0] }}<br>  {{ org.address[1] }}<br> {{ org.address[2] }}       
+      </p>
+    </div>
+
+    <div class="govuk-grid-column-one-half">
+      <p class="govuk-body">
+        <span class="govuk-!-font-weight-bold">SRO:</span>
+        <br>
+        {{ org.signatory.givenName }} {{ org.signatory.familyName }}
+        <br>
+        <a href="#">{{ org.signatory.email }}</a>
+      </p>
+    </div>
+  </div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <div class="moj-primary-navigation govuk-!-margin-bottom-2">
+
+          <div class="moj-primary-navigation__container">
+        
+            <div class="moj-primary-navigation__nav">
+        
+              <nav class="moj-primary-navigation" aria-label="Primary navigation">
+        
+                <ul class="moj-primary-navigation__list">
+                  <li class="moj-primary-navigation__item">
+                    <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims">Claims</a>
+                  </li>
+        
+                  <li class="moj-primary-navigation__item">
+                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'users'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=users">Users</a>
+                  </li>
+        
+                  <li class="moj-primary-navigation__item">
+                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'bankDetails'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=bankDetails">Bank details</a>
+                  </li>
+                </ul>
+        
+              </nav>
+        
+            </div>
+          </div>
+        
+        </div>
+
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% if data.orgTab == "claims" %}
+            {% include "../_components/org-view/claims.html" %}
+          {% elif data.orgTab == "singleClaim" %}
+            {% include "../_components/claim-view/claim-overview.html" %}
+          {% elif data.orgTab == "users" %}
+            {% include "../_components/org-view/users.html" %}
+        {% elif data.orgTab == "bankDetails" %}
+            {% include "../_components/org-view/bank-details.html" %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

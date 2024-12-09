@@ -3,6 +3,7 @@
     "claimID": "Z1Z-F1J6-3XF7-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KZ 79 0F 13 Z",
       "familyName": "Effertz-Stroman",
@@ -24,7 +25,11 @@
     "startDate": "2024-02-01T23:29:00.654Z",
     "status": "submitted",
     "createdDate": "2023-12-31T08:55:32.615Z",
-    "createdBy": "Flossie Gleason",
+    "createdBy": "Daniel Jones",
+    "submitter": {
+      "name": "Daniel Jones",
+      "email": "d.jones@organisation.com"
+    },
     "submittedDate": "2024-02-11T12:56:10.547Z",
     "approvedDate": null,
     "rejectedDate": null,
@@ -56,6 +61,7 @@
     "claimID": "AB1-C12D-3XF7-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "LE 09 5F 94 M",
       "familyName": "Kub",
@@ -77,8 +83,12 @@
     "startDate": "2024-02-01T23:29:00.654Z",
     "status": "submitted",
     "createdDate": "2023-12-31T08:55:32.615Z",
-    "createdBy": "Flossie Gleason",
+    "createdBy": "Rachel Mcglee",
     "submittedDate": "2024-02-11T13:56:10.547Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@organisation.com"
+    },
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -104,6 +114,7 @@
     "claimID": "Z8S-F1J6-4GH7-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "VL 10 7F 63 E",
       "familyName": "Heber",
@@ -127,6 +138,10 @@
     "createdDate": "2023-11-30T13:09:57.600Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-11-25T12:14:45.342Z",
+    "submitter": {
+      "name": "Flossie Gleason",
+      "email": "flossie.gleason@organisation.com"
+    },
     "approvedDate": "2024-02-09T14:52:43.631Z",
     "rejectedDate": null,
     "rejectedNote": null,
@@ -167,6 +182,7 @@
     "claimID": "K93-SK68-3S2K-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "ZX 51 96 87 D",
       "familyName": "Simonis",
@@ -190,6 +206,10 @@
     "createdDate": "2023-04-04T13:52:37.929Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-11-25T03:13:47.582Z",
+    "submitter": {
+      "name": "Daniel Jones",
+      "email": "d.jones@organisation.com"
+    },
     "approvedDate": null,
     "rejectedDate": "2024-02-05T14:53:43.631Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for. The evidence of completion provided did not meet our requirements because it did not refer to the training that was paid for.",
@@ -220,6 +240,7 @@
     "claimID": "W1J-BEDE-8LCQ-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "UG 66 2F 97 F",
       "familyName": "Turner",
@@ -243,6 +264,10 @@
     "createdDate": "2023-04-04T13:52:37.929Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": "2024-04-03T11:38:05.132Z",
+    "submitter": {
+      "name": "Fredrick Smith",
+      "email": "fredrick.smith@organisation.com"
+    },
     "approvedDate": null,
     "rejectedDate": "2024-05-11T12:12:05.132Z",
     "rejectedNote": "This claim has been escalated for fraud.",
@@ -278,6 +303,7 @@
     "claimID": "Y6M-5DYB-TRCL-A",
     "fundingType": "TU",
     "claimType": "100",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "NX 76 8F 30 D",
       "familyName": "Lucius",
@@ -301,6 +327,10 @@
     "createdDate": "2024-03-23T14:23:36.888Z",
     "createdBy": "Mara Monahan",
     "submittedDate": "2024-01-07T06:44:24.585Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@organisation.com"
+    },
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -326,6 +356,7 @@
     "claimID": "WR5-R2P4-DSL4-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "LM 89 7F 48 J",
       "familyName": "Harrison",
@@ -349,6 +380,10 @@
     "createdDate": "2023-12-31T08:55:32.615Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": "2024-02-11T12:56:10.547Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@organisation.com"
+    },
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -374,6 +409,7 @@
     "claimID": "R4Y-NL7G-D967-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",
@@ -397,6 +433,10 @@
     "createdDate": "2023-06-27T18:29:08.850Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-12-24T21:55:10.611Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@organisation.com"
+    },
     "approvedDate": "2024-04-15T19:35:05.522Z",
     "rejectedDate": null,
     "rejectedNote": null,
@@ -422,6 +462,7 @@
     "claimID": "F9B-EK2N-ELH8-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "FS 47 4F 68 U",
       "familyName": "Ezequiel",
@@ -445,6 +486,10 @@
     "createdDate": "2024-02-12T22:02:22.071Z",
     "createdBy": "Mara Monahan",
     "submittedDate": "2024-01-04T05:33:21.376Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@organisation.com"
+    },
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -470,6 +515,7 @@
     "claimID": "NLE-BMDT-68ZI-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "HM 27 9F 18 T",
       "familyName": "Julio",
@@ -493,6 +539,10 @@
     "createdDate": "2023-07-28T06:59:22.580Z",
     "createdBy": "Mara Monahan",
     "submittedDate": "2024-04-27T15:47:33.535Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@organisation.com"
+    },
     "approvedDate": null,
     "rejectedDate": "2024-04-28T19:25:11.840Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
@@ -520,6 +570,7 @@
     "claimID": "R7J-NC3G-D967-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",
@@ -543,6 +594,10 @@
     "createdDate": "2023-06-27T18:29:08.850Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-12-24T21:55:10.611Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@organisation.com"
+    },
     "approvedDate": "2024-04-15T19:35:05.522Z",
     "rejectedDate": null,
     "rejectedNote": null,
@@ -568,6 +623,7 @@
     "claimID": "K92-HD52-7GD9-B",
     "fundingType": "TU",
     "claimType": "60",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",
@@ -591,6 +647,10 @@
     "createdDate": "2023-06-27T18:29:08.850Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-12-24T21:55:10.611Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@organisation.com"
+    },
     "approvedDate": "2024-04-15T19:35:05.522Z",
     "rejectedDate": null,
     "rejectedNote": null,
@@ -616,6 +676,7 @@
     "claimID": "R7J-NC3G-D967-C",
     "fundingType": "TU",
     "claimType": "40",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",
@@ -639,6 +700,10 @@
     "createdDate": "2023-06-27T18:29:08.850Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-12-24T21:55:10.611Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@organisation.com"
+    },
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -664,6 +729,7 @@
     "claimID": "K92-HD52-7GD9-C",
     "fundingType": "TU",
     "claimType": "40",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",
@@ -687,6 +753,10 @@
     "createdDate": "2023-06-27T18:29:08.850Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-12-24T21:55:10.611Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@organisation.com"
+    },
     "approvedDate": "2024-04-15T19:35:05.522Z",
     "rejectedDate": "2024-04-28T19:25:11.840Z",
     "rejectedNote": "The evidence of completion provided did not meet our requirements because it did not refer to the training.",
@@ -712,6 +782,7 @@
     "claimID": "R4Y-NL7G-D967-C",
     "fundingType": "TU",
     "claimType": "40",
+    "workplaceId": "B02944934",
     "learner": {
       "id": "KQ 01 7F 72 D",
       "familyName": "Jairo",
@@ -735,6 +806,10 @@
     "createdDate": "2023-06-27T18:29:08.850Z",
     "createdBy": "Flossie Gleason",
     "submittedDate": "2023-12-24T21:55:10.611Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@organisation.com"
+    },
     "approvedDate": "2024-04-15T19:35:05.522Z",
     "rejectedDate": null,
     "rejectedNote": null,
