@@ -406,7 +406,7 @@ router.get('/outcome-handler', function (req, res) {
   delete req.session.data.processClaimStep 
 
 
-  req.session.data.processSuccess = true
+  req.session.data.processSuccess = "true"
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 });
 
