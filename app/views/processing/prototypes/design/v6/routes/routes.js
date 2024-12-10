@@ -436,7 +436,7 @@ router.post('/add-note', function (req, res) {
     delete req.session.data.noteError
 
     foundClaim.notes.push(newNote);
-    res.redirect('process-claim/claim' + '?id=' + claimID + "&noteAddedSuccess")
+    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&oteAddedSuccess#tab-contentn')
 
   }
 });
