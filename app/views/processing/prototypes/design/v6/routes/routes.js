@@ -428,10 +428,11 @@ router.post('/search-org-id', function (req, res) {
   }
   if (foundOrg == null) {
     res.redirect('organisation/find-organisation?error=notFound')
-  }
-  else {
+  } else {
     if (viaClaim) {
       res.redirect('organisation/org-view-main?orgTab=singleClaim&orgId=' + foundOrg.workplaceId + '&id=' + orgSearch + '&processClaimStep=notStarted')
+    } else if (viaSubmitterEmail || viaSROEmail) {
+      res.redirect('organisation/org-view-main?orgTab=users&orgId=' + foundOrg.workplaceId)
     } else {
       res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg.workplaceId)
     } 
