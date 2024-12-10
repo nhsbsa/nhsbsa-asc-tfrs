@@ -4,9 +4,12 @@
 {% set paymentNote = claim.evidenceOfPaymentreview.note %} 
 {% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
 {% set completionNote = claim.evidenceOfCompletionreview.note %}
+{% set pairClaim = data.id | matchPairClaim_V6(data.claims) %}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
+
+        <a href="org-view-main?orgTab=claims&processSucess" class="govuk-back-link govuk-!-margin-bottom-6">Back to all claims</a>
 
         {% if data.processSuccess == "true" %}
         <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
@@ -26,7 +29,9 @@
         </div>
         {% endif %}
 
-        <a href="org-view-main?orgTab=claims" class="govuk-back-link govuk-!-margin-bottom-6">Back to all claims</a>
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentNoNoteIncomplete or data.completionResponseIncomplete or data.completionNoNoteIncomplete %}
+            {% include "./process-claim/errorSummary.html" %}
+        {% endif %}
 
     </div>
 
@@ -34,15 +39,14 @@
     <div class="govuk-grid-column-full">
         <div class="moj-page-header-actions govuk-!-margin-bottom-6">
             <div class="moj-page-header-actions__title">
-                <span class="govuk-caption-l">Claim</span>
                 <h2 class="govuk-heading-l ">
-                    {{ claim.claimID }}
+                    Claim: {{ claim.claimID }}
                 </h2>
             </div>
           
             <div class="moj-page-header-actions__actions">
               <div class="moj-button-group moj-button-group--inline">
-                <a href="add-note?id={{claim.claimID}}&processSuccess" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
+                <a href="../process-claim/add-note?id={{claim.claimID}}&processSuccess" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
                     Add claim note
                  </a>
               </div>

@@ -10,6 +10,11 @@
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                     Does the evidence of payment meet the required criteria?
             </legend>
+            {% if data.paymentResponseIncomplete %}
+                <p id="payment-review-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Complete check on evidence of payment
+                </p>
+            {% endif %}
 
             <div class="govuk-radios" data-module="govuk-radios">
                 
