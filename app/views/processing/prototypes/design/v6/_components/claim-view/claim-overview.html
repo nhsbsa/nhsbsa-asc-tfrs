@@ -8,7 +8,9 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-        {% if data.processSuccess == "true" %}
+        <a href="org-view-main?orgTab=claims" class="govuk-back-link govuk-!-margin-bottom-6">Back to all claims</a>
+
+        {% if data.processSuccess == true %}
         <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
             
             <div class="govuk-notification-banner__header">
@@ -26,7 +28,9 @@
         </div>
         {% endif %}
 
-        <a href="org-view-main?orgTab=claims" class="govuk-back-link govuk-!-margin-bottom-6">Back to all claims</a>
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentNoNoteIncomplete or data.completionResponseIncomplete or data.completionNoNoteIncomplete %}
+            {% include "./process-claim/errorSummary.html" %}
+        {% endif %}
 
     </div>
 
