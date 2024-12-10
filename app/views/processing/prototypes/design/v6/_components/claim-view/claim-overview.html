@@ -4,6 +4,7 @@
 {% set paymentNote = claim.evidenceOfPaymentreview.note %} 
 {% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
 {% set completionNote = claim.evidenceOfCompletionreview.note %}
+{% set pairClaim = data.id | matchPairClaim_V6(data.claims) %}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
