@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, findOrg_V6 } = require('../helpers/helpers.js');
+const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, findOrg_V6, isValidOrgSearch } = require('../helpers/helpers.js');
 
 // v6 Prototype routes
 
@@ -393,6 +393,13 @@ router.post('/add-note', function (req, res) {
 
 router.post('/search-org-id', function (req, res) {
   const orgSearch = req.session.data.orgSearchInput
+
+  if (orgSearch == "") {
+    return res.redirect('organisation/find-organisation?error=emptyInput')
+  } else if (isValidOrgSearch(orgSearch) == false) {
+    return res.redirect('organisation/find-organisation?error=notValid')
+  }
+
   var foundOrg = null
   var viaClaim = false
   var viaSROEmail = false
@@ -436,6 +443,7 @@ router.post('/search-org-id', function (req, res) {
     } else {
       res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg.workplaceId)
     } 
+    delete req.session.data.orgSearchInput
   }
 });
 

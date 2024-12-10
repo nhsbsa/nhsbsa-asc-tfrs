@@ -10,7 +10,31 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if (data.error == "emptyInput" or data.error == "notValid"  or data.error == "notFound") %}
+            <div class="govuk-error-summary" data-module="govuk-error-summary">
+                <div role="alert">
+                    <h2 class="govuk-error-summary__title">
+                        There is a problem
+                    </h2>
+                    <div class="govuk-error-summary__body">
+                        <ul class="govuk-list govuk-error-summary__list">
+                            <li>
+                                {% if (data.error == "emptyInput") %}
+                                    <a href="#orgSearchInput">Enter something to search on</a>
+                                {% elif (data.error == "notValid") %}
+                                    <a href="#orgSearchInput">Enter a input in the correct format</a>
+                                {% elif (data.error == "notFound") %}
+                                    <a href="#orgSearchInput">No organisation match returned for your search</a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
         <span class="govuk-caption-l">Find a organisation</span>
         <h1 class="govuk-heading-l">What organisation are you searching for?</h1>
         <p class="govuk-body">You can search for a organisation using any of the following:
@@ -22,7 +46,7 @@
         </p>
 
         <form action="../search-org-id" method="post">
-            <div class="govuk-form-group {% if (data['training-input'] == ''  or data["training-input"].length < 3) %} govuk-form-group--error{% endif %}">
+            <div class="govuk-form-group {% if (data.error == "emptyInput" or data.error == "notValid"  or data.error == "notFound") %} govuk-form-group--error{% endif %}">
                 <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
                     Search
                 </label>
@@ -30,18 +54,22 @@
                 <div id="search-hint" class="govuk-hint moj-search__hint ">
                     Enter the whole workplace ID, email address, or claim reference number
                 </div>
-                {% if data["training-input"] == "" %}
+                {% if (data.error == "emptyInput") %}
                     <p id="search-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>You need to enter something to search on
+                        <span class="govuk-visually-hidden">Error:</span>Enter something to search on
                     </p>
-                {% elif data["training-input"].length < 3 %}
+                {% elif (data.error == "notValid") %}
                     <p id="search-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the name, or the whole course code or qualification number
+                        <span class="govuk-visually-hidden">Error:</span>Enter a input in the correct format
+                    </p>
+                {% elif (data.error == "notFound") %}
+                    <p id="search-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>No organisation match returned for your search
                     </p>
                 {% endif %}
 
-                    <input class="govuk-input {% if (data.invalidIDError or data.notFound) %} govuk-input--error {% endif %} " aria-describedby="org-search-input-hint {% if (data.invalidIDError or data.notFound) %} event-name-error {% endif %}"
-                    id="orgSearchInput" name="orgSearchInput" type="text">
+                    <input class="govuk-input {% if (data.error == "emptyInput" or data.error == "notValid"  or data.error == "notFound") %} govuk-input--error {% endif %} " aria-describedby="org-search-input-hint {% if (data.invalidIDError or data.notFound) %} event-name-error {% endif %}"
+                    id="orgSearchInput" name="orgSearchInput" type="text" value={{data.orgSearchInput}}>
             </div>
             <button class="govuk-button moj-search__button" data-module="govuk-button" type="submit"
             style="margin-left: 0px;">
