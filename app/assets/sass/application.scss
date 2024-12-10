@@ -422,16 +422,9 @@
   }
 }
 
-.govuk-pagination__item--ellipses__hidden {
+.govuk-pagination__item__hidden {
   @include govuk-media-query($until: tablet) {
-    content: "...";
-    @include govuk-typography-weight-bold;
-    color: $govuk-secondary-text-colour;
-
-    // Remove hover state for ellipsis items as they don't have links within them
-    &:hover {
-      background-color: transparent;
-    }
+    display: block;
   }
 }
 

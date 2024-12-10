@@ -90,7 +90,7 @@
                         &ctdot;
                     </li>
                     {% elif ((pageNumber - 2) > 1) and ((pageNumber - 3) == 1) %}
-                    <li class="govuk-pagination__item govuk-pagination__item--ellipses govuk-pagination__item--ellipses__hidden">
+                    <li class="govuk-pagination__item">
                         <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{pageNumber-2}}" aria-label="Page {{pageNumber-2}}">
                             {{pageNumber-2}}
                         </a>
@@ -99,7 +99,7 @@
 
 
                     {% if (pageNumber - 1) > 1 %}
-                    <li class="govuk-pagination__item">
+                    <li class="govuk-pagination__item govuk-pagination__item__hidden">
                         <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{pageNumber-1}}" aria-label="Page {{pageNumber-1}}">
                             {{pageNumber-1}}
                         </a>
@@ -114,7 +114,7 @@
                     </li>
 
                     {% if (pageNumber + 1) < maxPage %}
-                    <li class="govuk-pagination__item">
+                    <li class="govuk-pagination__item govuk-pagination__item__hidden">
                         <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{pageNumber + 1}}" aria-label="Page {{pageNumber + 1}}">
                             {{pageNumber + 1}}
                         </a>
@@ -126,7 +126,7 @@
                         &ctdot;
                     </li>
                     {% elif ((pageNumber + 2) < maxPage)  and ((pageNumber + 3) == maxPage) %}
-                    <li class="govuk-pagination__item govuk-pagination__item--ellipses govuk-pagination__item--ellipses__hidden">
+                    <li class="govuk-pagination__item">
                         <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{pageNumber + 2}}" aria-label="Page {{pageNumber + 2}}">
                             {{pageNumber + 2}}
                         </a>
