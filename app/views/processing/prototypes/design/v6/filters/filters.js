@@ -400,6 +400,6 @@ addFilter('findUniqueSubmitters_V6', function (claims) {
           uniqueSubmitters.push(submitter);
         }
       });
-    
-    return uniqueSubmitters;
+
+    return uniqueSubmitters.sort((a, b) => a.name.localeCompare(b.name));
 })
