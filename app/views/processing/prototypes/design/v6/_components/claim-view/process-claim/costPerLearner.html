@@ -24,6 +24,18 @@
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                 What was the cost per learner?
             </legend>
+
+            {% if data.paymentReimbursementAmountIncomplete %}
+                <p id="cost-per-learner-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Complete cost per learner
+                </p>
+            {% endif %}
+
+            {% if data.paymentReimbursementAmountInvalid %}
+                <p id="cost-per-learner-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter a valid cost per learner
+                </p>
+            {% endif %}
         
             <div class="govuk-input__wrapper" id="cost-per-learner">
                 <div class="govuk-input__prefix" aria-hidden="true">£</div>

@@ -28,4 +28,8 @@
 
     {% include "./process-claim/completionRejectionNote.html" %}
 
+{% elif (data.processClaimStep == "confirmOutcome") %}
+
+    {% include "./process-claim/confirmOutcome.html" %}
+
 {% endif %}
