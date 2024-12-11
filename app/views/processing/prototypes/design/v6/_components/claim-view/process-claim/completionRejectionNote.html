@@ -4,11 +4,11 @@
     {% set stepNo = "Step 2" %}
 {% endif %}
 
-<span class="govuk-caption-m">{{stepNo}}</span>
 <form action="../completion-rejection-note-handler" method="post" novalidate>
 
     <div class="govuk-form-group govuk-character-count {% if data.completionNoNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+            <span class="govuk-caption-m">{{stepNo}}</span>
             <h3 class="govuk-fieldset__heading">
                 Why did the evidence of completion not meet the required criteria?
             </h3>
