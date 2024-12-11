@@ -138,13 +138,13 @@ router.get('/start-processing', function (req, res) {
     }
   }
 
-  if (claim.claimType == "100" || claim.claimType == "60") {
-      req.session.data.processClaimStep = "checkPayment"
-  } else if (claim.claimType == "40")  {
-      req.session.data.processClaimStep = "checkCompletion"
-  }
+  req.session.data.processClaim = "inProgress"
 
-  return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+  if (claim.claimType == "100" || claim.claimType == "60") {
+    return res.redirect('process-claim/checkPayment?id=' + claimID)
+  } else if (claim.claimType == "40")  {
+    return res.redirect('process-claim/checkCompletion?id=' + claimID)
+  }
 
 });
 
@@ -156,15 +156,16 @@ router.post('/payment-check-handler', function (req, res) {
 
   if (paymentResponse == null) {
     req.session.data.paymentResponseIncomplete = true
+    return res.redirect('process-claim/checkPayment?id=' + claimID)
   } else {
     if (paymentResponse == "yes") {
-      req.session.data.processClaimStep = "costPerLearner"
+      return res.redirect('process-claim/costPerLearner?id=' + claimID)
     } else if (paymentResponse =="no") {
-      req.session.data.processClaimStep = "paymentRejectionNote"
+      return res.redirect('process-claim/paymentRejectionNote?id=' + claimID)
     }
   }
 
-  return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+  
 
 });
 
@@ -187,14 +188,14 @@ router.post('/cost-per-learner-handler', function (req, res) {
 
   if ((paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
     req.session.data.paymentReimbursementAmountIncomplete = true
-
+    return res.redirect('process-claim/costPerLearner?id=' + claimID)
   } else if (!validAmount) {
     req.session.data.paymentReimbursementAmountInvalid = true
-
+    return res.redirect('process-claim/costPerLearner?id=' + claimID)
   } else {
 
     if (claim.claimType == "100") {
-      req.session.data.processClaimStep = "checkCompletion"
+      return res.redirect('process-claim/checkCompletion?id=' + claimID)
     } else if (claim.claimType == "60") {
       switch(req.session.data.payment) {
         case "yes":
@@ -204,12 +205,10 @@ router.post('/cost-per-learner-handler', function (req, res) {
           req.session.data.result = "reject"
           break;
       }
-      req.session.data.processClaimStep = "confirmOutcome"
+      return res.redirect('process-claim/confirmOutcome?id=' + claimID)
     }
 
   }
-
-  return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
 
@@ -229,9 +228,10 @@ router.post('/payment-rejection-note-handler', function (req, res) {
 
   if ((paymentNoNote == null || paymentNoNote == "")) {
     req.session.data.paymentNoNoteIncomplete = true
+    return res.redirect('process-claim/paymentRejectionNote?id=' + claimID)
   } else {
     if (claim.claimType == "100") {
-      req.session.data.processClaimStep = "checkCompletion"
+      return res.redirect('process-claim/checkCompletion?id=' + claimID)
     } else if (claim.claimType == "60") {
       switch(req.session.data.payment) {
         case "yes":
@@ -241,11 +241,9 @@ router.post('/payment-rejection-note-handler', function (req, res) {
           req.session.data.result = "reject"
           break;
       }
-      req.session.data.processClaimStep = "confirmOutcome"
+      return res.redirect('process-claim/confirmOutcome?id=' + claimID)
     }
   }
-
-  return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
 
@@ -257,6 +255,7 @@ router.post('/completion-check-handler', function (req, res) {
 
   if (completionResponse == null) {
     req.session.data.completionResponseIncomplete = true
+    return res.redirect('process-claim/checkCompletion?id=' + claimID)
   } else {
     if (completionResponse == "yes") {
       switch(req.session.data.payment, req.session.data.completion) {
@@ -267,14 +266,12 @@ router.post('/completion-check-handler', function (req, res) {
           req.session.data.result = "reject"
           break;
       }
-      req.session.data.processClaimStep = "confirmOutcome"
+      return res.redirect('process-claim/confirmOutcome?id=' + claimID)
       
     } else if (completionResponse =="no") {
-      req.session.data.processClaimStep = "completionRejectionNote"
+      return res.redirect('process-claim/completionRejectionNote?id=' + claimID)
     }
   }
-
-  return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
 
@@ -286,6 +283,7 @@ router.post('/completion-rejection-note-handler', function (req, res) {
 
   if (completionNoNote == null || completionNoNote == "") {
     req.session.data.completionNoNoteIncomplete = true
+    return res.redirect('process-claim/completionRejectionNote?id=' + claimID)
   } else {
     switch(req.session.data.payment, req.session.data.completion) {
       case "yes","yes":
@@ -296,9 +294,8 @@ router.post('/completion-rejection-note-handler', function (req, res) {
         break;
     }
       req.session.data.processClaimStep = "confirmOutcome"
+      return res.redirect('process-claim/confirmOutcome?id=' + claimID)
   }
-
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
 
@@ -313,65 +310,14 @@ router.get('/process-claim-back-handler', function (req, res) {
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
 
+  delete req.session.data.payment
+  delete req.session.data.paymentReimbursementAmount
+  delete req.session.data.paymentNoNote
+  delete req.session.data.completion
+  delete req.session.data.completionNoNote
+  delete req.session.data.processClaim
+
   const claimID = req.session.data.id
-  const processClaimStep = req.session.data.processClaimStep
-  const paymentResponse = req.session.data.payment
-  const completionResponse = req.session.data.completion
-  var claim = null
-
-  for (const c of req.session.data.claims) {
-    if (c.claimID == claimID) {
-      claim = c
-      break;
-    }
-  }
-
-  if (processClaimStep == "checkPayment") {
-    
-    req.session.data.processClaimStep = "notStarted"
-
-  } else if (processClaimStep == "costPerLearner") {
-
-    req.session.data.processClaimStep = "checkPayment"
-
-  } else if (processClaimStep == "paymentRejectionNote") {
-
-    req.session.data.processClaimStep = "checkPayment"
-
-  } else if (processClaimStep == "checkCompletion") {
-
-    if (claim.claimType == "100") {
-      if (paymentResponse == "yes") {
-        req.session.data.processClaimStep = "costPerLearner"
-      } else if (paymentResponse == "no") {
-        req.session.data.processClaimStep = "paymentRejectionNote"
-      }
-    } else if (claim.claimType == "40") {
-      req.session.data.processClaimStep = "notStarted"
-    }
-
-  } else if (processClaimStep == "completionRejectionNote") {
-    
-    req.session.data.processClaimStep = "checkCompletion"
-
-  } else if (processClaimStep == "confirmOutcome") {
-
-    if (claim.claimType == "60") {
-      if (paymentResponse == "yes") {
-        req.session.data.processClaimStep = "costPerLearner"
-      } else if (paymentResponse == "no") {
-        req.session.data.processClaimStep = "paymentRejectionNote"
-      }
-    } else if ((claim.claimType == "100") || (claim.claimType == "40")) {
-      if (completionResponse == "yes") {
-        req.session.data.processClaimStep = "checkCompletion"
-      } else if (completionResponse == "no") {
-        req.session.data.processClaimStep = "completionRejectionNote"
-        
-      }
-    }
-
-  }
 
   return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
@@ -403,7 +349,9 @@ router.get('/outcome-handler', function (req, res) {
   delete req.session.data.paymentNoNote
   delete req.session.data.completion
   delete req.session.data.completionNoNote
-  delete req.session.data.processClaimStep 
+  delete req.session.data.processClaimStep
+
+  delete req.session.data.processClaim
 
 
   req.session.data.processSuccess = "true"
@@ -436,7 +384,7 @@ router.post('/add-note', function (req, res) {
     delete req.session.data.noteError
 
     foundClaim.notes.push(newNote);
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&oteAddedSuccess#tab-contentn')
+    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&oteAddedSuccess#tab-content')
 
   }
 });

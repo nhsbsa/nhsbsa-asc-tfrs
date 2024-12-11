@@ -1,0 +1,106 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% set claim = data.id | findClaim_V8(data.claims) %} 
+
+{% block pageTitle %}
+{% if (data.completionResponseIncomplete) %}Error: {% endif %}Check completion evidence - Claim {{data.id}} — Process claim — {{data.processingServiceName}}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if data.completionResponseIncomplete %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#payment-review-error">Complete check on evidence of completion</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <span class="govuk-caption-l">Process claim</span>
+
+        {% set stepNo = "Step 3" %}
+
+        {% if (claim.claimType == "40") %}
+            {% set stepNo = "Step 1" %}
+        {% endif %}
+
+        <h3 class="govuk-heading-m">{{stepNo}}: Check completion evidence</h3>
+
+        {% include "../_components/claim-view/process-claim/supporting-data/completion-evidence-information.html" %}
+
+        <form action="../completion-check-handler" method="post" novalidate>
+
+            <div class="govuk-form-group {% if data.completionResponseIncomplete %}govuk-form-group--error{% endif %}" id="completion-review">
+
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                            Does the evidence of completion meet the required criteria?
+                    </legend>
+
+                    {% if data.completionResponseIncomplete %}
+                        <p id="completion-review-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span> Complete check on evidence of completion
+                        </p>
+                    {% endif %}
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        
+                        <div class="govuk-radios__item">
+
+                            <input class="govuk-radios__input" id="completionYes" name="completion" type="radio" value="yes" {% if data.completion=='yes'%}checked{% endif %}>
+
+                            <label class="govuk-label govuk-radios__label" for="completionYes">
+                                Yes
+                            </label>
+
+                        </div>
+
+                        <div class="govuk-radios__item">
+
+                            <input class="govuk-radios__input" id="completionNo" name="completion" type="radio" value="no" {% if data.completion=='no' %}checked{% endif%}>
+
+                            <label class="govuk-label govuk-radios__label" for="completionNo">
+                                No
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+            </div>
+
+
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+                {% if claim.claimType == "100" %}
+                    {% if data.payment == "yes" %}
+                        <a class="govuk-link govuk-link--no-visited-state" href="./costPerLearner?id={{data.id}}">Go back</a>
+                    {% elif data.payment == "no" %}
+                        <a class="govuk-link govuk-link--no-visited-state" href="./paymentRejectionNote?id={{data.id}}">Go back</a>
+                    {% endif %}
+                {% elif claim.claimType == "40" %}
+                    <a class="govuk-link govuk-link--no-visited-state" href="../process-claim-back-handler">Go back</a>
+                {% endif %}
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

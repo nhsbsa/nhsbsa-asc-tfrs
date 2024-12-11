@@ -1,0 +1,209 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% set claim = data.id | findClaim_V8(data.claims) %} 
+
+{% block pageTitle %}
+{% if (data.paymentResponseIncomplete) %}Error: {% endif %}Check payment evidence - Claim {{data.id}} — Process claim — {{data.processingServiceName}}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        {% if data.paymentResponseIncomplete %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#payment-review-error">Complete check on evidence of payment</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <span class="govuk-caption-l">Process claim</span>
+        <h1 class="govuk-heading-l">Step 1: Check payment evidence</h1>
+
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form action="../payment-check-handler" method="post" novalidate>
+
+            <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error{% endif %}" id="payment-review">
+
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                            Does the evidence of payment meet the required criteria?
+                    </legend>
+                    {% if data.paymentResponseIncomplete %}
+                        <p id="payment-review-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span> Complete check on evidence of payment
+                        </p>
+                    {% endif %}
+
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        
+                        <div class="govuk-radios__item">
+
+                            <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="yes" {% if data.payment=='yes'%}checked{% endif %}>
+
+                            <label class="govuk-label govuk-radios__label" for="paymentYes">
+                                Yes
+                            </label>
+
+                        </div>
+
+                        <div class="govuk-radios__item">
+
+                            <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no" {% if data.payment=='no' %}checked{% endif%}>
+
+                            <label class="govuk-label govuk-radios__label" for="paymentNo">
+                                No
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+            </div>
+
+
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+                <a class="govuk-link govuk-link--no-visited-state" href="../process-claim-back-handler">Go back</a>
+            </div>
+
+        </form>
+
+        <div class="govuk-tabs" data-module="govuk-tabs">
+            <h2 class="govuk-tabs__title">
+            Contents
+            </h2>
+            <ul class="govuk-tabs__list">
+                <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+                    <a class="govuk-tabs__tab" href="#key">
+                    Key details
+                    </a>
+                </li>
+                <li class="govuk-tabs__list-item">
+                    <a class="govuk-tabs__tab" href="#evidence">
+                    Evidence of payment
+                    </a>
+                </li>
+            <li class="govuk-tabs__list-item">
+                <a class="govuk-tabs__tab" href="#history">
+                History
+                </a>
+            </li>
+            <li class="govuk-tabs__list-item">
+                <a class="govuk-tabs__tab" href="#details">
+                Other details
+                </a>
+            </li>
+            </ul>
+            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="key">
+                <h2 class="govuk-heading-m">Key details</h2>
+                <dl class="forced-summary-list">
+
+                <div class="forced-summary-list__row">
+
+                    <dt class="forced-summary-list__key">
+                        Organisation name
+                    </dt>
+
+                    <dd class="forced-summary-list__value">
+                        Oakhill Care Ltd
+                    </dd>
+
+                </div>
+
+
+                <div class="forced-summary-list__row">
+                    <dt class="forced-summary-list__key">
+                        Course or qualification name
+                    </dt>
+
+                    <dd class="forced-summary-list__value">
+                        {{ claim.training.title }}
+                    </dd>
+
+                </div>
+
+                {% if claim.training.code | trainingTypeCheck_V13(data.training, "Qualifications") %}
+                <div class="forced-summary-list__row">
+                    <dt class="forced-summary-list__key">
+                        Level and type
+                    </dt>
+
+                    <dd class="forced-summary-list__value">
+                        {{ claim.training.type }}
+                    </dd>
+
+                </div>
+                            
+                {% endif %}
+
+                <div class="forced-summary-list__row">
+                    <dt class="forced-summary-list__key">
+                        Max reimbursement amount
+                    </dt>
+
+                    <dd class="forced-summary-list__value">
+                        £{{ claim.training.reimbursementAmount }}
+                    </dd>
+
+                </div>
+
+                <div class="forced-summary-list__row">
+
+                    <dt class="forced-summary-list__key">
+                        Payment date
+                    </dt>
+
+                    <dd class="forced-summary-list__value">
+                        {{claim.costDate | govukDate}}
+                    </dd>
+
+                </div>
+
+                </dl>
+            </div>
+            <div class="govuk-tabs__panel" id="evidence">
+            <h2 class="govuk-heading-m"> Evidence of payment</h2>
+                <dl class="forced-summary-list">
+                    {% for evidence in claim.evidenceOfPayment %}
+                        {% set isPayment = true %}
+                        {% include "../_components/claim-view/evidence/file-section.html" %}
+                    {% endfor %}
+                </dl>
+            </div>
+            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="history">
+                {% include "../_components/claim-view/claim-tabs/claim-history.html" %}
+            </div>
+            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="details">
+                {% include "../_components/claim-view/claim-tabs/claim-details.html" %}
+            </div>
+        </div>
+    </div>  
+</div>
+
+
+{% endblock %}    
+
+{% block pageScripts %}
+<script type="text/javascript" src="/public/javascripts/processing/v6/side-nav-tabs.js"></script>
+<script type="text/javascript" src="/public/javascripts/processing/v6/timeline-filter.js"></script>
+{% endblock %}

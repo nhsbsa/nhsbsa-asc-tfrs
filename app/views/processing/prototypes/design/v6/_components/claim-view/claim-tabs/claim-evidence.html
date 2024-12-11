@@ -12,7 +12,7 @@
       <dl class="govuk-summary-list">
         {% for evidence in claim.evidenceOfPayment %} 
             {% set isPayment = true %}
-            {% include "./evidence/file-section.html" %} 
+            {% include "../evidence/file-section.html" %} 
         {% endfor %}
       </dl>
     </div>
@@ -32,7 +32,7 @@
       <dl class="govuk-summary-list">
             {% set evidence = claim.evidenceOfCompletion %} 
             {% set isPayment = false%} 
-            {% include "./evidence/file-section.html" %}
+            {% include "../evidence/file-section.html" %}
       </dl>
     </div>
 </div>

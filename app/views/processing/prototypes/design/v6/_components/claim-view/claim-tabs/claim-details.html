@@ -2,14 +2,14 @@
 
 {% if claim.training.code | trainingTypeCheck_V13(data.training, "Courses") %}
 
-    {% include "./details/course-card.html" %}
+    {% include "../details/course-card.html" %}
 
 {% elif claim.training.code | trainingTypeCheck_V13(data.training, "Qualifications") %}
 
-    {% include "./details/qualification-card.html" %}
+    {% include "../details/qualification-card.html" %}
 
 {% endif %}
 
-{% include "./details/learner-card.html" %}
+{% include "../details/learner-card.html" %}
 
-{% include "./details/dates-card.html" %}
+{% include "../details/dates-card.html" %}
