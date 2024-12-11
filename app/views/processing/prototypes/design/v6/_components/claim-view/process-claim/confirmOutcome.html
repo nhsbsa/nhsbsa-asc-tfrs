@@ -1,3 +1,17 @@
+{% set stepNo = "Step 3" %}
+
+{% if claim.claimType == "100" and data.completion =="yes" %}
+    {% set stepNo = "Step 4" %}
+{% elif claim.claimType == "100" and data.completion =="no" %}
+    {% set stepNo = "Step 5" %}
+{% endif %}
+
+{% if claim.claimType == "40" and data.completion =="yes" %}
+    {% set stepNo = "Step 2" %}
+{% elif claim.claimType == "40" and data.completion =="no" %}
+    {% set stepNo = "Step 3" %}
+{% endif %}
+
 <span class="govuk-caption-m">{{stepNo}}</span>
 <h3 class="govuk-heading-m">Confirm claim decision</h3>
 
