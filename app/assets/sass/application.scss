@@ -424,6 +424,13 @@
 
 .govuk-pagination__item__hidden {
   @include govuk-media-query($until: tablet) {
+    content: "...";
+    display: block;
+  }
+}
+
+.govuk-pagination__item--ellipses__hidden {
+  @include govuk-media-query($from: tablet) {
     display: none;
   }
 }
