@@ -1,20 +1,13 @@
-{% set stepNo = "Step 3" %}
-
-{% if (claim.claimType == "40") %}
-    {% set stepNo = "Step 1" %}
-{% endif %}
-
-<h3 class="govuk-heading-m">{{stepNo}}: Check completion evidence</h3>
-
-{% include "./supporting-data/completion-evidence-information.html" %}
-
+<span class="govuk-caption-m">Step 1</span>
 <form action="../completion-check-handler" method="post" novalidate>
 
     <div class="govuk-form-group {% if data.completionResponseIncomplete %}govuk-form-group--error{% endif %}" id="completion-review">
 
         <fieldset class="govuk-fieldset">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                <h3 class="govuk-fieldset__heading">
                     Does the evidence of completion meet the required criteria?
+                </h3>
             </legend>
 
             {% if data.completionResponseIncomplete %}

@@ -1,14 +1,13 @@
-<h3 class="govuk-heading-m">Step 1: Check payment evidence</h3>
-
-{% include "./supporting-data/payment-evidence-information.html" %}
-
+<span class="govuk-caption-m">Step 1</span>
 <form action="../payment-check-handler" method="post" novalidate>
 
     <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error{% endif %}" id="payment-review">
 
         <fieldset class="govuk-fieldset">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                <h3 class="govuk-fieldset__heading">
                     Does the evidence of payment meet the required criteria?
+                </h3>
             </legend>
             {% if data.paymentResponseIncomplete %}
                 <p id="payment-review-error" class="govuk-error-message">

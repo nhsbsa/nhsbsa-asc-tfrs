@@ -81,20 +81,30 @@
 
 </div>
 
+{% if (data.processClaim == "inProgress") %}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full process-claim-container">
+                {% include "./process-claim.html" %}
+        </div>
+    </div> 
+{% endif %}
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-quarter">
 
         <nav class="moj-side-navigation" aria-label="Side navigation">
             <ul class="moj-side-navigation__list">
-                <li class="moj-side-navigation__item moj-side-navigation__item--active">
-                    {% if (claim.status == "submitted") %}
-                    <a href="#process">Process claim</a>
-                    {% elif (claim.status == "approved") or (claim.status == "rejected") %}
-                    <a href="#outcome">Outcome</a>
-                    {% endif %}
-                </li>
+                {% if (data.processClaim != "inProgress") %}
+                    <li class="moj-side-navigation__item moj-side-navigation__item--active">
+                        {% if (claim.status == "submitted") %}
+                            <a href="#process">Process claim</a>
+                        {% elif (claim.status == "approved") or (claim.status == "rejected") %}
+                            <a href="#outcome">Outcome</a>
+                        {% endif %}
+                    </li>
+                {% endif %}
 
-                <li class="moj-side-navigation__item">
+                <li class="moj-side-navigation__item {% if (data.processClaim == 'inProgress') %}moj-side-navigation__item--active{% endif %}">
                     <a href="#history">History</a>
                 </li>
         
@@ -116,17 +126,29 @@
     </div>
 
     <div class="govuk-grid-column-three-quarters govuk-!-padding-top-4 govuk-!-padding-left-6">
-        {% if (claim.status == "submitted") %}
-        <div class="claim-tab" id="process">
-            {% include "./process-claim.html" %}
-        </div>
-        {% elif (claim.status == "approved") or (claim.status == "rejected") %}
-        <div class="claim-tab" id="outcome">
-            {% include "./claim-outcome.html" %}
-        </div>
+        {% if (data.processClaim != "inProgress") %}
+            {% if (claim.status == "submitted") %}
+            <div class="claim-tab" id="process">
+                <article class="moj-ticket-panel" aria-label="Sub navigation 1">
+
+                    <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
+                        <h3 class="govuk-heading-m govuk-!-margin-bottom-2">This claim hasn't been processed yet</h3>
+                        <p class="govuk-body">This claim was received 23 days ago. The claim should be processed and paid to the organisation in 42 days.</p>
+                        <a href="../start-processing" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+                            Start processing claim
+                        </a>
+                    </section>
+                
+                </article>
+            </div>
+            {% elif (claim.status == "approved") or (claim.status == "rejected") %}
+            <div class="claim-tab" id="outcome">
+                {% include "./claim-outcome.html" %}
+            </div>
+            {% endif %}
         {% endif %}
         
-        <div class="claim-tab claim-tab-hidden" id="history">
+        <div class="claim-tab {% if (data.processClaim != 'inProgress') %}claim-tab-hidden{% endif %}" id="history">
             {% include "./claim-history.html" %}
         </div>
         

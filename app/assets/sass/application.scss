@@ -432,3 +432,13 @@
   margin-left: govuk-spacing(3);
   margin-right: govuk-spacing(3);
 }
+
+
+.process-claim-container {
+  margin: govuk-spacing(3) 0;
+  //background-color: govuk-colour("light-grey");
+  border-style: solid;
+  border-width: 1px;
+  border-color: $govuk-border-colour;
+  padding: govuk-spacing(3) govuk-spacing(3) 0 govuk-spacing(3);
+}

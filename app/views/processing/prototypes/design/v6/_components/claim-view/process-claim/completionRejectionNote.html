@@ -1,18 +1,11 @@
-{% set stepNo = "Step 4" %}
-
-{% if (claim.claimType == "40") %}
-    {% set stepNo = "Step 2" %}
-{% endif %}
-
-<h3 class="govuk-heading-m">{{stepNo}}: Evidence of completion rejection reason</h3>
-
-{% include "./supporting-data/completion-evidence-information.html" %}
-
+<span class="govuk-caption-m">Step 1</span>
 <form action="../completion-rejection-note-handler" method="post" novalidate>
 
     <div class="govuk-form-group govuk-character-count {% if data.completionNoNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-            Why did the evidence of completion not meet the required criteria?
+            <h3 class="govuk-fieldset__heading">
+                Why did the evidence of completion not meet the required criteria?
+            </h3>
         </legend>
         
         <div id="completion-note-hint" class="govuk-hint">

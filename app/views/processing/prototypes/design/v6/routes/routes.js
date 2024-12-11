@@ -130,6 +130,8 @@ router.post('/search-claim-id', function (req, res) {
 router.get('/start-processing', function (req, res) {
   const claimID = req.session.data.id
   var claim = null
+
+  req.session.data.processClaim = "inProgress"
   
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -317,6 +319,7 @@ router.get('/process-claim-back-handler', function (req, res) {
   const processClaimStep = req.session.data.processClaimStep
   const paymentResponse = req.session.data.payment
   const completionResponse = req.session.data.completion
+
   var claim = null
 
   for (const c of req.session.data.claims) {
@@ -328,6 +331,7 @@ router.get('/process-claim-back-handler', function (req, res) {
 
   if (processClaimStep == "checkPayment") {
     
+    delete req.session.data.processClaim
     req.session.data.processClaimStep = "notStarted"
 
   } else if (processClaimStep == "costPerLearner") {
@@ -347,6 +351,7 @@ router.get('/process-claim-back-handler', function (req, res) {
         req.session.data.processClaimStep = "paymentRejectionNote"
       }
     } else if (claim.claimType == "40") {
+      delete req.session.data.processClaim
       req.session.data.processClaimStep = "notStarted"
     }
 
@@ -403,7 +408,8 @@ router.get('/outcome-handler', function (req, res) {
   delete req.session.data.paymentNoNote
   delete req.session.data.completion
   delete req.session.data.completionNoNote
-  delete req.session.data.processClaimStep 
+  delete req.session.data.processClaimStep
+  delete req.session.data.processClaim
 
 
   req.session.data.processSuccess = "true"
