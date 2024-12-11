@@ -12,14 +12,33 @@ GOV.UK prototype - {{data.processingServiceName}}
             might appear in the real service.</p>
         <p class="govuk-body">The data should not be considered real for the purposes of understanding what training is
             available in the adult social care sector or training that is eligible for this service.</p>
-        <a href="./load-data" role="button" draggable="false" class="govuk-button govuk-button--start"
-            data-module="govuk-button">
-            Start prototype
-            <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19"
-                viewBox="0 0 33 40" aria-hidden="true" focusable="false">
-                <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z" />
-            </svg>
-        </a>
+
+            <form action="./load-data" method="post" novalidate>
+        <!--     <div class="govuk-form-group">
+                <label class="govuk-label" for="user-type">
+                    Choose user type
+                </label>
+                <div id="user-type-hint" class="govuk-hint">
+                    This will simulate the full version of the prototype as it would appear for that user type
+                </div>
+                <select class="govuk-select" id="userType" name="userType" aria-describedby="user-type-hint">
+                    <option value="signatory" selected>Signatory</option>
+                    <option value="submitter">Submitter</option>
+                </select>
+            </div> -->
+                <div class="govuk-form-group">
+                    <label class="govuk-label govuk-label--s" for="search-type">
+                        Choose process a claim journey version to test
+                    </label>
+                    <select class="govuk-select" id="processJourneyType" name="processJourneyType" aria-describedby="search-type-hint">
+                        <option value="a" selected>Version A</option>
+                        <option value="b">Version B</option>
+                    </select>
+                </div>
+            <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button">
+                Start prototype
+            </button>
+            </form>
 
     </div>
 </div>
