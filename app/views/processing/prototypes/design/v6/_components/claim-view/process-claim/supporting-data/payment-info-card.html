@@ -1,19 +1,4 @@
 <div class="govuk-summary-card">
-    <div class="govuk-summary-card__title-wrapper">
-        <h4 class="govuk-summary-card__title">
-            Evidence of Completion
-        </h4>
-    </div>
-    <div class="govuk-summary-card__content">
-        <dl class="govuk-summary-list">
-            {% set evidence = claim.evidenceOfCompletion %} 
-            {% set isPayment = false%} 
-            {% include "../../evidence/file-section.html" %}
-        </dl>
-    </div>
-</div>
-
-<div class="govuk-summary-card">
 
     <div class="govuk-summary-card__title-wrapper">
 
@@ -62,27 +47,16 @@
                 </dd>
 
             </div>
-
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Awarding body
-                </dt>
-
-                <dd class="govuk-summary-list__value">
-                    {{ claim.training.awardingOrganisation }}
-                </dd>
-
-            </div>
                         
             {% endif %}
 
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Learner name
+                    Max reimbursement amount
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    {{ claim.learner.givenName }} {{ claim.learner.familyName }}
+                    £{{ claim.training.reimbursementAmount }}
                 </dd>
 
             </div>
@@ -90,11 +64,11 @@
             <div class="govuk-summary-list__row">
 
                 <dt class="govuk-summary-list__key">
-                    Completion date
+                    Payment date
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    {{claim.completionDate | govukDate}}
+                    {{claim.costDate | govukDate}}
                 </dd>
 
             </div>

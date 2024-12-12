@@ -1,0 +1,178 @@
+.forced-summary-list {
+    @include govuk-font($size: 19);
+    @include govuk-text-colour;
+    @include govuk-media-query($from: tablet) {
+      display: table;
+      width: 100%;
+      table-layout: fixed; // Required to allow us to wrap words that overflow.
+      border-collapse: collapse;
+    }
+    margin: 0; // Reset default user agent styles
+    @include govuk-responsive-margin(6, "bottom");
+  }
+  
+  .forced-summary-list__row {
+    border-bottom: 1px solid $govuk-border-colour;
+    margin-bottom: govuk-spacing(3);
+  
+  }
+  
+  // Remove right padding from the last column in the row
+  .forced-summary-list__row:not(.govuk-summary-list__row--no-actions) > :last-child {
+    padding-right: 0;
+  }
+  
+  .forced-summary-list__key,
+  .forced-summary-list__value,
+  .forced-summary-list__actions {
+    margin: 0; // Reset default user agent styles
+  }
+  
+  .forced-summary-list__actions {
+    margin-bottom: govuk-spacing(3);
+  }
+  
+  .forced-summary-list__key,
+  .forced-summary-list__value {
+    // Automatic wrapping for unbreakable text (e.g. URLs)
+    word-wrap: break-word; // Fallback for older browsers only
+    overflow-wrap: break-word;
+  }
+  
+  .forced-summary-list__key {
+    margin-bottom: govuk-spacing(1);
+    @include govuk-typography-weight-bold;
+  }
+  
+  .forced-summary-list__value {
+      margin-bottom: govuk-spacing(3);
+  }
+  
+  .forced-summary-list__value > p {
+    margin-bottom: govuk-spacing(2);
+  }
+  
+  .forced-summary-list__value > :last-child {
+    margin-bottom: 0;
+  }
+  
+  .forced-summary-list__actions-list {
+    width: 100%;
+    margin: 0; // Reset default user agent styles
+    padding: 0; // Reset default user agent styles
+  }
+  
+  .forced-summary-list__actions-list-item {
+    display: inline-block;
+  }
+  
+  
+  .forced-summary-list__actions-list-item {
+    margin-right: govuk-spacing(2);
+    padding-right: govuk-spacing(2);
+    border-right: 1px solid $govuk-border-colour;
+  }
+  
+  .forced-summary-list__actions-list-item:last-child {
+    margin-right: 0;
+    padding-right: 0;
+    border: 0;
+  }
+  
+  // Large groups of action links may wrap onto multiple lines. Because the link
+  // focus styles are applied outside of the link's bounding box, there are
+  // situations where the focus style on a link can be overlapped by subsequent
+  // links. We don't want this, so let's create a new stacking context on focus
+  // so the link always appears to be 'on top'.
+  .forced-summary-list__actions-list-item .govuk-link:focus {
+    isolation: isolate;
+  }
+  
+  // No border on entire summary list
+  .forced-summary-list--no-border {
+    .forced-summary-list__row {
+      border: 0;
+    }
+  }
+  
+  // No border on specific rows
+  .forced-summary-list__row--no-border {
+    border: 0;
+  }
+  
+  // Additional block for the summary card
+  .forced-summary-card {
+    @include govuk-responsive-margin(6, "bottom");
+    border: 1px solid $govuk-border-colour;
+  }
+  
+  .forced-summary-card__title-wrapper {
+    padding: govuk-spacing(3);
+  
+    // Ensures the card header appears separate to the summary list in forced colours mode
+    border-bottom: 1px solid transparent;
+    background-color: govuk-colour("light-grey");
+  }
+  
+  .forced-summary-card__title {
+    @include govuk-font($size: 19, $weight: bold);
+    @include govuk-text-colour;
+    margin: govuk-spacing(1) govuk-spacing(4) govuk-spacing(2) 0;
+  }
+  
+  .forced-summary-card__actions {
+    @include govuk-font-size($size: 19);
+    @include govuk-typography-weight-bold;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    margin: govuk-spacing(1) 0;
+    padding: 0;
+    list-style: none;
+  
+  }
+  
+  .forced-summary-card__action {
+    display: inline;
+    margin: 0 govuk-spacing(2) 0 0;
+    padding-right: govuk-spacing(2);
+    border-right: 1px solid $govuk-border-colour;
+  
+    // We use the following media query to target IE11 and 10 only to add margin
+    // between actions.
+    //
+    // We do this because we're using row-gap to create space between actions on
+    // more evergreen browsers which IE doesn't support. @supports currently isn't
+    // a viable solution, see https://github.com/w3c/csswg-drafts/issues/3559.
+    //
+    // Solution taken from https://stackoverflow.com/questions/11173106/apply-style-only-on-ie#answer-36448860
+    // which also includes an explanation of why this works
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      margin-bottom: govuk-spacing(1);
+    }
+  }
+  
+  .forced-summary-card__action:last-child {
+    margin: 0;
+    padding-right: 0;
+    border-right: none;
+  
+    // See above comment for why this is here
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      margin-bottom: 0;
+    }
+  }
+  
+  .forced-summary-card__content {
+    padding: govuk-spacing(3) govuk-spacing(3) 0;
+  
+    .forced-summary-list {
+      margin-bottom: 0;
+    }
+  
+    .forced-summary-list__row:last-of-type {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+  }
+  
