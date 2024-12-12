@@ -3,7 +3,7 @@
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
 // 
 
-// Add extra styles here
+@import 'narrow-summary-list.scss';
 
 .course-search {
   border: 1px solid;
@@ -424,13 +424,6 @@
 
 .govuk-pagination__item__hidden {
   @include govuk-media-query($until: tablet) {
-    content: "...";
-    display: block;
-  }
-}
-
-.govuk-pagination__item--ellipses__hidden {
-  @include govuk-media-query($from: tablet) {
     display: none;
   }
 }

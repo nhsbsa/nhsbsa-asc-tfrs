@@ -122,4 +122,26 @@ function isFullClaimCheck(claim) {
     }
 }
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck }
+function isValidOrgSearch(orgSearch) {
+    // Regular expression for a valid email address
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Regular expression for a valid workplace ID
+    const letterAndDigitsRegex = /^[A-NP-Z0-9]{9}$/;
+
+    // Regular expression for a valid claim reference number
+    const claimReferenceRegex = /^[A-NP-Z0-9]{3}(-)?[A-NP-Z0-9]{4}(-)?[A-NP-Z0-9]{4}(-)?([ABC])?$/i;
+
+    // Check against all three conditions
+    if (emailRegex.test(orgSearch)) {
+        return true;
+    } else if (letterAndDigitsRegex.test(orgSearch)) {
+        return true;
+    } else if (claimReferenceRegex.test(orgSearch)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch }

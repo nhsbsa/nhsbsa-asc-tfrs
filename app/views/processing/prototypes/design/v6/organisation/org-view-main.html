@@ -35,7 +35,7 @@
 
     <div class="govuk-grid-column-one-half">
       <p class="govuk-body">
-        <span class="govuk-!-font-weight-bold">SRO:</span>
+        <span class="govuk-!-font-weight-bold">Senior Responsible Officer:</span>
         <br>
         {{ org.signatory.givenName }} {{ org.signatory.familyName }}
         <br>
@@ -56,7 +56,7 @@
         
                 <ul class="moj-primary-navigation__list">
                   <li class="moj-primary-navigation__item">
-                    <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims">Claims</a>
+                    <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims">All claims</a>
                   </li>
         
                   <li class="moj-primary-navigation__item">
