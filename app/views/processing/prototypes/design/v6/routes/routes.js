@@ -509,7 +509,7 @@ router.post('/search-claim-id-orgView', function (req, res) {
 
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
-    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&invalidIDError=true&emptyError=true')
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&emptyError=true')
   }
 
   const letterORegex = /o/i;

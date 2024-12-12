@@ -2,9 +2,9 @@
 {% set claims = data.orgId | findOrgClaims_V13(data.claims) %}
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-full">
 
-        {% if (data.invalidIDError) or (data.notFound) %}
+        {% if (data.invalidIDError) or (data.notFound) or (data.emptyError)%}
         <div class="govuk-error-summary govuk-!-margin-top-2" data-module="govuk-error-summary">
             <div role="alert">
                 <h2 class="govuk-error-summary__title">
@@ -14,11 +14,11 @@
                     <ul class="govuk-list govuk-error-summary__list">
                         <li>
                             {% if (data.emptyError) %}
-                            <a href="#claimID"> Enter a claim reference number</a>
+                                <a href="#claimID"> Enter a claim reference number</a>
                             {% elif (data.notFound) %}
-                            <a href="#claimID">No match returned for your search: <q>{{ data.claimID }}</a>
+                                <a href="#claimID">No match returned for your search</a>
                             {% else %}
-                            <a href="#claimID">Enter a claim reference number in the correct format</a>
+                                <a href="#claimID">Enter a claim reference number in the correct format</a>
                             {% endif %}
                         </li>
                     </ul>
@@ -27,50 +27,53 @@
         </div>
         {% endif %}
 
-        <h1 class="govuk-heading-l govuk-!-margin-top-6">Find claim</h1>
-        <form action="../search-claim-id-orgView" method="post" novalidate>
-            <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset" role="group" aria-describedby="claim-id-hint">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        What is the claim reference number?
-                    </legend>
-                    <div id="search-hint" class="govuk-hint moj-search__hint">
-                    Enter a claim reference. This could be with or without the -A, -B or -C suffix. Examples: H2T-C813-3XF7-C or WR5-R2P4-DSL4
-                  </div>
-                    <div class="{% if (data.invalidIDError or data.notFound) %} govuk-form-group--error {% endif %}">
-                        {% if (data.invalidIDError or data.notFound) %}
-                        <p id="event-name-error" class="govuk-error-message">
-                            {% if (data.emptyError) %}
-                            <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number
-                            {% elif (data.notFound) %}
-                            <span class="govuk-visually-hidden">Error:</span> No match returned for your search: <q>{{ data.claimID }}
-                            {% else %}
-                            <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number in the
-                            correct format
-                            {% endif %}
-                        </p>
-                        {% endif %}
-                        <input
-                            class="govuk-input govuk-input--width-10 {% if (data.invalidIDError or data.notFound) %} govuk-input--error {% endif %} "
-                            aria-describedby="claim-id-hint {% if (data.invalidIDError or data.notFound) %} event-name-error {% endif %}"
-                            id="claimID" name="claimID" type="text" value="{{data.claimID}}">
-                    </div>
-                </fieldset>
-            </div>
-            <button class="govuk-button moj-search__button" data-module="govuk-button" type="submit"
-                style="margin-left: 0px;">
-                Find claim
-            </button>
-        </form>
+        <h1 class="govuk-heading-l govuk-!-margin-top-6">All claims</h1>
 
-        <!-- <table class="govuk-table" data-module="moj-sortable-table">
-            <thead class="govuk-table__head govuk-!-margin-top-6">
+        <div class="moj-search">
+            <form action="../search-claim-id-orgView" method="post">
+              <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">
+                <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+                  Find a claim
+                </label>
+                <div id="search-hint" class="govuk-hint moj-search__hint">
+                  Enter a claim reference. This could be with or without the -A, -B or -C suffix.<br> Examples: H2T-C813-3XF7-C or WR5-R2P4-DSL4
+                </div>
+                {% if data.invalidIDError %}
+                    <p id="sortCode-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>Enter a claim reference number in the correct format
+                    </p>
+                {% endif %}
+                {% if data.emptyError %}
+                    <p id="sortCode-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>Enter a claim reference number
+                    </p>
+                {% endif %}
+                {% if data.notFound%}
+                    <p id="sortCode-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>No match returned for your search
+                    </p>
+                {% endif %}
+      
+                <div class="search__button-group">
+                    <input class="govuk-input moj-search__input govuk-input--width-10 {% if data.invalidIDError or data.emptyError or data.notFound %} govuk-input--error {% endif %}" id="claimID" name="claimID" type="search"
+                      aria-describedby="search-hint" value="{{data.claimID}}">
+                    <button type="submit" class="govuk-button govuk-button--secondary moj-search__button"
+                      data-module="govuk-button">
+                      Search
+                    </button>
+              </div>
+
+            </form>
+          </div>
+
+        <table class="govuk-table govuk-!-margin-top-3" data-module="moj-sortable-table">
+            <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
-                    <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Claim reference</th>
+                    <th class="govuk-table__header" scope="col" width="22%" aria-sort="ascending">Claim reference</th>
                     <th class="govuk-table__header" scope="col" width="5%" aria-sort="none">Type</th>
-                    <th class="govuk-table__header" scope="col" width="33%" aria-sort="none">Training</th>
-                    <th class="govuk-table__header" scope="col" width="25%" aria-sort="none">Learner</th>
-                    <th class="govuk-table__header" scope="col" width="25%" aria-sort="none">Status</th>
+                    <th class="govuk-table__header" scope="col" width="30%" aria-sort="none">Training</th>
+                    <th class="govuk-table__header" scope="col" width="23%" aria-sort="none">Learner</th>
+                    <th class="govuk-table__header" scope="col" width="27%" aria-sort="none">Status</th>
                 </tr>
             </thead>
             <tbody class="govuk-table__body">
@@ -82,11 +85,13 @@
                         <td class="govuk-table__cell">
                             {% if claim.learner %} {{ claim.learner.givenName }} {{ claim.learner.familyName }} {% else %} Not yet added {% endif %}
                         </td>
-                        <td class="govuk-table__cell">{{ claim.status }}</td>
+                        <td class="govuk-table__cell">{{ claim.status |processorstatusTag_V6 }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
-        </table> -->
+        </table>
+
+        <!-- {% include "./claims-table.html" %} -->
 
     </div>
 </div>
