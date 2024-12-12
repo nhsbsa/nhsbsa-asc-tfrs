@@ -93,6 +93,7 @@ router.post('/search-claim-id', function (req, res) {
 
   var claimID = req.session.data.claimID.replace(/\s/g, '');
 
+
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
     return res.redirect('process-claim/start-process?invalidIDError=true&emptyError=true')
@@ -494,6 +495,48 @@ router.post('/search-org-id', function (req, res) {
       res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg.workplaceId)
     } 
     delete req.session.data.orgSearchInput
+  }
+});
+
+router.post('/search-claim-id-orgView', function (req, res) {
+  delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['notFound'];
+  delete req.session.data['id'];
+
+  var claimID = req.session.data.claimID.replace(/\s/g, '');
+  var foundOrg = req.session.data.orgId
+
+  const emptyRegex = /\S/;
+  if (!emptyRegex.test(claimID)) {
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&invalidIDError=true&emptyError=true')
+  }
+
+  const letterORegex = /o/i;
+  if (letterORegex.test(claimID)) {
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&invalidIDError=true')
+  }
+
+  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  if (!lengthRegex.test(claimID)) {
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&invalidIDError=true')
+  }
+
+  var foundClaim = null
+  for (const c of req.session.data['claims']) {
+    if (c.claimID == claimID) {
+      foundClaim = c
+    }
+  }
+  if (foundClaim == null) {
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true')
+  }
+  if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
+    req.session.data.processClaimStep = "notStarted"
+    req.session.data.orgTab = "singleClaim"
+    return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgId=' + foundOrg)
+  } else {
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true')
   }
 });
 
