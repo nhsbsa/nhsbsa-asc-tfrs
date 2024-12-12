@@ -8,6 +8,10 @@
 
     {% include "./process-claim/notStarted.html" %}
 
+{% elif (data.processClaimStep == "inProgress") %}
+
+    {% include "./process-claim/inProgress.html" %}
+
 {% elif (data.processClaimStep == "checkPayment") %}
 
     {% include "./process-claim/checkPayment.html" %}

@@ -138,26 +138,26 @@
                         Does the evidence of payment meet the required criteria?
                     </legend>
                     {% if data.paymentResponseIncomplete %}
-                    <p id="note-error" class="govuk-error-message">
+                    <p id="payment-review-error" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span> Complete check on evidence of payment
                     </p>
                     {% endif %}
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-
+        
                             <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="yes"
                                 data-aria-controls="conditional-paymentReimbursementAmount" {% if data.payment=='yes'
                                 %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="paymentYes">
                                 Yes
                             </label>
-
+        
                         </div>
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
                             id="conditional-paymentReimbursementAmount" data-maxlength="1000">
                             <div class="govuk-form-group govuk-character-count {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %}govuk-form-group--error {% endif %}"
                                 data-module="govuk-character-count">
-
+        
                                 {% if (claim.fundingType == "TU")%}
                                 <label class="govuk-label" for="paymentReimbursementAmount">
                                     What was the cost per learner?
@@ -171,19 +171,19 @@
                                     <p class="govuk-hint">The organisation will not get back more than they actually
                                         paid.</p>
                                 </div>
-
-
+        
+        
                                 {% if data.paymentReimbursementAmountIncomplete %}
                                 <p id="cost-per-learner-error" class="govuk-error-message">
                                     <span class="govuk-visually-hidden">Error:</span> Complete cost per learner
                                 </p>
                                 {% endif %}
                                 {% if data.paymentReimbursementAmountInvalid %}
-                                <p id="note-error" class="govuk-error-message">
+                                <p id="cost-per-learner-error" class="govuk-error-message">
                                     <span class="govuk-visually-hidden">Error:</span> Enter a valid cost per learner
                                 </p>
                                 {% endif %}
-
+        
                                 <div class="govuk-input__wrapper" id="cost-per-learner">
                                     <div class="govuk-input__prefix" aria-hidden="true">£</div>
                                     <input
@@ -192,10 +192,10 @@
                                         value="{{ data.paymentReimbursementAmount | default ('') }}">
                                 </div>
                                 {% endif %}
-
+        
                             </div>
                         </div>
-
+        
                         <div class="govuk-radios__item">
                             <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no"
                                 data-aria-controls="conditional-payment-no" {% if data.payment=='no' %}checked{% endif
@@ -233,11 +233,11 @@
                 </fieldset>
             </div>
             {% endif %}
-
+        
             {% if (claim.fundingType == "TU") and (claim.claimType == "100") %}
             <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
             {% endif %}
-
+        
             {% if (claim.fundingType == "TU") and (claim.claimType != "60") %}
             <div class="govuk-form-group {% if data.completionResponseIncomplete %}govuk-form-group--error {% endif %}"
                 id="completion-review">
@@ -246,7 +246,7 @@
                         Does the evidence of completion meet the required criteria?
                     </legend>
                     {% if data.completionResponseIncomplete %}
-                    <p id="note-error" class="govuk-error-message">
+                    <p id="completion-review-error" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span> Complete check on evidence of completion
                     </p>
                     {% endif %}
@@ -266,7 +266,7 @@
                                 No
                             </label>
                         </div>
-
+        
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-notes">
                             <div class="govuk-form-group govuk-character-count {% if data.completionNoNoteIncomplete %}govuk-form-group--error {% endif %}"
                                 data-module="govuk-character-count" data-maxlength="1000">

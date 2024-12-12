@@ -154,6 +154,11 @@ router.get('/start-processing', function (req, res) {
 
     return res.redirect('process-claim/claim' + '?id=' + claimID)
 
+  } else if (processJourneyType == "c") {
+
+    req.session.data.processClaimStep = "inProgress"
+    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
   }
 
 
@@ -346,6 +351,8 @@ router.get('/process-claim-back-handler', function (req, res) {
   const completionResponse = req.session.data.completion
   var claim = null
 
+  const processJourneyType = req.session.data.processJourneyType
+
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
       claim = c
@@ -383,20 +390,27 @@ router.get('/process-claim-back-handler', function (req, res) {
 
   } else if (processClaimStep == "confirmOutcome") {
 
-    if (claim.claimType == "60") {
-      if (paymentResponse == "yes") {
-        req.session.data.processClaimStep = "costPerLearner"
-      } else if (paymentResponse == "no") {
-        req.session.data.processClaimStep = "paymentRejectionNote"
+    if (processJourneyType == "b") {
+
+      if (claim.claimType == "60") {
+        if (paymentResponse == "yes") {
+          req.session.data.processClaimStep = "costPerLearner"
+        } else if (paymentResponse == "no") {
+          req.session.data.processClaimStep = "paymentRejectionNote"
+        }
+      } else if ((claim.claimType == "100") || (claim.claimType == "40")) {
+        if (completionResponse == "yes") {
+          req.session.data.processClaimStep = "checkCompletion"
+        } else if (completionResponse == "no") {
+          req.session.data.processClaimStep = "completionRejectionNote"
+          
+        }
       }
-    } else if ((claim.claimType == "100") || (claim.claimType == "40")) {
-      if (completionResponse == "yes") {
-        req.session.data.processClaimStep = "checkCompletion"
-      } else if (completionResponse == "no") {
-        req.session.data.processClaimStep = "completionRejectionNote"
-        
-      }
+
+    } else if (processJourneyType == "c") {
+      req.session.data.processClaimStep = "inProgress"
     }
+    
 
   }
 
@@ -419,6 +433,8 @@ router.post('/claim-process-handler', function (req, res) {
   const paymentNoNote = req.session.data.paymentNoNote
   const completionResponse = req.session.data.completion
   const completionNoNote = req.session.data.completionNoNote
+
+  const processJourneyType = req.session.data.processJourneyType
 
   var errorParamaters = ""
   var claim = null
@@ -455,13 +471,31 @@ router.post('/claim-process-handler', function (req, res) {
   }
 
   if (errorParamaters == "") {
+
     if ((paymentResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "40"))) && (completionResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "60")))) {
-      res.redirect('process-claim/outcome?result=approve')
+      req.session.data.result = "approve"
     } else {
-      res.redirect('process-claim/outcome?result=reject')
+      req.session.data.result = "reject"
     }
+
+    if (processJourneyType == "b") {
+      return res.redirect('process-claim/outcome')
+    } else if (processJourneyType == "c") {
+
+      req.session.data.processClaimStep = "confirmOutcome"
+      return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+  
+    }
+
   } else {
-    res.redirect("process-claim/claim?id=" + claimID + errorParamaters)
+
+    if (processJourneyType == "b") {
+      return  res.redirect("process-claim/claim?id=" + claimID + errorParamaters)
+    } else if (processJourneyType == "c") {
+      return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + errorParamaters + '#tab-content')
+  
+    }
+
   }
 });
 
@@ -495,6 +529,8 @@ router.get('/outcome-handler', function (req, res) {
 
 
   req.session.data.processSuccess = "true"
+
+
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 });
 
