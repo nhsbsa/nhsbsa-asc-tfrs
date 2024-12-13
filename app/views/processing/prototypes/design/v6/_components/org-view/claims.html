@@ -5,26 +5,26 @@
     <div class="govuk-grid-column-full">
 
         {% if (data.invalidIDError) or (data.notFound) or (data.emptyError)%}
-        <div class="govuk-error-summary govuk-!-margin-top-2" data-module="govuk-error-summary">
-            <div role="alert">
-                <h2 class="govuk-error-summary__title">
-                    There is a problem
-                </h2>
-                <div class="govuk-error-summary__body">
-                    <ul class="govuk-list govuk-error-summary__list">
-                        <li>
-                            {% if (data.emptyError) %}
-                                <a href="#claimID"> Enter a claim reference number</a>
-                            {% elif (data.notFound) %}
-                                <a href="#claimID">No match returned for your search</a>
-                            {% else %}
-                                <a href="#claimID">Enter a claim reference number in the correct format</a>
-                            {% endif %}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+          <div class="govuk-error-summary govuk-!-margin-top-2" data-module="govuk-error-summary">
+              <div role="alert">
+                  <h2 class="govuk-error-summary__title">
+                      There is a problem
+                  </h2>
+                  <div class="govuk-error-summary__body">
+                      <ul class="govuk-list govuk-error-summary__list">
+                          <li>
+                              {% if (data.emptyError) %}
+                                  <a href="#claimID"> Enter a claim reference number</a>
+                              {% elif (data.notFound) %}
+                                  <a href="#claimID">No match returned for your search</a>
+                              {% else %}
+                                  <a href="#claimID">Enter a claim reference number in the correct format</a>
+                              {% endif %}
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
         {% endif %}
 
         <h1 class="govuk-heading-l govuk-!-margin-top-6">All claims</h1>

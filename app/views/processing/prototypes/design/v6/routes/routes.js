@@ -656,7 +656,10 @@ router.post('/search-claim-id-orgView', function (req, res) {
     return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true')
   }
   if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
-    req.session.data.processClaimStep = "notStarted"
+    
+    if (data.userType == "processor") {
+      req.session.data.processClaimStep = "notStarted"
+    }
     req.session.data.orgTab = "singleClaim"
     return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgId=' + foundOrg)
   } else {

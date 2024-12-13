@@ -86,15 +86,17 @@
 
         <nav class="moj-side-navigation" aria-label="Side navigation">
             <ul class="moj-side-navigation__list">
-                <li class="moj-side-navigation__item moj-side-navigation__item--active">
-                    {% if (claim.status == "submitted") %}
-                    <a href="#process">Process claim</a>
-                    {% elif (claim.status == "approved") or (claim.status == "rejected") %}
-                    <a href="#outcome">Outcome</a>
-                    {% endif %}
-                </li>
+                {% if data.userType == "processor"%}
+                    <li class="moj-side-navigation__item moj-side-navigation__item--active">
+                        {% if claim.status == "submitted" %}
+                        <a href="#process">Process claim</a>
+                        {% elif (claim.status == "approved") or (claim.status == "rejected") %}
+                        <a href="#outcome">Outcome</a>
+                        {% endif %}
+                    </li>
+                {% endif %}
 
-                <li class="moj-side-navigation__item">
+                <li class="moj-side-navigation__item {% if data.userType == 'ccsAgent'%}moj-side-navigation__item--active{% endif%}">
                     <a href="#history">History</a>
                 </li>
         
@@ -116,17 +118,19 @@
     </div>
 
     <div class="govuk-grid-column-three-quarters govuk-!-padding-top-4 govuk-!-padding-left-6">
-        {% if (claim.status == "submitted") %}
-        <div class="claim-tab" id="process">
-            {% include "./process-claim.html" %}
-        </div>
-        {% elif (claim.status == "approved") or (claim.status == "rejected") %}
-        <div class="claim-tab" id="outcome">
-            {% include "./claim-outcome.html" %}
-        </div>
+        {% if data.userType == "processor"%}
+            {% if (claim.status == "submitted") %}
+            <div class="claim-tab" id="process">
+                {% include "./process-claim.html" %}
+            </div>
+            {% elif (claim.status == "approved") or (claim.status == "rejected") %}
+            <div class="claim-tab" id="outcome">
+                {% include "./claim-outcome.html" %}
+            </div>
+            {% endif %}
         {% endif %}
         
-        <div class="claim-tab claim-tab-hidden" id="history">
+        <div class="claim-tab{% if data.userType == 'processor'%}claim-tab-hidden {% endif %}" id="history">
             {% include "./claim-history.html" %}
         </div>
         
