@@ -86,6 +86,7 @@ router.post('/search-claim-id', function (req, res) {
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
   delete req.session.data.processSuccess
+  delete req.session.data.noteSuccess
 
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
@@ -325,6 +326,7 @@ router.get('/cancel-handler', function (req, res) {
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
   delete req.session.data.processSuccess
+  delete req.session.data.noteSuccess
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
   
@@ -343,6 +345,7 @@ router.get('/process-claim-back-handler', function (req, res) {
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
   delete req.session.data.processSuccess
+  delete req.session.data.noteSuccess
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
 
@@ -425,6 +428,7 @@ router.post('/claim-process-handler', function (req, res) {
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
   delete req.session.data.processSuccess
+  delete req.session.data.noteSuccess
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
 
@@ -561,7 +565,8 @@ router.post('/add-note', function (req, res) {
     delete req.session.data.noteError
 
     foundClaim.notes.push(newNote);
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&oteAddedSuccess#tab-contentn')
+    req.session.data.noteSuccess = "true"
+    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
   }
 });
