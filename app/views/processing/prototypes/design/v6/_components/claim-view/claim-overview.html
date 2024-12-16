@@ -9,7 +9,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
-        <a href="org-view-main?orgTab=claims&processSuccess" class="govuk-back-link govuk-!-margin-bottom-6">Back to all claims</a>
+        <a href="org-view-main?orgTab=claims&processSuccess&noteSuccess" class="govuk-back-link govuk-!-margin-bottom-6">Back to all claims</a>
 
         {% if data.processSuccess == "true" %}
         <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
@@ -23,6 +23,24 @@
             <div class="govuk-notification-banner__content">
                 <h3 class="govuk-notification-banner__heading">
                     Claim outcome recorded and returned to organisation
+                </h3>
+            </div>
+
+        </div>
+        {% endif %}
+
+        {% if data.noteSuccess == "true" %}
+        <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+            
+            <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                    Success
+                </h2>
+            </div>
+
+            <div class="govuk-notification-banner__content">
+                <h3 class="govuk-notification-banner__heading">
+                    Note added to claim
                 </h3>
             </div>
 
@@ -86,7 +104,7 @@
 
         <nav class="moj-side-navigation" aria-label="Side navigation">
             <ul class="moj-side-navigation__list">
-                <li class="moj-side-navigation__item moj-side-navigation__item--active">
+                <li class="moj-side-navigation__item {% if data.noteSuccess != 'true' %} moj-side-navigation__item--active {% endif %}">
                     {% if (claim.status == "submitted") %}
                     <a href="#process">Process claim</a>
                     {% elif (claim.status == "approved") or (claim.status == "rejected") %}
@@ -94,7 +112,7 @@
                     {% endif %}
                 </li>
 
-                <li class="moj-side-navigation__item">
+                <li class="moj-side-navigation__item {% if data.noteSuccess == 'true' %} moj-side-navigation__item--active {% endif %}">
                     <a href="#history">History</a>
                 </li>
         
@@ -117,16 +135,16 @@
 
     <div class="govuk-grid-column-three-quarters govuk-!-padding-top-4 govuk-!-padding-left-6">
         {% if (claim.status == "submitted") %}
-        <div class="claim-tab" id="process">
+        <div class="claim-tab {% if data.noteSuccess == 'true' %} claim-tab-hidden {% endif %}" id="process">
             {% include "./process-claim.html" %}
         </div>
         {% elif (claim.status == "approved") or (claim.status == "rejected") %}
-        <div class="claim-tab" id="outcome">
+        <div class="claim-tab {% if data.noteSuccess == 'true' %} claim-tab-hidden {% endif %}" id="outcome">
             {% include "./claim-outcome.html" %}
         </div>
         {% endif %}
         
-        <div class="claim-tab claim-tab-hidden" id="history">
+        <div class="claim-tab {% if data.noteSuccess != 'true' %} claim-tab-hidden {% endif %}" id="history">
             {% include "./claim-history.html" %}
         </div>
         
