@@ -669,4 +669,36 @@ router.post('/search-claim-id-orgView', function (req, res) {
   }
 });
 
+router.post('/add-org-note', function (req, res) {
+  const orgID = req.session.data.orgId
+  var foundOrg = null
+  for (const org of req.session.data['organisations']) {
+    if (org.workplaceId == orgID) {
+      foundOrg = org
+    }
+  }
+  var newNoteInput = req.session.data.notes
+
+  if (newNoteInput == null || newNoteInput == "") {
+    req.session.data.noteError = true  
+    res.redirect('process-claim/add-note?id=' + claimID)
+
+  } else {
+    var currentDate = new Date().toISOString();
+    var newNote = {
+      "author": "Test Participant (Processor)",
+      "date": currentDate,
+      "note": newNoteInput
+    };
+
+    delete req.session.data.noteInput
+    delete req.session.data.noteError
+
+    foundClaim.notes.push(newNote);
+    req.session.data.noteSuccess = "true"
+    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+  }
+});
+
 module.exports = router
