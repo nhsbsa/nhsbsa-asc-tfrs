@@ -1,0 +1,25 @@
+{% set org = data.orgId | findOrganisation_V13(data.organisations) %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l govuk-!-margin-top-6">Notes</h1>
+
+        
+        <a href="add-note?id={{claim.claimID}}&processSuccess" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Add note
+          </a>
+          
+          
+          {% if org.notes.length > 0 %}
+          
+              {% for note in org.notes | dateSort_V6 %}
+                  {% include "./org-note.html" %}
+              {% endfor %}
+          
+          {% else %}
+          
+              <p class="govuk-body">There are currently no notes for this organisation.</p>
+          
+          {% endif %}
+
+    </div>
+</div>
