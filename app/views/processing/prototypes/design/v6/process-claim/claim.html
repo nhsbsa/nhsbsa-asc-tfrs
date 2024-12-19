@@ -53,12 +53,12 @@
                         {% if (claim.fundingType == "TU") %}
                         {% if data.paymentReimbursementAmountIncomplete %}
                         <li>
-                            <a href="#cost-per-learner-error">Complete cost per learner</a>
+                            <a href="#cost-per-learner-error">Enter cost per learner</a>
                         </li>
                         {% endif %}
                         {% if data.paymentReimbursementAmountInvalid %}
                         <li>
-                            <a href="#cost-per-learner-error">Enter a valid cost per learner</a>
+                            <a href="#cost-per-learner-error">Cost per learner must be a number</a>
                         </li>
                         {% endif %}
                         {% endif %}
@@ -175,12 +175,12 @@
         
                                 {% if data.paymentReimbursementAmountIncomplete %}
                                 <p id="cost-per-learner-error" class="govuk-error-message">
-                                    <span class="govuk-visually-hidden">Error:</span> Complete cost per learner
+                                    <span class="govuk-visually-hidden">Error:</span>Enter cost per learner
                                 </p>
                                 {% endif %}
                                 {% if data.paymentReimbursementAmountInvalid %}
                                 <p id="cost-per-learner-error" class="govuk-error-message">
-                                    <span class="govuk-visually-hidden">Error:</span> Enter a valid cost per learner
+                                    <span class="govuk-visually-hidden">Error:</span>Cost per learner must be a number
                                 </p>
                                 {% endif %}
         

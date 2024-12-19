@@ -14,11 +14,11 @@
                     <ul class="govuk-list govuk-error-summary__list">
                         <li>
                             {% if (data.emptyError) %}
-                                <a href="#claimID"> Enter a claim reference number</a>
+                                <a href="#claimID"> Enter a claim reference</a>
                             {% elif (data.notFound) %}
-                                <a href="#claimID">No match returned for your search</a>
+                                <a href="#claimID">No results found</a>
                             {% else %}
-                                <a href="#claimID">Enter a claim reference number in the correct format</a>
+                                <a href="#claimID">Enter a claim reference in the correct format</a>
                             {% endif %}
                         </li>
                     </ul>
@@ -36,21 +36,21 @@
                   Find a claim
                 </label>
                 <div id="search-hint" class="govuk-hint moj-search__hint">
-                  Enter a claim reference. This could be with or without the -A, -B or -C suffix.<br> Examples: H2T-C813-3XF7-C or WR5-R2P4-DSL4
+                  Enter a claim reference. This could be with or without an -A, -B or -C suffix. For example, H2T-C813-3XF7-C or H2T-C813-3XF7
                 </div>
                 {% if data.invalidIDError %}
                     <p id="sortCode-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>Enter a claim reference number in the correct format
+                        <span class="govuk-visually-hidden">Error:</span>Enter a claim reference in the correct format
                     </p>
                 {% endif %}
                 {% if data.emptyError %}
                     <p id="sortCode-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>Enter a claim reference number
+                        <span class="govuk-visually-hidden">Error:</span>Enter a claim reference
                     </p>
                 {% endif %}
                 {% if data.notFound%}
                     <p id="sortCode-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>No match returned for your search
+                        <span class="govuk-visually-hidden">Error:</span>No results found
                     </p>
                 {% endif %}
       
