@@ -11,8 +11,8 @@
     For instance, if the organisation paid £100 for 4 learners then the cost per learner is £25.
 </p>
 
-<p class="govuk-body govuk-!-font-weight-bold">
-    The maximum reimbursement amount for this training is £{{claim.training.reimbursementAmount}}.
+<p class="govuk-body">
+    The maximum reimbursement amount for this training is <b>£{{claim.training.reimbursementAmount}}</b>.
 </p>
 
 <p class="govuk-body">
@@ -31,13 +31,13 @@
 
             {% if data.paymentReimbursementAmountIncomplete %}
                 <p id="cost-per-learner-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> Complete cost per learner
+                    <span class="govuk-visually-hidden">Error:</span> Enter cost per learner
                 </p>
             {% endif %}
 
             {% if data.paymentReimbursementAmountInvalid %}
                 <p id="cost-per-learner-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> Enter a valid cost per learner
+                    <span class="govuk-visually-hidden">Error:</span>Cost per learner must be a number
                 </p>
             {% endif %}
         

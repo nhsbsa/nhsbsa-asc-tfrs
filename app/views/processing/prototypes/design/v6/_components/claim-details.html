@@ -1,7 +1,7 @@
 {% set pairClaim = data.id | matchPairClaim_V6(data.claims) %}
 {% if (claim.fundingType == "TU") and (claim.claimType == "60") %}
     <h3 class="govuk-heading-s">60 claim</h3>
-    <p class="govuk-body">This is the 60 part of a claim which uses the 60/40 funding model.</p>
+    <p class="govuk-body">This is the 60 part of a claim that uses the 60/40 funding model.</p>
     <p class="govuk-body">It covers evidence of payment.</p>
     {% if pairClaim != null %}
     <p class="govuk-body">View the <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">40 part of the claim</a>, which covers evidence of training completion.</p>
@@ -11,7 +11,7 @@
 
 {% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}
     <h3 class="govuk-heading-s">40 claim</h3>
-    <p class="govuk-body">This is the 40 part of a claim which uses the 60/40 funding model.</p>
+    <p class="govuk-body">This is the 40 part of a claim that uses the 60/40 funding model.</p>
     <p class="govuk-body">It covers evidence of training completion.</p>
     <p class="govuk-body">View the <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">60 part of the claim</a>, which covers evidence of payment.</p>
 

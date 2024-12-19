@@ -29,7 +29,7 @@
             </div>
             <div class="govuk-notification-banner__content">
                 <h3 class="govuk-notification-banner__heading">
-                    Claim outcome recorded and returned to organisation
+                    Claim outcome recorded and shared with organisation
                 </h3>
             </div>
         </div>
@@ -53,29 +53,29 @@
                         {% if (claim.fundingType == "TU") %}
                         {% if data.paymentReimbursementAmountIncomplete %}
                         <li>
-                            <a href="#cost-per-learner-error">Complete cost per learner</a>
+                            <a href="#cost-per-learner-error">Enter cost per learner</a>
                         </li>
                         {% endif %}
                         {% if data.paymentReimbursementAmountInvalid %}
                         <li>
-                            <a href="#cost-per-learner-error">Enter a valid cost per learner</a>
+                            <a href="#cost-per-learner-error">Cost per learner must be a number</a>
                         </li>
                         {% endif %}
                         {% endif %}
 
                         {% if data.paymentNoNoteIncomplete %}
                         <li>
-                            <a href="#payment-note-error"> Complete note for evidence of payment</a>
+                            <a href="#payment-note-error">Enter payment rejection reasons</a>
                         </li>
                         {% endif %}
                         {% if data.completionResponseIncomplete %}
                         <li>
-                            <a href="#completion-review">Complete check on evidence of completion</a>
+                            <a href="#completion-review">Select yes if evidence of completion meets the required criteria </a>
                         </li>
                         {% endif %}
                         {% if data.completionNoNoteIncomplete %}
                         <li>
-                            <a href="#completion-note-error">Complete note for evidence of completion</a>
+                            <a href="#completion-note-error">Enter completion rejection reasons</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -175,12 +175,12 @@
         
                                 {% if data.paymentReimbursementAmountIncomplete %}
                                 <p id="cost-per-learner-error" class="govuk-error-message">
-                                    <span class="govuk-visually-hidden">Error:</span> Complete cost per learner
+                                    <span class="govuk-visually-hidden">Error:</span>Enter cost per learner
                                 </p>
                                 {% endif %}
                                 {% if data.paymentReimbursementAmountInvalid %}
                                 <p id="cost-per-learner-error" class="govuk-error-message">
-                                    <span class="govuk-visually-hidden">Error:</span> Enter a valid cost per learner
+                                    <span class="govuk-visually-hidden">Error:</span>Cost per learner must be a number
                                 </p>
                                 {% endif %}
         
@@ -212,7 +212,7 @@
                                     Why did the evidence not meet the required criteria?
                                 </label>
                                 <div id="payment-note-hint" class="govuk-hint">
-                                    This will be seen by the submitter when the claim is processed.
+                                    This note tells the submitter why their claim has been rejected
                                 </div>
                                 {% if data.paymentNoNoteIncomplete %}
                                 <p id="payment-note-error" class="govuk-error-message">
@@ -247,7 +247,7 @@
                     </legend>
                     {% if data.completionResponseIncomplete %}
                     <p id="completion-review-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span> Complete check on evidence of completion
+                        <span class="govuk-visually-hidden">Error:</span>Select yes if evidence of completion meets the required criteria 
                     </p>
                     {% endif %}
                     <div class="govuk-radios" data-module="govuk-radios">
@@ -274,7 +274,7 @@
                                     Why did the evidence not meet the required criteria?
                                 </label>
                                 <div id="completionNote-hint" class="govuk-hint">
-                                    This will be seen by the submitter when the claim is processed.
+                                    This note tells the submitter why their claim has been rejected
                                 </div>
                                 {% if data.completionNoNoteIncomplete %}
                                 <p id="completion-note-error" class="govuk-error-message">
