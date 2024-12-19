@@ -146,7 +146,7 @@
             </div>
         {% endif %}
     
-        <div class="claim-tab {% if data.noteSuccess == 'true' or (data.userType == 'ccsAgent' and data.selectedTab == 'history' and claim.status == 'submitted') %} {% else %} claim-tab-hidden {% endif %}" id="history">
+        <div class="claim-tab {% if data.noteSuccess == 'true' or (data.userType == 'ccsAgent' and claim.status == 'submitted') %} {% else %} claim-tab-hidden {% endif %}" id="history">
             {% include "./claim-history.html" %}
         </div>
 
