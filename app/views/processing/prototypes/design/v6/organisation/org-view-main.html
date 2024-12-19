@@ -66,6 +66,10 @@
                   <li class="moj-primary-navigation__item">
                     <a class="moj-primary-navigation__link" {% if data.orgTab == 'bankDetails'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=bankDetails">Bank details</a>
                   </li>
+
+                  <li class="moj-primary-navigation__item">
+                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'orgNotes'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=orgNotes">Organisation notes</a>
+                  </li>
                 </ul>
         
               </nav>
@@ -89,6 +93,8 @@
             {% include "../_components/org-view/users.html" %}
         {% elif data.orgTab == "bankDetails" %}
             {% include "../_components/org-view/bank-details.html" %}
+        {% elif data.orgTab == "orgNotes" %}
+            {% include "../_components/org-view/org-notes.html" %}
         {% endif %}
       </div>
     </div>
