@@ -1,5 +1,5 @@
 {% if (claim.fundingType == "TU") and (claim.claimType == "60") %}
-    <p class="govuk-body">This is the 60 part of a claim which uses the 60/40 funding model.</p>
+    <p class="govuk-body">This is the 60 part of a claim that uses the 60/40 funding model.</p>
     <p class="govuk-body">It covers evidence of payment.</p>
     {% if pairClaim != null %}
     <p class="govuk-body">View the <a href="../organisation/org-view-main?orgTab=singleClaim&notes&noteError&id={{pairClaim.claimID}}#tab-content" class="govuk-link">40 part of the claim</a>, which covers evidence of training completion.</p>
@@ -8,7 +8,7 @@
     {% endif %}
 
 {% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}
-    <p class="govuk-body">This is the 40 part of a claim which uses the 60/40 funding model.</p>
+    <p class="govuk-body">This is the 40 part of a claim that uses the 60/40 funding model.</p>
     <p class="govuk-body">It covers evidence of training completion.</p>
     <p class="govuk-body">View the <a href="../organisation/org-view-main?orgTab=singleClaim&notes&noteError&id={{pairClaim.claimID}}#tab-content" class="govuk-link">60 part of the claim</a>, which covers evidence of payment.</p>
 

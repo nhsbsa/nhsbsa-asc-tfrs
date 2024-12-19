@@ -22,7 +22,7 @@
 
             <div class="govuk-notification-banner__content">
                 <h3 class="govuk-notification-banner__heading">
-                    Claim outcome recorded and returned to organisation
+                    Claim outcome recorded and shared with organisation
                 </h3>
             </div>
 
@@ -104,15 +104,17 @@
 
         <nav class="moj-side-navigation" aria-label="Side navigation">
             <ul class="moj-side-navigation__list">
-                <li class="moj-side-navigation__item {% if data.noteSuccess != 'true' %} moj-side-navigation__item--active {% endif %}">
-                    {% if (claim.status == "submitted") %}
-                    <a href="#process">Process claim</a>
-                    {% elif (claim.status == "approved") or (claim.status == "rejected") %}
-                    <a href="#outcome">Outcome</a>
-                    {% endif %}
-                </li>
+                {% if (claim.status == "submitted" and data.userType == "processor") %}
+                    <li class="moj-side-navigation__item {% if data.noteSuccess != 'true' %} moj-side-navigation__item--active {% endif %}">
+                        <a href="#process">Process claim</a>
+                    </li>
+                {% elif (claim.status == "approved") or (claim.status == "rejected") %}
+                    <li class="moj-side-navigation__item {% if data.noteSuccess != 'true' %} moj-side-navigation__item--active {% endif %}">
+                        <a href="#outcome">Outcome</a>
+                    </li>
+                {% endif %}
 
-                <li class="moj-side-navigation__item {% if data.noteSuccess == 'true' %} moj-side-navigation__item--active {% endif %}">
+                <li class="moj-side-navigation__item {% if data.noteSuccess == 'true' or (claim.status == 'submitted' and data.userType == 'ccsAgent') %} moj-side-navigation__item--active {% endif %}">
                     <a href="#history">History</a>
                 </li>
         
@@ -134,20 +136,20 @@
     </div>
 
     <div class="govuk-grid-column-three-quarters govuk-!-padding-top-4 govuk-!-padding-left-6">
-        {% if (claim.status == "submitted") %}
-        <div class="claim-tab {% if data.noteSuccess == 'true' %} claim-tab-hidden {% endif %}" id="process">
-            {% include "./process-claim.html" %}
-        </div>
+        {% if (claim.status == "submitted" and data.userType == "processor") %}
+            <div class="claim-tab {% if data.noteSuccess == 'true' %} claim-tab-hidden {% endif %}" id="process">
+                {% include "./process-claim.html" %}
+            </div>
         {% elif (claim.status == "approved") or (claim.status == "rejected") %}
-        <div class="claim-tab {% if data.noteSuccess == 'true' %} claim-tab-hidden {% endif %}" id="outcome">
-            {% include "./claim-outcome.html" %}
-        </div>
+            <div class="claim-tab {% if data.noteSuccess == 'true' %} claim-tab-hidden {% endif %}" id="outcome">
+                {% include "./claim-outcome.html" %}
+            </div>
         {% endif %}
-        
-        <div class="claim-tab {% if data.noteSuccess != 'true' %} claim-tab-hidden {% endif %}" id="history">
+    
+        <div class="claim-tab {% if data.noteSuccess == 'true' or (data.userType == 'ccsAgent' and claim.status == 'submitted') %} {% else %} claim-tab-hidden {% endif %}" id="history">
             {% include "./claim-history.html" %}
         </div>
-        
+
         <div class="claim-tab claim-tab-hidden" id="details">
             {% include "./claim-details.html" %}
         </div>
