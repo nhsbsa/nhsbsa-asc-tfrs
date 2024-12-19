@@ -1,6 +1,6 @@
 
 
-<h2 class="govuk-heading-m">Claim History</h2>
+<h2 class="govuk-heading-m">Claim history</h2>
 <div class="moj-timeline">
 
   {% if (claim.status == "approved") %}
@@ -14,7 +14,7 @@
         <p class="moj-timeline__date">
           <time datetime="{{ claim.createdDate }}">{{ pairClaim.approvedDate | govukDate }} at {{ pairClaim.approvedDate | govukTime}}</time>
         </p>
-        <div class="moj-timeline__description">The 40 part of your claim has been reviewed and approved. You will receive the remaining £{{claim.training.reimbursementAmount * 0.4}}.</div>
+        <div class="moj-timeline__description">The 40 part of your claim has been approved.</div>
       </div>
     {% endif %}
 
@@ -27,7 +27,7 @@
         <p class="moj-timeline__date">
           <time datetime="{{ claim.createdDate }}">{{ pairClaim.rejectedDate | govukDate }} at {{ pairClaim.rejectedDate | govukTime}}</time>
         </p>
-        <div class="moj-timeline__description">The 40 part of your claim has been reviewed and rejected. The rejection note will let you know why it was rejected.</div>
+        <div class="moj-timeline__description">The 40 part of your claim Your claim has been rejected. The rejection note will explain why.</div>
       </div>
     {% endif %}
 
@@ -41,7 +41,7 @@
           <time datetime="{{ claim.createdDate }}">{{ pairClaim.submittedDate | govukDate }} at {{ pairClaim.submittedDate | govukTime }}</time>
         </p>
         {% if (pairClaim.status == "submitted") %}
-        <div class="moj-timeline__description">The 40 part of your claim is being reviewed by a member of our processing staff.</div>
+          <div class="moj-timeline__description">The 40 part of your claim is being reviewed by a member of our processing staff.</div>
         {% endif %}
       </div>
     {% endif %}
@@ -54,7 +54,9 @@
       <p class="moj-timeline__date">
         <time datetime="{{ claim.createdDate }}">{{ claim.approvedDate | govukDate }} at {{ claim.approvedDate | govukTime}}</time>
       </p>
-      <div class="moj-timeline__description">{% if claim.claimType == "60"%}The 60 part of your claim {% else %}Your claim {% endif %} has been reviewed and approved. You will receive £{% if claim.claimType == "60"%}{{claim.training.reimbursementAmount * 0.6}}{% else %}{{claim.training.reimbursementAmount}}{% endif %}.</div>
+      {% if pairClaim == null or not (pairClaim.status == "submitted" or pairClaim.status == "rejected" or pairClaim.status == "approved") %}
+        <div class="moj-timeline__description">{% if claim.claimType == "60"%}The 60 part of your claim {% else %}Your claim {% endif %} has been approved.</div>
+      {% endif %}
     </div>
   {% endif %}
 
@@ -67,7 +69,7 @@
       <p class="moj-timeline__date">
         <time datetime="{{ claim.createdDate }}">{{ claim.rejectedDate | govukDate }} at {{ claim.rejectedDate | govukTime}}</time>
       </p>
-      <div class="moj-timeline__description">{% if claim.claimType == "60"%}The 60 part of your claim {% else %}Your claim {% endif %} has been reviewed and rejected. The rejection note will let you know why it was rejected.</div>
+      <div class="moj-timeline__description">{% if claim.claimType == "60"%}The 60 part of your claim {% else %}Your claim {% endif %} has been rejected. The rejection note will explain why.</div>
     </div>
   {% endif %}
 
