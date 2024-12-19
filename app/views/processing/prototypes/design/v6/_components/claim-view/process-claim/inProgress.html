@@ -45,12 +45,12 @@
 
                         {% if data.paymentReimbursementAmountIncomplete %}
                         <p id="cost-per-learner-error" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span> Complete cost per learner
+                            <span class="govuk-visually-hidden">Error:</span> Enter cost per learner
                         </p>
                         {% endif %}
                         {% if data.paymentReimbursementAmountInvalid %}
                         <p id="cost-per-learner-error" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span> Enter a valid cost per learner
+                            <span class="govuk-visually-hidden">Error:</span>Cost per learner must be a number
                         </p>
                         {% endif %}
 
@@ -82,7 +82,7 @@
                             Why did the evidence not meet the required criteria?
                         </label>
                         <div id="payment-note-hint" class="govuk-hint">
-                            This will be seen by the submitter when the claim is processed.
+                            This note tells the submitter why their claim has been rejected
                         </div>
                         {% if data.paymentNoNoteIncomplete %}
                         <p id="payment-note-error" class="govuk-error-message">
@@ -117,7 +117,7 @@
             </legend>
             {% if data.completionResponseIncomplete %}
             <p id="completion-review-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Complete check on evidence of completion
+                <span class="govuk-visually-hidden">Error:</span>Select yes if evidence of completion meets the required criteria 
             </p>
             {% endif %}
             <div class="govuk-radios" data-module="govuk-radios">
@@ -144,7 +144,7 @@
                             Why did the evidence not meet the required criteria?
                         </label>
                         <div id="completionNote-hint" class="govuk-hint">
-                            This will be seen by the submitter when the claim is processed.
+                            This note tells the submitter why their claim has been rejected
                         </div>
                         {% if data.completionNoNoteIncomplete %}
                         <p id="completion-note-error" class="govuk-error-message">
