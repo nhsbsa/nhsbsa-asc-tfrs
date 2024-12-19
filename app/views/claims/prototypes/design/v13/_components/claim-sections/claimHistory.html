@@ -1,0 +1,101 @@
+
+
+<h2 class="govuk-heading-m">Claim history</h2>
+<div class="moj-timeline">
+
+  {% if (claim.status == "approved") %}
+
+    {% if pairClaim.status == "approved"%}
+      <div class="moj-timeline__item">
+        <div class="moj-timeline__header">
+          <h2 class="moj-timeline__title">40 part approved</h2>
+          <p class="moj-timeline__byline">by Claim processor</p>
+        </div>
+        <p class="moj-timeline__date">
+          <time datetime="{{ claim.createdDate }}">{{ pairClaim.approvedDate | govukDate }} at {{ pairClaim.approvedDate | govukTime}}</time>
+        </p>
+        <div class="moj-timeline__description">The 40 part of your claim has been approved.</div>
+      </div>
+    {% endif %}
+
+    {% if pairClaim.status == "rejected"%}
+      <div class="moj-timeline__item">
+        <div class="moj-timeline__header">
+          <h2 class="moj-timeline__title">40 part rejected</h2>
+          <p class="moj-timeline__byline">by Claim processor</p>
+        </div>
+        <p class="moj-timeline__date">
+          <time datetime="{{ claim.createdDate }}">{{ pairClaim.rejectedDate | govukDate }} at {{ pairClaim.rejectedDate | govukTime}}</time>
+        </p>
+        <div class="moj-timeline__description">The 40 part of your claim Your claim has been rejected. The rejection note will explain why.</div>
+      </div>
+    {% endif %}
+
+    {% if (pairClaim.status == "submitted") or (pairClaim.status == "rejected") or (pairClaim.status == "approved")  %}
+      <div class="moj-timeline__item">
+        <div class="moj-timeline__header">
+          <h2 class="moj-timeline__title">40 part submitted</h2>
+          <p class="moj-timeline__byline">by {{ pairClaim.createdBy }}</p>
+        </div>
+        <p class="moj-timeline__date">
+          <time datetime="{{ claim.createdDate }}">{{ pairClaim.submittedDate | govukDate }} at {{ pairClaim.submittedDate | govukTime }}</time>
+        </p>
+        {% if (pairClaim.status == "submitted") %}
+          <div class="moj-timeline__description">The 40 part of your claim is being reviewed by a member of our processing staff.</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="moj-timeline__item">
+      <div class="moj-timeline__header">
+        <h2 class="moj-timeline__title">{% if claim.claimType == "60"%}60 part {% else %}Claim {% endif %}approved</h2>
+        <p class="moj-timeline__byline">by Claim processor</p>
+      </div>
+      <p class="moj-timeline__date">
+        <time datetime="{{ claim.createdDate }}">{{ claim.approvedDate | govukDate }} at {{ claim.approvedDate | govukTime}}</time>
+      </p>
+      {% if pairClaim == null or not (pairClaim.status == "submitted" or pairClaim.status == "rejected" or pairClaim.status == "approved") %}
+        <div class="moj-timeline__description">{% if claim.claimType == "60"%}The 60 part of your claim {% else %}Your claim {% endif %} has been approved.</div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if ( claim.status == "rejected") %}
+    <div class="moj-timeline__item">
+      <div class="moj-timeline__header">
+        <h2 class="moj-timeline__title">{% if claim.claimType == "60"%}60 part {% else %}Claim {% endif %}rejected</h2>
+        <p class="moj-timeline__byline">by Claim processor</p>
+      </div>
+      <p class="moj-timeline__date">
+        <time datetime="{{ claim.createdDate }}">{{ claim.rejectedDate | govukDate }} at {{ claim.rejectedDate | govukTime}}</time>
+      </p>
+      <div class="moj-timeline__description">{% if claim.claimType == "60"%}The 60 part of your claim {% else %}Your claim {% endif %} has been rejected. The rejection note will explain why.</div>
+    </div>
+  {% endif %}
+
+  {% if (claim.status == "submitted") or (claim.status == "rejected") or (claim.status == "approved") %}
+    <div class="moj-timeline__item">
+      <div class="moj-timeline__header">
+        <h2 class="moj-timeline__title">{% if claim.claimType == "60"%}60 part {% else %}Claim {% endif %}submitted</h2>
+        <p class="moj-timeline__byline">by {{ claim.createdBy }}</p>
+      </div>
+      <p class="moj-timeline__date">
+        <time datetime="{{ claim.createdDate }}">{{ claim.submittedDate | govukDate }} at {{ claim.submittedDate | govukTime }}</time>
+      </p>
+      {% if (claim.status == "submitted") %}
+      <div class="moj-timeline__description">{% if claim.claimType == "60"%}The 60 part of your claim {% else %}Your claim {% endif %}is being reviewed by a member of our processing staff.</div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="moj-timeline__item">
+    <div class="moj-timeline__header">
+      <h2 class="moj-timeline__title">Claim created</h2>
+      <p class="moj-timeline__byline">by {{ claim.createdBy }}</p>
+    </div>
+    <p class="moj-timeline__date">
+      <time datetime="{{ claim.createdDate }}">{{ claim.createdDate | govukDate }} at {{ claim.createdDate | govukTime }}</time>
+    </p>
+  </div>
+
+</div>
