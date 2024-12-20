@@ -33,25 +33,14 @@ GOV.UK prototype - {{data.processingServiceName}}
                     <form action="./load-data" method="post" novalidate>
                         <div class="govuk-form-group">
                             <label class="govuk-label" for="user-type">
-                              Choose user type
+                                Choose user type
                             </label>
                             <div id="user-type-hint" class="govuk-hint">
-                              This will simulate the full version of the prototype as it would appear for that user type
+                                This will simulate the full version of the prototype as it would appear for that user type
                             </div>
                             <select class="govuk-select" id="userType" name="userType" aria-describedby="user-type-hint">
                                 <option value="processor" selected>Processor</option>
                                 <option value="ccsAgent">CCS agent</option>
-                            </select>
-                          </div>
-
-                          <div class="govuk-form-group">
-                            <label class="govuk-label govuk-label--s" for="search-type">
-                                Choose process a claim journey version to test
-                            </label>
-                            <select class="govuk-select" id="processJourneyType" name="processJourneyType" aria-describedby="search-type-hint">
-                                <option value="a" selected>Version A</option>
-                                <option value="b">Version B</option>
-                                <option value="c">Version C</option>
                             </select>
                         </div>
 
