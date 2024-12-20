@@ -1,14 +1,13 @@
 {% set org = data.orgId | findOrganisation_V7(data.organisations) %}
 {% set claims = data.orgId | findOrgClaims_V7(data.claims) %}
 
-{% set status = data.statusID | statusDetails_V13(data.statuses) %}
-{% set noClaims = status.id | claimCount_V13(data.claims, data.fundingPot) %}
+{% set noClaims = claims | length %}
 {% set deletedId = data.deletedID %}
 
 {% set rowsPerPage = 20 %}
 
 {% set pageNumber = data.currentPage | parseInt %}
-{% set maxPage =  noClaims | pageCount_V13(rowsPerPage) %}
+{% set maxPage =  noClaims | pageCount_V7(rowsPerPage) %}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">

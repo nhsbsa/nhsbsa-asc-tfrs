@@ -403,3 +403,20 @@ addFilter('findUniqueSubmitters_V7', function (claims) {
 
     return uniqueSubmitters.sort((a, b) => a.name.localeCompare(b.name));
 })
+
+addFilter('pageCount_V7', function (content, perPage) {
+    return Math.ceil(content / perPage)
+})
+
+addFilter('typeTag_V7', function (type) {
+    switch (type) {
+        case null:
+            return ""
+        case "100":
+            return '<strong class="govuk-tag govuk-tag--orange">100</strong>'
+        case "60":
+            return '<strong class="govuk-tag govuk-tag--yellow">60</strong>'
+        case "40":
+            return '<strong class="govuk-tag govuk-tag--purple">40</strong>'
+    }
+}, { renderAsHtml: true })
