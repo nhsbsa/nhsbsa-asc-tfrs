@@ -1,5 +1,14 @@
-{% set org = data.orgId | findOrganisation_V13(data.organisations) %}
-{% set claims = data.orgId | findOrgClaims_V13(data.claims) %}
+{% set org = data.orgId | findOrganisation_V7(data.organisations) %}
+{% set claims = data.orgId | findOrgClaims_V7(data.claims) %}
+
+{% set status = data.statusID | statusDetails_V13(data.statuses) %}
+{% set noClaims = status.id | claimCount_V13(data.claims, data.fundingPot) %}
+{% set deletedId = data.deletedID %}
+
+{% set rowsPerPage = 20 %}
+
+{% set pageNumber = data.currentPage | parseInt %}
+{% set maxPage =  noClaims | pageCount_V13(rowsPerPage) %}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
@@ -66,7 +75,7 @@
             </form>
           </div>
 
-        <table class="govuk-table govuk-!-margin-top-3" data-module="moj-sortable-table">
+<!--         <table class="govuk-table govuk-!-margin-top-3" data-module="moj-sortable-table">
             <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
                     <th class="govuk-table__header" scope="col" width="22%" aria-sort="ascending">Claim reference</th>
@@ -85,7 +94,7 @@
                         <td class="govuk-table__cell">
                             {% if claim.learner %} {{ claim.learner.givenName }} {{ claim.learner.familyName }} {% else %} Not yet added {% endif %}
                         </td>
-                        <td class="govuk-table__cell">{{ claim.status |processorstatusTag_V6 }}</td>
+                        <td class="govuk-table__cell">{{ claim.status |processorstatusTag_V7 }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -123,8 +132,8 @@
           </nav>
           <p class="govuk-body pagination__results">Showing <span class="govuk-!-font-weight-bold">21</span> to <span class="govuk-!-font-weight-bold">40</span> of <span class="govuk-!-font-weight-bold">43</span> claims</p>
         </div>
-
-        <!-- {% include "./claims-table.html" %} -->
+ -->
+        {% include "./claims-table.html" %}
 
     </div>
 </div>

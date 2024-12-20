@@ -1,6 +1,6 @@
 {% extends "../layouts/processing-main.html" %}
-{% set org = data.orgId | findOrganisation_V13(data.organisations) %}
-{% set claims = data.orgId | findOrgClaims_V13(data.claims) %}
+{% set org = data.orgId | findOrganisation_V7(data.organisations) %}
+{% set claims = data.orgId | findOrgClaims_V7(data.claims) %}
 
 {% block content %}
 <div class="govuk-grid-row">

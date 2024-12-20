@@ -1,6 +1,6 @@
 {% extends "./layouts/processing-main.html" %}
 
-{% set foundOrganisation = data.organisations | findOrg_V7(data.orgID) %}
+{% set foundOrganisation = data.organisations | findOrg_V6(data.orgID) %}
 
 {% block pageTitle %}
 What do you want to do? — {{data.processingServiceName}}

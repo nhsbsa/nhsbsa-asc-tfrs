@@ -4,7 +4,7 @@
 {% set paymentNote = claim.evidenceOfPaymentreview.note %} 
 {% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
 {% set completionNote = claim.evidenceOfCompletionreview.note %}
-{% set pairClaim = data.id | matchPairClaim_V6(data.claims) %}
+{% set pairClaim = data.id | matchPairClaim_V7(data.claims) %}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
@@ -74,7 +74,7 @@
 
     <div class="govuk-grid-column-two-thirds">
         <p class="govuk-body">
-            {{ claim.status | processorstatusTag_V6 }} {% if claim.status == "approved"%} on {{ claim.approvedDate | govukDate }}{% endif %}{% if claim.status == "rejected"%}on {{ claim.rejectedDate | govukDate }}{%endif%}
+            {{ claim.status | processorstatusTag_V7 }} {% if claim.status == "approved"%} on {{ claim.approvedDate | govukDate }}{% endif %}{% if claim.status == "rejected"%}on {{ claim.rejectedDate | govukDate }}{%endif%}
         </p>
         {% include "./claim-type.html" %}
     </div>
@@ -167,7 +167,7 @@
 </div>
 
 {% block pageScripts %}
-<script type="text/javascript" src="/public/javascripts/processing/v6/side-nav-tabs.js"></script>
-<script type="text/javascript" src="/public/javascripts/processing/v6/error-summary-handler.js"></script>
-<script type="text/javascript" src="/public/javascripts/processing/v6/timeline-filter.js"></script>
+<script type="text/javascript" src="/public/javascripts/processing/v7/side-nav-tabs.js"></script>
+<script type="text/javascript" src="/public/javascripts/processing/v7/error-summary-handler.js"></script>
+<script type="text/javascript" src="/public/javascripts/processing/v7/timeline-filter.js"></script>
 {% endblock %}

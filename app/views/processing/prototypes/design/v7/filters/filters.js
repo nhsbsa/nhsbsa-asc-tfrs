@@ -9,7 +9,7 @@ const { renderString } = require('nunjucks')
 const { formatDate, isFullClaimCheck } = require('../helpers/helpers.js');
 const fs = require('fs');
 
-addFilter('processorstatusTag_V6', function (statusID) {
+addFilter('processorstatusTag_V7', function (statusID) {
     if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Not yet processed</strong>'
     } else if (statusID == 'approved') {
@@ -21,7 +21,7 @@ addFilter('processorstatusTag_V6', function (statusID) {
     }
 }, { renderAsHtml: true })
 
-addFilter('sectionCheck_V6', function (state) {
+addFilter('sectionCheck_V7', function (state) {
     if (state != null) {
         return "Completed"
     } else if (state == null) {
@@ -31,7 +31,7 @@ addFilter('sectionCheck_V6', function (state) {
     }
 }, { renderAsHtml: true })
 
-addFilter('findClaim_V6', function (claims, id) {
+addFilter('findClaim_V7', function (claims, id) {
     var foundClaim = null
     for (const claim of claims) {
         if (claim.claimID == id) {
@@ -41,7 +41,7 @@ addFilter('findClaim_V6', function (claims, id) {
     return foundClaim
 })
 
-addFilter('criteriaQuestions_V6', function (criteria, type, claim, header) {
+addFilter('criteriaQuestions_V7', function (criteria, type, claim, header) {
     if (type == "payment") {
         switch (criteria) {
             case "0":
@@ -93,7 +93,7 @@ addFilter('criteriaQuestions_V6', function (criteria, type, claim, header) {
     }
 }, { renderAsHtml: true })
 
-addFilter('criteriaAnswer_V6', function (criteria, type, claim) {
+addFilter('criteriaAnswer_V7', function (criteria, type, claim) {
     if (type == "payment") {
         if (claim.evidenceOfPaymentreview["criteria" + criteria].result) {
             return "Yes"
@@ -110,11 +110,11 @@ addFilter('criteriaAnswer_V6', function (criteria, type, claim) {
 }, { renderAsHtml: true })
 
 
-addFilter('checkPDF_V6', function (str) {
+addFilter('checkPDF_V7', function (str) {
     return str.endsWith(".pdf");
 })
 
-addFilter('evidenceBackLink_V6', function (criteriaNo, type) {
+addFilter('evidenceBackLink_V7', function (criteriaNo, type) {
     if (criteriaNo == "1") {
         return "claim"
     } else {
@@ -124,12 +124,12 @@ addFilter('evidenceBackLink_V6', function (criteriaNo, type) {
 })
 
 
-addFilter('dateSort_V6', function (notes) {
+addFilter('dateSort_V7', function (notes) {
     const sortedData = notes.sort((a, b) => new Date(b.date) - new Date(a.date));
     return sortedData
 })
 
-addFilter('reimbursement_V6', function (claim, paymentReimbursementAmount) {
+addFilter('reimbursement_V7', function (claim, paymentReimbursementAmount) {
     if ((claim.fundingType == "TU") && (claim.claimType == "60")) {
         if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
             return paymentReimbursementAmount * 0.6
@@ -149,7 +149,7 @@ addFilter('reimbursement_V6', function (claim, paymentReimbursementAmount) {
     }
 });
 
-addFilter('original_reimbursement_amount_V6', function (claim,paymentReimbursementAmount) {
+addFilter('original_reimbursement_amount_V7', function (claim,paymentReimbursementAmount) {
     if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
         paymentReimbursementAmount = claim.reimbursementAmount
     }
@@ -160,7 +160,7 @@ addFilter('original_reimbursement_amount_V6', function (claim,paymentReimburseme
     }
 });
 
-addFilter('orgErrorMessage_V6', function (error) {
+addFilter('orgErrorMessage_V7', function (error) {
     if (error == "invalid") {
         return "Enter a valid workplace ID"
     } else if ( error == "missing") {
@@ -185,7 +185,7 @@ addFilter('signatoryErrorMessage_V9', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true });
 
-addFilter('qualificationCheck_V6', function(claim, training, value) {
+addFilter('qualificationCheck_V7', function(claim, training, value) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     let isQualification = false;
 
@@ -201,7 +201,7 @@ addFilter('qualificationCheck_V6', function(claim, training, value) {
     }
 })
 
-addFilter('matchPairClaim_V6', function(claimID, claims) {
+addFilter('matchPairClaim_V7', function(claimID, claims) {
     var pairID = null
     var pairClaim = null
 
@@ -224,7 +224,7 @@ addFilter('matchPairClaim_V6', function(claimID, claims) {
 
 })
 
-addFilter('findOrg_V6', function (organisations, id) {
+addFilter('findOrg_V7', function (organisations, id) {
     var foundOrg = null
     for (const org of organisations) {
         if (org.workplaceId == id) {
@@ -234,7 +234,7 @@ addFilter('findOrg_V6', function (organisations, id) {
     return foundOrg
 })
 
-addFilter('formatInformation_V6', function (foundOrg, enteredInfo, isFromCheckEdited, isNewOrg) {
+addFilter('formatInformation_V7', function (foundOrg, enteredInfo, isFromCheckEdited, isNewOrg) {
     var info = ""
     if (isNewOrg == "true" || isFromCheckEdited == "true" ) {
         if (enteredInfo != null) {
@@ -251,7 +251,7 @@ addFilter('formatInformation_V6', function (foundOrg, enteredInfo, isFromCheckEd
 })
 
 
-addFilter('createTimelineArray_V6', function (claim) {
+addFilter('createTimelineArray_V7', function (claim) {
     // Extract the timestamps and their associated data
     const events = [];
 
@@ -353,7 +353,7 @@ addFilter('createTimelineArray_V6', function (claim) {
 })
 
 
-addFilter('countOccurrences_V6', function (events,string) {
+addFilter('countOccurrences_V7', function (events,string) {
      // Validate input
     if (!Array.isArray(events)) {
         throw new Error("The first argument must be an array.");
@@ -371,7 +371,7 @@ addFilter('countOccurrences_V6', function (events,string) {
     }, 0);
 })
 
-addFilter('findOrganisation_V13', function (orgID, organisations) {
+addFilter('findOrganisation_V7', function (orgID, organisations) {
     let organisation = null;
     for (const org of organisations) {
       if (org.workplaceId == orgID) {
@@ -381,7 +381,7 @@ addFilter('findOrganisation_V13', function (orgID, organisations) {
     return organisation;
 })
 
-addFilter('findOrgClaims_V13', function (orgID, claims) {
+addFilter('findOrgClaims_V7', function (orgID, claims) {
     let orgClaims = [];
     for (const claim of claims) {
       if (claim.workplaceId == orgID) {
@@ -391,7 +391,7 @@ addFilter('findOrgClaims_V13', function (orgID, claims) {
     return orgClaims;
 })
 
-addFilter('findUniqueSubmitters_V6', function (claims) {
+addFilter('findUniqueSubmitters_V7', function (claims) {
     const uniqueSubmitters = [];
 
     claims.forEach(claim => {

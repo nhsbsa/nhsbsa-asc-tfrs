@@ -20,7 +20,7 @@
                 <div class="govuk-error-summary__body">
                     <ul class="govuk-list govuk-error-summary__list">
                         <li>
-                            <a href="#workplace-id-error">{{ data.submitError | orgErrorMessage_V7 }}</a>
+                            <a href="#workplace-id-error">{{ data.submitError | orgErrorMessage_V6 }}</a>
                         </li>
                     </ul>
                 </div>
@@ -43,7 +43,7 @@
                     </div>
                     {% if data.submitError == "invalid" or data.submitError == "missing" %}
                     <p id="workplace-id-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span> {{ data.submitError | orgErrorMessage_V7 }}
+                        <span class="govuk-visually-hidden">Error:</span> {{ data.submitError | orgErrorMessage_V6 }}
                     </p>
                     {% endif %}
                     <input

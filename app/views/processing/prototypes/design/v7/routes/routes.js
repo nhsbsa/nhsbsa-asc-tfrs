@@ -1,9 +1,9 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, findOrg_V6, isValidOrgSearch } = require('../helpers/helpers.js');
+const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, findOrg_V7, isValidOrgSearch } = require('../helpers/helpers.js');
 
-// v6 Prototype routes
+// v7 Prototype routes
 
 router.get('/load-data', function (req, res) {
   //Load data from JSON files
@@ -352,7 +352,7 @@ router.get('/back-all-claims', function (req, res) {
   delete req.session.data.completion
   delete req.session.data.completionNoNote
 
-  return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + req.session.data.orgId)
+  return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + req.session.data.orgId + '&currentPage=1#tab-content')
 
 });
 
@@ -610,7 +610,7 @@ router.post('/search-org-id', function (req, res) {
     } else if (viaSubmitterEmail || viaSROEmail) {
       res.redirect('organisation/org-view-main?orgTab=users&orgId=' + foundOrg.workplaceId)
     } else {
-      res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg.workplaceId)
+      res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg.workplaceId + '&currentPage=1')
     } 
     delete req.session.data.orgSearchInput
   }
@@ -647,7 +647,7 @@ router.post('/search-claim-id-orgView', function (req, res) {
     }
   }
   if (foundClaim == null) {
-    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true')
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true&currentPage=1')
   }
   if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
     
@@ -655,7 +655,7 @@ router.post('/search-claim-id-orgView', function (req, res) {
     req.session.data.orgTab = "singleClaim"
     return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgId=' + foundOrg)
   } else {
-    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true')
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true&currentPage=1')
   }
 });
 
