@@ -1,0 +1,132 @@
+{% set org = data.orgId | findOrganisation_V13(data.organisations) %}
+{% set claims = data.orgId | findOrgClaims_V13(data.claims) %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        {% if (data.invalidIDError) or (data.notFound) or (data.emptyError)%}
+        <div class="govuk-error-summary govuk-!-margin-top-2" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            {% if (data.emptyError) %}
+                                <a href="#claimID"> Enter a claim reference</a>
+                            {% elif (data.notFound) %}
+                                <a href="#claimID">No results found</a>
+                            {% else %}
+                                <a href="#claimID">Enter a claim reference in the correct format</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <h1 class="govuk-heading-l govuk-!-margin-top-6">All claims</h1>
+
+        <div class="moj-search">
+            <form action="../search-claim-id-orgView" method="post">
+              <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">
+                <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+                  Find a claim
+                </label>
+                <div id="search-hint" class="govuk-hint moj-search__hint">
+                  Enter a claim reference. This could be with or without an -A, -B or -C suffix. For example, H2T-C813-3XF7-C or H2T-C813-3XF7
+                </div>
+                {% if data.invalidIDError %}
+                    <p id="sortCode-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>Enter a claim reference in the correct format
+                    </p>
+                {% endif %}
+                {% if data.emptyError %}
+                    <p id="sortCode-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>Enter a claim reference
+                    </p>
+                {% endif %}
+                {% if data.notFound%}
+                    <p id="sortCode-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>No results found
+                    </p>
+                {% endif %}
+      
+                <div class="search__button-group">
+                    <input class="govuk-input moj-search__input govuk-input--width-10 {% if data.invalidIDError or data.emptyError or data.notFound %} govuk-input--error {% endif %}" id="claimID" name="claimID" type="search"
+                      aria-describedby="search-hint" value="{{data.claimID}}">
+                    <button type="submit" class="govuk-button govuk-button--secondary moj-search__button"
+                      data-module="govuk-button">
+                      Search
+                    </button>
+              </div>
+
+            </form>
+          </div>
+
+        <table class="govuk-table govuk-!-margin-top-3" data-module="moj-sortable-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" width="22%" aria-sort="ascending">Claim reference</th>
+                    <th class="govuk-table__header" scope="col" width="5%" aria-sort="none">Type</th>
+                    <th class="govuk-table__header" scope="col" width="30%" aria-sort="none">Training</th>
+                    <th class="govuk-table__header" scope="col" width="23%" aria-sort="none">Learner</th>
+                    <th class="govuk-table__header" scope="col" width="27%" aria-sort="none">Status</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                {% for claim in claims %}
+                    <tr class="govuk-table__row claim-row" id="{{ claim.claimID | removeClaimSuffix_V13 }}">
+                        <td class="govuk-table__header" scope="row"><a class="govuk-link" href="org-view-main?orgId={{org.workplaceId}}&orgTab=singleClaim&id={{claim.claimID}}&processClaimStep=notStarted">{{ claim.claimID }}</a></td>
+                        <td class="govuk-table__cell">{{ claim.claimType | typeTag_V13 }}</td>
+                        <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                        <td class="govuk-table__cell">
+                            {% if claim.learner %} {{ claim.learner.givenName }} {{ claim.learner.familyName }} {% else %} Not yet added {% endif %}
+                        </td>
+                        <td class="govuk-table__cell">{{ claim.status |processorstatusTag_V6 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="govuk-pagination__results" style="display: flex; align-items: flex-start;">
+        <nav class="govuk-pagination" aria-label="Pagination">
+            <ul class="govuk-pagination__list">
+              <li class="govuk-pagination__item">
+                <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1">
+                  1
+                </a>
+              </li>
+              <li class="govuk-pagination__item govuk-pagination__item--current">
+                <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2" aria-current="page">
+                  2
+                </a>
+              </li>
+              <li class="govuk-pagination__item">
+                <a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">
+                  3
+                </a>
+              </li>
+            </ul>
+            <div class="govuk-pagination__next">
+              <a class="govuk-link govuk-pagination__link" href="#" rel="next">
+                <span class="govuk-pagination__link-title">
+                  Next<span class="govuk-visually-hidden"> page</span>
+                </span>
+                <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+                  <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7266z"></path>
+                </svg>
+              </a>
+            </div>
+          </nav>
+          <p class="govuk-body pagination__results">Showing <span class="govuk-!-font-weight-bold">21</span> to <span class="govuk-!-font-weight-bold">40</span> of <span class="govuk-!-font-weight-bold">43</span> claims</p>
+        </div>
+
+        <!-- {% include "./claims-table.html" %} -->
+
+    </div>
+</div>
+
+

@@ -8,7 +8,7 @@ Add note
 
 {% if claim.notes.length > 0 %}
 
-    {% for note in claim.notes | dateSort_V6 %}
+    {% for note in claim.notes | dateSort_V7 %}
         {% include "./notes/note.html" %}
     {% endfor %}
 

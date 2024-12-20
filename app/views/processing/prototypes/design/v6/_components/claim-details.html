@@ -1,4 +1,4 @@
-{% set pairClaim = data.id | matchPairClaim_V6(data.claims) %}
+{% set pairClaim = data.id | matchPairClaim_V7(data.claims) %}
 {% if (claim.fundingType == "TU") and (claim.claimType == "60") %}
     <h3 class="govuk-heading-s">60 claim</h3>
     <p class="govuk-body">This is the 60 part of a claim that uses the 60/40 funding model.</p>
@@ -91,7 +91,7 @@
             Level and type
         </dt>
         <dd class="govuk-summary-list__value">
-            {{ claim | qualificationCheck_V6(data.training, claim.training.type) }}
+            {{ claim | qualificationCheck_V7(data.training, claim.training.type) }}
         </dd>
     </div>
     <div class="govuk-summary-list__row">
@@ -99,7 +99,7 @@
             Awarding organisation
         </dt>
         <dd class="govuk-summary-list__value">
-            {{ claim | qualificationCheck_V6(data.training, claim.training.awardingOrganisation) }}
+            {{ claim | qualificationCheck_V7(data.training, claim.training.awardingOrganisation) }}
         </dd>
     </div>
     <div class="govuk-summary-list__row">

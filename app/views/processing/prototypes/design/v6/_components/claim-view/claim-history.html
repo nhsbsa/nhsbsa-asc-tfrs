@@ -1,5 +1,5 @@
 
-{% set events = claim | createTimelineArray_V6 %}
+{% set events = claim | createTimelineArray_V7 %}
 
 
 <h3 class="govuk-heading-m">History</h3>
@@ -8,16 +8,16 @@
 <div class="history-filters">
     <ul>
         <li>
-            <a class="govuk-button filter-button selected" role="button" href="#all" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>All ({{events | countOccurrences_V6("all")}})</a>
+            <a class="govuk-button filter-button selected" role="button" href="#all" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>All ({{events | countOccurrences_V7("all")}})</a>
         </li>
         <li>
-            <a class="govuk-button filter-button" role="button" href="#note" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>Notes ({{events | countOccurrences_V6("note")}})</a>
+            <a class="govuk-button filter-button" role="button" href="#note" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>Notes ({{events | countOccurrences_V7("note")}})</a>
         </li>
         <li>
-            <a class="govuk-button filter-button" role="button" href="#statusDate" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>Status changes ({{events | countOccurrences_V6("statusDate")}})</a>
+            <a class="govuk-button filter-button" role="button" href="#statusDate" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>Status changes ({{events | countOccurrences_V7("statusDate")}})</a>
         </li>
         <li>
-            <a class="govuk-button filter-button" role="button" href="#trainingDate" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>Training ({{events | countOccurrences_V6("trainingDate")}})</a>
+            <a class="govuk-button filter-button" role="button" href="#trainingDate" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>Training ({{events | countOccurrences_V7("trainingDate")}})</a>
         </li>
     </ul>
 </div>
