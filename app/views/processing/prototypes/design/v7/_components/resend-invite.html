@@ -1,0 +1,97 @@
+<h1 class="govuk-heading-l">Invitation sent but sign up not completed</h1>
+<p class="govuk-body">This organisation has already been invited but their Senior Responsible Officer (SRO) has not completed the registration process.</p>
+
+{% set foundOrganisation = data.organisations | findOrg_V7(data.orgID) %}
+
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        Organisation details
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.workplaceId }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.name }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {%for line in foundOrganisation.address %}
+                        {{ line }}<br>
+                    {% endfor %}
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>
+
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+            Invited Senior Responsible Officer details
+        </h2>
+        <ul class="govuk-summary-card__actions">
+          <li class="govuk-summary-card__action">
+            <a class="govuk-link" href="signatory-details">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
+          </li>
+        </ul>
+      </div>
+    <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Last (family) name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.signatory.familyName }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    First (given) name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.signatory.givenName }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Email address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.signatory.email }}
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>
+
+<p class="govuk-body">
+    If the SRO details are correct, you could either remind the SRO to respond to their existing invite or send a new invite.
+    <br>If the SRO details are not correct, you can edit them and then send an invite.
+</p>
+<form action="../home?confirmation=register" method="post" novalidate>
+    <input type="hidden" name="answers-checked" value="true">
+        <div class="govuk-button-group">
+            <a type="submit" class="govuk-button" href="../home?confirmation=register">
+                Send new invite
+            </a>
+            <a class="govuk-link" href="organisation-details?edited=">Go back</a>
+        </div>
+</form>

@@ -1,0 +1,51 @@
+
+{% set events = claim | createTimelineArray_V7 %}
+
+
+<h3 class="govuk-heading-m">History</h3>
+
+<h4 class="govuk-heading-s">Filter by type</h4>
+<div class="history-filters">
+    <ul>
+        <li>
+            <a class="govuk-button filter-button selected" role="button" href="#all" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>All ({{events | countOccurrences_V7("all")}})</a>
+        </li>
+        <li>
+            <a class="govuk-button filter-button" role="button" href="#note" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>Notes ({{events | countOccurrences_V7("note")}})</a>
+        </li>
+        <li>
+            <a class="govuk-button filter-button" role="button" href="#statusDate" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>Status changes ({{events | countOccurrences_V7("statusDate")}})</a>
+        </li>
+        <li>
+            <a class="govuk-button filter-button" role="button" href="#trainingDate" aria-current="true"><span class="govuk-visually-hidden">Filter by </span>Training ({{events | countOccurrences_V7("trainingDate")}})</a>
+        </li>
+    </ul>
+</div>
+
+
+<div class="moj-timeline">
+    {% for event in events %} 
+    <div class="moj-timeline__item" id="{{event.type}}">
+
+        <div class="moj-timeline__header">
+        <h6 class="moj-timeline__title">{{event.title}}</h6>
+        
+        {% if event.author != null%}
+        <p class="moj-timeline__byline">by {{event.author}}</p>
+        {% endif %}
+        </div>
+    
+        <p class="moj-timeline__date">
+        <time datetime="{{event.date}}">{{event.date | govukDate}}</time>
+        </p>
+    
+        <div class="moj-timeline__description">
+        <p>{{event.description}} </p>
+        </div>
+    
+    </div>
+    {% endfor %}
+</div>    
+        
+        
+<!--  <a href="#" class="govuk-link">see more</a> -->

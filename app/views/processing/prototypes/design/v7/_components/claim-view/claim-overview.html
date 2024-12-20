@@ -1,0 +1,173 @@
+
+{% set claim = data.id | findClaim_V8(data.claims) %} 
+{% set paymentCompleted = claim.evidenceOfPaymentreview.pass != null %}
+{% set paymentNote = claim.evidenceOfPaymentreview.note %} 
+{% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
+{% set completionNote = claim.evidenceOfCompletionreview.note %}
+{% set pairClaim = data.id | matchPairClaim_V7(data.claims) %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <a href="../back-all-claims" class="govuk-back-link govuk-!-margin-bottom-6">Back to all claims</a>
+
+        {% if data.processSuccess == "true" %}
+        <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+            
+            <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                    Success
+                </h2>
+            </div>
+
+            <div class="govuk-notification-banner__content">
+                <h3 class="govuk-notification-banner__heading">
+                    Claim outcome recorded and shared with organisation
+                </h3>
+            </div>
+
+        </div>
+        {% endif %}
+
+        {% if data.noteSuccess == "true" %}
+        <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+            
+            <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                    Success
+                </h2>
+            </div>
+
+            <div class="govuk-notification-banner__content">
+                <h3 class="govuk-notification-banner__heading">
+                    Note added to claim
+                </h3>
+            </div>
+
+        </div>
+        {% endif %}
+
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentNoNoteIncomplete or data.completionResponseIncomplete or data.completionNoNoteIncomplete %}
+            {% include "./process-claim/errorSummary.html" %}
+        {% endif %}
+
+    </div>
+
+
+    <div class="govuk-grid-column-full">
+        <div class="moj-page-header-actions govuk-!-margin-bottom-6">
+            <div class="moj-page-header-actions__title">
+                <h2 class="govuk-heading-l ">
+                    Claim: {{ claim.claimID }}
+                </h2>
+            </div>
+          
+            <div class="moj-page-header-actions__actions">
+              <div class="moj-button-group moj-button-group--inline">
+                <a href="../process-claim/add-note?id={{claim.claimID}}&processSuccess" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
+                    Add claim note
+                 </a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">
+            {{ claim.status | processorstatusTag_V7 }} {% if claim.status == "approved"%} on {{ claim.approvedDate | govukDate }}{% endif %}{% if claim.status == "rejected"%}on {{ claim.rejectedDate | govukDate }}{%endif%}
+        </p>
+        {% include "./claim-type.html" %}
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <p class="govuk-body">
+            <span class="govuk-!-font-weight-bold">Training:</span>
+            <br>
+            {% if claim.training.code | trainingTypeCheck_V13(data.training, "Courses") %}
+                {{ claim.training.title }}
+            {% elif claim.training.code | trainingTypeCheck_V13(data.training, "Qualifications") %}
+                {{ claim.training.title }}
+                <br>
+                {{ claim.training.type }}
+            {% endif %}
+        </p>
+        <p class="govuk-body">
+            <span class="govuk-!-font-weight-bold">Learner:</span>
+            <br>
+            {{ claim.learner.givenName }} {{ claim.learner.familyName }}
+        </p>
+    </div>
+
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-quarter">
+
+        <nav class="moj-side-navigation" aria-label="Side navigation">
+            <ul class="moj-side-navigation__list">
+                {% if (claim.status == "submitted" and data.userType == "processor") %}
+                    <li class="moj-side-navigation__item {% if data.noteSuccess != 'true' %} moj-side-navigation__item--active {% endif %}">
+                        <a href="#process">Process claim</a>
+                    </li>
+                {% elif (claim.status == "approved") or (claim.status == "rejected") %}
+                    <li class="moj-side-navigation__item {% if data.noteSuccess != 'true' %} moj-side-navigation__item--active {% endif %}">
+                        <a href="#outcome">Outcome</a>
+                    </li>
+                {% endif %}
+
+                <li class="moj-side-navigation__item {% if data.noteSuccess == 'true' or (claim.status == 'submitted' and data.userType == 'ccsAgent') %} moj-side-navigation__item--active {% endif %}">
+                    <a href="#history">History</a>
+                </li>
+        
+                <li class="moj-side-navigation__item">
+                    <a href="#details">Details</a>
+                </li>
+
+                <li class="moj-side-navigation__item">
+                    <a href="#evidence">Evidence</a>
+                </li>
+
+                <li class="moj-side-navigation__item">
+                    <a href="#submitter">Submitter</a>
+                </li>
+                
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="govuk-grid-column-three-quarters govuk-!-padding-top-4 govuk-!-padding-left-6">
+        {% if (claim.status == "submitted" and data.userType == "processor") %}
+            <div class="claim-tab {% if data.noteSuccess == 'true' %} claim-tab-hidden {% endif %}" id="process">
+                {% include "./process-claim.html" %}
+            </div>
+        {% elif (claim.status == "approved") or (claim.status == "rejected") %}
+            <div class="claim-tab {% if data.noteSuccess == 'true' %} claim-tab-hidden {% endif %}" id="outcome">
+                {% include "./claim-outcome.html" %}
+            </div>
+        {% endif %}
+    
+        <div class="claim-tab {% if data.noteSuccess == 'true' or (data.userType == 'ccsAgent' and claim.status == 'submitted') %} {% else %} claim-tab-hidden {% endif %}" id="history">
+            {% include "./claim-history.html" %}
+        </div>
+
+        <div class="claim-tab claim-tab-hidden" id="details">
+            {% include "./claim-details.html" %}
+        </div>
+
+        <div class="claim-tab claim-tab-hidden" id="evidence">
+            {% include "./claim-evidence.html" %}
+        </div>
+
+        <div class="claim-tab claim-tab-hidden" id="submitter">
+            {% include "./claim-submitter.html" %}
+        </div>
+
+    </div>
+
+</div>
+
+{% block pageScripts %}
+<script type="text/javascript" src="/public/javascripts/processing/v7/side-nav-tabs.js"></script>
+<script type="text/javascript" src="/public/javascripts/processing/v7/error-summary-handler.js"></script>
+<script type="text/javascript" src="/public/javascripts/processing/v7/timeline-filter.js"></script>
+{% endblock %}

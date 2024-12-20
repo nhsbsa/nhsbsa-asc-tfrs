@@ -371,7 +371,7 @@ addFilter('countOccurrences_V6', function (events,string) {
     }, 0);
 })
 
-addFilter('findOrganisation_V13', function (orgID, organisations) {
+addFilter('findOrganisation_V6', function (orgID, organisations) {
     let organisation = null;
     for (const org of organisations) {
       if (org.workplaceId == orgID) {
@@ -381,7 +381,7 @@ addFilter('findOrganisation_V13', function (orgID, organisations) {
     return organisation;
 })
 
-addFilter('findOrgClaims_V13', function (orgID, claims) {
+addFilter('findOrgClaims_V6', function (orgID, claims) {
     let orgClaims = [];
     for (const claim of claims) {
       if (claim.workplaceId == orgID) {

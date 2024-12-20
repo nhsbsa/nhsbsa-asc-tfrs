@@ -1,0 +1,47 @@
+{% set uniqueSubmitters = data.claims| findUniqueSubmitters_V7 %}
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l govuk-!-margin-top-6">Users</h1>   
+
+        <h2 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer</h1>  
+          
+          <table class="govuk-table" data-module="moj-sortable-table">
+            <thead class="govuk-table__head govuk-!-margin-top-6">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" width="30%">Name</th>
+                    <th class="govuk-table__header" scope="col" width="50%">Email</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row claim-row" id="{{ org.workplaceId }}">
+                        <td class="govuk-table__cell">{{ org.signatory.givenName}} {{ org.signatory.familyName}}</td>
+                        <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ org.signatory.email }}</a></td>
+                    </tr>
+        
+            </tbody>
+        </table>
+          
+
+        <h2 class="govuk-heading-m govuk-!-margin-top-6">Submitters</h1>   
+        <table class="govuk-table" data-module="moj-sortable-table">
+          <thead class="govuk-table__head govuk-!-margin-top-6">
+              <tr class="govuk-table__row">
+                  <th class="govuk-table__header" scope="col" width="30%">Name</th>
+                  <th class="govuk-table__header" scope="col" width="50%">Email</th>
+              </tr>
+          </thead>
+          <tbody class="govuk-table__body">
+              {% for submitter in uniqueSubmitters %}
+                  <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
+                      <td class="govuk-table__cell">{{ submitter.name}}</td>
+                      <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ submitter.email }}</a></td>
+                  </tr>
+              {% endfor %}
+      
+          </tbody>
+      </table>
+
+     </div>
+</div>
