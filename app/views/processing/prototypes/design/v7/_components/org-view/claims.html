@@ -1,5 +1,6 @@
 {% set org = data.orgId | findOrganisation_V7(data.organisations) %}
 {% set claims = data.orgId | findOrgClaims_V7(data.claims) %}
+{% set claims = claims | orderClaims_V7 %}
 
 {% set noClaims = claims | length %}
 {% set deletedId = data.deletedID %}

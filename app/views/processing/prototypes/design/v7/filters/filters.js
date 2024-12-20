@@ -420,3 +420,13 @@ addFilter('typeTag_V7', function (type) {
             return '<strong class="govuk-tag govuk-tag--purple">40</strong>'
     }
 }, { renderAsHtml: true })
+
+addFilter('orderClaims_V7', function (claims) {
+    // Desired order of statuses
+    const statusOrder = ["submitted", "rejected", "approved"];
+
+    // Sort function
+    claims.sort((a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status));
+    
+    return claims
+})
