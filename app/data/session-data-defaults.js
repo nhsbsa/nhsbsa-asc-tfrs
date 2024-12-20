@@ -17,7 +17,7 @@ module.exports = {
             {
                 "versionNo": "12",
                 "phase": "Beta",
-                "status": ["dev", "UR"],
+                "status": ["dev"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-12/",
                 "tested": null,
                 "created": [
@@ -315,15 +315,26 @@ module.exports = {
         "processingCurrent": "v6",
         "processingVersions": [
             {
+                "versionNo": "7",
+                "phase": "Beta",
+                "status": ["design"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-7/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },
+            {
                 "versionNo": "6",
                 "phase": "Beta",
-                "status": ["UR", "design"],
+                "status": ["UR"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-6/",
                 "tested": null,
                 "created": null,
                 "aims": null,
                 "learnt": null
-            },{
+            },
+            {
                 "versionNo": "5",
                 "phase": "Beta",
                 "status": ["dev"],
