@@ -14,7 +14,7 @@
     {% set stepNo = "Step 3" %}
 {% endif %}
 
-<h3 class="govuk-heading-m">{% if data.processJourneyType != "c" %}{{stepNo}}: {% endif %}Confirm claim decision</h3>
+<h3 class="govuk-heading-m">{% if data.processJourneyType != "b" %}{{stepNo}}: {% endif %}Confirm claim decision</h3>
 
 <p class="govuk-body">
     The claim has <span class="govuk-!-font-weight-bold">{% if data.result == "reject" %}not{%endif %} met</span> the evidence criteria and therefore should be <span class="govuk-!-font-weight-bold">{% if data.result == "approve" %}approved{% elif data.result == "reject" %}rejected{% endif %}</span>.
