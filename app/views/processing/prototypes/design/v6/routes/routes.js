@@ -22,9 +22,9 @@ router.post('/check-org', function (req, res) {
     res.redirect('register-organisation/organisation-details?submitError=missing')
   } else if (orgID == "timeout") {
     res.redirect('register-organisation/org-issue?submitError=timeout')
-  } else if (orgID == "B02944934") {
+  } else if (orgID == "D18946931" || orgID == "resend") {
     res.redirect('register-organisation/org-issue?submitError=resend')
-  } else if (orgID == "D18946931") {
+  } else if (orgID == "B02944934" || orgID == "dupe") {
     res.redirect('register-organisation/org-issue?submitError=duplicate')
   } else if (checkWDSFormat(orgID)) {
     delete req.session.data.submitError
@@ -307,48 +307,16 @@ router.post('/search-org-id', function (req, res) {
   }
 
   var foundOrg = null
-  var viaClaim = false
-  var viaSROEmail = false
-  var viaSubmitterEmail = false
-  var viaOrgId = false
   for (const org of req.session.data['organisations']) {
     if (org.workplaceId == orgSearch) {
       foundOrg = org
-      viaOrgId = true
       break
-    } else if (org.signatory.email == orgSearch) {
-      foundOrg = org
-      viaSROEmail = true
-      break
-    } else {
-      for (const claim of req.session.data['claims']) {
-        if (claim.claimID == orgSearch) {
-          for (const org of req.session.data['organisations']) {
-            if (org.workplaceId == claim.workplaceId) {
-              foundOrg = org
-              viaClaim = true
-            }
-          }
-          break
-        } else if (claim.submitter.email == orgSearch) {
-          foundOrg = org
-          viaSubmitterEmail = true
-          break
-        }
-      }
-      break
-    } 
+    }
   }
   if (foundOrg == null) {
     res.redirect('organisation/find-organisation?error=notFound')
   } else {
-    if (viaClaim) {
-      res.redirect('organisation/org-view-main?orgTab=singleClaim&orgId=' + foundOrg.workplaceId + '&id=' + orgSearch + '&processClaimStep=notStarted')
-    } else if (viaSubmitterEmail || viaSROEmail) {
-      res.redirect('organisation/org-view-main?orgTab=users&orgId=' + foundOrg.workplaceId)
-    } else {
-      res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg.workplaceId)
-    } 
+    res.redirect('organisation/org-view-main?orgTab=users&orgId=' + foundOrg.workplaceId + '&currentPage=1')
     delete req.session.data.orgSearchInput
   }
 });

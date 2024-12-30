@@ -6,7 +6,36 @@
       "signatory": {
         "givenName": "Lionel",
         "familyName": "Lowe",
-        "email": "lionel-lowel@evergreencare.co.uk"
+        "email": "lionel-lowel@evergreencare.co.uk",
+        "status": "registered"
+      },
+      "users": {
+        "active": [
+          {
+          "name": "Daniel Jones",
+          "email": "d.jones@evergreencare.com"
+        }, 
+        {
+          "name": "Rachel Mcglee",
+          "email": "rachel.mcglee@evergreencare.com"
+        },
+        {
+          "name": "Flossie Gleason",
+          "email": "flossie.gleason@evergreencare.com"
+        },
+        {
+          "name": "Fredrick Smith",
+          "email": "fredrick.smith@evergreencare.com"
+        }
+      ],
+        "inactive": [{
+          "name": "Simon Kendrick",
+          "email": "simon.kendrick@evergreencare.com"
+        }],
+        "invited": [{
+          "name": "Charlotte Dandy",
+          "email": "charlotte.dandy@evergreencare.com"
+        }]
       },
       "bankDetails": {
         "nameOnAccount": "Evergreen Care Home",
@@ -45,8 +74,30 @@
       "signatory": {
         "givenName": "Natasha",
         "familyName": "Jones",
-        "email": "natasha-jones@carehome.co.uk"
+        "email": "natasha-jones@carehome.co.uk",
+        "status": "registered"
       }, 
+      "users": {
+        "active": [],
+        "inactive": []
+      },
+      "notes" : []
+    },
+    {
+      "workplaceId": "G76904778",
+      "name": "NEW org",
+      "address": ["72 Guild Street", "London", "SE23 6FH"],
+      "signatory": {
+        "givenName": "Mary",
+        "familyName": "McCarthey",
+        "email": "mary-mccarthy@neworg.co.uk",
+        "status": "invited"
+      },
+      "users": {
+        "active": [],
+        "inactive": []
+      },
+      "bankDetails": null, 
       "notes" : []
     }
   ]
