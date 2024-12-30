@@ -397,4 +397,16 @@ router.post('/add-org-note', function (req, res) {
   }
 });
 
+router.get('/reinvite-signatory', function (req, res) {
+  req.session.data.invite = "success"
+  if (req.session.data.resendList) {
+    req.session.data.resendList.push(req.session.data.name)
+  } else {
+    req.session.data.resendList = [req.session.data.name]
+  }
+
+  res.redirect('org-admin/manage-team')
+
+});
+
 module.exports = router

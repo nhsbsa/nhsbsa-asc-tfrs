@@ -2,32 +2,48 @@
 {% set org = data.orgId | findOrganisation_V6(data.organisations) %}
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <div class="{% if (org.signatory.status == 'invited') %}govuk-grid-column-full{% else %}govuk-grid-column-two-thirds{% endif %}">
         <h1 class="govuk-heading-l govuk-!-margin-top-6">Users</h1>   
 
-        <h2 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer</h1>  
+        <h2 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer (SRO)</h1>  
           
-          <table class="govuk-table" data-module="moj-sortable-table">
-            <thead class="govuk-table__head govuk-!-margin-top-6">
-                <tr class="govuk-table__row">
-                    <th class="govuk-table__header" scope="col" width="30%">Name</th>
-                    <th class="govuk-table__header" scope="col" width="50%">Email</th>
-                    <th class="govuk-table__header" scope="col" width="20%">Status</th>
-                </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-                    <tr class="govuk-table__row claim-row" id="{{ org.workplaceId }}">
-                        <td class="govuk-table__cell">{{ org.signatory.givenName}} {{ org.signatory.familyName}}</td>
-                        <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ org.signatory.email }}</a></td>
-                        <td class="govuk-table__cell">{{ org.signatory.status | userStatusTag_V6 }}</td>
-                    </tr>
-            </tbody>
-        </table>
-
         {% if (org.signatory.status == "invited") %} 
-            <p class="govuk-body"><a href="edit-signatory-details" class="govuk-link">Edit invited signatory</a></p>
+            <table class="govuk-table" data-module="moj-sortable-table">
+                <thead class="govuk-table__head govuk-!-margin-top-6">
+                    <tr class="govuk-table__row">
+                        <th class="govuk-table__header" scope="col" width="20%">Name</th>
+                        <th class="govuk-table__header" scope="col" width="40%">Email</th>
+                        <th class="govuk-table__header" scope="col" width="15%">Status</th>
+                        <th class="govuk-table__header" scope="col" width="25%">Actions</th>
+                        </tr>
+                    </thead>
+                <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row claim-row" id="{{ org.workplaceId }}">
+                            <td class="govuk-table__cell">{{ org.signatory.givenName}} {{ org.signatory.familyName}}</td>
+                            <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ org.signatory.email }}</a></td>
+                            <td class="govuk-table__cell">{{ org.signatory.status | userStatusTag_V6 }}</td>
+                            <td class="govuk-table__cell">{% if not (data.resendList | matchResend_V12(org.signatory.email)) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-signatory?name={{org.signatory.email}}">Resend invite<span class="govuk-visually-hidden">to {{org.signatory.givenName}} {{org.signatory.familyName}}</span></a>{% else %}Invitation sent{% endif %}<a class="govuk-link govuk-link--no-visited-state" style="display: inline-block; margin-left: 10px; padding-left: 10px; border-left: 1px solid #b1b4b6;" href="./edit-signatory-details">Edit details<span class="govuk-visually-hidden">{{org.signatory.givenName}} {{org.signatory.familyName}}</span></a></td>
+                        </tr>
+                </tbody>
+            </table>
+        {% else %} 
+                <table class="govuk-table" data-module="moj-sortable-table">
+                    <thead class="govuk-table__head govuk-!-margin-top-6">
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header" scope="col" width="30%">Name</th>
+                            <th class="govuk-table__header" scope="col" width="50%">Email</th>
+                            <th class="govuk-table__header" scope="col" width="20%">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                            <tr class="govuk-table__row claim-row" id="{{ org.workplaceId }}">
+                                <td class="govuk-table__cell">{{ org.signatory.givenName}} {{ org.signatory.familyName}}</td>
+                                <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ org.signatory.email }}</a></td>
+                                <td class="govuk-table__cell">{{ org.signatory.status | userStatusTag_V6 }}</td>
+                            </tr>
+                    </tbody>
+                </table>
         {% endif %} 
-          
 
         <h2 class="govuk-heading-m govuk-!-margin-top-6">Submitters</h1>  
         {% if (org.users.active.length > 0 or org.users.inactive.length > 0) %} 

@@ -423,3 +423,14 @@ addFilter('userStatusTag_V6', function (status) {
         return '<strong class="govuk-tag govuk-tag--grey">Inactive</strong>'
     }
 }, { renderAsHtml: true })
+
+addFilter('matchResend_V6', function (resendList, email) {
+    if (resendList != null && resendList != "") {
+        for (const e of resendList) {
+            if (e == email) {
+                return true
+            }
+        }
+    }
+    return false
+})
