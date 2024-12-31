@@ -377,12 +377,13 @@ router.post('/add-org-note', function (req, res) {
 
   if (newNoteInput == null || newNoteInput == "") {
     req.session.data.noteError = true  
-    res.redirect('process-claim/add-note?id=' + claimID)
+    res.redirect('org-note/add-org-note')
 
   } else {
     var currentDate = new Date().toISOString();
     var newNote = {
-      "author": "Test Participant (Processor)",
+      "author": "Test Participant",
+      "jobRole": "Processor",
       "date": currentDate,
       "note": newNoteInput
     };
@@ -390,9 +391,9 @@ router.post('/add-org-note', function (req, res) {
     delete req.session.data.noteInput
     delete req.session.data.noteError
 
-    foundClaim.notes.push(newNote);
+    foundOrg.notes.push(newNote);
     req.session.data.noteSuccess = "true"
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+    res.redirect('organisation/org-view-main' + '?orgTab=orgNotes')
 
   }
 });
