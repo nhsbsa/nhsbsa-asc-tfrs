@@ -16,7 +16,7 @@
                 <div class="govuk-error-summary__body">
                     <ul class="govuk-list govuk-error-summary__list">
                         <li>
-                            <a href="#description-error">Add a note for the claim claim</a>
+                            <a href="#description-error">Add a note for this organisation</a>
                         </li>
                     </ul>
                 </div>
@@ -24,11 +24,11 @@
         </div>
         {% endif %}
 
-        <form action="../add-note" method="post" class="form">
+        <form action="../add-org-note" method="post" class="form">
             <div
                 class="govuk-form-group govuk-character-count {% if (data.noteError != null and data.noteError) %} govuk-form-group--error {% endif %}">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <span class="govuk-caption-l">Claim Reference Number: {{ data.id }}</span>
+                    <span class="govuk-caption-l">Organisation workplace ID: {{ data.orgId }}</span>
                     <h1 class="govuk-fieldset__heading">
                         Add a note
                     </h1>
