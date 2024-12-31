@@ -404,9 +404,42 @@ router.get('/reinvite-signatory', function (req, res) {
   } else {
     req.session.data.resendList = [req.session.data.name]
   }
+  res.redirect('organisation/org-view-main?orgTab=users&orgId=' + req.session.data.orgId + '&currentPage=1')
+});
 
-  res.redirect('org-admin/manage-team')
+router.post('/org-signatory-handler', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+  const edited = req.session.data.edited
+  const newOrg = req.session.data.newOrg
 
+  const result = signatoryCheck(familyName, givenName, email)
+
+  if (result.signatoryValid) {
+    delete req.session.data.submitError
+      res.redirect('organisation/updated-signatory-invitation')
+  } else {
+    req.session.data.submitError = result
+    res.redirect('organisation/signatory-details')
+  }
+});
+
+router.post('/update-signatory-invite', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+
+  const orgID = req.session.data.orgId
+  for (const org of req.session.data['organisations']) {
+    if (org.workplaceId == orgID) {
+      org.signatory.givenName = givenName
+      org.signatory.familyName = familyName
+      org.signatory.email = email
+      org.signatory.status = "invited"
+    } 
+  }
+  res.redirect('organisation/org-view-main?orgTab=users&confirmation=invited&edited=&goBack=')
 });
 
 module.exports = router

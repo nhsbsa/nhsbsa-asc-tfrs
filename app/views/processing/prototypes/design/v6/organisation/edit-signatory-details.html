@@ -1,6 +1,6 @@
 {% extends "../layouts/processing-main.html" %}
 
-{% set foundOrganisation = data.organisations | findOrg_V6(data.orgID) %}
+{% set foundOrganisation = data.organisations | findOrg_V6(data.orgId) %}
 
 {% set givenName = foundOrganisation.signatory.givenName | formatInformation_V6(data.givenName, data.edited, data.newOrg) %}
 {% set familyName = foundOrganisation.signatory.familyName | formatInformation_V6(data.familyName, data.edited, data.newOrg) %}
@@ -39,7 +39,7 @@
         <h1 class="govuk-heading-l">Senior Responsible Officer details</h1>
         <p class="govuk-body">Enter the details of the person in the organisation who will be the Senior Responsible Officer (SRO).</p>
         <p class="govuk-body"> This person will sign the grant determination declaration.</p>
-        <form action="../signatory-handler" method="post" novalidate>
+        <form action="../org-signatory-handler" method="post" novalidate>
             <div
                 class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
                 <label class="govuk-label" for="familyName" aria-describedby="full-name-hint">
@@ -108,7 +108,7 @@
                     Continue
                 </button>
                 {% if not data.newOrg %}
-                <a class="govuk-link" href="org-issue?submitError=resend">Cancel</a>
+                <a class="govuk-link" href="./org-view-main?orgTab=users">Cancel</a>
                 {% endif %}
             </div>
         </form>
