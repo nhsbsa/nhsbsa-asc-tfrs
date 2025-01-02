@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-m" id="learner">Learner</h2>
+<{% if claim.claimType == '60' %}h3{% else %}h2{% endif %} class="govuk-heading-m" id="learner">Learner</{% if claim.claimType == '60' %}h3{% else %}h2{% endif %}>
 <dl class="govuk-summary-list">
   {% if not claim.learner %}
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =="missing" %}

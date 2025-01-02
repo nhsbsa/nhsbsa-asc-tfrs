@@ -27,8 +27,11 @@
         </div>
         {% endif %}
 
-        <h1 class="govuk-heading-l govuk-!-margin-top-6">All claims</h1>
+        <h1 class="govuk-heading-l govuk-!-margin-top-6">Claim search</h1>
 
+        {% if (claims.length == 0) %} 
+            <p>This organisation has not yet submitted any claims.</p>
+        {% elif org.signatory.status == "active" %}
         <div class="moj-search">
             <form action="../search-claim-id-orgView" method="post">
               <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">
@@ -65,6 +68,10 @@
 
             </form>
           </div>
+
+          {% else %}
+            <p>Organisation has not yet completed registration so no claims can yet be submitted.</p>
+        {% endif %}
 
     </div>
 </div>
