@@ -27,7 +27,7 @@
         </div>
         {% endif %}
 
-        <h1 class="govuk-heading-l govuk-!-margin-top-6">Claim search</h1>
+        <h1 class="govuk-heading-l govuk-!-margin-top-6">Find a claim</h1>
 
         {% if (claims.length == 0) %} 
             <p>This organisation has not yet submitted any claims.</p>
@@ -35,9 +35,6 @@
         <div class="moj-search">
             <form action="../search-claim-id-orgView" method="post">
               <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">
-                <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
-                  Find a claim
-                </label>
                 <div id="search-hint" class="govuk-hint moj-search__hint">
                   Enter a claim reference. This could be with or without an -A, -B or -C suffix. For example, H2T-C813-3XF7-C or H2T-C813-3XF7
                 </div>
