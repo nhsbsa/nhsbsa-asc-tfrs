@@ -115,13 +115,16 @@
                     <a class="moj-primary-navigation__link" {% if data.orgTab == 'users'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=users">Users</a>
                   </li>
 
-                  <li class="moj-primary-navigation__item">
-                    <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims">Claim lookup</a>
-                  </li>
-        
-                  <li class="moj-primary-navigation__item">
-                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'bankDetails'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=bankDetails">Bank details</a>
-                  </li>
+                  {% if (org.signatory.status == "active") %}
+                    <li class="moj-primary-navigation__item">
+                      <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims">Find a claim</a>
+                    </li>
+                  {% endif %}
+                  {% if (org.signatory.status == "active") %}
+                    <li class="moj-primary-navigation__item">
+                      <a class="moj-primary-navigation__link" {% if data.orgTab == 'bankDetails'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=bankDetails">Bank details</a>
+                    </li>
+                  {% endif %}
 
                   <li class="moj-primary-navigation__item">
                     <a class="moj-primary-navigation__link" {% if data.orgTab == 'orgNotes'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=orgNotes">Organisation notes</a>
