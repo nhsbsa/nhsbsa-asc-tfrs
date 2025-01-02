@@ -28,10 +28,7 @@
           "email": "fredrick.smith@evergreencare.com"
         }
       ],
-        "inactive": [{
-          "name": "Simon Kendrick",
-          "email": "simon.kendrick@evergreencare.com"
-        }],
+        "inactive": [],
         "invited": [{
           "name": "Charlotte Dandy",
           "email": "charlotte.dandy@evergreencare.com"
@@ -46,7 +43,7 @@
       "notes" : [
         {
           "author": "Pansy Carter",
-          "jobRole": "CCS Agent",
+          "jobRole": "Processor",
           "date": "2023-12-01T17:49:45.079Z",
           "note": "Begun processing claim but had to double check the payment evidence with manager."
         }
@@ -65,7 +62,8 @@
       }, 
       "users": {
         "active": [],
-        "inactive": []
+        "inactive": [],
+        "invited": []
       },
       "notes" : []
     },
@@ -80,10 +78,26 @@
         "status": "active"
       },
       "users": {
-        "active": [],
-        "inactive": []
+        "active": [{
+          "name": "Daniel Jones",
+          "email": "d.jones@pinetreecare.com"
+        },
+        {
+          "name": "Fredrick Smith",
+          "email": "fredrick.smith@pinetreecare.com"
+        }],
+        "inactive": [],
+        "invited": [{
+          "name": "Jack McPhearson",
+          "email": "jack.McPhearson@pinetreecare.com"
+        }]
       },
-      "bankDetails": null, 
+      "bankDetails": {
+        "nameOnAccount": "Pinetree Manor Care Centre",
+        "sortCode": "526788",
+        "accountNumber": "33234465",
+        "buildingSocietyNumber": "4598329056"
+      },
       "notes" : [
         {
           "author": "Pansy Carter",
@@ -96,30 +110,43 @@
     {
       "workplaceId": "A89263211",
       "name": "Kingscourt Care Home",
-      "address": ["72 Guild Street", "London", "SE23 6FH"],
+      "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
       "signatory": {
-        "givenName": "Mary",
-        "familyName": "McCarthey",
-        "email": "mary-mccarthy@neworg.co.uk",
+        "givenName": "Joseph",
+        "familyName": "Stepen",
+        "email": "joseph-stephen@kingscourtcare.co.uk",
         "status": "active"
       },
       "users": {
-        "active": [],
-        "inactive": []
+        "active": [{
+          "name": "Rachel Mcglee",
+          "email": "rachel.mcglee@kingscourtcare.com"
+        },
+        {
+          "name": "Mary McCleod",
+          "email": "mary.mccleod@kingscourtcare.com"
+        }],
+        "inactive": [],
+        "invited": []
       },
-      "bankDetails": null, 
+      "bankDetails": {
+        "nameOnAccount": "Kingscourt Care Home",
+        "sortCode": "123384",
+        "accountNumber": "82889922",
+        "buildingSocietyNumber": "4598329056"
+      },
       "notes" : [
         {
           "author": "Kathryn McKenzie",
           "jobRole": "CCS Agent",
           "date": "2023-03-01T17:49:45.079Z",
-          "note": "Submitter rang up but failed to have correct workplace ID so could not proceed with query."
+          "note": "Submitter named Rachel Mcglee rang up but failed to have pass IDCV check so could not proceed with query."
         },
         {
           "author": "Pansy Carter",
-          "jobRole": "CCS Agent",
+          "jobRole": "Processor",
           "date": "2024-01-07T17:49:45.079Z",
-          "note": "Daniel Jones (submitter) rang to query rejection reason. Referred to processor"
+          "note": "Daniel Jones (submitter) rang to query rejection reason. Referred to processor."
         }
       ]
     }
