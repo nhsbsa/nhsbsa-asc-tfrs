@@ -1,25 +1,40 @@
 {% set org = data.orgId | findOrganisation_V6(data.organisations) %}
+
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l govuk-!-margin-top-6">Organisation notes</h1>
-
+        <div class="moj-page-header-actions">
+            <div class="moj-page-header-actions__title">
+                <h1 class="govuk-heading-l govuk-!-margin-top-6">Organisation notes</h1>   
+            </div>
         
-        <a href="add-org-note" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">
-          Add note
-          </a>
-          
-          
-          {% if org.notes.length > 0 %}
-          
-              {% for note in org.notes | dateSort_V6 %}
-                  {% include "./org-note.html" %}
-              {% endfor %}
-          
-          {% else %}
-          
-              <p class="govuk-body">There are currently no notes for this organisation.</p>
-          
-          {% endif %}
+            <div class="moj-page-header-actions__actions">
+            <div class="moj-button-group moj-button-group--inline">
+                <a href="add-org-note" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
+                    Add note
+                </a>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+            {% if org.notes.length > 0 %}
+            
+                {% for note in org.notes | dateSort_V6 %}
+                    {% include "./org-note.html" %}
+                {% endfor %}
+            
+            {% else %}
+            
+                <p class="govuk-body">There are currently no notes for this organisation.</p>
+            
+            {% endif %}
 
     </div>
 </div>
+
+

@@ -6,7 +6,36 @@
       "signatory": {
         "givenName": "Lionel",
         "familyName": "Lowe",
-        "email": "lionel-lowel@evergreencare.co.uk"
+        "email": "lionel-lowel@evergreencare.co.uk",
+        "status": "active"
+      },
+      "users": {
+        "active": [
+          {
+          "name": "Daniel Jones",
+          "email": "d.jones@evergreencare.com"
+        }, 
+        {
+          "name": "Rachel Mcglee",
+          "email": "rachel.mcglee@evergreencare.com"
+        },
+        {
+          "name": "Flossie Gleason",
+          "email": "flossie.gleason@evergreencare.com"
+        },
+        {
+          "name": "Fredrick Smith",
+          "email": "fredrick.smith@evergreencare.com"
+        }
+      ],
+        "inactive": [{
+          "name": "Simon Kendrick",
+          "email": "simon.kendrick@evergreencare.com"
+        }],
+        "invited": [{
+          "name": "Charlotte Dandy",
+          "email": "charlotte.dandy@evergreencare.com"
+        }]
       },
       "bankDetails": {
         "nameOnAccount": "Evergreen Care Home",
@@ -17,16 +46,19 @@
       "notes" : [
         {
           "author": "Davonte O'Reilly",
+          "jobRole": "Processor",
           "date": "2023-02-05T12:31:45.079Z",
           "note": "Daniel Jones (submitter) rang to query rejection reason."
         },
         {
           "author": "Davonte O'Reilly",
+          "jobRole": "Processor",
           "date": "2023-12-03T11:05:45.079Z",
           "note": "SRO Lionel Lowe rang to query the bank details associated with the organisation."
         },
         {
           "author": "Pansy Carter",
+          "jobRole": "CCS Agent",
           "date": "2023-12-01T17:49:45.079Z",
           "note": "Submitter rang up but failed to have correct workplace ID so could not proceed with query."
         }
@@ -45,8 +77,30 @@
       "signatory": {
         "givenName": "Natasha",
         "familyName": "Jones",
-        "email": "natasha-jones@carehome.co.uk"
+        "email": "natasha-jones@carehome.co.uk",
+        "status": "registered"
       }, 
+      "users": {
+        "active": [],
+        "inactive": []
+      },
+      "notes" : []
+    },
+    {
+      "workplaceId": "G76904778",
+      "name": "NEW org",
+      "address": ["72 Guild Street", "London", "SE23 6FH"],
+      "signatory": {
+        "givenName": "Mary",
+        "familyName": "McCarthey",
+        "email": "mary-mccarthy@neworg.co.uk",
+        "status": "invited"
+      },
+      "users": {
+        "active": [],
+        "inactive": []
+      },
+      "bankDetails": null, 
       "notes" : []
     }
   ]

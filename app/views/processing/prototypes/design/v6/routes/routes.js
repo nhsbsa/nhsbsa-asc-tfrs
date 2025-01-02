@@ -22,9 +22,9 @@ router.post('/check-org', function (req, res) {
     res.redirect('register-organisation/organisation-details?submitError=missing')
   } else if (orgID == "timeout") {
     res.redirect('register-organisation/org-issue?submitError=timeout')
-  } else if (orgID == "B02944934") {
+  } else if (orgID == "D18946931" || orgID == "resend") {
     res.redirect('register-organisation/org-issue?submitError=resend')
-  } else if (orgID == "D18946931") {
+  } else if (orgID == "B02944934" || orgID == "dupe") {
     res.redirect('register-organisation/org-issue?submitError=duplicate')
   } else if (checkWDSFormat(orgID)) {
     delete req.session.data.submitError
@@ -307,48 +307,16 @@ router.post('/search-org-id', function (req, res) {
   }
 
   var foundOrg = null
-  var viaClaim = false
-  var viaSROEmail = false
-  var viaSubmitterEmail = false
-  var viaOrgId = false
   for (const org of req.session.data['organisations']) {
     if (org.workplaceId == orgSearch) {
       foundOrg = org
-      viaOrgId = true
       break
-    } else if (org.signatory.email == orgSearch) {
-      foundOrg = org
-      viaSROEmail = true
-      break
-    } else {
-      for (const claim of req.session.data['claims']) {
-        if (claim.claimID == orgSearch) {
-          for (const org of req.session.data['organisations']) {
-            if (org.workplaceId == claim.workplaceId) {
-              foundOrg = org
-              viaClaim = true
-            }
-          }
-          break
-        } else if (claim.submitter.email == orgSearch) {
-          foundOrg = org
-          viaSubmitterEmail = true
-          break
-        }
-      }
-      break
-    } 
+    }
   }
   if (foundOrg == null) {
     res.redirect('organisation/find-organisation?error=notFound')
   } else {
-    if (viaClaim) {
-      res.redirect('organisation/org-view-main?orgTab=singleClaim&orgId=' + foundOrg.workplaceId + '&id=' + orgSearch + '&processClaimStep=notStarted')
-    } else if (viaSubmitterEmail || viaSROEmail) {
-      res.redirect('organisation/org-view-main?orgTab=users&orgId=' + foundOrg.workplaceId)
-    } else {
-      res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg.workplaceId)
-    } 
+    res.redirect('organisation/org-view-main?orgTab=users&orgId=' + foundOrg.workplaceId + '&currentPage=1')
     delete req.session.data.orgSearchInput
   }
 });
@@ -409,12 +377,13 @@ router.post('/add-org-note', function (req, res) {
 
   if (newNoteInput == null || newNoteInput == "") {
     req.session.data.noteError = true  
-    res.redirect('process-claim/add-note?id=' + claimID)
+    res.redirect('org-note/add-org-note')
 
   } else {
     var currentDate = new Date().toISOString();
     var newNote = {
-      "author": "Test Participant (Processor)",
+      "author": "Test Participant",
+      "jobRole": "Processor",
       "date": currentDate,
       "note": newNoteInput
     };
@@ -422,11 +391,56 @@ router.post('/add-org-note', function (req, res) {
     delete req.session.data.noteInput
     delete req.session.data.noteError
 
-    foundClaim.notes.push(newNote);
+    foundOrg.notes.push(newNote);
     req.session.data.noteSuccess = "true"
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+    res.redirect('organisation/org-view-main' + '?orgTab=orgNotes')
 
   }
+});
+
+router.get('/reinvite-signatory', function (req, res) {
+  req.session.data.invite = "success"
+  if (req.session.data.resendList) {
+    req.session.data.resendList.push(req.session.data.name)
+  } else {
+    req.session.data.resendList = [req.session.data.name]
+  }
+  res.redirect('organisation/org-view-main?orgTab=users&orgId=' + req.session.data.orgId + '&currentPage=1')
+});
+
+router.post('/org-signatory-handler', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+  const edited = req.session.data.edited
+  const newOrg = req.session.data.newOrg
+
+  const result = signatoryCheck(familyName, givenName, email)
+
+  if (result.signatoryValid) {
+    delete req.session.data.submitError
+      res.redirect('organisation/updated-signatory-invitation')
+  } else {
+    req.session.data.submitError = result
+    res.redirect('organisation/signatory-details')
+  }
+});
+
+router.post('/update-signatory-invite', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+
+  const orgID = req.session.data.orgId
+  for (const org of req.session.data['organisations']) {
+    if (org.workplaceId == orgID) {
+      org.signatory.givenName = givenName
+      org.signatory.familyName = familyName
+      org.signatory.email = email
+      org.signatory.status = "invited"
+    } 
+  }
+  res.redirect('organisation/org-view-main?orgTab=users&confirmation=invited&edited=&goBack=')
 });
 
 module.exports = router
