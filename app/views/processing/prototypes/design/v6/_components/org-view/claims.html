@@ -29,7 +29,9 @@
 
         <h1 class="govuk-heading-l govuk-!-margin-top-6">Claim search</h1>
 
-        {% if org.signatory.status == "registered" %}
+        {% if (claims.length == 0) %} 
+            <p>This organisation has not yet submitted any claims.</p>
+        {% elif org.signatory.status == "active" %}
         <div class="moj-search">
             <form action="../search-claim-id-orgView" method="post">
               <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">

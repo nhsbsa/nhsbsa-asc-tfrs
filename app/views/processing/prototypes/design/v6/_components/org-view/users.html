@@ -79,8 +79,10 @@
                     {% endfor %}
                 </tbody>
              </table>
-        {% else %}
+        {% elif (org.signatory.status == "invited") %}
             <p>Organisation has not yet completed registration so no submitters yet added.</p>
+        {% else %}
+            <p>This organisation does not yet have any registered submitters added.</p>
         {% endif %}
  
      </div>
