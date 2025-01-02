@@ -46,7 +46,7 @@
         {% endif %} 
 
         <h2 class="govuk-heading-m govuk-!-margin-top-6">Submitters</h1>  
-        {% if (org.users.active.length > 0 or org.users.inactive.length > 0) %} 
+        {% if (org.users.active.length > 0 or org.users.invited.length > 0) %} 
             <table class="govuk-table" data-module="moj-sortable-table">
                 <thead class="govuk-table__head govuk-!-margin-top-6">
                     <tr class="govuk-table__row">
@@ -80,9 +80,9 @@
                 </tbody>
              </table>
         {% elif (org.signatory.status == "invited") %}
-            <p>Organisation has not yet completed registration so no submitters yet added.</p>
+            <p class="govuk-body">No submitters added yet as organisation has not completed registration.</p>
         {% else %}
-            <p>This organisation does not yet have any registered submitters added.</p>
+            <p class="govuk-body">This organisation does not yet have any registered submitters added.</p>
         {% endif %}
  
      </div>
