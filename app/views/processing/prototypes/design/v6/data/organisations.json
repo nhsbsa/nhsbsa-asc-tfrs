@@ -45,40 +45,23 @@
       }, 
       "notes" : [
         {
-          "author": "Davonte O'Reilly",
-          "jobRole": "Processor",
-          "date": "2023-02-05T12:31:45.079Z",
-          "note": "Daniel Jones (submitter) rang to query rejection reason."
-        },
-        {
-          "author": "Davonte O'Reilly",
-          "jobRole": "Processor",
-          "date": "2023-12-03T11:05:45.079Z",
-          "note": "SRO Lionel Lowe rang to query the bank details associated with the organisation."
-        },
-        {
           "author": "Pansy Carter",
           "jobRole": "CCS Agent",
           "date": "2023-12-01T17:49:45.079Z",
-          "note": "Submitter rang up but failed to have correct workplace ID so could not proceed with query."
+          "note": "Begun processing claim but had to double check the payment evidence with manager."
         }
       ]
     },
     {
-      "workplaceId": "D18946931",
+      "workplaceId": "G76904778",
       "name": "Bright Horizons Care home",
       "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
-      "bankDetails": {
-        "nameOnAccount": "Mary Gerard",
-        "sortCode": "947262",
-        "accountNumber": "1827635",
-        "buildingSocietyNumber": null
-      },
+      "bankDetails": null,
       "signatory": {
         "givenName": "Natasha",
         "familyName": "Jones",
         "email": "natasha-jones@carehome.co.uk",
-        "status": "registered"
+        "status": "invited"
       }, 
       "users": {
         "active": [],
@@ -87,21 +70,58 @@
       "notes" : []
     },
     {
-      "workplaceId": "G76904778",
-      "name": "NEW org",
-      "address": ["72 Guild Street", "London", "SE23 6FH"],
+      "workplaceId": "D91774723",
+      "name": "Pinetree Manor Care Centre",
+      "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
       "signatory": {
-        "givenName": "Mary",
-        "familyName": "McCarthey",
-        "email": "mary-mccarthy@neworg.co.uk",
-        "status": "invited"
+        "givenName": "Hadyn",
+        "familyName": "Lacy",
+        "email": "hadyn-lacey@pinetreecare.co.uk",
+        "status": "active"
       },
       "users": {
         "active": [],
         "inactive": []
       },
       "bankDetails": null, 
-      "notes" : []
+      "notes" : [
+        {
+          "author": "Pansy Carter",
+          "jobRole": "CCS Agent",
+          "date": "2023-12-01T17:49:45.079Z",
+          "note": "SRO Hadyn Lacy rang to query the bank details associated with the organisation."
+        }
+      ]
+    },
+    {
+      "workplaceId": "A89263211",
+      "name": "Kingscourt Care Home",
+      "address": ["72 Guild Street", "London", "SE23 6FH"],
+      "signatory": {
+        "givenName": "Mary",
+        "familyName": "McCarthey",
+        "email": "mary-mccarthy@neworg.co.uk",
+        "status": "active"
+      },
+      "users": {
+        "active": [],
+        "inactive": []
+      },
+      "bankDetails": null, 
+      "notes" : [
+        {
+          "author": "Kathryn McKenzie",
+          "jobRole": "CCS Agent",
+          "date": "2023-03-01T17:49:45.079Z",
+          "note": "Submitter rang up but failed to have correct workplace ID so could not proceed with query."
+        },
+        {
+          "author": "Pansy Carter",
+          "jobRole": "CCS Agent",
+          "date": "2024-01-07T17:49:45.079Z",
+          "note": "Daniel Jones (submitter) rang to query rejection reason. Referred to processor"
+        }
+      ]
     }
   ]
 
