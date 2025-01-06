@@ -6,7 +6,8 @@
     {% if claim.status == status.id and claim.fundingType == data.fundingPot %}
         {% set matchCounter = matchCounter + 1 %}
         {% set hasResults=true %} 
-        {% if addHeader %} 
+        {% if addHeader %}
+        <div class="moj-scrollable-pane">
             <table class="govuk-table">
             <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
@@ -55,6 +56,7 @@
 
             </tbody>
             </table>
+            </div>
             <div class="govuk-pagination__results">
             <nav class="govuk-pagination govuk-pagination__list__results" aria-label="Pagination">
 
