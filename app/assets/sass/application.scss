@@ -407,12 +407,16 @@
 .govuk-pagination__results {
   flex-direction: column; /* Stack items vertically */
   text-align: center;    /* Center text */
+  margin-top: govuk-spacing(2);
 
 
   @include govuk-media-query($from: tablet) {
     text-align: left;    /* Center text */
   }
 
+  @media screen and (min-width: 1020px) {
+    margin-top: 0;
+  }
 
   @include govuk-media-query($from: desktop) {
     display: flex;
