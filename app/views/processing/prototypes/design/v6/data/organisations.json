@@ -44,8 +44,14 @@
         {
           "author": "Pansy Carter",
           "jobRole": "Processor",
-          "date": "2023-12-01T17:49:45.079Z",
-          "note": "Begun processing claim but had to double check the payment evidence with manager."
+          "date": "2024-01-01T17:49:45.079Z",
+          "note": "Begun processing claim but need to double check the payment evidence with manager."
+        },
+        {
+          "author": "Pansy Carter",
+          "jobRole": "Processor",
+          "date": "2023-12-06T14:02:45.079Z",
+          "note": "Rang the organisation as SRO had not yet accepted invite. Issue was SRO hadn’t received as email entered was incorrect. Edited and reissued invite."
         }
       ]
     },
@@ -100,10 +106,22 @@
       },
       "notes" : [
         {
-          "author": "Pansy Carter",
+          "author": "Ellen Johnson",
+          "jobRole": "CCS Agent",
+          "date": "2023-08-11T10:38:45.079Z",
+          "note": "SRO Hadyn Lacy rang to query the bank details associated with the organisation and update."
+        },
+        {
+          "author": "Paul Barrett",
           "jobRole": "CCS Agent",
           "date": "2023-12-01T17:49:45.079Z",
-          "note": "SRO Hadyn Lacy rang to query the bank details associated with the organisation."
+          "note": "Organisation inquired about the status of submitted claims and how long expected on processing times. Advised should receive a update in next 2 weeks."
+        },
+        {
+          "author": "Ellen Johnson",
+          "jobRole": "Processor",
+          "date": "2023-08-07T11:22:45.079Z",
+          "note": "Called organisation as bank details are invalid, SRO is going to double check and ring back."
         }
       ]
     },
@@ -143,10 +161,16 @@
           "note": "Submitter named Rachel Mcglee rang up but failed to have pass IDCV check so could not proceed with query."
         },
         {
+          "author": "Francesca Surrey",
+          "jobRole": "CCS Agent",
+          "date": "2024-06-07T17:49:45.079Z",
+          "note": "Mary McCleod (submitter) rang to query rejection reason on claim reference H93-SJK2-3S2K-A. Referred to processor."
+        },
+        {
           "author": "Pansy Carter",
           "jobRole": "Processor",
           "date": "2024-01-07T17:49:45.079Z",
-          "note": "Daniel Jones (submitter) rang to query rejection reason. Referred to processor."
+          "note": "Email sent to submitter Mary McCleod requesting additional details regarding training course provider on claim K92-HD52-7GD9-C."
         }
       ]
     }
