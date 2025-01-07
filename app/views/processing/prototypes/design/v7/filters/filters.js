@@ -391,19 +391,6 @@ addFilter('findOrgClaims_V7', function (orgID, claims) {
     return orgClaims;
 })
 
-addFilter('findUniqueSubmitters_V7', function (claims) {
-    const uniqueSubmitters = [];
-
-    claims.forEach(claim => {
-        const submitter = claim.submitter;
-        if (!uniqueSubmitters.some(s => s.email === submitter.email)) {
-          uniqueSubmitters.push(submitter);
-        }
-      });
-
-    return uniqueSubmitters.sort((a, b) => a.name.localeCompare(b.name));
-})
-
 addFilter('pageCount_V7', function (content, perPage) {
     return Math.ceil(content / perPage)
 })
@@ -429,4 +416,28 @@ addFilter('orderClaims_V7', function (claims) {
     claims.sort((a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status));
     
     return claims
+})
+
+addFilter('userStatusTag_V7', function (status) {
+
+    if (status == 'active') {
+        return '<strong class="govuk-tag govuk-tag--blue">Active</strong>'
+    } else if (status == 'registered') {
+        return '<strong class="govuk-tag govuk-tag--green">Registered</strong>'
+    } else if (status == 'invited') {
+        return '<strong class="govuk-tag govuk-tag--yellow">Invited</strong>'
+    } else {
+        return '<strong class="govuk-tag govuk-tag--grey">Inactive</strong>'
+    }
+}, { renderAsHtml: true })
+
+addFilter('matchResend_V7', function (resendList, email) {
+    if (resendList != null && resendList != "") {
+        for (const e of resendList) {
+            if (e == email) {
+                return true
+            }
+        }
+    }
+    return false
 })

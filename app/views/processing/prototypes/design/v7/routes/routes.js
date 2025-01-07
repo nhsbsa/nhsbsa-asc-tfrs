@@ -639,12 +639,13 @@ router.post('/add-org-note', function (req, res) {
 
   if (newNoteInput == null || newNoteInput == "") {
     req.session.data.noteError = true  
-    res.redirect('process-claim/add-note?id=' + claimID)
+    res.redirect('org-note/add-org-note')
 
   } else {
     var currentDate = new Date().toISOString();
     var newNote = {
-      "author": "Test Participant (Processor)",
+      "author": "Test Participant",
+      "jobRole": "Processor",
       "date": currentDate,
       "note": newNoteInput
     };
@@ -652,11 +653,57 @@ router.post('/add-org-note', function (req, res) {
     delete req.session.data.noteInput
     delete req.session.data.noteError
 
-    foundClaim.notes.push(newNote);
+    foundOrg.notes.push(newNote);
     req.session.data.noteSuccess = "true"
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+    res.redirect('organisation/org-view-main' + '?orgTab=orgNotes')
 
   }
 });
+
+router.get('/reinvite-signatory', function (req, res) {
+  req.session.data.invite = "success"
+  if (req.session.data.resendList) {
+    req.session.data.resendList.push(req.session.data.name)
+  } else {
+    req.session.data.resendList = [req.session.data.name]
+  }
+  res.redirect('organisation/org-view-main?orgTab=users&orgId=' + req.session.data.orgId + '&currentPage=1')
+});
+
+router.post('/org-signatory-handler', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+  const edited = req.session.data.edited
+  const newOrg = req.session.data.newOrg
+
+  const result = signatoryCheck(familyName, givenName, email)
+
+  if (result.signatoryValid) {
+    delete req.session.data.submitError
+      res.redirect('organisation/updated-signatory-invitation')
+  } else {
+    req.session.data.submitError = result
+    res.redirect('organisation/signatory-details')
+  }
+});
+
+router.post('/update-signatory-invite', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+
+  const orgID = req.session.data.orgId
+  for (const org of req.session.data['organisations']) {
+    if (org.workplaceId == orgID) {
+      org.signatory.givenName = givenName
+      org.signatory.familyName = familyName
+      org.signatory.email = email
+      org.signatory.status = "invited"
+    } 
+  }
+  res.redirect('organisation/org-view-main?orgTab=users&confirmation=invited&edited=&goBack=')
+});
+
 
 module.exports = router
