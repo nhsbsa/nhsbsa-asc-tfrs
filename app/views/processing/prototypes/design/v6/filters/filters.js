@@ -391,26 +391,6 @@ addFilter('findOrgClaims_V6', function (orgID, claims) {
     return orgClaims;
 })
 
-addFilter('findUniqueSubmitters_V6', function (claims, orgId) {
-
-    const orgClaims = []
-    for (const claim of claims) {
-        if (claim.workplaceId == orgId) {
-          orgClaims.push(claim)
-        }
-    }
-    const uniqueSubmitters = [];
-
-    orgClaims.forEach(claim => {
-        const submitter = claim.submitter;
-        if (!uniqueSubmitters.some(s => s.email === submitter.email)) {
-          uniqueSubmitters.push(submitter);
-        }
-      });
-
-    return uniqueSubmitters.sort((a, b) => a.name.localeCompare(b.name));
-})
-
 addFilter('userStatusTag_V6', function (status) {
 
     if (status == 'active') {

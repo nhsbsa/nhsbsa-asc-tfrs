@@ -117,7 +117,7 @@
 
                   {% if (org.signatory.status == "active") %}
                     <li class="moj-primary-navigation__item">
-                      <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims&claimID=">Find a claim</a>
+                      <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims&claimID=&emptyError=&invalidIDError=&notFound=">Find a claim</a>
                     </li>
                   {% endif %}
 
