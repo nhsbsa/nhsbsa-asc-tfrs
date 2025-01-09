@@ -638,9 +638,7 @@ router.post('/add-org-note', function (req, res) {
   var newNoteInput = req.session.data.notes
 
   if (newNoteInput == null || newNoteInput == "") {
-    req.session.data.noteError = true  
-    res.redirect('org-note/add-org-note')
-
+    res.redirect('organisation/add-org-note?noteError=true')
   } else {
     var currentDate = new Date().toISOString();
     var newNote = {
