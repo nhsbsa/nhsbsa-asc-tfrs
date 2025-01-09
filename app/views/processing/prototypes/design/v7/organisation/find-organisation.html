@@ -22,9 +22,9 @@
                         <ul class="govuk-list govuk-error-summary__list">
                             <li>
                                 {% if (data.error == "emptyInput") %}
-                                    <a href="#orgSearchInput">Enter workplace ID, for example B02944934</a>
+                                    <a href="#orgSearchInput">Enter workplace ID, for example H02944934</a>
                                 {% elif (data.error == "notValid") %}
-                                    <a href="#orgSearchInput">Enter workplace ID in the correct format, for example B02944934</a>
+                                    <a href="#orgSearchInput">Enter workplace ID in the correct format, for example H02944934</a>
                                 {% elif (data.error == "notFound") %}
                                     <a href="#orgSearchInput">No organisation match returned for your search</a>
                                 {% endif %}
@@ -52,11 +52,11 @@
 
                 {% if (data.error == "emptyInput") %}
                     <p id="search-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>Enter workplace ID, for example B02944934
+                        <span class="govuk-visually-hidden">Error:</span>Enter workplace ID, for example H02944934
                     </p>
                 {% elif (data.error == "notValid") %}
                     <p id="search-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>Enter workplace ID in the correct format, for example B02944934
+                        <span class="govuk-visually-hidden">Error:</span>Enter workplace ID in the correct format, for example H02944934
                     </p>
                 {% elif (data.error == "notFound") %}
                     <p id="search-error" class="govuk-error-message">
