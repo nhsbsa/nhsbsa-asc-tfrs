@@ -308,7 +308,9 @@ router.post('/search-org-id', function (req, res) {
 
   var foundOrg = null
   for (const org of req.session.data['organisations']) {
-    if (org.workplaceId == orgSearch) {
+    let searchedOrg = orgSearch.toLowerCase()
+    let singleOrg = org.workplaceId.toLowerCase()
+    if (singleOrg == searchedOrg) {
       foundOrg = org
       break
     }

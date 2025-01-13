@@ -579,7 +579,7 @@ router.post('/search-org-id', function (req, res) {
   if (foundOrg == null) {
     res.redirect('organisation/find-organisation?error=notFound')
   } else {
-    res.redirect('organisation/org-view-main?orgTab=users&orgId=' + foundOrg.workplaceId + '&currentPage=1')
+    res.redirect('organisation/org-view-main?orgTab=users&orgId=' + foundOrg.workplaceId + '&currentPage=1&error=')
     delete req.session.data.orgSearchInput
   }
 });
