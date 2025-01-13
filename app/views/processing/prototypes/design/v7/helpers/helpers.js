@@ -127,7 +127,7 @@ function isValidOrgSearch(orgSearch) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // Regular expression for a valid workplace ID
-    const letterAndDigitsRegex = /^[A-NP-Z0-9]{9}$/;
+    const letterAndDigitsRegex = /^[A-NP-Z0-9]{9}$/i;
 
     // Regular expression for a valid claim reference number
     const claimReferenceRegex = /^[A-NP-Z0-9]{3}(-)?[A-NP-Z0-9]{4}(-)?[A-NP-Z0-9]{4}(-)?([ABC])?$/i;

@@ -571,7 +571,9 @@ router.post('/search-org-id', function (req, res) {
 
   var foundOrg = null
   for (const org of req.session.data['organisations']) {
-    if (org.workplaceId == orgSearch) {
+    let searchedOrg = orgSearch.toLowerCase()
+    let singleOrg = org.workplaceId.toLowerCase()
+    if (singleOrg == searchedOrg) {
       foundOrg = org
       break
     }
@@ -579,7 +581,7 @@ router.post('/search-org-id', function (req, res) {
   if (foundOrg == null) {
     res.redirect('organisation/find-organisation?error=notFound')
   } else {
-    res.redirect('organisation/org-view-main?orgTab=users&orgId=' + foundOrg.workplaceId + '&currentPage=1')
+    res.redirect('organisation/org-view-main?orgTab=users&orgId=' + foundOrg.workplaceId + '&currentPage=1&error=')
     delete req.session.data.orgSearchInput
   }
 });
@@ -590,7 +592,7 @@ router.post('/search-claim-id-orgView', function (req, res) {
   delete req.session.data['notFound'];
   delete req.session.data['id'];
 
-  var claimID = req.session.data.claimID.replace(/\s/g, '');
+  var claimID = req.session.data.claimID.replace(/[\s-]/g, '');
   var foundOrg = req.session.data.orgId
 
   const emptyRegex = /\S/;
@@ -603,14 +605,16 @@ router.post('/search-claim-id-orgView', function (req, res) {
     return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&invalidIDError=true')
   }
 
-  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  const lengthRegex = /^[A-NP-Z0-9]{3}[A-NP-Z0-9]{4}[A-NP-Z0-9]{4}(A|B|C)$/i;
   if (!lengthRegex.test(claimID)) {
     return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&invalidIDError=true')
   }
 
   var foundClaim = null
   for (const c of req.session.data['claims']) {
-    if (c.claimID == claimID) {
+    let searchedID = claimID.toLowerCase()
+    let singleClaim = c.claimID.toLowerCase().replace(/[\s-]/g, '');
+    if (searchedID == singleClaim) {
       foundClaim = c
     }
   }
