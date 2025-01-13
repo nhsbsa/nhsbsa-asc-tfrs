@@ -7,7 +7,7 @@
         <form method="post" action="../add-training" class="govuk-!-margin-0">
             <input type="hidden" name="trainingSelection" value="{{ training.code }}">
             <input type="hidden" name="viewOnly" value='false'>
-            <button type="submit" class="govuk-button">Add to claim<span class="govuk-visually-hidden"> {{ training.title }}</span></button>
+            <button type="submit" class="govuk-button">Add <span class="govuk-visually-hidden">&nbsp; course {{ training.code }}</span> to claim</button>
         </form>
     </td>
 </tr>
@@ -21,7 +21,7 @@
         <form method="post" action="../add-training" class="govuk-!-margin-0">
             <input type="hidden" name="trainingSelection" value="{{ training.code }}">
             <input type="hidden" name="viewOnly" value='false'>
-            <button type="submit" class="govuk-button">Add to claim<span class="govuk-visually-hidden"> {{ training.title }}</span></button>
+            <button type="submit" class="govuk-button">Add<span class="govuk-visually-hidden">&nbsp; qualification {{ training.code }}</span> to claim</button>
         </form>
     </td>
 </tr>

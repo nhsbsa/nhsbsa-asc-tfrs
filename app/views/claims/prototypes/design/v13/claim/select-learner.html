@@ -108,7 +108,7 @@
                     <td class="govuk-table__cell">
                         <form method="post" action="../add-learner" class="govuk-!-margin-0">
                             <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
-                            <button type="submit" class="govuk-button">Select</button>
+                            <button type="submit" class="govuk-button">Select <span class="govuk-visually-hidden">&nbsp; learner {{ learner.id }}</span></button>
                         </form>
                     </td>
                 </tr>
