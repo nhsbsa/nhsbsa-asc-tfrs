@@ -33,14 +33,14 @@ addFilter('sectionCheck', function (state) {
     }
 }, { renderAsHtml: true })
 
-addFilter('findClaim', function (claims, id) {
-    var foundClaim = null
-    for (const claim of claims) {
-        if (claim.claimID == id) {
-            foundClaim = claim
+addFilter('findClaim', function (claimID, claims) {
+    let claim = null;
+    for (let c of claims) {
+        if (c.claimID == claimID) {
+            claim = c
         }
     }
-    return foundClaim
+    return claim;
 })
 
 addFilter('criteriaQuestions', function (criteria, type, claim, header) {
