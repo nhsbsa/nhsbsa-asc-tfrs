@@ -36,7 +36,7 @@
 
             </div>
 
-            {% if claim.training.code | trainingTypeCheck_V13(data.training, "Qualifications") %}
+            {% if claim.training.code | trainingTypeCheck(data.training, "Qualifications") %}
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Level and type

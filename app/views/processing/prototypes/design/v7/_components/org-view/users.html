@@ -1,5 +1,5 @@
 
-{% set org = data.orgId | findOrganisation_V6(data.organisations) %}
+{% set org = data.orgId | findOrganisation(data.organisations) %}
 
 <div class="govuk-grid-row">
     <div class="{% if (org.signatory.status == 'invited') %}govuk-grid-column-full{% else %}govuk-grid-column-two-thirds{% endif %}">

@@ -164,7 +164,7 @@ addFilter('orgErrorMessage', function (error) {
     }
 })
 
-addFilter('signatoryErrorMessage_V9', function (submitError) {
+addFilter('signatoryErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {

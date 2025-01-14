@@ -1,6 +1,6 @@
 {% extends "../layouts/processing-main.html" %}
 
-{% set claim = data.id | findClaim_V8(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 {% set paymentCompleted = claim.evidenceOfPaymentreview.pass != null %}
 {% set paymentNote = claim.evidenceOfPaymentreview.note %}
 {% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
@@ -399,7 +399,7 @@
             </div>
         </div>
         {% if claim.notes.length > 0 %}
-        {% for note in claim.notes| dateSort_V2 %}
+        {% for note in claim.notes| dateSort %}
         {% include "../_components/note.html" %}
         {% endfor %}
         {% else %}

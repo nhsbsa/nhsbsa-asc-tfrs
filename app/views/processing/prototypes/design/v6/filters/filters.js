@@ -168,7 +168,7 @@ addFilter('orgErrorMessage', function (error) {
     }
 })
 
-addFilter('signatoryErrorMessage_V9', function (submitError) {
+addFilter('signatoryErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
@@ -414,3 +414,25 @@ addFilter('matchResend', function (resendList, email) {
     }
     return false
 })
+
+addFilter('removeClaimSuffix', function (claimID) {
+    // Check if the string has at least two characters
+    if (claimID.length < 2) {
+        return ''; // Return an empty string if there are less than two characters
+    }
+    // Use the slice method to remove the last two characters
+    return claimID.slice(0, -2);
+})
+
+addFilter('typeTag', function (type) {
+    switch (type) {
+        case null:
+            return ""
+        case "100":
+            return '<strong class="govuk-tag govuk-tag--orange">100</strong>'
+        case "60":
+            return '<strong class="govuk-tag govuk-tag--yellow">60</strong>'
+        case "40":
+            return '<strong class="govuk-tag govuk-tag--purple">40</strong>'
+    }
+}, { renderAsHtml: true })

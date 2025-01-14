@@ -168,7 +168,7 @@ addFilter('orgErrorMessage', function (error) {
     }
 })
 
-addFilter('signatoryErrorMessage_V9', function (submitError) {
+addFilter('signatoryErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
@@ -250,4 +250,7 @@ addFilter('formatInformation', function (foundOrg, enteredInfo, isFromCheckEdite
     return info
 })
 
-
+addFilter('dateSort', function (notes) {
+    const sortedData = notes.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return sortedData
+})

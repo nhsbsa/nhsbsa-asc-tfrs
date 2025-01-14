@@ -1,6 +1,6 @@
 {% extends "../layouts/processing-main.html" %}
 
-{% set claim = data.id | findClaim_V8(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 {{ ["Calculate Reimbursement amount: ", claim.claimID, " - process a claim"] | join }}

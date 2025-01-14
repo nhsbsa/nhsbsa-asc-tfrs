@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %} 
 
 
-{% set matchName = data.resendEmail | inviteName_V10 (data.users) %}
+{% set matchName = data.resendEmail | inviteName (data.users) %}
 
 
 {% block pageTitle %} 

@@ -648,7 +648,7 @@ addFilter('isCostMoreThanMax', function (amount) {
     }
 })
 
-addFilter('statusTag_V7', function (statusID, statuses) {
+addFilter('statusTag', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {

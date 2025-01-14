@@ -168,7 +168,7 @@ addFilter('orgErrorMessage', function (error) {
     }
 })
 
-addFilter('signatoryErrorMessage_V9', function (submitError) {
+addFilter('signatoryErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
@@ -440,4 +440,16 @@ addFilter('matchResend', function (resendList, email) {
         }
     }
     return false
+})
+
+addFilter('trainingTypeCheck', function (trainingCode, trainingList, matchType) {
+
+    for (let trainingGroup of trainingList) {
+        for (let training of trainingGroup.courses) {
+            if (trainingCode == training.code) {
+                return trainingGroup.groupTitle == matchType;
+            }
+        }
+    }
+
 })

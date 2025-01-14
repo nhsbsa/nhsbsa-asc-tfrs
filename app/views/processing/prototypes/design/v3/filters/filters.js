@@ -141,7 +141,7 @@ addFilter('reimbursementCPD', function (claim, learner) {
     }
 }, { renderAsHtml: true })
 
-addFilter('formatLearnerBudget_V11', function (learnerID, learners) {
+addFilter('formatLearnerBudget', function (learnerID, learners) {
     for (let learner of learners) {
         if (learner.id == learnerID) {
             if (learner.cpdBudget == 0) {
@@ -222,7 +222,7 @@ addFilter('orgErrorMessage', function (error) {
     }
 })
 
-addFilter('signatoryErrorMessage_V9', function (submitError) {
+addFilter('signatoryErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
@@ -275,5 +275,17 @@ addFilter('matchPairClaim', function(claimID, claims) {
     }
 
     return pairClaim
+
+})
+
+addFilter('removeClaimSuffix', function (claimID) {
+
+    // Check if the string has at least two characters
+    if (claimID.length < 2) {
+        return ''; // Return an empty string if there are less than two characters
+    }
+
+    // Use the slice method to remove the last two characters
+    return claimID.slice(0, -2);
 
 })

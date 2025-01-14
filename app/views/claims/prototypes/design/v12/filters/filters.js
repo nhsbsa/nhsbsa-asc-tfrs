@@ -557,7 +557,7 @@ addFilter('inviteName', function (email, users) {
     }
 })
 
-addFilter('expireTime_V10', function (isoDateTime) {
+addFilter('expireTime', function (isoDateTime) {
     const inputDateTime = new Date(isoDateTime);
     const currentDateTime = new Date();
     const oneDayInMillis = 24 * 60 * 60 * 1000;
@@ -587,7 +587,7 @@ addFilter('expireTime_V10', function (isoDateTime) {
 })
 
 
-addFilter('countMatchingStatus_V10', function (objectsArray, statusString) {
+addFilter('countMatchingStatus', function (objectsArray, statusString) {
     // Initialize a counter to keep track of the matching objects
     let count = 0;
 
@@ -642,7 +642,7 @@ addFilter('isCostMoreThanMax', function (amount) {
     }
 })
 
-addFilter('statusTag_V7', function (statusID, statuses) {
+addFilter('statusTag', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {
