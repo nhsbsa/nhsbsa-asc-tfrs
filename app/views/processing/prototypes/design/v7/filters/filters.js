@@ -453,3 +453,11 @@ addFilter('trainingTypeCheck', function (trainingCode, trainingList, matchType) 
     }
 
 })
+
+addFilter('parseInt', function(value, radix = 10) {
+    return parseInt(value, radix);
+});
+
+addFilter('min', (value1, value2) => {
+    return Math.min(value1, value2);
+});
