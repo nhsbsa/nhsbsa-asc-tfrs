@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Enter job title - ", (data.claimType | potName_V9)] | join }}
+{{ ["Enter job title - ", (data.claimType | potName)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
@@ -24,7 +24,7 @@
                     </h2>
                     <div class="govuk-error-summary__body">
                         <ul class="govuk-list govuk-error-summary__list">
-                            {{ data.submitError | bankErrorMessage_V9("summary") }}
+                            {{ data.submitError | bankErrorMessage("summary") }}
                         </ul>
                     </div>
                 </div>

@@ -1,12 +1,12 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V13(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 {% if (data["learnerInput"] == "" or data["learnerInput"].length < 3) %}Error: {% endif %}Course or qualification learner — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
-<a href="claim-details?id={{ claim.claimID | removeClaimSuffix_V13 }}" class="govuk-back-link">Back</a>
+<a href="claim-details?id={{ claim.claimID | removeClaimSuffix }}" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -85,7 +85,7 @@
         {% set hasResults = false %}
         {% set addHeader = true %}
         {% for learner in data['learners'] %}
-        {% set match = data['learnerInput'] | learnerSearch_V13(learner) %}
+        {% set match = data['learnerInput'] | learnerSearch(learner) %}
         {% if match %}
         {% set hasResults = true %}
         {% if addHeader %}

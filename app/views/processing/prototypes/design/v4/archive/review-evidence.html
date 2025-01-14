@@ -1,7 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% set claim = data.id | findClaim_V8(data.claims) %}
-{% set criteriaList = data.type | returnCriteria_V4(data.criteria) %}
+{% set criteriaList = data.type | returnCriteria(data.criteria) %}
 
 {% block pageTitle %}
 {{ ["Review evidence claim: ", claim.claimID, " - process a claim"] | join }}
@@ -82,7 +82,7 @@
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend">
-                        {{ item.question | returnaAsHTML_V4(claim) }}
+                        {{ item.question | returnaAsHTML(claim) }}
                     </legend>
                     <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
                         <div class="govuk-radios__item">

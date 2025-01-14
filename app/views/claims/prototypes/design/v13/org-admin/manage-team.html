@@ -1,8 +1,8 @@
 {% extends "../layouts/claims-main.html" %} 
 
-{% set matchResendUser = data.resendEmail | findUser_V13 (data.users) %}
-{% set matchDeletedUser = data.deletedEmail | findUser_V13 (data.users) %}
-{% set count = data.users | userCountNotExpired_V13 %}
+{% set matchResendUser = data.resendEmail | findUser (data.users) %}
+{% set matchDeletedUser = data.deletedEmail | findUser (data.users) %}
+{% set count = data.users | userCountNotExpired %}
 
 
 {% block pageTitle %} 

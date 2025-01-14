@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V13(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 Your Adult Social Care Workforce Data Set (ASC-WDS) account is not up-to-date — {{serviceName}} — GOV.UK

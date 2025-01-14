@@ -26,14 +26,14 @@
         </h2>
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
-            {{ data.submitError | learnerErrorMessage_V11 }}
+            {{ data.submitError | learnerErrorMessage }}
           </ul>
         </div>
       </div>
     </div>
     {% endif %}
 
-    {% if data.inClaim == 'true' %}<span class="govuk-caption-l">Claim: {{ claim.claimID | removeClaimSuffix_V11 }}</span>{% endif %}
+    {% if data.inClaim == 'true' %}<span class="govuk-caption-l">Claim: {{ claim.claimID | removeClaimSuffix }}</span>{% endif %}
     <h1 class="govuk-heading-l">New learner details</h1>
   </div>
   <div class="govuk-grid-column-two-thirds">

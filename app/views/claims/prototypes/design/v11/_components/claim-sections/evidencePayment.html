@@ -1,7 +1,7 @@
 <h2 class="govuk-heading-m" id="payment">Payment for activity</h2>
 <dl class="govuk-summary-list">
 
-  {% set evidenceOfPaymentCount = claim.evidenceOfPayment | coursesCount_V11 %}
+  {% set evidenceOfPaymentCount = claim.evidenceOfPayment | coursesCount %}
 
   {% if claim.fundingType == "CPD" %}
 

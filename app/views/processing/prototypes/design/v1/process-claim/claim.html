@@ -14,7 +14,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Process a claim</span>
-        <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | processorstatusTag_V1 }}</h1>
+        <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | processorstatusTag }}</h1>
     </div>
 </div>
 
@@ -30,7 +30,7 @@
                     </a>
                 </div>
                 <div class="govuk-task-list__status" id="company-details-1-status">
-                    {{ claim.evidenceOfPaymentreview.pass | sectionCheck_V1 }}
+                    {{ claim.evidenceOfPaymentreview.pass | sectionCheck }}
                 </div>
             </li>
             <li class="govuk-task-list__item govuk-task-list__item--with-link">
@@ -40,7 +40,7 @@
                     </a>
                 </div>
                 <div class="govuk-task-list__status" id="company-details-2-status">
-                    {{ claim.evidenceOfCompletionreview.pass | sectionCheck_V1 }}
+                    {{ claim.evidenceOfCompletionreview.pass | sectionCheck }}
                 </div>
             </li>
         </ul>
@@ -72,7 +72,7 @@
             </div>
         </div>
         {% if data['notes'].length > 0 %}     
-            {% for note in data['notes']| dateSort_V1 %}     
+            {% for note in data['notes']| dateSort %}     
                 {% include "../_components/note.html" %}
             {% endfor %}
         {% else %}  

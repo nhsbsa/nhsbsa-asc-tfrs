@@ -9,7 +9,7 @@ const { removeSpacesAndLowerCase } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 
-addFilter('statusTag_V6', function (statusID, statuses) {
+addFilter('statusTag', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -33,7 +33,7 @@ addFilter('statusTag_V6', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
-addFilter('claimCount_V6', function (statusID, claims) {
+addFilter('claimCount', function (statusID, claims) {
     let i = 0
     for (const c of claims) {
         if (c.status == statusID) {
@@ -43,11 +43,11 @@ addFilter('claimCount_V6', function (statusID, claims) {
     return i
 })
 
-addFilter('pageCount_V6', function (content, perPage) {
+addFilter('pageCount', function (content, perPage) {
     return Math.ceil(content / perPage)
 })
 
-addFilter('uniqueDates_V6', function (claims, dateType) {
+addFilter('uniqueDates', function (claims, dateType) {
 
     const uniqueMonthYears = new Set();
 
@@ -73,7 +73,7 @@ addFilter('uniqueDates_V6', function (claims, dateType) {
 
 })
 
-addFilter('statusName_V6', function (statusID, statuses) {
+addFilter('statusName', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -83,7 +83,7 @@ addFilter('statusName_V6', function (statusID, statuses) {
     return statusName
 })
 
-addFilter('variableDate_V6', function (statusID) {
+addFilter('variableDate', function (statusID) {
     if (statusID == 'incomplete') {
         return 'Created date'
     } else if (statusID == 'ready-to-submit') {
@@ -100,7 +100,7 @@ addFilter('variableDate_V6', function (statusID) {
 
 })
 
-addFilter('variableDateType_V6', function (statusID) {
+addFilter('variableDateType', function (statusID) {
     if (statusID == 'incomplete') {
         return 'createdDate'
     } else if (statusID == 'ready-to-submit') {
@@ -117,7 +117,7 @@ addFilter('variableDateType_V6', function (statusID) {
 
 })
 
-addFilter('removeSpacesAndLowerCase_V6', function (inputString) {
+addFilter('removeSpacesAndLowerCase', function (inputString) {
 
     // Convert the string to lowercase
     let outputString = removeSpacesAndLowerCase(inputString);

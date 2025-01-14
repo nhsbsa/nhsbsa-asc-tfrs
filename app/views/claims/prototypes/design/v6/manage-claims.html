@@ -44,7 +44,7 @@
             {% for status in data['statuses'] %}
             <li class="govuk-tabs__list-item">
               <a class="govuk-tabs__tab" href="#{{ status.id }}">
-                {{ status.name }} ({{ status.id | claimCount_V6(data.claims) }})
+                {{ status.name }} ({{ status.id | claimCount(data.claims) }})
               </a>
             </li>
             {% endfor %}

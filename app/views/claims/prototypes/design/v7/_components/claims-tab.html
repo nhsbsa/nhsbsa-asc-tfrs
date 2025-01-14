@@ -1,4 +1,4 @@
-{% set noClaims = status.id | claimCount_V7(data.claims, data.claimType) %}
+{% set noClaims = status.id | claimCount(data.claims, data.claimType) %}
 
 <div class="govuk-tabs__panel" role="tabpanel" id="{{ status.id }}">
   <div class="govuk-grid-row">

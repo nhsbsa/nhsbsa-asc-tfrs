@@ -1,14 +1,14 @@
 {% extends "./layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Manage claims - ", (data.claimType | potName_V9)] | join }}
+{{ ["Manage claims - ", (data.claimType | potName)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
 <div class="govuk-breadcrumbs">
   <ol class="govuk-breadcrumbs__list">
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=TU">Manage claims ({{ data.claimType | potName_V9
+      <a class="govuk-breadcrumbs__link" href="manage-claims-home?claimType=TU">Manage claims ({{ data.claimType | potName
         }})</a>
     </li>
   </ol>
@@ -33,7 +33,7 @@
         </div>
     <div class="moj-page-header-actions">
       <div class="moj-page-header-actions__title">
-        <span class="govuk-caption-l">{{ data.claimType | potName_V9 }}</span>
+        <span class="govuk-caption-l">{{ data.claimType | potName }}</span>
         <h1 class="govuk-heading-l">Manage claims</h1>
       </div>
       <div class="moj-page-header-actions__actions">
@@ -53,7 +53,7 @@
   <div class="govuk-grid-column-two-thirds">
     <ul class="homepage-services-and-info__list">
         {% for status in data.statuses %}
-        {% set noClaims = status.id | claimCount_V9(data.claims, data.claimType) %}
+        {% set noClaims = status.id | claimCount(data.claims, data.claimType) %}
         <li class="chevron-card">
           <div class="chevron-card__wrapper">
               <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">

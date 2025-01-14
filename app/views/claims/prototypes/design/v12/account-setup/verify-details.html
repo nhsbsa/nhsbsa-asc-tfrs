@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Verify details - ", (data.fundingPot | potName_V12)] | join }}
+{{ ["Verify details - ", (data.fundingPot | potName)] | join }}
 {% endblock %}
 
 {% block beforeContent %}

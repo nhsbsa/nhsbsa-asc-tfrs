@@ -8,7 +8,7 @@ const addFilter = govukPrototypeKit.views.addFilter
 const { removeSpacesAndLowerCase } = require('../helpers/helpers.js');
 
 const fs = require('fs');
-addFilter('statusTag_V12', function (statusID, statuses) {
+addFilter('statusTag', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -30,7 +30,7 @@ addFilter('statusTag_V12', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
-addFilter('claimCount_V12', function (statusID, claims, claimType) {
+addFilter('claimCount', function (statusID, claims, claimType) {
     let i = 0
     for (const c of claims) {
         if (c.status == statusID && c.fundingType == claimType) {
@@ -40,11 +40,11 @@ addFilter('claimCount_V12', function (statusID, claims, claimType) {
     return i
 })
 
-addFilter('pageCount_V12', function (content, perPage) {
+addFilter('pageCount', function (content, perPage) {
     return Math.ceil(content / perPage)
 })
 
-addFilter('statusName_V12', function (statusID, statuses) {
+addFilter('statusName', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -54,7 +54,7 @@ addFilter('statusName_V12', function (statusID, statuses) {
     return statusName
 })
 
-addFilter('statusDetails_V12', function (statusID, statuses) {
+addFilter('statusDetails', function (statusID, statuses) {
     let status = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -64,7 +64,7 @@ addFilter('statusDetails_V12', function (statusID, statuses) {
     return status
 })
 
-addFilter('variableDate_V12', function (statusID) {
+addFilter('variableDate', function (statusID) {
     if (statusID == 'not-yet-submitted') {
         return 'Created'
     } else if (statusID == 'submitted') {
@@ -78,13 +78,13 @@ addFilter('variableDate_V12', function (statusID) {
     }
 })
 
-addFilter('removeSpacesAndLowerCase_V12', function (inputString) {
+addFilter('removeSpacesAndLowerCase', function (inputString) {
     // Convert the string to lowercase
     let outputString = removeSpacesAndLowerCase(inputString);
     return outputString;
 })
 
-addFilter('potName_V12', function (type) {
+addFilter('potName', function (type) {
     let name = "Pot Naming Error"
     if (type == "TU") {
         name = "Care skills funding"
@@ -92,13 +92,13 @@ addFilter('potName_V12', function (type) {
     return name
 })
 
-addFilter('checkEligible_V12', function (learner, type, roleTypes) {
+addFilter('checkEligible', function (learner, type, roleTypes) {
     let eligibleRoles = []
     eligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
     return eligibleRoles.includes(learner.roleType)
 })
 
-addFilter('errorSummary_V12', function (claim, submitError) {
+addFilter('errorSummary', function (claim, submitError) {
     let errorSummaryStr = ''
 
     if (submitError.description == "missing") {
@@ -131,7 +131,7 @@ addFilter('errorSummary_V12', function (claim, submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true })
 
-addFilter('findClaim_V12', function (claimID, claims) {
+addFilter('findClaim', function (claimID, claims) {
     let claim = null;
     for (let c of claims) {
         if (c.claimID == claimID) {
@@ -141,7 +141,7 @@ addFilter('findClaim_V12', function (claimID, claims) {
     return claim;
 })
 
-addFilter('groupByTitle_V12', function (training) {
+addFilter('groupByTitle', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const organizedData = {};
     for (const course of qualificationsObject.courses) {
@@ -154,7 +154,7 @@ addFilter('groupByTitle_V12', function (training) {
     return organizedData;
 })
 
-addFilter('getUniqueCourseTitles_V12', function (training) {
+addFilter('getUniqueCourseTitles', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const uniqueTitles = [];
 
@@ -166,7 +166,7 @@ addFilter('getUniqueCourseTitles_V12', function (training) {
     return uniqueTitles
 })
 
-addFilter('coursesCount_V12', function (courses) {
+addFilter('coursesCount', function (courses) {
     let count = 0;
     if (courses != null) {
         for (const c of courses) {
@@ -176,7 +176,7 @@ addFilter('coursesCount_V12', function (courses) {
     return count;
 })
 
-addFilter('formatCount_V12', function (courses) {
+addFilter('formatCount', function (courses) {
     let count = courses.length;
     let text = count + " provider";
     if (count > 1) {
@@ -185,7 +185,7 @@ addFilter('formatCount_V12', function (courses) {
     return text;
 })
 
-addFilter('dateErrorMessage_V12', function (dateErrorObject, dateType, errorSection) {
+addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection) {
     const errorMessages = [];
 
     if (errorSection == 'summary') {
@@ -233,7 +233,7 @@ addFilter('dateErrorMessage_V12', function (dateErrorObject, dateType, errorSect
     return errorMessages.join('');
 }, { renderAsHtml: true })
 
-addFilter('dateErrorFormat_V12', function (dateErrorObject, type) {
+addFilter('dateErrorFormat', function (dateErrorObject, type) {
     let state = false
     if (dateErrorObject) {
         if (type == "day") {
@@ -253,7 +253,7 @@ addFilter('dateErrorFormat_V12', function (dateErrorObject, type) {
     return state;
 })
 
-addFilter('listItemVariableDate_V12', function (statusID, claim) {
+addFilter('listItemVariableDate', function (statusID, claim) {
     if (statusID == 'not-yet-submitted') {
         return 'Created ' + formatDate(claim.createdDate)
     } else if (statusID == 'submitted') {
@@ -267,7 +267,7 @@ addFilter('listItemVariableDate_V12', function (statusID, claim) {
     }
 })
 
-addFilter('listItemVariableSort_V12', function (statusID, claim) {
+addFilter('listItemVariableSort', function (statusID, claim) {
     if (statusID == 'not-yet-submitted') {
         return 'Recently created'
     } else if (statusID == 'submitted') {
@@ -292,7 +292,7 @@ function formatDate(dateStr) {
     return formattedDate;
 }
 
-addFilter('relativeDateFromDateToToday_V12', function (dateStr) {
+addFilter('relativeDateFromDateToToday', function (dateStr) {
     const inputDate = new Date(dateStr);
     const currentDate = new Date();
     const differenceInMs = currentDate - inputDate;
@@ -313,7 +313,7 @@ addFilter('relativeDateFromDateToToday_V12', function (dateStr) {
     }
 })
 
-addFilter('findMatchingTraining_V12', function (claim, training) {
+addFilter('findMatchingTraining', function (claim, training) {
     // Extracting titles from training array's Qualifications courses
     const qualificationTitles = training.reduce((acc, group) => {
         if (group.groupTitle == "Qualifications") {
@@ -328,7 +328,7 @@ addFilter('findMatchingTraining_V12', function (claim, training) {
     return false;
 })
 
-addFilter('formatTrainingDate_V12', function (date) {
+addFilter('formatTrainingDate', function (date) {
     let isValidDate = false
     if (date != "Invalid DateTime") {
         isValidDate = true
@@ -336,7 +336,7 @@ addFilter('formatTrainingDate_V12', function (date) {
     return isValidDate
 })
 
-addFilter('learnerErrorMessage_V12', function (submitError) {
+addFilter('learnerErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
@@ -358,7 +358,7 @@ addFilter('learnerErrorMessage_V12', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true })
 
-addFilter('learnerMatch_V12', function (newField, matchField, type) {
+addFilter('learnerMatch', function (newField, matchField, type) {
     let result = ''
 
     if (newField != matchField) {
@@ -375,7 +375,7 @@ addFilter('learnerMatch_V12', function (newField, matchField, type) {
     return result
 }, { renderAsHtml: true })
 
-addFilter('learnerSearch_V12', function (search, learner) {
+addFilter('learnerSearch', function (search, learner) {
     let match = false
     const formattedgivenName = removeSpacesAndLowerCase(learner.givenName);
     const formattedfamilyName = removeSpacesAndLowerCase(learner.familyName);
@@ -390,7 +390,7 @@ addFilter('learnerSearch_V12', function (search, learner) {
     return match
 })
 
-addFilter('trainingSearch_V12', function (search, training) {
+addFilter('trainingSearch', function (search, training) {
     let match = false
     const formattedSearch = removeSpacesAndLowerCase(search);
     const formattedTrainingTitle = removeSpacesAndLowerCase(training.title);
@@ -404,7 +404,7 @@ addFilter('trainingSearch_V12', function (search, training) {
 })
 
 
-addFilter('bankErrorMessage_V12', function (bankErrorObject) {
+addFilter('bankErrorMessage', function (bankErrorObject) {
     const errorMessages = [];
 
     if (bankErrorObject.accountName === 'missing') {
@@ -433,7 +433,7 @@ addFilter('bankErrorMessage_V12', function (bankErrorObject) {
     return errorMessages.join('');
 }, { renderAsHtml: true })
 
-addFilter('trainingTypeCheck_V12', function (trainingCode, trainingList, matchType) {
+addFilter('trainingTypeCheck', function (trainingCode, trainingList, matchType) {
 
     for (let trainingGroup of trainingList) {
         for (let training of trainingGroup.courses) {
@@ -445,7 +445,7 @@ addFilter('trainingTypeCheck_V12', function (trainingCode, trainingList, matchTy
 
 })
 
-addFilter('findPair_V12', function (claimID, claims) {
+addFilter('findPair', function (claimID, claims) {
 
     for (let claim of claims) {
         const id = claim.claimID;
@@ -458,7 +458,7 @@ addFilter('findPair_V12', function (claimID, claims) {
     return null; // Return null if no match is found
 })
 
-addFilter('typeTag_V12', function (type) {
+addFilter('typeTag', function (type) {
     switch (type) {
         case null:
             return ""
@@ -471,7 +471,7 @@ addFilter('typeTag_V12', function (type) {
     }
 }, { renderAsHtml: true })
 
-addFilter('sortByDate_V12', function (claims, statusID) {
+addFilter('sortByDate', function (claims, statusID) {
     if (statusID == 'not-yet-submitted') {
         return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
     } else if (statusID == 'submitted') {
@@ -485,7 +485,7 @@ addFilter('sortByDate_V12', function (claims, statusID) {
     }
 })
 
-addFilter('userType_V12', function (type) {
+addFilter('userType', function (type) {
     switch(type) {
         case "signatory":
         return "Signatory"
@@ -498,7 +498,7 @@ addFilter('userType_V12', function (type) {
     }
 })
 
-addFilter('userStatusTag_V12', function (status) {
+addFilter('userStatusTag', function (status) {
     switch(status) {
         case "active":
         return '<strong class="govuk-tag govuk-tag--turquoise">Active</strong>'
@@ -515,7 +515,7 @@ addFilter('userStatusTag_V12', function (status) {
     }
 }, { renderAsHtml: true })
 
-addFilter('userErrorMessage_V12', function (submitError) {
+addFilter('userErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
@@ -536,7 +536,7 @@ addFilter('userErrorMessage_V12', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true })
 
-addFilter('matchResend_V12', function (resendList, email) {
+addFilter('matchResend', function (resendList, email) {
     if (resendList != null && resendList != "") {
         for (const e of resendList) {
             if (e === email) {
@@ -549,7 +549,7 @@ addFilter('matchResend_V12', function (resendList, email) {
     return false
 })
 
-addFilter('inviteName_V12', function (email, users) {
+addFilter('inviteName', function (email, users) {
     for (const user of users) {
         if (user.email === email) {
             return user.givenName + " " + user.familyName
@@ -605,7 +605,7 @@ addFilter('countMatchingStatus_V10', function (objectsArray, statusString) {
 })
 
 
-addFilter('75CharacterCount_V12', function (description) {
+addFilter('75CharacterCount', function (description) {
 
     let limit = 75
     if (description.length <= limit) {
@@ -624,7 +624,7 @@ addFilter('75CharacterCount_V12', function (description) {
 })
 
 
-addFilter('removeClaimSuffix_V12', function (claimID) {
+addFilter('removeClaimSuffix', function (claimID) {
     // Check if the string has at least two characters
     if (claimID.length < 2) {
         return ''; // Return an empty string if there are less than two characters
@@ -634,7 +634,7 @@ addFilter('removeClaimSuffix_V12', function (claimID) {
 })
 
 
-addFilter('isCostMoreThanMax_V12', function (amount) {
+addFilter('isCostMoreThanMax', function (amount) {
     if (amount > 500) {
         return true
     } else {

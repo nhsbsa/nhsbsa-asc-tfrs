@@ -25,7 +25,7 @@
         data.result == "approve" %}approved{% elif data.result ==
         "reject" %}rejected{% endif %}</span>.</p>
     {% if data.result == "approve" %}
-    <p class="govuk-body">The organisation will receive the following reimbursement amount: <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V2 }}</span></p>
+    <p class="govuk-body">The organisation will receive the following reimbursement amount: <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement }}</span></p>
     <details class="govuk-details">
       <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
@@ -39,7 +39,7 @@
     {% elif data.result == "reject" %}
     <p class="govuk-body">The organisation will receive the following note to explain why it was rejected. This is based
       on the answers and notes given to the criteria checks.</p>
-    {{ claim | rejectionNote_V2 }}
+    {{ claim | rejectionNote }}
     <p class="govuk-body"><a class="govuk-link" href="./edit-rejection-notes.html">Edit rejection note</a></p>
     {% endif %}
     <p class="govuk-body">Confirm that the evidence provided did{% if data.result == "reject" %} not{%

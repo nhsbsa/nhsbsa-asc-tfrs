@@ -1,4 +1,4 @@
-{% set noClaims = status.id | claimCount_V5(data.claims) %}
+{% set noClaims = status.id | claimCount(data.claims) %}
 
 <div class="govuk-tabs__panel" id="{{ status.id }}" noClaims="{{ noClaims }}">
             <div class="govuk-grid-row">
@@ -30,7 +30,7 @@
                         <th class="govuk-table__header govuk-!-width-one-third" scope="col" aria-sort="none">Activity name</th>
                         <th class="govuk-table__header" scope="col" aria-sort="none">Start date</th>
                         <th class="govuk-table__header" scope="col" aria-sort="none">Learners</th>
-                        <th class="govuk-table__header" scope="col" aria-sort="descending">{{ status.id | variableDate_V5 }}</th>
+                        <th class="govuk-table__header" scope="col" aria-sort="descending">{{ status.id | variableDate }}</th>
                         </tr>
                     </thead>
                     <tbody class="govuk-table__body">
@@ -86,7 +86,7 @@
                     
                         <li class="moj-pagination__item moj-pagination__item--dots">…</li>
                     
-                        <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 5 of 30">{{ noClaims | pageCount_V5(data.filters.perPage | default (10)) }}</a></li>
+                        <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 5 of 30">{{ noClaims | pageCount(data.filters.perPage | default (10)) }}</a></li>
 
                     
                         <li class="moj-pagination__item  moj-pagination__item--next">

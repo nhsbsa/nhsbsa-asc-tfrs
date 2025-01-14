@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V7(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% if data.type == 'completion' or data.type == 'enrollment' %}
 {% set learner = null %}

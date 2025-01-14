@@ -2,7 +2,7 @@
 {% if (data.noInputsB) or (data.dateInvalid) %}
 {% set matchedClaims = [] %}
 {% else %}
-{% set matchedClaims = data.claims | claimsMatchAdvancedSearchB_V13(data.trainingName, data.learner, data.submitter,
+{% set matchedClaims = data.claims | claimsMatchAdvancedSearchB(data.trainingName, data.learner, data.submitter,
 data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear, data.endMonth, data.endYear) %}
 {% endif %}
 {% set resultCount = matchedClaims.length %}
@@ -62,7 +62,7 @@ data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <div class="{% if data.noInputsB or data.dateInvalid %}govuk-form-group--error{% endif %} govuk-!-padding-bottom-4">
-      <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
+      <span class="govuk-caption-l">{{ data.fundingPot | potName }}</span>
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search</h2>
         <p class="govuk-body">You can search by a combination of any of the fields below</p>
         {% if data.noInputsB %}
@@ -74,7 +74,7 @@ data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear
   </div>
 </div>
 
-<form action="/search_result_b_V13" method="post" class="form">
+<form action="/search_result_b" method="post" class="form">
   <div class="{% if data.noInputsB or data.dateInvalid %}govuk-form-group--error{% endif %} govuk-!-margin-bottom-6">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half">
@@ -133,9 +133,9 @@ data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear
               {% for status in statusArray %}
               <div class="govuk-checkboxes__item">
                 <input class="govuk-checkboxes__input" id={{status}} name="statusOptions" type="checkbox"
-                  value={{status}} {% if ( data.statusOptions | isSelected_V13(status)) %}checked {% endif %}>
+                  value={{status}} {% if ( data.statusOptions | isSelected(status)) %}checked {% endif %}>
                 <label class="govuk-label govuk-checkboxes__label" for={{status}}>
-                  {{status | formatStatus_V13}}
+                  {{status | formatStatus}}
                 </label>
               </div>
               {% endfor %}
@@ -158,7 +158,7 @@ data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear
               {% for type in typeArray %}
               <div class="govuk-checkboxes__item">
                 <input class="govuk-checkboxes__input" id={{type}} name="typeOptions" type="checkbox" value={{type}} {%
-                  if ( data.typeOptions | isSelected_V13(type)) %} checked {% endif %}>
+                  if ( data.typeOptions | isSelected(type)) %} checked {% endif %}>
                 <label class="govuk-label govuk-checkboxes__label" for={{type}}>
                   {{type}}
                 </label>
@@ -198,8 +198,8 @@ data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear
               </label>
               <select class="govuk-select" id="dateType" name="sort">
                 {% for dateType in dateArray %}
-                <option value={{dateType}} {% if ( data.sort | isSelected_V13(dateType)) %} selected {% endif %}>
-                  {{dateType | formatDateType_V13}}</option>
+                <option value={{dateType}} {% if ( data.sort | isSelected(dateType)) %} selected {% endif %}>
+                  {{dateType | formatDateType}}</option>
                 {% endfor %}
               </select>
             </div>
@@ -280,11 +280,11 @@ data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear
         <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
           <td class="govuk-table__header" scope="row"><a class="govuk-link"
               href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
-          <td class="govuk-table__cell">{{ claim.claimType | typeTag_V13 }}</td>
+          <td class="govuk-table__cell">{{ claim.claimType | typeTag }}</td>
           <td class="govuk-table__cell">{{ claim.training.title }}</td>
           <td class="govuk-table__cell">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</td>
           <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
-            statusTag_V13(data.statuses) }}</td>
+            statusTag(data.statuses) }}</td>
         </tr>
         {% endfor %}
       </tbody>

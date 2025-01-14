@@ -1,4 +1,4 @@
-{% set org = data.orgId | findOrganisation_V6(data.organisations) %}
+{% set org = data.orgId | findOrganisation(data.organisations) %}
 
 
 <div class="govuk-grid-row">
@@ -24,7 +24,7 @@
 
             {% if org.notes.length > 0 %}
             
-                {% for note in org.notes | dateSort_V6 %}
+                {% for note in org.notes | dateSort %}
                     {% include "./org-note.html" %}
                 {% endfor %}
             

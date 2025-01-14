@@ -118,7 +118,7 @@ router.post('/search_id_result', function (req, res) {
   }
 });
 
-router.post('/search_result_a_V13', function (req, res) {
+router.post('/search_result_a', function (req, res) {
   delete req.session.data['noInputsA'];
   delete req.session.data['notFound'];
   delete req.session.data['invalidIDError'];
@@ -148,7 +148,7 @@ router.post('/search_result_a_V13', function (req, res) {
   }
 });
 
-router.post('/search_result_b_V13', function (req, res) {
+router.post('/search_result_b', function (req, res) {
   delete req.session.data['noInputsB'];
   delete req.session.data['dateInvalid'];
   delete req.session.data['fromSearchId'];
@@ -188,7 +188,7 @@ router.post('/search_result_b_V13', function (req, res) {
 });
 
 
-router.post('/apply-filters_V13', function (req, res) {
+router.post('/apply-filters', function (req, res) {
   const statuses = req.session.data.filterStatus
   const startDates = req.session.data.filterStartDate
   const types = req.session.data.filterType

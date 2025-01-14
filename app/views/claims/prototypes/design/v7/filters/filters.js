@@ -8,7 +8,7 @@ const addFilter = govukPrototypeKit.views.addFilter
 const { removeSpacesAndLowerCase } = require('../helpers/helpers.js');
 
 const fs = require('fs');
-addFilter('statusTag_V7', function (statusID, statuses) {
+addFilter('statusTag', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -32,7 +32,7 @@ addFilter('statusTag_V7', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
-addFilter('claimCount_V7', function (statusID, claims, claimType) {
+addFilter('claimCount', function (statusID, claims, claimType) {
     let i = 0
     for (const c of claims) {
         if (c.status == statusID && c.type == claimType) {
@@ -42,11 +42,11 @@ addFilter('claimCount_V7', function (statusID, claims, claimType) {
     return i
 })
 
-addFilter('pageCount_V7', function (content, perPage) {
+addFilter('pageCount', function (content, perPage) {
     return Math.ceil(content / perPage)
 })
 
-addFilter('uniqueDates_V7', function (claims, dateType) {
+addFilter('uniqueDates', function (claims, dateType) {
 
     const uniqueMonthYears = new Set();
 
@@ -72,7 +72,7 @@ addFilter('uniqueDates_V7', function (claims, dateType) {
 
 })
 
-addFilter('statusName_V7', function (statusID, statuses) {
+addFilter('statusName', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -82,7 +82,7 @@ addFilter('statusName_V7', function (statusID, statuses) {
     return statusName
 })
 
-addFilter('variableDate_V7', function (statusID) {
+addFilter('variableDate', function (statusID) {
     if (statusID == 'not-yet-submitted') {
         return 'Created'
     } else if (statusID == 'submitted') {
@@ -99,7 +99,7 @@ addFilter('variableDate_V7', function (statusID) {
 
 })
 
-addFilter('removeSpacesAndLowerCase_V7', function (inputString) {
+addFilter('removeSpacesAndLowerCase', function (inputString) {
 
     // Convert the string to lowercase
     let outputString = removeSpacesAndLowerCase(inputString);
@@ -108,7 +108,7 @@ addFilter('removeSpacesAndLowerCase_V7', function (inputString) {
 
 })
 
-addFilter('claimMatch_V7', function (claim, search, claimType) {
+addFilter('claimMatch', function (claim, search, claimType) {
     let check = false;
 
     const formattedSearch = removeSpacesAndLowerCase(search);
@@ -163,7 +163,7 @@ addFilter('claimMatch_V7', function (claim, search, claimType) {
     return check;
 })
 
-addFilter('potName_V7', function (type) {
+addFilter('potName', function (type) {
     let name = "Pot Naming Error"
     if (type == "TU") {
         name = "Care skills funding"
@@ -175,7 +175,7 @@ addFilter('potName_V7', function (type) {
 
 })
 
-addFilter('newClaimLink_V7', function (type) {
+addFilter('newClaimLink', function (type) {
     let claimLink = "#"
     if (type == "TU") {
         claimLink = "claim/first-claim"
@@ -185,7 +185,7 @@ addFilter('newClaimLink_V7', function (type) {
     return claimLink
 })
 
-addFilter('checkEligible_V7', function (learner, type, roleTypes) {
+addFilter('checkEligible', function (learner, type, roleTypes) {
     let eligibleRoles = []
     if (type == "TU") {
         eligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
@@ -198,7 +198,7 @@ addFilter('checkEligible_V7', function (learner, type, roleTypes) {
 
 })
 
-addFilter('errorSummary_V7', function (claim) {
+addFilter('errorSummary', function (claim) {
     let errorSummaryStr = ''
 
     if (claim.type == "TU") {
@@ -249,7 +249,7 @@ addFilter('errorSummary_V7', function (claim) {
     return errorSummaryStr
 }, { renderAsHtml: true })
 
-addFilter('findClaim_V7', function (claimID, claims) {
+addFilter('findClaim', function (claimID, claims) {
     let claim  = null;
 
     for (let c of claims) {

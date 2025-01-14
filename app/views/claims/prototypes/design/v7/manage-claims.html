@@ -1,7 +1,7 @@
 {% extends "./layouts/claims-main.html" %}
 
 {% block pageTitle %}
-{{ ["Manage claims - ", (data.claimType | potName_V7)] | join }}
+{{ ["Manage claims - ", (data.claimType | potName)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
@@ -11,7 +11,7 @@
       <a class="govuk-breadcrumbs__link" href="home">Home</a>
     </li>
     <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="manage-claims?claimType=TU">Manage claims ({{ data.claimType | potName_V7
+      <a class="govuk-breadcrumbs__link" href="manage-claims?claimType=TU">Manage claims ({{ data.claimType | potName
         }})</a>
     </li>
   </ol>
@@ -23,12 +23,12 @@
   <div class="govuk-grid-column-full">
     <div class="moj-page-header-actions">
       <div class="moj-page-header-actions__title">
-        <span class="govuk-caption-xl">{{ data.claimType | potName_V7 }}</span>
+        <span class="govuk-caption-xl">{{ data.claimType | potName }}</span>
         <h1 class="govuk-heading-xl">Manage claims</h1>
       </div>
       <div class="moj-page-header-actions__actions">
         <div class="moj-button-group moj-button-group--inline">
-            <form method="post" action="{{ data.claimType | newClaimLink_V7 }}" class="govuk-!-margin-0">
+            <form method="post" action="{{ data.claimType | newClaimLink }}" class="govuk-!-margin-0">
               <button class="govuk-button moj-button-menu__item govuk-button--primary moj-page-header-actions__action"
                 data-module="govuk-button" type="submit">Start a new claim</button>
             </form>
@@ -86,7 +86,7 @@
         {% for status in data.statuses %}
         <li class="govuk-tabs__list-item">
           <a class="govuk-tabs__tab" href="#{{ status.id }}">
-            {{ status.name }} ({{ status.id | claimCount_V7(data.claims, data.claimType) }})
+            {{ status.name }} ({{ status.id | claimCount(data.claims, data.claimType) }})
           </a>
         </li>
         {% endfor %}

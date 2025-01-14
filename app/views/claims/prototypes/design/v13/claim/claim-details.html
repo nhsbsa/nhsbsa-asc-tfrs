@@ -1,18 +1,18 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V13(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% if claim.claimType == "60" %}
-  {% set pairClaim = claim.claimID | findPair_V13(data.claims) %}
+  {% set pairClaim = claim.claimID | findPair(data.claims) %}
 {% elif claim.claimType == "40" %}
   {% set pairClaim = claim %}
-  {% set claim = pairClaim.claimID | findPair_V13(data.claims) %}
+  {% set claim = pairClaim.claimID | findPair(data.claims) %}
 {% endif %}
 
 {% block pageTitle %}
 {% if (claim.fundingType == "TU" and claim.claimType == "100") %}
 {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Claim: {{claim.claimID}} — {{serviceName}} — GOV.UK
 {% else %}
-{% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Combined claim: {{claim.claimID | removeClaimSuffix_V13}} — {{serviceName}} — GOV.UK
+{% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Combined claim: {{claim.claimID | removeClaimSuffix}} — {{serviceName}} — GOV.UK
 {% endif %}
 {% endblock %}
 
@@ -39,7 +39,7 @@
       {% if (claim.fundingType == "TU" and claim.claimType == "100") %}
         Claim: {{ claim.claimID }}
       {% else %}
-        Combined claim: {{ claim.claimID | removeClaimSuffix_V13 }}
+        Combined claim: {{ claim.claimID | removeClaimSuffix }}
       {% endif %}
     </h1>
   </div>
@@ -56,7 +56,7 @@
 
     {% if (claim.fundingType == "TU" and claim.claimType == "100") %}
 
-      <p class="govuk-body">This {{ claim.claimType | typeTag_V13 }} claim is {{ claim.status | statusTag_V13(data.statuses) }}</p>
+      <p class="govuk-body">This {{ claim.claimType | typeTag }} claim is {{ claim.status | statusTag(data.statuses) }}</p>
 
       {% if claim.status == "rejected" %}
       <h2 class="govuk-heading-s">Rejection note</h2>
@@ -65,9 +65,9 @@
 
     {% elif claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
 
-      <p class="govuk-body">The {{ "60" | typeTag_V13 }} part of this claim is {{ claim.status | statusTag_V13(data.statuses) }}</p>
+      <p class="govuk-body">The {{ "60" | typeTag }} part of this claim is {{ claim.status | statusTag(data.statuses) }}</p>
 
-      <p class="govuk-body">The {{ "40" | typeTag_V13 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V13(data.statuses) }} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+      <p class="govuk-body">The {{ "40" | typeTag }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag(data.statuses) }} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
 
       {% if claim.status == "rejected" %}
         <h2 class="govuk-heading-s">Rejection note</h2>

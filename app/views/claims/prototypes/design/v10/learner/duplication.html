@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V10(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 {{ ["Duplicate learner - Claim: ", data.id] | join }}
@@ -31,7 +31,7 @@
                     Last (family) name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.familyName | learnerMatch_V10(data.learnerMatch.familyName, "new") }}
+                    {{ data.familyName | learnerMatch(data.learnerMatch.familyName, "new") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -39,7 +39,7 @@
                     First (given) name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.givenName | learnerMatch_V10(data.learnerMatch.givenName, "new") }}
+                    {{ data.givenName | learnerMatch(data.learnerMatch.givenName, "new") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -47,7 +47,7 @@
                     National Insurance number
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.nationalInsuranceNumber | learnerMatch_V10(data.learnerMatch.id, "new") }}
+                    {{ data.nationalInsuranceNumber | learnerMatch(data.learnerMatch.id, "new") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -55,7 +55,7 @@
                     Job title
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.jobTitle | learnerMatch_V10(data.learnerMatch.jobTitle, "new") }}
+                    {{ data.jobTitle | learnerMatch(data.learnerMatch.jobTitle, "new") }}
                 </dd>
             </div>
         </dl>
@@ -68,7 +68,7 @@
                     Last (family) name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.familyName | learnerMatch_V10(data.learnerMatch.familyName, "match") }}
+                    {{ data.familyName | learnerMatch(data.learnerMatch.familyName, "match") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -76,7 +76,7 @@
                     First (given) name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.givenName | learnerMatch_V10(data.learnerMatch.givenName, "match") }}
+                    {{ data.givenName | learnerMatch(data.learnerMatch.givenName, "match") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -84,7 +84,7 @@
                     National Insurance number
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.nationalInsuranceNumber | learnerMatch_V10(data.learnerMatch.id, "match") }}
+                    {{ data.nationalInsuranceNumber | learnerMatch(data.learnerMatch.id, "match") }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -92,7 +92,7 @@
                     Job title
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.jobTitle | learnerMatch_V10(data.learnerMatch.jobTitle, "match") }}
+                    {{ data.jobTitle | learnerMatch(data.learnerMatch.jobTitle, "match") }}
                 </dd>
             </div>
         </dl>

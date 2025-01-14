@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V11(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 Select training - new claim
@@ -80,7 +80,7 @@ Select training - new claim
         {% set addHeader = true %}
 
         {% for training in trainingGroup.courses %}
-        {% set match = data['training-input'] | trainingSearch_V11(training) %}
+        {% set match = data['training-input'] | trainingSearch(training) %}
 
         {% if match %}
         {% set hasResults = true %}

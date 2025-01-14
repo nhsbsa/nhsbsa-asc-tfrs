@@ -1,7 +1,7 @@
 {% extends "../layouts/processing-main.html" %}
 
 {% set claim = data.id | findClaim_V8(data.claims) %}
-{% set learner = claim.learner.id | findLearner_V3(data.learners) %}
+{% set learner = claim.learner.id | findLearner(data.learners) %}
 
 {% block pageTitle %}
 {{ ["Confirm outcome: ", claim.claimID, " - process a claim"] | join }}
@@ -19,9 +19,9 @@
         "reject" %}rejected{% endif %}</span>.</p>
     {% if data.result == "approve" %}
       {% if claim.fundingType == "TU" %}
-        <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement_V3(data.paymentReimbursementAmount) }}</span> in reimbursement.</p>
+        <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">£{{ claim | reimbursement(data.paymentReimbursementAmount) }}</span> in reimbursement.</p>
       {% elif claim.fundingType == "CPD" %}
-        {{ claim | reimbursementCPD_V3(learner)}}
+        {{ claim | reimbursementCPD(learner)}}
       {% endif %}
     <details class="govuk-details">
       <summary class="govuk-details__summary">
@@ -40,27 +40,27 @@
           </ul>
 
         {% elif (claim.fundingType == "TU") and (claim.claimType == "60")  %}
-          <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £{{ claim | reimbursement_V3(data.paymentReimbursementAmount) / 0.6 }}.</p>
+          <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £{{ claim | reimbursement(data.paymentReimbursementAmount) / 0.6 }}.</p>
           <p>This is whichever is the lower of:</p>
           <ul class="govuk-list govuk-list--bullet">
               <li>the maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
               <li>what the organisation actually paid (£{{data.paymentReimbursementAmount}}) &ndash; this was the <strong>cost per learner</strong> value you entered on the last screen</li>
           </ul>
-          <p>For this 60 part of the claim the organisation will get 60% of the total amount, which is <strong>£{{ (claim | reimbursement_V3(data.paymentReimbursementAmount)) }}</strong>.</p>
-          <p>When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim | reimbursement_V3(data.paymentReimbursementAmount) / 0.6 * 0.4)}}).</p>
+          <p>For this 60 part of the claim the organisation will get 60% of the total amount, which is <strong>£{{ (claim | reimbursement(data.paymentReimbursementAmount)) }}</strong>.</p>
+          <p>When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim | reimbursement(data.paymentReimbursementAmount) / 0.6 * 0.4)}}).</p>
 
         {% elif (claim.fundingType == "TU") and (claim.claimType == "40")  %}
-          <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim | reimbursement_V3(data.paymentReimbursementAmount) / 0.4) }}.</p>
+          <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim | reimbursement(data.paymentReimbursementAmount) / 0.4) }}.</p>
           <p>This is whichever is the lower of:</p>
           <ul class="govuk-list govuk-list--bullet">
               <li>the maximum reimbursement amount (£{{claim.training.reimbursementAmount}})</li>
               <li>what the organisation actually paid (£{{data.paymentReimbursementAmount}})</li>
           </ul>
-          <p>For this 40 part of the claim the organisation will get 40% of the total amount, which is <strong>£{{ (claim | reimbursement_V3(data.paymentReimbursementAmount)) }}</strong>.</p>
-          <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement_V3(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>
+          <p>For this 40 part of the claim the organisation will get 40% of the total amount, which is <strong>£{{ (claim | reimbursement(data.paymentReimbursementAmount)) }}</strong>.</p>
+          <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>
           
         {% elif (claim.fundingType == "CPD") %}
-          <p class="govuk-body">{{claim | reimbursementExplanation_V3(learner)}}</p>
+          <p class="govuk-body">{{claim | reimbursementExplanation(learner)}}</p>
         {% endif %}
       </div>
     </details>

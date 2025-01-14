@@ -8,7 +8,7 @@ const addFilter = govukPrototypeKit.views.addFilter
 const { removeSpacesAndCharactersAndLowerCase } = require('../helpers/helpers.js');
 
 const fs = require('fs');
-addFilter('statusTag_V13', function (statusID, statuses) {
+addFilter('statusTag', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -28,7 +28,7 @@ addFilter('statusTag_V13', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
-addFilter('claimCount_V13', function (statusID, claims, claimType) {
+addFilter('claimCount', function (statusID, claims, claimType) {
     let i = 0
     for (const c of claims) {
         if (c.status == statusID && c.fundingType == claimType) {
@@ -38,11 +38,11 @@ addFilter('claimCount_V13', function (statusID, claims, claimType) {
     return i
 })
 
-addFilter('pageCount_V13', function (content, perPage) {
+addFilter('pageCount', function (content, perPage) {
     return Math.ceil(content / perPage)
 })
 
-addFilter('statusName_V13', function (statusID, statuses) {
+addFilter('statusName', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -52,7 +52,7 @@ addFilter('statusName_V13', function (statusID, statuses) {
     return statusName
 })
 
-addFilter('statusDetails_V13', function (statusID, statuses) {
+addFilter('statusDetails', function (statusID, statuses) {
     let status = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -62,7 +62,7 @@ addFilter('statusDetails_V13', function (statusID, statuses) {
     return status
 })
 
-addFilter('variableDate_V13', function (statusID) {
+addFilter('variableDate', function (statusID) {
     if (statusID == 'not-yet-submitted') {
         return 'Created'
     } else if (statusID == 'submitted') {
@@ -76,13 +76,13 @@ addFilter('variableDate_V13', function (statusID) {
     }
 })
 
-addFilter('removeSpacesAndCharactersAndLowerCase_V13', function (inputString) {
+addFilter('removeSpacesAndCharactersAndLowerCase', function (inputString) {
     // Convert the string to lowercase
     let outputString = removeSpacesAndCharactersAndLowerCase(inputString);
     return outputString;
 })
 
-addFilter('potName_V13', function (type) {
+addFilter('potName', function (type) {
     let name = "Pot Naming Error"
     if (type == "TU") {
         name = "Care skills funding"
@@ -90,13 +90,13 @@ addFilter('potName_V13', function (type) {
     return name
 })
 
-addFilter('checkEligible_V13', function (learner, type, roleTypes) {
+addFilter('checkEligible', function (learner, type, roleTypes) {
     let eligibleRoles = []
     eligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
     return eligibleRoles.includes(learner.roleType)
 })
 
-addFilter('errorSummary_V13', function (claim, submitError) {
+addFilter('errorSummary', function (claim, submitError) {
     let errorSummaryStr = ''
 
     if (submitError.description == "missing") {
@@ -135,7 +135,7 @@ addFilter('errorSummary_V13', function (claim, submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true })
 
-addFilter('findClaim_V13', function (claimID, claims) {
+addFilter('findClaim', function (claimID, claims) {
     let claim = null;
     var searchedClaimID = claimID.replace(/[-\s]+/g, '');
     for (let c of claims) {
@@ -147,7 +147,7 @@ addFilter('findClaim_V13', function (claimID, claims) {
     return claim;
 })
 
-addFilter('findUser_V13', function (email, users) {
+addFilter('findUser', function (email, users) {
     let user = null;
     for (let u of users) {
         if (u.email == email) {
@@ -157,7 +157,7 @@ addFilter('findUser_V13', function (email, users) {
     return user;
 })
 
-addFilter('groupByTitle_V13', function (training) {
+addFilter('groupByTitle', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const organizedData = {};
     for (const course of qualificationsObject.courses) {
@@ -170,7 +170,7 @@ addFilter('groupByTitle_V13', function (training) {
     return organizedData;
 })
 
-addFilter('getUniqueCourseTitles_V13', function (training) {
+addFilter('getUniqueCourseTitles', function (training) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     const uniqueTitles = [];
 
@@ -182,7 +182,7 @@ addFilter('getUniqueCourseTitles_V13', function (training) {
     return uniqueTitles
 })
 
-addFilter('getCount_V13', function (items) {
+addFilter('getCount', function (items) {
     let count = 0;
     if (items != null) {
         for (const c of items) {
@@ -193,7 +193,7 @@ addFilter('getCount_V13', function (items) {
 })
 
 
-addFilter('formatCount_V13', function (courses) {
+addFilter('formatCount', function (courses) {
     let count = courses.length;
     let text = count + " provider";
     if (count > 1) {
@@ -202,7 +202,7 @@ addFilter('formatCount_V13', function (courses) {
     return text;
 })
 
-addFilter('dateErrorMessage_V13', function (dateErrorObject, dateType, errorSection) {
+addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection) {
     const errorMessages = [];
 
     if (errorSection == 'summary') {
@@ -250,7 +250,7 @@ addFilter('dateErrorMessage_V13', function (dateErrorObject, dateType, errorSect
     return errorMessages.join('');
 }, { renderAsHtml: true })
 
-addFilter('dateErrorFormat_V13', function (dateErrorObject, type) {
+addFilter('dateErrorFormat', function (dateErrorObject, type) {
     let state = false
     if (dateErrorObject) {
         if (type == "day") {
@@ -270,7 +270,7 @@ addFilter('dateErrorFormat_V13', function (dateErrorObject, type) {
     return state;
 })
 
-addFilter('listItemVariableDate_V13', function (statusID, claim) {
+addFilter('listItemVariableDate', function (statusID, claim) {
     if (statusID == 'not-yet-submitted') {
         return 'Created ' + formatDate(claim.createdDate)
     } else if (statusID == 'submitted') {
@@ -284,7 +284,7 @@ addFilter('listItemVariableDate_V13', function (statusID, claim) {
     }
 })
 
-addFilter('listItemVariableSort_V13', function (statusID, claim) {
+addFilter('listItemVariableSort', function (statusID, claim) {
     if (statusID == 'not-yet-submitted') {
         return 'Recently created'
     } else if (statusID == 'submitted') {
@@ -309,7 +309,7 @@ function formatDate(dateStr) {
     return formattedDate;
 }
 
-addFilter('relativeDateFromDateToToday_V13', function (dateStr) {
+addFilter('relativeDateFromDateToToday', function (dateStr) {
     const inputDate = new Date(dateStr);
     const currentDate = new Date();
     const differenceInMs = currentDate - inputDate;
@@ -330,7 +330,7 @@ addFilter('relativeDateFromDateToToday_V13', function (dateStr) {
     }
 })
 
-addFilter('findMatchingTraining_V13', function (claim, training) {
+addFilter('findMatchingTraining', function (claim, training) {
     // Extracting titles from training array's Qualifications courses
     const qualificationTitles = training.reduce((acc, group) => {
         if (group.groupTitle == "Qualifications") {
@@ -345,7 +345,7 @@ addFilter('findMatchingTraining_V13', function (claim, training) {
     return false;
 })
 
-addFilter('formatTrainingDate_V13', function (date) {
+addFilter('formatTrainingDate', function (date) {
     let isValidDate = false
     if (date != "Invalid DateTime") {
         isValidDate = true
@@ -353,7 +353,7 @@ addFilter('formatTrainingDate_V13', function (date) {
     return isValidDate
 })
 
-addFilter('learnerErrorMessage_V13', function (submitError) {
+addFilter('learnerErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
@@ -375,7 +375,7 @@ addFilter('learnerErrorMessage_V13', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true })
 
-addFilter('learnerMatch_V13', function (newField, matchField, type) {
+addFilter('learnerMatch', function (newField, matchField, type) {
     let result = ''
 
     if (newField != matchField) {
@@ -392,7 +392,7 @@ addFilter('learnerMatch_V13', function (newField, matchField, type) {
     return result
 }, { renderAsHtml: true })
 
-addFilter('learnerSearch_V13', function (search, learner) {
+addFilter('learnerSearch', function (search, learner) {
     let match = false
     const formattedgivenName = removeSpacesAndCharactersAndLowerCase(learner.givenName);
     const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(learner.familyName);
@@ -406,7 +406,7 @@ addFilter('learnerSearch_V13', function (search, learner) {
     return match
 })
 
-addFilter('trainingSearch_V13', function (search, training) {
+addFilter('trainingSearch', function (search, training) {
     let match = false
     const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
     const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
@@ -420,7 +420,7 @@ addFilter('trainingSearch_V13', function (search, training) {
 })
 
 
-addFilter('bankErrorMessage_V13', function (bankErrorObject) {
+addFilter('bankErrorMessage', function (bankErrorObject) {
     const errorMessages = [];
 
     if (bankErrorObject.accountName === 'missing') {
@@ -449,7 +449,7 @@ addFilter('bankErrorMessage_V13', function (bankErrorObject) {
     return errorMessages.join('');
 }, { renderAsHtml: true })
 
-addFilter('trainingTypeCheck_V13', function (trainingCode, trainingList, matchType) {
+addFilter('trainingTypeCheck', function (trainingCode, trainingList, matchType) {
 
     for (let trainingGroup of trainingList) {
         for (let training of trainingGroup.courses) {
@@ -461,7 +461,7 @@ addFilter('trainingTypeCheck_V13', function (trainingCode, trainingList, matchTy
 
 })
 
-addFilter('findPair_V13', function (claimID, claims) {
+addFilter('findPair', function (claimID, claims) {
 
     for (let claim of claims) {
         const id = claim.claimID;
@@ -474,7 +474,7 @@ addFilter('findPair_V13', function (claimID, claims) {
     return null; // Return null if no match is found
 })
 
-addFilter('typeTag_V13', function (type) {
+addFilter('typeTag', function (type) {
     switch (type) {
         case null:
             return ""
@@ -487,7 +487,7 @@ addFilter('typeTag_V13', function (type) {
     }
 }, { renderAsHtml: true })
 
-addFilter('sortByDate_V13', function (claims, statusID) {
+addFilter('sortByDate', function (claims, statusID) {
     if (statusID == 'not-yet-submitted') {
         return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
     } else if (statusID == 'submitted') {
@@ -501,7 +501,7 @@ addFilter('sortByDate_V13', function (claims, statusID) {
     }
 })
 
-addFilter('userType_V13', function (type) {
+addFilter('userType', function (type) {
     switch(type) {
         case "signatory":
         return "Signatory"
@@ -514,7 +514,7 @@ addFilter('userType_V13', function (type) {
     }
 })
 
-addFilter('userStatusTag_V13', function (status) {
+addFilter('userStatusTag', function (status) {
     switch(status) {
         case "active":
         return '<strong class="govuk-tag govuk-tag--turquoise">Active</strong>'
@@ -531,7 +531,7 @@ addFilter('userStatusTag_V13', function (status) {
     }
 }, { renderAsHtml: true })
 
-addFilter('userErrorMessage_V13', function (submitError) {
+addFilter('userErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
@@ -552,7 +552,7 @@ addFilter('userErrorMessage_V13', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true })
 
-addFilter('matchResend_V13', function (resendList, email) {
+addFilter('matchResend', function (resendList, email) {
     if (resendList != null && resendList != "") {
         for (const e of resendList) {
             if (e === email) {
@@ -563,7 +563,7 @@ addFilter('matchResend_V13', function (resendList, email) {
     return false
 })
 
-addFilter('expireTime_V13', function (isoDateTime) {
+addFilter('expireTime', function (isoDateTime) {
     const inputDateTime = new Date(isoDateTime);
     const currentDateTime = new Date();
     const oneDayInMillis = 24 * 60 * 60 * 1000;
@@ -593,7 +593,7 @@ addFilter('expireTime_V13', function (isoDateTime) {
 })
 
 
-addFilter('countMatchingStatus_V13', function (objectsArray, statusString) {
+addFilter('countMatchingStatus', function (objectsArray, statusString) {
     // Initialize a counter to keep track of the matching objects
     let count = 0;
 
@@ -611,7 +611,7 @@ addFilter('countMatchingStatus_V13', function (objectsArray, statusString) {
 })
 
 
-addFilter('75CharacterCount_V13', function (description) {
+addFilter('75CharacterCount', function (description) {
 
     let limit = 75
     if (description.length <= limit) {
@@ -630,7 +630,7 @@ addFilter('75CharacterCount_V13', function (description) {
 })
 
 
-addFilter('removeClaimSuffix_V13', function (claimID) {
+addFilter('removeClaimSuffix', function (claimID) {
     // Check if the string has at least two characters
     if (claimID.length < 2) {
         return ''; // Return an empty string if there are less than two characters
@@ -640,7 +640,7 @@ addFilter('removeClaimSuffix_V13', function (claimID) {
 })
 
 
-addFilter('isCostMoreThanMax_V13', function (amount) {
+addFilter('isCostMoreThanMax', function (amount) {
     if (amount > 500) {
         return true
     } else {
@@ -668,7 +668,7 @@ addFilter('statusTag_V7', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
-addFilter('uniqueDates_V13', function (claims, dateType) {
+addFilter('uniqueDates', function (claims, dateType) {
 
     const uniqueMonthYears = new Set();
 
@@ -683,7 +683,7 @@ addFilter('uniqueDates_V13', function (claims, dateType) {
     return sortedMonthYears
 })
 
-addFilter('formatDate_V13', function (date) {
+addFilter('formatDate', function (date) {
     const startDate = new Date(date);
     const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
     const [year, month] = monthYear.split('-');
@@ -692,7 +692,7 @@ addFilter('formatDate_V13', function (date) {
     return formatter.format(formattedDate);
 })
 
-addFilter('availableStatus_V13', function (claims) {
+addFilter('availableStatus', function (claims) {
     const uniqueStatuses = new Set();
     claims.forEach(claim => {
         uniqueStatuses.add(claim.status);
@@ -700,7 +700,7 @@ addFilter('availableStatus_V13', function (claims) {
     return Array.from(uniqueStatuses);
 })
 
-addFilter('uniqueTypes_V13', function (claims) {
+addFilter('uniqueTypes', function (claims) {
     const uniqueTypes = new Set();
     claims.forEach(claim => {
 
@@ -710,7 +710,7 @@ addFilter('uniqueTypes_V13', function (claims) {
     return sortedTypes
 })
 
-addFilter('formatStatus_V13', function (status) {
+addFilter('formatStatus', function (status) {
     if (status === "not-yet-submitted") {
         return "Not yet submitted"
     } else if (status === "submitted") {
@@ -722,7 +722,7 @@ addFilter('formatStatus_V13', function (status) {
     }
 })
 
-addFilter('claimsMatchAdvancedSearchA_V13', function (claims, training, learner) {
+addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner) {
     const formattedTraining = removeSpacesAndCharactersAndLowerCase(training);
     const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
 
@@ -770,7 +770,7 @@ addFilter('claimsMatchAdvancedSearchA_V13', function (claims, training, learner)
     return searched
 })
 
-addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner, submitter, statuses, types, dateType, startMonth, startYear, endMonth, endYear) {
+addFilter('claimsMatchAdvancedSearchB', function (claims, training, learner, submitter, statuses, types, dateType, startMonth, startYear, endMonth, endYear) {
     const formattedTraining = removeSpacesAndCharactersAndLowerCase(training);
     const formattedSubmitter = removeSpacesAndCharactersAndLowerCase(submitter);
 
@@ -880,7 +880,7 @@ addFilter('claimsMatchAdvancedSearchB_V13', function (claims, training, learner,
     }
 })
 
-addFilter('filteredClaims_V13', function (claims, statuses, dates, types) {
+addFilter('filteredClaims', function (claims, statuses, dates, types) {
     var filtered = claims.filter(claim => {
         let statusCheck = true;
         if (statuses != null && statuses != "") {
@@ -916,7 +916,7 @@ addFilter('filteredClaims_V13', function (claims, statuses, dates, types) {
     return filtered;
 });
 
-addFilter('statusArray_V13', function (statusString) { 
+addFilter('statusArray', function (statusString) { 
     let availableStatus = ["not-yet-submitted", "submitted", "rejected", "approved"]
     let returnedArray = []
     if (statusString != null && statusString != "") {
@@ -929,13 +929,13 @@ addFilter('statusArray_V13', function (statusString) {
     return returnedArray
 });
 
-addFilter('startDateArray_V13', function (startDateString) { 
+addFilter('startDateArray', function (startDateString) { 
     if (startDateString != null && startDateString != "") {
         return startDateString.split("+");
     }
 });
 
-addFilter('typeArray_V13', function (typeString) { 
+addFilter('typeArray', function (typeString) { 
     let availableTypes = ["100", "60", "40"]
     let returnedArray = []
     if (typeString != null && typeString != "") {
@@ -948,7 +948,7 @@ addFilter('typeArray_V13', function (typeString) {
     return returnedArray
 });
 
-addFilter('formatDateType_V13', function (status) {
+addFilter('formatDateType', function (status) {
     if (status === "started") {
         return "Started from"
     } else if (status === "created") {
@@ -962,7 +962,7 @@ addFilter('formatDateType_V13', function (status) {
     }
 })
 
-addFilter('isSelected_V13', function (valueArray, status) { 
+addFilter('isSelected', function (valueArray, status) { 
     var selected = false 
     if (valueArray != null && valueArray != "") {
             if (valueArray.includes(status)) {
@@ -973,7 +973,7 @@ addFilter('isSelected_V13', function (valueArray, status) {
 });
 
 
-addFilter('userCountNotExpired_V13', function (users) { 
+addFilter('userCountNotExpired', function (users) { 
     var count = false 
     if (users != null && users != "") {
         for (const u of users) {

@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set user = data.deletedEmail | findUser_V13(data.users) %}
+{% set user = data.deletedEmail | findUser(data.users) %}
 
 {% if user.status == "active" %}
   {% set usertype = "registered" %}

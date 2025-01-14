@@ -35,6 +35,24 @@ router.use('/processing/prototypes/design/v7/', require('./views/processing/prot
 
 // Add your routes here
 router.use((req, res, next) => {
+
+  //Load the correct version of the filters to use based on the version number
+  // Use a regular expression to extract the section ("processing" or "claims") and the version number
+  const match = req.path.match(/\/(processing|claims)\/.*\/v(\d+)\//);
+
+  if (match) {
+    const section = match[1]; // "processing" or "claims"
+    const version = match[2]; // e.g., "7" for v7
+    try {
+        // Dynamically require the filters file based on the section and version
+        const filtersPath = '../app/views/' + section + '/prototypes/design/v' + version + '/filters/filters.js';
+        require(filtersPath);
+        console.log('Filters applied for ' + section + ' v' + version);
+    } catch (error) {
+        console.log('No filters file for this version');
+    }
+  }
+
   // Define keys to exclude from logging
   const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes', 'CPDActivities', 'versionHistory', 'users', 'processingServiceName'];
 

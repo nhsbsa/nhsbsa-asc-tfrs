@@ -34,7 +34,7 @@
   </div>
   {% endif %}
 
-  {% if ( claim.evidenceOfPayment | getCount_V13 == 0 ) %}
+  {% if ( claim.evidenceOfPayment | getCount == 0 ) %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =="missing" %}
       <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
         <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-evidence-error">
