@@ -1,15 +1,15 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V11(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% if claim.claimType == "60" %}
-{% set pairClaim = claim.claimID | findPair_V11(data.claims) %}
+{% set pairClaim = claim.claimID | findPair(data.claims) %}
 {% elif claim.claimType == "40" %}
 {% set pairClaim = claim %}
-{% set claim = pairClaim.claimID | findPair_V11(data.claims) %}
+{% set claim = pairClaim.claimID | findPair(data.claims) %}
 {% endif %}
 
 {% block pageTitle %}
-{{ ["Claim: ", claim.claimID, " - ", (claim.fundingType | potName_V11)] | join }}
+{{ ["Claim: ", claim.claimID, " - ", (claim.fundingType | potName)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
@@ -25,12 +25,12 @@
     {% if data.submitError.claimValid != null and not data.submitError.claimValid %}
     {% include "../_components/claim-sections/errorCatch.html" %}
     {% endif %}
-    <span class="govuk-caption-xl">{{ claim.fundingType | potName_V11 }}</span>
+    <span class="govuk-caption-xl">{{ claim.fundingType | potName }}</span>
     <h1 class="govuk-heading-xl">
       {% if (claim.fundingType == "TU" and claim.claimType == "100") or (claim.fundingType == "CPD") %}
         Claim: {{ claim.claimID }}
       {% else %}
-        Combined claim: {{ claim.claimID | removeClaimSuffix_V11 }}
+        Combined claim: {{ claim.claimID | removeClaimSuffix }}
       {% endif %}
     </h1>
   </div>
@@ -47,7 +47,7 @@
 
     {% if (claim.fundingType == "TU" and claim.claimType == "100") or claim.fundingType == "CPD" %}
 
-    <p class="govuk-body">This {{ claim.claimType | typeTag_V11 }} claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
+    <p class="govuk-body">This {{ claim.claimType | typeTag }} claim is {{ claim.status | statusTag(data.statuses) }}</p>
 
     {% if claim.fundingType == "CPD" and (claim.status == "not-yet-submitted" or claim.status == "new") %}
     <p class="govuk-body">Claims must each be for a single revalidation activity. Claims for multiple activities will be rejected. Start a separate claim for each activity.</p>
@@ -58,9 +58,9 @@
 
     {% elif claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
 
-    <p class="govuk-body">The {{ "60" | typeTag_V11 }} part of this claim is {{ claim.status | statusTag_V11(data.statuses) }}</p>
+    <p class="govuk-body">The {{ "60" | typeTag }} part of this claim is {{ claim.status | statusTag(data.statuses) }}</p>
 
-    <p class="govuk-body">The {{ "40" | typeTag_V11 }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag_V11(data.statuses) }} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+    <p class="govuk-body">The {{ "40" | typeTag }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag(data.statuses) }} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
 
     {% if claim.status == "rejected" %}
     <h2 class="govuk-heading-s">Rejection note</h2>

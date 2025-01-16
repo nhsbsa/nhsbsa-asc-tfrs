@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V7(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 {{ ["Select learner - Claim: ", claim.claimID] | join }}
@@ -58,9 +58,9 @@
         {% for learner in data['learners'] %}
         {% set lowercasedsearch = data['learnerInput'] | lower %}
         {% set lowercasedname = learner.fullName | lower %}
-        {% set formattedSearch = data['learnerInput'] | removeSpacesAndLowerCase_V7 %}
-        {% set formattedID = learner.id | removeSpacesAndLowerCase_V7 %}
-        {% set eligibleCheck = learner | checkEligible_V7(data.claimType, data.roleTypes) %}
+        {% set formattedSearch = data['learnerInput'] | removeSpacesAndLowerCase %}
+        {% set formattedID = learner.id | removeSpacesAndLowerCase %}
+        {% set eligibleCheck = learner | checkEligible(data.claimType, data.roleTypes) %}
         {% if (lowercasedname == lowercasedsearch or learner.id == data['learnerInput'] or lowercasedsearch in
         lowercasedname or formattedSearch in formattedID) and eligibleCheck %}
         {% set hasResults = true %}
@@ -104,7 +104,7 @@
                         {% elif learnerAdded and eligibleCheck %}
                         <p class="govuk-body">Already added to claim</p>
                         {% elif not eligibleCheck %}
-                        <p class="govuk-body">Not eligible for {{ data.claimType | potName_V7 }}<br><a href="#"
+                        <p class="govuk-body">Not eligible for {{ data.claimType | potName }}<br><a href="#"
                                 class="govuk-link">What does this mean?</a></p>
                         {% else %}
                         <p class="govuk-body">Error checking eligibility</p>

@@ -5,10 +5,10 @@
       Name
     </dt>
     <dd class="govuk-summary-list__value">
-      {% if claim.training.code | trainingTypeCheck_V9(data.training, "Courses") %}
+      {% if claim.training.code | trainingTypeCheck(data.training, "Courses") %}
       <p class="govuk-body">{{ claim.training.code }}</p>
       <p class="govuk-body">{{ claim.training.title }}</p>
-      {% elif claim.training.code | trainingTypeCheck_V9(data.training, "Qualifications") %}
+      {% elif claim.training.code | trainingTypeCheck(data.training, "Qualifications") %}
       <p class="govuk-body">{{ claim.training.code }}</p>
       <p class="govuk-body">{{ claim.training.title }}</p>
       <p class="govuk-body">{{ claim.training.type }}</p>

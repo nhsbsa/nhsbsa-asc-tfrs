@@ -1,6 +1,6 @@
 {% set hasResults = false %}
 {% set addHeader = true %}
-{% for claim in data['claims'] | sortByDate_V10(status.id) %}
+{% for claim in data['claims'] | sortByDate(status.id) %}
 {% if claim.status == status.id and claim.fundingType == data.fundingPot %} {% set hasResults=true %} {%
     if addHeader %} <table class="govuk-table">
     <thead class="govuk-table__head">
@@ -8,7 +8,7 @@
             <th class="govuk-table__header" scope="col" width="22%">Claim reference</th>
             <th class="govuk-table__header" scope="col" width="38%">Activity</th>
             <th class="govuk-table__header" scope="col" width="25%">Learner</th>
-            <th class="govuk-table__header" scope="col" width="15%">{{ status.id | variableDate_V10 }}</th>
+            <th class="govuk-table__header" scope="col" width="15%">{{ status.id | variableDate }}</th>
         </tr>
     </thead>
     <tbody class="govuk-table__body">

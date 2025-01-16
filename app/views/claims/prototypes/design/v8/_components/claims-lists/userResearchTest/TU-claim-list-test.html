@@ -10,7 +10,7 @@
             <th class="govuk-table__header govuk-!-width-one-third" scope="col" aria-sort="none">Training</th>
             <th class="govuk-table__header" scope="col" aria-sort="none">Started</th>
             <th class="govuk-table__header" scope="col" aria-sort="none">Learner</th>
-            <th class="govuk-table__header" scope="col" aria-sort="descending">{{ status.id | variableDate_V8 }}</th>
+            <th class="govuk-table__header" scope="col" aria-sort="descending">{{ status.id | variableDate }}</th>
         </tr>
     </thead>
     <tbody class="govuk-table__body">
@@ -64,7 +64,7 @@
             <li class="moj-pagination__item moj-pagination__item--dots">…</li>
 
             <li class="moj-pagination__item"><a class="moj-pagination__link" href="#" aria-label="Page 5 of 30">{{
-                    noClaims | pageCount_V8(data.filters.perPage | default (10)) }}</a></li>
+                    noClaims | pageCount(data.filters.perPage | default (10)) }}</a></li>
 
 
             <li class="moj-pagination__item  moj-pagination__item--next">

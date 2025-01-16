@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V13(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 Are you sure you want to delete this claim? — {{serviceName}} — GOV.UK

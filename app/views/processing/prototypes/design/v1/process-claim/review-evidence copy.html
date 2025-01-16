@@ -1,6 +1,6 @@
 {% extends "../layouts/processing-main.html" %}
 
-{% set claim = data.id | findClaim_V8(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 {{ ["Review evidence claim: ", claim.claimID, " - process a claim"] | join }}
@@ -14,7 +14,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Review evidence of payment</span>
-        <h1 class="govuk-heading-l">{{ data.criteria | criteriaQuestions_V1(data.type, claim, "true") }}</h1>
+        <h1 class="govuk-heading-l">{{ data.criteria | criteriaQuestions(data.type, claim, "true") }}</h1>
     </div>
 </div>
 
@@ -44,7 +44,7 @@
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        {{ data.criteria | criteriaQuestions_V1(data.type, claim, "false") }}
+                        {{ data.criteria | criteriaQuestions(data.type, claim, "false") }}
                     </legend>
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">

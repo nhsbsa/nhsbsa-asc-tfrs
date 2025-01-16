@@ -8,7 +8,7 @@ const addFilter = govukPrototypeKit.views.addFilter
 const { formatDate } = require('../helpers/helpers.js');
 const fs = require('fs');
 
-addFilter('processorstatusTag_V1', function (statusID) {
+addFilter('processorstatusTag', function (statusID) {
     if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Not yet processed</strong>'
     } else if (statusID == 'rejected' || statusID == 'approved') {
@@ -18,7 +18,7 @@ addFilter('processorstatusTag_V1', function (statusID) {
     }
 }, { renderAsHtml: true })
 
-addFilter('sectionCheck_V1', function (state) {
+addFilter('sectionCheck', function (state) {
     if (state != null) {
         return "Completed"
     } else if (state == null) {
@@ -28,17 +28,17 @@ addFilter('sectionCheck_V1', function (state) {
     }
 }, { renderAsHtml: true })
 
-addFilter('findClaim_V1', function (claims, id) {
-    var foundClaim = null
-    for (const claim of claims) {
-        if (claim.claimID == id) {
-            foundClaim = claim
+addFilter('findClaim', function (claimID, claims) {
+    let claim = null;
+    for (let c of claims) {
+        if (c.claimID == claimID) {
+            claim = c
         }
     }
-    return foundClaim
+    return claim;
 })
 
-addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
+addFilter('criteriaQuestions', function (criteria, type, claim, header) {
     if (type == "payment") {
         switch (criteria) {
             case "1":
@@ -90,7 +90,7 @@ addFilter('criteriaQuestions_V1', function (criteria, type, claim, header) {
     }
 }, { renderAsHtml: true })
 
-addFilter('criteriaAnswer_V1', function (criteria, type, claim) {
+addFilter('criteriaAnswer', function (criteria, type, claim) {
     if (type == "payment") {
         if (claim.evidenceOfPaymentreview["criteria" + criteria].result) {
             return "Yes"
@@ -107,11 +107,11 @@ addFilter('criteriaAnswer_V1', function (criteria, type, claim) {
 }, { renderAsHtml: true })
 
 
-addFilter('checkPDF_V1', function (str) {
+addFilter('checkPDF', function (str) {
     return str.endsWith(".pdf");
 })
 
-addFilter('evidenceBackLink_V1', function (criteriaNo, type) {
+addFilter('evidenceBackLink', function (criteriaNo, type) {
     if (criteriaNo == "1") {
         return "claim"
     } else {
@@ -121,12 +121,12 @@ addFilter('evidenceBackLink_V1', function (criteriaNo, type) {
 })
 
 
-addFilter('dateSort_V1', function (notes) {
+addFilter('dateSort', function (notes) {
     const sortedData = notes.sort((a, b) => new Date(b.date) - new Date(a.date));
     return sortedData
 })
 
-addFilter('reimbursement_V1', function (claim) {
+addFilter('reimbursement', function (claim) {
     if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
         return claim.reimbursementAmount
     } else {
@@ -136,7 +136,7 @@ addFilter('reimbursement_V1', function (claim) {
 });
 
 
-addFilter('rejectionNote_V1', function (claim) {
+addFilter('rejectionNote', function (claim) {
     rejectionNote = "<div class='govuk-inset-text'><h3 class='govuk-heading-s'>Claim rejected</h3>"
     if (!claim.evidenceOfPaymentreview.criteria1.result) {
         rejectionNote = rejectionNote + "<p class='govuk-body'>The payment evidence does not show the training was " + claim.training.title + ".<br>" + claim.evidenceOfPaymentreview.criteria1.note + "</p>"

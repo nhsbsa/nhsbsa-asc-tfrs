@@ -1,10 +1,10 @@
 {% extends "../layouts/processing-main.html" %}
 
-{% set foundOrganisation = data.organisations | findOrg_V5(data.orgID) %}
+{% set foundOrganisation = data.organisations | findOrg(data.orgID) %}
 
-{% set givenName = foundOrganisation.signatory.givenName | formatInformation_V5(data.givenName, data.edited, data.newOrg) %}
-{% set familyName = foundOrganisation.signatory.familyName | formatInformation_V5(data.familyName, data.edited, data.newOrg) %}
-{% set email = foundOrganisation.signatory.email | formatInformation_V5(data.email, data.edited, data.newOrg) %}
+{% set givenName = foundOrganisation.signatory.givenName | formatInformation(data.givenName, data.edited, data.newOrg) %}
+{% set familyName = foundOrganisation.signatory.familyName | formatInformation(data.familyName, data.edited, data.newOrg) %}
+{% set email = foundOrganisation.signatory.email | formatInformation(data.email, data.edited, data.newOrg) %}
 
 {% block pageTitle %}
 {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}Error: {% endif %}Senior Responsible Officer details — Register an organisation — {{data.processingServiceName}}
@@ -29,7 +29,7 @@
             </h2>
             <div class="govuk-error-summary__body">
               <ul class="govuk-list govuk-error-summary__list">
-                {{ data.submitError | signatoryErrorMessage_V9 }}
+                {{ data.submitError | signatoryErrorMessage }}
               </ul>
             </div>
           </div>

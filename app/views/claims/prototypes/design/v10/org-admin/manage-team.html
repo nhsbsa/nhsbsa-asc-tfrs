@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %} 
 
 
-{% set matchName = data.name | inviteName_V10 (data.users) %}
+{% set matchName = data.name | inviteName (data.users) %}
 
 
 {% block pageTitle %} 
@@ -72,7 +72,7 @@
             {% if user.status == "active" %}
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
-            <td class="govuk-table__cell" width="15%">{{ user.type | userType_V10 }}</td>
+            <td class="govuk-table__cell" width="15%">{{ user.type | userType }}</td>
             <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
             <td class="govuk-table__cell" width="20%"></td>
           </tr>
@@ -87,9 +87,9 @@
             {% if user.status != "active" %}
           <tr class="govuk-table__row">
             <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
-            <td class="govuk-table__cell" width="15%">{{ user.type | userType_V10 }}</td>
+            <td class="govuk-table__cell" width="15%">{{ user.type | userType }}</td>
             <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
-            <td class="govuk-table__cell" width="20%">{% if not (data.resendList | matchResend_V10(user.email)) %}<form action="../reinvite-user?name={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
+            <td class="govuk-table__cell" width="20%">{% if not (data.resendList | matchResend(user.email)) %}<form action="../reinvite-user?name={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
           </tr>
           {% endif %}
           {% endfor %}

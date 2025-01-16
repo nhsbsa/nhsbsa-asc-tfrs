@@ -1,11 +1,11 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V10(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 {% if claim.claimType == "60" or claim.claimType == "40" %}
-{% set pairID = claim.claimID | findPair_V10(data.claims) %}
+{% set pairID = claim.claimID | findPair(data.claims) %}
 {% endif %}
 
 {% block pageTitle %}
-{{ ["Claim: ", claim.claimID, " - ", (claim.fundingType | potName_V10)] | join }}
+{{ ["Claim: ", claim.claimID, " - ", (claim.fundingType | potName)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
@@ -37,7 +37,7 @@
     {% if data.submitError.claimValid != null and not data.submitError.claimValid %}
     {% include "../_components/claim-sections/errorCatch.html" %}
     {% endif %}
-    <span class="govuk-caption-l">{{ claim.fundingType | potName_V10 }}</span>
+    <span class="govuk-caption-l">{{ claim.fundingType | potName }}</span>
     <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}</h1>
   </div>
 </div>
@@ -57,7 +57,7 @@
           Status
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ claim.status | statusTag_V10(data.statuses) }}
+          {{ claim.status | statusTag(data.statuses) }}
         </dd>
       </div>
 
@@ -67,7 +67,7 @@
           Type
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ claim.claimType | typeTag_V10 }}
+          {{ claim.claimType | typeTag }}
           {% if claim.claimType == "100" %}
           <p class="govuk-caption-m" style="padding-top: 5px;" aria-describedby="100-claim-type-hint">Single reimbursement on training completion</p>
           {% elif claim.claimType == "60" %}

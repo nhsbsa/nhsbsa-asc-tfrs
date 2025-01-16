@@ -1,11 +1,11 @@
-{% set matchedClaimsBeforeFilter = data.claims | claimsMatchSearchWithoutFilter_V13(data.search) %}
-{% set uniqueStartDates = matchedClaimsBeforeFilter | uniqueDates_V13("startDate") %}
-{% set availableStatus = matchedClaimsBeforeFilter | availableStatus_V13(data.search) %}
-{% set uniqueTypes = matchedClaimsBeforeFilter | uniqueTypes_V13 %}
+{% set matchedClaimsBeforeFilter = data.claims | claimsMatchSearchWithoutFilter(data.search) %}
+{% set uniqueStartDates = matchedClaimsBeforeFilter | uniqueDates("startDate") %}
+{% set availableStatus = matchedClaimsBeforeFilter | availableStatus(data.search) %}
+{% set uniqueTypes = matchedClaimsBeforeFilter | uniqueTypes %}
 
-{% set selectedStatusFilters = (data.status | statusArray_V13) %}
-{% set selectedDateFilters = (data.startDate | startDateArray_V13) %}
-{% set selectedTypeFilters = (data.type | typeArray_V13) %}
+{% set selectedStatusFilters = (data.status | statusArray) %}
+{% set selectedDateFilters = (data.startDate | startDateArray) %}
+{% set selectedTypeFilters = (data.type | typeArray) %}
 
 
 <div class="moj-filter">
@@ -31,7 +31,7 @@
             <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Status</h3>
             <ul class="moj-filter-tags">
                 {% for status in selectedStatusFilters %}
-                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>{{status | formatStatus_V13}}</a></li>
+                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span>{{status | formatStatus}}</a></li>
                 {% endfor %}
             </ul>
             {% endif%}
@@ -39,7 +39,7 @@
             <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Start date</h3>
             <ul class="moj-filter-tags">
                 {% for status in selectedDateFilters %}
-                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> {{status | formatDate_V13}}</a></li>
+                    <li><a class="moj-filter__tag" href="/path/to/remove/this"><span class="govuk-visually-hidden">Remove this filter</span> {{status | formatDate}}</a></li>
                 {% endfor %}
             </ul>
             {% endif%}
@@ -55,7 +55,7 @@
         {% endif%}
 
         <div class="moj-filter__options">
-            <form id="filterForm" action="../apply-filters_V13" method="post">
+            <form id="filterForm" action="../apply-filters" method="post">
                 <button class="govuk-button" data-module="govuk-button" data-test-id="submit-button">
                     Apply filters
                 </button>
@@ -69,9 +69,9 @@
                             {% for status in availableStatus %}
                             <div class="govuk-checkboxes__item">
                                 <input class="govuk-checkboxes__input" id="{{ status }}" name="filterStatus"
-                                    type="checkbox" value="{{ status }}"  {% if ( selectedStatusFilters | isSelected_V13(status)) %}checked {% endif %}>
+                                    type="checkbox" value="{{ status }}"  {% if ( selectedStatusFilters | isSelected(status)) %}checked {% endif %}>
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ status }}">
-                                    {{ status | formatStatus_V13 }}
+                                    {{ status | formatStatus }}
                                 </label>
                             </div>
                             {% endfor %}
@@ -90,7 +90,7 @@
                             {% set checkboxId = 'type-' + loopIndex %}
                             <div class="govuk-checkboxes__item">
                                 <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="filterType"
-                                    type="checkbox" value="{{ type }}"  {% if ( selectedTypeFilters | isSelected_V13(type)) %}checked {% endif %}>
+                                    type="checkbox" value="{{ type }}"  {% if ( selectedTypeFilters | isSelected(type)) %}checked {% endif %}>
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ checkboxId }}">
                                     {{ type }}
                                 </label>
@@ -112,9 +112,9 @@
                             {% set checkboxId = 'startdate-' + loopIndex %}
                             <div class="govuk-checkboxes__item">
                                 <input class="govuk-checkboxes__input" id="{{ checkboxId }}" name="filterStartDate"
-                                    type="checkbox" value="{{ monthYear }}" {% if ( selectedDateFilters | isSelected_V13(monthYear)) %}checked {% endif %}>
+                                    type="checkbox" value="{{ monthYear }}" {% if ( selectedDateFilters | isSelected(monthYear)) %}checked {% endif %}>
                                 <label class="govuk-label govuk-checkboxes__label" for="{{ checkboxId }}">
-                                    {{ monthYear | formatDate_V13 }}
+                                    {{ monthYear | formatDate }}
                                 </label>
                             </div>
                             {% set loopIndex = loopIndex + 1 %}

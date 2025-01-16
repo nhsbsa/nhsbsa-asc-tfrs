@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V7(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 {{ ["Select training - Claim: ", claim.claimID] | join }}
@@ -52,13 +52,13 @@
         {% if data['training-input'] %}
         <h2 class="govuk-heading-m">Search results</h2>
         {% set lowercasedsearch = data['training-input'] | lower %}
-        {% set formattedSearch = data['training-input'] | removeSpacesAndLowerCase_V7 %}
+        {% set formattedSearch = data['training-input'] | removeSpacesAndLowerCase %}
         {% set hasResults = false %}
         {% for trainingGroup in data.training %}
         {% set addHeader = true %}
         {% for training in trainingGroup.courses %}
         {% set lowercasedname = training.title | lower %}
-        {% set formattedCode = training.code | removeSpacesAndLowerCase_V7 %}
+        {% set formattedCode = training.code | removeSpacesAndLowerCase %}
         {% if lowercasedname == lowercasedsearch or training.code == data['training-input'] or lowercasedsearch in
         lowercasedname or formattedSearch in formattedCode %}
         {% set hasResults = true %}

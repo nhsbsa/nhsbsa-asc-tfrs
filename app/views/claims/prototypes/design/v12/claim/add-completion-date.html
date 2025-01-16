@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V12(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 {{ ["Add completion date - Claim: ", claim.claimID] | join }}
@@ -16,7 +16,7 @@
                 </h2>
                 <div class="govuk-error-summary__body">
                     <ul class="govuk-list govuk-error-summary__list">
-                        {{ data.submitError | dateErrorMessage_V12("Completion date","summary") }}
+                        {{ data.submitError | dateErrorMessage("Completion date","summary") }}
                     </ul>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                         For example, 12 5 2024
                     </div>
                     {% if data.submitError.dateValid != null and not data.submitError.dateValid %}
-                    {{data.submitError | dateErrorMessage_V12("Completion date", "input") }}
+                    {{data.submitError | dateErrorMessage("Completion date", "input") }}
                     {% endif %}
                     <div class="govuk-date-input" id="completion-date-started">
                         <div class="govuk-date-input__item">
@@ -45,7 +45,7 @@
                                     Day
                                 </label>
                                 <input
-                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat_V12('day') ) %} govuk-input--error {% endif %}"
+                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat('day') ) %} govuk-input--error {% endif %}"
                                     id="completion-date-started-day" name="completion-date-started-day" type="text"
                                     value="{{ data['completion-date-started-day'] | default ('') }}"
                                     inputmode="numeric">
@@ -57,7 +57,7 @@
                                     Month
                                 </label>
                                 <input
-                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat_V12('month') ) %} govuk-input--error {% endif %}"
+                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat('month') ) %} govuk-input--error {% endif %}"
                                     id="completion-date-started-month" name="completion-date-started-month" type="text"
                                     value="{{ data['completion-date-started-month'] | default ('') }}"
                                     inputmode="numeric">
@@ -69,7 +69,7 @@
                                     Year
                                 </label>
                                 <input
-                                    class="govuk-input govuk-date-input__input govuk-input--width-4 {% if (data.submitError | dateErrorFormat_V12('year') ) %} govuk-input--error {% endif %}"
+                                    class="govuk-input govuk-date-input__input govuk-input--width-4 {% if (data.submitError | dateErrorFormat('year') ) %} govuk-input--error {% endif %}"
                                     id="completion-date-started-year" name="completion-date-started-year" type="text"
                                     value="{{ data['completion-date-started-year'] | default ('') }}"
                                     inputmode="numeric">

@@ -8,26 +8,7 @@ const addFilter = govukPrototypeKit.views.addFilter
 
 const fs = require('fs');
 
-// Add your claims filters here
-require('../app/views/claims/prototypes/design/v5/filters/filters.js')
-require('../app/views/claims/prototypes/design/v6/filters/filters.js')
-require('../app/views/claims/prototypes/design/v7/filters/filters.js')
-require('../app/views/claims/prototypes/design/v8/filters/filters.js')
-require('../app/views/claims/prototypes/design/v9/filters/filters.js')
-require('../app/views/claims/prototypes/design/v10/filters/filters.js')
-require('../app/views/claims/prototypes/design/v11/filters/filters.js')
-require('../app/views/claims/prototypes/design/v12/filters/filters.js')
-require('../app/views/claims/prototypes/design/v13/filters/filters.js')
-
-// Add your processing filters here
-require('../app/views/processing/prototypes/design/v1/filters/filters.js')
-require('../app/views/processing/prototypes/design/v2/filters/filters.js')
-require('../app/views/processing/prototypes/design/v3/filters/filters.js')
-require('../app/views/processing/prototypes/design/v4/filters/filters.js')
-require('../app/views/processing/prototypes/design/v5/filters/filters.js')
-require('../app/views/processing/prototypes/design/v6/filters/filters.js')
-require('../app/views/processing/prototypes/design/v7/filters/filters.js')
-
+//Filter files for each version are loaded in dynamically in routes to avoid conflicts
 
 addFilter('default', function (value, defaultValue) {
     if (value != null) {

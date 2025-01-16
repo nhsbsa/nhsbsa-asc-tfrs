@@ -1,6 +1,6 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V11(data.claims) %}
-{% set evidenceCount = claim.evidenceOfPayment | coursesCount_V11 %}
+{% set claim = data.id | findClaim(data.claims) %}
+{% set evidenceCount = claim.evidenceOfPayment | coursesCount %}
 
 {% block pageTitle %}
 {{ ["Add evidence - Claim: ", claim.claimID] | join }}
@@ -50,7 +50,7 @@
     </div>
     {% endif %}
 
-    <span class="govuk-caption-l">Claim reference number: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
+    <span class="govuk-caption-l">Claim reference number: {{ claim.claimID | removeClaimSuffix }}</span>
     <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
   </div>
 </div>

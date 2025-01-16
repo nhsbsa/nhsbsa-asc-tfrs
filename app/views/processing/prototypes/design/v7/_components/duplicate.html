@@ -1,7 +1,7 @@
 <h1 class="govuk-heading-l">Organisation is already registered</h1>
 <p class="govuk-body">This organisation has already been invited and their Senior Responsible Officer (SRO) has completed the registration process.</p>
 
-{% set foundOrganisation = data.organisations | findOrg_V7(data.orgID) %}
+{% set foundOrganisation = data.organisations | findOrg(data.orgID) %}
 
 <div class="govuk-summary-card">
     <div class="govuk-summary-card__title-wrapper">

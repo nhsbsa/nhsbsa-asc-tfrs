@@ -1,6 +1,6 @@
 {% set hasResults = false %}
 {% set addHeader = true %}
-{% for claim in data['claims'] | sortByDate_V11(status.id) %}
+{% for claim in data['claims'] | sortByDate(status.id) %}
 {% if claim.status == status.id and claim.fundingType == data.fundingPot %} {% set hasResults=true %} {%
     if addHeader %} <table class="govuk-table">
     <thead class="govuk-table__head">
@@ -8,13 +8,13 @@
             <th class="govuk-table__header" scope="col" width="22%">Claim reference</th>
             <th class="govuk-table__header" scope="col" width="40%">Activity description</th>
             <th class="govuk-table__header" scope="col" width="23%">Learner</th>
-            <th class="govuk-table__header" scope="col" width="15%">{{ status.id | variableDate_V11 }}</th>
+            <th class="govuk-table__header" scope="col" width="15%">{{ status.id | variableDate }}</th>
         </tr>
     </thead>
     <tbody class="govuk-table__body">
         {% set addHeader = false %}
         {% endif %}
-        <tr class="govuk-table__row claim-row" id="{{ claim.claimID | removeClaimSuffix_V11 }}">
+        <tr class="govuk-table__row claim-row" id="{{ claim.claimID | removeClaimSuffix }}">
             <td class="govuk-table__header" scope="row"><a class="govuk-link" href="claim/claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a></td>
             <td class="govuk-table__cell">
                 {% if claim.description %} {{ claim.description }} {% else %} Not yet added {% endif %}

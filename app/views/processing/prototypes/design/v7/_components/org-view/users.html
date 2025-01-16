@@ -1,5 +1,5 @@
 
-{% set org = data.orgId | findOrganisation_V6(data.organisations) %}
+{% set org = data.orgId | findOrganisation(data.organisations) %}
 
 <div class="govuk-grid-row">
     <div class="{% if (org.signatory.status == 'invited') %}govuk-grid-column-full{% else %}govuk-grid-column-two-thirds{% endif %}">
@@ -21,8 +21,8 @@
                         <tr class="govuk-table__row claim-row" id="{{ org.workplaceId }}">
                             <td class="govuk-table__cell">{{ org.signatory.givenName}} {{ org.signatory.familyName}}</td>
                             <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ org.signatory.email }}</a></td>
-                            <td class="govuk-table__cell">{{ org.signatory.status | userStatusTag_V7 }}</td>
-                            <td class="govuk-table__cell">{% if not (data.resendList | matchResend_V7(org.signatory.email)) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-signatory?name={{org.signatory.email}}">Resend invite<span class="govuk-visually-hidden">to {{org.signatory.givenName}} {{org.signatory.familyName}}</span></a>{% else %}Invitation sent{% endif %}<a class="govuk-link govuk-link--no-visited-state" style="display: inline-block; margin-left: 10px; padding-left: 10px; border-left: 1px solid #b1b4b6;" href="edit-signatory-details?confirmation=&invite=">Edit details<span class="govuk-visually-hidden">{{org.signatory.givenName}} {{org.signatory.familyName}}</span></a></td>
+                            <td class="govuk-table__cell">{{ org.signatory.status | userStatusTag }}</td>
+                            <td class="govuk-table__cell">{% if not (data.resendList | matchResend(org.signatory.email)) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-signatory?name={{org.signatory.email}}">Resend invite<span class="govuk-visually-hidden">to {{org.signatory.givenName}} {{org.signatory.familyName}}</span></a>{% else %}Invitation sent{% endif %}<a class="govuk-link govuk-link--no-visited-state" style="display: inline-block; margin-left: 10px; padding-left: 10px; border-left: 1px solid #b1b4b6;" href="edit-signatory-details?confirmation=&invite=">Edit details<span class="govuk-visually-hidden">{{org.signatory.givenName}} {{org.signatory.familyName}}</span></a></td>
                         </tr>
                 </tbody>
             </table>
@@ -39,7 +39,7 @@
                             <tr class="govuk-table__row claim-row" id="{{ org.workplaceId }}">
                                 <td class="govuk-table__cell">{{ org.signatory.givenName}} {{ org.signatory.familyName}}</td>
                                 <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ org.signatory.email }}</a></td>
-                                <td class="govuk-table__cell">{{ org.signatory.status | userStatusTag_V7 }}</td>
+                                <td class="govuk-table__cell">{{ org.signatory.status | userStatusTag }}</td>
                             </tr>
                     </tbody>
                 </table>
@@ -60,21 +60,21 @@
                         <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
                             <td class="govuk-table__cell">{{ user.name}}</td>
                             <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
-                            <td class="govuk-table__cell"><strong class="govuk-tag">{{ "active" | userStatusTag_V7 }}</strong></td>
+                            <td class="govuk-table__cell"><strong class="govuk-tag">{{ "active" | userStatusTag }}</strong></td>
                         </tr>
                     {% endfor %}
                     {% for user in org.users.invited %}
                     <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
                         <td class="govuk-table__cell">{{ user.name}}</td>
                         <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
-                        <td class="govuk-table__cell">{{ "invited" | userStatusTag_V7 }}</td>
+                        <td class="govuk-table__cell">{{ "invited" | userStatusTag }}</td>
                     </tr>
                     {% endfor %}
                     {% for user in org.users.inactive %}
                         <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
                             <td class="govuk-table__cell">{{ user.name}}</td>
                             <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
-                            <td class="govuk-table__cell">{{ "inactive" | userStatusTag_V7 }}</td>
+                            <td class="govuk-table__cell">{{ "inactive" | userStatusTag }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

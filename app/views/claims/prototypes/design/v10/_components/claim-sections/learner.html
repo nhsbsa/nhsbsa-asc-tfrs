@@ -25,8 +25,8 @@
       <p class="govuk-body">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</p>
       <p class="govuk-body">{{ claim.learner.id }}</p>
       {% if data.fundingPot == "CPD" and claim.learner.cpdBudget != null and claim.learner.cpdBudget != -1 and (claim.status == "not-yet-submitted" or claim.status == "new")%}
-        <p class="govuk-body">Budget available to learner: £{{ claim.learner.id | availableAmount_V10(claim.learner.cpdBudget, data.claims) }}</p>
-        <p class="govuk-body">Pending claims amount: £{{ claim.learner.id | pendingAmount_V10(data.claims) }}</p>
+        <p class="govuk-body">Budget available to learner: £{{ claim.learner.id | availableAmount(claim.learner.cpdBudget, data.claims) }}</p>
+        <p class="govuk-body">Pending claims amount: £{{ claim.learner.id | pendingAmount(data.claims) }}</p>
         <p class="govuk-body">Budget remaining (not including pending): £{{ claim.learner.cpdBudget }}</p>
       {% endif %}
     </dd>

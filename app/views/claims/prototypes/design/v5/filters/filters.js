@@ -11,7 +11,7 @@ const fs = require('fs');
 
 // Add your filters here
 
-addFilter('statusTag_V5', function (statusID, statuses) {
+addFilter('statusTag', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -35,7 +35,7 @@ addFilter('statusTag_V5', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
-addFilter('claimCount_V5', function (statusID, claims) {
+addFilter('claimCount', function (statusID, claims) {
     let i = 0
     for (const c of claims) {
         if (c.status == statusID) {
@@ -45,11 +45,11 @@ addFilter('claimCount_V5', function (statusID, claims) {
     return i
 })
 
-addFilter('pageCount_V5', function (content, perPage) {
+addFilter('pageCount', function (content, perPage) {
     return Math.ceil(content / perPage)
 })
 
-addFilter('uniqueDates_V5', function (claims, dateType) {
+addFilter('uniqueDates', function (claims, dateType) {
 
     const uniqueMonthYears = new Set();
 
@@ -75,7 +75,7 @@ addFilter('uniqueDates_V5', function (claims, dateType) {
 
 })
 
-addFilter('statusName_V5', function (statusID, statuses) {
+addFilter('statusName', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
         if (s.id == statusID) {
@@ -85,7 +85,7 @@ addFilter('statusName_V5', function (statusID, statuses) {
     return statusName
 })
 
-addFilter('variableDate_V5', function (statusID) {
+addFilter('variableDate', function (statusID) {
     if (statusID == 'incomplete') {
         return 'Created date'
     } else if (statusID == 'ready-to-submit') {
@@ -102,7 +102,7 @@ addFilter('variableDate_V5', function (statusID) {
 
 })
 
-addFilter('variableDateType_V5', function (statusID) {
+addFilter('variableDateType', function (statusID) {
     if (statusID == 'incomplete') {
         return 'createdDate'
     } else if (statusID == 'ready-to-submit') {
@@ -119,7 +119,7 @@ addFilter('variableDateType_V5', function (statusID) {
 
 })
 
-addFilter('removeSpacesAndLowerCase_V5', function (inputString) {
+addFilter('removeSpacesAndLowerCase', function (inputString) {
 
     // Convert the string to lowercase
     let outputString = removeSpacesAndLowerCase(inputString);
@@ -129,7 +129,7 @@ addFilter('removeSpacesAndLowerCase_V5', function (inputString) {
 })
 
 
-addFilter('randomizeOrder_V5', function (array) {
+addFilter('randomizeOrder', function (array) {
     // Perform Fisher-Yates shuffle
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));

@@ -1,9 +1,9 @@
 {% extends "../layouts/claims-main.html" %}
 
 {% if (data.searchType == 'a') %} 
-    {% set matchedClaims = data.claims | claimsMatchAdvancedSearchA_V13(data.training, data.learner) %}
+    {% set matchedClaims = data.claims | claimsMatchAdvancedSearchA(data.training, data.learner) %}
 {% elif (data.searchType == 'b') %} 
-    {% set matchedClaims = data.claims | claimsMatchAdvancedSearchB_V13(data.training, data.learner, data.submitter, data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear, data.endMonth, data.endYear) %}
+    {% set matchedClaims = data.claims | claimsMatchAdvancedSearchB(data.training, data.learner, data.submitter, data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear, data.endMonth, data.endYear) %}
 {% endif %} 
 {% set resultCount = matchedClaims.length %}
 
@@ -20,7 +20,7 @@ Search results — {{serviceName}} — GOV.UK
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">{{ data.fundingPot | potName_V13 }}</span>
+        <span class="govuk-caption-l">{{ data.fundingPot | potName }}</span>
         <h1 class="govuk-heading-l">Search results</h1>
     </div>
 </div>
@@ -66,13 +66,13 @@ Search results — {{serviceName}} — GOV.UK
                             <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
                                 <td class="govuk-table__header" scope="row"><a class="govuk-link"
                                         href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
-                                <td class="govuk-table__cell">{{ claim.claimType | typeTag_V13 }}</td>
+                                <td class="govuk-table__cell">{{ claim.claimType | typeTag }}</td>
                                 <td class="govuk-table__cell">{{ claim.training.title }}</td>
                                 <td class="govuk-table__cell">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</td>
                                 <td class="govuk-table__cell" data-sort-value="{{ claim.startDate }}">{{ claim.startDate |
                                         govukDate("truncate") }}</td>
                                 <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
-                                            statusTag_V13(data.statuses) }}</td>
+                                            statusTag(data.statuses) }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

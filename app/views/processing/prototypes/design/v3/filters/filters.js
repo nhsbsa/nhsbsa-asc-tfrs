@@ -9,7 +9,7 @@ const { renderString } = require('nunjucks')
 const { formatDate, isFullClaimCheck, getLearner } = require('../helpers/helpers.js');
 const fs = require('fs');
 
-addFilter('processorstatusTag_V3', function (statusID) {
+addFilter('processorstatusTag', function (statusID) {
     if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Not yet processed</strong>'
     } else if (statusID == 'approved') {
@@ -21,7 +21,7 @@ addFilter('processorstatusTag_V3', function (statusID) {
     }
 }, { renderAsHtml: true })
 
-addFilter('sectionCheck_V3', function (state) {
+addFilter('sectionCheck', function (state) {
     if (state != null) {
         return "Completed"
     } else if (state == null) {
@@ -31,17 +31,17 @@ addFilter('sectionCheck_V3', function (state) {
     }
 }, { renderAsHtml: true })
 
-addFilter('findClaim_V3', function (claims, id) {
-    var foundClaim = null
-    for (const claim of claims) {
-        if (claim.claimID == id) {
-            foundClaim = claim
+addFilter('findClaim', function (claimID, claims) {
+    let claim = null;
+    for (let c of claims) {
+        if (c.claimID == claimID) {
+            claim = c
         }
     }
-    return foundClaim
+    return claim;
 })
 
-addFilter('criteriaQuestions_V3', function (criteria, type, claim, header) {
+addFilter('criteriaQuestions', function (criteria, type, claim, header) {
     if (type == "payment") {
         switch (criteria) {
             case "0":
@@ -93,7 +93,7 @@ addFilter('criteriaQuestions_V3', function (criteria, type, claim, header) {
     }
 }, { renderAsHtml: true })
 
-addFilter('criteriaAnswer_V3', function (criteria, type, claim) {
+addFilter('criteriaAnswer', function (criteria, type, claim) {
     if (type == "payment") {
         if (claim.evidenceOfPaymentreview["criteria" + criteria].result) {
             return "Yes"
@@ -110,11 +110,11 @@ addFilter('criteriaAnswer_V3', function (criteria, type, claim) {
 }, { renderAsHtml: true })
 
 
-addFilter('checkPDF_V3', function (str) {
+addFilter('checkPDF', function (str) {
     return str.endsWith(".pdf");
 })
 
-addFilter('evidenceBackLink_V3', function (criteriaNo, type) {
+addFilter('evidenceBackLink', function (criteriaNo, type) {
     if (criteriaNo == "1") {
         return "claim"
     } else {
@@ -124,12 +124,12 @@ addFilter('evidenceBackLink_V3', function (criteriaNo, type) {
 })
 
 
-addFilter('dateSort_V3', function (notes) {
+addFilter('dateSort', function (notes) {
     const sortedData = notes.sort((a, b) => new Date(b.date) - new Date(a.date));
     return sortedData
 })
 
-addFilter('reimbursementCPD_V3', function (claim, learner) {
+addFilter('reimbursementCPD', function (claim, learner) {
     if (learner.cpdBudget == 0) {
         return `<p class="govuk-body">The organisation will not receive reimbursement.</p>`
     } else if (claim.paymentAmount <= learner.cpdBudget) {
@@ -141,7 +141,7 @@ addFilter('reimbursementCPD_V3', function (claim, learner) {
     }
 }, { renderAsHtml: true })
 
-addFilter('formatLearnerBudget_V11', function (learnerID, learners) {
+addFilter('formatLearnerBudget', function (learnerID, learners) {
     for (let learner of learners) {
         if (learner.id == learnerID) {
             if (learner.cpdBudget == 0) {
@@ -153,7 +153,7 @@ addFilter('formatLearnerBudget_V11', function (learnerID, learners) {
     }
 })
 
-addFilter('reimbursement_V3', function (claim, paymentReimbursementAmount) {
+addFilter('reimbursement', function (claim, paymentReimbursementAmount) {
     if ((claim.fundingType == "TU") && (claim.claimType == "60")) {
         if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
             return paymentReimbursementAmount * 0.6
@@ -173,7 +173,7 @@ addFilter('reimbursement_V3', function (claim, paymentReimbursementAmount) {
     }
 });
 
-addFilter('findLearner_V3', function (learnerID, learners) {
+addFilter('findLearner', function (learnerID, learners) {
     for (let learner of learners) {
         if (learner.id == learnerID) {
             return learner
@@ -181,7 +181,7 @@ addFilter('findLearner_V3', function (learnerID, learners) {
     }
 });
 
-addFilter('reimbursementExplanation_V3', function (claim, learner) {
+addFilter('reimbursementExplanation', function (claim, learner) {
     if (learner.cpdBudget > claim.paymentAmount) {
         return `<p class="govuk-body">The learner's remaining revalidation budget is £${learner.cpdBudget}.</p><p>So the organisation will get back the full cost of the activity: <strong>£${claim.paymentAmount}</strong>.</p>`
     } else if (learner.cpdBudget > 0) {
@@ -191,7 +191,7 @@ addFilter('reimbursementExplanation_V3', function (claim, learner) {
     }
 }, { renderAsHtml: true });
 
-addFilter('reimbursementApprovedExplanation_V3', function (claim, learner) {
+addFilter('reimbursementApprovedExplanation', function (claim, learner) {
     if (claim.reimbursementAmount == 0) {
         return `<p class="govuk-body">The learner has no remaining revalidation budget.</p><p>So the organisation will not get back any reimbursement for this claim.</p>`
     } else if (claim.paymentAmount > claim.reimbursementAmount) {
@@ -203,7 +203,7 @@ addFilter('reimbursementApprovedExplanation_V3', function (claim, learner) {
     }
 }, { renderAsHtml: true });
 
-addFilter('original_reimbursement_amount_V3', function (claim,paymentReimbursementAmount) {
+addFilter('original_reimbursement_amount', function (claim,paymentReimbursementAmount) {
     if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
         paymentReimbursementAmount = claim.reimbursementAmount
     }
@@ -214,7 +214,7 @@ addFilter('original_reimbursement_amount_V3', function (claim,paymentReimburseme
     }
 });
 
-addFilter('orgErrorMessage_V3', function (error) {
+addFilter('orgErrorMessage', function (error) {
     if (error == "invalid") {
         return "Enter a valid workplace ID"
     } else if ( error == "missing") {
@@ -222,7 +222,7 @@ addFilter('orgErrorMessage_V3', function (error) {
     }
 })
 
-addFilter('signatoryErrorMessage_V9', function (submitError) {
+addFilter('signatoryErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
@@ -239,7 +239,7 @@ addFilter('signatoryErrorMessage_V9', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true });
 
-addFilter('qualificationCheck_V3', function(claim, training, value) {
+addFilter('qualificationCheck', function(claim, training, value) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     let isQualification = false;
 
@@ -255,7 +255,7 @@ addFilter('qualificationCheck_V3', function(claim, training, value) {
     }
 })
 
-addFilter('matchPairClaim_V3', function(claimID, claims) {
+addFilter('matchPairClaim', function(claimID, claims) {
     var pairID = null
     var pairClaim = null
 
@@ -275,5 +275,17 @@ addFilter('matchPairClaim_V3', function(claimID, claims) {
     }
 
     return pairClaim
+
+})
+
+addFilter('removeClaimSuffix', function (claimID) {
+
+    // Check if the string has at least two characters
+    if (claimID.length < 2) {
+        return ''; // Return an empty string if there are less than two characters
+    }
+
+    // Use the slice method to remove the last two characters
+    return claimID.slice(0, -2);
 
 })

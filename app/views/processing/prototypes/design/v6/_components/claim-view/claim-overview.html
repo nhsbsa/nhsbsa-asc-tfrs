@@ -1,4 +1,4 @@
-{% set claim = data.id | findClaim_V8(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% if (data.processClaimStep == "inProgress") or (data.processClaimStep == "claimProcessed")   %}
 

@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V7(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 {{ ["Add cost - Claim: ", claim.claimID] | join }}
@@ -28,7 +28,7 @@
         <form action="../add-cost" method="post" novalidate>
             <div
                 class="govuk-form-group {% if data.submitError != null and data.submitError %} govuk-form-group--error {% endif %}">
-                <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID | removeClaimSuffix_V11 }}</span>
+                <span class="govuk-caption-l">Claim Reference Number: {{ claim.claimID | removeClaimSuffix }}</span>
                 <h1 class="govuk-label-wrapper">
                     <label class="govuk-label govuk-label--l" for="postcode">
                         Add cost

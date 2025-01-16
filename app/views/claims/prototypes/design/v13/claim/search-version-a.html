@@ -1,6 +1,6 @@
 {% extends "../layouts/claims-main.html" %}
 
-{% set matchedClaims = data.claims | claimsMatchAdvancedSearchA_V13(data.trainingName, data.learner) %}
+{% set matchedClaims = data.claims | claimsMatchAdvancedSearchA(data.trainingName, data.learner) %}
 {% set resultCount = matchedClaims.length %}
 
 {% block pageTitle %}
@@ -69,7 +69,7 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form action="/search_result_a_V13" method="post" class="form">
+    <form action="/search_result_a" method="post" class="form">
       <div class="{% if data.noInputsA %}govuk-form-group--error{% endif %} govuk-!-margin-bottom-6">
         <div class="govuk-form-group {% if data.learnerSearchLengthInsufficient %}govuk-form-group--error{% endif %}">
           <label class="govuk-label" for="learner">
@@ -132,11 +132,11 @@
           <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
             <td class="govuk-table__header" scope="row"><a class="govuk-link"
                 href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
-            <td class="govuk-table__cell">{{ claim.claimType | typeTag_V13 }}</td>
+            <td class="govuk-table__cell">{{ claim.claimType | typeTag }}</td>
             <td class="govuk-table__cell">{{ claim.training.title }}</td>
             <td class="govuk-table__cell">{{ claim.learner.givenName }} {{ claim.learner.familyName }}</td>
             <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
-              statusTag_V13(data.statuses) }}</td>
+              statusTag(data.statuses) }}</td>
           </tr>
         {% endfor %}
         

@@ -1,10 +1,10 @@
 {% extends "./layouts/claims-main.html" %}
 
-{% set status = data.statusID | statusDetails_V10(data.statuses) %}
-{% set numClaims = status.id | claimCount_V10(data.claims, data.fundingPot) %}
+{% set status = data.statusID | statusDetails(data.statuses) %}
+{% set numClaims = status.id | claimCount(data.claims, data.fundingPot) %}
 
 {% block pageTitle %}
-{{ [status.name, " claims - ", (data.fundingPot | potName_V10)] | join }}
+{{ [status.name, " claims - ", (data.fundingPot | potName)] | join }}
 {% endblock %}
 
 {% block beforeContent %}
@@ -17,7 +17,7 @@
         {% if data.fundingPot == "TU" %}
             <li class="govuk-breadcrumbs__list-item">
                 <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=TU">Manage claims ({{ data.fundingPot |
-                    potName_V10
+                    potName
                     }})
                 </a>
             </li>
@@ -28,7 +28,7 @@
         {% else %}
             <li class="govuk-breadcrumbs__list-item">
                 <a class="govuk-breadcrumbs__link" href="manage-claims-home?fundingPot=CPD">Manage claims ({{ data.fundingPot |
-                    potName_V10
+                    potName
                     }})
                 </a>
             </li>
@@ -45,7 +45,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        <span class="govuk-caption-l">{{ data.fundingPot | potName_V10 }}</span>
+        <span class="govuk-caption-l">{{ data.fundingPot | potName }}</span>
         <h2 class="govuk-heading-l govuk-!-margin-bottom-3">{{ status.name }} claims ({{ numClaims }})</h2>
         <p class="govuk-body">{{status.description}}</p>
     </div>

@@ -9,7 +9,7 @@ const { renderString } = require('nunjucks')
 const { formatDate, isFullClaimCheck } = require('../helpers/helpers.js');
 const fs = require('fs');
 
-addFilter('processorstatusTag_V4', function (statusID) {
+addFilter('processorstatusTag', function (statusID) {
     if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Not yet processed</strong>'
     } else if (statusID == 'approved') {
@@ -21,7 +21,7 @@ addFilter('processorstatusTag_V4', function (statusID) {
     }
 }, { renderAsHtml: true })
 
-addFilter('sectionCheck_V4', function (state) {
+addFilter('sectionCheck', function (state) {
     if (state != null) {
         return "Completed"
     } else if (state == null) {
@@ -31,17 +31,17 @@ addFilter('sectionCheck_V4', function (state) {
     }
 }, { renderAsHtml: true })
 
-addFilter('findClaim_V4', function (claims, id) {
-    var foundClaim = null
-    for (const claim of claims) {
-        if (claim.claimID == id) {
-            foundClaim = claim
+addFilter('findClaim', function (claimID, claims) {
+    let claim = null;
+    for (let c of claims) {
+        if (c.claimID == claimID) {
+            claim = c
         }
     }
-    return foundClaim
+    return claim;
 })
 
-addFilter('criteriaQuestions_V4', function (criteria, type, claim, header) {
+addFilter('criteriaQuestions', function (criteria, type, claim, header) {
     if (type == "payment") {
         switch (criteria) {
             case "0":
@@ -93,7 +93,7 @@ addFilter('criteriaQuestions_V4', function (criteria, type, claim, header) {
     }
 }, { renderAsHtml: true })
 
-addFilter('criteriaAnswer_V4', function (criteria, type, claim) {
+addFilter('criteriaAnswer', function (criteria, type, claim) {
     if (type == "payment") {
         if (claim.evidenceOfPaymentreview["criteria" + criteria].result) {
             return "Yes"
@@ -110,11 +110,11 @@ addFilter('criteriaAnswer_V4', function (criteria, type, claim) {
 }, { renderAsHtml: true })
 
 
-addFilter('checkPDF_V4', function (str) {
+addFilter('checkPDF', function (str) {
     return str.endsWith(".pdf");
 })
 
-addFilter('evidenceBackLink_V4', function (criteriaNo, type) {
+addFilter('evidenceBackLink', function (criteriaNo, type) {
     if (criteriaNo == "1") {
         return "claim"
     } else {
@@ -124,12 +124,12 @@ addFilter('evidenceBackLink_V4', function (criteriaNo, type) {
 })
 
 
-addFilter('dateSort_V4', function (notes) {
+addFilter('dateSort', function (notes) {
     const sortedData = notes.sort((a, b) => new Date(b.date) - new Date(a.date));
     return sortedData
 })
 
-addFilter('reimbursement_V4', function (claim, paymentReimbursementAmount) {
+addFilter('reimbursement', function (claim, paymentReimbursementAmount) {
     if ((claim.fundingType == "TU") && (claim.claimType == "60")) {
         if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
             return paymentReimbursementAmount * 0.6
@@ -149,7 +149,7 @@ addFilter('reimbursement_V4', function (claim, paymentReimbursementAmount) {
     }
 });
 
-addFilter('original_reimbursement_amount_V4', function (claim,paymentReimbursementAmount) {
+addFilter('original_reimbursement_amount', function (claim,paymentReimbursementAmount) {
     if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
         paymentReimbursementAmount = claim.reimbursementAmount
     }
@@ -160,7 +160,7 @@ addFilter('original_reimbursement_amount_V4', function (claim,paymentReimburseme
     }
 });
 
-addFilter('orgErrorMessage_V4', function (error) {
+addFilter('orgErrorMessage', function (error) {
     if (error == "invalid") {
         return "Enter a valid workplace ID"
     } else if ( error == "missing") {
@@ -168,7 +168,7 @@ addFilter('orgErrorMessage_V4', function (error) {
     }
 })
 
-addFilter('signatoryErrorMessage_V9', function (submitError) {
+addFilter('signatoryErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {
@@ -185,7 +185,7 @@ addFilter('signatoryErrorMessage_V9', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true });
 
-addFilter('qualificationCheck_V4', function(claim, training, value) {
+addFilter('qualificationCheck', function(claim, training, value) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     let isQualification = false;
 
@@ -201,7 +201,7 @@ addFilter('qualificationCheck_V4', function(claim, training, value) {
     }
 })
 
-addFilter('matchPairClaim_V4', function(claimID, claims) {
+addFilter('matchPairClaim', function(claimID, claims) {
     var pairID = null
     var pairClaim = null
 

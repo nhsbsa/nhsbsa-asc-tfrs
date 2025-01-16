@@ -61,7 +61,7 @@
     {% endif %}
   </div>
   {% endif %}
-  {% if ((claim.evidenceOfCompletion | getCount_V13 == 0) and claim.claimType == "100") or (pairClaim != null and (pairClaim.evidenceOfCompletion | getCount_V13 == 0))  or (claim.claimType == "60" and claim.status != "approved")  %}
+  {% if ((claim.evidenceOfCompletion | getCount == 0) and claim.claimType == "100") or (pairClaim != null and (pairClaim.evidenceOfCompletion | getCount == 0))  or (claim.claimType == "60" and claim.status != "approved")  %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =="missing"and claim.learner%}
     <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
       <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-evidence-error">

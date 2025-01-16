@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim_V8(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 
 {% block pageTitle %}
 {{ ["Select learner - Claim: ", claim.claimID] | join }}
@@ -75,7 +75,7 @@
         {% set hasResults = false %}
         {% set addHeader = true %}
         {% for learner in data['learners'] %}
-        {% set match = data['learnerInput'] | learnerSearch_V8(learner) %}
+        {% set match = data['learnerInput'] | learnerSearch(learner) %}
         {% if match %}
         {% set hasResults = true %}
         {% if addHeader %}

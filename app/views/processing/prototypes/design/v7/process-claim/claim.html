@@ -1,6 +1,6 @@
 {% extends "../layouts/processing-main.html" %}
 
-{% set claim = data.id | findClaim_V8(data.claims) %}
+{% set claim = data.id | findClaim(data.claims) %}
 {% set paymentCompleted = claim.evidenceOfPaymentreview.pass != null %}
 {% set paymentNote = claim.evidenceOfPaymentreview.note %}
 {% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
@@ -89,7 +89,7 @@
         <span class="govuk-caption-l">Process a claim</span>
         {% endif %}
         <h1 class="govuk-heading-l" style="margin-bottom: 15px;">Claim: {{ claim.claimID }}</h1>
-        <p class="govuk-body" style="margin-bottom: 30px;">{{ claim.status | processorstatusTag_V7 }} {% if claim.status
+        <p class="govuk-body" style="margin-bottom: 30px;">{{ claim.status | processorstatusTag }} {% if claim.status
             == "approved"%} on {{ claim.approvedDate | govukDate }}{% endif %}{% if claim.status == "rejected"%}on {{
             claim.rejectedDate | govukDate }}{% endif %}</p>
     </div>
@@ -342,7 +342,7 @@
 
         {% if (claim.fundingType == "TU") and (claim.claimType == "100") %}
         <p class="govuk-body">The amount to be reimbursed for this 100 claim is <strong>£{{ claim |
-                reimbursement_V7(claim.reimbursementAmount) }}</strong>.</p>
+                reimbursement(claim.reimbursementAmount) }}</strong>.</p>
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
             <li>maximum reimbursement amount for this training (£{{ claim.training.reimbursementAmount }})</li>
@@ -351,29 +351,29 @@
 
         {% elif (claim.fundingType == "TU") and (claim.claimType == "60") %}
         <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £{{ claim |
-            reimbursement_V7(claim.reimbursementAmount) / 0.6 }}.</p>
+            reimbursement(claim.reimbursementAmount) / 0.6 }}.</p>
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
             <li>maximum reimbursement amount for this training (£{{claim.training.reimbursementAmount}})</li>
             <li>cost per learner (what the organisation actually paid) (£{{ claim.reimbursementAmount }})</li>
         </ul>
         <p class="govuk-body">For this 60 part of the claim the organisation will get 60% of the total amount, which is
-            <strong>£{{ (claim | reimbursement_V7(claim.reimbursementAmount)) }}</strong>.</p>
+            <strong>£{{ (claim | reimbursement(claim.reimbursementAmount)) }}</strong>.</p>
         <p class="govuk-body">When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim |
-            reimbursement_V7(claim.reimbursementAmount) / 0.6 * 0.4)}}).</p>
+            reimbursement(claim.reimbursementAmount) / 0.6 * 0.4)}}).</p>
 
         {% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}
         <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim |
-            reimbursement_V7(claim.reimbursementAmount) / 0.4) }}.</p>
+            reimbursement(claim.reimbursementAmount) / 0.4) }}.</p>
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
             <li>maximum reimbursement amount for this training (£{{claim.training.reimbursementAmount}})</li>
             <li>cost per learner (what the organisation actually paid) (£{{claim.reimbursementAmount}})</li>
         </ul>
         <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of the total amount, which is
-            <strong>£{{ (claim | reimbursement_V7(claim.reimbursementAmount))}}</strong>.</p>
+            <strong>£{{ (claim | reimbursement(claim.reimbursementAmount))}}</strong>.</p>
         <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim |
-            reimbursement_V7(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>
+            reimbursement(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>
         {% endif %}
 
 
