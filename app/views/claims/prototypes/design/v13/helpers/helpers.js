@@ -28,7 +28,7 @@ function checkClaim(claim) {
         result.evidenceOfPayment = "valid"
     }
 
-    if (claim.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100") && claim.learner) {
+    if (claim.evidenceOfCompletion.length == 0 && (claim.claimType == "40" || claim.claimType == "100") && claim.learner) {
         result.evidenceOfCompletion = "missing"
     } else {
         result.evidenceOfCompletion = "valid"
