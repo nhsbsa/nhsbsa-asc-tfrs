@@ -150,7 +150,10 @@
   <div class="govuk-grid-column-one-third">
 
     {% include "../_components/claim-sections/claimAmount.html" %}
+
+    {% if claim.status != "rejected" %}
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
 
     {% include "../_components/claim-sections/claimHistory.html" %}
     
