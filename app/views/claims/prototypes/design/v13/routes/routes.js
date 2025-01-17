@@ -514,9 +514,9 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.learnerID;
   delete req.session.data.submitError
 
-  if (type == 'payment' || type == "completion") {
+  if (type == 'payment') {
     res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
-  } else if (radioButtonValue == "no") {
+  } else if (type == "completion") {
     res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
   }
 })
