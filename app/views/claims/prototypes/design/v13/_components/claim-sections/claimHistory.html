@@ -8,7 +8,7 @@
     {% if pairClaim.status == "approved"%}
       <div class="moj-timeline__item">
         <div class="moj-timeline__header">
-          <h2 class="moj-timeline__title">40 part approved</h2>
+          <h3 class="moj-timeline__title">40 part approved</h3>
           <p class="moj-timeline__byline">by Claim processor</p>
         </div>
         <p class="moj-timeline__date">
@@ -21,7 +21,7 @@
     {% if pairClaim.status == "rejected"%}
       <div class="moj-timeline__item">
         <div class="moj-timeline__header">
-          <h2 class="moj-timeline__title">40 part rejected</h2>
+          <h3 class="moj-timeline__title">40 part rejected</h3>
           <p class="moj-timeline__byline">by Claim processor</p>
         </div>
         <p class="moj-timeline__date">
@@ -34,7 +34,7 @@
     {% if (pairClaim.status == "submitted") or (pairClaim.status == "rejected") or (pairClaim.status == "approved")  %}
       <div class="moj-timeline__item">
         <div class="moj-timeline__header">
-          <h2 class="moj-timeline__title">40 part submitted</h2>
+          <h3 class="moj-timeline__title">40 part submitted</h3>
           <p class="moj-timeline__byline">by {{ pairClaim.createdBy }}</p>
         </div>
         <p class="moj-timeline__date">
@@ -48,7 +48,7 @@
 
     <div class="moj-timeline__item">
       <div class="moj-timeline__header">
-        <h2 class="moj-timeline__title">{% if claim.claimType == "60"%}60 part {% else %}Claim {% endif %}approved</h2>
+        <h3 class="moj-timeline__title">{% if claim.claimType == "60"%}60 part {% else %}Claim {% endif %}approved</h3>
         <p class="moj-timeline__byline">by Claim processor</p>
       </div>
       <p class="moj-timeline__date">
@@ -63,7 +63,7 @@
   {% if ( claim.status == "rejected") %}
     <div class="moj-timeline__item">
       <div class="moj-timeline__header">
-        <h2 class="moj-timeline__title">{% if claim.claimType == "60"%}60 part {% else %}Claim {% endif %}rejected</h2>
+        <h3 class="moj-timeline__title">{% if claim.claimType == "60"%}60 part {% else %}Claim {% endif %}rejected</h3>
         <p class="moj-timeline__byline">by Claim processor</p>
       </div>
       <p class="moj-timeline__date">
@@ -76,7 +76,7 @@
   {% if (claim.status == "submitted") or (claim.status == "rejected") or (claim.status == "approved") %}
     <div class="moj-timeline__item">
       <div class="moj-timeline__header">
-        <h2 class="moj-timeline__title">{% if claim.claimType == "60"%}60 part {% else %}Claim {% endif %}submitted</h2>
+        <h3 class="moj-timeline__title">{% if claim.claimType == "60"%}60 part {% else %}Claim {% endif %}submitted</h3>
         <p class="moj-timeline__byline">by {{ claim.createdBy }}</p>
       </div>
       <p class="moj-timeline__date">
@@ -90,7 +90,7 @@
 
   <div class="moj-timeline__item">
     <div class="moj-timeline__header">
-      <h2 class="moj-timeline__title">Claim created</h2>
+      <h3 class="moj-timeline__title">Claim created</h3>
     </div>
     <p class="moj-timeline__date">
       <time datetime="{{ claim.createdDate }}">{{ claim.createdDate | govukDate }} at {{ claim.createdDate | govukTime }}</time>
