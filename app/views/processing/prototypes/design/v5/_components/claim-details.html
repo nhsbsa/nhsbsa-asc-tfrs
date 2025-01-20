@@ -1,6 +1,6 @@
 {% set pairClaim = data.id | matchPairClaim(data.claims) %}
 {% if (claim.fundingType == "TU") and (claim.claimType == "60") %}
-    <h3 class="govuk-heading-s">60 claim</h3>
+    <h2 class="govuk-heading-s">60 claim</h2>
     <p class="govuk-body">This is the 60 part of a claim which uses the 60/40 funding model.</p>
     <p class="govuk-body">It covers evidence of payment.</p>
     {% if pairClaim != null %}
@@ -10,17 +10,17 @@
     {% endif %}
 
 {% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}
-    <h3 class="govuk-heading-s">40 claim</h3>
+    <h2 class="govuk-heading-s">40 claim</h2>
     <p class="govuk-body">This is the 40 part of a claim which uses the 60/40 funding model.</p>
     <p class="govuk-body">It covers evidence of training completion.</p>
     <p class="govuk-body">View the <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">60 part of the claim</a>, which covers evidence of payment.</p>
 
 {% elif (claim.fundingType == "TU") and (claim.claimType == "100") %}
-    <h3 class="govuk-heading-s">100 claim</h3>
+    <h2 class="govuk-heading-s">100 claim</h2>
     <p class="govuk-body">This is a 100 claim. It covers both evidence of payment and evidence of training completion.</p>
 {% endif %}
 
-<h3 class="govuk-heading-m" id="payment">Organisation</h3>
+<h2 class="govuk-heading-m" id="payment">Organisation</h2>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
@@ -47,7 +47,7 @@
         </dd>
     </div>
 </dl>
-<h3 class="govuk-heading-m" id="payment">Submitter</h3>
+<h2 class="govuk-heading-m" id="payment">Submitter</h2>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
@@ -76,7 +76,7 @@
 
 </dl>
 
-<h3 class="govuk-heading-m" id="payment">Training</h3>
+<h2 class="govuk-heading-m" id="payment">Training</h2>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
@@ -129,7 +129,7 @@
     </div>
     {% endif %}
 </dl>
-<h3 class="govuk-heading-m" id="payment">Learner</h3>
+<h2 class="govuk-heading-m" id="payment">Learner</h2>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">

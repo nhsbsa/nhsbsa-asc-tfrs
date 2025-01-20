@@ -87,9 +87,9 @@
 
         <div style="padding-top: 10px;">
             {% if ((claim.fundingType == "TU") and (claim.claimType != "40"))%}
-                <h2 class="govuk-heading-m">
+                <h3 class="govuk-heading-m">
                     Evidence of payment
-                </h2>
+                </h3>
                 <dl class="govuk-summary-list">
                     {% for evidence in claim.evidenceOfPayment %}
                         {% set isPayment = true %}
@@ -99,9 +99,9 @@
             {% endif %}
 
             {% if (claim.fundingType == "TU") and (claim.claimType != "60")%}
-                <h2 class="govuk-heading-m">
+                <h3 class="govuk-heading-m">
                     Evidence of completion
-                </h2>
+                </h3>
                 <dl class="govuk-summary-list">
                     {% set evidence = claim.evidenceOfCompletion %}
                     {% set isPayment = false %}
@@ -118,7 +118,7 @@
 
         {% if data.userType == "processor" %}
             <form action="../claim-process-handler" method="post" novalidate>
-                <h2 class="govuk-heading-m">Review of evidence</h2>
+                <h3 class="govuk-heading-m">Review of evidence</h3>
                 {% if ((claim.fundingType == "TU") and (claim.claimType != "40"))%}
                     <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}"
                         id="payment-review">
@@ -294,10 +294,10 @@
         
         {% else %}
 
-        <h2 class="govuk-heading-m">Completed review of evidence</h2>
+        <h3 class="govuk-heading-m">Completed review of evidence</h3>
 
         {% if ((claim.fundingType == "TU") and (claim.claimType != "40"))%}
-        <h3 class="govuk-heading-s">Does the evidence of payment meet the required criteria?</h3>
+        <h4 class="govuk-heading-s">Does the evidence of payment meet the required criteria?</h4>
 
         {% if claim.evidenceOfPaymentreview.pass == "Approved" %}
         <p class="govuk-body">
@@ -314,7 +314,7 @@
         {% endif %}
 
         {% if (claim.fundingType == "TU") and (claim.claimType != "60") %}
-        <h3 class="govuk-heading-s">Does the evidence of completion meet the required criteria?</h3>
+        <h4 class="govuk-heading-s">Does the evidence of completion meet the required criteria?</h4>
 
         {% if claim.evidenceOfCompletionreview.pass == "Approved" %}
         <p class="govuk-body">Yes</br></p>
