@@ -89,11 +89,11 @@
       <dd class="govuk-summary-list__value">
         {% if claim.claimType == "100" %}
           {% for evidence in claim.evidenceOfCompletion %}
-            <p><a class="govuk-link" href="/public/images/{{ evidence }}" target="_blank">{{ evidence }}<span class="govuk-visually-hidden">{{ evidence }}</span></a></p>
+            <p><a class="govuk-link" href="/public/images/{{ evidence }}" target="_blank">{{ evidence }}  (opens in new tab)</a></p>
           {% endfor %}
         {% elif claim.claimType == "60" %}
          {% for evidence in pairClaim.evidenceOfCompletion %}
-          <p><a class="govuk-link" href="/public/images/{{ evidence }}" target="_blank">{{ evidence }}<span class="govuk-visually-hidden">{{ evidence }}</span></a></p>
+          <p><a class="govuk-link" href="/public/images/{{ evidence }}" target="_blank">{{ evidence }}  (opens in new tab)</a></p>
          {% endfor %}
         {% endif %}
       </dd>

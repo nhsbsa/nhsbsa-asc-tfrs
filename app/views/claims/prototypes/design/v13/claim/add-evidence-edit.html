@@ -82,11 +82,11 @@
         {% for evidence in evidence %}
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">{{evidence}}<span class="govuk-visually-hidden">{{evidence}}</span></a>
+            <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">{{evidence}} (opens in new tab)</a>
           </dt>
           <dd class="govuk-summary-list__actions">
             <form action="../remove-evidence?type={{data.type}}" method="post" novalidate>
-              <button class="unstyle-button">Delete</button>
+              <button class="unstyle-button">Delete<span class="govuk-visually-hidden"> {{evidence}}</span></button>
             </form>
           </dd>
         </div>
