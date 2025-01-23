@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Image Link</title>
+    <style>
+        body {
+            background-color: #b1b4b6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #yellow-banner {
+            background-color: yellow;
+            color: black;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #image-link {
+            display: block;
+            text-align: center;
+            margin-top: 6em;
+        }
+
+        #image-link img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="yellow-banner">
+        <p>This screen is for testing only. There is no interaction. Please click the form image to continue or <a class="govuk-link" href="MFA">go back</a>.</p>
+    </div>
+    <div id="image-link">
+        <a id="image-link" href="{% if data.journey == 'creation' and data.userType == 'signatory'%} ../account-setup/verify-details {% else %} ../manage-claims-home?fundingPot=TU  {% endif %}">
+            <img src="/public/images/mfa-code.png" alt="Clickable Image">
+        </a>
+    </div>
+</body>
+
+</html>
+

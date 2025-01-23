@@ -1,0 +1,28 @@
+{% if trainingGroup.groupTitle == "Courses" %}
+<tr class="govuk-table__row">
+    <th scope="row" class="govuk-table__header">{{ training.code }}</th>
+    <td class="govuk-table__cell">{{ training.groupCategory }}</td>
+    <td class="govuk-table__cell">{{ training.title }}</td>
+    <td class="govuk-table__cell  govuk-table__cell--numeric">
+        <form method="post" action="../add-training" class="govuk-!-margin-0">
+            <input type="hidden" name="trainingSelection" value="{{ training.code }}">
+            <input type="hidden" name="viewOnly" value='false'>
+            <button type="submit" class="govuk-button">Add <span class="govuk-visually-hidden">&nbsp; course {{ training.code }}</span> to claim</button>
+        </form>
+    </td>
+</tr>
+{% elif trainingGroup.groupTitle == "Qualifications" %}
+<tr class="govuk-table__row">
+    <th scope="row" class="govuk-table__header">{{ training.code }}</th>
+    <td class="govuk-table__cell">{{ training.type }}</td>
+    <td class="govuk-table__cell">{{ training.title }}</td>
+    <td class="govuk-table__cell">{{ training.awardingOrganisation }}</td>
+    <td class="govuk-table__cell  govuk-table__cell--numeric">
+        <form method="post" action="../add-training" class="govuk-!-margin-0">
+            <input type="hidden" name="trainingSelection" value="{{ training.code }}">
+            <input type="hidden" name="viewOnly" value='false'>
+            <button type="submit" class="govuk-button">Add<span class="govuk-visually-hidden">&nbsp; qualification {{ training.code }}</span> to claim</button>
+        </form>
+    </td>
+</tr>
+{% endif %}
