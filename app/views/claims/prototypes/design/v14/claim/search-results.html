@@ -1,10 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 
-{% if (data.searchType == 'a') %} 
-    {% set matchedClaims = data.claims | claimsMatchAdvancedSearchA(data.training, data.learner) %}
-{% elif (data.searchType == 'b') %} 
-    {% set matchedClaims = data.claims | claimsMatchAdvancedSearchB(data.training, data.learner, data.submitter, data.statusOptions, data.typeOptions, data.sort, data.startMonth, data.startYear, data.endMonth, data.endYear) %}
-{% endif %} 
+{% set matchedClaims = data.claims | claimsMatchAdvancedSearchA(data.training, data.learner) %}
+
 {% set resultCount = matchedClaims.length %}
 
 
@@ -13,7 +10,7 @@ Search results — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
-    <a href="search-version-{{data.searchType}}?searchId=&trainingName=&learner=" class="govuk-back-link">Back</a>
+    <a href="advanced-search?searchId=&trainingName=&learner=" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}

@@ -19,7 +19,7 @@
 {% block beforeContent %}
 
   {% if (data.fromSearchResults) %}
-    <a href="search-version-{{data.searchType}}" class="govuk-back-link">Back</a>
+    <a href="advanced-search" class="govuk-back-link">Back</a>
   {% elif (data.fromSearchId) %}
     <a href="../manage-claims-home?searchId=" class="govuk-back-link">Back</a>
   {% elif not (claim.status == "new") and not (claim.status == "not-yet-submitted") %}

@@ -142,9 +142,9 @@ router.post('/search_result_a', function (req, res) {
     errorQuery += "learnerSearchLengthInsufficient=true&"
   } 
   if (errorQuery == "") {
-    res.redirect('claims/prototypes/design/v14/claim/search-version-a?fromSearchResults=true#searchResults');
+    res.redirect('claims/prototypes/design/v14/claim/advanced-search?fromSearchResults=true#searchResults');
   } else {
-    res.redirect('claims/prototypes/design/v14/claim/search-version-a?' + errorQuery)
+    res.redirect('claims/prototypes/design/v14/claim/advanced-search?' + errorQuery)
   }
 });
 
