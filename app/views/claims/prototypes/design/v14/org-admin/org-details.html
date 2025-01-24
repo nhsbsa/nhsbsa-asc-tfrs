@@ -1,5 +1,7 @@
 {% extends "../layouts/claims-main.html" %} 
 
+{% set sro = data.org | identifySignatory %}
+
 {% block pageTitle %} 
 Organisation details — {{serviceName}} — GOV.UK
 {% endblock %}
@@ -32,6 +34,14 @@ Organisation details — {{serviceName}} — GOV.UK
                 </dt>
                 <dd class="govuk-summary-list__value">
                     {{ data.org.address[0] }}<br>  {{ data.org.address[1] }}<br> {{ data.org.address[2] }}  
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Senior Responsible officer 
+                </dt>
+                <dd class="govuk-summary-list__value">
+                        {{sro.givenName}} {{sro.familyName}} <br> <a class="govuk-link" href="mailto:example@example.com">{{sro.email}}</a>
                 </dd>
             </div>
         </dl>
