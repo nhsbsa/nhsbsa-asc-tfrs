@@ -1,7 +1,7 @@
 {% extends "./layouts/claims-main.html" %}
 
 {% set status = data.statusID | statusDetails(data.statuses) %}
-{% set noClaims = status.id | claimCount(data.claims, data.fundingPot) %}
+{% set noClaims = status.id | claimCount(data.claims) %}
 {% set deletedId = data.deletedID %}
 
 {% set rowsPerPage = 20 %}
@@ -22,7 +22,7 @@
         </li>
         <li class="govuk-breadcrumbs__list-item">
             <a class="govuk-breadcrumbs__link"
-                href="manage-claims?fundingPot={{ data.fundingPot }}&statusID={{ status.id }}&deleteSuccess=">{{ status.name
+                href="manage-claims?statusID={{ status.id }}&deleteSuccess=">{{ status.name
                 }} claims</a>
         </li>
     </ol>

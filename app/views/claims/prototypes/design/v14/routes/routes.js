@@ -569,7 +569,6 @@ router.post('/remove-evidence', function (req, res) {
 })
 
 router.post('/save-claim', function (req, res) {
-  var fundingPot = req.session.data.fundingPot
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
@@ -593,7 +592,7 @@ router.post('/save-claim', function (req, res) {
 
   req.session.data.currentPage = "1"
 
-  res.redirect('manage-claims?fundingPot=' + fundingPot + '&statusID=not-yet-submitted')
+  res.redirect('manage-claims?statusID=not-yet-submitted')
 
 });
 

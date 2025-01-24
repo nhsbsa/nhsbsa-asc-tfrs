@@ -145,7 +145,7 @@ Manage claims - {{serviceName}} — GOV.UK
 
     <ul class="homepage-services-and-info__list">
         {% for status in data.statuses %}
-        {% set noClaims = status.id | claimCount(data.claims, data.fundingPot) %}
+        {% set noClaims = status.id | claimCount(data.claims) %}
         <li class="chevron-card">
           <div class="chevron-card__wrapper">
               <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
