@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set user = data.deletedEmail | findUser(data.users) %}
+{% set user = data.deletedEmail | findUser(data.org.users) %}
 
 {% if user.status == "active" %}
   {% set usertype = "registered" %}
@@ -54,7 +54,7 @@
             <a type="submit" class="govuk-button" href="../confirm-delete-user">
               {% if user.status == "active" %}Yes, delete user{% else %}Yes, cancel invitation{% endif %}
             </a>
-            <a class="govuk-link govuk-link--no-visited-state" href="../org-admin/manage-team?deletedEmail">
+            <a class="govuk-link govuk-link--no-visited-state" href="../org-admin/manage-team?tabLocation=users&deletedEmail">
                 No, go back
             </a>
         </div>

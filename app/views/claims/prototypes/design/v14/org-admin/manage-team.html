@@ -1,8 +1,8 @@
 {% extends "../layouts/claims-main.html" %} 
 
-{% set matchResendUser = data.resendEmail | findUser (data.users) %}
-{% set matchDeletedUser = data.deletedEmail | findUser (data.users) %}
-{% set count = data.users | userCountNotExpired %}
+{% set matchResendUser = data.resendEmail | findUser (data.org.users) %}
+{% set matchDeletedUser = data.deletedEmail | findUser (data.org.users) %}
+{% set count = data.org.users | userCountNotExpired %}
 
 
 {% block pageTitle %} 
@@ -73,7 +73,7 @@ Manage team — {{serviceName}} — GOV.UK
     <table class="govuk-table">
       <caption class="govuk-table__caption govuk-table__caption--m">Registered</caption>
       <tbody class="govuk-table__body">
-          {% for user in data.users %}
+          {% for user in data.org.users %}
             {% if user.status == "active" %}
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
@@ -88,11 +88,11 @@ Manage team — {{serviceName}} — GOV.UK
         {% endfor %}
       </tbody>
     </table>
-    {% if (data.users | countMatchingStatus("pending")) >0 %}
+    {% if (data.org.users | countMatchingStatus("pending")) >0 %}
     <table class="govuk-table">
       <caption class="govuk-table__caption govuk-table__caption--m">Invited</caption>
       <tbody class="govuk-table__body">
-          {% for user in data.users %}
+          {% for user in data.org.users %}
             {% if user.status == "pending" %}
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>

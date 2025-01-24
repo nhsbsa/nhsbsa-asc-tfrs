@@ -726,7 +726,7 @@ router.post('/check-user', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
 
-  const submitError = checkUserForm(familyName, givenName, email, req.session.data.users)
+  const submitError = checkUserForm(familyName, givenName, email, req.session.data.org.users)
 
   if (submitError.userValid) {
     res.redirect('org-admin/confirm-user-details')
@@ -757,13 +757,13 @@ router.post('/invite-user', function (req, res) {
         status: "pending",
         invited: new Date()
     };
-    req.session.data.users.push(user)
+    req.session.data.org.users.push(user)
     delete req.session.data.familyName
     delete req.session.data.givenName
     delete req.session.data.email
     delete req.session.data.deleteSuccess
     delete req.session.data.deletedUser
-    res.redirect('org-admin/manage-team?invite=success')
+    res.redirect('org-admin/manage-team?tabLocation=users&invite=success')
   } else {
     res.redirect('org-admin/confirm-user-details?checkBoxSubmitError=true')
   }
@@ -779,21 +779,21 @@ router.get('/reinvite-user', function (req, res) {
     req.session.data.resendList = [req.session.data.name]
   }
 
-  res.redirect('org-admin/manage-team')
+  res.redirect('org-admin/manage-team?tabLocation=users')
 
 });
 
 
 router.get('/confirm-delete-user', function (req, res) {
   var query = "registered"
-  for (const user of req.session.data.users) {
+  for (const user of req.session.data.org.users) {
     if (req.session.data.deletedEmail == user.email) {
       query = user.status
       user.status = "deleted"
     }
   }
   delete req.session.data.invite
-  res.redirect('org-admin/manage-team?deleteSuccess=true&deletedUser=' + query)
+  res.redirect('org-admin/manage-team?tabLocation=users&deleteSuccess=true&deletedUser=' + query)
 });
 
 router.get('/clear-learner', function (req, res) {
@@ -834,7 +834,6 @@ function loadData(req) {
   var trainingFile = 'training.json'
   var claimsFile = 'claims.json'
   var statusFile = 'claim-item-statuses.json'
-  var roleTypes = 'role-types.json'
   var users = 'users.json'
 
   console.log('loading in training file')
@@ -852,14 +851,6 @@ function loadData(req) {
   console.log('loading in statuses file')
   req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
   console.log('statuses file loaded')
-
-  console.log('loading in role types file')
-  req.session.data['roleTypes'] = loadJSONFromFile(roleTypes, path)
-  console.log('role types file loaded')
-
-  console.log('loading in users file')
-  req.session.data['users'] = loadJSONFromFile(users, path)
-  console.log('users file loaded')
 
   return console.log('data updated')
 }

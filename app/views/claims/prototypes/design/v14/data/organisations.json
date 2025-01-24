@@ -3,86 +3,135 @@
         "workplaceId": "B02944934",
         "name": "Evergreen Care home",
         "address": ["72 Guild Street", "London", "SE23 6FH"],
-        "signatory": {
-          "givenName": "Lionel",
-          "familyName": "Lowe",
-          "email": "lionel-lowel@evergreencare.co.uk",
-          "status": "active"
-        },
-        "users": {
-          "active": [
-            {
-            "name": "Daniel Jones",
-            "email": "d.jones@evergreencare.com"
-          }, 
+        "users": [
           {
-            "name": "Rachel Mcglee",
-            "email": "rachel.mcglee@evergreencare.com"
+              "familyName": "Gleason",
+              "givenName": "Flossie",
+              "email": "flossie.gleason@homecase.co.uk",
+              "type": "signatory",
+              "status": "active",
+              "invited": "2023-06-21T07:31:33.123Z"
           },
           {
-            "name": "Flossie Gleason",
-            "email": "flossie.gleason@evergreencare.com"
+              "familyName": "Monahan",
+              "givenName": "Mara",
+              "email": "mara.monahan@homecase.co.uk",
+              "type": "submitter",
+              "status": "pending",
+              "invited": "2023-06-21T07:31:33.123Z"
           },
           {
-            "name": "Fredrick Smith",
-            "email": "fredrick.smith@evergreencare.com"
+              "familyName": "Upton",
+              "givenName": "Johnny",
+              "email": "johnny.upton@homecase.co.uk",
+              "type": "submitter",
+              "status": "active",
+              "invited": "2023-06-21T07:31:33.123Z"
+          },
+          {
+              "familyName": "Connelly",
+              "givenName": "Allan",
+              "email": "allan.connelly@homecase.co.uk",
+              "type": "submitter",
+              "status": "pending",
+              "invited": "2024-07-01T07:31:33.123Z"
           }
-        ],
-          "inactive": [],
-          "invited": [{
-            "name": "Charlotte Dandy",
-            "email": "charlotte.dandy@evergreencare.com"
-          }]
-        },
+      
+      ],
         "bankDetails": {
           "nameOnAccount": "Evergreen Care Home",
           "sortCode": "272893",
           "accountNumber": "12345678",
-          "buildingSocietyNumber": "4598329056"
-        }
-      },
-      {
-        "workplaceId": "G76904778",
-        "name": "Bright Horizons Care home",
-        "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
-        "bankDetails": null,
-        "signatory": {
-          "givenName": "Natasha",
-          "familyName": "Jones",
-          "email": "natasha-jones@carehome.co.uk",
-          "status": "invited"
-        }, 
-        "users": {
-          "active": [],
-          "inactive": [],
-          "invited": []
+          "buildingSocietyNumber": null
         }
       },
       {
         "workplaceId": "D91774723",
         "name": "Pinetree Manor Care Centre",
         "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
-        "signatory": {
-          "givenName": "Hadyn",
-          "familyName": "Lacy",
-          "email": "hadyn-lacey@pinetreecare.co.uk",
-          "status": "active"
-        },
-        "users": {
-          "active": [{
-            "name": "Daniel Jones",
-            "email": "d.jones@pinetreecare.com"
+        "users": [
+          {
+              "familyName": "Gleason",
+              "givenName": "Flossie",
+              "email": "flossie.gleason@homecase.co.uk",
+              "type": "signatory",
+              "status": "active",
+              "invited": "2023-06-21T07:31:33.123Z"
           },
           {
-            "name": "Fredrick Smith",
-            "email": "fredrick.smith@pinetreecare.com"
-          }],
-          "inactive": [],
-          "invited": [{
-            "name": "Jack McPhearson",
-            "email": "jack.McPhearson@pinetreecare.com"
-          }]
-        },
+              "familyName": "Monahan",
+              "givenName": "Mara",
+              "email": "mara.monahan@homecase.co.uk",
+              "type": "submitter",
+              "status": "pending",
+              "invited": "2023-06-21T07:31:33.123Z"
+          },
+          {
+              "familyName": "Upton",
+              "givenName": "Johnny",
+              "email": "johnny.upton@homecase.co.uk",
+              "type": "submitter",
+              "status": "active",
+              "invited": "2023-06-21T07:31:33.123Z"
+          },
+          {
+            "familyName": "Smith",
+            "givenName": "John",
+            "email": "john.smith@homecase.co.uk",
+            "type": "submitter",
+            "status": "active",
+            "invited": "2023-06-21T07:31:33.123Z"
+          },
+          {
+            "familyName": "Hopkins",
+            "givenName": "Jane",
+            "email": "jane.hopkins@homecase.co.uk",
+            "type": "submitter",
+            "status": "active",
+            "invited": "2023-06-21T07:31:33.123Z"
+          },
+          {
+            "familyName": "Yaeger",
+            "givenName": "Eren",
+            "email": "eren.yaeger@homecase.co.uk",
+            "type": "submitter",
+            "status": "active",
+            "invited": "2023-06-21T07:31:33.123Z"
+          },
+          {
+            "familyName": "Connelly",
+            "givenName": "Allan",
+            "email": "allan.connelly@homecase.co.uk",
+            "type": "submitter",
+            "status": "pending",
+            "invited": "2024-07-01T07:31:33.123Z"
+          },
+          {
+            "familyName": "Ackerman",
+            "givenName": "Levi",
+            "email": "levi.ackerman@homecase.co.uk",
+            "type": "submitter",
+            "status": "pending",
+            "invited": "2024-07-01T07:31:33.123Z"
+          },
+          {
+            "familyName": "Styne",
+            "givenName": "Carol",
+            "email": "carol.styne@homecase.co.uk",
+            "type": "submitter",
+            "status": "pending",
+            "invited": "2024-07-01T07:31:33.123Z"
+          },
+          {
+            "familyName": "Crowne",
+            "givenName": "Sheryl",
+            "email": "sheryl.crowne@homecase.co.uk",
+            "type": "submitter",
+            "status": "pending",
+            "invited": "2024-07-01T07:31:33.123Z"
+          }
+      
+      ],
         "bankDetails": {
           "nameOnAccount": "Pinetree Manor Care Centre",
           "sortCode": "526788",
@@ -94,29 +143,21 @@
         "workplaceId": "A89263211",
         "name": "Kingscourt Care Home",
         "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
-        "signatory": {
-          "givenName": "Joseph",
-          "familyName": "Stepen",
-          "email": "joseph-stephen@kingscourtcare.co.uk",
-          "status": "active"
-        },
-        "users": {
-          "active": [{
-            "name": "Rachel Mcglee",
-            "email": "rachel.mcglee@kingscourtcare.com"
-          },
+        "users": [
           {
-            "name": "Mary McCleod",
-            "email": "mary.mccleod@kingscourtcare.com"
-          }],
-          "inactive": [],
-          "invited": []
-        },
+              "familyName": "Gleason",
+              "givenName": "Flossie",
+              "email": "flossie.gleason@homecase.co.uk",
+              "type": "signatory",
+              "status": "active",
+              "invited": "2023-06-21T07:31:33.123Z"
+          }      
+      ],
         "bankDetails": {
           "nameOnAccount": "Kingscourt Care Home",
           "sortCode": "123384",
           "accountNumber": "82889922",
-          "buildingSocietyNumber": "4598329056"
+          "buildingSocietyNumber": null
         }
       }
     ]  

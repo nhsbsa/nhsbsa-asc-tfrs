@@ -90,12 +90,6 @@ addFilter('potName', function (type) {
     return name
 })
 
-addFilter('checkEligible', function (learner, type, roleTypes) {
-    let eligibleRoles = []
-    eligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
-    return eligibleRoles.includes(learner.roleType)
-})
-
 addFilter('errorSummary', function (claim, submitError) {
     let errorSummaryStr = ''
 
