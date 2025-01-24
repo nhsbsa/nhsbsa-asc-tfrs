@@ -1,6 +1,7 @@
 {% extends "./main.html" %}
 
 {% block header %}
+
 <header class="govuk-header " role="banner" data-module="govuk-header">
   <div class="govuk-header__container govuk-width-container">
     <div class="govuk-header__logo">
@@ -45,7 +46,7 @@
 </div>
 <div class="app-organisation-actions govuk-width-container" aria-label="Organisation switcher">
   <div class="app-organisation-actions__title">
-    Oaktree Care home <span class="govuk-caption-m">B1038592</span>
+    {{data.org.name}} <span class="govuk-caption-m">{{data.org.workplaceId}}</span>
     </div>
     <!-- <div class="app-organisation-actions__actions">
         <a class="govuk-link app-organisation-actions__link" href="/organisations">Change organisation</a>
@@ -60,25 +61,25 @@
           Menu
         </button>
         <ul class="govuk-service-navigation__list" id="navigation">
-          <li class="govuk-service-navigation__item govuk-service-navigation__item--active">
-            <a class="govuk-service-navigation__link" href="./manage-claims-home" aria-current="true">
+          <li class="govuk-service-navigation__item {% if data.tabLocation == 'claims' %}govuk-service-navigation__item--active{% endif %}">
+            <a class="govuk-service-navigation__link" href="/claims/prototypes/design/v14/manage-claims?tabLocation=claims" {% if data.tabLocation == 'claims' %}aria-current="true"{% endif %}>
               <strong class="govuk-service-navigation__active-fallback">Manage claims</strong>
             </a>
           </li>
           {% if data.userType == "signatory" %}
-          <li class="govuk-service-navigation__item">
-            <a class="govuk-service-navigation__link" href="./org-admin/manage-team">
+          <li class="govuk-service-navigation__item {% if data.tabLocation == 'users' %}govuk-service-navigation__item--active{% endif %}">
+            <a class="govuk-service-navigation__link" href="/claims/prototypes/design/v14/org-admin/manage-team?tabLocation=users" {% if data.tabLocation == 'users' %}aria-current="true"{% endif %}>
               Manage team
             </a>
           </li>
-          <li class="govuk-service-navigation__item">
-            <a class="govuk-service-navigation__link" href="./org-admin/bank-details">
+          <li class="govuk-service-navigation__item {% if data.tabLocation == 'bankDetails' %}govuk-service-navigation__item--active{% endif %}">
+            <a class="govuk-service-navigation__link" href="/claims/prototypes/design/v14/org-admin/bank-details?tabLocation=bankDetails" {% if data.tabLocation == 'bankDetails' %}aria-current="true"{% endif %}>
               Manage bank details
             </a>
           </li>
           {% endif %}
-          <li class="govuk-service-navigation__item">
-            <a class="govuk-service-navigation__link" href="./org-admin/org-details">
+          <li class="govuk-service-navigation__item {% if data.tabLocation == 'orgDetails' %}govuk-service-navigation__item--active{% endif %}">
+            <a class="govuk-service-navigation__link" href="/claims/prototypes/design/v14/org-admin/org-details?tabLocation=orgDetails" {% if data.tabLocation == 'orgDetails' %}aria-current="true"{% endif %}>
               Organisation details
             </a>
           </li>
@@ -87,4 +88,5 @@
     </div>
   </div>
 </div>
+
 {% endblock %}

@@ -898,7 +898,7 @@ function loadData(req) {
 
 router.post('/load-data', function (req, res) {
   //Load data from JSON files
-  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v13/data/')
+  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v14/data/')
   const orgID = req.session.data['orgID']
 
   console.log(orgID)
@@ -911,7 +911,7 @@ router.post('/load-data', function (req, res) {
     }
   }
 
-  delete req.session.data['orgId']
+  delete req.session.data['orgID']
   
   loadData(req);
   res.redirect('before-you-start.html')
