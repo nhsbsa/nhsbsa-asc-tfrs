@@ -89,7 +89,7 @@ Manage claims - {{serviceName}} — GOV.UK
       </div>
       <div class="moj-page-header-actions__actions">
         <div class="moj-button-group moj-button-group--inline">
-            <form method="post" action="/new-claim-v14" class="govuk-!-margin-0">
+            <form method="post" action="./new-claim" class="govuk-!-margin-0">
               <button class="govuk-button moj-button-menu__item govuk-button--primary moj-page-header-actions__action"
                 data-module="govuk-button" type="submit">Start a new claim</button>
             </form>
@@ -103,7 +103,7 @@ Manage claims - {{serviceName}} — GOV.UK
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <div class="moj-search search__container">
-      <form action="/search_id_result" method="post">
+      <form action="./search_id_result" method="post">
         <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">
           <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
             Find a claim

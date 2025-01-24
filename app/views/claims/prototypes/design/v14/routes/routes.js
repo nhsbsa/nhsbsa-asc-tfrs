@@ -328,7 +328,7 @@ function newTUClaim(req, input, type) {
   return claim.claimID
 }
 
-router.get('/new-claim-v14', function (req, res) {
+router.post('/new-claim', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];
   delete req.session.data['notFound'];
