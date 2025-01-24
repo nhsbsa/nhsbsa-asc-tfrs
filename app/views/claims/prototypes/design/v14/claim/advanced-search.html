@@ -4,16 +4,16 @@
 {% set resultCount = matchedClaims.length %}
 
 {% block pageTitle %}
-{% if data.noInputsA or data.trainingSearchLengthInsufficient or data.learnerSearchLengthInsufficient %}Error: {% endif %}Advanced search — {{serviceName}} — GOV.UK
+{% if data.noInputs or data.trainingSearchLengthInsufficient or data.learnerSearchLengthInsufficient %}Error: {% endif %}Advanced search — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../manage-claims-home?fundingPot=TU&noInputsA&trainingName&learner&trainingSearchLengthInsufficient&learnerSearchLengthInsufficient" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home?trainingName&learner" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
 
-{% if data.noInputsA or data.trainingSearchLengthInsufficient or data.learnerSearchLengthInsufficient %}
+{% if data.noInputs or data.trainingSearchLengthInsufficient or data.learnerSearchLengthInsufficient %}
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <div class="govuk-error-summary" data-module="govuk-error-summary">
@@ -23,7 +23,7 @@
         </h2>
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
-              {% if data.noInputsA %}
+              {% if data.noInputs %}
               <li>
                 <a href="#input-error">
                   You need to enter something to search on
@@ -55,10 +55,10 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <div class="{% if data.noInputsA %}govuk-form-group--error{% endif %} govuk-!-padding-bottom-4">
+    <div class="{% if data.noInputs %}govuk-form-group--error{% endif %} govuk-!-padding-bottom-4">
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search</h2>
         <p class="govuk-body govuk-!-margin-bottom-2">You can find a claim by either learner, or course or qualification name, or a combination of both.</p>
-        {% if data.noInputsA %}
+        {% if data.noInputs %}
         <p id="input-error" class="govuk-error-message govuk-!-margin-bottom-3">
           <span class="govuk-visually-hidden">Error:</span> You need to enter something to search on
         </p>
@@ -69,8 +69,8 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <form action="/search_result_a" method="post" class="form">
-      <div class="{% if data.noInputsA %}govuk-form-group--error{% endif %} govuk-!-margin-bottom-6">
+    <form action="../advanced-search-handler" method="post" class="form">
+      <div class="{% if data.noInputs %}govuk-form-group--error{% endif %} govuk-!-margin-bottom-6">
         <div class="govuk-form-group {% if data.learnerSearchLengthInsufficient %}govuk-form-group--error{% endif %}">
           <label class="govuk-label" for="learner">
             <strong>Learner</strong>

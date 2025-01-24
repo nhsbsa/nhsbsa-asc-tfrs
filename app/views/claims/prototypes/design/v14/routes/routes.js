@@ -88,17 +88,17 @@ router.post('/search_id_result', function (req, res) {
 
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
-    return res.redirect('claims/prototypes/design/v14/manage-claims-home?emptyError=true');
+    return res.redirect('manage-claims-home?emptyError=true');
   }
 
   const letterORegex = /o/i;
   if (letterORegex.test(claimID)) {
-    return res.redirect('claims/prototypes/design/v14/manage-claims-home?invalidIDError=true');
+    return res.redirect('manage-claims-home?invalidIDError=true');
   }
 
   const lengthRegex = /^[A-NP-Z0-9]{3}(-)?[A-NP-Z0-9]{4}(-)?[A-NP-Z0-9]{4}(-)?([ABC])?$/;
   if (!lengthRegex.test(claimID)) {
-    return res.redirect('claims/prototypes/design/v14/manage-claims-home?searchId='+claimID + '&invalidIDError=true');
+    return res.redirect('manage-claims-home?searchId='+claimID + '&invalidIDError=true');
   }
 
   var foundClaim = null
@@ -112,14 +112,14 @@ router.post('/search_id_result', function (req, res) {
   // handle the claim id searched on won't be the one on a specific claim
 
   if (foundClaim == null) {
-    return res.redirect('claims/prototypes/design/v14/manage-claims-home?searchId='+claimID + '&notFound=true');
+    return res.redirect('manage-claims-home?searchId='+claimID + '&notFound=true');
   } else {
-    res.redirect('claims/prototypes/design/v14/claim/claim-details?id=' + claimID +"&fromSearchId=true");
+    res.redirect('claim/claim-details?id=' + claimID +"&fromSearchId=true");
   }
 });
 
-router.post('/search_result_a', function (req, res) {
-  delete req.session.data['noInputsA'];
+router.post('/advanced-search-handler', function (req, res) {
+  delete req.session.data['noInputs'];
   delete req.session.data['notFound'];
   delete req.session.data['invalidIDError'];
   delete req.session.data['emptyError'];
@@ -133,7 +133,7 @@ router.post('/search_result_a', function (req, res) {
 
   let errorQuery = ""
   if (training == "" && learner == "") {
-    errorQuery += "noInputsA=true&"
+    errorQuery += "noInputs=true&"
   }
   if ((training != "" && training.length < 3)) {
     errorQuery += "trainingSearchLengthInsufficient=true&"
@@ -142,51 +142,20 @@ router.post('/search_result_a', function (req, res) {
     errorQuery += "learnerSearchLengthInsufficient=true&"
   } 
   if (errorQuery == "") {
-    res.redirect('claims/prototypes/design/v14/claim/advanced-search?fromSearchResults=true#searchResults');
+    delete req.session.data['noInputs'];
+    delete req.session.data['notFound'];
+    delete req.session.data['invalidIDError'];
+    delete req.session.data['emptyError'];
+    delete req.session.data['fromSearchId'];
+    delete req.session.data['fromSearchResults'];
+    delete req.session.data['trainingSearchLengthInsufficient'];
+    delete req.session.data['learnerSearchLengthInsufficient'];
+    
+    res.redirect('claim/advanced-search?fromSearchResults=true#searchResults');
   } else {
-    res.redirect('claims/prototypes/design/v14/claim/advanced-search?' + errorQuery)
+    res.redirect('claim/advanced-search?' + errorQuery)
   }
 });
-
-router.post('/search_result_b', function (req, res) {
-  delete req.session.data['noInputsB'];
-  delete req.session.data['dateInvalid'];
-  delete req.session.data['fromSearchId'];
-  delete req.session.data['fromSearchResults'];
-
-  const training = req.session.data.trainingName
-  const learner = req.session.data.learner
-  const submitter = req.session.data.submitter
-  const statusArray = req.session.data.statusOptions
-  const typeArray = req.session.data.typeOptions
-  const startMonth = req.session.data.startMonth
-  const startYear = req.session.data.startYear
-  const endMonth = req.session.data.endMonth
-  const endYear = req.session.data.endYear
-
-  const startDate = new Date(startYear, startMonth - 1, 1);
-  const endDate = new Date(endYear, endMonth, 0);
-
-  if (training == "" && learner == "" && submitter == "" && statusArray == null && typeArray == null && startMonth == "" && startYear == "" && endMonth == "" && endYear == "") {
-    return res.redirect('claims/prototypes/design/v14/claim/search-version-b?noInputsB=true');
-  } 
-  if (startMonth != "" || startYear != "" || endMonth != "" || endYear != "") {
-    if (isNaN(startMonth) || isNaN(startYear) || isNaN(endMonth) || isNaN(endYear)) {
-      return res.redirect('claims/prototypes/design/v14/claim/search-version-b?dateInvalid=notValidDates');
-    } else if ((startMonth < 1 || startMonth > 12) || (endMonth < 1 || endMonth > 12) || (startYear < 1 || startYear > 2024) || (endYear < 1 || endYear > 2024)) {
-      return res.redirect('claims/prototypes/design/v14/claim/search-version-b?dateInvalid=notValidDates');
-    } else if (startDate > endDate) {
-      return res.redirect('claims/prototypes/design/v14/claim/search-version-b?dateInvalid=startBeforeEnd');
-    } else if (startMonth == "" || startYear == "" || endMonth == "" || endYear == "") {
-      return res.redirect('claims/prototypes/design/v14/claim/search-version-b?dateInvalid=notValidDates');
-    } else {
-      return res.redirect('claims/prototypes/design/v14/claim/search-version-b?fromSearchResults=true#searchResults');
-    }
-  } else {
-    return res.redirect('claims/prototypes/design/v14/claim/search-version-b?fromSearchResults=true#searchResults');
-  }
-});
-
 
 router.post('/apply-filters', function (req, res) {
   const statuses = req.session.data.filterStatus
@@ -363,7 +332,7 @@ router.get('/new-claim-v14', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];
   delete req.session.data['notFound'];
-  res.redirect('claims/prototypes/design/v14/claim/select-training')
+  res.redirect('claim/select-training')
 });
 
 router.get('/start-40-claim', function (req, res) {
@@ -569,7 +538,6 @@ router.post('/remove-evidence', function (req, res) {
 })
 
 router.post('/save-claim', function (req, res) {
-  var fundingPot = req.session.data.fundingPot
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
@@ -593,7 +561,7 @@ router.post('/save-claim', function (req, res) {
 
   req.session.data.currentPage = "1"
 
-  res.redirect('manage-claims?fundingPot=' + fundingPot + '&statusID=not-yet-submitted')
+  res.redirect('manage-claims?statusID=not-yet-submitted')
 
 });
 

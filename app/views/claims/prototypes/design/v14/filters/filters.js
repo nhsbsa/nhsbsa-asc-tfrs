@@ -28,10 +28,10 @@ addFilter('statusTag', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
-addFilter('claimCount', function (statusID, claims, claimType) {
+addFilter('claimCount', function (statusID, claims) {
     let i = 0
     for (const c of claims) {
-        if (c.status == statusID && c.fundingType == claimType) {
+        if (c.status == statusID) {
             i++
         }
     }

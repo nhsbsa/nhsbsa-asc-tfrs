@@ -3,7 +3,7 @@
 {% set matchCounter = 0 %}
 
 {% for claim in data['claims'] | sortByDate(status.id) %}
-    {% if claim.status == status.id and claim.fundingType == data.fundingPot %}
+    {% if claim.status == status.id %}
         {% set matchCounter = matchCounter + 1 %}
         {% set hasResults=true %} 
         {% if addHeader %}

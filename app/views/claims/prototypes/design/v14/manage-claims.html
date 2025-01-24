@@ -1,7 +1,7 @@
 {% extends "./layouts/claims-main.html" %}
 
 {% set status = data.statusID | statusDetails(data.statuses) %}
-{% set noClaims = status.id | claimCount(data.claims, data.fundingPot) %}
+{% set noClaims = status.id | claimCount(data.claims) %}
 {% set deletedId = data.deletedID %}
 
 {% set rowsPerPage = 20 %}
