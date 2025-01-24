@@ -1,0 +1,122 @@
+[
+    {
+        "workplaceId": "B02944934",
+        "name": "Evergreen Care home",
+        "address": ["72 Guild Street", "London", "SE23 6FH"],
+        "signatory": {
+          "givenName": "Lionel",
+          "familyName": "Lowe",
+          "email": "lionel-lowel@evergreencare.co.uk",
+          "status": "active"
+        },
+        "users": {
+          "active": [
+            {
+            "name": "Daniel Jones",
+            "email": "d.jones@evergreencare.com"
+          }, 
+          {
+            "name": "Rachel Mcglee",
+            "email": "rachel.mcglee@evergreencare.com"
+          },
+          {
+            "name": "Flossie Gleason",
+            "email": "flossie.gleason@evergreencare.com"
+          },
+          {
+            "name": "Fredrick Smith",
+            "email": "fredrick.smith@evergreencare.com"
+          }
+        ],
+          "inactive": [],
+          "invited": [{
+            "name": "Charlotte Dandy",
+            "email": "charlotte.dandy@evergreencare.com"
+          }]
+        },
+        "bankDetails": {
+          "nameOnAccount": "Evergreen Care Home",
+          "sortCode": "272893",
+          "accountNumber": "12345678",
+          "buildingSocietyNumber": "4598329056"
+        }
+      },
+      {
+        "workplaceId": "G76904778",
+        "name": "Bright Horizons Care home",
+        "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
+        "bankDetails": null,
+        "signatory": {
+          "givenName": "Natasha",
+          "familyName": "Jones",
+          "email": "natasha-jones@carehome.co.uk",
+          "status": "invited"
+        }, 
+        "users": {
+          "active": [],
+          "inactive": [],
+          "invited": []
+        }
+      },
+      {
+        "workplaceId": "D91774723",
+        "name": "Pinetree Manor Care Centre",
+        "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
+        "signatory": {
+          "givenName": "Hadyn",
+          "familyName": "Lacy",
+          "email": "hadyn-lacey@pinetreecare.co.uk",
+          "status": "active"
+        },
+        "users": {
+          "active": [{
+            "name": "Daniel Jones",
+            "email": "d.jones@pinetreecare.com"
+          },
+          {
+            "name": "Fredrick Smith",
+            "email": "fredrick.smith@pinetreecare.com"
+          }],
+          "inactive": [],
+          "invited": [{
+            "name": "Jack McPhearson",
+            "email": "jack.McPhearson@pinetreecare.com"
+          }]
+        },
+        "bankDetails": {
+          "nameOnAccount": "Pinetree Manor Care Centre",
+          "sortCode": "526788",
+          "accountNumber": "33234465",
+          "buildingSocietyNumber": "4598329056"
+        }
+      },
+      {
+        "workplaceId": "A89263211",
+        "name": "Kingscourt Care Home",
+        "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
+        "signatory": {
+          "givenName": "Joseph",
+          "familyName": "Stepen",
+          "email": "joseph-stephen@kingscourtcare.co.uk",
+          "status": "active"
+        },
+        "users": {
+          "active": [{
+            "name": "Rachel Mcglee",
+            "email": "rachel.mcglee@kingscourtcare.com"
+          },
+          {
+            "name": "Mary McCleod",
+            "email": "mary.mccleod@kingscourtcare.com"
+          }],
+          "inactive": [],
+          "invited": []
+        },
+        "bankDetails": {
+          "nameOnAccount": "Kingscourt Care Home",
+          "sortCode": "123384",
+          "accountNumber": "82889922",
+          "buildingSocietyNumber": "4598329056"
+        }
+      }
+    ]  

@@ -30,6 +30,20 @@ GOV.UK prototype - {{serviceName}}
                             <option value="submitter">Submitter</option>
                         </select>
                       </div>
+                      <div class="govuk-form-group">
+                        <label class="govuk-label" for="org">
+                          Choose organisation
+                        </label>
+                        <div id="org-hint" class="govuk-hint">
+                          This allows different features to be tested
+                        </div>
+                        <select class="govuk-select" id="orgID" name="orgID" aria-describedby="org-hint">
+                            <option value="B02944934" selected>Evergreen Care home</option>
+                            <option value="G76904778">Bright Horizons Care home</option>
+                            <option value="D91774723">Pinetree Manor Care Centre</option>
+                            <option value="A89263211">Kingscourt Care Home</option>
+                        </select>
+                      </div>
                 <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="./load-data">
                     Start full prototype
                 </button>

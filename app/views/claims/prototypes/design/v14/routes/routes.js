@@ -898,6 +898,21 @@ function loadData(req) {
 
 router.post('/load-data', function (req, res) {
   //Load data from JSON files
+  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v13/data/')
+  const orgID = req.session.data['orgID']
+
+  console.log(orgID)
+
+  for (const organisation of organisations) {
+    if (organisation.workplaceId == orgID) {
+      
+      req.session.data.org = organisation
+      break;
+    }
+  }
+
+  delete req.session.data['orgId']
+  
   loadData(req);
   res.redirect('before-you-start.html')
 })

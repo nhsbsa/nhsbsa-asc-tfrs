@@ -15,18 +15,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-<div class="govuk-breadcrumbs">
-    <ol class="govuk-breadcrumbs__list">
-        <li class="govuk-breadcrumbs__list-item">
-            <a class="govuk-breadcrumbs__link" href="manage-claims-home">Home</a>
-        </li>
-        <li class="govuk-breadcrumbs__list-item">
-            <a class="govuk-breadcrumbs__link"
-                href="manage-claims?fundingPot={{ data.fundingPot }}&statusID={{ status.id }}&deleteSuccess=">{{ status.name
-                }} claims</a>
-        </li>
-    </ol>
-</div>
+    <a href="manage-claims-home" class="govuk-back-link">Back to Manage claims</a>
 {% endblock %}
 
 {% block content %}

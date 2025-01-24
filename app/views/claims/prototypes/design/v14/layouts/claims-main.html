@@ -21,13 +21,6 @@
         <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation"
           aria-label="Show or hide menu" hidden>Menu</button>
         <ul id="navigation" class="govuk-header__navigation-list">
-
-          {% if data.userType == "signatory" %}
-              <li class="govuk-header__navigation-item">
-                <a class="govuk-header__link" href="./org-admin/manage-team">Manage team</a>
-              </li>
-          {% endif %}
-
           <li class="govuk-header__navigation-item">
             <a class="govuk-header__link" href="#">
               Sign out
@@ -48,6 +41,50 @@
         This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
       </span>
     </p>
+  </div>
+</div>
+<div class="app-organisation-actions govuk-width-container" aria-label="Organisation switcher">
+  <div class="app-organisation-actions__title">
+    Oaktree Care home <span class="govuk-caption-m">B1038592</span>
+    </div>
+    <!-- <div class="app-organisation-actions__actions">
+        <a class="govuk-link app-organisation-actions__link" href="/organisations">Change organisation</a>
+    </div> -->
+</div>
+
+<div class="govuk-service-navigation" data-module="govuk-service-navigation">
+  <div class="govuk-width-container">
+    <div class="govuk-service-navigation__container">
+      <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
+        <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden>
+          Menu
+        </button>
+        <ul class="govuk-service-navigation__list" id="navigation">
+          <li class="govuk-service-navigation__item govuk-service-navigation__item--active">
+            <a class="govuk-service-navigation__link" href="./manage-claims-home" aria-current="true">
+              <strong class="govuk-service-navigation__active-fallback">Manage claims</strong>
+            </a>
+          </li>
+          {% if data.userType == "signatory" %}
+          <li class="govuk-service-navigation__item">
+            <a class="govuk-service-navigation__link" href="./org-admin/manage-team">
+              Manage team
+            </a>
+          </li>
+          <li class="govuk-service-navigation__item">
+            <a class="govuk-service-navigation__link" href="./org-admin/bank-details">
+              Manage bank details
+            </a>
+          </li>
+          {% endif %}
+          <li class="govuk-service-navigation__item">
+            <a class="govuk-service-navigation__link" href="./org-admin/org-details">
+              Organisation details
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </div>
 {% endblock %}

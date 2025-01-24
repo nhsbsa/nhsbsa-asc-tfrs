@@ -1,0 +1,41 @@
+{% extends "../layouts/claims-main.html" %} 
+
+{% block pageTitle %} 
+Organisation details — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Organisation details</h1>
+        <p class="govuk-body">This information is taken from the ASC-WDS, if there is mistake with this data you will need to make those changes on your ASC-WDS account.</p>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{data.org.name}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{data.org.workplaceId}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Address 
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.org.address[0] }}<br>  {{ data.org.address[1] }}<br> {{ data.org.address[2] }}  
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>
+
+{% endblock %}
