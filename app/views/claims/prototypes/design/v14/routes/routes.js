@@ -88,17 +88,17 @@ router.post('/search_id_result', function (req, res) {
 
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
-    return res.redirect('claims/prototypes/design/v14/manage-claims-home?fundingPot=TU&emptyError=true');
+    return res.redirect('claims/prototypes/design/v14/manage-claims-home?emptyError=true');
   }
 
   const letterORegex = /o/i;
   if (letterORegex.test(claimID)) {
-    return res.redirect('claims/prototypes/design/v14/manage-claims-home?fundingPot=TU&invalidIDError=true');
+    return res.redirect('claims/prototypes/design/v14/manage-claims-home?invalidIDError=true');
   }
 
   const lengthRegex = /^[A-NP-Z0-9]{3}(-)?[A-NP-Z0-9]{4}(-)?[A-NP-Z0-9]{4}(-)?([ABC])?$/;
   if (!lengthRegex.test(claimID)) {
-    return res.redirect('claims/prototypes/design/v14/manage-claims-home?fundingPot=TU&searchId='+claimID + '&invalidIDError=true');
+    return res.redirect('claims/prototypes/design/v14/manage-claims-home?searchId='+claimID + '&invalidIDError=true');
   }
 
   var foundClaim = null
@@ -112,7 +112,7 @@ router.post('/search_id_result', function (req, res) {
   // handle the claim id searched on won't be the one on a specific claim
 
   if (foundClaim == null) {
-    return res.redirect('claims/prototypes/design/v14/manage-claims-home?fundingPot=TU&searchId='+claimID + '&notFound=true');
+    return res.redirect('claims/prototypes/design/v14/manage-claims-home?searchId='+claimID + '&notFound=true');
   } else {
     res.redirect('claims/prototypes/design/v14/claim/claim-details?id=' + claimID +"&fromSearchId=true");
   }
@@ -850,7 +850,7 @@ router.get('/confirm-delete-claim', function (req, res) {
         if (fromSearchId || fromSearchResults) {
           res.redirect('manage-claims-home?&deleteSuccess=true&fromSearchId&deletedID='+ claimID)
         } else {
-          res.redirect('manage-claims?fundingPot=TU&deleteSuccess=true&deletedID=' + claimID)
+          res.redirect('manage-claims?deleteSuccess=true&deletedID=' + claimID)
         }
         
     }
