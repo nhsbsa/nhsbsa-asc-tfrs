@@ -553,3 +553,8 @@
   padding-right: 0;
   border: 0;
 }
+
+.app-organisation-caption {
+  @include govuk-font($size: 16);
+  color: $govuk-secondary-text-colour;
+}

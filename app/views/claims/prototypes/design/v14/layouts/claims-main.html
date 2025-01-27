@@ -46,7 +46,7 @@
 </div>
 <div class="app-organisation-actions govuk-width-container" aria-label="Organisation switcher">
   <div class="app-organisation-actions__title">
-    {{data.org.name}} <span class="govuk-caption-m">{{data.org.workplaceId}}</span>
+    {{data.org.name}} <span class="app-organisation-caption">({{data.org.workplaceId}})</span>
     </div>
     <!-- <div class="app-organisation-actions__actions">
         <a class="govuk-link app-organisation-actions__link" href="/organisations">Change organisation</a>
@@ -69,18 +69,18 @@
           {% if data.userType == "signatory" %}
           <li class="govuk-service-navigation__item {% if data.tabLocation == 'users' %}govuk-service-navigation__item--active{% endif %}">
             <a class="govuk-service-navigation__link" href="/claims/prototypes/design/v14/org-admin/manage-team?tabLocation=users" {% if data.tabLocation == 'users' %}aria-current="true"{% endif %}>
-              Manage team
+              {% if data.tabLocation == 'users' %}<strong class="govuk-service-navigation__active-fallback">{% endif %}Manage team{% if data.tabLocation == 'users' %}</strong>{% endif %}
             </a>
           </li>
           <li class="govuk-service-navigation__item {% if data.tabLocation == 'bankDetails' %}govuk-service-navigation__item--active{% endif %}">
             <a class="govuk-service-navigation__link" href="/claims/prototypes/design/v14/org-admin/bank-details?tabLocation=bankDetails" {% if data.tabLocation == 'bankDetails' %}aria-current="true"{% endif %}>
-              Manage bank details
+              {% if data.tabLocation == 'bankDetails' %}<strong class="govuk-service-navigation__active-fallback">{% endif %}Bank details{% if data.tabLocation == 'bankDetails' %}</strong>{% endif %}
             </a>
           </li>
           {% endif %}
           <li class="govuk-service-navigation__item {% if data.tabLocation == 'orgDetails' %}govuk-service-navigation__item--active{% endif %}">
             <a class="govuk-service-navigation__link" href="/claims/prototypes/design/v14/org-admin/org-details?tabLocation=orgDetails" {% if data.tabLocation == 'orgDetails' %}aria-current="true"{% endif %}>
-              Organisation details
+              {% if data.tabLocation == 'orgDetails' %}<strong class="govuk-service-navigation__active-fallback">{% endif %}Organisation details{% if data.tabLocation == 'orgDetails' %}</strong>{% endif %}
             </a>
           </li>
         </ul>
