@@ -3,7 +3,7 @@ const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, findOrg, isValidOrgSearch } = require('../helpers/helpers.js');
 
-// v6 Prototype routes
+// v7 Prototype routes
 
 router.get('/load-data', function (req, res) {
   //Load data from JSON files
