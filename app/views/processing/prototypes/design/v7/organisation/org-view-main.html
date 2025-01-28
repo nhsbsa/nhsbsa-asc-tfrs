@@ -124,6 +124,12 @@
                   <li class="moj-primary-navigation__item">
                     <a class="moj-primary-navigation__link" {% if data.orgTab == 'orgNotes'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=orgNotes">Organisation notes</a>
                   </li>
+
+                  {% if (org.signatory.status == "active") %}
+                  <li class="moj-primary-navigation__item">
+                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'bankDetails'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=bankDetails">Bank details</a>
+                  </li>
+                  {% endif %}
                 </ul>
         
               </nav>
