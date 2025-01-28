@@ -1,10 +1,18 @@
 {% extends "../layouts/processing-main.html" %}
 
-{% set foundOrganisation = data.organisations | findOrg(data.orgId) %}
+{% set foundOrganisation = data.organisations | findOrg(data.orgID) %}
 
 
 {% block pageTitle %}
-    Workplace ID - Register an organisation
+Check Senior Responsible Officer details are correct — Register an organisation — {{data.processingServiceName}}
+{% endblock %}
+
+{% block beforeContent %}
+    {% if data.newOrg %}
+        <div >
+            <a class="govuk-back-link" href="signatory-details">Back</a>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -12,7 +20,7 @@
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Register an organisation</span>
         <h1 class="govuk-heading-l">Check Senior Responsible Officer details are correct</h1>
-        <p class="govuk-body">Check this information is correct before sending a new invite.</p>
+        <p class="govuk-body">Check this information is correct before sending the invite.</p>
 
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
@@ -27,7 +35,7 @@
                             Workplace ID
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ foundOrganisation.workplaceId }}
+                            {{data.orgID}}
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
@@ -35,7 +43,7 @@
                             Name
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {{ foundOrganisation.name }}
+                            Fake care home
                         </dd>
                     </div>
                     <div class="govuk-summary-list__row">
@@ -43,9 +51,7 @@
                             Address
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            {%for line in foundOrganisation.address %}
-                                {{ line }}<br>
-                            {% endfor %}
+                            72 Guild Street<br>London<br>SE23 6FH
                         </dd>
                     </div>
                 </dl>
@@ -59,7 +65,7 @@
               </h2>
               <ul class="govuk-summary-card__actions">
                 <li class="govuk-summary-card__action">
-                  <a class="govuk-link" href="signatory-details?goBack=true&edited=true">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
+                  <a class="govuk-link" href="signatory-details?edited=true">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
                 </li>
               </ul>
             </div>
@@ -92,16 +98,16 @@
                 </dl>
             </div>
         </div>
-        <p class="govuk-body">Sending a new invite will also deactivate the old one.</p>
-        <form action="../home?confirmation=register&edited=&goBack=" method="post" novalidate>
+        <form action="../home?confirmation=register&newOrg=" method="post" novalidate>
             <input type="hidden" name="answers-checked" value="true">
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Confirm and send invite
                 </button>
-                <a class="govuk-link" href="org-issue?submitError=resend&familyName=&givenName=&email=&edited=">Cancel</a>
+                <a class="govuk-link" href="organisation-details?newOrg=&orgID=&edited=">Cancel</a>
             </div>
         </form>
     </div>
 </div>
+
 {% endblock %}

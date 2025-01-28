@@ -1,6 +1,3 @@
-{% set org = data.orgId | findOrganisation(data.organisations) %}
-{% set claims = data.orgId | findOrgClaims(data.claims) %}
-
 {% set hasResults = false %}
 {% set addHeader = true %}
 {% set matchCounter = 0 %}
@@ -9,40 +6,28 @@
         {% set matchCounter = matchCounter + 1 %}
         {% set hasResults=true %} 
         {% if addHeader %} 
-            <table class="govuk-table">
+            <table class="govuk-table govuk-!-margin-top-3">
             <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
                     <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Claim reference</th>
                     <th class="govuk-table__header" scope="col" width="5%" aria-sort="none">Type</th>
-                    <th class="govuk-table__header" scope="col" width="33%" aria-sort="none">Training</th>
-                    <th class="govuk-table__header" scope="col" width="25%" aria-sort="none">Learner</th>
-                    <th class="govuk-table__header" scope="col" width="15%" aria-sort="descending">Status</th>
+                    <th class="govuk-table__header" scope="col" width="30%" aria-sort="none">Training</th>
+                    <th class="govuk-table__header" scope="col" width="23%" aria-sort="none">Learner</th>
+                    <th class="govuk-table__header" scope="col" width="27%" aria-sort="descending">Status</th>
                 </tr>
             </thead>
             <tbody class="govuk-table__body">
             {% set addHeader = false %}
         {% endif %}
             {% if (matchCounter <= (pageNumber * rowsPerPage)) and (matchCounter > ((pageNumber * rowsPerPage) - rowsPerPage)) %}
-            <tr class="govuk-table__row claim-row" id="{{ claim.claimID | removeClaimSuffix }}">
-                <td class="govuk-table__header" scope="row"><a class="govuk-link" href="claim/claim-details?id={{ claim.claimID }}&deleteSuccess">{{ claim.claimID }}</a></td>
+            <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
+                <td class="govuk-table__header" scope="row"><a class="govuk-link" href="org-view-main?orgId={{org.workplaceId}}&orgTab=singleClaim&id={{claim.claimID}}&processClaimStep=notStarted">{{ claim.claimID }}</a></td>
                 <td class="govuk-table__cell">{{ claim.claimType | typeTag }}</td>
                 <td class="govuk-table__cell">{{ claim.training.title }}</td>
                 <td class="govuk-table__cell">
                     {% if claim.learner %} {{ claim.learner.givenName }} {{ claim.learner.familyName }} {% else %} Not yet added {% endif %}
                 </td>
-                {% if status.id == 'not-yet-submitted' %}
-                <td class="govuk-table__cell">{{ claim.createdDate |
-                    govukDate("truncate") }}</td>
-                {% elif status.id == 'submitted' %}
-                <td class="govuk-table__cell">{{ claim.submittedDate |
-                    govukDate("truncate") }}</td>
-                {% elif status.id == 'rejected' %}
-                <td class="govuk-table__cell">{{ claim.rejectedDate |
-                    govukDate("truncate") }}</td>
-                {% elif status.id == 'approved' %}
-                <td class="govuk-table__cell">{{ claim.approvedDate |
-                    govukDate("truncate") }}</td>
-                {% endif %}
+                <td class="govuk-table__cell">{{ claim.status | processorstatusTag }}</td>
             </tr>
             {% endif %}
 
@@ -62,7 +47,7 @@
 
                 {% if pageNumber != 1 %}
                     <div class="govuk-pagination__prev">
-                        <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{previousPage}}" rel="prev">
+                        <a class="govuk-link govuk-pagination__link" href="org-view-main?orgTab=claims&orgId={{data.orgId}}&currentPage={{previousPage}}#tab-content" rel="prev">
                         <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
                             <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
                         </svg>
@@ -81,7 +66,7 @@
 
                     {% if pageNumber != 1 %}
                     <li class="govuk-pagination__item">
-                        <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage=1" aria-label="Page 1">
+                        <a class="govuk-link govuk-pagination__link" href="org-view-main?orgTab=claims&orgId={{data.orgId}}&currentPage=1#tab-content" aria-label="Page 1">
                         1
                         </a>
                     </li>
@@ -96,7 +81,7 @@
                         &ctdot;
                     </li>
                     <li class="govuk-pagination__item">
-                        <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{pageNumber-2}}" aria-label="Page {{pageNumber-2}}">
+                        <a class="govuk-link govuk-pagination__link" href="org-view-main?orgTab=claims&orgId={{data.orgId}}&currentPage={{pageNumber - 2}}#tab-content" aria-label="Page {{pageNumber-2}}">
                             {{pageNumber-2}}
                         </a>
                     </li>
@@ -105,7 +90,7 @@
 
                     {% if (pageNumber - 1) > 1 %}
                     <li class="govuk-pagination__item {% if (pageNumber == 3)  %} govuk-pagination__item__hidden {% endif %}">
-                        <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{pageNumber-1}}" aria-label="Page {{pageNumber-1}}">
+                        <a class="govuk-link govuk-pagination__link" href="org-view-main?orgTab=claims&orgId={{data.orgId}}&currentPage={{pageNumber - 1}}#tab-content" aria-label="Page {{pageNumber-1}}">
                             {{pageNumber-1}}
                         </a>
                     </li>
@@ -113,14 +98,14 @@
 
 
                     <li class="govuk-pagination__item govuk-pagination__item--current">
-                        <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{pageNumber}}" aria-label="Page {{pageNumber}}" aria-current="page">
+                        <a class="govuk-link govuk-pagination__link" href="org-view-main?orgTab=claims&orgId={{data.orgId}}&currentPage={{pageNumber}}#tab-content" aria-label="Page {{pageNumber}}" aria-current="page">
                             {{pageNumber}}
                         </a>
                     </li>
 
                     {% if (pageNumber + 1) < maxPage %}
                     <li class="govuk-pagination__item {% if ((maxPage - 2) == pageNumber)  %} govuk-pagination__item__hidden {% endif %}">
-                        <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{pageNumber + 1}}" aria-label="Page {{pageNumber + 1}}">
+                        <a class="govuk-link govuk-pagination__link" href="org-view-main?orgTab=claims&orgId={{data.orgId}}&currentPage={{pageNumber + 1}}#tab-content" aria-label="Page {{pageNumber + 1}}">
                             {{pageNumber + 1}}
                         </a>
                     </li>
@@ -132,7 +117,7 @@
                     </li>
                     {% elif ((pageNumber + 2) < maxPage)  and ((pageNumber + 3) == maxPage) %}
                     <li class="govuk-pagination__item">
-                        <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{pageNumber + 2}}" aria-label="Page {{pageNumber + 2}}">
+                        <a class="govuk-link govuk-pagination__link" href="org-view-main?orgTab=claims&orgId={{data.orgId}}&currentPage={{pageNumber + 2}}#tab-content" aria-label="Page {{pageNumber + 2}}">
                             {{pageNumber + 2}}
                         </a>
                     </li>
@@ -143,7 +128,7 @@
 
                     {% if pageNumber != maxPage %}
                     <li class="govuk-pagination__item">
-                        <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{maxPage}}" aria-label="Page {{maxPage}}">
+                        <a class="govuk-link govuk-pagination__link" href="org-view-main?orgTab=claims&orgId={{data.orgId}}&currentPage={{maxPage}}#tab-content" aria-label="Page {{maxPage}}">
                             {{maxPage}}
                         </a>
                     </li>
@@ -154,7 +139,7 @@
 
                 {% if pageNumber != maxPage %}
                     <div class="govuk-pagination__next">
-                    <a class="govuk-link govuk-pagination__link" href="manage-claims?statusID={{ status.id }}&currentPage={{nextPage}}" rel="next">
+                    <a class="govuk-link govuk-pagination__link" href="org-view-main?orgTab=claims&orgId={{data.orgId}}&currentPage={{nextPage}}#tab-content" rel="next">
                         <span class="govuk-pagination__link-title">
                         Next<span class="govuk-visually-hidden"> page</span>
                         </span>
@@ -167,10 +152,5 @@
             </nav>
             <p class="govuk-body pagination__results">Showing <span class="govuk-!-font-weight-bold">{{(((pageNumber * rowsPerPage) - rowsPerPage) + 1)}}</span> to <span class="govuk-!-font-weight-bold">{{(pageNumber * rowsPerPage) | min (noClaims) }}</span> of <span class="govuk-!-font-weight-bold">{{ noClaims }}</span> claims</p>
         </div>
-{% endif %}
-
-
-{% if hasResults == false %}
-<p class="govuk-body">There are currently no claims that are {{ status.name }}.</p>
 {% endif %}
 

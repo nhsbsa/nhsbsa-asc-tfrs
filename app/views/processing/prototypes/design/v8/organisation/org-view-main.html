@@ -119,6 +119,10 @@
                     <li class="moj-primary-navigation__item">
                       <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims&claimID=&emptyError=&invalidIDError=&notFound=">Find a claim</a>
                     </li>
+
+                    <li class="moj-primary-navigation__item">
+                      <a class="moj-primary-navigation__link" {% if data.orgTab == 'bankDetails'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=bankDetails">Bank details</a>
+                    </li>
                   {% endif %}
 
                   <li class="moj-primary-navigation__item">

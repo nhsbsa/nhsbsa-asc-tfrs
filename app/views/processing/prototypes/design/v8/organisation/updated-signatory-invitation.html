@@ -59,7 +59,7 @@
               </h2>
               <ul class="govuk-summary-card__actions">
                 <li class="govuk-summary-card__action">
-                  <a class="govuk-link" href="signatory-details?goBack=true&edited=true">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
+                  <a class="govuk-link" href="edit-signatory-details?goBack=true&edited=true">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
                 </li>
               </ul>
             </div>
@@ -93,13 +93,13 @@
             </div>
         </div>
         <p class="govuk-body">Sending a new invite will also deactivate the old one.</p>
-        <form action="../home?confirmation=register&edited=&goBack=" method="post" novalidate>
+        <form action="../update-signatory-invite" method="post" novalidate>
             <input type="hidden" name="answers-checked" value="true">
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Confirm and send invite
                 </button>
-                <a class="govuk-link" href="org-issue?submitError=resend&familyName=&givenName=&email=&edited=">Cancel</a>
+                <a class="govuk-link" href="org-view-main?orgTab=users">Cancel</a>
             </div>
         </form>
     </div>
