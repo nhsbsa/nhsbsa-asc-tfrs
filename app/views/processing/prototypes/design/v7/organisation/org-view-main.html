@@ -64,10 +64,9 @@
     </div>
   </div>
 
+  {% if org.signatory.status == "invited" %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-
-      {% if org.signatory.status == "invited" %}
         <div class="govuk-warning-text">
           <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
           <strong class="govuk-warning-text__text">
@@ -75,9 +74,9 @@
             Organisation has not yet finished registration. The Senior Responsible Officer needs to accept the invitation sent to their email and complete registration.
           </strong>
         </div>
-      {% endif %}
     </div>
   </div>
+  {% endif %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
@@ -117,7 +116,7 @@
 
                   {% if (org.signatory.status == "active") %}
                     <li class="moj-primary-navigation__item">
-                      <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims&claimID=&emptyError=&invalidIDError=&notFound=">Find a claim</a>
+                      <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims&claimID&emptyError&invalidIDError&notFound">Find a claim</a>
                     </li>
                   {% endif %}
 
