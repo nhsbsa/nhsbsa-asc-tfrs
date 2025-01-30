@@ -554,5 +554,17 @@ router.get('/back-to-start-handler', function (req, res) {
   res.redirect('./home')
 });
 
+router.get('/confirm-signatory-handler', function (req, res) {
+
+  delete req.session.data.newOrg
+  delete req.session.data.orgID
+  delete req.session.data.email
+  delete req.session.data['answers-checked']
+
+  req.session.data.confirmation = 'register'
+
+  res.redirect('./home')
+});
+
 
 module.exports = router
