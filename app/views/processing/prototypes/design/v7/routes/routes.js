@@ -19,18 +19,23 @@ router.post('/check-org', function (req, res) {
   delete req.session.data.email
 
   if (orgID == "") {
-    res.redirect('register-organisation/organisation-details?submitError=missing')
+    req.session.data.submitError = 'missing'
+    res.redirect('register-organisation/organisation-details')
   } else if (orgID == "timeout") {
-    res.redirect('register-organisation/org-issue?submitError=timeout')
+    req.session.data.submitError = 'timeout'
+    res.redirect('register-organisation/org-issue')
   } else if (orgID == "D18946931" || orgID == "resend") {
-    res.redirect('register-organisation/org-issue?submitError=resend')
+    req.session.data.submitError = 'resend'
+    res.redirect('register-organisation/org-issue')
   } else if (orgID == "B02944934" || orgID == "dupe") {
-    res.redirect('register-organisation/org-issue?submitError=duplicate')
+    req.session.data.submitError = 'duplicate'
+    res.redirect('register-organisation/org-issue')
   } else if (checkWDSFormat(orgID)) {
     delete req.session.data.submitError
     res.redirect('register-organisation/confirm-organisation-details')
   } else {
-    res.redirect('register-organisation/organisation-details?submitError=invalid')
+    req.session.data.submitError = 'invalid'
+    res.redirect('register-organisation/organisation-details')
   }
 });
 
@@ -40,11 +45,14 @@ router.post('/confirm-org-handler', function (req, res) {
   delete req.session.data.confirmation
 
   if (confirmation == "yes") {
-    res.redirect('register-organisation/signatory-details?newOrg=true')
+    req.session.data.newOrg = 'true'
+    res.redirect('register-organisation/signatory-details')
   } else if (confirmation == "no") {
-    res.redirect('register-organisation/org-issue?submitError=incorrect')
+    req.session.data.submitError = 'incorrect'
+    res.redirect('register-organisation/org-issue')
   } else if (confirmation == null) {
-    res.redirect('register-organisation/confirm-organisation-details?submitError=missing')
+    req.session.data.submitError = 'missing'
+    res.redirect('register-organisation/confirm-organisation-details')
   }
 });
 
@@ -406,7 +414,8 @@ router.post('/add-org-note', function (req, res) {
   var newNoteInput = req.session.data.notes
 
   if (newNoteInput == null || newNoteInput == "") {
-    res.redirect('organisation/add-org-note?noteError=true')
+    req.session.data.noteError = 'true'
+    res.redirect('organisation/add-org-note')
 
   } else {
     var currentDate = new Date().toISOString();
@@ -422,7 +431,8 @@ router.post('/add-org-note', function (req, res) {
 
     foundOrg.notes.push(newNote);
     req.session.data.noteSuccess = "true"
-    res.redirect('organisation/org-view-main' + '?orgTab=orgNotes')
+    req.session.data.orgTab = 'orgNotes'
+    res.redirect('organisation/org-view-main')
 
   }
 });
@@ -434,7 +444,8 @@ router.get('/reinvite-signatory', function (req, res) {
   } else {
     req.session.data.resendList = [req.session.data.name]
   }
-  res.redirect('organisation/org-view-main?orgTab=users&orgId=' + req.session.data.orgId + '&currentPage=1')
+  req.session.data.orgTab = "users"
+  res.redirect('organisation/org-view-main')
 });
 
 router.post('/org-signatory-handler', function (req, res) {
