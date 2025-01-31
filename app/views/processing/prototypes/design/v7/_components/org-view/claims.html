@@ -11,7 +11,7 @@
 {% set maxPage =  noClaims | pageCount(rowsPerPage) %}
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
 
         {% if (data.invalidIDError) or (data.notFound) or (data.emptyError)%}
         <div class="govuk-error-summary govuk-!-margin-top-2" data-module="govuk-error-summary">
@@ -43,7 +43,7 @@
         {% elif (claims.length == 0) %}
             <p class="govuk-body">This organisation has not yet submitted any claims.</p>
         {% else %}
-          <div class="moj-search">
+        <div class="moj-search">
               <form action="../search-claim-id-orgView" method="post">
                 <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">
                   <div id="search-hint" class="govuk-hint moj-search__hint">
@@ -73,16 +73,18 @@
                         Search
                       </button>
                 </div>
+                </div>
               </form>
-            </div>
-
-            
-
-          {% include "./claims-table.html" %}
-
-        {% endif %}
-
+        </div>
     </div>
 </div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% include "./claims-table.html" %}
+        {% endif %}
+    </div>
+</div>
+        
+
 
 

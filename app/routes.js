@@ -32,6 +32,7 @@ router.use('/processing/prototypes/design/v4/', require('./views/processing/prot
 router.use('/processing/prototypes/design/v5/', require('./views/processing/prototypes/design/v5/routes/routes.js'))
 router.use('/processing/prototypes/design/v6/', require('./views/processing/prototypes/design/v6/routes/routes.js'))
 router.use('/processing/prototypes/design/v7/', require('./views/processing/prototypes/design/v7/routes/routes.js'))
+router.use('/processing/prototypes/design/v8/', require('./views/processing/prototypes/design/v8/routes/routes.js'))
 
 
 // Add your routes here
@@ -55,7 +56,7 @@ router.use((req, res, next) => {
   }
 
   // Define keys to exclude from logging
-  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes', 'CPDActivities', 'versionHistory', 'users', 'processingServiceName'];
+  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes', 'CPDActivities', 'versionHistory', 'users', 'processingServiceName', 'organisations'];
 
   // Create a copy of req.session.data with excluded keys removed
   const filteredData = Object.keys(req.session.data)
