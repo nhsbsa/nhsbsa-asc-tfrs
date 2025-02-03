@@ -442,6 +442,7 @@ router.post('/add-org-note', function (req, res) {
     foundOrg.notes.push(newNote);
     req.session.data.noteSuccess = "true"
     req.session.data.orgTab = 'orgNotes'
+    req.session.data.activeNote = 'false'
     res.redirect('organisation/org-view-main')
 
   }

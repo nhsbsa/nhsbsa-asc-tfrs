@@ -443,3 +443,62 @@
   margin-left: govuk-spacing(3);
   margin-right: govuk-spacing(3);
 }
+
+
+@import "https://design-system.service.gov.uk/stylesheets/main.css";
+
+@import "https://design-system.service.gov.uk/stylesheets/main.css";
+
+.note-composer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 400px;
+    background: #f3f2f1;
+    border: 2px solid #0b0c0c;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    font-family: "GDS Transport", Arial, sans-serif;
+    box-sizing: border-box;
+
+    .composer-header {
+        background: $govuk-brand-colour;
+        color: #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+
+    .composer-body {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .composer-footer {
+        padding: 10px;
+        background: #f3f2f1;
+        text-align: right;
+
+    }
+
+    .hidden {
+      display: none;
+    }
+    
+}
+
+
+
