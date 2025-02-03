@@ -10,10 +10,10 @@
             <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
                     <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Claim reference</th>
-                    <th class="govuk-table__header" scope="col" width="5%" aria-sort="none">Type</th>
-                    <th class="govuk-table__header" scope="col" width="30%" aria-sort="none">Training</th>
-                    <th class="govuk-table__header" scope="col" width="23%" aria-sort="none">Learner</th>
-                    <th class="govuk-table__header" scope="col" width="27%" aria-sort="descending">Status</th>
+                    <th class="govuk-table__header" scope="col" width="25%" aria-sort="none">Training</th>
+                    <th class="govuk-table__header" scope="col" width="20%" aria-sort="none">Learner</th>
+                    <th class="govuk-table__header" scope="col" width="15%" aria-sort="descending">Submitted</th>
+                    <th class="govuk-table__header" scope="col" width="18%" aria-sort="descending">Status</th>
                 </tr>
             </thead>
             <tbody class="govuk-table__body">
@@ -22,11 +22,12 @@
             {% if (matchCounter <= (pageNumber * rowsPerPage)) and (matchCounter > ((pageNumber * rowsPerPage) - rowsPerPage)) %}
             <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
                 <td class="govuk-table__header" scope="row"><a class="govuk-link" href="../claim-view-handler/{{claim.claimID}}">{{ claim.claimID }}</a></td>
-                <td class="govuk-table__cell">{{ claim.claimType | typeTag }}</td>
                 <td class="govuk-table__cell">{{ claim.training.title }}</td>
                 <td class="govuk-table__cell">
                     {% if claim.learner %} {{ claim.learner.givenName }} {{ claim.learner.familyName }} {% else %} Not yet added {% endif %}
                 </td>
+                <td class="govuk-table__cell">{{ claim.submittedDate |
+                    govukDate("truncate") }}</td>
                 <td class="govuk-table__cell">{{ claim.status | processorstatusTag }}</td>
             </tr>
             {% endif %}
