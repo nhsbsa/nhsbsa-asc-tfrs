@@ -35,19 +35,17 @@
             </div>
         {% endif %}
 
-        <span class="govuk-caption-l">Find an organisation</span>
-
-        <form action="../search-org-id" method="post">
+        <form action="../search-org" method="post">
             <div class="govuk-form-group {% if (data.error == "emptyInput" or data.error == "notValid"  or data.error == "notFound") %} govuk-form-group--error{% endif %}">
 
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="dob-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                       <h1 class="govuk-fieldset__heading">
-                        Which organisation are you searching for?
+                        Find an organisation
                       </h1>
                     </legend>
                     <div id="dob-hint" class="govuk-hint">
-                        You can search by workplace ID
+                        Enter a workplace ID or email address
                     </div>
 
                 {% if (data.error == "emptyInput") %}
