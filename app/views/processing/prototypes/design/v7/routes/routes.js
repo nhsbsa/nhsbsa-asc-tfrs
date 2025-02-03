@@ -442,7 +442,7 @@ router.post('/add-org-note', function (req, res) {
     foundOrg.notes.push(newNote);
     req.session.data.noteSuccess = "true"
     req.session.data.orgTab = 'orgNotes'
-    
+
     // Send a response that includes JavaScript to close the tab
     res.send(`
       <html>
