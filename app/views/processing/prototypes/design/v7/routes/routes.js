@@ -432,7 +432,18 @@ router.post('/add-org-note', function (req, res) {
     foundOrg.notes.push(newNote);
     req.session.data.noteSuccess = "true"
     req.session.data.orgTab = 'orgNotes'
-    res.redirect('organisation/org-view-main')
+    
+    // Send a response that includes JavaScript to close the tab
+    res.send(`
+      <html>
+      <body>
+          <script>
+              window.opener.location.reload(); // Refresh the parent tab if needed
+              window.close(); // Close the current tab
+          </script>
+      </body>
+      </html>
+  `);
 
   }
 });
