@@ -22,12 +22,13 @@
                         <ul class="govuk-list govuk-error-summary__list">
                             <li>
                                 {% if (data.error == "emptyInput") %}
-                                    <a href="#orgSearchInput">Enter workplace ID, for example H02944934</a>
+                                    <a href="#orgSearchInput">Enter a workplace ID or a contact's email address</a>
                                 {% elif (data.error == "notValid") %}
-                                    <a href="#orgSearchInput">Enter workplace ID in the correct format, for example H02944934</a>
+                                    <a href="#orgSearchInput">Enter a workplace ID or a contact's email address in the correct format</a>
                                 {% elif (data.error == "notFound") %}
                                     <a href="#orgSearchInput">No organisation match returned for your search</a>
                                 {% endif %}
+
                             </li>
                         </ul>
                     </div>
@@ -44,17 +45,25 @@
                         Find an organisation
                       </h1>
                     </legend>
+                    <p class="govuk-body">You can search for a organisation using any of the following:
+                        <ul class="govuk-list govuk-list--bullet">
+                            <li>Workplace ID<div id="workplace-id-hint" class="govuk-hint">Example: H18944934</div></li>
+                            <li>Contact's email address<div id="email-address-hint" class="govuk-hint">Example: adam.scott@email.com</div></li>
+                        </ul>
+                        </p>
+                
                     <div id="dob-hint" class="govuk-hint">
-                        Enter a workplace ID or email address
+                        Enter the whole workplace ID or a contact's email address.
                     </div>
+    
 
                 {% if (data.error == "emptyInput") %}
                     <p id="search-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>Enter workplace ID, for example H02944934
+                        <span class="govuk-visually-hidden">Error:</span>Enter a workplace ID or a contact's email address
                     </p>
                 {% elif (data.error == "notValid") %}
                     <p id="search-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>Enter workplace ID in the correct format, for example H02944934
+                        <span class="govuk-visually-hidden">Error:</span>Enter a workplace ID or a contact's email address in the correct format
                     </p>
                 {% elif (data.error == "notFound") %}
                     <p id="search-error" class="govuk-error-message">
