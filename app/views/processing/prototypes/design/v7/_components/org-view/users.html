@@ -3,7 +3,7 @@
 
 <div class="govuk-grid-row">
     <div class="{% if (org.signatory.status == 'invited') %}govuk-grid-column-full{% else %}govuk-grid-column-two-thirds{% endif %}">
-        <h1 class="govuk-heading-l govuk-!-margin-top-6">Users</h1>   
+        <h1 class="govuk-heading-l govuk-!-margin-top-6">Contacts</h1>   
 
         <h2 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer (SRO)</h1>  
           
@@ -12,9 +12,9 @@
                 <thead class="govuk-table__head govuk-!-margin-top-6">
                     <tr class="govuk-table__row">
                         <th class="govuk-table__header" scope="col" width="20%">Name</th>
-                        <th class="govuk-table__header" scope="col" width="40%">Email</th>
+                        <th class="govuk-table__header" scope="col" width="45%">Email</th>
                         <th class="govuk-table__header" scope="col" width="15%">Status</th>
-                        <th class="govuk-table__header" scope="col" width="25%"><span class="govuk-visually-hidden">Actions</span></th>
+                        <th class="govuk-table__header" scope="col" width="20%"><span class="govuk-visually-hidden">Actions</span></th>
                         </tr>
                     </thead>
                 <tbody class="govuk-table__body">
@@ -31,8 +31,8 @@
                     <thead class="govuk-table__head govuk-!-margin-top-6">
                         <tr class="govuk-table__row">
                             <th class="govuk-table__header" scope="col" width="30%">Name</th>
-                            <th class="govuk-table__header" scope="col" width="50%">Email</th>
-                            <th class="govuk-table__header" scope="col" width="20%">Status</th>
+                            <th class="govuk-table__header" scope="col" width="55%">Email</th>
+                            <th class="govuk-table__header" scope="col" width="15%">Status</th>
                         </tr>
                     </thead>
                     <tbody class="govuk-table__body">
@@ -51,8 +51,8 @@
                 <thead class="govuk-table__head govuk-!-margin-top-6">
                     <tr class="govuk-table__row">
                         <th class="govuk-table__header" scope="col" width="30%">Name</th>
-                        <th class="govuk-table__header" scope="col" width="50%">Email</th>
-                        <th class="govuk-table__header" scope="col" width="20%">Status</th>
+                        <th class="govuk-table__header" scope="col" width="55%">Email</th>
+                        <th class="govuk-table__header" scope="col" width="15%">Status</th>
                     </tr>
                 </thead>
                 <tbody class="govuk-table__body">
@@ -60,7 +60,7 @@
                         <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
                             <td class="govuk-table__cell">{{ user.name}}</td>
                             <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
-                            <td class="govuk-table__cell"><strong class="govuk-tag">{{ "active" | userStatusTag }}</strong></td>
+                            <td class="govuk-table__cell">{{ "active" | userStatusTag }}</td>
                         </tr>
                     {% endfor %}
                     {% for user in org.users.invited %}

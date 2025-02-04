@@ -19,18 +19,23 @@ router.post('/check-org', function (req, res) {
   delete req.session.data.email
 
   if (orgID == "") {
-    res.redirect('register-organisation/organisation-details?submitError=missing')
+    req.session.data.submitError = 'missing'
+    res.redirect('register-organisation/organisation-details')
   } else if (orgID == "timeout") {
-    res.redirect('register-organisation/org-issue?submitError=timeout')
+    req.session.data.submitError = 'timeout'
+    res.redirect('register-organisation/org-issue')
   } else if (orgID == "D18946931" || orgID == "resend") {
-    res.redirect('register-organisation/org-issue?submitError=resend')
+    req.session.data.submitError = 'resend'
+    res.redirect('register-organisation/org-issue')
   } else if (orgID == "B02944934" || orgID == "dupe") {
-    res.redirect('register-organisation/org-issue?submitError=duplicate')
+    req.session.data.submitError = 'duplicate'
+    res.redirect('register-organisation/org-issue')
   } else if (checkWDSFormat(orgID)) {
     delete req.session.data.submitError
     res.redirect('register-organisation/confirm-organisation-details')
   } else {
-    res.redirect('register-organisation/organisation-details?submitError=invalid')
+    req.session.data.submitError = 'invalid'
+    res.redirect('register-organisation/organisation-details')
   }
 });
 
@@ -40,11 +45,14 @@ router.post('/confirm-org-handler', function (req, res) {
   delete req.session.data.confirmation
 
   if (confirmation == "yes") {
-    res.redirect('register-organisation/signatory-details?newOrg=true')
+    req.session.data.newOrg = 'true'
+    res.redirect('register-organisation/signatory-details')
   } else if (confirmation == "no") {
-    res.redirect('register-organisation/org-issue?submitError=incorrect')
+    req.session.data.submitError = 'incorrect'
+    res.redirect('register-organisation/org-issue')
   } else if (confirmation == null) {
-    res.redirect('register-organisation/confirm-organisation-details?submitError=missing')
+    req.session.data.submitError = 'missing'
+    res.redirect('register-organisation/confirm-organisation-details')
   }
 });
 
@@ -121,9 +129,14 @@ router.post('/search-claim-id', function (req, res) {
   }
   if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
     req.session.data.processClaimStep = "inProgress"
-    req.session.data.orgTab = "singleClaim"
+    req.session.data.orgTab = "claims"
 
-    return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgId=' + foundClaim.workplaceId)
+    delete req.session.data.claimID;
+
+    req.session.data.id = foundClaim.claimID
+    req.session.data.orgId = foundClaim.workplaceId
+
+    return res.redirect('organisation/org-view-main')
   } else {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
   }
@@ -132,7 +145,7 @@ router.post('/search-claim-id', function (req, res) {
 router.get('/cancel-outcome', function (req, res) {
   const claimID = req.session.data.id
   req.session.data.processClaimStep = "inProgress"
-  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+  res.redirect('organisation/org-view-main#tab-content')
 });
 
 router.get('/back-all-claims', function (req, res) {
@@ -151,7 +164,13 @@ router.get('/back-all-claims', function (req, res) {
   delete req.session.data.completion
   delete req.session.data.completionNoNote
 
-  return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + req.session.data.orgId)
+  delete req.session.data.id
+  delete req.session.data.inProgress
+
+  req.session.data.currentPage = '1'
+  req.session.data.orgTab = 'claims'
+
+  return res.redirect('organisation/org-view-main')
 
 });
 
@@ -220,12 +239,12 @@ router.post('/claim-process-handler', function (req, res) {
     }
 
       req.session.data.processClaimStep = "confirmOutcome"
-      return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+      return res.redirect('organisation/org-view-main#tab-content')
 
 
   } else {
 
-      return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + errorParamaters + '#tab-content')
+      return res.redirect('organisation/org-view-main'+ errorParamaters + '#tab-content')
 
   }
 });
@@ -262,7 +281,7 @@ router.get('/outcome-handler', function (req, res) {
   req.session.data.processSuccess = "true"
 
   req.session.data.processClaimStep = "claimProcessed"
-  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+  res.redirect('organisation/org-view-main#tab-content')
 });
 
 router.post('/add-note', function (req, res) {
@@ -292,18 +311,21 @@ router.post('/add-note', function (req, res) {
 
     foundClaim.notes.push(newNote);
     req.session.data.noteSuccess = "true"
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+    res.redirect('organisation/org-view-main#tab-content')
 
   }
 });
 
-router.post('/search-org-id', function (req, res) {
+router.post('/search-org', function (req, res) {
   const orgSearch = req.session.data.orgSearchInput
+  delete req.session.data.error
 
   if (orgSearch == "") {
-    return res.redirect('organisation/find-organisation?error=emptyInput')
+    req.session.data.error = 'emptyInput'
+    return res.redirect('organisation/find-organisation')
   } else if (isValidOrgSearch(orgSearch) == false) {
-    return res.redirect('organisation/find-organisation?error=notValid')
+    req.session.data.error = 'notValid'
+    return res.redirect('organisation/find-organisation')
   }
 
   var foundOrg = null
@@ -313,13 +335,26 @@ router.post('/search-org-id', function (req, res) {
     if (singleOrg == searchedOrg) {
       foundOrg = org
       break
+    } else if (org.signatory.email == searchedOrg) {
+      foundOrg = org
+      break
+    } else {
+      for (const user of org.users.active) {
+        if (user.email == searchedOrg) {
+          foundOrg = org
+          break
+        }
+      }
     }
   }
   if (foundOrg == null) {
-    res.redirect('organisation/find-organisation?error=notFound')
+    req.session.data.error = 'notFound'
+    res.redirect('organisation/find-organisation')
   } else {
-    res.redirect('organisation/org-view-main?orgTab=users&orgId=' + foundOrg.workplaceId + '&currentPage=1&error=')
     delete req.session.data.orgSearchInput
+    req.session.data.orgTab = 'users'
+    req.session.data.orgId = foundOrg.workplaceId
+    res.redirect('organisation/org-view-main')
   }
 });
 
@@ -334,17 +369,20 @@ router.post('/search-claim-id-orgView', function (req, res) {
 
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
-    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&emptyError=true')
+    req.session.data.emptyError = 'true';
+    return res.redirect('organisation/org-view-main')
   }
 
   const letterORegex = /o/i;
   if (letterORegex.test(claimID)) {
-    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&invalidIDError=true')
+    req.session.data.invalidIDError = 'true';
+    return res.redirect('organisation/org-view-main')
   }
 
   const lengthRegex = /^[A-NP-Z0-9]{3}[A-NP-Z0-9]{4}[A-NP-Z0-9]{4}(A|B|C)$/i;
   if (!lengthRegex.test(claimID)) {
-    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&invalidIDError=true')
+    req.session.data.invalidIDError = 'true';
+    return res.redirect('organisation/org-view-main')
   }
 
   var foundClaim = null
@@ -356,16 +394,22 @@ router.post('/search-claim-id-orgView', function (req, res) {
     }
   }
   if (foundClaim == null) {
-    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true')
+    req.session.data.notFound = 'true';
+    return res.redirect('organisation/org-view-main')
   }
   if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
-    
-    req.session.data.processClaimStep = "inProgress"
 
-    req.session.data.orgTab = "singleClaim"
-    return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgId=' + foundOrg)
+    delete req.session.data.claimID;
+    delete req.session.data.currentPage;
+
+    req.session.data.processClaimStep = "inProgress"
+    req.session.data.orgTab = "claims"
+    req.session.data.id = foundClaim.claimID
+
+    return res.redirect('organisation/org-view-main')
   } else {
-    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true')
+    req.session.data.notFound = 'true';
+    return res.redirect('organisation/org-view-main')
   }
 });
 
@@ -380,7 +424,8 @@ router.post('/add-org-note', function (req, res) {
   var newNoteInput = req.session.data.notes
 
   if (newNoteInput == null || newNoteInput == "") {
-    res.redirect('organisation/add-org-note?noteError=true')
+    req.session.data.noteError = 'true'
+    res.redirect('organisation/add-org-note')
 
   } else {
     var currentDate = new Date().toISOString();
@@ -396,7 +441,8 @@ router.post('/add-org-note', function (req, res) {
 
     foundOrg.notes.push(newNote);
     req.session.data.noteSuccess = "true"
-    res.redirect('organisation/org-view-main' + '?orgTab=orgNotes')
+    req.session.data.orgTab = 'orgNotes'
+    res.redirect('organisation/org-view-main')
 
   }
 });
@@ -408,7 +454,8 @@ router.get('/reinvite-signatory', function (req, res) {
   } else {
     req.session.data.resendList = [req.session.data.name]
   }
-  res.redirect('organisation/org-view-main?orgTab=users&orgId=' + req.session.data.orgId + '&currentPage=1')
+  req.session.data.orgTab = "users"
+  res.redirect('organisation/org-view-main')
 });
 
 router.post('/org-signatory-handler', function (req, res) {
@@ -434,6 +481,10 @@ router.post('/update-signatory-invite', function (req, res) {
   const givenName = req.session.data.givenName
   const email = req.session.data.email
 
+  
+  delete req.session.data.edited
+  delete req.session.data.goBack
+
   const orgID = req.session.data.orgId
   for (const org of req.session.data['organisations']) {
     if (org.workplaceId == orgID) {
@@ -443,7 +494,87 @@ router.post('/update-signatory-invite', function (req, res) {
       org.signatory.status = "invited"
     } 
   }
-  res.redirect('organisation/org-view-main?orgTab=users&confirmation=invited&edited=&goBack=')
+  req.session.data.confirmation = 'invited'
+  req.session.data.orgTab = 'users'
+
+  res.redirect('organisation/org-view-main')
 });
+
+router.get('/org-tab-handler/:tab', function (req, res) {
+
+  const orgTab = req.params.tab
+
+  delete req.session.data.claimID
+  delete req.session.data.emptyError
+  delete req.session.data.invalidIDError
+  delete req.session.data.notFound
+  delete req.session.data.currentPage
+
+  req.session.data.orgTab = orgTab
+
+  if (orgTab == 'claims') {
+    req.session.data.currentPage = '1'
+  }
+
+  res.redirect('../organisation/org-view-main')
+});
+
+router.get('/claim-view-handler/:claimID', function (req, res) {
+
+  const claimID = req.params.claimID
+
+  delete req.session.data.currentPage
+
+  req.session.data.orgTab = 'claims'
+  req.session.data.id = claimID
+  req.session.data.processClaimStep = 'inProgress'
+
+  res.redirect('../organisation/org-view-main')
+});
+
+router.get('/back-to-start-handler', function (req, res) {
+
+  delete req.session.data.paymentResponseIncomplete
+  delete req.session.data.paymentReimbursementAmountIncomplete
+  delete req.session.data.paymentReimbursementAmountInvalid
+  delete req.session.data.paymentNoNoteIncomplete
+  delete req.session.data.processSuccess
+  delete req.session.data.noteSuccess
+  delete req.session.data.completionResponseIncomplete
+  delete req.session.data.completionNoNoteIncomplete
+
+  delete req.session.data.payment
+  delete req.session.data.paymentReimbursementAmount
+  delete req.session.data.paymentNoNote
+  delete req.session.data.completion
+  delete req.session.data.completionNoNote
+
+  delete req.session.data.id
+  delete req.session.data.processClaimStep
+  delete req.session.data.currentPage
+  delete req.session.data.orgTab
+  delete req.session.data.orgId
+
+  delete req.session.data.result
+
+  delete req.session.data.confirmation
+  delete req.session.data.invite
+
+
+  res.redirect('./home')
+});
+
+router.get('/confirm-signatory-handler', function (req, res) {
+
+  delete req.session.data.newOrg
+  delete req.session.data.orgID
+  delete req.session.data.email
+  delete req.session.data['answers-checked']
+
+  req.session.data.confirmation = 'register'
+
+  res.redirect('./home')
+});
+
 
 module.exports = router

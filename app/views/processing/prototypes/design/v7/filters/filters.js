@@ -391,6 +391,33 @@ addFilter('findOrgClaims', function (orgID, claims) {
     return orgClaims;
 })
 
+addFilter('pageCount', function (content, perPage) {
+    return Math.ceil(content / perPage)
+})
+
+addFilter('typeTag', function (type) {
+    switch (type) {
+        case null:
+            return ""
+        case "100":
+            return '<strong class="govuk-tag govuk-tag--orange">100</strong>'
+        case "60":
+            return '<strong class="govuk-tag govuk-tag--yellow">60</strong>'
+        case "40":
+            return '<strong class="govuk-tag govuk-tag--purple">40</strong>'
+    }
+}, { renderAsHtml: true })
+
+addFilter('orderClaims', function (claims) {
+    // Desired order of statuses
+    const statusOrder = ["submitted", "rejected", "approved"];
+
+    // Sort function
+    claims.sort((a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status));
+    
+    return claims
+})
+
 addFilter('userStatusTag', function (status) {
 
     if (status == 'active') {
@@ -436,3 +463,11 @@ addFilter('typeTag', function (type) {
             return '<strong class="govuk-tag govuk-tag--purple">40</strong>'
     }
 }, { renderAsHtml: true })
+
+addFilter('parseInt', function(value, radix = 10) {
+    return parseInt(value, radix);
+});
+
+addFilter('min', (value1, value2) => {
+    return Math.min(value1, value2);
+});

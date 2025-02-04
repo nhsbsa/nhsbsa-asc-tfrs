@@ -55,7 +55,7 @@
           <div class="moj-page-header-actions__actions">
             <div class="moj-button-group moj-button-group--inline">
                <p class="govuk-body">
-                <a href="../home?confirmation=&invite=" class="govuk-link">Back to start</a>
+                <a href="../back-to-start-handler" class="govuk-link">Back to start</a>
               </p>
             </div>
           </div>
@@ -64,10 +64,9 @@
     </div>
   </div>
 
+  {% if org.signatory.status == "invited" %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-
-      {% if org.signatory.status == "invited" %}
         <div class="govuk-warning-text">
           <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
           <strong class="govuk-warning-text__text">
@@ -75,9 +74,9 @@
             Organisation has not yet finished registration. The Senior Responsible Officer needs to accept the invitation sent to their email and complete registration.
           </strong>
         </div>
-      {% endif %}
     </div>
   </div>
+  {% endif %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
@@ -112,17 +111,17 @@
         
                 <ul class="moj-primary-navigation__list">
                   <li class="moj-primary-navigation__item">
-                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'users'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=users">Users</a>
+                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'users'%}aria-current="page"{%endif%} href="../org-tab-handler/users">Contacts</a>
                   </li>
 
                   {% if (org.signatory.status == "active") %}
                     <li class="moj-primary-navigation__item">
-                      <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims&claimID=&emptyError=&invalidIDError=&notFound=">Find a claim</a>
+                      <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="../org-tab-handler/claims">Claims</a>
                     </li>
                   {% endif %}
 
                   <li class="moj-primary-navigation__item">
-                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'orgNotes'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=orgNotes">Organisation notes</a>
+                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'orgNotes'%}aria-current="page"{%endif%} href="../org-tab-handler/orgNotes">BSA notes</a>
                   </li>
 
                   {% if (org.signatory.status == "active") %}
@@ -145,9 +144,9 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full" id="tab-content">
       <div class="tab-content">
-        {% if data.orgTab == "claims" %}
+        {% if data.orgTab == "claims" and data.id == null %}
             {% include "../_components/org-view/claims.html" %}
-          {% elif data.orgTab == "singleClaim" %}
+          {% elif data.orgTab == "claims" and data.id != null %}
             {% include "../_components/claim-view/claim-overview.html" %}
           {% elif data.orgTab == "users" %}
             {% include "../_components/org-view/users.html" %}
