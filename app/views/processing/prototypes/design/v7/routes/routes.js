@@ -560,8 +560,11 @@ router.get('/back-to-start-handler', function (req, res) {
   delete req.session.data.confirmation
   delete req.session.data.invite
 
-
-  res.redirect('./home')
+  if (req.session.data.userType == "processor") {
+    res.redirect('./home')
+  } else {
+    res.redirect('./organisation/find-organisation')
+  }
 });
 
 router.get('/confirm-signatory-handler', function (req, res) {
