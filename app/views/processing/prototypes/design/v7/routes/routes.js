@@ -316,7 +316,7 @@ router.post('/add-note', function (req, res) {
   }
 });
 
-router.post('/search-org-id', function (req, res) {
+router.post('/search-org', function (req, res) {
   const orgSearch = req.session.data.orgSearchInput
   delete req.session.data.error
 
@@ -335,6 +335,16 @@ router.post('/search-org-id', function (req, res) {
     if (singleOrg == searchedOrg) {
       foundOrg = org
       break
+    } else if (org.signatory.email == searchedOrg) {
+      foundOrg = org
+      break
+    } else {
+      for (const user of org.users.active) {
+        if (user.email == searchedOrg) {
+          foundOrg = org
+          break
+        }
+      }
     }
   }
   if (foundOrg == null) {
