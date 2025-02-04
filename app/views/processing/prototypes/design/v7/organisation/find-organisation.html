@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block beforeContent %}
+{% if (data.userType != "ccsAgent") %}
 <a href="../home" class="govuk-back-link">Back</a>
+{% endif %}
 {% endblock %}
 
 {% block content %}
