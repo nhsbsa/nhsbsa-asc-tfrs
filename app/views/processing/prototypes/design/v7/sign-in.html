@@ -12,14 +12,14 @@ Sign in - {{data.processingServiceName}}
         <p class="govuk-body">Please click "Sign in" button to continue.</p>
 
         {% if (data.userType == "ccsAgent") %}
-        <a class="govuk-button" data-module="govuk-button" href="organisation/find-organisation">
-            Sign-in
-        </a>
-    {% else %}
-        <a class="govuk-button" data-module="govuk-button" href="home">
-            Sign-in
-        </a>
-    {% endif %}
+            <a class="govuk-button" data-module="govuk-button" href="organisation/find-organisation">
+                Sign-in
+            </a>
+        {% else %}
+            <a class="govuk-button" data-module="govuk-button" href="home">
+                Sign-in
+            </a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
