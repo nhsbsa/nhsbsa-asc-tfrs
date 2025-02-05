@@ -47,7 +47,7 @@
               <form action="../search-claim-id-orgView" method="post">
                 <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">
                   <div id="search-hint" class="govuk-hint moj-search__hint">
-                    Enter a claim reference. This could be with or without an -A, -B or -C suffix. For example, H2T-C813-3XF7-C or H2T-C813-3XF7
+                    <label for="claimID">Enter a claim reference.</label> This could be with or without an -A, -B or -C suffix. For example, H2T-C813-3XF7-C or H2T-C813-3XF7
                   </div>
                   {% if data.invalidIDError %}
                       <p id="sortCode-error" class="govuk-error-message">

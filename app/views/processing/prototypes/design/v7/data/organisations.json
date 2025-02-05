@@ -74,6 +74,24 @@
       "notes" : []
     },
     {
+      "workplaceId": "K15904728",
+      "name": "Purple Stones Care home",
+      "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
+      "bankDetails": null,
+      "signatory": {
+        "givenName": "Kayleigh",
+        "familyName": "McCleod",
+        "email": "kayleigh-mccleod@carehome.co.uk",
+        "status": "active"
+      }, 
+      "users": {
+        "active": [],
+        "inactive": [],
+        "invited": []
+      },
+      "notes" : []
+    },
+    {
       "workplaceId": "D91774723",
       "name": "Pinetree Manor Care Centre",
       "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],

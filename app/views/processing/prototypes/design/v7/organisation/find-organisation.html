@@ -41,14 +41,16 @@
         <form action="../search-org" method="post">
             <div class="govuk-form-group {% if (data.error == "emptyInput" or data.error == "notValid"  or data.error == "notFound") %} govuk-form-group--error{% endif %}">
 
-                <fieldset class="govuk-fieldset" role="group" aria-describedby="dob-hint">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="org-search-input-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                       <h1 class="govuk-fieldset__heading">
-                        Find an organisation
+                        <label for="orgSearchInput">
+                            Find an organisation
+                        </label>
                       </h1>
                     </legend>
                 
-                    <div id="dob-hint" class="govuk-hint">
+                    <div id="org-search-input-hint" class="govuk-hint">
                         Enter a workplace ID or a contact's email address.
                     </div>
     
