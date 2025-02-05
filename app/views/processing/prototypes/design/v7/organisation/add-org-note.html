@@ -31,9 +31,11 @@
                 class="govuk-form-group govuk-character-count {% if (data.noteError != null and data.noteError) %} govuk-form-group--error {% endif %}">
                 <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <span class="govuk-caption-l">{{ org.name }}</span>
-                    <h1 class="govuk-fieldset__heading">
-                        Add a note
-                    </h1>
+                    <label for="notes">
+                        <h1 class="govuk-fieldset__heading">
+                            Add a note
+                        </h1>
+                    </label>
                 </legend>
                 <div id="notes-hint" class="govuk-hint">
                     This note will be kept on record so you and other BSA staff can refer to it in future. When notes relate to claims, please include the <strong>claim reference numbers</strong>.
