@@ -469,10 +469,10 @@ router.post('/org-signatory-handler', function (req, res) {
 
   if (result.signatoryValid) {
     delete req.session.data.submitError
-      res.redirect('organisation/updated-signatory-invitation')
+      res.redirect('organisation/org-updated-signatory-invitation')
   } else {
     req.session.data.submitError = result
-    res.redirect('organisation/signatory-details')
+    res.redirect('organisation/edit-signatory-details')
   }
 });
 
@@ -480,8 +480,6 @@ router.post('/update-signatory-invite', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
   const email = req.session.data.email
-
-  
   delete req.session.data.edited
   delete req.session.data.goBack
 
@@ -493,6 +491,11 @@ router.post('/update-signatory-invite', function (req, res) {
       org.signatory.email = email
       org.signatory.status = "invited"
     } 
+  }
+  if (req.session.data.resendList) {
+    req.session.data.resendList.push(req.session.data.email)
+  } else {
+    req.session.data.resendList = [req.session.data.email]
   }
   req.session.data.confirmation = 'invited'
   req.session.data.orgTab = 'users'
@@ -559,6 +562,7 @@ router.get('/back-to-start-handler', function (req, res) {
 
   delete req.session.data.confirmation
   delete req.session.data.invite
+  delete req.session.data.resendList
 
   if (req.session.data.userType == "processor") {
     res.redirect('./home')
