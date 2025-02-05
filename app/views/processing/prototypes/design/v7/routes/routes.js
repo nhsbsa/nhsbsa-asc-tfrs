@@ -244,7 +244,7 @@ router.post('/claim-process-handler', function (req, res) {
 
   } else {
 
-      return res.redirect('organisation/org-view-main'+ errorParamaters + '#tab-content')
+      return res.redirect('organisation/org-view-main?'+ errorParamaters + '#tab-content')
 
   }
 });

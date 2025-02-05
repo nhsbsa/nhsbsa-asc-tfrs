@@ -65,7 +65,7 @@
                         <input
                             class="govuk-input govuk-input--width-10 {% if (data.invalidIDError or data.notFound) %} govuk-input--error {% endif %} "
                             aria-describedby="claim-id-hint {% if (data.invalidIDError or data.notFound) %} event-name-error {% endif %}"
-                            id="claimID" name="claimID" type="text">
+                            id="claimID" name="claimID" type="text" value="{{data.claimID}}">
                     </div>
                 </fieldset>
             </div>
