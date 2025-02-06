@@ -100,7 +100,7 @@ router.post('/search-claim-id', function (req, res) {
   delete req.session.data.completionNoNoteIncomplete
 
 
-  var claimID = req.session.data.claimID.replace(/\s/g, '');
+  var claimID = req.session.data.claimID.replace(/[\s-]/g, '');
 
 
   const emptyRegex = /\S/;
@@ -113,16 +113,33 @@ router.post('/search-claim-id', function (req, res) {
     return res.redirect('process-claim/start-process?invalidIDError=true')
   }
 
-  const lengthRegex = /^[A-NP-Z0-9]{3}-[A-NP-Z0-9]{4}-[A-NP-Z0-9]{4}-(A|B|C)$/;
+  const lengthRegex = /^[A-NP-Z0-9]{3}[A-NP-Z0-9]{4}[A-NP-Z0-9]{4}(?:A|B|C)?$/i;
   if (!lengthRegex.test(claimID)) {
     return res.redirect('process-claim/start-process?invalidIDError=true')
   }
 
   var foundClaim = null
   for (const c of req.session.data['claims']) {
-    if (c.claimID == claimID) {
+    let searchedID = claimID.toLowerCase()
+    let singleClaim = c.claimID.toLowerCase().replace(/[\s-]/g, '');
+
+    // single searched full claim id
+    if (singleClaim == searchedID) {
       foundClaim = c
+      break
     }
+
+    // search with no suffix to return the most recent claim 
+    let foundClaimArray = []
+    if (singleClaim.includes(searchedID)) {
+      foundClaimArray.push(c)
+    }
+    if (foundClaimArray.length > 1) {
+      foundClaim = foundClaimArray.find(claim => claim.claimID.endsWith('-C'))
+    } else if (foundClaimArray.length == 1) {
+      foundClaim = foundClaimArray[0]
+    }
+
   }
   if (foundClaim == null) {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
@@ -365,7 +382,6 @@ router.post('/search-claim-id-orgView', function (req, res) {
   delete req.session.data['id'];
 
   var claimID = req.session.data.claimID.replace(/[\s-]/g, '');
-  var foundOrg = req.session.data.orgId
 
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
@@ -379,7 +395,8 @@ router.post('/search-claim-id-orgView', function (req, res) {
     return res.redirect('organisation/org-view-main')
   }
 
-  const lengthRegex = /^[A-NP-Z0-9]{3}[A-NP-Z0-9]{4}[A-NP-Z0-9]{4}(A|B|C)$/i;
+  const lengthRegex = /^[A-NP-Z0-9]{3}[A-NP-Z0-9]{4}[A-NP-Z0-9]{4}(?:A|B|C)?$/i;
+
   if (!lengthRegex.test(claimID)) {
     req.session.data.invalidIDError = 'true';
     return res.redirect('organisation/org-view-main')
@@ -389,9 +406,24 @@ router.post('/search-claim-id-orgView', function (req, res) {
   for (const c of req.session.data['claims']) {
     let searchedID = claimID.toLowerCase()
     let singleClaim = c.claimID.toLowerCase().replace(/[\s-]/g, '');
-    if (searchedID == singleClaim) {
+
+    // single searched full claim id
+    if (singleClaim == searchedID) {
       foundClaim = c
+      break
     }
+
+    // search with no suffix to return the most recent claim 
+    let foundClaimArray = []
+    if (singleClaim.includes(searchedID)) {
+      foundClaimArray.push(c)
+    }
+    if (foundClaimArray.length > 1) {
+      foundClaim = foundClaimArray.find(claim => claim.claimID.endsWith('-C'))
+    } else if (foundClaimArray.length == 1) {
+      foundClaim = foundClaimArray[0]
+    }
+
   }
   if (foundClaim == null) {
     req.session.data.notFound = 'true';
