@@ -471,3 +471,14 @@ addFilter('parseInt', function(value, radix = 10) {
 addFilter('min', (value1, value2) => {
     return Math.min(value1, value2);
 });
+
+
+addFilter('processedDate', function (claim) {
+    let processedDate = null
+    if (claim.approvedDate) {
+        processedDate = claim.approvedDate
+    } else if (claim.rejectedDate) {
+        processedDate = claim.rejectedDate
+    }
+    return processedDate
+})
