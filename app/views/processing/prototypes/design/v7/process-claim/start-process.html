@@ -24,7 +24,7 @@
                             {% if (data.emptyError) %}
                             <a href="#claimID"> Enter a claim reference number</a>
                             {% elif (data.notFound) %}
-                            <a href="#claimID">No match returned for your search: <q>{{ data.id }}</a>
+                            <a href="#claimID">No match returned for your search: <q>{{ data.claimID }}</a>
                             {% else %}
                             <a href="#claimID">Enter a claim reference number in the correct format</a>
                             {% endif %}
@@ -55,7 +55,7 @@
                             {% if (data.emptyError) %}
                             <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number
                             {% elif (data.notFound) %}
-                            <span class="govuk-visually-hidden">Error:</span> No match returned for your search: <q>{{ data.id }}
+                            <span class="govuk-visually-hidden">Error:</span> No match returned for your search: <q>{{ data.claimID }}
                             {% else %}
                             <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number in the
                             correct format
