@@ -615,5 +615,29 @@ router.get('/confirm-signatory-handler', function (req, res) {
   res.redirect('./home')
 });
 
+router.post('/change-sro-handler', function (req, res) {
+
+    res.redirect('./change-sro/signatory-details')
+
+});
+
+router.post('/signatory-change-handler', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+  const edited = req.session.data.edited
+  const newOrg = req.session.data.newOrg
+
+  const result = signatoryCheck(familyName, givenName, email)
+
+  if (result.signatoryValid) {
+    delete req.session.data.submitError
+    res.redirect('change-sro/updated-signatory-invitation')
+  } else {
+    req.session.data.submitError = result
+    res.redirect('change-sro/signatory-details')
+  }
+});
+
 
 module.exports = router
