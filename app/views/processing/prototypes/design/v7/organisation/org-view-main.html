@@ -1,6 +1,23 @@
 {% extends "../layouts/processing-main.html" %}
 {% set org = data.orgId | findOrganisation(data.organisations) %}
 {% set claims = data.orgId | findOrgClaims(data.claims) %}
+{% set SROStatusCheck = false %}
+{% set activeSRO = null %}
+
+{% for sro in org.signatory %}
+    {% if (sro.status == "active") %}
+        {% set SROStatusCheck = true %}
+        {% set activeSRO = sro %}
+    {% endif %}
+{% endfor %}
+
+{% if (not SROStatusCheck) %}
+  {% for sro in org.signatory %}
+    {% if (sro.status == "invited") %}
+      {% set activeSRO = sro %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 {% block content %}
 <div class="govuk-grid-row">
@@ -64,7 +81,7 @@
     </div>
   </div>
 
-  {% if org.signatory.status == "invited" %}
+  {% if (not SROStatusCheck) %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <div class="govuk-warning-text">
@@ -91,9 +108,9 @@
       <p class="govuk-body">
         <span class="govuk-!-font-weight-bold">Senior Responsible Officer:</span>
         <br>
-        {{ org.signatory.givenName }} {{ org.signatory.familyName }}
+        {{ activeSRO.givenName }} {{ activeSRO.familyName }}
         <br>
-        <a href="#">{{ org.signatory.email }}</a>
+        <a href="#">{{ activeSRO.email }}</a>
       </p>
     </div>
   </div>
@@ -114,7 +131,7 @@
                     <a class="moj-primary-navigation__link" {% if data.orgTab == 'users'%}aria-current="page"{%endif%} href="../org-tab-handler/users">Contacts</a>
                   </li>
 
-                  {% if (org.signatory.status == "active") %}
+                  {% if (SROStatusCheck) %}
                     <li class="moj-primary-navigation__item">
                       <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="../org-tab-handler/claims">Claims</a>
                     </li>
