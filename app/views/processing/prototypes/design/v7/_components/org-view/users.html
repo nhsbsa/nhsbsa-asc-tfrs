@@ -1,5 +1,11 @@
 
 {% set org = data.orgId | findOrganisation(data.organisations) %}
+{% set SROStatusCheck = false %}
+{% for sro in org.signatory %}
+    {% if (sro.status == "invited") %}
+        {% set SROStatusCheck = true %}
+    {% endif %}
+{% endfor %}
 
 <div class="govuk-grid-row">
     <div class="{% if (org.signatory.status == 'invited') %}govuk-grid-column-full{% else %}govuk-grid-column-two-thirds{% endif %}">
@@ -17,7 +23,7 @@
                     <th class="govuk-table__header" scope="col" width="20%">Name</th>
                     <th class="govuk-table__header" scope="col" width="45%">Email</th>
                     <th class="govuk-table__header" scope="col" width="15%">Status</th>
-                    <th class="govuk-table__header" scope="col" width="20%"><span class="govuk-visually-hidden">Actions</span></th>
+                    {% if (SROStatusCheck) %}<th class="govuk-table__header" scope="col" width="20%"><span class="govuk-visually-hidden">Actions</span></th>{% endif %}
                     </tr>
                 </thead>
             <tbody class="govuk-table__body">
@@ -26,9 +32,9 @@
                         <td class="govuk-table__cell">{{ sro.givenName}} {{ sro.familyName}}</td>
                         <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ sro.email }}</a></td>
                         <td class="govuk-table__cell">{{ sro.status | userStatusTag }}</td>
-                        {% if (sro.status == "invited") %}<td class="govuk-table__cell" style="text-align: right;">{% if (not (data.resendList | matchResend(sro.email))) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-signatory?name={{sro.email}}">Resend invite<span class="govuk-visually-hidden">to {{sro.givenName}} {{sro.familyName}}</span></a>{% else %}Invitation sent{% endif %}</td>{% endif %}
+                        {% if (sro.status == "invited") %}<td class="govuk-table__cell" style="text-align: right;">{% if (not (data.resendList | matchResend(sro.email))) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-signatory?name={{sro.email}}">Resend invite<span class="govuk-visually-hidden">to {{sro.givenName}} {{sro.familyName}}</span></a>{% else %}Invitation sent{% endif %}</td>{% elif (SROStatusCheck) %}<td class="govuk-table__cell" style="text-align: right;"></td>{% endif %}
                     </tr>
-                    {% endfor %}
+                {% endfor %}
             </tbody>
         </table>
         

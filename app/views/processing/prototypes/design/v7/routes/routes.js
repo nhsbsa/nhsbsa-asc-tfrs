@@ -535,15 +535,17 @@ router.post('/update-signatory-invite', function (req, res) {
           status : "invited"
         }
         org.signatory.push(newSignatory);
-        org.signatory[0].status = "invited"
+        if (SROChange =='replace') {
+        org.signatory[0].status = "Inactive"
+        }
       }
       
     } 
   }
   if (req.session.data.resendList) {
-    req.session.data.resendList.push(req.session.data.email)
+    req.session.data.resendList.push(email)
   } else {
-    req.session.data.resendList = [req.session.data.email]
+    req.session.data.resendList = [email]
   }
   req.session.data.confirmation = 'invited'
   req.session.data.orgTab = 'users'
