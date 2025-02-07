@@ -3,9 +3,9 @@
 {% set foundOrganisation = data.organisations | findOrg(data.orgId) %}
 
 {% if data.SROChange == 'edit' %}
-    {% set givenName = foundOrganisation.signatory.givenName %}
-    {% set familyName = foundOrganisation.signatory.familyName %}
-    {% set email = foundOrganisation.signatory.email %}
+    {% set givenName = foundOrganisation.signatory[0].givenName %}
+    {% set familyName = foundOrganisation.signatory[0].familyName %}
+    {% set email = foundOrganisation.signatory[0].email %}
 {% endif %}
 
 {% block pageTitle %}

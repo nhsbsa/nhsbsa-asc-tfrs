@@ -9,44 +9,31 @@
         <a href="../change-sro/change-sro-question" class="govuk-button" data-module="govuk-button">
             Make changes to SRO
         </a>
-          
-        {% if (org.signatory.status == "invited") %} 
-            <table class="govuk-table" data-module="moj-sortable-table">
-                <thead class="govuk-table__head govuk-!-margin-top-6">
-                    <tr class="govuk-table__row">
-                        <th class="govuk-table__header" scope="col" width="20%">Name</th>
-                        <th class="govuk-table__header" scope="col" width="45%">Email</th>
-                        <th class="govuk-table__header" scope="col" width="15%">Status</th>
-                        <th class="govuk-table__header" scope="col" width="20%"><span class="govuk-visually-hidden">Actions</span></th>
-                        </tr>
-                    </thead>
-                <tbody class="govuk-table__body">
-                        <tr class="govuk-table__row claim-row" id="{{ org.workplaceId }}">
-                            <td class="govuk-table__cell">{{ org.signatory.givenName}} {{ org.signatory.familyName}}</td>
-                            <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ org.signatory.email }}</a></td>
-                            <td class="govuk-table__cell">{{ org.signatory.status | userStatusTag }}</td>
-                            <td class="govuk-table__cell" style="text-align: right;">{% if (not (data.resendList | matchResend(org.signatory.email))) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-signatory?name={{org.signatory.email}}">Resend invite<span class="govuk-visually-hidden">to {{org.signatory.givenName}} {{org.signatory.familyName}}</span></a>{% else %}Invitation sent{% endif %}</td>
-                        </tr>
-                </tbody>
-            </table>
-        {% else %} 
-                <table class="govuk-table" data-module="moj-sortable-table">
-                    <thead class="govuk-table__head govuk-!-margin-top-6">
-                        <tr class="govuk-table__row">
-                            <th class="govuk-table__header" scope="col" width="30%">Name</th>
-                            <th class="govuk-table__header" scope="col" width="55%">Email</th>
-                            <th class="govuk-table__header" scope="col" width="15%">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="govuk-table__body">
-                            <tr class="govuk-table__row claim-row" id="{{ org.workplaceId }}">
-                                <td class="govuk-table__cell">{{ org.signatory.givenName}} {{ org.signatory.familyName}}</td>
-                                <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ org.signatory.email }}</a></td>
-                                <td class="govuk-table__cell">{{ org.signatory.status | userStatusTag }}</td>
-                            </tr>
-                    </tbody>
-                </table>
-        {% endif %} 
+        
+
+        <table class="govuk-table" data-module="moj-sortable-table">
+            <thead class="govuk-table__head govuk-!-margin-top-6">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" width="20%">Name</th>
+                    <th class="govuk-table__header" scope="col" width="45%">Email</th>
+                    <th class="govuk-table__header" scope="col" width="15%">Status</th>
+                    <th class="govuk-table__header" scope="col" width="20%"><span class="govuk-visually-hidden">Actions</span></th>
+                    </tr>
+                </thead>
+            <tbody class="govuk-table__body">
+                {% for sro in org.signatory %}
+                    <tr class="govuk-table__row claim-row" id="{{ org.workplaceId }}">
+                        <td class="govuk-table__cell">{{ sro.givenName}} {{ sro.familyName}}</td>
+                        <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ sro.email }}</a></td>
+                        <td class="govuk-table__cell">{{ sro.status | userStatusTag }}</td>
+                        {% if (sro.status == "invited") %}<td class="govuk-table__cell" style="text-align: right;">{% if (not (data.resendList | matchResend(sro.email))) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-signatory?name={{sro.email}}">Resend invite<span class="govuk-visually-hidden">to {{sro.givenName}} {{sro.familyName}}</span></a>{% else %}Invitation sent{% endif %}</td>{% endif %}
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+        
+
+
 
         <h2 class="govuk-heading-m govuk-!-margin-top-6">Submitters</h1>  
         {% if (org.users.active.length > 0 or org.users.invited.length > 0) %} 
