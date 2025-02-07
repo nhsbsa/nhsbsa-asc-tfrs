@@ -5,7 +5,10 @@
     <div class="{% if (org.signatory.status == 'invited') %}govuk-grid-column-full{% else %}govuk-grid-column-two-thirds{% endif %}">
         <h1 class="govuk-heading-l govuk-!-margin-top-6">Contacts</h1>   
 
-        <h2 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer (SRO)</h1>  
+        <h2 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer (SRO)</h1>
+        <a href="change-sro-question" class="govuk-button" data-module="govuk-button">
+            Make changes to SRO
+        </a>
           
         {% if (org.signatory.status == "invited") %} 
             <table class="govuk-table" data-module="moj-sortable-table">
