@@ -30,7 +30,7 @@
       "name": "Daniel Jones",
       "email": "d.jones@evergreencare.com"
     },
-    "submittedDate": "2024-02-11T12:56:10.547Z",
+    "submittedDate": "2024-04-16T12:56:10.547Z",
     "approvedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
@@ -379,7 +379,7 @@
     "status": "submitted",
     "createdDate": "2023-12-31T08:55:32.615Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2024-02-11T12:56:10.547Z",
+    "submittedDate": "2024-07-09T12:56:10.547Z",
     "submitter": {
       "name": "Rachel Mcglee",
       "email": "rachel.mcglee@evergreencare.com"
@@ -718,6 +718,59 @@
     "evidenceOfCompletionreview": {
       "pass": null,
       "note": null
+    },
+    "reimbursementAmount": 55,
+    "completionDate": "2023-09-14T21:03:51.996Z",
+    "costDate": "2023-05-13T18:29:08.850Z",
+    "notes": [
+    ]
+  },
+  {
+    "claimID": "M8M-6WH8-TRCL-B",
+    "fundingType": "TU",
+    "claimType": "40",
+    "workplaceId": "B02944934",
+    "learner": {
+      "id": "KQ 01 7F 72 D",
+      "familyName": "Jairo",
+      "givenName": "Kuphal",
+      "jobTitle": "Council Care Assistant"
+    },
+    "training": {
+      "code": "600/9319/5",
+      "reimbursementAmount": 150,
+      "title": "Understanding the Principles and Practices of Assessment",
+      "totalLearningTime": "30 hours",
+      "fundingModel": "split",
+      "type": "Level 3 Award",
+      "category": "Assessment",
+      "description": null,
+      "awardingOrganisation": "SEG Awards",
+      "link": null
+    },
+    "startDate": "2023-08-14T21:03:51.996Z",
+    "status": "rejected",
+    "createdDate": "2023-06-27T18:29:08.850Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-22T21:55:10.611Z",
+    "submitter": {
+      "name": "Rachel Mcglee",
+      "email": "rachel.mcglee@evergreencare.com"
+    },
+    "approvedDate": null,
+    "rejectedDate": "2024-10-02T19:25:11.840Z",
+    "rejectedNote": "The evidence of completion provided did not meet our requirements because it did not refer to the training.",
+    "evidenceOfPayment": ["invoice008.pdf", "bankstatement008.pdf", "receipt008.pdf"],
+    "evidenceOfPaymentreview": {
+      "pass": "Approved",
+      "note": null
+    },
+    "paymentNote": null,
+    "completionNote": null,
+    "evidenceOfCompletion": "certificate003.pdf",
+    "evidenceOfCompletionreview": {
+      "pass": "Rejected",
+      "note": "The evidence of completion provided did not meet our requirements because it did not refer to the training."
     },
     "reimbursementAmount": 55,
     "completionDate": "2023-09-14T21:03:51.996Z",
