@@ -386,20 +386,20 @@ router.post('/search-claim-id-orgView', function (req, res) {
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
     req.session.data.emptyError = 'true';
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   }
 
   const letterORegex = /o/i;
   if (letterORegex.test(claimID)) {
     req.session.data.invalidIDError = 'true';
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   }
 
   const lengthRegex = /^[A-NP-Z0-9]{3}[A-NP-Z0-9]{4}[A-NP-Z0-9]{4}(?:A|B|C)?$/i;
 
   if (!lengthRegex.test(claimID)) {
     req.session.data.invalidIDError = 'true';
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   }
 
   var foundClaim = null
@@ -427,7 +427,7 @@ router.post('/search-claim-id-orgView', function (req, res) {
   }
   if (foundClaim == null) {
     req.session.data.notFound = 'true';
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   }
   if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
 
@@ -438,10 +438,10 @@ router.post('/search-claim-id-orgView', function (req, res) {
     req.session.data.orgTab = "claims"
     req.session.data.id = foundClaim.claimID
 
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   } else {
     req.session.data.notFound = 'true';
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   }
 });
 
@@ -487,7 +487,7 @@ router.get('/reinvite-signatory', function (req, res) {
     req.session.data.resendList = [req.session.data.name]
   }
   req.session.data.orgTab = "users"
-  res.redirect('organisation/org-view-main')
+  res.redirect('organisation/org-view-main#tab-content')
 });
 
 router.post('/org-signatory-handler', function (req, res) {
@@ -532,7 +532,7 @@ router.post('/update-signatory-invite', function (req, res) {
   req.session.data.confirmation = 'invited'
   req.session.data.orgTab = 'users'
 
-  res.redirect('organisation/org-view-main')
+  res.redirect('organisation/org-view-main#tab-content')
 });
 
 router.get('/org-tab-handler/:tab', function (req, res) {
