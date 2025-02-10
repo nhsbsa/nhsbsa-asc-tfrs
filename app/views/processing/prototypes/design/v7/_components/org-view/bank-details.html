@@ -37,7 +37,7 @@
               </dd>
             </div>
           </dl>
-        {% elif (org.signatory.status == "invited") %}
+        {% elif (org.signatory.active.status == "invited") %}
           <p class="govuk-body">Organisation has not yet completed registration so bank details have not yet been added.</p>
         {% else %}
           <p class="govuk-body">This organisation has not yet added their bank details.</p>

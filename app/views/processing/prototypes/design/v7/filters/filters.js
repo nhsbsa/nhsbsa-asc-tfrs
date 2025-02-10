@@ -429,8 +429,6 @@ addFilter('userStatusTag', function (status) {
 
     if (status == 'active') {
         return '<strong class="govuk-tag govuk-tag--blue">Active</strong>'
-    } else if (status == 'registered') {
-        return '<strong class="govuk-tag govuk-tag--green">Registered</strong>'
     } else if (status == 'invited') {
         return '<strong class="govuk-tag govuk-tag--yellow">Invited</strong>'
     } else {
