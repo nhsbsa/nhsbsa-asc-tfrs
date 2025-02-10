@@ -411,10 +411,10 @@
     "claimType": "60",
     "workplaceId": "B02944934",
     "learner": {
-      "id": "KQ 01 7F 72 D",
-      "familyName": "Jairo",
-      "givenName": "Kuphal",
-      "jobTitle": "Council Care Assistant"
+      "id": "BF 73 4F 97 L",
+      "familyName": "Windler",
+      "givenName": "Zechariah",
+      "jobTitle": "Facility Manager"
     },
     "training": {
       "code": "600/9319/5",
@@ -437,7 +437,7 @@
       "name": "Rachel Mcglee",
       "email": "rachel.mcglee@evergreencare.com"
     },
-    "approvedDate": "2024-04-15T19:35:05.522Z",
+    "approvedDate": "2024-02-01T19:35:05.522Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice008.pdf", "bankstatement008.pdf", "receipt008.pdf"],
@@ -572,9 +572,9 @@
     "claimType": "60",
     "workplaceId": "B02944934",
     "learner": {
-      "id": "KQ 01 7F 72 D",
-      "familyName": "Jairo",
-      "givenName": "Kuphal",
+      "id": "FB 88 2F 39 Z",
+      "familyName": "Schiller",
+      "givenName": "Braxton",
       "jobTitle": "Council Care Assistant"
     },
     "training": {
@@ -593,12 +593,12 @@
     "status": "approved",
     "createdDate": "2023-06-27T18:29:08.850Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-12-24T21:55:10.611Z",
+    "submittedDate": "2023-11-02T21:55:10.611Z",
     "submitter": {
       "name": "Rachel Mcglee",
       "email": "rachel.mcglee@evergreencare.com"
     },
-    "approvedDate": "2024-04-15T19:35:05.522Z",
+    "approvedDate": "2024-03-11T19:35:05.522Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice008.pdf", "bankstatement008.pdf", "receipt008.pdf"],
@@ -625,10 +625,10 @@
     "claimType": "60",
     "workplaceId": "B02944934",
     "learner": {
-      "id": "KQ 01 7F 72 D",
-      "familyName": "Jairo",
-      "givenName": "Kuphal",
-      "jobTitle": "Council Care Assistant"
+      "id": "WA 92 8F 35 V",
+      "familyName": "Reilly",
+      "givenName": "Sim",
+      "jobTitle": "Care Manager"
     },
     "training": {
       "code": "600/9319/5",
@@ -646,12 +646,12 @@
     "status": "approved",
     "createdDate": "2023-06-27T18:29:08.850Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-12-24T21:55:10.611Z",
+    "submittedDate": "2024-05-08T21:55:10.611Z",
     "submitter": {
       "name": "Rachel Mcglee",
       "email": "rachel.mcglee@evergreencare.com"
     },
-    "approvedDate": "2024-04-15T19:35:05.522Z",
+    "approvedDate": "2024-12-15T19:35:05.522Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice008.pdf", "bankstatement008.pdf", "receipt008.pdf"],
@@ -678,9 +678,9 @@
     "claimType": "40",
     "workplaceId": "B02944934",
     "learner": {
-      "id": "KQ 01 7F 72 D",
-      "familyName": "Jairo",
-      "givenName": "Kuphal",
+      "id": "UH 04 6F 47 V",
+      "familyName": "Padberg",
+      "givenName": "Orlando",
       "jobTitle": "Council Care Assistant"
     },
     "training": {
@@ -752,13 +752,13 @@
     "status": "rejected",
     "createdDate": "2023-06-27T18:29:08.850Z",
     "createdBy": "Flossie Gleason",
-    "submittedDate": "2023-12-24T21:55:10.611Z",
+    "submittedDate": "2024-02-22T21:55:10.611Z",
     "submitter": {
       "name": "Rachel Mcglee",
       "email": "rachel.mcglee@evergreencare.com"
     },
-    "approvedDate": "2024-04-15T19:35:05.522Z",
-    "rejectedDate": "2024-04-28T19:25:11.840Z",
+    "approvedDate": null,
+    "rejectedDate": "2024-08-02T19:25:11.840Z",
     "rejectedNote": "The evidence of completion provided did not meet our requirements because it did not refer to the training.",
     "evidenceOfPayment": ["invoice008.pdf", "bankstatement008.pdf", "receipt008.pdf"],
     "evidenceOfPaymentreview": {
