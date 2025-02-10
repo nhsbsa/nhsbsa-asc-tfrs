@@ -345,25 +345,43 @@ router.post('/search-org', function (req, res) {
     return res.redirect('organisation/find-organisation')
   }
 
-  var foundOrg = null
+  var foundOrg = null;
+  const searchedOrg = orgSearch.toLowerCase();
+
   for (const org of req.session.data['organisations']) {
-    let searchedOrg = orgSearch.toLowerCase()
-    let singleOrg = org.workplaceId.toLowerCase()
-    if (singleOrg == searchedOrg) {
-      foundOrg = org
-      break
-    } else if (org.signatory.active && org.signatory.active.email == searchedOrg) {
-      foundOrg = org
-      break
-    } else {
-      for (const user of org.users.active) {
-        if (user.email == searchedOrg) {
-          foundOrg = org
-          break
-        }
-      }
+    const singleOrg = org.workplaceId?.toLowerCase();
+    
+    if (singleOrg === searchedOrg) {
+      foundOrg = org;
+      break;
+    }
+
+    if (org.signatory?.active?.email?.toLowerCase() === searchedOrg) {
+      foundOrg = org;
+      break;
+    }
+
+    if (org.signatory?.inactive?.some(signatory => signatory.email?.toLowerCase() === searchedOrg)) {
+      foundOrg = org;
+      break;
+    }
+
+    if (org.users?.active?.some(user => user.email?.toLowerCase() === searchedOrg)) {
+      foundOrg = org;
+      break;
+    }
+
+    if (org.users?.invited?.some(user => user.email?.toLowerCase() === searchedOrg)) {
+      foundOrg = org;
+      break;
+    }
+
+    if (org.users?.inactive?.some(user => user.email?.toLowerCase() === searchedOrg)) {
+      foundOrg = org;
+      break;
     }
   }
+
   if (foundOrg == null) {
     req.session.data.error = 'notFound'
     res.redirect('organisation/find-organisation')
