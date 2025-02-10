@@ -74,11 +74,9 @@
                     <a class="moj-primary-navigation__link" {% if data.orgTab == 'users'%}aria-current="page"{%endif%} href="../org-tab-handler/users">Contacts</a>
                   </li>
 
-                  {% if (org.signatory.status == "active") %}
                     <li class="moj-primary-navigation__item">
                       <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="../org-tab-handler/claims">Claims</a>
                     </li>
-                  {% endif %}
 
                   <li class="moj-primary-navigation__item">
                     <a class="moj-primary-navigation__link" {% if data.orgTab == 'orgNotes'%}aria-current="page"{%endif%} href="../org-tab-handler/orgNotes">BSA notes</a>
