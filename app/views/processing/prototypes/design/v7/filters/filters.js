@@ -409,21 +409,26 @@ addFilter('typeTag', function (type) {
 }, { renderAsHtml: true })
 
 addFilter('orderClaims', function (claims) {
-    // Desired order of statuses
-    const statusOrder = ["submitted", "rejected", "approved"];
-
-    // Sort function
-    claims.sort((a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status));
     
-    return claims
+    return claims.sort((a, b) => {
+        const statusOrder = { submitted: 1, rejected: 2, approved: 3 };
+        
+        // Compare statuses based on order
+        const statusComparison = statusOrder[a.status] - statusOrder[b.status];
+        if (statusComparison !== 0) return statusComparison;
+        
+        // If statuses are the same, sort by corresponding date in descending order
+        const dateField = a.status === "submitted" ? "submittedDate" : 
+                          a.status === "rejected" ? "rejectedDate" : "approvedDate";
+        
+        return new Date(b[dateField]) - new Date(a[dateField]);
+    });
 })
 
 addFilter('userStatusTag', function (status) {
 
     if (status == 'active') {
         return '<strong class="govuk-tag govuk-tag--blue">Active</strong>'
-    } else if (status == 'registered') {
-        return '<strong class="govuk-tag govuk-tag--green">Registered</strong>'
     } else if (status == 'invited') {
         return '<strong class="govuk-tag govuk-tag--yellow">Invited</strong>'
     } else {

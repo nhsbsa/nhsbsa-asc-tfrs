@@ -4,10 +4,27 @@
       "name": "Evergreen Care home",
       "address": ["72 Guild Street", "London", "SE23 6FH"],
       "signatory": {
-        "givenName": "Lionel",
-        "familyName": "Lowe",
-        "email": "lionel-lowel@evergreencare.co.uk",
-        "status": "active"
+        "active": 
+          {        
+            "givenName": "Lionel",
+            "familyName": "Lowe",
+            "email": "lionel-lowel@evergreencare.co.uk",
+            "status": "active"
+          },  
+        "inactive": [
+          {        
+            "givenName": "Windler",
+            "familyName": "Marlene",
+            "email": "marlene-windler@evergreencare.co.uk",
+            "status": "inactive"
+          },
+          {        
+            "givenName": "Reilly",
+            "familyName": "Sim",
+            "email": "sim-reilly@evergreencare.co.uk",
+            "status": "inactive"
+          }
+        ]
       },
       "users": {
         "active": [
@@ -22,13 +39,12 @@
         {
           "name": "Flossie Gleason",
           "email": "flossie.gleason@evergreencare.com"
-        },
-        {
-          "name": "Fredrick Smith",
-          "email": "fredrick.smith@evergreencare.com"
         }
       ],
-        "inactive": [],
+        "inactive": [{
+          "name": "Fredrick Smith",
+          "email": "fredrick.smith@evergreencare.com"
+        }],
         "invited": [{
           "name": "Charlotte Dandy",
           "email": "charlotte.dandy@evergreencare.com"
@@ -61,10 +77,14 @@
       "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
       "bankDetails": null,
       "signatory": {
-        "givenName": "Natasha",
-        "familyName": "Jones",
-        "email": "natasha-jones@carehome.co.uk",
-        "status": "invited"
+        "active": 
+          {
+            "givenName": "Natasha",
+            "familyName": "Jones",
+            "email": "natasha-jones@carehome.co.uk",
+            "status": "invited"
+          },  
+        "inactive": []
       }, 
       "users": {
         "active": [],
@@ -79,10 +99,14 @@
       "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
       "bankDetails": null,
       "signatory": {
-        "givenName": "Kayleigh",
-        "familyName": "McCleod",
-        "email": "kayleigh-mccleod@carehome.co.uk",
-        "status": "active"
+        "active": 
+          {        
+            "givenName": "Kayleigh",
+            "familyName": "McCleod",
+            "email": "kayleigh-mccleod@carehome.co.uk",
+            "status": "active"
+          },  
+        "inactive": []
       }, 
       "users": {
         "active": [],

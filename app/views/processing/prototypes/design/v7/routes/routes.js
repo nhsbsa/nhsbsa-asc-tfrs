@@ -352,7 +352,7 @@ router.post('/search-org', function (req, res) {
     if (singleOrg == searchedOrg) {
       foundOrg = org
       break
-    } else if (org.signatory.email == searchedOrg) {
+    } else if (org.signatory.active && org.signatory.active.email == searchedOrg) {
       foundOrg = org
       break
     } else {
@@ -518,10 +518,10 @@ router.post('/update-signatory-invite', function (req, res) {
   const orgID = req.session.data.orgId
   for (const org of req.session.data['organisations']) {
     if (org.workplaceId == orgID) {
-      org.signatory.givenName = givenName
-      org.signatory.familyName = familyName
-      org.signatory.email = email
-      org.signatory.status = "invited"
+      org.signatory.active.givenName = givenName
+      org.signatory.active.familyName = familyName
+      org.signatory.active.email = email
+      org.signatory.active.status = "invited"
     } 
   }
   if (req.session.data.resendList) {

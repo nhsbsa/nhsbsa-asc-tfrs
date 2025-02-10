@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  {% if org.signatory.status == "invited" %}
+  {% if org.signatory.active.status == "invited" %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <div class="govuk-warning-text">
@@ -51,9 +51,9 @@
       <p class="govuk-body">
         <span class="govuk-!-font-weight-bold">Senior Responsible Officer:</span>
         <br>
-        {{ org.signatory.givenName }} {{ org.signatory.familyName }}
+        {{ org.signatory.active.givenName }} {{ org.signatory.active.familyName }}
         <br>
-        <a href="#">{{ org.signatory.email }}</a>
+        <a href="#">{{ org.signatory.active.email }}</a>
       </p>
     </div>
   </div>
