@@ -375,11 +375,6 @@ router.post('/search-org', function (req, res) {
       foundOrg = org;
       break;
     }
-
-    if (org.users?.inactive?.some(user => user.email?.toLowerCase() === searchedOrg)) {
-      foundOrg = org;
-      break;
-    }
   }
 
   if (foundOrg == null) {
