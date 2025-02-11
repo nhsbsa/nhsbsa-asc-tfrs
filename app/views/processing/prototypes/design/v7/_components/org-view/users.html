@@ -108,13 +108,6 @@
                         <td class="govuk-table__cell">{{ "invited" | userStatusTag }}</td>
                     </tr>
                     {% endfor %}
-                    {% for user in org.users.inactive %}
-                        <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
-                            <td class="govuk-table__cell">{{ user.name}}</td>
-                            <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
-                            <td class="govuk-table__cell">{{ "inactive" | userStatusTag }}</td>
-                        </tr>
-                    {% endfor %}
                 </tbody>
              </table>
         {% else %}
