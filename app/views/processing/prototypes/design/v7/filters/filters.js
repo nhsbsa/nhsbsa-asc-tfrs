@@ -487,3 +487,9 @@ addFilter('processedDate', function (claim) {
     }
     return processedDate
 })
+
+addFilter('sortByFirstName', function (inactiveClaims) {
+    return inactiveClaims.sort((a, b) => {
+        return a.givenName.localeCompare(b.givenName);
+      });
+})
