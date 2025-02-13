@@ -72,7 +72,7 @@
                                 <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ org.signatory.active.email }}</a></td>
                                 <td class="govuk-table__cell">{{ org.signatory.active.status | userStatusTag }}</td>
                             </tr>
-                        {% for sig in org.signatory.inactive %}
+                        {% for sig in (org.signatory.inactive | sortByFirstName) %}
                             <tr class="govuk-table__row claim-row" id="{{ sig.email }}">
                                 <td class="govuk-table__cell">{{ sig.givenName}} {{ sig.familyName}}</td>
                                 <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ sig.email }}</a></td>
@@ -94,16 +94,16 @@
                     </tr>
                 </thead>
                 <tbody class="govuk-table__body">
-                    {% for user in org.users.active %}
-                        <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
-                            <td class="govuk-table__cell">{{ user.name}}</td>
+                    {% for user in (org.users.active | sortByFirstName) %}
+                        <tr class="govuk-table__row claim-row" id="{{ user.givenName}} {{ user.familyName}}">
+                            <td class="govuk-table__cell">{{ user.givenName}} {{ user.familyName}}</td>
                             <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
                             <td class="govuk-table__cell">{{ "active" | userStatusTag }}</td>
                         </tr>
                     {% endfor %}
-                    {% for user in org.users.invited %}
-                    <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
-                        <td class="govuk-table__cell">{{ user.name}}</td>
+                    {% for user in (org.users.invited | sortByFirstName) %}
+                    <tr class="govuk-table__row claim-row" id="{{ user.givenName}} {{ user.familyName}}">
+                        <td class="govuk-table__cell">{{ user.givenName}} {{ user.familyName}}</td>
                         <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
                         <td class="govuk-table__cell">{{ "invited" | userStatusTag }}</td>
                     </tr>
