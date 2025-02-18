@@ -9,7 +9,7 @@
 {% endif %}
 
 {% block pageTitle %}
-{% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}Error: {% endif %}{% if data.SROChange == 'edit' %}Edit {% else %}New {% endif %}Senior Responsible Officer details — {{data.processingServiceName}}
+{% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}Error: {% endif %}{% if data.SROChange == 'edit' %}Edit {% else %}New {% endif %} SRO — {{data.processingServiceName}}
 {% endblock %}
 
 {% block content %}
@@ -31,13 +31,12 @@
         {% endif %}
 
         {% if data.SROChange == 'edit' %}
-        <h1 class="govuk-heading-l">Edit Senior Responsible Officer details</h1>
-        <p class="govuk-body">Lorem ipsum odor amet, consectetuer adipiscing elit. Sem eu ad ex imperdiet erat bibendum quis. Parturient habitant ultrices rutrum proin velit etiam eros.</p>
-        <p class="govuk-body">Lorem ipsum odor amet, consectetuer adipiscing elit.</p>
+        <h1 class="govuk-heading-l">Edit SRO</h1>
+        <p class="govuk-body">You can use this page to edit the SRO before sending a new email invite.</p>
+        <p class="govuk-body">This person will sign the grant determination letter.</p>
         {% else %}
-        <h1 class="govuk-heading-l">New Senior Responsible Officer details</h1>
-        <p class="govuk-body">Lorem ipsum odor amet, consectetuer adipiscing elit. Sem eu ad ex imperdiet erat bibendum quis. Parturient habitant ultrices rutrum proin velit etiam eros.</p>
-        <p class="govuk-body">Lorem ipsum odor amet, consectetuer adipiscing elit.</p>
+        <h1 class="govuk-heading-l">New SRO details</h1>
+        <p class="govuk-body">You can use this page to change the SRO before sending a new email invite.</p>
         {% endif %}
         <form action="../signatory-change-handler" method="post" novalidate>
             <div

@@ -18,16 +18,21 @@ router.post('/check-org', function (req, res) {
   delete req.session.data.givenName
   delete req.session.data.email
 
+  var orgRegistered = false
+
+  for (const org of req.session.data.organisations) {
+    if (org.workplaceId == orgID) {
+      orgRegistered = true
+    }
+  }
+
   if (orgID == "") {
     req.session.data.submitError = 'missing'
     res.redirect('register-organisation/organisation-details')
   } else if (orgID == "timeout") {
     req.session.data.submitError = 'timeout'
     res.redirect('register-organisation/org-issue')
-  } else if (orgID == "D18946931" || orgID == "resend") {
-    req.session.data.submitError = 'resend'
-    res.redirect('register-organisation/org-issue')
-  } else if (orgID == "B02944934" || orgID == "dupe") {
+  } else if (orgRegistered || orgID == "dupe" || orgID == "resend") {
     req.session.data.submitError = 'duplicate'
     res.redirect('register-organisation/org-issue')
   } else if (checkWDSFormat(orgID)) {
@@ -507,8 +512,6 @@ router.post('/org-signatory-handler', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
   const email = req.session.data.email
-  const edited = req.session.data.edited
-  const newOrg = req.session.data.newOrg
 
   const result = signatoryCheck(familyName, givenName, email)
 
@@ -558,6 +561,7 @@ router.post('/update-signatory-invite', function (req, res) {
   delete req.session.data.familyName
   delete req.session.data.givenName
   delete req.session.data.email
+  delete req.session.data.SROChange
 
   res.redirect('organisation/org-view-main#tab-content')
 });
@@ -571,6 +575,15 @@ router.get('/org-tab-handler/:tab', function (req, res) {
   delete req.session.data.invalidIDError
   delete req.session.data.notFound
   delete req.session.data.currentPage
+  delete req.session.data.confirmation
+  delete req.session.data.processSuccess
+
+  delete req.session.data.paymentResponseIncomplete
+  delete req.session.data.paymentReimbursementAmountIncomplete
+  delete req.session.data.paymentReimbursementAmountInvalid
+  delete req.session.data.paymentNoNoteIncomplete
+  delete req.session.data.completionResponseIncomplete
+  delete req.session.data.completionNoNoteIncomplete
 
   req.session.data.orgTab = orgTab
 
@@ -586,6 +599,7 @@ router.get('/claim-view-handler/:claimID', function (req, res) {
   const claimID = req.params.claimID
 
   delete req.session.data.currentPage
+
 
   req.session.data.orgTab = 'claims'
   req.session.data.id = claimID

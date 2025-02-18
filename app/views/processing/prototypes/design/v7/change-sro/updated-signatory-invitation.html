@@ -16,7 +16,7 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l">Check {% if data.SROChange != 'edit' %}new {% endif %}Senior Responsible Officer details are correct</h1>
+        <h1 class="govuk-heading-l">Check {% if data.SROChange == 'edit' %}updated {% else %}new {% endif %}SRO details</h1>
         <p class="govuk-body">Check this information is correct before sending a new invite.</p>
 
         <div class="govuk-summary-card">
@@ -140,7 +140,12 @@
                 </dl>
             </div>
         </div>
-        <p class="govuk-body">Lorem ipsum odor amet, consectetuer adipiscing elit. Sem eu ad ex imperdiet erat bibendum quis. Parturient habitant ultrices rutrum proin velit etiam eros.</p>
+        {% if data.SROChange == 'edit' %}
+        <p class="govuk-body">If you are changing the SRO, the new SRO will be added to the service once they set up an account?</p>
+        {% else %}
+        <p class="govuk-body">Sending this invite to a new SRO will automatically deactivate the previous SRO's account.</p>
+        {% endif %}
+
         <form action="../update-signatory-invite" method="post" novalidate>
             <input type="hidden" name="answers-checked" value="true">
             <div class="govuk-button-group">

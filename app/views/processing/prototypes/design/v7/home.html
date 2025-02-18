@@ -22,7 +22,7 @@ What do you want to do? — {{data.processingServiceName}}
                     Invite sent
                 </h2>
                 <p class="govuk-body">{% if data.confirmation == "register" %}An email has been sent to {{ data.givenName | default(foundOrganisation.signatory.givenName) }} {{
-                    data.familyName | default(foundOrganisation.signatory.familyName) }} inviting Fake care home to the service.{% endif %}</p>
+                    data.familyName | default(foundOrganisation.signatory.familyName) }} inviting Fake care home to the service.{% endif %} <a class="govuk-notification-banner__link" href="#">View organisation</a>.</p>
             </div>
         </div>
         {% endif %}
