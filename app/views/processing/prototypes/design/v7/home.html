@@ -34,7 +34,7 @@ What do you want to do? — {{data.processingServiceName}}
 
         <ul class="homepage-services-and-info__list">
 
-            {% if (data.userType == "processor") %}
+            {% if (data.userType == "processor" or data.userType == "leadProcessor") %}
                 <li class="chevron-card">
                     <div class="chevron-card__wrapper">
                         <h2 class="gem-c-heading govuk-heading-s govuk-!-margin-bottom-2">
@@ -56,7 +56,7 @@ What do you want to do? — {{data.processingServiceName}}
                     </div>
                 </li>
 
-            {% if (data.userType == "processor") %}
+            {% if (data.userType == "processor" or data.userType == "leadProcessor") %}
                 <li class="chevron-card">
                     <div class="chevron-card__wrapper">
                         <h2 class="gem-c-heading govuk-heading-s govuk-!-margin-bottom-2">

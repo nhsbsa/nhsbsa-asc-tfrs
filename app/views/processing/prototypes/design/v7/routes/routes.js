@@ -637,7 +637,7 @@ router.get('/back-to-start-handler', function (req, res) {
   delete req.session.data.invite
   delete req.session.data.resendList
 
-  if (req.session.data.userType == "processor") {
+  if (req.session.data.userType == "processor" || req.session.data.userType == "leadProcessor") {
     res.redirect('./home')
   } else {
     res.redirect('./organisation/find-organisation')

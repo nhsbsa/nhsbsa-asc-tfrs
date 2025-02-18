@@ -12,7 +12,7 @@
 {% endif %}
 
 <div class="govuk-grid-row">
-    <div class="{% if (org.signatory.active.status == "invited") %}govuk-grid-column-full{% else %}govuk-grid-column-two-thirds{% endif %}">
+    <div class="{% if (org.signatory.active.status == 'invited') %}govuk-grid-column-full{% else %}govuk-grid-column-two-thirds{% endif %}">
         
         {% if data.confirmation == "invited" or data.invite == "success"%}
             <div class="govuk-notification-banner govuk-notification-banner--success govuk-!-margin-top-6" role="alert"
@@ -48,9 +48,12 @@
 
         <h2 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer (SRO)</h1>
         
+        {% if (data.userType == "leadProcessor") %}
         <a href="../change-sro/signatory-details?SROChange=replace" class="govuk-button" data-module="govuk-button">
             Change SRO
         </a>
+        {% endif %}
+
             <table class="govuk-table" data-module="moj-sortable-table">
                 <thead class="govuk-table__head govuk-!-margin-top-6">
                     <tr class="govuk-table__row">
