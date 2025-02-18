@@ -103,7 +103,7 @@
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
               <h2 class="govuk-summary-card__title">
-                {% if data.SROChange != 'edit' %}New {% endif %}Senior Responsible Officer details
+                {% if data.SROChange == 'edit' %}Updated {% else %}New {% endif %}Senior Responsible Officer details
               </h2>
               <ul class="govuk-summary-card__actions">
                 <li class="govuk-summary-card__action">
@@ -141,9 +141,16 @@
             </div>
         </div>
         {% if data.SROChange == 'edit' %}
-        <p class="govuk-body">If you are changing the SRO, the new SRO will be added to the service once they set up an account?</p>
+        <p class="govuk-body">If you are changing the SRO, the new SRO will be added to the service once they set up an account.</p>
         {% else %}
         <p class="govuk-body">Sending this invite to a new SRO will automatically deactivate the previous SRO's account.</p>
+
+        {% if (foundOrganisation.signatory.active.status == "active" and foundOrganisation.bankDetails == null) %}
+        <p class="govuk-body">The new SRO will need to complete registration, including signing the GDL and inputting the organisation bank details.</p>
+        {% else %}
+        <p class="govuk-body">The new SRO will not need to complete registration, they will just need to create an account.</p>
+        {% endif %}
+
         {% endif %}
 
         <form action="../update-signatory-invite" method="post" novalidate>

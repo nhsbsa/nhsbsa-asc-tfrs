@@ -48,7 +48,11 @@
           <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
           <strong class="govuk-warning-text__text">
             <span class="govuk-visually-hidden">Warning</span>
+            {% if (org.signatory.active.status == "active") %}
+            Organisation has not yet finished registration. The Senior Responsible Officer needs to complete registration.
+            {% else %}
             Organisation has not yet finished registration. The Senior Responsible Officer needs to accept the invite sent to their email and complete registration.
+            {% endif %}
           </strong>
         </div>
     </div>
