@@ -45,13 +45,33 @@ router.use((req, res, next) => {
   if (match) {
     const section = match[1]; // "processing" or "claims"
     const version = match[2]; // e.g., "7" for v7
+
     try {
-        // Dynamically require the filters file based on the section and version
-        const filtersPath = '../app/views/' + section + '/prototypes/design/v' + version + '/filters/filters.js';
+      // Construct the path for the new filters file
+      const filtersPath = '../app/views/' + section + '/prototypes/design/v' + version + '/filters/filters.js';
+      const resolvedFiltersPath = require.resolve(filtersPath);
+
+      // Iterate through require.cache and remove only old 'filters.js' files, keeping the new one
+      Object.keys(require.cache).forEach((key) => {
+        if (
+          key.match(/\/app\/views\/(processing|claims)\/.*\/v\d+\/filters\/filters\.js$/) &&
+          key !== resolvedFiltersPath // Only delete if it's not the current filters file
+        ) {
+          delete require.cache[key];
+          console.log(`Unloaded cached filters: ${key}`);
+        }
+      });
+
+      // Check if the new filters file is already in the cache
+      if (!require.cache[resolvedFiltersPath]) {
         require(filtersPath);
         console.log('Filters applied for ' + section + ' v' + version);
+      } else {
+        console.log('Filters already loaded for ' + section + ' v' + version);
+      }
+
     } catch (error) {
-        console.log('No filters file for this version');
+      console.log('No filters file for this version');
     }
   }
 
