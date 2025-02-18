@@ -59,9 +59,9 @@
 
         {% if data.SROChange == 'replace' %}
 
-        {% set givenName = foundOrganisation.signatory.givenName %}
-        {% set familyName = foundOrganisation.signatory.familyName %}
-        {% set email = foundOrganisation.signatory.email %}
+        {% set givenName = foundOrganisation.signatory.active.givenName %}
+        {% set familyName = foundOrganisation.signatory.active.familyName  %}
+        {% set email = foundOrganisation.signatory.active.email %}
 
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
@@ -107,7 +107,7 @@
               </h2>
               <ul class="govuk-summary-card__actions">
                 <li class="govuk-summary-card__action">
-                  <a class="govuk-link" href="signatory-details?goBack=true&edited=true">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
+                  <a class="govuk-link" href="signatory-details">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
                 </li>
               </ul>
             </div>

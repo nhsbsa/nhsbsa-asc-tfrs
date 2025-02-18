@@ -3,19 +3,13 @@
 {% set foundOrganisation = data.organisations | findOrg(data.orgId) %}
 
 {% if data.SROChange == 'edit' %}
-    {% set givenName = foundOrganisation.signatory[0].givenName %}
-    {% set familyName = foundOrganisation.signatory[0].familyName %}
-    {% set email = foundOrganisation.signatory[0].email %}
+    {% set givenName = foundOrganisation.signatory.active.givenName %}
+    {% set familyName = foundOrganisation.signatory.active.familyName  %}
+    {% set email = foundOrganisation.signatory.active.email %}
 {% endif %}
 
 {% block pageTitle %}
-{% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}Error: {% endif %}Senior Responsible Officer details — Register an organisation — {{data.processingServiceName}}
-{% endblock %}
-
-{% block beforeContent %}
-        <div >
-            <a class="govuk-back-link" href="change-sro-question">Back</a>
-        </div>
+{% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}Error: {% endif %}{% if data.SROChange == 'edit' %}Edit {% else %}New {% endif %}Senior Responsible Officer details — {{data.processingServiceName}}
 {% endblock %}
 
 {% block content %}
@@ -35,9 +29,16 @@
           </div>
         </div>
         {% endif %}
-        <h1 class="govuk-heading-l">{% if data.SROChange == 'edit' %}Edit {% else %}New {% endif %}Senior Responsible Officer details</h1>
+
+        {% if data.SROChange == 'edit' %}
+        <h1 class="govuk-heading-l">Edit Senior Responsible Officer details</h1>
         <p class="govuk-body">Lorem ipsum odor amet, consectetuer adipiscing elit. Sem eu ad ex imperdiet erat bibendum quis. Parturient habitant ultrices rutrum proin velit etiam eros.</p>
         <p class="govuk-body">Lorem ipsum odor amet, consectetuer adipiscing elit.</p>
+        {% else %}
+        <h1 class="govuk-heading-l">New Senior Responsible Officer details</h1>
+        <p class="govuk-body">Lorem ipsum odor amet, consectetuer adipiscing elit. Sem eu ad ex imperdiet erat bibendum quis. Parturient habitant ultrices rutrum proin velit etiam eros.</p>
+        <p class="govuk-body">Lorem ipsum odor amet, consectetuer adipiscing elit.</p>
+        {% endif %}
         <form action="../signatory-change-handler" method="post" novalidate>
             <div
                 class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
@@ -56,7 +57,7 @@
                 <input
                     class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.familyName == 'missing' %} govuk-input--error {% endif %}"
                     id="familyName" name="familyName" type="text" spellcheck="false" autocomplete="name"
-                    value="{{ familyName }}">
+                    value="{{data.familyName | default(familyName)}}">
             </div>
             <div
                 class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.givenName == 'missing' %} govuk-form-group--error {% endif %}">
@@ -76,7 +77,7 @@
                 <input
                     class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.givenName == 'missing' %} govuk-input--error {% endif %}"
                     id="givenName" name="givenName" type="text" spellcheck="false" autocomplete="name"
-                    value="{{givenName}}">
+                    value="{{data.givenName | default(givenName)}}">
             </div>
             <div
                 class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-form-group--error {% endif %}">
@@ -100,12 +101,13 @@
                 <input
                     class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-input--error  {% endif %}"
                     id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint"
-                    autocomplete="email" value="{{ email}}">
+                    autocomplete="email" value="{{data.email | default(email)}}">
             </div>
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Continue
                 </button>
+                <a class="govuk-link" href="../organisation/org-view-main?orgTab=users">Cancel</a>
             </div>
         </form>
     </div>

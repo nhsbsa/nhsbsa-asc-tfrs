@@ -525,8 +525,6 @@ router.post('/update-signatory-invite', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
   const email = req.session.data.email
-  delete req.session.data.edited
-  delete req.session.data.goBack
 
   const SROChange  = req.session.data.SROChange
 
@@ -535,6 +533,15 @@ router.post('/update-signatory-invite', function (req, res) {
   const orgID = req.session.data.orgId
   for (const org of req.session.data['organisations']) {
     if (org.workplaceId == orgID) {
+
+      const previousSRO = {
+        givenName: org.signatory.active.givenName,
+        familyName: org.signatory.active.familyName,
+        email: org.signatory.active.email,
+        status: 'inactive'
+      }
+      org.signatory.inactive.push(previousSRO)
+
       org.signatory.active.givenName = givenName
       org.signatory.active.familyName = familyName
       org.signatory.active.email = email
@@ -548,6 +555,9 @@ router.post('/update-signatory-invite', function (req, res) {
   }
   req.session.data.confirmation = 'invited'
   req.session.data.orgTab = 'users'
+  delete req.session.data.familyName
+  delete req.session.data.givenName
+  delete req.session.data.email
 
   res.redirect('organisation/org-view-main#tab-content')
 });
@@ -642,8 +652,6 @@ router.post('/signatory-change-handler', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
   const email = req.session.data.email
-  const edited = req.session.data.edited
-  const newOrg = req.session.data.newOrg
 
   const result = signatoryCheck(familyName, givenName, email)
 
