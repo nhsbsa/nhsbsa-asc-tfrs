@@ -443,3 +443,9 @@
   margin-left: govuk-spacing(3);
   margin-right: govuk-spacing(3);
 }
+
+.govuk-pagination__item--ellipses__hidden {
+  @include govuk-media-query($from: tablet) {
+    display: none;
+  }
+}

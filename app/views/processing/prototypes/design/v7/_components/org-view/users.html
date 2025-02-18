@@ -8,7 +8,38 @@
 {% endfor %}
 
 <div class="govuk-grid-row">
-    <div class="{% if (org.signatory.status == 'invited') %}govuk-grid-column-full{% else %}govuk-grid-column-two-thirds{% endif %}">
+    <div class="{% if (org.signatory.active.status == "invited") %}govuk-grid-column-full{% else %}govuk-grid-column-two-thirds{% endif %}">
+        
+        {% if data.confirmation == "invited" or data.invite == "success"%}
+            <div class="govuk-notification-banner govuk-notification-banner--success" role="alert"
+                aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+                <div class="govuk-notification-banner__header">
+                    <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                        Success
+                    </h2>
+                </div>
+                <div class="govuk-notification-banner__content">
+                    <h3 class="govuk-notification-banner__heading">
+                        Invite sent
+                    <p class="govuk-body">An email has been sent to {{ data.givenName | default(org.signatory.active.givenName) }} {{data.familyName | default(org.signatory.active.familyName) }} inviting {{org.name}} to register with the service.</p>
+                </div>
+            </div>
+        {% endif %}
+      
+      {% if data.invite == "failure" %}
+  
+      <div class="moj-banner moj-banner--warning" role="region" aria-label="Warning">
+  
+        <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+          <path d="M13.6,15.4h-2.3v-4.5h2.3V15.4z M13.6,19.8h-2.3v-2.2h2.3V19.8z M0,23.2h25L12.5,2L0,23.2z" />
+        </svg>
+      
+        <div class="moj-banner__message">Invitation {{matchResendUser.givenName}} {{matchResendUser.familyName}} wasn't sent - try again</div>
+      
+      </div>
+  
+      {% endif %}
+        
         <h1 class="govuk-heading-l govuk-!-margin-top-6">Contacts</h1>   
 
         <h2 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer (SRO)</h1>
@@ -52,26 +83,19 @@
                     </tr>
                 </thead>
                 <tbody class="govuk-table__body">
-                    {% for user in org.users.active %}
-                        <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
-                            <td class="govuk-table__cell">{{ user.name}}</td>
+                    {% for user in (org.users.active | sortByFirstName) %}
+                        <tr class="govuk-table__row claim-row" id="{{ user.givenName}} {{ user.familyName}}">
+                            <td class="govuk-table__cell">{{ user.givenName}} {{ user.familyName}}</td>
                             <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
                             <td class="govuk-table__cell">{{ "active" | userStatusTag }}</td>
                         </tr>
                     {% endfor %}
-                    {% for user in org.users.invited %}
-                    <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
-                        <td class="govuk-table__cell">{{ user.name}}</td>
+                    {% for user in (org.users.invited | sortByFirstName) %}
+                    <tr class="govuk-table__row claim-row" id="{{ user.givenName}} {{ user.familyName}}">
+                        <td class="govuk-table__cell">{{ user.givenName}} {{ user.familyName}}</td>
                         <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
                         <td class="govuk-table__cell">{{ "invited" | userStatusTag }}</td>
                     </tr>
-                    {% endfor %}
-                    {% for user in org.users.inactive %}
-                        <tr class="govuk-table__row claim-row" id="{{ submitter.name }}">
-                            <td class="govuk-table__cell">{{ user.name}}</td>
-                            <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
-                            <td class="govuk-table__cell">{{ "inactive" | userStatusTag }}</td>
-                        </tr>
                     {% endfor %}
                 </tbody>
              </table>

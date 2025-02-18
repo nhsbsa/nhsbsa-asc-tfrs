@@ -3,35 +3,61 @@
       "workplaceId": "B02944934",
       "name": "Evergreen Care home",
       "address": ["72 Guild Street", "London", "SE23 6FH"],
-      "signatory": [{
-        "givenName": "Lionel",
-        "familyName": "Lowe",
-        "email": "lionel-lowel@evergreencare.co.uk",
-        "status": "active"
-      }],
+      "signatory": {
+        "active": 
+          {        
+            "givenName": "Lionel",
+            "familyName": "Lowe",
+            "email": "lionel-lowel@evergreencare.co.uk",
+            "status": "active"
+          },  
+        "inactive": [
+          {        
+            "givenName": "Windler",
+            "familyName": "Marlene",
+            "email": "marlene-windler@evergreencare.co.uk",
+            "status": "inactive"
+          },
+          {        
+            "givenName": "Reilly",
+            "familyName": "Sim",
+            "email": "sim-reilly@evergreencare.co.uk",
+            "status": "inactive"
+          }
+        ]
+      },
       "users": {
         "active": [
           {
-          "name": "Daniel Jones",
+          "givenName": "Daniel",
+          "familyName": "Jones",
           "email": "d.jones@evergreencare.com"
         }, 
         {
-          "name": "Rachel Mcglee",
+          "givenName": "Rachel",
+          "familyName": "Mcglee",
           "email": "rachel.mcglee@evergreencare.com"
         },
         {
-          "name": "Flossie Gleason",
+          "givenName": "Flossie",
+          "familyName": "Gleason",
           "email": "flossie.gleason@evergreencare.com"
-        },
-        {
-          "name": "Fredrick Smith",
-          "email": "fredrick.smith@evergreencare.com"
         }
       ],
-        "inactive": [],
+        "inactive": [{
+          "givenName": "Fredrick",
+          "familyName": "Smith",
+          "email": "fredrick.smith@evergreencare.com"
+        }],
         "invited": [{
-          "name": "Charlotte Dandy",
+          "givenName": "Charlotte",
+          "familyName": "Dandy",
           "email": "charlotte.dandy@evergreencare.com"
+        },
+        {
+          "givenName": "Abel",
+          "familyName": "Mellow",
+          "email": "abel.mellow@evergreencare.com"
         }]
       },
       "bankDetails": {
@@ -60,12 +86,16 @@
       "name": "Bright Horizons Care home",
       "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
       "bankDetails": null,
-      "signatory": [{
-        "givenName": "Natasha",
-        "familyName": "Jones",
-        "email": "natasha-jones@carehome.co.uk",
-        "status": "invited"
-      }], 
+      "signatory": {
+        "active": 
+          {
+            "givenName": "Natasha",
+            "familyName": "Jones",
+            "email": "natasha-jones@carehome.co.uk",
+            "status": "invited"
+          },  
+        "inactive": []
+      }, 
       "users": {
         "active": [],
         "inactive": [],
@@ -79,10 +109,14 @@
       "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
       "bankDetails": null,
       "signatory": {
-        "givenName": "Kayleigh",
-        "familyName": "McCleod",
-        "email": "kayleigh-mccleod@carehome.co.uk",
-        "status": "active"
+        "active": 
+          {        
+            "givenName": "Kayleigh",
+            "familyName": "McCleod",
+            "email": "kayleigh-mccleod@carehome.co.uk",
+            "status": "active"
+          },  
+        "inactive": []
       }, 
       "users": {
         "active": [],
@@ -95,24 +129,30 @@
       "workplaceId": "D91774723",
       "name": "Pinetree Manor Care Centre",
       "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
-      "signatory": [{
-        "givenName": "Hadyn",
-        "familyName": "Lacy",
+      "signatory": {
+        "active" : {
+          "givenName": "Hadyn",
+          "familyName": "Lacy",
         "email": "hadyn-lacey@pinetreecare.co.uk",
         "status": "active"
-      }],
+        },
+        "inactive": []
+      },
       "users": {
         "active": [{
-          "name": "Daniel Jones",
+          "givenName": "Daniel",
+          "familyName": "Jones",
           "email": "d.jones@pinetreecare.com"
         },
         {
-          "name": "Fredrick Smith",
+          "givenName": "Fredrick",
+          "familyName": "Smith",
           "email": "fredrick.smith@pinetreecare.com"
         }],
         "inactive": [],
         "invited": [{
-          "name": "Jack McPhearson",
+          "givenName": "Jack",
+          "familyName": "McPhearson",
           "email": "jack.McPhearson@pinetreecare.com"
         }]
       },
@@ -147,19 +187,26 @@
       "workplaceId": "A89263211",
       "name": "Kingscourt Care Home",
       "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
-      "signatory": [{
-        "givenName": "Joseph",
-        "familyName": "Stepen",
-        "email": "joseph-stephen@kingscourtcare.co.uk",
-        "status": "active"
-      }],
+      "signatory": {
+        "active": 
+          {        
+            "givenName": "Joseph",
+            "familyName": "Stephen",
+            "email": "joseph-stephen@kingscourt.co.uk",
+            "status": "active"
+          },  
+        "inactive": [
+        ]
+      },
       "users": {
         "active": [{
-          "name": "Rachel Mcglee",
+          "givenName": "Rachel",
+          "familyName": "Mcglee",
           "email": "rachel.mcglee@kingscourtcare.com"
         },
         {
-          "name": "Mary McCleod",
+          "givenName": "MaryMcCleod",
+          "familyName": "McCleod",
           "email": "mary.mccleod@kingscourtcare.com"
         }],
         "inactive": [],

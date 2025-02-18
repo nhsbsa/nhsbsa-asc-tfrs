@@ -2,9 +2,9 @@
 
 {% set foundOrganisation = data.organisations | findOrg(data.orgId) %}
 
-{% set givenName = foundOrganisation.signatory.givenName | formatInformation(data.givenName, data.edited, data.newOrg) %}
-{% set familyName = foundOrganisation.signatory.familyName | formatInformation(data.familyName, data.edited, data.newOrg) %}
-{% set email = foundOrganisation.signatory.email | formatInformation(data.email, data.edited, data.newOrg) %}
+{% set givenName = foundOrganisation.signatory.active.givenName | formatInformation(data.givenName, data.edited, data.newOrg) %}
+{% set familyName = foundOrganisation.signatory.active.familyName | formatInformation(data.familyName, data.edited, data.newOrg) %}
+{% set email = foundOrganisation.signatory.active.email | formatInformation(data.email, data.edited, data.newOrg) %}
 
 {% block pageTitle %}
 {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}Error: {% endif %}Senior Responsible Officer details — Register an organisation — {{data.processingServiceName}}

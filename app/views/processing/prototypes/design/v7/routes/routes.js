@@ -345,25 +345,38 @@ router.post('/search-org', function (req, res) {
     return res.redirect('organisation/find-organisation')
   }
 
-  var foundOrg = null
+  var foundOrg = null;
+  const searchedOrg = orgSearch.toLowerCase();
+
   for (const org of req.session.data['organisations']) {
-    let searchedOrg = orgSearch.toLowerCase()
-    let singleOrg = org.workplaceId.toLowerCase()
-    if (singleOrg == searchedOrg) {
-      foundOrg = org
-      break
-    } else if (org.signatory.email == searchedOrg) {
-      foundOrg = org
-      break
-    } else {
-      for (const user of org.users.active) {
-        if (user.email == searchedOrg) {
-          foundOrg = org
-          break
-        }
-      }
+    const singleOrg = org.workplaceId?.toLowerCase();
+    
+    if (singleOrg === searchedOrg) {
+      foundOrg = org;
+      break;
+    }
+
+    if (org.signatory?.active?.email?.toLowerCase() === searchedOrg) {
+      foundOrg = org;
+      break;
+    }
+
+    if (org.signatory?.inactive?.some(signatory => signatory.email?.toLowerCase() === searchedOrg)) {
+      foundOrg = org;
+      break;
+    }
+
+    if (org.users?.active?.some(user => user.email?.toLowerCase() === searchedOrg)) {
+      foundOrg = org;
+      break;
+    }
+
+    if (org.users?.invited?.some(user => user.email?.toLowerCase() === searchedOrg)) {
+      foundOrg = org;
+      break;
     }
   }
+
   if (foundOrg == null) {
     req.session.data.error = 'notFound'
     res.redirect('organisation/find-organisation')
@@ -386,20 +399,20 @@ router.post('/search-claim-id-orgView', function (req, res) {
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
     req.session.data.emptyError = 'true';
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   }
 
   const letterORegex = /o/i;
   if (letterORegex.test(claimID)) {
     req.session.data.invalidIDError = 'true';
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   }
 
   const lengthRegex = /^[A-NP-Z0-9]{3}[A-NP-Z0-9]{4}[A-NP-Z0-9]{4}(?:A|B|C)?$/i;
 
   if (!lengthRegex.test(claimID)) {
     req.session.data.invalidIDError = 'true';
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   }
 
   var foundClaim = null
@@ -427,7 +440,7 @@ router.post('/search-claim-id-orgView', function (req, res) {
   }
   if (foundClaim == null) {
     req.session.data.notFound = 'true';
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   }
   if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
 
@@ -438,10 +451,10 @@ router.post('/search-claim-id-orgView', function (req, res) {
     req.session.data.orgTab = "claims"
     req.session.data.id = foundClaim.claimID
 
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   } else {
     req.session.data.notFound = 'true';
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main#tab-content')
   }
 });
 
@@ -487,7 +500,7 @@ router.get('/reinvite-signatory', function (req, res) {
     req.session.data.resendList = [req.session.data.name]
   }
   req.session.data.orgTab = "users"
-  res.redirect('organisation/org-view-main')
+  res.redirect('organisation/org-view-main#tab-content')
 });
 
 router.post('/org-signatory-handler', function (req, res) {
@@ -522,24 +535,10 @@ router.post('/update-signatory-invite', function (req, res) {
   const orgID = req.session.data.orgId
   for (const org of req.session.data['organisations']) {
     if (org.workplaceId == orgID) {
-      if (SROChange =='edit') {
-        org.signatory[0].givenName = givenName
-        org.signatory[0].familyName = familyName
-        org.signatory[0].email = email
-        org.signatory[0].status = "invited"
-      } else {
-        const newSignatory = {
-          givenName : givenName,
-          familyName : familyName,
-          email : email,
-          status : "invited"
-        }
-        org.signatory.push(newSignatory);
-        if (SROChange =='replace') {
-        org.signatory[0].status = "Inactive"
-        }
-      }
-      
+      org.signatory.active.givenName = givenName
+      org.signatory.active.familyName = familyName
+      org.signatory.active.email = email
+      org.signatory.active.status = "invited"
     } 
   }
   if (req.session.data.resendList) {
@@ -550,7 +549,7 @@ router.post('/update-signatory-invite', function (req, res) {
   req.session.data.confirmation = 'invited'
   req.session.data.orgTab = 'users'
 
-  res.redirect('organisation/org-view-main')
+  res.redirect('organisation/org-view-main#tab-content')
 });
 
 router.get('/org-tab-handler/:tab', function (req, res) {
