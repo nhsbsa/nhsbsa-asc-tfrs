@@ -532,18 +532,19 @@ router.post('/update-signatory-invite', function (req, res) {
   const SROChange  = req.session.data.SROChange
 
   
-
   const orgID = req.session.data.orgId
+
   for (const org of req.session.data['organisations']) {
     if (org.workplaceId == orgID) {
-
-      const previousSRO = {
-        givenName: org.signatory.active.givenName,
-        familyName: org.signatory.active.familyName,
-        email: org.signatory.active.email,
-        status: 'inactive'
+      if (SROChange == 'replace') {
+        const previousSRO = {
+          givenName: org.signatory.active.givenName,
+          familyName: org.signatory.active.familyName,
+          email: org.signatory.active.email,
+          status: 'inactive'
+        }
+        org.signatory.inactive.push(previousSRO)
       }
-      org.signatory.inactive.push(previousSRO)
 
       org.signatory.active.givenName = givenName
       org.signatory.active.familyName = familyName
@@ -551,6 +552,7 @@ router.post('/update-signatory-invite', function (req, res) {
       org.signatory.active.status = "invited"
     } 
   }
+  
   if (req.session.data.resendList) {
     req.session.data.resendList.push(email)
   } else {
