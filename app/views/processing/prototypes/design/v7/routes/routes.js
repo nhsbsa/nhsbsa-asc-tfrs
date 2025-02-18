@@ -32,7 +32,7 @@ router.post('/check-org', function (req, res) {
   } else if (orgID == "timeout") {
     req.session.data.submitError = 'timeout'
     res.redirect('register-organisation/org-issue')
-  } else if (orgRegistered || orgID == "dupe" || orgID == "resend") {
+  } else if (orgRegistered) {
     req.session.data.submitError = 'duplicate'
     res.redirect('register-organisation/org-issue')
   } else if (checkWDSFormat(orgID)) {
