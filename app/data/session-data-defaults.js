@@ -325,7 +325,7 @@ module.exports = {
             {
                 "versionNo": "7",
                 "phase": "Beta",
-                "status": ["dev"],
+                "status": ["dev","design"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-7/",
                 "tested": null,
                 "created": null,
