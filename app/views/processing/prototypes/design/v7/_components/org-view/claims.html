@@ -37,10 +37,7 @@
         {% endif %}
 
         <h1 class="govuk-heading-l govuk-!-margin-top-6">Claims</h1>
-
-        {% if (org.signatory.active.status == "invited") %} 
-            <p class="govuk-body">This organisation has not yet submitted any claims.</p>
-        {% elif (claims.length == 0) %}
+        {% if (claims.length == 0) %}
             <p class="govuk-body">This organisation has not yet submitted any claims.</p>
         {% else %}
         <div class="moj-search">

@@ -238,6 +238,142 @@
           "note": "Email sent to submitter Mary McCleod requesting additional details regarding training course provider on claim Y6M-5DYB-TRCL-A."
         }
       ]
+    },
+    {
+      "workplaceId": "E94744323",
+      "name": "Dawnstar Care home",
+      "address": ["21 Bond Street", "London", "SE23 6FH"],
+      "signatory": {
+        "active": 
+          {        
+            "givenName": "Lionel",
+            "familyName": "Lowe",
+            "email": "lionel-lowel@evergreencare.co.uk",
+            "status": "invited"
+          },  
+        "inactive": [
+          {        
+            "givenName": "Windler",
+            "familyName": "Marlene",
+            "email": "marlene-windler@evergreencare.co.uk",
+            "status": "inactive"
+          },
+          {        
+            "givenName": "Reilly",
+            "familyName": "Sim",
+            "email": "sim-reilly@evergreencare.co.uk",
+            "status": "inactive"
+          }
+        ]
+      },
+      "users": {
+        "active": [
+          {
+          "givenName": "Daniel",
+          "familyName": "Jones",
+          "email": "d.jones@evergreencare.com"
+        }, 
+        {
+          "givenName": "Rachel",
+          "familyName": "Mcglee",
+          "email": "rachel.mcglee@evergreencare.com"
+        },
+        {
+          "givenName": "Flossie",
+          "familyName": "Gleason",
+          "email": "flossie.gleason@evergreencare.com"
+        }
+      ],
+        "inactive": [{
+          "givenName": "Fredrick",
+          "familyName": "Smith",
+          "email": "fredrick.smith@evergreencare.com"
+        }],
+        "invited": [{
+          "givenName": "Charlotte",
+          "familyName": "Dandy",
+          "email": "charlotte.dandy@evergreencare.com"
+        },
+        {
+          "givenName": "Abel",
+          "familyName": "Mellow",
+          "email": "abel.mellow@evergreencare.com"
+        }]
+      },
+      "bankDetails": {
+        "nameOnAccount": "Evergreen Care Home",
+        "sortCode": "272893",
+        "accountNumber": "12345678",
+        "buildingSocietyNumber": "4598329056"
+      }, 
+      "notes" : [
+        {
+          "author": "Pansy Carter",
+          "jobRole": "Processor",
+          "date": "2024-01-01T17:49:45.079Z",
+          "note": "Begun processing claim but need to double check the payment evidence with manager."
+        },
+        {
+          "author": "Pansy Carter",
+          "jobRole": "Processor",
+          "date": "2023-12-06T14:02:45.079Z",
+          "note": "Rang the organisation as SRO had not yet accepted invite. Issue was SRO hadn’t received as email entered was incorrect. Edited and reissued invite."
+        }
+      ]
+    },
+    {
+      "workplaceId": "G12348103",
+      "name": "Bright Horizons Care home",
+      "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
+      "bankDetails": null,
+      "signatory": {
+        "active": 
+          {        
+            "givenName": "Lionel",
+            "familyName": "Lowe",
+            "email": "lionel-lowel@evergreencare.co.uk",
+            "status": "invited"
+          },  
+        "inactive": [{
+          "givenName": "Natasha",
+          "familyName": "Jones",
+          "email": "natasha-jones@carehome.co.uk",
+          "status": "inactive"
+        }]
+      }, 
+      "users": {
+        "active": [],
+        "inactive": [],
+        "invited": []
+      },
+      "notes" : []
+    },
+    {
+      "workplaceId": "K15926372",
+      "name": "Purple Stones Care home",
+      "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
+      "bankDetails": null,
+      "signatory": {
+        "active": 
+        {        
+          "givenName": "Lionel",
+          "familyName": "Lowe",
+          "email": "lionel-lowel@evergreencare.co.uk",
+          "status": "invited"
+        },  
+        "inactive": [{        
+          "givenName": "Kayleigh",
+          "familyName": "McCleod",
+          "email": "kayleigh-mccleod@carehome.co.uk",
+          "status": "inactive"
+        }]
+      }, 
+      "users": {
+        "active": [],
+        "inactive": [],
+        "invited": []
+      },
+      "notes" : []
     }
   ]
 

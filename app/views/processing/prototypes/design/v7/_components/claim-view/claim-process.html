@@ -116,7 +116,7 @@
 
         {% if claim.status == "submitted" %}
 
-        {% if data.userType == "processor" %}
+        {% if data.userType == "processor" or data.userType == "leadProcessor" %}
             <form action="../claim-process-handler" method="post" novalidate>
                 <h3 class="govuk-heading-m">Review of evidence</h3>
                 {% if ((claim.fundingType == "TU") and (claim.claimType != "40"))%}

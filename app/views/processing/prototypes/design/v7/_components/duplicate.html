@@ -1,5 +1,5 @@
 <h1 class="govuk-heading-l">Organisation is already registered</h1>
-<p class="govuk-body">This organisation has already been invited and their Senior Responsible Officer (SRO) has completed the registration process.</p>
+<p class="govuk-body">This organisation has already been invited</p>
 
 {% set foundOrganisation = data.organisations | findOrg(data.orgID) %}
 
@@ -53,7 +53,7 @@
                     Last (family) name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ foundOrganisation.signatory.familyName }}
+                    {{ foundOrganisation.signatory.active.familyName }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -61,7 +61,7 @@
                     First (given) name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ foundOrganisation.signatory.givenName }}
+                    {{ foundOrganisation.signatory.active.givenName }}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -69,7 +69,7 @@
                     Email address
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ foundOrganisation.signatory.email }}
+                    {{ foundOrganisation.signatory.active.email }}
                 </dd>
             </div>
         </dl>
@@ -77,6 +77,14 @@
 </div>
 <p class="govuk-body">Let them know they can use the email address and password they registered with to log in. If they need to they can reset their password.</p>
 <p class="govuk-body">If they have a problem logging in they can get in touch with the NHS Business Services Authority account support team at <a href="email address">email address</a>.</p>
-<a type="submit" class="govuk-button" href="organisation-details?orgID=">
-    Go back
-</a>
+<form action="../search-org?orgSearchInput={{data.orgID}}" method="post">
+    <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+        View organisation
+        </button>
+        <a class="govuk-link" href="organisation-details?orgID">
+            Go back
+        </a>
+    </div>
+</form>
+

@@ -5,7 +5,7 @@ module.exports = {
             {
                 "versionNo": "14",
                 "phase": "Beta",
-                "status": ["design"],
+                "status": ["design","UR"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-14/",
                 "tested": null,
                 "created": null,
@@ -15,7 +15,7 @@ module.exports = {
             {
                 "versionNo": "13",
                 "phase": "Beta",
-                "status": ["design", "UR"],
+                "status": ["dev", "design"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-13/",
                 "tested": null,
                 "created": null,
@@ -25,7 +25,7 @@ module.exports = {
             {
                 "versionNo": "12",
                 "phase": "Beta",
-                "status": ["dev"],
+                "status": ["retired"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-12/",
                 "tested": null,
                 "created": [
@@ -320,12 +320,12 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v6",
+        "processingCurrent": "v7",
         "processingVersions": [
             {
                 "versionNo": "7",
                 "phase": "Beta",
-                "status": ["design"],
+                "status": ["dev","design"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-7/",
                 "tested": null,
                 "created": null,
@@ -335,7 +335,7 @@ module.exports = {
             {
                 "versionNo": "6",
                 "phase": "Beta",
-                "status": ["UR"],
+                "status": ["retired"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-6/",
                 "tested": null,
                 "created": null,
@@ -345,7 +345,7 @@ module.exports = {
             {
                 "versionNo": "5",
                 "phase": "Beta",
-                "status": ["dev"],
+                "status": ["retired"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-5/",
                 "tested": null,
                 "created": null,

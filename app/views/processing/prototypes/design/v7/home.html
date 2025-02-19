@@ -22,7 +22,7 @@ What do you want to do? — {{data.processingServiceName}}
                     Invite sent
                 </h2>
                 <p class="govuk-body">{% if data.confirmation == "register" %}An email has been sent to {{ data.givenName | default(foundOrganisation.signatory.givenName) }} {{
-                    data.familyName | default(foundOrganisation.signatory.familyName) }} inviting Fake care home to the service.{% endif %}</p>
+                    data.familyName | default(foundOrganisation.signatory.familyName) }} inviting Fake care home to the service.{% endif %} <a class="govuk-notification-banner__link" href="#">View organisation</a>.</p>
             </div>
         </div>
         {% endif %}
@@ -34,7 +34,7 @@ What do you want to do? — {{data.processingServiceName}}
 
         <ul class="homepage-services-and-info__list">
 
-            {% if (data.userType == "processor") %}
+            {% if (data.userType == "processor" or data.userType == "leadProcessor") %}
                 <li class="chevron-card">
                     <div class="chevron-card__wrapper">
                         <h2 class="gem-c-heading govuk-heading-s govuk-!-margin-bottom-2">
@@ -56,7 +56,7 @@ What do you want to do? — {{data.processingServiceName}}
                     </div>
                 </li>
 
-            {% if (data.userType == "processor") %}
+            {% if (data.userType == "processor" or data.userType == "leadProcessor") %}
                 <li class="chevron-card">
                     <div class="chevron-card__wrapper">
                         <h2 class="gem-c-heading govuk-heading-s govuk-!-margin-bottom-2">
