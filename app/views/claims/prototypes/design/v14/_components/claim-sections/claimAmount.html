@@ -24,14 +24,14 @@
     <details class="govuk-details">
         <summary class="govuk-details__summary">
             <span class="govuk-details__summary-text">
-                How was this calculated?
+                How is reimbursement calculated?
             </span>
         </summary>
         <div class="govuk-details__text">
             <p class="govuk-body">This amount is the lower of:</p>
             <ul class="govuk-list govuk-list--bullet">
-                <li>the maximum reimbursement amount for this training</li>
-                <li>what you paid</li>
+                <li>the maximum reimbursement amount for this training (£{{ claim.training.reimbursementAmount * 1.2 }})</li>
+                <li>what you actually paid (£{{ claim.training.reimbursementAmount}})</li>
             </ul>
         </div>
     </details>
