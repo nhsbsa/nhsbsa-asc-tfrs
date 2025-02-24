@@ -218,6 +218,40 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="paymentNeedsRevision" name="payment" type="radio" value="needsRevision"
+                                        data-aria-controls="conditional-payment-revision" {% if data.payment=='needsRevision' %}checked{% endif
+                                        %}>
+                                    <label class="govuk-label govuk-radios__label" for="paymentNeedsRevision">
+                                        Needs revision
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                                    id="conditional-payment-revision" data-maxlength="1000">
+                                    <div class="govuk-form-group govuk-character-count {% if data.paymentNeedsRevisionNoteIncomplete %}govuk-form-group--error{% endif %}"
+                                        data-module="govuk-character-count">
+                                        <label class="govuk-label" for="payment-needs-revision">
+                                            Why did the evidence not meet the required criteria?
+                                        </label>
+                                        <div id="payment-note-hint" class="govuk-hint">
+                                            This note tells the submitter what they need to change to meet the required criteria
+                                        </div>
+                                        {% if data.paymentNeedsRevisionNoteIncomplete %}
+                                        <p id="payment-note-error" class="govuk-error-message">
+                                            <span class="govuk-visually-hidden">Error:</span>Complete note for evidence of
+                                            payment
+                                        </p>
+                                        {% endif %}
+                                        <textarea
+                                            class="govuk-textarea govuk-js-character-count {% if data.paymentNeedsRevisionNoteIncomplete %}govuk-textarea--error{% endif %}"
+                                            id="paymentNeedsRevisionNote" name="paymentNeedsRevisionNote" rows="21"
+                                            aria-describedby="payment-needs-revision-note-info note-hint">{{ data.paymentNeedsRevisionNote | default ('') }}</textarea>
+                                        <div id="payment-needs-revision-note-info" class="govuk-hint govuk-character-count__message">
+                                            You can enter up to 1000 characters
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </fieldset>
                     </div>
@@ -255,7 +289,6 @@
                                     No
                                 </label>
                             </div>
-            
                             <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-notes">
                                 <div class="govuk-form-group govuk-character-count {% if data.completionNoNoteIncomplete %}govuk-form-group--error {% endif %}"
                                     data-module="govuk-character-count" data-maxlength="1000">
@@ -276,6 +309,39 @@
                                         id="completionNoNote" name="completionNoNote" rows="21"
                                         aria-describedby="completionNote-info completionNote-hint">{{ data.completionNoNote | default ('') }}</textarea>
                                     <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
+                                        You can enter up to 1000 characters
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="completionNeedsRevision" name="completion" type="radio"
+                                    value="needsRevision" data-aria-controls="conditional-revision-notes" {% if data.completion=='needsRevision'
+                                    %}checked{% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="completionNeedsRevision">
+                                    Needs revision
+                                </label>
+                            </div>
+                            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-revision-notes">
+                                <div class="govuk-form-group govuk-character-count {% if data.completionNeedsRevisionNoteIncomplete %}govuk-form-group--error {% endif %}"
+                                    data-module="govuk-character-count" data-maxlength="1000">
+                                    <label class="govuk-label" for="completionNeedsRevisionNote">
+                                        Why did the evidence not meet the required criteria?
+                                    </label>
+                                    <div id="completionNeedsRevisionNote-hint" class="govuk-hint">
+                                        This note tells the submitter what they need to change to meet the required criteria
+                                    </div>
+                                    {% if data.completionNeedsRevisionNoteIncomplete %}
+                                    <p id="completion-note-error" class="govuk-error-message">
+                                        <span class="govuk-visually-hidden">Error:</span> Complete note for evidence of
+                                        completion
+                                    </p>
+                                    {% endif %}
+                                    <textarea
+                                        class="govuk-textarea govuk-js-character-count {% if data.completionNeedsRevisionNoteIncomplete %}govuk-textarea--error{% endif %}"
+                                        id="completionNeedsRevisionNote" name="completionNeedsRevisionNote" rows="21"
+                                        aria-describedby="completionNeedsRevisionNote-info completionNeedsRevisionNote-hint">{{ data.completionNeedsRevisionNote | default ('') }}</textarea>
+                                    <div id="completionNeedsRevisionNote-info" class="govuk-hint govuk-character-count__message">
                                         You can enter up to 1000 characters
                                     </div>
                                 </div>

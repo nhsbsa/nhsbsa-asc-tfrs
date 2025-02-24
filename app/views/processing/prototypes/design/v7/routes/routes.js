@@ -204,17 +204,21 @@ router.post('/claim-process-handler', function (req, res) {
   delete req.session.data.paymentReimbursementAmountIncomplete
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentNoNoteIncomplete
+  delete req.session.data.paymentNeedsRevisionNoteIncomplete
   delete req.session.data.processSuccess
   delete req.session.data.noteSuccess
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionNoNoteIncomplete
+  delete req.session.data.completionNeedsRevisionNoteIncomplete
 
   claimID = req.session.data.id
   const paymentResponse = req.session.data.payment
   const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
   const paymentNoNote = req.session.data.paymentNoNote
+  const paymentNeedsRevisionNote = req.session.data.paymentNeedsRevisionNote
   const completionResponse = req.session.data.completion
   const completionNoNote = req.session.data.completionNoNote
+  const completionNeedsRevisionNote = req.session.data.completionNeedsRevisionNote
 
   const processJourneyType = req.session.data.processJourneyType
 
