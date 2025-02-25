@@ -23,7 +23,7 @@
       "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
     },
     "startDate": "2024-02-01T23:29:00.654Z",
-    "status": "submitted",
+    "status": "queried",
     "createdDate": "2023-12-31T08:55:32.615Z",
     "createdBy": "Daniel Jones",
     "submitter": {
@@ -32,18 +32,19 @@
     },
     "submittedDate": "2024-04-16T12:56:10.547Z",
     "approvedDate": null,
+    "queriedDate": "2024-08-11T12:56:10.547Z",
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
     "evidenceOfPaymentreview": {
-      "pass": null,
+      "pass": "Queried",
       "note": null
     },
     "paymentNote": null,
     "completionNote": null,
     "evidenceOfCompletion": "certificate.pdf",
     "evidenceOfCompletionreview": {
-      "pass": null,
+      "pass": "Approved",
       "note": null
     },
     "reimbursementAmount": null,
@@ -90,6 +91,7 @@
       "email": "rachel.mcglee@evergreencare.com"
     },
     "approvedDate": null,
+    "queriedDate": null,
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],

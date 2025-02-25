@@ -411,7 +411,7 @@ addFilter('typeTag', function (type) {
 addFilter('orderClaims', function (claims) {
     
     return claims.sort((a, b) => {
-        const statusOrder = { submitted: 1, rejected: 2, approved: 3 };
+        const statusOrder = { submitted: 1, queried: 2, rejected: 3, approved: 4 };
         
         // Compare statuses based on order
         const statusComparison = statusOrder[a.status] - statusOrder[b.status];
@@ -419,7 +419,8 @@ addFilter('orderClaims', function (claims) {
         
         // If statuses are the same, sort by corresponding date in descending order
         const dateField = a.status === "submitted" ? "submittedDate" : 
-                          a.status === "rejected" ? "rejectedDate" : "approvedDate";
+                          a.status === "rejected" ? "rejectedDate" :
+                          a.status === "approved" ? "approvedDate" : "queriedDate";
         
         return new Date(b[dateField]) - new Date(a[dateField]);
     });
