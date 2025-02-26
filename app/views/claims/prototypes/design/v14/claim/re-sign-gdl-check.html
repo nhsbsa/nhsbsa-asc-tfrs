@@ -1,0 +1,43 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims) %}
+
+{% block pageTitle %}
+Your Adult Social Care Workforce Data Set (ASC-WDS) account is not up-to-date — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">You need to resign the grant determination letter(GDL)</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-visually-hidden">Warning</span>
+                The signature on the GDL is now out of date. You will to re-sign it before you can submit any more claims.
+            </strong>
+        </div>
+
+        <p class="govuk-body">
+            Once you have re-signed the GDL, you can return and submit the claim.
+        </p>
+        <h2 class="govuk-heading-m">If you need support</h2>
+        <p class="govuk-body">You can get in touch with the NHS Business Services Authority:</p>
+        <div class="govuk-inset-text">
+            Email: <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a><br>Phone: 0300 xxx xxxx
+        </div>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-button-group">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Re-sign GDL
+            </button>
+            <a class="govuk-link" href="#">Go back to claim</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -4,12 +4,6 @@
 {% if data.declarationSubmitError %}Error: {% endif %}Declaration — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
-{% block beforeContent %}
-<div >
-    <a href="job-title" class="govuk-back-link">Back</a>
-</div>
-{% endblock %}
-
 {% block content %}
 
 <div class="govuk-grid-row">
@@ -32,12 +26,11 @@
         {% endif %}
     </div>
     <div class="govuk-grid-column-two-thirds">
-            <span class="govuk-caption-l">Complete registration</span>
-            <h1 class="govuk-heading-l">Grant determination letter</h1>
+            <h1 class="govuk-heading-l">Re-sign the grant determination letter</h1>
 
-            <p class="govuk-body">Confirm you have read the grant determination letter in the onboarding pack. This sets out, on behalf of the Secretary of State for Health and Social Care, the conditions that you must meet for claims to be paid.</p>
+            <p class="govuk-body">Confirm you have read the new grant determination letter (GDL). This sets out, on behalf of the Secretary of State for Health and Social Care, the conditions that you must meet for claims to be paid.</p>
 
-            <p class="govuk-body">You must accept the conditions in the letter before continuing.</p>
+            <p class="govuk-body">You must accept the conditions in the new letter before continuing. Your organisation will not be able to submit claims until you have re-signed the GDL.</p>
     </div>
     <div class="govuk-grid-column-two-thirds">
         <form action="../declaration-confirmation" method="post" novalidate>
@@ -60,9 +53,12 @@
                     </div>
                 </fieldset>
             </div>
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+                <a class="govuk-link" href="#">Sign later</a>
+            </div>
         </form>
     </div>
 </div>
