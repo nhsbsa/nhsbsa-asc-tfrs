@@ -32,11 +32,10 @@
 
         {% if data.SROChange == 'edit' %}
         <h1 class="govuk-heading-l">Edit SRO</h1>
-        <p class="govuk-body">You can use this page to edit the SRO before sending a new email invite.</p>
-        <p class="govuk-body">This person will sign the grant determination letter.</p>
+        <p class="govuk-body">Use this page to edit the existing SRO.</p>
         {% else %}
-        <h1 class="govuk-heading-l">New SRO details</h1>
-        <p class="govuk-body">You can use this page to change the SRO before sending a new email invite.</p>
+        <h1 class="govuk-heading-l">Add new SRO</h1>
+        <p class="govuk-body">Use this page to add the new SRO's details.</p>
         {% endif %}
         <form action="../signatory-change-handler" method="post" novalidate>
             <div

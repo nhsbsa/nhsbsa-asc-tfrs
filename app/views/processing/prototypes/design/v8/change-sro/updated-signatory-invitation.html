@@ -17,8 +17,11 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">Check {% if data.SROChange == 'edit' %}updated {% else %}new {% endif %}SRO details</h1>
+        {% if data.SROChange == 'edit' %}
         <p class="govuk-body">Check this information is correct before sending a new invite.</p>
-
+        {% else %}
+        <p class="govuk-body">Check this information is correct before sending them an invite.</p>
+        {% endif %}
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
               <h2 class="govuk-summary-card__title">
@@ -66,7 +69,7 @@
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
               <h2 class="govuk-summary-card__title">
-                Previous Senior Responsible Officer details
+                Previous SRO details
               </h2>
             </div>
             <div class="govuk-summary-card__content">
@@ -103,11 +106,11 @@
         <div class="govuk-summary-card">
             <div class="govuk-summary-card__title-wrapper">
               <h2 class="govuk-summary-card__title">
-                {% if data.SROChange == 'edit' %}Updated {% else %}New {% endif %}Senior Responsible Officer details
+                {% if data.SROChange == 'edit' %}Updated {% else %}New {% endif %}SRO details
               </h2>
               <ul class="govuk-summary-card__actions">
                 <li class="govuk-summary-card__action">
-                  <a class="govuk-link" href="signatory-details">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
+                  <a class="govuk-link" href="signatory-details">Edit<span class="govuk-visually-hidden"> SRO details</span></a>
                 </li>
               </ul>
             </div>
@@ -141,15 +144,15 @@
             </div>
         </div>
         {% if data.SROChange == 'edit' %}
-        <p class="govuk-body">If you are changing the SRO, the new SRO will be added to the service once they set up an account.</p>
+            <p class="govuk-body">The SRO still needs to complete registration. This includes signing the GDL and providing the organisation's bank details.</p>
         {% else %}
-        <p class="govuk-body">Sending this invite to a new SRO will automatically deactivate the previous SRO's account.</p>
+            <p class="govuk-body">Sending this invite to a new SRO will automatically deactivate the previous SRO's account.</p>
 
-        {% if (foundOrganisation.signatory.active.status == "active" and foundOrganisation.bankDetails == null) %}
-        <p class="govuk-body">The new SRO will need to complete registration, including signing the GDL and inputting the organisation bank details.</p>
-        {% else %}
-        <p class="govuk-body">The new SRO will not need to complete registration, they will just need to create an account.</p>
-        {% endif %}
+            {% if foundOrganisation.bankDetails == null %}
+                <p class="govuk-body">The new SRO will need to complete registration. This includes signing the GDL and providing the organisation's bank details.</p>
+            {% else %}
+                <p class="govuk-body">The new SRO will not need to complete registration. They just need to create an account.</p>
+            {% endif %}
 
         {% endif %}
 
