@@ -9,7 +9,7 @@
       {% if submission.trainingCode | trainingTypeCheck(data.training, "Courses") %}
         <p class="govuk-body">{{ submission.trainingCode }}</p>
         <p class="govuk-body">Training title</p>
-      {% elif claim.training.code | trainingTypeCheck(data.training, "Qualifications") %}
+      {% elif submission.trainingCode | trainingTypeCheck(data.training, "Qualifications") %}
         <p class="govuk-body">{{ submission.trainingCode }}</p>
         <p class="govuk-body">Training title</p>
         <p class="govuk-body">Training type</p>

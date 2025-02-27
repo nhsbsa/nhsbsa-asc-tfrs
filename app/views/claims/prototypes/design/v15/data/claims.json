@@ -30,12 +30,12 @@
         "evidenceOfCompletion": "certificate.pdf",
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-04-22T15:23:10.547Z",
-        "evidenceOfPaymentreview": {
+        "evidenceOfPaymentReview": {
           "pass": "Queried",
           "note": "Training didn't match invoice",
           "costPerLearner": null
         },
-        "evidenceOfCompletionreview": {
+        "evidenceOfCompletionReview": {
           "pass": "Approved",
           "note": null
         }
@@ -55,12 +55,12 @@
         "evidenceOfCompletion": "certificate.pdf",
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-04-26T15:23:10.547Z",
-        "evidenceOfPaymentreview": {
+        "evidenceOfPaymentReview": {
           "pass": "Approved",
           "note": null,
           "costPerLearner": "100"
         },
-        "evidenceOfCompletionreview": {
+        "evidenceOfCompletionReview": {
           "pass": "Approved",
           "note": null
         }
@@ -100,12 +100,12 @@
         "evidenceOfCompletion": "certificate.pdf",
         "processedBy": null,
         "processedDate": null,
-        "evidenceOfPaymentreview": {
+        "evidenceOfPaymentReview": {
           "pass": null,
           "note": null,
           "costPerLearner": null
         },
-        "evidenceOfCompletionreview": {
+        "evidenceOfCompletionReview": {
           "pass": null,
           "note": null
         }
@@ -144,12 +144,12 @@
         "evidenceOfCompletion": "certificate.pdf",
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-01-12T15:23:10.547Z",
-        "evidenceOfPaymentreview": {
+        "evidenceOfPaymentReview": {
           "pass": "Queried",
           "note": "Training didn't match invoice",
           "costPerLearner": null
         },
-        "evidenceOfCompletionreview": {
+        "evidenceOfCompletionReview": {
           "pass": "Approved",
           "note": null
         }
@@ -169,12 +169,12 @@
         "evidenceOfCompletion": "certificate.pdf",
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-01-12T15:23:10.547Z",
-        "evidenceOfPaymentreview": {
+        "evidenceOfPaymentReview": {
           "pass": "Approved",
           "note": null,
           "costPerLearner": "120.99"
         },
-        "evidenceOfCompletionreview": {
+        "evidenceOfCompletionReview": {
           "pass": "Approved",
           "note": null
         }
@@ -206,12 +206,12 @@
         "evidenceOfCompletion": "certificate.pdf",
         "processedBy": null,
         "processedDate": null,
-        "evidenceOfPaymentreview": {
+        "evidenceOfPaymentReview": {
           "pass": null,
           "note": null,
           "costPerLearner": null
         },
-        "evidenceOfCompletionreview": {
+        "evidenceOfCompletionReview": {
           "pass": null,
           "note": null
         }
@@ -243,12 +243,12 @@
         "evidenceOfCompletion": "certificate.pdf",
         "processedBy": "Euan Cooper",
         "processedDate": "2024-12-11T19:25:11.840Z",
-        "evidenceOfPaymentreview": {
+        "evidenceOfPaymentReview": {
           "pass": "Rejected",
           "note": "Learner is ineligible",
           "costPerLearner": null
         },
-        "evidenceOfCompletionreview": {
+        "evidenceOfCompletionReview": {
           "pass": "Approved",
           "note": null
         }

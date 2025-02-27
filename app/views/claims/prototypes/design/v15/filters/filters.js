@@ -19,6 +19,8 @@ addFilter('statusTag', function (statusID, statuses) {
         return '<strong class="govuk-tag govuk-tag--blue">' + statusName + '</strong>'
     } else if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
+    } else if (statusID == 'queried') {
+        return '<strong class="govuk-tag govuk-tag--yellow">' + statusName + '</strong>'
     } else if (statusID == 'rejected') {
         return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
     } else if (statusID == 'approved') {
@@ -650,26 +652,6 @@ addFilter('isCostMoreThanMax', function (amount) {
     }
 })
 
-addFilter('statusTag', function (statusID, statuses) {
-    var statusName = null
-    for (const s of statuses) {
-        if (s.id == statusID) {
-            statusName = s.name
-        }
-    }
-    if (statusID == 'not-yet-submitted') {
-        return '<strong class="govuk-tag govuk-tag--blue">' + statusName + '</strong>'
-    } else if (statusID == 'submitted') {
-        return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
-    } else if (statusID == 'approved') {
-        return '<strong class="govuk-tag govuk-tag--green">' + statusName + '</strong>'
-    } else if (statusID == 'rejected') {
-        return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
-    } else {
-        return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
-    }
-}, { renderAsHtml: true })
-
 addFilter('uniqueDates', function (claims, dateType) {
 
     const uniqueMonthYears = new Set();
@@ -1025,3 +1007,15 @@ addFilter('findTraining', (submission, trainingArray) => {
 addFilter('findLearner', (submission, learners) => {
     return "Example user"
 })
+
+addFilter('getRejectionNote', (submission) => {
+    let rejectionNote = ""
+    if (submission.evidenceOfPaymentReview.pass != null && submission.evidenceOfPaymentReview.pass == "Rejected") {
+        rejectionNote += submission.evidenceOfPaymentReview.note
+    }
+    if (submission.evidenceOfCompletionReview.pass != null && submission.evidenceOfCompletionReview.pass == "Rejected") {
+        rejectionNote += submission.evidenceOfCompletionReview.note
+    }
+    return rejectionNote
+})
+
