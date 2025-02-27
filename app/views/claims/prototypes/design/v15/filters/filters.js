@@ -65,6 +65,8 @@ addFilter('statusDetails', function (statusID, statuses) {
 addFilter('variableDate', function (statusID) {
     if (statusID == 'not-yet-submitted') {
         return 'Created'
+    } else if (statusID == 'queried') {
+        return 'Queried'
     } else if (statusID == 'submitted') {
         return 'Submitted'
     } else if (statusID == 'rejected') {
@@ -992,3 +994,34 @@ addFilter('parseInt', function(value, radix = 10) {
 addFilter('min', (value1, value2) => {
     return Math.min(value1, value2);
 });
+
+addFilter('getMostRelevantSubmission', (claim) => {
+    let mostRecentProcessed = null;
+    let mostRecentSubmitted = null;
+    let mostRecentNotYetSubmitted = null
+    
+    claim.submissions.forEach(submission => {
+        if (submission.processedDate) {
+            if (!mostRecentProcessed || new Date(submission.processedDate) > new Date(mostRecentProcessed.processedDate)) {
+                mostRecentProcessed = submission;
+            }
+        } else if (submission.submittedDate) {
+            if (!mostRecentSubmitted || new Date(submission.submittedDate) > new Date(mostRecentSubmitted.submittedDate)) {
+                mostRecentSubmitted = submission;
+            }
+        } else {
+            mostRecentNotYetSubmitted = submission
+        }
+    });
+    let submission = mostRecentProcessed || mostRecentSubmitted || mostRecentNotYetSubmitted;
+    return submission
+})
+
+
+addFilter('findTraining', (submission, trainingArray) => {
+    return "Example Training"
+})
+
+addFilter('findLearner', (submission, learners) => {
+    return "Example user"
+})

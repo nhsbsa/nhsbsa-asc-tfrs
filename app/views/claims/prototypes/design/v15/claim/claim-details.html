@@ -1,5 +1,6 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims) %}
+{% set submission = claim | getMostRelevantSubmission%}
 
 {% if claim.claimType == "60" %}
   {% set pairClaim = claim.claimID | findPair(data.claims) %}
@@ -9,11 +10,11 @@
 {% endif %}
 
 {% block pageTitle %}
-{% if (claim.fundingType == "TU" and claim.claimType == "100") %}
-{% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Claim: {{claim.claimID}} — {{serviceName}} — GOV.UK
-{% else %}
-{% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Combined claim: {{claim.claimID | removeClaimSuffix}} — {{serviceName}} — GOV.UK
-{% endif %}
+  {% if (claim.claimType == "100") %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Claim: {{claim.claimID}} — {{serviceName}} — GOV.UK
+  {% else %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Combined claim: {{claim.claimID | removeClaimSuffix}} — {{serviceName}} — GOV.UK
+  {% endif %}
 {% endblock %}
 
 {% block beforeContent %}
@@ -36,7 +37,7 @@
     {% include "../_components/claim-sections/errorCatch.html" %}
     {% endif %}
     <h1 class="govuk-heading-xl">
-      {% if (claim.fundingType == "TU" and claim.claimType == "100") %}
+      {% if (claim.claimType == "100") %}
         Claim: {{ claim.claimID }}
       {% else %}
         Combined claim: {{ claim.claimID | removeClaimSuffix }}
@@ -48,13 +49,13 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    {% if claim.fundingType == "TU" and claim.claimType != "100" %}
+    {% if claim.claimType != "100" %}
       <p class="govuk-body">This is a combined claim using the 60/40 funding model. 60% of reimbursement is upfront after payment and 40% is on training completion.</p>
-    {% elif claim.fundingType == "TU" and claim.claimType == "100"  %}
+    {% elif claim.claimType == "100"  %}
       <p class="govuk-body">100 claims have a single reimbursement on training completion.</p>
     {% endif %}
 
-    {% if (claim.fundingType == "TU" and claim.claimType == "100") %}
+    {% if (claim.claimType == "100") %}
 
       <p class="govuk-body">This {{ claim.claimType | typeTag }} claim is {{ claim.status | statusTag(data.statuses) }}</p>
 
@@ -63,7 +64,7 @@
       <p class="govuk-body">{{claim.rejectedNote}}</p>
       {% endif %}
 
-    {% elif claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
+    {% elif (claim.claimType == "60" or claim.claimType == "40") %}
 
       <p class="govuk-body">The {{ "60" | typeTag }} part of this claim is {{ claim.status | statusTag(data.statuses) }}</p>
 
@@ -81,7 +82,7 @@
 
     {% endif %}
 
-    {% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
+    {% if (claim.claimType == "60" or claim.claimType == "40") %}
     <div class="content-container">
       <div class="vertical-line-container">
         <div class="circle">
@@ -105,12 +106,12 @@
       {% include "../_components/claim-sections/cta-section.html" %}
     {% endif %}
     
-    {% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
+    {% if (claim.claimType == "60" or claim.claimType == "40") %}
   </div>
 </div>
 {% endif %}
 
-{% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
+{% if (claim.claimType == "60" or claim.claimType == "40") %}
     <div class="content-container govuk-!-padding-bottom-6">
       <div class="vertical-line-container">
         <div class="circle">
@@ -141,7 +142,7 @@
     {% include "../_components/claim-sections/cta-section.html" %}
     {% endif %}
 
-    {% if claim.fundingType == "TU" and (claim.claimType == "60" or claim.claimType == "40") %}
+    {% if (claim.claimType == "60" or claim.claimType == "40") %}
   </div>
 </div>
 {% endif %}

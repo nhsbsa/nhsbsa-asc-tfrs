@@ -1,7 +1,7 @@
 
 {% if claim.claimType == "100" %}
 
-    {% if (claim.status == "new" or claim.status == "not-yet-submitted" or claim.status == "submitted") %}
+    {% if (claim.status == "queried" or claim.status == "not-yet-submitted" or claim.status == "submitted") %}
 
     <p class="govuk-body"><strong>The maximum reimbursement amount for this training is</strong><br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}.</strong></p>
     <p class="govuk-body">This is the most you could get back. It’s usually less than the training actually cost, meaning that you’ll cover the difference.</p>
@@ -40,7 +40,7 @@
 
 {% elif claim.claimType == "60" %}
 
-    {% if (claim.status == "new" or claim.status == "not-yet-submitted" or claim.status == "submitted") %}
+    {% if (claim.status == "queried" or claim.status == "not-yet-submitted" or claim.status == "submitted") %}
     <p class="govuk-body"><strong>The maximum reimbursement amount for this training is</strong><br><strong class="govuk-!-font-size-36">£{{ claim.training.reimbursementAmount }}.</strong></p>
 
     <p class="govuk-body">Using the 60/40 funding model, you could get back up to:</p>
