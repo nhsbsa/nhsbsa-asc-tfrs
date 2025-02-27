@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block beforeContent %}
+{% if (data.userType != "ccsAgent") %}
 <a href="../home" class="govuk-back-link">Back</a>
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -22,12 +24,13 @@
                         <ul class="govuk-list govuk-error-summary__list">
                             <li>
                                 {% if (data.error == "emptyInput") %}
-                                    <a href="#orgSearchInput">Enter workplace ID, for example H02944934</a>
+                                    <a href="#orgSearchInput">Enter a workplace ID, for example B02944934, or a contact's email address</a>
                                 {% elif (data.error == "notValid") %}
-                                    <a href="#orgSearchInput">Enter workplace ID in the correct format, for example H02944934</a>
+                                    <a href="#orgSearchInput">Enter a workplace ID, for example B02944934, or a contact's email address in the correct format</a>
                                 {% elif (data.error == "notFound") %}
-                                    <a href="#orgSearchInput">No organisation match returned for your search</a>
+                                    <a href="#orgSearchInput">No matches found</a>
                                 {% endif %}
+
                             </li>
                         </ul>
                     </div>
@@ -35,32 +38,34 @@
             </div>
         {% endif %}
 
-        <span class="govuk-caption-l">Find an organisation</span>
-
-        <form action="../search-org-id" method="post">
+        <form action="../search-org" method="post">
             <div class="govuk-form-group {% if (data.error == "emptyInput" or data.error == "notValid"  or data.error == "notFound") %} govuk-form-group--error{% endif %}">
 
-                <fieldset class="govuk-fieldset" role="group" aria-describedby="dob-hint">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="org-search-input-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                       <h1 class="govuk-fieldset__heading">
-                        Which organisation are you searching for?
+                        <label for="orgSearchInput">
+                            Find an organisation
+                        </label>
                       </h1>
                     </legend>
-                    <div id="dob-hint" class="govuk-hint">
-                        You can search by workplace ID
+                
+                    <div id="org-search-input-hint" class="govuk-hint">
+                        Enter workplace ID or a contact's email address
                     </div>
+    
 
                 {% if (data.error == "emptyInput") %}
                     <p id="search-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>Enter workplace ID, for example H02944934
+                        <span class="govuk-visually-hidden">Error:</span>Enter a workplace ID, for example H18944934, or a contact's email address
                     </p>
                 {% elif (data.error == "notValid") %}
                     <p id="search-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>Enter workplace ID in the correct format, for example H02944934
+                        <span class="govuk-visually-hidden">Error:</span>Enter a workplace ID, for example H18944934, or a contact's email address in the correct format
                     </p>
                 {% elif (data.error == "notFound") %}
                     <p id="search-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>No organisation match returned for your search
+                        <span class="govuk-visually-hidden">Error:</span>No matches found
                     </p>
                 {% endif %}
 

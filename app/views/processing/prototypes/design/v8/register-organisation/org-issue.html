@@ -1,4 +1,4 @@
-{% extends "../layouts/main.html" %}
+{% extends "../layouts/processing-main.html" %}
 
 {% block pageTitle %}
 There is a problem — Register an organisation — {{data.processingServiceName}}
@@ -9,8 +9,6 @@ There is a problem — Register an organisation — {{data.processingServiceName
     <div class="govuk-grid-column-two-thirds">
         {% if data.submitError == "duplicate" %}
         {% include "../_components/duplicate.html" %}
-        {% elif data.submitError == "resend" %}
-        {% include "../_components/resend-invite.html" %}
         {% elif data.submitError == "timeout" %}
         {% include "../_components/api-down.html" %}
         {% elif data.submitError == "incorrect" %}

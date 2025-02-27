@@ -1,0 +1,63 @@
+{% extends "../layouts/processing-main.html" %}
+
+{% block pageTitle %}
+{% if data.noteError != null and data.noteError %}Error: {% endif %}Add a note — {{data.processingServiceName}}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if (data.noteError != null and data.noteError) %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#description-error">Add a note about this claim</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <form action="../add-note" method="post" class="form">
+            <div
+                class="govuk-form-group govuk-character-count {% if (data.noteError != null and data.noteError) %} govuk-form-group--error {% endif %}">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <span class="govuk-caption-l">Claim reference number: {{ data.id }}</span>
+                    <h1 class="govuk-fieldset__heading">
+                        Add a note
+                    </h1>
+                </legend>
+                <div id="notes-hint" class="govuk-hint">
+                    Lorem ipsum odor amet, consectetuer adipiscing elit. Ornare odio fusce sed lacus urna lacus amet
+                    libero!
+                </div>
+                {% if (data.noteError != null and data.noteError) %}
+                <p id="notes-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Add a note about this claim
+                </p>
+                {% endif %}
+
+                <textarea
+                    class="govuk-textarea govuk-js-character-count {% if (data.noteError != null and data.noteError) %}govuk-textarea--error{% endif %}"
+                    id="notes" name="notes" rows="20" aria-describedby="notes-hint"
+                    aria-describedby="notes-hint"></textarea>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Add to claim
+                </button>
+                <a class="govuk-link govuk-link--no-visited-state" href="../organisation/org-view-main?orgTab=singleClaim&notes&noteError&id={{data.id}}#tab-content">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

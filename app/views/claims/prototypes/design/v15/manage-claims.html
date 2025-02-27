@@ -1,0 +1,89 @@
+{% extends "./layouts/claims-main.html" %}
+
+{% set status = data.statusID | statusDetails(data.statuses) %}
+{% set noClaims = status.id | claimCount(data.claims) %}
+{% set deletedId = data.deletedID %}
+
+{% set rowsPerPage = 20 %}
+
+{% set pageNumber = data.currentPage | parseInt %}
+{% set maxPage =  noClaims | pageCount(rowsPerPage) %}
+
+
+{% block pageTitle %}
+{{status.name}} claims (page {{pageNumber}} of {{maxPage}}) — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-breadcrumbs">
+    <ol class="govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item">
+            <a class="govuk-breadcrumbs__link" href="manage-claims-home">Home</a>
+        </li>
+        <li class="govuk-breadcrumbs__list-item">
+            <a class="govuk-breadcrumbs__link"
+                href="manage-claims?statusID={{ status.id }}&deleteSuccess=">{{ status.name
+                }} claims</a>
+        </li>
+    </ol>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% if data.deleteSuccess %}
+            <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+                <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+            </svg>
+            <div class="moj-banner__message">Claim reference {{deletedId}} has been successfully deleted</div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3">{{ status.name }} claims ({{ noClaims }})</h2>
+        <p class="govuk-body">{{status.description}}</p>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    {% if noClaims == 0 %}
+    <div class="govuk-grid-column-full">
+        <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-visually-hidden">Warning</span>
+                There are not currently any {{ status.name | toLowerCase }} claims.
+            </strong>
+        </div>
+    </div>
+    {% else %}
+    <div class="govuk-grid-column-full">
+
+        <details class="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    Understand claim types
+                </span>
+            </summary>
+            <div class="govuk-details__text">
+                <p class="govuk-body"><strong class="govuk-tag govuk-tag--orange">100</strong> claims &ndash; single
+                    reimbursement on training completion</p>
+                <p class="govuk-body"><strong class="govuk-tag govuk-tag--yellow">60</strong> part claim &ndash; split
+                    reimbursement, 60% up front after payment</p>
+                <p class="govuk-body"><strong class="govuk-tag govuk-tag--purple">40</strong> part claim &ndash; split
+                    reimbursement, 40% on training completion</p>
+            </div>
+        </details>
+
+        {% include "./_components/claims-lists/TU-claim-list.html" %}
+
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
