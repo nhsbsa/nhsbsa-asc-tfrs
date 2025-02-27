@@ -31,12 +31,12 @@
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-04-22T15:23:10.547Z",
         "evidenceOfPaymentReview": {
-          "pass": "Queried",
+          "pass": "queried",
           "note": "Training didn't match invoice",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "pass": "Approved",
+          "pass": "approved",
           "note": null
         }
       }, 
@@ -56,12 +56,12 @@
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-04-26T15:23:10.547Z",
         "evidenceOfPaymentReview": {
-          "pass": "Approved",
-          "note": null,
+          "pass": "queried",
+          "note": "Training name needs to match the name on the invoice provided",
           "costPerLearner": "100"
         },
         "evidenceOfCompletionReview": {
-          "pass": "Approved",
+          "pass": "approved",
           "note": null
         }
       }
@@ -145,12 +145,12 @@
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-01-12T15:23:10.547Z",
         "evidenceOfPaymentReview": {
-          "pass": "Queried",
+          "pass": "queried",
           "note": "Training didn't match invoice",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "pass": "Approved",
+          "pass": "approved",
           "note": null
         }
       }, 
@@ -170,12 +170,12 @@
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-01-12T15:23:10.547Z",
         "evidenceOfPaymentReview": {
-          "pass": "Approved",
+          "pass": "approved",
           "note": null,
           "costPerLearner": "120.99"
         },
         "evidenceOfCompletionReview": {
-          "pass": "Approved",
+          "pass": "approved",
           "note": null
         }
       }
@@ -244,12 +244,12 @@
         "processedBy": "Euan Cooper",
         "processedDate": "2024-12-11T19:25:11.840Z",
         "evidenceOfPaymentReview": {
-          "pass": "Rejected",
+          "pass": "rejected",
           "note": "Learner is ineligible",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "pass": "Approved",
+          "pass": "approved",
           "note": null
         }
       }
