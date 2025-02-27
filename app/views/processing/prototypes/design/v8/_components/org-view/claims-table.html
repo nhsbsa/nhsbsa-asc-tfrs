@@ -10,10 +10,10 @@
             <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
                     <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Claim reference</th>
-                    <th class="govuk-table__header" scope="col" width="5%" aria-sort="none">Type</th>
-                    <th class="govuk-table__header" scope="col" width="30%" aria-sort="none">Training</th>
-                    <th class="govuk-table__header" scope="col" width="23%" aria-sort="none">Learner</th>
-                    <th class="govuk-table__header" scope="col" width="27%" aria-sort="descending">Status</th>
+                    <th class="govuk-table__header" scope="col" width="25%" aria-sort="none">Training</th>
+                    <th class="govuk-table__header" scope="col" width="20%" aria-sort="none">Learner</th>
+                    <th class="govuk-table__header" scope="col" width="15%" aria-sort="descending">Processed</th>
+                    <th class="govuk-table__header" scope="col" width="18%" aria-sort="descending">Status</th>
                 </tr>
             </thead>
             <tbody class="govuk-table__body">
@@ -21,12 +21,16 @@
         {% endif %}
             {% if (matchCounter <= (pageNumber * rowsPerPage)) and (matchCounter > ((pageNumber * rowsPerPage) - rowsPerPage)) %}
             <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
-                <td class="govuk-table__header" scope="row"><a class="govuk-link" href="org-view-main?orgId={{org.workplaceId}}&orgTab=singleClaim&id={{claim.claimID}}&processClaimStep=notStarted">{{ claim.claimID }}</a></td>
-                <td class="govuk-table__cell">{{ claim.claimType | typeTag }}</td>
+                <td class="govuk-table__header" scope="row"><a class="govuk-link" href="../claim-view-handler/{{claim.claimID}}">{{ claim.claimID }}</a></td>
                 <td class="govuk-table__cell">{{ claim.training.title }}</td>
                 <td class="govuk-table__cell">
                     {% if claim.learner %} {{ claim.learner.givenName }} {{ claim.learner.familyName }} {% else %} Not yet added {% endif %}
                 </td>
+                {% if (claim.approvedDate or claim.rejectedDate)%}
+                    <td class="govuk-table__cell">{{ ((claim | processedDate) | govukDate("truncate"))}}</td>
+                {% else %}
+                    <td class="govuk-table__cell missing-value">-------------------</td>
+                {%endif%}
                 <td class="govuk-table__cell">{{ claim.status | processorstatusTag }}</td>
             </tr>
             {% endif %}
@@ -47,7 +51,7 @@
 
                 {% if pageNumber != 1 %}
                     <div class="govuk-pagination__prev">
-                        <a class="govuk-link govuk-pagination__link" href="org-view-main?orgTab=claims&orgId={{data.orgId}}&currentPage={{previousPage}}#tab-content" rel="prev">
+                        <a class="govuk-link govuk-pagination__link" href="org-view-main?orgTab=singleClaim&orgId={{data.orgId}}&currentPage={{previousPage}}#tab-content" rel="prev">
                         <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
                             <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
                         </svg>

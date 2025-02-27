@@ -22,6 +22,7 @@ router.use('/claims/prototypes/design/v11/', require('./views/claims/prototypes/
 router.use('/claims/prototypes/design/v12/', require('./views/claims/prototypes/design/v12/routes/routes.js'))
 router.use('/claims/prototypes/design/v13/', require('./views/claims/prototypes/design/v13/routes/routes.js'))
 router.use('/claims/prototypes/design/v14/', require('./views/claims/prototypes/design/v14/routes/routes.js'))
+router.use('/claims/prototypes/design/v15/', require('./views/claims/prototypes/design/v15/routes/routes.js'))
 
 
 // Add your processing routes here
@@ -33,6 +34,7 @@ router.use('/processing/prototypes/design/v5/', require('./views/processing/prot
 router.use('/processing/prototypes/design/v6/', require('./views/processing/prototypes/design/v6/routes/routes.js'))
 router.use('/processing/prototypes/design/v7/', require('./views/processing/prototypes/design/v7/routes/routes.js'))
 router.use('/processing/prototypes/design/v8/', require('./views/processing/prototypes/design/v8/routes/routes.js'))
+router.use('/processing/prototypes/design/v9/', require('./views/processing/prototypes/design/v9/routes/routes.js'))
 
 
 // Add your routes here

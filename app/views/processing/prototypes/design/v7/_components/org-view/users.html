@@ -25,7 +25,11 @@
                 <div class="govuk-notification-banner__content">
                     <h3 class="govuk-notification-banner__heading">
                         Invite sent
-                    <p class="govuk-body">An email has been sent to {{ data.givenName | default(org.signatory.active.givenName) }} {{data.familyName | default(org.signatory.active.familyName) }} inviting {{org.name}} to register with the service.</p>
+                        {% if org.bankDetails == null %}
+                            <p class="govuk-body">An email has been sent to {{ data.givenName | default(org.signatory.active.givenName) }} {{data.familyName | default(org.signatory.active.familyName) }} inviting {{org.name}} to register with the service.</p>
+                        {% else %}
+                            <p class="govuk-body">An email has been sent to {{ data.givenName | default(org.signatory.active.givenName) }} {{data.familyName | default(org.signatory.active.familyName) }} inviting them to create an SRO account for {{org.name}}.</p>
+                        {% endif %}
                 </div>
             </div>
         {% endif %}
@@ -51,7 +55,7 @@
         {% if (data.userType == "leadProcessor") %}
         <h2 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer (SRO)</h2>
         <a href="../change-sro/signatory-details?SROChange=replace" class="govuk-button" data-module="govuk-button">
-            Change SRO
+            Add new SRO
         </a>
         {% endif %}
 
@@ -70,7 +74,7 @@
                             <td class="govuk-table__cell">{{ org.signatory.active.givenName}} {{ org.signatory.active.familyName}}</td>
                             <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ org.signatory.active.email }}</a></td>
                             <td class="govuk-table__cell">{{ org.signatory.active.status | userStatusTag }}</td>
-                            {% if (org.signatory.active.status == "invited") %}<td class="govuk-table__cell" style="text-align: right;">{% if (not (data.resendList | matchResend(org.signatory.active.email))) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-signatory?name={{org.signatory.active.email}}">Resend invite<span class="govuk-visually-hidden">to {{org.signatory.active.givenName}} {{org.signatory.active.familyName}}</span></a>{% else %}Invitation sent{% endif %}{% if (data.userType == "leadProcessor") %}<a class="govuk-link govuk-link--no-visited-state" style="display: inline-block; margin-left: 10px; padding-left: 10px; border-left: 1px solid #b1b4b6;" href="../change-sro/signatory-details?SROChange=edit">Edit SRO<span class="govuk-visually-hidden">{{org.signatory.active.givenName}} {{org.signatory.active.familyName}}</span></a>{% endif %}</td>{% endif %}
+                            {% if (org.signatory.active.status == "invited") %}<td class="govuk-table__cell" style="text-align: right;">{% if (not (data.resendList | matchResend(org.signatory.active.email))) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-signatory?name={{org.signatory.active.email}}">Resend invite<span class="govuk-visually-hidden">to {{org.signatory.active.givenName}} {{org.signatory.active.familyName}}</span></a>{% else %}Invite sent{% endif %}{% if (data.userType == "leadProcessor") %}<a class="govuk-link govuk-link--no-visited-state" style="display: inline-block; margin-left: 10px; padding-left: 10px; border-left: 1px solid #b1b4b6;" href="../change-sro/signatory-details?SROChange=edit">Edit SRO<span class="govuk-visually-hidden">{{org.signatory.active.givenName}} {{org.signatory.active.familyName}}</span></a>{% endif %}</td>{% endif %}
                         </tr>
                         {% for sig in (org.signatory.inactive | sortByFirstName) %}
                             <tr class="govuk-table__row" id="{{ sig.email }}">

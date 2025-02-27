@@ -1,15 +1,115 @@
-<h3 class="govuk-heading-m" id="payment">Details</h3>
+{% set pairClaim = data.id | matchPairClaim(data.claims) %}
+{% if (claim.fundingType == "TU") and (claim.claimType == "60") %}
+    <h3 class="govuk-heading-s">60 claim</h3>
+    <p class="govuk-body">This is the 60 part of a claim that uses the 60/40 funding model.</p>
+    <p class="govuk-body">It covers evidence of payment.</p>
+    {% if pairClaim != null %}
+    <p class="govuk-body">View the <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">40 part of the claim</a>, which covers evidence of training completion.</p>
+    {% else %}
+    <p class="govuk-body">The 40 part of the claim which covers the evidence of training completion has not been submitted yet.</p>
+    {% endif %}
 
-{% if claim.training.code | trainingTypeCheck(data.training, "Courses") %}
+{% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}
+    <h3 class="govuk-heading-s">40 claim</h3>
+    <p class="govuk-body">This is the 40 part of a claim that uses the 60/40 funding model.</p>
+    <p class="govuk-body">It covers evidence of training completion.</p>
+    <p class="govuk-body">View the <a href="./claim?id={{pairClaim.claimID}}" class="govuk-link">60 part of the claim</a>, which covers evidence of payment.</p>
 
-    {% include "./details/course-card.html" %}
-
-{% elif claim.training.code | trainingTypeCheck(data.training, "Qualifications") %}
-
-    {% include "./details/qualification-card.html" %}
-
+{% elif (claim.fundingType == "TU") and (claim.claimType == "100") %}
+    <h3 class="govuk-heading-s">100 claim</h3>
+    <p class="govuk-body">This is a 100 claim. It covers both evidence of payment and evidence of training completion.</p>
 {% endif %}
 
-{% include "./details/learner-card.html" %}
+<h3 class="govuk-heading-m" id="payment">Submitter</h3>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            <span class="govuk-visually-hidden">Submitter</span>Name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{claim.submitter.name}}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            <span class="govuk-visually-hidden">Submitter</span>Email
+        </dt>
+        <dd class="govuk-summary-list__value">
+            <a class="govuk-link" href="mailto:example@example.com">{{claim.submitter.email}}</a>
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Submitted on
+        </dt>
+        <dd class="govuk-summary-list__value">
+                {{claim.submittedDate | govukDate}}
+        </dd>
+    </div>
 
-{% include "./details/dates-card.html" %}
+</dl>
+
+<h3 class="govuk-heading-m" id="payment">Training</h3>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Title
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{claim.training.title}}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Level and type
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ claim | qualificationCheck(data.training, claim.training.type) }}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Awarding organisation
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ claim | qualificationCheck(data.training, claim.training.awardingOrganisation) }}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Payment date
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ claim.costDate | govukDate }}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Start date
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ claim.startDate | govukDate }}
+        </dd>
+    </div>
+    {% if (claim.fundingType == "TU") and (claim.claimType != "60")%}
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ claim.completionDate | govukDate }}
+        </dd>
+    </div>
+    {% endif %}
+</dl>
+<h3 class="govuk-heading-m" id="payment">Learner</h3>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            <span class="govuk-visually-hidden">Learner</span>Name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{claim.learner.givenName}} {{claim.learner.familyName}}
+        </dd>
+    </div>
+</dl>

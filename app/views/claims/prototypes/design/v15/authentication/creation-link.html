@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Presentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #505a5f;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .footer {
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-top: 1px solid #dddddd;
+            border-radius: 0 0 8px 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a class="govuk-link" href="../index">Back</a> <a class="govuk-link" href="email-expiry">Link expired screen</a>
+
+    <div class="container">
+        <div class="header">
+            <h2>Sign up to claim for adult social care learning and development costs</h2>
+            <p>From: sender@example.com</p>
+            <p>To: receiver@example.com</p>
+            <p>Date: 10 April 2024</p>
+        </div>
+        <div class="content">
+            {% if data.userType == 'signatory'%}
+                <p>Dear [first name] [last name],</p>
+                <p>Thank you for agreeing to start using the <strong>Claim for adult social care learning and development</strong> service being developed by the NHS Business Services Authority. </p>
+                <p>If this email has been sent you to in error you must not continue. Contact us at <a href="#">email address</a> to let us know so we can correct this.</p>
+                <p><a href="verify-details">Create your user account</a> as the Senior Responsible Officer. This link will expire in 24 hours.</p>
+                <p><strong>Do not share this link with anyone else. Only you will be able to create an account. You must not share user accounts but you can add additional users to submit claims on your behalf.</strong></p>
+                <p>If you do not think you are the right person to sign the legally binding declaration on behalf of your organisation, or your sign up link has expired,  please contact us at <a href="#">email address</a> before continuing.</p>
+                <p>We look forward to working with you.</p>
+                <p>NHS Business Services Authority</p>
+            {% else %}
+                <p>Dear [first name] [last name],</p>
+                <p>This is an invitation to start using the <strong>Claim for adult social care learning and development</strong> service being developed by the NHS Business Services Authority.</p>
+                <p>If this email has been sent you to in error you must not continue. Contact us at <a href="#">email address</a> to let us know so we can correct this.</p>
+                <p><a href="verify-details">Create your user account</a>. This link will expire in 24 hours.</p>
+                <p><strong>Do not share this link with anyone else. Only you will be able to create an account. You must not share user accounts but additional users can be added if required.</strong></p>
+                <p>For additional security, sign in will require two-factor authentication (2FA) using Microsoft Authenticator (<a href="https://www.microsoft.com/en-us/security/mobile-authenticator-app">get help with this</a>).</p>
+                <p>We recommend reading the scheme guidance and watching the supporting videos before using the service for the first time. These are available in the onboarding pack we sent to your organisation.</p>
+                <p>If the sign up link has expired, please contact [signatory first name] [signatory last name] in your organisation for a new one.</p>
+                <p>NHS Business Services Authority</p>
+            {% endif %}
+        </div>
+        <div class="footer">
+            <p>This is the footer of your email.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

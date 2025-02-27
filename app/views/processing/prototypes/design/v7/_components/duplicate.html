@@ -1,5 +1,4 @@
-<h1 class="govuk-heading-l">Organisation is already registered</h1>
-<p class="govuk-body">This organisation has already been invited</p>
+<h1 class="govuk-heading-l">Organisation has already been invited</h1>
 
 {% set foundOrganisation = data.organisations | findOrg(data.orgID) %}
 
@@ -40,47 +39,10 @@
         </dl>
     </div>
 </div>
-<div class="govuk-summary-card">
-    <div class="govuk-summary-card__title-wrapper">
-        <h2 class="govuk-summary-card__title">
-            Senior Responsible Officer details
-        </h2>
-      </div>
-    <div class="govuk-summary-card__content">
-        <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Last (family) name
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    {{ foundOrganisation.signatory.active.familyName }}
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    First (given) name
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    {{ foundOrganisation.signatory.active.givenName }}
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Email address
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    {{ foundOrganisation.signatory.active.email }}
-                </dd>
-            </div>
-        </dl>
-    </div>
-</div>
-<p class="govuk-body">Let them know they can use the email address and password they registered with to log in. If they need to they can reset their password.</p>
-<p class="govuk-body">If they have a problem logging in they can get in touch with the NHS Business Services Authority account support team at <a href="email address">email address</a>.</p>
 <form action="../search-org?orgSearchInput={{data.orgID}}" method="post">
     <div class="govuk-button-group">
         <button type="submit" class="govuk-button" data-module="govuk-button">
-        View organisation
+        View details
         </button>
         <a class="govuk-link" href="organisation-details?orgID">
             Go back

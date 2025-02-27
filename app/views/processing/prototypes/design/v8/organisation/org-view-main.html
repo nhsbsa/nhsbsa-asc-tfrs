@@ -1,50 +1,27 @@
 {% extends "../layouts/processing-main.html" %}
 {% set org = data.orgId | findOrganisation(data.organisations) %}
 {% set claims = data.orgId | findOrgClaims(data.claims) %}
+{% set SROStatusCheck = false %}
+{% set activeSRO = null %}
+
+{% for sro in org.signatory %}
+    {% if (sro.status == "active") %}
+        {% set SROStatusCheck = true %}
+        {% set activeSRO = sro %}
+    {% endif %}
+{% endfor %}
+
+{% if (not SROStatusCheck) %}
+  {% for sro in org.signatory %}
+    {% if (sro.status == "invited") %}
+      {% set activeSRO = sro %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-
-      {% if data.confirmation == "invited"%}
-        <div class="govuk-notification-banner govuk-notification-banner--success" role="alert"
-            aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
-            <div class="govuk-notification-banner__header">
-                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
-                    Success
-                </h2>
-            </div>
-            <div class="govuk-notification-banner__content">
-                <h3 class="govuk-notification-banner__heading">
-                    Invite sent
-                <p class="govuk-body">An email has been sent to {{ data.givenName | default(org.signatory.givenName) }} {{data.familyName | default(org.signatory.familyName) }} inviting Fake care home to the service.</p>
-            </div>
-        </div>
-      {% endif %}
-
-      {% if data.invite == "success" %}
-      <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
-  
-        <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
-          <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
-        </svg>
-      
-        <div class="moj-banner__message">Invitation to {{org.signatory.givenName}} {{org.signatory.familyName}} sent.<br><br>Some emails might not arrive straight away. You can resend the email after 24 hours if necessary.</div>
-      
-      </div>
-      {% elif data.invite == "failure" %}
-  
-      <div class="moj-banner moj-banner--warning" role="region" aria-label="Warning">
-  
-        <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
-          <path d="M13.6,15.4h-2.3v-4.5h2.3V15.4z M13.6,19.8h-2.3v-2.2h2.3V19.8z M0,23.2h25L12.5,2L0,23.2z" />
-        </svg>
-      
-        <div class="moj-banner__message">Invitation {{matchResendUser.givenName}} {{matchResendUser.familyName}} wasn't sent - try again</div>
-      
-      </div>
-  
-      {% endif %}
 
       <div class="moj-page-header-actions">
           <div class="moj-page-header-actions__title">
@@ -55,7 +32,7 @@
           <div class="moj-page-header-actions__actions">
             <div class="moj-button-group moj-button-group--inline">
                <p class="govuk-body">
-                <a href="../home?confirmation=&invite=" class="govuk-link">Back to start</a>
+                <a href="../back-to-start-handler" class="govuk-link">Back to start</a>
               </p>
             </div>
           </div>
@@ -64,20 +41,23 @@
     </div>
   </div>
 
+  {% if org.bankDetails == null %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-
-      {% if org.signatory.status == "invited" %}
         <div class="govuk-warning-text">
           <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
           <strong class="govuk-warning-text__text">
             <span class="govuk-visually-hidden">Warning</span>
-            Organisation has not yet finished registration. The Senior Responsible Officer needs to accept the invitation sent to their email and complete registration.
+            {% if (org.signatory.active.status == "active") %}
+            Organisation has not yet finished registration. The Senior Responsible Officer has created an account but needs to complete registration.
+            {% else %}
+            Organisation has not yet finished registration. The Senior Responsible Officer needs to create an account and complete registration.
+            {% endif %}
           </strong>
         </div>
-      {% endif %}
     </div>
   </div>
+  {% endif %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
@@ -92,9 +72,9 @@
       <p class="govuk-body">
         <span class="govuk-!-font-weight-bold">Senior Responsible Officer:</span>
         <br>
-        {{ org.signatory.givenName }} {{ org.signatory.familyName }}
+        {{ org.signatory.active.givenName }} {{ org.signatory.active.familyName }}
         <br>
-        <a href="#">{{ org.signatory.email }}</a>
+        <a href="#">{{ org.signatory.active.email }}</a>
       </p>
     </div>
   </div>
@@ -112,21 +92,15 @@
         
                 <ul class="moj-primary-navigation__list">
                   <li class="moj-primary-navigation__item">
-                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'users'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=users">Users</a>
+                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'users'%}aria-current="page"{%endif%} href="../org-tab-handler/users">Contacts</a>
                   </li>
 
-                  {% if (org.signatory.status == "active") %}
                     <li class="moj-primary-navigation__item">
-                      <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=claims&claimID=&emptyError=&invalidIDError=&notFound=">Find a claim</a>
+                      <a class="moj-primary-navigation__link"  {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="page"{%endif%} href="../org-tab-handler/claims">Claims</a>
                     </li>
-
-                    <li class="moj-primary-navigation__item">
-                      <a class="moj-primary-navigation__link" {% if data.orgTab == 'bankDetails'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=bankDetails">Bank details</a>
-                    </li>
-                  {% endif %}
 
                   <li class="moj-primary-navigation__item">
-                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'orgNotes'%}aria-current="page"{%endif%} href="org-view-main.html?orgTab=orgNotes">Organisation notes</a>
+                    <a class="moj-primary-navigation__link" {% if data.orgTab == 'orgNotes'%}aria-current="page"{%endif%} href="../org-tab-handler/orgNotes">BSA notes</a>
                   </li>
                 </ul>
         
@@ -143,9 +117,9 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full" id="tab-content">
       <div class="tab-content">
-        {% if data.orgTab == "claims" %}
+        {% if data.orgTab == "claims" and data.id == null %}
             {% include "../_components/org-view/claims.html" %}
-          {% elif data.orgTab == "singleClaim" %}
+          {% elif data.orgTab == "claims" and data.id != null %}
             {% include "../_components/claim-view/claim-overview.html" %}
           {% elif data.orgTab == "users" %}
             {% include "../_components/org-view/users.html" %}

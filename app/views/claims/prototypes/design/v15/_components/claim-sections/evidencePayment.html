@@ -1,0 +1,74 @@
+<{% if claim.claimType == '60' %}h3{% else %}h2{% endif %} class="govuk-heading-m" id="payment">Payment for activity</{% if claim.claimType == '60' %}h3{% else %}h2{% endif %}>
+<dl class="govuk-summary-list">
+
+  {% if not claim.costDate %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =="missing" %}
+    <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
+      <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
+        <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a payment date</p>
+      </div>
+    </div>
+    {% endif %}
+  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='missing' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='missing' %} govuk-summary-key--error {% endif %}">
+      Payment date
+    </dt>
+    <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='missing' %} govuk-summary-value--error {% endif %}">
+      <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Add payment date</a>
+    </dd>
+  </div>
+  {% else %}
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Payment date
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {{ claim.costDate | govukDate }}
+    </dd>
+    {% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType != "40" %}
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">
+          payment date</span></a>
+    </dd>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if ( claim.evidenceOfPayment | getCount == 0 ) %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =="missing" %}
+      <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
+        <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-evidence-error">
+          <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add evidence of payment</p>
+        </div>
+      </div>
+    {% endif %}
+    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =='missing' %} govuk-summary-list-row--error {% endif %}">
+      <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =='missing' %} govuk-summary-key--error {% endif %}">
+        Evidence of payment
+      </dt>
+      <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =='missing' %} govuk-summary-value--error {% endif %}">
+        <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=payment">Add evidence</a>
+      </dd>
+    </div>
+  {% else %}
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Evidence of payment
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {% for payment in claim.evidenceOfPayment %}
+         <p><a class="govuk-link" href="/public/images/{{payment}}" target="_blank">{{payment}} (opens in new tab)</a></p>
+        {% endfor %}
+      </dd>
+      {% if (claim.status == "new" or claim.status == "not-yet-submitted") %}
+        <dd class="govuk-summary-list__actions">
+          <ul class="govuk-summary-list__actions-list">
+            <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
+                href="add-evidence-edit?type=payment">Change<span class="govuk-visually-hidden"> evidence of payment</span></a>
+            </li>
+          </ul>
+        </dd>
+      {% endif %}
+    </div>
+  {% endif %}
+</dl>
