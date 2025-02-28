@@ -992,3 +992,8 @@ addFilter('parseInt', function(value, radix = 10) {
 addFilter('min', (value1, value2) => {
     return Math.min(value1, value2);
 });
+
+addFilter('identifySignatory', (org) => {
+    const signatory = org.users.find(user => user.type === "signatory");
+    return signatory
+});

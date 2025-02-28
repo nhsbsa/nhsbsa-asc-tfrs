@@ -726,7 +726,7 @@ router.post('/check-user', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
 
-  const submitError = checkUserForm(familyName, givenName, email, req.session.data.users)
+  const submitError = checkUserForm(familyName, givenName, email, req.session.data.org.users)
 
   if (submitError.userValid) {
     res.redirect('org-admin/confirm-user-details')
@@ -757,13 +757,13 @@ router.post('/invite-user', function (req, res) {
         status: "pending",
         invited: new Date()
     };
-    req.session.data.users.push(user)
+    req.session.data.org.users.push(user)
     delete req.session.data.familyName
     delete req.session.data.givenName
     delete req.session.data.email
     delete req.session.data.deleteSuccess
     delete req.session.data.deletedUser
-    res.redirect('org-admin/manage-team?invite=success')
+    res.redirect('org-admin/manage-team?tabLocation=users&invite=success')
   } else {
     res.redirect('org-admin/confirm-user-details?checkBoxSubmitError=true')
   }
@@ -779,7 +779,7 @@ router.get('/reinvite-user', function (req, res) {
     req.session.data.resendList = [req.session.data.name]
   }
 
-  res.redirect('org-admin/manage-team')
+  res.redirect('org-admin/manage-team?tabLocation=users')
 
 });
 
@@ -793,7 +793,7 @@ router.get('/confirm-delete-user', function (req, res) {
     }
   }
   delete req.session.data.invite
-  res.redirect('org-admin/manage-team?deleteSuccess=true&deletedUser=' + query)
+  res.redirect('org-admin/manage-team?tabLocation=users&deleteSuccess=true&deletedUser=' + query)
 });
 
 router.get('/clear-learner', function (req, res) {
@@ -866,6 +866,24 @@ function loadData(req) {
 
 router.post('/load-data', function (req, res) {
   //Load data from JSON files
+
+   //Load data from JSON files
+   const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v14/data/')
+   const orgID = req.session.data['orgID']
+ 
+   console.log(orgID)
+ 
+   for (const organisation of organisations) {
+     if (organisation.workplaceId == orgID) {
+       
+       req.session.data.org = organisation
+       break;
+     }
+   }
+ 
+   delete req.session.data['orgID']
+  
+   
   loadData(req);
   res.redirect('before-you-start.html')
 })
