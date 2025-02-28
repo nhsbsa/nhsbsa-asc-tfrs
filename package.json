@@ -9,11 +9,11 @@
     "@faker-js/faker": "^8.3.1",
     "@govuk-prototype-kit/common-templates": "2.0.1",
     "@govuk-prototype-kit/step-by-step": "2.2.3",
-    "@ministryofjustice/frontend": "^2.1.1",
-    "@x-govuk/govuk-prototype-filters": "^1.2.1",
+    "@ministryofjustice/frontend": "3.7.0",
+    "@x-govuk/govuk-prototype-filters": "1.4.4",
     "fs": "^0.0.1-security",
-    "govuk-frontend": "5.2.0",
-    "govuk-prototype-kit": "13.16.1"
+    "govuk-frontend": "5.8.0",
+    "govuk-prototype-kit": "13.16.2"
   },
   "devDependencies": {
     "backstopjs": "^6.3.6"
