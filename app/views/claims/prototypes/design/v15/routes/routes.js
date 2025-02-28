@@ -868,7 +868,7 @@ router.post('/load-data', function (req, res) {
   //Load data from JSON files
 
    //Load data from JSON files
-   const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v14/data/')
+   const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v15/data/')
    const orgID = req.session.data['orgID']
  
    console.log(orgID)
