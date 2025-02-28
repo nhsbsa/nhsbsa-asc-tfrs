@@ -834,8 +834,6 @@ function loadData(req) {
   var trainingFile = 'training.json'
   var claimsFile = 'claims.json'
   var statusFile = 'claim-item-statuses.json'
-  var roleTypes = 'role-types.json'
-  var users = 'users.json'
 
   console.log('loading in training file')
   req.session.data['training'] = loadJSONFromFile(trainingFile, path)
@@ -852,14 +850,6 @@ function loadData(req) {
   console.log('loading in statuses file')
   req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
   console.log('statuses file loaded')
-
-  console.log('loading in role types file')
-  req.session.data['roleTypes'] = loadJSONFromFile(roleTypes, path)
-  console.log('role types file loaded')
-
-  console.log('loading in users file')
-  req.session.data['users'] = loadJSONFromFile(users, path)
-  console.log('users file loaded')
 
   return console.log('data updated')
 }
