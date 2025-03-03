@@ -227,20 +227,30 @@ function newTUClaim(req, input, type) {
   if (type == "100") {
     claim = {
       claimID: generateUniqueID() + "-A",
+      workplaceId: "B02944934",
       claimType: "100",
-      fundingType: "TU",
-      learner: null,
-      training: input,
-      startDate: null,
       status: "not-yet-submitted",
       createdDate: dStr,
       createdBy: "Test Participant",
-      submittedDate: null,
-      paidDate: null,
-      costDate: null,
-      evidenceOfPayment: [],
-      evidenceOfCompletion: null,
-      completionDate: null
+      notes: null,
+      submissions: [{
+      	submitter: {
+      		name: null,
+			email: null,
+      	},
+      	submittedDate: null,
+      	trainingCode: input.code,
+      	learnerId: null,
+      	startDate: null,
+      	costDate: null,
+      	completionDate: null,
+      	evidenceOfPayment: [],
+      	evidenceOfCompletion: null,
+      	processedBy: null,
+      	processedDate: null,
+      	evidenceOfPaymentReview: null,
+      	evidenceOfCompletionReview: null
+      }]
     };
   } else if (type == "60") {
     claim = {
