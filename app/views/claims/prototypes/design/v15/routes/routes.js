@@ -833,7 +833,7 @@ function loadData(req) {
   var learnersFile = 'learners.json'
   var trainingFile = 'training.json'
   var claimsFile = 'claims.json'
-  var statusFile = 'claim-item-statuses.json'
+  var statusFile = 'claim-statuses.json'
 
   console.log('loading in training file')
   req.session.data['training'] = loadJSONFromFile(trainingFile, path)
