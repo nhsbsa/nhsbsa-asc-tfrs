@@ -1,10 +1,11 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims) %}
+{% set submission = claim | getMostRelevantSubmission%}
 
 {% if (data.type == "payment") %}
-  {% set evidence = claim.evidenceOfPayment %}
+  {% set evidence = submission.evidenceOfPayment %}
 {% elif (data.type == "completion") %}
-  {% set evidence = claim.evidenceOfCompletion %}
+  {% set evidence = submission.evidenceOfCompletion %}
 {% endif %}
 
 {% block pageTitle %}

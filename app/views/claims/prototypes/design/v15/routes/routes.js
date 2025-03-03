@@ -390,7 +390,8 @@ router.post('/add-start-date', function (req, res) {
     delete req.session.data['activity-date-started-year'];
     for (const c of req.session.data.claims) {
       if (claimID == c.claimID) {
-        c.startDate = startDate
+        let submission = getMostRelevantSubmission(c)
+        submission.startDate = startDate
       }
     }
     res.redirect('claim/claim-details' + '?id=' + claimID + '#training')
@@ -415,7 +416,8 @@ router.post('/cost-date', function (req, res) {
   if (error.dateValid == true) {
     for (const c of req.session.data.claims) {
       if (claimID == c.claimID) {
-        c.costDate = costDate
+        let submission = getMostRelevantSubmission(c)
+        submission.costDate = costDate
       }
     }
     delete req.session.data['payment-date-started-day'];
@@ -446,7 +448,8 @@ router.post('/completion-date', function (req, res) {
   if (error.dateValid == true) {
     for (const c of req.session.data.claims) {
       if (claimID == c.claimID) {
-        c.completionDate = completionDate
+        let submission = getMostRelevantSubmission(c)
+        submission.completionDate = completionDate
       }
     }
     delete req.session.data['completion-date-started-day'];
@@ -479,11 +482,12 @@ router.post('/add-learner', function (req, res) {
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
-        duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims);
+      let submission = getMostRelevantSubmission(c)
+        duplicateCheck = checkDuplicateClaim(learner.id, submission.trainingCode, req.session.data.claims);
         if (duplicateCheck.check) {
           res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
         } else {
-          c.learner = learner
+          submission.learnerId = learner.id
           res.redirect('claim/claim-details?id=' + claimID + '#learner')
         }
 
@@ -503,11 +507,12 @@ router.post('/add-evidence', function (req, res) {
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
-      let numberOfEvidence = c.evidenceOfPayment.length + 1
+      let submission = getMostRelevantSubmission(c)
+      let numberOfEvidence = submission.evidenceOfPayment.length + 1
       if (type == 'payment') {
-        c.evidenceOfPayment.push('invoice' + (c.evidenceOfPayment.length + 1) + '.pdf')
+        submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
       } else if (type == 'completion') {
-        c.evidenceOfCompletion.push('certificate' + (c.evidenceOfCompletion.length + 1) + '.pdf')
+        submission.evidenceOfCompletion = ('certificate' + (submission.evidenceOfCompletion.length + 1) + '.pdf')
       }
       break;
     }
@@ -550,12 +555,13 @@ router.post('/remove-evidence', function (req, res) {
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
+      let submission = getMostRelevantSubmission(c)
       if (type == 'payment') {
-        c.evidenceOfPayment.pop()
-        paymentCount = c.evidenceOfPayment.length
+        submission.evidenceOfPayment.pop()
+        paymentCount = submission.evidenceOfPayment.length
       } else if (type == 'completion') {
-        c.evidenceOfCompletion.pop()
-        completionCount = c.evidenceOfCompletion.length
+        submission.evidenceOfCompletion.pop()
+        completionCount = submission.evidenceOfCompletion.length
       }
       break;
     }

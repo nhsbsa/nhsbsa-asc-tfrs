@@ -1,6 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims) %}
-{% set evidenceCount = claim.evidenceOfPayment | getCount %}
+{% set submission = claim | getMostRelevantSubmission%}
+{% set evidenceCount = submission.evidenceOfPayment | getCount %}
 
 {% block pageTitle %}
 {% if data.errorFileTooBig or data.errorWrongFileFormat or data.errorFileMissing %}Error: {% endif %}Add evidence of {{data.type}} — {{serviceName}} — GOV.UK
