@@ -343,6 +343,7 @@ function getMostRelevantSubmission(claim) {
     let mostRecentNotYetSubmitted = null
     
     claim.submissions.forEach(submission => {
+
         if (submission.processedDate) {
             if (!mostRecentProcessed || new Date(submission.processedDate) > new Date(mostRecentProcessed.processedDate)) {
                 mostRecentProcessed = submission;

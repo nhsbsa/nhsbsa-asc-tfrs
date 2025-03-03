@@ -46,15 +46,62 @@ router.post('/add-training', function (req, res) {
       }
     }
   }
-  if (trainingChoice.fundingModel == "full") {
+
+  var claim = null
+  for (const c of req.session.data.claims) {
+    if (req.session.data.id == c.claimID && c.status == "queried") {
+      claim = c
+      break
+    }
+  }
+
+  if (claim) {
+    let submission = getMostRelevantSubmission(claim)
+    if (submission.submittedDate) {
+      let newSubmission = newDraftSubmission(submission)
+      newSubmission.trainingCode = trainingChoice.code
+      claim.submissions.push(newSubmission)
+    } else {
+      submission.trainingCode = trainingChoice.code 
+    }
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
-    const claimID = newTUClaim(req, trainingChoice, "100")
-    res.redirect('claim/claim-details' + '?id=' + claimID)
+    res.redirect('claim/claim-details' + '?id=' + claim.claimID)
   } else {
-    res.redirect('claim/split-decision')
+
+    if (trainingChoice.fundingModel == "full") {
+      delete req.session.data['training-input'];
+      delete req.session.data['trainingSelection'];
+      const claimID = newTUClaim(req, trainingChoice, "100")
+      res.redirect('claim/claim-details' + '?id=' + claimID)
+    } else {
+      res.redirect('claim/split-decision')
+    }
+
   }
 });
+
+function newDraftSubmission(submission) {
+  return {
+    submitter: {
+      name: null,
+      email: null,
+    },
+    submittedDate: null,
+    trainingCode: submission.trainingCode,
+    learnerId: submission.learnerId,
+    startDate: submission.startDate,
+    costDate: submission.costDate,
+    completionDate: submission.completionDate,
+    evidenceOfPayment: submission.evidenceOfPayment,
+    evidenceOfCompletion: submission.evidenceOfCompletion,
+    processedBy: null,
+    processedDate: null,
+    evidenceOfPaymentReview: null,
+    evidenceOfCompletionReview: null
+  }
+}
+
 
 router.post('/bank-details-handler', function (req, res) {
   const accountName = req.session.data.nameOnTheAccount
@@ -601,6 +648,26 @@ router.post('/save-claim', function (req, res) {
   req.session.data.currentPage = "1"
 
   res.redirect('manage-claims?statusID=not-yet-submitted')
+
+});
+
+router.post('/save-query-claim', function (req, res) {
+
+  delete req.session.data.id
+  delete req.session.data.submitError
+  delete req.session.data['completion-date-started-day'];
+  delete req.session.data['completion-date-started-month'];
+  delete req.session.data['completion-date-started-year'];
+  delete req.session.data['payment-date-started-day'];
+  delete req.session.data['payment-date-started-month'];
+  delete req.session.data['payment-date-started-year'];
+  delete req.session.data['activity-date-started-day'];
+  delete req.session.data['activity-date-started-month'];
+  delete req.session.data['activity-date-started-year'];
+
+  req.session.data.currentPage = "1"
+
+  res.redirect('manage-claims?statusID=queried')
 
 });
 

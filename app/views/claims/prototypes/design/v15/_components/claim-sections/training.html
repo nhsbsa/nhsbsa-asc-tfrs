@@ -16,9 +16,9 @@
         <p class="govuk-body">{{training.awardingOrganisation}}</p>
       {% endif %}
     </dd>
-    {% if claim.status == "queried" %}
+    {% if claim.status == "queried" and claim.claimType != 40 %}
       <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='inFuture' %} govuk-summary-value--error {% endif %}">
-        <a class="govuk-link govuk-link--no-visited-state" href="start-date">Change<span class="govuk-visually-hidden">
+        <a class="govuk-link govuk-link--no-visited-state" href="select-training">Change<span class="govuk-visually-hidden">
             activity start date</span></a>
       </dd>
     {% endif %}
