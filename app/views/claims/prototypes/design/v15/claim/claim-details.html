@@ -61,7 +61,12 @@
 
       {% if claim.status == "rejected" %}
         <h2 class="govuk-heading-s">Rejection note</h2>
-        <p class="govuk-body">{{submission | getRejectionNote }}</p>
+        {% if submission.evidenceOfPaymentReview.pass == "rejected" %}
+          <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+        {% if submission.evidenceOfCompletionReview.pass == "rejected" %}
+          <p class="govuk-body">{{submission.evidenceOfCompletionReview.note}}</p>
+        {% endif %}
       {% endif %}
 
     {% elif (claim.claimType == "60" or claim.claimType == "40") %}

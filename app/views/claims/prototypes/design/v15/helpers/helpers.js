@@ -3,46 +3,47 @@ const fs = require('fs');
 function checkClaim(claim) {
 
     const result = {};
+    const submission = getMostRelevantSubmission(claim)
     
-    if (claim.learner == null) {
+    if (submission.learnerId == null) {
         result.learner = "missing"
     } else {
         result.learner = "valid"
     }
 
-    if (claim.startDate == null && ( claim.fundingType == "TU") ) {
+    if (submission.startDate == null) {
         result.startDate = "missing"
     } else {
         result.startDate = "valid"
     }
 
-    if (claim.costDate == null && ! claim.claimType != "40") {
+    if (submission.costDate == null && ! claim.claimType != "40") {
         result.paymentDate = "missing"
     } else {
         result.paymentDate = "valid"
     }
 
-    if (claim.evidenceOfPayment.length == 0 && claim.claimType != "40") {
+    if (submission.evidenceOfPayment.length == 0 && claim.claimType != "40") {
         result.evidenceOfPayment = "missing"
     } else {
         result.evidenceOfPayment = "valid"
     }
 
-    if (claim.evidenceOfCompletion.length == 0 && (claim.claimType == "40" || claim.claimType == "100") && claim.learner) {
+    if (submission.evidenceOfCompletion.length == 0 && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerId) {
         result.evidenceOfCompletion = "missing"
     } else {
         result.evidenceOfCompletion = "valid"
     }
 
-    if (claim.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && claim.learner) {
+    if (submission.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerId) {
         result.completionDate = "missing"
     } else {
         result.completionDate = "valid"
     }
 
     if (result.completionDate == "valid" && result.startDate == "valid") {
-        const startDate = new Date(claim.startDate)
-        const completionDate = new Date(claim.completionDate)
+        const startDate = new Date(submission.startDate)
+        const completionDate = new Date(submission.completionDate)
         const currentDate = new Date()
         if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
             result.startDate = "invalid"
@@ -336,4 +337,26 @@ function emailFormat(string) {
 }
 
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm }
+function getMostRelevantSubmission(claim) {
+    let mostRecentProcessed = null;
+    let mostRecentSubmitted = null;
+    let mostRecentNotYetSubmitted = null
+    
+    claim.submissions.forEach(submission => {
+        if (submission.processedDate) {
+            if (!mostRecentProcessed || new Date(submission.processedDate) > new Date(mostRecentProcessed.processedDate)) {
+                mostRecentProcessed = submission;
+            }
+        } else if (submission.submittedDate) {
+            if (!mostRecentSubmitted || new Date(submission.submittedDate) > new Date(mostRecentSubmitted.submittedDate)) {
+                mostRecentSubmitted = submission;
+            }
+        } else {
+            mostRecentNotYetSubmitted = submission
+        }
+    });
+    let submission = mostRecentProcessed || mostRecentSubmitted || mostRecentNotYetSubmitted;
+    return submission
+}
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission }

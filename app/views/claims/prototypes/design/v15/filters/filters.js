@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase } = require('../helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -978,25 +978,8 @@ addFilter('min', (value1, value2) => {
 });
 
 addFilter('getMostRelevantSubmission', (claim) => {
-    let mostRecentProcessed = null;
-    let mostRecentSubmitted = null;
-    let mostRecentNotYetSubmitted = null
-    
-    claim.submissions.forEach(submission => {
-        if (submission.processedDate) {
-            if (!mostRecentProcessed || new Date(submission.processedDate) > new Date(mostRecentProcessed.processedDate)) {
-                mostRecentProcessed = submission;
-            }
-        } else if (submission.submittedDate) {
-            if (!mostRecentSubmitted || new Date(submission.submittedDate) > new Date(mostRecentSubmitted.submittedDate)) {
-                mostRecentSubmitted = submission;
-            }
-        } else {
-            mostRecentNotYetSubmitted = submission
-        }
-    });
-    let submission = mostRecentProcessed || mostRecentSubmitted || mostRecentNotYetSubmitted;
-    return submission
+    let recentClaim = getMostRelevantSubmission(claim)
+    return recentClaim
 })
 
 
@@ -1009,12 +992,12 @@ addFilter('findLearner', (submission, learners) => {
 })
 
 addFilter('getRejectionNote', (submission) => {
-    let rejectionNote = ""
-    if (submission.evidenceOfPaymentReview.pass != null && submission.evidenceOfPaymentReview.pass == "Rejected") {
-        rejectionNote += submission.evidenceOfPaymentReview.note
+    let rejectionNote = ''
+    if (submission.evidenceOfPaymentReview.pass != null && submission.evidenceOfPaymentReview.pass == "rejected") {
+        rejectionNote +=  'Evidence of payment<br>' + submission.evidenceOfPaymentReview.note
     }
-    if (submission.evidenceOfCompletionReview.pass != null && submission.evidenceOfCompletionReview.pass == "Rejected") {
-        rejectionNote += submission.evidenceOfCompletionReview.note
+    if (submission.evidenceOfCompletionReview.pass != null && submission.evidenceOfCompletionReview.pass == "rejected") {
+        rejectionNote += "Evidence of completion" + '<br>' + submission.evidenceOfCompletionReview.note
     }
     return rejectionNote
 })
