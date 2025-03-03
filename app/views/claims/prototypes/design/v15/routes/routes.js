@@ -2,6 +2,8 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm } = require('../helpers/helpers.js');
+const { generateClaims } = require('../helpers/generate-claims.js');
+const { generateLearners } = require('../helpers/generate-learners.js');
 
 // v15 Prototype routes
 
@@ -864,6 +866,13 @@ router.get('/load-data-account-test', function (req, res) {
   //Load data from JSON files
   loadData(req);
   res.redirect('./authentication/creation-link?journey=creation')
+})
+
+//generate data
+router.get('/generate', function (req, res) {
+  generateLearners(50);
+  generateClaims("B02944934");
+  res.redirect('../')
 })
 
 module.exports = router
