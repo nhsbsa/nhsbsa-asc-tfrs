@@ -22,6 +22,12 @@
                 Confirm details
             </button>
         </form>
+    {% elif (claim.status == "queried") %}
+        <form action="../ready-to-declare?id={{claim.claimID}}" method="post" novalidate>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Resubmit details
+            </button>
+        </form>
     {% else %}
         <form action="../ready-to-declare?id={{pairClaim.claimID}}" method="post" novalidate>
             <button type="submit" class="govuk-button" data-module="govuk-button">

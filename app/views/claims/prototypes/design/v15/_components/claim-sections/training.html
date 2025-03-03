@@ -1,21 +1,27 @@
 <{% if claim.claimType == '60' %}h3{% else %}h2{% endif %} class="govuk-heading-m" id="training">Training</{% if claim.claimType == '60' %}h3{% else %}h2{% endif %}>
 
 <dl class="govuk-summary-list">
-  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+  <div class="govuk-summary-list__row  {% if claim.status != "queried" %} govuk-summary-list__row--no-actions {% endif%}">
     <dt class="govuk-summary-list__key">
       Name
     </dt>
     <dd class="govuk-summary-list__value">
       {% if submission.trainingCode | trainingTypeCheck(data.training, "Courses") %}
         <p class="govuk-body">{{ submission.trainingCode }}</p>
-        <p class="govuk-body">Training title</p>
+        <p class="govuk-body">{{training.title}}</p>
       {% elif submission.trainingCode | trainingTypeCheck(data.training, "Qualifications") %}
         <p class="govuk-body">{{ submission.trainingCode }}</p>
-        <p class="govuk-body">Training title</p>
-        <p class="govuk-body">Training type</p>
-        <p class="govuk-body">Training awarding organisation</p>
+        <p class="govuk-body">{{training.title}}</p>
+        <p class="govuk-body">{{training.type}}</p>
+        <p class="govuk-body">{{training.awardingOrganisation}}</p>
       {% endif %}
     </dd>
+    {% if claim.status == "queried" %}
+      <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='inFuture' %} govuk-summary-value--error {% endif %}">
+        <a class="govuk-link govuk-link--no-visited-state" href="start-date">Change<span class="govuk-visually-hidden">
+            activity start date</span></a>
+      </dd>
+    {% endif %}
   </div>
 
   {% if not submission.startDate %}
@@ -36,7 +42,7 @@
   </div>
   {% else %}
   
-    {% if (claim.status == "not-yet-submitted") %}
+    {% if (claim.status == "not-yet-submitted") or (claim.status == "queried") %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate == "inFuture" %}
     <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
       <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">

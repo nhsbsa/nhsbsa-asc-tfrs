@@ -1,0 +1,21 @@
+<h3 class="govuk-heading-m">What happens next</h3>
+
+<p class="govuk-body">This claim has been queried by the processors as it currently doesn't pass the criteria for approval. The reasons why are detailed in the query note.</p>
+<p class="govuk-body">You are able to update the claim and resubmit.</p>
+
+<div class="govuk-button-group" style="align-items: center;">
+
+        <form action="../ready-to-declare?id={{claim.claimID}}" method="post" novalidate>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Resubmit details
+            </button>
+        </form>
+
+    <form action="../save-claim" method="post" novalidate>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Save and finish later
+        </button>
+    </form>
+    
+        <a class="govuk-link govuk-link--no-visited-state" href="delete-claim-confirmation">Close claim</a>
+</div>

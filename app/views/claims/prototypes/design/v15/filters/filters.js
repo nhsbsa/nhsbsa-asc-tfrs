@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission } = require('../helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -706,7 +706,7 @@ addFilter('formatStatus', function (status) {
     }
 })
 
-addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner) {
+addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner, trainingCourses) {
     const formattedTraining = removeSpacesAndCharactersAndLowerCase(training);
     const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
 
@@ -716,9 +716,12 @@ addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner) {
 
     var searched = claims.filter(claim => {
         let trainingCheck = false;
-        if (claim.training != null) {
-            const formattedTitle = removeSpacesAndCharactersAndLowerCase(claim.training.title);
-            const code = claim.training.code;
+        let submission = getMostRelevantSubmission(claim)
+
+        if (submission.trainingCode != null) {
+            const claimTraining = findCourseByCode(submission.trainingCode, trainingCourses)
+            const formattedTitle = removeSpacesAndCharactersAndLowerCase(claimTraining.title);
+            const code = submission.trainingCode;
             const codeRegex = /^(?:\d{3}\/?\d{4}\/?\d|[A-Za-z]{5})$/;
             if (formattedTraining != "") {
                 if (formattedTitle.includes(formattedTraining)) {
@@ -983,12 +986,12 @@ addFilter('getMostRelevantSubmission', (claim) => {
 })
 
 
-addFilter('findTraining', (submission, trainingArray) => {
-    return "Example Training"
+addFilter('findTraining', (trainingCode, trainingArray) => {
+    return findCourseByCode(trainingCode, trainingArray)
 })
 
-addFilter('findLearner', (submission, learners) => {
-    return "Example user"
+addFilter('findLearner', (learnerId, learners) => {
+    return findLearnerById(learnerId, learners)
 })
 
 addFilter('getRejectionNote', (submission) => {

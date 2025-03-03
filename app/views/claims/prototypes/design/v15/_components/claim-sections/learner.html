@@ -22,7 +22,7 @@
       Name
     </dt>
     <dd class="govuk-summary-list__value">
-      <p class="govuk-body">Learner name</p>
+      <p class="govuk-body">{{learner.givenName}} {{learner.familyName}}</p>
       <p class="govuk-body">{{ submission.learnerId }}</p>
     </dd>
     {% if (claim.status == "not-yet-submitted" or claim.status == "queried")%}

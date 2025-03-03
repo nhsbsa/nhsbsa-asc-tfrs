@@ -1,6 +1,8 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims) %}
 {% set submission = claim | getMostRelevantSubmission%}
+{% set learner = submission.learnerId | findLearner(data["learners"])%}
+{% set training = submission.trainingCode | findTraining(data.training)%}
 
 {% if claim.claimType == "60" %}
   {% set pairClaim = claim.claimID | findPair(data.claims) %}
@@ -23,7 +25,7 @@
     <a href="advanced-search" class="govuk-back-link">Back</a>
   {% elif (data.fromSearchId) %}
     <a href="../manage-claims-home?searchId=" class="govuk-back-link">Back</a>
-  {% elif not (claim.status == "new") and not (claim.status == "not-yet-submitted") %}
+  {% elif not (claim.status == "new") and not (claim.status == "not-yet-submitted") and not (claim.status == "queried") %}
     <a href="../manage-claims?statusID={{ data.statusID }}" class="govuk-back-link">Back</a>
   {% endif %} 
 {% endblock %}
@@ -65,6 +67,16 @@
           <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
         {% if submission.evidenceOfCompletionReview.pass == "rejected" %}
+          <p class="govuk-body">{{submission.evidenceOfCompletionReview.note}}</p>
+        {% endif %}
+      {% endif %}
+
+      {% if claim.status == "queried" %}
+        <h2 class="govuk-heading-s">Query note</h2>
+        {% if submission.evidenceOfPaymentReview.pass == "queried" %}
+          <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+        {% if submission.evidenceOfCompletionReview.pass == "queried" %}
           <p class="govuk-body">{{submission.evidenceOfCompletionReview.note}}</p>
         {% endif %}
       {% endif %}
@@ -143,8 +155,10 @@
 
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
 
-    {% if ((claim.status == "new" or claim.status == "not-yet-submitted" or pairClaim.status == "new" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}
-    {% include "../_components/claim-sections/cta-section.html" %}
+    {% if ((claim.status == "not-yet-submitted" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}
+      {% include "../_components/claim-sections/cta-section.html" %}
+    {% elif (claim.status == "queried")  %}
+      {% include "../_components/claim-sections/query-cta-section.html" %}
     {% endif %}
 
     {% if (claim.claimType == "60" or claim.claimType == "40") %}
