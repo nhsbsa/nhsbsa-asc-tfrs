@@ -54,15 +54,11 @@ router.post('/add-training', function (req, res) {
       break
     }
   }
-
   if (claim) {
-    let submission = getMostRelevantSubmission(claim)
-    if (submission.submittedDate) {
-      let newSubmission = newDraftSubmission(submission)
-      newSubmission.trainingCode = trainingChoice.code
-      claim.submissions.push(newSubmission)
+    if (claim.fieldChanges) {
+      claim.fieldChanges.trainingCode = trainingChoice.code 
     } else {
-      submission.trainingCode = trainingChoice.code 
+      claim.fieldChanges = { trainingCode : trainingChoice.code }
     }
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];

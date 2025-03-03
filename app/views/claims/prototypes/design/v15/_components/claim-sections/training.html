@@ -3,14 +3,14 @@
 <dl class="govuk-summary-list">
   <div class="govuk-summary-list__row  {% if claim.status != "queried" %} govuk-summary-list__row--no-actions {% endif%}">
     <dt class="govuk-summary-list__key">
-      Name
+      Name {% if (claim.fieldChanges.trainingCode) %}<span style="color: darkgreen;"> (Edited)</span> {% endif %}
     </dt>
     <dd class="govuk-summary-list__value">
-      {% if submission.trainingCode | trainingTypeCheck(data.training, "Courses") %}
-        <p class="govuk-body">{{ submission.trainingCode }}</p>
+      {% if training.code | trainingTypeCheck(data.training, "Courses") %}
+        <p class="govuk-body">{{ training.code }}</p>
         <p class="govuk-body">{{training.title}}</p>
-      {% elif submission.trainingCode | trainingTypeCheck(data.training, "Qualifications") %}
-        <p class="govuk-body">{{ submission.trainingCode }}</p>
+      {% elif training.code | trainingTypeCheck(data.training, "Qualifications") %}
+        <p class="govuk-body">{{ training.code }}</p>
         <p class="govuk-body">{{training.title}}</p>
         <p class="govuk-body">{{training.type}}</p>
         <p class="govuk-body">{{training.awardingOrganisation}}</p>

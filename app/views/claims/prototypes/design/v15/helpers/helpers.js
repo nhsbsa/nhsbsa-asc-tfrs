@@ -360,9 +360,13 @@ function getMostRelevantSubmission(claim) {
     return submission
 }
 
-  function findCourseByCode(code, trainingCourses) {
+  function findCourseByCode(code, trainingCourses, fieldChanges) {
+    let currentCode = code
+    if (fieldChanges.trainingCode) {
+        currentCode = fieldChanges.trainingCode
+    }
     for (const group of trainingCourses) {
-      const course = group.courses.find(course => course.code === code);
+      const course = group.courses.find(course => course.code == currentCode);
       if (course) {
         return course;
       }

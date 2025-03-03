@@ -989,8 +989,9 @@ addFilter('getMostRelevantSubmission', (claim) => {
 })
 
 
-addFilter('findTraining', (trainingCode, trainingArray) => {
-    return findCourseByCode(trainingCode, trainingArray)
+addFilter('findTraining', (trainingCode, trainingArray, fieldChanges) => {
+    let course = findCourseByCode(trainingCode, trainingArray, fieldChanges)
+    return course
 })
 
 addFilter('findLearner', (learnerId, learners) => {
