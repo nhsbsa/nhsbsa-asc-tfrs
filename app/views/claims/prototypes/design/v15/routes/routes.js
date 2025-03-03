@@ -255,52 +255,75 @@ function newTUClaim(req, input, type) {
   } else if (type == "60") {
     claim = {
       claimID: generateUniqueID() + "-B",
+      workplaceId: "B02944934",
       claimType: "60",
-      fundingType: "TU",
-      learner: null,
-      training: input,
-      startDate: null,
       status: "not-yet-submitted",
+
       createdDate: dStr,
       createdBy: "Test Participant",
-      submittedDate: null,
-      paidDate: null,
-      costDate: null,
-      evidenceOfPayment: [],
-      evidenceOfCompletion: null,
-      completionDate: null
+      notes: null,
+      submissions: [{
+      	submitter: {
+      		name: null,
+			email: null,
+      	},
+      	submittedDate: null,
+      	trainingCode: input.code,
+      	learnerId: null,
+      	startDate: null,
+      	paidDate: null,
+      	costDate: null,
+      	completionDate: null,
+      	evidenceOfPayment: [],
+      	evidenceOfCompletion: null,
+      	processedBy: null,
+      	processedDate: null,
+      	evidenceOfPaymentReview: null,
+      	evidenceOfCompletionReview: null
+      }]
     };
   } else if (type == "40") {
-    let training = null
-    let learner = null
+    let trainingCode = null
+    let learnerId = null
     let startDate = null
     let costDate = null
     let evidenceOfPayment = null
     for (const c of req.session.data.claims) {
       if (input == c.claimID) {
-        training = c.training
-        learner = c.learner
-        startDate = c.startDate
-        costDate = c.costDate
-        evidenceOfPayment = c.evidenceOfPayment
+        let submission = getMostRelevantSubmission(c)
+        trainingCode = submission.trainingCode
+        learnerId = submission.learnerId
+        startDate = submission.startDate
+        costDate = submission.costDate
+        evidenceOfPayment = submission.evidenceOfPayment
       }
     }
     claim = {
       claimID: input.slice(0, -1) + "C",
       claimType: "40",
-      fundingType: "TU",
-      learner,
-      training,
-      startDate,
       status: "not-yet-submitted",
       createdDate: dStr,
       createdBy: "Test Participant",
-      submittedDate: null,
-      paidDate: null,
-      costDate,
-      evidenceOfPayment,
-      evidenceOfCompletion: null,
-      completionDate: null
+      notes: null,
+      submissions: [{
+      	submitter: {
+      		name: null,
+			email: null,
+      	},
+      	submittedDate: null,
+      	trainingCode,
+      	learnerId,
+      	startDate,
+      	paidDate: null,
+      	costDate,
+      	completionDate: null,
+      	evidenceOfPayment,
+      	evidenceOfCompletion: null,
+      	processedBy: null,
+      	processedDate: null,
+      	evidenceOfPaymentReview: null,
+      	evidenceOfCompletionReview: null
+      }]
     };
   }
 
