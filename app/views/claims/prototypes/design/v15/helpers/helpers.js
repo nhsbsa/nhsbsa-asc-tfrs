@@ -362,7 +362,7 @@ function getMostRelevantSubmission(claim) {
 
   function findCourseByCode(code, trainingCourses, fieldChanges) {
     let currentCode = code
-    if (fieldChanges.trainingCode) {
+    if (fieldChanges && fieldChanges.trainingCode) {
         currentCode = fieldChanges.trainingCode
     }
     for (const group of trainingCourses) {
