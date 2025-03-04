@@ -1,0 +1,52 @@
+{% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims) %}
+
+{% block pageTitle %}
+Missing bank details — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">We do not have bank details for your organisations.</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-visually-hidden">Warning</span>
+                You cannot submit claims until valid bank details are added for your organisations.
+            </strong>
+        </div>
+        {% if data.userType == "signatory" %}
+        <p class="govuk-body">
+            As the senior responsible officer you will need to add bank details for your organisation.
+        </p>
+        {% elif data.userType == "submitter" %}
+        <p class="govuk-body">
+            The senior responsible officer will need to log in and add bank details for your organisation.
+        </p>
+        {% endif %}
+        <h2 class="govuk-heading-m">If you need support</h2>
+        <p class="govuk-body">You can get in touch with the NHS Business Services Authority:</p>
+        <div class="govuk-inset-text">
+            Email: <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a><br>Phone: 0300 xxx xxxx
+        </div>
+        {% if data.userType == "signatory" %}
+        <div class="govuk-button-group">
+            <a type="submit" class="govuk-button"  href="../org-admin/change-bank-details">
+                Add bank details
+            </a>
+            <a class="govuk-link"  href="claim-details?id={{data.id}}">Go back to claim</a>
+        </div>
+        {% elif data.userType == "submitter" %}
+        <a type="submit" class="govuk-button" href="claim-details?id={{data.id}}">
+            Go back to claim
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

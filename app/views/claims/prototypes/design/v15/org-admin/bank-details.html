@@ -1,0 +1,57 @@
+{% extends "../layouts/claims-main.html" %} 
+
+{% block pageTitle %} 
+Banks details — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Bank details</h1>
+        {% if data.org.bankDetails == null %}
+            <p class="govuk-body">You have not added your organisation bank details to the service yet. Your organisation can't submit bank details until you do.</p>
+            <a type="submit" class="govuk-button" href="./change-bank-details">
+                Add bank details
+            </a>
+        {% else %}
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Name on account
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{data.org.bankDetails.nameOnAccount}}
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Sort code
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{data.org.bankDetails.sortCode}}
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Account number
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{data.org.bankDetails.accountNumber}}
+            </dd>
+            </div>
+            {% if data.org.bankDetails.buildingSocietyNumber != null %}
+                <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Building society roll number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{{data.org.bankDetails.buildingSocietyNumber}}</p>
+                </dd>
+                </div>
+            {% endif %}
+        </dl>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
