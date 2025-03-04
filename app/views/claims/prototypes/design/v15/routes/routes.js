@@ -595,7 +595,12 @@ router.post('/ready-to-declare', function (req, res) {
   const submitError = checkClaim(claim)
   if (submitError.claimValid) {
     delete req.session.data.submitError
-    res.redirect('claim/declaration')
+    if (req.session.data.org.bankDetails == null) {
+      res.redirect('claim/missing-bank-details')
+    } else {
+      res.redirect('claim/declaration')
+    }
+    
   } else {
     req.session.data.submitError = submitError
     res.redirect('claim/claim-details' + '?id=' + claimID)
