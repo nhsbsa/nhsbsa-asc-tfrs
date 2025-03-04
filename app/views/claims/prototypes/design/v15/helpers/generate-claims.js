@@ -64,7 +64,7 @@ function generatecreatedByList(organisation) {
 
 function generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, claimType) {
   
-  let submissions = [];
+  let submissions = null;
 
   const learners = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/v15/data/learners.json', 'utf8'));
 
@@ -73,7 +73,8 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
   const trainingCode = trainingItem.code
 
 
-  if ( claimType = "full") {
+  if ( claimType == "full") {
+    submissions = [];
 
     const submission =  {
       submitter: null,
@@ -109,7 +110,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       submission.submittedDate = faker.date.between({ from: startDate, to: new Date() });
   
       submission.costDate = faker.date.between({ from: policyDate, to: startDate });
-      submission.evidenceOfPayment.push(["bankStatement.pdf", "invoice.pdf", "receipt.pdf"]);
+      submission.evidenceOfPayment.concat(["bankStatement.pdf", "invoice.pdf", "receipt.pdf"]);
   
       submission.evidenceOfCompletion = "certficate1";
       submission.completionDate = faker.date.between({ from: startDate, to: submission.submittedDate });
@@ -153,12 +154,14 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       submissionsB: []
     };
 
+    const submissionDateA = faker.date.between({ from: startDate, to: new Date() })
+
     const submissionA =  {
-      submitter: faker.helpers.arrayElement(users),
-      submittedDate: faker.date.between({ from: submissionA.startDate, to: new Date() }),
+      submitter: faker.helpers.arrayElement(users).email,
+      submittedDate: submissionDateA,
   
-      training,
-      learner, 
+      trainingCode,
+      learnerID, 
       startDate, 
   
       costDate: faker.date.between({ from: policyDate, to: startDate }),
@@ -176,23 +179,25 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         outcome: "pass",
         note: null
       },
-      processedDate: faker.date.between({ from: submissionA.submittedDate, to: new Date() }),
+      processedDate: faker.date.between({ from: submissionDateA, to: new Date() }),
       processedBy: faker.helpers.arrayElement(backOfficeStaff.processors)
     }
 
+    const submissionDateB = faker.date.between({ from: submissionA.processedDate, to: new Date() });
+
     const submissionB =  {
-      submitter: null,
-      submittedDate: null,
+      submitter: faker.helpers.arrayElement(users).email,
+      submittedDate: submissionDateB,
   
-      training,
-      learner, 
+      trainingCode,
+      learnerID, 
       startDate, 
   
-      costDate: null,
-      evidenceOfPayment: ["bankStatement.pdf", "invoice.pdf", "receipt.pdf"],
+      costDate: submissionA.costDate,
+      evidenceOfPayment: submissionA.evidenceOfPayment,
   
-      completionDate: null, 
-      evidenceOfCompletion: null,
+      completionDate: faker.date.between({ from: startDate, to: submissionDateB }), 
+      evidenceOfCompletion: submissionA.evidenceOfCompletion,
   
       evidenceOfPaymentReview: {
         outcome: null,
@@ -207,48 +212,36 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       processedBy: null
     }
 
-    if (['not-yet-submitted'].includes(status)) {
-      submissions.push(submission)
-    } else if (['submitted', 'rejected', 'approved', "queried"].includes(status)) {
-      submissionB.submitter = faker.helpers.arrayElement(users);
-      submissionB.submittedDate = faker.date.between({ from: submissionA.processedDate, to: new Date() });
+    if (['rejected'].includes(status)) {
 
-      submissionB.costDate = submissionA.costDate 
-      submissionB.evidenceOfPayment.push(["bankStatement.pdf", "invoice.pdf", "receipt.pdf"]);
-  
-      submissionB.evidenceOfCompletion = "certficate1";
-      submissionB.completionDate = faker.date.between({ from: startDate, to: submissionB.submittedDate });
+      submissionB.evidenceOfPaymentReview.outcome = "fail"
+      submissionB.evidenceOfPaymentReview.note = "The evidence of payment show you paid for a course that is not eligible for funding through our service."
 
-      if (['rejected'].includes(status)) {
-  
-        submissionB.evidenceOfPaymentReview.outcome = "fail"
-        submission.BevidenceOfPaymentReview.note = "The evidence of payment show you paid for a course that is not eligible for funding through our service."
-  
-        submissionB.evidenceOfCompletionReview.outcome = "pass"
-  
-      } else if(['approved'].includes(status)) {
-  
-        submissionB.evidenceOfPaymentReview.outcome = "pass"
-        submissionB.evidenceOfPaymentReview.costPerLearner = Math.floor(trainingItem.reimbursementAmount * 0.9)
-  
-        submissionB.evidenceOfCompletionReview.outcome = "pass"
-  
-      } else if(['queried'].includes(status)) {
-        submissionB.evidenceOfPaymentReview.outcome = "queried"
-        submissionB.evidenceOfPaymentReview.note = "The evidence of payment provided is not sufficient to prove you paid for the training."
-  
-        submissionB.evidenceOfCompletionReview.outcome = "pass"
-  
-      }
+      submissionB.evidenceOfCompletionReview.outcome = "pass"
 
-      if (['rejected', 'approved', "queried"].includes(status)) {
-        submissionB.processedBy = faker.helpers.arrayElement(backOfficeStaff.processors)
-        submissionB.processedDate = faker.date.between({ from: submissionB.submittedDate, to: new Date() });
-      }
+    } else if(['approved'].includes(status)) {
 
-      submissions.submissionsA.push(submissionA)
-      submissions.submissionsB.push(submissionB)
+      submissionB.evidenceOfPaymentReview.outcome = "pass"
+      submissionB.evidenceOfPaymentReview.costPerLearner = Math.floor(trainingItem.reimbursementAmount * 0.9)
+
+      submissionB.evidenceOfCompletionReview.outcome = "pass"
+
+    } else if(['queried'].includes(status)) {
+      submissionB.evidenceOfPaymentReview.outcome = "queried"
+      submissionB.evidenceOfPaymentReview.note = "The evidence of payment provided is not sufficient to prove you paid for the training."
+
+      submissionB.evidenceOfCompletionReview.outcome = "pass"
+
     }
+
+    if (['rejected', 'approved', "queried"].includes(status)) {
+      submissionB.processedBy = faker.helpers.arrayElement(backOfficeStaff.processors)
+      submissionB.processedDate = faker.date.between({ from: submissionB.submittedDate, to: new Date() });
+    }
+
+    submissions.submissionsA.push(submissionA)
+    submissions.submissionsB.push(submissionB)
+    
   }
 
   return submissions
@@ -320,6 +313,8 @@ function generateClaims(workplaceID) {
       const claimIDA = claimID + "-B"
       const claimIDB = claimID + "-C"
       const generatedSubmissions = generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, "split")
+      const submissionsA = generatedSubmissions.submissionsA
+      const submissionsB = generatedSubmissions.submissionsB
 
       const claimA = {
         claimID: claimIDA,
@@ -329,7 +324,7 @@ function generateClaims(workplaceID) {
         createdDate,
         createdBy,
         notes: [],
-        submissions: generatedSubmissions.submissionsA,
+        submissions: submissionsA,
       };
 
       const claimB = {
@@ -340,7 +335,7 @@ function generateClaims(workplaceID) {
         createdDate,
         createdBy,
         notes: [],
-        submissions: generatedSubmissions.submissionsB,
+        submissions: submissionsB,
       };
       data.push(claimA);
       data.push(claimB);
