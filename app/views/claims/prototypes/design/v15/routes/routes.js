@@ -82,11 +82,11 @@ router.post('/bank-details-handler', function (req, res) {
     delete req.session.data.accountNumber
     delete req.session.data.rollNumber
 
-    if (req.session.data.journey != null) {
-      delete req.session.data.journey
-    res.redirect('manage-claims-home?tabLocation=claims')
-    } else {
+    if (req.session.data.journey == 'signin') {
       res.redirect('org-admin/bank-details?tabLocation=bankDetails')
+    } else {
+      req.session.data.journey = 'signin'
+      res.redirect('manage-claims-home?tabLocation=claims')
     }
     
   } else {

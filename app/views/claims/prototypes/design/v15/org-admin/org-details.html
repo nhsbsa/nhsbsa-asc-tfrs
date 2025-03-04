@@ -1,7 +1,5 @@
 {% extends "../layouts/claims-main.html" %} 
 
-{% set sro = data.org | identifySignatory %}
-
 {% block pageTitle %} 
 Organisation details — {{serviceName}} — GOV.UK
 {% endblock %}
@@ -25,7 +23,7 @@ Organisation details — {{serviceName}} — GOV.UK
                     Workplace ID
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{data.org.workplaceId}}
+                    {{data.org.workplaceID}}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -41,7 +39,7 @@ Organisation details — {{serviceName}} — GOV.UK
                     Senior Responsible officer 
                 </dt>
                 <dd class="govuk-summary-list__value">
-                        {{sro.givenName}} {{sro.familyName}} <br> <a class="govuk-link" href="mailto:example@example.com">{{sro.email}}</a>
+                        {{data.org.signatory.active.givenName}} {{data.org.signatory.active.familyName}} <br> <a class="govuk-link" href="mailto:example@example.com">{{data.org.signatory.active.email}}</a>
                 </dd>
             </div>
         </dl>
