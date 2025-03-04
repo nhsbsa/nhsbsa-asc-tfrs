@@ -1,6 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
+const fs = require('fs');
 const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm } = require('../helpers/helpers.js');
 const { generateClaims } = require('../helpers/generate-claims.js');
 const { generateLearners } = require('../helpers/generate-learners.js');
@@ -871,7 +872,15 @@ router.get('/load-data-account-test', function (req, res) {
 //generate data
 router.get('/generate', function (req, res) {
   generateLearners(50);
-  generateClaims("B02944934");
+  let claims = []
+  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/v15/data/organisations.json', 'utf8'));
+  for (const org of organisations) {
+    claims = claims.concat(generateClaims(org.workplaceID));
+  }
+  // Write data to claims.json
+  const jsonFilePath = './app/views/claims/prototypes/design/v15/data/claims.json';
+  fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
+
   res.redirect('../')
 })
 
