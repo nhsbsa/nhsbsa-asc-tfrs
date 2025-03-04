@@ -68,14 +68,30 @@ router.post('/bank-details-handler', function (req, res) {
   const check = checkBankDetailsForm(accountName, sortCode, accountNumber, buildingSociety)
 
   if (check.bankDetailsValid) {
+    const bankDetails = {
+      nameOnAccount: accountName,
+      sortCode: sortCode,
+      accountNumber: accountNumber,
+      rollNumber: buildingSociety
+    }
+    
+    req.session.data.org.bankDetails = bankDetails
+
     delete req.session.data.nameOnTheAccount
     delete req.session.data.sortCode
     delete req.session.data.accountNumber
     delete req.session.data.rollNumber
-    res.redirect('./index')
+
+    if (req.session.data.journey != null) {
+      delete req.session.data.journey
+    res.redirect('manage-claims-home?tabLocation=claims')
+    } else {
+      res.redirect('org-admin/bank-details?tabLocation=bankDetails')
+    }
+    
   } else {
     req.session.data.submitError = check
-    res.redirect('account-setup/bank-details')
+    res.redirect('org-admin/change-bank-details')
   }
 });
 
@@ -715,9 +731,27 @@ router.post('/declaration-confirmation', function (req, res) {
   delete req.session.data.declarationSubmitError
   const declarationConfirmed = req.session.data.declaration
   if (declarationConfirmed != null) {
-    res.redirect('account-setup/bank-details')
+    res.redirect('account-setup/bank-details-question')
   } else {
     res.redirect('account-setup/declaration?declarationSubmitError=true')
+  }
+});
+
+
+router.post('/bank-details-question-handler', function (req, res) {
+  delete req.session.data.submitError
+
+  const answer = req.session.data.bankDetailsQuestion
+
+  if (answer != null) {
+    if (answer == "yes") {
+      res.redirect('org-admin/change-bank-details')
+    } else if (answer == "no") {
+      delete req.session.data.journey
+      res.redirect('manage-claims-home?tabLocation=claims')
+    }
+  } else {
+    res.redirect('account-setup/bank-details-question?submitError=true')
   }
 });
 
@@ -858,31 +892,37 @@ function loadData(req) {
 }
 
 router.post('/load-data', function (req, res) {
-  //Load data from JSON files
 
-   //Load data from JSON files
-   const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v15/data/')
-   const orgID = req.session.data['orgID']
- 
-   console.log(orgID)
- 
-   for (const organisation of organisations) {
-     if (organisation.workplaceId == orgID) {
-       
-       req.session.data.org = organisation
-       break;
-     }
-   }
- 
-   delete req.session.data['orgID']
+  //Load data from JSON files
+  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v15/data/')
+  const orgID = req.session.data['orgID']
+
+  for (const organisation of organisations) {
+    if (organisation.workplaceID == orgID) {
+      
+      req.session.data.org = organisation
+      break;
+    }
+  }
+
+  delete req.session.data['orgID']
   
-   
   loadData(req);
   res.redirect('before-you-start.html')
 })
 
 router.get('/load-data-account-test', function (req, res) {
   //Load data from JSON files
+
+  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v15/data/')
+
+  for (const organisation of organisations) {
+    if (organisation.workplaceID == "G76904778") {
+      req.session.data.org = organisation
+      break;
+    }
+  }
+
   loadData(req);
   res.redirect('./authentication/creation-link?journey=creation')
 })

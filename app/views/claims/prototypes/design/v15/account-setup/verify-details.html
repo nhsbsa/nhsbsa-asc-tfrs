@@ -58,7 +58,7 @@
                     Last (family) name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    Smith
+                    {{data.org.signatory.active.familyName}}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -66,7 +66,7 @@
                     First (given) name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    John
+                    {{data.org.signatory.active.givenName}}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -74,7 +74,7 @@
                     Email address
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    john.smith@carehome.com
+                    {{data.org.signatory.active.email}}
                 </dd>
             </div>
         </dl>
@@ -86,7 +86,7 @@
                     Workplace ID
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    123456
+                    {{data.org.workplaceID}}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -94,7 +94,7 @@
                     Organisation name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    Fake care home
+                    {{data.org.name}}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -102,7 +102,9 @@
                     Organisation address
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    72 Guild Street<br>London<br>SE23 6FH
+                    {% for addressLine in data.org.address %}
+                        {{addressLine}}<br>
+                    {% endfor %}
                 </dd>
             </div>
         </dl>

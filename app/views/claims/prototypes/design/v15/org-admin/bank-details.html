@@ -7,23 +7,13 @@ Banks details — {{serviceName}} — GOV.UK
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        {% if data.bankDetailsConfirmation %}
-        <div class="govuk-error-summary" data-module="govuk-error-summary">
-            <div role="alert">
-                <h2 class="govuk-error-summary__title">
-                    There is a problem
-                </h2>
-                <div class="govuk-error-summary__body">
-                    <ul class="govuk-list govuk-error-summary__list">
-                        <li>
-                            <a href="#user-checkbox">You must confirm you understand and accept before continuing.</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        {% endif %}
         <h1 class="govuk-heading-l">Bank details</h1>
+        {% if data.org.bankDetails == null %}
+            <p class="govuk-body">You have not added your organisation bank details to the service yet. Your organisation can't submit bank details until you do.</p>
+            <a type="submit" class="govuk-button" href="./change-bank-details">
+                Add bank details
+            </a>
+        {% else %}
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
@@ -60,6 +50,7 @@ Banks details — {{serviceName}} — GOV.UK
                 </div>
             {% endif %}
         </dl>
+        {% endif %}
     </div>
 </div>
 

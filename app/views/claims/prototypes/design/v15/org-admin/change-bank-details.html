@@ -1,12 +1,17 @@
 {% extends "../layouts/claims-account-setup.html" %}
 
 {% block pageTitle %}
-{% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid  %}Error: {% endif %}Organisation bank or building society account details — Complete registration — {{serviceName}} — GOV.UK
+{% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid  %}Error: {% endif %}Organisation bank or building society account details — {{serviceName}} — GOV.UK
 {% endblock %}
+
 
 {% block beforeContent %}
 <div>
-    <a href="declaration" class="govuk-back-link">Back</a>
+    {% if data.journey %}
+    <a href="../account-setup/declaration" class="govuk-back-link">Back</a>
+    {% else %}
+    <a href="bank-details?tabLocation=bankDetails" class="govuk-back-link">Back</a>
+    {% endif %}
 </div>
 {% endblock %}
 
@@ -30,7 +35,9 @@
                 </div>
             </div>
             {% endif %}
-
+            {% if data.journey %}
+                <span class="govuk-caption-l">Complete registration</span>
+            {% endif %}
             <h1 class="govuk-heading-l">Organisation bank or building society account details</h1>
             <p class="govuk-body">We need this information to pay training costs back to your organisation.</p>
             <div class="govuk-warning-text">
@@ -106,9 +113,9 @@
             </div>
 
             <h2 class="govuk-heading-m">What happens next</h2>
-            <p class="govuk-body">This will complete the registration process and allow you to start submitting claims for adult social care learning and development.</p>
+            <p class="govuk-body">This will allow you to start submitting claims for adult social care learning and development. However these bank details will be verified and if there are any issues we will be in touch.</p>
             <button type="submit" class="govuk-button" data-module="govuk-button">
-                Continue
+                Add bank details
             </button>
         </form>
     </div>
