@@ -994,10 +994,10 @@ addFilter('findLearner', (learnerID, learners, fieldChanges) => {
 
 addFilter('getRejectionNote', (submission) => {
     let rejectionNote = ''
-    if (submission.evidenceOfPaymentReview.pass != null && submission.evidenceOfPaymentReview.pass == "rejected") {
+    if (submission.evidenceOfPaymentReview.outcome != null && submission.evidenceOfPaymentReview.outcome == "fail") {
         rejectionNote +=  'Evidence of payment<br>' + submission.evidenceOfPaymentReview.note
     }
-    if (submission.evidenceOfCompletionReview.pass != null && submission.evidenceOfCompletionReview.pass == "rejected") {
+    if (submission.evidenceOfCompletionReview.outcome != null && submission.evidenceOfCompletionReview.outcome == "fail") {
         rejectionNote += "Evidence of completion" + '<br>' + submission.evidenceOfCompletionReview.note
     }
     return rejectionNote

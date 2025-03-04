@@ -63,20 +63,20 @@
 
       {% if claim.status == "rejected" %}
         <h2 class="govuk-heading-m">Rejection note</h2>
-        {% if submission.evidenceOfPaymentReview.pass == "rejected" %}
+        {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
         <p class="govuk-body"><strong>Evidence of payment: </strong>{{submission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
-        {% if submission.evidenceOfCompletionReview.pass == "rejected" %}
+        {% if submission.evidenceOfCompletionReview.outcome == "fail" %}
         <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
         {% endif %}
       {% endif %}
 
       {% if claim.status == "queried" %}
         <h2 class="govuk-heading-s">Query note</h2>
-        {% if submission.evidenceOfPaymentReview.pass == "queried" %}
+        {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
           <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
-        {% if submission.evidenceOfCompletionReview.pass == "queried" %}
+        {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
           <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
         {% endif %}
       {% endif %}

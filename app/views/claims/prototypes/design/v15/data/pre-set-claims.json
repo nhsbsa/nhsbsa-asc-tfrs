@@ -13,7 +13,6 @@
         "note": "Submitter called to ask questions regarding this claim. Referral passed to processor."
       }
     ],
-
     "submissions": [
       { 
         "submitter": {
@@ -31,12 +30,12 @@
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-04-22T15:23:10.547Z",
         "evidenceOfPaymentReview": {
-          "pass": "queried",
+          "outcome": "queried",
           "note": "Training didn't match invoice",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "pass": "approved",
+          "outcome": "pass",
           "note": null
         }
       }, 
@@ -56,19 +55,17 @@
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-04-26T15:23:10.547Z",
         "evidenceOfPaymentReview": {
-          "pass": "queried",
+          "outcome": "queried",
           "note": "Training name needs to match the name on the invoice provided",
           "costPerLearner": "100"
         },
         "evidenceOfCompletionReview": {
-          "pass": "approved",
+          "outcome": "pass",
           "note": null
         }
       }
     ]
   },
-
-
   {
     "claimID": "AB1-C12D-3XF7-A",
     "workplaceID": "B02944934",
@@ -101,18 +98,17 @@
         "processedBy": null,
         "processedDate": null,
         "evidenceOfPaymentReview": {
-          "pass": null,
+          "outcome": null,
           "note": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "pass": null,
+          "outcome": null,
           "note": null
         }
       }
     ]
   }, 
-
   {
     "claimID": "Z8S-F1J6-4GH7-A",
     "workplaceID": "B02944934",
@@ -145,12 +141,12 @@
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-01-12T15:23:10.547Z",
         "evidenceOfPaymentReview": {
-          "pass": "queried",
+          "outcome": "queried",
           "note": "Training didn't match invoice",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "pass": "approved",
+          "outcome": "pass",
           "note": null
         }
       }, 
@@ -170,12 +166,12 @@
         "processedBy": "Arron MacGregor",
         "processedDate": "2024-01-12T15:23:10.547Z",
         "evidenceOfPaymentReview": {
-          "pass": "approved",
+          "outcome": "pass",
           "note": null,
           "costPerLearner": "120.99"
         },
         "evidenceOfCompletionReview": {
-          "pass": "approved",
+          "outcome": "pass",
           "note": null
         }
       }
@@ -207,12 +203,12 @@
         "processedBy": null,
         "processedDate": null,
         "evidenceOfPaymentReview": {
-          "pass": null,
+          "outcome": null,
           "note": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "pass": null,
+          "outcome": null,
           "note": null
         }
       }
@@ -244,12 +240,12 @@
         "processedBy": "Euan Cooper",
         "processedDate": "2024-12-11T19:25:11.840Z",
         "evidenceOfPaymentReview": {
-          "pass": "rejected",
+          "outcome": "fail",
           "note": "Learner is ineligible",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "pass": "approved",
+          "outcome": "pass",
           "note": null
         }
       }
@@ -281,12 +277,12 @@
         "processedBy": "Euan Cooper",
         "processedDate": "2024-12-11T19:25:11.840Z",
         "evidenceOfPaymentReview": {
-          "pass": "rejected",
+          "outcome": "fail",
           "note": "Learner is ineligible",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "pass": "rejected",
+          "outcome": "fail",
           "note": "Learner is ineligible"
         }
       }

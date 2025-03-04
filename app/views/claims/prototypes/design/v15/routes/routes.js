@@ -260,7 +260,7 @@ function newTUClaim(req, input, type) {
       submissions: [{
       	submitter: {
       		name: null,
-			email: null,
+			    email: null,
       	},
       	submittedDate: null,
       	trainingCode: input.code,
@@ -289,7 +289,7 @@ function newTUClaim(req, input, type) {
       submissions: [{
       	submitter: {
       		name: null,
-			email: null,
+			    email: null,
       	},
       	submittedDate: null,
       	trainingCode: input.code,
@@ -332,7 +332,7 @@ function newTUClaim(req, input, type) {
       submissions: [{
       	submitter: {
       		name: null,
-			email: null,
+			    email: null,
       	},
       	submittedDate: null,
       	trainingCode,
@@ -514,7 +514,6 @@ router.post('/add-learner', function (req, res) {
           submission.learnerID = learner.id
           res.redirect('claim/claim-details?id=' + claimID + '#learner')
         }
-
     }
   }
 });
