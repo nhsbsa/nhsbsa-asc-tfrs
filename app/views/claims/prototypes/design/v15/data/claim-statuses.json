@@ -8,7 +8,7 @@
     {
         "id": "queried",
         "name": "Queried",
-        "description": "Claims that have been queried. They need further action taking.",
+        "description": "Claims that have been submitted but need updating.",
         "distribution": 0.10
     },
     {

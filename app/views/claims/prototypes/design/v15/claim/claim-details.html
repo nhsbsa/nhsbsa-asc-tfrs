@@ -62,22 +62,22 @@
       <p class="govuk-body">This {{ claim.claimType | typeTag }} claim is {{ claim.status | statusTag(data.statuses) }}</p>
 
       {% if claim.status == "rejected" %}
-        <h2 class="govuk-heading-s">Rejection note</h2>
+        <h2 class="govuk-heading-m">Rejection note</h2>
         {% if submission.evidenceOfPaymentReview.pass == "rejected" %}
-          <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
+        <p class="govuk-body"><strong>Evidence of payment: </strong>{{submission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
         {% if submission.evidenceOfCompletionReview.pass == "rejected" %}
-          <p class="govuk-body">{{submission.evidenceOfCompletionReview.note}}</p>
+        <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
         {% endif %}
       {% endif %}
 
       {% if claim.status == "queried" %}
         <h2 class="govuk-heading-s">Query note</h2>
         {% if submission.evidenceOfPaymentReview.pass == "queried" %}
-          <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
+          <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
         {% if submission.evidenceOfCompletionReview.pass == "queried" %}
-          <p class="govuk-body">{{submission.evidenceOfCompletionReview.note}}</p>
+          <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
         {% endif %}
       {% endif %}
 
