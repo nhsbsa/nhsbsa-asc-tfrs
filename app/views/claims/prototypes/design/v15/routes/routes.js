@@ -1,7 +1,10 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
+const fs = require('fs');
 const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm } = require('../helpers/helpers.js');
+const { generateClaims } = require('../helpers/generate-claims.js');
+const { generateLearners } = require('../helpers/generate-learners.js');
 
 // v15 Prototype routes
 
@@ -833,9 +836,7 @@ function loadData(req) {
   var learnersFile = 'learners.json'
   var trainingFile = 'training.json'
   var claimsFile = 'claims.json'
-  var statusFile = 'claim-item-statuses.json'
-  var roleTypes = 'role-types.json'
-  var users = 'users.json'
+  var statusFile = 'claim-statuses.json'
 
   console.log('loading in training file')
   req.session.data['training'] = loadJSONFromFile(trainingFile, path)
@@ -852,14 +853,6 @@ function loadData(req) {
   console.log('loading in statuses file')
   req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
   console.log('statuses file loaded')
-
-  console.log('loading in role types file')
-  req.session.data['roleTypes'] = loadJSONFromFile(roleTypes, path)
-  console.log('role types file loaded')
-
-  console.log('loading in users file')
-  req.session.data['users'] = loadJSONFromFile(users, path)
-  console.log('users file loaded')
 
   return console.log('data updated')
 }
@@ -892,6 +885,21 @@ router.get('/load-data-account-test', function (req, res) {
   //Load data from JSON files
   loadData(req);
   res.redirect('./authentication/creation-link?journey=creation')
+})
+
+//generate data
+router.get('/generate', function (req, res) {
+  generateLearners(50);
+  let claims = []
+  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/v15/data/organisations.json', 'utf8'));
+  for (const org of organisations) {
+    claims = claims.concat(generateClaims(org.workplaceID));
+  }
+  // Write data to claims.json
+  const jsonFilePath = './app/views/claims/prototypes/design/v15/data/claims.json';
+  fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
+
+  res.redirect('../')
 })
 
 module.exports = router
