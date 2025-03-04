@@ -988,8 +988,8 @@ addFilter('findTraining', (trainingCode, trainingArray, fieldChanges) => {
     return course
 })
 
-addFilter('findLearner', (learnerID, learners) => {
-    return findLearnerById(learnerID, learners)
+addFilter('findLearner', (learnerID, learners, fieldChanges) => {
+    return findLearnerById(learnerID, learners, fieldChanges)
 })
 
 addFilter('getRejectionNote', (submission) => {

@@ -376,8 +376,12 @@ function getMostRelevantSubmission(claim) {
     return null;
   }
 
-  function findLearnerById(id, learners) {
-      const learner = learners.find(learner => learner.id == id);
+  function findLearnerById(id, learners, fieldChanges) {
+    let currentId = id
+    if (fieldChanges && fieldChanges.learnerId) {
+        currentId = fieldChanges.learnerId
+    }
+      const learner = learners.find(learner => learner.id == currentId);
       if (learner) {
         return learner;
       } else {

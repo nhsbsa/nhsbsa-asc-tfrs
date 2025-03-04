@@ -80,28 +80,6 @@ router.post('/add-training', function (req, res) {
   }
 });
 
-function newDraftSubmission(submission) {
-  return {
-    submitter: {
-      name: null,
-      email: null,
-    },
-    submittedDate: null,
-    trainingCode: submission.trainingCode,
-    learnerId: submission.learnerId,
-    startDate: submission.startDate,
-    costDate: submission.costDate,
-    completionDate: submission.completionDate,
-    evidenceOfPayment: submission.evidenceOfPayment,
-    evidenceOfCompletion: submission.evidenceOfCompletion,
-    processedBy: null,
-    processedDate: null,
-    evidenceOfPaymentReview: null,
-    evidenceOfCompletionReview: null
-  }
-}
-
-
 router.post('/bank-details-handler', function (req, res) {
   const accountName = req.session.data.nameOnTheAccount
   const sortCode = req.session.data.sortCode
@@ -533,7 +511,7 @@ router.post('/add-learner', function (req, res) {
         if (duplicateCheck.check) {
           res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
         } else {
-          submission.learnerId = learner.id
+          submission.learnerID = learner.id
           res.redirect('claim/claim-details?id=' + claimID + '#learner')
         }
 

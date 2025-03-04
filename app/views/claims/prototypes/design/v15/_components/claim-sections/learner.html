@@ -19,7 +19,7 @@
   {% else %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
-      Name
+      Name {% if (claim.fieldChanges.learnerId) %}<span style="color: darkgreen;"> (Edited)</span> {% endif %}
     </dt>
     <dd class="govuk-summary-list__value">
       <p class="govuk-body">{{learner.givenName}} {{learner.familyName}}</p>
