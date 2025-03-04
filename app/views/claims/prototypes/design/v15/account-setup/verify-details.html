@@ -102,9 +102,7 @@
                     Organisation address
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {% for addressLine in data.org.address %}
-                        {{addressLine}}<br>
-                    {% endfor %}
+                    {{ data.org.address[0] }}<br>  {{ data.org.address[1] }}<br> {{ data.org.address[2] }}  
                 </dd>
             </div>
         </dl>
