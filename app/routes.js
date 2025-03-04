@@ -6,8 +6,6 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const fs = require('fs');
-const { generateClaims } = require('./scripts/generate-claims.js');
-const { generateLearners } = require('./scripts/generate-learners.js');
 
 // Add your claims routes here
 router.use('/v3/', require('./views/claims/prototypes/design/v3/routes/routes.js'))
@@ -101,12 +99,5 @@ router.use((req, res, next) => {
 router.get('/getLocalData', (req, res) => {
   res.send(req.session.data)
 });
-
-//generate data
-router.get('/generate', function (req, res) {
-  generateLearners(50, 'v11');
-  generateClaims(100, 'v11');
-  res.redirect('../')
-})
 
 module.exports = router;

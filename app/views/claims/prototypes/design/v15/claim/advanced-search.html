@@ -136,7 +136,7 @@
                 href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
             <td class="govuk-table__cell">{{ claim.claimType | typeTag }}</td>
             <td class="govuk-table__cell">{{ submission.trainingCode }}</td>
-            <td class="govuk-table__cell">{{ submission.learnerId}} {{ claim.learner.familyName }}</td>
+            <td class="govuk-table__cell">{{ submission.learnerID}} {{ claim.learner.familyName }}</td>
             <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
               statusTag(data.statuses) }}</td>
           </tr>

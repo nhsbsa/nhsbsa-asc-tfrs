@@ -94,12 +94,6 @@ addFilter('potName', function (type) {
     return name
 })
 
-addFilter('checkEligible', function (learner, type, roleTypes) {
-    let eligibleRoles = []
-    eligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
-    return eligibleRoles.includes(learner.roleType)
-})
-
 addFilter('errorSummary', function (claim, submitError) {
     let errorSummaryStr = ''
 
@@ -994,8 +988,8 @@ addFilter('findTraining', (trainingCode, trainingArray, fieldChanges) => {
     return course
 })
 
-addFilter('findLearner', (learnerId, learners) => {
-    return findLearnerById(learnerId, learners)
+addFilter('findLearner', (learnerID, learners) => {
+    return findLearnerById(learnerID, learners)
 })
 
 addFilter('getRejectionNote', (submission) => {

@@ -1,7 +1,7 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims) %}
 {% set submission = claim | getMostRelevantSubmission%}
-{% set learner = submission.learnerId | findLearner(data["learners"])%}
+{% set learner = submission.learnerID | findLearner(data["learners"])%}
 {% set training = submission.trainingCode | findTraining(data.training)%}
 
 {% block pageTitle %}

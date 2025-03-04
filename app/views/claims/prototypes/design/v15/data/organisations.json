@@ -1,0 +1,390 @@
+[
+  {
+      "workplaceID": "B02944934",
+      "numberOfClaims": 100,
+      "name": "Evergreen Care home",
+      "address": ["72 Guild Street", "London", "SE23 6FH"],
+      "signatory": {
+        "active": 
+          {        
+            "givenName": "Lionel",
+            "familyName": "Lowe",
+            "email": "lionel-lowel@evergreencare.co.uk",
+            "status": "active"
+          },  
+        "inactive": [
+          {        
+            "givenName": "Windler",
+            "familyName": "Marlene",
+            "email": "marlene-windler@evergreencare.co.uk",
+            "status": "inactive"
+          },
+          {        
+            "givenName": "Reilly",
+            "familyName": "Sim",
+            "email": "sim-reilly@evergreencare.co.uk",
+            "status": "inactive"
+          }
+        ]
+      },
+      "users": {
+        "active": [
+          {
+          "givenName": "Daniel",
+          "familyName": "Jones",
+          "email": "d.jones@evergreencare.com"
+        }, 
+        {
+          "givenName": "Rachel",
+          "familyName": "Mcglee",
+          "email": "rachel.mcglee@evergreencare.com"
+        },
+        {
+          "givenName": "Flossie",
+          "familyName": "Gleason",
+          "email": "flossie.gleason@evergreencare.com"
+        }
+      ],
+        "inactive": [{
+          "givenName": "Fredrick",
+          "familyName": "Smith",
+          "email": "fredrick.smith@evergreencare.com"
+        }],
+        "invited": [{
+          "givenName": "Charlotte",
+          "familyName": "Dandy",
+          "email": "charlotte.dandy@evergreencare.com"
+        },
+        {
+          "givenName": "Abel",
+          "familyName": "Mellow",
+          "email": "abel.mellow@evergreencare.com"
+        }]
+      },
+      "bankDetails": {
+        "nameOnAccount": "Evergreen Care Home",
+        "sortCode": "272893",
+        "accountNumber": "12345678",
+        "buildingSocietyNumber": "4598329056"
+      }, 
+      "notes" : [
+        {
+          "author": "Pansy Carter",
+          "jobRole": "Processor",
+          "date": "2024-01-01T17:49:45.079Z",
+          "note": "Begun processing claim but need to double check the payment evidence with manager."
+        },
+        {
+          "author": "Pansy Carter",
+          "jobRole": "Processor",
+          "date": "2023-12-06T14:02:45.079Z",
+          "note": "Rang the organisation as SRO had not yet accepted invite. Issue was SRO hadn’t received as email entered was incorrect. Edited and reissued invite."
+        }
+      ]
+    },
+    {
+      "workplaceID": "G76904778",
+      "numberOfClaims": 0,
+      "name": "Bright Horizons Care home",
+      "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
+      "bankDetails": null,
+      "signatory": {
+        "active": 
+          {
+            "givenName": "Natasha",
+            "familyName": "Jones",
+            "email": "natasha-jones@carehome.co.uk",
+            "status": "invited"
+          },  
+        "inactive": []
+      }, 
+      "users": {
+        "active": [],
+        "inactive": [],
+        "invited": []
+      },
+      "notes" : []
+    },
+    {
+      "workplaceID": "K15904728",
+      "numberOfClaims": 0,
+      "name": "Purple Stones Care home",
+      "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
+      "bankDetails": null,
+      "signatory": {
+        "active": 
+          {        
+            "givenName": "Kayleigh",
+            "familyName": "McCleod",
+            "email": "kayleigh-mccleod@carehome.co.uk",
+            "status": "active"
+          },  
+        "inactive": []
+      }, 
+      "users": {
+        "active": [],
+        "inactive": [],
+        "invited": []
+      },
+      "notes" : []
+    },
+    {
+      "workplaceID": "D91774723",
+      "numberOfClaims": 100,
+      "name": "Pinetree Manor Care Centre",
+      "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
+      "signatory": {
+        "active" : {
+          "givenName": "Hadyn",
+          "familyName": "Lacy",
+        "email": "hadyn-lacey@pinetreecare.co.uk",
+        "status": "active"
+        },
+        "inactive": []
+      },
+      "users": {
+        "active": [{
+          "givenName": "Daniel",
+          "familyName": "Jones",
+          "email": "d.jones@pinetreecare.com"
+        },
+        {
+          "givenName": "Fredrick",
+          "familyName": "Smith",
+          "email": "fredrick.smith@pinetreecare.com"
+        }],
+        "inactive": [],
+        "invited": [{
+          "givenName": "Jack",
+          "familyName": "McPhearson",
+          "email": "jack.McPhearson@pinetreecare.com"
+        }]
+      },
+      "bankDetails": {
+        "nameOnAccount": "Pinetree Manor Care Centre",
+        "sortCode": "526788",
+        "accountNumber": "33234465",
+        "buildingSocietyNumber": "4598329056"
+      },
+      "notes" : [
+        {
+          "author": "Ellen Johnson",
+          "jobRole": "CCS Agent",
+          "date": "2023-08-11T10:38:45.079Z",
+          "note": "SRO Hadyn Lacy rang to query the bank details associated with the organisation and update."
+        },
+        {
+          "author": "Paul Barrett",
+          "jobRole": "CCS Agent",
+          "date": "2023-12-01T17:49:45.079Z",
+          "note": "Organisation inquired about the status of submitted claims and how long expected on processing times. Advised should receive a update in next 2 weeks."
+        },
+        {
+          "author": "Ellen Johnson",
+          "jobRole": "Processor",
+          "date": "2023-08-07T11:22:45.079Z",
+          "note": "Called organisation as bank details are invalid, SRO is going to double check and ring back."
+        }
+      ]
+    },
+    {
+      "workplaceID": "A89263211",
+      "numberOfClaims": 100,
+      "name": "Kingscourt Care Home",
+      "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
+      "signatory": {
+        "active": 
+          {        
+            "givenName": "Joseph",
+            "familyName": "Stephen",
+            "email": "joseph-stephen@kingscourt.co.uk",
+            "status": "active"
+          },  
+        "inactive": [
+        ]
+      },
+      "users": {
+        "active": [{
+          "givenName": "Rachel",
+          "familyName": "Mcglee",
+          "email": "rachel.mcglee@kingscourtcare.com"
+        },
+        {
+          "givenName": "MaryMcCleod",
+          "familyName": "McCleod",
+          "email": "mary.mccleod@kingscourtcare.com"
+        }],
+        "inactive": [],
+        "invited": []
+      },
+      "bankDetails": {
+        "nameOnAccount": "Kingscourt Care Home",
+        "sortCode": "123384",
+        "accountNumber": "82889922",
+        "buildingSocietyNumber": "4598329056"
+      },
+      "notes" : [
+        {
+          "author": "Kathryn McKenzie",
+          "jobRole": "CCS Agent",
+          "date": "2023-03-01T17:49:45.079Z",
+          "note": "Submitter named Rachel Mcglee rang up but failed to have pass IDCV check so could not proceed with query."
+        },
+        {
+          "author": "Francesca Surrey",
+          "jobRole": "CCS Agent",
+          "date": "2024-04-29T17:49:45.079Z",
+          "note": "Mary McCleod (submitter) rang to query rejection reason on claim reference Y6M-5DYB-TRCL-A. Referred to processor."
+        },
+        {
+          "author": "Pansy Carter",
+          "jobRole": "Processor",
+          "date": "2024-04-25T17:49:45.079Z",
+          "note": "Email sent to submitter Mary McCleod requesting additional details regarding training course provider on claim Y6M-5DYB-TRCL-A."
+        }
+      ]
+    },
+    {
+      "workplaceID": "E94744323",
+      "numberOfClaims": 100,
+      "name": "Dawnstar Care home",
+      "address": ["21 Bond Street", "London", "SE23 6FH"],
+      "signatory": {
+        "active": 
+          {        
+            "givenName": "Lionel",
+            "familyName": "Lowe",
+            "email": "lionel-lowel@evergreencare.co.uk",
+            "status": "invited"
+          },  
+        "inactive": [
+          {        
+            "givenName": "Windler",
+            "familyName": "Marlene",
+            "email": "marlene-windler@evergreencare.co.uk",
+            "status": "inactive"
+          },
+          {        
+            "givenName": "Reilly",
+            "familyName": "Sim",
+            "email": "sim-reilly@evergreencare.co.uk",
+            "status": "inactive"
+          }
+        ]
+      },
+      "users": {
+        "active": [
+          {
+          "givenName": "Daniel",
+          "familyName": "Jones",
+          "email": "d.jones@evergreencare.com"
+        }, 
+        {
+          "givenName": "Rachel",
+          "familyName": "Mcglee",
+          "email": "rachel.mcglee@evergreencare.com"
+        },
+        {
+          "givenName": "Flossie",
+          "familyName": "Gleason",
+          "email": "flossie.gleason@evergreencare.com"
+        }
+      ],
+        "inactive": [{
+          "givenName": "Fredrick",
+          "familyName": "Smith",
+          "email": "fredrick.smith@evergreencare.com"
+        }],
+        "invited": [{
+          "givenName": "Charlotte",
+          "familyName": "Dandy",
+          "email": "charlotte.dandy@evergreencare.com"
+        },
+        {
+          "givenName": "Abel",
+          "familyName": "Mellow",
+          "email": "abel.mellow@evergreencare.com"
+        }]
+      },
+      "bankDetails": {
+        "nameOnAccount": "Evergreen Care Home",
+        "sortCode": "272893",
+        "accountNumber": "12345678",
+        "buildingSocietyNumber": "4598329056"
+      }, 
+      "notes" : [
+        {
+          "author": "Pansy Carter",
+          "jobRole": "Processor",
+          "date": "2024-01-01T17:49:45.079Z",
+          "note": "Begun processing claim but need to double check the payment evidence with manager."
+        },
+        {
+          "author": "Pansy Carter",
+          "jobRole": "Processor",
+          "date": "2023-12-06T14:02:45.079Z",
+          "note": "Rang the organisation as SRO had not yet accepted invite. Issue was SRO hadn’t received as email entered was incorrect. Edited and reissued invite."
+        }
+      ]
+    },
+    {
+      "workplaceID": "G12348103",
+      "numberOfClaims": 0,
+      "name": "Bright Horizons Care home",
+      "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
+      "bankDetails": null,
+      "signatory": {
+        "active": 
+          {        
+            "givenName": "Lionel",
+            "familyName": "Lowe",
+            "email": "lionel-lowel@evergreencare.co.uk",
+            "status": "invited"
+          },  
+        "inactive": [{
+          "givenName": "Natasha",
+          "familyName": "Jones",
+          "email": "natasha-jones@carehome.co.uk",
+          "status": "inactive"
+        }]
+      }, 
+      "users": {
+        "active": [],
+        "inactive": [],
+        "invited": []
+      },
+      "notes" : []
+    },
+    {
+      "workplaceID": "K15926372",
+      "numberOfClaims": 0,
+      "name": "Purple Stones Care home",
+      "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
+      "bankDetails": null,
+      "signatory": {
+        "active": 
+        {        
+          "givenName": "Lionel",
+          "familyName": "Lowe",
+          "email": "lionel-lowel@evergreencare.co.uk",
+          "status": "invited"
+        },  
+        "inactive": [{        
+          "givenName": "Kayleigh",
+          "familyName": "McCleod",
+          "email": "kayleigh-mccleod@carehome.co.uk",
+          "status": "inactive"
+        }]
+      }, 
+      "users": {
+        "active": [],
+        "inactive": [],
+        "invited": []
+      },
+      "notes" : []
+    }
+  ]
+
+
+
+  

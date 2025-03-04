@@ -5,7 +5,7 @@
 {% for claim in data['claims'] | sortByDate(status.id) %}
     {% if claim.status == status.id %}
         {% set submission = claim | getMostRelevantSubmission%}
-        {% set learner = submission.learnerId | findLearner(data["learners"])%}
+        {% set learner = submission.learnerID | findLearner(data["learners"])%}
         {% set training = submission.trainingCode | findTraining(data.training)%}
         {% set matchCounter = matchCounter + 1 %}
         {% set hasResults=true %} 

@@ -5,7 +5,7 @@ function checkClaim(claim) {
     const result = {};
     const submission = getMostRelevantSubmission(claim)
     
-    if (submission.learnerId == null) {
+    if (submission.learnerID == null) {
         result.learner = "missing"
     } else {
         result.learner = "valid"
@@ -29,13 +29,13 @@ function checkClaim(claim) {
         result.evidenceOfPayment = "valid"
     }
 
-    if (submission.evidenceOfCompletion.length == 0 && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerId) {
+    if (submission.evidenceOfCompletion.length == 0 && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
         result.evidenceOfCompletion = "missing"
     } else {
         result.evidenceOfCompletion = "valid"
     }
 
-    if (submission.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerId) {
+    if (submission.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
         result.completionDate = "missing"
     } else {
         result.completionDate = "valid"
@@ -185,7 +185,7 @@ function checkDuplicateClaim(learnerID, trainingID, claimList) {
         for (const c of claimList) {
             let submission = getMostRelevantSubmission(c)
             if (c.learner != null && c.fundingType == "TU") {
-                if (submission.trainingCode == trainingID && submission.learnerId == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
+                if (submission.trainingCode == trainingID && submission.learnerID == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
                     result.matchType = c.claimType
                     result.check = true;
                     result.id = c.claimID

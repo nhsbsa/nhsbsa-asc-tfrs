@@ -1,6 +1,6 @@
 <{% if claim.claimType == '60' %}h3{% else %}h2{% endif %} class="govuk-heading-m" id="learner">Learner</{% if claim.claimType == '60' %}h3{% else %}h2{% endif %}>
 <dl class="govuk-summary-list">
-  {% if not submission.learnerId %}
+  {% if not submission.learnerID %}
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =="missing" %}
   <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
     <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="learner-error">
@@ -23,7 +23,7 @@
     </dt>
     <dd class="govuk-summary-list__value">
       <p class="govuk-body">{{learner.givenName}} {{learner.familyName}}</p>
-      <p class="govuk-body">{{ submission.learnerId }}</p>
+      <p class="govuk-body">{{ submission.learnerID }}</p>
     </dd>
     {% if (claim.status == "not-yet-submitted" or claim.status == "queried")%}
     <dd class="govuk-summary-list__actions">
