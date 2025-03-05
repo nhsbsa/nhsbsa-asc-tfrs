@@ -3,7 +3,7 @@
 {% set matchCounter = 0 %}
 
 {% for claim in data['claims'] | sortByDate(status.id) %}
-    {% if claim.status == status.id %}
+    {% if (claim.status == status.id) and (claim.workplaceID == data.org.workplaceID) %}
         {% set submission = claim | getMostRelevantSubmission%}
         {% set learner = submission.learnerID | findLearner(data["learners"])%}
         {% set training = submission.trainingCode | findTraining(data.training)%}

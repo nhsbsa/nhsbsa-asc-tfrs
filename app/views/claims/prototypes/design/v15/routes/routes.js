@@ -101,6 +101,7 @@ router.post('/bank-details-handler', function (req, res) {
     delete req.session.data.rollNumber
 
     if (req.session.data.journey == 'signin') {
+      req.session.data.addbankdetailsSuccess = 'true'
       res.redirect('org-admin/bank-details?tabLocation=bankDetails')
     } else {
       req.session.data.journey = 'signin'
@@ -141,7 +142,7 @@ router.post('/search_id_result', function (req, res) {
   var foundClaim = null
   for (const c of req.session.data['claims']) {
     var removeDash = c.claimID.replace(/-/g, '')
-    if (removeDash.includes(claimID)) {
+    if ((removeDash.includes(claimID) && (req.session.data.org.workplaceID == c.workplaceID)) ) {
       foundClaim = c
     }
 }
@@ -872,11 +873,8 @@ router.post('/invite-user', function (req, res) {
         familyName: familyName,
         givenName: givenName,
         email: email,
-        type: "submitter",
-        status: "pending",
-        invited: new Date()
     };
-    req.session.data.org.users.push(user)
+    req.session.data.org.users.invited.push(user)
     delete req.session.data.familyName
     delete req.session.data.givenName
     delete req.session.data.email
@@ -904,15 +902,29 @@ router.get('/reinvite-user', function (req, res) {
 
 
 router.get('/confirm-delete-user', function (req, res) {
-  var query = "registered"
-  for (const user of req.session.data.users) {
-    if (req.session.data.deletedEmail == user.email) {
-      query = user.status
-      user.status = "deleted"
-    }
+  const deletedEmail = req.session.data.deletedEmail
+  let query = null
+
+  let index = req.session.data.org.users.invited.findIndex(obj => obj['email'] === deletedEmail);
+  if (index !== -1) {
+    req.session.data.org.users.inactive.push(req.session.data.org.users.invited[index]);
+    req.session.data.org.users.invited.splice(index, 1);
+    query = 'invited'
   }
+  
+  index = req.session.data.org.users.active.findIndex(obj => obj['email'] === deletedEmail);
+  if (index !== -1) {
+    req.session.data.org.users.inactive.push(req.session.data.org.users.active[index]);
+    req.session.data.org.users.active.splice(index, 1);
+    query = 'active'
+  }
+
   delete req.session.data.invite
-  res.redirect('org-admin/manage-team?tabLocation=users&deleteSuccess=true&deletedUser=' + query)
+
+  req.session.data.deletedUser = query
+  req.session.data.deleteSuccess = 'true'
+
+  res.redirect('org-admin/manage-team?tabLocation=users')
 });
 
 router.get('/clear-learner', function (req, res) {

@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById } = require('../helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -30,10 +30,10 @@ addFilter('statusTag', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
-addFilter('claimCount', function (statusID, claims) {
+addFilter('claimCount', function (statusID, claims, workplaceID) {
     let i = 0
     for (const c of claims) {
-        if (c.status == statusID) {
+        if ((c.status == statusID && (c.workplaceID == workplaceID))) {
             i++
         }
     }
@@ -145,7 +145,8 @@ addFilter('findClaim', function (claimID, claims) {
     return claim;
 })
 
-addFilter('findUser', function (email, users) {
+addFilter('findUser', function (email, org) {
+    users = flattenUsers(org)
     let user = null;
     for (let u of users) {
         if (u.email == email) {
@@ -703,7 +704,7 @@ addFilter('formatStatus', function (status) {
     }
 })
 
-addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner, trainingCourses) {
+addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner, trainingCourses, learners, workplaceID) {
     const formattedTraining = removeSpacesAndCharactersAndLowerCase(training);
     const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
 
@@ -732,23 +733,25 @@ addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner, tra
         let learnerCheck = false;
         if (learner == "") { 
                 learnerCheck = true
-        } else if (claim.learner != null) {
-            const formattedgivenName = removeSpacesAndCharactersAndLowerCase(claim.learner.givenName);
-            const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(claim.learner.familyName);
+        } else if (submission.learner != null) {
+            learnerDetails = findLearnerById(submission.learner, learners)
+            const formattedgivenName = removeSpacesAndCharactersAndLowerCase(learnerDetails.givenName);
+            const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(learnerDetails.familyName);
             const formattedfullName = formattedgivenName + formattedfamilyName;
             const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
-            const formattedID = removeSpacesAndCharactersAndLowerCase(claim.learner.id);
+            const formattedID = removeSpacesAndCharactersAndLowerCase(learnerDetails.id);
             if (formattedfullName.includes(formattedLearner) || formattedID == formattedLearner) {
                 learnerCheck = true;
             }
         }
         let check = false
-        if ((training != "" && trainingCheck) && (learner != "" && learnerCheck)) {
+        if ((training != "" && trainingCheck) && (learner != "" && learnerCheck) && (workplaceID == claim.workplaceID)) {
             check = true
         }
-        if ((training == "" && learnerCheck) || (learner == "" && trainingCheck)) {
+        if (((training == "" && learnerCheck) || (learner == "" && trainingCheck)) && (workplaceID == claim.workplaceID)) {
             check = true
         }
+
         return check
     })
     return searched
@@ -957,16 +960,25 @@ addFilter('isSelected', function (valueArray, status) {
 });
 
 
-addFilter('userCountNotExpired', function (users) { 
-    var count = false 
-    if (users != null && users != "") {
-        for (const u of users) {
-            if (u.status != "expired" && u.status != "deleted") {
-                count += 1
-            }
-        }
+addFilter('userCountNotExpired', function (org) { 
+    let count = 0;
+
+    // Count active signatory
+    if (org.signatory?.active) {
+    count++;
     }
-    return count.toString()
+
+    // Count active users
+    if (Array.isArray(org.users?.active)) {
+    count += org.users.active.length;
+    }
+
+    // Count invited users
+    if (Array.isArray(org.users?.invited)) {
+    count += org.users.invited.length;
+    }
+
+    return count;
 });
 
 addFilter('parseInt', function(value, radix = 10) {
@@ -1002,3 +1014,7 @@ addFilter('getRejectionNote', (submission) => {
     return rejectionNote
 })
 
+
+addFilter('getReimbursementAmount', (submission, training) => {
+    return Math.min(submission.evidenceOfPaymentReview.costPerLearner, training.reimbursementAmount);
+})
