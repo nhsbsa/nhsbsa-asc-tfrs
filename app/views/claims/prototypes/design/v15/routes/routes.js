@@ -52,17 +52,14 @@ router.post('/add-training', function (req, res) {
 
   var claim = null
   for (const c of req.session.data.claims) {
-    if (req.session.data.id == c.claimID && c.status == "queried") {
+    if (req.session.data.id == c.claimID.replace(/[-\s]+/g, '') && c.workplaceID == "B02944934" && c.status == "queried") {
       claim = c
       break
     }
   }
   if (claim) {
-    if (claim.fieldChanges) {
-      claim.fieldChanges.trainingCode = trainingChoice.code 
-    } else {
-      claim.fieldChanges = { trainingCode : trainingChoice.code }
-    }
+    let draft = getMostRelevantSubmission(claim)
+    draft.trainingCode = trainingChoice.code
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
     res.redirect('claim/claim-details' + '?id=' + claim.claimID)

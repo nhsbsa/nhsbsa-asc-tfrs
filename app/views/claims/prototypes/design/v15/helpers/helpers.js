@@ -362,13 +362,9 @@ function getMostRelevantSubmission(claim) {
     return submission
 }
 
-  function findCourseByCode(code, trainingCourses, fieldChanges) {
-    let currentCode = code
-    if (fieldChanges && fieldChanges.trainingCode) {
-        currentCode = fieldChanges.trainingCode
-    }
+  function findCourseByCode(code, trainingCourses) {
     for (const group of trainingCourses) {
-      const course = group.courses.find(course => course.code == currentCode);
+      const course = group.courses.find(course => course.code == code);
       if (course) {
         return course;
       }
@@ -376,12 +372,8 @@ function getMostRelevantSubmission(claim) {
     return null;
   }
 
-  function findLearnerById(id, learners, fieldChanges) {
-    let currentId = id
-    if (fieldChanges && fieldChanges.learnerId) {
-        currentId = fieldChanges.learnerId
-    }
-      const learner = learners.find(learner => learner.id == currentId);
+  function findLearnerById(id, learners) {
+      const learner = learners.find(learner => learner.id == id);
       if (learner) {
         return learner;
       } else {
