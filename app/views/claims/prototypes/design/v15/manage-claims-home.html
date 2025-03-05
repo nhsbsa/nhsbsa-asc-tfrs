@@ -69,10 +69,10 @@ Manage claims - {{serviceName}} — GOV.UK
       <div class="govuk-notification-banner__content">
         <p class="govuk-notification-banner__heading">
           {% if data.userType == "signatory" %}
-          Your organisation can't submit claims until you, as the Senior responsible officers add your organisation's bank details to the service.
+          You can only submit claims once you, as the Senior Responsible Officer, have added your organisation's bank details to the service.
           <a class="govuk-notification-banner__link" href="./org-admin/change-bank-details">Add bank details</a>.
           {% elif data.userType == "submitter" %}
-          Your organisation can't submit claims until the Senior responsible officer adds your organisation's bank details to the service.
+          You will only be able to submit claims once your Senior Responsible Officer logs in and adds your organisation's bank details to the service. 
           {% endif %}
         </p>
       </div>
