@@ -1015,3 +1015,7 @@ addFilter('getRejectionNote', (submission) => {
     return rejectionNote
 })
 
+
+addFilter('getReimbursementAmount', (submission, training) => {
+    return Math.min(submission.evidenceOfPaymentReview.costPerLearner, training.reimbursementAmount);
+})
