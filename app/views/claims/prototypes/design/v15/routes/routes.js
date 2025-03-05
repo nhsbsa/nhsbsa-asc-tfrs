@@ -104,6 +104,7 @@ router.post('/bank-details-handler', function (req, res) {
     delete req.session.data.rollNumber
 
     if (req.session.data.journey == 'signin') {
+      req.session.data.addbankdetailsSuccess = 'true'
       res.redirect('org-admin/bank-details?tabLocation=bankDetails')
     } else {
       req.session.data.journey = 'signin'
