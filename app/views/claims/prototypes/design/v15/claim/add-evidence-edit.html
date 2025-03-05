@@ -1,6 +1,12 @@
 {% extends "../layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
-{% set submission = claim | getMostRelevantSubmission%}
+
+
+{% if (claim.status == "queried") %}
+  {% set submission = claim | getDraftSubmission %}
+{% else %}
+  {% set submission = claim | getMostRelevantSubmission%}
+{% endif %}
 
 {% if (data.type == "payment") %}
   {% set evidence = submission.evidenceOfPayment %}

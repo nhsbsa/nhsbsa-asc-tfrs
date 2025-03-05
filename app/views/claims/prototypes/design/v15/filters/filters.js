@@ -1053,12 +1053,18 @@ addFilter('checkIfUpdated', (claim, field) => {
             return true
         }
     } else if (field == "evidencePayment") {
-        // to do compare if same contents
-        if (lastQueried.evidenceOfPayment === draftClaim.evidenceOfPayment) {
-            return false
-        } else {
-            return true
+
+        if (lastQueried.evidenceOfPayment.length !== draftClaim.evidenceOfPayment.length) {
+            return true;
         }
+        lastQueried.evidenceOfPayment.sort();
+        draftClaim.evidenceOfPayment.sort();
+        for (let i = 0; i < lastQueried.length; i++) {
+            if (lastQueried[i] !== draftClaim[i]) {
+                return true;
+            }
+        }
+        return false;
     } else if (field == "completionDate") {
         // to do compare if same contents
         if (lastQueried.completionDate === draftClaim.completionDate) {
@@ -1067,11 +1073,10 @@ addFilter('checkIfUpdated', (claim, field) => {
             return true
         }
     } else if (field == "evidenceCompletion") {
-        // to do compare if same contents
-        if (lastQueried.evidenceOfCompletion === draftClaim.evidenceOfCompletion) {
-            return false
+        if (lastQueried.evidenceOfCompletion.length !== draftClaim.evidenceOfCompletion.length) {
+            return true;
         } else {
-            return true
+            return false
         }
     } else {
         return false
