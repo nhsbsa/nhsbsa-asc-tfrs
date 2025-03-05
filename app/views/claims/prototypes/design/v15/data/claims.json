@@ -1,6 +1,6 @@
 [
   {
-    "claimID": "Z1Z-F1J6-3XF7-A",
+    "claimID": "Z1Z-F1J6-3XF8-A",
     "workplaceID": "B02944934",
     "claimType": "100",
     "status": "queried",
@@ -4316,7 +4316,11 @@
         "learnerID": "BU 26 7F 00 Y",
         "startDate": "2024-07-10T07:09:13.563Z",
         "costDate": "2024-07-03T05:07:24.174Z",
-        "evidenceOfPayment": [],
+        "evidenceOfPayment": [
+          "bankStatement.pdf",
+          "invoice.pdf",
+          "receipt.pdf"
+        ],
         "completionDate": "2024-07-17T16:46:51.676Z",
         "evidenceOfCompletion": "certficate1",
         "evidenceOfPaymentReview": {

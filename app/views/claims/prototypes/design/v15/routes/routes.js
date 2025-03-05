@@ -50,13 +50,8 @@ router.post('/add-training', function (req, res) {
     }
   }
 
-  var claim = null
-  for (const c of req.session.data.claims) {
-    if (req.session.data.id == c.claimID.replace(/[-\s]+/g, '') && c.workplaceID == "B02944934" && c.status == "queried") {
-      claim = c
-      break
-    }
-  }
+  var claim = req.session.data.claims.find(c => c.claimID.replace(/[-\s]+/g, '') == req.session.data.id.replace(/[-\s]+/g, '')  && (c.workplaceID == req.session.data.org.workplaceID) && c.status == "queried");
+
   if (claim) {
     let draft = getMostRelevantSubmission(claim)
     draft.trainingCode = trainingChoice.code

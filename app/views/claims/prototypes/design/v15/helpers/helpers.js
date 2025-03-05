@@ -358,6 +358,10 @@ function getMostRelevantSubmission(claim) {
     let mostRecentNotYetSubmitted = null
 
     if (claim.submissions == null) { return [] }
+
+    if (claim.status == "queried") {
+        return claim.submissions.find(s => s.submittedDate == null);
+    }
     
     claim.submissions.forEach(submission => {
 

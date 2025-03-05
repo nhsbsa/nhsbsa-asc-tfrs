@@ -994,7 +994,6 @@ addFilter('getMostRelevantSubmission', (claim) => {
     return recentClaim
 })
 
-
 addFilter('findTraining', (trainingCode, trainingArray) => {
     return findCourseByCode(trainingCode, trainingArray)
 })
@@ -1013,7 +1012,6 @@ addFilter('getRejectionNote', (submission) => {
     }
     return rejectionNote
 })
-
 
 addFilter('getReimbursementAmount', (submission, training) => {
     return Math.min(submission.evidenceOfPaymentReview.costPerLearner, training.reimbursementAmount);

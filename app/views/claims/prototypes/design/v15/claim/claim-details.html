@@ -72,7 +72,7 @@
       {% endif %}
 
       {% if claim.status == "queried" %}
-        <h2 class="govuk-heading-s">Query note</h2>
+        <h2 class="govuk-heading-m">Query note</h2>
         {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
           <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
