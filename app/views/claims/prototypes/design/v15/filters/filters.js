@@ -1008,11 +1008,11 @@ addFilter('findLearner', (learnerID, learners) => {
 })
 
 addFilter('checkIfUpdated', (claim, field) => {
-    let draftClaim = getMostRelevantSubmission(claim)
-    let lastQueried = getDraftSubmission(claim)
+    let lastQueried = getMostRelevantSubmission(claim)
+    let draftClaim = getDraftSubmission(claim)
 
-    if (field == "training") {
-        if (draftClaim.trainingCode == lastQueried.trainingCode) {
+    if (field == "training" && draftClaim) {
+        if (lastQueried.trainingCode == draftClaim.trainingCode) {
             return false
         } else {
             return true

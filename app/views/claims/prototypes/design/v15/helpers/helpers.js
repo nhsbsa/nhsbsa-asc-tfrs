@@ -357,7 +357,6 @@ function getDraftSubmission(claim) {
     }
 }
 
-
 function getMostRelevantSubmission(claim) {
     let mostRecentProcessed = null;
     let mostRecentSubmitted = null;
