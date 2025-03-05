@@ -351,6 +351,12 @@ function emailFormat(string) {
     return emailRegex.test(string);
 }
 
+function getDraftSubmission(claim) {
+    if (claim.status == "queried") {
+        return claim.submissions.find(s => s.submittedDate == null);
+    }
+}
+
 
 function getMostRelevantSubmission(claim) {
     let mostRecentProcessed = null;
@@ -359,10 +365,6 @@ function getMostRelevantSubmission(claim) {
 
     if (claim.submissions == null) { return [] }
 
-    if (claim.status == "queried") {
-        return claim.submissions.find(s => s.submittedDate == null);
-    }
-    
     claim.submissions.forEach(submission => {
 
         if (submission.processedDate) {
@@ -425,4 +427,4 @@ function getMostRelevantSubmission(claim) {
     return users;
 }
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers }
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission }

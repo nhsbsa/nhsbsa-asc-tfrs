@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers } = require('../helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -994,6 +994,11 @@ addFilter('getMostRelevantSubmission', (claim) => {
     return recentClaim
 })
 
+addFilter('getDraftSubmission', (claim) => {
+    let recentClaim = getDraftSubmission(claim)
+    return recentClaim
+})
+
 addFilter('findTraining', (trainingCode, trainingArray) => {
     return findCourseByCode(trainingCode, trainingArray)
 })
@@ -1001,6 +1006,22 @@ addFilter('findTraining', (trainingCode, trainingArray) => {
 addFilter('findLearner', (learnerID, learners) => {
     return findLearnerById(learnerID, learners)
 })
+
+addFilter('checkIfUpdated', (claim, field) => {
+    let draftClaim = getMostRelevantSubmission(claim)
+    let lastQueried = getDraftSubmission(claim)
+
+    if (field == "training") {
+        if (draftClaim.trainingCode == lastQueried.trainingCode) {
+            return false
+        } else {
+            return true
+        }
+    } else {
+        return false
+    }
+})
+
 
 addFilter('getRejectionNote', (submission) => {
     let rejectionNote = ''

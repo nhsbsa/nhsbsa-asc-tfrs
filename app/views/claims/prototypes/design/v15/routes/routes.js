@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission } = require('../helpers/helpers.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, getDraftSubmission } = require('../helpers/helpers.js');
 const { generateClaims } = require('../helpers/generate-claims.js');
 const { generateLearners } = require('../helpers/generate-learners.js');
 
@@ -53,7 +53,7 @@ router.post('/add-training', function (req, res) {
   var claim = req.session.data.claims.find(c => c.claimID.replace(/[-\s]+/g, '') == req.session.data.id.replace(/[-\s]+/g, '')  && (c.workplaceID == req.session.data.org.workplaceID) && c.status == "queried");
 
   if (claim) {
-    let draft = getMostRelevantSubmission(claim)
+    let draft = getDraftSubmission(claim)
     draft.trainingCode = trainingChoice.code
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
