@@ -130,13 +130,41 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
   
         submission.evidenceOfCompletionReview.outcome = "pass"
   
-
   
       } else if(['queried'].includes(status)) {
         submission.evidenceOfPaymentReview.outcome = "queried"
         submission.evidenceOfPaymentReview.note = "The evidence of payment provided is not sufficient to prove you paid for the training."
-  
+
         submission.evidenceOfCompletionReview.outcome = "pass"
+
+        const submission2 =  {
+          submitter: null,
+          submittedDate: null,
+      
+          trainingCode,
+          learnerID, 
+          startDate, 
+      
+          costDate: submission.costDate,
+          evidenceOfPayment: submission.evidenceOfPayment,
+      
+          completionDate: submission.completionDate, 
+          evidenceOfCompletion: submission.evidenceOfCompletion,
+      
+          evidenceOfPaymentReview: {
+            outcome: null,
+            note: null,
+            costPerLearner: null
+          },
+          evidenceOfCompletionReview: {
+            outcome: null,
+            note: null
+          },
+          processedDate: null,
+          processedBy: null
+        }
+
+        submissions.push(submission2)
   
       }
 
@@ -232,6 +260,35 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
       submissionB.evidenceOfCompletionReview.outcome = "pass"
 
+      const submissionB2 =  {
+        submitter: null,
+        submittedDate: null,
+    
+        trainingCode,
+        learnerID, 
+        startDate, 
+    
+        costDate: submissionB.costDate,
+        evidenceOfPayment: submissionB.evidenceOfPayment,
+    
+        completionDate: submissionB.completionDate, 
+        evidenceOfCompletion: submissionB.evidenceOfCompletion,
+    
+        evidenceOfPaymentReview: {
+          outcome: null,
+          note: null,
+          costPerLearner: null
+        },
+        evidenceOfCompletionReview: {
+          outcome: null,
+          note: null
+        },
+        processedDate: null,
+        processedBy: null
+      }
+
+      submissions.submissionsB.push(submissionB2)
+
     }
 
     if (['rejected', 'approved', "queried"].includes(status)) {
@@ -241,7 +298,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
     submissions.submissionsA.push(submissionA)
     submissions.submissionsB.push(submissionB)
-    
+
   }
 
   return submissions
@@ -249,10 +306,6 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
 // Claim Generator
 function generateClaims(workplaceID) {
-  let data  = []
-  // Load pre-set claims
-  /* const preSetClaims = JSON.parse(fs.readFileSync('./data/pre-set-claims.json', 'utf8'));
-  let data = data.concat(preSetClaims) */
 
   // Load JSON files
   const training = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/v15/data/training.json', 'utf8'));
@@ -267,10 +320,28 @@ function generateClaims(workplaceID) {
     }
   }
 
+  const users = generatecreatedByList(organisation);
+
+  // Load pre-set claims
+  const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/v15/data/pre-set-claims.json', 'utf8'));
+  for (const claim of preSetClaims) {
+
+    for (const submission of claim.submissions) {
+      if (submission.submitter != null) {
+        submission.submitter = faker.helpers.arrayElement(users).email
+      }
+    }
+
+    claim.createdBy = faker.helpers.arrayElement(users).email
+    claim.workplaceID = workplaceID
+  }
+
+  let data = preSetClaims
+
    //set date references
   const policyDate = new Date('2024-04-01 '); // April 2, 2024
 
-  const users = generatecreatedByList(organisation);
+
 
   for (let i = 10; i <= organisation.numberOfClaims; i++) {
     faker.seed(i);

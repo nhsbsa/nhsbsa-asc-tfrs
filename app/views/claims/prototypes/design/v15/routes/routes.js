@@ -1018,7 +1018,9 @@ router.get('/generate', function (req, res) {
   let claims = []
   const organisations = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/v15/data/organisations.json', 'utf8'));
   for (const org of organisations) {
-    claims = claims.concat(generateClaims(org.workplaceID));
+    if (org.numberOfClaims >0) {
+      claims = claims.concat(generateClaims(org.workplaceID));
+    }
   }
   // Write data to claims.json
   const jsonFilePath = './app/views/claims/prototypes/design/v15/data/claims.json';

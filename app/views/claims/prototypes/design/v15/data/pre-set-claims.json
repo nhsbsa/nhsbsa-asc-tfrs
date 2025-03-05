@@ -1,11 +1,11 @@
 [
   {
     "claimID": "Z1Z-F1J6-3XF7-A",
-    "workplaceID": "B02944934",
+    "workplaceID": null,
     "claimType": "100",
     "status": "queried",
     "createdDate": "2023-12-31T08:55:32.615Z",
-    "createdBy": "Daniel Jones",
+    "createdBy": "d.jones@evergreencare.com",
     "notes": [
       {
         "author": "Donald Marvin (CCS Agent)",
@@ -15,10 +15,7 @@
     ],
     "submissions": [
       { 
-        "submitter": {
-          "name": "Daniel Jones",
-          "email": "d.jones@evergreencare.com"
-        },
+        "submitter": "d.jones@evergreencare.com",
         "submittedDate": "2024-04-16T12:56:10.547Z",
         "trainingCode": "DLDOC",
         "learnerID": "KZ 79 0F 13 Z",
@@ -40,10 +37,7 @@
         }
       }, 
       { 
-        "submitter": {
-          "name": "Daniel Jones",
-          "email": "d.jones@evergreencare.com"
-        },
+        "submitter": "d.jones@evergreencare.com",
         "submittedDate": "2024-04-24T11:12:10.547Z",
         "trainingCode": "DLEDI",
         "learnerID": "KZ 79 0F 13 Z",
@@ -68,11 +62,11 @@
   },
   {
     "claimID": "AB1-C12D-3XF7-A",
-    "workplaceID": "B02944934",
+    "workplaceID": null,
     "claimType": "100",
     "status": "submitted",
     "createdDate": "2023-12-31T08:55:32.615Z",
-    "createdBy": "Rachel Mcglee",
+    "createdBy": "rachel.mcglee@evergreencare.com",
     "notes": [
       {
         "author": "Donald Marvin (CCS Agent)",
@@ -83,10 +77,7 @@
 
     "submissions": [
       { 
-        "submitter": {
-          "name": "Rachel Mcglee",
-          "email": "rachel.mcglee@evergreencare.com"
-        },
+        "submitter": "d.jones@evergreencare.com",
         "submittedDate": "2024-02-11T13:56:10.547Z",
         "trainingCode": "DLDOC",
         "learnerID": "LE 09 5F 94 M",
@@ -111,11 +102,11 @@
   }, 
   {
     "claimID": "Z8S-F1J6-4GH7-A",
-    "workplaceID": "B02944934",
+    "workplaceID": null,
     "claimType": "100",
     "status": "approved",
     "createdDate": "2023-11-30T13:09:57.600Z",
-    "createdBy": "Flossie Gleason",
+    "createdBy": "rachel.mcglee@evergreencare.com",
     "notes": [
       {
         "author": "Donald Marvin (CCS Agent)",
@@ -126,10 +117,7 @@
 
     "submissions": [
       { 
-        "submitter": {
-          "name": "Daniel Jones",
-          "email": "d.jones@evergreencare.com"
-        },
+        "submitter": "d.jones@evergreencare.com",
         "submittedDate": "2023-12-16T12:56:10.547Z",
         "trainingCode": "DLDOC",
         "learnerID": "OB 78 2F 15 O",
@@ -151,10 +139,7 @@
         }
       }, 
       { 
-        "submitter": {
-          "name": "Daniel Jones",
-          "email": "d.jones@evergreencare.com"
-        },
+        "submitter": "d.jones@evergreencare.com",
         "submittedDate": "2024-02-01T12:56:10.547Z",
         "trainingCode": "DLDOC",
         "learnerID": "KZ 79 0F 13 Z",
@@ -179,19 +164,16 @@
   },
   {
     "claimID": "FJ1-E12D-3XF7-A",
-    "workplaceID": "B02944934",
+    "workplaceID": null,
     "claimType": "100",
     "status": "not-yet-submitted",
     "createdDate": "2023-12-31T08:55:32.615Z",
-    "createdBy": "Rachel Mcglee",
+    "createdBy": "rachel.mcglee@evergreencare.com",
     "notes": [],
 
     "submissions": [
       { 
-        "submitter": {
-          "name": null,
-          "email": null
-        },
+        "submitter": null,
         "submittedDate": null,
         "trainingCode": "DLDOC",
         "learnerID": "ZX 51 96 87 D",
@@ -216,19 +198,16 @@
   },
   {
     "claimID": "M8M-6WH8-TRCL-B",
-    "workplaceID": "B02944934",
+    "workplaceID": null,
     "claimType": "100",
     "status": "rejected",
     "createdDate": "2023-12-31T08:55:32.615Z",
-    "createdBy": "Rachel Mcglee",
+    "createdBy": "rachel.mcglee@evergreencare.com",
     "notes": [],
 
     "submissions": [
       { 
-        "submitter": {
-          "name": "Rachel Mcglee",
-          "email": "rachel.mcglee@evergreencare.com"
-        },
+        "submitter": "rachel.mcglee@evergreencare.com",
         "submittedDate": "2024-12-10T19:25:11.840Z",
         "trainingCode": "600/9319/5",
         "learnerID": "ZX 51 96 87 D",
@@ -253,19 +232,16 @@
   }, 
   {
     "claimID": "JS3-2DHS-TRCL-A",
-    "workplaceID": "B02944934",
+    "workplaceID": null,
     "claimType": "100",
     "status": "rejected",
     "createdDate": "2023-12-31T08:55:32.615Z",
-    "createdBy": "Rachel Mcglee",
+    "createdBy": "rachel.mcglee@evergreencare.com",
     "notes": [],
 
     "submissions": [
       { 
-        "submitter": {
-          "name": "Rachel Mcglee",
-          "email": "rachel.mcglee@evergreencare.com"
-        },
+        "submitter": "rachel.mcglee@evergreencare.com",
         "submittedDate": "2024-12-10T19:25:11.840Z",
         "trainingCode": "600/9319/5",
         "learnerID": "ZX 51 96 87 D",
