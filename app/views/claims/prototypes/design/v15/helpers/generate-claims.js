@@ -110,7 +110,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       submission.submittedDate = faker.date.between({ from: startDate, to: new Date() });
   
       submission.costDate = faker.date.between({ from: policyDate, to: startDate });
-      submission.evidenceOfPayment.concat(["bankStatement.pdf", "invoice.pdf", "receipt.pdf"]);
+      submission.evidenceOfPayment = ["bankStatement.pdf", "invoice.pdf", "receipt.pdf"];
   
       submission.evidenceOfCompletion = "certficate1";
       submission.completionDate = faker.date.between({ from: startDate, to: submission.submittedDate });
@@ -225,7 +225,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       evidenceOfPayment: submissionA.evidenceOfPayment,
   
       completionDate: faker.date.between({ from: startDate, to: submissionDateB }), 
-      evidenceOfCompletion: submissionA.evidenceOfCompletion,
+      evidenceOfCompletion: "certficate1",
   
       evidenceOfPaymentReview: {
         outcome: null,
