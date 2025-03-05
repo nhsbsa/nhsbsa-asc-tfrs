@@ -422,8 +422,13 @@ router.post('/add-start-date', function (req, res) {
     delete req.session.data['activity-date-started-month'];
     delete req.session.data['activity-date-started-year'];
     for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        let submission = getMostRelevantSubmission(c)
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        let submission = null
+        if (c.status == "queried") {
+          submission = getDraftSubmission(c)
+        } else {
+          submission = getMostRelevantSubmission(c)
+        }
         submission.startDate = startDate
       }
     }
@@ -448,8 +453,13 @@ router.post('/cost-date', function (req, res) {
 
   if (error.dateValid == true) {
     for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        let submission = getMostRelevantSubmission(c)
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        let submission = null
+        if (c.status == "queried") {
+          submission = getDraftSubmission(c)
+        } else {
+          submission = getMostRelevantSubmission(c)
+        }
         submission.costDate = costDate
       }
     }
@@ -480,8 +490,13 @@ router.post('/completion-date', function (req, res) {
 
   if (error.dateValid == true) {
     for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        let submission = getMostRelevantSubmission(c)
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        let submission = null
+        if (c.status == "queried") {
+          submission = getDraftSubmission(c)
+        } else {
+          submission = getMostRelevantSubmission(c)
+        }
         submission.completionDate = completionDate
       }
     }
@@ -535,7 +550,6 @@ router.post('/add-learner', function (req, res) {
 
 router.post('/add-evidence', function (req, res) {
   delete req.session.data.deleteSuccess
-  var radioButtonValue = req.session.data.another
   var type = req.session.data.type
   var claimID = req.session.data.id 
 
@@ -544,9 +558,13 @@ router.post('/add-evidence', function (req, res) {
   }
 
   for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      let submission = getMostRelevantSubmission(c)
-      let numberOfEvidence = submission.evidenceOfPayment.length + 1
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
       if (type == 'payment') {
         submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
       } else if (type == 'completion') {
@@ -617,7 +635,7 @@ router.post('/remove-evidence', function (req, res) {
 router.post('/save-claim', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID) ) {
       c.status = 'not-yet-submitted'
       break;
     }
@@ -691,11 +709,17 @@ router.post('/submit-claim', function (req, res) {
   const dStr = d.toISOString();
 
   for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
       if (req.session.data.confirmation) {
+        let submission = null
+        if (c.status == "queried") {
+          submission = getDraftSubmission(c)
+        } else {
+          submission = getMostRelevantSubmission(c)
+        }
         c.status = 'submitted'
-        let submission = getMostRelevantSubmission(c)
         submission.submittedDate = dStr
+        submission.submitter = "flossie.gleason@evergreencare.com"
         delete req.session.data.submitError
         req.session.data.claims = sortByCreatedDate(req.session.data.claims);
         res.redirect('claim/confirmation')

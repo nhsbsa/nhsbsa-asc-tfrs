@@ -1027,11 +1027,43 @@ addFilter('checkIfUpdated', (claim, field) => {
         } else {
             return true
         }
+    } else if (field == "startDate") {
+        if (lastQueried.startDate == draftClaim.startDate) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "costDate") {
+        if (lastQueried.costDate == draftClaim.costDate) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "evidencePayment") {
+        // to do compare if same contents
+        if (lastQueried.evidenceOfPayment === draftClaim.evidenceOfPayment) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "completionDate") {
+        // to do compare if same contents
+        if (lastQueried.completionDate === draftClaim.completionDate) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "evidenceCompletion") {
+        // to do compare if same contents
+        if (lastQueried.evidenceOfCompletion === draftClaim.evidenceOfCompletion) {
+            return false
+        } else {
+            return true
+        }
     } else {
         return false
     }
 })
-
 
 addFilter('getRejectionNote', (submission) => {
     let rejectionNote = ''
