@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById } = require('../helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -145,7 +145,8 @@ addFilter('findClaim', function (claimID, claims) {
     return claim;
 })
 
-addFilter('findUser', function (email, users) {
+addFilter('findUser', function (email, org) {
+    users = flattenUsers(org)
     let user = null;
     for (let u of users) {
         if (u.email == email) {
@@ -959,16 +960,25 @@ addFilter('isSelected', function (valueArray, status) {
 });
 
 
-addFilter('userCountNotExpired', function (users) { 
-    var count = false 
-    if (users != null && users != "") {
-        for (const u of users) {
-            if (u.status != "expired" && u.status != "deleted") {
-                count += 1
-            }
-        }
+addFilter('userCountNotExpired', function (org) { 
+    let count = 0;
+
+    // Count active signatory
+    if (org.signatory?.active) {
+    count++;
     }
-    return count.toString()
+
+    // Count active users
+    if (Array.isArray(org.users?.active)) {
+    count += org.users.active.length;
+    }
+
+    // Count invited users
+    if (Array.isArray(org.users?.invited)) {
+    count += org.users.invited.length;
+    }
+
+    return count;
 });
 
 addFilter('parseInt', function(value, radix = 10) {

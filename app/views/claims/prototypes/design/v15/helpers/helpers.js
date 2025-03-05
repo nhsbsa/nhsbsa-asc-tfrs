@@ -293,7 +293,26 @@ function loadJSONFromFile(fileName, path = 'app/data/') {
     return JSON.parse(jsonFile) // Return JSON as object
   }
 
-  function checkUserForm(familyName, givenName, email, users) {
+function emailExists(data, email) {
+    // Check signatory active
+    if (data.signatory?.active?.email === email) {
+        return true;
+    }
+    
+    // Check users active
+    if (data.users?.active?.some(user => user.email === email)) {
+        return true;
+    }
+    
+    // Check users invited
+    if (data.users?.invited?.some(user => user.email === email)) {
+        return true;
+    }
+    
+    return false;
+}
+
+function checkUserForm(familyName, givenName, email, org) {
     const result = {};
 
     if (familyName == "" || familyName === undefined || familyName == null ) {
@@ -308,12 +327,8 @@ function loadJSONFromFile(fileName, path = 'app/data/') {
         result.givenName = "valid"
     }
 
-    let emailMatch = false
-    for (const user of users) {
-        if (user.email == email) {
-            emailMatch = true
-        }
-    }
+    const emailMatch = emailExists(org, email)
+
 
     if (email == "" || email === undefined || email == null ) {
         result.email = "missing"
@@ -389,4 +404,29 @@ function getMostRelevantSubmission(claim) {
       }
   }
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById }
+  function flattenUsers(data) {
+    let users = [];
+  
+    // Flatten signatory
+    if (data.signatory) {
+      if (data.signatory.active) {
+        users.push({ ...data.signatory.active });
+      }
+      if (Array.isArray(data.signatory.inactive)) {
+        users = users.concat(data.signatory.inactive);
+      }
+    }
+  
+    // Flatten users
+    if (data.users) {
+      Object.values(data.users).forEach(userGroup => {
+        if (Array.isArray(userGroup)) {
+          users = users.concat(userGroup);
+        }
+      });
+    }
+  
+    return users;
+}
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers }
