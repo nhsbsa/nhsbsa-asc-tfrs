@@ -570,7 +570,7 @@ router.post('/add-evidence', function (req, res) {
       if (type == 'payment') {
         submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
       } else if (type == 'completion') {
-        submission.evidenceOfCompletion = ('certificate' + (submission.evidenceOfCompletion.length + 1) + '.pdf')
+        submission.evidenceOfCompletion = ('certificate.pdf')
       }
       break;
     }
