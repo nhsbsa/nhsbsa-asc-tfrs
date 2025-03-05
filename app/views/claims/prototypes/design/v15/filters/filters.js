@@ -30,10 +30,10 @@ addFilter('statusTag', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
-addFilter('claimCount', function (statusID, claims) {
+addFilter('claimCount', function (statusID, claims, workplaceID) {
     let i = 0
     for (const c of claims) {
-        if (c.status == statusID) {
+        if ((c.status == statusID && (c.workplaceID == workplaceID))) {
             i++
         }
     }
@@ -703,7 +703,7 @@ addFilter('formatStatus', function (status) {
     }
 })
 
-addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner, trainingCourses) {
+addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner, trainingCourses, learners, workplaceID) {
     const formattedTraining = removeSpacesAndCharactersAndLowerCase(training);
     const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
 
@@ -732,23 +732,25 @@ addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner, tra
         let learnerCheck = false;
         if (learner == "") { 
                 learnerCheck = true
-        } else if (claim.learner != null) {
-            const formattedgivenName = removeSpacesAndCharactersAndLowerCase(claim.learner.givenName);
-            const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(claim.learner.familyName);
+        } else if (submission.learner != null) {
+            learnerDetails = findLearnerById(submission.learner, learners)
+            const formattedgivenName = removeSpacesAndCharactersAndLowerCase(learnerDetails.givenName);
+            const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(learnerDetails.familyName);
             const formattedfullName = formattedgivenName + formattedfamilyName;
             const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
-            const formattedID = removeSpacesAndCharactersAndLowerCase(claim.learner.id);
+            const formattedID = removeSpacesAndCharactersAndLowerCase(learnerDetails.id);
             if (formattedfullName.includes(formattedLearner) || formattedID == formattedLearner) {
                 learnerCheck = true;
             }
         }
         let check = false
-        if ((training != "" && trainingCheck) && (learner != "" && learnerCheck)) {
+        if ((training != "" && trainingCheck) && (learner != "" && learnerCheck) && (workplaceID == claim.workplaceID)) {
             check = true
         }
-        if ((training == "" && learnerCheck) || (learner == "" && trainingCheck)) {
+        if (((training == "" && learnerCheck) || (learner == "" && trainingCheck)) && (workplaceID == claim.workplaceID)) {
             check = true
         }
+
         return check
     })
     return searched

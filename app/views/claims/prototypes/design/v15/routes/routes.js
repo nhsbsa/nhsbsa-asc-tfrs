@@ -144,7 +144,7 @@ router.post('/search_id_result', function (req, res) {
   var foundClaim = null
   for (const c of req.session.data['claims']) {
     var removeDash = c.claimID.replace(/-/g, '')
-    if (removeDash.includes(claimID)) {
+    if ((removeDash.includes(claimID) && (req.session.data.org.workplaceID == c.workplaceID)) ) {
       foundClaim = c
     }
 }
