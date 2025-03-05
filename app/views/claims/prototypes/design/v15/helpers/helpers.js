@@ -426,4 +426,43 @@ function getMostRelevantSubmission(claim) {
     return users;
 }
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission }
+function sortClaimsByStatusSubmission(claims, dateType) {
+
+    // Sort the claims based on the most recent submission date
+    claims.sort((a, b) => {
+        // Find the most recent submission for each claim
+        const latestA = a.submissions.reduce((latest, submission) => {
+            return new Date(submission[dateType]) > new Date(latest[dateType]) ? submission : latest;
+        }, a.submissions[0]);
+
+        const latestB = b.submissions.reduce((latest, submission) => {
+            return new Date(submission[dateType]) > new Date(latest[dateType]) ? submission : latest;
+        }, b.submissions[0]);
+
+        // Compare the most recent submission dates
+        return new Date(latestB[dateType]) - new Date(latestA[dateType]);
+    });
+
+    return claims;
+}
+
+function sortClaimsByMostProcessedSubmission(claims) {
+    // Sort the claims based on the most recent submission date
+    claims.sort((a, b) => {
+        // Find the most recent submission for each claim
+        const latestA = a.submissions.reduce((latest, submission) => {
+            return new Date(submission.processedDate) > new Date(latest.processedDate) ? submission : latest;
+        }, a.submissions[0]);
+
+        const latestB = b.submissions.reduce((latest, submission) => {
+            return new Date(submission.processedDate) > new Date(latest.processedDate) ? submission : latest;
+        }, b.submissions[0]);
+
+        // Compare the most recent submission dates
+        return new Date(latestB.processedDate) - new Date(latestA.processedDate);
+    });
+
+    return claims;
+}
+
+module.exports = { sortClaimsByMostProcessedSubmission, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission }

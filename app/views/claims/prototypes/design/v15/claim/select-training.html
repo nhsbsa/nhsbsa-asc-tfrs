@@ -34,7 +34,7 @@
             </div>
         </div>
         {% endif %}
-        {% if (claim.status == "queried") %}
+        {% if ( claim != null ) %}
             <span class="govuk-caption-l">Queried claim</span>
         {% else %}
             <span class="govuk-caption-l">New claim</span>

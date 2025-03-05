@@ -49,8 +49,10 @@ router.post('/add-training', function (req, res) {
       }
     }
   }
-
-  var claim = req.session.data.claims.find(c => c.claimID.replace(/[-\s]+/g, '') == req.session.data.id.replace(/[-\s]+/g, '')  && (c.workplaceID == req.session.data.org.workplaceID) && c.status == "queried");
+  var claim = null
+  if (req.session.data.id) {
+    claim = req.session.data.claims.find(c => c.claimID.replace(/[-\s]+/g, '') == req.session.data.id.replace(/[-\s]+/g, '')  && (c.workplaceID == req.session.data.org.workplaceID) && c.status == "queried");
+  }
 
   if (claim) {
     let draft = getDraftSubmission(claim)

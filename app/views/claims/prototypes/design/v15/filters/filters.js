@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission } = require('../helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortClaimsByMostProcessedSubmission } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -135,14 +135,19 @@ addFilter('errorSummary', function (claim, submitError) {
 
 addFilter('findClaim', function (claimID, claims, workplaceID) {
     let claim = null;
-    var searchedClaimID = claimID.replace(/[-\s]+/g, '');
-    for (let c of claims) {
-        var removeSuffix = c.claimID.replace(/[-\s]+/g, '');
-        if (removeSuffix.includes(searchedClaimID) && c.workplaceID == workplaceID) {
-            claim = c
+    if (claimID) {
+        var searchedClaimID = claimID.replace(/[-\s]+/g, '');
+        for (let c of claims) {
+            var removeSuffix = c.claimID.replace(/[-\s]+/g, '');
+            if (removeSuffix.includes(searchedClaimID) && c.workplaceID == workplaceID) {
+                claim = c
+            }
         }
+        return claim;
+    } else {
+        return null
     }
-    return claim;
+
 })
 
 addFilter('findUser', function (email, org) {
@@ -406,8 +411,15 @@ addFilter('learnerSearch', function (search, learner) {
 })
 
 addFilter('trainingSearch', function (search, training, claim) {
-    let match = false
-    if (claim.status == "queried" && ((training.fundingModel == "full" && claim.claimType == "100") || (training.type == "split" && claim.claimType != "100"))) {
+    let match = false 
+    let s = false
+    if (claim == null) {
+        s = true
+    } else {
+        s = claim.status == "queried" && ((training.fundingModel == "full" && claim.claimType == "100") || (training.type == "split" && claim.claimType != "100"))
+    }
+
+    if (s) {
         const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
         const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
         const formattedTrainingCode = removeSpacesAndCharactersAndLowerCase(training.code);
@@ -493,11 +505,13 @@ addFilter('sortByDate', function (claims, statusID) {
     if (statusID == 'not-yet-submitted') {
         return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
     } else if (statusID == 'submitted') {
-        return claims.sort((a, b) => new Date(b.submittedDate) - new Date(a.submittedDate));
+        return sortClaimsByStatusSubmission(claims, 'submittedDate')
+    } else if (statusID == 'queried') {
+        return sortClaimsByStatusSubmission(claims, 'processedDate')
     } else if (statusID == 'rejected') {
-        return claims.sort((a, b) => new Date(b.rejectedDate) - new Date(a.rejectedDate));
+        return sortClaimsByStatusSubmission(claims, 'processedDate')
     } else if (statusID == 'approved') {
-        return claims.sort((a, b) => new Date(b.approvedDate) - new Date(a.approvedDate));
+        return sortClaimsByStatusSubmission(claims, 'processedDate')
     } else {
         return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
     }
@@ -512,7 +526,6 @@ addFilter('userType', function (type) {
         case "submitter":
         return "Submitter"
         break;
-
     }
 })
 

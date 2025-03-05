@@ -4,7 +4,11 @@
 
 {% for claim in data['claims'] | sortByDate(status.id) %}
     {% if (claim.status == status.id) and (claim.workplaceID == data.org.workplaceID) %}
-        {% set submission = claim | getMostRelevantSubmission%}
+        {% if (claim.status == "queried") %}
+            {% set submission = claim | getDraftSubmission %}
+        {% else %}
+            {% set submission = claim | getMostRelevantSubmission %}
+        {% endif %}
         {% set learner = submission.learnerID | findLearner(data["learners"])%}
         {% set training = submission.trainingCode | findTraining(data.training)%}
         {% set matchCounter = matchCounter + 1 %}
@@ -36,7 +40,8 @@
                 <td class="govuk-table__cell">{{ claim.createdDate |
                     govukDate("truncate") }}</td>
                 {% elif status.id == 'queried' %}
-                <td class="govuk-table__cell">{{ submission.processedDate |
+                    {% set queriedDate = claim | getMostRelevantSubmission %}
+                <td class="govuk-table__cell">{{ queriedDate.processedDate |
                     govukDate("truncate") }}</td>
                 {% elif status.id == 'submitted' %}
                 <td class="govuk-table__cell">{{ submission.submittedDate |
