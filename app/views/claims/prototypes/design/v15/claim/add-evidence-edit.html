@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim(data.claims) %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 {% set submission = claim | getMostRelevantSubmission%}
 
 {% if (data.type == "payment") %}

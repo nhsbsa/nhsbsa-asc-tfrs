@@ -497,9 +497,10 @@ router.post('/completion-date', function (req, res) {
 
 router.post('/add-learner', function (req, res) {
   var claimID = req.session.data.id
+  var learner = null
   for (const l of req.session.data.learners) {
     if (req.session.data.learnerSelection == l.id) {
-      var learner = l
+      learner = l
       break;
     }
   }
@@ -514,8 +515,13 @@ router.post('/add-learner', function (req, res) {
   delete req.session.data.nationalInsuranceNumber
 
   for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      let submission = getMostRelevantSubmission(c)
+    if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
         duplicateCheck = checkDuplicateClaim(learner.id, submission.trainingCode, req.session.data.claims);
         if (duplicateCheck.check) {
           res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)

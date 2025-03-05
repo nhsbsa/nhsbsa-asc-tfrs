@@ -133,12 +133,12 @@ addFilter('errorSummary', function (claim, submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true })
 
-addFilter('findClaim', function (claimID, claims) {
+addFilter('findClaim', function (claimID, claims, workplaceID) {
     let claim = null;
     var searchedClaimID = claimID.replace(/[-\s]+/g, '');
     for (let c of claims) {
         var removeSuffix = c.claimID.replace(/[-\s]+/g, '');
-        if (removeSuffix.includes(searchedClaimID)) {
+        if (removeSuffix.includes(searchedClaimID) && c.workplaceID == workplaceID) {
             claim = c
         }
     }
@@ -1011,8 +1011,18 @@ addFilter('checkIfUpdated', (claim, field) => {
     let lastQueried = getMostRelevantSubmission(claim)
     let draftClaim = getDraftSubmission(claim)
 
-    if (field == "training" && draftClaim) {
+    if (draftClaim == null) {
+        return false
+    }
+
+    if (field == "training") {
         if (lastQueried.trainingCode == draftClaim.trainingCode) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "learner") {
+        if (lastQueried.learnerID == draftClaim.learnerID) {
             return false
         } else {
             return true
