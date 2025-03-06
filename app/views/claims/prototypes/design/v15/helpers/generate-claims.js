@@ -214,8 +214,8 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
     const submissionDateB = faker.date.between({ from: submissionA.processedDate, to: new Date() });
 
     const submissionB =  {
-      submitter: faker.helpers.arrayElement(users).email,
-      submittedDate: submissionDateB,
+      submitter: null,
+      submittedDate: null,
   
       trainingCode,
       learnerID, 
@@ -224,8 +224,8 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       costDate: submissionA.costDate,
       evidenceOfPayment: submissionA.evidenceOfPayment,
   
-      completionDate: faker.date.between({ from: startDate, to: submissionDateB }), 
-      evidenceOfCompletion: "certficate1",
+      completionDate: null, 
+      evidenceOfCompletion: null,
   
       evidenceOfPaymentReview: {
         outcome: submissionA.evidenceOfPaymentReview.outcome,
@@ -238,6 +238,14 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       },
       processedDate: null,
       processedBy: null
+    }
+
+    if (['submitted', 'rejected', 'approved', "queried"].includes(status)) {
+      submissionB.submitter = faker.helpers.arrayElement(users).email;
+      submissionB.submittedDate = submissionDateB;
+  
+      submissionB.evidenceOfCompletion = "certficate1";
+      submissionB.completionDate =  faker.date.between({ from: startDate, to: submissionDateB });
     }
 
     if (['rejected'].includes(status)) {
@@ -356,7 +364,13 @@ function generateClaims(workplaceID) {
     const trainingGroup = faker.helpers.arrayElement(training)
     const trainingItem = faker.helpers.arrayElement(trainingGroup.courses);
 
-    if (trainingItem.fundingModel == "full" || (['not-yet-submitted'].includes(status) && trainingItem.fundingModel == "split" )) {
+    //if it is a 60/40 eligible training and not yet submitted claim, randomly decide whether the 60 or 40 part is not yet submitted or queried.
+    let randomBoolean = false
+    if ((['not-yet-submitted', 'queried'].includes(status) && trainingItem.fundingModel == "split" )) {
+      randomBoolean = Math.random() < 0.5
+    }
+
+    if (trainingItem.fundingModel == "full" || randomBoolean) {
 
       if (trainingItem.fundingModel == "full") {
         claimID = claimID + "-A"
