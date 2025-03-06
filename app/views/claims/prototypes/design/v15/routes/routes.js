@@ -299,8 +299,6 @@ function newClaim(req, input, type) {
     claim.claimID = generateUniqueID() + "-B",
     claim.claimType = "60"
   }
-  
-  console.log(claim)
 
   req.session.data.claims.push(claim)
   //reset seed
