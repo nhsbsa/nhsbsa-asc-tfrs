@@ -964,6 +964,14 @@ router.get('/clear-learner', function (req, res) {
   }
 });
 
+router.get('/showNote', function (req, res) {
+  req.session.data['showNote'] = "query"
+});
+
+router.get('/hideNote', function (req, res) {
+  req.session.data['showNote'] = null
+});
+
 router.get('/confirm-delete-claim', function (req, res) {
   var claimID = req.session.data.id
   var claims = req.session.data.claims

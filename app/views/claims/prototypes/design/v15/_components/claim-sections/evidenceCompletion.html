@@ -44,7 +44,7 @@
   {% endif %}
   <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture')%} govuk-summary-key--error {% endif %}">
-      Completion date {% if ( claim | checkIfUpdated("completionDate")) %}<strong class="govuk-tag">updated</strong> {% endif %}
+      Completion date {% if ( claim | checkIfUpdated("completionDate")) %}<p>(updated)</p>{% endif %}
     </dt>
     <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-value--error {% endif %}">
       {% if claim.claimType == "100" %}
@@ -84,7 +84,7 @@
   {% else %}
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">
-        Evidence of completion </br>{% if ( claim | checkIfUpdated("evidenceCompletion")) %}<strong class="govuk-tag">updated</strong> {% endif %}
+        Evidence of completion </br>{% if ( claim | checkIfUpdated("evidenceCompletion")) %}<p>(updated)</p> {% endif %}
       </dt>
       <dd class="govuk-summary-list__value">
         {% if claim.claimType == "100" %}
