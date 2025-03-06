@@ -1,4 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 
 {% block pageTitle %}
 {% if (data["training-input"] == "" or data["training-input"].length < 3) %}Error: {% endif %}What course or qualification are you claiming for? — {{serviceName}} — GOV.UK
@@ -33,7 +34,11 @@
             </div>
         </div>
         {% endif %}
-        <span class="govuk-caption-l">New claim</span>
+        {% if ( claim != null ) %}
+            <span class="govuk-caption-l">Queried claim</span>
+        {% else %}
+            <span class="govuk-caption-l">New claim</span>
+        {% endif %}
         <h1 class="govuk-heading-l">What course or qualification are you claiming for?</h1>
     </div>
 </div>
@@ -88,8 +93,7 @@
                 {% set addHeader = true %}
 
                 {% for training in trainingGroup.courses %}
-                    {% set match = data['training-input'] | trainingSearch(training) %}
-
+                    {% set match = data['training-input'] | trainingSearch(training, claim) %}
                     {% if match %}
                         {% set hasResults = true %}
 

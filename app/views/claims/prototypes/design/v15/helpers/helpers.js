@@ -3,46 +3,47 @@ const fs = require('fs');
 function checkClaim(claim) {
 
     const result = {};
+    const submission = getMostRelevantSubmission(claim)
     
-    if (claim.learner == null) {
+    if (submission.learnerID == null) {
         result.learner = "missing"
     } else {
         result.learner = "valid"
     }
 
-    if (claim.startDate == null && ( claim.fundingType == "TU") ) {
+    if (submission.startDate == null) {
         result.startDate = "missing"
     } else {
         result.startDate = "valid"
     }
 
-    if (claim.costDate == null && ! claim.claimType != "40") {
+    if (submission.costDate == null && ! claim.claimType != "40") {
         result.paymentDate = "missing"
     } else {
         result.paymentDate = "valid"
     }
 
-    if (claim.evidenceOfPayment.length == 0 && claim.claimType != "40") {
+    if (submission.evidenceOfPayment.length == 0 && claim.claimType != "40") {
         result.evidenceOfPayment = "missing"
     } else {
         result.evidenceOfPayment = "valid"
     }
 
-    if (claim.evidenceOfCompletion.length == 0 && (claim.claimType == "40" || claim.claimType == "100") && claim.learner) {
+    if (submission.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
         result.evidenceOfCompletion = "missing"
     } else {
         result.evidenceOfCompletion = "valid"
     }
 
-    if (claim.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && claim.learner) {
+    if (submission.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
         result.completionDate = "missing"
     } else {
         result.completionDate = "valid"
     }
 
     if (result.completionDate == "valid" && result.startDate == "valid") {
-        const startDate = new Date(claim.startDate)
-        const completionDate = new Date(claim.completionDate)
+        const startDate = new Date(submission.startDate)
+        const completionDate = new Date(submission.completionDate)
         const currentDate = new Date()
         if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
             result.startDate = "invalid"
@@ -181,10 +182,10 @@ function checkDuplicateClaim(learnerID, trainingID, claimList) {
     let result = {}
     result.check = false
     result.id = ''
-
         for (const c of claimList) {
+            let submission = getMostRelevantSubmission(c)
             if (c.learner != null && c.fundingType == "TU") {
-                if (c.training.code == trainingID && c.learner.id == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
+                if (submission.trainingCode == trainingID && submission.learnerID == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
                     result.matchType = c.claimType
                     result.check = true;
                     result.id = c.claimID
@@ -292,7 +293,26 @@ function loadJSONFromFile(fileName, path = 'app/data/') {
     return JSON.parse(jsonFile) // Return JSON as object
   }
 
-  function checkUserForm(familyName, givenName, email, users) {
+function emailExists(data, email) {
+    // Check signatory active
+    if (data.signatory?.active?.email === email) {
+        return true;
+    }
+    
+    // Check users active
+    if (data.users?.active?.some(user => user.email === email)) {
+        return true;
+    }
+    
+    // Check users invited
+    if (data.users?.invited?.some(user => user.email === email)) {
+        return true;
+    }
+    
+    return false;
+}
+
+function checkUserForm(familyName, givenName, email, org) {
     const result = {};
 
     if (familyName == "" || familyName === undefined || familyName == null ) {
@@ -307,12 +327,8 @@ function loadJSONFromFile(fileName, path = 'app/data/') {
         result.givenName = "valid"
     }
 
-    let emailMatch = false
-    for (const user of users) {
-        if (user.email == email) {
-            emailMatch = true
-        }
-    }
+    const emailMatch = emailExists(org, email)
+
 
     if (email == "" || email === undefined || email == null ) {
         result.email = "missing"
@@ -335,5 +351,134 @@ function emailFormat(string) {
     return emailRegex.test(string);
 }
 
+function getDraftSubmission(claim) {
+    if (claim.status == "queried") {
+        return claim.submissions.find(s => s.submittedDate == null);
+    }
+}
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm }
+function getMostRelevantSubmission(claim) {
+    let mostRecentProcessed = null;
+    let mostRecentSubmitted = null;
+    let mostRecentNotYetSubmitted = null
+
+    if (claim.submissions == null) { return [] }
+
+    claim.submissions.forEach(submission => {
+
+        if (submission.processedDate) {
+            if (!mostRecentProcessed || new Date(submission.processedDate) > new Date(mostRecentProcessed.processedDate)) {
+                mostRecentProcessed = submission;
+            }
+        } else if (submission.submittedDate) {
+            if (!mostRecentSubmitted || new Date(submission.submittedDate) > new Date(mostRecentSubmitted.submittedDate)) {
+                mostRecentSubmitted = submission;
+            }
+        } else {
+            mostRecentNotYetSubmitted = submission
+        }
+    });
+    let submission = mostRecentProcessed || mostRecentSubmitted || mostRecentNotYetSubmitted;
+    return submission
+}
+
+  function findCourseByCode(code, trainingCourses) {
+    for (const group of trainingCourses) {
+      const course = group.courses.find(course => course.code == code);
+      if (course) {
+        return course;
+      }
+    }
+    return null;
+  }
+
+  function findLearnerById(id, learners) {
+      const learner = learners.find(learner => learner.id == id);
+      if (learner) {
+        return learner;
+      } else {
+        return null;
+      }
+  }
+
+  function flattenUsers(data) {
+    let users = [];
+  
+    // Flatten signatory
+    if (data.signatory) {
+      if (data.signatory.active) {
+        users.push({ ...data.signatory.active });
+      }
+      if (Array.isArray(data.signatory.inactive)) {
+        users = users.concat(data.signatory.inactive);
+      }
+    }
+  
+    // Flatten users
+    if (data.users) {
+      Object.values(data.users).forEach(userGroup => {
+        if (Array.isArray(userGroup)) {
+          users = users.concat(userGroup);
+        }
+      });
+    }
+  
+    return users;
+}
+
+function sortClaimsByStatusSubmission(claims, dateType) {
+    // Sort the claims based on the most recent submission date
+    claims.sort((a, b) => {
+        // Ensure there is a submission array and the dateType exists
+        const getLatestSubmission = (claim) => {
+            // Ensure the submissions array is not empty
+            if (!claim.submissions || claim.submissions.length === 0) {
+                return null;
+            }
+
+            // Find the most recent submission for a claim based on the dateType
+            return claim.submissions.reduce((latest, submission) => {
+                const submissionDate = submission[dateType];
+                // If dateType doesn't exist or submissionDate is invalid, skip this submission
+                if (!submissionDate) {
+                    return latest;
+                }
+                return new Date(submissionDate) > new Date(latest[dateType]) ? submission : latest;
+            }, claim.submissions[0]);
+        };
+
+        // Get the most recent submission for both claims
+        const latestA = getLatestSubmission(a);
+        const latestB = getLatestSubmission(b);
+
+        // If either claim has no valid submission, consider it as older
+        if (!latestA) return 1; // treat `a` as older if no submission
+        if (!latestB) return -1; // treat `b` as older if no submission
+
+        // Compare the most recent submission dates
+        return new Date(latestB[dateType]) - new Date(latestA[dateType]);
+    });
+
+    return claims;
+}
+
+function sortSubmissionsByDate(submissions, dateType) {
+    // Ensure that the claim has a submissions array and it's not empty
+    if (!submissions || submissions.length === 0) {
+        return submissions; // Return the claim as is if no submissions exist
+    }
+
+    // Sort the submissions array based on the dateType
+    submissions.sort((a, b) => {
+        const dateA = new Date(a[dateType]);
+        const dateB = new Date(b[dateType]);
+
+        // Sort in descending order (most recent first)
+        return dateB - dateA;
+    });
+
+    return submissions; // Return the claim with sorted submissions
+}
+
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate }

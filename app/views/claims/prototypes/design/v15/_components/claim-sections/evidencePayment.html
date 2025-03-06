@@ -1,7 +1,7 @@
 <{% if claim.claimType == '60' %}h3{% else %}h2{% endif %} class="govuk-heading-m" id="payment">Payment for activity</{% if claim.claimType == '60' %}h3{% else %}h2{% endif %}>
 <dl class="govuk-summary-list">
 
-  {% if not claim.costDate %}
+  {% if not submission.costDate %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =="missing" %}
     <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
       <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
@@ -20,12 +20,12 @@
   {% else %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
-      Payment date
+      Payment date {% if ( claim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">updated</strong> {% endif %}
     </dt>
     <dd class="govuk-summary-list__value">
-      {{ claim.costDate | govukDate }}
+      {{ submission.costDate | govukDate }}
     </dd>
-    {% if (claim.status == "new" or claim.status == "not-yet-submitted") and claim.claimType != "40" %}
+    {% if (claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType != "40" %}
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">
           payment date</span></a>
@@ -34,7 +34,7 @@
   </div>
   {% endif %}
 
-  {% if ( claim.evidenceOfPayment | getCount == 0 ) %}
+  {% if ( submission.evidenceOfPayment | getCount == 0 ) %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =="missing" %}
       <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
         <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-evidence-error">
@@ -53,14 +53,14 @@
   {% else %}
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">
-        Evidence of payment
+        Evidence of payment {% if ( claim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag">updated</strong> {% endif %}
       </dt>
       <dd class="govuk-summary-list__value">
-        {% for payment in claim.evidenceOfPayment %}
+        {% for payment in submission.evidenceOfPayment %}
          <p><a class="govuk-link" href="/public/images/{{payment}}" target="_blank">{{payment}} (opens in new tab)</a></p>
         {% endfor %}
       </dd>
-      {% if (claim.status == "new" or claim.status == "not-yet-submitted") %}
+      {% if (claim.status == "queried" or claim.status == "not-yet-submitted") %}
         <dd class="govuk-summary-list__actions">
           <ul class="govuk-summary-list__actions-list">
             <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
