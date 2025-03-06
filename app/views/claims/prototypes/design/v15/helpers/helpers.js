@@ -362,6 +362,8 @@ function getMostRelevantSubmission(claim) {
     let mostRecentSubmitted = null;
     let mostRecentNotYetSubmitted = null
 
+    console.log(claim.submission)
+
     if (claim.submissions == null) { return [] }
 
     claim.submissions.forEach(submission => {
