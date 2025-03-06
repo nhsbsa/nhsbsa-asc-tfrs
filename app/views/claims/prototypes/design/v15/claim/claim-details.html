@@ -8,21 +8,30 @@
   {% set claim = pairClaim.claimID | findPair(data.claims) %}
 {% endif %}
 
-{% if (claim.status == "queried") %}
-  {% set submission = claim | getDraftSubmission %}
+{% if claim.claimType == "60" %}  
 
-  {% if claim.claimType == "60" %}
-    {% set pairSubmission = pairClaim | getDraftSubmission %}
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
   {% endif %}
-
-{% else %}
-  {% set submission = claim | getMostRelevantSubmission %}
-
-  {% if claim.claimType == "60" %}
+  {% if (pairClaim.status == "queried") %}
+    {% set pairSubmission = pairClaim | getDraftSubmission %}
+  {% else %}
     {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
   {% endif %}
 
+{% else %}
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+
 {% endif %}
+
+
 
 {% set learner = submission.learnerID | findLearner(data["learners"]) %}
 
