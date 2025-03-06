@@ -15,7 +15,7 @@
         <p class="moj-timeline__date">
           <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
         </p>
-        <a href="#" class="govuk-link">View claim</a>
+        <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
       </div>
     </div>
 
@@ -27,9 +27,8 @@
           <p class="moj-timeline__date">
             <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
           </p>
-          <a href="../view-note" class="govuk-link">View query note</a>
+          <a href="/showHistoryNote?noteType=query&submittedDate={{submission.submittedDate}}" class="govuk-link">View query note</a>
         </div>
-
       </div>
 
       <div class="moj-timeline__item">
@@ -39,9 +38,8 @@
           <p class="moj-timeline__date">
             <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
           </p>
-          <a href="#" class="govuk-link">View claim</a>
+          <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
         </div>
-
       </div>
 
       {% elif submission.evidenceOfPaymentReview.outcome == "pass" and submission.evidenceOfCompletionReview.outcome == "pass"  %} 
@@ -62,7 +60,7 @@
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
-            <a href="#" class="govuk-link">View claim</a>
+            <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
           </div>
 
         </div>
@@ -76,7 +74,7 @@
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
             </p>
-            <a href="#" class="govuk-link">View rejection note</a>
+            <a href="/showHistoryNote?noteType=rejection&submittedDate={{submission.submittedDate}}" class="govuk-link">View rejection note</a>
           </div>
           
         </div>
@@ -88,7 +86,7 @@
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
-            <a href="#" class="govuk-link">View claim</a>
+            <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
           </div>
         </div>
 

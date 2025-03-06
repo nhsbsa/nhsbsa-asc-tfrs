@@ -3,7 +3,7 @@
 <dl class="govuk-summary-list">
   <div class="govuk-summary-list__row  {% if claim.status != "queried" %} govuk-summary-list__row--no-actions {% endif%}">
     <dt class="govuk-summary-list__key">
-      Name {% if ( claim | checkIfUpdated("training")) %}<strong class="govuk-tag">updated</strong> {% endif %}
+      Name {% if ( claim | checkIfUpdated("training")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
     </dt>
     <dd class="govuk-summary-list__value">
       {% set training = submission.trainingCode | findTraining(data.training) %}
@@ -17,7 +17,7 @@
         <p class="govuk-body">{{training.awardingOrganisation}}</p>
       {% endif %}
     </dd>
-    {% if claim.status == "queried" and claim.claimType != 40 %}
+    {% if claim.status == "queried" and claim.claimType != 40 and not data.showNote %}
       <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='inFuture' %} govuk-summary-value--error {% endif %}">
         <a class="govuk-link govuk-link--no-visited-state" href="select-training">Change<span class="govuk-visually-hidden">
             activity start date</span></a>
@@ -43,7 +43,7 @@
   </div>
   {% else %}
   
-    {% if (claim.status == "not-yet-submitted") or (claim.status == "queried") %}
+    {% if (claim.status == "not-yet-submitted") or (claim.status == "queried") and not data.showNote %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate == "inFuture" %}
     <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
       <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
@@ -53,7 +53,7 @@
     {% endif %}
     <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='inFuture' %} govuk-summary-list-row--error {% endif %}">
       <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='inFuture' %} govuk-summary-key--error {% endif %}">
-        Start date {% if ( claim | checkIfUpdated("startDate")) %}<strong class="govuk-tag">updated</strong> {% endif %}
+        Start date {% if ( claim | checkIfUpdated("startDate")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
       </dt>
       <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='inFuture' %} govuk-summary-value--error {% endif %}">
         {{ submission.startDate | govukDate }}

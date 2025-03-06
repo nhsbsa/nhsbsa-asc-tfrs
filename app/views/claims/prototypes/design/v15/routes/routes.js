@@ -723,7 +723,6 @@ router.post('/submit-claim', function (req, res) {
         submission.submittedDate = dStr
         submission.submitter = "flossie.gleason@evergreencare.com"
         delete req.session.data.submitError
-        req.session.data.claims = sortByCreatedDate(req.session.data.claims);
         res.redirect('claim/confirmation')
       } else {
         res.redirect('claim/declaration?submitError=true')
@@ -960,6 +959,29 @@ router.get('/clear-learner', function (req, res) {
     if (claimID == c.claimID) {
       c.learner = null
       res.redirect('claim/claim-details' + '?id=' + claimID)
+    }
+  }
+});
+
+router.get('/showHistoryNote', function (req, res) {
+  req.session.data['showNote'] = req.session.data['noteType']
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claims/prototypes/design/v15/claim/claim-details' + '?id=' + claimID)
+    }
+  }
+});
+
+router.get('/hideNote', function (req, res) {
+  req.session.data['showNote'] = null
+  req.session.data['noteType'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claims/prototypes/design/v15/claim/claim-details' + '?id=' + claimID)
     }
   }
 });

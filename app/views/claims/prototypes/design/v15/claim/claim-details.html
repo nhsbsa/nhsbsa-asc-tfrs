@@ -195,5 +195,11 @@
       <p class="govuk-body"><a href="../guidance/tu-evidence-requirements" class="govuk-link">Help with evidence requirements</a></p>
 
   </div>
+
+  {% if data.showNote %}
+    {% include "../_components/claim-sections/view-note.html" %}
+  {% endif %}
+
+
 </div>
 {% endblock %}

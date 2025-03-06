@@ -150,6 +150,11 @@ addFilter('findClaim', function (claimID, claims, workplaceID) {
 
 })
 
+addFilter('findSubmissionByDate', function (submissions, submittedDate) {
+    const submission = submissions.find(s => s.submittedDate == submittedDate);
+    return submission
+})
+
 addFilter('findUser', function (email, org) {
     users = flattenUsers(org)
     let user = null;
