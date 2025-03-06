@@ -1,6 +1,6 @@
 
 {% if data.showNote == "query" %}
-{% set submission = claim.submissions | findSubmissionByDate(data.submissionDate) %}
+{% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
 <div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
   <div>
       <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Query note</h1>
@@ -17,7 +17,7 @@
   </div>
 </div>
 {% elif data.showNote == "rejection" %}
-{% set submission = claim.submissions | findSubmissionByDate(data.submissionDate) %}
+{% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
 <div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
   <div>
     <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Rejection note</h1>
@@ -32,7 +32,7 @@
 </div>
 </div>
 {% elif data.showNote == "claim" %}
-{% set submission = claim.submissions | findSubmissionByDate(data.submissionDate) %}
+{% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
 <div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
   <div>
       <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Claim</h1>

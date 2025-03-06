@@ -15,8 +15,8 @@
         <p class="moj-timeline__date">
           <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
         </p>
-      <div class="moj-timeline__description">The 40 part of your claim is being reviewed by a member of our processing staff.</div>
-      <a href="/showHistoryNote" class="govuk-link">View claim</a>  
+      <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+
     </div>
     </div>
 
@@ -28,9 +28,7 @@
           <p class="moj-timeline__date">
             <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
           </p>
-          <div class="moj-timeline__description">The 40 part of your claim has been queried.</div>
-          <a href="/showHistoryNote" class="govuk-link">View query note</a>
-          
+          <a href="/showHistoryNote?noteType=query&submittedDate={{submission.submittedDate}}" class="govuk-link">View query note</a>
 
         </div>
 
@@ -43,8 +41,8 @@
           <p class="moj-timeline__date">
             <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
           </p>
-          <div class="moj-timeline__description">The 40 part of your claim is being reviewed by a member of our processing staff.</div>
-          <a href="/showHistoryNote" class="govuk-link">View claim</a>
+          <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+
         </div>
 
       </div>
@@ -67,8 +65,8 @@
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
-            <div class="moj-timeline__description">The 40 part of your claim is being reviewed by a member of our processing staff.</div>
-            <a href="/showHistoryNote" class="govuk-link">View claim</a>
+            <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+
           </div>
 
         </div>
@@ -82,8 +80,7 @@
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
             </p>
-            <div class="moj-timeline__description">The 40 part of your claim has been rejected.</div>
-            <a href="/showHistoryNote" class="govuk-link">View rejection note</a>
+            <a href="/showHistoryNote?noteType=rejection&submittedDate={{submission.submittedDate}}" class="govuk-link">View rejection note</a>
           </div>
           
         </div>
@@ -95,8 +92,8 @@
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
-            <div class="moj-timeline__description">The 40 part of your claim is being reviewed by a member of our processing staff.</div>
-            <a href="/showHistoryNote" class="govuk-link">View claim</a>
+            <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+
           </div>
         </div>
 
@@ -117,8 +114,8 @@
         <p class="moj-timeline__date">
           <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
         </p>
-        <div class="moj-timeline__description">The 60 part of your claim is being reviewed by a member of our processing staff.</div>
-        <a href="/showHistoryNote" class="govuk-link">View claim</a>
+        <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+
       </div>
     </div>
 
@@ -130,8 +127,7 @@
           <p class="moj-timeline__date">
             <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
           </p>
-          <div class="moj-timeline__description">The 40 part of your claim has been queried.</div>
-          <a href="/showHistoryNote" class="govuk-link">View query note</a>
+          <a href="/showHistoryNote?noteType=query&submittedDate={{submission.submittedDate}}" class="govuk-link">View query note</a>
         </div>
 
       </div>
@@ -143,8 +139,8 @@
           <p class="moj-timeline__date">
             <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
           </p>
-          <div class="moj-timeline__description">The 60 part of your claim is being reviewed by a member of our processing staff.</div>
-          <a href="/showHistoryNote" class="govuk-link">View claim</a>
+          <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+
         </div>
 
       </div>
@@ -167,8 +163,8 @@
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
-            <div class="moj-timeline__description">The 60 part of your claim is being reviewed by a member of our processing staff.</div>
-            <a href="/showHistoryNote" class="govuk-link">View claim</a>
+            <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+
           </div>
 
         </div>
@@ -182,8 +178,7 @@
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
             </p>
-            <div class="moj-timeline__description">The 60 part of your claim has been rejected.</div>
-            <a href="/showHistoryNote" class="govuk-link">View rejection note</a>
+            <a href="/showHistoryNote?noteType=rejection&submittedDate={{submission.submittedDate}}" class="govuk-link">View rejection note</a>
           </div>
           
         </div>
@@ -195,8 +190,8 @@
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
-            <div class="moj-timeline__description">The 60 part of your claim is being reviewed by a member of our processing staff.</div>
-            <a href="/showHistoryNote" class="govuk-link">View claim</a>
+            <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+
           </div>
         </div>
 

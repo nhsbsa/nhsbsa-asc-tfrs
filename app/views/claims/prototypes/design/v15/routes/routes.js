@@ -964,26 +964,23 @@ router.get('/clear-learner', function (req, res) {
 });
 
 router.get('/showHistoryNote', function (req, res) {
-  let type = req.session.data['noteType']
-  req.session.data['showNote'] = type
-  req.session.data['submissionDate'] = req.session.data['submittedDate']
+  req.session.data['showNote'] = req.session.data['noteType']
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      c.learner = null
       res.redirect('claims/prototypes/design/v15/claim/claim-details' + '?id=' + claimID)
     }
   }
 });
-// http://localhost:3002/claims/prototypes/design/v15/claim/claim-details?id=6WI-WV4K-9QH1-A&deleteSuccess=&showNote=claimSubmission
 
 router.get('/hideNote', function (req, res) {
   req.session.data['showNote'] = null
   req.session.data['noteType'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      c.learner = null
       res.redirect('claims/prototypes/design/v15/claim/claim-details' + '?id=' + claimID)
     }
   }
