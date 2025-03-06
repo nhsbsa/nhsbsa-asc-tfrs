@@ -1,12 +1,10 @@
-
-
 {% if data.showNote == "query" %}
 <div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
   <div>
       <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Query note</h1>
       <p class="govuk-body"><strong>Evidence of payment: </strong>The evidence of payment provided is not sufficient to prove you paid for the training.</p>
       <div class="govuk-button-group">
-          <button id="" class="govuk-button">Close</button>
+          <a href="/hideNote?noteType=" class="govuk-link govuk-button" >Close</a>
       </div>
   </div>
 </div>

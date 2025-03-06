@@ -965,10 +965,25 @@ router.get('/clear-learner', function (req, res) {
 
 router.get('/showHistoryNote', function (req, res) {
   req.session.data['showNote'] = "query"
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      c.learner = null
+      res.redirect('claims/prototypes/design/v15/claim/claim-details' + '?id=' + claimID)
+    }
+  }
 });
+// http://localhost:3002/claims/prototypes/design/v15/claim/claim-details?id=6WI-WV4K-9QH1-A&deleteSuccess=&showNote=claimSubmission
 
 router.get('/hideNote', function (req, res) {
   req.session.data['showNote'] = null
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      c.learner = null
+      res.redirect('claims/prototypes/design/v15/claim/claim-details' + '?id=' + claimID)
+    }
+  }
 });
 
 router.get('/confirm-delete-claim', function (req, res) {
