@@ -758,8 +758,8 @@ addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner, tra
         let learnerCheck = false;
         if (learner == "") { 
                 learnerCheck = true
-        } else if (submission.learner != null) {
-            learnerDetails = findLearnerById(submission.learner, learners)
+        } else if (submission.learnerID != null) {
+            learnerDetails = findLearnerById(submission.learnerID, learners)
             const formattedgivenName = removeSpacesAndCharactersAndLowerCase(learnerDetails.givenName);
             const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(learnerDetails.familyName);
             const formattedfullName = formattedgivenName + formattedfamilyName;
