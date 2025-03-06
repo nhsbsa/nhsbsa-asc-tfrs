@@ -15,7 +15,7 @@
   {% else %}
     {% set submission = claim | getMostRelevantSubmission %}
   {% endif %}
-  {% if (pairClaim.status == "queried") %}
+  {% if (pairClaim and pairClaim.status == "queried") %}
     {% set pairSubmission = pairClaim | getDraftSubmission %}
   {% else %}
     {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
