@@ -723,7 +723,6 @@ router.post('/submit-claim', function (req, res) {
         submission.submittedDate = dStr
         submission.submitter = "flossie.gleason@evergreencare.com"
         delete req.session.data.submitError
-        req.session.data.claims = sortByCreatedDate(req.session.data.claims);
         res.redirect('claim/confirmation')
       } else {
         res.redirect('claim/declaration?submitError=true')
@@ -964,7 +963,7 @@ router.get('/clear-learner', function (req, res) {
   }
 });
 
-router.get('/showNote', function (req, res) {
+router.get('/showHistoryNote', function (req, res) {
   req.session.data['showNote'] = "query"
 });
 
