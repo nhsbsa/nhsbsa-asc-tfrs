@@ -32,6 +32,7 @@
 </div>
 </div>
 {% elif data.showNote == "claim" %}
+{% set submission = claim.submissions | findSubmissionByDate(data.submissionDate) %}
 <div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
   <div>
       <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Claim</h1>

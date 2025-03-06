@@ -968,8 +968,8 @@ router.get('/showHistoryNote', function (req, res) {
   req.session.data['showNote'] = type
   req.session.data['submissionDate'] = req.session.data['submittedDate']
   var claimID = req.session.data.id
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
       c.learner = null
       res.redirect('claims/prototypes/design/v15/claim/claim-details' + '?id=' + claimID)
     }
@@ -982,7 +982,7 @@ router.get('/hideNote', function (req, res) {
   req.session.data['noteType'] = null
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
       c.learner = null
       res.redirect('claims/prototypes/design/v15/claim/claim-details' + '?id=' + claimID)
     }
