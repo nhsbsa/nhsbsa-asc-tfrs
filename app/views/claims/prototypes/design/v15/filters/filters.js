@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate } = require('../helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findPair } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -481,16 +481,7 @@ addFilter('trainingTypeCheck', function (trainingCode, trainingList, matchType) 
 })
 
 addFilter('findPair', function (claimID, claims) {
-
-    for (let claim of claims) {
-        const id = claim.claimID;
-        // Check if the ID is not the same as the existing ID and
-        // if the first part of the ID (excluding the last 2 characters) matches the existing ID
-        if (id !== claimID && id.slice(0, -2) === claimID.slice(0, -2)) {
-            return claim;
-        }
-    }
-    return null; // Return null if no match is found
+    return findPair(claimID, claims)
 })
 
 addFilter('typeTag', function (type) {

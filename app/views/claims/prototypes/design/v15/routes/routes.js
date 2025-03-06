@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, getDraftSubmission } = require('../helpers/helpers.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair } = require('../helpers/helpers.js');
 const { generateClaims } = require('../helpers/generate-claims.js');
 const { generateLearners } = require('../helpers/generate-learners.js');
 
@@ -642,24 +642,69 @@ router.post('/submit-claim', function (req, res) {
   const d = new Date()
   const dStr = d.toISOString();
 
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
-      if (req.session.data.confirmation) {
-        let submission = null
-        if (c.status == "queried") {
-          submission = getDraftSubmission(c)
-        } else {
-          submission = getMostRelevantSubmission(c)
+  let hundredClaim = null
+
+  let sixtyClaim = null
+  let fourtyClaim = null
+
+  if (req.session.data.confirmation == null) {
+    res.redirect('claim/declaration?submitError=true')
+  } else {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
+        if (c.claimType == "100") {
+          hundredClaim = c
+        } else if (c.claimType == "60") {
+          sixtyClaim = c
+        } else if (c.claimType == "40") {
+          fourtyClaim = c
         }
-        c.status = 'submitted'
-        submission.submittedDate = dStr
-        submission.submitter = "flossie.gleason@evergreencare.com"
-        delete req.session.data.submitError
-        res.redirect('claim/confirmation')
-      } else {
-        res.redirect('claim/declaration?submitError=true')
       }
     }
+
+    if (sixtyClaim) {
+      fourtyClaim = findPair(sixtyClaim.claimID, req.session.data.claims)
+    } else if (fourtyClaim) {
+      sixtyClaim = findPair(fourtyClaim.claimID, req.session.data.claims)
+    }
+
+    let submission = null
+
+    if (hundredClaim && hundredClaim.status == "queried") {
+      submission = getDraftSubmission(hundredClaim)
+      hundredClaim.status = 'submitted'
+    } else if (hundredClaim) {
+      submission = getMostRelevantSubmission(hundredClaim)
+      hundredClaim.status = 'submitted'
+    }
+
+    if (sixtyClaim && fourtyClaim == null) {
+      if (sixtyClaim.status == "queried") {
+        submission = getDraftSubmission(sixtyClaim)
+        sixtyClaim.status = 'submitted'
+      } else {
+        submission = getMostRelevantSubmission(sixtyClaim)
+        sixtyClaim.status = 'submitted'
+      }
+    }
+
+    if (fourtyClaim) {
+      if (fourtyClaim.status == "queried") {
+        submission = getDraftSubmission(fourtyClaim)
+        fourtyClaim.status = 'submitted'
+      } else {
+        submission = getMostRelevantSubmission(fourtyClaim)
+        fourtyClaim.status = 'submitted'
+      }
+    }
+
+
+    submission.submittedDate = dStr
+    submission.submitter = "flossie.gleason@evergreencare.com"
+    delete req.session.data.submitError
+    res.redirect('claim/confirmation')
+
+
   }
 });
 

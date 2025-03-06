@@ -34,16 +34,25 @@
 {% elif data.showNote == "claim" %}
 {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
 
-      {# {% include "./claim-history-claim-view.html" %} #}
-
       <div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
         <div>
             <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Claim</h1>
       
-            {% include "./training.html" %}
-            {% include "./learner.html" %}
-            {% include "./evidencePayment.html" %}
-            {% include "./evidenceCompletion.html" %}
+            {% if claim.claimType == "100" or claim.claimType == "60" %}
+              {% include "./training.html" %}
+            {% endif %}
+
+            {% if claim.claimType == "100" or claim.claimType == "60" %}
+              {% include "./learner.html" %}
+            {% endif %}
+
+            {% if claim.claimType == "100" or claim.claimType == "60" %}
+              {% include "./evidencePayment.html" %}
+            {% endif %}
+
+            {% if claim.claimType == "100" or pairClaim.claimType == "40" %}
+              {% include "./evidenceCompletion.html" %}
+            {% endif %}
       
             <a href="/hideNote" class="govuk-link govuk-button" >Close</a>
       

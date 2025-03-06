@@ -11,7 +11,7 @@
     <div class="moj-timeline__item">
       <div class="moj-timeline__header">
         <h3 class="moj-timeline__title">40 claim submitted</h3>
-        <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+        <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
         <p class="moj-timeline__date">
           <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
         </p>
@@ -37,7 +37,7 @@
       <div class="moj-timeline__item">
         <div class="moj-timeline__header">
           <h3 class="moj-timeline__title">40 claim submitted</h3>
-          <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+          <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
           <p class="moj-timeline__date">
             <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
           </p>
@@ -61,7 +61,7 @@
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title">40 claim submitted</h3>
-            <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+            <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
@@ -88,7 +88,7 @@
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title">40 claim submitted</h3>
-            <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+            <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
@@ -110,7 +110,7 @@
     <div class="moj-timeline__item">
       <div class="moj-timeline__header">
         <h3 class="moj-timeline__title">60 claim submitted</h3>
-        <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+        <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
         <p class="moj-timeline__date">
           <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
         </p>
@@ -135,7 +135,7 @@
       <div class="moj-timeline__item">
         <div class="moj-timeline__header">
           <h3 class="moj-timeline__title">60 claim submitted</h3>
-          <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+          <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
           <p class="moj-timeline__date">
             <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
           </p>
@@ -159,7 +159,7 @@
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title">60 claim submitted</h3>
-            <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+            <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
@@ -186,7 +186,7 @@
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title">60 claim submitted</h3>
-            <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+            <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>

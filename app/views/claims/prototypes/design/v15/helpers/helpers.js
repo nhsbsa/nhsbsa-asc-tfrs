@@ -480,5 +480,17 @@ function sortSubmissionsByDate(submissions, dateType) {
     return submissions; // Return the claim with sorted submissions
 }
 
+function findPair(claimID, claims){
+    for (let claim of claims) {
+        const id = claim.claimID;
+        // Check if the ID is not the same as the existing ID and
+        // if the first part of the ID (excluding the last 2 characters) matches the existing ID
+        if (id !== claimID && id.slice(0, -2) === claimID.slice(0, -2)) {
+            return claim;
+        }
+    }
+    return null; // Return null if no match is found
+}
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate }
+
+module.exports = { findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate }
