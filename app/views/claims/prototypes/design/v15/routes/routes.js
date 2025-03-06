@@ -964,7 +964,8 @@ router.get('/clear-learner', function (req, res) {
 });
 
 router.get('/showHistoryNote', function (req, res) {
-  req.session.data['showNote'] = "query"
+  let type = req.session.data['noteType']
+  req.session.data['showNote'] = type
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {

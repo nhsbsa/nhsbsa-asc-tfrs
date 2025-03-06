@@ -3,9 +3,8 @@
   <div>
       <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Query note</h1>
       <p class="govuk-body"><strong>Evidence of payment: </strong>The evidence of payment provided is not sufficient to prove you paid for the training.</p>
-      <div class="govuk-button-group">
-          <a href="/hideNote?noteType=" class="govuk-link govuk-button" >Close</a>
-      </div>
+      <a href="/hideNote?noteType=" class="govuk-link govuk-button" >Close</a>
+
   </div>
 </div>
 {% elif data.showNote == "rejection" %}
@@ -13,12 +12,11 @@
   <div>
     <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Rejection note</h1>
     <p class="govuk-body"><strong>Evidence of payment: </strong>The learner is ineligible.</p>
-    <div class="govuk-button-group">
-        <button id="" class="govuk-button">Close</button>
-    </div>
+    <a href="/hideNote?noteType=" class="govuk-link govuk-button" >Close</a>
+
 </div>
 </div>
-{% elif data.showNote == "claimSubmission" %}
+{% elif data.showNote == "claim" %}
 <div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
   <div>
       <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Claim</h1>
@@ -28,9 +26,8 @@
       {% include "./evidencePayment.html" %}
       {% include "./evidenceCompletion.html" %}
 
-      <div class="govuk-button-group">
-          <button id="" class="govuk-button">Close</button>
-      </div>
+      <a href="/hideNote?noteType=" class="govuk-link govuk-button" >Close</a>
+
   </div>
 </div>
 {% endif %}
