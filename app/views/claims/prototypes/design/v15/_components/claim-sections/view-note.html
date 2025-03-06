@@ -33,19 +33,24 @@
 </div>
 {% elif data.showNote == "claim" %}
 {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
-<div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
-  <div>
-      <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Claim</h1>
 
-      {% include "./training.html" %}
-      {% include "./learner.html" %}
-      {% include "./evidencePayment.html" %}
-      {% include "./evidenceCompletion.html" %}
+      {% include "./claim-history-claim-view.html" %}
+{# 
+      <div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
+        <div>
+            <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Claim</h1>
+      
+            {% include "./training.html" %}
+            {% include "./learner.html" %}
+            {% include "./evidencePayment.html" %}
+            {% include "./evidenceCompletion.html" %}
+      
+            <a href="/hideNote" class="govuk-link govuk-button" >Close</a>
+      
+        </div>
+      </div>
+       #}
 
-      <a href="/hideNote" class="govuk-link govuk-button" >Close</a>
-
-  </div>
-</div>
 {% endif %}
 
 <div id="hmrc-timeout-overlay" class="hmrc-timeout-overlay"></div>
