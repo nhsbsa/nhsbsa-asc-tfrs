@@ -59,7 +59,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "Training name needs to match the name on the invoice provided",
-          "costPerLearner": "100"
+          "costPerLearner": 100
         },
         "evidenceOfCompletionReview": {
           "outcome": "pass",
@@ -197,7 +197,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
-          "costPerLearner": "120.99"
+          "costPerLearner": 120.99
         },
         "evidenceOfCompletionReview": {
           "outcome": "pass",
@@ -5250,7 +5250,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "Training name needs to match the name on the invoice provided",
-          "costPerLearner": "100"
+          "costPerLearner": 100
         },
         "evidenceOfCompletionReview": {
           "outcome": "pass",
@@ -5362,7 +5362,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
-          "costPerLearner": "120.99"
+          "costPerLearner": 120.99
         },
         "evidenceOfCompletionReview": {
           "outcome": "pass",
@@ -10216,7 +10216,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "Training name needs to match the name on the invoice provided",
-          "costPerLearner": "100"
+          "costPerLearner": 100
         },
         "evidenceOfCompletionReview": {
           "outcome": "pass",
@@ -10328,7 +10328,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
-          "costPerLearner": "120.99"
+          "costPerLearner": 120.99
         },
         "evidenceOfCompletionReview": {
           "outcome": "pass",
@@ -15334,7 +15334,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "Training name needs to match the name on the invoice provided",
-          "costPerLearner": "100"
+          "costPerLearner": 100
         },
         "evidenceOfCompletionReview": {
           "outcome": "pass",
@@ -15446,7 +15446,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
-          "costPerLearner": "120.99"
+          "costPerLearner": 120.99
         },
         "evidenceOfCompletionReview": {
           "outcome": "pass",

@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortClaimsByMostProcessedSubmission } = require('../helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -516,6 +516,13 @@ addFilter('sortByDate', function (claims, statusID) {
         return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
     }
 })
+
+addFilter('orderByMostRecent', function (claims) {
+    let sorted = sortSubmissionsByDate(claims, 'submittedDate')
+    return sorted
+})
+
+
 
 addFilter('userType', function (type) {
     switch(type) {

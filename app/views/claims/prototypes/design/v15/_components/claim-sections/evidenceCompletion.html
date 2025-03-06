@@ -1,6 +1,6 @@
 <{% if claim.claimType == '60' %}h3{% else %}h2{% endif %} class="govuk-heading-m" id="completion">Training completion by learner</{% if claim.claimType == '60' %}h3{% else %}h2{% endif %}>
 {% if not submission.learnerID and claim.claimType == "100" %}
-<p class="govuk-body"><span class="govuk-caption-m">Add a learner to this claim before filling in this section.</span></p>
+  <p class="govuk-body"><span class="govuk-caption-m">Add a learner to this claim before filling in this section.</span></p>
 {% endif %}
 <dl class="govuk-summary-list">
   {% if (not submission.completionDate and claim.claimType == "100") or (pairClaim != null and not pairClaim.completionDate) or (claim.claimType == "60" and claim.status != "approved") %}
@@ -18,10 +18,10 @@
           Completion date
         </dt>
         <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-value--error {% endif %}">
-          {% if (submission.learnerID and claim.claimType != "60") or pairClaim != null %}
-          <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date">Add completion date</a>
+          {% if (submission.completionDate and claim.claimType != "60") or pairClaim != null %}
+            <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date">Add completion date</a>
           {% else %}
-          <span class="govuk-caption-m">Cannot start yet</span>
+            <span class="govuk-caption-m">Cannot start yet</span>
           {% endif %}
         </dd>
       </div>
