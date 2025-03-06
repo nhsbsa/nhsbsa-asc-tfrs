@@ -245,7 +245,7 @@ router.post('/split-decision-handler', function (req, res) {
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
     delete req.session.data.splitDecision;
-
+    console.log(trainingChoice)
     const claimID = newClaim(req, trainingChoice, "60")
     res.redirect('claim/claim-details' + '?id=' + claimID)
 
@@ -255,76 +255,51 @@ router.post('/split-decision-handler', function (req, res) {
 });
 
 function newClaim(req, input, type) {
-  let claim = {};
   const d = new Date();
   const dStr = d.toISOString();
   faker.seed(req.session.data.claims.length + 1);
+
+  let claim = {
+    claimID: null,
+    workplaceID: req.session.data.org.workplaceID,
+    claimType: null,
+    status: "not-yet-submitted",
+    createdDate: dStr,
+    createdBy: "Test Participant",
+    notes: null,
+    submissions: [{
+      submitter: null,
+      submittedDate: null,
+      trainingCode: input.code,
+      learnerID: null,
+      startDate: null,
+      costDate: null,
+      completionDate: null,
+      evidenceOfPayment: [],
+      evidenceOfCompletion: null,
+      processedBy: null,
+      processedDate: null,
+      evidenceOfPaymentReview: {
+        outcome: null,
+        note: null,
+        costPerLearner: null
+      },
+      evidenceOfCompletionReview: {
+        outcome: null,
+        note: null
+      }
+    }]
+  };
+
+
   if (type == "100") {
-    claim = {
-      claimID: generateUniqueID() + "-A",
-      workplaceID: req.session.data.org.workplaceID,
-      claimType: "100",
-      status: "not-yet-submitted",
-      createdDate: dStr,
-      createdBy: "Test Participant",
-      notes: null,
-      submissions: [{
-      	submitter: null,
-      	submittedDate: null,
-      	trainingCode: input.code,
-      	learnerID: null,
-      	startDate: null,
-      	costDate: null,
-      	completionDate: null,
-      	evidenceOfPayment: [],
-      	evidenceOfCompletion: null,
-      	processedBy: null,
-      	processedDate: null,
-      	evidenceOfPaymentReview: {
-          outcome: null,
-          note: null,
-          costPerLearner: null
-        },
-      	evidenceOfCompletionReview: {
-          outcome: null,
-          note: null
-        }
-      }]
-    };
+    claim.claimID = generateUniqueID() + "-A",
+    claim.claimType = "100"
   } else if (type == "60") {
-    claim = {
-      claimID: generateUniqueID() + "-B",
-      workplaceID: req.session.data.org.workplaceID,
-      claimType: "60",
-      status: "not-yet-submitted",
-      createdDate: dStr,
-      createdBy: "Test Participant",
-      notes: null,
-      submissions: [{
-      	submitter: null,
-      	submittedDate: null,
-      	trainingCode: input.code,
-      	learnerID: null,
-      	startDate: null,
-      	paidDate: null,
-      	costDate: null,
-      	completionDate: null,
-      	evidenceOfPayment: [],
-      	evidenceOfCompletion: null,
-      	processedBy: null,
-      	processedDate: null,
-      	evidenceOfPaymentReview: {
-          outcome: null,
-          note: null,
-          costPerLearner: null
-        },
-      	evidenceOfCompletionReview: {
-          outcome: null,
-          note: null
-        }
-      }]
-    };
+    claim.claimID = generateUniqueID() + "-B",
+    claim.claimType = "60"
   }
+  
   console.log(claim)
 
   req.session.data.claims.push(claim)
