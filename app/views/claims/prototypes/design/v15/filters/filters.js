@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers } = require('../helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -133,16 +133,21 @@ addFilter('errorSummary', function (claim, submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true })
 
-addFilter('findClaim', function (claimID, claims) {
+addFilter('findClaim', function (claimID, claims, workplaceID) {
     let claim = null;
-    var searchedClaimID = claimID.replace(/[-\s]+/g, '');
-    for (let c of claims) {
-        var removeSuffix = c.claimID.replace(/[-\s]+/g, '');
-        if (removeSuffix.includes(searchedClaimID)) {
-            claim = c
+    if (claimID) {
+        var searchedClaimID = claimID.replace(/[-\s]+/g, '');
+        for (let c of claims) {
+            var removeSuffix = c.claimID.replace(/[-\s]+/g, '');
+            if (removeSuffix.includes(searchedClaimID) && c.workplaceID == workplaceID) {
+                claim = c
+            }
         }
+        return claim;
+    } else {
+        return null
     }
-    return claim;
+
 })
 
 addFilter('findUser', function (email, org) {
@@ -406,8 +411,15 @@ addFilter('learnerSearch', function (search, learner) {
 })
 
 addFilter('trainingSearch', function (search, training, claim) {
-    let match = false
-    if (claim.status == "queried" && ((training.fundingModel == "full" && claim.claimType == "100") || (training.type == "split" && claim.claimType != "100"))) {
+    let match = false 
+    let s = false
+    if (claim == null) {
+        s = true
+    } else {
+        s = claim.status == "queried" && ((training.fundingModel == "full" && claim.claimType == "100") || (training.type == "split" && claim.claimType != "100"))
+    }
+
+    if (s) {
         const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
         const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
         const formattedTrainingCode = removeSpacesAndCharactersAndLowerCase(training.code);
@@ -493,15 +505,24 @@ addFilter('sortByDate', function (claims, statusID) {
     if (statusID == 'not-yet-submitted') {
         return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
     } else if (statusID == 'submitted') {
-        return claims.sort((a, b) => new Date(b.submittedDate) - new Date(a.submittedDate));
+        return sortClaimsByStatusSubmission(claims, 'submittedDate')
+    } else if (statusID == 'queried') {
+        return sortClaimsByStatusSubmission(claims, 'processedDate')
     } else if (statusID == 'rejected') {
-        return claims.sort((a, b) => new Date(b.rejectedDate) - new Date(a.rejectedDate));
+        return sortClaimsByStatusSubmission(claims, 'processedDate')
     } else if (statusID == 'approved') {
-        return claims.sort((a, b) => new Date(b.approvedDate) - new Date(a.approvedDate));
+        return sortClaimsByStatusSubmission(claims, 'processedDate')
     } else {
         return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
     }
 })
+
+addFilter('orderByMostRecent', function (claims) {
+    let sorted = sortSubmissionsByDate(claims, 'submittedDate')
+    return sorted
+})
+
+
 
 addFilter('userType', function (type) {
     switch(type) {
@@ -512,7 +533,6 @@ addFilter('userType', function (type) {
         case "submitter":
         return "Submitter"
         break;
-
     }
 })
 
@@ -994,12 +1014,80 @@ addFilter('getMostRelevantSubmission', (claim) => {
     return recentClaim
 })
 
+addFilter('getDraftSubmission', (claim) => {
+    let recentClaim = getDraftSubmission(claim)
+    return recentClaim
+})
+
 addFilter('findTraining', (trainingCode, trainingArray) => {
     return findCourseByCode(trainingCode, trainingArray)
 })
 
 addFilter('findLearner', (learnerID, learners) => {
     return findLearnerById(learnerID, learners)
+})
+
+addFilter('checkIfUpdated', (claim, field) => {
+    let lastQueried = getMostRelevantSubmission(claim)
+    let draftClaim = getDraftSubmission(claim)
+
+    if (draftClaim == null) {
+        return false
+    }
+
+    if (field == "training") {
+        if (lastQueried.trainingCode == draftClaim.trainingCode) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "learner") {
+        if (lastQueried.learnerID == draftClaim.learnerID) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "startDate") {
+        if (lastQueried.startDate == draftClaim.startDate) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "costDate") {
+        if (lastQueried.costDate == draftClaim.costDate) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "evidencePayment") {
+
+        if (lastQueried.evidenceOfPayment.length !== draftClaim.evidenceOfPayment.length) {
+            return true;
+        }
+        lastQueried.evidenceOfPayment.sort();
+        draftClaim.evidenceOfPayment.sort();
+        for (let i = 0; i < lastQueried.length; i++) {
+            if (lastQueried[i] !== draftClaim[i]) {
+                return true;
+            }
+        }
+        return false;
+    } else if (field == "completionDate") {
+        // to do compare if same contents
+        if (lastQueried.completionDate === draftClaim.completionDate) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "evidenceCompletion") {
+        if (lastQueried.evidenceOfCompletion.length !== draftClaim.evidenceOfCompletion.length) {
+            return true;
+        } else {
+            return false
+        }
+    } else {
+        return false
+    }
 })
 
 addFilter('getRejectionNote', (submission) => {

@@ -1,5 +1,5 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim(data.claims) %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 
 {% block pageTitle %}
 Missing bank details — {{serviceName}} — GOV.UK

@@ -1,8 +1,12 @@
 {% extends "../layouts/claims-main.html" %}
-{% set claim = data.id | findClaim(data.claims) %}
-{% set submission = claim | getMostRelevantSubmission %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if (claim.status == "queried") %}
+  {% set submission = claim | getDraftSubmission %}
+{% else %}
+  {% set submission = claim | getMostRelevantSubmission %}
+{% endif %}
 {% set learner = submission.learnerID | findLearner(data["learners"]) %}
-{% set training = submission.trainingCode | findTraining(data.training) %}
 
 {% if claim.claimType == "60" %}
   {% set pairClaim = claim.claimID | findPair(data.claims) %}
@@ -72,12 +76,13 @@
       {% endif %}
 
       {% if claim.status == "queried" %}
+      {% set previousSub = claim | getMostRelevantSubmission %}
         <h2 class="govuk-heading-m">Query note</h2>
-        {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
-          <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
+        {% if previousSub.evidenceOfPaymentReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of payment:</strong> {{previousSub.evidenceOfPaymentReview.note}}</p>
         {% endif %}
-        {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
-          <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
+        {% if previousSub.evidenceOfCompletionReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of completion:</strong> {{previousSub.evidenceOfCompletionReview.note}}</p>
         {% endif %}
       {% endif %}
 
@@ -175,7 +180,12 @@
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% endif %}
 
-    {% include "../_components/claim-sections/claimHistory.html" %}
+    {% if claim.claimType == "100" %}
+      {% include "../_components/claim-sections/claimHistory100.html" %}
+    {% else %}
+      {% include "../_components/claim-sections/claimHistory6040.html" %}
+    {% endif %}
+    
     
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 

@@ -29,7 +29,7 @@ function checkClaim(claim) {
         result.evidenceOfPayment = "valid"
     }
 
-    if (submission.evidenceOfCompletion.length == 0 && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
+    if (submission.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
         result.evidenceOfCompletion = "missing"
     } else {
         result.evidenceOfCompletion = "valid"
@@ -351,6 +351,11 @@ function emailFormat(string) {
     return emailRegex.test(string);
 }
 
+function getDraftSubmission(claim) {
+    if (claim.status == "queried") {
+        return claim.submissions.find(s => s.submittedDate == null);
+    }
+}
 
 function getMostRelevantSubmission(claim) {
     let mostRecentProcessed = null;
@@ -359,10 +364,6 @@ function getMostRelevantSubmission(claim) {
 
     if (claim.submissions == null) { return [] }
 
-    if (claim.status == "queried") {
-        return claim.submissions.find(s => s.submittedDate == null);
-    }
-    
     claim.submissions.forEach(submission => {
 
         if (submission.processedDate) {
@@ -425,4 +426,59 @@ function getMostRelevantSubmission(claim) {
     return users;
 }
 
-module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers }
+function sortClaimsByStatusSubmission(claims, dateType) {
+    // Sort the claims based on the most recent submission date
+    claims.sort((a, b) => {
+        // Ensure there is a submission array and the dateType exists
+        const getLatestSubmission = (claim) => {
+            // Ensure the submissions array is not empty
+            if (!claim.submissions || claim.submissions.length === 0) {
+                return null;
+            }
+
+            // Find the most recent submission for a claim based on the dateType
+            return claim.submissions.reduce((latest, submission) => {
+                const submissionDate = submission[dateType];
+                // If dateType doesn't exist or submissionDate is invalid, skip this submission
+                if (!submissionDate) {
+                    return latest;
+                }
+                return new Date(submissionDate) > new Date(latest[dateType]) ? submission : latest;
+            }, claim.submissions[0]);
+        };
+
+        // Get the most recent submission for both claims
+        const latestA = getLatestSubmission(a);
+        const latestB = getLatestSubmission(b);
+
+        // If either claim has no valid submission, consider it as older
+        if (!latestA) return 1; // treat `a` as older if no submission
+        if (!latestB) return -1; // treat `b` as older if no submission
+
+        // Compare the most recent submission dates
+        return new Date(latestB[dateType]) - new Date(latestA[dateType]);
+    });
+
+    return claims;
+}
+
+function sortSubmissionsByDate(submissions, dateType) {
+    // Ensure that the claim has a submissions array and it's not empty
+    if (!submissions || submissions.length === 0) {
+        return submissions; // Return the claim as is if no submissions exist
+    }
+
+    // Sort the submissions array based on the dateType
+    submissions.sort((a, b) => {
+        const dateA = new Date(a[dateType]);
+        const dateB = new Date(b[dateType]);
+
+        // Sort in descending order (most recent first)
+        return dateB - dateA;
+    });
+
+    return submissions; // Return the claim with sorted submissions
+}
+
+
+module.exports = { checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate }

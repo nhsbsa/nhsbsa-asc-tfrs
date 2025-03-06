@@ -1,0 +1,60 @@
+{% extends "../layouts/main.html" %}
+
+
+{% block content %}
+<div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
+    <div>
+        <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">You’re about to be signed out</h1>
+        <p class="govuk-body hmrc-timeout-dialog__message" aria-hidden="true">To protect your information, we will sign you out in <span id="hmrc-timeout-countdown" class="hmrc-timeout-dialog__countdown">41 seconds</span>.</p>
+        <p class="govuk-body hmrc-timeout-dialog__message" aria-hidden="true">Any changes you have made will be saved.</p>
+        <p id="hmrc-timeout-message" class="govuk-visually-hidden screenreader-content" aria-live="assertive">To protect your information, we will sign you out in 1 minute.</p>
+        <div class="govuk-button-group">
+            <button id="hmrc-timeout-keep-signin-btn" class="govuk-button">Stay signed in</button>
+            <a class="govuk-link" href="time-out-sign-out">Sign out</a>
+          </div>
+    </div>
+</div>
+
+<div id="hmrc-timeout-overlay" class="hmrc-timeout-overlay">
+
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {# {% include "../_components/claim-sections/training.html" %}
+
+        {% include "../_components/claim-sections/learner.html" %}
+    
+        {% include "../_components/claim-sections/evidencePayment.html" %}
+    
+        {% if (claim.claimType == "60" or claim.claimType == "40") %}
+    <div class="content-container govuk-!-padding-bottom-6">
+      <div class="vertical-line-container">
+        <div class="circle">
+          <span class="govuk-heading-s section-number">2</span>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="horizontal-line"></div>
+      </div>
+      <div class="content">
+        <h2 class="govuk-heading-l">Complete the 40 part</h2>
+
+        {% if ((claim.claimType == "60" and ((pairClaim.status != null))))  %}
+          <p class="govuk-body">Claim reference for the 40 part: {{ claim.claimID.slice(0, -1) + "C" }}</p>
+        {% endif %}
+
+        {% if pairClaim == null and claim.claimType == "60" %}
+        {% if claim.status != "rejected" %}
+        <p class="govuk-body"><span class="govuk-caption-m">This part cannot be started until the 60 part is approved.</span></p>
+        {% elif claim.status == "rejected" %}
+        <p class="govuk-body"><span class="govuk-caption-m">The 60 part was rejected therefore the 40 part cannot be started.</span></p>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+
+    {% include "../_components/claim-sections/evidenceCompletion.html" %} #}
+            
+    </div>
+</div>
+
+{% endblock %}

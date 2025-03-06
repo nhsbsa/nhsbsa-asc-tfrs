@@ -1,3 +1,9 @@
+{% if (claim.status == "queried") %}
+            {% set submission = claim | getDraftSubmission %}
+        {% else %}
+            {% set submission = claim | getMostRelevantSubmission %}
+        {% endif %}
+{% set training = submission.trainingCode | findTraining(data.training)%}
 
 {% if claim.claimType == "100" %}
 
