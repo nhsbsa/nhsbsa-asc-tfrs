@@ -21,9 +21,39 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">Lorem ipsum dolor sit amet. Ut nihil modi eos recusandae repudiandae sit soluta natus ut sequi illo a dignissimos numquam. A nisi quia et modi itaque sit molestias ratione aut voluptates reiciendis vel nulla voluptas et beatae praesentium et vero voluptatibus! Vel temporibus debitis aut animi nihil At fuga enim vel debitis error est fuga maiores in labore dolorem eum expedita ipsam.</p>
-        <p class="govuk-body">Lorem ipsum dolor sit amet. Ut nihil modi eos recusandae repudiandae sit soluta natus ut sequi illo a dignissimos numquam. A nisi quia et modi itaque sit molestias ratione aut voluptates reiciendis vel nulla voluptas et beatae praesentium et vero voluptatibus! Vel temporibus debitis aut animi nihil At fuga enim vel debitis error est fuga maiores in labore dolorem eum expedita ipsam.</p>
-        <p class="govuk-body">Lorem ipsum dolor sit amet. Ut nihil modi eos recusandae repudiandae sit soluta natus ut sequi illo a dignissimos numquam. A nisi quia et modi itaque sit molestias ratione aut voluptates reiciendis vel nulla voluptas et beatae praesentium et vero voluptatibus! Vel temporibus debitis aut animi nihil At fuga enim vel debitis error est fuga maiores in labore dolorem eum expedita ipsam.</p>
+        {# {% include "../_components/claim-sections/training.html" %}
+
+        {% include "../_components/claim-sections/learner.html" %}
+    
+        {% include "../_components/claim-sections/evidencePayment.html" %}
+    
+        {% if (claim.claimType == "60" or claim.claimType == "40") %}
+    <div class="content-container govuk-!-padding-bottom-6">
+      <div class="vertical-line-container">
+        <div class="circle">
+          <span class="govuk-heading-s section-number">2</span>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="horizontal-line"></div>
+      </div>
+      <div class="content">
+        <h2 class="govuk-heading-l">Complete the 40 part</h2>
+
+        {% if ((claim.claimType == "60" and ((pairClaim.status != null))))  %}
+          <p class="govuk-body">Claim reference for the 40 part: {{ claim.claimID.slice(0, -1) + "C" }}</p>
+        {% endif %}
+
+        {% if pairClaim == null and claim.claimType == "60" %}
+        {% if claim.status != "rejected" %}
+        <p class="govuk-body"><span class="govuk-caption-m">This part cannot be started until the 60 part is approved.</span></p>
+        {% elif claim.status == "rejected" %}
+        <p class="govuk-body"><span class="govuk-caption-m">The 60 part was rejected therefore the 40 part cannot be started.</span></p>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+
+    {% include "../_components/claim-sections/evidenceCompletion.html" %} #}
+            
     </div>
 </div>
 

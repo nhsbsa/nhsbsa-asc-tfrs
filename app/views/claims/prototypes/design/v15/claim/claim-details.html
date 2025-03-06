@@ -76,12 +76,13 @@
       {% endif %}
 
       {% if claim.status == "queried" %}
+      {% set previousSub = claim | getMostRelevantSubmission %}
         <h2 class="govuk-heading-m">Query note</h2>
-        {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
-          <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
+        {% if previousSub.evidenceOfPaymentReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of payment:</strong> {{previousSub.evidenceOfPaymentReview.note}}</p>
         {% endif %}
-        {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
-          <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
+        {% if previousSub.evidenceOfCompletionReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of completion:</strong> {{previousSub.evidenceOfCompletionReview.note}}</p>
         {% endif %}
       {% endif %}
 
