@@ -1,5 +1,5 @@
 <{% if claim.claimType == '60' %}h3{% else %}h2{% endif %} class="govuk-heading-m" id="completion">Training completion by learner</{% if claim.claimType == '60' %}h3{% else %}h2{% endif %}>
-{% if not submission.learnerID and claim.claimType == "100" %}
+{% if (not submission.learnerID) and claim.claimType == "100" %}
   <p class="govuk-body"><span class="govuk-caption-m">Add a learner to this claim before filling in this section.</span></p>
 {% endif %}
 <dl class="govuk-summary-list">
