@@ -25,7 +25,7 @@
                     <div class="govuk-error-summary__body">
                         <ul class="govuk-list govuk-error-summary__list">
                             <li>
-                                <a href="#bank-details-error">Select if you want to add bank details now</a>
+                                <a href="#bank-details-error">Select yes if you want to add bank details now</a>
                               </li>
                         </ul>
                     </div>
@@ -35,29 +35,32 @@
 
             
             <div class="govuk-form-group {% if data.submitError == 'true' %}govuk-form-group--error{% endif %}">
-            <fieldset class="govuk-fieldset" {% if data.submitError == 'true' %}aria-describedby="bank-details-error"{% endif %}>
+            <fieldset class="govuk-fieldset" aria-describedby="bank-question-hint{% if data.submitError == 'true' %}bank-details-error{% endif %}">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                 <span class="govuk-caption-l">Complete registration</span>
                 <h1 class="govuk-fieldset__heading">
-                 Do you want to add your organisations bank details now?
+                  Do you want to add your organisation's bank details now?
                 </h1>
               </legend>
+              <div id="bank-question-hint" class="govuk-hint">
+                You will only be able to submit claims once you have done this.
+              </div>
               {% if data.submitError == 'true' %}
               <p id="bank-details-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Select if you want to add bank details now
+                <span class="govuk-visually-hidden">Error:</span> Select yes if you want to add bank details now
               </p>
               {% endif %}
               <div class="govuk-radios" data-module="govuk-radios">
                 <div class="govuk-radios__item">
                   <input class="govuk-radios__input" id="bankDetailsQuestion-1" name="bankDetailsQuestion" type="radio" value="yes">
                   <label class="govuk-label govuk-radios__label" for="bankDetailsQuestion-1">
-                    Yes, I want to add my organisation's bank details now.
+                    Yes
                   </label>
                 </div>
                 <div class="govuk-radios__item">
                   <input class="govuk-radios__input" id="bankDetailsQuestion-2" name="bankDetailsQuestion" type="radio" value="no">
                   <label class="govuk-label govuk-radios__label" for="bankDetailsQuestion-2">
-                    No, I will add my organisation's bank details later.
+                    No, I will add them later
                   </label>
                 </div>
               </div>

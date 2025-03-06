@@ -10,25 +10,22 @@ Missing bank details — {{serviceName}} — GOV.UK
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-        <h1 class="govuk-heading-l">We do not have bank details for your organisations.</h1>
+        <h1 class="govuk-heading-l">
+            {% if data.userType == "signatory" %}
+            Add your organisation's bank details
+            {% elif data.userType == "submitter" %}
+            We need your organisation's bank details
+            {% endif %}
+        </h1>
     </div>
     <div class="govuk-grid-column-two-thirds">
-        <div class="govuk-warning-text">
-            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-            <strong class="govuk-warning-text__text">
-                <span class="govuk-visually-hidden">Warning</span>
-                You cannot submit claims until valid bank details are added for your organisations.
-            </strong>
-        </div>
+        <p class="govuk-body">
         {% if data.userType == "signatory" %}
-        <p class="govuk-body">
-            As the senior responsible officer you will need to add bank details for your organisation.
-        </p>
+            As the Senior Responsible Officer, you need to add your organisation's bank details before you can submit a claim.
         {% elif data.userType == "submitter" %}
-        <p class="govuk-body">
-            The senior responsible officer will need to log in and add bank details for your organisation.
-        </p>
+        Your Senior Responsible Officer needs to log in and add your organisation's bank details before you can submit a claim.
         {% endif %}
+        </p>
         <h2 class="govuk-heading-m">If you need support</h2>
         <p class="govuk-body">You can get in touch with the NHS Business Services Authority:</p>
         <div class="govuk-inset-text">
