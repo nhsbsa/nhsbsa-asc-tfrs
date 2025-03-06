@@ -365,7 +365,7 @@ function generateClaims(workplaceID) {
     const trainingItem = faker.helpers.arrayElement(trainingGroup.courses);
 
     //if it is a 60/40 eligible training and not yet submitted claim, randomly decide whether the 60 or 40 part is not yet submitted or queried.
-    const randomBoolean = false
+    let randomBoolean = false
     if ((['not-yet-submitted', 'queried'].includes(status) && trainingItem.fundingModel == "split" )) {
       randomBoolean = Math.random() < 0.5
     }

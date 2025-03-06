@@ -295,7 +295,7 @@
         "completionDate": "2025-02-02T01:44:27.141Z",
         "evidenceOfCompletion": "certficate1",
         "evidenceOfPaymentReview": {
-          "outcome": "fail",
+          "outcome": "queried",
           "note": "The evidence of payment you have provided does not show what training was paid for.",
           "costPerLearner": null
         },
