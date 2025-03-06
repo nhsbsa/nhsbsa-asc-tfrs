@@ -65,7 +65,7 @@ router.post('/add-training', function (req, res) {
     if (trainingChoice.fundingModel == "full") {
       delete req.session.data['training-input'];
       delete req.session.data['trainingSelection'];
-      const claimID = newTUClaim(req, trainingChoice, "100")
+      const claimID = newClaim(req, trainingChoice, "100")
       res.redirect('claim/claim-details' + '?id=' + claimID)
     } else {
       res.redirect('claim/split-decision')
@@ -239,14 +239,14 @@ router.post('/split-decision-handler', function (req, res) {
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
     delete req.session.data.splitDecision;
-    const claimID = newTUClaim(req, trainingChoice, "100")
+    const claimID = newClaim(req, trainingChoice, "100")
     res.redirect('claim/claim-details' + '?id=' + claimID)
   } else if (choice == "yes") {
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
     delete req.session.data.splitDecision;
 
-    const claimID = newTUClaim(req, trainingChoice, "60")
+    const claimID = newClaim(req, trainingChoice, "60")
     res.redirect('claim/claim-details' + '?id=' + claimID)
 
   } else {
@@ -254,7 +254,7 @@ router.post('/split-decision-handler', function (req, res) {
   }
 });
 
-function newTUClaim(req, input, type) {
+function newClaim(req, input, type) {
   let claim = {};
   const d = new Date();
   const dStr = d.toISOString();
@@ -262,20 +262,17 @@ function newTUClaim(req, input, type) {
   if (type == "100") {
     claim = {
       claimID: generateUniqueID() + "-A",
-      workplaceId: "B02944934",
+      workplaceID: req.session.data.org.workplaceID,
       claimType: "100",
       status: "not-yet-submitted",
       createdDate: dStr,
       createdBy: "Test Participant",
       notes: null,
       submissions: [{
-      	submitter: {
-      		name: null,
-			    email: null,
-      	},
+      	submitter: null,
       	submittedDate: null,
       	trainingCode: input.code,
-      	learnerId: null,
+      	learnerID: null,
       	startDate: null,
       	costDate: null,
       	completionDate: null,
@@ -283,28 +280,31 @@ function newTUClaim(req, input, type) {
       	evidenceOfCompletion: null,
       	processedBy: null,
       	processedDate: null,
-      	evidenceOfPaymentReview: null,
-      	evidenceOfCompletionReview: null
+      	evidenceOfPaymentReview: {
+          outcome: null,
+          note: null,
+          costPerLearner: null
+        },
+      	evidenceOfCompletionReview: {
+          outcome: null,
+          note: null
+        }
       }]
     };
   } else if (type == "60") {
     claim = {
       claimID: generateUniqueID() + "-B",
-      workplaceId: "B02944934",
+      workplaceID: req.session.data.org.workplaceID,
       claimType: "60",
       status: "not-yet-submitted",
-
       createdDate: dStr,
       createdBy: "Test Participant",
       notes: null,
       submissions: [{
-      	submitter: {
-      		name: null,
-			    email: null,
-      	},
+      	submitter: null,
       	submittedDate: null,
       	trainingCode: input.code,
-      	learnerId: null,
+      	learnerID: null,
       	startDate: null,
       	paidDate: null,
       	costDate: null,
@@ -313,54 +313,19 @@ function newTUClaim(req, input, type) {
       	evidenceOfCompletion: null,
       	processedBy: null,
       	processedDate: null,
-      	evidenceOfPaymentReview: null,
-      	evidenceOfCompletionReview: null
-      }]
-    };
-  } else if (type == "40") {
-    let trainingCode = null
-    let learnerId = null
-    let startDate = null
-    let costDate = null
-    let evidenceOfPayment = null
-    for (const c of req.session.data.claims) {
-      if (input == c.claimID) {
-        let submission = getMostRelevantSubmission(c)
-        trainingCode = submission.trainingCode
-        learnerId = submission.learnerId
-        startDate = submission.startDate
-        costDate = submission.costDate
-        evidenceOfPayment = submission.evidenceOfPayment
-      }
-    }
-    claim = {
-      claimID: input.slice(0, -1) + "C",
-      claimType: "40",
-      status: "not-yet-submitted",
-      createdDate: dStr,
-      createdBy: "Test Participant",
-      notes: null,
-      submissions: [{
-      	submitter: {
-      		name: null,
-			    email: null,
-      	},
-      	submittedDate: null,
-      	trainingCode,
-      	learnerId,
-      	startDate,
-      	paidDate: null,
-      	costDate,
-      	completionDate: null,
-      	evidenceOfPayment,
-      	evidenceOfCompletion: null,
-      	processedBy: null,
-      	processedDate: null,
-      	evidenceOfPaymentReview: null,
-      	evidenceOfCompletionReview: null
+      	evidenceOfPaymentReview: {
+          outcome: null,
+          note: null,
+          costPerLearner: null
+        },
+      	evidenceOfCompletionReview: {
+          outcome: null,
+          note: null
+        }
       }]
     };
   }
+  console.log(claim)
 
   req.session.data.claims.push(claim)
   //reset seed
@@ -401,12 +366,6 @@ router.post('/new-claim', function (req, res) {
   delete req.session.data['invalidIDError'];
   delete req.session.data['notFound'];
   res.redirect('claim/select-training')
-});
-
-router.get('/start-40-claim', function (req, res) {
-  claimID = req.session.data.id
-  const newID = newTUClaim(req, claimID, "40")
-  res.redirect('claim/claim-details' + '?id=' + newID)
 });
 
 router.post('/add-start-date', function (req, res) {

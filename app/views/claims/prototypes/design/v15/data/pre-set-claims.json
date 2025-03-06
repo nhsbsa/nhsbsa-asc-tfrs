@@ -112,8 +112,7 @@
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
         "evidenceOfPayment": [
-          "invoice.pdf",
-          "receipt.pdf"
+          "invoice.pdf"
         ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certficate1",
@@ -137,9 +136,7 @@
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
         "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
+          "invoice.pdf"
         ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certficate1",
@@ -804,15 +801,16 @@
         "startDate": "2024-07-06T10:37:21.199Z",
         "costDate": "2024-04-11T09:34:39.184Z",
         "evidenceOfPayment": [
+          "bankStatement.pdf",
           "invoice.pdf",
           "receipt.pdf"
         ],
-        "completionDate": "2025-01-22T21:12:41.455Z",
+        "completionDate": "2025-01-23T21:12:41.455Z",
         "evidenceOfCompletion": "certficate1",
         "evidenceOfPaymentReview": {
-          "outcome": null,
+          "outcome": "pass",
           "note": null,
-          "costPerLearner": null
+          "costPerLearner": 270
         },
         "evidenceOfCompletionReview": {
           "outcome": null,
@@ -829,19 +827,20 @@
         "startDate": "2024-07-06T10:37:21.199Z",
         "costDate": "2024-04-11T09:34:39.184Z",
         "evidenceOfPayment": [
+          "bankStatement.pdf",
           "invoice.pdf",
           "receipt.pdf"
         ],
-        "completionDate": "2025-01-22T21:12:41.455Z",
+        "completionDate": "2025-01-23T21:12:41.455Z",
         "evidenceOfCompletion": "certficate1",
         "evidenceOfPaymentReview": {
-          "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
-          "costPerLearner": null
+          "outcome": "pass",
+          "note": null,
+          "costPerLearner": 270
         },
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
         },
         "processedDate": "2025-02-27T21:46:43.842Z",
         "processedBy": "Allan Connelly"
@@ -854,18 +853,20 @@
         "startDate": "2024-07-06T10:37:21.199Z",
         "costDate": "2024-04-11T09:34:39.184Z",
         "evidenceOfPayment": [
-          "invoice.pdf"
+          "bankStatement.pdf",
+          "invoice.pdf",
+          "receipt.pdf"
         ],
         "completionDate": "2025-01-22T21:12:41.455Z",
         "evidenceOfCompletion": "certficate1",
         "evidenceOfPaymentReview": {
-          "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
-          "costPerLearner": null
+          "outcome": "pass",
+          "note": null,
+          "costPerLearner": 270
         },
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
         },
         "processedDate": "2025-02-20T21:46:43.842Z",
         "processedBy": "Allan Connelly"
