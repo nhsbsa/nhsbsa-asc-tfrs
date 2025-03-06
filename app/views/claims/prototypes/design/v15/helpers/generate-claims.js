@@ -62,14 +62,14 @@ function generatecreatedByList(organisation) {
 
 }
 
-function generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, claimType) {
+function generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, claimType, createdDate) {
   
   let submissions = null;
 
   const learners = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/v15/data/learners.json', 'utf8'));
 
   const learnerID =  getRandomLearners(learners, 1).id;
-  const startDate = faker.date.between({ from: policyDate, to: new Date() });
+  const startDate = faker.date.between({ from: createdDate, to: new Date() });
   const trainingCode = trainingItem.code
 
 
@@ -228,9 +228,9 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       evidenceOfCompletion: "certficate1",
   
       evidenceOfPaymentReview: {
-        outcome: null,
-        note: null,
-        costPerLearner: null
+        outcome: submissionA.evidenceOfPaymentReview.outcome,
+        note: submissionA.evidenceOfPaymentReview.note,
+        costPerLearner: submissionA.evidenceOfPaymentReview.costPerLearner
       },
       evidenceOfCompletionReview: {
         outcome: null,
@@ -242,10 +242,8 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
     if (['rejected'].includes(status)) {
 
-      submissionB.evidenceOfPaymentReview.outcome = "fail"
-      submissionB.evidenceOfPaymentReview.note = "The evidence of payment show you paid for a course that is not eligible for funding through our service."
-
-      submissionB.evidenceOfCompletionReview.outcome = "pass"
+      submissionB.evidenceOfCompletionReview.outcome = "fail"
+      submissionB.evidenceOfCompletionReview.note = "The evidence of payment show you paid for a course that is not eligible for funding through our service."
 
     } else if(['approved'].includes(status)) {
 
@@ -275,9 +273,9 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         evidenceOfCompletion: submissionB.evidenceOfCompletion,
     
         evidenceOfPaymentReview: {
-          outcome: null,
-          note: null,
-          costPerLearner: null
+          outcome: submissionA.evidenceOfPaymentReview.outcome,
+        note: submissionA.evidenceOfPaymentReview.note,
+        costPerLearner: submissionA.evidenceOfPaymentReview.costPerLearner
         },
         evidenceOfCompletionReview: {
           outcome: null,
@@ -337,13 +335,14 @@ function generateClaims(workplaceID) {
   }
 
   let data = preSetClaims
+  /* let data = [] */
 
    //set date references
   const policyDate = new Date('2024-04-01 '); // April 2, 2024
 
 
 
-  for (let i = 10; i <= organisation.numberOfClaims; i++) {
+  for (let i = 1; i <= organisation.numberOfClaims; i++) {
     faker.seed(i);
     
     let claimID = generateUniqueID();
@@ -375,7 +374,7 @@ function generateClaims(workplaceID) {
         createdDate,
         createdBy,
         notes: [],
-        submissions: generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, "full"),
+        submissions: generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, "full", createdDate),
       };
 
       data.push(claim);
@@ -383,7 +382,7 @@ function generateClaims(workplaceID) {
     } else if (trainingItem.fundingModel == "split") {
       const claimIDA = claimID + "-B"
       const claimIDB = claimID + "-C"
-      const generatedSubmissions = generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, "split")
+      const generatedSubmissions = generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, "split", createdDate)
       const submissionsA = generatedSubmissions.submissionsA
       const submissionsB = generatedSubmissions.submissionsB
 
