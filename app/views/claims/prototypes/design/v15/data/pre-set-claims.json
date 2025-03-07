@@ -89,11 +89,11 @@
   },
   {
     "claimID": "CWH-E4C7-FBXJ-A",
-    "workplaceID": "placeholder",
+    "workplaceID": "A02944934",
     "claimType": "100",
     "status": "queried",
     "createdDate": "2024-08-15T23:09:49.421Z",
-    "createdBy": "placeholder",
+    "createdBy": "miles.whitaker@evergreencare.com",
     "notes": [],
     "submissions": [
       {
@@ -103,7 +103,11 @@
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
-        "evidenceOfPayment": ["invoice1.pdf"],
+        "evidenceOfPayment": [
+          "invoice1.pdf", 
+          "bankStatement1.pdf", 
+          "receipt1.pdf"
+        ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
@@ -119,18 +123,22 @@
         "processedBy": null
       },
       {
-        "submitter": "d.jones@evergreencare.com",
+        "submitter": "rosalie.finch@evergreencare.com",
         "submittedDate": "2024-10-31T00:34:25.749Z",
         "trainingCode": "USMS",
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
-        "evidenceOfPayment": ["invoice1.pdf"],
+        "evidenceOfPayment": [
+          "invoice1.pdf", 
+          "bankStatement1.pdf", 
+          "receipt1.pdf"
+        ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment date on the evidence of payment provided does not match the payment date in the claim.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -147,12 +155,14 @@
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-05T14:48:06.827Z",
-        "evidenceOfPayment": ["invoice1.pdf"],
+        "evidenceOfPayment": [
+          "invoice1.pdf"
+        ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The payment date on the evidence of payment provided does not match the payment date in the claim.",
+          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
