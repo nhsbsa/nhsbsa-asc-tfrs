@@ -48,13 +48,9 @@
         "learnerID": "LE 09 5F 94 M",
         "startDate": "2024-11-01T13:53:44.121Z",
         "costDate": "2024-09-26T12:05:18.831Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2024-12-17T21:33:21.901Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
@@ -74,13 +70,9 @@
         "learnerID": "LE 09 5F 94 M",
         "startDate": "2024-11-01T13:53:44.121Z",
         "costDate": "2024-09-23T12:05:18.831Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2024-12-17T21:33:21.901Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The date of payment in the evidence of payment did not match the payment date given in the claim.",
@@ -111,11 +103,9 @@
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
-        "evidenceOfPayment": [
-          "invoice.pdf"
-        ],
+        "evidenceOfPayment": ["invoice1.pdf"],
         "completionDate": "2024-10-24T19:46:57.118Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
@@ -135,11 +125,9 @@
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
-        "evidenceOfPayment": [
-          "invoice.pdf"
-        ],
+        "evidenceOfPayment": ["invoice1.pdf"],
         "completionDate": "2024-10-24T19:46:57.118Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
@@ -159,13 +147,9 @@
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-05T14:48:06.827Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["invoice1.pdf"],
         "completionDate": "2024-10-24T19:46:57.118Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The payment date on the evidence of payment provided does not match the payment date in the claim.",
@@ -196,13 +180,9 @@
         "learnerID": "ZX 51 96 87 D",
         "startDate": "2024-10-04T03:10:46.108Z",
         "costDate": "2024-06-30T04:56:45.463Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2024-11-01T01:05:03.483Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": "pass",
@@ -222,12 +202,9 @@
         "learnerID": "ZX 51 96 87 D",
         "startDate": "2024-10-04T03:10:46.108Z",
         "costDate": "2024-06-30T04:56:45.463Z",
-        "evidenceOfPayment": [
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2024-11-01T01:05:03.483Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
@@ -258,13 +235,9 @@
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-01-20T01:06:04.197Z",
         "costDate": "2024-07-25T23:15:29.066Z",
-        "evidenceOfPayment": [
-          "bankStatement1.pdf",
-          "invoice1.pdf",
-          "receipt1.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-02-02T01:44:27.141Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "fail",
           "note": "The evidence of payment show you paid for a course that is not eligible for funding through our service.",
@@ -284,13 +257,9 @@
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-01-20T01:06:04.197Z",
         "costDate": "2024-07-25T23:15:29.066Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-02-02T01:44:27.141Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment you have provided does not show what training was paid for.",
@@ -354,11 +323,7 @@
         "learnerID": "BF 73 4F 97 L",
         "startDate": "2024-07-08T11:45:01.732Z",
         "costDate": "2024-05-27T01:16:45.233Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -380,10 +345,7 @@
         "learnerID": "BF 73 4F 97 L",
         "startDate": "2024-07-08T11:45:01.732Z",
         "costDate": "2024-05-27T01:16:45.233Z",
-        "evidenceOfPayment": [
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["invoice1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -416,11 +378,7 @@
         "learnerID": "KZ 79 0F 13 Z",
         "startDate": "2024-06-09T23:24:35.737Z",
         "costDate": "2024-06-08T12:52:08.749Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -442,10 +400,7 @@
         "learnerID": "KZ 79 0F 13 Z",
         "startDate": "2024-06-09T23:24:35.737Z",
         "costDate": "2024-06-08T12:52:08.749Z",
-        "evidenceOfPayment": [
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["invoice1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -467,9 +422,7 @@
         "learnerID": "KZ 79 0F 13 Z",
         "startDate": "2024-06-09T23:24:35.737Z",
         "costDate": "2024-06-08T12:52:08.749Z",
-        "evidenceOfPayment": [
-          "invoice.pdf"
-        ],
+        "evidenceOfPayment": ["invoice1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -502,11 +455,7 @@
         "learnerID": "LE 09 5F 94 M",
         "startDate": "2024-03-31T23:55:47.273Z",
         "costDate": "2024-03-31T23:55:44.062Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -528,10 +477,7 @@
         "learnerID": "LE 09 5F 94 M",
         "startDate": "2024-03-31T23:55:47.273Z",
         "costDate": "2024-03-31T23:55:44.062Z",
-        "evidenceOfPayment": [
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["invoice1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -564,13 +510,9 @@
         "learnerID": "LE 09 5F 94 M",
         "startDate": "2024-03-31T23:55:47.273Z",
         "costDate": "2024-03-31T23:55:44.062Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2024-04-21T11:36:28.857Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
@@ -601,11 +543,7 @@
         "learnerID": "ZX 51 96 87 D",
         "startDate": "2024-07-11T23:38:03.737Z",
         "costDate": "2024-06-18T20:17:59.152Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -627,10 +565,7 @@
         "learnerID": "ZX 51 96 87 D",
         "startDate": "2024-07-11T23:38:03.737Z",
         "costDate": "2024-06-18T20:17:59.152Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -663,11 +598,7 @@
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-02-24T09:54:13.322Z",
         "costDate": "2024-10-18T14:35:08.968Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -700,13 +631,9 @@
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-02-24T09:54:13.322Z",
         "costDate": "2024-10-18T14:35:08.968Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-03-05T03:16:00.448Z",
-        "evidenceOfCompletion": "certficate3",
+        "evidenceOfCompletion": "certficate2.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
@@ -726,13 +653,9 @@
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-02-24T09:54:13.322Z",
         "costDate": "2024-10-18T14:35:08.968Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-03-05T03:16:00.448Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
@@ -763,11 +686,7 @@
         "learnerID": "LM 89 7F 48 J",
         "startDate": "2024-07-06T10:37:21.199Z",
         "costDate": "2024-04-11T09:34:39.184Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -800,13 +719,9 @@
         "learnerID": "LM 89 7F 48 J",
         "startDate": "2024-07-06T10:37:21.199Z",
         "costDate": "2024-04-11T09:34:39.184Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-23T21:12:41.455Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
@@ -826,13 +741,9 @@
         "learnerID": "LM 89 7F 48 J",
         "startDate": "2024-07-06T10:37:21.199Z",
         "costDate": "2024-04-11T09:34:39.184Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-23T21:12:41.455Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
@@ -852,13 +763,9 @@
         "learnerID": "LM 89 7F 48 J",
         "startDate": "2024-07-06T10:37:21.199Z",
         "costDate": "2024-04-11T09:34:39.184Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-22T21:12:41.455Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
@@ -889,11 +796,7 @@
         "learnerID": "BF 73 4F 97 L",
         "startDate": "2024-06-29T03:28:29.822Z",
         "costDate": "2024-06-04T11:51:05.528Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -926,13 +829,9 @@
         "learnerID": "BF 73 4F 97 L",
         "startDate": "2024-06-29T03:28:29.822Z",
         "costDate": "2024-06-04T11:51:05.528Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-23T10:49:50.110Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
@@ -952,13 +851,9 @@
         "learnerID": "BF 73 4F 97 L",
         "startDate": "2024-06-29T03:28:29.822Z",
         "costDate": "2024-06-04T11:51:05.528Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-23T10:49:50.110Z",
-        "evidenceOfCompletion": "certficate5",
+        "evidenceOfCompletion": "certficate2.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
@@ -989,11 +884,7 @@
         "learnerID": "KZ 79 0F 13 Z",
         "startDate": "2025-01-20T08:38:24.133Z",
         "costDate": "2024-11-27T07:49:17.543Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -1026,13 +917,9 @@
         "learnerID": "KZ 79 0F 13 Z",
         "startDate": "2025-01-20T08:38:24.133Z",
         "costDate": "2024-11-27T07:49:17.543Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-30T10:14:23.640Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
@@ -1052,13 +939,9 @@
         "learnerID": "KZ 79 0F 13 Z",
         "startDate": "2025-01-20T08:38:24.133Z",
         "costDate": "2024-11-27T07:49:17.543Z",
-        "evidenceOfPayment": [
-          "bankStatement.pdf",
-          "invoice.pdf",
-          "receipt.pdf"
-        ],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-30T10:14:23.640Z",
-        "evidenceOfCompletion": "certficate1",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
