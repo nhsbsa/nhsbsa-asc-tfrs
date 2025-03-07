@@ -110,9 +110,9 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       submission.submittedDate = faker.date.between({ from: startDate, to: new Date() });
   
       submission.costDate = faker.date.between({ from: policyDate, to: startDate });
-      submission.evidenceOfPayment = ["bankStatement.pdf", "invoice.pdf", "receipt.pdf"];
+      submission.evidenceOfPayment = ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"];
   
-      submission.evidenceOfCompletion = "certficate1";
+      submission.evidenceOfCompletion = "certificate1.pdf";
       submission.completionDate = faker.date.between({ from: startDate, to: submission.submittedDate });
   
       if (['rejected'].includes(status)) {
@@ -193,7 +193,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       startDate, 
   
       costDate: faker.date.between({ from: policyDate, to: startDate }),
-      evidenceOfPayment: ["bankStatement.pdf", "invoice.pdf", "receipt.pdf"],
+      evidenceOfPayment: ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
   
       completionDate: null, 
       evidenceOfCompletion: null,
@@ -244,7 +244,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       submissionB.submitter = faker.helpers.arrayElement(users).email;
       submissionB.submittedDate = submissionDateB;
   
-      submissionB.evidenceOfCompletion = "certficate1";
+      submissionB.evidenceOfCompletion = "certificate1.pdf";
       submissionB.completionDate =  faker.date.between({ from: startDate, to: submissionDateB });
     }
 

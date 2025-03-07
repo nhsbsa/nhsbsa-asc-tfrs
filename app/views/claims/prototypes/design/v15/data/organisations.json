@@ -1,7 +1,7 @@
 [
   {
     "workplaceID": "A02944934",
-    "numberOfClaims": 500,
+    "numberOfClaims": 300,
     "name": "Evergreen Care home",
     "address": ["72 Guild Street", "London", "SE23 6FH"],
     "bankDetails": {
@@ -89,7 +89,7 @@
   },
   {
     "workplaceID": "B13299931",
-    "numberOfClaims": 100,
+    "numberOfClaims": 75,
     "name": "Teatree Care",
     "address": ["32 The Lawn", "Birmingham", "BI23 6FH"],
     "bankDetails": {
@@ -134,7 +134,7 @@
   },
   {
     "workplaceID": "C63281491",
-    "numberOfClaims": 20,
+    "numberOfClaims": 10,
     "name": "Anika Care Ltd",
     "address": ["13 Gandfield Street", "Wakefield", "WA23 6FH"],
     "bankDetails": {
