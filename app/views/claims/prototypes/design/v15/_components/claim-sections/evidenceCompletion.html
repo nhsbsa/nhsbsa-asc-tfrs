@@ -18,7 +18,7 @@
           Completion date
         </dt>
         <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-value--error {% endif %}">
-          {% if (not submission.completionDate and claim.claimType != "60") or pairClaim != null %}
+          {% if (submission.learnerID and claim.claimType != "60") or pairClaim != null %}
             <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date">Add completion date</a>
           {% else %}
             <span class="govuk-caption-m">Cannot start yet</span>
