@@ -2,200 +2,209 @@
 
 <h2 class="govuk-heading-m">Claim history</h2>
 <div class="moj-timeline">
+  {% if pairClaim %}
+    {% set count = pairClaim.submissions.length + claim.submissions.length %}
+  {% else %}
+    {% set count = claim.submissions.length %}
+  {% endif %}
+  {% set notesNumber = count +1 %}
 
   {% for submission in pairClaim.submissions | orderByMostRecent %}
+    {% set notesNumber = notesNumber - 1 %}
+
     {% if submission.submittedDate %} 
 
-    {% if submission.processedDate == null %} 
-
-    <div class="moj-timeline__item">
-      <div class="moj-timeline__header">
-        <h3 class="moj-timeline__title">40 claim submitted</h3>
-        <p class="moj-timeline__byline">by {{submitter}}</p>
-        <p class="moj-timeline__date">
-          <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
-        </p>
-      <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
-
-    </div>
-    </div>
-
-    {% elif submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried" %} 
-      <div class="moj-timeline__item">
-        <div class="moj-timeline__header">
-          <h3 class="moj-timeline__title">40 claim queried</h3>
-          <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
-          <p class="moj-timeline__date">
-            <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-          </p>
-          <a href="/showHistoryNote?noteType=query&submittedDate={{submission.submittedDate}}" class="govuk-link">View query note</a>
-
-        </div>
-
-      </div>
-
-      <div class="moj-timeline__item">
-        <div class="moj-timeline__header">
-          <h3 class="moj-timeline__title">40 claim submitted</h3>
-          <p class="moj-timeline__byline">by {{submitter}}</p>
-          <p class="moj-timeline__date">
-            <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
-          </p>
-          <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
-
-        </div>
-
-      </div>
-
-      {% elif submission.evidenceOfPaymentReview.outcome == "pass" and submission.evidenceOfCompletionReview.outcome == "pass"  %} 
-        <div class="moj-timeline__item">
-          <div class="moj-timeline__header">
-            <h3 class="moj-timeline__title">40 claim approved</h3>
-            <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
-          </div>
-          <p class="moj-timeline__date">
-            <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-          </p>
-        </div>
-
+      {% if submission.processedDate == null %} 
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title">40 claim submitted</h3>
-            <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+            <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
-            <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
-
+            {% if notesNumber != count %} 
+              <a href="/showHistoryNote?noteType=fourtyClaim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+            {% endif %} 
           </div>
-
         </div>
 
-
-        {% elif submission.evidenceOfPaymentReview.outcome == "fail" or submission.evidenceOfCompletionReview.outcome == "fail"  %} 
+      
+      {% elif submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried" %} 
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
-            <h3 class="moj-timeline__title">40 claim rejected</h3>
+            <h3 class="moj-timeline__title">40 claim queried</h3>
             <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
             </p>
-            <a href="/showHistoryNote?noteType=rejection&submittedDate={{submission.submittedDate}}" class="govuk-link">View rejection note</a>
+            {% if notesNumber != count %} 
+              <a href="/showHistoryNote?noteType=query&submittedDate={{submission.submittedDate}}" class="govuk-link">View query note</a>
+            {% endif %} 
           </div>
-          
         </div>
-
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title">40 claim submitted</h3>
-            <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+            <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
-            <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
-
+              <a href="/showHistoryNote?noteType=fourtyClaim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
           </div>
         </div>
 
-    {% endif %} 
+
+        {% elif submission.evidenceOfPaymentReview.outcome == "pass" and submission.evidenceOfCompletionReview.outcome == "pass"  %} 
+          <div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h3 class="moj-timeline__title">40 claim approved</h3>
+              <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
+            </div>
+            <p class="moj-timeline__date">
+              <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+            </p>
+          </div>
+          <div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h3 class="moj-timeline__title">40 claim submitted</h3>
+              <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
+              <p class="moj-timeline__date">
+                <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
+              </p>
+              {% if notesNumber != count %} 
+                <a href="/showHistoryNote?noteType=fourtyClaim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+              {% endif %} 
+              </div>
+          </div>
+
+
+          {% elif submission.evidenceOfPaymentReview.outcome == "fail" or submission.evidenceOfCompletionReview.outcome == "fail"  %} 
+          <div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h3 class="moj-timeline__title">40 claim rejected</h3>
+              <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
+              <p class="moj-timeline__date">
+                <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+              </p>
+              {% if notesNumber != count %} 
+                <a href="/showHistoryNote?noteType=rejection&submittedDate={{submission.submittedDate}}" class="govuk-link">View rejection note</a>
+              {% endif %} 
+            </div>
+          </div>
+          <div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h3 class="moj-timeline__title">40 claim submitted</h3>
+              <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
+              <p class="moj-timeline__date">
+                <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
+              </p>
+              {% if notesNumber != count %} 
+                <a href="/showHistoryNote?noteType=fourtyClaim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+              {% endif %} 
+            </div>
+          </div>
+
+
+      {% endif %} 
 
     {% endif %} 
   {% endfor %}
 
   {% for submission in claim.submissions | orderByMostRecent %}
+    {% set notesNumber = notesNumber - 1 %} 
     {% if submission.submittedDate %} 
 
-    {% if submission.processedDate == null %} 
-
-    <div class="moj-timeline__item">
-      <div class="moj-timeline__header">
-        <h3 class="moj-timeline__title">60 claim submitted</h3>
-        <p class="moj-timeline__byline">by {{submitter}}</p>
-        <p class="moj-timeline__date">
-          <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
-        </p>
-        <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
-
-      </div>
-    </div>
-
-    {% elif submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried" %} 
-      <div class="moj-timeline__item">
-        <div class="moj-timeline__header">
-          <h3 class="moj-timeline__title">60 claim queried</h3>
-          <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
-          <p class="moj-timeline__date">
-            <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-          </p>
-          <a href="/showHistoryNote?noteType=query&submittedDate={{submission.submittedDate}}" class="govuk-link">View query note</a>
-        </div>
-
-      </div>
-
-      <div class="moj-timeline__item">
-        <div class="moj-timeline__header">
-          <h3 class="moj-timeline__title">60 claim submitted</h3>
-          <p class="moj-timeline__byline">by {{submitter}}</p>
-          <p class="moj-timeline__date">
-            <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
-          </p>
-          <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
-
-        </div>
-
-      </div>
-
-      {% elif submission.evidenceOfPaymentReview.outcome == "pass" and submission.evidenceOfCompletionReview.outcome == "pass"  %} 
-        <div class="moj-timeline__item">
-          <div class="moj-timeline__header">
-            <h3 class="moj-timeline__title">60 claim approved</h3>
-            <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
-          </div>
-          <p class="moj-timeline__date">
-            <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-          </p>
-        </div>
-
+      {% if submission.processedDate == null %} 
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title">60 claim submitted</h3>
-            <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+            <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
-            <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
-
+            {% if notesNumber != count %} 
+              <a href="/showHistoryNote?noteType=sixtyClaim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+            {% endif %} 
           </div>
-
         </div>
 
 
-        {% elif submission.evidenceOfPaymentReview.outcome == "fail" or submission.evidenceOfCompletionReview.outcome == "fail"  %} 
+      {% elif submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried" %} 
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
-            <h3 class="moj-timeline__title">60 claim rejected</h3>
+            <h3 class="moj-timeline__title">60 claim queried</h3>
             <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
             </p>
-            <a href="/showHistoryNote?noteType=rejection&submittedDate={{submission.submittedDate}}" class="govuk-link">View rejection note</a>
+            <a href="/showHistoryNote?noteType=query&submittedDate={{submission.submittedDate}}" class="govuk-link">View query note</a>
           </div>
-          
         </div>
-
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title">60 claim submitted</h3>
-            <p class="moj-timeline__byline">by {{submission.submitter}}</p>
+            <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
-            <a href="/showHistoryNote?noteType=claim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
-
-          </div>
+            {% if notesNumber != count %} 
+              <a href="/showHistoryNote?noteType=sixtyClaim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+            {% endif %} 
+            </div>
         </div>
 
-    {% endif %} 
+        
+        {% elif submission.evidenceOfPaymentReview.outcome == "pass" and submission.evidenceOfCompletionReview.outcome == "pass"  %} 
+          <div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h3 class="moj-timeline__title">60 claim approved</h3>
+              <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
+            </div>
+            <p class="moj-timeline__date">
+              <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+            </p>
+          </div>
+          <div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h3 class="moj-timeline__title">60 claim submitted</h3>
+              <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
+              <p class="moj-timeline__date">
+                <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
+              </p>
+              {% if notesNumber != count %} 
+                <a href="/showHistoryNote?noteType=sixtyClaim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+              {% endif %} 
+              </div>
+          </div>
+
+
+          {% elif submission.evidenceOfPaymentReview.outcome == "fail" or submission.evidenceOfCompletionReview.outcome == "fail"  %} 
+          <div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h3 class="moj-timeline__title">60 claim rejected</h3>
+              <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
+              <p class="moj-timeline__date">
+                <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+              </p>
+              {% if notesNumber != count %} 
+                <a href="/showHistoryNote?noteType=rejection&submittedDate={{submission.submittedDate}}" class="govuk-link">View rejection note</a>
+              {% endif %} 
+            </div>
+          </div>
+          <div class="moj-timeline__item">
+            <div class="moj-timeline__header">
+              <h3 class="moj-timeline__title">60 claim submitted</h3>
+              <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
+              <p class="moj-timeline__date">
+                <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
+              </p>
+              {% if notesNumber != count %} 
+                <a href="/showHistoryNote?noteType=sixtyClaim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
+              {% endif %} 
+              </div>
+          </div>
+
+      {% endif %} 
 
     {% endif %} 
   {% endfor %}
