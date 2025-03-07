@@ -448,7 +448,7 @@ addFilter('bankErrorMessage', function (bankErrorObject) {
     if (bankErrorObject.accountName === 'missing') {
         errorMessages.push('<li><a href="#accountName-error">Enter the name on the account</a></li>');
     } else if (bankErrorObject.accountName === 'tooLong') {
-        errorMessages.push('<li><a href="#accountName-error">Name on the account must be no more than 18 characters</a></li>');
+        errorMessages.push('<li><a href="#accountName-error">Name on the account must be no more than 140 characters</a></li>');
     }
     if (bankErrorObject.sortCode === 'missing') {
         errorMessages.push('<li><a href="#sortCode-error">Enter a sort code</a></li>');

@@ -9,7 +9,7 @@
 
     {% if (claim.status == "queried" or claim.status == "not-yet-submitted" or claim.status == "submitted") %}
 
-    <p class="govuk-body"><strong>The maximum reimbursement amount for this training is</strong><br><strong class="govuk-!-font-size-36">£{{ training.reimbursementAmount }}.</strong></p>
+    <p class="govuk-body"><strong>The maximum reimbursement amount for this training is</strong><br><strong class="govuk-!-font-size-36">{{ training.reimbursementAmount | currency(trailingZeros=false) }}</strong></p>
     <p class="govuk-body">This is the most you could get back. It’s usually less than the training actually cost, meaning that you’ll cover the difference.</p>
     <p class="govuk-body">If you paid less than the maximum reimbursement amount, you’ll get back what you paid.</p>
 
@@ -26,7 +26,7 @@
     </details>
 
     {% elif claim.status == "approved" %}
-    <p class="govuk-body">You will get back <br><strong class="govuk-!-font-size-36">£{{ submission | getReimbursementAmount(training) }}</strong><br> for this claim.</p>
+    <p class="govuk-body">You will get back <br><strong class="govuk-!-font-size-36">{{ (submission | getReimbursementAmount(training)) | currency(trailingZeros=false) }}</strong><br> for this claim.</p>
     <details class="govuk-details">
         <summary class="govuk-details__summary">
             <span class="govuk-details__summary-text">
@@ -36,8 +36,8 @@
         <div class="govuk-details__text">
             <p class="govuk-body">This amount is the lower of:</p>
             <ul class="govuk-list govuk-list--bullet">
-                <li>the maximum reimbursement amount for this training (£{{ training.reimbursementAmount }})</li>
-                <li>what you actually paid (£{{ submission.evidenceOfPaymentReview.costPerLearner}})</li>
+                <li>the maximum reimbursement amount for this training ({{ training.reimbursementAmount | currency(trailingZeros=false) }})</li>
+                <li>what you actually paid ({{ submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}})</li>
             </ul>
         </div>
     </details>
@@ -47,12 +47,12 @@
 {% elif claim.claimType == "60" %}
 
     {% if (claim.status == "queried" or claim.status == "not-yet-submitted" or claim.status == "submitted") %}
-    <p class="govuk-body"><strong>The maximum reimbursement amount for this training is</strong><br><strong class="govuk-!-font-size-36">£{{ training.reimbursementAmount }}.</strong></p>
+    <p class="govuk-body"><strong>The maximum reimbursement amount for this training is</strong><br><strong class="govuk-!-font-size-36">{{ training.reimbursementAmount | currency(trailingZeros=false) }}</strong></p>
 
     <p class="govuk-body">Using the 60/40 funding model, you could get back up to:</p>
     <ul class="govuk-list govuk-list--bullet">
-        <li><strong>£{{ training.reimbursementAmount * 0.6 }}</strong> up front for the 60 part of the claim and</li>
-        <li><strong>£{{ training.reimbursementAmount * 0.4 }}</strong> on completion of training for the 40 part of the claim</li>
+        <li><strong>{{ (training.reimbursementAmount * 0.6) | currency(trailingZeros=false) }}</strong> up front for the 60 part of the claim and</li>
+        <li><strong>{{ (training.reimbursementAmount * 0.4) | currency(trailingZeros=false) }}</strong> on completion of training for the 40 part of the claim</li>
     </ul>
     <p class="govuk-body">The maximum reimbursement amount is the most you could get back. It’s usually less than the training actually cost, meaning that you’ll cover the difference.</p>
     <p class="govuk-body">If you paid less than the maximum reimbursement amount, you’ll get back what you paid.</p>
@@ -81,9 +81,9 @@
 
         {% if pairClaim.status == "new" or pairClaim.status == "not-yet-submitted" or pairClaim.status == "submitted" %}
 
-        <p class="govuk-body"><strong>The total you could get back for this training is</strong><br><strong class="govuk-!-font-size-36">£{{ submission | getReimbursementAmount(training) }}.</strong></p>
-        <p class="govuk-body">You'll get <strong>£{{ (submission | getReimbursementAmount(training)) * 0.6 }}</strong> for the 60 part of the claim.</p>
-        <p class="govuk-body">You could get an additional <strong>£{{ (submission | getReimbursementAmount(training)) * 0.4 }}</strong> when the 40 part of the claim is approved.</p>
+        <p class="govuk-body"><strong>The total you could get back for this training is</strong><br><strong class="govuk-!-font-size-36">{{ (submission | getReimbursementAmount(training)) | currency(trailingZeros=false) }}</strong></p>
+        <p class="govuk-body">You'll get <strong>{{ ((submission | getReimbursementAmount(training)) * 0.6) | currency(trailingZeros=false) }}</strong> for the 60 part of the claim.</p>
+        <p class="govuk-body">You could get an additional <strong>{{ ((submission | getReimbursementAmount(training)) * 0.4) | currency(trailingZeros=false) }}</strong> when the 40 part of the claim is approved.</p>
 
         <details class="govuk-details">
             <summary class="govuk-details__summary">
@@ -94,8 +94,8 @@
             <div class="govuk-details__text">
                 <p class="govuk-body">The total you could get back for this training is whichever is the lower of:</p>
                 <ul class="govuk-list govuk-list--bullet">
-                    <li>the maximum reimbursement amount for this training (£{{ training.reimbursementAmount }})</li>
-                    <li>what you actually paid (£{{ submission.evidenceOfPaymentReview.costPerLearner}})</li>
+                    <li>the maximum reimbursement amount for this training ({{ training.reimbursementAmount | currency(trailingZeros=false) }})</li>
+                    <li>what you actually paid ({{ submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}})</li>
                 </ul>
                 <p class="govuk-body">For the 60 part of the claim you'll get 60% of this total after providing evidence of payment.</p>
                 <p class="govuk-body">For the 40 part of the claim you'll get 40% of the total after providing evidence of training completion.</p>
@@ -104,9 +104,9 @@
 
         {% elif pairClaim.status == "approved" %}
 
-        <p class="govuk-body"><strong>In total for this training you'll get back </strong><br><strong class="govuk-!-font-size-36">£{{ submission | getReimbursementAmount(training) }}.</strong></p>
-        <p class="govuk-body">For the 60 part of the claim you've already got <strong>£{{ (submission | getReimbursementAmount(training)) * 0.6 }}</strong>.</p>
-        <p class="govuk-body">You'll get <strong>£{{ (submission | getReimbursementAmount(training)) * 0.4 }}</strong> for the 40 part of the claim.</p>
+        <p class="govuk-body"><strong>In total for this training you'll get back </strong><br><strong class="govuk-!-font-size-36">{{ (submission | getReimbursementAmount(training)) | currency(trailingZeros=false) }}</strong></p>
+        <p class="govuk-body">For the 60 part of the claim you've already got <strong>{{ ((submission | getReimbursementAmount(training)) * 0.6) | currency(trailingZeros=false) }}</strong>.</p>
+        <p class="govuk-body">You'll get <strong>{{ ((submission | getReimbursementAmount(training)) * 0.4) | currency(trailingZeros=false) }}</strong> for the 40 part of the claim.</p>
 
         <details class="govuk-details">
             <summary class="govuk-details__summary">
@@ -117,8 +117,8 @@
             <div class="govuk-details__text">
                 <p class="govuk-body">The total you could get back for this training is whichever is the lower of:</p>
                 <ul class="govuk-list govuk-list--bullet">
-                    <li>the maximum reimbursement amount for this training (£{{ training.reimbursementAmount}})</li>
-                    <li>what you actually paid (£{{ submission.evidenceOfPaymentReview.costPerLearner}})</li>
+                    <li>the maximum reimbursement amount for this training ({{ training.reimbursementAmount | currency(trailingZeros=false)}})</li>
+                    <li>what you actually paid ({{ submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}})</li>
                 </ul>
                 <p class="govuk-body">For the 60 part of the claim you'll get 60% of this total after providing evidence of payment.</p>
                 <p class="govuk-body">For the 40 part of the claim you'll get 40% of the total after providing evidence of training completion.</p>
@@ -127,7 +127,7 @@
 
         {% elif pairClaim.status == "rejected" %}
 
-        <p class="govuk-body">You'll get back <br><strong class="govuk-!-font-size-36">£{{ (submission | getReimbursementAmount(training)) * 0.6 }}</strong><br>for the 60 part of the claim.</p>
+        <p class="govuk-body">You'll get back <br><strong class="govuk-!-font-size-36">{{ ((submission | getReimbursementAmount(training)) * 0.6) | currency(trailingZeros=false) }}</strong><br>for the 60 part of the claim.</p>
         <p class="govuk-body">You'll not get anything for the 40 part as it was rejected.</p>
 
         <details class="govuk-details">
@@ -139,8 +139,8 @@
             <div class="govuk-details__text">
                 <p class="govuk-body">The total you could get back for this training is whichever is the lower of:</p>
                 <ul class="govuk-list govuk-list--bullet">
-                    <li>the maximum reimbursement amount for this training (£{{ training.reimbursementAmount }})</li>
-                    <li>what you actually paid (£{{ submission.evidenceOfPaymentReview.costPerLearner}})</li>
+                    <li>the maximum reimbursement amount for this training ({{ training.reimbursementAmount | currency(trailingZeros=false) }})</li>
+                    <li>what you actually paid ({{ submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}})</li>
                 </ul>
                 <p class="govuk-body">For the 60 part of the claim you'll get 60% of this total after providing evidence of payment.</p>
             </div>

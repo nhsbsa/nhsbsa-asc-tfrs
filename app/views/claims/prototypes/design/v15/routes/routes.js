@@ -338,6 +338,14 @@ router.post('/new-claim', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];
   delete req.session.data['notFound'];
+  delete req.session.data['id'];
+  delete req.session.data['statusID'];
+  delete req.session.data['fromSearchId'];
+  delete req.session.data['fromSearchResults'];
+  delete req.session.data['confirmation'];
+  delete req.session.data['type'];
+  
+
   res.redirect('claim/select-training')
 });
 
@@ -615,13 +623,26 @@ router.post('/save-query-claim', function (req, res) {
 });
 
 router.post('/ready-to-declare', function (req, res) {
-  const claimID = req.session.data.id
+  let claimID = req.session.data.id
   let claim = {}
+
+  
+
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
       claim = c
     }
   }
+
+  if (claim.claimType == "60" && claim.status == "approved") {
+    claimID =  claimID.slice(0, -1) + 'C';
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID) {
+        claim = c
+      }
+    }
+  }
+
   const submitError = checkClaim(claim)
   if (submitError.claimValid) {
     delete req.session.data.submitError
@@ -702,6 +723,7 @@ router.post('/submit-claim', function (req, res) {
     submission.submittedDate = dStr
     submission.submitter = "flossie.gleason@evergreencare.com"
     delete req.session.data.submitError
+    delete req.session.data.confirmation
     res.redirect('claim/confirmation')
 
 
