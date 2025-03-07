@@ -629,7 +629,7 @@ router.post('/ready-to-declare', function (req, res) {
   
 
   for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
+    if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
       claim = c
     }
   }
@@ -637,7 +637,7 @@ router.post('/ready-to-declare', function (req, res) {
   if (claim.claimType == "60" && claim.status == "approved") {
     claimID =  claimID.slice(0, -1) + 'C';
     for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
         claim = c
       }
     }
