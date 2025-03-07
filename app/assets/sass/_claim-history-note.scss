@@ -22,7 +22,7 @@ html {
   z-index: 1002;
   top: 50%;
   left: 50%;
-  width: 280px;
+  width: 500px;
   padding: 30px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -35,7 +35,7 @@ html {
   overflow-y: auto;
 
   @include govuk-media-query($from: tablet) {
-    width: 435px;
+    width: 600px;
   }
 
   &:focus {
@@ -56,6 +56,73 @@ html {
 }
 
 .claim-history-dialog__link {
+  @include govuk-font($size: 24);
+
+  @include govuk-media-query($from: tablet) {
+    @include govuk-font($size: 19);
+
+    // Same padding as govuk-button
+    padding: (govuk-spacing(2) - $govuk-border-width-form-element) govuk-spacing(2) (govuk-spacing(2) - $govuk-border-width-form-element - ($govuk-border-width-form-element / 2));
+  }
+}
+
+
+.note-overlay {
+  position: fixed;
+  z-index: 1001;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  background-color: govuk-colour("black");
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+}
+
+html {
+  &.no-scroll {
+    overflow: hidden;
+  }
+}
+
+.note-dialog {
+  position: fixed;
+  z-index: 1002;
+  top: 50%;
+  left: 50%;
+  width: 280px;
+  padding: 30px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  border: 5px solid govuk-colour("black");
+  background-color: govuk-colour("white");
+
+  @include govuk-media-query($from: tablet) {
+    width: 435px;
+  }
+
+  &:focus {
+    outline: $govuk-focus-width solid $govuk-focus-colour;
+  }
+}
+
+.note-dialog__message {
+  @include govuk-font($size: 19);
+
+  line-height: 1.31579;
+}
+
+.note-dialog__countdown {
+  display: inline-block;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.note-dialog__link {
   @include govuk-font($size: 24);
 
   @include govuk-media-query($from: tablet) {
