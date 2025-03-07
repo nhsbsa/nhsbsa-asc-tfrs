@@ -42,17 +42,18 @@
 {% elif data.showNote == "hundredClaim" or data.showNote == "sixtyClaim" or data.showNote == "fourtyClaim" %}
 {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
 
-      <div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
+<div>
+      <div tabindex="-1" role="dialog" aria-modal="true" class="claim-history-dialog scrollable-claim-note" aria-labelledby="claim-history-heading claim-history-message">
         <div>
 
           {% if data.showNote == "hundredClaim" %}
-            <h2 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Claim submission</h2>
+            <h2 id="claim-history-heading" class="govuk-heading-m push--top">Claim submission</h2>
             <p class="govuk-body">Submitted on {{data.submittedDate  | govukDate }}</p>
           {% elif data.showNote == "sixtyClaim" %}
-            <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">60 part submission</h1>
+            <h1 id="claim-history-heading" class="govuk-heading-m push--top">60 part submission</h1>
             <p class="govuk-body">Submitted on {{data.submittedDate | govukDate }}</p>
           {% elif  data.showNote == "fourtyClaim" %}
-            <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">40 part submission</h1>
+            <h1 id="claim-history-heading" class="govuk-heading-m push--top">40 part submission</h1>
             <p class="govuk-body">Submitted on {{data.submittedDate | govukDate }}</p>
           {% endif %}
           
@@ -75,8 +76,9 @@
             <a href="/hideNote" class="govuk-link govuk-button" >Close</a>
         </div>
       </div>
+      </div>
       
 
 {% endif %}
 
-<div id="hmrc-timeout-overlay" class="hmrc-timeout-overlay"></div>
+<div id="claim-history-overlay" class="claim-history-overlay"></div>

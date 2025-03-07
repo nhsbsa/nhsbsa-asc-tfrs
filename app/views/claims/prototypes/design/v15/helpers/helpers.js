@@ -3,7 +3,12 @@ const fs = require('fs');
 function checkClaim(claim) {
 
     const result = {};
-    const submission = getMostRelevantSubmission(claim)
+    let submission = null
+    if (claim.status == "queried") {
+        submission = getDraftSubmission(claim)
+    } else {
+        submission = getMostRelevantSubmission(claim)
+    }
     
     if (submission.learnerID == null) {
         result.learner = "missing"
@@ -502,6 +507,8 @@ function findPair(claimID, claims){
 function checkChange(claim) {
     let lastQueried = getMostRelevantSubmission(claim)
     let draftClaim = getDraftSubmission(claim)
+
+    console.log(claim)
 
     let isChange = false
     if (
