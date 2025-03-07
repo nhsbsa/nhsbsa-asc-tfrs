@@ -29,10 +29,25 @@ GOV.UK prototype - {{serviceName}}
                             <option value="signatory" selected>Signatory</option>
                             <option value="submitter">Submitter</option>
                         </select>
-                      </div>
-                <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="./load-data">
-                    Start full prototype
-                </button>
+                    </div>
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="org">
+                            Choose organisation
+                        </label>
+                        <div id="org-hint" class="govuk-hint">
+                            These different organisations show different states of the service.
+                        </div>
+                        <select class="govuk-select" id="orgID" name="orgID" aria-describedby="org-hint">
+                            <option value="A02944934" selected>Evergreen Care home</option>
+                            <option value="B13299931">Teatree Care</option>
+                            <option value="C63281491">Anika Care Ltd</option>
+                            <option value="D62749203">Denhams Care Home</option>
+                            <option value="G91774723">Kingscourt Care Home</option>
+                        </select>
+                    </div>
+                    <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="./load-data">
+                        Start full prototype
+                    </button>
                 </form>
             </section>
         </article>

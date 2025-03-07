@@ -1,26 +1,12 @@
 {% extends "../layouts/claims-main.html" %} 
 
-{% set matchResendUser = data.resendEmail | findUser (data.users) %}
-{% set matchDeletedUser = data.deletedEmail | findUser (data.users) %}
-{% set count = data.users | userCountNotExpired %}
+{% set matchResendUser = data.resendEmail | findUser (data.org) %}
+{% set matchDeletedUser = data.deletedEmail | findUser (data.org) %}
+{% set count = data.org | userCountNotExpired %}
 
 
 {% block pageTitle %} 
 Manage team — {{serviceName}} — GOV.UK
-{% endblock %}
-
-{% block beforeContent %}
-<div class="govuk-breadcrumbs">
-  <ol class="govuk-breadcrumbs__list">
-    <li class="govuk-breadcrumbs__list-item">
-      <a class="govuk-breadcrumbs__link" href="../manage-claims-home?invite">Home
-      </a>
-  </li>
-    <li class="govuk-breadcrumbs__list-item">
-        <a class="govuk-breadcrumbs__link" href="#">Manage team</a>
-    </li>
-  </ol>
-</div>
 {% endblock %}
 
 {% block content %}
@@ -87,33 +73,34 @@ Manage team — {{serviceName}} — GOV.UK
     <table class="govuk-table">
       <caption class="govuk-table__caption govuk-table__caption--m">Registered</caption>
       <tbody class="govuk-table__body">
-          {% for user in data.users %}
-            {% if user.status == "active" %}
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
-                <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
-                {% if user.type == "signatory" %}
-                  <td class="govuk-table__cell govuk-table__cell--numeric" width="40%"></td>
-                {% else %}
-                  <td class="govuk-table__cell govuk-table__cell--numeric" width="40%"><a class="govuk-link govuk-link--no-visited-state" href="delete-user-confirmation?deletedEmail={{user.email}}&deleteSuccess">Delete</a></td>
-                {% endif %}
-              </tr>
-          {% endif %}
+        <tr class="govuk-table__row">
+          <th scope="row" class="govuk-table__header" width="30%">{{data.org.signatory.active.givenName}} {{data.org.signatory.active.familyName}} {% if data.userType == "signatory" %} (you) {% endif %}</th>
+          <td class="govuk-table__cell" width="35%">{{ data.org.signatory.active.email }}</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric" width="40%"></td>
+        </tr>
+        {% for user in data.org.users.active %}
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}}</th>
+            <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
+            {% if user.type == "signatory" %}
+              <td class="govuk-table__cell govuk-table__cell--numeric" width="40%"></td>
+            {% else %}
+              <td class="govuk-table__cell govuk-table__cell--numeric" width="40%"><a class="govuk-link govuk-link--no-visited-state" href="delete-user-confirmation?deletedEmail={{user.email}}&deleteSuccess">Delete</a></td>
+            {% endif %}
+          </tr>
         {% endfor %}
       </tbody>
     </table>
-    {% if (data.users | countMatchingStatus("pending")) >0 %}
+    {% if data.org.users.invited | length  > 0 %}
     <table class="govuk-table">
       <caption class="govuk-table__caption govuk-table__caption--m">Invited</caption>
       <tbody class="govuk-table__body">
-          {% for user in data.users %}
-            {% if user.status == "pending" %}
+        {% for user in data.org.users.invited %}
               <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
+                <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}}</th>
                 <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
                 <td class="govuk-table__cell govuk-table__cell--numeric" width="40%">{% if not (data.resendList | matchResend(user.email)) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-user?name={{user.email}}">Resend invite<span class="govuk-visually-hidden">to {{user.givenName}} {{user.familyName}}</span></a>{% else %}Invitation sent{% endif %}<a class="govuk-link govuk-link--no-visited-state" style="display: inline-block; margin-left: 10px; padding-left: 10px; border-left: 1px solid #b1b4b6;" href="delete-user-confirmation?deletedEmail={{user.email}}&deleteSuccess">Cancel invitation<span class="govuk-visually-hidden">{{user.givenName}} {{user.familyName}}</span></a></td>
               </tr>
-          {% endif %}
         {% endfor %}
       </tbody>
     </table>

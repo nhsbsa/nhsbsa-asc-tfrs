@@ -1,0 +1,36 @@
+<h2 class="govuk-heading-m" id="completion">Training completion by learner</h2>
+
+<dl class="govuk-summary-list">
+
+
+
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">
+      Completion date
+    </dt>
+    <dd class="govuk-summary-list__value">
+      {% if claim.claimType == "100" %}
+        {{ submission.completionDate | govukDate }}
+      {% elif claim.claimType == "60" %}
+        {{ pairSubmission.completionDate | govukDate }}
+      {% endif %}
+    </dd>
+  </div>
+
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Evidence of completion
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {% if claim.claimType == "100" %}
+            <p><a class="govuk-link" href="/public/images/{{ submission.evidenceOfCompletion }}" target="_blank">{{ submission.evidenceOfCompletion }}  (opens in new tab)</a></p>
+        {% elif claim.claimType == "60" %}
+            <p><a class="govuk-link" href="/public/images/{{ pairSubmission.evidenceOfCompletion }}" target="_blank">{{ pairSubmission.evidenceOfCompletion }}  (opens in new tab)</a></p>
+        {% endif %}
+      </dd>
+
+    </div>
+
+
+</dl>

@@ -6,10 +6,16 @@
         "distribution": 0.25
     },
     {
+        "id": "queried",
+        "name": "Queried",
+        "description": "Claims that have been submitted but need updating.",
+        "distribution": 0.10
+    },
+    {
         "id": "submitted",
         "name": "Submitted",
         "description": "Claims that have been submitted for processing.",
-        "distribution": 0.40
+        "distribution": 0.30
     },
     {
         "id": "rejected",

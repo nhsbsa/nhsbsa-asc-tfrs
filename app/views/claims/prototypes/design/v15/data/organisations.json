@@ -1,0 +1,293 @@
+[
+  {
+    "workplaceID": "A02944934",
+    "numberOfClaims": 500,
+    "name": "Evergreen Care home",
+    "address": ["72 Guild Street", "London", "SE23 6FH"],
+    "bankDetails": {
+      "nameOnAccount": "Evergreen Care Home",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": "4598329056"
+    }, 
+    "notes" : [],
+    "signatory": {
+      "active": 
+        {        
+          "givenName": "Lionel",
+          "familyName": "Lowe",
+          "email": "lionel-lowel@evergreencare.co.uk",
+          "status": "active"
+        },  
+      "inactive": [
+        {        
+          "givenName": "Windler",
+          "familyName": "Marlene",
+          "email": "marlene-windler@evergreencare.co.uk"
+        },
+        {        
+          "givenName": "Reilly",
+          "familyName": "Sim",
+          "email": "sim-reilly@evergreencare.co.uk"
+        }
+      ]
+    },
+    "users": {
+      "active": [
+        {
+        "givenName": "Daniel",
+        "familyName": "Jones",
+        "email": "d.jones@evergreencare.com"
+      }, 
+      {
+        "givenName": "Rachel",
+        "familyName": "Mcglee",
+        "email": "rachel.mcglee@evergreencare.com"
+      },
+      {
+        "givenName": "Jasper",
+        "familyName": "Holloway",
+        "email": "jasper.holloway@evergreencare.com"
+      },
+      {
+        "givenName": "Elias",
+        "familyName": "Thornton",
+        "email": "elias.thornton@evergreencare.com"
+      },
+      {
+        "givenName": "Lena",
+        "familyName": "Caldwell",
+        "email": "lena.caldwell@evergreencare.com"
+      },
+      {
+        "givenName": "Miles",
+        "familyName": "Whitaker",
+        "email": "miles.whitaker@evergreencare.com"
+      },
+      {
+        "givenName": "Rosalie",
+        "familyName": "Finch",
+        "email": "rosalie.finch@evergreencare.com"
+      }
+    ],
+      "inactive": [{
+        "givenName": "Fredrick",
+        "familyName": "Smith",
+        "email": "fredrick.smith@evergreencare.com"
+      }],
+      "invited": [{
+        "givenName": "Charlotte",
+        "familyName": "Dandy",
+        "email": "charlotte.dandy@evergreencare.com"
+      },
+      {
+        "givenName": "Abel",
+        "familyName": "Mellow",
+        "email": "abel.mellow@evergreencare.com"
+      }]
+    }
+  },
+  {
+    "workplaceID": "B13299931",
+    "numberOfClaims": 100,
+    "name": "Teatree Care",
+    "address": ["32 The Lawn", "Birmingham", "BI23 6FH"],
+    "bankDetails": {
+      "nameOnAccount": "Teatree Care",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    }, 
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Cameron",
+      "familyName": "Bennett",
+      "email": "cameron.bennett@teatree.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [
+      {
+        "givenName": "Oliver",
+        "familyName": "Grey",
+        "email": "oliver.grey@teatree.com"
+      }
+    ],
+    "inactive": [
+      {
+        "givenName": "Eleanor",
+        "familyName": "Morris",
+        "email": "eleanor.morris@teatree.com"
+      }
+    ],
+    "invited": [
+      {
+        "givenName": "Zane",
+        "familyName": "Montgomery",
+        "email": "zane.montgomery@teatree.com"
+      }
+    ]
+  }
+  },
+  {
+    "workplaceID": "C63281491",
+    "numberOfClaims": 20,
+    "name": "Anika Care Ltd",
+    "address": ["13 Gandfield Street", "Wakefield", "WA23 6FH"],
+    "bankDetails": {
+      "nameOnAccount": "Anika Care",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    }, 
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Ivy",
+      "familyName": "Montgomery",
+      "email": "ivy.montgomery@anikacare.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "D62749203",
+    "numberOfClaims": 0,
+    "name": "Denhams Care Home",
+    "address": ["12 Fairfield Road", "Scarborough", "SC23 6FH"],
+    "bankDetails": {
+      "nameOnAccount": "Denhams Ltd",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    }, 
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Theo",
+      "familyName": "Kingston",
+      "email": "theo.kingston@denhams.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "E76904778",
+    "numberOfClaims": 0,
+    "name": "Bright Horizons Care home",
+    "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
+    "bankDetails": null, 
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Mira",
+      "familyName": "Caldwell",
+      "email": "Mira.Caldwell@brighthorizons.com",
+      "status": "invited"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "F15904728",
+    "numberOfClaims": 0,
+    "name": "Purple Stones Care home",
+    "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
+    "bankDetails": null, 
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Mira",
+      "familyName": "Caldwell",
+      "email": "Mira.Caldwell@purplestonecare.com",
+      "status": "invited"
+    },  
+    "inactive": [
+      {        
+      "givenName": "Mira",
+      "familyName": "Caldwell",
+      "email": "Mira.Caldwell@purplestonecare.com"
+      }
+    ]
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "G91774723",
+    "numberOfClaims": 0,
+    "name": "Pinetree Manor Care Centre",
+    "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
+    "bankDetails": null, 
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Hadyn",
+      "familyName": "Lacy",
+      "email": "hadyn-lacey@pinetreecare.co.uk",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "G91774723",
+    "numberOfClaims": 0,
+    "name": "Kingscourt Care Home",
+    "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
+    "bankDetails": null, 
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Joseph",
+      "familyName": "Stephen",
+      "email": "joseph-stephen@kingscourt.co.uk",
+      "status": "active"
+    },  
+    "inactive": [
+      {        
+      "givenName": "Evelyn",
+      "familyName": "Brooks",
+      "email": "evelyn.brooks@kingscourt.co.uk"
+      }
+    ]
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  }
+]
+
+
+
+  

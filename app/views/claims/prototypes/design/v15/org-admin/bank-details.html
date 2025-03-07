@@ -1,0 +1,67 @@
+{% extends "../layouts/claims-main.html" %} 
+
+{% block pageTitle %} 
+Banks details — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.addbankdetailsSuccess %}
+            <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+                <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+            </svg>
+                <div class="moj-banner__message">Bank details have been successfully added</div>
+            </div>
+        {% endif %}
+
+        <h1 class="govuk-heading-l">Bank details</h1>
+        {% if data.org.bankDetails == null %}
+            <p class="govuk-body">You have not added your organisation's bank details yet. You will not be able to submit any claims until you do.</p>
+            <a type="submit" class="govuk-button" href="./change-bank-details">
+                Add bank details
+            </a>
+        {% else %}
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Name on account
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{data.org.bankDetails.nameOnAccount}}
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Sort code
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{data.org.bankDetails.sortCode}}
+            </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Account number
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{data.org.bankDetails.accountNumber}}
+            </dd>
+            </div>
+            {% if data.org.bankDetails.buildingSocietyNumber != null %}
+                <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Building society roll number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <p class="govuk-body">{{data.org.bankDetails.buildingSocietyNumber}}</p>
+                </dd>
+                </div>
+            {% endif %}
+        </dl>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

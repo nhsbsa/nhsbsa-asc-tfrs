@@ -1,7 +1,10 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm } = require('../helpers/helpers.js');
+const fs = require('fs');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair } = require('../helpers/helpers.js');
+const { generateClaims } = require('../helpers/generate-claims.js');
+const { generateLearners } = require('../helpers/generate-learners.js');
 
 // v15 Prototype routes
 
@@ -46,13 +49,28 @@ router.post('/add-training', function (req, res) {
       }
     }
   }
-  if (trainingChoice.fundingModel == "full") {
+  var claim = null
+  if (req.session.data.id) {
+    claim = req.session.data.claims.find(c => c.claimID.replace(/[-\s]+/g, '') == req.session.data.id.replace(/[-\s]+/g, '')  && (c.workplaceID == req.session.data.org.workplaceID) && c.status == "queried");
+  }
+
+  if (claim) {
+    let draft = getDraftSubmission(claim)
+    draft.trainingCode = trainingChoice.code
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
-    const claimID = newTUClaim(req, trainingChoice, "100")
-    res.redirect('claim/claim-details' + '?id=' + claimID)
+    res.redirect('claim/claim-details' + '?id=' + claim.claimID)
   } else {
-    res.redirect('claim/split-decision')
+
+    if (trainingChoice.fundingModel == "full") {
+      delete req.session.data['training-input'];
+      delete req.session.data['trainingSelection'];
+      const claimID = newClaim(req, trainingChoice, "100")
+      res.redirect('claim/claim-details' + '?id=' + claimID)
+    } else {
+      res.redirect('claim/split-decision')
+    }
+
   }
 });
 
@@ -65,14 +83,31 @@ router.post('/bank-details-handler', function (req, res) {
   const check = checkBankDetailsForm(accountName, sortCode, accountNumber, buildingSociety)
 
   if (check.bankDetailsValid) {
+    const bankDetails = {
+      nameOnAccount: accountName,
+      sortCode: sortCode,
+      accountNumber: accountNumber,
+      rollNumber: buildingSociety
+    }
+    
+    req.session.data.org.bankDetails = bankDetails
+
     delete req.session.data.nameOnTheAccount
     delete req.session.data.sortCode
     delete req.session.data.accountNumber
     delete req.session.data.rollNumber
-    res.redirect('./index')
+
+    if (req.session.data.journey == 'signin') {
+      req.session.data.addbankdetailsSuccess = 'true'
+      res.redirect('org-admin/bank-details?tabLocation=bankDetails')
+    } else {
+      req.session.data.journey = 'signin'
+      res.redirect('manage-claims-home?tabLocation=claims')
+    }
+    
   } else {
     req.session.data.submitError = check
-    res.redirect('account-setup/bank-details')
+    res.redirect('org-admin/change-bank-details')
   }
 });
 
@@ -104,7 +139,7 @@ router.post('/search_id_result', function (req, res) {
   var foundClaim = null
   for (const c of req.session.data['claims']) {
     var removeDash = c.claimID.replace(/-/g, '')
-    if (removeDash.includes(claimID)) {
+    if ((removeDash.includes(claimID) && (req.session.data.org.workplaceID == c.workplaceID)) ) {
       foundClaim = c
     }
 }
@@ -204,14 +239,14 @@ router.post('/split-decision-handler', function (req, res) {
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
     delete req.session.data.splitDecision;
-    const claimID = newTUClaim(req, trainingChoice, "100")
+    const claimID = newClaim(req, trainingChoice, "100")
     res.redirect('claim/claim-details' + '?id=' + claimID)
   } else if (choice == "yes") {
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
     delete req.session.data.splitDecision;
-
-    const claimID = newTUClaim(req, trainingChoice, "60")
+    console.log(trainingChoice)
+    const claimID = newClaim(req, trainingChoice, "60")
     res.redirect('claim/claim-details' + '?id=' + claimID)
 
   } else {
@@ -219,79 +254,50 @@ router.post('/split-decision-handler', function (req, res) {
   }
 });
 
-function newTUClaim(req, input, type) {
-  let claim = {};
+function newClaim(req, input, type) {
   const d = new Date();
   const dStr = d.toISOString();
   faker.seed(req.session.data.claims.length + 1);
-  if (type == "100") {
-    claim = {
-      claimID: generateUniqueID() + "-A",
-      claimType: "100",
-      fundingType: "TU",
-      learner: null,
-      training: input,
-      startDate: null,
-      status: "not-yet-submitted",
-      createdDate: dStr,
-      createdBy: "Test Participant",
+
+  let claim = {
+    claimID: null,
+    workplaceID: req.session.data.org.workplaceID,
+    claimType: null,
+    status: "not-yet-submitted",
+    createdDate: dStr,
+    createdBy: "Test Participant",
+    notes: null,
+    submissions: [{
+      submitter: null,
       submittedDate: null,
-      paidDate: null,
+      trainingCode: input.code,
+      learnerID: null,
+      startDate: null,
       costDate: null,
+      completionDate: null,
       evidenceOfPayment: [],
       evidenceOfCompletion: null,
-      completionDate: null
-    };
-  } else if (type == "60") {
-    claim = {
-      claimID: generateUniqueID() + "-B",
-      claimType: "60",
-      fundingType: "TU",
-      learner: null,
-      training: input,
-      startDate: null,
-      status: "not-yet-submitted",
-      createdDate: dStr,
-      createdBy: "Test Participant",
-      submittedDate: null,
-      paidDate: null,
-      costDate: null,
-      evidenceOfPayment: [],
-      evidenceOfCompletion: null,
-      completionDate: null
-    };
-  } else if (type == "40") {
-    let training = null
-    let learner = null
-    let startDate = null
-    let costDate = null
-    let evidenceOfPayment = null
-    for (const c of req.session.data.claims) {
-      if (input == c.claimID) {
-        training = c.training
-        learner = c.learner
-        startDate = c.startDate
-        costDate = c.costDate
-        evidenceOfPayment = c.evidenceOfPayment
+      processedBy: null,
+      processedDate: null,
+      evidenceOfPaymentReview: {
+        outcome: null,
+        note: null,
+        costPerLearner: null
+      },
+      evidenceOfCompletionReview: {
+        outcome: null,
+        note: null
       }
-    }
-    claim = {
-      claimID: input.slice(0, -1) + "C",
-      claimType: "40",
-      fundingType: "TU",
-      learner,
-      training,
-      startDate,
-      status: "not-yet-submitted",
-      createdDate: dStr,
-      createdBy: "Test Participant",
-      submittedDate: null,
-      paidDate: null,
-      costDate,
-      evidenceOfPayment,
-      evidenceOfCompletion: null,
-      completionDate: null
-    };
+    }]
+  };
+
+
+  if (type == "100") {
+    claim.claimID = generateUniqueID() + "-A",
+    claim.claimType = "100"
+  } else if (type == "60") {
+    claim.claimID = generateUniqueID() + "-B",
+    claim.claimType = "60"
   }
 
   req.session.data.claims.push(claim)
@@ -335,12 +341,6 @@ router.post('/new-claim', function (req, res) {
   res.redirect('claim/select-training')
 });
 
-router.get('/start-40-claim', function (req, res) {
-  claimID = req.session.data.id
-  const newID = newTUClaim(req, claimID, "40")
-  res.redirect('claim/claim-details' + '?id=' + newID)
-});
-
 router.post('/add-start-date', function (req, res) {
   const day = req.session.data['activity-date-started-day']
   const month = req.session.data['activity-date-started-month']
@@ -356,8 +356,14 @@ router.post('/add-start-date', function (req, res) {
     delete req.session.data['activity-date-started-month'];
     delete req.session.data['activity-date-started-year'];
     for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        c.startDate = startDate
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        let submission = null
+        if (c.status == "queried") {
+          submission = getDraftSubmission(c)
+        } else {
+          submission = getMostRelevantSubmission(c)
+        }
+        submission.startDate = startDate
       }
     }
     res.redirect('claim/claim-details' + '?id=' + claimID + '#training')
@@ -381,8 +387,14 @@ router.post('/cost-date', function (req, res) {
 
   if (error.dateValid == true) {
     for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        c.costDate = costDate
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        let submission = null
+        if (c.status == "queried") {
+          submission = getDraftSubmission(c)
+        } else {
+          submission = getMostRelevantSubmission(c)
+        }
+        submission.costDate = costDate
       }
     }
     delete req.session.data['payment-date-started-day'];
@@ -412,8 +424,14 @@ router.post('/completion-date', function (req, res) {
 
   if (error.dateValid == true) {
     for (const c of req.session.data.claims) {
-      if (claimID == c.claimID) {
-        c.completionDate = completionDate
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        let submission = null
+        if (c.status == "queried") {
+          submission = getDraftSubmission(c)
+        } else {
+          submission = getMostRelevantSubmission(c)
+        }
+        submission.completionDate = completionDate
       }
     }
     delete req.session.data['completion-date-started-day'];
@@ -428,9 +446,10 @@ router.post('/completion-date', function (req, res) {
 
 router.post('/add-learner', function (req, res) {
   var claimID = req.session.data.id
+  var learner = null
   for (const l of req.session.data.learners) {
     if (req.session.data.learnerSelection == l.id) {
-      var learner = l
+      learner = l
       break;
     }
   }
@@ -445,22 +464,26 @@ router.post('/add-learner', function (req, res) {
   delete req.session.data.nationalInsuranceNumber
 
   for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-        duplicateCheck = checkDuplicateClaim(learner.id, c.training.code, req.session.data.claims);
+    if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
+        duplicateCheck = checkDuplicateClaim(learner.id, submission.trainingCode, req.session.data.claims);
         if (duplicateCheck.check) {
           res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
         } else {
-          c.learner = learner
+          submission.learnerID = learner.id
           res.redirect('claim/claim-details?id=' + claimID + '#learner')
         }
-
     }
   }
 });
 
 router.post('/add-evidence', function (req, res) {
   delete req.session.data.deleteSuccess
-  var radioButtonValue = req.session.data.another
   var type = req.session.data.type
   var claimID = req.session.data.id 
 
@@ -469,12 +492,17 @@ router.post('/add-evidence', function (req, res) {
   }
 
   for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      let numberOfEvidence = c.evidenceOfPayment.length + 1
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
       if (type == 'payment') {
-        c.evidenceOfPayment.push('invoice' + (c.evidenceOfPayment.length + 1) + '.pdf')
+        submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
       } else if (type == 'completion') {
-        c.evidenceOfCompletion.push('certificate' + (c.evidenceOfCompletion.length + 1) + '.pdf')
+        submission.evidenceOfCompletion = ('certificate.pdf')
       }
       break;
     }
@@ -517,12 +545,13 @@ router.post('/remove-evidence', function (req, res) {
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
+      let submission = getMostRelevantSubmission(c)
       if (type == 'payment') {
-        c.evidenceOfPayment.pop()
-        paymentCount = c.evidenceOfPayment.length
+        submission.evidenceOfPayment.pop()
+        paymentCount = submission.evidenceOfPayment.length
       } else if (type == 'completion') {
-        c.evidenceOfCompletion.pop()
-        completionCount = c.evidenceOfCompletion.length
+        submission.evidenceOfCompletion.pop()
+        completionCount = submission.evidenceOfCompletion.length
       }
       break;
     }
@@ -540,7 +569,7 @@ router.post('/remove-evidence', function (req, res) {
 router.post('/save-claim', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID) ) {
       c.status = 'not-yet-submitted'
       break;
     }
@@ -565,6 +594,26 @@ router.post('/save-claim', function (req, res) {
 
 });
 
+router.post('/save-query-claim', function (req, res) {
+
+  delete req.session.data.id
+  delete req.session.data.submitError
+  delete req.session.data['completion-date-started-day'];
+  delete req.session.data['completion-date-started-month'];
+  delete req.session.data['completion-date-started-year'];
+  delete req.session.data['payment-date-started-day'];
+  delete req.session.data['payment-date-started-month'];
+  delete req.session.data['payment-date-started-year'];
+  delete req.session.data['activity-date-started-day'];
+  delete req.session.data['activity-date-started-month'];
+  delete req.session.data['activity-date-started-year'];
+
+  req.session.data.currentPage = "1"
+
+  res.redirect('manage-claims?statusID=queried')
+
+});
+
 router.post('/ready-to-declare', function (req, res) {
   const claimID = req.session.data.id
   let claim = {}
@@ -576,7 +625,12 @@ router.post('/ready-to-declare', function (req, res) {
   const submitError = checkClaim(claim)
   if (submitError.claimValid) {
     delete req.session.data.submitError
-    res.redirect('claim/declaration')
+    if (req.session.data.org.bankDetails == null) {
+      res.redirect('claim/missing-bank-details')
+    } else {
+      res.redirect('claim/declaration')
+    }
+    
   } else {
     req.session.data.submitError = submitError
     res.redirect('claim/claim-details' + '?id=' + claimID)
@@ -588,18 +642,69 @@ router.post('/submit-claim', function (req, res) {
   const d = new Date()
   const dStr = d.toISOString();
 
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      if (req.session.data.confirmation) {
-        c.status = 'submitted'
-        c.submittedDate = dStr
-        delete req.session.data.submitError
-        req.session.data.claims = sortByCreatedDate(req.session.data.claims);
-        res.redirect('claim/confirmation')
-      } else {
-        res.redirect('claim/declaration?submitError=true')
+  let hundredClaim = null
+
+  let sixtyClaim = null
+  let fourtyClaim = null
+
+  if (req.session.data.confirmation == null) {
+    res.redirect('claim/declaration?submitError=true')
+  } else {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
+        if (c.claimType == "100") {
+          hundredClaim = c
+        } else if (c.claimType == "60") {
+          sixtyClaim = c
+        } else if (c.claimType == "40") {
+          fourtyClaim = c
+        }
       }
     }
+
+    if (sixtyClaim) {
+      fourtyClaim = findPair(sixtyClaim.claimID, req.session.data.claims)
+    } else if (fourtyClaim) {
+      sixtyClaim = findPair(fourtyClaim.claimID, req.session.data.claims)
+    }
+
+    let submission = null
+
+    if (hundredClaim && hundredClaim.status == "queried") {
+      submission = getDraftSubmission(hundredClaim)
+      hundredClaim.status = 'submitted'
+    } else if (hundredClaim) {
+      submission = getMostRelevantSubmission(hundredClaim)
+      hundredClaim.status = 'submitted'
+    }
+
+    if (sixtyClaim && fourtyClaim == null) {
+      if (sixtyClaim.status == "queried") {
+        submission = getDraftSubmission(sixtyClaim)
+        sixtyClaim.status = 'submitted'
+      } else {
+        submission = getMostRelevantSubmission(sixtyClaim)
+        sixtyClaim.status = 'submitted'
+      }
+    }
+
+    if (fourtyClaim) {
+      if (fourtyClaim.status == "queried") {
+        submission = getDraftSubmission(fourtyClaim)
+        fourtyClaim.status = 'submitted'
+      } else {
+        submission = getMostRelevantSubmission(fourtyClaim)
+        fourtyClaim.status = 'submitted'
+      }
+    }
+
+
+    submission.submittedDate = dStr
+    submission.submitter = "flossie.gleason@evergreencare.com"
+    delete req.session.data.submitError
+    res.redirect('claim/confirmation')
+
+
   }
 });
 
@@ -712,9 +817,27 @@ router.post('/declaration-confirmation', function (req, res) {
   delete req.session.data.declarationSubmitError
   const declarationConfirmed = req.session.data.declaration
   if (declarationConfirmed != null) {
-    res.redirect('account-setup/bank-details')
+    res.redirect('account-setup/bank-details-question')
   } else {
     res.redirect('account-setup/declaration?declarationSubmitError=true')
+  }
+});
+
+
+router.post('/bank-details-question-handler', function (req, res) {
+  delete req.session.data.submitError
+
+  const answer = req.session.data.bankDetailsQuestion
+
+  if (answer != null) {
+    if (answer == "yes") {
+      res.redirect('org-admin/change-bank-details')
+    } else if (answer == "no") {
+      delete req.session.data.journey
+      res.redirect('manage-claims-home?tabLocation=claims')
+    }
+  } else {
+    res.redirect('account-setup/bank-details-question?submitError=true')
   }
 });
 
@@ -726,7 +849,7 @@ router.post('/check-user', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
 
-  const submitError = checkUserForm(familyName, givenName, email, req.session.data.users)
+  const submitError = checkUserForm(familyName, givenName, email, req.session.data.org.users)
 
   if (submitError.userValid) {
     res.redirect('org-admin/confirm-user-details')
@@ -753,17 +876,14 @@ router.post('/invite-user', function (req, res) {
         familyName: familyName,
         givenName: givenName,
         email: email,
-        type: "submitter",
-        status: "pending",
-        invited: new Date()
     };
-    req.session.data.users.push(user)
+    req.session.data.org.users.invited.push(user)
     delete req.session.data.familyName
     delete req.session.data.givenName
     delete req.session.data.email
     delete req.session.data.deleteSuccess
     delete req.session.data.deletedUser
-    res.redirect('org-admin/manage-team?invite=success')
+    res.redirect('org-admin/manage-team?tabLocation=users&invite=success')
   } else {
     res.redirect('org-admin/confirm-user-details?checkBoxSubmitError=true')
   }
@@ -779,21 +899,35 @@ router.get('/reinvite-user', function (req, res) {
     req.session.data.resendList = [req.session.data.name]
   }
 
-  res.redirect('org-admin/manage-team')
+  res.redirect('org-admin/manage-team?tabLocation=users')
 
 });
 
 
 router.get('/confirm-delete-user', function (req, res) {
-  var query = "registered"
-  for (const user of req.session.data.users) {
-    if (req.session.data.deletedEmail == user.email) {
-      query = user.status
-      user.status = "deleted"
-    }
+  const deletedEmail = req.session.data.deletedEmail
+  let query = null
+
+  let index = req.session.data.org.users.invited.findIndex(obj => obj['email'] === deletedEmail);
+  if (index !== -1) {
+    req.session.data.org.users.inactive.push(req.session.data.org.users.invited[index]);
+    req.session.data.org.users.invited.splice(index, 1);
+    query = 'invited'
   }
+  
+  index = req.session.data.org.users.active.findIndex(obj => obj['email'] === deletedEmail);
+  if (index !== -1) {
+    req.session.data.org.users.inactive.push(req.session.data.org.users.active[index]);
+    req.session.data.org.users.active.splice(index, 1);
+    query = 'active'
+  }
+
   delete req.session.data.invite
-  res.redirect('org-admin/manage-team?deleteSuccess=true&deletedUser=' + query)
+
+  req.session.data.deletedUser = query
+  req.session.data.deleteSuccess = 'true'
+
+  res.redirect('org-admin/manage-team?tabLocation=users')
 });
 
 router.get('/clear-learner', function (req, res) {
@@ -802,6 +936,29 @@ router.get('/clear-learner', function (req, res) {
     if (claimID == c.claimID) {
       c.learner = null
       res.redirect('claim/claim-details' + '?id=' + claimID)
+    }
+  }
+});
+
+router.get('/showHistoryNote', function (req, res) {
+  req.session.data['showNote'] = req.session.data['noteType']
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claims/prototypes/design/v15/claim/claim-details' + '?id=' + claimID)
+    }
+  }
+});
+
+router.get('/hideNote', function (req, res) {
+  req.session.data['showNote'] = null
+  req.session.data['noteType'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claims/prototypes/design/v15/claim/claim-details' + '?id=' + claimID)
     }
   }
 });
@@ -833,9 +990,7 @@ function loadData(req) {
   var learnersFile = 'learners.json'
   var trainingFile = 'training.json'
   var claimsFile = 'claims.json'
-  var statusFile = 'claim-item-statuses.json'
-  var roleTypes = 'role-types.json'
-  var users = 'users.json'
+  var statusFile = 'claim-statuses.json'
 
   console.log('loading in training file')
   req.session.data['training'] = loadJSONFromFile(trainingFile, path)
@@ -853,27 +1008,60 @@ function loadData(req) {
   req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
   console.log('statuses file loaded')
 
-  console.log('loading in role types file')
-  req.session.data['roleTypes'] = loadJSONFromFile(roleTypes, path)
-  console.log('role types file loaded')
-
-  console.log('loading in users file')
-  req.session.data['users'] = loadJSONFromFile(users, path)
-  console.log('users file loaded')
-
   return console.log('data updated')
 }
 
 router.post('/load-data', function (req, res) {
+
   //Load data from JSON files
+  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v15/data/')
+  const orgID = req.session.data['orgID']
+
+  for (const organisation of organisations) {
+    if (organisation.workplaceID == orgID) {
+      
+      req.session.data.org = organisation
+      break;
+    }
+  }
+
+  delete req.session.data['orgID']
+  
   loadData(req);
   res.redirect('before-you-start.html')
 })
 
 router.get('/load-data-account-test', function (req, res) {
   //Load data from JSON files
+
+  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v15/data/')
+
+  for (const organisation of organisations) {
+    if (organisation.workplaceID == "G76904778") {
+      req.session.data.org = organisation
+      break;
+    }
+  }
+
   loadData(req);
   res.redirect('./authentication/creation-link?journey=creation')
+})
+
+//generate data
+router.get('/generate', function (req, res) {
+  generateLearners(50);
+  let claims = []
+  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/prototypes/design/v15/data/organisations.json', 'utf8'));
+  for (const org of organisations) {
+    if (org.numberOfClaims >0) {
+      claims = claims.concat(generateClaims(org.workplaceID));
+    }
+  }
+  // Write data to claims.json
+  const jsonFilePath = './app/views/claims/prototypes/design/v15/data/claims.json';
+  fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
+
+  res.redirect('../')
 })
 
 module.exports = router

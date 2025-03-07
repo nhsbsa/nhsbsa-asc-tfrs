@@ -449,3 +449,124 @@
     display: none;
   }
 }
+
+.govuk-pagination__item--ellipses__hidden {
+  @include govuk-media-query($from: tablet) {
+    display: none;
+  }
+}
+
+.app-organisation-actions {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.app-organisation-actions::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.app-organisation-actions__title {
+  font-family: "GDS Transport", arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+@media print {
+  .app-organisation-actions__title {
+    font-family: sans-serif;
+  }
+}
+@media (min-width: 40.0625em) {
+  .app-organisation-actions__title {
+    font-size: 1.1875rem;
+    line-height: 1.3157894737;
+  }
+}
+@media print {
+  .app-organisation-actions__title {
+    font-size: 14pt;
+    line-height: 1.15;
+  }
+}
+@media (min-width: 40.0625em) {
+  .app-organisation-actions__title {
+    float: left;
+    width: 60%;
+  }
+}
+
+.app-organisation-actions__link {
+  font-family: "GDS Transport", arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-decoration: underline;
+  text-decoration-thickness: max(1px, .0625rem);
+  text-underline-offset: 0.1578em;
+}
+@media print {
+  .app-organisation-actions__link {
+    font-family: sans-serif;
+  }
+}
+.app-organisation-actions__link:hover {
+  text-decoration-thickness: max(3px, .1875rem, .12em);
+  -webkit-text-decoration-skip-ink: none;
+  text-decoration-skip-ink: none;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip: none;
+}
+.app-organisation-actions__link:focus {
+  outline: 3px solid transparent;
+  color: #0b0c0c;
+  background-color: #ffdd00;
+  box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+  text-decoration: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.app-organisation-actions__link:link, .app-organisation-actions__link:visited {
+  color: #1d70b8;
+}
+
+.app-organisation-actions__actions {
+  margin: 0;
+}
+@media (min-width: 40.0625em) {
+  .app-organisation-actions__actions {
+    display: table-cell;
+    width: 40%;
+    padding-right: 0;
+    text-align: right;
+    float: right;
+  }
+}
+
+.app-organisation-actions__actions-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.app-organisation-actions__actions-list-item {
+  display: inline;
+  margin-right: 10px;
+  padding-right: 10px;
+}
+
+.app-organisation-actions__actions-list-item:not(:last-child) {
+  border-right: 1px solid #b1b4b6;
+}
+
+.app-organisation-actions__actions-list-item:last-child {
+  margin-right: 0;
+  padding-right: 0;
+  border: 0;
+}
+
+.app-organisation-caption {
+  @include govuk-font($size: 16);
+  color: $govuk-secondary-text-colour;
+}

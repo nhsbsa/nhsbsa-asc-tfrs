@@ -29,7 +29,7 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement001.png"],
-    "evidenceOfPaymentreview": {
+    "evidenceOfPaymentReview": {
       "pass": null,
       "criteria1": {
         "result": null,
@@ -49,7 +49,7 @@
       }
     },
     "evidenceOfCompletion": ["certificate001.pdf"],
-    "evidenceOfCompletionreview": {
+    "evidenceOfCompletionReview": {
       "pass": null,
       "criteria1": {
         "result": null,
@@ -98,7 +98,7 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement001.png"],
-    "evidenceOfPaymentreview": {
+    "evidenceOfPaymentReview": {
       "pass": null,
       "criteria1": {
         "result": null,
@@ -118,7 +118,7 @@
       }
     },
     "evidenceOfCompletion": ["certificate001.pdf"],
-    "evidenceOfCompletionreview": {
+    "evidenceOfCompletionReview": {
       "pass": null,
       "criteria1": {
         "result": null,
@@ -168,7 +168,7 @@
     "rejectedDate": null,
     "rejectedNote": null,
     "evidenceOfPayment": ["invoice002.pdf"],
-    "evidenceOfPaymentreview": {
+    "evidenceOfPaymentReview": {
       "complete": false,
       "criteria-1": false,
       "criteria-2": false,
@@ -183,7 +183,7 @@
 
     },
     "evidenceOfCompletion": ["certificate002.pdf"],
-    "evidenceOfCompletionreview": {
+    "evidenceOfCompletionReview": {
       "complete": false,
       "criteria-1": false,
       "criteria-2": false,
@@ -230,7 +230,7 @@
     "rejectedDate": "2023-12-05T18:04:04.173Z",
     "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
     "evidenceOfPayment": ["invoice007.pdf"],
-    "evidenceOfPaymentreview": {
+    "evidenceOfPaymentReview": {
       "complete": false,
       "criteria-1": false,
       "criteria-2": false,
@@ -245,7 +245,7 @@
 
     },
     "evidenceOfCompletion": ["certificate007.pdf"],
-    "evidenceOfCompletionreview": {
+    "evidenceOfCompletionReview": {
       "complete": false,
       "criteria-1": false,
       "criteria-2": false,

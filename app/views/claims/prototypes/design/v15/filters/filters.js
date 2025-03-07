@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase } = require('../helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findPair } = require('../helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -19,6 +19,8 @@ addFilter('statusTag', function (statusID, statuses) {
         return '<strong class="govuk-tag govuk-tag--blue">' + statusName + '</strong>'
     } else if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
+    } else if (statusID == 'queried') {
+        return '<strong class="govuk-tag govuk-tag--yellow">' + statusName + '</strong>'
     } else if (statusID == 'rejected') {
         return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
     } else if (statusID == 'approved') {
@@ -28,10 +30,10 @@ addFilter('statusTag', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
-addFilter('claimCount', function (statusID, claims) {
+addFilter('claimCount', function (statusID, claims, workplaceID) {
     let i = 0
     for (const c of claims) {
-        if (c.status == statusID) {
+        if ((c.status == statusID && (c.workplaceID == workplaceID))) {
             i++
         }
     }
@@ -65,6 +67,8 @@ addFilter('statusDetails', function (statusID, statuses) {
 addFilter('variableDate', function (statusID) {
     if (statusID == 'not-yet-submitted') {
         return 'Created'
+    } else if (statusID == 'queried') {
+        return 'Queried'
     } else if (statusID == 'submitted') {
         return 'Submitted'
     } else if (statusID == 'rejected') {
@@ -88,12 +92,6 @@ addFilter('potName', function (type) {
         name = "Care skills funding"
     }
     return name
-})
-
-addFilter('checkEligible', function (learner, type, roleTypes) {
-    let eligibleRoles = []
-    eligibleRoles = roleTypes.filter(role => role.eligibility.isTUeligible).map(role => role.rolename);
-    return eligibleRoles.includes(learner.roleType)
 })
 
 addFilter('errorSummary', function (claim, submitError) {
@@ -135,19 +133,30 @@ addFilter('errorSummary', function (claim, submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true })
 
-addFilter('findClaim', function (claimID, claims) {
+addFilter('findClaim', function (claimID, claims, workplaceID) {
     let claim = null;
-    var searchedClaimID = claimID.replace(/[-\s]+/g, '');
-    for (let c of claims) {
-        var removeSuffix = c.claimID.replace(/[-\s]+/g, '');
-        if (removeSuffix.includes(searchedClaimID)) {
-            claim = c
+    if (claimID) {
+        var searchedClaimID = claimID.replace(/[-\s]+/g, '');
+        for (let c of claims) {
+            var removeSuffix = c.claimID.replace(/[-\s]+/g, '');
+            if (removeSuffix.includes(searchedClaimID) && c.workplaceID == workplaceID) {
+                claim = c
+            }
         }
+        return claim;
+    } else {
+        return null
     }
-    return claim;
+
 })
 
-addFilter('findUser', function (email, users) {
+addFilter('findSubmissionByDate', function (submissions, submittedDate) {
+    const submission = submissions.find(s => s.submittedDate == submittedDate);
+    return submission
+})
+
+addFilter('findUser', function (email, org) {
+    users = flattenUsers(org)
     let user = null;
     for (let u of users) {
         if (u.email == email) {
@@ -406,16 +415,26 @@ addFilter('learnerSearch', function (search, learner) {
     return match
 })
 
-addFilter('trainingSearch', function (search, training) {
-    let match = false
-    const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
-    const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
-    const formattedTrainingCode = removeSpacesAndCharactersAndLowerCase(training.code);
-
-    if (formattedTrainingTitle.includes(formattedSearch) || formattedTrainingCode.includes(formattedSearch)) {
-        match = true
+addFilter('trainingSearch', function (search, training, claim) {
+    let match = false 
+    let s = false
+    if (claim == null) {
+        s = true
+    } else {
+        s = claim.status == "queried" && ((training.fundingModel == "full" && claim.claimType == "100") || (training.type == "split" && claim.claimType != "100"))
     }
 
+    if (s) {
+        const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
+        const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
+        const formattedTrainingCode = removeSpacesAndCharactersAndLowerCase(training.code);
+    
+        if (formattedTrainingTitle.includes(formattedSearch) || formattedTrainingCode.includes(formattedSearch)) {
+            match = true
+        }
+    } else {
+        return false
+    }
     return match
 })
 
@@ -462,16 +481,7 @@ addFilter('trainingTypeCheck', function (trainingCode, trainingList, matchType) 
 })
 
 addFilter('findPair', function (claimID, claims) {
-
-    for (let claim of claims) {
-        const id = claim.claimID;
-        // Check if the ID is not the same as the existing ID and
-        // if the first part of the ID (excluding the last 2 characters) matches the existing ID
-        if (id !== claimID && id.slice(0, -2) === claimID.slice(0, -2)) {
-            return claim;
-        }
-    }
-    return null; // Return null if no match is found
+    return findPair(claimID, claims)
 })
 
 addFilter('typeTag', function (type) {
@@ -491,15 +501,24 @@ addFilter('sortByDate', function (claims, statusID) {
     if (statusID == 'not-yet-submitted') {
         return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
     } else if (statusID == 'submitted') {
-        return claims.sort((a, b) => new Date(b.submittedDate) - new Date(a.submittedDate));
+        return sortClaimsByStatusSubmission(claims, 'submittedDate')
+    } else if (statusID == 'queried') {
+        return sortClaimsByStatusSubmission(claims, 'processedDate')
     } else if (statusID == 'rejected') {
-        return claims.sort((a, b) => new Date(b.rejectedDate) - new Date(a.rejectedDate));
+        return sortClaimsByStatusSubmission(claims, 'processedDate')
     } else if (statusID == 'approved') {
-        return claims.sort((a, b) => new Date(b.approvedDate) - new Date(a.approvedDate));
+        return sortClaimsByStatusSubmission(claims, 'processedDate')
     } else {
         return claims.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
     }
 })
+
+addFilter('orderByMostRecent', function (claims) {
+    let sorted = sortSubmissionsByDate(claims, 'submittedDate')
+    return sorted
+})
+
+
 
 addFilter('userType', function (type) {
     switch(type) {
@@ -510,7 +529,6 @@ addFilter('userType', function (type) {
         case "submitter":
         return "Submitter"
         break;
-
     }
 })
 
@@ -648,26 +666,6 @@ addFilter('isCostMoreThanMax', function (amount) {
     }
 })
 
-addFilter('statusTag', function (statusID, statuses) {
-    var statusName = null
-    for (const s of statuses) {
-        if (s.id == statusID) {
-            statusName = s.name
-        }
-    }
-    if (statusID == 'not-yet-submitted') {
-        return '<strong class="govuk-tag govuk-tag--blue">' + statusName + '</strong>'
-    } else if (statusID == 'submitted') {
-        return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
-    } else if (statusID == 'approved') {
-        return '<strong class="govuk-tag govuk-tag--green">' + statusName + '</strong>'
-    } else if (statusID == 'rejected') {
-        return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
-    } else {
-        return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
-    }
-}, { renderAsHtml: true })
-
 addFilter('uniqueDates', function (claims, dateType) {
 
     const uniqueMonthYears = new Set();
@@ -722,7 +720,7 @@ addFilter('formatStatus', function (status) {
     }
 })
 
-addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner) {
+addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner, trainingCourses, learners, workplaceID) {
     const formattedTraining = removeSpacesAndCharactersAndLowerCase(training);
     const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
 
@@ -732,9 +730,12 @@ addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner) {
 
     var searched = claims.filter(claim => {
         let trainingCheck = false;
-        if (claim.training != null) {
-            const formattedTitle = removeSpacesAndCharactersAndLowerCase(claim.training.title);
-            const code = claim.training.code;
+        let submission = getMostRelevantSubmission(claim)
+
+        if (submission.trainingCode != null) {
+            const claimTraining = findCourseByCode(submission.trainingCode, trainingCourses)
+            const formattedTitle = removeSpacesAndCharactersAndLowerCase(claimTraining.title);
+            const code = submission.trainingCode;
             const codeRegex = /^(?:\d{3}\/?\d{4}\/?\d|[A-Za-z]{5})$/;
             if (formattedTraining != "") {
                 if (formattedTitle.includes(formattedTraining)) {
@@ -748,23 +749,25 @@ addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner) {
         let learnerCheck = false;
         if (learner == "") { 
                 learnerCheck = true
-        } else if (claim.learner != null) {
-            const formattedgivenName = removeSpacesAndCharactersAndLowerCase(claim.learner.givenName);
-            const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(claim.learner.familyName);
+        } else if (submission.learnerID != null) {
+            learnerDetails = findLearnerById(submission.learnerID, learners)
+            const formattedgivenName = removeSpacesAndCharactersAndLowerCase(learnerDetails.givenName);
+            const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(learnerDetails.familyName);
             const formattedfullName = formattedgivenName + formattedfamilyName;
             const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
-            const formattedID = removeSpacesAndCharactersAndLowerCase(claim.learner.id);
+            const formattedID = removeSpacesAndCharactersAndLowerCase(learnerDetails.id);
             if (formattedfullName.includes(formattedLearner) || formattedID == formattedLearner) {
                 learnerCheck = true;
             }
         }
         let check = false
-        if ((training != "" && trainingCheck) && (learner != "" && learnerCheck)) {
+        if ((training != "" && trainingCheck) && (learner != "" && learnerCheck) && (workplaceID == claim.workplaceID)) {
             check = true
         }
-        if ((training == "" && learnerCheck) || (learner == "" && trainingCheck)) {
+        if (((training == "" && learnerCheck) || (learner == "" && trainingCheck)) && (workplaceID == claim.workplaceID)) {
             check = true
         }
+
         return check
     })
     return searched
@@ -973,16 +976,25 @@ addFilter('isSelected', function (valueArray, status) {
 });
 
 
-addFilter('userCountNotExpired', function (users) { 
-    var count = false 
-    if (users != null && users != "") {
-        for (const u of users) {
-            if (u.status != "expired" && u.status != "deleted") {
-                count += 1
-            }
-        }
+addFilter('userCountNotExpired', function (org) { 
+    let count = 0;
+
+    // Count active signatory
+    if (org.signatory?.active) {
+    count++;
     }
-    return count.toString()
+
+    // Count active users
+    if (Array.isArray(org.users?.active)) {
+    count += org.users.active.length;
+    }
+
+    // Count invited users
+    if (Array.isArray(org.users?.invited)) {
+    count += org.users.invited.length;
+    }
+
+    return count;
 });
 
 addFilter('parseInt', function(value, radix = 10) {
@@ -992,3 +1004,99 @@ addFilter('parseInt', function(value, radix = 10) {
 addFilter('min', (value1, value2) => {
     return Math.min(value1, value2);
 });
+
+addFilter('getMostRelevantSubmission', (claim) => {
+    let recentClaim = getMostRelevantSubmission(claim)
+    return recentClaim
+})
+
+addFilter('getDraftSubmission', (claim) => {
+    let recentClaim = getDraftSubmission(claim)
+    return recentClaim
+})
+
+addFilter('findTraining', (trainingCode, trainingArray) => {
+    return findCourseByCode(trainingCode, trainingArray)
+})
+
+addFilter('findLearner', (learnerID, learners) => {
+    return findLearnerById(learnerID, learners)
+})
+
+addFilter('checkIfUpdated', (claim, field) => {
+    let lastQueried = getMostRelevantSubmission(claim)
+    let draftClaim = getDraftSubmission(claim)
+
+    if (draftClaim == null) {
+        return false
+    }
+
+    if (field == "training") {
+        if (lastQueried.trainingCode == draftClaim.trainingCode) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "learner") {
+        if (lastQueried.learnerID == draftClaim.learnerID) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "startDate") {
+        if (lastQueried.startDate == draftClaim.startDate) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "costDate") {
+        if (lastQueried.costDate == draftClaim.costDate) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "evidencePayment") {
+
+        if (lastQueried.evidenceOfPayment.length !== draftClaim.evidenceOfPayment.length) {
+            return true;
+        }
+        lastQueried.evidenceOfPayment.sort();
+        draftClaim.evidenceOfPayment.sort();
+        for (let i = 0; i < lastQueried.length; i++) {
+            if (lastQueried[i] !== draftClaim[i]) {
+                return true;
+            }
+        }
+        return false;
+    } else if (field == "completionDate") {
+        // to do compare if same contents
+        if (lastQueried.completionDate === draftClaim.completionDate) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "evidenceCompletion") {
+        if (lastQueried.evidenceOfCompletion.length !== draftClaim.evidenceOfCompletion.length) {
+            return true;
+        } else {
+            return false
+        }
+    } else {
+        return false
+    }
+})
+
+addFilter('getRejectionNote', (submission) => {
+    let rejectionNote = ''
+    if (submission.evidenceOfPaymentReview.outcome != null && submission.evidenceOfPaymentReview.outcome == "fail") {
+        rejectionNote +=  'Evidence of payment<br>' + submission.evidenceOfPaymentReview.note
+    }
+    if (submission.evidenceOfCompletionReview.outcome != null && submission.evidenceOfCompletionReview.outcome == "fail") {
+        rejectionNote += "Evidence of completion" + '<br>' + submission.evidenceOfCompletionReview.note
+    }
+    return rejectionNote
+})
+
+addFilter('getReimbursementAmount', (submission, training) => {
+    return Math.min(submission.evidenceOfPaymentReview.costPerLearner, training.reimbursementAmount);
+})
