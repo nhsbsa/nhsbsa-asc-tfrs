@@ -1,7 +1,7 @@
 
-{% if data.showNote == "fourtyQuery" or data.showNote == "sixtyQuery" %}
+{% if data.showNote == "fourtyQuery" or data.showNote == "sixtyQuery" or data.showNote == "hundredQuery" %}
 
-  {% if data.showNote == "sixtyQuery" %}
+  {% if data.showNote == "sixtyQuery" or data.showNote == "hundredQuery" %}
     {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
   {% else %}
     {% set submission = pairClaim.submissions | findSubmissionByDate(data.submittedDate) %}
@@ -23,8 +23,8 @@
   </div>
 
 
-{% elif data.showNote == "fourtyRejection" or data.showNote == "sixtyRejection" %}
-{% if data.showNote == "sixtyQuery" %}
+{% elif data.showNote == "fourtyRejection" or data.showNote == "sixtyRejection" or data.showNote == "hundredRejection" %}
+{% if data.showNote == "sixtyRejection" or data.showNote == "hundredRejection" %}
     {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
   {% else %}
     {% set submission = pairClaim.submissions | findSubmissionByDate(data.submittedDate) %}

@@ -34,7 +34,7 @@
               <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
             </p>
             {% if notesNumber != count %} 
-              <a href="/showHistoryNote?noteType=query&submittedDate={{submission.submittedDate}}" class="govuk-link">View query note</a>
+              <a href="/showHistoryNote?noteType=hundredQuery&submittedDate={{submission.submittedDate}}" class="govuk-link">View query note</a>
             {% endif %} 
           </div>
         </div>
@@ -85,7 +85,7 @@
                 <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
               </p>
               {% if notesNumber != count %} 
-              <a href="/showHistoryNote?noteType=rejection&submittedDate={{submission.submittedDate}}" class="govuk-link">View rejection note</a>
+              <a href="/showHistoryNote?noteType=hundredRejection&submittedDate={{submission.submittedDate}}" class="govuk-link">View rejection note</a>
               {% endif %} 
             </div>
           </div>
