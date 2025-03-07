@@ -44,6 +44,17 @@
 
       <div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
         <div>
+
+          {% if data.showNote == "hundredClaim" %}
+            <h2 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Claim submission</h2>
+            <p class="govuk-body">Submitted on {{data.submittedDate  | govukDate }}</p>
+          {% elif data.showNote == "sixtyClaim" or data.showNote == "fourtyClaim" %}
+            <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">60 part submission</h1>
+            <p class="govuk-body">Submitted on {{data.submittedDate | govukDate }}</p>
+          {% elif  data.showNote == "fourtyClaim" %}
+          <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">40 part submission</h1>
+          <p class="govuk-body">Submitted on {{data.submittedDate | govukDate }}</p>
+          {% endif %}
           
             {% if data.showNote == "hundredClaim" or data.showNote == "sixtyClaim" %}
               {% include "./training.html" %}
