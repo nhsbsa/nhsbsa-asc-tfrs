@@ -1,7 +1,7 @@
 
-{% if data.showNote == "query" %}
+{% if data.showNote == "fourtyQuery" or data.showNote == "sixtyQuery" %}
 
-  {% if claim %}
+  {% if data.showNote == "sixtyQuery" %}
     {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
   {% else %}
     {% set submission = pairClaim.submissions | findSubmissionByDate(data.submittedDate) %}
@@ -23,8 +23,12 @@
   </div>
 
 
-{% elif data.showNote == "rejection" %}
-{% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
+{% elif data.showNote == "fourtyRejection" or data.showNote == "sixtyRejection" %}
+{% if data.showNote == "sixtyQuery" %}
+    {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
+  {% else %}
+    {% set submission = pairClaim.submissions | findSubmissionByDate(data.submittedDate) %}
+  {% endif %}
   <div id="hmrc-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="hmrc-timeout-dialog" aria-labelledby="hmrc-timeout-heading hmrc-timeout-message">
     <div>
       <h1 id="hmrc-timeout-heading" class="govuk-heading-m push--top">Rejection note</h1>
