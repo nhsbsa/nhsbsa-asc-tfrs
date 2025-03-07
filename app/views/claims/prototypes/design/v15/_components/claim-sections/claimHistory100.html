@@ -29,7 +29,7 @@
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title">Claim queried</h3>
-            <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
+            <p class="moj-timeline__byline">by Claim processor</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
             </p>
@@ -56,7 +56,7 @@
           <div class="moj-timeline__item">
             <div class="moj-timeline__header">
               <h3 class="moj-timeline__title">Claim approved</h3>
-              <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
+              <p class="moj-timeline__byline">by Claim processor</p>
             </div>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
@@ -80,7 +80,7 @@
           <div class="moj-timeline__item">
             <div class="moj-timeline__header">
               <h3 class="moj-timeline__title">Claim rejected</h3>
-              <p class="moj-timeline__byline">by {{submission.processedBy}}</p>
+              <p class="moj-timeline__byline">by Claim processor</p>
               <p class="moj-timeline__date">
                 <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
               </p>

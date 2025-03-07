@@ -55,7 +55,13 @@ function checkClaim(claim) {
         }
     }
 
-    result.claimValid = result.learner == "valid" && result.startDate == "valid" && result.paymentDate == "valid" && result.evidenceOfPayment == "valid" && result.evidenceOfCompletion == "valid" && result.completionDate == "valid";
+    if (claim.status == "queried") {
+        result.change = checkChange(claim)
+    } else {
+        result.change = true
+    }
+
+    result.claimValid = result.learner == "valid" && result.startDate == "valid" && result.paymentDate == "valid" && result.evidenceOfPayment == "valid" && result.evidenceOfCompletion == "valid" && result.completionDate == "valid" && result.change;
     return result
 }
 
@@ -358,28 +364,29 @@ function getDraftSubmission(claim) {
 }
 
 function getMostRelevantSubmission(claim) {
-    let mostRecentProcessed = null;
-    let mostRecentSubmitted = null;
-    let mostRecentNotYetSubmitted = null
+    if (!claim || !claim.submissions || claim.submissions.length === 0) {
+        return null; // Return null if claim or submissions are invalid
+    }
 
-    if (claim == null || claim.submissions == null) { return [] }
+    let mostRecentSubmission = null;
+    let latestDate = null;
 
     claim.submissions.forEach(submission => {
+        let submissionDate = submission.processedDate || submission.submittedDate;
 
-        if (submission.processedDate) {
-            if (!mostRecentProcessed || new Date(submission.processedDate) > new Date(mostRecentProcessed.processedDate)) {
-                mostRecentProcessed = submission;
+        if (submissionDate) {
+            let currentDate = new Date(submissionDate);
+            if (!latestDate || currentDate > latestDate) {
+                latestDate = currentDate;
+                mostRecentSubmission = submission;
             }
-        } else if (submission.submittedDate) {
-            if (!mostRecentSubmitted || new Date(submission.submittedDate) > new Date(mostRecentSubmitted.submittedDate)) {
-                mostRecentSubmitted = submission;
-            }
-        } else {
-            mostRecentNotYetSubmitted = submission
+        } else if (!mostRecentSubmission) {
+            // If all dates are null, keep track of the first encountered submission
+            mostRecentSubmission = submission;
         }
     });
-    let submission = mostRecentProcessed || mostRecentSubmitted || mostRecentNotYetSubmitted;
-    return submission
+
+    return mostRecentSubmission;
 }
 
   function findCourseByCode(code, trainingCourses) {
@@ -490,6 +497,35 @@ function findPair(claimID, claims){
         }
     }
     return null; // Return null if no match is found
+}
+
+function checkChange(claim) {
+    let lastQueried = getMostRelevantSubmission(claim)
+    let draftClaim = getDraftSubmission(claim)
+
+    let isChange = false
+    if (
+        (lastQueried.trainingCode !== draftClaim.trainingCode) ||
+        (lastQueried.learnerID !== draftClaim.learnerID) ||
+        (lastQueried.startDate !== draftClaim.startDate) ||
+        (lastQueried.costDate !== draftClaim.costDate) ||
+        (lastQueried.completionDate !== draftClaim.completionDate) ||
+        (lastQueried.evidenceOfCompletion !== draftClaim.evidenceOfCompletion) ||
+        (lastQueried.evidenceOfPayment.length !== draftClaim.evidenceOfPayment.length)
+    ) {
+        isChange = true
+    } else {
+        lastQueried.evidenceOfPayment.sort();
+        draftClaim.evidenceOfPayment.sort();
+        for (let i = 0; i < lastQueried.length; i++) {
+            if (lastQueried[i] !== draftClaim[i]) {
+                isChange  = true
+                break;
+            }
+        }
+    }
+
+    return isChange
 }
 
 
