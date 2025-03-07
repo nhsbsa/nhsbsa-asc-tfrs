@@ -112,7 +112,9 @@
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
         "evidenceOfPayment": [
-          "invoice1.pdf"
+          "invoice1.pdf", 
+          "bankStatement1.pdf", 
+          "receipt1.pdf"
         ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certificate1.pdf",
@@ -136,13 +138,15 @@
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
         "evidenceOfPayment": [
-          "invoice1.pdf"
+          "invoice1.pdf", 
+          "bankStatement1.pdf", 
+          "receipt1.pdf"
         ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment date on the evidence of payment provided does not match the payment date in the claim.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -166,7 +170,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The payment date on the evidence of payment provided does not match the payment date in the claim.",
+          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -16640,7 +16644,7 @@
     "claimType": "100",
     "status": "queried",
     "createdDate": "2024-08-15T23:09:49.421Z",
-    "createdBy": "cameron.bennett@teatree.com",
+    "createdBy": "miles.whitaker@evergreencare.com",
     "notes": [],
     "submissions": [
       {
@@ -16651,7 +16655,9 @@
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
         "evidenceOfPayment": [
-          "invoice1.pdf"
+          "invoice1.pdf", 
+          "bankStatement1.pdf", 
+          "receipt1.pdf"
         ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certificate1.pdf",
@@ -16668,20 +16674,22 @@
         "processedBy": null
       },
       {
-        "submitter": "oliver.grey@teatree.com",
+        "submitter": "rosalie.finch@evergreencare.com",
         "submittedDate": "2024-10-31T00:34:25.749Z",
         "trainingCode": "USMS",
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
         "evidenceOfPayment": [
-          "invoice1.pdf"
+          "invoice1.pdf", 
+          "bankStatement1.pdf", 
+          "receipt1.pdf"
         ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment date on the evidence of payment provided does not match the payment date in the claim.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -16692,7 +16700,7 @@
         "processedBy": "Flossie Gleason"
       },
       {
-        "submitter": "oliver.grey@teatree.com",
+        "submitter": "d.jones@evergreencare.com",
         "submittedDate": "2024-10-15T00:34:25.749Z",
         "trainingCode": "USMS",
         "learnerID": "HB 78 2F 15 O",
@@ -16705,7 +16713,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The payment date on the evidence of payment provided does not match the payment date in the claim.",
+          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -21754,7 +21762,7 @@
     "claimType": "100",
     "status": "queried",
     "createdDate": "2024-08-15T23:09:49.421Z",
-    "createdBy": "ivy.montgomery@anikacare.com",
+    "createdBy": "miles.whitaker@evergreencare.com",
     "notes": [],
     "submissions": [
       {
@@ -21765,7 +21773,9 @@
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
         "evidenceOfPayment": [
-          "invoice1.pdf"
+          "invoice1.pdf", 
+          "bankStatement1.pdf", 
+          "receipt1.pdf"
         ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certificate1.pdf",
@@ -21782,20 +21792,22 @@
         "processedBy": null
       },
       {
-        "submitter": "ivy.montgomery@anikacare.com",
+        "submitter": "rosalie.finch@evergreencare.com",
         "submittedDate": "2024-10-31T00:34:25.749Z",
         "trainingCode": "USMS",
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
         "evidenceOfPayment": [
-          "invoice1.pdf"
+          "invoice1.pdf", 
+          "bankStatement1.pdf", 
+          "receipt1.pdf"
         ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment date on the evidence of payment provided does not match the payment date in the claim.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -21806,7 +21818,7 @@
         "processedBy": "Flossie Gleason"
       },
       {
-        "submitter": "ivy.montgomery@anikacare.com",
+        "submitter": "d.jones@evergreencare.com",
         "submittedDate": "2024-10-15T00:34:25.749Z",
         "trainingCode": "USMS",
         "learnerID": "HB 78 2F 15 O",
@@ -21819,7 +21831,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The payment date on the evidence of payment provided does not match the payment date in the claim.",
+          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
