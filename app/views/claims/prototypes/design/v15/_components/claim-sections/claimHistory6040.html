@@ -147,7 +147,7 @@
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
             </p>
-            {% if notesNumber != count %} 
+            {% if notesNumber != count or (count == 2) %} 
               <a href="/showHistoryNote?noteType=sixtyClaim&submittedDate={{submission.submittedDate}}" class="govuk-link">View claim</a>
             {% endif %} 
             </div>
