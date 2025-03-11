@@ -1,4 +1,4 @@
-{% extends "../layouts/claims-account-setup.html" %}
+{% extends "../layouts/claims-main.html" %}
 
 {% block pageTitle %}
 {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid  %}Error: {% endif %}Organisation bank or building society account details — {{serviceName}} — GOV.UK
@@ -7,11 +7,7 @@
 
 {% block beforeContent %}
 <div>
-    {% if data.journey %}
-    <a href="../account-setup/declaration" class="govuk-back-link">Back</a>
-    {% else %}
     <a href="bank-details?tabLocation=bankDetails" class="govuk-back-link">Back</a>
-    {% endif %}
 </div>
 {% endblock %}
 

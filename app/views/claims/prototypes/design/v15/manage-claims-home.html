@@ -70,7 +70,7 @@ Manage claims - {{serviceName}} — GOV.UK
         <p class="govuk-notification-banner__heading">
           {% if data.userType == "signatory" %}
           You can only submit claims once you, as the Senior Responsible Officer, have added your organisation's bank details to the service.
-          <a class="govuk-notification-banner__link" href="./org-admin/change-bank-details">Add bank details</a>.
+          <a class="govuk-notification-banner__link" href="./org-admin/change-bank-details?tabLocation=bankDetails">Add bank details</a>.
           {% elif data.userType == "submitter" %}
           You will only be able to submit claims once your Senior Responsible Officer logs in and adds your organisation's bank details to the service. 
           {% endif %}
