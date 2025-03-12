@@ -643,12 +643,23 @@ router.post('/ready-to-declare', function (req, res) {
     }
   }
 
+  let submission = null
+    if (claim.status == "queried") {
+        submission = getDraftSubmission(claim)
+    } else {
+        submission = getMostRelevantSubmission(claim)
+    }
+
+  const FYdate = new Date('2024-03-03')
+
   const submitError = checkClaim(claim)
   if (submitError.claimValid) {
     delete req.session.data.submitError
     if (req.session.data.org.bankDetails == null) {
       res.redirect('claim/missing-bank-details')
-    } else {
+    } else if (req.session.data.org.validGDL == false &&  new Date(submission.costDate) > FYdate) {
+      res.redirect('claim/missing-gdl')
+    } else{
       res.redirect('claim/declaration')
     }
     
@@ -841,7 +852,22 @@ router.post('/declaration-confirmation', function (req, res) {
   if (declarationConfirmed != null) {
     res.redirect('account-setup/bank-details-question')
   } else {
+    req.session.data.declarationSubmitError = 'true'
     res.redirect('account-setup/declaration?declarationSubmitError=true')
+  }
+});
+
+router.post('/new-declaration-confirmation', function (req, res) {
+  delete req.session.data.declarationSubmitError
+  const declarationConfirmed = req.session.data.declaration
+
+  if (declarationConfirmed != null) {
+    delete req.session.data.declarationConfirmed
+    req.session.data.org.validGDL = true
+    res.redirect('manage-claims-home?tabLocation=claims')
+  } else {
+    req.session.data.declarationSubmitError = 'true'
+    res.redirect('account-setup/sign-new-gdl')
   }
 });
 
@@ -1002,6 +1028,23 @@ router.get('/confirm-delete-claim', function (req, res) {
         
     }
   }
+});
+
+router.get('/signin-handler', function (req, res) {
+  const journey = req.session.data.journey
+  const userType = req.session.data.userType
+  const org = req.session.data.org
+
+  if (journey == 'creation' && userType == 'signatory') {
+      res.redirect('account-setup/verify-details')
+  } else {
+    if (org.validGDL) {
+      res.redirect('manage-claims-home?tabLocation=claims')
+    } else {
+      res.redirect('account-setup/sign-new-gdl')
+    }
+  } 
+
 });
 
 function loadData(req) {
