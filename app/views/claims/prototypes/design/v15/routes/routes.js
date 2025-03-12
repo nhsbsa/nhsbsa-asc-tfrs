@@ -133,7 +133,7 @@ router.post('/search_id_result', function (req, res) {
 
   const lengthRegex = /^[A-NP-Z0-9]{3}(-)?[A-NP-Z0-9]{4}(-)?[A-NP-Z0-9]{4}(-)?([ABC])?$/;
   if (!lengthRegex.test(claimID)) {
-    return res.redirect('manage-claims-home?searchId='+claimID + '&invalidIDError=true');
+    return res.redirect('manage-claims-home?invalidIDError=true');
   }
 
   var foundClaim = null
@@ -147,9 +147,11 @@ router.post('/search_id_result', function (req, res) {
   // handle the claim id searched on won't be the one on a specific claim
 
   if (foundClaim == null) {
-    return res.redirect('manage-claims-home?searchId='+claimID + '&notFound=true');
+    return res.redirect('manage-claims-home?notFound=true');
   } else {
-    res.redirect('claim/claim-details?id=' + claimID +"&fromSearchId=true");
+    delete req.session.data.searchClaimId
+    req.session.data.fromSearchId = 'true'
+    res.redirect('claim/claim-details?id=' + foundClaim.claimID);
   }
 });
 
