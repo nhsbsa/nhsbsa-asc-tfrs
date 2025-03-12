@@ -1038,7 +1038,7 @@ router.get('/signin-handler', function (req, res) {
   if (journey == 'creation' && userType == 'signatory') {
       res.redirect('account-setup/verify-details')
   } else {
-    if (org.validGDL) {
+    if (org.validGDL || userType == 'submitter') {
       res.redirect('manage-claims-home?tabLocation=claims')
     } else {
       res.redirect('account-setup/sign-new-gdl')
