@@ -133,7 +133,7 @@ router.post('/search_id_result', function (req, res) {
 
   const lengthRegex = /^[A-NP-Z0-9]{3}(-)?[A-NP-Z0-9]{4}(-)?[A-NP-Z0-9]{4}(-)?([ABC])?$/;
   if (!lengthRegex.test(claimID)) {
-    return res.redirect('manage-claims-home?searchId='+claimID + '&invalidIDError=true');
+    return res.redirect('manage-claims-home?invalidIDError=true');
   }
 
   var foundClaim = null
@@ -147,9 +147,11 @@ router.post('/search_id_result', function (req, res) {
   // handle the claim id searched on won't be the one on a specific claim
 
   if (foundClaim == null) {
-    return res.redirect('manage-claims-home?searchId='+claimID + '&notFound=true');
+    return res.redirect('manage-claims-home?notFound=true');
   } else {
-    res.redirect('claim/claim-details?id=' + claimID +"&fromSearchId=true");
+    delete req.session.data.searchClaimId
+    req.session.data.fromSearchId = 'true'
+    res.redirect('claim/claim-details?id=' + foundClaim.claimID);
   }
 });
 
@@ -643,12 +645,23 @@ router.post('/ready-to-declare', function (req, res) {
     }
   }
 
+  let submission = null
+    if (claim.status == "queried") {
+        submission = getDraftSubmission(claim)
+    } else {
+        submission = getMostRelevantSubmission(claim)
+    }
+
+  const FYdate = new Date('2024-03-03')
+
   const submitError = checkClaim(claim)
   if (submitError.claimValid) {
     delete req.session.data.submitError
     if (req.session.data.org.bankDetails == null) {
       res.redirect('claim/missing-bank-details')
-    } else {
+    } else if (req.session.data.org.validGDL == false &&  new Date(submission.costDate) > FYdate) {
+      res.redirect('claim/missing-gdl')
+    } else{
       res.redirect('claim/declaration')
     }
     
@@ -841,7 +854,22 @@ router.post('/declaration-confirmation', function (req, res) {
   if (declarationConfirmed != null) {
     res.redirect('account-setup/bank-details-question')
   } else {
+    req.session.data.declarationSubmitError = 'true'
     res.redirect('account-setup/declaration?declarationSubmitError=true')
+  }
+});
+
+router.post('/new-declaration-confirmation', function (req, res) {
+  delete req.session.data.declarationSubmitError
+  const declarationConfirmed = req.session.data.declaration
+
+  if (declarationConfirmed != null) {
+    delete req.session.data.declarationConfirmed
+    req.session.data.org.validGDL = true
+    res.redirect('manage-claims-home?tabLocation=claims')
+  } else {
+    req.session.data.declarationSubmitError = 'true'
+    res.redirect('account-setup/sign-new-gdl')
   }
 });
 
@@ -1002,6 +1030,23 @@ router.get('/confirm-delete-claim', function (req, res) {
         
     }
   }
+});
+
+router.get('/signin-handler', function (req, res) {
+  const journey = req.session.data.journey
+  const userType = req.session.data.userType
+  const org = req.session.data.org
+
+  if (journey == 'creation' && userType == 'signatory') {
+      res.redirect('account-setup/verify-details')
+  } else {
+    if (org.validGDL || userType == 'submitter') {
+      res.redirect('manage-claims-home?tabLocation=claims')
+    } else {
+      res.redirect('account-setup/sign-new-gdl')
+    }
+  } 
+
 });
 
 function loadData(req) {

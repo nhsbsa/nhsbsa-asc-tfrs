@@ -9,7 +9,8 @@
       "sortCode": "272893",
       "accountNumber": "12345678",
       "buildingSocietyNumber": "4598329056"
-    }, 
+    },
+    "validGDL": true,
     "notes" : [],
     "signatory": {
       "active": 
@@ -97,7 +98,8 @@
       "sortCode": "272893",
       "accountNumber": "12345678",
       "buildingSocietyNumber": null
-    }, 
+    },
+    "validGDL": true,
     "notes" : [],
     "signatory": {
     "active": {        
@@ -142,7 +144,8 @@
       "sortCode": "272893",
       "accountNumber": "12345678",
       "buildingSocietyNumber": null
-    }, 
+    },
+    "validGDL": true,
     "notes" : [],
     "signatory": {
     "active": {        
@@ -169,7 +172,8 @@
       "sortCode": "272893",
       "accountNumber": "12345678",
       "buildingSocietyNumber": null
-    }, 
+    },
+    "validGDL": true,
     "notes" : [],
     "signatory": {
     "active": {        
@@ -191,7 +195,8 @@
     "numberOfClaims": 0,
     "name": "Bright Horizons Care home",
     "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
-    "bankDetails": null, 
+    "bankDetails": null,
+    "validGDL": false,
     "notes" : [],
     "signatory": {
     "active": {        
@@ -213,7 +218,8 @@
     "numberOfClaims": 0,
     "name": "Purple Stones Care home",
     "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
-    "bankDetails": null, 
+    "bankDetails": null,
+    "validGDL": false,
     "notes" : [],
     "signatory": {
     "active": {        
@@ -241,7 +247,8 @@
     "numberOfClaims": 0,
     "name": "Pinetree Manor Care Centre",
     "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
-    "bankDetails": null, 
+    "bankDetails": null,
+    "validGDL": true,
     "notes" : [],
     "signatory": {
     "active": {        
@@ -259,11 +266,12 @@
   }
   },
   {
-    "workplaceID": "G9137123",
+    "workplaceID": "G91371231",
     "numberOfClaims": 0,
     "name": "Kingscourt Care Home",
     "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
-    "bankDetails": null, 
+    "bankDetails": null,
+    "validGDL": false,
     "notes" : [],
     "signatory": {
     "active": {        
@@ -279,6 +287,34 @@
       "email": "evelyn.brooks@kingscourt.co.uk"
       }
     ]
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "F87223491",
+    "numberOfClaims": 10,
+    "name": "Farifields Care home",
+    "address": ["12 Farifield Road", "York", "YO23 6FH"],
+    "bankDetails": {
+      "nameOnAccount": "Farifields Care home Ltd",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    },
+    "validGDL": false,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Ivy",
+      "familyName": "Montgomery",
+      "email": "ivy.montgomery@anikacare.com",
+      "status": "active"
+    },  
+    "inactive": []
   },
   "users": {
     "active": [],

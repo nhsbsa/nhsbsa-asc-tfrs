@@ -48,7 +48,7 @@
   {% if (data.fromSearchResults) %}
     <a href="advanced-search" class="govuk-back-link">Back</a>
   {% elif (data.fromSearchId) %}
-    <a href="../manage-claims-home?searchId=" class="govuk-back-link">Back</a>
+    <a href="../manage-claims-home?fromSearchId" class="govuk-back-link">Back</a>
   {% elif not (claim.status == "new") and not (claim.status == "not-yet-submitted") and not (claim.status == "queried") %}
     <a href="../manage-claims?statusID={{ data.statusID }}" class="govuk-back-link">Back</a>
   {% endif %} 
