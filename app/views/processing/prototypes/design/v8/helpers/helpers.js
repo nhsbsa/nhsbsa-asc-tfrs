@@ -170,4 +170,23 @@ function getMostRelevantSubmission(claim) {
     return mostRecentSubmission;
 }
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch, getMostRelevantSubmission }
+function findCourseByCode(code, trainingCourses) {
+    for (const group of trainingCourses) {
+      const course = group.courses.find(course => course.code == code);
+      if (course) {
+        return course;
+      }
+    }
+    return null;
+  }
+
+  function findLearnerById(id, learners) {
+      const learner = learners.find(learner => learner.id == id);
+      if (learner) {
+        return learner;
+      } else {
+        return null;
+      }
+  }
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById }

@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission } = require('../helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode } = require('../helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag', function (statusID) {
@@ -501,4 +501,12 @@ addFilter('sortByFirstName', function (inactiveClaims) {
     return inactiveClaims.sort((a, b) => {
         return a.givenName.localeCompare(b.givenName);
       });
+})
+
+addFilter('findTraining', (trainingCode, trainingArray) => {
+    return findCourseByCode(trainingCode, trainingArray)
+})
+
+addFilter('findLearner', (learnerID, learners) => {
+    return findLearnerById(learnerID, learners)
 })
