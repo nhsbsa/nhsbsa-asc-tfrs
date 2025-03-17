@@ -852,7 +852,12 @@ router.post('/declaration-confirmation', function (req, res) {
   delete req.session.data.declarationSubmitError
   const declarationConfirmed = req.session.data.declaration
   if (declarationConfirmed != null) {
-    res.redirect('account-setup/bank-details-question')
+    req.session.data.org.validGDL = true
+    if (req.session.data.org.bankDetails == null) {
+      res.redirect('account-setup/bank-details-question')
+    } else {
+      res.redirect('manage-claims-home?tabLocation=claims')
+    }
   } else {
     req.session.data.declarationSubmitError = 'true'
     res.redirect('account-setup/declaration?declarationSubmitError=true')
@@ -1102,14 +1107,16 @@ router.get('/load-data-account-test', function (req, res) {
   //Load data from JSON files
 
   const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/prototypes/design/v15/data/')
+  const orgID = req.session.data['orgID']
 
   for (const organisation of organisations) {
-    if (organisation.workplaceID == "G76904778") {
+    if (organisation.workplaceID == orgID) {
       req.session.data.org = organisation
       break;
     }
   }
 
+  delete req.session.data['orgID']
   loadData(req);
   res.redirect('./authentication/creation-link?journey=creation')
 })
