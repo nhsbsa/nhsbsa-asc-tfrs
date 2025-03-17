@@ -21,7 +21,7 @@ router.post('/check-org', function (req, res) {
   var orgRegistered = false
 
   for (const org of req.session.data.organisations) {
-    if (org.workplaceId == orgID) {
+    if (org.workplaceID == orgID) {
       orgRegistered = true
     }
   }
@@ -156,7 +156,7 @@ router.post('/search-claim-id', function (req, res) {
     delete req.session.data.claimID;
 
     req.session.data.id = foundClaim.claimID
-    req.session.data.orgId = foundClaim.workplaceId
+    req.session.data.orgId = foundClaim.workplaceID
 
     return res.redirect('organisation/org-view-main')
   } else {
@@ -354,7 +354,7 @@ router.post('/search-org', function (req, res) {
   const searchedOrg = orgSearch.toLowerCase();
 
   for (const org of req.session.data['organisations']) {
-    const singleOrg = org.workplaceId?.toLowerCase();
+    const singleOrg = org.workplaceID?.toLowerCase();
     
     if (singleOrg === searchedOrg) {
       foundOrg = org;
@@ -388,7 +388,7 @@ router.post('/search-org', function (req, res) {
   } else {
     delete req.session.data.orgSearchInput
     req.session.data.orgTab = 'users'
-    req.session.data.orgId = foundOrg.workplaceId
+    req.session.data.orgId = foundOrg.workplaceID
     res.redirect('organisation/org-view-main')
   }
 });
@@ -467,7 +467,7 @@ router.post('/add-org-note', function (req, res) {
   const orgID = req.session.data.orgId
   var foundOrg = null
   for (const org of req.session.data['organisations']) {
-    if (org.workplaceId == orgID) {
+    if (org.workplaceID == orgID) {
       foundOrg = org
     }
   }
@@ -535,7 +535,7 @@ router.post('/update-signatory-invite', function (req, res) {
   const orgID = req.session.data.orgId
 
   for (const org of req.session.data['organisations']) {
-    if (org.workplaceId == orgID) {
+    if (org.workplaceID == orgID) {
       if (SROChange == 'replace') {
         const previousSRO = {
           givenName: org.signatory.active.givenName,

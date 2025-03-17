@@ -6,12 +6,14 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck } = require('../helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission } = require('../helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag', function (statusID) {
     if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Not yet processed</strong>'
+    } else if (statusID == 'queried') {
+        return '<strong class="govuk-tag govuk-tag--yellow">Queried</strong>' 
     } else if (statusID == 'approved') {
         return '<strong class="govuk-tag govuk-tag--green">Approved</strong>' 
     }else if (statusID == 'rejected') {
@@ -227,7 +229,7 @@ addFilter('matchPairClaim', function(claimID, claims) {
 addFilter('findOrg', function (organisations, id) {
     var foundOrg = null
     for (const org of organisations) {
-        if (org.workplaceId == id) {
+        if (org.workplaceID == id) {
             foundOrg = org
         }
     }
@@ -374,7 +376,7 @@ addFilter('countOccurrences', function (events,string) {
 addFilter('findOrganisation', function (orgID, organisations) {
     let organisation = null;
     for (const org of organisations) {
-      if (org.workplaceId == orgID) {
+      if (org.workplaceID == orgID) {
         organisation = org
       }
     }
@@ -384,7 +386,7 @@ addFilter('findOrganisation', function (orgID, organisations) {
 addFilter('findOrgClaims', function (orgID, claims) {
     let orgClaims = [];
     for (const claim of claims) {
-      if (claim.workplaceId == orgID) {
+      if (claim.workplaceID == orgID) {
         orgClaims.push(claim)
       }
     }
@@ -411,7 +413,7 @@ addFilter('typeTag', function (type) {
 addFilter('orderClaims', function (claims) {
     
     return claims.sort((a, b) => {
-        const statusOrder = { submitted: 1, rejected: 2, approved: 3 };
+        const statusOrder = { submitted: 1, queried: 2, rejected: 3, approved: 4};
         
         // Compare statuses based on order
         const statusComparison = statusOrder[a.status] - statusOrder[b.status];
@@ -419,10 +421,17 @@ addFilter('orderClaims', function (claims) {
         
         // If statuses are the same, sort by corresponding date in descending order
         const dateField = a.status === "submitted" ? "submittedDate" : 
-                          a.status === "rejected" ? "rejectedDate" : "approvedDate";
+                          "processedDate";
         
-        return new Date(b[dateField]) - new Date(a[dateField]);
+        let aSubmission =  getMostRelevantSubmission(a)     
+        let bSubmission =  getMostRelevantSubmission(b)     
+        return new Date(bSubmission[dateField]) - new Date(aSubmission[dateField]);
     });
+})
+
+addFilter('getMostRelevantSubmission', (claim) => {
+    let recentClaim = getMostRelevantSubmission(claim)
+    return recentClaim
 })
 
 addFilter('userStatusTag', function (status) {

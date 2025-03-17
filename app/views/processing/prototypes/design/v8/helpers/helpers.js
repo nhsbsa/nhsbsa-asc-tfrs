@@ -144,4 +144,30 @@ function isValidOrgSearch(orgSearch) {
     }
 }
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch }
+function getMostRelevantSubmission(claim) {
+    if (!claim || !claim.submissions || claim.submissions.length === 0) {
+        return null; // Return null if claim or submissions are invalid
+    }
+
+    let mostRecentSubmission = null;
+    let latestDate = null;
+
+    claim.submissions.forEach(submission => {
+        let submissionDate = submission.processedDate || submission.submittedDate;
+
+        if (submissionDate) {
+            let currentDate = new Date(submissionDate);
+            if (!latestDate || currentDate > latestDate) {
+                latestDate = currentDate;
+                mostRecentSubmission = submission;
+            }
+        } else if (!mostRecentSubmission) {
+            // If all dates are null, keep track of the first encountered submission
+            mostRecentSubmission = submission;
+        }
+    });
+
+    return mostRecentSubmission;
+}
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch, getMostRelevantSubmission }
