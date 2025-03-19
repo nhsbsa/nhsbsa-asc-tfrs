@@ -187,12 +187,12 @@ addFilter('signatoryErrorMessage', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true });
 
-addFilter('qualificationCheck', function(claim, training, value) {
+addFilter('qualificationCheck', function(submission, training, value) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     let isQualification = false;
 
     for (let course of qualificationsObject.courses) {
-        if (course.title == claim.training.title) {
+        if (course.code == submission.trainingCode) {
             isQualification = true
         }
     }
