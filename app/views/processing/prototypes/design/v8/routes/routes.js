@@ -131,43 +131,39 @@ router.post('/search-claim-id', function (req, res) {
     // single searched full claim id
     if (singleClaim == searchedID) {
       foundClaim = c
-      break
     }
-
-    // search with no suffix to return the most recent claim 
-    let foundClaimArray = []
-    if (singleClaim.includes(searchedID)) {
-      foundClaimArray.push(c)
-    }
-    if (foundClaimArray.length > 1) {
-      foundClaim = foundClaimArray.find(claim => claim.claimID.endsWith('-C'))
-    } else if (foundClaimArray.length == 1) {
-      foundClaim = foundClaimArray[0]
-    }
-
   }
   if (foundClaim == null) {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
   }
   if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
-    req.session.data.processClaimStep = "inProgress"
-    req.session.data.orgTab = "claims"
+    req.session.data.processClaimStep = "notStarted"
+    req.session.data.orgTab = "singleClaim"
 
-    delete req.session.data.claimID;
-
-    req.session.data.id = foundClaim.claimID
-    req.session.data.orgId = foundClaim.workplaceID
-
-    return res.redirect('organisation/org-view-main')
+    return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgId=' + foundClaim.workplaceID)
   } else {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
   }
 });
 
+router.get('/cancel-handler', function (req, res) {
+  delete req.session.data.paymentResponseIncomplete
+  delete req.session.data.paymentReimbursementAmountIncomplete
+  delete req.session.data.paymentReimbursementAmountInvalid
+  delete req.session.data.paymentNoNoteIncomplete
+  delete req.session.data.processSuccess
+  delete req.session.data.noteSuccess
+  delete req.session.data.completionResponseIncomplete
+  delete req.session.data.completionNoNoteIncomplete
+  
+  const claimID = req.session.data.id
+  req.session.data.processClaimStep = "notStarted"
+  return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+});
+
 router.get('/cancel-outcome', function (req, res) {
   const claimID = req.session.data.id
-  req.session.data.processClaimStep = "inProgress"
-  res.redirect('organisation/org-view-main#tab-content')
+  res.redirect('process-claim/claim?id=' + claimID)
 });
 
 router.get('/back-all-claims', function (req, res) {
@@ -186,16 +182,105 @@ router.get('/back-all-claims', function (req, res) {
   delete req.session.data.completion
   delete req.session.data.completionNoNote
 
-  delete req.session.data.id
-  delete req.session.data.inProgress
+  return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + req.session.data.orgId + '&currentPage=1#tab-content')
 
-  req.session.data.currentPage = '1'
-  req.session.data.orgTab = 'claims'
+});
+router.get('/process-claim-back-handler', function (req, res) {
+  delete req.session.data.paymentResponseIncomplete
+  delete req.session.data.paymentReimbursementAmountIncomplete
+  delete req.session.data.paymentReimbursementAmountInvalid
+  delete req.session.data.paymentNoNoteIncomplete
+  delete req.session.data.processSuccess
+  delete req.session.data.noteSuccess
+  delete req.session.data.completionResponseIncomplete
+  delete req.session.data.completionNoNoteIncomplete
 
-  return res.redirect('organisation/org-view-main')
+  const claimID = req.session.data.id
+  const processClaimStep = req.session.data.processClaimStep
+  const paymentResponse = req.session.data.payment
+  const completionResponse = req.session.data.completion
+  var claim = null
+
+  const processJourneyType = req.session.data.processJourneyType
+
+  for (const c of req.session.data.claims) {
+    if (c.claimID == claimID) {
+      claim = c
+      break;
+    }
+  }
+
+  if (processClaimStep == "checkPayment") {
+    
+    req.session.data.processClaimStep = "notStarted"
+
+  } else if (processClaimStep == "costPerLearner") {
+
+    req.session.data.processClaimStep = "checkPayment"
+
+  } else if (processClaimStep == "paymentRejectionNote") {
+
+    req.session.data.processClaimStep = "checkPayment"
+
+  } else if (processClaimStep == "checkCompletion") {
+
+    if (claim.claimType == "100") {
+      if (paymentResponse == "yes") {
+        req.session.data.processClaimStep = "costPerLearner"
+      } else if (paymentResponse == "no") {
+        req.session.data.processClaimStep = "paymentRejectionNote"
+      }
+    } else if (claim.claimType == "40") {
+      req.session.data.processClaimStep = "notStarted"
+    }
+
+  } else if (processClaimStep == "completionRejectionNote") {
+    
+    req.session.data.processClaimStep = "checkCompletion"
+
+  } else if (processClaimStep == "confirmOutcome") {
+
+    if (processJourneyType == "b") {
+      req.session.data.processClaimStep = "inProgress"
+    }
+    
+
+  }
+
+  return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
 
+router.get('/start-processing', function (req, res) {
+  const claimID = req.session.data.id
+  var claim = null
+
+  const processJourneyType = req.session.data.processJourneyType
+  
+  for (const c of req.session.data.claims) {
+    if (c.claimID == claimID) {
+      claim = c
+      break;
+    }
+  }
+
+  if (processJourneyType == "a") {
+
+    if (claim.claimType == "100" || claim.claimType == "60") {
+      req.session.data.processClaimStep = "checkPayment"
+    } else if (claim.claimType == "40")  {
+        req.session.data.processClaimStep = "checkCompletion"
+    }
+    
+    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+  } else if (processJourneyType == "b") {
+
+    req.session.data.processClaimStep = "inProgress"
+    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+  }
+});
 
 
 
@@ -259,14 +344,13 @@ router.post('/claim-process-handler', function (req, res) {
     } else {
       req.session.data.result = "reject"
     }
-
       req.session.data.processClaimStep = "confirmOutcome"
-      return res.redirect('organisation/org-view-main#tab-content')
+      return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 
   } else {
 
-      return res.redirect('organisation/org-view-main?'+ errorParamaters + '#tab-content')
+      return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + errorParamaters + '#tab-content')
 
   }
 });
@@ -302,8 +386,7 @@ router.get('/outcome-handler', function (req, res) {
 
   req.session.data.processSuccess = "true"
 
-  req.session.data.processClaimStep = "claimProcessed"
-  res.redirect('organisation/org-view-main#tab-content')
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 });
 
 router.post('/add-note', function (req, res) {
@@ -400,66 +483,41 @@ router.post('/search-claim-id-orgView', function (req, res) {
   delete req.session.data['id'];
 
   var claimID = req.session.data.claimID.replace(/[\s-]/g, '');
+  var foundOrg = req.session.data.orgId
 
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
-    req.session.data.emptyError = 'true';
-    return res.redirect('organisation/org-view-main#tab-content')
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&emptyError=true')
   }
 
   const letterORegex = /o/i;
   if (letterORegex.test(claimID)) {
-    req.session.data.invalidIDError = 'true';
-    return res.redirect('organisation/org-view-main#tab-content')
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&invalidIDError=true')
   }
 
-  const lengthRegex = /^[A-NP-Z0-9]{3}[A-NP-Z0-9]{4}[A-NP-Z0-9]{4}(?:A|B|C)?$/i;
-
+  const lengthRegex = /^[A-NP-Z0-9]{3}[A-NP-Z0-9]{4}[A-NP-Z0-9]{4}(A|B|C)$/i;
   if (!lengthRegex.test(claimID)) {
-    req.session.data.invalidIDError = 'true';
-    return res.redirect('organisation/org-view-main#tab-content')
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&invalidIDError=true')
   }
 
   var foundClaim = null
   for (const c of req.session.data['claims']) {
     let searchedID = claimID.toLowerCase()
     let singleClaim = c.claimID.toLowerCase().replace(/[\s-]/g, '');
-
-    // single searched full claim id
-    if (singleClaim == searchedID) {
+    if (searchedID == singleClaim) {
       foundClaim = c
-      break
     }
-
-    // search with no suffix to return the most recent claim 
-    let foundClaimArray = []
-    if (singleClaim.includes(searchedID)) {
-      foundClaimArray.push(c)
-    }
-    if (foundClaimArray.length > 1) {
-      foundClaim = foundClaimArray.find(claim => claim.claimID.endsWith('-C'))
-    } else if (foundClaimArray.length == 1) {
-      foundClaim = foundClaimArray[0]
-    }
-
   }
   if (foundClaim == null) {
-    req.session.data.notFound = 'true';
-    return res.redirect('organisation/org-view-main#tab-content')
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true&currentPage=1')
   }
   if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
-
-    delete req.session.data.claimID;
-    delete req.session.data.currentPage;
-
-    req.session.data.processClaimStep = "inProgress"
-    req.session.data.orgTab = "claims"
-    req.session.data.id = foundClaim.claimID
-
-    return res.redirect('organisation/org-view-main#tab-content')
+    
+    req.session.data.processClaimStep = "notStarted"
+    req.session.data.orgTab = "singleClaim"
+    return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgId=' + foundOrg)
   } else {
-    req.session.data.notFound = 'true';
-    return res.redirect('organisation/org-view-main#tab-content')
+    return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true&currentPage=1')
   }
 });
 
@@ -680,5 +738,158 @@ router.post('/signatory-change-handler', function (req, res) {
   }
 });
 
+router.post('/payment-check-handler', function (req, res) {
+  const claimID = req.session.data.id
+  const paymentResponse = req.session.data.payment
+
+  delete req.session.data.paymentResponseIncomplete
+
+  if (paymentResponse == null) {
+    req.session.data.paymentResponseIncomplete = true
+  } else {
+    if (paymentResponse == "yes") {
+      req.session.data.processClaimStep = "costPerLearner"
+    } else if (paymentResponse =="no") {
+      req.session.data.processClaimStep = "paymentRejectionNote"
+    }
+  }
+
+  return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+});
+
+router.post('/cost-per-learner-handler', function (req, res) {
+  const claimID = req.session.data.id
+  const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
+  var claim = null
+  const validAmount = validNumberCheck(paymentReimbursementAmount)
+
+  delete req.session.data.paymentReimbursementAmountIncomplete
+  delete req.session.data.paymentReimbursementAmountInvalid
+
+
+  for (const c of req.session.data.claims) {
+    if (c.claimID == claimID) {
+      claim = c
+      break;
+    }
+  }
+
+  if ((paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
+    req.session.data.paymentReimbursementAmountIncomplete = true
+
+  } else if (!validAmount) {
+    req.session.data.paymentReimbursementAmountInvalid = true
+
+  } else {
+
+    if (claim.claimType == "100") {
+      req.session.data.processClaimStep = "checkCompletion"
+    } else if (claim.claimType == "60") {
+      switch(req.session.data.payment) {
+        case "yes":
+          req.session.data.result = "approve"
+          break;
+        case "no":
+          req.session.data.result = "reject"
+          break;
+      }
+      req.session.data.processClaimStep = "confirmOutcome"
+    }
+
+  }
+
+  return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+});
+
+router.post('/payment-rejection-note-handler', function (req, res) {
+  const claimID = req.session.data.id
+  const paymentNoNote = req.session.data.paymentNoNote
+  var claim = null
+
+  delete req.session.data.paymentNoNoteIncomplete
+
+  for (const c of req.session.data.claims) {
+    if (c.claimID == claimID) {
+      claim = c
+      break;
+    }
+  }
+
+  if ((paymentNoNote == null || paymentNoNote == "")) {
+    req.session.data.paymentNoNoteIncomplete = true
+  } else {
+    if (claim.claimType == "100") {
+      req.session.data.processClaimStep = "checkCompletion"
+    } else if (claim.claimType == "60") {
+      switch(req.session.data.payment) {
+        case "yes":
+          req.session.data.result = "approve"
+          break;
+        case "no":
+          req.session.data.result = "reject"
+          break;
+      }
+      req.session.data.processClaimStep = "confirmOutcome"
+    }
+  }
+
+  return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+});
+
+router.post('/completion-check-handler', function (req, res) {
+  const claimID = req.session.data.id
+  const completionResponse = req.session.data.completion
+
+  delete req.session.data.completionResponseIncomplete
+
+  if (completionResponse == null) {
+    req.session.data.completionResponseIncomplete = true
+  } else {
+    if (completionResponse == "yes") {
+      switch(req.session.data.payment, req.session.data.completion) {
+        case "yes","yes":
+          req.session.data.result = "approve"
+          break;
+        default:
+          req.session.data.result = "reject"
+          break;
+      }
+      req.session.data.processClaimStep = "confirmOutcome"
+      
+    } else if (completionResponse =="no") {
+      req.session.data.processClaimStep = "completionRejectionNote"
+    }
+  }
+
+  return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+});
+
+router.post('/completion-rejection-note-handler', function (req, res) {
+  const claimID = req.session.data.id
+  const completionNoNote = req.session.data.completionNoNote
+
+  delete req.session.data.completionNoNoteIncomplete
+
+  if (completionNoNote == null || completionNoNote == "") {
+    req.session.data.completionNoNoteIncomplete = true
+  } else {
+    switch(req.session.data.payment, req.session.data.completion) {
+      case "yes","yes":
+        req.session.data.result = "approve"
+        break;
+      default:
+        req.session.data.result = "reject"
+        break;
+    }
+      req.session.data.processClaimStep = "confirmOutcome"
+  }
+
+    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+});
 
 module.exports = router
