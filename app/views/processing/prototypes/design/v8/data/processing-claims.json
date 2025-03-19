@@ -268,16 +268,10 @@
         "startDate": "2024-07-08T11:45:01.732Z",
         "costDate": "2024-05-27T01:16:45.233Z",
         "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
           "costPerLearner": null
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": null,
-          "note": null
         },
         "processedDate": null,
         "processedBy": null
@@ -290,16 +284,10 @@
         "startDate": "2024-07-08T11:45:01.732Z",
         "costDate": "2024-05-27T01:16:45.233Z",
         "evidenceOfPayment": ["invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": null,
-          "note": null
         },
         "processedDate": "2025-02-12T07:43:14.557Z",
         "processedBy": "Flossie Gleaason"
@@ -323,16 +311,10 @@
         "startDate": "2024-06-09T23:24:35.737Z",
         "costDate": "2024-06-08T12:52:08.749Z",
         "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
           "costPerLearner": null
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": null,
-          "note": null
         },
         "processedDate": null,
         "processedBy": null
@@ -345,16 +327,10 @@
         "startDate": "2024-06-09T23:24:35.737Z",
         "costDate": "2024-06-08T12:52:08.749Z",
         "evidenceOfPayment": ["invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": null,
-          "note": null
         },
         "processedDate": "2025-02-28T07:28:48.023Z",
         "processedBy": "Allan Connelly"
@@ -367,16 +343,10 @@
         "startDate": "2024-06-09T23:24:35.737Z",
         "costDate": "2024-06-08T12:52:08.749Z",
         "evidenceOfPayment": ["invoice1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": null,
-          "note": null
         },
         "processedDate": "2025-02-17T07:28:48.023Z",
         "processedBy": "Allan Connelly"
@@ -400,16 +370,10 @@
         "startDate": "2024-03-31T23:55:47.273Z",
         "costDate": "2024-03-31T23:55:44.062Z",
         "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
           "costPerLearner": 162
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
         },
         "processedDate": "2024-06-26T17:19:54.377Z",
         "processedBy": "Flossie Gleason"
@@ -422,16 +386,10 @@
         "startDate": "2024-03-31T23:55:47.273Z",
         "costDate": "2024-03-31T23:55:44.062Z",
         "evidenceOfPayment": ["invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
         },
         "processedDate": "2024-05-05T17:19:54.377Z",
         "processedBy": "Flossie Gleason"
@@ -455,16 +413,10 @@
         "startDate": "2024-07-11T23:38:03.737Z",
         "costDate": "2024-06-18T20:17:59.152Z",
         "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "fail",
           "note": "The evidence of payment show you paid for a course that is not eligible for funding through our service.",
           "costPerLearner": null
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": null,
-          "note": null
         },
         "processedDate": "2025-01-10T06:24:49.949Z",
         "processedBy": "Allan Connelly"
@@ -477,16 +429,10 @@
         "startDate": "2024-07-11T23:38:03.737Z",
         "costDate": "2024-06-18T20:17:59.152Z",
         "evidenceOfPayment": ["bankStatement1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment does not show what training you paid for.",
           "costPerLearner": null
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": null,
-          "note": null
         },
         "processedDate": "2024-11-23T06:24:49.949Z",
         "processedBy": "Allan Connelly"
@@ -510,16 +456,10 @@
         "startDate": "2025-02-24T09:54:13.322Z",
         "costDate": "2024-10-18T14:35:08.968Z",
         "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
           "costPerLearner": 108
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
         },
         "processedDate": "2025-02-03T06:15:38.665Z",
         "processedBy": "Allan Connelly"
@@ -541,15 +481,8 @@
         "trainingCode": "501/1146/2",
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-02-24T09:54:13.322Z",
-        "costDate": "2024-10-18T14:35:08.968Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-03-05T03:16:00.448Z",
         "evidenceOfCompletion": "certficate2.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": null,
-          "note": null,
-          "costPerLearner": null
-        },
         "evidenceOfCompletionReview": {
           "outcome": null,
           "note": null
@@ -563,15 +496,8 @@
         "trainingCode": "501/1146/2",
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-02-24T09:54:13.322Z",
-        "costDate": "2024-10-18T14:35:08.968Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-03-05T03:16:00.448Z",
         "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": null,
-          "note": null,
-          "costPerLearner": null
-        },
         "evidenceOfCompletionReview": {
           "outcome": "queried",
           "note": "The certificate shows a different learner's name to the one in the claim."
@@ -598,16 +524,10 @@
         "startDate": "2024-07-06T10:37:21.199Z",
         "costDate": "2024-04-11T09:34:39.184Z",
         "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
           "costPerLearner": 270
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
         },
         "processedDate": "2025-02-18T05:44:08.305Z",
         "processedBy": "Mara Monahan"
@@ -629,15 +549,8 @@
         "trainingCode": "601/7356/7",
         "learnerID": "LM 89 7F 48 J",
         "startDate": "2024-07-06T10:37:21.199Z",
-        "costDate": "2024-04-11T09:34:39.184Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-23T21:12:41.455Z",
         "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": "pass",
-          "note": null,
-          "costPerLearner": 270
-        },
         "evidenceOfCompletionReview": {
           "outcome": null,
           "note": null
@@ -651,15 +564,8 @@
         "trainingCode": "601/7356/7",
         "learnerID": "LM 89 7F 48 J",
         "startDate": "2024-07-06T10:37:21.199Z",
-        "costDate": "2024-04-11T09:34:39.184Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-23T21:12:41.455Z",
         "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": "pass",
-          "note": null,
-          "costPerLearner": 270
-        },
         "evidenceOfCompletionReview": {
           "outcome": "queried",
           "note": "The completion date on the certificate does not match the completion date on the claim"
@@ -673,15 +579,8 @@
         "trainingCode": "601/7356/7",
         "learnerID": "LM 89 7F 48 J",
         "startDate": "2024-07-06T10:37:21.199Z",
-        "costDate": "2024-04-11T09:34:39.184Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-22T21:12:41.455Z",
         "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": "pass",
-          "note": null,
-          "costPerLearner": 270
-        },
         "evidenceOfCompletionReview": {
           "outcome": "queried",
           "note": "The completion date on the certificate does not match the completion date on the claim"
@@ -708,16 +607,10 @@
         "startDate": "2024-06-29T03:28:29.822Z",
         "costDate": "2024-06-04T11:51:05.528Z",
         "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
           "costPerLearner": 270
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
         },
         "processedDate": "2024-07-24T00:49:20.058Z",
         "processedBy": "Allan Connelly"
@@ -739,15 +632,8 @@
         "trainingCode": "601/6126/7",
         "learnerID": "BF 73 4F 97 L",
         "startDate": "2024-06-29T03:28:29.822Z",
-        "costDate": "2024-06-04T11:51:05.528Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-23T10:49:50.110Z",
         "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": "pass",
-          "note": null,
-          "costPerLearner": 270
-        },
         "evidenceOfCompletionReview": {
           "outcome": "pass",
           "note": null
@@ -761,15 +647,8 @@
         "trainingCode": "601/6126/7",
         "learnerID": "BF 73 4F 97 L",
         "startDate": "2024-06-29T03:28:29.822Z",
-        "costDate": "2024-06-04T11:51:05.528Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-23T10:49:50.110Z",
         "evidenceOfCompletion": "certficate2.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": "pass",
-          "note": null,
-          "costPerLearner": 270
-        },
         "evidenceOfCompletionReview": {
           "outcome": "queried",
           "note": "The name on the evidence of completion does not match the claim."
@@ -796,16 +675,10 @@
         "startDate": "2025-01-20T08:38:24.133Z",
         "costDate": "2024-11-27T07:49:17.543Z",
         "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
           "costPerLearner": 162
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
         },
         "processedDate": "2025-02-12T12:05:57.719Z",
         "processedBy": "Allan Connelly"
@@ -827,15 +700,8 @@
         "trainingCode": "601/7430/4",
         "learnerID": "KZ 79 0F 13 Z",
         "startDate": "2025-01-20T08:38:24.133Z",
-        "costDate": "2024-11-27T07:49:17.543Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-30T10:14:23.640Z",
         "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": "pass",
-          "note": null,
-          "costPerLearner": "162"
-        },
         "evidenceOfCompletionReview": {
           "outcome": "fail",
           "note": "The certificate of completion still doesn't match the details in the claim."
@@ -849,15 +715,8 @@
         "trainingCode": "601/7430/4",
         "learnerID": "KZ 79 0F 13 Z",
         "startDate": "2025-01-20T08:38:24.133Z",
-        "costDate": "2024-11-27T07:49:17.543Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-01-30T10:14:23.640Z",
         "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": "pass",
-          "note": null,
-          "costPerLearner": 162
-        },
         "evidenceOfCompletionReview": {
           "outcome": "pass",
           "note": "The certificate of completion still doesn't match the details in the claim."
