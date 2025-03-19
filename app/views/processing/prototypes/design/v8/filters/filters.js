@@ -510,3 +510,15 @@ addFilter('findTraining', (trainingCode, trainingArray) => {
 addFilter('findLearner', (learnerID, learners) => {
     return findLearnerById(learnerID, learners)
 })
+
+addFilter('trainingTypeCheck', function (trainingCode, trainingList, matchType) {
+
+    for (let trainingGroup of trainingList) {
+        for (let training of trainingGroup.courses) {
+            if (trainingCode == training.code) {
+                return trainingGroup.groupTitle == matchType;
+            }
+        }
+    }
+
+})
