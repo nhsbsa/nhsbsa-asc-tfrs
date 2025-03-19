@@ -157,7 +157,7 @@
                                                 <p class="govuk-hint">For instance, if the organisation paid £100 for 4 learners
                                                     then the cost per learner is £25.</p>
                                                 <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is
-                                                        £{{claim.training.reimbursementAmount}}.</strong></p>
+                                                        £{{training.reimbursementAmount}}.</strong></p>
                                                 <p class="govuk-hint">The organisation will not get back more than they actually
                                                     paid.</p>
                                             </div>
@@ -331,34 +331,41 @@
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
         {% if (claim.claimType == "100") %}
-        <p class="govuk-body">The amount to be reimbursed for this 100 claim is <strong>£</strong>.</p>
+        <p class="govuk-body">The amount to be reimbursed for this 100 claim is <strong>£{{ claim |
+            reimbursement(claim.reimbursementAmount) }}</strong>.</p>
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
             <li>maximum reimbursement amount for this training (£{{ training.reimbursementAmount }})</li>
-            <li>cost per learner (what the organisation actually paid) (£)</li>
+            <li>cost per learner (what the organisation actually paid) (£{{claim.reimbursementAmount}})</li>
         </ul>
 
         {% elif (claim.claimType == "60") %}
-        <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £.</p>
+        <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £{{ claim |
+            reimbursement(claim.reimbursementAmount) / 0.6 }}.</p>
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
-            <li>maximum reimbursement amount for this training (£)</li>
-            <li>cost per learner (what the organisation actually paid) (£)</li>
+            <li>maximum reimbursement amount for this training (£{{training.reimbursementAmount}})</li>
+            <li>cost per learner (what the organisation actually paid) (£{{ claim.reimbursementAmount }})</li>
         </ul>
         <p class="govuk-body">For this 60 part of the claim the organisation will get 60% of the total amount, which is
-            <strong>£</strong>.</p>
-        <p class="govuk-body">When the 40 claim is approved they'll get back the remaining 40% (£).</p>
+            <strong>£{{ (claim | reimbursement(claim.reimbursementAmount)) }}</strong>.</p>
+-        <p class="govuk-body">When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim |
+-            reimbursement(claim.reimbursementAmount) / 0.6 * 0.4)}}).</p>
++            <strong>£</strong>.</p>
+
 
         {% elif (claim.claimType == "40") %}
-        <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £.</p>
+        <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim |
+            reimbursement(claim.reimbursementAmount) / 0.4) }}.</p>
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
-            <li>maximum reimbursement amount for this training (£)</li>
-            <li>cost per learner (what the organisation actually paid) (£)</li>
+            <li>maximum reimbursement amount for this training (£{{training.reimbursementAmount}})</li>
+            <li>cost per learner (what the organisation actually paid) (£{{claim.reimbursementAmount}})</li>
         </ul>
         <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of the total amount, which is
-            <strong>£</strong>.</p>
-        <p class="govuk-body">The organisation has already had 60% of the total, which was £.</p>
+            <strong>£{{ (claim | reimbursement(claim.reimbursementAmount))}}</strong>.</p>
+            <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim |
+                reimbursement(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>    
         {% endif %}
 
 

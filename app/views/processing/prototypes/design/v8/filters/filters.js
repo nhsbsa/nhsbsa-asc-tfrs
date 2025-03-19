@@ -132,13 +132,13 @@ addFilter('dateSort', function (notes) {
 })
 
 addFilter('reimbursement', function (claim, paymentReimbursementAmount) {
-    if ((claim.fundingType == "TU") && (claim.claimType == "60")) {
+    if ((claim.claimType == "60")) {
         if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
             return paymentReimbursementAmount * 0.6
         } else {
             return claim.training.reimbursementAmount * 0.6
         }
-    } else if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
+    } else if (claim.claimType == "40") {
         if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
             return claim.reimbursementAmount * 0.4
         } else {
@@ -152,7 +152,7 @@ addFilter('reimbursement', function (claim, paymentReimbursementAmount) {
 });
 
 addFilter('original_reimbursement_amount', function (claim,paymentReimbursementAmount) {
-    if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
+    if (claim.claimType == "40") {
         paymentReimbursementAmount = claim.reimbursementAmount
     }
     if (paymentReimbursementAmount > claim.training.reimbursementAmount) {
