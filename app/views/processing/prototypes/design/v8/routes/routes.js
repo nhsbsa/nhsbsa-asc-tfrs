@@ -661,7 +661,7 @@ router.get('/claim-view-handler/:claimID', function (req, res) {
   delete req.session.data.currentPage
 
 
-  req.session.data.orgTab = 'claims'
+  req.session.data.orgTab = 'singleClaim'
   req.session.data.id = claimID
   req.session.data.processClaimStep = 'inProgress'
 
