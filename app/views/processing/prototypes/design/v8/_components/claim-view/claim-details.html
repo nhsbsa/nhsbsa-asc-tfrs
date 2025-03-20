@@ -1,10 +1,10 @@
 <h3 class="govuk-heading-m" id="payment">Details</h3>
 
-{% if claim.training.code | trainingTypeCheck(data.training, "Courses") %}
+{% if training.code | trainingTypeCheck(data.training, "Courses") %}
 
     {% include "./details/course-card.html" %}
 
-{% elif claim.training.code | trainingTypeCheck(data.training, "Qualifications") %}
+{% elif training.code | trainingTypeCheck(data.training, "Qualifications") %}
 
     {% include "./details/qualification-card.html" %}
 

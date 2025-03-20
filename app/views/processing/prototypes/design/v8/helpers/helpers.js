@@ -189,4 +189,30 @@ function findCourseByCode(code, trainingCourses) {
       }
   }
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById }
+  function flattenUsers(data) {
+    let users = [];
+  
+    // Flatten signatory
+    if (data.signatory) {
+      if (data.signatory.active) {
+        users.push({ ...data.signatory.active });
+      }
+      if (Array.isArray(data.signatory.inactive)) {
+        users = users.concat(data.signatory.inactive);
+      }
+    }
+  
+    // Flatten users
+    if (data.users) {
+      Object.values(data.users).forEach(userGroup => {
+        if (Array.isArray(userGroup)) {
+          users = users.concat(userGroup);
+        }
+      });
+    }
+  
+    return users;
+}
+
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers }

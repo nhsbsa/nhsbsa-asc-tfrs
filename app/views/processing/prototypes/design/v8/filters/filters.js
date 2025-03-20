@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode } = require('../helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers } = require('../helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag', function (statusID) {
@@ -521,4 +521,15 @@ addFilter('trainingTypeCheck', function (trainingCode, trainingList, matchType) 
         }
     }
 
+})
+
+addFilter('findUser', function (email, org) {
+    users = flattenUsers(org)
+    let user = null;
+    for (let u of users) {
+        if (u.email == email) {
+            user = u
+        }
+    }
+    return user;
 })

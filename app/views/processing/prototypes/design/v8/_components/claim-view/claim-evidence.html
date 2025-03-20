@@ -1,7 +1,7 @@
 <h3 class="govuk-heading-m">Evidence</h3>
 
 
-{% if ((claim.fundingType == "TU") and (claim.claimType != "40"))%}
+{% if (claim.claimType != "40")%}
 <div class="govuk-summary-card">
     <div class="govuk-summary-card__title-wrapper">
       <h4 class="govuk-summary-card__title">
@@ -10,7 +10,7 @@
     </div>
     <div class="govuk-summary-card__content">
       <dl class="govuk-summary-list">
-        {% for evidence in claim.evidenceOfPayment %} 
+        {% for evidence in submission.evidenceOfPayment %} 
             {% set isPayment = true %}
             {% include "./evidence/file-section.html" %} 
         {% endfor %}
@@ -21,7 +21,7 @@
   
 
 
-{% if (claim.fundingType == "TU") and (claim.claimType != "60")%}
+{% if (claim.claimType != "60")%}
 <div class="govuk-summary-card">
     <div class="govuk-summary-card__title-wrapper">
       <h4 class="govuk-summary-card__title">
@@ -30,7 +30,7 @@
     </div>
     <div class="govuk-summary-card__content">
       <dl class="govuk-summary-list">
-            {% set evidence = claim.evidenceOfCompletion %} 
+            {% set evidence = submission.evidenceOfCompletion %} 
             {% set isPayment = false%} 
             {% include "./evidence/file-section.html" %}
       </dl>
