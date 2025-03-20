@@ -248,20 +248,20 @@
           {        
             "givenName": "Lionel",
             "familyName": "Lowe",
-            "email": "lionel-lowel@evergreencare.co.uk",
+            "email": "lionel-lowel@dawnstar.co.uk",
             "status": "invited"
           },  
         "inactive": [
           {        
             "givenName": "Windler",
             "familyName": "Marlene",
-            "email": "marlene-windler@evergreencare.co.uk",
+            "email": "marlene-windler@dawnstar.co.uk",
             "status": "inactive"
           },
           {        
             "givenName": "Reilly",
             "familyName": "Sim",
-            "email": "sim-reilly@evergreencare.co.uk",
+            "email": "sim-reilly@dawnstar.co.uk",
             "status": "inactive"
           }
         ]
@@ -271,33 +271,33 @@
           {
           "givenName": "Daniel",
           "familyName": "Jones",
-          "email": "d.jones@evergreencare.com"
+          "email": "d.jones@dawnstar.com"
         }, 
         {
           "givenName": "Rachel",
           "familyName": "Mcglee",
-          "email": "rachel.mcglee@evergreencare.com"
+          "email": "rachel.mcglee@dawnstar.com"
         },
         {
           "givenName": "Flossie",
           "familyName": "Gleason",
-          "email": "flossie.gleason@evergreencare.com"
+          "email": "flossie.gleason@dawnstar.com"
         }
       ],
         "inactive": [{
           "givenName": "Fredrick",
           "familyName": "Smith",
-          "email": "fredrick.smith@evergreencare.com"
+          "email": "fredrick.smith@dawnstar.com"
         }],
         "invited": [{
           "givenName": "Charlotte",
           "familyName": "Dandy",
-          "email": "charlotte.dandy@evergreencare.com"
+          "email": "charlotte.dandy@dawnstar.com"
         },
         {
           "givenName": "Abel",
           "familyName": "Mellow",
-          "email": "abel.mellow@evergreencare.com"
+          "email": "abel.mellow@dawnstar.com"
         }]
       },
       "bankDetails": {
@@ -331,13 +331,13 @@
           {        
             "givenName": "Lionel",
             "familyName": "Lowe",
-            "email": "lionel-lowel@evergreencare.co.uk",
+            "email": "lionel-lowel@brightcare.co.uk",
             "status": "invited"
           },  
         "inactive": [{
           "givenName": "Natasha",
           "familyName": "Jones",
-          "email": "natasha-jones@carehome.co.uk",
+          "email": "natasha-jones@brightcare.co.uk",
           "status": "inactive"
         }]
       }, 
@@ -358,13 +358,13 @@
         {        
           "givenName": "Lionel",
           "familyName": "Lowe",
-          "email": "lionel-lowel@evergreencare.co.uk",
+          "email": "lionel-lowel@purplestones.co.uk",
           "status": "invited"
         },  
         "inactive": [{        
           "givenName": "Kayleigh",
           "familyName": "McCleod",
-          "email": "kayleigh-mccleod@carehome.co.uk",
+          "email": "kayleigh-mccleod@purplestones.co.uk",
           "status": "inactive"
         }]
       }, 
