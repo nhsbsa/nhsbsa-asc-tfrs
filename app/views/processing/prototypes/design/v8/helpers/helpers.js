@@ -214,5 +214,23 @@ function findCourseByCode(code, trainingCourses) {
     return users;
 }
 
+function sortSubmissionsByDate(submissions, dateType) {
+    // Ensure that the claim has a submissions array and it's not empty
+    if (!submissions || submissions.length === 0) {
+        return submissions; // Return the claim as is if no submissions exist
+    }
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers }
+    // Sort the submissions array based on the dateType
+    submissions.sort((a, b) => {
+        const dateA = new Date(a[dateType]);
+        const dateB = new Date(b[dateType]);
+
+        // Sort in descending order (most recent first)
+        return dateB - dateA;
+    });
+
+    return submissions; // Return the claim with sorted submissions
+}
+
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate }

@@ -1,5 +1,10 @@
+{% if claim.claimType == "100" %} 
+    {% set events = claim | create100TimelineArray %}
+{% else %} 
+    {% set events = claim | create6040TimelineArray(pairClaim) %}
+{% endif %} 
 
-{% set events = claim | createTimelineArray %}
+
 
 
 <h3 class="govuk-heading-m">History</h3>

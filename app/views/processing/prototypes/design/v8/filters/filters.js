@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers } = require('../helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate } = require('../helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag', function (statusID) {
@@ -252,10 +252,146 @@ addFilter('formatInformation', function (foundOrg, enteredInfo, isFromCheckEdite
     return info
 })
 
+addFilter('orderByMostRecent', function (submissions) {
+    let sorted = sortSubmissionsByDate(submissions, 'submittedDate')
+    return sorted
+})
 
-addFilter('createTimelineArray', function (claim) {
+addFilter('create100TimelineArray', function (claim) {
     // Extract the timestamps and their associated data
     const events = [];
+
+    let sorted = sortSubmissionsByDate(claim.submissions, 'submittedDate')
+
+
+    for (const submission of sorted) {
+        if (submission.submittedDate) {
+
+            if (submission.processedDate == null) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                    // Add completion date
+                    if (submission.completionDate) {
+                        events.push({
+                            type: "trainingDate",
+                            title: "Training completed",
+                            date: submission.completionDate,
+                            description: claim.completionNote || null,
+                            author: null
+                        });
+                    }
+                    // Add cost date
+                    if (submission.costDate) {
+                        events.push({
+                            type: "trainingDate",
+                            title: "Training paid for",
+                            date: submission.costDate,
+                            description: null,
+                            author: null
+                        });
+                    }
+
+                    // Add start date
+                    if (submission.startDate) {
+                        events.push({
+                            type: "trainingDate",
+                            title: "Training started",
+                            date: submission.startDate,
+                            description: null,
+                            author: null
+                        });
+                    }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "queried" || submission.evidenceOfCompletionReview.outcome == "queried")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                // Add queried date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim queried",
+                        date: submission.processedDate,
+                        description: null,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "pass" || submission.evidenceOfCompletionReview.outcome == "pass")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                // Add approved date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim approved",
+                        date: submission.processedDate,
+                        description:  null,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "fail" || submission.evidenceOfCompletionReview.outcome == "fail")) {
+
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                // Add rejected date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim rejected",
+                        date: submission.processedDate,
+                        description:  null,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+
+            }
+    
+    
+            
+        }
+    }
 
     // Add created date
     if (claim.createdDate) {
@@ -268,85 +404,333 @@ addFilter('createTimelineArray', function (claim) {
         });
     }
 
-    // Add submitted date
-    if (claim.submittedDate) {
+    // Sort the events by date in descending order
+    events.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    return events;
+})
+
+
+addFilter('create6040TimelineArray', function (claim, pairClaim) {
+    // Extract the timestamps and their associated data
+    const events = [];
+    let sixtyClaim = null
+    let fourtyClaim = null
+    if (claim.claimType == "60") {
+        sixtyClaim = claim
+        fourtyClaim = pairClaim
+    } else {
+        sixtyClaim = pairClaim
+        fourtyClaim = claim
+    }
+
+    for (const submission of sixtyClaim.submissions) {
+        if (submission.submittedDate) {
+
+            if (submission.processedDate == null) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                // Add cost date
+                if (submission.costDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training paid for",
+                        date: submission.costDate,
+                        description: null,
+                        author: null
+                    });
+                }
+
+                // Add start date
+                if (submission.startDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training started",
+                        date: submission.startDate,
+                        description: null,
+                        author: null
+                    });
+                }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "queried")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                // Add queried date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim queried",
+                        date: submission.processedDate,
+                        description: null,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "pass")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                // Add approved date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim approved",
+                        date: submission.processedDate,
+                        description:  null,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+                // Add cost date
+                if (submission.costDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training paid for",
+                        date: submission.costDate,
+                        description: null,
+                        author: null
+                    });
+                }
+
+                // Add start date
+                if (submission.startDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training started",
+                        date: submission.startDate,
+                        description: null,
+                        author: null
+                    });
+                }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "fail")) {
+
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                // Add rejected date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim rejected",
+                        date: submission.processedDate,
+                        description:  null,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+                
+                // Add cost date
+                if (submission.costDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training paid for",
+                        date: submission.costDate,
+                        description: null,
+                        author: null
+                    });
+                }
+
+                // Add start date
+                if (submission.startDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training started",
+                        date: submission.startDate,
+                        description: null,
+                        author: null
+                    });
+                }
+            }
+        }
+    }
+
+
+    for (const submission of fourtyClaim.submissions) {
+        if (submission.submittedDate) {
+
+            if (submission.processedDate == null) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                // Add completion date
+                if (submission.completionDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training completed",
+                        date: submission.completionDate,
+                        description: claim.completionNote || null,
+                        author: null
+                    });
+                }
+
+            } else if ((submission.evidenceOfCompletionReview.outcome == "queried")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                // Add queried date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim queried",
+                        date: submission.processedDate,
+                        description: null,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+            } else if ((submission.evidenceOfCompletionReview.outcome == "pass")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                // Add approved date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim approved",
+                        date: submission.processedDate,
+                        description:  null,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+                // Add completion date
+                if (submission.completionDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training completed",
+                        date: submission.completionDate,
+                        description: claim.completionNote || null,
+                        author: null
+                    });
+                }
+
+            } else if ((submission.evidenceOfCompletionReview.outcome == "fail")) {
+
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        author: claim.createdBy + " (Submitter)"
+                    });
+                }
+
+                // Add rejected date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim rejected",
+                        date: submission.processedDate,
+                        description:  null,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+                // Add completion date
+                if (submission.completionDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training completed",
+                        date: submission.completionDate,
+                        description: claim.completionNote || null,
+                        author: null
+                    });
+                }
+
+
+            }
+
+        }
+    }
+ 
+    // Add 60 created date
+    if (sixtyClaim.createdDate) {
         events.push({
             type: "statusDate",
-            title: "Claim submitted",
-            date: claim.submittedDate,
+            title: "60 claim created",
+            date: sixtyClaim.createdDate,
             description: null,
-            author: claim.createdBy + " (Submitter)"
+            author: sixtyClaim.createdBy + " (Submitter)"
         });
     }
 
-    // Add completion date
-    if (claim.completionDate) {
-        events.push({
-            type: "trainingDate",
-            title: "Training completed",
-            date: claim.completionDate,
-            description: claim.completionNote || null,
-            author: null
-        });
-    }
-
-    // Add rejected date
-    if (claim.approvedDate) {
-        events.push({
-            type: "statusDate",
-            title: "Claim approved",
-            date: claim.approvedDate,
-            description:  null,
-            author: "Eren Yeager (Processor)"
-        });
-    }
-
-    // Add rejected date
-    if (claim.rejectedDate) {
-        events.push({
-            type: "statusDate",
-            title: "Claim rejected",
-            date: claim.rejectedDate,
-            description: claim.rejectedNote || null,
-            author: "Eren Yeager (Processor)"
-        });
-    }
-
-    // Add cost date
-    if (claim.costDate) {
-        events.push({
-            type: "trainingDate",
-            title: "Training paid for",
-            date: claim.costDate,
-            description: null,
-            author: null
-        });
-    }
-
-    // Add cost date
-    if (claim.startDate) {
-        events.push({
-            type: "trainingDate",
-            title: "Training started",
-            date: claim.startDate,
-            description: null,
-            author: null
-        });
-    }
-
-
-    // Add notes
-    if (claim.notes && Array.isArray(claim.notes)) {
-        claim.notes.forEach(note => {
+        // Add 40 created date
+        if (fourtyClaim.createdDate) {
             events.push({
-                type: "note",
-                title: "Note added",
-                date: note.date,
-                description: note.note,
-                author: note.author
+                type: "statusDate",
+                title: "40 claim created",
+                date: fourtyClaim.createdDate,
+                description: null,
+                author: fourtyClaim.createdBy + " (Submitter)"
             });
-        });
-    }
+        }
 
     // Sort the events by date in descending order
     events.sort((a, b) => new Date(b.date) - new Date(a.date));
