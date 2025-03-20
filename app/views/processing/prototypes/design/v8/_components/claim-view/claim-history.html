@@ -1,11 +1,10 @@
 {% if claim.claimType == "100" %} 
     {% set events = claim | create100TimelineArray %}
-{% else %} 
-    {% set events = claim | create6040TimelineArray(pairClaim) %}
+{% elif claim.claimType == "60" %} 
+    {% set events = claim | create60TimelineArray %}
+{% elif claim.claimType == "40" %} 
+    {% set events = claim | create40TimelineArray %}
 {% endif %} 
-
-
-
 
 <h3 class="govuk-heading-m">History</h3>
 
@@ -42,7 +41,7 @@
         </p>
     
         <div class="moj-timeline__description">
-        <p>{{event.description}} </p>
+            <a href="{{event.description}}" class="govuk-link">{{event.description}} </p></a>
         </div>
     
     </div>
