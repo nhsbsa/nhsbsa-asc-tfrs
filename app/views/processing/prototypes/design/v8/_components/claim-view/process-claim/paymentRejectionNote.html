@@ -5,7 +5,7 @@
 
 <form action="../payment-rejection-note-handler" method="post" novalidate>
 
-    <div class="govuk-form-group govuk-character-count {% if data.paymentNoNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
+    <div class="govuk-form-group govuk-character-count {% if data.paymentRejectNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
             Why did the evidence of payment not meet the required criteria?
         </legend>
@@ -14,13 +14,13 @@
             This note tells the submitter why their claim has been rejected
         </div>
 
-        {% if data.paymentNoNoteIncomplete %}
+        {% if data.paymentRejectNoteIncomplete %}
         <p id="payment-note-error" class="govuk-error-message">
             <span class="govuk-visually-hidden">Error:</span>Enter payment rejection reasons
         </p>
         {% endif %}
         
-        <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentNoNoteIncomplete %}govuk-textarea--error{% endif %}" id="paymentNoNote" name="paymentNoNote" rows="30" aria-describedby="payment-no-note-info note-hint">{{ data.paymentNoNote | default ('') }}</textarea>
+        <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentRejectNoteIncomplete %}govuk-textarea--error{% endif %}" id="paymentRejectNote" name="paymentRejectNote" rows="30" aria-describedby="payment-no-note-info note-hint">{{ data.paymentRejectNote | default ('') }}</textarea>
         
         <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
             You can enter up to 1000 characters

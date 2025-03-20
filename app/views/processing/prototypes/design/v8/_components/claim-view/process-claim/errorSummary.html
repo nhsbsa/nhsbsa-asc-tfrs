@@ -27,7 +27,7 @@
 
                 {% endif %}
 
-                {% if data.paymentNoNoteIncomplete %}
+                {% if data.paymentRejectNoteIncomplete %}
                 <li>
                     <a href="#payment-note-error">Enter payment rejection reasons</a>
                 </li>
@@ -39,7 +39,7 @@
                 </li>
                 {% endif %}
 
-                {% if data.completionNoNoteIncomplete %}
+                {% if data.completionRejectNoteIncomplete %}
                 <li>
                     <a href="#completion-note-error">Enter completion rejection reasons</a>
                 </li>

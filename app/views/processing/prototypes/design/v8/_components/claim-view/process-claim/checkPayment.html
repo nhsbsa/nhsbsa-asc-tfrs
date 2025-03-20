@@ -31,10 +31,20 @@
 
                 <div class="govuk-radios__item">
 
-                    <input class="govuk-radios__input" id="paymentNo" name="payment" type="radio" value="no" {% if data.payment=='no' %}checked{% endif%}>
+                    <input class="govuk-radios__input" id="paymentQuery" name="payment" type="radio" value="query" {% if data.payment=='query' %}checked{% endif%}>
 
-                    <label class="govuk-label govuk-radios__label" for="paymentNo">
-                        No
+                    <label class="govuk-label govuk-radios__label" for="paymentQuery">
+                        No - needs action by org
+                    </label>
+
+                </div>
+
+                <div class="govuk-radios__item">
+
+                    <input class="govuk-radios__input" id="paymentReject" name="payment" type="radio" value="reject" {% if data.payment=='reject' %}checked{% endif%}>
+
+                    <label class="govuk-label govuk-radios__label" for="paymentReject">
+                        No - reject the claim
                     </label>
 
                 </div>

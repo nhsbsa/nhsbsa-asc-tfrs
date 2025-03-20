@@ -4,10 +4,10 @@
 {% set learner = submission.learnerID | findLearner(data["learners"])%}
 {% set training = submission.trainingCode | findTraining(data.training)%}
 
-{% set paymentCompleted = claim.evidenceOfPaymentreview.pass != null %}
-{% set paymentNote = claim.evidenceOfPaymentreview.note %} 
-{% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
-{% set completionNote = claim.evidenceOfCompletionreview.note %}
+{% set paymentCompleted = claim.evidenceOfPaymentReview.pass != null %}
+{% set paymentNote = claim.evidenceOfPaymentReview.note %} 
+{% set completionCompleted = claim.evidenceOfCompletionReview.pass != null%}
+{% set completionNote = claim.evidenceOfCompletionReview.note %}
 
 {% set pairClaim = data.id | matchPairClaim(data.claims) %}
 {% set pairSubmisison = pairClaim | getMostRelevantSubmission %}
@@ -53,7 +53,7 @@
         </div>
         {% endif %}
 
-        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentNoNoteIncomplete or data.completionResponseIncomplete or data.completionNoNoteIncomplete %}
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentRejectNoteIncomplete or data.completionResponseIncomplete or data.completionRejectNoteIncomplete %}
             {% include "./process-claim/errorSummary.html" %}
         {% endif %}
 

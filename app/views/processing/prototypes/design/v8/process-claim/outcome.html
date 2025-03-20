@@ -63,12 +63,12 @@ Claim: {{claim.claimID}} — {{data.processingServiceName}}
       
         {% if (data.payment == "no") %}
           <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
-          <p class='govuk-body'>{{data.paymentNoNote}}</p>
+          <p class='govuk-body'>{{data.paymentRejectNote}}</p>
       {% endif %}
 
       {% if (data.completion == "no") %}
           <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
-          <p class='govuk-body'>{{data.completionNoNote}}</p>
+          <p class='govuk-body'>{{data.completionRejectNote}}</p>
       {% endif %}
       </div>
     {% endif %}

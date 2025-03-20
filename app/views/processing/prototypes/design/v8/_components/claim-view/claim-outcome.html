@@ -1,28 +1,32 @@
 <h3 class="govuk-heading-m" id="payment">Outcome</h3>
     
-{% if ((claim.fundingType == "TU") and (claim.claimType != "40"))%}
+{% if (claim.claimType != "40")%}
     <h4 class="govuk-heading-s">Does the evidence of payment meet the required criteria?</h4>
 
-    {% if claim.evidenceOfPaymentreview.pass == "Approved" %}
+    {% if submission.evidenceOfPaymentReview.outcome == "approved" %}
         <p class="govuk-body">Yes</p>
-    {% else %}
-        <p class="govuk-body">No</p>
+    {% elif submission.evidenceOfPaymentReview.outcome == "queried" %}
+        <p class="govuk-body">Queried</p>
+    {% elif submission.evidenceOfPaymentReview.poutcomeass == "rejected" %}
+        <p class="govuk-body">Rejected</p>
     {% endif %}
 
 
-    {% if (claim.fundingType == "TU") and (claim.claimType != "60") %}
+    {% if (claim.claimType != "60") %}
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
     {% endif %}
 
 {% endif %}
 
-{% if (claim.fundingType == "TU") and (claim.claimType != "60") %}
+{% if (claim.claimType != "60") %}
     <h4 class="govuk-heading-s">Does the evidence of completion meet the required criteria?</h4>
 
-    {% if claim.evidenceOfCompletionreview.pass == "Approved" %}
+    {% if submission.evidenceOfCompletionReview.outcome == "approved" %}
         <p class="govuk-body">Yes</p>
-    {% else %}
-        <p class="govuk-body">No</p>
+    {% elif submission.evidenceOfCompletionReview.outcome == "queried" %}
+        <p class="govuk-body">Queried</p>
+    {% elif submission.evidenceOfCompletionReview.outcome == "rejected" %}
+        <p class="govuk-body">Rejected</p>
     {% endif %}
 
 {% endif %}
@@ -32,35 +36,35 @@
 
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-    {% if (claim.fundingType == "TU") and (claim.claimType == "100") %}
+    {% if (claim.claimType == "100") %}
 
-        <p class="govuk-body">The amount to be reimbursed for this 100 claim is <strong>£{{ claim | reimbursement(claim.reimbursementAmount) }}</strong>.</p>
+        {# <p class="govuk-body">The amount to be reimbursed for this 100 claim is <strong>£{{ claim | reimbursement(claim.reimbursementAmount) }}</strong>.</p> #}
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
-            <li>maximum reimbursement amount for this training (£{{ claim.training.reimbursementAmount }})</li>
-            <li>cost per learner (what the organisation actually paid) (£{{claim.reimbursementAmount}})</li>
+            <li>maximum reimbursement amount for this training (£{{ training.reimbursementAmount }})</li>
+            <li>cost per learner (what the organisation actually paid) (£{{submission.evidenceOfPaymentReview.costPerLearner}})</li>
         </ul>
 
-    {% elif (claim.fundingType == "TU") and (claim.claimType == "60") %}
+    {% elif (claim.claimType == "60") %}
 
-        <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £{{ claim | reimbursement(claim.reimbursementAmount) / 0.6 }}.</p>
+        {# <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £{{ claim | reimbursement(claim.reimbursementAmount) / 0.6 }}.</p> #}
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
-            <li>maximum reimbursement amount for this training (£{{claim.training.reimbursementAmount}})</li>
-            <li>cost per learner (what the organisation actually paid) (£{{ claim.reimbursementAmount }})</li>
+            <li>maximum reimbursement amount for this training (£{{training.reimbursementAmount}})</li>
+            <li>cost per learner (what the organisation actually paid) (£{{ submission.evidenceOfPaymentReview.costPerLearner }})</li>
         </ul>
-        <p class="govuk-body">For this 60 part of the claim the organisation will get 60% of the total amount, which is <strong>£{{ (claim | reimbursement(claim.reimbursementAmount)) }}</strong>.</p>
-        <p class="govuk-body">When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim | reimbursement(claim.reimbursementAmount) / 0.6 * 0.4)}}).</p>
+        {# <p class="govuk-body">For this 60 part of the claim the organisation will get 60% of the total amount, which is <strong>£{{ (claim | reimbursement(claim.reimbursementAmount)) }}</strong>.</p> #}
+        {# <p class="govuk-body">When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim | reimbursement(claim.reimbursementAmount) / 0.6 * 0.4)}}).</p> #}
 
-    {% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}
-        <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim | reimbursement(claim.reimbursementAmount) / 0.4) }}.</p>
+    {% elif (claim.claimType == "40") %}
+        {# <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim | reimbursement(claim.reimbursementAmount) / 0.4) }}.</p> #}
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
-            <li>maximum reimbursement amount for this training (£{{claim.training.reimbursementAmount}})</li>
-            <li>cost per learner (what the organisation actually paid) (£{{claim.reimbursementAmount}})</li>
+            <li>maximum reimbursement amount for this training (£{{training.reimbursementAmount}})</li>
+            <li>cost per learner (what the organisation actually paid) (£{{submission.evidenceOfPaymentReview.costPerLearner}})</li>
         </ul>
-        <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of the total amount, which is <strong>£{{ (claim | reimbursement(claim.reimbursementAmount))}}</strong>.</p>
-        <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>
+        {# <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of the total amount, which is <strong>£{{ (claim | reimbursement(claim.reimbursementAmount))}}</strong>.</p> #}
+        {# <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p> #}
     {% endif %}
 
 
@@ -70,14 +74,29 @@
     
     <h4 class="govuk-heading-s">Rejection reasons</h4>
 
-    {% if (claim.evidenceOfPaymentreview.pass == "Rejected") %}
+    {% if (claim.evidenceOfPaymentReview.outcome == "rejected") %}
         <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
-        <p class='govuk-body'>{{claim.evidenceOfPaymentreview.note}}</p>
+        <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
     {% endif %}
 
-    {% if (claim.evidenceOfCompletionreview.pass == "Rejected")  %}
+    {% if (claim.evidenceOfCompletionReview.outcome == "rejected")  %}
         <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
-        <p class='govuk-body'>{{claim.evidenceOfCompletionreview.note}}</p>
+        <p class='govuk-body'>{{submission.evidenceOfCompletionReview.note}}</p>
     {% endif %}
 
+{% elif (claim.status == "queried") %}
+        
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    
+    <h4 class="govuk-heading-s">Query reasons</h4>
+
+    {% if (claim.evidenceOfPaymentReview.outcome == "queried") %}
+        <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
+        <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
+    {% endif %}
+
+    {% if (claim.evidenceOfCompletionReview.outcome == "queried")  %}
+        <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
+        <p class='govuk-body'>{{submission.evidenceOfCompletionReview.note}}</p>
+    {% endif %}
 {% endif %}

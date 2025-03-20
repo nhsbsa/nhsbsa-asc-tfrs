@@ -76,7 +76,7 @@
                 </div>
                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
                     id="conditional-payment-no" data-maxlength="1000">
-                    <div class="govuk-form-group govuk-character-count {% if data.paymentNoNoteIncomplete %}govuk-form-group--error{% endif %}"
+                    <div class="govuk-form-group govuk-character-count {% if data.paymentRejectNoteIncomplete %}govuk-form-group--error{% endif %}"
                         data-module="govuk-character-count">
                         <label class="govuk-label" for="payment-no">
                             Why did the evidence not meet the required criteria?
@@ -84,16 +84,16 @@
                         <div id="payment-note-hint" class="govuk-hint">
                             This note tells the submitter why their claim has been rejected
                         </div>
-                        {% if data.paymentNoNoteIncomplete %}
+                        {% if data.paymentRejectNoteIncomplete %}
                         <p id="payment-note-error" class="govuk-error-message">
                             <span class="govuk-visually-hidden">Error:</span>Complete note for evidence of
                             payment
                         </p>
                         {% endif %}
                         <textarea
-                            class="govuk-textarea govuk-js-character-count {% if data.paymentNoNoteIncomplete %}govuk-textarea--error{% endif %}"
-                            id="paymentNoNote" name="paymentNoNote" rows="21"
-                            aria-describedby="payment-no-note-info note-hint">{{ data.paymentNoNote | default ('') }}</textarea>
+                            class="govuk-textarea govuk-js-character-count {% if data.paymentRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
+                            id="paymentRejectNote" name="paymentRejectNote" rows="21"
+                            aria-describedby="payment-no-note-info note-hint">{{ data.paymentRejectNote | default ('') }}</textarea>
                         <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
                             You can enter up to 1000 characters
                         </div>
@@ -138,7 +138,7 @@
                 </div>
 
                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-notes">
-                    <div class="govuk-form-group govuk-character-count {% if data.completionNoNoteIncomplete %}govuk-form-group--error {% endif %}"
+                    <div class="govuk-form-group govuk-character-count {% if data.completionRejectNoteIncomplete %}govuk-form-group--error {% endif %}"
                         data-module="govuk-character-count" data-maxlength="1000">
                         <label class="govuk-label" for="completionNote">
                             Why did the evidence not meet the required criteria?
@@ -146,16 +146,16 @@
                         <div id="completionNote-hint" class="govuk-hint">
                             This note tells the submitter why their claim has been rejected
                         </div>
-                        {% if data.completionNoNoteIncomplete %}
+                        {% if data.completionRejectNoteIncomplete %}
                         <p id="completion-note-error" class="govuk-error-message">
                             <span class="govuk-visually-hidden">Error:</span> Complete note for evidence of
                             completion
                         </p>
                         {% endif %}
                         <textarea
-                            class="govuk-textarea govuk-js-character-count {% if data.completionNoNoteIncomplete %}govuk-textarea--error{% endif %}"
-                            id="completionNoNote" name="completionNoNote" rows="21"
-                            aria-describedby="completionNote-info completionNote-hint">{{ data.completionNoNote | default ('') }}</textarea>
+                            class="govuk-textarea govuk-js-character-count {% if data.completionRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
+                            id="completionRejectNote" name="completionRejectNote" rows="21"
+                            aria-describedby="completionNote-info completionNote-hint">{{ data.completionRejectNote | default ('') }}</textarea>
                         <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
                             You can enter up to 1000 characters
                         </div>

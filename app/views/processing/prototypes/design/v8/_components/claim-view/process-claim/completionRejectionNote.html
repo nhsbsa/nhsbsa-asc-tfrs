@@ -11,7 +11,7 @@
 
 <form action="../completion-rejection-note-handler" method="post" novalidate>
 
-    <div class="govuk-form-group govuk-character-count {% if data.completionNoNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
+    <div class="govuk-form-group govuk-character-count {% if data.completionRejectNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
             Why did the evidence of completion not meet the required criteria?
         </legend>
@@ -20,13 +20,13 @@
             This note tells the submitter why their claim has been rejected
         </div>
 
-        {% if data.completionNoNoteIncomplete %}
+        {% if data.completionRejectNoteIncomplete %}
             <p id="completion-note-error" class="govuk-error-message">
                 <span class="govuk-visually-hidden">Error:</span>Enter completion rejection reasons
             </p>
         {% endif %}
         
-        <textarea class="govuk-textarea govuk-js-character-count {% if data.completionNoNoteIncomplete %}govuk-textarea--error{% endif %}" id="completionNoNote" name="completionNoNote" rows="30" aria-describedby="completion-no-note-info note-hint">{{ data.completionNoNote | default ('') }}</textarea>
+        <textarea class="govuk-textarea govuk-js-character-count {% if data.completionRejectNoteIncomplete %}govuk-textarea--error{% endif %}" id="completionRejectNote" name="completionRejectNote" rows="30" aria-describedby="completion-no-note-info note-hint">{{ data.completionRejectNote | default ('') }}</textarea>
         
         <div id="completion-no-note-info" class="govuk-hint govuk-character-count__message">
             You can enter up to 1000 characters

@@ -41,19 +41,27 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentNoNote, completionResponse, completionNoNote) {
-        if (paymentResponse == "yes") {
-            foundClaim.evidenceOfPaymentreview.pass = "Approved"
-            foundClaim.reimbursementAmount = paymentReimbursementNote
-        } else if (paymentResponse == "no") {
-            foundClaim.evidenceOfPaymentreview.pass = "Rejected"
-            foundClaim.evidenceOfPaymentreview.note = paymentNoNote
+function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentRejectNote, completionResponse, completionRejectNote) {
+    let submission = getMostRelevantSubmission(foundClaim)    
+    if (paymentResponse == "yes") {
+            submission.evidenceOfPaymentReview.outcome = "approved"
+            submission.evidenceOfPaymentReview.costPerLearner = paymentReimbursementNote
+        } else if (paymentResponse == "reject") {
+            submission.evidenceOfPaymentReview.outcome = "rejected"
+            submission.evidenceOfPaymentReview.note = paymentRejectNote
+        } else if (paymentResponse == "query") {
+            submission.evidenceOfPaymentReview.outcome = "queried"
+            submission.evidenceOfPaymentReview.note = paymentQueryNote
         }
+
         if (completionResponse == "yes") {
-            foundClaim.evidenceOfCompletionreview.pass = "Approved"
-        } else if (completionResponse == "no") {
-            foundClaim.evidenceOfCompletionreview.pass = "Rejected"
-            foundClaim.evidenceOfCompletionreview.note = completionNoNote
+            submission.evidenceOfCompletionReview.outcome = "approved"
+        } else if (completionResponse == "reject") {
+            submission.evidenceOfCompletionReview.outcome = "rejected"
+            submission.evidenceOfCompletionReview.note = completionRejectNote
+        } else if (completionResponse == "query") {
+            submission.evidenceOfCompletionReview.outcome = "queried"
+            submission.evidenceOfCompletionReview.note = completionQueryNote
         }
 }
 

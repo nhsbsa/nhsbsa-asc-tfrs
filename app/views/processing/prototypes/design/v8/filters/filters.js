@@ -97,16 +97,16 @@ addFilter('criteriaQuestions', function (criteria, type, claim, header) {
 
 addFilter('criteriaAnswer', function (criteria, type, claim) {
     if (type == "payment") {
-        if (claim.evidenceOfPaymentreview["criteria" + criteria].result) {
+        if (claim.evidenceOfPaymentReview["criteria" + criteria].result) {
             return "Yes"
         } else {
-            return "No<br>" + claim.evidenceOfPaymentreview["criteria" + criteria].note
+            return "No<br>" + claim.evidenceOfPaymentReview["criteria" + criteria].note
         }
     } else if (type == "completion") {
-        if (claim.evidenceOfCompletionreview["criteria" + criteria].result) {
+        if (claim.evidenceOfCompletionReview["criteria" + criteria].result) {
             return "Yes"
         } else {
-            return "No<br>" + claim.evidenceOfCompletionreview["criteria" + criteria].note
+            return "No<br>" + claim.evidenceOfCompletionReview["criteria" + criteria].note
         }
     }
 }, { renderAsHtml: true })
