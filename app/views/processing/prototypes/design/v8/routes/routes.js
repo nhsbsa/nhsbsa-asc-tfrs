@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, findOrg, isValidOrgSearch } = require('../helpers/helpers.js');
+const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission } = require('../helpers/helpers.js');
 
 // v8 Prototype routes
 
@@ -360,12 +360,17 @@ router.get('/outcome-handler', function (req, res) {
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
       updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, completionResponse, completionRejectNote)
+      
+      let submission = getMostRelevantSubmission(claim)    
+      submission.processedDate = new Date()
+      submission.processedBy = "To add"
+
       if (req.session.data.result == "reject") {
-        claim.rejectedDate = new Date()
         claim.status = "rejected"
       } else if (req.session.data.result == "approve") {
-        claim.approvedDate = new Date()
         claim.status = "approved"
+      } else if (req.session.data.result == "query") {
+        claim.status = "queried"
       }
     }
   }

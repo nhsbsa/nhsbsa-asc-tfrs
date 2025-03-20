@@ -3,12 +3,12 @@
 {% if (claim.claimType != "40")%}
     <h4 class="govuk-heading-s">Does the evidence of payment meet the required criteria?</h4>
 
-    {% if submission.evidenceOfPaymentReview.outcome == "approved" %}
+    {% if submission.evidenceOfPaymentReview.outcome == "pass" %}
         <p class="govuk-body">Yes</p>
     {% elif submission.evidenceOfPaymentReview.outcome == "queried" %}
-        <p class="govuk-body">Queried</p>
-    {% elif submission.evidenceOfPaymentReview.poutcomeass == "rejected" %}
-        <p class="govuk-body">Rejected</p>
+        <p class="govuk-body">No - needs action by org</p>
+    {% elif submission.evidenceOfPaymentReview.outcome == "fail" %}
+        <p class="govuk-body">No - rejected</p>
     {% endif %}
 
 
@@ -21,12 +21,12 @@
 {% if (claim.claimType != "60") %}
     <h4 class="govuk-heading-s">Does the evidence of completion meet the required criteria?</h4>
 
-    {% if submission.evidenceOfCompletionReview.outcome == "approved" %}
+    {% if submission.evidenceOfCompletionReview.outcome == "pass" %}
         <p class="govuk-body">Yes</p>
     {% elif submission.evidenceOfCompletionReview.outcome == "queried" %}
-        <p class="govuk-body">Queried</p>
-    {% elif submission.evidenceOfCompletionReview.outcome == "rejected" %}
-        <p class="govuk-body">Rejected</p>
+        <p class="govuk-body">No - needs action by org</p>
+    {% elif submission.evidenceOfCompletionReview.outcome == "fail" %}
+        <p class="govuk-body">No - rejected</p>
     {% endif %}
 
 {% endif %}
@@ -74,12 +74,12 @@
     
     <h4 class="govuk-heading-s">Rejection reasons</h4>
 
-    {% if (claim.evidenceOfPaymentReview.outcome == "rejected") %}
+    {% if (submission.evidenceOfPaymentReview.outcome == "fail") %}
         <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
         <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
     {% endif %}
 
-    {% if (claim.evidenceOfCompletionReview.outcome == "rejected")  %}
+    {% if (submission.evidenceOfCompletionReview.outcome == "fail")  %}
         <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
         <p class='govuk-body'>{{submission.evidenceOfCompletionReview.note}}</p>
     {% endif %}
@@ -90,12 +90,12 @@
     
     <h4 class="govuk-heading-s">Query reasons</h4>
 
-    {% if (claim.evidenceOfPaymentReview.outcome == "queried") %}
+    {% if (submission.evidenceOfPaymentReview.outcome == "queried") %}
         <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
         <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
     {% endif %}
 
-    {% if (claim.evidenceOfCompletionReview.outcome == "queried")  %}
+    {% if (submission.evidenceOfCompletionReview.outcome == "queried")  %}
         <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
         <p class='govuk-body'>{{submission.evidenceOfCompletionReview.note}}</p>
     {% endif %}

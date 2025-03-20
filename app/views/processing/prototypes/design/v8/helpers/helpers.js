@@ -44,10 +44,10 @@ function loadData(req) {
 function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentRejectNote, completionResponse, completionRejectNote) {
     let submission = getMostRelevantSubmission(foundClaim)    
     if (paymentResponse == "yes") {
-            submission.evidenceOfPaymentReview.outcome = "approved"
+            submission.evidenceOfPaymentReview.outcome = "pass"
             submission.evidenceOfPaymentReview.costPerLearner = paymentReimbursementNote
         } else if (paymentResponse == "reject") {
-            submission.evidenceOfPaymentReview.outcome = "rejected"
+            submission.evidenceOfPaymentReview.outcome = "fail"
             submission.evidenceOfPaymentReview.note = paymentRejectNote
         } else if (paymentResponse == "query") {
             submission.evidenceOfPaymentReview.outcome = "queried"
@@ -55,9 +55,9 @@ function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paym
         }
 
         if (completionResponse == "yes") {
-            submission.evidenceOfCompletionReview.outcome = "approved"
+            submission.evidenceOfCompletionReview.outcome = "pass"
         } else if (completionResponse == "reject") {
-            submission.evidenceOfCompletionReview.outcome = "rejected"
+            submission.evidenceOfCompletionReview.outcome = "fail"
             submission.evidenceOfCompletionReview.note = completionRejectNote
         } else if (completionResponse == "query") {
             submission.evidenceOfCompletionReview.outcome = "queried"
