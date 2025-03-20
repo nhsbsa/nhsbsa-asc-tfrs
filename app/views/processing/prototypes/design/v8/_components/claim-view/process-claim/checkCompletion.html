@@ -39,10 +39,20 @@
 
                 <div class="govuk-radios__item">
 
-                    <input class="govuk-radios__input" id="completionNo" name="completion" type="radio" value="no" {% if data.completion=='no' %}checked{% endif%}>
+                    <input class="govuk-radios__input" id="completionQuery" name="completion" type="radio" value="query" {% if data.completion=='query' %}checked{% endif%}>
 
-                    <label class="govuk-label govuk-radios__label" for="completionNo">
-                        No
+                    <label class="govuk-label govuk-radios__label" for="completionQuery">
+                        No - needs action by org
+                    </label>
+
+                </div>
+
+                <div class="govuk-radios__item">
+
+                    <input class="govuk-radios__input" id="completionReject" name="completion" type="radio" value="reject" {% if data.completion=='reject' %}checked{% endif%}>
+
+                    <label class="govuk-label govuk-radios__label" for="completionReject">
+                        No - reject
                     </label>
 
                 </div>

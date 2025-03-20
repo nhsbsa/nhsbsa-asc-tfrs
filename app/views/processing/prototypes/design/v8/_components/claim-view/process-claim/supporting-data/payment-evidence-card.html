@@ -11,7 +11,7 @@
     <div class="govuk-summary-card__content">
     
         <dl class="govuk-summary-list">
-            {% for evidence in claim.evidenceOfPayment %}
+            {% for evidence in submission.evidenceOfPayment %}
                 {% set isPayment = true %}
                 {% include "../../evidence/file-section.html" %}
             {% endfor %}

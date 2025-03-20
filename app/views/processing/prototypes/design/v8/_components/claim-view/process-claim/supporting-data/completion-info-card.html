@@ -13,37 +13,24 @@
         <dl class="govuk-summary-list">
 
             <div class="govuk-summary-list__row">
-
-                <dt class="govuk-summary-list__key">
-                    Organisation name
-                </dt>
-
-                <dd class="govuk-summary-list__value">
-                    Oakhill Care Ltd
-                </dd>
-
-            </div>
-
-
-            <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Course or qualification name
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    {{ claim.training.title }}
+                    {{ training.title }}
                 </dd>
 
             </div>
 
-            {% if claim.training.code | trainingTypeCheck(data.training, "Qualifications") %}
+            {% if training.code | trainingTypeCheck(data.training, "Qualifications") %}
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Level and type
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    {{ claim.training.type }}
+                    {{ training.type }}
                 </dd>
 
             </div>
@@ -54,7 +41,7 @@
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    {{ claim.training.awardingOrganisation }}
+                    {{ training.awardingOrganisation }}
                 </dd>
 
             </div>
@@ -67,7 +54,7 @@
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    {{ claim.learner.givenName }} {{ claim.learner.familyName }}
+                    {{ learner.givenName }} {{ learner.familyName }}
                 </dd>
 
             </div>
@@ -79,7 +66,7 @@
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    {{claim.completionDate | govukDate}}
+                    {{submission.completionDate | govukDate}}
                 </dd>
 
             </div>

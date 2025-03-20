@@ -12,18 +12,6 @@
 
         <dl class="govuk-summary-list">
 
-            <div class="govuk-summary-list__row">
-
-                <dt class="govuk-summary-list__key">
-                    Organisation name
-                </dt>
-
-                <dd class="govuk-summary-list__value">
-                    Oakhill Care Ltd
-                </dd>
-
-            </div>
-
 
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -31,19 +19,19 @@
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    {{ claim.training.title }}
+                    {{ training.title }}
                 </dd>
 
             </div>
 
-            {% if claim.training.code | trainingTypeCheck(data.training, "Qualifications") %}
+            {% if training.code | trainingTypeCheck(data.training, "Qualifications") %}
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Level and type
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    {{ claim.training.type }}
+                    {{ training.type }}
                 </dd>
 
             </div>
@@ -56,7 +44,7 @@
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    £{{ claim.training.reimbursementAmount }}
+                    £{{ training.reimbursementAmount }}
                 </dd>
 
             </div>
@@ -68,7 +56,7 @@
                 </dt>
 
                 <dd class="govuk-summary-list__value">
-                    {{claim.costDate | govukDate}}
+                    {{submission.costDate | govukDate}}
                 </dd>
 
             </div>

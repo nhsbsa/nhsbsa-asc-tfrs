@@ -254,8 +254,6 @@ router.get('/process-claim-back-handler', function (req, res) {
 router.get('/start-processing', function (req, res) {
   const claimID = req.session.data.id
   var claim = null
-
-  const processJourneyType = req.session.data.processJourneyType
   
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -263,8 +261,6 @@ router.get('/start-processing', function (req, res) {
       break;
     }
   }
-
-  if (processJourneyType == "a") {
 
     if (claim.claimType == "100" || claim.claimType == "60") {
       req.session.data.processClaimStep = "checkPayment"
@@ -274,12 +270,7 @@ router.get('/start-processing', function (req, res) {
     
     return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
-  } else if (processJourneyType == "b") {
 
-    req.session.data.processClaimStep = "inProgress"
-    return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
-
-  }
 });
 
 
