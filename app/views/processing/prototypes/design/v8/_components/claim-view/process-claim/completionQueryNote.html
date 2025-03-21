@@ -1,0 +1,46 @@
+{% set stepNo = "Step 4" %}
+
+{% if (claim.claimType == "40") %}
+    {% set stepNo = "Step 2" %}
+{% endif %}
+
+<h3 class="govuk-heading-m">{{stepNo}}: Evidence of completion action reason</h3>
+
+{% include "./supporting-data/completion-evidence-card.html" %}
+{% include "./supporting-data/completion-info-card.html" %}
+
+<form action="../completion-query-note-handler" method="post" novalidate>
+
+    <div class="govuk-form-group govuk-character-count {% if data.completionQueryNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+            Why did the evidence of completion not meet the required criteria?
+        </legend>
+        
+        <div id="completion-query-note-hint" class="govuk-hint">
+            This note tells the submitter what they need to update on the claim to meet the criteria.
+        </div>
+
+        {% if data.completionQueryNoteIncomplete %}
+            <p id="completion-note-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span>Enter completion action reasons
+            </p>
+        {% endif %}
+        
+        <textarea class="govuk-textarea govuk-js-character-count {% if data.completionQueryNoteIncomplete %}govuk-textarea--error{% endif %}" id="completionQueryNote" name="completionQueryNote" rows="30" aria-describedby="completion-query-note-info note-hint">{{ data.completionQueryNote | default ('') }}</textarea>
+        
+        <div id="completion-no-note-info" class="govuk-hint govuk-character-count__message">
+            You can enter up to 1000 characters
+        </div>
+
+</div>
+
+    <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Continue
+        </button>
+        <a class="govuk-link govuk-link--no-visited-state" href="../process-claim-back-handler">Go back</a>
+    </div>
+
+</form>
+
+

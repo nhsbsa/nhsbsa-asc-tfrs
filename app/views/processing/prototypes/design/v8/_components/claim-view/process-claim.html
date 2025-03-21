@@ -24,6 +24,10 @@
 
     {% include "./process-claim/paymentRejectionNote.html" %}
 
+{% elif (data.processClaimStep == "paymentQueryNote") %}
+
+    {% include "./process-claim/paymentQueryNote.html" %}
+
 {% elif (data.processClaimStep == "checkCompletion") %}
 
     {% include "./process-claim/checkCompletion.html" %}
@@ -31,6 +35,10 @@
 {% elif (data.processClaimStep == "completionRejectionNote") %}
 
     {% include "./process-claim/completionRejectionNote.html" %}
+
+{% elif (data.processClaimStep == "completionQueryNote") %}
+
+    {% include "./process-claim/completionQueryNote.html" %}
 
 {% elif (data.processClaimStep == "confirmOutcome") %}
 

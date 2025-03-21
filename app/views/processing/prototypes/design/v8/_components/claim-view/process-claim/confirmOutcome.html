@@ -6,6 +6,8 @@
     {% set stepNo = "Step 4" %}
 {% elif claim.claimType == "100" and (data.completion =="reject" or data.completion =="query")%}
     {% set stepNo = "Step 5" %}
+{% elif claim.claimType == "100" and (data.payment =="reject")%}
+    {% set stepNo = "Step 3" %}
 {% endif %}
 
 {% if claim.claimType == "40" and data.completion =="yes" %}
@@ -15,7 +17,6 @@
 {% endif %}
 
 <h3 class="govuk-heading-m">{{stepNo}}: Confirm claim decision</h3>
-
 
 {% if data.result == "reject" %}
     <p class="govuk-body">The claim has <span class="govuk-!-font-weight-bold">not met</span> the evidence criteria and therefore should be <span class="govuk-!-font-weight-bold">rejected</span>.</p>
@@ -98,9 +99,31 @@
 
     </div>
 
+{% elif data.result == "query" %}
+
+    <p class="govuk-body">The organisation will receive the following note to explain what it needs to update to meet the criteria to be approved. The wording is taken from what you entered on the previous screen.</p>
+
+    <div class='govuk-inset-text'><h2 class='govuk-heading-s'>Claim queried</h2>
+    
+    {% if (data.payment == "query") %}
+
+        <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
+        <p class='govuk-body'>{{data.paymentQueryNote}}</p>
+
+    {% endif %}
+
+    {% if (data.completion == "query") %}
+
+        <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
+        <p class='govuk-body'>{{data.completionQueryNote}}</p>
+
+    {% endif %}
+
+    </div>
+
 {% endif %}
 
-<p class="govuk-body">Confirm that this claim should be {% if data.result == "approve" %}approved{% elif data.result == "reject" %}rejected{% endif %}.</p>
+<p class="govuk-body">Confirm that this claim should be {% if data.result == "approve" %}approved{% elif data.result == "reject" %}rejected{% elif data.result == "query" %}queried{% endif %}.</p>
 
 <div class="govuk-button-group">
     <a type="submit" class="govuk-button" href="../outcome-handler">{% if data.result == "approve" %}Approve{% elif data.result == "query" %}Query{% elif data.result == "reject" %}Reject{% endif %} claim</a>
