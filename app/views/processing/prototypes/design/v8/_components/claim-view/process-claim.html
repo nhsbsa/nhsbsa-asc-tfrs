@@ -40,6 +40,18 @@
 
     {% include "./process-claim/completionQueryNote.html" %}
 
+    {% elif (data.processClaimStep == "checkOther") %}
+
+    {% include "./process-claim/checkOther.html" %}
+
+{% elif (data.processClaimStep == "otherRejectionNote") %}
+
+    {% include "./process-claim/otherRejectionNote.html" %}
+
+{% elif (data.processClaimStep == "otherQueryNote") %}
+
+    {% include "./process-claim/otherQueryNote.html" %}
+
 {% elif (data.processClaimStep == "confirmOutcome") %}
 
     {% include "./process-claim/confirmOutcome.html" %}
