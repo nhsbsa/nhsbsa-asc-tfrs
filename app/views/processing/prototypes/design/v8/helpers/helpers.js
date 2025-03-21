@@ -41,7 +41,7 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentRejectNote, completionResponse, completionRejectNote) {
+function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentRejectNote, completionResponse, completionRejectNote, paymentQueryNote, completionQueryNote) {
     let submission = getMostRelevantSubmission(foundClaim)    
     if (paymentResponse == "yes") {
             submission.evidenceOfPaymentReview.outcome = "pass"

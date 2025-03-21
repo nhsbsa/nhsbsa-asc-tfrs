@@ -162,7 +162,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "pass",
-          "note": "pass",
+          "note": null,
           "costPerLearner": 135
         },
         "evidenceOfCompletionReview": {
