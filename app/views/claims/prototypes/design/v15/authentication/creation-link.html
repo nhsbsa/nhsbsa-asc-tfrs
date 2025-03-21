@@ -54,25 +54,16 @@
             <p>Date: 10 April 2024</p>
         </div>
         <div class="content">
-            {% if data.userType == 'signatory'%}
-                <p>Dear [first name] [last name],</p>
-                <p>Thank you for agreeing to start using the <strong>Claim for adult social care learning and development</strong> service being developed by the NHS Business Services Authority. </p>
-                <p>If this email has been sent you to in error you must not continue. Contact us at <a href="#">email address</a> to let us know so we can correct this.</p>
-                <p><a href="verify-details">Create your user account</a> as the Senior Responsible Officer. This link will expire in 24 hours.</p>
-                <p><strong>Do not share this link with anyone else. Only you will be able to create an account. You must not share user accounts but you can add additional users to submit claims on your behalf.</strong></p>
-                <p>If you do not think you are the right person to sign the legally binding declaration on behalf of your organisation, or your sign up link has expired,  please contact us at <a href="#">email address</a> before continuing.</p>
-                <p>We look forward to working with you.</p>
-                <p>NHS Business Services Authority</p>
-            {% else %}
-                <p>Dear [first name] [last name],</p>
-                <p>This is an invitation to start using the <strong>Claim for adult social care learning and development</strong> service being developed by the NHS Business Services Authority.</p>
-                <p>If this email has been sent you to in error you must not continue. Contact us at <a href="#">email address</a> to let us know so we can correct this.</p>
-                <p><a href="verify-details">Create your user account</a>. This link will expire in 24 hours.</p>
-                <p><strong>Do not share this link with anyone else. Only you will be able to create an account. You must not share user accounts but additional users can be added if required.</strong></p>
-                <p>For additional security, sign in will require two-factor authentication (2FA) using Microsoft Authenticator (<a href="https://www.microsoft.com/en-us/security/mobile-authenticator-app">get help with this</a>).</p>
-                <p>We recommend reading the scheme guidance and watching the supporting videos before using the service for the first time. These are available in the onboarding pack we sent to your organisation.</p>
-                <p>If the sign up link has expired, please contact [signatory first name] [signatory last name] in your organisation for a new one.</p>
-                <p>NHS Business Services Authority</p>
+            {% if data.org.workplaceID == 'E76904778' %}
+                {% include "../_components/invite-emails/scenario-1.html" %}
+            {% elif data.org.workplaceID == 'F15904728' %}
+                {% include "../_components/invite-emails/scenario-2.html" %}
+            {% elif data.org.workplaceID == 'F84625987' %}
+                {% include "../_components/invite-emails/scenario-3.html" %}
+            {% elif data.org.workplaceID == 'B52698456' %}
+                {% include "../_components/invite-emails/scenario-4.html" %}
+            {% elif data.org.workplaceID == 'B52698456' %}
+                {% include "../_components/invite-emails/scenario-5.html" %}
             {% endif %}
         </div>
         <div class="footer">

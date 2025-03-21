@@ -202,7 +202,7 @@
     "active": {        
       "givenName": "Mira",
       "familyName": "Caldwell",
-      "email": "Mira.Caldwell@brighthorizons.com",
+      "email": "mira.caldwell@brighthorizons.com",
       "status": "invited"
     },  
     "inactive": []
@@ -223,9 +223,9 @@
     "notes" : [],
     "signatory": {
     "active": {        
-      "givenName": "Mira",
-      "familyName": "Caldwell",
-      "email": "Mira.Caldwell@purplestonecare.com",
+      "givenName": "Craig",
+      "familyName": "Helliwell",
+      "email": "craig.helliwell@purplestonecare.com",
       "status": "invited"
     },  
     "inactive": [
@@ -311,10 +311,90 @@
     "active": {        
       "givenName": "Ivy",
       "familyName": "Montgomery",
-      "email": "ivy.montgomery@anikacare.com",
+      "email": "ivy.montgomery@farifields.com",
       "status": "active"
     },  
     "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "B52698456",
+    "numberOfClaims": 75,
+    "name": "Fandly Care",
+    "address": ["12 Jack Street", "Liverpool", "LI12 8GB"],
+    "bankDetails": {
+      "nameOnAccount": "Fandly Ltd",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    },
+    "validGDL": true,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Jane",
+      "familyName": "Crow",
+      "email": "jane.crow@fandly.com",
+      "status": "invited"
+    },  
+    "inactive": [{        
+      "givenName": "Cameron",
+      "familyName": "Bennett",
+      "email": "cameron.bennett@fandly.com",
+      "status": "active"
+    }]
+  },
+  "users": {
+    "active": [
+      {
+        "givenName": "Oliver",
+        "familyName": "Grey",
+        "email": "oliver.grey@fandly.com"
+      }
+    ],
+    "inactive": [
+      {
+        "givenName": "Eleanor",
+        "familyName": "Morris",
+        "email": "eleanor.morris@fandly.com"
+      }
+    ],
+    "invited": [
+      {
+        "givenName": "Mark",
+        "familyName": "Montgomery",
+        "email": "zane.montgomery@fandly.com"
+      }
+    ]
+  }
+  },
+  {
+    "workplaceID": "F84625987",
+    "numberOfClaims": 0,
+    "name": "Halsey Care home",
+    "address": ["23 Halsey street", "Sunderland", "S31 5HG"],
+    "bankDetails": null,
+    "validGDL": false,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Casey",
+      "familyName": "Fedrisk",
+      "email": "casey.fedrisk@halseycare.com",
+      "status": "invited"
+    },  
+    "inactive": [
+      {        
+      "givenName": "Mira",
+      "familyName": "Caldwell",
+      "email": "Mira.Caldwell@halseycare.com"
+      }
+    ]
   },
   "users": {
     "active": [],

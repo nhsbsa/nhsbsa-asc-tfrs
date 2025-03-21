@@ -42,7 +42,7 @@
             </div>
             <div class="govuk-notification-banner__content">
               <p class="govuk-notification-banner__heading">
-                You must provide all information up to and including bank details to complete registration. Your progress will not be saved if you exit prior to that.
+                You must provide all information{% if data.org.bankDetails == null %} up to and including bank details{% endif %} to complete registration. Your progress will not be saved if you exit prior to that.
               </p>
             </div>
           </div>
