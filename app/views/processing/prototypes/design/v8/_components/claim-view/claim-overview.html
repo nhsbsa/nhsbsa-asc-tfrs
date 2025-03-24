@@ -53,7 +53,7 @@
         </div>
         {% endif %}
 
-        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentRejectNoteIncomplete or data.completionResponseIncomplete or data.completionRejectNoteIncomplete %}
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentRejectNoteIncomplete or data.paymentQueryNoteIncomplete or data.completionResponseIncomplete or data.completionRejectNoteIncomplete or data.completionQueryNoteIncomplete or data.otherResponseIncomplete or data.otherRejectNoteIncomplete or data.otherQueryNoteIncomplete %}
             {% include "./process-claim/errorSummary.html" %}
         {% endif %}
 

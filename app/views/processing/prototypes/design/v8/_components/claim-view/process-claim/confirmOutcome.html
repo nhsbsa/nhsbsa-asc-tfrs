@@ -63,15 +63,17 @@
                 <p>When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim | reimbursement(data.paymentReimbursementAmount, data.training) / 0.6 * 0.4)}}).</p>
 
             {% elif (claim.claimType == "40")  %}
+            {% set pairClaim = data.id | matchPairClaim(data.claims) %}
+            {% set pairSubmisison = pairClaim | getMostRelevantSubmission %}
 
                 <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim | reimbursement(data.paymentReimbursementAmount, data.training) / 0.4) }}.</p>
                 <p>This is whichever is the lower of:</p>
                 <ul class="govuk-list govuk-list--bullet">
                     <li>the maximum reimbursement amount (£{{training.reimbursementAmount}})</li>
-                    <li>what the organisation actually paid (£{{data.paymentReimbursementAmount}})</li>
+                    <li>what the organisation actually paid (£{{pairSubmisison.evidenceOfPaymentReview.costPerLearner}})</li>
                 </ul>
                 <p>For this 40 part of the claim the organisation will get 40% of the total amount, which is <strong>£{{ (claim | reimbursement(data.paymentReimbursementAmount, data.training)) }}</strong>.</p>
-                {# <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement(claim.reimbursementAmount, data.training) / 0.4 * 0.6 )}}.</p> #}
+                <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner, data.training) / 0.4 * 0.6 )}}.</p>
 
             {% endif %}
         </div>

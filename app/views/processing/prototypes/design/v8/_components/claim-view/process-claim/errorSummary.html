@@ -5,13 +5,13 @@
         </h2>
         <div class="govuk-error-summary__body">
             <ul class="govuk-list govuk-error-summary__list">
+
                 {% if data.paymentResponseIncomplete %}
                 <li>
                     <a href="#payment-review-error">Select yes if evidence of payment meets the required criteria </a>
                 </li>
                 {% endif %}
 
-                {% if (claim.fundingType == "TU") %}
 
                     {% if data.paymentReimbursementAmountIncomplete %}
                     <li>
@@ -25,11 +25,16 @@
                     </li>
                     {% endif %}
 
-                {% endif %}
 
                 {% if data.paymentRejectNoteIncomplete %}
                 <li>
                     <a href="#payment-note-error">Enter payment rejection reasons</a>
+                </li>
+                {% endif %}
+
+                {% if data.paymentQueryNoteIncomplete %}
+                <li>
+                    <a href="#payment-note-error">Enter payment query reasons</a>
                 </li>
                 {% endif %}
 
@@ -39,9 +44,33 @@
                 </li>
                 {% endif %}
 
+                {% if data.completionQueryNoteIncomplete %}
+                <li>
+                    <a href="#completion-note-error">Enter completion query reasons</a>
+                </li>
+                {% endif %}
+
                 {% if data.completionRejectNoteIncomplete %}
                 <li>
                     <a href="#completion-note-error">Enter completion rejection reasons</a>
+                </li>
+                {% endif %}
+
+                {% if data.otherResponseIncomplete %}
+                <li>
+                    <a href="#completion-review-error">Select no if no other reason </a>
+                </li>
+                {% endif %}
+
+                {% if data.otherQueryNoteIncomplete %}
+                <li>
+                    <a href="#other-note-error">Enter query reasons</a>
+                </li>
+                {% endif %}
+
+                {% if data.otherRejectNoteIncomplete %}
+                <li>
+                    <a href="#other-note-error">Enter rejection reasons</a>
                 </li>
                 {% endif %}
 
