@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate } = require('../helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg } = require('../helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag', function (statusID) {
@@ -260,11 +260,13 @@ addFilter('orderByMostRecent', function (submissions) {
     return sorted
 })
 
-addFilter('create100TimelineArray', function (claim) {
+addFilter('create100TimelineArray', function (claim, organisations) {
     // Extract the timestamps and their associated data
     const events = [];
 
     let sorted = sortSubmissionsByDate(claim.submissions, 'submittedDate')
+    let org = findOrg(organisations, claim.workplaceID)
+    let users = flattenUsers(org)
 
 
     for (const submission of sorted) {
@@ -280,7 +282,7 @@ addFilter('create100TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: null,
                         link: null,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -329,7 +331,7 @@ addFilter('create100TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: "View claim",
                         link: "/showClaimHistoryNote?noteType=hundredClaim&submittedDate=" + submission.submittedDate,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -355,7 +357,7 @@ addFilter('create100TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: "View claim",
                         link: "/showClaimHistoryNote?noteType=hundredClaim&submittedDate=" + submission.submittedDate,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -382,7 +384,7 @@ addFilter('create100TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: "View claim",
                         link: "/showClaimHistoryNote?noteType=hundredClaim&submittedDate=" + submission.submittedDate,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -414,7 +416,7 @@ addFilter('create100TimelineArray', function (claim) {
             date: claim.createdDate,
             description: null,
             link: null,
-            author: claim.createdBy + " (Submitter)"
+            author: findUser(users, claim.createdBy) + " (Submitter)"
         });
     }
 
@@ -425,9 +427,11 @@ addFilter('create100TimelineArray', function (claim) {
 })
 
 
-addFilter('create60TimelineArray', function (claim) {
+addFilter('create60TimelineArray', function (claim, organisations) {
     // Extract the timestamps and their associated data
     const events = [];
+    let org = findOrg(organisations, claim.workplaceID)
+    let users = flattenUsers(org)
 
     for (const submission of claim.submissions) {
         if (submission.submittedDate) {
@@ -442,7 +446,7 @@ addFilter('create60TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: null,
                         link: null,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -480,7 +484,7 @@ addFilter('create60TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: "View claim",
                         link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -506,7 +510,7 @@ addFilter('create60TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: "View claim",
                         link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -557,7 +561,7 @@ addFilter('create60TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: "View claim",
                         link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -607,7 +611,7 @@ addFilter('create60TimelineArray', function (claim) {
             title: "60 claim created",
             date: claim.createdDate,
             description: null,
-            author: claim.createdBy + " (Submitter)"
+            author: findUser(users, claim.createdBy) + " (Submitter)"
         });
     }
 
@@ -617,9 +621,12 @@ addFilter('create60TimelineArray', function (claim) {
     return events;
 })
 
-addFilter('create40TimelineArray', function (claim) {
+addFilter('create40TimelineArray', function (claim, organisations) {
     // Extract the timestamps and their associated data
     const events = [];
+    
+    let org = findOrg(organisations, claim.workplaceID)
+    let users = flattenUsers(org)
     
     for (const submission of claim.submissions) {
         if (submission.submittedDate) {
@@ -634,7 +641,7 @@ addFilter('create40TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: null,
                         link: null,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -659,7 +666,7 @@ addFilter('create40TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: "View claim",
                         link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -685,7 +692,7 @@ addFilter('create40TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: "View claim",
                         link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -723,7 +730,7 @@ addFilter('create40TimelineArray', function (claim) {
                         date: submission.submittedDate,
                         description: "View claim",
                         link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
-                        author: submission.submitter + " (Submitter)"
+                        author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
 
@@ -764,7 +771,7 @@ addFilter('create40TimelineArray', function (claim) {
                 title: "40 claim created",
                 date: claim.createdDate,
                 description: null,
-                author: claim.createdBy + " (Submitter)"
+                author: findUser(users, claim.createdBy) + " (Submitter)"
             });
         }
 
