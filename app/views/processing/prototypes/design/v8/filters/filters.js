@@ -131,23 +131,26 @@ addFilter('dateSort', function (notes) {
     return sortedData
 })
 
-addFilter('reimbursement', function (claim, paymentReimbursementAmount) {
+addFilter('reimbursement', function (claim, paymentReimbursementAmount, trainingCourses) {
+
+    let submission = getMostRelevantSubmission(claim)
+    let training = findCourseByCode(submission.trainingCode, trainingCourses )
     if ((claim.claimType == "60")) {
-        if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
+        if (training.reimbursementAmount > paymentReimbursementAmount) {
             return paymentReimbursementAmount * 0.6
         } else {
-            return claim.training.reimbursementAmount * 0.6
+            return training.reimbursementAmount * 0.6
         }
     } else if (claim.claimType == "40") {
-        if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
+        if (training.reimbursementAmount > claim.reimbursementAmount) {
             return claim.reimbursementAmount * 0.4
         } else {
-            return claim.training.reimbursementAmount * 0.4
+            return training.reimbursementAmount * 0.4
         }
-    } else if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
+    } else if (training.reimbursementAmount > paymentReimbursementAmount) {
         return paymentReimbursementAmount
     } else {
-        return claim.training.reimbursementAmount
+        return training.reimbursementAmount
     }
 });
 
@@ -337,7 +340,7 @@ addFilter('create100TimelineArray', function (claim) {
                         title: "Claim queried",
                         date: submission.processedDate,
                         description: "View query note",
-                        link: "/showClaimHistoryNote?noteType=queryNote&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=hundredQueryNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }
@@ -390,7 +393,7 @@ addFilter('create100TimelineArray', function (claim) {
                         title: "Claim rejected",
                         date: submission.processedDate,
                         description:  "View rejection note",
-                        link: "/showClaimHistoryNote?noteType=rejectionNote&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=hundredRejectionNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }
@@ -476,7 +479,7 @@ addFilter('create60TimelineArray', function (claim) {
                         title: "60 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "#",
+                        link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
                         author: submission.submitter + " (Submitter)"
                     });
                 }
@@ -488,7 +491,7 @@ addFilter('create60TimelineArray', function (claim) {
                         title: "60 claim queried",
                         date: submission.processedDate,
                         description: "View query note",
-                        link: "#",
+                        link: "/showClaimHistoryNote?noteType=sixtyQueryNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }
@@ -502,7 +505,7 @@ addFilter('create60TimelineArray', function (claim) {
                         title: "60 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "#",
+                        link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
                         author: submission.submitter + " (Submitter)"
                     });
                 }
@@ -553,7 +556,7 @@ addFilter('create60TimelineArray', function (claim) {
                         title: "60 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "#",
+                        link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
                         author: submission.submitter + " (Submitter)"
                     });
                 }
@@ -565,7 +568,7 @@ addFilter('create60TimelineArray', function (claim) {
                         title: "60 claim rejected",
                         date: submission.processedDate,
                         description: "View rejection note",
-                        link: "#",
+                        link: "/showClaimHistoryNote?noteType=sixtyRejectionNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }
@@ -655,7 +658,7 @@ addFilter('create40TimelineArray', function (claim) {
                         title: "40 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "#",
+                        link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
                         author: submission.submitter + " (Submitter)"
                     });
                 }
@@ -667,7 +670,7 @@ addFilter('create40TimelineArray', function (claim) {
                         title: "40 claim queried",
                         date: submission.processedDate,
                         description: "View query note",
-                        link: "#",
+                        link: "/showClaimHistoryNote?noteType=fourtyQueryNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }
@@ -681,7 +684,7 @@ addFilter('create40TimelineArray', function (claim) {
                         title: "40 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "#",
+                        link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
                         author: submission.submitter + " (Submitter)"
                     });
                 }
@@ -719,7 +722,7 @@ addFilter('create40TimelineArray', function (claim) {
                         title: "40 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "#",
+                        link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
                         author: submission.submitter + " (Submitter)"
                     });
                 }
@@ -731,7 +734,7 @@ addFilter('create40TimelineArray', function (claim) {
                         title: "40 claim rejected",
                         date: submission.processedDate,
                         description: "View rejection note",
-                        link: "#",
+                        link: "/showClaimHistoryNote?noteType=fourtyRejectionNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }

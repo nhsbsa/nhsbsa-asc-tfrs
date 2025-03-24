@@ -12,10 +12,8 @@
             </dt>
             <dd class="govuk-summary-list__value">
             {% if claim.claimType == "40"%}
-            {{claim.claimType}}
               {{pairSubmisison.costDate | govukDate}}
             {% else%}
-            {{claim.claimType}}
               {{submission.costDate | govukDate}}
             {% endif%}
             </dd>
@@ -25,7 +23,6 @@
             Start date
           </dt>
           <dd class="govuk-summary-list__value">
-            {{claim.claimType}}
             {{submission.startDate | govukDate}}
           </dd>
         </div>
