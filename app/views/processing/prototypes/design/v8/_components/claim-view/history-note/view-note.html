@@ -47,7 +47,9 @@
     <p>Submitted on {{submission.submittedDate | govukDate}}</p>
     
     <h3 class="govuk-heading-m" id="payment">Training</h3>
+ 
     <dl class="govuk-summary-list">
+        {% if (claim.claimType != "40")%}
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
                 Title
@@ -88,6 +90,7 @@
                 {{ submission.startDate | govukDate }}
             </dd>
         </div>
+        {% endif %}
         {% if (claim.claimType != "60")%}
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
@@ -99,6 +102,7 @@
         </div>
         {% endif %}
     </dl>
+    {% if (claim.claimType != "40")%}
     <h3 class="govuk-heading-m" id="payment">Learner</h3>
     <dl class="govuk-summary-list">
         <div class="govuk-summary-list__row">
@@ -110,6 +114,7 @@
             </dd>
         </div>
     </dl>
+    {% endif %}
 
       <div style="padding-top: 10px;">
           {% if (claim.claimType != "40")%}
