@@ -41,7 +41,7 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentRejectNote, completionResponse, completionRejectNote, paymentQueryNote, completionQueryNote) {
+function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentRejectNote, completionResponse, completionRejectNote, paymentQueryNote, completionQueryNote, otherResponse, otherRejectNote, otherQueryNote) {
     let submission = getMostRelevantSubmission(foundClaim)    
     if (paymentResponse == "yes") {
             submission.evidenceOfPaymentReview.outcome = "pass"
@@ -62,6 +62,16 @@ function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paym
         } else if (completionResponse == "query") {
             submission.evidenceOfCompletionReview.outcome = "queried"
             submission.evidenceOfCompletionReview.note = completionQueryNote
+        }
+
+        if (otherResponse == "yes") {
+            submission.otherCheck.outcome = "pass"
+        } else if (otherResponse == "reject") {
+            submission.otherCheck.outcome = "fail"
+            submission.otherCheck.note = otherRejectNote
+        } else if (otherResponse == "query") {
+            submission.otherCheck.outcome = "queried"
+            submission.otherCheck.note = otherQueryNote
         }
 }
 

@@ -31,6 +31,21 @@
 
 {% endif %}
 
+{% if (submission.otherCheck.outcome) %}
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+    <h4 class="govuk-heading-s">Another other reason </h4>
+
+    {% if submission.otherCheck.outcome == "pass" %}
+        <p class="govuk-body">No</p>
+    {% elif submission.otherCheck.outcome == "queried" %}
+        <p class="govuk-body">Yes - needs action by org</p>
+    {% elif submission.otherCheck.outcome == "fail" %}
+        <p class="govuk-body">Yes - rejected</p>
+    {% endif %}
+
+{% endif %}
+
 
 {% if (claim.status == "approved") %}
 
@@ -84,6 +99,11 @@
         <p class='govuk-body'>{{submission.evidenceOfCompletionReview.note}}</p>
     {% endif %}
 
+    {% if (submission.otherCheck.outcome == "fail")  %}
+        <p class='govuk-body'>Another reason the claim couldn't be approved.</p>
+        <p class='govuk-body'>{{submission.otherCheck.note}}</p>
+    {% endif %}
+
 {% elif (claim.status == "queried") %}
         
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
@@ -98,5 +118,10 @@
     {% if (submission.evidenceOfCompletionReview.outcome == "queried")  %}
         <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
         <p class='govuk-body'>{{submission.evidenceOfCompletionReview.note}}</p>
+    {% endif %}
+
+    {% if (submission.otherCheck.outcome == "queried")  %}
+        <p class='govuk-body'>Another reason the claim couldn't be approved.</p>
+        <p class='govuk-body'>{{submission.otherCheck.note}}</p>
     {% endif %}
 {% endif %}

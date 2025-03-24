@@ -97,6 +97,13 @@
 
     {% endif %}
 
+    {% if (data.other == "reject") %}
+
+        <p class='govuk-body'>There was another reason the claim could not be approved.</p>
+        <p class='govuk-body'>{{data.otherRejectNote}}</p>
+
+    {% endif %}
+
     </div>
 
 {% elif data.result == "query" %}
@@ -116,6 +123,13 @@
 
         <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
         <p class='govuk-body'>{{data.completionQueryNote}}</p>
+
+    {% endif %}
+
+    {% if (data.other == "query") %}
+
+        <p class='govuk-body'>There was another reason the claim could not be approved.</p>
+        <p class='govuk-body'>{{data.otherQueryNote}}</p>
 
     {% endif %}
 

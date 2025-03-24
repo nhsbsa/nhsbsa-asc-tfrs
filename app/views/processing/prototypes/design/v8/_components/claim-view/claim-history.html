@@ -47,6 +47,10 @@
     </div>
     {% endfor %}
 </div>    
-        
+
+{% if data.showNote %}
+    {% include "../claim-view/history-note/view-note.html" %}
+{% endif %}
+
         
 <!--  <a href="#" class="govuk-link">see more</a> -->

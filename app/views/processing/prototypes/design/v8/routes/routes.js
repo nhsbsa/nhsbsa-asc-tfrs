@@ -394,11 +394,14 @@ router.get('/outcome-handler', function (req, res) {
   const completionRejectNote = req.session.data.completionRejectNote
   const completionQueryNote = req.session.data.completionQueryNote
 
+  const otherResponse = req.session.data.other
+  const otherRejectNote = req.session.data.otherRejectNote
+  const otherQueryNote = req.session.data.otherQueryNote
 
 
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
-      updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, completionResponse, completionRejectNote, paymentQueryNote, completionQueryNote)
+      updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, completionResponse, completionRejectNote, paymentQueryNote, completionQueryNote, otherResponse, otherRejectNote, otherQueryNote)
       
       let submission = getMostRelevantSubmission(claim)    
       submission.processedDate = new Date()
@@ -428,6 +431,29 @@ router.get('/outcome-handler', function (req, res) {
   req.session.data.processSuccess = "true"
 
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+});
+
+router.get('/showClaimHistoryNote', function (req, res) {
+  req.session.data['showNote'] = req.session.data['noteType']
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
+      res.redirect('processing/prototypes/design/v8/organisation/org-view-main?orgTab=singleClaim' + '?id=' + claimID)
+    }
+  }
+});
+
+router.get('/hideClaimHistoryNote', function (req, res) {
+  req.session.data['showNote'] = null
+  req.session.data['noteType'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
+      res.redirect('processing/prototypes/design/v8/organisation/org-view-main?orgTab=singleClaim' + '?id=' + claimID)
+    }
+  }
 });
 
 router.post('/add-note', function (req, res) {

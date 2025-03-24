@@ -27,6 +27,10 @@
           "outcome": null,
           "note": null
         },
+        "otherCheck": {
+          "outcome": null,
+          "note": null
+        },
         "processedDate": null,
         "processedBy": null
       },
@@ -49,6 +53,10 @@
           "outcome": "pass",
           "note": null
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2025-02-06T11:52:30.850Z",
         "processedBy": "Flossie Gleason"
       }
@@ -63,32 +71,6 @@
     "createdBy": "miles.whitaker@evergreencare.com",
     "notes": [],
     "submissions": [
-      {
-        "submitter": null,
-        "submittedDate": null,
-        "trainingCode": "USMS",
-        "learnerID": "HB 78 2F 15 O",
-        "startDate": "2024-10-15T02:17:46.659Z",
-        "costDate": "2024-07-15T14:48:06.827Z",
-        "evidenceOfPayment": [
-          "invoice1.pdf", 
-          "bankStatement1.pdf", 
-          "receipt1.pdf"
-        ],
-        "completionDate": "2024-10-24T19:46:57.118Z",
-        "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": null,
-          "note": null,
-          "costPerLearner": null
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": null,
-          "note": null
-        },
-        "processedDate": null,
-        "processedBy": null
-      },
       {
         "submitter": "rosalie.finch@evergreencare.com",
         "submittedDate": "2024-10-31T00:34:25.749Z",
@@ -109,6 +91,10 @@
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "otherCheck": {
           "outcome": "pass",
           "note": null
         },
@@ -133,6 +119,10 @@
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "otherCheck": {
           "outcome": "pass",
           "note": null
         },
@@ -169,6 +159,10 @@
           "outcome": "pass",
           "note": null
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2025-01-06T23:38:56.268Z",
         "processedBy": "Flossie Gleason"
       },
@@ -188,6 +182,10 @@
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "otherCheck": {
           "outcome": "pass",
           "note": null
         },
@@ -224,6 +222,10 @@
           "outcome": "pass",
           "note": null
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2025-02-27T19:57:31.176Z",
         "processedBy": "Flossie Gleason"
       },
@@ -243,6 +245,10 @@
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "otherCheck": {
           "outcome": "pass",
           "note": null
         },
@@ -273,6 +279,10 @@
           "note": null,
           "costPerLearner": null
         },
+        "otherCheck": {
+          "outcome": null,
+          "note": null
+        },
         "processedDate": null,
         "processedBy": null
       },
@@ -288,6 +298,10 @@
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
         },
         "processedDate": "2025-02-12T07:43:14.557Z",
         "processedBy": "Flossie Gleaason"
@@ -316,6 +330,10 @@
           "note": null,
           "costPerLearner": null
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": null,
         "processedBy": null
       },
@@ -332,6 +350,10 @@
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2025-02-28T07:28:48.023Z",
         "processedBy": "Allan Connelly"
       },
@@ -347,6 +369,10 @@
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
         },
         "processedDate": "2025-02-17T07:28:48.023Z",
         "processedBy": "Allan Connelly"
@@ -375,6 +401,10 @@
           "note": null,
           "costPerLearner": 162
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2024-06-26T17:19:54.377Z",
         "processedBy": "Flossie Gleason"
       },
@@ -390,6 +420,10 @@
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
         },
         "processedDate": "2024-05-05T17:19:54.377Z",
         "processedBy": "Flossie Gleason"
@@ -418,6 +452,10 @@
           "note": "The evidence of payment show you paid for a course that is not eligible for funding through our service.",
           "costPerLearner": null
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2025-01-10T06:24:49.949Z",
         "processedBy": "Allan Connelly"
       },
@@ -433,6 +471,10 @@
           "outcome": "queried",
           "note": "The evidence of payment does not show what training you paid for.",
           "costPerLearner": null
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
         },
         "processedDate": "2024-11-23T06:24:49.949Z",
         "processedBy": "Allan Connelly"
@@ -461,6 +503,10 @@
           "note": null,
           "costPerLearner": 108
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2025-02-03T06:15:38.665Z",
         "processedBy": "Allan Connelly"
       }
@@ -487,6 +533,10 @@
           "outcome": null,
           "note": null
         },
+        "otherCheck": {
+          "outcome": null,
+          "note": null
+        },
         "processedDate": null,
         "processedBy": null
       },
@@ -501,6 +551,10 @@
         "evidenceOfCompletionReview": {
           "outcome": "queried",
           "note": "The certificate shows a different learner's name to the one in the claim."
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
         },
         "processedDate": "2025-03-04T06:15:38.665Z",
         "processedBy": "Allan Connelly"
@@ -529,6 +583,10 @@
           "note": null,
           "costPerLearner": 270
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2025-02-18T05:44:08.305Z",
         "processedBy": "Mara Monahan"
       }
@@ -544,21 +602,6 @@
     "notes": [],
     "submissions": [
       {
-        "submitter": null,
-        "submittedDate": null,
-        "trainingCode": "601/7356/7",
-        "learnerID": "LM 89 7F 48 J",
-        "startDate": "2024-07-06T10:37:21.199Z",
-        "completionDate": "2025-01-23T21:12:41.455Z",
-        "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfCompletionReview": {
-          "outcome": null,
-          "note": null
-        },
-        "processedDate": null,
-        "processedBy": null
-      },
-      {
         "submitter": "jasper.holloway@evergreencare.com",
         "submittedDate": "2025-02-23T05:51:35.010Z",
         "trainingCode": "601/7356/7",
@@ -570,6 +613,10 @@
           "outcome": "queried",
           "note": "The completion date on the certificate does not match the completion date on the claim"
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2025-02-27T21:46:43.842Z",
         "processedBy": "Allan Connelly"
       },
@@ -579,11 +626,15 @@
         "trainingCode": "601/7356/7",
         "learnerID": "LM 89 7F 48 J",
         "startDate": "2024-07-06T10:37:21.199Z",
-        "completionDate": "2025-01-22T21:12:41.455Z",
+        "completionDate": "2025-01-20T21:12:41.455Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfCompletionReview": {
           "outcome": "queried",
           "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
         },
         "processedDate": "2025-02-20T21:46:43.842Z",
         "processedBy": "Allan Connelly"
@@ -612,6 +663,10 @@
           "note": null,
           "costPerLearner": 270
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2024-07-24T00:49:20.058Z",
         "processedBy": "Allan Connelly"
       }
@@ -638,6 +693,10 @@
           "outcome": "pass",
           "note": null
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2025-02-16T00:32:45.681Z",
         "processedBy": "Flossie Gleason"
       },
@@ -652,6 +711,10 @@
         "evidenceOfCompletionReview": {
           "outcome": "queried",
           "note": "The name on the evidence of completion does not match the claim."
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
         },
         "processedDate": "2025-01-28T00:32:45.681Z",
         "processedBy": "Flossie Gleason"
@@ -680,6 +743,10 @@
           "note": null,
           "costPerLearner": 162
         },
+        "otherCheck": {
+         "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2025-02-12T12:05:57.719Z",
         "processedBy": "Allan Connelly"
       }
@@ -706,6 +773,10 @@
           "outcome": "fail",
           "note": "The certificate of completion still doesn't match the details in the claim."
         },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
         "processedDate": "2025-03-01T03:53:38.386Z",
         "processedBy": "Mara Monahan"
       },
@@ -720,6 +791,10 @@
         "evidenceOfCompletionReview": {
           "outcome": "pass",
           "note": "The certificate of completion still doesn't match the details in the claim."
+        },
+        "otherCheck": {
+          "outcome": null,
+          "note": null
         },
         "processedDate": "2025-02-21T03:53:38.386Z",
         "processedBy": "Mara Monahan"
