@@ -11,14 +11,25 @@
         <p class="govuk-body">No - rejected</p>
     {% endif %}
 
-
-    {% if (claim.claimType != "60" and submission.evidenceOfCompletionReview.outcome) %}
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    {% if submission.evidenceOfPaymentReview.outcome == "pass" %}
+        <h4 class="govuk-heading-s">What was cost per learner?</h4>
+        <p class="govuk-body">£{{submission.evidenceOfPaymentReview.costPerLearner}}</p>
+    {% elif submission.evidenceOfPaymentReview.outcome == "queried" %}
+        <h4 class="govuk-heading-s">What was payment query reason?</h4>
+        <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
+    {% elif submission.evidenceOfPaymentReview.outcome == "fail" %}
+        <h4 class="govuk-heading-s">What was payment rejection reason?</h4>
+        <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
     {% endif %}
 
 {% endif %}
 
+
 {% if (claim.claimType != "60" and submission.evidenceOfCompletionReview.outcome) %}
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
     <h4 class="govuk-heading-s">Does the evidence of completion meet the required criteria?</h4>
 
     {% if submission.evidenceOfCompletionReview.outcome == "pass" %}
@@ -29,12 +40,24 @@
         <p class="govuk-body">No - rejected</p>
     {% endif %}
 
+
+    {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <h4 class="govuk-heading-s">What was completion query reason?</h4>
+        <p class="govuk-body">{{submission.evidenceOfCompletionReview.note}}</p>
+    {% elif submission.evidenceOfCompletionReview.outcome == "fail" %}
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <h4 class="govuk-heading-s">What was completion rejection reason?</h4>
+        <p class="govuk-body">{{submission.evidenceOfCompletionReview.note}}</p>
+    {% endif %}
+
 {% endif %}
 
 {% if (submission.otherCheck.outcome) %}
 
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-    <h4 class="govuk-heading-s">Another other reason </h4>
+
+    <h4 class="govuk-heading-s">Another other reason claim wasn't approved</h4>
 
     {% if submission.otherCheck.outcome == "pass" %}
         <p class="govuk-body">No</p>
@@ -42,6 +65,18 @@
         <p class="govuk-body">Yes - needs action by org</p>
     {% elif submission.otherCheck.outcome == "fail" %}
         <p class="govuk-body">Yes - rejected</p>
+    {% endif %}
+
+    
+
+    {% if submission.otherCheck.outcome == "queried" %}
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <h4 class="govuk-heading-s">What was other query reason?</h4>
+        <p class="govuk-body">{{submission.otherCheck.note}}</p>
+    {% elif submission.otherCheck.outcome == "fail" %}
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <h4 class="govuk-heading-s">What was other rejection reason?</h4>
+        <p class="govuk-body">{{submission.otherCheck.note}}</p>
     {% endif %}
 
 {% endif %}
@@ -53,7 +88,7 @@
 
     {% if (claim.claimType == "100") %}
 
-        {# <p class="govuk-body">The amount to be reimbursed for this 100 claim is <strong>£{{ claim | reimbursement(claim.reimbursementAmount, data.training) }}</strong>.</p> #}
+        <p class="govuk-body">The amount to be reimbursed for this 100 claim is <strong>£{{ claim | reimbursement(claim.reimbursementAmount, data.training) }}</strong>.</p>
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
             <li>maximum reimbursement amount for this training (£{{ training.reimbursementAmount }})</li>
@@ -83,45 +118,5 @@
     {% endif %}
 
 
-{% elif (claim.status == "rejected") %}
-        
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-    
-    <h4 class="govuk-heading-s">Rejection reasons</h4>
-
-    {% if (submission.evidenceOfPaymentReview.outcome == "fail") %}
-        <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
-        <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
-    {% endif %}
-
-    {% if (submission.evidenceOfCompletionReview.outcome == "fail")  %}
-        <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
-        <p class='govuk-body'>{{submission.evidenceOfCompletionReview.note}}</p>
-    {% endif %}
-
-    {% if (submission.otherCheck.outcome == "fail")  %}
-        <p class='govuk-body'>Another reason the claim couldn't be approved.</p>
-        <p class='govuk-body'>{{submission.otherCheck.note}}</p>
-    {% endif %}
-
-{% elif (claim.status == "queried") %}
-        
-    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-    
-    <h4 class="govuk-heading-s">Query reasons</h4>
-
-    {% if (submission.evidenceOfPaymentReview.outcome == "queried") %}
-        <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
-        <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
-    {% endif %}
-
-    {% if (submission.evidenceOfCompletionReview.outcome == "queried")  %}
-        <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
-        <p class='govuk-body'>{{submission.evidenceOfCompletionReview.note}}</p>
-    {% endif %}
-
-    {% if (submission.otherCheck.outcome == "queried")  %}
-        <p class='govuk-body'>Another reason the claim couldn't be approved.</p>
-        <p class='govuk-body'>{{submission.otherCheck.note}}</p>
-    {% endif %}
 {% endif %}
+
