@@ -2,8 +2,8 @@
 
 {% set stepNo = "Step 5" %}
 
-{% if claim.claimType == "100" and data.completion =="yes" and data.other =="yes" %}
-    {% set stepNo = "Step 4" %}
+{% if claim.claimType == "100" and data.completion =="yes" and data.other =="yes" and data.payment =="yes" %}
+    {% set stepNo = "Step 5" %}
 {% elif claim.claimType == "100" and (data.completion =="reject" or data.completion =="query")%}
     {% set stepNo = "Step 5" %}
 {% elif claim.claimType == "100" and (data.payment =="reject")%}
