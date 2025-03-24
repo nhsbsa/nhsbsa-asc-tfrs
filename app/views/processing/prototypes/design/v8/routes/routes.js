@@ -438,7 +438,7 @@ router.get('/showClaimHistoryNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
-      res.redirect('processing/prototypes/design/v8/organisation/org-view-main?orgTab=singleClaim' + '?id=' + claimID)
+      res.redirect('processing/prototypes/design/v8/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
@@ -448,10 +448,11 @@ router.get('/hideClaimHistoryNote', function (req, res) {
   req.session.data['noteType'] = null
   req.session.data['submissionDate'] = null
   req.session.data['submittedDate'] = null
+  req.session.data['fromNoteNav'] = true
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
-      res.redirect('processing/prototypes/design/v8/organisation/org-view-main?orgTab=singleClaim' + '?id=' + claimID)
+      res.redirect('processing/prototypes/design/v8/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
