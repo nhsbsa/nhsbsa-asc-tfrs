@@ -207,6 +207,26 @@ function findCourseByCode(code, trainingCourses) {
       }
   }
 
+  function findUser(users, email) {
+    let user = null;
+    for (let u of users) {
+        if (u.email == email) {
+            user = u.givenName + " " + u.familyName
+        }
+    }
+    return user;
+  }
+
+  function findOrg(organisations, orgID) {
+    let organisation = null;
+    for (const org of organisations) {
+      if (org.workplaceID == orgID) {
+        organisation = org
+      }
+    }
+    return organisation;
+  }
+
   function flattenUsers(data) {
     let users = [];
   
@@ -251,4 +271,4 @@ function sortSubmissionsByDate(submissions, dateType) {
 }
 
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate }
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg }
