@@ -293,7 +293,11 @@ router.get('/process-claim-back-handler', function (req, res) {
   }
 
   else if (processClaimStep == "confirmOutcome") {
-    if (otherResponse == "yes") {
+    if (completionResponse == "reject") {
+      req.session.data.processClaimStep = "completionRejectionNote"
+    } else if (paymentResponse == "reject") {
+      req.session.data.processClaimStep = "paymentRejectionNote"
+    } else if (otherResponse == "yes") {
       req.session.data.processClaimStep = "checkOther"
     } else if (otherResponse == "query") {
       req.session.data.processClaimStep = "otherQueryNote"
