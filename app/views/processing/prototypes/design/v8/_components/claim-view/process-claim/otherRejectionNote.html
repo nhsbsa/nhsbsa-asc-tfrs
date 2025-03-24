@@ -1,0 +1,43 @@
+{% set stepNo = "Step A" %}
+
+{% if (claim.claimType == "40") %}
+    {% set stepNo = "Step Z" %}
+{% endif %}
+
+<h3 class="govuk-heading-m">{{stepNo}}: Other rejection reason</h3>
+
+<form action="../other-rejection-note-handler" method="post" novalidate>
+
+    <div class="govuk-form-group govuk-character-count {% if data.otherRejectNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+            Why did the claim not meet the required criteria?
+        </legend>
+        
+        <div id="other-note-hint" class="govuk-hint">
+            This note tells the submitter why their claim has been rejected
+        </div>
+
+        {% if data.otherRejectNoteIncomplete %}
+            <p id="other-note-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span>Enter other rejection reasons
+            </p>
+        {% endif %}
+        
+        <textarea class="govuk-textarea govuk-js-character-count {% if data.otherRejectNoteIncomplete %}govuk-textarea--error{% endif %}" id="otherRejectNote" name="otherRejectNote" rows="30" aria-describedby="other-no-note-info note-hint">{{ data.otherRejectNote | default ('') }}</textarea>
+        
+        <div id="completion-no-note-info" class="govuk-hint govuk-character-count__message">
+            You can enter up to 1000 characters
+        </div>
+
+</div>
+
+    <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Continue
+        </button>
+        <a class="govuk-link govuk-link--no-visited-state" href="../process-claim-back-handler">Go back</a>
+    </div>
+
+</form>
+
+

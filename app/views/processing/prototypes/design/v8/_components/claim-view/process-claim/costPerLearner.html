@@ -1,0 +1,60 @@
+
+<h3 class="govuk-heading-m">Step 2: Calculate cost per learner</h3>
+
+{% include "./supporting-data/payment-evidence-card.html" %}
+
+<p class="govuk-body">
+    Enter the amount the training cost for a single learner.
+</p>
+
+<p class="govuk-body">
+    For instance, if the organisation paid £100 for 4 learners then the cost per learner is £25.
+</p>
+
+<p class="govuk-body">
+    The maximum reimbursement amount for this training is <b>£{{training.reimbursementAmount}}</b>.
+</p>
+
+<p class="govuk-body">
+    The organisation will not get back more than they actually paid.
+</p>
+
+<form action="../cost-per-learner-handler" method="post" novalidate>
+
+    <div class="govuk-form-group {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %}govuk-form-group--error{% endif %}">
+
+        <fieldset class="govuk-fieldset">
+
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                What was the cost per learner?
+            </legend>
+
+            {% if data.paymentReimbursementAmountIncomplete %}
+                <p id="cost-per-learner-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter cost per learner
+                </p>
+            {% endif %}
+
+            {% if data.paymentReimbursementAmountInvalid %}
+                <p id="cost-per-learner-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Cost per learner must be a number
+                </p>
+            {% endif %}
+        
+            <div class="govuk-input__wrapper" id="cost-per-learner">
+                <div class="govuk-input__prefix" aria-hidden="true">£</div>
+                <input class="govuk-input govuk-input--width-5 {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %} govuk-input--error {% endif %}" id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text" value="{{ data.paymentReimbursementAmount | default ('') }}">
+            </div>
+            
+        </fieldset>
+
+    </div>
+
+    <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Continue
+        </button>
+        <a class="govuk-link govuk-link--no-visited-state" href="../process-claim-back-handler">Go back</a>
+    </div>
+
+</form>
