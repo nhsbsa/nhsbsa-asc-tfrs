@@ -190,15 +190,23 @@ router.get('/process-claim-back-handler', function (req, res) {
   delete req.session.data.paymentReimbursementAmountIncomplete
   delete req.session.data.paymentReimbursementAmountInvalid
   delete req.session.data.paymentRejectNoteIncomplete
+  delete req.session.data.paymentQueryNoteIncomplete
+
   delete req.session.data.processSuccess
   delete req.session.data.noteSuccess
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionRejectNoteIncomplete
+  delete req.session.data.completionQueryNoteIncomplete
+
+  delete req.session.data.otherResponseIncomplete
+  delete req.session.data.otherRejectNoteIncomplete
+  delete req.session.data.otherQueryNoteIncomplete
 
   const claimID = req.session.data.id
   const processClaimStep = req.session.data.processClaimStep
   const paymentResponse = req.session.data.payment
   const completionResponse = req.session.data.completion
+  const otherResponse = req.session.data.other
   var claim = null
 
   for (const c of req.session.data.claims) {
@@ -245,37 +253,39 @@ router.get('/process-claim-back-handler', function (req, res) {
   } else if (processClaimStep == "completionQueryNote") {
     
     req.session.data.processClaimStep = "checkCompletion"
+    
 
-  } else if (processClaimStep == "confirmOutcome") {
-    if (claim.claimType == "60") {
-      if (paymentResponse == "yes") {
-        req.session.data.processClaimStep = "costPerLearner"
-      } else if (paymentResponse == "query") {
-        req.session.data.processClaimStep = "paymentQueryNote"
-      } else if (paymentResponse == "reject") {
-        req.session.data.processClaimStep = "paymentRejectionNote"
-      }
-    } else if (claim.claimType == "40") {
+  } else if (processClaimStep == "checkOther") {
+
+    if (claim.claimType == "100") {
       if (completionResponse == "yes") {
-        req.session.data.processClaimStep = "costPerLearner"
+        req.session.data.processClaimStep = "checkCompletion"
       } else if (completionResponse == "query") {
         req.session.data.processClaimStep = "completionQueryNote"
       } else if (completionResponse == "reject") {
         req.session.data.processClaimStep = "completionRejectionNote"
       }
-    } else if (claim.claimType == "100") {
-      if (paymentResponse == "yes" || paymentResponse == "query") {
-        if (completionResponse == "query") {
-          req.session.data.processClaimStep = "completionQueryNote"
-        }  else if (completionResponse == "reject") {
-          req.session.data.processClaimStep = "completionRejectionNote"
-        } else if (completionResponse == "yes") {
-          req.session.data.processClaimStep = "checkCompletion"
-        }
-      } else {
-        req.session.data.processClaimStep = "paymentRejectionNote"
-      }
+    } else if (claim.claimType == "40") {
+      req.session.data.processClaimStep = "notStarted"
+    }
+
+  } else if (processClaimStep == "otherRejectionNote") {
+    
+    req.session.data.processClaimStep = "checkOther"
+
+  } else if (processClaimStep == "otherQueryNote") {
+
+    req.session.data.processClaimStep = "checkOther"
   }
+
+  else if (processClaimStep == "confirmOutcome") {
+    if (otherResponse == "yes") {
+      req.session.data.processClaimStep = "checkOther"
+    } else if (otherResponse == "query") {
+      req.session.data.processClaimStep = "otherQueryNote"
+    } else if (otherResponse == "reject") {
+      req.session.data.processClaimStep = "otherRejectionNote"
+    }
 }
 
   return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
