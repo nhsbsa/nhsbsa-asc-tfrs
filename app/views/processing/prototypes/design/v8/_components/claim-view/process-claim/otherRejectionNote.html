@@ -1,10 +1,8 @@
-{% set stepNo = "Step A" %}
 
-{% if (claim.claimType == "40") %}
-    {% set stepNo = "Step Z" %}
-{% endif %}
+{% set stepNo = "otherNote" | calculateStepNumber(claim.claimType, data.payment, data.completion, data.other) %}
 
-<h3 class="govuk-heading-m">{{stepNo}}: Other rejection reason</h3>
+
+<h3 class="govuk-heading-m">Step {{stepNo}}: Other rejection reason</h3>
 
 <form action="../other-rejection-note-handler" method="post" novalidate>
 

@@ -266,8 +266,22 @@ router.get('/process-claim-back-handler', function (req, res) {
         req.session.data.processClaimStep = "completionRejectionNote"
       }
     } else if (claim.claimType == "40") {
-      req.session.data.processClaimStep = "notStarted"
-    }
+      if (completionResponse == "yes") {
+        req.session.data.processClaimStep = "checkCompletion"
+      } else if (completionResponse == "query") {
+        req.session.data.processClaimStep = "completionQueryNote"
+      } else if (completionResponse == "reject") {
+        req.session.data.processClaimStep = "completionRejectionNote"
+      }
+    } else if (claim.claimType == "60") {
+      if (paymentResponse == "yes") {
+        req.session.data.processClaimStep = "costPerLearner"
+      } else if (paymentResponse == "query") {
+        req.session.data.processClaimStep = "paymentQueryNote"
+      } else if (paymentResponse == "reject") {
+        req.session.data.processClaimStep = "paymentRejectionNote"
+      }
+    } 
 
   } else if (processClaimStep == "otherRejectionNote") {
     
