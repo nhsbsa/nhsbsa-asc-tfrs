@@ -283,6 +283,9 @@ router.get('/process-claim-back-handler', function (req, res) {
 });
 
 router.get('/start-processing', function (req, res) {
+
+  delete req.session.data.fromNoteNav
+  
   const claimID = req.session.data.id
   var claim = null
   
@@ -323,8 +326,6 @@ router.post('/claim-process-handler', function (req, res) {
   const completionResponse = req.session.data.completion
   const completionRejectNote = req.session.data.completionRejectNote
 
-  const processJourneyType = req.session.data.processJourneyType
-
   var errorParamaters = ""
   var claim = null
   var isFullClaim = false
@@ -339,7 +340,7 @@ router.post('/claim-process-handler', function (req, res) {
   }
   isFullClaim = isFullClaimCheck(claim)
 
-  if (((claim.fundingType == "TU") && (claim.claimType == "60" || claim.claimType == "100"))) {
+  if (claim.claimType == "60" || claim.claimType == "100") {
     if (paymentResponse == null) {
       errorParamaters += "&paymentResponseIncomplete=true";
     } else if (paymentResponse == "yes" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
@@ -361,7 +362,7 @@ router.post('/claim-process-handler', function (req, res) {
 
   if (errorParamaters == "") {
 
-    if ((paymentResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "40"))) && (completionResponse == "yes" || ((claim.fundingType == "TU") && (claim.claimType == "60")))) {
+    if ((paymentResponse == "yes" ||  (claim.claimType == "40")) && (completionResponse == "yes" || claim.claimType == "60")) {
       req.session.data.result = "approve"
     } else {
       req.session.data.result = "reject"
@@ -383,6 +384,8 @@ router.get('/outcome-handler', function (req, res) {
   const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
   const paymentRejectNote = req.session.data.paymentRejectNote
   const paymentQueryNote = req.session.data.paymentQueryNote
+
+  delete req.session.data.fromNoteNav
 
   if (paymentResponse == "reject") {
     delete req.session.data.completion
@@ -448,7 +451,7 @@ router.get('/hideClaimHistoryNote', function (req, res) {
   req.session.data['noteType'] = null
   req.session.data['submissionDate'] = null
   req.session.data['submittedDate'] = null
-  req.session.data['fromNoteNav'] = true
+  req.session.data['fromNoteNav'] = "true"
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
@@ -705,6 +708,7 @@ router.get('/org-tab-handler/:tab', function (req, res) {
   delete req.session.data.currentPage
   delete req.session.data.confirmation
   delete req.session.data.processSuccess
+  delete req.session.data.fromNoteNav
 
   delete req.session.data.paymentResponseIncomplete
   delete req.session.data.paymentReimbursementAmountIncomplete
@@ -746,6 +750,7 @@ router.get('/back-to-start-handler', function (req, res) {
   delete req.session.data.noteSuccess
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionRejectNoteIncomplete
+  delete req.session.data.fromNoteNav
 
   delete req.session.data.payment
   delete req.session.data.paymentReimbursementAmount
@@ -811,6 +816,7 @@ router.post('/payment-check-handler', function (req, res) {
   const paymentResponse = req.session.data.payment
 
   delete req.session.data.paymentResponseIncomplete
+  delete req.session.data.fromNoteNav
 
   if (paymentResponse == null) {
     req.session.data.paymentResponseIncomplete = true
@@ -836,6 +842,7 @@ router.post('/cost-per-learner-handler', function (req, res) {
 
   delete req.session.data.paymentReimbursementAmountIncomplete
   delete req.session.data.paymentReimbursementAmountInvalid
+  delete req.session.data.fromNoteNav
 
 
   for (const c of req.session.data.claims) {
@@ -870,6 +877,7 @@ router.post('/payment-rejection-note-handler', function (req, res) {
   var claim = null
 
   delete req.session.data.paymentRejectNoteIncomplete
+  delete req.session.data.fromNoteNav
 
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -895,6 +903,7 @@ router.post('/payment-query-note-handler', function (req, res) {
   var claim = null
 
   delete req.session.data.paymentQueryNoteIncomplete
+  delete req.session.data.fromNoteNav
 
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -922,6 +931,7 @@ router.post('/completion-check-handler', function (req, res) {
   const completionResponse = req.session.data.completion
 
   delete req.session.data.completionResponseIncomplete
+  delete req.session.data.fromNoteNav
 
   if (completionResponse == null) {
     req.session.data.completionResponseIncomplete = true
@@ -946,6 +956,7 @@ router.post('/completion-rejection-note-handler', function (req, res) {
   const completionRejectNote = req.session.data.completionRejectNote
 
   delete req.session.data.completionRejectNoteIncomplete
+  delete req.session.data.fromNoteNav
 
   if (completionRejectNote == null || completionRejectNote == "") {
     req.session.data.completionRejectNoteIncomplete = true
@@ -963,6 +974,7 @@ router.post('/completion-query-note-handler', function (req, res) {
   const completionQueryNote = req.session.data.completionQueryNote
 
   delete req.session.data.completionQueryNoteIncomplete
+  delete req.session.data.fromNoteNav
 
   if (completionQueryNote == null || completionQueryNote == "") {
     req.session.data.completionQueryNoteIncomplete = true
@@ -981,6 +993,7 @@ router.post('/other-check-handler', function (req, res) {
   const otherResponse = req.session.data.other
   var claim = null
   delete req.session.data.otherResponseIncomplete
+  delete req.session.data.fromNoteNav
 
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -1063,6 +1076,7 @@ router.post('/other-rejection-note-handler', function (req, res) {
   const otherRejectNote = req.session.data.otherRejectNote
 
   delete req.session.data.otherRejectNoteIncomplete
+  delete req.session.data.fromNoteNav
 
   if (otherRejectNote == null || otherRejectNote == "") {
     req.session.data.otherRejectNoteIncomplete = true
@@ -1080,6 +1094,7 @@ router.post('/other-query-note-handler', function (req, res) {
   const otherQueryNote = req.session.data.otherQueryNote
 
   delete req.session.data.otherQueryNoteIncomplete
+  delete req.session.data.fromNoteNav
 
   if (otherQueryNote == null || otherQueryNote == "") {
     req.session.data.otherQueryNoteIncomplete = true
