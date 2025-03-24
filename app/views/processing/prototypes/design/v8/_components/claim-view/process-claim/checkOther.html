@@ -1,4 +1,7 @@
-<h3 class="govuk-heading-m">Step 4: Any other reason to reject</h3>
+
+{% set stepNo = "checkOther" | calculateStepNumber(claim.claimType, data.payment, data.completion, data.other) %}
+
+<h3 class="govuk-heading-m">Step {{stepNo}}: Any other reason to reject</h3>
 
 <form action="../other-check-handler" method="post" novalidate>
 

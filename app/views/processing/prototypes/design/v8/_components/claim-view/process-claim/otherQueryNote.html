@@ -1,4 +1,7 @@
-<h3 class="govuk-heading-m">Step Y: Other action the claim does not meet the criteria</h3>
+{% set stepNo = "otherNote" | calculateStepNumber(claim.claimType, data.payment, data.completion, data.other) %}
+
+
+<h3 class="govuk-heading-m">Step {{stepNo}}: Other action the claim does not meet the criteria</h3>
 
 <form action="../other-query-note-handler" method="post" novalidate>
 
