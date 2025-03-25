@@ -1,14 +1,14 @@
-<h3 class="govuk-heading-m">Step {{data.stepNumber}}: Other action the claim does not meet the criteria</h3>
+<h3 class="govuk-heading-m">Step {{data.stepNumber}}: Other reasons why action is needed</h3>
 
 <form action="../other-query-note-handler" method="post" novalidate>
 
     <div class="govuk-form-group govuk-character-count {% if data.otherQueryNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-            Why else did the claim not meet the required criteria?
+            Is there any other reason why this claim needs action (besides a problem with the evidence)?
         </legend>
         
         <div id="other-query-note-hint" class="govuk-hint">
-            This note tells the submitter what they need to update on the claim to meet the criteria.
+            This note informs the submitter what actions they need to take
         </div>
 
         {% if data.otherQueryNoteIncomplete %}

@@ -13,7 +13,7 @@ addFilter('processorstatusTag', function (statusID) {
     if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Not yet processed</strong>'
     } else if (statusID == 'queried') {
-        return '<strong class="govuk-tag govuk-tag--yellow">Queried</strong>' 
+        return '<strong class="govuk-tag govuk-tag--yellow">Needs action</strong>' 
     } else if (statusID == 'approved') {
         return '<strong class="govuk-tag govuk-tag--green">Approved</strong>' 
     }else if (statusID == 'rejected') {
@@ -339,9 +339,9 @@ addFilter('create100TimelineArray', function (claim, organisations) {
                 if (submission.processedDate) {
                     events.push({
                         type: "statusDate",
-                        title: "Claim queried",
+                        title: "Action needed",
                         date: submission.processedDate,
-                        description: "View query note",
+                        description: "View actions",
                         link: "/showClaimHistoryNote?noteType=hundredQueryNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
@@ -492,9 +492,9 @@ addFilter('create60TimelineArray', function (claim, organisations) {
                 if (submission.processedDate) {
                     events.push({
                         type: "statusDate",
-                        title: "60 claim queried",
+                        title: "60 claim action needed",
                         date: submission.processedDate,
-                        description: "View query note",
+                        description: "View actions",
                         link: "/showClaimHistoryNote?noteType=sixtyQueryNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
@@ -674,9 +674,9 @@ addFilter('create40TimelineArray', function (claim, organisations) {
                 if (submission.processedDate) {
                     events.push({
                         type: "statusDate",
-                        title: "40 claim queried",
+                        title: "40 claim action needed",
                         date: submission.processedDate,
-                        description: "View query note",
+                        description: "View actions",
                         link: "/showClaimHistoryNote?noteType=fourtyQueryNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });

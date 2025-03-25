@@ -1,14 +1,14 @@
-<h3 class="govuk-heading-m">Step {{data.stepNumber}}: Other rejection reason</h3>
+<h3 class="govuk-heading-m">Step {{data.stepNumber}}: Other rejection reasons</h3>
 
 <form action="../other-rejection-note-handler" method="post" novalidate>
 
     <div class="govuk-form-group govuk-character-count {% if data.otherRejectNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-            Why did the claim not meet the required criteria?
+            Is there any other reason why this claim should be rejected (besides a problem with the evidence)?
         </legend>
         
         <div id="other-note-hint" class="govuk-hint">
-            This note tells the submitter why their claim has been rejected
+            This note informs the submitter why their claim has been rejected
         </div>
 
         {% if data.otherRejectNoteIncomplete %}

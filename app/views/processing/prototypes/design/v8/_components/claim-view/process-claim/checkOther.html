@@ -1,5 +1,5 @@
 
-<h3 class="govuk-heading-m">Step {{data.stepNumber}}: Any other reason to reject</h3>
+<h3 class="govuk-heading-m">Step {{data.stepNumber}}: Other rejection reasons</h3>
 
 <form action="../other-check-handler" method="post" novalidate>
 
@@ -7,13 +7,23 @@
 
         <fieldset class="govuk-fieldset">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                    Is there any other reason this claim doesn't pass the criteria?
+                Is there any other reason why this claim should be rejected (besides a problem with the evidence)?
             </legend>
             {% if data.otherResponseIncomplete %}
                 <p id="other-review-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span> Select no if no other reason
                 </p>
             {% endif %}
+
+            <div class="govuk-radios__item">
+
+                <input class="govuk-radios__input" id="otherReject" name="other" type="radio" value="reject" {% if data.other=='reject' %}checked{% endif%}>
+
+                <label class="govuk-label govuk-radios__label" for="otherReject">
+                    Yes
+                </label>
+
+            </div>
 
             <div class="govuk-radios" data-module="govuk-radios">
                 
@@ -32,20 +42,12 @@
                     <input class="govuk-radios__input" id="otherQuery" name="other" type="radio" value="query" {% if data.other=='query' %}checked{% endif%}>
 
                     <label class="govuk-label govuk-radios__label" for="otherQuery">
-                        Yes - needs action by org
+                        Needs action by submitter
                     </label>
 
                 </div>
 
-                <div class="govuk-radios__item">
-
-                    <input class="govuk-radios__input" id="otherReject" name="other" type="radio" value="reject" {% if data.other=='reject' %}checked{% endif%}>
-
-                    <label class="govuk-label govuk-radios__label" for="otherReject">
-                        Yes - reject the claim
-                    </label>
-
-                </div>
+                
 
             </div>
 
