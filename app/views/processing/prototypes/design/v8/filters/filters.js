@@ -821,68 +821,6 @@ addFilter('findOrgClaims', function (orgID, claims) {
     return orgClaims;
 })
 
-addFilter('calculateStepNumber', function (page, claimType, payment, completion, other) {
-let stepCount = 0
-    if (page == "confirmOutcome") {
-        
-        if (claimType == "100") {
-            stepCount = 5
-            if (completion == "query" || completion == "reject") {
-                stepCount += 1
-            }
-            if (other == "query" || other == "reject") {
-                stepCount += 1
-            }
-        } else if (claimType == "60") {
-            stepCount = 4
-            if (other == "query" || other == "reject") {
-                stepCount += 1
-            }
-        } else if (claimType == "40") {
-            stepCount = 3
-            if (completion == "query" || completion == "reject") {
-                stepCount += 1
-            }
-            if (other == "query" || other == "reject") {
-                stepCount += 1
-            }
-        }
-
-    } else if (page == "checkOther") {
-        if (claimType == "100") {
-            stepCount = 4
-            if (completion == "query" || completion == "reject") {
-                stepCount += 1
-            }
-        } else if (claimType == "60") {
-            stepCount = 3
-
-        } else if (claimType == "40") {
-            stepCount = 2
-            if (completion == "query" || completion == "reject") {
-                stepCount += 1
-            }
-        }
-    } else if (page == "otherNote") {
-        if (claimType == "100") {
-            stepCount = 5
-            if (completion == "query" || completion == "reject") {
-                stepCount += 1
-            }
-        } else if (claimType == "60") {
-            stepCount = 4
-
-        } else if (claimType == "40") {
-            stepCount = 3
-            if (completion == "query" || completion == "reject") {
-                stepCount += 1
-            }
-        }
-
-    }
-    return stepCount
-})
-
 addFilter('pageCount', function (content, perPage) {
     return Math.ceil(content / perPage)
 })

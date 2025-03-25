@@ -1,10 +1,4 @@
-{% set stepNo = "Step 3" %}
-
-{% if (claim.claimType == "40") %}
-    {% set stepNo = "Step 1" %}
-{% endif %}
-
-<h3 class="govuk-heading-m">{{stepNo}}: Check completion evidence</h3>
+<h3 class="govuk-heading-m">Step {{data.stepNumber}}: Check completion evidence</h3>
 
 {% include "./supporting-data/completion-evidence-card.html" %}
 {% include "./supporting-data/completion-info-card.html" %}
