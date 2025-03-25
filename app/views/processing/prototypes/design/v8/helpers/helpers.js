@@ -91,7 +91,7 @@ function checkWDSFormat(id) {
 
 }
 
-function signatoryCheck(familyName, givenName, email) {
+function signatoryCheck(familyName, givenName, email, ) {
     const result = {}
 
     if (familyName =="") {
@@ -106,10 +106,12 @@ function signatoryCheck(familyName, givenName, email) {
         result.givenName = "valid"
     }
 
-    if (email =="") {
+    if (email == "") {
         result.email = "missing"
     } else if (!(emailFormat(email))) {
         result.email = "invalid"
+    } else if (email == "duplicate@duplicate.com") {
+        result.email = "duplicate"
     } else {
         result.email = "valid"
     }

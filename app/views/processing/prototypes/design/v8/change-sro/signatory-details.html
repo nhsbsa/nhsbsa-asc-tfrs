@@ -78,7 +78,7 @@
                     value="{{data.givenName | default(givenName)}}">
             </div>
             <div
-                class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-form-group--error {% endif %}">
+                class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid' or data.submitError.email == 'duplicate') %} govuk-form-group--error {% endif %}">
                 <label class="govuk-label" for="email">
                     Email address
                 </label>
@@ -86,13 +86,15 @@
                     We’ll send the invite to this address
                 </div>
                 {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
-                (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %}
+                (data.submitError.email == 'missing' or data.submitError.email == 'invalid' or data.submitError.email == 'duplicate') %}
                 <p id="email-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span> 
                     {% if data.submitError.email == 'missing' %}
                         Enter an email address
                     {% elif data.submitError.email == 'invalid' %}
                         Enter an email address in the correct format, like name@example.com
+                    {% elif data.submitError.email == 'duplicate' %}
+                        This email address is already in use
                     {% endif %}
                 </p>
                 {% endif %}

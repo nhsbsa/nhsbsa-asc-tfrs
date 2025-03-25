@@ -186,6 +186,8 @@ addFilter('signatoryErrorMessage', function (submitError) {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address</a></li>')
     } else if (submitError.email == "invalid") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address in the correct format, like name@example.com</a></li>')
+    }else if (submitError.email == "duplicate") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">This email address is already in use</a></li>')
     }
     return errorSummaryStr
 }, { renderAsHtml: true });
