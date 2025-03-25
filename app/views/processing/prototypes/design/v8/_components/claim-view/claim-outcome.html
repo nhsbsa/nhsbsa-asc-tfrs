@@ -8,7 +8,7 @@
     {% elif submission.evidenceOfPaymentReview.outcome == "queried" %}
         <p class="govuk-body">Needs action by submitter</p>
     {% elif submission.evidenceOfPaymentReview.outcome == "fail" %}
-        <p class="govuk-body">No - rejected</p>
+        <p class="govuk-body">No</p>
     {% endif %}
 
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
@@ -37,7 +37,7 @@
     {% elif submission.evidenceOfCompletionReview.outcome == "queried" %}
         <p class="govuk-body">Needs action by submitter</p>
     {% elif submission.evidenceOfCompletionReview.outcome == "fail" %}
-        <p class="govuk-body">No - rejected</p>
+        <p class="govuk-body">No</p>
     {% endif %}
 
 
@@ -62,9 +62,9 @@
     {% if submission.otherCheck.outcome == "pass" %}
         <p class="govuk-body">No</p>
     {% elif submission.otherCheck.outcome == "queried" %}
-        <p class="govuk-body">Yes - needs action by org</p>
+        <p class="govuk-body">Needs action by submitter</p>
     {% elif submission.otherCheck.outcome == "fail" %}
-        <p class="govuk-body">Yes - rejected</p>
+        <p class="govuk-body">Yes</p>
     {% endif %}
 
     
