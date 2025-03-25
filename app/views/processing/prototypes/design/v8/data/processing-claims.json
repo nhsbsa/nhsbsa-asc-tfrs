@@ -15,7 +15,7 @@
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-02-24T09:54:13.322Z",
         "costDate": "2024-10-18T14:35:08.968Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "evidenceOfPayment": ["october-statement"],
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
@@ -46,7 +46,7 @@
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-02-24T09:54:13.322Z",
         "completionDate": "2025-02-27T03:16:00.448Z",
-        "evidenceOfCompletion": "certficate2.pdf",
+        "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
         "evidenceOfCompletionReview": {
           "outcome": null,
           "note": null
@@ -77,9 +77,9 @@
         "learnerID": "ZX 51 96 87 D",
         "startDate": "2024-07-21T03:36:53.621Z",
         "costDate": "2024-09-25T12:05:18.831Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "evidenceOfPayment": ["sept-bankstatement.png"],
         "completionDate": "2024-10-02T11:52:30.850Z",
-        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
@@ -103,9 +103,9 @@
         "learnerID": "LE 09 5F 94 M",
         "startDate": "2024-07-21T03:36:53.621Z",
         "costDate": "2024-09-23T12:05:18.831Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "evidenceOfPayment": ["sept-bankstatement.png"],
         "completionDate": "2024-10-02T11:52:30.850Z",
-        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The date of payment in the evidence of payment did not match the payment date given in the claim. Update the payment date or provide the correct evidence",
@@ -136,13 +136,13 @@
       {
         "submitter": "jasper.holloway@evergreencare.com",
         "submittedDate": "2025-03-13T03:36:53.621Z",
-        "trainingCode": "DLEDI",
+        "trainingCode": "IMLM",
         "learnerID": "LM 89 7F 48 J",
         "startDate": "2024-12-17T03:36:53.621Z",
         "costDate": "2024-11-11T03:36:53.621Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "evidenceOfPayment": ["november-bankstatement.pdf"],
         "completionDate": "2025-02-01T03:36:53.621Z",
-        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
