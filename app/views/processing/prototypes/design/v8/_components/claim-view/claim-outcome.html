@@ -6,7 +6,7 @@
     {% if submission.evidenceOfPaymentReview.outcome == "pass" %}
         <p class="govuk-body">Yes</p>
     {% elif submission.evidenceOfPaymentReview.outcome == "queried" %}
-        <p class="govuk-body">No - needs action by org</p>
+        <p class="govuk-body">Needs action by submitter</p>
     {% elif submission.evidenceOfPaymentReview.outcome == "fail" %}
         <p class="govuk-body">No - rejected</p>
     {% endif %}
@@ -17,7 +17,7 @@
         <h4 class="govuk-heading-s">What was cost per learner?</h4>
         <p class="govuk-body">£{{submission.evidenceOfPaymentReview.costPerLearner}}</p>
     {% elif submission.evidenceOfPaymentReview.outcome == "queried" %}
-        <h4 class="govuk-heading-s">What was payment query reason?</h4>
+        <h4 class="govuk-heading-s">Why is action needed on evidence of payment?</h4>
         <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
     {% elif submission.evidenceOfPaymentReview.outcome == "fail" %}
         <h4 class="govuk-heading-s">What was payment rejection reason?</h4>
@@ -35,7 +35,7 @@
     {% if submission.evidenceOfCompletionReview.outcome == "pass" %}
         <p class="govuk-body">Yes</p>
     {% elif submission.evidenceOfCompletionReview.outcome == "queried" %}
-        <p class="govuk-body">No - needs action by org</p>
+        <p class="govuk-body">Needs action by submitter</p>
     {% elif submission.evidenceOfCompletionReview.outcome == "fail" %}
         <p class="govuk-body">No - rejected</p>
     {% endif %}
@@ -43,7 +43,7 @@
 
     {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-        <h4 class="govuk-heading-s">What was completion query reason?</h4>
+        <h4 class="govuk-heading-s">Why is action needed on evidence of completion?</h4>
         <p class="govuk-body">{{submission.evidenceOfCompletionReview.note}}</p>
     {% elif submission.evidenceOfCompletionReview.outcome == "fail" %}
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
@@ -57,7 +57,7 @@
 
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-    <h4 class="govuk-heading-s">Another other reason claim wasn't approved</h4>
+    <h4 class="govuk-heading-s">Is there another reason why the claim wasn't approved?</h4>
 
     {% if submission.otherCheck.outcome == "pass" %}
         <p class="govuk-body">No</p>
@@ -71,7 +71,7 @@
 
     {% if submission.otherCheck.outcome == "queried" %}
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-        <h4 class="govuk-heading-s">What was other query reason?</h4>
+        <h4 class="govuk-heading-s">Why else is action needed?</h4>
         <p class="govuk-body">{{submission.otherCheck.note}}</p>
     {% elif submission.otherCheck.outcome == "fail" %}
     <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">

@@ -5,7 +5,7 @@
 {% endif %}
 
 {% if data.result == "query" %}
-    <p class="govuk-body">The claim has been sent to query state.</p>
+        <p class="govuk-body">The claim <span class="govuk-!-font-weight-bold">needs action</span> to meet the evidence criteria and therefore should be returned to the submitter.</p>
 {% endif %}
 
 {% if data.result == "approve" %}
@@ -83,7 +83,7 @@
 
     {% if (data.other == "reject") %}
 
-        <p class='govuk-body'>There was another reason the claim could not be approved.</p>
+        <p class='govuk-body'>There is another reason why this claim could not be approved.</p>
         <p class='govuk-body'>{{data.otherRejectNote}}</p>
 
     {% endif %}
@@ -92,9 +92,9 @@
 
 {% elif data.result == "query" %}
 
-    <p class="govuk-body">The organisation will receive the following note to explain what it needs to update to meet the criteria to be approved. The wording is taken from what you entered on the previous screen.</p>
+    <p class="govuk-body">The organisation will receive the following note to explain what actions it needs to take. The wording is taken from what you entered on the previous screen.</p>
 
-    <div class='govuk-inset-text'><h2 class='govuk-heading-s'>Claim queried</h2>
+    <div class='govuk-inset-text'><h2 class='govuk-heading-s'>Claim needs action</h2>
     
     {% if (data.payment == "query") %}
 
@@ -112,7 +112,7 @@
 
     {% if (data.other == "query") %}
 
-        <p class='govuk-body'>There was another reason the claim could not be approved.</p>
+        <p class='govuk-body'>There is another reason why this claim needs action.</p>
         <p class='govuk-body'>{{data.otherQueryNote}}</p>
 
     {% endif %}
@@ -121,9 +121,9 @@
 
 {% endif %}
 
-<p class="govuk-body">Confirm that this claim should be {% if data.result == "approve" %}approved{% elif data.result == "reject" %}rejected{% elif data.result == "query" %}queried{% endif %}.</p>
+<p class="govuk-body">Confirm that this claim should be {% if data.result == "approve" %}approved{% elif data.result == "reject" %}rejected{% elif data.result == "query" %}sent back{% endif %}.</p>
 
 <div class="govuk-button-group">
-    <a type="submit" class="govuk-button" href="../outcome-handler">{% if data.result == "approve" %}Approve{% elif data.result == "query" %}Query{% elif data.result == "reject" %}Reject{% endif %} claim</a>
+    <a type="submit" class="govuk-button" href="../outcome-handler">{% if data.result == "approve" %}Approve{% elif data.result == "query" %}Send{% elif data.result == "reject" %}Reject{% endif %} claim {% if data.result == "query" %}back{% endif %}</a>
     <a class="govuk-link govuk-link--no-visited-state" href="../process-claim-back-handler">Go back</a>
 </div>

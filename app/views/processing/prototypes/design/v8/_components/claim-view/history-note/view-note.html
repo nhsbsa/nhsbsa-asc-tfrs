@@ -6,7 +6,7 @@
 {% if data.noteType == "hundredQueryNote" or data.noteType == "sixtyQueryNote" or data.noteType == "fourtyQueryNote"%}
 <div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
   <div>
-      <h1 id="note-heading" class="govuk-heading-m push--top">Query note</h1>
+      <h1 id="note-heading" class="govuk-heading-m push--top">Actions needed</h1>
 
         {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
           <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
