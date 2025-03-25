@@ -86,6 +86,9 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
         <h2 class="govuk-heading-m govuk-!-margin-top-6">Submitters</h3> 
+        {% if (org.users.active.length == 0 and org.users.invited.length == 0 and org.users.inactive.length == 0) %} 
+        <p class="govuk-body">No submitters added yet.</p>
+        {% else %}
         {% if (org.users.active.length > 0 or org.users.invited.length > 0) %} 
             <table class="govuk-table">
                 <thead class="govuk-table__head">
@@ -113,7 +116,7 @@
                 </tbody>
             </table>
         {% else %}
-            <p class="govuk-body">No active submitters.</p>
+            <p class="govuk-body">There are currently no active or invited submitters.</p>
         {% endif %}
     </div>
 </div>
@@ -141,6 +144,7 @@
         </table>
         {% else %}
         <p class="govuk-body govuk-!-margin-top-6">No submitters have been deleted by the SRO.</p>
+        {% endif %}
         {% endif %}
     </div>
 </div>
