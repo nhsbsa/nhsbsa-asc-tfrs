@@ -25,7 +25,7 @@
 
       <div class="moj-page-header-actions">
           <div class="moj-page-header-actions__title">
-            <span class="govuk-caption-xl">Workplace ID: {{org.workplaceId}}</span>
+            <span class="govuk-caption-xl">Workplace ID: {{org.workplaceID}}</span>
             <h1 class="govuk-heading-xl"> {{org.name}}</h1>
           </div>
         
@@ -100,11 +100,11 @@
                     {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Claims{% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}</strong>{%endif%}
                   </a>
                 </li>
-                <li class="govuk-service-navigation__item {% if data.orgTab == 'orgNotes'%}govuk-service-navigation__item--active{%endif%}">
+                {# <li class="govuk-service-navigation__item {% if data.orgTab == 'orgNotes'%}govuk-service-navigation__item--active{%endif%}">
                   <a class="govuk-service-navigation__link" href="../org-tab-handler/orgNotes">
                     {% if data.orgTab == 'orgNotes'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}BSA notes{% if data.orgTab == 'orgNotes'%}</strong>{%endif%}
                   </a>
-                </li>
+                </li> #}
               </ul>
             </nav>
           </div>
@@ -116,9 +116,9 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full" id="tab-content">
       <div class="tab-content">
-        {% if data.orgTab == "claims" and data.id == null %}
+        {% if data.orgTab == "claims" %}
             {% include "../_components/org-view/claims.html" %}
-          {% elif data.orgTab == "claims" and data.id != null %}
+          {% elif data.orgTab == "singleClaim" %}
             {% include "../_components/claim-view/claim-overview.html" %}
           {% elif data.orgTab == "users" %}
             {% include "../_components/org-view/users.html" %}

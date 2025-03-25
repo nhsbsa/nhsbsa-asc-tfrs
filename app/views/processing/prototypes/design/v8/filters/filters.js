@@ -6,12 +6,14 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck } = require('../helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg } = require('../helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag', function (statusID) {
     if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Not yet processed</strong>'
+    } else if (statusID == 'queried') {
+        return '<strong class="govuk-tag govuk-tag--yellow">Needs action</strong>' 
     } else if (statusID == 'approved') {
         return '<strong class="govuk-tag govuk-tag--green">Approved</strong>' 
     }else if (statusID == 'rejected') {
@@ -95,16 +97,16 @@ addFilter('criteriaQuestions', function (criteria, type, claim, header) {
 
 addFilter('criteriaAnswer', function (criteria, type, claim) {
     if (type == "payment") {
-        if (claim.evidenceOfPaymentreview["criteria" + criteria].result) {
+        if (claim.evidenceOfPaymentReview["criteria" + criteria].result) {
             return "Yes"
         } else {
-            return "No<br>" + claim.evidenceOfPaymentreview["criteria" + criteria].note
+            return "No<br>" + claim.evidenceOfPaymentReview["criteria" + criteria].note
         }
     } else if (type == "completion") {
-        if (claim.evidenceOfCompletionreview["criteria" + criteria].result) {
+        if (claim.evidenceOfCompletionReview["criteria" + criteria].result) {
             return "Yes"
         } else {
-            return "No<br>" + claim.evidenceOfCompletionreview["criteria" + criteria].note
+            return "No<br>" + claim.evidenceOfCompletionReview["criteria" + criteria].note
         }
     }
 }, { renderAsHtml: true })
@@ -129,28 +131,31 @@ addFilter('dateSort', function (notes) {
     return sortedData
 })
 
-addFilter('reimbursement', function (claim, paymentReimbursementAmount) {
-    if ((claim.fundingType == "TU") && (claim.claimType == "60")) {
-        if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
+addFilter('reimbursement', function (claim, paymentReimbursementAmount, trainingCourses) {
+
+    let submission = getMostRelevantSubmission(claim)
+    let training = findCourseByCode(submission.trainingCode, trainingCourses )
+    if ((claim.claimType == "60")) {
+        if (training.reimbursementAmount > paymentReimbursementAmount) {
             return paymentReimbursementAmount * 0.6
         } else {
-            return claim.training.reimbursementAmount * 0.6
+            return training.reimbursementAmount * 0.6
         }
-    } else if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
-        if (claim.training.reimbursementAmount > claim.reimbursementAmount) {
+    } else if (claim.claimType == "40") {
+        if (training.reimbursementAmount > claim.reimbursementAmount) {
             return claim.reimbursementAmount * 0.4
         } else {
-            return claim.training.reimbursementAmount * 0.4
+            return training.reimbursementAmount * 0.4
         }
-    } else if (claim.training.reimbursementAmount > paymentReimbursementAmount) {
+    } else if (training.reimbursementAmount > paymentReimbursementAmount) {
         return paymentReimbursementAmount
     } else {
-        return claim.training.reimbursementAmount
+        return training.reimbursementAmount
     }
 });
 
 addFilter('original_reimbursement_amount', function (claim,paymentReimbursementAmount) {
-    if ((claim.fundingType == "TU") && (claim.claimType == "40")) {
+    if (claim.claimType == "40") {
         paymentReimbursementAmount = claim.reimbursementAmount
     }
     if (paymentReimbursementAmount > claim.training.reimbursementAmount) {
@@ -185,12 +190,12 @@ addFilter('signatoryErrorMessage', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true });
 
-addFilter('qualificationCheck', function(claim, training, value) {
+addFilter('qualificationCheck', function(submission, training, value) {
     const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
     let isQualification = false;
 
     for (let course of qualificationsObject.courses) {
-        if (course.title == claim.training.title) {
+        if (course.code == submission.trainingCode) {
             isQualification = true
         }
     }
@@ -227,7 +232,7 @@ addFilter('matchPairClaim', function(claimID, claims) {
 addFilter('findOrg', function (organisations, id) {
     var foundOrg = null
     for (const org of organisations) {
-        if (org.workplaceId == id) {
+        if (org.workplaceID == id) {
             foundOrg = org
         }
     }
@@ -250,10 +255,158 @@ addFilter('formatInformation', function (foundOrg, enteredInfo, isFromCheckEdite
     return info
 })
 
+addFilter('orderByMostRecent', function (submissions) {
+    let sorted = sortSubmissionsByDate(submissions, 'submittedDate')
+    return sorted
+})
 
-addFilter('createTimelineArray', function (claim) {
+addFilter('create100TimelineArray', function (claim, organisations) {
     // Extract the timestamps and their associated data
     const events = [];
+
+    let sorted = sortSubmissionsByDate(claim.submissions, 'submittedDate')
+    let org = findOrg(organisations, claim.workplaceID)
+    let users = flattenUsers(org)
+
+
+    for (const submission of sorted) {
+        if (submission.submittedDate) {
+
+            if (submission.processedDate == null) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        link: null,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                    // Add completion date
+                    if (submission.completionDate) {
+                        events.push({
+                            type: "trainingDate",
+                            title: "Training completed",
+                            date: submission.completionDate,
+                            description: claim.completionNote || null,
+                            link: null,
+                            author: null
+                        });
+                    }
+                    // Add cost date
+                    if (submission.costDate) {
+                        events.push({
+                            type: "trainingDate",
+                            title: "Training paid for",
+                            date: submission.costDate,
+                            description: null,
+                            link: null,
+                            author: null
+                        });
+                    }
+
+                    // Add start date
+                    if (submission.startDate) {
+                        events.push({
+                            type: "trainingDate",
+                            title: "Training started",
+                            date: submission.startDate,
+                            description: null,
+                            link: null,
+                            author: null
+                        });
+                    }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "queried" || submission.evidenceOfCompletionReview.outcome == "queried")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim submitted",
+                        date: submission.submittedDate,
+                        description: "View claim",
+                        link: "/showClaimHistoryNote?noteType=hundredClaim&submittedDate=" + submission.submittedDate,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                // Add queried date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Action needed",
+                        date: submission.processedDate,
+                        description: "View actions",
+                        link: "/showClaimHistoryNote?noteType=hundredQueryNote&submittedDate=" + submission.submittedDate,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "pass" || submission.evidenceOfCompletionReview.outcome == "pass")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim submitted",
+                        date: submission.submittedDate,
+                        description: "View claim",
+                        link: "/showClaimHistoryNote?noteType=hundredClaim&submittedDate=" + submission.submittedDate,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                // Add approved date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim approved",
+                        date: submission.processedDate,
+                        description:  null,
+                        link: "#",
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "fail" || submission.evidenceOfCompletionReview.outcome == "fail")) {
+
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim submitted",
+                        date: submission.submittedDate,
+                        description: "View claim",
+                        link: "/showClaimHistoryNote?noteType=hundredClaim&submittedDate=" + submission.submittedDate,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                // Add rejected date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "Claim rejected",
+                        date: submission.processedDate,
+                        description:  "View rejection note",
+                        link: "/showClaimHistoryNote?noteType=hundredRejectionNote&submittedDate=" + submission.submittedDate,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+
+            }
+    
+    
+            
+        }
+    }
 
     // Add created date
     if (claim.createdDate) {
@@ -262,87 +415,8 @@ addFilter('createTimelineArray', function (claim) {
             title: "Claim created",
             date: claim.createdDate,
             description: null,
-            author: claim.createdBy + " (Submitter)"
-        });
-    }
-
-    // Add submitted date
-    if (claim.submittedDate) {
-        events.push({
-            type: "statusDate",
-            title: "Claim submitted",
-            date: claim.submittedDate,
-            description: null,
-            author: claim.createdBy + " (Submitter)"
-        });
-    }
-
-    // Add completion date
-    if (claim.completionDate) {
-        events.push({
-            type: "trainingDate",
-            title: "Training completed",
-            date: claim.completionDate,
-            description: claim.completionNote || null,
-            author: null
-        });
-    }
-
-    // Add rejected date
-    if (claim.approvedDate) {
-        events.push({
-            type: "statusDate",
-            title: "Claim approved",
-            date: claim.approvedDate,
-            description:  null,
-            author: "Eren Yeager (Processor)"
-        });
-    }
-
-    // Add rejected date
-    if (claim.rejectedDate) {
-        events.push({
-            type: "statusDate",
-            title: "Claim rejected",
-            date: claim.rejectedDate,
-            description: claim.rejectedNote || null,
-            author: "Eren Yeager (Processor)"
-        });
-    }
-
-    // Add cost date
-    if (claim.costDate) {
-        events.push({
-            type: "trainingDate",
-            title: "Training paid for",
-            date: claim.costDate,
-            description: null,
-            author: null
-        });
-    }
-
-    // Add cost date
-    if (claim.startDate) {
-        events.push({
-            type: "trainingDate",
-            title: "Training started",
-            date: claim.startDate,
-            description: null,
-            author: null
-        });
-    }
-
-
-    // Add notes
-    if (claim.notes && Array.isArray(claim.notes)) {
-        claim.notes.forEach(note => {
-            events.push({
-                type: "note",
-                title: "Note added",
-                date: note.date,
-                description: note.note,
-                author: note.author
-            });
+            link: null,
+            author: findUser(users, claim.createdBy) + " (Submitter)"
         });
     }
 
@@ -351,6 +425,362 @@ addFilter('createTimelineArray', function (claim) {
 
     return events;
 })
+
+
+addFilter('create60TimelineArray', function (claim, organisations) {
+    // Extract the timestamps and their associated data
+    const events = [];
+    let org = findOrg(organisations, claim.workplaceID)
+    let users = flattenUsers(org)
+
+    for (const submission of claim.submissions) {
+        if (submission.submittedDate) {
+
+            if (submission.processedDate == null) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        link: null,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                // Add cost date
+                if (submission.costDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training paid for",
+                        date: submission.costDate,
+                        description: null,
+                        link: null,
+                        author: null
+                    });
+                }
+
+                // Add start date
+                if (submission.startDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training started",
+                        date: submission.startDate,
+                        description: null,
+                        link: null,
+                        author: null
+                    });
+                }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "queried")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim submitted",
+                        date: submission.submittedDate,
+                        description: "View claim",
+                        link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                // Add queried date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim action needed",
+                        date: submission.processedDate,
+                        description: "View actions",
+                        link: "/showClaimHistoryNote?noteType=sixtyQueryNote&submittedDate=" + submission.submittedDate,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "pass")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim submitted",
+                        date: submission.submittedDate,
+                        description: "View claim",
+                        link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                // Add approved date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim approved",
+                        date: submission.processedDate,
+                        description:  null,
+                        link: null,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+                // Add cost date
+                if (submission.costDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training paid for",
+                        date: submission.costDate,
+                        description: null,
+                        link: null,
+                        author: null
+                    });
+                }
+
+                // Add start date
+                if (submission.startDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training started",
+                        date: submission.startDate,
+                        description: null,
+                        link: null,
+                        author: null
+                    });
+                }
+
+            } else if ((submission.evidenceOfPaymentReview.outcome == "fail")) {
+
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim submitted",
+                        date: submission.submittedDate,
+                        description: "View claim",
+                        link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                // Add rejected date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "60 claim rejected",
+                        date: submission.processedDate,
+                        description: "View rejection note",
+                        link: "/showClaimHistoryNote?noteType=sixtyRejectionNote&submittedDate=" + submission.submittedDate,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+                
+                // Add cost date
+                if (submission.costDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training paid for",
+                        date: submission.costDate,
+                        description: null,
+                        link: null,
+                        author: null
+                    });
+                }
+
+                // Add start date
+                if (submission.startDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training started",
+                        date: submission.startDate,
+                        description: null,
+                        link: null,
+                        author: null
+                    });
+                }
+            }
+        }
+    }
+ 
+    // Add 60 created date
+    if (claim.createdDate) {
+        events.push({
+            type: "statusDate",
+            title: "60 claim created",
+            date: claim.createdDate,
+            description: null,
+            author: findUser(users, claim.createdBy) + " (Submitter)"
+        });
+    }
+
+    // Sort the events by date in descending order
+    events.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    return events;
+})
+
+addFilter('create40TimelineArray', function (claim, organisations) {
+    // Extract the timestamps and their associated data
+    const events = [];
+    
+    let org = findOrg(organisations, claim.workplaceID)
+    let users = flattenUsers(org)
+    
+    for (const submission of claim.submissions) {
+        if (submission.submittedDate) {
+
+            if (submission.processedDate == null) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim submitted",
+                        date: submission.submittedDate,
+                        description: null,
+                        link: null,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                // Add completion date
+                if (submission.completionDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training completed",
+                        date: submission.completionDate,
+                        description: claim.completionNote || null,
+                        author: null
+                    });
+                }
+
+            } else if ((submission.evidenceOfCompletionReview.outcome == "queried")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim submitted",
+                        date: submission.submittedDate,
+                        description: "View claim",
+                        link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                // Add queried date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim action needed",
+                        date: submission.processedDate,
+                        description: "View actions",
+                        link: "/showClaimHistoryNote?noteType=fourtyQueryNote&submittedDate=" + submission.submittedDate,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+            } else if ((submission.evidenceOfCompletionReview.outcome == "pass")) {
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim submitted",
+                        date: submission.submittedDate,
+                        description: "View claim",
+                        link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                // Add approved date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim approved",
+                        date: submission.processedDate,
+                        description:  null,
+                        link: null,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+                // Add completion date
+                if (submission.completionDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training completed",
+                        date: submission.completionDate,
+                        description: claim.completionNote || null,
+                        link: null,
+                        author: null
+                    });
+                }
+
+            } else if ((submission.evidenceOfCompletionReview.outcome == "fail")) {
+
+
+                // Add submitted date
+                if (submission.submittedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim submitted",
+                        date: submission.submittedDate,
+                        description: "View claim",
+                        link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
+                        author: findUser(users, submission.submitter) + " (Submitter)"
+                    });
+                }
+
+                // Add rejected date
+                if (submission.processedDate) {
+                    events.push({
+                        type: "statusDate",
+                        title: "40 claim rejected",
+                        date: submission.processedDate,
+                        description: "View rejection note",
+                        link: "/showClaimHistoryNote?noteType=fourtyRejectionNote&submittedDate=" + submission.submittedDate,
+                        author: "Eren Yeager (Processor)"
+                    });
+                }
+
+                // Add completion date
+                if (submission.completionDate) {
+                    events.push({
+                        type: "trainingDate",
+                        title: "Training completed",
+                        date: submission.completionDate,
+                        description: claim.completionNote || null,
+                        link: null,
+                        author: null
+                    });
+                }
+
+
+            }
+
+        }
+    }
+ 
+        // Add 40 created date
+        if (claim.createdDate) {
+            events.push({
+                type: "statusDate",
+                title: "40 claim created",
+                date: claim.createdDate,
+                description: null,
+                author: findUser(users, claim.createdBy) + " (Submitter)"
+            });
+        }
+
+    // Sort the events by date in descending order
+    events.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    return events;
+})
+
 
 
 addFilter('countOccurrences', function (events,string) {
@@ -374,7 +804,7 @@ addFilter('countOccurrences', function (events,string) {
 addFilter('findOrganisation', function (orgID, organisations) {
     let organisation = null;
     for (const org of organisations) {
-      if (org.workplaceId == orgID) {
+      if (org.workplaceID == orgID) {
         organisation = org
       }
     }
@@ -384,7 +814,7 @@ addFilter('findOrganisation', function (orgID, organisations) {
 addFilter('findOrgClaims', function (orgID, claims) {
     let orgClaims = [];
     for (const claim of claims) {
-      if (claim.workplaceId == orgID) {
+      if (claim.workplaceID == orgID) {
         orgClaims.push(claim)
       }
     }
@@ -411,7 +841,7 @@ addFilter('typeTag', function (type) {
 addFilter('orderClaims', function (claims) {
     
     return claims.sort((a, b) => {
-        const statusOrder = { submitted: 1, rejected: 2, approved: 3 };
+        const statusOrder = { submitted: 1, queried: 2, rejected: 3, approved: 4};
         
         // Compare statuses based on order
         const statusComparison = statusOrder[a.status] - statusOrder[b.status];
@@ -419,10 +849,17 @@ addFilter('orderClaims', function (claims) {
         
         // If statuses are the same, sort by corresponding date in descending order
         const dateField = a.status === "submitted" ? "submittedDate" : 
-                          a.status === "rejected" ? "rejectedDate" : "approvedDate";
+                          "processedDate";
         
-        return new Date(b[dateField]) - new Date(a[dateField]);
+        let aSubmission =  getMostRelevantSubmission(a)     
+        let bSubmission =  getMostRelevantSubmission(b)     
+        return new Date(bSubmission[dateField]) - new Date(aSubmission[dateField]);
     });
+})
+
+addFilter('getMostRelevantSubmission', (claim) => {
+    let recentClaim = getMostRelevantSubmission(claim)
+    return recentClaim
 })
 
 addFilter('userStatusTag', function (status) {
@@ -492,4 +929,41 @@ addFilter('sortByFirstName', function (inactiveClaims) {
     return inactiveClaims.sort((a, b) => {
         return a.givenName.localeCompare(b.givenName);
       });
+})
+
+addFilter('findTraining', (trainingCode, trainingArray) => {
+    return findCourseByCode(trainingCode, trainingArray)
+})
+
+addFilter('findLearner', (learnerID, learners) => {
+    return findLearnerById(learnerID, learners)
+})
+
+addFilter('trainingTypeCheck', function (trainingCode, trainingList, matchType) {
+
+    for (let trainingGroup of trainingList) {
+        for (let training of trainingGroup.courses) {
+            if (trainingCode == training.code) {
+                return trainingGroup.groupTitle == matchType;
+            }
+        }
+    }
+
+})
+
+addFilter('findUser', function (email, org) {
+    users = flattenUsers(org)
+    let user = null;
+    for (let u of users) {
+        if (u.email == email) {
+            user = u
+        }
+    }
+    return user;
+})
+
+
+addFilter('findSubmissionByDate', function (submissions, submittedDate) {
+    const submission = submissions.find(s => s.submittedDate == submittedDate);
+    return submission
 })
