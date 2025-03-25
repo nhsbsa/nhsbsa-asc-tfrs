@@ -305,7 +305,7 @@ router.get('/process-claim-back-handler', function (req, res) {
       req.session.data.processClaimStep = "otherRejectionNote"
     }
 }
-
+  req.session.data.stepNumber = Number(req.session.data.stepNumber) - 1
   return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
@@ -329,7 +329,7 @@ router.get('/start-processing', function (req, res) {
     } else if (claim.claimType == "40")  {
         req.session.data.processClaimStep = "checkCompletion"
     }
-    
+    req.session.data.stepNumber = 1
     return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 
@@ -858,6 +858,7 @@ router.post('/payment-check-handler', function (req, res) {
     }
   }
 
+  req.session.data.stepNumber = Number(req.session.data.stepNumber) + 1
   return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
@@ -894,7 +895,7 @@ router.post('/cost-per-learner-handler', function (req, res) {
       req.session.data.processClaimStep = "checkOther"
     }
   }
-
+  req.session.data.stepNumber = Number(req.session.data.stepNumber) + 1
   return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
@@ -920,7 +921,7 @@ router.post('/payment-rejection-note-handler', function (req, res) {
     req.session.data.result = "reject"
     req.session.data.processClaimStep = "confirmOutcome"
   }
-
+  req.session.data.stepNumber = Number(req.session.data.stepNumber) + 1
   return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
@@ -949,7 +950,7 @@ router.post('/payment-query-note-handler', function (req, res) {
       req.session.data.processClaimStep = "checkOther"
     }
   }
-
+  req.session.data.stepNumber = Number(req.session.data.stepNumber) + 1
   return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
@@ -974,7 +975,7 @@ router.post('/completion-check-handler', function (req, res) {
       req.session.data.processClaimStep = "completionQueryNote"
     }
   }
-
+  req.session.data.stepNumber = Number(req.session.data.stepNumber) + 1
   return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
@@ -992,7 +993,7 @@ router.post('/completion-rejection-note-handler', function (req, res) {
       req.session.data.result = "reject";
       req.session.data.processClaimStep = "confirmOutcome"
   }
-
+  req.session.data.stepNumber = Number(req.session.data.stepNumber) + 1
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
@@ -1010,7 +1011,7 @@ router.post('/completion-query-note-handler', function (req, res) {
     req.session.data.result = "query";
     req.session.data.processClaimStep = "checkOther"
   }
-
+  req.session.data.stepNumber = Number(req.session.data.stepNumber) + 1
     res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
@@ -1094,7 +1095,7 @@ router.post('/other-check-handler', function (req, res) {
     }
 
   }
-
+  req.session.data.stepNumber = Number(req.session.data.stepNumber) + 1
   return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
@@ -1112,7 +1113,7 @@ router.post('/other-rejection-note-handler', function (req, res) {
       req.session.data.result = "reject";
       req.session.data.processClaimStep = "confirmOutcome"
   }
-
+  req.session.data.stepNumber = Number(req.session.data.stepNumber) + 1
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
@@ -1130,8 +1131,8 @@ router.post('/other-query-note-handler', function (req, res) {
     req.session.data.result = "query";
     req.session.data.processClaimStep = "confirmOutcome"
   }
-
-    res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+  req.session.data.stepNumber = Number(req.session.data.stepNumber) + 1
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
 });
 
