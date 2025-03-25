@@ -292,8 +292,13 @@
         ]
       },
       "users": {
-        "active": [
-          {
+        "active": [],
+        "inactive": [{
+          "givenName": "Fredrick",
+          "familyName": "Smith",
+          "email": "fredrick.smith@dawnstar.com"
+        },
+        {
           "givenName": "Daniel",
           "familyName": "Jones",
           "email": "d.jones@dawnstar.com"
@@ -307,23 +312,8 @@
           "givenName": "Flossie",
           "familyName": "Gleason",
           "email": "flossie.gleason@dawnstar.com"
-        }
-      ],
-        "inactive": [{
-          "givenName": "Fredrick",
-          "familyName": "Smith",
-          "email": "fredrick.smith@dawnstar.com"
         }],
-        "invited": [{
-          "givenName": "Charlotte",
-          "familyName": "Dandy",
-          "email": "charlotte.dandy@dawnstar.com"
-        },
-        {
-          "givenName": "Abel",
-          "familyName": "Mellow",
-          "email": "abel.mellow@dawnstar.com"
-        }]
+        "invited": []
       },
       "bankDetails": {
         "nameOnAccount": "Evergreen Care Home",
