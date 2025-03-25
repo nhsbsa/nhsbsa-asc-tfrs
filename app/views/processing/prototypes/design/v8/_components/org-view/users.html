@@ -44,19 +44,14 @@
     
         {% endif %}
         
-        <h1 class="govuk-heading-l govuk-!-margin-top-6">Contacts</h1>   
-
-        
-        
+        <h2 class="govuk-heading-l govuk-!-margin-top-6">Contacts</h2>   
+        <h3 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer (SRO)</h3>
         {% if (data.userType == "leadProcessor") %}
-        <h2 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer (SRO)</h2>
         <a href="../change-sro/signatory-details?SROChange=replace" class="govuk-button" data-module="govuk-button">
             Add new SRO
         </a>
         {% endif %}
-
             <table class="govuk-table {% if (data.userType != 'leadProcessor') %}govuk-!-margin-top-6{% endif %}">
-                {% if (data.userType != "leadProcessor") %}<caption class="govuk-table__caption govuk-table__caption--m">Senior Responsible Officer (SRO)</caption>{% endif %}
                 <thead class="govuk-table__head">
                     <tr class="govuk-table__row">
                         <th class="govuk-table__header" scope="col" width="{{nameColumnWidth}}">Name</th>
@@ -86,10 +81,12 @@
 </div>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
-        
+        <h2 class="govuk-heading-m govuk-!-margin-top-6">Submitters</h3> 
+        {% if (org.users.active.length == 0 and org.users.invited.length == 0 and org.users.inactive.length == 0) %} 
+        <p class="govuk-body">No submitters added yet.</p>
+        {% else %}
         {% if (org.users.active.length > 0 or org.users.invited.length > 0) %} 
-            <table class="govuk-table govuk-!-margin-top-6">
-                <caption class="govuk-table__caption govuk-table__caption--m">Submitters</caption>
+            <table class="govuk-table">
                 <thead class="govuk-table__head">
                     <tr class="govuk-table__row">
                         <th class="govuk-table__header" scope="col" width="{{nameColumnWidth}}">Name</th>
@@ -115,8 +112,35 @@
                 </tbody>
             </table>
         {% else %}
-            <h2 class="govuk-heading-m govuk-!-margin-top-6">Submitters</h1>  
-            <p class="govuk-body">No submitters added yet.</p>
+            <p class="govuk-body">There are currently no active or invited submitters.</p>
+        {% endif %}
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+        {% if (org.users.inactive.length > 0) %} 
+        <p class="govuk-body govuk-!-margin-top-6">These submitters have been deleted by the SRO:</p>
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" width="{{nameColumnWidth}}">Name</th>
+                    <th class="govuk-table__header" scope="col" width="{{emailColumnWidth}}">Email</th>
+                    <th class="govuk-table__header" scope="col" width="{{statusColumnWidth}}">Status</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                {% for user in (org.users.inactive | sortByFirstName) %}
+                    <tr class="govuk-table__row" id="{{ user.givenName}} {{ user.familyName}}">
+                        <td class="govuk-table__cell">{{ user.givenName}} {{ user.familyName}}</td>
+                        <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
+                        <td class="govuk-table__cell">{{ "inactive" | userStatusTag }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="govuk-body govuk-!-margin-top-6">No submitters have been deleted by the SRO.</p>
+        {% endif %}
         {% endif %}
     </div>
 </div>
