@@ -24,7 +24,7 @@
                             {% if (data.emptyError) %}
                             <a href="#claimID"> Enter a claim reference number</a>
                             {% elif (data.notFound) %}
-                            <a href="#claimID">No match returned for your search: <q>{{ data.claimID }}</a>
+                            <a href="#claimID">No match returned for your search: <q>{{ data.id }}</a>
                             {% else %}
                             <a href="#claimID">Enter a claim reference number in the correct format</a>
                             {% endif %}
@@ -41,10 +41,8 @@
         <form action="../search-claim-id" method="post" novalidate>
             <div class="govuk-form-group">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="claim-id-hint">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m" >
-                        <label for="claimID">
-                            What is the claim reference number?
-                        </label>
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        What is the claim reference number?
                     </legend>
                     <div id="claim-id-hint" class="govuk-hint">
                         For example, WR5-R2P4-DSL4 or WR5-R2P4-DSL4-C
@@ -55,7 +53,7 @@
                             {% if (data.emptyError) %}
                             <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number
                             {% elif (data.notFound) %}
-                            <span class="govuk-visually-hidden">Error:</span> No match returned for your search: <q>{{ data.claimID }}
+                            <span class="govuk-visually-hidden">Error:</span> No match returned for your search: <q>{{ data.id }}
                             {% else %}
                             <span class="govuk-visually-hidden">Error:</span> Enter a claim reference number in the
                             correct format
@@ -65,7 +63,7 @@
                         <input
                             class="govuk-input govuk-input--width-10 {% if (data.invalidIDError or data.notFound) %} govuk-input--error {% endif %} "
                             aria-describedby="claim-id-hint {% if (data.invalidIDError or data.notFound) %} event-name-error {% endif %}"
-                            id="claimID" name="claimID" type="text" value="{{data.claimID}}">
+                            id="claimID" name="claimID" type="text">
                     </div>
                 </fieldset>
             </div>
