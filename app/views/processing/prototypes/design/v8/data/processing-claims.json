@@ -1,5 +1,167 @@
 [
   {
+    "claimID": "3SH-I94K-JSND-B",
+    "workplaceID": "B02944934",
+    "claimType": "60",
+    "status": "approved",
+    "createdDate": "2025-01-01T00:06:28.462Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "lena.caldwell@evergreencare.com",
+        "submittedDate": "2025-01-04T07:53:32.066Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "NX 76 8F 30 D",
+        "startDate": "2025-02-24T09:54:13.322Z",
+        "costDate": "2024-10-18T14:35:08.968Z",
+        "evidenceOfPayment": ["october-statement"],
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "costPerLearner": 108
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2025-02-03T06:15:38.665Z",
+        "processedBy": "Allan Connelly"
+      }
+    ]
+  },
+  {
+    "claimID": "3SH-I94K-JSND-C",
+    "workplaceID": "B02944934",
+    "claimType": "40",
+    "status": "submitted",
+    "createdDate": "2025-02-03T00:12:28.462Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "d.jones@evergreencare.com",
+        "submittedDate": "2025-03-06T08:21:17.133Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "NX 76 8F 30 D",
+        "startDate": "2025-02-24T09:54:13.322Z",
+        "completionDate": "2025-02-27T03:16:00.448Z",
+        "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "otherCheck": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
+  }, 
+
+  {
+    "claimID": "ASK-74V3-JSK4-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "status": "submitted",
+    "createdDate": "2024-07-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-02-01T11:52:30.850Z",
+        "trainingCode": "DLEDI",
+        "learnerID": "ZX 51 96 87 D",
+        "startDate": "2024-07-21T03:36:53.621Z",
+        "costDate": "2024-09-25T12:05:18.831Z",
+        "evidenceOfPayment": ["sept-bankstatement.png"],
+        "completionDate": "2024-10-02T11:52:30.850Z",
+        "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "otherCheck": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }, 
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2024-10-07T11:52:30.850Z",
+        "trainingCode": "DLEDI",
+        "learnerID": "LE 09 5F 94 M",
+        "startDate": "2024-07-21T03:36:53.621Z",
+        "costDate": "2024-09-23T12:05:18.831Z",
+        "evidenceOfPayment": ["sept-bankstatement.png"],
+        "completionDate": "2024-10-02T11:52:30.850Z",
+        "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The date of payment in the evidence of payment did not match the payment date given in the claim. Update the payment date or provide the correct evidence",
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The learner name in the completion certificate does not match the learner given in the claim. Need to provide the correct certificate for the correct learner."
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2025-01-20T11:52:30.850Z",
+        "processedBy": "Flossie Gleason"
+      }
+    ]
+  }, 
+  {
+    "claimID": "SKD-74V3-JSK4-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "status": "submitted",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "IMLM",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-11-11T03:36:53.621Z",
+        "evidenceOfPayment": ["november-bankstatement.pdf"],
+        "completionDate": "2025-02-01T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "otherCheck": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
+  },
+  {
     "claimID": "HMJ-74V3-T8V5-A",
     "workplaceID": "B02944934",
     "claimType": "100",
