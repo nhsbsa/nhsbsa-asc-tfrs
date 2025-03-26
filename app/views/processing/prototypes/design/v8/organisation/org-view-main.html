@@ -96,7 +96,7 @@
                   </a>
                 </li>
                 <li class="govuk-service-navigation__item {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}govuk-service-navigation__item--active{%endif%}">
-                  <a class="govuk-service-navigation__link" href="../org-tab-handler/claims" {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="true"{%endif%}>
+                  <a class="govuk-service-navigation__link" {% if data.id %} href="../org-tab-handler/singleClaim"{% else%} href="../org-tab-handler/claims"{% endif%} {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="true"{%endif%}>
                     {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Claims{% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}</strong>{%endif%}
                   </a>
                 </li>
