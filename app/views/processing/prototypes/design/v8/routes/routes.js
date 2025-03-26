@@ -828,12 +828,31 @@ router.post('/signatory-change-handler', function (req, res) {
   const givenName = req.session.data.givenName
   const email = req.session.data.email
 
+  const SROChange = req.session.data.SROChange
+
   const result = signatoryCheck(familyName, givenName, email)
 
+  let noChange = false
+
+  if (SROChange == 'edit') {
+    const orgId = req.session.data.orgId
+    const organisations = req.session.data.organisations
+    for (const org of organisations) {
+      if (org.workplaceID == orgId) {
+        noChange = org.signatory.active.familyName == familyName && org.signatory.active.givenName == givenName && org.signatory.active.email == email
+      }
+    }
+  }
+
   if (result.signatoryValid) {
-    delete req.session.data.submitError
-    res.redirect('change-sro/updated-signatory-invitation')
-  } else {
+    if (noChange) {
+      req.session.data.submitError = "noChange"
+      res.redirect('change-sro/signatory-details')
+    } else {
+      delete req.session.data.submitError
+      res.redirect('change-sro/updated-signatory-invitation')
+    }
+  } else {  
     req.session.data.submitError = result
     res.redirect('change-sro/signatory-details')
   }

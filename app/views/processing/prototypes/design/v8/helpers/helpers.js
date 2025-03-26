@@ -91,7 +91,7 @@ function checkWDSFormat(id) {
 
 }
 
-function signatoryCheck(familyName, givenName, email, ) {
+function signatoryCheck(familyName, givenName, email) {
     const result = {}
 
     if (familyName =="") {
