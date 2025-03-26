@@ -1,7 +1,14 @@
 <h3 class="govuk-heading-m">Step {{data.stepNumber}}: Confirm claim decision</h3>
 
 {% if data.result == "reject" %}
+    {% if data.other == "reject" %}
+        <p class="govuk-body">The claim has been <span class="govuk-!-font-weight-bold">rejected</span> for a reason not related to evidence.</p>
+
+    {% else %}
     <p class="govuk-body">The claim has <span class="govuk-!-font-weight-bold">not met</span> the evidence criteria and therefore should be <span class="govuk-!-font-weight-bold">rejected</span>.</p>
+
+    {% endif %}
+
 {% endif %}
 
 {% if data.result == "query" %}
@@ -83,7 +90,7 @@
 
     {% if (data.other == "reject") %}
 
-        <p class='govuk-body'>There is another reason why this claim could not be approved.</p>
+        <p class='govuk-body'>There is another reason, not related to evidence, why this claim could not be approved.</p>
         <p class='govuk-body'>{{data.otherRejectNote}}</p>
 
     {% endif %}
