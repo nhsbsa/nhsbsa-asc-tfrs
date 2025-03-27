@@ -176,16 +176,23 @@ addFilter('orgErrorMessage', function (error) {
 addFilter('signatoryErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
-    if (submitError.familyName == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a last (family) name</a></li>')
-    }
-    if (submitError.givenName == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a first (given) name</a></li>')
-    }
-    if (submitError.email == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address</a></li>')
-    } else if (submitError.email == "invalid") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address in the correct format, like name@example.com</a></li>')
+    if (submitError == "noChange") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#">You need to change at least one field before you can continue</a></li>')
+    } else {
+        if (submitError.familyName == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a last (family) name</a></li>')
+        }
+        if (submitError.givenName == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a first (given) name</a></li>')
+        }
+        if (submitError.email == "missing") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address</a></li>')
+        } else if (submitError.email == "invalid") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address in the correct format, like name@example.com</a></li>')
+        }else if (submitError.email == "duplicate") {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">This email address is already in use</a></li>')
+        }
+
     }
     return errorSummaryStr
 }, { renderAsHtml: true });
