@@ -1103,3 +1103,15 @@ addFilter('getRejectionNote', (submission) => {
 addFilter('getReimbursementAmount', (submission, training) => {
     return Math.min(submission.evidenceOfPaymentReview.costPerLearner, training.reimbursementAmount);
 })
+
+addFilter('comparePaymentDate', function(date) {
+    const paymentDate = new Date(date);
+
+    const policyDate = new Date('2025-04-01');
+
+    if (paymentDate >= policyDate) {
+        return true
+    } else {
+        return false
+    }
+})
