@@ -1,4 +1,4 @@
-{% extends "../layouts/claims-main.html" %}
+{% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 {% set submission = claim | getMostRelevantSubmission%}
 {% set learner = submission.learnerID | findLearner(data["learners"])%}

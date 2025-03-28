@@ -1,4 +1,4 @@
-{% extends "../layouts/claims-main.html" %}
+{% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims) %}
 {% if claim.claimType == "60" or claim.claimType == "40" %}
 {% set pairID = claim.claimID | findPair(data.claims) %}

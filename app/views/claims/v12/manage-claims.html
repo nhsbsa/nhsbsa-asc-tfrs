@@ -1,4 +1,4 @@
-{% extends "./layouts/claims-main.html" %}
+{% extends "./_layouts/claims-main.html" %}
 
 {% set status = data.statusID | statusDetails(data.statuses) %}
 {% set numClaims = status.id | claimCount(data.claims, data.fundingPot) %}
