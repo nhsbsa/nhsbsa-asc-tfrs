@@ -78,9 +78,9 @@ function generateLearners (quantity, version) {
   let data = [];
   //Load data from JSON file
 
-  const rolesData = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/data/role-types.json', 'utf8'));
+  const rolesData = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/_data/role-types.json', 'utf8'));
 
-  const preSetLearners = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/data/pre-set-learners.json', 'utf8'));
+  const preSetLearners = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/_data/pre-set-learners.json', 'utf8'));
   data = data.concat(preSetLearners);
 
 
@@ -104,7 +104,7 @@ function generateLearners (quantity, version) {
   }
 
   // Write data to learners.json
-  const jsonFilePath = './app/views/claims/' + version + '/data/learners.json';
+  const jsonFilePath = './app/views/claims/' + version + '/_data/learners.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
   //reset seed
   faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));

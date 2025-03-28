@@ -860,7 +860,7 @@ router.get('/confirm-delete-claim', function (req, res) {
 function loadData(req) {
   // pull in the prototype data object and see if it contains a datafile reference
   let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
-  const path = 'app/views/claims/v13/data/'
+  const path = 'app/views/claims/v13/_data/'
 
   var learnersFile = 'learners.json'
   var trainingFile = 'training.json'

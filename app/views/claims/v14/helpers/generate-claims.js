@@ -71,9 +71,9 @@ function generateTUClaims(quantity, version) {
   const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
 
   // Load JSON files
-  const learners = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/data/learners.json', 'utf8'));
-  const training = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/data/training.json', 'utf8'));
-  const statuses = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/data/claim-item-statuses.json', 'utf8'));
+  const learners = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/_data/learners.json', 'utf8'));
+  const training = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/_data/training.json', 'utf8'));
+  const statuses = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/_data/claim-item-statuses.json', 'utf8'));
 
   for (let i = 1; i <= quantity; i++) {
     faker.seed(i);
@@ -232,9 +232,9 @@ function generateCPDClaims(quantity, version) {
   const creators = ['Flossie Gleason', 'Allan Connelly', 'Mara Monahan']
   
   // Load JSON files
-  const learners = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/data/learners.json', 'utf8'));
-  const activities = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/data/cpd-activities.json', 'utf8'));
-  const statuses = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/data/claim-item-statuses.json', 'utf8'));
+  const learners = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/_data/learners.json', 'utf8'));
+  const activities = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/_data/cpd-activities.json', 'utf8'));
+  const statuses = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/_data/claim-item-statuses.json', 'utf8'));
   
   for (let i = 1; i <= quantity; i++) {
     faker.seed(i+10000);
@@ -311,7 +311,7 @@ function generateCPDClaims(quantity, version) {
 function generateClaims(quantity, version) {
   let data = [];
 
-  const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/data/pre-set-claims.json', 'utf8'));
+  const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/' + version + '/_data/pre-set-claims.json', 'utf8'));
   data = data.concat(preSetClaims)
 
   const TUClaims = generateTUClaims(Math.floor(quantity * 0.96), version);
@@ -320,7 +320,7 @@ function generateClaims(quantity, version) {
   data = data.concat(TUClaims, CPDClaims);
 
   // Write data to learners.json
-  const jsonFilePath = './app/views/claims/' + version + '/data/claims.json';
+  const jsonFilePath = './app/views/claims/' + version + '/_data/claims.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
 }
 

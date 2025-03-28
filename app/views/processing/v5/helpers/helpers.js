@@ -10,7 +10,7 @@ function loadJSONFromFile(fileName, path = 'app/data/') {
 function loadData(req) {
     // pull in the prototype data object and see if it contains a datafile reference
     let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
-    const path = 'app/views/processing/v5/data/'
+    const path = 'app/views/processing/v5/_data/'
 
     var learnersFile = 'learners.json'
     var claimsFile = 'processing-claims.json'

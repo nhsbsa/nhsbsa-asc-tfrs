@@ -1057,7 +1057,7 @@ router.get('/signin-handler', function (req, res) {
 function loadData(req) {
   // pull in the prototype data object and see if it contains a datafile reference
   let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
-  const path = 'app/views/claims/v15/data/'
+  const path = 'app/views/claims/v15/_data/'
 
   var learnersFile = 'learners.json'
   var trainingFile = 'training.json'
@@ -1086,7 +1086,7 @@ function loadData(req) {
 router.post('/load-data', function (req, res) {
 
   //Load data from JSON files
-  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/v15/data/')
+  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/v15/_data/')
   const orgID = req.session.data['orgID']
 
   for (const organisation of organisations) {
@@ -1106,7 +1106,7 @@ router.post('/load-data', function (req, res) {
 router.get('/load-data-account-test', function (req, res) {
   //Load data from JSON files
 
-  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/v15/data/')
+  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/v15/_data/')
   const orgID = req.session.data['orgID']
 
   for (const organisation of organisations) {
@@ -1125,14 +1125,14 @@ router.get('/load-data-account-test', function (req, res) {
 router.get('/generate', function (req, res) {
   generateLearners(50);
   let claims = []
-  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v15/data/organisations.json', 'utf8'));
+  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v15/_data/organisations.json', 'utf8'));
   for (const org of organisations) {
     if (org.numberOfClaims >0) {
       claims = claims.concat(generateClaims(org.workplaceID));
     }
   }
   // Write data to claims.json
-  const jsonFilePath = './app/views/claims/v15/data/claims.json';
+  const jsonFilePath = './app/views/claims/v15/_data/claims.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
 
   res.redirect('../')
