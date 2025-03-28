@@ -14,6 +14,12 @@ const claimsVersions = fs.readdirSync('./app/views/claims')
   .filter(dir => /^v\d+$/.test(dir)) // Match folders like "v1", "v2", "v3"
   .map(dir => dir.replace('v', '')); // Extract version number
 
+  // Read available versions dynamically from the processing directory
+const processingVersions = fs.readdirSync('./app/views/processing')
+.filter(dir => /^v\d+$/.test(dir)) // Match folders like "v1", "v2", "v3"
+.map(dir => dir.replace('v', '')); // Extract version number
+
+
 // Load claims routes in
 claimsVersions.forEach(version => {
   const routePath = path.join(__dirname, `./views/claims/v${version}/_routes/routes.js`);
@@ -25,12 +31,7 @@ claimsVersions.forEach(version => {
   }
 });
 
-// Read available versions dynamically from the claims directory
-const processingVersions = fs.readdirSync('./app/views/processing')
-  .filter(dir => /^v\d+$/.test(dir)) // Match folders like "v1", "v2", "v3"
-  .map(dir => dir.replace('v', '')); // Extract version number
-
-// Load claims routes in
+// Load processing routes in
 processingVersions.forEach(version => {
   const routePath = path.join(__dirname, `./views/processing/v${version}/_routes/routes.js`);
   
@@ -41,7 +42,7 @@ processingVersions.forEach(version => {
   }
 });
 
-// Add your routes here
+
 router.use((req, res, next) => {
 
   //Load the correct version of the filters to use based on the version number
