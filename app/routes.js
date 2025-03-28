@@ -54,7 +54,7 @@ router.use((req, res, next) => {
 
     try {
       // Construct the path for the new filters file
-      const filtersPath = '../app/views/' + section + '/v' + version + '/filters/filters.js';
+      const filtersPath = '../app/views/' + section + '/v' + version + '/_filters/filters.js';
       const resolvedFiltersPath = require.resolve(filtersPath);
 
       // Iterate through require.cache and remove only old 'filters.js' files, keeping the new one
