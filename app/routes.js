@@ -10,32 +10,32 @@ const path = require('path');
 
 // Include version-specific routes
 // Read available versions dynamically from the claims directory
-const claimsVersions = fs.readdirSync('./app/views/claims/prototypes/design')
+const claimsVersions = fs.readdirSync('./app/views/claims')
   .filter(dir => /^v\d+$/.test(dir)) // Match folders like "v1", "v2", "v3"
   .map(dir => dir.replace('v', '')); // Extract version number
 
 // Load claims routes in
 claimsVersions.forEach(version => {
-  const routePath = path.join(__dirname, `./views/claims/prototypes/design/v${version}/routes/routes.js`);
+  const routePath = path.join(__dirname, `./views/claims/v${version}/routes/routes.js`);
   
   if (fs.existsSync(routePath)) {
-    router.use(`/claims/prototypes/design/v${version}`, require(routePath));
+    router.use(`/claims/v${version}`, require(routePath));
   } else {
     console.warn(`Warning: routes.js not found for v${version}, skipping...`);
   }
 });
 
 // Read available versions dynamically from the claims directory
-const processingVersions = fs.readdirSync('./app/views/processing/prototypes/design')
+const processingVersions = fs.readdirSync('./app/views/processing')
   .filter(dir => /^v\d+$/.test(dir)) // Match folders like "v1", "v2", "v3"
   .map(dir => dir.replace('v', '')); // Extract version number
 
 // Load claims routes in
 processingVersions.forEach(version => {
-  const routePath = path.join(__dirname, `./views/processing/prototypes/design/v${version}/routes/routes.js`);
+  const routePath = path.join(__dirname, `./views/processing/v${version}/routes/routes.js`);
   
   if (fs.existsSync(routePath)) {
-    router.use(`/processing/prototypes/design/v${version}`, require(routePath));
+    router.use(`/processing/v${version}`, require(routePath));
   } else {
     console.warn(`Warning: routes.js not found for v${version}, skipping...`);
   }
@@ -46,7 +46,7 @@ router.use((req, res, next) => {
 
   //Load the correct version of the filters to use based on the version number
   // Use a regular expression to extract the section ("processing" or "claims") and the version number
-  const match = req.path.match(/\/(processing|claims)\/.*\/v(\d+)\//);
+  const match = req.path.match(/\/(processing|claims)\/v(\d+)\//);
 
   if (match) {
     const section = match[1]; // "processing" or "claims"
@@ -54,13 +54,13 @@ router.use((req, res, next) => {
 
     try {
       // Construct the path for the new filters file
-      const filtersPath = '../app/views/' + section + '/prototypes/design/v' + version + '/filters/filters.js';
+      const filtersPath = '../app/views/' + section + '/v' + version + '/filters/filters.js';
       const resolvedFiltersPath = require.resolve(filtersPath);
 
       // Iterate through require.cache and remove only old 'filters.js' files, keeping the new one
       Object.keys(require.cache).forEach((key) => {
         if (
-          key.match(/\/app\/views\/(processing|claims)\/.*\/v\d+\/filters\/filters\.js$/) &&
+          key.match(/\/app\/views\/(processing|claims)\/v\d+\/filters\/filters\.js$/) &&
           key !== resolvedFiltersPath // Only delete if it's not the current filters file
         ) {
           delete require.cache[key];

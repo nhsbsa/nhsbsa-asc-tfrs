@@ -1,0 +1,197 @@
+{% extends "claims/v1/layouts/claims-main.html" %}
+
+{% block pageTitle %}
+  GOV.UK page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-breadcrumbs">
+    <ol class="govuk-breadcrumbs__list">
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="#">Home</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="#">Claims items</a>
+      </li>
+    </ol>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div class="moj-page-header-actions">
+
+        <div class="moj-page-header-actions__title">
+          <h1 class="govuk-heading-xl">Claims items</h1>
+        </div>
+      
+        <div class="moj-page-header-actions__actions">
+      
+          <div class="moj-button-menu">
+            <div class="moj-button-menu__wrapper">
+      
+              <a class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button" href="claim-items/add-claim-item/new-claim-item.html">
+                Add new claim item
+              </a>
+      
+              <a class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button" href="claim-items/add-evidence/add-evidence">
+                Add evidence
+              </a>
+      
+            </div>
+          </div>
+      
+        </div>
+      
+    </div>      
+    <div class="govuk-width-container">
+        <main class="govuk-main-wrapper">
+            <div class="govuk-tabs" data-module="govuk-tabs">
+                <h2 class="govuk-tabs__title">
+                  Contents
+                </h2>
+                <ul class="govuk-tabs__list">
+                  <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+                    <a class="govuk-tabs__tab" href="#cpd">
+                      RHP Continuous Professional Development
+                    </a>
+                  </li>
+                  <li class="govuk-tabs__list-item">
+                    <a class="govuk-tabs__tab" href="#tu">
+                      Targeted Upskilling
+                    </a>
+                  </li>
+                </ul>
+                <div class="govuk-tabs__panel" id="tu">
+                    <div class="govuk-grid-row">
+                        <div class="govuk-grid-column-one-third">
+                            <div class="moj-filter">
+
+                                <div class="moj-filter__header">
+                            
+                                    <div class="moj-filter__header-title">
+                                        <h2 class="govuk-heading-m">Sort</h2>
+                                    </div>
+                                
+                                    <div class="moj-filter__header-action">
+                                
+                                    </div>
+                                </div>
+
+                                <div class="moj-filter__options">                            
+                                    <form method="get" action="#tu" class="form">
+                                    <div class="govuk-form-group">
+                                        <fieldset class="govuk-fieldset">
+                                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+
+                                            Group by
+                                
+                                            </legend>
+                                        <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+                                            <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="groupby" name="groupby" type="radio" value="learner" {% if data['groupby'] == "learner" %}checked {% endif %}>
+                                            <label class="govuk-label govuk-radios__label" for="groupby">
+                                                Learner
+                                            </label>
+                                            </div>
+                                            <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="groupby" name="groupby" type="radio" value="l&devent" {% if data['groupby'] == "l&devent" %}checked {% endif %}>
+                                            <label class="govuk-label govuk-radios__label" for="groupby">
+                                                L&D Event
+                                            </label>
+                                            </div>
+                                        </div>
+
+                                        </fieldset>
+                                    </div>
+                                    <div class="govuk-form-group">
+                                        <fieldset class="govuk-fieldset">
+                                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+
+                                            Order by
+                                
+                                            </legend>
+                                        <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+                                            <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="orderby" name="orderby" type="radio" value="fname" checked>
+                                            <label class="govuk-label govuk-radios__label" for="orderby">
+                                                First name
+                                            </label>
+                                            </div>
+                                            <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="orderby" name="orderby" type="radio" value="lname">
+                                            <label class="govuk-label govuk-radios__label" for="orderby-1">
+                                                Last name
+                                            </label>
+                                            </div>
+                                        </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="govuk-form-group">
+                                    <button class="govuk-button" data-module="govuk-button">
+                                        Apply group and sort
+                                    </button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!--Filter Start-->
+                            {% include "../claim-items/_includes/TU/filter.html" %}
+                            <!--Filter End-->  
+                        </div>
+                        <div class="govuk-grid-column-two-thirds">
+                            <div class="govuk-grid-row">
+                                <div class="govuk-grid-column-full govuk-!-padding-bottom-6">
+                                    <div class="moj-search">
+
+                                        <form action="#" method="post">
+                                    
+                                        <div class="govuk-form-group">
+                                            <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+                                            Find a person or course
+                                            </label>
+                                    
+                                            <div id="search-hint" class="govuk-hint moj-search__hint ">
+                                            You can search by a person's name or by a course name
+                                            </div>
+                                    
+                                            <input class="govuk-input moj-search__input " id="search" name="search" type="search" aria-describedby="search-hint">
+                                    
+                                        </div>
+                                    
+                                        <button class="govuk-button moj-search__button " data-module="govuk-button">
+                                            Search
+                                        </button>
+                                    
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="govuk-grid-row">
+                                <div class="govuk-grid-column-full">
+                                    {% if data['groupby'] == "learner" %}
+                                    {% include "../claim-items/_includes/TU/learner-card.html" %}
+                                    {% include "../claim-items/_includes/TU/learner-card.html" %}
+                                    {% include "../claim-items/_includes/TU/learner-card.html" %}
+                                    {% include "../claim-items/_includes/TU/learner-card.html" %}
+                                    {% endif %}
+                                    {% if data['groupby'] == "l&devent" %}
+                                    {% include "../claim-items/_includes/TU/l&devent-card.html" %}
+                                    {% include "../claim-items/_includes/TU/l&devent-card.html" %}
+                                    {% include "../claim-items/_includes/TU/l&devent-card.html" %}
+                                    {% include "../claim-items/_includes/TU/l&devent-card.html" %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+      </div>
+   
+</div>
+
+{% endblock %}
