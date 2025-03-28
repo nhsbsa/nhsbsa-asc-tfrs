@@ -16,7 +16,7 @@ const claimsVersions = fs.readdirSync('./app/views/claims')
 
 // Load claims routes in
 claimsVersions.forEach(version => {
-  const routePath = path.join(__dirname, `./views/claims/v${version}/routes/routes.js`);
+  const routePath = path.join(__dirname, `./views/claims/v${version}/_routes/routes.js`);
   
   if (fs.existsSync(routePath)) {
     router.use(`/claims/v${version}`, require(routePath));
@@ -32,7 +32,7 @@ const processingVersions = fs.readdirSync('./app/views/processing')
 
 // Load claims routes in
 processingVersions.forEach(version => {
-  const routePath = path.join(__dirname, `./views/processing/v${version}/routes/routes.js`);
+  const routePath = path.join(__dirname, `./views/processing/v${version}/_routes/routes.js`);
   
   if (fs.existsSync(routePath)) {
     router.use(`/processing/v${version}`, require(routePath));
