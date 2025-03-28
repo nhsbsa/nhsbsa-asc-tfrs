@@ -974,3 +974,15 @@ addFilter('findSubmissionByDate', function (submissions, submittedDate) {
     const submission = submissions.find(s => s.submittedDate == submittedDate);
     return submission
 })
+
+addFilter('comparePaymentDate', function(date) {
+    const paymentDate = new Date(date);
+
+    const policyDate = new Date('2025-04-01');
+
+    if (paymentDate >= policyDate) {
+        return true
+    } else {
+        return false
+    }
+})

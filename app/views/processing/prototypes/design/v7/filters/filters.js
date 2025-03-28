@@ -493,3 +493,15 @@ addFilter('sortByFirstName', function (inactiveClaims) {
         return a.givenName.localeCompare(b.givenName);
       });
 })
+
+addFilter('comparePaymentDate', function(date) {
+    const paymentDate = new Date(date);
+
+    const policyDate = new Date('2025-04-01');
+
+    if (paymentDate >= policyDate) {
+        return true
+    } else {
+        return false
+    }
+})

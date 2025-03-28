@@ -155,8 +155,8 @@
                                             <p class="govuk-hint">Enter the amount the training cost for a single learner.</p>
                                             <p class="govuk-hint">For instance, if the organisation paid £100 for 4 learners
                                                 then the cost per learner is £25.</p>
-                                            <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is
-                                                    £{{claim.training.reimbursementAmount}}.</strong></p>
+                                            <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is £{{claim.training.reimbursementAmount}}.</strong></p>
+                                            <p class="govuk-hint">This is the maximum amount for training paid for {% if (claim.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %}.</p>
                                             <p class="govuk-hint">The organisation will not get back more than they actually
                                                 paid.</p>
                                         </div>
@@ -334,35 +334,29 @@
                 reimbursement(claim.reimbursementAmount) }}</strong>.</p>
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
-            <li>maximum reimbursement amount for this training (£{{ claim.training.reimbursementAmount }})</li>
+            <li>maximum reimbursement amount for training paid for {% if (claim.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %} (£{{claim.training.reimbursementAmount}})</li>
             <li>cost per learner (what the organisation actually paid) (£{{claim.reimbursementAmount}})</li>
         </ul>
 
         {% elif (claim.fundingType == "TU") and (claim.claimType == "60") %}
-        <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £{{ claim |
-            reimbursement(claim.reimbursementAmount) / 0.6 }}.</p>
+        <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £{{ claim | reimbursement(claim.reimbursementAmount) / 0.6 }}.</p>
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
-            <li>maximum reimbursement amount for this training (£{{claim.training.reimbursementAmount}})</li>
+            <li>maximum reimbursement amount for training paid for {% if (claim.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %} (£{{claim.training.reimbursementAmount}})</li>
             <li>cost per learner (what the organisation actually paid) (£{{ claim.reimbursementAmount }})</li>
         </ul>
-        <p class="govuk-body">For this 60 part of the claim the organisation will get 60% of the total amount, which is
-            <strong>£{{ (claim | reimbursement(claim.reimbursementAmount)) }}</strong>.</p>
-        <p class="govuk-body">When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim |
-            reimbursement(claim.reimbursementAmount) / 0.6 * 0.4)}}).</p>
+        <p class="govuk-body">For this 60 part of the claim the organisation will get 60% of the total amount, which is <strong>£{{ (claim | reimbursement(claim.reimbursementAmount)) }}</strong>.</p>
+        <p class="govuk-body">When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim | reimbursement(claim.reimbursementAmount) / 0.6 * 0.4)}}).</p>
 
         {% elif (claim.fundingType == "TU") and (claim.claimType == "40") %}
-        <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim |
-            reimbursement(claim.reimbursementAmount) / 0.4) }}.</p>
+        <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim | reimbursement(claim.reimbursementAmount) / 0.4) }}.</p>
         <p class="govuk-body">This is whichever is the lower of the:</p>
         <ul class="govuk-list govuk-list--bullet">
-            <li>maximum reimbursement amount for this training (£{{claim.training.reimbursementAmount}})</li>
+            <li>maximum reimbursement amount for training paid for {% if (claim.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %} (£{{claim.training.reimbursementAmount}})</li>
             <li>cost per learner (what the organisation actually paid) (£{{claim.reimbursementAmount}})</li>
         </ul>
-        <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of the total amount, which is
-            <strong>£{{ (claim | reimbursement(claim.reimbursementAmount))}}</strong>.</p>
-        <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim |
-            reimbursement(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>
+        <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of the total amount, which is <strong>£{{ (claim | reimbursement(claim.reimbursementAmount))}}</strong>.</p>
+        <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement(claim.reimbursementAmount) / 0.4 * 0.6 )}}.</p>
         {% endif %}
 
 
