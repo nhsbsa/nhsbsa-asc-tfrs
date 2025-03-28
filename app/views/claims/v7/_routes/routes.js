@@ -1,8 +1,8 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
-const { loadJSONFromFile } = require('../helpers/JSONfileloaders.js');
+const { loadJSONFromFile } = require('../_helpers/JSONfileloaders.js');
 const { faker } = require('@faker-js/faker');
-const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../helpers/helpers.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate } = require('../_helpers/helpers.js');
 
 // v7 Prototype routes
 

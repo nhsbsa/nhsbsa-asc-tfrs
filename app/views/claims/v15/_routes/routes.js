@@ -2,9 +2,9 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair } = require('../helpers/helpers.js');
-const { generateClaims } = require('../helpers/generate-claims.js');
-const { generateLearners } = require('../helpers/generate-learners.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair } = require('../_helpers/helpers.js');
+const { generateClaims } = require('../_helpers/generate-claims.js');
+const { generateLearners } = require('../_helpers/generate-learners.js');
 
 // v15 Prototype routes
 

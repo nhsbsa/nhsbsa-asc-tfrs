@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate } = require('../helpers/helpers.js');
+const { formatDate } = require('../_helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag', function (statusID) {

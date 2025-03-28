@@ -1,6 +1,6 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
-const { loadJSONFromFile } = require('../helpers/JSONfileloaders.js');
+const { loadJSONFromFile } = require('../_helpers/JSONfileloaders.js');
 
 // V4 Prototype routes
 
