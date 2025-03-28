@@ -98,7 +98,7 @@
     </dl>
     <h2 class="govuk-heading-m">What happens next</h2>
     <p class="govuk-body">This will create {{ data['learnersSelected'] | length }} new claims, one for each learner for this activity.</p>
-    <form action="/v4/create-claims" method="post" novalidate>
+    <form action="../create-claims" method="post" novalidate>
     <input type="hidden" name="answers-checked" value="true">
     <button class="govuk-button" data-module="govuk-button">
         Accept and create new claims

@@ -49,7 +49,7 @@ router.post('/new-claim-reset', function (req, res) {
   delete req.session.data['selectedClaims'];
   delete req.session.data['selectedClaimsConfirmed'];
 
-  res.redirect('../claims/prototypes/design/v5/claim/claim-details'+'?id='+claim.claimID)
+  res.redirect('./claim/claim-details'+'?id='+claim.claimID)
 });
 
 router.post('/add-training', function (req, res) {
@@ -74,7 +74,7 @@ router.post('/add-training', function (req, res) {
 
     
 
-    res.redirect('../claims/prototypes/design/v5/claim/claim-details'+'?id='+claimID)
+    res.redirect('./claim/claim-details'+'?id='+claimID)
 });
 
 router.post('/create-date', function (req, res) {
@@ -94,7 +94,7 @@ router.post('/create-date', function (req, res) {
   delete req.session.data['activity-date-started-month'];
   delete req.session.data['activity-date-started-year'];
   
-  res.redirect('../claims/prototypes/design/v5/claim/claim-details'+'?id='+claimID)
+  res.redirect('./claim/claim-details'+'?id='+claimID)
 });
 
 router.post('/add-learner', function (req, res) {
@@ -125,7 +125,7 @@ router.post('/add-learner', function (req, res) {
     delete req.session.data.learnerInput;
     delete req.session.data.learnerSelection;
     
-    res.redirect('../claims/prototypes/design/v5/claim/claim-details'+'?id='+claimID)
+    res.redirect('./claim/claim-details'+'?id='+claimID)
 });
 
 router.post('/remove-learner', function (req, res) {
@@ -145,7 +145,7 @@ router.post('/remove-learner', function (req, res) {
         break;
     }
   }
-  res.redirect('../claims/prototypes/design/v5/claim/claim-details'+'?id='+claimID)
+  res.redirect('./claim/claim-details'+'?id='+claimID)
 });
 
 
@@ -163,7 +163,7 @@ router.post('/add-cost', function (req, res) {
 
   delete req.session.data.cost;
 
-  res.redirect('../claims/prototypes/design/v5/claim/claim-details'+'?id='+claimID)
+  res.redirect('./claim/claim-details'+'?id='+claimID)
 });
 
 router.post('/add-note', function (req, res) {
@@ -179,7 +179,7 @@ router.post('/add-note', function (req, res) {
 
   delete req.session.data.note;
 
-  res.redirect('../claims/prototypes/design/v5/claim/claim-details'+'?id='+claimID)
+  res.redirect('./claim/claim-details'+'?id='+claimID)
 });
 
 router.post('/add-evidence', function (req, res) {
@@ -218,7 +218,7 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.type;
   delete req.session.data.learnerID;
 
-  res.redirect('../claims/prototypes/design/v5/claim/claim-details'+'?id='+claimID)
+  res.redirect('./claim/claim-details'+'?id='+claimID)
 
 })
 
@@ -233,7 +233,7 @@ router.post('/save-claim', function (req, res) {
     }
   }
   delete req.session.data.id
-  res.redirect('../claims/prototypes/design/v5/manage-claims')
+  res.redirect('./manage-claims')
 
 });
 
@@ -247,9 +247,9 @@ router.post('/submit-claim', function (req, res) {
       if (checkClaim(c)) {
         c.status = 'submitted'
         c.submittedDate = dStr
-        res.redirect('../claims/prototypes/design/v5/claim/confirmation')
+        res.redirect('./claim/confirmation')
       } else {
-        res.redirect('../claims/prototypes/design/v5/claim/claim-details'+'?id='+claimID)
+        res.redirect('./claim/claim-details'+'?id='+claimID)
       }
     }
   }
@@ -290,7 +290,7 @@ router.post('/create-learner', function (req, res) {
     delete req.session.data.regID
     delete req.session.data.roleType
     delete req.session.data.learnerInput
-    res.redirect('../claims/prototypes/design/v5/claim/claim-details'+'?id='+claimID)
+    res.redirect('./claim/claim-details'+'?id='+claimID)
   } else{
     console.log('match')
     delete req.session.data.fullName
@@ -299,7 +299,7 @@ router.post('/create-learner', function (req, res) {
     delete req.session.data.regID
     delete req.session.data.roleType
     delete req.session.data.learnerInput
-    res.redirect('../claims/prototypes/design/v5/learner/add-learner?inClaim='+req.session.data.inClaim+'&existingLearner=true')
+    res.redirect('./learner/add-learner?inClaim='+req.session.data.inClaim+'&existingLearner=true')
   }
 
 });
@@ -389,7 +389,7 @@ function loadData(req) {
 router.get('/load-data', function (req, res) {
     //Load data from JSON files
     loadData(req);
-    res.redirect('../claims/prototypes/design/v5/before-you-start.html')
+    res.redirect('./before-you-start.html')
   })
 
 

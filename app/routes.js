@@ -6,34 +6,40 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const fs = require('fs');
+const path = require('path');
 
-// Add your claims routes here
-router.use('/v3/', require('./views/claims/prototypes/design/v3/routes/routes.js'))
-router.use('/v4/', require('./views/claims/prototypes/design/v4/routes/routes.js'))
-router.use('/v5/', require('./views/claims/prototypes/design/v5/routes/routes.js'))
-router.use('/v6/', require('./views/claims/prototypes/design/v6/routes/routes.js'))
-router.use('/claims/prototypes/design/v7/', require('./views/claims/prototypes/design/v7/routes/routes.js'))
-router.use('/claims/prototypes/design/v8/', require('./views/claims/prototypes/design/v8/routes/routes.js'))
-router.use('/claims/prototypes/design/v9/', require('./views/claims/prototypes/design/v9/routes/routes.js'))
-router.use('/claims/prototypes/design/v10/', require('./views/claims/prototypes/design/v10/routes/routes.js'))
-router.use('/claims/prototypes/design/v11/', require('./views/claims/prototypes/design/v11/routes/routes.js'))
-router.use('/claims/prototypes/design/v12/', require('./views/claims/prototypes/design/v12/routes/routes.js'))
-router.use('/claims/prototypes/design/v13/', require('./views/claims/prototypes/design/v13/routes/routes.js'))
-router.use('/claims/prototypes/design/v14/', require('./views/claims/prototypes/design/v14/routes/routes.js'))
-router.use('/claims/prototypes/design/v15/', require('./views/claims/prototypes/design/v15/routes/routes.js'))
+// Include version-specific routes
+// Read available versions dynamically from the claims directory
+const claimsVersions = fs.readdirSync('./app/views/claims/prototypes/design')
+  .filter(dir => /^v\d+$/.test(dir)) // Match folders like "v1", "v2", "v3"
+  .map(dir => dir.replace('v', '')); // Extract version number
 
+// Load claims routes in
+claimsVersions.forEach(version => {
+  const routePath = path.join(__dirname, `./views/claims/prototypes/design/v${version}/routes/routes.js`);
+  
+  if (fs.existsSync(routePath)) {
+    router.use(`/claims/prototypes/design/v${version}`, require(routePath));
+  } else {
+    console.warn(`Warning: routes.js not found for v${version}, skipping...`);
+  }
+});
 
-// Add your processing routes here
-router.use('/processing/prototypes/design/v1/', require('./views/processing/prototypes/design/v1/routes/routes.js'))
-router.use('/processing/prototypes/design/v2/', require('./views/processing/prototypes/design/v2/routes/routes.js'))
-router.use('/processing/prototypes/design/v3/', require('./views/processing/prototypes/design/v3/routes/routes.js'))
-router.use('/processing/prototypes/design/v4/', require('./views/processing/prototypes/design/v4/routes/routes.js'))
-router.use('/processing/prototypes/design/v5/', require('./views/processing/prototypes/design/v5/routes/routes.js'))
-router.use('/processing/prototypes/design/v6/', require('./views/processing/prototypes/design/v6/routes/routes.js'))
-router.use('/processing/prototypes/design/v7/', require('./views/processing/prototypes/design/v7/routes/routes.js'))
-router.use('/processing/prototypes/design/v8/', require('./views/processing/prototypes/design/v8/routes/routes.js'))
-router.use('/processing/prototypes/design/v9/', require('./views/processing/prototypes/design/v9/routes/routes.js'))
+// Read available versions dynamically from the claims directory
+const processingVersions = fs.readdirSync('./app/views/processing/prototypes/design')
+  .filter(dir => /^v\d+$/.test(dir)) // Match folders like "v1", "v2", "v3"
+  .map(dir => dir.replace('v', '')); // Extract version number
 
+// Load claims routes in
+processingVersions.forEach(version => {
+  const routePath = path.join(__dirname, `./views/processing/prototypes/design/v${version}/routes/routes.js`);
+  
+  if (fs.existsSync(routePath)) {
+    router.use(`/processing/prototypes/design/v${version}`, require(routePath));
+  } else {
+    console.warn(`Warning: routes.js not found for v${version}, skipping...`);
+  }
+});
 
 // Add your routes here
 router.use((req, res, next) => {

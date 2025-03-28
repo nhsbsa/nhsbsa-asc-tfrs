@@ -15,7 +15,7 @@ router.post('/add-training', function (req, res) {
     
     req.session.data['trainingChoice'] = training
 
-    res.redirect('../claims/prototypes/design/v4/new-claim/activity-profile')
+    res.redirect('./new-claim/activity-profile')
 });
 
 router.post('/select-learner', function (req, res) {
@@ -29,7 +29,7 @@ router.post('/select-learner', function (req, res) {
 
     req.session.data['learnerSelected'] = learner
     
-    res.redirect('../claims/prototypes/design/v4/new-claim/learner-profile')
+    res.redirect('./new-claim/learner-profile')
 });
 
 router.post('/add-learner', function (req, res) {
@@ -40,13 +40,13 @@ router.post('/add-learner', function (req, res) {
         req.session.data['learnersSelected'] = [req.session.data['learnerSelected']]
     }
 
-    res.redirect('../claims/prototypes/design/v4/new-claim/learner-summary')
+    res.redirect('./new-claim/learner-summary')
 });
 
 router.post('/evidence-for-claims', function (req, res) {
    
 
-    res.redirect('../claims/prototypes/design/v4/evidence/check-your-evidence-claims')
+    res.redirect('./evidence/check-your-evidence-claims')
 });
 
 router.post('/add-more-learners-answer', function (req, res) {
@@ -56,10 +56,10 @@ router.post('/add-more-learners-answer', function (req, res) {
     if (addAnother == "Yes"){
         // Send user to learner search page
         req.session.data['learner-input'] = ""
-        res.redirect('../claims/prototypes/design/v4/new-claim/select-learner')
+        res.redirect('./new-claim/select-learner')
       } else if (addAnother == "No") {
         // Send user to check your answers
-        res.redirect('../claims/prototypes/design/v4/new-claim/check-your-answers')
+        res.redirect('./new-claim/check-your-answers')
       }
     
 });
@@ -67,7 +67,7 @@ router.post('/add-more-learners-answer', function (req, res) {
 router.post('/evidence-in-claim-process', function (req, res) {
     req.session.data['addEvidenceInClaimProcess'] = true
 
-    res.redirect('../claims/prototypes/design/v4/evidence/evidence-type')
+    res.redirect('./evidence/evidence-type')
 
 
 });
@@ -79,10 +79,10 @@ router.post('/evidence-choice', function (req, res) {
     if (evidenceType == "payment"){
         // Send user to actual amount page
         req.session.data['search-input'] = ""
-        res.redirect('../claims/prototypes/design/v4/evidence/actual-amount')
+        res.redirect('./evidence/actual-amount')
       } else {
         // Send user to file upload page
-        res.redirect('../claims/prototypes/design/v4/evidence/upload')
+        res.redirect('./evidence/upload')
       }
 
 });
@@ -136,7 +136,7 @@ router.post('/update-session-data', (req, res) => {
 
     }
 
-    res.redirect('../claims/prototypes/design/v4/new-claim/confirmation')
+    res.redirect('./new-claim/confirmation')
     
   });
 
@@ -152,7 +152,7 @@ router.post('/claims-choice', function (req, res) {
         }
     }
     req.session.data.selectedClaimsConfirmed = claims
-    res.redirect('../claims/prototypes/design/v4/evidence/check-your-evidence-claims')
+    res.redirect('./evidence/check-your-evidence-claims')
 });
 
 router.post('/new-claim-reset', function (req, res) {
@@ -178,7 +178,7 @@ router.post('/new-claim-reset', function (req, res) {
     delete req.session.data['selectedClaims'];
     delete req.session.data['selectedClaimsConfirmed'];
 
-    res.redirect('../claims/prototypes/design/v4/new-claim/select-training.html')
+    res.redirect('./new-claim/select-training.html')
 });
 
 router.post('/new-evidence-reset', function (req, res) {
@@ -192,7 +192,7 @@ router.post('/new-evidence-reset', function (req, res) {
     delete req.session.data['selectedClaims'];
     delete req.session.data['selectedClaimsConfirmed'];
 
-    res.redirect('../claims/prototypes/design/v4/evidence/evidence-type')
+    res.redirect('./evidence/evidence-type')
 });
 
 function loadData(req) {
@@ -235,7 +235,7 @@ function loadData(req) {
 router.get('/load-data', function (req, res) {
     //Load data from JSON files
     loadData(req);
-    res.redirect('../claims/prototypes/design/v4/before-you-start.html')
+    res.redirect('./before-you-start.html')
   })
 
 

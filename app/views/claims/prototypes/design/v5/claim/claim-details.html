@@ -203,7 +203,7 @@
                 <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="../learner/learner-profile?learnerID={{ l.id }}">View learner details<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>
                 {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
                 <li class="govuk-summary-list__actions-list-item">
-                  <form action="/v5/remove-learner?learnerID={{ l.id }}" method="post">
+                  <form action="../remove-learner?learnerID={{ l.id }}" method="post">
                     <p class="govuk-body">
                         <button class="unstyle-card-button">Remove<span class="govuk-visually-hidden"> {{ l.fullName }}</span></button>
                     </p>
@@ -384,12 +384,12 @@
         </div>
         <p class="govuk-body"></p>
         <div class="govuk-button-group">
-          <form action="/v5/submit-claim" method="post" novalidate>
+          <form action="../submit-claim" method="post" novalidate>
             <button type="submit" class="govuk-button" data-module="govuk-button">
               Submit claim
             </button> 
           </form>
-          <form action="/v5/save-claim" method="post" novalidate>
+          <form action="../save-claim" method="post" novalidate>
             <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
               Save and finish later
             </button>

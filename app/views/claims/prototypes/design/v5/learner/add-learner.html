@@ -39,7 +39,7 @@
               Job title: {{learner.jobTitle}} <br>
               Role type: {{learner.roleType}} <br>
               {% if data.inClaim == 'true' %}
-              <form method="post" action="/v5/add-learner" class="govuk-!-margin-0">
+              <form method="post" action="../add-learner" class="govuk-!-margin-0">
                 <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
                 <button type="submit" class="unstyle-card-button">Add the existing learner to claim</button>
               </form>
@@ -57,7 +57,7 @@
         </div>
       </div>
       {% endif %}
-        <form action="/v5/create-learner" method="post" novalidate>
+        <form action="../create-learner" method="post" novalidate>
             <div class="govuk-form-group">
                 <label class="govuk-label govuk-label--s" for="full-name" aria-describedby="full-name-hint">
                   Full name

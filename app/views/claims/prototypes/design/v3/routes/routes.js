@@ -12,10 +12,10 @@ router.post('/claim-item-start-point', function (req, res) {
     // Check whether the variable matches a condition
     if (startingpoint == "bylearner"){
       // Send user to learner page
-      res.redirect('../claims/prototypes/design/v3/new-claim-item/learner/select-learner.html')
+      res.redirect('./new-claim-item/learner/select-learner.html')
     } else if (startingpoint == "byevent") {
       // Send user to event page
-      res.redirect('../claims/prototypes/design/v3/new-claim-item/event/select-event-type.html')
+      res.redirect('./new-claim-item/event/select-event-type.html')
     }
   
   })
@@ -28,16 +28,16 @@ router.post('/claim-item-start-point', function (req, res) {
     // Check whether the variable matches a condition
     if (evidence == "learner-yes"){
       // Send user to learner page
-      res.redirect('../claims/prototypes/design/v3/new-claim-item/learner/tu/add-evidence.html')
+      res.redirect('./new-claim-item/learner/tu/add-evidence.html')
     } else if (evidence == "learner-no") {
       // Send user to event page
-      res.redirect('../claims/prototypes/design/v3/new-claim-item/learner/tu/check-your-answers.html')
+      res.redirect('./new-claim-item/learner/tu/check-your-answers.html')
     } else if (evidence == "event-yes") {
       // Send user to event page
-      res.redirect('../claims/prototypes/design/v3/new-claim-item/event/tu/add-evidence.html')
+      res.redirect('./new-claim-item/event/tu/add-evidence.html')
     } else if (evidence == "event-no") {
       // Send user to event page
-      res.redirect('../claims/prototypes/design/v3/new-claim-item/event/tu/check-your-answers.html')
+      res.redirect('./new-claim-item/event/tu/check-your-answers.html')
     }
   
   })
@@ -50,10 +50,10 @@ router.post('/claim-item-start-point', function (req, res) {
     // Check whether the variable matches a condition
     if (eventtype == "cpd"){
       // Send user to learner page
-      res.redirect('../claims/prototypes/design/v3/new-claim-item/event/cpd/select-activity.html')
+      res.redirect('./new-claim-item/event/cpd/select-activity.html')
     } else if (eventtype == "tu") {
       // Send user to event page
-      res.redirect('../claims/prototypes/design/v3/new-claim-item/event/tu/select-course.html')
+      res.redirect('./new-claim-item/event/tu/select-course.html')
     }
   
   })
