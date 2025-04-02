@@ -1,0 +1,47 @@
+{% extends "../_layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{{ ["Enter job title - ", (data.claimType | potName)] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="verify-details" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="declaration" method="post" class="form">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <span class="govuk-caption-l">Complete registration</span>
+                        <h1 class="govuk-fieldset__heading" for="orgID">
+                            What is your job title?
+                        </h1>
+                    </legend>
+                    <details class="govuk-details">
+                        <summary class="govuk-details__summary">
+                            <span class="govuk-details__summary-text">
+                                Why do we need to know this?
+                            </span>
+                        </summary>
+                        <div class="govuk-details__text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </div>
+                    </details>
+                    <input class="govuk-input" aria-describedby="asc-wds-id-hint" id="jobTitle"
+                        name="jobTitle" type="text">
+                </fieldset>
+            </div>
+            <button class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

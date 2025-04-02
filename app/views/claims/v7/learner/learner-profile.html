@@ -1,0 +1,105 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set learner = null %}
+{% for l in data.learners %}
+{% if l.id == data.learnerID %}
+{% set learner = l %}
+{% endif %}
+{% endfor %}
+
+{% block pageTitle %}
+{{ ["Learner profile - ", serviceName] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="govuk-heading-l">{{ learner.fullName }}</h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h2 class="govuk-heading-m">Learner overview</h2>
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          National Insurance number
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ learner.id }}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Full name
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ learner.fullName }}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Job title
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ learner.jobTitle}}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Role type
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ learner.roleType }}
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h2 class="govuk-heading-m">Recent claims for {{ learner.fullName }}</h2>
+    {% set addHeader = true %}
+    {% for claim in data.claims %}
+    {% for l in claim.learners %}
+    {% if learner.id == l.id %}
+    {% set learnerAdded = true %}
+    {% if addHeader %}
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" scope="col">Claim Reference Number</th>
+          <th class="govuk-table__header" scope="col">Activity</th>
+          <th class="govuk-table__header" scope="col">Start Date</th>
+          <th class="govuk-table__header" scope="col">Status</th>
+          <th class="govuk-table__header" scope="col">Created on</th>
+          <th class="govuk-table__header" scope="col">Created by</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        {% set addHeader = false %}
+        {% endif %}
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">{{ claim.claimID }}</td>
+          <td class="govuk-table__cell">{{ claim.training.title }}</td>
+          <td class="govuk-table__cell">{{ claim.startDate | govukDate("truncate") }}</td>
+          <td class="govuk-table__cell">{{ claim.status | statusName(data.statuses) }}</td>
+          <td class="govuk-table__cell">{{ claim.createdDate | govukDate("truncate") }}</td>
+          <td class="govuk-table__cell">{{ claim.createdBy }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "./_layouts/claims-main.html" %}
+
+{% set status = data.statusID | statusDetails(data.statuses) %}
+{% set noClaims = status.id | claimCount(data.claims, data.claimType) %}
+
+{% block pageTitle %}
+{{ [status.name, " claims - ", (data.claimType | potName)] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="/claims/v8/manage-claims-buttons-test" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <span class="govuk-caption-l">{{ data.claimType | potName }}</span>
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3">{{ status.name }} claims ({{ noClaims }})</h2>
+        <p class="govuk-body">{{status.description}}</p>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    {% if noClaims == 0 %}
+    <div class="govuk-grid-column-full">
+            <div class="govuk-warning-text">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-visually-hidden">Warning</span>
+                    There are not currently any {{ status.name | toLowerCase }} claims.
+                </strong>
+            </div>
+        </div>
+            {% else %}
+    <div class="moj-scrollable-pane">
+        <div class="govuk-grid-column-full">
+            {% include "./_components/claims-lists/userResearchTest/TU-claim-list-item-test.html" %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+
+
+{% endblock %}

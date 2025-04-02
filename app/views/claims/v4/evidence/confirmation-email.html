@@ -1,0 +1,29 @@
+{% extends "../_layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="confirmation" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+        <h1 class="govuk-heading-l">Confirmation email</h1>
+        <h2 class="govuk-heading-m">From:</h2>
+        <p class="govuk-body">Adult social care staff learning and development reimbursement service</p>
+        <h2 class="govuk-heading-m">Subject:</h2>
+        <p class="govuk-body">Evidence added to adult social care learning and development claims</p>
+        <h2 class="govuk-heading-m">Body:</h2>
+        <p class="govuk-body">Dear [name],</p>
+        <p class="govuk-body">You have added evidence of payment to 4 claims on the <a href="https://adult-social-care-7fe9bafd955a.herokuapp.com/claims/v4/" class="govuk-link">adult social care staff learning and development reimbursement</a> service.</p>
+        <p class="govuk-body">The evidence relates to the Introduction to Dementia Care course on 12 November 2023.</p>
+        <p class="govuk-body">Log into the reimbursement service to:
+            <ul class="govuk-list govuk-list--bullet">
+                <li>view these claims</li>
+                <li>add any further necessary evidence</li>
+                <li>submit the completed claims for payment</li>
+                <li>track the progress of submitted claims</li>
+            </ul>
+        </p>
+        <p class="govuk-body">NHS Business Services Authority</p>
+</div>
+
+{% endblock %}

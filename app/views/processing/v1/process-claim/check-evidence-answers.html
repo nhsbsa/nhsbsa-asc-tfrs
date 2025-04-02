@@ -1,0 +1,47 @@
+{% extends "../_layouts/processing-main.html" %}
+
+{% set claim = data.id | findClaim(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Review evidence claim: ", claim.claimID, " - process a claim"] | join }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Review evidence of {{data.type}}</span>
+        <h1 class="govuk-heading-l">Check your answers before continuing</h1>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.type == "payment" %}
+        {% set noCriteria = ['1', '2', '3', '4'] %}
+        {% elif data.type == "completion" %}
+        {% set noCriteria = ['1', '2', '3'] %}
+        {% endif %}
+        <dl class="govuk-summary-list">
+            {% for i in noCriteria %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key" style="width: 50%;">
+                    {{ i | criteriaQuestions(data.type, claim, "false") }}
+                </dt>
+                <dd class="govuk-summary-list__value" style="width: 40%;">
+                    {{ i | criteriaAnswer(data.type, claim) }}
+                </dd>
+                <dd class="govuk-summary-list__actions" style="width: 10%;">
+                    <a class="govuk-link" href="review-evidence?type={{data.type}}&criteria={{i}}">Change</a>
+                </dd>
+            </div>
+            {% endfor %}
+        </dl>
+        <form action="claim" method="post" novalidate>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

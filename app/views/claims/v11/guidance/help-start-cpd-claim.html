@@ -1,0 +1,131 @@
+{% extends "../_layouts/main.html" %}
+
+{% block beforeContent %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l">Help with starting a new revalidation claim</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <p class="govuk-body-l">
+            Completing a claim effectively will help to ensure you get reimbursement for your claim as quickly as possible. This guidance will help you to do that.
+        </p>
+
+        <p class="govuk-body">
+            Watch this short video or read the transcript below to see how to quickly fill in a new revalidation claim.
+        </p>
+
+        <!-- <style>
+            .embed-container {
+                position: relative;
+                padding-bottom: 56.25%;
+                margin: 28px 0;
+                height: 0;
+                overflow: hidden;
+                max-width: 100%;
+            }
+
+            .embed-container iframe,
+            .embed-container object,
+            .embed-container embed {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        </style> -->
+
+        <!-- <div class='embed-container'>
+            <iframe allowfullscreen frameborder='0' src='https://www.youtube-nocookie.com/embed/y4dQQAzUR2A'></iframe>
+        </div> -->
+
+        <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    Video transcript: Starting a new revalidation claim
+                </span>
+            </summary>
+            <div class="govuk-details__text">
+
+                <h2 class="govuk-heading-m">Revalidation claims</h2>
+                <p class="govuk-body">
+                    A revalidation claim is made up of:
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>a description of the activity</li>
+                    <li>the learner who did the training</li>
+                    <li>the amount it cost</li>
+                    <li>the date it was paid for</li>
+                    <li>the evidence that you paid for the training</li>
+                </ul>
+                </p>
+                <p class="govuk-body">
+                    A claim cannot consist of more than one activity or learner.
+                </p>
+                <p class="govuk-body">
+                    So if one learner completed several activites you would need to submit a separate claim for each one. Similarly, if several learners completed the same activity, you would need to claim separately for each.
+                </p>
+
+                <h2 class="govuk-heading-m">Reimbursement amounts</h2>
+                <p class="govuk-body">
+                    Every learner has a maximum budget amount of £500. This is the most you could get back.
+                </p>
+
+                <h2 class="govuk-heading-m">Completing a claim</h2>
+                <p class="govuk-body">
+                    To start a new claim, click on the ‘Start a new revalidation claim’ button in the top right of the ‘Manage
+                    claims’ screen.
+                </p>
+
+                <h2 class="govuk-heading-s">Activity</h2>
+                <p class="govuk-body">
+                    You’ll first need to enter a description of the activity that you’re claiming for.
+                </p>
+
+                <h2 class="govuk-heading-s">Learner</h2>
+                <p class="govuk-body">
+                    Click ‘add learner’ and search by name or National Insurance number to see if they’re already on the system. If they are,
+                    just click ‘Add to claim’. Otherwise click ‘Add new learner’, enter their name, National Insurance number and job title. Then click ‘Select’. You will need to go through and answer question's on learner's eligibility, if all answer's are yes the learner will be added to claim when you select click ‘Add to claim’
+                </p>
+
+                <h2 class="govuk-heading-s">Evidence of payment</h2>
+                <p class="govuk-body">
+                    The payment date is the date you paid the training provider.
+                </p>
+                <p class="govuk-body">
+                    The evidence of payment needs to show:
+                    <ul class="govuk-list govuk-list--bullet">
+                        <li>what the payment was for</li>
+                        <li>how much you paid</li>
+                        <li>the date of payment</li>
+                    </ul>
+                </p>
+                <p class="govuk-body">
+                    This would normally be the receipt from the training provider. If the receipt does not include all this information you will also need to include another document such as the payment invoice. You can upload up to 3 files.
+                </p>
+                <p class="govuk-body">
+                    If you don’t have the documents digitally you’ll need to scan or take a photo of them.
+                </p>
+
+                <h2 class="govuk-heading-s">Saving or submitting</h2>
+                <p class="govuk-body">
+                    If there's still information to add another time, press 'Save and finish later'. The claim will be saved to the 'Not yet completed' list on the 'Manage claims' screen.
+                </p>
+                <p class="govuk-body">
+                    If you've finished adding everything to the claim you can press 'Confirm details' and then ‘Submit claim’ to confirm you’ve understood the declaration. This will send the claim for processing. The claim will move to the 'Submitted' status on the 'Manage claims' screen and you will no longer be able to edit it.
+                </p>
+                <p class="govuk-body">
+                    The aim is to process your claim as quickly as possible, in accordance with scheme rules. It usually takes around 2 weeks for the claim to be paid. In busy periods it can take up to 6 weeks.
+                </p>
+            </div>
+        </details>
+    </div>
+</div>
+</div>
+
+{% endblock %}

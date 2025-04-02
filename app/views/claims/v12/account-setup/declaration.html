@@ -1,0 +1,70 @@
+{% extends "../_layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{{ ["Grant declaration - ", (data.fundingPot | potName)] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="job-title" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% if data.declarationSubmitError %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#declare-checkbox">You must confirm you understand and accept before continuing.</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+            <span class="govuk-caption-l">Complete registration</span>
+            <h1 class="govuk-heading-l">Grant determination letter</h1>
+
+            <p class="govuk-body">Confirm you have read the grant determination letter in the onboarding pack. This sets out, on behalf of the Secretary of State for Health and Social Care, the conditions that you must meet for claims to be paid.</p>
+
+            <p class="govuk-body">You must accept the conditions in the letter before continuing.</p>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <form action="../declaration-confirmation" method="post" novalidate>
+            <div class="govuk-button-group {% if data.declarationSubmitError %} govuk-form-group--error {% endif %}"
+                id="declare-checkbox">
+                <fieldset class="govuk-fieldset" aria-describedby="{% if data.declarationSubmitError %} declare-error {% endif %}">
+                    {% if data.declarationSubmitError %}
+                    <p id="declare-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> You must confirm you understand and accept before continuing.
+                    </p>
+                    {% endif %}
+                    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="declaration" name="declaration" type="checkbox"
+                                value="declaration-confirmed">
+                            <label class="govuk-label govuk-checkboxes__label" for="declaration">
+                                I understand and accept.
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

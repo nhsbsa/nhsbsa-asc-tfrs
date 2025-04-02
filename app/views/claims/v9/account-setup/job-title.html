@@ -1,0 +1,73 @@
+{% extends "../_layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{{ ["Enter job title - ", (data.claimType | potName)] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="verify-details" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if data.jobTitleEmptyError or data.jobTitleInvalid %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                <li>
+                  <a href="#jobTitle">
+                    {% if data.jobTitleEmptyError %}
+                    The job title must not be empty
+                    {% elif data.jobTitleInvalid %}
+                    The job title must not include invalid characters
+                    {% endif %}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Complete registration</span>
+        <h1 class="govuk-heading-l">
+          What is your job title?
+        </h1>
+        <p class="govuk-body">This is needed to confirm that you meet the requirement of having sufficient authority to make legally binding contracts on behalf of your organisation.</p>
+        <p class="govuk-body">We may perform checks on this.</p>
+
+        <form action="../validate-job-title" method="post" class="form">
+            <div class="govuk-form-group {% if data.jobTitleEmptyError or data.jobTitleInvalid %} govuk-form-group--error {% endif %}">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                            What is your job title?
+                    </legend>
+                    {% if data.jobTitleEmptyError or data.jobTitleInvalid %}
+                    <p id="jobTitle" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        {% if data.jobTitleEmptyError %}
+                        The job title must not be empty
+                        {% elif data.jobTitleInvalid %}
+                        The job title must not include invalid characters
+                        {% endif %}
+                    </p>
+                    {% endif %}
+                    <input class="govuk-input govuk-!-width-two-thirds" aria-describedby="asc-wds-id-hint" id="jobTitle"
+                        name="jobTitle" type="text">
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

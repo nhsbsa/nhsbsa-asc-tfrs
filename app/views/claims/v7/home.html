@@ -1,0 +1,101 @@
+{% extends "./_layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{{ ["Home - ", serviceName] | join }}
+{% endblock %}
+
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">{{ serviceName }}</h1>
+        <h2 class="govuk-heading-l">Overview</h2>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds dashboard-container">
+        <p class="govuk-body">Since 1 January 2024 (<a href="#" class="govuk-link">change this date</a>):</p>
+        <div class="govuk-grid-row dashboard-card-container">
+            <div class="govuk-grid-column-one-third">
+                <div class="govuk-grid-row dashboard-card dashboard-card__left">
+                    <strong class="govuk-!-font-size-48">7</strong><br><strong>claims have been started</strong>
+                </div>
+            </div>
+            <div class="govuk-grid-column-one-third">
+                <div class="govuk-grid-row dashboard-card dashboard-card__middle">
+                    <strong class="govuk-!-font-size-48">1</strong><br><strong>claim has been queried by BSA</strong>
+                </div>
+            </div>
+            <div class="govuk-grid-column-one-third">
+                <div class="govuk-grid-row dashboard-card dashboard-card__right">
+                    <strong class="govuk-!-font-size-48">3</strong><br><strong>claims have been paid</strong>
+                </div>
+            </div>
+
+        </div>
+        <p class="govuk-body">You have <a href="#" class="govuk-link">3 incomplete claims</a> started before 1 January
+            2024 and<br><a href="#" class="govuk-link">1 incomplete claim</a> started before 1 November 2023.</p>
+        <h3 class="govuk-heading-m">Messages about queried claims</h3>
+        <p class="govuk-body"><strong>17 December 2023</strong></p>
+        <p class="govuk-body">It looks like you've submitted the wrong invoice for claim <a href="#"
+                class="govuk-link">C20236519</a>. Please correct this and resubmit.</p>
+        <p class="govuk-body"><a href="#" class="govuk-link">View older messages (6)</a></p>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h2 class="govuk-heading-l">Options</h2>
+
+        <ul class="homepage-services-and-info__list">
+
+            <li class="chevron-card">
+                <div class="chevron-card__wrapper">
+                    <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
+                        <a class="govuk-link chevron-card__link" data-track-action="topicsLink"
+                            data-track-category="homepageClicked" data-track-dimension-index="29"
+                            data-track-dimension="Benefits" data-track-label="eligibility-checker" data-track-value="1"
+                            data-ga4-link="{&quot;event_name&quot;:&quot;navigation&quot;,&quot;type&quot;:&quot;homepage&quot;,&quot;index_link&quot;:1,&quot;index_section&quot;:3,&quot;index_section_count&quot;:6,&quot;index_total&quot;:16,&quot;section&quot;:&quot;Services and information&quot;}"
+                            href="#">Eligibility Checker</a>
+                    </h3>
+                    <p class="govuk-body chevron-card__description">Check the activities and types of staff that are
+                        eligible for funding.</p>
+                </div>
+            </li>
+
+            <li class="chevron-card">
+                <div class="chevron-card__wrapper">
+                    <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
+                        <a class="govuk-link chevron-card__link" data-track-action="topicsLink"
+                            data-track-category="homepageClicked" data-track-dimension-index="29"
+                            data-track-dimension="Benefits" data-track-label="manage-tu-claims" data-track-value="1"
+                            data-ga4-link="{&quot;event_name&quot;:&quot;navigation&quot;,&quot;type&quot;:&quot;homepage&quot;,&quot;index_link&quot;:1,&quot;index_section&quot;:3,&quot;index_section_count&quot;:6,&quot;index_total&quot;:16,&quot;section&quot;:&quot;Services and information&quot;}"
+                            href="manage-claims?claimType=TU">{{ "TU" | potName }}</a>
+                    </h3>
+                    <p class="govuk-body chevron-card__description">Manage claims, or start a new claim, for {{ "TU" |
+                        potName }}.</p>
+                </div>
+            </li>
+
+            <li class="chevron-card">
+                <div class="chevron-card__wrapper">
+                    <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
+                        <a class="govuk-link chevron-card__link" data-track-action="topicsLink"
+                            data-track-category="homepageClicked" data-track-dimension-index="29"
+                            data-track-dimension="Benefits" data-track-label="manage-cpd-claims" data-track-value="1"
+                            data-ga4-link="{&quot;event_name&quot;:&quot;navigation&quot;,&quot;type&quot;:&quot;homepage&quot;,&quot;index_link&quot;:1,&quot;index_section&quot;:3,&quot;index_section_count&quot;:6,&quot;index_total&quot;:16,&quot;section&quot;:&quot;Services and information&quot;}"
+                            href="manage-claims?claimType=CPD">{{ "CPD" | potName }}</a>
+                    </h3>
+                    <p class="govuk-body chevron-card__description">Manage claims, or start a new claim, for {{ "CPD" |
+                        potName }}.</p>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

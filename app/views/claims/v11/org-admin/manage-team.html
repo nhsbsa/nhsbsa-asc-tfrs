@@ -1,0 +1,123 @@
+{% extends "../_layouts/claims-main.html" %} 
+
+
+{% set matchName = data.resendEmail | inviteName (data.users) %}
+
+
+{% block pageTitle %} 
+{{ ["Mange team members - ", serviceName] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <a class="govuk-breadcrumbs__link" href="../choose-a-claim-type?invite&resendEmail">Home
+      </a>
+  </li>
+    <li class="govuk-breadcrumbs__list-item">
+        <a class="govuk-breadcrumbs__link" href="#">Manage team</a>
+    </li>
+  </ol>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    {% if data.invite == "success" %}
+    <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+
+      <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+        <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+      </svg>
+    
+      <div class="moj-banner__message">Invitation to {{matchName}} sent.<br><br>Some emails might not arrive straight away. You can resend the email after 24 hours if necessary.</div>
+    
+    </div>
+    {% elif data.invite == "failure" %}
+
+    <div class="moj-banner moj-banner--warning" role="region" aria-label="Warning">
+
+      <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+        <path d="M13.6,15.4h-2.3v-4.5h2.3V15.4z M13.6,19.8h-2.3v-2.2h2.3V19.8z M0,23.2h25L12.5,2L0,23.2z" />
+      </svg>
+    
+      <div class="moj-banner__message">Invitation {{matchName}} wasn't sent - try again</div>
+    
+    </div>
+
+    {% endif %}
+    
+    <h1 class="govuk-heading-l">Manage team</h1>
+    <p>All registered team members can add and manage claims. Only you can invite new team members.</p>
+
+    {% if (data.users | length) < 10 %}
+
+    <div class="govuk-inset-text">
+      You currently have {{ data.users | length }} team members out of a maximum of 10.
+    </div>
+
+    <a type="submit" href="user-details" class="govuk-button" data-module="govuk-button">
+        Invite new team member
+    </a>
+
+    {% else %}
+
+    <p class="govuk-body">You have reached the maximum of 10 team members.</p>
+
+    {% endif %}
+
+    {% if (data.users | countMatchingStatus("active"))>0 %}
+    <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--m">Registered</caption>
+        <tbody class="govuk-table__body">
+            {% for user in data.users %}
+            {% if user.status == "active" %}
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
+            <td class="govuk-table__cell" width="45%">{{ user.email }}</td>
+            <td class="govuk-table__cell" width="30%"></td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% if (data.users | countMatchingStatus("pending"))>0 %}
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--m">Invited</caption>
+        <tbody class="govuk-table__body">
+            {% for user in data.users %}
+            {% if user.status == "pending" %}
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
+            <td class="govuk-table__cell" width="45%">{{ user.email }}</td>
+            <td class="govuk-table__cell" width="30%">You can resend this invite from<br>{{ user.invited | expireTime }}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+      {% if (data.users | countMatchingStatus("expired"))>0 %}
+      <table class="govuk-table">
+        <caption class="govuk-table__caption govuk-table__caption--m">Expired invites</caption>
+        <tbody class="govuk-table__body">
+            {% for user in data.users %}
+            {% if user.status == "expired" %}
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header" width="25%">{{user.givenName}} {{user.familyName}} {% if user.type == "signatory" %} (you) {% endif %}</th>
+            <td class="govuk-table__cell" width="45%">{{ user.email }}</td>
+            <td class="govuk-table__cell" width="30%">{% if not (data.resendList | matchResend(user.email)) %}<form action="../reinvite-user?resendEmail={{user.email}}" method="post" novalidate><button class="unstyle-button unstyle-button-table">Resend invite</button></form>{% else %}Invitation sent{% endif %}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+</div>
+
+{% endblock %}

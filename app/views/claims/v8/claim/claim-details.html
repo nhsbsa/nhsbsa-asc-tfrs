@@ -1,0 +1,76 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Claim: ", claim.claimID, " - ", (claim.type | potName)] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+{% if not (claim.status == "new" or claim.status == "not-yet-submitted") %}
+<a href="../manage-claims-home" class="govuk-back-link">Back</a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}
+    {% include "../_components/claim-sections/errorCatch.html" %}
+    {% endif %}
+    <span class="govuk-caption-l">{{ claim.type | potName }}</span>
+    <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | statusTag(data.statuses) }}</h1>
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% if claim.status == "rejected" %}
+    <h2 class="govuk-heading-m">Claim rejected</h2>
+    <p class="govuk-body">{{claim.rejectedNote}}</p>
+    {% endif %}
+
+
+    {% if claim.type == "TU" %}
+    {% include "../_components/claim-sections/training.html" %}
+    {% elif claim.type == "CPD" %}
+    {% include "../_components/claim-sections/activity.html" %}
+    {% endif %}
+
+    {% include "../_components/claim-sections/learner.html" %}
+
+    {% include "../_components/claim-sections/evidencePayment.html" %}
+
+    {% if claim.type == "TU" or claim.categoryName == "Courses" %}
+    {% include "../_components/claim-sections/evidenceCompletion.html" %}
+    {% endif %}
+
+    {% if claim.status == "new" or claim.status == "not-yet-submitted"%}
+    <h2 class="govuk-heading-m">What happens next</h2>
+    <p class="govuk-body"> When you have added all the necessary information to this claim you can confirm the details
+      and submit the claim for processing.
+    </p>
+    <p class="govuk-body">If you still have information to add or check, you can save and finish the claim later.</p>
+    <div class="govuk-button-group">
+      <form action="../ready-to-declare" method="post" novalidate>
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Confirm details
+        </button>
+      </form>
+      <form action="../save-claim" method="post" novalidate>
+        <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+          Save and finish later
+        </button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+  <div class="govuk-grid-column-one-third">
+    {% include "../_components/claim-sections/claimAmount.html" %}
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <h2 class="govuk-heading-m">Related content</h2>
+    <p class="govuk-body"><a href="../guidance/help-start-claim" class="govuk-link">Help with starting a new care skills
+        claim</a></p>
+    <p class="govuk-body"><a href="../guidance/evidence-requirements" class="govuk-link">Help with evidence requirements</a></p>
+  </div>
+</div>
+{% endblock %}

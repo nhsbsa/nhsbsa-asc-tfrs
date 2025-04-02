@@ -1,0 +1,103 @@
+{% extends "../_layouts/processing-main.html" %}
+
+{% block pageTitle %}
+Signatory details - Register an organisation
+{% endblock %}
+
+{% block beforeContent %}
+<a href="confirm-organisation-details" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                {{ data.submitError | signatoryErrorMessage }}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Register an organisation</span>
+        <h1 class="govuk-heading-l">Signatory details</h1>
+        <p class="govuk-body">These are details of the individual in the organisation who will be responsible for
+            signing the grant determination letter.</p>
+        <form action="../signatory-handler" method="post" novalidate>
+            <div
+                class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
+                <label class="govuk-label" for="familyName" aria-describedby="full-name-hint">
+                    Last (family) name
+                </label>
+                <div id="role-type-hint" class="govuk-hint">
+                    The last (family) name of the signatory.
+                </div>
+                {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
+                data.submitError.familyName == 'missing' %}
+                <p id="familyName-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter a last (family) name
+                </p>
+                {% endif %}
+                <input
+                    class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.familyName == 'missing' %} govuk-input--error {% endif %}"
+                    id="familyName" name="familyName" type="text" spellcheck="false" autocomplete="name"
+                    value="{{ data.familyName | default ('') }}">
+            </div>
+            <div
+                class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.givenName == 'missing' %} govuk-form-group--error {% endif %}">
+                <label class="govuk-label" for="givenName" aria-describedby="full-name-hint">
+                    First (given) name
+                </label>
+                <div id="role-type-hint" class="govuk-hint">
+                    The first (given) name of the signatory.
+                </div>
+                {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
+                data.submitError.givenName
+                == 'missing' %}
+                <p id="givenName-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter a first (given) name
+                </p>
+                {% endif %}
+                <input
+                    class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.givenName == 'missing' %} govuk-input--error {% endif %}"
+                    id="givenName" name="givenName" type="text" spellcheck="false" autocomplete="name"
+                    value="{{ data.givenName | default ('') }}">
+            </div>
+            <div
+                class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-form-group--error {% endif %}">
+                <label class="govuk-label" for="email">
+                    Email address
+                </label>
+                <div id="email-hint" class="govuk-hint">
+                    We’ll send the invite to this address
+                </div>
+                {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
+                (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %}
+                <p id="email-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> 
+                    {% if data.submitError.email == 'missing' %}
+                        Enter an email address
+                    {% elif data.submitError.email == 'invalid' %}
+                        Enter an email address in the correct format, like name@example.com
+                    {% endif %}
+                </p>
+                {% endif %}
+                <input
+                    class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-input--error  {% endif %}"
+                    id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint"
+                    autocomplete="email" value="{{ data.email | default ('') }}">
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

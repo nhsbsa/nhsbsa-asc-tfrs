@@ -1,0 +1,103 @@
+{% extends "../_layouts/main.html" %}
+
+{% block beforeContent %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l">Help with revalidation evidence requirements</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <p class="govuk-body-l">
+            Adding appropriate evidence to a claim will help to ensure you get reimbursement as quickly as possible. This guidance will help you to do that.
+        </p>
+
+        <p class="govuk-body">
+            Watch this short video or read the transcript below to understand how to submit evidence appropriately.
+        </p>
+
+        <!-- <style>
+            .embed-container {
+                position: relative;
+                padding-bottom: 56.25%;
+                margin: 28px 0;
+                height: 0;
+                overflow: hidden;
+                max-width: 100%;
+            }
+
+            .embed-container iframe,
+            .embed-container object,
+            .embed-container embed {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        </style> -->
+
+        <!-- <div class='embed-container'>
+            <iframe allowfullscreen frameborder='0' src='https://www.youtube-nocookie.com/embed/cf-echYlxQc'></iframe>
+        </div> -->
+
+        <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    Video transcript: Revalidation evidence requirements
+                </span>
+            </summary>
+            <div class="govuk-details__text">
+
+                <h2 class="govuk-heading-m">Evidence requirements</h2>
+
+                <p class="govuk-body">There is 1 type of evidence you’ll need to add when creating a new revalidation claim.
+                <ul class="govuk-list govuk-list--number">
+                    <li>Evidence of payment</li>
+                </ul>
+                </p>
+
+                <p class="govuk-body">This is necessary to ensure claims are accurate and to protect against fraud. Without this evidence the NHS Business Services Authority will not be able to process the claim and you will not get back any money.</p>
+                
+                <p class="govuk-body">Each piece of evidence must be: 
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>in PDF, JPG, JPEG or PNG format</li>
+                    <li>an original document</li>
+                    <li>clear and in focus</li>
+                    <li>in colour</li>
+                    <li>not cropped (you must show the whole document and not just part of it)</li>
+                    <li>not altered by computer software</li>
+                    <li>not more than 2MB</li>
+                </ul>
+                </p>
+                
+                <p class="govuk-body">If you do not have a document in digital form, you should scan or take a photo of it.</p>
+                
+                <h2 class="govuk-heading-m">Evidence of payment</h2>
+                
+                <p class="govuk-body">You need to show that you have paid for the training. The evidence must include: 
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>course or qualification name</li>
+                    <li>training provider name</li>
+                    <li>how much you paid</li>
+                    <li>when you made the payment</li>
+                </ul>
+                </p>
+                
+                <p class="govuk-body">If you paid in more than one instalment, you will need to provide evidence of the total cost.</p>
+                
+                <p class="govuk-body">You can upload up to 4 separate documents if a single document does not show all necessary information.</p>
+                
+                <p class="govuk-body">Acceptable evidence includes an invoice with associated receipt. An invoice by itself will not be sufficient as it does not show you have actually paid.</p>
+
+            </div>
+        </details>
+    </div>
+</div>
+
+{% endblock %}

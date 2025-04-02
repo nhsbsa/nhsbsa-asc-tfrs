@@ -1,0 +1,25 @@
+{% extends "../_layouts/main.html" %}
+
+{% block pageTitle %}
+{{ ["Account issue - ", serviceName] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="verify-details" class="govuk-back-link">Back</a>
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Account details are not correct</h1>
+
+        <h2 class="govuk-heading-m">If the problem is with your details</h2>
+        <p class="govuk-body">For instance if your name is not correct, <a href="#">email</a> the NHS Business Services Authority account support team.</p>
+
+        <h2 class="govuk-heading-m">If the problem is with your organisation</h2>
+        <p class="govuk-body">For instance if the address is not correct, you should put this right in the <a href="https://www.skillsforcare.org.uk/Adult-Social-Care-Workforce-Data/Adult-Social-Care-Workforce-Data-Set/Adult-Social-Care-Workforce-Data-Set.aspx">Adult Social Care Workforce Dataset</a> (ASC-WDS).</p>
+        <p class="govuk-body">You can then use the link from your invitation email to restart the registration process. If the link has expired, <a href="#">email</a> the NHS Business Services Authority account support team.</p>
+    </div>
+</div>
+{% endblock %}

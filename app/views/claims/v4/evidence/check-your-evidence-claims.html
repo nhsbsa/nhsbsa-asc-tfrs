@@ -1,0 +1,77 @@
+{% extends "../_layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="claim-selector.html" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Add evidence</span>
+        <h1 class="govuk-heading-l">Check your evidence and selected claims before continuing</h1>
+        <h2 class="govuk-heading-m">Evidence</h2>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+        <p class="govuk-body"> invoice.pdf, 2MB</p>
+        <img src="/public/images/fake-invoice.png" alt="{{ data['evidenceFile'] }}" width="100%">
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">Please check your evidence of {{ data['evidenceType'] }} includes:
+            <ul class="govuk-list govuk-list--bullet">
+                <li>your organisation name, which should be the same as the name in your account for this service</li>
+                <li>the name of the activity you are claiming for</li>
+                <li>the date the activity took place</li>
+              </ul>
+        </p>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h2 class="govuk-heading-m">Selected Claims</h2>
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th class="govuk-table__header" scope="col">Claim reference number</th>
+                <th class="govuk-table__header" scope="col">Activity</th>
+                <th class="govuk-table__header" scope="col">Start date</th>
+                <th class="govuk-table__header" scope="col">Learner ID</th>
+                <th class="govuk-table__header" scope="col">Learner name</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+            {% for claim in data['selectedClaimsConfirmed'] %}
+              <tr class="govuk-table__row">
+                <td class="govuk-table__cell">{{ claim.claimID }}</td>
+                <td class="govuk-table__cell">{{ claim.training.title }}</td>
+                <td class="govuk-table__cell">{{ claim.startDateStr }}</td>
+                <td class="govuk-table__cell">{{ claim.learner.id }}</td>
+                <td class="govuk-table__cell">{{ claim.learner.fullName }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+        </table> 
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-m">Do you want to continue?</h2>
+        <p class="govuk-body">The evidence will be added to {{ data['selectedClaimsConfirmed'] | length }} claims.</p>
+        <form action="confirmation" method="post" novalidate>
+        <button class="govuk-button" data-module="govuk-button">
+            Accept and add
+        </button>
+        </form>
+        <form action="../manage-claim-items" method="post" novalidate>
+        <button class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Cancel
+        </button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "../_layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="job-title" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">New learner</span>
+        <h1 class="govuk-heading-l">Check your answers before adding the learner to the claim</h1>
+        <h2 class="govuk-heading-m">Learner details</h2>
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+            Full name
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ data.fullName }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> full name</span></a>
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+            National Insurance number
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ data.nationalInsuranceNumber }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> National Insurance number</span></a>
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+            Job title
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ data.jobTitle }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> job title</span></a>
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+            Role group
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ data.roleType }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> role group</span></a>
+            </dd>
+        </div>
+        {% if data.registrationOrg %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+            Professional organisation
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ data.registrationOrg }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> profressional organisation</span></a>
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+            Registration number
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ data.registrationNo }}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+            <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> registration number</span></a>
+            </dd>
+        </div>
+        {% endif %}
+        </dl>
+        <h2 class="govuk-heading-m">Now add learner to claim</h2>
+        <p class="govuk-body">By add this learner you are confirming that, to the best of your knowledge, the details you are providing about this learner are correct.</p>
+        <p class="govuk-body">When you add a learner to a claim this learner will then be saved in the service and be available to add to other claims when needed.</p>
+        <form action="./create-learner" method="post" novalidate>
+        <input type="hidden" name="answers-checked" value="true">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Accept and add to claim
+        </button>
+        </form>
+    </div>  
+</div>
+{% endblock %}

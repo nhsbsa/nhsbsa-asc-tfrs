@@ -1,4 +1,4 @@
-{% extends "layouts/main.html" %}
+{% extends "_layouts/main.html" %}
 
 {% if data.area == "Claims" %}
 {% set current = data.versionHistory.claimsCurrent %}
@@ -50,7 +50,7 @@ organisations."%}
             </strong>
         </h2>
         <a class="govuk-button" data-module="govuk-button"
-            href="{{ data.area | toLowerCase }}/prototypes/design/{{current}}/">
+            href="{{ data.area | toLowerCase }}/{{current}}/">
             View current prototype
         </a>
     </div>
@@ -72,7 +72,7 @@ organisations."%}
             {% endfor %}
         </p>
         <p class="govuk-body">
-            <a class="govuk-link" href="{{ data.area | toLowerCase }}/prototypes/design/v{{ version.versionNo }}/">View v{{
+            <a class="govuk-link" href="{{ data.area | toLowerCase }}/v{{ version.versionNo }}/">View v{{
                 version.versionNo }} prototype</a>
         </p>
 

@@ -1,0 +1,107 @@
+{% extends "../_layouts/processing-main.html" %}
+
+{% set foundOrganisation = data.organisations | findOrg(data.orgID) %}
+
+
+{% block pageTitle %}
+    Workplace ID - Register an organisation
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Register an organisation</span>
+        <h1 class="govuk-heading-l">Check Senior Responsible Officer details are correct</h1>
+        <p class="govuk-body">Check this information is correct before sending a new invite.</p>
+
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+              <h2 class="govuk-summary-card__title">
+                Organisation details
+              </h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Workplace ID
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ foundOrganisation.workplaceId }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ foundOrganisation.name }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Address
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {%for line in foundOrganisation.address %}
+                                {{ line }}<br>
+                            {% endfor %}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+              <h2 class="govuk-summary-card__title">
+                Senior Responsible Officer details
+              </h2>
+              <ul class="govuk-summary-card__actions">
+                <li class="govuk-summary-card__action">
+                  <a class="govuk-link" href="signatory-details?goBack=true&edited=true">Edit<span class="govuk-visually-hidden"> signatory details</span></a>
+                </li>
+              </ul>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Last (family) name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.familyName }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            First (given) name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.givenName }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Email address
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.email }}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+        <p class="govuk-body">Sending a new invite will also deactivate the old one.</p>
+        <form action="../home?confirmation=register&edited=&goBack=" method="post" novalidate>
+            <input type="hidden" name="answers-checked" value="true">
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Confirm and send invite
+                </button>
+                <a class="govuk-link" href="org-issue?submitError=resend&familyName=&givenName=&email=&edited=">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

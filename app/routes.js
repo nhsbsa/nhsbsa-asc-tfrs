@@ -6,41 +6,48 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const fs = require('fs');
+const path = require('path');
 
-// Add your claims routes here
-router.use('/v3/', require('./views/claims/prototypes/design/v3/routes/routes.js'))
-router.use('/v4/', require('./views/claims/prototypes/design/v4/routes/routes.js'))
-router.use('/v5/', require('./views/claims/prototypes/design/v5/routes/routes.js'))
-router.use('/v6/', require('./views/claims/prototypes/design/v6/routes/routes.js'))
-router.use('/claims/prototypes/design/v7/', require('./views/claims/prototypes/design/v7/routes/routes.js'))
-router.use('/claims/prototypes/design/v8/', require('./views/claims/prototypes/design/v8/routes/routes.js'))
-router.use('/claims/prototypes/design/v9/', require('./views/claims/prototypes/design/v9/routes/routes.js'))
-router.use('/claims/prototypes/design/v10/', require('./views/claims/prototypes/design/v10/routes/routes.js'))
-router.use('/claims/prototypes/design/v11/', require('./views/claims/prototypes/design/v11/routes/routes.js'))
-router.use('/claims/prototypes/design/v12/', require('./views/claims/prototypes/design/v12/routes/routes.js'))
-router.use('/claims/prototypes/design/v13/', require('./views/claims/prototypes/design/v13/routes/routes.js'))
-router.use('/claims/prototypes/design/v14/', require('./views/claims/prototypes/design/v14/routes/routes.js'))
-router.use('/claims/prototypes/design/v15/', require('./views/claims/prototypes/design/v15/routes/routes.js'))
+// Include version-specific routes
+// Read available versions dynamically from the claims directory
+const claimsVersions = fs.readdirSync('./app/views/claims')
+  .filter(dir => /^v\d+$/.test(dir)) // Match folders like "v1", "v2", "v3"
+  .map(dir => dir.replace('v', '')); // Extract version number
+
+  // Read available versions dynamically from the processing directory
+const processingVersions = fs.readdirSync('./app/views/processing')
+.filter(dir => /^v\d+$/.test(dir)) // Match folders like "v1", "v2", "v3"
+.map(dir => dir.replace('v', '')); // Extract version number
 
 
-// Add your processing routes here
-router.use('/processing/prototypes/design/v1/', require('./views/processing/prototypes/design/v1/routes/routes.js'))
-router.use('/processing/prototypes/design/v2/', require('./views/processing/prototypes/design/v2/routes/routes.js'))
-router.use('/processing/prototypes/design/v3/', require('./views/processing/prototypes/design/v3/routes/routes.js'))
-router.use('/processing/prototypes/design/v4/', require('./views/processing/prototypes/design/v4/routes/routes.js'))
-router.use('/processing/prototypes/design/v5/', require('./views/processing/prototypes/design/v5/routes/routes.js'))
-router.use('/processing/prototypes/design/v6/', require('./views/processing/prototypes/design/v6/routes/routes.js'))
-router.use('/processing/prototypes/design/v7/', require('./views/processing/prototypes/design/v7/routes/routes.js'))
-router.use('/processing/prototypes/design/v8/', require('./views/processing/prototypes/design/v8/routes/routes.js'))
-router.use('/processing/prototypes/design/v9/', require('./views/processing/prototypes/design/v9/routes/routes.js'))
+// Load claims routes in
+claimsVersions.forEach(version => {
+  const routePath = path.join(__dirname, `./views/claims/v${version}/_routes/routes.js`);
+  
+  if (fs.existsSync(routePath)) {
+    router.use(`/claims/v${version}`, require(`./views/claims/v${version}/_routes/routes.js`));
+  } else {
+    console.warn(`Warning: routes.js not found for v${version}, skipping...`);
+  }
+});
+
+// Load processing routes in
+processingVersions.forEach(version => {
+  const routePath = path.join(__dirname, `./views/processing/v${version}/_routes/routes.js`);
+  
+  if (fs.existsSync(routePath)) {
+    router.use(`/processing/v${version}`, require(`./views/processing/v${version}/_routes/routes.js`));
+  } else {
+    console.warn(`Warning: routes.js not found for v${version}, skipping...`);
+  }
+});
 
 
-// Add your routes here
 router.use((req, res, next) => {
 
   //Load the correct version of the filters to use based on the version number
   // Use a regular expression to extract the section ("processing" or "claims") and the version number
-  const match = req.path.match(/\/(processing|claims)\/.*\/v(\d+)\//);
+  const match = req.path.match(/\/(processing|claims)\/v(\d+)\//);
 
   if (match) {
     const section = match[1]; // "processing" or "claims"
@@ -48,13 +55,13 @@ router.use((req, res, next) => {
 
     try {
       // Construct the path for the new filters file
-      const filtersPath = '../app/views/' + section + '/prototypes/design/v' + version + '/filters/filters.js';
+      const filtersPath = '../app/views/' + section + '/v' + version + '/_filters/filters.js';
       const resolvedFiltersPath = require.resolve(filtersPath);
 
       // Iterate through require.cache and remove only old 'filters.js' files, keeping the new one
       Object.keys(require.cache).forEach((key) => {
         if (
-          key.match(/\/app\/views\/(processing|claims)\/.*\/v\d+\/filters\/filters\.js$/) &&
+          key.match(/\/app\/views\/(processing|claims)\/v\d+\/filters\/filters\.js$/) &&
           key !== resolvedFiltersPath // Only delete if it's not the current filters file
         ) {
           delete require.cache[key];

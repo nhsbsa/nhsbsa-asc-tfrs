@@ -1,0 +1,84 @@
+{% extends "../_layouts/processing-main.html" %}
+
+{% set claim = data.id | findClaim(data.claims) %}
+
+{% block pageTitle %}
+{{ ["Claim: ", claim.claimID, " - process a claim"] | join }}
+{% endblock %}
+
+{% block beforeContent %}
+<a href="start-process" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Process a claim</span>
+        <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}<br>{{ claim.status | processorstatusTag }}</h1>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if claim.status == "submitted" %}
+        <h2 class="govuk-heading-m">Check evidence</h2>
+        <ul class="govuk-task-list">
+            <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                <div class="govuk-task-list__name-and-hint">
+                    <a class="govuk-link govuk-task-list__link" href="../evidence-check-start-handler?type=payment" aria-describedby="company-details-1-status">
+                        Evidence of payment
+                    </a>
+                </div>
+                <div class="govuk-task-list__status" id="company-details-1-status">
+                    {{ claim.evidenceOfPaymentreview.pass | sectionCheck }}
+                </div>
+            </li>
+            <li class="govuk-task-list__item govuk-task-list__item--with-link">
+                <div class="govuk-task-list__name-and-hint">
+                    <a class="govuk-link govuk-task-list__link" href="../evidence-check-start-handler?type=completion" aria-describedby="company-details-2-status">
+                        Evidence of completion
+                    </a>
+                </div>
+                <div class="govuk-task-list__status" id="company-details-2-status">
+                    {{ claim.evidenceOfCompletionreview.pass | sectionCheck }}
+                </div>
+            </li>
+        </ul>
+
+        <form method="post" action="../claim-process-handler" class="govuk-!-margin-0">
+            <button class="govuk-button govuk-button--primary" data-module="govuk-button" type="submit">Continue</button>
+        </form>
+
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" style="margin-bottom: 40px;">
+        <div class="moj-page-header-actions">
+            <div class="moj-page-header-actions__title" >
+                <h2 class="govuk-heading-m">Claim notes</h2>
+            </div>
+            <div class="moj-page-header-actions__actions">
+                <div class="moj-button-menu">
+                    <div class="moj-button-menu__wrapper">
+                        <a href="add-note?id={{claim.claimID}}" role="button" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary moj-page-header-actions__action" data-module="govuk-button">
+                            Add note
+                          </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if data['notes'].length > 0 %}     
+            {% for note in data['notes']| dateSort %}     
+                {% include "../_components/note.html" %}
+            {% endfor %}
+        {% else %}  
+            <p>There are currently no notes for this claim.</p>   
+        {% endif %}     
+    </div>
+</div>
+
+{% endblock %}

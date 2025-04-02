@@ -1,0 +1,27 @@
+{% extends "../_layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="ni-number" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="role-type" method="post" novalidate>
+            <div class="govuk-form-group">
+                <h1 class="govuk-label-wrapper">
+                <span class="govuk-caption-l">New learner</span>
+                <label class="govuk-label govuk-label--l" for="job-title">
+                    What is the job title of {{ data.fullName }}?
+                </label>
+                </h1>
+                <input class="govuk-input" id="job-title" name="jobTitle" type="text" value="{{ data.jobTitle }}">
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Save and continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

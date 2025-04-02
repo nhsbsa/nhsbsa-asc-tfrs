@@ -1,0 +1,416 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = null %}
+{% for c in data.claims %}
+  {% if c.claimID == data.id %}
+    {% set claim = c %}
+  {% endif %}
+{% endfor %}
+
+{% block beforeContent %}
+{% if claim.status != 'new' %}
+<a href="../manage-claims#{{ claim.status }}" class="govuk-back-link">Back</a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-m">Claim Summary</h2>
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Status
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ claim.status | statusTag(data.statuses) }}
+          </dd>
+        </div>
+
+        {% if claim.learners.length>0 %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Number of learners
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ claim.learners.length}}
+          </dd>
+        </div>
+        {% endif %}
+
+
+        {% if claim.costPerLearner != null and claim.learners !=[] %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Total cost
+          </dt>
+          <dd class="govuk-summary-list__value">
+            £{{ claim.learners.length*claim.costPerLearner }}
+          </dd>
+        </div>
+        {% endif %}
+
+        {% if claim.costPerLearner != null and claim.learners !=[] %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Total reimbursment
+          </dt>
+          <dd class="govuk-summary-list__value">
+            £{{ claim.learners.length*claim.training.reimbursementAmount }}
+          </dd>
+        </div>
+        {% endif %}
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Created on
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ claim.createdDate | govukDate }}
+          </dd>
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Created by
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ claim.createdBy }}
+          </dd>
+        </div>
+
+        {% if claim.status == "submitted" or claim.status == "insufficient-evidence" or claim.status == "paid" %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Submitted on
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ claim.submittedDate | govukDate }}
+          </dd>
+        </div>
+        {% endif %}
+
+        {% if claim.status == "paid" %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Paid on
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ claim.paidDate | govukDate }}
+          </dd>
+        </div>
+        {% endif %}
+
+      </dl>
+
+      {% if claim.status == "insufficient-evidence" %}
+      <h2 class="govuk-heading-m">Claim query</h2>
+        <p class="govuk-body">The evidence of payment doesn't not show the correct course code.</p>
+        <p class="govuk-body">Please review the evidence and edit the selected course or upload a more suitable piece of evidence.</p>
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Review claim
+        </button>
+      {% endif %}
+
+
+
+        <h2 class="govuk-heading-m">Course</h2>
+        <dl class="govuk-summary-list">
+
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Name
+              </dt>
+              {% if not claim.training %}
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--blue">
+                  Incomplete
+                </strong>
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link govuk-link--no-visited-state" href="select-training">Select course</a>
+              </dd>
+              {% else %}
+              <dd class="govuk-summary-list__value">
+                {{ claim.training.code }}<br> {{ claim.training.title }}
+              </dd>
+              {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+              <dd class="govuk-summary-list__actions">
+                <ul class="govuk-summary-list__actions-list">
+                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="activity-profile?viewOnly=true&trainingSelection={{ claim.training.code }}">View<span class="govuk-visually-hidden"> training</span></a></li>
+                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="select-training">Change<span class="govuk-visually-hidden"> training</span></a></li>
+                </ul>
+              </dd>
+              {% endif %}
+              {% endif %}
+            </div>
+
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Start date
+              </dt>
+              {% if not claim.startDate %}
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--blue">
+                  Incomplete
+                </strong>
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link govuk-link--no-visited-state" href="start-date">Add start date</a>
+              </dd>
+              {% else %}
+              <dd class="govuk-summary-list__value">
+                {{ claim.startDate | govukDate }}
+              </dd>
+              {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link govuk-link--no-visited-state" href="start-date">Change<span class="govuk-visually-hidden"> activity start date</span></a>
+              </dd>
+              {% endif %}
+              {% endif %}
+            </div>
+        </dl>
+
+        <h2 class="govuk-heading-m">Learners</h2>
+        {% if claim.learners.length === 0 %}
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Learners
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <strong class="govuk-tag govuk-tag--blue">
+                Incomplete
+              </strong>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add learner</a>
+            </dd>
+          </div>
+        </dl>
+        {% else %}
+        {% set counter = 1 %}
+        {% for l in claim.learners %}
+        <div class="govuk-summary-card">
+          <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">{{ l.fullName }}<span class="govuk-caption-m">{{ l.id }}</span></h2>
+            <ul class="govuk-summary-card__actions">
+              <ul class="govuk-summary-list__actions-list">
+                <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="../learner/learner-profile?learnerID={{ l.id }}">View learner details<span class="govuk-visually-hidden"> {{ l.fullName }}</span></a></li>
+                {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+                <li class="govuk-summary-list__actions-list-item">
+                  <form action="../remove-learner?learnerID={{ l.id }}" method="post">
+                    <p class="govuk-body">
+                        <button class="unstyle-card-button">Remove<span class="govuk-visually-hidden"> {{ l.fullName }}</span></button>
+                    </p>
+                </form>
+                </li>
+                {% endif %}
+              </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+              {% if data.trainingChoice.fundingModel == "split" %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Evidence of enrollment
+                </dt>
+                {% if l.evidence.evidenceOfEnrollment == null %}
+                <dd class="govuk-summary-list__value">
+                  <strong class="govuk-tag govuk-tag--blue">
+                    Incomplete
+                  </strong>
+                </dd>
+                {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+                <dd class="govuk-summary-list__actions">
+                  <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=enrollment&learnerID={{ l.id }}">Add evidence</a>
+                </dd>
+                {% endif %}
+                {% else %}
+                <dd class="govuk-summary-list__value">
+                  {{ l.evidence.evidenceOfEnrollment }}
+                </dd>
+                {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+                <dd class="govuk-summary-list__actions">
+                  <ul class="govuk-summary-list__actions-list">
+                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="#">View<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
+                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=enrollment&learnerID={{ l.id }}">Change<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
+                  </ul>
+                </dd>
+                {% endif %}
+                {% endif %}
+              </div>
+              {% endif %}
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Evidence of completion
+                </dt>
+                {% if l.evidence.evidenceOfCompletion == null %}
+                <dd class="govuk-summary-list__value">
+                  <strong class="govuk-tag govuk-tag--blue">
+                    Incomplete
+                  </strong>
+                </dd>
+                {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+                <dd class="govuk-summary-list__actions">
+                  <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{ l.id }}">Add evidence</a>
+                </dd>
+                {% endif %}
+                {% else %}
+                <dd class="govuk-summary-list__value">
+                  {{ l.evidence.evidenceOfCompletion }}
+                </dd>
+                {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+                <dd class="govuk-summary-list__actions">
+                  <ul class="govuk-summary-list__actions-list">
+                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="#">View<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
+                    <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{ l.id }}">Change<span class="govuk-visually-hidden"> evidence of enrollment for {{ l.fullname }}</span></a></li>
+                  </ul>
+                </dd>
+                {% endif %}
+                {% endif %}
+              </div>
+            </dl>
+          </div>
+        </div>
+        {% set counter = counter + 1 %}
+        {% endfor %}
+        {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+        <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another learner</a></p>
+        {% endif %}
+        {% endif %}
+        <h2 class="govuk-heading-m">Cost</h2>
+        <dl class="govuk-summary-list">
+          
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Cost per learner
+              </dt>
+              {% if not claim.costPerLearner %}
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--blue">
+                  Incomplete
+                </strong>
+              </dd>
+              {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link govuk-link--no-visited-state" href="cost-per-learner">Add cost</a>
+              </dd>
+              {% endif %}
+              {% else %}
+              <dd class="govuk-summary-list__value">
+                £{{ claim.costPerLearner }}
+              </dd>
+              {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link govuk-link--no-visited-state" href="cost-per-learner">Change<span class="govuk-visually-hidden"> cost</span></a>
+              </dd>
+              {% endif %}
+              {% endif %}
+            </div>
+
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Evidence of payment
+              </dt>
+              {% if not claim.evidenceOfPayment %}
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--blue">
+                  Incomplete
+                </strong>
+              </dd>
+              {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=payment">Add evidence</a>
+              </dd>
+              {% endif %}
+              {% else %}
+              <dd class="govuk-summary-list__value">
+                {{ claim.evidenceOfPayment }}
+              </dd>
+              {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+              <dd class="govuk-summary-list__actions">
+                <ul class="govuk-summary-list__actions-list">
+                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="#">View<span class="govuk-visually-hidden"> evidence of payment</span></a></li>
+                  <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=payment">Change<span class="govuk-visually-hidden"> evidence of payment</span></a></li>
+                </ul>
+              </dd>
+              {% endif %}
+              {% endif %}
+            </div>
+        </dl>
+
+        <h2 class="govuk-heading-m">Supporting notes</h2>
+        {% if claim.notes.length === 0 and (claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit") %}
+        <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Add note</a></p>
+        {% elif claim.notes.length > 0 and not (claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit") %}
+        <p class="govuk-body">No supporting notes added to claim before submission.</p>
+        {% else %}
+        <dl class="govuk-summary-list">
+          {% for n in claim.notes %}
+            <div class="govuk-summary-list__row">
+              <dd class="govuk-summary-list__value">
+                {{ n }}
+              </dd>
+              {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link govuk-link--no-visited-state" href="delete-note">Delete</a>
+              </dd>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </dl>
+          {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+          <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-note">Add another note</a></p>
+          {% endif %}
+        {% endif %}
+
+        {% if claim.status == "new" or claim.status == "incomplete" or claim.status == "ready-to-submit"%}
+        <h2 class="govuk-heading-m">What happens next</h2>
+        <p class="govuk-body">When you have added all the necessary information to this claim you can submit it for processing. Check that nothing is showing as 'incomplete' and that you have added all the learners you need to.</p>
+        <p class="govuk-body">If there is still information to add, you can save and finish the claim later.</p>
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-visually-hidden">Warning</span>
+            <p><strong>I declare that the information I have given in this claim is correct and complete. It also meets the rules set out in the grant award letter.</strong></p>
+
+            <p><strong>I understand that it may be subject to:</strong></p>
+
+            <ul class="govuk-list govuk-list--bullet">
+            <li><strong>verification checks</strong></li>
+            <li><strong>audit review</strong></li>
+            <li><strong>counter fraud checks</strong></li>
+            </ul>
+          </strong>
+        </div>
+        <p class="govuk-body"></p>
+        <div class="govuk-button-group">
+          <form action="../submit-claim" method="post" novalidate>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+              Submit claim
+            </button> 
+          </form>
+          <form action="../save-claim" method="post" novalidate>
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+              Save and finish later
+            </button>
+        </form>
+        </div>
+        {% endif %}
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <hr class="govuk-!-margin-bottom-5">
+      <h2 class="govuk-heading-m">Related content</h2>
+      <p class="govuk-body"><a href="../guidance/help-start-claim" class="govuk-link">Help with starting a new claim</a></p>
+      <p class="govuk-body"><a href="#" class="govuk-link">Find out more about evidence requirements</a></p>
+      <p class="govuk-body"><a href="#" class="govuk-link">Find out more about eligibility requirements</a>
+    </div>
+</div>
+{% endblock %}

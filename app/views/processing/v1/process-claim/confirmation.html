@@ -1,0 +1,35 @@
+{% extends "../_layouts/processing-main.html" %}
+
+{% block pageTitle %}
+Confirmation - Process a claim
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+                Claim processed
+            </h1>
+            <div class="govuk-panel__body">
+                Claim number
+                <br><strong>{{ data.id }}</strong>
+            </div>
+        </div>
+        <h2 class="govuk-heading-m">What happens next</h2>
+        <p class="govuk-body">
+            The claim will be sent for payment and the organisation will see the outcome of their claim when they log in. If the claim was rejected they will see the notes you provided with their claim.
+        </p>
+        <div class="govuk-button-group">
+            <a class="govuk-button" data-module="govuk-button" href="start-process">
+                Process another claim
+            </a>
+            <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="../home">
+                Choose another task
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

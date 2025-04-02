@@ -1,0 +1,169 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = null %}
+{% for c in data.claims %}
+{% if c.claimID == data.id %}
+{% set claim = c %}
+{% endif %}
+{% endfor %}
+
+{% block pageTitle %}
+{{ ["Add new learner - ", serviceName] | join }}
+{% endblock %}
+
+
+{% block beforeContent %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    {% if data.inClaim == 'true' %}<span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>{% endif %}
+    <h1 class="govuk-heading-l">New learner details</h1>
+  </div>
+  <div class="govuk-grid-column-two-thirds">
+    {% if data.existingLearner == 'true' %}
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">
+          Learner already exists in service
+        </h2>
+        <div class="govuk-error-summary__body">
+          <p>
+            Two learners cannot share the same National Insurance number and the following learner already exists:
+          </p>
+          <p>
+            {% set learner = null %}
+            {% for l in data.learners %}
+            {% if l.id == data.nationalInsuranceNumber %}
+            {% set learner = l %}
+            {% endif %}
+            {% endfor %}
+            National Insurance number: {{learner.id}} <br>
+            Full name: {{learner.fullName}} <br>
+            Job title: {{learner.jobTitle}} <br>
+            Role type: {{learner.roleType}} <br>
+            {% if data.inClaim == 'true' %}
+          <form method="post" action="../add-learner" class="govuk-!-margin-0">
+            <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
+            <button type="submit" class="unstyle-card-button">Add the existing learner to claim</button>
+          </form>
+          </p>
+          <p>or</p>
+          <p>
+          <form method="post" action="#" class="govuk-!-margin-0">
+            <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
+            <button type="submit" class="unstyle-card-button">Update existing learners details</button>
+          </form>
+          </p>
+          {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <form action="../create-learner" method="post" novalidate>
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s" for="full-name" aria-describedby="full-name-hint">
+          Full name
+        </label>
+        <div id="role-type-hint" class="govuk-hint">
+          Their full name as it would appear on a completion certificate.
+        </div>
+        <input class="govuk-input" id="full-name" name="fullName" type="text" spellcheck="false" autocomplete="name">
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s" for="national-insurance-number">
+          National Insurance number
+        </label>
+        <div id="national-insurance-number-hint" class="govuk-hint">
+          For example, ‘QQ 12 34 56 C’.
+        </div>
+        <input class="govuk-input govuk-input--width-10 govuk-input--extra-letter-spacing"
+          id="national-insurance-number" name="nationalInsuranceNumber" type="text" spellcheck="false"
+          aria-describedby="national-insurance-number-hint">
+        <details class="govuk-details govuk-!-padding-top-2">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+              Why do we need this?
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+            National Insurance numbers are used to provide unique identifiers for learners. They ensure that claims can
+            be managed appropriately, even if a learner moves employer.
+          </div>
+        </details>
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label govuk-label--s" for="jobTitle">
+          Job title
+        </label>
+        <input class="govuk-input" id="jobTitle" name="jobTitle" type="text">
+      </div>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="role-type-hint">
+          <label class="govuk-label govuk-label--s" for="jobTitle">
+            Role group
+          </label>
+          <div id="role-type-hint" class="govuk-hint">
+            Select one option
+          </div>
+          <div class="govuk-radios" data-module="govuk-radios">
+            {% set counter = 1 %}
+            {% for role in data.roleTypes %}
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="role-type-{{ counter }}" name="roleType" type="radio"
+                value="{{ role.rolename }}" aria-describedby="{{ role.rolename }}-item-hint"
+                data-aria-controls="conditional-registration-details-{{ counter }}">
+              <label class="govuk-label govuk-radios__label" for="role-type-{{ counter }}">
+                {{ role.rolename }}
+              </label>
+              <div id="{{ role.rolename }}-item-hint" class="govuk-hint govuk-radios__hint">
+                {{ role.description }}
+              </div>
+              {% if role.registered == true %}
+              <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                id="conditional-registration-details-{{ counter }}">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="regOrg">
+                    Registration Organisation
+                  </label>
+                  <input class="govuk-input govuk-!-width-full" id="regOrg" name="regOrg" spellcheck="false">
+                </div>
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="regID">
+                    Registration ID
+                  </label>
+                  <input class="govuk-input govuk-!-width-full" id="regID" name="regID" spellcheck="false">
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            {% set counter = counter + 1 %}
+            {% endfor %}
+          </div>
+        </fieldset>
+      </div>
+      <h2 class="govuk-heading-m">What happens next</h2>
+      <p class="govuk-body">The new learner will be added to the claim. They will also be available to add to future
+        claims.</p>
+      {% if data.inClaim == 'true' %}
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Save and add to claim
+      </button>
+      {% else %}
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Add new learner
+      </button>
+      {% endif %}
+    </form>
+  </div>
+  <div class="govuk-grid-column-one-third">
+    <hr class="govuk-!-margin-bottom-5">
+    <h2 class="govuk-heading-m">Get help adding a learner</h2>
+    <p class="govuk-body"><a href="#" class="govuk-link">Why we need to know their National Insurance number</a></p>
+    <p class="govuk-body"><a href="#" class="govuk-link">What do role groups mean</a>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "../_layouts/claims-main.html" %}
+
+{% block beforeContent %}
+<a href="claim-details?id={{ claim.claimID }}" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">
+            Starting your first claim
+        </h1>
+        <p class="govuk-body">
+            It looks like this is your first time starting a claim. Completing a claim effectively will help to ensure
+            you get reimbursement from the NHS Business Services Authority (NHSBSA) as quickly as possible. We have
+            produced some guidance that will help you to do that.
+        </p>
+        <form action="../first-start" method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Do you want to learn more before starting a new claim?
+                    </legend>
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="claimGuidance" name="claimGuidance" type="radio"
+                                value="yes">
+                            <label class="govuk-label govuk-radios__label" for="claimGuidance">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="claimGuidance-2" name="claimGuidance" type="radio"
+                                value="no">
+                            <label class="govuk-label govuk-radios__label" for="claimGuidance-2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

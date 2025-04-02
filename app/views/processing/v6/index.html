@@ -1,0 +1,59 @@
+{% extends "./_layouts/main.html" %}
+
+{% block pageTitle %}
+GOV.UK prototype - {{data.processingServiceName}}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">This is a GOV.UK prototype</h1>
+        <p class="govuk-body">This prototype contains fictional data which has been created to simulate the data that
+            might appear in the real service.</p>
+        <p class="govuk-body">The data should not be considered real for the purposes of understanding what training is
+            available in the adult social care sector or training that is eligible for this service.</p>
+
+            <!-- <form action="./load-data" method="post" novalidate> -->
+        <!--     <div class="govuk-form-group">
+                <label class="govuk-label" for="user-type">
+                    Choose user type
+                </label>
+                <div id="user-type-hint" class="govuk-hint">
+                    This will simulate the full version of the prototype as it would appear for that user type
+                </div>
+                <select class="govuk-select" id="userType" name="userType" aria-describedby="user-type-hint">
+                    <option value="signatory" selected>Signatory</option>
+                    <option value="submitter">Submitter</option>
+                </select>
+            </div> -->
+            <article class="moj-ticket-panel" aria-label="Sub navigation 1">
+                <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
+                    <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Full Prototype</h2>
+                    <p class="govuk-body">This will take to the full version of the prototype.</p>
+                    <form action="./load-data" method="post" novalidate>
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="user-type">
+                                Choose user type
+                            </label>
+                            <div id="user-type-hint" class="govuk-hint">
+                                This will simulate the full version of the prototype as it would appear for that user type
+                            </div>
+                            <select class="govuk-select" id="userType" name="userType" aria-describedby="user-type-hint">
+                                <option value="processor" selected>Processor</option>
+                                <option value="ccsAgent">CCS agent</option>
+                            </select>
+                        </div>
+
+                        <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button">
+                            Start prototype
+                        </button>
+                    </form>
+                </section>
+            </article>
+
+    </div>
+</div>
+
+
+</div>
+{% endblock %}

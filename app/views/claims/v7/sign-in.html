@@ -1,0 +1,18 @@
+{% extends "./_layouts/main.html" %}
+
+{% block pageTitle %}
+{{ ["Sign in - ", serviceName] | join }}
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Sign in</h1>
+        <p class="govuk-body">Please click "Sign in" button to continue.</p>
+        <a class="govuk-button" data-module="govuk-button" href="home">
+            Sign-in
+        </a>
+    </div>
+</div>
+{% endblock %}

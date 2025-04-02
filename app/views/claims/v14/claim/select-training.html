@@ -1,0 +1,127 @@
+{% extends "../_layouts/claims-main.html" %}
+
+{% block pageTitle %}
+{% if (data["training-input"] == "" or data["training-input"].length < 3) %}Error: {% endif %}What course or qualification are you claiming for? — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+    <a href="../manage-claims-home" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data["training-input"] == "" or data["training-input"].length < 3 %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        {% if data["training-input"] == "" %}
+                        <li>
+                            <a href="#search-error">You need to enter something to search on</a>
+                        </li>
+                        {% elif data["training-input"].length < 3 %}
+                        <li>
+                            <a href="#search-error">You need to enter at least 3 characters of the name, or the whole course code or qualification number</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">New claim</span>
+        <h1 class="govuk-heading-l">What course or qualification are you claiming for?</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">Select the training course or qualification you are claiming for.</p>
+        <p class="govuk-body">If the course you are expecting does not show up in the search results, check that you’ve
+            entered the correct name or course code. If it is still missing, it may mean it is not on the list
+                of <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme">eligible training courses or qualifications</a>.</p>
+        <div class="moj-search govuk-!-padding-bottom-2">
+
+            <form action="select-training" method="post">
+
+                <div class="govuk-form-group {% if (data['training-input'] == ''  or data["training-input"].length < 3) %} govuk-form-group--error{% endif %}">
+                    <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+                        Search
+                    </label>
+
+                    <div id="search-hint" class="govuk-hint moj-search__hint ">
+                        Enter at least 3 characters of the name, or the whole course code or qualification number
+                    </div>
+                    {% if data["training-input"] == "" %}
+                        <p id="search-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span>You need to enter something to search on
+                        </p>
+                    {% elif data["training-input"].length < 3 %}
+                        <p id="search-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the name, or the whole course code or qualification number
+                        </p>
+                    {% endif %}
+                    <input class="govuk-input moj-search__input {% if (data['training-input'] == ''  or data["training-input"].length < 3) %} govuk-input--error{% endif %}" id="search" name="training-input" type="search"
+                        aria-describedby="search-hint" value="{{ data['training-input'] }}">
+
+                </div>
+
+                <button class="govuk-button moj-search__button govuk-button--secondary" data-module="govuk-button">
+                    Search
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% if (data['training-input'] and data["training-input"].length > 2) %}
+            <h2 class="govuk-heading-m govuk-!-margin-top-3">Search results</h2>
+            {% set hasResults = false %}
+            {% for trainingGroup in data.training %}
+                {% set addHeader = true %}
+
+                {% for training in trainingGroup.courses %}
+                    {% set match = data['training-input'] | trainingSearch(training) %}
+
+                    {% if match %}
+                        {% set hasResults = true %}
+
+                        {% if addHeader %}
+                            {% include "../_components/select-training/select-training-header.html" %}
+                            {% set addHeader = false %}
+                        {% endif %}
+
+                        {% include "../_components/select-training/select-training-row.html" %}
+                    {% endif %}
+                {% endfor %}
+                {% if not addHeader %}
+                    </tbody>
+                    </table>
+                {% endif %}
+            {% endfor %}
+
+            {% if not hasResults %}
+                <p class="govuk-body">This search returned no results.</p>
+
+                <p class="govuk-body">
+                    Improve your search results by:
+                  </p>
+                  <ul class="govuk-list govuk-list--bullet">
+                    <li>double-checking your spelling</li>
+                    <li>searching for something less specific</li>
+                    <li>checking you entered the whole course code or qualification number</li>
+                  </ul>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
