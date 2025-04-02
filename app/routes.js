@@ -25,7 +25,7 @@ claimsVersions.forEach(version => {
   const routePath = path.join(__dirname, `./views/claims/v${version}/_routes/routes.js`);
   
   if (fs.existsSync(routePath)) {
-    router.use(`/claims/v${version}`, require(routePath));
+    router.use(`/claims/v${version}`, require(`./views/claims/v${version}/_routes/routes.js`));
   } else {
     console.warn(`Warning: routes.js not found for v${version}, skipping...`);
   }
@@ -36,7 +36,7 @@ processingVersions.forEach(version => {
   const routePath = path.join(__dirname, `./views/processing/v${version}/_routes/routes.js`);
   
   if (fs.existsSync(routePath)) {
-    router.use(`/processing/v${version}`, require(routePath));
+    router.use(`/processing/v${version}`, require(`./views/processing/v${version}/_routes/routes.js`));
   } else {
     console.warn(`Warning: routes.js not found for v${version}, skipping...`);
   }
