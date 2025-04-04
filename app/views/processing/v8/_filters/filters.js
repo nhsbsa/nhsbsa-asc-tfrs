@@ -270,13 +270,10 @@ addFilter('orderByMostRecent', function (submissions) {
 addFilter('create100TimelineArray', function (claim, organisations) {
     // Extract the timestamps and their associated data
     const events = [];
-
-    let sorted = sortSubmissionsByDate(claim.submissions, 'submittedDate')
     let org = findOrg(organisations, claim.workplaceID)
     let users = flattenUsers(org)
 
-
-    for (const submission of sorted) {
+    for (const submission of claim.submissions) {
         if (submission.submittedDate) {
 
             if (submission.processedDate == null) {
@@ -406,12 +403,7 @@ addFilter('create100TimelineArray', function (claim, organisations) {
                         author: "Eren Yeager (Processor)"
                     });
                 }
-
-
             }
-    
-    
-            
         }
     }
 
@@ -806,16 +798,6 @@ addFilter('countOccurrences', function (events,string) {
         }
         return count;
     }, 0);
-})
-
-addFilter('findOrganisation', function (orgID, organisations) {
-    let organisation = null;
-    for (const org of organisations) {
-      if (org.workplaceID == orgID) {
-        organisation = org
-      }
-    }
-    return organisation;
 })
 
 addFilter('findOrgClaims', function (orgID, claims) {
