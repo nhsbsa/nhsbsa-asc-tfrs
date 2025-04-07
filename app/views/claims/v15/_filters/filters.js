@@ -234,7 +234,7 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
             errorMessages.push('<li><a href="#input-error">Enter the ' + dateType.toLowerCase() + '</a></li>');
         }
         if (dateErrorObject.date === 'invalidPolicy') {
-            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be on or after 1 April 2024</a></li>');
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must fall within the eligible financial year for this course</a></li>');
         }
     } else if (errorSection == 'input') {
         errorMessages.push('<p id="input-error" class="govuk-error-message">')
@@ -254,7 +254,7 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>Enter the ' + dateType.toLowerCase() + '<br>');
         }
         if (dateErrorObject.date === 'invalidPolicy') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be on or after 1 April 2024<br>');
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must fall within the eligible financial year for this course<br>');
         }
         errorMessages.push('</p>')
     }
