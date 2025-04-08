@@ -4,6 +4,9 @@ function checkClaim(claim) {
 
     const result = {};
     let submission = null
+
+    const currentDate = new Date()
+
     if (claim.status == "queried") {
         submission = getDraftSubmission(claim)
     } else {
@@ -24,8 +27,15 @@ function checkClaim(claim) {
 
     if (submission.costDate == null && ! claim.claimType != "40") {
         result.paymentDate = "missing"
-    } else {
+    }  else {
         result.paymentDate = "valid"
+    }
+
+    if (result.paymentDate == "valid") {
+        const costDate = new Date(submission.costDate)
+        if (currentDate.getTime() < costDate.getTime()) {
+            result.paymentDate = "inFuture"
+        }
     }
 
     if (submission.evidenceOfPayment.length == 0 && claim.claimType != "40") {
@@ -49,7 +59,6 @@ function checkClaim(claim) {
     if (result.completionDate == "valid" && result.startDate == "valid") {
         const startDate = new Date(submission.startDate)
         const completionDate = new Date(submission.completionDate)
-        const currentDate = new Date()
         if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
             result.startDate = "invalid"
             result.completionDate = "invalid"
