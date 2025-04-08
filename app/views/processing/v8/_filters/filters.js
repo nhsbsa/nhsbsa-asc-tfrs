@@ -273,11 +273,41 @@ addFilter('create100TimelineArray', function (claim, organisations) {
     let org = findOrg(organisations, claim.workplaceID)
     let users = flattenUsers(org)
 
+    let latestSubmission = getMostRelevantSubmission(claim)
+
+    // Add completion date
+    events.push({
+        type: "trainingDate",
+        title: "Training completed",
+        date: latestSubmission.completionDate,
+        description: null,
+        link: null,
+        author: null
+    });
+    // Add cost date
+    events.push({
+        type: "trainingDate",
+        title: "Training paid for",
+        date: latestSubmission.costDate,
+        description: null,
+        link: null,
+        author: null
+    });
+
+    // Add start date
+    events.push({
+        type: "trainingDate",
+        title: "Training started",
+        date: latestSubmission.startDate,
+        description: null,
+        link: null,
+        author: null
+    });
+
     for (const submission of claim.submissions) {
         if (submission.submittedDate) {
 
             if (submission.processedDate == null) {
-
                 // Add submitted date
                 if (submission.submittedDate) {
                     events.push({
@@ -290,41 +320,6 @@ addFilter('create100TimelineArray', function (claim, organisations) {
                     });
                 }
 
-                    // Add completion date
-                    if (submission.completionDate) {
-                        events.push({
-                            type: "trainingDate",
-                            title: "Training completed",
-                            date: submission.completionDate,
-                            description: claim.completionNote || null,
-                            link: null,
-                            author: null
-                        });
-                    }
-                    // Add cost date
-                    if (submission.costDate) {
-                        events.push({
-                            type: "trainingDate",
-                            title: "Training paid for",
-                            date: submission.costDate,
-                            description: null,
-                            link: null,
-                            author: null
-                        });
-                    }
-
-                    // Add start date
-                    if (submission.startDate) {
-                        events.push({
-                            type: "trainingDate",
-                            title: "Training started",
-                            date: submission.startDate,
-                            description: null,
-                            link: null,
-                            author: null
-                        });
-                    }
-
             } else if ((submission.evidenceOfPaymentReview.outcome == "queried" || submission.evidenceOfCompletionReview.outcome == "queried")) {
 
                 // Add submitted date
@@ -334,7 +329,7 @@ addFilter('create100TimelineArray', function (claim, organisations) {
                         title: "Claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "/showClaimHistoryNote?noteType=hundredClaim&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=claim&submittedDate=" + submission.submittedDate,
                         author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
@@ -346,7 +341,7 @@ addFilter('create100TimelineArray', function (claim, organisations) {
                         title: "Action needed",
                         date: submission.processedDate,
                         description: "View actions",
-                        link: "/showClaimHistoryNote?noteType=hundredQueryNote&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=queryNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }
@@ -360,7 +355,7 @@ addFilter('create100TimelineArray', function (claim, organisations) {
                         title: "Claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "/showClaimHistoryNote?noteType=hundredClaim&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=claim&submittedDate=" + submission.submittedDate,
                         author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
@@ -387,7 +382,7 @@ addFilter('create100TimelineArray', function (claim, organisations) {
                         title: "Claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "/showClaimHistoryNote?noteType=hundredClaim&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=claim&submittedDate=" + submission.submittedDate,
                         author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
@@ -399,7 +394,7 @@ addFilter('create100TimelineArray', function (claim, organisations) {
                         title: "Claim rejected",
                         date: submission.processedDate,
                         description:  "View rejection note",
-                        link: "/showClaimHistoryNote?noteType=hundredRejectionNote&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=rejectionNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }
@@ -482,7 +477,7 @@ addFilter('create60TimelineArray', function (claim, organisations) {
                         title: "60 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=claim&submittedDate=" + submission.submittedDate,
                         author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
@@ -494,7 +489,7 @@ addFilter('create60TimelineArray', function (claim, organisations) {
                         title: "60 claim action needed",
                         date: submission.processedDate,
                         description: "View actions",
-                        link: "/showClaimHistoryNote?noteType=sixtyQueryNote&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=queryNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }
@@ -508,7 +503,7 @@ addFilter('create60TimelineArray', function (claim, organisations) {
                         title: "60 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=claim&submittedDate=" + submission.submittedDate,
                         author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
@@ -559,7 +554,7 @@ addFilter('create60TimelineArray', function (claim, organisations) {
                         title: "60 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "/showClaimHistoryNote?noteType=sixtyClaim&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=claim&submittedDate=" + submission.submittedDate,
                         author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
@@ -571,7 +566,7 @@ addFilter('create60TimelineArray', function (claim, organisations) {
                         title: "60 claim rejected",
                         date: submission.processedDate,
                         description: "View rejection note",
-                        link: "/showClaimHistoryNote?noteType=sixtyRejectionNote&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=rejectionNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }
@@ -664,7 +659,7 @@ addFilter('create40TimelineArray', function (claim, organisations) {
                         title: "40 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=claim&submittedDate=" + submission.submittedDate,
                         author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
@@ -676,7 +671,7 @@ addFilter('create40TimelineArray', function (claim, organisations) {
                         title: "40 claim action needed",
                         date: submission.processedDate,
                         description: "View actions",
-                        link: "/showClaimHistoryNote?noteType=fourtyQueryNote&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=queryNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }
@@ -690,7 +685,7 @@ addFilter('create40TimelineArray', function (claim, organisations) {
                         title: "40 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=claim&submittedDate=" + submission.submittedDate,
                         author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
@@ -728,7 +723,7 @@ addFilter('create40TimelineArray', function (claim, organisations) {
                         title: "40 claim submitted",
                         date: submission.submittedDate,
                         description: "View claim",
-                        link: "/showClaimHistoryNote?noteType=fourtyClaim&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=claim&submittedDate=" + submission.submittedDate,
                         author: findUser(users, submission.submitter) + " (Submitter)"
                     });
                 }
@@ -740,7 +735,7 @@ addFilter('create40TimelineArray', function (claim, organisations) {
                         title: "40 claim rejected",
                         date: submission.processedDate,
                         description: "View rejection note",
-                        link: "/showClaimHistoryNote?noteType=fourtyRejectionNote&submittedDate=" + submission.submittedDate,
+                        link: "/showClaimHistoryNote?noteType=rejectionNote&submittedDate=" + submission.submittedDate,
                         author: "Eren Yeager (Processor)"
                     });
                 }
