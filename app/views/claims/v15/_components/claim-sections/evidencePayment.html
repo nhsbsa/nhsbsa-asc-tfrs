@@ -18,11 +18,18 @@
     </dd>
   </div>
   {% else %}
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
+  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate == "inFuture" %}
+  <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
+    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
+      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Payment date must be in the past </p>
+    </div>
+  </div>
+  {% endif %}
+  <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-key--error {% endif %}">
       Payment date {% if ( claim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
     </dt>
-    <dd class="govuk-summary-list__value">
+    <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-value--error {% endif %}">
       {{ submission.costDate | govukDate }}
     </dd>
     {% if (claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType != "40" and not data.showNote %}

@@ -106,11 +106,17 @@ addFilter('errorSummary', function (claim, submitError) {
     if (submitError.startDate == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#start-date-error">Add a start date</a></li>')
     }
+    if (submitError.startDate == "inFuture") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Start date must be in the past</a></li>')
+    }
     if (submitError.learner == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#learner-error">Add a learner</a></li>')
     }
     if (submitError.paymentDate == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-date-error">Add a payment date</a></li>')
+    }
+    if (submitError.paymentDate == "inFuture") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-date-error">Payment date must be in the past</a></li>')
     }
     if (submitError.evidenceOfPayment == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-evidence-error">Add evidence of payment</a></li>')
@@ -126,9 +132,6 @@ addFilter('errorSummary', function (claim, submitError) {
     }
     if (submitError.completionDate == "inFuture") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be in the past</a></li>')
-    }
-    if (submitError.startDate == "inFuture") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Start date must be in the past</a></li>')
     }
     if (submitError.change == false ) {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#">You cannot submit a queried claim without making changes</a></li>')
