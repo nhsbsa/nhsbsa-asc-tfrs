@@ -6,6 +6,7 @@
   {% else %}
     {% set submission = pairClaim.submissions | findSubmissionByDate(data.submittedDate) %}
   {% endif %}
+  
   <div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
     <div>
         <h1 id="note-heading" class="govuk-heading-m push--top">Query note</h1>
@@ -18,13 +19,12 @@
           {% endif %}
 
         <a href="/hideNote" class="govuk-link govuk-button" >Close</a>
-
     </div>
   </div>
 
 
 {% elif data.showNote == "fourtyRejection" or data.showNote == "sixtyRejection" or data.showNote == "hundredRejection" %}
-{% if data.showNote == "sixtyRejection" or data.showNote == "hundredRejection" %}
+  {% if data.showNote == "sixtyRejection" or data.showNote == "hundredRejection" %}
     {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
   {% else %}
     {% set submission = pairClaim.submissions | findSubmissionByDate(data.submittedDate) %}
@@ -44,9 +44,9 @@
 
 
 {% elif data.showNote == "hundredClaim" or data.showNote == "sixtyClaim" or data.showNote == "fourtyClaim" %}
-{% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
+  {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
 
-<div>
+  <div>
       <div tabindex="-1" role="dialog" aria-modal="true" class="claim-history-dialog scrollable-claim-note" aria-labelledby="claim-history-heading claim-history-message">
         <div>
 
@@ -78,9 +78,10 @@
             {% endif %}
       
             <a href="/hideNote" class="govuk-link govuk-button" >Close</a>
+
         </div>
       </div>
-      </div>
+  </div>
       
 
 {% endif %}

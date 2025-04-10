@@ -12300,7 +12300,7 @@
           "costPerLearner": 540
         },
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
+          "outcome": null,
           "note": null
         },
         "processedDate": "2025-03-17T05:46:46.185Z",
@@ -12332,13 +12332,13 @@
         "completionDate": "2024-12-09T17:40:47.334Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
-          "outcome": "pass",
+          "outcome": null,
           "note": null,
-          "costPerLearner": 540
+          "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "outcome": null,
-          "note": null
+          "outcome": "queried",
+          "note": "The certificate doesn't match the learner name"
         },
         "processedDate": null,
         "processedBy": null
@@ -13328,7 +13328,7 @@
     "submissions": [
       {
         "submitter": "lionel-lowel@evergreencare.co.uk",
-        "submittedDate": "2025-03-20T05:30:12.408Z",
+        "submittedDate": "2025-03-21T05:30:12.408Z",
         "trainingCode": "501/1864/X",
         "learnerID": "XY 32 8F 00 J",
         "startDate": "2025-03-06T00:26:59.560Z",
@@ -13349,7 +13349,7 @@
           "outcome": "pass",
           "note": null
         },
-        "processedDate": "2025-03-20T07:38:03.421Z",
+        "processedDate": "2025-03-22T07:38:03.421Z",
         "processedBy": "Mara Monahan"
       }
     ]

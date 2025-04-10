@@ -1,5 +1,5 @@
 {% extends "../_layouts/processing-main.html" %}
-{% set org = data.orgId | findOrganisation(data.organisations) %}
+{% set org = data.organisations | findOrg(data.orgId) %}
 
 
 {% block pageTitle %}

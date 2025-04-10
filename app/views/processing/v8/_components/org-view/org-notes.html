@@ -1,5 +1,4 @@
-{% set org = data.orgId | findOrganisation(data.organisations) %}
-
+{% set org = data.organisations | findOrg(data.orgId) %}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">

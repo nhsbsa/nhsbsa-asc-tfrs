@@ -234,11 +234,7 @@
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% endif %}
 
-    {% if claim.claimType == "100" %}
-      {% include "../_components/claim-sections/claimHistory100.html" %}
-    {% else %}
-      {% include "../_components/claim-sections/claimHistory6040.html" %}
-    {% endif %}
+      {% include "../_components/claim-sections/claimHistory.html" %}
     
     
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
