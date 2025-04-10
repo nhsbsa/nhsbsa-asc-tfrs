@@ -1,10 +1,6 @@
-{% if claim.claimType == "100" %} 
-    {% set events = claim | create100TimelineArray(data.organisations) %}
-{% elif claim.claimType == "60" %} 
-    {% set events = claim | create60TimelineArray(data.organisations) %}
-{% elif claim.claimType == "40" %} 
-    {% set events = claim | create40TimelineArray(data.organisations) %}
-{% endif %} 
+
+    {% set events = claim | createTimelineArray(data.organisations) %}
+
 
 <h3 class="govuk-heading-m">History</h3>
 

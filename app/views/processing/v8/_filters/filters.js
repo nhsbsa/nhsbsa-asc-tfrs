@@ -267,7 +267,7 @@ addFilter('orderByMostRecent', function (submissions) {
     return sorted
 })
 
-addFilter('create100TimelineArray', function (claim, organisations) {
+addFilter('createTimelineArray', function (claim, organisations) {
     // Extract the timestamps and their associated data
     const events = [];
     let org = findOrg(organisations, claim.workplaceID)
@@ -275,34 +275,39 @@ addFilter('create100TimelineArray', function (claim, organisations) {
 
     let latestSubmission = getMostRelevantSubmission(claim)
 
-    // Add completion date
-    events.push({
-        type: "trainingDate",
-        title: "Training completed",
-        date: latestSubmission.completionDate,
-        description: null,
-        link: null,
-        author: null
-    });
-    // Add cost date
-    events.push({
-        type: "trainingDate",
-        title: "Training paid for",
-        date: latestSubmission.costDate,
-        description: null,
-        link: null,
-        author: null
-    });
+    if (claim.claimType == "100" || claim.claimType == "40" ) {
+        // Add completion date
+        events.push({
+            type: "trainingDate",
+            title: "Training completed",
+            date: latestSubmission.completionDate,
+            description: null,
+            link: null,
+            author: null
+        });
+    }
 
-    // Add start date
-    events.push({
-        type: "trainingDate",
-        title: "Training started",
-        date: latestSubmission.startDate,
-        description: null,
-        link: null,
-        author: null
-    });
+    if (claim.claimType == "100" || claim.claimType == "60" ) { 
+        // Add cost date
+        events.push({
+            type: "trainingDate",
+            title: "Training paid for",
+            date: latestSubmission.costDate,
+            description: null,
+            link: null,
+            author: null
+        });
+
+        // Add start date
+        events.push({
+            type: "trainingDate",
+            title: "Training started",
+            date: latestSubmission.startDate,
+            description: null,
+            link: null,
+            author: null
+        });
+    }
 
     for (const submission of claim.submissions) {
 
@@ -315,7 +320,11 @@ addFilter('create100TimelineArray', function (claim, organisations) {
             author: findUser(users, submission.submitter) + " (Submitter)"
         });
 
-        if ((submission.evidenceOfPaymentReview.outcome == "fail" || submission.evidenceOfCompletionReview.outcome == "fail")) {
+        if (
+            ((claim.claimType == "100" || claim.claimType == "60") && submission.evidenceOfPaymentReview.outcome == "fail")
+            || ((claim.claimType == "100" || claim.claimType == "40") && submission.evidenceOfCompletionReview.outcome == "fail")
+            || submission.otherCheck.outcome == "fail"
+        ) {
 
             // Add rejected date
             if (submission.processedDate) {
@@ -328,7 +337,11 @@ addFilter('create100TimelineArray', function (claim, organisations) {
                     author: "Eren Yeager (Processor)"
                 });
             }
-        } else if ((submission.evidenceOfPaymentReview.outcome == "queried" || submission.evidenceOfCompletionReview.outcome == "queried")) {
+        } else if (
+            ((claim.claimType == "100" || claim.claimType == "60") && submission.evidenceOfPaymentReview.outcome == "queried")
+            || ((claim.claimType == "100" || claim.claimType == "40") && submission.evidenceOfCompletionReview.outcome == "queried")
+            || submission.otherCheck.outcome == "queried"
+        ) {
 
             // Add queried date
             if (submission.processedDate) {
@@ -342,7 +355,10 @@ addFilter('create100TimelineArray', function (claim, organisations) {
                 });
             }
 
-        } else if ((submission.evidenceOfPaymentReview.outcome == "pass" || submission.evidenceOfCompletionReview.outcome == "pass")) {
+        } else if (
+            ((claim.claimType == "100" || claim.claimType == "60") && submission.evidenceOfPaymentReview.outcome == "pass") 
+            && ((claim.claimType == "100" || claim.claimType == "40") && submission.evidenceOfCompletionReview.outcome == "pass")
+            && submission.otherCheck.outcome == "pass") {
 
             // Add approved date
             if (submission.processedDate) {
@@ -351,7 +367,7 @@ addFilter('create100TimelineArray', function (claim, organisations) {
                     title: "Claim approved",
                     date: submission.processedDate,
                     description:  null,
-                    link: "#",
+                    link: null,
                     author: "Eren Yeager (Processor)"
                 });
             }
@@ -376,203 +392,6 @@ addFilter('create100TimelineArray', function (claim, organisations) {
 
     return events;
 })
-
-
-addFilter('create60TimelineArray', function (claim, organisations) {
-    // Extract the timestamps and their associated data
-    const events = [];
-    let org = findOrg(organisations, claim.workplaceID)
-    let users = flattenUsers(org)
-
-    let latestSubmission = getMostRelevantSubmission(claim)
-
-    // Add cost date
-    events.push({
-        type: "trainingDate",
-        title: "Training paid for",
-        date: latestSubmission.costDate,
-        description: null,
-        link: null,
-        author: null
-    });
-
-    // Add start date
-    events.push({
-        type: "trainingDate",
-        title: "Training started",
-        date: latestSubmission.startDate,
-        description: null,
-        link: null,
-        author: null
-    });
-
-    for (const submission of claim.submissions) {
-
-        // Add submitted date
-        events.push({
-            type: "statusDate",
-            title: "60 claim submitted",
-            date: submission.submittedDate,
-            description: "View claim",
-            link: "/showClaimHistoryNote?noteType=claim&submittedDate=" + submission.submittedDate,
-            author: findUser(users, submission.submitter) + " (Submitter)"
-        });
-
-        if ((submission.evidenceOfPaymentReview.outcome == "queried")) {
-
-            // Add queried date
-            if (submission.processedDate) {
-                events.push({
-                    type: "statusDate",
-                    title: "60 claim action needed",
-                    date: submission.processedDate,
-                    description: "View actions",
-                    link: "/showClaimHistoryNote?noteType=queryNote&submittedDate=" + submission.submittedDate,
-                    author: "Eren Yeager (Processor)"
-                });
-            }
-
-        } else if ((submission.evidenceOfPaymentReview.outcome == "pass")) {
-
-            // Add approved date
-            if (submission.processedDate) {
-                events.push({
-                    type: "statusDate",
-                    title: "60 claim approved",
-                    date: submission.processedDate,
-                    description:  null,
-                    link: null,
-                    author: "Eren Yeager (Processor)"
-                });
-            }
-
-        } else if ((submission.evidenceOfPaymentReview.outcome == "fail")) {
-
-            // Add rejected date
-            if (submission.processedDate) {
-                events.push({
-                    type: "statusDate",
-                    title: "60 claim rejected",
-                    date: submission.processedDate,
-                    description: "View rejection note",
-                    link: "/showClaimHistoryNote?noteType=rejectionNote&submittedDate=" + submission.submittedDate,
-                    author: "Eren Yeager (Processor)"
-                });
-            }
-
-        }
-    }
- 
-    // Add 60 created date
-    if (claim.createdDate) {
-        events.push({
-            type: "statusDate",
-            title: "60 claim created",
-            date: claim.createdDate,
-            description: null,
-            author: findUser(users, claim.createdBy) + " (Submitter)"
-        });
-    }
-
-    // Sort the events by date in descending order
-    events.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    return events;
-})
-
-addFilter('create40TimelineArray', function (claim, organisations) {
-    // Extract the timestamps and their associated data
-    const events = [];
-    
-    let org = findOrg(organisations, claim.workplaceID)
-    let users = flattenUsers(org)
-
-    let latestSubmission = getMostRelevantSubmission(claim)
-
-    // Add completion date
-    events.push({
-        type: "trainingDate",
-        title: "Training completed",
-        date: latestSubmission.completionDate,
-        description: null,
-        link: null,
-        author: null
-    });
-    
-    for (const submission of claim.submissions) {
-
-        // Add submitted date
-        events.push({
-            type: "statusDate",
-            title: "40 claim submitted",
-            date: submission.submittedDate,
-            description: "View claim",
-            link: "/showClaimHistoryNote?noteType=claim&submittedDate=" + submission.submittedDate,
-            author: findUser(users, submission.submitter) + " (Submitter)"
-        });
-
-        if ((submission.evidenceOfCompletionReview.outcome == "queried")) {
-
-            // Add queried date
-            if (submission.processedDate) {
-                events.push({
-                    type: "statusDate",
-                    title: "40 claim action needed",
-                    date: submission.processedDate,
-                    description: "View actions",
-                    link: "/showClaimHistoryNote?noteType=queryNote&submittedDate=" + submission.submittedDate,
-                    author: "Eren Yeager (Processor)"
-                });
-            }
-
-        } else if ((submission.evidenceOfCompletionReview.outcome == "pass")) {
-
-            // Add approved date
-            if (submission.processedDate) {
-                events.push({
-                    type: "statusDate",
-                    title: "40 claim approved",
-                    date: submission.processedDate,
-                    description:  null,
-                    link: null,
-                    author: "Eren Yeager (Processor)"
-                });
-            }
-
-        } else if ((submission.evidenceOfCompletionReview.outcome == "fail")) {
-
-            // Add rejected date
-            if (submission.processedDate) {
-                events.push({
-                    type: "statusDate",
-                    title: "40 claim rejected",
-                    date: submission.processedDate,
-                    description: "View rejection note",
-                    link: "/showClaimHistoryNote?noteType=rejectionNote&submittedDate=" + submission.submittedDate,
-                    author: "Eren Yeager (Processor)"
-                });
-            }
-        }
-    }
- 
-    // Add 40 created date
-    if (claim.createdDate) {
-        events.push({
-            type: "statusDate",
-            title: "40 claim created",
-            date: claim.createdDate,
-            description: null,
-            author: findUser(users, claim.createdBy) + " (Submitter)"
-        });
-    }
-
-    // Sort the events by date in descending order
-    events.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    return events;
-})
-
-
 
 addFilter('countOccurrences', function (events,string) {
      // Validate input
