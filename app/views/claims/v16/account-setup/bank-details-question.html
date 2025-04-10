@@ -1,0 +1,76 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+{% block pageTitle %}
+{% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid  %}Error: {% endif %}Organisation bank or building society account details — Complete registration — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div>
+    <a href="declaration" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="../bank-details-question-handler" method="post" class="form">
+
+            {% if data.submitError == 'true' %}
+            <div class="govuk-error-summary" data-module="govuk-error-summary">
+                <div role="alert">
+                    <h2 class="govuk-error-summary__title">
+                        There is a problem
+                    </h2>
+                    <div class="govuk-error-summary__body">
+                        <ul class="govuk-list govuk-error-summary__list">
+                            <li>
+                                <a href="#bank-details-error">Select yes if you want to add bank details now</a>
+                              </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            
+            <div class="govuk-form-group {% if data.submitError == 'true' %}govuk-form-group--error{% endif %}">
+            <fieldset class="govuk-fieldset" aria-describedby="bank-question-hint{% if data.submitError == 'true' %}bank-details-error{% endif %}">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                <span class="govuk-caption-l">Complete registration</span>
+                <h1 class="govuk-fieldset__heading">
+                  Do you want to add your organisation's bank details now?
+                </h1>
+              </legend>
+              <div id="bank-question-hint" class="govuk-hint">
+                You will only be able to submit claims once you have done this.
+              </div>
+              {% if data.submitError == 'true' %}
+              <p id="bank-details-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Select yes if you want to add bank details now
+              </p>
+              {% endif %}
+              <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="bankDetailsQuestion-1" name="bankDetailsQuestion" type="radio" value="yes">
+                  <label class="govuk-label govuk-radios__label" for="bankDetailsQuestion-1">
+                    Yes
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <input class="govuk-radios__input" id="bankDetailsQuestion-2" name="bankDetailsQuestion" type="radio" value="no">
+                  <label class="govuk-label govuk-radios__label" for="bankDetailsQuestion-2">
+                    No, I will add them later
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+            Continue
+          </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,265 @@
+[
+  {
+    "claimID": "Z1Z-F1J6-3XF7-A",
+    "type": "TU",
+    "learner": {
+      "id": "KZ 79 0F 13 Z",
+      "familyName": "Effertz-Stroman",
+      "givenName": "Aron",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLDOC",
+      "reimbursementAmount": 50,
+      "title": "Delivering outstanding care",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+    },
+    "startDate": "2024-02-01T23:29:00.654Z",
+    "status": "submitted",
+    "createdDate": "2023-12-31T08:55:32.615Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-11T22:56:10.547Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement001.png"],
+    "evidenceOfPaymentReview": {
+      "pass": null,
+      "criteria1": {
+        "result": null,
+        "note": null
+      },
+      "criteria2": {
+        "result": null,
+        "note": null
+      },
+      "criteria3": {
+        "result": null,
+        "note": null
+      },
+      "criteria4": {
+        "result": null,
+        "note": null
+      }
+    },
+    "evidenceOfCompletion": ["certificate001.pdf"],
+    "evidenceOfCompletionReview": {
+      "pass": null,
+      "criteria1": {
+        "result": null,
+        "note": null
+      },
+      "criteria2": {
+        "result": null,
+        "note": null
+      },
+      "criteria3": {
+        "result": null,
+        "note": null
+      }
+    },
+    "reimbursementAmount": null,
+    "completionDate": "2024-02-05T20:22:11.308Z",
+    "costDate": "2023-08-08T07:55:32.615Z"
+  },
+  {
+    "claimID": "AB1-C12D-3XF7-A",
+    "type": "TU",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLDOC",
+      "reimbursementAmount": 50,
+      "title": "Delivering outstanding care",
+      "totalLearningTime": "60 mins",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Support for leaders and managers",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Support-for-leaders-and-managers/Good-and-outstanding-care/Outstanding-care.aspx"
+    },
+    "startDate": "2024-02-01T23:29:00.654Z",
+    "status": "submitted",
+    "createdDate": "2023-12-31T08:55:32.615Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2024-02-11T22:56:10.547Z",
+    "approvedDate": null,
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement001.png"],
+    "evidenceOfPaymentReview": {
+      "pass": null,
+      "criteria1": {
+        "result": null,
+        "note": null
+      },
+      "criteria2": {
+        "result": null,
+        "note": null
+      },
+      "criteria3": {
+        "result": null,
+        "note": null
+      },
+      "criteria4": {
+        "result": null,
+        "note": null
+      }
+    },
+    "evidenceOfCompletion": ["certificate001.pdf"],
+    "evidenceOfCompletionReview": {
+      "pass": null,
+      "criteria1": {
+        "result": null,
+        "note": null
+      },
+      "criteria2": {
+        "result": null,
+        "note": null
+      },
+      "criteria3": {
+        "result": null,
+        "note": null
+      }
+    },
+    "reimbursementAmount": null,
+    "completionDate": "2024-02-05T20:22:11.308Z",
+    "costDate": "2023-08-08T07:55:32.615Z"
+  },
+
+  {
+    "claimID": "Z8S-F1J6-4GH7-A",
+    "type": "TU",
+    "learner": {
+      "id": "LE 09 5F 94 M",
+      "familyName": "Kub",
+      "givenName": "Roy",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "DLEDI",
+      "reimbursementAmount": 50,
+      "title": "Module 1 – Equality, diversity and inclusion",
+      "totalLearningTime": "4 hours",
+      "fundingModel": "full",
+      "type": "e-Learning Module",
+      "category": "Developing your workforce",
+      "description": null,
+      "awardingOrganisation": "Skills for Care",
+      "link": "https://www.skillsforcare.org.uk/Developing-your-workforce/Care-topics/Creating-an-inclusive-organisation/Creating-an-inclusive-organisation.aspx"
+    },
+    "startDate": "2023-10-25T02:38:35.764Z",
+    "status": "approved",
+    "createdDate": "2023-11-30T13:09:57.600Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T12:14:45.342Z",
+    "approvedDate": "2024-02-09T01:58:43.631Z",
+    "rejectedDate": null,
+    "rejectedNote": null,
+    "evidenceOfPayment": ["invoice002.pdf"],
+    "evidenceOfPaymentReview": {
+      "complete": false,
+      "criteria-1": false,
+      "criteria-2": false,
+      "criteria-3": false,
+      "criteria-4": false,
+      "criteria-5": false,
+      "criteria-6": false,
+      "criteria-7": false,
+      "criteria-8": false,
+      "criteria-9": false,
+      "criteria-10": false
+
+    },
+    "evidenceOfCompletion": ["certificate002.pdf"],
+    "evidenceOfCompletionReview": {
+      "complete": false,
+      "criteria-1": false,
+      "criteria-2": false,
+      "criteria-3": false,
+      "criteria-4": false,
+      "criteria-5": false,
+      "criteria-6": false,
+      "criteria-7": false,
+      "criteria-8": false,
+      "criteria-9": false,
+      "criteria-10": false
+
+    },
+    "completionDate": "2023-11-16T01:18:28.980Z",
+    "costDate": "2023-10-04T12:09:57.600Z"
+  },
+  {
+    "claimID": "Z8S-F1J6-9VGH-A",
+    "type": "TU",
+    "learner": {
+      "id": "ZX 51 96 87 D",
+      "familyName": "Simonis",
+      "givenName": "Casey",
+      "jobTitle": "Caregiver"
+    },
+    "training": {
+      "code": "MHFA",
+      "reimbursementAmount": 100,
+      "title": "Mental Health First Aid",
+      "totalLearningTime": "14 hours of content, delivered as 4 live sessions",
+      "fundingModel": "full",
+      "type": "Course",
+      "category": "Mental Health",
+      "description": null,
+      "awardingOrganisation": "MHFA England",
+      "link": "https://mhfaengland.org/individuals/adult/mental-health-first-aid/"
+    },
+    "startDate": "2023-10-12T06:08:29.142Z",
+    "status": "rejected",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "submittedDate": "2023-11-25T03:13:47.582Z",
+    "approvedDate": null,
+    "rejectedDate": "2023-12-05T18:04:04.173Z",
+    "rejectedNote": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+    "evidenceOfPayment": ["invoice007.pdf"],
+    "evidenceOfPaymentReview": {
+      "complete": false,
+      "criteria-1": false,
+      "criteria-2": false,
+      "criteria-3": false,
+      "criteria-4": false,
+      "criteria-5": false,
+      "criteria-6": false,
+      "criteria-7": false,
+      "criteria-8": false,
+      "criteria-9": false,
+      "criteria-10": false
+
+    },
+    "evidenceOfCompletion": ["certificate007.pdf"],
+    "evidenceOfCompletionReview": {
+      "complete": false,
+      "criteria-1": false,
+      "criteria-2": false,
+      "criteria-3": false,
+      "criteria-4": false,
+      "criteria-5": false,
+      "criteria-6": false,
+      "criteria-7": false,
+      "criteria-8": false,
+      "criteria-9": false,
+      "criteria-10": false
+
+    },
+    "completionDate": "2023-11-03T05:51:56.177Z",
+    "costDate": "2022-09-19T13:52:37.929Z"
+  }
+]

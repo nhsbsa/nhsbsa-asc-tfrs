@@ -1,0 +1,147 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% block pageTitle %}
+{% if (data["learnerInput"] == "" or data["learnerInput"].length < 3) %}Error: {% endif %}Course or qualification learner — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<a href="claim-details" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if (data["learnerInput"] == "" or data["learnerInput"].length < 3) %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        {% if data["learnerInput"] == "" %}
+                        <li>
+                            <a href="#search-error">You need to enter something to search on</a>
+                        </li>
+                        {% elif data["learnerInput"].length < 3 %}
+                        <li>
+                            <a href="#search-error">You need to enter at least 3 characters of the name, or the whole NI number</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">Course or qualification learner</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">If you have previously claimed for this learner their details will already be in the system.</p>
+        <p class="govuk-body">Check using the search below.</p>
+        <div class="moj-search govuk-!-padding-bottom-2">
+
+            <form action="select-learner" method="post">
+
+                <div class="govuk-form-group {% if (data['learnerInput'] == '' or data["learnerInput"].length < 3) %}govuk-form-group--error{% endif %}">
+                    <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
+                        Search for a learner
+                    </label>
+
+                    <div id="search-hint" class="govuk-hint moj-search__hint ">
+                        Enter at least 3 characters of the name, or the whole National Insurance (NI) number
+                    </div>
+                    {% if (data["learnerInput"] == "") %}
+                        <p id="search-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span>You need to enter something to search on
+                        </p>
+                    {% elif (data["learnerInput"].length < 3) %}
+                        <p id="search-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the name, or the whole NI number
+                        </p>
+                    {% endif %}
+
+                    <input class="govuk-input moj-search__input {% if (data['learnerInput'] == '' or data["learnerInput"].length < 3) %}govuk-input--error{% endif %}" id="search" name="learnerInput" type="search"
+                        aria-describedby="search-hint" value="{{ data['learnerInput'] }}">
+
+                </div>
+
+                <button class="govuk-button moj-search__button govuk-button--secondary" data-module="govuk-button">
+                    Search
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% if (data['learnerInput'] and data["learnerInput"].length > 2) %}
+        <h2 class="govuk-heading-m govuk-!-margin-top-3">Search results</h2>
+        {% set hasResults = false %}
+        {% set addHeader = true %}
+        {% for learner in data['learners'] %}
+        {% set match = data['learnerInput'] | learnerSearch(learner) %}
+        {% if match %}
+        {% set hasResults = true %}
+        {% if addHeader %}
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">National Insurance number</th>
+                    <th scope="col" class="govuk-table__header">Full name</th>
+                    <th scope="col" class="govuk-table__header">Job title</th>
+                    <th scope="col" class="govuk-table__header"></th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                {% set addHeader = false %}
+                {% endif %}
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">{{ learner.id }}</th>
+                    <td class="govuk-table__cell">{{ learner.givenName }} {{ learner.familyName }}</td>
+                    <td class="govuk-table__cell">{{ learner.jobTitle }}</td>
+                    <td class="govuk-table__cell">
+                        <form method="post" action="../add-learner" class="govuk-!-margin-0">
+                            <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
+                            <button type="submit" class="govuk-button">Select <span class="govuk-visually-hidden">&nbsp; learner {{ learner.id }}</span></button>
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                {% if hasResults %}
+            </tbody>
+        </table>
+        <form action="../learner/add-learner?inClaim=true" method="post">
+            <p class="govuk-body">If you cannot find the learner this may mean they have not yet been added.</p>
+            <button class="govuk-button govuk-button--secondary">Add new learner</button>
+        </form>
+        {% else %}
+        <form action="../learner/add-learner?inClaim=true" method="post">
+            <p class="govuk-body">
+                No matches returned for your search: <q>{{ data['learnerInput'] }}</q>.
+            </p>
+            <p class="govuk-body">This may mean the learner you're trying to add has not yet been added.</p>
+            <button class="govuk-button govuk-button--secondary">Add new learner</button>
+
+            <p class="govuk-body">
+                Improve your search results by:
+              </p>
+              <ul class="govuk-list govuk-list--bullet">
+                <li>double-checking your spelling</li>
+                <li>searching for something less specific</li>
+                <li>checking you entered the whole NI number</li>
+              </ul>
+        </form>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

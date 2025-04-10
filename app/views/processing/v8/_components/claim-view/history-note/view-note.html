@@ -3,7 +3,7 @@
 {% set learner = submission.learnerID | findLearner(data["learners"])%}
 {% set training = submission.trainingCode | findTraining(data.training)%}
 
-{% if data.noteType == "hundredQueryNote" or data.noteType == "sixtyQueryNote" or data.noteType == "fourtyQueryNote"%}
+{% if data.noteType == "queryNote"%}
 <div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
   <div>
       <h1 id="note-heading" class="govuk-heading-m push--top">Actions needed</h1>
@@ -25,7 +25,7 @@
 
 {% endif %}
 
-{% if data.noteType == "hundredRejectionNote" or data.noteType == "sixtyRejectionNote" or data.noteType == "fourtyRejectionNote"%}
+{% if data.noteType == "rejectionNote"%}
 <div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
   <div>
     <h1 id="note-heading" class="govuk-heading-m push--top">Rejection note</h1>
@@ -41,7 +41,7 @@
 {% endif %}
 
 
-{% if data.showNote == "hundredClaim" or data.showNote == "sixtyClaim" or data.showNote == "fourtyClaim"%}
+{% if data.showNote == "claim"%}
 <div>
   <div tabindex="-1" role="dialog" aria-modal="true" class="claim-history-dialog scrollable-claim-note" aria-labelledby="claim-history-heading claim-history-message">
     <div>
