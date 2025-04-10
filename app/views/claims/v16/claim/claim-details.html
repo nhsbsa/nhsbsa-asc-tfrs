@@ -1,0 +1,259 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if claim.claimType == "60" %}
+  {% set pairClaim = claim.claimID | findPair(data.claims) %}
+{% elif claim.claimType == "40" %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair(data.claims) %}
+{% endif %}
+
+{% if claim.claimType == "60" %}  
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+  {% if (pairClaim and pairClaim.status == "queried") %}
+    {% set pairSubmission = pairClaim | getDraftSubmission %}
+  {% else %}
+    {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% else %}
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% endif %}
+
+
+
+{% set learner = submission.learnerID | findLearner(data["learners"]) %}
+
+{% block pageTitle %}
+  {% if (claim.claimType == "100") %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Claim: {{claim.claimID}} — {{serviceName}} — GOV.UK
+  {% else %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Combined claim: {{claim.claimID | removeClaimSuffix}} — {{serviceName}} — GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+
+  {% if (data.fromSearchResults) %}
+    <a href="advanced-search" class="govuk-back-link">Back</a>
+  {% elif (data.fromSearchId) %}
+    <a href="../manage-claims-home?fromSearchId" class="govuk-back-link">Back</a>
+  {% elif not (claim.status == "new") and not (claim.status == "not-yet-submitted") and not (claim.status == "queried") %}
+    <a href="../manage-claims?statusID={{ data.statusID }}" class="govuk-back-link">Back</a>
+  {% endif %} 
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}
+    {% include "../_components/claim-sections/errorCatch.html" %}
+    {% endif %}
+    <h1 class="govuk-heading-xl">
+      {% if (claim.claimType == "100") %}
+        Claim: {{ claim.claimID }}
+      {% else %}
+        Combined claim: {{ claim.claimID | removeClaimSuffix }}
+      {% endif %}
+    </h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% if claim.claimType != "100" %}
+      <p class="govuk-body">This is a combined claim using the 60/40 funding model. 60% of reimbursement is upfront after payment and 40% is on training completion.</p>
+    {% elif claim.claimType == "100"  %}
+      <p class="govuk-body">100 claims have a single reimbursement on training completion.</p>
+    {% endif %}
+
+    {% if (claim.claimType == "100") %}
+
+      <p class="govuk-body">This {{ claim.claimType | typeTag }} claim is {{ claim.status | statusTag(data.statuses) }}</p>
+
+      {% if claim.status == "rejected" %}
+        <h2 class="govuk-heading-m">Rejection note</h2>
+        {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
+        <p class="govuk-body"><strong>Evidence of payment: </strong>{{submission.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+        {% if submission.evidenceOfCompletionReview.outcome == "fail" %}
+        <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
+        {% endif %}
+      {% endif %}
+
+      {% if claim.status == "queried" %}
+      {% set previousSub = claim | getMostRelevantSubmission %}
+        <h2 class="govuk-heading-m">Query note</h2>
+        {% if previousSub.evidenceOfPaymentReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of payment:</strong> {{previousSub.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+        {% if previousSub.evidenceOfCompletionReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of completion:</strong> {{previousSub.evidenceOfCompletionReview.note}}</p>
+        {% endif %}
+      {% endif %}
+
+    {% elif (claim.claimType == "60" or claim.claimType == "40") %}
+
+      <p class="govuk-body">The {{ "60" | typeTag }} part of this claim is {{ claim.status | statusTag(data.statuses) }}</p>
+
+      <p class="govuk-body">The {{ "40" | typeTag }} part of this claim {% if pairClaim != null %}is {{ pairClaim.status | statusTag(data.statuses) }} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+
+      {% if claim.status == "rejected" %}
+        <h2 class="govuk-heading-m">Rejection note</h2>
+        {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
+        <p class="govuk-body"><strong>Evidence of payment: </strong>{{submission.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+        {% if submission.evidenceOfCompletionReview.outcome == "fail" %}
+        <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
+        {% endif %}
+      {% endif %}
+
+      {% if pairClaim.status == "rejected" %}
+      <h2 class="govuk-heading-m">Rejection note</h2>
+      {% if pairSubmission.evidenceOfPaymentReview.outcome == "fail" %}
+      <p class="govuk-body"><strong>Evidence of payment: </strong>{{pairSubmission.evidenceOfPaymentReview.note}}</p>
+      {% endif %}
+      {% if pairSubmission.evidenceOfCompletionReview.outcome == "fail" %}
+      <p class="govuk-body"><strong>Evidence of completion:</strong> {{pairSubmission.evidenceOfCompletionReview.note}}</p>
+      {% endif %}
+      {% endif %}
+
+      {% if claim.status == "queried" %}
+      {% set previousSub = claim | getMostRelevantSubmission %}
+        <h2 class="govuk-heading-m">Query note</h2>
+        {% if previousSub.evidenceOfPaymentReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of payment:</strong> {{previousSub.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+        {% if previousSub.evidenceOfCompletionReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of completion:</strong> {{previousSub.evidenceOfCompletionReview.note}}</p>
+        {% endif %}
+      {% endif %}
+
+      {% if pairClaim.status == "queried" %}
+      {% set previousSub = pairClaim | getMostRelevantSubmission %}
+        <h2 class="govuk-heading-m">Query note</h2>
+        {% if previousSub.evidenceOfPaymentReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of payment:</strong> {{previousSub.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+        {% if previousSub.evidenceOfCompletionReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of completion:</strong> {{previousSub.evidenceOfCompletionReview.note}}</p>
+        {% endif %}
+      {% endif %}
+
+    {% endif %}
+
+    {% if (claim.claimType == "60" or claim.claimType == "40") %}
+    <div class="content-container">
+      <div class="vertical-line-container">
+        <div class="circle">
+          <span class="govuk-heading-s section-number">1</span>
+        </div>
+        <div class="vertical-line"></div>
+      </div>
+      <div class="content"> 
+        <h2 class="govuk-heading-l">Complete the 60 part</h2>
+        <p class="govuk-body">Claim reference for the 60 part: {{ claim.claimID }}</p>
+    {% endif %}
+
+
+    {% include "../_components/claim-sections/training.html" %}
+
+    {% include "../_components/claim-sections/learner.html" %}
+
+    {% include "../_components/claim-sections/evidencePayment.html" %}
+
+    {% if (claim.status == "not-yet-submitted" and claim.claimType == "60") %}
+      {% include "../_components/claim-sections/cta-section.html" %}
+    {% elif (claim.status == "queried" and claim.claimType == "60") %}
+      {% include "../_components/claim-sections/query-cta-section.html" %}
+    {% endif %}
+    
+    {% if (claim.claimType == "60" or claim.claimType == "40") %}
+  </div>
+</div>
+{% endif %}
+
+{% if (claim.claimType == "60" or claim.claimType == "40") %}
+    <div class="content-container govuk-!-padding-bottom-6">
+      <div class="vertical-line-container">
+        <div class="circle">
+          <span class="govuk-heading-s section-number">2</span>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="horizontal-line"></div>
+      </div>
+      <div class="content">
+        <h2 class="govuk-heading-l">Complete the 40 part</h2>
+
+        {% if ((claim.claimType == "60" and ((pairClaim.status != null))))  %}
+          <p class="govuk-body">Claim reference for the 40 part: {{ claim.claimID.slice(0, -1) + "C" }}</p>
+        {% endif %}
+
+        {% if pairClaim == null and claim.claimType == "60" %}
+        {% if claim.status != "rejected" %}
+        <p class="govuk-body"><span class="govuk-caption-m">This part cannot be started until the 60 part is approved.</span></p>
+        {% elif claim.status == "rejected" %}
+        <p class="govuk-body"><span class="govuk-caption-m">The 60 part was rejected therefore the 40 part cannot be started.</span></p>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+
+    {% include "../_components/claim-sections/evidenceCompletion.html" %}
+
+    {% if ((claim.status == "not-yet-submitted" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}
+      {% include "../_components/claim-sections/cta-section.html" %}
+    {% elif ((claim.status == "queried" or pairClaim.status == "queried") and (claim.claimType == "100" or pairClaim.claimType == "40")) %}
+      {% include "../_components/claim-sections/query-cta-section.html" %}
+    {% endif %}
+
+    {% if (claim.claimType == "60" or claim.claimType == "40") %}
+  </div>
+</div>
+{% endif %}
+
+  </div>
+  <div class="govuk-grid-column-one-third">
+
+    {% include "../_components/claim-sections/claimAmount.html" %}
+
+    {% if claim.status != "rejected" %}
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
+
+    {% if claim.claimType == "100" %}
+      {% include "../_components/claim-sections/claimHistory100.html" %}
+    {% else %}
+      {% include "../_components/claim-sections/claimHistory6040.html" %}
+    {% endif %}
+    
+    
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+    <h2 class="govuk-heading-m">Related content</h2>
+
+      <p class="govuk-body"><a href="../guidance/help-start-tu-claim" class="govuk-link">Help with starting a new claim</a></p>
+      <p class="govuk-body"><a href="../guidance/tu-evidence-requirements" class="govuk-link">Help with evidence requirements</a></p>
+
+  </div>
+
+  {% if data.showNote %}
+    {% include "../_components/claim-sections/claim-history/view-note.html" %}
+  {% endif %}
+
+
+</div>
+{% endblock %}
