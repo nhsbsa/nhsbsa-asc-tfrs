@@ -356,9 +356,9 @@ addFilter('createTimelineArray', function (claim, organisations) {
             }
 
         } else if (
-            ((claim.claimType == "100" || claim.claimType == "60") && submission.evidenceOfPaymentReview.outcome == "pass") 
-            && ((claim.claimType == "100" || claim.claimType == "40") && submission.evidenceOfCompletionReview.outcome == "pass")
-            && submission.otherCheck.outcome == "pass") {
+            (claim.claimType == "100" && submission.evidenceOfPaymentReview.outcome == "pass" && submission.evidenceOfCompletionReview.outcome == "pass" && submission.otherCheck.outcome == "pass") 
+            || (claim.claimType == "60" && submission.evidenceOfPaymentReview.outcome == "pass" && submission.otherCheck.outcome == "pass")
+            || (claim.claimType == "40" && submission.evidenceOfCompletionReview.outcome == "pass" && submission.otherCheck.outcome == "pass")) {
 
             // Add approved date
             if (submission.processedDate) {
