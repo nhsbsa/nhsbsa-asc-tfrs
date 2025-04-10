@@ -519,8 +519,8 @@ addFilter('sortByDate', function (claims, statusID) {
     }
 })
 
-addFilter('orderByMostRecent', function (claims) {
-    let sorted = sortSubmissionsByDate(claims, 'submittedDate')
+addFilter('orderByMostRecent', function (submissions) {
+    let sorted = sortSubmissionsByDate(submissions, 'submittedDate')
     return sorted
 })
 
