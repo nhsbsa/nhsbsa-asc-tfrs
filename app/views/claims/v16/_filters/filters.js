@@ -1118,3 +1118,10 @@ addFilter('comparePaymentDate', function(date) {
         return false
     }
 })
+
+addFilter('formatSortCode', function(sortCode) {
+    if (!/^\d{6}$/.test(sortCode)) {
+      throw new Error("Input must be a string of exactly 6 digits.");
+    }
+    return sortCode.match(/.{1,2}/g).join("-");
+})

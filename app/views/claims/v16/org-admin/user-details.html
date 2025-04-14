@@ -22,9 +22,8 @@
       </div>
     </div>
     {% endif %}
-    <span class="govuk-caption-l">Invite new team member</span>
-    <h1 class="govuk-heading-l">Enter contact details</h1>
-    <p class="govuk-body">Enter the details of the team member you would like to invite. They will be able to add and manage claims.</p>
+    <h1 class="govuk-heading-l">Invite new submitter</h1>
+    <p class="govuk-body">Enter the details of the team member you're inviting to be a submitter.</p>
     <form action="../check-user" method="post" novalidate>
       <div
         class="govuk-form-group {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
@@ -64,7 +63,7 @@
           Email address
         </label>
         <div id="email-hint" class="govuk-hint">
-          We’ll only use this to send the invitation
+          We’ll only use this to send the invite
         </div>
         {% if data.submitError.userValid != null and not data.submitError.userValid and
           (data.submitError.email == 'missing' or data.submitError.email == 'invalid' or data.submitError.email == 'match')  %}
@@ -73,7 +72,7 @@
             {% if data.submitError.email == 'missing' %}
                 Enter an email address
             {% elif data.submitError.email == 'match' %}
-            An invitation has already been sent to this email
+                An invite has already been sent to this email
             {% elif data.submitError.email == 'invalid' %}
                 Enter an email address in the correct format, like name@example.com
             {% endif %}

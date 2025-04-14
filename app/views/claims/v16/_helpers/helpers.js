@@ -422,30 +422,39 @@ function getMostRelevantSubmission(claim) {
       }
   }
 
-  function flattenUsers(data) {
+function flattenUsers(data) {
     let users = [];
   
     // Flatten signatory
     if (data.signatory) {
       if (data.signatory.active) {
-        users.push({ ...data.signatory.active });
+        users.push({ ...data.signatory.active }); // No status added here
       }
       if (Array.isArray(data.signatory.inactive)) {
-        users = users.concat(data.signatory.inactive);
+        const inactiveSignatories = data.signatory.inactive.map(user => ({
+          ...user,
+          status: 'inactive'
+        }));
+        users = users.concat(inactiveSignatories);
       }
     }
   
-    // Flatten users
+    // Flatten users and add status
     if (data.users) {
-      Object.values(data.users).forEach(userGroup => {
+      Object.entries(data.users).forEach(([group, userGroup]) => {
         if (Array.isArray(userGroup)) {
-          users = users.concat(userGroup);
+          const groupStatus = group === "active" || group === "inactive" || group === "invited" ? group : null;
+          const processedUsers = groupStatus
+            ? userGroup.map(user => ({ ...user, status: groupStatus }))
+            : userGroup;
+          users = users.concat(processedUsers);
         }
       });
     }
   
     return users;
-}
+  }
+  
 
 function sortClaimsByStatusSubmission(claims, dateType) {
     // Sort the claims based on the most recent submission date

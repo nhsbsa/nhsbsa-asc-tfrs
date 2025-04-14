@@ -67,21 +67,22 @@ Manage claims - {{serviceName}} — GOV.UK
         </h2>
       </div>
       <div class="govuk-notification-banner__content">
+        <h3 class="govuk-notification-banner__heading">Action needed</h3>
         {% if data.org.bankDetails == null %}
-          <p class="govuk-notification-banner__heading">
+          <p class="govuk-body">
               {% if data.userType == "signatory" %}
-              You can only submit claims once you, as the Senior Responsible Officer, have added your organisation's bank details to the service.
+              As Senior Responsible Officer you need to add your organisation's bank details before you can submit claims.
               <a class="govuk-notification-banner__link" href="./org-admin/change-bank-details?tabLocation=bankDetails">Add bank details</a>.
               {% elif data.userType == "submitter" %}
-              You will only be able to submit claims once your Senior Responsible Officer logs in and adds your organisation's bank details to the service. 
+              Please alert your Senior Responsible Officer that they need to enter your organisation's bank details so that you can start submitting claims.
               {% endif %}
           </p>
         {% endif %}
         {% if data.org.validGDL == false  %}
-          <p class="govuk-notification-banner__heading">
+          <p class="govuk-body">
               {% if data.userType == "signatory" %}
               You can only submit claims that were paid for in the year starting 1 April 2025 once you, as Senior Responsible Officer, sign the new grant determination letter (GDL).
-              <a class="govuk-notification-banner__link" href="./account-setup/sign-new-gdl">Sign new GDL</a>
+              <a class="govuk-notification-banner__link" href="./account-setup/sign-new-gdl">Sign new GDL</a>.
               {% elif data.userType == "submitter" %}
               You can only submit claims that were paid for  in the year starting 1 April 2025 once your Senior Responsible Officer signs the new grant determination letter for that year.
               {% endif %}
