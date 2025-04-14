@@ -67,7 +67,7 @@
           {% if data.userType == "signatory" %}
           <li class="govuk-service-navigation__item {% if data.tabLocation == 'users' %}govuk-service-navigation__item--active{% endif %}">
             <a class="govuk-service-navigation__link" href="/claims/v16/org-admin/manage-team?tabLocation=users" {% if data.tabLocation == 'users' %}aria-current="true"{% endif %}>
-              {% if data.tabLocation == 'users' %}<strong class="govuk-service-navigation__active-fallback">{% endif %}Manage Submitters{% if data.tabLocation == 'users' %}</strong>{% endif %}
+              {% if data.tabLocation == 'users' %}<strong class="govuk-service-navigation__active-fallback">{% endif %}Manage submitters{% if data.tabLocation == 'users' %}</strong>{% endif %}
             </a>
           </li>
           <li class="govuk-service-navigation__item {% if data.tabLocation == 'bankDetails' %}govuk-service-navigation__item--active{% endif %}">
