@@ -20,10 +20,14 @@ Banks details — {{serviceName}} — GOV.UK
         <h1 class="govuk-heading-l">Bank details</h1>
         {% if data.org.bankDetails == null %}
             <p class="govuk-body">You have not added your organisation's bank details yet. You will not be able to submit any claims until you do.</p>
+            <div class="govuk-inset-text">
+                As Senior Responsible Officer you are the only person in your organisation who is able to add and view bank details.
+            </div>
             <a type="submit" class="govuk-button" href="./change-bank-details">
                 Add bank details
             </a>
         {% else %}
+        <p class="govuk-body">As Senior Responsible Officer you are the only person in your organisation who is able to  view this information.</p>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">

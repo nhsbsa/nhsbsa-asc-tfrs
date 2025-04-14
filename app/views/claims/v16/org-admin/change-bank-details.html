@@ -35,7 +35,8 @@
                 <span class="govuk-caption-l">Complete registration</span>
             {% endif %}
             <h1 class="govuk-heading-l">Organisation bank or building society account details</h1>
-            <p class="govuk-body">We need this information to pay training costs back to your organisation.</p>
+            <p class="govuk-body">As Senior Responsible Officer you are the only person in your organisation who is able to add and view bank details.</p>
+            <p class="govuk-body">We need this information to reimburse your training costs.</p>
             <div class="govuk-warning-text">
                 <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
                 <strong class="govuk-warning-text__text">
@@ -49,7 +50,7 @@
                     Name on the account
                 </label>
                 <div id="account-name-hint" class="govuk-hint">
-                    Must be no more than 140 characters. If the name is longer, enter as much as you can
+                    This is  name of your organisation, not your bank
                 </div>
                 {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountName != 'valid' %}
                 <p id="accountName-error" class="govuk-error-message">
@@ -109,8 +110,8 @@
             </div>
 
             <h2 class="govuk-heading-m">What happens next</h2>
-            <p class="govuk-body">Adding your organisation's bank details will allow you to start submitting claims for training costs.</p>
-            <p class="govuk-body">These bank details will be verified and we will be in touch if there are any issues.</p>
+            <p class="govuk-body">These bank details will now be verified and we will be in touch if there are any issues.</p>
+            <p class="govuk-body">You can start submitting claims, but you will not receive payment until verification is completed.</p>
             <button type="submit" class="govuk-button" data-module="govuk-button">
                 Add bank details
             </button>
