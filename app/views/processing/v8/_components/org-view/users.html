@@ -1,5 +1,5 @@
 
-{% set org = data.orgId | findOrganisation(data.organisations) %}
+{% set org = data.organisations | findOrg(data.orgId) %}
 
 {% set nameColumnWidth = "20%" %}
 {% set emailColumnWidth = "45%" %}

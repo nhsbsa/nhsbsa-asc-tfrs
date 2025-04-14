@@ -1,4 +1,4 @@
-{% set org = data.orgId | findOrganisation(data.organisations) %}
+{% set org = data.organisations | findOrg(data.orgId) %}
 {% set orgClaims = data.orgId | findOrgClaims(data.claims) %}
 {% set claims = orgClaims | orderClaims %}
 

@@ -8544,12 +8544,12 @@
         "completionDate": "2025-01-30T12:11:46.169Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
-          "outcome": "pass",
+          "outcome": null,
           "note": null,
-          "costPerLearner": 1350
+          "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "outcome": null,
+          "outcome":null,
           "note": null
         },
         "processedDate": null,
@@ -8570,13 +8570,13 @@
         "completionDate": "2025-01-30T12:11:46.169Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
-          "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
-          "costPerLearner": 1350
+          "outcome": null,
+          "note": null,
+          "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
+          "outcome": "queried",
+          "note": "The evidence of payment provided is not sufficient to prove you paid for the training."
         },
         "processedDate": "2025-03-18T16:41:19.739Z",
         "processedBy": "Flossie Gleason"

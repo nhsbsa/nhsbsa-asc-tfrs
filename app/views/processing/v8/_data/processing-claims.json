@@ -361,7 +361,7 @@
     "workplaceID": "B02944934",
     "claimType": "100",
     "status": "rejected",
-    "createdDate": "2025-02-01T22:20:36.371Z",
+    "createdDate": "2024-12-01T22:20:36.371Z",
     "createdBy": "lena.caldwell@evergreencare.com",
     "notes": [],
     "submissions": [
@@ -376,13 +376,13 @@
         "completionDate": "2025-02-02T01:44:27.141Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
-          "outcome": "fail",
-          "note": "The evidence of payment show you paid for a course that is not eligible for funding through our service.",
+          "outcome": "queried",
+          "note": "The evidence of payment needs to show the date of payment",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
+          "outcome": "fail",
+          "note": "The certificate is for a course not eligible."
         },
         "otherCheck": {
           "outcome": "pass",
@@ -407,8 +407,8 @@
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
+          "outcome": "queried",
+          "note": "The certificate doesn't show the learner"
         },
         "otherCheck": {
           "outcome": "pass",
@@ -479,26 +479,6 @@
     "createdBy": "lena.caldwell@evergreencare.com",
     "notes": [],
     "submissions": [
-      {
-        "submitter": null,
-        "submittedDate": null,
-        "trainingCode": "601/6128/0",
-        "learnerID": "KZ 79 0F 13 Z",
-        "startDate": "2024-06-09T23:24:35.737Z",
-        "costDate": "2024-06-08T12:52:08.749Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-        "evidenceOfPaymentReview": {
-          "outcome": null,
-          "note": null,
-          "costPerLearner": null
-        },
-        "otherCheck": {
-          "outcome": "pass",
-          "note": null
-        },
-        "processedDate": null,
-        "processedBy": null
-      },
       {
         "submitter": "jasper.holloway@evergreencare.com",
         "submittedDate": "2025-02-23T16:59:19.728Z",
@@ -933,7 +913,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfCompletionReview": {
           "outcome": "fail",
-          "note": "The certificate of completion still doesn't match the details in the claim."
+          "note": "The training is not eligible for this fund."
         },
         "otherCheck": {
           "outcome": "pass",
@@ -951,11 +931,11 @@
         "completionDate": "2025-01-30T10:14:23.640Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": "The certificate of completion still doesn't match the details in the claim."
+          "outcome": "queried",
+          "note": "The certificate of completion doesn't match the details in the claim."
         },
         "otherCheck": {
-          "outcome": null,
+          "outcome": "pass",
           "note": null
         },
         "processedDate": "2025-02-21T03:53:38.386Z",

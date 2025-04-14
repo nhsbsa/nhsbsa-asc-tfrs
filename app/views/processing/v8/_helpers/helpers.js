@@ -85,10 +85,8 @@ function formatDate(isoDate) {
 }
 
 function checkWDSFormat(id) {
-
     var pattern = /^[B-I]\d{5,8}$/;
     return pattern.test(id);
-
 }
 
 function signatoryCheck(familyName, givenName, email) {
@@ -117,7 +115,6 @@ function signatoryCheck(familyName, givenName, email) {
     }
     
     result.signatoryValid = result.familyName == "valid" && result.givenName == "valid" && result.email == "valid"
-
     return result
 }
 
