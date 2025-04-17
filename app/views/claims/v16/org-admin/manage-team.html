@@ -1,7 +1,5 @@
 {% extends "../_layouts/claims-main.html" %} 
 
-{% set matchResendUser = data.resendEmail | findUser (data.org) %}
-{% set matchDeletedUser = data.deletedEmail | findUser (data.org) %}
 {% set count = data.org | userCountNotExpired %}
 
 
@@ -20,7 +18,7 @@ Manage team — {{serviceName}} — GOV.UK
         <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
       </svg>
     
-      <div class="moj-banner__message">Invite to {{matchResendUser.givenName}} {{matchResendUser.familyName}} sent.<br><br>Some emails might not arrive straight away. You can resend the email after 24 hours if necessary.</div>
+      <div class="moj-banner__message">Invite to {{data.matchResendUser.givenName}} {{data.matchResendUser.familyName}} sent.<br><br>Some emails might not arrive straight away. You can resend the email after 24 hours if necessary.</div>
     
     </div>
     {% elif data.invite == "failure" %}
@@ -31,7 +29,7 @@ Manage team — {{serviceName}} — GOV.UK
         <path d="M13.6,15.4h-2.3v-4.5h2.3V15.4z M13.6,19.8h-2.3v-2.2h2.3V19.8z M0,23.2h25L12.5,2L0,23.2z" />
       </svg>
     
-      <div class="moj-banner__message">Invite to {{matchResendUser.givenName}} {{matchResendUser.familyName}} wasn't sent - try again</div>
+      <div class="moj-banner__message">Invite to {{data.matchResendUser.givenName}} {{data.matchResendUser.familyName}} wasn't sent - try again</div>
     
     </div>
 
@@ -44,9 +42,9 @@ Manage team — {{serviceName}} — GOV.UK
         <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
       </svg>
       {% if (data.deletedUser == "active")%}
-        <div class="moj-banner__message">Registered user {{matchDeletedUser.givenName}} {{matchDeletedUser.familyName}} has been successfully deleted</div>
+        <div class="moj-banner__message">Registered user {{data.matchDeletedUser.givenName}} {{data.matchDeletedUser.familyName}} has been successfully deleted</div>
       {% elif (data.deletedUser  != "active") %}
-        <div class="moj-banner__message">Invite to user {{matchDeletedUser.givenName}} {{matchDeletedUser.familyName}} has been successfully cancelled</div>
+        <div class="moj-banner__message">Invite to user {{data.matchDeletedUser.givenName}} {{data.matchDeletedUser.familyName}} has been successfully cancelled</div>
       {% endif %}
     </div>
     {% endif %}
@@ -107,7 +105,7 @@ Manage team — {{serviceName}} — GOV.UK
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header" width="30%">{{user.givenName}} {{user.familyName}}</th>
                 <td class="govuk-table__cell" width="35%">{{ user.email }}</td>
-                <td class="govuk-table__cell govuk-table__cell--numeric" width="40%">{% if not (data.resendList | matchResend(user.email)) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-user?name={{user.email}}">Resend invite<span class="govuk-visually-hidden">to {{user.givenName}} {{user.familyName}}</span></a>{% else %}Invite sent{% endif %}<a class="govuk-link govuk-link--no-visited-state" style="display: inline-block; margin-left: 10px; padding-left: 10px; border-left: 1px solid #b1b4b6;" href="delete-user-confirmation?deletedEmail={{user.email}}&deleteSuccess">Cancel invite<span class="govuk-visually-hidden">{{user.givenName}} {{user.familyName}}</span></a></td>
+                <td class="govuk-table__cell govuk-table__cell--numeric" width="40%">{% if not (data.resendList | matchResend(user.email)) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-user?email={{user.email}}">Resend invite<span class="govuk-visually-hidden">to {{user.givenName}} {{user.familyName}}</span></a>{% else %}Invite sent{% endif %}<a class="govuk-link govuk-link--no-visited-state" style="display: inline-block; margin-left: 10px; padding-left: 10px; border-left: 1px solid #b1b4b6;" href="delete-user-confirmation?deletedEmail={{user.email}}&deleteSuccess">Cancel invite<span class="govuk-visually-hidden">{{user.givenName}} {{user.familyName}}</span></a></td>
               </tr>
         {% endfor %}
       </tbody>

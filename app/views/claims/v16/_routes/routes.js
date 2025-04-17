@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair } = require('../_helpers/helpers.js');
+const { checkClaim, compareNINumbers, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser } = require('../_helpers/helpers.js');
 const { generateClaims } = require('../_helpers/generate-claims.js');
 const { generateLearners } = require('../_helpers/generate-learners.js');
 
@@ -904,7 +904,7 @@ router.post('/check-user', function (req, res) {
   const familyName = req.session.data.familyName
   const givenName = req.session.data.givenName
 
-  const submitError = checkUserForm(familyName, givenName, email, req.session.data.org.users)
+  const submitError = checkUserForm(familyName, givenName, email, req.session.data.org)
 
   if (submitError.userValid) {
     res.redirect('org-admin/confirm-user-details')
@@ -925,7 +925,8 @@ router.post('/invite-user', function (req, res) {
 
   const confirmationChecked = req.session.data.confirmation
 
-  req.session.data.resendEmail = email
+  
+
   if (confirmationChecked != null) {
     const user = {
         familyName: familyName,
@@ -938,22 +939,27 @@ router.post('/invite-user', function (req, res) {
     delete req.session.data.email
     delete req.session.data.deleteSuccess
     delete req.session.data.deletedUser
-    res.redirect('org-admin/manage-team?tabLocation=users&invite=success')
+    req.session.data.matchResendUser = findUser(email,req.session.data.org)
+    req.session.data.invite = 'success'
+    res.redirect('org-admin/manage-team?tabLocation=users')
   } else {
-    res.redirect('org-admin/confirm-user-details?checkBoxSubmitError=true')
+    req.session.data.checkBoxSubmitError = 'true'
+    res.redirect('org-admin/confirm-user-details')
   }
 });
 
 router.get('/reinvite-user', function (req, res) {
   req.session.data.invite = "success"
 
+  req.session.data.matchResendUser = findUser(req.session.data.email,req.session.data.org)
 
   if (req.session.data.resendList) {
-    req.session.data.resendList.push(req.session.data.name)
+    req.session.data.resendList.push(req.session.data.email)
   } else {
-    req.session.data.resendList = [req.session.data.name]
+    req.session.data.resendList = [req.session.data.email]
   }
 
+  delete req.session.data.email
   res.redirect('org-admin/manage-team?tabLocation=users')
 
 });
@@ -978,7 +984,9 @@ router.get('/confirm-delete-user', function (req, res) {
   }
 
   delete req.session.data.invite
+  delete req.session.data.deletedEmail
 
+  req.session.data.matchDeletedUser = findUser(deletedEmail,req.session.data.org)
   req.session.data.deletedUser = query
   req.session.data.deleteSuccess = 'true'
 
