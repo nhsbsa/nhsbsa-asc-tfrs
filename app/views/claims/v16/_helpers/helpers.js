@@ -453,8 +453,18 @@ function flattenUsers(data) {
     }
   
     return users;
-  }
-  
+}
+
+function findUser(email, org) {
+    users = flattenUsers(org)
+    let user = null;
+    for (let u of users) {
+        if (u.email == email) {
+            user = u
+        }
+    }
+    return user;
+}
 
 function sortClaimsByStatusSubmission(claims, dateType) {
     // Sort the claims based on the most recent submission date
@@ -554,4 +564,4 @@ function checkChange(claim) {
 }
 
 
-module.exports = { findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate }
+module.exports = { findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser }
