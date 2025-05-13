@@ -20,7 +20,7 @@ addFilter('statusTag', function (statusID, statuses) {
     } else if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
     } else if (statusID == 'queried') {
-        return '<strong class="govuk-tag govuk-tag--yellow" style="max-width: 180px;">' + statusName + '</strong>'
+        return '<strong class="govuk-tag govuk-tag--yellow" style="max-width: 200px;">' + statusName + '</strong>'
     } else if (statusID == 'rejected') {
         return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
     } else if (statusID == 'approved') {

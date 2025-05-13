@@ -124,9 +124,9 @@
 
     {% elif (claim.claimType == "60") %}
 
-      <p class="govuk-body">This {{ "60" | typeTag }} part of claim was {{ claim.status | statusTag(data.statuses) }} on 9 May 2025.</p>
+      <p class="govuk-body">The {{ "60" | typeTag }} part of this claim was {{ claim.status | statusTag(data.statuses) }} on 9 May 2025.</p>
 
-      <p class="govuk-body">This {{ "40" | typeTag }} part of claim {% if pairClaim != null %}was {{ pairClaim.status | statusTag(data.statuses) }} on 9 May 2025. {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+      <p class="govuk-body">The {{ "40" | typeTag }} part of this claim {% if pairClaim != null %}was {{ pairClaim.status | statusTag(data.statuses) }} on 9 May 2025. {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
 
       <p class="govuk-body">The most you could receive is <strong>£100</strong> (<a href="#" class="govuk-link">see how we calculate this</a>). </p>
 

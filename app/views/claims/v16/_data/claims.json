@@ -4999,10 +4999,6 @@
           "note": null,
           "costPerLearner": 135
         },
-        "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
-        },
         "processedDate": "2025-02-19T07:38:57.492Z",
         "processedBy": "Mara Monahan"
       }
@@ -5057,14 +5053,9 @@
         ],
         "completionDate": "2025-03-04T02:41:29.889Z",
         "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
-          "costPerLearner": 135
-        },
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
+          "outcome": "queried",
+          "note": "The certificate did not match the learner."
         },
         "processedDate": "2025-03-20T04:33:03.796Z",
         "processedBy": "Mara Monahan"
