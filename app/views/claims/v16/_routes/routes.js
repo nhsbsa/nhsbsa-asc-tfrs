@@ -1078,7 +1078,7 @@ router.post('/add-supporting-note', function (req, res) {
       break;
     }
   }
-
+  delete req.session.data.supportingNote
   res.redirect('claim/claim-details'+'?id='+claimID+'#notes')
 });
 

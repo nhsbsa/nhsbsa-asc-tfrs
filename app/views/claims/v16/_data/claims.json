@@ -5303,16 +5303,10 @@
           "invoice1.pdf",
           "receipt1.pdf"
         ],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
           "costPerLearner": 720
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
         },
         "processedDate": "2025-03-13T20:40:04.513Z",
         "processedBy": "Mara Monahan"
@@ -5342,11 +5336,6 @@
         ],
         "completionDate": "2025-01-13T01:04:54.693Z",
         "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": "pass",
-          "note": null,
-          "costPerLearner": 720
-        },
         "evidenceOfCompletionReview": {
           "outcome": null,
           "note": null
@@ -5368,14 +5357,9 @@
         ],
         "completionDate": "2025-01-13T01:04:54.693Z",
         "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
-          "costPerLearner": 720
-        },
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
+          "outcome": "queried",
+          "note": "The learner does not match the certificate provided."
         },
         "processedDate": "2025-03-18T22:56:42.684Z",
         "processedBy": "Mara Monahan"

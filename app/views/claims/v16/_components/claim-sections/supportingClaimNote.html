@@ -1,27 +1,39 @@
-<h2 class="govuk-heading-m" id="notes">Supporting note</h2>
+
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 
-{% if submission.supportingNote %}
-    <dl class="govuk-summary-list">
-
-        <div class="govuk-summary-list__row">
-            {# <dt class="govuk-summary-list__key">
-                Supporting note
-            </dt> #}
+<dl class="govuk-summary-list">
+{% if ((claim.claimType == "100" or claim.claimType == "60") and not submission.supportingNote) %}
+    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+        <dt class="govuk-summary-list__key">
+            Supporting note
+        </dt>
+        {% if claim.status != "not-yet-submitted" and claim.status != "queried" %}
             <dd class="govuk-summary-list__value">
-                {{ submission.supportingNote }}
+                <p class="govuk-body">No supporting notes added to claim before submission.</p>
             </dd>
-            {% if claim.status == "not-yet-submitted" or claim.status == "queried" or pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried"%}
-            <dd class="govuk-summary-list__actions">
-                <a class="govuk-link govuk-link--no-visited-state" href="add-supporting-note">Change</a>
+        {% else %}
+            <dd class="govuk-summary-list__value">
+                <a class="govuk-link govuk-link--no-visited-state" href="add-supporting-note">Add supporting note</a>
             </dd>
-            {% endif %}
-        </div>
+        {% endif %}
+    </div>
 
-    </dl>
-{% elif claim.status == "not-yet-submitted" or claim.status == "queried" or pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried" %}
-    <p class="govuk-body">Add a note that might help NHS BSA staff when processing your claim.</p>
-    <p class="govuk-body"><a class="govuk-link govuk-link--no-visited-state" href="add-supporting-note">Add note</a></p>
 {% else %}
-    <p class="govuk-body">No supporting notes added to claim before submission.</p>
+
+<div class="govuk-summary-list__row">
+  <dt class="govuk-summary-list__key">
+    Supporting note {% if ( claim | checkIfUpdated("supportingNote")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
+  </dt>
+  <dd class="govuk-summary-list__value">
+    <p class="govuk-body">{{submission.supportingNote}}</p>
+  </dd>
+  {% if (claim.status == "not-yet-submitted" or claim.status == "queried")%}
+  <dd class="govuk-summary-list__actions">
+    <a class="govuk-link govuk-link--no-visited-state" href="add-supporting-note">Change<span
+        class="govuk-visually-hidden"> supporting note</span></a>
+  </dd>
+  {% endif %}
+</div>
+
 {% endif %}
+</dl>
