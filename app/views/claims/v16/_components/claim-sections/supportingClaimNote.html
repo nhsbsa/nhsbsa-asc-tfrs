@@ -1,11 +1,10 @@
 
-{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
-
 <dl class="govuk-summary-list">
-{% if ((claim.claimType == "100" or claim.claimType == "60") and not submission.supportingNote) %}
+{% if ((claim.claimType == "100" or claim.claimType == "60" and not is40Part) and not submission.supportingNote) %}
     <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
         <dt class="govuk-summary-list__key">
             Supporting note
+            {{claim.claimType}}
         </dt>
         {% if claim.status != "not-yet-submitted" and claim.status != "queried" %}
             <dd class="govuk-summary-list__value">
@@ -18,11 +17,11 @@
         {% endif %}
     </div>
 
-{% else %}
+{% elif not is40Part %}
 
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
-    Supporting note {% if ( claim | checkIfUpdated("supportingNote")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
+    Supporting note {{claim.claimType}} {% if ( claim | checkIfUpdated("supportingNote")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
   </dt>
   <dd class="govuk-summary-list__value">
     <p class="govuk-body">{{submission.supportingNote}}</p>
@@ -34,6 +33,8 @@
   </dd>
   {% endif %}
 </div>
+
+{% else %}
 
 {% endif %}
 </dl>

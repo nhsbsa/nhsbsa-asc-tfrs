@@ -197,7 +197,7 @@
       <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable">View previous submissions</a></p>
     {% endif %}
 
-    {% if (claim.claimType == "60" or claim.claimType == "40") %}
+    {% if (claim.claimType == "60") %}
     <div class="content-container">
       <div class="vertical-line-container">
         <div class="circle">
@@ -230,12 +230,12 @@
       {% include "../_components/claim-sections/query-cta-section.html" %}
     {% endif %}
     
-    {% if (claim.claimType == "60" or claim.claimType == "40") %}
+    {% if (claim.claimType == "60" ) %}
   </div>
 </div>
 {% endif %}
 
-{% if (claim.claimType == "60" or claim.claimType == "40") %}
+{% if (claim.claimType == "60") %}
     <div class="content-container govuk-!-padding-bottom-6">
       <div class="vertical-line-container">
         <div class="circle">
@@ -266,7 +266,12 @@
 
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
 
-    {% if (claim.claimType != "60") %}
+    {% if (claim.claimType == "100" ) %}
+      {% include "../_components/claim-sections/supportingClaimNote.html" %}
+    {% endif %}
+
+    {% if (pairClaim.claimType == "40" and claim.status == "approved" ) %}
+      {% set is40Part = "true" %}
       {% include "../_components/claim-sections/supportingClaimNote.html" %}
     {% endif %}
 
@@ -276,7 +281,7 @@
       {% include "../_components/claim-sections/query-cta-section.html" %}
     {% endif %}
 
-    {% if (claim.claimType == "60" or claim.claimType == "40") %}
+    {% if (claim.claimType == "60") %}
   </div>
 </div>
 {% endif %}
