@@ -87,7 +87,9 @@
           {% if submission.evidenceOfCompletionReview.outcome == "fail" %}
             <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
           {% endif %}
+          <p class="govuk-body">If you dispute the outcome, then <a class="govuk-link" href="#">contact us here</a></p>
         </div>
+
       {% endif %}
 
       {% if claim.status == "queried" %}
@@ -102,6 +104,7 @@
             <p class="govuk-body"><strong>Evidence of completion:</strong> {{previousSub.evidenceOfCompletionReview.note}}</p>
           {% endif %}
           <p class="govuk-body"><a class="govuk-link" href="#">Check what evidence you need to provide</a></p>
+          <p class="govuk-body">If you are unsure, then <a class="govuk-link" href="#">contact us here</a></p>
 
         </div>
       {% endif %}
@@ -143,6 +146,7 @@
           {% if pairSubmission.evidenceOfCompletionReview.outcome == "fail" %}
             <p class="govuk-body"><strong>Evidence of completion:</strong> {{pairSubmission.evidenceOfCompletionReview.note}}</p>
           {% endif %}
+          <p class="govuk-body">If you dispute the outcome, then <a class="govuk-link" href="#">contact us here</a></p>
         </div>
       {% endif %}
 
@@ -171,6 +175,7 @@
           {% if previousSub.evidenceOfCompletionReview.outcome == "queried" %}
             <p class="govuk-body"><strong>Evidence of completion:</strong> {{previousSub.evidenceOfCompletionReview.note}}</p>
           {% endif %}
+          <p class="govuk-body">If you are unsure, then <a class="govuk-link" href="#">contact us here</a></p>
         </div>
       {% endif %}
       {% if pairClaim.status == "queried" %}
@@ -183,6 +188,8 @@
           {% if previousSub.evidenceOfCompletionReview.outcome == "queried" %}
             <p class="govuk-body"><strong>Evidence of completion:</strong> {{previousSub.evidenceOfCompletionReview.note}}</p>
           {% endif %}
+          <p class="govuk-body">If you are unsure, then <a class="govuk-link" href="#">contact us here</a></p>
+
         </div>
       {% endif %}
 
