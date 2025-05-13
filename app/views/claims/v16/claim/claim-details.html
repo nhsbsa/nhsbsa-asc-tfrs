@@ -114,12 +114,19 @@
         </div>
       {% endif %}
 
+      {% if claim.status == "not-yet-submitted" %}
+        <div class="hods-alert">
+          <h2 class="hods-alert__heading">What to do now</h2>
+          <p class="govuk-body">Fill in claim details and submit</p>
+        </div>
+      {% endif %}
+
 
     {% elif (claim.claimType == "60") %}
 
-      <p class="govuk-body">This {{ "60" | typeTag }} claim was {{ claim.status | statusTag(data.statuses) }} on 9 May 2025.</p>
+      <p class="govuk-body">This {{ "60" | typeTag }} part of claim was {{ claim.status | statusTag(data.statuses) }} on 9 May 2025.</p>
 
-      <p class="govuk-body">This {{ "40" | typeTag }} claim {% if pairClaim != null %}was {{ pairClaim.status | statusTag(data.statuses) }} on 9 May 2025. {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+      <p class="govuk-body">This {{ "40" | typeTag }} part of claim {% if pairClaim != null %}was {{ pairClaim.status | statusTag(data.statuses) }} on 9 May 2025. {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
 
       <p class="govuk-body">The most you could receive is <strong>£100</strong> (<a href="#" class="govuk-link">see how we calculate this</a>). </p>
 
@@ -153,6 +160,12 @@
         <div class="hods-alert">
           <h2 class="hods-alert__heading">Reimbursement amount</h2>
           <p class="govuk-body">Claim was approved, you can expect to be paid in next X days from approval.</p>
+        </div>
+      {% endif %}
+      {% if claim.status == "not-yet-submitted" %}
+        <div class="hods-alert">
+          <h2 class="hods-alert__heading">What to do now</h2>
+          <p class="govuk-body">Fill in <a class="govuk-link" href="#">60 part</a> of the claim details and submit</p>
         </div>
       {% endif %}
 
@@ -272,7 +285,7 @@
 
     {% if (pairClaim.claimType == "40" and claim.status == "approved" ) %}
       {% set is40Part = "true" %}
-      {% include "../_components/claim-sections/40supportingClaimNote.html" %}
+      {% include "../_components/claim-sections/supportingClaimNote.html" %}
     {% endif %}
 
     {% if ((claim.status == "not-yet-submitted" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}

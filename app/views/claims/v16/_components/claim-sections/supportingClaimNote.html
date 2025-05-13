@@ -1,11 +1,19 @@
+{% if is40Part == "true" %}
+    {% set submissionToUse = pairSubmission %}
+    {% set claimToUse = pairClaim %}
+{% else %}
+    {% set submissionToUse = submission %}
+    {% set claimToUse = claim %}
+{% endif %}
+
+
 <dl class="govuk-summary-list">
-{% if (not submission.supportingNote) %}
+{% if (not submissionToUse.supportingNote) %}
     <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
         <dt class="govuk-summary-list__key">
             Supporting note
-            {{claim.claimType}}
         </dt>
-        {% if claim.status != "not-yet-submitted" and claim.status != "queried" %}
+        {% if claimToUse.status != "not-yet-submitted" and claimToUse.status != "queried" %}
             <dd class="govuk-summary-list__value">
                 <p class="govuk-body">No supporting notes added to claim before submission.</p>
             </dd>
@@ -20,12 +28,12 @@
 
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
-    Supporting note {{claim.claimType}} {% if ( claim | checkIfUpdated("supportingNote")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
+    Supporting note {% if ( claimToUse | checkIfUpdated("supportingNote")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
   </dt>
   <dd class="govuk-summary-list__value">
-    <p class="govuk-body">{{submission.supportingNote}}</p>
+    <p class="govuk-body">{{submissionToUse.supportingNote}}</p>
   </dd>
-  {% if (claim.status == "not-yet-submitted" or claim.status == "queried")%}
+  {% if (claimToUse.status == "not-yet-submitted" or claimToUse.status == "queried")%}
   <dd class="govuk-summary-list__actions">
     <a class="govuk-link govuk-link--no-visited-state" href="add-supporting-note">Change<span
         class="govuk-visually-hidden"> supporting note</span></a>

@@ -12401,6 +12401,7 @@
           "outcome": null,
           "note": null
         },
+        "supportingNote": "hello",
         "processedDate": "2025-03-17T05:46:46.185Z",
         "processedBy": "Mara Monahan"
       }
@@ -12461,8 +12462,8 @@
           "costPerLearner": 540
         },
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
+          "outcome": "queried",
+          "note": "The certificate doesn't match the learner name"
         },
         "processedDate": "2025-03-19T15:11:51.774Z",
         "processedBy": "Mara Monahan"
