@@ -237,8 +237,10 @@
     </dl>
 
     {% if (claim.status == "not-yet-submitted" and claim.claimType == "60") %}
+      {% include "../_components/claim-sections/supportingClaimNote.html" %}
       {% include "../_components/claim-sections/cta-section.html" %}
     {% elif (claim.status == "queried" and claim.claimType == "60") %}
+      {% include "../_components/claim-sections/supportingClaimNote.html" %}
       {% include "../_components/claim-sections/query-cta-section.html" %}
     {% endif %}
     
@@ -278,11 +280,11 @@
 
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
 
-    {% include "../_components/claim-sections/supportingClaimNote.html" %}
-
     {% if ((claim.status == "not-yet-submitted" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}
+      {% include "../_components/claim-sections/supportingClaimNote.html" %}
       {% include "../_components/claim-sections/cta-section.html" %}
     {% elif ((claim.status == "queried" or pairClaim.status == "queried") and (claim.claimType == "100" or pairClaim.claimType == "40")) %}
+      {% include "../_components/claim-sections/supportingClaimNote.html" %}
       {% include "../_components/claim-sections/query-cta-section.html" %}
     {% endif %}
 

@@ -1063,7 +1063,7 @@ router.get('/signin-handler', function (req, res) {
 });
 
 router.post('/add-supporting-note', function (req, res) {
-  var note = req.session.data.note
+  var note = req.session.data.supportingNote
   var claimID = req.session.data.id
   
   for (const c of req.session.data.claims) {
@@ -1072,8 +1072,6 @@ router.post('/add-supporting-note', function (req, res) {
         break;
     }
   }
-
-  delete req.session.data.note;
 
   res.redirect('claim/claim-details'+'?id='+claimID+'#notes')
 });
