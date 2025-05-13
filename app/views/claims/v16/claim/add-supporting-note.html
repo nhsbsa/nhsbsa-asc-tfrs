@@ -1,5 +1,6 @@
 {% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+{% set submission = claim | getMostRelevantSubmission%}
 
 {% block pageTitle %}
 {{ ["Add note - Claim: ", claim.claimID] | join }}
@@ -23,7 +24,7 @@
         <div id="more-detail-hint" class="govuk-hint">
           Do not include financial information, like your organsiation's bank details.
         </div>
-        <textarea class="govuk-textarea" id="supportingNote" name="supportingNote" value="{{data.supportingNote}}"" rows="10" aria-describedby="more-detail-hint"></textarea>
+        <textarea class="govuk-textarea" id="supportingNote" name="supportingNote" rows="10" aria-describedby="more-detail-hint">{{data.supportingNote}}</textarea>
       </div>
       <button class="govuk-button" data-module="govuk-button">
         Add to claim
