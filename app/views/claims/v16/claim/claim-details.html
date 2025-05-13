@@ -272,7 +272,7 @@
 
     {% if (pairClaim.claimType == "40" and claim.status == "approved" ) %}
       {% set is40Part = "true" %}
-      {% include "../_components/claim-sections/supportingClaimNote.html" %}
+      {% include "../_components/claim-sections/40supportingClaimNote.html" %}
     {% endif %}
 
     {% if ((claim.status == "not-yet-submitted" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}

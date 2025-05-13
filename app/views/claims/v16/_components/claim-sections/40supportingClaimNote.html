@@ -1,11 +1,11 @@
 <dl class="govuk-summary-list">
-{% if (not submission.supportingNote) %}
+{% if (not pairSubmission.supportingNote) %}
     <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
         <dt class="govuk-summary-list__key">
             Supporting note
-            {{claim.claimType}}
+            {{pairClaim.claimType}}
         </dt>
-        {% if claim.status != "not-yet-submitted" and claim.status != "queried" %}
+        {% if pairClaim.status != "not-yet-submitted" and pairClaim.status != "queried" %}
             <dd class="govuk-summary-list__value">
                 <p class="govuk-body">No supporting notes added to claim before submission.</p>
             </dd>
@@ -20,12 +20,12 @@
 
 <div class="govuk-summary-list__row">
   <dt class="govuk-summary-list__key">
-    Supporting note {{claim.claimType}} {% if ( claim | checkIfUpdated("supportingNote")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
+    Supporting note {{pairClaim.claimType}} {% if ( pairClaim | checkIfUpdated("supportingNote")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
   </dt>
   <dd class="govuk-summary-list__value">
-    <p class="govuk-body">{{submission.supportingNote}}</p>
+    <p class="govuk-body">{{pairSubmission.supportingNote}}</p>
   </dd>
-  {% if (claim.status == "not-yet-submitted" or claim.status == "queried")%}
+  {% if (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried")%}
   <dd class="govuk-summary-list__actions">
     <a class="govuk-link govuk-link--no-visited-state" href="add-supporting-note">Change<span
         class="govuk-visually-hidden"> supporting note</span></a>
