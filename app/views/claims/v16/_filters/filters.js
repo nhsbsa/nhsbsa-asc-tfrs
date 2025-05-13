@@ -1118,3 +1118,12 @@ addFilter('formatSortCode', function(sortCode) {
     }
     return sortCode.match(/.{1,2}/g).join("-");
 })
+
+addFilter('maskCharacters', function(str, num) {
+    if (num <= 0) return str;
+    if (num >= str.length) return '*'.repeat(str.length);
+    
+    const masked = '*'.repeat(num);
+    const remainder = str.slice(num);
+    return masked + remainder;
+})
