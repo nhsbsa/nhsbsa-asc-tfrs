@@ -1062,6 +1062,22 @@ router.get('/signin-handler', function (req, res) {
 
 });
 
+router.post('/add-supporting-note', function (req, res) {
+  var note = req.session.data.note
+  var claimID = req.session.data.id
+  
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+        c.notes.push(note)
+        break;
+    }
+  }
+
+  delete req.session.data.note;
+
+  res.redirect('claim/claim-details'+'?id='+claimID+'#notes')
+});
+
 function loadData(req) {
   // pull in the prototype data object and see if it contains a datafile reference
   let prototype = {} || req.session.data['prototype'] // set up if doesn't exist

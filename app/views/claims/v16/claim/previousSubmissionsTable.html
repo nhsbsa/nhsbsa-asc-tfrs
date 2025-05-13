@@ -1,0 +1,20 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% block beforeContent %}
+<p class="govuk-body"><a href="claim-details" class="govuk-back-link">Back to claim details</a></p>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <h2 class="govuk-heading-l" id="training">Claim submissions</h2>
+        <p class="govuk-body">This table shows your current draft and earlier submissions with any updates you've made highlighted.</p>
+        
+        
+    </div>
+</div>
+
+{% endblock %}

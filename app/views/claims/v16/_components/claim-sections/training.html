@@ -1,9 +1,7 @@
-<{% if claim.claimType == '60' %}h3{% else %}h2{% endif %} class="govuk-heading-m" id="training">Training</{% if claim.claimType == '60' %}h3{% else %}h2{% endif %}>
 
-<dl class="govuk-summary-list">
   <div class="govuk-summary-list__row  {% if claim.status != "queried" %} govuk-summary-list__row--no-actions {% endif%}">
     <dt class="govuk-summary-list__key">
-      Name {% if ( claim | checkIfUpdated("training")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
+      Training {% if ( claim | checkIfUpdated("training")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
     </dt>
     <dd class="govuk-summary-list__value">
       {% set training = submission.trainingCode | findTraining(data.training) %}
@@ -74,4 +72,3 @@
 
   </div>
   {% endif %}
-</dl>

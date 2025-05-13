@@ -1,6 +1,3 @@
-<{% if claim.claimType == '60' %}h3{% else %}h2{% endif %} class="govuk-heading-m" id="payment">Payment for activity</{% if claim.claimType == '60' %}h3{% else %}h2{% endif %}>
-<dl class="govuk-summary-list">
-
   {% if not submission.costDate %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =="missing" %}
     <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
@@ -78,4 +75,3 @@
       {% endif %}
     </div>
   {% endif %}
-</dl>
