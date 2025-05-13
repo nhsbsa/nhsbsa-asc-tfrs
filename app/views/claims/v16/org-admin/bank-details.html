@@ -50,7 +50,7 @@ Banks details — {{serviceName}} — GOV.UK
                 Account number
             </dt>
             <dd class="govuk-summary-list__value">
-                {{data.org.bankDetails.accountNumber}}
+                {{data.org.bankDetails.accountNumber | maskCharacters(4)}}
             </dd>
             </div>
             {% if data.org.bankDetails.buildingSocietyNumber != null %}
