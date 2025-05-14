@@ -23,11 +23,8 @@
           
                   <th scope="col" class="govuk-table__header" style="min-width: 200px;"><span class="govuk-visually-hidden">Submissions</span></th>
           
-                  
-                  {% set count = claim.submissions.length %}
-                  {% for submission in claim.submissions | sortSubmissionsForTable %}
-                    {% set count = count - 1 %}
-                    <th scope="col" class="govuk-table__header" style="min-width: 200px;">{{count}}</th>
+                  {% for text in claim.submissions | matchSubmissionToText %}
+                    <th scope="col" class="govuk-table__header" style="min-width: 200px;">{{text}}</th>
                   {%endfor %}
           
                 </tr>

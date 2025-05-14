@@ -521,9 +521,23 @@ addFilter('sortSubmissionsForTable', function (submissions) {
     return sorted
 })
 
-addFilter('matchSubmissionToText', function (count) {
-    let text = ["First submission", "Second submission", "Third submission", "Fourth submission", "Fifth submission"]
-    return text[count]
+addFilter('matchSubmissionToText', function (submissions) {
+    const submissionLabels = submissions.map((submission, index, array) => {
+        if (!submission.submittedDate) {
+          return "Current draft";
+        } else {
+          // Count how many submissions (after this one) have a submittedDate
+          const submittedAfter = array.slice(index + 1).filter(s => s.submittedDate).length;
+      
+          if (submittedAfter === 0) return "First submission";
+          if (submittedAfter === 1) return "Second submission";
+          if (submittedAfter === 2) return "Third submission";
+          return `${submittedAfter + 1}th submission`; // fallback for 4th and beyond
+        }
+      });
+      return submissionLabels
+    // let text = ["First submission", "Second submission", "Third submission", "Fourth submission", "Fifth submission"]
+    // return text[count]
 })
 
 
