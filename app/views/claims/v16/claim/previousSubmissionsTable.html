@@ -91,6 +91,7 @@
                     {%endfor %}  
                   </tr>
           
+                  {% if data.view == "100" or data.view == "60"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Training</strong></td>
                     {% for submission in claim.submissions | sortSubmissionsForTable %}
@@ -102,7 +103,9 @@
                       {% endif %}
                     {%endfor %}  
                 </tr>
+                {% endif %}
 
+                {% if data.view == "100" or data.view == "60"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Start date</strong></td>
                     {% for submission in claim.submissions | sortSubmissionsForTable %}
@@ -113,7 +116,9 @@
                       {% endif %}
                     {%endfor %}
                 </tr>
+                {% endif  %}
 
+                {% if data.view == "100" or data.view == "60"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Payment date</strong></td>
                     {% for submission in claim.submissions | sortSubmissionsForTable %}
@@ -124,7 +129,9 @@
                       {% endif %}
                     {%endfor %}
                 </tr>
+                {% endif %}
 
+                {% if data.view == "100" or data.view == "60"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
                     {% for submission in claim.submissions | sortSubmissionsForTable %}
@@ -139,6 +146,7 @@
                       {% endif %}
                     {%endfor %}
                 </tr>
+                {% endif %}
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Learner</strong></td>
@@ -151,7 +159,7 @@
                     {%endfor %}   
                 </tr>
 
-
+                {% if data.view == "100" or data.view == "40"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Completion date</strong></td>
                     {% for submission in claim.submissions | sortSubmissionsForTable %}
@@ -162,7 +170,9 @@
                       {% endif %}
                     {%endfor %}
                 </tr>
+                {% endif %}
 
+                {% if data.view == "100" or data.view == "40"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
                     {% for submission in claim.submissions | sortSubmissionsForTable %}
@@ -173,6 +183,7 @@
                       {% endif %}
                   {%endfor %}
                 </tr>
+                {% endif %}
 
                 <tr class="govuk-table__row">
                   <td class="govuk-table__cell"><strong>Supporting note</strong></td>

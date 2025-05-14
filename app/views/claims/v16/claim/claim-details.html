@@ -220,7 +220,7 @@
       <h2 class="govuk-heading-m" id="training">Claim details</h2>
     {% endif %}
     {% if data.versionResearch == "B" and claim.claimType == "100" %}
-      <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable">View previous submissions</a></p>
+      <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=100">View previous submissions</a></p>
     {% endif %}
 
     {% if (claim.claimType == "60") %}
@@ -235,7 +235,7 @@
         <h2 class="govuk-heading-l">Complete the 60 part</h2>
         <p class="govuk-body">Claim reference for the 60 part: {{ claim.claimID }}</p>
         {% if data.versionResearch == "B"%}
-          <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable">View all 60 part submissions</a></p>
+          <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=60">View all 60 part submissions</a></p>
         {% endif %}
     {% endif %}
 
@@ -285,7 +285,7 @@
           {% endif %}
         {% endif %}
         {% if data.versionResearch == "B" and claim.status != "rejected" and pairClaim.submissions.length > 1%}
-          <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable">View all 40 part submissions</a></p>
+          <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=40">View all 40 part submissions</a></p>
         {% endif %}
 
       {% endif %}
