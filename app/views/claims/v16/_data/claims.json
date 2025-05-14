@@ -140,7 +140,7 @@
         "trainingCode": "USMS",
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
-        "costDate": "2024-07-15T14:48:06.827Z",
+        "costDate": "2024-07-05T14:48:06.827Z",
         "evidenceOfPayment": [
           "invoice1.pdf",
           "bankStatement1.pdf",
@@ -164,7 +164,7 @@
       {
         "submitter": "rachel.mcglee@evergreencare.com",
         "submittedDate": "2024-10-15T00:34:25.749Z",
-        "trainingCode": "USMS",
+        "trainingCode": "PBSFL",
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-05T14:48:06.827Z",
@@ -175,7 +175,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The training selected does not match what you paid for.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -5579,8 +5579,8 @@
       {
         "submitter": null,
         "submittedDate": null,
-        "trainingCode": "PBSFL",
-        "learnerID": "BF 74 0F 46 L",
+        "trainingCode": "DLBPCI",
+        "learnerID": "BF 73 4F 97 L",
         "startDate": "2025-03-18T06:37:46.618Z",
         "costDate": "2024-12-12T17:58:03.257Z",
         "evidenceOfPayment": [
@@ -5605,7 +5605,7 @@
       {
         "submitter": "lionel-lowel@evergreencare.co.uk",
         "submittedDate": "2025-04-19T20:12:22.737Z",
-        "trainingCode": "PBSFL",
+        "trainingCode": "610/0103/6",
         "learnerID": "BF 74 0F 46 L",
         "startDate": "2025-03-18T06:37:46.618Z",
         "costDate": "2024-12-12T17:58:03.257Z",
@@ -5622,8 +5622,8 @@
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
+          "outcome": "queried",
+          "note": "The evidence of completion provided does not match the learner."
         },
         "processedDate": "2025-04-20T04:19:18.514Z",
         "processedBy": "Mara Monahan"
@@ -5658,8 +5658,8 @@
         "submitter": "lionel-lowel@evergreencare.co.uk",
         "submittedDate": "2025-03-15T20:12:22.737Z",
         "trainingCode": "PBSFL",
-        "learnerID": "BF 74 0F 46 L",
-        "startDate": "2025-03-18T06:37:46.618Z",
+        "learnerID": "FS 47 4F 68 U",
+        "startDate": "2025-03-11T06:37:46.618Z",
         "costDate": "2024-12-12T17:58:03.257Z",
         "evidenceOfPayment": [
           "bankStatement1.pdf",
@@ -5686,7 +5686,7 @@
         "trainingCode": "PBSFL",
         "learnerID": "BF 74 0F 46 L",
         "startDate": "2025-03-18T06:37:46.618Z",
-        "costDate": "2024-12-12T17:58:03.257Z",
+        "costDate": "2024-11-12T17:58:03.257Z",
         "evidenceOfPayment": [
           "bankStatement1.pdf",
           "invoice1.pdf",

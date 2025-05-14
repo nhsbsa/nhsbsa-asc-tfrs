@@ -75,13 +75,10 @@
 
                       {% if (submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried") %}
                         <td class="govuk-table__cell">
-                          {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
-                            {{submission.evidenceOfPaymentReview.note}} </br>
-                          {% endif %}
-                          {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
-                            {{submission.evidenceOfCompletionReview.note}} </br>
-                        {% endif %}
+                          {% set text = submission | formatText %}
+                            {{text | trunctateString}} </br> <a class="govuk-link" href="#">...See more</a></br>
                         </td>
+
                       {% else %}
                         <td class="govuk-table__cell">---</td>
                       {% endif %}

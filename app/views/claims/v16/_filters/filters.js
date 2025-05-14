@@ -153,8 +153,23 @@ addFilter('findClaim', function (claimID, claims, workplaceID) {
     } else {
         return null
     }
-
 })
+
+addFilter('trunctateString', function (string) {
+    return string.slice(0, 30);
+})
+
+addFilter('formatText', function (submission) {
+    let text = ""
+    if (submission.evidenceOfPaymentReview.note) {
+        text = submission.evidenceOfPaymentReview.note + " "
+    }
+    if (submission.evidenceOfCompletionReview.note) {
+        text += submission.evidenceOfCompletionReview.note
+    }
+    return text
+})
+
 
 addFilter('findSubmissionByDate', function (submissions, submittedDate) {
     const submission = submissions.find(s => s.submittedDate == submittedDate);
@@ -1118,6 +1133,20 @@ addFilter('getRejectionNote', (submission) => {
         rejectionNote += "Evidence of completion" + '<br>' + submission.evidenceOfCompletionReview.note
     }
     return rejectionNote
+})
+
+addFilter('compareIfEvidenceChanged', (first, second) => {
+    if (first.evidenceOfPayment.length !== second.evidenceOfPayment.length) {
+        return true;
+    }
+    first.evidenceOfPayment.sort();
+    second.evidenceOfPayment.sort();
+    for (let i = 0; i < first.length; i++) {
+        if (first[i] !== second[i]) {
+            return true;
+        }
+    }
+    return false;
 })
 
 addFilter('getReimbursementAmount', (submission, training) => {
