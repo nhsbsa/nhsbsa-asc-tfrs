@@ -9,7 +9,10 @@
   
   <div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
     <div>
-        <h1 id="note-heading" class="govuk-heading-m push--top">Query note</h1>
+        <h1 id="note-heading" class="govuk-heading-m push--top">Requested edits</h1>
+
+          <p class="govuk-body"><strong>Version: </strong>Second submission </br> <strong>Submitted date: </strong>{{submission.submittedDate | govukDate}}</p>
+
 
           {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
             <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
@@ -18,7 +21,7 @@
             <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
           {% endif %}
 
-        <a href="/hideNote" class="govuk-link govuk-button" >Close</a>
+        <a href="/hideComparisonNote" class="govuk-link govuk-button" >Close</a>
     </div>
   </div>
 
@@ -77,7 +80,7 @@
               {% include "./evidenceCompletion.html" %}
             {% endif %}
       
-            <a href="/hideNote" class="govuk-link govuk-button" >Close</a>
+            <a href="/hideComparisonNote" class="govuk-link govuk-button" >Close</a>
 
         </div>
       </div>

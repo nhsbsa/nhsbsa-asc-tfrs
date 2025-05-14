@@ -1003,17 +1003,17 @@ router.get('/clear-learner', function (req, res) {
   }
 });
 
-router.get('/showHistoryNote', function (req, res) {
+router.get('/showComparisonNote', function (req, res) {
   req.session.data['showNote'] = req.session.data['noteType']
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      res.redirect('claims/v16/claim/claim-details' + '?id=' + claimID)
+      res.redirect('claims/v16/claim/previousSubmissionsTable' + '?id=' + claimID)
     }
   }
 });
 
-router.get('/hideNote', function (req, res) {
+router.get('/hideComparisonNote', function (req, res) {
   req.session.data['showNote'] = null
   req.session.data['noteType'] = null
   req.session.data['submissionDate'] = null
@@ -1021,7 +1021,7 @@ router.get('/hideNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      res.redirect('claims/v16/claim/claim-details' + '?id=' + claimID)
+      res.redirect('claims/v16/claim/previousSubmissionsTable' + '?id=' + claimID)
     }
   }
 });
@@ -1060,26 +1060,6 @@ router.get('/signin-handler', function (req, res) {
     }
   } 
 
-});
-
-router.post('/add-supporting-note', function (req, res) {
-  var note = req.session.data.supportingNote
-  var claimID = req.session.data.id
-
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
-      let submission = null
-      if (c.status == "queried") {
-        submission = getDraftSubmission(c)
-      } else {
-        submission = getMostRelevantSubmission(c)
-      }
-      submission.supportingNote = note
-      break;
-    }
-  }
-  delete req.session.data.supportingNote
-  res.redirect('claim/claim-details'+'?id='+claimID+'#notes')
 });
 
 function loadData(req) {

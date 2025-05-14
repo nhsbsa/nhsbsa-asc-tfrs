@@ -76,7 +76,7 @@
                       {% if (submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried") %}
                         <td class="govuk-table__cell">
                           {% set text = submission | formatText %}
-                            {{text | trunctateString}} </br> <a class="govuk-link" href="#">...See more</a></br>
+                            {{text | trunctateString}} </br> <a class="govuk-link" href="/showComparisonNote?noteType=sixtyQuery&submittedDate={{submission.submittedDate}}">...See more</a></br>
                         </td>
 
                       {% else %}
@@ -243,6 +243,10 @@
           
           </div>
     </div>
+
+    {% if data.showNote %}
+    {% include "../_components/claim-sections/claim-history/view-note.html" %}
+  {% endif %}
 </div>
 
 {% endblock %}
