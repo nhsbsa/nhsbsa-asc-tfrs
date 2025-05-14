@@ -5572,7 +5572,7 @@
     "workplaceID": "A02944934",
     "claimType": "100",
     "status": "queried",
-    "createdDate": "2025-03-17T21:39:34.147Z",
+    "createdDate": "2025-02-17T21:39:34.147Z",
     "createdBy": "d.jones@evergreencare.com",
     "notes": [],
     "submissions": [
@@ -5652,6 +5652,58 @@
           "note": null
         },
         "processedDate": "2025-03-21T04:19:18.514Z",
+        "processedBy": "Mara Monahan"
+      },
+      {
+        "submitter": "lionel-lowel@evergreencare.co.uk",
+        "submittedDate": "2025-03-15T20:12:22.737Z",
+        "trainingCode": "PBSFL",
+        "learnerID": "BF 74 0F 46 L",
+        "startDate": "2025-03-18T06:37:46.618Z",
+        "costDate": "2024-12-12T17:58:03.257Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "completionDate": "2025-03-18T15:10:32.027Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2025-03-16T04:19:18.514Z",
+        "processedBy": "Mara Monahan"
+      },
+      {
+        "submitter": "lionel-lowel@evergreencare.co.uk",
+        "submittedDate": "2025-03-13T20:12:22.737Z",
+        "trainingCode": "PBSFL",
+        "learnerID": "BF 74 0F 46 L",
+        "startDate": "2025-03-18T06:37:46.618Z",
+        "costDate": "2024-12-12T17:58:03.257Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "completionDate": "2025-03-18T15:10:32.027Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2025-03-13T04:19:18.514Z",
         "processedBy": "Mara Monahan"
       }
     ]
