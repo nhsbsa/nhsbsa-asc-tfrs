@@ -127,7 +127,15 @@
                     <td class="govuk-table__cell"><strong>Payment date</strong></td>
                     {% for submission in sortedSubmissions %}
                       {% if submission.costDate %}
-                      <td class="govuk-table__cell">{{submission.costDate | govukDate}}</td>
+
+
+                      {% if (submission.costDate !== sortedSubmissions[loop.index0 + 1].costDate and (loop.index0 + 1) <= (sortedSubmissions.length - 1)  ) or (submission.costDate !== sortedSubmissions[loop.index0 - 1].costDate and (loop.index0 - 1) >= 0) %}
+                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.costDate | govukDate}}</strong></mark></td>
+                      {% else %}
+                        <td class="govuk-table__cell">{{submission.costDate | govukDate}}</td>
+                      {% endif %}
+                      
+                      
                       {% else %}
                       <td class="govuk-table__cell">---</td>
                       {% endif %}
@@ -156,7 +164,14 @@
                     <td class="govuk-table__cell"><strong>Learner</strong></td>
                     {% for submission in sortedSubmissions %}
                       {% if submission.learnerID %}
-                        <td class="govuk-table__cell">{{(submission.learnerID | findLearner(data["learners"])).givenName}} {{(submission.learnerID | findLearner(data["learners"])).familyName}}</td>
+
+                        {% if (submission.learnerID !== sortedSubmissions[loop.index0 + 1].learnerID and (loop.index0 + 1) <= (sortedSubmissions.length - 1)  ) or (submission.learnerID !== sortedSubmissions[loop.index0 - 1].learnerID and (loop.index0 - 1) >= 0) %}
+                          <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{(submission.learnerID | findLearner(data["learners"])).givenName}} {{(submission.learnerID | findLearner(data["learners"])).familyName}}</strong></mark></td>
+                        {% else %}
+                          <td class="govuk-table__cell">{{(submission.learnerID | findLearner(data["learners"])).givenName}} {{(submission.learnerID | findLearner(data["learners"])).familyName}}</td>
+                        {% endif %}
+
+
                       {% else %}
                         <td class="govuk-table__cell">---</td>
                       {% endif %}
@@ -168,7 +183,14 @@
                     <td class="govuk-table__cell"><strong>Completion date</strong></td>
                     {% for submission in sortedSubmissions %}
                       {% if submission.completionDate %}
-                      <td class="govuk-table__cell">{{submission.completionDate | govukDate}}</td>
+
+                      {% if (submission.completionDate !== sortedSubmissions[loop.index0 + 1].completionDate and (loop.index0 + 1) <= (sortedSubmissions.length - 1)  ) or (submission.completionDate !== sortedSubmissions[loop.index0 - 1].completionDate and (loop.index0 - 1) >= 0) %}
+                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.completionDate | govukDate}}</strong></mark></td>
+                      {% else %}
+                        <td class="govuk-table__cell">{{submission.completionDate | govukDate}}</td>
+                      {% endif %}
+
+
                       {% else %}
                       <td class="govuk-table__cell">---</td>
                       {% endif %}
@@ -181,7 +203,14 @@
                     <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
                     {% for submission in sortedSubmissions %}
                       {% if submission.evidenceOfCompletion %}
-                      <td class="govuk-table__cell"><a class="govuk-link" href="#">{{submission.evidenceOfCompletion}}</a></td>
+
+                      {% if (submission.evidenceOfCompletion !== sortedSubmissions[loop.index0 + 1].evidenceOfCompletion and (loop.index0 + 1) <= (sortedSubmissions.length - 1)  ) or (submission.evidenceOfCompletion !== sortedSubmissions[loop.index0 - 1].evidenceOfCompletion and (loop.index0 - 1) >= 0) %}
+                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong><a class="govuk-link" href="#">{{submission.evidenceOfCompletion}}</a></strong></mark></td>
+                      {% else %}
+                        <td class="govuk-table__cell"><a class="govuk-link" href="#">{{submission.evidenceOfCompletion}}</a></td>
+                      {% endif %}
+                      
+                      
                       {% else %}
                       <td class="govuk-table__cell">---</td>
                       {% endif %}
@@ -193,7 +222,13 @@
                   <td class="govuk-table__cell"><strong>Supporting note</strong></td>
                   {% for submission in sortedSubmissions %}
                       {% if submission.supportingNote %}
-                      <td class="govuk-table__cell">{{submission.supportingNote}}</td>
+
+                      {% if (submission.supportingNote !== sortedSubmissions[loop.index0 + 1].supportingNote and (loop.index0 + 1) <= (sortedSubmissions.length - 1)  ) or (submission.supportingNote !== sortedSubmissions[loop.index0 - 1].supportingNote and (loop.index0 - 1) >= 0) %}
+                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.supportingNote}}</strong></mark></td>
+                      {% else %}
+                        <td class="govuk-table__cell">{{submission.supportingNote}}</td>
+                      {% endif %}
+
                       {% else %}
                       <td class="govuk-table__cell">---</td>
                       {% endif %}
