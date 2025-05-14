@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findPair, findUser } = require('../_helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsByDateReversed, findPair, findUser } = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -516,7 +516,15 @@ addFilter('orderByMostRecent', function (submissions) {
     let sorted = sortSubmissionsByDate(submissions, 'submittedDate')
     return sorted
 })
+addFilter('orderReversed', function (submissions) {
+    let sorted = sortSubmissionsByDateReversed(submissions, 'submittedDate')
+    return sorted
+})
 
+addFilter('matchSubmissionToText', function (count) {
+    let text = ["First submission", "Second submission", "Third submission", "Fourth submission", "Fifth submission"]
+    return text[count]
+})
 
 
 addFilter('userType', function (type) {

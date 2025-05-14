@@ -520,6 +520,24 @@ function sortSubmissionsByDate(submissions, dateType) {
     return submissions; // Return the claim with sorted submissions
 }
 
+function sortSubmissionsByDateReversed(submissions, dateType) {
+    // Ensure that the claim has a submissions array and it's not empty
+    if (!submissions || submissions.length === 0) {
+        return submissions; // Return the claim as is if no submissions exist
+    }
+
+    // Sort the submissions array based on the dateType
+    submissions.sort((a, b) => {
+        const dateA = new Date(a[dateType]);
+        const dateB = new Date(b[dateType]);
+
+        // Sort in descending order (most recent first)
+        return dateA - dateB;
+    });
+
+    return submissions; // Return the claim with sorted submissions
+}
+
 function findPair(claimID, claims){
     for (let claim of claims) {
         const id = claim.claimID;
@@ -564,4 +582,4 @@ function checkChange(claim) {
 }
 
 
-module.exports = { findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser }
+module.exports = { findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsByDateReversed }

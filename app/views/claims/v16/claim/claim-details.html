@@ -121,6 +121,13 @@
         </div>
       {% endif %}
 
+      {% if claim.status == "submitted" %}
+        <div class="hods-alert">
+          <h2 class="hods-alert__heading">What to do now</h2>
+          <p class="govuk-body">Wait for processing to be completed. You should hear back in 4 to 7 days.</p>
+        </div>
+      {% endif %}
+
 
     {% elif (claim.claimType == "60") %}
 
@@ -166,6 +173,12 @@
         <div class="hods-alert">
           <h2 class="hods-alert__heading">What to do now</h2>
           <p class="govuk-body">Fill in <a class="govuk-link" href="#">60 part</a> of the claim details and submit</p>
+        </div>
+      {% endif %}
+      {% if claim.status == "submitted" or pairClaim.status == "submitted"%}
+        <div class="hods-alert">
+          <h2 class="hods-alert__heading">What to do now</h2>
+          <p class="govuk-body">Wait for processing to be completed. You should hear back in 4 to 7 days.</p>
         </div>
       {% endif %}
 

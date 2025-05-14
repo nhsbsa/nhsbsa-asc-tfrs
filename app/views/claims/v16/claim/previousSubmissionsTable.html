@@ -10,6 +10,8 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
+      <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+
         <h2 class="govuk-heading-l" id="training">Claim submissions</h2>
         <p class="govuk-body">This table shows your current draft and earlier submissions with any updates you've made <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
         
@@ -21,10 +23,12 @@
           
                   <th scope="col" class="govuk-table__header" style="min-width: 200px;"><span class="govuk-visually-hidden">Submissions</span></th>
           
-                  <th scope="col" class="govuk-table__header" style="min-width: 200px;">Current draft</th>
-                  <th scope="col" class="govuk-table__header" style="min-width: 200px;">Third submission</th>
-                  <th scope="col" class="govuk-table__header" style="min-width: 200px;">Second submission</th>
-                  <th scope="col" class="govuk-table__header" style="min-width: 200px;">First submission</th>
+                  
+                  {% set count = claim.submissions.length %}
+                  {% for submission in claim.submissions | orderByMostRecent %}
+                    {% set count = count - 1 %}
+                    <th scope="col" class="govuk-table__header" style="min-width: 200px;">{{count}}</th>
+                  {%endfor %}
           
                 </tr>
               </thead>
@@ -32,91 +36,153 @@
               <tbody class="govuk-table__body">
           
                 <tr class="govuk-table__row">
-                  <td class="govuk-table__cell"><strong>Submission date</strong></td>
+                <td class="govuk-table__cell"><strong>Submission date</strong></td>
+                {% for submission in claim.submissions | orderByMostRecent %}
+                  {% if submission.submittedDate %}
+                  <td class="govuk-table__cell">{{submission.submittedDate | govukDate}}</td>
+                  {% else %}
                   <td class="govuk-table__cell">---</td>
-                  <td class="govuk-table__cell">To add</td>
-                  <td class="govuk-table__cell">To add</td>
-                  <td class="govuk-table__cell">To add</td>
+                  {% endif %}
+                {%endfor %}
 
 
                 </tr>
           
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Submitted by</strong></td>
-                    <td class="govuk-table__cell">---</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>                </tr>
+                    {% for submission in claim.submissions | orderByMostRecent %}
+                      {% if submission.submitter %}
+                        <td class="govuk-table__cell">{{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</td>
+                      {% else %}
+                        <td class="govuk-table__cell">---</td>
+                      {% endif %}
+                    {%endfor %}             
+                </tr>
+
+                <tr class="govuk-table__row">
+                  <td class="govuk-table__cell"><strong>Processed date</strong></td>
+
+                  {% for submission in claim.submissions | orderByMostRecent %}
+                    {% if submission.processedDate %}
+                      <td class="govuk-table__cell">{{submission.processedDate | govukDate}}</td>
+                      {% else %}
+                      <td class="govuk-table__cell">---</td>
+                    {% endif %}
+                  {%endfor %}
+                  </tr>
           
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Edits requested</strong></td>
-                    <td class="govuk-table__cell">---</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>                </tr>
+                    {% for submission in claim.submissions | orderByMostRecent %}
+
+                      {% if (submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried") %}
+                        <td class="govuk-table__cell">
+                          {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
+                            {{submission.evidenceOfPaymentReview.note}} </br>
+                          {% endif %}
+                          {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
+                            {{submission.evidenceOfCompletionReview.note}} </br>
+                        {% endif %}
+                        </td>
+                      {% else %}
+                        <td class="govuk-table__cell">---</td>
+                      {% endif %}
+                      
+                    {%endfor %}  
+                  </tr>
           
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Training</strong></td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td> 
+                    {% for submission in claim.submissions | orderByMostRecent %}
+                      {% set training = submission.trainingCode | findTraining(data.training) %}
+                      {% if training %}
+                        <td class="govuk-table__cell">{{training.code}}</br>{{training.title}}</td>
+                      {% else %}
+                        <td class="govuk-table__cell">---</td>
+                      {% endif %}
+                    {%endfor %}  
                 </tr>
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Start date</strong></td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td> 
+                    {% for submission in claim.submissions | orderByMostRecent %}
+                      {% if submission.startDate %}
+                      <td class="govuk-table__cell">{{submission.startDate | govukDate}}</td>
+                      {% else %}
+                      <td class="govuk-table__cell">---</td>
+                      {% endif %}
+                    {%endfor %}
                 </tr>
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Payment date</strong></td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td> 
+                    {% for submission in claim.submissions | orderByMostRecent %}
+                      {% if submission.costDate %}
+                      <td class="govuk-table__cell">{{submission.costDate | govukDate}}</td>
+                      {% else %}
+                      <td class="govuk-table__cell">---</td>
+                      {% endif %}
+                    {%endfor %}
                 </tr>
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td> 
+                    {% for submission in claim.submissions | orderByMostRecent %}
+                      {% if submission.evidenceOfPayment %}
+                      <td class="govuk-table__cell">
+                        {% for evidence in submission.evidenceOfPayment %}
+                          <a class="govuk-link" href="#">{{evidence}}</a></br>
+                        {% endfor %}
+                      </td>
+                      {% else %}
+                      <td class="govuk-table__cell">---</td>
+                      {% endif %}
+                    {%endfor %}
                 </tr>
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Learner</strong></td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td> 
+                    {% for submission in claim.submissions | orderByMostRecent %}
+                      {% if submission.learnerID %}
+                        <td class="govuk-table__cell">{{(submission.learnerID | findLearner(data["learners"])).givenName}} {{(submission.learnerID | findLearner(data["learners"])).familyName}}</td>
+                      {% else %}
+                        <td class="govuk-table__cell">---</td>
+                      {% endif %}
+                    {%endfor %}   
                 </tr>
+
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Completion date</strong></td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td> 
+                    {% for submission in claim.submissions | orderByMostRecent %}
+                      {% if submission.completionDate %}
+                      <td class="govuk-table__cell">{{submission.completionDate | govukDate}}</td>
+                      {% else %}
+                      <td class="govuk-table__cell">---</td>
+                      {% endif %}
+                    {%endfor %}
                 </tr>
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td>
-                    <td class="govuk-table__cell">To add</td> 
+                    {% for submission in claim.submissions | orderByMostRecent %}
+                      {% if submission.evidenceOfCompletion %}
+                      <td class="govuk-table__cell"><a class="govuk-link" href="#">{{submission.evidenceOfCompletion}}</a></td>
+                      {% else %}
+                      <td class="govuk-table__cell">---</td>
+                      {% endif %}
+                  {%endfor %}
                 </tr>
 
                 <tr class="govuk-table__row">
                   <td class="govuk-table__cell"><strong>Supporting note</strong></td>
-                  <td class="govuk-table__cell">To add</td>
-                  <td class="govuk-table__cell">To add</td>
-                  <td class="govuk-table__cell">To add</td>
-                  <td class="govuk-table__cell">To add</td> 
+                  {% for submission in claim.submissions | orderByMostRecent %}
+                      {% if submission.supportingNote %}
+                      <td class="govuk-table__cell">{{submission.supportingNote}}</td>
+                      {% else %}
+                      <td class="govuk-table__cell">---</td>
+                      {% endif %}
+                    {%endfor %}
               </tr>
 
               </tbody>
