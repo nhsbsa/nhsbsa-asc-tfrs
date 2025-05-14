@@ -25,7 +25,7 @@
           
                   
                   {% set count = claim.submissions.length %}
-                  {% for submission in claim.submissions | orderByMostRecent %}
+                  {% for submission in claim.submissions | sortSubmissionsForTable %}
                     {% set count = count - 1 %}
                     <th scope="col" class="govuk-table__header" style="min-width: 200px;">{{count}}</th>
                   {%endfor %}
@@ -37,7 +37,7 @@
           
                 <tr class="govuk-table__row">
                 <td class="govuk-table__cell"><strong>Submission date</strong></td>
-                {% for submission in claim.submissions | orderByMostRecent %}
+                {% for submission in claim.submissions | sortSubmissionsForTable %}
                   {% if submission.submittedDate %}
                   <td class="govuk-table__cell">{{submission.submittedDate | govukDate}}</td>
                   {% else %}
@@ -50,7 +50,7 @@
           
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Submitted by</strong></td>
-                    {% for submission in claim.submissions | orderByMostRecent %}
+                    {% for submission in claim.submissions | sortSubmissionsForTable %}
                       {% if submission.submitter %}
                         <td class="govuk-table__cell">{{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</td>
                       {% else %}
@@ -62,7 +62,7 @@
                 <tr class="govuk-table__row">
                   <td class="govuk-table__cell"><strong>Processed date</strong></td>
 
-                  {% for submission in claim.submissions | orderByMostRecent %}
+                  {% for submission in claim.submissions | sortSubmissionsForTable %}
                     {% if submission.processedDate %}
                       <td class="govuk-table__cell">{{submission.processedDate | govukDate}}</td>
                       {% else %}
@@ -73,7 +73,7 @@
           
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Edits requested</strong></td>
-                    {% for submission in claim.submissions | orderByMostRecent %}
+                    {% for submission in claim.submissions | sortSubmissionsForTable %}
 
                       {% if (submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried") %}
                         <td class="govuk-table__cell">
@@ -93,7 +93,7 @@
           
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Training</strong></td>
-                    {% for submission in claim.submissions | orderByMostRecent %}
+                    {% for submission in claim.submissions | sortSubmissionsForTable %}
                       {% set training = submission.trainingCode | findTraining(data.training) %}
                       {% if training %}
                         <td class="govuk-table__cell">{{training.code}}</br>{{training.title}}</td>
@@ -105,7 +105,7 @@
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Start date</strong></td>
-                    {% for submission in claim.submissions | orderByMostRecent %}
+                    {% for submission in claim.submissions | sortSubmissionsForTable %}
                       {% if submission.startDate %}
                       <td class="govuk-table__cell">{{submission.startDate | govukDate}}</td>
                       {% else %}
@@ -116,7 +116,7 @@
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Payment date</strong></td>
-                    {% for submission in claim.submissions | orderByMostRecent %}
+                    {% for submission in claim.submissions | sortSubmissionsForTable %}
                       {% if submission.costDate %}
                       <td class="govuk-table__cell">{{submission.costDate | govukDate}}</td>
                       {% else %}
@@ -127,7 +127,7 @@
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
-                    {% for submission in claim.submissions | orderByMostRecent %}
+                    {% for submission in claim.submissions | sortSubmissionsForTable %}
                       {% if submission.evidenceOfPayment %}
                       <td class="govuk-table__cell">
                         {% for evidence in submission.evidenceOfPayment %}
@@ -142,7 +142,7 @@
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Learner</strong></td>
-                    {% for submission in claim.submissions | orderByMostRecent %}
+                    {% for submission in claim.submissions | sortSubmissionsForTable %}
                       {% if submission.learnerID %}
                         <td class="govuk-table__cell">{{(submission.learnerID | findLearner(data["learners"])).givenName}} {{(submission.learnerID | findLearner(data["learners"])).familyName}}</td>
                       {% else %}
@@ -154,7 +154,7 @@
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Completion date</strong></td>
-                    {% for submission in claim.submissions | orderByMostRecent %}
+                    {% for submission in claim.submissions | sortSubmissionsForTable %}
                       {% if submission.completionDate %}
                       <td class="govuk-table__cell">{{submission.completionDate | govukDate}}</td>
                       {% else %}
@@ -165,7 +165,7 @@
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
-                    {% for submission in claim.submissions | orderByMostRecent %}
+                    {% for submission in claim.submissions | sortSubmissionsForTable %}
                       {% if submission.evidenceOfCompletion %}
                       <td class="govuk-table__cell"><a class="govuk-link" href="#">{{submission.evidenceOfCompletion}}</a></td>
                       {% else %}
@@ -176,7 +176,7 @@
 
                 <tr class="govuk-table__row">
                   <td class="govuk-table__cell"><strong>Supporting note</strong></td>
-                  {% for submission in claim.submissions | orderByMostRecent %}
+                  {% for submission in claim.submissions | sortSubmissionsForTable %}
                       {% if submission.supportingNote %}
                       <td class="govuk-table__cell">{{submission.supportingNote}}</td>
                       {% else %}
