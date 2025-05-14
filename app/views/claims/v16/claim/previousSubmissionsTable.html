@@ -1,5 +1,6 @@
 {% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+{% set sortedSubmissions = claim.submissions | sortSubmissionsForTable %}
 
 {% block beforeContent %}
 <p class="govuk-body"><a href="claim-details" class="govuk-back-link">Back to claim details</a></p>
@@ -34,7 +35,7 @@
           
                 <tr class="govuk-table__row">
                 <td class="govuk-table__cell"><strong>Submission date</strong></td>
-                {% for submission in claim.submissions | sortSubmissionsForTable %}
+                {% for submission in sortedSubmissions %}
                   {% if submission.submittedDate %}
                   <td class="govuk-table__cell">{{submission.submittedDate | govukDate}}</td>
                   {% else %}
@@ -47,7 +48,7 @@
           
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Submitted by</strong></td>
-                    {% for submission in claim.submissions | sortSubmissionsForTable %}
+                    {% for submission in sortedSubmissions %}
                       {% if submission.submitter %}
                         <td class="govuk-table__cell">{{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</td>
                       {% else %}
@@ -59,7 +60,7 @@
                 <tr class="govuk-table__row">
                   <td class="govuk-table__cell"><strong>Processed date</strong></td>
 
-                  {% for submission in claim.submissions | sortSubmissionsForTable %}
+                  {% for submission in sortedSubmissions %}
                     {% if submission.processedDate %}
                       <td class="govuk-table__cell">{{submission.processedDate | govukDate}}</td>
                       {% else %}
@@ -70,7 +71,7 @@
           
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Edits requested</strong></td>
-                    {% for submission in claim.submissions | sortSubmissionsForTable %}
+                    {% for submission in sortedSubmissions %}
 
                       {% if (submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried") %}
                         <td class="govuk-table__cell">
@@ -91,7 +92,7 @@
                   {% if data.view == "100" or data.view == "60"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Training</strong></td>
-                    {% for submission in claim.submissions | sortSubmissionsForTable %}
+                    {% for submission in sortedSubmissions %}
                       {% set training = submission.trainingCode | findTraining(data.training) %}
                       {% if training %}
                         <td class="govuk-table__cell">{{training.code}}</br>{{training.title}}</td>
@@ -105,9 +106,15 @@
                 {% if data.view == "100" or data.view == "60"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Start date</strong></td>
-                    {% for submission in claim.submissions | sortSubmissionsForTable %}
+                    {% for submission in sortedSubmissions %}
                       {% if submission.startDate %}
-                      <td class="govuk-table__cell">{{submission.startDate | govukDate}}</td>
+
+                      {% if (submission.startDate !== sortedSubmissions[loop.index0 + 1].startDate and (loop.index0 + 1) <= (sortedSubmissions.length - 1)  ) or (submission.startDate !== sortedSubmissions[loop.index0 - 1].startDate and (loop.index0 - 1) >= 0) %}
+                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.startDate | govukDate}}</strong></mark></td>
+                      {% else %}
+                        <td class="govuk-table__cell">{{submission.startDate | govukDate}}</td>
+                      {% endif %}
+
                       {% else %}
                       <td class="govuk-table__cell">---</td>
                       {% endif %}
@@ -118,7 +125,7 @@
                 {% if data.view == "100" or data.view == "60"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Payment date</strong></td>
-                    {% for submission in claim.submissions | sortSubmissionsForTable %}
+                    {% for submission in sortedSubmissions %}
                       {% if submission.costDate %}
                       <td class="govuk-table__cell">{{submission.costDate | govukDate}}</td>
                       {% else %}
@@ -131,7 +138,7 @@
                 {% if data.view == "100" or data.view == "60"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
-                    {% for submission in claim.submissions | sortSubmissionsForTable %}
+                    {% for submission in sortedSubmissions %}
                       {% if submission.evidenceOfPayment %}
                       <td class="govuk-table__cell">
                         {% for evidence in submission.evidenceOfPayment %}
@@ -147,7 +154,7 @@
 
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Learner</strong></td>
-                    {% for submission in claim.submissions | sortSubmissionsForTable %}
+                    {% for submission in sortedSubmissions %}
                       {% if submission.learnerID %}
                         <td class="govuk-table__cell">{{(submission.learnerID | findLearner(data["learners"])).givenName}} {{(submission.learnerID | findLearner(data["learners"])).familyName}}</td>
                       {% else %}
@@ -159,7 +166,7 @@
                 {% if data.view == "100" or data.view == "40"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Completion date</strong></td>
-                    {% for submission in claim.submissions | sortSubmissionsForTable %}
+                    {% for submission in sortedSubmissions %}
                       {% if submission.completionDate %}
                       <td class="govuk-table__cell">{{submission.completionDate | govukDate}}</td>
                       {% else %}
@@ -172,7 +179,7 @@
                 {% if data.view == "100" or data.view == "40"  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
-                    {% for submission in claim.submissions | sortSubmissionsForTable %}
+                    {% for submission in sortedSubmissions %}
                       {% if submission.evidenceOfCompletion %}
                       <td class="govuk-table__cell"><a class="govuk-link" href="#">{{submission.evidenceOfCompletion}}</a></td>
                       {% else %}
@@ -184,7 +191,7 @@
 
                 <tr class="govuk-table__row">
                   <td class="govuk-table__cell"><strong>Supporting note</strong></td>
-                  {% for submission in claim.submissions | sortSubmissionsForTable %}
+                  {% for submission in sortedSubmissions %}
                       {% if submission.supportingNote %}
                       <td class="govuk-table__cell">{{submission.supportingNote}}</td>
                       {% else %}
