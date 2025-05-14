@@ -532,6 +532,8 @@ addFilter('matchSubmissionToText', function (submissions) {
           if (submittedAfter === 0) return "First submission";
           if (submittedAfter === 1) return "Second submission";
           if (submittedAfter === 2) return "Third submission";
+          if (submittedAfter === 3) return "Fourth submission";
+          if (submittedAfter === 4) return "Fifth submission";
           return `${submittedAfter + 1}th submission`; // fallback for 4th and beyond
         }
       });
