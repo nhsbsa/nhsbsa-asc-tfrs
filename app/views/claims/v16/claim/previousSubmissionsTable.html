@@ -95,7 +95,13 @@
                     {% for submission in sortedSubmissions %}
                       {% set training = submission.trainingCode | findTraining(data.training) %}
                       {% if training %}
+
+                        {% if (training.code !== sortedSubmissions[loop.index0 + 1].trainingCode and (loop.index0 + 1) <= (sortedSubmissions.length - 1)  ) or (training.code !== sortedSubmissions[loop.index0 - 1].trainingCode and (loop.index0 - 1) >= 0) %}
+                          <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{training.code}}</br>{{training.title}}</strong></mark></td>
+                        {% else %}
                         <td class="govuk-table__cell">{{training.code}}</br>{{training.title}}</td>
+                        {% endif %}
+
                       {% else %}
                         <td class="govuk-table__cell">---</td>
                       {% endif %}
