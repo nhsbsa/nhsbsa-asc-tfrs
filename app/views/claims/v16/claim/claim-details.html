@@ -160,7 +160,7 @@
       {% if claim.status == "approved" and pairClaim.status == "not-yet-submitted"%}
         <div class="hods-alert">
           <h2 class="hods-alert__heading">Next steps</h2>
-          <p class="govuk-body">You can now proceed with completing the <a class="govuk-link" href="#">40 part</a> of this claim.</p>
+          <p class="govuk-body">You can now proceed with completing the <a class="govuk-link" href="#fourtyPartClaim">40 part</a> of this claim.</p>
          </div>
       {% endif %}
       {% if pairClaim.status == "approved" %}
@@ -172,7 +172,7 @@
       {% if claim.status == "not-yet-submitted" %}
         <div class="hods-alert">
           <h2 class="hods-alert__heading">What to do now</h2>
-          <p class="govuk-body">Fill in <a class="govuk-link" href="#">60 part</a> of the claim details and submit</p>
+          <p class="govuk-body">Fill in <a class="govuk-link" href="#sixtyPartClaim">60 part</a> of the claim details and submit</p>
         </div>
       {% endif %}
       {% if claim.status == "submitted" or pairClaim.status == "submitted"%}
@@ -187,7 +187,7 @@
       {% if claim.status == "queried" %}
         {% set previousSub = claim | getMostRelevantSubmission %}
         <div class="hods-alert">
-          <h2 class="hods-alert__heading">Edit <a class="govuk-link" href="#">60 part</a> of claim and resubmit</h2>
+          <h2 class="hods-alert__heading">Edit <a class="govuk-link" href="#sixtyPartClaim">60 part</a> of claim and resubmit</h2>
           {% if previousSub.evidenceOfPaymentReview.outcome == "queried" %}
             <p class="govuk-body"><strong>Evidence of payment:</strong> {{previousSub.evidenceOfPaymentReview.note}}</p>
           {% endif %}
@@ -197,7 +197,7 @@
       {% if pairClaim.status == "queried" %}
         {% set previousSub = pairClaim | getMostRelevantSubmission %}
         <div class="hods-alert">
-          <h2 class="hods-alert__heading">Edit <a class="govuk-link" href="#">40 part</a> of claim and resubmit</h2>
+          <h2 class="hods-alert__heading">Edit <a class="govuk-link" href="#fourtyPartClaim">40 part</a> of claim and resubmit</h2>
           {% if previousSub.evidenceOfCompletionReview.outcome == "queried" %}
             <p class="govuk-body"><strong>Evidence of completion:</strong> {{previousSub.evidenceOfCompletionReview.note}}</p>
           {% endif %}
@@ -232,7 +232,7 @@
         <div class="vertical-line"></div>
       </div>
       <div class="content"> 
-        <h2 class="govuk-heading-l">Complete the 60 part</h2>
+        <h2 class="govuk-heading-l" id="sixtyPartClaim">Complete the 60 part</h2>
         <p class="govuk-body">Claim reference for the 60 part: {{ claim.claimID }}</p>
         {% if data.versionResearch == "B"%}
           <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=60">View all 60 part submissions</a></p>
@@ -271,7 +271,7 @@
         <div class="horizontal-line"></div>
       </div>
       <div class="content">
-        <h2 class="govuk-heading-l">Complete the 40 part</h2>
+        <h2 class="govuk-heading-l" id="fourtyPartClaim">Complete the 40 part</h2>
 
         {% if ((claim.claimType == "60" and ((pairClaim.status != null))))  %}
           <p class="govuk-body">Claim reference for the 40 part: {{ claim.claimID.slice(0, -1) + "C" }}</p>
