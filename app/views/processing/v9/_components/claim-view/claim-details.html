@@ -137,6 +137,14 @@
             {{learner.givenName}} {{learner.familyName}}
         </dd>
     </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            <span class="govuk-visually-hidden">Learner</span>National insurance number
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{learner.id}}
+        </dd>
+    </div>
 </dl>
 <div style="padding-top: 10px;">
     {% if (claim.claimType != "40") %}
