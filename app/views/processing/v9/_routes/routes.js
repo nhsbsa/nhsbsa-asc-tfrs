@@ -1,7 +1,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
-const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission } = require('../_helpers/helpers.js');
+const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission } = require('../_helpers/helpers.js');
 
 // v9 Prototype routes
 
@@ -163,7 +163,8 @@ router.get('/cancel-handler', function (req, res) {
 
 router.get('/cancel-outcome', function (req, res) {
   const claimID = req.session.data.id
-  res.redirect('process-claim/claim?id=' + claimID)
+  req.session.data.processClaimStep = "inProgress"
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 });
 
 router.get('/back-all-claims', function (req, res) {
@@ -351,12 +352,13 @@ router.post('/claim-process-handler', function (req, res) {
   const paymentResponse = req.session.data.payment
   const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
   const paymentRejectNote = req.session.data.paymentRejectNote
+  const paymentQueriedNote = req.session.data.paymentQueriedNote
   const completionResponse = req.session.data.completion
   const completionRejectNote = req.session.data.completionRejectNote
+  const completionQueriedNote = req.session.data.completionQueriedNote
 
   var errorParamaters = ""
   var claim = null
-  var isFullClaim = false
 
   var validAmount = validNumberCheck(paymentReimbursementAmount)
 
@@ -366,34 +368,39 @@ router.post('/claim-process-handler', function (req, res) {
       break;
     }
   }
-  isFullClaim = isFullClaimCheck(claim)
 
   if (claim.claimType == "60" || claim.claimType == "100") {
     if (paymentResponse == null) {
       errorParamaters += "&paymentResponseIncomplete=true";
-    } else if (paymentResponse == "yes" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
+    } else if (paymentResponse == "approve" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
       errorParamaters += "&paymentReimbursementAmountIncomplete=true";
-    } else if (paymentResponse == "yes" && (!validAmount)) {
+    } else if (paymentResponse == "approve" && (!validAmount)) {
       errorParamaters += "&paymentReimbursementAmountInvalid=true";
-    } else if (paymentResponse == "no" && (paymentRejectNote == null || paymentRejectNote == "")) {
+    } else if (paymentResponse == "reject" && (paymentRejectNote == null || paymentRejectNote == "")) {
       errorParamaters += "&paymentRejectNoteIncomplete=true";
+    } else if (paymentResponse == "queried" && (paymentQueriedNote == null || paymentQueriedNote == "")) {
+      errorParamaters += "&paymentQueriedNoteIncomplete=true";
     }
   }
 
   if (claim.claimType == "40" || claim.claimType == "100") {
     if (completionResponse == null) {
       errorParamaters += "&completionResponseIncomplete=true";
-    } else if (completionResponse == "no" && (completionRejectNote == null || completionRejectNote == "")) {
+    } else if (completionResponse == "reject" && (completionRejectNote == null || completionRejectNote == "")) {
       errorParamaters += "&completionRejectNoteIncomplete=true";
+    } else if (completionResponse == "queried" && (completionQueriedNote == null || completionQueriedNote == "")) {
+      errorParamaters += "&completionQueriedNoteIncomplete=true";
     }
   }
 
   if (errorParamaters == "") {
 
-    if ((paymentResponse == "yes" ||  (claim.claimType == "40")) && (completionResponse == "yes" || claim.claimType == "60")) {
+    if ((paymentResponse == "approve" ||  (claim.claimType == "40")) && (completionResponse == "approve" || claim.claimType == "60")) {
       req.session.data.result = "approve"
-    } else {
+    } else if ((paymentResponse == "reject" ||  (claim.claimType == "40")) || (completionResponse == "reject" || claim.claimType == "60")) {
       req.session.data.result = "reject"
+    } else if ((paymentResponse == "queried" ||  (claim.claimType == "40")) && (completionResponse == "queried" || claim.claimType == "60")) {
+      req.session.data.result = "queried"
     }
       req.session.data.processClaimStep = "confirmOutcome"
       return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
@@ -412,14 +419,6 @@ router.get('/outcome-handler', function (req, res) {
   const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
   const paymentRejectNote = req.session.data.paymentRejectNote
   const paymentQueryNote = req.session.data.paymentQueryNote
-
-  delete req.session.data.fromNoteNav
-
-  if (paymentResponse == "reject") {
-    delete req.session.data.completion
-    delete req.session.data.completionRejectNote
-    delete req.session.data.completionQueryNote
-  }
 
   const completionResponse = req.session.data.completion
   const completionRejectNote = req.session.data.completionRejectNote
@@ -442,7 +441,7 @@ router.get('/outcome-handler', function (req, res) {
         claim.status = "rejected"
       } else if (req.session.data.result == "approve") {
         claim.status = "approved"
-      } else if (req.session.data.result == "query") {
+      } else if (req.session.data.result == "queried") {
         claim.status = "queried"
       }
     }
@@ -456,10 +455,10 @@ router.get('/outcome-handler', function (req, res) {
   delete req.session.data.completion
   delete req.session.data.completionRejectNote
   delete req.session.data.completionQueryNote
-  delete req.session.data.processClaimStep 
 
 
   req.session.data.processSuccess = "true"
+  req.session.data.processClaimStep = "claimProcessed"
 
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 });
