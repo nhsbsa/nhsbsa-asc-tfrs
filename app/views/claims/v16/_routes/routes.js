@@ -1080,23 +1080,36 @@ router.post('/add-supporting-note', function (req, res) {
   res.redirect('claim/claim-details'+'?id='+claimID+'#notes')
 });
 
-function loadData(req) {
+function loadData(req, orgID) {
   // pull in the prototype data object and see if it contains a datafile reference
-  let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
   const path = 'app/views/claims/v16/_data/'
 
   var learnersFile = 'learners.json'
   var trainingFile = 'training.json'
   var claimsFile = 'claims.json'
   var statusFile = 'claim-statuses.json'
+  const orgFile = 'organisations.json'
+  
+
+  console.log('loading in organisation file')
+  const organisations = loadJSONFromFile(orgFile, path)
+  for (const organisation of organisations) {
+    if (organisation.workplaceID == orgID) {
+      req.session.data.org = organisation
+      break;
+    }
+  }
+  console.log('organisation file loaded')
 
   console.log('loading in training file')
   req.session.data['training'] = loadJSONFromFile(trainingFile, path)
   console.log('training file loaded')
 
   console.log('loading in claims file')
-  req.session.data['claims'] = loadJSONFromFile(claimsFile, path)
-  console.log('claims file loaded')
+  const allClaims = loadJSONFromFile(claimsFile, path);
+  const filteredClaims = allClaims.filter(claim => claim.workplaceID === orgID);
+  req.session.data['claims'] = filteredClaims;
+  console.log(filteredClaims.length + ' of ' + allClaims.length + ' claims loaded')
 
   console.log('loading in learners file')
   req.session.data['learners'] = loadJSONFromFile(learnersFile, path)
@@ -1106,44 +1119,23 @@ function loadData(req) {
   req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
   console.log('statuses file loaded')
 
+
   return console.log('data updated')
 }
 
 router.post('/load-data', function (req, res) {
-
-  //Load data from JSON files
-  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/v16/_data/')
   const orgID = req.session.data['orgID']
-
-  for (const organisation of organisations) {
-    if (organisation.workplaceID == orgID) {
-      
-      req.session.data.org = organisation
-      break;
-    }
-  }
-
+  loadData(req, orgID);
   delete req.session.data['orgID']
-  
-  loadData(req);
+
   res.redirect('before-you-start.html')
 })
 
 router.get('/load-data-account-test', function (req, res) {
-  //Load data from JSON files
-
-  const organisations = loadJSONFromFile('organisations.json', 'app/views/claims/v16/_data/')
   const orgID = req.session.data['orgID']
-
-  for (const organisation of organisations) {
-    if (organisation.workplaceID == orgID) {
-      req.session.data.org = organisation
-      break;
-    }
-  }
-
+  loadData(req, orgID);
   delete req.session.data['orgID']
-  loadData(req);
+
   res.redirect('./authentication/creation-link?journey=creation')
 })
 
