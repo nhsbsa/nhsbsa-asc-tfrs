@@ -1119,6 +1119,12 @@ addFilter('checkIfUpdated', (claim, field) => {
         } else {
             return false
         }
+    } else if (field == "supportingNote") {
+        if (lastQueried.supportingNote == draftClaim.supportingNote) {
+            return false
+        } else {
+            return true
+        }
     } else {
         return false
     }
