@@ -43,7 +43,7 @@ function loadData(req) {
 
 function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentRejectNote, completionResponse, completionRejectNote, paymentQueryNote, completionQueryNote, otherResponse, otherRejectNote, otherQueryNote) {
     let submission = getMostRelevantSubmission(foundClaim)    
-    if (paymentResponse == "yes") {
+    if (paymentResponse == "approve") {
             submission.evidenceOfPaymentReview.outcome = "pass"
             submission.evidenceOfPaymentReview.costPerLearner = paymentReimbursementNote
         } else if (paymentResponse == "reject") {
@@ -54,7 +54,7 @@ function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paym
             submission.evidenceOfPaymentReview.note = paymentQueryNote
         }
 
-        if (completionResponse == "yes") {
+        if (completionResponse == "approve") {
             submission.evidenceOfCompletionReview.outcome = "pass"
         } else if (completionResponse == "reject") {
             submission.evidenceOfCompletionReview.outcome = "fail"
@@ -64,7 +64,7 @@ function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paym
             submission.evidenceOfCompletionReview.note = completionQueryNote
         }
 
-        if (otherResponse == "yes") {
+        if (otherResponse == "approve") {
             submission.otherCheck.outcome = "pass"
         } else if (otherResponse == "reject") {
             submission.otherCheck.outcome = "fail"
@@ -129,14 +129,6 @@ function validNumberCheck(string) {
         isValid = true
     }
     return isValid
-}
-
-function isFullClaimCheck(claim) {
-    if (claim.fundingType == "TU" && claim.training.fundingModel == "full" && claim.completionDate != null) {
-        return true
-    } else { 
-        return false
-    }
 }
 
 function isValidOrgSearch(orgSearch) {
@@ -270,4 +262,4 @@ function sortSubmissionsByDate(submissions, dateType) {
 }
 
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isFullClaimCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg }
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg }
