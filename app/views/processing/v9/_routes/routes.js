@@ -463,6 +463,22 @@ router.get('/outcome-handler', function (req, res) {
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 });
 
+router.get('/view-previous-submissions-handler', function (req, res) {
+
+  claimID = req.session.data.id
+  req.session.data.processClaimStep = "previousSubmissions"
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+});
+
+router.get('/view-previous-submissions-back-handler', function (req, res) {
+  
+  claimID = req.session.data.id
+  req.session.data.processClaimStep = "inProgress"
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+});
+
 router.get('/showClaimHistoryNote', function (req, res) {
   req.session.data['showNote'] = req.session.data['noteType']
   var claimID = req.session.data.id

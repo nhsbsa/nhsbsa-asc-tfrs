@@ -10,6 +10,10 @@
 
     {% include "./claim-process.html" %}
 
+{% elif (data.processClaimStep == "previousSubmissions") %}
+
+    {% include "./claim-previous-submissions.html" %}
+
 {% elif (data.processClaimStep == "confirmOutcome") %}
 
     {% include "./confirm-outcome.html" %}
