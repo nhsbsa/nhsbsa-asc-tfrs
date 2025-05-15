@@ -1,0 +1,14 @@
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+        <h4 class="govuk-summary-card__title">
+            Evidence of completion
+        </h4>
+    </div>
+    <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+            {% set evidence = submission.evidenceOfCompletion %} 
+            {% set isPayment = false%} 
+            {% include "../../evidence/file-section.html" %}
+        </dl>
+    </div>
+</div>

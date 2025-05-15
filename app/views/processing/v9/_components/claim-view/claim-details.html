@@ -1,0 +1,15 @@
+<h3 class="govuk-heading-m" id="payment">Details</h3>
+
+{% if training.code | trainingTypeCheck(data.training, "Courses") %}
+
+    {% include "./details/course-card.html" %}
+
+{% elif training.code | trainingTypeCheck(data.training, "Qualifications") %}
+
+    {% include "./details/qualification-card.html" %}
+
+{% endif %}
+
+{% include "./details/learner-card.html" %}
+
+{% include "./details/dates-card.html" %}
