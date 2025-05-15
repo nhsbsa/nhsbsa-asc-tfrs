@@ -340,18 +340,29 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v8",
+        "processingCurrent": "v9",
         "processingVersions": [
+            {
+                "versionNo": "9",
+                "phase": "Beta",
+                "status": ["design"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-9/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },
             {
                 "versionNo": "8",
                 "phase": "Beta",
-                "status": ["design","UR"],
+                "status": ["retired"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-8/",
                 "tested": null,
                 "created": null,
                 "aims": null,
                 "learnt": null
-            },{
+            },
+            {
                 "versionNo": "7",
                 "phase": "Beta",
                 "status": ["dev"],

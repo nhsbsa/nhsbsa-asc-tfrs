@@ -1,0 +1,87 @@
+{% set org = data.organisations | findOrg(data.orgId) %}
+{% set orgClaims = data.orgId | findOrgClaims(data.claims) %}
+{% set claims = orgClaims | orderClaims %}
+
+{% set noClaims = claims | length %}
+{% set deletedId = data.deletedID %}
+
+{% set rowsPerPage = 20 %}
+
+{% set pageNumber = data.currentPage | parseInt %}
+{% set maxPage =  noClaims | pageCount(rowsPerPage) %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if (data.invalidIDError) or (data.notFound) or (data.emptyError)%}
+        <div class="govuk-error-summary govuk-!-margin-top-2" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            {% if (data.emptyError) %}
+                                <a href="#claimID"> Enter a claim reference</a>
+                            {% elif (data.notFound) %}
+                                <a href="#claimID">No results found</a>
+                            {% else %}
+                                <a href="#claimID">Enter a claim reference in the correct format</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <h1 class="govuk-heading-l govuk-!-margin-top-6">Claims</h1>
+        {% if (claims.length == 0) %}
+            <p class="govuk-body">This organisation has not yet submitted any claims.</p>
+        {% else %}
+        <div class="moj-search">
+              <form action="../search-claim-id-orgView" method="post">
+                <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">
+                  <div id="search-hint" class="govuk-hint moj-search__hint">
+                    <label for="claimID">Enter a claim reference.</label> This could be with or without an -A, -B or -C suffix. For example, H2T-C813-3XF7-C or H2T-C813-3XF7
+                  </div>
+                  {% if data.invalidIDError %}
+                      <p id="sortCode-error" class="govuk-error-message">
+                          <span class="govuk-visually-hidden">Error:</span>Enter a claim reference in the correct format
+                      </p>
+                  {% endif %}
+                  {% if data.emptyError %}
+                      <p id="sortCode-error" class="govuk-error-message">
+                          <span class="govuk-visually-hidden">Error:</span>Enter a claim reference
+                      </p>
+                  {% endif %}
+                  {% if data.notFound%}
+                      <p id="sortCode-error" class="govuk-error-message">
+                          <span class="govuk-visually-hidden">Error:</span>No results found
+                      </p>
+                  {% endif %}
+        
+                  <div class="search__button-group">
+                      <input class="govuk-input moj-search__input govuk-input--width-10 {% if data.invalidIDError or data.emptyError or data.notFound %} govuk-input--error {% endif %}" id="claimID" name="claimID" type="search"
+                        aria-describedby="search-hint" value="{{data.claimID}}">
+                      <button type="submit" class="govuk-button govuk-button--secondary moj-search__button"
+                        data-module="govuk-button">
+                        Search
+                      </button>
+                </div>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% include "./claims-table.html" %}
+        {% endif %}
+    </div>
+</div>
+        
+
+
+

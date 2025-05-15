@@ -1,0 +1,399 @@
+[
+  {
+    "claimID": "Z1Z-F1J6-3XF7-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "status": "submitted",
+    "createdDate": "2023-12-31T08:55:32.615Z",
+    "createdBy": "Daniel Jones",
+    "notes": [
+      {
+        "author": "Donald Marvin (CCS Agent)",
+        "date": "2024-02-05T09:02:43.631Z",
+        "note": "Submitter called to ask questions regarding this claim. Referral passed to processor."
+      }
+    ],
+
+    "submissions": [
+      { 
+        "submitter": {
+          "name": "Daniel Jones",
+          "email": "d.jones@evergreencare.com"
+        },
+        "submittedDate": "2024-04-16T12:56:10.547Z",
+        "trainingCode": "DLDOC",
+        "learnerId": "KZ 79 0F 13 Z",
+        "startDate": "2024-02-01T23:29:00.654Z",
+        "costDate": "2023-08-08T07:55:32.615Z",
+        "completionDate": "2024-02-05T20:22:11.308Z",
+        "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+        "evidenceOfCompletion": "certificate.pdf",
+        "processedBy": null,
+        "processedDate": null,
+        "evidenceOfPaymentReview": {
+          "pass": null,
+          "note": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "pass": null,
+          "note": null
+        }
+      }
+    ]
+  },
+
+
+  {
+    "claimID": "AB1-C12D-3XF7-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "status": "submitted",
+    "createdDate": "2023-12-31T08:55:32.615Z",
+    "createdBy": "Rachel Mcglee",
+    "notes": [
+      {
+        "author": "Donald Marvin (CCS Agent)",
+        "date": "2024-02-05T09:02:43.631Z",
+        "note": "Submitter called to ask questions regarding this claim. Referral passed to processor."
+      }
+    ],
+
+    "submissions": [
+      { 
+        "submitter": {
+          "name": "Rachel Mcglee",
+          "email": "rachel.mcglee@evergreencare.com"
+        },
+        "submittedDate": "2024-02-11T13:56:10.547Z",
+        "trainingCode": "DLDOC",
+        "learnerId": "LE 09 5F 94 M",
+        "startDate": "2024-02-01T23:29:00.654Z",
+        "costDate": "2023-08-08T07:55:32.615Z",
+        "completionDate": "2024-02-05T20:22:11.308Z",
+        "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+        "evidenceOfCompletion": "certificate.pdf",
+        "processedBy": null,
+        "processedDate": null,
+        "evidenceOfPaymentReview": {
+          "pass": null,
+          "note": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "pass": null,
+          "note": null
+        }
+      }
+    ]
+  }, 
+
+  {
+    "claimID": "Z8S-F1J6-4GH7-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "status": "approved",
+    "createdDate": "2023-11-30T13:09:57.600Z",
+    "createdBy": "Flossie Gleason",
+    "notes": [
+      {
+        "author": "Donald Marvin (Processor)",
+        "date": "2024-02-05T08:58:43.631Z",
+        "note": "The evidence of payment met all of the criteria requirements."
+      },
+      {
+        "author": "Donald Marvin (Processor)",
+        "date": "2024-02-05T09:02:43.631Z",
+        "note": "The evidence of completion met all of the criteria requirements."
+      },
+      {
+        "author": "Donald Marvin (Processor)",
+        "date": "2024-02-05T10:32:43.631Z",
+        "note": "Have to go check with my manager the exact amount to reimburse."
+      }
+    ],
+
+    "submissions": [
+      { 
+        "submitter": {
+          "name": "Daniel Jones",
+          "email": "d.jones@evergreencare.com"
+        },
+        "submittedDate": "2023-11-25T12:14:45.342Z",
+        "trainingCode": "DLEDI",
+        "learnerId": "OB 78 2F 15 O",
+        "startDate": "2023-10-25T02:38:35.764Z",
+        "costDate": "2023-08-08T07:55:32.615Z",
+        "completionDate": "2023-09-12T20:22:11.308Z",
+        "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+        "evidenceOfCompletion": "certificate.pdf",
+        "processedBy": "Arron MacGregor",
+        "processedDate": "2024-01-12T15:23:10.547Z",
+        "evidenceOfPaymentReview": {
+          "pass": "queried",
+          "note": "Training didn't match invoice",
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "pass": "approved",
+          "note": null
+        }
+      }, 
+      { 
+        "submitter": {
+          "name": "Daniel Jones",
+          "email": "d.jones@evergreencare.com"
+        },
+        "submittedDate": "2024-02-01T12:56:10.547Z",
+        "trainingCode": "DLDOC",
+        "learnerId": "KZ 79 0F 13 Z",
+        "startDate": "2023-08-11T23:29:00.654Z",
+        "costDate": "2023-08-08T07:55:32.615Z",
+        "completionDate": "2023-09-12T20:22:11.308Z",
+        "evidenceOfPayment": ["invoice.pdf", "receipt171.png", "bankstatement.png"],
+        "evidenceOfCompletion": "certificate.pdf",
+        "processedBy": "Arron MacGregor",
+        "processedDate": "2024-01-12T15:23:10.547Z",
+        "evidenceOfPaymentReview": {
+          "pass": "approved",
+          "note": null,
+          "costPerLearner": "110"
+        },
+        "evidenceOfCompletionReview": {
+          "pass": "approved",
+          "note": null
+        }
+      }
+    ]
+  },
+  {
+    "claimID": "K93-SK68-3S2K-A",
+    "workplaceID": "D91774723",
+    "claimType": "100",
+    "status": "rejected",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "notes": [],
+
+    "submissions": [
+      { 
+        "submitter": {
+          "name": "Daniel Jones",
+          "email": "daniel.jones@pinetreecare.com"
+        },
+        "submittedDate": "2023-11-25T03:13:47.582Z",
+        "trainingCode": "MHFA",
+        "learnerId": "ZX 51 96 87 D",
+        "startDate": "2023-10-12T06:08:29.142Z",
+        "costDate": "2022-09-19T13:52:37.929Z",
+        "completionDate": "2023-11-03T05:51:56.177Z",
+        "evidenceOfPayment": ["invoice003.pdf", "bankstatement003.pdf"],
+        "evidenceOfCompletion": "certificate003.pdf",
+        "processedBy": "Marvin Elsayed",
+        "processedDate": "2024-02-05T14:53:43.631Z",
+        "evidenceOfPaymentReview": {
+          "pass": "rejected",
+          "note": "The evidence of payment provided did not meet our requirements because it did not refer to the training that was paid for.",
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "pass": "rejected",
+          "note": "The evidence of completion provided did not meet our requirements because it did not refer to the correct training that was paid for."
+        }
+      }
+    ]
+  },
+  {
+    "claimID": "W1J-BEDE-8LCQ-A",
+    "workplaceID": "D91774723",
+    "claimType": "100",
+    "status": "rejected",
+    "createdDate": "2023-04-04T13:52:37.929Z",
+    "createdBy": "Flossie Gleason",
+    "notes": [],
+
+    "submissions": [
+      { 
+        "submitter": {
+          "name": "Fredrick Smith",
+          "email": "fredrick.smith@pinetreecare.com"
+        },
+        "submittedDate": "2024-04-03T11:38:05.132Z",
+        "trainingCode": "IMSDT",
+        "learnerId": "UG 66 2F 97 F",
+        "startDate": "2023-06-16T12:49:27.956Z",
+        "costDate": "2022-09-19T13:52:37.929Z",
+        "completionDate": "2023-11-03T05:51:56.177Z",
+        "evidenceOfPayment": ["invoice004.pdf"],
+        "evidenceOfCompletion": "certificate004.pdf",
+        "processedBy": "Euan Cooper",
+        "processedDate": "2024-05-11T12:12:05.132Z",
+        "evidenceOfPaymentReview": {
+          "pass": "rejected",
+          "note": "This training is not eligible",
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "pass": "rejected",
+          "note": "This training is not eligible"
+        }
+      }
+    ]
+  },
+  {
+    "claimID": "K92-HD52-7GD9-C",
+    "workplaceID": "A89263211",
+    "claimType": "100",
+    "status": "submitted",
+    "createdDate": "2024-03-23T14:23:36.888Z",
+    "createdBy": "Mara Monahan",
+    "notes": [
+      {
+        "author": "Donald Marvin (CCS Agent)",
+        "date": "2024-02-05T09:02:43.631Z",
+        "note": "Submitter called to ask questions regarding this claim. Referral passed to processor."
+      }
+    ],
+
+    "submissions": [
+      { 
+        "submitter": {
+          "name": "Mary McCleod",
+          "email": "mary.mccleod@kingscourtcare.com"
+        },
+        "submittedDate": "2024-01-07T06:44:24.585Z",
+        "trainingCode": "USMS",
+        "learnerId": "NX 76 8F 30 D",
+        "startDate": "2023-12-10T05:49:45.727Z",
+        "costDate": "2023-07-06T13:23:36.888Z",
+        "completionDate": "2023-12-14T23:54:25.599Z",
+        "evidenceOfPayment": ["invoice010.pdf", "bankstatement010.pdf", "receipt010.pdf"],
+        "evidenceOfCompletion": "certificate.pdf",
+        "processedBy": null,
+        "processedDate": null,
+        "evidenceOfPaymentReview": {
+          "pass": null,
+          "note": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "pass": null,
+          "note": null
+        }
+      }
+    ]
+  },
+  {
+    "claimID": "WR5-R2P4-DSL4-B",
+    "workplaceID": "B02944934",
+    "claimType": "60",
+    "status": "submitted",
+    "createdDate": "2023-12-31T08:55:32.615Z",
+    "createdBy": "Flossie Gleason",
+    "notes": [
+      {
+        "author": "Donald Marvin (CCS Agent)",
+        "date": "2024-02-05T09:02:43.631Z",
+        "note": "Submitter called to ask questions regarding this claim. Referral passed to processor."
+      }
+    ],
+
+    "submissions": [
+      { 
+        "submitter": {
+          "name": "Rachel Mcglee",
+          "email": "rachel.mcglee@evergreencare.com"
+        },
+        "submittedDate": "2024-07-09T12:56:10.547Z",
+        "trainingCode": "603/6251/0",
+        "learnerId": "LM 89 7F 48 J",
+        "startDate": "2024-02-01T23:29:00.654Z",
+        "costDate": "2023-08-08T07:55:32.615Z",
+        "completionDate": null,
+        "evidenceOfPayment": ["invoice007.pdf", "bankstatement007.pdf", "receipt007.pdf"],
+        "evidenceOfCompletion": "certificate.pdf",
+        "processedBy": null,
+        "processedDate": null,
+        "evidenceOfPaymentReview": {
+          "pass": null,
+          "note": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "pass": null,
+          "note": null
+        }
+      }
+    ]
+  },
+  {
+    "claimID": "R4Y-NL7G-D967-B",
+    "workplaceID": "B02944934",
+    "claimType": "60",
+    "status": "approved",
+    "createdDate": "2023-06-27T18:29:08.850Z",
+    "createdBy": "Flossie Gleason",
+    "notes": [
+      {
+        "author": "Donald Marvin (CCS Agent)",
+        "date": "2024-02-05T09:02:43.631Z",
+        "note": "Submitter called to ask questions regarding this claim. Referral passed to processor."
+      }
+    ],
+
+    "submissions": [
+      { 
+        "submitter": {
+          "name": "Rachel Mcglee",
+          "email": "rachel.mcglee@evergreencare.com"
+        },
+        "submittedDate": "2023-12-24T21:55:10.611Z",
+        "trainingCode": "600/9319/5",
+        "learnerId": "BF 73 4F 97 L",
+        "startDate": "2023-08-14T21:03:51.996Z",
+        "costDate": "2023-05-13T18:29:08.850Z",
+        "evidenceOfPayment": ["invoice008.pdf", "bankstatement008.pdf", "receipt008.pdf"],
+        "evidenceOfCompletion": "certificate003.pdf",
+        "processedBy": "Marvin Gayle",
+        "processedDate": "2024-02-01T19:35:05.522Z",
+        "evidenceOfPaymentReview": {
+          "pass": "approved",
+          "note": null,
+          "costPerLearner": 55
+        }
+      }
+    ]
+  },
+  {
+    "claimID": "R7J-NC3G-D967-C",
+    "workplaceID": "B02944934",
+    "claimType": "40",
+    "status": "submitted",
+    "createdDate": "2023-06-27T18:29:08.850Z",
+    "createdBy": "Flossie Gleason",
+    "notes": [
+      {
+        "author": "Donald Marvin (CCS Agent)",
+        "date": "2024-02-05T09:02:43.631Z",
+        "note": "Submitter called to ask questions regarding this claim. Referral passed to processor."
+      }
+    ],
+    "submissions": [
+      { 
+        "submitter": {
+          "name": "Rachel Mcglee",
+          "email": "rachel.mcglee@evergreencare.com"
+        },
+        "submittedDate": "2023-12-24T21:55:10.611Z",
+        "completionDate": "2023-09-14T21:03:51.996Z",
+        "evidenceOfCompletion": "certificate003.pdf",
+        "processedBy": "Marvin Gayle",
+        "processedDate": "2024-02-01T19:35:05.522Z",
+        "evidenceOfCompletionReview": {
+          "pass": "approved",
+          "note": null
+        }
+      }
+    ]
+  }
+]
