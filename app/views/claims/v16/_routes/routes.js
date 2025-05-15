@@ -628,8 +628,6 @@ router.post('/ready-to-declare', function (req, res) {
   let claimID = req.session.data.id
   let claim = {}
 
-  
-
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
       claim = c
@@ -1060,6 +1058,26 @@ router.get('/signin-handler', function (req, res) {
     }
   } 
 
+});
+
+router.post('/add-supporting-note', function (req, res) {
+  var note = req.session.data.supportingNote
+  var claimID = req.session.data.id
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
+      submission.supportingNote = note
+      break;
+    }
+  }
+  delete req.session.data.supportingNote
+  res.redirect('claim/claim-details'+'?id='+claimID+'#notes')
 });
 
 function loadData(req) {
