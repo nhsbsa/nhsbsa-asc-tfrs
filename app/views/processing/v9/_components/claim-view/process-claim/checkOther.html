@@ -1,0 +1,65 @@
+
+<h3 class="govuk-heading-m">Step {{data.stepNumber}}: Other rejection reasons</h3>
+
+<form action="../other-check-handler" method="post" novalidate>
+
+    <div class="govuk-form-group {% if data.otherResponseIncomplete %}govuk-form-group--error{% endif %}" id="other-review">
+
+        <fieldset class="govuk-fieldset">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                Is there any other reason why this claim should be rejected (besides a problem with the evidence)?
+            </legend>
+            {% if data.otherResponseIncomplete %}
+                <p id="other-review-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Select no if no other reason
+                </p>
+            {% endif %}
+
+            <div class="govuk-radios__item">
+
+                <input class="govuk-radios__input" id="otherReject" name="other" type="radio" value="reject" {% if data.other=='reject' %}checked{% endif%}>
+
+                <label class="govuk-label govuk-radios__label" for="otherReject">
+                    Yes
+                </label>
+
+            </div>
+
+            <div class="govuk-radios" data-module="govuk-radios">
+                
+                <div class="govuk-radios__item">
+
+                    <input class="govuk-radios__input" id="otherYes" name="other" type="radio" value="yes" {% if data.other=='yes'%}checked{% endif %}>
+
+                    <label class="govuk-label govuk-radios__label" for="otherYes">
+                        No
+                    </label>
+
+                </div>
+
+                <div class="govuk-radios__item">
+
+                    <input class="govuk-radios__input" id="otherQuery" name="other" type="radio" value="query" {% if data.other=='query' %}checked{% endif%}>
+
+                    <label class="govuk-label govuk-radios__label" for="otherQuery">
+                        Needs action by submitter
+                    </label>
+
+                </div>
+
+                
+
+            </div>
+
+        </fieldset>
+    </div>
+
+
+    <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Continue
+        </button>
+        <a class="govuk-link govuk-link--no-visited-state" href="../process-claim-back-handler">Go back</a>
+    </div>
+
+</form>

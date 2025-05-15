@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findPair, findUser } = require('../_helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser } = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -20,7 +20,7 @@ addFilter('statusTag', function (statusID, statuses) {
     } else if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
     } else if (statusID == 'queried') {
-        return '<strong class="govuk-tag govuk-tag--yellow">' + statusName + '</strong>'
+        return '<strong class="govuk-tag govuk-tag" style="max-width: 200px;">' + statusName + '</strong>'
     } else if (statusID == 'rejected') {
         return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
     } else if (statusID == 'approved') {
@@ -153,8 +153,23 @@ addFilter('findClaim', function (claimID, claims, workplaceID) {
     } else {
         return null
     }
-
 })
+
+addFilter('trunctateString', function (string) {
+    return string.slice(0, 30);
+})
+
+addFilter('formatText', function (submission) {
+    let text = ""
+    if (submission.evidenceOfPaymentReview.note) {
+        text = submission.evidenceOfPaymentReview.note + " "
+    }
+    if (submission.evidenceOfCompletionReview.note) {
+        text += submission.evidenceOfCompletionReview.note
+    }
+    return text
+})
+
 
 addFilter('findSubmissionByDate', function (submissions, submittedDate) {
     const submission = submissions.find(s => s.submittedDate == submittedDate);
@@ -516,7 +531,31 @@ addFilter('orderByMostRecent', function (submissions) {
     let sorted = sortSubmissionsByDate(submissions, 'submittedDate')
     return sorted
 })
+addFilter('sortSubmissionsForTable', function (submissions) {
+    let sorted = sortSubmissionsForTable(submissions)
+    return sorted
+})
 
+addFilter('matchSubmissionToText', function (submissions) {
+    const submissionLabels = submissions.map((submission, index, array) => {
+        if (!submission.submittedDate) {
+          return "Current draft";
+        } else {
+          // Count how many submissions (after this one) have a submittedDate
+          const submittedAfter = array.slice(index + 1).filter(s => s.submittedDate).length;
+      
+          if (submittedAfter === 0) return "First submission";
+          if (submittedAfter === 1) return "Second submission";
+          if (submittedAfter === 2) return "Third submission";
+          if (submittedAfter === 3) return "Fourth submission";
+          if (submittedAfter === 4) return "Fifth submission";
+          return `${submittedAfter + 1}th submission`; // fallback for 4th and beyond
+        }
+      });
+      return submissionLabels
+    // let text = ["First submission", "Second submission", "Third submission", "Fourth submission", "Fifth submission"]
+    // return text[count]
+})
 
 
 addFilter('userType', function (type) {
@@ -1080,6 +1119,12 @@ addFilter('checkIfUpdated', (claim, field) => {
         } else {
             return false
         }
+    } else if (field == "supportingNote") {
+        if (lastQueried.supportingNote == draftClaim.supportingNote) {
+            return false
+        } else {
+            return true
+        }
     } else {
         return false
     }
@@ -1094,6 +1139,20 @@ addFilter('getRejectionNote', (submission) => {
         rejectionNote += "Evidence of completion" + '<br>' + submission.evidenceOfCompletionReview.note
     }
     return rejectionNote
+})
+
+addFilter('compareIfEvidenceChanged', (first, second) => {
+    if (first.evidenceOfPayment.length !== second.evidenceOfPayment.length) {
+        return true;
+    }
+    first.evidenceOfPayment.sort();
+    second.evidenceOfPayment.sort();
+    for (let i = 0; i < first.length; i++) {
+        if (first[i] !== second[i]) {
+            return true;
+        }
+    }
+    return false;
 })
 
 addFilter('getReimbursementAmount', (submission, training) => {

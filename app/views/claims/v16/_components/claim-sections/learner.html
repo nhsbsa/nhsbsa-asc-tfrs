@@ -1,5 +1,3 @@
-<{% if claim.claimType == '60' %}h3{% else %}h2{% endif %} class="govuk-heading-m" id="learner">Learner</{% if claim.claimType == '60' %}h3{% else %}h2{% endif %}>
-<dl class="govuk-summary-list">
   {% if not submission.learnerID %}
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =="missing" %}
   <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
@@ -10,7 +8,7 @@
   {% endif %}
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-key--error {% endif %}">
-      Name
+      Learner
     </dt>
     <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-value--error {% endif %}">
       <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add learner</a>
@@ -19,7 +17,7 @@
   {% else %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
-      Name {% if ( claim | checkIfUpdated("learner")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
+      Learner {% if ( claim | checkIfUpdated("learner")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
     </dt>
     <dd class="govuk-summary-list__value">
       <p class="govuk-body">{{learner.givenName}} {{learner.familyName}}</p>
@@ -34,4 +32,3 @@
   </div>
 
   {% endif %}
-</dl>

@@ -520,6 +520,19 @@ function sortSubmissionsByDate(submissions, dateType) {
     return submissions; // Return the claim with sorted submissions
 }
 
+function sortSubmissionsForTable(submissions) {
+    return submissions.sort((a, b) => {
+        if (!a.submittedDate && b.submittedDate) return -1;
+        if (a.submittedDate && !b.submittedDate) return 1;
+      
+        const dateA = new Date(a.processedDate || 0);
+        const dateB = new Date(b.processedDate || 0);
+      
+        return dateB - dateA;
+      });
+      
+}
+
 function findPair(claimID, claims){
     for (let claim of claims) {
         const id = claim.claimID;
@@ -544,6 +557,7 @@ function checkChange(claim) {
         (lastQueried.learnerID !== draftClaim.learnerID) ||
         (lastQueried.startDate !== draftClaim.startDate) ||
         (lastQueried.costDate !== draftClaim.costDate) ||
+        (lastQueried.supportingNote !== draftClaim.supportingNote) ||
         (lastQueried.completionDate !== draftClaim.completionDate) ||
         (lastQueried.evidenceOfCompletion !== draftClaim.evidenceOfCompletion) ||
         (lastQueried.evidenceOfPayment.length !== draftClaim.evidenceOfPayment.length)
@@ -564,4 +578,4 @@ function checkChange(claim) {
 }
 
 
-module.exports = { findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser }
+module.exports = { findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable }

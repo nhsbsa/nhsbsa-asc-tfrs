@@ -1,0 +1,80 @@
+<div class="govuk-error-summary" data-module="govuk-error-summary">
+    <div role="alert">
+        <h2 class="govuk-error-summary__title">
+            There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+
+                {% if data.paymentResponseIncomplete %}
+                <li>
+                    <a href="#payment-review-error">Select yes if evidence of payment meets the required criteria </a>
+                </li>
+                {% endif %}
+
+
+                    {% if data.paymentReimbursementAmountIncomplete %}
+                    <li>
+                        <a href="#cost-per-learner-error">Enter cost per learner</a>
+                    </li>
+                    {% endif %}
+
+                    {% if data.paymentReimbursementAmountInvalid %}
+                    <li>
+                        <a href="#cost-per-learner-error">Cost per learner must be a number</a>
+                    </li>
+                    {% endif %}
+
+
+                {% if data.paymentRejectNoteIncomplete %}
+                <li>
+                    <a href="#payment-note-error">Enter evidence of payment rejection reasons</a>
+                </li>
+                {% endif %}
+
+                {% if data.paymentQueryNoteIncomplete %}
+                <li>
+                    <a href="#payment-note-error">Enter evidence of payment actions</a>
+                </li>
+                {% endif %}
+
+                {% if data.completionResponseIncomplete %}
+                <li>
+                    <a href="#completion-review-error">Select yes if evidence of completion meets the required criteria </a>
+                </li>
+                {% endif %}
+
+                {% if data.completionQueryNoteIncomplete %}
+                <li>
+                    <a href="#completion-note-error">Enter evidence of completion actions</a>
+                </li>
+                {% endif %}
+
+                {% if data.completionRejectNoteIncomplete %}
+                <li>
+                    <a href="#completion-note-error">Enter evidence of completion rejection reasons</a>
+                </li>
+                {% endif %}
+
+                {% if data.otherResponseIncomplete %}
+                <li>
+                    <a href="#completion-review-error">Select no if no other reason </a>
+                </li>
+                {% endif %}
+
+                {% if data.otherQueryNoteIncomplete %}
+                <li>
+                    <a href="#other-note-error">Enter actions needed for other reasons</a>
+                </li>
+                {% endif %}
+
+                {% if data.otherRejectNoteIncomplete %}
+                <li>
+                    <a href="#other-note-error">Enter other rejection reasons</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</div>

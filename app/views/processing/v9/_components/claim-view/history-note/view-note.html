@@ -1,0 +1,152 @@
+{% set claim = data.id | findClaim(data.claims) %} 
+{% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
+{% set learner = submission.learnerID | findLearner(data["learners"])%}
+{% set training = submission.trainingCode | findTraining(data.training)%}
+
+{% if data.noteType == "queryNote"%}
+<div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
+  <div>
+      <h1 id="note-heading" class="govuk-heading-m push--top">Actions needed</h1>
+
+        {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+        {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
+          <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
+        {% endif %}
+        {% if submission.otherCheck.outcome == "queried" %}
+          <p class="govuk-body"><strong>Other reason:</strong> {{submission.otherCheck.note}}</p>
+        {% endif %}
+
+      <a href="/hideClaimHistoryNote" class="govuk-link govuk-button" >Close</a>
+
+  </div>
+</div>
+
+{% endif %}
+
+{% if data.noteType == "rejectionNote"%}
+<div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
+  <div>
+    <h1 id="note-heading" class="govuk-heading-m push--top">Rejection note</h1>
+    {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
+          <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+        {% if submission.evidenceOfCompletionReview.outcome == "fail" %}
+          <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
+        {% endif %}
+    <a href="/hideClaimHistoryNote" class="govuk-link govuk-button" >Close</a>
+  </div>  
+</div>
+{% endif %}
+
+
+{% if data.showNote == "claim"%}
+<div>
+  <div tabindex="-1" role="dialog" aria-modal="true" class="claim-history-dialog scrollable-claim-note" aria-labelledby="claim-history-heading claim-history-message">
+    <div>
+
+    <h3 class="govuk-heading-s">Claim submission</h3>
+    <p>Submitted on {{submission.submittedDate | govukDate}}</p>
+    
+    <h3 class="govuk-heading-m" id="payment">Training</h3>
+ 
+    <dl class="govuk-summary-list">
+        {% if (claim.claimType != "40")%}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Title
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{training.title}}
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Level and type
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ claim | qualificationCheck(data.training, claim.training.type) }}
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Awarding organisation
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ claim | qualificationCheck(data.training, claim.training.awardingOrganisation) }}
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Payment date
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ submission.costDate | govukDate }}
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ submission.startDate | govukDate }}
+            </dd>
+        </div>
+        {% endif %}
+        {% if (claim.claimType != "60")%}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Completion date
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ submission.completionDate | govukDate }}
+            </dd>
+        </div>
+        {% endif %}
+    </dl>
+    {% if (claim.claimType != "40")%}
+    <h3 class="govuk-heading-m" id="payment">Learner</h3>
+    <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                <span class="govuk-visually-hidden">Learner</span>Name
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{learner.givenName}} {{learner.familyName}}
+            </dd>
+        </div>
+    </dl>
+    {% endif %}
+
+      <div style="padding-top: 10px;">
+          {% if (claim.claimType != "40")%}
+          <h2 class="govuk-heading-m">
+              Evidence of payment
+          </h2>
+          <dl class="govuk-summary-list">
+              {% for evidence in submission.evidenceOfPayment %}
+              {% set isPayment = true %}
+              {% include "../history-note/file-section.html" %}
+              {% endfor %}
+          </dl>
+          {% endif %}
+
+          {% if (claim.claimType != "60")%}
+          <h2 class="govuk-heading-m">
+              Evidence of completion
+          </h2>
+          <dl class="govuk-summary-list">
+              {% set evidence = submission.evidenceOfCompletion %}
+              {% set isPayment = false %}
+              {% include "../history-note/file-section.html" %}
+          </dl>
+          {% endif %}
+          <a href="/hideClaimHistoryNote" class="govuk-link govuk-button" >Close</a>
+        </div>
+      </div>
+      </div>
+
+      {% endif %}
+
+<div id="claim-history-overlay" class="claim-history-overlay"></div>

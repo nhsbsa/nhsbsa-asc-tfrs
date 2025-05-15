@@ -7,8 +7,8 @@
     },
     {
         "id": "queried",
-        "name": "Queried",
-        "description": "Claims that have been submitted but need updating.",
+        "name": "Sent back for editing",
+        "description": "Claims that have been submitted but need amending.",
         "distribution": 0.10
     },
     {

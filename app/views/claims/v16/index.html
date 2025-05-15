@@ -47,6 +47,18 @@ GOV.UK prototype - {{serviceName}}
                             <option value="F87223491">Farifields Care home</option>
                         </select>
                     </div>
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="version-research">
+                          Choose version
+                        </label>
+                        <div id="version-research-hint" class="govuk-hint">
+                          This will simulate the version of the prototype you wish to test in UR
+                        </div>
+                        <select class="govuk-select" id="versionResearch" name="versionResearch" aria-describedby="version-research-hint">
+                            <option value="A" selected>A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
                     <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="./load-data">
                         Start full prototype
                     </button>
