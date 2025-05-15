@@ -20,7 +20,7 @@ addFilter('statusTag', function (statusID, statuses) {
     } else if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
     } else if (statusID == 'queried') {
-        return '<strong class="govuk-tag govuk-tag--yellow" style="max-width: 200px;">' + statusName + '</strong>'
+        return '<strong class="govuk-tag govuk-tag" style="max-width: 200px;">' + statusName + '</strong>'
     } else if (statusID == 'rejected') {
         return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
     } else if (statusID == 'approved') {
@@ -1118,6 +1118,12 @@ addFilter('checkIfUpdated', (claim, field) => {
             return true;
         } else {
             return false
+        }
+    } else if (field == "supportingNote") {
+        if (lastQueried.supportingNote == draftClaim.supportingNote) {
+            return false
+        } else {
+            return true
         }
     } else {
         return false
