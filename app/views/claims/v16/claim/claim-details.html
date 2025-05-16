@@ -74,7 +74,7 @@
 
     {% if (claim.claimType == "100") %}
 
-      <p class="govuk-body">This {{ claim.claimType | typeTag }} claim was {{ claim.status | statusTag(data.statuses) }} on 9 May 2025.</p>
+      <p class="govuk-body">This {{ claim.claimType | typeTag }} claim {% if (claim.status != "not-yet-submitted") %}was {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.{% else %}is {{ claim.status | statusTag(data.statuses) }}{% endif %}</p>
       <p class="govuk-body">The most you could receive is <strong >£100</strong> (<a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>). </p>
 
       {% if claim.status == "rejected" %}
@@ -131,9 +131,9 @@
 
     {% elif (claim.claimType == "60") %}
 
-      <p class="govuk-body">The {{ "60" | typeTag }} part of this claim was {{ claim.status | statusTag(data.statuses) }} on 9 May 2025.</p>
+      <p class="govuk-body">The {{ "60" | typeTag }} part of this claim {% if (claim.status != "not-yet-submitted") %}was {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.{% else %}is {{ claim.status | statusTag(data.statuses) }}{% endif %}</p>
 
-      <p class="govuk-body">The {{ "40" | typeTag }} part of this claim {% if pairClaim != null %}was {{ pairClaim.status | statusTag(data.statuses) }} on 9 May 2025. {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+      <p class="govuk-body">The {{ "40" | typeTag }} part of this claim {% if pairClaim != null %}{% if (pairClaim.status != "not-yet-submitted") %}was {{ pairClaim.status | statusTag(data.statuses) }} on {{ (pairClaim | statusDate) | govukDate }}.{% else %}is {{ pairClaim.status | statusTag(data.statuses) }}{% endif %} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
 
       <p class="govuk-body">The most you could receive is <strong>£100</strong> (<a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>). </p>
 
