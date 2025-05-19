@@ -306,26 +306,20 @@ addFilter('learnerSearch', function (search, learner) {
 })
 
 addFilter('trainingSearch', function (search, training, claim) {
-    let match = false 
-    let s = false
-    if (claim == null) {
-        s = true
-    } else {
-        s = claim.status == "queried" && ((training.fundingModel == "full" && claim.claimType == "100") || (training.type == "split" && claim.claimType != "100"))
-    }
 
-    if (s) {
+    if ((claim == null) || (claim.status == "queried" && ((training.fundingModel == "full" && claim.claimType == "100") || (training.fundingModel == "split" && claim.claimType != "100")))) {
         const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
         const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
         const formattedTrainingCode = removeSpacesAndCharactersAndLowerCase(training.code);
     
         if (formattedTrainingTitle.includes(formattedSearch) || formattedTrainingCode.includes(formattedSearch)) {
-            match = true
+            return true
         }
     } else {
         return false
     }
-    return match
+
+    return false
 })
 
 

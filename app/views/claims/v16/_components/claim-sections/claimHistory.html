@@ -1,10 +1,7 @@
 {% if claim.claimType == "100" %}
-  {% set claimTypeText = "hundred" %}
   {% set actionText = "" %}
 {% elif claim.claimType == "60" %}
-  {% set claimTypeText = "sixty" %}
   {% set actionText = "60 part" %}
-  {% set pairClaimTypeText = "fourty" %}
   {% set pairClaimActionText = "40 part" %}
 {% endif %}
 
@@ -31,10 +28,10 @@
           </div>
 
           {% elif (submission.evidenceOfCompletionReview.outcome == "queried")%} 
-          
+          {% set status = "queried" | statusDetails(data.statuses) %}
           <div class="moj-timeline__item">
             <div class="moj-timeline__header">
-              <h3 class="moj-timeline__title">{{pairClaimActionText}} Queried</h3>
+              <h3 class="moj-timeline__title">{{pairClaimActionText}} {{status.name}}</h3>
               <p class="moj-timeline__byline">by Claim processor</p>
               <p class="moj-timeline__date">
                 <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
@@ -90,10 +87,10 @@
 
         {% elif (claim.claimType == "100" and (submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried"))
         or (claim.claimType == "60" and submission.evidenceOfPaymentReview.outcome == "queried" ) %} 
-         
+         {% set status = "queried" | statusDetails(data.statuses) %}
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
-            <h3 class="moj-timeline__title">{{actionText}} Queried</h3>
+            <h3 class="moj-timeline__title">{{actionText}} {{status.name}}</h3>
             <p class="moj-timeline__byline">by Claim processor</p>
             <p class="moj-timeline__date">
               <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
