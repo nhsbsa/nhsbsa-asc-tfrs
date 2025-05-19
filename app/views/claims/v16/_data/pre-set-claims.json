@@ -142,7 +142,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence provided does not detail a breakdown of the cost per learner, please provide confirmation of the total cost you paid per learner.",
+          "note": "The evidence provided does not detail a breakdown of the cost per learner, please provide confirmation of the cost you paid per learner.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -205,7 +205,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "We cannot accept an invoice and bank statement only as evidence of payment as it is not sufficient to prove you paid for the training. We require you to a receipt or receipted invoice.",
+          "note": "We cannot accept an invoice and bank statement only as evidence of payment as it is not sufficient to prove you paid for the training. We require you to a receipt or receipted invoice. The evidence provided also does not detail a breakdown of the cost per learner, please provide confirmation of the cost you paid per learner.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
