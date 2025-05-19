@@ -61,7 +61,7 @@ router.use((req, res, next) => {
       // Iterate through require.cache and remove only old 'filters.js' files, keeping the new one
       Object.keys(require.cache).forEach((key) => {
         if (
-          key.match(/\/app\/views\/(processing|claims)\/v\d+\/filters\/filters\.js$/) &&
+          key.match(/\/app\/views\/(processing|claims)\/v\d+\/_filters\/filters\.js$/) &&
           key !== resolvedFiltersPath // Only delete if it's not the current filters file
         ) {
           delete require.cache[key];
