@@ -99,6 +99,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         outcome: null,
         note: null
       },
+      supportingNote: null,
       processedDate: null,
       processedBy: null
     }
@@ -160,6 +161,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
             outcome: null,
             note: null
           },
+          supportingNote: null,
           processedDate: null,
           processedBy: null
         }
@@ -184,6 +186,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
     const submissionDateA = faker.date.between({ from: startDate, to: new Date() })
 
+    // 60 part
     const submissionA =  {
       submitter: faker.helpers.arrayElement(users).email,
       submittedDate: submissionDateA,
@@ -204,15 +207,17 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         costPerLearner: Math.floor(trainingItem.reimbursementAmount * 0.9)
       },
       evidenceOfCompletionReview: {
-        outcome: "pass",
+        outcome: null,
         note: null
       },
+      supportingNote: null,
       processedDate: faker.date.between({ from: submissionDateA, to: new Date() }),
       processedBy: faker.helpers.arrayElement(backOfficeStaff.processors)
     }
 
     const submissionDateB = faker.date.between({ from: submissionA.processedDate, to: new Date() });
 
+    //40 part
     const submissionB =  {
       submitter: null,
       submittedDate: null,
@@ -236,6 +241,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         outcome: null,
         note: null
       },
+      supportingNote: null,
       processedDate: null,
       processedBy: null
     }
@@ -255,17 +261,13 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
     } else if(['approved'].includes(status)) {
 
-      submissionB.evidenceOfPaymentReview.outcome = "pass"
-      submissionB.evidenceOfPaymentReview.costPerLearner = Math.floor(trainingItem.reimbursementAmount * 0.9)
-
       submissionB.evidenceOfCompletionReview.outcome = "pass"
 
     } else if(['queried'].includes(status)) {
-      submissionB.evidenceOfPaymentReview.outcome = "queried"
-      submissionB.evidenceOfPaymentReview.note = "The evidence of payment provided is not sufficient to prove you paid for the training."
+      submissionB.evidenceOfCompletionReview.outcome = "queried"
+      submissionB.evidenceOfCompletionReview.note = "The completion date on the certificate does not match the completion date on the claim"
 
-      submissionB.evidenceOfCompletionReview.outcome = "pass"
-
+      //40 part draft
       const submissionB2 =  {
         submitter: null,
         submittedDate: null,
@@ -282,13 +284,14 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
     
         evidenceOfPaymentReview: {
           outcome: submissionA.evidenceOfPaymentReview.outcome,
-        note: submissionA.evidenceOfPaymentReview.note,
-        costPerLearner: submissionA.evidenceOfPaymentReview.costPerLearner
+          note: submissionA.evidenceOfPaymentReview.note,
+          costPerLearner: submissionA.evidenceOfPaymentReview.costPerLearner
         },
         evidenceOfCompletionReview: {
-          outcome: null,
-          note: null
+          outcome: submissionB.evidenceOfCompletionReview.outcome,
+          note: submissionB.evidenceOfCompletionReview.note
         },
+        supportingNote: submissionB.supportingNote,
         processedDate: null,
         processedBy: null
       }

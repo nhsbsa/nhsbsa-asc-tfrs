@@ -91,18 +91,18 @@
     ]
   },
   {
-    "claimID": "CWH-E4C7-FBXJ-A",
-    "workplaceID": "A02944934",
+    "claimID": "CFD-EHS7-F43J-A",
+    "workplaceID": "placeholder",
     "claimType": "100",
     "status": "queried",
     "createdDate": "2024-08-15T23:09:49.421Z",
-    "createdBy": "miles.whitaker@evergreencare.com",
+    "createdBy": "placeholder",
     "notes": [],
     "submissions": [
       {
         "submitter": null,
         "submittedDate": null,
-        "trainingCode": "USMS",
+        "trainingCode": "601/2007/1",
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
@@ -129,7 +129,7 @@
       {
         "submitter": "rosalie.finch@evergreencare.com",
         "submittedDate": "2024-10-31T00:34:25.749Z",
-        "trainingCode": "USMS",
+        "trainingCode": "601/2007/1",
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-15T14:48:06.827Z",
@@ -142,7 +142,70 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The payment date on the evidence of payment provided does not match the payment date in the claim.",
+          "note": "The evidence provided does not detail a breakdown of the cost per learner, please provide confirmation of the total cost you paid per learner.",
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The awarding body for the training course on the claim doesn't match the awarding body of the certificate of completion uploaded to your claim."
+        },
+        "supportingNote": null,
+        "processedDate": "2024-12-07T06:17:43.399Z",
+        "processedBy": "Flossie Gleason"
+      }
+    ]
+  },
+  {
+    "claimID": "CWH-E4C7-FBXJ-A",
+    "workplaceID": "placeholder",
+    "claimType": "100",
+    "status": "queried",
+    "createdDate": "2024-08-15T23:09:49.421Z",
+    "createdBy": "placeholder",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": null,
+        "submittedDate": null,
+        "trainingCode": "USMS",
+        "learnerID": "HB 78 2F 15 O",
+        "startDate": "2024-10-15T02:17:46.659Z",
+        "costDate": "2024-07-05T14:48:06.827Z",
+        "evidenceOfPayment": [
+          "invoice1.pdf", 
+          "bankStatement1.pdf"
+        ],
+        "completionDate": "2024-10-24T19:46:57.118Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "supportingNote": null,
+        "processedDate": null,
+        "processedBy": null
+      },
+      {
+        "submitter": "rosalie.finch@evergreencare.com",
+        "submittedDate": "2024-10-31T00:34:25.749Z",
+        "trainingCode": "USMS",
+        "learnerID": "HB 78 2F 15 O",
+        "startDate": "2024-10-15T02:17:46.659Z",
+        "costDate": "2024-07-05T14:48:06.827Z",
+        "evidenceOfPayment": [
+          "invoice1.pdf", 
+          "bankStatement1.pdf"
+        ],
+        "completionDate": "2024-10-24T19:46:57.118Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "We cannot accept an invoice and bank statement only as evidence of payment as it is not sufficient to prove you paid for the training. We require you to a receipt or receipted invoice.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -161,13 +224,13 @@
         "startDate": "2024-10-15T02:17:46.659Z",
         "costDate": "2024-07-05T14:48:06.827Z",
         "evidenceOfPayment": [
-          "invoice1.pdf"
+          "bankStatement1.pdf"
         ],
         "completionDate": "2024-10-24T19:46:57.118Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "We cannot accept an bank statement only as evidence of payment as it is not sufficient to prove you paid for the training. We require you to upload a receipt.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -729,7 +792,30 @@
           "costPerLearner": 270
         },
         "evidenceOfCompletionReview": {
-          "outcome": "pass",
+          "outcome": null,
+          "note": null
+        },
+        "supportingNote": "We paid £270 per learner for qualification.",
+        "processedDate": "2025-02-18T05:44:08.305Z",
+        "processedBy": "Mara Monahan"
+      },
+      {
+        "submitter": "rachel.mcglee@evergreencare.com",
+        "submittedDate": "2024-12-21T11:46:31.081Z",
+        "trainingCode": "601/7356/7",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-07-06T10:37:21.199Z",
+        "costDate": "2024-04-11T09:34:39.184Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The evidence provided does not detail a breakdown of the cost per learner, please provide confirmation of the total cost you paid per learner.",
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
           "note": null
         },
         "supportingNote": null,
@@ -758,12 +844,12 @@
         "completionDate": "2025-01-23T21:12:41.455Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
-          "outcome": "pass",
+          "outcome": null,
           "note": null,
-          "costPerLearner": 270
+          "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "outcome": null,
+          "outcome": "queried",
           "note": null
         },
         "supportingNote": null,
@@ -781,39 +867,16 @@
         "completionDate": "2025-01-23T21:12:41.455Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
-          "outcome": "pass",
+          "outcome": null,
           "note": null,
-          "costPerLearner": 270
+          "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
           "outcome": "queried",
-          "note": "The completion date on the certificate does not match the completion date on the claim"
+          "note": "The name of the learner on the claim does not match the name of the learner on the certificate of completion."
         },
         "supportingNote": null,
         "processedDate": "2025-02-27T21:46:43.842Z",
-        "processedBy": "Allan Connelly"
-      },
-      {
-        "submitter": "jasper.holloway@evergreencare.com",
-        "submittedDate": "2025-02-19T05:51:35.010Z",
-        "trainingCode": "601/7356/7",
-        "learnerID": "LM 89 7F 48 J",
-        "startDate": "2024-07-06T10:37:21.199Z",
-        "costDate": "2024-04-11T09:34:39.184Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-        "completionDate": "2025-01-22T21:12:41.455Z",
-        "evidenceOfCompletion": "certificate1.pdf",
-        "evidenceOfPaymentReview": {
-          "outcome": "pass",
-          "note": null,
-          "costPerLearner": 270
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": "queried",
-          "note": "The learner name on the certificate does not match the completion date on the claim"
-        },
-        "supportingNote": null,
-        "processedDate": "2025-02-20T21:46:43.842Z",
         "processedBy": "Allan Connelly"
       }
     ]

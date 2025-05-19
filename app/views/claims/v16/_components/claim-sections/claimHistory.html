@@ -1,10 +1,7 @@
 {% if claim.claimType == "100" %}
-  {% set claimTypeText = "hundred" %}
   {% set actionText = "" %}
 {% elif claim.claimType == "60" %}
-  {% set claimTypeText = "sixty" %}
   {% set actionText = "60 part" %}
-  {% set pairClaimTypeText = "fourty" %}
   {% set pairClaimActionText = "40 part" %}
 {% endif %}
 
@@ -14,32 +11,28 @@
 <div class="moj-timeline">
 
   {% if pairClaim != null %}
-  {% set count = pairClaim.submissions.length %}
     {% for submission in pairClaim.submissions | orderByMostRecent %}
-    {% set count = count - 1 %}
-      {% if submission.submittedDate %} 
-
         {% if (submission.evidenceOfCompletionReview.outcome == "fail") %} 
           <div class="moj-timeline__item">
             <div class="moj-timeline__header">
               <h3 class="moj-timeline__title">{{pairClaimActionText}} Rejected</h3>
               <p class="moj-timeline__byline">by Claim processor</p>
-              <p class="moj-timeline__date">
-                <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-              </p>
             </div>
+            <p class="moj-timeline__date">
+              <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+            </p>
           </div>
 
           {% elif (submission.evidenceOfCompletionReview.outcome == "queried")%} 
-          
+          {% set status = "queried" | statusDetails(data.statuses) %}
           <div class="moj-timeline__item">
             <div class="moj-timeline__header">
-              <h3 class="moj-timeline__title">{{pairClaimActionText}} Queried</h3>
+              <h3 class="moj-timeline__title">{{pairClaimActionText}} {{status.name}}</h3>
               <p class="moj-timeline__byline">by Claim processor</p>
-              <p class="moj-timeline__date">
-                <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-              </p>
             </div>
+            <p class="moj-timeline__date">
+              <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+            </p>
           </div>
 
 
@@ -58,23 +51,18 @@
 
           <div class="moj-timeline__item">
             <div class="moj-timeline__header">
-              <h3 class="moj-timeline__title">{{pairClaimActionText}} {% if count == 0 %}Res{% else %}S{% endif %}ubmitted</h3>
+              <h3 class="moj-timeline__title">{{pairClaimActionText}} {% if loop.last %}S{% else %}Res{% endif %}ubmitted</h3>
               <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
-              <p class="moj-timeline__date">
-                <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
-              </p>
             </div>
+            <p class="moj-timeline__date">
+              <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
+            </p>
           </div>
-
-      {% endif %} 
     {% endfor %}
 
   {% endif %}
-
-  {% set count = claim.submissions.length %}
+  
   {% for submission in claim.submissions | orderByMostRecent %}
-  {% set count = count - 1 %}
-    {% if submission.submittedDate %} 
 
       {% if (claim.claimType == "100" and (submission.evidenceOfPaymentReview.outcome == "fail" or submission.evidenceOfCompletionReview.outcome == "fail")) 
         or (claim.claimType == "60" and submission.evidenceOfPaymentReview.outcome == "fail") %} 
@@ -82,23 +70,23 @@
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title"> {{actionText}} Rejected</h3>
             <p class="moj-timeline__byline">by Claim processor</p>
-            <p class="moj-timeline__date">
-              <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-            </p>
           </div>
+          <p class="moj-timeline__date">
+            <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+          </p>
         </div>
 
         {% elif (claim.claimType == "100" and (submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried"))
         or (claim.claimType == "60" and submission.evidenceOfPaymentReview.outcome == "queried" ) %} 
-         
+         {% set status = "queried" | statusDetails(data.statuses) %}
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
-            <h3 class="moj-timeline__title">{{actionText}} Queried</h3>
+            <h3 class="moj-timeline__title">{{actionText}} {{status.name}}</h3>
             <p class="moj-timeline__byline">by Claim processor</p>
-            <p class="moj-timeline__date">
-              <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-            </p>
           </div>
+          <p class="moj-timeline__date">
+            <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+          </p>
         </div>
 
 
@@ -118,20 +106,20 @@
 
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
-            <h3 class="moj-timeline__title">{{actionText}} {% if count > 1 %}Res{% else %}S{% endif %}ubmitted</h3>
+            <h3 class="moj-timeline__title">{{actionText}} {% if loop.last %}S{% else %}Res{% endif %}ubmitted</h3>
             <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
-            <p class="moj-timeline__date">
-              <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
-            </p>
           </div>
+          <p class="moj-timeline__date">
+            <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
+          </p>
         </div>
 
-    {% endif %} 
   {% endfor %}
 
   <div class="moj-timeline__item">
     <div class="moj-timeline__header">
       <h3 class="moj-timeline__title">Created</h3>
+      <p class="moj-timeline__byline">by {{(claim.createdBy | findUser(data.org)).givenName}} {{(claim.createdBy| findUser(data.org)).familyName}}</p>
     </div>
     <p class="moj-timeline__date">
       <time datetime="{{ claim.createdDate }}">{{ claim.createdDate | govukDate }} at {{ claim.createdDate | govukTime }}</time>

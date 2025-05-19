@@ -20,7 +20,7 @@ addFilter('statusTag', function (statusID, statuses) {
     } else if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--pink">' + statusName + '</strong>'
     } else if (statusID == 'queried') {
-        return '<strong class="govuk-tag govuk-tag" style="max-width: 200px;">' + statusName + '</strong>'
+        return '<strong class="govuk-tag govuk-tag--light-blue" style="max-width: 200px;">' + statusName + '</strong>'
     } else if (statusID == 'rejected') {
         return '<strong class="govuk-tag govuk-tag--red">' + statusName + '</strong>'
     } else if (statusID == 'approved') {
@@ -42,16 +42,6 @@ addFilter('claimCount', function (statusID, claims, workplaceID) {
 
 addFilter('pageCount', function (content, perPage) {
     return Math.ceil(content / perPage)
-})
-
-addFilter('statusName', function (statusID, statuses) {
-    var statusName = null
-    for (const s of statuses) {
-        if (s.id == statusID) {
-            statusName = s.name
-        }
-    }
-    return statusName
 })
 
 addFilter('statusDetails', function (statusID, statuses) {
@@ -84,14 +74,6 @@ addFilter('removeSpacesAndCharactersAndLowerCase', function (inputString) {
     // Convert the string to lowercase
     let outputString = removeSpacesAndCharactersAndLowerCase(inputString);
     return outputString;
-})
-
-addFilter('potName', function (type) {
-    let name = "Pot Naming Error"
-    if (type == "TU") {
-        name = "Care skills funding"
-    }
-    return name
 })
 
 addFilter('errorSummary', function (claim, submitError) {
@@ -180,31 +162,6 @@ addFilter('findUser', function (email, org) {
     return findUser(email, org);
 })
 
-addFilter('groupByTitle', function (training) {
-    const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
-    const organizedData = {};
-    for (const course of qualificationsObject.courses) {
-        const title = course.title;
-        if (!organizedData[title]) {
-            organizedData[title] = [];
-        }
-        organizedData[title].push(course);
-    }
-    return organizedData;
-})
-
-addFilter('getUniqueCourseTitles', function (training) {
-    const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
-    const uniqueTitles = [];
-
-    for (let course of qualificationsObject.courses) {
-        if (!uniqueTitles.includes(course.title)) {
-            uniqueTitles.push(course.title);
-        }
-    }
-    return uniqueTitles
-})
-
 addFilter('getCount', function (items) {
     let count = 0;
     if (items != null) {
@@ -213,16 +170,6 @@ addFilter('getCount', function (items) {
         }
     }
     return count;
-})
-
-
-addFilter('formatCount', function (courses) {
-    let count = courses.length;
-    let text = count + " provider";
-    if (count > 1) {
-        text += "s"
-    };
-    return text;
 })
 
 addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection) {
@@ -293,87 +240,16 @@ addFilter('dateErrorFormat', function (dateErrorObject, type) {
     return state;
 })
 
-addFilter('listItemVariableDate', function (statusID, claim) {
-    if (statusID == 'not-yet-submitted') {
-        return 'Created ' + formatDate(claim.createdDate)
-    } else if (statusID == 'submitted') {
-        return 'Submitted ' + formatDate(claim.submittedDate)
-    } else if (statusID == 'rejected') {
-        return 'Rejected ' + formatDate(claim.rejectedDate)
-    } else if (statusID == 'approved') {
-        return 'Approved ' + formatDate(claim.approvedDate)
-    } else {
-        return 'Created ' + formatDate(claim.createdDate)
+addFilter('statusDate', function (claim) {
+    const submission = getMostRelevantSubmission(claim)
+    const status = claim.status
+    if (status == 'not-yet-submitted') {
+        return claim.createdDate
+    } else if (status == 'submitted') {
+        return submission.submittedDate
+    } else if (status == 'rejected' || status == 'approved' || status == 'queried') {
+        return submission.processedDate
     }
-})
-
-addFilter('listItemVariableSort', function (statusID, claim) {
-    if (statusID == 'not-yet-submitted') {
-        return 'Recently created'
-    } else if (statusID == 'submitted') {
-        return 'Recently submitted'
-    } else if (statusID == 'rejected') {
-        return 'Recently rejected'
-    } else if (statusID == 'approved') {
-        return 'Recently approved'
-    } else {
-        return 'Recently created'
-    }
-})
-
-function formatDate(dateStr) {
-    let dateObj = new Date(dateStr);
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"];
-    let day = dateObj.getUTCDate();
-    let monthIndex = dateObj.getUTCMonth();
-    let year = dateObj.getUTCFullYear();
-    let formattedDate = day + ' ' + monthNames[monthIndex] + ' ' + year;
-    return formattedDate;
-}
-
-addFilter('relativeDateFromDateToToday', function (dateStr) {
-    const inputDate = new Date(dateStr);
-    const currentDate = new Date();
-    const differenceInMs = currentDate - inputDate;
-    const differenceInDays = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
-    if (differenceInDays > 730) {
-        const differenceInYears = Math.floor(differenceInDays / 365);
-        return differenceInYears + (differenceInYears === 1 ? ' year' : ' years') + ' ago';
-    } else if (differenceInDays > 70) {
-        const differenceInMonths = Math.floor(differenceInDays / 30);
-        return differenceInMonths + (differenceInMonths === 1 ? ' month' : ' months') + ' ago';
-    } else if (differenceInDays > 14) {
-        const differenceInWeeks = Math.floor(differenceInDays / 7);
-        return differenceInWeeks + ' weeks ago';
-    } else if (differenceInDays == 1) {
-        return differenceInDays + ' day ago';
-    } else {
-        return differenceInDays + ' days ago';
-    }
-})
-
-addFilter('findMatchingTraining', function (claim, training) {
-    // Extracting titles from training array's Qualifications courses
-    const qualificationTitles = training.reduce((acc, group) => {
-        if (group.groupTitle == "Qualifications") {
-            return acc.concat(group.courses.map(course => course.title));
-        }
-        return acc;
-    }, []);
-    // Iterating over claims to find matching titles
-    if (qualificationTitles.includes(claim.training.title)) {
-        return true;
-    }
-    return false;
-})
-
-addFilter('formatTrainingDate', function (date) {
-    let isValidDate = false
-    if (date != "Invalid DateTime") {
-        isValidDate = true
-    }
-    return isValidDate
 })
 
 addFilter('learnerErrorMessage', function (submitError) {
@@ -430,26 +306,20 @@ addFilter('learnerSearch', function (search, learner) {
 })
 
 addFilter('trainingSearch', function (search, training, claim) {
-    let match = false 
-    let s = false
-    if (claim == null) {
-        s = true
-    } else {
-        s = claim.status == "queried" && ((training.fundingModel == "full" && claim.claimType == "100") || (training.type == "split" && claim.claimType != "100"))
-    }
 
-    if (s) {
+    if ((claim == null) || (claim.status == "queried" && ((training.fundingModel == "full" && claim.claimType == "100") || (training.fundingModel == "split" && claim.claimType != "100")))) {
         const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
         const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
         const formattedTrainingCode = removeSpacesAndCharactersAndLowerCase(training.code);
     
         if (formattedTrainingTitle.includes(formattedSearch) || formattedTrainingCode.includes(formattedSearch)) {
-            match = true
+            return true
         }
     } else {
         return false
     }
-    return match
+
+    return false
 })
 
 
@@ -528,9 +398,11 @@ addFilter('sortByDate', function (claims, statusID) {
 })
 
 addFilter('orderByMostRecent', function (submissions) {
-    let sorted = sortSubmissionsByDate(submissions, 'submittedDate')
-    return sorted
-})
+    let filtered = submissions.filter(sub => sub.submittedDate);
+    let sorted = sortSubmissionsByDate(filtered, 'submittedDate');
+    return sorted;
+});
+
 addFilter('sortSubmissionsForTable', function (submissions) {
     let sorted = sortSubmissionsForTable(submissions)
     return sorted
@@ -619,72 +491,6 @@ addFilter('matchResend', function (resendList, email) {
     return false
 })
 
-addFilter('expireTime', function (isoDateTime) {
-    const inputDateTime = new Date(isoDateTime);
-    const currentDateTime = new Date();
-    const oneDayInMillis = 24 * 60 * 60 * 1000;
-
-    // Check if the input date-time is within 24 hours of the current date-time
-    if (Math.abs(inputDateTime - currentDateTime) > oneDayInMillis) {
-        // If not, adjust it to the current date-time
-        inputDateTime.setTime(currentDateTime.getTime());
-    }
-
-    // Calculate the date-time 24 hours after the (possibly adjusted) input date-time
-    const futureDateTime = new Date(inputDateTime.getTime() + oneDayInMillis);
-
-    // Format the future date-time
-    const day = futureDateTime.getDate();
-    const month = futureDateTime.toLocaleString('en-GB', { month: 'long' });
-    const year = futureDateTime.getFullYear();
-    const hours = futureDateTime.getHours();
-    const minutes = futureDateTime.getMinutes();
-    const ampm = hours >= 12 ? 'pm' : 'am';
-    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-
-    const formattedFutureDateTime = `${day} ${month} ${year} at ${formattedHours}:${formattedMinutes}${ampm}`;
-
-    return formattedFutureDateTime;
-})
-
-
-addFilter('countMatchingStatus', function (objectsArray, statusString) {
-    // Initialize a counter to keep track of the matching objects
-    let count = 0;
-
-    // Loop through each object in the array
-    objectsArray.forEach((obj) => {
-        // Check if the status attribute matches the provided string
-        if (obj.status === statusString) {
-            // Increment the counter if there is a match
-            count++;
-        }
-    });
-
-    // Return the final count
-    return count;
-})
-
-
-addFilter('75CharacterCount', function (description) {
-
-    let limit = 75
-    if (description.length <= limit) {
-        return description;
-    }
-    let words = description.split(' ');
-    let truncated = words[0];
-
-    for (let i = 1; i < words.length; i++) {
-        if ((truncated + ' ' + words[i]).length > limit) {
-            break;
-        }
-        truncated += ' ' + words[i];
-    }
-    return truncated + "...";
-})
-
 
 addFilter('removeClaimSuffix', function (claimID) {
     // Check if the string has at least two characters
@@ -695,70 +501,7 @@ addFilter('removeClaimSuffix', function (claimID) {
     return claimID.slice(0, -2);
 })
 
-
-addFilter('isCostMoreThanMax', function (amount) {
-    if (amount > 500) {
-        return true
-    } else {
-        return false
-    }
-})
-
-addFilter('uniqueDates', function (claims, dateType) {
-
-    const uniqueMonthYears = new Set();
-
-    claims.forEach(claim => {
-        const startDate = new Date(claim[dateType]);
-        const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
-
-        uniqueMonthYears.add(monthYear);
-    });
-    const sortedMonthYears = Array.from(uniqueMonthYears).sort();
-
-    return sortedMonthYears
-})
-
-addFilter('formatDate', function (date) {
-    const startDate = new Date(date);
-    const monthYear = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
-    const [year, month] = monthYear.split('-');
-    const formattedDate = new Date(year, month - 1); // Month is 0-indexed in JavaScript
-    const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' });
-    return formatter.format(formattedDate);
-})
-
-addFilter('availableStatus', function (claims) {
-    const uniqueStatuses = new Set();
-    claims.forEach(claim => {
-        uniqueStatuses.add(claim.status);
-    });
-    return Array.from(uniqueStatuses);
-})
-
-addFilter('uniqueTypes', function (claims) {
-    const uniqueTypes = new Set();
-    claims.forEach(claim => {
-
-        uniqueTypes.add(claim.claimType);
-    });
-    const sortedTypes = Array.from(uniqueTypes).sort();
-    return sortedTypes
-})
-
-addFilter('formatStatus', function (status) {
-    if (status === "not-yet-submitted") {
-        return "Not yet submitted"
-    } else if (status === "submitted") {
-        return "Submitted"
-    } else if (status === "approved") {
-        return "Approved"
-    } else if (status === "rejected") {
-        return "Rejected"
-    }
-})
-
-addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner, trainingCourses, learners, workplaceID) {
+addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, trainingCourses, learners, workplaceID) {
     const formattedTraining = removeSpacesAndCharactersAndLowerCase(training);
     const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
 
@@ -811,116 +554,6 @@ addFilter('claimsMatchAdvancedSearchA', function (claims, training, learner, tra
     return searched
 })
 
-addFilter('claimsMatchAdvancedSearchB', function (claims, training, learner, submitter, statuses, types, dateType, startMonth, startYear, endMonth, endYear) {
-    const formattedTraining = removeSpacesAndCharactersAndLowerCase(training);
-    const formattedSubmitter = removeSpacesAndCharactersAndLowerCase(submitter);
-
-    if (training == null && learner == null && submitter == null && statuses == null && types == null && startMonth == null && startYear == null && endMonth == null && endYear == null) {
-        return false
-    } else {
-
-        var searched = claims.filter(claim => {
-            let trainingCheck = false;
-            if (training == "") { 
-                trainingCheck = true
-            } else if (claim.training != null && formattedTraining != "") {
-                const formattedActivity = removeSpacesAndCharactersAndLowerCase(claim.training.title);
-                if (formattedTraining != "" &&  formattedActivity.includes(formattedTraining)) {
-                    trainingCheck = true;
-                }
-            }
-            let learnerCheck = false;
-            if (learner == "") { 
-                learnerCheck = true
-            } else if (claim.learner != null) {
-                const formattedgivenName = removeSpacesAndCharactersAndLowerCase(claim.learner.givenName);
-                const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(claim.learner.familyName);
-                const formattedfullName = formattedgivenName + formattedfamilyName;
-                const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
-                const formattedID = removeSpacesAndCharactersAndLowerCase(claim.learner.id);
-                if (formattedgivenName.includes(formattedLearner) || formattedfamilyName.includes(formattedLearner) || formattedfullName.includes(formattedLearner) || formattedID.includes(formattedLearner)) {
-                    learnerCheck = true;
-                }
-            }
-            let submitterCheck = false;
-            if (submitter == "") { 
-                submitterCheck = true
-            } else if (claim.createdBy != null && formattedSubmitter != "") {
-                const formattedName = removeSpacesAndCharactersAndLowerCase(claim.createdBy);
-                if (formattedSubmitter != "" && formattedName.includes(formattedSubmitter)) {
-                    submitterCheck = true;
-                }
-            }
-            let statusCheck = false;
-            if (statuses == null) { 
-                statusCheck = true
-            } else if (claim.status != null) {
-                if (statuses.includes(claim.status)) {
-                    statusCheck = true;
-                }
-            }
-            let typeCheck = false;
-            if (types == null) { 
-                typeCheck = true
-            } else if (claim.status != null) {
-                if (types.includes(claim.claimType)) {
-                    typeCheck = true;
-                }
-            }
-            let dateCheck = false;
-            if (startMonth == "" && startYear == "" && endMonth == "" && endYear == "") { 
-                dateCheck = true
-            } else if (claim.status != null) {
-                let dateToCheck = null
-                if (dateType == "started") {
-                    if (claim.startDate == null) {
-                        dateCheck = false
-                    } else {
-                        dateToCheck = new Date(claim.startDate);
-                    }
-                }
-                if (dateType == "created") {
-                    if (claim.createdDate == null) {
-                        dateCheck = false
-                    } else {
-                        dateToCheck = new Date(claim.createdDate);
-                    }
-                }
-                if (dateType == "submitted") {
-                    if (claim.submittedDate == null) {
-                        dateCheck = false
-                    } else {
-                        dateToCheck = new Date(claim.submittedDate);
-                    }
-                }
-                if (dateType == "approved") {
-                    if (claim.approvedDate == null) {
-                        dateCheck = false
-                    } else {
-                        dateToCheck = new Date(claim.approvedDate);
-                    }
-                }
-                if (dateType == "rejected") {
-                    if (claim.rejectedDate == null) {
-                        dateCheck = false
-                    } else {
-                        dateToCheck = new Date(claim.rejectedDate);
-                    }
-                }
-                const startDate = new Date(startYear, startMonth - 1, 1);
-                const endDate = new Date(endYear, endMonth, 0);
-
-                if (dateToCheck >= startDate && dateToCheck <= endDate) {
-                    dateCheck = true;
-                }
-            }
-
-            return trainingCheck && learnerCheck & submitterCheck & statusCheck & typeCheck & dateCheck
-        })
-        return searched
-    }
-})
-
 addFilter('filteredClaims', function (claims, statuses, dates, types) {
     var filtered = claims.filter(claim => {
         let statusCheck = true;
@@ -955,62 +588,6 @@ addFilter('filteredClaims', function (claims, statuses, dates, types) {
     });
 
     return filtered;
-});
-
-addFilter('statusArray', function (statusString) { 
-    let availableStatus = ["not-yet-submitted", "submitted", "rejected", "approved"]
-    let returnedArray = []
-    if (statusString != null && statusString != "") {
-        for (const s of availableStatus) {
-            if (statusString.includes(s)) {
-                returnedArray.push(s)
-            }
-        }
-    }
-    return returnedArray
-});
-
-addFilter('startDateArray', function (startDateString) { 
-    if (startDateString != null && startDateString != "") {
-        return startDateString.split("+");
-    }
-});
-
-addFilter('typeArray', function (typeString) { 
-    let availableTypes = ["100", "60", "40"]
-    let returnedArray = []
-    if (typeString != null && typeString != "") {
-        for (const t of availableTypes) {
-            if (typeString.includes(t)) {
-                returnedArray.push(t)
-            }
-        }
-    }
-    return returnedArray
-});
-
-addFilter('formatDateType', function (status) {
-    if (status === "started") {
-        return "Started from"
-    } else if (status === "created") {
-        return "Created from"
-    } else if (status === "submitted") {
-        return "Submitted from"
-    } else if (status === "approved") {
-        return "Approved from"
-    } else if (status === "rejected") {
-        return "Rejected from"
-    }
-})
-
-addFilter('isSelected', function (valueArray, status) { 
-    var selected = false 
-    if (valueArray != null && valueArray != "") {
-            if (valueArray.includes(status)) {
-                selected = true
-            }
-    }
-    return selected
 });
 
 

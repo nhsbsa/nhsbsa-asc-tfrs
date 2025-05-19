@@ -1,6 +1,6 @@
 {% extends "../_layouts/claims-main.html" %}
 
-{% set matchedClaims = data.claims | claimsMatchAdvancedSearchA(data.trainingName, data.learner, data.training, data.learners, data.org.workplaceID) %}
+{% set matchedClaims = data.claims | claimsMatchAdvancedSearch(data.trainingName, data.learner, data.training, data.learners, data.org.workplaceID) %}
 {% set resultCount = matchedClaims.length %}
 
 

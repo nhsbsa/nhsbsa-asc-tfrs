@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block beforeContent %}
+{% if ( claim != null ) %}
+    <a href="claim-details?id={{data.id}}" class="govuk-back-link">Back</a>
+{% else %}
     <a href="../manage-claims-home" class="govuk-back-link">Back</a>
+{% endif %}
 {% endblock %}
 
 {% block content %}
