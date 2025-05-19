@@ -763,8 +763,8 @@
           "costPerLearner": 270
         },
         "evidenceOfCompletionReview": {
-          "outcome": null,
-          "note": null
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
         },
         "supportingNote": null,
         "processedDate": null,

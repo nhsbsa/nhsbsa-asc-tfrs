@@ -75,7 +75,7 @@
     {% if (claim.claimType == "100") %}
 
       <p class="govuk-body">This {{ claim.claimType | typeTag }} claim {% if (claim.status != "not-yet-submitted") %}was {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.{% else %}is {{ claim.status | statusTag(data.statuses) }}{% endif %}</p>
-      <p class="govuk-body">The most you could receive is <strong >£100</strong> (<a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>). </p>
+      {% include "../_components/claim-sections/claimAmount.html" %}
 
       {% if claim.status == "rejected" %}
         <div class="hods-alert">
@@ -135,7 +135,7 @@
 
       <p class="govuk-body">The {{ "40" | typeTag }} part of this claim {% if pairClaim != null %}{% if (pairClaim.status != "not-yet-submitted") %}was {{ pairClaim.status | statusTag(data.statuses) }} on {{ (pairClaim | statusDate) | govukDate }}.{% else %}is {{ pairClaim.status | statusTag(data.statuses) }}{% endif %} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
 
-      <p class="govuk-body">The most you could receive is <strong>£100</strong> (<a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>). </p>
+      {% include "../_components/claim-sections/claimAmount.html" %}
 
       {% if claim.status == "rejected" %}
         <div class="hods-alert">
@@ -218,9 +218,9 @@
 
     {% if claim.claimType == "100" %}
       <h2 class="govuk-heading-m" id="training">Claim details</h2>
-    {% endif %}
-    {% if data.versionResearch == "B" and claim.claimType == "100"%}
-      <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=100">View previous submissions</a></p>
+      {% if data.versionResearch == "B" and claim.status != "not-yet-submitted" and claim.submissions.length > 1 %}
+        <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=100">View previous submissions</a></p>
+      {% endif %}
     {% endif %}
 
     {% if (claim.claimType == "60") %}
@@ -234,7 +234,7 @@
       <div class="content"> 
         <h2 class="govuk-heading-l" id="sixtyPartClaim">Complete the 60 part</h2>
         <p class="govuk-body">Claim reference for the 60 part: {{ claim.claimID }}</p>
-        {% if data.versionResearch == "B"%}
+        {% if data.versionResearch == "B" and claim.status != "not-yet-submitted" and claim.submissions.length > 1 %}
           <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=60">View all 60 part submissions</a></p>
         {% endif %}
     {% endif %}
@@ -283,9 +283,9 @@
           {% elif claim.status == "rejected" %}
             <p class="govuk-body"><span class="govuk-caption-m">The 60 part was rejected therefore the 40 part cannot be started.</span></p>
           {% endif %}
-        {% endif %}
-        {% if data.versionResearch == "B" and claim.status != "rejected" and pairClaim.submissions.length > 1%}
-          <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=40">View all 40 part submissions</a></p>
+          {% if data.versionResearch == "B" and pairClaim.status != "not-yet-submitted" and pairClaim.submissions.length > 1 %}
+            <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=40">View all 40 part submissions</a></p>
+          {% endif %}
         {% endif %}
 
       {% endif %}
