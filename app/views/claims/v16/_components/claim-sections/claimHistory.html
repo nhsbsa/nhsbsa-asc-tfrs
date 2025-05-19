@@ -17,10 +17,10 @@
             <div class="moj-timeline__header">
               <h3 class="moj-timeline__title">{{pairClaimActionText}} Rejected</h3>
               <p class="moj-timeline__byline">by Claim processor</p>
-              <p class="moj-timeline__date">
-                <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-              </p>
             </div>
+            <p class="moj-timeline__date">
+              <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+            </p>
           </div>
 
           {% elif (submission.evidenceOfCompletionReview.outcome == "queried")%} 
@@ -29,10 +29,10 @@
             <div class="moj-timeline__header">
               <h3 class="moj-timeline__title">{{pairClaimActionText}} {{status.name}}</h3>
               <p class="moj-timeline__byline">by Claim processor</p>
-              <p class="moj-timeline__date">
-                <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-              </p>
             </div>
+            <p class="moj-timeline__date">
+              <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+            </p>
           </div>
 
 
@@ -53,10 +53,10 @@
             <div class="moj-timeline__header">
               <h3 class="moj-timeline__title">{{pairClaimActionText}} {% if loop.last %}S{% else %}Res{% endif %}ubmitted</h3>
               <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
-              <p class="moj-timeline__date">
-                <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
-              </p>
             </div>
+            <p class="moj-timeline__date">
+              <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
+            </p>
           </div>
     {% endfor %}
 
@@ -70,10 +70,10 @@
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title"> {{actionText}} Rejected</h3>
             <p class="moj-timeline__byline">by Claim processor</p>
-            <p class="moj-timeline__date">
-              <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-            </p>
           </div>
+          <p class="moj-timeline__date">
+            <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+          </p>
         </div>
 
         {% elif (claim.claimType == "100" and (submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried"))
@@ -83,10 +83,10 @@
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title">{{actionText}} {{status.name}}</h3>
             <p class="moj-timeline__byline">by Claim processor</p>
-            <p class="moj-timeline__date">
-              <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
-            </p>
           </div>
+          <p class="moj-timeline__date">
+            <time datetime="{{ claim.createdDate }}">{{ submission.processedDate | govukDate }} at {{ submission.processedDate | govukTime }}</time>
+          </p>
         </div>
 
 
@@ -108,10 +108,10 @@
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title">{{actionText}} {% if loop.last %}S{% else %}Res{% endif %}ubmitted</h3>
             <p class="moj-timeline__byline">by {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</p>
-            <p class="moj-timeline__date">
-              <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
-            </p>
           </div>
+          <p class="moj-timeline__date">
+            <time datetime="{{ claim.createdDate }}">{{ submission.submittedDate | govukDate }} at {{ submission.submittedDate | govukTime }}</time>
+          </p>
         </div>
 
   {% endfor %}

@@ -607,3 +607,10 @@
   @include govuk-font($size: 16);
   color: $govuk-secondary-text-colour;
 }
+
+.summary-list-hint{
+  white-space: nowrap; 
+  overflow: visible;
+  margin-top: govuk-spacing(1);
+  margin-bottom: govuk-spacing(1);
+}

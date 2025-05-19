@@ -75,59 +75,6 @@
     {% if (claim.claimType == "100") %}
 
       <p class="govuk-body">This {{ claim.claimType | typeTag }} claim {% if (claim.status != "not-yet-submitted") %}was {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.{% else %}is {{ claim.status | statusTag(data.statuses) }}{% endif %}</p>
-      {% include "../_components/claim-sections/claimAmount.html" %}
-
-      {% if claim.status == "rejected" %}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">Rejection note</h2>
-
-          {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
-            <p class="govuk-body"><strong>Evidence of payment: </strong>{{submission.evidenceOfPaymentReview.note}}</p>
-          {% endif %}
-          {% if submission.evidenceOfCompletionReview.outcome == "fail" %}
-            <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
-          {% endif %}
-          <p class="govuk-body">If you dispute the outcome, then <a class="govuk-link" href="../contact">contact us here</a></p>
-        </div>
-      {% endif %}
-
-      {% if claim.status == "queried" %}
-        {% set previousSub = claim | getMostRelevantSubmission %}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">Edit claim and resubmit</h2>
-          <p class="govuk-body">Once you've made the requested edits you can resubmit the claim for processing.</p>
-          {% if previousSub.evidenceOfPaymentReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Evidence of payment:</strong> {{previousSub.evidenceOfPaymentReview.note}}</p>
-          {% endif %}
-          {% if previousSub.evidenceOfCompletionReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Evidence of completion:</strong> {{previousSub.evidenceOfCompletionReview.note}}</p>
-          {% endif %}
-          <p class="govuk-body"><a class="govuk-link" href="../guidance/tu-evidence-requirements.html">Check what evidence you need to provide</a></p>
-          <p class="govuk-body">If you are unsure, then <a class="govuk-link" href="../contact">contact us here</a></p>
-        </div>
-      {% endif %}
-
-      {% if claim.status == "approved" %}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">Reimbursement amount</h2>
-          <p class="govuk-body">Claim was approved, you can expect to be paid in next X days from approval.</p>
-        </div>
-      {% endif %}
-
-      {% if claim.status == "not-yet-submitted" %}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">What to do now</h2>
-          <p class="govuk-body">Fill in claim details and submit</p>
-        </div>
-      {% endif %}
-
-      {% if claim.status == "submitted" %}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">What to do now</h2>
-          <p class="govuk-body">Wait for processing to be completed. You should hear back in 4 to 7 days.</p>
-        </div>
-      {% endif %}
-
 
     {% elif (claim.claimType == "60") %}
 
@@ -135,78 +82,10 @@
 
       <p class="govuk-body">The {{ "40" | typeTag }} part of this claim {% if pairClaim != null %}{% if (pairClaim.status != "not-yet-submitted") %}was {{ pairClaim.status | statusTag(data.statuses) }} on {{ (pairClaim | statusDate) | govukDate }}.{% else %}is {{ pairClaim.status | statusTag(data.statuses) }}{% endif %} {% elif claim.status =="rejected" %}therefore cannot be started.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
 
-      {% include "../_components/claim-sections/claimAmount.html" %}
-
-      {% if claim.status == "rejected" %}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">Rejection note</h2>
-
-          {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
-            <p class="govuk-body"><strong>Evidence of payment: </strong>{{submission.evidenceOfPaymentReview.note}}</p>
-          {% endif %}
-          <p class="govuk-body">If you dispute the outcome, then <a class="govuk-link" href="../contact">contact us here</a></p>
-         </div>
-      {% endif %}
-      {% if pairClaim.status == "rejected" %}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">Rejection note</h2>
-          {% if pairSubmission.evidenceOfCompletionReview.outcome == "fail" %}
-            <p class="govuk-body"><strong>Evidence of completion:</strong> {{pairSubmission.evidenceOfCompletionReview.note}}</p>
-          {% endif %}
-          <p class="govuk-body">If you dispute the outcome, then <a class="govuk-link" href="../contact">contact us here</a></p>
-        </div>
-      {% endif %}
-
-      {% if claim.status == "approved" and pairClaim.status == "not-yet-submitted"%}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">Next steps</h2>
-          <p class="govuk-body">You can now proceed with completing the <a class="govuk-link" href="#fourtyPartClaim">40 part</a> of this claim.</p>
-         </div>
-      {% endif %}
-      {% if pairClaim.status == "approved" %}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">Reimbursement amount</h2>
-          <p class="govuk-body">Claim was approved, you can expect to be paid in next X days from approval.</p>
-        </div>
-      {% endif %}
-      {% if claim.status == "not-yet-submitted" %}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">What to do now</h2>
-          <p class="govuk-body">Fill in <a class="govuk-link" href="#sixtyPartClaim">60 part</a> of the claim details and submit</p>
-        </div>
-      {% endif %}
-      {% if claim.status == "submitted" or pairClaim.status == "submitted"%}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">What to do now</h2>
-          <p class="govuk-body">Wait for processing to be completed. You should hear back in 4 to 7 days.</p>
-        </div>
-      {% endif %}
-
-    
-
-      {% if claim.status == "queried" %}
-        {% set previousSub = claim | getMostRelevantSubmission %}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">Edit <a class="govuk-link" href="#sixtyPartClaim">60 part</a> of claim and resubmit</h2>
-          {% if previousSub.evidenceOfPaymentReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Evidence of payment:</strong> {{previousSub.evidenceOfPaymentReview.note}}</p>
-          {% endif %}
-          <p class="govuk-body">If you are unsure, then <a class="govuk-link" href="../contact">contact us here</a></p>
-        </div>
-      {% endif %}
-      {% if pairClaim.status == "queried" %}
-        {% set previousSub = pairClaim | getMostRelevantSubmission %}
-        <div class="hods-alert">
-          <h2 class="hods-alert__heading">Edit <a class="govuk-link" href="#fourtyPartClaim">40 part</a> of claim and resubmit</h2>
-          {% if previousSub.evidenceOfCompletionReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Evidence of completion:</strong> {{previousSub.evidenceOfCompletionReview.note}}</p>
-          {% endif %}
-          <p class="govuk-body">If you are unsure, then <a class="govuk-link" href="../contact">contact us here</a></p>
-
-        </div>
-      {% endif %}
-
     {% endif %}
+
+    {% include "../_components/claim-sections/claimAmount.html" %}
+    {% include "../_components/claim-sections/alertSection.html" %}
 
   </div>
 </div>
@@ -218,7 +97,7 @@
 
     {% if claim.claimType == "100" %}
       <h2 class="govuk-heading-m" id="training">Claim details</h2>
-      {% if data.versionResearch == "B" and claim.status != "not-yet-submitted" and claim.submissions.length > 1 %}
+      {% if data.versionResearch == "B" and claim.status != "not-yet-submitted" and (claim.submissions | length) > 1 %}
         <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=100">View previous submissions</a></p>
       {% endif %}
     {% endif %}
@@ -245,9 +124,10 @@
       {% include "../_components/claim-sections/evidencePayment.html" %}
 
       {% include "../_components/claim-sections/learner.html" %}
-    </dl>
+
     {% if (claim.claimType == "60") %}
       {% include "../_components/claim-sections/supportingClaimNote.html" %}
+      </dl>
     {% endif %}
 
     {% if (claim.status == "not-yet-submitted" and claim.claimType == "60") %}
@@ -283,13 +163,15 @@
           {% elif claim.status == "rejected" %}
             <p class="govuk-body"><span class="govuk-caption-m">The 60 part was rejected therefore the 40 part cannot be started.</span></p>
           {% endif %}
-          {% if data.versionResearch == "B" and pairClaim.status != "not-yet-submitted" and pairClaim.submissions.length > 1 %}
-            <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=40">View all 40 part submissions</a></p>
-          {% endif %}
         {% endif %}
 
-      {% endif %}
-
+        {% if data.versionResearch == "B" and pairClaim.status != "not-yet-submitted" and (pairClaim.submissions | length) > 1 %}
+            <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=40">View all 40 part submissions</a></p>
+        {% endif %}
+        <dl class="govuk-summary-list">
+  {% endif %}
+    
+    
     {% include "../_components/claim-sections/evidenceCompletion.html" %}
 
     {% if (claim.claimType == "100" ) %}
@@ -300,6 +182,7 @@
       {% set is40Part = "true" %}
       {% include "../_components/claim-sections/supportingClaimNote.html" %}
     {% endif %}
+    </dl>
 
     {% if ((claim.status == "not-yet-submitted" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}
       {% include "../_components/claim-sections/cta-section.html" %}
