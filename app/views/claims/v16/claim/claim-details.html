@@ -85,7 +85,10 @@
     {% endif %}
 
     {% include "../_components/claim-sections/claimAmount.html" %}
-    {% include "../_components/claim-sections/alertSection.html" %}
+
+    {% if not ((claim.claimType == "100" or claim.claimType == "60") and  claim.status == "not-yet-submitted") %}
+      {% include "../_components/claim-sections/alertSection.html" %}
+    {% endif %}
 
   </div>
 </div>
