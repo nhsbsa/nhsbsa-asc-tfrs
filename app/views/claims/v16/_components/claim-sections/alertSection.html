@@ -1,3 +1,8 @@
+{% set noteSubmission = claim | getMostRelevantSubmission %}
+{% if pairClaim %}
+    {% set notePairSubmission = pairClaim | getMostRelevantSubmission %}
+{% endif %}
+
 {% if (claim.claimType == "100") %}
     {% if claim.status == "rejected" %}
     <div role="region" class="moj-alert moj-alert--information moj-alert--with-heading" aria-label="information: The finance section has moved" data-module="moj-alert">
@@ -9,11 +14,11 @@
         <div class="moj-alert__content">
             <h2 class="moj-alert__heading">Why your claim was rejected</h2>
 
-            {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
-            <p class="govuk-body"><strong>Evidence of payment: </strong>{{submission.evidenceOfPaymentReview.note}}</p>
+            {% if noteSubmission.evidenceOfPaymentReview.outcome == "fail" %}
+            <p class="govuk-body"><strong>Evidence of payment: </strong>{{noteSubmission.evidenceOfPaymentReview.note}}</p>
             {% endif %}
-            {% if submission.evidenceOfCompletionReview.outcome == "fail" %}
-            <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
+            {% if noteSubmission.evidenceOfCompletionReview.outcome == "fail" %}
+            <p class="govuk-body"><strong>Evidence of completion:</strong> {{noteSubmission.evidenceOfCompletionReview.note}}</p>
             {% endif %}
             <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../contact">contact us</a>.</p>
         </div>
@@ -60,7 +65,7 @@
         </div>
         <div class="moj-alert__content">
             <h2 class="moj-alert__heading">Your claim was successful</h2>
-            <p class="govuk-body">You can expect to be paid by {{(submission.processedDate | duration(1, "weeks")) | govukDate }}.</p>
+            <p class="govuk-body">You can expect to be paid by {{(noteSubmission.processedDate | duration(1, "weeks")) | govukDate }}.</p>
         </div>
 
             <div class="moj-alert__action">
@@ -78,7 +83,7 @@
         </div>
         <div class="moj-alert__content">
             <h2 class="moj-alert__heading">Your claim is being processed</h2>
-            <p class="govuk-body">It usually takes 2 to 6 weeks to process a claim. You should hear back from us by {{(submission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
+            <p class="govuk-body">It usually takes 2 to 6 weeks to process a claim. You should hear back from us by {{(noteSubmission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
         </div>
 
             <div class="moj-alert__action">
@@ -98,8 +103,8 @@
         </div>
         <div class="moj-alert__content">
             <h2 class="moj-alert__heading">Why the 60 part of your claim was rejected</h2>
-            {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
-            <p class="govuk-body"><strong>Evidence of payment: </strong>{{submission.evidenceOfPaymentReview.note}}</p>
+            {% if noteSubmission.evidenceOfPaymentReview.outcome == "fail" %}
+            <p class="govuk-body"><strong>Evidence of payment: </strong>{{noteSubmission.evidenceOfPaymentReview.note}}</p>
             {% endif %}
             <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../contact">contact us</a>.</p>
         </div>
@@ -118,8 +123,8 @@
         </div>
         <div class="moj-alert__content">
             <h2 class="moj-alert__heading">Why the 40 part of your claim was rejected</h2>
-        {% if pairSubmission.evidenceOfCompletionReview.outcome == "fail" %}
-        <p class="govuk-body"><strong>Evidence of completion:</strong> {{pairSubmission.evidenceOfCompletionReview.note}}</p>
+        {% if notePairSubmission.evidenceOfCompletionReview.outcome == "fail" %}
+        <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.evidenceOfCompletionReview.note}}</p>
         {% endif %}
         <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../contact">contact us</a>.</p>
     </div>
@@ -156,7 +161,7 @@
         </div>
         <div class="moj-alert__content">
             <h2 class="moj-alert__heading">Your claim was successful</h2>
-            <p class="govuk-body">You can expect to be paid by {{(pairSubmission.processedDate | duration(1, "weeks")) | govukDate }}</p>
+            <p class="govuk-body">You can expect to be paid by {{(notePairSubmission.processedDate | duration(1, "weeks")) | govukDate }}</p>
         </div>
 
         <div class="moj-alert__action">
@@ -173,7 +178,7 @@
         </div>
         <div class="moj-alert__content">
             <h2 class="moj-alert__heading">The 60 part of your claim is being processed</h2>
-            <p class="govuk-body">It usually takes 2 to 6 weeks to process a claim. You should hear back from us by {{(submission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
+            <p class="govuk-body">It usually takes 2 to 6 weeks to process a claim. You should hear back from us by {{(noteSubmission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
         </div>
 
         <div class="moj-alert__action">
@@ -190,7 +195,7 @@
         </div>
         <div class="moj-alert__content">
             <h2 class="moj-alert__heading">The 40 part of your claim is being processed</h2>
-            <p class="govuk-body">It usually takes 2 to 6 weeks to process a claim. You should hear back from us by {{(pairSubmission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
+            <p class="govuk-body">It usually takes 2 to 6 weeks to process a claim. You should hear back from us by {{(notePairSubmission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
         </div>
 
         <div class="moj-alert__action">
@@ -212,7 +217,7 @@
             <h2 class="moj-alert__heading">Edit claim and resubmit</h2>
             <p class="govuk-body">Once you've made these requested edits, you can resubmit the <a class="govuk-link" href="#sixtyPartClaim">60 part</a> of your claim for processing.</p>
             {% if previousSub.evidenceOfPaymentReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
+            <p class="govuk-body"><strong>Evidence of payment:</strong> {{noteSubmission.evidenceOfPaymentReview.note}}</p>
             {% endif %}
             <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
         </div>
@@ -232,8 +237,8 @@
         <div class="moj-alert__content">
             <h2 class="moj-alert__heading">Edit claim and resubmit</h2>
             <p class="govuk-body">Once you've made these requested edits, you can resubmit the <a class="govuk-link" href="#fourtyPartClaim">40 part</a> of your claim for processing.</p>
-            {% if previousSub.evidenceOfCompletionReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Evidence of completion:</strong> {{pairSubmission.evidenceOfCompletionReview.note}}</p>
+            {% if notePairSubmission.evidenceOfCompletionReview.outcome == "queried" %}
+            <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.evidenceOfCompletionReview.note}}</p>
             {% endif %}
             <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
 
