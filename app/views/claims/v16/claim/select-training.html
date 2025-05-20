@@ -97,7 +97,7 @@
                 {% set addHeader = true %}
 
                 {% for training in trainingGroup.courses %}
-                    {% set match = data['training-input'] | trainingSearch(training, claim) %}
+                    {% set match = data['training-input'] | trainingSearch(training, claim, data.training) %}
                     {% if match %}
                         {% set hasResults = true %}
 
