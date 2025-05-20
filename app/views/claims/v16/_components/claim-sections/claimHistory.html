@@ -12,6 +12,7 @@
 
   {% if pairClaim != null %}
     {% for submission in pairClaim.submissions | orderByMostRecent %}
+    
         {% if (submission.evidenceOfCompletionReview.outcome == "fail") %} 
           <div class="moj-timeline__item">
             <div class="moj-timeline__header">
@@ -62,10 +63,10 @@
 
   {% endif %}
   
+
   {% for submission in claim.submissions | orderByMostRecent %}
 
-      {% if (claim.claimType == "100" and (submission.evidenceOfPaymentReview.outcome == "fail" or submission.evidenceOfCompletionReview.outcome == "fail")) 
-        or (claim.claimType == "60" and submission.evidenceOfPaymentReview.outcome == "fail") %} 
+      {% if (claim.claimType == "100" and (submission.evidenceOfPaymentReview.outcome == "fail" or submission.evidenceOfCompletionReview.outcome == "fail")) or (claim.claimType == "60" and submission.evidenceOfPaymentReview.outcome == "fail") %} 
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
             <h3 class="moj-timeline__title"> {{actionText}} Rejected</h3>
@@ -76,8 +77,7 @@
           </p>
         </div>
 
-        {% elif (claim.claimType == "100" and (submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried"))
-        or (claim.claimType == "60" and submission.evidenceOfPaymentReview.outcome == "queried" ) %} 
+        {% elif (claim.claimType == "100" and (submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried")) or (claim.claimType == "60" and submission.evidenceOfPaymentReview.outcome == "queried" ) %} 
          {% set status = "queried" | statusDetails(data.statuses) %}
         <div class="moj-timeline__item">
           <div class="moj-timeline__header">
@@ -90,8 +90,7 @@
         </div>
 
 
-        {% elif (claim.claimType == "100" and (submission.evidenceOfPaymentReview.outcome == "pass" and submission.evidenceOfCompletionReview.outcome == "pass"))
-        or (claim.claimType == "60" and submission.evidenceOfPaymentReview.outcome == "pass" ) %} 
+        {% elif (claim.claimType == "100" and (submission.evidenceOfPaymentReview.outcome == "pass" and submission.evidenceOfCompletionReview.outcome == "pass")) or (claim.claimType == "60" and submission.evidenceOfPaymentReview.outcome == "pass" ) %} 
           <div class="moj-timeline__item">
             <div class="moj-timeline__header">
               <h3 class="moj-timeline__title">{{actionText}} Approved</h3>
