@@ -226,7 +226,7 @@
                       {% if submission.evidenceOfCompletion %}
 
                       {% if (submission.evidenceOfCompletion !== sortedSubmissions[loop.index0 + 1].evidenceOfCompletion and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong><a class="govuk-link" href="#">{{submission.evidenceOfCompletion}}</a></strong></mark><a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">(open in new tab)</a></td>
+                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.evidenceOfCompletion}}</strong></mark> <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">(open in new tab)</a></td>
                       {% else %}
                         <td class="govuk-table__cell">{{submission.evidenceOfCompletion}} <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">(open in new tab)</a></td>
                       {% endif %}
