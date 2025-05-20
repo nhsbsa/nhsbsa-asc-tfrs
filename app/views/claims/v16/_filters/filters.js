@@ -305,9 +305,12 @@ addFilter('learnerSearch', function (search, learner) {
     return match
 })
 
-addFilter('trainingSearch', function (search, training, claim) {
+addFilter('trainingSearch', function (search, training, claim, allTraining) {
 
-    if ((claim == null) || (claim.status == "queried" && ((training.fundingModel == "full" && claim.claimType == "100") || (training.fundingModel == "split" && claim.claimType != "100")))) {
+    const submission = getMostRelevantSubmission(claim)
+    const claimTraining = findCourseByCode(submission.trainingCode, allTraining)
+
+    if ((claim == null) || (claim.status == "queried" && (training.fundingModel == claimTraining.fundingModel))) {
         const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
         const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
         const formattedTrainingCode = removeSpacesAndCharactersAndLowerCase(training.code);
