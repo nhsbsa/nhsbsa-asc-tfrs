@@ -9,7 +9,7 @@
 {% if (not submissionToUse.supportingNote) %}
     <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
         <dt class="govuk-summary-list__key">
-            Supporting note (optional)
+            Supporting information (optional)
         </dt>
         {% if claimToUse.status != "not-yet-submitted" and claimToUse.status != "queried" %}
             <dd class="govuk-summary-list__value">
@@ -17,7 +17,7 @@
             </dd>
         {% else %}
             <dd class="govuk-summary-list__value">
-                <a class="govuk-link govuk-link--no-visited-state" href="add-supporting-note">Add supporting note</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="add-supporting-note">Add supporting information</a>
             </dd>
         {% endif %}
     </div>
@@ -26,7 +26,7 @@
 
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Supporting note {% if ( claimToUse | checkIfUpdated("supportingNote")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+            Supporting information {% if ( claimToUse | checkIfUpdated("supportingNote")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
         </dt>
         <dd class="govuk-summary-list__value">
             <p class="govuk-body">{{submissionToUse.supportingNote}}</p>
@@ -34,7 +34,7 @@
         {% if (claimToUse.status == "not-yet-submitted" or claimToUse.status == "queried")%}
             <dd class="govuk-summary-list__actions">
                 <a class="govuk-link govuk-link--no-visited-state" href="add-supporting-note">Change<span
-                    class="govuk-visually-hidden"> supporting note</span></a>
+                    class="govuk-visually-hidden"> supporting information</span></a>
             </dd>
         {% endif %}
     </div>
