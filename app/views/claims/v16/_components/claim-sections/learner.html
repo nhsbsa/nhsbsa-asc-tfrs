@@ -17,7 +17,7 @@
   {% else %}
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">
-        Learner {% if ( claim | checkIfUpdated("learner")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
+        Learner {% if ( claim | checkIfUpdated("learner")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
       </dt>
       <dd class="govuk-summary-list__value">
         <p class="govuk-body">{{learner.givenName}} {{learner.familyName}}</p>

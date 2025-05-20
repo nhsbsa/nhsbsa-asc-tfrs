@@ -24,7 +24,7 @@
   {% endif %}
   <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-key--error {% endif %}">
-      Payment date {% if ( claim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
+      Payment date {% if ( claim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
     </dt>
     <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-value--error {% endif %}">
       {{ submission.costDate | govukDate }}
@@ -57,7 +57,7 @@
 {% else %}
   <div class="govuk-summary-list__row">
     <dt class="govuk-summary-list__key">
-      Evidence of payment {% if ( claim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag">Updated</strong>{% endif %}
+      Evidence of payment {% if ( claim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
     </dt>
     <dd class="govuk-summary-list__value">
       {% for payment in submission.evidenceOfPayment %}
