@@ -1,70 +1,16 @@
-{% if claim.claimType == "100" %}
-  {% set actionText = "" %}
-{% elif claim.claimType == "60" %}
-  {% set actionText = "60 part" %}
-  {% set pairClaimActionText = "40 part" %}
-{% endif %}
-
-
-
 <h2 class="govuk-heading-m">Claim history</h2>
 <div class="moj-timeline">
 
   {% if pairClaim != null %}
     {% for submission in pairClaim.submissions | orderByMostRecent %}
-
-          {% set timelineData = submission | generateTimelineData(pairClaim.claimType, data.org, loop.last,  data.statuses) %}
-          {% if (timelineData) %} 
-            <div class="moj-timeline__item">
-              <div class="moj-timeline__header">
-                <h3 class="moj-timeline__title">{{timelineData.processStep.title}}</h3>
-                <p class="moj-timeline__byline">{{timelineData.processStep.author}}</p>
-              </div>
-              <p class="moj-timeline__date">
-                <time datetime="{{ timelineData.processStep.date }}">{{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }}</time>
-              </p>
-            </div>
-          {% endif %}
-
-          <div class="moj-timeline__item">
-            <div class="moj-timeline__header">
-              <h3 class="moj-timeline__title">{{timelineData.submissionStep.title}}</h3>
-              <p class="moj-timeline__byline">{{timelineData.submissionStep.author}}</p>
-            </div>
-            <p class="moj-timeline__date">
-              <time datetime="{{ timelineData.submissionStep.date }}">{{ timelineData.submissionStep.date | govukDate }} at {{ timelineData.submissionStep.date | govukTime }}</time>
-            </p>
-          </div>
-
+          {% set type = pairClaim.claimType %}
+          {% include "./claim-history/timeline-items.html" %}
     {% endfor %}
   {% endif %}
-  
 
   {% for submission in claim.submissions | orderByMostRecent %}
-
-      {% set timelineData = submission | generateTimelineData(claim.claimType, data.org, loop.last, data.statuses) %}
-          {% if (timelineData) %} 
-            <div class="moj-timeline__item">
-              <div class="moj-timeline__header">
-                <h3 class="moj-timeline__title">{{timelineData.processStep.title}}</h3>
-                <p class="moj-timeline__byline">{{timelineData.processStep.author}}</p>
-              </div>
-              <p class="moj-timeline__date">
-                <time datetime="{{ timelineData.processStep.date }}">{{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }}</time>
-              </p>
-            </div>
-          {% endif %}
-
-          <div class="moj-timeline__item">
-            <div class="moj-timeline__header">
-              <h3 class="moj-timeline__title">{{timelineData.submissionStep.title}}</h3>
-              <p class="moj-timeline__byline">{{timelineData.submissionStep.author}}</p>
-            </div>
-            <p class="moj-timeline__date">
-              <time datetime="{{ timelineData.submissionStep.date }}">{{ timelineData.submissionStep.date | govukDate }} at {{ timelineData.submissionStep.date | govukTime }}</time>
-            </p>
-          </div>
-
+      {% set type = claim.claimType %}
+      {% include "./claim-history/timeline-items.html" %}
   {% endfor %}
 
   <div class="moj-timeline__item">
