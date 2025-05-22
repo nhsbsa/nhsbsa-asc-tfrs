@@ -1,5 +1,5 @@
 {% set timelineData = submission | generateTimelineData(type, data.org, loop.last,  data.statuses) %}
-{% if (timelineData) %} 
+{% if (timelineData.processStep) %} 
 <div class="moj-timeline__item">
     <div class="moj-timeline__header">
     <h3 class="moj-timeline__title">{{timelineData.processStep.title}}</h3>

@@ -794,21 +794,25 @@ addFilter('generateTimelineData', function(submission, claimType, org, lastBoole
         date: submission.submittedDate
     }
 
-    let processStepTitle = null
 
-    if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "fail") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "fail" || submission.evidenceOfCompletionReview.outcome == "fail")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "fail")) {
-        processStepTitle = titlePrefix + findStatus("rejected", statuses).name
-    } else if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "queried") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "queried" || submission.evidenceOfCompletionReview.outcome == "queried")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "queried")) {
-        processStepTitle = titlePrefix + findStatus("queried", statuses).name
-    } else if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "queried") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "pass" && submission.evidenceOfCompletionReview.outcome == "pass")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "pass")) {
-        processStepTitle = titlePrefix + findStatus("approved", statuses).name
-    }
+    if (submission.processedDate) {
 
-    timelineData.processStep = {
-        title: capitalizeFirstLetter(processStepTitle.toLowerCase()),
-        author: "by Claim processor",
-        date: submission.processedDate
+        if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "fail") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "fail" || submission.evidenceOfCompletionReview.outcome == "fail")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "fail")) {
+            processStepTitle = titlePrefix + findStatus("rejected", statuses).name
+        } else if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "queried") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "queried" || submission.evidenceOfCompletionReview.outcome == "queried")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "queried")) {
+            processStepTitle = titlePrefix + findStatus("queried", statuses).name
+        } else if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "queried") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "pass" && submission.evidenceOfCompletionReview.outcome == "pass")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "pass")) {
+            processStepTitle = titlePrefix + findStatus("approved", statuses).name
         }
+
+
+        timelineData.processStep = {
+            title: capitalizeFirstLetter(processStepTitle.toLowerCase()),
+            author: "by Claim processor",
+            date: submission.processedDate
+            }
+
+       }
 
     return timelineData
 })
