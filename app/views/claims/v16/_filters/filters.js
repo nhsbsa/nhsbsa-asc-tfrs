@@ -301,9 +301,12 @@ addFilter('learnerSearch', function (search, learner) {
 
 addFilter('trainingSearch', function (search, training, claim, allTraining) {
 
-    const submission = getMostRelevantSubmission(claim)
-    const claimTraining = findCourseByCode(submission.trainingCode, allTraining)
-
+    let claimTraining = null
+    if (claim) {
+        const submission = getMostRelevantSubmission(claim)
+        claimTraining = findCourseByCode(submission.trainingCode, allTraining)
+    }
+    
     if ((claim == null) || (claim.status == "queried" && (training.fundingModel == claimTraining.fundingModel))) {
         const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
         const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
