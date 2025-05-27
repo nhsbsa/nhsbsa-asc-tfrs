@@ -168,9 +168,9 @@
 
                         {% for evidence in submission.evidenceOfPayment %}
                         {% if ((evidence not in previousEvidence) and (evidenceLoop) <= ((sortedSubmissions | length) - 1)  ) %}
-                          <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">(open in new tab)</a></br>
+                          <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open in new tab</a>)</br>
                         {% else %}
-                          {{evidence}} <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">(open in new tab)</a></br>
+                          {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open in new tab</a>)</br>
                         {% endif %}
                         {% endfor %}
                       </td>
@@ -226,9 +226,9 @@
                       {% if submission.evidenceOfCompletion %}
 
                       {% if (submission.evidenceOfCompletion !== sortedSubmissions[loop.index0 + 1].evidenceOfCompletion and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.evidenceOfCompletion}}</strong></mark> <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">(open in new tab)</a></td>
+                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.evidenceOfCompletion}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open in new tab</a>)</td>
                       {% else %}
-                        <td class="govuk-table__cell">{{submission.evidenceOfCompletion}} <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">(open in new tab)</a></td>
+                        <td class="govuk-table__cell">{{submission.evidenceOfCompletion}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open in new tab</a>)</td>
                       {% endif %}
                       
                       
