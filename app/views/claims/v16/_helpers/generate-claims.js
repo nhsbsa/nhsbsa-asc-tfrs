@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { faker } = require('@faker-js/faker');
+const { generatecreatedByList } = require('../_helpers/helpers.js');
 
 function getRandomLearners(learnerList, x) {
   const copyLearners = [...learnerList];
@@ -50,16 +51,6 @@ function generateUniqueID() {
       }
   }
   return id;
-}
-
-function generatecreatedByList(organisation) {
-  let names = [{name: organisation.signatory.active.givenName + " " + organisation.signatory.active.familyName, email: organisation.signatory.active.email}]
-
-  for (const user of organisation.users.active) {
-    names.push({name: user.givenName + " " + user.familyName, email: user.email})
-  }
-  return names
-
 }
 
 function generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, claimType, createdDate) {
@@ -331,22 +322,7 @@ function generateClaims(workplaceID) {
 
   const users = generatecreatedByList(organisation);
 
-  // Load pre-set claims
-  const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/v16/_data/pre-set-claims.json', 'utf8'));
-  for (const claim of preSetClaims) {
-
-    for (const submission of claim.submissions) {
-      if (submission.submitter != null) {
-        submission.submitter = faker.helpers.arrayElement(users).email
-      }
-    }
-
-    claim.createdBy = faker.helpers.arrayElement(users).email
-    claim.workplaceID = workplaceID
-  }
-
-  let data = preSetClaims
-  /* let data = [] */
+  const data = [];
 
    //set date references
   const policyDate = new Date('2024-04-01 '); // April 2, 2024

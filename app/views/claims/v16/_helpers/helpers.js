@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { faker } = require('@faker-js/faker');
 
 function checkClaim(claim) {
 
@@ -685,7 +686,22 @@ function loadData(req, orgID) {
   console.log('loading in claims file')
   const allClaims = loadJSONFromFile(claimsFile, path);
   const filteredClaims = allClaims.filter(claim => claim.workplaceID === orgID);
-  req.session.data['claims'] = filteredClaims;
+  // Load pre-set claims
+    const users = generatecreatedByList(req.session.data.org);
+    const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/v16/_data/pre-set-claims.json', 'utf8'));
+    for (const claim of preSetClaims) {
+
+        for (const submission of claim.submissions) {
+        if (submission.submitter != null) {
+            submission.submitter = faker.helpers.arrayElement(users).email
+        }
+        }
+
+        claim.createdBy = faker.helpers.arrayElement(users).email
+        claim.workplaceID = req.session.data.org.workplaceID
+    }
+
+  req.session.data['claims'] = filteredClaims.concat(preSetClaims);
   console.log(filteredClaims.length + ' of ' + allClaims.length + ' claims loaded')
 
   console.log('loading in learners file')
@@ -714,5 +730,15 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
+function generatecreatedByList(organisation) {
+  let names = [{name: organisation.signatory.active.givenName + " " + organisation.signatory.active.familyName, email: organisation.signatory.active.email}]
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter}
+  for (const user of organisation.users.active) {
+    names.push({name: user.givenName + " " + user.familyName, email: user.email})
+  }
+  return names
+
+}
+
+
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList}

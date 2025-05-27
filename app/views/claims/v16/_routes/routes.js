@@ -933,7 +933,8 @@ router.get('/load-data-account-test', function (req, res) {
   loadData(req, orgID);
   delete req.session.data['orgID']
 
-  res.redirect('./authentication/creation-link?journey=creation')
+  req.session.data.journey = "creation"
+  res.redirect('./authentication/creation-link')
 })
 
 //generate data
