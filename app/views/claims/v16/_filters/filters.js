@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser } = require('../_helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter} = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -45,13 +45,7 @@ addFilter('pageCount', function (content, perPage) {
 })
 
 addFilter('statusDetails', function (statusID, statuses) {
-    let status = null
-    for (const s of statuses) {
-        if (s.id == statusID) {
-            status = s
-        }
-    }
-    return status
+    return findStatus(statusID, statuses)
 })
 
 addFilter('variableDate', function (statusID) {
@@ -307,9 +301,12 @@ addFilter('learnerSearch', function (search, learner) {
 
 addFilter('trainingSearch', function (search, training, claim, allTraining) {
 
-    const submission = getMostRelevantSubmission(claim)
-    const claimTraining = findCourseByCode(submission.trainingCode, allTraining)
-
+    let claimTraining = null
+    if (claim) {
+        const submission = getMostRelevantSubmission(claim)
+        claimTraining = findCourseByCode(submission.trainingCode, allTraining)
+    }
+    
     if ((claim == null) || (claim.status == "queried" && (training.fundingModel == claimTraining.fundingModel))) {
         const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
         const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
@@ -765,4 +762,57 @@ addFilter('maskCharacters', function(str, num) {
     const masked = '*'.repeat(num);
     const remainder = str.slice(num);
     return masked + remainder;
+})
+
+
+addFilter('generateTimelineData', function(submission, claimType, org, lastBoolean, statuses) {
+    let timelineData = {
+    submissionStep: null,
+    processStep: null
+    }
+
+    const user = findUser(submission.submitter, org)
+    let titlePrefix = ""
+    if (claimType == "100") {
+        titlePrefix = ""
+    } else if (claimType == "60") {
+        titlePrefix = "60 part "
+    } else if (claimType == "40") {
+        titlePrefix = "40 part "
+    }
+
+    let submissionTitle = null
+    if (lastBoolean) {
+        submissionTitle = titlePrefix + "submitted"
+    } else {
+        submissionTitle = titlePrefix + "resubmitted"
+    }
+
+    timelineData.submissionStep = {
+        title: capitalizeFirstLetter(submissionTitle.toLowerCase()),
+        author: "by " + user.givenName + " " + user.familyName,
+        date: submission.submittedDate
+    }
+
+
+    if (submission.processedDate) {
+
+        if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "fail") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "fail" || submission.evidenceOfCompletionReview.outcome == "fail")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "fail")) {
+            processStepTitle = titlePrefix + findStatus("rejected", statuses).name
+        } else if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "queried") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "queried" || submission.evidenceOfCompletionReview.outcome == "queried")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "queried")) {
+            processStepTitle = titlePrefix + findStatus("queried", statuses).name
+        } else if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "queried") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "pass" && submission.evidenceOfCompletionReview.outcome == "pass")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "pass")) {
+            processStepTitle = titlePrefix + findStatus("approved", statuses).name
+        }
+
+
+        timelineData.processStep = {
+            title: capitalizeFirstLetter(processStepTitle.toLowerCase()),
+            author: "by Claim processor",
+            date: submission.processedDate
+            }
+
+       }
+
+    return timelineData
 })

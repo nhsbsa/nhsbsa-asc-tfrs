@@ -577,5 +577,142 @@ function checkChange(claim) {
     return isChange
 }
 
+function newClaim(req, input, type) {
+    const d = new Date();
+    const dStr = d.toISOString();
+    faker.seed(req.session.data.claims.length + 1);
 
-module.exports = { findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable }
+    let claim = {
+        claimID: null,
+        workplaceID: req.session.data.org.workplaceID,
+        claimType: null,
+        status: "not-yet-submitted",
+        createdDate: dStr,
+        createdBy: "Test Participant",
+        notes: null,
+        submissions: [{
+        submitter: null,
+        submittedDate: null,
+        trainingCode: input.code,
+        learnerID: null,
+        startDate: null,
+        costDate: null,
+        completionDate: null,
+        evidenceOfPayment: [],
+        evidenceOfCompletion: null,
+        processedBy: null,
+        processedDate: null,
+        evidenceOfPaymentReview: {
+            outcome: null,
+            note: null,
+            costPerLearner: null
+        },
+        evidenceOfCompletionReview: {
+            outcome: null,
+            note: null
+        }
+        }]
+    };
+
+
+    if (type == "100") {
+        claim.claimID = generateUniqueID() + "-A",
+        claim.claimType = "100"
+    } else if (type == "60") {
+        claim.claimID = generateUniqueID() + "-B",
+        claim.claimType = "60"
+    }
+
+    req.session.data.claims.push(claim)
+    //reset seed
+    faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
+    delete req.session.data['training-input'];
+    delete req.session.data['trainingSelection'];
+    delete req.session.data['activity-date-started-day'];
+    delete req.session.data['activity-date-started-month'];
+    delete req.session.data['activity-date-started-year'];
+    delete req.session.data['payment-date-started-day'];
+    delete req.session.data['payment-date-started-month'];
+    delete req.session.data['payment-date-started-year'];
+    delete req.session.data['completion-date-started-day'];
+    delete req.session.data['completion-date-started-month'];
+    delete req.session.data['completion-date-started-year'];
+    delete req.session.data['learner-input'];
+    delete req.session.data['learner-selection'];
+    delete req.session.data['learnerSelected'];
+    delete req.session.data['learner-choice'];
+    delete req.session.data['add-another'];
+    delete req.session.data['answers-checked'];
+    delete req.session.data['evidenceType'];
+    delete req.session.data['totalAmount'];
+    delete req.session.data['EvidenceNoLearners'];
+    delete req.session.data['evidenceFile'];
+    delete req.session.data['selectedClaims'];
+    delete req.session.data['selectedClaimsConfirmed'];
+    delete req.session.data['activityType'];
+    delete req.session.data['submitError'];
+    delete req.session.data['emptyError'];
+    delete req.session.data['invalidIDError'];
+    delete req.session.data['notFound'];
+    return claim.claimID
+}
+
+function loadData(req, orgID) {
+  // pull in the prototype data object and see if it contains a datafile reference
+  const path = 'app/views/claims/v16/_data/'
+
+  var learnersFile = 'learners.json'
+  var trainingFile = 'training.json'
+  var claimsFile = 'claims.json'
+  var statusFile = 'claim-statuses.json'
+  const orgFile = 'organisations.json'
+  
+
+  console.log('loading in organisation file')
+  const organisations = loadJSONFromFile(orgFile, path)
+  for (const organisation of organisations) {
+    if (organisation.workplaceID == orgID) {
+      req.session.data.org = organisation
+      break;
+    }
+  }
+  console.log('organisation file loaded')
+
+  console.log('loading in training file')
+  req.session.data['training'] = loadJSONFromFile(trainingFile, path)
+  console.log('training file loaded')
+
+  console.log('loading in claims file')
+  const allClaims = loadJSONFromFile(claimsFile, path);
+  const filteredClaims = allClaims.filter(claim => claim.workplaceID === orgID);
+  req.session.data['claims'] = filteredClaims;
+  console.log(filteredClaims.length + ' of ' + allClaims.length + ' claims loaded')
+
+  console.log('loading in learners file')
+  req.session.data['learners'] = loadJSONFromFile(learnersFile, path)
+  console.log('learners file loaded')
+
+  console.log('loading in statuses file')
+  req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
+  console.log('statuses file loaded')
+
+
+  return console.log('data updated')
+}
+
+function findStatus(statusID, statuses) {
+    let status = null
+    for (const s of statuses) {
+        if (s.id == statusID) {
+            status = s
+        }
+    }
+    return status
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter}

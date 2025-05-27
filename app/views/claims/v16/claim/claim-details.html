@@ -49,7 +49,7 @@
     <a href="advanced-search" class="govuk-back-link">Back</a>
   {% elif (data.fromSearchId) %}
     <a href="../manage-claims-home?fromSearchId" class="govuk-back-link">Back</a>
-  {% elif not (claim.status == "new") and not (claim.status == "not-yet-submitted") and not (claim.status == "queried") %}
+  {% elif not (claim.status == "not-yet-submitted") and not (claim.status == "queried") %}
     <a href="../manage-claims?statusID={{ data.statusID }}" class="govuk-back-link">Back</a>
   {% endif %} 
 {% endblock %}
@@ -85,7 +85,10 @@
     {% endif %}
 
     {% include "../_components/claim-sections/claimAmount.html" %}
-    {% include "../_components/claim-sections/alertSection.html" %}
+
+    {% if not ((claim.claimType == "100" or claim.claimType == "60") and  claim.status == "not-yet-submitted") %}
+      {% include "../_components/claim-sections/alertSection.html" %}
+    {% endif %}
 
   </div>
 </div>
@@ -125,89 +128,75 @@
 
       {% include "../_components/claim-sections/learner.html" %}
 
-    {% if (claim.claimType == "60") %}
-      {% include "../_components/claim-sections/supportingClaimNote.html" %}
-      </dl>
-    {% endif %}
-
-    {% if (claim.status == "not-yet-submitted" and claim.claimType == "60") %}
-      {% include "../_components/claim-sections/cta-section.html" %}
-    {% elif (claim.status == "queried" and claim.claimType == "60") %}
-      {% include "../_components/claim-sections/query-cta-section.html" %}
-    {% endif %}
+      {% if (claim.claimType == "60") %}
+        {% include "../_components/claim-sections/supportingClaimNote.html" %}
+    </dl>
+      {% endif %}
     
     {% if (claim.claimType == "60" ) %}
+      {% if (claim.status == "not-yet-submitted" or claim.status == "queried") %}
+        {% include "../_components/claim-sections/cta-section.html" %}
+      {% endif %}
+    </div>
   </div>
-</div>
-{% endif %}
 
-{% if (claim.claimType == "60") %}
-    <div class="content-container govuk-!-padding-bottom-6">
-      <div class="vertical-line-container">
-        <div class="circle">
-          <span class="govuk-heading-s section-number">2</span>
-        </div>
-        <div class="vertical-line"></div>
-        <div class="horizontal-line"></div>
+  <div class="content-container govuk-!-padding-bottom-6">
+    <div class="vertical-line-container">
+      <div class="circle">
+        <span class="govuk-heading-s section-number">2</span>
       </div>
-      <div class="content">
-        <h2 class="govuk-heading-l" id="fourtyPartClaim">Complete the 40 part</h2>
+      <div class="vertical-line"></div>
+      <div class="horizontal-line"></div>
+    </div>
+    <div class="content">
+      <h2 class="govuk-heading-l" id="fourtyPartClaim">Complete the 40 part</h2>
 
-        {% if ((claim.claimType == "60" and ((pairClaim.status != null))))  %}
-          <p class="govuk-body">Claim reference for the 40 part: {{ claim.claimID.slice(0, -1) + "C" }}</p>
-        {% endif %}
+      {% if ((claim.claimType == "60" and ((pairClaim.status != null))))  %}
+        <p class="govuk-body">Claim reference for the 40 part: {{ claim.claimID.slice(0, -1) + "C" }}</p>
+      {% endif %}
 
-        {% if pairClaim == null and claim.claimType == "60" %}
-          {% if claim.status != "rejected" %}
-            <p class="govuk-body"><span class="govuk-caption-m">This part cannot be started until the 60 part is approved.</span></p>
-          {% elif claim.status == "rejected" %}
-            <p class="govuk-body"><span class="govuk-caption-m">The 60 part was rejected therefore the 40 part cannot be started.</span></p>
-          {% endif %}
+      {% if pairClaim == null and claim.claimType == "60" %}
+        {% if claim.status != "rejected" %}
+          <p class="govuk-body"><span class="govuk-caption-m">This part cannot be started until the 60 part is approved.</span></p>
+        {% elif claim.status == "rejected" %}
+          <p class="govuk-body"><span class="govuk-caption-m">The 60 part was rejected therefore the 40 part cannot be started.</span></p>
         {% endif %}
+      {% endif %}
 
-        {% if data.versionResearch == "B" and pairClaim.status != "not-yet-submitted" and (pairClaim.submissions | length) > 1 %}
-            <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=40">View all 40 part submissions</a></p>
-        {% endif %}
-        <dl class="govuk-summary-list">
+      {% if data.versionResearch == "B" and pairClaim.status != "not-yet-submitted" and (pairClaim.submissions | length) > 1 %}
+          <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=40">View all 40 part submissions</a></p>
+      {% endif %}
+      <dl class="govuk-summary-list">
   {% endif %}
-    
-    
-    {% include "../_components/claim-sections/evidenceCompletion.html" %}
 
-    {% if (claim.claimType == "100" ) %}
-      {% include "../_components/claim-sections/supportingClaimNote.html" %}
-    {% endif %}
+      {% include "../_components/claim-sections/evidenceCompletion.html" %}
 
-    {% if (pairClaim.claimType == "40" and claim.status == "approved" ) %}
-      {% set is40Part = "true" %}
-      {% include "../_components/claim-sections/supportingClaimNote.html" %}
-    {% endif %}
+      {% if (claim.claimType == "100" ) %}
+        {% include "../_components/claim-sections/supportingClaimNote.html" %}
+      {% endif %}
+
+      {% if (pairClaim.claimType == "40" and claim.status == "approved" ) %}
+        {% set is40Part = "true" %}
+        {% include "../_components/claim-sections/supportingClaimNote.html" %}
+      {% endif %}
     </dl>
 
-    {% if ((claim.status == "not-yet-submitted" or pairClaim.status == "not-yet-submitted") and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}
+    {% if (((claim.status == "not-yet-submitted" or pairClaim.status == "not-yet-submitted") or (claim.status == "queried" or pairClaim.status == "queried")) and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}
       {% include "../_components/claim-sections/cta-section.html" %}
-    {% elif ((claim.status == "queried" or pairClaim.status == "queried") and (claim.claimType == "100" or pairClaim.claimType == "40")) %}
-      {% include "../_components/claim-sections/query-cta-section.html" %}
     {% endif %}
 
     {% if (claim.claimType == "60") %}
   </div>
 </div>
-{% endif %}
-
-
+  {% endif %}
 
   </div>
 
   <div class="govuk-grid-column-one-third">
-
     {% include "../_components/claim-sections/claimHistory.html" %}
   </div>
 
 </div> 
-
-
-
 
 {% endblock %}
 
