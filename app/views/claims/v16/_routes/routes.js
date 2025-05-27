@@ -8,23 +8,6 @@ const { generateLearners } = require('../_helpers/generate-learners.js');
 
 // v16 Prototype routes
 
-router.post('/account-handler', function (req, res) {
-  const accountAnswer = req.session.data.account
-  const journey = req.session.data.journey
-
-  if (accountAnswer == "yes") {
-    if (journey == 'creation') {
-      res.redirect('authentication/creation-link')
-    } else {
-      res.redirect('authentication/sign-in')
-    }
-  } else if (accountAnswer == "no") {
-    res.redirect('register')
-  } else if (accountAnswer == "dont-know") {
-    res.redirect('register')
-  }
-});
-
 router.post('/verify-details-handler', function (req, res) {
   const confirmationAnswer = req.session.data.confirmation
   delete req.session.data.confirmation
@@ -193,38 +176,6 @@ router.post('/advanced-search-handler', function (req, res) {
     res.redirect('claim/advanced-search?' + errorQuery)
   }
 });
-
-router.post('/apply-filters', function (req, res) {
-  const statuses = req.session.data.filterStatus
-  const startDates = req.session.data.filterStartDate
-  const types = req.session.data.filterType
-  const search = req.session.data.search
-
-  delete req.session.data.filterStatus
-  delete req.session.data.status
-  delete req.session.data.filterStartDate
-  delete req.session.data.filterType
-
-  let query = '?search=' + search
-  if (statuses != null && statuses != "") {
-    query += "&status="
-    const statusString = statuses.join("+");
-    query += statusString;
-  }
-  if (startDates != null && startDates != "") {
-    query += '&startDate='
-    const startDatesString = startDates.join("+");
-    query += startDatesString;
-  }
-  if (types != null && types != "") {
-    query += '&type='
-    const typesString = types.join("+");
-    query += typesString;
-  }
-
-  res.redirect('claim/search-results' + query);
-});
-
 
 router.post('/split-decision-handler', function (req, res) {
   const trainingCode = req.session.data.trainingSelection
@@ -448,7 +399,7 @@ router.post('/add-evidence', function (req, res) {
   }
 })
 
-router.post('/radioButton', function (req, res) {
+router.post('/evidence-add-another-handler', function (req, res) {
   delete req.session.data.deleteSuccess
   delete req.session.data.allDeleteSuccess
   delete req.session.data.missingOption
@@ -777,7 +728,6 @@ router.post('/new-declaration-confirmation', function (req, res) {
   }
 });
 
-
 router.post('/bank-details-question-handler', function (req, res) {
   delete req.session.data.submitError
 
@@ -863,7 +813,6 @@ router.get('/reinvite-user', function (req, res) {
 
 });
 
-
 router.get('/confirm-delete-user', function (req, res) {
   const deletedEmail = req.session.data.deletedEmail
   let query = null
@@ -890,16 +839,6 @@ router.get('/confirm-delete-user', function (req, res) {
   req.session.data.deleteSuccess = 'true'
 
   res.redirect('org-admin/manage-team?tabLocation=users')
-});
-
-router.get('/clear-learner', function (req, res) {
-  var claimID = req.session.data.id
-  for (const c of req.session.data.claims) {
-    if (claimID == c.claimID) {
-      c.learner = null
-      res.redirect('claim/claim-details' + '?id=' + claimID)
-    }
-  }
 });
 
 router.get('/showComparisonNote', function (req, res) {

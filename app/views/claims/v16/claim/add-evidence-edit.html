@@ -103,7 +103,7 @@
     </div>
 
     {% if evidence.length != 4 %}
-    <form action="../radioButton?type={{data.type}}" method="post" novalidate>
+    <form action="../evidence-add-another-handler?type={{data.type}}" method="post" novalidate>
       <div class="govuk-form-group {% if data.missingOption %} govuk-form-group--error {% endif %}">
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
