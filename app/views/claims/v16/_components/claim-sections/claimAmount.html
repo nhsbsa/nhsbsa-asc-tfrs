@@ -8,27 +8,27 @@
 {% if claim.claimType == "100" %}
 
     {% if (claim.status == "queried" or claim.status == "not-yet-submitted" or claim.status == "submitted") %}
-        <p class="govuk-body">The most you could get back is <strong>{{ training.reimbursementAmount | currency(trailingZeros=false) }}</strong> (<a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>).</p> 
+        <p class="govuk-body">The most you could get back is <strong>{{ training.reimbursementAmount | currency(trailingZeros=false) }}</strong> - <a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>.</p> 
     {% elif claim.status == "approved" %}
-        <p class="govuk-body">You'll get back <strong>{{ (submission | getReimbursementAmount(training)) | currency(trailingZeros=false) }}</strong> for this claim (<a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>).</p>
+        <p class="govuk-body">You'll get back <strong>{{ (submission | getReimbursementAmount(training)) | currency(trailingZeros=false) }}</strong> for this claim - <a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>.</p>
     {% endif %}
 
 {% elif claim.claimType == "60" %}
 
     {% if (claim.status == "queried" or claim.status == "not-yet-submitted" or claim.status == "submitted") %}
-        <p class="govuk-body">The most you could get back is <strong>{{ training.reimbursementAmount | currency(trailingZeros=false) }}</strong> (<a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>).</p>
+        <p class="govuk-body">The most you could get back is <strong>{{ training.reimbursementAmount | currency(trailingZeros=false) }}</strong> - <a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>.</p>
     {% elif claim.status == "approved" %}
         
         {% if pairClaim.status == "not-yet-submitted" or pairClaim.status == "submitted" or pairClaim.status == "queried" %}
-            <p class="govuk-body">The most you could get back is <strong>{{ (submission | getReimbursementAmount(training)) | currency(trailingZeros=false) }}</strong> (<a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>).</p>
-            <p class="govuk-body">You'll get <strong>{{ ((submission | getReimbursementAmount(training)) * 0.6) | currency(trailingZeros=false) }}</strong> for the 60 part of the claim. You can expect to be paid this by {{(submission.processedDate | duration(1, "weeks")) | govukDate }}.</p>
-            <p class="govuk-body">You could get an additional <strong>{{ ((submission | getReimbursementAmount(training)) * 0.4) | currency(trailingZeros=false) }}</strong> when the 40 part of the claim is approved.</p>
+            <p class="govuk-body">The most you could get back is <strong>{{ (submission | getReimbursementAmount(training)) | currency(trailingZeros=false) }}</strong> - <a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>.</p>
+            <p class="govuk-body">You'll get <strong>{{ ((submission | getReimbursementAmount(training)) * 0.6) | currency(trailingZeros=false) }}</strong> for the 60 part of the claim. You can expect to be paid by {{(submission.processedDate | duration(1, "weeks")) | govukDate }}.</p>
+            <p class="govuk-body">You could get an additional <strong>{{ ((submission | getReimbursementAmount(training)) * 0.4) | currency(trailingZeros=false) }}</strong> if the 40 part of the claim is approved.</p>
         {% elif pairClaim.status == "approved" %}
-            <p class="govuk-body">In total for this training you'll get back <strong>{{ (submission | getReimbursementAmount(training)) | currency(trailingZeros=false) }}</strong> (<a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>).</p>
-            <p class="govuk-body">For the 60 part of the claim you've already got <strong>{{ ((submission | getReimbursementAmount(training)) * 0.6) | currency(trailingZeros=false) }}</strong>. You should have been paid this by {{(submission.processedDate | duration(1, "weeks")) | govukDate }}</p>
+            <p class="govuk-body">In total for this training you'll get back <strong>{{ (submission | getReimbursementAmount(training)) | currency(trailingZeros=false) }}</strong> - <a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>.</p>
+            <p class="govuk-body">You've already got <strong>{{ ((submission | getReimbursementAmount(training)) * 0.6) | currency(trailingZeros=false) }}</strong> for the 60 part of the claim. You should have been paid by {{(submission.processedDate | duration(1, "weeks")) | govukDate }}</p>
             <p class="govuk-body">You'll get <strong>{{ ((submission | getReimbursementAmount(training)) * 0.4) | currency(trailingZeros=false) }}</strong> for the 40 part of the claim.</p>
         {% elif pairClaim.status == "rejected" %}
-            <p class="govuk-body">You'll get back <strong>{{ ((submission | getReimbursementAmount(training)) * 0.6) | currency(trailingZeros=false) }}</strong> for the 60 part of the claim (<a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>). You can expect to be paid this by {{(submission.processedDate | duration(1, "weeks")) | govukDate }}.</p>
+            <p class="govuk-body">You'll get back <strong>{{ ((submission | getReimbursementAmount(training)) * 0.6) | currency(trailingZeros=false) }}</strong> for the 60 part of the claim - <a href="../guidance/reimburse-amounts.html" class="govuk-link">see how we calculate this</a>. You can expect to be paid by {{(submission.processedDate | duration(1, "weeks")) | govukDate }}.</p>
             <p class="govuk-body">You will not get anything for the 40 part as it was rejected.</p>
         {% endif %}
 
