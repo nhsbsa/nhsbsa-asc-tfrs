@@ -131,7 +131,7 @@
       {% if (claim.claimType == "60") %}
         {% include "../_components/claim-sections/supportingClaimNote.html" %}
     </dl>
-      {% endif %}
+      {% endif %} 
     
     {% if (claim.claimType == "60" ) %}
       {% if (claim.status == "not-yet-submitted" or claim.status == "queried") %}
@@ -175,7 +175,7 @@
         {% include "../_components/claim-sections/supportingClaimNote.html" %}
       {% endif %}
 
-      {% if (pairClaim.claimType == "40" and claim.status == "approved" ) %}
+      {% if (claim.claimType == "60" ) %}
         {% set is40Part = "true" %}
         {% include "../_components/claim-sections/supportingClaimNote.html" %}
       {% endif %}
