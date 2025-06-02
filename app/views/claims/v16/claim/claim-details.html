@@ -157,7 +157,7 @@
 
       {% if pairClaim == null and claim.claimType == "60" %}
         {% if claim.status != "rejected" %}
-          <p class="govuk-body">This part cannot be started until the 60 part is approved.</p>
+          <p class="govuk-body"><span class="govuk-caption-m">This part cannot be started until the 60 part is approved.</span></p>
         {% elif claim.status == "rejected" %}
           <p class="govuk-body"><span class="govuk-caption-m">The 60 part was rejected therefore the 40 part cannot be started.</span></p>
         {% endif %}
