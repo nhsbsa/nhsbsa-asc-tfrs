@@ -53,7 +53,7 @@
 
     {% if claim.status == "queried" %}
         <h2 class="moj-alert__heading">Edit claim and resubmit</h2>
-        <p class="govuk-body">Once these requested edits, you can resubmit the <a class="govuk-link" href="#sixtyPartClaim">60 part</a> of your claim for processing.</p>
+        <p class="govuk-body">Once you've made these requested edits, you can resubmit the <a class="govuk-link" href="#sixtyPartClaim">60 part</a> of your claim for processing.</p>
         {% if noteSubmission.evidenceOfPaymentReview.outcome == "queried" %}
         <p class="govuk-body"><strong>Evidence of payment:</strong> {{noteSubmission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
