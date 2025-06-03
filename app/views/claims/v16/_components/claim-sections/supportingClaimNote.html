@@ -11,7 +11,11 @@
         <dt class="govuk-summary-list__key">
             Supporting information (optional)
         </dt>
-        {% if claimToUse.status != "not-yet-submitted" and claimToUse.status != "queried" %}
+         {% if (is40Part and claim.status == "rejected") or (is40Part and (claim.status == "not-yet-submitted" or claim.status == "submitted" or claim.status == "queried")) %}
+         <dd class="govuk-summary-list__value">
+                <p class="govuk-caption-m">&#8212</p>
+            </dd>
+        {% elif claimToUse.status != "not-yet-submitted" and claimToUse.status != "queried" %}
             <dd class="govuk-summary-list__value">
                 <p class="govuk-caption-m">No supporting information added to claim before submission.</p>
             </dd>

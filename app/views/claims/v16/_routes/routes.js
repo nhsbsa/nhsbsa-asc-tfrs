@@ -633,7 +633,8 @@ router.post('/submit-claim', function (req, res) {
 
 
     submission.submittedDate = dStr
-    submission.submitter = "flossie.gleason@evergreencare.com"
+    let org = req.session.data.org
+    submission.submitter = org.signatory.active.email
     delete req.session.data.submitError
     delete req.session.data.confirmation
     res.redirect('claim/confirmation')
