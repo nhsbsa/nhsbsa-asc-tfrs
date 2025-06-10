@@ -1,5 +1,6 @@
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 {% from "govuk/components/footer/macro.njk" import govukFooter %}
+{% set govukRebrand = true %}
 
 {% block pageTitle %}
 {{ serviceName }} — GOV.UK
@@ -41,6 +42,7 @@
 
 {% block footer %}
   {{ govukFooter({
+    rebrand: true,
     meta: {
       items: [
       {
