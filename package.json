@@ -12,7 +12,7 @@
     "@ministryofjustice/frontend": "^3.7.0",
     "@x-govuk/govuk-prototype-filters": "1.4.4",
     "fs": "^0.0.1-security",
-    "govuk-frontend": "5.8.0",
+    "govuk-frontend": "^5.10.2",
     "govuk-prototype-kit": "13.16.2"
   },
   "devDependencies": {
