@@ -548,7 +548,6 @@ addFilter('trainingTypeCheck', function (trainingCode, trainingList, matchType) 
             }
         }
     }
-
 })
 
 addFilter('findUser', function (email, org) {
@@ -608,10 +607,10 @@ addFilter('matchSubmissionToText', function (submissions) {
 
 addFilter('formatText', function (submission) {
     let text = ""
-    if (submission.evidenceOfPaymentReview.note) {
+    if (submission.evidenceOfPaymentReview && submission.evidenceOfPaymentReview.note) {
         text = submission.evidenceOfPaymentReview.note + " "
     }
-    if (submission.evidenceOfCompletionReview.note) {
+    if (submission.evidenceOfCompletionReview && submission.evidenceOfCompletionReview.note) {
         text += submission.evidenceOfCompletionReview.note
     }
     return text

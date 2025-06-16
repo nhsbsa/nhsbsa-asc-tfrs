@@ -1181,4 +1181,26 @@ router.post('/other-query-note-handler', function (req, res) {
 
 });
 
+router.get('/showEditedNote', function (req, res) {
+  req.session.data['showNote'] = true
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
+      res.redirect('processing/v9/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
+    }
+  }
+});
+
+router.get('/hideEditedNote', function (req, res) {
+  req.session.data['showNote'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
+      res.redirect('processing/v9/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
+    }
+  }
+});
+
 module.exports = router

@@ -43,7 +43,7 @@
                         <td class="govuk-table__cell"><strong>Submitted by</strong></td>
                         {% for submission in sortedSubmissions %}
                             {% if submission.submitter %}
-                                <td class="govuk-table__cell">{{(submission.submitter | findUser(data.orgId)).givenName}} {{(submission.submitter | findUser(data.orgId)).familyName}}</td>
+                                <td class="govuk-table__cell">{{(submission.submitter | findUser(org)).givenName}} {{(submission.submitter | findUser(org)).familyName}}</td>
                             {% else %}
                                 <td class="govuk-table__cell">---</td>
                             {% endif %}
@@ -51,25 +51,25 @@
                     </tr>
 
                     <tr class="govuk-table__row">
-                  <td class="govuk-table__cell"><strong>Processed on</strong></td>
+                        <td class="govuk-table__cell"><strong>Processed on</strong></td>
 
-                  {% for submission in sortedSubmissions %}
-                    {% if submission.processedDate %}
-                      <td class="govuk-table__cell">{{submission.processedDate | govukDate}}</td>
-                      {% else %}
-                      <td class="govuk-table__cell">---</td>
-                    {% endif %}
-                  {%endfor %}
-                  </tr>
+                        {% for submission in sortedSubmissions %}
+                            {% if submission.processedDate %}
+                            <td class="govuk-table__cell">{{submission.processedDate | govukDate}}</td>
+                            {% else %}
+                            <td class="govuk-table__cell">---</td>
+                            {% endif %}
+                        {%endfor %}
+                    </tr>
 
-                  {# <tr class="govuk-table__row">
+                  <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Edits requested after processing</strong></td>
                     {% for submission in sortedSubmissions %}
 
                       {% if ((submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried")) and submission.submittedDate != null %}
                         <td class="govuk-table__cell">
                           {% set text = submission | formatText %}
-                            {{text | trunctateString}} </br> <a class="govuk-link" href="/showComparisonNote?noteType=sixtyQuery&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                            {{text | trunctateString}} </br> <a class="govuk-link" href="/showEditedNote?submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
                         </td>
 
                       {% else %}
@@ -77,7 +77,7 @@
                       {% endif %}
                       
                     {%endfor %}  
-                  </tr> #}
+                  </tr>
 
                 {% if data.view == "100" or data.view == "60"  %}
                     <tr class="govuk-table__row">
@@ -235,6 +235,6 @@
     </div>
 
     {% if data.showNote %}
-    {% include "../_components/claim-view/view-note.html" %}
-  {% endif %}
+        {% include "../claim-view/view-note.html" %}
+    {% endif %}
 </div>  
