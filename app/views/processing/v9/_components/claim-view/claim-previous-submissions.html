@@ -64,18 +64,18 @@
 
                   <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Edits requested after processing</strong></td>
+                    {% set count = sortedSubmissions.length %}
                     {% for submission in sortedSubmissions %}
-
                       {% if ((submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried")) and submission.submittedDate != null %}
                         <td class="govuk-table__cell">
                           {% set text = submission | formatText %}
-                            {{text | trunctateString}} </br> <a class="govuk-link" href="/showEditedNote?submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                            {{text | trunctateString}} </br> <a class="govuk-link" href="/showEditedNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
                         </td>
 
                       {% else %}
                         <td class="govuk-table__cell">---</td>
                       {% endif %}
-                      
+                      {% set count = count - 1 %}
                     {%endfor %}  
                   </tr>
 

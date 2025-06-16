@@ -619,3 +619,10 @@ addFilter('formatText', function (submission) {
 addFilter('trunctateString', function (string) {
     return string.slice(0, 30);
 })
+
+addFilter('formatCountToText', function (count) {
+    if (count == 1) { return "First"} 
+    if (count == 2) { return "Second"} 
+    if (count == 3) { return "Third"} 
+    if (count == 4) { return "Fourth"} 
+})

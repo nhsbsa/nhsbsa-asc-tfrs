@@ -11,7 +11,7 @@
     <div>
         <h1 id="note-heading" class="govuk-heading-m push--top">Requested edits</h1>
 
-          <p class="govuk-body"><strong>Version: </strong>Second submission </br> <strong>Submitted date: </strong>{{submission.submittedDate | govukDate}}</p>
+          <p class="govuk-body"><strong>Version: </strong>{{data.count | formatCountToText}} submission </br> <strong>Submitted date: </strong>{{submission.submittedDate | govukDate}}</p>
 
 
           {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
