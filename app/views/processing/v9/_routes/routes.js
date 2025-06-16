@@ -466,8 +466,14 @@ router.get('/outcome-handler', function (req, res) {
 router.get('/view-previous-submissions-handler', function (req, res) {
 
   claimID = req.session.data.id
+  var foundClaim = null
+  for (const claim of req.session.data['claims']) {
+    if (claim.claimID == claimID) {
+      foundClaim = claim
+    }
+  }
   req.session.data.processClaimStep = "previousSubmissions"
-  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&view=' + foundClaim.claimType + '#tab-content')
 
 });
 

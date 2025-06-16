@@ -39,16 +39,14 @@
               <tbody class="govuk-table__body">
           
                 <tr class="govuk-table__row">
-                <td class="govuk-table__cell"><strong>Submitted on</strong></td>
-                {% for submission in sortedSubmissions %}
-                  {% if submission.submittedDate %}
-                  <td class="govuk-table__cell">{{submission.submittedDate | govukDate}}</td>
-                  {% else %}
-                  <td class="govuk-table__cell">---</td>
-                  {% endif %}
-                {%endfor %}
-
-
+                  <td class="govuk-table__cell"><strong>Submitted on</strong></td>
+                  {% for submission in sortedSubmissions %}
+                    {% if submission.submittedDate %}
+                      <td class="govuk-table__cell">{{submission.submittedDate | govukDate}}</td>
+                    {% else %}
+                      <td class="govuk-table__cell">---</td>
+                    {% endif %}
+                  {%endfor %}
                 </tr>
           
                 <tr class="govuk-table__row">
@@ -259,7 +257,7 @@
               </tbody>
             </table>
           
-          </div>
+        </div>
     </div>
 
     {% if data.showNote %}

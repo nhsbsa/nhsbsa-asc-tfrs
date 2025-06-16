@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg } = require('../_helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable } = require('../_helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag', function (statusID) {
@@ -578,4 +578,45 @@ addFilter('comparePaymentDate', function(date) {
     } else {
         return false
     }
+})
+
+addFilter('sortSubmissionsForTable', function (submissions) {
+    let sorted = sortSubmissionsForTable(submissions)
+    return sorted
+})
+
+addFilter('matchSubmissionToText', function (submissions) {
+    const submissionLabels = submissions.map((submission, index, array) => {
+        if (!submission.submittedDate) {
+          return "Current draft";
+        } else {
+          // Count how many submissions (after this one) have a submittedDate
+          const submittedAfter = array.slice(index + 1).filter(s => s.submittedDate).length;
+      
+          if (submittedAfter === 0) return "First submission";
+          if (submittedAfter === 1) return "Second submission";
+          if (submittedAfter === 2) return "Third submission";
+          if (submittedAfter === 3) return "Fourth submission";
+          if (submittedAfter === 4) return "Fifth submission";
+          return `${submittedAfter + 1}th submission`; // fallback for 4th and beyond
+        }
+      });
+      return submissionLabels
+    // let text = ["First submission", "Second submission", "Third submission", "Fourth submission", "Fifth submission"]
+    // return text[count]
+})
+
+addFilter('formatText', function (submission) {
+    let text = ""
+    if (submission.evidenceOfPaymentReview.note) {
+        text = submission.evidenceOfPaymentReview.note + " "
+    }
+    if (submission.evidenceOfCompletionReview.note) {
+        text += submission.evidenceOfCompletionReview.note
+    }
+    return text
+})
+
+addFilter('trunctateString', function (string) {
+    return string.slice(0, 30);
 })

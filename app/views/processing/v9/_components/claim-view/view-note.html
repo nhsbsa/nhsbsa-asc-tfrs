@@ -1,0 +1,92 @@
+
+{% if data.showNote == "fourtyQuery" or data.showNote == "sixtyQuery" or data.showNote == "hundredQuery" %}
+
+  {% if data.showNote == "sixtyQuery" or data.showNote == "hundredQuery" %}
+    {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
+  {% else %}
+    {% set submission = pairClaim.submissions | findSubmissionByDate(data.submittedDate) %}
+  {% endif %}
+  
+  <div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
+    <div>
+        <h1 id="note-heading" class="govuk-heading-m push--top">Requested edits</h1>
+
+          <p class="govuk-body"><strong>Version: </strong>Second submission </br> <strong>Submitted date: </strong>{{submission.submittedDate | govukDate}}</p>
+
+
+          {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
+            <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
+          {% endif %}
+          {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
+            <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
+          {% endif %}
+
+        <a href="/hideComparisonNote" class="govuk-link govuk-button" >Close</a>
+    </div>
+  </div>
+
+
+{% elif data.showNote == "fourtyRejection" or data.showNote == "sixtyRejection" or data.showNote == "hundredRejection" %}
+  {% if data.showNote == "sixtyRejection" or data.showNote == "hundredRejection" %}
+    {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
+  {% else %}
+    {% set submission = pairClaim.submissions | findSubmissionByDate(data.submittedDate) %}
+  {% endif %}
+  <div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
+    <div>
+      <h1 id="note-heading" class="govuk-heading-m push--top">Rejection note</h1>
+      {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
+            <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
+          {% endif %}
+          {% if submission.evidenceOfCompletionReview.outcome == "fail" %}
+            <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
+          {% endif %}
+      <a href="/hideNote" class="govuk-link govuk-button" >Close</a>
+    </div>  
+  </div>
+
+
+{% elif data.showNote == "hundredClaim" or data.showNote == "sixtyClaim" or data.showNote == "fourtyClaim" %}
+  {% set submission = claim.submissions | findSubmissionByDate(data.submittedDate) %}
+
+  <div>
+      <div tabindex="-1" role="dialog" aria-modal="true" class="claim-history-dialog scrollable-claim-note" aria-labelledby="claim-history-heading claim-history-message">
+        <div>
+
+          {% if data.showNote == "hundredClaim" %}
+            <h2 id="claim-history-heading" class="govuk-heading-m push--top">Claim submission</h2>
+            <p class="govuk-body">Submitted on {{data.submittedDate  | govukDate }}</p>
+          {% elif data.showNote == "sixtyClaim" %}
+            <h1 id="claim-history-heading" class="govuk-heading-m push--top">60 part submission</h1>
+            <p class="govuk-body">Submitted on {{data.submittedDate | govukDate }}</p>
+          {% elif  data.showNote == "fourtyClaim" %}
+            <h1 id="claim-history-heading" class="govuk-heading-m push--top">40 part submission</h1>
+            <p class="govuk-body">Submitted on {{data.submittedDate | govukDate }}</p>
+          {% endif %}
+          
+            {% if data.showNote == "hundredClaim" or data.showNote == "sixtyClaim" %}
+              {% include "./training.html" %}
+            {% endif %}
+
+            {% if data.showNote == "hundredClaim" or data.showNote == "sixtyClaim" %}
+              {% include "./learner.html" %}
+            {% endif %}
+
+            {% if data.showNote == "hundredClaim" or data.showNote == "sixtyClaim" %}
+              {% include "./evidencePayment.html" %}
+            {% endif %}
+
+            {% if data.showNote == "hundredClaim" or data.showNote == "fourtyClaim" %}
+              {% include "./evidenceCompletion.html" %}
+            {% endif %}
+      
+            <a href="/hideComparisonNote" class="govuk-link govuk-button" >Close</a>
+
+        </div>
+      </div>
+  </div>
+      
+
+{% endif %}
+
+<div id="claim-history-overlay" class="claim-history-overlay"></div>

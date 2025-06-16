@@ -1,10 +1,240 @@
+{% set sortedSubmissions = claim.submissions | sortSubmissionsForTable %}
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
         <a href="../view-previous-submissions-back-handler" class="govuk-back-link govuk-!-margin-bottom-6">Back to claim details</a>
 
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-        <h2 class="govuk-heading-l" id="training">Claim submissions</h2>
+
+        <h2 class="govuk-heading-l" id="training">{% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% else %}Claim{% endif %} submissions</h2>
+        <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} submissions with any edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
+        
+
+        <div class="moj-scrollable-pane">
+            <table class="govuk-table">
+
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+            
+                    <th scope="col" class="govuk-table__header" style="min-width: 200px;"><span class="govuk-visually-hidden">Submissions</span></th>
+            
+                    {% for text in sortedSubmissions | matchSubmissionToText %}
+                        <th scope="col" class="govuk-table__header" style="min-width: 200px;">{{text}}</th>
+                    {%endfor %}
+            
+                    </tr>
+                </thead>
+
+                <tbody class="govuk-table__body">
+
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Submitted on</strong></td>
+                        {% for submission in sortedSubmissions %}
+                            {% if submission.submittedDate %}
+                            <td class="govuk-table__cell">{{submission.submittedDate | govukDate}}</td>
+                            {% else %}
+                            <td class="govuk-table__cell">---</td>
+                            {% endif %}
+                        {%endfor %}
+                    </tr>
+
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Submitted by</strong></td>
+                        {% for submission in sortedSubmissions %}
+                            {% if submission.submitter %}
+                                <td class="govuk-table__cell">{{(submission.submitter | findUser(data.orgId)).givenName}} {{(submission.submitter | findUser(data.orgId)).familyName}}</td>
+                            {% else %}
+                                <td class="govuk-table__cell">---</td>
+                            {% endif %}
+                        {%endfor %}             
+                    </tr>
+
+                    <tr class="govuk-table__row">
+                  <td class="govuk-table__cell"><strong>Processed on</strong></td>
+
+                  {% for submission in sortedSubmissions %}
+                    {% if submission.processedDate %}
+                      <td class="govuk-table__cell">{{submission.processedDate | govukDate}}</td>
+                      {% else %}
+                      <td class="govuk-table__cell">---</td>
+                    {% endif %}
+                  {%endfor %}
+                  </tr>
+
+                  {# <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><strong>Edits requested after processing</strong></td>
+                    {% for submission in sortedSubmissions %}
+
+                      {% if ((submission.evidenceOfPaymentReview.outcome == "queried" or submission.evidenceOfCompletionReview.outcome == "queried")) and submission.submittedDate != null %}
+                        <td class="govuk-table__cell">
+                          {% set text = submission | formatText %}
+                            {{text | trunctateString}} </br> <a class="govuk-link" href="/showComparisonNote?noteType=sixtyQuery&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                        </td>
+
+                      {% else %}
+                        <td class="govuk-table__cell">---</td>
+                      {% endif %}
+                      
+                    {%endfor %}  
+                  </tr> #}
+
+                {% if data.view == "100" or data.view == "60"  %}
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Training</strong></td>
+                        {% for submission in sortedSubmissions %}
+                        {% set training = submission.trainingCode | findTraining(data.training) %}
+                        {% if training %}
+
+                            {% if (training.code !== sortedSubmissions[loop.index0 + 1].trainingCode and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  )%}
+                            <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{training.code}}</br>{{training.title}}</strong></mark></td>
+                            {% else %}
+                            <td class="govuk-table__cell">{{training.code}}</br>{{training.title}}</td>
+                            {% endif %}
+
+                        {% else %}
+                            <td class="govuk-table__cell">---</td>
+                        {% endif %}
+                        {%endfor %}  
+                    </tr>
+                    {% endif %}
+
+                    {% if data.view == "100" or data.view == "60"  %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><strong>Start date</strong></td>
+                            {% for submission in sortedSubmissions %}
+                                {% if submission.startDate %}
+                                    {% if (submission.startDate !== sortedSubmissions[loop.index0 + 1].startDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  )%}
+                                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.startDate | govukDate}}</strong></mark></td>
+                                    {% else %}
+                                        <td class="govuk-table__cell">{{submission.startDate | govukDate}}</td>
+                                    {% endif %}
+                                {% else %}
+                                <td class="govuk-table__cell">---</td>
+                                {% endif %}
+                            {%endfor %}
+                        </tr>
+                    {% endif  %}
+
+                    {% if data.view == "100" or data.view == "60"  %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><strong>Payment date</strong></td>
+                            {% for submission in sortedSubmissions %}
+                                {% if submission.costDate %}
+                                    {% if (submission.costDate !== sortedSubmissions[loop.index0 + 1].costDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
+                                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.costDate | govukDate}}</strong></mark></td>
+                                    {% else %}
+                                        <td class="govuk-table__cell">{{submission.costDate | govukDate}}</td>
+                                    {% endif %}
+                                {% else %}
+                                <td class="govuk-table__cell">---</td>
+                                {% endif %}
+                            {%endfor %}
+                        </tr>
+                    {% endif %}
+
+                    {% if data.view == "100" or data.view == "60"  %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
+                            {% for submission in sortedSubmissions %}
+                                {% if submission.evidenceOfPayment %}
+                                    <td class="govuk-table__cell">
+                                        {% set evidenceLoop = loop.index0 + 1 %}
+                                        {% if sortedSubmissions[evidenceLoop].evidenceOfPayment %}
+                                            {% set previousEvidence = sortedSubmissions[evidenceLoop].evidenceOfPayment %}
+                                        {% else %}
+                                            {% set previousEvidence = [] %}
+                                        {% endif %}
+                                        {% for evidence in submission.evidenceOfPayment %}
+                                            {% if ((evidence not in previousEvidence) and (evidenceLoop) <= ((sortedSubmissions | length) - 1)  ) %}
+                                                <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                                            {% else %}
+                                                {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                {% else %}
+                                    <td class="govuk-table__cell">---</td>
+                                {% endif %}
+                            {%endfor %}
+                        </tr>
+                    {% endif %}
+
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Learner</strong></td>
+                        {% for submission in sortedSubmissions %}
+                        {% if submission.learnerID %}
+                            {% if (submission.learnerID !== sortedSubmissions[loop.index0 + 1].learnerID and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
+                            <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{(submission.learnerID | findLearner(data["learners"])).givenName}} {{(submission.learnerID | findLearner(data["learners"])).familyName}}</strong></mark></td>
+                            {% else %}
+                            <td class="govuk-table__cell">{{(submission.learnerID | findLearner(data["learners"])).givenName}} {{(submission.learnerID | findLearner(data["learners"])).familyName}}</td>
+                            {% endif %}
+                        {% else %}
+                            <td class="govuk-table__cell">---</td>
+                        {% endif %}
+                        {%endfor %}   
+                    </tr>
+
+                    {% if data.view == "100" or data.view == "40"  %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><strong>Completion date</strong></td>
+                            {% for submission in sortedSubmissions %}
+                                {% if submission.completionDate %}
+                                    {% if (submission.completionDate !== sortedSubmissions[loop.index0 + 1].completionDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
+                                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.completionDate | govukDate}}</strong></mark></td>
+                                    {% else %}
+                                        <td class="govuk-table__cell">{{submission.completionDate | govukDate}}</td>
+                                    {% endif %}
+                                {% else %}
+                                    <td class="govuk-table__cell">---</td>
+                                {% endif %}
+                            {%endfor %}
+                        </tr>
+                    {% endif %}
+
+                    {% if data.view == "100" or data.view == "40"  %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
+                            {% for submission in sortedSubmissions %}
+                                {% if submission.evidenceOfCompletion %}
+                                    {% if (submission.evidenceOfCompletion !== sortedSubmissions[loop.index0 + 1].evidenceOfCompletion and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
+                                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.evidenceOfCompletion}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{submission.evidenceOfCompletion}} </span>in new tab</a>)</td>
+                                    {% else %}
+                                        <td class="govuk-table__cell">{{submission.evidenceOfCompletion}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{submission.evidenceOfCompletion}} </span>in new tab</a>)</td>
+                                    {% endif %}
+                                {% else %}
+                                    <td class="govuk-table__cell">---</td>
+                                {% endif %}
+                            {%endfor %}
+                        </tr>
+                    {% endif %}
+
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><strong>Supporting note</strong></td>
+                    {% for submission in sortedSubmissions %}
+                        {% if submission.supportingNote %}
+                            {% if (submission.supportingNote !== sortedSubmissions[loop.index0 + 1].supportingNote and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
+                                <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.supportingNote}}</strong></mark></td>
+                            {% else %}
+                                <td class="govuk-table__cell">{{submission.supportingNote}}</td>
+                            {% endif %}
+                        {% else %}
+                            <td class="govuk-table__cell">---</td>
+                        {% endif %}
+                        {%endfor %}
+                    </tr>
+
+                </tbody>
+
+
+            </table>
+          
+        </div>
+        
 
     </div>
-</div>
+
+    {% if data.showNote %}
+    {% include "../_components/claim-view/view-note.html" %}
+  {% endif %}
+</div>  
