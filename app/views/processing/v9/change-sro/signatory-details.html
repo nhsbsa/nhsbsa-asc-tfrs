@@ -113,7 +113,11 @@
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Continue
                 </button>
-                <a class="govuk-link" href="../organisation/org-view-main?orgTab=users">Cancel</a>
+                {% if data.SROChange == 'edit' %}
+                    <a class="govuk-link" href="../organisation/org-view-main?orgTab=users">Cancel</a>
+                {% else %}
+                    <a class="govuk-link" href="../organisation/org-view-main?orgTab=users&givenName=&email=&familyName=">Cancel</a>
+                {% endif %}
             </div>
         </form>
     </div>

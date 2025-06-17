@@ -7,12 +7,6 @@
     Workplace ID - Register an organisation
 {% endblock %}
 
-{% block beforeContent %}
-        <div >
-            <a class="govuk-back-link" href="signatory-details">Back</a>
-        </div>
-{% endblock %}
-
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -175,6 +169,11 @@
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Confirm and send invite
                 </button>
+                {% if data.SROChange == 'edit' %}
+                    <a class="govuk-link" href="../organisation/org-view-main?orgTab=users">Cancel</a>
+                {% else %}
+                    <a class="govuk-link" href="../organisation/org-view-main?orgTab=users&givenName=&email=&familyName=">Cancel</a>
+                {% endif %}
             </div>
         </form>
     </div>
