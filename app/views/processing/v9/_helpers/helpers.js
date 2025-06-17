@@ -261,5 +261,11 @@ function sortSubmissionsByDate(submissions, dateType) {
     return submissions; // Return the claim with sorted submissions
 }
 
+function sortSubmissionsForTable(submissions) {
+    return submissions.sort((a, b) => {
+        return new Date(b.submittedDate) - new Date(a.submittedDate);
+      });
+}
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg }
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable }

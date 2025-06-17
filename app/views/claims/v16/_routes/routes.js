@@ -844,10 +844,11 @@ router.get('/confirm-delete-user', function (req, res) {
 
 router.get('/showComparisonNote', function (req, res) {
   req.session.data['showNote'] = req.session.data['noteType']
+  let subCount = req.session.data['count']
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      res.redirect('claims/v16/claim/previousSubmissionsTable' + '?id=' + claimID)
+      res.redirect('claims/v16/claim/previousSubmissionsTable?subCount=' + subCount + '&id=' + claimID)
     }
   }
 });
