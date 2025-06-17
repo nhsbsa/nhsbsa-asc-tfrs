@@ -169,20 +169,4 @@
             {% include "./evidence/file-section.html" %}
         </dl>
     {% endif %}
-    <h3 class="govuk-heading-m" id="payment">Supporting Information</h3>
-<dl class="govuk-summary-list">
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Note
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {% if (submission.supportingNote) %}
-                {{submission.supportingNote}}
-            {% else %}
-               <p class="govuk-caption-m">No supporting information added to claim before submission.</p>
-            {% endif %}
-            
-        </dd>
-    </div>
-</dl>
 </div>
