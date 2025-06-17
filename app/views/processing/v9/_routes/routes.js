@@ -466,8 +466,14 @@ router.get('/outcome-handler', function (req, res) {
 router.get('/view-previous-submissions-handler', function (req, res) {
 
   claimID = req.session.data.id
+  var foundClaim = null
+  for (const claim of req.session.data['claims']) {
+    if (claim.claimID == claimID) {
+      foundClaim = claim
+    }
+  }
   req.session.data.processClaimStep = "previousSubmissions"
-  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&view=' + foundClaim.claimType + '#tab-content')
 
 });
 
@@ -1173,6 +1179,29 @@ router.post('/other-query-note-handler', function (req, res) {
   
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
+});
+
+router.get('/showEditedNote', function (req, res) {
+  req.session.data['showNote'] = true
+  let subCount = req.session.data['count']
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
+      res.redirect('processing/v9/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
+    }
+  }
+});
+
+router.get('/hideEditedNote', function (req, res) {
+  req.session.data['showNote'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
+      res.redirect('processing/v9/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
+    }
+  }
 });
 
 module.exports = router
