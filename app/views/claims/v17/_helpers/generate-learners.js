@@ -24,10 +24,10 @@ function generateLearners (quantity) {
   let data = [];
 
   //Load job titles data from JSON file
-  const jobTitles = JSON.parse(fs.readFileSync('./app/views/claims/v16/_data/jobTitles.json', 'utf8'));
+  const jobTitles = JSON.parse(fs.readFileSync('./app/views/claims/v17/_data/jobTitles.json', 'utf8'));
 
   //load pre set learners from JSOn file
-  const preSetLearners = JSON.parse(fs.readFileSync('./app/views/claims/v16/_data/pre-set-learners.json', 'utf8'));
+  const preSetLearners = JSON.parse(fs.readFileSync('./app/views/claims/v17/_data/pre-set-learners.json', 'utf8'));
 
   //Start the date off with the present learners
   data = data.concat(preSetLearners);
@@ -50,7 +50,7 @@ function generateLearners (quantity) {
   }
 
   // Write data to learners.json
-  const jsonFilePath = './app/views/claims/v16/_data/learners.json';
+  const jsonFilePath = './app/views/claims/v17/_data/learners.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(data, null, 2));
   //reset seed
   faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));

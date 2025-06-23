@@ -6,7 +6,7 @@ const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, val
 const { generateClaims } = require('../_helpers/generate-claims.js');
 const { generateLearners } = require('../_helpers/generate-learners.js');
 
-// v16 Prototype routes
+// v17 Prototype routes
 
 router.post('/verify-details-handler', function (req, res) {
   const confirmationAnswer = req.session.data.confirmation
@@ -848,7 +848,7 @@ router.get('/showComparisonNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      res.redirect('claims/v16/claim/previousSubmissionsTable?subCount=' + subCount + '&id=' + claimID)
+      res.redirect('claims/v17/claim/previousSubmissionsTable?subCount=' + subCount + '&id=' + claimID)
     }
   }
 });
@@ -861,7 +861,7 @@ router.get('/hideComparisonNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      res.redirect('claims/v16/claim/previousSubmissionsTable' + '?id=' + claimID)
+      res.redirect('claims/v17/claim/previousSubmissionsTable' + '?id=' + claimID)
     }
   }
 });
@@ -943,14 +943,14 @@ router.get('/load-data-account-test', function (req, res) {
 router.get('/generate', function (req, res) {
   generateLearners(50);
   let claims = []
-  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v16/_data/organisations.json', 'utf8'));
+  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v17/_data/organisations.json', 'utf8'));
   for (const org of organisations) {
     if (org.numberOfClaims >0) {
       claims = claims.concat(generateClaims(org.workplaceID));
     }
   }
   // Write data to claims.json
-  const jsonFilePath = './app/views/claims/v16/_data/claims.json';
+  const jsonFilePath = './app/views/claims/v17/_data/claims.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
 
   res.redirect('../')

@@ -57,7 +57,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
   
   let submissions = null;
 
-  const learners = JSON.parse(fs.readFileSync('./app/views/claims/v16/_data/learners.json', 'utf8'));
+  const learners = JSON.parse(fs.readFileSync('./app/views/claims/v17/_data/learners.json', 'utf8'));
 
   const learnerID =  getRandomLearners(learners, 1).id;
   const startDate = faker.date.between({ from: createdDate, to: new Date() });
@@ -308,10 +308,10 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 function generateClaims(workplaceID) {
 
   // Load JSON files
-  const training = JSON.parse(fs.readFileSync('./app/views/claims/v16/_data/training.json', 'utf8'));
-  const statuses = JSON.parse(fs.readFileSync('./app/views/claims/v16/_data/claim-statuses.json', 'utf8'));
-  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v16/_data/organisations.json', 'utf8'));
-  const backOfficeStaff = JSON.parse(fs.readFileSync('./app/views/claims/v16/_data/backOfficeStaff.json', 'utf8'));
+  const training = JSON.parse(fs.readFileSync('./app/views/claims/v17/_data/training.json', 'utf8'));
+  const statuses = JSON.parse(fs.readFileSync('./app/views/claims/v17/_data/claim-statuses.json', 'utf8'));
+  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v17/_data/organisations.json', 'utf8'));
+  const backOfficeStaff = JSON.parse(fs.readFileSync('./app/views/claims/v17/_data/backOfficeStaff.json', 'utf8'));
 
   let organisation = null
   for (const org of organisations) {

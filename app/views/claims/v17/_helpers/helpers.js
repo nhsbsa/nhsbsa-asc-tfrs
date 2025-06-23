@@ -660,7 +660,7 @@ function newClaim(req, input, type) {
 
 function loadData(req, orgID) {
   // pull in the prototype data object and see if it contains a datafile reference
-  const path = 'app/views/claims/v16/_data/'
+  const path = 'app/views/claims/v17/_data/'
 
   var learnersFile = 'learners.json'
   var trainingFile = 'training.json'
@@ -688,7 +688,7 @@ function loadData(req, orgID) {
   const filteredClaims = allClaims.filter(claim => claim.workplaceID === orgID);
   // Load pre-set claims
     const users = generatecreatedByList(req.session.data.org);
-    const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/v16/_data/pre-set-claims.json', 'utf8'));
+    const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/v17/_data/pre-set-claims.json', 'utf8'));
     for (const claim of preSetClaims) {
 
         for (const submission of claim.submissions) {
