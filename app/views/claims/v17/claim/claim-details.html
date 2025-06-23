@@ -127,13 +127,9 @@
       {% include "../_components/claim-sections/evidencePayment.html" %}
 
       {% include "../_components/claim-sections/learner.html" %}
-
-      {% if (claim.claimType == "60") %}
-        {% include "../_components/claim-sections/supportingClaimNote.html" %}
-    </dl>
-      {% endif %} 
     
     {% if (claim.claimType == "60" ) %}
+     </dl>
       {% if (claim.status == "not-yet-submitted" or claim.status == "queried") %}
         {% include "../_components/claim-sections/cta-section.html" %}
       {% endif %}
@@ -173,14 +169,6 @@
         {% include "../_components/claim-sections/evidenceCompletion.html" %}
       {% endif %}
 
-      {% if (claim.claimType == "100") %}
-        {% include "../_components/claim-sections/supportingClaimNote.html" %}
-      {% endif %}
-
-      {% if (claim.claimType == "60" and claim.status != "rejected") %}
-        {% set is40Part = "true" %}
-        {% include "../_components/claim-sections/supportingClaimNote.html" %}
-      {% endif %}
     </dl>
 
     {% if (((claim.status == "not-yet-submitted" or pairClaim.status == "not-yet-submitted") or (claim.status == "queried" or pairClaim.status == "queried")) and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}
