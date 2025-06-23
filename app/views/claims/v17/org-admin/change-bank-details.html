@@ -1,0 +1,132 @@
+{% if data.journey == 'creation' %}
+    {% extends "../_layouts/claims-account-setup.html" %}
+{% else %}
+    {% extends "../_layouts/claims-main.html" %}
+{% endif %}
+
+{% block pageTitle %}
+{% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid  %}Error: {% endif %}Organisation bank or building society account details — {{serviceName}} — GOV.UK
+{% endblock %}
+
+
+{% block beforeContent %}
+{% if data.journey == 'creation' %}
+<div>
+    <a href="../account-setup/bank-details-question" class="govuk-back-link">Back</a>
+</div>
+{% else %}
+<div>
+    <a href="bank-details?tabLocation=bankDetails" class="govuk-back-link">Back</a>
+</div>
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="../bank-details-handler" method="post" class="form">
+
+            {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid %}
+            <div class="govuk-error-summary" data-module="govuk-error-summary">
+                <div role="alert">
+                    <h2 class="govuk-error-summary__title">
+                        There is a problem
+                    </h2>
+                    <div class="govuk-error-summary__body">
+                        <ul class="govuk-list govuk-error-summary__list">
+                            {{ data.submitError | bankErrorMessage("summary") }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if data.journey == 'creation' %}
+                <span class="govuk-caption-l">Complete registration</span>
+            {% endif %}
+            <h1 class="govuk-heading-l">Organisation bank or building society account details</h1>
+            <p class="govuk-body">As Senior Responsible Officer you are the only person in your organisation who is able to add and view bank details.</p>
+            <p class="govuk-body">We need this information to reimburse your training costs.</p>
+            <div class="govuk-warning-text">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-visually-hidden">Warning</span>
+                    Personal accounts must not be used.
+                </strong>
+            </div>
+            <div
+                class="govuk-form-group {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountName != 'valid' %}govuk-form-group--error{% endif %}">
+                <label class="govuk-label" for="name-on-the-account">
+                    Name on the account
+                </label>
+                <div id="account-name-hint" class="govuk-hint">
+                    Enter the name of your organisation exactly as it appears on the account
+                </div>
+                {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountName != 'valid' %}
+                <p id="accountName-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> {% if data.submitError.accountName == 'missing' %}Enter the name on the account {% elif data.submitError.accountName == 'tooLong' %}Name on the account must be no more than 18 characters{% endif %}
+                </p>
+                {% endif %}
+                <input
+                    class="govuk-input {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountName != 'valid' %}govuk-input--error{% endif %}"
+                    id="name-on-the-account" name="nameOnTheAccount" type="text" spellcheck="false" autocomplete="name" value="{{ data.nameOnTheAccount | default ('') }}" aria-describedby="account-name-hint">
+            </div>
+            <div class="govuk-form-group {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.sortCode != 'valid' %}govuk-form-group--error{% endif %}">
+                <label class="govuk-label" for="sort-code">
+                    Sort code
+                </label>
+                <div id="sort-code-hint" class="govuk-hint">
+                    Must be 6 digits long
+                </div>
+                {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.sortCode != 'valid' %}
+                <p id="sortCode-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> {% if data.submitError.sortCode == 'missing' %} Enter a sort code{% elif data.submitError.sortCode == 'invalid' %} Enter a valid sort code like 309430{% endif %}
+                </p>
+                {% endif %}
+                <input class="govuk-input govuk-input--width-5 govuk-input--extra-letter-spacing {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.sortCode != 'valid' %}govuk-input--error{% endif %}" id="sort-code"
+                    name="sortCode" type="text" spellcheck="false" aria-describedby="sort-code-hint"
+                    inputmode="numeric" value="{{ data.sortCode | default ('') }}">
+            </div>
+            <div class="govuk-form-group {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountNumber != 'valid' %}govuk-form-group--error{% endif %}">
+                <label class="govuk-label" for="account-number">
+                    Account number
+                </label>
+                <div id="account-number-hint" class="govuk-hint">
+                    Must be between 6 and 8 digits long
+                </div>
+                {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountNumber != 'valid' %}
+                <p id="sortCode-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> {% if data.submitError.accountNumber == 'missing' %} Enter an account number{% elif data.submitError.accountNumber == 'invalid' %} Enter a valid account number like 00733445{% elif data.submitError.accountNumber == 'lengthIssue' %} Account number must be between 6 and 8 digits{% endif %}
+                </p>
+                {% endif %}
+                <input class="govuk-input govuk-input--width-10 govuk-input--extra-letter-spacing {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountNumber != 'valid' %}govuk-input--error{% endif %}" id="account-number"
+                    name="accountNumber" type="text" spellcheck="false" aria-describedby="account-number-hint"
+                    inputmode="numeric" value="{{ data.accountNumber | default ('') }}">
+            </div>
+            <div class="govuk-form-group {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.buildingSociety != 'valid' %}govuk-form-group--error{% endif %}">
+                <label class="govuk-label" for="roll-number">
+                    Building society roll number (if you have one)
+                </label>
+                <div id="roll-number-hint" class="govuk-hint">
+                    You can find it on your card, statement or passbook
+                </div>
+                {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.buildingSociety != 'valid' %}
+                <p id="sortCode-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> {% if data.submitError.buildingSociety == 'invalid' %} Building society roll number must only include letters a to z, numbers, hyphens, spaces, forward slashes and full stops{% elif data.submitError.buildingSociety == 'lengthIssue' %} Building society roll number must be between 1 and 18 characters{% endif %}
+                </p>
+                {% endif %}
+                <input class="govuk-input govuk-input--width-10 govuk-input--extra-letter-spacing {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.buildingSociety != 'valid' %}govuk-input--error{% endif %}" id="roll-number"
+                    name="rollNumber" type="text" spellcheck="false" aria-describedby="roll-number-hint" value="{{ data.rollNumber | default ('') }}">
+            </div>
+
+            <h2 class="govuk-heading-m">What happens next</h2>
+            <p class="govuk-body">These bank details will now be verified and we will be in touch if there are any issues.</p>
+            <p class="govuk-body">You can start submitting claims, but you will not receive payment until verification is complete.</p>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Add bank details
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% block pageTitle %}
+Duplicate learner - Claim: {{data.id}}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">National Insurance number already in use</h1>
+        
+        <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-visually-hidden">Warning</span>
+                The new learner has a National Insurance number that already exists for another learner.
+            </strong>
+        </div>
+
+        <p class="govuk-body"> Here are the details of both learners, with differences <mark
+                class="hods-highlight"><strong>highlighted</strong></mark>.</p>
+    </div>
+    <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-m">New learner details</h2>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Last (family) name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.familyName | learnerMatch(data.learnerMatch.familyName, "new") }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    First (given) name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.givenName | learnerMatch(data.learnerMatch.givenName, "new") }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    National Insurance number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.nationalInsuranceNumber | learnerMatch(data.learnerMatch.id, "new") }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Job title
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.jobTitle | learnerMatch(data.learnerMatch.jobTitle, "new") }}
+                </dd>
+            </div>
+        </dl>
+    </div>
+    <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-m">Existing learner details</h2>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Last (family) name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.familyName | learnerMatch(data.learnerMatch.familyName, "match") }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    First (given) name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.givenName | learnerMatch(data.learnerMatch.givenName, "match") }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    National Insurance number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.nationalInsuranceNumber | learnerMatch(data.learnerMatch.id, "match") }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Job title
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.jobTitle | learnerMatch(data.learnerMatch.jobTitle, "match") }}
+                </dd>
+            </div>
+        </dl>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+
+        <p class="govuk-body">
+            You cannot currently update an existing learner record. So you can either add the existing learner to the claim and discard the new learner, or go back and update the new learner.
+        </p>
+
+        <form action="../add-learner?learnerSelection={{ data.learnerMatch.id }}" method="post" novalidate>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Add existing learner to claim
+                </button>
+                <a class="govuk-link govuk-link--no-visited-state" href="add-learner">Go back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
