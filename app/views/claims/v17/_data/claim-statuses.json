@@ -1,0 +1,32 @@
+[
+    {
+        "id": "not-yet-submitted",
+        "name": "Not yet submitted",
+        "description": "Claims that have not yet been submitted. They may still need information adding.",
+        "distribution": 0.25
+    },
+    {
+        "id": "queried",
+        "name": "Sent back for editing",
+        "description": "Claims that have been submitted but need amending.",
+        "distribution": 0.10
+    },
+    {
+        "id": "submitted",
+        "name": "Submitted",
+        "description": "Claims that have been submitted for processing.",
+        "distribution": 0.30
+    },
+    {
+        "id": "rejected",
+        "name": "Rejected",
+        "description": "Claims that have been rejected.",
+        "distribution": 0.05
+    },
+    {
+        "id": "approved",
+        "name": "Approved",
+        "description": "Claims that have been approved for payment.",
+        "distribution": 0.30
+    }
+]

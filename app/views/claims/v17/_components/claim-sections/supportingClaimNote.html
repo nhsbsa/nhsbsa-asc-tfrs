@@ -1,0 +1,45 @@
+{% if is40Part == "true" %}
+    {% set submissionToUse = pairSubmission %}
+    {% set claimToUse = pairClaim %}
+{% else %}
+    {% set submissionToUse = submission %}
+    {% set claimToUse = claim %}
+{% endif %}
+
+{% if (not submissionToUse.supportingNote) %}
+    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+        <dt class="govuk-summary-list__key">
+            Supporting information (optional)
+        </dt>
+         {% if (is40Part and claim.status == "rejected") or (is40Part and (claim.status == "not-yet-submitted" or claim.status == "submitted" or claim.status == "queried")) %}
+         <dd class="govuk-summary-list__value">
+                <p class="govuk-caption-m">&#8212</p>
+            </dd>
+        {% elif claimToUse.status != "not-yet-submitted" and claimToUse.status != "queried" %}
+            <dd class="govuk-summary-list__value">
+                <p class="govuk-caption-m">No supporting information added to claim before submission.</p>
+            </dd>
+        {% else %}
+            <dd class="govuk-summary-list__value">
+                <a class="govuk-link govuk-link--no-visited-state" href="add-supporting-note">Add supporting information</a>
+            </dd>
+        {% endif %}
+    </div>
+
+{% else %}
+
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Supporting information {% if ( claimToUse | checkIfUpdated("supportingNote")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+        </dt>
+        <dd class="govuk-summary-list__value">
+            <p class="govuk-body">{{submissionToUse.supportingNote}}</p>
+        </dd>
+        {% if (claimToUse.status == "not-yet-submitted" or claimToUse.status == "queried")%}
+            <dd class="govuk-summary-list__actions">
+                <a class="govuk-link govuk-link--no-visited-state" href="add-supporting-note">Change<span
+                    class="govuk-visually-hidden"> supporting information</span></a>
+            </dd>
+        {% endif %}
+    </div>
+{% endif %}

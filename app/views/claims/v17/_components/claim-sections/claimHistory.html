@@ -1,0 +1,26 @@
+<h2 class="govuk-heading-m">Claim history</h2>
+<div class="moj-timeline">
+
+  {% if pairClaim != null %}
+    {% for submission in pairClaim.submissions | orderByMostRecent %}
+          {% set type = pairClaim.claimType %}
+          {% include "./claim-history/timeline-items.html" %}
+    {% endfor %}
+  {% endif %}
+
+  {% for submission in claim.submissions | orderByMostRecent %}
+      {% set type = claim.claimType %}
+      {% include "./claim-history/timeline-items.html" %}
+  {% endfor %}
+
+  <div class="moj-timeline__item">
+    <div class="moj-timeline__header">
+      <h3 class="moj-timeline__title">Created</h3>
+      <p class="moj-timeline__byline">by {{(claim.createdBy | findUser(data.org)).givenName}} {{(claim.createdBy| findUser(data.org)).familyName}}</p>
+    </div>
+    <p class="moj-timeline__date">
+      <time datetime="{{ claim.createdDate }}">{{ claim.createdDate | govukDate }} at {{ claim.createdDate | govukTime }}</time>
+    </p>
+  </div>
+
+</div>
