@@ -558,7 +558,6 @@ function checkChange(claim) {
         (lastQueried.learnerID !== draftClaim.learnerID) ||
         (lastQueried.startDate !== draftClaim.startDate) ||
         (lastQueried.costDate !== draftClaim.costDate) ||
-        (lastQueried.supportingNote !== draftClaim.supportingNote) ||
         (lastQueried.completionDate !== draftClaim.completionDate) ||
         (lastQueried.evidenceOfCompletion !== draftClaim.evidenceOfCompletion) ||
         (lastQueried.evidenceOfPayment.length !== draftClaim.evidenceOfPayment.length)

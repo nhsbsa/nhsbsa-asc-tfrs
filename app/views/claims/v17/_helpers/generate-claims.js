@@ -90,7 +90,6 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         outcome: null,
         note: null
       },
-      supportingNote: null,
       processedDate: null,
       processedBy: null
     }
@@ -152,7 +151,6 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
             outcome: null,
             note: null
           },
-          supportingNote: null,
           processedDate: null,
           processedBy: null
         }
@@ -201,7 +199,6 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         outcome: null,
         note: null
       },
-      supportingNote: null,
       processedDate: faker.date.between({ from: submissionDateA, to: new Date() }),
       processedBy: faker.helpers.arrayElement(backOfficeStaff.processors)
     }
@@ -232,7 +229,6 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         outcome: null,
         note: null
       },
-      supportingNote: null,
       processedDate: null,
       processedBy: null
     }
@@ -282,7 +278,6 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
           outcome: submissionB.evidenceOfCompletionReview.outcome,
           note: submissionB.evidenceOfCompletionReview.note
         },
-        supportingNote: submissionB.supportingNote,
         processedDate: null,
         processedBy: null
       }
