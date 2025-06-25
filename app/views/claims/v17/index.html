@@ -17,7 +17,7 @@ GOV.UK prototype - {{serviceName}}
             <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
                 <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Full Prototype</h2>
                 <p class="govuk-body">This will take to the full version of the prototype.</p>
-                <form action="./load-data" method="post" novalidate>
+                <form action="scenario-picker?journey=organisation" method="post" novalidate>
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="user-type">
                           Choose user type
@@ -30,24 +30,7 @@ GOV.UK prototype - {{serviceName}}
                             <option value="submitter">Submitter</option>
                         </select>
                     </div>
-                    <div class="govuk-form-group">
-                        <label class="govuk-label" for="org">
-                            Choose organisation
-                        </label>
-                        <div id="org-hint" class="govuk-hint">
-                            These different organisations show different states of the service.
-                        </div>
-                        <select class="govuk-select" id="orgID" name="orgID" aria-describedby="org-hint">
-                            <option value="A02944934" selected>Evergreen Care home</option>
-                            <option value="B13299931">Teatree Care</option>
-                            <option value="C63281491">Anika Care Ltd</option>
-                            <option value="D62749203">Denhams Care Home</option>
-                            <option value="G91774723">Pinetree Manor Care Centre</option>
-                            <option value="G91371231">Kingscourt Care Home</option>
-                            <option value="F87223491">Farifields Care home</option>
-                        </select>
-                    </div>
-                    <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="./load-data">
+                    <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" >
                         Start full prototype
                     </button>
                 </form>
