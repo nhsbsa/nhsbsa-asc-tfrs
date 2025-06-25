@@ -660,8 +660,14 @@ router.post('/create-learner', function (req, res) {
       req.session.data.learners.push(learner)
 
       for (const c of req.session.data.claims) {
-        if (claimID == c.claimID) {
-          c.learner = learner
+        if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+          let submission = null
+          if (c.status == "queried") {
+            submission = getDraftSubmission(c)
+          } else {
+            submission = getMostRelevantSubmission(c)
+          }
+          submission.learnerID = learner.id
           break;
         }
       }
