@@ -270,7 +270,7 @@ function newTUClaim(req, input, type) {
       paidDate: null,
       costDate: null,
       evidenceOfPayment: [],
-      evidenceOfCompletion: null,
+      evidenceOfCompletion: [],
       completionDate: null
     };
   } else if (type == "60") {
@@ -288,7 +288,7 @@ function newTUClaim(req, input, type) {
       paidDate: null,
       costDate: null,
       evidenceOfPayment: [],
-      evidenceOfCompletion: null,
+      evidenceOfCompletion: [],
       completionDate: null
     };
   } else if (type == "40") {
@@ -320,7 +320,7 @@ function newTUClaim(req, input, type) {
       paidDate: null,
       costDate,
       evidenceOfPayment,
-      evidenceOfCompletion: null,
+      evidenceOfCompletion: [],
       completionDate: null
     };
   }
