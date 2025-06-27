@@ -701,8 +701,13 @@ function loadData(req, orgID) {
         claim.workplaceID = req.session.data.org.workplaceID
     }
 
-  req.session.data['claims'] = filteredClaims.concat(preSetClaims);
-  console.log(filteredClaims.length + ' of ' + allClaims.length + ' claims loaded')
+if (req.session.data.org.numberOfClaims > 0) {
+    req.session.data['claims'] = filteredClaims.concat(preSetClaims);
+    console.log(filteredClaims.length + ' of ' + allClaims.length + ' claims loaded')
+} else {
+    req.session.data['claims'] = [];
+    console.log('0 claims loaded')
+}
 
   console.log('loading in learners file')
   req.session.data['learners'] = loadJSONFromFile(learnersFile, path)
