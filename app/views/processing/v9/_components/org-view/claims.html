@@ -41,7 +41,7 @@
             <p class="govuk-body">This organisation has not yet submitted any claims.</p>
         {% else %}
         <div class="moj-search">
-              <form action="../search-claim-id-orgView" method="post">
+              <form action="../search-claim-id" method="post">
                 <div class="govuk-form-group {% if data.invalidIDError or data.emptyError or data.notFound %}govuk-form-group--error{% endif %}">
                   <div id="search-hint" class="govuk-hint moj-search__hint">
                     <label for="claimID">Enter a claim reference.</label> This could be with or without an -A, -B or -C suffix. For example, H2T-C813-3XF7-C or H2T-C813-3XF7
