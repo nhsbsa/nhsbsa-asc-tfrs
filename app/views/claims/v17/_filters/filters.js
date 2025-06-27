@@ -307,7 +307,7 @@ addFilter('trainingSearch', function (search, training, claim, allTraining) {
         claimTraining = findCourseByCode(submission.trainingCode, allTraining)
     }
     
-    if ((claim == null) || (claim.status == "queried" && (training.fundingModel == claimTraining.fundingModel))) {
+    if ((claim == null) || (claim.status == "queried" && (claim.claimType == "100" || (training.fundingModel == claimTraining.fundingModel )))) {
         const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
         const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
         const formattedTrainingCode = removeSpacesAndCharactersAndLowerCase(training.code);
