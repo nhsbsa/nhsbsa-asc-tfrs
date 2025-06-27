@@ -137,7 +137,7 @@ router.post('/search-claim-id', function (req, res) {
     return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
   }
   if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
-    req.session.data.processClaimStep = "notStarted"
+    req.session.data.processClaimStep = "inProgress"
     req.session.data.orgTab = "singleClaim"
 
     return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgId=' + foundClaim.workplaceID)
@@ -633,7 +633,7 @@ router.post('/search-claim-id-orgView', function (req, res) {
   }
   if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
     
-    req.session.data.processClaimStep = "notStarted"
+    req.session.data.processClaimStep = "inProgress"
     req.session.data.orgTab = "singleClaim"
     return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgId=' + foundOrg)
   } else {
