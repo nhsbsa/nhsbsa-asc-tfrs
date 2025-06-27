@@ -131,24 +131,24 @@ router.post('/search-claim-id', function (req, res) {
     let singleClaim = c.claimID.toLowerCase().replace(/[\s-]/g, '');
 
     // single searched full claim id
-    if (singleClaim == searchedID && orgID !== null && c.workplaceID == orgID) {
+    if (singleClaim == searchedID && (orgID == null || c.workplaceID == orgID)) {
       foundClaim = c
     }
   }
   if (foundClaim == null) {
-    if (orgID === null) {
+    if (orgID == null) {
       return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
     } else {
       return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + orgID + '&notFound=true&currentPage=1')
     }
-  }
-  if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
+  } else if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
+
     req.session.data.processClaimStep = "inProgress"
     req.session.data.orgTab = "singleClaim"
 
     return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgId=' + foundClaim.workplaceID)
   } else {
-    if (orgID === null) {
+    if (orgID == null) {
       return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
     } else {
       return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true&currentPage=1')
