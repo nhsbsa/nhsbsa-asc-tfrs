@@ -1,4 +1,25 @@
 <h2 class="govuk-heading-m">Claim history</h2>
+
+{% if claim.status != "not-yet-submitted" and (claim.submissions | length) > 1 and claim.claimType == "100" %}
+  <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=100">Compare submissions</a></p>
+{% endif %}
+
+
+{% if (pairClaim.status == "not-yet-submitted" or pairClaim.status == "submitted" or pairClaim.status == "queried") and (pairClaim.submissions | length) > 1 and pairClaim.claimType == "40"%}
+    <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=40">Compare 40 part submissions</a></p>
+{% endif %}
+{% if (claim.status != "not-yet-submitted"and claim.submissions.length > 1 and claim.claimType == "60") %}
+  <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=60" >Compare 60 part submissions</a></p>
+{% endif %}
+{% if (pairClaim.status == "approved" or pairClaim.status == "rejected") and (pairClaim.submissions | length) > 1 and pairClaim.claimType == "40"%}
+    <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=40">Compare 40 part submissions</a></p>
+{% endif %}
+
+
+{% if (claim.submissions | length) > 1 or (pairClaim.submissions | length) > 1%}
+  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+{% endif %}
+
 <div class="moj-timeline">
 
   {% if pairClaim != null %}
