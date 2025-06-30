@@ -114,12 +114,6 @@
           <h2 class="govuk-heading-l" id="sixtyPartClaim">60 part</h2>
           <p class="govuk-body">Claim reference for the <strong class="govuk-tag govuk-tag--yellow">60</strong> part: {{ claim.claimID }}</p>
       
-          {# {% if (claim.submissions | length) <= 1 %}
-            <p class="govuk-body">This was submitted <strong>once</strong>.</p>
-          {% else %}
-            <p class="govuk-body">This has been submitted <strong>{{(claim.submissions | length)}}</strong> times.</p>
-          {% endif %} #}
-    
     {% endif %}
 
 
@@ -161,11 +155,6 @@
         {% endif %}
       {% endif %}
 
-      {# {% if (claim.submissions | length) <= 1 %}
-            <p class="govuk-body">This has been submitted <strong>once</strong>.</p>
-          {% else %}
-            <p class="govuk-body">This has been submitted <strong>{{(claim.submissions | length)}}</strong> times.</p>
-          {% endif %} #}
       <dl class="govuk-summary-list">
   {% endif %}
 
