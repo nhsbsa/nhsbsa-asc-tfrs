@@ -4,11 +4,15 @@
     <td class="govuk-table__cell">{{ training.groupCategory }}</td>
     <td class="govuk-table__cell">{{ training.title }}</td>
     <td class="govuk-table__cell  govuk-table__cell--numeric">
+        {% if claim != null and claim.status == "queried" and claim.claimType == "60" and training.fundingModel != "split" %}
+        <span class="govuk-caption-m">This training is not eligible for the 60/40 funding model.</span>
+        {% else %}
         <form method="post" action="../add-training" class="govuk-!-margin-0">
             <input type="hidden" name="trainingSelection" value="{{ training.code }}">
             <input type="hidden" name="viewOnly" value='false'>
             <button type="submit" class="govuk-button">Add <span class="govuk-visually-hidden">&nbsp; course {{ training.code }}</span> to claim</button>
         </form>
+        {% endif %}
     </td>
 </tr>
 {% elif trainingGroup.groupTitle == "Qualifications" %}
@@ -18,11 +22,15 @@
     <td class="govuk-table__cell">{{ training.title }}</td>
     <td class="govuk-table__cell">{{ training.awardingOrganisation }}</td>
     <td class="govuk-table__cell  govuk-table__cell--numeric">
+        {% if claim != null and claim.status == "queried" and claim.claimType == "60" and training.fundingModel != "split" %}
+        <span class="govuk-caption-m">This training is not eligible for the 60/40 funding model.</span>
+        {% else %}
         <form method="post" action="../add-training" class="govuk-!-margin-0">
             <input type="hidden" name="trainingSelection" value="{{ training.code }}">
             <input type="hidden" name="viewOnly" value='false'>
             <button type="submit" class="govuk-button">Add<span class="govuk-visually-hidden">&nbsp; qualification {{ training.code }}</span> to claim</button>
         </form>
+        {% endif %}
     </td>
 </tr>
 {% endif %}

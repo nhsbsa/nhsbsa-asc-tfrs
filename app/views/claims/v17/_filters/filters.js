@@ -301,22 +301,12 @@ addFilter('learnerSearch', function (search, learner) {
 
 addFilter('trainingSearch', function (search, training, claim, allTraining) {
 
-    let claimTraining = null
-    if (claim) {
-        const submission = getMostRelevantSubmission(claim)
-        claimTraining = findCourseByCode(submission.trainingCode, allTraining)
-    }
-    
-    if ((claim == null) || (claim.status == "queried" && (claim.claimType == "100" || (training.fundingModel == claimTraining.fundingModel )))) {
-        const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
-        const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
-        const formattedTrainingCode = removeSpacesAndCharactersAndLowerCase(training.code);
-    
-        if (formattedTrainingTitle.includes(formattedSearch) || formattedTrainingCode.includes(formattedSearch)) {
-            return true
-        }
-    } else {
-        return false
+    const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
+    const formattedTrainingTitle = removeSpacesAndCharactersAndLowerCase(training.title);
+    const formattedTrainingCode = removeSpacesAndCharactersAndLowerCase(training.code);
+
+    if (formattedTrainingTitle.includes(formattedSearch) || formattedTrainingCode.includes(formattedSearch)) {
+        return true
     }
 
     return false
