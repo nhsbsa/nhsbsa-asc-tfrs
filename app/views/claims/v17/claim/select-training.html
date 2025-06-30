@@ -39,7 +39,7 @@
         </div>
         {% endif %}
         {% if ( claim != null ) %}
-            <span class="govuk-caption-l">Queried claim</span>
+            <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
         {% else %}
             <span class="govuk-caption-l">New claim</span>
         {% endif %}
