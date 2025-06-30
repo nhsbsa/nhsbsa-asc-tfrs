@@ -24023,5 +24023,131 @@
         "processedBy": null
       }
     ]
+  },
+  {
+    "claimID": "1EB-WNNE-QMFE-B",
+    "workplaceID": "C63281491",
+    "claimType": "60",
+    "status": "approved",
+    "createdDate": "2024-04-25T16:47:01.125Z",
+        "submitter": "ivy.montgomery@anikacare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2024-11-21T12:09:36.697Z",
+        "trainingCode": "601/6128/0",
+        "learnerID": "EL 78 2F 05 S",
+        "startDate": "2024-07-22T06:30:21.310Z",
+        "costDate": "2024-07-19T23:05:59.240Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "costPerLearner": 54
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": "2025-03-05T22:31:22.483Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2024-11-19T12:09:36.697Z",
+        "trainingCode": "601/6128/0",
+        "learnerID": "EL 78 2F 05 S",
+        "startDate": "2024-07-21T06:30:21.310Z",
+        "costDate": "2024-07-19T23:05:59.240Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "njahsdjad",
+          "costPerLearner": 54
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": "2025-03-04T22:31:22.483Z",
+        "processedBy": "Flossie Gleason"
+      }
+    ]
+  },
+  {
+    "claimID": "1EB-WNNE-QMFE-C",
+    "workplaceID": "C63281491",
+    "claimType": "40",
+    "status": "approved",
+    "createdDate": "2024-04-25T16:47:01.125Z",
+    "createdBy": "ivy.montgomery@anikacare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2025-05-11T20:32:08.174Z",
+        "trainingCode": "601/6128/0",
+        "learnerID": "EL 78 2F 05 S",
+        "startDate": "2024-07-22T06:30:21.310Z",
+        "costDate": "2024-07-19T23:05:59.240Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "completionDate": "2025-03-04T03:06:55.575Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "costPerLearner": 54
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2025-06-02T20:57:13.612Z",
+        "processedBy": "Allan Connelly"
+      },
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2025-05-10T20:32:08.174Z",
+        "trainingCode": "601/6128/0",
+        "learnerID": "EL 78 2F 05 S",
+        "startDate": "2024-07-22T06:30:21.310Z",
+        "costDate": "2024-07-19T23:05:59.240Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "completionDate": "2025-03-03T03:06:55.575Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": "sbjhsbjs",
+          "costPerLearner": 54
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "sjhbss"
+        },
+        "processedDate": "2025-06-01T20:57:13.612Z",
+        "processedBy": "Allan Connelly"
+      }
+    ]
   }
 ]
