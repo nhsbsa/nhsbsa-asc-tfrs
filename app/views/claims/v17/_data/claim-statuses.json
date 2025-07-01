@@ -7,8 +7,8 @@
     },
     {
         "id": "queried",
-        "name": "Sent back for editing",
-        "description": "Claims that have been submitted but need amending.",
+        "name": "Needs action",
+        "description": "Claims sent back by processors because they need some edits before they can progress.",
         "distribution": 0.10
     },
     {
@@ -20,7 +20,7 @@
     {
         "id": "rejected",
         "name": "Rejected",
-        "description": "Claims that have been rejected.",
+        "description": "Claims that have been rejected and therefore cannot be edited and resubmitted.",
         "distribution": 0.05
     },
     {
