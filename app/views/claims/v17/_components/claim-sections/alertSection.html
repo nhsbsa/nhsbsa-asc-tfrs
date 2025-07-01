@@ -32,7 +32,8 @@
     {% endif %}
 
     {% if claim.status == "rejected" %}
-        <h2 class="moj-alert__heading govuk-!-static-margin-bottom-3">Why your claim was rejected</h2>
+        <h2 class="moj-alert__heading">Why your claim was rejected</h2>
+        <p class="govuk-body">This claim has been rejected which means it cannot be edited and resubmitted. You'll find the reasons below.</p>
 
         {% if noteSubmission.evidenceOfPaymentReview.outcome == "fail" %}
         <p class="govuk-body"><strong>Evidence of payment: </strong>{{noteSubmission.evidenceOfPaymentReview.note}}</p>
@@ -67,7 +68,9 @@
     {% endif %}
 
     {% if claim.status == "rejected" %}
-        <h2 class="moj-alert__heading govuk-!-static-margin-bottom-3">Why the 60 part of your claim was rejected</h2>
+        <h2 class="moj-alert__heading">Why the 60 part of your claim was rejected</h2>
+        <p class="govuk-body">This claim has been rejected which means it cannot be edited and resubmitted. You'll find the reasons below.</p>
+
         {% if noteSubmission.evidenceOfPaymentReview.outcome == "fail" %}
         <p class="govuk-body"><strong>Evidence of payment: </strong>{{noteSubmission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
@@ -98,7 +101,9 @@
         {% endif %}
 
         {% if pairClaim.status == "rejected" %}
-            <h2 class="moj-alert__heading govuk-!-static-margin-bottom-3">Why the 40 part of your claim was rejected</h2>
+            <h2 class="moj-alert__heading">Why the 40 part of your claim was rejected</h2>
+            <p class="govuk-body">This claim has been rejected which means it cannot be edited and resubmitted. You'll find the reasons below.</p>
+
             {% if notePairSubmission.evidenceOfCompletionReview.outcome == "fail" %}
             <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.evidenceOfCompletionReview.note}}</p>
             {% endif %}
