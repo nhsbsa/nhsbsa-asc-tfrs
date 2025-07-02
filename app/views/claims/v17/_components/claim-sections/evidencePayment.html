@@ -29,7 +29,7 @@
     <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-value--error {% endif %}">
       {{ submission.costDate | govukDate }}
     </dd>
-    {% if (claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType != "40" and not data.showNote %}
+    {% if (claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType != "40" %}
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">
           payment date</span></a>
@@ -64,7 +64,7 @@
         <p><a class="govuk-link" href="/public/images/{{payment}}" target="_blank">{{payment}} (opens in new tab)</a></p>
       {% endfor %}
     </dd>
-    {% if (claim.status == "queried" or claim.status == "not-yet-submitted")and not data.showNote %}
+    {% if (claim.status == "queried" or claim.status == "not-yet-submitted") %}
       <dd class="govuk-summary-list__actions">
         <ul class="govuk-summary-list__actions-list">
           <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"

@@ -52,7 +52,7 @@
       {{ pairSubmission.completionDate | govukDate }}
     {% endif %}
   </dd>
-  {% if (not data.showNote and (claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried"))  %}
+  {% if ((claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried"))  %}
   <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-value--error {% endif %}">
     <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date">Change<span class="govuk-visually-hidden">
       completion date</span></a>
@@ -96,7 +96,7 @@
         <p><a class="govuk-link" href="/public/images/{{ pairSubmission.evidenceOfCompletion }}" target="_blank">{{ pairSubmission.evidenceOfCompletion }}  (opens in new tab)</a></p>
       {% endif %}
     </dd>
-    {% if ( not data.showNote and (claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted")) %}
+    {% if ( (claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted")) %}
       <dd class="govuk-summary-list__actions">
         <ul class="govuk-summary-list__actions-list">
           <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
