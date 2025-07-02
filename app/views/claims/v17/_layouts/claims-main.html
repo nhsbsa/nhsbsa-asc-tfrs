@@ -41,7 +41,7 @@
           </button>
           <ul class="govuk-service-navigation__list" id="navigation">
             <li class="govuk-service-navigation__item {% if data.tabLocation == 'claims' %}govuk-service-navigation__item--active{% endif %}">
-              <a class="govuk-service-navigation__link" href="/claims/v17/manage-claims-home?tabLocation=claims" {% if data.tabLocation == 'claims' %}aria-current="true"{% endif %}>
+              <a class="govuk-service-navigation__link" href="/claims/v17/manage-claims-home?tabLocation=claims&submitError=" {% if data.tabLocation == 'claims' %}aria-current="true"{% endif %}>
                 <strong class="govuk-service-navigation__active-fallback">Manage claims</strong>
               </a>
             </li>
