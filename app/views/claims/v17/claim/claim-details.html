@@ -49,7 +49,7 @@
     <a href="advanced-search" class="govuk-back-link">Back</a>
   {% elif (data.fromSearchId) %}
     <a href="../manage-claims-home?fromSearchId" class="govuk-back-link">Back</a>
-  {% elif not (claim.status == "not-yet-submitted") and not (claim.status == "queried") %}
+  {% elif (claim.status != "not-yet-submitted") and (claim.status != "queried") and (pairClaim.status != "queried") and (pairClaim.status != "not-yet-submitted")%}
     <a href="../manage-claims?statusID={{ data.statusID }}" class="govuk-back-link">Back</a>
   {% endif %} 
 {% endblock %}
