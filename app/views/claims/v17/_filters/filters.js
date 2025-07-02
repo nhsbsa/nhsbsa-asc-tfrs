@@ -110,7 +110,7 @@ addFilter('errorSummary', function (claim, submitError) {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be in the past</a></li>')
     }
     if (submitError.change == false ) {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#">You cannot submit a queried claim without making changes</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#action-alert-box">You cannot submit a queried claim without making changes</a></li>')
     }
     return errorSummaryStr
 }, { renderAsHtml: true })
