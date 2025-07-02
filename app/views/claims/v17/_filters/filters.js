@@ -806,3 +806,22 @@ addFilter('generateTimelineData', function(submission, claimType, org, lastBoole
 
     return timelineData
 })
+
+addFilter('splitISODate', function(inputDate) {
+    const outputDate = {
+        day: '',
+        month: '',
+        year: ''
+    }
+    if (inputDate != null) {
+        const ISODate = new Date(inputDate)
+        
+
+        outputDate.day = ISODate.getDate()
+        outputDate.month = ISODate.getMonth() + 1
+        outputDate.year = ISODate.getFullYear()
+
+    }
+
+    return outputDate
+})
