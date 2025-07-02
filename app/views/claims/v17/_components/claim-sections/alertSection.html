@@ -15,7 +15,7 @@
 
     {% if claim.status == "queried" %}
         <h2 class="moj-alert__heading">Edit claim and resubmit</h2>
-        <p class="govuk-body">Once you've made these requested edits, you can resubmit the claim for processing.</p>
+        <p class="govuk-body">Once you've made these requested edits you can resubmit the claim for processing.</p>
         {% if noteSubmission.evidenceOfPaymentReview.outcome == "queried" %}
         <p class="govuk-body"><strong>Evidence of payment:</strong> {{noteSubmission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
@@ -28,7 +28,7 @@
 
     {% if claim.status == "submitted" %}
         <h2 class="moj-alert__heading">Your claim is being processed</h2>
-        <p class="govuk-body">This usually takes 2 to 6 weeks to process a claim. You should hear back from us by {{(noteSubmission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
+        <p class="govuk-body">This usually takes 2 to 6 weeks. You should hear back from us by {{(noteSubmission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
     {% endif %}
 
     {% if claim.status == "rejected" %}
@@ -54,7 +54,7 @@
 
     {% if claim.status == "queried" %}
         <h2 class="moj-alert__heading">Edit claim and resubmit</h2>
-        <p class="govuk-body">Once you've made these requested edits, you can resubmit the <a class="govuk-link" href="#sixtyPartClaim">60 part</a> of your claim for processing.</p>
+        <p class="govuk-body">Once you've made these requested edits you can resubmit the <a class="govuk-link" href="#sixtyPartClaim">60 part</a> of your claim for processing.</p>
         {% if noteSubmission.evidenceOfPaymentReview.outcome == "queried" %}
         <p class="govuk-body"><strong>Evidence of payment:</strong> {{noteSubmission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
@@ -64,7 +64,7 @@
 
     {% if claim.status == "submitted"%}
         <h2 class="moj-alert__heading">The 60 part of your claim is being processed</h2>
-        <p class="govuk-body">This usually takes 2 to 6 weeks to process a claim. You should hear back from us by {{(noteSubmission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
+        <p class="govuk-body">This usually takes 2 to 6 weeks. You should hear back from us by {{(noteSubmission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
     {% endif %}
 
     {% if claim.status == "rejected" %}
@@ -86,7 +86,7 @@
 
         {% if pairClaim.status == "queried" %}
             <h2 class="moj-alert__heading">Edit claim and resubmit</h2>
-            <p class="govuk-body">Once you've made these requested edits, you can resubmit the <a class="govuk-link" href="#fourtyPartClaim">40 part</a> of your claim for processing.</p>
+            <p class="govuk-body">Once you've made these requested edits you can resubmit the <a class="govuk-link" href="#fourtyPartClaim">40 part</a> of your claim for processing.</p>
             {% if notePairSubmission.evidenceOfCompletionReview.outcome == "queried" %}
             <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.evidenceOfCompletionReview.note}}</p>
             {% endif %}
@@ -97,7 +97,7 @@
 
         {% if pairClaim.status == "submitted"%}
             <h2 class="moj-alert__heading">The 40 part of your claim is being processed</h2>
-            <p class="govuk-body">This usually takes 2 to 6 weeks to process a claim. You should hear back from us by {{(notePairSubmission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
+            <p class="govuk-body">This usually takes 2 to 6 weeks. You should hear back from us by {{(notePairSubmission.submittedDate | duration(6, "weeks")) | govukDate }}.</p>
         {% endif %}
 
         {% if pairClaim.status == "rejected" %}
