@@ -1,6 +1,12 @@
 {% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 
+{% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+{% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+{% endif %}
+
 {% block pageTitle %}
 {% if (data["training-input"] == "" or data["training-input"].length < 3) %}Error: {% endif %}What course or qualification are you claiming for? — {{serviceName}} — GOV.UK
 {% endblock %}
