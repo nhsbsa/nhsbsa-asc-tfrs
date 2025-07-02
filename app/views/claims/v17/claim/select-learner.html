@@ -1,6 +1,12 @@
 {% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 
+{% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+{% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+{% endif %}
+
 {% block pageTitle %}
 {% if (data["learnerInput"] == "" or data["learnerInput"].length < 3) %}Error: {% endif %}Course or qualification learner — {{serviceName}} — GOV.UK
 {% endblock %}
@@ -106,10 +112,14 @@
                     <td class="govuk-table__cell">{{ learner.givenName }} {{ learner.familyName }}</td>
                     <td class="govuk-table__cell">{{ learner.jobTitle }}</td>
                     <td class="govuk-table__cell">
+                        {% if submission.learnerID == learner.id %}
+                        <span class="govuk-caption-m">Currently selected</span>
+                        {% else %}
                         <form method="post" action="../add-learner" class="govuk-!-margin-0">
                             <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
                             <button type="submit" class="govuk-button">Select <span class="govuk-visually-hidden">&nbsp; learner {{ learner.id }}</span></button>
                         </form>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endif %}

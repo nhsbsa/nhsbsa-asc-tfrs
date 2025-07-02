@@ -6,6 +6,8 @@
     <td class="govuk-table__cell  govuk-table__cell--numeric">
         {% if claim != null and claim.status == "queried" and claim.claimType == "60" and training.fundingModel != "split" %}
         <span class="govuk-caption-m">This training is not eligible for the 60/40 funding model.</span>
+        {% elif submission.trainingCode == training.code %}
+            <span class="govuk-caption-m">Currently selected</span>
         {% else %}
         <form method="post" action="../add-training" class="govuk-!-margin-0">
             <input type="hidden" name="trainingSelection" value="{{ training.code }}">
@@ -23,7 +25,9 @@
     <td class="govuk-table__cell">{{ training.awardingOrganisation }}</td>
     <td class="govuk-table__cell  govuk-table__cell--numeric">
         {% if claim != null and claim.status == "queried" and claim.claimType == "60" and training.fundingModel != "split" %}
-        <span class="govuk-caption-m">This training is not eligible for the 60/40 funding model.</span>
+            <span class="govuk-caption-m">This training is not eligible for the 60/40 funding model.</span>
+        {% elif submission.trainingCode == training.code %}
+            <span class="govuk-caption-m">Currently selected</span>
         {% else %}
         <form method="post" action="../add-training" class="govuk-!-margin-0">
             <input type="hidden" name="trainingSelection" value="{{ training.code }}">
