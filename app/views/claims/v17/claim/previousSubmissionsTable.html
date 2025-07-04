@@ -238,23 +238,6 @@
                 </tr>
                 {% endif %}
 
-                <tr class="govuk-table__row">
-                  <td class="govuk-table__cell"><strong>Supporting note</strong></td>
-                  {% for submission in sortedSubmissions %}
-                      {% if submission.supportingNote %}
-
-                      {% if (submission.supportingNote !== sortedSubmissions[loop.index0 + 1].supportingNote and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.supportingNote}}</strong></mark></td>
-                      {% else %}
-                        <td class="govuk-table__cell">{{submission.supportingNote}}</td>
-                      {% endif %}
-
-                      {% else %}
-                      <td class="govuk-table__cell">---</td>
-                      {% endif %}
-                    {%endfor %}
-              </tr>
-
               </tbody>
             </table>
           
