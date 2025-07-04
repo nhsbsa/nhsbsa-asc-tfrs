@@ -52,7 +52,7 @@ addFilter('variableDate', function (statusID) {
     if (statusID == 'not-yet-submitted') {
         return 'Created'
     } else if (statusID == 'queried') {
-        return 'Queried'
+        return 'Action requested'
     } else if (statusID == 'submitted') {
         return 'Submitted'
     } else if (statusID == 'rejected') {

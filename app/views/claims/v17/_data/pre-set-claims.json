@@ -882,6 +882,28 @@
         },
         "processedDate": "2024-07-24T00:49:20.058Z",
         "processedBy": "Allan Connelly"
+      },
+      {
+        "submitter": "elias.thornton@evergreencare.com",
+        "submittedDate": "2024-07-15T17:05:04.418Z",
+        "trainingCode": "601/6126/7",
+        "learnerID": "BF 73 4F 97 L",
+        "startDate": "2024-06-29T03:28:29.822Z",
+        "costDate": "2024-06-04T11:51:05.528Z",
+        "evidenceOfPayment": ["invoice1.pdf", "receipt1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "You have not shown that you have paid for the training.",
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2024-07-16T00:49:20.058Z",
+        "processedBy": "Allan Connelly"
       }
     ]
   },
