@@ -854,7 +854,7 @@ router.get('/showComparisonNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      res.redirect('claims/v17/claim/previousSubmissionsTable?subCount=' + subCount + '&id=' + claimID)
+      res.redirect('claim/previousSubmissionsTable?subCount=' + subCount + '&id=' + claimID)
     }
   }
 });
@@ -867,7 +867,7 @@ router.get('/hideComparisonNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      res.redirect('claims/v17/claim/previousSubmissionsTable' + '?id=' + claimID)
+      res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID)
     }
   }
 });
