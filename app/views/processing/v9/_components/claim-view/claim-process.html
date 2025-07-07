@@ -168,51 +168,15 @@
                                                 id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text"
                                                 value="{{ data.paymentReimbursementAmount | default ('') }}">
                                         </div>
-                                        
-                
-                                    </div>
-                                </div>
-                
-                                <div class="govuk-radios__item">
-                                    <input class="govuk-radios__input" id="paymentReject" name="payment" type="radio" value="reject"
-                                        data-aria-controls="conditional-payment-reject" {% if data.payment=='reject' %}checked{% endif
-                                        %}>
-                                    <label class="govuk-label govuk-radios__label" for="paymentReject">
-                                        No, reject
-                                    </label>
-                                </div>
-                                <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
-                                    id="conditional-payment-reject" data-maxlength="1000">
-                                    <div class="govuk-form-group govuk-character-count {% if data.paymentRejectNoteIncomplete %}govuk-form-group--error{% endif %}"
-                                        data-module="govuk-character-count">
-                                        <label class="govuk-label" for="payment-reject">
-                                            Why has this evidence been rejected?
-                                        </label>
-                                        <div id="payment-reject-note-hint" class="govuk-hint">
-                                            This note tells the submitter why their claim has been rejected
-                                        </div>
-                                        {% if data.paymentRejectNoteIncomplete %}
-                                        <p id="payment-reject-note-error" class="govuk-error-message">
-                                            <span class="govuk-visually-hidden">Error:</span>Complete note for evidence of
-                                            payment
-                                        </p>
-                                        {% endif %}
-                                        <textarea
-                                            class="govuk-textarea govuk-js-character-count {% if data.paymentRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
-                                            id="paymentRejectNote" name="paymentRejectNote" rows="21"
-                                            aria-describedby="payment-no-note-info note-hint">{{ data.paymentRejectNote | default ('') }}</textarea>
-                                        <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
-                                            You can enter up to 1000 characters
-                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="govuk-radios__item">
+                                                                <div class="govuk-radios__item">
                                     <input class="govuk-radios__input" id="paymentQueried" name="payment" type="radio" value="queried"
                                         data-aria-controls="conditional-payment-queried" {% if data.payment=='queried' %}checked{% endif
                                         %}>
                                     <label class="govuk-label govuk-radios__label" for="paymentQueried">
-                                        No, send back for editing
+                                        No - action required
                                     </label>
                                 </div>
                                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
@@ -220,10 +184,10 @@
                                     <div class="govuk-form-group govuk-character-count {% if data.paymentRejectNoteIncomplete %}govuk-form-group--error{% endif %}"
                                         data-module="govuk-character-count">
                                         <label class="govuk-label" for="payment-queried">
-                                            What does the organisation need to do meet the required criteria?
+                                            What action does the organisation need to take?
                                         </label>
                                         <div id="payment-queried-note-hint" class="govuk-hint">
-                                            This note tells the submitter what they need to edit before resubmitting
+                                            This note tells the organisation what edits they need to make before they resubmit this claim.
                                         </div>
                                         {% if data.paymentQueriedNoteIncomplete %}
                                         <p id="payment-queried-note-error" class="govuk-error-message">
@@ -236,6 +200,40 @@
                                             id="paymentRejectNote" name="paymentQueriedNote" rows="21"
                                             aria-describedby="payment-queried-note-info note-hint">{{ data.paymentQueriedNote | default ('') }}</textarea>
                                         <div id="payment-queried-note-info" class="govuk-hint govuk-character-count__message">
+                                            You can enter up to 1000 characters
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="paymentReject" name="payment" type="radio" value="reject"
+                                        data-aria-controls="conditional-payment-reject" {% if data.payment=='reject' %}checked{% endif
+                                        %}>
+                                    <label class="govuk-label govuk-radios__label" for="paymentReject">
+                                        No - reject
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                                    id="conditional-payment-reject" data-maxlength="1000">
+                                    <div class="govuk-form-group govuk-character-count {% if data.paymentRejectNoteIncomplete %}govuk-form-group--error{% endif %}"
+                                        data-module="govuk-character-count">
+                                        <label class="govuk-label" for="payment-reject">
+                                            Why has this claim been rejected?
+                                        </label>
+                                        <div id="payment-reject-note-hint" class="govuk-hint">
+                                            This note tells the organisation why their claim has been rejected and therefore cannot  be edited and resubmitted.
+                                        </div>
+                                        {% if data.paymentRejectNoteIncomplete %}
+                                        <p id="payment-reject-note-error" class="govuk-error-message">
+                                            <span class="govuk-visually-hidden">Error:</span>Complete note for evidence of
+                                            payment
+                                        </p>
+                                        {% endif %}
+                                        <textarea
+                                            class="govuk-textarea govuk-js-character-count {% if data.paymentRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
+                                            id="paymentRejectNote" name="paymentRejectNote" rows="21"
+                                            aria-describedby="payment-no-note-info note-hint">{{ data.paymentRejectNote | default ('') }}</textarea>
+                                        <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
                                             You can enter up to 1000 characters
                                         </div>
                                     </div>
@@ -269,23 +267,55 @@
                                     Yes
                                 </label>
                             </div>
+
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="completionQueried" name="completion" type="radio"
+                                    value="queried" data-aria-controls="conditional-queried-notes" {% if data.completion=='queried'
+                                    %}checked{% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="completionQueried">
+                                    No - action required
+                                </label>
+                            </div>
+                            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-queried-notes">
+                                <div class="govuk-form-group govuk-character-count {% if data.completionQueriedNoteIncomplete %}govuk-form-group--error {% endif %}"
+                                    data-module="govuk-character-count" data-maxlength="1000">
+                                    <label class="govuk-label" for="completionNote">
+                                        What action does the organisation need to take?
+                                    </label>
+                                    <div id="completionQueriedNote-hint" class="govuk-hint">
+                                        This note tells the organisation what edits they need to make before they resubmit this claim.
+                                    </div>
+                                    {% if data.completionQueriedNoteIncomplete %}
+                                    <p id="completion-queried-note-error" class="govuk-error-message">
+                                        <span class="govuk-visually-hidden">Error:</span> Complete note for evidence of completion
+                                    </p>
+                                    {% endif %}
+                                    <textarea
+                                        class="govuk-textarea govuk-js-character-count {% if data.completionQueriedNoteIncomplete %}govuk-textarea--error{% endif %}"
+                                        id="completionQueriedNote" name="completionQueriedNote" rows="21"
+                                        aria-describedby="completionNote-info completionNote-hint">{{ data.completionQueriedNote | default ('') }}</textarea>
+                                    <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
+                                        You can enter up to 1000 characters
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="govuk-radios__item">
                                 <input class="govuk-radios__input" id="completionReject" name="completion" type="radio"
                                     value="reject" data-aria-controls="conditional-reject-notes" {% if data.completion=='reject'
                                     %}checked{% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="completionReject">
-                                    No, reject
+                                    No - reject
                                 </label>
                             </div>
-            
                             <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-reject-notes">
                                 <div class="govuk-form-group govuk-character-count {% if data.completionRejectNoteIncomplete %}govuk-form-group--error {% endif %}"
                                     data-module="govuk-character-count" data-maxlength="1000">
                                     <label class="govuk-label" for="completionNote">
-                                        Why has this evidence been rejected?
+                                        Why has this claim been rejected?
                                     </label>
                                     <div id="completionRejectNote-hint" class="govuk-hint">
-                                        This note tells the submitter why their claim has been rejected
+                                        This note tells the organisation why their claim has been rejected and therefore cannot  be edited and resubmitted.
                                     </div>
                                     {% if data.completionRejectNoteIncomplete %}
                                     <p id="completion-reject-note-error" class="govuk-error-message">
@@ -297,40 +327,6 @@
                                         class="govuk-textarea govuk-js-character-count {% if data.completionRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
                                         id="completionRejectNote" name="completionRejectNote" rows="21"
                                         aria-describedby="completionNote-info completionNote-hint">{{ data.completionRejectNote | default ('') }}</textarea>
-                                    <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
-                                        You can enter up to 1000 characters
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="govuk-radios__item">
-                                <input class="govuk-radios__input" id="completionQueried" name="completion" type="radio"
-                                    value="queried" data-aria-controls="conditional-queried-notes" {% if data.completion=='queried'
-                                    %}checked{% endif %}>
-                                <label class="govuk-label govuk-radios__label" for="completionQueried">
-                                    No, send back for editing
-                                </label>
-                            </div>
-            
-                            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-queried-notes">
-                                <div class="govuk-form-group govuk-character-count {% if data.completionQueriedNoteIncomplete %}govuk-form-group--error {% endif %}"
-                                    data-module="govuk-character-count" data-maxlength="1000">
-                                    <label class="govuk-label" for="completionNote">
-                                        What does the organisation need to do meet the required criteria?
-                                    </label>
-                                    <div id="completionQueriedNote-hint" class="govuk-hint">
-                                        This note tells the submitter what they need to edit before resubmitting
-                                    </div>
-                                    {% if data.completionQueriedNoteIncomplete %}
-                                    <p id="completion-queried-note-error" class="govuk-error-message">
-                                        <span class="govuk-visually-hidden">Error:</span> Complete note for evidence of
-                                        completion
-                                    </p>
-                                    {% endif %}
-                                    <textarea
-                                        class="govuk-textarea govuk-js-character-count {% if data.completionQueriedNoteIncomplete %}govuk-textarea--error{% endif %}"
-                                        id="completionQueriedNote" name="completionQueriedNote" rows="21"
-                                        aria-describedby="completionNote-info completionNote-hint">{{ data.completionQueriedNote | default ('') }}</textarea>
                                     <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
                                         You can enter up to 1000 characters
                                     </div>
