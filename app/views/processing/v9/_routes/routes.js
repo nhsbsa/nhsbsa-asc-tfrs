@@ -191,6 +191,8 @@ router.post('/claim-process-handler', function (req, res) {
   delete req.session.data.noteSuccess
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionRejectNoteIncomplete
+  delete req.session.data.paymentQueriedNoteIncomplete
+  delete req.session.data.completionQueriedNoteIncomplete
 
   claimID = req.session.data.id
   const paymentResponse = req.session.data.payment
@@ -239,13 +241,32 @@ router.post('/claim-process-handler', function (req, res) {
 
   if (errorParamaters == "") {
 
-    if ((paymentResponse == "approve" ||  (claim.claimType == "40")) && (completionResponse == "approve" || claim.claimType == "60")) {
-      req.session.data.result = "approve"
-    } else if ((paymentResponse == "reject" ||  (claim.claimType == "40")) || (completionResponse == "reject" || claim.claimType == "60")) {
-      req.session.data.result = "reject"
-    } else if ((paymentResponse == "queried" ||  (claim.claimType == "40")) && (completionResponse == "queried" || claim.claimType == "60")) {
-      req.session.data.result = "queried"
+    if (claim.claimType == "100") {
+      if (paymentResponse == "reject" || completionResponse == "reject") {
+        req.session.data.result = "reject";
+      } else if (paymentResponse == "queried" || completionResponse == "queried") {
+        req.session.data.result = "queried";
+      } else if (paymentResponse == "approve" && completionResponse == "approve") {
+        req.session.data.result = "approve";
+      }
+    } else if (claim.claimType == "60") {
+      if (paymentResponse == "reject") {
+        req.session.data.result = "reject";
+      } else if (paymentResponse == "queried") {
+        req.session.data.result = "queried";
+      } else if (paymentResponse == "approve") {
+        req.session.data.result = "approve";
+      }
+    } else if (claim.claimType == "40") {
+      if (completionResponse == "reject") {
+        req.session.data.result = "reject";
+      } else if (completionResponse == "queried") {
+        req.session.data.result = "queried";
+      } else if (completionResponse == "approve") {
+        req.session.data.result = "approve";
+      }
     }
+
       req.session.data.processClaimStep = "confirmOutcome"
       return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
@@ -262,20 +283,15 @@ router.get('/outcome-handler', function (req, res) {
   const paymentResponse = req.session.data.payment
   const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
   const paymentRejectNote = req.session.data.paymentRejectNote
-  const paymentQueryNote = req.session.data.paymentQueryNote
+  const paymentQueriedNote = req.session.data.paymentQueriedNote
 
   const completionResponse = req.session.data.completion
   const completionRejectNote = req.session.data.completionRejectNote
-  const completionQueryNote = req.session.data.completionQueryNote
-
-  const otherResponse = req.session.data.other
-  const otherRejectNote = req.session.data.otherRejectNote
-  const otherQueryNote = req.session.data.otherQueryNote
-
+  const completionQueriedNote = req.session.data.completionQueriedNote
 
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
-      updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, completionResponse, completionRejectNote, paymentQueryNote, completionQueryNote, otherResponse, otherRejectNote, otherQueryNote)
+      updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentQueriedNote, paymentRejectNote, completionResponse, completionQueriedNote, completionRejectNote)
       
       let submission = getMostRelevantSubmission(claim)    
       submission.processedDate = new Date()
@@ -294,11 +310,11 @@ router.get('/outcome-handler', function (req, res) {
   delete req.session.data.payment
   delete req.session.data.paymentReimbursementAmount
   delete req.session.data.paymentRejectNote
-  delete req.session.data.paymentQueryNote
+  delete req.session.data.paymentQueriedNote
 
   delete req.session.data.completion
   delete req.session.data.completionRejectNote
-  delete req.session.data.completionQueryNote
+  delete req.session.data.completionQueriedNote
 
 
   req.session.data.processSuccess = "true"

@@ -5,7 +5,7 @@
     {% if (claim.submissions | length) <= 1 %}
     <p class="govuk-body">This is the <strong>first</strong> time this has been submitted.</p>
     {% else %}
-    <p class="govuk-body">This has been submitted <strong>{{(claim.submissions | length)}}</strong> times.</p>
+    <p class="govuk-body">This claim has been submitted <strong>{{(claim.submissions | length)}}</strong> times.</p>
     <p class="govuk-body"><a href="../view-previous-submissions-handler" class="govuk-link">View previous submissions of this 60 part</a></p>
     {% endif %}
 
@@ -23,7 +23,7 @@
     {% if (claim.submissions | length) <= 1 %}
     <p class="govuk-body">This is the <strong>first</strong> time this has been submitted.</p>
     {% else %}
-    <p class="govuk-body">This has been submitted <strong>{{(claim.submissions | length)}}</strong> times.</p>
+    <p class="govuk-body">This claim has been submitted <strong>{{(claim.submissions | length)}}</strong> times.</p>
     <p class="govuk-body"><a href="../view-previous-submissions-handler?view=100" class="govuk-link">View previous submissions of this 40 part</a></p>
     {% endif %}
 
@@ -37,8 +37,8 @@
     {% if (claim.submissions | length) <= 1 %}
     <p class="govuk-body">This is the <strong>first</strong> time this has been submitted.</p>
     {% else %}
-    <p class="govuk-body">This has been submitted <strong>{{(claim.submissions | length)}}</strong> times.</p>
-    <p class="govuk-body"><a href="../view-previous-submissions-handler" class="govuk-link">View previous submissions of this claim</a></p>
+    <p class="govuk-body">This claim has been submitted <strong>{{(claim.submissions | length)}}</strong> times.</p>
+    <p class="govuk-body"><a href="../view-previous-submissions-handler" class="govuk-link">View previous submissions</a></p>
     {% endif %}
 
 {% endif %}

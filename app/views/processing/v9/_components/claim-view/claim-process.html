@@ -24,7 +24,7 @@
         </div>
         {% endif %}
 
-        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentRejectNoteIncomplete or data.completionResponseIncomplete or data.completionRejectNoteIncomplete %}
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentRejectNoteIncomplete or data.completionResponseIncomplete or data.completionRejectNoteIncomplete or data.completionQueriedNoteIncomplete or data.paymentQueriedNoteIncomplete %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
             <div role="alert">
                 <h2 class="govuk-error-summary__title">
@@ -38,7 +38,6 @@
                         </li>
                         {% endif %}
 
-                        {% if (claim.fundingType == "TU") %}
                             {% if data.paymentReimbursementAmountIncomplete %}
                                 <li>
                                     <a href="#cost-per-learner-error">Enter cost per learner</a>
@@ -49,7 +48,7 @@
                                     <a href="#cost-per-learner-error">Cost per learner must be a number</a>
                                 </li>
                             {% endif %}
-                        {% endif %}
+
 
                         {% if data.paymentRejectNoteIncomplete %}
                             <li>
@@ -176,7 +175,7 @@
                                         data-aria-controls="conditional-payment-queried" {% if data.payment=='queried' %}checked{% endif
                                         %}>
                                     <label class="govuk-label govuk-radios__label" for="paymentQueried">
-                                        No - action required
+                                        No &#8212 action required
                                     </label>
                                 </div>
                                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
@@ -197,7 +196,7 @@
                                         {% endif %}
                                         <textarea
                                             class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-textarea--error{% endif %}"
-                                            id="paymentRejectNote" name="paymentQueriedNote" rows="21"
+                                            id="paymentQueriedNote" name="paymentQueriedNote" rows="21"
                                             aria-describedby="payment-queried-note-info note-hint">{{ data.paymentQueriedNote | default ('') }}</textarea>
                                         <div id="payment-queried-note-info" class="govuk-hint govuk-character-count__message">
                                             You can enter up to 1000 characters
@@ -210,7 +209,7 @@
                                         data-aria-controls="conditional-payment-reject" {% if data.payment=='reject' %}checked{% endif
                                         %}>
                                     <label class="govuk-label govuk-radios__label" for="paymentReject">
-                                        No - reject
+                                        No &#8212 reject
                                     </label>
                                 </div>
                                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
@@ -225,8 +224,7 @@
                                         </div>
                                         {% if data.paymentRejectNoteIncomplete %}
                                         <p id="payment-reject-note-error" class="govuk-error-message">
-                                            <span class="govuk-visually-hidden">Error:</span>Complete note for evidence of
-                                            payment
+                                            <span class="govuk-visually-hidden">Error:</span>Complete note for evidence of payment
                                         </p>
                                         {% endif %}
                                         <textarea
@@ -273,7 +271,7 @@
                                     value="queried" data-aria-controls="conditional-queried-notes" {% if data.completion=='queried'
                                     %}checked{% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="completionQueried">
-                                    No - action required
+                                    No &#8212 action required
                                 </label>
                             </div>
                             <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-queried-notes">
@@ -305,7 +303,7 @@
                                     value="reject" data-aria-controls="conditional-reject-notes" {% if data.completion=='reject'
                                     %}checked{% endif %}>
                                 <label class="govuk-label govuk-radios__label" for="completionReject">
-                                    No - reject
+                                    No &#8212 reject
                                 </label>
                             </div>
                             <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-reject-notes">
