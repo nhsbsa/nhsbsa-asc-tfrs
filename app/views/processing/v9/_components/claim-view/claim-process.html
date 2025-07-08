@@ -34,7 +34,7 @@
                     <ul class="govuk-list govuk-error-summary__list">
                         {% if data.paymentResponseIncomplete %}
                         <li>
-                            <a href="#payment-review">Complete check on evidence of payment</a>
+                            <a href="#payment-review">Select an option for evidence of payment</a>
                         </li>
                         {% endif %}
 
@@ -52,31 +52,31 @@
 
                         {% if data.paymentRejectNoteIncomplete %}
                             <li>
-                                <a href="#payment-reject-note-error">Enter payment rejection reasons</a>
+                                <a href="#payment-reject-note-error">Enter rejection reasons for evidence of payment </a>
                             </li>
                         {% endif %}
 
                         {% if data.paymentQueriedNoteIncomplete %}
                             <li>
-                                <a href="#payment-queried-note-error">Enter payment query reasons</a>
+                                <a href="#payment-queried-note-error">Enter action required for evidence of payment </a>
                             </li>
                         {% endif %}
 
                         {% if data.completionResponseIncomplete %}
                             <li>
-                                <a href="#completion-review">Select yes if evidence of completion meets the required criteria </a>
+                                <a href="#completion-review">Select an option for evidence of completion </a>
                             </li>
                         {% endif %}
 
                         {% if data.completionRejectNoteIncomplete %}
                             <li>
-                                <a href="#completion-reject-note-error">Enter completion rejection reasons</a>
+                                <a href="#completion-reject-note-error">Enter rejection reasons for evidence of completion</a>
                             </li>
                         {% endif %}
 
                         {% if data.completionQueriedNoteIncomplete %}
                             <li>
-                                <a href="#completion-queried-note-error">Enter completion query reasons</a>
+                                <a href="#completion-queried-note-error">Enter action required for evidence of completion</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -115,7 +115,7 @@
                             </legend>
                             {% if data.paymentResponseIncomplete %}
                                 <p id="payment-review-error" class="govuk-error-message">
-                                    <span class="govuk-visually-hidden">Error:</span> Complete check on evidence of payment
+                                    <span class="govuk-visually-hidden">Error:</span>Select an option for evidence of payment
                                 </p>
                             {% endif %}
                             <div class="govuk-radios" data-module="govuk-radios">
@@ -186,12 +186,11 @@
                                             What action does the organisation need to take?
                                         </label>
                                         <div id="payment-queried-note-hint" class="govuk-hint">
-                                            This note tells the organisation what edits they need to make before they resubmit this claim.
+                                            This note tells the organisation what edits they need to make before they resubmit this claim
                                         </div>
                                         {% if data.paymentQueriedNoteIncomplete %}
                                         <p id="payment-queried-note-error" class="govuk-error-message">
-                                            <span class="govuk-visually-hidden">Error:</span>Complete note for evidence of
-                                            payment
+                                            <span class="govuk-visually-hidden">Error:</span>Enter action required for evidence of payment 
                                         </p>
                                         {% endif %}
                                         <textarea
@@ -220,11 +219,11 @@
                                             Why has this claim been rejected?
                                         </label>
                                         <div id="payment-reject-note-hint" class="govuk-hint">
-                                            This note tells the organisation why their claim has been rejected and therefore cannot  be edited and resubmitted.
+                                            This note tells the organisation why their claim has been rejected and therefore cannot  be edited and resubmitted
                                         </div>
                                         {% if data.paymentRejectNoteIncomplete %}
                                         <p id="payment-reject-note-error" class="govuk-error-message">
-                                            <span class="govuk-visually-hidden">Error:</span>Complete note for evidence of payment
+                                            <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for evidence of payment 
                                         </p>
                                         {% endif %}
                                         <textarea
@@ -254,7 +253,7 @@
                         </legend>
                         {% if data.completionResponseIncomplete %}
                         <p id="completion-review-error" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span>Select yes if evidence of completion meets the required criteria 
+                            <span class="govuk-visually-hidden">Error:</span>Select an option for evidence of completion 
                         </p>
                         {% endif %}
                         <div class="govuk-radios" data-module="govuk-radios">
@@ -281,11 +280,11 @@
                                         What action does the organisation need to take?
                                     </label>
                                     <div id="completionQueriedNote-hint" class="govuk-hint">
-                                        This note tells the organisation what edits they need to make before they resubmit this claim.
+                                        This note tells the organisation what edits they need to make before they resubmit this claim
                                     </div>
                                     {% if data.completionQueriedNoteIncomplete %}
                                     <p id="completion-queried-note-error" class="govuk-error-message">
-                                        <span class="govuk-visually-hidden">Error:</span> Complete note for evidence of completion
+                                        <span class="govuk-visually-hidden">Error:</span> Enter action required for evidence of completion
                                     </p>
                                     {% endif %}
                                     <textarea
@@ -313,12 +312,11 @@
                                         Why has this claim been rejected?
                                     </label>
                                     <div id="completionRejectNote-hint" class="govuk-hint">
-                                        This note tells the organisation why their claim has been rejected and therefore cannot  be edited and resubmitted.
+                                        This note tells the organisation why their claim has been rejected and therefore cannot  be edited and resubmitted
                                     </div>
                                     {% if data.completionRejectNoteIncomplete %}
                                     <p id="completion-reject-note-error" class="govuk-error-message">
-                                        <span class="govuk-visually-hidden">Error:</span> Complete note for evidence of
-                                        completion
+                                        <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for evidence of completion
                                     </p>
                                     {% endif %}
                                     <textarea

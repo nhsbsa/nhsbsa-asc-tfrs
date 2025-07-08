@@ -4,13 +4,13 @@
         <h4 class="govuk-heading-s">Does the evidence of payment meet the required criteria?</h4>
 
         {% if submission.evidenceOfPaymentReview.outcome == "pass" %}
-        <p class="govuk-body">
-            Yes
-        </p>
+            <p class="govuk-body">Yes</p>
+        {% elif submission.evidenceOfPaymentReview.outcome == "fail" %}
+            <p class="govuk-body">No – reject</br>{{submission.evidenceOfPaymentReview.note}}</p>
         {% else %}
-        <p class="govuk-body">
-            No</br>{{submission.evidenceOfPaymentReview.note}}</p>
+            <p class="govuk-body">No – action required</br>{{submission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
+
         {% if claim.claimType != "60" %}
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         {% endif %}
@@ -20,9 +20,11 @@
         <h4 class="govuk-heading-s">Does the evidence of completion meet the required criteria?</h4>
 
         {% if submission.evidenceOfCompletionReview.outcome == "pass" %}
-        <p class="govuk-body">Yes</p>
+            <p class="govuk-body">Yes</p>
+        {% elif submission.evidenceOfCompletionReview.outcome == "fail" %}
+            <p class="govuk-body">No – reject</br>{{submission.evidenceOfCompletionReview.note}}</p>
         {% else %}
-        <p class="govuk-body">No</br>{{submission.evidenceOfCompletionReview.note}}</p>
+            <p class="govuk-body">No – action required</br>{{submission.evidenceOfCompletionReview.note}}</p>
         {% endif %}
 
         {% endif %}
