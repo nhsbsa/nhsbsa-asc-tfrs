@@ -41,15 +41,15 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paymentRejectNote, completionResponse, completionRejectNote, paymentQueryNote, completionQueryNote, otherResponse, otherRejectNote, otherQueryNote) {
+function updateClaim(foundClaim, paymentResponse, paymentReimbursementAmount, paymentQueryNote, paymentRejectNote, completionResponse, completionQueryNote, completionRejectNote) {
     let submission = getMostRelevantSubmission(foundClaim)    
     if (paymentResponse == "approve") {
             submission.evidenceOfPaymentReview.outcome = "pass"
-            submission.evidenceOfPaymentReview.costPerLearner = paymentReimbursementNote
+            submission.evidenceOfPaymentReview.costPerLearner = paymentReimbursementAmount
         } else if (paymentResponse == "reject") {
             submission.evidenceOfPaymentReview.outcome = "fail"
             submission.evidenceOfPaymentReview.note = paymentRejectNote
-        } else if (paymentResponse == "query") {
+        } else if (paymentResponse == "queried") {
             submission.evidenceOfPaymentReview.outcome = "queried"
             submission.evidenceOfPaymentReview.note = paymentQueryNote
         }
@@ -59,19 +59,9 @@ function updateClaim(foundClaim, paymentResponse, paymentReimbursementNote, paym
         } else if (completionResponse == "reject") {
             submission.evidenceOfCompletionReview.outcome = "fail"
             submission.evidenceOfCompletionReview.note = completionRejectNote
-        } else if (completionResponse == "query") {
+        } else if (completionResponse == "queried") {
             submission.evidenceOfCompletionReview.outcome = "queried"
             submission.evidenceOfCompletionReview.note = completionQueryNote
-        }
-
-        if (otherResponse == "approve") {
-            submission.otherCheck.outcome = "pass"
-        } else if (otherResponse == "reject") {
-            submission.otherCheck.outcome = "fail"
-            submission.otherCheck.note = otherRejectNote
-        } else if (otherResponse == "query") {
-            submission.otherCheck.outcome = "queried"
-            submission.otherCheck.note = otherQueryNote
         }
 }
 
