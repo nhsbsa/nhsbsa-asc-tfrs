@@ -156,9 +156,9 @@
             <p class="govuk-body">Sending this invite to a new SRO will automatically deactivate the previous SRO's account.</p>
 
             {% if foundOrganisation.bankDetails == null %}
-                <p class="govuk-body">The new SRO will need to complete registration. This includes signing the GDL and providing the organisation's bank details.</p>
+                <p class="govuk-body">The new SRO will need to complete registration. This includes confirming they have read the GDL and providing the organisation's bank details.</p>
             {% else %}
-                <p class="govuk-body">The new SRO will need to complete registration. This includes signing the GDL.</p>
+                <p class="govuk-body">The new SRO will need to complete registration and confirm they have read the GDL. They do not need to provide bank details.</p>
             {% endif %}
 
         {% endif %}
