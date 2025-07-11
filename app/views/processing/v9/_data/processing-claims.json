@@ -974,5 +974,180 @@
         "processedBy": "Mara Monahan"
       }
     ]
+  },
+    {
+    "claimID": "JSK-SJD5-SK3D-C",
+    "workplaceID": "B02944934",
+    "claimType": "40",
+    "status": "submitted",
+    "createdDate": "2025-02-03T00:12:28.462Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "d.jones@evergreencare.com",
+        "submittedDate": "2025-03-06T08:21:17.133Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2025-02-24T09:54:13.322Z",
+        "completionDate": "2025-02-27T03:16:00.448Z",
+        "evidenceOfCompletion": "completion-VE.png",
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "otherCheck": {
+          "outcome": null,
+          "note": null
+        },
+        "supportingNote": null,
+        "processedDate": null,
+        "processedBy": null
+      },
+      {
+        "submitter": "d.jones@evergreencare.com",
+        "submittedDate": "2025-02-23T05:51:35.010Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2025-02-24T09:54:13.322Z",
+        "completionDate": "2025-02-27T03:16:00.448Z",
+        "evidenceOfCompletion": "completion-OP.png",
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The learner name in the completion certificate does not match the learner given in the claim. Need to provide the correct certificate for the correct learner."
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
+        "supportingNote": null,
+        "processedDate": "2025-02-27T21:46:43.842Z",
+        "processedBy": "Allan Connelly"
+      }
+    ]
+  },
+    {
+    "claimID": "JSK-SJD5-SK3D-B",
+    "workplaceID": "B02944934",
+    "claimType": "60",
+    "status": "approved",
+    "createdDate": "2024-08-23T09:51:56.578Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "rachel.mcglee@evergreencare.com",
+        "submittedDate": "2024-12-21T11:46:31.081Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2025-02-24T09:54:13.322Z",
+        "costDate": "2024-04-11T09:34:39.184Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "costPerLearner": 270
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
+        "supportingNote": null,
+        "processedDate": "2025-02-18T05:44:08.305Z",
+        "processedBy": "Mara Monahan"
+      }
+    ]
+  },
+    {
+    "claimID": "WK4-92DN-8SJD-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "status": "submitted",
+    "createdDate": "2025-03-03T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T11:52:30.850Z",
+        "trainingCode": "DLEDI",
+        "learnerID": "LE 09 5F 94 M",
+        "startDate": "2024-07-21T03:36:53.621Z",
+        "costDate": "2024-09-23T12:05:18.831Z",
+        "evidenceOfPayment": ["sept-bankstatement.png"],
+        "completionDate": "2024-10-02T11:52:30.850Z",
+        "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The payment evidence is insufficient",
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The learner name in the completion certificate does not match the learner given in the claim. Need to provide the correct certificate for the correct learner."
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
+        "supportingNote": null,
+        "processedDate": "2025-01-20T11:52:30.850Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-25T11:52:30.850Z",
+        "trainingCode": "DLEDI",
+        "learnerID": "LE 09 5F 94 M",
+        "startDate": "2024-07-21T03:36:53.621Z",
+        "costDate": "2024-09-23T12:05:18.831Z",
+        "evidenceOfPayment": ["sept-bankstatement.png"],
+        "completionDate": "2024-10-02T11:52:30.850Z",
+        "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The payment evidence is insufficient",
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The learner name in the completion certificate does not match the learner given in the claim. Need to provide the correct certificate for the correct learner."
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
+        "supportingNote": null,
+        "processedDate": "2025-01-20T11:52:30.850Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-04-12T11:52:30.850Z",
+        "trainingCode": "DLEDI",
+        "learnerID": "ZX 51 96 87 D",
+        "startDate": "2024-07-21T03:36:53.621Z",
+        "costDate": "2024-09-25T12:05:18.831Z",
+        "evidenceOfPayment": ["sept-bankstatement.png"],
+        "completionDate": "2024-10-02T11:52:30.850Z",
+        "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "otherCheck": {
+          "outcome": null,
+          "note": null
+        },
+        "supportingNote": null,
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
   }
 ]
