@@ -198,9 +198,9 @@
                             {% for submission in sortedSubmissions %}
                                 {% if submission.evidenceOfCompletion %}
                                     {% if (submission.evidenceOfCompletion !== sortedSubmissions[loop.index0 + 1].evidenceOfCompletion and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.evidenceOfCompletion}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{submission.evidenceOfCompletion}} </span>in new tab</a>)</td>
+                                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.evidenceOfCompletion}}</strong></mark> (<a class="govuk-link" href="/public/images/{{submission.evidenceOfCompletion}}" target="_blank">open <span class="govuk-visually-hidden">{{submission.evidenceOfCompletion}} </span>in new tab</a>)</td>
                                     {% else %}
-                                        <td class="govuk-table__cell">{{submission.evidenceOfCompletion}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{submission.evidenceOfCompletion}} </span>in new tab</a>)</td>
+                                        <td class="govuk-table__cell">{{submission.evidenceOfCompletion}} (<a class="govuk-link" href="/public/images/{{submission.evidenceOfCompletion}}" target="_blank">open <span class="govuk-visually-hidden">{{submission.evidenceOfCompletion}} </span>in new tab</a>)</td>
                                     {% endif %}
                                 {% else %}
                                     <td class="govuk-table__cell">---</td>
