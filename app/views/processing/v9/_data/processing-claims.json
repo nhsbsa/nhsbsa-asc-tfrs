@@ -1011,10 +1011,10 @@
         "learnerID": "LM 89 7F 48 J",
         "startDate": "2025-02-24T09:54:13.322Z",
         "completionDate": "2025-02-27T03:16:00.448Z",
-        "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
+        "evidenceOfCompletion": "completion-OP.png",
         "evidenceOfCompletionReview": {
           "outcome": "queried",
-          "note": "Wrong learner"
+          "note": "The learner name in the completion certificate does not match the learner given in the claim. Need to provide the correct certificate for the correct learner."
         },
         "otherCheck": {
           "outcome": "pass",
@@ -1039,7 +1039,7 @@
         "submitter": "rachel.mcglee@evergreencare.com",
         "submittedDate": "2024-12-21T11:46:31.081Z",
         "trainingCode": "501/1146/2",
-        "learnerID": "NX 76 8F 30 D",
+        "learnerID": "LM 89 7F 48 J",
         "startDate": "2025-02-24T09:54:13.322Z",
         "costDate": "2024-04-11T09:34:39.184Z",
         "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
