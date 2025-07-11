@@ -1071,20 +1071,20 @@
         "submitter": "jasper.holloway@evergreencare.com",
         "submittedDate": "2025-03-13T11:52:30.850Z",
         "trainingCode": "DLEDI",
-        "learnerID": "LE 09 5F 94 M",
-        "startDate": "2024-07-21T03:36:53.621Z",
+        "learnerID": "ZX 51 96 87 D",
+        "startDate": "2024-10-21T03:36:53.621Z",
         "costDate": "2024-09-23T12:05:18.831Z",
-        "evidenceOfPayment": ["sept-bankstatement.png"],
-        "completionDate": "2024-10-02T11:52:30.850Z",
-        "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
+        "evidenceOfPayment": ["rbc-sept-bankstatement.png"],
+        "completionDate": "2024-11-02T11:52:30.850Z",
+        "evidenceOfCompletion": "certificate-BS.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The payment evidence is insufficient",
+          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
           "outcome": "queried",
-          "note": "The learner name in the completion certificate does not match the learner given in the claim. Need to provide the correct certificate for the correct learner."
+          "note": "The certificate doesn't match the completion date or the code of the training course selected. Please enter the correct completion date and update to the correct training that was completed."
         },
         "otherCheck": {
           "outcome": "pass",
@@ -1098,20 +1098,20 @@
         "submitter": "jasper.holloway@evergreencare.com",
         "submittedDate": "2025-03-25T11:52:30.850Z",
         "trainingCode": "DLEDI",
-        "learnerID": "LE 09 5F 94 M",
-        "startDate": "2024-07-21T03:36:53.621Z",
+        "learnerID": "ZX 51 96 87 D",
+        "startDate": "2024-10-21T03:36:53.621Z",
         "costDate": "2024-09-23T12:05:18.831Z",
-        "evidenceOfPayment": ["sept-bankstatement.png"],
-        "completionDate": "2024-10-02T11:52:30.850Z",
-        "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
+        "evidenceOfPayment": ["rbc-sept-bankstatement.png", "invoice1.pdf"],
+        "completionDate": "2024-02-10T11:52:30.850Z",
+        "evidenceOfCompletion": "certificate-BS.pdf",
         "evidenceOfPaymentReview": {
-          "outcome": "queried",
-          "note": "The payment evidence is insufficient",
-          "costPerLearner": null
+          "outcome": "pass",
+          "note": null,
+          "costPerLearner": "75"
         },
         "evidenceOfCompletionReview": {
           "outcome": "queried",
-          "note": "The learner name in the completion certificate does not match the learner given in the claim. Need to provide the correct certificate for the correct learner."
+          "note": "The certificate doesn't match the completion date or the code of the training course selected. Please enter the correct completion date and update to the correct training that was completed."
         },
         "otherCheck": {
           "outcome": "pass",
@@ -1126,11 +1126,11 @@
         "submittedDate": "2025-04-12T11:52:30.850Z",
         "trainingCode": "DLEDI",
         "learnerID": "ZX 51 96 87 D",
-        "startDate": "2024-07-21T03:36:53.621Z",
+        "startDate": "2024-10-21T03:36:53.621Z",
         "costDate": "2024-09-25T12:05:18.831Z",
-        "evidenceOfPayment": ["sept-bankstatement.png"],
+        "evidenceOfPayment": ["rbc-sept-bankstatement.png", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2024-10-02T11:52:30.850Z",
-        "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
+        "evidenceOfCompletion": "certificate-BS.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
