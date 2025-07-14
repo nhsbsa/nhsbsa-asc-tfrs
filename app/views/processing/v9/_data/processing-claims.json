@@ -1070,13 +1070,13 @@
       {
         "submitter": "jasper.holloway@evergreencare.com",
         "submittedDate": "2025-03-13T11:52:30.850Z",
-        "trainingCode": "DLEDI",
+        "trainingCode": "603/1935/5",
         "learnerID": "ZX 51 96 87 D",
         "startDate": "2024-10-21T03:36:53.621Z",
         "costDate": "2024-09-23T12:05:18.831Z",
-        "evidenceOfPayment": ["rbc-sept-bankstatement.png"],
+        "evidenceOfPayment": ["rbc-sept-bankstatement.png", "bankStatement-september.pdf"],
         "completionDate": "2024-11-02T11:52:30.850Z",
-        "evidenceOfCompletion": "certificate-BS.pdf",
+        "evidenceOfCompletion": "certificate-BS.png",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
@@ -1084,7 +1084,7 @@
         },
         "evidenceOfCompletionReview": {
           "outcome": "queried",
-          "note": "The certificate doesn't match the completion date or the code of the training course selected. Please enter the correct completion date and update to the correct training that was completed."
+          "note": "The certificate doesn't match the completion date. Please enter the correct completion date."
         },
         "otherCheck": {
           "outcome": "pass",
@@ -1097,21 +1097,21 @@
       {
         "submitter": "jasper.holloway@evergreencare.com",
         "submittedDate": "2025-03-25T11:52:30.850Z",
-        "trainingCode": "DLEDI",
+        "trainingCode": "603/1935/5",
         "learnerID": "ZX 51 96 87 D",
         "startDate": "2024-10-21T03:36:53.621Z",
         "costDate": "2024-09-23T12:05:18.831Z",
-        "evidenceOfPayment": ["rbc-sept-bankstatement.png", "invoice1.pdf"],
-        "completionDate": "2024-02-10T11:52:30.850Z",
-        "evidenceOfCompletion": "certificate-BS.pdf",
+        "evidenceOfPayment": ["rbc-sept-bankstatement.png"],
+        "completionDate": "2024-10-02T11:52:30.850Z",
+        "evidenceOfCompletion": "certificate-BS.png",
         "evidenceOfPaymentReview": {
-          "outcome": "pass",
-          "note": null,
-          "costPerLearner": "75"
+          "outcome": "queried",
+          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "outcome": "queried",
-          "note": "The certificate doesn't match the completion date or the code of the training course selected. Please enter the correct completion date and update to the correct training that was completed."
+          "outcome": "pass",
+          "note": null
         },
         "otherCheck": {
           "outcome": "pass",
@@ -1124,13 +1124,13 @@
       {
         "submitter": "jasper.holloway@evergreencare.com",
         "submittedDate": "2025-04-12T11:52:30.850Z",
-        "trainingCode": "DLEDI",
+        "trainingCode": "603/1935/5",
         "learnerID": "ZX 51 96 87 D",
         "startDate": "2024-10-21T03:36:53.621Z",
         "costDate": "2024-09-23T12:05:18.831Z",
-        "evidenceOfPayment": ["rbc-sept-bankstatement.png", "invoice1.pdf", "receipt1.pdf"],
+        "evidenceOfPayment": ["rbc-sept-bankstatement.png", "training-invoice1.pdf"],
         "completionDate": "2024-10-02T11:52:30.850Z",
-        "evidenceOfCompletion": "certificate-BS.pdf",
+        "evidenceOfCompletion": "certificate-BS.png",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
