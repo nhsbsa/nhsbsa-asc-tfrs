@@ -1110,8 +1110,8 @@
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
-          "outcome": "queried",
-          "note": "The certificate doesn't match the completion date. Please enter the correct completion date."
+          "outcome": "pass",
+          "note": null
         },
         "otherCheck": {
           "outcome": "pass",
