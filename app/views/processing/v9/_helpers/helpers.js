@@ -9,8 +9,6 @@ function loadJSONFromFile(fileName, path = 'app/data/') {
 }
 
 function loadData(req) {
-    // pull in the prototype data object and see if it contains a datafile reference
-    let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
     
     var claimsFile = 'processing-claims.json'
     var statusFile = 'claim-item-statuses.json'

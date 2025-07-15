@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { faker } = require('@faker-js/faker');
+const dataPath = 'app/views/claims/v17/_data/'
 
 function checkClaim(claim) {
 
@@ -414,7 +415,19 @@ function getMostRelevantSubmission(claim) {
     return null;
   }
 
-  function findLearnerById(id, learners) {
+  function loadLearners(localLearners) {
+    let learners = loadJSONFromFile('learners.json', dataPath)
+    console.log(learners)
+    console.log(localLearners)
+    learners.push(localLearners)
+
+    return learners
+  }
+
+  function findLearnerById(id, localLearners) {
+    
+    const learners = loadLearners(localLearners)
+
       const learner = learners.find(learner => learner.id == id);
       if (learner) {
         return learner;
@@ -659,9 +672,7 @@ function newClaim(req, input, type) {
 
 function loadData(req, orgID) {
   // pull in the prototype data object and see if it contains a datafile reference
-  const path = 'app/views/claims/v17/_data/'
 
-  var learnersFile = 'learners.json'
   var trainingFile = 'training.json'
   var claimsFile = 'claims.json'
   var statusFile = 'claim-statuses.json'
@@ -669,7 +680,7 @@ function loadData(req, orgID) {
   
 
   console.log('loading in organisation file')
-  const organisations = loadJSONFromFile(orgFile, path)
+  const organisations = loadJSONFromFile(orgFile, dataPath)
   for (const organisation of organisations) {
     if (organisation.workplaceID == orgID) {
       req.session.data.org = organisation
@@ -679,11 +690,11 @@ function loadData(req, orgID) {
   console.log('organisation file loaded')
 
   console.log('loading in training file')
-  req.session.data['training'] = loadJSONFromFile(trainingFile, path)
+  req.session.data['training'] = loadJSONFromFile(trainingFile, dataPath)
   console.log('training file loaded')
 
   console.log('loading in claims file')
-  const allClaims = loadJSONFromFile(claimsFile, path);
+  const allClaims = loadJSONFromFile(claimsFile, dataPath);
   const filteredClaims = allClaims.filter(claim => claim.workplaceID === orgID);
   // Load pre-set claims
     const users = generatecreatedByList(req.session.data.org);
@@ -708,12 +719,11 @@ if (req.session.data.org.numberOfClaims > 0) {
     console.log('0 claims loaded')
 }
 
-  console.log('loading in learners file')
-  req.session.data['learners'] = loadJSONFromFile(learnersFile, path)
-  console.log('learners file loaded')
+    //create an empty array for any learners added locally
+  req.session.data['learners'] = []
 
   console.log('loading in statuses file')
-  req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
+  req.session.data['statuses'] = loadJSONFromFile(statusFile, dataPath)
   console.log('statuses file loaded')
 
 
@@ -745,4 +755,4 @@ function generatecreatedByList(organisation) {
 }
 
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList}
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners}

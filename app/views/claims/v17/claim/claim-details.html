@@ -33,7 +33,7 @@
 
 
 
-{% set learner = submission.learnerID | findLearner(data["learners"]) %}
+{% set learner = submission.learnerID | findLearner(data.learners) %}
 
 
 {% block pageTitle %}

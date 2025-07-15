@@ -1,5 +1,6 @@
 {% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+{% set learners = data.learners | loadLearners %}
 
 {% if (claim.status == "queried") %}
     {% set submission = claim | getDraftSubmission %}
@@ -90,7 +91,7 @@
         <h2 class="govuk-heading-m govuk-!-margin-top-3">Search results</h2>
         {% set hasResults = false %}
         {% set addHeader = true %}
-        {% for learner in data['learners'] %}
+        {% for learner in learners %}
         {% set match = data['learnerInput'] | learnerSearch(learner) %}
         {% if match %}
         {% set hasResults = true %}
