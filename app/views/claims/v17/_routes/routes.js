@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser } = require('../_helpers/helpers.js');
+const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode } = require('../_helpers/helpers.js');
 const { generateClaims } = require('../_helpers/generate-claims.js');
 const { generateLearners } = require('../_helpers/generate-learners.js');
 
@@ -24,22 +24,23 @@ router.post('/verify-details-handler', function (req, res) {
 
 router.post('/add-training', function (req, res) {
   const trainingCode = req.session.data.trainingSelection
-  var trainingChoice = null
-  for (const trainingGroup of req.session.data.training) {
-    for (const t of trainingGroup.courses) {
-      if (trainingCode == t.code) {
-        trainingChoice = t
-      }
-    }
-  }
+  const trainingChoice = findCourseByCode(trainingCode)
+
   var claim = null
   if (req.session.data.id) {
-    claim = req.session.data.claims.find(c => c.claimID.replace(/[-\s]+/g, '') == req.session.data.id.replace(/[-\s]+/g, '')  && (c.workplaceID == req.session.data.org.workplaceID) && c.status == "queried");
+    claim = req.session.data.claims.find(c => c.claimID.replace(/[-\s]+/g, '') == req.session.data.id.replace(/[-\s]+/g, '')  && (c.workplaceID == req.session.data.org.workplaceID) && (c.status == "queried" || c.status == "not-yet-submitted"));
   }
+  console.log(claim)
 
   if (claim) {
-    let draft = getDraftSubmission(claim)
-    draft.trainingCode = trainingChoice.code
+    let submission = null
+    if(claim.status =="queried") {
+      submission = getDraftSubmission(claim)
+    } else {
+      submission = getMostRelevantSubmission(claim)
+    }
+    
+    submission.trainingCode = trainingChoice.code
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
     res.redirect('claim/claim-details' + '?id=' + claim.claimID)
@@ -179,15 +180,9 @@ router.post('/advanced-search-handler', function (req, res) {
 
 router.post('/split-decision-handler', function (req, res) {
   const trainingCode = req.session.data.trainingSelection
+  const trainingChoice = findCourseByCode(trainingCode)
   const choice = req.session.data.splitDecision
 
-  for (const trainingGroup of req.session.data.training) {
-    for (const t of trainingGroup.courses) {
-      if (trainingCode == t.code) {
-        var trainingChoice = t
-      }
-    }
-  }
   if (choice == "no") {
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];

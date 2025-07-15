@@ -10,7 +10,7 @@
             {% set submission = claim | getMostRelevantSubmission %}
         {% endif %}
         {% set learner = submission.learnerID | findLearner(data["learners"])%}
-        {% set training = submission.trainingCode | findTraining(data.training)%}
+        {% set training = submission.trainingCode | findTraining %}
         {% set matchCounter = matchCounter + 1 %}
         {% set hasResults=true %} 
         {% if addHeader %}
