@@ -2,30 +2,35 @@
     {
         "id": "not-yet-submitted",
         "name": "Not yet submitted",
+        "historyName": "Not yet submitted",
         "description": "Claims that have not yet been submitted. They may still need information adding.",
         "distribution": 0.25
     },
     {
         "id": "queried",
         "name": "Needs action",
+        "historyName": "Action requested",
         "description": "Claims sent back by processors because they need some edits before they can progress.",
         "distribution": 0.10
     },
     {
         "id": "submitted",
         "name": "Submitted",
+        "historyName": "Submitted",
         "description": "Claims that have been submitted for processing.",
         "distribution": 0.30
     },
     {
         "id": "rejected",
         "name": "Rejected",
+        "historyName": "Rejected",
         "description": "Claims that have been rejected and therefore cannot be edited and resubmitted.",
         "distribution": 0.05
     },
     {
         "id": "approved",
         "name": "Approved",
+        "historyName": "Approved",
         "description": "Claims that have been approved for payment.",
         "distribution": 0.30
     }
