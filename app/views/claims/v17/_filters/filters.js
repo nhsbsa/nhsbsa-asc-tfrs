@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter} = require('../_helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter} = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -297,6 +297,11 @@ addFilter('learnerSearch', function (search, learner) {
         match = true
     }
     return match
+})
+
+addFilter('loadLearners', function (localLearners) {
+    return loadLearners(localLearners)
+
 })
 
 addFilter('trainingSearch', function (search, training, claim, allTraining) {

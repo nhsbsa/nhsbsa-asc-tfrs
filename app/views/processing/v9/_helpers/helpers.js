@@ -1,4 +1,5 @@
 const fs = require('fs');
+const dataPath = 'app/views/processing/v9/_data/'
 
 
 // funtion to load in data files
@@ -8,34 +9,21 @@ function loadJSONFromFile(fileName, path = 'app/data/') {
 }
 
 function loadData(req) {
-    // pull in the prototype data object and see if it contains a datafile reference
-    let prototype = {} || req.session.data['prototype'] // set up if doesn't exist
-    const path = 'app/views/processing/v9/_data/'
-
-    var learnersFile = 'learners.json'
+    
     var claimsFile = 'processing-claims.json'
     var statusFile = 'claim-item-statuses.json'
-    var trainingFile = 'training.json'
     var organisationsFile = 'organisations.json'
 
     console.log('loading in claims file')
-    req.session.data['claims'] = loadJSONFromFile(claimsFile, path)
+    req.session.data['claims'] = loadJSONFromFile(claimsFile, dataPath)
     console.log('claims file loaded')
 
     console.log('loading in statuses file')
-    req.session.data['statuses'] = loadJSONFromFile(statusFile, path)
+    req.session.data['statuses'] = loadJSONFromFile(statusFile, dataPath)
     console.log('statuses file loaded')
 
-    console.log('loading in training file')
-    req.session.data['training'] = loadJSONFromFile(trainingFile, path)
-    console.log('training file loaded')
-
-    console.log('loading in learners file')
-    req.session.data['learners'] = loadJSONFromFile(learnersFile, path)
-    console.log('learners file loaded')
-
     console.log('loading in organisations file')
-    req.session.data['organisations'] = loadJSONFromFile(organisationsFile, path)
+    req.session.data['organisations'] = loadJSONFromFile(organisationsFile, dataPath)
     console.log('organisations file loaded')
 
     return console.log('data updated')
@@ -169,7 +157,9 @@ function getMostRelevantSubmission(claim) {
     return mostRecentSubmission;
 }
 
-function findCourseByCode(code, trainingCourses) {
+function findCourseByCode(code) {
+     const trainingCourses = loadJSONFromFile('training.json', dataPath)
+
     for (const group of trainingCourses) {
       const course = group.courses.find(course => course.code == code);
       if (course) {
@@ -179,7 +169,9 @@ function findCourseByCode(code, trainingCourses) {
     return null;
   }
 
-  function findLearnerById(id, learners) {
+  function findLearnerById(id) {
+    const learners = loadJSONFromFile('learners.json', dataPath)
+    
       const learner = learners.find(learner => learner.id == id);
       if (learner) {
         return learner;

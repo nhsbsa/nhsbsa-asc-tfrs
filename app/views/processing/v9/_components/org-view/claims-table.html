@@ -4,8 +4,8 @@
 
 {% for claim in claims %}
     {% set submission = claim | getMostRelevantSubmission %}
-    {% set learner = submission.learnerID | findLearner(data["learners"])%}
-    {% set training = submission.trainingCode | findTraining(data.training)%}
+    {% set learner = submission.learnerID | findLearner %}
+    {% set training = submission.trainingCode | findTraining %}
         {% set matchCounter = matchCounter + 1 %}
         {% set hasResults=true %} 
         {% if addHeader %} 

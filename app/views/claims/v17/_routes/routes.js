@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser } = require('../_helpers/helpers.js');
+const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser } = require('../_helpers/helpers.js');
 const { generateClaims } = require('../_helpers/generate-claims.js');
 const { generateLearners } = require('../_helpers/generate-learners.js');
 
@@ -327,13 +327,8 @@ router.post('/completion-date', function (req, res) {
 
 router.post('/add-learner', function (req, res) {
   var claimID = req.session.data.id
-  var learner = null
-  for (const l of req.session.data.learners) {
-    if (req.session.data.learnerSelection == l.id) {
-      learner = l
-      break;
-    }
-  }
+  var learner = findLearnerById(req.session.data.learnerSelection,req.session.data.learners)
+
   delete req.session.data.existingLearner
   delete req.session.data.learnerInput;
   delete req.session.data.learnerSelection;
@@ -646,8 +641,10 @@ router.post('/create-learner', function (req, res) {
   const givenName = req.session.data.givenName
   const jobTitle = req.session.data.jobTitle
 
+  const learners = loadLearners(req.session.data.learners)
+
   const submitError = checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle)
-  const dupeLearner = compareNINumbers(req.session.data.nationalInsuranceNumber, req.session.data.learners)
+  const dupeLearner = compareNINumbers(req.session.data.nationalInsuranceNumber, learners)
 
   if (submitError.learnerValid) {
     if (req.session.data.inClaim == 'true' && !dupeLearner.check) {
