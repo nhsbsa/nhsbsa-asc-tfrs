@@ -2,7 +2,7 @@
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 {% set submission = claim | getMostRelevantSubmission%}
 {% set learner = submission.learnerID | findLearner(data["learners"])%}
-{% set training = submission.trainingCode | findTraining(data.training)%}
+{% set training = submission.trainingCode | findTraining %}
 
 {% block pageTitle %}
 Are you sure you want to delete this claim? — {{serviceName}} — GOV.UK

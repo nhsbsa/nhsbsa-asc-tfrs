@@ -3,7 +3,7 @@
 {% else %}
     {% set submission = claim | getMostRelevantSubmission %}
 {% endif %}
-{% set training = submission.trainingCode | findTraining(data.training)%}
+{% set training = submission.trainingCode | findTraining %}
 
 {% if claim.claimType == "100" %}
 

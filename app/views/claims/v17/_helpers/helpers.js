@@ -405,7 +405,14 @@ function getMostRelevantSubmission(claim) {
     return mostRecentSubmission;
 }
 
-  function findCourseByCode(code, trainingCourses) {
+function loadTraining() {
+    return loadJSONFromFile('training.json', dataPath)
+  }
+
+function findCourseByCode(code) {
+
+    const trainingCourses = loadTraining()
+
     for (const group of trainingCourses) {
       const course = group.courses.find(course => course.code == code);
       if (course) {
@@ -416,12 +423,11 @@ function getMostRelevantSubmission(claim) {
   }
 
   function loadLearners(localLearners) {
-    let learners = loadJSONFromFile('learners.json', dataPath)
-    console.log(learners)
-    console.log(localLearners)
-    learners.push(localLearners)
+    const learners = loadJSONFromFile('learners.json', dataPath)
 
-    return learners
+    const allLearners = learners.concat(localLearners)
+
+    return allLearners
   }
 
   function findLearnerById(id, localLearners) {
@@ -671,11 +677,9 @@ function newClaim(req, input, type) {
 }
 
 function loadData(req, orgID) {
-  // pull in the prototype data object and see if it contains a datafile reference
 
-  var trainingFile = 'training.json'
-  var claimsFile = 'claims.json'
-  var statusFile = 'claim-statuses.json'
+  const claimsFile = 'claims.json'
+  const statusFile = 'claim-statuses.json'
   const orgFile = 'organisations.json'
   
 
@@ -688,10 +692,6 @@ function loadData(req, orgID) {
     }
   }
   console.log('organisation file loaded')
-
-  console.log('loading in training file')
-  req.session.data['training'] = loadJSONFromFile(trainingFile, dataPath)
-  console.log('training file loaded')
 
   console.log('loading in claims file')
   const allClaims = loadJSONFromFile(claimsFile, dataPath);
@@ -755,4 +755,4 @@ function generatecreatedByList(organisation) {
 }
 
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners}
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining}

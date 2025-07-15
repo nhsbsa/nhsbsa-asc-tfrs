@@ -1,6 +1,8 @@
 {% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 
+{% set allTraining = "" | loadTraining %}
+
 {% if (claim.status == "queried") %}
     {% set submission = claim | getDraftSubmission %}
 {% else %}
@@ -99,11 +101,11 @@
         {% if (data['training-input'] and data["training-input"].length > 2) %}
             <h2 class="govuk-heading-m govuk-!-margin-top-3">Search results</h2>
             {% set hasResults = false %}
-            {% for trainingGroup in data.training %}
+            {% for trainingGroup in allTraining %}
                 {% set addHeader = true %}
 
                 {% for training in trainingGroup.courses %}
-                    {% set match = data['training-input'] | trainingSearch(training, claim, data.training) %}
+                    {% set match = data['training-input'] | trainingSearch(training, claim, allTraining) %}
                     {% if match %}
                         {% set hasResults = true %}
 

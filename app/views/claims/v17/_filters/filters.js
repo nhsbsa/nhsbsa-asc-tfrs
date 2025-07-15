@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter} = require('../_helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining} = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -304,6 +304,11 @@ addFilter('loadLearners', function (localLearners) {
 
 })
 
+addFilter('loadTraining', function (emptyString) {
+    return loadTraining()
+
+})
+
 addFilter('trainingSearch', function (search, training, claim, allTraining) {
 
     const formattedSearch = removeSpacesAndCharactersAndLowerCase(search);
@@ -347,7 +352,9 @@ addFilter('bankErrorMessage', function (bankErrorObject) {
     return errorMessages.join('');
 }, { renderAsHtml: true })
 
-addFilter('trainingTypeCheck', function (trainingCode, trainingList, matchType) {
+addFilter('trainingTypeCheck', function (trainingCode, matchType) {
+
+    const trainingList = loadTraining()
 
     for (let trainingGroup of trainingList) {
         for (let training of trainingGroup.courses) {
@@ -496,7 +503,8 @@ addFilter('removeClaimSuffix', function (claimID) {
     return claimID.slice(0, -2);
 })
 
-addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, trainingCourses, learners, workplaceID) {
+addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, localLearners, workplaceID) {
+    const learners = loadLearners(localLearners)
     const formattedTraining = removeSpacesAndCharactersAndLowerCase(training);
     const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
 
@@ -509,7 +517,7 @@ addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, trai
         let submission = getMostRelevantSubmission(claim)
 
         if (submission.trainingCode != null) {
-            const claimTraining = findCourseByCode(submission.trainingCode, trainingCourses)
+            const claimTraining = findCourseByCode(submission.trainingCode)
             const formattedTitle = removeSpacesAndCharactersAndLowerCase(claimTraining.title);
             const code = submission.trainingCode;
             const codeRegex = /^(?:\d{3}\/?\d{4}\/?\d|[A-Za-z]{5})$/;
@@ -625,8 +633,8 @@ addFilter('getDraftSubmission', (claim) => {
     return recentClaim
 })
 
-addFilter('findTraining', (trainingCode, trainingArray) => {
-    return findCourseByCode(trainingCode, trainingArray)
+addFilter('findTraining', (trainingCode) => {
+    return findCourseByCode(trainingCode)
 })
 
 addFilter('findLearner', (learnerID, learners) => {

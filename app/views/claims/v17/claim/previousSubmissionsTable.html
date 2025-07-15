@@ -95,7 +95,7 @@
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Training</strong></td>
                     {% for submission in sortedSubmissions %}
-                      {% set training = submission.trainingCode | findTraining(data.training) %}
+                      {% set training = submission.trainingCode | findTraining %}
                       {% if training %}
 
                         {% if (training.code !== sortedSubmissions[loop.index0 + 1].trainingCode and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  )%}
