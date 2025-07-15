@@ -416,12 +416,11 @@ function getMostRelevantSubmission(claim) {
   }
 
   function loadLearners(localLearners) {
-    let learners = loadJSONFromFile('learners.json', dataPath)
-    console.log(learners)
-    console.log(localLearners)
-    learners.push(localLearners)
+    const learners = loadJSONFromFile('learners.json', dataPath)
 
-    return learners
+    const allLearners = learners.concat(localLearners)
+
+    return allLearners
   }
 
   function findLearnerById(id, localLearners) {
