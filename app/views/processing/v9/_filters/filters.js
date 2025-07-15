@@ -38,10 +38,10 @@ addFilter('dateSort', function (notes) {
     return sortedData
 })
 
-addFilter('reimbursement', function (claim, paymentReimbursementAmount, trainingCourses) {
+addFilter('reimbursement', function (claim, paymentReimbursementAmount) {
 
     let submission = getMostRelevantSubmission(claim)
-    let training = findCourseByCode(submission.trainingCode, trainingCourses )
+    let training = findCourseByCode(submission.trainingCode)
     if ((claim.claimType == "60")) {
         if (training.reimbursementAmount > paymentReimbursementAmount) {
             return paymentReimbursementAmount * 0.6
@@ -216,12 +216,12 @@ addFilter('sortByFirstName', function (inactiveClaims) {
       });
 })
 
-addFilter('findTraining', (trainingCode, trainingArray) => {
-    return findCourseByCode(trainingCode, trainingArray)
+addFilter('findTraining', (trainingCode) => {
+    return findCourseByCode(trainingCode)
 })
 
-addFilter('findLearner', (learnerID, learners) => {
-    return findLearnerById(learnerID, learners)
+addFilter('findLearner', (learnerID) => {
+    return findLearnerById(learnerID)
 })
 
 addFilter('findUser', function (email, org) {

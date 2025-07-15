@@ -83,7 +83,7 @@
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell"><strong>Training</strong></td>
                         {% for submission in sortedSubmissions %}
-                        {% set training = submission.trainingCode | findTraining(data.training) %}
+                        {% set training = submission.trainingCode | findTraining %}
                         {% if training %}
 
                             {% if (training.code !== sortedSubmissions[loop.index0 + 1].trainingCode and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  )%}
@@ -165,9 +165,9 @@
                         {% for submission in sortedSubmissions %}
                         {% if submission.learnerID %}
                             {% if (submission.learnerID !== sortedSubmissions[loop.index0 + 1].learnerID and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                            <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{(submission.learnerID | findLearner(data["learners"])).givenName}} {{(submission.learnerID | findLearner(data["learners"])).familyName}}</strong></mark></td>
+                            <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{(submission.learnerID | findLearner).givenName}} {{(submission.learnerID | findLearner).familyName}}</strong></mark></td>
                             {% else %}
-                            <td class="govuk-table__cell">{{(submission.learnerID | findLearner(data["learners"])).givenName}} {{(submission.learnerID | findLearner(data["learners"])).familyName}}</td>
+                            <td class="govuk-table__cell">{{(submission.learnerID | findLearner).givenName}} {{(submission.learnerID | findLearner).familyName}}</td>
                             {% endif %}
                         {% else %}
                             <td class="govuk-table__cell">---</td>
