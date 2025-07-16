@@ -416,7 +416,12 @@ router.post('/remove-evidence', function (req, res) {
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID) {
-      let submission = getMostRelevantSubmission(c)
+      let submission = null
+      if (c.status == "queried") {
+          submission = getDraftSubmission(c)
+      } else {
+          submission = getMostRelevantSubmission(c)
+      }
       if (type == 'payment') {
         submission.evidenceOfPayment.pop()
         paymentCount = submission.evidenceOfPayment.length
