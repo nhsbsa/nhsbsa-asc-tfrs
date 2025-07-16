@@ -675,17 +675,14 @@ addFilter('checkIfUpdated', (claim, field) => {
         }
     } else if (field == "evidencePayment") {
 
-        if (lastQueried.evidenceOfPayment.length !== draftClaim.evidenceOfPayment.length) {
-            return true;
-        }
-        lastQueried.evidenceOfPayment.sort();
-        draftClaim.evidenceOfPayment.sort();
-        for (let i = 0; i < lastQueried.length; i++) {
-            if (lastQueried[i] !== draftClaim[i]) {
-                return true;
+        const lastSet = new Set(lastQueried.evidenceOfPayment);
+        for (const item of draftClaim.evidenceOfPayment) {
+            if (!lastSet.has(item)) {
+                return true; // Found something new in draft
             }
         }
-        return false;
+        return false; // Nothing new in draft
+
     } else if (field == "completionDate") {
         // to do compare if same contents
         if (lastQueried.completionDate === draftClaim.completionDate) {
@@ -694,10 +691,10 @@ addFilter('checkIfUpdated', (claim, field) => {
             return true
         }
     } else if (field == "evidenceCompletion") {
-        if (lastQueried.evidenceOfCompletion.length !== draftClaim.evidenceOfCompletion.length) {
-            return true;
+        if (lastQueried.evidenceOfCompletion == draftClaim.evidenceOfCompletion) {
+            return false;
         } else {
-            return false
+            return true
         }
     } else if (field == "supportingNote") {
         if (lastQueried.supportingNote == draftClaim.supportingNote) {
