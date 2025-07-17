@@ -1,10 +1,10 @@
 {
-    "id": "tfrs-v8",
+    "id": "claims-v17",
     "viewports": [
         {
             "label": "desktop",
-            "width": 1000,
-            "height": 730
+            "width": 1200,
+            "height": 1000
         }
     ],
     "onBeforeScript": "puppet/onBefore.js",
@@ -12,136 +12,127 @@
     "scenarios": [
         {
             "label": "start",
-            "url": "http://localhost:3000/claims/v8/before-you-start"
+            "url": "http://localhost:3000/claims/v17/backstop/before-you-start",
+            "delay": 500
         },
         {
             "label": "sign-in",
-            "url": "http://localhost:3000/claims/v8/authentication/sign-in"
+            "url": "http://localhost:3000/claims/v17/backstop/sign-in",
+            "delay": 500
         },
         {
             "label": "mfa-code",
-            "url": "http://localhost:3000/claims/v8/authentication/mfa-code"
+            "url": "http://localhost:3000/claims/v17/backstop/mfa-code",
+            "delay": 500
         },
         {
-            "label": "TU-manage-claims-home",
-            "url": "http://localhost:3000/claims/v8/manage-claims-home?claimType=TU"
+            "label": "manage-claims",
+            "url": "http://localhost:3000/claims/v17/backstop/manage-claims",
+            "delay": 500
         },
         {
-            "label": "TU-manage-claims-not-yet-submitted",
-            "url": "http://localhost:3000/claims/v8/manage-claims?claimType=TU&statusID=not-yet-submitted"
+            "label": "sign-new-gdl",
+            "url": "http://localhost:3000/claims/v17/backstop/sign-new-gdl",
+            "delay": 500
         },
         {
-            "label": "TU-manage-claims-submitted",
-            "url": "http://localhost:3000/claims/v8/manage-claims?claimType=TU&statusID=submitted"
+            "label": "sign-new-gdl-error",
+            "url": "http://localhost:3000/claims/v17/backstop/sign-new-gdl?error=true",
+            "delay": 500
         },
         {
-            "label": "TU-manage-claims-rejected",
-            "url": "http://localhost:3000/claims/v8/manage-claims?claimType=TU&statusID=rejected"
+            "label": "org-details",
+            "url": "http://localhost:3000/claims/v17/backstop/org-details",
+            "delay": 500
         },
         {
-            "label": "TU-manage-claims-approved",
-            "url": "http://localhost:3000/claims/v8/manage-claims?claimType=TU&statusID=approved"
+            "label": "contact-us",
+            "url": "http://localhost:3000/claims/v17/backstop/contact-us",
+            "delay": 500
         },
         {
-            "label": "TU-first-claim-help",
-            "url": "http://localhost:3000/claims/v8/guidance/help-start-claim"
+            "label": "terms-of-use",
+            "url": "http://localhost:3000/claims/v17/backstop/terms-of-use",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-training",
-            "url": "http://localhost:3000/claims/v8/claim/select-training"
+            "label": "SRO-email-scenario-1",
+            "url": "http://localhost:3000/claims/v17/backstop/email?scenario=1",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-training-input",
-            "url": "http://localhost:3000/claims/v8/claim/select-training?training-input=health"
+            "label": "SRO-email-scenario-2",
+            "url": "http://localhost:3000/claims/v17/backstop/email?scenario=2",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-training-no-results",
-            "url": "http://localhost:3000/claims/v8/claim/select-training?training-input=test"
+            "label": "SRO-email-scenario-3",
+            "url": "http://localhost:3000/claims/v17/backstop/email?scenario=3",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim",
-            "url": "http://localhost:3000/claims/v8/claim/claim-details?id=STY-2EBD-KDAY-C"
+            "label": "SRO-email-scenario-4",
+            "url": "http://localhost:3000/claims/v17/backstop/email?scenario=4",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-start-date",
-            "url": "http://localhost:3000/claims/v8/claim/start-date?id=STY-2EBD-KDAY-C"
+            "label": "submitter-email",
+            "url": "http://localhost:3000/claims/v17/backstop/email?scenario=5",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-learner",
-            "url": "http://localhost:3000/claims/v8/claim/select-learner?id=STY-2EBD-KDAY-C"
+            "label": "SRO-verify-details-scenario-1",
+            "url": "http://localhost:3000/claims/v17/backstop/verify-details?scenario=1",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-learner-results",
-            "url": "http://localhost:3000/claims/v8/claim/select-learner?learnerInput=roy&id=STY-2EBD-KDAY-C&claimType=TU"
+            "label": "SRO-verify-details-scenario-2",
+            "url": "http://localhost:3000/claims/v17/backstop/verify-details?scenario=2",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-new-learner",
-            "url": "http://localhost:3000/claims/v8/learner/add-learner?inClaim=true"
+            "label": "SRO-verify-details-scenario-3",
+            "url": "http://localhost:3000/claims/v17/backstop/verify-details?scenario=3",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-payment-date",
-            "url": "http://localhost:3000/claims/v8/claim/cost-date?id=STY-2EBD-KDAY-C"
+            "label": "SRO-verify-details-scenario-4",
+            "url": "http://localhost:3000/claims/v17/backstop/verify-details?scenario=4",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-evidence-payment",
-            "url": "http://localhost:3000/claims/v8/claim/add-evidence?type=payment&id=STY-2EBD-KDAY-C"
+            "label": "submitter-verify-details",
+            "url": "http://localhost:3000/claims/v17/backstop/verify-details?scenario=5",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-evidence-completion",
-            "url": "http://localhost:3000/claims/v8/claim/add-evidence?type=completion&learnerID=LE%2009%205F%2094%20M&id=STY-2EBD-KDAY-C"
+            "label": "SRO-sign-in-scenario-1",
+            "url": "http://localhost:3000/claims/v17/backstop/sign-in?scenario=1",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-completion-date",
-            "url": "http://localhost:3000/claims/v8/claim/add-completion-date?id=STY-2EBD-KDAY-C"
+            "label": "SRO-sign-in-scenario-2",
+            "url": "http://localhost:3000/claims/v17/backstop/sign-in?scenario=2",
+            "delay": 500
         },
         {
-            "label": "TU-new-claim-confirmation",
-            "url": "http://localhost:3000/claims/v8/claim/confirmation?id=STY-2EBD-KDAY-C"
+            "label": "SRO-sign-in-scenario-3",
+            "url": "http://localhost:3000/claims/v17/backstop/sign-in?scenario=3",
+            "delay": 500
         },
         {
-            "label": "TU-not-yet-submitted-claim",
-            "url": "http://localhost:3000/claims/v8/claim/claim-details?id=Z8S-F3K6-3XF7-C"
+            "label": "SRO-sign-in-scenario-4",
+            "url": "http://localhost:3000/claims/v17/backstop/sign-in?scenario=4",
+            "delay": 500
         },
         {
-            "label": "TU-submitted-claim",
-            "url": "http://localhost:3000/claims/v8/claim/claim-details?id=Z1Z-F1J6-3XF7-C"
-        },
-        {
-            "label": "TU-rejected-claim",
-            "url": "http://localhost:3000/claims/v8/claim/claim-details?id=Z8S-F1J6-9VGH-C"
-        },
-        {
-            "label": "TU-approved-claim",
-            "url": "http://localhost:3000/claims/v8/claim/claim-details?id=Z8S-F1J6-4GH7-C"
-        },
-        {
-            "label": "TU-new-claim-learner-no-results",
-            "url": "http://localhost:3000/claims/v8/claim/select-learner?learnerInput=test&id=STY-2EBD-KDAY-C&claimType=TU"
-        },
-        {
-            "label": "TU-claim-decleration",
-            "url": "http://localhost:3000/claims/v8/claim/declaration?id=STY-2EBD-KDAY-C"
-        },
-        {
-            "label": "TU-claim-decleration-error",
-            "url": "http://localhost:3000/claims/v8/claim/declaration?id=STY-2EBD-KDAY-C&submitError=true"
-        },
-        {
-            "label": "TU-new-claim-duplication",
-            "url": "http://localhost:3000/claims/v8/claim/duplication?id=STY-2EBD-KDAY-C&dupeID=ELJ-ACYJ-CN4N-C"
-        },
-        {
-            "label": "TU-evidence-guidance",
-            "url": "http://localhost:3000/claims/v8/guidance/evidence-requirements"
-        },
-        {
-            "label": "TU-asc-wds-check-fail",
-            "url": "http://localhost:3000/claims/v8/claim/asc-wds-check?id=STY-2EBD-KDAY-C"
+            "label": "submitter-sign-in",
+            "url": "http://localhost:3000/claims/v17/backstop/sign-in?scenario=5",
+            "delay": 500
         }
-        
     ],
     "paths": {
-        "bitmaps_reference": "backstop_data/bitmaps_reference",
+        "bitmaps_reference": "app/views/claims/v17/_screenshots",
         "bitmaps_test": "backstop_data/bitmaps_test",
         "engine_scripts": "backstop_data/engine_scripts",
         "html_report": "backstop_data/html_report",

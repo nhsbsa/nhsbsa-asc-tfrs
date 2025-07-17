@@ -6,6 +6,9 @@ const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, val
 const { generateClaims } = require('../_helpers/generate-claims.js');
 const { generateLearners } = require('../_helpers/generate-learners.js');
 
+
+router.use('/claims/v17/backstop', require('./_backstop-routes.js'));
+
 // v17 Prototype routes
 
 router.post('/verify-details-handler', function (req, res) {
