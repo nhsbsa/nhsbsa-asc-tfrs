@@ -279,8 +279,10 @@ function checkBankDetailsForm(accountName, sortCode, accountNumber, buildingSoci
 
     if (sortCode == "" || sortCode === undefined || sortCode == null ) {
         result.sortCode = "missing"
-    } else if (!(/^\d{6}$/.test(sortCode))) {
+    } else if (!(/^\d+$/.test(sortCode))) {
         result.sortCode = "invalid"
+    } else if ((sortCode.length != 6)) {
+        result.sortCode = "lengthIssue"
     } else {
         result.sortCode = "valid"
     }

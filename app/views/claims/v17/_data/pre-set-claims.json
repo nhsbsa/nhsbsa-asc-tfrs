@@ -15,7 +15,7 @@
         "learnerID": "KZ 79 0F 13 Z",
         "startDate": "2025-01-05T03:31:11.898Z",
         "costDate": null,
-        "evidenceOfPayment": [],
+        "evidenceOfPayment": ["invoice1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -361,7 +361,7 @@
         "learnerID": "LM 89 7F 48 J",
         "startDate": "2024-08-27T10:48:25.990Z",
         "costDate": null,
-        "evidenceOfPayment": [],
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf", "invoice2.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -1047,6 +1047,72 @@
         },
         "processedDate": "2025-02-21T03:53:38.386Z",
         "processedBy": "Mara Monahan"
+      }
+    ]
+  },
+  {
+    "claimID": "ABC-UA5D-43BD-A",
+    "workplaceID": "placeholder",
+    "claimType": "100",
+    "status": "not-yet-submitted",
+    "createdDate": "2024-10-23T16:02:53.060Z",
+    "createdBy": "placeholder",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": null,
+        "submittedDate": null,
+        "trainingCode": "MHFA",
+        "learnerID": null,
+        "startDate": null,
+        "costDate": null,
+        "evidenceOfPayment": [],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
+  },
+  {
+    "claimID": "GDH-34ND-MXS4-B",
+    "workplaceID": "placeholder",
+    "claimType": "60",
+    "status": "not-yet-submitted",
+    "createdDate": "2024-06-16T23:01:41.732Z",
+    "createdBy": "placeholder",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": null,
+        "submittedDate": null,
+        "trainingCode": "601/7938/7",
+        "learnerID": null,
+        "startDate": null,
+        "costDate": null,
+        "evidenceOfPayment": [],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
       }
     ]
   }
