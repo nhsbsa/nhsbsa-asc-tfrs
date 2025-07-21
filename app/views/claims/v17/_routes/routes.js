@@ -7,7 +7,7 @@ const { generateClaims } = require('../_helpers/generate-claims.js');
 const { generateLearners } = require('../_helpers/generate-learners.js');
 
 
-router.use('/claims/v17/backstop', require('./_backstop-routes.js'));
+router.use('/claims/v17/backstop', require('../_backstop/backstop-routes.js'));
 
 // v17 Prototype routes
 
