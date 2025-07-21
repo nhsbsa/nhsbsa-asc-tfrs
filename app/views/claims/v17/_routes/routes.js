@@ -340,18 +340,22 @@ router.post('/add-learner', function (req, res) {
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
       let submission = null
+
       if (c.status == "queried") {
         submission = getDraftSubmission(c)
       } else {
         submission = getMostRelevantSubmission(c)
       }
-        duplicateCheck = checkDuplicateClaim(learner.id, submission.trainingCode, req.session.data.claims);
-        if (duplicateCheck.check) {
-          res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
-        } else {
-          submission.learnerID = learner.id
-          res.redirect('claim/claim-details?id=' + claimID + '#learner')
-        }
+
+      duplicateCheck = checkDuplicateClaim(learner.id, submission.trainingCode, req.session.data.claims);
+
+      if (duplicateCheck.check) {
+        res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
+      } else {
+        submission.learnerID = learner.id
+        res.redirect('claim/claim-details?id=' + claimID + '#learner')
+      }
+
     }
   }
 });
@@ -884,7 +888,10 @@ router.get('/confirm-delete-claim', function (req, res) {
         if (fromSearchId || fromSearchResults) {
           res.redirect('manage-claims-home?&deleteSuccess=true&fromSearchId&deletedID='+ claimID)
         } else {
-          res.redirect('manage-claims?deleteSuccess=true&deletedID=' + claimID)
+          req.session.data.deleteSuccess = "true"
+          req.session.data.deletedID = claimID
+          req.session.data.currentPage = "1"
+          res.redirect('manage-claims?statusID=not-yet-submitted')
         }
         
     }

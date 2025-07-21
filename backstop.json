@@ -969,6 +969,81 @@
             "label": "guidance-help-reimbursement-amounts",
             "url": "http://localhost:3000/claims/v17/backstop/help-reimbursement-amounts",
             "delay": 500
+        },
+        {
+            "label": "duplicate-claim",
+            "url": "http://localhost:3000/claims/v17/backstop/duplicate-claim",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-asc-wds-submission-check-fail",
+            "url": "http://localhost:3000/claims/v17/backstop/asc-wds-check",
+            "delay": 500
+        },
+        {
+            "label": "SRO-claim-submission-missing-GDL",
+            "url": "http://localhost:3000/claims/v17/backstop/missing-GDL?userType=signatory",
+            "delay": 500
+        },
+        {
+            "label": "submitter-claim-submission-missing-GDL",
+            "url": "http://localhost:3000/claims/v17/backstop/missing-GDL?userType=submitter",
+            "delay": 500
+        },
+        {
+            "label": "SRO-claim-submission-missing-bank-details",
+            "url": "http://localhost:3000/claims/v17/backstop/missing-bank-details?userType=signatory",
+            "delay": 500
+        },
+        {
+            "label": "submitter-claim-submission-missing-bank-details",
+            "url": "http://localhost:3000/claims/v17/backstop/missing-bank-details?userType=submitter",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-100-missing-details-error-scenario-1",
+            "url": "http://localhost:3000/claims/v17/backstop/claim?status=new&type=100&error=missing1",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-100-missing-details-error-scenario-2",
+            "url": "http://localhost:3000/claims/v17/backstop/claim?status=not-yet-submitted&type=100&error=missing2",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-60-missing-details-error-scenario-3",
+            "url": "http://localhost:3000/claims/v17/backstop/claim?status=new&type=60&error=missing1",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-40-missing-details-error-scenario-4",
+            "url": "http://localhost:3000/claims/v17/backstop/claim?status=not-yet-submitted&type=40&error=missing3",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-100-date-logic-error",
+            "url": "http://localhost:3000/claims/v17/backstop/claim?status=not-yet-submitted&type=100&error=date1",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-40-date-logic-error",
+            "url": "http://localhost:3000/claims/v17/backstop/claim?status=not-yet-submitted&type=40&error=date2",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-100-no-edits-error",
+            "url": "http://localhost:3000/claims/v17/backstop/claim?status=queried&type=100&error=noedits",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-60-no-edits-error",
+            "url": "http://localhost:3000/claims/v17/backstop/claim?status=queried&type=60&error=noedits",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-40-no-edits-error",
+            "url": "http://localhost:3000/claims/v17/backstop/claim?status=queried&type=40&error=noedits",
+            "delay": 500
         }
 
     ],

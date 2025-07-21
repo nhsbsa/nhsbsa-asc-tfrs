@@ -948,6 +948,7 @@ router.get('/claim', function (req, res) {
     let id = null
     const status = req.session.data.status
     const type = req.session.data.type
+    const error = req.session.data.error
 
   // Add data to the session
     req.session.data = {
@@ -1055,6 +1056,100 @@ router.get('/claim', function (req, res) {
     req.session.data.id = id
 
     loadData(req, "B13299931")
+
+    if (error == "missing1") {
+        req.session.data.submitError = {
+            learner: "missing",
+            startDate: "missing",
+            paymentDate: "missing",
+            evidenceOfPayment: "missing",
+            evidenceOfCompletion: "valid",
+            completionDate: "valid",
+            change: true,
+            claimValid: false
+            }
+    } else if (error == "missing2") {
+        req.session.data.submitError = {
+            learner: "valid",
+            startDate: "valid",
+            paymentDate: "missing",
+            evidenceOfPayment: "valid",
+            evidenceOfCompletion: "missing",
+            completionDate: "missing",
+            change: true,
+            claimValid: false
+            }
+    } else if (error == "missing3") {
+        req.session.data.submitError = {
+            learner: "valid",
+            startDate: "valid",
+            paymentDate: "valid",
+            evidenceOfPayment: "valid",
+            evidenceOfCompletion: "missing",
+            completionDate: "missing",
+            change: true,
+            claimValid: false
+            }
+    } else if (error == "date1") {
+        req.session.data.submitError = {
+            learner: "valid",
+            startDate: "invalid",
+            paymentDate: "valid",
+            evidenceOfPayment: "valid",
+            evidenceOfCompletion: "valid",
+            completionDate: "invalid",
+            change: true,
+            claimValid: false
+            }
+
+            for (const claim of req.session.data.claims) {
+                if (claim.claimID == "GE2-UA5D-4K6C-A") {
+                    const submission = getMostRelevantSubmission(claim)
+                    submission.costDate = "2025-03-31T23:55:44.062Z"
+                    submission.completionDate = "2025-02-25T23:55:44.062Z"
+                    submission.evidenceOfCompletion = "certificate1.pdf"
+                }
+            }
+    } else if (error == "date2") {
+        req.session.data.submitError = {
+            learner: "valid",
+            startDate: "invalid",
+            paymentDate: "valid",
+            evidenceOfPayment: "valid",
+            evidenceOfCompletion: "valid",
+            completionDate: "invalid",
+            change: true,
+            claimValid: false
+            }
+
+            for (const claim of req.session.data.claims) {
+                if (claim.claimID == "P1J-EHVI-88A2-C") {
+                    const submission = getMostRelevantSubmission(claim)
+                    submission.completionDate = "2024-06-15T23:55:44.062Z"
+                    submission.evidenceOfCompletion = "certificate1.pdf"
+                }
+            }
+    } else if (error == "noedits") {
+        req.session.data.submitError = {
+            learner: "valid",
+            startDate: "valid",
+            paymentDate: "valid",
+            evidenceOfPayment: "valid",
+            evidenceOfCompletion: "valid",
+            completionDate: "valid",
+            change: false,
+            claimValid: false
+            }
+
+            if (type =="60") {
+                for (const claim of req.session.data.claims) {
+                if (claim.claimID == "VJH-8Y37-EZNM-B") {
+                    const submission = getDraftSubmission(claim)
+                    submission.evidenceOfPayment = ["invoice1.pdf", "receipt1.pdf"]
+                }
+            }
+            }
+        }
 
     // Redirect to the page you want to screenshot
     res.redirect('../claim/claim-details');
@@ -1428,7 +1523,7 @@ router.get('/declaration', function (req, res) {
         userType: 'signatory',
         journey: 'signin',
         tabLocation: "claims",
-        id: "GE2-UA5D-4K6C-A",
+        id: "GE2-UA5D-4K6C-A"
     };
 
     loadData(req, "A02944934")
@@ -1449,7 +1544,7 @@ router.get('/confirmation', function (req, res) {
         userType: 'signatory',
         journey: 'signin',
         tabLocation: "claims",
-        id: "GE2-UA5D-4K6C-A",
+        id: "GE2-UA5D-4K6C-A"
     };
 
     loadData(req, "A02944934")
@@ -1465,7 +1560,7 @@ router.get('/help-new-claim', function (req, res) {
         area: 'Claims',
         userType: 'signatory',
         journey: 'signin',
-        tabLocation: "claims",
+        tabLocation: "claims"
     };
 
     loadData(req, "A02944934")
@@ -1481,7 +1576,7 @@ router.get('/help-evidence', function (req, res) {
         area: 'Claims',
         userType: 'signatory',
         journey: 'signin',
-        tabLocation: "claims",
+        tabLocation: "claims"
     };
 
     loadData(req, "A02944934")
@@ -1497,13 +1592,85 @@ router.get('/help-reimbursement-amounts', function (req, res) {
         area: 'Claims',
         userType: 'signatory',
         journey: 'signin',
-        tabLocation: "claims",
+        tabLocation: "claims"
     };
 
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
     res.redirect('../guidance/reimburse-amounts');
+});
+
+router.get('/duplicate-claim', function (req, res) {
+
+  // Add data to the session
+    req.session.data = {
+        area: 'Claims',
+        userType: 'signatory',
+        journey: 'signin',
+        tabLocation: "claims",
+        id: 'GE2-UA5D-4K6C-A',
+        dupeID: 'HMJ-74V3-T8V5-A',
+        matchType: '100'
+    };
+
+    loadData(req, "A02944934")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../claim/duplication');
+});
+
+router.get('/asc-wds-check', function (req, res) {
+
+  // Add data to the session
+    req.session.data = {
+        area: 'Claims',
+        userType: 'signatory',
+        journey: 'signin',
+        tabLocation: "claims",
+        id: 'GE2-UA5D-4K6C-A'
+    };
+
+    loadData(req, "A02944934")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../claim/asc-wds-check');
+});
+
+router.get('/missing-GDL', function (req, res) {
+    const userType = req.session.data.userType
+
+  // Add data to the session
+    req.session.data = {
+        area: 'Claims',
+        userType,
+        journey: 'signin',
+        tabLocation: "claims",
+        id: 'GE2-UA5D-4K6C-A'
+    };
+
+    loadData(req, "F87223491")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../claim/missing-GDL');
+});
+
+router.get('/missing-bank-details', function (req, res) {
+    const userType = req.session.data.userType
+
+  // Add data to the session
+    req.session.data = {
+        area: 'Claims',
+        userType,
+        journey: 'signin',
+        tabLocation: "claims",
+        id: 'GE2-UA5D-4K6C-A'
+    };
+
+    loadData(req, "F87223491")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../claim/missing-bank-details');
 });
 
 module.exports = router

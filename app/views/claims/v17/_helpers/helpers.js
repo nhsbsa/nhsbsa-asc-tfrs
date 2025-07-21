@@ -206,8 +206,8 @@ function checkDuplicateClaim(learnerID, trainingID, claimList) {
     result.id = ''
         for (const c of claimList) {
             let submission = getMostRelevantSubmission(c)
-            if (c.learner != null && c.fundingType == "TU") {
-                if (submission.trainingCode == trainingID && submission.learnerID == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
+            if (submission.learnerID != null) {
+                if (submission.trainingCode == trainingID && submission.learnerID == learnerID && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
                     result.matchType = c.claimType
                     result.check = true;
                     result.id = c.claimID
