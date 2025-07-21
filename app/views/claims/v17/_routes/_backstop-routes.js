@@ -6,7 +6,7 @@ const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, val
 
 
 router.get('/before-you-start', function (req, res) {
-    // Add data to the session
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -18,7 +18,7 @@ router.get('/before-you-start', function (req, res) {
 });
 
 router.get('/sign-in', function (req, res) {
-    // Add data to the session
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -30,7 +30,7 @@ router.get('/sign-in', function (req, res) {
 });
 
 router.get('/account-creation-incomplete', function (req, res) {
-    // Add data to the session
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -42,7 +42,7 @@ router.get('/account-creation-incomplete', function (req, res) {
 });
 
 router.get('/mfa-code', function (req, res) {
-    // Add data to the session
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -57,7 +57,7 @@ router.get('/sign-new-gdl', function (req, res) {
 
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -78,7 +78,7 @@ router.get('/sign-new-gdl', function (req, res) {
 router.get('/org-details', function (req, res) {
     const userType = req.session.data.userType
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
@@ -93,7 +93,7 @@ router.get('/org-details', function (req, res) {
 });
 
 router.get('/contact-us', function (req, res) {
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -107,7 +107,7 @@ router.get('/contact-us', function (req, res) {
 });
 
 router.get('/terms-of-use', function (req, res) {
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -130,7 +130,7 @@ router.get('/email', function (req, res) {
         userType = "signatory"
     }
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
@@ -166,7 +166,7 @@ router.get('/email', function (req, res) {
 });
 
 router.get('/email-expiry', function (req, res) {
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -189,7 +189,7 @@ router.get('/authentication-verify-details', function (req, res) {
         userType = "signatory"
     }
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
@@ -234,7 +234,7 @@ router.get('/sign-in', function (req, res) {
         userType = "signatory"
     }
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
@@ -279,7 +279,7 @@ router.get('/mfa', function (req, res) {
         userType = "signatory"
     }
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
@@ -324,7 +324,7 @@ router.get('/mfa-code', function (req, res) {
         userType = "signatory"
     }
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
@@ -365,7 +365,7 @@ router.get('/registration-verify-details', function (req, res) {
 
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -401,7 +401,7 @@ router.get('/registration-verify-details', function (req, res) {
 });
 
 router.get('/registration-account-issue', function (req, res) {
-    // Add data to the session
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -418,7 +418,7 @@ router.get('/registration-job-title', function (req, res) {
 
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -462,7 +462,7 @@ router.get('/registration-sign-gdl', function (req, res) {
 
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -503,7 +503,7 @@ router.get('/registration-bank-details-choice', function (req, res) {
 
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -549,7 +549,7 @@ router.get('/registration-bank-details', function (req, res) {
         journey = "creation"
     }
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -617,7 +617,7 @@ router.get('/view-bank-details', function (req, res) {
 
     const confirmation = req.session.data.confirmation
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -651,7 +651,7 @@ router.get('/manage-submitters', function (req, res) {
     const deleteType = req.session.data.delete
     const resend = req.session.data.resend
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -719,7 +719,7 @@ router.get('/manage-submitters', function (req, res) {
 router.get('/new-submitter-details', function (req, res) {
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -766,7 +766,7 @@ router.get('/new-submitter-details', function (req, res) {
 router.get('/check-submitter-details', function (req, res) {
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -794,7 +794,7 @@ router.get('/delete-submitters', function (req, res) {
     const error = req.session.data.error
     const scenario = req.session.data.scenario
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -824,7 +824,7 @@ router.get('/manage-claims', function (req, res) {
     const userType = req.session.data.userType
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
@@ -870,7 +870,7 @@ router.get('/advanced-search', function (req, res) {
     const results = req.session.data.results
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -913,7 +913,7 @@ router.get('/manage-claims-status', function (req, res) {
     const statusID = req.session.data.status
     const deleteClaim = req.session.data.deleteClaim
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -950,7 +950,7 @@ router.get('/claim', function (req, res) {
     const type = req.session.data.type
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -1158,7 +1158,7 @@ router.get('/claim', function (req, res) {
 router.get('/delete-claim', function (req, res) {
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1183,7 +1183,7 @@ router.get('/select-training', function (req, res) {
     const error = req.session.data.error
     const change = req.session.data.change
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -1218,7 +1218,7 @@ router.get('/funding-model-choice', function (req, res) {
 
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -1241,7 +1241,7 @@ router.get('/select-learner', function (req, res) {
     const error = req.session.data.error
     const change = req.session.data.change
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -1276,7 +1276,7 @@ router.get('/select-learner', function (req, res) {
 router.get('/add-new-learner', function (req, res) {
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -1316,7 +1316,7 @@ router.get('/add-new-learner', function (req, res) {
 
 router.get('/duplicate-learner', function (req, res) {
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -1339,7 +1339,7 @@ router.get('/duplicate-learner', function (req, res) {
 router.get('/start-date', function (req, res) {
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1378,7 +1378,7 @@ router.get('/start-date', function (req, res) {
 router.get('/payment-date', function (req, res) {
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1417,7 +1417,7 @@ router.get('/payment-date', function (req, res) {
 router.get('/completion-date', function (req, res) {
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1447,7 +1447,7 @@ router.get('/evidence', function (req, res) {
     const type = req.session.data.type
     const deleteState = req.session.data.deleteState
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1488,7 +1488,7 @@ router.get('/evidence-edit', function (req, res) {
         id = "GE2-UA5D-4K6C-A"
     }
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1517,7 +1517,7 @@ router.get('/evidence-edit', function (req, res) {
 router.get('/declaration', function (req, res) {
     const error = req.session.data.error
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1538,7 +1538,7 @@ router.get('/declaration', function (req, res) {
 
 router.get('/confirmation', function (req, res) {
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1555,7 +1555,7 @@ router.get('/confirmation', function (req, res) {
 
 router.get('/help-new-claim', function (req, res) {
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1571,7 +1571,7 @@ router.get('/help-new-claim', function (req, res) {
 
 router.get('/help-evidence', function (req, res) {
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1587,7 +1587,7 @@ router.get('/help-evidence', function (req, res) {
 
 router.get('/help-reimbursement-amounts', function (req, res) {
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1603,7 +1603,7 @@ router.get('/help-reimbursement-amounts', function (req, res) {
 
 router.get('/duplicate-claim', function (req, res) {
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1622,7 +1622,7 @@ router.get('/duplicate-claim', function (req, res) {
 
 router.get('/asc-wds-check', function (req, res) {
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1640,7 +1640,7 @@ router.get('/asc-wds-check', function (req, res) {
 router.get('/missing-GDL', function (req, res) {
     const userType = req.session.data.userType
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
@@ -1658,7 +1658,7 @@ router.get('/missing-GDL', function (req, res) {
 router.get('/missing-bank-details', function (req, res) {
     const userType = req.session.data.userType
 
-  // Add data to the session
+  delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
