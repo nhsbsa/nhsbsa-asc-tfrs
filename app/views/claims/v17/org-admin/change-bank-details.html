@@ -64,7 +64,7 @@
                 </div>
                 {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.accountName != 'valid' %}
                 <p id="accountName-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> {% if data.submitError.accountName == 'missing' %}Enter the name on the account {% elif data.submitError.accountName == 'tooLong' %}Name on the account must be no more than 140 characters{% endif %}
+                    <span class="govuk-visually-hidden">Error:</span> {% if data.submitError.accountName == 'missing' %}Enter the name on the account {% elif data.submitError.accountName == 'tooLong' %}Name on the account must be no more than 140 characters {% elif data.submitError.accountName == 'invalid' %}Account name must only include letters a to z, numbers, hyphens, spaces, ampersands, full stops and forward slashes {% endif %}
                 </p>
                 {% endif %}
                 <input

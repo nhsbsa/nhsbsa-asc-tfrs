@@ -275,6 +275,8 @@ function checkBankDetailsForm(accountName, sortCode, accountNumber, buildingSoci
         result.accountName = "tooLong"
     } else {
         result.accountName = "valid"
+    }   if (!(/^[A-Za-z0-9.&\/\- ]+$/.test(accountName))) {
+        result.accountName = "invalid"
     }
 
     if (sortCode == "" || sortCode === undefined || sortCode == null ) {
