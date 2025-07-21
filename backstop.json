@@ -1088,7 +1088,7 @@
 
     ],
     "paths": {
-        "bitmaps_reference": "app/views/claims/v17/_screenshots",
+        "bitmaps_reference": "app/views/claims/v17/_backstop/screenshots",
         "bitmaps_test": "backstop_data/bitmaps_test",
         "engine_scripts": "backstop_data/engine_scripts",
         "html_report": "backstop_data/html_report",
