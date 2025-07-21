@@ -648,7 +648,7 @@ router.get('/view-bank-details', function (req, res) {
 router.get('/manage-submitters', function (req, res) {
     let orgID = null
     const scenario = req.session.data.scenario
-    const deleteType = req.session.data.delete
+    const deleteType = req.session.data.deleteType
     const resend = req.session.data.resend
 
   delete req.session.data
@@ -676,7 +676,7 @@ router.get('/manage-submitters', function (req, res) {
     loadData(req, orgID)
 
     if ( resend == "success") {
-        req.session.data.invite = "sucess"
+        req.session.data.invite = "success"
         req.session.data.resendList = ["zane.montgomery@teatree.com"]
         req.session.data.matchResendUser = {
             givenName: "Zane",
@@ -692,7 +692,9 @@ router.get('/manage-submitters', function (req, res) {
             email: "zane.montgomery@teatree.com",
             status: "invited"
         }
-    } else if (deleteType == "invited") {
+    }
+    
+    if (deleteType == "invited") {
         req.session.data.deleteSuccess = "true"
         req.session.data.deletedUser = "invited"
         req.session.data.matchDeletedUser = {
@@ -815,7 +817,7 @@ router.get('/delete-submitters', function (req, res) {
     }
 
     // Redirect to the page you want to screenshot
-    res.redirect('../org-admin/confirm-user-details');
+    res.redirect('../org-admin/delete-user-confirmation');
 });
 
 router.get('/manage-claims', function (req, res) {

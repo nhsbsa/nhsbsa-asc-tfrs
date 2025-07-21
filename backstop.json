@@ -341,18 +341,8 @@
             "delay": 500
         },
         {
-            "label": "SRO-registered-bank-details-scenario-1",
+            "label": "SRO-registered-bank-details",
             "url": "http://localhost:3000/claims/v17/backstop/registration-bank-details?scenario=1&registered=true",
-            "delay": 500
-        },
-        {
-            "label": "SRO-registered-bank-details-scenario-2",
-            "url": "http://localhost:3000/claims/v17/backstop/registration-bank-details?scenario=2&registered=true",
-            "delay": 500
-        },
-        {
-            "label": "SRO-registered-bank-details-scenario-3",
-            "url": "http://localhost:3000/claims/v17/backstop/registration-bank-details?scenario=3&registered=true",
             "delay": 500
         },
         {
@@ -387,7 +377,7 @@
         },
         {
             "label": "SRO-manage-submitters-resend-success",
-            "url": "http://localhost:3000/claims/v17/backstop/manage-submitters?scenario=1&resend=sucess",
+            "url": "http://localhost:3000/claims/v17/backstop/manage-submitters?scenario=1&resend=success",
             "delay": 500
         },
         {
@@ -432,7 +422,7 @@
         },
         {
             "label": "SRO-new-submitters-invite-success",
-            "url": "http://localhost:3000/claims/v17/backstop/manage-submitters?scenario=1&resend=sucess",
+            "url": "http://localhost:3000/claims/v17/backstop/manage-submitters?scenario=1&resend=success",
             "delay": 500
         },
         {
