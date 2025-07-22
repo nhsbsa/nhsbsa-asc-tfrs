@@ -583,7 +583,7 @@ router.get('/registration-bank-details', function (req, res) {
         }
     } else if ( error == "invalid") {
         req.session.data.submitError = {
-            accountName: "valid",
+            accountName: "invalid",
             sortCode: "invalid",
             accountNumber: "invalid",
             buildingSociety: "invalid",
