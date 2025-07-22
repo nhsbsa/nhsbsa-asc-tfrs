@@ -1699,7 +1699,7 @@ router.get('/missing-GDL', function (req, res) {
     loadData(req, "F87223491")
 
     // Redirect to the page you want to screenshot
-    res.redirect('../claim/missing-GDL');
+    res.redirect('../claim/missing-gdl');
 });
 
 router.get('/missing-bank-details', function (req, res) {
