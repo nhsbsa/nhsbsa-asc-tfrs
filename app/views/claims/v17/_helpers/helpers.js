@@ -206,8 +206,8 @@ function checkDuplicateClaim(learnerID, trainingID, claimList) {
     result.id = ''
         for (const c of claimList) {
             let submission = getMostRelevantSubmission(c)
-            if (c.learner != null && c.fundingType == "TU") {
-                if (submission.trainingCode == trainingID && submission.learnerID == learnerID && (c.status == 'submitted' || c.status == 'approved')) {
+            if (submission.learnerID != null) {
+                if (submission.trainingCode == trainingID && submission.learnerID == learnerID && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
                     result.matchType = c.claimType
                     result.check = true;
                     result.id = c.claimID
@@ -281,8 +281,10 @@ function checkBankDetailsForm(accountName, sortCode, accountNumber, buildingSoci
 
     if (sortCode == "" || sortCode === undefined || sortCode == null ) {
         result.sortCode = "missing"
-    } else if (!(/^\d{6}$/.test(sortCode))) {
+    } else if (!(/^\d+$/.test(sortCode))) {
         result.sortCode = "invalid"
+    } else if ((sortCode.length != 6)) {
+        result.sortCode = "lengthIssue"
     } else {
         result.sortCode = "valid"
     }
