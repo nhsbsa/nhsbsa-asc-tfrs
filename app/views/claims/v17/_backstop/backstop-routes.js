@@ -1131,6 +1131,45 @@ router.get('/claim', function (req, res) {
                     submission.evidenceOfCompletion = "certificate1.pdf"
                 }
             }
+    } else if (error == "date3") {
+        req.session.data.submitError = {
+            learner: "valid",
+            startDate: "inFuture",
+            paymentDate: "inFuture",
+            evidenceOfPayment: "valid",
+            evidenceOfCompletion: "valid",
+            completionDate: "valid",
+            change: true,
+            claimValid: false
+            }
+
+            for (const claim of req.session.data.claims) {
+                if (claim.claimID == "GE2-UA5D-4K6C-A") {
+                    const submission = getMostRelevantSubmission(claim)
+                    submission.costDate = "2025-03-31T23:55:44.062Z"
+                    submission.completionDate = "2025-02-25T23:55:44.062Z"
+                    submission.evidenceOfCompletion = "certificate1.pdf"
+                }
+            }
+    } else if (error == "date4") {
+        req.session.data.submitError = {
+            learner: "valid",
+            startDate: "valid",
+            paymentDate: "valid",
+            evidenceOfPayment: "valid",
+            evidenceOfCompletion: "valid",
+            completionDate: "inFuture",
+            change: true,
+            claimValid: false
+            }
+
+            for (const claim of req.session.data.claims) {
+                if (claim.claimID == "P1J-EHVI-88A2-C") {
+                    const submission = getMostRelevantSubmission(claim)
+                    submission.completionDate = "2024-06-15T23:55:44.062Z"
+                    submission.evidenceOfCompletion = "certificate1.pdf"
+                }
+            }
     } else if (error == "noedits") {
         req.session.data.submitError = {
             learner: "valid",
@@ -1177,7 +1216,7 @@ router.get('/delete-claim', function (req, res) {
     } 
 
     // Redirect to the page you want to screenshot
-    res.redirect('../claim/delete-claim');
+    res.redirect('../claim/delete-claim-confirmation');
 });
 
 router.get('/select-training', function (req, res) {
@@ -1249,7 +1288,7 @@ router.get('/select-learner', function (req, res) {
         userType: "signatory",
         journey: "signin",
         tabLocation: "claims",
-        id: "GDH-34ND-MXS4-B"
+        id: "GE2-UA5D-4K6C-A"
     };
 
     loadData(req, "A02944934")
@@ -1265,10 +1304,6 @@ router.get('/select-learner', function (req, res) {
         req.session.data.learnerInput = ""
     } else if (error == "invalid") {
         req.session.data.learnerInput = "o"
-    }
-
-    if (change == "true") {
-        req.session.data.id = "GE2-UA5D-4K6C-A"
     }
 
     // Redirect to the page you want to screenshot
@@ -1347,7 +1382,7 @@ router.get('/start-date', function (req, res) {
         userType: 'signatory',
         journey: 'signin',
         tabLocation: "claims",
-        id: "GE2-UA5D-4K6C-A"
+        id: "ABC-UA5D-43BD-A"
     };
 
     loadData(req, "A02944934")
@@ -1368,9 +1403,9 @@ router.get('/start-date', function (req, res) {
             date: "invalidPolicy",
             dateValid: false
             }
-            req.session.data[activity-date-started-day] = "02"
-            req.session.data[activity-date-started-month] = "04"
-            req.session.data[activity-date-started-year] = "2023"
+            req.session.data["activity-date-started-day"] = "02"
+            req.session.data["activity-date-started-month"] = "04"
+            req.session.data["activity-date-started-year"] = "2023"
     }
 
     // Redirect to the page you want to screenshot
@@ -1407,9 +1442,9 @@ router.get('/payment-date', function (req, res) {
             date: "invalidPolicy",
             dateValid: false
             }
-            req.session.data[payment-date-started-day] = "02"
-            req.session.data[payment-date-started-month] = "04"
-            req.session.data[payment-date-started-year] = "2023"
+            req.session.data["payment-date-started-day"] = "02"
+            req.session.data["payment-date-started-month"] = "04"
+            req.session.data["payment-date-started-year"] = "2023"
     }
 
     // Redirect to the page you want to screenshot
@@ -1541,7 +1576,7 @@ router.get('/declaration', function (req, res) {
     req.session.data.id = id
 
     if ( error == "missing") {
-        req.session.data.missingOption = "true"
+        req.session.data.submitError = "true"
     }
 
     // Redirect to the page you want to screenshot
@@ -1562,7 +1597,7 @@ router.get('/confirmation', function (req, res) {
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
-    res.redirect('../claim/declaration');
+    res.redirect('../claim/confirmation');
 });
 
 router.get('/help-new-claim', function (req, res) {

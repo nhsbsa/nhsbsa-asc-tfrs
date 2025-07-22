@@ -711,16 +711,6 @@
             "delay": 500
         },
         {
-            "label": "claim-change-training-missing-error",
-            "url": "http://localhost:3000/claims/v17/backstop/select-training?error=missing&change=true",
-            "delay": 500
-        },
-        {
-            "label": "claim-change-training-invalid-error",
-            "url": "http://localhost:3000/claims/v17/backstop/select-training?error=invalid&change=true",
-            "delay": 500
-        },
-        {
             "label": "claim-change-training-results",
             "url": "http://localhost:3000/claims/v17/backstop/select-training?results=yes&change=true",
             "delay": 500
@@ -773,31 +763,6 @@
         {
             "label": "claim-select-learner-no-results",
             "url": "http://localhost:3000/claims/v17/backstop/select-learner?results=no",
-            "delay": 500
-        },
-        {
-            "label": "claim-change-learner",
-            "url": "http://localhost:3000/claims/v17/backstop/select-learner?change=true",
-            "delay": 500
-        },
-        {
-            "label": "claim-change-learner-missing-error",
-            "url": "http://localhost:3000/claims/v17/backstop/select-learner?error=missing&change=true",
-            "delay": 500
-        },
-        {
-            "label": "claim-change-learner-invalid-error",
-            "url": "http://localhost:3000/claims/v17/backstop/select-learner?error=invalid&change=true",
-            "delay": 500
-        },
-        {
-            "label": "claim-change-learner-results",
-            "url": "http://localhost:3000/claims/v17/backstop/select-learner?results=yes&change=true",
-            "delay": 500
-        },
-        {
-            "label": "claim-change-learner-no-results",
-            "url": "http://localhost:3000/claims/v17/backstop/select-learner?results=no&change=true",
             "delay": 500
         },
         {
@@ -942,7 +907,12 @@
         },
         {
             "label": "claim-declaration-missing-error",
-            "url": "http://localhost:3000/claims/v17/backstop/declaration?error=missing",
+            "url": "http://localhost:3000/claims/v17/backstop/declaration?status=not-yet-submitted&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "claim-declaration-resubmit-missing-error",
+            "url": "http://localhost:3000/claims/v17/backstop/declaration?status=queried&error=missing",
             "delay": 500
         },
         {
@@ -957,7 +927,7 @@
         },
         {
             "label": "guidance-help-evidence-requirements",
-            "url": "http://localhost:3000/claims/v17/backstop/help-evidence-requirements",
+            "url": "http://localhost:3000/claims/v17/backstop/help-evidence",
             "delay": 500
         },
         {
@@ -1013,6 +983,16 @@
         {
             "label": "claim-submission-40-missing-details-error-scenario-4",
             "url": "http://localhost:3000/claims/v17/backstop/claim?status=not-yet-submitted&type=40&error=missing3",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-100-future-date-logic-error",
+            "url": "http://localhost:3000/claims/v17/backstop/claim?status=not-yet-submitted&type=100&error=date3",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-40-future-date-logic-error",
+            "url": "http://localhost:3000/claims/v17/backstop/claim?status=not-yet-submitted&type=40&error=date4",
             "delay": 500
         },
         {
