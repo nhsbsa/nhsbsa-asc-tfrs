@@ -80,7 +80,7 @@
                 </div>
                 {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.sortCode != 'valid' %}
                 <p id="sortCode-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> {% if data.submitError.sortCode == 'missing' %} Enter a sort code{% elif data.submitError.sortCode == 'invalid' %} Enter a valid sort code like 309430{% endif %}
+                    <span class="govuk-visually-hidden">Error:</span> {% if data.submitError.sortCode == 'missing' %} Enter a sort code{% elif data.submitError.sortCode == 'invalid' %} Enter a valid sort code like 309430{% elif data.submitError.sortCode == 'lengthIssue' %} Sort code must be 6 digits long{% endif %}
                 </p>
                 {% endif %}
                 <input class="govuk-input govuk-input--width-5 govuk-input--extra-letter-spacing {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.sortCode != 'valid' %}govuk-input--error{% endif %}" id="sort-code"

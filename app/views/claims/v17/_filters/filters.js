@@ -335,6 +335,8 @@ addFilter('bankErrorMessage', function (bankErrorObject) {
         errorMessages.push('<li><a href="#sortCode-error">Enter a sort code</a></li>');
     } else if (bankErrorObject.sortCode === 'invalid') {
         errorMessages.push('<li><a href="#sortCode-error">Enter a valid sort code like 309430</a></li>');
+    }else if (bankErrorObject.sortCode === 'lengthIssue') {
+        errorMessages.push('<li><a href="#sortCode-error">Sort code must be 6 digits long</a></li>');
     }
     if (bankErrorObject.accountNumber === 'missing') {
         errorMessages.push('<li><a href="#accountNumber-error">Enter an account number</a></li>');
