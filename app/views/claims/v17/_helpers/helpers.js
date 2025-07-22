@@ -273,10 +273,10 @@ function checkBankDetailsForm(accountName, sortCode, accountNumber, buildingSoci
         result.accountName = "missing"
     }  else if(accountName.length > 140 ) {
         result.accountName = "tooLong"
+    }   else if (!(/^[A-Za-z0-9.&\/\- ]+$/.test(accountName))) {
+        result.accountName = "invalid"
     } else {
         result.accountName = "valid"
-    }   if (!(/^[A-Za-z0-9.&\/\- ]+$/.test(accountName))) {
-        result.accountName = "invalid"
     }
 
     if (sortCode == "" || sortCode === undefined || sortCode == null ) {
