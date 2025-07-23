@@ -3,7 +3,7 @@ const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission } = require('../_helpers/helpers.js');
 
-// v9 Prototype routes
+// v10 Prototype routes
 
 router.get('/load-data', function (req, res) {
   //Load data from JSON files
@@ -580,7 +580,7 @@ router.get('/showEditedNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
-      res.redirect('processing/v9/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
+      res.redirect('processing/v10/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
@@ -592,7 +592,7 @@ router.get('/hideEditedNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
-      res.redirect('processing/v9/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
+      res.redirect('processing/v10/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });

@@ -1,5 +1,5 @@
 const fs = require('fs');
-const dataPath = 'app/views/processing/v9/_data/'
+const dataPath = 'app/views/processing/v10/_data/'
 
 
 // funtion to load in data files
