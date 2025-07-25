@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable } = require('../_helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile } = require('../_helpers/helpers.js');
 const fs = require('fs');
 
 addFilter('processorstatusTag', function (statusID) {
@@ -298,4 +298,19 @@ addFilter('formatCountToText', function (count) {
     if (count == 2) { return "Second"} 
     if (count == 3) { return "Third"} 
     if (count == 4) { return "Fourth"} 
+})
+addFilter('returntrainingType', function (code) {
+   const dataPath = 'app/views/processing/v10/_data/'
+    const trainingCourses = loadJSONFromFile('training.json', dataPath)
+    for (const group of trainingCourses) {
+        const course = group.courses.find(course=>course.code ==code);
+        if (course){
+            if (group.groupTitle=="Courses"){
+                return "Course code"
+            } else if(group.groupTitle=="Qualifications") {
+                return "Qualification number"
+            }
+        }
+    }
+    return null
 })
