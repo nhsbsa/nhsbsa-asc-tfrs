@@ -3,6 +3,8 @@ const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission } = require('../_helpers/helpers.js');
 
+router.use('/processing/v10/backstop', require('../_backstop/backstop-routes.js'));
+
 // v10 Prototype routes
 
 router.get('/load-data', function (req, res) {
@@ -112,17 +114,29 @@ router.post('/search-claim-id', function (req, res) {
 
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
-    return res.redirect('process-claim/start-process?invalidIDError=true&emptyError=true')
+    if (orgID == null) {
+      return res.redirect('process-claim/start-process?invalidIDError=true&emptyError=true')
+    } else {
+      return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + orgID + '&currentPage=1&invalidIDError=true&emptyError=true')
+    }
   }
 
   const letterORegex = /o/i;
   if (letterORegex.test(claimID)) {
-    return res.redirect('process-claim/start-process?invalidIDError=true')
+    if (orgID == null) {
+      return res.redirect('process-claim/start-process?invalidIDError=true')
+    } else {
+      return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + orgID + '&currentPage=1&invalidIDError=true')
+    }
   }
 
   const lengthRegex = /^[A-NP-Z0-9]{3}[A-NP-Z0-9]{4}[A-NP-Z0-9]{4}(?:A|B|C)?$/i;
   if (!lengthRegex.test(claimID)) {
+    if (orgID == null) {
     return res.redirect('process-claim/start-process?invalidIDError=true')
+    } else {
+      return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + orgID + '&currentPage=1&invalidIDError=true')
+    }
   }
 
   var foundClaim = null

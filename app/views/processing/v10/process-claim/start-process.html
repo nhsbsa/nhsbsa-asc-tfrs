@@ -24,7 +24,7 @@
                             {% if (data.emptyError) %}
                             <a href="#claimID"> Enter a claim reference</a>
                             {% elif (data.notFound) %}
-                            <a href="#claimID">No match returned for your search: <q>{{ data.id }}</a>
+                            <a href="#claimID">No match returned for your search: <q>{{ data.claimID }}</a>
                             {% else %}
                             <a href="#claimID">Enter a claim reference in the correct format</a>
                             {% endif %}
@@ -53,7 +53,7 @@
                             {% if (data.emptyError) %}
                             <span class="govuk-visually-hidden">Error:</span> Enter a claim reference
                             {% elif (data.notFound) %}
-                            <span class="govuk-visually-hidden">Error:</span> No match returned for your search: <q>{{ data.id }}
+                            <span class="govuk-visually-hidden">Error:</span> No match returned for your search: <q>{{ data.claimID }}
                             {% else %}
                             <span class="govuk-visually-hidden">Error:</span> Enter a claim reference in the correct format
                             {% endif %}
@@ -62,7 +62,7 @@
                         <input
                             class="govuk-input govuk-input--width-10 {% if (data.invalidIDError or data.notFound) %} govuk-input--error {% endif %} "
                             aria-describedby="claim-id-hint {% if (data.invalidIDError or data.notFound) %} event-name-error {% endif %}"
-                            id="claimID" name="claimID" type="text">
+                            id="claimID" name="claimID" type="text" value="{{ data.claimID | default ('') }}">
                     </div>
                 </fieldset>
             </div>

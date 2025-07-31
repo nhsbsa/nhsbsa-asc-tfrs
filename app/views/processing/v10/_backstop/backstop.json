@@ -1,0 +1,35 @@
+{
+    "id": "processing",
+    "viewports": [
+        {
+            "label": "desktop",
+            "width": 1200,
+            "height": 1000
+        }
+    ],
+    "onBeforeScript": "puppet/onBefore.js",
+    "onReadyScript": "puppet/onReady.js",
+    "scenarios": [
+        {
+            "label": "start",
+            "url": "http://localhost:3000/claims/v17/backstop/before-you-start",
+            "delay": 500
+        }
+    ],
+    "paths": {
+        "bitmaps_reference": "app/views/processing/v17/_backstop/screenshots",
+        "bitmaps_test": "backstop_data/bitmaps_test",
+        "engine_scripts": "backstop_data/engine_scripts",
+        "html_report": "backstop_data/html_report",
+        "ci_report": "backstop_data/ci_report"
+    },
+    "report": ["browser"],
+    "engine": "puppeteer",
+    "engineOptions": {
+        "args": ["--no-sandbox"]
+    },
+    "asyncCaptureLimit": 5,
+    "asyncCompareLimit": 50,
+    "debug": false,
+    "debugWindow": false
+}

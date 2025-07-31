@@ -11,8 +11,7 @@
 {% set maxPage =  noClaims | pageCount(rowsPerPage) %}
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-
+    <div class="govuk-grid-column-full">
         {% if (data.invalidIDError) or (data.notFound) or (data.emptyError)%}
         <div class="govuk-error-summary govuk-!-margin-top-2" data-module="govuk-error-summary">
             <div role="alert">
@@ -35,7 +34,8 @@
             </div>
         </div>
         {% endif %}
-
+    </div>
+    <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l govuk-!-margin-top-6">Claims</h1>
         {% if (claims.length == 0) %}
             <p class="govuk-body">This organisation has not yet submitted any claims.</p>
