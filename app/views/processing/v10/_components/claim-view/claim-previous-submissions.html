@@ -208,14 +208,24 @@
                             {%endfor %}
                         </tr>
                     {% endif %}
-
+                    
                 </tbody>
 
 
             </table>
           
         </div>
-        
+         {% if  claim.claimType =="60" %}
+                        {% if pairClaim != null %}
+                        <p class="govuk-body govuk-!-margin-top-4" >View the <a href="./org-view-main?id={{pairClaim.claimID}}&processClaimStep=inProgress" class="govuk-link">40 part of the claim</a>, which covers evidence of training completion.</p>
+                        {% else %}
+                        <p class="govuk-body govuk-!-margin-top-4">The 40 part of the claim, which covers evidence of training completion, has not  been submitted yet.</p>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if claim.claimType =="40"%}
+                    <p class="govuk-body govuk-!-margin-top-4">View the <a href="./org-view-main?id={{pairClaim.claimID}}&processClaimStep=inProgress" class="govuk-link">60 part of the claim</a>, which covers evidence of payment.</p>
+                    {% endif %}
 
     </div>
 
