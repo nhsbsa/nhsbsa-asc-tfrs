@@ -157,7 +157,7 @@
         },
         {
             "label": "claim-rejected-100",
-            "url": "http://localhost:3000/processing/v10/backstop/claim?userType=processor&status=querejectedried&type=100",
+            "url": "http://localhost:3000/processing/v10/backstop/claim?userType=processor&status=rejected&type=100",
             "delay": 500
         },
         {
@@ -342,7 +342,7 @@
         },
         {
             "label": "claim-rejected-100-confirmation",
-            "url": "http://localhost:3000/processing/v10/backstop/claim?userType=processor&status=querejectedried&type=100&confirmation=true",
+            "url": "http://localhost:3000/processing/v10/backstop/claim?userType=processor&status=rejected&type=100&confirmation=true",
             "delay": 500
         },
         {
@@ -641,6 +641,21 @@
             "delay": 500
         },
         {
+            "label": "edit-SRO-invite-success-scenario-1",
+            "url": "http://localhost:3000/processing/v10/backstop/view-org-users?userType=leadProcessor&scenario=1&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-invite-success-scenario-3",
+            "url": "http://localhost:3000/processing/v10/backstop/view-org-users?userType=leadProcessor&scenario=3&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-invite-success-scenario-4",
+            "url": "http://localhost:3000/processing/v10/backstop/view-org-users?userType=leadProcessor&scenario=4&resend=true",
+            "delay": 500
+        },
+        {
             "label": "change-SRO-details-scenario-1",
             "url": "http://localhost:3000/processing/v10/backstop/change-SRO?type=replace&scenario=1",
             "delay": 500
@@ -788,6 +803,31 @@
         {
             "label": "change-SRO-confirm-SRO-details-scenario-5-fail-error",
             "url": "http://localhost:3000/processing/v10/backstop/confirm-SRO-details-change?type=replace&scenario=5&error=fail",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-invite-success-scenario-1",
+            "url": "http://localhost:3000/processing/v10/backstop/view-org-users?userType=leadProcessor&scenario=1&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-invite-success-scenario-2",
+            "url": "http://localhost:3000/processing/v10/backstop/view-org-users?userType=leadProcessor&scenario=2&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-invite-success-scenario-3",
+            "url": "http://localhost:3000/processing/v10/backstop/view-org-users?userType=leadProcessor&scenario=3&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-invite-success-scenario-4",
+            "url": "http://localhost:3000/processing/v10/backstop/view-org-users?userType=leadProcessor&scenario=4&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-invite-success-scenario-5",
+            "url": "http://localhost:3000/processing/v10/backstop/view-org-users?userType=leadProcessor&scenario=5&resend=true",
             "delay": 500
         }
     ],

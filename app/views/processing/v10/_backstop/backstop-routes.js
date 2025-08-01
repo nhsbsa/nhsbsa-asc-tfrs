@@ -22,6 +22,8 @@ router.get('/landing-screen', function (req, res) {
         break;
     }
 
+    loadData(req)
+
     // Redirect to the page you want to screenshot
     res.redirect('../home');
 });
@@ -40,6 +42,8 @@ router.get('/org-details', function (req, res) {
     } else if ( error == "invalid") {
         req.session.data.submitError = "invalid"
     }
+
+    loadData(req)
 
     // Redirect to the page you want to screenshot
     res.redirect('../register-organisation/organisation-details');
@@ -64,6 +68,8 @@ router.get('/org-issue', function (req, res) {
         req.session.data.submitError = "incorrect"
     }
 
+    loadData(req)
+
     // Redirect to the page you want to screenshot
     res.redirect('../register-organisation/org-issue');
 });
@@ -81,6 +87,8 @@ router.get('/confirm-org-details', function (req, res) {
     if ( error == "missing") {
         req.session.data.submitError = "missing"
     }
+
+    loadData(req)
 
     // Redirect to the page you want to screenshot
     res.redirect('../register-organisation/confirm-organisation-details');
@@ -114,7 +122,9 @@ router.get('/SRO-details', function (req, res) {
         req.session.data.familyName = "Smith"
         req.session.data.givenName = "John"
         req.session.data.email = "john.smith"
-    } 
+    }
+
+    loadData(req)
 
     // Redirect to the page you want to screenshot
     res.redirect('../register-organisation/signatory-details');
@@ -132,6 +142,8 @@ router.get('/confirm-SRO-details', function (req, res) {
         givenName: "John",
         email: "john.smith@fakecarehome.com"
     };
+
+    loadData(req)
 
     // Redirect to the page you want to screenshot
     res.redirect('../register-organisation/confirm-signatory-details');
@@ -156,6 +168,8 @@ router.get('/find-claim', function (req, res) {
         req.session.data.claimID = "ABC-ABCD-ABCD-A"
         req.session.data.notFound = "true"
     }
+
+    loadData(req)
 
     // Redirect to the page you want to screenshot
     res.redirect('../process-claim/start-process');
@@ -327,7 +341,6 @@ router.get('/outcome', function (req, res) {
     let id = null
     const status = req.session.data.status
     const type = req.session.data.type
-    const error = req.session.data.error
 
   delete req.session.data
     req.session.data = {
@@ -343,36 +356,63 @@ router.get('/outcome', function (req, res) {
     switch (type) {
         case "100":
         id = "HMJ-74V3-T8V5-A";
+        if ( status == "approve") {
+            req.session.data.payment = "approve"
+            req.session.data.completion = "approve"
+            req.session.data.paymentReimbursementAmount = "50"
+            req.session.data.result = "approve"
+        } else if ( status == "reject") {
+            req.session.data.payment = "reject"
+            req.session.data.completion = "reject"
+            req.session.data.paymentRejectNote = "This is a test note."
+            req.session.data.completionRejectNote = "This is a test note."
+            req.session.data.result = "reject"
+        } else if ( status == "queried") {
+            req.session.data.payment = "queried"
+            req.session.data.completion = "queried"
+            req.session.data.paymentQueriedNote = "This is a test note."
+            req.session.data.completionQueriedNote = "This is a test note."
+            req.session.data.result = "queried"
+        }
         break;
 
         case "60":
         id = "1SC-WE58-MT7W-B";
+        if ( status == "approve") {
+            req.session.data.payment = "approve"
+            req.session.data.paymentReimbursementAmount = "50"
+            req.session.data.result = "approve"
+        } else if ( status == "reject") {
+            req.session.data.payment = "reject"
+            req.session.data.paymentRejectNote = "This is a test note."
+            req.session.data.result = "reject"
+        } else if ( status == "queried") {
+            req.session.data.payment = "queried"
+            req.session.data.paymentQueriedNote = "This is a test note."
+            req.session.data.result = "queried"
+        }
         break;
 
         case "40":
         id = "9JH-I94K-TPRB-C";
+        if ( status == "approve") {
+            req.session.data.completion = "approve"
+            req.session.data.result = "approve"
+        } else if ( status == "reject") {
+            req.session.data.completion = "reject"
+            req.session.data.completionRejectNote = "This is a test note."
+            req.session.data.result = "reject"
+        } else if ( status == "queried") {
+            req.session.data.completion = "queried"
+            req.session.data.completionQueriedNote = "This is a test note."
+            req.session.data.result = "queried"
+        }
         break;
     }
 
     req.session.data.id = id
 
     loadData(req)
-
-    if ( status == "approve") {
-        req.session.data.payment = "approve"
-        req.session.data.completion = "approve"
-        req.session.data.paymentReimbursementAmount = "50"
-    } else if ( status == "reject") {
-        req.session.data.payment = "reject"
-        req.session.data.completion = "reject"
-        req.session.data.paymentRejectNote = "This is a test note."
-        req.session.data.completionRejectNote = "This is a test note."
-    } else if ( status == "queried") {
-        req.session.data.payment = "queried"
-        req.session.data.completion = "queried"
-        req.session.data.paymentQueriedNote = "This is a test note."
-        req.session.data.completionQueriedNote = "This is a test note."
-    }
 
     // Redirect to the page you want to screenshot
     res.redirect('../organisation/org-view-main');
@@ -450,6 +490,7 @@ router.get('/find-org', function (req, res) {
 router.get('/view-org-users', function (req, res) {
     const userType = req.session.data.userType
     const resend = req.session.data.resend
+    const scenario = req.session.data.scenario
 
     delete req.session.data
     req.session.data = {
@@ -472,6 +513,13 @@ router.get('/view-org-users', function (req, res) {
 
         case "2":
         req.session.data.orgId = "G91774723";
+        if ( resend == "true") {
+            req.session.data.name = "hadyn-lacey@pinetreecare.co.uk"
+            req.session.data.invite = "success"
+            req.session.data.resendList = ["hadyn-lacey@pinetreecare.co.uk"]
+        } else if ( resend == "fail") {
+            req.session.data.invite = "failure"
+        }
         break;
 
         case "3":
@@ -498,6 +546,13 @@ router.get('/view-org-users', function (req, res) {
 
         case "5":
         req.session.data.orgId = "B02944934";
+        if ( resend == "true") {
+            req.session.data.name = "lionel-lowel@evergreencare.co.uk"
+            req.session.data.invite = "success"
+            req.session.data.resendList = ["lionel-lowel@evergreencare.co.uk"]
+        } else if ( resend == "fail") {
+            req.session.data.invite = "failure"
+        }
         break;
     }
 
@@ -555,7 +610,6 @@ router.get('/change-SRO', function (req, res) {
     req.session.data = {
         area: 'Processing',
         userType: "processor",
-        orgId: "G03944234",
         newOrg: "true",
         SROChange
     };
@@ -621,7 +675,7 @@ router.get('/change-SRO', function (req, res) {
 
 router.get('/confirm-SRO-details-change', function (req, res) {
     const error = req.session.data.error
-    const scenario = req.session.data.error
+    const scenario = req.session.data.scenario
     const SROChange = req.session.data.type
 
     delete req.session.data
@@ -631,7 +685,8 @@ router.get('/confirm-SRO-details-change', function (req, res) {
         newOrg: "true",
         familyName: "Smith",
         givenName: "John",
-        email: "john.smith@fakecarehome.com"
+        email: "john.smith@fakecarehome.com",
+        SROChange
     };
 
     switch (scenario) {
