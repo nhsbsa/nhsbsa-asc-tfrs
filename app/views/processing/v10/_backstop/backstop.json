@@ -412,7 +412,7 @@
         },
         {
             "label": "find-org-invalid-error",
-            "url": "https://adult-social-care-7fe9bafd955a.herokuapp.com/processing/v10/backstop/find-org?userType=processor&error=missing",
+            "url": "https://adult-social-care-7fe9bafd955a.herokuapp.com/processing/v10/backstop/find-org?userType=processor&error=invalid",
             "delay": 500
         },
         {

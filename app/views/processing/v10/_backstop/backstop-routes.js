@@ -654,8 +654,11 @@ router.get('/change-SRO', function (req, res) {
         req.session.data.familyName = "Smith"
         req.session.data.givenName = "John"
         req.session.data.email = "john.smith"
-    } else if ( error == "noChange") {
+    } else if ( error == "nochange") {
         req.session.data.submitError = "noChange"
+        req.session.data.familyName = "Smith"
+        req.session.data.givenName = "John"
+        req.session.data.email = "john.smith&fakecarehome.com"
     }  else if ( error == "duplicate") {
         req.session.data.submitError = {
             familyName: "valid",
