@@ -3,6 +3,8 @@ const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission } = require('../_helpers/helpers.js');
 
+router.use('/processing/v10/backstop', require('../_backstop/backstop-routes.js'));
+
 // v10 Prototype routes
 
 router.get('/load-data', function (req, res) {
@@ -107,22 +109,34 @@ router.post('/search-claim-id', function (req, res) {
 
 
   var claimID = req.session.data.claimID.replace(/[\s-]/g, '');
-  var orgID = req.session.data.orgId
+  var orgID = req.session.data.orgID
 
 
   const emptyRegex = /\S/;
   if (!emptyRegex.test(claimID)) {
-    return res.redirect('process-claim/start-process?invalidIDError=true&emptyError=true')
+    if (orgID == null) {
+      return res.redirect('process-claim/start-process?invalidIDError=true&emptyError=true')
+    } else {
+      return res.redirect('organisation/org-view-main?orgTab=claims&orgID=' + orgID + '&currentPage=1&invalidIDError=true&emptyError=true')
+    }
   }
 
   const letterORegex = /o/i;
   if (letterORegex.test(claimID)) {
-    return res.redirect('process-claim/start-process?invalidIDError=true')
+    if (orgID == null) {
+      return res.redirect('process-claim/start-process?invalidIDError=true')
+    } else {
+      return res.redirect('organisation/org-view-main?orgTab=claims&orgID=' + orgID + '&currentPage=1&invalidIDError=true')
+    }
   }
 
   const lengthRegex = /^[A-NP-Z0-9]{3}[A-NP-Z0-9]{4}[A-NP-Z0-9]{4}(?:A|B|C)?$/i;
   if (!lengthRegex.test(claimID)) {
+    if (orgID == null) {
     return res.redirect('process-claim/start-process?invalidIDError=true')
+    } else {
+      return res.redirect('organisation/org-view-main?orgTab=claims&orgID=' + orgID + '&currentPage=1&invalidIDError=true')
+    }
   }
 
   var foundClaim = null
@@ -135,23 +149,24 @@ router.post('/search-claim-id', function (req, res) {
       foundClaim = c
     }
   }
+  console.log(foundClaim + " " + orgID)
   if (foundClaim == null) {
     if (orgID == null) {
       return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
     } else {
-      return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + orgID + '&notFound=true&currentPage=1')
+      return res.redirect('organisation/org-view-main?orgTab=claims&orgID=' + orgID + '&notFound=true&currentPage=1')
     }
-  } else if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected") {
+  } else if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected" || foundClaim.status == "queried") {
 
     req.session.data.processClaimStep = "inProgress"
     req.session.data.orgTab = "singleClaim"
 
-    return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgId=' + foundClaim.workplaceID)
+    return res.redirect('organisation/org-view-main' + '?id=' + foundClaim.claimID + '&orgID=' + foundClaim.workplaceID)
   } else {
     if (orgID == null) {
       return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')
     } else {
-      return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + foundOrg + '&notFound=true&currentPage=1')
+      return res.redirect('organisation/org-view-main?orgTab=claims&orgID=' + orgID + '&notFound=true&currentPage=1')
     }
   }
 });
@@ -178,7 +193,7 @@ router.get('/back-all-claims', function (req, res) {
   delete req.session.data.completion
   delete req.session.data.completionRejectNote
 
-  return res.redirect('organisation/org-view-main?orgTab=claims&orgId=' + req.session.data.orgId + '&currentPage=1#tab-content')
+  return res.redirect('organisation/org-view-main?orgTab=claims&orgID=' + req.session.data.orgID + '&currentPage=1#tab-content')
 
 });
 
@@ -395,7 +410,7 @@ router.post('/search-org', function (req, res) {
   } else {
     delete req.session.data.orgSearchInput
     req.session.data.orgTab = 'users'
-    req.session.data.orgId = foundOrg.workplaceID
+    req.session.data.orgID = foundOrg.workplaceID
     res.redirect('organisation/org-view-main')
   }
 });
@@ -419,7 +434,7 @@ router.post('/update-signatory-invite', function (req, res) {
   const SROChange  = req.session.data.SROChange
 
   
-  const orgID = req.session.data.orgId
+  const orgID = req.session.data.orgID
 
   for (const org of req.session.data['organisations']) {
     if (org.workplaceID == orgID) {
@@ -506,7 +521,7 @@ router.get('/back-to-start-handler', function (req, res) {
   delete req.session.data.processClaimStep
   delete req.session.data.currentPage
   delete req.session.data.orgTab
-  delete req.session.data.orgId
+  delete req.session.data.orgID
 
   delete req.session.data.result
 
@@ -551,10 +566,10 @@ router.post('/signatory-change-handler', function (req, res) {
   let noChange = false
 
   if (SROChange == 'edit') {
-    const orgId = req.session.data.orgId
+    const orgID = req.session.data.orgID
     const organisations = req.session.data.organisations
     for (const org of organisations) {
-      if (org.workplaceID == orgId) {
+      if (org.workplaceID == orgID) {
         noChange = org.signatory.active.familyName == familyName && org.signatory.active.givenName == givenName && org.signatory.active.email == email
       }
     }
@@ -579,7 +594,7 @@ router.get('/showEditedNote', function (req, res) {
   let subCount = req.session.data['count']
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
-    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
       res.redirect('processing/v10/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
     }
   }
@@ -591,7 +606,7 @@ router.get('/hideEditedNote', function (req, res) {
   req.session.data['submittedDate'] = null
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
-    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgId)) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
       res.redirect('processing/v10/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
     }
   }
