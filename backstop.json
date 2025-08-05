@@ -36,6 +36,11 @@
             "delay": 500
         },
         {
+            "label": "register-org-already-invited",
+            "url": "http://localhost:3000/processing/v10/backstop/org-issue?issue=dupe",
+            "delay": 500
+        },
+        {
             "label": "register-org-confirm-org-details",
             "url": "http://localhost:3000/processing/v10/backstop/confirm-org-details",
             "delay": 500
@@ -47,7 +52,7 @@
         },
         {
             "label": "register-org-asc-wds-incorrect",
-            "url": "http://localhost:3000/processing/v10/backstop/org-issue?error=incorrect",
+            "url": "http://localhost:3000/processing/v10/backstop/org-issue?issue=incorrect",
             "delay": 500
         },
         {
@@ -87,7 +92,7 @@
         },
         {
             "label": "find-claim-invalid-error",
-            "url": "http://localhost:3000/processing/v10/backstop/find-claim?error=missing",
+            "url": "http://localhost:3000/processing/v10/backstop/find-claim?error=invalid",
             "delay": 500
         },
         {
@@ -293,6 +298,21 @@
         {
             "label": "processor-claim-approve-outcome-40",
             "url": "http://localhost:3000/processing/v10/backstop/outcome?status=approve&type=40",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-needs-action-outcome-100",
+            "url": "http://localhost:3000/processing/v10/backstop/outcome?status=queried&type=100",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-needs-action-outcome-60",
+            "url": "http://localhost:3000/processing/v10/backstop/outcome?status=queried&type=60",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-needs-action-outcome-40",
+            "url": "http://localhost:3000/processing/v10/backstop/outcome?status=queried&type=40",
             "delay": 500
         },
         {

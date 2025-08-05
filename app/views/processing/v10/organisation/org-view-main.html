@@ -1,6 +1,6 @@
 {% extends "../_layouts/processing-main.html" %}
-{% set org = data.organisations | findOrg(data.orgId) %}
-{% set claims = data.orgId | findOrgClaims(data.claims) %}
+{% set org = data.organisations | findOrg(data.orgID) %}
+{% set claims = data.orgID | findOrgClaims(data.claims) %}
 {% set SROStatusCheck = false %}
 {% set activeSRO = null %}
 

@@ -60,11 +60,11 @@ router.get('/org-issue', function (req, res) {
 
     if ( issue == "timeout") {
         req.session.data.submitError = "timeout"
-    } else if ( error == "invalid") {
-        req.session.data.orgId = "G91371231"
+    } else if ( issue == "dupe") {
+        req.session.data.orgID = "B02944934"
         req.session.data.submitError = "duplicate"
-    } else if ( error == "invalid") {
-        req.session.data.orgId = "G03944234"
+    } else if ( issue == "incorrect") {
+        req.session.data.orgID = "G03944234"
         req.session.data.submitError = "incorrect"
     }
 
@@ -81,7 +81,7 @@ router.get('/confirm-org-details', function (req, res) {
     req.session.data = {
         area: 'Processing',
         userType: "processor",
-        orgId: "G03944234"
+        orgID: "G03944234"
     };
 
     if ( error == "missing") {
@@ -101,7 +101,7 @@ router.get('/SRO-details', function (req, res) {
     req.session.data = {
         area: 'Processing',
         userType: "processor",
-        orgId: "G03944234",
+        orgID: "G03944234",
         newOrg: "true"
     };
 
@@ -136,7 +136,7 @@ router.get('/confirm-SRO-details', function (req, res) {
     req.session.data = {
         area: 'Processing',
         userType: "processor",
-        orgId: "G03944234",
+        orgID: "G03944234",
         newOrg: "true",
         familyName: "Smith",
         givenName: "John",
@@ -191,7 +191,7 @@ router.get('/claim', function (req, res) {
         journey: "signin",
         tabLocation: "claims",
         orgTab: "singleClaim",
-        orgId: "B02944934",
+        orgID: "B02944934",
         processClaimStep: "inProgress"
     };
 
@@ -215,7 +215,7 @@ router.get('/claim', function (req, res) {
         case "queried":
         switch (type) {
             case "100":
-            id = "CFD-EHS7-F43J-A";
+            id = "CWH-E4C7-FBXJ-A";
             break;
 
             case "60":
@@ -296,6 +296,7 @@ router.get('/claim', function (req, res) {
     } else if ( error == "costMissing") {
         req.session.data.paymentReimbursementAmountIncomplete = "true"
     }  else if ( error == "costInvalid") {
+        req.session.data.paymentReimbursementAmount = "abc"
         req.session.data.paymentReimbursementAmountInvalid = "true"
     } else if ( error == "rejectMissing") {
         switch (type) {
@@ -349,7 +350,7 @@ router.get('/outcome', function (req, res) {
         journey: "signin",
         tabLocation: "claims",
         orgTab: "singleClaim",
-        orgId: "B02944934",
+        orgID: "B02944934",
         processClaimStep: "confirmOutcome"
     };
 
@@ -429,7 +430,7 @@ router.get('/submissions', function (req, res) {
         journey: "signin",
         tabLocation: "claims",
         orgTab: "singleClaim",
-        orgId: "B02944934",
+        orgID: "B02944934",
         processClaimStep: "previousSubmissions"
     };
 
@@ -501,7 +502,7 @@ router.get('/view-org-users', function (req, res) {
 
     switch (scenario) {
         case "1":
-        req.session.data.orgId = "E76904778";
+        req.session.data.orgID = "E76904778";
         if ( resend == "true") {
             req.session.data.name = "mira.caldwell@brighthorizons.com"
             req.session.data.invite = "success"
@@ -512,7 +513,7 @@ router.get('/view-org-users', function (req, res) {
         break;
 
         case "2":
-        req.session.data.orgId = "G91774723";
+        req.session.data.orgID = "G91774723";
         if ( resend == "true") {
             req.session.data.name = "hadyn-lacey@pinetreecare.co.uk"
             req.session.data.invite = "success"
@@ -523,7 +524,7 @@ router.get('/view-org-users', function (req, res) {
         break;
 
         case "3":
-        req.session.data.orgId = "F15904728";
+        req.session.data.orgID = "F15904728";
         if ( resend == "true") {
             req.session.data.name = "craig.helliwell@purplestonecare.com"
             req.session.data.invite = "success"
@@ -534,7 +535,7 @@ router.get('/view-org-users', function (req, res) {
         break;
 
         case "4":
-        req.session.data.orgId = "B52698456";
+        req.session.data.orgID = "B52698456";
         if ( resend == "true") {
             req.session.data.name = "jane.crow@fandly.com"
             req.session.data.invite = "success"
@@ -545,7 +546,7 @@ router.get('/view-org-users', function (req, res) {
         break;
 
         case "5":
-        req.session.data.orgId = "B02944934";
+        req.session.data.orgID = "B02944934";
         if ( resend == "true") {
             req.session.data.name = "lionel-lowel@evergreencare.co.uk"
             req.session.data.invite = "success"
@@ -576,11 +577,11 @@ router.get('/view-org-claims', function (req, res) {
 
     switch (scenario) {
         case "1":
-        req.session.data.orgId = "B02944934";
+        req.session.data.orgID = "B02944934";
         break;
 
         case "2":
-        req.session.data.orgId = "C63281491";
+        req.session.data.orgID = "C63281491";
         break;
     }
 
@@ -616,23 +617,23 @@ router.get('/change-SRO', function (req, res) {
 
     switch (scenario) {
         case "1":
-        req.session.data.orgId = "E76904778";
+        req.session.data.orgID = "E76904778";
         break;
 
         case "2":
-        req.session.data.orgId = "G91774723";
+        req.session.data.orgID = "G91774723";
         break;
 
         case "3":
-        req.session.data.orgId = "F15904728";
+        req.session.data.orgID = "F15904728";
         break;
 
         case "4":
-        req.session.data.orgId = "B52698456";
+        req.session.data.orgID = "B52698456";
         break;
 
         case "5":
-        req.session.data.orgId = "B02944934";
+        req.session.data.orgID = "B02944934";
         break;
     }
 
@@ -691,23 +692,23 @@ router.get('/confirm-SRO-details-change', function (req, res) {
 
     switch (scenario) {
         case "1":
-        req.session.data.orgId = "E76904778";
+        req.session.data.orgID = "E76904778";
         break;
 
         case "2":
-        req.session.data.orgId = "G91774723";
+        req.session.data.orgID = "G91774723";
         break;
 
         case "3":
-        req.session.data.orgId = "F15904728";
+        req.session.data.orgID = "F15904728";
         break;
 
         case "4":
-        req.session.data.orgId = "B52698456";
+        req.session.data.orgID = "B52698456";
         break;
 
         case "5":
-        req.session.data.orgId = "B02944934";
+        req.session.data.orgID = "B02944934";
         break;
     }
 
