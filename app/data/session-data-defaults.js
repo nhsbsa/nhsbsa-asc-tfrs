@@ -1,7 +1,17 @@
 module.exports = {
     "versionHistory": {
-        "claimsCurrent": "v17",
+        "claimsCurrent": "v18",
         "claimVersions": [
+            {
+                "versionNo": "18",
+                "phase": "Beta",
+                "status": ["design"],
+                "designHistory": null,
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },
             {
                 "versionNo": "17",
                 "phase": "Beta",

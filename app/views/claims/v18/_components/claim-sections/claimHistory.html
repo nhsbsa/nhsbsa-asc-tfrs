@@ -1,0 +1,43 @@
+<h2 class="govuk-heading-m">Claim history</h2>
+
+{% if claim.status != "not-yet-submitted" and (claim.submissions | length) > 1 and claim.claimType == "100" %}
+  <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=100">View previous submissions</a></p>
+{% endif %}
+
+{% if (claim.status != "not-yet-submitted" and pairClaim.status != "queried" and claim.submissions.length > 1 and claim.claimType == "60") %}
+  <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=60" >View 60 part submissions</a></p>
+{% endif %}
+{% if (pairClaim.status != "not-yet-submitted") and (pairClaim.submissions | length) > 1 and pairClaim.claimType == "40"%}
+    <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=40">View 40 part submissions</a></p>
+{% endif %}
+
+
+{% if (claim.submissions | length) > 1 or (pairClaim.submissions | length) > 1%}
+  <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+{% endif %}
+
+<div class="moj-timeline">
+
+  {% if pairClaim != null %}
+    {% for submission in pairClaim.submissions | orderByMostRecent %}
+          {% set type = pairClaim.claimType %}
+          {% include "./claim-history/timeline-items.html" %}
+    {% endfor %}
+  {% endif %}
+
+  {% for submission in claim.submissions | orderByMostRecent %}
+      {% set type = claim.claimType %}
+      {% include "./claim-history/timeline-items.html" %}
+  {% endfor %}
+
+  <div class="moj-timeline__item">
+    <div class="moj-timeline__header">
+      <h3 class="moj-timeline__title">Created</h3>
+      <p class="moj-timeline__byline">by {{(claim.createdBy | findUser(data.org)).givenName}} {{(claim.createdBy| findUser(data.org)).familyName}}</p>
+    </div>
+    <p class="moj-timeline__date">
+      <time datetime="{{ claim.createdDate }}">{{ claim.createdDate | govukDate }} at {{ claim.createdDate | govukTime }}</time>
+    </p>
+  </div>
+
+</div>

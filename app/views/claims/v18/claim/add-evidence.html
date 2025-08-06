@@ -1,0 +1,116 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+{% set submission = claim | getMostRelevantSubmission%}
+{% set evidenceCount = submission.evidenceOfPayment | getCount %}
+
+{% block pageTitle %}
+{% if data.errorFileTooBig or data.errorWrongFileFormat or data.errorFileMissing %}Error: {% endif %}Add evidence of {{data.type}} — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    {% if data.allDeleteSuccess %}
+    <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+      <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+        <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+      </svg>
+      <div class="moj-banner__message">File named file.png has been deleted</div>
+    </div>
+    {% endif %}
+    {% if data.errorFileTooBig or data.errorWrongFileFormat or data.errorFileMissing %}
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            <li>
+              <a href="#upload">
+                {% if data.errorFileTooBig %}
+                The file must be smaller than 2MB
+                {% elif data.errorWrongFileFormat %}
+                The file must be a PDF, JPG, JPEG or PNG.
+                {% elif data.errorFileMissing %}
+                Select a file as evidence of {{data.type}}
+                {% endif %}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+    <h1 class="govuk-heading-l">Add evidence of {{ data.type }}</h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <p class="govuk-body">
+      You need to provide evidence of {{ data.type }}{% if data.type == 'completion' %} for {{ claim.learner.givenName
+      }} {{ claim.learner.familyName }}{% endif %}.
+      {% if data.type == 'payment' %} You may upload up to 4 files.{% endif %} These can be in PDF, JPG, JPEG or PNG format.
+    </p>
+
+    <div id="upload"
+      class="govuk-form-group {% if data.errorFileTooBig or data.errorWrongFileFormat  or data.errorFileMissing %} govuk-form-group--error {% endif %}">
+      <label class="govuk-label" for="evidenceFile">
+        Upload a file
+      </label>
+      {% if data.errorFileTooBig or data.errorWrongFileFormat or data.errorFileMissing %}
+        <p id="upload" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span>
+          {% if data.errorFileTooBig %}
+            The file must be smaller than 2MB
+          {% elif data.errorWrongFileFormat %}
+            The file must be a PDF, JPG, JPEG or PNG.
+          {% elif data.errorFileMissing %}
+            Select an evidence of {{data.type}}
+          {% endif %}
+        </p>
+      {% endif %}
+      <input
+        class="govuk-file-upload {% if data.errorFileTooBig or data.errorWrongFileFormat  or data.errorFileMissing %} govuk-file-upload--error {% endif %}"
+        id="evidenceFile" name="evidenceFile" type="file" aria-describedby="evidenceFile-error">
+    </div>
+    <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to
+        update file upload progress</a>
+      </p>
+    {% if data.type == "payment"%}
+    <form action="../add-evidence?type=payment" method="post" novalidate>
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+        <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler">Cancel</a>
+      </div>
+    </form>
+    {% else %}
+    <form action="../add-evidence?type=completion" method="post" novalidate>
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Add to claim
+        </button>
+        <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler">Cancel</a>
+      </div>
+    </form>
+    {% endif %}
+
+  </div>
+  <div class="govuk-grid-column-one-third">
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    <h2 class="govuk-heading-m">Related content</h2>
+    <p class="govuk-body"><a href="../guidance/tu-evidence-requirements" class="govuk-link">What evidence you need to provide</a></p>
+  </div>
+</div>
+
+
+
+{% endblock %}
