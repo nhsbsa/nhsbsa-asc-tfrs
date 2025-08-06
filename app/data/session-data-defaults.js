@@ -350,8 +350,18 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v10",
+        "processingCurrent": "v11",
         "processingVersions": [
+             {
+                "versionNo": "11",
+                "phase": "Beta",
+                "status": ["design"],
+                "designHistory":null,
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },
             {
                 "versionNo": "10",
                 "phase": "Beta",

@@ -1,0 +1,870 @@
+{
+    "id": "processing",
+    "viewports": [
+        {
+            "label": "desktop",
+            "width": 1200,
+            "height": 1000
+        }
+    ],
+    "onBeforeScript": "puppet/onBefore.js",
+    "onReadyScript": "puppet/onReady.js",
+    "scenarios": [
+        {
+            "label": "landing-screen",
+            "url": "http://localhost:3000/processing/v11/backstop/landing-screen",
+            "delay": 500
+        },
+        {
+            "label": "register-org-org-details",
+            "url": "http://localhost:3000/processing/v11/backstop/org-details",
+            "delay": 500
+        },
+        {
+            "label": "register-org-org-details-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/org-details?error=missing",
+            "delay": 500
+        },
+        {
+            "label": "register-org-org-details-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/org-details?error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "register-org-api-timeout",
+            "url": "http://localhost:3000/processing/v11/backstop/org-issue?issue=timeout",
+            "delay": 500
+        },
+        {
+            "label": "register-org-already-invited",
+            "url": "http://localhost:3000/processing/v11/backstop/org-issue?issue=dupe",
+            "delay": 500
+        },
+        {
+            "label": "register-org-confirm-org-details",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-org-details",
+            "delay": 500
+        },
+        {
+            "label": "register-org-confirm-org-details-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-org-details?error=missing",
+            "delay": 500
+        },
+        {
+            "label": "register-org-asc-wds-incorrect",
+            "url": "http://localhost:3000/processing/v11/backstop/org-issue?issue=incorrect",
+            "delay": 500
+        },
+        {
+            "label": "register-org-SRO-details",
+            "url": "http://localhost:3000/processing/v11/backstop/SRO-details",
+            "delay": 500
+        },
+        {
+            "label": "register-org-SRO-details-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/SRO-details?error=missing",
+            "delay": 500
+        },
+        {
+            "label": "register-org-SRO-details-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/SRO-details?error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "register-org-confirm-SRO-details",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details",
+            "delay": 500
+        },
+        {
+            "label": "register-org-confirmation",
+            "url": "http://localhost:3000/processing/v11/backstop/landing-screen?scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "find-claim",
+            "url": "http://localhost:3000/processing/v11/backstop/find-claim",
+            "delay": 500
+        },
+        {
+            "label": "find-claim-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/find-claim?error=missing",
+            "delay": 500
+        },
+        {
+            "label": "find-claim-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/find-claim?error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "find-claim-nomatch-error",
+            "url": "http://localhost:3000/processing/v11/backstop/find-claim?error=nomatch",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-100",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=100",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-60",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=60",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-40",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=40",
+            "delay": 500
+        },
+        {
+            "label": "ccs-claim-not-yet-processed-100",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=ccsAgent&status=submitted&type=100",
+            "delay": 500
+        },
+        {
+            "label": "ccs-claim-not-yet-processed-60",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=ccsAgent&status=submitted&type=60",
+            "delay": 500
+        },
+        {
+            "label": "ccs-claim-not-yet-processed-40",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=ccsAgent&status=submitted&type=40",
+            "delay": 500
+        },
+        {
+            "label": "claim-needs-action-100",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=queried&type=100",
+            "delay": 500
+        },
+        {
+            "label": "claim-needs-action-60",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=queried&type=60",
+            "delay": 500
+        },
+        {
+            "label": "claim-needs-action-40",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=queried&type=40",
+            "delay": 500
+        },
+        {
+            "label": "claim-approved-100",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=approved&type=100",
+            "delay": 500
+        },
+        {
+            "label": "claim-approved-60",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=approved&type=60",
+            "delay": 500
+        },
+        {
+            "label": "claim-approved-40",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=approved&type=40",
+            "delay": 500
+        },
+        {
+            "label": "claim-rejected-100",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=rejected&type=100",
+            "delay": 500
+        },
+        {
+            "label": "claim-rejected-60",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=rejected&type=60",
+            "delay": 500
+        },
+        {
+            "label": "claim-rejected-40",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=rejected&type=40",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-100-radio-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=100&error=radioMissing",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-60-radio-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=60&error=radioMissing",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-40-radio-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=40&error=radioMissing",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-100-radio-yes",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=100&radio=yes",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-60-radio-yes",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=60&radio=yes",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-40-radio-yes",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=40&radio=yes",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-100-radio-reject",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=100&radio=reject",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-60-radio-reject",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=60&radio=reject",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-40-radio-reject",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=40&radio=reject",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-100-radio-queried",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=100&radio=queried",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-60-radio-queried",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=60&radio=queried",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-40-radio-queried",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=40&radio=queried",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-100-cost-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=100&radio=yes&error=costMissing",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-60-cost-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=60&radio=yes&error=costMissing",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-100-cost-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=100&radio=yes&error=costInvalid",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-60-cost-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=60&radio=yes&error=costInvalid",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-100-radio-reject-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=100&radio=reject&error=rejectMissing",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-60-radio-reject-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=60&radio=reject&error=rejectMissing",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-40-radio-reject-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=40&radio=reject&error=rejectMissing",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-100-radio-queried-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=100&radio=queried&error=queriedMissing",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-60-radio-queried-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=60&radio=queried&error=queriedMissing",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-40-radio-queried-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=40&radio=queried&error=queriedMissing",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-approve-outcome-100",
+            "url": "http://localhost:3000/processing/v11/backstop/outcome?status=approve&type=100",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-approve-outcome-60",
+            "url": "http://localhost:3000/processing/v11/backstop/outcome?status=approve&type=60",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-approve-outcome-40",
+            "url": "http://localhost:3000/processing/v11/backstop/outcome?status=approve&type=40",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-needs-action-outcome-100",
+            "url": "http://localhost:3000/processing/v11/backstop/outcome?status=queried&type=100",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-needs-action-outcome-60",
+            "url": "http://localhost:3000/processing/v11/backstop/outcome?status=queried&type=60",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-needs-action-outcome-40",
+            "url": "http://localhost:3000/processing/v11/backstop/outcome?status=queried&type=40",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-reject-outcome-100",
+            "url": "http://localhost:3000/processing/v11/backstop/outcome?status=reject&type=100",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-reject-outcome-60",
+            "url": "http://localhost:3000/processing/v11/backstop/outcome?status=reject&type=60",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-reject-outcome-40",
+            "url": "http://localhost:3000/processing/v11/backstop/outcome?status=reject&type=40",
+            "delay": 500
+        },
+        {
+            "label": "claim-needs-action-100-confirmation",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=queried&type=100&confirmation=true",
+            "delay": 500
+        },
+        {
+            "label": "claim-needs-action-60-confirmation",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=queried&type=60&confirmation=true",
+            "delay": 500
+        },
+        {
+            "label": "claim-needs-action-40-confirmation",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=queried&type=40&confirmation=true",
+            "delay": 500
+        },
+        {
+            "label": "claim-approved-100-confirmation",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=approved&type=100&confirmation=true",
+            "delay": 500
+        },
+        {
+            "label": "claim-approved-60-confirmation",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=approved&type=60&confirmation=true",
+            "delay": 500
+        },
+        {
+            "label": "claim-approved-40-confirmation",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=approved&type=40&confirmation=true",
+            "delay": 500
+        },
+        {
+            "label": "claim-rejected-100-confirmation",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=rejected&type=100&confirmation=true",
+            "delay": 500
+        },
+        {
+            "label": "claim-rejected-60-confirmation",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=rejected&type=60&confirmation=true",
+            "delay": 500
+        },
+        {
+            "label": "claim-rejected-40-confirmation",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=rejected&type=40&confirmation=true",
+            "delay": 500
+        },
+        {
+            "label": "submissions-100",
+            "url": "http://localhost:3000/processing/v11/backstop/submissions?type=100",
+            "delay": 500
+        },
+        {
+            "label": "submissions-60",
+            "url": "http://localhost:3000/processing/v11/backstop/submissions?type=60",
+            "delay": 500
+        },
+        {
+            "label": "submissions-40",
+            "url": "http://localhost:3000/processing/v11/backstop/submissions?type=40",
+            "delay": 500
+        },
+        {
+            "label": "edit-note",
+            "url": "http://localhost:3000/processing/v11/backstop/submissions?type=100&note=true",
+            "delay": 500
+        },
+        {
+            "label": "processor-find-org",
+            "url": "http://localhost:3000/processing/v11/backstop/find-org?userType=processor",
+            "delay": 500
+        },
+        {
+            "label": "ccs-find-org",
+            "url": "http://localhost:3000/processing/v11/backstop/find-org?userType=ccsAgent",
+            "delay": 500
+        },
+        {
+            "label": "find-org-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/find-org?userType=processor&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "find-org-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/find-org?userType=processor&error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "find-org-nomatch-error",
+            "url": "http://localhost:3000/processing/v11/backstop/find-org?userType=processor&error=nomatch",
+            "delay": 500
+        },
+        {
+            "label": "processor-view-org-users-scenario-1",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=processor&scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "leadProcessor-view-org-users-scenario-1",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "processor-view-org-users-scenario-2",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=processor&scenario=2",
+            "delay": 500
+        },
+        {
+            "label": "leadProcessor-view-org-users-scenario-2",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=2",
+            "delay": 500
+        },
+        {
+            "label": "processor-view-org-users-scenario-3",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=processor&scenario=3",
+            "delay": 500
+        },
+        {
+            "label": "leadProcessor-view-org-users-scenario-3",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=3",
+            "delay": 500
+        },
+        {
+            "label": "processor-view-org-users-scenario-4",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=processor&scenario=4",
+            "delay": 500
+        },
+        {
+            "label": "leadProcessor-view-org-users-scenario-4",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=4",
+            "delay": 500
+        },
+        {
+            "label": "processor-view-org-users-scenario-5",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=processor&scenario=5",
+            "delay": 500
+        },
+        {
+            "label": "leadProcessor-view-org-users-scenario-5",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=5",
+            "delay": 500
+        },
+        {
+            "label": "processor-view-org-users-scenario-1-resend-invite-success",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=processor&scenario=1&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "leadProcessor-view-org-users-scenario-1-resend-invite-success",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=1&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "processor-view-org-users-scenario-3-resend-invite-success",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=processor&scenario=3&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "leadProcessor-view-org-users-scenario-3-resend-invite-success",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=3&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "processor-view-org-users-scenario-4-resend-invite-success",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=processor&scenario=4&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "leadProcessor-view-org-users-scenario-4-resend-invite-success",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=4&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "processor-view-org-users-scenario-1-resend-invite-failure",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=processor&scenario=1&resend=fail",
+            "delay": 500
+        },
+        {
+            "label": "leadProcessor-view-org-users-scenario-1-resend-invite-failure",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=1&resend=fail",
+            "delay": 500
+        },
+        {
+            "label": "processor-view-org-users-scenario-3-resend-invite-failure",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=processor&scenario=3&resend=fail",
+            "delay": 500
+        },
+        {
+            "label": "leadProcessor-view-org-users-scenario-3-resend-invite-failure",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=3&resend=fail",
+            "delay": 500
+        },
+        {
+            "label": "processor-view-org-users-scenario-4-resend-invite-failure",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=processor&scenario=4&resend=fail",
+            "delay": 500
+        },
+        {
+            "label": "leadProcessor-view-org-users-scenario-4-resend-invite-failure",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=4&resend=fail",
+            "delay": 500
+        },
+        {
+            "label": "view-org-claims",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-claims?scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "view-org-claims-empty",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-claims?scenario=2",
+            "delay": 500
+        },
+        {
+            "label": "view-org-claims-search-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-claims?scenario=1&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "view-org-claims-search-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-claims?scenario=1&error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "view-org-claims-search-no-match-error",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-claims?scenario=1&error=nomatch",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-1",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-1-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=1&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-1-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=1&error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-1-nochange-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=1&error=nochange",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-1-duplicate-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=1&error=duplicate",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-3",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=3",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-3-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=3&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-3-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=3&error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-3-nochange-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=3&error=nochange",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-3-duplicate-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=3&error=duplicate",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-4",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=4",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-4-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=4&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-4-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=4&error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-4-nochange-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=4&error=nochange",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-details-scenario-4-duplicate-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=edit&scenario=4&error=duplicate",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-confirm-SRO-details-scenario-1",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=edit&scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-confirm-SRO-details-scenario-1-fail-error",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=edit&scenario=1&error=fail",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-confirm-SRO-details-scenario-3",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=edit&scenario=3",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-confirm-SRO-details-scenario-3-fail-error",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=edit&scenario=3&error=fail",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-confirm-SRO-details-scenario-4",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=edit&scenario=4",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-confirm-SRO-details-scenario-4-fail-error",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=edit&scenario=4&error=fail",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-invite-success-scenario-1",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=1&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-invite-success-scenario-3",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=3&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "edit-SRO-invite-success-scenario-4",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=4&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-1",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-1-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=1&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-1-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=1&error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-1-duplicate-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=1&error=duplicate",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-2",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=2",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-2-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=2&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-2-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=2&error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-2-duplicate-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=2&error=duplicate",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-3",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=3",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-3-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=3&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-3-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=3&error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-3-duplicate-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=3&error=duplicate",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-4",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=4",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-4-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=4&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-4-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=4&error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-4-duplicate-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=4&error=duplicate",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-5",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=5",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-5-missing-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=5&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-5-invalid-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=5&error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-details-scenario-5-duplicate-error",
+            "url": "http://localhost:3000/processing/v11/backstop/change-SRO?type=replace&scenario=5&error=duplicate",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-confirm-SRO-details-scenario-1",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=replace&scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-confirm-SRO-details-scenario-1-fail-error",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=replace&scenario=1&error=fail",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-confirm-SRO-details-scenario-2",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=replace&scenario=2",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-confirm-SRO-details-scenario-2-fail-error",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=replace&scenario=2&error=fail",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-confirm-SRO-details-scenario-3",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=replace&scenario=3",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-confirm-SRO-details-scenario-3-fail-error",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=replace&scenario=3&error=fail",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-confirm-SRO-details-scenario-4",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=replace&scenario=4",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-confirm-SRO-details-scenario-4-fail-error",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=replace&scenario=4&error=fail",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-confirm-SRO-details-scenario-5",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=replace&scenario=5",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-confirm-SRO-details-scenario-5-fail-error",
+            "url": "http://localhost:3000/processing/v11/backstop/confirm-SRO-details-change?type=replace&scenario=5&error=fail",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-invite-success-scenario-1",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=1&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-invite-success-scenario-2",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=2&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-invite-success-scenario-3",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=3&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-invite-success-scenario-4",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=4&resend=true",
+            "delay": 500
+        },
+        {
+            "label": "change-SRO-invite-success-scenario-5",
+            "url": "http://localhost:3000/processing/v11/backstop/view-org-users?userType=leadProcessor&scenario=5&resend=true",
+            "delay": 500
+        }
+    ],
+    "paths": {
+        "bitmaps_reference": "app/views/processing/v11/_backstop/screenshots",
+        "bitmaps_test": "backstop_data/bitmaps_test",
+        "engine_scripts": "backstop_data/engine_scripts",
+        "html_report": "backstop_data/html_report",
+        "ci_report": "backstop_data/ci_report"
+    },
+    "report": ["browser"],
+    "engine": "puppeteer",
+    "engineOptions": {
+        "args": ["--no-sandbox"]
+    },
+    "asyncCaptureLimit": 5,
+    "asyncCompareLimit": 50,
+    "debug": false,
+    "debugWindow": false
+}
