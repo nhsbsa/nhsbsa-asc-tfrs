@@ -1,5 +1,5 @@
-{% set org = data.organisations | findOrg(data.orgId) %}
-{% set orgClaims = data.orgId | findOrgClaims(data.claims) %}
+{% set org = data.organisations | findOrg(data.orgID) %}
+{% set orgClaims = data.orgID | findOrgClaims(data.claims) %}
 {% set claims = orgClaims | orderClaims %}
 
 {% set noClaims = claims | length %}
