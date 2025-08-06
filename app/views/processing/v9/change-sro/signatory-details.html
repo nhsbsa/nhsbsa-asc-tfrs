@@ -1,6 +1,6 @@
 {% extends "../_layouts/processing-main.html" %}
 
-{% set foundOrganisation = data.organisations | findOrg(data.orgId) %}
+{% set foundOrganisation = data.organisations | findOrg(data.orgID) %}
 
 {% if data.SROChange == 'edit' %}
     {% set givenName = foundOrganisation.signatory.active.givenName %}
