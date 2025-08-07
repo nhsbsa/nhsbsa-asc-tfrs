@@ -360,12 +360,22 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v10",
+        "processingCurrent": "v11",
         "processingVersions": [
+             {
+                "versionNo": "11",
+                "phase": "Beta",
+                "status": ["design"],
+                "designHistory":"https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-11/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },
             {
                 "versionNo": "10",
                 "phase": "Beta",
-                "status": ["design"],
+                "status": ["dev"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-10/",
                 "tested": null,
                 "created": null,
@@ -374,7 +384,7 @@ module.exports = {
             },{
                 "versionNo": "9",
                 "phase": "Beta",
-                "status": ["UR"],
+                "status": ["retired"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-9/",
                 "tested": null,
                 "created": null,
@@ -394,7 +404,7 @@ module.exports = {
             {
                 "versionNo": "7",
                 "phase": "Beta",
-                "status": ["dev"],
+                "status": ["retired"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-7/",
                 "tested": null,
                 "created": null,
