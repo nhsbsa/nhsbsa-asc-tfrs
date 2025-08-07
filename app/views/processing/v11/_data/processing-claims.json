@@ -48,14 +48,14 @@
         "trainingCode": "501/1146/2",
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-02-24T09:54:13.322Z",
-        "costDate": null,
-        "evidenceOfPayment": null,
+        "costDate": "2025-03-01T03:16:00.448Z",
+        "evidenceOfPayment": ["invoice1.pdf", "bankStatement1.pdf"],
         "completionDate": "2025-02-27T03:16:00.448Z",
         "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
-          "paymentPlan": "yes",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
