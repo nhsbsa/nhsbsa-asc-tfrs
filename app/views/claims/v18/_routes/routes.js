@@ -966,7 +966,7 @@ router.get('/generate', function (req, res) {
   const jsonFilePath = './app/views/claims/v18/_data/claims.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
 
-  res.redirect('../')
+  res.redirect('../../')
 })
 
 module.exports = router

@@ -53,7 +53,7 @@ function generateUniqueID() {
   return id;
 }
 
-function generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, claimType, createdDate) {
+function generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, claimType, createdDate, isPaymentPlan) {
   
   let submissions = null;
 
@@ -84,6 +84,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       evidenceOfPaymentReview: {
         outcome: null,
         note: null,
+        paymentPlan: null,
         costPerLearner: null
       },
       evidenceOfCompletionReview: {
@@ -116,7 +117,6 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       } else if(['approved'].includes(status)) {
   
         submission.evidenceOfPaymentReview.outcome = "pass"
-        submission.evidenceOfPaymentReview.note = "pass"
         submission.evidenceOfPaymentReview.costPerLearner = Math.floor(trainingItem.reimbursementAmount * 0.9)
   
         submission.evidenceOfCompletionReview.outcome = "pass"
@@ -145,6 +145,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
           evidenceOfPaymentReview: {
             outcome: null,
             note: null,
+            paymentPlan: null,
             costPerLearner: null
           },
           evidenceOfCompletionReview: {
@@ -174,6 +175,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
     };
 
     const submissionDateA = faker.date.between({ from: startDate, to: new Date() })
+    const processedDateA = faker.date.between({ from: submissionDateA, to: new Date() })
 
     // 60 part
     const submissionA =  {
@@ -193,17 +195,24 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       evidenceOfPaymentReview: {
         outcome: "pass",
         note: null,
+        paymentPlan: null,
         costPerLearner: Math.floor(trainingItem.reimbursementAmount * 0.9)
       },
       evidenceOfCompletionReview: {
         outcome: null,
         note: null
       },
-      processedDate: faker.date.between({ from: submissionDateA, to: new Date() }),
+      processedDate: processedDateA,
       processedBy: faker.helpers.arrayElement(backOfficeStaff.processors)
     }
 
-    const submissionDateB = faker.date.between({ from: submissionA.processedDate, to: new Date() });
+    if (isPaymentPlan == true) {
+          submissionA.evidenceOfPaymentReview.paymentPlan = "yes"
+    } else if (isPaymentPlan == false) {
+          submissionA.evidenceOfPaymentReview.paymentPlan = "no"
+    }
+
+    const submissionDateB = faker.date.between({ from: processedDateA, to: new Date() });
 
     //40 part
     const submissionB =  {
@@ -214,16 +223,17 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       learnerID, 
       startDate, 
   
-      costDate: submissionA.costDate,
-      evidenceOfPayment: submissionA.evidenceOfPayment,
+      costDate: null,
+      evidenceOfPayment: null,
   
       completionDate: null, 
       evidenceOfCompletion: null,
   
       evidenceOfPaymentReview: {
-        outcome: submissionA.evidenceOfPaymentReview.outcome,
-        note: submissionA.evidenceOfPaymentReview.note,
-        costPerLearner: submissionA.evidenceOfPaymentReview.costPerLearner
+        outcome: null,
+        note: null,
+        paymentPlan: null,
+        costPerLearner: null
       },
       evidenceOfCompletionReview: {
         outcome: null,
@@ -233,12 +243,25 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       processedBy: null
     }
 
+
     if (['submitted', 'rejected', 'approved', "queried"].includes(status)) {
       submissionB.submitter = faker.helpers.arrayElement(users).email;
       submissionB.submittedDate = submissionDateB;
   
       submissionB.evidenceOfCompletion = "certificate1.pdf";
-      submissionB.completionDate =  faker.date.between({ from: startDate, to: submissionDateB });
+      const completionDateB =  faker.date.between({ from: processedDateA, to: submissionDateB });
+      submissionB.completionDate = completionDateB
+      
+
+      if (isPaymentPlan == true) {
+        submissionB.costDate = faker.date.between({ from: processedDateA , to: completionDateB })
+        submissionB.evidenceOfPayment = ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"]
+
+        submissionB.evidenceOfPaymentReview.outcome = "pass"
+        submissionB.evidenceOfPaymentReview.costPerLearner = Math.floor(trainingItem.reimbursementAmount * 0.9)
+        submissionB.evidenceOfPaymentReview.paymentPlan = "yes"
+      }
+
     }
 
     if (['rejected'].includes(status)) {
@@ -246,9 +269,12 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       submissionB.evidenceOfCompletionReview.outcome = "fail"
       submissionB.evidenceOfCompletionReview.note = "The evidence of payment show you paid for a course that is not eligible for funding through our service."
 
+
+
     } else if(['approved'].includes(status)) {
 
       submissionB.evidenceOfCompletionReview.outcome = "pass"
+      
 
     } else if(['queried'].includes(status)) {
       submissionB.evidenceOfCompletionReview.outcome = "queried"
@@ -263,16 +289,17 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         learnerID, 
         startDate, 
     
-        costDate: submissionB.costDate,
-        evidenceOfPayment: submissionB.evidenceOfPayment,
+        costDate: null,
+        evidenceOfPayment: null,
     
         completionDate: submissionB.completionDate, 
         evidenceOfCompletion: submissionB.evidenceOfCompletion,
     
         evidenceOfPaymentReview: {
-          outcome: submissionA.evidenceOfPaymentReview.outcome,
-          note: submissionA.evidenceOfPaymentReview.note,
-          costPerLearner: submissionA.evidenceOfPaymentReview.costPerLearner
+          outcome: null,
+          note: null,
+          paymentPlan: null,
+          costPerLearner: null
         },
         evidenceOfCompletionReview: {
           outcome: submissionB.evidenceOfCompletionReview.outcome,
@@ -280,6 +307,12 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         },
         processedDate: null,
         processedBy: null
+      }
+
+      if (isPaymentPlan == true) {
+        submissionB2.evidenceOfPaymentReview.outcome = "pass"
+        submissionB2.evidenceOfPaymentReview.costPerLearner = Math.floor(trainingItem.reimbursementAmount * 0.9)
+        submissionB2.evidenceOfPaymentReview.paymentPlan = "yes"
       }
 
       submissions.submissionsB.push(submissionB2)
@@ -320,7 +353,7 @@ function generateClaims(workplaceID) {
   const data = [];
 
    //set date references
-  const policyDate = new Date('2024-04-01 '); // April 2, 2024
+  const policyDate = new Date('2024-04-01 '); // April 2, 2025 not the real policy date but having claims from this year is more realistic
 
 
 
@@ -329,6 +362,7 @@ function generateClaims(workplaceID) {
     
     let claimID = generateUniqueID();
     let claimType = null
+    let isPaymentPlan = null
     const status = getRandomStatus(statuses);
 
     const user = faker.helpers.arrayElement(users)
@@ -358,11 +392,12 @@ function generateClaims(workplaceID) {
         claimID,
         workplaceID,
         claimType,
+        isPaymentPlan,
         status,
         createdDate,
         createdBy,
         notes: [],
-        submissions: generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, "full", createdDate),
+        submissions: generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, "full", createdDate, isPaymentPlan),
       };
 
       data.push(claim);
@@ -370,7 +405,14 @@ function generateClaims(workplaceID) {
     } else if (trainingItem.fundingModel == "split") {
       const claimIDA = claimID + "-B"
       const claimIDB = claimID + "-C"
-      const generatedSubmissions = generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, "split", createdDate)
+
+      if (Math.random() < 0.5) {
+        isPaymentPlan = true
+      } else {
+        isPaymentPlan = false
+      }
+      
+      const generatedSubmissions = generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, "split", createdDate, isPaymentPlan)
       const submissionsA = generatedSubmissions.submissionsA
       const submissionsB = generatedSubmissions.submissionsB
 
@@ -378,6 +420,7 @@ function generateClaims(workplaceID) {
         claimID: claimIDA,
         workplaceID,
         claimType: "60",
+        isPaymentPlan,
         status: "approved",
         createdDate,
         createdBy,
@@ -389,6 +432,7 @@ function generateClaims(workplaceID) {
         claimID: claimIDB,
         workplaceID,
         claimType: "40",
+        isPaymentPlan,
         status,
         createdDate,
         createdBy,

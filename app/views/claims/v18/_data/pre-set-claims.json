@@ -3,6 +3,7 @@
     "claimID": "GE2-UA5D-4K6C-A",
     "workplaceID": "placeholder",
     "claimType": "100",
+    "isPaymentPlan": null,
     "status": "not-yet-submitted",
     "createdDate": "2024-10-23T16:02:53.060Z",
     "createdBy": "placeholder",
@@ -21,6 +22,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -36,6 +38,7 @@
     "claimID": "HMJ-74V3-T8V5-A",
     "workplaceID": "placeholder",
     "claimType": "100",
+    "isPaymentPlan": null,
     "status": "submitted",
     "createdDate": "2024-07-11T03:36:53.621Z",
     "createdBy": "placeholder",
@@ -54,6 +57,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -76,6 +80,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The date of payment in the evidence of payment did not match the payment date given in the claim.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -91,6 +96,7 @@
     "claimID": "CFD-EHS7-F43J-A",
     "workplaceID": "placeholder",
     "claimType": "100",
+    "isPaymentPlan": null,
     "status": "queried",
     "createdDate": "2024-08-15T23:09:49.421Z",
     "createdBy": "placeholder",
@@ -113,6 +119,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -139,6 +146,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence provided does not detail a breakdown of the cost per learner, please provide confirmation of the cost you paid per learner.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -154,6 +162,7 @@
     "claimID": "CWH-E4C7-FBXJ-A",
     "workplaceID": "placeholder",
     "claimType": "100",
+    "isPaymentPlan": null,
     "status": "queried",
     "createdDate": "2024-08-15T23:09:49.421Z",
     "createdBy": "placeholder",
@@ -175,6 +184,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -200,6 +210,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "We cannot accept an invoice and bank statement only as evidence of payment as it is not sufficient to prove you paid for the training. We require you to upload a receipt or receipted invoice. The evidence provided also does not detail a breakdown of the cost per learner, please provide confirmation of the cost you paid per learner.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -224,6 +235,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "We cannot accept an bank statement only as evidence of payment as it is not sufficient to prove you paid for the training. We require you to upload a receipt.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -239,6 +251,7 @@
     "claimID": "CKX-ZZSG-BDCB-A",
     "workplaceID": "placeholder",
     "claimType": "100",
+    "isPaymentPlan": null,
     "status": "approved",
     "createdDate": "2024-06-02T15:31:23.587Z",
     "createdBy": "placeholder",
@@ -257,6 +270,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": "pass",
+          "paymentPlan": null,
           "costPerLearner": 135
         },
         "evidenceOfCompletionReview": {
@@ -279,6 +293,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -294,6 +309,7 @@
     "claimID": "ML8-K712-2N27-A",
     "workplaceID": "placeholder",
     "claimType": "100",
+    "isPaymentPlan": null,
     "status": "rejected",
     "createdDate": "2025-02-01T22:20:36.371Z",
     "createdBy": "placeholder",
@@ -312,6 +328,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "fail",
           "note": "The evidence of payment show you paid for a course that is not eligible for funding through our service.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -334,6 +351,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment you have provided does not show what training was paid for.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -349,6 +367,7 @@
     "claimID": "ZSK-23VE-MXS4-B",
     "workplaceID": "placeholder",
     "claimType": "60",
+    "isPaymentPlan": null,
     "status": "not-yet-submitted",
     "createdDate": "2024-06-16T23:01:41.732Z",
     "createdBy": "placeholder",
@@ -367,6 +386,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -382,6 +402,7 @@
     "claimID": "1SC-WE58-MT7W-B",
     "workplaceID": "placeholder",
     "claimType": "60",
+    "isPaymentPlan": null,
     "status": "submitted",
     "createdDate": "2024-04-24T21:55:08.777Z",
     "createdBy": "placeholder",
@@ -400,6 +421,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -422,6 +444,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -437,6 +460,7 @@
     "claimID": "VJH-8Y37-EZNM-B",
     "workplaceID": "placeholder",
     "claimType": "60",
+    "isPaymentPlan": null,
     "status": "queried",
     "createdDate": "2024-04-19T15:33:23.442Z",
     "createdBy": "placeholder",
@@ -455,6 +479,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -477,6 +502,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -499,6 +525,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -514,6 +541,7 @@
     "claimID": "P1J-EHVI-88A2-B",
     "workplaceID": "placeholder",
     "claimType": "60",
+    "isPaymentPlan": true,
     "status": "approved",
     "createdDate": "2024-04-04T17:04:00.117Z",
     "createdBy": "placeholder",
@@ -532,6 +560,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
+          "paymentPlan": "yes",
           "costPerLearner": 162
         },
         "evidenceOfCompletionReview": {
@@ -554,6 +583,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -569,6 +599,7 @@
     "claimID": "P1J-EHVI-88A2-C",
     "workplaceID": "placeholder",
     "claimType": "40",
+    "isPaymentPlan": true,
     "status": "not-yet-submitted",
     "createdDate": "2024-04-04T17:04:00.117Z",
     "createdBy": "placeholder",
@@ -587,6 +618,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -602,6 +634,7 @@
     "claimID": "UK9-JGAN-B4QP-B",
     "workplaceID": "placeholder",
     "claimType": "60",
+    "isPaymentPlan": null,
     "status": "rejected",
     "createdDate": "2024-07-19T21:46:08.241Z",
     "createdBy": "placeholder",
@@ -620,6 +653,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "fail",
           "note": "The evidence of payment show you paid for a course that is not eligible for funding through our service.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -642,6 +676,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence of payment does not show what training you paid for.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -657,6 +692,7 @@
     "claimID": "9JH-I94K-TPRB-B",
     "workplaceID": "placeholder",
     "claimType": "60",
+    "isPaymentPlan": false,
     "status": "approved",
     "createdDate": "2025-01-01T00:06:28.462Z",
     "createdBy": "placeholder",
@@ -675,6 +711,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": 108
         },
         "evidenceOfCompletionReview": {
@@ -690,6 +727,7 @@
     "claimID": "9JH-I94K-TPRB-C",
     "workplaceID": "placeholder",
     "claimType": "40",
+    "isPaymentPlan": false,
     "status": "submitted",
     "createdDate": "2025-01-31T00:06:28.462Z",
     "createdBy": "placeholder",
@@ -708,6 +746,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -730,6 +769,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -745,6 +785,7 @@
     "claimID": "SRX-A33U-BMUG-B",
     "workplaceID": "placeholder",
     "claimType": "60",
+    "isPaymentPlan": false,
     "status": "approved",
     "createdDate": "2024-08-23T09:51:56.578Z",
     "createdBy": "placeholder",
@@ -763,6 +804,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": 270
         },
         "evidenceOfCompletionReview": {
@@ -786,6 +828,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "The evidence provided does not detail a breakdown of the cost per learner, please provide confirmation of the total cost you paid per learner.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -801,6 +844,7 @@
     "claimID": "SRX-A33U-BMUG-C",
     "workplaceID": "placeholder",
     "claimType": "40",
+    "isPaymentPlan": false,
     "status": "queried",
     "createdDate": "2024-08-23T09:51:56.578Z",
     "createdBy": "placeholder",
@@ -819,6 +863,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -841,6 +886,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -856,6 +902,7 @@
     "claimID": "SND-EPRS-N3MZ-B",
     "workplaceID": "placeholder",
     "claimType": "60",
+    "isPaymentPlan": false,
     "status": "approved",
     "createdDate": "2024-06-30T02:18:53.344Z",
     "createdBy": "placeholder",
@@ -874,6 +921,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": 270
         },
         "evidenceOfCompletionReview": {
@@ -896,6 +944,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "queried",
           "note": "You have not shown that you have paid for the training.",
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -911,6 +960,7 @@
     "claimID": "SND-EPRS-N3MZ-C",
     "workplaceID": "placeholder",
     "claimType": "40",
+    "isPaymentPlan": false,
     "status": "approved",
     "createdDate": "2024-06-30T02:18:53.344Z",
     "createdBy": "placeholder",
@@ -929,6 +979,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": 270
         },
         "evidenceOfCompletionReview": {
@@ -951,6 +1002,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": 270
         },
         "evidenceOfCompletionReview": {
@@ -966,6 +1018,7 @@
     "claimID": "A8T-TAGD-ETJE-B",
     "workplaceID": "placeholder",
     "claimType": "60",
+    "isPaymentPlan": false,
     "status": "approved",
     "createdDate": "2024-04-04T17:20:55.410Z",
     "createdBy": "placeholder",
@@ -984,6 +1037,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": 162
         },
         "evidenceOfCompletionReview": {
@@ -999,6 +1053,7 @@
     "claimID": "A8T-TAGD-ETJE-C",
     "workplaceID": "placeholder",
     "claimType": "40",
+    "isPaymentPlan": false,
     "status": "rejected",
     "createdDate": "2024-04-04T17:20:55.410Z",
     "createdBy": "placeholder",
@@ -1017,6 +1072,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": "162"
         },
         "evidenceOfCompletionReview": {
@@ -1039,6 +1095,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": 162
         },
         "evidenceOfCompletionReview": {
@@ -1054,6 +1111,7 @@
     "claimID": "ABC-UA5D-43BD-A",
     "workplaceID": "placeholder",
     "claimType": "100",
+    "isPaymentPlan": null,
     "status": "not-yet-submitted",
     "createdDate": "2024-10-23T16:02:53.060Z",
     "createdBy": "placeholder",
@@ -1072,6 +1130,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
@@ -1087,6 +1146,7 @@
     "claimID": "GDH-34ND-MXS4-B",
     "workplaceID": "placeholder",
     "claimType": "60",
+    "isPaymentPlan": null,
     "status": "not-yet-submitted",
     "createdDate": "2024-06-16T23:01:41.732Z",
     "createdBy": "placeholder",
@@ -1105,6 +1165,7 @@
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
+          "paymentPlan": null,
           "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
