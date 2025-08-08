@@ -620,3 +620,15 @@
     margin-bottom: govuk-px-to-rem(3px);
   }
 }
+
+
+.processing__conditional {
+
+    .govuk-frontend-supported &--hidden {
+      display: none;
+    }
+
+    & > :last-child {
+      margin-bottom: 0;
+    }
+}
