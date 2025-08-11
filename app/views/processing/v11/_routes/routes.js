@@ -221,6 +221,8 @@ router.post('/claim-process-handler', function (req, res) {
 
   let claim = null
 
+  console.log(paymentPlanResponse)
+
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
       claim = c

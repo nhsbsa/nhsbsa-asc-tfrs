@@ -266,12 +266,15 @@ function checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, p
     if (claim.claimType == "60" || claim.claimType == "100") {
         if (paymentResponse == null) {
         errorParamaters += "&paymentResponseIncomplete=true";
-        } else if (paymentResponse == "approve" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
-        errorParamaters += "&paymentReimbursementAmountIncomplete=true";
-        } else if (paymentResponse == "approve" && (!validAmount)) {
-        errorParamaters += "&paymentReimbursementAmountInvalid=true";
-        } else if (paymentResponse == "approve" && paymentPlanResponse == null) {
-        errorParamaters += "&paymentPlanResponseIncomplete=true";
+        } else if (paymentResponse == "approve") {
+          if (paymentReimbursementAmount == null || paymentReimbursementAmount == ""){
+            errorParamaters += "&paymentReimbursementAmountIncomplete=true";
+          } else if (paymentResponse == "approve" && (!validAmount)) {
+            errorParamaters += "&paymentReimbursementAmountInvalid=true";
+          }
+          if (paymentPlanResponse == null) {
+            errorParamaters += "&paymentPlanResponseIncomplete=true";
+          }
         } else if (paymentResponse == "reject" && (paymentRejectNote == null || paymentRejectNote == "")) {
         errorParamaters += "&paymentRejectNoteIncomplete=true";
         } else if (paymentResponse == "queried" && (paymentQueriedNote == null || paymentQueriedNote == "")) {
@@ -298,6 +301,8 @@ function checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, p
         errorParamaters += "&completionQueriedNoteIncomplete=true";
         }
     }
+
+    return errorParamaters
 }
 
 function determineOutcome(claim, paymentResponse, completionResponse) {

@@ -217,14 +217,14 @@
                                         {% endif %}
                                         <div class="govuk-radios" data-module="govuk-radios">
                                         <div class="govuk-radios__item">
-                                            <input class="govuk-radios__input" id="paymentPlanResponse-yes" name="paymentPlanResponse" type="radio" value="yes">
-                                            <label class="govuk-label govuk-radios__label" for="paymentPlanResponse-yes">
+                                            <input class="govuk-radios__input" id="paymentPlanResponseYes" name="paymentPlanResponse" type="radio" value="yes" {% if data.paymentPlanResponse=='yes'%}checked{% endif %}>
+                                            <label class="govuk-label govuk-radios__label" for="paymentPlanResponseYes">
                                             Yes
                                             </label>
                                         </div>
                                         <div class="govuk-radios__item">
-                                            <input class="govuk-radios__input" id="paymentPlanResponse-no" name="paymentPlanResponse" type="radio" value="no">
-                                            <label class="govuk-label govuk-radios__label" for="paymentPlanResponse-no">
+                                            <input class="govuk-radios__input" id="paymentPlanResponseNo" name="paymentPlanResponse" type="radio" value="no" {% if data.paymentPlanResponse=='no'%}checked{% endif %}>
+                                            <label class="govuk-label govuk-radios__label" for="paymentPlanResponseNo">
                                             No
                                             </label>
                                         </div>
