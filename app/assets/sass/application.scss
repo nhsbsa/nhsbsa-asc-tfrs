@@ -624,11 +624,9 @@
 
 .processing__conditional {
 
-    .govuk-frontend-supported &--hidden {
-      display: none;
-    }
+    @include govuk-responsive-margin(6, "bottom");
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
 
-    & > :last-child {
-      margin-bottom: 0;
-    }
 }

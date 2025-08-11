@@ -143,8 +143,7 @@
                                         No – action required
                                     </label>
                                 </div>
-                                <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
-                                    id="conditional-payment-queried" data-maxlength="1000">
+                                <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-payment-queried" data-maxlength="1000">
                                     <div class="govuk-form-group govuk-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-form-group--error{% endif %}"
                                         data-module="govuk-character-count">
                                         <label class="govuk-label" for="payment-queried">
@@ -204,7 +203,7 @@
                         </fieldset>
                     </div>
                     {% if (claim.claimType != "40") %}
-                        <div class="govuk-form-group processing__conditional" id="processing__conditional">
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="processing__conditional">
                             {% if (claim.claimType == "60") %}
                                 <div class="govuk-form-group {% if data.paymentPlanResponseIncomplete %}govuk-form-group--error {% endif %}">
                                     <fieldset class="govuk-fieldset">
