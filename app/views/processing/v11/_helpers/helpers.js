@@ -29,11 +29,19 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(foundClaim, paymentResponse, paymentReimbursementAmount, paymentQueryNote, paymentRejectNote, completionResponse, completionQueryNote, completionRejectNote) {
-    let submission = getMostRelevantSubmission(foundClaim)    
+function updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentQueryNote, paymentRejectNote, completionResponse, completionQueryNote, completionRejectNote, paymentPlanResponse) {
+    let submission = getMostRelevantSubmission(claim)    
     if (paymentResponse == "approve") {
             submission.evidenceOfPaymentReview.outcome = "pass"
-            submission.evidenceOfPaymentReview.costPerLearner = paymentReimbursementAmount
+            if (claim.claimType == "100" || claim.claimType == "60") {
+                submission.evidenceOfPaymentReview.costPerLearner = paymentReimbursementAmount
+                submission.evidenceOfPaymentReview.paymentPlan = paymentPlanResponse
+                if (paymentPlanResponse == "yes") {
+                    claim.isPaymentPlan = true
+                } else if (paymentPlanResponse == "no") {
+                    claim.isPaymentPlan = false
+                }
+            }
         } else if (paymentResponse == "reject") {
             submission.evidenceOfPaymentReview.outcome = "fail"
             submission.evidenceOfPaymentReview.note = paymentRejectNote
@@ -246,8 +254,82 @@ function sortSubmissionsByDate(submissions, dateType) {
 function sortSubmissionsForTable(submissions) {
     return submissions.sort((a, b) => {
         return new Date(b.submittedDate) - new Date(a.submittedDate);
-      });
+    });
+}
+
+function checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paymentPlanResponse) {
+
+    let errorParamaters = ""
+
+    const validAmount = validNumberCheck(paymentReimbursementAmount)
+
+    if (claim.claimType == "60" || claim.claimType == "100") {
+        if (paymentResponse == null) {
+        errorParamaters += "&paymentResponseIncomplete=true";
+        } else if (paymentResponse == "approve" && (paymentReimbursementAmount == null || paymentReimbursementAmount == "")) {
+        errorParamaters += "&paymentReimbursementAmountIncomplete=true";
+        } else if (paymentResponse == "approve" && (!validAmount)) {
+        errorParamaters += "&paymentReimbursementAmountInvalid=true";
+        } else if (paymentResponse == "approve" && paymentPlanResponse == null) {
+        errorParamaters += "&paymentPlanResponseIncomplete=true";
+        } else if (paymentResponse == "reject" && (paymentRejectNote == null || paymentRejectNote == "")) {
+        errorParamaters += "&paymentRejectNoteIncomplete=true";
+        } else if (paymentResponse == "queried" && (paymentQueriedNote == null || paymentQueriedNote == "")) {
+        errorParamaters += "&paymentQueriedNoteIncomplete=true";
+        }
+    }
+
+    if (claim.claimType == "40" && claim.isPaymentPlan) {
+        if (paymentResponse == null) {
+        errorParamaters += "&paymentResponseIncomplete=true";
+        } else if (paymentResponse == "reject" && (paymentRejectNote == null || paymentRejectNote == "")) {
+        errorParamaters += "&paymentRejectNoteIncomplete=true";
+        } else if (paymentResponse == "queried" && (paymentQueriedNote == null || paymentQueriedNote == "")) {
+        errorParamaters += "&paymentQueriedNoteIncomplete=true";
+        }
+    }
+
+    if (claim.claimType == "40" || claim.claimType == "100") {
+        if (completionResponse == null) {
+        errorParamaters += "&completionResponseIncomplete=true";
+        } else if (completionResponse == "reject" && (completionRejectNote == null || completionRejectNote == "")) {
+        errorParamaters += "&completionRejectNoteIncomplete=true";
+        } else if (completionResponse == "queried" && (completionQueriedNote == null || completionQueriedNote == "")) {
+        errorParamaters += "&completionQueriedNoteIncomplete=true";
+        }
+    }
+}
+
+function determineOutcome(claim, paymentResponse, completionResponse) {
+    let result = null
+
+    if (claim.claimType == "100") {
+      if (paymentResponse == "reject" || completionResponse == "reject") {
+        result = "reject";
+      } else if (paymentResponse == "queried" || completionResponse == "queried") {
+        result = "queried";
+      } else if (paymentResponse == "approve" && completionResponse == "approve") {
+        result = "approve";
+      }
+    } else if (claim.claimType == "60") {
+      if (paymentResponse == "reject") {
+        result = "reject";
+      } else if (paymentResponse == "queried") {
+        result = "queried";
+      } else if (paymentResponse == "approve") {
+        result = "approve";
+      }
+    } else if (claim.claimType == "40") {
+      if (completionResponse == "reject") {
+        result = "reject";
+      } else if (completionResponse == "queried") {
+        result = "queried";
+      } else if (completionResponse == "approve") {
+        result = "approve";
+      }
+    }
+    return result
 }
 
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable }
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome }
