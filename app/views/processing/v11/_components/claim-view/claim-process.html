@@ -112,6 +112,11 @@
         {% if data.userType == "processor" or data.userType == "leadProcessor" %}
             <form action="../claim-process-handler" method="post" novalidate>
                 <h3 class="govuk-heading-m">Review of evidence</h3>
+                {% if (claim.isPaymentPlan and claim.claimType == "40") %} 
+                <p class="govuk-body">The organisation has only paid 60% of the training cost.</p>
+                {% elif ((not claim.isPaymentPlan) and claim.claimType == "40") %}
+                <p class="govuk-body">The organisation has paid for the training in full.</p>
+                {% endif %}
                 {% if (claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) %}
                     <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}"
                         id="payment-review">
@@ -119,6 +124,11 @@
                             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                                 Does the evidence of payment meet the required criteria?
                             </legend>
+                            {% if (claim.isPaymentPlan and claim.claimType == "40") %} 
+                            <div id="payment-hint" class="govuk-hint">
+                                You need to check the organisation has paid the remaining 40%.
+                            </div>
+                            {% endif %}
                             {% if data.paymentResponseIncomplete %}
                                 <p id="payment-review-error" class="govuk-error-message">
                                     <span class="govuk-visually-hidden">Error:</span>Select an option for evidence of payment
@@ -235,10 +245,10 @@
                             <div class="govuk-form-group {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %}govuk-form-group--error {% endif %}">
 
                                 <label class="govuk-label govuk-label--s" for="paymentReimbursementAmount">
-                                    What was the cost per learner?
+                                    What is the full cost per learner?
                                 </label>
                                 <div id="payment-note-hint" class="govuk-hint">
-                                    <p class="govuk-hint">Enter the amount the training cost for a single learner.</p>
+                                    <p class="govuk-hint">Enter the full cost of this training for a single learner (even if the organisation has only paid 60% so far).</p>
                                     <p class="govuk-hint">For instance, if the organisation paid £100 for 4 learners
                                         then the cost per learner is £25.</p>
                                     <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is £{{training.reimbursementAmount}}.</strong></p>
@@ -264,7 +274,7 @@
                                     <input
                                         class="govuk-input govuk-input--width-5 {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %} govuk-input--error {% endif %}"
                                         id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text"
-                                        value="{{ data.paymentReimbursementAmount | default ('') }}">
+                                        value="{{ data.paymentReimbursementAmount | default ('') }}" aria-describedby="payment-note-hint">
                                 </div>
                             </div>
                         </div>

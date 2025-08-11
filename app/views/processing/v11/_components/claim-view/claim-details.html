@@ -1,11 +1,11 @@
 {% if claim.claimType == "60" %}
-    <h3 class="govuk-heading-s">60 claim</h3>
-    <p class="govuk-body">This is the 60 part of a claim that uses the 60/40 funding model. It covers evidence of payment.   </p>
+    <h3 class="govuk-heading-s">60 part</h3>
+    <p class="govuk-body">This is the 60 part of a claim that uses the 60/40 funding model. It covers evidence of payment only.</p>
     
     {% if pairClaim != null %}
     <p class="govuk-body">View the <a href="./org-view-main?id={{pairClaim.claimID}}" class="govuk-link">40 part of the claim</a>, which covers evidence of training completion.</p>
     {% else %}
-    <p class="govuk-body">The 40 part of the claim, which covers evidence of training completion, has not  been submitted yet.</p>
+    <p class="govuk-body">The 40 part of the claim, has not been submitted yet.</p>
     {% endif %}
 
     {% if claim.submissions | length <= 1 %}
@@ -16,8 +16,11 @@
     {% endif %}
 
 {% elif claim.claimType == "40" %}
-    <h3 class="govuk-heading-s">40 claim</h3>
-    <p class="govuk-body">This is the 40 part of a claim that uses the 60/40 funding model. It covers evidence of training completion.</p>
+    <h3 class="govuk-heading-s">40 part</h3>
+    <p class="govuk-body">This is the 40 part of a claim that uses the 60/40 funding model. {% if not claim.isPaymentPlan %}It covers evidence of training completion.{% endif %}</p>
+    {% if claim.isPaymentPlan %}
+    <p class="govuk-body">This is a payment plan claim so it covers evidence of training completion and evidence of payment for the 40 part.</p>
+    {% endif %}
     <p class="govuk-body">View the <a href="./org-view-main?id={{pairClaim.claimID}}" class="govuk-link">60 part of the claim</a>, which covers evidence of payment.</p>
 
     {% if claim.submissions | length <= 1 %}
