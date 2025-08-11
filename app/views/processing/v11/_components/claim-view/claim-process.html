@@ -1,0 +1,390 @@
+{% set paymentCompleted = claim.evidenceOfPaymentreview.pass != null %}
+{% set paymentRejectte = claim.evidenceOfPaymentreview.note %}
+{% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
+{% set completionNote = claim.evidenceOfCompletionreview.note %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <a href="../back-all-claims" class="govuk-back-link govuk-!-margin-bottom-6">Back to all claims</a>
+
+        {% if data.processSuccess == "true" %}
+        <div class="govuk-notification-banner govuk-notification-banner--success" role="alert"
+            aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+            <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                    Success
+                </h2>
+            </div>
+            <div class="govuk-notification-banner__content">
+                <h3 class="govuk-notification-banner__heading">
+                    Claim outcome recorded and shared with organisation
+                </h3>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentRejectNoteIncomplete or data.completionResponseIncomplete or data.completionRejectNoteIncomplete or data.completionQueriedNoteIncomplete or data.paymentQueriedNoteIncomplete %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        {% if data.paymentResponseIncomplete %}
+                        <li>
+                            <a href="#payment-review">Select an option for evidence of payment</a>
+                        </li>
+                        {% endif %}
+
+                            {% if data.paymentReimbursementAmountIncomplete %}
+                                <li>
+                                    <a href="#cost-per-learner-error">Enter cost per learner</a>
+                                </li>
+                            {% endif %}
+                            {% if data.paymentReimbursementAmountInvalid %}
+                                <li>
+                                    <a href="#cost-per-learner-error">Cost per learner must be a number</a>
+                                </li>
+                            {% endif %}
+
+
+                        {% if data.paymentRejectNoteIncomplete %}
+                            <li>
+                                <a href="#payment-reject-note-error">Enter rejection reasons for evidence of payment </a>
+                            </li>
+                        {% endif %}
+
+                        {% if data.paymentQueriedNoteIncomplete %}
+                            <li>
+                                <a href="#payment-queried-note-error">Enter action required for evidence of payment </a>
+                            </li>
+                        {% endif %}
+
+                        {% if data.completionResponseIncomplete %}
+                            <li>
+                                <a href="#completion-review">Select an option for evidence of completion </a>
+                            </li>
+                        {% endif %}
+
+                        {% if data.completionRejectNoteIncomplete %}
+                            <li>
+                                <a href="#completion-reject-note-error">Enter rejection reasons for evidence of completion</a>
+                            </li>
+                        {% endif %}
+
+                        {% if data.completionQueriedNoteIncomplete %}
+                            <li>
+                                <a href="#completion-queried-note-error">Enter action required for evidence of completion</a>
+                            </li>
+                        {% endif %}
+
+                        {% if data.paymentPlanResponseIncomplete %}
+                            <li>
+                                <a href="#payment-plan-error">???</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3">Claim: {{ claim.claimID }}</h2>
+        <p class="govuk-body govuk-!-margin-bottom-6">{{ claim.status | processorstatusTag }}{% if claim.status != 'submitted' %} on {{ submission.processedDate | govukDate }}{% endif %}</p>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+
+        {% include "./claim-details.html" %}
+
+    </div>
+
+    <div class="govuk-grid-column-one-half">
+
+
+        {% if claim.status == "submitted" %}
+
+        {% if data.userType == "processor" or data.userType == "leadProcessor" %}
+            <form action="../claim-process-handler" method="post" novalidate>
+                <h3 class="govuk-heading-m">Review of evidence</h3>
+                {% if (claim.isPaymentPlan and claim.claimType == "40") %} 
+                <p class="govuk-body">The organisation has only paid 60% of the training cost.</p>
+                {% elif ((not claim.isPaymentPlan) and claim.claimType == "40") %}
+                <p class="govuk-body">The organisation has paid for the training in full.</p>
+                {% endif %}
+                {% if (claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) %}
+                    <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}"
+                        id="payment-review">
+                        <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
+                            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                                Does the evidence of payment meet the required criteria?
+                            </legend>
+                            {% if (claim.isPaymentPlan and claim.claimType == "40") %} 
+                            <div id="payment-hint" class="govuk-hint">
+                                You need to check the organisation has paid the remaining 40%.
+                            </div>
+                            {% endif %}
+                            {% if data.paymentResponseIncomplete %}
+                                <p id="payment-review-error" class="govuk-error-message">
+                                    <span class="govuk-visually-hidden">Error:</span>Select an option for evidence of payment
+                                </p>
+                            {% endif %}
+                            <div class="govuk-radios" data-module="govuk-radios">
+                                <div class="govuk-radios__item">
+                
+                                    <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="approve"
+                                        data-aria-controls="processing__conditional" {% if data.payment=='approve'
+                                        %}checked{% endif %}>
+                                    <label class="govuk-label govuk-radios__label" for="paymentYes">
+                                        Yes
+                                    </label>
+                
+                                </div>
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="paymentQueried" name="payment" type="radio" value="queried"
+                                        {% if (claim.claimType != "40") %}data-aria-controls="conditional-payment-queried"{% endif %} {% if data.payment=='queried' %}checked{% endif
+                                        %}>
+                                    <label class="govuk-label govuk-radios__label" for="paymentQueried">
+                                        No – action required
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-payment-queried" data-maxlength="1000">
+                                    <div class="govuk-form-group govuk-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-form-group--error{% endif %}"
+                                        data-module="govuk-character-count">
+                                        <label class="govuk-label" for="payment-queried">
+                                            What action does the organisation need to take?
+                                        </label>
+                                        <div id="payment-queried-note-hint" class="govuk-hint">
+                                            This note tells the organisation what edits they need to make before they resubmit this claim
+                                        </div>
+                                        {% if data.paymentQueriedNoteIncomplete %}
+                                        <p id="payment-queried-note-error" class="govuk-error-message">
+                                            <span class="govuk-visually-hidden">Error:</span>Enter action required for evidence of payment 
+                                        </p>
+                                        {% endif %}
+                                        <textarea
+                                            class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-textarea--error{% endif %}"
+                                            id="paymentQueriedNote" name="paymentQueriedNote" rows="21"
+                                            aria-describedby="payment-queried-note-info note-hint">{{ data.paymentQueriedNote | default ('') }}</textarea>
+                                        <div id="payment-queried-note-info" class="govuk-hint govuk-character-count__message">
+                                            You can enter up to 1000 characters
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="govuk-radios__item">
+                                    <input class="govuk-radios__input" id="paymentReject" name="payment" type="radio" value="reject"
+                                        data-aria-controls="conditional-payment-reject" {% if data.payment=='reject' %}checked{% endif
+                                        %}>
+                                    <label class="govuk-label govuk-radios__label" for="paymentReject">
+                                        No – reject
+                                    </label>
+                                </div>
+                                <div class="govuk-radios__conditional govuk-radios__conditional--hidden"
+                                    id="conditional-payment-reject" data-maxlength="1000">
+                                    <div class="govuk-form-group govuk-character-count {% if data.paymentRejectNoteIncomplete %}govuk-form-group--error{% endif %}"
+                                        data-module="govuk-character-count">
+                                        <label class="govuk-label" for="payment-reject">
+                                            Why has this claim been rejected?
+                                        </label>
+                                        <div id="payment-reject-note-hint" class="govuk-hint">
+                                            This note tells the organisation why their claim has been rejected and therefore cannot  be edited and resubmitted
+                                        </div>
+                                        {% if data.paymentRejectNoteIncomplete %}
+                                        <p id="payment-reject-note-error" class="govuk-error-message">
+                                            <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for evidence of payment 
+                                        </p>
+                                        {% endif %}
+                                        <textarea
+                                            class="govuk-textarea govuk-js-character-count {% if data.paymentRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
+                                            id="paymentRejectNote" name="paymentRejectNote" rows="21"
+                                            aria-describedby="payment-no-note-info note-hint">{{ data.paymentRejectNote | default ('') }}</textarea>
+                                        <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
+                                            You can enter up to 1000 characters
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    {% if (claim.claimType != "40") %}
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="processing__conditional">
+                            {% if (claim.claimType == "60") %}
+                                <div class="govuk-form-group {% if data.paymentPlanResponseIncomplete %}govuk-form-group--error {% endif %}">
+                                    <fieldset class="govuk-fieldset">
+                                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                                            Was the training paid for in full?
+                                        </legend>
+                                        {% if data.paymentPlanResponseIncomplete %}
+                                            <p id="payment-plan-error" class="govuk-error-message">
+                                                <span class="govuk-visually-hidden">Error:</span>??
+                                            </p>
+                                        {% endif %}
+                                        <div class="govuk-radios" data-module="govuk-radios">
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="paymentPlanResponseYes" name="paymentPlanResponse" type="radio" value="yes" {% if data.paymentPlanResponse=='yes'%}checked{% endif %}>
+                                            <label class="govuk-label govuk-radios__label" for="paymentPlanResponseYes">
+                                            Yes
+                                            </label>
+                                        </div>
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="paymentPlanResponseNo" name="paymentPlanResponse" type="radio" value="no" {% if data.paymentPlanResponse=='no'%}checked{% endif %}>
+                                            <label class="govuk-label govuk-radios__label" for="paymentPlanResponseNo">
+                                            No
+                                            </label>
+                                        </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            {% endif %}
+                            <div class="govuk-form-group {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %}govuk-form-group--error {% endif %}">
+
+                                <label class="govuk-label govuk-label--s" for="paymentReimbursementAmount">
+                                    What is the full cost per learner?
+                                </label>
+                                <div id="payment-note-hint" class="govuk-hint">
+                                    <p class="govuk-hint">Enter the full cost of this training for a single learner (even if the organisation has only paid 60% so far).</p>
+                                    <p class="govuk-hint">For instance, if the organisation paid £100 for 4 learners
+                                        then the cost per learner is £25.</p>
+                                    <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is £{{training.reimbursementAmount}}.</strong></p>
+                                    <p class="govuk-hint">This is the maximum amount for training paid for {% if (submission.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %}.</p>
+                                    <p class="govuk-hint">The organisation will not get back more than they actually
+                                        paid.</p>
+                                </div>
+
+
+                                {% if data.paymentReimbursementAmountIncomplete %}
+                                <p id="cost-per-learner-error" class="govuk-error-message">
+                                    <span class="govuk-visually-hidden">Error:</span>Enter cost per learner
+                                </p>
+                                {% endif %}
+                                {% if data.paymentReimbursementAmountInvalid %}
+                                <p id="cost-per-learner-error" class="govuk-error-message">
+                                    <span class="govuk-visually-hidden">Error:</span>Cost per learner must be a number
+                                </p>
+                                {% endif %}
+
+                                <div class="govuk-input__wrapper" id="cost-per-learner">
+                                    <div class="govuk-input__prefix" aria-hidden="true">£</div>
+                                    <input
+                                        class="govuk-input govuk-input--width-5 {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %} govuk-input--error {% endif %}"
+                                        id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text"
+                                        value="{{ data.paymentReimbursementAmount | default ('') }}" aria-describedby="payment-note-hint">
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                {% endif %}
+            
+                {% if claim.claimType == "100" %}
+                <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                {% endif %}
+            
+                {% if claim.claimType != "60" %}
+                <div class="govuk-form-group {% if data.completionResponseIncomplete %}govuk-form-group--error {% endif %}"
+                    id="completion-review">
+                    <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                            Does the evidence of completion meet the required criteria?
+                        </legend>
+                        {% if data.completionResponseIncomplete %}
+                        <p id="completion-review-error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span>Select an option for evidence of completion 
+                        </p>
+                        {% endif %}
+                        <div class="govuk-radios" data-module="govuk-radios">
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input " id="completionYes" name="completion" type="radio"
+                                    value="approve" {% if data.completion=='approve' %}checked{% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="completionYes">
+                                    Yes
+                                </label>
+                            </div>
+
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="completionQueried" name="completion" type="radio"
+                                    value="queried" data-aria-controls="conditional-queried-notes" {% if data.completion=='queried'
+                                    %}checked{% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="completionQueried">
+                                    No – action required
+                                </label>
+                            </div>
+                            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-queried-notes">
+                                <div class="govuk-form-group govuk-character-count {% if data.completionQueriedNoteIncomplete %}govuk-form-group--error {% endif %}"
+                                    data-module="govuk-character-count" data-maxlength="1000">
+                                    <label class="govuk-label" for="completionNote">
+                                        What action does the organisation need to take?
+                                    </label>
+                                    <div id="completionQueriedNote-hint" class="govuk-hint">
+                                        This note tells the organisation what edits they need to make before they resubmit this claim
+                                    </div>
+                                    {% if data.completionQueriedNoteIncomplete %}
+                                    <p id="completion-queried-note-error" class="govuk-error-message">
+                                        <span class="govuk-visually-hidden">Error:</span> Enter action required for evidence of completion
+                                    </p>
+                                    {% endif %}
+                                    <textarea
+                                        class="govuk-textarea govuk-js-character-count {% if data.completionQueriedNoteIncomplete %}govuk-textarea--error{% endif %}"
+                                        id="completionQueriedNote" name="completionQueriedNote" rows="21"
+                                        aria-describedby="completionNote-info completionNote-hint">{{ data.completionQueriedNote | default ('') }}</textarea>
+                                    <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
+                                        You can enter up to 1000 characters
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="completionReject" name="completion" type="radio"
+                                    value="reject" data-aria-controls="conditional-reject-notes" {% if data.completion=='reject'
+                                    %}checked{% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="completionReject">
+                                    No – reject
+                                </label>
+                            </div>
+                            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-reject-notes">
+                                <div class="govuk-form-group govuk-character-count {% if data.completionRejectNoteIncomplete %}govuk-form-group--error {% endif %}"
+                                    data-module="govuk-character-count" data-maxlength="1000">
+                                    <label class="govuk-label" for="completionNote">
+                                        Why has this claim been rejected?
+                                    </label>
+                                    <div id="completionRejectNote-hint" class="govuk-hint">
+                                        This note tells the organisation why their claim has been rejected and therefore cannot  be edited and resubmitted
+                                    </div>
+                                    {% if data.completionRejectNoteIncomplete %}
+                                    <p id="completion-reject-note-error" class="govuk-error-message">
+                                        <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for evidence of completion
+                                    </p>
+                                    {% endif %}
+                                    <textarea
+                                        class="govuk-textarea govuk-js-character-count {% if data.completionRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
+                                        id="completionRejectNote" name="completionRejectNote" rows="21"
+                                        aria-describedby="completionNote-info completionNote-hint">{{ data.completionRejectNote | default ('') }}</textarea>
+                                    <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
+                                        You can enter up to 1000 characters
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                {% endif %}
+                <div class="govuk-button-group">
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Complete claim
+                    </button>
+                </div>
+            </form>
+        {% endif %}
+        
+        {% else %}
+
+        {% include "./claim-outcome.html" %}
+
+        {% endif %}
+    </div>
