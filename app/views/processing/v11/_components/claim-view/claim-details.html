@@ -154,7 +154,7 @@
     </div>
 </dl>
 <div style="padding-top: 10px;">
-    {% if (claim.claimType != "40") %}
+    {% if (claim.claimType != "40") or (claim.claimType == "40" and claim.isPaymentPlan) %}
         <h3 class="govuk-heading-m">
             Evidence of payment
         </h3>

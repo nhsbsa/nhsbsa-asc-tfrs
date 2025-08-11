@@ -1,6 +1,6 @@
 <h3 class="govuk-heading-m">Completed review of evidence</h3>
 
-{% if claim.claimType != "40"%}
+{% if claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)%}
         <h4 class="govuk-heading-s">Does the evidence of payment meet the required criteria?</h4>
 
         {% if submission.evidenceOfPaymentReview.outcome == "pass" %}
