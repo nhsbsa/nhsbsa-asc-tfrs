@@ -218,7 +218,7 @@
                                 <div class="govuk-form-group {% if data.paymentPlanResponseIncomplete %}govuk-form-group--error {% endif %}">
                                     <fieldset class="govuk-fieldset">
                                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                                            Was the training paid for in full?
+                                            Has the organisation paid for this training in full?
                                         </legend>
                                         {% if data.paymentPlanResponseIncomplete %}
                                             <p id="payment-plan-error" class="govuk-error-message">
@@ -249,8 +249,7 @@
                                 </label>
                                 <div id="payment-note-hint" class="govuk-hint">
                                     <p class="govuk-hint">Enter the full cost of this training for a single learner (even if the organisation has only paid 60% so far).</p>
-                                    <p class="govuk-hint">For instance, if the organisation paid £100 for 4 learners
-                                        then the cost per learner is £25.</p>
+                                    <p class="govuk-hint">For instance, if the organisation will be paying a total of £100 for 4 learners then the cost per learner is £25.</p>
                                     <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is £{{training.reimbursementAmount}}.</strong></p>
                                     <p class="govuk-hint">This is the maximum amount for training paid for {% if (submission.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %}.</p>
                                     <p class="govuk-hint">The organisation will not get back more than they actually
