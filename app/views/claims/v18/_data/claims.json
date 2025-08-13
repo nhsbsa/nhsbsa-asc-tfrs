@@ -539,8 +539,7 @@
         "costDate": "2025-07-19T23:32:03.407Z",
         "evidenceOfPayment": [
           "bankStatement1.pdf",
-          "invoice1.pdf",
-          "receipt1.pdf"
+          "invoice1.pdf"
         ],
         "completionDate": "2025-07-20T00:02:52.645Z",
         "evidenceOfCompletion": "certificate1.pdf",
@@ -20692,7 +20691,7 @@
         "trainingCode": "601/2566/4",
         "learnerID": "SC 67 9F 81 W",
         "startDate": "2025-06-26T17:54:55.031Z",
-        "costDate": null,
+        "costDate": "2025-06-27T17:54:55.031Z",
         "evidenceOfPayment": [],
         "completionDate": null,
         "evidenceOfCompletion": null,
