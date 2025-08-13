@@ -113,7 +113,7 @@
             <form action="../claim-process-handler" method="post" novalidate>
                 <h3 class="govuk-heading-m">Review of evidence</h3>
                 {% if (claim.isPaymentPlan and claim.claimType == "40") %} 
-                <p class="govuk-body">The organisation has only paid 60% of the training cost.</p>
+                <p class="govuk-body">The organisation has only provided evidence of payment for 60% of the training cost.</p>
                 {% elif ((not claim.isPaymentPlan) and claim.claimType == "40") %}
                 <p class="govuk-body">The organisation has paid for the training in full.</p>
                 {% endif %}
