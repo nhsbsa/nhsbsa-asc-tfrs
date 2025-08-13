@@ -1,4 +1,4 @@
-{% if not submission.costDate %}
+{% if (not submission.costDate and claim.claimType == "100") or (pairClaim != null and not pairSubmission.costDate) %}
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =="missing" %}
   <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
     <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
@@ -38,7 +38,7 @@
   </div>
 {% endif %}
 
-{% if ( submission.evidenceOfPayment | getCount == 0 ) %}
+{% if (( submission.evidenceOfPayment | getCount == 0 ) and claim.claimType == "100") or (pairClaim != null and ( pairSubmission.evidenceOfPayment | getCount == 0 ))  %}
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =="missing" %}
     <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
       <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-evidence-error">

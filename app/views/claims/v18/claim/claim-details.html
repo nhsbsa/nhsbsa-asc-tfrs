@@ -184,6 +184,11 @@
   {% endif %}
 
       {% if (claim.status != "rejected") %}
+
+        {% if (pairClaim.isPaymentPlan == true) %}
+          {% include "../_components/claim-sections/evidencePayment.html" %}
+        {% endif %}
+        
         {% include "../_components/claim-sections/evidenceCompletion.html" %}
       {% endif %}
 

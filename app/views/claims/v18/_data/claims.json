@@ -1,4 +1,97 @@
 [
+    {
+    "claimID": "A1G-EHVI-88A2-B",
+    "workplaceID": "C63281491",
+    "claimType": "60",
+    "isPaymentPlan": true,
+    "status": "approved",
+    "createdDate": "2024-04-04T17:04:00.117Z",
+    "createdBy": "ivy.montgomery@anikacare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2024-05-14T09:19:41.012Z",
+        "trainingCode": "601/0129/5",
+        "learnerID": "UG 66 2F 97 F",
+        "startDate": "2024-07-31T23:55:47.273Z",
+        "costDate": "2024-07-31T23:55:44.062Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "yes",
+          "costPerLearner": 162
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2024-06-26T17:19:54.377Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2024-04-10T09:19:41.012Z",
+        "trainingCode": "601/0129/5",
+        "learnerID": "UG 66 2F 97 F",
+        "startDate": "2024-07-31T23:55:47.273Z",
+        "costDate": "2024-07-31T23:55:44.062Z",
+        "evidenceOfPayment": ["invoice1.pdf", "receipt1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2024-05-05T17:19:54.377Z",
+        "processedBy": "Flossie Gleason"
+      }
+    ]
+  },
+  {
+    "claimID": "A1G-EHVI-88A2-C",
+    "workplaceID": "C63281491",
+    "claimType": "40",
+    "isPaymentPlan": true,
+    "status": "not-yet-submitted",
+    "createdDate": "2024-04-04T17:04:00.117Z",
+    "createdBy": "ivy.montgomery@anikacare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": null,
+        "submittedDate": null,
+        "trainingCode": "601/0129/5",
+        "learnerID": "UG 66 2F 97 F",
+        "startDate": "2024-07-31T23:55:47.273Z",
+        "costDate": null,
+        "evidenceOfPayment": [],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
+  },
   {
     "claimID": "PDD-MMLV-5588-B",
     "workplaceID": "A02944934",
