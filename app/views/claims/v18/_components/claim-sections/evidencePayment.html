@@ -22,7 +22,8 @@
     </div>
   </div>
   {% endif %}
-  <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-list-row--error {% endif %}">
+  <div class="govuk-summary-list__row {% if (is40Part != true and claim.claimType == "60" and (claim.status == "approved" or claim.status == "rejected" or claim.status == "submitted"))%}govuk-summary-list__row--no-actions{% endif %}
+ {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-key--error {% endif %}">
       {% if claim.claimType == "100" or claim.claimType == "60"%}
         Payment date {% if ( claim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
@@ -39,7 +40,7 @@
       {% endif %}
 
     </dd>
-    {% if (claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType != "40" %}
+    {% if ((is40Part != true and (claim.status == "queried" or claim.status == "not-yet-submitted")) or (is40Part == true and (pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted"))) %}
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">
           payment date</span></a>
@@ -65,7 +66,8 @@
     </dd>
   </div>
 {% else %}
-  <div class="govuk-summary-list__row">
+  <div class="govuk-summary-list__row {% if (is40Part != true and claim.claimType == "60" and (claim.status == "approved" or claim.status == "rejected" or claim.status == "submitted"))%}govuk-summary-list__row--no-actions{% endif %}
+">
     <dt class="govuk-summary-list__key">
       {% if claim.claimType == "100" or is40Part != true %}
         Evidence of payment </br>{% if ( claim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
@@ -86,7 +88,7 @@
       {% endif %}
 
     </dd>
-    {% if (claim.status == "queried" or claim.status == "not-yet-submitted") %}
+    {% if ((is40Part != true and (claim.status == "queried" or claim.status == "not-yet-submitted")) or (is40Part == true and (pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted"))) %}
       <dd class="govuk-summary-list__actions">
         <ul class="govuk-summary-list__actions-list">
           <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
