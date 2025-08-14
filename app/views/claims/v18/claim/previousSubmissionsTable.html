@@ -152,32 +152,32 @@
                 {% endif %}
 
                 {% if data.view == "100" or data.view == "60" %}
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
-                    {% for submission in sortedSubmissions %}
-                      {% if submission.evidenceOfPayment %}
-                      <td class="govuk-table__cell">
-                        
-                        {% set evidenceLoop = loop.index0 + 1 %}
-                        {% if sortedSubmissions[evidenceLoop].evidenceOfPayment %}
-                          {% set previousEvidence = sortedSubmissions[evidenceLoop].evidenceOfPayment %}
-                        {% else %}
-                          {% set previousEvidence = [] %}
-                        {% endif %}
+                  <tr class="govuk-table__row">
+                      <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
+                      {% for submission in sortedSubmissions %}
+                        {% if submission.evidenceOfPayment %}
+                        <td class="govuk-table__cell">
+                          
+                          {% set evidenceLoop = loop.index0 + 1 %}
+                          {% if sortedSubmissions[evidenceLoop].evidenceOfPayment %}
+                            {% set previousEvidence = sortedSubmissions[evidenceLoop].evidenceOfPayment %}
+                          {% else %}
+                            {% set previousEvidence = [] %}
+                          {% endif %}
 
-                        {% for evidence in submission.evidenceOfPayment %}
-                        {% if ((evidence not in previousEvidence) and (evidenceLoop) <= ((sortedSubmissions | length) - 1)  ) %}
-                          <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                          {% for evidence in submission.evidenceOfPayment %}
+                            {% if ((evidence not in previousEvidence) and (evidenceLoop) <= ((sortedSubmissions | length) - 1)  ) %}
+                              <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                            {% else %}
+                              {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                            {% endif %}
+                          {% endfor %}
+                        </td>
                         {% else %}
-                          {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                          <td class="govuk-table__cell">---</td>
                         {% endif %}
-                        {% endfor %}
-                      </td>
-                      {% else %}
-                      <td class="govuk-table__cell">---</td>
-                      {% endif %}
-                    {%endfor %}
-                </tr>
+                      {%endfor %}
+                  </tr>
                 {% endif %}
 
                 <tr class="govuk-table__row">
@@ -190,8 +190,6 @@
                         {% else %}
                           <td class="govuk-table__cell">{{(submission.learnerID | findLearner(data["learners"])).givenName}} {{(submission.learnerID | findLearner(data["learners"])).familyName}}</td>
                         {% endif %}
-
-
                       {% else %}
                         <td class="govuk-table__cell">---</td>
                       {% endif %}
@@ -199,53 +197,49 @@
                 </tr>
 
                 {% if (data.view == "40" and claim.isPaymentPlan == true) %}
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><strong>Payment date</strong></td>
-                    {% for submission in sortedSubmissions %}
-                      {% if submission.costDate %}
-
-
-                      {% if (submission.costDate !== sortedSubmissions[loop.index0 + 1].costDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.costDate | govukDate}}</strong></mark></td>
-                      {% else %}
-                        <td class="govuk-table__cell">{{submission.costDate | govukDate}}</td>
-                      {% endif %}
-                      
-                      
-                      {% else %}
-                      <td class="govuk-table__cell">---</td>
-                      {% endif %}
-                    {%endfor %}
-                </tr>
+                  <tr class="govuk-table__row">
+                      <td class="govuk-table__cell"><strong>Payment date</strong></td>
+                      {% for submission in sortedSubmissions %}
+                        {% if submission.costDate %}
+                          {% if (submission.costDate !== sortedSubmissions[loop.index0 + 1].costDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
+                            <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.costDate | govukDate}}</strong></mark></td>
+                          {% else %}
+                            <td class="govuk-table__cell">{{submission.costDate | govukDate}}</td>
+                          {% endif %}
+                        {% else %}
+                        <td class="govuk-table__cell">---</td>
+                        {% endif %}
+                      {%endfor %}
+                  </tr>
                 {% endif %}
 
                 {% if (data.view == "40" and claim.isPaymentPlan == true) %}
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
-                    {% for submission in sortedSubmissions %}
-                      {% if submission.evidenceOfPayment %}
-                      <td class="govuk-table__cell">
-                        
-                        {% set evidenceLoop = loop.index0 + 1 %}
-                        {% if sortedSubmissions[evidenceLoop].evidenceOfPayment %}
-                          {% set previousEvidence = sortedSubmissions[evidenceLoop].evidenceOfPayment %}
-                        {% else %}
-                          {% set previousEvidence = [] %}
-                        {% endif %}
+                  <tr class="govuk-table__row">
+                      <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
+                      {% for submission in sortedSubmissions %}
+                        {% if submission.evidenceOfPayment %}
+                          <td class="govuk-table__cell">
+                            
+                            {% set evidenceLoop = loop.index0 + 1 %}
+                            {% if sortedSubmissions[evidenceLoop].evidenceOfPayment %}
+                              {% set previousEvidence = sortedSubmissions[evidenceLoop].evidenceOfPayment %}
+                            {% else %}
+                              {% set previousEvidence = [] %}
+                            {% endif %}
 
-                        {% for evidence in submission.evidenceOfPayment %}
-                        {% if ((evidence not in previousEvidence) and (evidenceLoop) <= ((sortedSubmissions | length) - 1)  ) %}
-                          <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                            {% for evidence in submission.evidenceOfPayment %}
+                              {% if ((evidence not in previousEvidence) and (evidenceLoop) <= ((sortedSubmissions | length) - 1)  ) %}
+                                <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                              {% else %}
+                                {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                              {% endif %}
+                            {% endfor %}
+                          </td>
                         {% else %}
-                          {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                          <td class="govuk-table__cell">---</td>
                         {% endif %}
-                        {% endfor %}
-                      </td>
-                      {% else %}
-                      <td class="govuk-table__cell">---</td>
-                      {% endif %}
-                    {%endfor %}
-                </tr>
+                      {%endfor %}
+                  </tr>
                 {% endif %}
 
                 {% if data.view == "100" or data.view == "40"  %}
