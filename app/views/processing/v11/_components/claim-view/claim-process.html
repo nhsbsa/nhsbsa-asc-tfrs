@@ -113,13 +113,12 @@
             <form action="../claim-process-handler" method="post" novalidate>
                 <h3 class="govuk-heading-m">Review of evidence</h3>
                 {% if (claim.isPaymentPlan and claim.claimType == "40") %} 
-                <p class="govuk-body">The organisation has only paid 60% of the training cost.</p>
+                <p class="govuk-body">The organisation has only provided evidence of payment for 60% of the training cost.</p>
                 {% elif ((not claim.isPaymentPlan) and claim.claimType == "40") %}
                 <p class="govuk-body">The organisation has paid for the training in full.</p>
                 {% endif %}
                 {% if (claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) %}
-                    <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}"
-                        id="payment-review">
+                    <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}" id="payment-review">
                         <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
                             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                                 Does the evidence of payment meet the required criteria?
@@ -137,25 +136,20 @@
                             <div class="govuk-radios" data-module="govuk-radios">
                                 <div class="govuk-radios__item">
                 
-                                    <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="approve"
-                                        data-aria-controls="processing__conditional" {% if data.payment=='approve'
-                                        %}checked{% endif %}>
+                                    <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="approve" {% if claim.claimType != '40' %} data-aria-controls="processing__conditional" {% endif %} {% if data.payment=='approve' %}checked{% endif %}>
                                     <label class="govuk-label govuk-radios__label" for="paymentYes">
                                         Yes
                                     </label>
                 
                                 </div>
                                 <div class="govuk-radios__item">
-                                    <input class="govuk-radios__input" id="paymentQueried" name="payment" type="radio" value="queried"
-                                        {% if (claim.claimType != "40") %}data-aria-controls="conditional-payment-queried"{% endif %} {% if data.payment=='queried' %}checked{% endif
-                                        %}>
+                                    <input class="govuk-radios__input" id="paymentQueried" name="payment" type="radio" value="queried" data-aria-controls="conditional-payment-queried" {% if data.payment=='queried' %}checked{% endif %}>
                                     <label class="govuk-label govuk-radios__label" for="paymentQueried">
                                         No – action required
                                     </label>
                                 </div>
                                 <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="conditional-payment-queried" data-maxlength="1000">
-                                    <div class="govuk-form-group govuk-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-form-group--error{% endif %}"
-                                        data-module="govuk-character-count">
+                                    <div class="govuk-form-group govuk-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
                                         <label class="govuk-label" for="payment-queried">
                                             What action does the organisation need to take?
                                         </label>
@@ -167,10 +161,7 @@
                                             <span class="govuk-visually-hidden">Error:</span>Enter action required for evidence of payment 
                                         </p>
                                         {% endif %}
-                                        <textarea
-                                            class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-textarea--error{% endif %}"
-                                            id="paymentQueriedNote" name="paymentQueriedNote" rows="21"
-                                            aria-describedby="payment-queried-note-info note-hint">{{ data.paymentQueriedNote | default ('') }}</textarea>
+                                        <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-textarea--error{% endif %}" id="paymentQueriedNote" name="paymentQueriedNote" rows="21" aria-describedby="payment-queried-note-info note-hint">{{ data.paymentQueriedNote | default ('') }}</textarea>
                                         <div id="payment-queried-note-info" class="govuk-hint govuk-character-count__message">
                                             You can enter up to 1000 characters
                                         </div>
