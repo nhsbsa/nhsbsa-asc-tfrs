@@ -212,7 +212,7 @@ router.post('/claim-process-handler', function (req, res) {
   claimID = req.session.data.id
   const paymentResponse = req.session.data.payment
   const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
-  const paymentPlanResponse = req.session.data.paymentPlanResponse
+  const paidInFullResponse = req.session.data.paidInFullResponse
   const paymentRejectNote = req.session.data.paymentRejectNote
   const paymentQueriedNote = req.session.data.paymentQueriedNote
   const completionResponse = req.session.data.completion
@@ -221,7 +221,7 @@ router.post('/claim-process-handler', function (req, res) {
 
   let claim = null
 
-  console.log(paymentPlanResponse)
+  console.log(paidInFullResponse)
 
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -230,7 +230,7 @@ router.post('/claim-process-handler', function (req, res) {
     }
   }
 
-  const errorParamaters = checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paymentPlanResponse)
+  const errorParamaters = checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paidInFullResponse)
 
   if (errorParamaters == "") {
 
@@ -251,7 +251,7 @@ router.get('/outcome-handler', function (req, res) {
   const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
   const paymentRejectNote = req.session.data.paymentRejectNote
   const paymentQueriedNote = req.session.data.paymentQueriedNote
-  const paymentPlanResponse = req.session.data.paymentPlanResponse
+  const paidInFullResponse = req.session.data.paidInFullResponse
 
   const completionResponse = req.session.data.completion
   const completionRejectNote = req.session.data.completionRejectNote
@@ -259,7 +259,7 @@ router.get('/outcome-handler', function (req, res) {
 
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
-      updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentQueriedNote, paymentRejectNote, completionResponse, completionQueriedNote, completionRejectNote, paymentPlanResponse)
+      updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentQueriedNote, paymentRejectNote, completionResponse, completionQueriedNote, completionRejectNote, paidInFullResponse)
       
       let submission = getMostRelevantSubmission(claim)    
       submission.processedDate = new Date()
@@ -279,7 +279,7 @@ router.get('/outcome-handler', function (req, res) {
   delete req.session.data.paymentReimbursementAmount
   delete req.session.data.paymentRejectNote
   delete req.session.data.paymentQueriedNote
-  delete req.session.data.paymentPlanResponse
+  delete req.session.data.paidInFullResponse
 
   delete req.session.data.completion
   delete req.session.data.completionRejectNote

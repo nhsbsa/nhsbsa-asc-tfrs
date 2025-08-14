@@ -47,9 +47,9 @@
         
         <h4 class="govuk-heading-s">Was the training paid for in full?</h4>
         {% if submission.evidenceOfPaymentReview.paymentPlan == "yes" %}
-            <p class="govuk-body">No</p>
-        {% elif submission.evidenceOfPaymentReview.paymentPlan == "no" %}
             <p class="govuk-body">Yes</p>
+        {% elif submission.evidenceOfPaymentReview.paymentPlan == "no" %}
+            <p class="govuk-body">No</p>
         {% endif %}
 
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">

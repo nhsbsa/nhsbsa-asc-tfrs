@@ -80,7 +80,7 @@
                             </li>
                         {% endif %}
 
-                        {% if data.paymentPlanResponseIncomplete %}
+                        {% if data.paidInFullResponseIncomplete %}
                             <li>
                                 <a href="#payment-plan-error">???</a>
                             </li>
@@ -206,26 +206,26 @@
                     {% if (claim.claimType != "40") %}
                         <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="processing__conditional">
                             {% if (claim.claimType == "60") %}
-                                <div class="govuk-form-group {% if data.paymentPlanResponseIncomplete %}govuk-form-group--error {% endif %}">
+                                <div class="govuk-form-group {% if data.paidInFullResponseIncomplete %}govuk-form-group--error {% endif %}">
                                     <fieldset class="govuk-fieldset">
                                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                                             Has the organisation paid for this training in full?
                                         </legend>
-                                        {% if data.paymentPlanResponseIncomplete %}
+                                        {% if data.paidInFullResponseIncomplete %}
                                             <p id="payment-plan-error" class="govuk-error-message">
                                                 <span class="govuk-visually-hidden">Error:</span>??
                                             </p>
                                         {% endif %}
                                         <div class="govuk-radios" data-module="govuk-radios">
                                         <div class="govuk-radios__item">
-                                            <input class="govuk-radios__input" id="paymentPlanResponseYes" name="paymentPlanResponse" type="radio" value="no" {% if data.paymentPlanResponse=='no'%}checked{% endif %}>
-                                            <label class="govuk-label govuk-radios__label" for="paymentPlanResponseYes">
+                                            <input class="govuk-radios__input" id="paidInFullResponseYes" name="paidInFullResponse" type="radio" value="yes" {% if data.paidInFullResponse=='yes'%}checked{% endif %}>
+                                            <label class="govuk-label govuk-radios__label" for="paidInFullResponseYes">
                                             Yes
                                             </label>
                                         </div>
                                         <div class="govuk-radios__item">
-                                            <input class="govuk-radios__input" id="paymentPlanResponseNo" name="paymentPlanResponse" type="radio" value="yes" {% if data.paymentPlanResponse=='yes'%}checked{% endif %}>
-                                            <label class="govuk-label govuk-radios__label" for="paymentPlanResponseNo">
+                                            <input class="govuk-radios__input" id="paidInFullResponseNo" name="paidInFullResponse" type="radio" value="no" {% if data.paidInFullResponse=='no'%}checked{% endif %}>
+                                            <label class="govuk-label govuk-radios__label" for="paidInFullResponseNo">
                                             No
                                             </label>
                                         </div>

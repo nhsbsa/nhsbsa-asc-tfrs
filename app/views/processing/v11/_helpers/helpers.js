@@ -29,17 +29,17 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentQueryNote, paymentRejectNote, completionResponse, completionQueryNote, completionRejectNote, paymentPlanResponse) {
+function updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentQueryNote, paymentRejectNote, completionResponse, completionQueryNote, completionRejectNote, paidInFullResponse) {
     let submission = getMostRelevantSubmission(claim)    
     if (paymentResponse == "approve") {
             submission.evidenceOfPaymentReview.outcome = "pass"
             if (claim.claimType == "100" || claim.claimType == "60") {
                 submission.evidenceOfPaymentReview.costPerLearner = paymentReimbursementAmount
-                submission.evidenceOfPaymentReview.paymentPlan = paymentPlanResponse
-                if (paymentPlanResponse == "yes") {
-                    claim.isPaymentPlan = true
-                } else if (paymentPlanResponse == "no") {
+                submission.evidenceOfPaymentReview.paymentPlan = paidInFullResponse
+                if (paidInFullResponse == "yes") {
                     claim.isPaymentPlan = false
+                } else if (paidInFullResponse == "no") {
+                    claim.isPaymentPlan = true
                 }
             }
         } else if (paymentResponse == "reject") {
@@ -257,7 +257,7 @@ function sortSubmissionsForTable(submissions) {
     });
 }
 
-function checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paymentPlanResponse) {
+function checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paidInFullResponse) {
 
     let errorParamaters = ""
 
@@ -272,8 +272,8 @@ function checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, p
           } else if (paymentResponse == "approve" && (!validAmount)) {
             errorParamaters += "&paymentReimbursementAmountInvalid=true";
           }
-          if (paymentPlanResponse == null) {
-            errorParamaters += "&paymentPlanResponseIncomplete=true";
+          if (paidInFullResponse == null) {
+            errorParamaters += "&paidInFullResponseIncomplete=true";
           }
         } else if (paymentResponse == "reject" && (paymentRejectNote == null || paymentRejectNote == "")) {
         errorParamaters += "&paymentRejectNoteIncomplete=true";
