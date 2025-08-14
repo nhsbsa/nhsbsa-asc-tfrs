@@ -1,4 +1,129 @@
 [
+    {
+    "claimID": "7MD-KS92-FB93-B",
+    "workplaceID": "B02944934",
+    "claimType": "60",
+    "isPaymentPlan": true,
+    "status": "approved",
+    "createdDate": "2025-02-01T00:06:28.462Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "lena.caldwell@evergreencare.com",
+        "submittedDate": "2025-02-04T07:53:32.066Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "NX 76 8F 30 D",
+        "startDate": "2025-03-24T09:54:13.322Z",
+        "costDate": "2024-10-18T14:35:08.968Z",
+        "evidenceOfPayment": ["october-statement"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "yes",
+          "costPerLearner": 120
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": "2025-03-03T06:15:38.665Z",
+        "processedBy": "Allan Connelly"
+      }
+    ]
+  },
+  {
+    "claimID": "7MD-KS92-FB93-C",
+    "workplaceID": "B02944934",
+    "claimType": "40",
+    "isPaymentPlan": true,
+    "status": "submitted",
+    "createdDate": "2025-03-03T00:12:28.462Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "d.jones@evergreencare.com",
+        "submittedDate": "2025-04-06T08:21:17.133Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "NX 76 8F 30 D",
+        "startDate": "2025-03-24T09:54:13.322Z",
+        "costDate": "2025-04-01T03:16:00.448Z",
+        "evidenceOfPayment": ["invoice1.pdf", "bankStatement1.pdf"],
+        "completionDate": "2025-02-27T03:16:00.448Z",
+        "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
+  },
+  {
+    "claimID": "8LF-SJ43-JMS3-B",
+    "workplaceID": "B02944934",
+    "claimType": "60",
+    "isPaymentPlan": null,
+    "status": "submitted",
+    "createdDate": "2024-05-24T21:55:08.777Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "lionel-lowel@evergreencare.co.uk",
+        "submittedDate": "2025-03-03T07:43:14.557Z",
+        "trainingCode": "601/1464/2",
+        "learnerID": "BF 73 4F 97 L",
+        "startDate": "2024-08-08T11:45:01.732Z",
+        "costDate": "2024-06-27T01:16:45.233Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      },
+      {
+        "submitter": "lionel-lowel@evergreencare.co.uk",
+        "submittedDate": "2025-02-07T07:43:14.557Z",
+        "trainingCode": "601/1464/2",
+        "learnerID": "BF 73 4F 97 L",
+        "startDate": "2024-08-08T11:45:01.732Z",
+        "costDate": "2024-06-17T01:16:45.233Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The payment date doesn't match the evidence of payment, please update.",
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": "2025-02-12T07:43:14.557Z",
+        "processedBy": "Flossie Gleaason"
+      }
+    ]
+  },
   {
     "claimID": "3SH-I94K-JSND-B",
     "workplaceID": "B02944934",
