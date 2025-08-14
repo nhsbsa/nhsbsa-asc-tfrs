@@ -78,7 +78,7 @@
         {% if (claim.status == "not-yet-submitted") %}
           is {{ claim.status | statusTag(data.statuses) }}.
         {% elif (claim.status == "queried") %}
-          {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.
+          {{ claim.status | statusTag(data.statuses) }}.
         {% else %}
           was {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.
         {% endif %}</p>
@@ -89,7 +89,7 @@
         {% if (claim.status == "not-yet-submitted") %}
           is {{ claim.status | statusTag(data.statuses) }}
         {% elif (claim.status == "queried") %}
-          {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.
+          {{ claim.status | statusTag(data.statuses) }}.
         {% else %}
           was {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.
         {% endif %}</p>
@@ -100,7 +100,7 @@
           {% if (pairClaim.status == "not-yet-submitted") %}
             is {{ pairClaim.status | statusTag(data.statuses) }}
           {% elif (pairClaim.status == "queried") %}
-            {{ pairClaim.status | statusTag(data.statuses) }} on {{ (pairClaim | statusDate) | govukDate }}.
+            {{ pairClaim.status | statusTag(data.statuses) }}.
           {% else %}
             was {{ pairClaim.status | statusTag(data.statuses) }} on {{ (pairClaim | statusDate) | govukDate }}.
           {% endif %} 
