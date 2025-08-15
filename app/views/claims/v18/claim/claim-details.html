@@ -145,6 +145,7 @@
     <dl class="govuk-summary-list">
       {% include "../_components/claim-sections/training.html" %}
 
+      {% set is40Part = false %}
       {% include "../_components/claim-sections/evidencePayment.html" %}
 
       {% include "../_components/claim-sections/learner.html" %}
@@ -184,6 +185,12 @@
   {% endif %}
 
       {% if (claim.status != "rejected") %}
+
+        {% if (pairClaim.isPaymentPlan == true) %}
+          {% set is40Part = true %}
+          {% include "../_components/claim-sections/evidencePayment.html" %}
+        {% endif %}
+        
         {% include "../_components/claim-sections/evidenceCompletion.html" %}
       {% endif %}
 
