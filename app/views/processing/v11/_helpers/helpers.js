@@ -35,11 +35,12 @@ function updateClaim(claim, paymentResponse, paymentReimbursementAmount, payment
             submission.evidenceOfPaymentReview.outcome = "pass"
             if (claim.claimType == "100" || claim.claimType == "60") {
                 submission.evidenceOfPaymentReview.costPerLearner = paymentReimbursementAmount
-                submission.evidenceOfPaymentReview.paymentPlan = paidInFullResponse
                 if (paidInFullResponse == "yes") {
                     claim.isPaymentPlan = false
+                    submission.evidenceOfPaymentReview.paymentPlan = "no"
                 } else if (paidInFullResponse == "no") {
                     claim.isPaymentPlan = true
+                    submission.evidenceOfPaymentReview.paymentPlan = "yes"
                 }
             }
         } else if (paymentResponse == "reject") {
