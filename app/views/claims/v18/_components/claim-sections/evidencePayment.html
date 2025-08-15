@@ -1,4 +1,4 @@
-{% if not submission.costDate %}
+{% if (not submission.costDate and claim.claimType == "100") or (is40Part != true and claim.claimType == "60" and not submission.costDate) or (is40Part == true and pairClaim != null and not pairSubmission.costDate) %}
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =="missing" %}
   <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
     <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
@@ -22,14 +22,25 @@
     </div>
   </div>
   {% endif %}
-  <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-list-row--error {% endif %}">
+  <div class="govuk-summary-list__row {% if (is40Part != true and claim.claimType == "60" and (claim.status == "approved" or claim.status == "rejected" or claim.status == "submitted"))%}govuk-summary-list__row--no-actions{% endif %}
+ {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-key--error {% endif %}">
-      Payment date {% if ( claim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+      {% if claim.claimType == "100" or is40Part != true%}
+        Payment date {% if ( claim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+      {% else %}
+        Payment date {% if ( pairClaim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+      {% endif %}
     </dt>
+    
     <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-value--error {% endif %}">
-      {{ submission.costDate | govukDate }}
+      {% if claim.claimType == "100" or is40Part != true %}
+        {{ submission.costDate | govukDate }}
+      {% else %}
+        {{ pairSubmission.costDate | govukDate }}
+      {% endif %}
+
     </dd>
-    {% if (claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType != "40" %}
+    {% if ((is40Part != true and (claim.status == "queried" or claim.status == "not-yet-submitted")) or (is40Part == true and (pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted"))) %}
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">
           payment date</span></a>
@@ -38,7 +49,7 @@
   </div>
 {% endif %}
 
-{% if ( submission.evidenceOfPayment | getCount == 0 ) %}
+{% if ( submission.evidenceOfPayment | getCount == 0 and claim.claimType == "100") or (is40Part != true and claim.claimType == "60" and submission.evidenceOfPayment | getCount == 0) or (is40Part == true and pairClaim != null and ( pairSubmission.evidenceOfPayment | getCount == 0 ))  %}
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfPayment =="missing" %}
     <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
       <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-evidence-error">
@@ -55,16 +66,29 @@
     </dd>
   </div>
 {% else %}
-  <div class="govuk-summary-list__row">
+  <div class="govuk-summary-list__row {% if (is40Part != true and claim.claimType == "60" and (claim.status == "approved" or claim.status == "rejected" or claim.status == "submitted"))%}govuk-summary-list__row--no-actions{% endif %}
+">
     <dt class="govuk-summary-list__key">
-      Evidence of payment {% if ( claim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+      {% if claim.claimType == "100" or is40Part != true %}
+        Evidence of payment </br>{% if ( claim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+      {% else %}
+        Evidence of payment </br>{% if ( pairClaim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+      {% endif %}
     </dt>
     <dd class="govuk-summary-list__value">
-      {% for payment in submission.evidenceOfPayment %}
-        <p><a class="govuk-link" href="/public/images/{{payment}}" target="_blank">{{payment}} (opens in new tab)</a></p>
-      {% endfor %}
+
+      {% if claim.claimType == "100" or is40Part != true %}
+        {% for payment in submission.evidenceOfPayment %}
+          <p><a class="govuk-link" href="/public/images/{{payment}}" target="_blank">{{payment}} (opens in new tab)</a></p>
+        {% endfor %}
+      {% else %}
+        {% for payment in pairSubmission.evidenceOfPayment %}
+          <p><a class="govuk-link" href="/public/images/{{payment}}" target="_blank">{{payment}} (opens in new tab)</a></p>
+        {% endfor %}
+      {% endif %}
+
     </dd>
-    {% if (claim.status == "queried" or claim.status == "not-yet-submitted") %}
+    {% if ((is40Part != true and (claim.status == "queried" or claim.status == "not-yet-submitted")) or (is40Part == true and (pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted"))) %}
       <dd class="govuk-summary-list__actions">
         <ul class="govuk-summary-list__actions-list">
           <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
