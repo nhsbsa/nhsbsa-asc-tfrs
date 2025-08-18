@@ -15,7 +15,7 @@
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-01-25T09:54:13.322Z",
         "costDate": "2024-10-18T14:35:08.968Z",
-        "evidenceOfPayment": ["october-statement"],
+        "evidenceOfPayment": ["Bankstatement-scenario260.png","InvoicePP-scenario260.png"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
@@ -49,7 +49,7 @@
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-03-24T09:54:13.322Z",
         "costDate": "2025-04-01T03:16:00.448Z",
-        "evidenceOfPayment": ["invoice1.pdf", "bankStatement1.pdf"],
+        "evidenceOfPayment": ["InvoicePP-scenario240.png", "BankstatementPP-scenario240.png"],
         "completionDate": "2025-03-25T03:16:00.448Z",
         "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
         "evidenceOfPaymentReview": {
