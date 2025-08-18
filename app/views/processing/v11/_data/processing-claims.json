@@ -5,15 +5,15 @@
     "claimType": "60",
     "isPaymentPlan": true,
     "status": "approved",
-    "createdDate": "2025-02-01T00:06:28.462Z",
+    "createdDate": "2025-01-31T00:06:28.462Z",
     "createdBy": "lena.caldwell@evergreencare.com",
     "submissions": [
       {
         "submitter": "lena.caldwell@evergreencare.com",
-        "submittedDate": "2025-02-04T07:53:32.066Z",
+        "submittedDate": "2025-02-01T07:53:32.066Z",
         "trainingCode": "501/1146/2",
         "learnerID": "NX 76 8F 30 D",
-        "startDate": "2025-03-24T09:54:13.322Z",
+        "startDate": "2025-01-25T09:54:13.322Z",
         "costDate": "2024-10-18T14:35:08.968Z",
         "evidenceOfPayment": ["october-statement"],
         "completionDate": null,
@@ -28,7 +28,7 @@
           "outcome": null,
           "note": null
         },
-        "processedDate": "2025-03-03T06:15:38.665Z",
+        "processedDate": "2025-02-24T06:15:38.665Z",
         "processedBy": "Allan Connelly"
       }
     ]
@@ -44,13 +44,13 @@
     "submissions": [
       {
         "submitter": "d.jones@evergreencare.com",
-        "submittedDate": "2025-04-06T08:21:17.133Z",
+        "submittedDate": "2025-04-16T08:21:17.133Z",
         "trainingCode": "501/1146/2",
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-03-24T09:54:13.322Z",
         "costDate": "2025-04-01T03:16:00.448Z",
         "evidenceOfPayment": ["invoice1.pdf", "bankStatement1.pdf"],
-        "completionDate": "2025-02-27T03:16:00.448Z",
+        "completionDate": "2025-03-25T03:16:00.448Z",
         "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
@@ -67,14 +67,14 @@
       },
       {
         "submitter": "d.jones@evergreencare.com",
-        "submittedDate": "2025-04-06T08:21:17.133Z",
+        "submittedDate": "2025-04-02T08:21:17.133Z",
         "trainingCode": "501/1146/2",
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-03-24T09:54:13.322Z",
         "costDate": "2025-04-01T03:16:00.448Z",
-        "evidenceOfPayment": ["invoice1.pdf", "bankStatement1.pdf"],
-        "completionDate": "2025-04-02T03:16:00.448Z",
-        "evidenceOfCompletion": "certificate001",
+        "evidenceOfPayment": ["bankStatement1.pdf"],
+        "completionDate": "2025-03-25T03:16:00.448Z",
+        "evidenceOfCompletion": "certificate001.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
