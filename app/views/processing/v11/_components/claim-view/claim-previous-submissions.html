@@ -116,7 +116,7 @@
                         </tr>
                     {% endif  %}
 
-                    {% if data.view == "100" or data.view == "60"  %}
+                    {% if data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true) %}
                         <tr class="govuk-table__row">
                             <td class="govuk-table__cell"><strong>Payment date</strong></td>
                             {% for submission in sortedSubmissions %}
@@ -133,7 +133,7 @@
                         </tr>
                     {% endif %}
 
-                    {% if data.view == "100" or data.view == "60"  %}
+                    {% if data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true) %}
                         <tr class="govuk-table__row">
                             <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
                             {% for submission in sortedSubmissions %}
