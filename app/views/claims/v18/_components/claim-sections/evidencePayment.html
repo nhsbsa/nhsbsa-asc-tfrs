@@ -1,10 +1,10 @@
 {% if (not submission.costDate and claim.claimType == "100") or (is40Part != true and claim.claimType == "60" and not submission.costDate) or (is40Part == true and pairClaim != null and not pairSubmission.costDate) %}
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =="missing" %}
-  <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
-    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
-      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a payment date</p>
+    <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
+      <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
+        <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a payment date</p>
+      </div>
     </div>
-  </div>
   {% endif %}
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='missing' %} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='missing' %} govuk-summary-key--error {% endif %}">
