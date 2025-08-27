@@ -186,16 +186,21 @@ function validateDate(day, month, year, type) {
         result.date = 'allMissing';
     } else if (result.day == 'missing' || result.month == 'missing' || result.year == 'missing') {
         result.date = 'partMissing';
-    } else if ((checkDate.getTime() < policyDate.getTime()) && (type=="start" || type=="payment")) {
-        result.date = 'invalidPolicy'
     } else if (isValidDate(day, month, year)) {
         result.date = 'valid';
     } else {
         result.date = 'invalid';
     }
 
+    // Validate policy 
+    if ((checkDate.getTime() < policyDate.getTime()) && (type=="start" || type=="payment")) {
+        result.policy = 'invalidPolicy'
+    } else {
+        result.policy = 'valid';
+    }
+
     // Determine overall validity
-    result.dateValid = result.date === 'valid' && result.day === 'valid' && result.month === 'valid' && result.year === 'valid';
+    result.dateValid = result.policy === 'valid' && result.date === 'valid' && result.day === 'valid' && result.month === 'valid' && result.year === 'valid';
 
     return result;
 }
