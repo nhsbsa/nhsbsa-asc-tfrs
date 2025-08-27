@@ -198,6 +198,9 @@ function validateDate(day, month, year, type) {
     } else {
         result.policy = 'valid';
     }
+    // add in other rules here 
+    
+
 
     // Determine overall validity
     result.dateValid = result.policy === 'valid' && result.date === 'valid' && result.day === 'valid' && result.month === 'valid' && result.year === 'valid';

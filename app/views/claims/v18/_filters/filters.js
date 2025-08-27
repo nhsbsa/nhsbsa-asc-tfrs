@@ -185,7 +185,7 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
         if (dateErrorObject.date === 'allMissing') {
             errorMessages.push('<li><a href="#input-error">Enter the ' + dateType.toLowerCase() + '</a></li>');
         }
-        if (dateErrorObject.date === 'invalidPolicy') {
+        if (dateErrorObject.policy === 'invalidPolicy') {
             errorMessages.push('<li><a href="#input-error">' + dateType + ' must fall within the eligible financial year for this course</a></li>');
         }
     } else if (errorSection == 'input') {
@@ -205,7 +205,7 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
         if (dateErrorObject.date === 'allMissing') {
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>Enter the ' + dateType.toLowerCase() + '<br>');
         }
-        if (dateErrorObject.date === 'invalidPolicy') {
+        if (dateErrorObject.policy === 'invalidPolicy') {
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must fall within the eligible financial year for this course<br>');
         }
         errorMessages.push('</p>')
