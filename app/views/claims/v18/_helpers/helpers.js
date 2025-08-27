@@ -27,7 +27,7 @@ function checkClaim(claim) {
         result.startDate = "valid"
     }
 
-    if (submission.costDate == null && ! claim.claimType != "40") {
+ if (submission.costDate == null && (claim.claimType == "100" || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
         result.paymentDate = "missing"
     }  else {
         result.paymentDate = "valid"
@@ -40,7 +40,7 @@ function checkClaim(claim) {
         }
     }
 
-    if (submission.evidenceOfPayment.length == 0 && claim.claimType != "40") {
+    if (submission.evidenceOfPayment.length == 0  && (claim.claimType == "100" || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
         result.evidenceOfPayment = "missing"
     } else {
         result.evidenceOfPayment = "valid"

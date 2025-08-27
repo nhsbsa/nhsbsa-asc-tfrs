@@ -569,29 +569,6 @@
         },
         "processedDate": "2024-06-26T17:19:54.377Z",
         "processedBy": "Flossie Gleason"
-      },
-      {
-        "submitter": "rachel.mcglee@evergreencare.com",
-        "submittedDate": "2024-04-10T09:19:41.012Z",
-        "trainingCode": "601/0129/5",
-        "learnerID": "LE 09 5F 94 M",
-        "startDate": "2024-07-31T23:55:47.273Z",
-        "costDate": "2024-07-31T23:55:44.062Z",
-        "evidenceOfPayment": ["invoice1.pdf", "receipt1.pdf"],
-        "completionDate": null,
-        "evidenceOfCompletion": null,
-        "evidenceOfPaymentReview": {
-          "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
-          "paymentPlan": null,
-          "costPerLearner": null
-        },
-        "evidenceOfCompletionReview": {
-          "outcome": "pass",
-          "note": null
-        },
-        "processedDate": "2024-05-05T17:19:54.377Z",
-        "processedBy": "Flossie Gleason"
       }
     ]
   },
@@ -611,8 +588,8 @@
         "trainingCode": "601/0129/5",
         "learnerID": "LE 09 5F 94 M",
         "startDate": "2024-07-31T23:55:47.273Z",
-        "costDate": "2024-08-02T23:55:44.062Z",
-        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf"],
+        "costDate": null,
+        "evidenceOfPayment": [],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
