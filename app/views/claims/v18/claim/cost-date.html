@@ -36,13 +36,23 @@
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
                         <h1 class="govuk-fieldset__heading">
-                            When did you pay for the course or qualification?
+                            {% if claim.claimType == "40" %}
+                                When did you make the 40% payment for this training?
+                            {% else %}
+                                When did you pay for the course or qualification?
+                            {% endif %}
                         </h1>
                     </legend>
                     <p class="govuk-body">You'll need to make sure the date you enter:</p>
                     <ul class="govuk-list govuk-list--bullet">
-                        <li>matches the date on the payment evidence</li>
-                        <li>falls within the eligible financial year for this course (you can check this in the list of <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/eligible-training-courses-and-qualifications">eligible training courses and qualifications</a>)</li>
+                        {% if claim.claimType == "40" %}
+                            <li>matches the evidence for the 40% payment</li>
+                            <li>is after the 60% payment date</li>
+                            <li>is after the training start date</li>
+                        {% else %}
+                            <li>matches the date on the payment evidence</li>
+                            <li>falls within the eligible financial year for this course (you can check this in the list of <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/eligible-training-courses-and-qualifications">eligible training courses and qualifications</a>)</li>
+                        {% endif %}
                     </ul>
                     <div id="start-date-issued-hint" class="govuk-hint">
                         For example, 12 5 2024
