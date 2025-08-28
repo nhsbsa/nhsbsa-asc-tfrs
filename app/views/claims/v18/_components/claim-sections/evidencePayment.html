@@ -28,7 +28,7 @@
       {% if claim.claimType == "100" or is40Part != true%}
         {% if claim.isPaymentPlan == true %}60% p{% else %}P{% endif %}ayment date {% if ( claim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
       {% else %}
-        Payment date {% if ( pairClaim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+        {% if claim.isPaymentPlan == true %}40% p{% else %}P{% endif%}ayment date {% if ( pairClaim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
       {% endif %}
     </dt>
     
