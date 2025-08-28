@@ -147,7 +147,7 @@ function isValidDate(day, month, year) {
     );
 }
 
-function validateDate(day, month, year, type) {
+function validateDate(day, month, year, type, claim, pairClaim) {
     const result = {};
     const policyDate = new Date("2024-04-01");
     const date = year + "-" + month + "-" + day;
@@ -193,13 +193,13 @@ function validateDate(day, month, year, type) {
     }
 
     // Validate policy 
-    if ((checkDate.getTime() < policyDate.getTime()) && (type=="start" || type=="payment")) {
+    if ((checkDate.getTime() < policyDate.getTime()) && (type=="start" || (type=="payment" && pairClaim == null))) {
         result.policy = 'invalidPolicy'
     } else {
         result.policy = 'valid';
     }
     // add in other rules here 
-    
+    // 
 
 
     // Determine overall validity

@@ -296,10 +296,28 @@ router.post('/completion-date', function (req, res) {
   if (claimID[claimID.length - 1] === 'B') {
     claimID =  claimID.slice(0, -1) + 'C';
   }
+  // claim will always be 100 or 40
 
+  const { claims, org } = req.session.data
+  const workplaceID = org.workplaceID
+  let claim = null
+  let sixtyClaim = null
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+    if (claimID == c.claimID && isSameWorkplace) {
+      claim = c
+    }
+    if (claimID[claimID.length - 1] === 'C') {
+      let sixtyId = claimID.slice(0, -1) + 'B'
+      if (sixtyId == c.claimID && isSameWorkplace) {
+        sixtyClaim = c
+      }
+    }
+  }
   delete req.session.data.submitError
 
-  const error = validateDate(day, month, year, "completion");
+  const error = validateDate(day, month, year, "completion", claim, pairClaim);
 
   if (error.dateValid == true) {
     for (const c of req.session.data.claims) {
