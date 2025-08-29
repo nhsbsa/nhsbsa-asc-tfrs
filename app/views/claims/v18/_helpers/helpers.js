@@ -200,8 +200,7 @@ function validateDate(day, month, year, type, claim, sixtyClaim) {
     } else {
         result.policy = 'valid';
     }
-
-    // add in other rules here 
+    // Validate completion date is after start date on 40 
     if (sixtyClaim != null) {
         let submission = getMostRelevantSubmission(sixtyClaim)
         if (checkDate.getTime() < new Date(submission.startDate).getTime()) {

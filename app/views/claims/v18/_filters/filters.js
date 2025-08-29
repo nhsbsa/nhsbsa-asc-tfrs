@@ -211,6 +211,9 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
         if (dateErrorObject.policy === 'invalidPolicy') {
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must fall within the eligible financial year for this course<br>');
         }
+        if (dateErrorObject.policy === 'invalidAfterStart') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be after the start date<br>');
+        }
         errorMessages.push('</p>')
     }
 
@@ -221,15 +224,15 @@ addFilter('dateErrorFormat', function (dateErrorObject, type) {
     let state = false
     if (dateErrorObject) {
         if (type == "day") {
-            if (dateErrorObject.day == 'missing' || (dateErrorObject.day == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.date == 'invalidPolicy') {
+            if (dateErrorObject.day == 'missing' || (dateErrorObject.day == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.policy == 'invalidPolicy' || dateErrorObject.policy == 'invalidAfterStart') {
                 state = true
             }
         } else if (type == "month") {
-            if (dateErrorObject.month == 'missing' || (dateErrorObject.month == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.date == 'invalidPolicy') {
+            if (dateErrorObject.month == 'missing' || (dateErrorObject.month == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.policy == 'invalidPolicy' || dateErrorObject.policy == 'invalidAfterStart') {
                 state = true
             }
         } else if (type == "year") {
-            if (dateErrorObject.year == 'missing' || (dateErrorObject.year == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.date == 'invalidPolicy') {
+            if (dateErrorObject.year == 'missing' || (dateErrorObject.year == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.policy == 'invalidPolicy' || dateErrorObject.policy == 'invalidAfterStart') {
                 state = true
             }
         }
