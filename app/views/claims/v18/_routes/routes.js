@@ -317,7 +317,7 @@ router.post('/completion-date', function (req, res) {
   }
   delete req.session.data.submitError
 
-  const error = validateDate(day, month, year, "completion", claim, pairClaim);
+  const error = validateDate(day, month, year, "completion", claim, sixtyClaim);
 
   if (error.dateValid == true) {
     for (const c of req.session.data.claims) {
