@@ -149,7 +149,7 @@ function isValidDate(day, month, year) {
     );
 }
 
-function validateDate(day, month, year, type, claim, pairClaim) {
+function validateDate(day, month, year, type, claim, sixtyClaim) {
     const result = {};
     const policyDate = new Date("2024-04-01");
     const date = year + "-" + month + "-" + day;
@@ -195,13 +195,21 @@ function validateDate(day, month, year, type, claim, pairClaim) {
     }
 
     // Validate policy 
-    if ((checkDate.getTime() < policyDate.getTime()) && (type=="start" || (type=="payment" && pairClaim == null))) {
+    if ((checkDate.getTime() < policyDate.getTime()) && (type=="start" || (type=="payment" && sixtyClaim == null))) {
         result.policy = 'invalidPolicy'
     } else {
         result.policy = 'valid';
     }
+
     // add in other rules here 
-    // 
+    if (sixtyClaim != null) {
+        let submission = getMostRelevantSubmission(sixtyClaim)
+        if (checkDate.getTime() < new Date(submission.startDate).getTime()) {
+            result.policy = 'invalidAfterStart'
+        } else {
+            result.policy = 'valid';
+        }
+    }
 
 
     // Determine overall validity

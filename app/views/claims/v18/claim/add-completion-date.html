@@ -43,9 +43,10 @@
                     <p class="govuk-body">This is the date that the learner completed this training.</p>
                     <div id="start-date-issued-hint" class="govuk-hint">
                         For example, 12 5 2024
+                    </br>claim:{{claim.claimType}}, pair: {{pairClaim.claimType}}
                     </div>
                     {% if data.submitError.dateValid != null and not data.submitError.dateValid %}
-                    {{data.submitError | dateErrorMessage("Completion date", "input") }}
+                        {{data.submitError | dateErrorMessage("Completion date", "input") }}
                     {% endif %}
                     <div class="govuk-date-input" id="completion-date-started">
                         <div class="govuk-date-input__item">

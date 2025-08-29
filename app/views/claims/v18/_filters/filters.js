@@ -188,6 +188,9 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
         if (dateErrorObject.policy === 'invalidPolicy') {
             errorMessages.push('<li><a href="#input-error">' + dateType + ' must fall within the eligible financial year for this course</a></li>');
         }
+        if (dateErrorObject.policy === 'invalidAfterStart') {
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be after start date</a></li>');
+        }
     } else if (errorSection == 'input') {
         errorMessages.push('<p id="input-error" class="govuk-error-message">')
         if (dateErrorObject.day === 'missing' && dateErrorObject.date !== 'allMissing') {
