@@ -189,7 +189,7 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
             errorMessages.push('<li><a href="#input-error">' + dateType + ' must fall within the eligible financial year for this course</a></li>');
         }
         if (dateErrorObject.policy === 'invalidAfterStart') {
-            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be after start date</a></li>');
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be on or after the training start date</a></li>');
         }
     } else if (errorSection == 'input') {
         errorMessages.push('<p id="input-error" class="govuk-error-message">')
@@ -212,7 +212,7 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must fall within the eligible financial year for this course<br>');
         }
         if (dateErrorObject.policy === 'invalidAfterStart') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be after the start date<br>');
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be on or after the training start date<br>');
         }
         errorMessages.push('</p>')
     }
