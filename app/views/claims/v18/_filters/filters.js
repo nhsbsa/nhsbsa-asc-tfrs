@@ -191,6 +191,9 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
         if (dateErrorObject.policy === 'invalidAfterStart') {
             errorMessages.push('<li><a href="#input-error">' + dateType + ' must be on or after the training start date</a></li>');
         }
+        if (dateErrorObject.policy === 'invalidAfterPayment') {
+            errorMessages.push('<li><a href="#input-error">40% ' + dateType.toLowerCase() + ' must be after the 60% payment date</a></li>');
+        }
     } else if (errorSection == 'input') {
         errorMessages.push('<p id="input-error" class="govuk-error-message">')
         if (dateErrorObject.day === 'missing' && dateErrorObject.date !== 'allMissing') {
@@ -211,9 +214,13 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
         if (dateErrorObject.policy === 'invalidPolicy') {
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must fall within the eligible financial year for this course<br>');
         }
-        if (dateErrorObject.policy === 'invalidAfterStart') {
+        if (dateErrorObject. policy === 'invalidAfterStart') {
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be on or after the training start date<br>');
         }
+        if (dateErrorObject.policy === 'invalidAfterPayment') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>40% ' + dateType.toLowerCase() + ' must be after the 60% payment date<br>');
+        }
+        
         errorMessages.push('</p>')
     }
 
@@ -224,15 +231,15 @@ addFilter('dateErrorFormat', function (dateErrorObject, type) {
     let state = false
     if (dateErrorObject) {
         if (type == "day") {
-            if (dateErrorObject.day == 'missing' || (dateErrorObject.day == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.policy == 'invalidPolicy' || dateErrorObject.policy == 'invalidAfterStart') {
+            if (dateErrorObject.day == 'missing' || (dateErrorObject.day == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.policy == 'invalidPolicy' || dateErrorObject.policy == 'invalidAfterStart' || dateErrorObject.policy == 'invalidAfterPayment') {
                 state = true
             }
         } else if (type == "month") {
-            if (dateErrorObject.month == 'missing' || (dateErrorObject.month == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.policy == 'invalidPolicy' || dateErrorObject.policy == 'invalidAfterStart') {
+            if (dateErrorObject.month == 'missing' || (dateErrorObject.month == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.policy == 'invalidPolicy' || dateErrorObject.policy == 'invalidAfterStart' || dateErrorObject.policy == 'invalidAfterPayment') {
                 state = true
             }
         } else if (type == "year") {
-            if (dateErrorObject.year == 'missing' || (dateErrorObject.year == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.policy == 'invalidPolicy' || dateErrorObject.policy == 'invalidAfterStart') {
+            if (dateErrorObject.year == 'missing' || (dateErrorObject.year == 'invalid' && dateErrorObject.date != 'partMissing') || dateErrorObject.date == 'invalid' || dateErrorObject.policy == 'invalidPolicy' || dateErrorObject.policy == 'invalidAfterStart' || dateErrorObject.policy == 'invalidAfterPayment') {
                 state = true
             }
         }

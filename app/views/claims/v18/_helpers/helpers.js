@@ -194,23 +194,42 @@ function validateDate(day, month, year, type, claim, sixtyClaim) {
         result.date = 'invalid';
     }
 
-    // Validate policy 
-    if ((checkDate.getTime() < policyDate.getTime()) && (type=="start" || (type=="payment" && sixtyClaim == null))) {
-        result.policy = 'invalidPolicy'
-    } else {
-        result.policy = 'valid';
-    }
-    // Validate completion date is after start date on 40 
-    if (sixtyClaim != null) {
+    result.policy = "valid"
+    // Validate 40 completion date is after start date on 60
+    if (sixtyClaim != null && type == "completion") {
         let submission = getMostRelevantSubmission(sixtyClaim)
         if (checkDate.getTime() < new Date(submission.startDate).getTime()) {
             result.policy = 'invalidAfterStart'
-        } else {
-            result.policy = 'valid';
         }
     }
 
+    // Validate financial year policy for 100 and 60 
+    if ((type=="start" || (type=="payment" && sixtyClaim == null))) {
+        if ((checkDate.getTime() < policyDate.getTime()) ) {
+            result.policy = 'invalidPolicy'
+        }
+    }
 
+    // Validate 40 payment
+    if (sixtyClaim != null && type == "payment") {
+        let submission = getMostRelevantSubmission(sixtyClaim)
+
+        let startDate = new Date(submission.startDate);
+        let costDate = new Date(submission.costDate);
+        let laterDate = null
+        let errorWord = null
+        if (costDate > startDate) {
+            laterDate = costDate
+            errorWord = "Payment"
+        } else {
+            laterDate = startDate
+            errorWord = "Start"
+        }
+
+        if (checkDate.getTime() < laterDate.getTime()) {
+            result.policy = 'invalidAfter' + errorWord
+        }
+    }
     // Determine overall validity
     result.dateValid = result.policy === 'valid' && result.date === 'valid' && result.day === 'valid' && result.month === 'valid' && result.year === 'valid';
 

@@ -260,9 +260,27 @@ router.post('/cost-date', function (req, res) {
   const claimID = req.session.data.id
   const costDate = new Date(year, month - 1, day)
 
+
+  const { claims, org } = req.session.data
+  const workplaceID = org.workplaceID
+  let claim = null
+  let sixtyClaim = null
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+    if (claimID == c.claimID && isSameWorkplace) {
+      claim = c
+    }
+    if (claimID[claimID.length - 1] === 'C') {
+      let sixtyId = claimID.slice(0, -1) + 'B'
+      if (sixtyId == c.claimID && isSameWorkplace) {
+        sixtyClaim = c
+      }
+    }
+  }
   delete req.session.data.submitError
 
-  const error = validateDate(day, month, year, "payment");
+  const error = validateDate(day, month, year, "payment", claim, sixtyClaim);
 
   if (error.dateValid == true) {
     for (const c of req.session.data.claims) {
