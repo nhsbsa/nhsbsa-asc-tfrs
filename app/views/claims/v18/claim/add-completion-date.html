@@ -1,6 +1,12 @@
 {% extends "../_layouts/claims-main.html" %}
 
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+{% if (claim.status == "approved") %}
+    {% set id = data.id | replaceSuffix %}
+    {% set claim = id | findClaim(data.claims, data.org.workplaceID) %}
+{% else %}
+    {% set id = data.id %}
+{% endif %}
 
 {% if (claim.status == "queried") %}
     {% set submission = claim | getDraftSubmission %}

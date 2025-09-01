@@ -1,6 +1,13 @@
 {% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 
+{% if (claim.status == "approved") %}
+    {% set id = data.id | replaceSuffix %}
+    {% set claim = id | findClaim(data.claims, data.org.workplaceID) %}
+{% else %}
+    {% set id = data.id %}
+{% endif %}
+
 {% if (claim.status == "queried") %}
     {% set submission = claim | getDraftSubmission %}
 {% else %}
@@ -30,7 +37,7 @@
             </div>
         </div>
         {% endif %}
-        <form action="../cost-date" method="post" class="form">
+        <form action="../cost-date?id={{id}}" method="post" class="form">
             <div class="govuk-form-group {% if data.submitError.dateValid != null and not data.submitError.dateValid %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
