@@ -15,16 +15,16 @@
     </dd>
   </div>
 {% else %}
-  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate == "inFuture" %}
-  <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
-    <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
-      <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Payment date must be in the past </p>
+  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate == "inFuture" and ((is40Part and pairClaim.claimType == "40") or (is40Part == false and pairClaim.claimType != "40")) %}
+    <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
+      <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
+        <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Payment date must be in the past</p>
+      </div>
     </div>
-  </div>
   {% endif %}
   <div class="govuk-summary-list__row {% if (is40Part != true and claim.claimType == "60" and (claim.status == "approved" or claim.status == "rejected" or claim.status == "submitted"))%}govuk-summary-list__row--no-actions{% endif %}
- {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-list-row--error {% endif %}">
-    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' %} govuk-summary-key--error {% endif %}">
+ {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' and ((is40Part and pairClaim.claimType == "40") or (is40Part == false and pairClaim.claimType != "40"))%} govuk-summary-list-row--error {% endif %}">
+    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' and ((is40Part and pairClaim.claimType == "40") or (is40Part == false and pairClaim.claimType != "40"))%} govuk-summary-key--error {% endif %}">
       {% if claim.claimType == "100" or is40Part != true%}
         {% if claim.isPaymentPlan == true %}60% p{% else %}P{% endif %}ayment date {% if ( claim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
       {% else %}
@@ -38,13 +38,13 @@
       {% else %}
         {{ pairSubmission.costDate | govukDate }}
       {% endif %}
+    </dd>
 
-    </dd>
     {% if ((is40Part != true and (claim.status == "queried" or claim.status == "not-yet-submitted")) or (is40Part == true and (pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted"))) %}
-    <dd class="govuk-summary-list__actions">
-      <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">
-          payment date</span></a>
-    </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">
+            payment date</span></a>
+      </dd>
     {% endif %}
   </div>
 {% endif %}
