@@ -45,7 +45,7 @@
                         For example, 12 5 2024
                     </div>
                     {% if data.submitError.dateValid != null and not data.submitError.dateValid %}
-                    {{data.submitError | dateErrorMessage("Completion date", "input") }}
+                        {{data.submitError | dateErrorMessage("Completion date", "input") }}
                     {% endif %}
                     <div class="govuk-date-input" id="completion-date-started">
                         <div class="govuk-date-input__item">

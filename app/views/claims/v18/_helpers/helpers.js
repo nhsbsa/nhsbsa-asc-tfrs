@@ -15,13 +15,13 @@ function checkClaim(claim) {
         submission = getMostRelevantSubmission(claim)
     }
     
-    if (submission.learnerID == null) {
+    if (claim.claimType != "40" && submission.learnerID == null) {
         result.learner = "missing"
     } else {
         result.learner = "valid"
     }
 
-    if (submission.startDate == null) {
+    if (claim.claimType != "40" && submission.startDate == null) {
         result.startDate = "missing"
     } else {
         result.startDate = "valid"
@@ -58,18 +58,20 @@ function checkClaim(claim) {
         result.completionDate = "valid"
     }
 
-    if (result.completionDate == "valid" && result.startDate == "valid") {
-        const startDate = new Date(submission.startDate)
-        const completionDate = new Date(submission.completionDate)
+    const startDate = new Date(submission.startDate)
+    const completionDate = new Date(submission.completionDate)
+    if ((result.completionDate == "valid" && submission.learnerID) && result.startDate == "valid") {
         if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
             result.startDate = "invalid"
             result.completionDate = "invalid"
         } else if ((currentDate.getTime() < completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
             result.completionDate = "inFuture"
-        } else if ((currentDate.getTime() < startDate.getTime()) && (claim.claimType == "60")) {
-            result.startDate = "inFuture"
-        }
+        } 
     }
+    if (result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "60") && (currentDate.getTime() < startDate.getTime())) {
+        result.startDate = "inFuture"
+    }
+    
 
     if (claim.status == "queried") {
         result.change = checkChange(claim)
@@ -147,7 +149,7 @@ function isValidDate(day, month, year) {
     );
 }
 
-function validateDate(day, month, year, type) {
+function validateDate(day, month, year, type, claim, sixtyClaim) {
     const result = {};
     const policyDate = new Date("2024-04-01");
     const date = year + "-" + month + "-" + day;
@@ -186,16 +188,50 @@ function validateDate(day, month, year, type) {
         result.date = 'allMissing';
     } else if (result.day == 'missing' || result.month == 'missing' || result.year == 'missing') {
         result.date = 'partMissing';
-    } else if ((checkDate.getTime() < policyDate.getTime()) && (type=="start" || type=="payment")) {
-        result.date = 'invalidPolicy'
     } else if (isValidDate(day, month, year)) {
         result.date = 'valid';
     } else {
         result.date = 'invalid';
     }
 
+    result.policy = "valid"
+    // Validate 40 completion date is after start date on 60
+    if (sixtyClaim != null && type == "completion") {
+        let submission = getMostRelevantSubmission(sixtyClaim)
+        if (checkDate.getTime() < new Date(submission.startDate).getTime()) {
+            result.policy = 'invalidAfterStart'
+        }
+    }
+
+    // Validate financial year policy for 100 and 60 
+    if ((type=="start" || (type=="payment" && sixtyClaim == null))) {
+        if ((checkDate.getTime() < policyDate.getTime()) ) {
+            result.policy = 'invalidPolicy'
+        }
+    }
+
+    // Validate 40 payment
+    if (sixtyClaim != null && type == "payment") {
+        let submission = getMostRelevantSubmission(sixtyClaim)
+
+        let startDate = new Date(submission.startDate);
+        let costDate = new Date(submission.costDate);
+        let laterDate = null
+        let errorWord = null
+        if (costDate > startDate) {
+            laterDate = costDate
+            errorWord = "Payment"
+        } else {
+            laterDate = startDate
+            errorWord = "Start"
+        }
+
+        if (checkDate.getTime() < laterDate.getTime()) {
+            result.policy = 'invalidAfter' + errorWord
+        }
+    }
     // Determine overall validity
-    result.dateValid = result.date === 'valid' && result.day === 'valid' && result.month === 'valid' && result.year === 'valid';
+    result.dateValid = result.policy === 'valid' && result.date === 'valid' && result.day === 'valid' && result.month === 'valid' && result.year === 'valid';
 
     return result;
 }
