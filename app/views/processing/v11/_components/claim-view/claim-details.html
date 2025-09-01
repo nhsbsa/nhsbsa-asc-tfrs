@@ -106,7 +106,7 @@
     </div>
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Max re-imbursement amount
+            Max reimbursement amount
         </dt>
         <dd class="govuk-summary-list__value">
             £{{training.reimbursementAmount}}
@@ -128,6 +128,7 @@
         <dd class="govuk-summary-list__value">
             {{ submission.startDate | govukDate }}
         </dd>
+    </div>
     {% endif %}
     {% if claim.claimType != "60" %}
     <div class="govuk-summary-list__row">
