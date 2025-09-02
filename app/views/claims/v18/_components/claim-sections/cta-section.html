@@ -28,7 +28,7 @@
     </a>
 
     <a class="govuk-button govuk-button--secondary" href="../save-claim">
-        {% if (claim.status == "queried") %}
+        {% if (claim.status == "queried") or (pairClaim and pairClaim.status == "queried") %}
             Save edits and finish later
         {% else %}
             Save and finish later
