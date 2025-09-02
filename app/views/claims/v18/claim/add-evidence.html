@@ -1,5 +1,12 @@
 {% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+{% if (claim.status == "approved") %}
+    {% set id = data.id | replaceSuffix %}
+    {% set claim = id | findClaim(data.claims, data.org.workplaceID) %}
+{% else %}
+    {% set id = data.id %}
+{% endif %}
+
 {% set submission = claim | getMostRelevantSubmission%}
 {% set evidenceCount = submission.evidenceOfPayment | getCount %}
 
@@ -84,7 +91,7 @@
         update file upload progress</a>
       </p>
     {% if data.type == "payment"%}
-    <form action="../add-evidence?type=payment" method="post" novalidate>
+    <form action="../add-evidence?type=payment&id={{id}}" method="post" novalidate>
       <div class="govuk-button-group">
         <button type="submit" class="govuk-button" data-module="govuk-button">
           Continue
@@ -93,7 +100,7 @@
       </div>
     </form>
     {% else %}
-    <form action="../add-evidence?type=completion" method="post" novalidate>
+    <form action="../add-evidence?type=completion&id={{id}}" method="post" novalidate>
       <div class="govuk-button-group">
         <button type="submit" class="govuk-button" data-module="govuk-button">
           Add to claim

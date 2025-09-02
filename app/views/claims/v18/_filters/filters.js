@@ -135,6 +135,10 @@ addFilter('trunctateString', function (string) {
     return string.slice(0, 30);
 })
 
+addFilter ('replaceSuffix', function (claimID) {
+    return claimID.slice(0, -1) + 'C';
+})
+
 addFilter('formatText', function (submission) {
     let text = ""
     if (submission.evidenceOfPaymentReview.note) {
