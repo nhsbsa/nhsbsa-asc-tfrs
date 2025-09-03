@@ -33,7 +33,6 @@ router.post('/add-training', function (req, res) {
   if (req.session.data.id) {
     claim = req.session.data.claims.find(c => c.claimID.replace(/[-\s]+/g, '') == req.session.data.id.replace(/[-\s]+/g, '')  && (c.workplaceID == req.session.data.org.workplaceID) && (c.status == "queried" || c.status == "not-yet-submitted"));
   }
-  console.log(claim)
 
   if (claim) {
     let submission = null
@@ -42,11 +41,18 @@ router.post('/add-training', function (req, res) {
     } else {
       submission = getMostRelevantSubmission(claim)
     }
-    
-    submission.trainingCode = trainingChoice.code
-    delete req.session.data['training-input'];
-    delete req.session.data['trainingSelection'];
-    res.redirect('claim/claim-details' + '?id=' + claim.claimID)
+
+    // add duplicate check here
+    var learner = findLearnerById(submission.learnerID,req.session.data.learners)
+    let duplicateCheck = checkDuplicateClaim(learner.id, trainingCode, req.session.data.claims);
+    if (duplicateCheck.check) {
+        res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
+    } else {
+      submission.trainingCode = trainingChoice.code
+      delete req.session.data['training-input'];
+      delete req.session.data['trainingSelection'];
+      res.redirect('claim/claim-details' + '?id=' + claim.claimID)
+    }
   } else {
 
     if (trainingChoice.fundingModel == "full") {
