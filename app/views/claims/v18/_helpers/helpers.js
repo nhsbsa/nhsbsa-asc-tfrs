@@ -241,7 +241,14 @@ function checkDuplicateClaim(learnerID, trainingID, claimList) {
     result.check = false
     result.id = ''
         for (const c of claimList) {
-            let submission = getMostRelevantSubmission(c)
+            let submission = null
+            if(c.status =="queried") {
+                submission = getDraftSubmission(c)
+            } else if (c.status =="not-yet-submitted") {
+                submission = getNotYetSubmittedSubmission(c)
+            } else {
+                submission = getMostRelevantSubmission(c)
+            }
             if (submission.learnerID != null) {
                 if (submission.trainingCode == trainingID && submission.learnerID == learnerID && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
                     result.matchType = c.claimType
@@ -252,9 +259,7 @@ function checkDuplicateClaim(learnerID, trainingID, claimList) {
             }
         }
 
-
     return result
-
 }
 
 function isNIFormat(input) {
@@ -417,6 +422,10 @@ function getDraftSubmission(claim) {
     if (claim.status == "queried") {
         return claim.submissions.find(s => s.submittedDate == null);
     }
+}
+
+function getNotYetSubmittedSubmission(claim) {
+    return claim.submissions.find(s => s.submittedDate == null);
 }
 
 function getMostRelevantSubmission(claim) {
