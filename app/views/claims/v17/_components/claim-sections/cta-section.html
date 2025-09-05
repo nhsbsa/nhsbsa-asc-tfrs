@@ -35,7 +35,7 @@
         {% endif  %}
     </a>
     
-    {% if (claim.claimType == "100" and claim.status == "not-yet-submitted") %}
+    {% if ((claim.claimType == "100" or claim.claimType == "60") and claim.status == "not-yet-submitted")%}
         <a class="govuk-link govuk-link--no-visited-state" href="delete-claim-confirmation">Delete claim</a>
     {% endif %}
 </div>
