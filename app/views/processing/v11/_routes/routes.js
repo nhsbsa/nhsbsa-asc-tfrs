@@ -208,6 +208,8 @@ router.post('/claim-process-handler', function (req, res) {
   delete req.session.data.completionRejectNoteIncomplete
   delete req.session.data.paymentQueriedNoteIncomplete
   delete req.session.data.completionQueriedNoteIncomplete
+  delete req.session.data.paidInFullResponseIncomplete
+
 
   claimID = req.session.data.id
   const paymentResponse = req.session.data.payment
