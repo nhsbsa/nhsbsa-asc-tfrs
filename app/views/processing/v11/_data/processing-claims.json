@@ -178,6 +178,29 @@
         },
         "processedDate": "2025-02-03T06:15:38.665Z",
         "processedBy": "Allan Connelly"
+      },
+      {
+        "submitter": "lena.caldwell@evergreencare.com",
+        "submittedDate": "2025-01-03T07:53:32.066Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "NX 76 8F 30 D",
+        "startDate": "2025-02-24T09:54:13.322Z",
+        "costDate": "2024-10-16T14:35:08.968Z",
+        "evidenceOfPayment": ["october-statement"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The cost date doesn't match the payment evidence",
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": "2025-02-02T06:15:38.665Z",
+        "processedBy": "Allan Connelly"
       }
     ]
   },
