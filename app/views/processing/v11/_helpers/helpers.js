@@ -278,15 +278,16 @@ function checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, p
           } else if (paymentResponse == "approve" && (!validAmount)) {
             errorParamaters += "&paymentReimbursementAmountInvalid=true";
           }
-          if (paidInFullResponse == null) {
-            errorParamaters += "&paidInFullResponseIncomplete=true";
-          }
         } else if (paymentResponse == "reject" && (paymentRejectNote == null || paymentRejectNote == "")) {
         errorParamaters += "&paymentRejectNoteIncomplete=true";
         } else if (paymentResponse == "queried" && (paymentQueriedNote == null || paymentQueriedNote == "")) {
         errorParamaters += "&paymentQueriedNoteIncomplete=true";
         }
     }
+    if (claim.claimType == "60" && paymentResponse == "approve" && paidInFullResponse == null) {
+      errorParamaters += "&paidInFullResponseIncomplete=true";
+    }
+
 
     if (claim.claimType == "40" && claim.isPaymentPlan) {
         if (paymentResponse == null) {
