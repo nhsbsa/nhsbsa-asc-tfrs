@@ -34,7 +34,7 @@
     {% if not (submission.trainingCode | isInternalOMMT) %}
     <p class="govuk-body">This is a 100 claim. It covers both evidence of payment and evidence of training completion.</p>
     {% else %}
-    <p class="govuk-body">This is a 100 claim for internally delivered Oliver McGowan Mandatory Training. Only evidence of training completion is provided.</p>
+    <p class="govuk-body">This is a 100 claim for internally delivered Oliver McGowan Mandatory Training. Only evidence of training completion needs to be provided.</p>
     {% endif %}
 
     {% if claim.submissions | length <= 1 %}
