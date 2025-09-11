@@ -38,6 +38,11 @@
                         </li>
                         {% endif %}
 
+                             {% if data.paidInFullResponseIncomplete %}
+                                <li>
+                                    <a href="#payment-plan-error"> Select an option for payment in full</a>
+                                </li>
+                            {% endif %}
                             {% if data.paymentReimbursementAmountIncomplete %}
                                 <li>
                                     <a href="#cost-per-learner-error">Enter cost per learner</a>
@@ -77,12 +82,6 @@
                         {% if data.completionQueriedNoteIncomplete %}
                             <li>
                                 <a href="#completion-queried-note-error">Enter action required for evidence of completion</a>
-                            </li>
-                        {% endif %}
-
-                        {% if data.paidInFullResponseIncomplete %}
-                            <li>
-                                <a href="#payment-plan-error"> Select an option for payment in full</a>
                             </li>
                         {% endif %}
                     </ul>
