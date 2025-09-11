@@ -49,10 +49,15 @@ function updateClaim(claim, paymentResponse, paymentReimbursementAmount, payment
         } else if (paymentResponse == "queried") {
             submission.evidenceOfPaymentReview.outcome = "queried"
             submission.evidenceOfPaymentReview.note = paymentQueryNote
-        }
+    }
 
         if (completionResponse == "approve") {
             submission.evidenceOfCompletionReview.outcome = "pass"
+            if (isInternalOMMT(submission.trainingCode)){
+              submission.evidenceOfPaymentReview.outcome = "pass"
+              const training = findCourseByCode(submission.trainingCode)
+              submission.evidenceOfPaymentReview.costPerLearner = training.reimbursementAmount
+            }
         } else if (completionResponse == "reject") {
             submission.evidenceOfCompletionReview.outcome = "fail"
             submission.evidenceOfCompletionReview.note = completionRejectNote
@@ -261,10 +266,10 @@ function sortSubmissionsForTable(submissions) {
 function checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paidInFullResponse) {
 
     let errorParamaters = ""
-
+    const submission = getMostRelevantSubmission(claim)
     const validAmount = validNumberCheck(paymentReimbursementAmount)
 
-    if (claim.claimType == "60" || claim.claimType == "100") {
+    if ((claim.claimType == "60" || claim.claimType == "100") && !(isInternalOMMT(submission.trainingCode))) {
         if (paymentResponse == null) {
         errorParamaters += "&paymentResponseIncomplete=true";
         } else if (paymentResponse == "approve") {
@@ -308,8 +313,9 @@ function checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, p
 
 function determineOutcome(claim, paymentResponse, completionResponse) {
     let result = null
-
-    if (claim.claimType == "100") {
+    let submission = getMostRelevantSubmission(claim)  
+    
+    if (claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) {
       if (paymentResponse == "reject" || completionResponse == "reject") {
         result = "reject";
       } else if (paymentResponse == "queried" || completionResponse == "queried") {
@@ -325,7 +331,7 @@ function determineOutcome(claim, paymentResponse, completionResponse) {
       } else if (paymentResponse == "approve") {
         result = "approve";
       }
-    } else if (claim.claimType == "40") {
+    } else if (claim.claimType == "40" || (claim.claimType == "100" && (isInternalOMMT(submission.trainingCode)))) {
       if (completionResponse == "reject") {
         result = "reject";
       } else if (completionResponse == "queried") {
@@ -337,5 +343,14 @@ function determineOutcome(claim, paymentResponse, completionResponse) {
     return result
 }
 
+function isInternalOMMT(courseCode) {
+  const validValues = [
+    "OMMT/T1/INT",
+    "OMMT/T2/INT"
+  ];
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome }
+  return validValues.includes(courseCode);
+}
+
+
+module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT }
