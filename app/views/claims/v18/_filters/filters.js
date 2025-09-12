@@ -867,3 +867,13 @@ addFilter('formatCountToText', function (count) {
 addFilter('isInternalOMMT', function (courseCode) {
     return isInternalOMMT(courseCode)
 })
+
+addFilter('isAllInternalOMMT', function (submissions) {
+    let check = true
+    for (const submission of submissions) {
+        if (!isInternalOMMT(submission.trainingCode)) {
+            check = false
+        }
+    }
+    return check
+})
