@@ -582,15 +582,22 @@ function sortSubmissionsByDate(submissions, dateType) {
 
 function sortSubmissionsForTable(submissions) {
     return submissions.sort((a, b) => {
+        // 1. If `a` has no submittedDate but `b` does, `a` comes first
         if (!a.submittedDate && b.submittedDate) return -1;
+
+        // 2. If `a` has a submittedDate but `b` doesn’t, `b` comes first
         if (a.submittedDate && !b.submittedDate) return 1;
-      
-        const dateA = new Date(a.processedDate || 0);
-        const dateB = new Date(b.processedDate || 0);
-      
+
+        // 3. Now both are in the same "submittedDate" group, handle processedDate
+        if (!a.processedDate && b.processedDate) return -1; // `a` missing processedDate goes first
+        if (a.processedDate && !b.processedDate) return 1;  // `b` missing processedDate goes first
+
+        // 4. If both have processedDate, sort descending (newest first)
+        const dateA = new Date(a.processedDate);
+        const dateB = new Date(b.processedDate);
+
         return dateB - dateA;
-      });
-      
+    });
 }
 
 function findPair(claimID, claims){

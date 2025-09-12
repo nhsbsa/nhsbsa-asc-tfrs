@@ -1,4 +1,5 @@
 {% set sortedSubmissions = claim.submissions | sortSubmissionsForTable %}
+{% set internalOMMTCheck = sortedSubmissions | isAllInternalOMMT %}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
@@ -116,7 +117,7 @@
                         </tr>
                     {% endif  %}
 
-                    {% if (data.view == "100" and not (submission.trainingCode | isInternalOMMT)) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true) %}
+                    {% if (data.view == "100" and not internalOMMTCheck) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true) %}
                         <tr class="govuk-table__row">
                             <td class="govuk-table__cell"><strong>Payment date</strong></td>
                             {% for submission in sortedSubmissions %}
@@ -133,7 +134,7 @@
                         </tr>
                     {% endif %}
 
-                    {% if (data.view == "100" and not (submission.trainingCode | isInternalOMMT)) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true) %}
+                    {% if (data.view == "100" and not internalOMMTCheck) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true) %}
                         <tr class="govuk-table__row">
                             <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
                             {% for submission in sortedSubmissions %}

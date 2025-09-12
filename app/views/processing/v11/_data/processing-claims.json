@@ -1382,5 +1382,62 @@
         "processedBy": null
       }
     ]
+  },
+  {
+    "claimID": "FOM-MT12-JSK4-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "submitted",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-06T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "HB 78 2F 15 O",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-14T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-03-07T11:52:30.850Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/EXT",
+        "learnerID": "HB 78 2F 15 O",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-09-23T12:05:18.831Z",
+        "evidenceOfPayment": ["rbc-sept-bankstatement.png", "training-invoice1.pdf"],
+        "completionDate": "2025-02-01T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
   }
 ]
