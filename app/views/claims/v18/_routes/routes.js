@@ -26,14 +26,13 @@ router.post('/verify-details-handler', function (req, res) {
 });
 
 router.post('/add-training', function (req, res) {
-  const trainingCode = req.session.data.trainingSelection
-  const trainingChoice = findCourseByCode(trainingCode)
+  const newTrainingCode = req.session.data.trainingSelection
+  const newTrainingChoice = findCourseByCode(newTrainingCode)
 
   var claim = null
   if (req.session.data.id) {
     claim = req.session.data.claims.find(c => c.claimID.replace(/[-\s]+/g, '') == req.session.data.id.replace(/[-\s]+/g, '')  && (c.workplaceID == req.session.data.org.workplaceID) && (c.status == "queried" || c.status == "not-yet-submitted"));
   }
-  console.log(claim)
 
   if (claim) {
     let submission = null
@@ -42,17 +41,28 @@ router.post('/add-training', function (req, res) {
     } else {
       submission = getMostRelevantSubmission(claim)
     }
-    
-    submission.trainingCode = trainingChoice.code
-    delete req.session.data['training-input'];
-    delete req.session.data['trainingSelection'];
-    res.redirect('claim/claim-details' + '?id=' + claim.claimID)
-  } else {
 
-    if (trainingChoice.fundingModel == "full") {
+    // add duplicate check here
+    var currentLearner = findLearnerById(submission.learnerID,req.session.data.learners)
+    let duplicateCheck = null
+    if (submission.learnerID != null) {
+      duplicateCheck = checkDuplicateTraining(currentLearner.id, newTrainingCode, req.session.data.claims);
+    }
+    
+    if (duplicateCheck && duplicateCheck.check) {
+        res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
+    } else {
+      submission.trainingCode = newTrainingChoice.code
       delete req.session.data['training-input'];
       delete req.session.data['trainingSelection'];
-      const claimID = newClaim(req, trainingChoice, "100")
+      res.redirect('claim/claim-details' + '?id=' + claim.claimID)
+    }
+  } else {
+
+    if (newTrainingChoice.fundingModel == "full") {
+      delete req.session.data['training-input'];
+      delete req.session.data['trainingSelection'];
+      const claimID = newClaim(req, newTrainingChoice, "100")
       res.redirect('claim/claim-details' + '?id=' + claimID)
     } else {
       res.redirect('claim/split-decision')
@@ -361,7 +371,7 @@ router.post('/completion-date', function (req, res) {
 
 router.post('/add-learner', function (req, res) {
   var claimID = req.session.data.id
-  var learner = findLearnerById(req.session.data.learnerSelection,req.session.data.learners)
+  var newLearner = findLearnerById(req.session.data.learnerSelection,req.session.data.learners)
 
   delete req.session.data.existingLearner
   delete req.session.data.learnerInput;
@@ -375,20 +385,20 @@ router.post('/add-learner', function (req, res) {
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
-      let submission = null
+      let currentSubmission = null
 
       if (c.status == "queried") {
-        submission = getDraftSubmission(c)
+        currentSubmission = getDraftSubmission(c)
       } else {
-        submission = getMostRelevantSubmission(c)
+        currentSubmission = getMostRelevantSubmission(c)
       }
 
-      duplicateCheck = checkDuplicateClaim(learner.id, submission.trainingCode, req.session.data.claims);
+      duplicateCheck = checkDuplicateLearner(newLearner.id, currentSubmission.trainingCode, req.session.data.claims);
 
       if (duplicateCheck.check) {
         res.redirect('claim/duplication?dupeID=' + duplicateCheck.id + '&matchType=' + duplicateCheck.matchType)
       } else {
-        submission.learnerID = learner.id
+        currentSubmission.learnerID = newLearner.id
         res.redirect('claim/claim-details?id=' + claimID + '#learner')
       }
 
