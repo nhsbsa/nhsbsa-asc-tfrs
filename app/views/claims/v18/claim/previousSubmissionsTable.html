@@ -130,7 +130,7 @@
                 </tr>
                 {% endif  %}
 
-                {% if data.view == "100" or data.view == "60" or not (submission.trainingCode | isInternalOMMT)  %}
+                {% if (data.view == "100" and not (submission.trainingCode | isInternalOMMT)) or data.view == "60" or not (submission.trainingCode | isInternalOMMT)  %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Payment date</strong></td>
                     {% for submission in sortedSubmissions %}
@@ -151,7 +151,7 @@
                 </tr>
                 {% endif %}
 
-                {% if data.view == "100" or data.view == "60" %}
+                {% if (data.view == "100" and not (submission.trainingCode | isInternalOMMT)) or data.view == "60" %}
                   <tr class="govuk-table__row">
                       <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
                       {% for submission in sortedSubmissions %}
