@@ -27,7 +27,7 @@ function checkClaim(claim) {
         result.startDate = "valid"
     }
 
- if (submission.costDate == null && (claim.claimType == "100" || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
+ if (submission.costDate == null && ((claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
         result.paymentDate = "missing"
     }  else {
         result.paymentDate = "valid"
@@ -40,7 +40,7 @@ function checkClaim(claim) {
         }
     }
 
-    if (submission.evidenceOfPayment.length == 0  && (claim.claimType == "100" || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
+    if (submission.evidenceOfPayment.length == 0  && ((claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
         result.evidenceOfPayment = "missing"
     } else {
         result.evidenceOfPayment = "valid"
@@ -236,19 +236,14 @@ function validateDate(day, month, year, type, claim, sixtyClaim) {
     return result;
 }
 
-function checkDuplicateLearner(newLearnerID, currentTrainingID, claimList) {
+function checkDuplicateClaim(learnerID, trainingID, claimList) {
     let result = {}
     result.check = false
     result.id = ''
         for (const c of claimList) {
-            let submission = null
-            if(c.status =="queried") {
-                submission = getDraftSubmission(c)
-            } else {
-                submission = getMostRelevantSubmission(c)
-            }
+            let submission = getMostRelevantSubmission(c)
             if (submission.learnerID != null) {
-                if (submission.trainingCode == currentTrainingID && submission.learnerID == newLearnerID && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
+                if (submission.trainingCode == trainingID && submission.learnerID == learnerID && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
                     result.matchType = c.claimType
                     result.check = true;
                     result.id = c.claimID
@@ -257,28 +252,9 @@ function checkDuplicateLearner(newLearnerID, currentTrainingID, claimList) {
             }
         }
 
-    return result
-}
 
-function checkDuplicateTraining(currentLearnerID, newTrainingID, claimList) {
-    let result = {}
-    result.check = false
-    result.id = ''
-        for (const c of claimList) {
-            let submission = null
-            if(c.status =="queried") {
-                submission = getDraftSubmission(c)
-            } else {
-                submission = getMostRelevantSubmission(c)
-            }
-            if (submission.trainingCode == newTrainingID && submission.learnerID == currentLearnerID && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
-                result.matchType = c.claimType
-                result.check = true;
-                result.id = c.claimID
-                break;
-            }
-        }
     return result
+
 }
 
 function isNIFormat(input) {
@@ -441,10 +417,6 @@ function getDraftSubmission(claim) {
     if (claim.status == "queried") {
         return claim.submissions.find(s => s.submittedDate == null);
     }
-}
-
-function getNotYetSubmittedSubmission(claim) {
-    return claim.submissions.find(s => s.submittedDate == null);
 }
 
 function getMostRelevantSubmission(claim) {
@@ -610,15 +582,22 @@ function sortSubmissionsByDate(submissions, dateType) {
 
 function sortSubmissionsForTable(submissions) {
     return submissions.sort((a, b) => {
+        // 1. If `a` has no submittedDate but `b` does, `a` comes first
         if (!a.submittedDate && b.submittedDate) return -1;
+
+        // 2. If `a` has a submittedDate but `b` doesn’t, `b` comes first
         if (a.submittedDate && !b.submittedDate) return 1;
-      
-        const dateA = new Date(a.processedDate || 0);
-        const dateB = new Date(b.processedDate || 0);
-      
+
+        // 3. Now both are in the same "submittedDate" group, handle processedDate
+        if (!a.processedDate && b.processedDate) return -1; // `a` missing processedDate goes first
+        if (a.processedDate && !b.processedDate) return 1;  // `b` missing processedDate goes first
+
+        // 4. If both have processedDate, sort descending (newest first)
+        const dateA = new Date(a.processedDate);
+        const dateB = new Date(b.processedDate);
+
         return dateB - dateA;
-      });
-      
+    });
 }
 
 function findPair(claimID, claims){
@@ -822,5 +801,14 @@ function generatecreatedByList(organisation) {
 
 }
 
+function isInternalOMMT(courseCode) {
+  const validValues = [
+    "OMMT/T1/INT",
+    "OMMT/T2/INT"
+  ];
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateLearner, checkDuplicateTraining, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining}
+  return validValues.includes(courseCode);
+}
+
+
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT}

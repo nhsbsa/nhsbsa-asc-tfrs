@@ -178,6 +178,29 @@
         },
         "processedDate": "2025-02-03T06:15:38.665Z",
         "processedBy": "Allan Connelly"
+      },
+      {
+        "submitter": "lena.caldwell@evergreencare.com",
+        "submittedDate": "2025-01-03T07:53:32.066Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "NX 76 8F 30 D",
+        "startDate": "2025-02-24T09:54:13.322Z",
+        "costDate": "2024-10-16T14:35:08.968Z",
+        "evidenceOfPayment": ["october-statement"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The cost date doesn't match the payment evidence",
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": "2025-02-02T06:15:38.665Z",
+        "processedBy": "Allan Connelly"
       }
     ]
   },
@@ -1288,6 +1311,120 @@
         "evidenceOfPayment": ["rbc-sept-bankstatement.png", "training-invoice1.pdf"],
         "completionDate": "2024-10-22T11:52:30.850Z",
         "evidenceOfCompletion": "certificate-BS.png",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
+  },
+  {
+    "claimID": "SOM-MT33-JSK4-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "submitted",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-06T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-14T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-03-07T11:52:30.850Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-01T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
+  },
+  {
+    "claimID": "FOM-MT12-JSK4-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "submitted",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-06T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "HB 78 2F 15 O",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-14T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-03-07T11:52:30.850Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/EXT",
+        "learnerID": "HB 78 2F 15 O",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-09-23T12:05:18.831Z",
+        "evidenceOfPayment": ["rbc-sept-bankstatement.png", "training-invoice1.pdf"],
+        "completionDate": "2025-02-01T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,

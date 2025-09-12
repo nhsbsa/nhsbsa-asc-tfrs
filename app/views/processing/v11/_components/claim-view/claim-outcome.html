@@ -1,6 +1,6 @@
 <h3 class="govuk-heading-m">Completed review of evidence</h3>
 
-{% if claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)%}
+{% if (claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT) %}
         <h4 class="govuk-heading-s">Does the evidence of payment meet the required criteria?</h4>
 
         {% if submission.evidenceOfPaymentReview.outcome == "pass" %}
@@ -14,9 +14,11 @@
         {% if claim.claimType != "60" %}
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
         {% endif %}
-        {% endif %}
+{% endif %}
 
-        {% if claim.claimType != "60" %}
+
+
+{% if claim.claimType != "60" %}
         <h4 class="govuk-heading-s">Does the evidence of completion meet the required criteria?</h4>
 
         {% if submission.evidenceOfCompletionReview.outcome == "pass" %}
@@ -27,7 +29,7 @@
             <p class="govuk-body">No – action required</br>{{submission.evidenceOfCompletionReview.note}}</p>
         {% endif %}
 
-        {% endif %}
+{% endif %}
 
 
         {% if (claim.status == "approved") %}
@@ -36,12 +38,14 @@
 
         {% if (claim.claimType == "100") %}
 
-        <p class="govuk-body">The amount to be reimbursed for this 100 claim is <strong>£{{ claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner) }}</strong>.</p>
-        <p class="govuk-body">This is whichever is the lower of the:</p>
-        <ul class="govuk-list govuk-list--bullet">
-            <li>maximum reimbursement amount for training paid for {% if (claim.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %} (£{{training.reimbursementAmount}})</li>
-            <li>cost per learner (what the organisation actually paid) (£{{submission.evidenceOfPaymentReview.costPerLearner}})</li>
-        </ul>
+        <p class="govuk-body">The amount to be reimbursed for this 100 claim is <strong>{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner)) | currency(trailingZeros=false) }}</strong>.</p>
+        {% if not (submission.trainingCode | isInternalOMMT) %}
+            <p class="govuk-body">This is whichever is the lower of the:</p>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>maximum reimbursement amount for training paid for {% if (claim.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %} (£{{training.reimbursementAmount}})</li>
+                <li>cost per learner (what the organisation actually paid) (£{{submission.evidenceOfPaymentReview.costPerLearner}})</li>
+            </ul>
+        {% endif %}
 
     {% elif (claim.claimType == "60") %}
         

@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining} = require('../_helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT} = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -862,4 +862,18 @@ addFilter('formatCountToText', function (count) {
     if (count == 2) { return "Second"} 
     if (count == 3) { return "Third"} 
     if (count == 4) { return "Fourth"} 
+})
+
+addFilter('isInternalOMMT', function (courseCode) {
+    return isInternalOMMT(courseCode)
+})
+
+addFilter('isAllInternalOMMT', function (submissions) {
+    let check = true
+    for (const submission of submissions) {
+        if (!isInternalOMMT(submission.trainingCode)) {
+            check = false
+        }
+    }
+    return check
 })

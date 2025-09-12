@@ -417,6 +417,58 @@
         "description": null,
         "awardingOrganisation": null,
         "link": "http://pbsacademy.org.uk/wp-content/uploads/2016/11/Positive-Behavioural-Support-Competence-Framework-May-2015.pdf"
+      },
+      {
+        "code": "OMMT/T1/INT",
+        "reimbursementAmount": 12.5,
+        "groupCategory": "The Oliver McGowan Mandatory Training",
+        "title": "Tier 1 (internally delivered training) - The Oliver McGowan Mandatory Training on Learning Disability and Autism",
+        "totalLearningTime": "1 hour",
+        "fundingModel": "full",
+        "type": "OMMT",
+        "category": "The Oliver McGowan Mandatory Training",
+        "description": null,
+        "awardingOrganisation": null,
+        "link": "https://www.hee.nhs.uk/our-work/learning-disability/current-projects/oliver-mcgowan-mandatory-training-learning-disability-autism/about-training"
+      },
+      {
+        "code": "OMMT/T1/EXT",
+        "reimbursementAmount": 25,
+        "groupCategory": "The Oliver McGowan Mandatory Training",
+        "title": "Tier 1 (externally procured training) - The Oliver McGowan Mandatory Training on Learning Disability and Autism",
+        "totalLearningTime": "1 hour",
+        "fundingModel": "full",
+        "type": "OMMT",
+        "category": "The Oliver McGowan Mandatory Training",
+        "description": null,
+        "awardingOrganisation": null,
+        "link": "https://www.hee.nhs.uk/our-work/learning-disability/current-projects/oliver-mcgowan-mandatory-training-learning-disability-autism/about-training"
+      },
+      {
+        "code": "OMMT/T2/INT",
+        "reimbursementAmount": 50,
+        "groupCategory": "The Oliver McGowan Mandatory Training",
+        "title": "Tier 2 (internally delivered training) - The Oliver McGowan Mandatory Training on Learning Disability and Autism",
+        "totalLearningTime": "1 day",
+        "fundingModel": "full",
+        "type": "OMMT",
+        "category": "The Oliver McGowan Mandatory Training",
+        "description": null,
+        "awardingOrganisation": null,
+        "link": "https://www.hee.nhs.uk/our-work/learning-disability/current-projects/oliver-mcgowan-mandatory-training-learning-disability-autism/about-training"
+      },
+      {
+        "code": "OMMT/T2/EXT",
+        "reimbursementAmount": 90,
+        "groupCategory": "The Oliver McGowan Mandatory Training",
+        "title": "Tier 2 (externally procured training) - The Oliver McGowan Mandatory Training on Learning Disability and Autism",
+        "totalLearningTime": "1 day",
+        "fundingModel": "full",
+        "type": "OMMT",
+        "category": "The Oliver McGowan Mandatory Training",
+        "description": null,
+        "awardingOrganisation": null,
+        "link": "https://www.hee.nhs.uk/our-work/learning-disability/current-projects/oliver-mcgowan-mandatory-training-learning-disability-autism/about-training"
       }
     ]
   },

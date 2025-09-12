@@ -1,5 +1,151 @@
 [
   {
+    "claimID": "SK2-A6SN-ESJ4-A",
+    "workplaceID": "C63281491",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "queried",
+    "createdDate": "2024-12-01T06:25:50.869Z",
+    "createdBy": "ivy.montgomery@anikacare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": null,
+        "submittedDate": null,
+        "trainingCode": "PBSFL",
+        "learnerID": "UG 66 2F 97 F",
+        "startDate": "2025-02-08T09:52:47.903Z",
+        "costDate": "2024-08-12T10:04:31.042Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "completionDate": "2025-03-12T13:26:50.648Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      },
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2025-04-01T06:25:50.869Z",
+        "trainingCode": "PBSFL",
+        "learnerID": "UG 66 2F 97 F",
+        "startDate": "2025-02-08T09:52:47.903Z",
+        "costDate": "2024-08-12T10:04:31.042Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "completionDate": "2025-03-12T13:26:50.648Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The evidence of payment doesn't match the payment date entered",
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2025-04-01T06:25:50.869Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2025-03-01T06:25:50.869Z",
+        "trainingCode": "PBSFL",
+        "learnerID": "UG 66 2F 97 F",
+        "startDate": "2025-02-08T09:52:47.903Z",
+        "costDate": "2024-11-08T10:04:31.042Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "completionDate": "2025-03-12T13:26:50.648Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The evidence of payment doesn't match the payment date entered",
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate":  "2025-03-12T06:25:50.869Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2025-02-01T06:25:50.869Z",
+        "trainingCode": "PBSFL",
+        "learnerID": "UG 66 2F 97 F",
+        "startDate": "2025-02-08T09:52:47.903Z",
+        "costDate": "2024-08-11T10:04:31.042Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "completionDate": "2025-03-12T13:26:50.648Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The evidence of payment doesn't match the payment date entered",
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2025-02-08T06:25:50.869Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2025-01-01T06:25:50.869Z",
+        "trainingCode": "PBSFL",
+        "learnerID": "UG 66 2F 97 F",
+        "startDate": "2025-02-08T09:52:47.903Z",
+        "costDate": "2024-08-11T10:04:31.042Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "receipt1.pdf"
+        ],
+        "completionDate": "2025-03-12T13:26:50.648Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The evidence of payment doesn't match the payment date entered and the evidence of payment isn't sufficient to prove you paid for the training, please add a invoice.",
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2025-01-01T06:25:50.869Z",
+        "processedBy": "Flossie Gleason"
+      }
+    ]
+  },
+  {
     "claimID": "PFH-2PI7-FZFK-B",
     "workplaceID": "A02944934",
     "claimType": "60",
