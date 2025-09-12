@@ -31,7 +31,11 @@
 
 {% elif claim.claimType == "100" %}
     <h3 class="govuk-heading-s">100 claim</h3>
+    {% if not (submission.trainingCode | isInternalOMMT) %}
     <p class="govuk-body">This is a 100 claim. It covers both evidence of payment and evidence of training completion.</p>
+    {% else %}
+    <p class="govuk-body">This is a 100 claim for internally delivered Oliver McGowan Mandatory Training. Only evidence of training completion needs to be provided.</p>
+    {% endif %}
 
     {% if claim.submissions | length <= 1 %}
         <p class="govuk-body govuk-!-margin-top-8">This is the <strong>first</strong> time this has been submitted.</p>
@@ -93,7 +97,7 @@
             Level and type
         </dt>
         <dd class="govuk-summary-list__value">
-            {{ training.type }}
+            {{ training.code | qualificationCheck(training.type) }}
         </dd>
     </div>
     <div class="govuk-summary-list__row">
@@ -101,7 +105,7 @@
             Awarding organisation
         </dt>
         <dd class="govuk-summary-list__value">
-            {{ training.awardingOrganisation }}
+            {{ claim | qualificationCheck(training.awardingOrganisation) }}
         </dd>
     </div>
     <div class="govuk-summary-list__row">
@@ -109,18 +113,20 @@
             Max reimbursement amount
         </dt>
         <dd class="govuk-summary-list__value">
-            £{{training.reimbursementAmount}}
+            {{training.reimbursementAmount | currency(trailingZeros=false)}}
         </dd>
     </div>
     {% if claim.claimType != "40" or claim.isPaymentPlan == true %}
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Payment date
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {{ submission.costDate | govukDate }}
-        </dd>
-    </div>
+    {% if not (submission.trainingCode | isInternalOMMT) %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Payment date
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ submission.costDate | govukDate }}
+            </dd>
+        </div>
+    {% endif %}
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
             Start date
@@ -161,7 +167,7 @@
     </div>
 </dl>
 <div style="padding-top: 10px;">
-    {% if (claim.claimType != "40") or (claim.claimType == "40" and claim.isPaymentPlan) %}
+    {% if ((claim.claimType != "40") or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT) %}
         <h3 class="govuk-heading-m">
             Evidence of payment
         </h3>

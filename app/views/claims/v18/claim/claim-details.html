@@ -146,7 +146,9 @@
       {% include "../_components/claim-sections/training.html" %}
 
       {% set is40Part = false %}
-      {% include "../_components/claim-sections/evidencePayment.html" %}
+      {% if not (submission.trainingCode | isInternalOMMT) %}
+        {% include "../_components/claim-sections/evidencePayment.html" %}
+      {% endif %}
 
       {% include "../_components/claim-sections/learner.html" %}
     

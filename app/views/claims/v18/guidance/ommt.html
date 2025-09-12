@@ -1,0 +1,67 @@
+{% if data.tabLocation == "claims" %}
+    {% extends "../_layouts/claims-main.html" %}
+{% else %}
+    {% extends "../_layouts/main.html" %}
+{% endif %}
+
+{% block pageTitle %}
+Help with starting a new claim — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l">Claim for Oliver McGowan Mandatory Training (OMMT) - draft</h1>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <p class="govuk-body">Adult social care organisations can now claim reimbursement for Oliver McGowan Mandatory Training on Learning Disability and Autism (OMMT) from the Learning and Development Support Scheme (LDSS).</p>
+        <p class="govuk-body">Your organisation must be registered with the Care Quality Commission (CQC) to be eligible.</p>
+        <p class="govuk-body">Funding for OMMT is ring-fenced and is in addition to the LDSS funding available for other courses and qualifications. There is also a separate funding cap per organisation for OMMT - you’ll find details in the LDSS <a href="">guide for employers</a>.</p>
+        
+        <p class="govuk-body">OMMT is delivered in 2 tiers: tier 1 and tier 2. While part 1 of each tier is free, there is a cost for part 2. Funding is available for part 2 courses through the LDSS.</p>
+        
+        <p class="govuk-body">
+            Reimbursement amounts differ according to how the training is delivered. Funding is available for:
+        <ul class="govuk-list govuk-list--bullet">
+            <li>OMMT courses delivered internally by a member of your organisation’s staff</li>
+            <li>courses procured externally from an approved OMMT training provider  </li>
+        </ul>
+        </p>
+
+        <p class="govuk-body">
+            In both cases you'll need to provide evidence of payment and evidence of completion. Evidence of payment for internally delivered training could include:
+        <ul class="govuk-list govuk-list--bullet">
+            <li>proof of payment to an awarding organisation for learner registration and certification fees</li>
+            <li>proof of payment to a third-party training subsidiary</li>
+        </ul>
+        </p>
+
+        <p class="govuk-body">All OMMT courses must be delivered by an approved OMMT training provider in order to be eligible for LDSS funding - see a <a href="">list of approved trainers</a>.</p>
+        <p class="govuk-body">
+            If one learner completes several courses you will need to submit a separate claim for each course. Similarly, if several learners complete the same course, you will need to claim separately for each learner.        </p>
+
+        <h1 class="govuk-heading-s">Providing evidence of completion</h1>
+        <p class="govuk-body">As with other courses reimbursed through LDSS, you'll need to provide a certificate of completion for each learner in order to receive reimbursement.</p>
+        <p class="govuk-body">OMMT training providers do not automatically issue certificates of completion so you may need to request them.</p>
+
+        <p class="govuk-body">
+            You’ll need to check that the certificates show:
+            <ul class="govuk-list govuk-list--bullet">
+                <li>a completion date that is within the agreed claims window - you’ll find this in the <a href="">guide for employers</a>.</li>
+                <li>which tier of training has been completed</li>
+                <li>the trainer’s name and registration number</li>
+            </ul>
+        </p>
+
+    </div>
+</div>
+</div>
+
+{% endblock %}

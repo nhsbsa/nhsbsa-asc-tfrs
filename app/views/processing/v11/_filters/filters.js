@@ -6,8 +6,9 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile } = require('../_helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT } = require('../_helpers/helpers.js');
 const fs = require('fs');
+const dataPath = 'app/views/processing/v11/_data/'
 
 addFilter('processorstatusTag', function (statusID) {
     if (statusID == 'submitted') {
@@ -313,4 +314,26 @@ addFilter('returntrainingType', function (code) {
         }
     }
     return null
+})
+
+addFilter('isInternalOMMT', function (courseCode) {
+    return isInternalOMMT(courseCode)
+})
+
+addFilter('qualificationCheck', function(trainingCode, value) {
+    const training = loadJSONFromFile('training.json', dataPath)
+
+    const qualificationsObject = training.find(obj => obj.groupTitle == "Qualifications");
+    let isQualification = false;
+
+    for (let course of qualificationsObject.courses) {
+        if (course.code == trainingCode) {
+            isQualification = true
+        }
+    }
+    if (isQualification) {
+        return value
+    } else {
+        return "Not applicable"
+    }
 })
