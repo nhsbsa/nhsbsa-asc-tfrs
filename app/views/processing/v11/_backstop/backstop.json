@@ -116,6 +116,11 @@
             "delay": 500
         },
         {
+            "label": "processor-claim-not-yet-processed-40-payment-plan",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=40&paymentPlan=true",
+            "delay": 500
+        },
+        {
             "label": "ccs-claim-not-yet-processed-100",
             "url": "http://localhost:3000/processing/v11/backstop/claim?userType=ccsAgent&status=submitted&type=100",
             "delay": 500
@@ -146,6 +151,11 @@
             "delay": 500
         },
         {
+            "label": "claim-needs-action-40-payment-plan",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=queried&type=40&paymentPlan=true",
+            "delay": 500
+        },
+        {
             "label": "claim-approved-100",
             "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=approved&type=100",
             "delay": 500
@@ -158,6 +168,11 @@
         {
             "label": "claim-approved-40",
             "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=approved&type=40",
+            "delay": 500
+        },
+        {
+            "label": "claim-approved-40-payment-plan",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=approved&type=40&paymentPlan=true",
             "delay": 500
         },
         {
@@ -176,6 +191,11 @@
             "delay": 500
         },
         {
+            "label": "claim-rejected-40-payment-plan",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=rejected&type=40&paymentPlan=true",
+            "delay": 500
+        },
+        {
             "label": "processor-claim-not-yet-processed-100-radio-missing-error",
             "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=100&error=radioMissing",
             "delay": 500
@@ -191,6 +211,11 @@
             "delay": 500
         },
         {
+            "label": "processor-claim-not-yet-processed-40-radio-missing-error-payment-plan",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=40&error=radioMissing&paymentPlan=true",
+            "delay": 500
+        },
+        {
             "label": "processor-claim-not-yet-processed-100-radio-yes",
             "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=100&radio=yes",
             "delay": 500
@@ -203,6 +228,11 @@
         {
             "label": "processor-claim-not-yet-processed-40-radio-yes",
             "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=40&radio=yes",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-not-yet-processed-40-radio-yes-payment-plan",
+            "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=submitted&type=40&radio=yes&paymentPlan=true",
             "delay": 500
         },
         {
@@ -386,8 +416,18 @@
             "delay": 500
         },
         {
+            "label": "submissions-60-payment-plan",
+            "url": "http://localhost:3000/processing/v11/backstop/submissions?type=60&paymentPlan=true",
+            "delay": 500
+        },
+        {
             "label": "submissions-40",
             "url": "http://localhost:3000/processing/v11/backstop/submissions?type=40",
+            "delay": 500
+        },
+        {
+            "label": "submissions-40-payment-plan",
+            "url": "http://localhost:3000/processing/v11/backstop/submissions?type=40&paymentPlan=true",
             "delay": 500
         },
         {
