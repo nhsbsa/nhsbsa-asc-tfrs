@@ -208,7 +208,7 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            if (paymentPlan == true) {
+            if (paymentPlan == "true") {
                 id = "3SH-I94K-JSND-C";
             } else {
                 id = "9JH-I94K-TPRB-C";
@@ -228,7 +228,7 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            if (paymentPlan == true) {
+            if (paymentPlan == "true") {
                 id = "47D-748D-JSND-C";
             } else {
                 id = "SRX-A33U-BMUG-C";
@@ -248,7 +248,7 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            if (paymentPlan == true) {
+            if (paymentPlan == "true") {
                 id = "3FD-JH62-JKMD-C";
             } else {
                 id = "SND-EPRS-N3MZ-C";
@@ -268,7 +268,7 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            if (paymentPlan == true) {
+            if (paymentPlan == "true") {
                 id = "D6F-K8DF-S82H-C";
             } else {
                 id = "A8T-TAGD-ETJE-C";
@@ -307,7 +307,7 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            if (paymentPlan == true) {
+            if (paymentPlan == "true") {
                 req.session.data.paymentResponseIncomplete = "true"
             }
             req.session.data.completionResponseIncomplete = "true"
@@ -443,6 +443,7 @@ router.get('/outcome', function (req, res) {
 router.get('/submissions', function (req, res) {
     const type = req.session.data.type
     const note = req.session.data.note
+    const paymentPlan = req.session.data.paymentPlan
 
   delete req.session.data
     req.session.data = {
@@ -462,12 +463,20 @@ router.get('/submissions', function (req, res) {
         break;
 
         case "60":
-        req.session.data.id = "1SC-WE58-MT7W-B";
+        if (paymentPlan == "true") {
+            req.session.data.id = "3SH-I94K-JSND-B";
+        } else {
+            req.session.data.id = "1SC-WE58-MT7W-B";
+        }
         req.session.data.view = "60"
         break;
 
         case "40":
-        req.session.data.id = "9JH-I94K-TPRB-C";
+        if (paymentPlan == "true") {
+            req.session.data.id = "7MD-KS92-FB93-C";
+        } else {
+            req.session.data.id = "JSK-SJD5-SK3D-C";
+        }
         req.session.data.view = "40"
         break;
     }

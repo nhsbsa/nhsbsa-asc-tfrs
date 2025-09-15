@@ -416,8 +416,18 @@
             "delay": 500
         },
         {
+            "label": "submissions-60-payment-plan",
+            "url": "http://localhost:3000/processing/v11/backstop/submissions?type=60&paymentPlan=true",
+            "delay": 500
+        },
+        {
             "label": "submissions-40",
             "url": "http://localhost:3000/processing/v11/backstop/submissions?type=40",
+            "delay": 500
+        },
+        {
+            "label": "submissions-40-payment-plan",
+            "url": "http://localhost:3000/processing/v11/backstop/submissions?type=40&paymentPlan=true",
             "delay": 500
         },
         {
