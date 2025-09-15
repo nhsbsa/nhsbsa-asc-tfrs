@@ -151,7 +151,7 @@
             "delay": 500
         },
         {
-            "label": "claim-needs-action-100",
+            "label": "claim-needs-action-100-ommt",
             "url": "http://localhost:3000/processing/v11/backstop/claim?userType=processor&status=queried&type=100&ommt=true",
             "delay": 500
         },

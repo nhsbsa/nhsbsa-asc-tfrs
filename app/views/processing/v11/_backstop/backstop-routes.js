@@ -201,7 +201,7 @@ router.get('/claim', function (req, res) {
         case "submitted":
         switch (type) {
             case "100":
-            if (ommt = "true") {
+            if (ommt == "true") {
                 id = "SOM-MT33-JSK4-A";
             } else {
                 id = "HMJ-74V3-T8V5-A";
@@ -226,7 +226,7 @@ router.get('/claim', function (req, res) {
         case "queried":
         switch (type) {
             case "100":
-            if (ommt = "true") {
+            if (ommt == "true") {
                 id = "LOM-MT32-JDNH-A";
             } else {
                 id = "CWH-E4C7-FBXJ-A";
@@ -250,7 +250,7 @@ router.get('/claim', function (req, res) {
         case "approved":
         switch (type) {
             case "100":
-            if (ommt = "true") {
+            if (ommt == "true") {
                 id = "DOM-MT33-JD23-A";
             } else {
                 id = "CKX-ZZSG-BDCB-A";
@@ -274,7 +274,7 @@ router.get('/claim', function (req, res) {
         case "rejected":
         switch (type) {
             case "100":
-            if (ommt = "true") {
+            if (ommt == "true") {
                 id = "POM-MT32-HDJS-A";
             } else {
                 id = "ML8-K712-2N27-A";
@@ -483,9 +483,9 @@ router.get('/submissions', function (req, res) {
 
     switch (type) {
         case "100":
-        if (ommt = "1") {
+        if (ommt == "1") {
             req.session.data.id = "SOM-MT33-JSK4-A";
-        } else if ( ommt = "2") {
+        } else if ( ommt == "2") {
             req.session.data.id = "FOM-MT12-JSK4-A";
         } else {
             req.session.data.id = "HMJ-74V3-T8V5-A";
