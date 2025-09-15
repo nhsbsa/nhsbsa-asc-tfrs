@@ -183,6 +183,7 @@ router.get('/claim', function (req, res) {
     const userType = req.session.data.userType
     const radio = req.session.data.radio
     const confirmation = req.session.data.confirmation
+    const paymentPlan = req.session.data.paymentPlan
 
   delete req.session.data
     req.session.data = {
@@ -207,7 +208,11 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "9JH-I94K-TPRB-C";
+            if (paymentPlan == true) {
+                id = "3SH-I94K-JSND-C";
+            } else {
+                id = "9JH-I94K-TPRB-C";
+            }
             break;
         }
         break;
@@ -223,7 +228,11 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "SRX-A33U-BMUG-C";
+            if (paymentPlan == true) {
+                id = "47D-748D-JSND-C";
+            } else {
+                id = "SRX-A33U-BMUG-C";
+            }
             break;
         }
         break;
@@ -239,7 +248,11 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "SND-EPRS-N3MZ-C";
+            if (paymentPlan == true) {
+                id = "3FD-JH62-JKMD-C";
+            } else {
+                id = "SND-EPRS-N3MZ-C";
+            }
             break;
         }
         break;
@@ -255,7 +268,11 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "A8T-TAGD-ETJE-C";
+            if (paymentPlan == true) {
+                id = "D6F-K8DF-S82H-C";
+            } else {
+                id = "A8T-TAGD-ETJE-C";
+            }
             break;
         }
         break;
@@ -290,11 +307,15 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
+            if (paymentPlan == true) {
+                req.session.data.paymentResponseIncomplete = "true"
+            }
             req.session.data.completionResponseIncomplete = "true"
             break;
         }
     } else if ( error == "costMissing") {
         req.session.data.paymentReimbursementAmountIncomplete = "true"
+        req.session.data.paidInFullResponseIncomplete = "true"
     }  else if ( error == "costInvalid") {
         req.session.data.paymentReimbursementAmount = "abc"
         req.session.data.paymentReimbursementAmountInvalid = "true"
