@@ -236,14 +236,19 @@ function validateDate(day, month, year, type, claim, sixtyClaim) {
     return result;
 }
 
-function checkDuplicateClaim(learnerID, trainingID, claimList) {
+function checkDuplicateClaim(learnerIDToCheck, trainingIDToCheck, claimList) {
     let result = {}
     result.check = false
     result.id = ''
         for (const c of claimList) {
-            let submission = getMostRelevantSubmission(c)
+            let submission = null
+            if(c.status =="queried") {
+                submission = getDraftSubmission(c)
+            } else {
+                submission = getMostRelevantSubmission(c)
+            }
             if (submission.learnerID != null) {
-                if (submission.trainingCode == trainingID && submission.learnerID == learnerID && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
+                if (submission.trainingCode == trainingIDToCheck && submission.learnerID == learnerIDToCheck && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
                     result.matchType = c.claimType
                     result.check = true;
                     result.id = c.claimID
@@ -252,9 +257,29 @@ function checkDuplicateClaim(learnerID, trainingID, claimList) {
             }
         }
 
+    return result
+}
+
+function checkDuplicateClaimSubmission(learnerIDToCheck, trainingIDToCheck, currentClaimID, claimList) {
+    let result = {}
+    result.check = false
+    result.id = ''
+        for (const c of claimList) {
+            let submission = null
+            if(c.status =="queried") {
+                submission = getDraftSubmission(c)
+            } else {
+                submission = getMostRelevantSubmission(c)
+            }
+            if (currentClaimID != c.claimID && submission.trainingCode == trainingIDToCheck && submission.learnerID == learnerIDToCheck && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
+                result.matchType = c.claimType
+                result.check = true;
+                result.id = c.claimID
+                break;
+            }
+        }
 
     return result
-
 }
 
 function isNIFormat(input) {
@@ -811,4 +836,4 @@ function isInternalOMMT(courseCode) {
 }
 
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT}
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT}
