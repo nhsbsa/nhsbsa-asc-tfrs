@@ -951,6 +951,7 @@ router.get('/claim', function (req, res) {
     const status = req.session.data.status
     const type = req.session.data.type
     const error = req.session.data.error
+    const ommt = req.session.data.ommt
 
   delete req.session.data
     req.session.data = {
@@ -1044,7 +1045,12 @@ router.get('/claim', function (req, res) {
         case "new":
         switch (type) {
             case "100":
-            id = "ABC-UA5D-43BD-A";
+            if (ommt == "true") {
+                id = "E3N-OMMT-GH27-A";
+            } else {
+                id = "ABC-UA5D-43BD-A";
+            }
+            
             break;
 
             case "60":
@@ -1702,6 +1708,26 @@ router.get('/missing-GDL', function (req, res) {
     res.redirect('../claim/missing-gdl');
 });
 
+router.get('/help-ommt', function (req, res) {
+    const loggedIn = req.session.data.loggedIn
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Claims',
+        userType: 'signatory',
+        journey: 'signin',
+    };
+
+    if (loggedIn == "true") {
+        req.session.data.tabLocation = "claims"
+    }
+
+    loadData(req, "A02944934")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../guidance/ommt');
+});
+
 router.get('/missing-bank-details', function (req, res) {
     const userType = req.session.data.userType
 
@@ -1725,6 +1751,7 @@ router.get('/previous-submissions', function (req, res) {
     const type = req.session.data.type
     const status = req.session.data.status
     const showNote = req.session.data.showNote
+    const ommt  = req.session.data.ommt
 
   delete req.session.data
     req.session.data = {
@@ -1745,7 +1772,13 @@ router.get('/previous-submissions', function (req, res) {
         }
     } else if (status == "submitted") {
         if (type == "100") {
-            id = "HMJ-74V3-T8V5-A";
+            if (ommt == "1") {
+                id = "SOM-MT33-JSK4-A";
+            } else if (ommt == "2") {
+                id = "FOM-MT12-JSK4-A";
+            } else {
+                id = "HMJ-74V3-T8V5-A";
+            }
         } else if (type == "60") {
             id = "1SC-WE58-MT7W-B";
         } else if (type == "40") {
