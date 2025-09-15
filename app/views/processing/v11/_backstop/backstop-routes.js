@@ -184,6 +184,7 @@ router.get('/claim', function (req, res) {
     const radio = req.session.data.radio
     const confirmation = req.session.data.confirmation
     const paymentPlan = req.session.data.paymentPlan
+    const ommt = req.session.data.ommt
 
   delete req.session.data
     req.session.data = {
@@ -200,7 +201,12 @@ router.get('/claim', function (req, res) {
         case "submitted":
         switch (type) {
             case "100":
-            id = "HMJ-74V3-T8V5-A";
+            if (ommt == "true") {
+                id = "SOM-MT33-JSK4-A";
+            } else {
+                id = "HMJ-74V3-T8V5-A";
+            }
+            
             break;
 
             case "60":
@@ -220,7 +226,11 @@ router.get('/claim', function (req, res) {
         case "queried":
         switch (type) {
             case "100":
-            id = "CWH-E4C7-FBXJ-A";
+            if (ommt == "true") {
+                id = "LOM-MT32-JDNH-A";
+            } else {
+                id = "CWH-E4C7-FBXJ-A";
+            }
             break;
 
             case "60":
@@ -240,7 +250,11 @@ router.get('/claim', function (req, res) {
         case "approved":
         switch (type) {
             case "100":
-            id = "CKX-ZZSG-BDCB-A";
+            if (ommt == "true") {
+                id = "DOM-MT33-JD23-A";
+            } else {
+                id = "CKX-ZZSG-BDCB-A";
+            }
             break;
 
             case "60":
@@ -260,7 +274,11 @@ router.get('/claim', function (req, res) {
         case "rejected":
         switch (type) {
             case "100":
-            id = "ML8-K712-2N27-A";
+            if (ommt == "true") {
+                id = "POM-MT32-HDJS-A";
+            } else {
+                id = "ML8-K712-2N27-A";
+            }
             break;
 
             case "60":
@@ -363,6 +381,7 @@ router.get('/outcome', function (req, res) {
     let id = null
     const status = req.session.data.status
     const type = req.session.data.type
+    const ommt = req.session.data.ommt
 
   delete req.session.data
     req.session.data = {
@@ -377,7 +396,12 @@ router.get('/outcome', function (req, res) {
 
     switch (type) {
         case "100":
-        id = "HMJ-74V3-T8V5-A";
+        if (ommt == "true") {
+            id = "SOM-MT33-JSK4-A";
+        }else {
+            id = "HMJ-74V3-T8V5-A";
+        }
+        
         if ( status == "approve") {
             req.session.data.payment = "approve"
             req.session.data.completion = "approve"
@@ -444,6 +468,7 @@ router.get('/submissions', function (req, res) {
     const type = req.session.data.type
     const note = req.session.data.note
     const paymentPlan = req.session.data.paymentPlan
+    const ommt = req.session.data.ommt
 
   delete req.session.data
     req.session.data = {
@@ -458,7 +483,14 @@ router.get('/submissions', function (req, res) {
 
     switch (type) {
         case "100":
-        req.session.data.id = "HMJ-74V3-T8V5-A";
+        if (ommt == "1") {
+            req.session.data.id = "SOM-MT33-JSK4-A";
+        } else if ( ommt == "2") {
+            req.session.data.id = "FOM-MT12-JSK4-A";
+        } else {
+            req.session.data.id = "HMJ-74V3-T8V5-A";
+        }
+        
         req.session.data.view = "100"
         break;
 

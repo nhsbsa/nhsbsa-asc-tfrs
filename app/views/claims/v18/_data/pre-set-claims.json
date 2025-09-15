@@ -1155,6 +1155,41 @@
     ]
   },
   {
+    "claimID": "E3N-OMMT-GH27-A",
+    "workplaceID": "placeholder",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "not-yet-submitted",
+    "createdDate": "2024-06-16T23:01:41.732Z",
+    "createdBy": "placeholder",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": null,
+        "submittedDate": null,
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": null,
+        "startDate": null,
+        "costDate": null,
+        "evidenceOfPayment": [],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
+  },
+  {
     "claimID": "SOM-MT33-JSK4-A",
     "workplaceID": "B02944934",
     "claimType": "100",

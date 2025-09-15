@@ -1643,5 +1643,233 @@
         "processedBy": "Allan Connelly"
       }
     ]
+  },
+  {
+    "claimID": "DOM-MT33-JD23-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "approved",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-06T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "KZ 79 0F 13 Z",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-14T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-03-07T11:52:30.850Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "KZ 79 0F 13 Z",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-01T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
+  },
+  {
+    "claimID": "KOM-MT33-HD72-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "queried",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-06T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "LE 09 5F 94 M",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-14T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-03-07T11:52:30.850Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "LE 09 5F 94 M",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-01T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-03-18T03:36:53.621Z",
+        "processedBy": "Flossie Gleason"
+      }
+    ]
+  },
+  {
+    "claimID": "LOM-MT32-JDNH-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "queried",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-06T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "LE 09 5F 94 M",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-14T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-03-07T11:52:30.850Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "LE 09 5F 94 M",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-01T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-03-18T03:36:53.621Z",
+        "processedBy": "Flossie Gleason"
+      }
+    ]
+  },
+  {
+    "claimID": "POM-MT32-HDJS-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "rejected",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-06T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "BF 73 4F 97 L",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-14T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-03-07T11:52:30.850Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "OMMT/T1/INT",
+        "learnerID": "BF 73 4F 97 L",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-01T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "fail",
+          "note": "The evidence of completion shows that this was an apprenticeship."
+        },
+        "processedDate": "2025-03-18T03:36:53.621Z",
+        "processedBy": "Flossie Gleason"
+      }
+    ]
   }
 ]

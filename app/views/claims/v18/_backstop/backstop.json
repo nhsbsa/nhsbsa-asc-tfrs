@@ -736,6 +736,11 @@
             "delay": 500
         },
         {
+            "label": "claim-new-100-ommt",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=new&type=100&ommt=true",
+            "delay": 500
+        },
+        {
             "label": "claim-new-60",
             "url": "http://localhost:3000/claims/v18/backstop/claim?status=new&type=60",
             "delay": 500
@@ -926,6 +931,16 @@
             "delay": 500
         },
         {
+            "label": "guidance-help-ommt-pre-login",
+            "url": "http://localhost:3000/claims/v18/backstop/help-ommt?loggedIn=false",
+            "delay": 500
+        },
+        {
+            "label": "guidance-help-ommt-post-login",
+            "url": "http://localhost:3000/claims/v18/backstop/help-ommt?loggedIn=true",
+            "delay": 500
+        },
+        {
             "label": "guidance-help-evidence-requirements",
             "url": "http://localhost:3000/claims/v18/backstop/help-evidence",
             "delay": 500
@@ -1023,6 +1038,16 @@
         {
             "label": "claim-view-previous-submissions-100",
             "url": "http://localhost:3000/claims/v18/backstop/previous-submissions?status=submitted&type=100",
+            "delay": 500
+        },
+        {
+            "label": "claim-view-previous-submissions-100-ommt-internal",
+            "url": "http://localhost:3000/claims/v18/backstop/previous-submissions?status=submitted&type=100&ommt=1",
+            "delay": 500
+        },
+        {
+            "label": "claim-view-previous-submissions-100-ommt-internal-change",
+            "url": "http://localhost:3000/claims/v18/backstop/previous-submissions?status=submitted&type=100&ommt=2",
             "delay": 500
         },
         {
