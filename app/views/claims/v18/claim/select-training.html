@@ -10,7 +10,7 @@
 {% endif %}
 
 {% block pageTitle %}
-{% if (data["training-input"] == "" or data["training-input"].length < 3) %}Error: {% endif %}What course or qualification are you claiming for? — {{serviceName}} — GOV.UK
+{% if (data["training-input"] == "") %}Error: {% endif %}What course or qualification are you claiming for? — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -24,7 +24,7 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        {% if data["training-input"] == "" or data["training-input"].length < 3 %}
+        {% if data["training-input"] == "" %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
             <div role="alert">
                 <h2 class="govuk-error-summary__title">
@@ -35,10 +35,6 @@
                         {% if data["training-input"] == "" %}
                         <li>
                             <a href="#search-error">You need to enter something to search on</a>
-                        </li>
-                        {% elif data["training-input"].length < 3 %}
-                        <li>
-                            <a href="#search-error">You need to enter at least 3 characters of the name, or the whole course code or qualification number</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -67,24 +63,20 @@
 
             <form action="select-training" method="post">
 
-                <div class="govuk-form-group {% if (data['training-input'] == ''  or data["training-input"].length < 3) %} govuk-form-group--error{% endif %}">
+                <div class="govuk-form-group {% if (data['training-input'] == '') %} govuk-form-group--error{% endif %}">
                     <label class="govuk-label moj-search__label govuk-!-font-weight-bold" for="search">
                         Search
                     </label>
 
                     <div id="search-hint" class="govuk-hint moj-search__hint ">
-                        Enter at least 3 characters of the name, or the whole course code or qualification number
+                        You can search by title, course code or qualification number
                     </div>
                     {% if data["training-input"] == "" %}
                         <p id="search-error" class="govuk-error-message">
                             <span class="govuk-visually-hidden">Error:</span>You need to enter something to search on
                         </p>
-                    {% elif data["training-input"].length < 3 %}
-                        <p id="search-error" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the name, or the whole course code or qualification number
-                        </p>
                     {% endif %}
-                    <input class="govuk-input moj-search__input {% if (data['training-input'] == ''  or data["training-input"].length < 3) %} govuk-input--error{% endif %}" id="search" name="training-input" type="search"
+                    <input class="govuk-input moj-search__input {% if (data['training-input'] == '') %} govuk-input--error{% endif %}" id="search" name="training-input" type="search"
                         aria-describedby="search-hint" value="{{ data['training-input'] }}">
 
                 </div>
@@ -101,7 +93,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        {% if (data['training-input'] and data["training-input"].length > 2) %}
+        {% if (data['training-input'] and data["training-input"].length > 0) %}
             <h2 class="govuk-heading-m govuk-!-margin-top-3">Search results</h2>
             {% set hasResults = false %}
             {% for trainingGroup in allTraining %}
