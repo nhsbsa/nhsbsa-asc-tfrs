@@ -98,8 +98,10 @@
         {% if pairClaim.status == "not-yet-submitted"%}
             <h2 class="moj-alert__heading">The 60 part of your claim was successful</h2>
             <p class="govuk-body">You can now complete the <a class="govuk-link" href="#fourtyPartClaim">40 part</a> of this claim.</p>
-            <p class="govuk-body">As you've only paid 60% of the training cost so far, you'll need to provide separate evidence of payment for the remaining 40% as well as evidence of completion. 
-            If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
+            {% if pairClaim.isPaymentPlan == true %}
+                <p class="govuk-body">As you've only paid 60% of the training cost so far, you'll need to provide separate evidence of payment for the remaining 40% as well as evidence of completion. 
+                If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
+            {% endif %}
         {% endif %}
 
         {% if pairClaim.status == "queried" %}
