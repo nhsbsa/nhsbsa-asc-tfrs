@@ -271,7 +271,7 @@ function checkDuplicateClaimSubmission(learnerIDToCheck, trainingIDToCheck, curr
             } else {
                 submission = getMostRelevantSubmission(c)
             }
-            if (currentClaimID != c.claimID && submission.trainingCode == trainingIDToCheck && submission.learnerID == learnerIDToCheck && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
+            if (currentClaimID.slice(0, -1) != c.claimID.slice(0, -1) && submission.trainingCode == trainingIDToCheck && submission.learnerID == learnerIDToCheck && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
                 result.matchType = c.claimType
                 result.check = true;
                 result.id = c.claimID
