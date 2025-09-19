@@ -113,8 +113,11 @@
             {% if (data.submitError.change == false ) %}
                 <p id="passport-issued-error" class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> You cannot resubmit a claim without making the requested edits</p>
             {% endif %}
+            {% if notePairSubmission.evidenceOfPaymentReview.outcome == "queried" %}
+                <p class="govuk-body"><strong>Evidence of payment:</strong> {{notePairSubmission.evidenceOfPaymentReview.note}}</p>
+            {% endif %}
             {% if notePairSubmission.evidenceOfCompletionReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.evidenceOfCompletionReview.note}}</p>
+                <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.evidenceOfCompletionReview.note}}</p>
             {% endif %}
         </div>
 

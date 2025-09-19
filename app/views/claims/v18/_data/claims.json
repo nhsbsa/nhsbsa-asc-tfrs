@@ -242,13 +242,13 @@
         "trainingCode": "601/0129/5",
         "learnerID": "UG 66 2F 97 F",
         "startDate": "2024-07-31T23:55:47.273Z",
-        "costDate": "2024-07-21T23:55:47.273Z",
+        "costDate": "2024-07-22T23:55:47.273Z",
         "evidenceOfPayment": ["invoice1.pdf", "receipt1.pdf"],
-        "completionDate":  "2024-08-01T17:19:54.377Z",
+        "completionDate":  "2024-08-12T17:19:54.377Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "completion date entered doesn't match the completion certficate, please update.",
+          "note": "payment date entered doesn't match the payment evidence, please update.",
           "paymentPlan": null,
           "costPerLearner": null
         },
