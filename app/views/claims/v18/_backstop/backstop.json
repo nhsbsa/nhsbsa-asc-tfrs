@@ -602,7 +602,12 @@
         },
         {
             "label": "claim-not-yet-submitted-40",
-            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40&paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-not-yet-submitted-40-paymentPlan",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40&paymentPlan=true",
             "delay": 500
         },
         {

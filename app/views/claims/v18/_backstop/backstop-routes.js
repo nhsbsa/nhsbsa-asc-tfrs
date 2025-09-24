@@ -950,6 +950,7 @@ router.get('/claim', function (req, res) {
     let id = null
     const status = req.session.data.status
     const type = req.session.data.type
+    const paymentPlan = req.session.data.paymentPlan
     const error = req.session.data.error
     const ommt = req.session.data.ommt
 
@@ -973,7 +974,14 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "P1J-EHVI-88A2-C";
+                switch (paymentPlan) {
+                    case "true":
+                    id = "P1J-EHVI-88A2-C";
+                    break;
+                    case "false":
+                    id = "J2S-MKQ7-2F4Q";
+                    break;
+                }
             break;
         }
         break;
@@ -989,7 +997,7 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "SRX-A33U-BMUG-C";
+            id = "SRX-A33U-BMUG-C"; //8BK-X4ZS-SCQU-C payment plan
             break;
         }
         break;
@@ -1021,7 +1029,7 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "SND-EPRS-N3MZ-C";
+            id = "SND-EPRS-N3MZ-C"; //RPM-QUKD-MURD-C payment plan 
             break;
         }
         break;
