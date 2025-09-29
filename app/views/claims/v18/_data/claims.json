@@ -19294,9 +19294,9 @@
         "learnerID": "VL 10 7F 63 E",
         "startDate": "2025-01-04T08:03:01.138Z",
         "costDate": null,
-        "evidenceOfPayment": null,
-        "completionDate": null,
-        "evidenceOfCompletion": null,
+        "evidenceOfPayment": [],
+        "completionDate": "2025-03-04T08:03:01.138Z",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,

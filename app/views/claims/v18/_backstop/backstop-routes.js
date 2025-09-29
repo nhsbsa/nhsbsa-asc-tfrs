@@ -1123,12 +1123,23 @@ router.get('/claim', function (req, res) {
             change: true,
             claimValid: false
             }
-    } else if (error == "missing3") {
+    } else if (error == "missing3" && paymentPlan == "false") {
         req.session.data.submitError = {
             learner: "valid",
             startDate: "valid",
             paymentDate: "valid",
             evidenceOfPayment: "valid",
+            evidenceOfCompletion: "missing",
+            completionDate: "missing",
+            change: true,
+            claimValid: false
+            }
+    } else if (error == "missing3" && paymentPlan == "true") {
+        req.session.data.submitError = {
+            learner: "valid",
+            startDate: "valid",
+            paymentDate: "missing",
+            evidenceOfPayment: "missing",
             evidenceOfCompletion: "missing",
             completionDate: "missing",
             change: true,
@@ -1197,7 +1208,7 @@ router.get('/claim', function (req, res) {
         req.session.data.submitError = {
             learner: "valid",
             startDate: "valid",
-            paymentDate: "valid",
+            paymentDate: "inFuture",
             evidenceOfPayment: "valid",
             evidenceOfCompletion: "valid",
             completionDate: "inFuture",
@@ -1209,6 +1220,7 @@ router.get('/claim', function (req, res) {
                 if (claim.claimID == "P1J-EHVI-88A2-C") {
                     const submission = getMostRelevantSubmission(claim)
                     submission.completionDate = "2024-06-15T23:55:44.062Z"
+                    submission.costDate = "2024-08-15T23:55:44.062Z"
                     submission.evidenceOfCompletion = "certificate1.pdf"
                 }
             }

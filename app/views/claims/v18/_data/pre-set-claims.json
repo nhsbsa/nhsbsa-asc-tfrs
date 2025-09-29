@@ -588,8 +588,8 @@
         "trainingCode": "601/0129/5",
         "learnerID": "LE 09 5F 94 M",
         "startDate": "2024-07-30T23:55:47.273Z",
-        "costDate": null,
-        "evidenceOfPayment": [],
+        "costDate": "2024-07-30T23:55:47.273Z",
+        "evidenceOfPayment": ["bankStatement1.pdf"],
         "completionDate": null,
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
