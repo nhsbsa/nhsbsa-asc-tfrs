@@ -1490,7 +1490,32 @@ router.get('/payment-date', function (req, res) {
             year: "valid",
             month: "valid",
             day: "valid",
-            date: "invalidPolicy",
+            date: "valid",
+            policy: "invalidPolicy",
+            dateValid: false
+            }
+            req.session.data["payment-date-started-day"] = "02"
+            req.session.data["payment-date-started-month"] = "04"
+            req.session.data["payment-date-started-year"] = "2023"
+    } else if (error == "startDate") {
+        req.session.data.submitError = {
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "valid",
+            policy: "invalidAfterStart",
+            dateValid: false
+            }
+            req.session.data["payment-date-started-day"] = "02"
+            req.session.data["payment-date-started-month"] = "04"
+            req.session.data["payment-date-started-year"] = "2023"
+    } else if (error == "sixtyPaymentDate") {
+        req.session.data.submitError = {
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "valid",
+            policy: "invalidAfterPayment",
             dateValid: false
             }
             req.session.data["payment-date-started-day"] = "02"

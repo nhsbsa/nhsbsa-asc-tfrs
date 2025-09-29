@@ -846,8 +846,23 @@
             "delay": 500
         },
         {
-            "label": "claim-add-payment-date-policy-error",
-            "url": "http://localhost:3000/claims/v18/backstop/payment-date?error=policy",
+            "label": "claim-add-payment-date-40-missing-error",
+            "url": "http://localhost:3000/claims/v18/backstop/payment-date?paymentPlan=true&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-payment-date-100-policy-error",
+            "url": "http://localhost:3000/claims/v18/backstop/payment-date?paymentPlan=false&error=policy",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-payment-date-40-invalidAfterStart-error",
+            "url": "http://localhost:3000/claims/v18/backstop/payment-date?paymentPlan=true&error=startDate",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-payment-date-40-invalidAfterPayment-error",
+            "url": "http://localhost:3000/claims/v18/backstop/payment-date?paymentPlan=true&error=sixtyPaymentDate",
             "delay": 500
         },
         {
