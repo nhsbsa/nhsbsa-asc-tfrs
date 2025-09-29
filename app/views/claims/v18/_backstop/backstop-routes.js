@@ -979,7 +979,7 @@ router.get('/claim', function (req, res) {
                     id = "P1J-EHVI-88A2-C";
                     break;
                     case "false":
-                    id = "J2S-MKQ7-2F4Q";
+                    id = "J2S-MKQ7-2F4Q-C";
                     break;
                 }
             break;
@@ -997,7 +997,14 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "SRX-A33U-BMUG-C"; //8BK-X4ZS-SCQU-C payment plan
+                switch (paymentPlan) {
+                    case "true":
+                    id = "P8A-66ND-IBFM";
+                    break;
+                    case "false":
+                    id = "SRX-A33U-BMUG-C";
+                    break;
+                }
             break;
         }
         break;
@@ -1013,7 +1020,14 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "9JH-I94K-TPRB-C";
+                switch (paymentPlan) {
+                    case "true":
+                    id = "26Q-GS9P-E91M-C";
+                    break;
+                    case "false":
+                    id = "9JH-I94K-TPRB-C";
+                    break;
+                }
             break;
         }
         break;
@@ -1029,7 +1043,14 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "SND-EPRS-N3MZ-C"; //RPM-QUKD-MURD-C payment plan 
+                switch (paymentPlan) {
+                    case "true":
+                    id = "NP1-NNFN-E76Y-C";
+                    break;
+                    case "false":
+                    id = "SND-EPRS-N3MZ-C";
+                    break;
+                }
             break;
         }
         break;
@@ -1045,7 +1066,14 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "A8T-TAGD-ETJE-C";
+            switch (paymentPlan) {
+                    case "true":
+                    id = "ST7-LVRI-VPK5-B";
+                    break;
+                    case "false":
+                    id = "A8T-TAGD-ETJE-C";
+                    break;
+                }
             break;
         }
         break;
@@ -1428,19 +1456,28 @@ router.get('/start-date', function (req, res) {
 
 router.get('/payment-date', function (req, res) {
     const error = req.session.data.error
+    const paymentPlan  = req.session.data.paymentPlan
+    const issue  = req.session.data.issue
 
-  delete req.session.data
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
         journey: 'signin',
-        tabLocation: "claims",
-        id: "GE2-UA5D-4K6C-A"
+        tabLocation: "claims"
     };
+
+    if (paymentPlan == "true") {
+        id = "IXD-E72Q-4KYG-C"
+    } else {
+        id = "GE2-UA5D-4K6C-A"
+    }
+
+    req.session.data.id = id
 
     loadData(req, "A02944934")
 
-    if ( error == "missing") {
+    if (error == "missing") {
         req.session.data.submitError = {
             year: "missing",
             month: "missing",
@@ -1760,8 +1797,9 @@ router.get('/previous-submissions', function (req, res) {
     const status = req.session.data.status
     const showNote = req.session.data.showNote
     const ommt  = req.session.data.ommt
+    const paymentPlan  = req.session.data.paymentPlan
 
-  delete req.session.data
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1776,7 +1814,11 @@ router.get('/previous-submissions', function (req, res) {
         } else if (type == "60") {
             id = "VJH-8Y37-EZNM-B";
         } else if (type == "40") {
-            id = "SRX-A33U-BMUG-C";
+            if (paymentPlan == "true") {
+                id = "2NB-ISY7-86JH-C";
+            } else {
+                id = "SRX-A33U-BMUG-C";
+            }
         }
     } else if (status == "submitted") {
         if (type == "100") {
@@ -1791,6 +1833,11 @@ router.get('/previous-submissions', function (req, res) {
             id = "1SC-WE58-MT7W-B";
         } else if (type == "40") {
             id = "9JH-I94K-TPRB-C";
+            if (paymentPlan == "true") {
+                id = "NPU-H9DG-6L1T-C";
+            } else {
+                id = "9JH-I94K-TPRB-C";
+            }
         }
     }
 
