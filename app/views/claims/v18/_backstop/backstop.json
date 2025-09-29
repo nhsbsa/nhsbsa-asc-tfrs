@@ -602,7 +602,12 @@
         },
         {
             "label": "claim-not-yet-submitted-40",
-            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40&paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-not-yet-submitted-40-paymentPlan",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40&paymentPlan=true",
             "delay": 500
         },
         {
@@ -617,7 +622,12 @@
         },
         {
             "label": "claim-submitted-40",
-            "url": "http://localhost:3000/claims/v18/backstop/claim?status=submitted&type=40",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=submitted&type=40&paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-submitted-40-paymentPlan",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=submitted&type=40&paymentPlan=true",
             "delay": 500
         },
         {
@@ -632,7 +642,12 @@
         },
         {
             "label": "claim-needs-action-40",
-            "url": "http://localhost:3000/claims/v18/backstop/claim?status=queried&type=40",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=queried&type=40&paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-needs-action-40-paymentPlan",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=queried&type=40&paymentPlan=true",
             "delay": 500
         },
         {
@@ -647,7 +662,12 @@
         },
         {
             "label": "claim-approved-40",
-            "url": "http://localhost:3000/claims/v18/backstop/claim?status=approved&type=40",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=approved&type=40&paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-approved-40-paymentPlan",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=approved&type=40&paymentPlan=true",
             "delay": 500
         },
         {
@@ -662,7 +682,12 @@
         },
         {
             "label": "claim-rejected-40",
-            "url": "http://localhost:3000/claims/v18/backstop/claim?status=rejected&type=40",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=rejected&type=40&paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-rejected-40-paymentPlan",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=rejected&type=40&paymentPlan=true",
             "delay": 500
         },
         {
@@ -807,7 +832,12 @@
         },
         {
             "label": "claim-add-payment-date",
-            "url": "http://localhost:3000/claims/v18/backstop/payment-date",
+            "url": "http://localhost:3000/claims/v18/backstop/payment-date?paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-payment-date-40-paymentPlan",
+            "url": "http://localhost:3000/claims/v18/backstop/payment-date?paymentPlan=true",
             "delay": 500
         },
         {
@@ -816,8 +846,23 @@
             "delay": 500
         },
         {
-            "label": "claim-add-payment-date-policy-error",
-            "url": "http://localhost:3000/claims/v18/backstop/payment-date?error=policy",
+            "label": "claim-add-payment-date-40-missing-error",
+            "url": "http://localhost:3000/claims/v18/backstop/payment-date?paymentPlan=true&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-payment-date-100-policy-error",
+            "url": "http://localhost:3000/claims/v18/backstop/payment-date?paymentPlan=false&error=policy",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-payment-date-40-invalidAfterStart-error",
+            "url": "http://localhost:3000/claims/v18/backstop/payment-date?paymentPlan=true&error=startDate",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-payment-date-40-invalidAfterPayment-error",
+            "url": "http://localhost:3000/claims/v18/backstop/payment-date?paymentPlan=true&error=sixtyPaymentDate",
             "delay": 500
         },
         {
@@ -827,7 +872,12 @@
         },
         {
             "label": "claim-add-completion-date-missing-error",
-            "url": "http://localhost:3000/claims/v18/backstop/completion-date?error=missing",
+            "url": "http://localhost:3000/claims/v18/backstop/completion-date?type=100&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-completion-date-40-completionDate-error",
+            "url": "http://localhost:3000/claims/v18/backstop/completion-date?type=40&error=policy",
             "delay": 500
         },
         {
@@ -997,7 +1047,12 @@
         },
         {
             "label": "claim-submission-40-missing-details-error-scenario-4",
-            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40&error=missing3",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40&error=missing3&paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-40-missing-details-error-scenario-4",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40&error=missing3&paymentPlan=true",
             "delay": 500
         },
         {
@@ -1007,17 +1062,17 @@
         },
         {
             "label": "claim-submission-40-future-date-logic-error",
-            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40&error=date4",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40&error=date4&paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-40-future-date-logic-error",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40&error=date4&paymentPlan=true",
             "delay": 500
         },
         {
             "label": "claim-submission-100-date-logic-error",
             "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=100&error=date1",
-            "delay": 500
-        },
-        {
-            "label": "claim-submission-40-date-logic-error",
-            "url": "http://localhost:3000/claims/v18/backstop/claim?status=not-yet-submitted&type=40&error=date2",
             "delay": 500
         },
         {
@@ -1032,7 +1087,12 @@
         },
         {
             "label": "claim-submission-40-no-edits-error",
-            "url": "http://localhost:3000/claims/v18/backstop/claim?status=queried&type=40&error=noedits",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=queried&type=40&error=noedits&paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-40-no-edits-error",
+            "url": "http://localhost:3000/claims/v18/backstop/claim?status=queried&type=40&error=noedits&paymentPlan=true",
             "delay": 500
         },
         {
@@ -1057,7 +1117,12 @@
         },
         {
             "label": "claim-view-previous-submissions-40",
-            "url": "http://localhost:3000/claims/v18/backstop/previous-submissions?status=submitted&type=40",
+            "url": "http://localhost:3000/claims/v18/backstop/previous-submissions?status=submitted&type=40&paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-view-previous-submissions-40-paymentPlan",
+            "url": "http://localhost:3000/claims/v18/backstop/previous-submissions?status=submitted&type=40&paymentPlan=true",
             "delay": 500
         },
         {
@@ -1072,7 +1137,12 @@
         },
         {
             "label": "claim-view-previous-submissions-40-needs-action",
-            "url": "http://localhost:3000/claims/v18/backstop/previous-submissions?status=queried&type=40",
+            "url": "http://localhost:3000/claims/v18/backstop/previous-submissions?status=queried&type=40&paymentPlan=false",
+            "delay": 500
+        },
+        {
+            "label": "claim-view-previous-submissions-40-needs-action-paymentPlan",
+            "url": "http://localhost:3000/claims/v18/backstop/previous-submissions?status=queried&type=40&paymentPlan=true",
             "delay": 500
         },
         {

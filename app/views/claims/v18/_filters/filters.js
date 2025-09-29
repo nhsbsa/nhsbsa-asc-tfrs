@@ -218,7 +218,7 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
         if (dateErrorObject.policy === 'invalidPolicy') {
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must fall within the eligible financial year for this course<br>');
         }
-        if (dateErrorObject. policy === 'invalidAfterStart') {
+        if (dateErrorObject.policy === 'invalidAfterStart') {
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be on or after the training start date<br>');
         }
         if (dateErrorObject.policy === 'invalidAfterPayment') {

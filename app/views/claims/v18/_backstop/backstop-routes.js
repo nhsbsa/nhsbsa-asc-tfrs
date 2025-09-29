@@ -950,6 +950,7 @@ router.get('/claim', function (req, res) {
     let id = null
     const status = req.session.data.status
     const type = req.session.data.type
+    const paymentPlan = req.session.data.paymentPlan
     const error = req.session.data.error
     const ommt = req.session.data.ommt
 
@@ -973,7 +974,14 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "P1J-EHVI-88A2-C";
+                switch (paymentPlan) {
+                    case "true":
+                    id = "P1J-EHVI-88A2-C";
+                    break;
+                    case "false":
+                    id = "J2S-MKQ7-2F4Q-C";
+                    break;
+                }
             break;
         }
         break;
@@ -989,7 +997,14 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "SRX-A33U-BMUG-C";
+                switch (paymentPlan) {
+                    case "true":
+                    id = "P8A-66ND-IBFM";
+                    break;
+                    case "false":
+                    id = "SRX-A33U-BMUG-C";
+                    break;
+                }
             break;
         }
         break;
@@ -1005,7 +1020,14 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "9JH-I94K-TPRB-C";
+                switch (paymentPlan) {
+                    case "true":
+                    id = "26Q-GS9P-E91M-C";
+                    break;
+                    case "false":
+                    id = "9JH-I94K-TPRB-C";
+                    break;
+                }
             break;
         }
         break;
@@ -1021,7 +1043,14 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "SND-EPRS-N3MZ-C";
+                switch (paymentPlan) {
+                    case "true":
+                    id = "NP1-NNFN-E76Y-C";
+                    break;
+                    case "false":
+                    id = "SND-EPRS-N3MZ-C";
+                    break;
+                }
             break;
         }
         break;
@@ -1037,7 +1066,14 @@ router.get('/claim', function (req, res) {
             break;
 
             case "40":
-            id = "A8T-TAGD-ETJE-C";
+            switch (paymentPlan) {
+                    case "true":
+                    id = "ST7-LVRI-VPK5-B";
+                    break;
+                    case "false":
+                    id = "A8T-TAGD-ETJE-C";
+                    break;
+                }
             break;
         }
         break;
@@ -1087,12 +1123,23 @@ router.get('/claim', function (req, res) {
             change: true,
             claimValid: false
             }
-    } else if (error == "missing3") {
+    } else if (error == "missing3" && paymentPlan == "false") {
         req.session.data.submitError = {
             learner: "valid",
             startDate: "valid",
             paymentDate: "valid",
             evidenceOfPayment: "valid",
+            evidenceOfCompletion: "missing",
+            completionDate: "missing",
+            change: true,
+            claimValid: false
+            }
+    } else if (error == "missing3" && paymentPlan == "true") {
+        req.session.data.submitError = {
+            learner: "valid",
+            startDate: "valid",
+            paymentDate: "missing",
+            evidenceOfPayment: "missing",
             evidenceOfCompletion: "missing",
             completionDate: "missing",
             change: true,
@@ -1161,7 +1208,7 @@ router.get('/claim', function (req, res) {
         req.session.data.submitError = {
             learner: "valid",
             startDate: "valid",
-            paymentDate: "valid",
+            paymentDate: "inFuture",
             evidenceOfPayment: "valid",
             evidenceOfCompletion: "valid",
             completionDate: "inFuture",
@@ -1173,6 +1220,7 @@ router.get('/claim', function (req, res) {
                 if (claim.claimID == "P1J-EHVI-88A2-C") {
                     const submission = getMostRelevantSubmission(claim)
                     submission.completionDate = "2024-06-15T23:55:44.062Z"
+                    submission.costDate = "2024-08-15T23:55:44.062Z"
                     submission.evidenceOfCompletion = "certificate1.pdf"
                 }
             }
@@ -1420,16 +1468,97 @@ router.get('/start-date', function (req, res) {
 
 router.get('/payment-date', function (req, res) {
     const error = req.session.data.error
+    const paymentPlan  = req.session.data.paymentPlan
+    const issue  = req.session.data.issue
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Claims',
+        userType: 'signatory',
+        journey: 'signin',
+        tabLocation: "claims"
+    };
+
+    if (paymentPlan == "true") {
+        id = "IXD-E72Q-4KYG-C"
+    } else {
+        id = "GE2-UA5D-4K6C-A"
+    }
+
+    req.session.data.id = id
+
+    loadData(req, "A02944934")
+
+    if (error == "missing") {
+        req.session.data.submitError = {
+            year: "missing",
+            month: "missing",
+            day: "missing",
+            date: "allMissing",
+            dateValid: false
+            }
+    } else if (error == "policy") {
+        req.session.data.submitError = {
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "valid",
+            policy: "invalidPolicy",
+            dateValid: false
+            }
+            req.session.data["payment-date-started-day"] = "02"
+            req.session.data["payment-date-started-month"] = "04"
+            req.session.data["payment-date-started-year"] = "2023"
+    } else if (error == "startDate") {
+        req.session.data.submitError = {
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "valid",
+            policy: "invalidAfterStart",
+            dateValid: false
+            }
+            req.session.data["payment-date-started-day"] = "02"
+            req.session.data["payment-date-started-month"] = "04"
+            req.session.data["payment-date-started-year"] = "2023"
+    } else if (error == "sixtyPaymentDate") {
+        req.session.data.submitError = {
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "valid",
+            policy: "invalidAfterPayment",
+            dateValid: false
+            }
+            req.session.data["payment-date-started-day"] = "02"
+            req.session.data["payment-date-started-month"] = "04"
+            req.session.data["payment-date-started-year"] = "2023"
+    }
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../claim/cost-date');
+});
+
+router.get('/completion-date', function (req, res) {
+    const error = req.session.data.error
+    const type = req.session.data.type
+    let id = null
 
   delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
         journey: 'signin',
-        tabLocation: "claims",
-        id: "GE2-UA5D-4K6C-A"
+        tabLocation: "claims"
     };
 
+    if (type == "100") {
+        id = "GE2-UA5D-4K6C-A"
+    } else if (type == "40") {
+        id = "IXD-E72Q-4KYG-C"
+    }
+
+    req.session.data.id = id
     loadData(req, "A02944934")
 
     if ( error == "missing") {
@@ -1445,40 +1574,10 @@ router.get('/payment-date', function (req, res) {
             year: "valid",
             month: "valid",
             day: "valid",
-            date: "invalidPolicy",
+            date: "valid",
+            policy: "invalidAfterStart",
             dateValid: false
-            }
-            req.session.data["payment-date-started-day"] = "02"
-            req.session.data["payment-date-started-month"] = "04"
-            req.session.data["payment-date-started-year"] = "2023"
-    }
-
-    // Redirect to the page you want to screenshot
-    res.redirect('../claim/cost-date');
-});
-
-router.get('/completion-date', function (req, res) {
-    const error = req.session.data.error
-
-  delete req.session.data
-    req.session.data = {
-        area: 'Claims',
-        userType: 'signatory',
-        journey: 'signin',
-        tabLocation: "claims",
-        id: "GE2-UA5D-4K6C-A"
-    };
-
-    loadData(req, "A02944934")
-
-    if ( error == "missing") {
-        req.session.data.submitError = {
-            year: "missing",
-            month: "missing",
-            day: "missing",
-            date: "allMissing",
-            dateValid: false
-            }
+        }
     }
 
     // Redirect to the page you want to screenshot
@@ -1752,8 +1851,9 @@ router.get('/previous-submissions', function (req, res) {
     const status = req.session.data.status
     const showNote = req.session.data.showNote
     const ommt  = req.session.data.ommt
+    const paymentPlan  = req.session.data.paymentPlan
 
-  delete req.session.data
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
@@ -1768,7 +1868,11 @@ router.get('/previous-submissions', function (req, res) {
         } else if (type == "60") {
             id = "VJH-8Y37-EZNM-B";
         } else if (type == "40") {
-            id = "SRX-A33U-BMUG-C";
+            if (paymentPlan == "true") {
+                id = "2NB-ISY7-86JH-C";
+            } else {
+                id = "SRX-A33U-BMUG-C";
+            }
         }
     } else if (status == "submitted") {
         if (type == "100") {
@@ -1783,6 +1887,11 @@ router.get('/previous-submissions', function (req, res) {
             id = "1SC-WE58-MT7W-B";
         } else if (type == "40") {
             id = "9JH-I94K-TPRB-C";
+            if (paymentPlan == "true") {
+                id = "NPU-H9DG-6L1T-C";
+            } else {
+                id = "9JH-I94K-TPRB-C";
+            }
         }
     }
 
