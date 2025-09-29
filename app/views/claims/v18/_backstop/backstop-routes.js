@@ -1504,16 +1504,24 @@ router.get('/payment-date', function (req, res) {
 
 router.get('/completion-date', function (req, res) {
     const error = req.session.data.error
+    const type = req.session.data.type
+    let id = null
 
   delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
         journey: 'signin',
-        tabLocation: "claims",
-        id: "GE2-UA5D-4K6C-A"
+        tabLocation: "claims"
     };
 
+    if (type == "100") {
+        id = "GE2-UA5D-4K6C-A"
+    } else if (type == "40") {
+        id = "IXD-E72Q-4KYG-C"
+    }
+
+    req.session.data.id = id
     loadData(req, "A02944934")
 
     if ( error == "missing") {
@@ -1524,6 +1532,15 @@ router.get('/completion-date', function (req, res) {
             date: "allMissing",
             dateValid: false
             }
+    } else if (error == "policy") {
+        req.session.data.submitError = {
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "valid",
+            policy: "invalidAfterStart",
+            dateValid: false
+        }
     }
 
     // Redirect to the page you want to screenshot

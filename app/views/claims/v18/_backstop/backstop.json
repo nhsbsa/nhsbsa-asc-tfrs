@@ -857,7 +857,12 @@
         },
         {
             "label": "claim-add-completion-date-missing-error",
-            "url": "http://localhost:3000/claims/v18/backstop/completion-date?error=missing",
+            "url": "http://localhost:3000/claims/v18/backstop/completion-date?type=100&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-completion-date-40-completionDate-error",
+            "url": "http://localhost:3000/claims/v18/backstop/completion-date?type=40&error=policy",
             "delay": 500
         },
         {
