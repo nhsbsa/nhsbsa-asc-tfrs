@@ -366,6 +366,29 @@
     "submissions": [
       {
         "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2024-05-12T09:19:41.012Z",
+        "trainingCode": "601/0129/5",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-08-01T23:55:47.273Z",
+        "costDate": "2024-07-28T23:55:44.062Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "yes",
+          "costPerLearner": 162
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "certificate doesn't match the learner"
+        },
+        "processedDate": "2024-06-22T17:19:54.377Z",
+        "processedBy": "Flossie Gleason"
+      },
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
         "submittedDate": "2024-06-15T09:19:41.012Z",
         "trainingCode": "601/0129/5",
         "learnerID": "LM 89 7F 48 J",
@@ -815,19 +838,19 @@
   },
   {
     "claimID": "ST7-LVRI-VPK5-B",
-    "workplaceID": "A02944934",
+    "workplaceID": "B13299931",
     "claimType": "60",
     "isPaymentPlan": true,
     "status": "approved",
     "createdDate": "2024-04-06T10:39:55.862Z",
-    "createdBy": "miles.whitaker@evergreencare.com",
+    "createdBy": "cameron.bennett@teatree.com",
     "notes": [],
     "submissions": [
       {
-        "submitter": "miles.whitaker@evergreencare.com",
+        "submitter": "cameron.bennett@teatree.com",
         "submittedDate": "2025-06-28T19:29:27.388Z",
         "trainingCode": "601/7430/4",
-        "learnerID": "UH 04 6F 47 V",
+        "learnerID": "EB 06 4F 17 Y",
         "startDate": "2025-06-04T17:00:17.376Z",
         "costDate": "2024-07-09T23:21:39.905Z",
         "evidenceOfPayment": [
@@ -854,19 +877,19 @@
   },
   {
     "claimID": "ST7-LVRI-VPK5-C",
-    "workplaceID": "A02944934",
+    "workplaceID": "B13299931",
     "claimType": "40",
     "isPaymentPlan": true,
     "status": "rejected",
     "createdDate": "2024-04-06T10:39:55.862Z",
-    "createdBy": "miles.whitaker@evergreencare.com",
+    "createdBy": "cameron.bennett@teatree.com",
     "notes": [],
     "submissions": [
       {
-        "submitter": "elias.thornton@evergreencare.com",
+        "submitter": "cameron.bennett@teatree.com",
         "submittedDate": "2025-07-20T02:57:11.152Z",
         "trainingCode": "601/7430/4",
-        "learnerID": "UH 04 6F 47 V",
+        "learnerID": "EB 06 4F 17 Y",
         "startDate": "2025-06-04T17:00:17.376Z",
         "costDate": "2025-07-19T23:32:03.407Z",
         "evidenceOfPayment": [
@@ -13038,8 +13061,12 @@
         "trainingCode": "501/1206/5",
         "learnerID": "CL 74 2F 71 G",
         "startDate": "2024-08-18T19:07:58.857Z",
-        "costDate": null,
-        "evidenceOfPayment": null,
+        "costDate": "2025-03-30T13:55:21.108Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
         "completionDate": "2025-03-30T14:17:05.942Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
@@ -18869,7 +18896,7 @@
     "claimID": "P8A-66ND-IBFM-B",
     "workplaceID": "B13299931",
     "claimType": "60",
-    "isPaymentPlan": false,
+    "isPaymentPlan": true,
     "status": "approved",
     "createdDate": "2025-06-17T17:17:30.011Z",
     "createdBy": "cameron.bennett@teatree.com",
@@ -18892,7 +18919,7 @@
         "evidenceOfPaymentReview": {
           "outcome": "pass",
           "note": null,
-          "paymentPlan": "no",
+          "paymentPlan": "yes",
           "costPerLearner": 54
         },
         "evidenceOfCompletionReview": {
@@ -18908,7 +18935,7 @@
     "claimID": "P8A-66ND-IBFM-C",
     "workplaceID": "B13299931",
     "claimType": "40",
-    "isPaymentPlan": false,
+    "isPaymentPlan": true,
     "status": "queried",
     "createdDate": "2025-06-17T17:17:30.011Z",
     "createdBy": "cameron.bennett@teatree.com",
@@ -18920,12 +18947,12 @@
         "trainingCode": "601/7939/9",
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2025-08-04T17:16:11.330Z",
-        "costDate": null,
-        "evidenceOfPayment": null,
+        "costDate": "2025-02-10T22:06:48.036Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-08-07T11:30:33.977Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
-          "outcome": null,
+          "outcome": "pass",
           "note": null,
           "paymentPlan": null,
           "costPerLearner": null
@@ -18943,12 +18970,12 @@
         "trainingCode": "601/7939/9",
         "learnerID": "HB 78 2F 15 O",
         "startDate": "2025-08-04T17:16:11.330Z",
-        "costDate": null,
-        "evidenceOfPayment": null,
+        "costDate": "2025-02-10T22:06:48.036Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
         "completionDate": "2025-08-07T11:30:33.977Z",
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
-          "outcome": null,
+          "outcome": "pass",
           "note": null,
           "paymentPlan": null,
           "costPerLearner": null
@@ -19267,9 +19294,9 @@
         "learnerID": "VL 10 7F 63 E",
         "startDate": "2025-01-04T08:03:01.138Z",
         "costDate": null,
-        "evidenceOfPayment": null,
-        "completionDate": null,
-        "evidenceOfCompletion": null,
+        "evidenceOfPayment": [],
+        "completionDate": "2025-03-04T08:03:01.138Z",
+        "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
