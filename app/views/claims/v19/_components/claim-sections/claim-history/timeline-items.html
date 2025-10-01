@@ -1,0 +1,22 @@
+{% set timelineData = submission | generateTimelineData(type, data.org, loop.last,  data.statuses) %}
+{% if (timelineData.processStep) %} 
+<div class="moj-timeline__item">
+    <div class="moj-timeline__header">
+    <h3 class="moj-timeline__title">{{timelineData.processStep.title}}</h3>
+    <p class="moj-timeline__byline">{{timelineData.processStep.author}}</p>
+    </div>
+    <p class="moj-timeline__date">
+    <time datetime="{{ timelineData.processStep.date }}">{{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }}</time>
+    </p>
+</div>
+{% endif %}
+
+<div class="moj-timeline__item">
+<div class="moj-timeline__header">
+    <h3 class="moj-timeline__title">{{timelineData.submissionStep.title}}</h3>
+    <p class="moj-timeline__byline">{{timelineData.submissionStep.author}}</p>
+</div>
+<p class="moj-timeline__date">
+    <time datetime="{{ timelineData.submissionStep.date }}">{{ timelineData.submissionStep.date | govukDate }} at {{ timelineData.submissionStep.date | govukTime }}</time>
+</p>
+</div>

@@ -1,0 +1,70 @@
+{% extends "./main.html" %}
+
+{% block header %}
+  {{ govukHeader({
+    rebrand: true, 
+    serviceName: serviceName,
+    navigation: [
+      {
+        href: "#",
+        text: "Sign out"
+      }
+      ]
+    }) 
+  }}
+  <div class="govuk-width-container">
+    <div class="govuk-phase-banner">
+      <p class="govuk-phase-banner__content">
+        <strong class="govuk-tag govuk-phase-banner__content__tag">
+          Prototype
+        </strong>
+        <span class="govuk-phase-banner__text">
+          This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+        </span>
+      </p>
+    </div>
+  </div>
+  <div class="app-organisation-actions govuk-width-container" aria-label="Organisation switcher">
+    <div class="app-organisation-actions__title">
+      {{data.org.name}} <span class="app-organisation-caption">({{data.org.workplaceID}})</span>
+      </div>
+      <!-- <div class="app-organisation-actions__actions">
+          <a class="govuk-link app-organisation-actions__link" href="/organisations">Change organisation</a>
+      </div> -->
+  </div>
+  <div class="govuk-service-navigation" data-module="govuk-service-navigation">
+    <div class="govuk-width-container">
+      <div class="govuk-service-navigation__container">
+        <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
+          <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden>
+            Menu
+          </button>
+          <ul class="govuk-service-navigation__list" id="navigation">
+            <li class="govuk-service-navigation__item {% if data.tabLocation == 'claims' %}govuk-service-navigation__item--active{% endif %}">
+              <a class="govuk-service-navigation__link" href="/claims/v19/manage-claims-home?tabLocation=claims&submitError=" {% if data.tabLocation == 'claims' %}aria-current="true"{% endif %}>
+                <strong class="govuk-service-navigation__active-fallback">Manage claims</strong>
+              </a>
+            </li>
+            {% if data.userType == "signatory" %}
+            <li class="govuk-service-navigation__item {% if data.tabLocation == 'users' %}govuk-service-navigation__item--active{% endif %}">
+              <a class="govuk-service-navigation__link" href="/claims/v19/org-admin/manage-team?tabLocation=users" {% if data.tabLocation == 'users' %}aria-current="true"{% endif %}>
+                {% if data.tabLocation == 'users' %}<strong class="govuk-service-navigation__active-fallback">{% endif %}Manage submitters{% if data.tabLocation == 'users' %}</strong>{% endif %}
+              </a>
+            </li>
+            <li class="govuk-service-navigation__item {% if data.tabLocation == 'bankDetails' %}govuk-service-navigation__item--active{% endif %}">
+              <a class="govuk-service-navigation__link" href="/claims/v19/org-admin/bank-details?tabLocation=bankDetails" {% if data.tabLocation == 'bankDetails' %}aria-current="true"{% endif %}>
+                {% if data.tabLocation == 'bankDetails' %}<strong class="govuk-service-navigation__active-fallback">{% endif %}Bank details{% if data.tabLocation == 'bankDetails' %}</strong>{% endif %}
+              </a>
+            </li>
+            {% endif %}
+            <li class="govuk-service-navigation__item {% if data.tabLocation == 'orgDetails' %}govuk-service-navigation__item--active{% endif %}">
+              <a class="govuk-service-navigation__link" href="/claims/v19/org-admin/org-details?tabLocation=orgDetails" {% if data.tabLocation == 'orgDetails' %}aria-current="true"{% endif %}>
+                {% if data.tabLocation == 'orgDetails' %}<strong class="govuk-service-navigation__active-fallback">{% endif %}Organisation details{% if data.tabLocation == 'orgDetails' %}</strong>{% endif %}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+{% endblock %}
