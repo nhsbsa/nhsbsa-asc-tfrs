@@ -10,7 +10,7 @@
     "submissions": [
       {
         "submitter": "lena.caldwell@evergreencare.com",
-        "submittedDate": "2025-02-01T07:53:32.066Z",
+        "submittedDate": "2025-03-01T07:53:32.066Z",
         "trainingCode": "501/1146/2",
         "learnerID": "NX 76 8F 30 D",
         "startDate": "2025-01-25T09:54:13.322Z",
@@ -23,6 +23,29 @@
           "note": null,
           "paymentPlan": "yes",
           "costPerLearner": 120
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": "2025-03-14T06:15:38.665Z",
+        "processedBy": "Allan Connelly"
+      },
+      {
+        "submitter": "lena.caldwell@evergreencare.com",
+        "submittedDate": "2025-02-01T07:53:32.066Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "NX 76 8F 30 D",
+        "startDate": "2025-01-25T09:54:13.322Z",
+        "costDate": "2024-08-18T14:35:08.968Z",
+        "evidenceOfPayment": ["Bankstatement-scenario260.png"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The payment evidence is insufficient to show you paid for this training. Please add additional evidence.",
+          "paymentPlan": null,
+          "costPerLearner": null
         },
         "evidenceOfCompletionReview": {
           "outcome": null,
@@ -797,7 +820,7 @@
     "claimType": "60",
     "isPaymentPlan": false,
     "status": "approved",
-    "createdDate": "2025-01-01T00:06:28.462Z",
+    "createdDate": "2024-11-01T00:06:28.462Z",
     "createdBy": "lena.caldwell@evergreencare.com",
     "submissions": [
       {
@@ -822,6 +845,29 @@
         },
         "processedDate": "2025-02-03T06:15:38.665Z",
         "processedBy": "Allan Connelly"
+      },
+      {
+        "submitter": "lena.caldwell@evergreencare.com",
+        "submittedDate": "2024-11-03T07:53:32.066Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "NX 76 8F 30 D",
+        "startDate": "2025-02-24T09:54:13.322Z",
+        "costDate": "2024-10-17T14:35:08.968Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The payment date doesn't match the evidence of payment provided.",
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": "2024-11-06T06:15:38.665Z",
+        "processedBy": "Allan Connelly"
       }
     ]
   },
@@ -831,7 +877,7 @@
     "claimType": "40",
     "isPaymentPlan": false,
     "status": "submitted",
-    "createdDate": "2025-02-25T00:06:28.462Z",
+    "createdDate": "2025-02-03T06:15:38.665Z",
     "createdBy": "lena.caldwell@evergreencare.com",
     "submissions": [
       {
