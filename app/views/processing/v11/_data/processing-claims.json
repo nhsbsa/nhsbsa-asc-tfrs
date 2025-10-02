@@ -1917,5 +1917,73 @@
         "processedBy": "Flossie Gleason"
       }
     ]
+  },
+  {
+    "claimID": "JOM-MT13-HD78-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "submitted",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "OMMT/T2/INT",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": null,
+        "evidenceOfPayment": null,
+        "completionDate": "2025-02-01T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
+  },
+  {
+    "claimID": "QOM-MT93-J8HD-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "submitted",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "OMMT/T2/EXT",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-12-16T03:36:53.621Z",
+        "evidenceOfPayment": ["rbc-sept-bankstatement.png", "training-invoice1.pdf"],
+        "completionDate": "2025-02-01T03:36:53.621Z",
+        "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": null,
+        "processedBy": null
+      }
+    ]
   }
 ]
