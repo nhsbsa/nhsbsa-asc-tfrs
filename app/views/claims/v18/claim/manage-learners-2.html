@@ -1,0 +1,373 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if claim.claimType == "60" %}
+  {% set pairClaim = claim.claimID | findPair(data.claims) %}
+{% elif claim.claimType == "40" %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair(data.claims) %}
+{% endif %}
+
+{% if claim.claimType == "60" %}  
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+  {% if (pairClaim and pairClaim.status == "queried") %}
+    {% set pairSubmission = pairClaim | getDraftSubmission %}
+  {% else %}
+    {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% else %}
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% endif %}
+
+
+
+{% set learner = submission.learnerID | findLearner(data.learners) %}
+
+
+{% block pageTitle %}
+  {% if (claim.claimType == "100") %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Claim: {{claim.claimID}} — {{serviceName}} — GOV.UK
+  {% else %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Combined claim: {{claim.claimID | removeClaimSuffix}} — {{serviceName}} — GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {% if (data.fromSearchResults) %}
+    <a href="advanced-search" class="govuk-back-link">Back</a>
+  {% elif (data.fromSearchId) %}
+    <a href="../manage-claims-home?fromSearchId" class="govuk-back-link">Back</a>
+  {% elif (claim.status != "not-yet-submitted") and (claim.status != "queried") and (pairClaim.status != "queried") and (pairClaim.status != "not-yet-submitted")%}
+    <a href="../manage-claims?statusID={{ data.statusID }}" class="govuk-back-link">Back</a>
+  {% endif %} 
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}
+      {% include "../_components/claim-sections/errorCatch.html" %}
+    {% endif %}
+    <h1 class="govuk-heading-xl">
+      {% if (claim.claimType == "100") %}
+        {{ claim.claimID }}
+      {% else %}
+        Combined claim: {{ claim.claimID | removeClaimSuffix }}
+      {% endif %}
+    </h1>
+
+    {% if (claim.claimType == "100") %}
+
+      <p class="govuk-body">This {{ claim.claimType | typeTag }} claim 
+        {% if (claim.status == "not-yet-submitted") %}
+          is {{ claim.status | statusTag(data.statuses) }}.
+        {% elif (claim.status == "queried") %}
+          {{ claim.status | statusTag(data.statuses) }}.
+        {% else %}
+          was {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.
+        {% endif %}</p>
+
+    {% elif (claim.claimType == "60") %}
+
+      <p class="govuk-body">The {{ "60" | typeTag }} part of this claim 
+        {% if (claim.status == "not-yet-submitted") %}
+          is {{ claim.status | statusTag(data.statuses) }}
+        {% elif (claim.status == "queried") %}
+          {{ claim.status | statusTag(data.statuses) }}.
+        {% else %}
+          was {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.
+        {% endif %}</p>
+
+      <p class="govuk-body">The {{ "40" | typeTag }} part of this claim 
+        {% if pairClaim != null %}
+
+          {% if (pairClaim.status == "not-yet-submitted") %}
+            is {{ pairClaim.status | statusTag(data.statuses) }}
+          {% elif (pairClaim.status == "queried") %}
+            {{ pairClaim.status | statusTag(data.statuses) }}.
+          {% else %}
+            was {{ pairClaim.status | statusTag(data.statuses) }} on {{ (pairClaim | statusDate) | govukDate }}.
+          {% endif %} 
+        
+        {% elif claim.status =="rejected" %}cannot therefore be submitted.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+
+    {% endif %}
+
+    {% include "../_components/claim-sections/claimAmount.html" %}
+
+    {% if not ((claim.claimType == "100" or claim.claimType == "60") and  claim.status == "not-yet-submitted") %}
+      {% include "../_components/claim-sections/alertSection.html" %}
+    {% endif %}
+
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+
+  <div class="govuk-grid-column-one-third">
+
+    <nav class="moj-side-navigation" aria-label="Side navigation">
+      <ul class="moj-side-navigation__list">
+        <li class="moj-side-navigation__item">
+          <a href="#1" aria-current="location">Training</a>
+        </li>
+
+        <li class="moj-side-navigation__item moj-side-navigation__item--active">
+          <a href="#2">Learners</a>
+        </li>
+
+        <li class="moj-side-navigation__item">
+          <a href="#3">Claim history</a>
+        </li>
+
+        <li class="moj-side-navigation__item">
+          <a href="#3">Previous submissions</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+  
+    <div class="govuk-grid-column-two-thirds">
+
+    <h2 class="govuk-heading-m" id="training">Learners</h2>
+
+    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+  Add another learner
+</button>
+
+    <div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Roy Kub<br>
+      <span class="govuk-body">AB 12 34 56 A</span>
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="#">Remove</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 October 2025
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p><a class="govuk-link" href="/public/images/{{ submission.evidenceOfCompletion }}" target="_blank">certificate.pdf  (opens in new tab)</a></p>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Mark Portnell<br>
+      <span class="govuk-body">AB 12 34 56 A</span>
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="#">Remove</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 October 2025
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p><a class="govuk-link" href="/public/images/{{ submission.evidenceOfCompletion }}" target="_blank">certificate.pdf  (opens in new tab)</a></p>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Hannah Williams<br>
+      <span class="govuk-body">AB 12 34 56 A</span>
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="#">Remove</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 October 2025
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p><a class="govuk-link" href="/public/images/{{ submission.evidenceOfCompletion }}" target="_blank">certificate.pdf  (opens in new tab)</a></p>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Sara Gulliver<br>
+      <span class="govuk-body">AB 12 34 56 A</span>
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="#">Remove</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 October 2025
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion">Add evidence</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Martine Gallie<br>
+      <span class="govuk-body">AB 12 34 56 A</span>
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="#">Remove</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 October 2025
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion">Add evidence</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

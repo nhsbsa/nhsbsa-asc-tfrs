@@ -1,0 +1,115 @@
+{% extends "../_layouts/claims-main.html" %}
+
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+{% if (claim.status == "approved") %}
+    {% set id = data.id | replaceSuffix %}
+    {% set claim = id | findClaim(data.claims, data.org.workplaceID) %}
+{% else %}
+    {% set id = data.id %}
+{% endif %}
+
+{% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+{% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+{% endif %}
+
+{% set date = submission.completionDate | splitISODate %}
+
+{% set learner = submission.learnerID | findLearner(data.learners) %}
+
+{% block pageTitle %}
+{% if data.submitError.dateValid != null and not data.submitError.dateValid %}Error: {% endif %}Add completion date — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.submitError.dateValid != null and not data.submitError.dateValid %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        {{ data.submitError | dateErrorMessage("Completion date","summary") }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <form action="../completion-date" method="post" class="form">
+            <div class="govuk-form-group {% if data.submitError.dateValid != null and not data.submitError.dateValid %} govuk-form-group--error {% endif %}">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+                        <h1 class="govuk-fieldset__heading">
+                            Add completion date for all learners
+                        </h1>
+                    </legend>
+                    <div class="govuk-warning-text">
+                        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                        <strong class="govuk-warning-text__text">
+                            <span class="govuk-visually-hidden">Warning</span>
+                            This will apply this completion date to every learner on this claim.
+                        </strong>
+                    </div>
+                    <div id="start-date-issued-hint" class="govuk-hint">
+                        For example, 12 5 2024
+                    </div>
+                    {% if data.submitError.dateValid != null and not data.submitError.dateValid %}
+                        {{data.submitError | dateErrorMessage("Completion date", "input") }}
+                    {% endif %}
+                    <div class="govuk-date-input" id="completion-date-started">
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="completion-date-started-day">
+                                    Day
+                                </label>
+                                <input
+                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat('day') ) %} govuk-input--error {% endif %}"
+                                    id="completion-date-started-day" name="completion-date-started-day" type="text"
+                                    value="{{ data['completion-date-started-day'] | default (date.day) }}"
+                                    inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="completion-date-started-month">
+                                    Month
+                                </label>
+                                <input
+                                    class="govuk-input govuk-date-input__input govuk-input--width-2 {% if (data.submitError | dateErrorFormat('month') ) %} govuk-input--error {% endif %}"
+                                    id="completion-date-started-month" name="completion-date-started-month" type="text"
+                                    value="{{ data['completion-date-started-month'] | default (date.month) }}"
+                                    inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-date-input__label" for="completion-date-started-year">
+                                    Year
+                                </label>
+                                <input
+                                    class="govuk-input govuk-date-input__input govuk-input--width-4 {% if (data.submitError | dateErrorFormat('year') ) %} govuk-input--error {% endif %}"
+                                    id="completion-date-started-year" name="completion-date-started-year" type="text"
+                                    value="{{ data['completion-date-started-year'] | default (date.year) }}"
+                                    inputmode="numeric">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Add to all learners
+                </button>
+                <a class="govuk-link govuk-link--no-visited-state"
+                    href="../cancel-handler">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
