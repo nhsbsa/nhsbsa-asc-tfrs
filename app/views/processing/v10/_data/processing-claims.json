@@ -654,6 +654,27 @@
     "submissions": [
       {
         "submitter": "lena.caldwell@evergreencare.com",
+        "submittedDate": "2025-01-02T07:53:32.066Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "NX 76 8F 30 D",
+        "startDate": "2024-12-12T09:54:13.322Z",
+        "costDate": "2024-10-18T14:35:08.968Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf"],
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "Insufficient evidence of payment",
+          "costPerLearner": null
+        },
+        "otherCheck": {
+          "outcome": "pass",
+          "note": null
+        },
+        "supportingNote": null,
+        "processedDate": "2025-01-03T06:15:38.665Z",
+        "processedBy": "Allan Connelly"
+      },
+      {
+        "submitter": "lena.caldwell@evergreencare.com",
         "submittedDate": "2025-01-04T07:53:32.066Z",
         "trainingCode": "501/1146/2",
         "learnerID": "NX 76 8F 30 D",
