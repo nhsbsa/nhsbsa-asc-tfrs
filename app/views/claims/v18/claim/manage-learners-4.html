@@ -19,65 +19,22 @@
 
       <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
 
-    <h2 class="govuk-heading-l" id="training">Learners (5)</h2>
+    <h2 class="govuk-heading-l" id="training">Learners (10)</h2>
 
+    <div class="govuk-button-group" style="align-items: center;">
     <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
   Add another learner
 </button>
-
-<p class="govuk-body"><a class="govuk-link" href="#">Add one completion date for all learners</a></p>
+<a class="govuk-link govuk-link--no-visited-state" href="delete-claim-confirmation">Add one completion date for all learners</a>
 
 </div>
 </div>
+</div>
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m" id="training">Incomplete (2)</h2>
-      </div>
-</div>
+      <h2 class="govuk-heading-m" id="training">Not complete (2)</h2>
 
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
-      <div class="govuk-summary-card">
-  <div class="govuk-summary-card__title-wrapper">
-    <h2 class="govuk-summary-card__title">
-      Braxton Schiller<br>
-      <span class="govuk-body">AB 12 34 56 A</span>
-    </h2>
-    <ul class="govuk-summary-card__actions">
-      <li class="govuk-summary-card__action">
-        <a class="govuk-link" href="#">Remove</a>
-      </li>
-    </ul>
-  </div>
-  <div class="govuk-summary-card__content">
-    <dl class="govuk-summary-list">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Completion date
-        </dt>
-        <dd class="govuk-summary-list__value">
-          12 October 2025
-        </dd>
-        <dd class="govuk-summary-list__actions">
-          <a class="govuk-link" href="#">Change</a>
-        </dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Evidence of completion
-        </dt>
-        <dd class="govuk-summary-list__value">
-          <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion">Add evidence</a>
-        </dd>
-      </div>
-    </dl>
-  </div>
-</div>
-
-
-    </div>
-
-    <div class="govuk-grid-column-one-half">
       <div class="govuk-summary-card">
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">
@@ -114,25 +71,249 @@
     </dl>
   </div>
 </div>
-    </div>
-
-
-</div>
-
-
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-heading-m" id="training">Completed (3)</h2>
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Braxton Schiller<br>
+      <span class="govuk-body">AB 12 34 56 A</span>
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="#">Remove</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 October 2025
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
       </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion">Add evidence</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
 </div>
 
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-m" id="training">Complete (8)</h2>
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Donny Berge<br>
+      <span class="govuk-body">AB 12 34 56 A</span>
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="#">Remove</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 October 2025
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p><a class="govuk-link" href="/public/images/{{ submission.evidenceOfCompletion }}" target="_blank">certificate.pdf  (opens in new tab)</a></p>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      John Fadel<br>
+      <span class="govuk-body">AB 12 34 56 A</span>
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="#">Remove</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 October 2025
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p><a class="govuk-link" href="/public/images/{{ submission.evidenceOfCompletion }}" target="_blank">certificate.pdf  (opens in new tab)</a></p>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Daisha Keeling<br>
+      <span class="govuk-body">AB 12 34 56 A</span>
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="#">Remove</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 October 2025
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p><a class="govuk-link" href="/public/images/{{ submission.evidenceOfCompletion }}" target="_blank">certificate.pdf  (opens in new tab)</a></p>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
 
     <div class="govuk-summary-card">
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">
       Roy Kub<br>
+      <span class="govuk-body">AB 12 34 56 A</span>
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="#">Remove</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 October 2025
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p><a class="govuk-link" href="/public/images/{{ submission.evidenceOfCompletion }}" target="_blank">certificate.pdf  (opens in new tab)</a></p>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Catalina Rau<br>
+      <span class="govuk-body">AB 12 34 56 A</span>
+    </h2>
+    <ul class="govuk-summary-card__actions">
+      <li class="govuk-summary-card__action">
+        <a class="govuk-link" href="#">Remove</a>
+      </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value">
+          12 October 2025
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p><a class="govuk-link" href="/public/images/{{ submission.evidenceOfCompletion }}" target="_blank">certificate.pdf  (opens in new tab)</a></p>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Change</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      Kathlyn Purdy<br>
       <span class="govuk-body">AB 12 34 56 A</span>
     </h2>
     <ul class="govuk-summary-card__actions">
@@ -211,12 +392,12 @@
 
 
 
-</div>
-    <div class="govuk-grid-column-one-half">
-      <div class="govuk-summary-card">
+
+
+<div class="govuk-summary-card">
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">
-      Kathlyn Purdy<br>
+      Adaline Wilkinson<br>
       <span class="govuk-body">AB 12 34 56 A</span>
     </h2>
     <ul class="govuk-summary-card__actions">
@@ -252,6 +433,9 @@
     </dl>
   </div>
 </div>
+
+
+
 </div>
 </div>
 

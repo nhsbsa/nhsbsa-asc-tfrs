@@ -69,9 +69,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <p class="govuk-body">
-      You need to provide evidence of {{ data.type }}{% if data.type == 'completion' %} for {{ learner.givenName
-      }} {{ learner.familyName }}{% endif %}.
-      {% if data.type == 'payment' %} You may upload up to 4 files.{% endif %} These can be in PDF, JPG, JPEG or PNG format.
+      {% if data.type == 'payment' %} You may upload up to 4 files.{% endif %} This can be in PDF, JPG, JPEG or PNG format.
     </p>
 
     <div id="upload"

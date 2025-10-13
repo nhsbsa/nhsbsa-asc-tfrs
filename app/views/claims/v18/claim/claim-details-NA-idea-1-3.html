@@ -78,7 +78,7 @@
         {% if (claim.status == "not-yet-submitted") %}
           is {{ claim.status | statusTag(data.statuses) }}.
         {% elif (claim.status == "queried") %}
-          {{ claim.status | statusTag(data.statuses) }}.
+          {{ claim.status | statusTag(data.statuses) }}
         {% else %}
           was {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.
         {% endif %}</p>
@@ -223,7 +223,7 @@
         Completion date
       </dt>
       <dd class="govuk-summary-list__value">
-          Completion dates added for all 5 learners
+          Date added for <strong>5</strong> learners
       </dd>
       <dd class="govuk-summary-list__actions">
       <a class="govuk-link govuk-link--no-visited-state" href="select-training">Change<span class="govuk-visually-hidden">
@@ -236,7 +236,7 @@
       Evidence of completion
     </dt>
     <dd class="govuk-summary-list__value ">
-          Evidence of completion added for all 5 learners
+          Evidence added for <strong>5</strong> learners
     </dd>
     <dd class="govuk-summary-list__actions">
       <a class="govuk-link govuk-link--no-visited-state" href="select-training">Change<span class="govuk-visually-hidden">
