@@ -56,8 +56,32 @@ Manage claims - {{serviceName}} — GOV.UK
   </div>
 {% endif %}
 
-
 <div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+      <div class="govuk-notification-banner__header">
+        <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+          Service update
+        </h2>
+      </div>
+      <div class="govuk-notification-banner__content">
+        <h3 class="govuk-notification-banner__heading">You can now edit claims and resubmit them</h3>
+          <p class="govuk-body">
+              Our claim processors are now able to return claims to you for editing. Once you have made the requested changes you can resubmit the claim for processing.
+              <a class="govuk-notification-banner__link" href="./guidance/edit-a-claim">Find out more</a>.
+          </p>
+
+           <h3 class="govuk-notification-banner__heading">Claim for Oliver McGowan Mandatory Training (OMMT)</h3>
+            <p class="govuk-body">
+              You can now use this service to claim for Oliver McGowan Mandatory Training (OMMT), including internally delivered courses.
+              <a class="govuk-notification-banner__link" href="./guidance/ommt">Find out more</a>.
+            </p>
+      </div>
+
+    </div>
+  </div>
+
   <div class="govuk-grid-column-full">
     {% if data.org.bankDetails == null or data.org.validGDL == false %}
     <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">

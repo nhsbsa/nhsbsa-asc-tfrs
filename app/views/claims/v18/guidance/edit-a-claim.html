@@ -1,0 +1,65 @@
+{% if data.tabLocation == "claims" %}
+    {% extends "../_layouts/claims-main.html" %}
+{% else %}
+    {% extends "../_layouts/main.html" %}
+{% endif %}
+
+{% block pageTitle %}
+Edit a claim — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">You can now edit claims and resubmit them</h1>
+
+        <p class="govuk-body">Our claim processors are now able to return claims to you for editing as well as approving and rejecting them. Once you have made the requested edits you can resubmit the claim for processing.</p>
+
+        <p class="govuk-body">
+            The aim is to:
+            <ul class="govuk-list govuk-list--bullet">
+                <li>make managing and submitting claims easier</li>
+                <li>save you time</li>
+                <li>reduce the number of rejected claims</li>
+            </ul>
+        </p>
+
+        <h2 class="govuk-heading-m">Changes to claim details page</h2>
+
+        <p class="govuk-body">
+            When you click onto a claim you will see that the 'Claim details’ page looks quite different. New features you may notice include:
+            <ul class="govuk-list govuk-list--bullet">
+                <li>an at-a-glance history of the claim</li>
+                <li>the ability to view details of previous submissions</li>
+                <li>a blue information box informing you of claim outcomes</li>
+            </ul>
+        </p>
+
+        <h2 class="govuk-heading-m">New claim status</h2>
+
+        <p class="govuk-body">Claims that are returned for editing will appear on the ‘Manage claims’ screen with a new <strong>Needs action</strong> label.</p>
+
+        <p class="govuk-body">
+            In the blue information box on <strong>Needs action</strong> claims you will be able to see:
+            <ul class="govuk-list govuk-list--bullet">
+                <li>the reason your claim has been returned</li>
+                <li>clear guidance on what you need to change before resubmitting it</li>
+            </ul>
+        </p>
+
+        <p class="govuk-body">Claims that cannot be edited and resubmitted — for example, because they are ineligible under this scheme — will be labelled <strong>Rejected</strong>.</p>
+
+        <p class="govuk-body">
+            If you have any questions you can contact us at 
+            <a class="govuk-link" href="mailto:ASClearninganddevelopmentsupport@nhsbsa.nhs.uk">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> 
+            or phone 0300 330 0522.
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}
