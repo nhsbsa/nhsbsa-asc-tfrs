@@ -494,42 +494,43 @@ function generateClaims(workplaceID) {
 }
 
 function transformClaims() {
-  const learners = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/learners.json', 'utf8'));
+  const learners = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/pre-set-learners.json', 'utf8'));
   const claims = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/pre-set-claims.json', 'utf8'));
 
-  return claims.map(claim => {
+  const transformedClaims = [];
+
+  for (let i = 0; i < claims.length; i++) {
+    const claim = claims[i];
+
+    // Copy the claim
     const newClaim = { ...claim };
-    
-    newClaim.submissions = claim.submissions.map(submission => {
+    newClaim.submissions = [];
+
+    for (let j = 0; j < claim.submissions.length; j++) {
+      const submission = claim.submissions[j];
+
+      // Copy submission
       const newSubmission = { ...submission };
 
-      // Select up to 7 learners from learners file
-      const selectedLearners = learners.slice(0, 7);
+       const numLearners = Math.floor(Math.random() * 7) + 1;
 
-      // Map them into the new learner structure
-      const newLearners = selectedLearners.map(learner => {
-        let outcome = "pass";
-        let note = null;
 
-        // Apply rules based on original claim's completion review
-        if (submission.evidenceOfCompletionReview?.outcome === "rejected") {
-          outcome = "rejected";
-          note = submission.evidenceOfCompletionReview.note || null;
-        } else if (submission.evidenceOfCompletionReview?.outcome === "queried") {
-          outcome = submission.evidenceOfCompletionReview.outcome; // keep queried for some
-          note = submission.evidenceOfCompletionReview.note || null;
-        }
+      // Take up to 7 learners from learners file
+      selectedLearners = getRandomLearners(learners,numLearners )
+      const newLearners = [];
+      for (let k = 0; k < learners.length && k < numLearners; k++) {
+        const learner = selectedLearners[k];
 
-        return {
-          learnerID: learner.learnerID,
+        newLearners.push({
+          learnerID: learner.id,
           completionDate: submission.completionDate || null,
           evidenceOfCompletion: submission.evidenceOfCompletion || null,
           evidenceOfCompletionReview: {
-            outcome,
-            note
+            outcome: submission.evidenceOfCompletionReview.outcome || null,
+            note: submission.evidenceOfCompletionReview.note || null
           }
-        };
-      });
+        });
+      }
 
       // Remove old learner fields
       delete newSubmission.learnerID;
@@ -537,13 +538,23 @@ function transformClaims() {
       delete newSubmission.evidenceOfCompletion;
       delete newSubmission.evidenceOfCompletionReview;
 
+      // Add new learners array
       newSubmission.learners = newLearners;
+      newSubmission.sharedCompletionDate = null
 
-      return newSubmission;
-    });
+      if (claim.status != "not-yet-submitted") {
+        newSubmission.sharedCompletionDate = false
+      }
 
-    return newClaim;
-  });
+      // Add transformed submission to claim
+      newClaim.submissions.push(newSubmission);
+    }
+
+    // Add transformed claim to final array
+    transformedClaims.push(newClaim);
+  }
+
+  return transformedClaims;
 }
 
 

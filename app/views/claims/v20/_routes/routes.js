@@ -3,7 +3,7 @@ const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
 const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode } = require('../_helpers/helpers.js');
-const { generateClaims } = require('../_helpers/generate-claims.js');
+const { generateClaims, transformClaims } = require('../_helpers/generate-claims.js');
 const { generateLearners } = require('../_helpers/generate-learners.js');
 
 
@@ -1019,6 +1019,11 @@ router.get('/generate', function (req, res) {
   // Write data to claims.json
   const jsonFilePath = './app/views/claims/v20/_data/claims.json';
   fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
+
+  // transform pre-set claims
+  /* const presetClaims = transformClaims()
+  const presetjsonFilePath = './app/views/claims/v20/_data/pre-set-claims.json';
+  fs.writeFileSync(presetjsonFilePath, JSON.stringify(presetClaims, null, 2)) */;
 
   res.redirect('../../')
 })
