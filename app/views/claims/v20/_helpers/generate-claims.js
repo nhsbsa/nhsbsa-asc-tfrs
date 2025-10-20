@@ -493,64 +493,74 @@ function generateClaims(workplaceID) {
 
 }
 
+function getRandomLearners(learners, num) {
+  const shuffled = [...learners].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, num);
+}
+
 function transformClaims() {
   const learners = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/pre-set-learners.json', 'utf8'));
   const claims = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/pre-set-claims.json', 'utf8'));
 
   const transformedClaims = [];
+  const claimLearnerMap = {}; // Stores learners by base claimID
 
   for (let i = 0; i < claims.length; i++) {
     const claim = claims[i];
-
-    // Copy the claim
     const newClaim = { ...claim };
     newClaim.submissions = [];
 
+    // Strip the final letter suffix (e.g., "GE2-UA5D-4K6C-A" -> "GE2-UA5D-4K6C")
+    const baseClaimID = claim.claimID.slice(0, -2); // assumes "-X" at the end of ID
+    let selectedLearners;
+
+    // 1️⃣ Reuse learners if this claim shares a base ID with another claim
+    if (claimLearnerMap[baseClaimID]) {
+      selectedLearners = claimLearnerMap[baseClaimID];
+    } else {
+      // 2️⃣ Otherwise, create random learners for this claim
+      const numLearners = Math.floor(Math.random() * 7) + 1;
+      selectedLearners = getRandomLearners(learners, numLearners);
+
+      // 3️⃣ Store them for other claims (40/60 pair) to reuse
+      claimLearnerMap[baseClaimID] = selectedLearners;
+    }
+
+    // 4️⃣ Build all submissions with the SAME learners
     for (let j = 0; j < claim.submissions.length; j++) {
       const submission = claim.submissions[j];
-
-      // Copy submission
       const newSubmission = { ...submission };
 
-       const numLearners = Math.floor(Math.random() * 7) + 1;
-
-
-      // Take up to 7 learners from learners file
-      selectedLearners = getRandomLearners(learners,numLearners )
       const newLearners = [];
-      for (let k = 0; k < learners.length && k < numLearners; k++) {
+      for (let k = 0; k < selectedLearners.length; k++) {
         const learner = selectedLearners[k];
 
         newLearners.push({
-          learnerID: learner.id,
+          learnerID: learner.id || learner.learnerID,
           completionDate: submission.completionDate || null,
           evidenceOfCompletion: submission.evidenceOfCompletion || null,
           evidenceOfCompletionReview: {
-            outcome: submission.evidenceOfCompletionReview.outcome || null,
-            note: submission.evidenceOfCompletionReview.note || null
+            outcome: submission.evidenceOfCompletionReview?.outcome || null,
+            note: submission.evidenceOfCompletionReview?.note || null
           }
         });
       }
 
-      // Remove old learner fields
+      // Remove old single-learner fields
       delete newSubmission.learnerID;
       delete newSubmission.completionDate;
       delete newSubmission.evidenceOfCompletion;
       delete newSubmission.evidenceOfCompletionReview;
 
-      // Add new learners array
+      // Add shared learners
       newSubmission.learners = newLearners;
-      newSubmission.sharedCompletionDate = null
 
-      if (claim.status != "not-yet-submitted") {
-        newSubmission.sharedCompletionDate = false
-      }
+      // Handle sharedCompletionDate flag
+      newSubmission.sharedCompletionDate = claim.status !== "not-yet-submitted" ? false : null;
 
-      // Add transformed submission to claim
       newClaim.submissions.push(newSubmission);
     }
 
-    // Add transformed claim to final array
     transformedClaims.push(newClaim);
   }
 

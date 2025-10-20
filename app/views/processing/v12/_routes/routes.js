@@ -1,7 +1,9 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
+const fs = require('fs');
 const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome } = require('../_helpers/helpers.js');
+const { transformClaims } = require('../_helpers/transform.js');
 
 router.use('/processing/v12/backstop', require('../_backstop/backstop-routes.js'));
 
@@ -565,5 +567,14 @@ router.get('/hideEditedNote', function (req, res) {
     }
   }
 });
+
+router.get('/transform', function (req, res) {
+  // transform pre-set claims
+  const presetClaims = transformClaims()
+  const presetjsonFilePath = './app/views/processing/v12/_data/processing-claims.json';
+  fs.writeFileSync(presetjsonFilePath, JSON.stringify(presetClaims, null, 2)) ;
+
+  res.redirect('../../')
+})
 
 module.exports = router
