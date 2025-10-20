@@ -4,15 +4,26 @@ const { generatecreatedByList } = require('../_helpers/helpers.js');
 
 function getRandomLearners(learnerList, x) {
   const copyLearners = [...learnerList];
+
   if (x > copyLearners.length) {
-    console.error("Error: Number of TU-eligible learners to select is greater than the total number of TU-eligible learners.");
-    return;
+    console.error(
+      "Error: Number of learners to select is greater than the total number of available learners."
+    );
+    return [];
   }
+
+  const selectedLearners = [];
+
+  for (let i = 0; i < x; i++) {
     const randomIndex = Math.floor(Math.random() * copyLearners.length);
     const learner = JSON.parse(JSON.stringify(copyLearners[randomIndex]));
-    copyLearners.splice(randomIndex, 1);
-  return learner;
+    selectedLearners.push(learner);
+    copyLearners.splice(randomIndex, 1); // remove the selected learner to avoid duplicates
+  }
+
+  return selectedLearners;
 }
+
 
 // Function to get a random role name based on distribution
 function getRandomStatus(statuses) {
@@ -59,7 +70,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
   const learners = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/learners.json', 'utf8'));
 
-  const learnerID =  getRandomLearners(learners, 1).id;
+  const submissionLearners =  getRandomLearners(learners, (Math.floor(Math.random() * 20)));
   const startDate = faker.date.between({ from: createdDate, to: new Date() });
   const trainingCode = trainingItem.code
 
@@ -72,27 +83,34 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       submittedDate: null,
   
       trainingCode,
-      learnerID, 
       startDate, 
   
       costDate: null,
       evidenceOfPayment: [],
-  
-      completionDate: null, 
-      evidenceOfCompletion: null,
-  
+
       evidenceOfPaymentReview: {
         outcome: null,
         note: null,
         paymentPlan: null,
         costPerLearner: null
       },
-      evidenceOfCompletionReview: {
-        outcome: null,
-        note: null
-      },
+
+      sharedCompletionDate: false,
+      learners: [],
       processedDate: null,
       processedBy: null
+    }
+
+    for (const learner of submissionLearners) {
+      const learnerItem = { learnerID: learner.id, 
+        completionDate: null, 
+        evidenceOfCompletion: null,
+        evidenceOfCompletionReview: {
+          outcome: null,
+          note: null
+        }
+      }
+      submission.learners.push(learnerItem)
     }
   
     if (['not-yet-submitted'].includes(status)) {
@@ -103,44 +121,44 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
   
       submission.costDate = faker.date.between({ from: policyDate, to: startDate });
       submission.evidenceOfPayment = ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"];
-  
-      submission.evidenceOfCompletion = "certificate1.pdf";
-      submission.completionDate = faker.date.between({ from: startDate, to: submission.submittedDate });
+
+      for (const learner of submission.learners) {
+        learner.evidenceOfCompletion = "certificate1.pdf";
+        learner.completionDate = faker.date.between({ from: startDate, to: submission.submittedDate });
+      }
   
       if (['rejected'].includes(status)) {
   
         submission.evidenceOfPaymentReview.outcome = "fail"
         submission.evidenceOfPaymentReview.note = "The evidence of payment show you paid for a course that is not eligible for funding through our service."
-  
-        submission.evidenceOfCompletionReview.outcome = "pass"
+        
+        for (const learner of submission.learners) {
+          learner.evidenceOfCompletionReview.outcome = "pass"
+        }
   
       } else if(['approved'].includes(status)) {
   
         submission.evidenceOfPaymentReview.outcome = "pass"
         submission.evidenceOfPaymentReview.costPerLearner = Math.floor(trainingItem.reimbursementAmount * 0.9)
-  
-        submission.evidenceOfCompletionReview.outcome = "pass"
+        
+        for (const learner of submission.learners) {
+          learner.evidenceOfCompletionReview.outcome = "pass"
+        }
   
   
       } else if(['queried'].includes(status)) {
         submission.evidenceOfPaymentReview.outcome = "queried"
         submission.evidenceOfPaymentReview.note = "The evidence of payment provided is not sufficient to prove you paid for the training."
 
-        submission.evidenceOfCompletionReview.outcome = "pass"
-
         const submission2 =  {
           submitter: null,
           submittedDate: null,
       
           trainingCode,
-          learnerID, 
           startDate, 
       
           costDate: submission.costDate,
           evidenceOfPayment: submission.evidenceOfPayment,
-      
-          completionDate: submission.completionDate, 
-          evidenceOfCompletion: submission.evidenceOfCompletion,
       
           evidenceOfPaymentReview: {
             outcome: null,
@@ -148,12 +166,16 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
             paymentPlan: null,
             costPerLearner: null
           },
-          evidenceOfCompletionReview: {
-            outcome: null,
-            note: null
-          },
+
+          sharedCompletionDate: false,
+          learners: [],
           processedDate: null,
           processedBy: null
+        }
+
+        for (const learner of submission.learners) {
+          submission2.learners.push(learner)
+          learner.evidenceOfCompletionReview.outcome = "pass"
         }
 
         submissions.push(submission2)
@@ -183,14 +205,10 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       submittedDate: submissionDateA,
   
       trainingCode,
-      learnerID, 
       startDate, 
   
       costDate: faker.date.between({ from: policyDate, to: startDate }),
       evidenceOfPayment: ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-  
-      completionDate: null, 
-      evidenceOfCompletion: null,
   
       evidenceOfPaymentReview: {
         outcome: "pass",
@@ -198,12 +216,23 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         paymentPlan: null,
         costPerLearner: Math.floor(trainingItem.reimbursementAmount * 0.9)
       },
-      evidenceOfCompletionReview: {
-        outcome: null,
-        note: null
-      },
+
+      sharedCompletionDate: null,
+      learners: [],
       processedDate: processedDateA,
       processedBy: faker.helpers.arrayElement(backOfficeStaff.processors)
+    }
+
+    for (const learner of submissionLearners) {
+      const learnerItem = { learnerID: learner.id, 
+        completionDate: null, 
+        evidenceOfCompletion: null,
+        evidenceOfCompletionReview: {
+          outcome: null,
+          note: null
+        }
+      }
+      submissionA.learners.push(learnerItem)
     }
 
     if (isPaymentPlan == true) {
@@ -220,14 +249,10 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       submittedDate: null,
   
       trainingCode,
-      learnerID, 
       startDate, 
   
       costDate: null,
       evidenceOfPayment: null,
-  
-      completionDate: null, 
-      evidenceOfCompletion: null,
   
       evidenceOfPaymentReview: {
         outcome: null,
@@ -235,26 +260,31 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         paymentPlan: null,
         costPerLearner: null
       },
-      evidenceOfCompletionReview: {
-        outcome: null,
-        note: null
-      },
+
+      sharedCompletionDate: false,
+      learners: [],
       processedDate: null,
       processedBy: null
     }
 
+    for (const learner of submissionA.learners) {
+      submissionB.learners.push(learner)
+    }
 
     if (['submitted', 'rejected', 'approved', "queried"].includes(status)) {
       submissionB.submitter = faker.helpers.arrayElement(users).email;
       submissionB.submittedDate = submissionDateB;
-  
-      submissionB.evidenceOfCompletion = "certificate1.pdf";
-      const completionDateB =  faker.date.between({ from: processedDateA, to: submissionDateB });
-      submissionB.completionDate = completionDateB
       
+      for (const learner of submissionB.learners) {
+      learner.evidenceOfCompletion = "certificate1.pdf";
+      const completionDateB =  faker.date.between({ from: processedDateA, to: submissionDateB });
+      learner.completionDate = completionDateB
+      }
+      
+      const latestDate = new Date(Math.max(...submissionB.learners.map(l => new Date(l.completionDate))));
 
       if (isPaymentPlan == true) {
-        submissionB.costDate = faker.date.between({ from: processedDateA , to: completionDateB })
+        submissionB.costDate = faker.date.between({ from: processedDateA , to: latestDate })
         submissionB.evidenceOfPayment = ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"]
 
         submissionB.evidenceOfPaymentReview.outcome = "pass"
@@ -266,19 +296,20 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
     if (['rejected'].includes(status)) {
 
-      submissionB.evidenceOfCompletionReview.outcome = "fail"
-      submissionB.evidenceOfCompletionReview.note = "The evidence of payment show you paid for a course that is not eligible for funding through our service."
-
+      for (const learner of submissionB.learners) {
+        learner.evidenceOfCompletionReview.outcome = "fail"
+        learner.evidenceOfCompletionReview.note = "The evidence of payment show you paid for a course that is not eligible for funding through our service."
+      }
 
 
     } else if(['approved'].includes(status)) {
 
-      submissionB.evidenceOfCompletionReview.outcome = "pass"
-      
+      for (const learner of submissionB.learners) {
+        learner.evidenceOfCompletionReview.outcome = "pass"
+      }
 
     } else if(['queried'].includes(status)) {
-      submissionB.evidenceOfCompletionReview.outcome = "queried"
-      submissionB.evidenceOfCompletionReview.note = "The completion date on the certificate does not match the completion date on the claim"
+
 
       //40 part draft
       const submissionB2 =  {
@@ -286,14 +317,11 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         submittedDate: null,
     
         trainingCode,
-        learnerID, 
         startDate, 
     
         costDate: null,
         evidenceOfPayment: null,
-    
-        completionDate: submissionB.completionDate, 
-        evidenceOfCompletion: submissionB.evidenceOfCompletion,
+
     
         evidenceOfPaymentReview: {
           outcome: null,
@@ -301,13 +329,27 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
           paymentPlan: null,
           costPerLearner: null
         },
-        evidenceOfCompletionReview: {
-          outcome: submissionB.evidenceOfCompletionReview.outcome,
-          note: submissionB.evidenceOfCompletionReview.note
-        },
+
+        sharedCompletionDate: false,
+        learners: [],
         processedDate: null,
         processedBy: null
       }
+
+      for (const learner of submissionB.learners) {
+
+        submissionB2.learners.push(learner)
+
+        const checkNumber = Math.random()
+        if (checkNumber < 0.5 ) {
+          learner.evidenceOfCompletionReview.outcome = "queried"
+          learner.evidenceOfCompletionReview.note = "The completion date on the certificate does not match the completion date on the claim"
+        } else if (checkNumber >0.5 && checkNumber < 0.75) {
+          learner.evidenceOfCompletionReview.outcome = "fail"
+          learner.evidenceOfCompletionReview.note = "The evidence of completion shows that this learner is inelgible for reimbursement."
+        }
+      }
+
 
       if (isPaymentPlan == true) {
         submissionB2.evidenceOfPaymentReview.outcome = "pass"
@@ -451,6 +493,59 @@ function generateClaims(workplaceID) {
 
 }
 
+function transformClaims() {
+  const learners = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/learners.json', 'utf8'));
+  const claims = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/pre-set-claims.json', 'utf8'));
 
-module.exports = { generateClaims }
+  return claims.map(claim => {
+    const newClaim = { ...claim };
+    
+    newClaim.submissions = claim.submissions.map(submission => {
+      const newSubmission = { ...submission };
+
+      // Select up to 7 learners from learners file
+      const selectedLearners = learners.slice(0, 7);
+
+      // Map them into the new learner structure
+      const newLearners = selectedLearners.map(learner => {
+        let outcome = "pass";
+        let note = null;
+
+        // Apply rules based on original claim's completion review
+        if (submission.evidenceOfCompletionReview?.outcome === "rejected") {
+          outcome = "rejected";
+          note = submission.evidenceOfCompletionReview.note || null;
+        } else if (submission.evidenceOfCompletionReview?.outcome === "queried") {
+          outcome = submission.evidenceOfCompletionReview.outcome; // keep queried for some
+          note = submission.evidenceOfCompletionReview.note || null;
+        }
+
+        return {
+          learnerID: learner.learnerID,
+          completionDate: submission.completionDate || null,
+          evidenceOfCompletion: submission.evidenceOfCompletion || null,
+          evidenceOfCompletionReview: {
+            outcome,
+            note
+          }
+        };
+      });
+
+      // Remove old learner fields
+      delete newSubmission.learnerID;
+      delete newSubmission.completionDate;
+      delete newSubmission.evidenceOfCompletion;
+      delete newSubmission.evidenceOfCompletionReview;
+
+      newSubmission.learners = newLearners;
+
+      return newSubmission;
+    });
+
+    return newClaim;
+  });
+}
+
+
+module.exports = { generateClaims, transformClaims }
 
