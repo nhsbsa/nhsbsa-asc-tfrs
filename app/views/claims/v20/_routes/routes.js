@@ -1021,9 +1021,9 @@ router.get('/generate', function (req, res) {
   fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
 
   // transform pre-set claims
-  const presetClaims = transformClaims()
-  const presetjsonFilePath = './app/views/claims/v20/_data/pre-set-claims.json';
-  fs.writeFileSync(presetjsonFilePath, JSON.stringify(presetClaims, null, 2));
+  //const presetClaims = transformClaims()
+  //const presetjsonFilePath = './app/views/claims/v20/_data/pre-set-claims.json';
+  //fs.writeFileSync(presetjsonFilePath, JSON.stringify(presetClaims, null, 2));
 
   res.redirect('../../')
 })
