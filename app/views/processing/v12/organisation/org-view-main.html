@@ -1,0 +1,134 @@
+{% extends "../_layouts/processing-main.html" %}
+{% set org = data.organisations | findOrg(data.orgID) %}
+{% set claims = data.orgID | findOrgClaims(data.claims) %}
+{% set SROStatusCheck = false %}
+{% set activeSRO = null %}
+
+{% for sro in org.signatory %}
+    {% if (sro.status == "active") %}
+        {% set SROStatusCheck = true %}
+        {% set activeSRO = sro %}
+    {% endif %}
+{% endfor %}
+
+{% if (not SROStatusCheck) %}
+  {% for sro in org.signatory %}
+    {% if (sro.status == "invited") %}
+      {% set activeSRO = sro %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <div class="moj-page-header-actions">
+          <div class="moj-page-header-actions__title">
+            <span class="govuk-caption-xl">Workplace ID: {{org.workplaceID}}</span>
+            <h1 class="govuk-heading-xl"> {{org.name}}</h1>
+          </div>
+        
+          <div class="moj-page-header-actions__actions">
+            <div class="moj-button-group moj-button-group--inline">
+               <p class="govuk-body">
+                <a href="../back-to-start-handler" class="govuk-link">Back to start</a>
+              </p>
+            </div>
+          </div>
+
+        </div>
+    </div>
+  </div>
+
+  {% if org.bankDetails == null %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-visually-hidden">Warning</span>
+            {% if (org.signatory.active.status == "active") %}
+            Organisation has not yet finished registration. The Senior Responsible Officer has created an account but needs to complete registration.
+            {% else %}
+            Organisation has not yet finished registration. The Senior Responsible Officer needs to create an account and complete registration.
+            {% endif %}
+          </strong>
+        </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <p class="govuk-body">
+        <span class="govuk-!-font-weight-bold">Address:</span>
+        <br>
+        {{ org.address[0] }}<br>  {{ org.address[1] }}<br> {{ org.address[2] }}       
+      </p>
+    </div>
+
+    <div class="govuk-grid-column-one-half">
+      <p class="govuk-body">
+        <span class="govuk-!-font-weight-bold">Senior Responsible Officer:</span>
+        <br>
+        {{ org.signatory.active.givenName }} {{ org.signatory.active.familyName }}
+        <br>
+        <a href="#">{{ org.signatory.active.email }}</a>
+      </p>
+    </div>
+  </div>
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <div class="govuk-service-navigation govuk-!-margin-bottom-2" data-module="govuk-service-navigation">
+        <div class="govuk-width-container service-nav-content">
+          <div class="govuk-service-navigation__container">
+            <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
+              <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden>
+                Menu
+              </button>
+              <ul class="govuk-service-navigation__list" id="navigation">
+                <li class="govuk-service-navigation__item {% if data.orgTab == 'users'%}govuk-service-navigation__item--active{%endif%}">
+                  <a class="govuk-service-navigation__link" href="../org-tab-handler/users">
+                    {% if data.orgTab == 'users'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Contacts{% if data.orgTab == 'users'%}</strong>{%endif%}
+                  </a>
+                </li>
+                <li class="govuk-service-navigation__item {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}govuk-service-navigation__item--active{%endif%}">
+                  <a class="govuk-service-navigation__link" {% if data.id %} href="../org-tab-handler/singleClaim"{% else%} href="../org-tab-handler/claims"{% endif%} {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="true"{%endif%}>
+                    {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Claims{% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}</strong>{%endif%}
+                  </a>
+                </li>
+                {# <li class="govuk-service-navigation__item {% if data.orgTab == 'orgNotes'%}govuk-service-navigation__item--active{%endif%}">
+                  <a class="govuk-service-navigation__link" href="../org-tab-handler/orgNotes">
+                    {% if data.orgTab == 'orgNotes'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}BSA notes{% if data.orgTab == 'orgNotes'%}</strong>{%endif%}
+                  </a>
+                </li> #}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full" id="tab-content">
+      <div class="tab-content">
+        {% if data.orgTab == "claims" %}
+            {% include "../_components/org-view/claims.html" %}
+          {% elif data.orgTab == "singleClaim" %}
+            {% include "../_components/claim-view/claim-overview.html" %}
+          {% elif data.orgTab == "users" %}
+            {% include "../_components/org-view/users.html" %}
+        {% elif data.orgTab == "bankDetails" %}
+            {% include "../_components/org-view/bank-details.html" %}
+        {% elif data.orgTab == "orgNotes" %}
+            {% include "../_components/org-view/org-notes.html" %}
+        {% endif %}
+      </div>
+    </div>
+</div>
+
+{% endblock %}
