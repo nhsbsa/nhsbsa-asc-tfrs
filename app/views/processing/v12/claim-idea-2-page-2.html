@@ -200,4 +200,27 @@
             </form>
     </div>
 
+    <div class="note-composer">
+ <div class="composer-header">
+     <span>New note</span>
+     <button class="close-btn">&times;</button>
+ </div>
+ <form action="../add-org-note" method="post" class="form">
+ <div class="composer-body">
+   <div id="more-detail-hint" class="govuk-hint">
+     This note will be kept on record so you and other BSA staff can refer to it in future. When notes relate to claims, please include the <strong>claim reference numbers</strong>.
+   </div>
+   <textarea
+   class="govuk-textarea govuk-js-character-count"
+   id="notes" name="notes" rows="15" aria-describedby="notes-hint"
+   aria-describedby="notes-hint"></textarea>
+ </div>
+ <div class="composer-footer">
+   <button type="submit" class="govuk-button govuk-!-margin-bottom-3" data-module="govuk-button">
+     Add to organisation
+ </button>
+ </div>
+</form>
+</div>
+
 {% endblock %}
