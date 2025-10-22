@@ -1,0 +1,203 @@
+{% extends "./_layouts/processing-main-new-nav.html" %}
+
+
+{% block content %}
+{% set paymentCompleted = claim.evidenceOfPaymentreview.pass != null %}
+{% set paymentRejectte = claim.evidenceOfPaymentreview.note %}
+{% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
+{% set completionNote = claim.evidenceOfCompletionreview.note %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <a href="../back-all-claims" class="govuk-back-link">Back to all claims</a>
+
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-3">Claim: WK4-92DN-8SJD-A</h2>
+        <p class="govuk-body govuk-!-margin-bottom-6">{{ "submitted" | processorstatusTag }}</p>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+
+    <h3 class="govuk-heading-s">100 claim</h3>
+    <p class="govuk-body">This claim has been submitted <strong>3</strong> times.</p>
+    <a href="../view-previous-submissions-handler?view=100" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">View previous submissions</a>
+
+
+    <h3 class="govuk-heading-m" id="payment">Submitter</h3>
+    <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                <span class="govuk-visually-hidden">Submitter</span>Name
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Jasper Holloway
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                <span class="govuk-visually-hidden">Submitter</span>Email
+            </dt>
+            <dd class="govuk-summary-list__value">
+                <a class="govuk-link" href="mailto:example@example.com">jasper.holloway@evergreencare.com</a>
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Submitted on
+            </dt>
+            <dd class="govuk-summary-list__value">
+                    12 April 2025
+            </dd>
+        </div>
+
+    </dl>
+
+    <h3 class="govuk-heading-m" id="payment">Training</h3>
+    <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+            Qualification number
+            </dt>
+            <dd class="govuk-summary-list__value">
+                603/1935/5
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Title
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Understanding Autism
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Level and type
+            </dt>
+            <dd class="govuk-summary-list__value">
+                Level 3 Certificate
+            </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Awarding organisation
+            </dt>
+            <dd class="govuk-summary-list__value">
+                TQUK
+            </dd>
+        </div>
+
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Payment date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    23 September 2024
+                </dd>
+            </div>
+
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+                21 October 2024
+            </dd>
+        </div>
+    </dl>
+
+
+    </div>
+
+    <div class="govuk-grid-column-one-half">
+
+            <form action="../claim-process-handler" method="post" novalidate>
+                <h3 class="govuk-heading-m">Review of evidence of completion</h3>
+                <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                    {% for i in range(0, 10) %}
+  <div class="govuk-accordion__section">
+    <div class="govuk-accordion__section-header">
+      <h2 class="govuk-accordion__section-heading">
+        <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
+          John Smth
+        </span>
+      </h2>
+    </div>
+    <div id="accordion-default-content-1" class="govuk-accordion__section-content">
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Learner name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    John Smith<br>
+                    AB 12 13 14 C
+                </dd>
+            </div>
+                    <div class="govuk-summary-list__row ">
+                        <dt class="govuk-summary-list__key">
+                            Evidence of completion <br>
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            <p><a class="govuk-link" href="/public/images/bankStatement1.pdf" target="_blank">certificate.pdf (opens in new tab)</a></p>
+                        </dd>
+                    </div>
+                        <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Completion date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    23 September 2024
+                </dd>
+            </div>
+                </dl>
+       <div class="govuk-form-group" id="payment-review">
+                    <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                            Does the evidence of completion for John Smith meet the required criteria?
+                        </legend>
+                        <div class="govuk-radios" data-module="govuk-radios">
+                            <div class="govuk-radios__item">
+            
+                                <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="approve" {% if claim.claimType != '40' %} data-aria-controls="processing__conditional" {% endif %} {% if data.payment=='approve' %}checked{% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="paymentYes">
+                                    Yes
+                                </label>
+            
+                            </div>
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="paymentQueried" name="payment" type="radio" value="queried" data-aria-controls="conditional-payment-queried" {% if data.payment=='queried' %}checked{% endif %}>
+                                <label class="govuk-label govuk-radios__label" for="paymentQueried">
+                                    No – action required
+                                </label>
+                            </div>            
+                            <div class="govuk-radios__item">
+                                <input class="govuk-radios__input" id="paymentReject" name="payment" type="radio" value="reject"
+                                    data-aria-controls="conditional-payment-reject" {% if data.payment=='reject' %}checked{% endif
+                                    %}>
+                                <label class="govuk-label govuk-radios__label" for="paymentReject">
+                                    No – reject
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+            
+            
+                
+                <div class="govuk-button-group">
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Continue
+                    </button>
+                </div>
+            </form>
+    </div>
+
+{% endblock %}

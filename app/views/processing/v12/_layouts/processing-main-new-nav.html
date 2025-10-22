@@ -1,0 +1,64 @@
+{% extends "./main.html" %}
+{% set govukRebrand = true %}
+
+{% block header %}
+  {{ govukHeader({
+    rebrand: true, 
+    serviceName: serviceName,
+    navigation: [
+      {
+        href: "#",
+        text: "Sign out"
+      }
+      ]
+    }) 
+  }}
+<div class="govuk-width-container">
+  <div class="govuk-phase-banner">
+    <p class="govuk-phase-banner__content">
+      <strong class="govuk-tag govuk-phase-banner__content__tag">
+        Prototype
+      </strong>
+      <span class="govuk-phase-banner__text">
+        This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      </span>
+    </p>
+  </div>
+</div>
+  <div class="app-organisation-actions govuk-width-container" aria-label="Organisation switcher">
+    <div class="app-organisation-actions__title">
+      Evergreen Care home <span class="app-organisation-caption">(B12345678)</span>
+      </div>
+      <!-- <div class="app-organisation-actions__actions">
+          <a class="govuk-link app-organisation-actions__link" href="/organisations">Change organisation</a>
+      </div> -->
+  </div>
+  <div class="govuk-service-navigation" data-module="govuk-service-navigation">
+    <div class="govuk-width-container">
+      <div class="govuk-service-navigation__container">
+        <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
+          <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden>
+            Menu
+          </button>
+          <ul class="govuk-service-navigation__list" id="navigation">
+            <li class="govuk-service-navigation__item">
+              <a class="govuk-service-navigation__link" href="/claims/v20/manage-claims-home?tabLocation=claims&submitError=">
+                <strong class="govuk-service-navigation__active-fallback">Contacts</strong>
+              </a>
+            </li>
+            <li class="govuk-service-navigation__item govuk-service-navigation__item--active">
+              <a class="govuk-service-navigation__link" href="/claims/v20/org-admin/manage-team?tabLocation=users" aria-current="true">
+                <strong class="govuk-service-navigation__active-fallback">Claims</strong>
+              </a>
+            </li>
+            <li class="govuk-service-navigation__item">
+              <a class="govuk-service-navigation__link" href="/claims/v20/org-admin/bank-details?tabLocation=bankDetails">
+                <strong class="govuk-service-navigation__active-fallback">Organisation details</strong>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+{% endblock %}
