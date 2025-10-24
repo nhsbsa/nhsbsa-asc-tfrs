@@ -52,6 +52,10 @@ router.post('/add-training', function (req, res) {
     if (isDuplicateClaim && isDuplicateClaim.check) {
         res.redirect('claim/duplication?dupeID=' + isDuplicateClaim.id + '&matchType=' + isDuplicateClaim.matchType)
     } else {
+      if (!(["OMMT/T1/INT","OMMT/T2/INT"].includes(submission.trainingCode)) && (["OMMT/T1/INT","OMMT/T2/INT"].includes(newTrainingChoice.code)) ) {
+        submission.evidenceOfPayment = null
+        submission.costDate = null
+      }
       submission.trainingCode = newTrainingChoice.code
       delete req.session.data['training-input'];
       delete req.session.data['trainingSelection'];
