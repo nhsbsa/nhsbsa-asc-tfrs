@@ -1,0 +1,85 @@
+<h3 class="govuk-heading-m">Completed review of evidence</h3>
+
+{% if (claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT) %}
+        <h4 class="govuk-heading-s">Does the evidence of payment meet the required criteria?</h4>
+
+        {% if submission.evidenceOfPaymentReview.outcome == "pass" %}
+            <p class="govuk-body">Yes</p>
+        {% elif submission.evidenceOfPaymentReview.outcome == "fail" %}
+            <p class="govuk-body">No – reject</br>{{submission.evidenceOfPaymentReview.note}}</p>
+        {% else %}
+            <p class="govuk-body">No – action required</br>{{submission.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+
+        {% if claim.claimType != "60" %}
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        {% endif %}
+{% endif %}
+
+
+
+{% if claim.claimType != "60" %}
+        <h4 class="govuk-heading-s">Does the evidence of completion meet the required criteria?</h4>
+
+        {% if submission.evidenceOfCompletionReview.outcome == "pass" %}
+            <p class="govuk-body">Yes</p>
+        {% elif submission.evidenceOfCompletionReview.outcome == "fail" %}
+            <p class="govuk-body">No – reject</br>{{submission.evidenceOfCompletionReview.note}}</p>
+        {% else %}
+            <p class="govuk-body">No – action required</br>{{submission.evidenceOfCompletionReview.note}}</p>
+        {% endif %}
+
+{% endif %}
+
+
+        {% if (claim.status == "approved") %}
+
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+        {% if (claim.claimType == "100") %}
+
+        <p class="govuk-body">The amount to be reimbursed for this 100 claim is <strong>{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner)) | currency(trailingZeros=false) }}</strong>.</p>
+        {% if not (submission.trainingCode | isInternalOMMT) %}
+            <p class="govuk-body">This is whichever is the lower of the:</p>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>maximum reimbursement amount for training paid for {% if (claim.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %} (£{{training.reimbursementAmount}})</li>
+                <li>cost per learner (what the organisation actually paid) (£{{submission.evidenceOfPaymentReview.costPerLearner}})</li>
+            </ul>
+        {% endif %}
+
+    {% elif (claim.claimType == "60") %}
+        
+        <h4 class="govuk-heading-s">Was the training paid for in full?</h4>
+        {% if submission.evidenceOfPaymentReview.paymentPlan == "yes" %}
+            <p class="govuk-body">No</p>
+        {% elif submission.evidenceOfPaymentReview.paymentPlan == "no" %}
+            <p class="govuk-body">Yes</p>
+        {% endif %}
+
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+        <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £{{ claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner) / 0.6 }}.</p>
+        <p class="govuk-body">This is whichever is the lower of the:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>maximum reimbursement amount for training paid for {% if (claim.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %} (£{{training.reimbursementAmount}})</li>
+            <li>cost per learner (what the organisation actually paid) (£{{ submission.evidenceOfPaymentReview.costPerLearner }})</li>
+        </ul>
+        <p class="govuk-body">For this 60 part of the claim the organisation will get 60% of the total amount, which is <strong>£{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner)) }}</strong>.</p>
+        <p class="govuk-body">When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner) / 0.6 * 0.4)}}).</p>
+
+    {% elif (claim.claimType == "40") %}
+        {% set pairClaim = data.id | matchPairClaim(data.claims) %}
+        {% set pairSubmisison = pairClaim | getMostRelevantSubmission %}
+
+        <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim | reimbursement(pairSubmisison.evidenceOfPaymentReview.costPerLearner) / 0.4) }}.</p>
+        <p class="govuk-body">This is whichever is the lower of the:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>maximum reimbursement amount for training paid for {% if (claim.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %} (£{{training.reimbursementAmount}})</li>
+            <li>cost per learner (what the organisation actually paid) (£{{pairSubmisison.evidenceOfPaymentReview.costPerLearner}})</li>
+        </ul>
+        <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of the total amount, which is <strong>£{{ (claim | reimbursement(pairSubmission.evidenceOfPaymentReview.costPerLearner))}}</strong>.</p>
+        <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement(pairSubmisison.evidenceOfPaymentReview.costPerLearner) / 0.4 * 0.6 )}}.</p>
+    {% endif %}
+
+
+        {% endif %}

@@ -2,10 +2,10 @@ module.exports = {
     "versionHistory": {
         "claimsCurrent": "v19",
         "claimVersions": [
-             {
+            {
                 "versionNo": "19",
                 "phase": "Beta",
-                "status": ["design"],
+                "status": ["dev"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-19/",
                 "tested": null,
                 "created": null,
@@ -15,7 +15,7 @@ module.exports = {
             {
                 "versionNo": "18",
                 "phase": "Beta",
-                "status": ["design"],
+                "status": ["retired"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-18/",
                 "tested": null,
                 "created": null,
@@ -25,7 +25,7 @@ module.exports = {
             {
                 "versionNo": "17",
                 "phase": "Beta",
-                "status": ["dev"],
+                "status": ["retired"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-17/",
                 "tested": null,
                 "created": null,
@@ -370,12 +370,22 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v11",
+        "processingCurrent": "v12",
         "processingVersions": [
              {
-                "versionNo": "11",
+                "versionNo": "12",
                 "phase": "Beta",
                 "status": ["design"],
+                "designHistory":"https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-12/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },
+            {
+                "versionNo": "11",
+                "phase": "Beta",
+                "status": ["dev"],
                 "designHistory":"https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-11/",
                 "tested": null,
                 "created": null,
@@ -385,7 +395,7 @@ module.exports = {
             {
                 "versionNo": "10",
                 "phase": "Beta",
-                "status": ["dev"],
+                "status": ["retired"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-10/",
                 "tested": null,
                 "created": null,
