@@ -13,20 +13,16 @@
         <a href="../back-all-claims" class="govuk-back-link">Back to all claims</a>
 
         <h2 class="govuk-heading-l govuk-!-margin-bottom-3">Claim: WK4-92DN-8SJD-A</h2>
-        <p class="govuk-body govuk-!-margin-bottom-6">{{ "submitted" | processorstatusTag }}</p>
+        <p class="govuk-body">{{ "submitted" | processorstatusTag }}</p>
+        <p class="govuk-body">This claim has been submitted <strong>3</strong> times.</p>
+        <a href="../view-previous-submissions-handler?view=100" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">View previous submissions</a>
     </div>
 </div>
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-
-    <h3 class="govuk-heading-s">100 claim</h3>
-    <p class="govuk-body">This claim has been submitted <strong>3</strong> times.</p>
-    <a href="../view-previous-submissions-handler?view=100" role="button" draggable="false" class="govuk-button govuk-button--secondary" data-module="govuk-button">View previous submissions</a>
-
-
-    <h3 class="govuk-heading-m" id="payment">Submitter</h3>
-    <dl class="govuk-summary-list">
+    <div class="govuk-grid-column-one-half govuk-!-padding-right-5">
+<h4 class="govuk-heading-m">Submitter</h4>
+<dl class="govuk-summary-list">
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
                 <span class="govuk-visually-hidden">Submitter</span>Name
@@ -51,10 +47,21 @@
                     12 April 2025
             </dd>
         </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Organisation address (at time of submission)
+            </dt>
+            <dd class="govuk-summary-list__value">
+                    4 Streety Street<br>
+                    Towny town<br>
+                    TO1 WN1
+            </dd>
+        </div>
 
     </dl>
 
-    <h3 class="govuk-heading-m" id="payment">Training</h3>
+    <h4 class="govuk-heading-m">Training</h4>
+
     <dl class="govuk-summary-list">
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
@@ -88,7 +95,19 @@
                 TQUK
             </dd>
         </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Maximum reimbursement amount
+            </dt>
+            <dd class="govuk-summary-list__value">
+                £420
+            </dd>
+        </div>
+    </dl>
 
+    <h4 class="govuk-heading-m">Dates</h4>
+
+    <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Payment date
@@ -106,30 +125,55 @@
                 21 October 2024
             </dd>
         </div>
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Completion dates
+            </dt>
+            <dd class="govuk-summary-list__value">
+                30 October 2024 - 21 November 2025
+            </dd>
+        </div>
     </dl>
-    </div>
 
-<div class="email-composer">
-<div class="email-header">
-<span>Processing claim: WK4-92DN-8SJD-A</span>
-<button class="minimise-button" onclick="toggleMinimise()">Minimise</button>
-</div>
-<div class="email-body">
-    <span class="govuk-caption-m">Learner 1 of 10</span>
-        <h3 class="govuk-heading-m">Review of evidence of completion</h3>
-        <dl class="govuk-summary-list">
+    <h4 class="govuk-heading-m">Learners</h4>
+
+    <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Learner name
+                    Names
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    John Smith<br>
-                    AB 12 13 14 C
+                    
+                    <ul class="govuk-list">
+                        <li>(6 learners)</li>
+  <li><a class="govuk-link" href="#">Mark Portnell</a></li>
+  <li><a class="govuk-link" href="#">John Smith</a></li>
+  <li><a class="govuk-link" href="#">Hannnah Williams</a></li>
+  <li><a class="govuk-link" href="#">Martine Gallie</a></li>
+  <li><a class="govuk-link" href="#">Kelly Faux</a></li>
+  <li><a class="govuk-link" href="#">Jane Doe</a></li>
+</ul>
                 </dd>
             </div>
+    </dl>
+
+
+    </div>
+    <div class="govuk-grid-column-one-half govuk-!-padding-left-5">
+        <span class="govuk-caption-m">Review completion</span>
+        <h3 class="govuk-heading-m">Learner 2 of 6</h3>
+        <div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+       John Smith<br>
+        <span style="font-weight:400">AB 12 13 14 C</span>
+    </h2>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
                     <div class="govuk-summary-list__row ">
                         <dt class="govuk-summary-list__key">
-                            Evidence of completion <br>
+                            Evidence <br>
                         </dt>
                         <dd class="govuk-summary-list__value">
                             <p><a class="govuk-link" href="/public/images/bankStatement1.pdf" target="_blank">certificate.pdf (opens in new tab)</a></p>
@@ -144,6 +188,11 @@
                 </dd>
             </div>
                 </dl>
+  </div>
+</div>
+
+
+        
 <div class="govuk-form-group" id="payment-review">
                     <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
                         <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
@@ -175,26 +224,67 @@
                         </div>
                     </fieldset>
                 </div>
+  <button type="submit" class="govuk-button" data-module="govuk-button">
+    Save and continue
+  </button>
+    </div>
+    </div>
+
+<nav class="side-nav" id="sideNav">
+<div class="side-nav-header">
+Claim progress
+<button class="minimise-btn" id="minimiseBtn">&#x276E;</button>
 </div>
-<div class="email-footer">
-<button class="govuk-button">Continue</button>
-</div>
-</div>
+<nav class="moj-side-navigation" aria-label="Side navigation">   
+<h4 class="moj-side-navigation__title">Review payment</h4>
+<ul class="moj-side-navigation__list govuk-!-margin-bottom-1">
+<li class="moj-side-navigation__item moj-side-navigation__item-with-icon">
+<a href="#1" aria-current="location" class="moj-side-navigation__link">Evidence of payment</a>
+<span class="moj-badge moj-badge--green">Done</span>
+</li>
+</ul>
+<h4 class="moj-side-navigation__title">Review completion</h4>
+<ul class="moj-side-navigation__list">
+<li class="moj-side-navigation__item moj-side-navigation__item-with-icon">
+<a href="#3" class="moj-side-navigation__link">Mark Portnell</a>
+<span class="moj-badge moj-badge--green">Done</span>
+</li>
+<li class="moj-side-navigation__item moj-side-navigation__item--active moj-side-navigation__item-with-icon">
+<a href="#2" class="moj-side-navigation__link">John Smith</a>
+<span class="moj-badge moj-badge--blue">In progress</span>
+</li>
+<li class="moj-side-navigation__item">
+<a href="#3">Hannah Williams</a>
+</li>
+<li class="moj-side-navigation__item">
+<a href="#3">Martine Gallie</a>
+</li>
+<li class="moj-side-navigation__item">
+<a href="#3">Kelly Faux</a>
+</li>
+<li class="moj-side-navigation__item">
+<a href="#3">Jane Doe</a>
+</li>
+</ul>
+</nav>
+</nav>
 
 {% endblock %}
 
 {% block pageScripts %}
 <script>
-function toggleMinimise() {
-const body = document.querySelector('.email-body');
-const footer = document.querySelector('.email-footer');
-if (body.style.display === 'none') {
-body.style.display = 'flex';
-footer.style.display = 'block';
-} else {
-body.style.display = 'none';
-footer.style.display = 'none';
-}
-}
+const nav = document.getElementById('sideNav');
+const minimiseBtn = document.getElementById('minimiseBtn');
+const minimisedTab = document.getElementById('minimisedTab');
+
+
+minimiseBtn.addEventListener('click', () => {
+nav.classList.add('minimised');
+});
+
+
+minimisedTab.addEventListener('click', () => {
+nav.classList.remove('minimised');
+});
 </script>
 {% endblock %}
