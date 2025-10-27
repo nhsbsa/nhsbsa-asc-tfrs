@@ -1,0 +1,187 @@
+<form action="../claim-payment-handler" method="post" novalidate>
+    <span class="govuk-caption-m">Review payment</span>
+    <h3 class="govuk-heading-m">Evidence of payment</h3>
+
+    {% if (claim.isPaymentPlan and claim.claimType == "40") %} 
+    <p class="govuk-body">The organisation has only provided evidence of payment for 60% of the training cost.</p>
+    {% endif %}
+
+    <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">
+            Evidence
+            </h2>
+        </div>
+        <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dd class="govuk-summary-list__value">
+                    {% for payment in submission.evidenceOfPayment %}
+                        <p class="govuk-body"><a class="govuk-link" href="/public/images/{{payment}}" target="_blank">{{payment}} (opens in new tab)</a></p>
+                    {% endfor %}
+                </dd>
+            </div>
+            </dl>
+        </div>
+     </div>
+
+    <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}" id="payment-review">
+        <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                Does the evidence of payment meet the required criteria?
+            </legend>
+            {% if (claim.isPaymentPlan and claim.claimType == "40") %} 
+            <div id="payment-hint" class="govuk-hint">
+                You need to check the organisation has paid the remaining 40%
+            </div>
+            {% endif %}
+            {% if data.paymentResponseIncomplete %}
+                <p id="payment-review-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Select an option for evidence of payment
+                </p>
+            {% endif %}
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+
+                    <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="approve" {% if claim.claimType != '40' %} data-aria-controls="processing__conditional" {% endif %} {% if data.payment=='approve' %}checked{% endif %}>
+                    <label class="govuk-label govuk-radios__label" for="paymentYes">
+                        Yes
+                    </label>
+
+                </div>
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="paymentQueried" name="payment" type="radio" value="queried" data-aria-controls="conditional-payment-queried" {% if data.payment=='queried' %}checked{% endif %}>
+                    <label class="govuk-label govuk-radios__label" for="paymentQueried">
+                        No – action required
+                    </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="paymentReject" name="payment" type="radio" value="reject"
+                        data-aria-controls="conditional-payment-reject" {% if data.payment=='reject' %}checked{% endif
+                        %}>
+                    <label class="govuk-label govuk-radios__label" for="paymentReject">
+                        No – reject
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    {% if (claim.claimType != "40") %}
+        <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="processing__conditional">
+            {% if (claim.claimType == "60") %}
+                <div class="govuk-form-group {% if data.paidInFullResponseIncomplete %}govuk-form-group--error {% endif %}">
+                    <fieldset class="govuk-fieldset">
+                        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                            Has the organisation paid for this training in full?
+                        </legend>
+                        {% if data.paidInFullResponseIncomplete %}
+                            <p id="payment-plan-error" class="govuk-error-message">
+                                <span class="govuk-visually-hidden">Error:</span>Select yes if the organisation has paid in full
+                            </p>
+                        {% endif %}
+                        <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="paidInFullResponseYes" name="paidInFullResponse" type="radio" value="yes" {% if data.paidInFullResponse=='yes'%}checked{% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="paidInFullResponseYes">
+                            Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="paidInFullResponseNo" name="paidInFullResponse" type="radio" value="no" {% if data.paidInFullResponse=='no'%}checked{% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="paidInFullResponseNo">
+                            No
+                            </label>
+                        </div>
+                        </div>
+                    </fieldset>
+                </div>
+            {% endif %}
+            <div class="govuk-form-group {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %}govuk-form-group--error {% endif %}">
+
+                <label class="govuk-label govuk-label--s" for="paymentReimbursementAmount">
+                    What is the full cost per learner?
+                </label>
+                <div id="payment-note-hint" class="govuk-hint">
+                    <p class="govuk-hint">Enter the full cost of this training for a single learner (even if the organisation has only paid 60% so far).</p>
+                    <p class="govuk-hint">For instance, if the organisation will be paying a total of £100 for 4 learners then the cost per learner is £25.</p>
+                    <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is £{{training.reimbursementAmount}}.</strong></p>
+                    <p class="govuk-hint">This is the maximum amount for training paid for {% if (submission.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %}.</p>
+                    <p class="govuk-hint">The organisation will not get back more than they actually
+                        paid.</p>
+                </div>
+
+
+                {% if data.paymentReimbursementAmountIncomplete %}
+                <p id="cost-per-learner-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Enter cost per learner
+                </p>
+                {% endif %}
+                {% if data.paymentReimbursementAmountInvalid %}
+                <p id="cost-per-learner-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Cost per learner must be a number
+                </p>
+                {% endif %}
+
+                <div class="govuk-input__wrapper" id="cost-per-learner">
+                    <div class="govuk-input__prefix" aria-hidden="true">£</div>
+                    <input
+                        class="govuk-input govuk-input--width-5 {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %} govuk-input--error {% endif %}"
+                        id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text"
+                        value="{{ data.paymentReimbursementAmount | default ('') }}" aria-describedby="payment-note-hint">
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-payment-queried" data-maxlength="1000">
+        <div class="govuk-form-group govuk-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                What action does the organisation need to take?
+            </legend>
+            <div id="payment-queried-note-hint" class="govuk-hint">
+                This note tells the organisation what edits they need to make before they resubmit this claim
+            </div>
+            {% if data.paymentQueriedNoteIncomplete %}
+            <p id="payment-queried-note-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span>Enter action required for evidence of payment 
+            </p>
+            {% endif %}
+            <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-textarea--error{% endif %}" id="paymentQueriedNote" name="paymentQueriedNote" rows="21" aria-describedby="payment-queried-note-info note-hint">{{ data.paymentQueriedNote | default ('') }}</textarea>
+            <div id="payment-queried-note-info" class="govuk-hint govuk-character-count__message">
+                You can enter up to 1000 characters
+            </div>
+        </div>
+    </div>
+
+    <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-payment-reject" data-maxlength="1000">
+        <div class="govuk-form-group govuk-character-count {% if data.paymentRejectNoteIncomplete %}govuk-form-group--error{% endif %}" data-module="govuk-character-count">
+             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                Why has this claim been rejected?
+            </legend>
+            <div id="payment-reject-note-hint" class="govuk-hint">
+                This note tells the organisation why their claim has been rejected and therefore cannot be edited and resubmitted
+            </div>
+            {% if data.paymentRejectNoteIncomplete %}
+            <p id="payment-reject-note-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for evidence of payment 
+            </p>
+            {% endif %}
+            <textarea
+                class="govuk-textarea govuk-js-character-count {% if data.paymentRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
+                id="paymentRejectNote" name="paymentRejectNote" rows="21"
+                aria-describedby="payment-no-note-info note-hint">{{ data.paymentRejectNote | default ('') }}</textarea>
+            <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
+                You can enter up to 1000 characters
+            </div>
+        </div>
+    </div>
+
+    <div class="govuk-button-group"  style="align-items: center;">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Save and continue
+        </button>
+
+        <a class="govuk-link govuk-link--no-visited-state" href="#">Save and finish later</a>
+    </div>
+</form>

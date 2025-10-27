@@ -6,19 +6,19 @@
 
 {% set pairClaim = data.id | matchPairClaim(data.claims) %}
 
-{% if (data.processClaimStep == "claim") %}
+{% if (data.claimScreen == "claim") %}
 
     {% include "./claim.html" %}
 
-{% elif (data.processClaimStep == "inProgress") %}
+{% elif (data.claimScreen == "inProgress") %}
 
     {% include "./claim-process.html" %}
 
-{% elif (data.processClaimStep == "previousSubmissions") %}
+{% elif (data.claimScreen == "previousSubmissions") %}
 
     {% include "./claim-previous-submissions.html" %}
 
-{% elif (data.processClaimStep == "confirmOutcome") %}
+{% elif (data.claimScreen == "confirmOutcome") %}
 
     {% include "./confirm-outcome.html" %}
 

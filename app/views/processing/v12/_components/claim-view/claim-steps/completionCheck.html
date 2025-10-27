@@ -1,0 +1,129 @@
+{% set learnerClaimData = submission.learners[(data.learnerCount-1)] %} 
+{% set learnerInfo = learnerClaimData.learnerID | findLearner %}
+
+<form action="../claim-process-handler" method="post" novalidate>
+    <span class="govuk-caption-m">Review Completion</span>
+    <h3 class="govuk-heading-m">Learner {{data.learnerCount}} of {{submission.learners | length}}</h3>
+    <div class="govuk-summary-card">
+        <div class="govuk-summary-card__title-wrapper">
+            <h2 class="govuk-summary-card__title">
+                {{learnerInfo.givenName}} {{learnerInfo.familyName}}
+
+            </h2>
+        </div>
+        <div class="govuk-summary-card__content">
+            <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Evidence
+                </dt>
+                <dd class="govuk-summary-list__value">
+                <a class="govuk-link" href="/public/images/{{learnerClaimData.evidenceOfCompletion}}" rel="noreferrer noopener" target="_blank">{{learnerClaimData.evidenceOfCompletion}} (opens in new tab)</a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Completion date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                {{ learnerClaimData.completionDate | govukDate }}
+                </dd>
+            </div>
+            </dl>
+        </div>
+    </div>
+
+    <div class="govuk-form-group {% if data.completionResponseIncomplete %}govuk-form-group--error {% endif %}" id="completion-review">
+        <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                Does the evidence of completion for {{learnerInfo.givenName}} {{learnerInfo.familyName}} meet the required criteria?
+            </legend>
+            {% if data.completionResponseIncomplete %}
+            <p id="completion-review-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span>Select an option for evidence of completion 
+            </p>
+            {% endif %}
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input " id="completionYes" name="completion" type="radio"
+                        value="approve" {% if data.completion=='approve' %}checked{% endif %}>
+                    <label class="govuk-label govuk-radios__label" for="completionYes">
+                        Yes
+                    </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="completionQueried" name="completion" type="radio"
+                        value="queried" data-aria-controls="conditional-queried-notes" {% if data.completion=='queried'
+                        %}checked{% endif %}>
+                    <label class="govuk-label govuk-radios__label" for="completionQueried">
+                        No – action required
+                    </label>
+                </div>
+                
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="completionReject" name="completion" type="radio"
+                        value="reject" data-aria-controls="conditional-reject-notes" {% if data.completion=='reject'
+                        %}checked{% endif %}>
+                    <label class="govuk-label govuk-radios__label" for="completionReject">
+                        No – reject
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-queried-notes">
+        <div class="govuk-form-group govuk-character-count {% if data.completionQueriedNoteIncomplete %}govuk-form-group--error {% endif %}"
+            data-module="govuk-character-count" data-maxlength="1000">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                What action does the organisation need to take?
+            </legend>
+            <div id="completionQueriedNote-hint" class="govuk-hint">
+                This note tells the organisation what edits they need to make before they resubmit this claim
+            </div>
+            {% if data.completionQueriedNoteIncomplete %}
+            <p id="completion-queried-note-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> Enter action required for evidence of completion
+            </p>
+            {% endif %}
+            <textarea
+                class="govuk-textarea govuk-js-character-count {% if data.completionQueriedNoteIncomplete %}govuk-textarea--error{% endif %}"
+                id="completionQueriedNote" name="completionQueriedNote" rows="21"
+                aria-describedby="completionNote-info completionNote-hint">{{ data.completionQueriedNote | default ('') }}</textarea>
+            <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
+                You can enter up to 1000 characters
+            </div>
+        </div>
+    </div>
+    <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-reject-notes">
+        <div class="govuk-form-group govuk-character-count {% if data.completionRejectNoteIncomplete %}govuk-form-group--error {% endif %}"
+            data-module="govuk-character-count" data-maxlength="1000">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                Why has this claim been rejected?
+            </legend>
+            <div id="completionRejectNote-hint" class="govuk-hint">
+                This note tells the organisation why their claim has been rejected and therefore cannot  be edited and resubmitted
+            </div>
+            {% if data.completionRejectNoteIncomplete %}
+            <p id="completion-reject-note-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for evidence of completion
+            </p>
+            {% endif %}
+            <textarea
+                class="govuk-textarea govuk-js-character-count {% if data.completionRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
+                id="completionRejectNote" name="completionRejectNote" rows="21"
+                aria-describedby="completionNote-info completionNote-hint">{{ data.completionRejectNote | default ('') }}</textarea>
+            <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
+                You can enter up to 1000 characters
+            </div>
+        </div>
+    </div>
+
+    <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Save and continue
+        </button>
+        <a class="govuk-link govuk-link--no-visited-state" href="#">Save and finish later</a>
+    </div>
+</form>

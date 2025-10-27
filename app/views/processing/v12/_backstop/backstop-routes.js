@@ -194,7 +194,7 @@ router.get('/claim', function (req, res) {
         tabLocation: "claims",
         orgTab: "singleClaim",
         orgID: "B02944934",
-        processClaimStep: "inProgress"
+        claimScreen: "inProgress"
     };
 
     switch (status) {
@@ -391,7 +391,7 @@ router.get('/outcome', function (req, res) {
         tabLocation: "claims",
         orgTab: "singleClaim",
         orgID: "B02944934",
-        processClaimStep: "confirmOutcome"
+        claimScreen: "confirmOutcome"
     };
 
     switch (type) {
@@ -478,7 +478,7 @@ router.get('/submissions', function (req, res) {
         tabLocation: "claims",
         orgTab: "singleClaim",
         orgID: "B02944934",
-        processClaimStep: "previousSubmissions"
+        claimScreen: "previousSubmissions"
     };
 
     switch (type) {

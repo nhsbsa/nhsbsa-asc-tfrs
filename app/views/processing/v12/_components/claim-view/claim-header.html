@@ -91,7 +91,7 @@
 
         <h2 class="govuk-heading-s">{{claim.claimType | claimTypeText (false)}}</h2>
 
-        {% if claim.status == "submitted" and data.processClaimStep != "inProgress" %}
+        {% if claim.status == "submitted" and data.claimScreen != "inProgress" and (data.userType == "processor" or data.userType == "leadProcessor") %}
                 <a href="../claim-process-start-handler" class="govuk-button" role="button" draggable="false" data-module="govuk-button">Process claim</a>
         {% endif %}
         
