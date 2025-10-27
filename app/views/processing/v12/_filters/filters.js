@@ -362,3 +362,19 @@ addFilter('claimTypeText', function (claimType, submissionCheck) {
             return "40 part"
         }
 })
+
+addFilter('orderLearners', function (learnerIds) {
+    const learners = loadJSONFromFile('learners.json', dataPath)
+    const learnerIdSet = new Set(learnerIds.map(l => l.learnerID));
+    const matchedLearners = learners.filter(l => learnerIdSet.has(l.id));
+    const sortedLearners = matchedLearners.sort((a, b) =>
+    a.givenName.localeCompare(b.givenName, undefined, { sensitivity: "base" })
+    );
+    return sortedLearners
+})
+
+addFilter('groupLearners', function (learners) {
+    // const learners = loadJSONFromFile('learners.json', dataPath)
+
+    return learners
+})

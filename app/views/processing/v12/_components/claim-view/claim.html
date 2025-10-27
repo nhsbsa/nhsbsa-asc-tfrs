@@ -12,6 +12,80 @@
 
     </div>
     <div class="govuk-grid-column-one-half">
+       <div style="padding-top: 10px;">
+    {% if ((claim.claimType != "40") or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT) %}
+        <h3 class="govuk-heading-m">
+            Evidence of payment
+        </h3>
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title">
+                Evidence
+                </h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dd class="govuk-summary-list__value">
+                    {% for evidence in submission.evidenceOfPayment %}
+                        {% set isPayment = true %}
+                        <ul class="govuk-list">
+                            <li>
+                                <a class="govuk-link" href="/public/images/{{evidence}}">{{evidence}} (opens in new tab)</a>
+                            </li>
+                        </ul>
+                    {% endfor %}
+                    </dd>
+                </div>
+                </dl>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if (claim.claimType != "60") %}
+        <h3 class="govuk-heading-m">
+            Evidence of completion
+        </h3>
+        <dl class="govuk-summary-list">
+            {% set evidence = submission.evidenceOfCompletion %}
+            {% set isPayment = false %}
+            {% include "./evidence/file-section.html" %}
+        </dl>
+
+        {% for learner in submission.learners | groupLearners %}
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title">
+                {{ (learner.learnerID | findLearner).givenName}} 
+                {{ (learner.learnerID | findLearner).familyName}}
+                </br> {{learner.learnerID}}
+                </h2>
+            </div>
+
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                        Evidence
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ learner.evidenceOfCompletion }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Completion date
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ learner.completionDate }}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+</div>
         
     </div>
 </div>
