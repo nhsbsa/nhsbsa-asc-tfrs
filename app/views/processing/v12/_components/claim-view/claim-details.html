@@ -106,28 +106,33 @@
     {% if claim.claimType != "60" %}
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-                Completion dates
+                {% if submission.learners.length == 1 %}
+                    Completion date
+                {% else %}
+                    Completion dates
+                {% endif %}
             </dt>
             <dd class="govuk-summary-list__value">
-                {{ submission.completionDate | govukDate }}
+                {{ submission.learners | dateRange }}
             </dd>
         </div>
     {% endif %}
 </dl>
 
-<h3 class="govuk-heading-m" id="payment">Learners</h3>
+<h3 class="govuk-heading-m" id="payment">Learner{%if submission.learners.length > 1%}s{%endif%}</h3>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            <span class="govuk-visually-hidden">Learner</span>Names
+            <span class="govuk-visually-hidden">Learner</span>Name{%if submission.learners.length > 1%}s{%endif%}
         </dt>
         <dd class="govuk-summary-list__value">
-            {% for learner in submission.learners | orderLearners %}
+            <p class="govuk-body">({{submission.learners.length}} learner{%if submission.learners.length > 1%}s{%endif%})</p>
+            {% for learner in submission.learners | sortLearners %}
                 <ul class="govuk-list">
-                            <li>
-                                <a class="govuk-link" href="#">{{learner.givenName}} {{learner.familyName}}</a>
-                            </li>
-                        </ul>
+                    <li>
+                        <a class="govuk-link" href="#">{{learner.givenName}} {{learner.familyName}}</a>
+                    </li>
+                </ul>
             {% endfor %}
         </dd>
     </div>

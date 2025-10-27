@@ -1,0 +1,58 @@
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title" id="#{{learner.givenName}}">
+        {{ learner.givenName}} 
+        {{ learner.familyName}}
+        </br> {{learner.learnerID}}
+        </h2>
+        {% if claim.status != "submitted"%}
+            <ul class="govuk-summary-card__actions">
+                <li class="govuk-summary-card__action">
+                    {{ learner.evidenceOfCompletionReview.outcome | learnerProcessedTag }}
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Evidence
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    <a class="govuk-link" href="/public/images/{{learner.evidenceOfCompletion}}">{{ learner.evidenceOfCompletion }} (opens in new tab)</a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Completion date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ learner.completionDate | govukDate }}
+                </dd>
+            </div>
+        </dl>
+        {% if claim.status != "submitted"%}
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Criteria met?
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {% if learner.evidenceOfCompletionReview.outcome == "queried"%}
+                            <strong>No - needs action</strong></br>
+                            {{learner.evidenceOfCompletionReview.note}}
+                        {% elif learner.evidenceOfCompletionReview.outcome == "fail"%}
+                            <strong>No - reject</strong></br>
+                            {{learner.evidenceOfCompletionReview.note}}
+                        {% else %}
+                            Yes
+                        {% endif %}
+                    </dd>
+                </div>
+            </dl>
+        {% endif %}
+    </div>
+</div>

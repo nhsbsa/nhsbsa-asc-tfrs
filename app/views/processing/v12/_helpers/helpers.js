@@ -341,5 +341,11 @@ function isInternalOMMT(courseCode) {
   return validValues.includes(courseCode);
 }
 
+function sortAlphabetically(learners) {
+  let sorted = []
+
+  return sorted;
+}
+
 
 module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT }
