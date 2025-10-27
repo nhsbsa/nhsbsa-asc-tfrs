@@ -6,7 +6,11 @@
 
 {% set pairClaim = data.id | matchPairClaim(data.claims) %}
 
-{% if (data.processClaimStep == "inProgress") or (data.processClaimStep == "claimProcessed")   %}
+{% if (data.processClaimStep == "claim") %}
+
+    {% include "./claim.html" %}
+
+{% elif (data.processClaimStep == "inProgress") %}
 
     {% include "./claim-process.html" %}
 

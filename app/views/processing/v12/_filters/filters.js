@@ -347,3 +347,18 @@ addFilter('qualificationCheck', function(trainingCode, value) {
         return "Not applicable"
     }
 })
+
+addFilter('claimTypeText', function (claimType, submissionCheck) {
+    switch(claimType) {
+        case "100":
+            if (submissionCheck) {
+                return "claim"
+            } else {
+                return "100 claim"
+            }
+        case "60":
+            return "60 part"
+        case "40":
+            return "40 part"
+        }
+})
