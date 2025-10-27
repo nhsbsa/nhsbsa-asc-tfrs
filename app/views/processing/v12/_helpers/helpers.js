@@ -263,20 +263,22 @@ function sortSubmissionsForTable(submissions) {
     });
 }
 
-function checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paidInFullResponse) {
+function checkClaimProcess(claim, section, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paidInFullResponse) {
 
     let errorParamaters = ""
-    const submission = getMostRelevantSubmission(claim)
     const validAmount = validNumberCheck(paymentReimbursementAmount)
 
-    if ((claim.claimType == "60" || claim.claimType == "100") && !(isInternalOMMT(submission.trainingCode))) {
-        if (paymentResponse == null) {
+    if (section == "payment") {
+      if (paymentResponse == null) {
         errorParamaters += "&paymentResponseIncomplete=true";
         } else if (paymentResponse == "approve") {
-          if (paymentReimbursementAmount == null || paymentReimbursementAmount == ""){
+          if ((paymentReimbursementAmount == null || paymentReimbursementAmount == "") && claim.claimType != "40"){
             errorParamaters += "&paymentReimbursementAmountIncomplete=true";
-          } else if (paymentResponse == "approve" && (!validAmount)) {
+          } else if (paymentResponse == "approve" && (!validAmount) && claim.claimType != "40") {
             errorParamaters += "&paymentReimbursementAmountInvalid=true";
+          }
+          if (claim.claimType == "60" && paidInFullResponse == null) {
+            errorParamaters += "&paidInFullResponseIncomplete=true";
           }
         } else if (paymentResponse == "reject" && (paymentRejectNote == null || paymentRejectNote == "")) {
         errorParamaters += "&paymentRejectNoteIncomplete=true";
@@ -284,22 +286,8 @@ function checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, p
         errorParamaters += "&paymentQueriedNoteIncomplete=true";
         }
     }
-    if (claim.claimType == "60" && paymentResponse == "approve" && paidInFullResponse == null) {
-      errorParamaters += "&paidInFullResponseIncomplete=true";
-    }
 
-
-    if (claim.claimType == "40" && claim.isPaymentPlan) {
-        if (paymentResponse == null) {
-        errorParamaters += "&paymentResponseIncomplete=true";
-        } else if (paymentResponse == "reject" && (paymentRejectNote == null || paymentRejectNote == "")) {
-        errorParamaters += "&paymentRejectNoteIncomplete=true";
-        } else if (paymentResponse == "queried" && (paymentQueriedNote == null || paymentQueriedNote == "")) {
-        errorParamaters += "&paymentQueriedNoteIncomplete=true";
-        }
-    }
-
-    if (claim.claimType == "40" || claim.claimType == "100") {
+    if (section == "completion") {
         if (completionResponse == null) {
         errorParamaters += "&completionResponseIncomplete=true";
         } else if (completionResponse == "reject" && (completionRejectNote == null || completionRejectNote == "")) {

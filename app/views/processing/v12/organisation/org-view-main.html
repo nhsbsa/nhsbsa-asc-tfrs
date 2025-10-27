@@ -39,7 +39,6 @@
   {% endif %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full" id="tab-content">
-      <div class="tab-content">
         {% if data.orgTab == "claims" %}
             {% include "../_components/org-view/claims.html" %}
           {% elif data.orgTab == "singleClaim" %}
@@ -51,7 +50,6 @@
         {% elif data.orgTab == "orgDetails" %}
             {% include "../_components/org-view/org-details.html" %}
         {% endif %}
-      </div>
     </div>
 </div>
 
