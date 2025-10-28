@@ -29,44 +29,6 @@ function loadData(req) {
     return console.log('data updated')
 }
 
-function updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentQueryNote, paymentRejectNote, completionResponse, completionQueryNote, completionRejectNote, paidInFullResponse) {
-    let submission = getMostRelevantSubmission(claim)    
-    if (paymentResponse == "approve") {
-            submission.evidenceOfPaymentReview.outcome = "pass"
-            if (claim.claimType == "100" || claim.claimType == "60") {
-                submission.evidenceOfPaymentReview.costPerLearner = paymentReimbursementAmount
-                if (paidInFullResponse == "yes") {
-                    claim.isPaymentPlan = false
-                    submission.evidenceOfPaymentReview.paymentPlan = "no"
-                } else if (paidInFullResponse == "no") {
-                    claim.isPaymentPlan = true
-                    submission.evidenceOfPaymentReview.paymentPlan = "yes"
-                }
-            }
-        } else if (paymentResponse == "reject") {
-            submission.evidenceOfPaymentReview.outcome = "fail"
-            submission.evidenceOfPaymentReview.note = paymentRejectNote
-        } else if (paymentResponse == "queried") {
-            submission.evidenceOfPaymentReview.outcome = "queried"
-            submission.evidenceOfPaymentReview.note = paymentQueryNote
-    }
-
-        if (completionResponse == "approve") {
-            submission.evidenceOfCompletionReview.outcome = "pass"
-            if (isInternalOMMT(submission.trainingCode)){
-              submission.evidenceOfPaymentReview.outcome = "pass"
-              const training = findCourseByCode(submission.trainingCode)
-              submission.evidenceOfPaymentReview.costPerLearner = training.reimbursementAmount
-            }
-        } else if (completionResponse == "reject") {
-            submission.evidenceOfCompletionReview.outcome = "fail"
-            submission.evidenceOfCompletionReview.note = completionRejectNote
-        } else if (completionResponse == "queried") {
-            submission.evidenceOfCompletionReview.outcome = "queried"
-            submission.evidenceOfCompletionReview.note = completionQueryNote
-        }
-}
-
 function formatDate(isoDate) {
     const date = new Date(isoDate);
     const day = date.getDate();
@@ -300,32 +262,50 @@ function checkClaimProcess(claim, section, paymentResponse, paymentReimbursement
     return errorParamaters
 }
 
-function determineOutcome(claim, paymentResponse, completionResponse) {
+function getOverallStatus(data) {
+  const outcomes = data.map(d => d.evidenceOfCompletionReview.outcome);
+  console.log(outcomes)
+  const allPass = outcomes.every(o => o == "pass");
+  const allFail = outcomes.every(o => o == "fail");
+  const anyQueried = outcomes.includes("queried");
+
+  if (anyQueried) return "queried";
+  if (allPass) return "approve";
+  if (allFail) return "reject";
+
+  return "queried"; // mixed outcomes or incomplete
+}
+
+
+function determineOutcome(claim) {
     let result = null
-    let submission = getMostRelevantSubmission(claim)  
+    let submission = getMostRelevantSubmission(claim)
+    const paymentResponse = submission.evidenceOfPaymentReview.outcome
+    const learners = submission.learners
+    console.log(learners)
     
     if (claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) {
-      if (paymentResponse == "reject" || completionResponse == "reject") {
+      if (paymentResponse == "fail" || getOverallStatus(learners) == "reject") {
         result = "reject";
-      } else if (paymentResponse == "queried" || completionResponse == "queried") {
+      } else if (paymentResponse == "queried" || getOverallStatus(learners) == "queried") {
         result = "queried";
-      } else if (paymentResponse == "approve" && completionResponse == "approve") {
+      } else if (paymentResponse == "pass" && getOverallStatus(learners) == "approve") {
         result = "approve";
       }
     } else if (claim.claimType == "60") {
-      if (paymentResponse == "reject") {
+      if (paymentResponse == "fail") {
         result = "reject";
       } else if (paymentResponse == "queried") {
         result = "queried";
-      } else if (paymentResponse == "approve") {
+      } else if (paymentResponse == "pass") {
         result = "approve";
       }
     } else if (claim.claimType == "40" || (claim.claimType == "100" && (isInternalOMMT(submission.trainingCode)))) {
-      if (completionResponse == "reject") {
+      if (getOverallStatus(learners) == "reject") {
         result = "reject";
-      } else if (completionResponse == "queried") {
+      } else if (getOverallStatus(learners) == "queried") {
         result = "queried";
-      } else if (completionResponse == "approve") {
+      } else if (getOverallStatus(learners) == "approve") {
         result = "approve";
       }
     }
@@ -342,4 +322,4 @@ function isInternalOMMT(courseCode) {
 }
 
 
-module.exports = { loadJSONFromFile, loadData, updateClaim, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT }
+module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus }

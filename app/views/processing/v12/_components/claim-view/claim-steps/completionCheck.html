@@ -1,7 +1,7 @@
 {% set learnerClaimData = submission.learners[(data.learnerCount-1)] %} 
 {% set learnerInfo = learnerClaimData.learnerID | findLearner %}
 
-<form action="../claim-process-handler" method="post" novalidate>
+<form action="../claim-completion-handler" method="post" novalidate>
     <span class="govuk-caption-m">Review Completion</span>
     <h3 class="govuk-heading-m">Learner {{data.learnerCount}} of {{submission.learners | length}}</h3>
     <div class="govuk-summary-card">
@@ -45,8 +45,7 @@
             {% endif %}
             <div class="govuk-radios" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                    <input class="govuk-radios__input " id="completionYes" name="completion" type="radio"
-                        value="approve" {% if data.completion=='approve' %}checked{% endif %}>
+                    <input class="govuk-radios__input " id="completionYes" name="completion" type="radio" value="approve" {% if (learnerClaimData.evidenceOfCompletionReview.outcome=='pass' and data.completion != 'null') or data.completion =='approve' %}checked{% endif %}>
                     <label class="govuk-label govuk-radios__label" for="completionYes">
                         Yes
                     </label>
@@ -54,8 +53,7 @@
 
                 <div class="govuk-radios__item">
                     <input class="govuk-radios__input" id="completionQueried" name="completion" type="radio"
-                        value="queried" data-aria-controls="conditional-queried-notes" {% if data.completion=='queried'
-                        %}checked{% endif %}>
+                        value="queried" data-aria-controls="conditional-queried-notes" {% if (learnerClaimData.evidenceOfCompletionReview.outcome=='queried' and data.completion != 'null') or data.completion =='queried' %}checked{% endif %}>
                     <label class="govuk-label govuk-radios__label" for="completionQueried">
                         No – action required
                     </label>
@@ -64,8 +62,7 @@
 
                 <div class="govuk-radios__item">
                     <input class="govuk-radios__input" id="completionReject" name="completion" type="radio"
-                        value="reject" data-aria-controls="conditional-reject-notes" {% if data.completion=='reject'
-                        %}checked{% endif %}>
+                        value="reject" data-aria-controls="conditional-reject-notes" {% if (learnerClaimData.evidenceOfCompletionReview.outcome=='fail' and data.completion != 'null') or data.completion =='reject' %}checked{% endif %}>
                     <label class="govuk-label govuk-radios__label" for="completionReject">
                         No – reject
                     </label>
@@ -90,7 +87,7 @@
             <textarea
                 class="govuk-textarea govuk-js-character-count {% if data.completionQueriedNoteIncomplete %}govuk-textarea--error{% endif %}"
                 id="completionQueriedNote" name="completionQueriedNote" rows="21"
-                aria-describedby="completionNote-info completionNote-hint">{{ data.completionQueriedNote | default ('') }}</textarea>
+                aria-describedby="completionNote-info completionNote-hint">{% if learnerClaimData.evidenceOfCompletionReview.outcome=='queried' %}{{ data.completionQueriedNote or learnerClaimData.evidenceOfCompletionReview.note or '' }}{% else %}{{ data.completionQueriedNote or '' }}{% endif %}</textarea>
             <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
                 You can enter up to 1000 characters
             </div>
@@ -113,7 +110,7 @@
             <textarea
                 class="govuk-textarea govuk-js-character-count {% if data.completionRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
                 id="completionRejectNote" name="completionRejectNote" rows="21"
-                aria-describedby="completionNote-info completionNote-hint">{{ data.completionRejectNote | default ('') }}</textarea>
+                aria-describedby="completionNote-info completionNote-hint">{% if learnerClaimData.evidenceOfCompletionReview.outcome=='fail' %}{{ data.completionRejectNote or learnerClaimData.evidenceOfCompletionReview.note or '' }}{% else %}{{ data.completionRejectNote or '' }}{% endif %}</textarea>
             <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
                 You can enter up to 1000 characters
             </div>
@@ -124,6 +121,6 @@
         <button type="submit" class="govuk-button" data-module="govuk-button">
             Save and continue
         </button>
-        <a class="govuk-link govuk-link--no-visited-state" href="#">Save and finish later</a>
+        <a class="govuk-link govuk-link--no-visited-state" href="../save-progress">Save and finish later</a>
     </div>
 </form>

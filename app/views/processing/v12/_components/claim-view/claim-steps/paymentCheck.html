@@ -43,14 +43,14 @@
             <div class="govuk-radios" data-module="govuk-radios">
                 <div class="govuk-radios__item">
 
-                    <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="approve" {% if claim.claimType != '40' %} data-aria-controls="processing__conditional" {% endif %} {% if data.payment=='approve' %}checked{% endif %}>
+                    <input class="govuk-radios__input" id="paymentYes" name="payment" type="radio" value="approve" {% if claim.claimType != '40' %} data-aria-controls="processing__conditional" {% endif %} {% if (submission.evidenceOfPaymentReview.outcome=='pass' and data.payment != 'null') or data.payment =='approve' %}checked{% endif %}>
                     <label class="govuk-label govuk-radios__label" for="paymentYes">
                         Yes
                     </label>
 
                 </div>
                 <div class="govuk-radios__item">
-                    <input class="govuk-radios__input" id="paymentQueried" name="payment" type="radio" value="queried" data-aria-controls="conditional-payment-queried" {% if data.payment=='queried' %}checked{% endif %}>
+                    <input class="govuk-radios__input" id="paymentQueried" name="payment" type="radio" value="queried" data-aria-controls="conditional-payment-queried" {% if (submission.evidenceOfPaymentReview.outcome=='queried' and data.payment != 'null') or data.payment =='queried' %}checked{% endif %}>
                     <label class="govuk-label govuk-radios__label" for="paymentQueried">
                         No – action required
                     </label>
@@ -58,8 +58,7 @@
 
                 <div class="govuk-radios__item">
                     <input class="govuk-radios__input" id="paymentReject" name="payment" type="radio" value="reject"
-                        data-aria-controls="conditional-payment-reject" {% if data.payment=='reject' %}checked{% endif
-                        %}>
+                        data-aria-controls="conditional-payment-reject" {% if (submission.evidenceOfPaymentReview.outcome=='fail' and data.payment != 'null') or data.payment =='reject' %}checked{% endif%}>
                     <label class="govuk-label govuk-radios__label" for="paymentReject">
                         No – reject
                     </label>
@@ -82,13 +81,13 @@
                         {% endif %}
                         <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="paidInFullResponseYes" name="paidInFullResponse" type="radio" value="yes" {% if data.paidInFullResponse=='yes'%}checked{% endif %}>
+                            <input class="govuk-radios__input" id="paidInFullResponseYes" name="paidInFullResponse" type="radio" value="yes" {% if (submission.evidenceOfPaymentReview.paymentPlan=='no' and data.paidInFullResponse != null) or data.paidInFullResponse == 'yes' %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="paidInFullResponseYes">
                             Yes
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="paidInFullResponseNo" name="paidInFullResponse" type="radio" value="no" {% if data.paidInFullResponse=='no'%}checked{% endif %}>
+                            <input class="govuk-radios__input" id="paidInFullResponseNo" name="paidInFullResponse" type="radio" value="no" {% if (submission.evidenceOfPaymentReview.paymentPlan=='yes' and data.paidInFullResponse != null) or data.paidInFullResponse == 'no' %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="paidInFullResponseNo">
                             No
                             </label>
@@ -128,7 +127,7 @@
                     <input
                         class="govuk-input govuk-input--width-5 {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %} govuk-input--error {% endif %}"
                         id="paymentReimbursementAmount" name="paymentReimbursementAmount" type="text"
-                        value="{{ data.paymentReimbursementAmount | default ('') }}" aria-describedby="payment-note-hint">
+                        value="{{ data.paymentReimbursementAmount or submission.evidenceOfPaymentReview.costPerLearner or '' }}" aria-describedby="payment-note-hint">
                 </div>
             </div>
         </div>
@@ -147,7 +146,7 @@
                 <span class="govuk-visually-hidden">Error:</span>Enter action required for evidence of payment 
             </p>
             {% endif %}
-            <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-textarea--error{% endif %}" id="paymentQueriedNote" name="paymentQueriedNote" rows="21" aria-describedby="payment-queried-note-info note-hint">{{ data.paymentQueriedNote | default ('') }}</textarea>
+            <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-textarea--error{% endif %}" id="paymentQueriedNote" name="paymentQueriedNote" rows="21" aria-describedby="payment-queried-note-info note-hint">{% if submission.evidenceOfPaymentReview.outcome=='queried' %}{{ data.paymentQueriedNote or submission.evidenceOfPaymentReview.note or '' }}{% else %}{{ data.paymentQueriedNote or '' }}{% endif %}</textarea>
             <div id="payment-queried-note-info" class="govuk-hint govuk-character-count__message">
                 You can enter up to 1000 characters
             </div>
@@ -170,7 +169,7 @@
             <textarea
                 class="govuk-textarea govuk-js-character-count {% if data.paymentRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
                 id="paymentRejectNote" name="paymentRejectNote" rows="21"
-                aria-describedby="payment-no-note-info note-hint">{{ data.paymentRejectNote | default ('') }}</textarea>
+                aria-describedby="payment-no-note-info note-hint">{% if submission.evidenceOfPaymentReview.outcome=='fail' %}{{ data.paymentRejectNote or submission.evidenceOfPaymentReview.note or '' }}{% else %}{{ data.paymentRejectNote or '' }}{% endif %}</textarea>
             <div id="payment-no-note-info" class="govuk-hint govuk-character-count__message">
                 You can enter up to 1000 characters
             </div>
@@ -182,6 +181,6 @@
             Save and continue
         </button>
 
-        <a class="govuk-link govuk-link--no-visited-state" href="#">Save and finish later</a>
+        <a class="govuk-link govuk-link--no-visited-state" href="../save-progress">Save and finish later</a>
     </div>
 </form>
