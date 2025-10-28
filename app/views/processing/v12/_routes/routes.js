@@ -179,6 +179,7 @@ router.get('/save-progress', function (req, res) {
   delete req.session.data.claimStep
   delete req.session.data.result
 
+
   req.session.data.claimScreen = "claim"
   req.session.data.progressSaved = true
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
@@ -273,6 +274,8 @@ router.post('/claim-payment-handler', function (req, res) {
   const paymentRejectNote = req.session.data.paymentRejectNote
   const paymentQueriedNote = req.session.data.paymentQueriedNote
 
+  const actionType = req.session.data.actionType
+
   let claim = null
 
   for (const c of req.session.data.claims) {
@@ -284,7 +287,7 @@ router.post('/claim-payment-handler', function (req, res) {
 
   const errorParamaters = checkClaimProcess(claim, "payment", paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, null, null, null, paidInFullResponse)
 
-  if (errorParamaters == "") {
+  if (errorParamaters == "" || actionType == "later") {
 
     let submission = getMostRelevantSubmission(claim) 
     if (paymentResponse == "approve") {
@@ -311,7 +314,18 @@ router.post('/claim-payment-handler', function (req, res) {
     delete req.session.data.paymentRejectNote
     delete req.session.data.paymentQueriedNote
 
-      if (claim.claimType == "100" || (claim.claimType == "40" && claim.isPaymentPlan) ) {
+      if (actionType == "later") {
+        const claimID = req.session.data.id
+        delete req.session.data.learnerCount
+        delete req.session.data.claimStep
+        delete req.session.data.result
+
+
+        req.session.data.claimScreen = "claim"
+        req.session.data.progressSaved = true
+        res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+      } else if (claim.claimType == "100" || (claim.claimType == "40" && claim.isPaymentPlan) ) {
         req.session.data.claimStep = "completion"
         req.session.data.learnerCount = 1
         return res.redirect('organisation/org-view-main#tab-content')
@@ -342,6 +356,9 @@ router.post('/claim-completion-handler', function (req, res) {
   const completionRejectNote = req.session.data.completionRejectNote
   const completionQueriedNote = req.session.data.completionQueriedNote
   const learnerCount = req.session.data.learnerCount
+
+  const actionType = req.session.data.actionType
+
   let claim = null
 
   for (const c of req.session.data.claims) {
@@ -355,7 +372,7 @@ router.post('/claim-completion-handler', function (req, res) {
 
   const errorParamaters = checkClaimProcess(claim, "completion", null, null, null, null, completionResponse, completionRejectNote, completionQueriedNote, null)
 
-  if (errorParamaters == "") {
+  if (errorParamaters == "" || actionType == "later") {
 
     const learnerSubmission = submission.learners[learnerCount-1]
     if (completionResponse == "approve") {
@@ -373,11 +390,24 @@ router.post('/claim-completion-handler', function (req, res) {
     delete req.session.data.completionRejectNote
     delete req.session.data.completionQueriedNote
 
-      if (learnerCount < submission.learners.length ) {
+      if (actionType == "later") {
+        const claimID = req.session.data.id
+        delete req.session.data.learnerCount
+        delete req.session.data.claimStep
+        delete req.session.data.result
+
+
+        req.session.data.claimScreen = "claim"
+        req.session.data.progressSaved = true
+        res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+      } else if (learnerCount < submission.learners.length ) {
         req.session.data.learnerCount = learnerCount + 1
         return res.redirect('organisation/org-view-main#tab-content')
 
       } else {
+        delete req.session.data.learnerCount
+        delete req.session.data.claimStep
         req.session.data.result = determineOutcome(claim)
         req.session.data.claimScreen = "confirmOutcome"
         return res.redirect('organisation/org-view-main#tab-content')
@@ -391,6 +421,23 @@ router.post('/claim-completion-handler', function (req, res) {
   }
 
 
+});
+
+router.get('/outcome-step-handler', function (req, res) {
+  claimID = req.session.data.id
+  delete req.session.data.learnerCount
+  delete req.session.data.claimStep
+  let claim = null
+
+  for (const c of req.session.data.claims) {
+    if (c.claimID == claimID) {
+      claim = c
+      break;
+    }
+  }
+  req.session.data.result = determineOutcome(claim)
+  req.session.data.claimScreen = "confirmOutcome"
+  return res.redirect('organisation/org-view-main#tab-content')
 });
 
 router.get('/outcome-handler', function (req, res) {

@@ -366,3 +366,31 @@ addFilter('claimTypeText', function (claimType, submissionCheck) {
 addFilter('checkCompletionOutcome', function (learners) {
     return getOverallStatus(learners)
 })
+
+addFilter('checkDone', function (review, type, claimType) {
+    let result = true
+
+    if (type == "payment") {
+
+        if (review.outcome != null) {
+            if ((review.outcome == "pass") && (((review.costPerLearner == null || review.costPerLearner == "")) || (review.paymentPlan == null && claimType == "60"))) {
+                result = false
+            } else if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "")) {
+                result = false
+            }
+        } else {
+            result = false
+        }
+
+    } else if ( type == "completion") {
+        if (review.outcome != null) {
+            if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "" )) {
+                result = false
+            }
+        } else {
+            result = false
+        }
+    }
+
+    return result
+})

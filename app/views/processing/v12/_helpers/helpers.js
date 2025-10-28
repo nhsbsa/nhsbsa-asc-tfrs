@@ -264,7 +264,6 @@ function checkClaimProcess(claim, section, paymentResponse, paymentReimbursement
 
 function getOverallStatus(data) {
   const outcomes = data.map(d => d.evidenceOfCompletionReview.outcome);
-  console.log(outcomes)
   const allPass = outcomes.every(o => o == "pass");
   const allFail = outcomes.every(o => o == "fail");
   const anyQueried = outcomes.includes("queried");
@@ -282,7 +281,6 @@ function determineOutcome(claim) {
     let submission = getMostRelevantSubmission(claim)
     const paymentResponse = submission.evidenceOfPaymentReview.outcome
     const learners = submission.learners
-    console.log(learners)
     
     if (claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) {
       if (paymentResponse == "fail" || getOverallStatus(learners) == "reject") {

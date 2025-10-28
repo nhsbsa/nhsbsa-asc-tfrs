@@ -3,6 +3,8 @@
 {% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
 {% set completionNote = claim.evidenceOfCompletionreview.note %}
 
+{% if (data.claimScreen == "inProgress") %}
+
 {% include "./claim-header.html" %}
 
 <div class="govuk-grid-row">
@@ -26,3 +28,9 @@
 
     </div>
 </div>
+
+{% elif (data.claimScreen == "confirmOutcome")  %}
+
+    {% include "./confirm-outcome.html" %}
+
+{% endif %}
