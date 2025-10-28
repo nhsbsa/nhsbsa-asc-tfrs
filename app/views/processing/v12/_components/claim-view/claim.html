@@ -21,7 +21,7 @@
         <div style="padding-top: 10px;">
             {% if ((claim.claimType != "40") or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT) %}
                 <h3 class="govuk-heading-m">
-                    Evidence of payment
+                    Payment evidence
                 </h3>
                     {% include "./evidence-of-payment-card.html" %}
             {% endif %}
@@ -30,7 +30,7 @@
             {% endif %}
             {% if (claim.claimType != "60") %}
                 <h3 class="govuk-heading-m">
-                    Evidence of completion
+                    Completion evidence
                 </h3>
                 {% if claim.status != 'submitted' %}
                     <p class="govuk-body">
