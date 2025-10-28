@@ -630,3 +630,70 @@
     border-left: none;
 
 }
+
+.side-nav {
+position: fixed;
+top: 50%;
+left: 0;
+transform: translateY(-50%);
+width: 300px;
+background-color: #ffffff;
+border: 1px solid #b1b4b6;
+border-left: none;
+border-radius: 0 5px 5px 0;
+box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+display: flex;
+flex-direction: column;
+overflow: hidden;
+}
+
+
+.side-nav.minimised {
+width: 50px;
+left: 0;
+}
+
+
+.side-nav-header {
+background-color: #1d70b8;
+color: #ffffff;
+padding: 10px;
+font-size: 19px;
+font-weight: bold;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-family: "GDS Transport", Arial, sans-serif;
+}
+
+
+.minimise-btn {
+background: none;
+border: none;
+color: #ffffff;
+font-size: 20px;
+cursor: pointer;
+}
+
+.moj-side-navigation__item {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+
+.moj-side-navigation__item--active {
+background-color: #f3f2f1;
+}
+
+
+.moj-side-navigation__item .moj-badge {
+margin-left: 10px;
+margin-right: govuk-spacing(2);
+}
+
+.side-nav-heading {
+  margin-left: 14px;
+  margin-bottom: govuk-spacing(2);
+}
