@@ -127,13 +127,51 @@
         </dt>
         <dd class="govuk-summary-list__value">
             <p class="govuk-body">({{submission.learners.length}} learner{%if submission.learners.length > 1%}s{%endif%})</p>
-            {% for learner in submission.learners | sortLearners %}
-                <ul class="govuk-list">
-                    <li>
-                        <a class="govuk-link" href="#">{{learner.givenName}} {{learner.familyName}}</a>
-                    </li>
-                </ul>
-            {% endfor %}
+
+            {%if claim.status == "submitted" %}
+
+                {% for learner in submission.learners | sortLearners %}
+                    <ul class="govuk-list">
+                        <li>
+                            <a class="govuk-link" href="#">{{learner.givenName}} {{learner.familyName}}</a>
+                        </li>
+                    </ul>
+                {% endfor %}
+
+            {% else %}
+
+                    {% if needsActionLearners.length > 0 %}
+                        <h3 class="govuk-heading-s" id="needsAction">Needs action</h3>
+                        {% for learner in needsActionLearners | sortLearners %}
+                            <ul class="govuk-list">
+                                <li>
+                                    <a class="govuk-link" href="#">{{learner.givenName}} {{learner.familyName}}</a>
+                                </li>
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
+                    {% if criteriaMetLearners.length > 0 %}
+                        <h3 class="govuk-heading-s" id="criteriaMet">Criteria met</h3>
+                        {% for learner in criteriaMetLearners | sortLearners %}
+                            <ul class="govuk-list">
+                                <li>
+                                    <a class="govuk-link" href="#">{{learner.givenName}} {{learner.familyName}}</a>
+                                </li>
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
+                    {% if rejectedLearners.length > 0 %}
+                        <h3 class="govuk-heading-s" id="rejected">Rejected</h3>
+                        {% for learner in rejectedLearners | sortLearners %}
+                            <ul class="govuk-list">
+                                <li>
+                                    <a class="govuk-link" href="#">{{learner.givenName}} {{learner.familyName}}</a>
+                                </li>
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
+
+            {%endif %}
         </dd>
     </div>
 </dl>
