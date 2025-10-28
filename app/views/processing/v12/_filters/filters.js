@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT } = require('../_helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus } = require('../_helpers/helpers.js');
 const fs = require('fs');
 const dataPath = 'app/views/processing/v12/_data/'
 
@@ -361,6 +361,38 @@ addFilter('claimTypeText', function (claimType, submissionCheck) {
         case "40":
             return "40 part"
         }
+})
+
+addFilter('checkCompletionOutcome', function (learners) {
+    return getOverallStatus(learners)
+})
+
+addFilter('checkDone', function (review, type, claimType) {
+    let result = true
+
+    if (type == "payment") {
+
+        if (review.outcome != null) {
+            if ((review.outcome == "pass") && (((review.costPerLearner == null || review.costPerLearner == "")) || (review.paymentPlan == null && claimType == "60"))) {
+                result = false
+            } else if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "")) {
+                result = false
+            }
+        } else {
+            result = false
+        }
+
+    } else if ( type == "completion") {
+        if (review.outcome != null) {
+            if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "" )) {
+                result = false
+            }
+        } else {
+            result = false
+        }
+    }
+
+    return result
 })
 
 addFilter('sortLearners', function (learners) {

@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, updateClaim, checkWDSFormat, signatoryCheck, validNumberCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome } = require('../_helpers/helpers.js');
+const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT } = require('../_helpers/helpers.js');
 const { transformClaims } = require('../_helpers/transform.js');
 
 router.use('/processing/v12/backstop', require('../_backstop/backstop-routes.js'));
@@ -173,9 +173,15 @@ router.post('/search-claim-id', function (req, res) {
   }
 });
 
-router.get('/cancel-outcome', function (req, res) {
+router.get('/save-progress', function (req, res) {
   const claimID = req.session.data.id
+  delete req.session.data.learnerCount
+  delete req.session.data.claimStep
+  delete req.session.data.result
+
+
   req.session.data.claimScreen = "claim"
+  req.session.data.progressSaved = true
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 });
 
@@ -194,15 +200,42 @@ router.get('/back-all-claims', function (req, res) {
   delete req.session.data.paymentRejectNote
   delete req.session.data.completion
   delete req.session.data.completionRejectNote
+  delete req.session.data.completionResponses
+  delete req.session.data.learnerCount
+  delete req.session.data.claimStep
+  delete req.session.data.progressSaved
 
   return res.redirect('organisation/org-view-main?orgTab=claims&orgID=' + req.session.data.orgID + '&currentPage=1#tab-content')
+
+});
+
+router.get('/process-step-handler', function (req, res) {
+req.session.data.orgTab = "singleClaim"
+req.session.data.claimScreen = "inProgress"
+const stage = req.session.data.stage
+const learnerNo = req.session.data.learnerNo
+
+delete req.session.data.progressSaved
+
+if (stage == "payment") {
+  req.session.data.claimStep = "payment"
+  delete req.session.data.learnerCount
+} else if (stage == "completion") {
+  req.session.data.learnerCount = parseInt(learnerNo)
+  req.session.data.claimStep = "completion"
+}
+
+delete req.session.data.stage
+delete req.session.data.learnerNo
+
+return res.redirect('organisation/org-view-main#tab-content')
 
 });
 
 router.get('/claim-process-start-handler', function (req, res) {
 req.session.data.orgTab = "singleClaim"
 req.session.data.claimScreen = "inProgress"
-
+delete req.session.data.progressSaved
 const claimID = req.session.data.id
 
 let claim = null
@@ -215,9 +248,10 @@ let claim = null
   }
 let submission = getMostRelevantSubmission(claim)    
 
-if ((claim.claimType != "40" || (claim.claimType == "40" && claim.isPaymentPlan)) && !(["OMMT/T1/INT","OMMT/T2/INT"].includes(submission.trainingCode))) {
+if ((claim.claimType != "40" || (claim.claimType == "40" && claim.isPaymentPlan)) && !(isInternalOMMT(submission.trainingCode))) {
   req.session.data.claimStep = "payment"
 } else {
+  req.session.data.learnerCount = 1
   req.session.data.claimStep = "completion"
 }
 
@@ -240,6 +274,8 @@ router.post('/claim-payment-handler', function (req, res) {
   const paymentRejectNote = req.session.data.paymentRejectNote
   const paymentQueriedNote = req.session.data.paymentQueriedNote
 
+  const actionType = req.session.data.actionType
+
   let claim = null
 
   for (const c of req.session.data.claims) {
@@ -251,16 +287,51 @@ router.post('/claim-payment-handler', function (req, res) {
 
   const errorParamaters = checkClaimProcess(claim, "payment", paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, null, null, null, paidInFullResponse)
 
-  if (errorParamaters == "") {
+  if (errorParamaters == "" || actionType == "later") {
 
-      if (claim.claimType != "40" || (claim.claimType == "40" && claim.isPaymentPlan) ) {
+    let submission = getMostRelevantSubmission(claim) 
+    if (paymentResponse == "approve") {
+            submission.evidenceOfPaymentReview.outcome = "pass"
+            if (claim.claimType == "100" || claim.claimType == "60") {
+                submission.evidenceOfPaymentReview.costPerLearner = paymentReimbursementAmount
+                if (paidInFullResponse == "yes") {
+                    submission.evidenceOfPaymentReview.paymentPlan = "no"
+                } else if (paidInFullResponse == "no") {
+                    submission.evidenceOfPaymentReview.paymentPlan = "yes"
+                }
+            }
+        } else if (paymentResponse == "reject") {
+            submission.evidenceOfPaymentReview.outcome = "fail"
+            submission.evidenceOfPaymentReview.note = paymentRejectNote
+        } else if (paymentResponse == "queried") {
+            submission.evidenceOfPaymentReview.outcome = "queried"
+            submission.evidenceOfPaymentReview.note = paymentQueriedNote
+    }
 
+    delete req.session.data.payment
+    delete req.session.data.paymentReimbursementAmount
+    delete req.session.data.paidInFullResponse
+    delete req.session.data.paymentRejectNote
+    delete req.session.data.paymentQueriedNote
+
+      if (actionType == "later") {
+        const claimID = req.session.data.id
+        delete req.session.data.learnerCount
+        delete req.session.data.claimStep
+        delete req.session.data.result
+
+
+        req.session.data.claimScreen = "claim"
+        req.session.data.progressSaved = true
+        res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+      } else if (claim.claimType == "100" || (claim.claimType == "40" && claim.isPaymentPlan) ) {
         req.session.data.claimStep = "completion"
         req.session.data.learnerCount = 1
         return res.redirect('organisation/org-view-main#tab-content')
 
       } else {
-        req.session.data.result = determineOutcome(claim, paymentResponse, null)
+        req.session.data.result = determineOutcome(claim, submission.evidenceOfPaymentReview.outcome, null)
         req.session.data.claimScreen = "confirmOutcome"
         return res.redirect('organisation/org-view-main#tab-content')
       }
@@ -275,29 +346,18 @@ router.post('/claim-payment-handler', function (req, res) {
 
 });
 
-router.post('/claim-process-handler', function (req, res) {
-  delete req.session.data.paymentResponseIncomplete
-  delete req.session.data.paymentReimbursementAmountIncomplete
-  delete req.session.data.paymentReimbursementAmountInvalid
-  delete req.session.data.paymentRejectNoteIncomplete
-  delete req.session.data.processSuccess
-  delete req.session.data.noteSuccess
+router.post('/claim-completion-handler', function (req, res) {
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionRejectNoteIncomplete
-  delete req.session.data.paymentQueriedNoteIncomplete
   delete req.session.data.completionQueriedNoteIncomplete
-  delete req.session.data.paidInFullResponseIncomplete
-
 
   claimID = req.session.data.id
-  const paymentResponse = req.session.data.payment
-  const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
-  const paidInFullResponse = req.session.data.paidInFullResponse
-  const paymentRejectNote = req.session.data.paymentRejectNote
-  const paymentQueriedNote = req.session.data.paymentQueriedNote
   const completionResponse = req.session.data.completion
   const completionRejectNote = req.session.data.completionRejectNote
   const completionQueriedNote = req.session.data.completionQueriedNote
+  const learnerCount = req.session.data.learnerCount
+
+  const actionType = req.session.data.actionType
 
   let claim = null
 
@@ -307,42 +367,100 @@ router.post('/claim-process-handler', function (req, res) {
       break;
     }
   }
+  const submission = getMostRelevantSubmission(claim)  
 
-  const errorParamaters = checkClaimProcess(claim, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paidInFullResponse)
 
-  if (errorParamaters == "") {
+  const errorParamaters = checkClaimProcess(claim, "completion", null, null, null, null, completionResponse, completionRejectNote, completionQueriedNote, null)
 
-      req.session.data.result = determineOutcome(claim, paymentResponse, completionResponse)
-      req.session.data.claimScreen = "confirmOutcome"
-      return res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+  if (errorParamaters == "" || actionType == "later") {
+
+    const learnerSubmission = submission.learners[learnerCount-1]
+    if (completionResponse == "approve") {
+        learnerSubmission.evidenceOfCompletionReview.outcome = "pass"
+    } else if (completionResponse == "reject") {
+        learnerSubmission.evidenceOfCompletionReview.outcome = "fail"
+        learnerSubmission.evidenceOfCompletionReview.note = completionRejectNote
+    } else if (completionResponse == "queried") {
+        learnerSubmission.evidenceOfCompletionReview.outcome = "queried"
+        learnerSubmission.evidenceOfCompletionReview.note = completionQueriedNote
+    }
+
+
+    delete req.session.data.completion
+    delete req.session.data.completionRejectNote
+    delete req.session.data.completionQueriedNote
+
+      if (actionType == "later") {
+        const claimID = req.session.data.id
+        delete req.session.data.learnerCount
+        delete req.session.data.claimStep
+        delete req.session.data.result
+
+
+        req.session.data.claimScreen = "claim"
+        req.session.data.progressSaved = true
+        res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
+
+      } else if (learnerCount < submission.learners.length ) {
+        req.session.data.learnerCount = learnerCount + 1
+        return res.redirect('organisation/org-view-main#tab-content')
+
+      } else {
+        delete req.session.data.learnerCount
+        delete req.session.data.claimStep
+        req.session.data.result = determineOutcome(claim)
+        req.session.data.claimScreen = "confirmOutcome"
+        return res.redirect('organisation/org-view-main#tab-content')
+      }
 
   } else {
 
 
-      return res.redirect('organisation/org-view-main' + errorParamaters + '#tab-content')
+      return res.redirect('organisation/org-view-main?' + errorParamaters + '#tab-content')
 
   }
+
+
+});
+
+router.get('/outcome-step-handler', function (req, res) {
+  claimID = req.session.data.id
+  delete req.session.data.learnerCount
+  delete req.session.data.claimStep
+  let claim = null
+
+  for (const c of req.session.data.claims) {
+    if (c.claimID == claimID) {
+      claim = c
+      break;
+    }
+  }
+  req.session.data.result = determineOutcome(claim)
+  req.session.data.claimScreen = "confirmOutcome"
+  return res.redirect('organisation/org-view-main#tab-content')
 });
 
 router.get('/outcome-handler', function (req, res) {
   claimID = req.session.data.id
-  const paymentResponse = req.session.data.payment
-  const paymentReimbursementAmount = req.session.data.paymentReimbursementAmount
-  const paymentRejectNote = req.session.data.paymentRejectNote
-  const paymentQueriedNote = req.session.data.paymentQueriedNote
-  const paidInFullResponse = req.session.data.paidInFullResponse
-
-  const completionResponse = req.session.data.completion
-  const completionRejectNote = req.session.data.completionRejectNote
-  const completionQueriedNote = req.session.data.completionQueriedNote
 
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {
-      updateClaim(claim, paymentResponse, paymentReimbursementAmount, paymentQueriedNote, paymentRejectNote, completionResponse, completionQueriedNote, completionRejectNote, paidInFullResponse)
-      
-      let submission = getMostRelevantSubmission(claim)    
+
+      let submission = getMostRelevantSubmission(claim)  
+      if (isInternalOMMT(submission.trainingCode)){
+        submission.evidenceOfPaymentReview.outcome = "pass"
+        const training = findCourseByCode(submission.trainingCode)
+        submission.evidenceOfPaymentReview.costPerLearner = training.reimbursementAmount
+      }  
+
+      if (submission.evidenceOfPaymentReview.paymentPlan == "no") {
+        claim.isPaymentPlan = false
+      } else if (submission.evidenceOfPaymentReview.paymentPlan == "yes") {
+        claim.isPaymentPlan = true
+      }
+
       submission.processedDate = new Date()
-      submission.processedBy = "To add"
+      submission.processedBy = "Test processor"
 
       if (req.session.data.result == "reject") {
         claim.status = "rejected"
@@ -354,19 +472,10 @@ router.get('/outcome-handler', function (req, res) {
     }
   }
 
-  delete req.session.data.payment
-  delete req.session.data.paymentReimbursementAmount
-  delete req.session.data.paymentRejectNote
-  delete req.session.data.paymentQueriedNote
-  delete req.session.data.paidInFullResponse
-
-  delete req.session.data.completion
-  delete req.session.data.completionRejectNote
-  delete req.session.data.completionQueriedNote
-
+  delete req.session.data.result
 
   req.session.data.processSuccess = "true"
-  req.session.data.claimScreen = "claimProcessed"
+  req.session.data.claimScreen = "claim"
 
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 });
