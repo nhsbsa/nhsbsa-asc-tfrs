@@ -32,10 +32,7 @@
                     {{ learner.completionDate | govukDate }}
                 </dd>
             </div>
-        </dl>
-        {% if claim.status != "submitted"%}
-            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-            <dl class="govuk-summary-list">
+            {% if claim.status != "submitted"%}
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Criteria met?
@@ -52,7 +49,9 @@
                         {% endif %}
                     </dd>
                 </div>
-            </dl>
+
         {% endif %}
+        </dl>
+        
     </div>
 </div>
