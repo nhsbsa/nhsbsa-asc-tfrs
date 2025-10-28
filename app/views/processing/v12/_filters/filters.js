@@ -402,8 +402,14 @@ addFilter('learnerProcessedTag', function (outcome) {
     if (outcome == 'queried') {
         return '<strong class="govuk-tag govuk-tag--yellow">Needs action</strong>' 
     } else if (outcome == 'pass') {
-        return '<strong class="govuk-tag govuk-tag--green">Approved</strong>' 
+        return '<strong class="govuk-tag govuk-tag--green">Criteria met</strong>' 
     } else if (outcome == 'fail') {
         return '<strong class="govuk-tag govuk-tag--red">Rejected</strong>' 
     }
 }, { renderAsHtml: true })
+
+addFilter('filterLearners', function (learners, status) {
+    let filtered = []
+    filtered = learners.filter( l => l.evidenceOfCompletionReview.outcome == status)
+    return filtered
+})

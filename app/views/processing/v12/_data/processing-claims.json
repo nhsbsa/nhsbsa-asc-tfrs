@@ -4222,8 +4222,8 @@
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "queried",
-              "note": "The completion date on the certificate does not match the completion date on the claim"
+              "outcome": "pass",
+              "note": null
             }
           },
           {
@@ -4231,8 +4231,8 @@
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "queried",
-              "note": "The completion date on the certificate does not match the completion date on the claim"
+              "outcome": "pass",
+              "note": null
             }
           },
           {
@@ -4379,8 +4379,8 @@
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "fail",
-              "note": "The evidence of completion shows that this was an apprenticeship."
+              "outcome": "queried",
+              "note": "The evidence of completion does not match the completion date provided."
             }
           },
           {
@@ -4388,8 +4388,8 @@
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "fail",
-              "note": "The evidence of completion shows that this was an apprenticeship."
+              "outcome": "pass",
+              "note": null
             }
           },
           {

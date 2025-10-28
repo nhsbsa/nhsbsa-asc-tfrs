@@ -3,6 +3,10 @@
 {% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
 {% set completionNote = claim.evidenceOfCompletionreview.note %}
 
+{% set needsActionLearners = submission.learners | filterLearners("queried") %}
+{% set criteriaMetLearners = submission.learners | filterLearners("pass") %}
+{% set rejectedLearners = submission.learners | filterLearners("fail") %}
+
 {% include "./claim-header.html" %}
 
 <div class="govuk-grid-row">
@@ -32,15 +36,40 @@
                 </h3>
 
                 {% if claim.status != 'submitted' %}
-                    <div class="govuk-inset-text">
-                        <strong>2</strong> learners <strong>met</strong> the criteria </br>
-                        <strong>2</strong> learners <strong>need action</strong></br>
-                        <strong>1</strong> learner <strong>rejected</strong>
-                    </div>
+                    <p class="govuk-body">
+                        {% if needsActionLearners.length > 0 %}
+                            <strong>{{needsActionLearners.length}}</strong> learners <a href="#needsAction">need action</a></br>
+                        {%endif %}
+                        {% if criteriaMetLearners.length > 0 %}
+                            <strong>{{criteriaMetLearners.length}}</strong> learners <a href="#criteriaMet">criteria met</a></br>
+                        {%endif %}
+                        {% if rejectedLearners.length > 0 %}
+                            <strong>{{rejectedLearners.length}}</strong> learners <a href="#rejected">rejected</a></br>
+                        {%endif %}
+                    </p>
+                    {% if needsActionLearners.length > 0 %}
+                        <h3 class="govuk-heading-s" id="needsAction">Needs action</h3>
+                        {% for learner in needsActionLearners | sortLearners %}
+                            {% include "./evidence-of-completion-card.html" %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if criteriaMetLearners.length > 0 %}
+                        <h3 class="govuk-heading-s" id="criteriaMet">Criteria met</h3>
+                        {% for learner in criteriaMetLearners | sortLearners %}
+                            {% include "./evidence-of-completion-card.html" %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if rejectedLearners.length > 0 %}
+                        <h3 class="govuk-heading-s" id="rejected">Rejected</h3>
+                        {% for learner in rejectedLearners | sortLearners %}
+                            {% include "./evidence-of-completion-card.html" %}
+                        {% endfor %}
+                    {% endif %}
+                {% else %}
+                    {% for learner in submission.learners | sortLearners %}
+                        {% include "./evidence-of-completion-card.html" %}
+                    {% endfor %}
                 {% endif %}
-                {% for learner in submission.learners | sortLearners %}
-                     {% include "./evidence-of-completion-card.html" %}
-                {% endfor %}
             {% endif %}
         </div>
         
