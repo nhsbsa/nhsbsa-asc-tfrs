@@ -40,10 +40,10 @@
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {% if learner.evidenceOfCompletionReview.outcome == "queried"%}
-                            <strong>No - needs action</strong></br>
+                            <strong>No – needs action</strong></br>
                             {{learner.evidenceOfCompletionReview.note}}
                         {% elif learner.evidenceOfCompletionReview.outcome == "fail"%}
-                            <strong>No - reject</strong></br>
+                            <strong>No – reject</strong></br>
                             {{learner.evidenceOfCompletionReview.note}}
                         {% else %}
                             Yes

@@ -35,10 +35,10 @@
                     </dt>
                     <dd class="govuk-summary-list__value">
                         {% if submission.evidenceOfPaymentReview.outcome == "queried"%}
-                            <strong>No - needs action</strong></br>
+                            <strong>No – needs action</strong></br>
                             {{submission.evidenceOfPaymentReview.note}}
                         {% elif submission.evidenceOfPaymentReview.outcome == "fail"%}
-                            <strong>No - reject</strong></br>
+                            <strong>No – reject</strong></br>
                             {{submission.evidenceOfPaymentReview.note}}
                         {% else %}
                             Yes
