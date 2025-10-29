@@ -51,9 +51,9 @@
                       {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Claims{% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}</strong>{%endif%}
                     </a>
                   </li>
-                  <li class="govuk-service-navigation__item {% if data.orgTab == 'orgDetails'%}govuk-service-navigation__item--active{%endif%}">
-                    <a class="govuk-service-navigation__link" href="#">
-                      {% if data.orgTab == 'orgDetails'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Organisation details{% if data.orgTab == 'orgDetails'%}</strong>{%endif%}
+                  <li class="govuk-service-navigation__item {% if data.orgTab == 'org-details'%}govuk-service-navigation__item--active{%endif%}">
+                    <a class="govuk-service-navigation__link" href="../org-tab-handler/org-details">
+                      {% if data.orgTab == 'org-details'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Organisation details{% if data.orgTab == 'org-details'%}</strong>{%endif%}
                     </a>
                   </li>
                 </ul>
