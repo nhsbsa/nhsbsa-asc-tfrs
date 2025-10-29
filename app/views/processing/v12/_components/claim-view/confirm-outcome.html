@@ -132,7 +132,7 @@
 <p class="govuk-body">Confirm that this claim should be {% if data.result == "approve" %}approved{% elif data.result == "reject" %}rejected{% elif data.result == "queried" %}sent back{% endif %}.</p>
 
 <div class="govuk-button-group">
-    <a type="submit" class="govuk-button" href="../outcome-handler">{% if data.result == "approve" %}Approve{% elif data.result == "queried" %}Send{% elif data.result == "reject" %}Reject{% endif %} claim {% if data.result == "queried" %}back{% endif %}</a>
-    <a class="govuk-link govuk-link--no-visited-state" href="../save-progress">Save and finish later</a>
+    <a class="govuk-button" href="../outcome-handler">{% if data.result == "approve" %}Approve{% elif data.result == "queried" %}Send{% elif data.result == "reject" %}Reject{% endif %} claim {% if data.result == "queried" %}back{% endif %}</a>
+    <a class="govuk-button govuk-button--secondary" href="../save-progress">Save and finish later</a>
 </div>
 </div>
