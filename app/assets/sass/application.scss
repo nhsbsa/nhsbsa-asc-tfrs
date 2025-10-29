@@ -662,7 +662,7 @@ left: 0;
 .side-nav-header {
 background-color: #1d70b8;
 color: #ffffff;
-padding: 10px;
+padding: govuk-spacing(2);
 font-size: 19px;
 font-weight: bold;
 display: flex;
@@ -672,18 +672,41 @@ font-family: "GDS Transport", Arial, sans-serif;
 }
 
 .side-nav-header.minimised {
-height: 600px;
-
+height: 400px;
+writing-mode: vertical-rl;
+text-orientation: mixed;
+justify-content: flex-start;
 }
 
 
-.minimise-btn {
+.minimise-btn-open {
 background: none;
 border: none;
 color: #ffffff;
 font-size: 20px;
 cursor: pointer;
 }
+
+.minimise-btn-open.minimised {
+display: none;
+}
+
+.minimise-btn-close {
+display: none;
+}
+
+.minimise-btn-close.minimised {
+background: none;
+border: none;
+color: #ffffff;
+font-size: 20px;
+cursor: pointer;
+transform: rotate(-90deg);
+margin-bottom: govuk-spacing(2);
+display:inline
+}
+
+
 
 .moj-side-navigation__item {
 display: flex;

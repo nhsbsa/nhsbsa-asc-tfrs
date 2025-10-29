@@ -2,8 +2,9 @@
 {% set learnersCompleted = true %}
 <div class="side-nav" id="sideNav">
     <div class="side-nav-header" id="side-nav-header">
+        <button class="minimise-btn-close" id="minimiseBtnClose">&#10095;</button>
         Claim progress
-        <button class="minimise-btn" id="minimiseBtn">&#x276E;</button>
+        <button class="minimise-btn-open" id="minimiseBtnOpen">&#x276E;</button>
     </div>
     <nav class="moj-side-navigation" aria-label="Side navigation" id="moj-side-navigation">
         {% if ((claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT)) %}
