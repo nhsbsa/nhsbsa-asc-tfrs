@@ -1,6 +1,6 @@
 <form action="../claim-payment-handler" method="post" novalidate>
     <span class="govuk-caption-m">Review payment</span>
-    <h3 class="govuk-heading-m">Evidence of payment</h3>
+    <h3 class="govuk-heading-m">Payment evidence</h3>
 
     {% if (claim.isPaymentPlan and claim.claimType == "40") %} 
     <p class="govuk-body">The organisation has only provided evidence of payment for 60% of the training cost.</p>
@@ -11,7 +11,7 @@
     <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}" id="payment-review">
         <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                Does the evidence of payment meet the required criteria?
+                Does the payment evidence meet the required criteria?
             </legend>
             {% if (claim.isPaymentPlan and claim.claimType == "40") %} 
             <div id="payment-hint" class="govuk-hint">
@@ -86,11 +86,6 @@
                 </label>
                 <div id="payment-note-hint" class="govuk-hint">
                     <p class="govuk-hint">Enter the full cost of this training for a single learner (even if the organisation has only paid 60% so far).</p>
-                    <p class="govuk-hint">For instance, if the organisation will be paying a total of £100 for 4 learners then the cost per learner is £25.</p>
-                    <p class="govuk-hint"><strong>The maximum reimbursement amount for this training is £{{training.reimbursementAmount}}.</strong></p>
-                    <p class="govuk-hint">This is the maximum amount for training paid for {% if (submission.costDate | comparePaymentDate ) %}<strong>on or after 1 April 2025</strong>{% else %}<strong>on or before 31 March 2025</strong>{% endif %}.</p>
-                    <p class="govuk-hint">The organisation will not get back more than they actually
-                        paid.</p>
                 </div>
 
 
@@ -122,7 +117,7 @@
                 What action does the organisation need to take?
             </legend>
             <div id="payment-queried-note-hint" class="govuk-hint">
-                This note tells the organisation what edits they need to make before they resubmit this claim
+                This note tells the organisation what edits they need to make to this learner.
             </div>
             {% if data.paymentQueriedNoteIncomplete %}
             <p id="payment-queried-note-error" class="govuk-error-message">
@@ -142,7 +137,7 @@
                 Why has this claim been rejected?
             </legend>
             <div id="payment-reject-note-hint" class="govuk-hint">
-                This note tells the organisation why their claim has been rejected and therefore cannot be edited and resubmitted
+                This note tells the organisation why this learner needs to be removed from this claim.
             </div>
             {% if data.paymentRejectNoteIncomplete %}
             <p id="payment-reject-note-error" class="govuk-error-message">

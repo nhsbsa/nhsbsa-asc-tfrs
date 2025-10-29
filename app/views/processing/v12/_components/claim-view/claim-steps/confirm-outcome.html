@@ -77,7 +77,7 @@
     
     {% if (submission.evidenceOfPaymentReview.outcome == "fail") %}
 
-        <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
+        <p class='govuk-body'>The payment evidence did not meet the required criteria.</p>
         <p class='govuk-body'>{{data.paymentRejectNote}}</p>
 
     {% endif %}
@@ -88,7 +88,7 @@
 
     {% if (completionOutcome == "reject") %}
 
-        <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
+        <p class='govuk-body'>The completion evidence did not meet the required criteria.</p>
         {% for learner in submission.learners %}
             {% if (learner.evidenceOfCompletionReview.outcome == "fail") %}
                 {% include "./claim-sections/outcomeNote.html" %}
@@ -100,12 +100,12 @@
 
 {% elif data.result == "queried" %}
 
-    <p class="govuk-body">The organisation will receive the following note to explain what actions it needs to take. The wording is taken from what you entered on the previous screen.</p>
+    <p class="govuk-body">The organisation will receive the following notes to explain what actions it needs to take. The wording is taken from what you entered on previous screens.</p>
 
     <div class='govuk-inset-text'><h2 class='govuk-heading-s'>Claim needs action</h2>
     
     {% if (submission.evidenceOfPaymentReview.outcome == "queried") %}
-        <p class='govuk-body'>The evidence of payment did not meet the required criteria.</p>
+        <p class='govuk-body'>The payment evidence did not meet the required criteria.</p>
         <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
 
     {% endif %}
@@ -116,7 +116,7 @@
 
     {% if (completionOutcome == "queried") %}
 
-        <p class='govuk-body'>The evidence of completion did not meet the required criteria.</p>
+        <p class='govuk-body'>The completion evidence did not meet the required criteria.</p>
         {% for learner in submission.learners %}
             {% if (learner.evidenceOfCompletionReview.outcome == "fail" or learner.evidenceOfCompletionReview.outcome == "queried") %}
                 {% include "./claim-sections/outcomeNote.html" %}

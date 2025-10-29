@@ -11,7 +11,7 @@
             <ul class="moj-side-navigation__list govuk-!-margin-bottom-1">
                 <li
                     class="moj-side-navigation__item {% if (submission.evidenceOfPaymentReview.outcome != null) %}moj-side-navigation__item-with-icon{% endif %}{% if (data.claimStep == "payment") %} moj-side-navigation__item--active{% endif %}">
-                    <a href="../process-step-handler?stage=payment" aria-current="location" class="moj-side-navigation__link">Evidence of payment</a>
+                    <a href="../process-step-handler?stage=payment" aria-current="location" class="moj-side-navigation__link">Payment evidence</a>
                     {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone ("payment", claim.claimType) %}
                     {% if (paymentIsDone) %}
                         <span class="moj-badge moj-badge--green">Done</span>

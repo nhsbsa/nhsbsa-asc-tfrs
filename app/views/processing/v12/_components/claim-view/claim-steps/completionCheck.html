@@ -5,14 +5,14 @@
 
 
 <form action="../claim-completion-handler" method="post" novalidate>
-    <span class="govuk-caption-m">Review Completion</span>
+    <span class="govuk-caption-m">Review completion</span>
     <h3 class="govuk-heading-m">Learner {{data.learnerCount}} of {{submission.learners | length}}</h3>
     {% include "../claim-sections/evidence-of-completion-card.html" %}
 
     <div class="govuk-form-group {% if data.completionResponseIncomplete %}govuk-form-group--error {% endif %}" id="completion-review">
         <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                Does the evidence of completion for {{learner.givenName}} {{learner.familyName}} meet the required criteria?
+                Does the completion evidence for {{learner.givenName}} {{learner.familyName}} meet the required criteria?
             </legend>
             {% if data.completionResponseIncomplete %}
             <p id="completion-review-error" class="govuk-error-message">
@@ -53,7 +53,7 @@
                 What action does the organisation need to take?
             </legend>
             <div id="completionQueriedNote-hint" class="govuk-hint">
-                This note tells the organisation what edits they need to make before they resubmit this claim
+                This note tells the organisation what edits they need to make to this learner.
             </div>
             {% if data.completionQueriedNoteIncomplete %}
             <p id="completion-queried-note-error" class="govuk-error-message">
@@ -73,10 +73,10 @@
         <div class="govuk-form-group govuk-character-count {% if data.completionRejectNoteIncomplete %}govuk-form-group--error {% endif %}"
             data-module="govuk-character-count" data-maxlength="1000">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                Why has this claim been rejected?
+                Why has this learner been rejected?
             </legend>
             <div id="completionRejectNote-hint" class="govuk-hint">
-                This note tells the organisation why their claim has been rejected and therefore cannot  be edited and resubmitted
+                This note tells the organisation why this learner needs to be removed from this claim.
             </div>
             {% if data.completionRejectNoteIncomplete %}
             <p id="completion-reject-note-error" class="govuk-error-message">
