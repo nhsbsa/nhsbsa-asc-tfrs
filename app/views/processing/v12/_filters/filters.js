@@ -6,13 +6,15 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT } = require('../_helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus } = require('../_helpers/helpers.js');
 const fs = require('fs');
 const dataPath = 'app/views/processing/v12/_data/'
 
 addFilter('processorstatusTag', function (statusID) {
     if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Not yet processed</strong>'
+    } else if (statusID == 'inProgress') {
+        return '<strong class="govuk-tag govuk-tag--light-blue">In progress</strong>' 
     } else if (statusID == 'queried') {
         return '<strong class="govuk-tag govuk-tag--yellow">Needs action</strong>' 
     } else if (statusID == 'approved') {
@@ -160,7 +162,7 @@ addFilter('pageCount', function (content, perPage) {
 addFilter('orderClaims', function (claims) {
     
     return claims.sort((a, b) => {
-        const statusOrder = { submitted: 1, queried: 2, rejected: 3, approved: 4};
+        const statusOrder = { inProgress: 1, submitted: 2, queried: 3, rejected: 4, approved: 5};
         
         // Compare statuses based on order
         const statusComparison = statusOrder[a.status] - statusOrder[b.status];
@@ -347,3 +349,106 @@ addFilter('qualificationCheck', function(trainingCode, value) {
         return "Not applicable"
     }
 })
+
+addFilter('claimTypeText', function (claimType, submissionCheck) {
+    switch(claimType) {
+        case "100":
+            if (submissionCheck) {
+                return "claim"
+            } else {
+                return "100 claim"
+            }
+        case "60":
+            return "60 part"
+        case "40":
+            return "40 part"
+        }
+})
+
+addFilter('checkCompletionOutcome', function (learners) {
+    return getOverallStatus(learners)
+})
+
+addFilter('checkDone', function (review, type, claimType) {
+    let result = true
+
+    if (type == "payment") {
+
+        if (review.outcome != null) {
+            if ((review.outcome == "pass") && (((review.costPerLearner == null || review.costPerLearner == "")) || (review.paymentPlan == null && claimType == "60"))) {
+                result = false
+            } else if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "")) {
+                result = false
+            }
+        } else {
+            result = false
+        }
+
+    } else if ( type == "completion") {
+        if (review.outcome != null) {
+            if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "" )) {
+                result = false
+            }
+        } else {
+            result = false
+        }
+    }
+
+    return result
+})
+
+addFilter('sortLearners', function (learners) {
+    const allLearners = loadJSONFromFile('learners.json', dataPath)
+    const mergedLearners = learners.map(learner => {
+        const match = allLearners.find(a => a.id === learner.learnerID);
+        return {
+            ...learner,
+            ...match // adds givenName and familyName if found
+        };
+    });
+    const sortedLearners = mergedLearners.sort((a, b) =>
+        a.givenName.localeCompare(b.givenName)
+     );
+    return sortedLearners
+})
+
+addFilter('dateRange', function (learners) {
+    const dates = learners.map(l => new Date(l.completionDate));
+    const firstDate = new Date(Math.min(...dates));
+    const lastDate = new Date(Math.max(...dates));
+
+    const formatDate = date =>
+        date.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+
+    const dateRange =
+    firstDate.getTime() === lastDate.getTime()
+    ? formatDate(firstDate)
+    : `${formatDate(firstDate)} to ${formatDate(lastDate)}`;
+
+    return dateRange
+})
+
+addFilter('learnerProcessedTag', function (outcome) {
+    if (outcome == 'queried') {
+        return '<strong class="govuk-tag govuk-tag--yellow">Needs action</strong>' 
+    } else if (outcome == 'pass') {
+        return '<strong class="govuk-tag govuk-tag--green">Criteria met</strong>' 
+    } else if (outcome == 'fail') {
+        return '<strong class="govuk-tag govuk-tag--red">Rejected</strong>' 
+    }
+}, { renderAsHtml: true })
+
+addFilter('filterLearners', function (learners, status) {
+    let filtered = []
+    filtered = learners.filter( l => l.evidenceOfCompletionReview.outcome == status)
+    return filtered
+})
+
+addFilter('merge', function(obj1, obj2) {
+    // Simple shallow merge: obj2 overrides obj1
+    return Object.assign({}, obj1, obj2);
+});

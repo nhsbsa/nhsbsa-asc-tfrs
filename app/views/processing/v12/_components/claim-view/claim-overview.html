@@ -6,16 +6,17 @@
 
 {% set pairClaim = data.id | matchPairClaim(data.claims) %}
 
-{% if (data.processClaimStep == "inProgress") or (data.processClaimStep == "claimProcessed")   %}
+{% if (data.claimScreen == "claim") %}
+
+    {% include "./claim.html" %}
+
+{% elif (data.claimScreen == "inProgress") or (data.claimScreen == "confirmOutcome")  %}
 
     {% include "./claim-process.html" %}
+    {% include "./claim-sections/claim-progress-tracker.html" %}
 
-{% elif (data.processClaimStep == "previousSubmissions") %}
+{% elif (data.claimScreen == "previousSubmissions") %}
 
     {% include "./claim-previous-submissions.html" %}
-
-{% elif (data.processClaimStep == "confirmOutcome") %}
-
-    {% include "./confirm-outcome.html" %}
 
 {% endif %}

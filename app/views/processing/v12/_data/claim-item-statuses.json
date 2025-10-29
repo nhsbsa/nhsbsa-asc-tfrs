@@ -6,6 +6,12 @@
         "distribution": 0.25
     },
     {
+        "id": "inProgress",
+        "name": "In progress",
+        "description": "Claims that have been partially processed.",
+        "distribution": 0.25
+    },
+    {
         "id": "queried",
         "name": "Queried",
         "description": "Claims that have been submitted but need updating.",

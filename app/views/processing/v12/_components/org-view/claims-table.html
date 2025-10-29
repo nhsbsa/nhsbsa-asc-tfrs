@@ -24,10 +24,10 @@
         {% endif %}
             {% if (matchCounter <= (pageNumber * rowsPerPage)) and (matchCounter > ((pageNumber * rowsPerPage) - rowsPerPage)) %}
             <tr class="govuk-table__row claim-row" id="{{ claim.claimID }}">
-                <td class="govuk-table__header" scope="row"><a class="govuk-link" href="org-view-main?orgID={{org.workplaceID}}&orgTab=singleClaim&id={{claim.claimID}}&processClaimStep=inProgress">{{ claim.claimID }}</a></td>
+                <td class="govuk-table__header" scope="row"><a class="govuk-link" href="org-view-main?orgID={{org.workplaceID}}&orgTab=singleClaim&id={{claim.claimID}}&claimScreen=claim">{{ claim.claimID }}</a></td>
                 <td class="govuk-table__cell">{{ training.title }}</td>
                 <td class="govuk-table__cell">
-                    {% if submission.learnerID %} {{ learner.givenName }} {{ learner.familyName }} {% else %} Not yet added {% endif %}
+                    {{submission.learners | length }} learner{% if (submission.learners | length) >1 %}s{% endif %}
                 </td>
                 {% if (submission.processedDate)%}
                     <td class="govuk-table__cell">{{ (submission.processedDate | govukDate("truncate"))}}</td>

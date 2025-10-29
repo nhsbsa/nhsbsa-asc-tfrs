@@ -1,0 +1,131 @@
+{% set completionOutcome = submission.learners | checkCompletionOutcome %}
+    {% if data.result == "reject" %}
+
+        <p class="govuk-body">The claim has <span class="govuk-!-font-weight-bold">not met</span> the evidence criteria and therefore should be <span class="govuk-!-font-weight-bold">rejected</span>.</p>
+
+    {% endif %}
+
+    {% if data.result == "queried" %}
+            <p class="govuk-body">The claim <span class="govuk-!-font-weight-bold">needs action</span> to meet the evidence criteria, or for another reason, and therefore should be returned to the submitter.</p>
+    {% endif %}
+
+    {% if data.result == "approve" %}
+
+        <p class="govuk-body">The claim has <span class="govuk-!-font-weight-bold">met</span> the evidence criteria and therefore should be <span class="govuk-!-font-weight-bold">approved</span>.</p>
+        <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner)) | currency(trailingZeros=false) }}</span> in reimbursement.</p>
+
+        {% if not (submission.trainingCode | isInternalOMMT) %}
+            <details class="govuk-details">
+
+                <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        How was this calculated?
+                    </span>
+                </summary>
+
+                <div class="govuk-details__text">
+
+                    {% if (claim.claimType == "100")  %}
+
+                        <p>This amount is whichever is the lower of:</p>
+                        
+                        <ul>
+                            <li>the maximum reimbursement amount for this training (£{{ training.reimbursementAmount }})</li>
+                            <li>what the organisation actually paid (£{{submission.evidenceOfPaymentReview.costPerLearner}}) &ndash; this was the <strong>cost per learner</strong> value you entered on the last screen
+                            </li>
+                        </ul>
+
+                    {% elif (claim.claimType == "60")  %}
+
+                        <p class="govuk-body">The total amount that could be reimbursed for this 60/40 claim is £{{ claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner) / 0.6 }}.</p>
+                        <p>This is whichever is the lower of:</p>
+                        <ul class="govuk-list govuk-list--bullet">
+                            <li>the maximum reimbursement amount (£{{training.reimbursementAmount}})</li>
+                            <li>what the organisation actually paid (£{{submission.evidenceOfPaymentReview.costPerLearner}}) &ndash; this was the <strong>cost per learner</strong> value you entered on the last screen</li>
+                        </ul>
+                        <p>For this 60 part of the claim the organisation will get 60% of the total amount, which is <strong>£{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner)) }}</strong>.</p>
+                        <p>When the 40 claim is approved they'll get back the remaining 40% (£{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner) / 0.6 * 0.4)}}).</p>
+
+                    {% elif (claim.claimType == "40")  %}
+                    {% set pairClaim = data.id | matchPairClaim(data.claims) %}
+                    {% set pairSubmisison = pairClaim | getMostRelevantSubmission %}
+
+                        <p class="govuk-body">The total amount to be reimbursed for this 60/40 claim is £{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner) / 0.4) }}.</p>
+                        <p>This is whichever is the lower of:</p>
+                        <ul class="govuk-list govuk-list--bullet">
+                            <li>the maximum reimbursement amount (£{{training.reimbursementAmount}})</li>
+                            <li>what the organisation actually paid (£{{pairSubmisison.evidenceOfPaymentReview.costPerLearner}})</li>
+                        </ul>
+                        <p>For this 40 part of the claim the organisation will get 40% of the total amount, which is <strong>£{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner)) }}</strong>.</p>
+                        <p class="govuk-body">The organisation has already had 60% of the total, which was £{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner) / 0.4 * 0.6 )}}.</p>
+
+                    {% endif %}
+                </div>
+            </details>
+        {% endif %}
+{% elif data.result == "reject" %}
+
+    <p class="govuk-body">The organisation will receive the following note to explain why it was rejected. The wording is taken from what you entered on the previous screen.</p>
+
+    <div class='govuk-inset-text'><h2 class='govuk-heading-s'>Claim rejected</h2>
+    
+    {% if (submission.evidenceOfPaymentReview.outcome == "fail") %}
+
+        <p class='govuk-body'>The payment evidence did not meet the required criteria.</p>
+        <p class='govuk-body'>{{data.paymentRejectNote}}</p>
+
+    {% endif %}
+
+    {% if (submission.evidenceOfPaymentReview.outcome == "fail") and (completionOutcome == "reject") %}
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
+
+    {% if (completionOutcome == "reject") %}
+
+        <p class='govuk-body'>The evidence of completion evidence did not meet the required criteria.</p>
+        {% for learner in submission.learners %}
+            {% if (learner.evidenceOfCompletionReview.outcome == "fail") %}
+                {% include "./claim-sections/outcomeNote.html" %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    </div>
+
+{% elif data.result == "queried" %}
+
+    <p class="govuk-body">The organisation will receive the following notes to explain what actions it needs to take. The wording is taken from what you entered on previous screens.</p>
+
+    <div class='govuk-inset-text'><h2 class='govuk-heading-s'>Claim needs action</h2>
+    
+    {% if (submission.evidenceOfPaymentReview.outcome == "queried") %}
+        <p class='govuk-body'>The payment evidence did not meet the required criteria.</p>
+        <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
+
+    {% endif %}
+
+    {% if (submission.evidenceOfPaymentReview.outcome == "queried") and (completionOutcome == "queried") %}
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% endif %}
+
+    {% if (completionOutcome == "queried") %}
+
+        <p class='govuk-body'>The completion evidence did not meet the required criteria.</p>
+        {% for learner in submission.learners %}
+            {% if (learner.evidenceOfCompletionReview.outcome == "fail" or learner.evidenceOfCompletionReview.outcome == "queried") %}
+                {% include "./claim-sections/outcomeNote.html" %}
+            {% endif %}
+        {% endfor %}
+
+    {% endif %}
+
+    </div>
+
+{% endif %}
+
+<p class="govuk-body">Confirm that this claim should be {% if data.result == "approve" %}approved{% elif data.result == "reject" %}rejected{% elif data.result == "queried" %}sent back{% endif %}.</p>
+
+<div class="govuk-button-group">
+    <a class="govuk-button" href="../outcome-handler">{% if data.result == "approve" %}Approve{% elif data.result == "queried" %}Send{% elif data.result == "reject" %}Reject{% endif %} claim {% if data.result == "queried" %}back{% endif %}</a>
+    <a class="govuk-button govuk-button--secondary" href="../save-progress">Save and finish later</a>
+</div>
