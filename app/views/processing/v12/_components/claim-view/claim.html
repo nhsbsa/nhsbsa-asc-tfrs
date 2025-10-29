@@ -32,7 +32,7 @@
                 <h3 class="govuk-heading-m">
                     Completion evidence
                 </h3>
-                {% if claim.status != 'submitted' %}
+                {% if claim.status != 'submitted' and claim.status != 'inProgress' %}
                     <p class="govuk-body">
                         {% if needsActionLearners.length > 0 %}
                             <strong>{{needsActionLearners.length}}</strong> learners <a href="#needsAction">need action</a></br>

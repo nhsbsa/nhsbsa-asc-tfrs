@@ -637,6 +637,7 @@ top: 50%;
 left: 0;
 transform: translateY(-50%);
 width: 300px;
+max-height: 600px;
 background-color: #ffffff;
 border: 1px solid #b1b4b6;
 border-left: none;
@@ -654,6 +655,9 @@ width: 50px;
 left: 0;
 }
 
+.moj-side-navigation.minimised {
+  display: none;
+}
 
 .side-nav-header {
 background-color: #1d70b8;
@@ -665,6 +669,11 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 font-family: "GDS Transport", Arial, sans-serif;
+}
+
+.side-nav-header.minimised {
+height: 600px;
+
 }
 
 

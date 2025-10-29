@@ -131,7 +131,7 @@
         <dd class="govuk-summary-list__value">
             <p class="govuk-body">({{submission.learners.length}} learner{%if submission.learners.length > 1%}s{%endif%})</p>
 
-            {%if claim.status == "submitted" %}
+            {%if claim.status == "submitted" or claim.status == 'inProgress' %}
 
                 <ul class="govuk-list">
                 {% for learner in submission.learners | sortLearners %}

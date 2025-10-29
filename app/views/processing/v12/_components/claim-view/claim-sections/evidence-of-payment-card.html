@@ -3,7 +3,7 @@
         <h2 class="govuk-summary-card__title">
         Evidence 
         </h2>
-        {% if claim.status != "submitted"%}
+        {% if claim.status != "submitted" and claim.status != 'inProgress'%}
             <ul class="govuk-summary-card__actions">
                 <li class="govuk-summary-card__action">
                     {{ submission.evidenceOfPaymentReview.outcome | learnerProcessedTag }}
@@ -21,7 +21,7 @@
                 </dd>
             </div>
         
-        {% if claim.status != "submitted"%}
+        {% if claim.status != "submitted" and claim.status != 'inProgress'%}
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">

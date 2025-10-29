@@ -13,6 +13,8 @@ const dataPath = 'app/views/processing/v12/_data/'
 addFilter('processorstatusTag', function (statusID) {
     if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Not yet processed</strong>'
+    } else if (statusID == 'inProgress') {
+        return '<strong class="govuk-tag govuk-tag--light-blue">In progress</strong>' 
     } else if (statusID == 'queried') {
         return '<strong class="govuk-tag govuk-tag--yellow">Needs action</strong>' 
     } else if (statusID == 'approved') {
@@ -160,7 +162,7 @@ addFilter('pageCount', function (content, perPage) {
 addFilter('orderClaims', function (claims) {
     
     return claims.sort((a, b) => {
-        const statusOrder = { submitted: 1, queried: 2, rejected: 3, approved: 4};
+        const statusOrder = { inProgress: 1, submitted: 2, queried: 3, rejected: 4, approved: 5};
         
         // Compare statuses based on order
         const statusComparison = statusOrder[a.status] - statusOrder[b.status];

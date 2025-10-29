@@ -1,11 +1,11 @@
 {% set paymentCompleted = true %}
 {% set learnersCompleted = true %}
 <div class="side-nav" id="sideNav">
-    <div class="side-nav-header">
+    <div class="side-nav-header" id="side-nav-header">
         Claim progress
         <button class="minimise-btn" id="minimiseBtn">&#x276E;</button>
     </div>
-    <nav class="moj-side-navigation" aria-label="Side navigation">
+    <nav class="moj-side-navigation" aria-label="Side navigation" id="moj-side-navigation">
         {% if ((claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT)) %}
             <h4 class="moj-side-navigation__title">Review payment</h4>
             <ul class="moj-side-navigation__list govuk-!-margin-bottom-1">

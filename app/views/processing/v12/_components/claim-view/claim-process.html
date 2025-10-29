@@ -3,9 +3,9 @@
 {% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
 {% set completionNote = claim.evidenceOfCompletionreview.note %}
 
-{% if (data.claimScreen == "inProgress") %}
-
 {% include "./claim-sections/claim-header.html" %}
+
+{% if (data.claimScreen == "inProgress") %}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half">
@@ -31,6 +31,12 @@
 
 {% elif (data.claimScreen == "confirmOutcome")  %}
 
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
     {% include "./claim-steps/confirm-outcome.html" %}
+
+    </div>
+</div>
 
 {% endif %}

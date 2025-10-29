@@ -158,7 +158,7 @@ router.post('/search-claim-id', function (req, res) {
     } else {
       return res.redirect('organisation/org-view-main?orgTab=claims&orgID=' + orgID + '&notFound=true&currentPage=1')
     }
-  } else if (foundClaim.status == "submitted" || foundClaim.status == "approved" || foundClaim.status == "rejected" || foundClaim.status == "queried") {
+  } else if (foundClaim.status == "submitted" || foundClaim.status == "inProgress" || foundClaim.status == "approved" || foundClaim.status == "rejected" || foundClaim.status == "queried") {
 
     req.session.data.claimScreen = "claim"
     req.session.data.orgTab = "singleClaim"
@@ -179,7 +179,14 @@ router.get('/save-progress', function (req, res) {
   delete req.session.data.claimStep
   delete req.session.data.result
 
+  for (const c of req.session.data.claims) {
+    if (c.claimID == claimID) {
+      claim = c
+      break;
+    }
+  }
 
+  claim.status = "inProgress"
   req.session.data.claimScreen = "claim"
   req.session.data.progressSaved = true
   res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
@@ -307,6 +314,9 @@ router.post('/claim-payment-handler', function (req, res) {
             submission.evidenceOfPaymentReview.outcome = "queried"
             submission.evidenceOfPaymentReview.note = paymentQueriedNote
     }
+    if (paymentResponse != null) {
+      claim.status = "inProgress"
+    }
 
     delete req.session.data.payment
     delete req.session.data.paymentReimbursementAmount
@@ -384,8 +394,9 @@ router.post('/claim-completion-handler', function (req, res) {
         learnerSubmission.evidenceOfCompletionReview.outcome = "queried"
         learnerSubmission.evidenceOfCompletionReview.note = completionQueriedNote
     }
-
-
+    if (completionResponse != null) {
+      claim.status = "inProgress"
+    }
     delete req.session.data.completion
     delete req.session.data.completionRejectNote
     delete req.session.data.completionQueriedNote
