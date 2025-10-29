@@ -394,3 +394,54 @@ addFilter('checkDone', function (review, type, claimType) {
 
     return result
 })
+
+addFilter('sortLearners', function (learners) {
+    const allLearners = loadJSONFromFile('learners.json', dataPath)
+    const mergedLearners = learners.map(learner => {
+        const match = allLearners.find(a => a.id === learner.learnerID);
+        return {
+            ...learner,
+            ...match // adds givenName and familyName if found
+        };
+    });
+    const sortedLearners = mergedLearners.sort((a, b) =>
+        a.givenName.localeCompare(b.givenName)
+     );
+    return sortedLearners
+})
+
+addFilter('dateRange', function (learners) {
+    const dates = learners.map(l => new Date(l.completionDate));
+    const firstDate = new Date(Math.min(...dates));
+    const lastDate = new Date(Math.max(...dates));
+
+    const formatDate = date =>
+        date.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+
+    const dateRange =
+    firstDate.getTime() === lastDate.getTime()
+    ? formatDate(firstDate)
+    : `${formatDate(firstDate)} to ${formatDate(lastDate)}`;
+
+    return dateRange
+})
+
+addFilter('learnerProcessedTag', function (outcome) {
+    if (outcome == 'queried') {
+        return '<strong class="govuk-tag govuk-tag--yellow">Needs action</strong>' 
+    } else if (outcome == 'pass') {
+        return '<strong class="govuk-tag govuk-tag--green">Criteria met</strong>' 
+    } else if (outcome == 'fail') {
+        return '<strong class="govuk-tag govuk-tag--red">Rejected</strong>' 
+    }
+}, { renderAsHtml: true })
+
+addFilter('filterLearners', function (learners, status) {
+    let filtered = []
+    filtered = learners.filter( l => l.evidenceOfCompletionReview.outcome == status)
+    return filtered
+})

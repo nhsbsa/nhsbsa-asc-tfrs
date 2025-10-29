@@ -697,3 +697,15 @@ margin-right: govuk-spacing(3);
   margin-left: 14px;
   margin-bottom: govuk-spacing(3);
 }
+
+.sticky {
+  position: sticky;
+  top: 0; 
+  background: white; 
+  z-index: 10; 
+}
+
+.sticky-container {
+  position: sticky;
+  top: 1rem;
+}

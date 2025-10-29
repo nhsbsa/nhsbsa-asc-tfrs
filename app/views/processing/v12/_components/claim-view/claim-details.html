@@ -18,10 +18,12 @@
     </div>
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            Submitted on
+            Organisation address
         </dt>
         <dd class="govuk-summary-list__value">
-                {{submission.submittedDate | govukDate}}
+            {% for line in org.address%}
+                {{line}} </br>
+            {% endfor %}
         </dd>
     </div>
 
@@ -69,77 +71,109 @@
             {{training.reimbursementAmount | currency(trailingZeros=false)}}
         </dd>
     </div>
-    {% if claim.claimType != "40" or claim.isPaymentPlan == true %}
-    {% if not (submission.trainingCode | isInternalOMMT) %}
-        <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-                Payment date
-            </dt>
-            <dd class="govuk-summary-list__value">
-                {{ submission.costDate | govukDate }}
-            </dd>
-        </div>
-    {% endif %}
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Start date
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {{ submission.startDate | govukDate }}
-        </dd>
-    </div>
-    {% endif %}
-    {% if claim.claimType != "60" %}
-    <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-            Completion date
-        </dt>
-        <dd class="govuk-summary-list__value">
-            {{ submission.completionDate | govukDate }}
-        </dd>
-    </div>
-    {% endif %}
 </dl>
-<h3 class="govuk-heading-m" id="payment">Learner</h3>
+
+<h3 class="govuk-heading-m" id="payment">Dates</h3>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            <span class="govuk-visually-hidden">Learner</span>Name
+            Submitted on
         </dt>
         <dd class="govuk-summary-list__value">
-            {{learner.givenName}} {{learner.familyName}}
+                {{submission.submittedDate | govukDate}}
         </dd>
     </div>
+    {% if claim.claimType != "40" or claim.isPaymentPlan == true %}
+        {% if not (submission.trainingCode | isInternalOMMT) %}
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Payment date
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ submission.costDate | govukDate }}
+                </dd>
+            </div>
+        {% endif %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                Start date
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ submission.startDate | govukDate }}
+            </dd>
+        </div>
+    {% endif %}
+    {% if claim.claimType != "60" %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+                {% if submission.learners.length == 1 %}
+                    Completion date
+                {% else %}
+                    Completion dates
+                {% endif %}
+            </dt>
+            <dd class="govuk-summary-list__value">
+                {{ submission.learners | dateRange }}
+            </dd>
+        </div>
+    {% endif %}
+</dl>
+
+<div class="sticky-container">
+<h3 class="govuk-heading-m" id="learner">Learner{%if submission.learners.length > 1%}s{%endif%}</h3>
+<dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-            <span class="govuk-visually-hidden">Learner</span>National insurance number
+            <span class="govuk-visually-hidden">Learner</span>Name{%if submission.learners.length > 1%}s{%endif%}
         </dt>
         <dd class="govuk-summary-list__value">
-            {{learner.id}}
+            <p class="govuk-body">({{submission.learners.length}} learner{%if submission.learners.length > 1%}s{%endif%})</p>
+
+            {%if claim.status == "submitted" %}
+
+                {% for learner in submission.learners | sortLearners %}
+                    <ul class="govuk-list">
+                        <li>
+                            <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
+                        </li>
+                    </ul>
+                {% endfor %}
+
+            {% else %}
+
+                    {% if needsActionLearners.length > 0 %}
+                        <h3 class="govuk-heading-s">Needs action</h3>
+                        {% for learner in needsActionLearners | sortLearners %}
+                            <ul class="govuk-list">
+                                <li>
+                                    <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
+                                </li>
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
+                    {% if criteriaMetLearners.length > 0 %}
+                        <h3 class="govuk-heading-s">Criteria met</h3>
+                        {% for learner in criteriaMetLearners | sortLearners %}
+                            <ul class="govuk-list">
+                                <li>
+                                    <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
+                                </li>
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
+                    {% if rejectedLearners.length > 0 %}
+                        <h3 class="govuk-heading-s">Rejected</h3>
+                        {% for learner in rejectedLearners | sortLearners %}
+                            <ul class="govuk-list">
+                                <li>
+                                    <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
+                                </li>
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
+
+            {%endif %}
         </dd>
     </div>
 </dl>
-<div style="padding-top: 10px;">
-    {% if ((claim.claimType != "40") or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT) %}
-        <h3 class="govuk-heading-m">
-            Evidence of payment
-        </h3>
-        <dl class="govuk-summary-list">
-            {% for evidence in submission.evidenceOfPayment %}
-                {% set isPayment = true %}
-                {% include "./evidence/file-section.html" %}
-            {% endfor %}
-        </dl>
-    {% endif %}
-
-    {% if (claim.claimType != "60") %}
-        <h3 class="govuk-heading-m">
-            Evidence of completion
-        </h3>
-        <dl class="govuk-summary-list">
-            {% set evidence = submission.evidenceOfCompletion %}
-            {% set isPayment = false %}
-            {% include "./evidence/file-section.html" %}
-        </dl>
-    {% endif %}
 </div>

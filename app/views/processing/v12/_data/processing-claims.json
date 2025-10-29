@@ -3121,7 +3121,7 @@
         "learners": [
           {
             "learnerID": "LM 89 7F 48 J",
-            "completionDate": "2024-11-02T11:52:30.850Z",
+            "completionDate": "2024-11-12T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
@@ -3130,7 +3130,7 @@
           },
           {
             "learnerID": "HB 78 2F 15 O",
-            "completionDate": "2024-11-02T11:52:30.850Z",
+            "completionDate": "2024-11-12T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
@@ -3139,7 +3139,7 @@
           },
           {
             "learnerID": "LE 09 5F 94 M",
-            "completionDate": "2024-11-02T11:52:30.850Z",
+            "completionDate": "2024-11-08T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
@@ -3148,7 +3148,7 @@
           },
           {
             "learnerID": "NX 76 8F 30 D",
-            "completionDate": "2024-11-02T11:52:30.850Z",
+            "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
@@ -3157,7 +3157,7 @@
           },
           {
             "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": "2024-11-02T11:52:30.850Z",
+            "completionDate": "2024-11-01T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
@@ -3254,7 +3254,7 @@
         "learners": [
           {
             "learnerID": "LM 89 7F 48 J",
-            "completionDate": "2024-10-22T11:52:30.850Z",
+            "completionDate": "2024-11-22T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
             "evidenceOfCompletionReview": {
               "outcome": null,
@@ -3263,7 +3263,7 @@
           },
           {
             "learnerID": "HB 78 2F 15 O",
-            "completionDate": "2024-10-22T11:52:30.850Z",
+            "completionDate": "2024-10-21T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
             "evidenceOfCompletionReview": {
               "outcome": null,
@@ -3272,7 +3272,7 @@
           },
           {
             "learnerID": "LE 09 5F 94 M",
-            "completionDate": "2024-10-22T11:52:30.850Z",
+            "completionDate": "2024-10-18T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
             "evidenceOfCompletionReview": {
               "outcome": null,
@@ -3290,7 +3290,7 @@
           },
           {
             "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": "2024-10-22T11:52:30.850Z",
+            "completionDate": "2024-10-12T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
             "evidenceOfCompletionReview": {
               "outcome": null,
@@ -4222,8 +4222,8 @@
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "queried",
-              "note": "The completion date on the certificate does not match the completion date on the claim"
+              "outcome": "pass",
+              "note": null
             }
           },
           {
@@ -4231,8 +4231,8 @@
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "queried",
-              "note": "The completion date on the certificate does not match the completion date on the claim"
+              "outcome": "pass",
+              "note": null
             }
           },
           {
@@ -4379,8 +4379,8 @@
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "fail",
-              "note": "The evidence of completion shows that this was an apprenticeship."
+              "outcome": "queried",
+              "note": "The evidence of completion does not match the completion date provided."
             }
           },
           {
@@ -4388,8 +4388,8 @@
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "fail",
-              "note": "The evidence of completion shows that this was an apprenticeship."
+              "outcome": "pass",
+              "note": null
             }
           },
           {
