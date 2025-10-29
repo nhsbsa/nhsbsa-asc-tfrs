@@ -2,7 +2,7 @@
     <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title" id="{{learner.givenName}}">
         {{ learner.givenName}} {{ learner.familyName}}
-        </br>{{learner.learnerID}}
+        </br><span class="govuk-!-font-weight-regular">{{learner.learnerID}}</span>
         </h2>
         {% if claim.status != "submitted"%}
             <ul class="govuk-summary-card__actions">

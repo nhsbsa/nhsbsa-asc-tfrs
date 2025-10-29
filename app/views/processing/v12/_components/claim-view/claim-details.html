@@ -133,45 +133,50 @@
 
             {%if claim.status == "submitted" %}
 
+                <ul class="govuk-list">
                 {% for learner in submission.learners | sortLearners %}
-                    <ul class="govuk-list">
                         <li>
-                            <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
+                            {%if data.claimStep == null %}
+                                <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
+                            {% else %}
+                                {{learner.givenName}} {{learner.familyName}}
+                            {% endif %}
                         </li>
-                    </ul>
+                    
                 {% endfor %}
+                </ul>
 
             {% else %}
 
                     {% if needsActionLearners.length > 0 %}
                         <h3 class="govuk-heading-s">Needs action</h3>
+                        <ul class="govuk-list">
                         {% for learner in needsActionLearners | sortLearners %}
-                            <ul class="govuk-list">
-                                <li>
-                                    <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
-                                </li>
-                            </ul>
+                            <li>
+                                <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
+                            </li>
                         {% endfor %}
+                        </ul>
                     {% endif %}
                     {% if criteriaMetLearners.length > 0 %}
                         <h3 class="govuk-heading-s">Criteria met</h3>
+                        <ul class="govuk-list">
                         {% for learner in criteriaMetLearners | sortLearners %}
-                            <ul class="govuk-list">
-                                <li>
-                                    <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
-                                </li>
-                            </ul>
+                            <li>
+                                <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
+                            </li>
                         {% endfor %}
+                        </ul>
                     {% endif %}
                     {% if rejectedLearners.length > 0 %}
                         <h3 class="govuk-heading-s">Rejected</h3>
+                        <ul class="govuk-list">
                         {% for learner in rejectedLearners | sortLearners %}
-                            <ul class="govuk-list">
-                                <li>
-                                    <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
-                                </li>
-                            </ul>
+                            <li>
+                                <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
+                            </li>
                         {% endfor %}
+                        </ul>
                     {% endif %}
 
             {%endif %}
