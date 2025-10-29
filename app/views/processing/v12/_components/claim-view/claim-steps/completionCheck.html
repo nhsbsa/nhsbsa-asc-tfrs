@@ -1,42 +1,18 @@
 {% set learnerClaimData = submission.learners[(data.learnerCount-1)] %} 
 {% set learnerInfo = learnerClaimData.learnerID | findLearner %}
+{% set learner = learnerClaimData | merge(learnerInfo) %}
+
+
 
 <form action="../claim-completion-handler" method="post" novalidate>
     <span class="govuk-caption-m">Review Completion</span>
     <h3 class="govuk-heading-m">Learner {{data.learnerCount}} of {{submission.learners | length}}</h3>
-    <div class="govuk-summary-card">
-        <div class="govuk-summary-card__title-wrapper">
-            <h2 class="govuk-summary-card__title">
-                {{learnerInfo.givenName}} {{learnerInfo.familyName}}
-
-            </h2>
-        </div>
-        <div class="govuk-summary-card__content">
-            <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                Evidence
-                </dt>
-                <dd class="govuk-summary-list__value">
-                <a class="govuk-link" href="/public/images/{{learnerClaimData.evidenceOfCompletion}}" rel="noreferrer noopener" target="_blank">{{learnerClaimData.evidenceOfCompletion}} (opens in new tab)</a>
-                </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                Completion date
-                </dt>
-                <dd class="govuk-summary-list__value">
-                {{ learnerClaimData.completionDate | govukDate }}
-                </dd>
-            </div>
-            </dl>
-        </div>
-    </div>
+    {% include "../claim-sections/evidence-of-completion-card.html" %}
 
     <div class="govuk-form-group {% if data.completionResponseIncomplete %}govuk-form-group--error {% endif %}" id="completion-review">
         <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                Does the evidence of completion for {{learnerInfo.givenName}} {{learnerInfo.familyName}} meet the required criteria?
+                Does the evidence of completion for {{learner.givenName}} {{learner.familyName}} meet the required criteria?
             </legend>
             {% if data.completionResponseIncomplete %}
             <p id="completion-review-error" class="govuk-error-message">

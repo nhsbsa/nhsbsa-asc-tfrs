@@ -445,3 +445,8 @@ addFilter('filterLearners', function (learners, status) {
     filtered = learners.filter( l => l.evidenceOfCompletionReview.outcome == status)
     return filtered
 })
+
+addFilter('merge', function(obj1, obj2) {
+    // Simple shallow merge: obj2 overrides obj1
+    return Object.assign({}, obj1, obj2);
+});

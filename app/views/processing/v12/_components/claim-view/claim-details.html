@@ -47,12 +47,13 @@
             {{training.title}}
         </dd>
     </div>
+    {% if (training.code | returntrainingType) == "Qualification number"%}
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
             Level and type
         </dt>
         <dd class="govuk-summary-list__value">
-            {{ training.code | qualificationCheck(training.type) }}
+            {{ training.type }}
         </dd>
     </div>
     <div class="govuk-summary-list__row">
@@ -60,9 +61,10 @@
             Awarding organisation
         </dt>
         <dd class="govuk-summary-list__value">
-            {{ claim | qualificationCheck(training.awardingOrganisation) }}
+            {{ training.awardingOrganisation }}
         </dd>
     </div>
+    {% endif %}
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
             Max reimbursement amount

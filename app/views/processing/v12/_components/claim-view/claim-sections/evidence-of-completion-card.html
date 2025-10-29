@@ -1,10 +1,8 @@
 <div class="govuk-summary-card">
     <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title" id="{{learner.givenName}}">
-
-        {{ learner.givenName}} 
-        {{ learner.familyName}}
-        </br> {{learner.learnerID}}
+        {{ learner.givenName}} {{ learner.familyName}}
+        </br>{{learner.learnerID}}
         </h2>
         {% if claim.status != "submitted"%}
             <ul class="govuk-summary-card__actions">
@@ -14,7 +12,6 @@
             </ul>
         {% endif %}
     </div>
-
     <div class="govuk-summary-card__content">
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
@@ -52,6 +49,5 @@
                 </div>
         {% endif %}
         </dl>
-        
     </div>
 </div>

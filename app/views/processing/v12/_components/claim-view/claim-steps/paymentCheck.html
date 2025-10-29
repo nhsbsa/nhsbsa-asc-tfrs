@@ -6,24 +6,7 @@
     <p class="govuk-body">The organisation has only provided evidence of payment for 60% of the training cost.</p>
     {% endif %}
 
-    <div class="govuk-summary-card">
-        <div class="govuk-summary-card__title-wrapper">
-            <h2 class="govuk-summary-card__title">
-            Evidence
-            </h2>
-        </div>
-        <div class="govuk-summary-card__content">
-            <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-                <dd class="govuk-summary-list__value">
-                    {% for payment in submission.evidenceOfPayment %}
-                        <p class="govuk-body"><a class="govuk-link" href="/public/images/{{payment}}" target="_blank">{{payment}} (opens in new tab)</a></p>
-                    {% endfor %}
-                </dd>
-            </div>
-            </dl>
-        </div>
-     </div>
+    {% include "../claim-sections/evidence-of-payment-card.html" %}
 
     <div class="govuk-form-group {% if data.paymentResponseIncomplete %}govuk-form-group--error {% endif %}" id="payment-review">
         <fieldset class="govuk-fieldset" aria-describedby="payment-hint">
