@@ -82,7 +82,7 @@
 
     {% if (completionOutcome == "reject") %}
 
-        <p class='govuk-body'>The evidence of completion evidence did not meet the required criteria.</p>
+        <p class='govuk-body'>The completion evidence did not meet the required criteria.</p>
         {% for learner in submission.learners %}
             {% if (learner.evidenceOfCompletionReview.outcome == "fail") %}
                 {% include "../claim-sections/outcomeNote.html" %}
