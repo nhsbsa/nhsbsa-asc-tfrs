@@ -527,18 +527,16 @@ function transformClaims() {
     }
 
     // 4️⃣ Build all submissions with the SAME learners
-    for (let j = 0; j < claim.submissions.length; j++) {
-      const submission = claim.submissions[j];
+    for (const submission of claim.submissions) {
       const newSubmission = { ...submission };
 
       const newLearners = [];
-      for (let k = 0; k < selectedLearners.length; k++) {
-        const learner = selectedLearners[k];
+      for (const learner of selectedLearners) {
 
         newLearners.push({
           learnerID: learner.id || learner.learnerID,
-          completionDate: submission.completionDate || null,
-          evidenceOfCompletion: submission.evidenceOfCompletion || null,
+          completionDate:  submission.completionDate || null,
+          evidenceOfCompletion:  submission.evidenceOfCompletion || null,
           evidenceOfCompletionReview: {
             outcome: submission.evidenceOfCompletionReview?.outcome || null,
             note: submission.evidenceOfCompletionReview?.note || null
@@ -546,14 +544,14 @@ function transformClaims() {
         });
       }
 
+      // Add shared learners
+      newSubmission.learners = newLearners;
+
       // Remove old single-learner fields
       delete newSubmission.learnerID;
       delete newSubmission.completionDate;
       delete newSubmission.evidenceOfCompletion;
       delete newSubmission.evidenceOfCompletionReview;
-
-      // Add shared learners
-      newSubmission.learners = newLearners;
 
       // Handle sharedCompletionDate flag
       newSubmission.sharedCompletionDate = claim.status !== "not-yet-submitted" ? false : null;
