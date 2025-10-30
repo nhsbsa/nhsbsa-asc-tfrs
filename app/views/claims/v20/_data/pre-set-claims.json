@@ -37,16 +37,7 @@
             }
           },
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LE 09 5F 94 M",
+            "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -64,7 +55,16 @@
             }
           },
           {
-            "learnerID": "NX 76 8F 30 D",
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -108,45 +108,9 @@
         "processedBy": null,
         "learners": [
           {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -154,8 +118,53 @@
           },
           {
             "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -185,56 +194,65 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
           {
             "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2024-12-17T21:33:21.901Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
               "note": null
             }
           }
@@ -274,45 +292,9 @@
         "processedBy": null,
         "learners": [
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -320,8 +302,17 @@
           },
           {
             "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -329,8 +320,35 @@
           },
           {
             "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -360,66 +378,66 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The awarding body for the training course on the claim doesn't match the awarding body of the certificate of completion uploaded to your claim."
             }
           },
           {
             "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The awarding body for the training course on the claim doesn't match the awarding body of the certificate of completion uploaded to your claim."
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The awarding body for the training course on the claim doesn't match the awarding body of the certificate of completion uploaded to your claim."
             }
           },
           {
             "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The awarding body for the training course on the claim doesn't match the awarding body of the certificate of completion uploaded to your claim."
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The awarding body for the training course on the claim doesn't match the awarding body of the certificate of completion uploaded to your claim."
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The awarding body for the training course on the claim doesn't match the awarding body of the certificate of completion uploaded to your claim."
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The awarding body for the training course on the claim doesn't match the awarding body of the certificate of completion uploaded to your claim."
             }
           }
         ],
@@ -457,27 +475,9 @@
         "processedBy": null,
         "learners": [
           {
-            "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -506,29 +506,11 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
-            "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           }
@@ -554,29 +536,11 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
-            "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2024-10-24T19:46:57.118Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           }
@@ -617,55 +581,37 @@
         "learners": [
           {
             "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
           {
             "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
           {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
           {
-            "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           }
@@ -693,55 +639,37 @@
         "learners": [
           {
             "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
           {
             "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
           {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
           {
-            "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           }
@@ -781,29 +709,47 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-02-02T01:44:27.141Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
           {
-            "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-02-02T01:44:27.141Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
           {
             "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2025-02-02T01:44:27.141Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2025-02-02T01:44:27.141Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-02-02T01:44:27.141Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
               "note": null
             }
           }
@@ -831,29 +777,47 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-02-02T01:44:27.141Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
           {
-            "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-02-02T01:44:27.141Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
           {
             "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2025-02-02T01:44:27.141Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2025-02-02T01:44:27.141Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-02-02T01:44:27.141Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
               "note": null
             }
           }
@@ -894,25 +858,7 @@
         "processedBy": null,
         "learners": [
           {
-            "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LM 89 7F 48 J",
+            "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -940,15 +886,6 @@
           },
           {
             "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -992,42 +929,6 @@
         "processedBy": null,
         "learners": [
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1058,42 +959,6 @@
         "processedDate": "2025-02-12T07:43:14.557Z",
         "processedBy": "Flossie Gleaason",
         "learners": [
-          {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
           {
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
@@ -1157,7 +1022,7 @@
             }
           },
           {
-            "learnerID": "LM 89 7F 48 J",
+            "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -1167,6 +1032,33 @@
           },
           {
             "learnerID": "BF 73 4F 97 L",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -1215,7 +1107,7 @@
             }
           },
           {
-            "learnerID": "LM 89 7F 48 J",
+            "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -1225,6 +1117,33 @@
           },
           {
             "learnerID": "BF 73 4F 97 L",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -1272,7 +1191,7 @@
             }
           },
           {
-            "learnerID": "LM 89 7F 48 J",
+            "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -1282,6 +1201,33 @@
           },
           {
             "learnerID": "BF 73 4F 97 L",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -1325,47 +1271,11 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           }
@@ -1401,43 +1311,7 @@
         "processedBy": null,
         "learners": [
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -1481,6 +1355,42 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1511,6 +1421,42 @@
         "processedDate": "2024-11-23T06:24:49.949Z",
         "processedBy": "Allan Connelly",
         "learners": [
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
           {
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
@@ -1556,11 +1502,11 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
-            "learnerID": "BF 73 4F 97 L",
+            "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           }
@@ -1600,9 +1546,9 @@
         "processedBy": null,
         "learners": [
           {
-            "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-03-05T03:16:00.448Z",
+            "evidenceOfCompletion": "certficate2.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -1632,12 +1578,12 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
-            "learnerID": "BF 73 4F 97 L",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-03-05T03:16:00.448Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The certificate shows a different learner's name to the one in the claim."
             }
           }
         ],
@@ -1677,7 +1623,25 @@
         "processedBy": "Mara Monahan",
         "learners": [
           {
-            "learnerID": "KZ 79 0F 13 Z",
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -1695,7 +1659,16 @@
             }
           },
           {
-            "learnerID": "HB 78 2F 15 O",
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -1727,7 +1700,25 @@
         "processedBy": "Mara Monahan",
         "learners": [
           {
-            "learnerID": "KZ 79 0F 13 Z",
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -1745,7 +1736,16 @@
             }
           },
           {
-            "learnerID": "HB 78 2F 15 O",
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -1789,29 +1789,56 @@
         "processedBy": null,
         "learners": [
           {
-            "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "queried",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
               "note": null
             }
           },
           {
             "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "queried",
               "note": null
             }
           },
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "queried",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
               "note": null
             }
           }
@@ -1839,30 +1866,57 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
-            "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The name of the learner on the claim does not match the name of the learner on the certificate of completion."
+            }
+          },
+          {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The name of the learner on the claim does not match the name of the learner on the certificate of completion."
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The name of the learner on the claim does not match the name of the learner on the certificate of completion."
             }
           },
           {
             "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The name of the learner on the claim does not match the name of the learner on the certificate of completion."
             }
           },
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The name of the learner on the claim does not match the name of the learner on the certificate of completion."
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The name of the learner on the claim does not match the name of the learner on the certificate of completion."
             }
           }
         ],
@@ -1901,29 +1955,20 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
               "note": null
             }
           },
@@ -1932,7 +1977,34 @@
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
               "note": null
             }
           }
@@ -1959,29 +2031,20 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
               "note": null
             }
           },
@@ -1990,7 +2053,34 @@
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
               "note": null
             }
           }
@@ -2030,38 +2120,56 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
               "note": null
             }
           },
           {
             "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
               "note": null
             }
           }
@@ -2089,39 +2197,57 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certficate2.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The name on the evidence of completion does not match the claim."
+            }
+          },
+          {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certficate2.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The name on the evidence of completion does not match the claim."
             }
           },
           {
             "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certficate2.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The name on the evidence of completion does not match the claim."
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certficate2.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The name on the evidence of completion does not match the claim."
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certficate2.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The name on the evidence of completion does not match the claim."
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2025-01-23T10:49:50.110Z",
+            "evidenceOfCompletion": "certficate2.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The name on the evidence of completion does not match the claim."
             }
           }
         ],
@@ -2160,11 +2286,29 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           }
@@ -2204,12 +2348,30 @@
         "processedBy": "Mara Monahan",
         "learners": [
           {
-            "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-01-30T10:14:23.640Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "fail",
+              "note": "The certificate of completion still doesn't match the details in the claim."
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2025-01-30T10:14:23.640Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "fail",
+              "note": "The certificate of completion still doesn't match the details in the claim."
+            }
+          },
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-01-30T10:14:23.640Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "fail",
+              "note": "The certificate of completion still doesn't match the details in the claim."
             }
           }
         ],
@@ -2236,12 +2398,30 @@
         "processedBy": "Mara Monahan",
         "learners": [
           {
-            "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-01-30T10:14:23.640Z",
+            "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "pass",
+              "note": "The certificate of completion still doesn't match the details in the claim."
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2025-01-30T10:14:23.640Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": "The certificate of completion still doesn't match the details in the claim."
+            }
+          },
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-01-30T10:14:23.640Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": "The certificate of completion still doesn't match the details in the claim."
             }
           }
         ],
@@ -2276,6 +2456,24 @@
         "processedBy": null,
         "learners": [
           {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2285,16 +2483,7 @@
             }
           },
           {
-            "learnerID": "NX 76 8F 30 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "LM 89 7F 48 J",
+            "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -2334,7 +2523,34 @@
         "processedBy": null,
         "learners": [
           {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
             "learnerID": "LE 09 5F 94 M",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -2374,7 +2590,7 @@
         "processedBy": null,
         "learners": [
           {
-            "learnerID": "BF 73 4F 97 L",
+            "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -2392,7 +2608,7 @@
             }
           },
           {
-            "learnerID": "NX 76 8F 30 D",
+            "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -2401,7 +2617,34 @@
             }
           },
           {
-            "learnerID": "LM 89 7F 48 J",
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -2440,12 +2683,57 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
-            "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-02-14T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The completion date on the certificate does not match the completion date on the claim"
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-02-14T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date on the certificate does not match the completion date on the claim"
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2025-02-14T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date on the certificate does not match the completion date on the claim"
+            }
+          },
+          {
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": "2025-02-14T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date on the certificate does not match the completion date on the claim"
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-02-14T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date on the certificate does not match the completion date on the claim"
+            }
+          },
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-02-14T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date on the certificate does not match the completion date on the claim"
             }
           }
         ],
@@ -2468,9 +2756,54 @@
         "processedBy": null,
         "learners": [
           {
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-02-01T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-02-01T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2025-02-01T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
             "learnerID": "LM 89 7F 48 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "completionDate": "2025-02-01T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-02-01T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-02-01T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -2507,39 +2840,21 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
-            "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-02-14T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The completion date on the certificate does not match the completion date on the claim"
             }
           },
           {
-            "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-02-14T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+              "outcome": "queried",
+              "note": "The completion date on the certificate does not match the completion date on the claim"
             }
           }
         ],
@@ -2565,36 +2880,18 @@
         "processedBy": null,
         "learners": [
           {
-            "learnerID": "KZ 79 0F 13 Z",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-02-01T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
             }
           },
           {
-            "learnerID": "LE 09 5F 94 M",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "ZX 51 96 87 D",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-02-01T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
