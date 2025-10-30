@@ -35,13 +35,13 @@
                 {% if claim.status != 'submitted' and claim.status != 'inProgress' %}
                     <p class="govuk-body">
                         {% if needsActionLearners.length > 0 %}
-                            <strong>{{needsActionLearners.length}}</strong> learners <a href="#needsAction">need action</a></br>
+                            <a href="#needsAction">need action</a> (<strong>{{needsActionLearners.length}}</strong> learners) </br>
                         {%endif %}
                         {% if criteriaMetLearners.length > 0 %}
-                            <strong>{{criteriaMetLearners.length}}</strong> learners <a href="#criteriaMet">criteria met</a></br>
+                            <a href="#criteriaMet">criteria met</a> (<strong>{{criteriaMetLearners.length}}</strong> learners)</br>
                         {%endif %}
                         {% if rejectedLearners.length > 0 %}
-                            <strong>{{rejectedLearners.length}}</strong> learners <a href="#rejected">rejected</a></br>
+                            <a href="#rejected">rejected</a> (<strong>{{rejectedLearners.length}}</strong> learners)</br>
                         {%endif %}
                     </p>
                     {% if needsActionLearners.length > 0 %}
