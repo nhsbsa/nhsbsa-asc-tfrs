@@ -39,6 +39,14 @@
                     {% endif %}
                 </dd>
             </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Cost per learner
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}} </br>
+                </dd>
+            </div>
         </dl>
         {% endif %}
         
