@@ -21,7 +21,11 @@
         <div style="padding-top: 10px;">
             {% if ((claim.claimType != "40") or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT) %}
                 <h3 class="govuk-heading-m">
+                    {% if claim.status != 'submitted' and claim.status != 'inProgress' %}
+                    Completed review of payment evidence
+                    {% else %}
                     Payment evidence
+                    {% endif %}
                 </h3>
                     {% include "./claim-sections/evidence-of-payment-card.html" %}
             {% endif %}
@@ -30,18 +34,22 @@
             {% endif %}
             {% if (claim.claimType != "60") %}
                 <h3 class="govuk-heading-m">
+                    {% if claim.status != 'submitted' and claim.status != 'inProgress' %}
+                    Completed review of completion evidence
+                    {% else %}
                     Completion evidence
+                    {% endif %}
                 </h3>
                 {% if claim.status != 'submitted' and claim.status != 'inProgress' %}
                     <p class="govuk-body">
                         {% if needsActionLearners.length > 0 %}
-                            <a href="#needsAction">need action</a> (<strong>{{needsActionLearners.length}}</strong> learners) </br>
+                            <a href="#needsAction">Needs action</a> (<strong>{{needsActionLearners.length}}</strong> learners) </br>
                         {%endif %}
                         {% if criteriaMetLearners.length > 0 %}
-                            <a href="#criteriaMet">criteria met</a> (<strong>{{criteriaMetLearners.length}}</strong> learners)</br>
+                            <a href="#criteriaMet">Criteria met</a> (<strong>{{criteriaMetLearners.length}}</strong> learners)</br>
                         {%endif %}
                         {% if rejectedLearners.length > 0 %}
-                            <a href="#rejected">rejected</a> (<strong>{{rejectedLearners.length}}</strong> learners)</br>
+                            <a href="#rejected">Rejected</a> (<strong>{{rejectedLearners.length}}</strong> learners)</br>
                         {%endif %}
                     </p>
                     {% if needsActionLearners.length > 0 %}
