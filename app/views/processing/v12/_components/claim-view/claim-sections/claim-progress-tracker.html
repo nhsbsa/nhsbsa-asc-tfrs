@@ -6,12 +6,11 @@
         Claim progress
         <button class="minimise-btn-open" id="minimiseBtnOpen">&#x276E;</button>
     </div>
-    <nav class="moj-side-navigation" aria-label="Side navigation" id="moj-side-navigation">
+    <nav class="moj-side-navigation nav-scrollable" aria-label="Side navigation" id="moj-side-navigation">
         {% if ((claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT)) %}
             <h4 class="moj-side-navigation__title">Review payment</h4>
             <ul class="moj-side-navigation__list govuk-!-margin-bottom-1">
-                <li
-                    class="moj-side-navigation__item {% if (submission.evidenceOfPaymentReview.outcome != null) %}moj-side-navigation__item-with-icon{% endif %}{% if (data.claimStep == "payment") %} moj-side-navigation__item--active{% endif %}">
+                <li class="moj-side-navigation__item {% if (submission.evidenceOfPaymentReview.outcome != null) %}moj-side-navigation__item-with-icon{% endif %}{% if (data.claimStep == "payment") %} moj-side-navigation__item--active{% endif %}" id="tracker-payment ">
                     <a href="../process-step-handler?stage=payment" aria-current="location" class="moj-side-navigation__link">Payment evidence</a>
                     {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone ("payment", claim.claimType) %}
                     {% if (paymentIsDone) %}
@@ -27,7 +26,7 @@
             <ul class="moj-side-navigation__list">
                 {% for learner in submission.learners %}
                     {% set learnerInfo = learner.learnerID | findLearner %}
-                    <li class="moj-side-navigation__item  {% if (learner.evidenceOfCompletionReview.outcome != null)  %}moj-side-navigation__item-with-icon{% endif %} {% if (data.claimStep == "completion") and (loop.index == data.learnerCount) %}moj-side-navigation__item--active{% endif %}">
+                    <li class="moj-side-navigation__item  {% if (learner.evidenceOfCompletionReview.outcome != null)  %}moj-side-navigation__item-with-icon{% endif %} {% if (data.claimStep == "completion") and (loop.index == data.learnerCount) %}moj-side-navigation__item--active{% endif %}" id="tracker-learner-{{loop.index}}">
                         <a href="../process-step-handler?stage=completion&learnerNo={{loop.index}}" class="moj-side-navigation__link">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
                         {% set completionIsDone = learner.evidenceOfCompletionReview | checkDone ("completion", claim.claimType) %}
                         {% if (completionIsDone) %}
@@ -42,8 +41,7 @@
         {% if paymentCompleted and learnersCompleted %}
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible govuk-!-margin-right-3 govuk-!-margin-left-3">
         <ul class="moj-side-navigation__list govuk-!-margin-bottom-1">
-            <li
-                class="moj-side-navigation__item {% if (data.claimScreen == "confirmOutcome")%}moj-side-navigation__item--active{% endif %}">
+            <li class="moj-side-navigation__item {% if (data.claimScreen == "confirmOutcome")%}moj-side-navigation__item--active{% endif %}" id="tracker-confirm">
                 <a href="../outcome-step-handler" aria-current="location" class="moj-side-navigation__link">Confirm outcome</a>
             </li>
         </ul>

@@ -706,7 +706,10 @@ margin-bottom: govuk-spacing(2);
 display:inline
 }
 
-
+.nav-scrollable {
+  overflow-y: auto;       /* enables vertical scrollbar when content overflows */
+  overflow-x: hidden;     /* hides horizontal scrollbar (optional) */
+}
 
 .moj-side-navigation__item {
 display: flex;

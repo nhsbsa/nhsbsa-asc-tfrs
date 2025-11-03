@@ -88,5 +88,20 @@ navHeader.classList.remove('minimised');
 minimiseBtnClose.classList.remove('minimised');
 minimiseBtnOpen.classList.remove('minimised');
 });
+
+window.addEventListener('load', () => {
+    // Check if the URL has a hash (like #section3)
+    const hash = window.location.hash;
+
+    if (hash) {
+      // Find the target element inside the scrollable div
+      const target = document.querySelector(hash);
+
+      if (target) {
+        // Scroll it into view, but only within the container
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+});
 </script>
 {% endblock %}
