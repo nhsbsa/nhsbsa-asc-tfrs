@@ -51,36 +51,24 @@
 
         <div style="padding-top: 10px;">
             {% if ((claim.claimType != "40") or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT) %}
-                <h3 class="govuk-heading-m">
-                    {% if claim.status != 'submitted' and claim.status != 'inProgress' %}
-                    Completed review of payment evidence
-                    {% else %}
-                    Payment evidence
-                    {% endif %}
-                </h3>
+                <h3 class="govuk-heading-m">Payment evidence</h3>
                     {% include "./claim-sections/evidence-of-payment-card.html" %}
             {% endif %}
             {% if (not (submission.trainingCode | isInternalOMMT) and claim.claimType == "100") or (claim.claimType == "40" and claim.isPaymentPlan)%}
                 <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
             {% endif %}
             {% if (claim.claimType != "60") %}
-                <h3 class="govuk-heading-m">
-                    {% if claim.status != 'submitted' and claim.status != 'inProgress' %}
-                    Completed review of completion evidence
-                    {% else %}
-                    Completion evidence
-                    {% endif %}
-                </h3>
+                <h3 class="govuk-heading-m">Completion evidence</h3>
                 {% if claim.status != 'submitted' and claim.status != 'inProgress' %}
                     <p class="govuk-body">
                         {% if needsActionLearners.length > 0 %}
-                            <a href="#needsAction">Needs action</a> (<strong>{{needsActionLearners.length}}</strong> learners) </br>
+                            <a href="#needsAction">Needs action</a> (<strong>{{needsActionLearners.length}}</strong> learner{% if (needsActionLearners | length) > 1 %}s{% endif %}) </br>
                         {%endif %}
                         {% if criteriaMetLearners.length > 0 %}
-                            <a href="#criteriaMet">Criteria met</a> (<strong>{{criteriaMetLearners.length}}</strong> learners)</br>
+                            <a href="#criteriaMet">Criteria met</a> (<strong>{{criteriaMetLearners.length}}</strong> learner{% if (criteriaMetLearners | length) > 1 %}s{% endif %})</br>
                         {%endif %}
                         {% if rejectedLearners.length > 0 %}
-                            <a href="#rejected">Rejected</a> (<strong>{{rejectedLearners.length}}</strong> learners)</br>
+                            <a href="#rejected">Rejected</a> (<strong>{{rejectedLearners.length}}</strong> learner{% if (rejectedLearners | length) > 1 %}s{% endif %})</br>
                         {%endif %}
                     </p>
                     {% if needsActionLearners.length > 0 %}

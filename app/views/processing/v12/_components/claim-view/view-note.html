@@ -7,10 +7,10 @@
           <p class="govuk-body"><strong>Version: </strong>{{data.count | formatCountToText}} submission </br> <strong>Submitted date: </strong>{{submission.submittedDate | govukDate}}</p>
 
           {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Evidence of payment:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
+            <p class="govuk-body"><strong>Payment evidence:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
           {% endif %}
           {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Evidence of completion:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
+            <p class="govuk-body"><strong>Completion evidence:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
           {% endif %}
 
         <a href="/hideEditedNote" class="govuk-link govuk-button">Close</a>

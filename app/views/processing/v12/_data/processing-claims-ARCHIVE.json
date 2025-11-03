@@ -157,7 +157,7 @@
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The payment date doesn't match the evidence of payment, please update.",
+          "note": "The payment date doesn't match the payment evidence, please update.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -214,7 +214,7 @@
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The payment date doesn't match the evidence of payment, please update.",
+          "note": "The payment date doesn't match the payment evidence, please update.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -362,7 +362,7 @@
         "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The date of payment in the evidence of payment did not match the payment date given in the claim. Update the payment date or provide the correct evidence",
+          "note": "The date of payment in the payment evidence did not match the payment date given in the claim. Update the payment date or provide the correct evidence",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -453,7 +453,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The date of payment in the evidence of payment did not match the payment date given in the claim.",
+          "note": "The date of payment in the payment evidence did not match the payment date given in the claim.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -491,7 +491,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The payment date on the evidence of payment provided does not match the payment date in the claim.",
+          "note": "The payment date on the payment evidence provided does not match the payment date in the claim.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -516,7 +516,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment evidence provided is not sufficient to prove you paid for the training.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -573,7 +573,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment evidence provided is not sufficient to prove you paid for the training.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -607,7 +607,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment needs to show the date of payment",
+          "note": "The payment evidence needs to show the date of payment",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -630,7 +630,7 @@
         "evidenceOfCompletion": "certificate1.pdf",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment you have provided does not show what training was paid for.",
+          "note": "The payment evidence you have provided does not show what training was paid for.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -687,7 +687,7 @@
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment evidence provided is not sufficient to prove you paid for the training.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -721,7 +721,7 @@
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment evidence provided is not sufficient to prove you paid for the training.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -744,7 +744,7 @@
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment evidence provided is not sufficient to prove you paid for the training.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -801,7 +801,7 @@
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment evidence provided is not sufficient to prove you paid for the training.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -835,7 +835,7 @@
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "fail",
-          "note": "The evidence of payment show you paid for a course that is not eligible for funding through our service.",
+          "note": "The payment evidence show you paid for a course that is not eligible for funding through our service.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -858,7 +858,7 @@
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment does not show what training you paid for.",
+          "note": "The payment evidence does not show what training you paid for.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -915,7 +915,7 @@
         "evidenceOfCompletion": null,
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The payment date doesn't match the evidence of payment provided.",
+          "note": "The payment date doesn't match the payment evidence provided.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -1160,7 +1160,7 @@
         },
         "evidenceOfCompletionReview": {
           "outcome": "queried",
-          "note": "The name on the evidence of completion does not match the claim."
+          "note": "The name on the completion evidence does not match the claim."
         },
         "processedDate": "2025-01-28T00:32:45.681Z",
         "processedBy": "Flossie Gleason"
@@ -1370,7 +1370,7 @@
         "evidenceOfCompletion": "certificate-BS.png",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment evidence provided is not sufficient to prove you paid for the training.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -1393,7 +1393,7 @@
         "evidenceOfCompletion": "certificate-BS.png",
         "evidenceOfPaymentReview": {
           "outcome": "queried",
-          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "note": "The payment evidence provided is not sufficient to prove you paid for the training.",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -1968,7 +1968,7 @@
         },
         "evidenceOfCompletionReview": {
           "outcome": "fail",
-          "note": "The evidence of completion shows that this was an apprenticeship."
+          "note": "The completion evidence shows that this was an apprenticeship."
         },
         "processedDate": "2025-03-18T03:36:53.621Z",
         "processedBy": "Flossie Gleason"

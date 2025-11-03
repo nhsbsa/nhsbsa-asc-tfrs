@@ -3,7 +3,7 @@
     <h3 class="govuk-heading-m">Payment evidence</h3>
 
     {% if (claim.isPaymentPlan and claim.claimType == "40") %} 
-    <p class="govuk-body">The organisation has only provided evidence of payment for 60% of the training cost.</p>
+    <p class="govuk-body">The organisation has only provided payment evidence for 60% of the training cost.</p>
     {% endif %}
 
     {% include "../claim-sections/evidence-of-payment-card.html" %}
@@ -20,7 +20,7 @@
             {% endif %}
             {% if data.paymentResponseIncomplete %}
                 <p id="payment-review-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span>Select an option for evidence of payment
+                    <span class="govuk-visually-hidden">Error:</span>Select an option for payment evidence
                 </p>
             {% endif %}
             <div class="govuk-radios" data-module="govuk-radios">
@@ -85,7 +85,7 @@
                     What is the full cost per learner?
                 </label>
                 <div id="payment-note-hint" class="govuk-hint">
-                    <p class="govuk-hint">Enter the full cost of this training for a single learner (even if the organisation has only paid 60% so far).</p>
+                    <p class="govuk-hint">Enter the full cost of this training for a single learner (even if the organisation has only paid 60% so far)</p>
                 </div>
 
 
@@ -117,11 +117,11 @@
                 What action does the organisation need to take?
             </legend>
             <div id="payment-queried-note-hint" class="govuk-hint">
-                This note tells the organisation what edits they need to make to this learner.
+                This note tells the organisation what edits they need to make to this learner
             </div>
             {% if data.paymentQueriedNoteIncomplete %}
             <p id="payment-queried-note-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span>Enter action required for evidence of payment 
+                <span class="govuk-visually-hidden">Error:</span>Enter action required for payment evidence 
             </p>
             {% endif %}
             <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-textarea--error{% endif %}" id="paymentQueriedNote" name="paymentQueriedNote" rows="21" aria-describedby="payment-queried-note-info note-hint">{% if submission.evidenceOfPaymentReview.outcome=='queried' %}{{ data.paymentQueriedNote or submission.evidenceOfPaymentReview.note or '' }}{% else %}{{ data.paymentQueriedNote or '' }}{% endif %}</textarea>
@@ -137,11 +137,11 @@
                 Why has this claim been rejected?
             </legend>
             <div id="payment-reject-note-hint" class="govuk-hint">
-                This note tells the organisation why this learner needs to be removed from this claim.
+                This note tells the organisation why this learner needs to be removed from this claim
             </div>
             {% if data.paymentRejectNoteIncomplete %}
             <p id="payment-reject-note-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for evidence of payment 
+                <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for payment evidence 
             </p>
             {% endif %}
             <textarea
