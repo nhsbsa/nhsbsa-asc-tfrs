@@ -222,20 +222,24 @@ req.session.data.claimScreen = "inProgress"
 const stage = req.session.data.stage
 const learnerNo = req.session.data.learnerNo
 
+let location = null
+
 delete req.session.data.progressSaved
 
 if (stage == "payment") {
   req.session.data.claimStep = "payment"
   delete req.session.data.learnerCount
+  location = "tracker-payment"
 } else if (stage == "completion") {
   req.session.data.learnerCount = parseInt(learnerNo)
   req.session.data.claimStep = "completion"
+  location = "tracker-learner-" + learnerNo
 }
 
 delete req.session.data.stage
 delete req.session.data.learnerNo
 
-return res.redirect('organisation/org-view-main#tab-content')
+return res.redirect('organisation/org-view-main#' + location)
 
 });
 
@@ -246,6 +250,7 @@ delete req.session.data.progressSaved
 const claimID = req.session.data.id
 
 let claim = null
+let location = null
 
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -257,12 +262,14 @@ let submission = getMostRelevantSubmission(claim)
 
 if ((claim.claimType != "40" || (claim.claimType == "40" && claim.isPaymentPlan)) && !(isInternalOMMT(submission.trainingCode))) {
   req.session.data.claimStep = "payment"
+  location = "tracker-payment"
 } else {
   req.session.data.learnerCount = 1
   req.session.data.claimStep = "completion"
+  location = "tracker-learner-" + learnerNo
 }
 
-return res.redirect('organisation/org-view-main#tab-content')
+return res.redirect('organisation/org-view-main#' + location)
 
 });
 
@@ -284,6 +291,7 @@ router.post('/claim-payment-handler', function (req, res) {
   const actionType = req.session.data.actionType
 
   let claim = null
+  let location = null
 
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -338,18 +346,20 @@ router.post('/claim-payment-handler', function (req, res) {
       } else if (claim.claimType == "100" || (claim.claimType == "40" && claim.isPaymentPlan) ) {
         req.session.data.claimStep = "completion"
         req.session.data.learnerCount = 1
-        return res.redirect('organisation/org-view-main#tab-content')
+        location = "tracker-learner-" + req.session.data.learnerCount
+        return res.redirect('organisation/org-view-main#' + location)
 
       } else {
         req.session.data.result = determineOutcome(claim, submission.evidenceOfPaymentReview.outcome, null)
         req.session.data.claimScreen = "confirmOutcome"
-        return res.redirect('organisation/org-view-main#tab-content')
+        location = "tracker-confirm"
+        return res.redirect('organisation/org-view-main#' + location)
       }
 
   } else {
 
 
-      return res.redirect('organisation/org-view-main?' + errorParamaters + '#tab-content')
+      return res.redirect('organisation/org-view-main?' + errorParamaters + '#tracker-payment')
 
   }
 
@@ -370,6 +380,7 @@ router.post('/claim-completion-handler', function (req, res) {
   const actionType = req.session.data.actionType
 
   let claim = null
+  let location = null
 
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -414,14 +425,16 @@ router.post('/claim-completion-handler', function (req, res) {
 
       } else if (learnerCount < submission.learners.length ) {
         req.session.data.learnerCount = learnerCount + 1
-        return res.redirect('organisation/org-view-main#tab-content')
+        location = "tracker-learner-" + req.session.data.learnerCount
+        return res.redirect('organisation/org-view-main#' + location)
 
       } else {
         delete req.session.data.learnerCount
         delete req.session.data.claimStep
         req.session.data.result = determineOutcome(claim)
         req.session.data.claimScreen = "confirmOutcome"
-        return res.redirect('organisation/org-view-main#tab-content')
+        location = "tracker-confirm"
+        return res.redirect('organisation/org-view-main#' + location)
       }
 
   } else {
