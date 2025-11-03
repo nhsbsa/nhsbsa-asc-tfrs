@@ -136,7 +136,7 @@
 
                     {% if (data.view == "100" and not internalOMMTCheck) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true) %}
                         <tr class="govuk-table__row">
-                            <td class="govuk-table__cell"><strong>Evidence of payment</strong></td>
+                            <td class="govuk-table__cell"><strong>Payment evidence</strong></td>
                             {% for submission in sortedSubmissions %}
                                 {% if submission.evidenceOfPayment %}
                                     <td class="govuk-table__cell">
@@ -195,7 +195,7 @@
 
                     {% if data.view == "100" or data.view == "40"  %}
                         <tr class="govuk-table__row">
-                            <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
+                            <td class="govuk-table__cell"><strong>Completion evidence</strong></td>
                             {% for submission in sortedSubmissions %}
                                 {% if submission.evidenceOfCompletion %}
                                     {% if (submission.evidenceOfCompletion !== sortedSubmissions[loop.index0 + 1].evidenceOfCompletion and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
@@ -225,7 +225,7 @@
                     {% endif %}
 
                     {% if claim.claimType =="40"%}
-                    <p class="govuk-body govuk-!-margin-top-4">View the <a href="./org-view-main?id={{pairClaim.claimID}}&claimScreen=claim" class="govuk-link">60 part of the claim</a>, which covers evidence of payment.</p>
+                    <p class="govuk-body govuk-!-margin-top-4">View the <a href="./org-view-main?id={{pairClaim.claimID}}&claimScreen=claim" class="govuk-link">60 part of the claim</a>, which covers payment evidence.</p>
                     {% endif %}
 
     </div>

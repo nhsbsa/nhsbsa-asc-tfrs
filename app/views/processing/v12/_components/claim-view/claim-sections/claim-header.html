@@ -45,7 +45,7 @@
                     <ul class="govuk-list govuk-error-summary__list">
                         {% if data.paymentResponseIncomplete %}
                         <li>
-                            <a href="#payment-review">Select an option for evidence of payment</a>
+                            <a href="#payment-review">Select an option for payment evidence</a>
                         </li>
                         {% endif %}
 
@@ -69,31 +69,31 @@
 
                         {% if data.paymentRejectNoteIncomplete %}
                             <li>
-                                <a href="#payment-reject-note-error">Enter rejection reasons for evidence of payment </a>
+                                <a href="#payment-reject-note-error">Enter rejection reasons for payment evidence </a>
                             </li>
                         {% endif %}
 
                         {% if data.paymentQueriedNoteIncomplete %}
                             <li>
-                                <a href="#payment-queried-note-error">Enter action required for evidence of payment </a>
+                                <a href="#payment-queried-note-error">Enter action required for payment evidence </a>
                             </li>
                         {% endif %}
 
                         {% if data.completionResponseIncomplete %}
                             <li>
-                                <a href="#completion-review">Select an option for evidence of completion </a>
+                                <a href="#completion-review">Select an option for completion evidence </a>
                             </li>
                         {% endif %}
 
                         {% if data.completionRejectNoteIncomplete %}
                             <li>
-                                <a href="#completion-reject-note-error">Enter rejection reasons for evidence of completion</a>
+                                <a href="#completion-reject-note-error">Enter rejection reasons for completion evidence</a>
                             </li>
                         {% endif %}
 
                         {% if data.completionQueriedNoteIncomplete %}
                             <li>
-                                <a href="#completion-queried-note-error">Enter action required for evidence of completion</a>
+                                <a href="#completion-queried-note-error">Enter action required for completion evidence</a>
                             </li>
                         {% endif %}
                     </ul>

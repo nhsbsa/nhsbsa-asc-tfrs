@@ -16,7 +16,7 @@
             </legend>
             {% if data.completionResponseIncomplete %}
             <p id="completion-review-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span>Select an option for evidence of completion 
+                <span class="govuk-visually-hidden">Error:</span>Select an option for completion evidence 
             </p>
             {% endif %}
             <div class="govuk-radios" data-module="govuk-radios">
@@ -53,11 +53,11 @@
                 What action does the organisation need to take?
             </legend>
             <div id="completionQueriedNote-hint" class="govuk-hint">
-                This note tells the organisation what edits they need to make to this learner.
+                This note tells the organisation what edits they need to make to this learner
             </div>
             {% if data.completionQueriedNoteIncomplete %}
             <p id="completion-queried-note-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span> Enter action required for evidence of completion
+                <span class="govuk-visually-hidden">Error:</span> Enter action required for completion evidence
             </p>
             {% endif %}
             <textarea
@@ -76,11 +76,11 @@
                 Why has this learner been rejected?
             </legend>
             <div id="completionRejectNote-hint" class="govuk-hint">
-                This note tells the organisation why this learner needs to be removed from this claim.
+                This note tells the organisation why this learner needs to be removed from this claim
             </div>
             {% if data.completionRejectNoteIncomplete %}
             <p id="completion-reject-note-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for evidence of completion
+                <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for completion evidence
             </p>
             {% endif %}
             <textarea
