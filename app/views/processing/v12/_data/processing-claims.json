@@ -633,7 +633,7 @@
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "fail",
+              "outcome": "queried",
               "note": "The certificate doesn't match the completion date. Please enter the correct completion date."
             }
           },
@@ -642,7 +642,7 @@
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "fail",
+              "outcome": "queried",
               "note": "The certificate doesn't match the completion date. Please enter the correct completion date."
             }
           },
@@ -651,7 +651,7 @@
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "fail",
+              "outcome": "queried",
               "note": "The certificate doesn't match the completion date. Please enter the correct completion date."
             }
           },
@@ -660,7 +660,7 @@
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "fail",
+              "outcome": "queried",
               "note": "The certificate doesn't match the completion date. Please enter the correct completion date."
             }
           },
@@ -687,7 +687,7 @@
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "pass",
+              "outcome": null,
               "note": null
             }
           },
@@ -768,7 +768,7 @@
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "pass",
+              "outcome": null,
               "note": null
             }
           },
@@ -786,7 +786,7 @@
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-312.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           },
@@ -795,7 +795,7 @@
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-312.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": null,
+              "outcome": "pass",
               "note": null
             }
           }
@@ -4216,8 +4216,8 @@
           "paymentPlan": null,
           "costPerLearner": null
         },
-        "processedDate": null,
-        "processedBy": null,
+        "processedDate": "2025-03-16T11:52:30.850Z",
+        "processedBy": "Flossie Gleason",
         "learners": [
           {
             "learnerID": "NX 76 8F 30 D",

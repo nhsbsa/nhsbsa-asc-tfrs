@@ -64,13 +64,13 @@
                         {% endif %}
                         <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="paidInFullResponseYes" name="paidInFullResponse" type="radio" value="yes" {% if (submission.evidenceOfPaymentReview.paymentPlan=='no' and data.paidInFullResponse != null) or data.paidInFullResponse == 'yes' %}checked{% endif %}>
+                            <input class="govuk-radios__input" id="paidInFullResponseYes" name="paidInFullResponse" type="radio" value="yes" {% if (submission.evidenceOfPaymentReview.paymentPlan=='no' and data.paidInFullResponse == null) or data.paidInFullResponse == 'yes' %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="paidInFullResponseYes">
                             Yes
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="paidInFullResponseNo" name="paidInFullResponse" type="radio" value="no" {% if (submission.evidenceOfPaymentReview.paymentPlan=='yes' and data.paidInFullResponse != null) or data.paidInFullResponse == 'no' %}checked{% endif %}>
+                            <input class="govuk-radios__input" id="paidInFullResponseNo" name="paidInFullResponse" type="radio" value="no" {% if (submission.evidenceOfPaymentReview.paymentPlan=='yes' and data.paidInFullResponse == null) or data.paidInFullResponse == 'no' %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="paidInFullResponseNo">
                             No
                             </label>

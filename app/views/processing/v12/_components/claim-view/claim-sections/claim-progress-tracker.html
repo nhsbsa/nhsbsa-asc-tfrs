@@ -1,5 +1,7 @@
 {% set paymentCompleted = true %}
 {% set learnersCompleted = true %}
+{% set sortedLearners = submission.learners | sortLearners %}
+
 <div class="side-nav" id="sideNav">
     <div class="side-nav-header" id="side-nav-header">
         <button class="minimise-btn-close" id="minimiseBtnClose">&#10095;</button>
@@ -24,7 +26,7 @@
         {% if claim.claimType != "60" %}
             <h4 class="moj-side-navigation__title">Review completion</h4>
             <ul class="moj-side-navigation__list">
-                {% for learner in submission.learners %}
+                {% for learner in sortedLearners %}
                     {% set learnerInfo = learner.learnerID | findLearner %}
                     <li class="moj-side-navigation__item  {% if (learner.evidenceOfCompletionReview.outcome != null)  %}moj-side-navigation__item-with-icon{% endif %} {% if (data.claimStep == "completion") and (loop.index == data.learnerCount) %}moj-side-navigation__item--active{% endif %}" id="tracker-learner-{{loop.index}}">
                         <a href="../process-step-handler?stage=completion&learnerNo={{loop.index}}" class="moj-side-navigation__link">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>

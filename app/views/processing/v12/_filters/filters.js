@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus } = require('../_helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically } = require('../_helpers/helpers.js');
 const fs = require('fs');
 const dataPath = 'app/views/processing/v12/_data/'
 
@@ -398,18 +398,8 @@ addFilter('checkDone', function (review, type, claimType) {
 })
 
 addFilter('sortLearners', function (learners) {
-    const allLearners = loadJSONFromFile('learners.json', dataPath)
-    const mergedLearners = learners.map(learner => {
-        const match = allLearners.find(a => a.id === learner.learnerID);
-        return {
-            ...learner,
-            ...match // adds givenName and familyName if found
-        };
-    });
-    const sortedLearners = mergedLearners.sort((a, b) =>
-        a.givenName.localeCompare(b.givenName)
-     );
-    return sortedLearners
+    
+    return sortAlphabetically(learners)
 })
 
 addFilter('dateRange', function (learners) {
