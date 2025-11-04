@@ -733,18 +733,6 @@ margin-right: govuk-spacing(3);
   margin-bottom: govuk-spacing(3);
 }
 
-.sticky {
-  position: sticky;
-  top: 0; 
-  background: white; 
-  z-index: 10; 
-}
-
-.sticky-container {
-  position: sticky;
-  top: 1rem;
-}
-
 /* Only apply the bottom border if another summary list follows immediately */
 .full-width-summary-row + .govuk-summary-list {
   border-top: none; /* prevents a double line */
