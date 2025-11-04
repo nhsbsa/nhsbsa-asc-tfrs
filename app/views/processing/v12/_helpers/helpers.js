@@ -320,10 +320,20 @@ function isInternalOMMT(courseCode) {
 }
 
 function sortAlphabetically(learners) {
-  let sorted = []
+  const allLearners = loadJSONFromFile('learners.json', dataPath)
+    const mergedLearners = learners.map(learner => {
+        const match = allLearners.find(a => a.id === learner.learnerID);
+        return {
+            ...learner,
+            ...match // adds givenName and familyName if found
+        };
+    });
+  const sortedLearners = mergedLearners.sort((a, b) =>
+        a.givenName.localeCompare(b.givenName)
+     );
 
-  return sorted;
+  return sortedLearners;
 }
 
 
-module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus }
+module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically }

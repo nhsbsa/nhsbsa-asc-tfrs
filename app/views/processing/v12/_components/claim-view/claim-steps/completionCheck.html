@@ -1,4 +1,5 @@
-{% set learnerClaimData = submission.learners[(data.learnerCount-1)] %} 
+{% set sortedLearners = submission.learners | sortLearners %}
+{% set learnerClaimData = sortedLearners[(data.learnerCount-1)] %} 
 {% set learnerInfo = learnerClaimData.learnerID | findLearner %}
 {% set learner = learnerClaimData | merge(learnerInfo) %}
 

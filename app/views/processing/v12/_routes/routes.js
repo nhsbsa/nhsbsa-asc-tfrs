@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT } = require('../_helpers/helpers.js');
+const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically } = require('../_helpers/helpers.js');
 const { transformClaims } = require('../_helpers/transform.js');
 
 router.use('/processing/v12/backstop', require('../_backstop/backstop-routes.js'));
@@ -352,6 +352,7 @@ router.post('/claim-payment-handler', function (req, res) {
       } else {
         req.session.data.result = determineOutcome(claim, submission.evidenceOfPaymentReview.outcome, null)
         req.session.data.claimScreen = "confirmOutcome"
+        delete req.session.data.claimStep
         location = "tracker-confirm"
         return res.redirect('organisation/org-view-main#' + location)
       }
@@ -394,8 +395,9 @@ router.post('/claim-completion-handler', function (req, res) {
   const errorParamaters = checkClaimProcess(claim, "completion", null, null, null, null, completionResponse, completionRejectNote, completionQueriedNote, null)
 
   if (errorParamaters == "" || actionType == "later") {
-
-    const learnerSubmission = submission.learners[learnerCount-1]
+    const sortedLearners = sortAlphabetically(submission.learners)
+    const learner = sortedLearners[learnerCount-1]
+    const learnerSubmission = submission.learners.find(u => u.learnerID === learner.learnerID)
     if (completionResponse == "approve") {
         learnerSubmission.evidenceOfCompletionReview.outcome = "pass"
     } else if (completionResponse == "reject") {
