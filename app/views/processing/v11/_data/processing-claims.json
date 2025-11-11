@@ -1676,6 +1676,29 @@
         },
         "processedDate": "2025-03-10T08:21:17.133Z",
         "processedBy": "Allan Connelly"
+      },
+      {
+        "submitter": "lena.caldwell@evergreencare.com",
+        "submittedDate": "2025-01-04T07:53:32.066Z",
+        "trainingCode": "501/1146/2",
+        "learnerID": "KZ 79 0F 13 Z",
+        "startDate": "2025-02-24T09:54:13.322Z",
+        "costDate": "2024-10-18T14:35:08.968Z",
+        "evidenceOfPayment": ["invoice1.pdf", "bankStatement1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "the payent evidence is insufficient",
+          "paymentPlan": "yes",
+          "costPerLearner": 108
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": "2025-02-03T06:15:38.665Z",
+        "processedBy": "Allan Connelly"
       }
     ]
   },
@@ -1690,7 +1713,7 @@
     "submissions": [
       {
         "submitter": "lena.caldwell@evergreencare.com",
-        "submittedDate": "2025-01-04T07:53:32.066Z",
+        "submittedDate": "2025-01-02T07:53:32.066Z",
         "trainingCode": "501/1146/2",
         "learnerID": "KZ 79 0F 13 Z",
         "startDate": "2025-02-24T09:54:13.322Z",
@@ -2040,6 +2063,188 @@
         },
         "processedDate": null,
         "processedBy": null
+      }
+    ]
+  },
+  {
+    "claimID": "SJD-ABSN-BMUG-B",
+    "workplaceID": "B02944934",
+    "claimType": "60",
+    "isPaymentPlan": true,
+    "status": "approved",
+    "createdDate": "2024-08-23T09:51:56.578Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "rachel.mcglee@evergreencare.com",
+        "submittedDate": "2024-12-21T11:46:31.081Z",
+        "trainingCode": "601/7356/7",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-07-06T10:37:21.199Z",
+        "costDate": "2024-04-11T09:34:39.184Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "yes",
+          "costPerLearner": 270
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": "2025-02-18T05:44:08.305Z",
+        "processedBy": "Mara Monahan"
+      }
+    ]
+  },
+  {
+    "claimID": "SJD-ABSN-BMUG-C",
+    "workplaceID": "B02944934",
+    "claimType": "40",
+    "isPaymentPlan": true,
+    "status": "queried",
+    "createdDate": "2024-08-23T09:51:56.578Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-02-23T05:51:35.010Z",
+        "trainingCode": "601/7356/7",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-07-06T10:37:21.199Z",
+        "costDate": "2024-05-11T09:34:39.184Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": "2025-01-23T21:12:41.455Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": 234
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-02-27T21:46:43.842Z",
+        "processedBy": "Allan Connelly"
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-02-19T05:51:35.010Z",
+        "trainingCode": "601/7356/7",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-07-06T10:37:21.199Z",
+        "costDate": "2024-05-11T09:34:39.184Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": "2025-01-20T21:12:41.455Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": 234
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-02-20T21:46:43.842Z",
+        "processedBy": "Allan Connelly"
+      }
+    ]
+  },
+  {
+    "claimID": "ABN-SMDE-SNDJ-B",
+    "workplaceID": "B02944934",
+    "claimType": "60",
+    "isPaymentPlan": true,
+    "status": "approved",
+    "createdDate": "2024-08-23T09:51:56.578Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "rachel.mcglee@evergreencare.com",
+        "submittedDate": "2024-12-21T11:46:31.081Z",
+        "trainingCode": "601/7356/7",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-07-06T10:37:21.199Z",
+        "costDate": "2024-04-11T09:34:39.184Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "yes",
+          "costPerLearner": 270
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": null,
+          "note": null
+        },
+        "processedDate": "2025-02-18T05:44:08.305Z",
+        "processedBy": "Mara Monahan"
+      }
+    ]
+  },
+  {
+    "claimID": "ABN-SMDE-SNDJ-C",
+    "workplaceID": "B02944934",
+    "claimType": "40",
+    "isPaymentPlan": true,
+    "status": "rejected",
+    "createdDate": "2024-08-23T09:51:56.578Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-02-23T05:51:35.010Z",
+        "trainingCode": "601/7356/7",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-07-06T10:37:21.199Z",
+        "costDate": "2024-07-25T23:15:29.066Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": "2025-01-23T21:12:41.455Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "yes",
+          "costPerLearner": 123
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "fail",
+          "note": "The certificate is for a course not eligible."
+        },
+        "processedDate": "2025-02-27T21:46:43.842Z",
+        "processedBy": "Allan Connelly"
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-02-19T05:51:35.010Z",
+        "trainingCode": "601/7356/7",
+        "learnerID": "LM 89 7F 48 J",
+        "startDate": "2024-07-06T10:37:21.199Z",
+        "costDate": "2024-07-25T23:15:29.066Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": "2025-01-20T21:12:41.455Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "yes",
+          "costPerLearner": 123
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "queried",
+          "note": "The completion date on the certificate does not match the completion date on the claim"
+        },
+        "processedDate": "2025-02-20T21:46:43.842Z",
+        "processedBy": "Allan Connelly"
       }
     ]
   }
