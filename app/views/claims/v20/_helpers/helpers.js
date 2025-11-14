@@ -835,5 +835,21 @@ function isInternalOMMT(courseCode) {
   return validValues.includes(courseCode);
 }
 
+function sortAlphabetically(learners) {
+  const allLearners = loadJSONFromFile('learners.json', dataPath)
+    const mergedLearners = learners.map(learner => {
+        const match = allLearners.find(a => a.id === learner.learnerID);
+        return {
+            ...learner,
+            ...match // adds givenName and familyName if found
+        };
+    });
+  const sortedLearners = mergedLearners.sort((a, b) =>
+        a.givenName.localeCompare(b.givenName)
+     );
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT}
+  return sortedLearners;
+}
+
+
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically}
