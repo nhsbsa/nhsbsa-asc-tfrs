@@ -123,6 +123,14 @@
 
   <div class="govuk-grid-column-two-thirds">
     <h2 class="govuk-heading-l" id="training">Claim details</h2>
+    
+     {% if claim.claimType == "100" %}
+      {% include "../_components/claim-sections/100-claim.html" %}
+     {% else %}
+      {% include "../_components/claim-sections/6040-claim.html" %}
+
+     {% endif %}
+
   </div>
 
   <div class="govuk-grid-column-one-third">

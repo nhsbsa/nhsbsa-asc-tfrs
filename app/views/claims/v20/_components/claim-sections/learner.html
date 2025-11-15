@@ -25,9 +25,15 @@
       </dd>
       {% if (claim.status == "not-yet-submitted" or claim.status == "queried")%}
       <dd class="govuk-summary-list__actions">
-        <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Change<span
-            class="govuk-visually-hidden"> learner</span></a>
-      </dd>
+      <ul class="govuk-summary-list__actions-list">
+        <li class="govuk-summary-list__actions-list-item">
+          <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another<span class="govuk-visually-hidden"> learner</span></a>
+        </li>
+        <li class="govuk-summary-list__actions-list-item">
+          <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Change<span class="govuk-visually-hidden"> learner</span></a>
+        </li>
+      </ul>
+    </dd>
       {% endif %}
     </div>
 {% endif %}
