@@ -15,7 +15,7 @@ function checkClaim(claim) {
         submission = getMostRelevantSubmission(claim)
     }
     
-    if (claim.claimType != "40" && submission.learnerID == null) {
+    if (claim.claimType != "40" && (submission.learners == null || submission.learners.length == 0 )) {
         result.learner = "missing"
     } else {
         result.learner = "valid"
@@ -46,31 +46,31 @@ function checkClaim(claim) {
         result.evidenceOfPayment = "valid"
     }
 
-    if (submission.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
-        result.evidenceOfCompletion = "missing"
-    } else {
+    // if (submission.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
+    //     result.evidenceOfCompletion = "missing"
+    // } else {
         result.evidenceOfCompletion = "valid"
-    }
+    // }
 
-    if (submission.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
-        result.completionDate = "missing"
-    } else {
+    // if (submission.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
+    //     result.completionDate = "missing"
+    // } else {
         result.completionDate = "valid"
-    }
+    // }
 
-    const startDate = new Date(submission.startDate)
-    const completionDate = new Date(submission.completionDate)
-    if ((result.completionDate == "valid" && submission.learnerID) && result.startDate == "valid") {
-        if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
-            result.startDate = "invalid"
-            result.completionDate = "invalid"
-        } else if ((currentDate.getTime() < completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
-            result.completionDate = "inFuture"
-        } 
-    }
-    if (result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "60") && (currentDate.getTime() < startDate.getTime())) {
-        result.startDate = "inFuture"
-    }
+    // const startDate = new Date(submission.startDate)
+    // const completionDate = new Date(submission.completionDate)
+    // if ((result.completionDate == "valid" && submission.learnerID) && result.startDate == "valid") {
+    //     if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
+    //         result.startDate = "invalid"
+    //         result.completionDate = "invalid"
+    //     } else if ((currentDate.getTime() < completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
+    //         result.completionDate = "inFuture"
+    //     } 
+    // }
+    // if (result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "60") && (currentDate.getTime() < startDate.getTime())) {
+    //     result.startDate = "inFuture"
+    // }
     
 
     if (claim.status == "queried") {
@@ -646,11 +646,11 @@ function checkChange(claim) {
     let isChange = false
     if (
         (lastQueried.trainingCode !== draftClaim.trainingCode) ||
-        (lastQueried.learnerID !== draftClaim.learnerID) ||
+        // (lastQueried.learnerID !== draftClaim.learnerID) ||
         (lastQueried.startDate !== draftClaim.startDate) ||
         (lastQueried.costDate !== draftClaim.costDate) ||
-        (lastQueried.completionDate !== draftClaim.completionDate) ||
-        (lastQueried.evidenceOfCompletion !== draftClaim.evidenceOfCompletion) ||
+        // (lastQueried.completionDate !== draftClaim.completionDate) ||
+        // (lastQueried.evidenceOfCompletion !== draftClaim.evidenceOfCompletion) ||
         (lastQueried.evidenceOfPayment.length !== draftClaim.evidenceOfPayment.length)
     ) {
         isChange = true

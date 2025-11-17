@@ -360,7 +360,7 @@ router.post('/completion-date', function (req, res) {
         } else {
           submission = getMostRelevantSubmission(c)
         }
-        submission.completionDate = completionDate
+        submission.learners[0].completionDate = completionDate
       }
     }
     delete req.session.data['completion-date-started-day'];
@@ -378,6 +378,7 @@ router.post('/add-learner', function (req, res) {
   var newLearner = findLearnerById(req.session.data.learnerSelection, req.session.data.learners)
   var singleLearnerClaim = req.session.data.single
 
+  delete req.session.data.single
   delete req.session.data.existingLearner
   delete req.session.data.learnerInput;
   delete req.session.data.learnerSelection;
@@ -458,7 +459,7 @@ router.post('/add-evidence', function (req, res) {
       if (type == 'payment') {
         submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
       } else if (type == 'completion') {
-        submission.evidenceOfCompletion = ('certificate.pdf')
+        submission.learners[0].evidenceOfCompletion = ('certificate.pdf')
       }
       break;
     }

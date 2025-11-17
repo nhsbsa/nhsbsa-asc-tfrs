@@ -117,20 +117,20 @@
       <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture') %} govuk-summary-list-row--error {% endif %}">
         <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture')%} govuk-summary-key--error {% endif %}">
           {% if claim.claimType == "100" %}
-            Evidence of completion {% if ( claim | checkIfUpdated("evidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+            Evidence of completionss {% if ( claim | checkIfUpdated("evidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
           {% elif claim.claimType == "60" %}
             Evidence of completion {% if ( pairClaim | checkIfUpdated("evidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
           {% endif %}
         </dt>
         <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture') %} govuk-summary-value--error {% endif %}">
           {% if claim.claimType == "100" %}
-            {{ submission.learners[0].evidenceOfCompletion | govukDate }}
+            {{ submission.learners[0].evidenceOfCompletion }}
           {% elif claim.claimType == "60" %}
-            {{ pairSubmission.learners[0].evidenceOfCompletion | govukDate }}
+            {{ pairSubmission.learners[0].evidenceOfCompletion }}
           {% endif %}
         </dd>
         {% if ((claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried"))  %}
-          <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.evidenceOfCompletion =='inFuture') %} govuk-summary-value--error {% endif %}">
+          <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture') %} govuk-summary-value--error {% endif %}">
             <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion">Change<span class="govuk-visually-hidden">
               evidence of completion</span></a>
           </dd>
