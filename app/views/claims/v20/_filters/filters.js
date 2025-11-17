@@ -878,11 +878,71 @@ addFilter('isAllInternalOMMT', function (submissions) {
     return check
 })
 
-addFilter('filterLearners', function (learners, status) {
-    let filtered = []
-    filtered = learners.filter( l => l.evidenceOfCompletionReview.outcome == status)
+addFilter('filterLearners', function (claim, pairClaim) {
+    let filtered = {
+        todo: [],
+        done: [],
+        removed: [],
+        approved: [],
+        rejected: [],
+        needsaction: []
+    }
+
+    if (claim.status == "not-yet-submitted" || claim.status == "submitted" || pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted" ) {
+        let submission = null
+        if (claim.status == "not-yet-submitted" || claim.status == "submitted") {
+            submission = getMostRelevantSubmission(claim)
+        } else if (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted") {
+            submission = getMostRelevantSubmission(pairClaim)
+        }
+
+        for (const learner of submission.learners) {
+            if (learner.completionDate == null || learner.evidenceOfCompletion == null) {
+                filtered.todo.push(learner)
+            }
+        }
+
+        for (const learner of submission.learners) {
+            if ((learner.completionDate != null && learner.evidenceOfCompletion != null) || claim.claimType == "60") {
+                filtered.done.push(learner)
+            }
+        }
+    }
+
+    if (claim.submissions.length > 1 && claim.status == "queried") {
+        filtered.removed = (getMostRelevantSubmission(claim)).filter(x => !(getDraftSubmission(claim)).includes(x))
+    } else if (claim.claimType == "60" && claim.status == "approved") {
+        if (pairClaim.status == "queried") {
+            filtered.removed = (getMostRelevantSubmission(claim)).filter(x => !(getDraftSubmission(pairClaim)).includes(x))
+        } else {
+            filtered.removed = (getMostRelevantSubmission(claim)).filter(x => !(getMostRelevantSubmission(pairClaim)).includes(x))
+        }
+    }
+
+    if (claim.claimType == "100" && (claim.status != "not-yet-submitted" && claim.status != "submitted")) {
+        filtered.approved = (getMostRelevantSubmission(claim)).learners.filter( l => l.evidenceOfCompletionReview.outcome == "pass")
+    } else if (claim.claimType == "60" && pairClaim != null && (pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted")) {
+        filtered.approved = (getMostRelevantSubmission(pairClaim)).learners.filter( l => l.evidenceOfCompletionReview.outcome == "pass")
+    }
+
+    if (claim.claimType == "100" && (claim.status != "not-yet-submitted" && claim.status != "submitted")) {
+        filtered.approved = (getMostRelevantSubmission(claim)).learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+    } else if (claim.claimType == "60" && pairClaim != null && (pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted")) {
+        filtered.approved = (getMostRelevantSubmission(pairClaim)).learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+    }
+
+    if (claim.claimType == "100" && (claim.status != "not-yet-submitted" && claim.status != "submitted")) {
+        filtered.needsaction = (getMostRelevantSubmission(claim)).learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
+    } else if (claim.claimType == "60" && pairClaim != null&& (pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted")) {
+        filtered.needsaction = (getMostRelevantSubmission(pairClaim)).learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
+    }
+
     return filtered
 })
+
+addFilter('difference', function(arr1, arr2) {
+    return arr1.filter(x => !arr2.includes(x));
+});
 
 addFilter('sortLearners', function (learners) {
     

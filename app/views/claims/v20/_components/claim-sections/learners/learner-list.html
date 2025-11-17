@@ -1,0 +1,73 @@
+{% if ((claim.claimType == "100" or claim.claimType == "60") and claim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "not-yet-submitted")%}
+
+    {% if (filteredLearners.todo | length) > 0 %}
+        <h2 class="govuk-heading-s" id="to-do">To do ({{filteredLearners.todo | length}})</h2>
+        {% set learners = filteredLearners.todo %}
+        {% include "./learner-links.html" %}
+    {% endif %}
+
+    {% if (filteredLearners.done  | length) > 0 %}
+        <h2 class="govuk-heading-s" id="to-do">Done ({{filteredLearners.done  | length}})</h2>
+        {% set learners = filteredLearners.done %}
+        {% include "./learner-links.html" %}
+    {% endif %}
+
+{% elif ((claim.claimType == "100" or claim.claimType == "60") and claim.status == "submitted") or (pairClaim != null and pairClaim.status == "submitted") %}
+
+    <h2 class="govuk-heading-s" id="to-do">Submitted ({{filteredLearners.done  | length}})</h2>
+    {% set learners = filteredLearners.done %}
+    {% include "./learner-links.html" %}
+
+    {% if (filteredLearners.removed  | length) > 0 and claim.claimType == "60" and pairClaim != null %}
+        <h2 class="govuk-heading-s" id="to-do">Removed from 40 part({{filteredLearners.removed | length}})</h2>
+        {% set learners = filteredLearners.removed %}
+        {% include "./learner-links.html" %}
+    {% endif %}
+
+{% elif ((claim.claimType == "100" or claim.claimType == "60") and claim.status == "queried") or (pairClaim != null and pairClaim.status == "queried") %}
+
+    {% if (filteredLearners.needsaction | length) > 0 %}
+        <h2 class="govuk-heading-s" id="to-do">Needs action({{filteredLearners.needsaction | length}})</h2>
+        {% set learners = filteredLearners.needsaction %}
+        {% include "./learner-links.html" %}
+    {% endif %}
+
+    {% if (filteredLearners.approved  | length) > 0 %}
+        <h2 class="govuk-heading-s" id="to-do">No action requested ({{filteredLearners.done  | length}})</h2>
+        {% set learners = filteredLearners.done %}
+        {% include "./learner-links.html" %}
+    {% endif %}
+
+    {% if (filteredLearners.removed  | length) > 0 %}
+        <h2 class="govuk-heading-s" id="to-do">Removed ({{filteredLearners.removed | length}})</h2>
+        {% set learners = filteredLearners.removed %}
+        {% include "./learner-links.html" %}
+    {% endif %}
+
+{% elif ((claim.claimType == "100" or claim.claimType == "60") and claim.status == "approved") or (pairClaim != null and pairClaim.status == "approved") %}
+
+    <h2 class="govuk-heading-s" id="to-do">Approved ({{filteredLearners.approved  | length}})</h2>
+    {% set learners = filteredLearners.approved %}
+    {% include "./learner-links.html" %}
+
+    {% if (filteredLearners.removed  | length) > 0 and claim.claimType == "60" and pairClaim != null %}
+        <h2 class="govuk-heading-s" id="to-do">Removed from 40 part({{filteredLearners.removed | length}})</h2>
+        {% set learners = filteredLearners.removed %}
+        {% include "./learner-links.html" %}
+    {% endif %}
+
+{% elif ((claim.claimType == "100" or claim.claimType == "60") and claim.status == "rejected") or (pairClaim != null and pairClaim.status == "rejected") %}
+
+    <h2 class="govuk-heading-s" id="to-do">Rejected ({{filteredLearners.rejected  | length}})</h2>
+    {% set learners = filteredLearners.rejected %}
+    {% include "./learner-links.html" %}
+
+    {% if (filteredLearners.removed  | length) > 0 and claim.claimType == "60" and pairClaim != null %}
+        <h2 class="govuk-heading-s" id="to-do">Removed from 40 part({{filteredLearners.removed | length}})</h2>
+        {% set learners = filteredLearners.removed %}
+        {% include "./learner-links.html" %}
+    {% endif %}
+
+{% endif %}
+
+
