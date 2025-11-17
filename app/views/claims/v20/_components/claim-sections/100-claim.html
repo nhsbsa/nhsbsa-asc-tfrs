@@ -6,17 +6,14 @@
 </dl>
 <div class="completion-header">
      <h2 class="govuk-heading-m">Completion</h2>
-     {% if (submission.learners.count > 1) and (claim.status == "not-yet-submitted" or claim.status == "queried") %}
+     {% if (submission.learners.length > 1) and (claim.status == "not-yet-submitted" or claim.status == "queried") %}
           <button type="submit" class="govuk-button govuk-button--secondary"  data-module="govuk-button">Manage</button>
      {% endif %} 
 </div>
 
 <dl class="govuk-summary-list">
-     {% include "./evidenceCompletion.html" %}
+     {% include "./evidenceCompletionClaimPage.html" %}
 </dl>
-
-
-
 
 {% if claim.status == "not-yet-submitted" or claim.status == "queried" %}
      {% include "./cta-section.html" %}

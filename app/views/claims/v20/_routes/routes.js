@@ -403,8 +403,34 @@ router.post('/add-learner', function (req, res) {
       if (isDuplicateClaim.check) {
         res.redirect('claim/duplication?dupeID=' + isDuplicateClaim.id + '&matchType=' + isDuplicateClaim.matchType)
       } else {
-        currentSubmission.learnerID = newLearner.id
-        res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        if (currentSubmission.learners == null) {
+          currentSubmission.learners = [
+            {
+            "learnerID": newLearner.id,
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }]
+          res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        } else {
+          let newnewlearner = [
+            {
+            "learnerID": newLearner.id,
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }]
+            currentSubmission.learners.push(newnewlearner);
+            //TO DO - redirect to manage learners page
+            res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        }
+
       }
 
     }

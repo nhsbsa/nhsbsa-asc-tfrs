@@ -31,11 +31,6 @@
 
 {% endif %}
 
-
-
-{% set learner = submission.learnerID | findLearner(data.learners) %}
-
-
 {% block pageTitle %}
   {% if (claim.claimType == "100") %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Claim: {{claim.claimID}} — {{serviceName}} — GOV.UK

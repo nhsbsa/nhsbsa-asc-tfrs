@@ -36,7 +36,6 @@
           {% include "./start-date.html" %}
           {% include "./evidencePayment.html" %}
         </dl>
-
       </div>
 
     </div>
@@ -68,13 +67,13 @@
       </div>
 
       <div id="accordion-with-summary-sections-content-1" class="govuk-accordion__section-content">
-      <div class="completion-header">
+        <div class="completion-header">
             <h2 class="govuk-heading-s heading-22">Completion</h2>
             <button type="submit" class="govuk-button govuk-button--secondary"  data-module="govuk-button">Manage</button>
-      </div>
-      <dl class="govuk-summary-list summary-list--no-borders">
-        {% include "./evidenceCompletion.html" %}
-      </dl>
+        </div>
+        <dl class="govuk-summary-list summary-list--no-borders">
+          {% include "./evidenceCompletionClaimPage.html" %}
+        </dl>
       </div>
 
     </div>
@@ -84,17 +83,17 @@
 {% else  %}
 
   <h2 class="govuk-heading-m" id="training">40 part</h2>
-    <p class="govuk-body">Claim reference for the <strong class="govuk-tag govuk-tag--purple">40</strong> part: {{ pairClaim.claimID }}</p>
-      <div class="completion-header">
-          <h2 class="govuk-heading-s heading-22">Completion</h2>
-          <button type="submit" class="govuk-button govuk-button--secondary"  data-module="govuk-button">Manage</button>
-      </div>
-      <dl class="govuk-summary-list">
-        {% include "./evidenceCompletion.html" %}
-      </dl>
-    {% if (pairClaim.status == "not-yet-submitted" or claim.status == "queried")%}
-      {% include "./cta-section.html" %}
-    {% endif %}
+  <p class="govuk-body">Claim reference for the <strong class="govuk-tag govuk-tag--purple">40</strong> part: {{ pairClaim.claimID }}</p>
+  <div class="completion-header">
+    <h2 class="govuk-heading-s heading-22">Completion</h2>
+    <button type="submit" class="govuk-button govuk-button--secondary"  data-module="govuk-button">Manage</button>
+  </div>
+  <dl class="govuk-summary-list">
+    {% include "./evidenceCompletionClaimPage.html" %}
+  </dl>
+  {% if (pairClaim.status == "not-yet-submitted" or claim.status == "queried")%}
+    {% include "./cta-section.html" %}
+  {% endif %}
 
 {% endif  %}
 

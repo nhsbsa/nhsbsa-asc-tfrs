@@ -676,12 +676,19 @@ addFilter('checkIfUpdated', (claim, field) => {
         } else {
             return true
         }
-    } else if (field == "learner") {
-        if (lastQueried.learnerID == draftClaim.learnerID) {
-            return false
-        } else {
-            return true
+    } else if (field == "learners") {
+        // if (lastQueried.learnerID == draftClaim.learnerID) {
+        //     return false
+        // } else {
+        //     return true
+        // }
+        const lastSet = new Set(lastQueried.learners);
+        for (const item of draftClaim.learners) {
+            if (!lastSet.has(item)) {
+                return true; // Found something new in draft
+            }
         }
+        return false; // Nothing new in draft
     } else if (field == "startDate") {
         if (lastQueried.startDate == draftClaim.startDate) {
             return false
