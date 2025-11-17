@@ -884,3 +884,15 @@ addFilter('isAllInternalOMMT', function (submissions) {
     }
     return check
 })
+
+addFilter('doesContainLearner', function (learners, learnerID) {
+    let exists = false;
+
+    for (const l of learners) {
+        if (l.learnerID === learnerID) {
+            exists = true;
+            break;
+        }
+    }
+    return exists
+})

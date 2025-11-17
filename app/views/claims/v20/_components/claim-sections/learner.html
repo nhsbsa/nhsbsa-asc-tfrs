@@ -31,7 +31,6 @@
               <div class="govuk-details__text">
                 <ul class="govuk-list">
                   {% for learner in submission.learners%}
-                  <p>{{learner.learnerID}}</p>
                     {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
                     <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
                   {%endfor%}
@@ -53,7 +52,11 @@
           <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another<span class="govuk-visually-hidden"> learner</span></a>
         </li>
         <li class="govuk-summary-list__actions-list-item">
-          <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Change<span class="govuk-visually-hidden"> learner</span></a>
+          {% if submission.learners.length == 1 %}
+            <a class="govuk-link govuk-link--no-visited-state" href="select-learner?single=true">Change 1<span class="govuk-visually-hidden"> learner</span></a>
+          {% else %}
+            <a class="govuk-link govuk-link--no-visited-state" href="#">Change all<span class="govuk-visually-hidden"> all learners</span></a>
+          {% endif %}
         </li>
       </ul>
     </dd>

@@ -376,6 +376,7 @@ router.post('/completion-date', function (req, res) {
 router.post('/add-learner', function (req, res) {
   var claimID = req.session.data.id
   var newLearner = findLearnerById(req.session.data.learnerSelection, req.session.data.learners)
+  var singleLearnerClaim = req.session.data.single
 
   delete req.session.data.existingLearner
   delete req.session.data.learnerInput;
@@ -403,7 +404,7 @@ router.post('/add-learner', function (req, res) {
       if (isDuplicateClaim.check) {
         res.redirect('claim/duplication?dupeID=' + isDuplicateClaim.id + '&matchType=' + isDuplicateClaim.matchType)
       } else {
-        if (currentSubmission.learners == null) {
+        if (currentSubmission.learners == null || singleLearnerClaim == "true") {
           currentSubmission.learners = [
             {
             "learnerID": newLearner.id,
@@ -416,7 +417,7 @@ router.post('/add-learner', function (req, res) {
           }]
           res.redirect('claim/claim-details?id=' + claimID + '#learner')
         } else {
-          let newnewlearner = [
+          let newnewlearner = 
             {
             "learnerID": newLearner.id,
             "completionDate": null,
@@ -425,7 +426,7 @@ router.post('/add-learner', function (req, res) {
               "outcome": null,
               "note": null
             }
-          }]
+          }
             currentSubmission.learners.push(newnewlearner);
             //TO DO - redirect to manage learners page
             res.redirect('claim/claim-details?id=' + claimID + '#learner')

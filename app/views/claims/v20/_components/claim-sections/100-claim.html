@@ -4,13 +4,13 @@
      {% include "./start-date.html" %}
      {% include "./evidencePayment.html" %}
 </dl>
+
 <div class="completion-header">
      <h2 class="govuk-heading-m">Completion</h2>
      {% if (submission.learners.length > 1) and (claim.status == "not-yet-submitted" or claim.status == "queried") %}
-          <button type="submit" class="govuk-button govuk-button--secondary"  data-module="govuk-button">Manage</button>
+          <button type="submit" class="govuk-button govuk-button--secondary"  data-module="govuk-button">{% if (claim.status == "not-yet-submitted" or claim.status == "queried") %}Manage{% else %}View{% endif %}</button>
      {% endif %} 
 </div>
-
 <dl class="govuk-summary-list">
      {% include "./evidenceCompletionClaimPage.html" %}
 </dl>
