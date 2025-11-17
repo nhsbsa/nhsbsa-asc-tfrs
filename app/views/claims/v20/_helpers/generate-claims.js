@@ -70,7 +70,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
   const learners = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/learners.json', 'utf8'));
 
-  const submissionLearners =  getRandomLearners(learners, (Math.floor(Math.random() * 20)));
+  const submissionLearners =  getRandomLearners(learners, (Math.floor(Math.random() * 30)));
   const startDate = faker.date.between({ from: createdDate, to: new Date() });
   const trainingCode = trainingItem.code
 
