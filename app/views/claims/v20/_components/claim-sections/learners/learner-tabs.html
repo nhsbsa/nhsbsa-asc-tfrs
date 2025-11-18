@@ -1,0 +1,100 @@
+<div class="govuk-tabs" data-module="govuk-tabs">
+  <h2 class="govuk-tabs__title">
+    Contents
+  </h2>
+  <ul class="govuk-tabs__list">
+
+    {% if (filteredLearners.todo.learners | length) > 0 %}
+        <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "todo" %} govuk-tabs__list-item--selected{% endif %}">
+                <a class="govuk-tabs__tab" href="#todo">
+                    {{ filteredLearners.todo.label}} ({{filteredLearners.todo.learners | length}})
+                </a>
+        </li>
+    {% endif %}
+
+    {% if (filteredLearners.needsaction.learners | length) > 0 %}
+        <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "needsaction" %} govuk-tabs__list-item--selected{% endif %}">
+                <a class="govuk-tabs__tab" href="#needsaction">
+                    {{ filteredLearners.needsaction.label}} ({{filteredLearners.needsaction.learners | length}})
+                </a>
+        </li>
+    {% endif %}
+
+    {% if (filteredLearners.done.learners | length) > 0 %}
+        <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "done" %} govuk-tabs__list-item--selected{% endif %}">
+                <a class="govuk-tabs__tab" href="#done">
+                    {{ filteredLearners.done.label}} ({{filteredLearners.done.learners | length}})
+                </a>
+        </li>
+    {% endif %}
+
+    {% if (filteredLearners.rejected.learners | length) > 0 %}
+        <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "rejected" %} govuk-tabs__list-item--selected{% endif %}">
+                <a class="govuk-tabs__tab" href="#rejected">
+                    {{ filteredLearners.rejected.label}} ({{filteredLearners.rejected.learners | length}})
+                </a>
+        </li>
+    {% endif %}
+
+    {% if (filteredLearners.approved.learners | length) > 0 %}
+        <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "approved" %} govuk-tabs__list-item--selected{% endif %}">
+                <a class="govuk-tabs__tab" href="#approved">
+                    {{ filteredLearners.approved.label}} ({{filteredLearners.approved.learners | length}})
+                </a>
+        </li>
+    {% endif %}
+
+    {% if (filteredLearners.removed.learners | length) > 0 %}
+        <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "removed" %} govuk-tabs__list-item--selected{% endif %}">
+                <a class="govuk-tabs__tab" href="#removed">
+                    {{ filteredLearners.removed.label}} ({{filteredLearners.removed.learners | length}})
+                </a>
+        </li>
+    {% endif %}
+
+  </ul>
+  
+  {% if (filteredLearners.todo.learners | length) > 0 %}
+        <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "todo" %} govuk-tabs__panel--hidden{% endif %}" id="todo">
+            {% set learnerList = filteredLearners.todo %}
+            {% set canChange = true %}
+            {% include "../_components/claim-sections/learners/learner-card-list.html" %}
+        </div>
+    {% endif %}
+
+    {% if (filteredLearners.needsaction.learners | length) > 0 %}
+        <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "needsaction" %} govuk-tabs__panel--hidden{% endif %}" id="needsaction">
+            {% set learnerList = filteredLearners.needsaction %}
+            {% set canChange = true %}
+            {% include "../_components/claim-sections/learners/learner-card-list.html" %}
+        </div>
+    {% endif %}
+
+    {% if (filteredLearners.done.learners | length) > 0 %}
+        <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "done" %} govuk-tabs__panel--hidden{% endif %}" id="done">
+            {% set learnerList = filteredLearners.done %}
+            {% include "../_components/claim-sections/learners/learner-card-list.html" %}
+        </div>
+    {% endif %}
+
+    {% if (filteredLearners.rejected.learners | length) > 0 %}
+        <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "rejected" %} govuk-tabs__panel--hidden{% endif %}" id="rejected">
+            {% set learnerList = filteredLearners.rejected %}
+            {% include "../_components/claim-sections/learners/learner-card-list.html" %}
+        </div>
+    {% endif %}
+
+    {% if (filteredLearners.approved.learners | length) > 0 %}
+        <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "approved" %} govuk-tabs__panel--hidden{% endif %}" id="approved">
+            {% set learnerList = filteredLearners.approved %}
+            {% include "../_components/claim-sections/learners/learner-card-list.html" %}
+        </div>
+    {% endif %}
+
+    {% if (filteredLearners.removed.learners | length) > 0 %}
+        <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "removed" %} govuk-tabs__panel--hidden{% endif %}" id="removed">
+            {% set learnerList = filteredLearners.removed %}
+            {% include "../_components/claim-sections/learners/learner-card-list.html" %}
+        </div>
+    {% endif %}
+</div>

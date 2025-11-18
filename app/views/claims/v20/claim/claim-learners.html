@@ -43,8 +43,14 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-        <h1 class="govuk-heading-l" id="training">Learners ({{submission.learners | length}})</h1>
+        <span class="govuk-caption-l">
+          {% if (claim.claimType == "100") %}
+            {{ claim.claimID }}
+          {% else %}
+            Combined claim: {{ claim.claimID | removeClaimSuffix }}
+          {% endif %}
+        </span>
+        <h1 class="govuk-heading-l">Learners ({{submission.learners | length}})</h1>
 
         {% if (submission.sharedCompletionDate != null) %}
             <dl class="govuk-summary-list">
@@ -53,13 +59,13 @@
                         Single completion date?
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{submission.sharedCompletionDate}}
+                        {{submission.sharedCompletionDate | response }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
                     </dd>
                 </div>
-                {% if (submission.sharedCompletionDate == 'yes') %}
+                {% if (submission.sharedCompletionDate) %}
                     <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Completion date
@@ -68,7 +74,7 @@
                         {{submission.learners[0].completionDate | govukDate }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+                        <a class="govuk-link" href="add-completion-date">Change<span class="govuk-visually-hidden"> name</span></a>
                     </dd>
                 </div>
                 {% endif %}
@@ -76,7 +82,7 @@
         {% endif %}
 
         {% if (claim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.claimType == "60") %}
-        <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#">
+        <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="select-learner.html">
             Add another learner
         </a>
         {% endif %}
@@ -88,7 +94,12 @@
         {% include "../_components/claim-sections/learners/learner-list.html" %}
     </div>
     <div class="govuk-grid-column-two-thirds">
-
+        {% if filteredLearners.multi.check %}
+          {% include "../_components/claim-sections/learners/learner-tabs.html" %}
+        {% else %}
+          {% set learnerList = filteredLearners[filteredLearners.multi.value]%}
+          {% include "../_components/claim-sections/learners/learner-card-list.html" %}
+        {% endif %}
     </div>
 </div>
 
