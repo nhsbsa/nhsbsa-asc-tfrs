@@ -887,6 +887,8 @@ addFilter('filterLearners', function (claim, pairClaim) {
     let pairSubmission = null
     let draftSubmission = null
     let draftPairSubmission= null
+    let setA = []
+    let setB = []
     let filtered = {
         todo: {
             label: "To do",
@@ -909,7 +911,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
             learners: []
         },
         removed: {
-            label: null,
+            label: "Removed from 40 part",
             learners: []
         }
     }
@@ -980,18 +982,18 @@ addFilter('filterLearners', function (claim, pairClaim) {
 
     if (claim.claimType == "100" && claim.status != "not-yet-submitted" && claim.status != "submitted" && claim.status != "queried") {
         filtered.rejected.learners = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
-    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted") {
+    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted" && pairClaim.status != "queried") {
         filtered.rejected.learners = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
     }
 
     if (claim.claimType == "100" && (claim.status != "not-yet-submitted" && claim.status != "submitted" && claim.status != "rejected")) {
-        const setA = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
-        const setB = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
-        filtered.needsaction.learners = setA + setB
+        setA = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
+        setB = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+        filtered.needsaction.learners = setA.concat(setB)
     } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted" && pairClaim.status != "rejected" ) {
-        const setA = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
-        const setB = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
-        filtered.needsaction.learners = setA + setB
+        setA = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
+        setB = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+        filtered.needsaction.learners = setA.concat(setB)
     }
 
     const nonEmptyKeys = Object.entries(filtered)
@@ -1025,4 +1027,9 @@ addFilter('sortLearners', function (learners) {
 addFilter('toLowerCase', function (string) {
     
     return (string.toLowerCase())
+})
+
+addFilter('getLearnerFieldByID', function (learners, learnerID, field) {
+    
+    return (getLearnerFieldByID(learners, learnerID, field))
 })

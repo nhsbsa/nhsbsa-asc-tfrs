@@ -14,10 +14,11 @@
     {% set submission = claim | getMostRelevantSubmission %}
 {% endif %}
 
-{% set date = submission.completionDate | splitISODate %}
+{% set date = (submission.learners | getLearnerFieldByID(data.learnerID, "completionDate")) | splitISODate %}
+{% set learnerInfo = data.learnerID | findLearner(data.learners) %}
 
 {% block pageTitle %}
-{% if data.submitError.dateValid != null and not data.submitError.dateValid %}Error: {% endif %}Add completion date — {{serviceName}} — GOV.UK
+{% if data.submitError.dateValid != null and not data.submitError.dateValid %}Error: {% endif %}Add completion date{% if (submission.sharedCompletionDate) %} for all learners{% else %} for {{learnerInfo.givenName}} {{learnerInfo.familyName}}{% endif %} — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block content %}
@@ -43,10 +44,16 @@
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
                         <h1 class="govuk-fieldset__heading">
-                            Add completion date
+                            Add completion date{% if (submission.sharedCompletionDate) %} for all learners{% else %} for {{learnerInfo.givenName}} {{learnerInfo.familyName}}{% endif %}
                         </h1>
                     </legend>
-                    <p class="govuk-body">This is the date that the learner completed this training.</p>
+                    <p class="govuk-body">
+                        {% if (submission.sharedCompletionDate) %}
+                            This is the date all learners on this claim completed the training.
+                        {% else %}
+                            This is the date the learner completed the training.
+                        {% endif %}
+                    </p>
                     <div id="start-date-issued-hint" class="govuk-hint">
                         For example, 12 5 2024
                     </div>

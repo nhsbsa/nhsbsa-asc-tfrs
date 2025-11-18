@@ -22,6 +22,8 @@
     {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
   {% endif %}
 
+  {% set sharedCompletionDate = pairSubmission.sharedCompletionDate %}
+
 {% else %}
 
   {% if (claim.status == "queried") %}
@@ -30,9 +32,13 @@
     {% set submission = claim | getMostRelevantSubmission %}
   {% endif %}
 
+  {% set sharedCompletionDate = submission.sharedCompletionDate %}
+
 {% endif %}
 
 {% set filteredLearners = claim | filterLearners(pairClaim) %}
+
+
 
 {% block beforeContent %}
 <p class="govuk-body"><a href="claim-details" class="govuk-back-link">Back to claim details</a></p>
@@ -52,20 +58,20 @@
         </span>
         <h1 class="govuk-heading-l">Learners ({{submission.learners | length}})</h1>
 
-        {% if (submission.sharedCompletionDate != null) %}
+        {% if (sharedCompletionDate != null) %}
             <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Single completion date?
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{submission.sharedCompletionDate | response }}
+                        {{sharedCompletionDate | response }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+                        <a class="govuk-link" href="shared-completion-date?change=true">Change<span class="govuk-visually-hidden"> name</span></a>
                     </dd>
                 </div>
-                {% if (submission.sharedCompletionDate) %}
+                {% if (sharedCompletionDate) %}
                     <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
                         Completion date
@@ -97,6 +103,9 @@
         {% if filteredLearners.multi.check %}
           {% include "../_components/claim-sections/learners/learner-tabs.html" %}
         {% else %}
+          {% if filteredLearners.multi.value == "needsaction" or filteredLearners.multi.value == "todo" %}
+            {% set canChange = true %}
+          {% endif %}
           {% set learnerList = filteredLearners[filteredLearners.multi.value]%}
           {% include "../_components/claim-sections/learners/learner-card-list.html" %}
         {% endif %}
