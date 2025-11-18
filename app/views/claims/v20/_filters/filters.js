@@ -907,7 +907,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
             learners: []
         },
         done: {
-            label: null,
+            label: "Done",
             learners: []
         },
         approved: {
@@ -924,9 +924,9 @@ addFilter('filterLearners', function (claim, pairClaim) {
         }
     }
 
-    if (claim.status == "not-yet-submitted" || claim.status == "submitted" || (pairClaim != null && (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted")) ) {
+    if (claim.status == "not-yet-submitted" || claim.status == "submitted" || claim.status == "queried" || (pairClaim != null && (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted" || pairClaim.status == "queried" )) ) {
 
-        if (claim.status == "not-yet-submitted" || claim.status == "submitted") {
+        if (claim.status == "not-yet-submitted" || claim.status == "submitted" || claim.status == "queried") {
             submission = getMostRelevantSubmission(claim)
             switch(claim.status) {
                 case "not-yet-submitted":
@@ -935,8 +935,11 @@ addFilter('filterLearners', function (claim, pairClaim) {
                 case "submitted":
                     filtered.done.label = "Submitted"
                     break;
+                case "queried":
+                    filtered.done.label = "No action needed"
+                    break;
             }
-        } else if (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted") {
+        } else if (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted" || pairClaim.status == "queried") {
             submission = getMostRelevantSubmission(pairClaim)
             switch(pairClaim.status) {
                 case "not-yet-submitted":
@@ -944,6 +947,9 @@ addFilter('filterLearners', function (claim, pairClaim) {
                     break;
                 case "submitted":
                     filtered.done.label = "Submitted"
+                    break;
+                case "queried":
+                    filtered.done.label = "No action needed"
                     break;
             }
         }
@@ -955,7 +961,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
         }
 
         for (const learner of submission.learners) {
-            if ((learner.completionDate != null && learner.evidenceOfCompletion != null) || (claim.claimType == "60" && claim.status == "not-yet-submitted" && claim.status == "submitted" )) {
+            if ((learner.completionDate != null && learner.evidenceOfCompletion != null && (learner.evidenceOfCompletionReview.outcome == null)) || (claim.claimType == "60" && claim.status != "approved")) {
                 filtered.done.learners.push(learner)
             }
         }

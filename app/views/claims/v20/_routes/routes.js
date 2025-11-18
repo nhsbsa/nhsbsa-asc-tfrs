@@ -461,7 +461,6 @@ router.post('/completion-date', function (req, res) {
       if (submission.sharedCompletionDate || learner.learnerID == learnerID) {
           learner.completionDate = completionDate
       }
-
     }
 
     delete req.session.data['completion-date-started-day'];
@@ -471,9 +470,12 @@ router.post('/completion-date', function (req, res) {
       delete req.session.data.learnerID
       res.redirect('claim/claim-learners')
     } else {
-      res.redirect('claim/claim-learners#' + learnerID)
+      if (submission.learners.length > 1) {
+        res.redirect('claim/claim-learners#' + learnerID)
+      } else {
+        res.redirect('claim/claim-details#completion')
+      }
     }
-    
   } else {
     req.session.data.submitError = error
     res.redirect('claim/add-completion-date')
@@ -536,8 +538,11 @@ router.post('/add-learner', function (req, res) {
             }
           }
             currentSubmission.learners.push(newnewlearner);
-            //TO DO - redirect to manage learners page
-            res.redirect('claim/claim-details?id=' + claimID + '#learner')
+            if (currentSubmission.learners.length > 1) {
+                res.redirect('claim/claim-learners?#'+newLearner.id)
+            } else {
+                res.redirect('claim/claim-details?id=' + claimID + '#learner')
+            }
         }
 
       }
@@ -550,6 +555,7 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.deleteSuccess
   var type = req.session.data.type
   var claimID = req.session.data.id 
+  const learnerID = req.session.data.learnerID
 
   if (claimID[claimID.length - 1] === 'B' && type == 'completion') {
     claimID =  claimID.slice(0, -1) + 'C';
@@ -566,7 +572,11 @@ router.post('/add-evidence', function (req, res) {
       if (type == 'payment') {
         submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
       } else if (type == 'completion') {
-        submission.learners[0].evidenceOfCompletion = ('certificate.pdf')
+        for (const learner of submission.learners) {
+          if (learner.learnerID == learnerID) {
+              learner.evidenceOfCompletion = ('certificate.pdf')
+          }
+        }
       }
       break;
     }
@@ -576,9 +586,13 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.submitError
 
   if (type == 'payment') {
-    res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
+    res.redirect('claim/add-evidence-edit' + '?id=' + claimID + 'type=' + type)
   } else if (type == "completion") {
-    res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
+    if (submission.learners.length > 1) {
+        res.redirect('claim/claim-learners#' + learnerID)
+      } else {
+        res.redirect('claim/claim-details#completion')
+      }
   }
 })
 
@@ -826,9 +840,16 @@ router.get('/cancel-handler', function (req, res) {
   delete req.session.data['jobTitleEmptyError'];
   delete req.session.data['jobTitle'];
   delete req.session.data['jobTitleInvalid'];
-  delete req.session.data['declarationSubmitError'];
+  delete req.session.data['declarationSubmitError']
+  delete req.session.data['learnerID'];
 
-  res.redirect('claim/claim-details' + '?id=' + claimID)
+  if (req.session.data.learner == "true") {
+    delete req.session.data.learner
+    res.redirect('claim/claim-learners')
+  } else {
+    res.redirect('claim/claim-details' + '?id=' + claimID)
+  }
+  
 
 });
 

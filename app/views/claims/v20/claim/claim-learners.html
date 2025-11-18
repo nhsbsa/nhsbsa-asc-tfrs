@@ -87,7 +87,7 @@
             </dl>
         {% endif %}
 
-        {% if (claim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.claimType == "60") %}
+        {% if (claim.status == "not-yet-submitted" or claim.status == "queried") and (claim.claimType == "100" or claim.claimType == "60") %}
         <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="select-learner.html">
             Add another learner
         </a>
