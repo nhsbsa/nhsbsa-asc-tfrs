@@ -87,7 +87,9 @@
   <div class="completion-header">
     <h2 class="govuk-heading-s heading-22">Completion</h2>
       {% if (submission.learners.length > 1) %}
-        <button type="submit" class="govuk-button govuk-button--secondary"  data-module="govuk-button">{% if (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried") %}Manage{% else %}View{% endif %}</button>
+      <a type="submit" class="govuk-button govuk-button--secondary" href="claim-learners">
+        {% if (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried") %}Manage{% else %}View{% endif %}
+      </a>
      {% endif %} 
   </div>
   <dl class="govuk-summary-list">
