@@ -69,7 +69,7 @@
             Completion date 
         </dt>
         <dd class="govuk-summary-list__value">
-          Added for X of X learners
+          Added for <strong>{{submission.learners | addedCount("completionDate")}}</strong> of <strong>{{submission.learners.length}}</strong> learners
         </dd>
       </div>
 
@@ -147,7 +147,7 @@
             Evidence of completion
         </dt>
         <dd class="govuk-summary-list__value">
-          Added for X of X learners
+          Added for <strong>{{submission.learners | addedCount("completionEvidence")}}</strong> of <strong>{{submission.learners.length}}</strong> learners
         </dd>
       </div>
 

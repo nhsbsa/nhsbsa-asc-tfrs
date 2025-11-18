@@ -86,7 +86,7 @@
   <p class="govuk-body">Claim reference for the <strong class="govuk-tag govuk-tag--purple">40</strong> part: {{ pairClaim.claimID }}</p>
   <div class="completion-header">
     <h2 class="govuk-heading-s heading-22">Completion</h2>
-      {% if (submission.learners.length > 1) and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried") %}
+      {% if (submission.learners.length > 1) %}
         <button type="submit" class="govuk-button govuk-button--secondary"  data-module="govuk-button">{% if (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried") %}Manage{% else %}View{% endif %}</button>
      {% endif %} 
   </div>

@@ -896,3 +896,13 @@ addFilter('doesContainLearner', function (learners, learnerID) {
     }
     return exists
 })
+
+addFilter('addedCount', function (learners, type) {
+    let added = 0
+    if (type == "completionDate") {
+        added = learners.filter(l => l.completionDate).length;
+    } else if (type == "completionEvidence") {
+        added = learners.filter(l => l.evidenceOfCompletion).length;
+    }
+    return added
+})

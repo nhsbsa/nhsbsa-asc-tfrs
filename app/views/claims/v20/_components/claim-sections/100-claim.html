@@ -7,7 +7,7 @@
 
 <div class="completion-header">
      <h2 class="govuk-heading-m">Completion</h2>
-     {% if (submission.learners.length > 1) and (claim.status == "not-yet-submitted" or claim.status == "queried") %}
+     {% if (submission.learners.length > 1) %}
           <button type="submit" class="govuk-button govuk-button--secondary"  data-module="govuk-button">{% if (claim.status == "not-yet-submitted" or claim.status == "queried") %}Manage{% else %}View{% endif %}</button>
      {% endif %} 
 </div>
