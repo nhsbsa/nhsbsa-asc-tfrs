@@ -1,0 +1,106 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if claim.claimType == "60" %}
+  {% set pairClaim = claim.claimID | findPair(data.claims) %}
+{% elif claim.claimType == "40" %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair(data.claims) %}
+{% endif %}
+
+{% if claim.claimType == "60" %}  
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+
+  {% if (pairClaim and pairClaim.status == "queried") %}
+    {% set pairSubmission = pairClaim | getDraftSubmission %}
+  {% else %}
+    {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% else %}
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% endif %}
+
+{% set filteredLearners = claim | filterLearners(pairClaim) %}
+
+{% block beforeContent %}
+<p class="govuk-body"><a href="claim-details" class="govuk-back-link">Back to claim details</a></p>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <span class="govuk-caption-l">
+          {% if (claim.claimType == "100") %}
+            {{ claim.claimID }}
+          {% else %}
+            Combined claim: {{ claim.claimID | removeClaimSuffix }}
+          {% endif %}
+        </span>
+        <h1 class="govuk-heading-l">Learners ({{submission.learners | length}})</h1>
+
+        {% if (submission.sharedCompletionDate != null) %}
+            <dl class="govuk-summary-list">
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Single completion date?
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{submission.sharedCompletionDate | response }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
+                    </dd>
+                </div>
+                {% if (submission.sharedCompletionDate) %}
+                    <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Completion date
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{submission.learners[0].completionDate | govukDate }}
+                    </dd>
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="add-completion-date">Change<span class="govuk-visually-hidden"> name</span></a>
+                    </dd>
+                </div>
+                {% endif %}
+            </dl>
+        {% endif %}
+
+        {% if (claim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.claimType == "60") %}
+        <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="select-learner.html">
+            Add another learner
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+        {% include "../_components/claim-sections/learners/learner-list.html" %}
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+        {% if filteredLearners.multi.check %}
+          {% include "../_components/claim-sections/learners/learner-tabs.html" %}
+        {% else %}
+          {% set learnerList = filteredLearners[filteredLearners.multi.value]%}
+          {% include "../_components/claim-sections/learners/learner-card-list.html" %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

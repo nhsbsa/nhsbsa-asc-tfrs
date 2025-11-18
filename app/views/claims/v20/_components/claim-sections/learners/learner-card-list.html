@@ -1,0 +1,9 @@
+<h2 class="govuk-heading-m">{{ learnerList.label}} ({{learnerList.learners | length}})</h2>
+{% if ((learnerList.learners | length) > 0) %}
+    {% for learner in learnerList.learners %}
+        {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
+        {% include "./learner-card.html" %}
+    {% endfor %}
+{% else %}
+<p class="govuk-body">0 learners {{ learnerList.label | toLowerCase}}</p>
+{% endif %}

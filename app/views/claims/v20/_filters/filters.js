@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT} = require('../_helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID} = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -662,7 +662,7 @@ addFilter('findLearner', (learnerID, learners) => {
     return findLearnerById(learnerID, learners)
 })
 
-addFilter('checkIfUpdated', (claim, field) => {
+addFilter('checkIfUpdated', (claim, field, learnerID) => {
     let lastQueried = getMostRelevantSubmission(claim)
     let draftClaim = getDraftSubmission(claim)
 
@@ -676,19 +676,12 @@ addFilter('checkIfUpdated', (claim, field) => {
         } else {
             return true
         }
-    } else if (field == "learners") {
-        // if (lastQueried.learnerID == draftClaim.learnerID) {
-        //     return false
-        // } else {
-        //     return true
-        // }
-        const lastSet = new Set(lastQueried.learners);
-        for (const item of draftClaim.learners) {
-            if (!lastSet.has(item)) {
-                return true; // Found something new in draft
-            }
+    } else if (field == "learner") {
+        if (lastQueried.learnerID == draftClaim.learnerID) {
+            return false
+        } else {
+            return true
         }
-        return false; // Nothing new in draft
     } else if (field == "startDate") {
         if (lastQueried.startDate == draftClaim.startDate) {
             return false
@@ -712,14 +705,18 @@ addFilter('checkIfUpdated', (claim, field) => {
         return false; // Nothing new in draft
 
     } else if (field == "completionDate") {
+        const date1 = getLearnerFieldByID(lastQueried.learners, learnerID, "completionDate")
+        const date2 = getLearnerFieldByID(draftClaim.learners, learnerID, "completionDate")
         // to do compare if same contents
-        if (lastQueried.completionDate === draftClaim.completionDate) {
+        if (date1 === date2) {
             return false
         } else {
             return true
         }
     } else if (field == "evidenceCompletion") {
-        if (lastQueried.evidenceOfCompletion == draftClaim.evidenceOfCompletion) {
+        const evidence1 = getLearnerFieldByID(lastQueried.learners, learnerID, "evidenceOfCompletion")
+        const evidence2 = getLearnerFieldByID(draftClaim.learners, learnerID, "evidenceOfCompletion")
+        if (evidence1 == evidence2) {
             return false;
         } else {
             return true
@@ -883,6 +880,151 @@ addFilter('isAllInternalOMMT', function (submissions) {
         }
     }
     return check
+})
+
+addFilter('filterLearners', function (claim, pairClaim) {
+    let submission = null
+    let pairSubmission = null
+    let draftSubmission = null
+    let draftPairSubmission= null
+    let filtered = {
+        todo: {
+            label: "To do",
+            learners: []
+        },
+        needsaction: {
+            label: "Needs action",
+            learners: []
+        },
+        done: {
+            label: null,
+            learners: []
+        },
+        approved: {
+            label: "Approved",
+            learners: []
+        },
+        rejected: {
+            label: "Rejected",
+            learners: []
+        },
+        removed: {
+            label: null,
+            learners: []
+        }
+    }
+
+    if (claim.status == "not-yet-submitted" || claim.status == "submitted" || (pairClaim != null && (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted")) ) {
+
+        if (claim.status == "not-yet-submitted" || claim.status == "submitted") {
+            submission = getMostRelevantSubmission(claim)
+            switch(claim.status) {
+                case "not-yet-submitted":
+                    filtered.done.label = "Done"
+                    break;
+                case "submitted":
+                    filtered.done.label = "Submitted"
+                    break;
+            }
+        } else if (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted") {
+            submission = getMostRelevantSubmission(pairClaim)
+            switch(pairClaim.status) {
+                case "not-yet-submitted":
+                    filtered.done.label = "Done"
+                    break;
+                case "submitted":
+                    filtered.done.label = "Submitted"
+                    break;
+            }
+        }
+
+        for (const learner of submission.learners) {
+            if ((learner.completionDate == null || learner.evidenceOfCompletion == null) && ((claim.claimType != "60") || claim.status == "approved")) {
+                filtered.todo.learners.push(learner)
+            }
+        }
+
+        for (const learner of submission.learners) {
+            if ((learner.completionDate != null && learner.evidenceOfCompletion != null) || (claim.claimType == "60" && claim.status == "not-yet-submitted" && claim.status == "submitted" )) {
+                filtered.done.learners.push(learner)
+            }
+        }
+    }
+
+    submission = getMostRelevantSubmission(claim)
+    if (pairClaim != null) {
+        pairSubmission = getMostRelevantSubmission(pairClaim)
+    }
+
+    if (claim.submissions.length > 1 && claim.status == "queried") {
+        draftSubmission = getDraftSubmission(claim)
+        filtered.removed.label = "Removed"
+        filtered.approved.label = "No action needed"
+        filtered.removed.learners = getLearnersNotInBoth(submission.learners, draftSubmission.learners)
+    } else if (claim.claimType == "60" && claim.status == "approved") {
+        filtered.removed.label = "Removed from 40 part"
+        if (pairClaim.status == "queried") {
+            filtered.approved.label = "No action needed"
+            draftPairSubmission = getDraftSubmission(pairClaim)
+            filtered.removed.learners = getLearnersNotInBoth(submission.learners, draftPairSubmission.learners)
+        } else {
+            filtered.removed.learners = getLearnersNotInBoth(submission.learners, pairSubmission.learners)
+        }
+    }
+
+    if (claim.claimType == "100" && claim.status != "not-yet-submitted" && claim.status != "submitted") {
+        filtered.approved.learners = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "pass")
+    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted") {
+        filtered.approved.learners = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "pass")
+    }
+
+    if (claim.claimType == "100" && claim.status != "not-yet-submitted" && claim.status != "submitted" && claim.status != "queried") {
+        filtered.rejected.learners = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted") {
+        filtered.rejected.learners = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+    }
+
+    if (claim.claimType == "100" && (claim.status != "not-yet-submitted" && claim.status != "submitted" && claim.status != "rejected")) {
+        const setA = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
+        const setB = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+        filtered.needsaction.learners = setA + setB
+    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted" && pairClaim.status != "rejected" ) {
+        const setA = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
+        const setB = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+        filtered.needsaction.learners = setA + setB
+    }
+
+    const nonEmptyKeys = Object.entries(filtered)
+        .filter(([_, item]) => Array.isArray(item.learners) && item.learners.length > 0)
+        .map(([key]) => key);
+
+    const count = nonEmptyKeys.length;
+
+    filtered.multi = {
+    check: count > 1,
+    value: count > 0 ? nonEmptyKeys[0] : null
+    };
+
+    return filtered
+})
+
+addFilter('response', function(boolean) {
+    if (boolean) {
+        return "Yes"
+    } else if (!boolean) {
+        return "No"
+    }
+    
+});
+
+addFilter('sortLearners', function (learners) {
+    
+    return sortAlphabetically(learners)
+})
+
+addFilter('toLowerCase', function (string) {
+    
+    return (string.toLowerCase())
 })
 
 addFilter('doesContainLearner', function (learners, learnerID) {

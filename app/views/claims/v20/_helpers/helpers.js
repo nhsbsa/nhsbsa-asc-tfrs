@@ -498,7 +498,6 @@ function findCourseByCode(code) {
   function findLearnerById(id, localLearners) {
     
     const learners = loadLearners(localLearners)
-
       const learner = learners.find(learner => learner.id == id);
       if (learner) {
         return learner;
@@ -835,5 +834,39 @@ function isInternalOMMT(courseCode) {
   return validValues.includes(courseCode);
 }
 
+function sortAlphabetically(learners) {
+  const allLearners = loadJSONFromFile('learners.json', dataPath)
+    const mergedLearners = learners.map(learner => {
+        const match = allLearners.find(a => a.id === learner.learnerID);
+        return {
+            ...learner,
+            ...match // adds givenName and familyName if found
+        };
+    });
+  const sortedLearners = mergedLearners.sort((a, b) =>
+        a.givenName.localeCompare(b.givenName)
+     );
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT}
+  return sortedLearners;
+}
+
+function getLearnersNotInBoth(arr1, arr2) {
+  // Extract learnerIDs for quick lookup
+  const ids1 = new Set(arr1.map(l => l.learnerID));
+  const ids2 = new Set(arr2.map(l => l.learnerID));
+
+  // Filter for IDs that are unique to arr1 or arr2
+  const uniqueToArr1 = arr1.filter(l => !ids2.has(l.learnerID));
+  const uniqueToArr2 = arr2.filter(l => !ids1.has(l.learnerID));
+
+  // Combine and return
+  return [...uniqueToArr1, ...uniqueToArr2];
+}
+
+function getLearnerFieldByID(learners, learnerID, field) {
+  const learner = learners.find(l => l.learnerID === learnerID);
+  return learner ? learner[field] : null; // safely returns null if not found
+}
+
+
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID}

@@ -1,0 +1,8 @@
+<ul class="govuk-list">
+    {% for learner in learners %}
+        {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
+        <li>
+            <a class="govuk-link" href="#{{learnerInfo.id}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
+        </li>
+    {% endfor %}
+</ul>
