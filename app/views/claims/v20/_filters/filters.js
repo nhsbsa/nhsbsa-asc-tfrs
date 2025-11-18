@@ -966,7 +966,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
             }
         }
     }
-
+    
     submission = getMostRelevantSubmission(claim)
     if (pairClaim != null) {
         pairSubmission = getMostRelevantSubmission(pairClaim)
@@ -1001,12 +1001,12 @@ addFilter('filterLearners', function (claim, pairClaim) {
     }
 
     if (claim.claimType == "100" && (claim.status != "not-yet-submitted" && claim.status != "submitted" && claim.status != "rejected")) {
-        setA = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
-        setB = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+        setA = draftSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
+        setB = draftSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
         filtered.needsaction.learners = setA.concat(setB)
     } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted" && pairClaim.status != "rejected" ) {
-        setA = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
-        setB = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+        setA = draftPairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
+        setB = draftPairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
         filtered.needsaction.learners = setA.concat(setB)
     }
 

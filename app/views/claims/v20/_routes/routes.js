@@ -358,7 +358,51 @@ router.get('/completion-date-handler', function (req, res) {
 
 });
 
-router.get('/shared-completion-date', function (req, res) {
+router.get('/remove-learner', function (req, res) {
+  const claimID = req.session.data.id
+  const learnerID = req.session.data.learner
+
+  const { claims, org } = req.session.data
+  const workplaceID = org.workplaceID
+  let claim = null
+  let mainClaim = null;
+  let cClaim = null;
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+
+    if (!isSameWorkplace) continue;
+
+    if (c.claimID === claimID) {
+      mainClaim = c;
+    }
+
+    if (c.claimID === claimID.slice(0, -1) + "C" && 
+        c.claimType === "60" && 
+        c.status === "approved") {
+      cClaim = c;
+    }
+  }
+
+  // Prefer C-claim if available
+  claim = cClaim || mainClaim;
+
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim)
+  } else {
+    submission = getMostRelevantSubmission(claim)
+  }
+
+  const updatedLearners = submission.learners.filter(item => item.learnerID !== learnerID);
+
+  submission.learners = updatedLearners
+
+  res.redirect('claim/claim-learners')
+
+
+});
+
+router.post('/shared-completion-date', function (req, res) {
   let claimID = req.session.data.id
   let response = req.session.data.sharedDate
   let change = req.session.data.change
@@ -397,7 +441,7 @@ router.get('/shared-completion-date', function (req, res) {
     }
     
 
-    if (change == "true" && response != "yes") {
+    if ((change == "true" && response != "yes")) {
       delete req.session.data.sharedDate
       delete req.session.data.change
       res.redirect('claim/claim-learners')
