@@ -31,7 +31,7 @@
                                 Completion date
                             </dt>
                             <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-value--error {% endif %}">
-                                <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date?learnerID={{learner.learnerID}}">
+                                <a class="govuk-link govuk-link--no-visited-state" href="../completion-date-handler?learnerID={{learner.learnerID}}">
                                     Add completion date<span class="govuk-visually-hidden"> for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
                                 </a>
                             </dd>        
@@ -68,7 +68,7 @@
                         </dd>
                         {% if (canChange) %}
                             <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-value--error {% endif %}">
-                                <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date?learnerID={{learner.learnerID}}">
+                                <a class="govuk-link govuk-link--no-visited-state" href="../completion-date-handler?learnerID={{learner.learnerID}}">
                                     Change<span class="govuk-visually-hidden"> completion date for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
                                 </a>
                             </dd>

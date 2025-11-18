@@ -895,6 +895,8 @@ addFilter('filterLearners', function (claim, pairClaim) {
     let pairSubmission = null
     let draftSubmission = null
     let draftPairSubmission= null
+    let setA = []
+    let setB = []
     let filtered = {
         todo: {
             label: "To do",
@@ -905,7 +907,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
             learners: []
         },
         done: {
-            label: null,
+            label: "Done",
             learners: []
         },
         approved: {
@@ -917,14 +919,14 @@ addFilter('filterLearners', function (claim, pairClaim) {
             learners: []
         },
         removed: {
-            label: null,
+            label: "Removed from 40 part",
             learners: []
         }
     }
 
-    if (claim.status == "not-yet-submitted" || claim.status == "submitted" || (pairClaim != null && (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted")) ) {
+    if (claim.status == "not-yet-submitted" || claim.status == "submitted" || claim.status == "queried" || (pairClaim != null && (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted" || pairClaim.status == "queried" )) ) {
 
-        if (claim.status == "not-yet-submitted" || claim.status == "submitted") {
+        if (claim.status == "not-yet-submitted" || claim.status == "submitted" || claim.status == "queried") {
             submission = getMostRelevantSubmission(claim)
             switch(claim.status) {
                 case "not-yet-submitted":
@@ -933,8 +935,11 @@ addFilter('filterLearners', function (claim, pairClaim) {
                 case "submitted":
                     filtered.done.label = "Submitted"
                     break;
+                case "queried":
+                    filtered.done.label = "No action needed"
+                    break;
             }
-        } else if (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted") {
+        } else if (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted" || pairClaim.status == "queried") {
             submission = getMostRelevantSubmission(pairClaim)
             switch(pairClaim.status) {
                 case "not-yet-submitted":
@@ -942,6 +947,9 @@ addFilter('filterLearners', function (claim, pairClaim) {
                     break;
                 case "submitted":
                     filtered.done.label = "Submitted"
+                    break;
+                case "queried":
+                    filtered.done.label = "No action needed"
                     break;
             }
         }
@@ -953,7 +961,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
         }
 
         for (const learner of submission.learners) {
-            if ((learner.completionDate != null && learner.evidenceOfCompletion != null) || (claim.claimType == "60" && claim.status == "not-yet-submitted" && claim.status == "submitted" )) {
+            if ((learner.completionDate != null && learner.evidenceOfCompletion != null && (learner.evidenceOfCompletionReview.outcome == null)) || (claim.claimType == "60" && claim.status != "approved")) {
                 filtered.done.learners.push(learner)
             }
         }
@@ -988,18 +996,18 @@ addFilter('filterLearners', function (claim, pairClaim) {
 
     if (claim.claimType == "100" && claim.status != "not-yet-submitted" && claim.status != "submitted" && claim.status != "queried") {
         filtered.rejected.learners = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
-    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted") {
+    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted" && pairClaim.status != "queried") {
         filtered.rejected.learners = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
     }
 
     if (claim.claimType == "100" && (claim.status != "not-yet-submitted" && claim.status != "submitted" && claim.status != "rejected")) {
-        const setA = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
-        const setB = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
-        filtered.needsaction.learners = setA + setB
+        setA = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
+        setB = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+        filtered.needsaction.learners = setA.concat(setB)
     } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted" && pairClaim.status != "rejected" ) {
-        const setA = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
-        const setB = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
-        filtered.needsaction.learners = setA + setB
+        setA = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
+        setB = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
+        filtered.needsaction.learners = setA.concat(setB)
     }
 
     const nonEmptyKeys = Object.entries(filtered)
@@ -1033,6 +1041,11 @@ addFilter('sortLearners', function (learners) {
 addFilter('toLowerCase', function (string) {
     
     return (string.toLowerCase())
+})
+
+addFilter('getLearnerFieldByID', function (learners, learnerID, field) {
+    
+    return (getLearnerFieldByID(learners, learnerID, field))
 })
 
 addFilter('doesContainLearner', function (learners, learnerID) {
