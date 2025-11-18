@@ -483,7 +483,9 @@ router.post('/completion-date', function (req, res) {
 router.post('/add-learner', function (req, res) {
   var claimID = req.session.data.id
   var newLearner = findLearnerById(req.session.data.learnerSelection, req.session.data.learners)
+  var singleLearnerClaim = req.session.data.single
 
+  delete req.session.data.single
   delete req.session.data.existingLearner
   delete req.session.data.learnerInput;
   delete req.session.data.learnerSelection;
@@ -510,8 +512,34 @@ router.post('/add-learner', function (req, res) {
       if (isDuplicateClaim.check) {
         res.redirect('claim/duplication?dupeID=' + isDuplicateClaim.id + '&matchType=' + isDuplicateClaim.matchType)
       } else {
-        currentSubmission.learnerID = newLearner.id
-        res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        if (currentSubmission.learners == null || singleLearnerClaim == "true") {
+          currentSubmission.learners = [
+            {
+            "learnerID": newLearner.id,
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }]
+          res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        } else {
+          let newnewlearner = 
+            {
+            "learnerID": newLearner.id,
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }
+            currentSubmission.learners.push(newnewlearner);
+            //TO DO - redirect to manage learners page
+            res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        }
+
       }
 
     }
@@ -538,7 +566,7 @@ router.post('/add-evidence', function (req, res) {
       if (type == 'payment') {
         submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
       } else if (type == 'completion') {
-        submission.evidenceOfCompletion = ('certificate.pdf')
+        submission.learners[0].evidenceOfCompletion = ('certificate.pdf')
       }
       break;
     }

@@ -676,12 +676,20 @@ addFilter('checkIfUpdated', (claim, field, learnerID) => {
         } else {
             return true
         }
-    } else if (field == "learner") {
-        if (lastQueried.learnerID == draftClaim.learnerID) {
-            return false
-        } else {
-            return true
+    } else if (field == "learners") {
+        // if (lastQueried.learnerID == draftClaim.learnerID) {
+        //     return false
+        // } else {
+        //     return true
+        // }
+        const lastSet = new Set(lastQueried.learners);
+        for (const item of draftClaim.learners) {
+            if (!lastSet.has(item)) {
+                return true; // Found something new in draft
+            }
         }
+        return false; // Nothing new in draft
+
     } else if (field == "startDate") {
         if (lastQueried.startDate == draftClaim.startDate) {
             return false
@@ -1032,4 +1040,26 @@ addFilter('toLowerCase', function (string) {
 addFilter('getLearnerFieldByID', function (learners, learnerID, field) {
     
     return (getLearnerFieldByID(learners, learnerID, field))
+})
+
+addFilter('doesContainLearner', function (learners, learnerID) {
+    let exists = false;
+
+    for (const l of learners) {
+        if (l.learnerID === learnerID) {
+            exists = true;
+            break;
+        }
+    }
+    return exists
+})
+
+addFilter('addedCount', function (learners, type) {
+    let added = 0
+    if (type == "completionDate") {
+        added = learners.filter(l => l.completionDate).length;
+    } else if (type == "completionEvidence") {
+        added = learners.filter(l => l.evidenceOfCompletion).length;
+    }
+    return added
 })

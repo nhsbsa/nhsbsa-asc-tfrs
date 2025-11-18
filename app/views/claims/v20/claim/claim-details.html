@@ -31,11 +31,6 @@
 
 {% endif %}
 
-
-
-{% set learner = submission.learnerID | findLearner(data.learners) %}
-
-
 {% block pageTitle %}
   {% if (claim.claimType == "100") %}
     {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Claim: {{claim.claimID}} — {{serviceName}} — GOV.UK
@@ -123,15 +118,20 @@
 
   <div class="govuk-grid-column-two-thirds">
     <h2 class="govuk-heading-l" id="training">Claim details</h2>
+    
+     {% if claim.claimType == "100" %}
+      {% include "../_components/claim-sections/100-claim.html" %}
+     {% else %}
+      {% include "../_components/claim-sections/6040-claim.html" %}
+
+     {% endif %}
+
   </div>
 
   <div class="govuk-grid-column-one-third">
 
     <p class="govuk-body"><a class="govuk-link" href="">View claim history</a></p>
     <p class="govuk-body"><a class="govuk-link" href="">View previous submissions</a></p>
-    <a type="submit" class="govuk-button govuk-button--secondary" href="claim-learners">
-      Manage
-    </a>
 
   </div>
 
