@@ -1794,7 +1794,7 @@
             "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
-              "note": null
+              "note": "wrong date"
             }
           },
           {
@@ -1803,7 +1803,7 @@
             "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
-              "note": null
+              "note": "wrong date"
             }
           },
           {
@@ -1812,7 +1812,7 @@
             "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
-              "note": null
+              "note": "null"
             }
           },
           {
@@ -1821,7 +1821,7 @@
             "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
-              "note": null
+              "note": "wrong date"
             }
           },
           {
@@ -1830,7 +1830,7 @@
             "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
-              "note": null
+              "note": "wrong date"
             }
           }
         ],

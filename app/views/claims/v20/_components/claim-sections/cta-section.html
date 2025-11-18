@@ -1,8 +1,3 @@
-
-{% if claim.claimType == "60" and claim.status == "not-yet-submitted" %}
-    <p class="govuk-body">Once the 60 part is approved and the learner has completed the training, you'll need to submit the 40 part for the rest of the reimbursement amount.</p>
-{% endif %}
-
 <div class="govuk-button-group" style="align-items: center;">
     <a class="govuk-button" href="../ready-to-declare?id={{claim.claimID}}">
         {% if (claim.status == "not-yet-submitted" or (pairClaim and pairClaim.status == "not-yet-submitted")) %}

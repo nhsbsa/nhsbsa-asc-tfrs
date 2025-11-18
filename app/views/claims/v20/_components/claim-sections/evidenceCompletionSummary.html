@@ -70,7 +70,11 @@
             Completion date 
         </dt>
         <dd class="govuk-summary-list__value">
+          {% if claim.claimType == "100"%}
+          Added for <strong>{{submission.learners | addedCount("completionDate")}}</strong> of <strong>{{submission.learners.length}}</strong> learners
+          {% else %}
           Added for <strong>{{pairSubmission.learners | addedCount("completionDate")}}</strong> of <strong>{{pairSubmission.learners.length}}</strong> learners
+          {% endif%}
         </dd>
       </div>
 
@@ -149,7 +153,11 @@
             Evidence of completion
         </dt>
         <dd class="govuk-summary-list__value">
-          Added for <strong>{{pairSubmission.learners | addedCount("completionEvidence")}}</strong> of <strong>{{pairSubmission.learners.length}}</strong> learners
+          {% if claim.claimType == "100"%}
+            Added for <strong>{{submission.learners | addedCount("completionEvidence")}}</strong> of <strong>{{submission.learners.length}}</strong> learners
+          {% else %}
+            Added for <strong>{{pairSubmission.learners | addedCount("completionEvidence")}}</strong> of <strong>{{pairSubmission.learners.length}}</strong> learners
+          {% endif%}
         </dd>
       </div>
 

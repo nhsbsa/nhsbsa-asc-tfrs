@@ -23,11 +23,29 @@
                 <p id="passport-issued-error" class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> You cannot resubmit a claim without making the requested edits</p>
             {% endif %}
             {% if noteSubmission.evidenceOfPaymentReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Evidence of payment:</strong> {{noteSubmission.evidenceOfPaymentReview.note}}</p>
+                <p class="govuk-body"><strong>Evidence of payment:</strong> {{noteSubmission.evidenceOfPaymentReview.note}}</p>
             {% endif %}
-            {% if noteSubmission.evidenceOfCompletionReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Evidence of completion:</strong> {{noteSubmission.evidenceOfCompletionReview.note}}</p>
+
+            {# if one learner #}
+            {% if noteSubmission.learners.length == 1 %}
+                {% if noteSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried" %}
+                    <p class="govuk-body"><strong>Evidence of completion:</strong> {{noteSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
+                {% endif %}
+            {# if multiple learners #}
+            {% else %}
+                {% if noteSubmission.learners | getLearnersByStatus("queried") %}
+                    <p class="govuk-body"><strong>Evidence of completion:</strong> 
+                        <ul class="govuk-list">
+                            {% for learner in noteSubmission.learners | getLearnersByStatus("queried")%}
+                                {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                                <li><a href="claim-learners" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                            {% endfor %}
+
+                        </ul>
+                    </p>
+                {% endif %}
             {% endif %}
+
         </div>
         <p class="govuk-body"><a class="govuk-link" href="../guidance/tu-evidence-requirements.html">Check what evidence you need to provide</a></p>
         <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
@@ -46,9 +64,27 @@
         {% if noteSubmission.evidenceOfPaymentReview.outcome == "fail" %}
         <p class="govuk-body"><strong>Evidence of payment: </strong>{{noteSubmission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
-        {% if noteSubmission.evidenceOfCompletionReview.outcome == "fail" %}
-        <p class="govuk-body"><strong>Evidence of completion:</strong> {{noteSubmission.evidenceOfCompletionReview.note}}</p>
+
+        {# if one learner #}
+        {% if noteSubmission.learners.length == 1 %}
+            {% if noteSubmission.learners[0].evidenceOfCompletionReview.outcome == "fail" %}
+                <p class="govuk-body"><strong>Evidence of completion:</strong> {{noteSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
+            {% endif %}
+        {# if multiple learners #}
+        {% else %}
+            {% if noteSubmission.learners | getLearnersByStatus("fail") %}
+                <p class="govuk-body"><strong>Evidence of completion:</strong> 
+                    <ul class="govuk-list">
+                        {% for learner in noteSubmission.learners | getLearnersByStatus("fail")%}
+                            {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                            <li><a href="claim-learners" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                        {% endfor %}
+
+                    </ul>
+                </p>
+            {% endif %}
         {% endif %}
+
         <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../contact">contact us</a>.</p>
         
     {% endif %}
@@ -116,9 +152,27 @@
             {% if notePairSubmission.evidenceOfPaymentReview.outcome == "queried" %}
                 <p class="govuk-body"><strong>Evidence of payment:</strong> {{notePairSubmission.evidenceOfPaymentReview.note}}</p>
             {% endif %}
-            {% if notePairSubmission.evidenceOfCompletionReview.outcome == "queried" %}
-                <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.evidenceOfCompletionReview.note}}</p>
+
+            {# if one learner #}
+            {% if notePairSubmission.learners.length == 1 %}
+                {% if notePairSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried" %}
+                <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
+                {% endif %}
+            {# if multiple learners #}
+            {% else %}
+                {% if notePairSubmission.learners | getLearnersByStatus("queried") %}
+                    <p class="govuk-body"><strong>Evidence of completion:</strong> 
+                        <ul class="govuk-list">
+                            {% for learner in notePairSubmission.learners | getLearnersByStatus("queried")%}
+                                {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                                <li><a href="claim-learners" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                            {% endfor %}
+
+                        </ul>
+                    </p>
+                {% endif %}
             {% endif %}
+
         </div>
 
             <p class="govuk-body"><a class="govuk-link" href="../guidance/tu-evidence-requirements.html">Check what evidence you need to provide</a></p>
@@ -134,9 +188,26 @@
             <h2 class="moj-alert__heading">Why the 40 part of your claim was rejected</h2>
             <p class="govuk-body">This claim has been rejected which means it cannot be edited and resubmitted. You'll find the reasons below.</p>
 
-            {% if notePairSubmission.evidenceOfCompletionReview.outcome == "fail" %}
-            <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.evidenceOfCompletionReview.note}}</p>
+            {# if one learner #}
+            {% if notePairSubmission.learners.length == 1 %}
+                {% if notePairSubmission.learners[0].evidenceOfCompletionReview.outcome == "fail" %}
+                <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
+                {% endif %}
+            {# if multiple learners #}
+            {% else %}
+                {% if notePairSubmission.learners | getLearnersByStatus("fail") %}
+                    <p class="govuk-body"><strong>Evidence of completion:</strong> 
+                        <ul class="govuk-list">
+                            {% for learner in notePairSubmission.learners | getLearnersByStatus("fail")%}
+                                {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                                <li><a href="claim-learners" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                            {% endfor %}
+
+                        </ul>
+                    </p>
+                {% endif %}
             {% endif %}
+
             <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../contact">contact us</a>.</p>
         {% endif %}
 
