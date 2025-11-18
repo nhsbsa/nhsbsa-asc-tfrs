@@ -1,4 +1,4 @@
-<dl class="govuk-summary-list {%if (pairClaim != null)%}summary-list--no-borders {% endif%}">
+<dl class="govuk-summary-list {%if ((pairClaim != null and claim.status != "approved"))%}summary-list--no-borders {% endif%}">
   {% include "./training.html" %}
   {% include "./learner.html" %}
 </dl>
@@ -8,7 +8,7 @@
 
     <h2 class="govuk-heading-m" id="training">60 part</h2>
     <p class="govuk-body">Claim reference for the <strong class="govuk-tag govuk-tag--yellow">60</strong> part: {{ claim.claimID }}</p>
-    <dl class="govuk-summary-list">
+    <dl class="govuk-summary-list {% if (claim.status == "submitted" or claim.status == "rejected") %}summary-list--no-borders{% endif %}">
       {% include "./start-date.html" %}
       {% include "./evidencePayment.html" %}
     </dl>
