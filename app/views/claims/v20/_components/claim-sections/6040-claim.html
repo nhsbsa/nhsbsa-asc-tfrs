@@ -1,4 +1,4 @@
-<dl class="govuk-summary-list {%if ((pairClaim != null and claim.status != "approved"))%}summary-list--no-borders {% endif%}">
+<dl class="govuk-summary-list {%if ((pairClaim != null and claim.status != "approved") or (claim.status == "approved" and (pairClaim.status != "approved" and pairClaim.status != "rejected")))%}summary-list--no-borders {% endif%}">
   {% include "./training.html" %}
   {% include "./learner.html" %}
 </dl>
@@ -95,7 +95,7 @@
   <dl class="govuk-summary-list">
     {% include "./evidenceCompletionSummary.html" %}
   </dl>
-  {% if (pairClaim.status == "not-yet-submitted" or claim.status == "queried")%}
+  {% if (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried")%}
     {% include "./cta-section.html" %}
   {% endif %}
 
