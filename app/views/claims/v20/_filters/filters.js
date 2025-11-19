@@ -1033,7 +1033,23 @@ addFilter('filterLearners', function (claim, pairClaim) {
         filtered.rejected.learners = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
     }
 
-    
+    if (claim.claimType == "60"  && claim.status != "approved") {
+        const doneLearners = filtered.done.learners;
+        const removedLearners = filtered.removed.learners;
+        
+        // Create a Set of learner IDs and learnerChanged values from removed
+        const removedIDs = new Set(
+        removedLearners.flatMap(l => [l.learnerID, l.learnerChanged].filter(Boolean))
+        );
+
+        // Filter out learners from done if their learnerID exists in removedIDs
+        const updatedDoneLearners = doneLearners.filter(
+        learner => !removedIDs.has(learner.learnerID)
+        );
+
+        // Update the original array
+        filtered.done.learners = updatedDoneLearners;
+    }
 
     const nonEmptyKeys = Object.entries(filtered)
         .filter(([_, item]) => Array.isArray(item.learners) && item.learners.length > 0)

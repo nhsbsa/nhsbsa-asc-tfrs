@@ -415,12 +415,23 @@ router.get('/remove-learner', function (req, res) {
   }
 
   req.session.data.learnerConfirmation = {
-    type: "removal",
-    learner: learnerID,
+      type: "removal",
+      learner: learnerID,
+    }
+
+  if (submission.learners.length > 1 || submission.removedLearners.length > 1) {
+    res.redirect('claim/claim-learners')
+  } else {
+    res.redirect('claim/claim-details')
   }
-  res.redirect('claim/claim-learners')
+  
 
 
+});
+
+router.get('/claim-learner-back-handler', function (req, res) {
+  delete req.session.data.learnerConfirmation
+  res.redirect('claim/claim-details');
 });
 
 router.get('/readd-learner', function (req, res) {

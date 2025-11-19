@@ -862,8 +862,16 @@ function getLearnersNotInBoth(arr1, arr2) {
 }
 
 function getLearnerFieldByID(learners, learnerID, field) {
-  const learner = learners.find(l => l.learnerID === learnerID);
-  return learner ? learner[field] : null; // safely returns null if not found
+  // Try to find by learnerID first
+  let learner = learners.find(l => l.learnerID === learnerID);
+  
+  // If not found, try to find by learnerChanged
+  if (!learner) {
+    learner = learners.find(l => l.learnerChanged === learnerID);
+  }
+  
+  // Return the requested field if found, otherwise null
+  return learner ? learner[field] : null;
 }
 
 function getOverallCompletionOutcome(learners) {
