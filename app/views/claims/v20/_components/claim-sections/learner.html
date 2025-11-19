@@ -1,3 +1,4 @@
+{# If no learners #}
 {% if not submission.learners %}
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =="missing" %}
     <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
@@ -6,6 +7,7 @@
       </div>
     </div>
   {% endif %}
+  
   <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-key--error {% endif %}">
       Learner
@@ -14,41 +16,82 @@
       <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add learner</a>
     </dd>
   </div>
+
+  {# If at least one learner #}
   {% else %}
     <div class="govuk-summary-list__row {% if (claim.status == "submitted" or claim.status == "approved")%}govuk-summary-list__row--no-actions{% endif %}">
       <dt class="govuk-summary-list__key">
         {% if submission.learners.length >1 %}Learners{% else %}Learner{% endif %} {% if ( claim | checkIfUpdated("learners")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
       </dt>
       <dd class="govuk-summary-list__value">
-         {% if submission.learners.length >1 %}
 
-            <details class="govuk-details">
-              <summary class="govuk-details__summary">
-                <span class="govuk-details__summary-text">
-                  {% if claim.claimType == "100" or (claim.claimType == "60" and pairClaim.claimID == null) %}
-                    {{submission.learners.length}} learners
-                  {% else %}
-                    {{pairSubmission.learners.length}} learners
-                  {% endif %}
-                </span>
-              </summary>
-              <div class="govuk-details__text">
-                <ul class="govuk-list">
-                  {% for learner in (submission.learners | sortLearners)%}
-                    {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
-                    <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
-                  {%endfor%}
-                </ul>
-              </div>
-            </details>
+        {# If multiple learners #}
+         {% if submission.learners.length >1 or submission.removedLearners.length > 0 or pairSubmission.removedLearners.length > 0 %}
 
+            {# For 100 or 60 claims #}
+            {% if claim.claimType == "100" or (claim.claimType == "60" and pairClaim.claimID == null) %}
+                <details class="govuk-details">
+                  <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        {{submission.learners.length}} learners
+                    </span>
+                  </summary>
+                  <div class="govuk-details__text">
+                    <ul class="govuk-list">
+                      {% for learner in (submission.learners | sortLearners)%}
+                        {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                        <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
+                      {%endfor%}
+                      {# To show removed learners #}
+                      {% if submission.removedLearners and submission.removedLearners.length > 0 %}
+                        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                        <strong>Removed</strong>
+                        {% for learner in (submission.removedLearners)%}
+                          {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                          <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
+                        {%endfor%}
+                      {% endif %}
+                    </ul>
+                  </div>
+                </details>
+
+                {# For 40 claims #}
+              {%else %}
+              <details class="govuk-details">
+                <summary class="govuk-details__summary">
+                  <span class="govuk-details__summary-text">
+                      {{pairSubmission.learners.length}} learners 
+                  </span>
+                </summary>
+                <div class="govuk-details__text">
+                  <ul class="govuk-list">
+                    {% for learner in (pairSubmission.learners | sortLearners)%}
+                      {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                      <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
+                    {%endfor%}
+                    {# To show removed learners #}
+                    {% if pairSubmission.removedLearners and pairSubmission.removedLearners.length > 0 %}
+                      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                      <strong>Removed from 40 part</strong>
+                      {% for learner in (pairSubmission.removedLearners)%}
+                        {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                        <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
+                      {%endfor%}
+                    {% endif %}
+                  </ul>
+                </div>
+              </details>
+            {% endif %}
+
+          {# If one learner #}
           {% else %}
             {% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
             <p class="govuk-body">{{learner.givenName}} {{learner.familyName}}</p>
             <p class="govuk-body">{{ submission.learnerID }}</p>
-           {% endif %}
+          {% endif %}
 
       </dd>
+      {# To add more learners #}
       {% if (claim.status == "not-yet-submitted" or claim.status == "queried")%}
         <dd class="govuk-summary-list__actions">
           {% if claim.status == "not-yet-submitted" %}
@@ -66,9 +109,11 @@
               </li>
             </ul>
           {% elif claim.status == "queried" %}
+            {# To change one learner #}
             {% if submission.learners.length == 1 %}
                 {% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
                   <a class="govuk-link govuk-link--no-visited-state" href="select-learner?change=true&changeID={{learner.id}}">Change<span class="govuk-visually-hidden"> learner</span></a>
+                {# To change all learners #}
                 {% else %}
                   <a class="govuk-link govuk-link--no-visited-state" href="claim-learners">Change<span class="govuk-visually-hidden"> all learners</span></a>
               {% endif %}
