@@ -5,6 +5,10 @@ const { generatecreatedByList } = require('../_helpers/helpers.js');
 function getRandomLearners(learnerList, x) {
   const copyLearners = [...learnerList];
 
+  if (x == 0 ) {
+    x = 1
+  }
+
   if (x > copyLearners.length) {
     console.error(
       "Error: Number of learners to select is greater than the total number of available learners."
@@ -95,7 +99,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         costPerLearner: null
       },
 
-      sharedCompletionDate: false,
+      sharedCompletionDate: null,
       learners: [],
       processedDate: null,
       processedBy: null
@@ -126,7 +130,8 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         learner.evidenceOfCompletion = "certificate1.pdf";
         learner.completionDate = faker.date.between({ from: startDate, to: submission.submittedDate });
       }
-  
+      submission.sharedCompletionDate = false
+
       if (['rejected'].includes(status)) {
   
         submission.evidenceOfPaymentReview.outcome = "fail"
@@ -261,14 +266,16 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         costPerLearner: null
       },
 
-      sharedCompletionDate: false,
+      sharedCompletionDate: null,
       learners: [],
       processedDate: null,
       processedBy: null
     }
 
+    let learnerCopy = null
     for (const learner of submissionA.learners) {
-      submissionB.learners.push(learner)
+      learnerCopy = structuredClone(learner)
+      submissionB.learners.push(learnerCopy)
     }
 
     if (['submitted', 'rejected', 'approved', "queried"].includes(status)) {
@@ -280,6 +287,8 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       const completionDateB =  faker.date.between({ from: processedDateA, to: submissionDateB });
       learner.completionDate = completionDateB
       }
+
+      submissionB.sharedCompletionDate = false
       
       const latestDate = new Date(Math.max(...submissionB.learners.map(l => new Date(l.completionDate))));
 
@@ -344,9 +353,12 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         if (checkNumber < 0.5 ) {
           learner.evidenceOfCompletionReview.outcome = "queried"
           learner.evidenceOfCompletionReview.note = "The completion date on the certificate does not match the completion date on the claim"
-        } else if (checkNumber >0.5 && checkNumber < 0.75) {
+        } else if (checkNumber >=0.5 && checkNumber < 0.75) {
           learner.evidenceOfCompletionReview.outcome = "fail"
           learner.evidenceOfCompletionReview.note = "The evidence of completion shows that this learner is inelgible for reimbursement."
+        } else if (checkNumber >= 0.75 && checkNumber < 1) {
+          learner.evidenceOfCompletionReview.outcome = "pass"
+          learner.evidenceOfCompletionReview.note = null
         }
       }
 
