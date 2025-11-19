@@ -1,0 +1,82 @@
+{% extends "../_layouts/claims-main.html" %}
+
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+{% if (claim.status == "approved") %}
+    {% set id = data.id | replaceSuffix %}
+    {% set claim = id | findClaim(data.claims, data.org.workplaceID) %}
+{% else %}
+    {% set id = data.id %}
+{% endif %}
+
+{% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+{% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+{% endif %}
+
+{% block pageTitle %}
+{% if data.submitError.dateValid != null and not data.submitError.dateValid %}Error: {% endif %}Did all learners on this claim complete training on the same date? — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.submitError %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <a href="#error">
+                            Select whether all learners on this claim complete training on the same date
+                        </a>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <form action="../shared-completion-date" method="post" class="form">
+            <div class="govuk-form-group {% if data.submitError %} govuk-form-group--error {% endif %}">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+                        <h1 class="govuk-fieldset__heading">
+                            Did all learners on this claim complete training on the same date?
+                        </h1>
+                    </legend>
+                    {% if data.submitError %}
+                        <p id="error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span>
+                            Select whether all learners on this claim complete training on the same date
+                        </p>
+                    {% endif %}
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sharedDate" name="sharedDate" type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="sharedDate">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="sharedDate-2" name="sharedDate" type="radio" value="no">
+                            <label class="govuk-label govuk-radios__label" for="sharedDate-2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+                <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler?learners=true">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

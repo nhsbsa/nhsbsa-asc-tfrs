@@ -1,0 +1,12 @@
+{% if  (filteredLearners.multi.check) %}
+    <h2 class="govuk-heading-m">{{ learnerList.label}} ({{learnerList.learners | length}})</h2>
+{% endif %}
+
+{% if ((learnerList.learners | length) > 0) %}
+    {% for learner in (learnerList.learners | sortLearners) %}
+        {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
+        {% include "./learner-card.html" %}
+    {% endfor %}
+{% else %}
+<p class="govuk-body">0 learners {{ learnerList.label}}</p>
+{% endif %}

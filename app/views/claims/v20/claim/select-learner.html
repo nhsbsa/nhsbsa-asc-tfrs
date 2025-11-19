@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="claim-details" class="govuk-back-link">Back</a>
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -105,10 +105,10 @@
                     <td class="govuk-table__cell">{{ learner.givenName }} {{ learner.familyName }}</td>
                     <td class="govuk-table__cell">{{ learner.jobTitle }}</td>
                     <td class="govuk-table__cell">
-                        {% if submission.learnerID == learner.id %}
-                        <span class="govuk-caption-m">Currently selected</span>
+                        {% if submission.learners and submission.learners | doesContainLearner(learner.id) %}
+                            <span class="govuk-caption-m">Currently selected</span>
                         {% else %}
-                        <form method="post" action="../add-learner" class="govuk-!-margin-0">
+                        <form method="post" action="../add-learner?single={{data.single}}" class="govuk-!-margin-0">
                             <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
                             <button type="submit" class="govuk-button">Select <span class="govuk-visually-hidden">&nbsp; learner {{ learner.id }}</span></button>
                         </form>

@@ -750,3 +750,26 @@ margin-right: govuk-spacing(3);
   border-bottom: 1px solid #b1b4b6;
 }
 
+.completion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px; /* optional */
+}
+
+.completion-header .govuk-button {
+  margin: 0; /* removes the default top margin */
+}
+
+.govuk-accordion__controls {
+  display: none !important;
+}
+
+.summary-list--no-borders .govuk-summary-list__row:last-child {
+  border-bottom: none;
+}
+
+.heading-22 {
+  font-size: 22px !important;
+  line-height: 1.3; /* match GOV.UK conventions */
+}

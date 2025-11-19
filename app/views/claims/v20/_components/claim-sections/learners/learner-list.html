@@ -1,0 +1,35 @@
+{% if (filteredLearners.todo.learners | length) > 0 %}
+    <h2 class="govuk-heading-s">{{ filteredLearners.todo.label}} ({{filteredLearners.todo.learners | length}})</h2>
+    {% set learners = filteredLearners.todo.learners %}
+    {% include "./learner-links.html" %}
+{% endif %}
+
+{% if (filteredLearners.needsaction.learners | length) > 0 %}
+    <h2 class="govuk-heading-s">{{ filteredLearners.needsaction.label}} ({{filteredLearners.needsaction.learners | length}})</h2>
+    {% set learners = filteredLearners.needsaction.learners  %}
+    {% include "./learner-links.html" %}
+{% endif %}
+
+{% if (filteredLearners.done.learners | length) > 0 %}
+    <h2 class="govuk-heading-s">{{ filteredLearners.done.label}} ({{filteredLearners.done.learners | length}})</h2>
+    {% set learners = filteredLearners.done.learners%}
+    {% include "./learner-links.html" %}
+{% endif %}
+
+{% if (filteredLearners.rejected.learners | length) > 0 %}
+    <h2 class="govuk-heading-s">{{ filteredLearners.rejected.label}} ({{filteredLearners.rejected.learners | length}})</h2>
+    {% set learners = filteredLearners.rejected.learners%}
+    {% include "./learner-links.html" %}
+{% endif %}
+
+{% if (filteredLearners.approved.learners | length) > 0 %}
+    <h2 class="govuk-heading-s">{{ filteredLearners.approved.label}} ({{filteredLearners.approved.learners | length}})</h2>
+    {% set learners = filteredLearners.approved.learners%}
+    {% include "./learner-links.html" %}
+{% endif %}
+
+{% if (filteredLearners.removed.learners | length) > 0 %}
+    <h2 class="govuk-heading-s">{{ filteredLearners.removed.label}} ({{filteredLearners.removed.learners | length}})</h2>
+    {% set learners = filteredLearners.removed.learners%}
+    {% include "./learner-links.html" %}
+{% endif %}

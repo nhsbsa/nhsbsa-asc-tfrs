@@ -15,7 +15,7 @@ function checkClaim(claim) {
         submission = getMostRelevantSubmission(claim)
     }
     
-    if (claim.claimType != "40" && submission.learnerID == null) {
+    if (claim.claimType != "40" && (submission.learners == null || submission.learners.length == 0 )) {
         result.learner = "missing"
     } else {
         result.learner = "valid"
@@ -46,31 +46,31 @@ function checkClaim(claim) {
         result.evidenceOfPayment = "valid"
     }
 
-    if (submission.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
-        result.evidenceOfCompletion = "missing"
-    } else {
+    // if (submission.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
+    //     result.evidenceOfCompletion = "missing"
+    // } else {
         result.evidenceOfCompletion = "valid"
-    }
+    // }
 
-    if (submission.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
-        result.completionDate = "missing"
-    } else {
+    // if (submission.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
+    //     result.completionDate = "missing"
+    // } else {
         result.completionDate = "valid"
-    }
+    // }
 
-    const startDate = new Date(submission.startDate)
-    const completionDate = new Date(submission.completionDate)
-    if ((result.completionDate == "valid" && submission.learnerID) && result.startDate == "valid") {
-        if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
-            result.startDate = "invalid"
-            result.completionDate = "invalid"
-        } else if ((currentDate.getTime() < completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
-            result.completionDate = "inFuture"
-        } 
-    }
-    if (result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "60") && (currentDate.getTime() < startDate.getTime())) {
-        result.startDate = "inFuture"
-    }
+    // const startDate = new Date(submission.startDate)
+    // const completionDate = new Date(submission.completionDate)
+    // if ((result.completionDate == "valid" && submission.learnerID) && result.startDate == "valid") {
+    //     if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
+    //         result.startDate = "invalid"
+    //         result.completionDate = "invalid"
+    //     } else if ((currentDate.getTime() < completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
+    //         result.completionDate = "inFuture"
+    //     } 
+    // }
+    // if (result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "60") && (currentDate.getTime() < startDate.getTime())) {
+    //     result.startDate = "inFuture"
+    // }
     
 
     if (claim.status == "queried") {
@@ -498,7 +498,6 @@ function findCourseByCode(code) {
   function findLearnerById(id, localLearners) {
     
     const learners = loadLearners(localLearners)
-
       const learner = learners.find(learner => learner.id == id);
       if (learner) {
         return learner;
@@ -646,11 +645,11 @@ function checkChange(claim) {
     let isChange = false
     if (
         (lastQueried.trainingCode !== draftClaim.trainingCode) ||
-        (lastQueried.learnerID !== draftClaim.learnerID) ||
+        // (lastQueried.learnerID !== draftClaim.learnerID) ||
         (lastQueried.startDate !== draftClaim.startDate) ||
         (lastQueried.costDate !== draftClaim.costDate) ||
-        (lastQueried.completionDate !== draftClaim.completionDate) ||
-        (lastQueried.evidenceOfCompletion !== draftClaim.evidenceOfCompletion) ||
+        // (lastQueried.completionDate !== draftClaim.completionDate) ||
+        // (lastQueried.evidenceOfCompletion !== draftClaim.evidenceOfCompletion) ||
         (lastQueried.evidenceOfPayment.length !== draftClaim.evidenceOfPayment.length)
     ) {
         isChange = true
@@ -835,5 +834,68 @@ function isInternalOMMT(courseCode) {
   return validValues.includes(courseCode);
 }
 
+function sortAlphabetically(learners) {
+  const allLearners = loadJSONFromFile('learners.json', dataPath)
+    const mergedLearners = learners.map(learner => {
+        const match = allLearners.find(a => a.id === learner.learnerID);
+        return {
+            ...learner,
+            ...match // adds givenName and familyName if found
+        };
+    });
+  const sortedLearners = mergedLearners.sort((a, b) =>
+        a.givenName.localeCompare(b.givenName)
+     );
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT}
+  return sortedLearners;
+}
+
+function getLearnersNotInBoth(arr1, arr2) {
+  // Extract learnerIDs for quick lookup
+  const ids1 = new Set(arr1.map(l => l.learnerID));
+  const ids2 = new Set(arr2.map(l => l.learnerID));
+
+  // Filter for IDs that are unique to arr1 or arr2
+  const uniqueToArr1 = arr1.filter(l => !ids2.has(l.learnerID));
+  const uniqueToArr2 = arr2.filter(l => !ids1.has(l.learnerID));
+
+  // Combine and return
+  return [...uniqueToArr1, ...uniqueToArr2];
+}
+
+function getLearnerFieldByID(learners, learnerID, field) {
+  const learner = learners.find(l => l.learnerID === learnerID);
+  return learner ? learner[field] : null; // safely returns null if not found
+}
+
+function getOverallCompletionOutcome(learners) {
+    let hasFail = false;
+    let hasQuery = false;
+
+    for (const learner of learners) {
+        const outcome = learner.evidenceOfCompletionReview?.outcome;
+
+        if (outcome === "fail") hasFail = true;
+        else if (outcome === "queried") hasQuery = true;
+    }
+
+    if (hasFail) return "fail";
+    if (hasQuery) return "queried";
+    return "pass";
+}
+
+function getLearnersFromDraft(baseSubmission, draftSubmission) {
+    // Find learners in base submission with outcome "queried" or "fail"
+    const filteredBaseLearners = baseSubmission.learners.filter(
+        l => ["queried", "fail"].includes(l.evidenceOfCompletionReview.outcome)
+    );
+
+    // Map them to corresponding learners in draft submission
+    const draftLearners = filteredBaseLearners.map(baseLearner => {
+        return draftSubmission.learners.find(d => d.learnerID === baseLearner.learnerID);
+    }).filter(l => l != null); // remove any unmatched learners
+
+    return draftLearners;
+}
+
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft}

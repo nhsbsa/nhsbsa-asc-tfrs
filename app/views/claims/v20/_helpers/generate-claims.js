@@ -5,6 +5,10 @@ const { generatecreatedByList } = require('../_helpers/helpers.js');
 function getRandomLearners(learnerList, x) {
   const copyLearners = [...learnerList];
 
+  if (x == 0 ) {
+    x = 1
+  }
+
   if (x > copyLearners.length) {
     console.error(
       "Error: Number of learners to select is greater than the total number of available learners."
@@ -70,7 +74,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
   const learners = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/learners.json', 'utf8'));
 
-  const submissionLearners =  getRandomLearners(learners, (Math.floor(Math.random() * 20)));
+  const submissionLearners =  getRandomLearners(learners, (Math.floor(Math.random() * 30)));
   const startDate = faker.date.between({ from: createdDate, to: new Date() });
   const trainingCode = trainingItem.code
 
@@ -95,7 +99,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         costPerLearner: null
       },
 
-      sharedCompletionDate: false,
+      sharedCompletionDate: null,
       learners: [],
       processedDate: null,
       processedBy: null
@@ -126,7 +130,8 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         learner.evidenceOfCompletion = "certificate1.pdf";
         learner.completionDate = faker.date.between({ from: startDate, to: submission.submittedDate });
       }
-  
+      submission.sharedCompletionDate = false
+
       if (['rejected'].includes(status)) {
   
         submission.evidenceOfPaymentReview.outcome = "fail"
@@ -174,8 +179,20 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         }
 
         for (const learner of submission.learners) {
-          submission2.learners.push(learner)
-          learner.evidenceOfCompletionReview.outcome = "pass"
+
+          submission2.learners.push(structuredClone(learner))
+
+          const checkNumber = Math.random()
+          if (checkNumber < 0.5 ) {
+            learner.evidenceOfCompletionReview.outcome = "queried"
+            learner.evidenceOfCompletionReview.note = "The completion date on the certificate does not match the completion date on the claim"
+          } else if (checkNumber >=0.5 && checkNumber < 0.75) {
+            learner.evidenceOfCompletionReview.outcome = "fail"
+            learner.evidenceOfCompletionReview.note = "The evidence of completion shows that this learner is inelgible for reimbursement."
+          } else if (checkNumber >= 0.75 && checkNumber < 1) {
+            learner.evidenceOfCompletionReview.outcome = "pass"
+            learner.evidenceOfCompletionReview.note = null
+          }
         }
 
         submissions.push(submission2)
@@ -261,14 +278,16 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         costPerLearner: null
       },
 
-      sharedCompletionDate: false,
+      sharedCompletionDate: null,
       learners: [],
       processedDate: null,
       processedBy: null
     }
 
+    let learnerCopy = null
     for (const learner of submissionA.learners) {
-      submissionB.learners.push(learner)
+      learnerCopy = structuredClone(learner)
+      submissionB.learners.push(learnerCopy)
     }
 
     if (['submitted', 'rejected', 'approved', "queried"].includes(status)) {
@@ -280,6 +299,8 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
       const completionDateB =  faker.date.between({ from: processedDateA, to: submissionDateB });
       learner.completionDate = completionDateB
       }
+
+      submissionB.sharedCompletionDate = false
       
       const latestDate = new Date(Math.max(...submissionB.learners.map(l => new Date(l.completionDate))));
 
@@ -338,15 +359,18 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
       for (const learner of submissionB.learners) {
 
-        submissionB2.learners.push(learner)
+        submissionB2.learners.push(structuredClone(learner))
 
         const checkNumber = Math.random()
         if (checkNumber < 0.5 ) {
           learner.evidenceOfCompletionReview.outcome = "queried"
           learner.evidenceOfCompletionReview.note = "The completion date on the certificate does not match the completion date on the claim"
-        } else if (checkNumber >0.5 && checkNumber < 0.75) {
+        } else if (checkNumber >=0.5 && checkNumber < 0.75) {
           learner.evidenceOfCompletionReview.outcome = "fail"
           learner.evidenceOfCompletionReview.note = "The evidence of completion shows that this learner is inelgible for reimbursement."
+        } else if (checkNumber >= 0.75 && checkNumber < 1) {
+          learner.evidenceOfCompletionReview.outcome = "pass"
+          learner.evidenceOfCompletionReview.note = null
         }
       }
 
@@ -505,47 +529,43 @@ function transformClaims() {
   const transformedClaims = [];
   const claimLearnerMap = {}; // Stores learners by base claimID
 
-  for (let i = 0; i < claims.length; i++) {
-    const claim = claims[i];
-    const newClaim = { ...claim };
+  for (const claim of claims) {
+    // Deep clone the claim
+    const newClaim = structuredClone(claim);
     newClaim.submissions = [];
 
-    // Strip the final letter suffix (e.g., "GE2-UA5D-4K6C-A" -> "GE2-UA5D-4K6C")
-    const baseClaimID = claim.claimID.slice(0, -2); // assumes "-X" at the end of ID
-    let selectedLearners;
+    // Strip the final letter suffix to get baseClaimID
+    const baseClaimID = claim.claimID.slice(0, -2);
 
-    // 1️⃣ Reuse learners if this claim shares a base ID with another claim
+    // Pick or reuse learners for this claim
+    let selectedLearners;
     if (claimLearnerMap[baseClaimID]) {
       selectedLearners = claimLearnerMap[baseClaimID];
     } else {
-      // 2️⃣ Otherwise, create random learners for this claim
       const numLearners = Math.floor(Math.random() * 7) + 1;
       selectedLearners = getRandomLearners(learners, numLearners);
-
-      // 3️⃣ Store them for other claims (40/60 pair) to reuse
       claimLearnerMap[baseClaimID] = selectedLearners;
     }
 
-    // 4️⃣ Build all submissions with the SAME learners
+    // Transform each submission
     for (const submission of claim.submissions) {
-      const newSubmission = { ...submission };
+      const newSubmission = structuredClone(submission);
 
-      const newLearners = [];
-      for (const learner of selectedLearners) {
+      // Pull submission-level fields
+      const completionDate = submission.completionDate || null;
+      const evidenceOfCompletion = submission.evidenceOfCompletion || null;
+      const evidenceOfCompletionReview = {
+        outcome: submission.evidenceOfCompletionReview?.outcome || null,
+        note: submission.evidenceOfCompletionReview?.note || null
+      };
 
-        newLearners.push({
-          learnerID: learner.id || learner.learnerID,
-          completionDate:  submission.completionDate || null,
-          evidenceOfCompletion:  submission.evidenceOfCompletion || null,
-          evidenceOfCompletionReview: {
-            outcome: submission.evidenceOfCompletionReview?.outcome || null,
-            note: submission.evidenceOfCompletionReview?.note || null
-          }
-        });
-      }
-
-      // Add shared learners
-      newSubmission.learners = newLearners;
+      // Map all selected learners to this submission
+      newSubmission.learners = selectedLearners.map(learner => ({
+        learnerID: learner.id || learner.learnerID,
+        completionDate,
+        evidenceOfCompletion,
+        evidenceOfCompletionReview
+      }));
 
       // Remove old single-learner fields
       delete newSubmission.learnerID;
@@ -553,7 +573,7 @@ function transformClaims() {
       delete newSubmission.evidenceOfCompletion;
       delete newSubmission.evidenceOfCompletionReview;
 
-      // Handle sharedCompletionDate flag
+      // Shared completion date flag
       newSubmission.sharedCompletionDate = claim.status !== "not-yet-submitted" ? false : null;
 
       newClaim.submissions.push(newSubmission);

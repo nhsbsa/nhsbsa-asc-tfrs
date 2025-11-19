@@ -318,10 +318,229 @@ router.post('/cost-date', function (req, res) {
   }
 });
 
+router.get('/completion-date-handler', function (req, res) {
+  let claimID = req.session.data.id
+
+  if (claimID[claimID.length - 1] === 'B') {
+    claimID =  claimID.slice(0, -1) + 'C';
+  }
+  // claim will always be 100 or 40
+
+  const { claims, org } = req.session.data
+  const workplaceID = org.workplaceID
+  let claim = null
+  let sixtyClaim = null
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+    if (claimID == c.claimID && isSameWorkplace) {
+      claim = c
+    }
+    if (claimID[claimID.length - 1] === 'C') {
+      let sixtyId = claimID.slice(0, -1) + 'B'
+      if (sixtyId == c.claimID && isSameWorkplace) {
+        sixtyClaim = c
+      }
+    }
+  }
+
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim)
+  } else {
+    submission = getMostRelevantSubmission(claim)
+  }
+
+  if (submission.sharedCompletionDate == null) {
+    res.redirect('claim/shared-completion-date')
+  } else {
+    res.redirect('claim/add-completion-date')
+  }
+
+});
+
+router.get('/remove-learner', function (req, res) {
+  const claimID = req.session.data.id
+  const learnerID = req.session.data.learner
+
+  const { claims, org } = req.session.data
+  const workplaceID = org.workplaceID
+  let claim = null
+  let mainClaim = null;
+  let cClaim = null;
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+
+    if (!isSameWorkplace) continue;
+
+    if (c.claimID === claimID) {
+      mainClaim = c;
+    }
+
+    if (c.claimID === claimID.slice(0, -1) + "C" && 
+        c.claimType === "60" && 
+        c.status === "approved") {
+      cClaim = c;
+    }
+  }
+
+  // Prefer C-claim if available
+  claim = cClaim || mainClaim;
+
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim)
+  } else {
+    submission = getMostRelevantSubmission(claim)
+  }
+
+
+  // Ensure removedLearners array exists
+  submission.removedLearners = submission.removedLearners || [];
+
+  // Find the learner being removed
+  const removedLearner = submission.learners.find(
+    item => item.learnerID === learnerID
+  );
+
+  // Filter out the learner
+  submission.learners = submission.learners.filter(
+    item => item.learnerID !== learnerID
+  );
+
+  if (!((claim.claimType == "100" || claim.claimType == "60") && claim.status == "not-yet-submitted")) {
+    // If a learner was actually removed, push it into removedLearners
+    if (removedLearner) {
+      submission.removedLearners.push(removedLearner);
+    }
+  }
+
+  res.redirect('claim/claim-learners')
+
+
+});
+
+router.get('/readd-learner', function (req, res) {
+  const claimID = req.session.data.id;
+  const learnerID = req.session.data.learner;
+
+  const { claims, org } = req.session.data;
+  const workplaceID = org.workplaceID;
+  let claim = null;
+  let mainClaim = null;
+  let cClaim = null;
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+    if (!isSameWorkplace) continue;
+
+    if (c.claimID === claimID) {
+      mainClaim = c;
+    }
+
+    if (
+      c.claimID === claimID.slice(0, -1) + "C" &&
+      c.claimType === "60" &&
+      c.status === "approved"
+    ) {
+      cClaim = c;
+    }
+  }
+
+  // Prefer C-claim if available
+  claim = cClaim || mainClaim;
+
+  let submission;
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim);
+  } else {
+    submission = getMostRelevantSubmission(claim);
+  }
+
+  // Ensure removedLearners array exists
+  submission.removedLearners = submission.removedLearners || [];
+
+  // Find the learner being re-added
+  const learnerToReadd = submission.removedLearners.find(
+    item => item.learnerID === learnerID
+  );
+
+  if (learnerToReadd) {
+    // Remove from removedLearners
+    submission.removedLearners = submission.removedLearners.filter(
+      item => item.learnerID !== learnerID
+    );
+
+    // Add back to learners
+    submission.learners = submission.learners || [];
+    submission.learners.push(learnerToReadd);
+  }
+
+  res.redirect('claim/claim-learners');
+});
+
+router.post('/shared-completion-date', function (req, res) {
+  let claimID = req.session.data.id
+  let response = req.session.data.sharedDate
+  let change = req.session.data.change
+  delete req.session.data.submitError
+
+  if (claimID[claimID.length - 1] === 'B') {
+    claimID =  claimID.slice(0, -1) + 'C';
+  }
+  // claim will always be 100 or 40
+
+  const { claims, org } = req.session.data
+  const workplaceID = org.workplaceID
+  let claim = null
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+    if (claimID == c.claimID && isSameWorkplace) {
+      claim = c
+    }
+  }
+
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim)
+  } else {
+    submission = getMostRelevantSubmission(claim)
+  }
+  console.log(response)
+  if (response != null) {
+    switch(response) {
+      case "yes":
+        submission.sharedCompletionDate = true
+        break;
+      case "no":
+        submission.sharedCompletionDate = false
+        break;
+    }
+    
+
+    if ((change == "true" && response != "yes")) {
+      delete req.session.data.sharedDate
+      delete req.session.data.change
+      res.redirect('claim/claim-learners')
+    } else {
+      delete req.session.data.sharedDate
+      delete req.session.data.change
+      res.redirect('claim/add-completion-date')
+    }
+
+  } else {
+    req.session.data.submitError = true
+    res.redirect('claim/shared-completion-date')
+  }
+
+  
+
+});
+
 router.post('/completion-date', function (req, res) {
   const day = req.session.data['completion-date-started-day']
   const month = req.session.data['completion-date-started-month']
   const year = req.session.data['completion-date-started-year']
+  const learnerID = req.session.data.learnerID
   let claimID = req.session.data.id
   const completionDate = new Date(year, month - 1, day)
 
@@ -352,21 +571,31 @@ router.post('/completion-date', function (req, res) {
   const error = validateDate(day, month, year, "completion", claim, sixtyClaim);
 
   if (error.dateValid == true) {
-    for (const c of req.session.data.claims) {
-      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
-        let submission = null
-        if (c.status == "queried") {
-          submission = getDraftSubmission(c)
-        } else {
-          submission = getMostRelevantSubmission(c)
-        }
-        submission.completionDate = completionDate
+    if (claim.status == "queried") {
+      submission = getDraftSubmission(claim)
+    } else {
+      submission = getMostRelevantSubmission(claim)
+    }
+
+    for (const learner of submission.learners) {
+      if (submission.sharedCompletionDate || learner.learnerID == learnerID) {
+          learner.completionDate = completionDate
       }
     }
+
     delete req.session.data['completion-date-started-day'];
     delete req.session.data['completion-date-started-month'];
     delete req.session.data['completion-date-started-year'];
-    res.redirect('claim/claim-details' + '?id=' + claimID + '#completion')
+    if (submission.sharedCompletionDate ) {
+      delete req.session.data.learnerID
+      res.redirect('claim/claim-learners')
+    } else {
+      if (submission.learners.length > 1) {
+        res.redirect('claim/claim-learners#' + learnerID)
+      } else {
+        res.redirect('claim/claim-details#completion')
+      }
+    }
   } else {
     req.session.data.submitError = error
     res.redirect('claim/add-completion-date')
@@ -376,7 +605,9 @@ router.post('/completion-date', function (req, res) {
 router.post('/add-learner', function (req, res) {
   var claimID = req.session.data.id
   var newLearner = findLearnerById(req.session.data.learnerSelection, req.session.data.learners)
+  var singleLearnerClaim = req.session.data.single
 
+  delete req.session.data.single
   delete req.session.data.existingLearner
   delete req.session.data.learnerInput;
   delete req.session.data.learnerSelection;
@@ -403,8 +634,37 @@ router.post('/add-learner', function (req, res) {
       if (isDuplicateClaim.check) {
         res.redirect('claim/duplication?dupeID=' + isDuplicateClaim.id + '&matchType=' + isDuplicateClaim.matchType)
       } else {
-        currentSubmission.learnerID = newLearner.id
-        res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        if (currentSubmission.learners == null || singleLearnerClaim == "true") {
+          currentSubmission.learners = [
+            {
+            "learnerID": newLearner.id,
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }]
+          res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        } else {
+          let newnewlearner = 
+            {
+            "learnerID": newLearner.id,
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }
+            currentSubmission.learners.push(newnewlearner);
+            if (currentSubmission.learners.length > 1) {
+                res.redirect('claim/claim-learners?#'+newLearner.id)
+            } else {
+                res.redirect('claim/claim-details?id=' + claimID + '#learner')
+            }
+        }
+
       }
 
     }
@@ -415,6 +675,7 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.deleteSuccess
   var type = req.session.data.type
   var claimID = req.session.data.id 
+  const learnerID = req.session.data.learnerID
 
   if (claimID[claimID.length - 1] === 'B' && type == 'completion') {
     claimID =  claimID.slice(0, -1) + 'C';
@@ -429,9 +690,17 @@ router.post('/add-evidence', function (req, res) {
         submission = getMostRelevantSubmission(c)
       }
       if (type == 'payment') {
-        submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
+        if (submission.evidenceOfPayment == null) {
+            submission.evidenceOfPayment = ['invoice1.pdf']
+        } else {
+          submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
+        }
       } else if (type == 'completion') {
-        submission.evidenceOfCompletion = ('certificate.pdf')
+        for (const learner of submission.learners) {
+          if (learner.learnerID == learnerID) {
+              learner.evidenceOfCompletion = ('certificate.pdf')
+          }
+        }
       }
       break;
     }
@@ -443,7 +712,11 @@ router.post('/add-evidence', function (req, res) {
   if (type == 'payment') {
     res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
   } else if (type == "completion") {
-    res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
+    if (submission.learners.length > 1) {
+        res.redirect('claim/claim-learners#' + learnerID)
+      } else {
+        res.redirect('claim/claim-details#completion')
+      }
   }
 })
 
@@ -691,9 +964,16 @@ router.get('/cancel-handler', function (req, res) {
   delete req.session.data['jobTitleEmptyError'];
   delete req.session.data['jobTitle'];
   delete req.session.data['jobTitleInvalid'];
-  delete req.session.data['declarationSubmitError'];
+  delete req.session.data['declarationSubmitError']
+  delete req.session.data['learnerID'];
 
-  res.redirect('claim/claim-details' + '?id=' + claimID)
+  if (req.session.data.learner == "true") {
+    delete req.session.data.learner
+    res.redirect('claim/claim-learners')
+  } else {
+    res.redirect('claim/claim-details' + '?id=' + claimID)
+  }
+  
 
 });
 
