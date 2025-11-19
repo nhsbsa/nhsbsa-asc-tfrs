@@ -884,4 +884,18 @@ function getOverallCompletionOutcome(learners) {
     return "pass";
 }
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome}
+function getLearnersFromDraft(baseSubmission, draftSubmission) {
+    // Find learners in base submission with outcome "queried" or "fail"
+    const filteredBaseLearners = baseSubmission.learners.filter(
+        l => ["queried", "fail"].includes(l.evidenceOfCompletionReview.outcome)
+    );
+
+    // Map them to corresponding learners in draft submission
+    const draftLearners = filteredBaseLearners.map(baseLearner => {
+        return draftSubmission.learners.find(d => d.learnerID === baseLearner.learnerID);
+    }).filter(l => l != null); // remove any unmatched learners
+
+    return draftLearners;
+}
+
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft}

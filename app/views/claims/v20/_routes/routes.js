@@ -393,13 +393,89 @@ router.get('/remove-learner', function (req, res) {
     submission = getMostRelevantSubmission(claim)
   }
 
-  const updatedLearners = submission.learners.filter(item => item.learnerID !== learnerID);
 
-  submission.learners = updatedLearners
+  // Ensure removedLearners array exists
+  submission.removedLearners = submission.removedLearners || [];
+
+  // Find the learner being removed
+  const removedLearner = submission.learners.find(
+    item => item.learnerID === learnerID
+  );
+
+  // Filter out the learner
+  submission.learners = submission.learners.filter(
+    item => item.learnerID !== learnerID
+  );
+
+  if (!((claim.claimType == "100" || claim.claimType == "60") && claim.status == "not-yet-submitted")) {
+    // If a learner was actually removed, push it into removedLearners
+    if (removedLearner) {
+      submission.removedLearners.push(removedLearner);
+    }
+  }
 
   res.redirect('claim/claim-learners')
 
 
+});
+
+router.get('/readd-learner', function (req, res) {
+  const claimID = req.session.data.id;
+  const learnerID = req.session.data.learner;
+
+  const { claims, org } = req.session.data;
+  const workplaceID = org.workplaceID;
+  let claim = null;
+  let mainClaim = null;
+  let cClaim = null;
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+    if (!isSameWorkplace) continue;
+
+    if (c.claimID === claimID) {
+      mainClaim = c;
+    }
+
+    if (
+      c.claimID === claimID.slice(0, -1) + "C" &&
+      c.claimType === "60" &&
+      c.status === "approved"
+    ) {
+      cClaim = c;
+    }
+  }
+
+  // Prefer C-claim if available
+  claim = cClaim || mainClaim;
+
+  let submission;
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim);
+  } else {
+    submission = getMostRelevantSubmission(claim);
+  }
+
+  // Ensure removedLearners array exists
+  submission.removedLearners = submission.removedLearners || [];
+
+  // Find the learner being re-added
+  const learnerToReadd = submission.removedLearners.find(
+    item => item.learnerID === learnerID
+  );
+
+  if (learnerToReadd) {
+    // Remove from removedLearners
+    submission.removedLearners = submission.removedLearners.filter(
+      item => item.learnerID !== learnerID
+    );
+
+    // Add back to learners
+    submission.learners = submission.learners || [];
+    submission.learners.push(learnerToReadd);
+  }
+
+  res.redirect('claim/claim-learners');
 });
 
 router.post('/shared-completion-date', function (req, res) {

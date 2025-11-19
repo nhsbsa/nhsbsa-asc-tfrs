@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome} = require('../_helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft} = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -917,26 +917,32 @@ addFilter('filterLearners', function (claim, pairClaim) {
     let setB = []
     let filtered = {
         todo: {
+            id: "todo",
             label: "To do",
             learners: []
         },
         needsaction: {
+            id: "needsaction",
             label: "Needs action",
             learners: []
         },
         done: {
+            id: "done",
             label: "Done",
             learners: []
         },
         approved: {
+            id: "approved",
             label: "Approved",
             learners: []
         },
         rejected: {
+            id: "rejected",
             label: "Rejected",
             learners: []
         },
         removed: {
+            id: "removed",
             label: "Removed from 40 part",
             learners: []
         }
@@ -985,26 +991,36 @@ addFilter('filterLearners', function (claim, pairClaim) {
         }
     }
     
+
     submission = getMostRelevantSubmission(claim)
+    if (claim.status == "queried") {
+        draftSubmission = getDraftSubmission(claim)
+    }
     if (pairClaim != null) {
         pairSubmission = getMostRelevantSubmission(pairClaim)
-    }
-
-    if (claim.submissions.length > 1 && claim.status == "queried") {
-        draftSubmission = getDraftSubmission(claim)
-        filtered.removed.label = "Removed"
-        filtered.approved.label = "No action needed"
-        filtered.removed.learners = getLearnersNotInBoth(submission.learners, draftSubmission.learners)
-    } else if (claim.claimType == "60" && claim.status == "approved") {
-        filtered.removed.label = "Removed from 40 part"
         if (pairClaim.status == "queried") {
-            filtered.approved.label = "No action needed"
             draftPairSubmission = getDraftSubmission(pairClaim)
-            filtered.removed.learners = getLearnersNotInBoth(submission.learners, draftPairSubmission.learners)
-        } else {
-            filtered.removed.learners = getLearnersNotInBoth(submission.learners, pairSubmission.learners)
         }
     }
+
+    if (claim.claimType == "100" && claim.status == "queried") {
+        filtered.needsaction.learners = getLearnersFromDraft(submission, draftSubmission);
+    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status == "queried") {
+        filtered.needsaction.learners = getLearnersFromDraft(pairSubmission, draftPairSubmission);
+    }
+
+    if (claim.status == "queried") {
+        filtered.removed.label = "Removed"
+        filtered.removed.learners = draftSubmission.removedLearners || []
+    } else if (claim.claimType == "60" && claim.status == "approved") {
+        filtered.removed.label = "Removed from 40 part"
+        let removedList = []
+        for (const s of pairClaim.submissions) {
+            removedList.push(...(s.removedLearners || []))
+        }
+        filtered.removed.learners = removedList
+    }
+
     if (claim.claimType == "100" && claim.status != "not-yet-submitted" && claim.status != "submitted") {
         filtered.approved.learners = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "pass")
     } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted") {
@@ -1017,15 +1033,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
         filtered.rejected.learners = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
     }
 
-    if (claim.claimType == "100" && (claim.status == "queried")) {
-        setA = draftSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
-        setB = draftSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
-        filtered.needsaction.learners = setA.concat(setB)
-    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status == "queried") {
-        setA = draftPairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
-        setB = draftPairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
-        filtered.needsaction.learners = setA.concat(setB)
-    }
+    
 
     const nonEmptyKeys = Object.entries(filtered)
         .filter(([_, item]) => Array.isArray(item.learners) && item.learners.length > 0)
@@ -1037,7 +1045,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
     check: count > 1,
     value: count > 0 ? nonEmptyKeys[0] : null
     };
-    
+
     return filtered
 })
 
@@ -1096,3 +1104,15 @@ addFilter('getLearnersByStatus', function (learners, outcome) {
     return filtered
 })
 
+addFilter('getNote', function (learnerID, claim, pairClaim) {
+    if (claim.claimType == "60" && claim.status == "approved") {
+        submission = getMostRelevantSubmission(pairClaim)
+    } else {
+        submission = getMostRelevantSubmission(claim)
+    }
+    console.log(submission)
+    const learner = submission.learners.find(l => l.learnerID === learnerID);
+    
+    return learner ? learner.evidenceOfCompletionReview.note : null;
+
+})

@@ -4,17 +4,23 @@
         {{learnerInfo.givenName}} {{learnerInfo.familyName}}
         </br><span class="govuk-!-font-weight-regular">{{learner.learnerID}}</span>
         </h2>
-        {% if (claim.status == "not-yet-submitted") or (claim.status == "needs-action") or (claim.claimType == "60" and claim.status == "approved" and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried")) %}
+        {% if (claim.status == "not-yet-submitted") or (claim.status == "queried") or (claim.claimType == "60" and claim.status == "approved" and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried")) %}
             <ul class="govuk-summary-card__actions">
-            <li class="govuk-summary-card__action">
-                <a class="govuk-link" href="../remove-learner?learner={{learner.learnerID}}">Remove<span class="govuk-visually-hidden"> {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>{% if (claim.claimType == "60") %} from 40 part{% endif %}</a>
-            </li>
+                <li class="govuk-summary-card__action">
+                    {% if learnerList.id != "removed" %}
+                        <a class="govuk-link" href="../remove-learner?learner={{learner.learnerID}}">Remove<span class="govuk-visually-hidden"> {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>{% if (claim.claimType == "60" and claim.status == "approved") %} from 40 part{% endif %}</a>
+                    {% else %}
+                        <a class="govuk-link" href="../readd-learner?learner={{learner.learnerID}}">Re-add<span class="govuk-visually-hidden"> {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>{% if (claim.claimType == "60" and claim.status == "approved") %} to 40 part{% endif %}</a>
+                    {% endif %}
+                </li>
             </ul>
+
         {% endif %}
     </div>
     {% if not (claim.claimType == "60" and claim.status != "approved") %}
             <div class="govuk-summary-card__content">
-                {% if learner.evidenceOfCompletionReview.outcome == "queried" or learner.evidenceOfCompletionReview.outcome == "fail" %}
+                {% set note = learner.learnerID | getNote(claim, pairClaim) %}
+                {% if note != null %}
                     <div role="region" class="moj-alert moj-alert--information moj-alert--with-heading" aria-label="information: The finance section has moved" data-module="moj-alert">
                         <div>
                             <svg class="moj-alert__icon" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" height="30" width="30">
@@ -22,7 +28,7 @@
                             </svg>
                         </div>
                         <div class="moj-alert__content">
-                            {{learner.evidenceOfCompletionReview.note}}
+                            {{note}}
                         </div>
                         <div class="moj-alert__action">
                             <button class="moj-alert__dismiss" hidden>Dismiss</button>

@@ -180,7 +180,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
         for (const learner of submission.learners) {
 
-          submission2.learners.push(learner)
+          submission2.learners.push(structuredClone(learner))
 
           const checkNumber = Math.random()
           if (checkNumber < 0.5 ) {
@@ -359,7 +359,7 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
 
       for (const learner of submissionB.learners) {
 
-        submissionB2.learners.push(learner)
+        submissionB2.learners.push(structuredClone(learner))
 
         const checkNumber = Math.random()
         if (checkNumber < 0.5 ) {
@@ -529,47 +529,43 @@ function transformClaims() {
   const transformedClaims = [];
   const claimLearnerMap = {}; // Stores learners by base claimID
 
-  for (let i = 0; i < claims.length; i++) {
-    const claim = claims[i];
-    const newClaim = { ...claim };
+  for (const claim of claims) {
+    // Deep clone the claim
+    const newClaim = structuredClone(claim);
     newClaim.submissions = [];
 
-    // Strip the final letter suffix (e.g., "GE2-UA5D-4K6C-A" -> "GE2-UA5D-4K6C")
-    const baseClaimID = claim.claimID.slice(0, -2); // assumes "-X" at the end of ID
-    let selectedLearners;
+    // Strip the final letter suffix to get baseClaimID
+    const baseClaimID = claim.claimID.slice(0, -2);
 
-    // 1️⃣ Reuse learners if this claim shares a base ID with another claim
+    // Pick or reuse learners for this claim
+    let selectedLearners;
     if (claimLearnerMap[baseClaimID]) {
       selectedLearners = claimLearnerMap[baseClaimID];
     } else {
-      // 2️⃣ Otherwise, create random learners for this claim
       const numLearners = Math.floor(Math.random() * 7) + 1;
       selectedLearners = getRandomLearners(learners, numLearners);
-
-      // 3️⃣ Store them for other claims (40/60 pair) to reuse
       claimLearnerMap[baseClaimID] = selectedLearners;
     }
 
-    // 4️⃣ Build all submissions with the SAME learners
+    // Transform each submission
     for (const submission of claim.submissions) {
-      const newSubmission = { ...submission };
+      const newSubmission = structuredClone(submission);
 
-      const newLearners = [];
-      for (const learner of selectedLearners) {
+      // Pull submission-level fields
+      const completionDate = submission.completionDate || null;
+      const evidenceOfCompletion = submission.evidenceOfCompletion || null;
+      const evidenceOfCompletionReview = {
+        outcome: submission.evidenceOfCompletionReview?.outcome || null,
+        note: submission.evidenceOfCompletionReview?.note || null
+      };
 
-        newLearners.push({
-          learnerID: learner.id || learner.learnerID,
-          completionDate:  submission.completionDate || null,
-          evidenceOfCompletion:  submission.evidenceOfCompletion || null,
-          evidenceOfCompletionReview: {
-            outcome: submission.evidenceOfCompletionReview?.outcome || null,
-            note: submission.evidenceOfCompletionReview?.note || null
-          }
-        });
-      }
-
-      // Add shared learners
-      newSubmission.learners = newLearners;
+      // Map all selected learners to this submission
+      newSubmission.learners = selectedLearners.map(learner => ({
+        learnerID: learner.id || learner.learnerID,
+        completionDate,
+        evidenceOfCompletion,
+        evidenceOfCompletionReview
+      }));
 
       // Remove old single-learner fields
       delete newSubmission.learnerID;
@@ -577,7 +573,7 @@ function transformClaims() {
       delete newSubmission.evidenceOfCompletion;
       delete newSubmission.evidenceOfCompletionReview;
 
-      // Handle sharedCompletionDate flag
+      // Shared completion date flag
       newSubmission.sharedCompletionDate = claim.status !== "not-yet-submitted" ? false : null;
 
       newClaim.submissions.push(newSubmission);
