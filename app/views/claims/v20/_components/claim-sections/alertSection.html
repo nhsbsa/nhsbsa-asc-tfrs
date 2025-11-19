@@ -38,7 +38,7 @@
                         <ul class="govuk-list">
                             {% for learner in noteSubmission.learners | getLearnersByStatus("queried")%}
                                 {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
-                                <li><a href="claim-learners" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                                <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
                             {% endfor %}
 
                         </ul>
@@ -77,7 +77,7 @@
                     <ul class="govuk-list">
                         {% for learner in noteSubmission.learners | getLearnersByStatus("fail")%}
                             {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
-                            <li><a href="claim-learners" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                            <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
                         {% endfor %}
 
                     </ul>
@@ -165,7 +165,7 @@
                         <ul class="govuk-list">
                             {% for learner in notePairSubmission.learners | getLearnersByStatus("queried")%}
                                 {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
-                                <li><a href="claim-learners" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                                <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
                             {% endfor %}
 
                         </ul>
@@ -200,7 +200,7 @@
                         <ul class="govuk-list">
                             {% for learner in notePairSubmission.learners | getLearnersByStatus("fail")%}
                                 {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
-                                <li><a href="claim-learners" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                                <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
                             {% endfor %}
 
                         </ul>

@@ -690,7 +690,11 @@ router.post('/add-evidence', function (req, res) {
         submission = getMostRelevantSubmission(c)
       }
       if (type == 'payment') {
-        submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
+        if (submission.evidenceOfPayment == null) {
+            submission.evidenceOfPayment = ['invoice1.pdf']
+        } else {
+          submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
+        }
       } else if (type == 'completion') {
         for (const learner of submission.learners) {
           if (learner.learnerID == learnerID) {
