@@ -106,6 +106,8 @@
                     <td class="govuk-table__cell">{{ learner.jobTitle }}</td>
                     <td class="govuk-table__cell">
                         {% if submission.learners and submission.learners | doesContainLearner(learner.id) %}
+                            <span class="govuk-caption-m">Already added to claim</span>
+                        {% elif data.changeID != null and [data.changeID] | doesContainLearner(learner.id) %}
                             <span class="govuk-caption-m">Currently selected</span>
                         {% else %}
                         <form method="post" action="../add-learner?single={{data.single}}" class="govuk-!-margin-0">
