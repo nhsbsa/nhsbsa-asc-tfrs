@@ -960,7 +960,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
                     filtered.done.label = "Submitted"
                     break;
                 case "queried":
-                    filtered.done.label = "No action needed"
+                    filtered.done.label = "Approved"
                     break;
             }
         } else if (pairClaim.status == "not-yet-submitted" || pairClaim.status == "submitted" || pairClaim.status == "queried") {
@@ -973,7 +973,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
                     filtered.done.label = "Submitted"
                     break;
                 case "queried":
-                    filtered.done.label = "No action needed"
+                    filtered.done.label = "Approved"
                     break;
             }
         }

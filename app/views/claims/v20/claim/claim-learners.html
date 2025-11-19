@@ -102,7 +102,7 @@
         {% include "../_components/claim-sections/learners/learner-list.html" %}
     </div>
     <div class="govuk-grid-column-two-thirds">
-        {% if (filteredLearners.multi.check or claim.status == "not-yet-submitted" or claim.status == "queried" or (pairClaim != null and pairClaim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "queried")) %}
+        {% if (filteredLearners.multi.check or (claim.claimType != "60" and (claim.status == "not-yet-submitted" or claim.status == "queried")) or (pairClaim != null and pairClaim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "queried")) %}
           {% include "../_components/claim-sections/learners/learner-tabs.html" %}
         {% else %}
           {% if filteredLearners.multi.value == "needsaction" or filteredLearners.multi.value == "todo" %}
