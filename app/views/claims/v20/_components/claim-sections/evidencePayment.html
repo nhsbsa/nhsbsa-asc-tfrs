@@ -22,7 +22,7 @@
       </div>
     </div>
   {% endif %}
-  <div class="govuk-summary-list__row {% if ((claim.status == "approved" or claim.status == "rejected" or claim.status == "submitted"))%}govuk-summary-list__row--no-actions{% endif %}
+  <div class="govuk-summary-list__row {% if (is40Part != true and(claim.status == "approved" or claim.status == "rejected" or claim.status == "submitted"))%}govuk-summary-list__row--no-actions{% endif %}
  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' and ((is40Part and pairClaim.claimType == "40") or (is40Part == false and pairClaim.claimType != "40"))%} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' and ((is40Part and pairClaim.claimType == "40") or (is40Part == false and pairClaim.claimType != "40"))%} govuk-summary-key--error {% endif %}">
       {% if claim.claimType == "100" or is40Part != true%}
@@ -66,8 +66,7 @@
     </dd>
   </div>
 {% else %}
-  <div class="govuk-summary-list__row {% if (is40Part != true and claim.claimType == "60" and (claim.status == "approved" or claim.status == "rejected" or claim.status == "submitted"))%}govuk-summary-list__row--no-actions{% endif %}
-">
+  <div class="govuk-summary-list__row {% if (is40Part != true and claim.claimType == "60" and (claim.status == "approved" or claim.status == "rejected" or claim.status == "submitted"))%}govuk-summary-list__row--no-actions{% endif %}">
     <dt class="govuk-summary-list__key">
       {% if claim.claimType == "100" or is40Part != true %}
         Evidence of payment </br>{% if ( claim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag">Edited</strong>{% endif %}

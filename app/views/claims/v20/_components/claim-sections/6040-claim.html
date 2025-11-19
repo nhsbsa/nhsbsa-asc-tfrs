@@ -90,6 +90,12 @@
 
   <h2 class="govuk-heading-m" id="training">40 part</h2>
   <p class="govuk-body">Claim reference for the <strong class="govuk-tag govuk-tag--purple">40</strong> part: {{ pairClaim.claimID }}</p>
+  {% if (pairClaim.isPaymentPlan == true) %}
+        {% set is40Part = true %}
+        <dl class="govuk-summary-list">
+          {% include "./evidencePayment.html" %}
+        </dl>
+      {% endif %}
   <div class="completion-header">
     <h2 class="govuk-heading-s heading-22">Completion</h2>
       {% if (submission.learners.length > 1) %}
