@@ -908,6 +908,7 @@ addFilter('isAllInternalOMMT', function (submissions) {
 })
 
 addFilter('filterLearners', function (claim, pairClaim) {
+    
     let submission = null
     let pairSubmission = null
     let draftSubmission = null
@@ -1004,24 +1005,23 @@ addFilter('filterLearners', function (claim, pairClaim) {
             filtered.removed.learners = getLearnersNotInBoth(submission.learners, pairSubmission.learners)
         }
     }
-
     if (claim.claimType == "100" && claim.status != "not-yet-submitted" && claim.status != "submitted") {
         filtered.approved.learners = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "pass")
     } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted") {
         filtered.approved.learners = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "pass")
     }
 
-    if (claim.claimType == "100" && claim.status != "not-yet-submitted" && claim.status != "submitted" && claim.status != "queried") {
+    if (claim.claimType == "100" && claim.status == "rejected") {
         filtered.rejected.learners = submission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
-    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted" && pairClaim.status != "queried") {
+    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status == "rejected") {
         filtered.rejected.learners = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
     }
 
-    if (claim.claimType == "100" && (claim.status != "not-yet-submitted" && claim.status != "submitted" && claim.status != "rejected")) {
+    if (claim.claimType == "100" && (claim.status == "queried")) {
         setA = draftSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
         setB = draftSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
         filtered.needsaction.learners = setA.concat(setB)
-    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status != "not-yet-submitted" && pairClaim.status != "submitted" && pairClaim.status != "rejected" ) {
+    } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status == "queried") {
         setA = draftPairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "queried")
         setB = draftPairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
         filtered.needsaction.learners = setA.concat(setB)
@@ -1037,7 +1037,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
     check: count > 1,
     value: count > 0 ? nonEmptyKeys[0] : null
     };
-
+    
     return filtered
 })
 

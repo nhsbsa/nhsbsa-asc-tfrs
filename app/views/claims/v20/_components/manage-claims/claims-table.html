@@ -34,7 +34,7 @@
                 <td class="govuk-table__cell">{{ claim.claimType | typeTag }}</td>
                 <td class="govuk-table__cell">{{training.title}}</td>
                 <td class="govuk-table__cell">
-                    {% if (submission.learners | length) > 1 %}{{submission.learners | length}} learners{% elif (submission.learners | length) == 1 %}{{learner.givenName}} {{learner.familyName}}{% else %}Not yet added{% endif %}
+                    {% if (submission.learners | length) > 1 %}{{submission.learners | length}} learners{% elif (submission.learners | length) == 1 %}1 learner{% else %}Not yet added{% endif %}
                 </td>
                 {% if status.id == 'not-yet-submitted' %}
                 <td class="govuk-table__cell">{{ claim.createdDate |
