@@ -1051,7 +1051,30 @@ router.post('/create-learner', function (req, res) {
           } else {
             submission = getMostRelevantSubmission(c)
           }
-          submission.learnerID = learner.id
+          if (submission.learners == null) {
+            submission.learners = [
+            {
+            "learnerID": learner.id,
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }]
+          } else {
+            let newLearner = 
+            {
+            "learnerID": learner.id,
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }
+          submission.learners.push(newLearner)
+          }
           break;
         }
       }
