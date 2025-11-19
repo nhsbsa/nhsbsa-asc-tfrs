@@ -630,7 +630,7 @@ router.post('/add-evidence', function (req, res) {
   delete req.session.data.submitError
 
   if (type == 'payment') {
-    res.redirect('claim/add-evidence-edit' + '?id=' + claimID + 'type=' + type)
+    res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
   } else if (type == "completion") {
     if (submission.learners.length > 1) {
         res.redirect('claim/claim-learners#' + learnerID)

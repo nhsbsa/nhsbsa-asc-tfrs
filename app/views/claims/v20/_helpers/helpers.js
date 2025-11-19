@@ -868,5 +868,20 @@ function getLearnerFieldByID(learners, learnerID, field) {
   return learner ? learner[field] : null; // safely returns null if not found
 }
 
+function getOverallCompletionOutcome(learners) {
+    let hasFail = false;
+    let hasQuery = false;
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID}
+    for (const learner of learners) {
+        const outcome = learner.evidenceOfCompletionReview?.outcome;
+
+        if (outcome === "fail") hasFail = true;
+        else if (outcome === "queried") hasQuery = true;
+    }
+
+    if (hasFail) return "fail";
+    if (hasQuery) return "queried";
+    return "pass";
+}
+
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome}

@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID} = require('../_helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome} = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -797,7 +797,6 @@ addFilter('maskCharacters', function(str, num) {
     return masked + remainder;
 })
 
-
 addFilter('generateTimelineData', function(submission, claimType, org, lastBoolean, statuses) {
     let timelineData = {
     submissionStep: null,
@@ -827,25 +826,43 @@ addFilter('generateTimelineData', function(submission, claimType, org, lastBoole
         date: submission.submittedDate
     }
 
-
     if (submission.processedDate) {
 
-        if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "fail") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "fail" || submission.evidenceOfCompletionReview.outcome == "fail")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "fail")) {
-            processStepTitle = titlePrefix + findStatus("rejected", statuses).historyName
-        } else if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "queried") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "queried" || submission.evidenceOfCompletionReview.outcome == "queried")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "queried")) {
-            processStepTitle = titlePrefix + findStatus("queried", statuses).historyName
-        } else if ((claimType == "40" && submission.evidenceOfCompletionReview.outcome == "queried") || (claimType == "100" && (submission.evidenceOfPaymentReview.outcome == "pass" && submission.evidenceOfCompletionReview.outcome == "pass")) || (claimType == "60" && submission.evidenceOfPaymentReview.outcome == "pass")) {
-            processStepTitle = titlePrefix + findStatus("approved", statuses).historyName
-        }
+    const completionOutcome = getOverallCompletionOutcome(submission.learners);
+    const paymentOutcome = submission.evidenceOfPaymentReview?.outcome;
+
+    if (
+        (claimType == "40" && completionOutcome === "fail") ||
+        (claimType == "100" && (paymentOutcome === "fail" || completionOutcome === "fail")) ||
+        (claimType == "60" && paymentOutcome === "fail")
+    ) {
+
+        processStepTitle = titlePrefix + findStatus("rejected", statuses).historyName;
 
 
-        timelineData.processStep = {
-            title: capitalizeFirstLetter(processStepTitle.toLowerCase()),
-            author: "by Claim processor",
-            date: submission.processedDate
-            }
+    } else if (
+        (claimType == "40" && completionOutcome === "queried") ||
+        (claimType == "100" && (paymentOutcome === "queried" || completionOutcome === "queried")) ||
+        (claimType == "60" && paymentOutcome === "queried")
+    ) {
+        processStepTitle = titlePrefix + findStatus("queried", statuses).historyName;
 
-       }
+    } else if (
+        (claimType == "40" && completionOutcome === "pass") ||
+        (claimType == "100" && (paymentOutcome === "pass" && completionOutcome === "pass")) ||
+        (claimType == "60" && paymentOutcome === "pass")
+    ) {
+        processStepTitle = titlePrefix + findStatus("approved", statuses).historyName;
+    }
+
+    timelineData.processStep = {
+        title: capitalizeFirstLetter(processStepTitle.toLowerCase()),
+        author: "by Claim processor",
+        date: submission.processedDate
+    }
+
+}
+
 
     return timelineData
 })
@@ -1069,3 +1086,13 @@ addFilter('addedCount', function (learners, type) {
     }
     return added
 })
+
+addFilter('getLearnersByStatus', function (learners, outcome) {
+    if (!Array.isArray(learners)) return [];
+    let filtered =  learners.filter(l =>
+        l.evidenceOfCompletionReview &&
+        l.evidenceOfCompletionReview.outcome == outcome
+    );
+    return filtered
+})
+

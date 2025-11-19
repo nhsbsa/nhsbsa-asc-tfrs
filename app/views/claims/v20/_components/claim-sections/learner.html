@@ -25,7 +25,11 @@
             <details class="govuk-details">
               <summary class="govuk-details__summary">
                 <span class="govuk-details__summary-text">
-                  {{submission.learners.length}} learners
+                  {% if claim.claimType == "100" or (claim.claimType == "60" and pairClaim.claimID == null) %}
+                    {{submission.learners.length}} learners
+                  {% else %}
+                    {{pairSubmission.learners.length}} learners
+                  {% endif %}
                 </span>
               </summary>
               <div class="govuk-details__text">
