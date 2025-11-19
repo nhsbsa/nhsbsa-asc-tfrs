@@ -6,7 +6,7 @@
         </h2>
         {% if (claim.status == "not-yet-submitted") or (claim.status == "queried") or (claim.claimType == "60" and claim.status == "approved" and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried")) %}
             <ul class="govuk-summary-card__actions">
-                {% if (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "queried")%}
+                {% if (learnerList.id == "needsaction") or (claim.claimType == "60" and claim.status == "queried") %}
                     <li class="govuk-summary-card__action">
                         <a class="govuk-link" href="select-learner?change=true&changeID={{learner.learnerID}}">Change learner</a>
                     </li>
