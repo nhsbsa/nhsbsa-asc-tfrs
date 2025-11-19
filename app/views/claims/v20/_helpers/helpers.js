@@ -883,15 +883,23 @@ function getOverallCompletionOutcome(learners) {
 }
 
 function getLearnersFromDraft(baseSubmission, draftSubmission) {
-    // Find learners in base submission with outcome "queried" or "fail"
+    // Filter base learners by outcome "queried" or "fail"
     const filteredBaseLearners = baseSubmission.learners.filter(
         l => ["queried", "fail"].includes(l.evidenceOfCompletionReview.outcome)
     );
 
-    // Map them to corresponding learners in draft submission
     const draftLearners = filteredBaseLearners.map(baseLearner => {
-        return draftSubmission.learners.find(d => d.learnerID === baseLearner.learnerID);
-    }).filter(l => l != null); // remove any unmatched learners
+        // Find a draft learner whose learnerID matches
+        // or whose learnerChanged (if not null/undefined) matches the baseLearner's ID
+        const matched = draftSubmission.learners.find(d =>
+            d.learnerID === baseLearner.learnerID ||
+            (d.learnerChanged != null && d.learnerChanged === baseLearner.learnerID)
+        );
+
+        return matched || null;
+    })
+    // Remove nulls (unmatched learners)
+    .filter(l => l !== null);
 
     return draftLearners;
 }
@@ -901,7 +909,8 @@ function replaceLearnerID(learners, oldID, newID) {
     if (learner.learnerID === oldID) {
       return {
         ...learner,
-        learnerID: newID
+        learnerID: newID,
+        learnerChanged: oldID
       };
     }
     return learner;
