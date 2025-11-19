@@ -105,12 +105,12 @@
                     <td class="govuk-table__cell">{{ learner.givenName }} {{ learner.familyName }}</td>
                     <td class="govuk-table__cell">{{ learner.jobTitle }}</td>
                     <td class="govuk-table__cell">
-                        {% if submission.learners and submission.learners | doesContainLearner(learner.id) %}
-                            <span class="govuk-caption-m">Already added to claim</span>
-                        {% elif data.changeID != null and [data.changeID] | doesContainLearner(learner.id) %}
+                        {% if data.changeID != null and data.changeID == learner.id %}
                             <span class="govuk-caption-m">Currently selected</span>
+                        {% elif submission.learners and submission.learners | doesContainLearner(learner.id) %}
+                            <span class="govuk-caption-m">Already added to claim</span>
                         {% else %}
-                        <form method="post" action="../add-learner?single={{data.single}}" class="govuk-!-margin-0">
+                        <form method="post" action="../add-learner" class="govuk-!-margin-0">
                             <input type="hidden" name="learnerSelection" value="{{ learner.id }}">
                             <button type="submit" class="govuk-button">Select <span class="govuk-visually-hidden">&nbsp; learner {{ learner.id }}</span></button>
                         </form>

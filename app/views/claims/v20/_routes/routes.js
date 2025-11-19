@@ -656,7 +656,7 @@ router.post('/add-learner', function (req, res) {
       if (isDuplicateClaim.check) {
         res.redirect('claim/duplication?dupeID=' + isDuplicateClaim.id + '&matchType=' + isDuplicateClaim.matchType)
       } else {
-        if (currentSubmission.learners == null) {
+        if (currentSubmission.learners == null || currentSubmission.learners == []) {
           currentSubmission.learners = [
             {
             "learnerID": newLearner.id,
@@ -668,8 +668,18 @@ router.post('/add-learner', function (req, res) {
             }
           }]
           res.redirect('claim/claim-details?id=' + claimID + '#learner')
-        } else if (currentSubmission.learners != null || change == "true") {
-        currentSubmission.learners = replaceLearnerID(currentSubmission.learners, changeLearnerID, newLearner)
+        } else if (currentSubmission.learners != [] && change == "true") {
+          currentSubmission.learners = replaceLearnerID(currentSubmission.learners, changeLearnerID, newLearner.id)
+          if (currentSubmission.learners.length > 1) {
+            req.session.data.learnerConfirmation = {
+                type: "learner",
+                learner: newLearner.id,
+              }
+              res.redirect('claim/claim-learners?#'+newLearner.id)
+          } else {
+              res.redirect('claim/claim-details?id=' + claimID + '#learner')
+          }
+          
         } else {
           let newnewlearner = 
             {

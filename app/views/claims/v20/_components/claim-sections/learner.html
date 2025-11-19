@@ -58,7 +58,8 @@
               </li>
               <li class="govuk-summary-list__actions-list-item">
                 {% if submission.learners.length == 1 %}
-                  <a class="govuk-link govuk-link--no-visited-state" href="select-learner?change=true&changeID={{learner.learnerID}}">Change<span class="govuk-visually-hidden"> learner</span></a>
+                  {% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
+                  <a class="govuk-link govuk-link--no-visited-state" href="select-learner?change=true&changeID={{learner.id}}">Change<span class="govuk-visually-hidden"> learner</span></a>
                 {% else %}
                   <a class="govuk-link govuk-link--no-visited-state" href="claim-learners">Change<span class="govuk-visually-hidden"> all learners</span></a>
                 {% endif %}
@@ -66,7 +67,8 @@
             </ul>
           {% elif claim.status == "queried" %}
             {% if submission.learners.length == 1 %}
-                  <a class="govuk-link govuk-link--no-visited-state" href="select-learner?change=true&changeID={{learner.learnerID}}">Change<span class="govuk-visually-hidden"> learner</span></a>
+                {% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
+                  <a class="govuk-link govuk-link--no-visited-state" href="select-learner?change=true&changeID={{learner.id}}">Change<span class="govuk-visually-hidden"> learner</span></a>
                 {% else %}
                   <a class="govuk-link govuk-link--no-visited-state" href="claim-learners">Change<span class="govuk-visually-hidden"> all learners</span></a>
               {% endif %}
