@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode } = require('../_helpers/helpers.js');
+const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID } = require('../_helpers/helpers.js');
 const { generateClaims, transformClaims } = require('../_helpers/generate-claims.js');
 const { generateLearners } = require('../_helpers/generate-learners.js');
 
@@ -624,9 +624,11 @@ router.post('/completion-date', function (req, res) {
 router.post('/add-learner', function (req, res) {
   var claimID = req.session.data.id
   var newLearner = findLearnerById(req.session.data.learnerSelection, req.session.data.learners)
-  var singleLearnerClaim = req.session.data.single
+  var change = req.session.data.change
+  var changeLearnerID = req.session.data.changeID
 
-  delete req.session.data.single
+  delete req.session.data.change
+  delete req.session.data.changeID
   delete req.session.data.existingLearner
   delete req.session.data.learnerInput;
   delete req.session.data.learnerSelection;
@@ -654,7 +656,7 @@ router.post('/add-learner', function (req, res) {
       if (isDuplicateClaim.check) {
         res.redirect('claim/duplication?dupeID=' + isDuplicateClaim.id + '&matchType=' + isDuplicateClaim.matchType)
       } else {
-        if (currentSubmission.learners == null || singleLearnerClaim == "true") {
+        if (currentSubmission.learners == null) {
           currentSubmission.learners = [
             {
             "learnerID": newLearner.id,
@@ -666,6 +668,8 @@ router.post('/add-learner', function (req, res) {
             }
           }]
           res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        } else if (currentSubmission.learners != null || change == "true") {
+        currentSubmission.learners = replaceLearnerID(currentSubmission.learners, changeLearnerID, newLearner)
         } else {
           let newnewlearner = 
             {

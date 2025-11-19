@@ -38,8 +38,6 @@
 
 {% set filteredLearners = claim | filterLearners(pairClaim) %}
 
-
-
 {% block beforeContent %}
 <p class="govuk-body"><a href="claim-details" class="govuk-back-link">Back to claim details</a></p>
 {% endblock %}
@@ -122,8 +120,8 @@
             </dl>
         {% endif %}
 
-        {% if (claim.status == "not-yet-submitted" or claim.status == "queried") and (claim.claimType == "100" or claim.claimType == "60") %}
-        <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="select-learner.html">
+        {% if (claim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.claimType == "60") %}
+        <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="select-learner">
             Add another learner
         </a>
         {% endif %}

@@ -1,16 +1,16 @@
-{% if (filteredLearners.todo.learners | length) > 0 or claim.status == "not-yet-submitted"  or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
+{% if (filteredLearners.todo.learners | length) > 0 or (claim.claimType == "100" and claim.status == "not-yet-submitted")  or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
     <h2 class="govuk-heading-s">{{ filteredLearners.todo.label}} ({{filteredLearners.todo.learners | length}})</h2>
     {% set learners = filteredLearners.todo.learners %}
     {% include "./learner-links.html" %}
 {% endif %}
 
-{% if (filteredLearners.needsaction.learners | length) > 0 or claim.status == "queried" or (pairClaim != null and pairClaim.status == "queried") %}
+{% if (filteredLearners.needsaction.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "queried") %}
     <h2 class="govuk-heading-s">{{ filteredLearners.needsaction.label}} ({{filteredLearners.needsaction.learners | length}})</h2>
     {% set learners = filteredLearners.needsaction.learners  %}
     {% include "./learner-links.html" %}
 {% endif %}
 
-{% if (filteredLearners.done.learners | length) > 0 or claim.status == "not-yet-submitted" or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
+{% if (filteredLearners.done.learners | length) > 0 or (claim.claimType == "100" and claim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
     <h2 class="govuk-heading-s">{{ filteredLearners.done.label}} ({{filteredLearners.done.learners | length}})</h2>
     {% set learners = filteredLearners.done.learners%}
     {% include "./learner-links.html" %}
@@ -28,7 +28,7 @@
     {% include "./learner-links.html" %}
 {% endif %}
 
-{% if (filteredLearners.removed.learners | length) > 0 or claim.status == "queried" or (pairClaim != null and pairClaim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "queried") %}
+{% if (filteredLearners.removed.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "queried") %}
     <h2 class="govuk-heading-s">{{ filteredLearners.removed.label}} ({{filteredLearners.removed.learners | length}})</h2>
     {% set learners = filteredLearners.removed.learners%}
     {% include "./learner-links.html" %}

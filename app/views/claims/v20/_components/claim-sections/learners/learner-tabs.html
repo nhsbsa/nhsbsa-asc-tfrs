@@ -4,7 +4,7 @@
   </h2>
   <ul class="govuk-tabs__list">
 
-    {% if (filteredLearners.todo.learners | length) > 0 or claim.status == "not-yet-submitted"  or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
+    {% if (filteredLearners.todo.learners | length) > 0 or (claim.claimType == "100" and claim.status == "not-yet-submitted")  or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
         <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "todo" %} govuk-tabs__list-item--selected{% endif %}">
                 <a class="govuk-tabs__tab" href="#todo">
                     {{ filteredLearners.todo.label}} ({{filteredLearners.todo.learners | length}})
@@ -12,7 +12,7 @@
         </li>
     {% endif %}
 
-    {% if (filteredLearners.needsaction.learners | length) > 0 or claim.status == "queried" or (pairClaim != null and pairClaim.status == "queried") %}
+    {% if (filteredLearners.needsaction.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "queried") %}
         <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "needsaction" %} govuk-tabs__list-item--selected{% endif %}">
                 <a class="govuk-tabs__tab" href="#needsaction">
                     {{ filteredLearners.needsaction.label}} ({{filteredLearners.needsaction.learners | length}})
@@ -20,7 +20,7 @@
         </li>
     {% endif %}
 
-    {% if (filteredLearners.done.learners | length) > 0 or claim.status == "not-yet-submitted" or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
+    {% if (filteredLearners.done.learners | length) > 0 or (claim.claimType == "100" and claim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
         <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "done" %} govuk-tabs__list-item--selected{% endif %}">
                 <a class="govuk-tabs__tab" href="#done">
                     {{ filteredLearners.done.label}} ({{filteredLearners.done.learners | length}})
@@ -44,7 +44,7 @@
         </li>
     {% endif %}
 
-    {% if (filteredLearners.removed.learners | length) > 0 or claim.status == "queried" or (pairClaim != null and pairClaim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "queried") %}
+    {% if (filteredLearners.removed.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "queried") %}
         <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "removed" %} govuk-tabs__list-item--selected{% endif %}">
                 <a class="govuk-tabs__tab" href="#removed">
                     {{ filteredLearners.removed.label}} ({{filteredLearners.removed.learners | length}})
@@ -54,7 +54,7 @@
 
   </ul>
   
-  {% if (filteredLearners.todo.learners | length) > 0 or claim.status == "not-yet-submitted"  or (pairClaim != null and pairClaim.status == "not-yet-submitted")  %}
+  {% if (filteredLearners.todo.learners | length) > 0 or (claim.claimType == "100" and claim.status == "not-yet-submitted")  or (pairClaim != null and pairClaim.status == "not-yet-submitted")  %}
         <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "todo" %} govuk-tabs__panel--hidden{% endif %}" id="todo">
             {% set learnerList = filteredLearners.todo %}
             {% set canChange = true %}
@@ -62,7 +62,7 @@
         </div>
     {% endif %}
 
-    {% if (filteredLearners.needsaction.learners | length) > 0 or claim.status == "queried" or (pairClaim != null and pairClaim.status == "queried") %}
+    {% if (filteredLearners.needsaction.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "queried") %}
         <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "needsaction" %} govuk-tabs__panel--hidden{% endif %}" id="needsaction">
             {% set learnerList = filteredLearners.needsaction %}
             {% set canChange = true %}
@@ -70,7 +70,7 @@
         </div>
     {% endif %}
 
-    {% if (filteredLearners.done.learners | length) > 0 or claim.status == "not-yet-submitted" or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
+    {% if (filteredLearners.done.learners | length) > 0 or (claim.claimType == "100" and claim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
         <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "done" %} govuk-tabs__panel--hidden{% endif %}" id="done">
             {% set learnerList = filteredLearners.done %}
             {% include "./learner-card-list.html" %}
@@ -91,7 +91,7 @@
         </div>
     {% endif %}
 
-    {% if (filteredLearners.removed.learners | length) > 0 or claim.status == "queried" or (pairClaim != null and pairClaim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "queried") %}
+    {% if (filteredLearners.removed.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "queried") %}
         <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "removed" %} govuk-tabs__panel--hidden{% endif %}" id="removed">
             {% set learnerList = filteredLearners.removed %}
             {% include "./learner-card-list.html" %}

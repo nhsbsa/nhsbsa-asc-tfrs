@@ -50,20 +50,28 @@
 
       </dd>
       {% if (claim.status == "not-yet-submitted" or claim.status == "queried")%}
-      <dd class="govuk-summary-list__actions">
-      <ul class="govuk-summary-list__actions-list">
-        <li class="govuk-summary-list__actions-list-item">
-          <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another<span class="govuk-visually-hidden"> learner</span></a>
-        </li>
-        <li class="govuk-summary-list__actions-list-item">
-          {% if submission.learners.length == 1 %}
-            <a class="govuk-link govuk-link--no-visited-state" href="select-learner?single=true">Change<span class="govuk-visually-hidden"> learner</span></a>
-          {% else %}
-            <a class="govuk-link govuk-link--no-visited-state" href="claim-learners">Change<span class="govuk-visually-hidden"> all learners</span></a>
+        <dd class="govuk-summary-list__actions">
+          {% if claim.status == "not-yet-submitted" %}
+            <ul class="govuk-summary-list__actions-list">
+              <li class="govuk-summary-list__actions-list-item">
+                <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another<span class="govuk-visually-hidden"> learner</span></a>
+              </li>
+              <li class="govuk-summary-list__actions-list-item">
+                {% if submission.learners.length == 1 %}
+                  <a class="govuk-link govuk-link--no-visited-state" href="select-learner?change=true&changeID={{learner.learnerID}}">Change<span class="govuk-visually-hidden"> learner</span></a>
+                {% else %}
+                  <a class="govuk-link govuk-link--no-visited-state" href="claim-learners">Change<span class="govuk-visually-hidden"> all learners</span></a>
+                {% endif %}
+              </li>
+            </ul>
+          {% elif claim.status == "queried" %}
+            {% if submission.learners.length == 1 %}
+                  <a class="govuk-link govuk-link--no-visited-state" href="select-learner?change=true&changeID={{learner.learnerID}}">Change<span class="govuk-visually-hidden"> learner</span></a>
+                {% else %}
+                  <a class="govuk-link govuk-link--no-visited-state" href="claim-learners">Change<span class="govuk-visually-hidden"> all learners</span></a>
+              {% endif %}
           {% endif %}
-        </li>
-      </ul>
-    </dd>
+        </dd>
       {% endif %}
     </div>
 {% endif %}
