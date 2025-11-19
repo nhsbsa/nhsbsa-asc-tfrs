@@ -640,8 +640,6 @@ function checkChange(claim) {
     let lastQueried = getMostRelevantSubmission(claim)
     let draftClaim = getDraftSubmission(claim)
 
-    console.log(claim)
-
     let isChange = false
     if (
         (lastQueried.trainingCode !== draftClaim.trainingCode) ||

@@ -1110,7 +1110,6 @@ addFilter('getNote', function (learnerID, claim, pairClaim) {
     } else {
         submission = getMostRelevantSubmission(claim)
     }
-    console.log(submission)
     const learner = submission.learners.find(l => l.learnerID === learnerID);
     
     return learner ? learner.evidenceOfCompletionReview.note : null;
