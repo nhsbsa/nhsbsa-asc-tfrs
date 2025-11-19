@@ -1,4 +1,4 @@
-{# If no learners #}
+{# If no learners, to add a learner #}
 {% if not submission.learners %}
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =="missing" %}
     <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
@@ -17,15 +17,15 @@
     </dd>
   </div>
 
-  {# If at least one learner #}
+  {# If at least one learner, learner key #}
   {% else %}
-    <div class="govuk-summary-list__row {% if (claim.status == "submitted" or claim.status == "approved")%}govuk-summary-list__row--no-actions{% endif %}">
+    <div class="govuk-summary-list__row {% if (claim.status == "submitted" or claim.status == "approved" and pairClaim.status != "not-yet-submitted" and pairClaim.status != "queried")%}govuk-summary-list__row--no-actions{% endif %}">
       <dt class="govuk-summary-list__key">
         {% if submission.learners.length >1 %}Learners{% else %}Learner{% endif %} {% if ( claim | checkIfUpdated("learners")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
       </dt>
       <dd class="govuk-summary-list__value">
 
-        {# If multiple learners #}
+        {# If multiple learners, including removed learners #}
          {% if submission.learners.length >1 or submission.removedLearners.length > 0 or pairSubmission.removedLearners.length > 0 %}
 
             {# For 100 or 60 claims #}
@@ -55,7 +55,7 @@
                   </div>
                 </details>
 
-                {# For 40 claims #}
+              {# For 40 claims #}
               {%else %}
               <details class="govuk-details">
                 <summary class="govuk-details__summary">
@@ -83,7 +83,7 @@
               </details>
             {% endif %}
 
-          {# If one learner #}
+          {# If one learner and none removed, show name of learner #}
           {% else %}
             {% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
             <p class="govuk-body">{{learner.givenName}} {{learner.familyName}}</p>
@@ -91,35 +91,45 @@
           {% endif %}
 
       </dd>
-      {# To add more learners #}
-      {% if (claim.status == "not-yet-submitted" or claim.status == "queried")%}
-        <dd class="govuk-summary-list__actions">
+
+      {# To add or change learners #}
           {% if claim.status == "not-yet-submitted" %}
-            <ul class="govuk-summary-list__actions-list">
-              <li class="govuk-summary-list__actions-list-item">
-                <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another<span class="govuk-visually-hidden"> learner</span></a>
-              </li>
-              <li class="govuk-summary-list__actions-list-item">
-                {% if submission.learners.length == 1 %}
-                  {% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
-                  <a class="govuk-link govuk-link--no-visited-state" href="select-learner?change=true&changeID={{learner.id}}">Change<span class="govuk-visually-hidden"> learner</span></a>
-                {% else %}
-                  <a class="govuk-link govuk-link--no-visited-state" href="claim-learners">Change<span class="govuk-visually-hidden"> all learners</span></a>
-                {% endif %}
-              </li>
-            </ul>
-          {% elif claim.status == "queried" %}
+            <dd class="govuk-summary-list__actions">
+              <ul class="govuk-summary-list__actions-list">
+                <li class="govuk-summary-list__actions-list-item">
+                  <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another<span class="govuk-visually-hidden"> learner</span></a>
+                </li>
+                <li class="govuk-summary-list__actions-list-item">
+                  {# To change one learner #}
+                  {% if submission.learners.length == 1 %}
+                    {% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
+                    <a class="govuk-link govuk-link--no-visited-state" href="select-learner?change=true&changeID={{learner.id}}">Change<span class="govuk-visually-hidden"> learner</span></a>
+                  {# To change all learners #}
+                  {% else %}
+                    <a class="govuk-link govuk-link--no-visited-state" href="claim-learners">Change<span class="govuk-visually-hidden"> all learners</span></a>
+                  {% endif %}
+                </li>
+              </ul>
+            </dd>
+          {% elif claim.status == "queried" or pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted"%}
+            <dd class="govuk-summary-list__actions">
             {# To change one learner #}
-            {% if submission.learners.length == 1 %}
-                {% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
-                  <a class="govuk-link govuk-link--no-visited-state" href="select-learner?change=true&changeID={{learner.id}}">Change<span class="govuk-visually-hidden"> learner</span></a>
-                {# To change all learners #}
-                {% else %}
-                  <a class="govuk-link govuk-link--no-visited-state" href="claim-learners">Change<span class="govuk-visually-hidden"> all learners</span></a>
-              {% endif %}
+            {% if submission.learners.length == 1 and pairSubmission.removedLearners.length == 0 and submission.removedLearners.length == 0 %}
+              {% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
+              <a class="govuk-link govuk-link--no-visited-state" href="select-learner?change=true&changeID={{learner.id}}">Change<span class="govuk-visually-hidden"> learner</span></a>
+            {# To change all learners #}
+            {% else %}
+              <a class="govuk-link govuk-link--no-visited-state" href="claim-learners">Change<span class="govuk-visually-hidden"> all learners</span></a>
+            {% endif %}
+
+            </dd>
           {% endif %}
-        </dd>
-      {% endif %}
+
+        
+      {# {% endif %} #}
+
+
+
     </div>
 {% endif %}
 
