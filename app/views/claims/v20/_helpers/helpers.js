@@ -832,9 +832,10 @@ function isInternalOMMT(courseCode) {
   return validValues.includes(courseCode);
 }
 
-function sortAlphabetically(learners) {
+function sortAlphabetically(learners, dataLearners) {
     // needs both the learners in the json and the new learners on the data.learners
-  const allLearners = loadJSONFromFile('learners.json', dataPath)
+  const fileLearners = loadJSONFromFile('learners.json', dataPath)
+  let allLearners = [...dataLearners, ...fileLearners]
     const mergedLearners = learners.map(learner => {
         const match = allLearners.find(a => a.id === learner.learnerID);
         return {

@@ -38,7 +38,7 @@
                   </summary>
                   <div class="govuk-details__text">
                     <ul class="govuk-list">
-                      {% for learner in (submission.learners | sortLearners)%}
+                      {% for learner in (submission.learners | sortLearners(data.learners))%}
                         {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
                         <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
                       {%endfor%}
@@ -65,7 +65,7 @@
                 </summary>
                 <div class="govuk-details__text">
                   <ul class="govuk-list">
-                    {% for learner in (pairSubmission.learners | sortLearners)%}
+                    {% for learner in (pairSubmission.learners | sortLearners(data.learners))%}
                       {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
                       <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
                     {%endfor%}
