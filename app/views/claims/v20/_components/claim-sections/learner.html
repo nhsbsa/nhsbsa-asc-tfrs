@@ -1,21 +1,21 @@
-{# If no learners, to add a learner #}
-{% if not submission.learners %}
-  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =="missing" %}
-    <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
-      <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="learner-error">
-        <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a learner</p>
+  {# If no learners, to add a learner #}
+{% if not submission.learners or submission.learners.length == 0  %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =="missing" %}
+      <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
+        <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="learner-error">
+          <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a learner</p>
+        </div>
       </div>
-    </div>
-  {% endif %}
+    {% endif %}
   
-  <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-list-row--error {% endif %}">
-    <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-key--error {% endif %}">
-      Learner
-    </dt>
-    <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-value--error {% endif %}">
-      <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add learner</a>
-    </dd>
-  </div>
+    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-list-row--error {% endif %}">
+      <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-key--error {% endif %}">
+        Learner
+      </dt>
+      <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.learner =='missing' %} govuk-summary-value--error {% endif %}">
+        <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add learner</a>
+      </dd>
+    </div>
 
   {# If at least one learner, learner key #}
   {% else %}
