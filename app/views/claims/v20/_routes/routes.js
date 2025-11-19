@@ -210,7 +210,6 @@ router.post('/split-decision-handler', function (req, res) {
     delete req.session.data['training-input'];
     delete req.session.data['trainingSelection'];
     delete req.session.data.splitDecision;
-    console.log(trainingChoice)
     const claimID = newClaim(req, trainingChoice, "60")
     res.redirect('claim/claim-details' + '?id=' + claimID)
 
@@ -361,6 +360,7 @@ router.get('/completion-date-handler', function (req, res) {
 router.get('/remove-learner', function (req, res) {
   const claimID = req.session.data.id
   const learnerID = req.session.data.learner
+  delete req.session.data.learnerConfirmation
 
   const { claims, org } = req.session.data
   const workplaceID = org.workplaceID
@@ -414,6 +414,10 @@ router.get('/remove-learner', function (req, res) {
     }
   }
 
+  req.session.data.learnerConfirmation = {
+    type: "removal",
+    learner: learnerID,
+  }
   res.redirect('claim/claim-learners')
 
 
@@ -422,6 +426,7 @@ router.get('/remove-learner', function (req, res) {
 router.get('/readd-learner', function (req, res) {
   const claimID = req.session.data.id;
   const learnerID = req.session.data.learner;
+  delete req.session.data.learnerConfirmation
 
   const { claims, org } = req.session.data;
   const workplaceID = org.workplaceID;
@@ -475,6 +480,11 @@ router.get('/readd-learner', function (req, res) {
     submission.learners.push(learnerToReadd);
   }
 
+  req.session.data.learnerConfirmation = {
+    type: "readd",
+    learner: learnerID,
+  }
+
   res.redirect('claim/claim-learners');
 });
 
@@ -505,7 +515,7 @@ router.post('/shared-completion-date', function (req, res) {
   } else {
     submission = getMostRelevantSubmission(claim)
   }
-  console.log(response)
+
   if (response != null) {
     switch(response) {
       case "yes":
@@ -543,6 +553,7 @@ router.post('/completion-date', function (req, res) {
   const learnerID = req.session.data.learnerID
   let claimID = req.session.data.id
   const completionDate = new Date(year, month - 1, day)
+  delete req.session.data.learnerConfirmation
 
   if (claimID[claimID.length - 1] === 'B') {
     claimID =  claimID.slice(0, -1) + 'C';
@@ -588,9 +599,17 @@ router.post('/completion-date', function (req, res) {
     delete req.session.data['completion-date-started-year'];
     if (submission.sharedCompletionDate ) {
       delete req.session.data.learnerID
+      req.session.data.learnerConfirmation = {
+        type: "date",
+        allLearners: true,
+      }
       res.redirect('claim/claim-learners')
     } else {
       if (submission.learners.length > 1) {
+          req.session.data.learnerConfirmation = {
+            type: "date",
+            learner: learnerID,
+          }
         res.redirect('claim/claim-learners#' + learnerID)
       } else {
         res.redirect('claim/claim-details#completion')
@@ -617,6 +636,7 @@ router.post('/add-learner', function (req, res) {
   delete req.session.data.givenName
   delete req.session.data.jobTitle
   delete req.session.data.nationalInsuranceNumber
+  delete req.session.data.learnerConfirmation
 
   for (const c of req.session.data.claims) {
     if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
@@ -659,6 +679,10 @@ router.post('/add-learner', function (req, res) {
           }
             currentSubmission.learners.push(newnewlearner);
             if (currentSubmission.learners.length > 1) {
+              req.session.data.learnerConfirmation = {
+                type: "learner",
+                learner: newLearner.id,
+              }
                 res.redirect('claim/claim-learners?#'+newLearner.id)
             } else {
                 res.redirect('claim/claim-details?id=' + claimID + '#learner')
@@ -713,6 +737,10 @@ router.post('/add-evidence', function (req, res) {
     res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
   } else if (type == "completion") {
     if (submission.learners.length > 1) {
+        req.session.data.learnerConfirmation = {
+          type: "evidence",
+          learner: learnerID,
+        }
         res.redirect('claim/claim-learners#' + learnerID)
       } else {
         res.redirect('claim/claim-details#completion')
