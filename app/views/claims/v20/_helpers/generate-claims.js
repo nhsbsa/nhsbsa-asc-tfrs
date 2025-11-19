@@ -179,8 +179,20 @@ function generateSubmissions(users, status, policyDate, trainingItem, backOffice
         }
 
         for (const learner of submission.learners) {
+
           submission2.learners.push(learner)
-          learner.evidenceOfCompletionReview.outcome = "pass"
+
+          const checkNumber = Math.random()
+          if (checkNumber < 0.5 ) {
+            learner.evidenceOfCompletionReview.outcome = "queried"
+            learner.evidenceOfCompletionReview.note = "The completion date on the certificate does not match the completion date on the claim"
+          } else if (checkNumber >=0.5 && checkNumber < 0.75) {
+            learner.evidenceOfCompletionReview.outcome = "fail"
+            learner.evidenceOfCompletionReview.note = "The evidence of completion shows that this learner is inelgible for reimbursement."
+          } else if (checkNumber >= 0.75 && checkNumber < 1) {
+            learner.evidenceOfCompletionReview.outcome = "pass"
+            learner.evidenceOfCompletionReview.note = null
+          }
         }
 
         submissions.push(submission2)
