@@ -33,7 +33,7 @@
                 <details class="govuk-details">
                   <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
-                        {{submission.learners.length}} learners
+                        {{submission.learners.length}} {% if submission.learners.length >1 %}learners{% else %}learner{% endif %}
                     </span>
                   </summary>
                   <div class="govuk-details__text">
@@ -60,7 +60,7 @@
               <details class="govuk-details">
                 <summary class="govuk-details__summary">
                   <span class="govuk-details__summary-text">
-                      {{pairSubmission.learners.length}} learners 
+                      {{pairSubmission.learners.length}} {% if pairSubmission.learners.length >1 %}learners{% else %}learner{% endif %} 
                   </span>
                 </summary>
                 <div class="govuk-details__text">
