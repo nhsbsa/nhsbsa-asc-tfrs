@@ -1198,3 +1198,18 @@ addFilter('getNote', function (learnerID, claim, pairClaim) {
     return learner ? learner.evidenceOfCompletionReview.note : null;
 
 })
+
+addFilter('findtabID', function (learnerID, filteredLearners) {
+    // Loop over each key in the object
+    for (const key in filteredLearners) {
+        const group = filteredLearners[key];
+        
+        // Check if this group has learners and if any learner matches the learnerID
+        if (group.learners && group.learners.some(learner => learner.learnerID === learnerID)) {
+        return group.id; // Return the id of the group
+        }
+    }
+    
+    // Return null if learnerID was not found in any group
+    return null;
+})

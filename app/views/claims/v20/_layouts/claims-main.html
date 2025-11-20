@@ -72,7 +72,7 @@
 {% block pageScripts %}
 <script>
 // 1. Left column links behavior
-document.querySelectorAll('#learner-jump-links a.govuk-link').forEach(link => {
+document.querySelectorAll('a.learner-jump-link').forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
 
@@ -90,16 +90,20 @@ document.querySelectorAll('#learner-jump-links a.govuk-link').forEach(link => {
 
       // Wait for the tab panel to become visible
       setTimeout(() => {
+        // Decode cardId to handle URL-encoded spaces (%20)
+        const decodedCardId = decodeURIComponent(cardId);
+
         // Use querySelector to find the element with spaces in ID
-        const card = document.querySelector(`[id="${cardId}"]`);
+        const card = document.querySelector(`[id="${decodedCardId}"]`);
         if (card) {
           card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          history.replaceState(null, '', '#' + cardId); // Update URL hash
+          history.replaceState(null, '', '#' + decodedCardId); // Update URL hash
         }
       }, 100);
     }
   });
 });
+
 
 window.addEventListener('load', () => {
   // Decode hash to handle %20 and other encoded characters
