@@ -415,12 +415,23 @@ router.get('/remove-learner', function (req, res) {
   }
 
   req.session.data.learnerConfirmation = {
-    type: "removal",
-    learner: learnerID,
+      type: "removal",
+      learner: learnerID,
+    }
+
+  if (submission.learners.length > 1 || submission.removedLearners.length > 1) {
+    res.redirect('claim/claim-learners')
+  } else {
+    res.redirect('claim/claim-details')
   }
-  res.redirect('claim/claim-learners')
+  
 
 
+});
+
+router.get('/claim-learner-back-handler', function (req, res) {
+  delete req.session.data.learnerConfirmation
+  res.redirect('claim/claim-details');
 });
 
 router.get('/readd-learner', function (req, res) {
@@ -736,7 +747,7 @@ router.post('/add-evidence', function (req, res) {
       } else if (type == 'completion') {
         for (const learner of submission.learners) {
           if (learner.learnerID == learnerID) {
-              learner.evidenceOfCompletion = ('certificate.pdf')
+              learner.evidenceOfCompletion = ('certificate_training.pdf')
           }
         }
       }
@@ -828,6 +839,7 @@ router.get('/save-claim', function (req, res) {
 
   delete req.session.data.id
   delete req.session.data.submitError
+  delete req.session.data.learnerConfirmation
   delete req.session.data['completion-date-started-day'];
   delete req.session.data['completion-date-started-month'];
   delete req.session.data['completion-date-started-year'];
@@ -1008,8 +1020,32 @@ router.get('/cancel-handler', function (req, res) {
   delete req.session.data['jobTitleInvalid'];
   delete req.session.data['declarationSubmitError']
   delete req.session.data['learnerID'];
+  delete req.session.data['learnerConfirmation'];
 
-  if (req.session.data.learner == "true") {
+  let claim = null
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+      claim = c
+    }
+  }
+
+  if (claim.claimType == "60" && claim.status == "approved") {
+    claimID =  claimID.slice(0, -1) + 'C';
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        claim = c
+      }
+    }
+  }
+
+  let submission = null
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim)
+  } else {
+    submission = getMostRelevantSubmission(claim)
+  }
+
+  if (req.session.data.learner == "true" && submission.learners.length > 1) {
     delete req.session.data.learner
     res.redirect('claim/claim-learners')
   } else {
@@ -1348,7 +1384,8 @@ router.get('/load-data-account-test', function (req, res) {
 
 //generate data
 router.get('/generate', function (req, res) {
-  generateLearners(50);
+  //generate learners to be used in claims, some claims require pre-set leaners that always exist so overwrite learners with caution
+  //generateLearners(50);
   let claims = []
   const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/organisations.json', 'utf8'));
   for (const org of organisations) {
@@ -1361,9 +1398,10 @@ router.get('/generate', function (req, res) {
   fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
 
   // transform pre-set claims
-  const presetClaims = transformClaims()
-  const presetjsonFilePath = './app/views/claims/v20/_data/pre-set-claims.json';
-  fs.writeFileSync(presetjsonFilePath, JSON.stringify(presetClaims, null, 2));
+  // this was only needed to transform non multi learner claims to multi leaner claims
+  //const presetClaims = transformClaims()
+  //const presetjsonFilePath = './app/views/claims/v20/_data/pre-set-claims.json';
+  //fs.writeFileSync(presetjsonFilePath, JSON.stringify(presetClaims, null, 2));
 
   res.redirect('../../')
 })

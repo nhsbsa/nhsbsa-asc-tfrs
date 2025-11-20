@@ -39,7 +39,7 @@
 {% set filteredLearners = claim | filterLearners(pairClaim) %}
 
 {% block beforeContent %}
-<p class="govuk-body"><a href="claim-details" class="govuk-back-link">Back to claim details</a></p>
+<p class="govuk-body"><a href="../claim-learner-back-handler" class="govuk-back-link">Back to claim details</a></p>
 {% endblock %}
 
 {% block content %}
@@ -110,7 +110,11 @@
                         Completion date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{submission.learners[0].completionDate | govukDate }}
+                        {% if claim.claimType == "60" %}
+                          {{pairSubmission.learners[0].completionDate | govukDate }}
+                        {% else %}
+                          {{submission.learners[0].completionDate | govukDate }}
+                        {% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="add-completion-date">Change<span class="govuk-visually-hidden"> name</span></a>

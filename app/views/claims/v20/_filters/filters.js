@@ -718,61 +718,75 @@ addFilter('checkIfUpdated', (claim, field, learnerID) => {
         return false; // Nothing new in draft
 
     } else if (field == "completionDate") {
-        const date1 = getLearnerFieldByID(lastQueried.learners, learnerID, "completionDate")
-        const date2 = getLearnerFieldByID(draftClaim.learners, learnerID, "completionDate")
+        const date1 = getLearnerFieldByID(draftClaim.learners, learnerID, "completionDate")
+        const result = draftClaim.learners.find(item => item.learnerID === learnerID);
+        if (result != null && result.learnerChanged != null) {
+            learnerID = result.learnerChanged
+        }
+        const date2 = getLearnerFieldByID(lastQueried.learners, learnerID, "completionDate")
+        
         // to do compare if same contents
-        if (date1 === date2) {
+        if (date1 === date2 || date1 == null || date2 == null) {
             return false
         } else {
             return true
         }
 
     } else if (field == "completionDates") {
+        // Build lookup map for lastQueried
         const lastMap = new Map(
-        lastQueried.learners.map(l => [l.learnerID, l.completionDate])
-        );
-        const draftMap = new Map(
-            draftClaim.learners.map(l => [l.learnerID, l.completionDate])
+            lastQueried.learners.map(l => [l.learnerID, l.completionDate])
         );
 
-        // Only check IDs that appear in both sets
-        for (const [id, draftDate] of draftMap.entries()) {
-            const lastDate = lastMap.get(id);
+        // Iterate over draftClaim learners
+        for (const draftLearner of draftClaim.learners) {
+            // Use learnerChanged if present
+            const learnerID = draftLearner.learnerChanged || draftLearner.learnerID;
 
-            // Learner existed but date changed
-            if (lastDate && lastDate !== draftDate) {
+            const draftDate = draftLearner.completionDate;
+            const lastDate = lastMap.get(learnerID);
+
+            // Check if learner existed before and date has changed
+            if (lastDate !== undefined && lastDate !== draftDate) {
                 return true;
             }
         }
 
         return false;
-
     } else if (field == "evidenceCompletion") {
-        const evidence1 = getLearnerFieldByID(lastQueried.learners, learnerID, "evidenceOfCompletion")
         const evidence2 = getLearnerFieldByID(draftClaim.learners, learnerID, "evidenceOfCompletion")
-        if (evidence1 == evidence2) {
+        const result = draftClaim.learners.find(item => item.learnerID === learnerID);
+        if (result != null && result.learnerChanged != null) {
+            learnerID = result.learnerChanged
+        }
+        const evidence1 = getLearnerFieldByID(lastQueried.learners, learnerID, "evidenceOfCompletion")
+        if (evidence1 == evidence2 || evidence1 == null || evidence2 == null) {
             return false;
         } else {
             return true
         }
 
     } else if (field == "multipleEvidenceCompletion") {
+        // Build lookup maps for lastQueried
         const lastMap = new Map(
             lastQueried.learners.map(l => [l.learnerID, l.evidenceOfCompletion])
         );
-        const draftMap = new Map(
-            draftClaim.learners.map(l => [l.learnerID, l.evidenceOfCompletion])
-        );
-        // Compare only learners that appear in both
-        for (const [id, draftEvidence] of draftMap.entries()) {
-            const lastEvidence = lastMap.get(id);
-            // Learner existed before and evidence has changed
-            if (lastEvidence && lastEvidence !== draftEvidence) {
+
+        // Iterate over draftClaim learners
+        for (const draftLearner of draftClaim.learners) {
+            // Use learnerChanged if present
+            const learnerID = draftLearner.learnerChanged || draftLearner.learnerID;
+
+            const draftEvidence = draftLearner.evidenceOfCompletion;
+            const lastEvidence = lastMap.get(learnerID);
+
+            // Check if learner existed before and evidence has changed
+            if (lastEvidence !== undefined && lastEvidence !== draftEvidence) {
                 return true;
             }
         }
-        return false;
 
+        return false;
     } else if (field == "supportingNote") {
         if (lastQueried.supportingNote == draftClaim.supportingNote) {
             return false
@@ -1085,7 +1099,23 @@ addFilter('filterLearners', function (claim, pairClaim) {
         filtered.rejected.learners = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
     }
 
-    
+    if (claim.claimType == "60"  && claim.status != "approved") {
+        const doneLearners = filtered.done.learners;
+        const removedLearners = filtered.removed.learners;
+
+        // Create a Set of learner IDs and learnerChanged values from removed
+        const removedIDs = new Set(
+        removedLearners.flatMap(l => [l.learnerID, l.learnerChanged].filter(Boolean))
+        );
+
+        // Filter out learners from done if their learnerID exists in removedIDs
+        const updatedDoneLearners = doneLearners.filter(
+        learner => !removedIDs.has(learner.learnerID)
+        );
+
+        // Update the original array
+        filtered.done.learners = updatedDoneLearners;
+    }
 
     const nonEmptyKeys = Object.entries(filtered)
         .filter(([_, item]) => Array.isArray(item.learners) && item.learners.length > 0)
@@ -1162,6 +1192,15 @@ addFilter('getNote', function (learnerID, claim, pairClaim) {
     } else {
         submission = getMostRelevantSubmission(claim)
     }
+    draftSubmission = getDraftSubmission(claim)
+    if (draftSubmission != null) {
+        const result = draftSubmission.learners.find(item => item.learnerID === learnerID);
+        if (result != null && result.learnerChanged != null) {
+            learnerID = result.learnerChanged
+        }
+    }
+    
+
     const learner = submission.learners.find(l => l.learnerID === learnerID);
     
     return learner ? learner.evidenceOfCompletionReview.note : null;

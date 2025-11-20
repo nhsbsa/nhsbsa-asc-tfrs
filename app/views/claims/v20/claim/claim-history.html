@@ -40,13 +40,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-  {% if (data.fromSearchResults) %}
-    <a href="advanced-search" class="govuk-back-link">Back</a>
-  {% elif (data.fromSearchId) %}
-    <a href="../manage-claims-home?fromSearchId" class="govuk-back-link">Back</a>
-  {% elif (claim.status != "not-yet-submitted") and (claim.status != "queried") and (pairClaim.status != "queried") and (pairClaim.status != "not-yet-submitted")%}
-    <a href="../manage-claims?statusID={{ data.statusID }}" class="govuk-back-link">Back</a>
-  {% endif %} 
+<p class="govuk-body"><a href="claim-details" class="govuk-back-link">Back to claim details</a></p>
 {% endblock %}
 
 
