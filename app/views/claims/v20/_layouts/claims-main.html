@@ -68,3 +68,59 @@
     </div>
   </div>
 {% endblock %}
+
+{% block pageScripts %}
+<script>
+// 1. Left column links behavior
+document.querySelectorAll('#learner-jump-links a.govuk-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    const href = this.getAttribute('href');
+    if (!href) return;
+
+    const cardId = href.substring(1); // get ID from href
+    const tabId = this.dataset.tab;
+    if (!tabId) return;
+
+    // Trigger a click on the tab link
+    const tabLink = document.querySelector(`.govuk-tabs__tab[href="#${tabId}"]`);
+    if (tabLink) {
+      tabLink.click();
+
+      // Wait for the tab panel to become visible
+      setTimeout(() => {
+        // Use querySelector to find the element with spaces in ID
+        const card = document.querySelector(`[id="${cardId}"]`);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + cardId); // Update URL hash
+        }
+      }, 100);
+    }
+  });
+});
+
+window.addEventListener('load', () => {
+  // Decode hash to handle %20 and other encoded characters
+  const hash = decodeURIComponent(window.location.hash.substring(1));
+  if (!hash) return;
+
+  const card = document.querySelector(`[id="${hash}"]`);
+  if (!card) return;
+
+  const tabPanel = card.closest('.govuk-tabs__panel');
+  if (!tabPanel) return;
+
+  const tabId = tabPanel.id;
+  const tabLink = document.querySelector(`.govuk-tabs__tab[href="#${tabId}"]`);
+  if (!tabLink) return;
+
+  tabLink.click();
+
+  setTimeout(() => {
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+});
+</script>
+{% endblock %}

@@ -1,35 +1,41 @@
 {% if (filteredLearners.todo.learners | length) > 0 or (claim.claimType == "100" and claim.status == "not-yet-submitted")  or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
     <h2 class="govuk-heading-s">{{ filteredLearners.todo.label}} ({{filteredLearners.todo.learners | length}})</h2>
     {% set learners = filteredLearners.todo.learners %}
+    {% set tabID = filteredLearners.todo.id %}
     {% include "./learner-links.html" %}
 {% endif %}
 
 {% if (filteredLearners.needsaction.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "queried") %}
     <h2 class="govuk-heading-s">{{ filteredLearners.needsaction.label}} ({{filteredLearners.needsaction.learners | length}})</h2>
     {% set learners = filteredLearners.needsaction.learners  %}
+    {% set tabID = filteredLearners.needsaction.id %}
     {% include "./learner-links.html" %}
 {% endif %}
 
 {% if (filteredLearners.done.learners | length) > 0 or (claim.claimType == "100" and claim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
     <h2 class="govuk-heading-s">{{ filteredLearners.done.label}} ({{filteredLearners.done.learners | length}})</h2>
     {% set learners = filteredLearners.done.learners%}
+    {% set tabID = filteredLearners.done.id %}
     {% include "./learner-links.html" %}
 {% endif %}
 
 {% if (filteredLearners.rejected.learners | length) > 0 %}
     <h2 class="govuk-heading-s">{{ filteredLearners.rejected.label}} ({{filteredLearners.rejected.learners | length}})</h2>
     {% set learners = filteredLearners.rejected.learners%}
+    {% set tabID = filteredLearners.rejected.id %}
     {% include "./learner-links.html" %}
 {% endif %}
 
 {% if (filteredLearners.approved.learners | length) > 0 %}
     <h2 class="govuk-heading-s">{{ filteredLearners.approved.label}} ({{filteredLearners.approved.learners | length}})</h2>
     {% set learners = filteredLearners.approved.learners%}
+    {% set tabID = filteredLearners.approved.id %}
     {% include "./learner-links.html" %}
 {% endif %}
 
 {% if (filteredLearners.removed.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "queried") %}
     <h2 class="govuk-heading-s">{{ filteredLearners.removed.label}} ({{filteredLearners.removed.learners | length}})</h2>
     {% set learners = filteredLearners.removed.learners%}
+    {% set tabID = filteredLearners.removed.id %}
     {% include "./learner-links.html" %}
 {% endif %}
