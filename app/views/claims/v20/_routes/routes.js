@@ -747,7 +747,7 @@ router.post('/add-evidence', function (req, res) {
       } else if (type == 'completion') {
         for (const learner of submission.learners) {
           if (learner.learnerID == learnerID) {
-              learner.evidenceOfCompletion = ('certificate.pdf')
+              learner.evidenceOfCompletion = ('certificate_training.pdf')
           }
         }
       }
@@ -1360,7 +1360,8 @@ router.get('/load-data-account-test', function (req, res) {
 
 //generate data
 router.get('/generate', function (req, res) {
-  generateLearners(50);
+  //generate learners to be used in claims, some claims require pre-set leaners that always exist so overwrite learners with caution
+  //generateLearners(50);
   let claims = []
   const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/organisations.json', 'utf8'));
   for (const org of organisations) {
@@ -1373,9 +1374,10 @@ router.get('/generate', function (req, res) {
   fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
 
   // transform pre-set claims
-  const presetClaims = transformClaims()
-  const presetjsonFilePath = './app/views/claims/v20/_data/pre-set-claims.json';
-  fs.writeFileSync(presetjsonFilePath, JSON.stringify(presetClaims, null, 2));
+  // this was only needed to transform non multi learner claims to multi leaner claims
+  //const presetClaims = transformClaims()
+  //const presetjsonFilePath = './app/views/claims/v20/_data/pre-set-claims.json';
+  //fs.writeFileSync(presetjsonFilePath, JSON.stringify(presetClaims, null, 2));
 
   res.redirect('../../')
 })
