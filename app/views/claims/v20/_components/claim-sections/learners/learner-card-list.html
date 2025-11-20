@@ -3,7 +3,7 @@
 {% endif %}
 
 {% if ((learnerList.learners | length) > 0) %}
-    {% for learner in (learnerList.learners | sortLearners) %}
+    {% for learner in (learnerList.learners | sortLearners(data.learners)) %}
         {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
         {% include "./learner-card.html" %}
     {% endfor %}

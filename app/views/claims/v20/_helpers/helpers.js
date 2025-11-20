@@ -832,8 +832,10 @@ function isInternalOMMT(courseCode) {
   return validValues.includes(courseCode);
 }
 
-function sortAlphabetically(learners) {
-  const allLearners = loadJSONFromFile('learners.json', dataPath)
+function sortAlphabetically(learners, dataLearners) {
+    // needs both the learners in the json and the new learners on the data.learners
+  const fileLearners = loadJSONFromFile('learners.json', dataPath)
+  let allLearners = [...dataLearners, ...fileLearners]
     const mergedLearners = learners.map(learner => {
         const match = allLearners.find(a => a.id === learner.learnerID);
         return {
@@ -862,8 +864,11 @@ function getLearnersNotInBoth(arr1, arr2) {
 }
 
 function getLearnerFieldByID(learners, learnerID, field) {
-  const learner = learners.find(l => l.learnerID === learnerID);
-  return learner ? learner[field] : null; // safely returns null if not found
+
+  const learner = learners.find(l => 
+    l.learnerID == learnerID || l.learnerChanged == learnerID
+  );
+  return learner ? learner[field] : null;
 }
 
 function getOverallCompletionOutcome(learners) {

@@ -415,12 +415,23 @@ router.get('/remove-learner', function (req, res) {
   }
 
   req.session.data.learnerConfirmation = {
-    type: "removal",
-    learner: learnerID,
+      type: "removal",
+      learner: learnerID,
+    }
+
+  if (submission.learners.length > 1 || submission.removedLearners.length > 1) {
+    res.redirect('claim/claim-learners')
+  } else {
+    res.redirect('claim/claim-details')
   }
-  res.redirect('claim/claim-learners')
+  
 
 
+});
+
+router.get('/claim-learner-back-handler', function (req, res) {
+  delete req.session.data.learnerConfirmation
+  res.redirect('claim/claim-details');
 });
 
 router.get('/readd-learner', function (req, res) {
@@ -828,6 +839,7 @@ router.get('/save-claim', function (req, res) {
 
   delete req.session.data.id
   delete req.session.data.submitError
+  delete req.session.data.learnerConfirmation
   delete req.session.data['completion-date-started-day'];
   delete req.session.data['completion-date-started-month'];
   delete req.session.data['completion-date-started-year'];
@@ -1051,7 +1063,21 @@ router.post('/create-learner', function (req, res) {
           } else {
             submission = getMostRelevantSubmission(c)
           }
-          submission.learnerID = learner.id
+          let newLearner = 
+            {
+            "learnerID": learner.id,
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }
+          if (submission.learners == null | submission.learners == []) {
+            submission.learners = [newLearner]
+          } else {
+            submission.learners.push(newLearner)
+          }
           break;
         }
       }
