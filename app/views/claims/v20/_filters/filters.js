@@ -733,25 +733,26 @@ addFilter('checkIfUpdated', (claim, field, learnerID) => {
         }
 
     } else if (field == "completionDates") {
+        // Build lookup map for lastQueried
         const lastMap = new Map(
-        lastQueried.learners.map(l => [l.learnerID, l.completionDate])
-        );
-        const draftMap = new Map(
-            draftClaim.learners.map(l => [l.learnerID, l.completionDate])
+            lastQueried.learners.map(l => [l.learnerID, l.completionDate])
         );
 
-        // Only check IDs that appear in both sets
-        for (const [id, draftDate] of draftMap.entries()) {
-            const lastDate = lastMap.get(id);
+        // Iterate over draftClaim learners
+        for (const draftLearner of draftClaim.learners) {
+            // Use learnerChanged if present
+            const learnerID = draftLearner.learnerChanged || draftLearner.learnerID;
 
-            // Learner existed but date changed
-            if (lastDate && lastDate !== draftDate) {
+            const draftDate = draftLearner.completionDate;
+            const lastDate = lastMap.get(learnerID);
+
+            // Check if learner existed before and date has changed
+            if (lastDate !== undefined && lastDate !== draftDate) {
                 return true;
             }
         }
 
         return false;
-
     } else if (field == "evidenceCompletion") {
         const evidence2 = getLearnerFieldByID(draftClaim.learners, learnerID, "evidenceOfCompletion")
         const result = draftClaim.learners.find(item => item.learnerID === learnerID);
@@ -766,22 +767,26 @@ addFilter('checkIfUpdated', (claim, field, learnerID) => {
         }
 
     } else if (field == "multipleEvidenceCompletion") {
+        // Build lookup maps for lastQueried
         const lastMap = new Map(
             lastQueried.learners.map(l => [l.learnerID, l.evidenceOfCompletion])
         );
-        const draftMap = new Map(
-            draftClaim.learners.map(l => [l.learnerID, l.evidenceOfCompletion])
-        );
-        // Compare only learners that appear in both
-        for (const [id, draftEvidence] of draftMap.entries()) {
-            const lastEvidence = lastMap.get(id);
-            // Learner existed before and evidence has changed
-            if (lastEvidence && lastEvidence !== draftEvidence) {
+
+        // Iterate over draftClaim learners
+        for (const draftLearner of draftClaim.learners) {
+            // Use learnerChanged if present
+            const learnerID = draftLearner.learnerChanged || draftLearner.learnerID;
+
+            const draftEvidence = draftLearner.evidenceOfCompletion;
+            const lastEvidence = lastMap.get(learnerID);
+
+            // Check if learner existed before and evidence has changed
+            if (lastEvidence !== undefined && lastEvidence !== draftEvidence) {
                 return true;
             }
         }
-        return false;
 
+        return false;
     } else if (field == "supportingNote") {
         if (lastQueried.supportingNote == draftClaim.supportingNote) {
             return false

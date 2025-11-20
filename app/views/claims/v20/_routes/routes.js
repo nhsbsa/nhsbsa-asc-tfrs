@@ -1020,8 +1020,32 @@ router.get('/cancel-handler', function (req, res) {
   delete req.session.data['jobTitleInvalid'];
   delete req.session.data['declarationSubmitError']
   delete req.session.data['learnerID'];
+  delete req.session.data['learnerConfirmation'];
 
-  if (req.session.data.learner == "true") {
+  let claim = null
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+      claim = c
+    }
+  }
+
+  if (claim.claimType == "60" && claim.status == "approved") {
+    claimID =  claimID.slice(0, -1) + 'C';
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        claim = c
+      }
+    }
+  }
+
+  let submission = null
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim)
+  } else {
+    submission = getMostRelevantSubmission(claim)
+  }
+
+  if (req.session.data.learner == "true" && submission.learners.length > 1) {
     delete req.session.data.learner
     res.redirect('claim/claim-learners')
   } else {
