@@ -823,6 +823,14 @@ addFilter('compareIfEvidenceChanged', (first, second) => {
     return false;
 })
 
+addFilter('getMultipleLearnersReimbursementAmount', (amount, learners) => {
+    if (learners == null | (learners && learners.length == 0) | (learners && learners.length == 1)) {
+        return amount
+    } else {
+        return amount * learners.length
+    }
+})
+
 addFilter('getReimbursementAmount', (submission, training) => {
     return Math.min(submission.evidenceOfPaymentReview.costPerLearner, training.reimbursementAmount);
 })
