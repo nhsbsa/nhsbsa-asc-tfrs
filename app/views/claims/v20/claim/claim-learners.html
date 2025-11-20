@@ -110,7 +110,11 @@
                         Completion date
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{submission.learners[0].completionDate | govukDate }}
+                        {% if claim.claimType == "60" %}
+                          {{pairSubmission.learners[0].completionDate | govukDate }}
+                        {% else %}
+                          {{submission.learners[0].completionDate | govukDate }}
+                        {% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         <a class="govuk-link" href="add-completion-date">Change<span class="govuk-visually-hidden"> name</span></a>
