@@ -247,13 +247,16 @@ function checkDuplicateClaim(learnerIDToCheck, trainingIDToCheck, claimList) {
             } else {
                 submission = getMostRelevantSubmission(c)
             }
-            if (submission.learnerID != null) {
-                if (submission.trainingCode == trainingIDToCheck && submission.learnerID == learnerIDToCheck && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
+            if (submission.learners != null) {
+                for (const learner of submission.learners) {
+                    if (submission.trainingCode == trainingIDToCheck && learner.learnerID == learnerIDToCheck && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
                     result.matchType = c.claimType
                     result.check = true;
                     result.id = c.claimID
                     break;
                 }
+                }
+                
             }
         }
 
