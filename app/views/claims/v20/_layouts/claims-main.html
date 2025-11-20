@@ -101,16 +101,14 @@ document.querySelectorAll('#learner-jump-links a.govuk-link').forEach(link => {
   });
 });
 
-// 2. On page load: if URL has hash, open the correct tab and scroll
 window.addEventListener('load', () => {
-  const hash = window.location.hash;
+  // Decode hash to handle %20 and other encoded characters
+  const hash = decodeURIComponent(window.location.hash.substring(1));
   if (!hash) return;
 
-  const cardId = hash.substring(1);
-  const card = document.querySelector(`[id="${cardId}"]`);
+  const card = document.querySelector(`[id="${hash}"]`);
   if (!card) return;
 
-  // Find the parent tab panel
   const tabPanel = card.closest('.govuk-tabs__panel');
   if (!tabPanel) return;
 
@@ -118,13 +116,11 @@ window.addEventListener('load', () => {
   const tabLink = document.querySelector(`.govuk-tabs__tab[href="#${tabId}"]`);
   if (!tabLink) return;
 
-  tabLink.click(); // Activate the correct tab
+  tabLink.click();
 
-  // Wait for panel to be visible, then scroll
   setTimeout(() => {
     card.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 100);
 });
-
 </script>
 {% endblock %}
