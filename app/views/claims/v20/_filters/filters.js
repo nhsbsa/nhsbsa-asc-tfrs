@@ -677,18 +677,23 @@ addFilter('checkIfUpdated', (claim, field, learnerID) => {
             return true
         }
     } else if (field == "learners") {
-        // if (lastQueried.learnerID == draftClaim.learnerID) {
-        //     return false
-        // } else {
-        //     return true
-        // }
-        const lastSet = new Set(lastQueried.learners);
-        for (const item of draftClaim.learners) {
-            if (!lastSet.has(item)) {
-                return true; // Found something new in draft
+        const lastIds = new Set(lastQueried.learners.map(l => l.learnerID));
+        const draftIds = new Set(draftClaim.learners.map(l => l.learnerID));
+        // Check for added learners
+        for (const id of draftIds) {
+            if (!lastIds.has(id)) {
+                return true; // A new learner was added
             }
         }
-        return false; // Nothing new in draft
+
+        // Check for removed learners
+        for (const id of lastIds) {
+            if (!draftIds.has(id)) {
+                return true; // A learner was removed
+            }
+        }
+
+        return false; // No changes
 
     } else if (field == "startDate") {
         if (lastQueried.startDate == draftClaim.startDate) {
@@ -726,6 +731,27 @@ addFilter('checkIfUpdated', (claim, field, learnerID) => {
         } else {
             return true
         }
+
+    } else if (field == "completionDates") {
+        const lastMap = new Map(
+        lastQueried.learners.map(l => [l.learnerID, l.completionDate])
+        );
+        const draftMap = new Map(
+            draftClaim.learners.map(l => [l.learnerID, l.completionDate])
+        );
+
+        // Only check IDs that appear in both sets
+        for (const [id, draftDate] of draftMap.entries()) {
+            const lastDate = lastMap.get(id);
+
+            // Learner existed but date changed
+            if (lastDate && lastDate !== draftDate) {
+                return true;
+            }
+        }
+
+        return false;
+
     } else if (field == "evidenceCompletion") {
         const evidence2 = getLearnerFieldByID(draftClaim.learners, learnerID, "evidenceOfCompletion")
         const result = draftClaim.learners.find(item => item.learnerID === learnerID);
@@ -738,6 +764,24 @@ addFilter('checkIfUpdated', (claim, field, learnerID) => {
         } else {
             return true
         }
+
+    } else if (field == "multipleEvidenceCompletion") {
+        const lastMap = new Map(
+            lastQueried.learners.map(l => [l.learnerID, l.evidenceOfCompletion])
+        );
+        const draftMap = new Map(
+            draftClaim.learners.map(l => [l.learnerID, l.evidenceOfCompletion])
+        );
+        // Compare only learners that appear in both
+        for (const [id, draftEvidence] of draftMap.entries()) {
+            const lastEvidence = lastMap.get(id);
+            // Learner existed before and evidence has changed
+            if (lastEvidence && lastEvidence !== draftEvidence) {
+                return true;
+            }
+        }
+        return false;
+
     } else if (field == "supportingNote") {
         if (lastQueried.supportingNote == draftClaim.supportingNote) {
             return false
