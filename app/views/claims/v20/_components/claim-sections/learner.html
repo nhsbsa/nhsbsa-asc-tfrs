@@ -21,7 +21,7 @@
   {% else %}
     <div class="govuk-summary-list__row {% if (claim.status == "submitted" or claim.status == "approved" and pairClaim.status != "not-yet-submitted" and pairClaim.status != "queried")%}govuk-summary-list__row--no-actions{% endif %}">
       <dt class="govuk-summary-list__key">
-        {% if submission.learners.length >1 %}Learners{% else %}Learner{% endif %} {% if ( claim | checkIfUpdated("learners")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+        {% if submission.learners.length >1 %}Learners{% else %}Learner{% endif %} {% if (claim | checkIfUpdated("learners") or (pairClaim and pairClaim | checkIfUpdated("learners"))) %}<strong class="govuk-tag">Edited</strong>{% endif %}
       </dt>
       <dd class="govuk-summary-list__value">
 
