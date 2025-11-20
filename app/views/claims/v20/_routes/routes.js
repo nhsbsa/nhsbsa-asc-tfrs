@@ -621,7 +621,7 @@ router.post('/completion-date', function (req, res) {
             type: "date",
             learner: learnerID,
           }
-        res.redirect('claim/claim-learners#' + learnerID)
+        res.redirect('claim/claim-learners')
       } else {
         res.redirect('claim/claim-details#completion')
       }
@@ -686,7 +686,7 @@ router.post('/add-learner', function (req, res) {
                 type: "learner",
                 learner: newLearner.id,
               }
-              res.redirect('claim/claim-learners?#'+newLearner.id)
+              res.redirect('claim/claim-learners')
           } else {
               res.redirect('claim/claim-details?id=' + claimID + '#learner')
           }
@@ -708,7 +708,7 @@ router.post('/add-learner', function (req, res) {
                 type: "learner",
                 learner: newLearner.id,
               }
-                res.redirect('claim/claim-learners?#'+newLearner.id)
+                res.redirect('claim/claim-learners')
             } else {
                 res.redirect('claim/claim-details?id=' + claimID + '#learner')
             }
@@ -766,7 +766,7 @@ router.post('/add-evidence', function (req, res) {
           type: "evidence",
           learner: learnerID,
         }
-        res.redirect('claim/claim-learners#' + learnerID)
+        res.redirect('claim/claim-learners')
       } else {
         res.redirect('claim/claim-details#completion')
       }
