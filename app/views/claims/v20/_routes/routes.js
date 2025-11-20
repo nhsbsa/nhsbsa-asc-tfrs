@@ -839,6 +839,7 @@ router.get('/save-claim', function (req, res) {
 
   delete req.session.data.id
   delete req.session.data.submitError
+  delete req.session.data.learnerConfirmation
   delete req.session.data['completion-date-started-day'];
   delete req.session.data['completion-date-started-month'];
   delete req.session.data['completion-date-started-year'];

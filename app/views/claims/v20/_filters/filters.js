@@ -713,18 +713,27 @@ addFilter('checkIfUpdated', (claim, field, learnerID) => {
         return false; // Nothing new in draft
 
     } else if (field == "completionDate") {
-        const date1 = getLearnerFieldByID(lastQueried.learners, learnerID, "completionDate")
-        const date2 = getLearnerFieldByID(draftClaim.learners, learnerID, "completionDate")
+        const date1 = getLearnerFieldByID(draftClaim.learners, learnerID, "completionDate")
+        const result = draftClaim.learners.find(item => item.learnerID === learnerID);
+        if (result != null && result.learnerChanged != null) {
+            learnerID = result.learnerChanged
+        }
+        const date2 = getLearnerFieldByID(lastQueried.learners, learnerID, "completionDate")
+        
         // to do compare if same contents
-        if (date1 === date2) {
+        if (date1 === date2 || date1 == null || date2 == null) {
             return false
         } else {
             return true
         }
     } else if (field == "evidenceCompletion") {
-        const evidence1 = getLearnerFieldByID(lastQueried.learners, learnerID, "evidenceOfCompletion")
         const evidence2 = getLearnerFieldByID(draftClaim.learners, learnerID, "evidenceOfCompletion")
-        if (evidence1 == evidence2) {
+        const result = draftClaim.learners.find(item => item.learnerID === learnerID);
+        if (result != null && result.learnerChanged != null) {
+            learnerID = result.learnerChanged
+        }
+        const evidence1 = getLearnerFieldByID(lastQueried.learners, learnerID, "evidenceOfCompletion")
+        if (evidence1 == evidence2 || evidence1 == null || evidence2 == null) {
             return false;
         } else {
             return true
@@ -1036,7 +1045,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
     if (claim.claimType == "60"  && claim.status != "approved") {
         const doneLearners = filtered.done.learners;
         const removedLearners = filtered.removed.learners;
-        
+
         // Create a Set of learner IDs and learnerChanged values from removed
         const removedIDs = new Set(
         removedLearners.flatMap(l => [l.learnerID, l.learnerChanged].filter(Boolean))
