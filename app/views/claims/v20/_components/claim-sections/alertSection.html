@@ -36,7 +36,7 @@
                 {% if noteSubmission.learners | getLearnersByStatus("queried") %}
                     <p class="govuk-body"><strong>Evidence of completion:</strong> 
                         <ul class="govuk-list">
-                            {% for learner in (noteSubmission.learners | sortLearners) | getLearnersByStatus("queried")%}
+                            {% for learner in (noteSubmission.learners | sortLearners(data.learners)) | getLearnersByStatus("queried")%}
                                 {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
                                 <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
                             {% endfor %}

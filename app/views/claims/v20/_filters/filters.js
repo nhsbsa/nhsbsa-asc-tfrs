@@ -1083,9 +1083,9 @@ addFilter('response', function(boolean) {
     
 });
 
-addFilter('sortLearners', function (learners) {
+addFilter('sortLearners', function (learners, dataLearners) {
     
-    return sortAlphabetically(learners)
+    return sortAlphabetically(learners, dataLearners)
 })
 
 addFilter('toLowerCase', function (string) {
