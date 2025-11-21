@@ -677,7 +677,7 @@ router.post('/add-learner', function (req, res) {
             }
           }
         if (currentSubmission.learners == null || currentSubmission.learners == []) {
-          currentSubmission.learners.push(learner)
+          currentSubmission.learners = [learner]
           res.redirect('claim/claim-details?id=' + claimID + '#learner')
         } else if (currentSubmission.learners != [] && change == "true") {
           currentSubmission.learners = replaceLearnerID(currentSubmission.learners, changeLearnerID, newLearner.id)
@@ -1099,7 +1099,7 @@ router.post('/create-learner', function (req, res) {
           delete req.session.data.nationalInsuranceNumber
           delete req.session.data.learnerInput
         if (submission.learners == null || submission.learners == []) {
-          submission.learners.push(submissionLearner)
+          submission.learners = [submissionLearner]
           res.redirect('claim/claim-details?id=' + claimID + '#learner')
         } else if (submission.learners != [] && change == "true") {
           submission.learners = replaceLearnerID(submission.learners, changeLearnerID, learner.id)
