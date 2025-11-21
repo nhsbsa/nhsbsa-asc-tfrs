@@ -667,9 +667,7 @@ router.post('/add-learner', function (req, res) {
       if (isDuplicateClaim.check) {
         res.redirect('claim/duplication?dupeID=' + isDuplicateClaim.id + '&matchType=' + isDuplicateClaim.matchType)
       } else {
-        if (currentSubmission.learners == null || currentSubmission.learners == []) {
-          currentSubmission.learners = [
-            {
+        const learner = {
             "learnerID": newLearner.id,
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -677,7 +675,9 @@ router.post('/add-learner', function (req, res) {
               "outcome": null,
               "note": null
             }
-          }]
+          }
+        if (currentSubmission.learners == null || currentSubmission.learners == []) {
+          currentSubmission.learners.push(learner)
           res.redirect('claim/claim-details?id=' + claimID + '#learner')
         } else if (currentSubmission.learners != [] && change == "true") {
           currentSubmission.learners = replaceLearnerID(currentSubmission.learners, changeLearnerID, newLearner.id)
@@ -692,17 +692,7 @@ router.post('/add-learner', function (req, res) {
           }
           
         } else {
-          let newnewlearner = 
-            {
-            "learnerID": newLearner.id,
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          }
-            currentSubmission.learners.push(newnewlearner);
+            currentSubmission.learners.push(learner);
             if (currentSubmission.learners.length > 1) {
               req.session.data.learnerConfirmation = {
                 type: "learner",
@@ -1064,6 +1054,12 @@ router.post('/create-learner', function (req, res) {
   const givenName = req.session.data.givenName
   const jobTitle = req.session.data.jobTitle
 
+  var change = req.session.data.change
+  var changeLearnerID = req.session.data.changeID
+
+  delete req.session.data.change
+  delete req.session.data.changeID
+
   const learners = loadLearners(req.session.data.learners)
 
   const submitError = checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle)
@@ -1087,8 +1083,7 @@ router.post('/create-learner', function (req, res) {
           } else {
             submission = getMostRelevantSubmission(c)
           }
-          let newLearner = 
-            {
+          const submissionLearner = {
             "learnerID": learner.id,
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1097,22 +1092,41 @@ router.post('/create-learner', function (req, res) {
               "note": null
             }
           }
-          if (submission.learners == null | submission.learners == []) {
-            submission.learners = [newLearner]
+          delete req.session.data.inClaim
+          delete req.session.data.familyName
+          delete req.session.data.givenName
+          delete req.session.data.jobTitle
+          delete req.session.data.nationalInsuranceNumber
+          delete req.session.data.learnerInput
+        if (submission.learners == null || submission.learners == []) {
+          submission.learners.push(submissionLearner)
+          res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        } else if (submission.learners != [] && change == "true") {
+          submission.learners = replaceLearnerID(submission.learners, changeLearnerID, learner.id)
+          if (submission.learners.length > 1) {
+            req.session.data.learnerConfirmation = {
+                type: "learner",
+                learner: learner.id,
+              }
+              res.redirect('claim/claim-learners')
           } else {
-            submission.learners.push(newLearner)
+              res.redirect('claim/claim-details?id=' + claimID + '#learner')
           }
-          break;
+          
+        } else {
+            submission.learners.push(submissionLearner);
+            if (submission.learners.length > 1) {
+              req.session.data.learnerConfirmation = {
+                type: "learner",
+                learner: learner.id,
+              }
+                res.redirect('claim/claim-learners')
+            } else {
+                res.redirect('claim/claim-details?id=' + claimID + '#learner')
+            }
+        }
         }
       }
-      delete req.session.data.inClaim
-      delete req.session.data.familyName
-      delete req.session.data.givenName
-      delete req.session.data.jobTitle
-      delete req.session.data.nationalInsuranceNumber
-      delete req.session.data.learnerInput
-      
-      res.redirect('claim/claim-details' + '?id=' + claimID)
 
     } else {
       req.session.data.learnerMatch = dupeLearner.learner
