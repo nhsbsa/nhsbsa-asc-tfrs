@@ -335,5 +335,67 @@ function sortAlphabetically(learners) {
   return sortedLearners;
 }
 
+function checkProcessingState(claim) {
+    let result = {
+      check: true,
+      missingList: []
+    }
+    let submission = getMostRelevantSubmission(claim)
+    const learners = sortAlphabetically(submission.learners)
+    
+    const paymentCheck = checkDone(submission.evidenceOfPaymentReview, "payment", claim.claimType)
+    if (!paymentCheck) {
+      result.check = false
+      const listItem = {
+        id: "payment",
+        position: null
+      }
+      result.missingList.push(listItem)
+    }
 
-module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically }
+    let count = 1
+    for (const learner of learners) {
+      const completionCheck = checkDone(learner.evidenceOfCompletionReview, "completion", claim.claimType)
+      if (!completionCheck) {
+      result.check = false
+      const listItem = {
+        id: learner.learnerID,
+        position: count
+      }
+      result.missingList.push(listItem)
+    }
+    count++
+    }
+    
+    return result
+}
+
+function checkDone(review, type, claimType) {
+    let result = true
+
+    if (type == "payment") {
+
+        if (review.outcome != null) {
+            if ((review.outcome == "pass") && (((review.costPerLearner == null || review.costPerLearner == "")) || (review.paymentPlan == null && claimType == "60"))) {
+                result = false
+            } else if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "")) {
+                result = false
+            }
+        } else {
+            result = false
+        }
+
+    } else if ( type == "completion") {
+        if (review.outcome != null) {
+            if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "" )) {
+                result = false
+            }
+        } else {
+            result = false
+        }
+    }
+
+    return result
+}
+
+module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState }

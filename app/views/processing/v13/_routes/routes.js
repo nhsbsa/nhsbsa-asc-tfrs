@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically } = require('../_helpers/helpers.js');
+const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState } = require('../_helpers/helpers.js');
 const { transformClaims } = require('../_helpers/transform.js');
 
 router.use('/processing/v13/backstop', require('../_backstop/backstop-routes.js'));
@@ -178,6 +178,7 @@ router.get('/save-progress', function (req, res) {
   delete req.session.data.learnerCount
   delete req.session.data.claimStep
   delete req.session.data.result
+  delete req.session.data.checkListError
 
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -225,6 +226,7 @@ const learnerNo = req.session.data.learnerNo
 let location = null
 
 delete req.session.data.progressSaved
+delete req.session.data.checkListError
 
 if (stage == "payment") {
   req.session.data.claimStep = "payment"
@@ -245,7 +247,6 @@ return res.redirect('organisation/org-view-main#' + location)
 
 router.get('/claim-process-start-handler', function (req, res) {
 req.session.data.orgTab = "singleClaim"
-req.session.data.claimScreen = "inProgress"
 delete req.session.data.progressSaved
 const claimID = req.session.data.id
 
@@ -259,17 +260,22 @@ let location = null
     }
   }
 let submission = getMostRelevantSubmission(claim)    
-
-if (claim.claimType == "100" || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan) || (isInternalOMMT(submission.trainingCode))) {
-  req.session.data.claimStep = "payment"
-  location = "tracker-payment"
+if (claim.status == "inProgress") {
+  req.session.data.claimScreen = "checkList"
 } else {
-  req.session.data.learnerCount = 1
-  req.session.data.claimStep = "completion"
-  location = "tracker-learner-" + learnerNo
+  req.session.data.claimScreen = "inProgress"
+  if (claim.claimType == "100" || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan) || (isInternalOMMT(submission.trainingCode))) {
+    req.session.data.claimStep = "payment"
+    location = "tracker-payment"
+  } else {
+    req.session.data.learnerCount = 1
+    req.session.data.claimStep = "completion"
+    location = "tracker-learner-" + learnerNo
+  }
 }
 
 return res.redirect('organisation/org-view-main#' + location)
+
 
 });
 
@@ -280,6 +286,7 @@ router.post('/claim-payment-handler', function (req, res) {
   delete req.session.data.paymentRejectNoteIncomplete
   delete req.session.data.paymentQueriedNoteIncomplete
   delete req.session.data.paidInFullResponseIncomplete
+  delete req.session.data.checkListError
 
   claimID = req.session.data.id
   const paymentResponse = req.session.data.payment
@@ -351,10 +358,9 @@ router.post('/claim-payment-handler', function (req, res) {
 
       } else {
         req.session.data.result = determineOutcome(claim, submission.evidenceOfPaymentReview.outcome, null)
-        req.session.data.claimScreen = "confirmOutcome"
+        req.session.data.claimScreen = "checkList"
         delete req.session.data.claimStep
-        location = "tracker-confirm"
-        return res.redirect('organisation/org-view-main#' + location)
+        return res.redirect('organisation/org-view-main')
       }
 
   } else {
@@ -371,6 +377,7 @@ router.post('/claim-completion-handler', function (req, res) {
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionRejectNoteIncomplete
   delete req.session.data.completionQueriedNoteIncomplete
+  delete req.session.data.checkListError
 
   claimID = req.session.data.id
   const completionResponse = req.session.data.completion
@@ -433,10 +440,8 @@ router.post('/claim-completion-handler', function (req, res) {
       } else {
         delete req.session.data.learnerCount
         delete req.session.data.claimStep
-        req.session.data.result = determineOutcome(claim)
-        req.session.data.claimScreen = "confirmOutcome"
-        location = "tracker-confirm"
-        return res.redirect('organisation/org-view-main#' + location)
+        req.session.data.claimScreen = "checkList"
+        return res.redirect('organisation/org-view-main')
       }
 
   } else {
@@ -453,6 +458,7 @@ router.get('/outcome-step-handler', function (req, res) {
   claimID = req.session.data.id
   delete req.session.data.learnerCount
   delete req.session.data.claimStep
+  delete req.session.data.checkListError
   let claim = null
 
   for (const c of req.session.data.claims) {
@@ -461,13 +467,24 @@ router.get('/outcome-step-handler', function (req, res) {
       break;
     }
   }
-  req.session.data.result = determineOutcome(claim)
-  req.session.data.claimScreen = "confirmOutcome"
-  return res.redirect('organisation/org-view-main#tab-content')
+
+  checkState = checkProcessingState(claim)
+
+  if (checkState.check) {
+    req.session.data.result = determineOutcome(claim)
+    req.session.data.claimScreen = "confirmOutcome"
+    return res.redirect('organisation/org-view-main')
+  } else {
+    req.session.data.checkListError = checkState
+    return res.redirect('organisation/org-view-main')
+  }
+
+  
 });
 
 router.get('/outcome-handler', function (req, res) {
   claimID = req.session.data.id
+  delete req.session.data.checkListError
 
   for (const claim of req.session.data.claims) {
     if (claim.claimID == claimID) {

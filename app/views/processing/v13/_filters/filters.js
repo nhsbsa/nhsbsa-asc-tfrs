@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically } = require('../_helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone } = require('../_helpers/helpers.js');
 const fs = require('fs');
 const dataPath = 'app/views/processing/v13/_data/'
 
@@ -370,31 +370,7 @@ addFilter('checkCompletionOutcome', function (learners) {
 })
 
 addFilter('checkDone', function (review, type, claimType) {
-    let result = true
-
-    if (type == "payment") {
-
-        if (review.outcome != null) {
-            if ((review.outcome == "pass") && (((review.costPerLearner == null || review.costPerLearner == "")) || (review.paymentPlan == null && claimType == "60"))) {
-                result = false
-            } else if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "")) {
-                result = false
-            }
-        } else {
-            result = false
-        }
-
-    } else if ( type == "completion") {
-        if (review.outcome != null) {
-            if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "" )) {
-                result = false
-            }
-        } else {
-            result = false
-        }
-    }
-
-    return result
+        return checkDone(review, type, claimType)
 })
 
 addFilter('sortLearners', function (learners) {
@@ -459,4 +435,8 @@ addFilter('outcomeText', function(outcome) {
             // code block
     }
     return text;
+});
+
+addFilter('checkIfMissing', function(targetId, checkList) {
+    return checkList.some(item => item.id === targetId);
 });

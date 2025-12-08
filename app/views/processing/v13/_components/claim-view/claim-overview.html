@@ -10,10 +10,9 @@
 
     {% include "./claim.html" %}
 
-{% elif (data.claimScreen == "inProgress") or (data.claimScreen == "confirmOutcome")  %}
+{% elif (data.claimScreen == "inProgress") or (data.claimScreen == "checkList") or (data.claimScreen == "confirmOutcome")  %}
 
     {% include "./claim-process.html" %}
-    {% include "./claim-sections/claim-progress-tracker.html" %}
 
 {% elif (data.claimScreen == "previousSubmissions") %}
 
