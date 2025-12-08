@@ -16,7 +16,12 @@
                     <a href="../process-step-handler?stage=payment" aria-current="location" class="moj-side-navigation__link">Payment evidence</a>
                     {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone ("payment", claim.claimType) %}
                     {% if (paymentIsDone) %}
-                        <span class="moj-badge moj-badge--green">Done</span>
+                        <div class="outcome-wrapper">
+                            <div class="outcome-text">{{submission.evidenceOfPaymentReview.outcome | outcomeText}}</div>
+                            <div>
+                                <span class="moj-badge moj-badge--green">Done</span>
+                            </div>
+                        </div>
                     {% else %}
                             {% set paymentCompleted = false %}
                     {% endif %}
@@ -32,7 +37,12 @@
                         <a href="../process-step-handler?stage=completion&learnerNo={{loop.index}}" class="moj-side-navigation__link">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
                         {% set completionIsDone = learner.evidenceOfCompletionReview | checkDone ("completion", claim.claimType) %}
                         {% if (completionIsDone) %}
-                            <span class="moj-badge moj-badge--green">Done</span>
+                            <div class="outcome-wrapper">
+                                <div class="outcome-text">{{learner.evidenceOfCompletionReview.outcome | outcomeText}}</div>
+                                <div>
+                                    <span class="moj-badge moj-badge--green">Done</span>
+                                </div>
+                            </div>
                         {% else %}
                             {% set learnersCompleted = false %}
                         {% endif %}

@@ -631,84 +631,144 @@
 
 }
 
-.side-nav {
-position: fixed;
-top: 50%;
-left: 0;
-transform: translateY(-50%);
-width: 300px;
-max-height: 400px;
-background-color: #ffffff;
-border: 1px solid #b1b4b6;
-border-left: none;
-border-radius: 0 5px 5px 0;
-box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
-transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
-display: flex;
-flex-direction: column;
-overflow: hidden;
+:root {
+  --side-nav-width: 400px;
+  --side-nav-min-width: 50px;
+  --side-nav-max-height: 50vh;
+  --side-nav-min-height: 20vh;
+  --side-nav-header-height: 50px; /* original header height */
 }
 
+/* container */
+.side-nav {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: var(--side-nav-width);
+  height: auto;          /* allow variable height based on content */
+  max-height: var(--side-nav-max-height);     /* maximum height is 50% of viewport */
+  min-height: var(--side-nav-min-height);
+  transition: width 0.3s ease, height 0.3s ease;  /* animate width & height */
+  background-color: #fff;
+  border: 1px solid #b1b4b6;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  box-sizing: border-box;
+}
 
+/* minimised width only */
 .side-nav.minimised {
-width: 50px;
-left: 0;
+  width: var(--side-nav-min-width);
+}
+
+/* header */
+.side-nav-header {
+  background-color: #1d70b8;
+  color: #fff;
+  display: flex;
+  align-items: center;           /* vertically center content in expanded mode */
+  justify-content: space-between; /* icon left/right */
+  font-size: 19px;
+  font-weight: bold;
+  font-family: "GDS Transport", Arial, sans-serif;
+  height: var(--side-nav-header-height);
+  padding: 0 govuk-spacing(2);
+  flex: 0 0 auto;               /* do not stretch */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* header when minimised */
+.side-nav-header.minimised {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  justify-content: flex-start;  /* align to top of container */
+  align-items: left;          /* center along horizontal axis */
+  height: 100%;                 /* fill parent height */
+  padding: govuk-spacing(2) 0;              /* top/bottom padding only */
+  box-sizing: border-box;
+  flex-direction: row;       /* stack icon above text */
+  gap: govuk-spacing(2); /* <-- space between stacked items (icon and text) */
+}
+
+/* nav content */
+.moj-side-navigation {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  display: block;
+  transition: opacity 0.2s;
 }
 
 .moj-side-navigation.minimised {
-  display: none;
+  display: none; /* hide when collapsed */
 }
 
-.side-nav-header {
-background-color: #1d70b8;
-color: #ffffff;
-padding: govuk-spacing(2);
-font-size: 19px;
-font-weight: bold;
-display: flex;
-justify-content: space-between;
-align-items: center;
-font-family: "GDS Transport", Arial, sans-serif;
-}
-
-.side-nav-header.minimised {
-height: 400px;
-writing-mode: vertical-rl;
-text-orientation: mixed;
-justify-content: flex-start;
-}
-
-
-.minimise-btn-open {
-background: none;
-border: none;
-color: #ffffff;
-font-size: 20px;
-cursor: pointer;
-}
-
-.minimise-btn-open.minimised {
-display: none;
-}
-
+/* buttons */
+.minimise-btn-open,
 .minimise-btn-close {
-display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
 }
 
-.minimise-btn-close.minimised {
-background: none;
-border: none;
-color: #ffffff;
-font-size: 20px;
-cursor: pointer;
-transform: rotate(-90deg);
-margin-bottom: govuk-spacing(2);
-display:inline
+/* open/close button visibility */
+.minimise-btn-open { display: inline; }
+.minimise-btn-close { display: none; }
+.minimise-btn-open.minimised { display: none; }
+.minimise-btn-close.minimised { 
+  display: inline;
+  transform: rotate(-90deg);
+  margin-bottom: govuk-spacing(1); /* space between icon and vertical text */
 }
+
+
+/* nav content scrollable and hidden when minimised */
+.moj-side-navigation {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.moj-side-navigation.minimised {
+  display: none;    /* hide completely when collapsed */
+}
+
+/* buttons */
+.minimise-btn-open,
+.minimise-btn-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* open shown by default; close hidden */
+.minimise-btn-open { display: inline; }
+.minimise-btn-close { display: none; }
+
+/* toggle button visibility when collapsed */
+.minimise-btn-open.minimised { display: none; }
+.minimise-btn-close.minimised { 
+  display: inline;
+  transform: rotate(-90deg);
+  margin-bottom: 0;
+}
+
 
 .nav-scrollable {
   overflow-y: auto;       /* enables vertical scrollbar when content overflows */
-  overflow-x: hidden;     /* hides horizontal scrollbar (optional) */
 }
 
 .moj-side-navigation__item {
@@ -724,8 +784,22 @@ background-color: #f3f2f1;
 
 
 .moj-side-navigation__item .moj-badge {
-margin-left: 10px;
+margin-left: govuk-spacing(2);
 margin-right: govuk-spacing(3);
+}
+
+.outcome-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.outcome-text {
+  @include govuk-text-colour;
+  @include govuk-font($size: 16);
+  line-height: 20px;
+  padding: govuk-spacing(2);
+  width: fit-content;
+  white-space: nowrap;
 }
 
 .side-nav-heading {

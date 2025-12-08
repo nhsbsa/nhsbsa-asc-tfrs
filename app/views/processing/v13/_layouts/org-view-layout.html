@@ -4,13 +4,7 @@
 {% block header %}
   {{ govukHeader({
     rebrand: true, 
-    serviceName: serviceName,
-    navigation: [
-      {
-        href: "#",
-        text: "Sign out"
-      }
-      ]
+    serviceName: serviceName
     }) 
   }}
 <div class="govuk-width-container">
@@ -27,10 +21,11 @@
 </div>
 <div class="app-organisation-actions govuk-width-container" aria-label="Organisation switcher">
     <div class="app-organisation-actions__title">
-      {{org.name}} <span class="app-organisation-caption">({{org.workplaceID}})</span>
+      <span class="govuk-caption-xl">({{org.workplaceID}})</span>
+      <span class="govuk-heading-xl govuk-!-static-margin-bottom-2">{{org.name}}</span>
       </div>
       <div class="app-organisation-actions__actions">
-          <a href="../back-to-start-handler" class="govuk-link app-organisation-actions__link">Change organisation</a>
+          <a href="../back-to-start-handler" class="govuk-link app-organisation-actions__link">Back to start</a>
       </div>
   </div>
 <div class="govuk-service-navigation" data-module="govuk-service-navigation">
@@ -71,23 +66,31 @@ const navHeader = document.getElementById('side-nav-header');
 const minimiseBtnOpen = document.getElementById('minimiseBtnOpen');
 const minimiseBtnClose = document.getElementById('minimiseBtnClose');
 
+let expandedHeight = null;
 
 minimiseBtnOpen.addEventListener('click', () => {
-nav.classList.add('minimised');
-navContent.classList.add('minimised');
-navHeader.classList.add('minimised');
-minimiseBtnClose.classList.add('minimised');
-minimiseBtnOpen.classList.add('minimised');
-});
+  // Capture the current nav height
+  expandedHeight = nav.offsetHeight + "px";
 
+  nav.style.height = expandedHeight; // lock height before collapsing
+  nav.classList.add('minimised');
+  navContent.classList.add('minimised');
+  navHeader.classList.add('minimised');
+  minimiseBtnClose.classList.add('minimised');
+  minimiseBtnOpen.classList.add('minimised');
+});
 
 minimiseBtnClose.addEventListener('click', () => {
-nav.classList.remove('minimised');
-navContent.classList.remove('minimised');
-navHeader.classList.remove('minimised');
-minimiseBtnClose.classList.remove('minimised');
-minimiseBtnOpen.classList.remove('minimised');
+  nav.classList.remove('minimised');
+  navContent.classList.remove('minimised');
+  navHeader.classList.remove('minimised');
+  minimiseBtnClose.classList.remove('minimised');
+  minimiseBtnOpen.classList.remove('minimised');
+
+  // Let height be variable again
+  nav.style.height = ""; 
 });
+
 
 window.addEventListener('load', () => {
     // Check if the URL has a hash (like #section3)

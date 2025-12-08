@@ -260,7 +260,7 @@ let location = null
   }
 let submission = getMostRelevantSubmission(claim)    
 
-if ((claim.claimType != "40" || (claim.claimType == "40" && claim.isPaymentPlan)) && !(isInternalOMMT(submission.trainingCode))) {
+if (claim.claimType == "100" || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan) || (isInternalOMMT(submission.trainingCode))) {
   req.session.data.claimStep = "payment"
   location = "tracker-payment"
 } else {

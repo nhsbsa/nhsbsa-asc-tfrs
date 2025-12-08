@@ -442,3 +442,21 @@ addFilter('merge', function(obj1, obj2) {
     // Simple shallow merge: obj2 overrides obj1
     return Object.assign({}, obj1, obj2);
 });
+
+addFilter('outcomeText', function(outcome) {
+    let text = null
+    switch(outcome) {
+        case "pass":
+            text = "Criteria met"
+            break;
+        case "fail":
+            text = "Rejected"
+            break;
+        case "queried":
+            text = "Needs action"
+            break;
+        default:
+            // code block
+    }
+    return text;
+});

@@ -71,22 +71,29 @@ const navHeader = document.getElementById('side-nav-header');
 const minimiseBtnOpen = document.getElementById('minimiseBtnOpen');
 const minimiseBtnClose = document.getElementById('minimiseBtnClose');
 
+let expandedHeight = null;
 
 minimiseBtnOpen.addEventListener('click', () => {
-nav.classList.add('minimised');
-navContent.classList.add('minimised');
-navHeader.classList.add('minimised');
-minimiseBtnClose.classList.add('minimised');
-minimiseBtnOpen.classList.add('minimised');
+  // Capture the current nav height
+  expandedHeight = nav.offsetHeight + "px";
+
+  nav.style.height = expandedHeight; // lock height before collapsing
+  nav.classList.add('minimised');
+  navContent.classList.add('minimised');
+  navHeader.classList.add('minimised');
+  minimiseBtnClose.classList.add('minimised');
+  minimiseBtnOpen.classList.add('minimised');
 });
 
-
 minimiseBtnClose.addEventListener('click', () => {
-nav.classList.remove('minimised');
-navContent.classList.remove('minimised');
-navHeader.classList.remove('minimised');
-minimiseBtnClose.classList.remove('minimised');
-minimiseBtnOpen.classList.remove('minimised');
+  nav.classList.remove('minimised');
+  navContent.classList.remove('minimised');
+  navHeader.classList.remove('minimised');
+  minimiseBtnClose.classList.remove('minimised');
+  minimiseBtnOpen.classList.remove('minimised');
+
+  // Let height be variable again
+  nav.style.height = ""; 
 });
 
 window.addEventListener('load', () => {
