@@ -1,0 +1,21 @@
+{% set claim = data.id | findClaim(data.claims) %} 
+{% set submission = claim | getMostRelevantSubmission %}
+{% set learner = submission.learnerID | findLearner %}
+{% set training = submission.trainingCode | findTraining %}
+{% set submitter = (submission.submitter | findUser(org)) %}
+
+{% set pairClaim = data.id | matchPairClaim(data.claims) %}
+
+{% if (data.claimScreen == "claim") %}
+
+    {% include "./claim.html" %}
+
+{% elif (data.claimScreen == "inProgress") or (data.claimScreen == "checkList") or (data.claimScreen == "confirmOutcome")  %}
+
+    {% include "./claim-process.html" %}
+
+{% elif (data.claimScreen == "previousSubmissions") %}
+
+    {% include "./claim-previous-submissions.html" %}
+
+{% endif %}

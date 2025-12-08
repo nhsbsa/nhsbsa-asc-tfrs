@@ -1,0 +1,110 @@
+{% extends "./main.html" %}
+{% set govukRebrand = true %}
+
+{% block header %}
+  {{ govukHeader({
+    rebrand: true, 
+    serviceName: serviceName
+    }) 
+  }}
+<div class="govuk-width-container">
+  <div class="govuk-phase-banner">
+    <p class="govuk-phase-banner__content">
+      <strong class="govuk-tag govuk-phase-banner__content__tag">
+        Prototype
+      </strong>
+      <span class="govuk-phase-banner__text">
+        This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      </span>
+    </p>
+  </div>
+</div>
+<div class="app-organisation-actions govuk-width-container" aria-label="Organisation switcher">
+    <div class="app-organisation-actions__title">
+      <span class="govuk-caption-xl">({{org.workplaceID}})</span>
+      <span class="govuk-heading-xl govuk-!-static-margin-bottom-2">{{org.name}}</span>
+      </div>
+      <div class="app-organisation-actions__actions">
+          <a href="../back-to-start-handler" class="govuk-link app-organisation-actions__link">Back to start</a>
+      </div>
+  </div>
+<div class="govuk-service-navigation" data-module="govuk-service-navigation">
+  <div class="govuk-width-container">
+    <div class="govuk-service-navigation__container">
+              <nav aria-label="Menu" class="govuk-service-navigation__wrapper">
+                <button type="button" class="govuk-service-navigation__toggle govuk-js-service-navigation-toggle" aria-controls="navigation" hidden>
+                  Menu
+                </button>
+                <ul class="govuk-service-navigation__list" id="navigation">
+                  <li class="govuk-service-navigation__item {% if data.orgTab == 'users'%}govuk-service-navigation__item--active{%endif%}">
+                    <a class="govuk-service-navigation__link" href="../org-tab-handler/users">
+                      {% if data.orgTab == 'users'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Contacts{% if data.orgTab == 'users'%}</strong>{%endif%}
+                    </a>
+                  </li>
+                  <li class="govuk-service-navigation__item {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}govuk-service-navigation__item--active{%endif%}">
+                    <a class="govuk-service-navigation__link" {% if data.id %} href="../org-tab-handler/singleClaim"{% else%} href="../org-tab-handler/claims"{% endif%} {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}aria-current="true"{%endif%}>
+                      {% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Claims{% if data.orgTab == 'claims' or data.orgTab=='singleClaim'%}</strong>{%endif%}
+                    </a>
+                  </li>
+                  <li class="govuk-service-navigation__item {% if data.orgTab == 'org-details'%}govuk-service-navigation__item--active{%endif%}">
+                    <a class="govuk-service-navigation__link" href="../org-tab-handler/org-details">
+                      {% if data.orgTab == 'org-details'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Organisation details{% if data.orgTab == 'org-details'%}</strong>{%endif%}
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+const nav = document.getElementById('sideNav');
+const navContent = document.getElementById('moj-side-navigation');
+const navHeader = document.getElementById('side-nav-header');
+const minimiseBtnOpen = document.getElementById('minimiseBtnOpen');
+const minimiseBtnClose = document.getElementById('minimiseBtnClose');
+
+let expandedHeight = null;
+
+minimiseBtnOpen.addEventListener('click', () => {
+  // Capture the current nav height
+  expandedHeight = nav.offsetHeight + "px";
+
+  nav.style.height = expandedHeight; // lock height before collapsing
+  nav.classList.add('minimised');
+  navContent.classList.add('minimised');
+  navHeader.classList.add('minimised');
+  minimiseBtnClose.classList.add('minimised');
+  minimiseBtnOpen.classList.add('minimised');
+});
+
+minimiseBtnClose.addEventListener('click', () => {
+  nav.classList.remove('minimised');
+  navContent.classList.remove('minimised');
+  navHeader.classList.remove('minimised');
+  minimiseBtnClose.classList.remove('minimised');
+  minimiseBtnOpen.classList.remove('minimised');
+
+  // Let height be variable again
+  nav.style.height = ""; 
+});
+
+
+window.addEventListener('load', () => {
+    // Check if the URL has a hash (like #section3)
+    const hash = window.location.hash;
+
+    if (hash) {
+      // Find the target element inside the scrollable div
+      const target = document.querySelector(hash);
+
+      if (target) {
+        // Scroll it into view, but only within the container
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+});
+</script>
+{% endblock %}
