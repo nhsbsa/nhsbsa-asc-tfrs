@@ -807,6 +807,9 @@ align-items: center;
 .side-nav-item-active{
   border-left: 4px solid #1d70b8;
   background-color: #f3f2f1;
+  .side-nav-link{
+    font-weight: 700;
+  }
 }
 
 

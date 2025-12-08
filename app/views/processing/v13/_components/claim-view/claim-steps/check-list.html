@@ -3,7 +3,7 @@
 {% set sortedLearners = submission.learners | sortLearners %}
 
 {% if ((claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT)) %}
-    <h2 class="govuk-heading-m">Review payment</h2>
+    <h2 class="govuk-heading-m">Payment evidence</h2>
     <ul class="govuk-task-list">
         
         <li class="govuk-task-list__item govuk-task-list__item--with-link {% if data.checkListError != null and data.checkListError.missingList[0].id =="payment"%}check-item-error{% endif %}" id="tracker-payment">
@@ -14,7 +14,7 @@
                 {% endif %}
             <div class="check-item">
                 <div class="govuk-task-list__name-and-hint">
-                    <a class="govuk-link govuk-task-list__link" href="../process-step-handler?stage=payment" aria-describedby="payment-status">Payment evidence</a>
+                    <a class="govuk-link govuk-task-list__link" href="../process-step-handler?stage=payment" aria-describedby="payment-status">Review evidence</a>
                 </div>
                 {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone ("payment", claim.claimType) %}
                 {% if (paymentIsDone) %}
@@ -24,14 +24,14 @@
                     </div>
                 {% else %}
                         {% set paymentCompleted = false %}
-                        <span class="moj-badge moj-badge--blue" id="learner-{{loop.index}}-status">Incomplete</span>
+                        <span class="moj-badge moj-badge--blue" id="learner-{{loop.index}}-status">Still to do</span>
                 {% endif %}
             </div>
         </li>
     </ul>
 {% endif %}
 {% if claim.claimType != "60" %}
-    <h2 class="govuk-heading-m">Review completion</h2>
+    <h2 class="govuk-heading-m">Completion evidence</h2>
     <ul class="govuk-task-list">
         {% for learner in sortedLearners %}
             {% set learnerInfo = learner.learnerID | findLearner %}
@@ -55,7 +55,7 @@
                         </div>
                     {% else %}
                         {% set learnersCompleted = false %}
-                        <span class="moj-badge moj-badge--blue" id="learner-{{loop.index}}-status">Incomplete</span>
+                        <span class="moj-badge moj-badge--blue" id="learner-{{loop.index}}-status">Still to do</span>
                     {% endif %}
                 </div>
             </li>

@@ -10,11 +10,11 @@
     </div>
     <nav class="moj-side-navigation nav-scrollable" aria-label="Side navigation" id="moj-side-navigation">
         {% if ((claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT)) %}
-            <h4 class="moj-side-navigation__title">Review payment</h4>
+            <h4 class="moj-side-navigation__title">Payment evidence</h4>
             <ul class="govuk-task-list">
                 <li class="govuk-task-list__item govuk-task-list__item--with-link side-nav-item {% if (data.claimStep == "payment") %}side-nav-item-active{% endif %}" id="tracker-payment ">
                     <div class="govuk-task-list__name-and-hint">
-                        <a class="govuk-link govuk-task-list__link side-nav-link" href="../process-step-handler?stage=payment" aria-describedby="payment-status">Payment evidence</a>
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state side-nav-link" href="../process-step-handler?stage=payment" aria-describedby="payment-status">Review evidence</a>
                     </div>
                     {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone ("payment", claim.claimType) %}
                     {% if (paymentIsDone) %}
@@ -29,13 +29,13 @@
             </ul>
         {% endif %}
         {% if claim.claimType != "60" %}
-            <h4 class="moj-side-navigation__title">Review completion</h4>
+            <h4 class="moj-side-navigation__title">Completion evidence</h4>
             <ul class="govuk-task-list">
                 {% for learner in sortedLearners %}
                     {% set learnerInfo = learner.learnerID | findLearner %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link side-nav-item {% if (data.claimStep == "completion") and (loop.index == data.learnerCount) %}side-nav-item-active{% endif %}" id="tracker-learner-{{loop.index}}">
                         <div class="govuk-task-list__name-and-hint">
-                        <a class="govuk-link govuk-task-list__link side-nav-link" href="../process-step-handler?stage=completion&learnerNo={{loop.index}}" aria-describedby="learner-{{loop.index}}-status">
+                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state side-nav-link" href="../process-step-handler?stage=completion&learnerNo={{loop.index}}" aria-describedby="learner-{{loop.index}}-status">
                             {{learnerInfo.givenName}} {{learnerInfo.familyName}}
                         </a>
                         </div>
