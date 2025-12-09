@@ -113,12 +113,12 @@
                         {% for missingCheck in data.checkListError.missingList %}
                             {% if missingCheck.id == "payment"%}
                                 <li>
-                                <a href="#error-payment">Complete the payment evidence check</a>
+                                <a href="#error-payment">Finish reviewing the payment evidence</a>
                                 </li>
                             {% else %}
                                 {% set learnerInfo = missingCheck.id | findLearner %}
                                 <li>
-                                <a href="#error-learner-{{missingCheck.position}}">Complete the completion evidence check for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
+                                <a href="#error-learner-{{missingCheck.position}}">Finish reviewing the completion evidence for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
                                 </li>
                             {% endif %}
                         {% endfor %}
@@ -153,7 +153,7 @@
 
         {% endif %}
         {% if (data.claimScreen == "checkList") %}
-            <p class="govuk-body govuk-!-margin-top-6">Check you've reviewed everything before continuing.</p>
+            <p class="govuk-body govuk-!-margin-top-6">Check the claim’s progress and finish any incomplete evidence checks.</p>
         {% endif %}
     </div>
 </div>
