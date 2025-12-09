@@ -9,7 +9,7 @@
         <li class="govuk-task-list__item govuk-task-list__item--with-link {% if data.checkListError != null and data.checkListError.missingList[0].id =="payment"%}check-item-error{% endif %}" id="tracker-payment">
             {% if data.checkListError != null and data.checkListError.missingList[0].id =="payment"%}
                     <p id="error-payment" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span> Complete the payment evidence check
+                        <span class="govuk-visually-hidden">Error:</span> Finish reviewing the payment evidence
                     </p>
                 {% endif %}
             <div class="check-item">
@@ -38,7 +38,7 @@
             <li class="govuk-task-list__item govuk-task-list__item--with-link {% if data.checkListError != null and ( learner.learnerID | checkIfMissing(data.checkListError.missingList))%}check-item-error{% endif %}" id="tracker-learner-{{loop.index}}">
                 {% if data.checkListError != null and ( learner.learnerID | checkIfMissing(data.checkListError.missingList))%}
                     <p id="error-learner-{{loop.index}}" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span> Complete the completion evidence check for {{learnerInfo.givenName}} {{learnerInfo.familyName}}
+                        <span class="govuk-visually-hidden">Error:</span> Finish reviewing the completion evidence for {{learnerInfo.givenName}} {{learnerInfo.familyName}}
                     </p>
                 {% endif %}
                 <div class="check-item">
@@ -62,6 +62,8 @@
         {% endfor %}
     </ul>
 {% endif %}
+
+<p class="govuk-body">Make sure you've reviewed all the evidence before continuing.</p>
 
 <div class="govuk-button-group">
     <a class="govuk-button" href="../outcome-step-handler">Continue</a>
