@@ -537,6 +537,20 @@ router.get('/view-previous-submissions-handler', function (req, res) {
 
 });
 
+router.get('/learner-previous-submissions-handler', function (req, res) {
+
+  claimID = req.session.data.id
+  var foundClaim = null
+  for (const claim of req.session.data['claims']) {
+    if (claim.claimID == claimID) {
+      foundClaim = claim
+    }
+  }
+  req.session.data.claimScreen = "learnerPreviousSubmissions"
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&view=' + foundClaim.claimType + '#tab-content')
+
+});
+
 router.get('/view-previous-submissions-back-handler', function (req, res) {
   
   claimID = req.session.data.id
