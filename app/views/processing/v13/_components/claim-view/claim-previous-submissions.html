@@ -63,6 +63,19 @@
                         {%endfor %}
                     </tr>
 
+                     <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Processed by</strong></td>
+
+                        {% for submission in sortedSubmissions %}
+                            {% if submission.processedDate %}
+                            <td class="govuk-table__cell">{{submission.processedBy }}</td>
+                            {% else %}
+                            <td class="govuk-table__cell">---</td>
+                            {% endif %}
+                        {%endfor %}
+                    </tr>
+
+
                   <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Edits requested after processing</strong></td>
                     {% set count = sortedSubmissions.length %}
