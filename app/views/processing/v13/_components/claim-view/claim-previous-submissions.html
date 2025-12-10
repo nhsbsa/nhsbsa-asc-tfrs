@@ -11,7 +11,18 @@
         <h2 class="govuk-heading-l" id="training">{% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% else %}Claim{% endif %} submissions</h2>
         <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} submissions with any edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
         
-
+        <div class="govuk-form-group">
+            <label class="govuk-label" for="sort">
+                Show
+            </label>
+            <select class="govuk-select" id="sort" name="sort">
+                <option value="changed">what's changed</option>
+                <option value="everything" selected>everything</option>
+            </select>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Apply
+            </button>
+        </div>
         <div class="moj-scrollable-pane">
             <table class="govuk-table">
 
