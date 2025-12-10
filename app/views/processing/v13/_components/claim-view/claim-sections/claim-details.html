@@ -105,7 +105,7 @@
             </dd>
         </div>
     {% endif %}
-    {% if claim.claimType != "60" %}
+    {% if claim.claimType != "60" and data.claimScreen != "inProgress" %}
         <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
                 {% if submission.learners.length == 1 %}
