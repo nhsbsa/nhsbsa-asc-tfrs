@@ -27,10 +27,18 @@
     <div class="govuk-grid-column-one-third">
         <ul class="govuk-list">
             {% for learner in sortedLearners %}
-            {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
-            <li>
-                <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
-            </li>
+                {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
+                {% if learner.status == "active"%}
+                    <li>
+                        <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
+                    </li>
+                {% else %}
+                <p>Removed</p>
+                    <li>
+                        <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
+                    </li>
+                {% endif %}
+
             {% endfor %}
         </ul>
     </div>
@@ -82,17 +90,17 @@
             <!-- ============================= -->
             <tr class="govuk-table__row">
                 <td class="govuk-table__cell">
-                    <strong>Learner 1</strong>
+                    <strong>Learner {{ loop.index }}</strong>
                 </td>
 
                 {% for submission in learner.history %}
                     {% if submission %}
                         {% set learnerInfo = submission.learnerID | findLearner %}
                         <td class="govuk-table__cell">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</td>
+                    {% elif loop.index != 1 %}
+                        <td class="govuk-table__cell">---</td>
                     {% else %}
-                    {# else if not first submisiion #}
-                        <td class="govuk-table__cell">(TO DO)</td>
-                        {# <td class="govuk-table__cell">(Removed)</td> #}
+                        <td class="govuk-table__cell">(Removed)</td>
                     {% endif %}
                 {% endfor %}
             </tr>
