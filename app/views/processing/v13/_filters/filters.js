@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone } = require('../_helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, buildLearnerComparison } = require('../_helpers/helpers.js');
 const fs = require('fs');
 const dataPath = 'app/views/processing/v13/_data/'
 
@@ -260,6 +260,12 @@ addFilter('sortSubmissionsForTable', function (submissions) {
     return sorted
 })
 
+addFilter('sortLearnersForTable', function (submissions) {
+    let sorted = sortSubmissionsForTable(submissions)
+    let newLearnerArray = buildLearnerComparison(sorted)
+    return newLearnerArray
+})
+
 addFilter('matchSubmissionToText', function (submissions) {
     const submissionLabels = submissions.map((submission, index, array) => {
         if (!submission.submittedDate) {
@@ -277,8 +283,6 @@ addFilter('matchSubmissionToText', function (submissions) {
         }
       });
       return submissionLabels
-    // let text = ["First submission", "Second submission", "Third submission", "Fourth submission", "Fifth submission"]
-    // return text[count]
 })
 
 addFilter('formatText', function (submission) {

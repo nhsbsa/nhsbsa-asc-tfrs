@@ -225,6 +225,52 @@ function sortSubmissionsForTable(submissions) {
     });
 }
 
+function buildLearnerComparison(submissions) {
+  // submissions is already sorted: [latest, older, ..., oldest]
+  const latest = submissions[0];
+
+  // 1. Learners in the latest submission
+  const latestLearnerIDs = new Set(latest.learners.map(l => l.learnerID));
+
+  // 2. Build map of all learners seen across any submission
+  const allLearners = new Map();
+
+  submissions.forEach((submission, submissionIndex) => {
+    submission.learners.forEach(learner => {
+      if (!allLearners.has(learner.learnerID)) {
+        allLearners.set(learner.learnerID, {
+          learnerID: learner.learnerID,
+          history: Array(submissions.length).fill(null) // one "slot" per submission
+        });
+      }
+
+      // Fill correct submission column (0 = latest)
+      const entry = allLearners.get(learner.learnerID);
+      entry.history[submissionIndex] = learner;
+    });
+  });
+
+  // 3. Split into active and removed
+  const active = [];
+  const removed = [];
+
+  for (const [id, data] of allLearners.entries()) {
+    if (latestLearnerIDs.has(id)) {
+      active.push({ learnerID: id, status: "active", history: data.history });
+    } else {
+      removed.push({ learnerID: id, status: "removed", history: data.history });
+    }
+  }
+
+  // 4. Sort alphabetically by learnerID (or name if you add it later)
+  active.sort((a, b) => a.learnerID.localeCompare(b.learnerID));
+  removed.sort((a, b) => a.learnerID.localeCompare(b.learnerID));
+
+  // 5. Final merged order
+  return [...active, ...removed];
+}
+
+
 function checkClaimProcess(claim, section, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paidInFullResponse) {
 
     let errorParamaters = ""
@@ -398,4 +444,4 @@ function checkDone(review, type, claimType) {
     return result
 }
 
-module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState }
+module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildLearnerComparison }

@@ -1,7 +1,7 @@
+{% set sortedLearners = claim.submissions | sortLearnersForTable %}
 {% set sortedSubmissions = claim.submissions | sortSubmissionsForTable %}
-{% set internalOMMTCheck = sortedSubmissions | isAllInternalOMMT %}
 
-<div class="govuk-grid-row">
+
     <div class="govuk-grid-column-full">
 
         <a href="../view-previous-submissions-handler" class="govuk-back-link govuk-!-margin-bottom-6">Back to previous submissions</a>
@@ -13,7 +13,7 @@
         
         <div class="govuk-form-group">
             <label class="govuk-label" for="sort">
-                {# Show #}
+                Show
             </label>
             <select class="govuk-select" id="sort" name="sort">
                 <option value="changed">Show what's changed</option>
@@ -23,7 +23,21 @@
                 Apply
             </button>
         </div>
+    </div>
 
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+        <ul class="govuk-list">
+            {% for learner in sortedLearners %}
+            {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
+            <li>
+                <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="govuk-grid-column-two-thirds">
         <div class="moj-scrollable-pane">
             <table class="govuk-table">
 
@@ -38,129 +52,127 @@
             
                     </tr>
                 </thead>
+    <tbody class="govuk-table__body">
 
-                <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+            <td class="govuk-table__cell"><strong>Submitted on</strong></td>
+            {% for submission in sortedSubmissions %}
+                {% if submission.submittedDate %}
+                <td class="govuk-table__cell">{{submission.submittedDate | govukDate}}</td>
+                {% else %}
+                <td class="govuk-table__cell">---</td>
+                {% endif %}
+            {%endfor %}
+        </tr>
 
-                    {% for submission in sortedSubmissions %}
+        <tr><td colspan="{{ sortedSubmissions.length + 1 }}" style="height: 60px;"></td></tr>
 
+        {% for learner in sortedLearners %}
 
-                    {# <tr class="govuk-table__row">
-                        <td class="govuk-table__cell"><strong>Learner</strong></td>
-                        {% for submission in sortedSubmissions %}
-                        {% if submission.learnerID %}
-                            {% if (submission.learnerID !== sortedSubmissions[loop.index0 + 1].learnerID and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                            <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{(submission.learnerID | findLearner).givenName}} {{(submission.learnerID | findLearner).familyName}}</strong></mark></td>
-                            {% else %}
-                            <td class="govuk-table__cell">{{(submission.learnerID | findLearner).givenName}} {{(submission.learnerID | findLearner).familyName}}</td>
-                            {% endif %}
-                        {% else %}
-                            <td class="govuk-table__cell">---</td>
-                        {% endif %}
-                        {%endfor %}   
-                    </tr> #}
+            <!-- ============================= -->
+            <!-- LEARNER NAME ROW -->
+            <!-- ============================= -->
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">
+                    <strong>Learner 1</strong>
+                </td>
 
-                    {# <tr class="govuk-table__row">
-                        <td class="govuk-table__cell"><strong>Requested edits</strong></td>
-                        {% set count = sortedSubmissions.length %}
-                        {% for submission in sortedSubmissions %}
-                        {% if ((submission.evidenceOfCompletionReview.outcome == "queried")) and submission.submittedDate != null %}
-                            <td class="govuk-table__cell">
-                            {% set text = submission | formatText %}
-                                {{text | trunctateString}} </br> <a class="govuk-link" href="/showEditedNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
-                            </td>
-                        {% else %}
-                            <td class="govuk-table__cell">---</td>
-                        {% endif %}
-                        {% set count = count - 1 %}
-                        {%endfor %}  
-                    </tr> #}
+                {% for submission in learner.history %}
+                    {% if submission %}
+                        {% set learnerInfo = submission.learnerID | findLearner %}
+                        <td class="govuk-table__cell">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</td>
+                    {% else %}
+                        <td class="govuk-table__cell">(Removed)</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
 
-                    {% endfor %}
+            <!-- ============================= -->
+            <!-- LEARNER ID ROW -->
+            <!-- ============================= -->
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">
+                    <strong>NI number</strong>
+                </td>
 
-                    {# <tr class="govuk-table__row">
-                        <td class="govuk-table__cell"><strong>Learner</strong></td>
-                        {% for submission in sortedSubmissions %}
-                        {% if submission.learnerID %}
-                            {% if (submission.learnerID !== sortedSubmissions[loop.index0 + 1].learnerID and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                            <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{(submission.learnerID | findLearner).givenName}} {{(submission.learnerID | findLearner).familyName}}</strong></mark></td>
-                            {% else %}
-                            <td class="govuk-table__cell">{{(submission.learnerID | findLearner).givenName}} {{(submission.learnerID | findLearner).familyName}}</td>
-                            {% endif %}
-                        {% else %}
-                            <td class="govuk-table__cell">---</td>
-                        {% endif %}
-                        {%endfor %}   
-                    </tr>
+                {% for submission in learner.history %}
+                    {% if submission %}
+                        <td class="govuk-table__cell">{{submission.learnerID}}</td>
+                    {% else %}
+                        <td class="govuk-table__cell">(Removed)</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
 
-                    <tr class="govuk-table__row">
-                        <td class="govuk-table__cell"><strong>Requested edits</strong></td>
-                        {% set count = sortedSubmissions.length %}
-                        {% for submission in sortedSubmissions %}
-                        {% if ((submission.evidenceOfCompletionReview.outcome == "queried")) and submission.submittedDate != null %}
-                            <td class="govuk-table__cell">
-                            {% set text = submission | formatText %}
-                                {{text | trunctateString}} </br> <a class="govuk-link" href="/showEditedNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
-                            </td>
-                        {% else %}
-                            <td class="govuk-table__cell">---</td>
-                        {% endif %}
-                        {% set count = count - 1 %}
-                        {%endfor %}  
-                    </tr> #}
+            <!-- ============================= -->
+            <!-- COMPLETION DATE ROW -->
+            <!-- ============================= -->
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell"><strong>Completion date</strong></td>
 
-                    {# {% if (data.view == "100" and not internalOMMTCheck) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true) %}
-                        <tr class="govuk-table__row">
-                            <td class="govuk-table__cell"><strong>Completion date</strong></td>
-                            {% for submission in sortedSubmissions %}
-                                {% if submission.costDate %}
-                                    {% if (submission.costDate !== sortedSubmissions[loop.index0 + 1].costDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.costDate | govukDate}}</strong></mark></td>
-                                    {% else %}
-                                        <td class="govuk-table__cell">{{submission.costDate | govukDate}}</td>
-                                    {% endif %}
-                                {% else %}
-                                <td class="govuk-table__cell">---</td>
-                                {% endif %}
-                            {%endfor %}
-                        </tr>
-                    {% endif %} #}
+                {% for submission in learner.history %}
+                    {% if submission and submission.completionDate %}
+                        <td class="govuk-table__cell">
+                            {{ submission.completionDate | govukDate }}
+                        </td>
+                    {% else %}
+                        <td class="govuk-table__cell">---</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
 
-                    {# {% if (data.view == "100" and not internalOMMTCheck) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true) %}
-                        <tr class="govuk-table__row">
-                            <td class="govuk-table__cell"><strong>Completion evidence</strong></td>
-                            {% for submission in sortedSubmissions %}
-                                {% if submission.evidenceOfPayment %}
-                                    <td class="govuk-table__cell">
-                                        {% set evidenceLoop = loop.index0 + 1 %}
-                                        {% if sortedSubmissions[evidenceLoop].evidenceOfPayment %}
-                                            {% set previousEvidence = sortedSubmissions[evidenceLoop].evidenceOfPayment %}
-                                        {% else %}
-                                            {% set previousEvidence = [] %}
-                                        {% endif %}
-                                        {% for evidence in submission.evidenceOfPayment %}
-                                            {% if ((evidence not in previousEvidence) and (evidenceLoop) <= ((sortedSubmissions | length) - 1)  ) %}
-                                                <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
-                                            {% else %}
-                                                {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </td>
-                                {% else %}
-                                    <td class="govuk-table__cell">---</td>
-                                {% endif %}
-                            {%endfor %}
-                        </tr>
-                    {% endif %} #}
+            <!-- ============================= -->
+            <!-- EVIDENCE OF COMPLETION ROW -->
+            <!-- ============================= -->
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
 
+                {% for submission in learner.history %}
+                    {% if submission and submission.evidenceOfCompletion %}
+                        <td class="govuk-table__cell">
+                            {{ submission.evidenceOfCompletion }}
+                            (<a class="govuk-link"
+                                href="/public/images/{{ submission.evidenceOfCompletion }}"
+                                target="_blank"
+                            >open in new tab</a>)
+                        </td>
+                    {% else %}
+                        <td class="govuk-table__cell">---</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
 
+            <!-- ============================= -->
+            <!-- REQUESTED EDITS ROW -->
+            <!-- ============================= -->
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell"><strong>Requested edits</strong></td>
 
+                {% for submission in learner.history %}
+                    {% if submission and submission.evidenceOfCompletionReview and submission.evidenceOfCompletionReview.outcome == "queried" %}
+                        <td class="govuk-table__cell">
+                            {{ submission.evidenceOfCompletionReview.note | trunctateString }}
+                            <br>
+                            <a class="govuk-link" href="/showEditedNote?submittedDate={{ submission.completionDate }}">
+                                … see more
+                            </a>
+                        </td>
+                    {% else %}
+                        <td class="govuk-table__cell">---</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
 
-                    
-                </tbody>
+            <!-- spacer between learners -->
+            <tr><td colspan="{{ sortedSubmissions.length + 1 }}" style="height: 60px;"></td></tr>
+
+        {% endfor %}
+    </tbody>
 
 
             </table>
           
+        </div>
         </div>
          {% if  claim.claimType =="60" %}
                         {% if pairClaim != null %}
