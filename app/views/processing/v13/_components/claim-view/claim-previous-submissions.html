@@ -30,12 +30,12 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
         <div class="moj-scrollable-pane">
-            <table class="govuk-table">
+            <table class="govuk-table" style="width: {{ ((sortedSubmissions | length) *320) + 200 }}px; table-layout:fixed; min-width:100%;">
                 <thead class="govuk-table__head">
                     <tr class="govuk-table__row">
-                    <th scope="col" class="govuk-table__header" style="width: 500px;"><span class="govuk-visually-hidden">Submissions</span></th>
+                    <th scope="col" class="govuk-table__header" style="width: 200px"><span class="govuk-visually-hidden">Submissions</span></th>
                     {% for text in sortedSubmissions | matchSubmissionToText %}
-                        <th scope="col" class="govuk-table__header" style="width: 300px;">{{text}}</th>
+                        <th scope="col" class="govuk-table__header">{{text}}</th>
                     {%endfor %}
                     </tr>
                 </thead>
@@ -90,12 +90,12 @@
             </div>
 
 
-            <table class="govuk-table">
+            <table class="govuk-table" style="width:{{((sortedSubmissions | length) *320) + 200 }}px; table-layout:fixed; min-width:100%;">
                 <thead class="govuk-table__head">
                     <tr class="govuk-table__row">
-                    <th scope="col" class="govuk-table__header" style="width: 500px;"><span class="govuk-visually-hidden">Submissions</span></th>
+                    <th scope="col" class="govuk-table__header" style="width: 200px"><span class="govuk-visually-hidden">Submissions</span></th>
                     {% for text in sortedSubmissions | matchSubmissionToText %}
-                        <th scope="col" class="govuk-table__header" style="width: 300px;"><span class="govuk-visually-hidden">{{text}}</span></th>
+                        <th scope="col" class="govuk-table__header"><span class="govuk-visually-hidden">{{text}}</span></th>
                     {%endfor %}
                     </tr>
                 </thead>
@@ -198,15 +198,20 @@
                     {%endfor %}  
                   </tr>
 
-                  </tbody>
+                </tbody>
             </table>
 
-             <table class="govuk-table">
+            <div style="padding-top: 20px;">
+                <h2 class="govuk-heading-m">Learners</h2>
+                <a type="submit" class="govuk-button govuk-button--secondary" href="../learner-previous-submissions-handler">Compare</a>
+            </div>
+
+             <table class="govuk-table" style="width : {{((sortedSubmissions | length) *320) + 200 }}px; table-layout:fixed; min-width:100%;">
                 <thead class="govuk-table__head">
                     <tr class="govuk-table__row">
-                    <th scope="col" class="govuk-table__header" style="width: 500px;"><span class="govuk-visually-hidden">Submissions</span></th>
+                    <th scope="col" class="govuk-table__header" style="width: 200px"><span class="govuk-visually-hidden">Submissions</span></th>
                     {% for text in sortedSubmissions | matchSubmissionToText %}
-                        <th scope="col" class="govuk-table__header" style="width: 300px;"><span class="govuk-visually-hidden">{{text}}</span></th>
+                        <th scope="col" class="govuk-table__header"><span class="govuk-visually-hidden">{{text}}</span></th>
                     {%endfor %}
                     </tr>
                 </thead>
@@ -220,15 +225,6 @@
                             </a>
                         </td>
                     </tr> #}
-
-                    <div class="completion-header" style="padding-top: 20px;">
-                        <h2 class="govuk-heading-m">Learners</h2>
-                        {# {% if (submission.learners.length > 1) %} #}
-                        <a type="submit" class="govuk-button govuk-button--secondary" href="../learner-previous-submissions-handler">
-                            Compare
-                        </a>
-                        {# {% endif %}  #}
-                    </div>
 
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell"><strong>Learner</strong></td>
