@@ -1,29 +1,27 @@
 {% set sortedLearners = claim.submissions | sortLearnersForTable %}
 {% set sortedSubmissions = claim.submissions | sortSubmissionsForTable %}
 
+<div class="govuk-grid-column-full">
+    <a href="../view-previous-submissions-handler" class="govuk-back-link govuk-!-margin-bottom-6">Back to previous submissions</a>
 
-    <div class="govuk-grid-column-full">
+    <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
 
-        <a href="../view-previous-submissions-handler" class="govuk-back-link govuk-!-margin-bottom-6">Back to previous submissions</a>
+    <h2 class="govuk-heading-l" id="training">Learners</h2>
+    <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} submissions with any learner edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
 
-        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-
-        <h2 class="govuk-heading-l" id="training">Learners</h2>
-        <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} submissions with any learner edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
-        
-        <div class="govuk-form-group">
-            <label class="govuk-label" for="sort">
-                Show
-            </label>
-            <select class="govuk-select" id="sort" name="sort">
-                <option value="changed">Show what's changed</option>
-                <option value="everything" selected>Show everything</option>
-            </select>
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-                Apply
-            </button>
-        </div>
+    <div class="govuk-form-group">
+        <label class="govuk-label" for="sort">
+            Show
+        </label>
+        <select class="govuk-select" id="sort" name="sort">
+            <option value="changed">Show what's changed</option>
+            <option value="everything" selected>Show everything</option>
+        </select>
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+            Apply
+        </button>
     </div>
+</div>
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
@@ -64,6 +62,16 @@
                 {% endif %}
             {%endfor %}
         </tr>
+                            <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Processed on</strong></td>
+                        {% for submission in sortedSubmissions %}
+                            {% if submission.processedDate %}
+                            <td class="govuk-table__cell">{{submission.processedDate | govukDate}}</td>
+                            {% else %}
+                            <td class="govuk-table__cell">---</td>
+                            {% endif %}
+                        {%endfor %}
+                    </tr>
 
         <tr><td colspan="{{ sortedSubmissions.length + 1 }}" style="height: 60px;"></td></tr>
 
@@ -82,7 +90,9 @@
                         {% set learnerInfo = submission.learnerID | findLearner %}
                         <td class="govuk-table__cell">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</td>
                     {% else %}
-                        <td class="govuk-table__cell">(Removed)</td>
+                    {# else if not first submisiion #}
+                        <td class="govuk-table__cell">(TO DO)</td>
+                        {# <td class="govuk-table__cell">(Removed)</td> #}
                     {% endif %}
                 {% endfor %}
             </tr>
@@ -99,7 +109,7 @@
                     {% if submission %}
                         <td class="govuk-table__cell">{{submission.learnerID}}</td>
                     {% else %}
-                        <td class="govuk-table__cell">(Removed)</td>
+                        <td class="govuk-table__cell">---</td>
                     {% endif %}
                 {% endfor %}
             </tr>
