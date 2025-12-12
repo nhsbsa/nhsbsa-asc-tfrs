@@ -30,12 +30,12 @@
                 {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
                 {% if learner.status == "active"%}
                     <li>
-                        <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
+                        <a class="govuk-link learner-jump-link" href="#{{learnerInfo.givenName}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
                     </li>
                 {% else %}
                 <h2 class="govuk-heading-s" style="padding-top: 20px;">Removed</h2>
                     <li>
-                        <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
+                        <a class="govuk-link learner-jump-link" href="#{{learnerInfo.givenName}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
                     </li>
                 {% endif %}
 
@@ -89,7 +89,7 @@
             <!-- LEARNER NAME ROW -->
             <!-- ============================= -->
             <tr class="govuk-table__row">
-                <td class="govuk-table__cell">
+                <td class="govuk-table__cell" >
                     <strong>Learner {{ loop.index }}</strong>
                 </td>
 
@@ -105,7 +105,7 @@
                         {% endif %}
 
                         {% set learnerInfo = submission.learnerID | findLearner %}
-                        <td class="govuk-table__cell">{{learnerInfo.givenName}} {{learnerInfo.familyName}}
+                        <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}
                             {% if not prevSubmission and loop.index0 != learner.history.length - 1 %}
                                 <p><strong>(New)</strong></p>
                             {% endif %}
