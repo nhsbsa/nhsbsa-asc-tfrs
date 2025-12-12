@@ -85,42 +85,50 @@
 
         {% for learner in sortedLearners %}
 
-            <!-- ============================= -->
             <!-- LEARNER NAME ROW -->
-            <!-- ============================= -->
             <tr class="govuk-table__row">
-                <td class="govuk-table__cell" >
+                <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">
                     <strong>Learner {{ loop.index }}</strong>
                 </td>
 
-                {% for submission in learner.history %}
-                    {% if submission %}
+            {% for submission in learner.history %}
+                {% set prev = learner.history[loop.index0 + 1] %} {# previous submission (older) #}
+                
+                {% if submission %}
+                    {% set learnerInfo = submission.learnerID | findLearner(data.learners) %}
+                    {% set isNew = false %}
 
-                        {# --- determine previous submission --- #}
-                        {% set prevIndex = loop.index0 + 1 %}
-                        {% if prevIndex < learner.history.length %}
-                            {% set prevSubmission = learner.history[prevIndex] %}
-                        {% else %}
-                            {% set prevSubmission = null %}
-                        {% endif %}
-
-                        {% set learnerInfo = submission.learnerID | findLearner %}
-                        <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}
-                            {% if not prevSubmission and loop.index0 != learner.history.length - 1 %}
-                                <p><strong>(New)</strong></p>
-                            {% endif %}
-                        </td>
-                    {% elif loop.index != 1 %}
-                        <td class="govuk-table__cell">---</td>
-                    {% else %}
-                        <td class="govuk-table__cell">(Removed)</td>
+                    {# Determine if learner is new: exists now, but not in previous submission, and not the oldest submission #}
+                    {% if loop.index0 != (learner.history | length) - 1 and not prev %}
+                        {% set isNew = true %}
                     {% endif %}
-                {% endfor %}
+
+                    <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">
+                        {% if loop.index0 == 0 and learner.status == "removed" %}
+                            (Removed)
+                        {% elif isNew %}
+                            <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
+                            <p><strong>(New)</strong></p>
+                        {% else %}
+                            {% if prev and (learnerInfo.givenName != (prev.learnerID | findLearner(data.learners)).givenName or learnerInfo.familyName != (prev.learnerID | findLearner(data.learners)).familyName) %}
+                                <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
+                            {% else %}
+                                {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    {% elif loop.index != 1 %}
+                        <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">---</td>
+                    {% else %}
+                        <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">(Removed)</td>
+                    {% endif %}
+            {% endfor %}
+
             </tr>
 
-            <!-- ============================= -->
+
+
             <!-- LEARNER ID ROW -->
-            <!-- ============================= -->
             <tr class="govuk-table__row">
                 <td class="govuk-table__cell">
                     <strong>NI number</strong>
@@ -135,47 +143,58 @@
                 {% endfor %}
             </tr>
 
-            <!-- ============================= -->
+            
             <!-- COMPLETION DATE ROW -->
-            <!-- ============================= -->
             <tr class="govuk-table__row">
                 <td class="govuk-table__cell"><strong>Completion date</strong></td>
-
                 {% for submission in learner.history %}
+                    {% set prev = learner.history[loop.index0 + 1] %}
+
                     {% if submission and submission.completionDate %}
-                        <td class="govuk-table__cell">
-                            {{ submission.completionDate | govukDate }}
-                        </td>
+                        {% if prev and submission.completionDate != prev.completionDate %}
+                            <td class="govuk-table__cell">
+                                <mark class="hods-highlight">
+                                    <strong>{{ submission.completionDate | govukDate }}</strong>
+                                </mark>
+                            </td>
+                        {% else %}
+                            <td class="govuk-table__cell">{{ submission.completionDate | govukDate }}</td>
+                        {% endif %}
                     {% else %}
                         <td class="govuk-table__cell">---</td>
                     {% endif %}
                 {% endfor %}
             </tr>
 
-            <!-- ============================= -->
             <!-- EVIDENCE OF COMPLETION ROW -->
-            <!-- ============================= -->
             <tr class="govuk-table__row">
                 <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
 
                 {% for submission in learner.history %}
+                    {% set prev = learner.history[loop.index0 + 1] %}
+
                     {% if submission and submission.evidenceOfCompletion %}
-                        <td class="govuk-table__cell">
-                            {{ submission.evidenceOfCompletion }}
-                            (<a class="govuk-link"
-                                href="/public/images/{{ submission.evidenceOfCompletion }}"
-                                target="_blank"
-                            >open in new tab</a>)
-                        </td>
+                        {% if prev and submission.evidenceOfCompletion != prev.evidenceOfCompletion %}
+                            <td class="govuk-table__cell">
+                                <mark class="hods-highlight"><strong>{{ submission.evidenceOfCompletion }}</strong></mark>
+                                (<a class="govuk-link" target="_blank"
+                                    href="/public/images/{{ submission.evidenceOfCompletion }}">open</a>)
+                            </td>
+                        {% else %}
+                            <td class="govuk-table__cell">
+                                {{ submission.evidenceOfCompletion }}
+                                (<a class="govuk-link" target="_blank"
+                                    href="/public/images/{{ submission.evidenceOfCompletion }}">open</a>)
+                            </td>
+                        {% endif %}
                     {% else %}
                         <td class="govuk-table__cell">---</td>
                     {% endif %}
                 {% endfor %}
+
             </tr>
 
-            <!-- ============================= -->
             <!-- REQUESTED EDITS ROW -->
-            <!-- ============================= -->
             <tr class="govuk-table__row">
                 <td class="govuk-table__cell"><strong>Requested edits</strong></td>
 
