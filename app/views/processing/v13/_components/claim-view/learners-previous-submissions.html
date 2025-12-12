@@ -143,7 +143,6 @@
                 {% endfor %}
             </tr>
 
-            
             <!-- COMPLETION DATE ROW -->
             <tr class="govuk-table__row">
                 <td class="govuk-table__cell"><strong>Completion date</strong></td>
@@ -197,19 +196,20 @@
             <!-- REQUESTED EDITS ROW -->
             <tr class="govuk-table__row">
                 <td class="govuk-table__cell"><strong>Requested edits</strong></td>
-
+                {% set count = sortedSubmissions.length %}
                 {% for submission in learner.history %}
                     {% if submission and submission.evidenceOfCompletionReview and submission.evidenceOfCompletionReview.outcome == "queried" %}
                         <td class="govuk-table__cell">
                             {{ submission.evidenceOfCompletionReview.note | trunctateString }}
                             <br>
-                            <a class="govuk-link" href="/showLearnerNote?submittedDate={{ submission.completionDate }}">
+                            <a class="govuk-link" href="/showLearnerNote?count={{count}}&submittedDate={{ submission.completionDate }}">
                                 … see more
                             </a>
                         </td>
                     {% else %}
                         <td class="govuk-table__cell">---</td>
                     {% endif %}
+                    {% set count = count - 1 %}
                 {% endfor %}
             </tr>
 

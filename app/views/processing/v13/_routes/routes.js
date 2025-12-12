@@ -825,12 +825,15 @@ router.get('/hideLearnerNote', function (req, res) {
   req.session.data['showLearnerNote'] = null
   req.session.data['submissionDate'] = null
   req.session.data['submittedDate'] = null
-  // var claimID = req.session.data.id
-  // for (const c of req.session.data.claims) {
-  //   if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
-  //     res.redirect('processing/v13/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
-  //   }
-  // }
+  var claimID = req.session.data.id
+  var foundClaim = null
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
+      foundClaim = c
+    }
+  }
+  req.session.data.claimScreen = "learnerPreviousSubmissions"
+  res.redirect('processing/v13/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
 });
 
 router.get('/transform', function (req, res) {
