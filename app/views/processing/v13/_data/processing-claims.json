@@ -1184,8 +1184,8 @@
             "completionDate": "2024-12-12T21:33:21.901Z",
             "evidenceOfCompletion": "certificate11.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "pass",
-              "note": null
+              "outcome": "queried",
+              "note": "The completion date doesn't match the certificate"
             }
           },
           {
@@ -1193,8 +1193,8 @@
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate12.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "pass",
-              "note": null
+              "outcome": "queried",
+              "note": "The completion date doesn't match the certificate"
             }
           },
           {
@@ -1202,8 +1202,8 @@
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate14.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "pass",
-              "note": null
+              "outcome": "queried",
+              "note": "The completion date doesn't match the certificate"
             }
           },
           {

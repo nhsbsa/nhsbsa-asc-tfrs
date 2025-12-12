@@ -798,6 +798,17 @@ router.get('/showEditedNote', function (req, res) {
   }
 });
 
+router.get('/showLearnerNote', function (req, res) {
+  req.session.data['showLearnerNote'] = true
+  let subCount = req.session.data['count']
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
+      res.redirect('processing/v13/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
+    }
+  }
+});
+
 router.get('/hideEditedNote', function (req, res) {
   req.session.data['showNote'] = null
   req.session.data['submissionDate'] = null
@@ -808,6 +819,18 @@ router.get('/hideEditedNote', function (req, res) {
       res.redirect('processing/v13/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
     }
   }
+});
+
+router.get('/hideLearnerNote', function (req, res) {
+  req.session.data['showLearnerNote'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  // var claimID = req.session.data.id
+  // for (const c of req.session.data.claims) {
+  //   if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
+  //     res.redirect('processing/v13/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
+  //   }
+  // }
 });
 
 router.get('/transform', function (req, res) {

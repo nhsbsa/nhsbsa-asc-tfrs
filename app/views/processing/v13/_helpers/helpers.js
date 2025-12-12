@@ -226,6 +226,12 @@ function sortSubmissionsForTable(submissions) {
 }
 
 function buildLearnerComparison(submissions) {
+
+  const fileLearners = loadJSONFromFile('learners.json', dataPath);
+  const learnerMap = new Map(
+    fileLearners.map(l => [l.id, l])
+  );
+
   // submissions is already sorted: [latest, older, ..., oldest]
   const latest = submissions[0];
 
@@ -255,18 +261,29 @@ function buildLearnerComparison(submissions) {
   const removed = [];
 
   for (const [id, data] of allLearners.entries()) {
-    if (latestLearnerIDs.has(id)) {
-      active.push({ learnerID: id, status: "active", history: data.history });
-    } else {
-      removed.push({ learnerID: id, status: "removed", history: data.history });
-    }
+    const info = learnerMap.get(id) || {}; // lookup: {givenName, familyName}
+
+    const record = {
+      learnerID: id,
+      status: latestLearnerIDs.has(id) ? "active" : "removed",
+      history: data.history,
+      givenName: info.givenName || "",
+      familyName: info.familyName || ""
+    };
+
+    if (record.status === "active") active.push(record);
+    else removed.push(record);
   }
 
   // 4. Sort alphabetically by learnerID (or name if you add it later)
-  active.sort((a, b) => a.learnerID.localeCompare(b.learnerID));
-  removed.sort((a, b) => a.learnerID.localeCompare(b.learnerID));
+  const sortByName = (a, b) =>
+    a.givenName.localeCompare(b.givenName) ||
+    a.familyName.localeCompare(b.familyName) ||
+    a.learnerID.localeCompare(b.learnerID);
 
-  // 5. Final merged order
+  active.sort(sortByName);
+  removed.sort(sortByName);
+
   return [...active, ...removed];
 }
 
