@@ -70,16 +70,16 @@
                 {% endif %}
             {%endfor %}
         </tr>
-                            <tr class="govuk-table__row">
-                        <td class="govuk-table__cell"><strong>Processed on</strong></td>
-                        {% for submission in sortedSubmissions %}
-                            {% if submission.processedDate %}
-                            <td class="govuk-table__cell">{{submission.processedDate | govukDate}}</td>
-                            {% else %}
-                            <td class="govuk-table__cell">---</td>
-                            {% endif %}
-                        {%endfor %}
-                    </tr>
+        <tr class="govuk-table__row">
+            <td class="govuk-table__cell"><strong>Processed on</strong></td>
+            {% for submission in sortedSubmissions %}
+                {% if submission.processedDate %}
+                <td class="govuk-table__cell">{{submission.processedDate | govukDate}}</td>
+                {% else %}
+                <td class="govuk-table__cell">---</td>
+                {% endif %}
+            {%endfor %}
+        </tr>
 
         <tr><td colspan="{{ sortedSubmissions.length + 1 }}" style="height: 60px;"></td></tr>
 
@@ -198,11 +198,14 @@
                 <td class="govuk-table__cell"><strong>Requested edits</strong></td>
                 {% set count = sortedSubmissions.length %}
                 {% for submission in learner.history %}
+                    {% set submissionIndex = loop.index0 %}
+                    {% set submittedDate = sortedSubmissions[submissionIndex].submittedDate %}
+
                     {% if submission and submission.evidenceOfCompletionReview and submission.evidenceOfCompletionReview.outcome == "queried" %}
                         <td class="govuk-table__cell">
                             {{ submission.evidenceOfCompletionReview.note | trunctateString }}
                             <br>
-                            <a class="govuk-link" href="/showLearnerNote?count={{count}}&submittedDate={{ submission.completionDate }}">
+                            <a class="govuk-link" href="/showLearnerNote?count={{count}}&submittedDate={{ submittedDate }}&learner={{learner.learnerID}}">
                                 … see more
                             </a>
                         </td>

@@ -243,6 +243,12 @@ addFilter('findSubmissionByDate', function (submissions, submittedDate) {
     return submission
 })
 
+addFilter('findLearnerSubmissionByDate', function (submissions, submittedDate, learner) {
+    const submission = submissions.find(s => s.submittedDate == submittedDate);
+    const foundLearner = submission.learners.find(l => l.learnerID == learner);
+    return foundLearner
+})
+
 addFilter('comparePaymentDate', function(date) {
     const paymentDate = new Date(date);
 
