@@ -6,7 +6,7 @@
 
     <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
 
-    <h2 class="govuk-heading-l" id="training">Learners</h2>
+    <h2 class="govuk-heading-l" id="training">Learners ({{sortedLearners.length}})</h2>
     <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} submissions with any learner edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
 
     <div class="govuk-form-group">
@@ -206,7 +206,7 @@
                             {{ submission.evidenceOfCompletionReview.note | trunctateString }}
                             <br>
                             <a class="govuk-link" href="/showLearnerNote?count={{count}}&submittedDate={{ submittedDate }}&learner={{learner.learnerID}}">
-                                … see more
+                                &#8230; see more
                             </a>
                         </td>
                     {% else %}
