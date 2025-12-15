@@ -245,6 +245,19 @@ return res.redirect('organisation/org-view-main#' + location)
 
 });
 
+router.get('/claim-switch', function (req, res) {
+const pairClaimID = req.session.data.pairID
+
+delete req.session.data.pairID
+delete req.session.data.claimStep
+delete req.session.data.learnerCount
+delete req.session.data.pairID
+
+req.session.data.claimScreen = "claim"
+req.session.data.id = pairClaimID
+return res.redirect('organisation/org-view-main')
+});
+
 router.get('/claim-process-start-handler', function (req, res) {
 req.session.data.orgTab = "singleClaim"
 delete req.session.data.progressSaved
