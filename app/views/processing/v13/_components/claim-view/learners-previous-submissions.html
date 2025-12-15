@@ -96,7 +96,7 @@
 
         {% for learner in sortedLearners %}
 
-            {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion) %}
+            {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status) %}
                 <!-- LEARNER NAME ROW -->
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">
@@ -118,13 +118,13 @@
                                 {% if loop.index0 == 0 and learner.status == "removed" %}
                                     <mark class="hods-highlight">(Removed)</mark>
                                 {% elif isNew %}
-                                    <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
+                                    <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark></br>{{submission.learnerID}}
                                     <p><strong>(New)</strong></p>
                                 {% else %}
                                     {% if prev and (learnerInfo.givenName != (prev.learnerID | findLearner(data.learners)).givenName or learnerInfo.familyName != (prev.learnerID | findLearner(data.learners)).familyName) %}
-                                        <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
+                                        <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark></br>{{submission.learnerID}}
                                     {% else %}
-                                        {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
+                                        {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</br>{{submission.learnerID}}
                                     {% endif %}
                                 {% endif %}
                             </td>
@@ -135,23 +135,6 @@
                             {% endif %}
                     {% endfor %}
 
-                </tr>
-            {% endif %}
-
-            {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion) %}
-                <!-- LEARNER ID ROW -->
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">
-                        <strong>NI number</strong>
-                    </td>
-
-                    {% for submission in learner.history %}
-                        {% if submission %}
-                            <td class="govuk-table__cell">{{submission.learnerID}}</td>
-                        {% else %}
-                            <td class="govuk-table__cell">---</td>
-                        {% endif %}
-                    {% endfor %}
                 </tr>
             {% endif %}
 
@@ -180,7 +163,7 @@
             {% endif  %}
 
            <!-- EVIDENCE OF COMPLETION ROW -->
-            {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionEvidence) %}
+            {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.evidenceOfCompletion) %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
 
@@ -209,7 +192,7 @@
             {% endif %}
 
             <!-- REQUESTED EDITS ROW -->
-             {% if data.view == "100" or data.view == "40"  %}
+             {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status) %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Requested edits</strong></td>
                     {% set count = sortedSubmissions.length %}

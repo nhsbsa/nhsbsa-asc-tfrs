@@ -496,8 +496,6 @@ addFilter('hasRemoved', function (learners) {
 })
 
 
-
-
 addFilter('matchSubmissionToText', function (submissions) {
     const submissionLabels = submissions.map((submission, index, array) => {
         if (!submission.submittedDate) {

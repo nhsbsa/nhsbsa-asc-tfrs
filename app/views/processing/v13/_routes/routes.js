@@ -522,8 +522,10 @@ router.get('/view-previous-submissions-handler', function (req, res) {
       foundClaim = claim
     }
   }
+  req.session.data.sort = ""
+  req.session.data.filter = ""
   req.session.data.claimScreen = "previousSubmissions"
-  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&view=' + foundClaim.claimType + '#tab-content')
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&view=' + foundClaim.claimType + "&filter=everything" + '#tab-content')
 
 });
 
