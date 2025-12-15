@@ -306,8 +306,25 @@ function computeLearnerChangeFlags(learnerHistory) {
       continue;
     }
 
-    if (l.completionDate !== baseline.completionDate) flags.completionDate = true;
-    if (l.evidenceOfCompletion !== baseline.evidenceOfCompletion) flags.evidenceOfCompletion = true;
+    if (
+      baseline.completionDate != null &&
+      l.completionDate != null &&
+      l.completionDate !== baseline.completionDate
+    ) {
+      flags.completionDate = true;
+    }
+    if (
+      baseline.evidenceOfCompletion != null &&
+      l.evidenceOfCompletion != null &&
+      l.evidenceOfCompletion !== baseline.evidenceOfCompletion
+    ) {
+      flags.evidenceOfCompletion = true;
+    }
+
+
+
+    // if (l.completionDate !== baseline.completionDate) flags.completionDate = true;
+    // if (l.evidenceOfCompletion !== baseline.evidenceOfCompletion) flags.evidenceOfCompletion = true;
   }
 
   return flags;
