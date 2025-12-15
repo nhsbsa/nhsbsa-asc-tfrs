@@ -88,124 +88,125 @@
                     </tbody>
             </table>
 
-            {% if data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true) and (data.filter == "changed" and (claimFlags.training or claimFlags.startDate or claimFlags.paymentDate or claimFlags.evidenceOfPayment))%}
+            {% if (data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan)) and (data.filter == "everything" or (data.filter == "changed" and (claimFlags.training or claimFlags.startDate or claimFlags.paymentDate or claimFlags.evidenceOfPayment)))%}
+                
                 <div style="padding-top: 20px;">
                     <h2 class="govuk-heading-m">Claim details</h2>
                 </div>
-            {% endif  %}
+                <table class="govuk-table" style="width:{{((sortedSubmissions | length) *320) + 200 }}px; table-layout:fixed; min-width:100%;">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header" style="width: 200px"><span class="govuk-visually-hidden">Submissions</span></th>
+                        {% for text in sortedSubmissions | matchSubmissionToText %}
+                            <th scope="col" class="govuk-table__header"><span class="govuk-visually-hidden">{{text}}</span></th>
+                        {%endfor %}
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
 
-            <table class="govuk-table" style="width:{{((sortedSubmissions | length) *320) + 200 }}px; table-layout:fixed; min-width:100%;">
-                <thead class="govuk-table__head">
-                    <tr class="govuk-table__row">
-                    <th scope="col" class="govuk-table__header" style="width: 200px"><span class="govuk-visually-hidden">Submissions</span></th>
-                    {% for text in sortedSubmissions | matchSubmissionToText %}
-                        <th scope="col" class="govuk-table__header"><span class="govuk-visually-hidden">{{text}}</span></th>
-                    {%endfor %}
-                    </tr>
-                </thead>
-                <tbody class="govuk-table__body">
+                    {% if (data.view == "100" or data.view == "60"or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and claimFlags.training))%}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell"><strong>Training</strong></td>
+                            {% for submission in sortedSubmissions %}
+                            {% set training = submission.trainingCode | findTraining %}
+                            {% if training %}
 
-                {% if (data.view == "100" or data.view == "60") and (data.filter == "everything" or (data.filter == "changed" and claimFlags.training))%}
-                    <tr class="govuk-table__row">
-                        <td class="govuk-table__cell"><strong>Training</strong></td>
-                        {% for submission in sortedSubmissions %}
-                        {% set training = submission.trainingCode | findTraining %}
-                        {% if training %}
+                                {% if (training.code !== sortedSubmissions[loop.index0 + 1].trainingCode and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  )%}
+                                <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{training.code}}</br>{{training.title}}</strong></mark></td>
+                                {% else %}
+                                <td class="govuk-table__cell">{{training.code}}</br>{{training.title}}</td>
+                                {% endif %}
 
-                            {% if (training.code !== sortedSubmissions[loop.index0 + 1].trainingCode and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  )%}
-                            <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{training.code}}</br>{{training.title}}</strong></mark></td>
                             {% else %}
-                            <td class="govuk-table__cell">{{training.code}}</br>{{training.title}}</td>
+                                <td class="govuk-table__cell">---</td>
                             {% endif %}
-
-                        {% else %}
-                            <td class="govuk-table__cell">---</td>
+                            {%endfor %}  
+                        </tr>
                         {% endif %}
-                        {%endfor %}  
-                    </tr>
-                    {% endif %}
 
-                {% if (data.view == "100" or data.view == "60") and (data.filter == "everything" or (data.filter == "changed" and claimFlags.startDate))%}
-                        <tr class="govuk-table__row">
-                            <td class="govuk-table__cell"><strong>Start date</strong></td>
-                            {% for submission in sortedSubmissions %}
-                                {% if submission.startDate %}
-                                    {% if (submission.startDate !== sortedSubmissions[loop.index0 + 1].startDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  )%}
-                                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.startDate | govukDate}}</strong></mark></td>
-                                    {% else %}
-                                        <td class="govuk-table__cell">{{submission.startDate | govukDate}}</td>
-                                    {% endif %}
-                                {% else %}
-                                <td class="govuk-table__cell">---</td>
-                                {% endif %}
-                            {%endfor %}
-                        </tr>
-                    {% endif  %}
-
-                    {% if ((data.view == "100" and not internalOMMTCheck) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and claimFlags.paymentDate))%}
-                        <tr class="govuk-table__row">
-                            <td class="govuk-table__cell"><strong>Payment date</strong></td>
-                            {% for submission in sortedSubmissions %}
-                                {% if submission.costDate %}
-                                    {% if (submission.costDate !== sortedSubmissions[loop.index0 + 1].costDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                                        <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.costDate | govukDate}}</strong></mark></td>
-                                    {% else %}
-                                        <td class="govuk-table__cell">{{submission.costDate | govukDate}}</td>
-                                    {% endif %}
-                                {% else %}
-                                <td class="govuk-table__cell">---</td>
-                                {% endif %}
-                            {%endfor %}
-                        </tr>
-                    {% endif %}
-
-                    {% if ((data.view == "100" and not internalOMMTCheck) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and claimFlags.evidenceOfPayment))%}
-                        <tr class="govuk-table__row">
-                            <td class="govuk-table__cell"><strong>Payment evidence</strong></td>
-                            {% for submission in sortedSubmissions %}
-                                {% if submission.evidenceOfPayment %}
-                                    <td class="govuk-table__cell">
-                                        {% set evidenceLoop = loop.index0 + 1 %}
-                                        {% if sortedSubmissions[evidenceLoop].evidenceOfPayment %}
-                                            {% set previousEvidence = sortedSubmissions[evidenceLoop].evidenceOfPayment %}
+                    {% if (data.view == "100" or data.view == "60") and (data.filter == "everything" or (data.filter == "changed" and claimFlags.startDate))%}
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell"><strong>Start date</strong></td>
+                                {% for submission in sortedSubmissions %}
+                                    {% if submission.startDate %}
+                                        {% if (submission.startDate !== sortedSubmissions[loop.index0 + 1].startDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  )%}
+                                            <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.startDate | govukDate}}</strong></mark></td>
                                         {% else %}
-                                            {% set previousEvidence = [] %}
+                                            <td class="govuk-table__cell">{{submission.startDate | govukDate}}</td>
                                         {% endif %}
-                                        {% for evidence in submission.evidenceOfPayment %}
-                                            {% if ((evidence not in previousEvidence) and (evidenceLoop) <= ((sortedSubmissions | length) - 1)  ) %}
-                                                <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">opens <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                                    {% else %}
+                                    <td class="govuk-table__cell">---</td>
+                                    {% endif %}
+                                {%endfor %}
+                            </tr>
+                        {% endif  %}
+
+                        {% if ((data.view == "100" and not internalOMMTCheck) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and claimFlags.paymentDate))%}
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell"><strong>Payment date</strong></td>
+                                {% for submission in sortedSubmissions %}
+                                    {% if submission.costDate %}
+                                        {% if (submission.costDate !== sortedSubmissions[loop.index0 + 1].costDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
+                                            <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.costDate | govukDate}}</strong></mark></td>
+                                        {% else %}
+                                            <td class="govuk-table__cell">{{submission.costDate | govukDate}}</td>
+                                        {% endif %}
+                                    {% else %}
+                                    <td class="govuk-table__cell">---</td>
+                                    {% endif %}
+                                {%endfor %}
+                            </tr>
+                        {% endif %}
+
+                        {% if ((data.view == "100" and not internalOMMTCheck) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and claimFlags.evidenceOfPayment))%}
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell"><strong>Payment evidence</strong></td>
+                                {% for submission in sortedSubmissions %}
+                                    {% if submission.evidenceOfPayment %}
+                                        <td class="govuk-table__cell">
+                                            {% set evidenceLoop = loop.index0 + 1 %}
+                                            {% if sortedSubmissions[evidenceLoop].evidenceOfPayment %}
+                                                {% set previousEvidence = sortedSubmissions[evidenceLoop].evidenceOfPayment %}
                                             {% else %}
-                                                {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">opens <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                                                {% set previousEvidence = [] %}
                                             {% endif %}
-                                        {% endfor %}
+                                            {% for evidence in submission.evidenceOfPayment %}
+                                                {% if ((evidence not in previousEvidence) and (evidenceLoop) <= ((sortedSubmissions | length) - 1)  ) %}
+                                                    <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">opens <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                                                {% else %}
+                                                    {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">opens <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                    {% else %}
+                                        <td class="govuk-table__cell">---</td>
+                                    {% endif %}
+                                {%endfor %}
+                            </tr>
+                        {% endif %}
+
+                        {% if (data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and (claimFlags.training or claimFlags.startDate or claimFlags.paymentDate or claimFlags.evidenceOfPayment))) %}
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell"><strong>Requested edits</strong></td>
+                                {% set count = sortedSubmissions.length %}
+                                {% for submission in sortedSubmissions %}
+                                {% if (submission.evidenceOfPaymentReview.outcome == "queried") and submission.submittedDate != null %}
+                                    <td class="govuk-table__cell">
+                                    {% set text = submission | formatText %}
+                                        {{text | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
                                     </td>
                                 {% else %}
                                     <td class="govuk-table__cell">---</td>
                                 {% endif %}
-                            {%endfor %}
-                        </tr>
-                    {% endif %}
+                                {% set count = count - 1 %}
+                                {%endfor %}  
+                            </tr>
+                        {% endif %}
 
-                    {% if (data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and (claimFlags.training or claimFlags.startDate or claimFlags.paymentDate or claimFlags.evidenceOfPayment))) %}
-                        <tr class="govuk-table__row">
-                            <td class="govuk-table__cell"><strong>Requested edits</strong></td>
-                            {% set count = sortedSubmissions.length %}
-                            {% for submission in sortedSubmissions %}
-                            {% if (submission.evidenceOfPaymentReview.outcome == "queried") and submission.submittedDate != null %}
-                                <td class="govuk-table__cell">
-                                {% set text = submission | formatText %}
-                                    {{text | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
-                                </td>
-                            {% else %}
-                                <td class="govuk-table__cell">---</td>
-                            {% endif %}
-                            {% set count = count - 1 %}
-                            {%endfor %}  
-                        </tr>
-                    {% endif %}
+                    </tbody>
+                </table>
 
-                </tbody>
-            </table>
+            {% endif  %}
 
             {% if (data.filter == "everything" or (data.filter == "changed" and claimFlags.learners or claimFlags.completionEvidence or claimFlags.completionDate)) %}
                 {% if sortedSubmissions | checkIfMultipleLearners %}
