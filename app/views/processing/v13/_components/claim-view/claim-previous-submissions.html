@@ -19,7 +19,7 @@
             </label>
             <select class="govuk-select" id="filterSubmissionValues" name="sort">
                 <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>Show what's changed</option>
-                <option value="everything" {% if data.filter == "everything"%}selected{% endif%}>Show everything</option>
+                <option value="everything" {% if data.filter == "everything" or data.filter == ""%}selected{% endif%}>Show everything</option>
             </select>
             <button type="submit" class="govuk-button" data-module="govuk-button">
                 Apply

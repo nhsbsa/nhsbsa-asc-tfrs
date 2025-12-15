@@ -96,7 +96,7 @@
 
         {% for learner in sortedLearners %}
 
-            {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion) %}
+            {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status) %}
                 <!-- LEARNER NAME ROW -->
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">
@@ -163,7 +163,7 @@
             {% endif  %}
 
            <!-- EVIDENCE OF COMPLETION ROW -->
-            {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionEvidence) %}
+            {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.evidenceOfCompletion) %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
 
@@ -192,7 +192,7 @@
             {% endif %}
 
             <!-- REQUESTED EDITS ROW -->
-             {% if data.view == "100" or data.view == "40"  %}
+             {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status) %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Requested edits</strong></td>
                     {% set count = sortedSubmissions.length %}
