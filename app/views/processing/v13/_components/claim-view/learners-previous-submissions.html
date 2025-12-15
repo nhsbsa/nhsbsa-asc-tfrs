@@ -194,7 +194,7 @@
             {% endif %}
 
             <!-- REQUESTED EDITS ROW -->
-             {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status) %}
+             {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status) and claim.status != "inProgress"%}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Requested edits</strong></td>
                     {% set count = sortedSubmissions.length %}
