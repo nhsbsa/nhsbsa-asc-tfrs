@@ -165,7 +165,7 @@
            <!-- EVIDENCE OF COMPLETION ROW -->
             {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.evidenceOfCompletion) %}
                 <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
+                    <td class="govuk-table__cell"><strong>Completion evidence</strong></td>
 
                     {% for submission in learner.history %}
                         {% set prev = learner.history[loop.index0 + 1] %}
