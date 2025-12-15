@@ -226,15 +226,6 @@
             }
           },
           {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": "2025-03-25T03:16:00.448Z",
-            "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -1121,15 +1112,6 @@
             }
           },
           {
-            "learnerID": "LE 09 5F 94 M",
-            "completionDate": "2024-12-18T21:33:21.901Z",
-            "evidenceOfCompletion": "certificate2.pdf",
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate3.pdf",
@@ -1181,7 +1163,7 @@
         "learners": [
           {
             "learnerID": "ZX 51 96 87 D",
-            "completionDate": "2024-12-12T21:33:21.901Z",
+            "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate11.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
@@ -1243,7 +1225,7 @@
             }
           }
         ],
-        "sharedCompletionDate": false
+        "sharedCompletionDate": true
       }
     ]
   },
@@ -3346,15 +3328,6 @@
             }
           },
           {
-            "learnerID": "LE 09 5F 94 M",
-            "completionDate": "2024-11-08T11:52:30.850Z",
-            "evidenceOfCompletion": "certificate-BS.png",
-            "evidenceOfCompletionReview": {
-              "outcome": "queried",
-              "note": "The certificate doesn't match the completion date. Please enter the correct completion date."
-            }
-          },
-          {
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-JS.png",
@@ -3463,15 +3436,6 @@
           {
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2024-11-22T11:52:30.850Z",
-            "evidenceOfCompletion": "certificate-BS.png",
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": "2024-10-21T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
             "evidenceOfCompletionReview": {
               "outcome": null,

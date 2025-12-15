@@ -288,6 +288,28 @@ function buildLearnerComparison(submissions) {
 }
 
 
+// function getCompletionDateRange(submission) {
+//   if (!submission.learners || submission.learners.length === 0) {
+//     return null;
+//   }
+
+//   const dates = submission.learners
+//     .map(l => l.completionDate)
+//     .filter(Boolean)               // remove nulls
+//     .map(d => new Date(d));
+
+//   if (dates.length === 0) return null;
+
+//   const min = new Date(Math.min(...dates));
+//   const max = new Date(Math.max(...dates));
+
+//   return {
+//     start: min,
+//     end: max,
+//     isRange: min.getTime() !== max.getTime()
+//   };
+// }
+
 function checkClaimProcess(claim, section, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paidInFullResponse) {
 
     let errorParamaters = ""
