@@ -9,7 +9,7 @@
     <h2 class="govuk-heading-l" id="training">Learners ({{sortedLearners.length}})</h2>
     <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} submissions with any learner edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
 
-    {# <form action="/applySubmissionsFilter" method="post" novalidate>
+    <form action="/applySubmissionsFilter" method="post" novalidate>
         <div class="govuk-form-group">
             <label class="govuk-label" for="sort">
                 Show
@@ -22,7 +22,7 @@
                 Apply
             </button>
         </div>
-    </form> #}
+    </form>
 </div>
 
 <div class="govuk-grid-row">
@@ -118,13 +118,13 @@
                                 {% if loop.index0 == 0 and learner.status == "removed" %}
                                     <mark class="hods-highlight">(Removed)</mark>
                                 {% elif isNew %}
-                                    <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
+                                    <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark></br>{{submission.learnerID}}
                                     <p><strong>(New)</strong></p>
                                 {% else %}
                                     {% if prev and (learnerInfo.givenName != (prev.learnerID | findLearner(data.learners)).givenName or learnerInfo.familyName != (prev.learnerID | findLearner(data.learners)).familyName) %}
-                                        <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
+                                        <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark></br>{{submission.learnerID}}
                                     {% else %}
-                                        {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
+                                        {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</br>{{submission.learnerID}}
                                     {% endif %}
                                 {% endif %}
                             </td>
@@ -135,23 +135,6 @@
                             {% endif %}
                     {% endfor %}
 
-                </tr>
-            {% endif %}
-
-            {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion) %}
-                <!-- LEARNER ID ROW -->
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">
-                        <strong>NI number</strong>
-                    </td>
-
-                    {% for submission in learner.history %}
-                        {% if submission %}
-                            <td class="govuk-table__cell">{{submission.learnerID}}</td>
-                        {% else %}
-                            <td class="govuk-table__cell">---</td>
-                        {% endif %}
-                    {% endfor %}
                 </tr>
             {% endif %}
 

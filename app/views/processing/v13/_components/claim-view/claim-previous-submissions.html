@@ -323,28 +323,9 @@
                                         {% if submission.learners %}
                                             {% set learnerInfo = submission.learners[0].learnerID | findLearner(data.learners) %}
                                             {% if (submission.learners.length !== sortedSubmissions[loop.index0 + 1].learners.length and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                                                <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{learnerInfo.givenName}} {{learnerInfo.familyName}}</strong></mark></td>
+                                                <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{learnerInfo.givenName}} {{learnerInfo.familyName}}</br>{{submission.learners[0].learnerID}}</strong></mark></td>
                                             {% else %}
-                                                <td class="govuk-table__cell">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</td>
-                                            {% endif %}
-                                        {% else %}
-                                            <td class="govuk-table__cell">---</td>
-                                        {% endif %}
-                                    {%endfor %}   
-                                </tr>
-                            {% endif %}
-
-                            {% if (data.filter == "everything" or (data.filter == "changed" and claimFlags.learners))%}
-                                <tr class="govuk-table__row">
-                                    <td class="govuk-table__cell">
-                                        <strong>NI number</strong>
-                                    </td>
-                                    {% for submission in sortedSubmissions %}
-                                        {% if submission.learners %}
-                                            {% if (submission.learners.length !== sortedSubmissions[loop.index0 + 1].learners.length and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                                                <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.learners[0].learnerID}}</strong></mark></td>
-                                            {% else %}
-                                                <td class="govuk-table__cell">{{submission.learners[0].learnerID}}</td>
+                                                <td class="govuk-table__cell">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</br>{{submission.learners[0].learnerID}}</td>
                                             {% endif %}
                                         {% else %}
                                             <td class="govuk-table__cell">---</td>
