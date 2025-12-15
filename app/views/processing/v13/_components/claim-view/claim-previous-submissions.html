@@ -173,9 +173,9 @@
                                         {% endif %}
                                         {% for evidence in submission.evidenceOfPayment %}
                                             {% if ((evidence not in previousEvidence) and (evidenceLoop) <= ((sortedSubmissions | length) - 1)  ) %}
-                                                <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                                                <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">opens <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
                                             {% else %}
-                                                {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                                                {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">opens <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
                                             {% endif %}
                                         {% endfor %}
                                     </td>
@@ -357,9 +357,9 @@
                                     {% for submission in sortedSubmissions %}
                                         {% if submission.learners %}
                                             {% if (submission.learners.length !== sortedSubmissions[loop.index0 + 1].learners.length and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
-                                                <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.learners[0].evidenceOfCompletion}} (<a class="govuk-link" href="/public/images/{{submission.learners[0].evidenceOfCompletion}}" target="_blank">open <span class="govuk-visually-hidden">{{submission.learners[0].evidenceOfCompletion}} </span>in new tab</a>)</br></strong></mark> </br> 2 changes</td>
+                                                <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.learners[0].evidenceOfCompletion}} (<a class="govuk-link" href="/public/images/{{submission.learners[0].evidenceOfCompletion}}" target="_blank">opens <span class="govuk-visually-hidden">{{submission.learners[0].evidenceOfCompletion}} </span>in new tab</a>)</br></strong></mark> </br> 2 changes</td>
                                             {% else %}
-                                                <td class="govuk-table__cell">{{submission.learners[0].evidenceOfCompletion}} (<a class="govuk-link" href="/public/images/{{submission.learners[0].evidenceOfCompletion}}" target="_blank">open <span class="govuk-visually-hidden">{{submission.learners[0].evidenceOfCompletion}} </span>in new tab</a>)</br></td>
+                                                <td class="govuk-table__cell">{{submission.learners[0].evidenceOfCompletion}} (<a class="govuk-link" href="/public/images/{{submission.learners[0].evidenceOfCompletion}}" target="_blank">opens <span class="govuk-visually-hidden">{{submission.learners[0].evidenceOfCompletion}} </span>in new tab</a>)</br></td>
                                             {% endif %}
                                         {% else %}
                                             <td class="govuk-table__cell">---</td>
