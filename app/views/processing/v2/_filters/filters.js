@@ -5,7 +5,6 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { renderString } = require('nunjucks')
 const { formatDate } = require('../_helpers/helpers.js');
 const fs = require('fs');
 
