@@ -6,7 +6,7 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { renderString } = require('nunjucks')
-const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone } = require('../_helpers/helpers.js');
+const { formatDate, isFullClaimCheck, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, buildLearnerComparison } = require('../_helpers/helpers.js');
 const fs = require('fs');
 const dataPath = 'app/views/processing/v13/_data/'
 
@@ -243,6 +243,12 @@ addFilter('findSubmissionByDate', function (submissions, submittedDate) {
     return submission
 })
 
+addFilter('findLearnerSubmissionByDate', function (submissions, submittedDate, learner) {
+    const submission = submissions.find(s => s.submittedDate == submittedDate);
+    const foundLearner = submission.learners.find(l => l.learnerID == learner);
+    return foundLearner
+})
+
 addFilter('comparePaymentDate', function(date) {
     const paymentDate = new Date(date);
 
@@ -259,6 +265,239 @@ addFilter('sortSubmissionsForTable', function (submissions) {
     let sorted = sortSubmissionsForTable(submissions)
     return sorted
 })
+
+addFilter('sortLearnersForTable', function (submissions) {
+    let sorted = sortSubmissionsForTable(submissions)
+    let newLearnerArray = buildLearnerComparison(sorted)
+    return newLearnerArray
+})
+
+addFilter('checkIfMultipleLearners', function (submissions) {
+    let moreThanOne = false
+        for (let sub of submissions) {
+            if (sub.learners.length > 1) {
+                moreThanOne = true
+            }
+        }
+    return moreThanOne
+})
+
+addFilter('getFirstDate', function (learners) {
+  if (!learners || learners.length === 0) return null;
+
+  const dates = learners
+    .map(l => l.completionDate)
+    .filter(Boolean);
+
+  if (dates.length === 0) return null;
+  dates.sort((a, b) => new Date(a) - new Date(b));
+  return dates[0]
+})
+
+addFilter('getLastDate', function (learners) {
+  if (!learners || learners.length === 0) return null;
+
+  const dates = learners
+    .map(l => l.completionDate)
+    .filter(Boolean);
+
+  if (dates.length === 0) return null;
+  dates.sort((a, b) => new Date(a) - new Date(b));
+  return dates[dates.length - 1]
+})
+
+addFilter('learnerCountChanges', function (currentSubmission, previousSubmission) {
+    let learnerChangeCount = 0
+    if (!currentSubmission.learners || !previousSubmission?.learners) {
+        learnerChangeCount = 0
+        return
+    }
+    const currentIds = currentSubmission.learners.map(l => l.learnerID)
+    const nextIds = previousSubmission.learners.map(l => l.learnerID)
+
+    const removed = currentIds.filter(id => !nextIds.includes(id))
+    const added = nextIds.filter(id => !currentIds.includes(id))
+
+    learnerChangeCount = removed.length + added.length
+    return learnerChangeCount
+})
+
+addFilter('completionDateCountChanges', function (currentSubmission, previousSubmission) {
+    if (!currentSubmission?.learners || !previousSubmission?.learners) {
+        return 0
+    }
+    // Map learnerID → completionDate for previous submission
+    const previousMap = new Map(
+        previousSubmission.learners.map(l => [
+        l.learnerID,
+        l.completionDate
+        ])
+    )
+  let changeCount = 0
+  for (const learner of currentSubmission.learners) {
+    const previousDate = previousMap.get(learner.learnerID)
+    // Only count if learner existed before
+    if (!previousDate) continue
+    if (learner.completionDate !== previousDate) {
+      changeCount++
+    }
+  }
+  return changeCount
+})
+
+addFilter('completionEvidenceCountChanges', function (currentSubmission, previousSubmission) {
+    let changeCount = 0
+
+    if (!currentSubmission.learners || !previousSubmission?.learners) {
+        return 0
+    }
+
+    const currentLearners = currentSubmission.learners
+    const previousLearners = previousSubmission.learners
+
+    const currentIds = currentLearners.map(l => l.learnerID)
+    const previousIds = previousLearners.map(l => l.learnerID)
+
+    // learnerID → evidenceOfCompletion (previous submission)
+    const previousEvidenceMap = new Map(
+        previousLearners.map(l => [
+            l.learnerID,
+            l.evidenceOfCompletion
+        ])
+    )
+
+    // Evidence removed (learner removed)
+    previousIds.forEach(id => {
+        if (!currentIds.includes(id)) {
+            changeCount++
+        }
+    })
+
+    // Evidence added (learner added)
+    currentIds.forEach(id => {
+        if (!previousIds.includes(id)) {
+            changeCount++
+        }
+    })
+
+    //  Evidence changed (same learner, different file)
+    currentLearners.forEach(learner => {
+        if (!previousEvidenceMap.has(learner.learnerID)) return
+
+        const previousEvidence = previousEvidenceMap.get(learner.learnerID)
+
+        if (learner.evidenceOfCompletion !== previousEvidence) {
+            changeCount++
+        }
+    })
+
+    return changeCount
+})
+
+addFilter('checkWhatHasChanged', function (submissions) {
+
+  if (submissions.length <= 1) {
+    // Only one submission → nothing has changed
+    return {
+      training: false,
+      startDate: false,
+      paymentDate: false,
+      evidenceOfPayment: false,
+      learners: false,
+      completionDate: false,
+      completionEvidence: false
+    }
+  }
+
+  // Start with the first submission as “baseline”
+  const baseline = submissions[0]
+
+  const flags = {
+    training: false,
+    startDate: false,
+    paymentDate: false,
+    evidenceOfPayment: false,
+    learners: false,
+    completionDate: false,
+    completionEvidence: false
+  }
+
+  for (let i = 1; i < submissions.length; i++) {
+    const current = submissions[i]
+
+    // Training
+    if (current.trainingCode !== baseline.trainingCode) flags.training = true
+
+    // Start date
+    if (current.startDate !== baseline.startDate) flags.startDate = true
+
+    // Payment date
+    if (current.costDate !== baseline.costDate) flags.paymentDate = true
+
+    // Evidence of payment
+    const currEOP = current.evidenceOfPayment || []
+    const baseEOP = baseline.evidenceOfPayment || []
+    if (
+      currEOP.length !== baseEOP.length ||
+      currEOP.some(f => !baseEOP.includes(f))
+    )
+      flags.evidenceOfPayment = true
+
+    // Learners added/removed
+    const currLearners = current.learners || []
+    const baseLearners = baseline.learners || []
+    const currIds = currLearners.map(l => l.learnerID)
+    const baseIds = baseLearners.map(l => l.learnerID)
+
+    if (
+      currIds.some(id => !baseIds.includes(id)) ||
+      baseIds.some(id => !currIds.includes(id))
+    )
+      flags.learners = true
+
+    // Completion date
+    const baseDateMap = new Map(baseLearners.map(l => [l.learnerID, l.completionDate]))
+    if (
+      flags.learners ||
+      currLearners.some(
+        l => baseDateMap.has(l.learnerID) && l.completionDate !== baseDateMap.get(l.learnerID)
+      )
+    )
+      flags.completionDate = true
+
+    // Completion evidence
+    const baseEvidenceMap = new Map(
+      baseLearners.map(l => [l.learnerID, l.evidenceOfCompletion])
+    )
+    if (
+      flags.learners ||
+      currLearners.some(
+        l =>
+          baseEvidenceMap.has(l.learnerID) &&
+          l.evidenceOfCompletion !== baseEvidenceMap.get(l.learnerID)
+      )
+    )
+      flags.completionEvidence = true
+  }
+
+  return flags
+})
+
+
+addFilter('hasRemoved', function (learners) {
+    let hasRemoved = false
+
+    for (const l of learners) {
+        if (l.status == "removed") {
+            hasRemoved = true
+        }
+
+    }
+    return hasRemoved
+})
+
+
+
 
 addFilter('matchSubmissionToText', function (submissions) {
     const submissionLabels = submissions.map((submission, index, array) => {
@@ -277,8 +516,6 @@ addFilter('matchSubmissionToText', function (submissions) {
         }
       });
       return submissionLabels
-    // let text = ["First submission", "Second submission", "Third submission", "Fourth submission", "Fifth submission"]
-    // return text[count]
 })
 
 addFilter('formatText', function (submission) {

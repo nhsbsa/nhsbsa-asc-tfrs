@@ -9,11 +9,8 @@
           {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
             <p class="govuk-body"><strong>Payment evidence:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
           {% endif %}
-          {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Completion evidence:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
-          {% endif %}
 
-        <a href="/hideEditedNote" class="govuk-link govuk-button">Close</a>
+        <a href="/hidePaymentNote" class="govuk-link govuk-button">Close</a>
     </div>
   </div>
 

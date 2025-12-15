@@ -225,6 +225,96 @@ function sortSubmissionsForTable(submissions) {
     });
 }
 
+function buildLearnerComparison(submissions) {
+
+  const fileLearners = loadJSONFromFile('learners.json', dataPath);
+  const learnerMap = new Map(
+    fileLearners.map(l => [l.id, l])
+  );
+
+  // submissions is already sorted: [latest, older, ..., oldest]
+  const latest = submissions[0];
+
+  // 1. Learners in the latest submission
+  const latestLearnerIDs = new Set(latest.learners.map(l => l.learnerID));
+
+  // 2. Build map of all learners seen across any submission
+  const allLearners = new Map();
+
+  submissions.forEach((submission, submissionIndex) => {
+    submission.learners.forEach(learner => {
+      if (!allLearners.has(learner.learnerID)) {
+        allLearners.set(learner.learnerID, {
+          learnerID: learner.learnerID,
+          history: Array(submissions.length).fill(null) // one "slot" per submission
+        });
+      }
+
+      // Fill correct submission column (0 = latest)
+      const entry = allLearners.get(learner.learnerID);
+      entry.history[submissionIndex] = learner;
+    });
+  });
+
+  // 3. Split into active and removed
+  const active = [];
+  const removed = [];
+
+  for (const [id, data] of allLearners.entries()) {
+    const info = learnerMap.get(id) || {}; // lookup: {givenName, familyName}
+
+    const record = {
+      learnerID: id,
+      status: latestLearnerIDs.has(id) ? "active" : "removed",
+      history: data.history,
+      givenName: info.givenName || "",
+      familyName: info.familyName || "",
+      changeFlags: computeLearnerChangeFlags(data.history)
+    };
+
+    if (record.status === "active") active.push(record);
+    else removed.push(record);
+  }
+
+  // 4. Sort alphabetically by learnerID (or name if you add it later)
+  const sortByName = (a, b) =>
+    a.givenName.localeCompare(b.givenName) ||
+    a.familyName.localeCompare(b.familyName) ||
+    a.learnerID.localeCompare(b.learnerID);
+
+  active.sort(sortByName);
+  removed.sort(sortByName);
+
+  return [...active, ...removed];
+}
+
+function computeLearnerChangeFlags(learnerHistory) {
+  // learnerHistory: array of learner objects per submission, null if missing
+  const flags = {
+    completionDate: false,
+    evidenceOfCompletion: false,
+    status: false // active vs removed
+  };
+
+  const baseline = learnerHistory[learnerHistory.findIndex(l => l)]; // first non-null submission
+
+  if (!baseline) return flags; // all null?
+
+  for (const l of learnerHistory) {
+    if (!l) {
+      flags.status = true; // learner missing in this submission
+      continue;
+    }
+
+    if (l.completionDate !== baseline.completionDate) flags.completionDate = true;
+    if (l.evidenceOfCompletion !== baseline.evidenceOfCompletion) flags.evidenceOfCompletion = true;
+  }
+
+  return flags;
+}
+
+
+
 function checkClaimProcess(claim, section, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paidInFullResponse) {
 
     let errorParamaters = ""
@@ -398,4 +488,4 @@ function checkDone(review, type, claimType) {
     return result
 }
 
-module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState }
+module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildLearnerComparison }
