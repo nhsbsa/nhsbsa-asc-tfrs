@@ -4694,5 +4694,689 @@
         "sharedCompletionDate": false
       }
     ]
+  },
+  {
+    "claimID": "HJF-TGD3-HFKI-B",
+    "workplaceID": "B02944934",
+    "claimType": "60",
+    "isPaymentPlan": false,
+    "status": "approved",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "501/1654/X",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-12-16T03:36:53.621Z",
+        "evidenceOfPayment": [
+          "bankstatement-212.pdf",
+          "invoice-212.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "no",
+          "costPerLearner": 400
+        },
+        "processedDate": "2025-03-16T03:36:53.621Z",
+        "processedBy": "Allan Connelly",
+        "learners": [
+          {
+            "learnerID": "QX 32 6F 41 Q",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": { "outcome": null, "note": null }
+          }
+        ],
+        "sharedCompletionDate": false
+      }
+    ]
+  },
+  {
+    "claimID": "HJF-TGD3-HFKI-C",
+    "workplaceID": "B02944934",
+    "claimType": "40",
+    "isPaymentPlan": false,
+    "status": "submitted",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-05-20T03:36:53.621Z",
+        "trainingCode": "501/1654/X",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-12-16T03:36:53.621Z",
+        "evidenceOfPayment": [
+          "bankstatement-212.pdf",
+          "invoice-212.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "no",
+          "costPerLearner": 400
+        },
+        "processedDate": null,
+        "processedBy": null,
+        "learners": [
+          {
+            "learnerID": "QX 32 6F 41 Q",
+            "completionDate": "2025-04-01T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": null, "note": null }
+          }
+        ],
+        "sharedCompletionDate": false
+      }
+    ]
+  },
+  {
+    "claimID": "IKT-HFKD-13KD-A",
+    "workplaceID": "B02944934",
+    "claimType": "100",
+    "isPaymentPlan": false,
+    "status": "inProgress",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-11-12T03:36:53.621Z",
+        "trainingCode": "501/1654/X",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-12-17T03:36:53.621Z",
+        "evidenceOfPayment": [
+          "bankstatement-212.pdf",
+          "invoice-212.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "no",
+          "costPerLearner": 400
+        },
+        "processedDate": null,
+        "processedBy": null,
+        "learners": [
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date on the certificate of completion does not match the claim details.  Please provide a certificate that includes the correct completion date or correct the completion date in the claim details."
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "FB 88 2F 39 Z",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date on the certificate of completion does not match the claim details.  Please provide a certificate that includes the correct completion date or correct the completion date in the claim details."
+            }
+          },
+          {
+            "learnerID": "XY 32 8F 00 J",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "AJ 54 4F 01 I",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "UH 04 6F 47 V",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "UP 28 8F 89 E",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date on the certificate of completion does not match the claim details.  Please provide a certificate that includes the correct completion date or correct the completion date in the claim details."
+            }
+          },
+          {
+            "learnerID": "WV 15 0F 13 V",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "FI 50 5F 30 D",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "NR 91 7F 72 O",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date on the certificate of completion does not match the claim details.  Please provide a certificate that includes the correct completion date or correct the completion date in the claim details."
+            }
+          },
+          {
+            "learnerID": "QB 54 8F 21 X",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "CL 74 2F 71 G",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "PX 89 8F 98 Q",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "BU 26 7F 00 Y",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": null, "note": null }
+          },
+          {
+            "learnerID": "IS 52 7F 57 C",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "WU 23 0F 97 M",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": null, "note": null }
+          }
+        ],
+        "sharedCompletionDate": false
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-10-13T03:36:53.621Z",
+        "trainingCode": "501/1654/X",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-12-16T03:36:53.621Z",
+        "evidenceOfPayment": [
+          "bankstatement-313.pdf",
+          "invoice-313.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The payment date on the payment evidence provided does not match the payment date in the claim. Please change the payment date in the claim details or provide evidence showing the correct payment date, ",
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "processedDate": "2025-10-15T03:36:53.621Z",
+        "processedBy": "Allan Connelly",
+        "learners": [
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-414.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The learner's name on the certificate of completion does not match the claims details. Please provide the correct certificate or change the learner in the claim details."
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "FB 88 2F 39 Z",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-414.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The learner's name on the certificate of completion does not match the claims details. Please provide the correct certificate or change the learner in the claim details."
+            }
+          },
+          {
+            "learnerID": "XY 32 8F 00 J",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "AJ 54 4F 01 I",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "UH 04 6F 47 V",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "UP 28 8F 89 E",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-414.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The learner's name on the certificate of completion does not match the claims details. Please provide the correct certificate or change the learner in the claim details."
+            }
+          },
+          {
+            "learnerID": "WV 15 0F 13 V",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "FI 50 5F 30 D",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "NR 91 7F 72 O",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-414.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The learner's name on the certificate of completion does not match the claims details. Please provide the correct certificate or change the learner in the claim details."
+            }
+          },
+          {
+            "learnerID": "QB 54 8F 21 X",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "CL 74 2F 71 G",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "PX 89 8F 98 Q",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "BU 26 7F 00 Y",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          },
+          {
+            "learnerID": "IS 52 7F 57 C",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-414.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The learner's name on the certificate of completion does not match the claims details. Please provide the correct certificate or change the learner in the claim details."
+            }
+          },
+          {
+            "learnerID": "WU 23 0F 97 M",
+            "completionDate": "2025-09-30T03:36:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
+          }
+        ],
+        "sharedCompletionDate": false
+      }
+    ]
+  },
+  {
+    "claimID": "POD-GD45-JD23-B",
+    "workplaceID": "B02944934",
+    "claimType": "60",
+    "isPaymentPlan": false,
+    "status": "approved",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-03-13T03:36:53.621Z",
+        "trainingCode": "501/1654/X",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-12-16T03:36:53.621Z",
+        "evidenceOfPayment": [
+          "bankstatement-212.pdf",
+          "invoice-212.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "no",
+          "costPerLearner": 400
+        },
+        "processedDate": "2025-03-16T03:36:53.621Z",
+        "processedBy": "Allan Connelly",
+        "learners": [
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "FB 88 2F 39 Z",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }
+        ],
+        "sharedCompletionDate": false
+      }
+    ]
+  },
+  {
+    "claimID": "POD-GD45-JD23-C",
+    "workplaceID": "B02944934",
+    "claimType": "40",
+    "isPaymentPlan": false,
+    "status": "submitted",
+    "createdDate": "2025-02-11T03:36:53.621Z",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "submissions": [
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-11-25T03:36:53.621Z",
+        "trainingCode": "501/1654/X",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-12-16T03:36:53.621Z",
+        "evidenceOfPayment": [
+          "bankstatement-212.pdf",
+          "invoice-212.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "no",
+          "costPerLearner": 400
+        },
+        "processedDate": null,
+        "processedBy": null,
+        "learners": [
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-10-10T08:21:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-10-02T12:45:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-10-20T09:55:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }
+        ],
+        "sharedCompletionDate": false
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-11-20T03:36:53.621Z",
+        "trainingCode": "501/1654/X",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-12-16T03:36:53.621Z",
+        "evidenceOfPayment": [
+          "bankstatement-212.pdf",
+          "invoice-212.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "no",
+          "costPerLearner": 400
+        },
+        "processedDate": "2025-11-23T03:36:53.621Z",
+        "processedBy": "Allan Connelly",
+        "learners": [
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-10-10T08:21:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-10-02T12:45:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2025-10-15T14:30:53.621Z",
+            "evidenceOfCompletion": "certificate-414.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date on the certificate of completion does not match the claim details.  Please provide a certificate that includes the correct completion date or correct the completion date in the claim details."
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-10-20T09:55:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          }
+        ],
+        "sharedCompletionDate": false
+      },
+      {
+        "submitter": "jasper.holloway@evergreencare.com",
+        "submittedDate": "2025-11-15T03:36:53.621Z",
+        "trainingCode": "501/1654/X",
+        "startDate": "2024-12-17T03:36:53.621Z",
+        "costDate": "2024-12-16T03:36:53.621Z",
+        "evidenceOfPayment": [
+          "bankstatement-212.pdf",
+          "invoice-212.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "no",
+          "costPerLearner": 400
+        },
+        "processedDate": "2025-11-17T03:36:53.621Z",
+        "processedBy": "Allan Connelly",
+        "learners": [
+          {
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-10-10T08:21:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-10-02T12:45:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2025-10-15T14:30:53.621Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The learner's name on the certificate of completion does not match the claims details. Please provide the correct certificate or change the learner in the claim details."
+            }
+          },
+          {
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2025-09-30T16:10:53.621Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The learner's name on the certificate of completion does not match the claims details. Please provide the correct certificate or change the learner in the claim details."
+            }
+          },
+          {
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-10-20T09:55:53.621Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          }
+        ],
+        "sharedCompletionDate": false
+      }
+    ]
   }
 ]
