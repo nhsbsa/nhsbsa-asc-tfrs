@@ -13,7 +13,7 @@
         <form action="/applySubmissionsFilter" method="post" novalidate>
             <div class="govuk-form-group">
                 <label class="govuk-label" for="sort">
-                    Show
+                    {# Show #}
                 </label>
                 <select class="govuk-select" id="filterSubmissionValues" name="sort">
                     <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>View edits only</option>
@@ -216,10 +216,14 @@
                         {% set count = count - 1 %}
                     {% endfor %}
                 </tr>
+
             {% endif %}
 
-            <!-- spacer between learners -->
-            <tr><td colspan="{{ sortedSubmissions.length + 1 }}" style="height: 60px;"></td></tr>
+            {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status) %}
+                <!-- spacer between learners -->
+                <tr><td colspan="{{ sortedSubmissions.length + 1 }}" style="height: 60px;"></td></tr>
+            {% endif %}
+
 
         {% endfor %}
     </tbody>
