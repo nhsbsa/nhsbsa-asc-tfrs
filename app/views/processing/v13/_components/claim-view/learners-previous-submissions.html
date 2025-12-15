@@ -9,7 +9,7 @@
     <h2 class="govuk-heading-l" id="training">Learners ({{sortedLearners.length}})</h2>
     <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} submissions with any learner edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
 
-    <form action="/applySubmissionsFilter" method="post" novalidate>
+    {# <form action="/applySubmissionsFilter" method="post" novalidate>
         <div class="govuk-form-group">
             <label class="govuk-label" for="sort">
                 Show
@@ -22,20 +22,23 @@
                 Apply
             </button>
         </div>
-    </form>
+    </form> #}
 </div>
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
         <ul class="govuk-list">
             {% for learner in sortedLearners %}
+              {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status) %}
                 {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
                 {% if learner.status == "active"%}
                     <li>
                         <a class="govuk-link learner-jump-link" href="#{{learnerInfo.givenName}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
                     </li>
                 {% endif %}
+            {% endif %}
             {% endfor %}
+
             {% if sortedLearners | hasRemoved %}
                 <h2 class="govuk-heading-s" style="padding-top: 20px;">Removed</h2>
             {% endif %}
@@ -93,66 +96,67 @@
 
         {% for learner in sortedLearners %}
 
-            <!-- LEARNER NAME ROW -->
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">
-                    <strong>Learner {{ loop.index }}</strong>
-                </td>
-
-            {% for submission in learner.history %}
-                {% set prev = learner.history[loop.index0 + 1] %} {# previous submission (older) #}
-                
-                {% if submission %}
-                    {% set learnerInfo = submission.learnerID | findLearner(data.learners) %}
-                    {% set isNew = false %}
-
-                    {# Determine if learner is new: exists now, but not in previous submission, and not the oldest submission #}
-                    {% if loop.index0 != (learner.history | length) - 1 and not prev %}
-                        {% set isNew = true %}
-                    {% endif %}
-
+            {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion) %}
+                <!-- LEARNER NAME ROW -->
+                <tr class="govuk-table__row">
                     <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">
-                        {% if loop.index0 == 0 and learner.status == "removed" %}
-                             <mark class="hods-highlight">(Removed)</mark>
-                        {% elif isNew %}
-                            <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
-                            <p><strong>(New)</strong></p>
-                        {% else %}
-                            {% if prev and (learnerInfo.givenName != (prev.learnerID | findLearner(data.learners)).givenName or learnerInfo.familyName != (prev.learnerID | findLearner(data.learners)).familyName) %}
-                                <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
-                            {% else %}
-                                {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
-                            {% endif %}
-                        {% endif %}
+                        <strong>Learner {{ loop.index }}</strong>
                     </td>
-                    {% elif loop.index != 1 %}
-                        <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">---</td>
-                    {% else %}
-                        <td class="govuk-table__cell" id="{{learnerInfo.givenName}}"><mark class="hods-highlight"><strong>(Removed)</strong></mark></td>
-                    {% endif %}
-            {% endfor %}
+                    {% for submission in learner.history %}
+                        {% set prev = learner.history[loop.index0 + 1] %} {# previous submission (older) #}
+                        
+                        {% if submission %}
+                            {% set learnerInfo = submission.learnerID | findLearner(data.learners) %}
+                            {% set isNew = false %}
 
-            </tr>
+                            {# Determine if learner is new: exists now, but not in previous submission, and not the oldest submission #}
+                            {% if loop.index0 != (learner.history | length) - 1 and not prev %}
+                                {% set isNew = true %}
+                            {% endif %}
 
+                            <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">
+                                {% if loop.index0 == 0 and learner.status == "removed" %}
+                                    <mark class="hods-highlight">(Removed)</mark>
+                                {% elif isNew %}
+                                    <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
+                                    <p><strong>(New)</strong></p>
+                                {% else %}
+                                    {% if prev and (learnerInfo.givenName != (prev.learnerID | findLearner(data.learners)).givenName or learnerInfo.familyName != (prev.learnerID | findLearner(data.learners)).familyName) %}
+                                        <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
+                                    {% else %}
+                                        {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                            {% elif loop.index != 1 %}
+                                <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">---</td>
+                            {% else %}
+                                <td class="govuk-table__cell" id="{{learnerInfo.givenName}}"><mark class="hods-highlight"><strong>(Removed)</strong></mark></td>
+                            {% endif %}
+                    {% endfor %}
 
+                </tr>
+            {% endif %}
 
-            <!-- LEARNER ID ROW -->
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell">
-                    <strong>NI number</strong>
-                </td>
+            {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion) %}
+                <!-- LEARNER ID ROW -->
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">
+                        <strong>NI number</strong>
+                    </td>
 
-                {% for submission in learner.history %}
-                    {% if submission %}
-                        <td class="govuk-table__cell">{{submission.learnerID}}</td>
-                    {% else %}
-                        <td class="govuk-table__cell">---</td>
-                    {% endif %}
-                {% endfor %}
-            </tr>
+                    {% for submission in learner.history %}
+                        {% if submission %}
+                            <td class="govuk-table__cell">{{submission.learnerID}}</td>
+                        {% else %}
+                            <td class="govuk-table__cell">---</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endif %}
 
             <!-- COMPLETION DATE ROW -->
-            {% if data.view == "100" or data.view == "40"  %}
+            {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate) %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Completion date</strong></td>
                     {% for submission in learner.history %}
@@ -176,7 +180,7 @@
             {% endif  %}
 
            <!-- EVIDENCE OF COMPLETION ROW -->
-            {% if data.view == "100" or data.view == "40"  %}
+            {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionEvidence) %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
 

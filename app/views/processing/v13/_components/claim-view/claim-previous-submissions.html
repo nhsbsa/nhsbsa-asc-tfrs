@@ -88,8 +88,6 @@
                     </tbody>
             </table>
 
-            <h2 class="govuk-heading-m">{{data.filter}}</h2>
-
             {% if data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true) and (data.filter == "changed" and (claimFlags.training or claimFlags.startDate or claimFlags.paymentDate or claimFlags.evidenceOfPayment))%}
                 <div style="padding-top: 20px;">
                     <h2 class="govuk-heading-m">Claim details</h2>

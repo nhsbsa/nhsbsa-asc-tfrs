@@ -268,7 +268,8 @@ function buildLearnerComparison(submissions) {
       status: latestLearnerIDs.has(id) ? "active" : "removed",
       history: data.history,
       givenName: info.givenName || "",
-      familyName: info.familyName || ""
+      familyName: info.familyName || "",
+      changeFlags: computeLearnerChangeFlags(data.history)
     };
 
     if (record.status === "active") active.push(record);
@@ -287,28 +288,32 @@ function buildLearnerComparison(submissions) {
   return [...active, ...removed];
 }
 
+function computeLearnerChangeFlags(learnerHistory) {
+  // learnerHistory: array of learner objects per submission, null if missing
+  const flags = {
+    completionDate: false,
+    evidenceOfCompletion: false,
+    status: false // active vs removed
+  };
 
-// function getCompletionDateRange(submission) {
-//   if (!submission.learners || submission.learners.length === 0) {
-//     return null;
-//   }
+  const baseline = learnerHistory[learnerHistory.findIndex(l => l)]; // first non-null submission
 
-//   const dates = submission.learners
-//     .map(l => l.completionDate)
-//     .filter(Boolean)               // remove nulls
-//     .map(d => new Date(d));
+  if (!baseline) return flags; // all null?
 
-//   if (dates.length === 0) return null;
+  for (const l of learnerHistory) {
+    if (!l) {
+      flags.status = true; // learner missing in this submission
+      continue;
+    }
 
-//   const min = new Date(Math.min(...dates));
-//   const max = new Date(Math.max(...dates));
+    if (l.completionDate !== baseline.completionDate) flags.completionDate = true;
+    if (l.evidenceOfCompletion !== baseline.evidenceOfCompletion) flags.evidenceOfCompletion = true;
+  }
 
-//   return {
-//     start: min,
-//     end: max,
-//     isRange: min.getTime() !== max.getTime()
-//   };
-// }
+  return flags;
+}
+
+
 
 function checkClaimProcess(claim, section, paymentResponse, paymentReimbursementAmount, paymentRejectNote, paymentQueriedNote, completionResponse, completionRejectNote, completionQueriedNote, paidInFullResponse) {
 
