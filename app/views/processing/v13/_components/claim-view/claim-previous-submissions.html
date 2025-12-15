@@ -8,18 +8,18 @@
         <a href="org-view-main?claimScreen=claim" class="govuk-back-link govuk-!-margin-bottom-6">Back to claim details</a>
 
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-        <h2 class="govuk-heading-l" id="training">{% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% else %}Claim{% endif %} submissions</h2>
+        <h2 class="govuk-heading-l" id="training">{% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% else %}Claim{% endif %} history</h2>
 
-        <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} submissions with any edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
+        <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} history with any edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
 
     <form action="/applySubmissionsFilter" method="post" novalidate>
         <div class="govuk-form-group">
             <label class="govuk-label" for="sort">
-                Show
+                {# Show #}
             </label>
             <select class="govuk-select" id="filterSubmissionValues" name="sort">
-                <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>Show what's changed</option>
-                <option value="everything" {% if data.filter == "everything" or data.filter == ""%}selected{% endif%}>Show everything</option>
+                <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>View edits only</option>
+                <option value="everything" {% if data.filter == "everything" or data.filter == ""%}selected{% endif%}>View all</option>
             </select>
             <button type="submit" class="govuk-button" data-module="govuk-button">
                 Apply
@@ -210,7 +210,7 @@
             {% if (data.filter == "everything" or (data.filter == "changed" and claimFlags.learners or claimFlags.completionEvidence or claimFlags.completionDate)) %}
                 {% if sortedSubmissions | checkIfMultipleLearners %}
                     <div style="padding-top: 20px;">
-                        <h2 class="govuk-heading-m">Learners</h2>
+                        <h2 class="govuk-heading-m">Learner details</h2>
                         <a type="submit" class="govuk-button govuk-button--secondary" href="../learner-previous-submissions-handler">Compare</a>
                     </div>
                     <table class="govuk-table" style="width : {{((sortedSubmissions | length) *320) + 200 }}px; table-layout:fixed; min-width:100%;">
@@ -227,7 +227,7 @@
                             
                             {% if (data.filter == "everything" or (data.filter == "changed" and claimFlags.learners)) %}
                                 <tr class="govuk-table__row">
-                                    <td class="govuk-table__cell"><strong>Learner</strong></td>
+                                    <td class="govuk-table__cell"><strong>Learners</strong></td>
                                     {% for submission in sortedSubmissions %}
                                         {% if submission.learners %}
                                         {% set changesCount = submission | learnerCountChanges(sortedSubmissions[loop.index0 + 1]) %}
@@ -245,7 +245,7 @@
 
                             {% if (data.view == "100" or data.view == "40") and (data.filter == "everything" or (data.filter == "changed" and claimFlags.completionDate)) %}
                                 <tr class="govuk-table__row">
-                                    <td class="govuk-table__cell"><strong>Completion date</strong></td>
+                                    <td class="govuk-table__cell"><strong>Completion dates</strong></td>
                                     {% for submission in sortedSubmissions %}
                                         {% if submission.learners %}
 
@@ -285,7 +285,6 @@
 
                                             {% set completionCountChanges = submission | completionEvidenceCountChanges(sortedSubmissions[loop.index0 + 1]) %}
                                             {% if completionCountChanges > 0  %}
-                                            {# {% if (submission.learners.length !== sortedSubmissions[loop.index0 + 1].learners.length and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %} #}
                                                 <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.learners.length}} files uploaded</strong></mark> </br> {{completionCountChanges}} change{% if completionCountChanges > 1 %}s{% endif %}</td>
                                             {% else %}
                                                 <td class="govuk-table__cell">{{submission.learners.length}} files uploaded</td>
@@ -303,7 +302,7 @@
                 {% else %}
 
                     <div style="padding-top: 20px;">
-                        <h2 class="govuk-heading-m">Learner</h2>
+                        <h2 class="govuk-heading-m">Learner details</h2>
                     </div>
                     <table class="govuk-table" style="width : {{((sortedSubmissions | length) *320) + 200 }}px; table-layout:fixed; min-width:100%;">
                         <thead class="govuk-table__head">
