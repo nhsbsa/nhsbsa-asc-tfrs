@@ -270,7 +270,7 @@ if (claim.status == "inProgress") {
   } else {
     req.session.data.learnerCount = 1
     req.session.data.claimStep = "completion"
-    location = "tracker-learner-" + learnerNo
+    location = "tracker-learner-1"
   }
 }
 
