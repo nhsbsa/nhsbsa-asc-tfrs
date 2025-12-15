@@ -2,27 +2,27 @@
 {% set sortedSubmissions = claim.submissions | sortSubmissionsForTable %}
 
 <div class="govuk-grid-column-full">
-    <a href="../view-previous-submissions-handler" class="govuk-back-link govuk-!-margin-bottom-6">Back to previous submissions</a>
+    <a href="../view-previous-submissions-handler" class="govuk-back-link govuk-!-margin-bottom-6">Back to claim history</a>
 
     <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
 
     <h2 class="govuk-heading-l" id="training">Learners ({{sortedLearners.length}})</h2>
-    <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} submissions with any learner edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
+    <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} history with any learner edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
 
-    {# <form action="/applySubmissionsFilter" method="post" novalidate>
+    <form action="/applySubmissionsFilter" method="post" novalidate>
         <div class="govuk-form-group">
             <label class="govuk-label" for="sort">
                 Show
             </label>
             <select class="govuk-select" id="filterSubmissionValues" name="sort">
-                <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>Show what's changed</option>
-                <option value="everything" {% if data.filter == "everything"%}selected{% endif%}>Show everything</option>
+                <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>View edits only</option>
+                <option value="everything" {% if data.filter == "everything"%}selected{% endif%}>View all</option>
             </select>
             <button type="submit" class="govuk-button" data-module="govuk-button">
                 Apply
             </button>
         </div>
-    </form> #}
+    </form>
 </div>
 
 <div class="govuk-grid-row">
@@ -96,7 +96,7 @@
 
         {% for learner in sortedLearners %}
 
-            {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion) %}
+            {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status) %}
                 <!-- LEARNER NAME ROW -->
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">
@@ -118,13 +118,13 @@
                                 {% if loop.index0 == 0 and learner.status == "removed" %}
                                     <mark class="hods-highlight">(Removed)</mark>
                                 {% elif isNew %}
-                                    <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
+                                    <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark></br>{{submission.learnerID}}
                                     <p><strong>(New)</strong></p>
                                 {% else %}
                                     {% if prev and (learnerInfo.givenName != (prev.learnerID | findLearner(data.learners)).givenName or learnerInfo.familyName != (prev.learnerID | findLearner(data.learners)).familyName) %}
-                                        <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark>
+                                        <mark class="hods-highlight"><strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong></mark></br>{{submission.learnerID}}
                                     {% else %}
-                                        {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
+                                        {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</br>{{submission.learnerID}}
                                     {% endif %}
                                 {% endif %}
                             </td>
@@ -135,23 +135,6 @@
                             {% endif %}
                     {% endfor %}
 
-                </tr>
-            {% endif %}
-
-            {% if data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion) %}
-                <!-- LEARNER ID ROW -->
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">
-                        <strong>NI number</strong>
-                    </td>
-
-                    {% for submission in learner.history %}
-                        {% if submission %}
-                            <td class="govuk-table__cell">{{submission.learnerID}}</td>
-                        {% else %}
-                            <td class="govuk-table__cell">---</td>
-                        {% endif %}
-                    {% endfor %}
                 </tr>
             {% endif %}
 
@@ -180,9 +163,9 @@
             {% endif  %}
 
            <!-- EVIDENCE OF COMPLETION ROW -->
-            {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionEvidence) %}
+            {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.evidenceOfCompletion) %}
                 <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><strong>Evidence of completion</strong></td>
+                    <td class="govuk-table__cell"><strong>Completion evidence</strong></td>
 
                     {% for submission in learner.history %}
                         {% set prev = learner.history[loop.index0 + 1] %}
@@ -209,7 +192,7 @@
             {% endif %}
 
             <!-- REQUESTED EDITS ROW -->
-             {% if data.view == "100" or data.view == "40"  %}
+             {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status) %}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Requested edits</strong></td>
                     {% set count = sortedSubmissions.length %}
