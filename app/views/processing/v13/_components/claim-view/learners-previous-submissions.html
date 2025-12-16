@@ -194,17 +194,17 @@
             {% endif %}
 
             <!-- REQUESTED EDITS ROW -->
-             {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status) and claim.status != "inProgress"%}
+             {% if (data.view == "100" or data.view == "40") and data.filter == "everything" or (data.filter == "changed" and learner.changeFlags.completionDate or learner.changeFlags.evidenceOfCompletion or learner.changeFlags.status)%}
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Requested edits</strong></td>
                     {% set count = sortedSubmissions.length %}
-                    {% for submission in learner.history %}
+                    {% for learnerSubmission in learner.history %}
                         {% set submissionIndex = loop.index0 %}
                         {% set submittedDate = sortedSubmissions[submissionIndex].submittedDate %}
 
-                        {% if submission and submission.evidenceOfCompletionReview and submission.evidenceOfCompletionReview.outcome == "queried" %}
+                        {% if learnerSubmission and learnerSubmission.evidenceOfCompletionReview and learnerSubmission.evidenceOfCompletionReview.outcome == "queried" and learnerSubmission.processedDate %}
                             <td class="govuk-table__cell">
-                                {{ submission.evidenceOfCompletionReview.note | trunctateString }}
+                                {{ learnerSubmission.evidenceOfCompletionReview.note | trunctateString }}
                                 <br>
                                 <a class="govuk-link" href="/showLearnerNote?count={{count}}&submittedDate={{ submittedDate }}&learner={{learner.learnerID}}">
                                     &#8230; see more
@@ -213,6 +213,7 @@
                         {% else %}
                             <td class="govuk-table__cell">---</td>
                         {% endif %}
+
                         {% set count = count - 1 %}
                     {% endfor %}
                 </tr>

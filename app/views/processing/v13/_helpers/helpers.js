@@ -235,10 +235,8 @@ function buildLearnerComparison(submissions) {
   // submissions is already sorted: [latest, older, ..., oldest]
   const latest = submissions[0];
 
-  // 1. Learners in the latest submission
   const latestLearnerIDs = new Set(latest.learners.map(l => l.learnerID));
 
-  // 2. Build map of all learners seen across any submission
   const allLearners = new Map();
 
   submissions.forEach((submission, submissionIndex) => {
@@ -246,22 +244,24 @@ function buildLearnerComparison(submissions) {
       if (!allLearners.has(learner.learnerID)) {
         allLearners.set(learner.learnerID, {
           learnerID: learner.learnerID,
-          history: Array(submissions.length).fill(null) // one "slot" per submission
+          history: Array(submissions.length).fill(null)
         });
       }
 
-      // Fill correct submission column (0 = latest)
       const entry = allLearners.get(learner.learnerID);
-      entry.history[submissionIndex] = learner;
+
+      entry.history[submissionIndex] = {
+        ...learner,
+        processedDate: submission.processedDate
+      };
     });
   });
 
-  // 3. Split into active and removed
   const active = [];
   const removed = [];
 
   for (const [id, data] of allLearners.entries()) {
-    const info = learnerMap.get(id) || {}; // lookup: {givenName, familyName}
+    const info = learnerMap.get(id) || {};
 
     const record = {
       learnerID: id,
@@ -276,7 +276,6 @@ function buildLearnerComparison(submissions) {
     else removed.push(record);
   }
 
-  // 4. Sort alphabetically by learnerID (or name if you add it later)
   const sortByName = (a, b) =>
     a.givenName.localeCompare(b.givenName) ||
     a.familyName.localeCompare(b.familyName) ||
@@ -287,6 +286,7 @@ function buildLearnerComparison(submissions) {
 
   return [...active, ...removed];
 }
+
 
 function computeLearnerChangeFlags(learnerHistory) {
   // learnerHistory: array of learner objects per submission, null if missing
