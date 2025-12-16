@@ -1,0 +1,105 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if claim.claimType == "60" %}
+  {% set pairClaim = claim.claimID | findPair(data.claims) %}
+{% elif claim.claimType == "40" %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair(data.claims) %}
+{% endif %}
+
+{% if claim.claimType == "60" %}  
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+  {% if (pairClaim and pairClaim.status == "queried") %}
+    {% set pairSubmission = pairClaim | getDraftSubmission %}
+  {% else %}
+    {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% else %}
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% endif %}
+
+{% block pageTitle %}
+  {% if (claim.claimType == "100") %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Claim: {{claim.claimID}} — {{serviceName}} — GOV.UK
+  {% else %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Combined claim: {{claim.claimID | removeClaimSuffix}} — {{serviceName}} — GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+<p class="govuk-body"><a href="claim-details" class="govuk-back-link">Back to claim details</a></p>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds"> 
+    
+
+    <h2 class="govuk-heading-m">Claim history</h2>
+
+    <div class="moj-timeline">
+
+      {% if pairClaim != null %}
+        {% for submission in pairClaim.submissions | orderByMostRecent %}
+              {% set type = pairClaim.claimType %}
+              {% include "../_components/claim-sections/claim-history/timeline-items.html" %}
+              
+        {% endfor %}
+      {% endif %}
+
+      {% for submission in claim.submissions | orderByMostRecent %}
+          {% set type = claim.claimType %}
+          {% include "../_components/claim-sections/claim-history/timeline-items.html" %}
+      {% endfor %}
+
+      <div class="moj-timeline__item">
+        <div class="moj-timeline__header">
+          <h3 class="moj-timeline__title">Created</h3>
+          <p class="moj-timeline__byline">by {{(claim.createdBy | findUser(data.org)).givenName}} {{(claim.createdBy| findUser(data.org)).familyName}}</p>
+        </div>
+        <p class="moj-timeline__date">
+          <time datetime="{{ claim.createdDate }}">{{ claim.createdDate | govukDate }} at {{ claim.createdDate | govukTime }}</time>
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
