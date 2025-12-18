@@ -1,0 +1,57 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
+{% set govukRebrand = true %}
+
+{% block pageTitle %}
+{{ serviceName }} — GOV.UK
+{% endblock %}
+
+{% block header %}
+  {{ govukHeader({
+    rebrand: true, 
+    serviceName: serviceName
+    }) 
+  }}
+  <div class="govuk-width-container">
+    <div class="govuk-phase-banner">
+      <p class="govuk-phase-banner__content">
+        <strong class="govuk-tag govuk-phase-banner__content__tag">
+          Prototype
+        </strong>
+        <span class="govuk-phase-banner__text">
+          This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+        </span>
+      </p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {{ govukFooter({
+    rebrand: true,
+    meta: {
+      items: [
+      {
+        href: "/claims/v21/contact",
+        text: "Contact us"
+      }, {
+        href: "",
+        text: "Cookies"
+      }, {
+        href: "",
+        text: "Accessibility"
+      }, {
+        href: "/claims/v21/terms-of-use",
+        text: "Terms of use"
+      }, {
+        href: "https://www.nhsbsa.nhs.uk/our-policies/privacy/claim-adult-social-care-learning-and-development-privacy-notice",
+        text: "Privacy notice"
+      }, {
+        href: "/manage-prototype/clear-data",
+        text: "Clear data"
+      }
+    ] ,
+      visuallyHiddenTitle: "Footer links"
+    }
+  }) }}
+{% endblock %}
