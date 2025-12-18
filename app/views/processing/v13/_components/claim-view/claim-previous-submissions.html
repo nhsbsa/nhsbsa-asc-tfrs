@@ -172,9 +172,9 @@
                                             {% endif %}
                                             {% for evidence in submission.evidenceOfPayment %}
                                                 {% if ((evidence not in previousEvidence) and (evidenceLoop) <= ((sortedSubmissions | length) - 1)  ) %}
-                                                    <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">opens <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                                                    <mark class="hods-highlight"><strong>{{evidence}}</strong></mark> (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
                                                 {% else %}
-                                                    {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">opens <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
+                                                    {{evidence}} (<a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">open <span class="govuk-visually-hidden">{{evidence}} </span>in new tab</a>)</br>
                                                 {% endif %}
                                             {% endfor %}
                                         </td>
