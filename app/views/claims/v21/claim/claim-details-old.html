@@ -1,0 +1,238 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if claim.claimType == "60" %}
+  {% set pairClaim = claim.claimID | findPair(data.claims) %}
+{% elif claim.claimType == "40" %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair(data.claims) %}
+{% endif %}
+
+{% if claim.claimType == "60" %}  
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+  {% if (pairClaim and pairClaim.status == "queried") %}
+    {% set pairSubmission = pairClaim | getDraftSubmission %}
+  {% else %}
+    {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% else %}
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% endif %}
+
+
+
+{% set learner = submission.learnerID | findLearner(data.learners) %}
+
+
+{% block pageTitle %}
+  {% if (claim.claimType == "100") %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Claim: {{claim.claimID}} — {{serviceName}} — GOV.UK
+  {% else %}
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Combined claim: {{claim.claimID | removeClaimSuffix}} — {{serviceName}} — GOV.UK
+  {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+  {% if (data.fromSearchResults) %}
+    <a href="advanced-search" class="govuk-back-link">Back</a>
+  {% elif (data.fromSearchId) %}
+    <a href="../manage-claims-home?fromSearchId" class="govuk-back-link">Back</a>
+  {% elif (claim.status != "not-yet-submitted") and (claim.status != "queried") and (pairClaim.status != "queried") and (pairClaim.status != "not-yet-submitted")%}
+    <a href="../manage-claims?statusID={{ data.statusID }}" class="govuk-back-link">Back</a>
+  {% endif %} 
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}
+      {% include "../_components/claim-sections/errorCatch.html" %}
+    {% endif %}
+    <h1 class="govuk-heading-xl">
+      {% if (claim.claimType == "100") %}
+        {{ claim.claimID }}
+      {% else %}
+        Combined claim: {{ claim.claimID | removeClaimSuffix }}
+      {% endif %}
+    </h1>
+
+    {% if (claim.claimType == "100") %}
+
+      <p class="govuk-body">This {{ claim.claimType | typeTag }} claim 
+        {% if (claim.status == "not-yet-submitted") %}
+          is {{ claim.status | statusTag(data.statuses) }}.
+        {% elif (claim.status == "queried") %}
+          {{ claim.status | statusTag(data.statuses) }}.
+        {% else %}
+          was {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.
+        {% endif %}</p>
+
+    {% elif (claim.claimType == "60") %}
+
+      <p class="govuk-body">The {{ "60" | typeTag }} part of this claim 
+        {% if (claim.status == "not-yet-submitted") %}
+          is {{ claim.status | statusTag(data.statuses) }}
+        {% elif (claim.status == "queried") %}
+          {{ claim.status | statusTag(data.statuses) }}.
+        {% else %}
+          was {{ claim.status | statusTag(data.statuses) }} on {{ (claim | statusDate) | govukDate }}.
+        {% endif %}</p>
+
+      <p class="govuk-body">The {{ "40" | typeTag }} part of this claim 
+        {% if pairClaim != null %}
+
+          {% if (pairClaim.status == "not-yet-submitted") %}
+            is {{ pairClaim.status | statusTag(data.statuses) }}
+          {% elif (pairClaim.status == "queried") %}
+            {{ pairClaim.status | statusTag(data.statuses) }}.
+          {% else %}
+            was {{ pairClaim.status | statusTag(data.statuses) }} on {{ (pairClaim | statusDate) | govukDate }}.
+          {% endif %} 
+        
+        {% elif claim.status =="rejected" %}cannot therefore be submitted.{% else %}cannot be started until the 60 part is approved.{% endif %}</p>
+
+    {% endif %}
+
+    {% include "../_components/claim-sections/claimAmount.html" %}
+
+    {% if not ((claim.claimType == "100" or claim.claimType == "60") and  claim.status == "not-yet-submitted") %}
+      {% include "../_components/claim-sections/alertSection.html" %}
+    {% endif %}
+
+  </div>
+</div>
+
+
+<div class="govuk-grid-row" style="margin-top: 20px;">
+
+  <div class="govuk-grid-column-two-thirds">
+
+    {% if claim.claimType == "100" %}
+      <h2 class="govuk-heading-m" id="training">Claim details</h2>
+    {% endif %}
+
+    {% if (claim.claimType == "60") %}
+      <div class="content-container">
+        <div class="vertical-line-container">
+          <div class="circle">
+            <span class="govuk-heading-s section-number">1</span>
+          </div>
+          <div class="vertical-line"></div>
+        </div>
+        <div class="content"> 
+          <h2 class="govuk-heading-l" id="sixtyPartClaim">60 part</h2>
+          <p class="govuk-body">Claim reference for the <strong class="govuk-tag govuk-tag--yellow">60</strong> part: {{ claim.claimID }}</p>
+      
+    {% endif %}
+
+
+    <dl class="govuk-summary-list">
+      {% include "../_components/claim-sections/training.html" %}
+
+      {% set is40Part = false %}
+      {% if not (submission.trainingCode | isInternalOMMT) %}
+        {% include "../_components/claim-sections/evidencePayment.html" %}
+      {% endif %}
+
+      {% include "../_components/claim-sections/learner.html" %}
+    
+    {% if (claim.claimType == "60" ) %}
+     </dl>
+      {% if (claim.status == "not-yet-submitted" or claim.status == "queried") %}
+        {% include "../_components/claim-sections/cta-section.html" %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="content-container govuk-!-padding-bottom-6">
+    <div class="vertical-line-container">
+      <div class="circle">
+        <span class="govuk-heading-s section-number">2</span>
+      </div>
+      <div class="vertical-line"></div>
+      <div class="horizontal-line"></div>
+    </div>
+    <div class="content">
+      <h2 class="govuk-heading-l" id="fourtyPartClaim">40 part</h2>
+
+      {% if ((claim.claimType == "60" and ((pairClaim.status != null))))  %}
+        <p class="govuk-body">Claim reference for the <strong class="govuk-tag govuk-tag--purple">40</strong> part: {{ claim.claimID.slice(0, -1) + "C" }}</p>
+      {% endif %}
+
+      {% if pairClaim == null and claim.claimType == "60" %}
+        {% if claim.status != "rejected" %}
+          <p class="govuk-body"><span class="govuk-caption-m">This part cannot be started until the 60 part is approved.</span></p>
+        {% elif claim.status == "rejected" %}
+          <p class="govuk-body"><span class="govuk-caption-m">You cannot submit the 40 part of this claim because the 60 part was rejected.</span></p>
+        {% endif %}
+      {% endif %}
+
+      <dl class="govuk-summary-list">
+  {% endif %}
+
+      {% if (claim.status != "rejected") %}
+
+        {% if (pairClaim.isPaymentPlan == true) %}
+          {% set is40Part = true %}
+          {% include "../_components/claim-sections/evidencePayment.html" %}
+        {% endif %}
+        
+        {% include "../_components/claim-sections/evidenceCompletion.html" %}
+      {% endif %}
+
+    </dl>
+
+    {% if (((claim.status == "not-yet-submitted" or pairClaim.status == "not-yet-submitted") or (claim.status == "queried" or pairClaim.status == "queried")) and (claim.claimType == "100" or pairClaim.claimType == "40"))  %}
+      {% include "../_components/claim-sections/cta-section.html" %}
+    {% endif %}
+
+    {% if (claim.claimType == "60") %}
+  </div>
+</div>
+  {% endif %}
+
+  </div>
+
+  <div class="govuk-grid-column-one-third">
+    {% include "../_components/claim-sections/claimHistory.html" %}
+  </div>
+
+</div> 
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

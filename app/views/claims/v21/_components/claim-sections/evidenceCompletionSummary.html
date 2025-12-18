@@ -1,0 +1,172 @@
+{# Completion evidence #}
+{# If no learners yet added #}
+{% if ((not submission.learners) and claim.claimType == "100") or (claim.claimType == "60" and claim.status != "approved" and not pairSubmission.learners) %}
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Completion date
+      </dt>
+      <dd class="govuk-summary-list__value">
+          <span class="govuk-caption-m">&#8212</span>
+      </dd>        
+    </div>
+  
+{# If 1 learner added #}
+{% elif submission.learners.length == 1 %}
+  {% set learner = submission.learners[0] %}
+
+    {# if no single completion date #}
+    {% if not learner.completionDate %}
+
+      {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "missing" and learner.learnerID %}
+        <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
+          <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
+            <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a completion date </p>
+          </div>
+        </div>
+      {% endif %}
+      <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' and submission.learnerID%} govuk-summary-list-row--error {% endif %}">
+        <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing'and submission.learnerID%} govuk-summary-key--error {% endif %}">
+          Completion date
+        </dt>
+        <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-value--error {% endif %}">
+            <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date?learnerID={{learner.learnerID}}">Add completion date</a>
+        </dd>        
+      </div>
+
+    {# if one single completion date #}
+    {% else %}
+
+      <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-list-row--error {% endif %}">
+        <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture')%} govuk-summary-key--error {% endif %}">
+          {% if claim.claimType == "100" %}
+            Completion date {% if ( claim | checkIfUpdated("completionDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+          {% elif claim.claimType == "60" %}
+            Completion date {% if ( pairClaim | checkIfUpdated("completionDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+          {% endif %}
+        </dt>
+        <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-value--error {% endif %}">
+          {% if claim.claimType == "100" %}
+            {{ learner.completionDate | govukDate }}
+          {% elif claim.claimType == "60" %}
+            {{ pairlearner.completionDate | govukDate }}
+          {% endif %}
+        </dd>
+        {% if ((claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried"))  %}
+          <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-value--error {% endif %}">
+            <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date?learnerID={{learner.learnerID}}">Change<span class="govuk-visually-hidden">
+              completion date</span></a>
+          </dd>
+        {% endif %}
+      </div>
+
+    {% endif %}
+
+{# If more than 1 learner added, give summary #}
+{% else %}
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            {% if claim.claimType == "100" %}
+              Completion date {% if ( claim | checkIfUpdated("completionDates")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+          {% elif claim.claimType == "60" %}
+              Completion date {% if ( pairClaim | checkIfUpdated("completionDates")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+          {% endif %}
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% if claim.claimType == "100"%}
+          Added for <strong>{{submission.learners | addedCount("completionDate")}}</strong> of <strong>{{submission.learners.length}}</strong> learners
+          {% else %}
+          Added for <strong>{{pairSubmission.learners | addedCount("completionDate")}}</strong> of <strong>{{pairSubmission.learners.length}}</strong> learners
+          {% endif%}
+        </dd>
+      </div>
+
+{% endif %}
+
+
+{# Completion evidence #}
+{# If no learners yet added #}
+{% if ((not submission.learners) and claim.claimType == "100") or (claim.claimType == "60" and claim.status != "approved" and not pairSubmission.learners) %}
+
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Evidence of completion
+      </dt>
+      <dd class="govuk-summary-list__value">
+          <span class="govuk-caption-m">&#8212</span>
+      </dd>        
+    </div>
+  
+{# If 1 learner added #}
+{% elif submission.learners.length == 1 %}
+    {% set learner = submission.learners[0] %}
+
+    {# if no single completion date #}
+    {% if not learner.evidenceOfCompletion %}
+
+      {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion == "missing" and learner.learnerID %}
+        <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
+          <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-evidence-error">
+            <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add evidence of completion </p>
+          </div>
+        </div>
+      {% endif %}
+      <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' and learner.learnerID%} govuk-summary-list-row--error {% endif %}">
+        <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing'and learner.learnerID%} govuk-summary-key--error {% endif %}">
+          Evidence of completion
+        </dt>
+        <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' %} govuk-summary-value--error {% endif %}">
+            <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{learner.learnerID}}">Add evidence of completion</a>
+        </dd>        
+      </div>
+
+    {# if one single completion date #}
+    {% else %}
+
+      <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture') %} govuk-summary-list-row--error {% endif %}">
+        <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture')%} govuk-summary-key--error {% endif %}">
+          {% if claim.claimType == "100" %}
+            Evidence of completion {% if ( claim | checkIfUpdated("evidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+          {% elif claim.claimType == "60" %}
+            Evidence of completion {% if ( pairClaim | checkIfUpdated("evidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+          {% endif %}
+        </dt>
+        <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture') %} govuk-summary-value--error {% endif %}">
+          {% if claim.claimType == "100" %}
+            {{ learner.evidenceOfCompletion }}
+          {% elif claim.claimType == "60" %}
+            {{ pairlearner.evidenceOfCompletion }}
+          {% endif %}
+        </dd>
+        {% if ((claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried"))  %}
+          <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture') %} govuk-summary-value--error {% endif %}">
+            <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{learner.learnerID}}">Change<span class="govuk-visually-hidden">
+              evidence of completion</span></a>
+          </dd>
+        {% endif %}
+      </div>
+
+    {% endif %}
+
+{# If more than 1 learner added, give summary #}
+{% else %}
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          {% if claim.claimType == "100" %}
+            Evidence of completion {% if ( claim | checkIfUpdated("multipleEvidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+          {% elif claim.claimType == "60" %}
+            Evidence of completion {% if ( pairClaim | checkIfUpdated("multipleEvidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+          {% endif %}
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {% if claim.claimType == "100"%}
+            Added for <strong>{{submission.learners | addedCount("completionEvidence")}}</strong> of <strong>{{submission.learners.length}}</strong> learners
+          {% else %}
+            Added for <strong>{{pairSubmission.learners | addedCount("completionEvidence")}}</strong> of <strong>{{pairSubmission.learners.length}}</strong> learners
+          {% endif%}
+        </dd>
+      </div>
+
+{% endif %}
