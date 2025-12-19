@@ -1379,6 +1379,12 @@ router.post('/add-supporting-note', function (req, res) {
   res.redirect('claim/claim-details'+'?id='+claimID+'#notes')
 });
 
+router.get('/applySubmissionsFilter', function (req, res) {
+  var claimID = req.session.data.id
+  var filter = req.session.data.sort
+  res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+});
+
 router.post('/load-data', function (req, res) {
   const orgID = req.session.data['orgID']
   loadData(req, orgID);
