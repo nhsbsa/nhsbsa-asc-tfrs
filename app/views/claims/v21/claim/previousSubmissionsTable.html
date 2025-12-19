@@ -404,13 +404,12 @@
                 {% endif %}
             {% endif %}
 
-
         </div>
 
-
-        
-
     </div>
+        {% if data.showNote %}
+        {% include "../claim-view/view-note.html" %}
+    {% endif %}
 </div>  
 
 {% endblock %}
