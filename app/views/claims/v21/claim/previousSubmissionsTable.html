@@ -205,11 +205,9 @@
                                 {% set count = sortedSubmissions.length %}
                                 {% for submission in sortedSubmissions %}
                                 {% if (submission.evidenceOfPaymentReview.outcome == "queried") and submission.submittedDate != null %}
-                                {# TO DO FIX #}
-                                    {# <td class="govuk-table__cell">
-                                    {% set text = submission | formatText %}
-                                        {{text | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
-                                    </td> #}
+                                    <td class="govuk-table__cell">
+                                        {{submission.evidenceOfPaymentReview.note | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                                    </td>
                                 {% else %}
                                     <td class="govuk-table__cell">---</td>
                                 {% endif %}
@@ -390,11 +388,9 @@
                                     {% set count = sortedSubmissions.length %}
                                     {% for submission in sortedSubmissions %}
                                     {% if (submission.learners[0].evidenceOfCompletionReview.outcome == "queried") and submission.submittedDate != null %}
-                                    {# TO DO FIX #}    
-                                    {# <td class="govuk-table__cell">
-                                        {% set text = submission | formatText %}
-                                            {{text | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
-                                        </td> #}
+                                    <td class="govuk-table__cell">
+                                            {{submission.learners[0].evidenceOfCompletionReview.note | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                                        </td>
                                     {% else %}
                                         <td class="govuk-table__cell">---</td>
                                     {% endif %}
