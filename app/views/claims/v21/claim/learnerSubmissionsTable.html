@@ -6,14 +6,59 @@
 {% endif %}
 
 {% set sortedSubmissions = claim.submissions | sortSubmissionsForTable %}
+{% set sortedLearnerSlots = claim.submissions | sortLearnerSlotsForTable %}
 {% set internalOMMTCheck = sortedSubmissions | isAllInternalOMMT %}
 {% set claimFlags = sortedSubmissions | checkWhatHasChanged %}
 
 {% block beforeContent %}
-<p class="govuk-body"><a href="../view-previous-submissions-back-handler" class="govuk-back-link">Back to previous submissions</a></p>
+<a href="../from-learners-submission" class="govuk-back-link govuk-!-margin-bottom-6">Back to claim history</a>
+
 {% endblock %}
 
 {% block content %}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+            <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+
+            <h2 class="govuk-heading-l" id="training">Learners ({{sortedLearnerSlots.length}})</h2>
+            <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} history with any learner edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
+
+            <form action="/applySubmissionsFilter" method="post" novalidate>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="sort">
+                    </label>
+                    <select class="govuk-select" id="filterSubmissionValues" name="sort">
+                        <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>View edits only</option>
+                        <option value="everything" {% if data.filter == "everything"%}selected{% endif%}>View all</option>
+                    </select>
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Apply
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-quarter">
+
+             <ul class="govuk-list">
+                {% for learnerSlot in sortedLearnerSlots %}
+                    <p>{{learnerSlot.status}}</p>
+
+                {% endfor %}
+
+             </ul>
+
+        </div>
+
+
+        <div class="govuk-grid-column-three-quarter">
+            <p>show table</p>
+        </div>
+    </div>
+
+
 
 
 {% endblock %}

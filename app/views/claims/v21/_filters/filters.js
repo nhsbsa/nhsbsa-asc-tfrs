@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft} = require('../_helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, buildSlotComparison } = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -745,6 +745,12 @@ addFilter('orderByMostRecent', function (submissions) {
 addFilter('sortSubmissionsForTable', function (submissions) {
     let sorted = sortSubmissionsForTable(submissions)
     return sorted
+})
+
+addFilter('sortLearnerSlotsForTable', function (submissions) {
+    let sorted = sortSubmissionsForTable(submissions)
+    let newLearnerArray = buildSlotComparison(sorted)
+    return newLearnerArray
 })
 
 addFilter('matchSubmissionToText', function (submissions) {
