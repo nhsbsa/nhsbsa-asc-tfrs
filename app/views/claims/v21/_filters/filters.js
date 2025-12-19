@@ -260,20 +260,44 @@ addFilter('checkIfMultipleLearners', function (submissions) {
 })
 
 addFilter('learnerCountChanges', function (currentSubmission, previousSubmission) {
-    let learnerChangeCount = 0
-    if (!currentSubmission.learners || !previousSubmission?.learners) {
-        learnerChangeCount = 0
-        return
+  if (!currentSubmission?.learners || !previousSubmission?.learners) {
+    return 0
+  }
+
+  const currentBySlot = new Map(
+    currentSubmission.learners.map(l => [l.slotID, l.learnerID])
+  )
+
+  const previousBySlot = new Map(
+    previousSubmission.learners.map(l => [l.slotID, l.learnerID])
+  )
+
+  const allSlotIDs = new Set([
+    ...currentBySlot.keys(),
+    ...previousBySlot.keys()
+  ])
+
+  let learnerChangeCount = 0
+
+  for (const slotID of allSlotIDs) {
+    const currentLearner = currentBySlot.get(slotID)
+    const previousLearner = previousBySlot.get(slotID)
+
+    // Slot added or removed
+    if (currentLearner === undefined || previousLearner === undefined) {
+      learnerChangeCount++
+      continue
     }
-    const currentIds = currentSubmission.learners.map(l => l.learnerID)
-    const nextIds = previousSubmission.learners.map(l => l.learnerID)
 
-    const removed = currentIds.filter(id => !nextIds.includes(id))
-    const added = nextIds.filter(id => !currentIds.includes(id))
+    // Same slot, different learner
+    if (currentLearner !== previousLearner) {
+      learnerChangeCount++
+    }
+  }
 
-    learnerChangeCount = removed.length + added.length
-    return learnerChangeCount
+  return learnerChangeCount
 })
+
 
 addFilter('completionDateCountChanges', function (currentSubmission, previousSubmission) {
     if (!currentSubmission?.learners || !previousSubmission?.learners) {
@@ -437,9 +461,6 @@ addFilter('checkWhatHasChanged', function (submissions) {
 
   return flags
 })
-
-
-
 
 addFilter('getFirstDate', function (learners) {
   if (!learners || learners.length === 0) return null;
