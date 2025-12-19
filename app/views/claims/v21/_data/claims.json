@@ -64,8 +64,8 @@
           "receipt1.pdf"
         ],
         "evidenceOfPaymentReview": {
-          "outcome": null,
-          "note": null,
+          "outcome": "queried",
+          "note": "start date didn't match",
           "paymentPlan": null,
           "costPerLearner": null
         },
@@ -93,7 +93,7 @@
           },
           {
             "slotID": "3",
-            "learnerID": "HA 93 7F 69 Q",
+            "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-10-03T06:09:42.876Z",
             "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {

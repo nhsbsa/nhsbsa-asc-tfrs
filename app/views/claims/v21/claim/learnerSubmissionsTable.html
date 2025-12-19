@@ -1,0 +1,19 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if (claim.claimType == "60" and data.view == "40") or (claim.claimType == "40" and data.view == "60") %}
+  {% set claim = claim.claimID | findPair(data.claims) %}
+{% endif %}
+
+{% set sortedSubmissions = claim.submissions | sortSubmissionsForTable %}
+{% set internalOMMTCheck = sortedSubmissions | isAllInternalOMMT %}
+{% set claimFlags = sortedSubmissions | checkWhatHasChanged %}
+
+{% block beforeContent %}
+<p class="govuk-body"><a href="../view-previous-submissions-back-handler" class="govuk-back-link">Back to previous submissions</a></p>
+{% endblock %}
+
+{% block content %}
+
+
+{% endblock %}

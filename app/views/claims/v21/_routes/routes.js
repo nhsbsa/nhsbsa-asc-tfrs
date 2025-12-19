@@ -1385,6 +1385,25 @@ router.get('/applySubmissionsFilter', function (req, res) {
   res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
 });
 
+router.get('/learner-previous-submissions-handler', function (req, res) {
+
+  claimID = req.session.data.id
+  var foundClaim = null
+  for (const claim of req.session.data['claims']) {
+    if (claim.claimID == claimID) {
+      foundClaim = claim
+    }
+  }
+  res.redirect('claim/learnerSubmissionsTable' + '?id=' + claimID )
+});
+
+router.get('/view-previous-submissions-back-handler', function (req, res) {
+  
+  claimID = req.session.data.id
+  res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID )
+
+});
+
 router.post('/load-data', function (req, res) {
   const orgID = req.session.data['orgID']
   loadData(req, orgID);
