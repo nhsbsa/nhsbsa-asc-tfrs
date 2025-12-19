@@ -300,76 +300,65 @@ addFilter('learnerCountChanges', function (currentSubmission, previousSubmission
 
 
 addFilter('completionDateCountChanges', function (currentSubmission, previousSubmission) {
-    if (!currentSubmission?.learners || !previousSubmission?.learners) {
-        return 0
-    }
-    // Map learnerID → completionDate for previous submission
-    const previousMap = new Map(
-        previousSubmission.learners.map(l => [
-        l.learnerID,
-        l.completionDate
-        ])
-    )
-  let changeCount = 0
-  for (const learner of currentSubmission.learners) {
-    const previousDate = previousMap.get(learner.learnerID)
-    // Only count if learner existed before
-    if (!previousDate) continue
-    if (learner.completionDate !== previousDate) {
-      changeCount++
-    }
+  if (!currentSubmission?.learners || !previousSubmission?.learners) {
+    return 0
   }
+
+  // Map completionDate by slotID
+  const currentBySlot = new Map(
+    currentSubmission.learners.map(l => [l.slotID, l.completionDate])
+  )
+  const previousBySlot = new Map(
+    previousSubmission.learners.map(l => [l.slotID, l.completionDate])
+  )
+
+  let changeCount = 0
+
+  // Compare only slots that exist in BOTH submissions
+  for (const [slotID, currentDate] of currentBySlot.entries()) {
+    const previousDate = previousBySlot.get(slotID)
+    if (previousDate === undefined) continue // added slot → ignore
+    if (currentDate !== previousDate) changeCount++ // only count actual date differences
+  }
+
   return changeCount
 })
 
+
 addFilter('completionEvidenceCountChanges', function (currentSubmission, previousSubmission) {
-    let changeCount = 0
+  if (!currentSubmission?.learners || !previousSubmission?.learners) {
+    return 0
+  }
 
-    if (!currentSubmission.learners || !previousSubmission?.learners) {
-        return 0
+  // Map evidence by slotID
+  const currentBySlot = new Map(
+    currentSubmission.learners.map(l => [l.slotID, l.evidenceOfCompletion])
+  )
+  const previousBySlot = new Map(
+    previousSubmission.learners.map(l => [l.slotID, l.evidenceOfCompletion])
+  )
+
+  // Get all slotIDs across both submissions
+  const allSlotIDs = new Set([...currentBySlot.keys(), ...previousBySlot.keys()])
+
+  let changeCount = 0
+
+  for (const slotID of allSlotIDs) {
+    const currentEvidence = currentBySlot.get(slotID)
+    const previousEvidence = previousBySlot.get(slotID)
+
+    if (currentEvidence === undefined || previousEvidence === undefined) {
+      // Slot added or removed
+      changeCount++
+    } else if (currentEvidence !== previousEvidence) {
+      // Evidence changed for existing slot
+      changeCount++
     }
+  }
 
-    const currentLearners = currentSubmission.learners
-    const previousLearners = previousSubmission.learners
-
-    const currentIds = currentLearners.map(l => l.learnerID)
-    const previousIds = previousLearners.map(l => l.learnerID)
-
-    // learnerID → evidenceOfCompletion (previous submission)
-    const previousEvidenceMap = new Map(
-        previousLearners.map(l => [
-            l.learnerID,
-            l.evidenceOfCompletion
-        ])
-    )
-
-    // Evidence removed (learner removed)
-    previousIds.forEach(id => {
-        if (!currentIds.includes(id)) {
-            changeCount++
-        }
-    })
-
-    // Evidence added (learner added)
-    currentIds.forEach(id => {
-        if (!previousIds.includes(id)) {
-            changeCount++
-        }
-    })
-
-    //  Evidence changed (same learner, different file)
-    currentLearners.forEach(learner => {
-        if (!previousEvidenceMap.has(learner.learnerID)) return
-
-        const previousEvidence = previousEvidenceMap.get(learner.learnerID)
-
-        if (learner.evidenceOfCompletion !== previousEvidence) {
-            changeCount++
-        }
-    })
-
-    return changeCount
+  return changeCount
 })
+
 
 addFilter('checkWhatHasChanged', function (submissions) {
   const flags = {
