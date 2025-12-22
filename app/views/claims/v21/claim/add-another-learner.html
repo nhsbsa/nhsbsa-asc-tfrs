@@ -1,0 +1,118 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if claim.claimType == "60" %}
+  {% set pairClaim = claim.claimID | findPair(data.claims) %}
+{% elif claim.claimType == "40" %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair(data.claims) %}
+{% endif %}
+
+{% if claim.claimType == "60" %}  
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+  {% if (pairClaim and pairClaim.status == "queried") %}
+    {% set pairSubmission = pairClaim | getDraftSubmission %}
+  {% else %}
+    {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% else %}
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% endif %}
+
+{% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
+
+{% block pageTitle %}
+{% if data.submitError %}Error: {% endif %}Add another learner — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if data.submitError %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#error">
+                                Select whether the you want to add another learner
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">
+            Claim for multiple learners
+        </h1>
+        <p class="govuk-body">You have added {{learner.givenName}} {{learner.familyName}} to the claim.</p>
+        <p class="govuk-body">You can make claims for more than one learner at a time. Providing:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>All learners attended the same course.</li>
+            <li>You paid for all the learners on the same date.</li>
+            {% if claim.claimType == "60" %}<li>For claims using the 60/40 funding model all learners started on the same date.</li>{% endif %}
+        </ul>
+        {% if claim.claimType == "60" %}
+            <p class="govuk-body">For claims using the 60/40 funding model all learners must complete the training before the 40 part can be submitted.</p>
+            <p class="govuk-body">However learners who won't complete, for instance because they have left your organisations, can be removed from the 40 part before submission.</p>
+        {% endif %}
+
+        <form action="../add-another-learner" method="post" novalidate>
+            <div class="govuk-form-group {% if data.submitError %}govuk-form-group--error{% endif %}">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Do you want to add another learner?
+                    </legend>
+                    {% if data.submitError %}
+                    <p id="error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        Select whether the you want to add another learner
+                    </p>
+                    {% endif %}
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="anotherlearner" name="anotherlearner" type="radio"
+                                value="yes">
+                            <label class="govuk-label govuk-radios__label" for="splitDanotherlearnerecision">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="anotherlearner-2" name="anotherlearner" type="radio"
+                                value="no">
+                            <label class="govuk-label govuk-radios__label" for="anotherlearner-2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

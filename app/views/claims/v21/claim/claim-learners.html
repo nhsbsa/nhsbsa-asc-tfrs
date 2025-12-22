@@ -38,10 +38,6 @@
 
 {% set filteredLearners = claim | filterLearners(pairClaim) %}
 
-{% block beforeContent %}
-<p class="govuk-body"><a href="../claim-learner-back-handler" class="govuk-back-link">Back to claim details</a></p>
-{% endblock %}
-
 {% block content %}
 {% if data.learnerConfirmation != null %}
   {% set learnerInfo = data.learnerConfirmation.learner | findLearner(data.learners) %}
@@ -131,12 +127,15 @@
                 {% endif %}
             </dl>
         {% endif %}
-
-        {% if (claim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.claimType == "60") %}
-        <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="select-learner">
-            Add another learner
-        </a>
-        {% endif %}
+        
+        <div class="govuk-button-group">
+          <a href="../claim-learner-back-handler" class="govuk-button" data-module="govuk-button">Back to claim</a>
+          {% if (claim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.claimType == "60") %}
+          <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="select-learner">
+              Add another learner
+          </a>
+          {% endif %}
+        </div>
     </div>
 </div>
 
