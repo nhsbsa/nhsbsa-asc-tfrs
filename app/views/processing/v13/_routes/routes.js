@@ -851,7 +851,7 @@ router.get('/hideLearnerNote', function (req, res) {
   res.redirect('processing/v13/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
 });
 
-router.get('/applySubmissionsFilter', function (req, res) {
+router.get('/applySubmissionsFilterProcessor', function (req, res) {
   var claimID = req.session.data.id
   var filter = req.session.data.sort
   res.redirect('processing/v13/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
