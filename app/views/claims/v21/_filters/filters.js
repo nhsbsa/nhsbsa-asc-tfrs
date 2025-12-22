@@ -753,6 +753,19 @@ addFilter('sortLearnerSlotsForTable', function (submissions) {
     return newLearnerArray
 })
 
+addFilter('getPreviousLearnerID', function (slot) {
+  if (!slot || !slot.history) return null;
+
+  // history is [latest, older, ..., oldest]
+  // slot is removed, so history[0] is null
+  for (let i = 1; i < slot.history.length; i++) {
+    if (slot.history[i]) {
+      return slot.history[i].learnerID;
+    }
+  }
+  return null;
+});
+
 addFilter('hasRemoved', function (learners) {
     let hasRemoved = false
     for (const l of learners) {

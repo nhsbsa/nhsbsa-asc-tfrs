@@ -46,44 +46,47 @@
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-quarter">
 
-                 <ul class="govuk-list">
+            <ul class="govuk-list">
 
-                    {# Active slots #}
-                    {% for slot in sortedLearnerSlots %}
-                        {% if data.filter == "everything" 
+                {# Active slots #}
+                {% for slot in sortedLearnerSlots %}
+                    {% if slot.status == "active" %}
+                    {% set learnerInfo = slot.learnerID | findLearner(data.learners) %}
+                    {% if data.filter == "everything" 
                             or (data.filter == "changed" 
                                 and (slot.changeFlags.completionDate 
                                     or slot.changeFlags.evidenceOfCompletion 
                                     or slot.changeFlags.status)) %}
-                        {% set learnerInfo = slot.history[0].learnerID | findLearner(data.learners) %}
-                        {% if slot.status == "active" and learnerInfo %}
-                            <li>
-                            <a class="govuk-link learner-jump-link" href="#{{ learnerInfo.givenName }}" data-tab="{{ tabID }}">
-                                {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
-                            </a>
-                            </li>
-                        {% endif %}
-                        {% endif %}
-                    {% endfor %}
-
-                    {# Removed slots header #}
-                    {% if sortedLearnerSlots | hasRemoved %}
-                        <h2 class="govuk-heading-s" style="padding-top: 20px;">Removed</h2>
-                    {% endif %}
-
-                    {# Removed slots #}
-                    {% for slot in sortedLearnerSlots %}
-                        {% set learnerInfo = slot.history[0].learnerID | findLearner(data.learners) %}
-                        {% if slot.status == "removed" and learnerInfo %}
                         <li>
-                            <a class="govuk-link learner-jump-link" href="#{{ learnerInfo.givenName }}" data-tab="{{ tabID }}">
+                        <a class="govuk-link learner-jump-link" href="#{{ learnerInfo.givenName }}" data-tab="{{ tabID }}">
                             {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
-                            </a>
+                        </a>
                         </li>
-                        {% endif %}
-                    {% endfor %}
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
 
-                    </ul>
+                {# Removed slots header #}
+                {% set removedSlots = sortedLearnerSlots | selectattr("status", "equalto", "removed") | list %}
+                {% if removedSlots | length %}
+                    <h2 class="govuk-heading-s" style="padding-top: 20px;">Removed</h2>
+                {% endif %}
+
+                {# Removed slots #}
+                {% for slot in sortedLearnerSlots %}
+                {% if slot.status == "removed" %}
+                    {% set prevLearnerID = slot | getPreviousLearnerID %}
+                    {% set learnerInfo = prevLearnerID | findLearner(data.learners) %}
+                    <li>
+                    <a class="govuk-link learner-jump-link" href="#{{ learnerInfo.givenName }}" data-tab="{{ tabID }}">
+                        {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
+                    </a>
+                    </li>
+                {% endif %}
+                {% endfor %}
+
+
+            </ul>
 
         </div>
 
@@ -200,14 +203,13 @@
                                 <strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong>
                                 </mark><br>
                                 {{ submission.learnerID }}
-                                <p><strong>(Slot added)</strong></p>
+                                <p><strong>(New)</strong></p>
 
                             {% elseif prev and submission.learnerID != prev.learnerID %}
                                 <mark class="hods-highlight">
                                 <strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong>
                                 </mark><br>
                                 {{ submission.learnerID }}
-                                <p><strong>(New)</strong></p>
 
                             {% else %}
                                 {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}<br>
