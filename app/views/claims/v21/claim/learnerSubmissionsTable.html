@@ -23,7 +23,7 @@
             <h2 class="govuk-heading-l" id="training">Learners ({{sortedLearnerSlots.length}})</h2>
             <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} history with any learner edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
 
-            <form action="/applySubmissionsFilter" method="post" novalidate>
+            <form action="/applyLearnerFilter" method="post" novalidate>
                 <div class="govuk-form-group">
                     <label class="govuk-label" for="sort">
                     </label>

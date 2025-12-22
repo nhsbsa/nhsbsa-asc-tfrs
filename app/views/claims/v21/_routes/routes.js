@@ -1359,6 +1359,19 @@ router.get('/signin-handler', function (req, res) {
 
 });
 
+router.get('/from-learners-submission', function (req, res) {
+  claimID = req.session.data.id
+  var foundClaim = null
+  for (const claim of req.session.data['claims']) {
+    if (claim.claimID == claimID) {
+      foundClaim = claim
+    }
+  }
+  var filter = req.session.data.sort
+  res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+});
+
+
 router.post('/add-supporting-note', function (req, res) {
   var note = req.session.data.supportingNote
   var claimID = req.session.data.id
@@ -1383,6 +1396,12 @@ router.get('/applySubmissionsFilter', function (req, res) {
   var claimID = req.session.data.id
   var filter = req.session.data.sort
   res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+});
+
+router.get('/applyLearnerFilter', function (req, res) {
+  var claimID = req.session.data.id
+  var filter = req.session.data.sort
+  res.redirect('claims/v21/claim/learnerSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
 });
 
 router.get('/learner-previous-submissions-handler', function (req, res) {
