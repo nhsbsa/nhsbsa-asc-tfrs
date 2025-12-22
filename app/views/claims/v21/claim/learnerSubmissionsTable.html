@@ -106,22 +106,59 @@
 
                     <!-- SUBMITTED DATE ROW -->
                     <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><strong>Submitted on</strong></td>
-                    {% for submission in sortedSubmissions %}
-                        <td class="govuk-table__cell">
-                        {# {{ submission.submittedDate ? (submission.submittedDate | govukDate) : '---' }} #}
-                        </td>
-                    {% endfor %}
+                        <td class="govuk-table__cell"><strong>Submitted on</strong></td>
+                        {% for submission in sortedSubmissions %}
+                            <td class="govuk-table__cell">
+                                {% if submission.submittedDate %}
+                                    {{submission.submittedDate | govukDate}}
+                                {% else %}
+                                    ---
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+
+                    <!-- SUBMITTED BY ROW -->
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Submitted by</strong></td>
+                        {% for submission in sortedSubmissions %}
+                            <td class="govuk-table__cell">
+                                {% if submission.submitter %}
+                                {# To do - fix #}fix
+                                    {{(submission.submitter | findUser(data.org.workplaceID)).givenName}} {{(submission.submitter | findUser(data.org.workplaceID)).familyName}}
+                                {% else %}
+                                    ---
+                                {% endif %}
+                            </td>
+                        {%endfor %}             
                     </tr>
 
                     <!-- PROCESSED DATE ROW -->
                     <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><strong>Processed on</strong></td>
+                    <td class="govuk-table__cell"><strong>Processed by</strong></td>
                     {% for submission in sortedSubmissions %}
                         <td class="govuk-table__cell">
-                        {# {{ submission.processedDate ? (submission.processedDate | govukDate) : '---' }} #}
+                        {% if submission.processedDate %}
+                            {{submission.processedBy}}
+                        {% else %}
+                            ---
+                        {% endif %}
                         </td>
                     {% endfor %}
+                    </tr>
+
+                    <!-- PROCESSED BY ROW -->
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><strong>Processed on</strong></td>
+                        {% for submission in sortedSubmissions %}
+                            <td class="govuk-table__cell">
+                                {% if submission.processedDate %}
+                                    {{submission.processedDate | govukDate}}
+                                {% else %}
+                                    ---
+                                {% endif %}
+                            </td>
+                        {% endfor %}
                     </tr>
 
                     <tr><td colspan="{{ sortedSubmissions.length + 1 }}" style="height: 60px;"></td></tr>
