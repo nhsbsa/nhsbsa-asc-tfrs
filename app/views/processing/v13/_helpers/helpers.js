@@ -221,55 +221,67 @@ function sortSubmissionsByDate(submissions, dateType) {
 
 function sortSubmissionsForTable(submissions) {
     return submissions.sort((a, b) => {
-        return new Date(b.submittedDate) - new Date(a.submittedDate);
+        // 1. If `a` has no submittedDate but `b` does, `a` comes first
+        if (!a.submittedDate && b.submittedDate) return -1;
+
+        // 2. If `a` has a submittedDate but `b` doesn’t, `b` comes first
+        if (a.submittedDate && !b.submittedDate) return 1;
+
+        // 3. Now both are in the same "submittedDate" group, handle processedDate
+        if (!a.processedDate && b.processedDate) return -1; // `a` missing processedDate goes first
+        if (a.processedDate && !b.processedDate) return 1;  // `b` missing processedDate goes first
+
+        // 4. If both have processedDate, sort descending (newest first)
+        const dateA = new Date(a.processedDate);
+        const dateB = new Date(b.processedDate);
+
+        return dateB - dateA;
     });
 }
 
-function buildLearnerComparison(submissions) {
-
+function buildSlotComparison(submissions) {
   const fileLearners = loadJSONFromFile('learners.json', dataPath);
-  const learnerMap = new Map(
-    fileLearners.map(l => [l.id, l])
-  );
+  const learnerMap = new Map(fileLearners.map(l => [l.id, l]));
 
   // submissions is already sorted: [latest, older, ..., oldest]
   const latest = submissions[0];
 
-  const latestLearnerIDs = new Set(latest.learners.map(l => l.learnerID));
-
-  const allLearners = new Map();
+  // Map slotID → history across submissions
+  const allSlots = new Map();
 
   submissions.forEach((submission, submissionIndex) => {
     submission.learners.forEach(learner => {
-      if (!allLearners.has(learner.learnerID)) {
-        allLearners.set(learner.learnerID, {
-          learnerID: learner.learnerID,
+      const slotKey = learner.slotID;
+
+      if (!allSlots.has(slotKey)) {
+        allSlots.set(slotKey, {
+          slotID: learner.slotID,
           history: Array(submissions.length).fill(null)
         });
       }
 
-      const entry = allLearners.get(learner.learnerID);
-
-      entry.history[submissionIndex] = {
-        ...learner,
-        processedDate: submission.processedDate
-      };
+      const entry = allSlots.get(slotKey);
+      entry.history[submissionIndex] = { ...learner, processedDate: submission.processedDate };
     });
   });
 
+  // Split active vs removed slots (based on latest submission)
+  const latestSlotIDs = new Set(latest.learners.map(l => l.slotID));
   const active = [];
   const removed = [];
 
-  for (const [id, data] of allLearners.entries()) {
-    const info = learnerMap.get(id) || {};
+  for (const [slotID, slotData] of allSlots.entries()) {
+    const latestLearnerID = slotData.history[0]?.learnerID;
+    const info = latestLearnerID ? learnerMap.get(latestLearnerID) || {} : {};
 
     const record = {
-      learnerID: id,
-      status: latestLearnerIDs.has(id) ? "active" : "removed",
-      history: data.history,
+      slotID,
+      learnerID: latestLearnerID || null,
+      status: latestSlotIDs.has(slotID) ? "active" : "removed",
+      history: slotData.history,
       givenName: info.givenName || "",
       familyName: info.familyName || "",
-      changeFlags: computeLearnerChangeFlags(data.history)
+      changeFlags: computeSlotChangeFlags(slotData.history)
     };
 
     if (record.status === "active") active.push(record);
@@ -279,7 +291,7 @@ function buildLearnerComparison(submissions) {
   const sortByName = (a, b) =>
     a.givenName.localeCompare(b.givenName) ||
     a.familyName.localeCompare(b.familyName) ||
-    a.learnerID.localeCompare(b.learnerID);
+    (a.learnerID || "").localeCompare(b.learnerID || "");
 
   active.sort(sortByName);
   removed.sort(sortByName);
@@ -288,43 +300,38 @@ function buildLearnerComparison(submissions) {
 }
 
 
-function computeLearnerChangeFlags(learnerHistory) {
-  // learnerHistory: array of learner objects per submission, null if missing
+function computeSlotChangeFlags(slotHistory) {
   const flags = {
     completionDate: false,
     evidenceOfCompletion: false,
-    status: false // active vs removed
+    status: false // slot added/removed or learner replaced
   };
 
-  const baseline = learnerHistory[learnerHistory.findIndex(l => l)]; // first non-null submission
+  const baselineIndex = slotHistory.findIndex(l => l);
+  if (baselineIndex === -1) return flags;
 
-  if (!baseline) return flags; // all null?
+  const baseline = slotHistory[baselineIndex];
 
-  for (const l of learnerHistory) {
+  for (const l of slotHistory) {
     if (!l) {
-      flags.status = true; // learner missing in this submission
+      flags.status = true; // slot missing in this submission → added/removed
       continue;
     }
 
-    if (
-      baseline.completionDate != null &&
-      l.completionDate != null &&
-      l.completionDate !== baseline.completionDate
-    ) {
+    // If learnerID changes within a slot → consider status changed
+    if (l.learnerID !== baseline.learnerID) {
+      flags.status = true;
+    }
+
+    // Completion date changes
+    if (baseline.completionDate && l.completionDate && l.completionDate !== baseline.completionDate) {
       flags.completionDate = true;
     }
-    if (
-      baseline.evidenceOfCompletion != null &&
-      l.evidenceOfCompletion != null &&
-      l.evidenceOfCompletion !== baseline.evidenceOfCompletion
-    ) {
+
+    // Evidence changes
+    if (baseline.evidenceOfCompletion && l.evidenceOfCompletion && l.evidenceOfCompletion !== baseline.evidenceOfCompletion) {
       flags.evidenceOfCompletion = true;
     }
-
-
-
-    // if (l.completionDate !== baseline.completionDate) flags.completionDate = true;
-    // if (l.evidenceOfCompletion !== baseline.evidenceOfCompletion) flags.evidenceOfCompletion = true;
   }
 
   return flags;
@@ -505,4 +512,4 @@ function checkDone(review, type, claimType) {
     return result
 }
 
-module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildLearnerComparison }
+module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildSlotComparison, computeSlotChangeFlags }

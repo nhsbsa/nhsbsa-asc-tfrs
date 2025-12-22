@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { formatDate, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, buildLearnerComparison } = require('../_helpers/helpers.js');
+const { formatDate, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, buildSlotComparison } = require('../_helpers/helpers.js');
 const fs = require('fs');
 const dataPath = 'app/views/processing/v13/_data/'
 
@@ -265,11 +265,33 @@ addFilter('sortSubmissionsForTable', function (submissions) {
     return sorted
 })
 
-addFilter('sortLearnersForTable', function (submissions) {
+addFilter('sortLearnerSlotsForTable', function (submissions) {
     let sorted = sortSubmissionsForTable(submissions)
-    let newLearnerArray = buildLearnerComparison(sorted)
+    let newLearnerArray = buildSlotComparison(sorted)
     return newLearnerArray
 })
+
+addFilter('getPreviousLearnerID', function (slot) {
+  if (!slot || !slot.history) return null;
+
+  // history is [latest, older, ..., oldest]
+  // slot is removed, so history[0] is null
+  for (let i = 1; i < slot.history.length; i++) {
+    if (slot.history[i]) {
+      return slot.history[i].learnerID;
+    }
+  }
+  return null;
+});
+addFilter('hasChanges', function (slots) {
+  if (!slots || !Array.isArray(slots)) return false;
+
+  let changed = slots.some(slot => {
+    const flags = slot.changeFlags || {};
+    return flags.completionDate || flags.evidenceOfCompletion || flags.status;
+  });
+  return changed
+  })
 
 addFilter('checkIfMultipleLearners', function (submissions) {
     let moreThanOne = false

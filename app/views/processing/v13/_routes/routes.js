@@ -857,6 +857,13 @@ router.get('/applySubmissionsFilter', function (req, res) {
   res.redirect('processing/v13/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
 })
 
+router.get('/applyLearnerFilter', function (req, res) {
+  var claimID = req.session.data.id
+  var filter = req.session.data.sort
+  req.session.data.claimScreen = "learnerPreviousSubmissions"
+  res.redirect('processing/v13/organisation/org-view-main?orgTab=singleClaim' + '?id=' + claimID + "&filter=" + filter)
+});
+
 router.get('/transform', function (req, res) {
   // transform pre-set claims
   const presetClaims = transformClaims()
