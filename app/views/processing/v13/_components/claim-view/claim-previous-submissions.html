@@ -1,7 +1,6 @@
 {% set sortedSubmissions = claim.submissions | sortSubmissionsForTable %}
 {% set internalOMMTCheck = sortedSubmissions | isAllInternalOMMT %}
 {% set claimFlags = sortedSubmissions | checkWhatHasChanged %}
-{% set org = data.organisations | findOrg(data.orgID) %}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
