@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft} = require('../_helpers/helpers.js');
+const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, buildSlotComparison } = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 addFilter('statusTag', function (statusID, statuses) {
@@ -156,9 +156,325 @@ addFilter('findSubmissionByDate', function (submissions, submittedDate) {
     return submission
 })
 
+addFilter('checkWhatHasChanged', function (submissions) {
+
+  if (submissions.length <= 1) {
+    // Only one submission → nothing has changed
+    return {
+      training: false,
+      startDate: false,
+      paymentDate: false,
+      evidenceOfPayment: false,
+      learners: false,
+      completionDate: false,
+      completionEvidence: false
+    }
+  }
+
+  // Start with the first submission as “baseline”
+  const baseline = submissions[0]
+
+  const flags = {
+    training: false,
+    startDate: false,
+    paymentDate: false,
+    evidenceOfPayment: false,
+    learners: false,
+    completionDate: false,
+    completionEvidence: false
+  }
+
+  for (let i = 1; i < submissions.length; i++) {
+    const current = submissions[i]
+
+    // Training
+    if (current.trainingCode !== baseline.trainingCode) flags.training = true
+
+    // Start date
+    if (current.startDate !== baseline.startDate) flags.startDate = true
+
+    // Payment date
+    if (current.costDate !== baseline.costDate) flags.paymentDate = true
+
+    // Evidence of payment
+    const currEOP = current.evidenceOfPayment || []
+    const baseEOP = baseline.evidenceOfPayment || []
+    if (
+      currEOP.length !== baseEOP.length ||
+      currEOP.some(f => !baseEOP.includes(f))
+    )
+      flags.evidenceOfPayment = true
+
+    // Learners added/removed
+    const currLearners = current.learners || []
+    const baseLearners = baseline.learners || []
+    const currIds = currLearners.map(l => l.learnerID)
+    const baseIds = baseLearners.map(l => l.learnerID)
+
+    if (
+      currIds.some(id => !baseIds.includes(id)) ||
+      baseIds.some(id => !currIds.includes(id))
+    )
+      flags.learners = true
+
+    // Completion date
+    const baseDateMap = new Map(baseLearners.map(l => [l.learnerID, l.completionDate]))
+    if (
+      flags.learners ||
+      currLearners.some(
+        l => baseDateMap.has(l.learnerID) && l.completionDate !== baseDateMap.get(l.learnerID)
+      )
+    )
+      flags.completionDate = true
+
+    // Completion evidence
+    const baseEvidenceMap = new Map(
+      baseLearners.map(l => [l.learnerID, l.evidenceOfCompletion])
+    )
+    if (
+      flags.learners ||
+      currLearners.some(
+        l =>
+          baseEvidenceMap.has(l.learnerID) &&
+          l.evidenceOfCompletion !== baseEvidenceMap.get(l.learnerID)
+      )
+    )
+      flags.completionEvidence = true
+  }
+
+  return flags
+})
+
 addFilter('findUser', function (email, org) {
     return findUser(email, org);
 })
+
+addFilter('checkIfMultipleLearners', function (submissions) {
+    let moreThanOne = false
+        for (let sub of submissions) {
+            if (sub.learners.length > 1) {
+                moreThanOne = true
+            }
+        }
+    return moreThanOne
+})
+
+addFilter('learnerCountChanges', function (currentSubmission, previousSubmission) {
+  if (!currentSubmission?.learners || !previousSubmission?.learners) {
+    return 0
+  }
+
+  const currentBySlot = new Map(
+    currentSubmission.learners.map(l => [l.slotID, l.learnerID])
+  )
+
+  const previousBySlot = new Map(
+    previousSubmission.learners.map(l => [l.slotID, l.learnerID])
+  )
+
+  const allSlotIDs = new Set([
+    ...currentBySlot.keys(),
+    ...previousBySlot.keys()
+  ])
+
+  let learnerChangeCount = 0
+
+  for (const slotID of allSlotIDs) {
+    const currentLearner = currentBySlot.get(slotID)
+    const previousLearner = previousBySlot.get(slotID)
+
+    // Slot added or removed
+    if (currentLearner === undefined || previousLearner === undefined) {
+      learnerChangeCount++
+      continue
+    }
+
+    // Same slot, different learner
+    if (currentLearner !== previousLearner) {
+      learnerChangeCount++
+    }
+  }
+
+  return learnerChangeCount
+})
+
+
+addFilter('completionDateCountChanges', function (currentSubmission, previousSubmission) {
+  if (!currentSubmission?.learners || !previousSubmission?.learners) {
+    return 0
+  }
+
+  // Map completionDate by slotID
+  const currentBySlot = new Map(
+    currentSubmission.learners.map(l => [l.slotID, l.completionDate])
+  )
+  const previousBySlot = new Map(
+    previousSubmission.learners.map(l => [l.slotID, l.completionDate])
+  )
+
+  let changeCount = 0
+
+  // Compare only slots that exist in BOTH submissions
+  for (const [slotID, currentDate] of currentBySlot.entries()) {
+    const previousDate = previousBySlot.get(slotID)
+    if (previousDate === undefined) continue // added slot → ignore
+    if (currentDate !== previousDate) changeCount++ // only count actual date differences
+  }
+
+  return changeCount
+})
+
+
+addFilter('completionEvidenceCountChanges', function (currentSubmission, previousSubmission) {
+  if (!currentSubmission?.learners || !previousSubmission?.learners) {
+    return 0
+  }
+
+  // Map evidence by slotID
+  const currentBySlot = new Map(
+    currentSubmission.learners.map(l => [l.slotID, l.evidenceOfCompletion])
+  )
+  const previousBySlot = new Map(
+    previousSubmission.learners.map(l => [l.slotID, l.evidenceOfCompletion])
+  )
+
+  // Get all slotIDs across both submissions
+  const allSlotIDs = new Set([...currentBySlot.keys(), ...previousBySlot.keys()])
+
+  let changeCount = 0
+
+  for (const slotID of allSlotIDs) {
+    const currentEvidence = currentBySlot.get(slotID)
+    const previousEvidence = previousBySlot.get(slotID)
+
+    if (currentEvidence === undefined || previousEvidence === undefined) {
+      // Slot added or removed
+      changeCount++
+    } else if (currentEvidence !== previousEvidence) {
+      // Evidence changed for existing slot
+      changeCount++
+    }
+  }
+
+  return changeCount
+})
+
+
+addFilter('checkWhatHasChanged', function (submissions) {
+  const flags = {
+    training: false,
+    startDate: false,
+    paymentDate: false,
+    evidenceOfPayment: false,
+    learners: false,
+    completionDate: false,
+    completionEvidence: false
+  }
+
+  if (submissions.length <= 1) return flags
+
+  // Sort submissions chronologically (oldest → newest)
+  const ordered = [...submissions].sort(
+    (a, b) => new Date(a.submittedDate) - new Date(b.submittedDate)
+  )
+
+  for (let i = 0; i < ordered.length - 1; i++) {
+    const prev = ordered[i]
+    const next = ordered[i + 1]
+
+    // --- Training ---
+    if (prev.trainingCode !== next.trainingCode) flags.training = true
+
+    // --- Start date ---
+    if (prev.startDate !== next.startDate) flags.startDate = true
+
+    // --- Payment date ---
+    if (prev.costDate !== next.costDate) flags.paymentDate = true
+
+    // --- Evidence of Payment ---
+    const prevEOP = prev.evidenceOfPayment || []
+    const nextEOP = next.evidenceOfPayment || []
+    if (
+      prevEOP.length !== nextEOP.length ||
+      prevEOP.some(f => !nextEOP.includes(f))
+    ) flags.evidenceOfPayment = true
+
+    // --- Learners / Slots ---
+    const prevSlots = prev.learners || []
+    const nextSlots = next.learners || []
+
+    const prevSlotMap = new Map(prevSlots.map(l => [l.slotID, l]))
+    const nextSlotMap = new Map(nextSlots.map(l => [l.slotID, l]))
+
+    const prevSlotIDs = new Set(prevSlotMap.keys())
+    const nextSlotIDs = new Set(nextSlotMap.keys())
+
+    const removedSlots = [...prevSlotIDs].filter(id => !nextSlotIDs.has(id))
+    const addedSlots = [...nextSlotIDs].filter(id => !prevSlotIDs.has(id))
+
+    // --- Learners flag ---
+    if (removedSlots.length > 0 || addedSlots.length > 0) {
+      flags.learners = true
+    }
+
+    for (const slotID of [...prevSlotIDs].filter(id => nextSlotIDs.has(id))) {
+      const prevLearner = prevSlotMap.get(slotID)
+      const nextLearner = nextSlotMap.get(slotID)
+      if (prevLearner.learnerID !== nextLearner.learnerID) {
+        flags.learners = true
+      }
+    }
+
+    // --- Completion date ---
+    for (const slotID of prevSlotIDs) {
+      const prevLearner = prevSlotMap.get(slotID)
+      const nextLearner = nextSlotMap.get(slotID)
+      if (!nextLearner || prevLearner.completionDate !== nextLearner.completionDate) {
+        flags.completionDate = true
+      }
+    }
+
+    // --- Completion evidence ---
+    if (removedSlots.length > 0 || addedSlots.length > 0) {
+      flags.completionEvidence = true
+    } else {
+      for (const slotID of [...prevSlotIDs].filter(id => nextSlotIDs.has(id))) {
+        const prevLearner = prevSlotMap.get(slotID)
+        const nextLearner = nextSlotMap.get(slotID)
+        if (prevLearner.evidenceOfCompletion !== nextLearner.evidenceOfCompletion) {
+          flags.completionEvidence = true
+        }
+      }
+    }
+  }
+
+  return flags
+})
+
+addFilter('getFirstDate', function (learners) {
+  if (!learners || learners.length === 0) return null;
+
+  const dates = learners
+    .map(l => l.completionDate)
+    .filter(Boolean);
+
+  if (dates.length === 0) return null;
+  dates.sort((a, b) => new Date(a) - new Date(b));
+  return dates[0]
+})
+
+addFilter('getLastDate', function (learners) {
+  if (!learners || learners.length === 0) return null;
+
+  const dates = learners
+    .map(l => l.completionDate)
+    .filter(Boolean);
+
+  if (dates.length === 0) return null;
+  dates.sort((a, b) => new Date(a) - new Date(b));
+  return dates[dates.length - 1]
+})
+
 
 addFilter('getCount', function (items) {
     let count = 0;
@@ -429,6 +745,44 @@ addFilter('orderByMostRecent', function (submissions) {
 addFilter('sortSubmissionsForTable', function (submissions) {
     let sorted = sortSubmissionsForTable(submissions)
     return sorted
+})
+
+addFilter('sortLearnerSlotsForTable', function (submissions) {
+    let sorted = sortSubmissionsForTable(submissions)
+    let newLearnerArray = buildSlotComparison(sorted)
+    return newLearnerArray
+})
+
+addFilter('getPreviousLearnerID', function (slot) {
+  if (!slot || !slot.history) return null;
+
+  // history is [latest, older, ..., oldest]
+  // slot is removed, so history[0] is null
+  for (let i = 1; i < slot.history.length; i++) {
+    if (slot.history[i]) {
+      return slot.history[i].learnerID;
+    }
+  }
+  return null;
+});
+addFilter('hasChanges', function (slots) {
+  if (!slots || !Array.isArray(slots)) return false;
+
+  let changed = slots.some(slot => {
+    const flags = slot.changeFlags || {};
+    return flags.completionDate || flags.evidenceOfCompletion || flags.status;
+  });
+  return changed
+  })
+
+addFilter('hasRemoved', function (learners) {
+    let hasRemoved = false
+    for (const l of learners) {
+        if (l.status == "removed") {
+            hasRemoved = true
+        }
+    }
+    return hasRemoved
 })
 
 addFilter('matchSubmissionToText', function (submissions) {

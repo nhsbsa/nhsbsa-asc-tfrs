@@ -553,6 +553,105 @@ function findUser(email, org) {
     return user;
 }
 
+function buildSlotComparison(submissions) {
+  const fileLearners = loadJSONFromFile('learners.json', dataPath);
+  const learnerMap = new Map(fileLearners.map(l => [l.id, l]));
+
+  // submissions is already sorted: [latest, older, ..., oldest]
+  const latest = submissions[0];
+
+  // Map slotID → history across submissions
+  const allSlots = new Map();
+
+  submissions.forEach((submission, submissionIndex) => {
+    submission.learners.forEach(learner => {
+      const slotKey = learner.slotID;
+
+      if (!allSlots.has(slotKey)) {
+        allSlots.set(slotKey, {
+          slotID: learner.slotID,
+          history: Array(submissions.length).fill(null)
+        });
+      }
+
+      const entry = allSlots.get(slotKey);
+      entry.history[submissionIndex] = { ...learner, processedDate: submission.processedDate };
+    });
+  });
+
+  // Split active vs removed slots (based on latest submission)
+  const latestSlotIDs = new Set(latest.learners.map(l => l.slotID));
+  const active = [];
+  const removed = [];
+
+  for (const [slotID, slotData] of allSlots.entries()) {
+    const latestLearnerID = slotData.history[0]?.learnerID;
+    const info = latestLearnerID ? learnerMap.get(latestLearnerID) || {} : {};
+
+    const record = {
+      slotID,
+      learnerID: latestLearnerID || null,
+      status: latestSlotIDs.has(slotID) ? "active" : "removed",
+      history: slotData.history,
+      givenName: info.givenName || "",
+      familyName: info.familyName || "",
+      changeFlags: computeSlotChangeFlags(slotData.history)
+    };
+
+    if (record.status === "active") active.push(record);
+    else removed.push(record);
+  }
+
+  const sortByName = (a, b) =>
+    a.givenName.localeCompare(b.givenName) ||
+    a.familyName.localeCompare(b.familyName) ||
+    (a.learnerID || "").localeCompare(b.learnerID || "");
+
+  active.sort(sortByName);
+  removed.sort(sortByName);
+
+  return [...active, ...removed];
+}
+
+
+function computeSlotChangeFlags(slotHistory) {
+  const flags = {
+    completionDate: false,
+    evidenceOfCompletion: false,
+    status: false // slot added/removed or learner replaced
+  };
+
+  const baselineIndex = slotHistory.findIndex(l => l);
+  if (baselineIndex === -1) return flags;
+
+  const baseline = slotHistory[baselineIndex];
+
+  for (const l of slotHistory) {
+    if (!l) {
+      flags.status = true; // slot missing in this submission → added/removed
+      continue;
+    }
+
+    // If learnerID changes within a slot → consider status changed
+    if (l.learnerID !== baseline.learnerID) {
+      flags.status = true;
+    }
+
+    // Completion date changes
+    if (baseline.completionDate && l.completionDate && l.completionDate !== baseline.completionDate) {
+      flags.completionDate = true;
+    }
+
+    // Evidence changes
+    if (baseline.evidenceOfCompletion && l.evidenceOfCompletion && l.evidenceOfCompletion !== baseline.evidenceOfCompletion) {
+      flags.evidenceOfCompletion = true;
+    }
+  }
+
+  return flags;
+}
+
+
 function sortClaimsByStatusSubmission(claims, dateType) {
     // Sort the claims based on the most recent submission date
     claims.sort((a, b) => {
@@ -925,4 +1024,4 @@ function replaceLearnerID(learners, oldID, newID) {
   });
 }
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID}
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison}

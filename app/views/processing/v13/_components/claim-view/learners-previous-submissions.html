@@ -35,7 +35,7 @@
                 {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
                 {% if learner.status == "active"%}
                     <li>
-                        <a class="govuk-link learner-jump-link" href="#{{learnerInfo.givenName}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
+                        <a class="govuk-link" href="#{{learnerInfo.givenName}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
                     </li>
                 {% endif %}
             {% endif %}
@@ -48,7 +48,7 @@
                 {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
                 {% if learner.status == "removed"%}
                     <li>
-                        <a class="govuk-link learner-jump-link" href="#{{learnerInfo.givenName}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
+                        <a class="govuk-link" href="#{{learnerInfo.givenName}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
                     </li>
 
                 {% endif %}
