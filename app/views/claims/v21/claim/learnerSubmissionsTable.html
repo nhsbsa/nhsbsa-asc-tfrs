@@ -38,7 +38,7 @@
             </form>
         </div>
     </div>
-    {% if data.filter == "changed" and slot.changeFlags == null%}
+    {% if data.filter == "changed" and sortedLearnerSlots | hasChanges == false %}
         <div class="govuk-grid-row">
             <p>There have been no changes to any submissions</p>
         </div>
@@ -67,8 +67,7 @@
                 {% endfor %}
 
                 {# Removed slots header #}
-                {% set removedSlots = sortedLearnerSlots | selectattr("status", "equalto", "removed") | list %}
-                {% if removedSlots | length %}
+                {% if sortedLearnerSlots | hasRemoved %}
                     <h2 class="govuk-heading-s" style="padding-top: 20px;">Removed</h2>
                 {% endif %}
 

@@ -765,6 +765,15 @@ addFilter('getPreviousLearnerID', function (slot) {
   }
   return null;
 });
+addFilter('hasChanges', function (slots) {
+  if (!slots || !Array.isArray(slots)) return false;
+
+  let changed = slots.some(slot => {
+    const flags = slot.changeFlags || {};
+    return flags.completionDate || flags.evidenceOfCompletion || flags.status;
+  });
+  return changed
+  })
 
 addFilter('hasRemoved', function (learners) {
     let hasRemoved = false
