@@ -42,13 +42,44 @@
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-quarter">
 
-             <ul class="govuk-list">
-                {% for learnerSlot in sortedLearnerSlots %}
-                    <p>hello</p>
+                 <ul class="govuk-list">
 
-                {% endfor %}
+                    {# Active slots #}
+                    {% for slot in sortedLearnerSlots %}
+                        {% if data.filter == "everything" 
+                            or (data.filter == "changed" 
+                                and (slot.changeFlags.completionDate 
+                                    or slot.changeFlags.evidenceOfCompletion 
+                                    or slot.changeFlags.status)) %}
+                        {% set learnerInfo = slot.history[0].learnerID | findLearner(data.learners) %}
+                        {% if slot.status == "active" and learnerInfo %}
+                            <li>
+                            <a class="govuk-link learner-jump-link" href="#{{ learnerInfo.givenName }}" data-tab="{{ tabID }}">
+                                {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
+                            </a>
+                            </li>
+                        {% endif %}
+                        {% endif %}
+                    {% endfor %}
 
-             </ul>
+                    {# Removed slots header #}
+                    {% if sortedLearnerSlots | hasRemoved %}
+                        <h2 class="govuk-heading-s" style="padding-top: 20px;">Removed</h2>
+                    {% endif %}
+
+                    {# Removed slots #}
+                    {% for slot in sortedLearnerSlots %}
+                        {% set learnerInfo = slot.history[0].learnerID | findLearner(data.learners) %}
+                        {% if slot.status == "removed" and learnerInfo %}
+                        <li>
+                            <a class="govuk-link learner-jump-link" href="#{{ learnerInfo.givenName }}" data-tab="{{ tabID }}">
+                            {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
+                            </a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    </ul>
 
         </div>
 
@@ -112,7 +143,7 @@
                     <!-- SLOT / LEARNER ROW -->
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell">
-                        <strong>Learner {{ slot.slotID }}</strong>
+                        <strong>Learner {{ loop.index0 + 1 }}</strong>
                         </td>
 
                         {% for submission in slot.history %}
@@ -134,7 +165,7 @@
                                 <strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong>
                                 </mark><br>
                                 {{ submission.learnerID }}
-                                <p><strong>(Learner changed)</strong></p>
+                                <p><strong>(New)</strong></p>
 
                             {% else %}
                                 {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}<br>
@@ -145,7 +176,7 @@
                         {% else %}
                             {% if loop.index0 == 0 %}
                             <td class="govuk-table__cell">
-                                <mark class="hods-highlight"><strong>(Slot removed)</strong></mark>
+                                <mark class="hods-highlight"><strong>(Removed)</strong></mark>
                             </td>
                             {% else %}
                             <td class="govuk-table__cell">---</td>

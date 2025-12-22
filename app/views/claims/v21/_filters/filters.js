@@ -753,6 +753,16 @@ addFilter('sortLearnerSlotsForTable', function (submissions) {
     return newLearnerArray
 })
 
+addFilter('hasRemoved', function (learners) {
+    let hasRemoved = false
+    for (const l of learners) {
+        if (l.status == "removed") {
+            hasRemoved = true
+        }
+    }
+    return hasRemoved
+})
+
 addFilter('matchSubmissionToText', function (submissions) {
     const submissionLabels = submissions.map((submission, index, array) => {
         if (!submission.submittedDate) {
