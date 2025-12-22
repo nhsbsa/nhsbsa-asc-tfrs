@@ -20,7 +20,7 @@
       <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
         <h2 class="govuk-heading-l" id="training">{% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% else %}Claim{% endif %} history</h2>
         <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} history with any edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
-        <form action="/applySubmissionsFilter" method="post" novalidate>
+        <form action="/applySubmissionsSort" method="post" novalidate>
           <div class="govuk-form-group">
               <label class="govuk-label" for="sort">
               </label>

@@ -1392,13 +1392,13 @@ router.post('/add-supporting-note', function (req, res) {
   res.redirect('claim/claim-details'+'?id='+claimID+'#notes')
 });
 
-router.get('/applySubmissionsFilter', function (req, res) {
+router.get('/applySubmissionsSort', function (req, res) {
   var claimID = req.session.data.id
   var filter = req.session.data.sort
   res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
 });
 
-router.get('/applyLearnerFilter', function (req, res) {
+router.get('/applyLearnerSort', function (req, res) {
   var claimID = req.session.data.id
   var filter = req.session.data.sort
   res.redirect('claims/v21/claim/learnerSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
