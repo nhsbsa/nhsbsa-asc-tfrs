@@ -38,7 +38,11 @@
             </form>
         </div>
     </div>
-
+    {% if data.filter == "changed" and slot.changeFlags == null%}
+        <div class="govuk-grid-row">
+            <p>There have been no changes to any submissions</p>
+        </div>
+    {% else%}
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-quarter">
 
@@ -160,6 +164,7 @@
                             </td>
                         {% endfor %}
                     </tr>
+
 
                     <tr><td colspan="{{ sortedSubmissions.length + 1 }}" style="height: 60px;"></td></tr>
 
@@ -327,10 +332,13 @@
 
                 </tbody>
                 </table>
+
+                
             </div>
-            </div>
+        </div>
 
     </div>
+     {% endif%}
 
 
 
