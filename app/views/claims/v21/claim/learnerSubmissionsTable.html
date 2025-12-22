@@ -130,8 +130,7 @@
                         {% for submission in sortedSubmissions %}
                             <td class="govuk-table__cell">
                                 {% if submission.submitter %}
-                                {# To do - fix #}fix
-                                    {{(submission.submitter | findUser(data.org.workplaceID)).givenName}} {{(submission.submitter | findUser(data.org.workplaceID)).familyName}}
+                                    {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}
                                 {% else %}
                                     ---
                                 {% endif %}

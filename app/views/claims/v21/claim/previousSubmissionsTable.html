@@ -68,8 +68,7 @@
                         <td class="govuk-table__cell"><strong>Submitted by</strong></td>
                         {% for submission in sortedSubmissions %}
                             {% if submission.submitter %}
-                            {# To do - fix #}
-                                <td class="govuk-table__cell">{{(submission.submitter | findUser(data.org.workplaceID)).givenName}} {{(submission.submitter | findUser(data.org.workplaceID)).familyName}}</td>
+                                <td class="govuk-table__cell">{{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}</td>
                             {% else %}
                                 <td class="govuk-table__cell">---</td>
                             {% endif %}
