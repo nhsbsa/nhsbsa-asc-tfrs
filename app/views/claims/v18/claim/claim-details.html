@@ -186,15 +186,12 @@
       <dl class="govuk-summary-list">
   {% endif %}
 
-      {% if (claim.status != "rejected") %}
-
         {% if (pairClaim.isPaymentPlan == true) %}
           {% set is40Part = true %}
           {% include "../_components/claim-sections/evidencePayment.html" %}
         {% endif %}
         
         {% include "../_components/claim-sections/evidenceCompletion.html" %}
-      {% endif %}
 
     </dl>
 
