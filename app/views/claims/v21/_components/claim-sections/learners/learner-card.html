@@ -38,11 +38,19 @@
                         <div class="moj-alert__content">
                             {{note}}
                         </div>
-                        <div class="moj-alert__button-row">
-                            <a href="../mark-as-actioned?learnerID={{learner.learnerID}}" class="govuk-button govuk-button--secondary govuk-!-margin-0">
-                                Mark as actioned
-                            </a>
-                        </div>
+                        {% if ((learnerList.id == "needsaction" or learnerList.id == "actioned") and not (claim.claimType == "60" and claim.status == "approved")) or (claim.claimType != "40" and claim.status == "queried") %}
+                            <div class="moj-alert__button-row">
+                                {% if learnerList.id == "needsaction" %}
+                                    <a href="../mark-as-actioned?learnerID={{learner.learnerID}}" class="govuk-button govuk-button--secondary govuk-!-margin-0">
+                                        Mark as actioned
+                                    </a>
+                                {% elif learnerList.id == "actioned" %}
+                                    <a href="../mark-as-needs-action?learnerID={{learner.learnerID}}" class="govuk-button govuk-button--secondary govuk-!-margin-0">
+                                        Mark as needs action
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
                     </div>
                 {% endif %}
             <dl class="govuk-summary-list">
@@ -154,8 +162,5 @@
 
             </dl>
         </div>
-        {% if note != null %}
-
-        {% endif %}
     {% endif %}
 </div>
