@@ -20,6 +20,14 @@
         </li>
     {% endif %}
 
+    {% if (filteredLearners.actioned.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "queried") %}
+        <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "actioned" %} govuk-tabs__list-item--selected{% endif %}">
+                <a class="govuk-tabs__tab" href="#actioned">
+                    {{ filteredLearners.actioned.label}} ({{filteredLearners.actioned.learners | length}})
+                </a>
+        </li>
+    {% endif %}
+
     {% if (filteredLearners.done.learners | length) > 0 or (claim.claimType == "100" and claim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
         <li class="govuk-tabs__list-item{% if filteredLearners.multi.value == "done" %} govuk-tabs__list-item--selected{% endif %}">
                 <a class="govuk-tabs__tab" href="#done">
@@ -65,6 +73,14 @@
     {% if (filteredLearners.needsaction.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "queried") %}
         <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "needsaction" %} govuk-tabs__panel--hidden{% endif %}" id="needsaction">
             {% set learnerList = filteredLearners.needsaction %}
+            {% set canChange = true %}
+            {% include "./learner-card-list.html" %}
+        </div>
+    {% endif %}
+
+    {% if (filteredLearners.actioned.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "queried") %}
+        <div class="govuk-tabs__panel{% if filteredLearners.multi.value != "actioned" %} govuk-tabs__panel--hidden{% endif %}" id="actioned">
+            {% set learnerList = filteredLearners.actioned %}
             {% set canChange = true %}
             {% include "./learner-card-list.html" %}
         </div>

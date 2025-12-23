@@ -678,7 +678,7 @@ router.post('/add-learner', function (req, res) {
           }
         if (currentSubmission.learners == null || currentSubmission.learners == []) {
           currentSubmission.learners = [learner]
-          res.redirect('claim/claim-details?id=' + claimID + '#learner')
+          res.redirect('claim/add-another-learner')
         } else if (currentSubmission.learners != [] && change == "true") {
           currentSubmission.learners = replaceLearnerID(currentSubmission.learners, changeLearnerID, newLearner.id)
           if (currentSubmission.learners.length > 1) {
@@ -688,7 +688,7 @@ router.post('/add-learner', function (req, res) {
               }
               res.redirect('claim/claim-learners')
           } else {
-              res.redirect('claim/claim-details?id=' + claimID + '#learner')
+              res.redirect('claim/add-another-learner')
           }
           
         } else {
@@ -700,7 +700,7 @@ router.post('/add-learner', function (req, res) {
               }
                 res.redirect('claim/claim-learners')
             } else {
-                res.redirect('claim/claim-details?id=' + claimID + '#learner')
+                res.redirect('claim/add-another-learner')
             }
         }
 
@@ -708,6 +708,49 @@ router.post('/add-learner', function (req, res) {
 
     }
   }
+});
+
+router.post('/add-another-learner', function (req, res) {
+  const choice = req.session.data.anotherlearner
+
+  if (choice == "no") {
+    delete req.session.data.anotherlearner;
+    res.redirect('claim/claim-details#learner')
+  } else if (choice == "yes") {
+    delete req.session.data.anotherlearner;
+    res.redirect('claim/select-learner')
+  } else {
+    res.redirect('claim/add-another-learner?submitError=true')
+  }
+});
+
+router.get('/mark-as-actioned', function (req, res) {
+  const learnerID = req.session.data.learnerID
+  const claimID = req.session.data.id 
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
+      for (const learner of submission.learners) {
+        if (learner.learnerID == learnerID) {
+            learner.actioned = true
+          break;
+        }
+      }
+      break;
+    }
+  }
+
+  req.session.data.learnerConfirmation = {
+    type: "actioned",
+    learner: learnerID,
+  }
+    res.redirect('claim/claim-learners')
 });
 
 router.post('/add-evidence', function (req, res) {

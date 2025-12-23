@@ -12,6 +12,13 @@
     {% include "./learner-links.html" %}
 {% endif %}
 
+{% if (filteredLearners.actioned.learners | length) > 0 or (claim.claimType == "100" and claim.status == "queried") or (pairClaim != null and pairClaim.status == "queried") %}
+    <h2 class="govuk-heading-s">{{ filteredLearners.actioned.label}} ({{filteredLearners.actioned.learners | length}})</h2>
+    {% set learners = filteredLearners.actioned.learners  %}
+    {% set tabID = filteredLearners.actioned.id %}
+    {% include "./learner-links.html" %}
+{% endif %}
+
 {% if (filteredLearners.done.learners | length) > 0 or (claim.claimType == "100" and claim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "not-yet-submitted") %}
     <h2 class="govuk-heading-s">{{ filteredLearners.done.label}} ({{filteredLearners.done.learners | length}})</h2>
     {% set learners = filteredLearners.done.learners%}
