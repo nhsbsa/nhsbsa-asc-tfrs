@@ -149,8 +149,17 @@
   <div class="govuk-grid-column-one-third">
 
     <p class="govuk-body"><a class="govuk-link" href="claim-history.html">View claim history</a></p>
-    <p class="govuk-body"><a class="govuk-link" href="">View previous submissions</a></p>
 
+    {% if claim.status != "not-yet-submitted" and (claim.submissions | length) > 1 and claim.claimType == "100" %}
+      <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=100&filter=everything">View previous submissions</a></p>
+    {% endif %}
+
+    {% if (claim.status != "not-yet-submitted" and pairClaim.status != "queried" and claim.submissions.length > 1 and claim.claimType == "60") %}
+      <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=60&filter=everything" >View 60 part submissions</a></p>
+    {% endif %}
+    {% if (pairClaim.status != "not-yet-submitted") and (pairClaim.submissions | length) > 1 and pairClaim.claimType == "40"%}
+        <p class="govuk-body"><a class="govuk-link" href="../claim/previousSubmissionsTable?view=40&filter=everything">View 40 part submissions</a></p>
+    {% endif %}
   </div>
 
 </div> 

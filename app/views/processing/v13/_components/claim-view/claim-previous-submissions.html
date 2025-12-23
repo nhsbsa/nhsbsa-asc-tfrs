@@ -12,10 +12,9 @@
 
         <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} history with any edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
 
-    <form action="/applySubmissionsFilter" method="post" novalidate>
+    <form action="/applySubmissionsFilterProcessor" method="post" novalidate>
         <div class="govuk-form-group">
             <label class="govuk-label" for="sort">
-                {# Show #}
             </label>
             <select class="govuk-select" id="filterSubmissionValues" name="sort">
                 <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>View edits only</option>
