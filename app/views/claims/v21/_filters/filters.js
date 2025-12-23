@@ -992,6 +992,11 @@ addFilter('filterLearners', function (claim, pairClaim) {
             label: "Needs action",
             learners: []
         },
+        actioned: {
+            id: "actioned",
+            label: "Actioned",
+            learners: []
+        },
         done: {
             id: "done",
             label: "Done",
@@ -1071,8 +1076,14 @@ addFilter('filterLearners', function (claim, pairClaim) {
 
     if (claim.claimType == "100" && claim.status == "queried") {
         filtered.needsaction.learners = getLearnersFromDraft(submission, draftSubmission);
+        filtered.actioned.learners = draftSubmission.learners.filter(item => item.actioned === true);
+        const actionedIds = new Set(filtered.actioned.learners.map(l => l.learnerID));
+        filtered.needsaction.learners = filtered.needsaction.learners.filter( l => !actionedIds.has(l.learnerID));
     } else if (claim.claimType == "60" && pairClaim != null && pairClaim.status == "queried") {
         filtered.needsaction.learners = getLearnersFromDraft(pairSubmission, draftPairSubmission);
+        filtered.actioned.learners = draftPairSubmission.learners.filter(item => item.actioned === true);
+        const actionedIds = new Set(filtered.actioned.learners.map(l => l.learnerID));
+        filtered.needsaction.learners = filtered.needsaction.learners.filter( l => !actionedIds.has(l.learnerID));
     }
 
     if (claim.status == "queried") {

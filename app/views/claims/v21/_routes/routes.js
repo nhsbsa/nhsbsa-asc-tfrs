@@ -724,6 +724,35 @@ router.post('/add-another-learner', function (req, res) {
   }
 });
 
+router.get('/mark-as-actioned', function (req, res) {
+  const learnerID = req.session.data.learnerID
+  const claimID = req.session.data.id 
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
+      for (const learner of submission.learners) {
+        if (learner.learnerID == learnerID) {
+            learner.actioned = true
+          break;
+        }
+      }
+      break;
+    }
+  }
+
+  req.session.data.learnerConfirmation = {
+    type: "actioned",
+    learner: learnerID,
+  }
+    res.redirect('claim/claim-learners')
+});
+
 router.post('/add-evidence', function (req, res) {
   delete req.session.data.deleteSuccess
   var type = req.session.data.type

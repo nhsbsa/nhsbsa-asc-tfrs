@@ -897,3 +897,9 @@ margin-right: govuk-spacing(3);
 .submissions-table .submissions-header-col {
     width: 500px;
 }
+
+.moj-alert__button-row {
+  grid-column: 2 / -1; // span content + action columns
+  margin-top: govuk-spacing(3);
+  text-align: right;
+}
