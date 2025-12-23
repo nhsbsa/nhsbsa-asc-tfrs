@@ -753,6 +753,35 @@ router.get('/mark-as-actioned', function (req, res) {
     res.redirect('claim/claim-learners')
 });
 
+router.get('/mark-as-needs-action', function (req, res) {
+  const learnerID = req.session.data.learnerID
+  const claimID = req.session.data.id 
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
+      for (const learner of submission.learners) {
+        if (learner.learnerID == learnerID) {
+            delete learner.actioned
+          break;
+        }
+      }
+      break;
+    }
+  }
+
+  req.session.data.learnerConfirmation = {
+    type: "needsaction",
+    learner: learnerID,
+  }
+    res.redirect('claim/claim-learners')
+});
+
 router.post('/add-evidence', function (req, res) {
   delete req.session.data.deleteSuccess
   var type = req.session.data.type
