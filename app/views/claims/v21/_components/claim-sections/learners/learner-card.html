@@ -54,7 +54,7 @@
                     </div>
                 {% endif %}
             <dl class="govuk-summary-list">
-                {% if (not submission.sharedCompletionDate) %}
+                {% if (submission.sharedCompletionDate == false) %}
                     {% if (not learner.completionDate) %}
                         
                         {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "missing" and learner.learnerID %}
