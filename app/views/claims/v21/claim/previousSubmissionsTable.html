@@ -137,7 +137,7 @@
                         </tr>
                         {% endif %}
 
-                    {% if (data.view == "100" or data.view == "60") and (data.filter == "everything" or (data.filter == "changed" and claimFlags.startDate))%}
+                    {% if (data.view == "60") and (data.filter == "everything" or (data.filter == "changed" and claimFlags.startDate))%}
                             <tr class="govuk-table__row">
                                 <td class="govuk-table__cell"><strong>Start date</strong></td>
                                 {% for submission in sortedSubmissions %}
