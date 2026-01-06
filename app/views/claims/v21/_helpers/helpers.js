@@ -21,7 +21,7 @@ function checkClaim(claim) {
         result.learner = "valid"
     }
 
-    if (claim.claimType != "40" && submission.startDate == null) {
+    if (claim.claimType == "60" && submission.startDate == null) {
         result.startDate = "missing"
     } else {
         result.startDate = "valid"
