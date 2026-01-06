@@ -65,7 +65,10 @@
                 {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
                 Evidence of completion added for <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
               {% elif data.learnerConfirmation.type == "removal" %}
-                {% if claim.claimType == "100" or (claim.claimType == "60" and claim.status != "approved") %}
+                {% if claim.status == "queried" or (claim.claimType == "60" and claim.status == "approved" and pairClaim.status == "queried") %}
+                  {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
+                  <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> removed from claim
+                {% elif claim.claimType == "100" or (claim.claimType == "60" and claim.status != "approved") %}
                   {{learnerInfo.givenName}} {{learnerInfo.familyName}} removed from the claim
                 {% else %}
                     {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
@@ -76,10 +79,10 @@
                 <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> added back to the {% if claim.claimType == "100" or (claim.claimType == "60" and claim.status != "approved") %}claim {% else %}40 part of the claim{% endif %}
               {% elif data.learnerConfirmation.type == "actioned" %}
                 {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
-                <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> marked as actioned
+                <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> moved to done
               {% elif data.learnerConfirmation.type == "needsaction" %}
                 {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
-                <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> marked as needs action
+                <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> moved to needs action
               {% endif %}
             </div>
 
@@ -135,7 +138,7 @@
         {% endif %}
         
         <div class="govuk-button-group">
-          <a href="../claim-learner-back-handler" class="govuk-button" data-module="govuk-button">Back to claim</a>
+          <a href="../claim-learner-back-handler" class="govuk-button" data-module="govuk-button">Back to claim details</a>
           {% if (claim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.claimType == "60") %}
           <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="select-learner">
               Add another learner

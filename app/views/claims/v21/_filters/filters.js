@@ -1348,7 +1348,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
         },
         actioned: {
             id: "actioned",
-            label: "Actioned",
+            label: "Done",
             learners: []
         },
         done: {
