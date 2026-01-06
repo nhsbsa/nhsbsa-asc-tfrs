@@ -34,7 +34,7 @@
 {% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
 
 {% block pageTitle %}
-{% if data.submitError %}Error: {% endif %}Add another learner — {{serviceName}} — GOV.UK
+{% if data.submitError %}Error: {% endif %}Add learners — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block content %}
@@ -62,19 +62,29 @@
 
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
         <h1 class="govuk-heading-l">
-            Claim for multiple learners
+            Add learners
         </h1>
-        <p class="govuk-body">You have added {{learner.givenName}} {{learner.familyName}} to the claim.</p>
-        <p class="govuk-body">You can make claims for more than one learner at a time. Providing:</p>
-        <ul class="govuk-list govuk-list--bullet">
-            <li>All learners attended the same course.</li>
-            <li>You paid for all the learners on the same date.</li>
-            {% if claim.claimType == "60" %}<li>For claims using the 60/40 funding model all learners started on the same date.</li>{% endif %}
-        </ul>
-        {% if claim.claimType == "60" %}
-            <p class="govuk-body">For claims using the 60/40 funding model all learners must complete the training before the 40 part can be submitted.</p>
-            <p class="govuk-body">However learners who won't complete, for instance because they have left your organisations, can be removed from the 40 part before submission.</p>
+
+        {% if claim.claimType == "100" %}
+            <p class="govuk-body">You've added <strong class="govuk-!-font-weight-bold">{{learner.givenName}} {{learner.familyName}}</strong> to this 100 claim.</p>
+            <p class="govuk-body">You can add more learners to the claim providing:</p>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>they all attended the same course</li>
+                <li>you paid for all the learners on the same date</li>
+            </ul>
+        {% else %}
+            <p class="govuk-body">You've added <strong class="govuk-!-font-weight-bold">{{learner.givenName}} {{learner.familyName}}</strong> to this 60/40 claim.</p>
+            <p class="govuk-body">You can add more learners to the claim providing:</p>
+            <ul class="govuk-list govuk-list--bullet">
+                <li>all the learners attended the same course</li>
+                <li>they all started at the same time</li>
+                <li>you paid for them all on the same date</li>
+            </ul>
+            <p class="govuk-body">You can remove learners from the 40 part of this claim later on if you need to.</p>
+            <p class="govuk-body">All remaining learners must complete the course before you can submit the 40 part.</p>
         {% endif %}
+
+
 
         <form action="../add-another-learner" method="post" novalidate>
             <div class="govuk-form-group {% if data.submitError %}govuk-form-group--error{% endif %}">
