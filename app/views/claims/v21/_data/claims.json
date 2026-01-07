@@ -353,7 +353,7 @@
             "slotID": "1",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -363,7 +363,7 @@
             "slotID": "2",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -373,7 +373,7 @@
             "slotID": "3",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -383,7 +383,7 @@
             "slotID": "4",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -393,7 +393,7 @@
             "slotID": "7",
             "learnerID": "WA 92 8F 35 V",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -403,7 +403,7 @@
             "slotID": "8",
             "learnerID": "UH 04 6F 47 V",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -413,7 +413,7 @@
             "slotID": "9",
             "learnerID": "EL 78 2F 05 S",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -423,7 +423,7 @@
             "slotID": "11",
             "learnerID": "CL 74 2F 71 G",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -433,7 +433,7 @@
             "slotID": "12",
             "learnerID": "PX 89 8F 98 Q",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -443,7 +443,7 @@
             "slotID": "13",
             "learnerID": "BU 26 7F 00 Y",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -477,7 +477,7 @@
             "slotID": "1",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "pass",
               "note": null
@@ -487,17 +487,17 @@
             "slotID": "2",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
-              "note": "The name of the learner on the claim does not match the name of the learner on the certificate of completion."
+              "note": "The completion date entered on the claim does not match the date on the certificate of completion."
             }
           },
           {
             "slotID": "3",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "pass",
               "note": null
@@ -507,7 +507,7 @@
             "slotID": "4",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "pass",
               "note": null
@@ -517,27 +517,27 @@
             "slotID": "7",
             "learnerID": "WA 92 8F 35 V",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
-              "note": "The name of the learner on the claim does not match the name of the learner on the certificate of completion."
+              "note": "The completion date entered on the claim does not match the date on the certificate of completion."
             }
           },
           {
             "slotID": "8",
             "learnerID": "UH 04 6F 47 V",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "queried",
-              "note": "The name of the learner on the claim does not match the name of the learner on the certificate of completion."
+              "note": "The completion date entered on the claim does not match the date on the certificate of completion."
             }
           },
           {
             "slotID": "9",
             "learnerID": "EL 78 2F 05 S",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "pass",
               "note": null
@@ -547,7 +547,7 @@
             "slotID": "11",
             "learnerID": "CL 74 2F 71 G",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "pass",
               "note": null
@@ -557,7 +557,7 @@
             "slotID": "12",
             "learnerID": "PX 89 8F 98 Q",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "pass",
               "note": null
@@ -567,7 +567,7 @@
             "slotID": "13",
             "learnerID": "BU 26 7F 00 Y",
             "completionDate": "2025-01-23T21:12:41.455Z",
-            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "pass",
               "note": null
