@@ -282,6 +282,36 @@
               "outcome": null,
               "note": null
             }
+          },
+          {
+            "slotID": "11",
+            "learnerID": "CL 74 2F 71 G",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "12",
+            "learnerID": "PX 89 8F 98 Q",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "13",
+            "learnerID": "BU 26 7F 00 Y",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
           }
         ],
         "removedLearners": [],
@@ -388,6 +418,36 @@
               "outcome": null,
               "note": null
             }
+          },
+          {
+            "slotID": "11",
+            "learnerID": "CL 74 2F 71 G",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "12",
+            "learnerID": "PX 89 8F 98 Q",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "13",
+            "learnerID": "BU 26 7F 00 Y",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
           }
         ],
         "removedLearners": null,
@@ -476,6 +536,36 @@
           {
             "slotID": "9",
             "learnerID": "EL 78 2F 05 S",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "11",
+            "learnerID": "CL 74 2F 71 G",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "12",
+            "learnerID": "PX 89 8F 98 Q",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "13",
+            "learnerID": "BU 26 7F 00 Y",
             "completionDate": "2025-01-23T21:12:41.455Z",
             "evidenceOfCompletion": "certificate1.pdf",
             "evidenceOfCompletionReview": {
