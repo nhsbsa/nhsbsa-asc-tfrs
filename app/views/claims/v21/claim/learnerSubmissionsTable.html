@@ -217,13 +217,13 @@
 
                         {% else %}
                             {% if loop.index0 == 0 %}
-                            <td class="govuk-table__cell">
-                                <mark class="hods-highlight"><strong>(Removed)</strong></mark>
-                            </td>
-                            {% else %}
-                            <td class="govuk-table__cell">---</td>
+                                <td class="govuk-table__cell">
+                                    <mark class="hods-highlight"><strong>(Removed{% if data.view == "40" %} from 40 part{% endif %})</strong></mark>
+                                </td>
+                                {% else %}
+                                <td class="govuk-table__cell">---</td>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
                         {% endfor %}
                     </tr>
 
