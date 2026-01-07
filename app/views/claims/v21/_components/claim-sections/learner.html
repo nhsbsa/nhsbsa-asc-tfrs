@@ -70,10 +70,11 @@
                       <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
                     {%endfor%}
                     {# To show removed learners #}
-                    {% if pairSubmission.removedLearners and pairSubmission.removedLearners.length > 0 %}
+                    {% set removed = pairClaim.submissions | getRemovedLearners %}
+                    {% if removed and removed.length > 0 %}
                       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
                       <strong>Removed from 40 part</strong>
-                      {% for learner in (pairSubmission.removedLearners)%}
+                      {% for learner in (removed)%}
                         {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
                         <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
                       {%endfor%}

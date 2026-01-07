@@ -1496,6 +1496,14 @@ addFilter('filterLearners', function (claim, pairClaim) {
     return filtered
 })
 
+addFilter('getRemovedLearners', function(submissions) {
+    let removedList = []
+    for (const s of submissions) {
+        removedList.push(...(s.removedLearners || []))
+    }
+    return removedList 
+});
+
 addFilter('response', function(boolean) {
     if (boolean) {
         return "Yes"

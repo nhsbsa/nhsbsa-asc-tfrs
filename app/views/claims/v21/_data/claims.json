@@ -390,38 +390,7 @@
             }
           }
         ],
-        "removedLearners": [          
-          {
-            "slotID": "5",
-            "learnerID": "HB 78 2F 15 O",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "slotID": "6",
-            "learnerID": "XY 32 8F 00 J",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "slotID": "10",
-            "learnerID": "UP 28 8F 89 E",
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          }
-        ],
+        "removedLearners": null,
         "sharedCompletionDate": false
       },
       {
