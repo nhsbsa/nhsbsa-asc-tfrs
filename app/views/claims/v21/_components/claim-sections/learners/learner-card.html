@@ -38,7 +38,7 @@
                         <div class="moj-alert__content">
                             {{note}}
                         </div>
-                        {% if ((learnerList.id == "needsaction" or learnerList.id == "actioned") and not (claim.claimType == "60" and claim.status == "approved")) or (claim.claimType != "40" and claim.status == "queried") %}
+                        {% if (learnerList.id == "needsaction" or learnerList.id == "actioned") %}
                             <div class="moj-alert__button-row">
                                 {% if learnerList.id == "needsaction" %}
                                     <a href="../mark-as-actioned?learnerID={{learner.learnerID}}" class="govuk-button govuk-button--secondary govuk-!-margin-0">
