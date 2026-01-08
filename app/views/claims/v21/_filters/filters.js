@@ -1016,6 +1016,11 @@ addFilter('findLearner', (learnerID, learners) => {
     return findLearnerById(learnerID, learners)
 })
 
+addFilter('findLearnerNote', (learnerID, learners) => {
+    let anser = findLearnerById(learnerID, learners)
+    return anser
+})
+
 addFilter('checkIfUpdated', (claim, field, learnerID) => {
     let lastQueried = getMostRelevantSubmission(claim)
     let draftClaim = getDraftSubmission(claim)

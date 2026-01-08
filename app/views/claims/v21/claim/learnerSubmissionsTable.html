@@ -58,7 +58,7 @@
                                     or slot.changeFlags.evidenceOfCompletion 
                                     or slot.changeFlags.status)) %}
                         <li>
-                        <a class="govuk-link" href="#{{ learnerInfo.givenName }}" data-tab="{{ tabID }}">
+                        <a class="govuk-link" href="#{{ slot.slotID }}" data-tab="{{ tabID }}">
                             {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
                         </a>
                         </li>
@@ -77,7 +77,7 @@
                     {% set prevLearnerID = slot | getPreviousLearnerID %}
                     {% set learnerInfo = prevLearnerID | findLearner(data.learners) %}
                     <li>
-                    <a class="govuk-link" href="#{{ learnerInfo.givenName }}" data-tab="{{ tabID }}">
+                    <a class="govuk-link" href="#{{ slot.slotID }}" data-tab="{{ tabID }}">
                         {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
                     </a>
                     </li>
@@ -195,7 +195,7 @@
                         {% if submission %}
                             {% set learnerInfo = submission.learnerID | findLearner(data.learners) %}
 
-                            <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">
+                            <td class="govuk-table__cell" id="{{slot.slotID}}">
                             {% if prev is none %}
                                 <mark class="hods-highlight">
                                 <strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong>
