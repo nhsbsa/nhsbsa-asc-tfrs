@@ -1448,7 +1448,7 @@ router.get('/showPaymentNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      res.redirect('claims/v21/claim/previousSubmissionsTable?subCount=' + subCount + '&id=' + claimID)
+      res.redirect('claims/v21/claim/previousSubmissionsTable?subCount=' + subCount + '&id=' + claimID + "#claimDetails")
     }
   }
 });
@@ -1461,7 +1461,7 @@ router.get('/hidePaymentNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID)
+      res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "#claimDetails")
     }
   }
 });
@@ -1473,7 +1473,7 @@ router.get('/showLearnerNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
-      res.redirect('claims/v21/claim/learnerSubmissionsTable?subCount=' + subCount + '&id=' + claimID)
+      res.redirect('claims/v21/claim/learnerSubmissionsTable?subCount=' + subCount + '&id=' + claimID + "#" + req.session.data.slotID)
     }
   }
 });
@@ -1490,7 +1490,7 @@ router.get('/hideLearnerNote', function (req, res) {
     }
   }
   req.session.data.claimScreen = "learnerPreviousSubmissions"
-  res.redirect('claims/v21/claim/learnerSubmissionsTable' + '?id=' + claimID)
+  res.redirect('claims/v21/claim/learnerSubmissionsTable' + '?id=' + claimID + "#" + req.session.data.slotID)
 });
 
 router.post('/add-supporting-note', function (req, res) {

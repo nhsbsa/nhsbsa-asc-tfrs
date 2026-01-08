@@ -104,7 +104,7 @@
             {% if (data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan)) and (data.filter == "everything" or (data.filter == "changed" and (claimFlags.training or claimFlags.startDate or claimFlags.paymentDate or claimFlags.evidenceOfPayment)))%}
                 
                 <div style="padding-top: 20px;">
-                    <h2 class="govuk-heading-m">Claim details</h2>
+                    <h2 class="govuk-heading-m"id="claimDetails">Claim details</h2>
                 </div>
                 <table class="govuk-table" style="width:{{((sortedSubmissions | length) *320) + 200 }}px; table-layout:fixed; min-width:100%;">
                     <thead class="govuk-table__head">
@@ -353,7 +353,6 @@
                                             {% if (submission.learners[0].completionDate !== sortedSubmissions[loop.index0 + 1].learners[0].completionDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
                                                 <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.learners[0].completionDate | govukDate}}</strong></mark></td>
                                             {% else %}
-                                                {# <td class="govuk-table__cell">{{submission.learners[0].id}}</td> #}
                                                 <td class="govuk-table__cell">{{submission.learners[0].completionDate | govukDate}}</td>
                                             {% endif %}
 
