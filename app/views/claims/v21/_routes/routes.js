@@ -1513,7 +1513,7 @@ router.get('/load-data-account-test', function (req, res) {
 })
 
 //generate data
-router.get('/generate', function (req, res) {
+router.get('/generate-claim', function (req, res) {
   //generate learners to be used in claims, some claims require pre-set leaners that always exist so overwrite learners with caution
   //generateLearners(50);
   let claims = []
