@@ -27,6 +27,7 @@
           "costPerLearner": null
         },
         "sharedCompletionDate": false,
+        "removedLearners": [],
         "learners": [
           {
             "slotID": "2",
@@ -70,6 +71,7 @@
           "costPerLearner": null
         },
         "sharedCompletionDate": false,
+        "removedLearners": [],
         "learners": [
           {
             "slotID": "1",
@@ -123,6 +125,7 @@
           "costPerLearner": null
         },
         "sharedCompletionDate": false,
+        "removedLearners": [],
         "learners": [
           {
             "slotID": "1",
@@ -147,6 +150,1123 @@
         ],
         "processedDate": "2025-10-10T04:51:55.424Z",
         "processedBy": "Flossie Gleason"
+      }
+    ]
+  },
+  {
+    "claimID": "LSE-WND3-IE3D-B",
+    "workplaceID": "C63281491",
+    "claimType": "60",
+    "isPaymentPlan": false,
+    "status": "approved",
+    "createdDate": "2024-08-23T09:51:56.578Z",
+    "createdBy": "ivy.montgomery@anikacare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2024-12-21T11:46:31.081Z",
+        "trainingCode": "601/7356/7",
+        "startDate": "2024-07-06T10:37:21.199Z",
+        "costDate": "2024-04-11T09:34:39.184Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": 270
+        },
+        "processedDate": "2025-02-18T05:44:08.305Z",
+        "processedBy": "Mara Monahan",
+        "learners": [
+          {
+            "slotID": "1",
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "2",
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "3",
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "4",
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "5",
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "6",
+            "learnerID": "XY 32 8F 00 J",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "7",
+            "learnerID": "WA 92 8F 35 V",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "8",
+            "learnerID": "UH 04 6F 47 V",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "9",
+            "learnerID": "EL 78 2F 05 S",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "10",
+            "learnerID": "UP 28 8F 89 E",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "11",
+            "learnerID": "CL 74 2F 71 G",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "12",
+            "learnerID": "PX 89 8F 98 Q",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "13",
+            "learnerID": "BU 26 7F 00 Y",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }
+        ],
+        "removedLearners": [],
+        "sharedCompletionDate": false
+      }
+    ]
+  },
+  {
+    "claimID": "LSE-WND3-IE3D-C",
+    "workplaceID": "C63281491",
+    "claimType": "40",
+    "isPaymentPlan": false,
+    "status": "queried",
+    "createdDate": "2024-08-23T09:51:56.578Z",
+    "createdBy": "ivy.montgomery@anikacare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": null,
+        "submittedDate": null,
+        "trainingCode": "601/7356/7",
+        "startDate": "2024-07-06T10:37:21.199Z",
+        "costDate": "2024-04-11T09:34:39.184Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "processedDate": null,
+        "processedBy": null,
+        "learners": [
+          {
+            "slotID": "1",
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "2",
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "3",
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "4",
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "7",
+            "learnerID": "WA 92 8F 35 V",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "8",
+            "learnerID": "UH 04 6F 47 V",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "9",
+            "learnerID": "EL 78 2F 05 S",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "11",
+            "learnerID": "CL 74 2F 71 G",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "12",
+            "learnerID": "PX 89 8F 98 Q",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "13",
+            "learnerID": "BU 26 7F 00 Y",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }
+        ],
+        "removedLearners": null,
+        "sharedCompletionDate": false
+      },
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2025-02-23T05:51:35.010Z",
+        "trainingCode": "601/7356/7",
+        "startDate": "2024-07-06T10:37:21.199Z",
+        "costDate": "2024-04-11T09:34:39.184Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "processedDate": "2025-02-27T21:46:43.842Z",
+        "processedBy": "Allan Connelly",
+        "learners": [
+          {
+            "slotID": "1",
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "2",
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date entered on the claim does not match the date on the certificate of completion."
+            }
+          },
+          {
+            "slotID": "3",
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "4",
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "7",
+            "learnerID": "WA 92 8F 35 V",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date entered on the claim does not match the date on the certificate of completion."
+            }
+          },
+          {
+            "slotID": "8",
+            "learnerID": "UH 04 6F 47 V",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The completion date entered on the claim does not match the date on the certificate of completion."
+            }
+          },
+          {
+            "slotID": "9",
+            "learnerID": "EL 78 2F 05 S",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "11",
+            "learnerID": "CL 74 2F 71 G",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "12",
+            "learnerID": "PX 89 8F 98 Q",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "13",
+            "learnerID": "BU 26 7F 00 Y",
+            "completionDate": "2025-01-23T21:12:41.455Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          }
+        ],
+        "removedLearners": [          
+          {
+            "slotID": "5",
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "6",
+            "learnerID": "XY 32 8F 00 J",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "10",
+            "learnerID": "UP 28 8F 89 E",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }
+        ],
+        "sharedCompletionDate": false
+      }
+    ]
+  },
+  {
+    "claimID": "KWB-NN2M-BDCB-A",
+    "workplaceID": "C63281491",
+    "claimType": "100",
+    "isPaymentPlan": null,
+    "status": "approved",
+    "createdDate": "2024-06-02T15:31:23.587Z",
+    "createdBy": "ivy.montgomery@anikacare.com",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2025-01-12T12:47:43.467Z",
+        "trainingCode": "PBSFL",
+        "startDate": "2024-10-04T03:10:46.108Z",
+        "costDate": "2024-06-30T04:56:45.463Z",
+        "evidenceOfPayment": [
+          "bankStatement1.pdf",
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": "pass",
+          "paymentPlan": null,
+          "costPerLearner": 135
+        },
+        "processedDate": "2025-01-28T23:38:56.268Z",
+        "processedBy": "Flossie Gleason",
+        "removedLearners": [
+          {
+            "slotID": "3",
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": "10",
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }
+        ],
+        "learners": [
+          {
+            "slotID": "1",
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "2",
+            "learnerID": "SE 52 1F 13 K",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "4",
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "5",
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2024-11-05T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "6",
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": "2024-11-06T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "7",
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "8",
+            "learnerID": "FB 88 2F 39 Z",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "9",
+            "learnerID": "XY 32 8F 00 J",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "11",
+            "learnerID": "WA 92 8F 35 V",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "12",
+            "learnerID": "AJ 54 4F 01 I",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "13",
+            "learnerID": "UH 04 6F 47 V",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "14",
+            "learnerID": "EB 06 4F 17 Y",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "15",
+            "learnerID": "EL 78 2F 05 S",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "16",
+            "learnerID": "UP 28 8F 89 E",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "17",
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "18",
+            "learnerID": "WV 15 0F 13 V",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "19",
+            "learnerID": "FI 50 5F 30 D",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "20",
+            "learnerID": "HE 58 1F 80 U",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "21",
+            "learnerID": "QB 54 8F 21 X",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "22",
+            "learnerID": "CL 74 2F 71 G",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "23",
+            "learnerID": "PX 89 8F 98 Q",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "24",
+            "learnerID": "BU 26 7F 00 Y",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "25",
+            "learnerID": "QX 32 6F 41 Q",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "26",
+            "learnerID": "NR 91 7F 72 O",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "27",
+            "learnerID": "YH 60 9F 32 Z",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "28",
+            "learnerID": "WS 54 2F 01 E",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "29",
+            "learnerID": "IS 52 7F 57 C",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "30",
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          }
+        ],
+        "sharedCompletionDate": false
+      },
+      {
+        "submitter": "ivy.montgomery@anikacare.com",
+        "submittedDate": "2024-11-23T12:47:43.467Z",
+        "trainingCode": "PBSFL",
+        "startDate": "2024-10-04T03:10:46.108Z",
+        "costDate": "2024-06-30T04:56:45.463Z",
+        "evidenceOfPayment": [
+          "invoice1.pdf",
+          "receipt1.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": "queried",
+          "note": "The evidence of payment provided is not sufficient to prove you paid for the training.",
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "processedDate": "2024-11-11T23:38:56.268Z",
+        "processedBy": "Flossie Gleason",
+        "removedLearners": [],
+        "learners": [
+          {
+            "slotID": "1",
+            "learnerID": "KZ 79 0F 13 Z",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "2",
+            "learnerID": "LE 09 5F 94 M",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The certificate of completion doesn't match the name of the learner in the claim."
+            }
+          },
+          {
+            "slotID": "3",
+            "learnerID": "HB 78 2F 15 O",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The certificate of completion doesn't match the name of the learner in the claim."
+            }
+          },
+          {
+            "slotID": "4",
+            "learnerID": "ZX 51 96 87 D",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "5",
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The certificate of completion doesn't match the completion date provided."
+            }
+          },
+          {
+            "slotID": "6",
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The certificate of completion doesn't match the completion date provided."
+            }
+          },
+          {
+            "slotID": "7",
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "8",
+            "learnerID": "FB 88 2F 39 Z",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "9",
+            "learnerID": "XY 32 8F 00 J",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "10",
+            "learnerID": "BF 73 4F 97 L",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The certificate of completion doesn't match the name of the learner in the claim."
+            }
+          },
+          {
+            "slotID": "11",
+            "learnerID": "WA 92 8F 35 V",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "12",
+            "learnerID": "AJ 54 4F 01 I",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "13",
+            "learnerID": "UH 04 6F 47 V",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "14",
+            "learnerID": "EB 06 4F 17 Y",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "15",
+            "learnerID": "EL 78 2F 05 S",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "16",
+            "learnerID": "UP 28 8F 89 E",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "17",
+            "learnerID": "NX 76 8F 30 D",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "18",
+            "learnerID": "WV 15 0F 13 V",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "19",
+            "learnerID": "FI 50 5F 30 D",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "20",
+            "learnerID": "HE 58 1F 80 U",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "21",
+            "learnerID": "QB 54 8F 21 X",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "22",
+            "learnerID": "CL 74 2F 71 G",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "23",
+            "learnerID": "PX 89 8F 98 Q",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "24",
+            "learnerID": "BU 26 7F 00 Y",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "25",
+            "learnerID": "FS 47 4F 68 U",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "queried",
+              "note": "The certificate of completion doesn't match the name of the learner in the claim."
+            }
+          },
+          {
+            "slotID": "26",
+            "learnerID": "NR 91 7F 72 O",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "27",
+            "learnerID": "YH 60 9F 32 Z",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "28",
+            "learnerID": "WS 54 2F 01 E",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "29",
+            "learnerID": "IS 52 7F 57 C",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          },
+          {
+            "slotID": "30",
+            "learnerID": "LM 89 7F 48 J",
+            "completionDate": "2024-11-01T01:05:03.483Z",
+            "evidenceOfCompletion": "certificate1.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": "pass",
+              "note": null
+            }
+          }
+        ],
+        "sharedCompletionDate": false
       }
     ]
   }
