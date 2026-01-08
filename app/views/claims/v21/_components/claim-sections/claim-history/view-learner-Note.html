@@ -1,4 +1,4 @@
-{% set foundLearnerSubmission = claim.submissions | findLearnerSubmissionByDate(data.submittedDate, data.learner) %}
+{% set foundLearnerSubmission = claim.submissions | findLearnerSubmissionByDate(data.submittedDate, data.slotID) %}
 
   <div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
     <div>

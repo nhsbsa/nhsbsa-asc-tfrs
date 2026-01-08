@@ -337,8 +337,12 @@
             </div>
         </div>
 
+        {% if data.showLearnerNote %}
+            {% include "../_components/claim-sections/claim-history/view-learner-note.html" %}
+        {% endif %}
+
     </div>
-     {% endif%}
+{% endif%}
 
 
 

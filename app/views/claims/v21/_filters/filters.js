@@ -1513,6 +1513,12 @@ addFilter('response', function(boolean) {
     
 });
 
+addFilter('findLearnerSubmissionByDate', function (submissions, submittedDate, slot) {
+    const submission = submissions.find(s => s.submittedDate == submittedDate);
+    const foundLearner = submission.learners.find(l => l.slotID == slot);
+    return foundLearner
+})
+
 addFilter('sortLearners', function (learners, dataLearners) {
     
     return sortAlphabetically(learners, dataLearners)
