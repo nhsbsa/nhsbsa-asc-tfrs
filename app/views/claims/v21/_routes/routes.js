@@ -1444,9 +1444,8 @@ router.get('/from-learners-submission', function (req, res) {
     if (claim.claimID == claimID) {
       foundClaim = claim
     }
-  }
-  var filter = req.session.data.sort
-  res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+  } 
+  res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
 });
 
 router.get('/showPaymentNote', function (req, res) {
@@ -1522,14 +1521,12 @@ router.post('/add-supporting-note', function (req, res) {
 
 router.get('/applySubmissionsSort', function (req, res) {
   var claimID = req.session.data.id
-  var filter = req.session.data.sort
-  res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+  res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
 });
 
 router.get('/applyLearnerSort', function (req, res) {
   var claimID = req.session.data.id
-  var filter = req.session.data.sort
-  res.redirect('claims/v21/claim/learnerSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+  res.redirect('claims/v21/claim/learnerSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
 });
 
 router.get('/learner-previous-submissions-handler', function (req, res) {
