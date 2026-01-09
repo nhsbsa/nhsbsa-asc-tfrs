@@ -472,6 +472,13 @@ router.get('/readd-learner', function (req, res) {
     submission = getMostRelevantSubmission(claim);
   }
 
+  // to readd previous submissions removed learners:
+  // to re-add learners that were on first submission, that are only in the removed learners array on first submission
+  // find all the removed learners on any submission
+  // find the one that is being readded
+  // add them to the most recent submission
+  // account in the submissions table design if they were removed in previous submissions then re-added
+
   // Ensure removedLearners array exists
   submission.removedLearners = submission.removedLearners || [];
 

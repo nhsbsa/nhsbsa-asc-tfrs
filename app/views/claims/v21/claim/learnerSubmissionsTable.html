@@ -311,7 +311,7 @@
                             <td class="govuk-table__cell">
                             {{ submission.evidenceOfCompletionReview.note | trunctateString }}<br>
                             <a class="govuk-link"
-                                href="/showLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}">
+                                href="/showLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}&learnerID={{submission.learnerID}}">
                                 &#8230; see more
                             </a>
                             </td>
