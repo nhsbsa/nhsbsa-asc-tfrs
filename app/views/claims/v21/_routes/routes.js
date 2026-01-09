@@ -472,6 +472,13 @@ router.get('/readd-learner', function (req, res) {
     submission = getMostRelevantSubmission(claim);
   }
 
+  // to readd previous submissions removed learners:
+  // to re-add learners that were on first submission, that are only in the removed learners array on first submission
+  // find all the removed learners on any submission
+  // find the one that is being readded
+  // add them to the most recent submission
+  // account in the submissions table design if they were removed in previous submissions then re-added
+
   // Ensure removedLearners array exists
   submission.removedLearners = submission.removedLearners || [];
 
@@ -1437,9 +1444,8 @@ router.get('/from-learners-submission', function (req, res) {
     if (claim.claimID == claimID) {
       foundClaim = claim
     }
-  }
-  var filter = req.session.data.sort
-  res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+  } 
+  res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
 });
 
 router.get('/showPaymentNote', function (req, res) {
@@ -1515,14 +1521,12 @@ router.post('/add-supporting-note', function (req, res) {
 
 router.get('/applySubmissionsSort', function (req, res) {
   var claimID = req.session.data.id
-  var filter = req.session.data.sort
-  res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+  res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
 });
 
 router.get('/applyLearnerSort', function (req, res) {
   var claimID = req.session.data.id
-  var filter = req.session.data.sort
-  res.redirect('claims/v21/claim/learnerSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+  res.redirect('claims/v21/claim/learnerSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
 });
 
 router.get('/learner-previous-submissions-handler', function (req, res) {
