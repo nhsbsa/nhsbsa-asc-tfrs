@@ -1,3 +1,8 @@
+{% if (learnerList.id == "todo" or learnerList.id == "done" or learnerList.id == "needsaction" or learnerList.id == "actioned") %}
+    {% set canChange = true %}
+{% else %}
+    {% set canChange = false %}
+{% endif %}
 <div class="govuk-summary-card" id="{{learnerInfo.id}}">
     <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
@@ -70,10 +75,14 @@
                                 Completion date
                             </dt>
                             <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-value--error {% endif %}">
+                                {% if (canChange) %}
                                 <a class="govuk-link govuk-link--no-visited-state" href="../completion-date-handler?learnerID={{learner.learnerID}}">
                                     Add completion date<span class="govuk-visually-hidden"> for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
                                 </a>
-                            </dd>        
+                                {% else %}
+                                    <p class="govuk-body"><span class="govuk-caption-m">Not added</span></p>
+                                {% endif %}
+                            </dd>
                         </div>
                     {% else %}
 
@@ -131,9 +140,13 @@
                         Evidence of completion
                         </dt>
                         <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' %} govuk-summary-value--error {% endif %}">
+                            {% if (canChange) %}
                             <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{learner.learnerID}}">
                                 Add evidence <span class="govuk-visually-hidden">for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
                             </a>
+                            {% else %}
+                                <p class="govuk-body"><span class="govuk-caption-m">Not added</span></p>
+                            {% endif %}
                         </dd>
                     </div>
                 {% else %}
