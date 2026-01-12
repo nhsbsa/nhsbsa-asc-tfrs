@@ -517,74 +517,69 @@ function generateClaims(workplaceID) {
 
 }
 
-function getRandomLearners(learners, num) {
-  const shuffled = [...learners].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, num);
+
+function generateClaim(claimType, claimStatus, submissions, learners, compDate, learnerAction) {
+  const learnerList = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
+  const training = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
+  const claims = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/claims.json', 'utf8'));
+
+  const trainingCode = getRandomCourseCode(training, claimType)
+  const claimLearners = getRandomLearners(learnerList, learners)
+   //set date references
+  const policyDate = new Date('2025-04-01 '); // April 1, 2025 not the real policy date but having claims from this year is more realistic
+
+
 }
 
-function transformClaims() {
-  const learners = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/pre-set-learners.json', 'utf8'));
-  const claims = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/pre-set-claims.json', 'utf8'));
+function getRandomCourseCode(data, value) {
+  // Helper to get a random item from an array
+  const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-  const transformedClaims = [];
-  const claimLearnerMap = {}; // Stores learners by base claimID
-
-  for (const claim of claims) {
-    // Deep clone the claim
-    const newClaim = structuredClone(claim);
-    newClaim.submissions = [];
-
-    // Strip the final letter suffix to get baseClaimID
-    const baseClaimID = claim.claimID.slice(0, -2);
-
-    // Pick or reuse learners for this claim
-    let selectedLearners;
-    if (claimLearnerMap[baseClaimID]) {
-      selectedLearners = claimLearnerMap[baseClaimID];
-    } else {
-      const numLearners = Math.floor(Math.random() * 7) + 1;
-      selectedLearners = getRandomLearners(learners, numLearners);
-      claimLearnerMap[baseClaimID] = selectedLearners;
-    }
-
-    // Transform each submission
-    for (const submission of claim.submissions) {
-      const newSubmission = structuredClone(submission);
-
-      // Pull submission-level fields
-      const completionDate = submission.completionDate || null;
-      const evidenceOfCompletion = submission.evidenceOfCompletion || null;
-      const evidenceOfCompletionReview = {
-        outcome: submission.evidenceOfCompletionReview?.outcome || null,
-        note: submission.evidenceOfCompletionReview?.note || null
-      };
-
-      // Map all selected learners to this submission
-      newSubmission.learners = selectedLearners.map(learner => ({
-        learnerID: learner.id || learner.learnerID,
-        completionDate,
-        evidenceOfCompletion,
-        evidenceOfCompletionReview
-      }));
-
-      // Remove old single-learner fields
-      delete newSubmission.learnerID;
-      delete newSubmission.completionDate;
-      delete newSubmission.evidenceOfCompletion;
-      delete newSubmission.evidenceOfCompletionReview;
-
-      // Shared completion date flag
-      newSubmission.sharedCompletionDate = claim.status !== "not-yet-submitted" ? false : null;
-
-      newClaim.submissions.push(newSubmission);
-    }
-
-    transformedClaims.push(newClaim);
+  if (value === '60' || value === '40' || value === '40PP') {
+    const group = data.find(g => g.groupTitle === 'Qualifications');
+    if (!group) return null;
+    
+    const randomCourse = getRandom(group.courses);
+    return randomCourse ? randomCourse.code : null;
   }
 
-  return transformedClaims;
+  if (value === '100') {
+    const group = data.find(g => g.groupTitle === 'Courses');
+    if (!group) return null;
+
+    // Filter out any courses where the code starts with 'OMMT'
+    const nonOmmtCourses = group.courses.filter(c => !c.code.startsWith('OMMT'));
+    
+    const randomCourse = getRandom(nonOmmtCourses);
+    return randomCourse ? randomCourse.code : null;
+  }
+
+  if (value === '100OMMT') {
+    const group = data.find(g => g.groupTitle === 'Courses');
+    if (!group) return null;
+
+    // Filter specifically for OMMT courses that contain 'INT' in the code
+    const ommtIntCourses = group.courses.filter(c => 
+      c.code.startsWith('OMMT') && c.code.includes('INT')
+    );
+    
+    const randomCourse = getRandom(ommtIntCourses);
+    return randomCourse ? randomCourse.code : null;
+  }
+
+  return "Invalid value provided";
 }
 
+function getRandomLearners(learners, quantity) {
+  let amount = 1
+  if (quantity == 'multi') {
+    const min = 5;
+    const max = 20;
+    amount = Math.floor(Math.random() * (max - min + 1)) + min;
+  }  
+  const shuffled = [...learners].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, amount);
+}
 
-module.exports = { generateClaims, transformClaims }
+module.exports = { generateClaim }
 

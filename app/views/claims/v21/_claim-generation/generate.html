@@ -1,0 +1,111 @@
+{% extends "./_layouts/main.html" %}
+
+{% block pageTitle %}
+Generate claims v21 - {{serviceName}}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Generate a claim</h1>
+        <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-visually-hidden">Warning</span>
+                Do not use this page without consulting a designer responsible for this prototype.
+            </strong>
+        </div>
+        <p class="govuk-body">This page can be used to generate a claim. It dfoes not covers all possible permutations but can be used to create a foundation of a claim from which you can then edit it in the JSON to align with the scernario you need.</p>
+        <form action="../generate-handler" method="post" class="form">
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="claimType">
+                    Choose claim type
+                </label>
+                <div id="claimType-hint" class="govuk-hint">
+                    This is the type of claim you want to create. Please note 40 claim types will always produce a corresponding 60 claim as well.
+                </div>
+                <select class="govuk-select" id="claimType" name="claimType" aria-describedby="claimType-hint">
+                    <option value="choose" selected>Choose claim type</option>
+                    <option value="100">100</option>
+                    <option value="100OMMT">100 (Internally delivered OMMT)</option>
+                    <option value="60">60</option>
+                    <option value="40">40</option>
+                    <option value="40PP">40 (payment plan)</option>
+                </select>
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="claimStatus">
+                    Choose claim status
+                </label>
+                <div id="claimStatus-hint" class="govuk-hint">
+                    This is the status of the claim you want to create.
+                </div>
+                <select class="govuk-select" id="claimStatus" name="claimStatus" aria-describedby="claimStatus-hint">
+                    <option value="choose" selected>Choose claim status</option>
+                    <option value="NYSE">Not yet submitted (empty)</option>
+                    <option value="NYSP">Not yet submitted (completed)</option>
+                    <option value="queried">Needs action</option>
+                    <option value="submitted">Submitted</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="submissions">
+                    Choose number of submissions
+                </label>
+                <div id="submissions-hint" class="govuk-hint">
+                    This is the number of submissions you want the claim to have. This will only apply to claim statuses that can allow for multiple submissions
+                </div>
+                <select class="govuk-select" id="submissions" name="submissions" aria-describedby="submissions-hint">
+                    <option value="choose" selected>Choose number of submissions</option>
+                    <option value="1">1</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="learners">
+                    Choose number of learners
+                </label>
+                <div id="learners-hint" class="govuk-hint">
+                    This is the number of learners you want the claim to have. This will only apply to claim statuses that need learners.
+                </div>
+                <select class="govuk-select" id="learners" name="learners" aria-describedby="learners-hint">
+                    <option value="choose" selected>Choose number of learners</option>
+                    <option value="1">1</option>
+                    <option value="multi">5-20</option>
+                </select>
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="compDate">
+                    Do the learners use a shared completion date?
+                </label>
+                <div id="compDate-hint" class="govuk-hint">
+                    This only applies to multi-learner claims.
+                </div>
+                <select class="govuk-select" id="compDate" name="compDate" aria-describedby="compDate-hint">
+                    <option value="choose" selected>Choose shared completion date</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="govuk-form-group">
+                <label class="govuk-label" for="learnerAction">
+                    What type of actions have been performed on the learners?
+                </label>
+                <div id="learnerAction-hint" class="govuk-hint">
+                    This only applies to multi-learner claims with multiple submissions.
+                </div>
+                <select class="govuk-select" id="learnerAction" name="learnerAction" aria-describedby="learnerAction-hint">
+                    <option value="choose" selected>Choose learners actions</option>
+                    <option value="yes">Removed</option>
+                    <option value="no">Changed</option>
+                </select>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Generate
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
