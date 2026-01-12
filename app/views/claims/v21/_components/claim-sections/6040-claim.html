@@ -60,13 +60,7 @@
         </h2>
         <div class="govuk-accordion__section-summary govuk-body" id="accordion-with-summary-sections-summary-1">
         {% if claim.status != "rejected" %}
-          <p class="govuk-body"><span class="govuk-caption-m">
-            This part cannot be started until:
-            <ul class="govuk-list govuk-list--bullet govuk-caption-m">
-              <li>the 60 part has been approved</li>
-              <li>all the learners on this claim have completed the training</li>
-            </ul>
-          </span></p>
+          <p class="govuk-body"><span class="govuk-caption-m">This part cannot be started until the 60 part has been approved.</span></p>
         {% elif claim.status == "rejected" %}
           <p class="govuk-body"><span class="govuk-caption-m">You cannot submit the 40 part of this claim because the 60 part was rejected.</span></p>
         {% endif %}

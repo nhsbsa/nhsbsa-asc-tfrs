@@ -472,6 +472,13 @@ router.get('/readd-learner', function (req, res) {
     submission = getMostRelevantSubmission(claim);
   }
 
+  // to readd previous submissions removed learners:
+  // to re-add learners that were on first submission, that are only in the removed learners array on first submission
+  // find all the removed learners on any submission
+  // find the one that is being readded
+  // add them to the most recent submission
+  // account in the submissions table design if they were removed in previous submissions then re-added
+
   // Ensure removedLearners array exists
   submission.removedLearners = submission.removedLearners || [];
 
@@ -1428,7 +1435,6 @@ router.get('/signin-handler', function (req, res) {
       res.redirect('account-setup/sign-new-gdl')
     }
   } 
-
 });
 
 router.get('/from-learners-submission', function (req, res) {
@@ -1438,11 +1444,60 @@ router.get('/from-learners-submission', function (req, res) {
     if (claim.claimID == claimID) {
       foundClaim = claim
     }
-  }
-  var filter = req.session.data.sort
-  res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+  } 
+  res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
 });
 
+router.get('/showPaymentNote', function (req, res) {
+  req.session.data['showNote'] = true
+  let subCount = req.session.data['count']
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claims/v21/claim/previousSubmissionsTable?subCount=' + subCount + '&id=' + claimID + "#claimDetails")
+    }
+  }
+});
+
+router.get('/hidePaymentNote', function (req, res) {
+  req.session.data['showNote'] = null
+  req.session.data['noteType'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "#claimDetails")
+    }
+  }
+});
+
+
+router.get('/showLearnerNote', function (req, res) {
+  req.session.data['showLearnerNote'] = true
+  let subCount = req.session.data['count']
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claims/v21/claim/learnerSubmissionsTable?subCount=' + subCount + '&id=' + claimID + "#" + req.session.data.slotID)
+    }
+  }
+});
+
+router.get('/hideLearnerNote', function (req, res) {
+  req.session.data['showLearnerNote'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  var claimID = req.session.data.id
+  var foundClaim = null
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
+      foundClaim = c
+    }
+  }
+  req.session.data.claimScreen = "learnerPreviousSubmissions"
+  res.redirect('claims/v21/claim/learnerSubmissionsTable' + '?id=' + claimID + "#" + req.session.data.slotID)
+});
 
 router.post('/add-supporting-note', function (req, res) {
   var note = req.session.data.supportingNote
@@ -1466,14 +1521,12 @@ router.post('/add-supporting-note', function (req, res) {
 
 router.get('/applySubmissionsSort', function (req, res) {
   var claimID = req.session.data.id
-  var filter = req.session.data.sort
-  res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+  res.redirect('claims/v21/claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
 });
 
 router.get('/applyLearnerSort', function (req, res) {
   var claimID = req.session.data.id
-  var filter = req.session.data.sort
-  res.redirect('claims/v21/claim/learnerSubmissionsTable' + '?id=' + claimID + "&filter=" + filter)
+  res.redirect('claims/v21/claim/learnerSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
 });
 
 router.get('/learner-previous-submissions-handler', function (req, res) {

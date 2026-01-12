@@ -1016,6 +1016,11 @@ addFilter('findLearner', (learnerID, learners) => {
     return findLearnerById(learnerID, learners)
 })
 
+addFilter('findLearnerNote', (learnerID, learners) => {
+    let anser = findLearnerById(learnerID, learners)
+    return anser
+})
+
 addFilter('checkIfUpdated', (claim, field, learnerID) => {
     let lastQueried = getMostRelevantSubmission(claim)
     let draftClaim = getDraftSubmission(claim)
@@ -1348,7 +1353,7 @@ addFilter('filterLearners', function (claim, pairClaim) {
         },
         actioned: {
             id: "actioned",
-            label: "Actioned",
+            label: "Done",
             learners: []
         },
         done: {
@@ -1496,6 +1501,14 @@ addFilter('filterLearners', function (claim, pairClaim) {
     return filtered
 })
 
+addFilter('getRemovedLearners', function(submissions) {
+    let removedList = []
+    for (const s of submissions) {
+        removedList.push(...(s.removedLearners || []))
+    }
+    return removedList 
+});
+
 addFilter('response', function(boolean) {
     if (boolean) {
         return "Yes"
@@ -1504,6 +1517,12 @@ addFilter('response', function(boolean) {
     }
     
 });
+
+addFilter('findLearnerSubmissionByDate', function (submissions, submittedDate, slot) {
+    const submission = submissions.find(s => s.submittedDate == submittedDate);
+    const foundLearner = submission.learners.find(l => l.slotID == slot);
+    return foundLearner
+})
 
 addFilter('sortLearners', function (learners, dataLearners) {
     

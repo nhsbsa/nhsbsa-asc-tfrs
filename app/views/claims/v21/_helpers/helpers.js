@@ -21,7 +21,7 @@ function checkClaim(claim) {
         result.learner = "valid"
     }
 
-    if (claim.claimType != "40" && submission.startDate == null) {
+    if (claim.claimType == "60" && submission.startDate == null) {
         result.startDate = "missing"
     } else {
         result.startDate = "valid"
@@ -501,12 +501,12 @@ function findCourseByCode(code) {
   function findLearnerById(id, localLearners) {
     
     const learners = loadLearners(localLearners)
-      const learner = learners.find(learner => learner.id == id);
-      if (learner) {
+    const learner = learners.find(learner => learner.id == id);
+    if (learner) {
         return learner;
-      } else {
+    } else {
         return null;
-      }
+    }
   }
 
 function flattenUsers(data) {

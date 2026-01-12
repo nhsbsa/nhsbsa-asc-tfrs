@@ -22,11 +22,11 @@
         <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} history with any edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
         <form action="/applySubmissionsSort" method="post" novalidate>
           <div class="govuk-form-group">
-              <label class="govuk-label" for="sort">
+              <label class="govuk-label" for="filter">
               </label>
-              <select class="govuk-select" id="filterSubmissionValues" name="sort">
+              <select class="govuk-select" id="filterSubmissionValues" name="filter">
                   <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>View edits only</option>
-                  <option value="everything" {% if data.filter == "everything" or data.filter == ""%}selected{% endif%}>View all</option>
+                  <option value="everything" {% if data.filter == "everything" or data.filter == "" or data.filter == null %}selected{% endif%}>View all</option>
               </select>
               <button type="submit" class="govuk-button" data-module="govuk-button">
                   Apply
@@ -104,7 +104,7 @@
             {% if (data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan)) and (data.filter == "everything" or (data.filter == "changed" and (claimFlags.training or claimFlags.startDate or claimFlags.paymentDate or claimFlags.evidenceOfPayment)))%}
                 
                 <div style="padding-top: 20px;">
-                    <h2 class="govuk-heading-m">Claim details</h2>
+                    <h2 class="govuk-heading-m"id="claimDetails">Claim details</h2>
                 </div>
                 <table class="govuk-table" style="width:{{((sortedSubmissions | length) *320) + 200 }}px; table-layout:fixed; min-width:100%;">
                     <thead class="govuk-table__head">
@@ -137,7 +137,7 @@
                         </tr>
                         {% endif %}
 
-                    {% if (data.view == "100" or data.view == "60") and (data.filter == "everything" or (data.filter == "changed" and claimFlags.startDate))%}
+                    {% if (data.view == "60") and (data.filter == "everything" or (data.filter == "changed" and claimFlags.startDate))%}
                             <tr class="govuk-table__row">
                                 <td class="govuk-table__cell"><strong>Start date</strong></td>
                                 {% for submission in sortedSubmissions %}
@@ -353,7 +353,6 @@
                                             {% if (submission.learners[0].completionDate !== sortedSubmissions[loop.index0 + 1].learners[0].completionDate and (loop.index0 + 1) <= ((sortedSubmissions | length) - 1)  ) %}
                                                 <td class="govuk-table__cell"><mark class="hods-highlight"><strong>{{submission.learners[0].completionDate | govukDate}}</strong></mark></td>
                                             {% else %}
-                                                {# <td class="govuk-table__cell">{{submission.learners[0].id}}</td> #}
                                                 <td class="govuk-table__cell">{{submission.learners[0].completionDate | govukDate}}</td>
                                             {% endif %}
 
@@ -406,8 +405,8 @@
         </div>
 
     </div>
-        {% if data.showNote %}
-        {% include "../claim-view/view-note.html" %}
+    {% if data.showNote %}
+        {% include "../_components/claim-sections/claim-history/view-note.html" %}
     {% endif %}
 </div>  
 

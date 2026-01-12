@@ -1,0 +1,23 @@
+{% set foundLearnerSubmission = claim.submissions | findLearnerSubmissionByDate(data.submittedDate, data.slotID) %}
+{% set claimLearner = data.learnerID | findLearnerNote(data.learners) %}
+
+  <div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
+    <div>
+        <h1 id="note-heading" class="govuk-heading-m push--top">Requested edits </h1>
+
+        <p class="govuk-body">
+          <strong>Version: </strong>{{data.count | formatCountToText}} submission </br> 
+          <strong>Submitted date: </strong>{{data.submittedDate | govukDate}} </br>    
+      </p>
+      <p class="govuk-body">
+        <strong>Learner: </strong>{{claimLearner.givenName}} {{claimLearner.familyName}}</br>
+      </p>
+        
+        <p class="govuk-body"><strong>Completion evidence:</strong> {{foundLearnerSubmission.evidenceOfCompletionReview.note}}</p>
+
+        <a href="/hideLearnerNote" class="govuk-link govuk-button">Close</a>
+    </div>
+  </div>
+
+
+<div id="claim-history-overlay" class="claim-history-overlay"></div>

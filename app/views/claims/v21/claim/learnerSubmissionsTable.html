@@ -25,11 +25,11 @@
 
             <form action="/applyLearnerSort" method="post" novalidate>
                 <div class="govuk-form-group">
-                    <label class="govuk-label" for="sort">
+                    <label class="govuk-label" for="filter">
                     </label>
-                    <select class="govuk-select" id="filterSubmissionValues" name="sort">
+                    <select class="govuk-select" id="filterSubmissionValues" name="filter">
                         <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>View edits only</option>
-                        <option value="everything" {% if data.filter == "everything"%}selected{% endif%}>View all</option>
+                        <option value="everything" {% if data.filter == "everything" or data.filter == "" or data.filter == []%}selected{% endif%}>View all</option>
                     </select>
                     <button type="submit" class="govuk-button" data-module="govuk-button">
                         Apply
@@ -58,7 +58,7 @@
                                     or slot.changeFlags.evidenceOfCompletion 
                                     or slot.changeFlags.status)) %}
                         <li>
-                        <a class="govuk-link" href="#{{ learnerInfo.givenName }}" data-tab="{{ tabID }}">
+                        <a class="govuk-link" href="#{{ slot.slotID }}" data-tab="{{ tabID }}">
                             {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
                         </a>
                         </li>
@@ -77,7 +77,7 @@
                     {% set prevLearnerID = slot | getPreviousLearnerID %}
                     {% set learnerInfo = prevLearnerID | findLearner(data.learners) %}
                     <li>
-                    <a class="govuk-link" href="#{{ learnerInfo.givenName }}" data-tab="{{ tabID }}">
+                    <a class="govuk-link" href="#{{ slot.slotID }}" data-tab="{{ tabID }}">
                         {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
                     </a>
                     </li>
@@ -195,7 +195,7 @@
                         {% if submission %}
                             {% set learnerInfo = submission.learnerID | findLearner(data.learners) %}
 
-                            <td class="govuk-table__cell" id="{{learnerInfo.givenName}}">
+                            <td class="govuk-table__cell" id="{{slot.slotID}}">
                             {% if prev is none %}
                                 <mark class="hods-highlight">
                                 <strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong>
@@ -217,13 +217,13 @@
 
                         {% else %}
                             {% if loop.index0 == 0 %}
-                            <td class="govuk-table__cell">
-                                <mark class="hods-highlight"><strong>(Removed)</strong></mark>
-                            </td>
-                            {% else %}
-                            <td class="govuk-table__cell">---</td>
+                                <td class="govuk-table__cell">
+                                    <mark class="hods-highlight"><strong>(Removed{% if data.view == "40" %} from 40 part{% endif %})</strong></mark>
+                                </td>
+                                {% else %}
+                                <td class="govuk-table__cell">---</td>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
                         {% endfor %}
                     </tr>
 
@@ -311,7 +311,7 @@
                             <td class="govuk-table__cell">
                             {{ submission.evidenceOfCompletionReview.note | trunctateString }}<br>
                             <a class="govuk-link"
-                                href="/showLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}">
+                                href="/showLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}&learnerID={{submission.learnerID}}">
                                 &#8230; see more
                             </a>
                             </td>
@@ -337,8 +337,12 @@
             </div>
         </div>
 
+        {% if data.showLearnerNote %}
+            {% include "../_components/claim-sections/claim-history/view-learner-note.html" %}
+        {% endif %}
+
     </div>
-     {% endif%}
+{% endif%}
 
 
 
