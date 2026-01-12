@@ -113,7 +113,7 @@
                     </dd>
                     {% if ((claim.status == "not-yet-submitted" or (pairClaim != null and pairClaim.status == "not-yet-submitted")) or ((claim.status == "queried" and sharedCompletionDate) or (pairClaim != null and pairClaim.status == "queried" and sharedCompletionDate))) %}
                       <dd class="govuk-summary-list__actions">
-                          <a class="govuk-link" href="shared-completion-date?change=true">Change<span class="govuk-visually-hidden"> name</span></a>
+                          <a class="govuk-link" href="shared-completion-date?change=true">Change<span class="govuk-visually-hidden"> single completion date</span></a>
                       </dd>
                     {% endif %}
                 </div>
@@ -129,9 +129,11 @@
                           {{submission.learners[0].completionDate | govukDate }}
                         {% endif %}
                     </dd>
-                    <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="add-completion-date">Change<span class="govuk-visually-hidden"> name</span></a>
-                    </dd>
+                    {% if ((claim.status == "not-yet-submitted" or (pairClaim != null and pairClaim.status == "not-yet-submitted")) or ((claim.status == "queried" and sharedCompletionDate) or (pairClaim != null and pairClaim.status == "queried" and sharedCompletionDate))) %}
+                      <dd class="govuk-summary-list__actions">
+                          <a class="govuk-link" href="add-completion-date">Change<span class="govuk-visually-hidden"> completion date</span></a>
+                      </dd>
+                    {% endif %}
                 </div>
                 {% endif %}
             </dl>
@@ -156,9 +158,6 @@
         {% if (filteredLearners.multi.check or (claim.claimType != "60" and (claim.status == "not-yet-submitted" or claim.status == "queried")) or (pairClaim != null and pairClaim.status == "not-yet-submitted") or (pairClaim != null and pairClaim.status == "queried")) %}
           {% include "../_components/claim-sections/learners/learner-tabs.html" %}
         {% else %}
-          {% if filteredLearners.multi.value == "needsaction" or filteredLearners.multi.value == "todo" %}
-            {% set canChange = true %}
-          {% endif %}
           {% set learnerList = filteredLearners[filteredLearners.multi.value]%}
           {% include "../_components/claim-sections/learners/learner-card-list.html" %}
         {% endif %}
