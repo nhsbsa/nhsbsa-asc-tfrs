@@ -1,0 +1,56 @@
+ <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+        Evidence 
+        </h2>
+        {% if claim.status != "submitted" and claim.status != 'inProgress'%}
+            <ul class="govuk-summary-card__actions">
+                <li class="govuk-summary-card__action">
+                    {{ submission.evidenceOfPaymentReview.outcome | learnerProcessedTag }}
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+    <div class="govuk-summary-card__content">
+        
+            <div class="full-width-summary-row">
+                <dd class="govuk-summary-list__value">
+                {% for evidence in submission.evidenceOfPayment %}
+                    <p class="govuk-body"><a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">{{evidence}} (opens in new tab)</a></p>
+                {% endfor %}
+                </dd>
+            </div>
+        
+        {% if claim.status != "submitted" and claim.status != 'inProgress'%}
+        <dl class="govuk-summary-list" style="border-bottom: none;">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Criteria met?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {% if submission.evidenceOfPaymentReview.outcome == "queried"%}
+                        <strong>No – needs action</strong></br>
+                        {{submission.evidenceOfPaymentReview.note}}
+                    {% elif submission.evidenceOfPaymentReview.outcome == "fail"%}
+                        <strong>No – reject</strong></br>
+                        {{submission.evidenceOfPaymentReview.note}}
+                    {% else %}
+                        Yes
+                    {% endif %}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Cost per learner
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}} </br>
+                </dd>
+            </div>
+        </dl>
+        {% endif %}
+        
+    </div>
+</div>
+
+    
