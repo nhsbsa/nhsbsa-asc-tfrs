@@ -4,14 +4,8 @@ const { generatecreatedByList, findCourseByCode } = require('../_helpers/helpers
 
 function getRandomLearners(learnerList, count) {
   const copyLearners = [...learnerList];
-  const x = 1
-  if (count == 'multi') {
-    const min = 5;
-    const max = 20;
-    x = Math.floor(Math.random() * (max - min + 1)) + min;
-  } 
 
-  if (x > copyLearners.length) {
+  if (count > copyLearners.length) {
     console.error(
       "Error: Number of learners to select is greater than the total number of available learners."
     );
@@ -20,7 +14,7 @@ function getRandomLearners(learnerList, count) {
 
   const selectedLearners = [];
 
-  for (let i = 0; i < x; i++) {
+  for (let i = 0; i < count; i++) {
     const randomIndex = Math.floor(Math.random() * copyLearners.length);
     const learner = JSON.parse(JSON.stringify(copyLearners[randomIndex]));
     selectedLearners.push(learner);
@@ -76,7 +70,12 @@ function generateClaim(claimTypeInput, claimStatusInput, submissionsInput, learn
   const user = faker.helpers.arrayElement(users)
   const createdBy = user.email;
   const trainingCode = getRandomCourseCode(training, claimTypeInput)
-  const claimLearners = getRandomLearners(learnerList, learnersInput)
+  let claimLearners = null
+  if (matchingClaim == null) {
+    claimLearners = getRandomLearners(learnerList, learnersInput)
+  } else {
+    claimLearners = getLearnersFromPairClaim(matchingClaim, claims, learnerList)
+  }
    //set date references
   const policyDate = new Date('2025-04-01 '); // April 1, 2025 not the real policy date but having claims from this year is more realistic
 
@@ -114,35 +113,54 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
   rejectedcompletionFile = "certificate-313.pdf"
   const training = findCourseByCode(trainingCode)
 
-  const submission = {
-      submitter: null,
-      submittedDate: null,
-      processedBy: null,
-      processedDate: null,
-      trainingCode,
-      startDate: null,
-      costDate: null,
-      evidenceOfPayment: [],
-      evidenceOfPaymentReview: {
-        outcome: null,
-        note: null,
-        paymentPlan: null,
-        costPerLearner: null
-      },
-      sharedCompletionDate: null,
-      learners: [],
-      removedLearners: []
-    }
-
     if (claimStatusInput == "NYSE") {
       //if the claim is a Not-yet-submitted (empty) then leave the submission empty add it to the empty submission list and return it
+      const submission = {
+        submitter: null,
+        submittedDate: null,
+        processedBy: null,
+        processedDate: null,
+        trainingCode,
+        startDate: null,
+        costDate: null,
+        evidenceOfPayment: [],
+        evidenceOfPaymentReview: {
+          outcome: null,
+          note: null,
+          paymentPlan: null,
+          costPerLearner: null
+        },
+        sharedCompletionDate: null,
+        learners: [],
+        removedLearners: []
+      }
+
       submissions.push(submission)
       return submissions
     } else {
       if (submissions.length === 0 ) {
+        const submission = {
+          submitter: null,
+          submittedDate: null,
+          processedBy: null,
+          processedDate: null,
+          trainingCode,
+          startDate: null,
+          costDate: null,
+          evidenceOfPayment: [],
+          evidenceOfPaymentReview: {
+            outcome: null,
+            note: null,
+            paymentPlan: null,
+            costPerLearner: null
+          },
+          sharedCompletionDate: null,
+          learners: [],
+          removedLearners: []
+        }
         //if this is the first submission then create fresh data
         submission.startDate = faker.date.between({ from: policyDate, to: new Date() });
-        const mostrecentCompletionDate = faker.date.between({ from: submission.startDate, to: new Date() });
+        const mostrecentCompletionDate = faker.date.between({ from: submission.startDate , to: new Date() });
 
         let slotCount = 1
         for (const l of claimLearners) {
@@ -161,7 +179,7 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
         slotCount++
         }
 
-        if (claimType == "100" || claimType == "60" || (claimType == "40" && isPaymentPlan)) {
+        if ((claimType == "100" && !isInternalOMMT(trainingCode)) || claimType == "60" || (claimType == "40" && isPaymentPlan)) {
           submission.costDate = faker.date.between({ from: policyDate, to: new Date() });
           switch(claimStatusInput) {
             case "NYSP":
@@ -209,7 +227,7 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
 
         if (claimType == "40" || claimType == "100") {
           submission.sharedCompletionDate = (compDate == "yes")
-          for (const learner of submission.learner) {
+          for (const learner of submission.learners) {
             if (submission.sharedCompletionDate) {
               learner.completionDate = mostrecentCompletionDate
             } else {
@@ -260,7 +278,11 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
         if (claimStatusInput != "NYSP") {
           const user = faker.helpers.arrayElement(users)
           submission.submitter = user.email
-          submission.submittedDate = faker.date.between({ from: mostrecentCompletionDate, to: new Date() });
+          const laterDate = new Date(Math.max(
+            new Date(mostrecentCompletionDate).getTime(),
+            new Date(createdDate).getTime()
+          ));
+          submission.submittedDate = faker.date.between({ from: laterDate, to: new Date() });
         }
 
         if (claimStatusInput != "NYSP" && claimStatusInput != "submitted" && claimStatusInput != "queried") {
@@ -268,14 +290,20 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
           submission.processedDate = faker.date.between({ from: submission.submittedDate, to: new Date() });
         }
 
+        submissions.push(submission)
       } else {
         const submission = structuredClone(submissions.at(-1))
-        submission.submittedDate = faker.date.between({ from: createdDate, to: submission.submittedDate });
+        const mostrecentCompletionDate = getMostRecentCompletionDate(submission.learners)
+        const laterDate = new Date(Math.max(
+            new Date(mostrecentCompletionDate).getTime(),
+            new Date(createdDate).getTime()
+          ));
+        submission.processedDate = faker.date.between({ from: laterDate, to: submission.submittedDate });
+        submission.submittedDate = faker.date.between({ from: laterDate, to: submission.processedDate });
         const user = faker.helpers.arrayElement(users)
         submission.submitter = user.email
-        submission.processedDate = faker.date.between({ from: submission.submittedDate, to: submission.processedDate });
         
-        if (claimType == "100" || claimType == "60" || (claimType == "40" && isPaymentPlan)) {
+        if ((claimType == "100" && !isInternalOMMT(trainingCode)) || claimType == "60" || (claimType == "40" && isPaymentPlan)) {
           submission.evidenceOfPayment = getRandomSubset(rejectedpaymentFiles)
           submission.evidenceOfPaymentReview = {
             outcome: "queried",
@@ -302,7 +330,7 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
                     outcome: "queried",
                     note: "The learner's name on the certificate does not match the learner's name on the claim details."
                   }
-            } else if (learner.evidenceOfCompletionReview.outcome == "pass") {
+            } else if (learner.evidenceOfCompletionReview.outcome == "pass" || learner.evidenceOfCompletionReview.outcome == null)  {
               if (Math.random() < 0.25 && claimType != "40") {
                   learner.evidenceOfCompletion = rejectedcompletionFile
                   learner.evidenceOfCompletionReview = {
@@ -323,44 +351,45 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
             }
           }
         }
-      }
 
-    submissions.push(submission)
-    
-    if (claimStatusInput == "queried") {
-      const draftSubmission = structuredClone(submissions[0])
-      draftSubmission.submitter = null
-      draftSubmission.submittedDate = null
-      draftSubmission.processedBy = null
-      draftSubmission.processedDate = null
-      draftSubmission.evidenceOfPaymentReview = {
-        outcome: null,
-        note: null,
-        paymentPlan: null,
-        costPerLearner: null
+        submissions.push(submission)
       }
-      const changeCount = 0
-      const removedCount = 0
-      const maxChanges = Math.ceil((draftSubmission.learners.length / 2) * 0.5);
-      for (let i = draftSubmission.learners.length - 1; i >= 0; i--) {
-        const learner = draftSubmission.learners[i];
-        learner.evidenceOfCompletionReview = {
-            outcome: null,
-            note: null
-          }
-        if (changeCount <= removedCount && changeCount < maxChanges && claimType != "40") {
-          learner.learnerChanged = learner.learnerID
-          learner.learnerID = getAvailableLearnerID(submission.learners, learnerList)
-          changeCount++
-        } else if (removedCount <= changeCount && removedCount < maxChanges && draftSubmission.learners.length > 1) {
-          const [removedLearner] = draftSubmission.learners.splice(i, 1);
-          draftSubmission.removedLearners.push(removedLearner);
-          removedCount++
+      
+      if (claimStatusInput == "queried") {
+        const draftSubmission = structuredClone(submissions[0])
+        draftSubmission.submitter = null
+        draftSubmission.submittedDate = null
+        draftSubmission.processedBy = null
+        draftSubmission.processedDate = null
+        draftSubmission.evidenceOfPaymentReview = {
+          outcome: null,
+          note: null,
+          paymentPlan: null,
+          costPerLearner: null
         }
+        const changeCount = 0
+        const removedCount = 0
+        const maxChanges = Math.ceil((draftSubmission.learners.length / 2) * 0.5);
+        for (let i = draftSubmission.learners.length - 1; i >= 0; i--) {
+          const learner = draftSubmission.learners[i];
+          learner.evidenceOfCompletionReview = {
+              outcome: null,
+              note: null
+            }
+          if (changeCount <= removedCount && changeCount < maxChanges && claimType != "40") {
+            learner.learnerChanged = learner.learnerID
+            learner.learnerID = getAvailableLearnerID(submission.learners, learnerList)
+            changeCount++
+          } else if (removedCount <= changeCount && removedCount < maxChanges && draftSubmission.learners.length > 1) {
+            const [removedLearner] = draftSubmission.learners.splice(i, 1);
+            draftSubmission.removedLearners.push(removedLearner);
+            removedCount++
+          }
+        }
+        submissions.unshift(draftSubmission)
       }
-    }
 
-    return submissions
+      return submissions
     }
 }
 
@@ -492,10 +521,10 @@ function assignClaimID(claimType, matchingClaim, claims) {
   let claimID = null
 
   if (matchingClaim != null) {
-    const baseClaimID = generateUniqueID(claims)
     claimID = updateClaimID(matchingClaim, claimType)
   } else {
-    claimID = updateClaimID(matchingClaim, claimType)
+    const baseClaimID = generateUniqueID(claims)
+    claimID = updateClaimID(baseClaimID, claimType)
   }
 
   return claimID
@@ -572,6 +601,46 @@ function getAvailableLearnerID(slots, learners) {
 
   const randomIndex = Math.floor(Math.random() * availableLearners.length);
   return availableLearners[randomIndex].id;
+}
+
+function getMostRecentCompletionDate(learners) {
+  // 1. Filter out any learners that don't have a completionDate yet
+  const learnersWithDates = learners.filter(l => l.completionDate);
+
+  // 2. If no dates exist, return null
+  if (learnersWithDates.length === 0) return null;
+
+  // 3. Compare dates to find the maximum
+  const mostRecent = learnersWithDates.reduce((latest, current) => {
+    return new Date(current.completionDate) > new Date(latest.completionDate) 
+      ? current 
+      : latest;
+  });
+
+  return mostRecent.completionDate;
+}
+
+function getLearnersFromPairClaim(matchingClaim, claims, learnerList) {
+  let learners = []
+  for (const claim of claims) {
+    if (claim.claimID == matchingClaim) {
+      const firstSubmission = claim.submissions.at(-1)
+      for (const learner of firstSubmission.learners) {
+        const foundLearner = learnerList.find(l => l.id === learner.learnerID);
+        learners.push(foundLearner)
+      }
+    }
+  }
+  return learners
+}
+
+function isInternalOMMT(courseCode) {
+  const validValues = [
+    "OMMT/T1/INT",
+    "OMMT/T2/INT"
+  ];
+
+  return validValues.includes(courseCode);
 }
 
 module.exports = { generateClaim }
