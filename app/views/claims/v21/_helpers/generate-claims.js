@@ -53,7 +53,7 @@ function generateUniqueID(claimsArray = []) {
 
 function generateClaim(claimTypeInput, claimStatusInput, submissionsInput, learnersInput, compDate, matchingClaim) {
   const learnerList = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
-  const training = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
+  const training = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/training.json', 'utf8'));
   const claims = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/claims.json', 'utf8'));
   const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/organisations.json', 'utf8'));
 
