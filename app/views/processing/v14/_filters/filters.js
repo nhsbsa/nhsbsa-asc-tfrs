@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { formatDate, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, buildLearnerComparison } = require('../_helpers/helpers.js');
+const { formatDate, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, buildLearnerComparison, orderSubmissions } = require('../_helpers/helpers.js');
 const fs = require('fs');
 const dataPath = 'app/views/processing/v13/_data/'
 
@@ -652,6 +652,156 @@ addFilter('merge', function(obj1, obj2) {
     // Simple shallow merge: obj2 overrides obj1
     return Object.assign({}, obj1, obj2);
 });
+
+addFilter('checkIfChanged', (claim, field, learnerID) => {
+
+    if (claim.submissions != null && claim.submissions.length == 1) { return false }
+    // filter to order submissions
+    let orderedSub = orderSubmissions(claim)
+
+    let latest = orderedSub[0]
+    let previous = orderedSub[1]
+
+    if (previous == null) {
+        return false
+    }
+
+    if (field == "training") {
+        if (latest.trainingCode == previous.trainingCode) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "learners") {
+        const lastIds = new Set(latest.learners.map(l => l.learnerID));
+        const draftIds = new Set(previous.learners.map(l => l.learnerID));
+        // Check for added learners
+        for (const id of draftIds) {
+            if (!lastIds.has(id)) {
+                return true; // A new learner was added
+            }
+        }
+
+        // Check for removed learners
+        for (const id of lastIds) {
+            if (!draftIds.has(id)) {
+                return true; // A learner was removed
+            }
+        }
+
+        return false; // No changes
+
+    } else if (field == "startDate") {
+        if (latest.startDate == previous.startDate) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "costDate") {
+        if (latest.costDate == previous.costDate) {
+            return false
+        } else {
+            return true
+        }
+    } else if (field == "evidencePayment") {
+
+        const previousSet = new Set(previous.evidenceOfPayment);
+        const latestSet = new Set(latest.evidenceOfPayment);
+
+        // Something added OR removed
+        for (const item of previousSet) {
+            if (!latestSet.has(item)) {
+                return true;
+            }
+        }
+
+        for (const item of latestSet) {
+            if (!previousSet.has(item)) {
+                return true;
+            }
+        }   
+        return false; // Nothing new in draft
+
+    } else if (field == "completionDate") {
+        const date1 = getLearnerFieldByID(previous.learners, learnerID, "completionDate")
+        const result = previous.learners.find(item => item.learnerID === learnerID);
+        if (result != null && result.learnerChanged != null) {
+            learnerID = result.learnerChanged
+        }
+        const date2 = getLearnerFieldByID(latest.learners, learnerID, "completionDate")
+        
+        // to do compare if same contents
+        if (date1 === date2 || date1 == null || date2 == null) {
+            return false
+        } else {
+            return true
+        }
+
+    } else if (field == "completionDates") {
+        // Build lookup map for latest
+        const lastMap = new Map(
+            latest.learners.map(l => [l.learnerID, l.completionDate])
+        );
+
+        // Iterate over previous learners
+        for (const draftLearner of previous.learners) {
+            // Use learnerChanged if present
+            const learnerID = draftLearner.learnerChanged || draftLearner.learnerID;
+
+            const draftDate = draftLearner.completionDate;
+            const lastDate = lastMap.get(learnerID);
+
+            // Check if learner existed before and date has changed
+            if (lastDate !== undefined && lastDate !== draftDate) {
+                return true;
+            }
+        }
+
+        return false;
+    } else if (field == "evidenceCompletion") {
+        const evidence2 = getLearnerFieldByID(previous.learners, learnerID, "evidenceOfCompletion")
+        const result = previous.learners.find(item => item.learnerID === learnerID);
+        if (result != null && result.learnerChanged != null) {
+            learnerID = result.learnerChanged
+        }
+        const evidence1 = getLearnerFieldByID(latest.learners, learnerID, "evidenceOfCompletion")
+        if (evidence1 == evidence2 || evidence1 == null || evidence2 == null) {
+            return false;
+        } else {
+            return true
+        }
+
+    } else if (field == "multipleEvidenceCompletion") {
+        // Build lookup maps for latest
+        const lastMap = new Map(
+            latest.learners.map(l => [l.learnerID, l.evidenceOfCompletion])
+        );
+
+        // Iterate over previous learners
+        for (const draftLearner of previous.learners) {
+            // Use learnerChanged if present
+            const learnerID = draftLearner.learnerChanged || draftLearner.learnerID;
+
+            const draftEvidence = draftLearner.evidenceOfCompletion;
+            const lastEvidence = lastMap.get(learnerID);
+
+            // Check if learner existed before and evidence has changed
+            if (lastEvidence !== undefined && lastEvidence !== draftEvidence) {
+                return true;
+            }
+        }
+
+        return false;
+    } else if (field == "supportingNote") {
+        if (latest.supportingNote == previous.supportingNote) {
+            return false
+        } else {
+            return true
+        }
+    } else {
+        return false
+    }
+})
 
 addFilter('outcomeText', function(outcome) {
     let text = null

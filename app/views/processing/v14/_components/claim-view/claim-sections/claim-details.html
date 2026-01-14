@@ -90,6 +90,11 @@
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Payment date
+                    {% if data.claimScreen == "inProgress" %}
+                        {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("costDate")) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("costDate"))%}
+                            <strong class="govuk-tag">Edited</strong>
+                        {% endif %}
+                    {% endif %}
                 </dt>
                 <dd class="govuk-summary-list__value">
                     {{ submission.costDate | govukDate }}

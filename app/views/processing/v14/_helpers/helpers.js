@@ -133,6 +133,29 @@ function getMostRelevantSubmission(claim) {
     return mostRecentSubmission;
 }
 
+function orderSubmissions(claim) {
+      if (!claim || !Array.isArray(claim.submissions) || claim.submissions.length === 0) {
+        return [];
+    }
+
+    return [...claim.submissions].sort((a, b) => {
+        const dateA = a.processedDate || a.submittedDate;
+        const dateB = b.processedDate || b.submittedDate;
+
+        // Both have dates → newest first
+        if (dateA && dateB) {
+            return new Date(dateB) - new Date(dateA);
+        }
+
+        // One has a date → that one comes first
+        if (dateA) return -1;
+        if (dateB) return 1;
+
+        // Neither has a date → keep original relative order
+        return 0;
+    });
+}
+
 function findCourseByCode(code) {
      const trainingCourses = loadJSONFromFile('training.json', dataPath)
 
@@ -505,4 +528,4 @@ function checkDone(review, type, claimType) {
     return result
 }
 
-module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildLearnerComparison }
+module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildLearnerComparison, orderSubmissions }
