@@ -365,6 +365,12 @@ router.post('/claim-payment-handler', function (req, res) {
 
       } else if (claim.claimType == "100" || (claim.claimType == "40" && claim.isPaymentPlan) ) {
         req.session.data.claimStep = "completion"
+
+        // need to order alphabetically by name then do the below function
+        // let nextLearner = submission.learners.findIndex(
+        //   learner => !learner?.evidenceOfCompletionReview?.outcome
+        // );
+        // TODO - cycle through the learners on claim, first one without a outcome make that the learner count 
         req.session.data.learnerCount = 1
         location = "tracker-learner-" + req.session.data.learnerCount
         return res.redirect('organisation/org-view-main#' + location)
@@ -440,11 +446,16 @@ router.post('/claim-completion-handler', function (req, res) {
         req.session.data.progressSaved = true
         res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
+        // TODO - else if a learner doesn't have a outcome yet  
       } else if (learnerCount < submission.learners.length ) {
+
+        // TODO - cycle through learners after learner count, go to next learner without a outcome, 
+        // or cycle back to start of learner without outcome or go to todo list?
         req.session.data.learnerCount = learnerCount + 1
         location = "tracker-learner-" + req.session.data.learnerCount
         return res.redirect('organisation/org-view-main#' + location)
 
+      // TODO - else all learners have outcomes, go to checklist 
       } else {
         delete req.session.data.learnerCount
         delete req.session.data.claimStep
