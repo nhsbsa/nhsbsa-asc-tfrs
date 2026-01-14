@@ -1,7 +1,12 @@
  <div class="govuk-summary-card">
     <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
-        Evidence
+        Evidence 
+        {% if data.claimScreen == "inProgress" %}
+            {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("evidencePayment")) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("evidencePayment"))%}
+                <strong class="govuk-tag">Edited</strong>
+            {% endif %}
+        {% endif %}
         </h2>
         {% if claim.status != "submitted" and claim.status != 'inProgress'%}
             <ul class="govuk-summary-card__actions">
@@ -11,10 +16,15 @@
             </ul>
         {% endif %}
         {% if data.claimScreen == "inProgress" %}
-            {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("evidencePayment")) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("evidencePayment"))%}
-                <strong class="govuk-tag">Edited</strong>
+            {% if ((claim.claimType == "100" or claim.claimType == "60") and (claim | checkIfChanged("evidencePayment") or claim | checkIfChanged("costDate"))) or ( claim.claimType == "40" and claim.isPaymentPlan == true and (claim | checkIfChanged("evidencePayment") or claim | checkIfChanged("costDate")))%}
+                <ul class="govuk-summary-card__actions">
+                    <li class="govuk-summary-card__action">
+                        <a class="govuk-link" href="#">View history<span class="govuk-visually-hidden"> of change</span></a>
+                    </li>
+                </ul>
             {% endif %}
         {% endif %}
+        
     </div>
     <div class="govuk-summary-card__content">
         
