@@ -14,17 +14,19 @@
             <ul class="govuk-task-list">
                 <li class="govuk-task-list__item govuk-task-list__item--with-link side-nav-item {% if (data.claimStep == "payment") %}side-nav-item-active{% endif %}" id="tracker-payment ">
                     <div class="govuk-task-list__name-and-hint">
-                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state side-nav-link" href="../process-step-handler?stage=payment" aria-describedby="payment-status">Review evidence</a>
+                        {% if (data.claimStep == "payment") %}
+                            <div class="side-nav-link">Review evidence</div>
+                        {% else %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state side-nav-link" href="../process-step-handler?stage=payment" aria-describedby="payment-status">Review evidence</a>
+                        {% endif %}
                     </div>
                     {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone ("payment", claim.claimType) %}
                     {% if (paymentIsDone) %}
                         <div class="govuk-task-list__status outcome-wrapper">
-                            {# <div class="outcome-text">Done</div> #}
                             <div id="learner-{{loop.index}}-status">{{ submission.evidenceOfPaymentReview.outcome | learnerProcessedTag }}</div>
                         </div>
                     {% else %}
                             {% set paymentCompleted = false %}
-                            {# <strong class="govuk-tag govuk-tag--light-blue">To do</strong> #}
                     {% endif %}
                 </li>
             </ul>
@@ -36,9 +38,14 @@
                     {% set learnerInfo = learner.learnerID | findLearner %}
                     <li class="govuk-task-list__item govuk-task-list__item--with-link side-nav-item {% if (data.claimStep == "completion") and (loop.index == data.learnerCount) %}side-nav-item-active{% endif %}" id="tracker-learner-{{loop.index}}">
                         <div class="govuk-task-list__name-and-hint">
-                        <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state side-nav-link" href="../process-step-handler?stage=completion&learnerNo={{loop.index}}" aria-describedby="learner-{{loop.index}}-status">
-                            {{learnerInfo.givenName}} {{learnerInfo.familyName}}
-                        </a>
+                            {% if (data.claimStep == "completion") and (loop.index == data.learnerCount) %}
+                                <div class="side-nav-link">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</div>
+                            {% else %}
+                                <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state side-nav-link" href="../process-step-handler?stage=completion&learnerNo={{loop.index}}" aria-describedby="learner-{{loop.index}}-status">
+                                    {{learnerInfo.givenName}} {{learnerInfo.familyName}}
+                                </a>
+                            {% endif %}
+                        
                         </div>
                         {% set completionIsDone = learner.evidenceOfCompletionReview | checkDone ("completion", claim.claimType) %}
                         {% if (completionIsDone) %}
@@ -48,7 +55,6 @@
                             </div>
                         {% else %}
                             {% set learnersCompleted = false %}
-                            {# <strong class="govuk-tag govuk-tag--light-blue">To do</strong> #}
                         {% endif %}
                     </li>
                 {% endfor %}
