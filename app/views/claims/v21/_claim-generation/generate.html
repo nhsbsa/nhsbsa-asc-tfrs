@@ -52,29 +52,15 @@ Generate claims v21 - {{serviceName}}
             </div>
             <div class="govuk-form-group">
                 <label class="govuk-label" for="submissions">
-                    Choose number of submissions
+                    How many submissions do you want the claim to have?
                 </label>
-                <div id="submissions-hint" class="govuk-hint">
-                    This is the number of submissions you want the claim to have. This will only apply to claim statuses that can allow for multiple submissions
-                </div>
-                <select class="govuk-select" id="submissions" name="submissions" aria-describedby="submissions-hint">
-                    <option value="choose" selected>Choose number of submissions</option>
-                    <option value="1">1</option>
-                    <option value="3">3</option>
-                </select>
+                <input class="govuk-input govuk-input--width-2" id="submissions" name="submissions" type="text">
             </div>
             <div class="govuk-form-group">
                 <label class="govuk-label" for="learners">
-                    Choose number of learners
+                    How many learners do you want the claim to have?
                 </label>
-                <div id="learners-hint" class="govuk-hint">
-                    This is the number of learners you want the claim to have. This will only apply to claim statuses that need learners.
-                </div>
-                <select class="govuk-select" id="learners" name="learners" aria-describedby="learners-hint">
-                    <option value="choose" selected>Choose number of learners</option>
-                    <option value="1">1</option>
-                    <option value="multi">5-20</option>
-                </select>
+                <input class="govuk-input govuk-input--width-2" id="learners" name="learners" type="text">
             </div>
             <div class="govuk-form-group">
                 <label class="govuk-label" for="compDate">
@@ -87,19 +73,6 @@ Generate claims v21 - {{serviceName}}
                     <option value="choose" selected>Choose shared completion date</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
-                </select>
-            </div>
-            <div class="govuk-form-group">
-                <label class="govuk-label" for="learnerAction">
-                    What type of actions have been performed on the learners?
-                </label>
-                <div id="learnerAction-hint" class="govuk-hint">
-                    This only applies to multi-learner claims with multiple submissions.
-                </div>
-                <select class="govuk-select" id="learnerAction" name="learnerAction" aria-describedby="learnerAction-hint">
-                    <option value="choose" selected>Choose learners actions</option>
-                    <option value="yes">Removed</option>
-                    <option value="no">Changed</option>
                 </select>
             </div>
             <button type="submit" class="govuk-button" data-module="govuk-button">

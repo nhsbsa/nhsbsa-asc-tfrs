@@ -1,13 +1,15 @@
 const fs = require('fs');
 const { faker } = require('@faker-js/faker');
-const { generatecreatedByList } = require('../_helpers/helpers.js');
+const { generatecreatedByList, findCourseByCode } = require('../_helpers/helpers.js');
 
-function getRandomLearners(learnerList, x) {
+function getRandomLearners(learnerList, count) {
   const copyLearners = [...learnerList];
-
-  if (x == 0 ) {
-    x = 1
-  }
+  const x = 1
+  if (count == 'multi') {
+    const min = 5;
+    const max = 20;
+    x = Math.floor(Math.random() * (max - min + 1)) + min;
+  } 
 
   if (x > copyLearners.length) {
     console.error(
@@ -28,384 +30,40 @@ function getRandomLearners(learnerList, x) {
   return selectedLearners;
 }
 
+function generateUniqueID(claimsArray = []) {
+  const characters = 'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789';
+  const sections = [3, 4, 4];
+  let id;
+  let isDuplicate;
 
-// Function to get a random role name based on distribution
-function getRandomStatus(statuses) {
-  // Generate a random number between 0 and 1
-  const randomValue = Math.random();
-
-  // Accumulate the distribution values to determine the range
-  let cumulativeDistribution = 0;
-
-  for (const status of statuses) {
-    cumulativeDistribution += status.distribution;
-
-    // Check if the random value falls within the range of the current role
-    if (randomValue <= cumulativeDistribution) {
-      return status.id;
-    }
-  }
-
-  // If no role is found (which should be rare), return the last role as a fallback
-  return statuses[statuses.length - 1].id;
-}
-
-function generateUniqueID() {
-  const characters = 'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789'; // Excluding 'O'
-  const sections = [3, 4, 4]; // Length of each section
-
-  let id = '';
-
-  for (let i = 0; i < sections.length; i++) {
+  do {
+    // 1. Generate the ID string
+    id = '';
+    for (let i = 0; i < sections.length; i++) {
       for (let j = 0; j < sections[i]; j++) {
-          const randomIndex = Math.floor(Math.random() * characters.length);
-          id += characters.charAt(randomIndex);
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        id += characters.charAt(randomIndex);
       }
       if (i < sections.length - 1) {
-          id += '-';
+        id += '-';
       }
-  }
+    }
+
+    // 2. Check if the generated ID exists in the claimsArray
+    isDuplicate = claimsArray.some(claim => claim.claimID === id);
+
+  } while (isDuplicate); // 3. If it's a duplicate, go back to step 1
+
   return id;
 }
 
-function generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, claimType, createdDate, isPaymentPlan) {
-  
-  let submissions = null;
+function generateClaim(claimTypeInput, claimStatusInput, submissionsInput, learnersInput, compDate, matchingClaim) {
+  const learnerList = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
+  const training = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
+  const claims = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/claims.json', 'utf8'));
+  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v20/_data/organisations.json', 'utf8'));
 
-  const learners = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
-
-  const submissionLearners =  getRandomLearners(learners, (Math.floor(Math.random() * 30)));
-  const startDate = faker.date.between({ from: createdDate, to: new Date() });
-  const trainingCode = trainingItem.code
-
-
-  if ( claimType == "full") {
-    submissions = [];
-
-    const submission =  {
-      submitter: null,
-      submittedDate: null,
-  
-      trainingCode,
-      startDate, 
-  
-      costDate: null,
-      evidenceOfPayment: [],
-
-      evidenceOfPaymentReview: {
-        outcome: null,
-        note: null,
-        paymentPlan: null,
-        costPerLearner: null
-      },
-
-      sharedCompletionDate: null,
-      learners: [],
-      processedDate: null,
-      processedBy: null
-    }
-
-    for (const learner of submissionLearners) {
-      const learnerItem = { learnerID: learner.id, 
-        completionDate: null, 
-        evidenceOfCompletion: null,
-        evidenceOfCompletionReview: {
-          outcome: null,
-          note: null
-        }
-      }
-      submission.learners.push(learnerItem)
-    }
-  
-    if (['not-yet-submitted'].includes(status)) {
-      submissions.push(submission)
-    } else if (['submitted', 'rejected', 'approved', "queried"].includes(status)) {
-      submission.submitter = faker.helpers.arrayElement(users).email;
-      submission.submittedDate = faker.date.between({ from: startDate, to: new Date() });
-  
-      submission.costDate = faker.date.between({ from: policyDate, to: startDate });
-      submission.evidenceOfPayment = ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"];
-
-      for (const learner of submission.learners) {
-        learner.evidenceOfCompletion = "certificate1.pdf";
-        learner.completionDate = faker.date.between({ from: startDate, to: submission.submittedDate });
-      }
-      submission.sharedCompletionDate = false
-
-      if (['rejected'].includes(status)) {
-  
-        submission.evidenceOfPaymentReview.outcome = "fail"
-        submission.evidenceOfPaymentReview.note = "The evidence of payment show you paid for a course that is not eligible for funding through our service."
-        
-        for (const learner of submission.learners) {
-          learner.evidenceOfCompletionReview.outcome = "pass"
-        }
-  
-      } else if(['approved'].includes(status)) {
-  
-        submission.evidenceOfPaymentReview.outcome = "pass"
-        submission.evidenceOfPaymentReview.costPerLearner = Math.floor(trainingItem.reimbursementAmount * 0.9)
-        
-        for (const learner of submission.learners) {
-          learner.evidenceOfCompletionReview.outcome = "pass"
-        }
-  
-  
-      } else if(['queried'].includes(status)) {
-        submission.evidenceOfPaymentReview.outcome = "queried"
-        submission.evidenceOfPaymentReview.note = "The evidence of payment provided is not sufficient to prove you paid for the training."
-
-        const submission2 =  {
-          submitter: null,
-          submittedDate: null,
-      
-          trainingCode,
-          startDate, 
-      
-          costDate: submission.costDate,
-          evidenceOfPayment: submission.evidenceOfPayment,
-      
-          evidenceOfPaymentReview: {
-            outcome: null,
-            note: null,
-            paymentPlan: null,
-            costPerLearner: null
-          },
-
-          sharedCompletionDate: false,
-          learners: [],
-          processedDate: null,
-          processedBy: null
-        }
-
-        for (const learner of submission.learners) {
-
-          submission2.learners.push(structuredClone(learner))
-
-          const checkNumber = Math.random()
-          if (checkNumber < 0.5 ) {
-            learner.evidenceOfCompletionReview.outcome = "queried"
-            learner.evidenceOfCompletionReview.note = "The completion date on the certificate does not match the completion date on the claim"
-          } else if (checkNumber >=0.5 && checkNumber < 0.75) {
-            learner.evidenceOfCompletionReview.outcome = "fail"
-            learner.evidenceOfCompletionReview.note = "The evidence of completion shows that this learner is inelgible for reimbursement."
-          } else if (checkNumber >= 0.75 && checkNumber < 1) {
-            learner.evidenceOfCompletionReview.outcome = "pass"
-            learner.evidenceOfCompletionReview.note = null
-          }
-        }
-
-        submissions.push(submission2)
-  
-      }
-
-      if (['rejected', 'approved', "queried"].includes(status)) {
-        submission.processedBy = faker.helpers.arrayElement(backOfficeStaff.processors)
-        submission.processedDate = faker.date.between({ from: submission.submittedDate, to: new Date() });
-      }
-
-      submissions.push(submission)
-
-    }
-  } else if (claimType == "split"){
-    submissions = {
-      submissionsA: [],
-      submissionsB: []
-    };
-
-    const submissionDateA = faker.date.between({ from: startDate, to: new Date() })
-    const processedDateA = faker.date.between({ from: submissionDateA, to: new Date() })
-
-    // 60 part
-    const submissionA =  {
-      submitter: faker.helpers.arrayElement(users).email,
-      submittedDate: submissionDateA,
-  
-      trainingCode,
-      startDate, 
-  
-      costDate: faker.date.between({ from: policyDate, to: startDate }),
-      evidenceOfPayment: ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
-  
-      evidenceOfPaymentReview: {
-        outcome: "pass",
-        note: null,
-        paymentPlan: null,
-        costPerLearner: Math.floor(trainingItem.reimbursementAmount * 0.9)
-      },
-
-      sharedCompletionDate: null,
-      learners: [],
-      processedDate: processedDateA,
-      processedBy: faker.helpers.arrayElement(backOfficeStaff.processors)
-    }
-
-    for (const learner of submissionLearners) {
-      const learnerItem = { learnerID: learner.id, 
-        completionDate: null, 
-        evidenceOfCompletion: null,
-        evidenceOfCompletionReview: {
-          outcome: null,
-          note: null
-        }
-      }
-      submissionA.learners.push(learnerItem)
-    }
-
-    if (isPaymentPlan == true) {
-          submissionA.evidenceOfPaymentReview.paymentPlan = "yes"
-    } else if (isPaymentPlan == false) {
-          submissionA.evidenceOfPaymentReview.paymentPlan = "no"
-    }
-
-    const submissionDateB = faker.date.between({ from: processedDateA, to: new Date() });
-
-    //40 part
-    const submissionB =  {
-      submitter: null,
-      submittedDate: null,
-  
-      trainingCode,
-      startDate, 
-  
-      costDate: null,
-      evidenceOfPayment: null,
-  
-      evidenceOfPaymentReview: {
-        outcome: null,
-        note: null,
-        paymentPlan: null,
-        costPerLearner: null
-      },
-
-      sharedCompletionDate: null,
-      learners: [],
-      processedDate: null,
-      processedBy: null
-    }
-
-    let learnerCopy = null
-    for (const learner of submissionA.learners) {
-      learnerCopy = structuredClone(learner)
-      submissionB.learners.push(learnerCopy)
-    }
-
-    if (['submitted', 'rejected', 'approved', "queried"].includes(status)) {
-      submissionB.submitter = faker.helpers.arrayElement(users).email;
-      submissionB.submittedDate = submissionDateB;
-      
-      for (const learner of submissionB.learners) {
-      learner.evidenceOfCompletion = "certificate1.pdf";
-      const completionDateB =  faker.date.between({ from: processedDateA, to: submissionDateB });
-      learner.completionDate = completionDateB
-      }
-
-      submissionB.sharedCompletionDate = false
-      
-      const latestDate = new Date(Math.max(...submissionB.learners.map(l => new Date(l.completionDate))));
-
-      if (isPaymentPlan == true) {
-        submissionB.costDate = faker.date.between({ from: processedDateA , to: latestDate })
-        submissionB.evidenceOfPayment = ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"]
-
-        submissionB.evidenceOfPaymentReview.outcome = "pass"
-        submissionB.evidenceOfPaymentReview.costPerLearner = Math.floor(trainingItem.reimbursementAmount * 0.9)
-        submissionB.evidenceOfPaymentReview.paymentPlan = "yes"
-      }
-
-    }
-
-    if (['rejected'].includes(status)) {
-
-      for (const learner of submissionB.learners) {
-        learner.evidenceOfCompletionReview.outcome = "fail"
-        learner.evidenceOfCompletionReview.note = "The evidence of payment show you paid for a course that is not eligible for funding through our service."
-      }
-
-
-    } else if(['approved'].includes(status)) {
-
-      for (const learner of submissionB.learners) {
-        learner.evidenceOfCompletionReview.outcome = "pass"
-      }
-
-    } else if(['queried'].includes(status)) {
-
-
-      //40 part draft
-      const submissionB2 =  {
-        submitter: null,
-        submittedDate: null,
-    
-        trainingCode,
-        startDate, 
-    
-        costDate: null,
-        evidenceOfPayment: null,
-
-    
-        evidenceOfPaymentReview: {
-          outcome: null,
-          note: null,
-          paymentPlan: null,
-          costPerLearner: null
-        },
-
-        sharedCompletionDate: false,
-        learners: [],
-        processedDate: null,
-        processedBy: null
-      }
-
-      for (const learner of submissionB.learners) {
-
-        submissionB2.learners.push(structuredClone(learner))
-
-        const checkNumber = Math.random()
-        if (checkNumber < 0.5 ) {
-          learner.evidenceOfCompletionReview.outcome = "queried"
-          learner.evidenceOfCompletionReview.note = "The completion date on the certificate does not match the completion date on the claim"
-        } else if (checkNumber >=0.5 && checkNumber < 0.75) {
-          learner.evidenceOfCompletionReview.outcome = "fail"
-          learner.evidenceOfCompletionReview.note = "The evidence of completion shows that this learner is inelgible for reimbursement."
-        } else if (checkNumber >= 0.75 && checkNumber < 1) {
-          learner.evidenceOfCompletionReview.outcome = "pass"
-          learner.evidenceOfCompletionReview.note = null
-        }
-      }
-
-
-      if (isPaymentPlan == true) {
-        submissionB2.evidenceOfPaymentReview.outcome = "pass"
-        submissionB2.evidenceOfPaymentReview.costPerLearner = Math.floor(trainingItem.reimbursementAmount * 0.9)
-        submissionB2.evidenceOfPaymentReview.paymentPlan = "yes"
-      }
-
-      submissions.submissionsB.push(submissionB2)
-
-    }
-
-    if (['rejected', 'approved', "queried"].includes(status)) {
-      submissionB.processedBy = faker.helpers.arrayElement(backOfficeStaff.processors)
-      submissionB.processedDate = faker.date.between({ from: submissionB.submittedDate, to: new Date() });
-    }
-
-    submissions.submissionsA.push(submissionA)
-    submissions.submissionsB.push(submissionB)
-
-  }
-
-  return submissions
-}
-
-// Claim Generator
-function generateClaims(workplaceID) {
-
-  // Load JSON files
-  const training = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/training.json', 'utf8'));
-  const statuses = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/claim-statuses.json', 'utf8'));
-  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/organisations.json', 'utf8'));
-  const backOfficeStaff = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/backOfficeStaff.json', 'utf8'));
+  const workplaceID = "A02944934"
 
   let organisation = null
   for (const org of organisations) {
@@ -414,121 +72,296 @@ function generateClaims(workplaceID) {
     }
   }
 
-  const users = generatecreatedByList(organisation);
-
-  const data = [];
-
-   //set date references
-  const policyDate = new Date('2024-04-01 '); // April 2, 2025 not the real policy date but having claims from this year is more realistic
-
-
-
-  for (let i = 1; i <= organisation.numberOfClaims; i++) {
-    faker.seed(i);
-    
-    let claimID = generateUniqueID();
-    let claimType = null
-    let isPaymentPlan = null
-    const status = getRandomStatus(statuses);
-
-    const user = faker.helpers.arrayElement(users)
-    const createdBy = user.email;
-    const createdDate = faker.date.between({ from: policyDate, to: new Date() }); 
-
-    const trainingGroup = faker.helpers.arrayElement(training)
-    const trainingItem = faker.helpers.arrayElement(trainingGroup.courses);
-
-    //if it is a 60/40 eligible training and not yet submitted claim, randomly decide whether the 60 or 40 part is not yet submitted or queried.
-    let randomBoolean = false
-    if ((['not-yet-submitted', 'queried', 'rejected', 'submitted'].includes(status) && trainingItem.fundingModel == "split" )) {
-      randomBoolean = Math.random() < 0.5
-    }
-
-    if (trainingItem.fundingModel == "full" || randomBoolean) {
-
-      if (trainingItem.fundingModel == "full") {
-        claimID = claimID + "-A"
-        claimType = "100"
-      } else if (trainingItem.fundingModel == "split") {
-        claimID = claimID + "-B"
-        claimType = "60"
-      }
-      
-      const claim = {
-        claimID,
-        workplaceID,
-        claimType,
-        isPaymentPlan,
-        status,
-        createdDate,
-        createdBy,
-        notes: [],
-        submissions: generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, "full", createdDate, isPaymentPlan),
-      };
-
-      data.push(claim);
-
-    } else if (trainingItem.fundingModel == "split") {
-      const claimIDA = claimID + "-B"
-      const claimIDB = claimID + "-C"
-
-      if (Math.random() < 0.5) {
-        isPaymentPlan = true
-      } else {
-        isPaymentPlan = false
-      }
-      
-      const generatedSubmissions = generateSubmissions(users, status, policyDate, trainingItem, backOfficeStaff, "split", createdDate, isPaymentPlan)
-      const submissionsA = generatedSubmissions.submissionsA
-      const submissionsB = generatedSubmissions.submissionsB
-
-      const claimA = {
-        claimID: claimIDA,
-        workplaceID,
-        claimType: "60",
-        isPaymentPlan,
-        status: "approved",
-        createdDate,
-        createdBy,
-        notes: [],
-        submissions: submissionsA,
-      };
-
-      const claimB = {
-        claimID: claimIDB,
-        workplaceID,
-        claimType: "40",
-        isPaymentPlan,
-        status,
-        createdDate,
-        createdBy,
-        notes: [],
-        submissions: submissionsB,
-      };
-      data.push(claimA);
-      data.push(claimB);
-    }
-  }
-
-  //reset seed
-  faker.seed(Math.ceil(Math.random() * Number.MAX_SAFE_INTEGER));
-
-  return data
-
-}
-
-
-function generateClaim(claimType, claimStatus, submissions, learners, compDate, learnerAction) {
-  const learnerList = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
-  const training = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
-  const claims = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/claims.json', 'utf8'));
-
-  const trainingCode = getRandomCourseCode(training, claimType)
-  const claimLearners = getRandomLearners(learnerList, learners)
+  const users = generatecreatedByList(organisation)
+  const user = faker.helpers.arrayElement(users)
+  const createdBy = user.email;
+  const trainingCode = getRandomCourseCode(training, claimTypeInput)
+  const claimLearners = getRandomLearners(learnerList, learnersInput)
    //set date references
   const policyDate = new Date('2025-04-01 '); // April 1, 2025 not the real policy date but having claims from this year is more realistic
 
+  const claimType = assignClaimType(claimTypeInput)
+  const claimID  = assignClaimID(claimType, matchingClaim, claims)
+  const status = assignClaimStatus(claimStatusInput)
+  const isPaymentPlan = assignPaymentPlan(claimTypeInput, claimStatusInput)
+  const createdDate = faker.date.between({ from: policyDate, to: new Date() });
+  let submissions = []
+  for (let i = 0; i < submissionsInput; i++) {
+    submissions = generateSubmission(submissions, claimType, isPaymentPlan, claimStatusInput, compDate, trainingCode, claimLearners, createdDate, policyDate, users)
+  } 
 
+  const claim = {
+      claimID,
+      claimType,
+      workplaceID,
+      createdBy,
+      status,
+      isPaymentPlan,
+      createdDate,
+      submissions
+    }
+
+    return claim
+}
+
+function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusInput, compDate, trainingCode, claimLearners, createdDate, policyDate, users) {
+  const backOfficeStaff = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/backOfficeStaff.json', 'utf8'));
+  const learnerList = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
+
+  approvepaymentFiles = ["bank-statement-212.pdf", "invoice-212.pdf", "receipt-212.pdf", "bank-statement-212-1.pdf"]
+  rejectedpaymentFiles = ["bank-statement-313.pdf", "invoice-313.pdf", "receipt-313.pdf", "bank-statement-313-1.pdf"]
+  approvecompletionFile = "certificate-212.pdf"
+  rejectedcompletionFile = "certificate-313.pdf"
+  const training = findCourseByCode(trainingCode)
+
+  const submission = {
+      submitter: null,
+      submittedDate: null,
+      processedBy: null,
+      processedDate: null,
+      trainingCode,
+      startDate: null,
+      costDate: null,
+      evidenceOfPayment: [],
+      evidenceOfPaymentReview: {
+        outcome: null,
+        note: null,
+        paymentPlan: null,
+        costPerLearner: null
+      },
+      sharedCompletionDate: null,
+      learners: [],
+      removedLearners: []
+    }
+
+    if (claimStatusInput == "NYSE") {
+      //if the claim is a Not-yet-submitted (empty) then leave the submission empty add it to the empty submission list and return it
+      submissions.push(submission)
+      return submissions
+    } else {
+      if (submissions.length === 0 ) {
+        //if this is the first submission then create fresh data
+        submission.startDate = faker.date.between({ from: policyDate, to: new Date() });
+        const mostrecentCompletionDate = faker.date.between({ from: submission.startDate, to: new Date() });
+
+        let slotCount = 1
+        for (const l of claimLearners) {
+          const learner = {
+          slotID: slotCount,
+          learnerID: l.id,
+          learnerChanged: null,
+          completionDate: null,
+          evidenceOfCompletion: [],
+          evidenceOfCompletionReview: {
+            outcome: null,
+            note: null
+          }
+        }
+        submission.learners.push(learner)
+        slotCount++
+        }
+
+        if (claimType == "100" || claimType == "60" || (claimType == "40" && isPaymentPlan)) {
+          submission.costDate = faker.date.between({ from: policyDate, to: new Date() });
+          switch(claimStatusInput) {
+            case "NYSP":
+              submission.evidenceOfPayment = getRandomSubset(approvepaymentFiles)
+              break;
+            case "submitted":
+              submission.evidenceOfPayment = getRandomSubset(approvepaymentFiles)
+              break;
+            case "queried":
+              submission.evidenceOfPayment = getRandomSubset(rejectedpaymentFiles)
+              submission.evidenceOfPaymentReview = {
+                outcome: "queried",
+                note: "The payment date on the evidence did not match the payment date on the claim details.",
+                paymentPlan: null,
+                costPerLearner: null
+              }
+              break;
+            case "approved":
+              submission.evidenceOfPayment = getRandomSubset(approvepaymentFiles)
+              
+              submission.evidenceOfPaymentReview = {
+                outcome: "pass",
+                note: null,
+                paymentPlan: null,
+                costPerLearner: (training.reimbursementAmount * 0.9)
+              }
+              if (isPaymentPlan === true) {
+                submission.evidenceOfPaymentReview.paymentPlan = "yes"
+              } else if (isPaymentPlan === false) {
+                submission.evidenceOfPaymentReview.paymentPlan = "yes"
+              }
+
+              break;
+            case "rejected":
+              submission.evidenceOfPayment = getRandomSubset(rejectedpaymentFiles)
+              submission.evidenceOfPaymentReview = {
+                outcome: "fail",
+                note: "The payment evidence shows that this was a part of an apprenticeship levy and therefore not eligible for funding.",
+                paymentPlan: null,
+                costPerLearner: null
+              }
+              break;
+          }
+        }
+
+        if (claimType == "40" || claimType == "100") {
+          submission.sharedCompletionDate = (compDate == "yes")
+          for (const learner of submission.learner) {
+            if (submission.sharedCompletionDate) {
+              learner.completionDate = mostrecentCompletionDate
+            } else {
+              learner.completionDate = subtractRandomDays(mostrecentCompletionDate)
+            }
+            switch(claimStatusInput) {
+              case "NYSP":
+                learner.evidenceOfCompletion = approvecompletionFile
+                break;
+              case "submitted":
+                learner.evidenceOfCompletion = approvecompletionFile
+                break;
+              case "queried":
+                if (Math.random() < 0.3 && claimType != "40") {
+                  learner.evidenceOfCompletion = rejectedcompletionFile
+                  learner.evidenceOfCompletionReview.outcome = "queried"
+                  if (submission.sharedCompletionDate) {
+                    learner.evidenceOfCompletionReview.note = "The learner's name on the certificate does not match the learner's name on the claim details."
+                  } else {
+                    learner.evidenceOfCompletionReview.note = "The completion date on the certificate does not match the completion date on the claim details."
+                  }              
+                } else {
+                  learner.evidenceOfCompletion = approvecompletionFile
+                  learner.evidenceOfCompletionReview = {
+                    outcome: "pass",
+                    note: null
+                  }
+                }
+                break;
+              case "approved":
+                learner.evidenceOfCompletion = approvecompletionFile
+                learner.evidenceOfCompletionReview = {
+                  outcome: "pass",
+                  note: null
+                }
+                break;
+              case "rejected":
+                learner.evidenceOfCompletion = rejectedcompletionFile
+                learner.evidenceOfCompletionReview = {
+                  outcome: "fail",
+                  note: "The certificate shows that this was part of an apprenticeship levy and therefore not eligible for reimbursement."
+                }
+                break;
+            }
+          }
+        }
+
+        if (claimStatusInput != "NYSP") {
+          const user = faker.helpers.arrayElement(users)
+          submission.submitter = user.email
+          submission.submittedDate = faker.date.between({ from: mostrecentCompletionDate, to: new Date() });
+        }
+
+        if (claimStatusInput != "NYSP" && claimStatusInput != "submitted" && claimStatusInput != "queried") {
+          submission.processedBy = faker.helpers.arrayElement(backOfficeStaff.processors)
+          submission.processedDate = faker.date.between({ from: submission.submittedDate, to: new Date() });
+        }
+
+      } else {
+        const submission = structuredClone(submissions.at(-1))
+        submission.submittedDate = faker.date.between({ from: createdDate, to: submission.submittedDate });
+        const user = faker.helpers.arrayElement(users)
+        submission.submitter = user.email
+        submission.processedDate = faker.date.between({ from: submission.submittedDate, to: submission.processedDate });
+        
+        if (claimType == "100" || claimType == "60" || (claimType == "40" && isPaymentPlan)) {
+          submission.evidenceOfPayment = getRandomSubset(rejectedpaymentFiles)
+          submission.evidenceOfPaymentReview = {
+            outcome: "queried",
+            note: "The payment date on the evidence did not match the payment date on the claim details. The payment evidence does not show that the training was paid for.",
+            paymentPlan: null,
+            costPerLearner: null
+          }
+          submission.costDate = getOffsetDate(submission.costDate)
+        }
+
+        if (claimType == "40" || claimType == "100") {
+          for (const learner of submission.learners) {
+            if (learner.evidenceOfCompletionReview.outcome == "queried") {
+              if (submission.sharedCompletionDate) {
+                learner.learnerChanged = learner.learnerID
+                learner.learnerID = getAvailableLearnerID(submission.learners, learnerList)
+              } else {
+                learner.completionDate = getOffsetDate(learner.completionDate)
+              }
+            } else if (learner.evidenceOfCompletionReview.outcome == "fail") {
+                const num = Math.floor(Math.random() * 100) + 1
+                learner.evidenceOfCompletion = "certificate" + String(num) + ".pdf"
+                learner.evidenceOfCompletionReview = {
+                    outcome: "queried",
+                    note: "The learner's name on the certificate does not match the learner's name on the claim details."
+                  }
+            } else if (learner.evidenceOfCompletionReview.outcome == "pass") {
+              if (Math.random() < 0.25 && claimType != "40") {
+                  learner.evidenceOfCompletion = rejectedcompletionFile
+                  learner.evidenceOfCompletionReview = {
+                    outcome: "queried"
+                  }
+                  if (submission.sharedCompletionDate) {
+                    learner.evidenceOfCompletionReview.note = "The learner's name on the certificate does not match the learner's name on the claim details."
+                  } else {
+                    learner.evidenceOfCompletionReview.note = "The completion date on the certificate does not match the completion date on the claim details."
+                  }              
+                } else {
+                  learner.evidenceOfCompletion = approvecompletionFile
+                  learner.evidenceOfCompletionReview = {
+                    outcome: "pass",
+                    note: null
+                  }
+                }
+            }
+          }
+        }
+      }
+
+    submissions.push(submission)
+    
+    if (claimStatusInput == "queried") {
+      const draftSubmission = structuredClone(submissions[0])
+      draftSubmission.submitter = null
+      draftSubmission.submittedDate = null
+      draftSubmission.processedBy = null
+      draftSubmission.processedDate = null
+      draftSubmission.evidenceOfPaymentReview = {
+        outcome: null,
+        note: null,
+        paymentPlan: null,
+        costPerLearner: null
+      }
+      const changeCount = 0
+      const removedCount = 0
+      const maxChanges = Math.ceil((draftSubmission.learners.length / 2) * 0.5);
+      for (let i = draftSubmission.learners.length - 1; i >= 0; i--) {
+        const learner = draftSubmission.learners[i];
+        learner.evidenceOfCompletionReview = {
+            outcome: null,
+            note: null
+          }
+        if (changeCount <= removedCount && changeCount < maxChanges && claimType != "40") {
+          learner.learnerChanged = learner.learnerID
+          learner.learnerID = getAvailableLearnerID(submission.learners, learnerList)
+          changeCount++
+        } else if (removedCount <= changeCount && removedCount < maxChanges && draftSubmission.learners.length > 1) {
+          const [removedLearner] = draftSubmission.learners.splice(i, 1);
+          draftSubmission.removedLearners.push(removedLearner);
+          removedCount++
+        }
+      }
+    }
+
+    return submissions
+    }
 }
 
 function getRandomCourseCode(data, value) {
@@ -570,15 +403,175 @@ function getRandomCourseCode(data, value) {
   return "Invalid value provided";
 }
 
-function getRandomLearners(learners, quantity) {
-  let amount = 1
-  if (quantity == 'multi') {
-    const min = 5;
-    const max = 20;
-    amount = Math.floor(Math.random() * (max - min + 1)) + min;
-  }  
-  const shuffled = [...learners].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, amount);
+function updateClaimID(claimID, claimType) {
+  // 1. Determine the correct suffix letter based on claimType
+  let suffixLetter = '';
+  if (claimType === 100) {
+    suffixLetter = 'A';
+  } else if (claimType === 60) {
+    suffixLetter = 'B';
+  } else if (claimType === 40) {
+    suffixLetter = 'C';
+  } else {
+    // Optional: handle unexpected claimTypes (defaults to A or keeps as is)
+    suffixLetter = 'A'; 
+  }
+
+  // 2. Define the regex to look for a trailing "-[Letter]"
+  // The "$" ensures we only look at the very end of the string
+  const suffixRegex = /-[A-Z]$/;
+
+  if (suffixRegex.test(claimID)) {
+    // If it exists, replace the last letter with our new one
+    return claimID.replace(suffixRegex, `-${suffixLetter}`);
+  } else {
+    // If it doesn't exist, append the hyphen and the letter
+    return `${claimID}-${suffixLetter}`;
+  }
+}
+
+function assignClaimType(claimTypeInput) {
+  let claimType = null
+  switch(claimTypeInput) {
+    case "100":
+      claimType = "100"
+      break;
+    case "100OMMT":
+      claimType = "100"
+      break;
+    case "60":
+      claimType = "60"
+      break;
+    case "60PP":
+      claimType = "60"
+      break;
+    case "40":
+      claimType = "40"
+      break;
+    case "40PP":
+      claimType = "40"
+      break;
+    default:
+      claimType = "100"
+  }
+
+  return claimType
+
+}
+
+function assignClaimStatus(claimStatusVariation) {
+  let claimStatus = null
+  switch(claimStatusVariation) {
+    case "NYSE":
+      claimStatus = "not-yet-submitted"
+      break;
+    case "NYSP":
+      claimStatus = "not-yet-submitted"
+      break;
+    case "queried":
+      claimStatus = "queried"
+      break;
+    case "submitted":
+      claimStatus = "submitted"
+      break;
+    case "approved":
+      claimStatus = "approved"
+      break;
+    case "rejected":
+      claimStatus = "rejected"
+      break;
+    default:
+      claimStatus = "not-yet-submitted"
+  }
+
+  return claimStatus
+
+}
+
+function assignClaimID(claimType, matchingClaim, claims) {
+  let claimID = null
+
+  if (matchingClaim != null) {
+    const baseClaimID = generateUniqueID(claims)
+    claimID = updateClaimID(matchingClaim, claimType)
+  } else {
+    claimID = updateClaimID(matchingClaim, claimType)
+  }
+
+  return claimID
+}
+
+function assignPaymentPlan(claimTypeInput, claimStatusInput) {
+  let isPaymentPlan = null
+
+  if (claimTypeInput == "60PP" || claimTypeInput == "40PP") {
+    isPaymentPlan = true
+  } else if ((claimTypeInput == "60" && claimStatusInput == "approved") || claimTypeInput == "40") {
+    isPaymentPlan = false
+  }
+
+  return isPaymentPlan
+}
+
+function getRandomSubset(arr) {
+  // 1. Determine a random size between 1 and 4
+  const randomSize = Math.floor(Math.random() * 4) + 1;
+
+  // 2. Shuffle a copy of the array and take the first N elements
+  // We use [...arr] to avoid changing the original array
+  return [...arr]
+    .sort(() => 0.5 - Math.random())
+    .slice(0, randomSize);
+}
+
+function subtractRandomDays(isoDateString) {
+  // 1. Convert the ISO string to a Date object
+  const date = new Date(isoDateString);
+
+  // 2. Generate a random number of days between 0 and 10
+  const randomDays = Math.floor(Math.random() * 11); // 11 ensures 10 is inclusive
+
+  // 3. Subtract the days
+  // .getDate() gets the day of the month, .setDate() updates it
+  date.setDate(date.getDate() - randomDays);
+
+  // 4. Convert back to ISO format
+  return date.toISOString();
+}
+
+function getOffsetDate(isoDateString) {
+  const date = new Date(isoDateString);
+  
+  // 1. Get random days (1-10)
+  const days = Math.floor(Math.random() * 10) + 1;
+
+  // 2. Randomly pick direction: 1 for add, -1 for subtract
+  const direction = Math.random() < 0.5 ? 1 : -1;
+
+  // 3. Apply and return
+  date.setDate(date.getDate() + (days * direction));
+  
+  return date.toISOString();
+}
+
+function getAvailableLearnerID(slots, learners) {
+  // 1. Collect all IDs currently in use (learnerID and learnerChanged)
+  // We use a Set because looking up a value in a Set is much faster than an array
+  const usedIDs = new Set();
+
+  slots.forEach(slot => {
+    if (slot.learnerID) usedIDs.add(slot.learnerID);
+    if (slot.learnerChanged) usedIDs.add(slot.learnerChanged);
+  });
+
+  // 2. Filter the learners array for those whose ID is NOT in the usedIDs set
+  const availableLearners = learners.filter(learner => !usedIDs.has(learner.id));
+
+  // 3. Return a random available ID, or null if none are left
+  if (availableLearners.length === 0) return null;
+
+  const randomIndex = Math.floor(Math.random() * availableLearners.length);
+  return availableLearners[randomIndex].id;
 }
 
 module.exports = { generateClaim }

@@ -1568,19 +1568,17 @@ router.get('/load-data-account-test', function (req, res) {
 router.post('/generate-handler', function (req, res) {
   const claimType = req.session.data.claimType
   const claimStatus = req.session.data.claimStatus
-  const submissions = req.session.data.submissions
-  const learners = req.session.data.learners
+  const submissions = parseInt(req.session.data.submissions, 10)
+  const learners = parseInt(req.session.data.learners, 10)
   const compDate = req.session.data.compDate
-  const learnerAction = req.session.data.learnerAction
 
   delete req.session.data.claimType
   delete req.session.data.claimStatus
   delete req.session.data.submissions
   delete req.session.data.learners
   delete req.session.data.compDate
-  delete req.session.data.learnerAction
 
-  const claim = generateClaim(claimType, claimStatus, submissions, learners, compDate, learnerAction)
+  const claim = generateClaim(claimType, claimStatus, submissions, learners, compDate)
   
   const jsonFilePath = './app/views/claims/v21/_data/claims.json';
   const claims = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
@@ -1588,7 +1586,7 @@ router.post('/generate-handler', function (req, res) {
   claims.push(claim)  
   fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
 
-  req.session.data.confirmationID = claim.id
+  req.session.data.confirmationID = claim.claimID
 
   res.redirect('./_claim-generation/generate-confirmation')
 })

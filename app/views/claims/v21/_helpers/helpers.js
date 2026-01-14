@@ -865,26 +865,10 @@ function loadData(req, orgID) {
   console.log('organisation file loaded')
 
   console.log('loading in claims file')
-  const allClaims = loadJSONFromFile(claimsFile, dataPath);
-  const filteredClaims = allClaims.filter(claim => claim.workplaceID === orgID);
-  // Load pre-set claims
-    const users = generatecreatedByList(req.session.data.org);
-    const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/pre-set-claims.json', 'utf8'));
-    for (const claim of preSetClaims) {
-
-        for (const submission of claim.submissions) {
-        if (submission.submitter != null) {
-            submission.submitter = faker.helpers.arrayElement(users).email
-        }
-        }
-
-        claim.createdBy = faker.helpers.arrayElement(users).email
-        claim.workplaceID = req.session.data.org.workplaceID
-    }
-
 if (req.session.data.org.numberOfClaims > 0) {
-    req.session.data['claims'] = filteredClaims.concat(preSetClaims);
-    console.log(filteredClaims.length + ' of ' + allClaims.length + ' claims loaded')
+    const allClaims = loadJSONFromFile(claimsFile, dataPath);
+    req.session.data['claims'] = allClaims
+    console.log(allClaims.length + ' claims loaded')
 } else {
     req.session.data['claims'] = [];
     console.log('0 claims loaded')
