@@ -446,16 +446,15 @@ router.post('/claim-completion-handler', function (req, res) {
         req.session.data.progressSaved = true
         res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
-        // TODO - else if a learner doesn't have a outcome yet  
+        // TODO - else if a learner after doesn't have a outcome yet  
       } else if (learnerCount < submission.learners.length ) {
 
         // TODO - cycle through learners after learner count, go to next learner without a outcome, 
-        // or cycle back to start of learner without outcome or go to todo list?
         req.session.data.learnerCount = learnerCount + 1
         location = "tracker-learner-" + req.session.data.learnerCount
         return res.redirect('organisation/org-view-main#' + location)
 
-      // TODO - else all learners have outcomes, go to checklist 
+      // TODO - else last learner go to checklist 
       } else {
         delete req.session.data.learnerCount
         delete req.session.data.claimStep
