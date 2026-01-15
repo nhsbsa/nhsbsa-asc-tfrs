@@ -7,7 +7,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { formatDate, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, buildLearnerComparison, orderSubmissions } = require('../_helpers/helpers.js');
 const fs = require('fs');
-const dataPath = 'app/views/processing/v13/_data/'
+const dataPath = 'app/views/processing/v14/_data/'
 
 addFilter('processorstatusTag', function (statusID) {
     if (statusID == 'submitted') {
@@ -537,7 +537,7 @@ addFilter('formatCountToText', function (count) {
     if (count == 4) { return "Fourth"} 
 })
 addFilter('returntrainingType', function (code) {
-   const dataPath = 'app/views/processing/v13/_data/'
+   const dataPath = 'app/views/processing/v14/_data/'
     const trainingCourses = loadJSONFromFile('training.json', dataPath)
     for (const group of trainingCourses) {
         const course = group.courses.find(course=>course.code ==code);
