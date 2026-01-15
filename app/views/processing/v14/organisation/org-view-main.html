@@ -1,0 +1,56 @@
+{% extends "../_layouts/org-view-layout.html" %}
+{% set org = data.organisations | findOrg(data.orgID) %}
+{% set claims = data.orgID | findOrgClaims(data.claims) %}
+{% set SROStatusCheck = false %}
+{% set activeSRO = null %}
+
+{% for sro in org.signatory %}
+    {% if (sro.status == "active") %}
+        {% set SROStatusCheck = true %}
+        {% set activeSRO = sro %}
+    {% endif %}
+{% endfor %}
+
+{% if (not SROStatusCheck) %}
+  {% for sro in org.signatory %}
+    {% if (sro.status == "invited") %}
+      {% set activeSRO = sro %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% block content %}
+{% if org.bankDetails == null %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-visually-hidden">Warning</span>
+            {% if (org.signatory.active.status == "active") %}
+            Organisation has not yet finished registration. The Senior Responsible Officer has created an account but needs to complete registration.
+            {% else %}
+            Organisation has not yet finished registration. The Senior Responsible Officer needs to create an account and complete registration.
+            {% endif %}
+          </strong>
+        </div>
+    </div>
+  </div>
+  {% endif %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full" id="tab-content">
+        {% if data.orgTab == "claims" %}
+            {% include "../_components/org-view/claims.html" %}
+          {% elif data.orgTab == "singleClaim" %}
+            {% include "../_components/claim-view/claim-overview.html" %}
+          {% elif data.orgTab == "users" %}
+            {% include "../_components/org-view/users.html" %}
+        {% elif data.orgTab == "bankDetails" %}
+            {% include "../_components/org-view/bank-details.html" %}
+        {% elif data.orgTab == "org-details" %}
+            {% include "../_components/org-view/org-details.html" %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% set paymentCompleted = true %}
+{% set learnersCompleted = true %}
+{% set sortedLearners = submission.learners | sortLearners %}
+
+{% if ((claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT)) %}
+    <h2 class="govuk-heading-m">Payment evidence</h2>
+    <ul class="govuk-task-list">
+        
+        <li class="govuk-task-list__item govuk-task-list__item--with-link {% if data.checkListError != null and data.checkListError.missingList[0].id =="payment"%}check-item-error{% endif %}" id="tracker-payment">
+            {% if data.checkListError != null and data.checkListError.missingList[0].id =="payment"%}
+                    <p id="error-payment" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> Finish reviewing the payment evidence
+                    </p>
+                {% endif %}
+            <div class="check-item">
+                <div class="govuk-task-list__name-and-hint">
+                    <a class="govuk-link govuk-task-list__link" href="../process-step-handler?stage=payment" aria-describedby="payment-status">Review evidence</a>
+                </div>
+                {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone ("payment", claim.claimType) %}
+                {% if (paymentIsDone) %}
+                    <div class="govuk-task-list__status outcome-wrapper">
+                        {# <div class="outcome-text">Done</div> #}
+                        <div id="learner-{{loop.index}}-status">{{ submission.evidenceOfPaymentReview.outcome | learnerProcessedTag }}</div>
+                        {# <div class="outcome-text">Done</div> #}
+                    </div>
+                {% else %}
+                        {% set paymentCompleted = false %}
+                        <strong class="govuk-tag govuk-tag--light-blue">Still to do</strong>
+                        {# <span class="moj-badge moj-badge--blue" id="learner-{{loop.index}}-status">Still to do</span> #}
+                {% endif %}
+            </div>
+        </li>
+    </ul>
+{% endif %}
+{% if claim.claimType != "60" %}
+    <h2 class="govuk-heading-m">Completion evidence</h2>
+    <ul class="govuk-task-list">
+        {% for learner in sortedLearners %}
+            {% set learnerInfo = learner.learnerID | findLearner %}
+            <li class="govuk-task-list__item govuk-task-list__item--with-link {% if data.checkListError != null and ( learner.learnerID | checkIfMissing(data.checkListError.missingList))%}check-item-error{% endif %}" id="tracker-learner-{{loop.index}}">
+                {% if data.checkListError != null and ( learner.learnerID | checkIfMissing(data.checkListError.missingList))%}
+                    <p id="error-learner-{{loop.index}}" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> Finish reviewing the completion evidence for {{learnerInfo.givenName}} {{learnerInfo.familyName}}
+                    </p>
+                {% endif %}
+                <div class="check-item">
+                    <div class="govuk-task-list__name-and-hint">
+                    <a class="govuk-link govuk-task-list__link" href="../process-step-handler?stage=completion&learnerNo={{loop.index}}" aria-describedby="learner-{{loop.index}}-status">
+                        {{learnerInfo.givenName}} {{learnerInfo.familyName}}
+                    </a>
+                    </div>
+                    {% set completionIsDone = learner.evidenceOfCompletionReview | checkDone ("completion", claim.claimType) %}
+                    {% if (completionIsDone) %}
+                        <div class="govuk-task-list__status outcome-wrapper">
+                            {# <div class="outcome-text">Done</div> #}
+                            <div id="learner-{{loop.index}}-status">{{ learner.evidenceOfCompletionReview.outcome | learnerProcessedTag }}</div>
+                            {# <div class="outcome-text">Done</div> #}
+                        </div>
+                    {% else %}
+                        {% set learnersCompleted = false %}
+                        <strong class="govuk-tag govuk-tag--light-blue">Still to do</strong>
+                        {# <div class="outcome-text">Still to do</div> #}
+                        {# <span class="moj-badge moj-badge--blue" id="learner-{{loop.index}}-status">Still to do</span> #}
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<p class="govuk-body">Make sure you've reviewed all the evidence before continuing.</p>
+
+<div class="govuk-button-group">
+    <a class="govuk-button" href="../outcome-step-handler">Continue</a>
+    <a class="govuk-button govuk-button--secondary" href="../save-progress">Save and finish later</a>
+</div>
