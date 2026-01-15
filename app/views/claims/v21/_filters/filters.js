@@ -1469,23 +1469,26 @@ addFilter('filterLearners', function (claim, pairClaim) {
         filtered.rejected.learners = pairSubmission.learners.filter( l => l.evidenceOfCompletionReview.outcome == "fail")
     }
 
-    if (claim.claimType == "60"  && claim.status != "approved") {
-        const doneLearners = filtered.done.learners;
-        const removedLearners = filtered.removed.learners;
 
-        // Create a Set of learner IDs and learnerChanged values from removed
-        const removedIDs = new Set(
-        removedLearners.flatMap(l => [l.learnerID, l.learnerChanged].filter(Boolean))
-        );
+    const doneLearners = filtered.done.learners;
+    const approvedLearners = filtered.approved.learners;
+    // 1. Create a Set of just the slotIDs from the removed list
+    const removedIDs = new Set(filtered.removed.learners.map(l => l.slotID));
 
-        // Filter out learners from done if their learnerID exists in removedIDs
-        const updatedDoneLearners = doneLearners.filter(
-        learner => !removedIDs.has(learner.learnerID)
-        );
+    // 2. Filter the done list by checking against that Set of IDs
+    const updatedDoneLearners = doneLearners.filter(
+        learner => !removedIDs.has(learner.slotID)
+    );
 
-        // Update the original array
-        filtered.done.learners = updatedDoneLearners;
-    }
+    // 3. Filter the approved list by checking against that Set of IDs
+    const updatedApprovedLearners = approvedLearners.filter(
+        learner => !removedIDs.has(learner.slotID)
+    );
+
+    // 4. Update the original array
+    filtered.done.learners = updatedDoneLearners;
+    filtered.approved.learners = updatedApprovedLearners;
+
 
     const nonEmptyKeys = Object.entries(filtered)
         .filter(([_, item]) => Array.isArray(item.learners) && item.learners.length > 0)

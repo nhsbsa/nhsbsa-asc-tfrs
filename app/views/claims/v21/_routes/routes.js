@@ -1584,8 +1584,11 @@ router.post('/generate-handler', function (req, res) {
   const claim = generateClaim(claimType, claimStatus, submissions, learners, compDate. null)
   claims.push(claim)
 
-  if (claimType == "60") {
-    const pairClaim = generateClaim("60", "approved", 1, learners, null, claim.claimID)
+  if (claimType == "40" ) {
+    const pairClaim = generateClaim("60", "approved", 1, learners, null, claim)
+    claims.push(pairClaim)
+  } else if (claimType == "40PP") {
+    const pairClaim = generateClaim("60PP", "approved", 1, learners, null, claim)
     claims.push(pairClaim)
   }
 

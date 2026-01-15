@@ -69,13 +69,16 @@ function generateClaim(claimTypeInput, claimStatusInput, submissionsInput, learn
   const users = generatecreatedByList(organisation)
   const user = faker.helpers.arrayElement(users)
   const createdBy = user.email;
-  const trainingCode = getRandomCourseCode(training, claimTypeInput)
   let claimLearners = null
+  let trainingCode = null
   if (matchingClaim == null) {
     claimLearners = getRandomLearners(learnerList, learnersInput)
+    trainingCode = getRandomCourseCode(training, claimTypeInput)
   } else {
-    claimLearners = getLearnersFromPairClaim(matchingClaim, claims, learnerList)
+    claimLearners = getLearnersFromPairClaim(matchingClaim, learnerList)
+    trainingCode = matchingClaim.submissions[0].trainingCode
   }
+  console.log(trainingCode)
    //set date references
   const policyDate = new Date('2025-04-01 '); // April 1, 2025 not the real policy date but having claims from this year is more realistic
 
@@ -87,7 +90,11 @@ function generateClaim(claimTypeInput, claimStatusInput, submissionsInput, learn
   let submissions = []
   for (let i = 0; i < submissionsInput; i++) {
     submissions = generateSubmission(submissions, claimType, isPaymentPlan, claimStatusInput, compDate, trainingCode, claimLearners, createdDate, policyDate, users)
-  } 
+  }
+
+  if (status == "queried") {
+    submissions = generateDraftSubmission(submissions, claimType, learnerList)
+  }
 
   const claim = {
       claimID,
@@ -199,7 +206,6 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
               break;
             case "approved":
               submission.evidenceOfPayment = getRandomSubset(approvepaymentFiles)
-              
               submission.evidenceOfPaymentReview = {
                 outcome: "pass",
                 note: null,
@@ -354,43 +360,45 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
 
         submissions.push(submission)
       }
-      
-      if (claimStatusInput == "queried") {
-        const draftSubmission = structuredClone(submissions[0])
-        draftSubmission.submitter = null
-        draftSubmission.submittedDate = null
-        draftSubmission.processedBy = null
-        draftSubmission.processedDate = null
-        draftSubmission.evidenceOfPaymentReview = {
-          outcome: null,
-          note: null,
-          paymentPlan: null,
-          costPerLearner: null
-        }
-        const changeCount = 0
-        const removedCount = 0
-        const maxChanges = Math.ceil((draftSubmission.learners.length / 2) * 0.5);
-        for (let i = draftSubmission.learners.length - 1; i >= 0; i--) {
-          const learner = draftSubmission.learners[i];
-          learner.evidenceOfCompletionReview = {
-              outcome: null,
-              note: null
-            }
-          if (changeCount <= removedCount && changeCount < maxChanges && claimType != "40") {
-            learner.learnerChanged = learner.learnerID
-            learner.learnerID = getAvailableLearnerID(submission.learners, learnerList)
-            changeCount++
-          } else if (removedCount <= changeCount && removedCount < maxChanges && draftSubmission.learners.length > 1) {
-            const [removedLearner] = draftSubmission.learners.splice(i, 1);
-            draftSubmission.removedLearners.push(removedLearner);
-            removedCount++
-          }
-        }
-        submissions.unshift(draftSubmission)
-      }
 
       return submissions
     }
+}
+
+function generateDraftSubmission(submissions, claimType, learnerList) {
+    const draftSubmission = structuredClone(submissions[0])
+    draftSubmission.submitter = null
+    draftSubmission.submittedDate = null
+    draftSubmission.processedBy = null
+    draftSubmission.processedDate = null
+    draftSubmission.evidenceOfPaymentReview = {
+      outcome: null,
+      note: null,
+      paymentPlan: null,
+      costPerLearner: null
+    }
+    let changeCount = 0
+    let removedCount = 0
+    const maxChanges = Math.ceil((draftSubmission.learners.length / 2) * 0.5);
+    for (let i = draftSubmission.learners.length - 1; i >= 0; i--) {
+      const learner = draftSubmission.learners[i];
+      learner.evidenceOfCompletionReview = {
+          outcome: null,
+          note: null
+        }
+      if (changeCount <= removedCount && changeCount < maxChanges && claimType != "40") {
+        learner.learnerChanged = learner.learnerID
+        learner.learnerID = getAvailableLearnerID(draftSubmission.learners, learnerList)
+        changeCount++
+      } else if (removedCount <= changeCount && removedCount < maxChanges && draftSubmission.learners.length > 1) {
+        const [removedLearner] = draftSubmission.learners.splice(i, 1);
+        draftSubmission.removedLearners.push(removedLearner);
+        removedCount++
+      }
+    }
+    submissions.unshift(draftSubmission)
+
+    return submissions
 }
 
 function getRandomCourseCode(data, value) {
@@ -435,11 +443,11 @@ function getRandomCourseCode(data, value) {
 function updateClaimID(claimID, claimType) {
   // 1. Determine the correct suffix letter based on claimType
   let suffixLetter = '';
-  if (claimType === 100) {
+  if (claimType === "100") {
     suffixLetter = 'A';
-  } else if (claimType === 60) {
+  } else if (claimType === "60") {
     suffixLetter = 'B';
-  } else if (claimType === 40) {
+  } else if (claimType === "40") {
     suffixLetter = 'C';
   } else {
     // Optional: handle unexpected claimTypes (defaults to A or keeps as is)
@@ -521,7 +529,7 @@ function assignClaimID(claimType, matchingClaim, claims) {
   let claimID = null
 
   if (matchingClaim != null) {
-    claimID = updateClaimID(matchingClaim, claimType)
+    claimID = updateClaimID(matchingClaim.claimID, claimType)
   } else {
     const baseClaimID = generateUniqueID(claims)
     claimID = updateClaimID(baseClaimID, claimType)
@@ -620,16 +628,12 @@ function getMostRecentCompletionDate(learners) {
   return mostRecent.completionDate;
 }
 
-function getLearnersFromPairClaim(matchingClaim, claims, learnerList) {
+function getLearnersFromPairClaim(matchingClaim, learnerList) {
   let learners = []
-  for (const claim of claims) {
-    if (claim.claimID == matchingClaim) {
-      const firstSubmission = claim.submissions.at(-1)
-      for (const learner of firstSubmission.learners) {
-        const foundLearner = learnerList.find(l => l.id === learner.learnerID);
-        learners.push(foundLearner)
-      }
-    }
+  const firstSubmission = matchingClaim.submissions.at(-1)
+  for (const learner of firstSubmission.learners) {
+    const foundLearner = learnerList.find(l => l.id === learner.learnerID);
+    learners.push(foundLearner)
   }
   return learners
 }
