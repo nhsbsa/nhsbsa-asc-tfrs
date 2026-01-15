@@ -78,7 +78,6 @@ function generateClaim(claimTypeInput, claimStatusInput, submissionsInput, learn
     claimLearners = getLearnersFromPairClaim(matchingClaim, learnerList)
     trainingCode = matchingClaim.submissions[0].trainingCode
   }
-  console.log(trainingCode)
    //set date references
   const policyDate = new Date('2025-04-01 '); // April 1, 2025 not the real policy date but having claims from this year is more realistic
 
