@@ -866,9 +866,28 @@ function loadData(req, orgID) {
 
   console.log('loading in claims file')
 if (req.session.data.org.numberOfClaims > 0) {
-    const allClaims = loadJSONFromFile(claimsFile, dataPath);
-    req.session.data['claims'] = allClaims
-    console.log(allClaims.length + ' claims loaded')
+    const claims = loadJSONFromFile(claimsFile, dataPath);
+
+    // 1. Get Base IDs of "inProgress" claims (e.g., "BMJ-3S3S-5JCY")
+    const inProgressBaseIDs = new Set(
+    claims
+        .filter(c => c.status === "inProgress")
+        .map(c => c.claimID.split('-').slice(0, 3).join('-'))
+    );
+
+    // 2. Filter the claims
+    req.session.data['claims'] = claims.filter(claim => {
+    // Extract the base of the current claim ID
+    const currentBaseID = claim.claimID.split('-').slice(0, 3).join('-');
+
+    // REMOVE if status is "inProgress" 
+    // OR if the base ID matches an inProgress one
+    const isExcluded = claim.status === "inProgress" || inProgressBaseIDs.has(currentBaseID);
+
+    return !isExcluded;
+    });
+    
+    console.log(claims.length + ' claims loaded')
 } else {
     req.session.data['claims'] = [];
     console.log('0 claims loaded')

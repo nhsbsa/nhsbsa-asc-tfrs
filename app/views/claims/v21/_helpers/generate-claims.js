@@ -203,6 +203,15 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
                 costPerLearner: null
               }
               break;
+            case "inProgress":
+              submission.evidenceOfPayment = getRandomSubset(rejectedpaymentFiles)
+              submission.evidenceOfPaymentReview = {
+                outcome: "queried",
+                note: "The payment date on the evidence did not match the payment date on the claim details.",
+                paymentPlan: null,
+                costPerLearner: null
+              }
+              break;
             case "approved":
               submission.evidenceOfPayment = getRandomSubset(approvepaymentFiles)
               submission.evidenceOfPaymentReview = {
@@ -262,6 +271,15 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
                   }
                 }
                 break;
+              case "inProgress":
+                if (Math.random() < 0.2) {
+                  learner.evidenceOfCompletion = approvecompletionFile
+                  learner.evidenceOfCompletionReview = {
+                    outcome: "pass",
+                    note: null
+                  }
+                }
+                break;
               case "approved":
                 learner.evidenceOfCompletion = approvecompletionFile
                 learner.evidenceOfCompletionReview = {
@@ -290,7 +308,7 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
           submission.submittedDate = faker.date.between({ from: laterDate, to: new Date() });
         }
 
-        if (claimStatusInput != "NYSP" && claimStatusInput != "submitted" && claimStatusInput != "queried") {
+        if (claimStatusInput != "NYSP" && claimStatusInput != "submitted" && claimStatusInput != "inProgress") {
           submission.processedBy = faker.helpers.arrayElement(backOfficeStaff.processors)
           submission.processedDate = faker.date.between({ from: submission.submittedDate, to: new Date() });
         }
@@ -509,6 +527,9 @@ function assignClaimStatus(claimStatusVariation) {
       break;
     case "submitted":
       claimStatus = "submitted"
+      break;
+    case "inprogress":
+      claimStatus = "inProgress"
       break;
     case "approved":
       claimStatus = "approved"
