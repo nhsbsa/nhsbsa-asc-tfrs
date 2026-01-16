@@ -1575,13 +1575,8 @@ router.post('/generate-handler', function (req, res) {
   const learners = parseInt(req.session.data.learners, 10)
   const compDate = req.session.data.compDate
 
-  delete req.session.data.claimType
-  delete req.session.data.claimStatus
-  delete req.session.data.submissions
-  delete req.session.data.learners
-  delete req.session.data.compDate
-
-  const claim = generateClaim(claimType, claimStatus, submissions, learners, compDate. null)
+  console.log(compDate)
+  const claim = generateClaim(claimType, claimStatus, submissions, learners, compDate, null)
   claims.push(claim)
 
   if (claimType == "40" ) {
@@ -1595,6 +1590,12 @@ router.post('/generate-handler', function (req, res) {
   fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
 
   req.session.data.confirmationID = claim.claimID
+
+  delete req.session.data.claimType
+  delete req.session.data.claimStatus
+  delete req.session.data.submissions
+  delete req.session.data.learners
+  delete req.session.data.compDate
 
   res.redirect('./_claim-generation/generate-confirmation')
 })

@@ -3,7 +3,6 @@ const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
 const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState } = require('../_helpers/helpers.js');
-const { transformClaims } = require('../_helpers/transform.js');
 
 router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
 
@@ -867,15 +866,6 @@ router.get('/applySubmissionsFilterProcessor', function (req, res) {
   res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
 })
 
-router.get('/transform', function (req, res) {
-  // transform pre-set claims
-  const presetClaims = transformClaims()
-  const presetjsonFilePath = './app/views/processing/v14/_data/claims.json';
-  fs.writeFileSync(presetjsonFilePath, JSON.stringify(presetClaims, null, 2)) ;
-
-  res.redirect('../../')
-})
-
 //generate data
 router.post('/generate-handler', function (req, res) {
   const jsonFilePath = './app/views/processing/v14/_data/claims.json';
@@ -893,7 +883,7 @@ router.post('/generate-handler', function (req, res) {
   delete req.session.data.learners
   delete req.session.data.compDate
 
-  const claim = generateClaim(claimType, claimStatus, submissions, learners, compDate. null)
+  const claim = generateClaim(claimType, claimStatus, submissions, learners, compDate, null)
   claims.push(claim)
 
   if (claimType == "40" ) {
