@@ -13,7 +13,6 @@
         <form action="/applySubmissionsFilterProcessor" method="post" novalidate>
             <div class="govuk-form-group">
                 <label class="govuk-label" for="sort">
-                    {# Show #}
                 </label>
                 <select class="govuk-select" id="filterSubmissionValues" name="sort">
                     <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>View edits only</option>

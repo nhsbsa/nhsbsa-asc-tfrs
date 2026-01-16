@@ -29,7 +29,22 @@
 
 </dl>
 
-<h3 class="govuk-heading-m" id="training">Training</h3>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h3 class="govuk-heading-m" id="training">
+    Training
+    {% if data.claimScreen == "inProgress" %}
+        {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("training")) %}
+            <strong class="govuk-tag">Edited</strong>
+        {% endif %}
+    {% endif %}
+    </h3>
+    {% if data.claimScreen == "inProgress" %}
+        {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("training")) %}
+            <a class="govuk-link" style="font-size: 19px; padding-bottom: 20px;"href="../view-previous-submissions-handler?navigateTo=training">View edits</a>
+        {% endif %}
+    {% endif %}
+</div>
+
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
@@ -87,7 +102,7 @@
     </div>
     {% if claim.claimType != "40" or claim.isPaymentPlan == true %}
         {% if not (submission.trainingCode | isInternalOMMT) %}
-            <div class="govuk-summary-list__row">
+            <div class="govuk-summary-list__row {% if data.claimScreen != "inProgress" %}govuk-summary-list__row--no-actions{% endif %}">
                 <dt class="govuk-summary-list__key">
                     Payment date
                     {% if data.claimScreen == "inProgress" %}
@@ -100,21 +115,31 @@
                     {{ submission.costDate | govukDate }}
                 </dd>
                 {% if data.claimScreen == "inProgress" %}
-                        {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("costDate")) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("costDate"))%}
-                            <dd class="govuk-summary-list__actions">
-                                <a class="govuk-link" href="#">View edits</a>
-                            </dd>
-                        {% endif %}
+                    {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("costDate")) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("costDate"))%}
+                        <dd class="govuk-summary-list__actions">
+                            <a class="govuk-link" href="../view-previous-submissions-handler?navigateTo=paymentDate">View edits</a>
+                        </dd>
                     {% endif %}
+                {% endif %}
             </div>
         {% endif %}
         <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
             <dt class="govuk-summary-list__key">
                 Start date
+                {% if data.claimScreen == "inProgress" %}
+                    {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("startDate")) %}
+                        <strong class="govuk-tag">Edited</strong>
+                    {% endif %}
+                {% endif %}
             </dt>
             <dd class="govuk-summary-list__value">
                 {{ submission.startDate | govukDate }}
             </dd>
+            {% if data.claimScreen == "inProgress" and ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("startDate")) %}
+                <dd class="govuk-summary-list__actions">
+                    <a class="govuk-link" href="../view-previous-submissions-handler?navigateTo=startDate">View edits</a>
+                </dd>
+            {% endif %}
         </div>
     {% endif %}
     {% if claim.claimType != "60" and data.claimScreen != "inProgress" %}
@@ -133,7 +158,22 @@
     {% endif %}
 </dl>
 
-<h3 class="govuk-heading-m" id="learner">Learner{%if submission.learners.length > 1%}s{%endif%}</h3>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h3 class="govuk-heading-m" id="learner">
+    Learner{%if submission.learners.length > 1%}s{%endif%}
+    {% if data.claimScreen == "inProgress" %}
+        {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("learners")) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("learners"))%}
+            <strong class="govuk-tag">Edited</strong>
+        {% endif %}
+    {% endif %}
+    </h3>
+    {% if data.claimScreen == "inProgress" %}
+        {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("learners")) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("learners"))%}
+            <a class="govuk-link" style="font-size: 19px; padding-bottom: 20px;"href="../view-previous-submissions-handler?navigateTo=learners">View edits</a>
+        {% endif %}
+    {% endif %}
+</div>
+
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">

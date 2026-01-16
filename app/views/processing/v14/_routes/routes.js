@@ -179,6 +179,7 @@ router.get('/save-progress', function (req, res) {
   delete req.session.data.claimStep
   delete req.session.data.result
   delete req.session.data.checkListError
+  delete req.session.data.navigateTo 
 
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -262,20 +263,27 @@ router.get('/claim-process-start-handler', function (req, res) {
 req.session.data.orgTab = "singleClaim"
 delete req.session.data.progressSaved
 const claimID = req.session.data.id
+let navigateTo = req.session.data.navigateTo
 
 let claim = null
 let location = null
 
-  for (const c of req.session.data.claims) {
-    if (c.claimID == claimID) {
-      claim = c
-      break;
-    }
+for (const c of req.session.data.claims) {
+  if (c.claimID == claimID) {
+    claim = c
+    break;
   }
+}
+
 let submission = getMostRelevantSubmission(claim)    
-if (claim.status == "inProgress") {
+if (claim.status == "inProgress" && !navigateTo) {
   req.session.data.claimScreen = "checkList"
-} else {
+} else if (navigateTo) {
+
+  req.session.data.claimScreen = "inProgress"
+
+}
+else {
   req.session.data.claimScreen = "inProgress"
   if (claim.claimType == "100" || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan) || (isInternalOMMT(submission.trainingCode))) {
     req.session.data.claimStep = "payment"
@@ -300,6 +308,7 @@ router.post('/claim-payment-handler', function (req, res) {
   delete req.session.data.paymentQueriedNoteIncomplete
   delete req.session.data.paidInFullResponseIncomplete
   delete req.session.data.checkListError
+  delete req.session.data.navigateTo
 
   claimID = req.session.data.id
   const paymentResponse = req.session.data.payment
@@ -440,6 +449,7 @@ router.post('/claim-completion-handler', function (req, res) {
         delete req.session.data.learnerCount
         delete req.session.data.claimStep
         delete req.session.data.result
+        delete req.session.data.navigateTo 
 
 
         req.session.data.claimScreen = "claim"
@@ -545,8 +555,12 @@ router.get('/view-previous-submissions-handler', function (req, res) {
       foundClaim = claim
     }
   }
+  var navigateTo = "tab-content" 
+  if (req.session.data.navigateTo) {
+    var navigateTo = req.session.data.navigateTo 
+  }
   req.session.data.claimScreen = "previousSubmissions"
-  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&view=' + foundClaim.claimType + "&filter=everything" + '#tab-content')
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&view=' + foundClaim.claimType + "&filter=everything" + '#' + navigateTo)
 });
 
 router.get('/from-learners-submission', function (req, res) {

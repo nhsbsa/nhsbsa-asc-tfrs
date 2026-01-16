@@ -1,7 +1,12 @@
 <div class="govuk-summary-card">
     <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title" id="{{learner.givenName}}">
-        {{ learner.givenName}} {{ learner.familyName}}
+        {{ learner.givenName}} {{ learner.familyName}} 
+        {% if data.claimScreen == "inProgress" %}
+            {% if ((claim.claimType == "100") and claim | checkIfChanged("learners")) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("learners"))%}
+                <strong class="govuk-tag">Edited</strong>
+            {% endif %}
+        {% endif %}
         </br><span class="govuk-!-font-weight-regular">{{learner.learnerID}}</span>
         </h2>
         {% if claim.status != "submitted" and claim.status != 'inProgress'%}
