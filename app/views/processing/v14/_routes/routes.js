@@ -5,7 +5,9 @@ const fs = require('fs');
 const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState } = require('../_helpers/helpers.js');
 
 router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
+router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
 
+// v14 Prototype routes
 // v14 Prototype routes
 
 router.get('/load-data', function (req, res) {
@@ -178,6 +180,7 @@ router.get('/save-progress', function (req, res) {
   delete req.session.data.claimStep
   delete req.session.data.result
   delete req.session.data.checkListError
+  delete req.session.data.navigateTo 
 
   for (const c of req.session.data.claims) {
     if (c.claimID == claimID) {
@@ -261,20 +264,28 @@ router.get('/claim-process-start-handler', function (req, res) {
 req.session.data.orgTab = "singleClaim"
 delete req.session.data.progressSaved
 const claimID = req.session.data.id
+let navigateTo = req.session.data.navigateTo
+let fromProcessing = req.session.data.fromProcessing
 
 let claim = null
 let location = null
 
-  for (const c of req.session.data.claims) {
-    if (c.claimID == claimID) {
-      claim = c
-      break;
-    }
+for (const c of req.session.data.claims) {
+  if (c.claimID == claimID) {
+    claim = c
+    break;
   }
+}
+
 let submission = getMostRelevantSubmission(claim)    
-if (claim.status == "inProgress") {
+if (claim.status == "inProgress" && (!navigateTo || !fromProcessing)) {
   req.session.data.claimScreen = "checkList"
-} else {
+} else if (navigateTo || fromProcessing) {
+
+  req.session.data.claimScreen = "inProgress"
+
+}
+else {
   req.session.data.claimScreen = "inProgress"
   if (claim.claimType == "100" || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan) || (isInternalOMMT(submission.trainingCode))) {
     req.session.data.claimStep = "payment"
@@ -299,6 +310,7 @@ router.post('/claim-payment-handler', function (req, res) {
   delete req.session.data.paymentQueriedNoteIncomplete
   delete req.session.data.paidInFullResponseIncomplete
   delete req.session.data.checkListError
+  delete req.session.data.navigateTo
 
   claimID = req.session.data.id
   const paymentResponse = req.session.data.payment
@@ -364,15 +376,16 @@ router.post('/claim-payment-handler', function (req, res) {
 
       } else if (claim.claimType == "100" || (claim.claimType == "40" && claim.isPaymentPlan) ) {
         req.session.data.claimStep = "completion"
-
-        // need to order alphabetically by name then do the below function
-        // let nextLearner = submission.learners.findIndex(
-        //   learner => !learner?.evidenceOfCompletionReview?.outcome
-        // );
-        // TODO - cycle through the learners on claim, first one without a outcome make that the learner count 
-        req.session.data.learnerCount = 1
-        location = "tracker-learner-" + req.session.data.learnerCount
-        return res.redirect('organisation/org-view-main#' + location)
+        const index = findFirstLearnerWithoutOutcome(sortAlphabetically(submission.learners))
+        if (index == -1) {
+          req.session.data.claimScreen = "checkList"
+          delete req.session.data.claimStep
+          return res.redirect('organisation/org-view-main')
+        } else {
+          req.session.data.learnerCount = index + 1
+          location = "tracker-learner-" + req.session.data.learnerCount
+          return res.redirect('organisation/org-view-main#' + location)
+        }
 
       } else {
         req.session.data.result = determineOutcome(claim, submission.evidenceOfPaymentReview.outcome, null)
@@ -411,7 +424,6 @@ router.post('/claim-completion-handler', function (req, res) {
   }
   const submission = getMostRelevantSubmission(claim)  
 
-
   const errorParamaters = checkClaimProcess(claim, "completion", null, null, null, null, completionResponse, completionRejectNote, completionQueriedNote, null)
 
   if (errorParamaters == "" || actionType == "later") {
@@ -439,6 +451,7 @@ router.post('/claim-completion-handler', function (req, res) {
         delete req.session.data.learnerCount
         delete req.session.data.claimStep
         delete req.session.data.result
+        delete req.session.data.navigateTo 
 
 
         req.session.data.claimScreen = "claim"
@@ -446,10 +459,10 @@ router.post('/claim-completion-handler', function (req, res) {
         res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
         // TODO - else if a learner after doesn't have a outcome yet  
-      } else if (learnerCount < submission.learners.length ) {
+      } else if (findFirstLearnerWithoutOutcome(sortAlphabetically(submission.learners), learnerCount) != -1) {
 
         // TODO - cycle through learners after learner count, go to next learner without a outcome, 
-        req.session.data.learnerCount = learnerCount + 1
+        req.session.data.learnerCount = findFirstLearnerWithoutOutcome(sortAlphabetically(submission.learners), learnerCount) + 1
         location = "tracker-learner-" + req.session.data.learnerCount
         return res.redirect('organisation/org-view-main#' + location)
 
@@ -490,8 +503,6 @@ router.get('/outcome-step-handler', function (req, res) {
     req.session.data.checkListError = checkState
     return res.redirect('organisation/org-view-main')
   }
-
-  
 });
 
 router.get('/outcome-handler', function (req, res) {
@@ -544,8 +555,12 @@ router.get('/view-previous-submissions-handler', function (req, res) {
       foundClaim = claim
     }
   }
+  var navigateTo = "tab-content" 
+  if (req.session.data.navigateTo) {
+    var navigateTo = req.session.data.navigateTo 
+  }
   req.session.data.claimScreen = "previousSubmissions"
-  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&view=' + foundClaim.claimType + "&filter=everything" + '#tab-content')
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&view=' + foundClaim.claimType + "&filter=everything" + '#' + navigateTo)
 });
 
 router.get('/from-learners-submission', function (req, res) {
@@ -570,8 +585,9 @@ router.get('/learner-previous-submissions-handler', function (req, res) {
       foundClaim = claim
     }
   }
+  var listSlot = req.session.data.listSlot
   req.session.data.claimScreen = "learnerPreviousSubmissions"
-  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&view=' + foundClaim.claimType + '#tab-content')
+  res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '&view=' + foundClaim.claimType + '#' + listSlot)
 
 });
 
@@ -818,6 +834,7 @@ router.get('/showPaymentNote', function (req, res) {
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
       res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
+      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
@@ -828,6 +845,7 @@ router.get('/showLearnerNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
+      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
       res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
     }
   }
@@ -840,6 +858,7 @@ router.get('/hidePaymentNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
+      res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
       res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
     }
   }
@@ -858,11 +877,13 @@ router.get('/hideLearnerNote', function (req, res) {
   }
   req.session.data.claimScreen = "learnerPreviousSubmissions"
   res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
+  res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
 });
 
-router.get('/applySubmissionsFilterProcessor', function (req, res) {
+router.get('/applySubmissionsFilterProcessorv14', function (req, res) {
   var claimID = req.session.data.id
   var filter = req.session.data.sort
+  res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
   res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
 })
 

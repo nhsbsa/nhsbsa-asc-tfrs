@@ -19,7 +19,7 @@
             {% if ((claim.claimType == "100" or claim.claimType == "60") and (claim | checkIfChanged("evidencePayment"))) or ( claim.claimType == "40" and claim.isPaymentPlan == true and (claim | checkIfChanged("evidencePayment")))%}
                 <ul class="govuk-summary-card__actions">
                     <li class="govuk-summary-card__action">
-                        <a class="govuk-link" href="#">View edits<span class="govuk-visually-hidden"> of change</span></a>
+                        <a class="govuk-link" href="../view-previous-submissions-handler?navigateTo=paymentEvidence">View edits<span class="govuk-visually-hidden"> of change</span></a>
                     </li>
                 </ul>
             {% endif %}

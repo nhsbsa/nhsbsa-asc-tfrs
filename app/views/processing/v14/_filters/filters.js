@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { formatDate, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, buildLearnerComparison, orderSubmissions } = require('../_helpers/helpers.js');
+const { formatDate, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, buildSlotComparison, orderSubmissions } = require('../_helpers/helpers.js');
 const fs = require('fs');
 const dataPath = 'app/views/processing/v14/_data/'
 
@@ -265,9 +265,9 @@ addFilter('sortSubmissionsForTable', function (submissions) {
     return sorted
 })
 
-addFilter('sortLearnersForTable', function (submissions) {
+addFilter('sortLearnerSlotsForTable', function (submissions) {
     let sorted = sortSubmissionsForTable(submissions)
-    let newLearnerArray = buildLearnerComparison(sorted)
+    let newLearnerArray = buildSlotComparison(sorted)
     return newLearnerArray
 })
 
@@ -280,6 +280,28 @@ addFilter('checkIfMultipleLearners', function (submissions) {
         }
     return moreThanOne
 })
+
+addFilter('getPreviousLearnerID', function (slot) {
+  if (!slot || !slot.history) return null;
+
+  // history is [latest, older, ..., oldest]
+  // slot is removed, so history[0] is null
+  for (let i = 1; i < slot.history.length; i++) {
+    if (slot.history[i]) {
+      return slot.history[i].learnerID;
+    }
+  }
+  return null;
+});
+addFilter('hasChanges', function (slots) {
+  if (!slots || !Array.isArray(slots)) return false;
+
+  let changed = slots.some(slot => {
+    const flags = slot.changeFlags || {};
+    return flags.completionDate || flags.evidenceOfCompletion || flags.status;
+  });
+  return changed
+  })
 
 addFilter('getFirstDate', function (learners) {
   if (!learners || learners.length === 0) return null;
@@ -306,111 +328,104 @@ addFilter('getLastDate', function (learners) {
 })
 
 addFilter('learnerCountChanges', function (currentSubmission, previousSubmission) {
-    let learnerChangeCount = 0
-    if (!currentSubmission.learners || !previousSubmission?.learners) {
-        learnerChangeCount = 0
-        return
+  if (!currentSubmission?.learners || !previousSubmission?.learners) {
+    return 0
+  }
+
+  const currentBySlot = new Map(
+    currentSubmission.learners.map(l => [l.slotID, l.learnerID])
+  )
+
+  const previousBySlot = new Map(
+    previousSubmission.learners.map(l => [l.slotID, l.learnerID])
+  )
+
+  const allSlotIDs = new Set([
+    ...currentBySlot.keys(),
+    ...previousBySlot.keys()
+  ])
+
+  let learnerChangeCount = 0
+
+  for (const slotID of allSlotIDs) {
+    const currentLearner = currentBySlot.get(slotID)
+    const previousLearner = previousBySlot.get(slotID)
+
+    // Slot added or removed
+    if (currentLearner === undefined || previousLearner === undefined) {
+      learnerChangeCount++
+      continue
     }
-    const currentIds = currentSubmission.learners.map(l => l.learnerID)
-    const nextIds = previousSubmission.learners.map(l => l.learnerID)
 
-    const removed = currentIds.filter(id => !nextIds.includes(id))
-    const added = nextIds.filter(id => !currentIds.includes(id))
+    // Same slot, different learner
+    if (currentLearner !== previousLearner) {
+      learnerChangeCount++
+    }
+  }
 
-    learnerChangeCount = removed.length + added.length
-    return learnerChangeCount
+  return learnerChangeCount
 })
 
 addFilter('completionDateCountChanges', function (currentSubmission, previousSubmission) {
-    if (!currentSubmission?.learners || !previousSubmission?.learners) {
-        return 0
-    }
-    // Map learnerID → completionDate for previous submission
-    const previousMap = new Map(
-        previousSubmission.learners.map(l => [
-        l.learnerID,
-        l.completionDate
-        ])
-    )
-  let changeCount = 0
-  for (const learner of currentSubmission.learners) {
-    const previousDate = previousMap.get(learner.learnerID)
-    // Only count if learner existed before
-    if (!previousDate) continue
-    if (learner.completionDate !== previousDate) {
-      changeCount++
-    }
+  if (!currentSubmission?.learners || !previousSubmission?.learners) {
+    return 0
   }
+
+  // Map completionDate by slotID
+  const currentBySlot = new Map(
+    currentSubmission.learners.map(l => [l.slotID, l.completionDate])
+  )
+  const previousBySlot = new Map(
+    previousSubmission.learners.map(l => [l.slotID, l.completionDate])
+  )
+
+  let changeCount = 0
+
+  // Compare only slots that exist in BOTH submissions
+  for (const [slotID, currentDate] of currentBySlot.entries()) {
+    const previousDate = previousBySlot.get(slotID)
+    if (previousDate === undefined) continue // added slot → ignore
+    if (currentDate !== previousDate) changeCount++ // only count actual date differences
+  }
+
   return changeCount
 })
 
 addFilter('completionEvidenceCountChanges', function (currentSubmission, previousSubmission) {
-    let changeCount = 0
+  if (!currentSubmission?.learners || !previousSubmission?.learners) {
+    return 0
+  }
 
-    if (!currentSubmission.learners || !previousSubmission?.learners) {
-        return 0
-    }
+  // Map evidence by slotID
+  const currentBySlot = new Map(
+    currentSubmission.learners.map(l => [l.slotID, l.evidenceOfCompletion])
+  )
+  const previousBySlot = new Map(
+    previousSubmission.learners.map(l => [l.slotID, l.evidenceOfCompletion])
+  )
 
-    const currentLearners = currentSubmission.learners
-    const previousLearners = previousSubmission.learners
+  // Get all slotIDs across both submissions
+  const allSlotIDs = new Set([...currentBySlot.keys(), ...previousBySlot.keys()])
 
-    const currentIds = currentLearners.map(l => l.learnerID)
-    const previousIds = previousLearners.map(l => l.learnerID)
+  let changeCount = 0
 
-    // learnerID → evidenceOfCompletion (previous submission)
-    const previousEvidenceMap = new Map(
-        previousLearners.map(l => [
-            l.learnerID,
-            l.evidenceOfCompletion
-        ])
-    )
+  for (const slotID of allSlotIDs) {
+    const currentEvidence = currentBySlot.get(slotID)
+    const previousEvidence = previousBySlot.get(slotID)
 
-    // Evidence removed (learner removed)
-    previousIds.forEach(id => {
-        if (!currentIds.includes(id)) {
-            changeCount++
-        }
-    })
-
-    // Evidence added (learner added)
-    currentIds.forEach(id => {
-        if (!previousIds.includes(id)) {
-            changeCount++
-        }
-    })
-
-    //  Evidence changed (same learner, different file)
-    currentLearners.forEach(learner => {
-        if (!previousEvidenceMap.has(learner.learnerID)) return
-
-        const previousEvidence = previousEvidenceMap.get(learner.learnerID)
-
-        if (learner.evidenceOfCompletion !== previousEvidence) {
-            changeCount++
-        }
-    })
-
-    return changeCount
-})
-
-addFilter('checkWhatHasChanged', function (submissions) {
-
-  if (submissions.length <= 1) {
-    // Only one submission → nothing has changed
-    return {
-      training: false,
-      startDate: false,
-      paymentDate: false,
-      evidenceOfPayment: false,
-      learners: false,
-      completionDate: false,
-      completionEvidence: false
+    if (currentEvidence === undefined || previousEvidence === undefined) {
+      // Slot added or removed
+      changeCount++
+    } else if (currentEvidence !== previousEvidence) {
+      // Evidence changed for existing slot
+      changeCount++
     }
   }
 
-  // Start with the first submission as “baseline”
-  const baseline = submissions[0]
+  return changeCount
+})
 
+addFilter('checkWhatHasChanged', function (submissions) {
   const flags = {
     training: false,
     startDate: false,
@@ -421,62 +436,81 @@ addFilter('checkWhatHasChanged', function (submissions) {
     completionEvidence: false
   }
 
-  for (let i = 1; i < submissions.length; i++) {
-    const current = submissions[i]
+  if (submissions.length <= 1) return flags
 
-    // Training
-    if (current.trainingCode !== baseline.trainingCode) flags.training = true
+  // Sort submissions chronologically (oldest → newest)
+  const ordered = [...submissions].sort(
+    (a, b) => new Date(a.submittedDate) - new Date(b.submittedDate)
+  )
 
-    // Start date
-    if (current.startDate !== baseline.startDate) flags.startDate = true
+  for (let i = 0; i < ordered.length - 1; i++) {
+    const prev = ordered[i]
+    const next = ordered[i + 1]
 
-    // Payment date
-    if (current.costDate !== baseline.costDate) flags.paymentDate = true
+    // --- Training ---
+    if (prev.trainingCode !== next.trainingCode) flags.training = true
 
-    // Evidence of payment
-    const currEOP = current.evidenceOfPayment || []
-    const baseEOP = baseline.evidenceOfPayment || []
+    // --- Start date ---
+    if (prev.startDate !== next.startDate) flags.startDate = true
+
+    // --- Payment date ---
+    if (prev.costDate !== next.costDate) flags.paymentDate = true
+
+    // --- Evidence of Payment ---
+    const prevEOP = prev.evidenceOfPayment || []
+    const nextEOP = next.evidenceOfPayment || []
     if (
-      currEOP.length !== baseEOP.length ||
-      currEOP.some(f => !baseEOP.includes(f))
-    )
-      flags.evidenceOfPayment = true
+      prevEOP.length !== nextEOP.length ||
+      prevEOP.some(f => !nextEOP.includes(f))
+    ) flags.evidenceOfPayment = true
 
-    // Learners added/removed
-    const currLearners = current.learners || []
-    const baseLearners = baseline.learners || []
-    const currIds = currLearners.map(l => l.learnerID)
-    const baseIds = baseLearners.map(l => l.learnerID)
+    // --- Learners / Slots ---
+    const prevSlots = prev.learners || []
+    const nextSlots = next.learners || []
 
-    if (
-      currIds.some(id => !baseIds.includes(id)) ||
-      baseIds.some(id => !currIds.includes(id))
-    )
+    const prevSlotMap = new Map(prevSlots.map(l => [l.slotID, l]))
+    const nextSlotMap = new Map(nextSlots.map(l => [l.slotID, l]))
+
+    const prevSlotIDs = new Set(prevSlotMap.keys())
+    const nextSlotIDs = new Set(nextSlotMap.keys())
+
+    const removedSlots = [...prevSlotIDs].filter(id => !nextSlotIDs.has(id))
+    const addedSlots = [...nextSlotIDs].filter(id => !prevSlotIDs.has(id))
+
+    // --- Learners flag ---
+    if (removedSlots.length > 0 || addedSlots.length > 0) {
       flags.learners = true
+    }
 
-    // Completion date
-    const baseDateMap = new Map(baseLearners.map(l => [l.learnerID, l.completionDate]))
-    if (
-      flags.learners ||
-      currLearners.some(
-        l => baseDateMap.has(l.learnerID) && l.completionDate !== baseDateMap.get(l.learnerID)
-      )
-    )
-      flags.completionDate = true
+    for (const slotID of [...prevSlotIDs].filter(id => nextSlotIDs.has(id))) {
+      const prevLearner = prevSlotMap.get(slotID)
+      const nextLearner = nextSlotMap.get(slotID)
+      if (prevLearner.learnerID !== nextLearner.learnerID) {
+        flags.learners = true
+      }
+    }
 
-    // Completion evidence
-    const baseEvidenceMap = new Map(
-      baseLearners.map(l => [l.learnerID, l.evidenceOfCompletion])
-    )
-    if (
-      flags.learners ||
-      currLearners.some(
-        l =>
-          baseEvidenceMap.has(l.learnerID) &&
-          l.evidenceOfCompletion !== baseEvidenceMap.get(l.learnerID)
-      )
-    )
+    // --- Completion date ---
+    for (const slotID of prevSlotIDs) {
+      const prevLearner = prevSlotMap.get(slotID)
+      const nextLearner = nextSlotMap.get(slotID)
+      if (!nextLearner || prevLearner.completionDate !== nextLearner.completionDate) {
+        flags.completionDate = true
+      }
+    }
+
+    // --- Completion evidence ---
+    if (removedSlots.length > 0 || addedSlots.length > 0) {
       flags.completionEvidence = true
+    } else {
+      for (const slotID of [...prevSlotIDs].filter(id => nextSlotIDs.has(id))) {
+        const prevLearner = prevSlotMap.get(slotID)
+        const nextLearner = nextSlotMap.get(slotID)
+        if (prevLearner.evidenceOfCompletion !== nextLearner.evidenceOfCompletion) {
+          flags.completionEvidence = true
+        }
+      }
+    }
   }
 
   return flags
@@ -653,7 +687,7 @@ addFilter('merge', function(obj1, obj2) {
     return Object.assign({}, obj1, obj2);
 });
 
-addFilter('checkIfChanged', (claim, field, learnerID) => {
+addFilter('checkIfChanged', (claim, field, slotID) => {
 
     if (claim.submissions != null && claim.submissions.length == 1) { return false }
     // filter to order submissions
@@ -673,23 +707,33 @@ addFilter('checkIfChanged', (claim, field, learnerID) => {
             return true
         }
     } else if (field == "learners") {
-        const lastIds = new Set(latest.learners.map(l => l.learnerID));
-        const draftIds = new Set(previous.learners.map(l => l.learnerID));
+        const latestIds = new Set(latest.learners.map(l => l.learnerID));
+        const previousIds = new Set(previous.learners.map(l => l.learnerID));
         // Check for added learners
-        for (const id of draftIds) {
-            if (!lastIds.has(id)) {
+        for (const id of previousIds) {
+            if (!latestIds.has(id)) {
                 return true; // A new learner was added
             }
         }
 
         // Check for removed learners
-        for (const id of lastIds) {
-            if (!draftIds.has(id)) {
+        for (const id of latestIds) {
+            if (!previousIds.has(id)) {
                 return true; // A learner was removed
             }
         }
 
         return false; // No changes
+
+    } else if (field == "learner") {
+        const previousSlot = previous.learners.find(item => item.slotID === slotID);
+        const latestSlot = latest.learners.find(item => item.slotID === slotID);
+
+        if (previousSlot != null && latestSlot != null && (previousSlot.learnerID == latestSlot.learnerID)) {
+            return false
+        } else {
+            return true
+        }
 
     } else if (field == "startDate") {
         if (latest.startDate == previous.startDate) {
@@ -723,81 +767,23 @@ addFilter('checkIfChanged', (claim, field, learnerID) => {
         return false; // Nothing new in draft
 
     } else if (field == "completionDate") {
-        const date1 = getLearnerFieldByID(previous.learners, learnerID, "completionDate")
-        const result = previous.learners.find(item => item.learnerID === learnerID);
-        if (result != null && result.learnerChanged != null) {
-            learnerID = result.learnerChanged
-        }
-        const date2 = getLearnerFieldByID(latest.learners, learnerID, "completionDate")
-        
-        // to do compare if same contents
-        if (date1 === date2 || date1 == null || date2 == null) {
+        const previousSlot = previous.learners.find(item => item.slotID === slotID);
+        const latestSlot = latest.learners.find(item => item.slotID === slotID);
+        if (previousSlot != null && latestSlot != null && (previousSlot.completionDate == latestSlot.completionDate)) {
             return false
         } else {
             return true
         }
 
-    } else if (field == "completionDates") {
-        // Build lookup map for latest
-        const lastMap = new Map(
-            latest.learners.map(l => [l.learnerID, l.completionDate])
-        );
-
-        // Iterate over previous learners
-        for (const draftLearner of previous.learners) {
-            // Use learnerChanged if present
-            const learnerID = draftLearner.learnerChanged || draftLearner.learnerID;
-
-            const draftDate = draftLearner.completionDate;
-            const lastDate = lastMap.get(learnerID);
-
-            // Check if learner existed before and date has changed
-            if (lastDate !== undefined && lastDate !== draftDate) {
-                return true;
-            }
-        }
-
-        return false;
     } else if (field == "evidenceCompletion") {
-        const evidence2 = getLearnerFieldByID(previous.learners, learnerID, "evidenceOfCompletion")
-        const result = previous.learners.find(item => item.learnerID === learnerID);
-        if (result != null && result.learnerChanged != null) {
-            learnerID = result.learnerChanged
-        }
-        const evidence1 = getLearnerFieldByID(latest.learners, learnerID, "evidenceOfCompletion")
-        if (evidence1 == evidence2 || evidence1 == null || evidence2 == null) {
-            return false;
-        } else {
-            return true
-        }
-
-    } else if (field == "multipleEvidenceCompletion") {
-        // Build lookup maps for latest
-        const lastMap = new Map(
-            latest.learners.map(l => [l.learnerID, l.evidenceOfCompletion])
-        );
-
-        // Iterate over previous learners
-        for (const draftLearner of previous.learners) {
-            // Use learnerChanged if present
-            const learnerID = draftLearner.learnerChanged || draftLearner.learnerID;
-
-            const draftEvidence = draftLearner.evidenceOfCompletion;
-            const lastEvidence = lastMap.get(learnerID);
-
-            // Check if learner existed before and evidence has changed
-            if (lastEvidence !== undefined && lastEvidence !== draftEvidence) {
-                return true;
-            }
-        }
-
-        return false;
-    } else if (field == "supportingNote") {
-        if (latest.supportingNote == previous.supportingNote) {
+        const previousSlot = previous.learners.find(item => item.slotID === slotID);
+        const latestSlot = latest.learners.find(item => item.slotID === slotID);
+        if (previousSlot != null && latestSlot != null && (previousSlot.evidenceOfCompletion == latestSlot.evidenceOfCompletion)) {
             return false
         } else {
             return true
         }
+
     } else {
         return false
     }
@@ -823,4 +809,10 @@ addFilter('outcomeText', function(outcome) {
 
 addFilter('checkIfMissing', function(targetId, checkList) {
     return checkList.some(item => item.id === targetId);
+});
+
+addFilter('findOrderedIndex', function(learners, slotID) {
+    let order = sortAlphabetically(learners)
+    const newSlot = order.findIndex(item => item.slotID === slotID);
+    return newSlot + 1
 });
