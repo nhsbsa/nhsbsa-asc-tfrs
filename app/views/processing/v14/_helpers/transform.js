@@ -1,5 +1,5 @@
 const fs = require('fs');
-const dataPath = 'app/views/processing/v13/_data/'
+const dataPath = 'app/views/processing/v14/_data/'
 
 function getRandomLearners(learnerList, x) {
   const copyLearners = [...learnerList];
@@ -29,8 +29,8 @@ function getRandomLearners(learners, num) {
 }
 
 function transformClaims() {
-  const learners = JSON.parse(fs.readFileSync('./app/views/processing/v13/_data/learners.json', 'utf8'));
-  const claims = JSON.parse(fs.readFileSync('./app/views/processing/v13/_data/processing-claims.json', 'utf8'));
+  const learners = JSON.parse(fs.readFileSync('./app/views/processing/v14/_data/learners.json', 'utf8'));
+  const claims = JSON.parse(fs.readFileSync('./app/views/processing/v14/_data/processing-claims.json', 'utf8'));
 
   const transformedClaims = [];
   const claimLearnerMap = {}; // Stores learners by base claimID

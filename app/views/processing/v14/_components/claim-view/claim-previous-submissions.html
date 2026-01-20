@@ -16,7 +16,7 @@
 
         <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} history with any edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
 
-    <form action="/applySubmissionsFilterProcessor" method="post" novalidate>
+    <form action="/applySubmissionsFilterProcessorv14" method="post" novalidate>
         <div class="govuk-form-group">
             <label class="govuk-label" for="sort">
             </label>
@@ -125,9 +125,9 @@
                             {% endif %}
                             {%endfor %}  
                         </tr>
-                        {% endif %}
+                    {% endif %}
 
-                    {% if (data.view == "100" or data.view == "60") and (data.filter == "everything" or (data.filter == "changed" and claimFlags.startDate))%}
+                    {% if (data.view == "60") and (data.filter == "everything" or (data.filter == "changed" and claimFlags.startDate))%}
                             <tr class="govuk-table__row" id="startDate">
                                 <td class="govuk-table__cell"><strong>Start date</strong></td>
                                 {% for submission in sortedSubmissions %}
@@ -195,8 +195,7 @@
                                 {% for submission in sortedSubmissions %}
                                 {% if (submission.evidenceOfPaymentReview.outcome == "queried") and submission.submittedDate != null %}
                                     <td class="govuk-table__cell">
-                                    {% set text = submission | formatText %}
-                                        {{text | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                                        {{submission.evidenceOfPaymentReview.note | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
                                     </td>
                                 {% else %}
                                     <td class="govuk-table__cell">---</td>
@@ -208,7 +207,6 @@
 
                     </tbody>
                 </table>
-
             {% endif  %}
 
             {% if (data.filter == "everything" or (data.filter == "changed" and claimFlags.learners or claimFlags.completionEvidence or claimFlags.completionDate)) %}
@@ -378,9 +376,8 @@
                                     {% set count = sortedSubmissions.length %}
                                     {% for submission in sortedSubmissions %}
                                     {% if (submission.learners[0].evidenceOfCompletionReview.outcome == "queried") and submission.submittedDate != null %}
-                                        <td class="govuk-table__cell">
-                                        {% set text = submission | formatText %}
-                                            {{text | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                                    <td class="govuk-table__cell">
+                                            {{submission.learners[0].evidenceOfCompletionReview.note | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
                                         </td>
                                     {% else %}
                                         <td class="govuk-table__cell">---</td>

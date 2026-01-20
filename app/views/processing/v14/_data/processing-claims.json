@@ -24,11 +24,12 @@
           "paymentPlan": "yes",
           "costPerLearner": 120
         },
-        "processedDate": "2025-03-14T06:15:38.665Z",
-        "processedBy": "Allan Connelly",
+        "processedDate": "2025-04-14T06:15:38.665Z",
+        "processedBy": "Shelly Connelly",
         "learners": [
           {
-            "learnerID": "BF 73 4F 97 L",
+            "slotID": "1",
+            "learnerID": "UG 66 2F 97 F",
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -37,6 +38,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -46,6 +48,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -55,6 +58,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -64,6 +68,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -73,6 +78,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -103,6 +109,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -112,6 +119,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -121,6 +129,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -130,6 +139,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -139,6 +149,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -148,6 +159,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -190,6 +202,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -199,7 +212,8 @@
             }
           },
           {
-            "learnerID": "LM 89 7F 48 J",
+            "slotID": "2",
+            "learnerID": "VL 10 7F 63 E",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
             "evidenceOfCompletionReview": {
@@ -208,6 +222,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -217,6 +232,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -226,6 +242,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -256,6 +273,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate001.pdf",
@@ -265,6 +283,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate001.pdf",
@@ -274,6 +293,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate001.pdf",
@@ -283,6 +303,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate001.pdf",
@@ -292,6 +313,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate001.pdf",
@@ -301,6 +323,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-03-25T03:16:00.448Z",
             "evidenceOfCompletion": "certificate001.pdf",
@@ -343,6 +366,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -374,6 +398,7 @@
         "processedBy": "Flossie Gleaason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -416,6 +441,7 @@
         "processedBy": "Flossie Gleaason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -425,6 +451,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -456,6 +483,7 @@
         "processedBy": "Flossie Gleaason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -465,6 +493,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -506,6 +535,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -536,6 +566,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -578,6 +609,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -620,6 +652,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "6",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -629,6 +662,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -638,6 +672,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -647,6 +682,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -656,6 +692,7 @@
             }
           },
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -665,6 +702,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -674,6 +712,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -683,6 +722,7 @@
             }
           },
           {
+            "slotID": "8",
             "learnerID": "KX 89 9F 87 K",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -692,6 +732,7 @@
             }
           },
           {
+            "slotID": "9",
             "learnerID": "OA 78 8F 31 V",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -701,6 +742,7 @@
             }
           },
           {
+            "slotID": "10",
             "learnerID": "KQ 01 7F 72 D",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -710,6 +752,7 @@
             }
           },
           {
+            "slotID": "11",
             "learnerID": "GR 03 6F 10 P",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -719,6 +762,7 @@
             }
           },
           {
+            "slotID": "12",
             "learnerID": "JU 91 7F 75 P",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -728,6 +772,7 @@
             }
           },
           {
+            "slotID": "13",
             "learnerID": "CM 61 1F 12 E",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -737,6 +782,7 @@
             }
           },
           {
+            "slotID": "14",
             "learnerID": "VL 10 7F 63 E",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -746,6 +792,7 @@
             }
           },
           {
+            "slotID": "15",
             "learnerID": "ZH 56 2F 40 Y",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -755,6 +802,7 @@
             }
           },
           {
+            "slotID": "16",
             "learnerID": "UG 66 2F 97 F",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -764,6 +812,7 @@
             }
           },
           {
+            "slotID": "17",
             "learnerID": "CW 99 7F 83 J",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -773,6 +822,7 @@
             }
           },
           {
+            "slotID": "18",
             "learnerID": "AL 82 2F 62 C",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-312.pdf",
@@ -782,6 +832,7 @@
             }
           },
           {
+            "slotID": "19",
             "learnerID": "HM 27 9F 18 T",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-312.pdf",
@@ -812,6 +863,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -821,6 +873,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -830,6 +883,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -839,6 +893,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -848,6 +903,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -889,6 +945,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -898,6 +955,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -907,6 +965,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -916,6 +975,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -925,6 +985,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -955,6 +1016,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -964,6 +1026,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -973,6 +1036,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -982,6 +1046,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -991,6 +1056,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-braxtonSchiller.pdf",
@@ -1033,6 +1099,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -1094,6 +1161,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1103,6 +1171,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2024-12-13T21:33:21.901Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1112,6 +1181,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate3.pdf",
@@ -1121,6 +1191,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate5.pdf",
@@ -1130,6 +1201,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate6.pdf",
@@ -1162,6 +1234,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate11.pdf",
@@ -1171,6 +1244,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate12.pdf",
@@ -1180,6 +1254,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate14.pdf",
@@ -1189,6 +1264,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate15.pdf",
@@ -1198,6 +1274,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1207,6 +1284,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1216,6 +1294,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2024-12-17T21:33:21.901Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1259,6 +1338,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-10-24T19:46:57.118Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1289,6 +1369,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-10-24T19:46:57.118Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1332,6 +1413,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1341,6 +1423,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1350,6 +1433,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1359,6 +1443,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1368,6 +1453,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1377,6 +1463,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1408,6 +1495,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1417,6 +1505,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1426,6 +1515,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1435,6 +1525,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1444,6 +1535,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1453,6 +1545,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2024-11-01T01:05:03.483Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1496,6 +1589,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-02T01:44:27.141Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1505,6 +1599,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-02-02T01:44:27.141Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1514,6 +1609,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-02T01:44:27.141Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1546,6 +1642,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-02T01:44:27.141Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1555,6 +1652,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-02-02T01:44:27.141Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1564,6 +1662,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-02T01:44:27.141Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -1607,6 +1706,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "2",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1616,6 +1716,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1625,6 +1726,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1656,6 +1758,7 @@
         "processedBy": "Flossie Gleaason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1665,6 +1768,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1674,6 +1778,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1683,6 +1788,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1725,6 +1831,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1734,6 +1841,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1743,6 +1851,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1773,6 +1882,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1782,6 +1892,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1791,6 +1902,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1834,6 +1946,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1865,6 +1978,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1908,6 +2022,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1917,6 +2032,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1926,6 +2042,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1935,6 +2052,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1944,6 +2062,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1953,6 +2072,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1962,6 +2082,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -1993,6 +2114,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2002,6 +2124,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2011,6 +2134,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2020,6 +2144,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2029,6 +2154,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2038,6 +2164,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2047,6 +2174,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2090,6 +2218,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2099,6 +2228,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2108,6 +2238,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2117,6 +2248,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2126,6 +2258,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2135,6 +2268,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2144,6 +2278,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2176,6 +2311,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2185,6 +2321,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2194,6 +2331,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2203,6 +2341,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2212,6 +2351,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2221,6 +2361,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2230,6 +2371,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2269,6 +2411,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certficate2.pdf",
@@ -2278,6 +2421,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certficate2.pdf",
@@ -2287,6 +2431,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certficate2.pdf",
@@ -2296,6 +2441,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certficate2.pdf",
@@ -2305,6 +2451,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certficate2.pdf",
@@ -2314,6 +2461,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certficate2.pdf",
@@ -2323,6 +2471,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certficate2.pdf",
@@ -2351,6 +2500,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-02-05T03:16:00.448Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2360,6 +2510,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-05T03:16:00.448Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2369,6 +2520,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-05T03:16:00.448Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2378,6 +2530,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-05T03:16:00.448Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2387,6 +2540,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-05T03:16:00.448Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2396,6 +2550,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-05T03:16:00.448Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2405,6 +2560,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-02-05T03:16:00.448Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2448,6 +2604,7 @@
         "processedBy": "Mara Monahan",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2457,6 +2614,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2466,6 +2624,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2475,6 +2634,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2484,6 +2644,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2523,6 +2684,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-01-23T21:12:41.455Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2532,6 +2694,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-01-23T21:12:41.455Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2541,6 +2704,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-01-23T21:12:41.455Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2550,6 +2714,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-01-23T21:12:41.455Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2559,6 +2724,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-01-23T21:12:41.455Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2587,6 +2753,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-01-20T21:12:41.455Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2596,6 +2763,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-01-20T21:12:41.455Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2605,6 +2773,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-01-20T21:12:41.455Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2614,6 +2783,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-01-20T21:12:41.455Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2623,6 +2793,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-01-20T21:12:41.455Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2666,6 +2837,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2675,6 +2847,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2684,6 +2857,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2723,6 +2897,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-01-23T10:49:50.110Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2732,6 +2907,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-01-23T10:49:50.110Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2741,6 +2917,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-01-23T10:49:50.110Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2769,6 +2946,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-01-23T10:49:50.110Z",
             "evidenceOfCompletion": "certficate2.pdf",
@@ -2778,6 +2956,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-01-23T10:49:50.110Z",
             "evidenceOfCompletion": "certficate2.pdf",
@@ -2787,6 +2966,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-01-23T10:49:50.110Z",
             "evidenceOfCompletion": "certficate2.pdf",
@@ -2830,6 +3010,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2839,6 +3020,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2848,6 +3030,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2857,6 +3040,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2866,6 +3050,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2875,6 +3060,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -2914,6 +3100,7 @@
         "processedBy": "Mara Monahan",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2923,6 +3110,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2932,6 +3120,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2941,6 +3130,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2950,6 +3140,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2959,6 +3150,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2987,6 +3179,7 @@
         "processedBy": "Mara Monahan",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -2996,6 +3189,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -3005,6 +3199,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -3014,6 +3209,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -3023,6 +3219,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -3032,6 +3229,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-01-30T10:14:23.640Z",
             "evidenceOfCompletion": "certificate1.pdf",
@@ -3071,6 +3269,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-VE.png",
@@ -3080,6 +3279,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-VE.png",
@@ -3089,6 +3289,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-VE.png",
@@ -3098,6 +3299,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-VE.png",
@@ -3107,6 +3309,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-VE.png",
@@ -3116,6 +3319,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-VE.png",
@@ -3144,6 +3348,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-OP.png",
@@ -3153,6 +3358,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-OP.png",
@@ -3162,6 +3368,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-OP.png",
@@ -3171,6 +3378,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-OP.png",
@@ -3180,6 +3388,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-OP.png",
@@ -3189,6 +3398,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "completion-OP.png",
@@ -3232,6 +3442,7 @@
         "processedBy": "Mara Monahan",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3241,6 +3452,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3250,6 +3462,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3259,6 +3472,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3268,6 +3482,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3277,6 +3492,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3319,6 +3535,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2024-01-12T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
@@ -3328,6 +3545,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-10-02T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-JS.png",
@@ -3337,6 +3555,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2024-11-01T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
@@ -3367,6 +3586,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2024-10-12T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
@@ -3376,6 +3596,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2024-10-12T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
@@ -3385,6 +3606,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2024-10-12T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
@@ -3394,6 +3616,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-10-12T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
@@ -3403,6 +3626,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2024-10-12T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
@@ -3434,6 +3658,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2024-11-22T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
@@ -3443,6 +3668,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2024-10-18T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
@@ -3452,6 +3678,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2024-10-22T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
@@ -3461,6 +3688,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2024-10-12T11:52:30.850Z",
             "evidenceOfCompletion": "certificate-BS.png",
@@ -3500,6 +3728,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3509,6 +3738,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3518,6 +3748,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3546,6 +3777,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3555,6 +3787,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3564,6 +3797,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3603,6 +3837,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3612,6 +3847,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3621,6 +3857,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3630,6 +3867,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3639,6 +3877,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3648,6 +3887,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3657,6 +3897,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3688,6 +3929,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3697,6 +3939,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3706,6 +3949,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3715,6 +3959,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3724,6 +3969,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3733,6 +3979,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3742,6 +3989,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -3783,6 +4031,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3825,6 +4074,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -3866,6 +4116,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3908,6 +4159,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -3949,6 +4201,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3958,6 +4211,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3967,6 +4221,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3976,6 +4231,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -3985,6 +4241,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -4027,6 +4284,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -4036,6 +4294,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -4045,6 +4304,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -4054,6 +4314,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -4063,6 +4324,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-27T03:16:00.448Z",
             "evidenceOfCompletion": "certificate-orlandoPadberg.pdf",
@@ -4102,6 +4364,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4111,6 +4374,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4120,6 +4384,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4129,6 +4394,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4157,6 +4423,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4166,6 +4433,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4175,6 +4443,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4184,6 +4453,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4223,6 +4493,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4232,6 +4503,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4260,6 +4532,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4269,6 +4542,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4308,6 +4582,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4317,6 +4592,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4326,6 +4602,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4335,6 +4612,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4344,6 +4622,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4353,6 +4632,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4381,6 +4661,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4390,6 +4671,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4399,6 +4681,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4408,6 +4691,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4417,6 +4701,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4426,6 +4711,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4465,6 +4751,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4474,6 +4761,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4483,6 +4771,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4492,6 +4781,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4501,6 +4791,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-02-14T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4529,6 +4820,7 @@
         "processedBy": "Flossie Gleason",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4538,6 +4830,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4547,6 +4840,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4556,6 +4850,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4565,6 +4860,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4604,6 +4900,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4646,6 +4943,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "BF 73 4F 97 L",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4655,6 +4953,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4664,6 +4963,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4673,6 +4973,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4682,6 +4983,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-02-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-VonRuedenEzequiel.pdf",
@@ -4724,6 +5026,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "QX 32 6F 41 Q",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -4763,6 +5066,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "QX 32 6F 41 Q",
             "completionDate": "2025-04-01T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -4802,18 +5106,21 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -4823,24 +5130,28 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "5",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "6",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "7",
             "learnerID": "FB 88 2F 39 Z",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -4850,24 +5161,28 @@
             }
           },
           {
+            "slotID": "8",
             "learnerID": "XY 32 8F 00 J",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "9",
             "learnerID": "AJ 54 4F 01 I",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "10",
             "learnerID": "UH 04 6F 47 V",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "11",
             "learnerID": "UP 28 8F 89 E",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -4877,18 +5192,21 @@
             }
           },
           {
+            "slotID": "12",
             "learnerID": "WV 15 0F 13 V",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "13",
             "learnerID": "FI 50 5F 30 D",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "14",
             "learnerID": "NR 91 7F 72 O",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -4898,30 +5216,35 @@
             }
           },
           {
+            "slotID": "15",
             "learnerID": "QB 54 8F 21 X",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "16",
             "learnerID": "CL 74 2F 71 G",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "17",
             "learnerID": "PX 89 8F 98 Q",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "18",
             "learnerID": "BU 26 7F 00 Y",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": null, "note": null }
           },
           {
+            "slotID": "19",
             "learnerID": "IS 52 7F 57 C",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -4931,6 +5254,7 @@
             }
           },
           {
+            "slotID": "20",
             "learnerID": "WU 23 0F 97 M",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -4959,18 +5283,21 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-414.pdf",
@@ -4980,24 +5307,28 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "5",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "6",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "7",
             "learnerID": "FB 88 2F 39 Z",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-414.pdf",
@@ -5007,24 +5338,28 @@
             }
           },
           {
+            "slotID": "8",
             "learnerID": "XY 32 8F 00 J",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "9",
             "learnerID": "AJ 54 4F 01 I",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "10",
             "learnerID": "UH 04 6F 47 V",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "11",
             "learnerID": "UP 28 8F 89 E",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-414.pdf",
@@ -5034,18 +5369,21 @@
             }
           },
           {
+            "slotID": "12",
             "learnerID": "WV 15 0F 13 V",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "13",
             "learnerID": "FI 50 5F 30 D",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "14",
             "learnerID": "NR 91 7F 72 O",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-414.pdf",
@@ -5055,30 +5393,35 @@
             }
           },
           {
+            "slotID": "15",
             "learnerID": "QB 54 8F 21 X",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "16",
             "learnerID": "CL 74 2F 71 G",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "17",
             "learnerID": "PX 89 8F 98 Q",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "18",
             "learnerID": "BU 26 7F 00 Y",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": { "outcome": "pass", "note": null }
           },
           {
+            "slotID": "19",
             "learnerID": "IS 52 7F 57 C",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-414.pdf",
@@ -5088,6 +5431,7 @@
             }
           },
           {
+            "slotID": "20",
             "learnerID": "WU 23 0F 97 M",
             "completionDate": "2025-09-30T03:36:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -5127,6 +5471,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -5136,6 +5481,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -5145,6 +5491,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -5154,6 +5501,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -5163,6 +5511,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -5172,6 +5521,7 @@
             }
           },
           {
+            "slotID": "6",
             "learnerID": "LM 89 7F 48 J",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -5181,6 +5531,7 @@
             }
           },
           {
+            "slotID": "7",
             "learnerID": "FB 88 2F 39 Z",
             "completionDate": null,
             "evidenceOfCompletion": null,
@@ -5223,6 +5574,7 @@
         "processedBy": null,
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-10-10T08:21:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -5232,6 +5584,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-10-02T12:45:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -5241,6 +5594,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-10-20T09:55:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -5272,6 +5626,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-10-10T08:21:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -5281,6 +5636,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-10-02T12:45:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -5290,6 +5646,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-10-15T14:30:53.621Z",
             "evidenceOfCompletion": "certificate-414.pdf",
@@ -5299,6 +5656,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-10-20T09:55:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -5330,6 +5688,7 @@
         "processedBy": "Allan Connelly",
         "learners": [
           {
+            "slotID": "1",
             "learnerID": "KZ 79 0F 13 Z",
             "completionDate": "2025-10-10T08:21:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -5339,6 +5698,7 @@
             }
           },
           {
+            "slotID": "2",
             "learnerID": "LE 09 5F 94 M",
             "completionDate": "2025-10-02T12:45:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",
@@ -5348,6 +5708,7 @@
             }
           },
           {
+            "slotID": "3",
             "learnerID": "HB 78 2F 15 O",
             "completionDate": "2025-10-15T14:30:53.621Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -5357,6 +5718,7 @@
             }
           },
           {
+            "slotID": "4",
             "learnerID": "ZX 51 96 87 D",
             "completionDate": "2025-09-30T16:10:53.621Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -5366,6 +5728,7 @@
             }
           },
           {
+            "slotID": "5",
             "learnerID": "NX 76 8F 30 D",
             "completionDate": "2025-10-20T09:55:53.621Z",
             "evidenceOfCompletion": "certificate-212.pdf",

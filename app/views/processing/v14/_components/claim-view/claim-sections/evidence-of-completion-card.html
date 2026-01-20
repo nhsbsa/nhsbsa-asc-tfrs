@@ -1,9 +1,9 @@
 <div class="govuk-summary-card">
     <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title" id="{{learner.givenName}}">
-        {{ learner.givenName}} {{ learner.familyName}} 
+        {{ learner.givenName}} {{ learner.familyName}}
         {% if data.claimScreen == "inProgress" %}
-            {% if ((claim.claimType == "100") and claim | checkIfChanged("learners")) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("learners"))%}
+            {% if ((claim.claimType == "100") and claim | checkIfChanged("learner", learner.slotID)) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("learner", learner.slotID))%}
                 <strong class="govuk-tag">Edited</strong>
             {% endif %}
         {% endif %}
@@ -16,12 +16,32 @@
                 </li>
             </ul>
         {% endif %}
+        {% if data.claimScreen == "inProgress" %}
+            {% if ((claim.claimType == "100" or claim.claimType == "60") and (claim | checkIfChanged("evidenceCompletion", learner.slotID ))) 
+            or ( claim.claimType == "40" and claim.isPaymentPlan == true and (claim | checkIfChanged("evidenceCompletion", learner.slotID)))
+            or ((claim.claimType == "100" or claim.claimType == "60") and (claim | checkIfChanged("completionDate", learner.slotID ))) 
+            or ( claim.claimType == "40" and claim.isPaymentPlan == true and (claim | checkIfChanged("completionDate", learner.slotID)))
+            or ((claim.claimType == "100" or claim.claimType == "60") and (claim | checkIfChanged("learner", learner.slotID ))) 
+            or ( claim.claimType == "40" and claim.isPaymentPlan == true and (claim | checkIfChanged("learner", learner.slotID)))
+            %}
+                <ul class="govuk-summary-card__actions">
+                    <li class="govuk-summary-card__action">
+                        <a class="govuk-link" href="../learner-previous-submissions-handler?fromProcessing=true&listSlot={{learner.slotID}}">View edits<span class="govuk-visually-hidden"> of change</span></a>
+                    </li>
+                </ul>
+            {% endif %}
+        {% endif %}
     </div>
     <div class="govuk-summary-card__content">
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                 Evidence
+                {% if data.claimScreen == "inProgress" %}
+                    {% if ((claim.claimType == "100") and claim | checkIfChanged("evidenceCompletion", learner.slotID)) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("evidenceCompletion", learner.slotID))%}
+                        <strong class="govuk-tag">Edited</strong>
+                    {% endif %}
+                {% endif %}
                 </dt>
                 <dd class="govuk-summary-list__value">
                     <a class="govuk-link" href="/public/images/{{learner.evidenceOfCompletion}}" target="_blank">{{ learner.evidenceOfCompletion }} (opens in new tab)</a>
@@ -30,6 +50,11 @@
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Completion date
+                    {% if data.claimScreen == "inProgress" %}
+                        {% if ((claim.claimType == "100") and claim | checkIfChanged("completionDate", learner.slotID)) or ( claim.claimType == "40" and claim.isPaymentPlan == true and claim | checkIfChanged("completionDate", learner.slotID))%}
+                            <strong class="govuk-tag">Edited</strong>
+                        {% endif %}
+                    {% endif %}
                 </dt>
                 <dd class="govuk-summary-list__value">
                     {{ learner.completionDate | govukDate }}
