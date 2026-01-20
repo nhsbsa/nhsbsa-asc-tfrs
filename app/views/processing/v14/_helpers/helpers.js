@@ -10,12 +10,13 @@ function loadJSONFromFile(fileName, path = 'app/data/') {
 
 function loadData(req) {
     
-    var claimsFile = 'processing-claims.json'
+    var claimsFile = 'claims.json'
     var statusFile = 'claim-item-statuses.json'
     var organisationsFile = 'organisations.json'
 
     console.log('loading in claims file')
-    req.session.data['claims'] = loadJSONFromFile(claimsFile, dataPath)
+    const claims = loadJSONFromFile(claimsFile, dataPath)
+    req.session.data['claims'] = claims.filter(claim => claim.status !== "not-yet-submitted");
     console.log('claims file loaded')
 
     console.log('loading in statuses file')

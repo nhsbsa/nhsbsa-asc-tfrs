@@ -865,26 +865,29 @@ function loadData(req, orgID) {
   console.log('organisation file loaded')
 
   console.log('loading in claims file')
-  const allClaims = loadJSONFromFile(claimsFile, dataPath);
-  const filteredClaims = allClaims.filter(claim => claim.workplaceID === orgID);
-  // Load pre-set claims
-    const users = generatecreatedByList(req.session.data.org);
-    const preSetClaims = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/pre-set-claims.json', 'utf8'));
-    for (const claim of preSetClaims) {
-
-        for (const submission of claim.submissions) {
-        if (submission.submitter != null) {
-            submission.submitter = faker.helpers.arrayElement(users).email
-        }
-        }
-
-        claim.createdBy = faker.helpers.arrayElement(users).email
-        claim.workplaceID = req.session.data.org.workplaceID
-    }
-
 if (req.session.data.org.numberOfClaims > 0) {
-    req.session.data['claims'] = filteredClaims.concat(preSetClaims);
-    console.log(filteredClaims.length + ' of ' + allClaims.length + ' claims loaded')
+    const claims = loadJSONFromFile(claimsFile, dataPath);
+
+    // 1. Get Base IDs of "inProgress" claims (e.g., "BMJ-3S3S-5JCY")
+    const inProgressBaseIDs = new Set(
+    claims
+        .filter(c => c.status === "inProgress")
+        .map(c => c.claimID.split('-').slice(0, 3).join('-'))
+    );
+
+    // 2. Filter the claims
+    req.session.data['claims'] = claims.filter(claim => {
+    // Extract the base of the current claim ID
+    const currentBaseID = claim.claimID.split('-').slice(0, 3).join('-');
+
+    // REMOVE if status is "inProgress" 
+    // OR if the base ID matches an inProgress one
+    const isExcluded = claim.status === "inProgress" || inProgressBaseIDs.has(currentBaseID);
+
+    return !isExcluded;
+    });
+    
+    console.log(claims.length + ' claims loaded')
 } else {
     req.session.data['claims'] = [];
     console.log('0 claims loaded')

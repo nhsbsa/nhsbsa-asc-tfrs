@@ -2,11 +2,12 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome } = require('../_helpers/helpers.js');
-const { transformClaims } = require('../_helpers/transform.js');
+const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome} = require('../_helpers/helpers.js');
 
 router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
+router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
 
+// v14 Prototype routes
 // v14 Prototype routes
 
 router.get('/load-data', function (req, res) {
@@ -833,6 +834,7 @@ router.get('/showPaymentNote', function (req, res) {
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
       res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
+      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
@@ -843,6 +845,7 @@ router.get('/showLearnerNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
+      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
       res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
     }
   }
@@ -855,6 +858,7 @@ router.get('/hidePaymentNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
+      res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
       res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
     }
   }
@@ -873,21 +877,49 @@ router.get('/hideLearnerNote', function (req, res) {
   }
   req.session.data.claimScreen = "learnerPreviousSubmissions"
   res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
+  res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
 });
 
 router.get('/applySubmissionsFilterProcessorv14', function (req, res) {
   var claimID = req.session.data.id
   var filter = req.session.data.sort
   res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
+  res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
 })
 
-router.get('/transform', function (req, res) {
-  // transform pre-set claims
-  const presetClaims = transformClaims()
-  const presetjsonFilePath = './app/views/processing/v14/_data/processing-claims.json';
-  fs.writeFileSync(presetjsonFilePath, JSON.stringify(presetClaims, null, 2)) ;
+//generate data
+router.post('/generate-handler', function (req, res) {
+  const jsonFilePath = './app/views/processing/v14/_data/claims.json';
+  const claims = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
 
-  res.redirect('../../')
+  const claimType = req.session.data.claimType
+  const claimStatus = req.session.data.claimStatus
+  const submissions = parseInt(req.session.data.submissions, 10)
+  const learners = parseInt(req.session.data.learners, 10)
+  const compDate = req.session.data.compDate
+
+  delete req.session.data.claimType
+  delete req.session.data.claimStatus
+  delete req.session.data.submissions
+  delete req.session.data.learners
+  delete req.session.data.compDate
+
+  const claim = generateClaim(claimType, claimStatus, submissions, learners, compDate, null)
+  claims.push(claim)
+
+  if (claimType == "40" ) {
+    const pairClaim = generateClaim("60", "approved", 1, learners, null, claim)
+    claims.push(pairClaim)
+  } else if (claimType == "40PP") {
+    const pairClaim = generateClaim("60PP", "approved", 1, learners, null, claim)
+    claims.push(pairClaim)
+  }
+
+  fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
+
+  req.session.data.confirmationID = claim.claimID
+
+  res.redirect('./_claim-generation/generate-confirmation')
 })
 
 module.exports = router

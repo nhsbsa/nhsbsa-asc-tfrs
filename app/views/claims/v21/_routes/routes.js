@@ -3,8 +3,7 @@ const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
 const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID } = require('../_helpers/helpers.js');
-const { generateClaims, transformClaims } = require('../_helpers/generate-claims.js');
-const { generateLearners } = require('../_helpers/generate-learners.js');
+const { generateClaim } = require('../_helpers/generate-claims.js');
 
 
 router.use('/claims/v21/backstop', require('../_backstop/backstop-routes.js'));
@@ -1566,27 +1565,39 @@ router.get('/load-data-account-test', function (req, res) {
 })
 
 //generate data
-router.get('/generate', function (req, res) {
-  //generate learners to be used in claims, some claims require pre-set leaners that always exist so overwrite learners with caution
-  //generateLearners(50);
-  let claims = []
-  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/organisations.json', 'utf8'));
-  for (const org of organisations) {
-    if (org.numberOfClaims >0) {
-      claims = claims.concat(generateClaims(org.workplaceID));
-    }
-  }
-  // Write data to claims.json
+router.post('/generate-handler', function (req, res) {
   const jsonFilePath = './app/views/claims/v21/_data/claims.json';
+  const claims = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
+
+  const claimType = req.session.data.claimType
+  const claimStatus = req.session.data.claimStatus
+  const submissions = parseInt(req.session.data.submissions, 10)
+  const learners = parseInt(req.session.data.learners, 10)
+  const compDate = req.session.data.compDate
+
+  console.log(compDate)
+  const claim = generateClaim(claimType, claimStatus, submissions, learners, compDate, null)
+  claims.push(claim)
+
+  if (claimType == "40" ) {
+    const pairClaim = generateClaim("60", "approved", 1, learners, null, claim)
+    claims.push(pairClaim)
+  } else if (claimType == "40PP") {
+    const pairClaim = generateClaim("60PP", "approved", 1, learners, null, claim)
+    claims.push(pairClaim)
+  }
+
   fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
 
-  // transform pre-set claims
-  // this was only needed to transform non multi learner claims to multi leaner claims
-  //const presetClaims = transformClaims()
-  //const presetjsonFilePath = './app/views/claims/v21/_data/pre-set-claims.json';
-  //fs.writeFileSync(presetjsonFilePath, JSON.stringify(presetClaims, null, 2));
+  req.session.data.confirmationID = claim.claimID
 
-  res.redirect('../../')
+  delete req.session.data.claimType
+  delete req.session.data.claimStatus
+  delete req.session.data.submissions
+  delete req.session.data.learners
+  delete req.session.data.compDate
+
+  res.redirect('./_claim-generation/generate-confirmation')
 })
 
 module.exports = router

@@ -52,10 +52,10 @@ function generateUniqueID(claimsArray = []) {
 }
 
 function generateClaim(claimTypeInput, claimStatusInput, submissionsInput, learnersInput, compDate, matchingClaim) {
-  const learnerList = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
-  const training = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/training.json', 'utf8'));
-  const claims = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/claims.json', 'utf8'));
-  const organisations = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/organisations.json', 'utf8'));
+  const learnerList = JSON.parse(fs.readFileSync('./app/views/processing/v14/_data/learners.json', 'utf8'));
+  const training = JSON.parse(fs.readFileSync('./app/views/processing/v14/_data/training.json', 'utf8'));
+  const claims = JSON.parse(fs.readFileSync('./app/views/processing/v14/_data/claims.json', 'utf8'));
+  const organisations = JSON.parse(fs.readFileSync('./app/views/processing/v14/_data/organisations.json', 'utf8'));
 
   const workplaceID = "A02944934"
 
@@ -110,8 +110,8 @@ function generateClaim(claimTypeInput, claimStatusInput, submissionsInput, learn
 }
 
 function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusInput, compDate, trainingCode, claimLearners, createdDate, policyDate, users) {
-  const backOfficeStaff = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/backOfficeStaff.json', 'utf8'));
-  const learnerList = JSON.parse(fs.readFileSync('./app/views/claims/v21/_data/learners.json', 'utf8'));
+  const backOfficeStaff = JSON.parse(fs.readFileSync('./app/views/processing/v14/_data/backOfficeStaff.json', 'utf8'));
+  const learnerList = JSON.parse(fs.readFileSync('./app/views/processing/v14/_data/learners.json', 'utf8'));
 
   approvepaymentFiles = ["bank-statement-212.pdf", "invoice-212.pdf", "receipt-212.pdf", "bank-statement-212-1.pdf"]
   rejectedpaymentFiles = ["bank-statement-313.pdf", "invoice-313.pdf", "receipt-313.pdf", "bank-statement-313-1.pdf"]
