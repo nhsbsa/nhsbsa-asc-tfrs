@@ -784,7 +784,11 @@ align-items: center;
   display: flex;
   justify-content: space-between;
   width: auto;
-  border-left: 4px solid transparent;
+  border-left: 10px solid transparent;
+}
+
+.moj-side-navigation__title {
+  border-left: 5px solid transparent;
 }
 
 .side-nav-link{
@@ -805,13 +809,14 @@ align-items: center;
 }
 
 .side-nav-item-active{
-  border-left: 4px solid #1d70b8;
+  border-left: 10px solid #1d70b8;
   background-color: #f3f2f1;
   .side-nav-link{
-    font-weight: 700;
+    font-weight: 600;
+    color: #0b0c0c;
+    text-decoration: none;
   }
 }
-
 
 .moj-side-navigation__item--active {
 background-color: #f3f2f1;

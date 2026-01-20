@@ -1,0 +1,163 @@
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        {% if (data.claimScreen != "inProgress" and data.claimScreen != "confirmOutcome" and data.claimScreen != "checkList") %}
+            <a href="../back-all-claims" class="govuk-back-link">Back to all claims</a>
+        {% endif %}
+
+        {% if data.processSuccess == "true" %}
+        <div class="govuk-notification-banner govuk-notification-banner--success" role="alert"
+            aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+            <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                    Success
+                </h2>
+            </div>
+            <div class="govuk-notification-banner__content">
+                <h3 class="govuk-notification-banner__heading">
+                    Claim outcome recorded and shared with organisation
+                </h3>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if data.progressSaved == true %}
+        <div role="region" class="moj-alert moj-alert--success" aria-label="success: Upload successful" data-module="moj-alert">
+            <div>
+                <svg class="moj-alert__icon" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" height="30" width="30">
+                <path d="M11.2869 24.6726L2.00415 15.3899L4.62189 12.7722L11.2869 19.4186L25.3781 5.32739L27.9958 7.96369L11.2869 24.6726Z" fill="currentColor" />
+                </svg>
+            </div>
+            <div class="moj-alert__content">Claim progress saved.</div>
+            <div class="moj-alert__action">
+                <button class="moj-alert__dismiss" hidden>Dismiss</button>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentRejectNoteIncomplete or data.completionResponseIncomplete or data.completionRejectNoteIncomplete or data.completionQueriedNoteIncomplete or data.paymentQueriedNoteIncomplete or data.paidInFullResponseIncomplete %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        {% if data.paymentResponseIncomplete %}
+                        <li>
+                            <a href="#payment-review">Select an option for payment evidence</a>
+                        </li>
+                        {% endif %}
+
+                            {% if data.paidInFullResponseIncomplete %}
+                                <li>
+                                    <a href="#payment-plan-error">Select yes if the organisation has paid in full</a>
+                                </li>
+                            {% endif %}
+
+                            {% if data.paymentReimbursementAmountIncomplete %}
+                                <li>
+                                    <a href="#cost-per-learner-error">Enter cost per learner</a>
+                                </li>
+                            {% endif %}
+                            {% if data.paymentReimbursementAmountInvalid %}
+                                <li>
+                                    <a href="#cost-per-learner-error">Cost per learner must be a number</a>
+                                </li>
+                            {% endif %}
+
+
+                        {% if data.paymentRejectNoteIncomplete %}
+                            <li>
+                                <a href="#payment-reject-note-error">Enter rejection reasons for payment evidence </a>
+                            </li>
+                        {% endif %}
+
+                        {% if data.paymentQueriedNoteIncomplete %}
+                            <li>
+                                <a href="#payment-queried-note-error">Enter action required for payment evidence </a>
+                            </li>
+                        {% endif %}
+
+                        {% if data.completionResponseIncomplete %}
+                            <li>
+                                <a href="#completion-review">Select an option for completion evidence </a>
+                            </li>
+                        {% endif %}
+
+                        {% if data.completionRejectNoteIncomplete %}
+                            <li>
+                                <a href="#completion-reject-note-error">Enter rejection reasons for completion evidence</a>
+                            </li>
+                        {% endif %}
+
+                        {% if data.completionQueriedNoteIncomplete %}
+                            <li>
+                                <a href="#completion-queried-note-error">Enter action required for completion evidence</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if data.checkListError != null and data.checkListError.check == false %}
+            <div class="govuk-error-summary" data-module="govuk-error-summary">
+                <div role="alert">
+                    <h2 class="govuk-error-summary__title">
+                    There is a problem
+                    </h2>
+                    <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        {% for missingCheck in data.checkListError.missingList %}
+                            {% if missingCheck.id == "payment"%}
+                                <li>
+                                <a href="#error-payment">Finish reviewing the payment evidence</a>
+                                </li>
+                            {% else %}
+                                {% set learnerInfo = missingCheck.id | findLearner %}
+                                <li>
+                                <a href="#error-learner-{{missingCheck.position}}">Finish reviewing the completion evidence for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Claim: {{ claim.claimID }}</h1>
+        {% if (data.claimScreen != "confirmOutcome" and data.claimScreen != "checkList") %}
+            <p class="govuk-body">{{ claim.status | processorstatusTag }}{% if claim.status != 'submitted' and claim.status != 'inProgress' %} on {{ submission.processedDate | govukDate }}{% endif %}</p>
+
+            <h2 class="govuk-heading-s">{{claim.claimType | claimTypeText (false)}}</h2>
+
+            {% if (claim.status == "submitted" or claim.status == 'inProgress') and data.claimScreen != "inProgress" and (data.userType == "processor" or data.userType == "leadProcessor") %}
+                    <a href="../claim-process-start-handler" class="govuk-button" role="button" draggable="false" data-module="govuk-button">{% if (claim.status == 'inProgress') %}Continue processing{% else %}Process claim{% endif %}</a>
+            {% endif %}
+            
+            {% if (pairClaim != null and claim.claimType == "60") or claim.claimType == "40" %}
+                <p class="govuk-body">View the <a href="../claim-switch?pairID={{pairClaim.claimID}}" class="govuk-link">{{pairClaim.claimType | claimTypeText (false)}} of the claim</a>.</p>
+            {% elif claim.claimType == "60" %}
+                <p class="govuk-body">The 40 part of the claim has not been submitted yet.</p>
+            {% endif %}
+
+            {% if claim.submissions | length <= 1 %}
+                <p class="govuk-body">This is the <strong>first</strong> time this has been submitted.</p>
+            {%else%}
+                <p class="govuk-body">This {{claim.claimType | claimTypeText (true)}} has been submitted <strong>{{ claim.submissions | length }}</strong> times.</p>
+                
+                {% if data.claimScreen == "claim" %}
+                    <a href="../view-previous-submissions-handler" class="govuk-button govuk-button--secondary" role="button" draggable="false" data-module="govuk-button">View claim history</a>
+                {% endif %}
+            {% endif %}
+
+        {% endif %}
+        {% if (data.claimScreen == "checkList") %}
+            <p class="govuk-body govuk-!-margin-top-6">Check the claim’s progress and finish any incomplete evidence checks.</p>
+        {% endif %}
+    </div>
+</div>
+
