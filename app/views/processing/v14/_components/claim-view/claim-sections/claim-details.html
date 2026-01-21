@@ -123,24 +123,26 @@
                 {% endif %}
             </div>
         {% endif %}
-        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
-            <dt class="govuk-summary-list__key">
-                Start date
-                {% if data.claimScreen == "inProgress" %}
-                    {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("startDate")) %}
-                        <strong class="govuk-tag">Edited</strong>
+        {% if claim.claimType == "60" %}
+            <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                <dt class="govuk-summary-list__key">
+                    Start date
+                    {% if data.claimScreen == "inProgress" %}
+                        {% if ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("startDate")) %}
+                            <strong class="govuk-tag">Edited</strong>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
-            </dt>
-            <dd class="govuk-summary-list__value">
-                {{ submission.startDate | govukDate }}
-            </dd>
-            {% if data.claimScreen == "inProgress" and ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("startDate")) %}
-                <dd class="govuk-summary-list__actions">
-                    <a class="govuk-link" href="../view-previous-submissions-handler?navigateTo=startDate">View edits</a>
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ submission.startDate | govukDate }}
                 </dd>
-            {% endif %}
-        </div>
+                {% if data.claimScreen == "inProgress" and ((claim.claimType == "100" or claim.claimType == "60") and claim | checkIfChanged("startDate")) %}
+                    <dd class="govuk-summary-list__actions">
+                        <a class="govuk-link" href="../view-previous-submissions-handler?navigateTo=startDate">View edits</a>
+                    </dd>
+                {% endif %}
+            </div>
+        {% endif %}
     {% endif %}
     {% if claim.claimType != "60" and data.claimScreen != "inProgress" %}
         <div class="govuk-summary-list__row">
