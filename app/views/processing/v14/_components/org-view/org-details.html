@@ -30,18 +30,30 @@
             </div>
         </dl>
 
-        <h2 class="govuk-heading-s">History</h2>
+        <h2 class="govuk-heading-s">Details timeline</h2>
         <div class="moj-timeline">
             <div class="moj-timeline__item">
                 <div class="moj-timeline__header">
-                    <h2 class="moj-timeline__title">Name updated</h2>
+                    <h2 class="moj-timeline__title">Name and address changed</h2>
                     <p class="moj-timeline__byline">by Joe Bloggs</p>
                 </div>
                 <p class="moj-timeline__date">
                     <time datetime="2019-06-14T14:01:00.000Z">14 June 2025 at 2:01pm</time>
                 </p>
                 <div class="moj-timeline__description">
-                <p>Changed to: <strong>Evergreen Care Home</strong></p>
+                <p>Changed to:</br> <strong>Evergreen Care Home</strong></p>
+                </div>
+            </div>
+            <div class="moj-timeline__item">
+                <div class="moj-timeline__header">
+                    <h2 class="moj-timeline__title">Name changed</h2>
+                    <p class="moj-timeline__byline">by Joe Bloggs</p>
+                </div>
+                <p class="moj-timeline__date">
+                    <time datetime="2019-06-14T14:01:00.000Z">14 June 2025 at 2:01pm</time>
+                </p>
+                <div class="moj-timeline__description">
+                <p>Changed to:</br> <strong>Evergreen Care Home</strong></p>
                 </div>
             </div>
             <div class="moj-timeline__item">
@@ -53,7 +65,8 @@
                     <time datetime="2019-06-14T14:01:00.000Z">8 April 2025 at 12:53pm</time>
                 </p>
                 <div class="moj-timeline__description">
-                <p>Registered as: <strong>Avery Place</strong></p>
+                <p><strong>Avery Place</strong></p>
+                <strong>{{ org.address[0] }}<br>  {{ org.address[1] }}<br> {{ org.address[2] }} </strong>
                 </div>
             </div>
         </div>  
