@@ -28,14 +28,46 @@
                     {{ org.address[0] }}<br>  {{ org.address[1] }}<br> {{ org.address[2] }}  
                 </dd>
             </div>
-<!--             <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Senior Responsible officer 
-                </dt>
-                <dd class="govuk-summary-list__value">
-                        {{data.org.signatory.active.givenName}} {{data.org.signatory.active.familyName}} <br> <a class="govuk-link" href="mailto:example@example.com">{{data.org.signatory.active.email}}</a>
-                </dd>
-            </div> -->
         </dl>
+
+        <h2 class="govuk-heading-s">Details timeline</h2>
+        <div class="moj-timeline">
+            <div class="moj-timeline__item">
+                <div class="moj-timeline__header">
+                    <h2 class="moj-timeline__title">Organisation details changed</h2>
+                </div>
+                <p class="moj-timeline__date">
+                    <time datetime="2019-06-14T14:01:00.000Z">14 June 2025 at 2:01pm</time>
+                </p>
+                <div class="moj-timeline__description">
+                <strong><p>Name changed to:</strong></br> Evergreen Care home</p>
+                </div>
+            </div>
+            <div class="moj-timeline__item">
+                <div class="moj-timeline__header">
+                    <h2 class="moj-timeline__title">Organisation details changed</h2>
+                </div>
+                <p class="moj-timeline__date">
+                    <time datetime="2019-06-14T14:01:00.000Z">23 May 2025 at 3:21pm</time>
+                </p>
+                <div class="moj-timeline__description">
+                <strong><p>Name changed to:</strong></br> Evergreen Care home Ltd</p>
+                <strong><p>Address changed to:</strong></br>{{ org.address[0] }}<br>  {{ org.address[1] }}<br> {{ org.address[2] }}</p>
+                </div>
+            </div>
+            <div class="moj-timeline__item">
+                <div class="moj-timeline__header">
+                    <h2 class="moj-timeline__title">Organisation registered</h2>
+                </div>
+                <p class="moj-timeline__date">
+                    <time datetime="2019-06-14T14:01:00.000Z">8 April 2025 at 12:53pm</time>
+                </p>
+                <div class="moj-timeline__description">
+                <strong><p>Name:</strong></br> Avery Place Care home</p>
+                <strong><p>Address:</strong></br>52 Major Road<br>London<br>SE15 3SK</p>
+
+                </div>
+            </div>
+        </div>  
     </div>
 </div>
