@@ -149,7 +149,7 @@
             {% if (data.submitError.change == false ) %}
                 <p id="passport-issued-error" class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> You cannot resubmit a claim without making the requested edits</p>
             {% endif %}
-            {% if notePairSubmission.evidenceOfPaymentReview.outcome == "queried" %}
+            {% if notePairSubmission.evidenceOfPaymentReview.outcome == "queried" and pairClaim.isPaymentPlan %}
                 <p class="govuk-body"><strong>Evidence of payment:</strong> {{notePairSubmission.evidenceOfPaymentReview.note}}</p>
             {% endif %}
 
@@ -187,6 +187,10 @@
         {% if pairClaim.status == "rejected" %}
             <h2 class="moj-alert__heading">Why the 40 part of your claim was rejected</h2>
             <p class="govuk-body">This claim has been rejected which means it cannot be edited and resubmitted. You'll find the reasons below.</p>
+            
+            {% if notePairSubmission.evidenceOfPaymentReview.outcome == "queried" and pairClaim.isPaymentPlan %}
+                <p class="govuk-body"><strong>Evidence of payment:</strong> {{notePairSubmission.evidenceOfPaymentReview.note}}</p>
+            {% endif %}
 
             {# if one learner #}
             {% if notePairSubmission.learners.length == 1 %}

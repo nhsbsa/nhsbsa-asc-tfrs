@@ -1302,5 +1302,75 @@
         "processedBy": null
       }
     ]
+  },
+  {
+    "claimID": "HD7-TAGD-ETJE-B",
+    "workplaceID": "placeholder",
+    "claimType": "60",
+    "isPaymentPlan": true,
+    "status": "approved",
+    "createdDate": "2024-04-04T17:20:55.410Z",
+    "createdBy": "placeholder",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "elias.thornton@evergreencare.com",
+        "submittedDate": "2025-02-06T02:03:29.064Z",
+        "trainingCode": "601/7430/4",
+        "learnerID": "KZ 79 0F 13 Z",
+        "startDate": "2025-01-20T08:38:24.133Z",
+        "costDate": "2024-11-27T07:49:17.543Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": null,
+        "evidenceOfCompletion": null,
+        "evidenceOfPaymentReview": {
+          "outcome": "pass",
+          "note": null,
+          "paymentPlan": "yes",
+          "costPerLearner": 162
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "pass",
+          "note": null
+        },
+        "processedDate": "2025-02-12T12:05:57.719Z",
+        "processedBy": "Allan Connelly"
+      }
+    ]
+  },
+  {
+    "claimID": "HD7-TAGD-ETJE-C",
+    "workplaceID": "placeholder",
+    "claimType": "40",
+    "isPaymentPlan": true,
+    "status": "rejected",
+    "createdDate": "2024-04-04T17:20:55.410Z",
+    "createdBy": "placeholder",
+    "notes": [],
+    "submissions": [
+      {
+        "submitter": "elias.thornton@evergreencare.com",
+        "submittedDate": "2025-02-28T17:53:17.772Z",
+        "trainingCode": "601/7430/4",
+        "learnerID": "KZ 79 0F 13 Z",
+        "startDate": "2025-01-20T08:38:24.133Z",
+        "costDate": "2024-11-27T07:49:17.543Z",
+        "evidenceOfPayment": ["bankStatement1.pdf", "invoice1.pdf", "receipt1.pdf"],
+        "completionDate": "2025-01-30T10:14:23.640Z",
+        "evidenceOfCompletion": "certificate1.pdf",
+        "evidenceOfPaymentReview": {
+          "outcome": "fail",
+          "note": "The certificate of completion shows that this was an apprenticeship levy.",
+          "paymentPlan": null,
+          "costPerLearner": "162"
+        },
+        "evidenceOfCompletionReview": {
+          "outcome": "fail",
+          "note": "The certificate of completion shows that this was an apprenticeship levy."
+        },
+        "processedDate": "2025-03-01T03:53:38.386Z",
+        "processedBy": "Mara Monahan"
+      }
+    ]
   }
 ]
