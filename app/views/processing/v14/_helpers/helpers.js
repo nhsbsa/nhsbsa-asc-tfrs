@@ -467,7 +467,7 @@ function checkProcessingState(claim) {
     let submission = getMostRelevantSubmission(claim)
     const learners = sortAlphabetically(submission.learners)
     
-    const paymentCheck = checkDone(submission.evidenceOfPaymentReview, "payment", claim.claimType)
+    const paymentCheck = checkDone(submission.evidenceOfPaymentReview, "payment", claim, submission.trainingCode)
     if (!paymentCheck) {
       result.check = false
       const listItem = {
@@ -479,7 +479,7 @@ function checkProcessingState(claim) {
 
     let count = 1
     for (const learner of learners) {
-      const completionCheck = checkDone(learner.evidenceOfCompletionReview, "completion", claim.claimType)
+      const completionCheck = checkDone(learner.evidenceOfCompletionReview, "completion", claim, submission.trainingCode)
       if (!completionCheck) {
       result.check = false
       const listItem = {
@@ -494,13 +494,13 @@ function checkProcessingState(claim) {
     return result
 }
 
-function checkDone(review, type, claimType) {
+function checkDone(review, type, claim, trainingCode) {
     let result = true
 
-    if (type == "payment") {
+    if (type == "payment" && ((claim.claimType == "100" && !(isInternalOMMT(trainingCode))) || (claim.claimType == "60") || (claim.claimType == "40" && claim.isPaymentPlan) ) ) {
 
         if (review.outcome != null) {
-            if ((review.outcome == "pass") && (((review.costPerLearner == null || review.costPerLearner == "")) || (review.paymentPlan == null && claimType == "60"))) {
+            if ((review.outcome == "pass") && (((review.costPerLearner == null || review.costPerLearner == "")) || (review.paymentPlan == null && claim.claimType == "60"))) {
                 result = false
             } else if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "")) {
                 result = false
@@ -509,7 +509,7 @@ function checkDone(review, type, claimType) {
             result = false
         }
 
-    } else if ( type == "completion") {
+    } else if ( type == "completion" && (claim.claimType == "100" || claim.claimType == "40")) {
         if (review.outcome != null) {
             if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "" )) {
                 result = false
