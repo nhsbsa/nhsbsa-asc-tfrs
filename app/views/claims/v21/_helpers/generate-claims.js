@@ -530,7 +530,7 @@ function assignClaimStatus(claimStatusVariation) {
     case "submitted":
       claimStatus = "submitted"
       break;
-    case "inprogress":
+    case "inProgress":
       claimStatus = "inProgress"
       break;
     case "approved":
