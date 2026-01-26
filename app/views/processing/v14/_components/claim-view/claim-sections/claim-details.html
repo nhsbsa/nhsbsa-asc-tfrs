@@ -1,3 +1,124 @@
+{% set paymentCompleted = true %}
+{% set learnersCompleted = true %}
+{% set sortedLearners = submission.learners | sortLearners %}
+
+<div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+
+  <div class="govuk-accordion__section" style="padding-top: 20px;"> 
+    <div class="govuk-accordion__section-header">
+      <h2 class="govuk-accordion__section-heading">
+        <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
+            Claim Progress
+        </span>
+      </h2>
+    </div>
+    <div id="accordion-default-content-1" class="govuk-accordion__section-content">
+      {% if ((claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT)) %}
+            <h4 class="moj-side-navigation__title">Payment evidence</h4>
+            <ul class="govuk-task-list">
+                <li class="govuk-task-list__item govuk-task-list__item--with-link side-nav-item {% if (data.claimStep == "payment") %}side-nav-item-active{% endif %}" id="tracker-payment ">
+                    <div class="govuk-task-list__name-and-hint">
+                        {% if (data.claimStep == "payment") %}
+                            <div class="side-nav-link">Review evidence</div>
+                        {% else %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state side-nav-link" href="../process-step-handler?stage=payment" aria-describedby="payment-status">Review evidence</a>
+                        {% endif %}
+                    </div>
+                    {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone ("payment", claim.claimType) %}
+                    {% if (paymentIsDone) %}
+                        <div class="govuk-task-list__status outcome-wrapper">
+                            <div id="learner-{{loop.index}}-status">{{ submission.evidenceOfPaymentReview.outcome | learnerProcessedTag }}</div>
+                        </div>
+                    {% else %}
+                            {% set paymentCompleted = false %}
+                    {% endif %}
+                </li>
+            </ul>
+        {% endif %}
+        {% if claim.claimType != "60" %}
+            <h4 class="moj-side-navigation__title">Completion evidence</h4>
+            <ul class="govuk-task-list">
+                {% for learner in sortedLearners %}
+                    {% set learnerInfo = learner.learnerID | findLearner %}
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link side-nav-item {% if (data.claimStep == "completion") and (loop.index == data.learnerCount) %}side-nav-item-active{% endif %}" id="tracker-learner-{{loop.index}}">
+                        <div class="govuk-task-list__name-and-hint">
+                            {% if (data.claimStep == "completion") and (loop.index == data.learnerCount) %}
+                                <div class="side-nav-link">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</div>
+                            {% else %}
+                                <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state side-nav-link" href="../process-step-handler?stage=completion&learnerNo={{loop.index}}" aria-describedby="learner-{{loop.index}}-status">
+                                    {{learnerInfo.givenName}} {{learnerInfo.familyName}}
+                                </a>
+                            {% endif %}
+                        
+                        </div>
+                        {% set completionIsDone = learner.evidenceOfCompletionReview | checkDone ("completion", claim.claimType) %}
+                        {% if (completionIsDone) %}
+                            <div class="govuk-task-list__status outcome-wrapper">
+                                <div id="learner-{{loop.index}}-status">{{ learner.evidenceOfCompletionReview.outcome | learnerProcessedTag }}</div>
+                            </div>
+                        {% else %}
+                            {% set learnersCompleted = false %}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+  </div>
+</div>
+{# <nav class="moj-side-navigation nav-scrollable" aria-label="Side navigation" id="moj-side-navigation"> #}
+        {# {% if ((claim.claimType != "40" or (claim.claimType == "40" and claim.isPaymentPlan)) and not (submission.trainingCode | isInternalOMMT)) %}
+            <h4 class="moj-side-navigation__title">Payment evidence</h4>
+            <ul class="govuk-task-list">
+                <li class="govuk-task-list__item govuk-task-list__item--with-link side-nav-item {% if (data.claimStep == "payment") %}side-nav-item-active{% endif %}" id="tracker-payment ">
+                    <div class="govuk-task-list__name-and-hint">
+                        {% if (data.claimStep == "payment") %}
+                            <div class="side-nav-link">Review evidence</div>
+                        {% else %}
+                            <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state side-nav-link" href="../process-step-handler?stage=payment" aria-describedby="payment-status">Review evidence</a>
+                        {% endif %}
+                    </div>
+                    {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone ("payment", claim.claimType) %}
+                    {% if (paymentIsDone) %}
+                        <div class="govuk-task-list__status outcome-wrapper">
+                            <div id="learner-{{loop.index}}-status">{{ submission.evidenceOfPaymentReview.outcome | learnerProcessedTag }}</div>
+                        </div>
+                    {% else %}
+                            {% set paymentCompleted = false %}
+                    {% endif %}
+                </li>
+            </ul>
+        {% endif %}
+        {% if claim.claimType != "60" %}
+            <h4 class="moj-side-navigation__title">Completion evidence</h4>
+            <ul class="govuk-task-list">
+                {% for learner in sortedLearners %}
+                    {% set learnerInfo = learner.learnerID | findLearner %}
+                    <li class="govuk-task-list__item govuk-task-list__item--with-link side-nav-item {% if (data.claimStep == "completion") and (loop.index == data.learnerCount) %}side-nav-item-active{% endif %}" id="tracker-learner-{{loop.index}}">
+                        <div class="govuk-task-list__name-and-hint">
+                            {% if (data.claimStep == "completion") and (loop.index == data.learnerCount) %}
+                                <div class="side-nav-link">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</div>
+                            {% else %}
+                                <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state side-nav-link" href="../process-step-handler?stage=completion&learnerNo={{loop.index}}" aria-describedby="learner-{{loop.index}}-status">
+                                    {{learnerInfo.givenName}} {{learnerInfo.familyName}}
+                                </a>
+                            {% endif %}
+                        
+                        </div>
+                        {% set completionIsDone = learner.evidenceOfCompletionReview | checkDone ("completion", claim.claimType) %}
+                        {% if (completionIsDone) %}
+                            <div class="govuk-task-list__status outcome-wrapper">
+                                <div id="learner-{{loop.index}}-status">{{ learner.evidenceOfCompletionReview.outcome | learnerProcessedTag }}</div>
+                            </div>
+                        {% else %}
+                            {% set learnersCompleted = false %}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %} #}
+    {# </nav> #}
+
 <h3 class="govuk-heading-m" id="submitter">Submitter</h3>
 <dl class="govuk-summary-list">
     <div class="govuk-summary-list__row">
