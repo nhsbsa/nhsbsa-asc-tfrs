@@ -20,7 +20,7 @@
                             <a class="govuk-link govuk-task-list__link govuk-link--no-visited-state side-nav-link" href="../process-step-handler?stage=payment" aria-describedby="payment-status">Review evidence</a>
                         {% endif %}
                     </div>
-                    {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone ("payment", claim.claimType) %}
+                    {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone("payment", claim, submission.trainingCode) %}
                     {% if (paymentIsDone) %}
                         <div class="govuk-task-list__status outcome-wrapper">
                             <div id="learner-{{loop.index}}-status">{{ submission.evidenceOfPaymentReview.outcome | learnerProcessedTag }}</div>
@@ -47,7 +47,7 @@
                             {% endif %}
                         
                         </div>
-                        {% set completionIsDone = learner.evidenceOfCompletionReview | checkDone ("completion", claim.claimType) %}
+                        {% set completionIsDone = learner.evidenceOfCompletionReview | checkDone ("completion", claim, submission.trainingCode) %}
                         {% if (completionIsDone) %}
                             <div class="govuk-task-list__status outcome-wrapper">
                                 <div id="learner-{{loop.index}}-status">{{ learner.evidenceOfCompletionReview.outcome | learnerProcessedTag }}</div>

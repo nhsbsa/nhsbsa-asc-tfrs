@@ -496,12 +496,15 @@ function checkProcessingState(claim) {
 
 function checkDone(review, type, claim, trainingCode) {
     let result = true
-
+    console.log(claim.isPaymentPlan)
+    console.log(review.outcome)
     if (type == "payment" && ((claim.claimType == "100" && !(isInternalOMMT(trainingCode))) || (claim.claimType == "60") || (claim.claimType == "40" && claim.isPaymentPlan) ) ) {
 
         if (review.outcome != null) {
-            if ((review.outcome == "pass") && (((review.costPerLearner == null || review.costPerLearner == "")) || (review.paymentPlan == null && claim.claimType == "60"))) {
-                result = false
+            if ((review.outcome == "pass") && !(claim.claimType == "40" && claim.isPaymentPlan)) {
+                if ((review.costPerLearner == null || review.costPerLearner == "") || (review.paymentPlan == null && claim.claimType == "60")) {
+                  result = false
+                }
             } else if ((review.outcome == "fail" || review.outcome == "queried") && (review.note == null || review.note == "")) {
                 result = false
             }

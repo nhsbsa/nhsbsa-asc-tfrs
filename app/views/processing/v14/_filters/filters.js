@@ -637,8 +637,8 @@ addFilter('checkCompletionOutcome', function (learners) {
     return getOverallStatus(learners)
 })
 
-addFilter('checkDone', function (review, type, claimType) {
-        return checkDone(review, type, claimType)
+addFilter('checkDone', function (review, type, claim, trainingCode) {
+        return checkDone(review, type, claim, trainingCode)
 })
 
 addFilter('sortLearners', function (learners) {
