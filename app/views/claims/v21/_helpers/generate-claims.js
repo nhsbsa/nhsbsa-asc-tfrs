@@ -274,8 +274,8 @@ function generateSubmission(submissions, claimType, isPaymentPlan, claimStatusIn
                 }
                 break;
               case "inProgress":
+                learner.evidenceOfCompletion = approvecompletionFile
                 if (Math.random() < 0.2) {
-                  learner.evidenceOfCompletion = approvecompletionFile
                   learner.evidenceOfCompletionReview = {
                     outcome: "pass",
                     note: null
