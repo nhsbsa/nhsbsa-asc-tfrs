@@ -1,11 +1,7 @@
-{% set paymentCompleted = claim.evidenceOfPaymentreview.pass != null %}
-{% set paymentRejectte = claim.evidenceOfPaymentreview.note %}
-{% set completionCompleted = claim.evidenceOfCompletionreview.pass != null%}
-{% set completionNote = claim.evidenceOfCompletionreview.note %}
-
 {% set needsActionLearners = submission.learners | filterLearners("queried") %}
 {% set criteriaMetLearners = submission.learners | filterLearners("pass") %}
 {% set rejectedLearners = submission.learners | filterLearners("fail") %}
+
 
 {% include "./claim-sections/claim-header.html" %}
 
@@ -32,8 +28,9 @@
 
                         {% elif (claim.claimType == "40")  %}
 
+                            {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
                             <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of the total amount, which is <span class="govuk-!-font-weight-bold">{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner)) | currency(trailingZeros=false)}}</span>.</p>
-                            <p class="govuk-body">The total amount is the number of learners on this 40 part ({{(submission.learners | length)}}) multiplied by the reimbursement amount ({{submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}}).</p>
+                            <p class="govuk-body">The total amount is the number of learners on this 40 part ({{(submission.learners | length)}}) multiplied by the reimbursement amount ({{pairSubmission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}}).</p>
 
                             {% endif %}
                         

@@ -40,8 +40,9 @@
                 <p class="govuk-body">For this 60 part of the claim the organisation will get 60% of the total amount, which is <span class="govuk-!-font-weight-bold">{{ ((claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner))*(submission.learners | length)) | currency(trailingZeros=false) }}</span>.</p>
 
             {% elif (claim.claimType == "40")  %}
-                <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of the total amount, which is <span class="govuk-!-font-weight-bold">{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner)) | currency(trailingZeros=false)}}</span>.</p>
-                <p class="govuk-body">The organisation has already had 60% of the total, which was {{ ((claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner) / 0.4 * 0.6 )*(submission.learners | length)) | currency(trailingZeros=false)}}.</p>
+                {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
+                <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of the total amount, which is <span class="govuk-!-font-weight-bold">{{ (claim | reimbursement(pairSubmission.evidenceOfPaymentReview.costPerLearner)) | currency(trailingZeros=false)}}</span>.</p>
+                <p class="govuk-body">The organisation has already had 60% of the total, which was {{ ((claim | reimbursement(pairSubmission.evidenceOfPaymentReview.costPerLearner) / 0.4 * 0.6 )*(submission.learners | length)) | currency(trailingZeros=false)}}.</p>
             {% endif %}
 
         {% endif %}
