@@ -1,7 +1,9 @@
 <dl class="govuk-summary-list">
      {% include "./training.html" %}
      {% include "./learner.html" %}
-     {% include "./evidencePayment.html" %}
+     {% if not (submission.trainingCode | isInternalOMMT) %}
+          {% include "./evidencePayment.html" %}
+     {% endif %} 
 </dl>
 
 <div class="completion-header">
