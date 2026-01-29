@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome} = require('../_helpers/helpers.js');
+const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode} = require('../_helpers/helpers.js');
 
 router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
 router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
@@ -287,7 +287,7 @@ if (claim.status == "inProgress" && (!navigateTo || !fromProcessing)) {
 }
 else {
   req.session.data.claimScreen = "inProgress"
-  if (claim.claimType == "100" || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan) || (isInternalOMMT(submission.trainingCode))) {
+  if ((claim.claimType == "100" && !isInternalOMMT(submission.trainingCode)) || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan) ) {
     req.session.data.claimStep = "payment"
     location = "tracker-payment"
   } else {
