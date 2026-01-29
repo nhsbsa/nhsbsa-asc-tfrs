@@ -55,15 +55,15 @@
     {% if (submission.evidenceOfPaymentReview.outcome == "fail") %}
 
         <p class='govuk-body'>The payment evidence did not meet the required criteria.</p>
-        <p class='govuk-body'>{{data.paymentRejectNote}}</p>
+        <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
 
     {% endif %}
 
-    {% if (submission.evidenceOfPaymentReview.outcome == "fail") and (completionOutcome == "reject") %}
+    {% if (submission.evidenceOfPaymentReview.outcome == "fail") and (completionOutcome == "reject") and claim.claimType != "60" %}
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% endif %}
 
-    {% if (completionOutcome == "reject") %}
+    {% if (completionOutcome == "reject" and claim.claimType != "60") %}
 
         <p class='govuk-body'>The completion evidence did not meet the required criteria.</p>
         <p class='govuk-body'><span class="govuk-!-font-weight-bold">{{rejectedLearners | length}}</span> learner{% if (rejectedLearners | length) > 1 %}s{% endif %} rejected</p>
@@ -88,11 +88,11 @@
 
     {% endif %}
 
-    {% if (submission.evidenceOfPaymentReview.outcome == "queried") and (completionOutcome == "queried") %}
+    {% if (submission.evidenceOfPaymentReview.outcome == "queried") and (completionOutcome == "queried") and claim.claimType != "60" %}
         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% endif %}
 
-    {% if (completionOutcome == "queried") %}
+    {% if (completionOutcome == "queried" and claim.claimType != "60") %}
 
         <p class='govuk-body'>The completion evidence did not meet the required criteria.</p>
         {% if (needsActionLearners | length) > 0 %}<p class='govuk-body'><span class="govuk-!-font-weight-bold">{{needsActionLearners | length}}</span> learner{% if (needsActionLearners | length) > 1 %}s{% endif %} needs action</p>{% endif %}
