@@ -81,10 +81,10 @@ Manage claims - {{serviceName}} — GOV.UK
         {% if data.org.validGDL == false  %}
           <p class="govuk-body">
               {% if data.userType == "signatory" %}
-              You can only submit claims that were paid for in the year starting 1 April 2026 once you, as Senior Responsible Officer, sign the new grant determination letter (GDL).
+              You can only submit claims for training paid for on or after 1&nbsp;April&nbsp;2026 once you, as Senior Responsible Officer, sign the new grant determination letter (GDL).
               <a class="govuk-notification-banner__link" href="./account-setup/sign-new-gdl">Sign new GDL</a>.
               {% elif data.userType == "submitter" %}
-              You can only submit claims that were paid for  in the year starting 1 April 2026 once your Senior Responsible Officer signs the new grant determination letter for that year.
+              You can only submit claims for training paid for on or after 1&nbsp;April&nbsp;2026 once your Senior Responsible Officer signs the new grant determination letter (GDL).
               {% endif %}
           </p>
         {% endif %}
