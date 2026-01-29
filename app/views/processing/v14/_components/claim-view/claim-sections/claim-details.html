@@ -198,7 +198,7 @@
                 <ul class="govuk-list">
                 {% for learner in submission.learners | sortLearners %}
                         <li>
-                            {%if data.claimStep == null and not (claim.claimType == "60" and (claim.status == "approved" or claim.status == "queried" or claim.status == "rejected")) %}
+                            {%if data.claimStep == null and not (claim.claimType == "60") %}
                                 <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
                             {% else %}
                                 {{learner.givenName}} {{learner.familyName}}

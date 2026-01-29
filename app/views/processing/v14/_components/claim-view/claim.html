@@ -2,10 +2,9 @@
 {% set criteriaMetLearners = submission.learners | filterLearners("pass") %}
 {% set rejectedLearners = submission.learners | filterLearners("fail") %}
 
-
 {% include "./claim-sections/claim-header.html" %}
 
-{% if claim.status == "approved" and not (submission.trainingCode | isInternalOMMT) %}
+{% if claim.status == "approved" %}
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
             <div role="region" class="moj-alert moj-alert--information moj-alert--with-heading" aria-label="information: The finance section has moved" data-module="moj-alert">
@@ -15,13 +14,18 @@
             </svg>
                 </div>
                 <div class="moj-alert__content">
-                    <h2 class="moj-alert__heading">Reimbursement amount</h2>
-                        {% if (claim.claimType == "100")  %}
+                    <h2 class="moj-alert__heading">Reimbursement amount </h2>
+                        {% if (submission.trainingCode | isInternalOMMT)  %}
+
+                            <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">{{(training.reimbursementAmount*submission.learners | length) | currency(trailingZeros=false)}}</span> in reimbursement.</p>
+                            <p class="govuk-body">The total amount is the number of learners on this claim ({{(submission.learners | length)}}) multiplied by the reimbursement amount ({{training.reimbursementAmount | currency(trailingZeros=false)}}).</p>
+
+                        {% elif (claim.claimType == "100")  %}
 
                             <p class="govuk-body">The organisation will receive <span class="govuk-!-font-weight-bold">{{ ((claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner))*(submission.learners | length)) | currency(trailingZeros=false) }}</span> in reimbursement.</p>
                             <p class="govuk-body">The total amount is the number of learners on this claim ({{(submission.learners | length)}}) multiplied by the reimbursement amount ({{submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}}).</p>
                         
-                            {% elif (claim.claimType == "60")  %}
+                        {% elif (claim.claimType == "60")  %}
 
                             <p class="govuk-body">For this 60 part of the claim the organisation will get 60% of the total amount, which is <span class="govuk-!-font-weight-bold">{{ ((claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner))*(submission.learners | length)) | currency(trailingZeros=false) }}</span>.</p>
                             <p class="govuk-body">The total amount is the number of learners on this 60 part ({{(submission.learners | length)}}) multiplied by the reimbursement amount ({{submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}}).</p>
@@ -32,7 +36,7 @@
                             <p class="govuk-body">For this 40 part of the claim the organisation will get 40% of the total amount, which is <span class="govuk-!-font-weight-bold">{{ (claim | reimbursement(submission.evidenceOfPaymentReview.costPerLearner)) | currency(trailingZeros=false)}}</span>.</p>
                             <p class="govuk-body">The total amount is the number of learners on this 40 part ({{(submission.learners | length)}}) multiplied by the reimbursement amount ({{pairSubmission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}}).</p>
 
-                            {% endif %}
+                        {% endif %}
                         
                 </div>
             </div>
