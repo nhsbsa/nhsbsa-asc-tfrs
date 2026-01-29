@@ -193,12 +193,12 @@
         <dd class="govuk-summary-list__value">
             <p class="govuk-body">({{submission.learners.length}} learner{%if submission.learners.length > 1%}s{%endif%})</p>
 
-            {%if claim.status == "submitted" or (claim.claimType == "60" and claim.status == "approved") or claim.status == 'inProgress' %}
+            {%if claim.status == "submitted" or (claim.claimType == "60" and (claim.status == "approved" or claim.status == "queried" or claim.status == "rejected")) or claim.status == 'inProgress' %}
 
                 <ul class="govuk-list">
                 {% for learner in submission.learners | sortLearners %}
                         <li>
-                            {%if data.claimStep == null and not (claim.claimType == "60" and claim.status == "approved") %}
+                            {%if data.claimStep == null and not (claim.claimType == "60" and (claim.status == "approved" or claim.status == "queried" or claim.status == "rejected")) %}
                                 <a class="govuk-link" href="#{{learner.givenName}}">{{learner.givenName}} {{learner.familyName}}</a>
                             {% else %}
                                 {{learner.givenName}} {{learner.familyName}}
