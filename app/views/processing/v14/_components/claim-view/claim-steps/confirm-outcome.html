@@ -53,9 +53,15 @@
     <div class='govuk-inset-text'><h2 class='govuk-heading-s'>Claim rejected</h2>
     
     {% if (submission.evidenceOfPaymentReview.outcome == "fail") %}
-
         <p class='govuk-body'>The payment evidence did not meet the required criteria.</p>
-        <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-three-quarters">
+                <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
+            </div>
+            <div class="govuk-grid-column-one-quarter">
+                <a class="govuk-link govuk-link--no-visited-state" href="../process-step-handler?stage=payment">Edit</a>
+            </div>
+        </div>
 
     {% endif %}
 
@@ -84,7 +90,14 @@
     
     {% if (submission.evidenceOfPaymentReview.outcome == "queried") %}
         <p class='govuk-body'>The payment evidence did not meet the required criteria.</p>
-        <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-three-quarters">
+                <p class='govuk-body'>{{submission.evidenceOfPaymentReview.note}}</p>
+            </div>
+            <div class="govuk-grid-column-one-quarter">
+                <a class="govuk-link govuk-link--no-visited-state" href="../process-step-handler?stage=payment">Edit</a>
+            </div>
+        </div>
 
     {% endif %}
 
