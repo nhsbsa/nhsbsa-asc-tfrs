@@ -44,7 +44,9 @@ addFilter('reimbursement', function (claim, paymentReimbursementAmount) {
 
     let submission = getMostRelevantSubmission(claim)
     let training = findCourseByCode(submission.trainingCode)
-    if ((claim.claimType == "60")) {
+    if (isInternalOMMT(submission.trainingCode)) {
+        return training.reimbursementAmount
+    } else if ((claim.claimType == "60")) {
         if (training.reimbursementAmount > paymentReimbursementAmount) {
             return paymentReimbursementAmount * 0.6
         } else {

@@ -795,17 +795,33 @@ align-items: center;
   @include govuk-font(16);
 }
 
-.check-item{
+.check-item {
   align-items: center;
   display: flex;
   justify-content: space-between;
   width: auto;
 }
 
-.check-item-error{
-    padding-left: govuk-spacing(3);
-    border-left: 5px solid #d4351c;
-    box-sizing: border-box;
+.check-item-error {
+  padding-top: govuk-spacing(3);
+  padding-left: govuk-spacing(3);
+  /* Remove the old border-left */
+  border-left: none; 
+  /* Required so the pseudo-element positions itself relative to this container */
+  position: relative; 
+  box-sizing: border-box;
+}
+
+.check-item-error::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  /* This creates the 5px gap at the top */
+  top: 5px; 
+  /* This matches your previous border-left: 5px solid #d4351c */
+  width: 5px;
+  background-color: #d4351c;
 }
 
 .side-nav-item-active{
