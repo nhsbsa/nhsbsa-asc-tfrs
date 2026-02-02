@@ -305,7 +305,7 @@
                             <td class="govuk-table__cell">
                             {{ submission.evidenceOfCompletionReview.note | trunctateString }}<br>
                             <a class="govuk-link"
-                                href="/showLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}&learnerID={{submission.learnerID}}">
+                                href="/showProcessorLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}&learnerID={{submission.learnerID}}">
                                 &#8230; see more
                             </a>
                             </td>
@@ -331,8 +331,8 @@
             </div>
         </div>
 
-        {% if data.showLearnerNote %}
-            {% include "../_components/claim-sections/claim-history/view-learner-note.html" %}
+        {% if data.showProcessorLearnerNote %}
+            {% include "../claim-view/view-learner-note.html" %}
         {% endif %}
         
      </div>
@@ -342,21 +342,3 @@
 
 
 {% endblock %}
-
-         {# {% if  claim.claimType =="60" %}
-            {% if pairClaim != null %}
-            <p class="govuk-body govuk-!-margin-top-4" >View the <a href="./org-view-main?id={{pairClaim.claimID}}&claimScreen=claim" class="govuk-link">40 part of the claim</a>, which covers evidence of {% if claim.isPaymentPlan == true%}both payment and {% endif%} completion.</p>
-            {% else %}
-            <p class="govuk-body govuk-!-margin-top-4">The 40 part of the claim, which covers evidence of {% if claim.isPaymentPlan == true%}both payment and {% endif%} completion, has not been submitted yet.</p>
-            {% endif %}
-        {% endif %}
-
-        {% if claim.claimType =="40"%}
-        <p class="govuk-body govuk-!-margin-top-4">View the <a href="./org-view-main?id={{pairClaim.claimID}}&claimScreen=claim" class="govuk-link">60 part of the claim</a>, which covers payment evidence.</p>
-        {% endif %}
-
-        </div> #}
-{# {% if data.showLearnerNote %}
-        {% include "../claim-view/view-learner-Note.html" %}
-    {% endif %} #}
-    {# </div> #}

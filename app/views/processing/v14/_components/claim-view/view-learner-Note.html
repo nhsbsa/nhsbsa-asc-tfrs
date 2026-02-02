@@ -1,4 +1,4 @@
-{% set foundLearnerSubmission = claim.submissions | findLearnerSubmissionByDate(data.submittedDate, data.learner) %}
+{% set foundLearnerSubmission = claim.submissions | findLearnerSubmissionByDate(data.submittedDate, data.learnerID) %}
 
   <div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
     <div>
@@ -8,7 +8,7 @@
 
             <p class="govuk-body"><strong>Completion evidence:</strong> {{foundLearnerSubmission.evidenceOfCompletionReview.note}}</p>
 
-        <a href="/hideLearnerNote" class="govuk-link govuk-button">Close</a>
+        <a href="/hideProcessorLearnerNote" class="govuk-link govuk-button">Close</a>
     </div>
   </div>
 

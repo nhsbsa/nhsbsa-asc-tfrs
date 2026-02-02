@@ -827,31 +827,29 @@ router.post('/signatory-change-handler', function (req, res) {
   }
 });
 
-router.get('/showPaymentNote', function (req, res) {
+router.get('/showClaimPaymentNote', function (req, res) {
   req.session.data['showNote'] = true
   let subCount = req.session.data['count']
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
       res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
-      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
 
-router.get('/showLearnerNote', function (req, res) {
-  req.session.data['showLearnerNote'] = true
+router.get('/showProcessorLearnerNote', function (req, res) {
+  req.session.data['showProcessorLearnerNote'] = true
   let subCount = req.session.data['count']
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
       res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
-      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
 
-router.get('/hidePaymentNote', function (req, res) {
+router.get('/hideClaimPaymentNote', function (req, res) {
   req.session.data['showNote'] = null
   req.session.data['submissionDate'] = null
   req.session.data['submittedDate'] = null
@@ -859,13 +857,12 @@ router.get('/hidePaymentNote', function (req, res) {
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
       res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
-      res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
 
-router.get('/hideLearnerNote', function (req, res) {
-  req.session.data['showLearnerNote'] = null
+router.get('/hideProcessorLearnerNote', function (req, res) {
+  req.session.data['showProcessorLearnerNote'] = null
   req.session.data['submissionDate'] = null
   req.session.data['submittedDate'] = null
   var claimID = req.session.data.id
@@ -877,13 +874,11 @@ router.get('/hideLearnerNote', function (req, res) {
   }
   req.session.data.claimScreen = "learnerPreviousSubmissions"
   res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
-  res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
 });
 
 router.get('/applySubmissionsFilterProcessorv14', function (req, res) {
   var claimID = req.session.data.id
   var filter = req.session.data.sort
-  res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
   res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
 })
 

@@ -195,7 +195,7 @@
                                 {% for submission in sortedSubmissions %}
                                 {% if (submission.evidenceOfPaymentReview.outcome == "queried") and submission.submittedDate != null %}
                                     <td class="govuk-table__cell">
-                                        {{submission.evidenceOfPaymentReview.note | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                                        {{submission.evidenceOfPaymentReview.note | trunctateString}} </br> <a class="govuk-link" href="/showClaimPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
                                     </td>
                                 {% else %}
                                     <td class="govuk-table__cell">---</td>
@@ -377,7 +377,7 @@
                                     {% for submission in sortedSubmissions %}
                                     {% if (submission.learners[0].evidenceOfCompletionReview.outcome == "queried") and submission.submittedDate != null %}
                                     <td class="govuk-table__cell">
-                                            {{submission.learners[0].evidenceOfCompletionReview.note | trunctateString}} </br> <a class="govuk-link" href="/showPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                                            {{submission.learners[0].evidenceOfCompletionReview.note | trunctateString}} </br> <a class="govuk-link" href="/showClaimPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
                                         </td>
                                     {% else %}
                                         <td class="govuk-table__cell">---</td>
