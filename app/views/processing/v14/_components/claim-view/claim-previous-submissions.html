@@ -370,7 +370,7 @@
                                 </tr>
                             {% endif %}
 
-                            {% if (data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and (claimFlags.learners or claimFlags.completionDate or claimFlags.completionEvidence))) %}
+                            {% if (data.view == "100" or data.view == "60" or (data.view == "40")) and (data.filter == "everything" or (data.filter == "changed" and (claimFlags.learners or claimFlags.completionDate or claimFlags.completionEvidence))) %}
                                 <tr class="govuk-table__row">
                                     <td class="govuk-table__cell"><strong>Requested edits</strong></td>
                                     {% set count = sortedSubmissions.length %}
