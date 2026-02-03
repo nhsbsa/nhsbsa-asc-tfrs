@@ -101,9 +101,6 @@ router.use((req, res, next) => {
   // you can enable this in your .env file
   console.log(JSON.stringify(log, null, 2))
 
-  req.session.cookie.sameSite = 'none';
-  req.session.cookie.secure = true;
-
   next()
 })
 
