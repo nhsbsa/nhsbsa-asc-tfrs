@@ -283,13 +283,13 @@
                     </tr>
                     {% endif %}
 
-                    <!-- REQUESTED EDITS ROW -->
+                    <!-- Outcome ROW -->
                     {% if (data.view == "100" or data.view == "40")
                             and (data.filter == "everything" or slot.changeFlags.status
                                 or slot.changeFlags.completionDate
                                 or slot.changeFlags.evidenceOfCompletion) %}
                     <tr class="govuk-table__row">
-                        <td class="govuk-table__cell"><strong>Requested edits</strong></td>
+                        <td class="govuk-table__cell"><strong>Outcome</strong></td>
 
                         {% set count = sortedSubmissions.length %}
                         {% for submission in slot.history %}
