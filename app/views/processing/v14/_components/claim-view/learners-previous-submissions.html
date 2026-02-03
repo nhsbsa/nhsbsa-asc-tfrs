@@ -119,34 +119,18 @@
                     </tr>
 
                     <!-- SUBMITTED BY ROW -->
-                    {# <tr class="govuk-table__row">
+                    <tr class="govuk-table__row">
                         <td class="govuk-table__cell"><strong>Submitted by</strong></td>
                         {% for submission in sortedSubmissions %}
-                            <td class="govuk-table__cell">
-                                {% if submission.submitter %}
-                                    {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}
-                                {% else %}
-                                    ---
-                                {% endif %}
-                            </td>
+                            {% if submission.submitter %}
+                                <td class="govuk-table__cell">{{(submission.submitter | findUser(org)).givenName}} {{(submission.submitter | findUser(org)).familyName}}</td>
+                            {% else %}
+                                <td class="govuk-table__cell">---</td>
+                            {% endif %}
                         {%endfor %}             
-                    </tr> #}
-
-                    <!-- PROCESSED DATE ROW -->
-                    <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><strong>Processed by</strong></td>
-                    {% for submission in sortedSubmissions %}
-                        <td class="govuk-table__cell">
-                        {% if submission.processedDate %}
-                            {{submission.processedBy}}
-                        {% else %}
-                            ---
-                        {% endif %}
-                        </td>
-                    {% endfor %}
                     </tr>
 
-                    <!-- PROCESSED BY ROW -->
+                    <!-- PROCESSED DATE ROW -->
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Processed on</strong></td>
                         {% for submission in sortedSubmissions %}
@@ -158,6 +142,20 @@
                                 {% endif %}
                             </td>
                         {% endfor %}
+                    </tr>
+
+                    <!-- PROCESSED BY ROW -->
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><strong>Processed by</strong></td>
+                    {% for submission in sortedSubmissions %}
+                        <td class="govuk-table__cell">
+                        {% if submission.processedBy %}
+                            {{submission.processedBy}}
+                        {% else %}
+                            ---
+                        {% endif %}
+                        </td>
+                    {% endfor %}
                     </tr>
 
 
