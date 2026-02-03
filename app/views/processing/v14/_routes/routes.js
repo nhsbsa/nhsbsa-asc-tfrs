@@ -838,6 +838,19 @@ router.get('/showClaimPaymentNote', function (req, res) {
   }
 });
 
+router.get('/hideClaimPaymentNote', function (req, res) {
+  req.session.data['showNote'] = null
+  req.session.data['type'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
+      res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
+    }
+  }
+});
+
 router.get('/showProcessorLearnerNote', function (req, res) {
   req.session.data['showProcessorLearnerNote'] = true
   let subCount = req.session.data['count']
@@ -845,18 +858,6 @@ router.get('/showProcessorLearnerNote', function (req, res) {
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
       res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
-    }
-  }
-});
-
-router.get('/hideClaimPaymentNote', function (req, res) {
-  req.session.data['showNote'] = null
-  req.session.data['submissionDate'] = null
-  req.session.data['submittedDate'] = null
-  var claimID = req.session.data.id
-  for (const c of req.session.data.claims) {
-    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
-      res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });

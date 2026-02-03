@@ -385,7 +385,7 @@
                                     {% for submission in sortedSubmissions %}
                                         {% if (submission.learners[0].evidenceOfCompletionReview.outcome == "queried") and submission.submittedDate != null %}
                                             <td class="govuk-table__cell">
-                                                <strong class="govuk-tag govuk-tag--yellow">Needs action</strong> </br> <a class="govuk-link" href="/showClaimPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                                                <strong class="govuk-tag govuk-tag--yellow">Needs action</strong> </br> <a class="govuk-link" href="/showClaimPaymentNote?type=completion&count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
                                             </td>
                                         {% elif (submission.learners[0].evidenceOfCompletionReview.outcome == "pass")%}
                                             <td class="govuk-table__cell">
@@ -393,7 +393,7 @@
                                             </td>
                                         {% elif (submission.learners[0].evidenceOfCompletionReview.outcome == "fail")%}
                                             <td class="govuk-table__cell">
-                                                <strong class="govuk-tag govuk-tag--red">Rejected</strong> </br> <a class="govuk-link" href="/showClaimPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                                                <strong class="govuk-tag govuk-tag--red">Rejected</strong> </br> <a class="govuk-link" href="/showClaimPaymentNote?type=completion&count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
                                             </td>
                                         {% else %}
                                             <td class="govuk-table__cell">---</td>
@@ -425,5 +425,5 @@
 
     {% if data.showNote %}
         {% include "../claim-view/view-note.html" %}
-    {% endif %}
+    {% endif %}    
 </div>  
