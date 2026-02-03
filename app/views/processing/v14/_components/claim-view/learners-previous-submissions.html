@@ -36,7 +36,7 @@
 
     {% if data.filter == "changed" and sortedLearnerSlots | hasChanges == false %}
         <div class="govuk-grid-row">
-            <p>There have been no changes to any submissions</p>
+            <p>The organisation has not edited any learners.</p>
         </div>
     {% else%}
 
@@ -283,7 +283,7 @@
                     </tr>
                     {% endif %}
 
-                    <!-- Outcome ROW -->
+                    <!-- LEARNER OUTCOME ROW -->
                     {% if (data.view == "100" or data.view == "40")
                             and (data.filter == "everything" or slot.changeFlags.status
                                 or slot.changeFlags.completionDate

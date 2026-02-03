@@ -5,9 +5,9 @@
         
 
           {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
-            <h1 id="note-heading" class="govuk-heading-m push--top">Requested edits</h1>
+            <h1 id="note-heading" class="govuk-heading-m push--top">Needs action</h1>
           {% elif submission.evidenceOfPaymentReview.outcome == "fail"%}
-            <h1 id="note-heading" class="govuk-heading-m push--top">Rejection reasons</h1>
+            <h1 id="note-heading" class="govuk-heading-m push--top">Rejected</h1>
           {% endif %}
 
           <p class="govuk-body"><strong>Version: </strong>{{data.count | formatCountToText}} submission </br> <strong>Submitted date: </strong>{{submission.submittedDate | govukDate}}</p>

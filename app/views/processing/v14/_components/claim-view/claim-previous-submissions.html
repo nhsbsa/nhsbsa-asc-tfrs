@@ -32,6 +32,12 @@
     </div>
 
 </div>
+{% if data.filter == "changed" and sortedLearnerSlots | hasChanges == false %}
+        <div class="govuk-grid-row">
+            <p>The organisation has not edited this claim.</p>
+            
+        </div>
+    {% else%}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
@@ -426,4 +432,6 @@
     {% if data.showNote %}
         {% include "../claim-view/view-note.html" %}
     {% endif %}    
-</div>  
+</div> 
+
+{% endif%}
