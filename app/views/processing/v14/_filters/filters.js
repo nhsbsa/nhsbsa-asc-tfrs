@@ -273,6 +273,10 @@ addFilter('sortLearnerSlotsForTable', function (submissions) {
     return newLearnerArray
 })
 
+addFilter('sortProcessedClaims', function (submissions) {
+    return submissions.filter(submission => submission.submittedDate);
+})
+
 addFilter('checkIfMultipleLearners', function (submissions) {
     let moreThanOne = false
         for (let sub of submissions) {

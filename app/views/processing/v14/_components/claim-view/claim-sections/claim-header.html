@@ -147,7 +147,7 @@
             {% if claim.submissions | length <= 1 %}
                 <p class="govuk-body">This is the <strong>first</strong> time this has been submitted.</p>
             {%else%}
-                <p class="govuk-body">This {{claim.claimType | claimTypeText (true)}} has been submitted <strong>{{ claim.submissions | length }}</strong> times.</p>
+                <p class="govuk-body">This {{claim.claimType | claimTypeText (true)}} has been submitted <strong>{{ (claim.submissions |sortProcessedClaims) | length }}</strong> times.</p>
                 
                 {% if data.claimScreen == "claim" %}
                     <a href="../view-previous-submissions-handler" class="govuk-button govuk-button--secondary" role="button" draggable="false" data-module="govuk-button">View claim history</a>

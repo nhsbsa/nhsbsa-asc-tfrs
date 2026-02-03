@@ -244,7 +244,8 @@ function sortSubmissionsByDate(submissions, dateType) {
 }
 
 function sortSubmissionsForTable(submissions) {
-    return submissions.sort((a, b) => {
+  let processedClaims = submissions.filter(submission => submission.submittedDate);
+    return processedClaims.sort((a, b) => {
         return new Date(b.submittedDate) - new Date(a.submittedDate);
     });
 }
