@@ -14,19 +14,24 @@
 
           {% if data.type == "completion" %}
 
-            {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
-              <p class="govuk-body"><strong>Payment evidence:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
-            {% elif submission.evidenceOfCompletionReview.outcome == "fail"%}
-                <p class="govuk-body"><strong>Payment evidence:</strong> {{submission.evidenceOfCompletionReview.note}}</p>
-            {% endif %}
+            <p class="govuk-body"><strong>Learner: {{learner.givenName}} {{learner.familyName}}</strong></p>
+            <p class="govuk-body"><strong>Completion evidence:</strong> 
+              {% if submission.evidenceOfCompletionReview.outcome == "queried" %}
+                {{submission.evidenceOfCompletionReview.note}}
+              {% elif submission.evidenceOfCompletionReview.outcome == "fail"%}
+                  {{submission.evidenceOfCompletionReview.note}}
+              {% endif %}
+            </p>
 
           {% else %}
 
-            {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
-              <p class="govuk-body"><strong>Payment evidence:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
-            {% elif submission.evidenceOfPaymentReview.outcome == "fail"%}
-                <p class="govuk-body"><strong>Payment evidence:</strong> {{submission.evidenceOfPaymentReview.note}}</p>
-            {% endif %}
+            <p class="govuk-body"><strong>Payment evidence:</strong> 
+                {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
+                  {{submission.evidenceOfPaymentReview.note}}
+                {% elif submission.evidenceOfPaymentReview.outcome == "fail"%}
+                    {{submission.evidenceOfPaymentReview.note}}
+                {% endif %}
+              </p>
 
           {% endif %}
 
