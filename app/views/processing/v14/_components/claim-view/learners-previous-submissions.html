@@ -301,12 +301,32 @@
                                 and submission.evidenceOfCompletionReview.outcome == "queried"
                                 and submission.processedDate %}
                             <td class="govuk-table__cell">
-                            {{ submission.evidenceOfCompletionReview.note | trunctateString }}<br>
-                            <a class="govuk-link"
-                                href="/showProcessorLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}&learnerID={{submission.learnerID}}">
-                                &#8230; see more
-                            </a>
+                                <strong class="govuk-tag govuk-tag--yellow">Needs action</strong> </br>
+                                <a class="govuk-link"
+                                    href="/showProcessorLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}&learnerID={{submission.learnerID}}">
+                                    &#8230; see more
+                                </a>
                             </td>
+                        {% elif submission
+                                and submission.evidenceOfCompletionReview
+                                and submission.evidenceOfCompletionReview.outcome == "pass"
+                                and submission.processedDate%}
+                            <td class="govuk-table__cell">
+                                <strong class="govuk-tag govuk-tag--green">Criteria met</strong>
+                            </td>
+
+                        {% elif submission
+                                and submission.evidenceOfCompletionReview
+                                and submission.evidenceOfCompletionReview.outcome == "fail"
+                                and submission.processedDate%}
+                            <td class="govuk-table__cell">
+                                <strong class="govuk-tag govuk-tag--red">Rejected</strong> </br>
+                                <a class="govuk-link"
+                                    href="/showProcessorLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}&learnerID={{submission.learnerID}}">
+                                    &#8230; see more
+                                </a>
+                            </td>
+
                         {% else %}
                             <td class="govuk-table__cell">---</td>
                         {% endif %}
