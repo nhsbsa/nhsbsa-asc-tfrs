@@ -1,16 +1,23 @@
 {% set foundLearnerSubmission = claim.submissions | findLearnerSubmissionByDate(data.submittedDate, data.learnerID) %}
+{% set learner = foundLearnerSubmission.learnerID | findLearner(data.learners) %}
 
   <div id="note-dialog" tabindex="-1" role="dialog" aria-modal="true" class="note-dialog" aria-labelledby="note-heading note-message">
     <div>
-        <h1 id="note-heading" class="govuk-heading-m push--top">Outcome</h1>
+        
+          {% if foundLearnerSubmission.evidenceOfCompletionReview.outcome == "queried" %}
+            <h1 id="note-heading" class="govuk-heading-m push--top">Requested edits</h1>
+          {% elif foundLearnerSubmission.evidenceOfCompletionReview.outcome == "fail"%}
+            <h1 id="note-heading" class="govuk-heading-m push--top">Rejection reasons</h1>
+          {% endif %}
 
           <p class="govuk-body"><strong>Version: </strong>{{data.count | formatCountToText}} submission </br> <strong>Submitted date: </strong>{{data.submittedDate | govukDate}}</p>
 
+          <p class="govuk-body"><strong>Learner: {{learner.givenName}} {{learner.familyName}}</strong></p>
+
+
           {% if foundLearnerSubmission.evidenceOfCompletionReview.outcome == "queried" %}
-            <p class="govuk-body"><strong>Needs action</strong></p>
             <p class="govuk-body"><strong>Completion evidence:</strong> {{foundLearnerSubmission.evidenceOfCompletionReview.note}}</p>
           {% elif foundLearnerSubmission.evidenceOfCompletionReview.outcome == "fail"%}
-              <p class="govuk-body">Rejected</p>
               <p class="govuk-body"><strong>Completion evidence:</strong> {{foundLearnerSubmission.evidenceOfCompletionReview.note}}</p>
           {% endif %}
 

@@ -190,7 +190,7 @@
 
                         {% if (not (submission.trainingCode | isInternalOMMT)) and (data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and (claimFlags.training or claimFlags.startDate or claimFlags.paymentDate or claimFlags.evidenceOfPayment))) %}
                             <tr class="govuk-table__row">
-                                <td class="govuk-table__cell"><strong>Outcome</strong></td>
+                                <td class="govuk-table__cell"><strong>Payment outcome</strong></td>
                                 {% set count = sortedSubmissions.length %}
                                 {% for submission in sortedSubmissions %}
                                 {% if (submission.evidenceOfPaymentReview.outcome == "queried") and submission.submittedDate != null %}
@@ -380,7 +380,7 @@
 
                             {% if (data.view == "100" or data.view == "40")  and (data.filter == "everything" or (data.filter == "changed" and (claimFlags.learners or claimFlags.completionDate or claimFlags.completionEvidence))) %}
                                 <tr class="govuk-table__row">
-                                    <td class="govuk-table__cell"><strong>Outcome</strong></td>
+                                    <td class="govuk-table__cell"><strong>Learner outcome</strong></td>
                                     {% set count = sortedSubmissions.length %}
                                     {% for submission in sortedSubmissions %}
                                         {% if (submission.learners[0].evidenceOfCompletionReview.outcome == "queried") and submission.submittedDate != null %}
