@@ -879,7 +879,7 @@ router.get('/hideProcessorLearnerNote', function (req, res) {
 
 router.get('/applySubmissionsFilterProcessorv14', function (req, res) {
   var claimID = req.session.data.id
-  var filter = req.session.data.sort
+  var filter = req.session.data.filter
   res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
 })
 

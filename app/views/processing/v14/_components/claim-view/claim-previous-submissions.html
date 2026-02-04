@@ -20,7 +20,7 @@
         <div class="govuk-form-group">
             <label class="govuk-label" for="sort">
             </label>
-            <select class="govuk-select" id="filterSubmissionValues" name="sort">
+            <select class="govuk-select" id="filterSubmissionValues" name="filter">
                 <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>View edits only</option>
                 <option value="everything" {% if data.filter == "everything" or data.filter == ""%}selected{% endif%}>View all</option>
             </select>
@@ -201,7 +201,7 @@
                                 {% for submission in sortedSubmissions %}
                                 {% if (submission.evidenceOfPaymentReview.outcome == "queried") and submission.submittedDate != null %}
                                     <td class="govuk-table__cell">
-                                        <strong class="govuk-tag govuk-tag--yellow">Needs action</strong> </br> <a class="govuk-link" href="/showClaimPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                                        <strong class="govuk-tag govuk-tag--yellow">Needs action</strong> </br> <a class="govuk-link" href="/showClaimPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see note</a></br>
                                     </td>
                                 {% elif (submission.evidenceOfPaymentReview.outcome == "pass")%}
                                     <td class="govuk-table__cell">
@@ -209,7 +209,7 @@
                                     </td>
                                 {% elif (submission.evidenceOfPaymentReview.outcome == "fail") %}
                                     <td class="govuk-table__cell">
-                                        <strong class="govuk-tag govuk-tag--red">Rejected</strong> </br> <a class="govuk-link" href="/showClaimPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see more</a></br>
+                                        <strong class="govuk-tag govuk-tag--red">Rejected</strong> </br> <a class="govuk-link" href="/showClaimPaymentNote?count={{count}}&submittedDate={{submission.submittedDate}}">&#8230; see note</a></br>
                                     </td>
                                 {% else %}
                                     <td class="govuk-table__cell">---</td>

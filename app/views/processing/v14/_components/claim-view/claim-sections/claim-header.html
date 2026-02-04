@@ -144,7 +144,7 @@
                 <p class="govuk-body">The 40 part of the claim has not been submitted yet.</p>
             {% endif %}
 
-            {% if claim.submissions | length <= 1 %}
+            {% if (claim.submissions |sortProcessedClaims) | length <= 1 %}
                 <p class="govuk-body">This is the <strong>first</strong> time this has been submitted.</p>
             {%else%}
                 <p class="govuk-body">This {{claim.claimType | claimTypeText (true)}} has been submitted <strong>{{ (claim.submissions |sortProcessedClaims) | length }}</strong> times.</p>
