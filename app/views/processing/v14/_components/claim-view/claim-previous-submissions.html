@@ -32,10 +32,9 @@
     </div>
 
 </div>
-{% if data.filter == "changed" and sortedLearnerSlots | hasChanges == false %}
+{% if data.filter == "changed" and sortedLearnerSlots | hasChanges == true %}
         <div class="govuk-grid-row">
             <p>The organisation has not edited this claim.</p>
-            
         </div>
     {% else%}
 
