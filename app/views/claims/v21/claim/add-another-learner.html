@@ -88,15 +88,15 @@
 
         <form action="../add-another-learner" method="post" novalidate>
             <div class="govuk-form-group {% if data.submitError %}govuk-form-group--error{% endif %}">
-                <fieldset class="govuk-fieldset">
+                <fieldset class="govuk-fieldset" {% if data.submitError %}aria-describedby="error"{% endif %}>
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                         Do you want to add another learner?
                     </legend>
                     {% if data.submitError %}
-                    <p id="error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span>
-                        Select whether the you want to add another learner
-                    </p>
+                        <p id="error" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span>
+                            Select whether the you want to add another learner
+                        </p>
                     {% endif %}
                     <div class="govuk-radios" data-module="govuk-radios">
                         <div class="govuk-radios__item">
