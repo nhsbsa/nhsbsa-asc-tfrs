@@ -1,0 +1,16 @@
+<ul class="govuk-list">
+    {% for learner in (learners | sortLearners(data.learners)) %}
+        {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
+        <li>
+            <a class="govuk-link 
+            {% if 
+            (claim.claimType == "100" and (claim.status == "not-yet-submitted" or claim.status == "queried")
+            or claim.claimType == "60" and (claim.status == "queried")
+            or pairClaim != null and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried")
+            )
+            %} 
+            learner-jump-link{% endif %}" 
+            href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
+        </li>
+    {% endfor %}
+</ul>

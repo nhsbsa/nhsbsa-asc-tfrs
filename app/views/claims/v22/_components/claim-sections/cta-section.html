@@ -1,0 +1,21 @@
+<div class="govuk-button-group" style="align-items: center;">
+    <a class="govuk-button" href="../ready-to-declare?id={{claim.claimID}}">
+        {% if (claim.status == "not-yet-submitted" or (pairClaim and pairClaim.status == "not-yet-submitted")) %}
+            Confirm details
+        {% elif (claim.status == "queried" or (pairClaim and pairClaim.status == "queried")) %}
+            Confirm edits
+        {% endif %}
+    </a>
+
+    <a class="govuk-button govuk-button--secondary" href="../save-claim">
+        {% if (claim.status == "queried") or (pairClaim and pairClaim.status == "queried") %}
+            Save edits and finish later
+        {% else %}
+            Save and finish later
+        {% endif  %}
+    </a>
+    
+    {% if ((claim.claimType == "100" or claim.claimType == "60") and claim.status == "not-yet-submitted")%}
+        <a class="govuk-link govuk-link--no-visited-state" href="delete-claim-confirmation">Delete claim</a>
+    {% endif %}
+</div>

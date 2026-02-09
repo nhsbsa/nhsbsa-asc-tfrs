@@ -1,0 +1,350 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if (claim.claimType == "60" and data.view == "40") or (claim.claimType == "40" and data.view == "60") %}
+  {% set claim = claim.claimID | findPair(data.claims) %}
+{% endif %}
+
+{% set sortedSubmissions = claim.submissions | sortSubmissionsForTable %}
+{% set sortedLearnerSlots = claim.submissions | sortLearnerSlotsForTable %}
+{% set internalOMMTCheck = sortedSubmissions | isAllInternalOMMT %}
+{% set claimFlags = sortedSubmissions | checkWhatHasChanged %}
+
+{% block beforeContent %}
+<a href="../from-learners-submission" class="govuk-back-link govuk-!-margin-bottom-6">Back to claim history</a>
+
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+            <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+
+            <h2 class="govuk-heading-l" id="training">Learners ({{sortedLearnerSlots.length}})</h2>
+            <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} history with any learner edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
+
+            <form action="/applyLearnerSort" method="post" novalidate>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="filter">
+                    </label>
+                    <select class="govuk-select" id="filterSubmissionValues" name="filter">
+                        <option value="changed" {% if data.filter == "changed"%}selected{% endif%}>View edits only</option>
+                        <option value="everything" {% if data.filter == "everything" or data.filter == "" or data.filter == []%}selected{% endif%}>View all</option>
+                    </select>
+                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                        Apply
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if data.filter == "changed" and sortedLearnerSlots | hasChanges == false %}
+        <div class="govuk-grid-row">
+            <p>There have been no changes to any submissions</p>
+        </div>
+    {% else%}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-quarter">
+
+            <ul class="govuk-list">
+
+                {# Active slots #}
+                {% for slot in sortedLearnerSlots %}
+                    {% if slot.status == "active" %}
+                    {% set learnerInfo = slot.learnerID | findLearner(data.learners) %}
+                    {% if data.filter == "everything" 
+                            or (data.filter == "changed" 
+                                and (slot.changeFlags.completionDate 
+                                    or slot.changeFlags.evidenceOfCompletion 
+                                    or slot.changeFlags.status)) %}
+                        <li>
+                        <a class="govuk-link" href="#{{ slot.slotID }}" data-tab="{{ tabID }}">
+                            {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
+                        </a>
+                        </li>
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                {# Removed slots header #}
+                {% if sortedLearnerSlots | hasRemoved %}
+                    <h2 class="govuk-heading-s" style="padding-top: 20px;">Removed</h2>
+                {% endif %}
+
+                {# Removed slots #}
+                {% for slot in sortedLearnerSlots %}
+                {% if slot.status == "removed" %}
+                    {% set prevLearnerID = slot | getPreviousLearnerID %}
+                    {% set learnerInfo = prevLearnerID | findLearner(data.learners) %}
+                    <li>
+                    <a class="govuk-link" href="#{{ slot.slotID }}" data-tab="{{ tabID }}">
+                        {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}
+                    </a>
+                    </li>
+                {% endif %}
+                {% endfor %}
+
+
+            </ul>
+
+        </div>
+
+
+        <div class="govuk-grid-column-three-quarter">
+            <div class="moj-scrollable-pane">
+                <table class="govuk-table">
+
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header" style="min-width: 200px;">
+                        <span class="govuk-visually-hidden">Submissions</span>
+                    </th>
+
+                    {% for text in sortedSubmissions | matchSubmissionToText %}
+                        <th scope="col" class="govuk-table__header" style="min-width: 200px;">
+                        {{ text }}
+                        </th>
+                    {% endfor %}
+                    </tr>
+                </thead>
+
+                <tbody class="govuk-table__body">
+
+                    <!-- SUBMITTED DATE ROW -->
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Submitted on</strong></td>
+                        {% for submission in sortedSubmissions %}
+                            <td class="govuk-table__cell">
+                                {% if submission.submittedDate %}
+                                    {{submission.submittedDate | govukDate}}
+                                {% else %}
+                                    ---
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+
+                    <!-- SUBMITTED BY ROW -->
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Submitted by</strong></td>
+                        {% for submission in sortedSubmissions %}
+                            <td class="govuk-table__cell">
+                                {% if submission.submitter %}
+                                    {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}
+                                {% else %}
+                                    ---
+                                {% endif %}
+                            </td>
+                        {%endfor %}             
+                    </tr>
+
+                    <!-- PROCESSED DATE ROW -->
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><strong>Processed by</strong></td>
+                    {% for submission in sortedSubmissions %}
+                        <td class="govuk-table__cell">
+                        {% if submission.processedDate %}
+                            {{submission.processedBy}}
+                        {% else %}
+                            ---
+                        {% endif %}
+                        </td>
+                    {% endfor %}
+                    </tr>
+
+                    <!-- PROCESSED BY ROW -->
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><strong>Processed on</strong></td>
+                        {% for submission in sortedSubmissions %}
+                            <td class="govuk-table__cell">
+                                {% if submission.processedDate %}
+                                    {{submission.processedDate | govukDate}}
+                                {% else %}
+                                    ---
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+
+
+                    <tr><td colspan="{{ sortedSubmissions.length + 1 }}" style="height: 60px;"></td></tr>
+
+                    {% for slot in sortedLearnerSlots %}
+
+                    {% if
+                        data.filter == "everything"
+                        or (
+                        data.filter == "changed"
+                        and (
+                            slot.changeFlags.completionDate
+                            or slot.changeFlags.evidenceOfCompletion
+                            or slot.changeFlags.status
+                        )
+                        )
+                    %}
+
+                    <!-- SLOT / LEARNER ROW -->
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">
+                        <strong>Learner {{ loop.index0 + 1 }}</strong>
+                        </td>
+
+                        {% for submission in slot.history %}
+                        {% set prev = slot.history[loop.index0 + 1] %}
+
+                        {% if submission %}
+                            {% set learnerInfo = submission.learnerID | findLearner(data.learners) %}
+
+                            <td class="govuk-table__cell" id="{{slot.slotID}}">
+                            {% if prev is none %}
+                                <mark class="hods-highlight">
+                                <strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong>
+                                </mark><br>
+                                {{ submission.learnerID }}
+                                <p><strong>(New)</strong></p>
+
+                            {% elseif prev and submission.learnerID != prev.learnerID %}
+                                <mark class="hods-highlight">
+                                <strong>{{ learnerInfo.givenName }} {{ learnerInfo.familyName }}</strong>
+                                </mark><br>
+                                {{ submission.learnerID }}
+
+                            {% else %}
+                                {{ learnerInfo.givenName }} {{ learnerInfo.familyName }}<br>
+                                {{ submission.learnerID }}
+                            {% endif %}
+                            </td>
+
+                        {% else %}
+                            {% if loop.index0 == 0 %}
+                                <td class="govuk-table__cell">
+                                    <mark class="hods-highlight"><strong>(Removed{% if data.view == "40" %} from 40 part{% endif %})</strong></mark>
+                                </td>
+                                {% else %}
+                                <td class="govuk-table__cell">---</td>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+
+                    <!-- COMPLETION DATE ROW -->
+                    {% if (data.view == "100" or data.view == "40")
+                            and (data.filter == "everything" or slot.changeFlags.completionDate) %}
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Completion date</strong></td>
+
+                        {% for submission in slot.history %}
+                        {% set prev = slot.history[loop.index0 + 1] %}
+
+                        {% if submission and submission.completionDate %}
+                            {% if prev and submission.completionDate != prev.completionDate %}
+                            <td class="govuk-table__cell">
+                                <mark class="hods-highlight">
+                                <strong>{{ submission.completionDate | govukDate }}</strong>
+                                </mark>
+                            </td>
+                            {% else %}
+                            <td class="govuk-table__cell">
+                                {{ submission.completionDate | govukDate }}
+                            </td>
+                            {% endif %}
+                        {% else %}
+                            <td class="govuk-table__cell">---</td>
+                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endif %}
+
+                    <!-- EVIDENCE OF COMPLETION ROW -->
+                    {% if (data.view == "100" or data.view == "40")
+                            and (data.filter == "everything" or slot.changeFlags.evidenceOfCompletion) %}
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Completion evidence</strong></td>
+
+                        {% for submission in slot.history %}
+                        {% set prev = slot.history[loop.index0 + 1] %}
+
+                        {% if submission and submission.evidenceOfCompletion %}
+                            {% if prev and submission.evidenceOfCompletion != prev.evidenceOfCompletion %}
+                            <td class="govuk-table__cell">
+                                <mark class="hods-highlight">
+                                <strong>{{ submission.evidenceOfCompletion }}</strong>
+                                </mark>
+                                (<a class="govuk-link" target="_blank"
+                                    href="/public/images/{{ submission.evidenceOfCompletion }}">
+                                open<span class="govuk-visually-hidden"> {{ submission.evidenceOfCompletion }}</span>
+                                </a>)
+                            </td>
+                            {% else %}
+                            <td class="govuk-table__cell">
+                                {{ submission.evidenceOfCompletion }}
+                                (<a class="govuk-link" target="_blank"
+                                    href="/public/images/{{ submission.evidenceOfCompletion }}">
+                                open<span class="govuk-visually-hidden"> {{ submission.evidenceOfCompletion }}</span>
+                                </a>)
+                            </td>
+                            {% endif %}
+                        {% else %}
+                            <td class="govuk-table__cell">---</td>
+                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endif %}
+
+                    <!-- REQUESTED EDITS ROW -->
+                    {% if (data.view == "100" or data.view == "40")
+                            and (data.filter == "everything" or slot.changeFlags.status
+                                or slot.changeFlags.completionDate
+                                or slot.changeFlags.evidenceOfCompletion) %}
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell"><strong>Requested edits</strong></td>
+
+                        {% set count = sortedSubmissions.length %}
+                        {% for submission in slot.history %}
+                        {% set submissionIndex = loop.index0 %}
+                        {% set submittedDate = sortedSubmissions[submissionIndex].submittedDate %}
+
+                        {% if submission
+                                and submission.evidenceOfCompletionReview
+                                and submission.evidenceOfCompletionReview.outcome == "queried"
+                                and submission.processedDate %}
+                            <td class="govuk-table__cell">
+                            {{ submission.evidenceOfCompletionReview.note | trunctateString }}<br>
+                            <a class="govuk-link"
+                                href="/showLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}&learnerID={{submission.learnerID}}">
+                                &#8230; see more
+                            </a>
+                            </td>
+                        {% else %}
+                            <td class="govuk-table__cell">---</td>
+                        {% endif %}
+
+                        {% set count = count - 1 %}
+                        {% endfor %}
+                    </tr>
+                    {% endif %}
+
+                    <!-- SPACER -->
+                    <tr><td colspan="{{ sortedSubmissions.length + 1 }}" style="height: 60px;"></td></tr>
+
+                    {% endif %}
+                    {% endfor %}
+
+                </tbody>
+                </table>
+
+                
+            </div>
+        </div>
+
+        {% if data.showLearnerNote %}
+            {% include "../_components/claim-sections/claim-history/view-learner-note.html" %}
+        {% endif %}
+
+    </div>
+{% endif%}
+
+
+
+
+{% endblock %}
