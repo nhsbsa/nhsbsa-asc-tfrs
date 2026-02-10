@@ -58,7 +58,7 @@
 
     {% if data.learnerConfirmation != null %}
       {% set learnerInfo = data.learnerConfirmation.learner | findLearner(data.learners) %}
-      <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+      <div class="moj-banner moj-banner--success" role="region" aria-label="Success" aria-live="polite">
 
         <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">

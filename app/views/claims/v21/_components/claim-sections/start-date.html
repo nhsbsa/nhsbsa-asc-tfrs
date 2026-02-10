@@ -25,7 +25,7 @@
     {% endif %}
     <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='inFuture' %} govuk-summary-list-row--error {% endif %}">
       <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='inFuture' %} govuk-summary-key--error {% endif %}">
-        Start date {% if ( claim | checkIfUpdated("startDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+        Start date {% if ( claim | checkIfUpdated("startDate")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
       </dt>
       <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='inFuture' %} govuk-summary-value--error {% endif %}">
         {{ submission.startDate | govukDate }}
