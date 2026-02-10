@@ -68,15 +68,13 @@
         {# if multiple learners #}
         {% else %}
             {% if noteSubmission.learners | getLearnersByStatus("fail") %}
-                <p class="govuk-body"><strong>Evidence of completion:</strong> 
+                <p class="govuk-body"><strong>Evidence of completion:</strong></p>
                     <ul class="govuk-list">
                         {% for learner in noteSubmission.learners | getLearnersByStatus("fail")%}
                             {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
                             <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
                         {% endfor %}
-
                     </ul>
-                </p>
             {% endif %}
         {% endif %}
 
@@ -156,15 +154,13 @@
             {# if multiple learners #}
             {% else %}
                 {% if notePairSubmission.learners | getLearnersByStatus("queried") %}
-                    <p class="govuk-body"><strong>Evidence of completion:</strong> 
+                    <p class="govuk-body"><strong>Evidence of completion:</strong></p>
                         <ul class="govuk-list">
                             {% for learner in notePairSubmission.learners | getLearnersByStatus("queried")%}
                                 {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
                                 <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
                             {% endfor %}
-
                         </ul>
-                    </p>
                 {% endif %}
             {% endif %}
 
@@ -183,7 +179,7 @@
             <h2 class="moj-alert__heading">Why the 40 part of your claim was rejected</h2>
             <p class="govuk-body">This claim has been rejected which means it cannot be edited and resubmitted. You'll find the reasons below.</p>
             
-            {% if notePairSubmission.evidenceOfPaymentReview.outcome == "queried" and pairClaim.isPaymentPlan %}
+            {% if notePairSubmission.evidenceOfPaymentReview.outcome == "fail" and pairClaim.isPaymentPlan %}
                 <p class="govuk-body"><strong>Evidence of payment:</strong> {{notePairSubmission.evidenceOfPaymentReview.note}}</p>
             {% endif %}
 

@@ -929,3 +929,7 @@ margin-right: govuk-spacing(3);
   align-self: flex-start; /* Prevents the list from stretching vertically */
   margin-top: 5px;       /* Optional: nudges it down to align with the first line of text */
 }
+
+.claim-history-title{
+  @include govuk-font($size: 24, $weight: bold,);
+}
