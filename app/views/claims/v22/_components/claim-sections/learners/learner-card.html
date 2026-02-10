@@ -9,8 +9,8 @@
         {{learnerInfo.givenName}} {{learnerInfo.familyName}}{% if ( learner.learnerChanged != null) %} <strong class="govuk-tag">Edited</strong>{% endif %}
         </br><span class="govuk-!-font-weight-regular">{{learner.learnerID}}</span>
         </h2>
-        {% if (claim.status == "not-yet-submitted") or (claim.status == "queried") or (claim.claimType == "60" and claim.status == "approved" and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried")) %}
-            <ul class="govuk-summary-card__actions">
+        {% if (claim.status == "not-yet-submitted") or (claim.status == "queried" and (learnerList.id == "needsaction" or learnerList.id == "actioned")) or (claim.claimType == "60" and claim.status == "approved" and (pairClaim.status == "not-yet-submitted" or (pairClaim.status == "queried" and (learnerList.id == "needsaction" or learnerList.id == "actioned")))) %}
+            <ul class="govuk-summary-card__actions govuk-summary-card__actions-flex-height">
                 {% if (learnerList.id == "needsaction" and not (claim.claimType == "60" and claim.status == "approved")) or (claim.claimType != "40" and claim.status == "queried") %}
                     <li class="govuk-summary-card__action">
                         <a class="govuk-link" href="select-learner?change=true&changeID={{learner.learnerID}}">Change learner</a>
@@ -18,11 +18,7 @@
                 {% endif %}
                 {% if learnerList.id != "removed" %}
                     <li class="govuk-summary-card__action">
-                        <a class="govuk-link" href="../remove-learner?learner={{learner.learnerID}}">Remove<span class="govuk-visually-hidden"> {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>{% if (claim.claimType == "60" and claim.status == "approved") %} from 40 part{% endif %}</a>
-                    </li>
-                {% else %}
-                    <li class="govuk-summary-card__action">
-                        <a class="govuk-link" href="../readd-learner?learner={{learner.learnerID}}">Re-add<span class="govuk-visually-hidden"> {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>{% if (claim.claimType == "60" and claim.status == "approved") %} to 40 part{% endif %}</a>
+                        <a class="govuk-link" href="remove-learner-confirmation?learner={{learner.learnerID}}">Remove<span class="govuk-visually-hidden"> {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>{% if (claim.claimType == "60" and claim.status == "approved") %} from 40 part{% endif %}</a>
                     </li>
                 {% endif %}
                 
@@ -59,7 +55,7 @@
                     </div>
                 {% endif %}
             <dl class="govuk-summary-list">
-                {% if (sharedCompletionDate != true) %}
+                {% if (sharedCompletionDate != true or claim.status != "not-yet-submitted") %}
                     {% if (not learner.completionDate) %}
                         
                         {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "missing" and learner.learnerID %}

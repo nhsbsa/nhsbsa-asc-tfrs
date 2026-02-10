@@ -924,3 +924,8 @@ margin-right: govuk-spacing(3);
   margin-top: govuk-spacing(3);
   text-align: right;
 }
+
+.govuk-summary-card__actions-flex-height {
+  align-self: flex-start; /* Prevents the list from stretching vertically */
+  margin-top: 5px;       /* Optional: nudges it down to align with the first line of text */
+}

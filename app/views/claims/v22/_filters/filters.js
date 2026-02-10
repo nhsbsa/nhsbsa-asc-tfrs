@@ -1447,7 +1447,10 @@ addFilter('filterLearners', function (claim, pairClaim) {
 
     if (claim.status == "queried") {
         filtered.removed.label = "Removed"
-        filtered.removed.learners = draftSubmission.removedLearners || []
+        // 1. Create a Set of slotIDs from the second list for fast lookup
+        const draftIds = new Set(draftSubmission.learners.map(learner => learner.slotID));
+        // 2. Filter list1 to find learners whose slotID is NOT in the Set
+        filtered.removed.learners = submission.learners.filter(learner => !draftIds.has(learner.slotID));
     } else if (claim.claimType == "60" && claim.status == "approved") {
         filtered.removed.label = "Removed from 40 part"
         let removedList = []

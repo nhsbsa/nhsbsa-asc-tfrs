@@ -52,7 +52,7 @@
             {{ pairlearner.completionDate | govukDate }}
           {% endif %}
         </dd>
-        {% if ((claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried"))  %}
+        {% if (((claim.status == "queried" and noteSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried") or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "not-yet-submitted" or (pairClaim.status == "queried" and notePairSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried")))  %}
           <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-value--error {% endif %}">
             <a class="govuk-link govuk-link--no-visited-state" href="add-completion-date?learnerID={{learner.learnerID}}">Change<span class="govuk-visually-hidden">
               completion date</span></a>
@@ -139,7 +139,7 @@
             {{ pairlearner.evidenceOfCompletion }}
           {% endif %}
         </dd>
-        {% if ((claim.status == "queried" or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "not-yet-submitted" or pairClaim.status == "queried"))  %}
+        {% if (((claim.status == "queried" and noteSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried") or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "not-yet-submitted" or (pairClaim.status == "queried" and notePairSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried")))  %}
           <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture') %} govuk-summary-value--error {% endif %}">
             <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{learner.learnerID}}">Change<span class="govuk-visually-hidden">
               evidence of completion</span></a>

@@ -684,7 +684,11 @@ router.post('/add-learner', function (req, res) {
           }
         if (currentSubmission.learners == null || currentSubmission.learners == []) {
           currentSubmission.learners = [learner]
-          res.redirect('claim/add-another-learner')
+          if (c.claimType == "100") {
+              res.redirect('claim/add-another-learner')
+          } else {
+            res.redirect('claim/claim-details')
+          }
         } else if (currentSubmission.learners != [] && change == "true") {
           currentSubmission.learners = replaceLearnerID(currentSubmission.learners, changeLearnerID, newLearner.id)
           if (currentSubmission.learners.length > 1) {
@@ -693,8 +697,10 @@ router.post('/add-learner', function (req, res) {
                 learner: newLearner.id,
               }
               res.redirect('claim/claim-learners')
-          } else {
+          } else if (c.claimType == "100") {
               res.redirect('claim/add-another-learner')
+          } else {
+            res.redirect('claim/claim-details')
           }
           
         } else {
@@ -705,8 +711,10 @@ router.post('/add-learner', function (req, res) {
                 learner: newLearner.id,
               }
                 res.redirect('claim/claim-learners')
+            } else if (c.claimType == "100") {
+              res.redirect('claim/add-another-learner')
             } else {
-                res.redirect('claim/add-another-learner')
+              res.redirect('claim/claim-details')
             }
         }
 

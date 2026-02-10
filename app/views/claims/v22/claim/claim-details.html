@@ -1,11 +1,17 @@
 {% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 
+
 {% if claim.claimType == "60" %}
   {% set pairClaim = claim.claimID | findPair(data.claims) %}
 {% elif claim.claimType == "40" %}
   {% set pairClaim = claim %}
   {% set claim = pairClaim.claimID | findPair(data.claims) %}
+{% endif %}
+
+{% set noteSubmission = claim | getMostRelevantSubmission %}
+{% if pairClaim %}
+    {% set notePairSubmission = pairClaim | getMostRelevantSubmission %}
 {% endif %}
 
 {% if claim.claimType == "60" %}  

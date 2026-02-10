@@ -88,7 +88,7 @@
           {% else %}
             {% set learner = submission.learners[0].learnerID | findLearner(data.learners) %}
             <p class="govuk-body">{{learner.givenName}} {{learner.familyName}}</p>
-            <p class="govuk-body">{{ submission.learnerID }}</p>
+            <p class="govuk-body">{{ learner.id }}</p>
           {% endif %}
 
       </dd>
@@ -97,9 +97,11 @@
           {% if claim.status == "not-yet-submitted" %}
             <dd class="govuk-summary-list__actions">
               <ul class="govuk-summary-list__actions-list">
-                <li class="govuk-summary-list__actions-list-item">
-                  <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another<span class="govuk-visually-hidden"> learner</span></a>
-                </li>
+                {% if claim.claimType == "100" %}
+                  <li class="govuk-summary-list__actions-list-item">
+                    <a class="govuk-link govuk-link--no-visited-state" href="select-learner">Add another<span class="govuk-visually-hidden"> learner</span></a>
+                  </li>
+                {% endif %}
                 <li class="govuk-summary-list__actions-list-item">
                   {# To change one learner #}
                   {% if submission.learners.length == 1 %}

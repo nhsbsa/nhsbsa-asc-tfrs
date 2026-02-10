@@ -65,18 +65,12 @@
                 {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
                 Evidence of completion added for <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
               {% elif data.learnerConfirmation.type == "removal" %}
-                {% if claim.status == "queried" or (claim.claimType == "60" and claim.status == "approved" and pairClaim.status == "queried") %}
-                  {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
-                  <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> removed from claim
-                {% elif claim.claimType == "100" or (claim.claimType == "60" and claim.status != "approved") %}
+                {% if claim.claimType == "100" or (claim.claimType == "60" and claim.status != "approved") %}
                   {{learnerInfo.givenName}} {{learnerInfo.familyName}} removed from the claim
                 {% else %}
                     {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
                     <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> removed from the 40 part of the claim
                 {% endif %}
-              {% elif data.learnerConfirmation.type == "readd" %}
-                {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
-                <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> added back to the {% if claim.claimType == "100" or (claim.claimType == "60" and claim.status != "approved") %}claim {% else %}40 part of the claim{% endif %}
               {% elif data.learnerConfirmation.type == "actioned" %}
                 {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
                 <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> moved to done
@@ -102,7 +96,7 @@
         </span>
         <h1 class="govuk-heading-l">Learners ({{submission.learners | length}})</h1>
 
-        {% if (sharedCompletionDate != null) %}
+        {% if (sharedCompletionDate != null and claim.status == "not-yet-submitted") %}
             <dl class="govuk-summary-list">
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">

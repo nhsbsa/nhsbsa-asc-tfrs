@@ -40,7 +40,7 @@
       {% endif %}
     </dd>
 
-    {% if ((is40Part != true and (claim.status == "queried" or claim.status == "not-yet-submitted")) or (is40Part == true and (pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted"))) %}
+    {% if ((is40Part != true and ((claim.status == "queried" and noteSubmission.evidenceOfPaymentReview.outcome =="queried") or claim.status == "not-yet-submitted")) or (is40Part == true and ((pairClaim.status == "queried" and notePairSubmission.evidenceOfPaymentReview.outcome =="queried") or pairClaim.status == "not-yet-submitted"))) %}
       <dd class="govuk-summary-list__actions">
         <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">
             payment date</span></a>
@@ -87,7 +87,7 @@
       {% endif %}
 
     </dd>
-    {% if ((is40Part != true and (claim.status == "queried" or claim.status == "not-yet-submitted")) or (is40Part == true and (pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted"))) %}
+    {% if ((is40Part != true and ((claim.status == "queried" and noteSubmission.evidenceOfPaymentReview.outcome == "queried") or claim.status == "not-yet-submitted")) or (is40Part == true and ((pairClaim.status == "queried" and notePairSubmission.evidenceOfPaymentReview.outcome =="queried") or pairClaim.status == "not-yet-submitted"))) %}
       <dd class="govuk-summary-list__actions">
         <ul class="govuk-summary-list__actions-list">
           <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"

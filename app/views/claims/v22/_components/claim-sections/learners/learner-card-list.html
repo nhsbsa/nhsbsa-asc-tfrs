@@ -2,6 +2,10 @@
     <h2 class="govuk-heading-m">{{ learnerList.label}} ({{learnerList.learners | length}})</h2>
 {% endif %}
 
+{% if learnerList.id == "removed" %}
+    <p class="govuk-body">These learners have been removed from the claim and cannot be re-added.</p>
+{% endif %}
+
 {% if ((learnerList.learners | length) > 0) %}
     {% for learner in (learnerList.learners | sortLearners(data.learners)) %}
         {% set learnerInfo = learner.learnerID | findLearner(data.learners) %}
