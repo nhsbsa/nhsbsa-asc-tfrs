@@ -41,13 +41,13 @@
         <div class="govuk-error-summary__body">
           <ul class="govuk-list govuk-error-summary__list">
             <li>
-              <a href="#upload">
+              <a href="#upload-error">
                 {% if data.errorFileTooBig %}
-                The file must be smaller than 2MB
+                  The file must be smaller than 2MB
                 {% elif data.errorWrongFileFormat %}
-                The file must be a PDF, JPG, JPEG or PNG.
+                  The file must be a PDF, JPG, JPEG or PNG.
                 {% elif data.errorFileMissing %}
-                Select a file as evidence of {{data.type}}
+                  Select a file as evidence of {{data.type}}
                 {% endif %}
               </a>
             </li>
@@ -67,6 +67,8 @@
 </div>
 
 <div class="govuk-grid-row">
+
+
   <div class="govuk-grid-column-two-thirds">
     <p class="govuk-body">
       {% if data.type == 'payment' %} You may upload up to 4 files.{% endif %} These can be in PDF, JPG, JPEG or PNG format.
@@ -78,45 +80,48 @@
         Upload a file
       </label>
       {% if data.errorFileTooBig or data.errorWrongFileFormat or data.errorFileMissing %}
-        <p id="upload" class="govuk-error-message">
+        <p id="upload-error" class="govuk-error-message">
           <span class="govuk-visually-hidden">Error:</span>
           {% if data.errorFileTooBig %}
             The file must be smaller than 2MB
           {% elif data.errorWrongFileFormat %}
             The file must be a PDF, JPG, JPEG or PNG.
           {% elif data.errorFileMissing %}
-            Select an evidence of {{data.type}}
+            Select a file as evidence of {{data.type}}
           {% endif %}
         </p>
       {% endif %}
       <input
         class="govuk-file-upload {% if data.errorFileTooBig or data.errorWrongFileFormat  or data.errorFileMissing %} govuk-file-upload--error {% endif %}"
-        id="evidenceFile" name="evidenceFile" type="file" aria-describedby="evidenceFile-error">
+        id="evidenceFile" name="evidenceFile" type="file" aria-describedby="{% if data.errorFileTooBig or data.errorWrongFileFormat  or data.errorFileMissing %}upload-error{% endif %}">
     </div>
+
     <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to
         update file upload progress</a>
-      </p>
+    </p>
     {% if data.type == "payment"%}
-    <form action="../add-evidence?type=payment&id={{id}}" method="post" novalidate>
-      <div class="govuk-button-group">
-        <button type="submit" class="govuk-button" data-module="govuk-button">
-          Continue
-        </button>
-        <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler">Cancel</a>
-      </div>
-    </form>
+      <form action="../add-evidence?type=payment&id={{id}}" method="post" novalidate>
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+            Continue
+          </button>
+          <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler">Cancel</a>
+        </div>
+      </form>
     {% else %}
-    <form action="../add-evidence?type=completion&id={{id}}" method="post" novalidate>
-      <div class="govuk-button-group">
-        <button type="submit" class="govuk-button" data-module="govuk-button">
-          Add to claim
-        </button>
-        <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler{% if (data.learnerID != null) %}?learner=true{% endif %}">Cancel</a>
-      </div>
-    </form>
+      <form action="../add-evidence?type=completion&id={{id}}" method="post" novalidate>
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+            Add to claim
+          </button>
+          <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler{% if (data.learnerID != null) %}?learner=true{% endif %}">Cancel</a>
+        </div>
+      </form>
     {% endif %}
 
   </div>
+
+
   <div class="govuk-grid-column-one-third">
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     <h2 class="govuk-heading-m">Related content</h2>

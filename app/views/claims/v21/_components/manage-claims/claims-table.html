@@ -18,11 +18,11 @@
             <table class="govuk-table">
             <thead class="govuk-table__head">
                 <tr class="govuk-table__row">
-                    <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Claim reference</th>
-                    <th class="govuk-table__header" scope="col" width="5%" aria-sort="none">Type</th>
-                    <th class="govuk-table__header" scope="col" width="33%" aria-sort="none">Training</th>
-                    <th class="govuk-table__header" scope="col" width="25%" aria-sort="none">Learners</th>
-                    <th class="govuk-table__header" scope="col" width="15%" aria-sort="descending">{{ claim.status | variableDate }}</th>
+                    <th class="govuk-table__header" scope="col" width="22%">Claim reference</th>
+                    <th class="govuk-table__header" scope="col" width="5%">Type</th>
+                    <th class="govuk-table__header" scope="col" width="33%">Training</th>
+                    <th class="govuk-table__header" scope="col" width="25%">Learners</th>
+                    <th class="govuk-table__header" scope="col" width="15%">{{ claim.status | variableDate }}</th>
                 </tr>
             </thead>
             <tbody class="govuk-table__body">
@@ -67,8 +67,8 @@
 
             </tbody>
             </table>
-            </div>
-            <div class="govuk-pagination__results">
+        </div>
+        <div class="govuk-pagination__results">
             <nav class="govuk-pagination govuk-pagination__list__results" aria-label="Pagination">
 
                 {% if pageNumber != 1 %}
@@ -176,9 +176,9 @@
                     </div>
                 {% endif %}
             </nav>
-            <p class="govuk-body pagination__results">Showing <span class="govuk-!-font-weight-bold">{{(((pageNumber * rowsPerPage) - rowsPerPage) + 1)}}</span> to <span class="govuk-!-font-weight-bold">{{(pageNumber * rowsPerPage) | min (noClaims) }}</span> of <span class="govuk-!-font-weight-bold">{{ noClaims }}</span> claims</p>
+        <p class="govuk-body pagination__results">Showing <span class="govuk-!-font-weight-bold">{{(((pageNumber * rowsPerPage) - rowsPerPage) + 1)}}</span> to <span class="govuk-!-font-weight-bold">{{(pageNumber * rowsPerPage) | min (noClaims) }}</span> of <span class="govuk-!-font-weight-bold">{{ noClaims }}</span> claims</p>
         </div>
-{% endif %}
+    {% endif %}
 
 
 {% if hasResults == false %}
