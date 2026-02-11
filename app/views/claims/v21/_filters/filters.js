@@ -488,57 +488,56 @@ addFilter('getCount', function (items) {
 
 addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection) {
     const errorMessages = [];
-
     if (errorSection == 'summary') {
         if (dateErrorObject.day === 'missing' && dateErrorObject.date !== 'allMissing') {
-            errorMessages.push('<li><a href="#input-error">' + dateType + ' must include a day</a></li>');
+            errorMessages.push('<li><a href="#completion-date-error">' + dateType + ' must include a day</a></li>');
         }
         if (dateErrorObject.month === 'missing' && dateErrorObject.date !== 'allMissing') {
-            errorMessages.push('<li><a href="#input-error">' + dateType + ' must include a month</a></li>');
+            errorMessages.push('<li><a href="#completion-date-error">' + dateType + ' must include a month</a></li>');
         }
         if (dateErrorObject.year === 'missing' && dateErrorObject.date !== 'allMissing') {
-            errorMessages.push('<li><a href="#input-error">' + dateType + ' must include a year</a></li>');
+            errorMessages.push('<li><a href="#completion-date-error">' + dateType + ' must include a year</a></li>');
         }
         if (dateErrorObject.date === 'invalid') {
-            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be a real date</a></li>');
+            errorMessages.push('<li><a href="#completion-date-error">' + dateType + ' must be a real date</a></li>');
         }
         if (dateErrorObject.date === 'allMissing') {
-            errorMessages.push('<li><a href="#input-error">Enter the ' + dateType.toLowerCase() + '</a></li>');
+            errorMessages.push('<li><a href="#completion-date-error">Enter the ' + dateType.toLowerCase() + '</a></li>');
         }
         if (dateErrorObject.policy === 'invalidPolicy') {
-            errorMessages.push('<li><a href="#input-error">' + dateType + ' must fall within the eligible financial year for this course</a></li>');
+            errorMessages.push('<li><a href="#completion-date-error">' + dateType + ' must fall within the eligible financial year for this course</a></li>');
         }
         if (dateErrorObject.policy === 'invalidAfterStart') {
-            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be on or after the training start date</a></li>');
+            errorMessages.push('<li><a href="#completion-date-error">' + dateType + ' must be on or after the training start date</a></li>');
         }
         if (dateErrorObject.policy === 'invalidAfterPayment') {
-            errorMessages.push('<li><a href="#input-error">40% ' + dateType.toLowerCase() + ' must be after the 60% payment date</a></li>');
+            errorMessages.push('<li><a href="#completion-date-error">40% ' + dateType.toLowerCase() + ' must be after the 60% payment date</a></li>');
         }
     } else if (errorSection == 'input') {
-        errorMessages.push('<p id="input-error" class="govuk-error-message">')
+        errorMessages.push('<p id="completion-date-error" class="govuk-error-message">' + '<span class="govuk-visually-hidden">Error:</span>');
         if (dateErrorObject.day === 'missing' && dateErrorObject.date !== 'allMissing') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must include a day<br>');
+            errorMessages.push(dateType + ' must include a day<br>');
         }
         if (dateErrorObject.month === 'missing' && dateErrorObject.date !== 'allMissing') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must include a month<br>');
+            errorMessages.push(dateType + ' must include a month<br>');
         }
         if (dateErrorObject.year === 'missing' && dateErrorObject.date !== 'allMissing') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must include a year<br>');
+            errorMessages.push(dateType + ' must include a year<br>');
         }
         if (dateErrorObject.date === 'invalid') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be a real date<br>');
+            errorMessages.push(dateType + ' must be a real date<br>');
         }
         if (dateErrorObject.date === 'allMissing') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>Enter the ' + dateType.toLowerCase() + '<br>');
+            errorMessages.push('Enter the ' + dateType.toLowerCase() + '<br>');
         }
         if (dateErrorObject.policy === 'invalidPolicy') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must fall within the eligible financial year for this course<br>');
+            errorMessages.push(dateType + ' must fall within the eligible financial year for this course<br>');
         }
         if (dateErrorObject.policy === 'invalidAfterStart') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be on or after the training start date<br>');
+            errorMessages.push(dateType + ' must be on or after the training start date<br>');
         }
         if (dateErrorObject.policy === 'invalidAfterPayment') {
-            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>40% ' + dateType.toLowerCase() + ' must be after the 60% payment date<br>');
+            errorMessages.push('40% '+ dateType.toLowerCase() + ' must be after the 60% payment date<br>');
         }
         
         errorMessages.push('</p>')
