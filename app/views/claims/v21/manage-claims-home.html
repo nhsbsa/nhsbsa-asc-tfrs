@@ -71,20 +71,20 @@ Manage claims - {{serviceName}} — GOV.UK
         {% if data.org.bankDetails == null %}
           <p class="govuk-body">
               {% if data.userType == "signatory" %}
-              As Senior Responsible Officer you need to add your organisation's bank details before you can submit claims.
+                As Senior Responsible Officer you need to add your organisation's bank details before you can submit claims.
               <a class="govuk-notification-banner__link" href="./org-admin/change-bank-details?tabLocation=bankDetails">Add bank details</a>.
               {% elif data.userType == "submitter" %}
-              Please alert your Senior Responsible Officer that they need to enter your organisation's bank details so that you can start submitting claims.
+                Please alert your Senior Responsible Officer that they need to enter your organisation's bank details so that you can start submitting claims.
               {% endif %}
           </p>
         {% endif %}
         {% if data.org.validGDL == false  %}
           <p class="govuk-body">
               {% if data.userType == "signatory" %}
-              You can only submit claims for training paid for on or after 1&nbsp;April&nbsp;2026 once you, as Senior Responsible Officer, sign the new grant determination letter (GDL).
+                You can only submit claims for training paid for on or after 1&nbsp;April&nbsp;2026 once you, as Senior Responsible Officer, sign the new grant determination letter (GDL).
               <a class="govuk-notification-banner__link" href="./account-setup/sign-new-gdl">Sign new GDL</a>.
               {% elif data.userType == "submitter" %}
-              You can only submit claims for training paid for on or after 1&nbsp;April&nbsp;2026 once your Senior Responsible Officer signs the new grant determination letter (GDL).
+                You can only submit claims for training paid for on or after 1&nbsp;April&nbsp;2026 once your Senior Responsible Officer signs the new grant determination letter (GDL).
               {% endif %}
           </p>
         {% endif %}
@@ -157,9 +157,9 @@ Manage claims - {{serviceName}} — GOV.UK
         {% set noClaims = status.id | claimCount(data.claims, data.org.workplaceID) %}
         <li class="chevron-card">
           <div class="chevron-card__wrapper">
-              <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
+              <h2 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
                   <a class="govuk-link chevron-card__link" data-track-label="{{ status.id }}" href="manage-claims?statusID={{ status.id }}&emptyError&invalidIDError&notFound&fromSearchId&fromSearchResults&deleteSuccess&currentPage=1">{{ status.name }} ({{ noClaims }})</a>
-              </h3>
+              </h2>
               <p class="govuk-body chevron-card__description">{{ status.description }}</p>
           </div>
       </li>
