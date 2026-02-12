@@ -18,7 +18,7 @@
   {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate == "inFuture" and ((is40Part and pairClaim.claimType == "40") or (is40Part == false and pairClaim.claimType != "40")) %}
     <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
       <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="payment-date-error">
-        <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Payment date must be in the past</p>
+        <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Payment date must be in the past</p>
       </div>
     </div>
   {% endif %}
@@ -42,8 +42,7 @@
 
     {% if ((is40Part != true and (claim.status == "queried" or claim.status == "not-yet-submitted")) or (is40Part == true and (pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted"))) %}
       <dd class="govuk-summary-list__actions">
-        <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">
-            payment date</span></a>
+        <a class="govuk-link govuk-link--no-visited-state" href="cost-date">Change<span class="govuk-visually-hidden">payment date</span></a>
       </dd>
     {% endif %}
   </div>
@@ -90,8 +89,7 @@
     {% if ((is40Part != true and (claim.status == "queried" or claim.status == "not-yet-submitted")) or (is40Part == true and (pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted"))) %}
       <dd class="govuk-summary-list__actions">
         <ul class="govuk-summary-list__actions-list">
-          <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state"
-              href="add-evidence-edit?type=payment">Change<span class="govuk-visually-hidden"> evidence of payment</span></a>
+          <li class="govuk-summary-list__actions-list-item"><a class="govuk-link govuk-link--no-visited-state" href="add-evidence-edit?type=payment">Change<span class="govuk-visually-hidden">evidence of payment</span></a>
           </li>
         </ul>
       </dd>

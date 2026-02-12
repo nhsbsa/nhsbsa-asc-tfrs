@@ -77,7 +77,7 @@
                             <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-value--error {% endif %}">
                                 {% if (canChange) %}
                                 <a class="govuk-link govuk-link--no-visited-state" href="../completion-date-handler?learnerID={{learner.learnerID}}">
-                                    Add completion date<span class="govuk-visually-hidden"> for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
+                                    Add completion date<span class="govuk-visually-hidden">for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
                                 </a>
                                 {% else %}
                                     <p class="govuk-body"><span class="govuk-caption-m">Not added</span></p>
@@ -89,7 +89,7 @@
                         {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "invalid" %}
                             <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
                                 <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
-                                    <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Completion date for {{learnerInfo.givenName}} {{learnerInfo.familyName}} must be on or after the start date </p>
+                                    <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Completion date for {{learnerInfo.givenName}} {{learnerInfo.familyName}} must be on or after the start date</p>
                                 </div>
                             </div>
                         {% endif %}
@@ -97,7 +97,7 @@
                         {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "inFuture" %}
                             <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
                             <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
-                                <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Completion date for {{learnerInfo.givenName}} {{learnerInfo.familyName}} must be in the past </p>
+                                <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Completion date for {{learnerInfo.givenName}} {{learnerInfo.familyName}} must be in the past </p>
                             </div>
                             </div>
                         {% endif %}
@@ -117,7 +117,7 @@
                         {% if (canChange) %}
                             <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-value--error {% endif %}">
                                 <a class="govuk-link govuk-link--no-visited-state" href="../completion-date-handler?learnerID={{learner.learnerID}}">
-                                    Change<span class="govuk-visually-hidden"> completion date for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
+                                    Change<span class="govuk-visually-hidden">completion date for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
                                 </a>
                             </dd>
                         {% endif %}
@@ -142,7 +142,7 @@
                         <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' %} govuk-summary-value--error {% endif %}">
                             {% if (canChange) %}
                             <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{learner.learnerID}}">
-                                Add evidence <span class="govuk-visually-hidden">for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
+                                Add evidence<span class="govuk-visually-hidden">for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
                             </a>
                             {% else %}
                                 <p class="govuk-body"><span class="govuk-caption-m">Not added</span></p>
@@ -160,17 +160,16 @@
                         {% endif %}
                         </dt>
                         <dd class="govuk-summary-list__value">
-                            <p><a class="govuk-link" href="/public/images/{{ learner.evidenceOfCompletion }}" target="_blank">{{ learner.evidenceOfCompletion }}  (opens in new tab)</a></p>
+                            <p><a class="govuk-link" href="/public/images/{{ learner.evidenceOfCompletion }}" target="_blank">{{ learner.evidenceOfCompletion }} (opens in new tab)</a></p>
                         </dd>
                         {% if (canChange) %}
                         <dd class="govuk-summary-list__actions">
-                                <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{learner.learnerID}}">
-                                    Change<span class="govuk-visually-hidden"> evidence of completion for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
-                                </a>
+                            <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{learner.learnerID}}">
+                                Change<span class="govuk-visually-hidden">evidence of completion for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
+                            </a>
                         </dd>
                         {% endif %}
                     </div>
-
                 {% endif %}
 
             </dl>

@@ -19,7 +19,7 @@
     {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate == "inFuture" %}
     <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
       <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
-        <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Start date must be in the past </p>
+        <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Start date must be in the past </p>
       </div>
     </div>
     {% endif %}
@@ -31,8 +31,7 @@
         {{ submission.startDate | govukDate }}
       </dd>
       <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='inFuture' %} govuk-summary-value--error {% endif %}">
-        <a class="govuk-link govuk-link--no-visited-state" href="start-date">Change<span class="govuk-visually-hidden">
-            activity start date</span></a>
+        <a class="govuk-link govuk-link--no-visited-state" href="start-date">Change<span class="govuk-visually-hidden">activity start date</span></a>
       </dd>
     </div>
   {% else %}
