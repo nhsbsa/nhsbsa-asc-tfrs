@@ -1348,12 +1348,12 @@ addFilter('filterLearners', function (claim, pairClaim) {
         },
         needsaction: {
             id: "needsaction",
-            label: "Needs action",
+            label: "Needs editing",
             learners: []
         },
         actioned: {
             id: "actioned",
-            label: "Done",
+            label: "Edits done",
             learners: []
         },
         done: {

@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-<p class="govuk-body"><a href="claim-history" class="govuk-back-link">Back to claim timeline</a></p>
+<p class="govuk-body"><a href="claim-history" class="govuk-back-link">Back to claim history</a></p>
 {% endblock %}
 
 
@@ -40,9 +40,9 @@
         {% endif %}
     </span>
     {% if data.reasonType == "queried" %}
-        <h2 class="govuk-heading-l">Actions requested</h2>
+        <h2 class="govuk-heading-l">Edits requested</h2>
 
-        <p class="govuk-body">The follow edits were requested by the claim processor on {{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }} after processing your first submission.</p>
+        <p class="govuk-body">The following edits were requested by the claim processor on {{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }} after processing your first submission.</p>
 
         {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
             <h2 class="govuk-heading-m">Evidence of payment</h2>

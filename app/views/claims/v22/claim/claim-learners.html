@@ -136,8 +136,9 @@
         {% if (claim.status == "queried" and (filteredLearners.needsaction.learners | length) == 0) %}
             <article class="moj-ticket-panel" aria-label="Sub navigation 1">
               <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
-                <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Actions completed</h2>
-                <p class="govuk-body">You have made all the edits requested for learners. Continue to the claim details to, make any other edits requested and submit your claim.</p>
+                <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Edits done</h2>
+                <p class="govuk-body">You have done all the edits we requested for every learner.</p>
+                <p class="govuk-body">You can now save your changes and continue to the claim details page to make any further edits and resubmit this claim.</p>
                 <a class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="../claim-learner-back-handler">
                   Save and continue
                 </a>

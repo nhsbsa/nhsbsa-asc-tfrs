@@ -9,8 +9,8 @@
     <time datetime="{{ timelineData.processStep.date }}">{{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }}</time>
     </p>
     <div class="moj-timeline__description">
-        {% if timelineData.processStep.title == "Action requested" %}
-            <a class="govuk-link" href="claim-history-note?loopCount={{loopCount}}&reasonType=queried">View actions requested</a>
+        {% if timelineData.processStep.title == "Edits requested" %}
+            <a class="govuk-link" href="claim-history-note?loopCount={{loopCount}}&reasonType=queried">View edits requested</a>
         {% endif %}
         {% if timelineData.processStep.title == "Rejected" %}
             <a class="govuk-link" href="claim-history-note?loopCount={{loopCount}}&reasonType=rejected">View reasons for rejection</a>

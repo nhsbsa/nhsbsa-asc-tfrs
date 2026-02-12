@@ -9,7 +9,7 @@
 {% endif %}
 
 {% block pageTitle %}
-    Claim timeline — {{serviceName}} — GOV.UK
+    Claim history — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -29,7 +29,7 @@
           Combined claim: {{ claim.claimID | removeClaimSuffix }}
         {% endif %}
       </span>
-    <h1 class="govuk-heading-l">Claim timeline</h1>
+    <h1 class="govuk-heading-l">Claim history</h1>
     <div class="moj-timeline">
 
       {% if pairClaim != null %}
