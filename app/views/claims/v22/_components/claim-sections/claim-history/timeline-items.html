@@ -8,92 +8,14 @@
     <p class="moj-timeline__date">
     <time datetime="{{ timelineData.processStep.date }}">{{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }}</time>
     </p>
-    {% if timelineData.processStep.title == "Action requested" %}
-        <div class="moj-timeline__description">
-            <details class="govuk-details govuk-!-margin-bottom-0">
-                <summary class="govuk-details__summary">
-                    <span class="govuk-details__summary-text">
-                    What action was requested?
-                    </span>
-                </summary>
-                <div class="govuk-details__text">
-                    <p class="govuk-body">The follow edits were requested by the claim processor:</p>
-
-                    {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
-                        <h3 class="govuk-heading-s">Evidence of payment</h3>
-                        <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
-                    {% endif %}
-
-                    {# if one learner #}
-                    {% if submission.learners.length == 1 %}
-                        {% if submission.learners[0].evidenceOfCompletionReview.outcome == "queried" %}
-                            <h3 class="govuk-heading-s">Evidence of completion</h3>
-                            <p class="govuk-body">{{submission.learners[0].evidenceOfCompletionReview.note}}</p>
-                        {% endif %}
-                    {# if multiple learners #}
-                    {% else %}
-                        {% if submission.learners | getLearnersByStatus("queried") %}
-                            <h3 class="govuk-heading-s">Evidence of completion</h3>
-                                <ul class="govuk-list govuk-list--spaced">
-                                    {% for learner in (submission.learners | sortLearners(data.learners)) | getLearnersByStatus("queried")%}
-                                        {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
-                                        <li>
-                                            {{claimLearner.givenName}} {{claimLearner.familyName}}
-                                            <br>
-                                            {{learner.evidenceOfCompletionReview.note}}
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            </details>
-        </div>
-    {% endif %}
-    {% if timelineData.processStep.title == "Rejected" %}
-        <div class="moj-timeline__description">
-            <details class="govuk-details">
-                <summary class="govuk-details__summary">
-                    <span class="govuk-details__summary-text">
-                    Why was it rejected?
-                    </span>
-                </summary>
-                <div class="govuk-details__text">
-                    <p class="govuk-body">The claim was rejected by the claim processor for the following reasons:</p>
-
-                    {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
-                        <h3 class="govuk-heading-s">Evidence of payment</h3>
-                        <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
-                    {% endif %}
-
-                    {# if one learner #}
-                    {% if submission.learners.length == 1 %}
-                        {% if submission.learners[0].evidenceOfCompletionReview.outcome == "fail" %}
-                        <h3 class="govuk-heading-s">Evidence of completion</h3>
-                            <p class="govuk-body">{{submission.learners[0].evidenceOfCompletionReview.note}}</p>
-                        {% endif %}
-                    {# if multiple learners #}
-                    {% else %}
-                        {% if submission.learners | getLearnersByStatus("fail") %}
-                            <h3 class="govuk-heading-s">Evidence of completion</h3>
-                                <ul class="govuk-list govuk-list--spaced">
-                                    {% for learner in (submission.learners | sortLearners(data.learners)) | getLearnersByStatus("fail")%}
-                                        {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
-                                        <li>
-                                            {{claimLearner.givenName}} {{claimLearner.familyName}}
-                                            <br>
-                                            {{learner.evidenceOfCompletionReview.note}}
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            </details>
-
-            
-        </div>
-    {% endif %}
+    <div class="moj-timeline__description">
+        {% if timelineData.processStep.title == "Action requested" %}
+            <a class="govuk-link" href="claim-history-note?loopCount={{loopCount}}&reasonType=queried">View actions requested</a>
+        {% endif %}
+        {% if timelineData.processStep.title == "Rejected" %}
+            <a class="govuk-link" href="claim-history-note?loopCount={{loopCount}}&reasonType=rejected">View reasons for rejection</a>
+        {% endif %}
+    </div>
 </div>
 {% endif %}
 
