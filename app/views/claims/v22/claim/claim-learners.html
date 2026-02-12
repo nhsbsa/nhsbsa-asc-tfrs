@@ -132,9 +132,23 @@
                 {% endif %}
             </dl>
         {% endif %}
+
+        {% if (claim.status == "queried" and (filteredLearners.needsaction.learners | length) == 0) %}
+            <article class="moj-ticket-panel" aria-label="Sub navigation 1">
+              <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
+                <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Actions completed</h2>
+                <p class="govuk-body">You have made all the edits requested for learners. Continue to the claim details to, make any other edits requested and submit your claim.</p>
+                <a class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" href="../claim-learner-back-handler">
+                  Save and continue
+                </a>
+              </section>
+            </article>
+        {% endif %} 
         
         <div class="govuk-button-group">
-          <a href="../claim-learner-back-handler" class="govuk-button" data-module="govuk-button">Back to claim details</a>
+          {% if not (claim.status == "queried" and (filteredLearners.needsaction.learners | length) == 0) %}
+            <a href="../claim-learner-back-handler" class="govuk-button" data-module="govuk-button">Back to claim details</a>
+          {% endif %}
           {% if (claim.status == "not-yet-submitted") and (claim.claimType == "100" or claim.claimType == "60") %}
           <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="select-learner">
               Add another learner

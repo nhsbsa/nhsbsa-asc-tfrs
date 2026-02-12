@@ -2,7 +2,7 @@
 {% if (timelineData.processStep) %} 
 <div class="moj-timeline__item">
     <div class="moj-timeline__header">
-    <h3 class="moj-timeline__title">{{timelineData.processStep.title}}</h3>
+    <h2 class="moj-timeline__title">{{timelineData.processStep.title}}</h2>
     <p class="moj-timeline__byline">{{timelineData.processStep.author}}</p>
     </div>
     <p class="moj-timeline__date">
@@ -20,20 +20,20 @@
                     <p class="govuk-body">The follow edits were requested by the claim processor:</p>
 
                     {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
-                        <h4 class="govuk-heading-s">Evidence of payment</h4>
+                        <h3 class="govuk-heading-s">Evidence of payment</h3>
                         <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
                     {% endif %}
 
                     {# if one learner #}
                     {% if submission.learners.length == 1 %}
                         {% if submission.learners[0].evidenceOfCompletionReview.outcome == "queried" %}
-                            <h4 class="govuk-heading-s">Evidence of completion</h4>
+                            <h3 class="govuk-heading-s">Evidence of completion</h3>
                             <p class="govuk-body">{{submission.learners[0].evidenceOfCompletionReview.note}}</p>
                         {% endif %}
                     {# if multiple learners #}
                     {% else %}
                         {% if submission.learners | getLearnersByStatus("queried") %}
-                            <h4 class="govuk-heading-s">Evidence of completion</h4>
+                            <h3 class="govuk-heading-s">Evidence of completion</h3>
                                 <ul class="govuk-list govuk-list--spaced">
                                     {% for learner in (submission.learners | sortLearners(data.learners)) | getLearnersByStatus("queried")%}
                                         {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
@@ -62,20 +62,20 @@
                     <p class="govuk-body">The claim was rejected by the claim processor for the following reasons:</p>
 
                     {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
-                        <h4 class="govuk-heading-s">Evidence of payment</h4>
+                        <h3 class="govuk-heading-s">Evidence of payment</h3>
                         <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
                     {% endif %}
 
                     {# if one learner #}
                     {% if submission.learners.length == 1 %}
                         {% if submission.learners[0].evidenceOfCompletionReview.outcome == "fail" %}
-                        <h4 class="govuk-heading-s">Evidence of completion</h4>
+                        <h3 class="govuk-heading-s">Evidence of completion</h3>
                             <p class="govuk-body">{{submission.learners[0].evidenceOfCompletionReview.note}}</p>
                         {% endif %}
                     {# if multiple learners #}
                     {% else %}
                         {% if submission.learners | getLearnersByStatus("fail") %}
-                            <h4 class="govuk-heading-s">Evidence of completion</h4>
+                            <h3 class="govuk-heading-s">Evidence of completion</h3>
                                 <ul class="govuk-list govuk-list--spaced">
                                     {% for learner in (submission.learners | sortLearners(data.learners)) | getLearnersByStatus("fail")%}
                                         {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
@@ -99,7 +99,7 @@
 
 <div class="moj-timeline__item">
 <div class="moj-timeline__header">
-    <h3 class="moj-timeline__title">{{timelineData.submissionStep.title}}</h3>
+    <h2 class="moj-timeline__title">{{timelineData.submissionStep.title}}</h2>
     <p class="moj-timeline__byline">{{timelineData.submissionStep.author}}</p>
 </div>
 <p class="moj-timeline__date">

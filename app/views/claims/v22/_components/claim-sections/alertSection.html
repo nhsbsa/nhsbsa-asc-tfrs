@@ -12,37 +12,42 @@
         <div class="govuk-form-group{% if (data.submitError.change == false ) %} govuk-form-group--error{% endif %}">
 
             <h2 class="moj-alert__heading">Edit claim and resubmit</h2>
-            <p class="govuk-body">Once you've made these requested edits you can resubmit the claim for processing.</p>
+            <p class="govuk-body">Once you've made the requested edits you can resubmit the claim for processing. If you’re not sure what evidence we require, check our guidance on <a class="govuk-link" href="../guidance/tu-evidence-requirements.html">what evidence you need to provide</a>.</p>
 
             {% if (data.submitError.change == false ) %}
                 <p id="passport-issued-error" class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> You cannot resubmit a claim without making the requested edits</p>
             {% endif %}
             {% if noteSubmission.evidenceOfPaymentReview.outcome == "queried" %}
-                <p class="govuk-body"><strong>Evidence of payment:</strong> {{noteSubmission.evidenceOfPaymentReview.note}}</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of payment</h3>
+                <p class="govuk-body">{{noteSubmission.evidenceOfPaymentReview.note}}</p>
             {% endif %}
 
             {# if one learner #}
             {% if noteSubmission.learners.length == 1 %}
                 {% if noteSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried" %}
-                    <p class="govuk-body"><strong>Evidence of completion:</strong> {{noteSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
+                    <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of completion</h3>
+                    <p class="govuk-body">{{noteSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
                 {% endif %}
             {# if multiple learners #}
             {% else %}
                 {% if noteSubmission.learners | getLearnersByStatus("queried") %}
-                    <p class="govuk-body"><strong>Evidence of completion:</strong> 
-                        <ul class="govuk-list">
-                            {% for learner in (noteSubmission.learners | sortLearners(data.learners)) | getLearnersByStatus("queried")%}
-                                {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
-                                <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
-                            {% endfor %}
-
-                        </ul>
-                    </p>
+                    {% set queriedLearners = (noteSubmission.learners | sortLearners(data.learners)) | getLearnersByStatus("queried")%}
+                    <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of completion</h3>
+                    {% if queriedLearners.length > 1 %}
+                        <p class="govuk-hint">Click on the names below to see the requested edits for each learner</p>
+                    {% else %}
+                        <p class="govuk-hint">Click on the name below to see the requested edits for this learner</p>
+                    {% endif %}
+                    <ul class="govuk-list">
+                        {% for learner in queriedLearners %}
+                            {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                            <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                        {% endfor %}
+                    </ul>
                 {% endif %}
             {% endif %}
 
         </div>
-        <p class="govuk-body"><a class="govuk-link" href="../guidance/tu-evidence-requirements.html">Check what evidence you need to provide</a></p>
         <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
     
         {% endif %}
@@ -57,24 +62,32 @@
         <p class="govuk-body">This claim has been rejected which means it cannot be edited and resubmitted. You'll find the reasons below.</p>
 
         {% if noteSubmission.evidenceOfPaymentReview.outcome == "fail" %}
-        <p class="govuk-body"><strong>Evidence of payment: </strong>{{noteSubmission.evidenceOfPaymentReview.note}}</p>
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of payment</h3>
+        <p class="govuk-body">{{noteSubmission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
 
         {# if one learner #}
         {% if noteSubmission.learners.length == 1 %}
             {% if noteSubmission.learners[0].evidenceOfCompletionReview.outcome == "fail" %}
-                <p class="govuk-body"><strong>Evidence of completion:</strong> {{noteSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of completion</h3>
+                <p class="govuk-body">{{noteSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
             {% endif %}
         {# if multiple learners #}
         {% else %}
             {% if noteSubmission.learners | getLearnersByStatus("fail") %}
-                <p class="govuk-body"><strong>Evidence of completion:</strong></p>
-                    <ul class="govuk-list">
-                        {% for learner in noteSubmission.learners | getLearnersByStatus("fail")%}
-                            {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
-                            <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
-                        {% endfor %}
-                    </ul>
+                {% set rejectedLearners = noteSubmission.learners | getLearnersByStatus("fail") %}
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of completion</h3>
+                {% if rejectedLearners.length > 1 %}
+                    <p class="govuk-hint">Click on the names below to see why these learners have been rejected</p>
+                {% else %}
+                    <p class="govuk-hint">Click on the name below to see why this learner has been rejected</p>
+                {% endif %}
+                <ul class="govuk-list">
+                    {% for learner in rejectedLearners %}
+                        {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                        <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                    {% endfor %}
+                </ul>
             {% endif %}
         {% endif %}
 
@@ -100,7 +113,8 @@
         {% endif %}
         
         {% if noteSubmission.evidenceOfPaymentReview.outcome == "queried" %}
-        <p class="govuk-body"><strong>Evidence of payment:</strong> {{noteSubmission.evidenceOfPaymentReview.note}}</p>
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of payment</h3>
+        <p class="govuk-body">{{noteSubmission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
         </div>
         <p class="govuk-body"><a class="govuk-link" href="../guidance/tu-evidence-requirements.html">Check what evidence you need to provide</a></p>
@@ -117,7 +131,8 @@
         <p class="govuk-body">This claim has been rejected which means it cannot be edited and resubmitted. You'll find the reasons below.</p>
 
         {% if noteSubmission.evidenceOfPaymentReview.outcome == "fail" %}
-        <p class="govuk-body"><strong>Evidence of payment: </strong>{{noteSubmission.evidenceOfPaymentReview.note}}</p>
+        <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of payment</h3>
+        <p class="govuk-body">{{noteSubmission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
         <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../contact">contact us</a>.</p>
     {% endif %}
@@ -143,24 +158,32 @@
                 <p id="passport-issued-error" class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> You cannot resubmit a claim without making the requested edits</p>
             {% endif %}
             {% if notePairSubmission.evidenceOfPaymentReview.outcome == "queried" and pairClaim.isPaymentPlan %}
-                <p class="govuk-body"><strong>Evidence of payment:</strong> {{notePairSubmission.evidenceOfPaymentReview.note}}</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of payment</h3>
+                <p class="govuk-body">{{notePairSubmission.evidenceOfPaymentReview.note}}</p>
             {% endif %}
 
             {# if one learner #}
             {% if notePairSubmission.learners.length == 1 %}
                 {% if notePairSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried" %}
-                <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of completion</h3>
+                <p class="govuk-body">{{notePairSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
                 {% endif %}
             {# if multiple learners #}
             {% else %}
                 {% if notePairSubmission.learners | getLearnersByStatus("queried") %}
-                    <p class="govuk-body"><strong>Evidence of completion:</strong></p>
-                        <ul class="govuk-list">
-                            {% for learner in notePairSubmission.learners | getLearnersByStatus("queried")%}
-                                {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
-                                <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
-                            {% endfor %}
-                        </ul>
+                    {% set queriedLearners = notePairSubmission.learners | getLearnersByStatus("queried") %}
+                    <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of completion</h3>
+                    {% if queriedLearners.length > 1 %}
+                        <p class="govuk-hint">Click on the names below to see the requested edits for each learner</p>
+                    {% else %}
+                        <p class="govuk-hint">Click on the name below to see the requested edits for this learner</p>
+                    {% endif %}
+                    <ul class="govuk-list">
+                        {% for learner in queriedLearners %}
+                            {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                            <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                        {% endfor %}
+                    </ul>
                 {% endif %}
             {% endif %}
 
@@ -180,26 +203,32 @@
             <p class="govuk-body">This claim has been rejected which means it cannot be edited and resubmitted. You'll find the reasons below.</p>
             
             {% if notePairSubmission.evidenceOfPaymentReview.outcome == "fail" and pairClaim.isPaymentPlan %}
-                <p class="govuk-body"><strong>Evidence of payment:</strong> {{notePairSubmission.evidenceOfPaymentReview.note}}</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of payment</h3>
+                <p class="govuk-body">{{notePairSubmission.evidenceOfPaymentReview.note}}</p>
             {% endif %}
 
             {# if one learner #}
             {% if notePairSubmission.learners.length == 1 %}
                 {% if notePairSubmission.learners[0].evidenceOfCompletionReview.outcome == "fail" %}
-                <p class="govuk-body"><strong>Evidence of completion:</strong> {{notePairSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of completion</h3>
+                <p class="govuk-body">{{notePairSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
                 {% endif %}
             {# if multiple learners #}
             {% else %}
                 {% if notePairSubmission.learners | getLearnersByStatus("fail") %}
-                    <p class="govuk-body"><strong>Evidence of completion:</strong> 
-                        <ul class="govuk-list">
-                            {% for learner in notePairSubmission.learners | getLearnersByStatus("fail")%}
-                                {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
-                                <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
-                            {% endfor %}
-
-                        </ul>
-                    </p>
+                    {% set rejectedLearners = notePairSubmission.learners | getLearnersByStatus("fail") %}
+                    <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of completion</h3>
+                    {% if rejectedLearners.length > 1 %}
+                        <p class="govuk-hint">Click on the names below to see why these learners have been rejected</p>
+                    {% else %}
+                        <p class="govuk-hint">Click on the name below to see why this learner has been rejected</p>
+                    {% endif %}
+                    <ul class="govuk-list">
+                        {% for learner in rejectedLearners %}
+                            {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                            <li><a href="claim-learners#{{claimLearner.id}}" class="govuk-link">{{claimLearner.givenName}} {{claimLearner.familyName}}</a></li>
+                        {% endfor %}
+                    </ul>
                 {% endif %}
             {% endif %}
 
@@ -215,8 +244,5 @@
 
 {% endif %}
 
-    </div>
-    <div class="moj-alert__action">
-        <button class="moj-alert__dismiss" hidden>Dismiss</button>
     </div>
 </div>
