@@ -46,17 +46,19 @@ function checkClaim(claim) {
         result.evidenceOfPayment = "valid"
     }
 
-    // if (submission.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
-    //     result.evidenceOfCompletion = "missing"
-    // } else {
-        result.evidenceOfCompletion = "valid"
-    // }
+    result.evidenceOfCompletion = "valid"
+    for (const learner of submission.learners) {
+        if (learner.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100")) {
+            result.evidenceOfCompletion = "missing"
+        }
+    }
 
-    // if (submission.completionDate == null && (claim.claimType == "40" || claim.claimType == "100") && submission.learnerID) {
-    //     result.completionDate = "missing"
-    // } else {
-        result.completionDate = "valid"
-    // }
+    result.completionDate = "valid"
+    for (const learner of submission.learners) {
+        if (learner.completionDate == null && (claim.claimType == "40" || claim.claimType == "100")) {
+            result.completionDate = "missing"
+        }
+    }
 
     // const startDate = new Date(submission.startDate)
     // const completionDate = new Date(submission.completionDate)
@@ -263,10 +265,11 @@ function checkDuplicateClaim(learnerIDToCheck, trainingIDToCheck, claimList) {
     return result
 }
 
-function checkDuplicateClaimSubmission(learnerIDToCheck, trainingIDToCheck, currentClaimID, claimList) {
-    let result = {}
-    result.check = false
-    result.id = ''
+function checkDuplicateClaimSubmission(learnersToCheck, trainingIDToCheck, currentClaimID, claimList) {
+    let result = {
+        check: null,
+        ids: []
+    }
         for (const c of claimList) {
             let submission = null
             if(c.status =="queried") {
@@ -274,16 +277,27 @@ function checkDuplicateClaimSubmission(learnerIDToCheck, trainingIDToCheck, curr
             } else {
                 submission = getMostRelevantSubmission(c)
             }
-            if (currentClaimID.slice(0, -1) != c.claimID.slice(0, -1) && submission.trainingCode == trainingIDToCheck && submission.learnerID == learnerIDToCheck && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
-                result.matchType = c.claimType
-                result.check = true;
-                result.id = c.claimID
-                break;
+            if (currentClaimID.slice(0, -1) != c.claimID.slice(0, -1) && submission.trainingCode == trainingIDToCheck && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
+                const matchingLearners = getMatchingLearners(learnersToCheck,submission.learners)
+                result.ids = result.ids.concat(matchingLearners)
             }
         }
 
+    if (result.ids.length === 0) {
+        result.check = false
+    } else (
+        result.check = true
+    )
     return result
 }
+
+const getMatchingLearners = (arr1, arr2) => {
+  // 1. Map the IDs from the second array into a Set for fast lookup
+  const secondArrayIDs = new Set(arr2.map(learner => learner.learnerID));
+
+  // 2. Filter the first array to keep only those whose ID exists in the Set
+  return arr1.filter(learner => secondArrayIDs.has(learner.learnerID));
+};
 
 function isNIFormat(input) {
     // Remove spaces from the input string

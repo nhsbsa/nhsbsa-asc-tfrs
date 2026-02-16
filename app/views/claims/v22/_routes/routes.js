@@ -934,6 +934,8 @@ router.get('/save-claim', function (req, res) {
 
 router.get('/ready-to-declare', function (req, res) {
   let claimID = req.session.data.id
+  delete req.session.data.org.matchingIDs
+
   let claim = {}
 
   for (const c of req.session.data.claims) {
@@ -958,29 +960,27 @@ router.get('/ready-to-declare', function (req, res) {
         submission = getMostRelevantSubmission(claim)
     }
 
-  let isDuplicateClaim = checkDuplicateClaimSubmission(submission.learnerID, submission.trainingCode, claim.claimID, req.session.data.claims);
+  let isDuplicateClaim = checkDuplicateClaimSubmission(submission.learners, submission.trainingCode, claim.claimID, req.session.data.claims);
+  const submitError = checkClaim(claim)
   const FYdate = new Date('2024-03-03')
 
-  if (isDuplicateClaim.check) {
-    res.redirect('claim/duplication?dupeID=' + isDuplicateClaim.id + '&matchType=' + isDuplicateClaim.matchType)
-  } else {
-    const submitError = checkClaim(claim)
-    if (submitError.claimValid) {
-      delete req.session.data.submitError
-      if (req.session.data.org.bankDetails == null) {
-        res.redirect('claim/missing-bank-details')
-      } else if (req.session.data.org.validGDL == false &&  new Date(submission.costDate) > FYdate) {
-        res.redirect('claim/missing-gdl')
-      } else{
-        res.redirect('claim/declaration')
-      }
-      
+  if (submitError.claimValid) {
+    delete req.session.data.submitError
+    if (req.session.data.org.bankDetails == null) {
+      res.redirect('claim/missing-bank-details')
+    } else if (req.session.data.org.validGDL == false &&  new Date(submission.costDate) > FYdate) {
+      res.redirect('claim/missing-gdl')
+    } else if (isDuplicateClaim.check) {
+      req.session.data.org.matchingIDs = isDuplicateClaim.ids
+      res.redirect('claim/duplication')
     } else {
-      req.session.data.submitError = submitError
-      res.redirect('claim/claim-details' + '?id=' + claimID)
+      res.redirect('claim/declaration')
     }
+    
+  } else {
+    req.session.data.submitError = submitError
+    res.redirect('claim/claim-details' + '?id=' + claimID)
   }
-
 
 });
 

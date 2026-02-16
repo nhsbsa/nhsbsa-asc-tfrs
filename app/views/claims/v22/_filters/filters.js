@@ -73,6 +73,12 @@ addFilter('removeSpacesAndCharactersAndLowerCase', function (inputString) {
 addFilter('errorSummary', function (claim, submitError) {
     let errorSummaryStr = ''
 
+    if (claim.status == "queried") {
+        submission = getDraftSubmission(claim)
+    } else {
+        submission = getMostRelevantSubmission(claim)
+    }
+
     if (submitError.description == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#description-error">Add a description</a></li>')
     }
@@ -98,10 +104,18 @@ addFilter('errorSummary', function (claim, submitError) {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-evidence-error">Add evidence of payment</a></li>')
     }
     if (submitError.completionDate == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Add a completion date</a></li>')
+        if (submission.learners.length > 1) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Add a completion date for all learners</a></li>')
+        } else {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Add a completion date for</a></li>')
+        }
     }
     if (submitError.evidenceOfCompletion == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-evidence-error">Add evidence of completion</a></li>')
+        if (submission.learners.length > 1) {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-evidence-error">Add evidence of completion for all learners</a></li>')
+        } else {
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-evidence-error">Add evidence of completion</a></li>')
+        }
     }
     if (submitError.completionDate == "invalid" || submitError.startDate == "invalid") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be on or after the start date</a></li>')

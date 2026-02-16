@@ -106,7 +106,7 @@
         <div class="govuk-form-group{% if (data.submitError.change == false ) %} govuk-form-group--error{% endif %}">
 
         <h2 class="moj-alert__heading">Edit claim and resubmit</h2>
-        <p class="govuk-body">Once you've made these requested edits you can resubmit the <a class="govuk-link" href="#sixtyPartClaim">60 part</a> of your claim for processing.</p>
+        <p class="govuk-body">Once you've made these requested edits you can resubmit the <a class="govuk-link" href="#sixtyPartClaim">60 part</a> of your claim for processing. If you’re not sure what evidence we require, check our guidance on <a class="govuk-link" href="../guidance/tu-evidence-requirements.html">what evidence you need to provide</a>.</p>
 
         {% if (data.submitError.change == false ) %}
             <p id="passport-issued-error" class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> You cannot resubmit a claim without making the requested edits</p>
@@ -117,7 +117,7 @@
         <p class="govuk-body">{{noteSubmission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
         </div>
-        <p class="govuk-body"><a class="govuk-link" href="../guidance/tu-evidence-requirements.html">Check what evidence you need to provide</a></p>
+
         <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
     {% endif %}
 
@@ -152,7 +152,7 @@
         <div class="govuk-form-group{% if (data.submitError.change == false ) %} govuk-form-group--error{% endif %}">
 
             <h2 class="moj-alert__heading">Edit claim and resubmit</h2>
-            <p class="govuk-body">Once you've made these requested edits you can resubmit the <a class="govuk-link" href="#fourtyPartClaim">40 part</a> of your claim for processing.</p>
+            <p class="govuk-body">Once you've made these requested edits you can resubmit the <a class="govuk-link" href="#fourtyPartClaim">40 part</a> of your claim for processing. If you’re not sure what evidence we require, check our guidance on <a class="govuk-link" href="../guidance/tu-evidence-requirements.html">what evidence you need to provide</a>.</p>
             
             {% if (data.submitError.change == false ) %}
                 <p id="passport-issued-error" class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> You cannot resubmit a claim without making the requested edits</p>
@@ -188,8 +188,7 @@
             {% endif %}
 
         </div>
-
-            <p class="govuk-body"><a class="govuk-link" href="../guidance/tu-evidence-requirements.html">Check what evidence you need to provide</a></p>
+        
             <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
         {% endif %}
 
