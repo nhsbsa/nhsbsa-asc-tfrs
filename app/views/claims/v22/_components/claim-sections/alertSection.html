@@ -165,8 +165,8 @@
             {# if one learner #}
             {% if notePairSubmission.learners.length == 1 %}
                 {% if notePairSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried" %}
-                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of completion</h3>
-                <p class="govuk-body">{{notePairSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
+                    <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of completion</h3>
+                    <p class="govuk-body">{{notePairSubmission.learners[0].evidenceOfCompletionReview.note}}</p>
                 {% endif %}
             {# if multiple learners #}
             {% else %}
