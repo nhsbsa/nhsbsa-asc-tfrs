@@ -40,13 +40,9 @@
         {% endif %}
     </span>
     {% if data.reasonType == "queried" %}
-        {# <h2 class="govuk-heading-l">Edits requested</h2> #}
-        <h2 class="govuk-heading-l govuk-!-margin-bottom-2">Edits requested<span class="govuk-!-font-weight-regular"> {{timelineData.processStep.author}}</span></h2>
-        <p class="govuk-body govuk-!-font-size-24 govuk-!-margin-bottom-6">{{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }}</p>
+        <h2 class="govuk-heading-l">Edits requested</h2>
 
-        {# <p class="govuk-body">We processed your first submission on {{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }} and requested the following edits.</p> #}
-
-        <p class="govuk-body">We processed your first submission and requested the following edits.</p>
+        <p class="govuk-body-l">We processed your first submission on {{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }} and requested the following edits.</p>
 
         {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
             <h2 class="govuk-heading-m">Evidence of payment</h2>
@@ -76,13 +72,9 @@
         {% endif %}
 
     {% else %}
-        {# <h2 class="govuk-heading-l">Reasons for rejection</h2> #}
-        <h2 class="govuk-heading-l govuk-!-margin-bottom-2">Rejected<span class="govuk-!-font-weight-regular"> {{timelineData.processStep.author}}</span></h2>
-        <p class="govuk-body govuk-!-font-size-24 govuk-!-margin-bottom-6">{{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }}</p>
+        <h2 class="govuk-heading-l">Reasons for rejection</h2>
 
-        {# <p class="govuk-body">We processed your first submission on {{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }} and rejected your claim for the following reasons.</p> #}
-        
-        <p class="govuk-body">We processed your first submission and rejected your claim for the following reasons.</p>
+        <p class="govuk-body-l">We processed your first submission on {{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }} and rejected your claim for the following reasons.</p>
 
         {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
             <h2 class="govuk-heading-m">Evidence of payment</h2>
