@@ -1,6 +1,6 @@
 {# Completion evidence #}
 {# If no learners yet added #}
-{% if ((not submission.learners) and claim.claimType == "100") or (claim.claimType == "60" and claim.status != "approved" and not pairSubmission.learners) %}
+{% if ((submission.learners.length == 0) and claim.claimType == "100") or (claim.claimType == "60" and claim.status != "approved" and not pairSubmission.learners) %}
 
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">
@@ -87,7 +87,7 @@
 
 {# Completion evidence #}
 {# If no learners yet added #}
-{% if ((not submission.learners) and claim.claimType == "100") or (claim.claimType == "60" and claim.status != "approved" and not pairSubmission.learners) %}
+{% if ((submission.learners.length == 0) and claim.claimType == "100") or (claim.claimType == "60" and claim.status != "approved" and not pairSubmission.learners) %}
 
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">

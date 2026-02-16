@@ -8,35 +8,8 @@
   {% set claim = pairClaim.claimID | findPair(data.claims) %}
 {% endif %}
 
-{% if claim.claimType == "60" %}  
-
-  {% if (claim.status == "queried") %}
-    {% set submission = claim | getDraftSubmission %}
-  {% else %}
-    {% set submission = claim | getMostRelevantSubmission %}
-  {% endif %}
-  {% if (pairClaim and pairClaim.status == "queried") %}
-    {% set pairSubmission = pairClaim | getDraftSubmission %}
-  {% else %}
-    {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
-  {% endif %}
-
-{% else %}
-
-  {% if (claim.status == "queried") %}
-    {% set submission = claim | getDraftSubmission %}
-  {% else %}
-    {% set submission = claim | getMostRelevantSubmission %}
-  {% endif %}
-
-{% endif %}
-
 {% block pageTitle %}
-  {% if (claim.claimType == "100") %}
-    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Claim: {{claim.claimID}} — {{serviceName}} — GOV.UK
-  {% else %}
-    {% if data.submitError.claimValid != null and not data.submitError.claimValid %}Error: {% endif %}Combined claim: {{claim.claimID | removeClaimSuffix}} — {{serviceName}} — GOV.UK
-  {% endif %}
+    Claim history — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -49,9 +22,14 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds"> 
     
-
-    <h2 class="govuk-heading-l">Claim timeline</h2>
-
+      <span class="govuk-caption-l">
+        {% if (claim.claimType == "100") %}
+          {{ claim.claimID }}
+        {% else %}
+          Combined claim: {{ claim.claimID | removeClaimSuffix }}
+        {% endif %}
+      </span>
+    <h1 class="govuk-heading-l">Claim history</h1>
     <div class="moj-timeline">
 
       {% if pairClaim != null %}
@@ -64,12 +42,13 @@
 
       {% for submission in claim.submissions | orderByMostRecent %}
           {% set type = claim.claimType %}
+          {% set loopCount = loop.index0 %}
           {% include "../_components/claim-sections/claim-history/timeline-items.html" %}
       {% endfor %}
 
       <div class="moj-timeline__item">
         <div class="moj-timeline__header">
-          <h3 class="moj-timeline__title">Created</h3>
+          <h2 class="moj-timeline__title">Created</h2>
           <p class="moj-timeline__byline">by {{(claim.createdBy | findUser(data.org)).givenName}} {{(claim.createdBy| findUser(data.org)).familyName}}</p>
         </div>
         <p class="moj-timeline__date">

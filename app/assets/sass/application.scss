@@ -922,7 +922,7 @@ margin-right: govuk-spacing(3);
 .moj-alert__button-row {
   grid-column: 2 / -1; // span content + action columns
   margin-top: govuk-spacing(3);
-  text-align: right;
+  text-align: left;
 }
 
 .govuk-summary-card__actions-flex-height {

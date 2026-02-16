@@ -1,0 +1,140 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if claim.claimType == "60" %}
+  {% set pairClaim = claim.claimID | findPair(data.claims) %}
+{% elif claim.claimType == "40" %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair(data.claims) %}
+{% endif %}
+
+{% set orderedSubmsissions = claim.submissions | orderByMostRecent %}
+
+{% set submission = orderedSubmsissions[data.loopCount] %}
+
+{% set timelineData = submission | generateTimelineData(type, data.org, loop.last,  data.statuses) %}
+
+{% block pageTitle %}
+    {% if data.reasonType == "queried" %}
+        Actions requested — {{serviceName}} — GOV.UK
+    {% else %}
+        Reasons for rejection — {{serviceName}} — GOV.UK
+    {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+<p class="govuk-body"><a href="claim-history" class="govuk-back-link">Back to claim history</a></p>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds"> 
+    
+    <span class="govuk-caption-l">
+        {% if (claim.claimType == "100") %}
+            {{ claim.claimID }}
+        {% else %}
+            Combined claim: {{ claim.claimID | removeClaimSuffix }}
+        {% endif %}
+    </span>
+    {% if data.reasonType == "queried" %}
+        {# <h2 class="govuk-heading-l">Edits requested</h2> #}
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-2">Edits requested<span class="govuk-!-font-weight-regular"> {{timelineData.processStep.author}}</span></h2>
+        <p class="govuk-body govuk-!-font-size-24 govuk-!-margin-bottom-6">{{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }}</p>
+
+        {# <p class="govuk-body">We processed your first submission on {{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }} and requested the following edits.</p> #}
+
+        <p class="govuk-body">We processed your first submission and requested the following edits.</p>
+
+        {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
+            <h2 class="govuk-heading-m">Evidence of payment</h2>
+            <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+
+        {# if one learner #}
+        {% if submission.learners.length == 1 %}
+            {% if submission.learners[0].evidenceOfCompletionReview.outcome == "queried" %}
+                <h2 class="govuk-heading-m">Evidence of completion</h2>
+                <p class="govuk-body">{{submission.learners[0].evidenceOfCompletionReview.note}}</p>
+            {% endif %}
+        {# if multiple learners #}
+        {% else %}
+            {% if submission.learners | getLearnersByStatus("queried") %}
+                <h2 class="govuk-heading-m">Evidence of completion</h2>
+                    <ul class="govuk-list govuk-list--spaced">
+                        {% for learner in (submission.learners | sortLearners(data.learners)) | getLearnersByStatus("queried")%}
+                            {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                            <li>
+                                <h2 class="govuk-heading-s govuk-!-margin-bottom-2">{{claimLearner.givenName}} {{claimLearner.familyName}}</h2>
+                                {{learner.evidenceOfCompletionReview.note}}
+                            </li>
+                        {% endfor %}
+                    </ul>
+            {% endif %}
+        {% endif %}
+
+    {% else %}
+        {# <h2 class="govuk-heading-l">Reasons for rejection</h2> #}
+        <h2 class="govuk-heading-l govuk-!-margin-bottom-2">Rejected<span class="govuk-!-font-weight-regular"> {{timelineData.processStep.author}}</span></h2>
+        <p class="govuk-body govuk-!-font-size-24 govuk-!-margin-bottom-6">{{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }}</p>
+
+        {# <p class="govuk-body">We processed your first submission on {{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }} and rejected your claim for the following reasons.</p> #}
+        
+        <p class="govuk-body">We processed your first submission and rejected your claim for the following reasons.</p>
+
+        {% if submission.evidenceOfPaymentReview.outcome == "fail" %}
+            <h2 class="govuk-heading-m">Evidence of payment</h2>
+            <p class="govuk-body">{{submission.evidenceOfPaymentReview.note}}</p>
+        {% endif %}
+
+        {# if one learner #}
+        {% if submission.learners.length == 1 %}
+            {% if submission.learners[0].evidenceOfCompletionReview.outcome == "fail" %}
+            <h2 class="govuk-heading-m">Evidence of completion</h2>
+                <p class="govuk-body">{{submission.learners[0].evidenceOfCompletionReview.note}}</p>
+            {% endif %}
+        {# if multiple learners #}
+        {% else %}
+            {% if submission.learners | getLearnersByStatus("fail") %}
+                <h2 class="govuk-heading-m">Evidence of completion</h2>
+                    <ul class="govuk-list govuk-list--spaced">
+                        {% for learner in (submission.learners | sortLearners(data.learners)) | getLearnersByStatus("fail")%}
+                            {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                            <li>
+                                {{claimLearner.givenName}} {{claimLearner.familyName}}
+                                <br>
+                                {{learner.evidenceOfCompletionReview.note}}
+                            </li>
+                        {% endfor %}
+                    </ul>
+            {% endif %}
+        {% endif %}
+
+    {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

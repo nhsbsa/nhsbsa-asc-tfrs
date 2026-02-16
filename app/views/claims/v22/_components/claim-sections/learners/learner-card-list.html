@@ -12,5 +12,16 @@
         {% include "./learner-card.html" %}
     {% endfor %}
 {% else %}
-<p class="govuk-body">0 learners {{ learnerList.label}}</p>
+    {% if (learnerList.id == "needsaction") %}
+        <p class="govuk-body">You have done the requested edits for every learner.</p>
+    {% elif (learnerList.id == "actioned") %}
+        <p class="govuk-body">You have not done edits for any learners.</p>
+    {% elif (learnerList.id == "todo") %}
+        <p class="govuk-body">You have finished adding completion information for all learners.</p>
+    {% elif (learnerList.id == "done") %}
+        <p class="govuk-body">You have not finished adding completion information for any learners.</p>
+    {% elif (learnerList.id == "removed") %}
+        <p class="govuk-body">You have not removed any learners from this claim.</p>
+    {% endif %}
+    
 {% endif %}

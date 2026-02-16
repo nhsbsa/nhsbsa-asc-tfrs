@@ -37,17 +37,18 @@
                             </svg>
                         </div>
                         <div class="moj-alert__content">
+                            <p class="govuk-body"><strong>Requested edits:</strong></p>
                             {{note}}
                         </div>
                         {% if (learnerList.id == "needsaction" or learnerList.id == "actioned") %}
                             <div class="moj-alert__button-row">
                                 {% if learnerList.id == "needsaction" %}
                                     <a href="../mark-as-actioned?learnerID={{learner.learnerID}}" class="govuk-button govuk-button--secondary govuk-!-margin-0">
-                                        Move to done
+                                        Move to edits done
                                     </a>
                                 {% elif learnerList.id == "actioned" %}
                                     <a href="../mark-as-needs-action?learnerID={{learner.learnerID}}" class="govuk-button govuk-button--secondary govuk-!-margin-0">
-                                        Move to needs action
+                                        Move to needs editing
                                     </a>
                                 {% endif %}
                             </div>
