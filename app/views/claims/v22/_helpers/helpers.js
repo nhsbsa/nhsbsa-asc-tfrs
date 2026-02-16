@@ -33,13 +33,6 @@ function checkClaim(claim) {
         result.paymentDate = "valid"
     }
 
-    if (result.paymentDate == "valid") {
-        const costDate = new Date(submission.costDate)
-        if (currentDate.getTime() < costDate.getTime()) {
-            result.paymentDate = "inFuture"
-        }
-    }
-
     if (submission.evidenceOfPayment.length == 0  && ((claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
         result.evidenceOfPayment = "missing"
     } else {
@@ -60,19 +53,14 @@ function checkClaim(claim) {
         }
     }
 
-    // const startDate = new Date(submission.startDate)
-    // const completionDate = new Date(submission.completionDate)
-    // if ((result.completionDate == "valid" && submission.learnerID) && result.startDate == "valid") {
-    //     if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
-    //         result.startDate = "invalid"
-    //         result.completionDate = "invalid"
-    //     } else if ((currentDate.getTime() < completionDate.getTime()) && (claim.claimType == "100" || claim.claimType == "40")) {
-    //         result.completionDate = "inFuture"
-    //     } 
-    // }
-    // if (result.startDate == "valid" && (claim.claimType == "100" || claim.claimType == "60") && (currentDate.getTime() < startDate.getTime())) {
-    //     result.startDate = "inFuture"
-    // }
+    const startDate = new Date(submission.startDate)
+    const completionDate = new Date(submission.learner[0].completionDate)
+    if ((result.completionDate == "valid") && result.startDate == "valid") {
+        if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "40")) {
+            result.startDate = "invalid"
+            result.completionDate = "invalid"
+        }
+    }
     
 
     if (claim.status == "queried") {
@@ -156,6 +144,7 @@ function validateDate(day, month, year, type, claim, sixtyClaim) {
     const policyDate = new Date("2024-04-01");
     const date = year + "-" + month + "-" + day;
     const checkDate = new Date(date);
+    const currentDate = new Date();
 
     // Validate year
     if (year == "" || isNaN(year)) {
@@ -191,7 +180,11 @@ function validateDate(day, month, year, type, claim, sixtyClaim) {
     } else if (result.day == 'missing' || result.month == 'missing' || result.year == 'missing') {
         result.date = 'partMissing';
     } else if (isValidDate(day, month, year)) {
-        result.date = 'valid';
+        if (currentDate.getTime() < checkDate.getTime()) {
+            result.date = 'inFuture'
+        } else {
+            result.date = 'valid';
+        }
     } else {
         result.date = 'invalid';
     }

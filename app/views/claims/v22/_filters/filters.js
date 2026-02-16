@@ -85,20 +85,11 @@ addFilter('errorSummary', function (claim, submitError) {
     if (submitError.claimAmount == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#claim-amount-error">Add a cost</a></li>')
     }
-    if (submitError.startDate == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#start-date-error">Add a start date</a></li>')
-    }
-    if (submitError.startDate == "inFuture") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Start date must be in the past</a></li>')
-    }
     if (submitError.learner == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#learner-error">Add a learner</a></li>')
     }
     if (submitError.paymentDate == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-date-error">Add a payment date</a></li>')
-    }
-    if (submitError.paymentDate == "inFuture") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-date-error">Payment date must be in the past</a></li>')
     }
     if (submitError.evidenceOfPayment == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-evidence-error">Add evidence of payment</a></li>')
@@ -119,9 +110,6 @@ addFilter('errorSummary', function (claim, submitError) {
     }
     if (submitError.completionDate == "invalid" || submitError.startDate == "invalid") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be on or after the start date</a></li>')
-    }
-    if (submitError.completionDate == "inFuture") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Completion date must be in the past</a></li>')
     }
     if (submitError.change == false ) {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#action-alert-box">You cannot resubmit a claim without making the requested edits</a></li>')
@@ -516,6 +504,9 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
         if (dateErrorObject.date === 'invalid') {
             errorMessages.push('<li><a href="#input-error">' + dateType + ' must be a real date</a></li>');
         }
+        if (dateErrorObject.date === 'inFuture') {
+            errorMessages.push('<li><a href="#input-error">' + dateType + ' must be in the past</a></li>');
+        }
         if (dateErrorObject.date === 'allMissing') {
             errorMessages.push('<li><a href="#input-error">Enter the ' + dateType.toLowerCase() + '</a></li>');
         }
@@ -541,6 +532,9 @@ addFilter('dateErrorMessage', function (dateErrorObject, dateType, errorSection)
         }
         if (dateErrorObject.date === 'invalid') {
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be a real date<br>');
+        }
+        if (dateErrorObject.date === 'inFuture') {
+            errorMessages.push('<span class="govuk-visually-hidden">Error:</span>' + dateType + ' must be in the past<br>');
         }
         if (dateErrorObject.date === 'allMissing') {
             errorMessages.push('<span class="govuk-visually-hidden">Error:</span>Enter the ' + dateType.toLowerCase() + '<br>');

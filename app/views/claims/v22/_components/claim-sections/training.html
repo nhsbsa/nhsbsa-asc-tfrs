@@ -16,7 +16,7 @@
     {% endif %}
   </dd>
   {% if (claim.status == "queried" or claim.status == "not-yet-submitted") %}
-    <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.startDate =='inFuture' %} govuk-summary-value--error {% endif %}">
+    <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid %} govuk-summary-value--error {% endif %}">
       <a class="govuk-link govuk-link--no-visited-state" href="select-training">Change<span class="govuk-visually-hidden">
           training</span></a>
     </dd>
