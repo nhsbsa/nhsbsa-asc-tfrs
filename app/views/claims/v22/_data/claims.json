@@ -584,43 +584,10 @@
             }
           },
           {
-            "slotID": 10,
-            "learnerID": "EB 06 4F 17 Y",
-            "learnerChanged": "JU 91 7F 75 P",
-            "completionDate": "2025-10-11T14:24:08.538Z",
-            "evidenceOfCompletion": "certificate-313.pdf",
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "slotID": 12,
-            "learnerID": "NR 91 7F 72 O",
-            "learnerChanged": "BF 74 0F 46 L",
-            "completionDate": "2025-10-11T14:24:08.538Z",
-            "evidenceOfCompletion": "certificate-212.pdf",
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "slotID": 13,
-            "learnerID": "GR 46 4F 92 C",
+            "slotID": 9,
+            "learnerID": "KZ 79 0F 13 Z",
             "learnerChanged": null,
             "completionDate": "2025-10-11T14:24:08.538Z",
-            "evidenceOfCompletion": "certificate-212.pdf",
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          },
-          {
-            "slotID": 14,
-            "learnerID": "PX 89 8F 98 Q",
-            "learnerChanged": "GR 03 6F 10 P",
-            "completionDate": "2025-10-11T14:24:08.538Z",
             "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
               "outcome": null,
@@ -628,21 +595,8 @@
             }
           },
           {
-            "slotID": 16,
-            "learnerID": "KQ 01 7F 72 D",
-            "learnerChanged": "WV 15 0F 13 V",
-            "completionDate": "2025-10-11T14:24:08.538Z",
-            "evidenceOfCompletion": "certificate-212.pdf",
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
-            }
-          }
-        ],
-        "removedLearners": [
-          {
-            "slotID": 15,
-            "learnerID": "WB 34 5F 39 T",
+            "slotID": 10,
+            "learnerID": "JU 91 7F 75 P",
             "learnerChanged": null,
             "completionDate": "2025-10-11T14:24:08.538Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -663,8 +617,30 @@
             }
           },
           {
-            "slotID": 9,
-            "learnerID": "KZ 79 0F 13 Z",
+            "slotID": 12,
+            "learnerID": "BF 74 0F 46 L",
+            "learnerChanged": null,
+            "completionDate": "2025-10-11T14:24:08.538Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": 13,
+            "learnerID": "GR 46 4F 92 C",
+            "learnerChanged": null,
+            "completionDate": "2025-10-11T14:24:08.538Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": 14,
+            "learnerID": "GR 03 6F 10 P",
             "learnerChanged": null,
             "completionDate": "2025-10-11T14:24:08.538Z",
             "evidenceOfCompletion": "certificate-313.pdf",
@@ -672,8 +648,31 @@
               "outcome": null,
               "note": null
             }
+          },
+          {
+            "slotID": 15,
+            "learnerID": "WB 34 5F 39 T",
+            "learnerChanged": null,
+            "completionDate": "2025-10-11T14:24:08.538Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": 16,
+            "learnerID": "WV 15 0F 13 V",
+            "learnerChanged": null,
+            "completionDate": "2025-10-11T14:24:08.538Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
           }
-        ]
+        ],
+        "removedLearners": []
       },
       {
         "submitter": "lionel-lowel@evergreencare.co.uk",
@@ -15033,11 +15032,11 @@
             "slotID": 1,
             "learnerID": "IS 52 7F 57 C",
             "learnerChanged": null,
-            "completionDate": "2025-12-28T05:50:29.865Z",
-            "evidenceOfCompletion": "certificate-212.pdf",
+            "completionDate": "2025-12-30T05:50:29.865Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "pass",
-              "note": null
+              "outcome": "queried",
+              "note": "The completion date on the certificate does not match the completion date on the claim details."
             }
           }
         ],
@@ -15064,11 +15063,11 @@
             "slotID": 1,
             "learnerID": "IS 52 7F 57 C",
             "learnerChanged": null,
-            "completionDate": "2025-12-28T05:50:29.865Z",
-            "evidenceOfCompletion": "certificate-212.pdf",
+            "completionDate": "2025-12-29T05:50:29.865Z",
+            "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "pass",
-              "note": null
+              "outcome": "queried",
+              "note": "The completion date on the certificate does not match the completion date on the claim details."
             }
           }
         ],
@@ -15096,10 +15095,10 @@
             "learnerID": "IS 52 7F 57 C",
             "learnerChanged": null,
             "completionDate": "2025-12-28T05:50:29.865Z",
-            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "pass",
-              "note": null
+              "outcome": "queried",
+              "note": "The completion date on the certificate does not match the completion date on the claim details."
             }
           }
         ],

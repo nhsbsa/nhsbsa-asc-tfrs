@@ -18,15 +18,15 @@
     {# if no single completion date #}
     {% if not learner.completionDate %}
 
-      {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "missing" and learner.learnerID %}
+      {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "missing" %}
         <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
           <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
-            <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a completion date </p>
+            <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a completion date</p>
           </div>
         </div>
       {% endif %}
-      <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' and submission.learnerID%} govuk-summary-list-row--error {% endif %}">
-        <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing'and submission.learnerID%} govuk-summary-key--error {% endif %}">
+      <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing'%} govuk-summary-list-row--error {% endif %}">
+        <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing'%} govuk-summary-key--error {% endif %}">
           Completion date
         </dt>
         <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-value--error {% endif %}">
@@ -64,9 +64,15 @@
 
 {# If more than 1 learner added, give summary #}
 {% else %}
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
+      {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "missing" %}
+        <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
+          <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
+            <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a completion date for all learners</p>
+          </div>
+        </div>
+      {% endif %}
+      <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing'%} govuk-summary-list-row--error {% endif %}">
+        <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing'%} govuk-summary-key--error {% endif %}">
             {% if claim.claimType == "100" %}
               Completion date {% if ( claim | checkIfUpdated("completionDates")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
           {% elif claim.claimType == "60" %}
@@ -105,15 +111,15 @@
     {# if no single completion date #}
     {% if not learner.evidenceOfCompletion %}
 
-      {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion == "missing" and learner.learnerID %}
+      {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion == "missing" %}
         <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
           <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-evidence-error">
             <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add evidence of completion </p>
           </div>
         </div>
       {% endif %}
-      <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' and learner.learnerID%} govuk-summary-list-row--error {% endif %}">
-        <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing'and learner.learnerID%} govuk-summary-key--error {% endif %}">
+      <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' %} govuk-summary-list-row--error {% endif %}">
+        <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing'%} govuk-summary-key--error {% endif %}">
           Evidence of completion
         </dt>
         <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' %} govuk-summary-value--error {% endif %}">
@@ -151,9 +157,15 @@
 
 {# If more than 1 learner added, give summary #}
 {% else %}
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
+      {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion == "missing" %}
+        <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
+          <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-evidence-error">
+            <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add evidence of completion for all learners</p>
+          </div>
+        </div>
+      {% endif %}
+      <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' %} govuk-summary-list-row--error {% endif %}">
+        <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing'%} govuk-summary-key--error {% endif %}">
           {% if claim.claimType == "100" %}
             Evidence of completion {% if ( claim | checkIfUpdated("multipleEvidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
           {% elif claim.claimType == "60" %}
