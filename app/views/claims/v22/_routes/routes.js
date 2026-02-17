@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID } = require('../_helpers/helpers.js');
+const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID } = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 
@@ -42,14 +42,14 @@ router.post('/add-training', function (req, res) {
     }
 
     // add duplicate check here
-    var currentLearner = findLearnerById(submission.learnerID,req.session.data.learners)
     let isDuplicateClaim = null
-    if (submission.learnerID != null) {
-      isDuplicateClaim = checkDuplicateClaim(currentLearner.id, newTrainingCode, req.session.data.claims);
+    if (submission.learners.length > 0) {
+      isDuplicateClaim = checkDuplicateClaim(submission.learners, newTrainingCode, claim.claimID, req.session.data.claims);
     }
     
     if (isDuplicateClaim && isDuplicateClaim.check) {
-        res.redirect('claim/duplication?dupeID=' + isDuplicateClaim.id + '&matchType=' + isDuplicateClaim.matchType)
+        req.session.data.matchingIDs = isDuplicateClaim.ids
+        res.redirect('claim/duplication')
     } else {
       if (!(["OMMT/T1/INT","OMMT/T2/INT"].includes(submission.trainingCode)) && (["OMMT/T1/INT","OMMT/T2/INT"].includes(newTrainingChoice.code)) ) {
         submission.evidenceOfPayment = null
@@ -668,13 +668,16 @@ router.post('/add-learner', function (req, res) {
         currentSubmission = getMostRelevantSubmission(c)
       }
 
-      isDuplicateClaim = checkDuplicateClaim(newLearner.id, currentSubmission.trainingCode, req.session.data.claims);
+      isDuplicateClaim = checkDuplicateClaim(currentSubmission.learners, currentSubmission.trainingCode, c.claimID, req.session.data.claims);
 
       if (isDuplicateClaim.check) {
-        res.redirect('claim/duplication?dupeID=' + isDuplicateClaim.id + '&matchType=' + isDuplicateClaim.matchType)
+        req.session.data.matchingIDs = isDuplicateClaim.ids
+        res.redirect('claim/duplication')
       } else {
         const learner = {
+            "slotID": null,
             "learnerID": newLearner.id,
+            "learnerChanged": null,
             "completionDate": null,
             "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
@@ -683,6 +686,7 @@ router.post('/add-learner', function (req, res) {
             }
           }
         if (currentSubmission.learners == null || currentSubmission.learners == []) {
+          learner.slotID = "1"
           currentSubmission.learners = [learner]
           if (c.claimType == "100") {
               res.redirect('claim/add-another-learner')
@@ -704,6 +708,8 @@ router.post('/add-learner', function (req, res) {
           }
           
         } else {
+            learnerSlotID = currentSubmission.learners.length + 1
+            learner.slotID = learnerSlotID.toString()
             currentSubmission.learners.push(learner);
             if (currentSubmission.learners.length > 1) {
               req.session.data.learnerConfirmation = {
@@ -960,7 +966,7 @@ router.get('/ready-to-declare', function (req, res) {
         submission = getMostRelevantSubmission(claim)
     }
 
-  let isDuplicateClaim = checkDuplicateClaimSubmission(submission.learners, submission.trainingCode, claim.claimID, req.session.data.claims);
+  let isDuplicateClaim = checkDuplicateClaim(submission.learners, submission.trainingCode, claim.claimID, req.session.data.claims);
   const submitError = checkClaim(claim)
   const FYdate = new Date('2024-03-03')
 
@@ -971,7 +977,7 @@ router.get('/ready-to-declare', function (req, res) {
     } else if (req.session.data.org.validGDL == false &&  new Date(submission.costDate) > FYdate) {
       res.redirect('claim/missing-gdl')
     } else if (isDuplicateClaim.check) {
-      req.session.data.org.matchingIDs = isDuplicateClaim.ids
+      req.session.data.matchingIDs = isDuplicateClaim.ids
       res.redirect('claim/duplication')
     } else {
       res.redirect('claim/declaration')

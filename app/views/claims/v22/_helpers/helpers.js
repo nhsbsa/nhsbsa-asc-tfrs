@@ -27,13 +27,13 @@ function checkClaim(claim) {
         result.startDate = "valid"
     }
 
- if (submission.costDate == null && ((claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
+    if (submission.costDate == null && ((claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
         result.paymentDate = "missing"
     }  else {
         result.paymentDate = "valid"
     }
-
-    if (submission.evidenceOfPayment.length == 0  && ((claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
+     console.log(submission.evidenceOfPayment)
+    if (submission.evidenceOfPayment != null && submission.evidenceOfPayment.length == 0  && ((claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
         result.evidenceOfPayment = "missing"
     } else {
         result.evidenceOfPayment = "valid"
@@ -231,56 +231,36 @@ function validateDate(day, month, year, type, claim, sixtyClaim) {
     return result;
 }
 
-function checkDuplicateClaim(learnerIDToCheck, trainingIDToCheck, claimList) {
-    let result = {}
-    result.check = false
-    result.id = ''
-        for (const c of claimList) {
-            let submission = null
-            if(c.status =="queried") {
-                submission = getDraftSubmission(c)
-            } else {
-                submission = getMostRelevantSubmission(c)
-            }
-            if (submission.learners != null) {
-                for (const learner of submission.learners) {
-                    if (submission.trainingCode == trainingIDToCheck && learner.learnerID == learnerIDToCheck && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
-                    result.matchType = c.claimType
-                    result.check = true;
-                    result.id = c.claimID
-                    break;
-                }
-                }
-                
-            }
-        }
-
-    return result
-}
-
-function checkDuplicateClaimSubmission(learnersToCheck, trainingIDToCheck, currentClaimID, claimList) {
+function checkDuplicateClaim(learnersToCheck, trainingIDToCheck, currentClaimID, claimList) {
     let result = {
         check: null,
         ids: []
     }
-        for (const c of claimList) {
-            let submission = null
-            if(c.status =="queried") {
-                submission = getDraftSubmission(c)
-            } else {
-                submission = getMostRelevantSubmission(c)
-            }
-            if (currentClaimID.slice(0, -1) != c.claimID.slice(0, -1) && submission.trainingCode == trainingIDToCheck && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
-                const matchingLearners = getMatchingLearners(learnersToCheck,submission.learners)
-                result.ids = result.ids.concat(matchingLearners)
-            }
+
+
+    for (const c of claimList) {
+        let submission = null
+        if(c.status =="queried") {
+            submission = getDraftSubmission(c)
+        } else {
+            submission = getMostRelevantSubmission(c)
         }
+        if (currentClaimID.slice(0, -1) != c.claimID.slice(0, -1) && submission.trainingCode == trainingIDToCheck && (c.status == 'queried' || c.status == 'submitted' || c.status == 'approved')) {
+            const matchingLearners = getMatchingLearners(learnersToCheck,submission.learners)
+            result.ids = result.ids.concat(matchingLearners)
+        }
+    }
 
     if (result.ids.length === 0) {
         result.check = false
     } else (
         result.check = true
     )
+
+    result.ids = [
+    ...new Map(result.ids.map(item => [item.learnerID, item])).values()
+    ];
+
     return result
 }
 
@@ -1033,4 +1013,4 @@ function replaceLearnerID(learners, oldID, newID) {
   });
 }
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkDuplicateClaimSubmission, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison}
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison}
