@@ -774,34 +774,33 @@ function newClaim(req, input, type) {
 
     let claim = {
         claimID: null,
-        workplaceID: req.session.data.org.workplaceID,
         claimType: null,
-        status: "not-yet-submitted",
-        createdDate: dStr,
+        workplaceID: req.session.data.org.workplaceID,
         createdBy: "Test Participant",
-        notes: null,
-        submissions: [{
-        submitter: null,
-        submittedDate: null,
-        trainingCode: input.code,
-        learnerID: null,
-        startDate: null,
-        costDate: null,
-        completionDate: null,
-        evidenceOfPayment: [],
-        evidenceOfCompletion: null,
-        processedBy: null,
-        processedDate: null,
-        evidenceOfPaymentReview: {
-            outcome: null,
-            note: null,
-            costPerLearner: null
-        },
-        evidenceOfCompletionReview: {
-            outcome: null,
-            note: null
-        }
-        }]
+        status: "not-yet-submitted",
+        isPaymentPlan: null,
+        createdDate: dStr,
+        submissions: [
+            {
+                submitter: null,
+                submittedDate: null,
+                processedBy: null,
+                processedDate: null,
+                trainingCode: input.code,
+                startDate: null,
+                costDate: null,
+                evidenceOfPayment: [],
+                evidenceOfCompletionReview: {
+                    outcome: null,
+                    note: null,
+                    paymentPlan: null,
+                    costPerLearner: null
+                },
+                sharedCompletionDate: null,
+                learners: []
+            }
+        ],
+        removedLearners: []
     };
 
 
