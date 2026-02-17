@@ -18,7 +18,7 @@
                 <div class="govuk-error-summary__body">
                     <ul class="govuk-list govuk-error-summary__list">
                         <li>
-                            <a href="#declare-checkbox">You must confirm you understand before submitting</a>
+                            <a href="#confirmation">You must confirm you understand before submitting</a>
                         </li>
                     </ul>
                 </div>
@@ -31,26 +31,27 @@
     <div class="govuk-grid-column-two-thirds">
         <div class="govuk-warning-text">
             <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-            <strong class="govuk-warning-text__text">
+            <div class="govuk-warning-text__text">
                 <span class="govuk-visually-hidden">Warning</span>
                 <p><strong>I declare that the information I have given in this claim is correct and complete. It also meets the rules set out in the grant determination letter.</strong></p>
-
                 <p><strong>I understand that it may be subject to:</strong></p>
-
                 <ul class="govuk-list govuk-list--bullet">
                     <li><strong>verification checks</strong></li>
                     <li><strong>audit review</strong></li>
                     <li><strong>counter fraud checks</strong></li>
                 </ul>
-
-            </strong>
+            </div>
         </div>
     </div>
     <div class="govuk-grid-column-two-thirds">
         <form action="../submit-claim" method="post" novalidate>
-            <div class="govuk-button-group {% if data.submitError %} govuk-form-group--error {% endif %}"
+            <div class="govuk-form-group {% if data.submitError %} govuk-form-group--error {% endif %}"
                 id="declare-checkbox">
-                <fieldset class="govuk-fieldset" aria-describedby="{% if data.submitError %} declare-error {% endif %}">
+
+                <fieldset class="govuk-fieldset" {% if data.submitError %}aria-describedby="declare-error"{% endif %}>
+                    <legend class="govuk-visually-hidden">
+                        Declaration checkbox
+                    </legend>
                     {% if data.submitError %}
                     <p id="declare-error" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span> You must confirm you understand before
@@ -60,13 +61,14 @@
                     <div class="govuk-checkboxes" data-module="govuk-checkboxes">
                         <div class="govuk-checkboxes__item">
                             <input class="govuk-checkboxes__input" id="confirmation" name="confirmation" type="checkbox"
-                                value="confirmation">
+                                value="confirmation" required {% if data.submitError %}aria-invalid="true"{% endif %}>
                             <label class="govuk-label govuk-checkboxes__label" for="confirmation">
                                 I understand and accept.
                             </label>
                         </div>
                     </div>
                 </fieldset>
+
             </div>
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">

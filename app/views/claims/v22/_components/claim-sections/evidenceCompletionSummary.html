@@ -13,7 +13,11 @@
   
 {# If 1 learner added #}
 {% elif submission.learners.length == 1 %}
-  {% set learner = submission.learners[0] %}
+    {% if claim.claimType == "100" %}
+      {% set learner = submission.learners[0] %}
+    {% elif claim.claimType == "60" %}
+      {% set learner = pairSubmission.learners[0] %}
+    {% endif %}
 
     {# if no single completion date #}
     {% if not learner.completionDate %}
@@ -46,11 +50,7 @@
           {% endif %}
         </dt>
         <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid') %} govuk-summary-value--error {% endif %}">
-          {% if claim.claimType == "100" %}
-            {{ learner.completionDate | govukDate }}
-          {% elif claim.claimType == "60" %}
-            {{ pairlearner.completionDate | govukDate }}
-          {% endif %}
+          {{ learner.completionDate | govukDate }}
         </dd>
         {% if (((claim.status == "queried" and noteSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried") or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "not-yet-submitted" or (pairClaim.status == "queried" and notePairSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried")))  %}
           <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid') %} govuk-summary-value--error {% endif %}">
@@ -106,9 +106,15 @@
   
 {# If 1 learner added #}
 {% elif submission.learners.length == 1 %}
-    {% set learner = submission.learners[0] %}
 
-    {# if no single completion date #}
+    {% if claim.claimType == "100" %}
+      {% set learner = submission.learners[0] %}
+    {% elif claim.claimType == "60" %}
+      {% set learner = pairSubmission.learners[0] %}
+    {% endif %}
+    
+
+    {# if no evidence of completion yet added #}
     {% if not learner.evidenceOfCompletion %}
 
       {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion == "missing" %}
@@ -127,7 +133,7 @@
         </dd>        
       </div>
 
-    {# if one single completion date #}
+    {# if one single learner #}
     {% else %}
 
       <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid') %} govuk-summary-list-row--error {% endif %}">
@@ -139,11 +145,7 @@
           {% endif %}
         </dt>
         <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid') %} govuk-summary-value--error {% endif %}">
-          {% if claim.claimType == "100" %}
-            {{ learner.evidenceOfCompletion }}
-          {% elif claim.claimType == "60" %}
-            {{ pairlearner.evidenceOfCompletion }}
-          {% endif %}
+          <p><a class="govuk-link" href="/public/images/{{learner.evidenceOfCompletion}}" target="_blank">{{learner.evidenceOfCompletion}} (opens in new tab)</a></p>
         </dd>
         {% if (((claim.status == "queried" and noteSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried") or claim.status == "not-yet-submitted") and claim.claimType == "100") or (pairClaim.status != null and (pairClaim.status == "not-yet-submitted" or (pairClaim.status == "queried" and notePairSubmission.learners[0].evidenceOfCompletionReview.outcome == "queried")))  %}
           <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid') %} govuk-summary-value--error {% endif %}">

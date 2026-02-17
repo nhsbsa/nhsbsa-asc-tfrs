@@ -14681,8 +14681,8 @@
             "completionDate": "2025-11-09T23:45:29.386Z",
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "pass",
-              "note": null
+              "outcome": "queried",
+              "note": "Learner certificate date doesn't match completion date entered."
             }
           }
         ],
