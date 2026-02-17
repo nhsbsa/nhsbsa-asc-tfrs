@@ -1,4 +1,4 @@
-{% if (learnerList.id == "todo" or learnerList.id == "done" or learnerList.id == "needsaction" or learnerList.id == "actioned") %}
+{% if (learnerList.id == "todo" or learnerList.id == "done" or learnerList.id == "needsaction" or learnerList.id == "actioned") and (claim.status == "not-yet-submitted" or claim.status == "queried") %}
     {% set canChange = true %}
 {% else %}
     {% set canChange = false %}
@@ -58,20 +58,12 @@
             <dl class="govuk-summary-list">
                 {% if (sharedCompletionDate != true or claim.status != "not-yet-submitted") %}
                     {% if (not learner.completionDate) %}
-                        
-                        {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "missing" and learner.learnerID %}
-                            <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
-                            <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
-                                <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add a completion date for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</p>
-                            </div>
-                            </div>
-                        {% endif %}
 
-                        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' and learner.learnerID%} govuk-summary-list-row--error {% endif %}">
-                            <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing'and learner.learnerID%} govuk-summary-key--error {% endif %}">
+                        <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                            <dt class="govuk-summary-list__key">
                                 Completion date
                             </dt>
-                            <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate =='missing' %} govuk-summary-value--error {% endif %}">
+                            <dd class="govuk-summary-list__value">
                                 {% if (canChange) %}
                                 <a class="govuk-link govuk-link--no-visited-state" href="../completion-date-handler?learnerID={{learner.learnerID}}">
                                     Add completion date<span class="govuk-visually-hidden"> for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
@@ -83,16 +75,8 @@
                         </div>
                     {% else %}
 
-                        {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.completionDate == "invalid" %}
-                            <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
-                                <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-date-error">
-                                    <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span>  Completion date for {{learnerInfo.givenName}} {{learnerInfo.familyName}} must be on or after the start date </p>
-                                </div>
-                            </div>
-                        {% endif %}
-
-                        <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid') %} govuk-summary-list-row--error {% endif %}">
-                        <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid')%} govuk-summary-key--error {% endif %}">
+                        <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
                             {% if claim.claimType == "100" %}
                             Completion date {% if ( claim | checkIfUpdated("completionDate", learner.learnerID)) %} <strong class="govuk-tag">Edited</strong>{% endif %}
                             {% elif claim.claimType == "60" %}
@@ -100,11 +84,11 @@
                             {% endif %}
                             
                         </dt>
-                        <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid') %} govuk-summary-value--error {% endif %}">
+                        <dd class="govuk-summary-list__value">
                             {{ learner.completionDate | govukDate }}
                         </dd>
                         {% if (canChange) %}
-                            <dd class="govuk-summary-list__actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid') %} govuk-summary-value--error {% endif %}">
+                            <dd class="govuk-summary-list__actions">
                                 <a class="govuk-link govuk-link--no-visited-state" href="../completion-date-handler?learnerID={{learner.learnerID}}">
                                     Change<span class="govuk-visually-hidden"> completion date for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
                                 </a>
@@ -115,20 +99,12 @@
                 {% endif %}
                 
                 {% if (not learner.evidenceOfCompletion) %}
-                
-                    {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =="missing"and learner.learnerID%}
-                        <div class="govuk-summary-list__row govuk-summary-list-row--error--message">
-                            <div class="govuk-summary-key--error govuk-summary-key--error--inline" id="completion-evidence-error">
-                            <p class="govuk-error-message"><span class="govuk-visually-hidden">Error:</span> Add evidence of completion for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</p>
-                            </div>
-                        </div>
-                    {% endif %}
 
-                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' and learner.learnerID%} govuk-summary-list-row--error {% endif %}">
-                        <dt class="govuk-summary-list__key  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' and learner.learnerID%} govuk-summary-key--error {% endif %}">
+                    <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                        <dt class="govuk-summary-list__key">
                         Evidence of completion
                         </dt>
-                        <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.evidenceOfCompletion =='missing' %} govuk-summary-value--error {% endif %}">
+                        <dd class="govuk-summary-list__value">
                             {% if (canChange) %}
                             <a class="govuk-link govuk-link--no-visited-state" href="add-evidence?type=completion&learnerID={{learner.learnerID}}">
                                 Add evidence <span class="govuk-visually-hidden">for {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>
