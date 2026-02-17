@@ -90,13 +90,7 @@
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <span class="govuk-caption-l">
-          {% if (claim.claimType == "100") %}
-            {{ claim.claimID }}
-          {% else %}
-            Combined claim: {{ claim.claimID | removeClaimSuffix }}
-          {% endif %}
-        </span>
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
         <h1 class="govuk-heading-l">Learners ({{submission.learners | length}})</h1>
 
         {% if (sharedCompletionDate != null and claim.status == "not-yet-submitted") %}
