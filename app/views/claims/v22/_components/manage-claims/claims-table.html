@@ -38,20 +38,20 @@
                 </td>
                 {% if status.id == 'not-yet-submitted' %}
                 <td class="govuk-table__cell">{{ claim.createdDate |
-                    govukDate("truncate") }}</td>
+                    govukDate(truncate=true) }}</td>
                 {% elif status.id == 'queried' %}
                     {% set queriedDate = claim | getMostRelevantSubmission %}
                 <td class="govuk-table__cell">{{ queriedDate.processedDate |
-                    govukDate("truncate") }}</td>
+                    govukDate(truncate=true) }}</td>
                 {% elif status.id == 'submitted' %}
                 <td class="govuk-table__cell">{{ submission.submittedDate |
-                    govukDate("truncate") }}</td>
+                    govukDate(truncate=true) }}</td>
                 {% elif status.id == 'rejected' %}
                 <td class="govuk-table__cell">{{ submission.processedDate |
-                    govukDate("truncate") }}</td>
+                    govukDate(truncate=true) }}</td>
                 {% elif status.id == 'approved' %}
                 <td class="govuk-table__cell">{{ submission.processedDate |
-                    govukDate("truncate") }}</td>
+                    govukDate(truncate=true) }}</td>
                 {% endif %}
             </tr>
             {% endif %}

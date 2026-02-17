@@ -30,7 +30,7 @@
                     {{submission.learners | length }} learner{% if (submission.learners | length) >1 %}s{% endif %}
                 </td>
                 {% if (submission.processedDate)%}
-                    <td class="govuk-table__cell">{{ (submission.processedDate | govukDate("truncate"))}}</td>
+                    <td class="govuk-table__cell">{{ (submission.processedDate | govukDate(truncate=true))}}</td>
                 {% else %}
                     <td class="govuk-table__cell missing-value">-------------------</td>
                 {%endif%}
