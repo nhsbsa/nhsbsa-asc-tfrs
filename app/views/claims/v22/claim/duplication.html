@@ -1,6 +1,29 @@
 {% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 
+{% if claim.claimType == "60" %}  
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+  {% if (pairClaim and pairClaim.status == "queried") %}
+    {% set pairSubmission = pairClaim | getDraftSubmission %}
+  {% else %}
+    {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% else %}
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% endif %}
+
 {% block pageTitle %}
 Duplicate claim - Claim: {{data.id}}
 {% endblock %}
@@ -10,10 +33,29 @@ Duplicate claim - Claim: {{data.id}}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-        <h1 class="govuk-heading-l">You cannot claim for this learner and training</h1>
+        <h1 class="govuk-heading-l">You cannot make a claim for this</h1>
     </div>
     <div class="govuk-grid-column-two-thirds">
+        
+        <p class="govuk-body">You cannot claim for following training for the following learners:</p>
 
+        <h2 class="govuk-heading-m">Training</h2>
+        {% if data.changeTrainingCode != null or data.changeTrainingCode != "" %}
+            {% set training = data.changeTrainingCode | findTraining %}
+        {% else %}
+            {% set training = submission.trainingCode | findTraining %}
+        {% endif %}
+
+        <p class="govuk-body">{{training.title}}</p>
+
+
+        <h2 class="govuk-heading-m">Learners</h2>
+        <ul class="govuk-list govuk-list--bullet">
+        {% for learner in data.matchingIDs %}
+            {% set learner = learner.learnerID | findLearner(data.learners) %}
+            <li>{{learner.givenName}} {{learner.familyName}}<br>{{ learner.id }}</li>
+        {% endfor %}
+        </ul>
         <div class="govuk-warning-text">
             <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
             <strong class="govuk-warning-text__text">

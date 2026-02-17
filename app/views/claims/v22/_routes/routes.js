@@ -49,6 +49,7 @@ router.post('/add-training', function (req, res) {
     
     if (isDuplicateClaim && isDuplicateClaim.check) {
         req.session.data.matchingIDs = isDuplicateClaim.ids
+        req.session.data.changeTrainingCode = newTrainingCode
         res.redirect('claim/duplication')
     } else {
       if (!(["OMMT/T1/INT","OMMT/T2/INT"].includes(submission.trainingCode)) && (["OMMT/T1/INT","OMMT/T2/INT"].includes(newTrainingChoice.code)) ) {
