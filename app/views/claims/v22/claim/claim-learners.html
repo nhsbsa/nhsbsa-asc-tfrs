@@ -65,8 +65,11 @@
                 {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
                 Evidence of completion added for <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a>
               {% elif data.learnerConfirmation.type == "removal" %}
-                {% if claim.claimType == "100" or (claim.claimType == "60" and claim.status != "approved") %}
+                {% if (claim.claimType == "100" or claim.claimType == "60") and claim.status == "not-yet-submitted" %}
                   {{learnerInfo.givenName}} {{learnerInfo.familyName}} removed from the claim
+                {% elif (claim.claimType == "100" or claim.claimType == "60") and claim.status == "queried" %}
+                  {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
+                  <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> removed from the claim
                 {% else %}
                     {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
                     <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> removed from the 40 part of the claim
