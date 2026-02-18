@@ -955,11 +955,14 @@ function getLearnersNotInBoth(arr1, arr2) {
 }
 
 function getLearnerFieldByID(learners, learnerID, field) {
-
-  const learner = learners.find(l => 
-    l.learnerID == learnerID || l.learnerChanged == learnerID
-  );
-  return learner ? learner[field] : null;
+    if (learnerID != null) {
+        const learner = learners.find(l => 
+        l.learnerID == learnerID || l.learnerChanged == learnerID
+        );
+        return learner ? learner[field] : null;
+    } else {
+        return null
+    }
 }
 
 function getOverallCompletionOutcome(learners) {

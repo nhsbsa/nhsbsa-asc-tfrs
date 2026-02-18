@@ -535,23 +535,14 @@ router.post('/shared-completion-date', function (req, res) {
   }
 
   if (response != null) {
-    switch(response) {
-      case "yes":
-        submission.sharedCompletionDate = true
-        break;
-      case "no":
-        submission.sharedCompletionDate = false
-        break;
-    }
     
 
     if ((change == "true" && response != "yes")) {
       delete req.session.data.sharedDate
       delete req.session.data.change
+      submission.sharedCompletionDate = false
       res.redirect('claim/claim-learners')
     } else {
-      delete req.session.data.sharedDate
-      delete req.session.data.change
       res.redirect('claim/add-completion-date')
     }
 
@@ -569,6 +560,8 @@ router.post('/completion-date', function (req, res) {
   const month = req.session.data['completion-date-started-month']
   const year = req.session.data['completion-date-started-year']
   const learnerID = req.session.data.learnerID
+  const response = req.session.data.sharedDate
+  const change = req.session.data.change
   let claimID = req.session.data.id
   const completionDate = new Date(year, month - 1, day)
   delete req.session.data.learnerConfirmation
@@ -605,6 +598,18 @@ router.post('/completion-date', function (req, res) {
     } else {
       submission = getMostRelevantSubmission(claim)
     }
+    if (submission.sharedCompletionDate == null || change == "true") {
+      switch (response) {
+        case "yes":
+          submission.sharedCompletionDate = true
+          break;
+        case "no":
+          submission.sharedCompletionDate = false
+          break;
+      }
+    }
+    delete req.session.data.change
+    delete req.session.data.sharedDate
 
     for (const learner of submission.learners) {
       if (submission.sharedCompletionDate || learner.learnerID == learnerID) {
@@ -628,8 +633,10 @@ router.post('/completion-date', function (req, res) {
             type: "date",
             learner: learnerID,
           }
+        delete req.session.data.learnerID
         res.redirect('claim/claim-learners')
       } else {
+        delete req.session.data.learnerID
         res.redirect('claim/claim-details#completion')
       }
     }
@@ -1127,14 +1134,19 @@ router.get('/cancel-handler', function (req, res) {
   } else {
     submission = getMostRelevantSubmission(claim)
   }
-
-  if (req.session.data.learner == "true" && submission.learners.length > 1) {
-    delete req.session.data.learner
-    res.redirect('claim/claim-learners')
+  if (req.session.data.sharedDate != null) {
+    delete req.session.data['sharedDate'];
+    res.redirect('claim/shared-completion-date')
   } else {
-    res.redirect('claim/claim-details' + '?id=' + claimID)
+    delete req.session.data['change'];
+    delete req.session.data['sharedDate'];
+    if (req.session.data.learner == "true" && submission.learners.length > 1) {
+      delete req.session.data.learner
+      res.redirect('claim/claim-learners')
+    } else {
+      res.redirect('claim/claim-details' + '?id=' + claimID)
+    }
   }
-  
 
 });
 
