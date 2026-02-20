@@ -401,6 +401,34 @@
     "inactive": [],
     "invited": []
   }
+  },
+  {
+    "workplaceID": "D76397203",
+    "numberOfClaims": 0,
+    "name": "Prickly Care home",
+    "address": ["2 Prickly Street", "Harrogate", "HO23 6FH"],
+    "bankDetails": {
+      "nameOnAccount": "Prickly care home Ltd",
+      "sortCode": "235486",
+      "accountNumber": "84526365",
+      "buildingSocietyNumber": null
+    },
+    "validGDL": false,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Ivy",
+      "familyName": "Montgomery",
+      "email": "ivy.montgomery@prickly.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
   }
 ]
 

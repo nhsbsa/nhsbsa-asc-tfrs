@@ -25,13 +25,23 @@
         </div>
         {% endif %}
     </div>
-    <div class="govuk-grid-column-two-thirds">
-            <h1 class="govuk-heading-l">Sign the new grant determination letter</h1>
+    {% if data.org.workplaceID == "D76397203" %}
+        <div class="govuk-grid-column-two-thirds">
+                <h1 class="govuk-heading-l">Sign the new grant determination letters</h1>
 
-            <p class="govuk-body">Confirm you have read the new grant determination letter (GDL) for the year starting 1&nbsp;April&nbsp;2026 in the <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/learning-and-development-support-scheme-for-the-adult-social-care-workforce-a-guide-for-employers" target="_blank">guide for employers (opens in new tab)</a>. This sets out, on behalf of the Secretary of State for Health and Social Care, the conditions that you must meet for claims to be paid.</p>
+                <p class="govuk-body">Confirm you have read the new grant determination letters (GDL) for the years starting 1&nbsp;April&nbsp;2025 and 1&nbsp;April&nbsp;2026 in the <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/learning-and-development-support-scheme-for-the-adult-social-care-workforce-a-guide-for-employers" target="_blank">guide for employers (opens in new tab)</a>. This sets out, on behalf of the Secretary of State for Health and Social Care, the conditions that you must meet for claims to be paid.</p>
 
-            <p class="govuk-body">You must accept the conditions in the new letter before continuing. Your organisation will not be able to submit claims that were paid for in the year starting 1 April 2026 until you have signed it.</p>
-    </div>
+                <p class="govuk-body">You must accept the conditions in the new letters before continuing. Your organisation will not be able to submit claims that were paid for in the years starting 1&nbsp;April&nbsp;2025 or 1&nbsp;April&nbsp;2026 until you have signed them.</p>
+        </div>
+    {% else %}
+        <div class="govuk-grid-column-two-thirds">
+                <h1 class="govuk-heading-l">Sign the new grant determination letter</h1>
+
+                <p class="govuk-body">Confirm you have read the new grant determination letter (GDL) for the year starting 1&nbsp;April&nbsp;2026 in the <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/learning-and-development-support-scheme-for-the-adult-social-care-workforce-a-guide-for-employers" target="_blank">guide for employers (opens in new tab)</a>. This sets out, on behalf of the Secretary of State for Health and Social Care, the conditions that you must meet for claims to be paid.</p>
+
+                <p class="govuk-body">You must accept the conditions in the new letter before continuing. Your organisation will not be able to submit claims that were paid for in the year starting 1&nbsp;April&nbsp;2026 until you have signed it.</p>
+        </div>
+    {% endif %}
     <div class="govuk-grid-column-two-thirds">
         <form action="../new-declaration-confirmation" method="post" novalidate>
             <div class="govuk-button-group {% if data.declarationSubmitError %} govuk-form-group--error {% endif %}"
