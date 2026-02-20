@@ -44,7 +44,7 @@
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
                         <h1 class="govuk-fieldset__heading">
-                            Add completion date{% if (submission.sharedCompletionDate or data.sharedDate == "yes") %} for all learners{% else %} for {{learnerInfo.givenName}} {{learnerInfo.familyName}}{% endif %}
+                            When did{% if (submission.sharedCompletionDate or data.sharedDate == "yes") %} the learners{% else %} {{learnerInfo.givenName}} {{learnerInfo.familyName}}{% endif %} complete the course or qualification?
                         </h1>
                     </legend>
                     <p class="govuk-body">

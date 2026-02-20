@@ -76,10 +76,10 @@
                 {% endif %}
               {% elif data.learnerConfirmation.type == "actioned" %}
                 {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
-                <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> moved to done
+                <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> moved to edits done
               {% elif data.learnerConfirmation.type == "needsaction" %}
                 {% set tabID = learnerInfo.id | findtabID(filteredLearners) %}
-                <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> moved to needs action
+                <a class="govuk-link learner-jump-link" href="#{{learnerInfo.id}}" data-tab="{{tabID}}">{{learnerInfo.givenName}} {{learnerInfo.familyName}}</a> moved to needs editing
               {% endif %}
             </div>
 
