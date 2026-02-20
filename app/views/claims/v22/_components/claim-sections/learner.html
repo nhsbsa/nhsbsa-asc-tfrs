@@ -43,7 +43,7 @@
                         <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
                       {%endfor%}
                       {# To show removed learners #}
-                      {% if submission.removedLearners and submission.removedLearners.length > 0 %}
+                      {% if submission.removedLearners and submission.removedLearners.length > 0 and claim.status == "queried"%}
                         <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
                         <strong>Removed</strong>
                         {% for learner in (submission.removedLearners)%}
