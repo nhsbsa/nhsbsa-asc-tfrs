@@ -1,4 +1,4 @@
-<div class="govuk-button-group" style="align-items: center;">
+<div class="govuk-button-group {% if claim.claimType == "60" %}govuk-!-padding-bottom-6{% endif %}"  style="align-items: center;">
     <a class="govuk-button" href="../ready-to-declare?id={{claim.claimID}}">
         {% if (claim.status == "not-yet-submitted" or (pairClaim and pairClaim.status == "not-yet-submitted")) %}
             Confirm details
