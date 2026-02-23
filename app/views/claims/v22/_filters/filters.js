@@ -1584,7 +1584,7 @@ addFilter('getLearnersByStatus', function (learners, outcome) {
     return filtered
 })
 
-addFilter('getNote', function (learnerID, claim, pairClaim) {
+addFilter('getCompletionReview', function (learnerID, claim, pairClaim) {
     if (claim.claimType == "60" && claim.status == "approved") {
         submission = getMostRelevantSubmission(pairClaim)
     } else {
@@ -1601,7 +1601,7 @@ addFilter('getNote', function (learnerID, claim, pairClaim) {
 
     const learner = submission.learners.find(l => l.learnerID === learnerID);
     
-    return learner ? learner.evidenceOfCompletionReview.note : null;
+    return learner ? learner.evidenceOfCompletionReview : null;
 
 })
 

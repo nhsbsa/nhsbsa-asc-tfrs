@@ -3,6 +3,10 @@
 {% else %}
     {% set canChange = false %}
 {% endif %}
+
+{% set completionReview = learner.learnerID | getCompletionReview(claim, pairClaim) %}
+{% set note = completionReview.note %}
+
 <div class="govuk-summary-card" id="{{learnerInfo.id}}">
     <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
@@ -17,18 +21,18 @@
                     </li>
                 {% endif %}
                 {% if learnerList.id != "removed" %}
-                    <li class="govuk-summary-card__action">
-                        <a class="govuk-link" href="remove-learner-confirmation?learner={{learner.learnerID}}">Remove<span class="govuk-visually-hidden"> {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>{% if (claim.claimType == "60" and claim.status == "approved") %} from 40 part{% endif %}</a>
-                    </li>
+                    {% if not (learnerList.id == "needsaction" and completionReview.outcome == "fail") %}
+                        <li class="govuk-summary-card__action">
+                            <a class="govuk-link" href="remove-learner-confirmation?learner={{learner.learnerID}}">Remove<span class="govuk-visually-hidden"> {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span>{% if (claim.claimType == "60" and claim.status == "approved") %} from 40 part{% endif %}</a>
+                        </li>
+                    {% endif %}
                 {% endif %}
-                
             </ul>
 
         {% endif %}
     </div>
     {% if not (claim.claimType == "60" and claim.status != "approved") %}
             <div class="govuk-summary-card__content">
-                {% set note = learner.learnerID | getNote(claim, pairClaim) %}
                 {% if note != null %}
                     <div role="region" class="moj-alert moj-alert--information moj-alert--with-heading" aria-label="information: The finance section has moved" data-module="moj-alert">
                         <div>
@@ -37,12 +41,24 @@
                             </svg>
                         </div>
                         <div class="moj-alert__content">
-                            <p class="govuk-body"><strong>Requested edits:</strong></p>
-                            {{note}}
+                            {% if learnerList.id == "rejected" %}
+                                <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Reasons for rejection:</h3>
+                            {% elif learnerList.id == "needsaction" %}
+                                <h3 class="govuk-heading-s govuk-!-margin-bottom-0">Requested edits:</h3>
+                                {% if completionReview.outcome == "fail" %}
+                                    <p class="govuk-body">You need to remove this learner from the claim for the following reasons.</p>
+                                {% endif %}
+                            {% endif %}
+                            <p class="govuk-body">{{note}}</p>
+                            
                         </div>
                         {% if (learnerList.id == "needsaction" or learnerList.id == "actioned") %}
                             <div class="moj-alert__button-row">
-                                {% if learnerList.id == "needsaction" %}
+                                {% if learnerList.id == "needsaction" and completionReview.outcome == "fail" %}
+                                    <a href="remove-learner-confirmation?learner={{learner.learnerID}}" class="govuk-button govuk-button--secondary govuk-!-margin-0">
+                                        Remove
+                                    </a>
+                                {% elif learnerList.id == "needsaction" %}
                                     <a href="../mark-as-actioned?learnerID={{learner.learnerID}}" class="govuk-button govuk-button--secondary govuk-!-margin-0">
                                         Move to edits done
                                     </a>

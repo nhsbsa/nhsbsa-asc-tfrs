@@ -745,7 +745,7 @@
             "completionDate": "2025-10-11T14:24:08.538Z",
             "evidenceOfCompletion": "certificate-313.pdf",
             "evidenceOfCompletionReview": {
-              "outcome": "queried",
+              "outcome": "fail",
               "note": "The learner's name on the certificate does not match the learner's name on the claim details."
             }
           },
