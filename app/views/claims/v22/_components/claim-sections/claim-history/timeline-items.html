@@ -11,10 +11,10 @@
     {% if "edits requested" in (timelineData.processStep.title | lower) or "rejected" in (timelineData.processStep.title | lower) %}
     <div class="moj-timeline__description">
         {% if "edits requested" in (timelineData.processStep.title | lower) %}
-            <a class="govuk-link" href="claim-history-note?loopCount={{loopCount}}&reasonType=queried">View edits requested</a>
+            <a class="govuk-link" href="claim-history-note?loopCount={{loopCount}}&reasonType=queried&type={{type}}">View edits requested</a>
         {% endif %}
         {% if "rejected" in (timelineData.processStep.title | lower) %}
-            <a class="govuk-link" href="claim-history-note?loopCount={{loopCount}}&reasonType=rejected">View reasons for rejection</a>
+            <a class="govuk-link" href="claim-history-note?loopCount={{loopCount}}&reasonType=rejected&type={{type}}">View reasons for rejection</a>
         {% endif %}
     </div>
     {% endif %}

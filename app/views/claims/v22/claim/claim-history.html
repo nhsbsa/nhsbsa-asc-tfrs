@@ -35,8 +35,8 @@
       {% if pairClaim != null %}
         {% for submission in pairClaim.submissions | orderByMostRecent %}
               {% set type = pairClaim.claimType %}
+              {% set loopCount = loop.index0 %}
               {% include "../_components/claim-sections/claim-history/timeline-items.html" %}
-              
         {% endfor %}
       {% endif %}
 
