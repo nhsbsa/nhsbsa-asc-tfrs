@@ -88,7 +88,9 @@ addFilter('errorSummary', function (claim, submitError) {
     if (submitError.learner == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#learner-error">Add a learner</a></li>')
     }
-    if (submitError.paymentDate == "missing") {
+    if (submitError.paymentDate == "missing" && claim.isPaymentPlan && claim.status == "approved") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-date-error">Add a 40% payment date</a></li>')
+    } else if (submitError.paymentDate == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-date-error">Add a payment date</a></li>')
     }
     if (submitError.evidenceOfPayment == "missing") {
@@ -98,7 +100,7 @@ addFilter('errorSummary', function (claim, submitError) {
         if (submission.learners.length > 1) {
             errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Add a completion date for all learners</a></li>')
         } else {
-            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Add a completion date for</a></li>')
+            errorSummaryStr = errorSummaryStr.concat('<li><a href="#completion-date-error">Add a completion date</a></li>')
         }
     }
     if (submitError.evidenceOfCompletion == "missing") {

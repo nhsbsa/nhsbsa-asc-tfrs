@@ -14561,8 +14561,8 @@
             "slotID": 1,
             "learnerID": "EB 06 4F 17 Y",
             "learnerChanged": null,
-            "completionDate": "2025-06-19T22:34:04.251Z",
-            "evidenceOfCompletion": "certificate-212.pdf",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null
@@ -15641,11 +15641,8 @@
         "processedDate": null,
         "trainingCode": "601/2324/2",
         "startDate": "2025-11-18T04:41:26.035Z",
-        "costDate": "2025-09-02T05:21:40.520Z",
-        "evidenceOfPayment": [
-          "receipt-212.pdf",
-          "invoice-212.pdf"
-        ],
+        "costDate": null,
+        "evidenceOfPayment": [],
         "evidenceOfPaymentReview": {
           "outcome": null,
           "note": null,
@@ -15658,8 +15655,8 @@
             "slotID": 1,
             "learnerID": "LM 89 7F 48 J",
             "learnerChanged": null,
-            "completionDate": "2025-12-28T22:55:21.293Z",
-            "evidenceOfCompletion": "certificate-212.pdf",
+            "completionDate": null,
+            "evidenceOfCompletion": null,
             "evidenceOfCompletionReview": {
               "outcome": null,
               "note": null

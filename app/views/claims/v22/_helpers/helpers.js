@@ -738,11 +738,8 @@ function checkChange(claim) {
     let isChange = false
     if (
         (lastQueried.trainingCode !== draftClaim.trainingCode) ||
-        // (lastQueried.learnerID !== draftClaim.learnerID) ||
         (lastQueried.startDate !== draftClaim.startDate) ||
         (lastQueried.costDate !== draftClaim.costDate) ||
-        // (lastQueried.completionDate !== draftClaim.completionDate) ||
-        // (lastQueried.evidenceOfCompletion !== draftClaim.evidenceOfCompletion) ||
         (lastQueried.evidenceOfPayment.length !== draftClaim.evidenceOfPayment.length)
     ) {
         isChange = true
@@ -755,9 +752,32 @@ function checkChange(claim) {
                 break;
             }
         }
+
+        for (const learner of lastQueried.learners) {
+            const match = findLearnerBySlot(draftClaim.learners, learner.slotID)
+            if (match != null) {
+                if (learner.learnerID !== match.learnerID || 
+                    learner.completionDate !== match.completionDate ||
+                    learner.evidenceOfCompletion !== match.evidenceOfCompletion) {
+                        isChange  = true
+                        break;
+                    }
+            } else {
+                isChange  = true
+                break;
+            }
+        }
     }
 
     return isChange
+}
+
+function findLearnerBySlot(list, id) {
+    // Use .find() to locate the first object with a matching slotID
+    const match = list.find(learner => learner.slotID === id);
+
+    // Return the match, or null if find() returned undefined
+    return match || null;
 }
 
 function newClaim(req, input, type) {
