@@ -32,7 +32,7 @@ function checkClaim(claim) {
     }  else {
         result.paymentDate = "valid"
     }
-     console.log(submission.evidenceOfPayment)
+
     if (submission.evidenceOfPayment != null && submission.evidenceOfPayment.length == 0  && ((claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan == true))) {
         result.evidenceOfPayment = "missing"
     } else {
@@ -40,25 +40,31 @@ function checkClaim(claim) {
     }
 
     result.evidenceOfCompletion = "valid"
-    for (const learner of submission.learners) {
-        if (learner.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100")) {
-            result.evidenceOfCompletion = "missing"
+    if (submission.learners.length > 0) {
+        for (const learner of submission.learners) {
+            if (learner.evidenceOfCompletion == null && (claim.claimType == "40" || claim.claimType == "100")) {
+                result.evidenceOfCompletion = "missing"
+            }
         }
     }
 
     result.completionDate = "valid"
-    for (const learner of submission.learners) {
-        if (learner.completionDate == null && (claim.claimType == "40" || claim.claimType == "100")) {
-            result.completionDate = "missing"
+    if (submission.learners.length > 0) {
+        for (const learner of submission.learners) {
+            if (learner.completionDate == null && (claim.claimType == "40" || claim.claimType == "100")) {
+                result.completionDate = "missing"
+            }
         }
     }
 
-    const startDate = new Date(submission.startDate)
-    const completionDate = new Date(submission.learners[0].completionDate)
-    if ((result.completionDate == "valid") && result.startDate == "valid") {
-        if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "40")) {
-            result.startDate = "invalid"
-            result.completionDate = "invalid"
+    if (submission.learners.length > 0) {
+        const startDate = new Date(submission.startDate)
+        const completionDate = new Date(submission.learners[0].completionDate)
+        if ((result.completionDate == "valid") && result.startDate == "valid") {
+            if ((startDate.getTime() > completionDate.getTime()) && (claim.claimType == "40")) {
+                result.startDate = "invalid"
+                result.completionDate = "invalid"
+            }
         }
     }
     
