@@ -757,9 +757,9 @@ function checkChange(claim) {
             const match = findLearnerBySlot(draftClaim.learners, learner.slotID)
             if (match != null) {
                 if (learner.learnerID !== match.learnerID || 
-                    learner.completionDate !== match.completionDate ||
-                    learner.evidenceOfCompletion !== match.evidenceOfCompletion) {
-                        isChange  = true
+                    (learner.completionDate !== match.completionDate && claim.claimType != "60") ||
+                    (learner.evidenceOfCompletion !== match.evidenceOfCompletion && claim.claimType != "60")) {
+                        isChange = true
                         break;
                     }
             } else {
