@@ -612,7 +612,7 @@ router.post('/completion-date', function (req, res) {
     delete req.session.data.sharedDate
 
     for (const learner of submission.learners) {
-      if (submission.sharedCompletionDate || learner.learnerID == learnerID) {
+      if ((submission.sharedCompletionDate && claim.status == "not-yet-submitted") || learner.learnerID == learnerID) {
           learner.completionDate = completionDate
       }
     }
@@ -620,7 +620,7 @@ router.post('/completion-date', function (req, res) {
     delete req.session.data['completion-date-started-day'];
     delete req.session.data['completion-date-started-month'];
     delete req.session.data['completion-date-started-year'];
-    if (submission.sharedCompletionDate ) {
+    if (submission.sharedCompletionDate && claim.status == "not-yet-submitted") {
       delete req.session.data.learnerID
       req.session.data.learnerConfirmation = {
         type: "date",
