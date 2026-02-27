@@ -386,7 +386,7 @@ function checkClaimProcess(claim, section, paymentResponse, paymentReimbursement
         
       } else if (paymentResponse == "queried" && (paymentQueriedNote.length > 1500)) {
 
-        errorParamaters += "&paymentQueryNoteTooLong=true";
+        errorParamaters += "&paymentQueriedNoteTooLong=true";
         
       }
       

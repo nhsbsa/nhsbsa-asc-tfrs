@@ -313,7 +313,7 @@ router.post('/claim-payment-handler', function (req, res) {
   delete req.session.data.navigateTo
   delete req.session.data.completionQueriedNoteTooLong
   delete req.session.data.completionRejectNoteTooLong
-  delete req.session.data.paymentQueryNoteTooLong
+  delete req.session.data.paymentQueriedNoteTooLong
   delete req.session.data.paymentRejectNoteTooLong
 
   claimID = req.session.data.id
