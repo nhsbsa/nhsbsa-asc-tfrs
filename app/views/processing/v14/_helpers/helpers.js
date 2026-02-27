@@ -356,31 +356,53 @@ function checkClaimProcess(claim, section, paymentResponse, paymentReimbursement
     const validAmount = validNumberCheck(paymentReimbursementAmount)
 
     if (section == "payment") {
+
       if (paymentResponse == null) {
+
         errorParamaters += "&paymentResponseIncomplete=true";
-        } else if (paymentResponse == "approve") {
-          if ((paymentReimbursementAmount == null || paymentReimbursementAmount == "") && claim.claimType != "40"){
-            errorParamaters += "&paymentReimbursementAmountIncomplete=true";
-          } else if (paymentResponse == "approve" && (!validAmount) && claim.claimType != "40") {
-            errorParamaters += "&paymentReimbursementAmountInvalid=true";
-          }
-          if (claim.claimType == "60" && paidInFullResponse == null) {
-            errorParamaters += "&paidInFullResponseIncomplete=true";
-          }
-        } else if (paymentResponse == "reject" && (paymentRejectNote == null || paymentRejectNote == "")) {
-        errorParamaters += "&paymentRejectNoteIncomplete=true";
-        } else if (paymentResponse == "queried" && (paymentQueriedNote == null || paymentQueriedNote == "")) {
-        errorParamaters += "&paymentQueriedNoteIncomplete=true";
+
+      } else if (paymentResponse == "approve") {
+
+        if ((paymentReimbursementAmount == null || paymentReimbursementAmount == "") && claim.claimType != "40"){
+          errorParamaters += "&paymentReimbursementAmountIncomplete=true";
+        } else if (paymentResponse == "approve" && (!validAmount) && claim.claimType != "40") {
+          errorParamaters += "&paymentReimbursementAmountInvalid=true";
         }
+        if (claim.claimType == "60" && paidInFullResponse == null) {
+          errorParamaters += "&paidInFullResponseIncomplete=true";
+        }
+        
+      } else if (paymentResponse == "reject" && (paymentRejectNote == null || paymentRejectNote == "")) {
+
+        errorParamaters += "&paymentRejectNoteIncomplete=true";
+
+      } else if (paymentResponse == "reject" && (paymentRejectNote.length > 1500)) {
+
+        errorParamaters += "&paymentRejectNoteTooLong=true";
+
+      } else if (paymentResponse == "queried" && (paymentQueriedNote == null || paymentQueriedNote == "")) {
+
+        errorParamaters += "&paymentQueriedNoteIncomplete=true";
+        
+      } else if (paymentResponse == "queried" && (paymentQueriedNote.length > 1500)) {
+
+        errorParamaters += "&paymentQueryNoteTooLong=true";
+        
+      }
+      
     }
 
     if (section == "completion") {
         if (completionResponse == null) {
-        errorParamaters += "&completionResponseIncomplete=true";
+          errorParamaters += "&completionResponseIncomplete=true";
         } else if (completionResponse == "reject" && (completionRejectNote == null || completionRejectNote == "")) {
-        errorParamaters += "&completionRejectNoteIncomplete=true";
+          errorParamaters += "&completionRejectNoteIncomplete=true";
+        } else if (completionResponse == "reject" && (completionRejectNote.length > 1500)) {
+          errorParamaters += "&completionRejectNoteTooLong=true";
         } else if (completionResponse == "queried" && (completionQueriedNote == null || completionQueriedNote == "")) {
-        errorParamaters += "&completionQueriedNoteIncomplete=true";
+          errorParamaters += "&completionQueriedNoteIncomplete=true";
+        } else if (completionResponse == "queried" && (completionQueriedNote.length > 1500)) {
+          errorParamaters += "&completionQueriedNoteTooLong=true";
         }
     }
 

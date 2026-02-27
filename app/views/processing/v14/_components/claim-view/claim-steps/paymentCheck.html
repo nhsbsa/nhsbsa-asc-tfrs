@@ -112,7 +112,7 @@
     {% endif %}
 
     <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-payment-queried" data-maxlength="1500">
-        <div class="govuk-form-group govuk-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-form-group--error{% endif %}" 
+        <div class="govuk-form-group govuk-character-count {% if data.paymentQueriedNoteIncomplete or data.paymentQueryNoteTooLong %}govuk-form-group--error{% endif %}" 
         data-module="govuk-character-count" data-maxlength="1500">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                 What action does the organisation need to take?
@@ -121,11 +121,16 @@
                 This note tells the submitter what edits they need to make before they resubmit this claim
             </div>
             {% if data.paymentQueriedNoteIncomplete %}
-            <p id="payment-queried-note-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span>Enter action required for payment evidence 
-            </p>
+                <p id="payment-queried-note-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Enter action required for payment evidence 
+                </p>
             {% endif %}
-            <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete %}govuk-textarea--error{% endif %}" 
+            {% if data.paymentQueryNoteTooLong %}
+                <p id="payment-queried-note-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Action note must be 1500 characters or less
+                </p>
+            {% endif %}
+            <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete or paymentQueryNoteTooLong %}govuk-textarea--error{% endif %}" 
             id="paymentQueriedNote" name="paymentQueriedNote" rows="21" 
             aria-describedby="paymentQueriedNote-info paymentQueriedNote-hint">{% if submission.evidenceOfPaymentReview.outcome=='queried' %}{{ data.paymentQueriedNote or submission.evidenceOfPaymentReview.note or '' }}{% else %}{{ data.paymentQueriedNote or '' }}{% endif %}</textarea>
             <div id="paymentQueriedNote-info" class="govuk-hint govuk-character-count__message">
@@ -135,7 +140,7 @@
     </div>
 
     <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-payment-reject">
-        <div class="govuk-form-group govuk-character-count {% if data.paymentRejectNoteIncomplete %}govuk-form-group--error{% endif %}" 
+        <div class="govuk-form-group govuk-character-count {% if data.paymentRejectNoteIncomplete or data.paymentRejectNoteTooLong %}govuk-form-group--error{% endif %}" 
             data-module="govuk-character-count" data-maxlength="1500">
              <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                 Why has this claim been rejected?
@@ -148,8 +153,13 @@
                     <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for payment evidence 
                 </p>
             {% endif %}
+            {% if data.paymentRejectNoteTooLong %}
+                <p id="payment-queried-note-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Rejection note must be 1500 characters or less
+                </p>
+            {% endif %}
             <textarea
-                class="govuk-textarea govuk-js-character-count {% if data.paymentRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
+                class="govuk-textarea govuk-js-character-count {% if data.paymentRejectNoteIncomplete or data.paymentRejectNoteTooLong%}govuk-textarea--error{% endif %}"
                 id="paymentRejectNote" name="paymentRejectNote" rows="21"
                 aria-describedby="paymentRejectNote-info paymentRejectNote-hint">{% if submission.evidenceOfPaymentReview.outcome=='fail' %}{{ data.paymentRejectNote or submission.evidenceOfPaymentReview.note or '' }}{% else %}{{ data.paymentRejectNote or '' }}{% endif %}</textarea>
             <div id="paymentRejectNote-info" class="govuk-hint govuk-character-count__message">

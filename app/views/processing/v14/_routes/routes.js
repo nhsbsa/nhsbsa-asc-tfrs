@@ -311,6 +311,10 @@ router.post('/claim-payment-handler', function (req, res) {
   delete req.session.data.paidInFullResponseIncomplete
   delete req.session.data.checkListError
   delete req.session.data.navigateTo
+  delete req.session.data.completionQueriedNoteTooLong
+  delete req.session.data.completionRejectNoteTooLong
+  delete req.session.data.paymentQueryNoteTooLong
+  delete req.session.data.paymentRejectNoteTooLong
 
   claimID = req.session.data.id
   const paymentResponse = req.session.data.payment
@@ -404,6 +408,10 @@ router.post('/claim-completion-handler', function (req, res) {
   delete req.session.data.completionRejectNoteIncomplete
   delete req.session.data.completionQueriedNoteIncomplete
   delete req.session.data.checkListError
+  delete req.session.data.completionQueriedNoteTooLong
+  delete req.session.data.completionRejectNoteTooLong
+  delete req.session.data.paymentQueryNoteTooLong
+  delete req.session.data.paymentRejectNoteTooLong
 
   claimID = req.session.data.id
   const completionResponse = req.session.data.completion

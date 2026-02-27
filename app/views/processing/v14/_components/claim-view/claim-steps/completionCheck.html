@@ -48,7 +48,7 @@
     </div>
 
     <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-queried-notes">
-        <div class="govuk-form-group govuk-character-count {% if data.completionQueriedNoteIncomplete %}govuk-form-group--error {% endif %}"
+        <div class="govuk-form-group govuk-character-count {% if data.completionQueriedNoteIncomplete or data.completionQueriedNoteTooLong %}govuk-form-group--error {% endif %}"
             data-module="govuk-character-count" data-maxlength="1500">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                 What action does the organisation need to take?
@@ -61,8 +61,13 @@
                 <span class="govuk-visually-hidden">Error:</span> Enter action required for completion evidence
             </p>
             {% endif %}
+            {% if data.completionQueriedNoteTooLong %}
+                <p id="payment-queried-note-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Action note must be 1500 characters or less
+                </p>
+            {% endif %}
             <textarea
-                class="govuk-textarea govuk-js-character-count {% if data.completionQueriedNoteIncomplete %}govuk-textarea--error{% endif %}"
+                class="govuk-textarea govuk-js-character-count {% if data.completionQueriedNoteIncomplete or data.completionQueriedNoteTooLong %}govuk-textarea--error{% endif %}"
                 id="completionQueriedNote" name="completionQueriedNote" rows="21"
                 aria-describedby="completionQueriedNote-info completionQueriedNote-hint">{% if learnerClaimData.evidenceOfCompletionReview.outcome=='queried' %}{{ data.completionQueriedNote or learnerClaimData.evidenceOfCompletionReview.note or '' }}{% else %}{{ data.completionQueriedNote or '' }}{% endif %}</textarea>
             <div id="completionQueriedNote-info" class="govuk-hint govuk-character-count__message">
@@ -72,7 +77,7 @@
     </div>
 
     <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-reject-notes">
-        <div class="govuk-form-group govuk-character-count {% if data.completionRejectNoteIncomplete %}govuk-form-group--error {% endif %}"
+        <div class="govuk-form-group govuk-character-count {% if data.completionRejectNoteIncomplete or data.completionRejectNoteTooLong %}govuk-form-group--error {% endif %}"
             data-module="govuk-character-count" data-maxlength="1500">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                 Why has this learner been rejected?
@@ -81,12 +86,17 @@
                 This note tells the organisation why this learner needs to be removed from this claim
             </div>
             {% if data.completionRejectNoteIncomplete %}
-            <p id="completion-reject-note-error" class="govuk-error-message">
-                <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for completion evidence
-            </p>
+                <p id="completion-reject-note-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for completion evidence
+                </p>
+            {% endif %}
+            {% if data.completionRejectNoteTooLong %}
+                <p id="payment-queried-note-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Rejection note must be 1500 characters or less
+                </p>
             {% endif %}
             <textarea
-                class="govuk-textarea govuk-js-character-count {% if data.completionRejectNoteIncomplete %}govuk-textarea--error{% endif %}"
+                class="govuk-textarea govuk-js-character-count {% if data.completionRejectNoteIncomplete or data.completionRejectNoteTooLong %}govuk-textarea--error{% endif %}"
                 id="completionRejectNote" name="completionRejectNote" rows="21"
                 aria-describedby="completionRejectNote-info completionRejectNote-hint">{% if learnerClaimData.evidenceOfCompletionReview.outcome=='fail' %}{{ data.completionRejectNote or learnerClaimData.evidenceOfCompletionReview.note or '' }}{% else %}{{ data.completionRejectNote or '' }}{% endif %}</textarea>
             <div id="completionRejectNote-info" class="govuk-hint govuk-character-count__message">
