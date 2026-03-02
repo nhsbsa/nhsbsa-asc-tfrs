@@ -43,7 +43,7 @@
     </div>
     <div class="govuk-grid-column-two-thirds">
         <form action="../declaration-confirmation" method="post" novalidate>
-            <div class="govuk-button-group {% if data.declarationSubmitError %} govuk-form-group--error {% endif %}"
+            <div class="govuk-form-group {% if data.declarationSubmitError %} govuk-form-group--error {% endif %}"
                 id="declare-checkbox">
                 <fieldset class="govuk-fieldset" aria-describedby="{% if data.declarationSubmitError %} declare-error {% endif %}">
                     {% if data.declarationSubmitError %}
