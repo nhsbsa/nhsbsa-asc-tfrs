@@ -125,12 +125,12 @@
                     <span class="govuk-visually-hidden">Error:</span>Enter action required for payment evidence 
                 </p>
             {% endif %}
-            {% if data.paymentQueryNoteTooLong %}
+            {% if data.paymentQueriedNoteTooLong %}
                 <p id="payment-queried-note-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span>Action note must be 1500 characters or less
                 </p>
             {% endif %}
-            <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete or paymentQueriedNoteTooLong %}govuk-textarea--error{% endif %}" 
+            <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete or data.paymentQueriedNoteTooLong %}govuk-textarea--error{% endif %}" 
             id="paymentQueriedNote" name="paymentQueriedNote" rows="21" 
             aria-describedby="paymentQueriedNote-info paymentQueriedNote-hint">{% if submission.evidenceOfPaymentReview.outcome=='queried' %}{{ data.paymentQueriedNote or submission.evidenceOfPaymentReview.note or '' }}{% else %}{{ data.paymentQueriedNote or '' }}{% endif %}</textarea>
             <div id="paymentQueriedNote-info" class="govuk-hint govuk-character-count__message">
@@ -154,7 +154,7 @@
                 </p>
             {% endif %}
             {% if data.paymentRejectNoteTooLong %}
-                <p id="payment-queried-note-error" class="govuk-error-message">
+                <p id="payment-reject-note-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span>Rejection note must be 1500 characters or less
                 </p>
             {% endif %}
