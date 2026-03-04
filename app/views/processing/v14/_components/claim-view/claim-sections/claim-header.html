@@ -35,7 +35,7 @@
         </div>
         {% endif %}
 
-        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentRejectNoteIncomplete or data.completionResponseIncomplete or data.completionRejectNoteIncomplete or data.completionQueriedNoteIncomplete or data.paymentQueriedNoteIncomplete or data.paidInFullResponseIncomplete %}
+        {% if data.paymentResponseIncomplete or data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid or data.paymentRejectNoteIncomplete or data.paymentRejectNoteTooLong or data.completionResponseIncomplete or data.completionRejectNoteIncomplete or data.completionRejectNoteTooLong or data.completionQueriedNoteIncomplete or data.completionQueriedNoteTooLong or data.paymentQueriedNoteIncomplete or data.paymentQueriedNoteTooLong  or data.paidInFullResponseIncomplete %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
             <div role="alert">
                 <h2 class="govuk-error-summary__title">
@@ -66,16 +66,25 @@
                                 </li>
                             {% endif %}
 
-
                         {% if data.paymentRejectNoteIncomplete %}
                             <li>
                                 <a href="#payment-reject-note-error">Enter rejection reasons for payment evidence </a>
+                            </li>
+                        {% endif %}
+                        {% if data.paymentRejectNoteTooLong %}
+                            <li>
+                                <a href="#payment-reject-note-error">Rejection note must be 1500 characters or less</a>
                             </li>
                         {% endif %}
 
                         {% if data.paymentQueriedNoteIncomplete %}
                             <li>
                                 <a href="#payment-queried-note-error">Enter action required for payment evidence </a>
+                            </li>
+                        {% endif %}
+                        {% if data.paymentQueriedNoteTooLong %}
+                            <li>
+                                <a href="#payment-queried-note-error">Action note must be 1500 characters or less</a>
                             </li>
                         {% endif %}
 
@@ -90,10 +99,20 @@
                                 <a href="#completion-reject-note-error">Enter rejection reasons for completion evidence</a>
                             </li>
                         {% endif %}
+                        {% if data.completionRejectNoteTooLong %}
+                            <li>
+                                <a href="#payment-reject-note-error">Rejection note must be 1500 characters or less</a>
+                            </li>
+                        {% endif %}
 
                         {% if data.completionQueriedNoteIncomplete %}
                             <li>
                                 <a href="#completion-queried-note-error">Enter action required for completion evidence</a>
+                            </li>
+                        {% endif %}
+                        {% if data.completionQueriedNoteTooLong %}
+                            <li>
+                                <a href="#completion-queried-note-error">Action note must be 1500 characters or less</a>
                             </li>
                         {% endif %}
                     </ul>

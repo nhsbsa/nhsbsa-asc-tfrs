@@ -75,11 +75,11 @@
       }} {{ claim.learner.familyName }}{% endif %}.
     </p>
     <p class="govuk-body">
-      You may upload up to 4 files. These can be in PDF, JPG, JPEG or PNG format.
+      You may upload up to 10 files. These can be in PDF, JPG, JPEG or PNG format.
     </p>
 
     <p class="govuk-body">{{evidence.length}} {% if evidence.length == 1 %}file{% else
-      %}files{% endif %} uploaded. {% if evidence.length == 4 %} If you want to upload another file,
+      %}files{% endif %} uploaded. {% if evidence.length == 10 %} If you want to upload another file,
       first delete one of your uploads. {% endif %}</p>
 
     <div class="govuk-form-group">
@@ -102,7 +102,7 @@
       </dl>
     </div>
 
-    {% if evidence.length != 4 %}
+    {% if evidence.length != 10 %}
     <form action="../evidence-add-another-handler?type={{data.type}}" method="post" novalidate>
       <div class="govuk-form-group {% if data.missingOption %} govuk-form-group--error {% endif %}">
         <fieldset class="govuk-fieldset">
