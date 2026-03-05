@@ -931,6 +931,7 @@ addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, loca
 
                 if (formattedfullName.includes(formattedLearner) || formattedID === formattedLearner) {
                     learnerCheck = true;
+                    claim.matchedLearner = learnerDetails
                     break; // stop once a match is found
                 }
             }

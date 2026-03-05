@@ -192,6 +192,8 @@ router.post('/advanced-search-handler', function (req, res) {
     res.redirect('claim/advanced-search?fromSearchResults=true#searchResults');
   } else {
     res.redirect('claim/advanced-search?' + errorQuery)
+    delete req.session.data['training'];
+    delete req.session.data['learner'];
   }
 });
 
