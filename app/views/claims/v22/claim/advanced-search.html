@@ -121,11 +121,11 @@
     <table class="govuk-table" data-module="moj-sortable-table">
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
-          <th class="govuk-table__header" scope="col" width="20%" aria-sort="none">Claim reference</th>
-          <th class="govuk-table__header" scope="col" width="3%" aria-sort="none">Type</th>
-          <th class="govuk-table__header" scope="col" width="26%" aria-sort="none">Training</th>
-          <th class="govuk-table__header" scope="col" width="22%" aria-sort="none">Learner</th>
-          <th class="govuk-table__header" scope="col" width="18%" aria-sort="descending">Status</th>
+          <th class="govuk-table__header" scope="col" width="20%">Claim reference</th>
+          <th class="govuk-table__header" scope="col" width="3%">Type</th>
+          <th class="govuk-table__header" scope="col" width="26%">Training</th>
+          <th class="govuk-table__header" scope="col" width="22%">Learners</th>
+          <th class="govuk-table__header" scope="col" width="18%">Status</th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
@@ -139,7 +139,7 @@
                 href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
             <td class="govuk-table__cell">{{ claim.claimType | typeTag }}</td>
             <td class="govuk-table__cell">{{ training.title }}</td>
-            <td class="govuk-table__cell">{{ learner.givenName}} {{ learner.familyName }}</td>
+            <td class="govuk-table__cell">{{ data['learner'] }}</td>
             <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
               statusTag(data.statuses) }}</td>
           </tr>
