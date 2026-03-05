@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome} = require('../_helpers/helpers.js');
+const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode} = require('../_helpers/helpers.js');
 
 router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
 router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
@@ -287,7 +287,7 @@ if (claim.status == "inProgress" && (!navigateTo || !fromProcessing)) {
 }
 else {
   req.session.data.claimScreen = "inProgress"
-  if (claim.claimType == "100" || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan) || (isInternalOMMT(submission.trainingCode))) {
+  if ((claim.claimType == "100" && !isInternalOMMT(submission.trainingCode)) || claim.claimType == "60" || (claim.claimType == "40" && claim.isPaymentPlan) ) {
     req.session.data.claimStep = "payment"
     location = "tracker-payment"
   } else {
@@ -311,6 +311,13 @@ router.post('/claim-payment-handler', function (req, res) {
   delete req.session.data.paidInFullResponseIncomplete
   delete req.session.data.checkListError
   delete req.session.data.navigateTo
+  delete req.session.data.completionQueriedNoteTooLong
+  delete req.session.data.completionRejectNoteTooLong
+  delete req.session.data.paymentQueriedNoteTooLong
+  delete req.session.data.paymentRejectNoteTooLong
+  delete req.session.data.completionResponseIncomplete
+  delete req.session.data.completionRejectNoteIncomplete
+  delete req.session.data.completionQueriedNoteIncomplete
 
   claimID = req.session.data.id
   const paymentResponse = req.session.data.payment
@@ -404,6 +411,17 @@ router.post('/claim-completion-handler', function (req, res) {
   delete req.session.data.completionRejectNoteIncomplete
   delete req.session.data.completionQueriedNoteIncomplete
   delete req.session.data.checkListError
+  delete req.session.data.completionQueriedNoteTooLong
+  delete req.session.data.completionRejectNoteTooLong
+  delete req.session.data.paymentQueryNoteTooLong
+  delete req.session.data.paymentRejectNoteTooLong
+  delete req.session.data.paymentResponseIncomplete
+  delete req.session.data.paymentReimbursementAmountIncomplete
+  delete req.session.data.paymentReimbursementAmountInvalid
+  delete req.session.data.paymentRejectNoteIncomplete
+  delete req.session.data.paymentQueriedNoteIncomplete
+  delete req.session.data.paidInFullResponseIncomplete
+  delete req.session.data.navigateTo
 
   claimID = req.session.data.id
   const completionResponse = req.session.data.completion
@@ -827,45 +845,43 @@ router.post('/signatory-change-handler', function (req, res) {
   }
 });
 
-router.get('/showPaymentNote', function (req, res) {
+router.get('/showClaimPaymentNote', function (req, res) {
   req.session.data['showNote'] = true
   let subCount = req.session.data['count']
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
       res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
-      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
 
-router.get('/showLearnerNote', function (req, res) {
-  req.session.data['showLearnerNote'] = true
-  let subCount = req.session.data['count']
-  var claimID = req.session.data.id
-  for (const c of req.session.data.claims ) {
-    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
-      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
-      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
-    }
-  }
-});
-
-router.get('/hidePaymentNote', function (req, res) {
+router.get('/hideClaimPaymentNote', function (req, res) {
   req.session.data['showNote'] = null
+  req.session.data['type'] = null
   req.session.data['submissionDate'] = null
   req.session.data['submittedDate'] = null
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
       res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
-      res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
 
-router.get('/hideLearnerNote', function (req, res) {
-  req.session.data['showLearnerNote'] = null
+router.get('/showProcessorLearnerNote', function (req, res) {
+  req.session.data['showProcessorLearnerNote'] = true
+  let subCount = req.session.data['count']
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
+      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
+    }
+  }
+});
+
+router.get('/hideProcessorLearnerNote', function (req, res) {
+  req.session.data['showProcessorLearnerNote'] = null
   req.session.data['submissionDate'] = null
   req.session.data['submittedDate'] = null
   var claimID = req.session.data.id
@@ -877,13 +893,11 @@ router.get('/hideLearnerNote', function (req, res) {
   }
   req.session.data.claimScreen = "learnerPreviousSubmissions"
   res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
-  res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
 });
 
 router.get('/applySubmissionsFilterProcessorv14', function (req, res) {
   var claimID = req.session.data.id
-  var filter = req.session.data.sort
-  res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
+  var filter = req.session.data.filter
   res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
 })
 

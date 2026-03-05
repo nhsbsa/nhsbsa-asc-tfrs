@@ -26,9 +26,9 @@
  {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' and ((is40Part and pairClaim.claimType == "40") or (is40Part == false and pairClaim.claimType != "40"))%} govuk-summary-list-row--error {% endif %}">
     <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and data.submitError.paymentDate =='inFuture' and ((is40Part and pairClaim.claimType == "40") or (is40Part == false and pairClaim.claimType != "40"))%} govuk-summary-key--error {% endif %}">
       {% if claim.claimType == "100" or is40Part != true%}
-        {% if claim.isPaymentPlan == true %}60% p{% else %}P{% endif %}ayment date {% if ( claim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+        {% if claim.isPaymentPlan == true %}60% p{% else %}P{% endif %}ayment date {% if ( claim | checkIfUpdated("costDate")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
       {% else %}
-        {% if claim.isPaymentPlan == true %}40% p{% else %}P{% endif%}ayment date {% if ( pairClaim | checkIfUpdated("costDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+        {% if claim.isPaymentPlan == true %}40% p{% else %}P{% endif%}ayment date {% if ( pairClaim | checkIfUpdated("costDate")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
       {% endif %}
     </dt>
     
@@ -69,9 +69,9 @@
   <div class="govuk-summary-list__row {% if (is40Part != true and claim.claimType == "60" and (claim.status == "approved" or claim.status == "rejected" or claim.status == "submitted"))%}govuk-summary-list__row--no-actions{% endif %}">
     <dt class="govuk-summary-list__key">
       {% if claim.claimType == "100" or is40Part != true %}
-        Evidence of payment </br>{% if ( claim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+        Evidence of payment </br>{% if ( claim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
       {% else %}
-        Evidence of payment </br>{% if ( pairClaim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+        Evidence of payment </br>{% if ( pairClaim | checkIfUpdated("evidencePayment")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
       {% endif %}
     </dt>
     <dd class="govuk-summary-list__value">

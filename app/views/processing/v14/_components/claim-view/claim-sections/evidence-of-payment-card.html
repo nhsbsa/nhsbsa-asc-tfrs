@@ -54,6 +54,7 @@
                     {% endif %}
                 </dd>
             </div>
+            {% if submission.evidenceOfPaymentReview.outcome == "pass"%}
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Cost per learner
@@ -62,6 +63,7 @@
                     {{submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}} </br>
                 </dd>
             </div>
+            {% endif %}
         </dl>
         {% endif %}
         

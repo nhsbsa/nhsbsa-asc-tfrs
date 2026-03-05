@@ -7,7 +7,8 @@
         Completion date
       </dt>
       <dd class="govuk-summary-list__value">
-          <span class="govuk-caption-m">&#8212</span>
+          <span class="govuk-caption-m" aria-hidden="true">&#8212</span>
+          <span class="govuk-visually-hidden">Cannot add until a learner has been added</span>
       </dd>        
     </div>
   
@@ -40,9 +41,9 @@
       <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-list-row--error {% endif %}">
         <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture')%} govuk-summary-key--error {% endif %}">
           {% if claim.claimType == "100" %}
-            Completion date {% if ( claim | checkIfUpdated("completionDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+            Completion date {% if ( claim | checkIfUpdated("completionDate")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
           {% elif claim.claimType == "60" %}
-            Completion date {% if ( pairClaim | checkIfUpdated("completionDate")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+            Completion date {% if ( pairClaim | checkIfUpdated("completionDate")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
           {% endif %}
         </dt>
         <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.completionDate =='invalid' or data.submitError.completionDate =='inFuture') %} govuk-summary-value--error {% endif %}">
@@ -68,9 +69,9 @@
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
             {% if claim.claimType == "100" %}
-              Completion date {% if ( claim | checkIfUpdated("completionDates")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+              Completion date {% if ( claim | checkIfUpdated("completionDates")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
           {% elif claim.claimType == "60" %}
-              Completion date {% if ( pairClaim | checkIfUpdated("completionDates")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+              Completion date {% if ( pairClaim | checkIfUpdated("completionDates")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
           {% endif %}
         </dt>
         <dd class="govuk-summary-list__value">
@@ -94,7 +95,8 @@
         Evidence of completion
       </dt>
       <dd class="govuk-summary-list__value">
-          <span class="govuk-caption-m">&#8212</span>
+          <span class="govuk-caption-m" aria-hidden="true">&#8212</span>
+          <span class="govuk-visually-hidden">Cannot add until a learner has been added</span>
       </dd>        
     </div>
   
@@ -127,9 +129,9 @@
       <div class="govuk-summary-list__row {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture') %} govuk-summary-list-row--error {% endif %}">
         <dt class="govuk-summary-list__key {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture')%} govuk-summary-key--error {% endif %}">
           {% if claim.claimType == "100" %}
-            Evidence of completion {% if ( claim | checkIfUpdated("evidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+            Evidence of completion {% if ( claim | checkIfUpdated("evidenceCompletion")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
           {% elif claim.claimType == "60" %}
-            Evidence of completion {% if ( pairClaim | checkIfUpdated("evidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+            Evidence of completion {% if ( pairClaim | checkIfUpdated("evidenceCompletion")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
           {% endif %}
         </dt>
         <dd class="govuk-summary-list__value {% if data.submitError.claimValid != null and not data.submitError.claimValid and (data.submitError.evidenceOfCompletion =='invalid' or data.submitError.evidenceOfCompletion =='inFuture') %} govuk-summary-value--error {% endif %}">
@@ -155,9 +157,9 @@
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
           {% if claim.claimType == "100" %}
-            Evidence of completion {% if ( claim | checkIfUpdated("multipleEvidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+            Evidence of completion {% if ( claim | checkIfUpdated("multipleEvidenceCompletion")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
           {% elif claim.claimType == "60" %}
-            Evidence of completion {% if ( pairClaim | checkIfUpdated("multipleEvidenceCompletion")) %}<strong class="govuk-tag">Edited</strong>{% endif %}
+            Evidence of completion {% if ( pairClaim | checkIfUpdated("multipleEvidenceCompletion")) %}<strong class="govuk-tag" aria-label="Edited">Edited</strong>{% endif %}
           {% endif %}
         </dt>
         <dd class="govuk-summary-list__value">

@@ -36,7 +36,7 @@
 
     {% if data.filter == "changed" and sortedLearnerSlots | hasChanges == false %}
         <div class="govuk-grid-row">
-            <p>There have been no changes to any submissions</p>
+            <p>The organisation has not edited any learners.</p>
         </div>
     {% else%}
 
@@ -119,34 +119,18 @@
                     </tr>
 
                     <!-- SUBMITTED BY ROW -->
-                    {# <tr class="govuk-table__row">
+                    <tr class="govuk-table__row">
                         <td class="govuk-table__cell"><strong>Submitted by</strong></td>
                         {% for submission in sortedSubmissions %}
-                            <td class="govuk-table__cell">
-                                {% if submission.submitter %}
-                                    {{(submission.submitter | findUser(data.org)).givenName}} {{(submission.submitter | findUser(data.org)).familyName}}
-                                {% else %}
-                                    ---
-                                {% endif %}
-                            </td>
+                            {% if submission.submitter %}
+                                <td class="govuk-table__cell">{{(submission.submitter | findUser(org)).givenName}} {{(submission.submitter | findUser(org)).familyName}}</td>
+                            {% else %}
+                                <td class="govuk-table__cell">---</td>
+                            {% endif %}
                         {%endfor %}             
-                    </tr> #}
-
-                    <!-- PROCESSED DATE ROW -->
-                    <tr class="govuk-table__row">
-                    <td class="govuk-table__cell"><strong>Processed by</strong></td>
-                    {% for submission in sortedSubmissions %}
-                        <td class="govuk-table__cell">
-                        {% if submission.processedDate %}
-                            {{submission.processedBy}}
-                        {% else %}
-                            ---
-                        {% endif %}
-                        </td>
-                    {% endfor %}
                     </tr>
 
-                    <!-- PROCESSED BY ROW -->
+                    <!-- PROCESSED DATE ROW -->
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Processed on</strong></td>
                         {% for submission in sortedSubmissions %}
@@ -158,6 +142,20 @@
                                 {% endif %}
                             </td>
                         {% endfor %}
+                    </tr>
+
+                    <!-- PROCESSED BY ROW -->
+                    <tr class="govuk-table__row">
+                    <td class="govuk-table__cell"><strong>Processed by</strong></td>
+                    {% for submission in sortedSubmissions %}
+                        <td class="govuk-table__cell">
+                        {% if submission.processedDate %}
+                            Allan Connelly
+                        {% else %}
+                            ---
+                        {% endif %}
+                        </td>
+                    {% endfor %}
                     </tr>
 
 
@@ -285,13 +283,13 @@
                     </tr>
                     {% endif %}
 
-                    <!-- REQUESTED EDITS ROW -->
+                    <!-- LEARNER OUTCOME ROW -->
                     {% if (data.view == "100" or data.view == "40")
                             and (data.filter == "everything" or slot.changeFlags.status
                                 or slot.changeFlags.completionDate
                                 or slot.changeFlags.evidenceOfCompletion) %}
                     <tr class="govuk-table__row">
-                        <td class="govuk-table__cell"><strong>Requested edits</strong></td>
+                        <td class="govuk-table__cell"><strong>Learner outcome</strong></td>
 
                         {% set count = sortedSubmissions.length %}
                         {% for submission in slot.history %}
@@ -303,12 +301,32 @@
                                 and submission.evidenceOfCompletionReview.outcome == "queried"
                                 and submission.processedDate %}
                             <td class="govuk-table__cell">
-                            {{ submission.evidenceOfCompletionReview.note | trunctateString }}<br>
-                            <a class="govuk-link"
-                                href="/showLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}&learnerID={{submission.learnerID}}">
-                                &#8230; see more
-                            </a>
+                                <strong class="govuk-tag govuk-tag--yellow">Needs action</strong> </br>
+                                <a class="govuk-link"
+                                    href="/showProcessorLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}&learnerID={{submission.learnerID}}">
+                                    &#8230; see note
+                                </a>
                             </td>
+                        {% elif submission
+                                and submission.evidenceOfCompletionReview
+                                and submission.evidenceOfCompletionReview.outcome == "pass"
+                                and submission.processedDate%}
+                            <td class="govuk-table__cell">
+                                <strong class="govuk-tag govuk-tag--green">Criteria met</strong>
+                            </td>
+
+                        {% elif submission
+                                and submission.evidenceOfCompletionReview
+                                and submission.evidenceOfCompletionReview.outcome == "fail"
+                                and submission.processedDate%}
+                            <td class="govuk-table__cell">
+                                <strong class="govuk-tag govuk-tag--red">Rejected</strong> </br>
+                                <a class="govuk-link"
+                                    href="/showProcessorLearnerNote?count={{ count }}&submittedDate={{ submittedDate }}&slotID={{ slot.slotID }}&learnerID={{submission.learnerID}}">
+                                    &#8230; see note
+                                </a>
+                            </td>
+
                         {% else %}
                             <td class="govuk-table__cell">---</td>
                         {% endif %}
@@ -331,8 +349,8 @@
             </div>
         </div>
 
-        {% if data.showLearnerNote %}
-            {% include "../_components/claim-sections/claim-history/view-learner-note.html" %}
+        {% if data.showProcessorLearnerNote %}
+            {% include "../claim-view/view-learner-note.html" %}
         {% endif %}
         
      </div>
@@ -342,21 +360,3 @@
 
 
 {% endblock %}
-
-         {# {% if  claim.claimType =="60" %}
-            {% if pairClaim != null %}
-            <p class="govuk-body govuk-!-margin-top-4" >View the <a href="./org-view-main?id={{pairClaim.claimID}}&claimScreen=claim" class="govuk-link">40 part of the claim</a>, which covers evidence of {% if claim.isPaymentPlan == true%}both payment and {% endif%} completion.</p>
-            {% else %}
-            <p class="govuk-body govuk-!-margin-top-4">The 40 part of the claim, which covers evidence of {% if claim.isPaymentPlan == true%}both payment and {% endif%} completion, has not been submitted yet.</p>
-            {% endif %}
-        {% endif %}
-
-        {% if claim.claimType =="40"%}
-        <p class="govuk-body govuk-!-margin-top-4">View the <a href="./org-view-main?id={{pairClaim.claimID}}&claimScreen=claim" class="govuk-link">60 part of the claim</a>, which covers payment evidence.</p>
-        {% endif %}
-
-        </div> #}
-{# {% if data.showLearnerNote %}
-        {% include "../claim-view/view-learner-Note.html" %}
-    {% endif %} #}
-    {# </div> #}

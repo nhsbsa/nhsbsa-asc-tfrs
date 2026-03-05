@@ -1,11 +1,21 @@
 module.exports = {
     "versionHistory": {
-        "claimsCurrent": "v21",
+        "claimsCurrent": "v22",
         "claimVersions": [
+            {
+                "versionNo": "22",
+                "phase": "Beta",
+                "status": ["dev"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-22/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },
             {
                 "versionNo": "21",
                 "phase": "Beta",
-                "status": ["UR"],
+                "status": ["retired"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-21/",
                 "tested": null,
                 "created": null,
