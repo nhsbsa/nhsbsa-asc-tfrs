@@ -917,18 +917,26 @@ addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, loca
         }
         let learnerCheck = false;
         if (learner == "") { 
-                learnerCheck = true
-        } else if (submission.learnerID != null) {
-            learnerDetails = findLearnerById(submission.learnerID, learners)
-            const formattedgivenName = removeSpacesAndCharactersAndLowerCase(learnerDetails.givenName);
-            const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(learnerDetails.familyName);
-            const formattedfullName = formattedgivenName + formattedfamilyName;
-            const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
-            const formattedID = removeSpacesAndCharactersAndLowerCase(learnerDetails.id);
-            if (formattedfullName.includes(formattedLearner) || formattedID == formattedLearner) {
-                learnerCheck = true;
+            learnerCheck = true
+        } else if (submission.learners != null && submission.learners.length > 0) {
+            for (const l of submission.learners) {
+                const learnerDetails = findLearnerById(l.learnerID, learners);
+                if (!learnerDetails) continue;
+
+                const formattedgivenName = removeSpacesAndCharactersAndLowerCase(learnerDetails.givenName);
+                const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(learnerDetails.familyName);
+                const formattedfullName = formattedgivenName + formattedfamilyName;
+                const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
+                const formattedID = removeSpacesAndCharactersAndLowerCase(learnerDetails.id);
+
+                if (formattedfullName.includes(formattedLearner) || formattedID === formattedLearner) {
+                    learnerCheck = true;
+                    claim.matchedLearner = learnerDetails
+                    break; // stop once a match is found
+                }
             }
         }
+        
         let check = false
         if ((training != "" && trainingCheck) && (learner != "" && learnerCheck) && (workplaceID == claim.workplaceID)) {
             check = true
