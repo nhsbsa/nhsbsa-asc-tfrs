@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-<a href="../manage-claims-home?trainingName&learner&noInputs" class="govuk-back-link">Back</a>
+<a href="../manage-claims-home?trainingName&learner&noInputs&trainingSearchLengthInsufficient&learnerSearchLengthInsufficient" class="govuk-back-link">Back</a>
 {% endblock %}
 
 {% block content %}
@@ -59,7 +59,7 @@
   <div class="govuk-grid-column-two-thirds">
     <div class="{% if data.noInputs %}govuk-form-group--error{% endif %} govuk-!-padding-bottom-4">
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search</h2>
-        <p class="govuk-body govuk-!-margin-bottom-2">You can find a claim by either learner, or course or qualification name, or a combination of both.</p>
+        <p class="govuk-body govuk-!-margin-bottom-2">You can find a claim using a learner's name, or the course or qualification name or a combination of them both.</p>
         {% if data.noInputs %}
         <p id="input-error" class="govuk-error-message govuk-!-margin-bottom-3">
           <span class="govuk-visually-hidden">Error:</span> You need to enter something to search on
