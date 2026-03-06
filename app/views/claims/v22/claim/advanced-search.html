@@ -35,14 +35,14 @@
               {% if data.learnerSearchLengthInsufficient %}
               <li>
                 <a href="#learnerSearch-error">
-                  You need to enter at least 3 characters of the learner name, or the whole NI number
+                  Enter at least 3 characters of a learner's name, or the whole National Insurance (NI) number
                 </a>
               </li>
               {% endif %}
               {% if data.trainingSearchLengthInsufficient %}
               <li>
                 <a href="#trainingSearch-error">
-                  You need to enter at least 3 characters of the name, or the whole course code or qualification number
+                  Enter at least 3 characters of the course or qualification name, or the whole course code or qualification number
                 </a>
               </li>
               {% endif %}
@@ -82,7 +82,7 @@
           </div>
           {% if data.learnerSearchLengthInsufficient %}
             <p id="learnerSearch-error" class="govuk-error-message govuk-!-margin-bottom-3">
-              <span class="govuk-visually-hidden">Error:</span> You need to enter at least 3 characters of the learner name, or the whole NI number
+              <span class="govuk-visually-hidden">Error: </span>Enter at least 3 characters of a learner's name, or the whole National Insurance (NI) number
             </p>
           {% endif %}
           <input class="govuk-input govuk-input--width-20" id="learner" name="learner" type="text"
@@ -98,7 +98,7 @@
           </div>
           {% if data.trainingSearchLengthInsufficient %}
             <p id="trainingSearch-error" class="govuk-error-message govuk-!-margin-bottom-3">
-              <span class="govuk-visually-hidden">Error:</span>You need to enter at least 3 characters of the name, or the whole course code or qualification number
+              <span class="govuk-visually-hidden">Error: </span>Enter at least 3 characters of the course or qualification name, or the whole course code or qualification number
             </p>
           {% endif %}
           <input class="govuk-input govuk-input--width-20" id="trainingName" name="trainingName" type="text"
@@ -148,7 +148,7 @@
                 {% elif submission.learners.length > 0 %}
                   {{ submission.learners.length }} learner{% if submission.learners.length > 1 %}s{% endif %}
                 {% else %}
-                  Learner not yet added
+                  No learners added yet
                 {% endif %}
               </td>
               <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
@@ -172,8 +172,7 @@
       Improve your search results by:
     </p>
     <ul class="govuk-list govuk-list--bullet">
-      <li>double-checking your spelling</li>
-      <li>searching for something less specific</li>
+      <li>checking your spelling</li>
       <li>checking you entered the whole NI number, course code or qualification number</li>
     </ul>
   </div>
