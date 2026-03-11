@@ -59,7 +59,7 @@
   <div class="govuk-grid-column-two-thirds">
     <div class="{% if data.noInputs %}govuk-form-group--error{% endif %} govuk-!-padding-bottom-4">
       <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Advanced search</h2>
-        <p class="govuk-body govuk-!-margin-bottom-2">You can find a claim using a learner's name, or the course or qualification name or a combination of them both.</p>
+        <p class="govuk-body govuk-!-margin-bottom-2">You can find a claim by searching for  a learner's name or NI number plus their course or qualification details.</p>
         {% if data.noInputs %}
         <p id="input-error" class="govuk-error-message govuk-!-margin-bottom-3">
           <span class="govuk-visually-hidden">Error:</span> You need to enter something to search on
@@ -78,7 +78,7 @@
             <strong>Learner</strong>
           </label>
           <div id="learner-name-hint" class="govuk-hint">
-            Enter at least 3 characters of the learner name, or the whole National Insurance (NI) number
+            Enter the learner name or National Insurance (NI) number
           </div>
           {% if data.learnerSearchLengthInsufficient %}
             <p id="learnerSearch-error" class="govuk-error-message govuk-!-margin-bottom-3">
@@ -94,7 +94,7 @@
             <strong>Course or qualification name</strong>
           </label>
           <div id="course-name-hint" class="govuk-hint">
-            Enter at least 3 characters of the name, or the whole course code or qualification number
+            Enter the name, course code or qualification number
           </div>
           {% if data.trainingSearchLengthInsufficient %}
             <p id="trainingSearch-error" class="govuk-error-message govuk-!-margin-bottom-3">
@@ -118,14 +118,26 @@
     <div class="govuk-grid-column-full">
       <h2 class="govuk-heading-m">Search results</h2>
       <p class="govuk-heading-m">{{ resultCount }} {% if resultCount == 1 %}result{% else %}results{% endif %}</p>
+      <p class="govuk-body"> Here are your search results with any matches <mark
+                class="hods-highlight"><strong>highlighted</strong></mark>.</p>
+      <p class="govuk-body">
+      Improve your search results by:
+    </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>entering more characters</li>
+      <li>checking you entered the whole NI number, course code or qualification number</li>
+    </ul>
       <table class="govuk-table" data-module="moj-sortable-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
             <th class="govuk-table__header" scope="col" width="20%">Claim reference</th>
             <th class="govuk-table__header" scope="col" width="3%">Type</th>
             <th class="govuk-table__header" scope="col" width="26%">Training</th>
-            <th class="govuk-table__header" scope="col" width="22%">Learners</th>
-            <th class="govuk-table__header" scope="col" width="18%">Status</th>
+            {% if matchedClaims and data['learner']%}
+              <th class="govuk-table__header" scope="col" width="22%">Matched learners</th>
+            {% endif %}
+            <th class="govuk-table__header" scope="col" width="15%">Learners</th>
+            <th class="govuk-table__header" scope="col" width="24%">Status</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
@@ -138,19 +150,22 @@
               <td class="govuk-table__header" scope="row"><a class="govuk-link"
                   href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
               <td class="govuk-table__cell">{{ claim.claimType | typeTag }}</td>
-              <td class="govuk-table__cell">{{ training.title }}</td>
+              <td class="govuk-table__cell"><mark class='hods-highlight'><strong>{{ training.code }}</strong></mark> </br>{{ training.title }}</td>
+              
+              {% if matchedClaims and data['learner']%}
+                <td class="govuk-table__cell">
+                  <mark class='hods-highlight'><strong>Roy Kubb</strong></mark>
+                </td>
+              {% endif %}
+                
               <td class="govuk-table__cell">
-                {% if claim.matchedLearner and data['learner']%}
-                  <strong>{{claim.matchedLearner.givenName }} {{ claim.matchedLearner.familyName }}</strong>
-                  {% if submission.learners.length > 1 %}
-                    and {{ submission.learners.length - 1 }} others
-                  {% endif %}
-                {% elif submission.learners.length > 0 %}
+                {% if submission.learners.length > 0%}
                   {{ submission.learners.length }} learner{% if submission.learners.length > 1 %}s{% endif %}
                 {% else %}
                   No learners added yet
                 {% endif %}
               </td>
+
               <td class="govuk-table__cell" data-sort-value="{{ claim.status }}">{{ claim.status |
                 statusTag(data.statuses) }}</td>
             </tr>
