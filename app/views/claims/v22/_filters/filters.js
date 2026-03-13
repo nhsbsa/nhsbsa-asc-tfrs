@@ -893,10 +893,6 @@ addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, loca
     const formattedTraining = removeSpacesAndCharactersAndLowerCase(training);
     const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
 
-    if ((formattedTraining.length > 0 && formattedTraining.length < 3) || (formattedLearner.length > 0 && formattedLearner.length < 3)) {
-        return []
-    }
-
     var searched = claims.filter(claim => {
         let trainingCheck = false;
         let submission = getMostRelevantSubmission(claim)
@@ -905,12 +901,11 @@ addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, loca
             const claimTraining = findCourseByCode(submission.trainingCode)
             const formattedTitle = removeSpacesAndCharactersAndLowerCase(claimTraining.title);
             const code = submission.trainingCode;
-            const codeRegex = /^(?:\d{3}\/?\d{4}\/?\d|[A-Za-z]{5})$/;
             if (formattedTraining != "") {
                 if (formattedTitle.includes(formattedTraining)) {
                     trainingCheck = true;
                 }
-                if (codeRegex.test(training) && removeSpacesAndCharactersAndLowerCase(code) == formattedTraining) {
+                if (removeSpacesAndCharactersAndLowerCase(code) == formattedTraining) {
                     trainingCheck = true;
                 }
             } 
@@ -919,6 +914,7 @@ addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, loca
         if (learner == "") { 
             learnerCheck = true
         } else if (submission.learners != null && submission.learners.length > 0) {
+            claim.matchedLearners = []
             for (const l of submission.learners) {
                 const learnerDetails = findLearnerById(l.learnerID, learners);
                 if (!learnerDetails) continue;
@@ -931,8 +927,7 @@ addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, loca
 
                 if (formattedfullName.includes(formattedLearner) || formattedID === formattedLearner) {
                     learnerCheck = true;
-                    claim.matchedLearner = learnerDetails
-                    break; // stop once a match is found
+                    claim.matchedLearners.push(learnerDetails)
                 }
             }
         }

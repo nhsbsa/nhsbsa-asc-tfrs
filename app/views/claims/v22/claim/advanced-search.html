@@ -130,14 +130,11 @@
       <table class="govuk-table" data-module="moj-sortable-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <th class="govuk-table__header" scope="col" width="20%">Claim reference</th>
+            <th class="govuk-table__header" scope="col" width="22%">Claim reference</th>
             <th class="govuk-table__header" scope="col" width="3%">Type</th>
             <th class="govuk-table__header" scope="col" width="26%">Training</th>
-            {% if matchedClaims and data['learner']%}
-              <th class="govuk-table__header" scope="col" width="22%">Matched learners</th>
-            {% endif %}
             <th class="govuk-table__header" scope="col" width="15%">Learners</th>
-            <th class="govuk-table__header" scope="col" width="24%">Status</th>
+            <th class="govuk-table__header" scope="col" width="20%">Status</th>
           </tr>
         </thead>
         <tbody class="govuk-table__body">
@@ -150,14 +147,7 @@
               <td class="govuk-table__header" scope="row"><a class="govuk-link"
                   href="claim-details?id={{ claim.claimID }}">{{ claim.claimID }}</a> </td>
               <td class="govuk-table__cell">{{ claim.claimType | typeTag }}</td>
-              <td class="govuk-table__cell"><mark class='hods-highlight'><strong>{{ training.code }}</strong></mark> </br>{{ training.title }}</td>
-              
-              {% if matchedClaims and data['learner']%}
-                <td class="govuk-table__cell">
-                  <mark class='hods-highlight'><strong>Roy Kubb</strong></mark>
-                </td>
-              {% endif %}
-                
+              <td class="govuk-table__cell">{{ training.code }} </br>{{ training.title }}</td>     
               <td class="govuk-table__cell">
                 {% if submission.learners.length > 0%}
                   {{ submission.learners.length }} learner{% if submission.learners.length > 1 %}s{% endif %}
