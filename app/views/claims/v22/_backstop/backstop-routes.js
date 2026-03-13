@@ -55,9 +55,20 @@ router.get('/mfa-code', function (req, res) {
 
 router.get('/sign-new-gdl', function (req, res) {
 
+    const scenario = req.session.data.scenario
     const error = req.session.data.error
+    let org = null
 
-  delete req.session.data
+    switch (scenario) {
+        case "1":
+            org = "F87223491";
+            break;
+        case "2":
+            org = "D76397203";
+            break;
+    }
+
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: "signatory",
@@ -69,7 +80,7 @@ router.get('/sign-new-gdl', function (req, res) {
         req.session.data.declarationSubmitError = "true"
     }
 
-    loadData(req, "F87223491")
+    loadData(req, org)
 
     // Redirect to the page you want to screenshot
     res.redirect('../account-setup/sign-new-gdl');
@@ -812,7 +823,7 @@ router.get('/delete-submitters', function (req, res) {
         req.session.data.deletedEmail = "zane.montgomery@teatree.com"
     }
 
-    if (error == "fail") {
+    if (error == "true") {
         req.session.data.deleteError = true
     }
 
@@ -953,6 +964,7 @@ router.get('/claim', function (req, res) {
     const paymentPlan = req.session.data.paymentPlan
     const error = req.session.data.error
     const ommt = req.session.data.ommt
+    const learnerCount = req.session.data.learnerCount
 
   delete req.session.data
     req.session.data = {
@@ -966,90 +978,138 @@ router.get('/claim', function (req, res) {
         case "not-yet-submitted":
         switch (type) {
             case "100":
-            id = "GE2-UA5D-4K6C-A";
-            break;
+                if (learnerCount == "multi") {
+                    id = "4RE-EHMM-1W4J-A";
+                } else if (learnerCount == "single") {
+                    id = "G5W-W3VK-BLA1-A";
+                }
+                break;
+
+            case "100ommt":
+                if (learnerCount == "multi") {
+                    id = "HER-F7X2-W9E1-A";
+                } else if (learnerCount == "single") {
+                    id = "K1K-3PVG-CRET-A";
+                }
+                break;
 
             case "60":
-            id = "ZSK-23VE-MXS4-B";
-            break;
+                id = "VKA-JZM3-64J1-B";
+                break;
 
             case "40":
                 switch (paymentPlan) {
                     case "true":
-                    id = "P1J-EHVI-88A2-C";
-                    break;
+                        id = "R95-W1JE-Y784-C";
+                        break;
                     case "false":
-                    id = "J2S-MKQ7-2F4Q-C";
-                    break;
+                        id = "U97-SJ15-4GZU-C";
+                        break;
                 }
-            break;
+                break;
         }
         break;
 
         case "queried":
         switch (type) {
             case "100":
-            id = "CFD-EHS7-F43J-A";
-            break;
+                if (learnerCount == "multi") {
+                    id = "HZE-PYRI-EN4T-A";
+                } else if (learnerCount == "single") {
+                    id = "HQQ-BWKI-MKJY-A";
+                }
+                break;
+            
+            case "100ommt":
+                if (learnerCount == "multi") {
+                    id = "1KF-1BHM-U4SU-A";
+                } else if (learnerCount == "single") {
+                    id = "9WI-4TMM-JXAF-A";
+                }
+                break;
 
             case "60":
-            id = "VJH-8Y37-EZNM-B";
-            break;
+                id = "A37-1YK1-CE1R-B";
+                break;
 
             case "40":
                 switch (paymentPlan) {
                     case "true":
-                    id = "P8A-66ND-IBFM";
-                    break;
+                        id = "GH5-FGAE-TKRT-C";
+                        break;
                     case "false":
-                    id = "SRX-A33U-BMUG-C";
-                    break;
+                        id = "WVN-NHAU-TTES-C";
+                        break;
                 }
-            break;
+                break;
         }
         break;
 
         case "submitted":
         switch (type) {
             case "100":
-            id = "HMJ-74V3-T8V5-A";
-            break;
+                if (learnerCount == "multi") {
+                    id = "G4H-9D4M-N6IX-A";
+                } else if (learnerCount == "single") {
+                    id = "YWR-8RPJ-R4YF-A";
+                }
+                break;
+            
+            case "100ommt":
+                if (learnerCount == "multi") {
+                    id = "V82-MHDY-E2LJ-A";
+                } else if (learnerCount == "single") {
+                    id = "ZIK-TZ5Q-ANEZ-A";
+                }
+                break;
 
             case "60":
-            id = "1SC-WE58-MT7W-B";
-            break;
+                id = "3Z2-Z2IB-6QIA-B";
+                break;
 
             case "40":
                 switch (paymentPlan) {
                     case "true":
-                    id = "26Q-GS9P-E91M-C";
-                    break;
+                        id = "U83-6VEU-73L7-C";
+                        break;
                     case "false":
-                    id = "9JH-I94K-TPRB-C";
-                    break;
+                        id = "2VY-XHXI-RJX6-C";
+                        break;
                 }
-            break;
+                break;
         }
         break;
 
         case "approved":
         switch (type) {
             case "100":
-            id = "CKX-ZZSG-BDCB-A";
-            break;
+                if (learnerCount == "multi") {
+                    id = "Y61-QY4U-2196-A";
+                } else if (learnerCount == "single") {
+                    id = "X56-8B8L-MG6E-A";
+                }
+                break;
+            
+            case "100ommt":
+                if (learnerCount == "multi") {
+                    id = "UDK-INCZ-9XN7-A";
+                } else if (learnerCount == "single") {
+                    id = "P78-G1Y8-GLFS-A";
+                }
+                break;
 
             case "60":
-            id = "P1J-EHVI-88A2-B";
-            break;
+                id = "U97-SJ15-4GZU-B";
+                break;
 
             case "40":
                 switch (paymentPlan) {
                     case "true":
-                    id = "NP1-NNFN-E76Y-C";
-                    break;
+                        id = "7NS-TE5B-BV3C-C";
+                        break;
                     case "false":
-                    id = "SND-EPRS-N3MZ-C";
-                    break;
+                        id = "L91-4CCR-Q8HC-C";
+                        break;
                 }
             break;
         }
@@ -1058,21 +1118,33 @@ router.get('/claim', function (req, res) {
         case "rejected":
         switch (type) {
             case "100":
-            id = "ML8-K712-2N27-A";
-            break;
+                if (learnerCount == "multi") {
+                    id = "F5P-S23L-94A2-A";
+                } else if (learnerCount == "single") {
+                    id = "VHL-EDE7-2EEC-A";
+                }
+                break;
+            
+            case "100ommt":
+                if (learnerCount == "multi") {
+                    id = "82M-AB5B-UL36-A";
+                } else if (learnerCount == "single") {
+                    id = "6GP-H2SS-UIYS-A";
+                }
+                break;
 
             case "60":
-            id = "UK9-JGAN-B4QP-B";
-            break;
+                id = "3BV-5EQS-8ZPI-B";
+                break;
 
             case "40":
             switch (paymentPlan) {
                     case "true":
-                    id = "ST7-LVRI-VPK5-B";
-                    break;
+                        id = "6ZG-2EVR-WWL3-C";
+                        break;
                     case "false":
-                    id = "A8T-TAGD-ETJE-C";
-                    break;
+                        id = "T9B-786Q-WK62-C";
+                        break;
                 }
             break;
         }
@@ -1082,15 +1154,15 @@ router.get('/claim', function (req, res) {
         switch (type) {
             case "100":
             if (ommt == "true") {
-                id = "E3N-OMMT-GH27-A";
+                id = "QQP-L6TW-38BG-A";
             } else {
-                id = "ABC-UA5D-43BD-A";
+                id = "Z76-PS55-Q2K7-A";
             }
             
             break;
 
             case "60":
-            id = "GDH-34ND-MXS4-B";
+            id = "5S9-K4V3-KS56-B";
             break;
         }
         break;
@@ -1099,7 +1171,7 @@ router.get('/claim', function (req, res) {
 
     req.session.data.id = id
 
-    loadData(req, "B13299931")
+    loadData(req, "A02944934")
 
     if (error == "missing1") {
         req.session.data.submitError = {
@@ -1259,11 +1331,11 @@ router.get('/delete-claim', function (req, res) {
         userType: 'signatory',
         journey: 'signin',
         tabLocation: "users",
-        id: "GE2-UA5D-4K6C-A"
+        id: "4RE-EHMM-1W4J-A"
 
     };
 
-    loadData(req, "B13299931")
+    loadData(req, "A02944934")
 
     if ( error == "fail") {
         req.session.data.deleteError = "true"
@@ -1302,7 +1374,7 @@ router.get('/select-training', function (req, res) {
     }
 
     if (change == "true") {
-        req.session.data.id = "VJH-8Y37-EZNM-B"
+        req.session.data.id = "5S9-K4V3-KS56-B"
     }
 
     // Redirect to the page you want to screenshot
@@ -1342,7 +1414,7 @@ router.get('/select-learner', function (req, res) {
         userType: "signatory",
         journey: "signin",
         tabLocation: "claims",
-        id: "GE2-UA5D-4K6C-A"
+        id: "Z76-PS55-Q2K7-A"
     };
 
     loadData(req, "A02944934")
@@ -1364,6 +1436,28 @@ router.get('/select-learner', function (req, res) {
     res.redirect('../claim/select-learner');
 });
 
+router.get('/add-another-learner', function (req, res) {
+    const error = req.session.data.error
+
+  delete req.session.data
+    req.session.data = {
+        area: 'Claims',
+        userType: "signatory",
+        journey: "signin",
+        tabLocation: "claims",
+        id: "4RE-EHMM-1W4J-A"
+    };
+
+    loadData(req, "A02944934")
+
+    if (error == "true") {
+        req.session.data.submitError = "true"
+    }
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../claim/add-another-learner');
+});
+
 router.get('/add-new-learner', function (req, res) {
     const error = req.session.data.error
 
@@ -1373,7 +1467,7 @@ router.get('/add-new-learner', function (req, res) {
         userType: "signatory",
         journey: "signin",
         tabLocation: "claims",
-        id: "ABC-UA5D-43BD-A",
+        id: "Z76-PS55-Q2K7-A",
         inClaim: "true"
     };
 
@@ -1413,7 +1507,7 @@ router.get('/duplicate-learner', function (req, res) {
         userType: "signatory",
         journey: "signin",
         tabLocation: "claims",
-        id: "ABC-UA5D-43BD-A",
+        id: "Z76-PS55-Q2K7-A",
         inClaim: "true",
         familyName: "Smith",
         givenName: "Braxton",
@@ -1436,7 +1530,7 @@ router.get('/start-date', function (req, res) {
         userType: 'signatory',
         journey: 'signin',
         tabLocation: "claims",
-        id: "ABC-UA5D-43BD-A"
+        id: "5S9-K4V3-KS56-B"
     };
 
     loadData(req, "A02944934")
@@ -1447,6 +1541,7 @@ router.get('/start-date', function (req, res) {
             month: "missing",
             day: "missing",
             date: "allMissing",
+            policy: "valid",
             dateValid: false
             }
     } else if (error == "policy") {
@@ -1454,12 +1549,25 @@ router.get('/start-date', function (req, res) {
             year: "valid",
             month: "valid",
             day: "valid",
-            date: "invalidPolicy",
+            date: "valid",
+            policy: "invalidPolicy",
             dateValid: false
             }
             req.session.data["activity-date-started-day"] = "02"
             req.session.data["activity-date-started-month"] = "04"
             req.session.data["activity-date-started-year"] = "2023"
+    }  else if (error == "future") {
+        req.session.data.submitError = {
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "inFuture",
+            policy: "valid",
+            dateValid: false
+            }
+            req.session.data["activity-date-started-day"] = "02"
+            req.session.data["activity-date-started-month"] = "04"
+            req.session.data["activity-date-started-year"] = "2028"
     }
 
     // Redirect to the page you want to screenshot
@@ -1480,9 +1588,9 @@ router.get('/payment-date', function (req, res) {
     };
 
     if (paymentPlan == "true") {
-        id = "IXD-E72Q-4KYG-C"
+        id = "R95-W1JE-Y784-C"
     } else {
-        id = "GE2-UA5D-4K6C-A"
+        id = "Z76-PS55-Q2K7-A"
     }
 
     req.session.data.id = id
@@ -1495,6 +1603,7 @@ router.get('/payment-date', function (req, res) {
             month: "missing",
             day: "missing",
             date: "allMissing",
+            policy: "valid",
             dateValid: false
             }
     } else if (error == "policy") {
@@ -1509,6 +1618,18 @@ router.get('/payment-date', function (req, res) {
             req.session.data["payment-date-started-day"] = "02"
             req.session.data["payment-date-started-month"] = "04"
             req.session.data["payment-date-started-year"] = "2023"
+        } else if (error == "future") {
+        req.session.data.submitError = {
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "inFuture",
+            policy: "valid",
+            dateValid: false
+            }
+            req.session.data["payment-date-started-day"] = "02"
+            req.session.data["payment-date-started-month"] = "04"
+            req.session.data["payment-date-started-year"] = "2029"
     } else if (error == "startDate") {
         req.session.data.submitError = {
             year: "valid",
@@ -1549,13 +1670,14 @@ router.get('/completion-date', function (req, res) {
         area: 'Claims',
         userType: 'signatory',
         journey: 'signin',
-        tabLocation: "claims"
+        tabLocation: "claims",
+        learnerID: "CM 61 1F 12 E"
     };
 
     if (type == "100") {
-        id = "GE2-UA5D-4K6C-A"
+        id = "G5W-W3VK-BLA1-A"
     } else if (type == "40") {
-        id = "IXD-E72Q-4KYG-C"
+        id = "U97-SJ15-4GZU-C"
     }
 
     req.session.data.id = id
@@ -1567,6 +1689,7 @@ router.get('/completion-date', function (req, res) {
             month: "missing",
             day: "missing",
             date: "allMissing",
+            policy: "valid",
             dateValid: false
             }
     } else if (error == "policy") {
@@ -1578,6 +1701,18 @@ router.get('/completion-date', function (req, res) {
             policy: "invalidAfterStart",
             dateValid: false
         }
+    } else if (error == "future") {
+        req.session.data.submitError = {
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "inFuture",
+            policy: "valid",
+            dateValid: false
+        }
+        req.session.data["completion-date-started-day"] = "02"
+        req.session.data["completion-date-started-month"] = "04"
+        req.session.data["completion-date-started-year"] = "2029"
     }
 
     // Redirect to the page you want to screenshot
@@ -1595,7 +1730,8 @@ router.get('/evidence', function (req, res) {
         userType: 'signatory',
         journey: 'signin',
         tabLocation: "claims",
-        id: "GE2-UA5D-4K6C-A",
+        id: "G5W-W3VK-BLA1-A",
+        learnerID: "CM 61 1F 12 E",
         type
     };
 
@@ -1625,9 +1761,9 @@ router.get('/evidence-edit', function (req, res) {
     const deleteState = req.session.data.deleteState
 
     if (max == "true") {
-        id = "ZSK-23VE-MXS4-B"
+        id = "G5W-W3VK-BLA1-A"
     } else {
-        id = "GE2-UA5D-4K6C-A"
+        id = "7JP-X9LK-1QXE-A"
     }
 
   delete req.session.data
@@ -1673,9 +1809,9 @@ router.get('/declaration', function (req, res) {
     loadData(req, "A02944934")
 
     if (status == "not-yet-submitted") {
-        id = "GE2-UA5D-4K6C-A"
+        id = "7JP-X9LK-1QXE-A"
     } else if (status == "queried") {
-        id = "CFD-EHS7-F43J-A"
+        id = "HQQ-BWKI-MKJY-A"
     }
 
     req.session.data.id = id
@@ -1696,7 +1832,7 @@ router.get('/confirmation', function (req, res) {
         userType: 'signatory',
         journey: 'signin',
         tabLocation: "claims",
-        id: "GE2-UA5D-4K6C-A"
+        id: "7JP-X9LK-1QXE-A"
     };
 
     loadData(req, "A02944934")
@@ -1780,7 +1916,7 @@ router.get('/asc-wds-check', function (req, res) {
         userType: 'signatory',
         journey: 'signin',
         tabLocation: "claims",
-        id: 'GE2-UA5D-4K6C-A'
+        id: '7JP-X9LK-1QXE-A'
     };
 
     loadData(req, "A02944934")
@@ -1798,7 +1934,7 @@ router.get('/missing-GDL', function (req, res) {
         userType,
         journey: 'signin',
         tabLocation: "claims",
-        id: 'GE2-UA5D-4K6C-A'
+        id: 'G5W-W3VK-BLA1-A'
     };
 
     loadData(req, "F87223491")
@@ -1836,7 +1972,7 @@ router.get('/missing-bank-details', function (req, res) {
         userType,
         journey: 'signin',
         tabLocation: "claims",
-        id: 'GE2-UA5D-4K6C-A'
+        id: 'G5W-W3VK-BLA1-A'
     };
 
     loadData(req, "F87223491")
@@ -1845,69 +1981,121 @@ router.get('/missing-bank-details', function (req, res) {
     res.redirect('../claim/missing-bank-details');
 });
 
-router.get('/previous-submissions', function (req, res) {
+router.get('/claim-history', function (req, res) {
     let id = null
     const type = req.session.data.type
     const status = req.session.data.status
-    const showNote = req.session.data.showNote
-    const ommt  = req.session.data.ommt
-    const paymentPlan  = req.session.data.paymentPlan
 
     delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
         journey: 'signin',
-        tabLocation: "claims",
-        view: type
+        tabLocation: "claims"
     };
 
-    if (status == "queried") {
-        if (type == "100") {
-            id = "CWH-E4C7-FBXJ-A";
-        } else if (type == "60") {
-            id = "VJH-8Y37-EZNM-B";
-        } else if (type == "40") {
-            if (paymentPlan == "true") {
-                id = "2NB-ISY7-86JH-C";
-            } else {
-                id = "SRX-A33U-BMUG-C";
-            }
-        }
-    } else if (status == "submitted") {
-        if (type == "100") {
-            if (ommt == "1") {
-                id = "SOM-MT33-JSK4-A";
-            } else if (ommt == "2") {
-                id = "FOM-MT12-JSK4-A";
-            } else {
-                id = "HMJ-74V3-T8V5-A";
-            }
-        } else if (type == "60") {
-            id = "1SC-WE58-MT7W-B";
-        } else if (type == "40") {
-            id = "9JH-I94K-TPRB-C";
-            if (paymentPlan == "true") {
-                id = "NPU-H9DG-6L1T-C";
-            } else {
-                id = "9JH-I94K-TPRB-C";
-            }
-        }
+    switch (type) {
+        case "100":
+            if (status == "not-yet-submitted") {
+                id = "URC-YAE4-6BDV-A";
+            } else if (status == "submitted") {
+                id = "CEK-BMS6-7M5W-A";
+            } else if (status == "queried") {
+                id = "337-TCSP-QEDR-A";
+            } else if (status == "resubmitted") {
+                id = "LE5-VQJS-FPSB-A";
+            } else if (status == "approved") {
+                id = "TYB-PEUI-74YT-A";
+            } else if (status == "rejected") {
+                id = "L9S-FMIX-Z41P-A";
+            } 
+            break;
+        case "60":
+            if (status == "not-yet-submitted") {
+                id = "VKA-JZM3-64J1-B";
+            } else if (status == "submitted") {
+                id = "3Z2-Z2IB-6QIA-B";
+            } else if (status == "queried") {
+                id = "VIM-5JSV-GQUS-B";
+            } else if (status == "resubmitted") {
+                id = "QZP-3H4J-AA4V-B";
+            } else if (status == "approved") {
+                id = "U97-SJ15-4GZU-B";
+            } else if (status == "rejected") {
+                id = "3BV-5EQS-8ZPI-B";
+            } 
+            break;
+        case "40":
+            if (status == "submitted") {
+                id = "U83-6VEU-73L7-C";
+            } else if (status == "queried") {
+                id = "WVN-NHAU-TTES-C";
+            } else if (status == "resubmitted") {
+                id = "24G-5H6R-V2J1-C";
+            } else if (status == "approved") {
+                id = "7NS-TE5B-BV3C-C";
+            } else if (status == "rejected") {
+                id = "T5L-J5HX-SH61-C";
+            } 
+            break;
     }
 
     req.session.data.id = id
 
     loadData(req, "A02944934")
 
-    if (showNote == "true") {
-        req.session.data.count = "1"
-        req.session.data.submittedDate = "2025-02-02T11:52:30.850Z"
-        req.session.data.showNote = "sixtyQuery"
-        req.session.data.subCount = "1"
+    // Redirect to the page you want to screenshot
+    res.redirect('../claim/claim-history');
+});
+
+
+router.get('/claim-history-note', function (req, res) {
+    const type = req.session.data.type
+    const form = req.session.data.form
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Claims',
+        userType: 'signatory',
+        journey: 'signin',
+        tabLocation: "claims"
+    };
+
+    switch (type) {
+        case "queried":
+            req.session.data.reasonType = "queried"
+            req.session.data.loopCount = "0"
+            if (form == "payment") {
+                req.session.data.type = "60",
+                req.session.data.id = "VIM-5JSV-GQUS-B"
+            } else if (form == "completion") {
+                req.session.data.type = "40",
+                req.session.data.id = "HTN-HNHV-73WD-C"
+            } else if ( form == "both") {
+                req.session.data.type = "100",
+                req.session.data.id = "HZE-PYRI-EN4T-A"
+            }
+            break;
+        case "rejected":
+            req.session.data.reasonType = "rejected"
+            req.session.data.loopCount = "0"
+            if (form == "payment") {
+                req.session.data.type = "60",
+                req.session.data.id = "YX2-4IYA-EBUL-B"
+            } else if (form == "completion") {
+                req.session.data.type = "40",
+                req.session.data.id = "T9B-786Q-WK62-C"
+            } else if ( form == "both") {
+                req.session.data.type = "100",
+                req.session.data.id = "L9S-FMIX-Z41P-A"
+            }
+            break;
     }
 
+    loadData(req, "A02944934")
+
     // Redirect to the page you want to screenshot
-    res.redirect('../claim/previousSubmissionsTable');
+    res.redirect('../claim/claim-history-note');
 });
 
 module.exports = router

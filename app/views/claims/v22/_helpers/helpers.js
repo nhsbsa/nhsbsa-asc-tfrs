@@ -871,10 +871,11 @@ function loadData(req, orgID) {
   for (const organisation of organisations) {
     if (organisation.workplaceID == orgID) {
       req.session.data.org = organisation
+      console.log('organisation file loaded')
       break;
     }
   }
-  console.log('organisation file loaded')
+  
 
   console.log('loading in claims file')
 if (req.session.data.org.numberOfClaims > 0) {
@@ -992,18 +993,21 @@ function getLearnerFieldByID(learners, learnerID, field) {
 }
 
 function getOverallCompletionOutcome(learners) {
-    let hasFail = false;
-    let hasQuery = false;
+    if (learners.length === 0) return "pass";
 
-    for (const learner of learners) {
-        const outcome = learner.evidenceOfCompletionReview?.outcome;
+    const outcomes = learners.map(l => l.evidenceOfCompletionReview?.outcome);
 
-        if (outcome === "fail") hasFail = true;
-        else if (outcome === "queried") hasQuery = true;
+    // 1. Return "fail" only if EVERY learner failed
+    if (outcomes.every(outcome => outcome === "fail")) {
+        return "fail";
     }
 
-    if (hasFail) return "fail";
-    if (hasQuery) return "queried";
+    // 2. Return "queried" if at least one is "fail" or "queried"
+    if (outcomes.some(outcome => outcome === "fail" || outcome === "queried")) {
+        return "queried";
+    }
+
+    // 3. Otherwise return "pass"
     return "pass";
 }
 
