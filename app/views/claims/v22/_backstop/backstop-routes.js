@@ -1184,16 +1184,28 @@ router.get('/claim', function (req, res) {
             change: true,
             claimValid: false
             }
+        if (type == "100") {
+            req.session.data.submitError.startDate = null
+        }
     } else if (error == "missing2") {
         req.session.data.submitError = {
             learner: "valid",
             startDate: "valid",
-            paymentDate: "missing",
+            paymentDate: "valid",
             evidenceOfPayment: "valid",
             evidenceOfCompletion: "missing",
             completionDate: "missing",
             change: true,
             claimValid: false
+            }
+        for (const claim of req.session.data.claims) {
+                if (claim.claimID == id) {
+                    const submission = getMostRelevantSubmission(claim)
+                    for (const learner of submission.learners) {
+                        learner.completionDate = null
+                        learner.evidenceOfCompletion = null
+                    }
+                }
             }
     } else if (error == "missing3" && paymentPlan == "false") {
         req.session.data.submitError = {
@@ -1216,26 +1228,6 @@ router.get('/claim', function (req, res) {
             completionDate: "missing",
             change: true,
             claimValid: false
-            }
-    } else if (error == "date1") {
-        req.session.data.submitError = {
-            learner: "valid",
-            startDate: "invalid",
-            paymentDate: "valid",
-            evidenceOfPayment: "valid",
-            evidenceOfCompletion: "valid",
-            completionDate: "invalid",
-            change: true,
-            claimValid: false
-            }
-
-            for (const claim of req.session.data.claims) {
-                if (claim.claimID == "GE2-UA5D-4K6C-A") {
-                    const submission = getMostRelevantSubmission(claim)
-                    submission.costDate = "2025-03-31T23:55:44.062Z"
-                    submission.completionDate = "2025-02-25T23:55:44.062Z"
-                    submission.evidenceOfCompletion = "certificate1.pdf"
-                }
             }
     } else if (error == "date2") {
         req.session.data.submitError = {
@@ -1297,6 +1289,31 @@ router.get('/claim', function (req, res) {
                 }
             }
     } else if (error == "noedits") {
+        switch (type) {
+            case "100":
+                if (learnerCount == "multi") {
+                    id = "HZE-PYRI-EN4T-A";
+                } else if (learnerCount == "single") {
+                    id = "RKS-RP75-JB2P-A";
+                    for (const claim of req.session.data.claims) {
+                        if (claim.claimID == id) {
+                            const submission = getMostRelevantSubmission(claim)
+                            submission.learners[0].learnerID = "WS 54 2F 01 E"
+                            submission.learners[0].learnerChanged = null
+                        }
+                    }
+                }
+                break;
+
+            case "60":
+                id = "VIM-5JSV-GQUS-B";
+                break;
+
+            case "40":
+                id = "WVN-NHAU-TTES-C";
+                break;
+        }
+
         req.session.data.submitError = {
             learner: "valid",
             startDate: "valid",
@@ -1306,15 +1323,6 @@ router.get('/claim', function (req, res) {
             completionDate: "valid",
             change: false,
             claimValid: false
-            }
-
-            if (type =="60") {
-                for (const claim of req.session.data.claims) {
-                if (claim.claimID == "VJH-8Y37-EZNM-B") {
-                    const submission = getDraftSubmission(claim)
-                    submission.evidenceOfPayment = ["invoice1.pdf", "receipt1.pdf"]
-                }
-            }
             }
         }
 

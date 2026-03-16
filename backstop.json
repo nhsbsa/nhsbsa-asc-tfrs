@@ -1131,8 +1131,13 @@
             "delay": 500
         },
         {
-            "label": "claim-submission-100-missing-details-error-scenario-2",
-            "url": "http://localhost:3000/claims/v22/backstop/claim?status=not-yet-submitted&type=100&error=missing2",
+            "label": "claim-submission-100-missing-details-error-scenario-2-single",
+            "url": "http://localhost:3000/claims/v22/backstop/claim?status=not-yet-submitted&type=100&error=missing2&learnerCount=single",
+            "delay": 500
+        },
+        {
+            "label": "claim-submission-100-missing-details-error-scenario-2-multi",
+            "url": "http://localhost:3000/claims/v22/backstop/claim?status=not-yet-submitted&type=100&error=missing2&learnerCount=multi",
             "delay": 500
         },
         {
@@ -1146,18 +1151,18 @@
             "delay": 500
         },
         {
-            "label": "claim-submission-40-missing-details-error-scenario-4",
+            "label": "claim-submission-40-missing-details-error-scenario-4-payment-plan",
             "url": "http://localhost:3000/claims/v22/backstop/claim?status=not-yet-submitted&type=40&error=missing3&paymentPlan=true",
             "delay": 500
         },
         {
-            "label": "claim-submission-100-date-logic-error",
-            "url": "http://localhost:3000/claims/v22/backstop/claim?status=not-yet-submitted&type=100&error=date1",
+            "label": "claim-submission-100-no-edits-error-single",
+            "url": "http://localhost:3000/claims/v22/backstop/claim?status=queried&type=100&error=noedits&learnerCount=single",
             "delay": 500
         },
         {
-            "label": "claim-submission-100-no-edits-error",
-            "url": "http://localhost:3000/claims/v22/backstop/claim?status=queried&type=100&error=noedits",
+            "label": "claim-submission-100-no-edits-error-multi",
+            "url": "http://localhost:3000/claims/v22/backstop/claim?status=queried&type=100&error=noedits&learnerCount=multi",
             "delay": 500
         },
         {
@@ -1168,11 +1173,6 @@
         {
             "label": "claim-submission-40-no-edits-error",
             "url": "http://localhost:3000/claims/v22/backstop/claim?status=queried&type=40&error=noedits&paymentPlan=false",
-            "delay": 500
-        },
-        {
-            "label": "claim-submission-40-no-edits-error",
-            "url": "http://localhost:3000/claims/v22/backstop/claim?status=queried&type=40&error=noedits&paymentPlan=true",
             "delay": 500
         },
         {
