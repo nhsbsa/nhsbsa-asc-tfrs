@@ -905,7 +905,7 @@ addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, loca
                 if (formattedTitle.includes(formattedTraining)) {
                     trainingCheck = true;
                 }
-                if (removeSpacesAndCharactersAndLowerCase(code) == formattedTraining) {
+                if (removeSpacesAndCharactersAndLowerCase(code).includes(formattedTraining)) {
                     trainingCheck = true;
                 }
             } 
@@ -925,7 +925,7 @@ addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, loca
                 const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
                 const formattedID = removeSpacesAndCharactersAndLowerCase(learnerDetails.id);
 
-                if (formattedfullName.includes(formattedLearner) || formattedID === formattedLearner) {
+                if (formattedfullName.includes(formattedLearner) || formattedID.includes(formattedLearner)) {
                     learnerCheck = true;
                     claim.matchedLearners.push(learnerDetails)
                 }
