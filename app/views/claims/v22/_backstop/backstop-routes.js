@@ -965,6 +965,7 @@ router.get('/claim', function (req, res) {
     const error = req.session.data.error
     const ommt = req.session.data.ommt
     const learnerCount = req.session.data.learnerCount
+    const banner = req.session.data.banner
 
   delete req.session.data
     req.session.data = {
@@ -1325,7 +1326,13 @@ router.get('/claim', function (req, res) {
             claimValid: false
             }
         }
-
+    
+        if (banner == "remove") {
+            req.session.data.learnerConfirmation = {
+                type: "removal",
+                learner: "AJ 54 4F 01 I"
+                }
+        }
     // Redirect to the page you want to screenshot
     res.redirect('../claim/claim-details');
 });
@@ -2104,6 +2111,181 @@ router.get('/claim-history-note', function (req, res) {
 
     // Redirect to the page you want to screenshot
     res.redirect('../claim/claim-history-note');
+});
+
+router.get('/manage-learners', function (req, res) {
+    const status = req.session.data.status
+    const tab = req.session.data.tab
+    const learners = req.session.data.learners
+    const sharedDate = req.session.data.sharedDate
+    const banner = req.session.data.banner
+    delete req.session.data
+
+    let id = null
+
+    req.session.data = {
+        area: 'Claims',
+        userType: 'signatory',
+        journey: 'signin',
+        tabLocation: "claims"
+    };
+
+    switch (status) {
+        case "not-yet-submitted":
+            id = "7JP-X9LK-1QXE-A"
+            break;
+        case "queried":
+            id = "HZE-PYRI-EN4T-A"
+            break;
+        case "submitted":
+            id = "LE5-VQJS-FPSB-A"
+            break;
+        case "approved":
+            id = "4I9-WCXV-WDSH-A"
+            break;
+        case "rejected":
+            id = "L9S-FMIX-Z41P-A"
+            break;
+    }
+
+
+
+    req.session.data.id = id
+    loadData(req, "A02944934")
+
+    if (status == "not-yet-submitted" && ((tab == "todo" && learners == "full") || (tab == "done" && learners == "empty"))) {
+        for (const claim of req.session.data.claims) {
+            if (claim.claimID == id) {
+                const submission = getMostRelevantSubmission(claim)
+                submission.sharedCompletionDate = null
+                for (const learner of submission.learners) {
+                    learner.evidenceOfCompletion = null
+                    learner.completionDate = null
+                }
+            }
+        } 
+    }
+
+    if (status == "not-yet-submitted" && tab == "done" && learners == "full" && sharedDate == "true") {
+        for (const claim of req.session.data.claims) {
+            if (claim.claimID == id) {
+                const submission = getMostRelevantSubmission(claim)
+                submission.sharedCompletionDate = true
+                for (const learner of submission.learners) {
+                    learner.completionDate = "2025-12-23T04:42:51.601Z"
+                }
+            }
+        } 
+    }
+
+    if (status == "queried" && ((tab == "needsaction" && learners == "empty") || (tab == "actioned" && learners == "full"))) {
+        for (const claim of req.session.data.claims) {
+            if (claim.claimID == id) {
+                const draftSubmission = getDraftSubmission(claim)
+                const submission = getMostRelevantSubmission(claim)
+                for (const learner of draftSubmission.learners) {
+                    const matchedLearner = submission.learners.find(item => item.slotID === learner.slotID);
+                    if (matchedLearner.evidenceOfCompletionReview.outcome == "queried" || matchedLearner.evidenceOfCompletionReview.outcome == "rejected") {
+                        learner.evidenceOfCompletion = "certificate2141.pdf"
+                        learner.actioned = true
+                    }
+                }
+            }
+        } 
+    }
+
+    if (status == "queried" && tab == "removed" && learners == "full") {
+        for (const claim of req.session.data.claims) {
+            if (claim.claimID == id) {
+                const submission = getDraftSubmission(claim)
+                submission.removedLearners = submission.learners[0]
+                submission.learners.shift()
+            }
+        } 
+    }
+
+    if (banner == "singleComp") {
+        req.session.data.learnerConfirmation = {
+            type: "date",
+            learner: "WV 15 0F 13 V"
+        };
+    } else if (banner == "sharedComp") {
+        for (const claim of req.session.data.claims) {
+            if (claim.claimID == id) {
+                const submission = getMostRelevantSubmission(claim)
+                submission.sharedCompletionDate = true
+                for (const learner of submission.learners) {
+                    learner.completionDate = "2025-12-23T04:42:51.601Z"
+                }
+            }
+        }
+        req.session.data.learnerConfirmation = {
+            type: "date",
+            allLearners: true
+        };
+    } else if (banner == "evidence") {
+        req.session.data.learnerConfirmation = {
+            type: "evidence",
+            learner: "WV 15 0F 13 V"
+        };
+    } else if (banner == "movedToDone") {
+        req.session.data.learnerConfirmation = {
+            type: "actioned",
+            learner: "KZ 79 0F 13 Z"
+        };
+    } else if (banner == "movedToEdits") {
+        req.session.data.learnerConfirmation = {
+            type: "needsaction",
+            learner: "KZ 79 0F 13 Z"
+        };
+    } else if (banner == "removed1") {
+        req.session.data.learnerConfirmation = {
+            type: "removal",
+            learner: "AJ 54 4F 01 I"
+        };
+        for (const claim of req.session.data.claims) {
+            if (claim.claimID == id) {
+                const submission = getMostRelevantSubmission(claim)
+                submission.removedLearners = submission.learners[0]
+                submission.learners.shift()
+            }
+        } 
+    } else if (banner == "removed2") {
+        req.session.data.learnerConfirmation = {
+            type: "removal",
+            learner: "SE 52 1F 13 K"
+        };
+        for (const claim of req.session.data.claims) {
+            if (claim.claimID == id) {
+                const submission = getDraftSubmission(claim)
+                for (const learner of submission.learners){
+                    if (learner.learnerID == req.session.data.learnerConfirmation.learner) {
+                        submission.removedLearners = learner
+                    }
+                }
+                submission.learners - submission.learners.filter(item => item.learnerID !== req.session.data.learnerConfirmation.learner);
+            }
+        } 
+    }
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../claim/claim-learners#' + tab);
+});
+
+router.get('/remove-learner-confirmation', function (req, res) {
+
+    req.session.data = {
+        area: 'Claims',
+        userType: 'signatory',
+        journey: 'signin',
+        tabLocation: "claims",
+        id: "7JP-X9LK-1QXE-A",
+        learner: "AJ 54 4F 01 I"
+    };
+
+    loadData(req, "A02944934")
+
+    res.redirect('../claim/remove-learner-confirmation');
 });
 
 module.exports = router
