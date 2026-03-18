@@ -1579,7 +1579,7 @@ router.post('/load-data', function (req, res) {
   loadData(req, orgID);
   delete req.session.data['orgID']
 
-  res.redirect('before-you-start.html')
+  res.redirect('self-serve/overview.html')
 })
 
 router.get('/load-data-account-test', function (req, res) {

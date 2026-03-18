@@ -35,29 +35,7 @@
             </nav>
         </div>
     </div>
-
-    <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
-            <h2 class="govuk-heading-l" id="overview">Overview</h1>
-            <p class="govuk-body">Adult social care providers in England can use this service to claim reimbursement towards the cost of training their employees.</p>
-            <p class="govuk-body">This funding is available from the Learning and Development Support Scheme (LDSS). The scheme aims to support adult social care staff to develop new skills by reducing training costs for their employers.</p>
-            <p class="govuk-body">There are 2 ring-fenced funds available:
-                <ul class="govuk-list govuk-list--bullet">
-                    <li>one for Oliver McGowan Mandatory Training</li>
-                    <li>another for all other eligible courses and qualifications</li>
-                </ul>
-            </p>
-            <p class="govuk-body">See a list of <a href="">eligible training courses and qualifications</a>.</p>
-
-            <p class="govuk-body">
-                If you need help using this service
-                The service is managed by the NHS Business Services Authority. You can email us at ASClearninganddevelopmentsupport@nhsbsa.nhs.uk or phone 0300 330 0522.
-                You can also find more detailed information in the LDSS guide for employers.
-            </p>
-        </div>
-        <div class="govuk-grid-column-one-third">
-            <h2 class="govuk-heading-s">Related content</h1>
-            <a class="govuk-link" href="#starting-claim">Stuff</a>
-        </div>
-    </div>
+    
+    {% include "./self-serve/overview.html" %}
+    
 {% endblock %}
