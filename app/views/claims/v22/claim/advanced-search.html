@@ -148,7 +148,34 @@
               <td class="govuk-table__cell">{{ training.code }} </br>{{ training.title }}</td>     
               <td class="govuk-table__cell">
                 {% if submission.learners.length > 0%}
-                  {{ submission.learners.length }} learner{% if submission.learners.length > 1 %}s{% endif %}
+                  
+                  <details class="govuk-details">
+                    <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                      {{ submission.learners.length }} learner{% if submission.learners.length > 1 %}s{% endif %}
+                    </span>
+                  </summary>
+                  <div class="govuk-details__text">
+                      <div style="padding-bottom: 10px;"><strong>Matched learners</strong></div>
+
+                    <ul class="govuk-list">
+                    {% for matchedLearners in claim.matchedLearners%}
+                      <li>{{matchedLearners.givenName}} {{matchedLearners.familyName}}</li>
+                    {%endfor%}
+                    {# To show other learners #}
+                    {# {% set removed = pairClaim.submissions | getRemovedLearners %} #}
+                    {# {% if removed and removed.length > 0 %} #}
+                      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                      <div style="padding-bottom: 10px;"><strong>Other learners</strong></div>
+                    {% for learner in (submission.learners | sortLearners(data.learners))%}
+                        {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+                        <li>{{claimLearner.givenName}} {{claimLearner.familyName}}</li>
+                      {%endfor%}
+                    {# {% endif %} #}
+                  </ul>
+                    
+                  </div>
+                </details>
                 {% else %}
                   No learners added yet
                 {% endif %}
