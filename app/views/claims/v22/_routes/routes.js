@@ -163,8 +163,8 @@ router.post('/advanced-search-handler', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['fromSearchId'];
   delete req.session.data['fromSearchResults'];
-  delete req.session.data['trainingSearchLengthInsufficient'];
-  delete req.session.data['learnerSearchLengthInsufficient'];
+  // delete req.session.data['trainingSearchLengthInsufficient'];
+  // delete req.session.data['learnerSearchLengthInsufficient'];
 
   const training = req.session.data.trainingName
   const learner = req.session.data.learner
@@ -173,12 +173,12 @@ router.post('/advanced-search-handler', function (req, res) {
   if (training == "" && learner == "") {
     errorQuery += "noInputs=true&"
   }
-  if ((training != "" && training.length < 3)) {
-    errorQuery += "trainingSearchLengthInsufficient=true&"
-  }
-  if ((learner != "" && learner.length < 3)) {
-    errorQuery += "learnerSearchLengthInsufficient=true&"
-  } 
+  // if ((training != "" && training.length < 3)) {
+  //   errorQuery += "trainingSearchLengthInsufficient=true&"
+  // }
+  // if ((learner != "" && learner.length < 3)) {
+  //   errorQuery += "learnerSearchLengthInsufficient=true&"
+  // } 
   if (errorQuery == "") {
     delete req.session.data['noInputs'];
     delete req.session.data['notFound'];
@@ -186,8 +186,8 @@ router.post('/advanced-search-handler', function (req, res) {
     delete req.session.data['emptyError'];
     delete req.session.data['fromSearchId'];
     delete req.session.data['fromSearchResults'];
-    delete req.session.data['trainingSearchLengthInsufficient'];
-    delete req.session.data['learnerSearchLengthInsufficient'];
+    // delete req.session.data['trainingSearchLengthInsufficient'];
+    // delete req.session.data['learnerSearchLengthInsufficient'];
     
     res.redirect('claim/advanced-search?fromSearchResults=true#searchResults');
   } else {
