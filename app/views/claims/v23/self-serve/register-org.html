@@ -1,6 +1,6 @@
 {% extends "../_layouts/main.html" %}
 
-{% set pageName = "overview" %}
+{% set pageName = "register-org" %}
 
 {% block pageTitle %}
     {{serviceName}} - GOV.UK
@@ -36,20 +36,33 @@
 
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
-            <h2 class="govuk-heading-l" id="overview">Overview</h2>
-            <p class="govuk-body">Adult social care providers in England can use this online service to claim reimbursement towards the cost of training their employees.</p>
-            <p class="govuk-body">This funding is available from the Learning and Development Support Scheme (LDSS). The LDSS aims to support adult social care staff to develop new skills by reducing training costs for their employers.</p>
-            <p class="govuk-body">You’ll find more details in the LDSS <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/learning-and-development-support-scheme-for-the-adult-social-care-workforce-a-guide-for-employers">guide for employers</a>.</p>
+            <h2 class="govuk-heading-l" id="overview">Register your organisation</h2>
+            <p class="govuk-body">Your Senior Responsible Officer may need to provide the following information when they register:
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>name and contact details</li>
+                    <li>evidence of their role within the organisation (for example, an employment contract)</li>
+                    <li>your organisation’s workplace ID as it appears in the Adult Social Care Workforce Data Set</li>
+                    <li>proof of address (for example, a recent utility or council tax bill)</li>
+                    <li>lease agreement</li>
+                    <li>public liability insurance certificate</li>
+                </ul>
+            </p>
+            <p class="govuk-body">Once we have all the necessary information we'll verify it and carry out counter-fraud checks. We aim to do this as quickly as possible.</p>
 
-            <p class="govuk-body">There are 2 separate ring-fenced funds available: one for Oliver McGowan Mandatory Training (OMMT) and another for all other courses and qualifications eligible under LDSS.</p>
-            <p class="govuk-body">See a list of <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/eligible-training-courses-and-qualifications">eligible training courses and qualifications</a>.</p>
+            <p class="govuk-body">For more about how we use your data, see our <a href="">privacy notice</a>.</p>
 
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Register
+            </button>
+
+            <h3 class="govuk-heading-m">If you need help using this service</h3>
+            <p class="govuk-body">This service is managed by the NHS Business Services Authority. You can email us at <a href="mailto:ASClearninganddevelopmentsupport@nhsbsa.nhs.uk">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
 
             <nav class="govuk-pagination govuk-pagination--block" aria-label="Pagination" style="padding-top: 20px;">
                 {{ govukPagination({
-                next: {
-                    href: "check-if-org-eligible",
-                    labelText: "Check if your oganisation is eligible"
+                previous: {
+                    href: "who-can-register",
+                    labelText: "Who can register"
                 }
                 }) }}
             </nav>

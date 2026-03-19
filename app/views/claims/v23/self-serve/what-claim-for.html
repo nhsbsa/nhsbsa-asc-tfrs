@@ -1,0 +1,100 @@
+{% extends "../_layouts/main.html" %}
+
+{% set pageName = "what-claim-for" %}
+
+{% block pageTitle %}
+    {{serviceName}} - GOV.UK
+{% endblock %}
+
+{% block content %}
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1 class="govuk-heading-l">Claim for adult social care learning and development</h1>
+            <nav class="contents-list" role="navigation" aria-label="Contents">
+                <h2 class="contents-list__title">Contents</h2>
+                <ol class="contents-list__list">
+                    <li class="contents-list__list-item contents-list__list-item">
+                        — <a class="govuk-link govuk-link--no-visited-state" href="overview" style="padding-left: 8px;">Overview</a>
+                    </li>
+                    <li class="contents-list__list-item contents-list__list-item">
+                    — <a class="govuk-link govuk-link--no-visited-state" href="check-if-org-eligible" style="padding-left: 8px;">Check if your organisation is eligible</a>
+                    </li>
+                    <li class="contents-list__list-item contents-list__list-item">
+                    — <a class="govuk-link govuk-link--no-visited-state" href="what-claim-for" style="padding-left: 8px;">What you can claim for</a>
+                    </li>
+                    <li class="contents-list__list-item contents-list__list-item">
+                    — <a class="govuk-link govuk-link--no-visited-state" href="who-can-register" style="padding-left: 8px;">Who can register</a>
+                    </li>
+                    <li class="contents-list__list-item contents-list__list-item">
+                    — <a class="govuk-link govuk-link--no-visited-state" href="register-org" style="padding-left: 8px;">Register your organisation</a>
+                </ol>
+                
+            </nav>
+        </div>
+    </div>
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+
+
+            <h2 class="govuk-heading-l" id="overview">What you can claim for</h2>
+            <p class="govuk-body">To find out which courses and qualifications you can claim for check this list of <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/eligible-training-courses-and-qualifications">eligible training courses and qualifications</a>.</p>
+            <p class="govuk-body">The list also shows the maximum reimbursement amounts available for each learner</p>
+
+
+            <h3 class="govuk-heading-m">Who you can claim for</h3>
+            <p class="govuk-body">You can claim for:
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>staff who provide direct care and are not registered with a professional body</li>
+                    <li>registered managers, including aspiring managers who are working towards registration</li>
+                </ul>
+            </p>
+            <p class="govuk-body">However, if you're claiming for OMMT, you can claim for any member of staff. </p>
+            <p class="govuk-body">See more about <a href="">claiming for OMMT</a></p>
+            <div class="govuk-inset-text">
+                You can only claim reimbursement towards the cost of the training itself, not extras like travel expenses.
+            </div>
+
+
+            <h3 class="govuk-heading-m">How much you can claim</h3>
+            <p class="govuk-body"><strong>The maximum reimbursement amount for each learner is usually less than the training actually costs.</strong></p>
+            <p class="govuk-body">This does not apply to claims for in-house OMMT, which has a fixed reimbursement amount.</p>
+            <p class="govuk-body">See more about <a href="">how we calculate reimbursement amounts</a>.</p>
+
+
+            <h3 class="govuk-heading-m">Submitting claims</h3>
+            <p class="govuk-body">To submit a claim you’ll need to include:
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>what the training was</li>
+                    <li>who completed it</li>
+                    <li>evidence of payment </li>
+                    <li>evidence of training completion for each learner</li>
+                </ul>
+            </p>
+            <p class="govuk-body">See more information about <a href="">what evidence you need to provide</a>.</p>
+
+
+            <h3 class="govuk-heading-m">When you’ll get paid</h3>
+            <p class="govuk-body">We aim to process your claim within 2 to 6 weeks. You’ll usually receive payment no more than 2 weeks after your claim is approved.</p>
+
+
+            <nav class="govuk-pagination govuk-pagination--block" aria-label="Pagination" style="padding-top: 20px;">
+                {{ govukPagination({
+                previous: {
+                    href: "check-if-org-eligible",
+                    labelText: "Check if your organisation is eligible"
+                },
+                next: {
+                    href: "who-can-register",
+                    labelText: "Who can register"
+                }
+                }) }}
+            </nav>
+
+
+        </div>
+
+    </div>
+
+{% endblock %}

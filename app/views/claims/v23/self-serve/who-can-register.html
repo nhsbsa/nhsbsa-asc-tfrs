@@ -1,6 +1,6 @@
 {% extends "../_layouts/main.html" %}
 
-{% set pageName = "overview" %}
+{% set pageName = "who-can-register" %}
 
 {% block pageTitle %}
     {{serviceName}} - GOV.UK
@@ -36,20 +36,29 @@
 
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
-            <h2 class="govuk-heading-l" id="overview">Overview</h2>
-            <p class="govuk-body">Adult social care providers in England can use this online service to claim reimbursement towards the cost of training their employees.</p>
-            <p class="govuk-body">This funding is available from the Learning and Development Support Scheme (LDSS). The LDSS aims to support adult social care staff to develop new skills by reducing training costs for their employers.</p>
-            <p class="govuk-body">You’ll find more details in the LDSS <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/learning-and-development-support-scheme-for-the-adult-social-care-workforce-a-guide-for-employers">guide for employers</a>.</p>
+            <h2 class="govuk-heading-l" id="overview">Who can register</h2>
+            <p class="govuk-body">To register, your organisation first needs to decide who is going to be the Senior Responsible Officer (SRO).</p>
+            <p class="govuk-body">The SRO is the only person who can register with this service.</p>
 
-            <p class="govuk-body">There are 2 separate ring-fenced funds available: one for Oliver McGowan Mandatory Training (OMMT) and another for all other courses and qualifications eligible under LDSS.</p>
-            <p class="govuk-body">See a list of <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/eligible-training-courses-and-qualifications">eligible training courses and qualifications</a>.</p>
+            <h3 class="govuk-heading-m" id="overview">Who is the SRO?</h3>
+            <p class="govuk-body">The SRO is a senior member of staff who takes responsibility for ensuring that your organisation follows all the scheme’s legal requirements and submits accurate, non-fraudulent claims.</p>
+            <p class="govuk-body">To register they will need a mobile phone with an authenticator app, such as <a href="https://support.microsoft.com/en-GB/authenticator/about-microsoft-authenticator">Microsoft Authenticator</a>, downloaded onto it.</p>
+            <p class="govuk-body">Before submitting any claims the SRO must also sign a grant determination letter. This is a legally binding document that outlines all the scheme’s terms and conditions (you’ll find it in the <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/learning-and-development-support-scheme-for-the-adult-social-care-workforce-a-guide-for-employers">guide for employers</a>).</p>
+
+            
+            <h3 class="govuk-heading-m" id="overview">Who can submit claims</h3>
+            <p class="govuk-body">The SRO can invite up to 9 other staff members to become ‘submitters’. Both the SRO and submitters will be able to submit and manage claims.</p>
 
 
             <nav class="govuk-pagination govuk-pagination--block" aria-label="Pagination" style="padding-top: 20px;">
                 {{ govukPagination({
+                previous: {
+                    href: "what-claim-for",
+                    labelText: "What you can claim for"
+                },
                 next: {
-                    href: "check-if-org-eligible",
-                    labelText: "Check if your oganisation is eligible"
+                    href: "register-org",
+                    labelText: "Register your organisation"
                 }
                 }) }}
             </nav>
