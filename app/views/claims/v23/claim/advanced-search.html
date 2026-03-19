@@ -148,7 +148,30 @@
               <td class="govuk-table__cell">{{ training.code }} </br>{{ training.title }}</td>     
               <td class="govuk-table__cell">
                 {% if submission.learners.length > 0%}
-                  {{ submission.learners.length }} learner{% if submission.learners.length > 1 %}s{% endif %}
+                  
+                  <details class="govuk-details">
+                    <summary class="govuk-details__summary">
+                      <span class="govuk-details__summary-text">
+                        {{ submission.learners.length }} learner{% if submission.learners.length > 1 %}s{% endif %}
+                      </span>
+                    </summary>
+                    <div class="govuk-details__text">
+                        <div style="padding-bottom: 10px;"><strong>Matched learners</strong></div>  
+                        <ul class="govuk-list">
+                          {% for matchedLearners in (submission.matchedLearners | sortLearners(data.learners))%}
+                            <li>{{matchedLearners.givenName}} {{matchedLearners.familyName}}</li>
+                          {%endfor%}
+
+                          {% if submission.otherLearners and submission.otherLearners.length > 0 %}
+                            <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+                            <div style="padding-bottom: 10px;"><strong>Other learners</strong></div>
+                          {% for learner in (submission.otherLearners | sortLearners(data.learners))%}
+                              <li>{{learner.givenName}} {{learner.familyName}}</li>
+                            {%endfor%}
+                          {% endif %}
+                        </ul>
+                    </div>
+                  </details>
                 {% else %}
                   No learners added yet
                 {% endif %}
