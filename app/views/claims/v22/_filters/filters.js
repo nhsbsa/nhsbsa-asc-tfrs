@@ -78,15 +78,11 @@ addFilter('errorSummary', function (claim, submitError) {
     } else {
         submission = getMostRelevantSubmission(claim)
     }
-
-    if (submitError.description == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#description-error">Add a description</a></li>')
-    }
-    if (submitError.claimAmount == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#claim-amount-error">Add a cost</a></li>')
-    }
     if (submitError.learner == "missing") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#learner-error">Add a learner</a></li>')
+    }
+    if (submitError.startDate == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#start-date-error">Add a start date</a></li>')
     }
     if (submitError.paymentDate == "missing" && claim.isPaymentPlan && claim.status == "approved") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#payment-date-error">Add a 40% payment date</a></li>')

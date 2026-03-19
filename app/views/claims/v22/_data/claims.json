@@ -50,7 +50,13 @@
           "bank-statement-212-1.pdf",
           "invoice-212.pdf",
           "receipt-212.pdf",
-          "bank-statement-212.pdf"
+          "bank-statement-212.pdf",
+          "test-file1.pdf",
+          "test-file2.pdf",
+          "test-file3.pdf",
+          "test-file4.pdf",
+          "test-file5.pdf",
+          "test-file6.pdf"
         ],
         "evidenceOfPaymentReview": {
           "outcome": null,
@@ -13913,7 +13919,7 @@
         "submittedDate": null,
         "processedBy": null,
         "processedDate": null,
-        "trainingCode": "603/2809/5",
+        "trainingCode": "601/6128/0",
         "startDate": null,
         "costDate": null,
         "evidenceOfPayment": [],
