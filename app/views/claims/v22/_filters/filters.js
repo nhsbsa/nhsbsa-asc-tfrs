@@ -910,20 +910,22 @@ addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, loca
         if (learner == "") { 
             learnerCheck = true
         } else if (submission.learners != null && submission.learners.length > 0) {
-            claim.matchedLearners = []
+            submission.matchedLearners = []
+            submission.otherLearners = []
             for (const l of submission.learners) {
                 const learnerDetails = findLearnerById(l.learnerID, learners);
                 if (!learnerDetails) continue;
 
                 const formattedgivenName = removeSpacesAndCharactersAndLowerCase(learnerDetails.givenName);
                 const formattedfamilyName = removeSpacesAndCharactersAndLowerCase(learnerDetails.familyName);
-                const formattedfullName = formattedgivenName + formattedfamilyName;
                 const formattedLearner = removeSpacesAndCharactersAndLowerCase(learner);
                 const formattedID = removeSpacesAndCharactersAndLowerCase(learnerDetails.id);
 
-                if (formattedfullName.includes(formattedLearner) || formattedID.includes(formattedLearner)) {
+                if (formattedgivenName.startsWith(formattedLearner) || formattedfamilyName.startsWith(formattedLearner) || formattedID.startsWith(formattedLearner)) {
                     learnerCheck = true;
-                    claim.matchedLearners.push(learnerDetails)
+                    submission.matchedLearners.push(learnerDetails)
+                } else {
+                    submission.otherLearners.push(learnerDetails)
                 }
             }
         }
