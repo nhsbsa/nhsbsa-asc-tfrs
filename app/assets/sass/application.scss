@@ -6,6 +6,61 @@
 @import '_timeout-dialog.scss';
 @import '_claim-history-note.scss';
 
+.app-next {
+  margin-top: 40px;
+  padding-top: 15px;
+  border-top: 1px solid #b1b4b6; /* govuk-border-colour */
+}
+
+.app-next__link {
+  text-decoration: none;
+}
+
+.app-next__link:hover .app-next__title {
+  text-decoration: underline;
+}
+
+.app-next__label {
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.app-next__icon {
+  margin-left: 6px;
+}
+
+.app-next__title {
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.contents-list {
+  display: block;
+  margin: 0 0 30px 0;
+  padding: 0;
+  font-family: "GDS Transport", arial, sans-serif;
+}
+
+.contents-list__title {
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 400;
+  margin: 0 0 15px 0;
+}
+
+.contents-list__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contents-list__list-item {
+  padding-top: 10px;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
 .course-search {
   border: 1px solid;
   border-color: $govuk-border-colour;
