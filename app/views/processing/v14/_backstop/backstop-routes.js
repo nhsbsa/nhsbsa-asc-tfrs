@@ -61,7 +61,7 @@ router.get('/org-issue', function (req, res) {
     if ( issue == "timeout") {
         req.session.data.submitError = "timeout"
     } else if ( issue == "dupe") {
-        req.session.data.orgID = "B02944934"
+        req.session.data.orgID = "A02944934"
         req.session.data.submitError = "duplicate"
     } else if ( issue == "incorrect") {
         req.session.data.orgID = "G03944234"
@@ -179,9 +179,7 @@ router.get('/claim', function (req, res) {
     let id = null
     const status = req.session.data.status
     const type = req.session.data.type
-    const error = req.session.data.error
     const userType = req.session.data.userType
-    const radio = req.session.data.radio
     const confirmation = req.session.data.confirmation
     const paymentPlan = req.session.data.paymentPlan
     const ommt = req.session.data.ommt
@@ -190,11 +188,10 @@ router.get('/claim', function (req, res) {
     req.session.data = {
         area: 'Processing',
         userType,
-        journey: "signin",
         tabLocation: "claims",
         orgTab: "singleClaim",
-        orgID: "B02944934",
-        claimScreen: "inProgress"
+        orgID: "A02944934",
+        claimScreen: "claim"
     };
 
     switch (status) {
@@ -202,22 +199,47 @@ router.get('/claim', function (req, res) {
         switch (type) {
             case "100":
             if (ommt == "true") {
-                id = "SOM-MT33-JSK4-A";
+                id = "PSV-TY16-39ER-A";
             } else {
-                id = "HMJ-74V3-T8V5-A";
+                id = "LE5-VQJS-FPSB-A";
             }
             
             break;
 
             case "60":
-            id = "1SC-WE58-MT7W-B";
+            id = "QZP-3H4J-AA4V-B";
             break;
 
             case "40":
             if (paymentPlan == "true") {
-                id = "3SH-I94K-JSND-C";
+                id = "U83-6VEU-73L7-C";
             } else {
-                id = "9JH-I94K-TPRB-C";
+                id = "2VY-XHXI-RJX6-C";
+            }
+            break;
+        }
+        break;
+
+        case "inprogress":
+        switch (type) {
+            case "100":
+            if (ommt == "true") {
+                id = "DRE-M1X4-P9UL-A";
+            } else {
+                id = "8PF-8G5B-2MBN-A";
+            }
+            
+            break;
+
+            case "60":
+            id = "BND-4Z57-JR5I-B";
+            break;
+
+            case "40":
+            if (paymentPlan == "true") {
+                id = "UX8-PXM5-B1SX-C";
+            } else {
+                id = "GT8-2R4R-MN7Y-C";
             }
             break;
         }
@@ -227,21 +249,21 @@ router.get('/claim', function (req, res) {
         switch (type) {
             case "100":
             if (ommt == "true") {
-                id = "LOM-MT32-JDNH-A";
+                id = "7AB-RBDV-RICD-A";
             } else {
-                id = "CWH-E4C7-FBXJ-A";
+                id = "S8U-ME8U-2A6D-A";
             }
             break;
 
             case "60":
-            id = "VJH-8Y37-EZNM-B";
+            id = "A37-1YK1-CE1R-B";
             break;
 
             case "40":
             if (paymentPlan == "true") {
-                id = "47D-748D-JSND-C";
+                id = "GH5-FGAE-TKRT-C";
             } else {
-                id = "SRX-A33U-BMUG-C";
+                id = "WVN-NHAU-TTES-C";
             }
             break;
         }
@@ -251,21 +273,21 @@ router.get('/claim', function (req, res) {
         switch (type) {
             case "100":
             if (ommt == "true") {
-                id = "DOM-MT33-JD23-A";
+                id = "JKR-12X8-I4DV-A";
             } else {
-                id = "CKX-ZZSG-BDCB-A";
+                id = "TYB-PEUI-74YT-A";
             }
             break;
 
             case "60":
-            id = "P1J-EHVI-88A2-B";
+            id = "L91-4CCR-Q8HC-B";
             break;
 
             case "40":
             if (paymentPlan == "true") {
-                id = "3FD-JH62-JKMD-C";
+                id = "7NS-TE5B-BV3C-C";
             } else {
-                id = "SND-EPRS-N3MZ-C";
+                id = "L91-4CCR-Q8HC-C";
             }
             break;
         }
@@ -275,21 +297,21 @@ router.get('/claim', function (req, res) {
         switch (type) {
             case "100":
             if (ommt == "true") {
-                id = "POM-MT32-HDJS-A";
+                id = "U4D-RCMZ-83FB-A";
             } else {
-                id = "ML8-K712-2N27-A";
+                id = "L9S-FMIX-Z41P-A";
             }
             break;
 
             case "60":
-            id = "UK9-JGAN-B4QP-B";
+            id = "3BV-5EQS-8ZPI-B";
             break;
 
             case "40":
             if (paymentPlan == "true") {
-                id = "D6F-K8DF-S82H-C";
+                id = "6ZG-2EVR-WWL3-C";
             } else {
-                id = "A8T-TAGD-ETJE-C";
+                id = "T9B-786Q-WK62-C";
             }
             break;
         }
@@ -301,77 +323,290 @@ router.get('/claim', function (req, res) {
 
     loadData(req)
 
-    if ( radio == "yes") {
-        req.session.data.payment = "approve"
-        req.session.data.completion = "approve"
-    } else if ( radio == "reject") {
-        req.session.data.payment = "reject"
-        req.session.data.completion = "reject"
-    } else if ( radio == "queried") {
-        req.session.data.payment = "queried"
-        req.session.data.completion = "queried"
-    }
-
-
-    if ( error == "radioMissing") {
-        switch (type) {
-            case "100":
-            req.session.data.paymentResponseIncomplete = "true"
-            req.session.data.completionResponseIncomplete = "true"
-            break;
-
-            case "60":
-            req.session.data.paymentResponseIncomplete = "true"
-            break;
-
-            case "40":
-            if (paymentPlan == "true") {
-                req.session.data.paymentResponseIncomplete = "true"
-            }
-            req.session.data.completionResponseIncomplete = "true"
-            break;
-        }
-    } else if ( error == "costMissing") {
-        req.session.data.paymentReimbursementAmountIncomplete = "true"
-        req.session.data.paidInFullResponseIncomplete = "true"
-    }  else if ( error == "costInvalid") {
-        req.session.data.paymentReimbursementAmount = "abc"
-        req.session.data.paymentReimbursementAmountInvalid = "true"
-    } else if ( error == "rejectMissing") {
-        switch (type) {
-            case "100":
-            req.session.data.paymentRejectNoteIncomplete = "true"
-            req.session.data.completionRejectNoteIncomplete = "true"
-            break;
-
-            case "60":
-            req.session.data.paymentRejectNoteIncomplete = "true"
-            break;
-
-            case "40":
-            req.session.data.completionRejectNoteIncomplete = "true"
-            break;
-        }
-    }else if ( error == "queriedMissing") {
-        switch (type) {
-            case "100":
-            req.session.data.paymentQueriedNoteIncomplete = "true"
-            req.session.data.completionQueriedNoteIncomplete = "true"
-            break;
-
-            case "60":
-            req.session.data.paymentQueriedNoteIncomplete = "true"
-            break;
-
-            case "40":
-            req.session.data.completionQueriedNoteIncomplete = "true"
-            break;
-        }
-    }
-
     if ( confirmation == "true") {
         req.session.data.processSuccess = "true"
     } 
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../organisation/org-view-main');
+});
+
+router.get('/processing', function (req, res) {
+    let id = null
+    const type = req.session.data.type
+    const step = req.session.data.step
+    const radio = req.session.data.radio
+    const result = req.session.data.result
+    const error = req.session.data.error
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Processing',
+        userType: "processor",
+        tabLocation: "claims",
+        orgTab: "singleClaim",
+        orgID: "A02944934"
+    };
+
+    if (step == "payment") {
+        req.session.data.claimScreen = "inProgress"
+        req.session.data.claimStep = "payment"
+        if (radio != null) {
+            req.session.data.payment = radio
+        }
+    } else if (step == "completion") {
+        req.session.data.claimScreen = "inProgress"
+        req.session.data.claimStep = "completion"
+        req.session.data.learnerCount = "1"
+        if (radio != null) {
+            req.session.data.completion = radio
+        }
+    } else if (step == "checkList") {
+        req.session.data.claimScreen = "checkList"
+    } else if (step == "confirmOutcome") {
+        req.session.data.claimScreen = "confirmOutcome"
+        req.session.data.result = result
+    }  else if (step == "confirmation") {
+        req.session.data.claimScreen = "claim"
+        req.session.data.processSuccess = "true"
+    }
+
+    if (step == "checkList") {
+        switch (type) {
+            case "100Single":
+                id = "R15-7PE8-YQAX-A";
+                break;
+            case "100Multi":
+                id = "1VL-F4AI-31U6-A";
+                break;
+            case "100OMMTSingle":
+                id = "TS3-31IE-6KSJ-A";
+                break;
+            case "100OMMTMulti":
+                id = "FYR-3YLD-JQJV-A";
+                break;
+            case "60":
+                id = "BND-4Z57-JR5I-B";
+                break;
+            case "40":
+                id = "GT8-2R4R-MN7Y-C";
+                break;
+            case "40PP":
+                id = "UX8-PXM5-B1SX-C";
+                break;
+        }
+    } else if (step == "confirmOutcome" || step == "confirmation") {
+        switch (type) {
+            case "100Single":
+                switch (result) {
+                    case "approve":
+                        id = "2RS-W66G-VEHS-A";
+                        break;
+                    case "queried":
+                        id = "RKS-RP75-JB2P-A";
+                        break;
+                    case "reject":
+                        id = "UJH-9C9P-2HJG-A";
+                        break;
+                }
+                break;
+            case "100Multi":
+                switch (result) {
+                    case "approve":
+                        id = "FTU-IPU5-Y6D4-A";
+                        break;
+                    case "queried":
+                        id = "337-TCSP-QEDR-A";
+                        break;
+                    case "reject":
+                        id = "U5M-XHPU-JZYL-A";
+                        break;
+                }
+                break;
+            case "100OMMTSingle":
+                switch (result) {
+                    case "approve":
+                        id = "4UX-X3GZ-2MUS-A";
+                        break;
+                    case "queried":
+                        id = "NPY-UNL7-KWXY-A";
+                        break;
+                    case "reject":
+                        id = "IV4-FURZ-4U9G-A";
+                        break;
+                }
+                break;
+            case "100OMMTMulti":
+                switch (result) {
+                    case "approve":
+                        id = "4UX-X3GZ-2MUS-A";
+                        break;
+                    case "queried":
+                        id = "NPY-UNL7-KWXY-A";
+                        break;
+                    case "reject":
+                        id = "IV4-FURZ-4U9G-A";
+                        break;
+                }
+                break;
+            case "60":
+                switch (result) {
+                    case "approve":
+                        id = "KNL-K98E-VSA8-B";
+                        break;
+                    case "queried":
+                        id = "A37-1YK1-CE1R-B";
+                        break;
+                    case "reject":
+                        id = "YX2-4IYA-EBUL-B";
+                        break;
+                }
+                break;
+            case "40":
+                switch (result) {
+                    case "approve":
+                        id = "KNL-K98E-VSA8-C";
+                        break;
+                    case "queried":
+                        id = "WVN-NHAU-TTES-C";
+                        break;
+                    case "reject":
+                        id = "T5L-J5HX-SH61-C";
+                        break;
+                }
+                break;
+            case "40PP":
+                switch (result) {
+                    case "approve":
+                        id = "7NS-TE5B-BV3C-C";
+                        break;
+                    case "queried":
+                        id = "GH5-FGAE-TKRT-C";
+                        break;
+                    case "reject":
+                        id = "6ZG-2EVR-WWL3-C";
+                        break;
+                }
+                break;
+        }
+    } else {
+        switch (type) {
+            case "100Single":
+                id = "K8T-2R2P-G6K9-A";
+                break;
+            case "100Multi":
+                id = "LE5-VQJS-FPSB-A";
+                break;
+            case "100OMMTSingle":
+                id = "ZIK-TZ5Q-ANEZ-A";
+                break;
+            case "100OMMTMulti":
+                id = "PSV-TY16-39ER-A";
+                break;
+            case "60":
+                id = "QZP-3H4J-AA4V-B";
+                break;
+            case "40":
+                id = "2VY-XHXI-RJX6-C";
+                break;
+            case "40PP":
+                id = "U83-6VEU-73L7-C";
+                break;
+        }
+    }
+
+    if (error == "missing-radio") {
+        if (step == "payment") {
+            req.session.data.paymentResponseIncomplete = "true"
+        } else if (step == "completion") {
+            req.session.data.completionResponseIncomplete = "true"
+        }
+    } else if (error == "missing-input") {
+        if (step == "payment") {
+            if (radio == "approve") {
+                req.session.data.paymentReimbursementAmountIncomplete = "true"
+                if (type == "60") {
+                    req.session.data.paidInFullResponseIncomplete = "true"
+                }
+            } else if (radio == "queried") {
+                req.session.data.paymentQueriedNoteIncomplete = "true"
+            } else if (radio == "reject") {
+                req.session.data.paymentRejectNoteIncomplete = "true"
+            }
+        } else if (step == "completion") {
+            if (radio == "queried") {
+                req.session.data.completionQueriedNoteIncomplete = "true"
+            } else if (radio == "reject") {
+                req.session.data.completionRejectNoteIncomplete = "true"
+            }
+        }
+            
+    } else if (error == "invalid-input") {
+        req.session.data.paymentReimbursementAmountInvalid = "true"
+        req.session.data.paymentReimbursementAmount = "abc"
+        if (type == "60") {
+            req.session.data.paidInFullResponseIncomplete = "true"
+        }
+    }  else if (error == "checkListError") {
+        id = "LE5-VQJS-FPSB-A";
+        req.session.data.checkListError = {
+            check: false,
+            missingList: [
+                {
+                id: "payment",
+                position: null
+                },
+                {
+                id: "GR 46 4F 92 C",
+                position: 1
+                },
+                {
+                id: "MD 20 2F 63 A",
+                position: 2
+                },
+                {
+                id: "HA 93 7F 69 Q",
+                position: 3
+                },
+                {
+                id: "FI 50 5F 30 D",
+                position: 4
+                },
+                {
+                id: "HM 27 9F 18 T",
+                position: 5
+                },
+                {
+                id: "BU 26 7F 00 Y",
+                position: 6
+                },
+                {
+                id: "PX 89 8F 98 Q",
+                position: 7
+                },
+                {
+                id: "UH 04 6F 47 V",
+                position: 8
+                },
+                {
+                id: "WB 34 5F 39 T",
+                position: 9
+                },
+                {
+                id: "UP 28 8F 89 E",
+                position: 10
+                },
+                {
+                id: "LM 89 7F 48 J",
+                position: 11
+                }
+            ]
+        }
+    }
+
+    req.session.data.id = id
+
+    loadData(req)
 
     // Redirect to the page you want to screenshot
     res.redirect('../organisation/org-view-main');
@@ -469,6 +704,8 @@ router.get('/submissions', function (req, res) {
     const note = req.session.data.note
     const paymentPlan = req.session.data.paymentPlan
     const ommt = req.session.data.ommt
+    const filter = req.session.data.filter
+    const section = req.session.data.section
 
   delete req.session.data
     req.session.data = {
@@ -477,18 +714,17 @@ router.get('/submissions', function (req, res) {
         journey: "signin",
         tabLocation: "claims",
         orgTab: "singleClaim",
-        orgID: "B02944934",
-        claimScreen: "previousSubmissions"
+        orgID: "A02944934",
+        claimScreen: "previousSubmissions",
+        filter
     };
 
     switch (type) {
         case "100":
-        if (ommt == "1") {
-            req.session.data.id = "SOM-MT33-JSK4-A";
-        } else if ( ommt == "2") {
-            req.session.data.id = "FOM-MT12-JSK4-A";
+        if (ommt == "true") {
+            req.session.data.id = "PSV-TY16-39ER-A";
         } else {
-            req.session.data.id = "HMJ-74V3-T8V5-A";
+            req.session.data.id = "C1L-PCT8-BSS6-A";
         }
         
         req.session.data.view = "100"
@@ -496,31 +732,88 @@ router.get('/submissions', function (req, res) {
 
         case "60":
         if (paymentPlan == "true") {
-            req.session.data.id = "3SH-I94K-JSND-B";
+            req.session.data.id = "24G-5H6R-V2J1-B";
         } else {
-            req.session.data.id = "1SC-WE58-MT7W-B";
+            req.session.data.id = "QZP-3H4J-AA4V-B";
         }
         req.session.data.view = "60"
         break;
 
         case "40":
         if (paymentPlan == "true") {
-            req.session.data.id = "7MD-KS92-FB93-C";
+            req.session.data.id = "24G-5H6R-V2J1-C";
         } else {
-            req.session.data.id = "JSK-SJD5-SK3D-C";
+            req.session.data.id = "AF7-6T8A-DY54-C";
         }
         req.session.data.view = "40"
         break;
     }
 
     loadData(req)
-
-    if ( note == "true") {
-        req.session.data.submittedDate = "2025-02-02T11:52:30.850Z"
+    if (note == "needs-action") {
+        req.session.data.id = "RKS-RP75-JB2P-A"
         req.session.data.showNote = "true"
         req.session.data.subCount = "1"
         req.session.data.count = "1"
+        req.session.data.submittedDate = "2025-11-22T20:01:16.131Z"
+        if (section == "completion") {
+            req.session.data.type = "completion"
+            req.session.data.slotID = "1"
+            req.session.data.learnerID = "WS 54 2F 01 E"
+        }
+    } else if (note == "reject") {
+        req.session.data.id = "UJH-9C9P-2HJG-A"
+        req.session.data.showNote = "true"
+        req.session.data.subCount = "3"
+        req.session.data.count = "3"
+        req.session.data.submittedDate = "2026-01-13T18:04:04.085Z"
+        if (section == "completion") {
+            req.session.data.slotID = "1"
+            req.session.data.type = "completion"
+            req.session.data.learnerID = "KZ 79 0F 13 Z"
+        }
     }
+    
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../organisation/org-view-main');
+});
+
+router.get('/submission-learners', function (req, res) {
+    const note = req.session.data.note
+    const filter = req.session.data.filter
+
+  delete req.session.data
+    req.session.data = {
+        area: 'Processing',
+        userType: "processor",
+        journey: "signin",
+        tabLocation: "claims",
+        orgTab: "singleClaim",
+        orgID: "A02944934",
+        claimScreen: "learnerPreviousSubmissions",
+        filter,
+        id: "C1L-PCT8-BSS6-A"
+    };
+
+    loadData(req)
+    if (note == "needs-action") {
+        req.session.data.showProcessorLearnerNote = "true"
+        req.session.data.subCount = "1"
+        req.session.data.count = "1"
+        req.session.data.submittedDate = "2025-11-23T07:56:20.350Z"
+        req.session.data.slotID = "3"
+        req.session.data.learnerID = "FS 47 4F 68 U"
+    } else if (note == "reject") {
+        req.session.data.id = "DM4-AJBV-1F7Q-A"
+        req.session.data.showProcessorLearnerNote = "true"
+        req.session.data.subCount = "3"
+        req.session.data.count = "3"
+        req.session.data.submittedDate = "2025-10-15T03:05:23.879Z"
+        req.session.data.slotID = "16"
+        req.session.data.learnerID = "QX 32 6F 41 Q"
+    }
+    
 
     // Redirect to the page you want to screenshot
     res.redirect('../organisation/org-view-main');
@@ -608,7 +901,7 @@ router.get('/view-org-users', function (req, res) {
         break;
 
         case "5":
-        req.session.data.orgID = "B02944934";
+        req.session.data.orgID = "A02944934";
         if ( resend == "true") {
             req.session.data.name = "lionel-lowel@evergreencare.co.uk"
             req.session.data.invite = "success"
@@ -639,11 +932,11 @@ router.get('/view-org-claims', function (req, res) {
 
     switch (scenario) {
         case "1":
-        req.session.data.orgID = "B02944934";
+        req.session.data.orgID = "A02944934";
         break;
 
         case "2":
-        req.session.data.orgID = "C63281491";
+        req.session.data.orgID = "B13299931";
         break;
     }
 
@@ -773,7 +1066,7 @@ router.get('/confirm-SRO-details-change', function (req, res) {
         break;
 
         case "5":
-        req.session.data.orgID = "B02944934";
+        req.session.data.orgID = "A02944934";
         break;
     }
 

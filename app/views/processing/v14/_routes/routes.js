@@ -152,7 +152,6 @@ router.post('/search-claim-id', function (req, res) {
       foundClaim = c
     }
   }
-  console.log(foundClaim + " " + orgID)
   if (foundClaim == null) {
     if (orgID == null) {
       return res.redirect('process-claim/start-process' + '?id=' + claimID + '&notFound=true')

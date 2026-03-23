@@ -146,6 +146,61 @@
             "delay": 500
         },
         {
+            "label": "ccs-claim-not-yet-processed-40-payment-plan",
+            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=ccsAgent&status=submitted&type=40&paymentPlan=true",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-in-progress-100",
+            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=inprogress&type=100",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-in-progress-100-ommt",
+            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=inprogress&type=100&ommt=true",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-in-progress-60",
+            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=inprogress&type=60",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-in-progress-40",
+            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=inprogress&type=40",
+            "delay": 500
+        },
+        {
+            "label": "processor-claim-in-progress-40-payment-plan",
+            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=inprogress&type=40&paymentPlan=true",
+            "delay": 500
+        },
+        {
+            "label": "ccs-claim-in-progress-100",
+            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=ccsAgent&status=inprogress&type=100",
+            "delay": 500
+        },
+        {
+            "label": "ccs-claim-in-progress-100-ommt",
+            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=ccsAgent&status=inprogress&type=100&ommt=true",
+            "delay": 500
+        },
+        {
+            "label": "ccs-claim-in-progress-60",
+            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=ccsAgent&status=inprogress&type=60",
+            "delay": 500
+        },
+        {
+            "label": "ccs-claim-in-progress-40",
+            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=ccsAgent&status=inprogress&type=40",
+            "delay": 500
+        },
+        {
+            "label": "ccs-claim-in-progress-40-payment-plan",
+            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=ccsAgent&status=inprogress&type=40&paymentPlan=true",
+            "delay": 500
+        },
+        {
             "label": "claim-needs-action-100",
             "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=queried&type=100",
             "delay": 500
@@ -221,258 +276,578 @@
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-100-radio-missing-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=100&error=radioMissing",
+            "label": "claim-processing-100Single-payment",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=payment",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-60-radio-missing-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=60&error=radioMissing",
+            "label": "claim-processing-100Multi-payment",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=payment",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-40-radio-missing-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=40&error=radioMissing",
+            "label": "claim-processing-60-payment",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=payment",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-40-radio-missing-error-payment-plan",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=40&error=radioMissing&paymentPlan=true",
+            "label": "claim-processing-40PP-payment",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=payment",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-100-radio-yes",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=100&radio=yes",
+            "label": "claim-processing-100Single-payment-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=payment&radio=approve",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-60-radio-yes",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=60&radio=yes",
+            "label": "claim-processing-100Multi-payment-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=payment&radio=approve",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-40-radio-yes",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=40&radio=yes",
+            "label": "claim-processing-60-payment-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=payment&radio=approve",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-40-radio-yes-payment-plan",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=40&radio=yes&paymentPlan=true",
+            "label": "claim-processing-40PP-payment-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=payment&radio=approve",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-100-radio-reject",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=100&radio=reject",
+            "label": "claim-processing-100Single-payment-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=payment&radio=queried",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-60-radio-reject",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=60&radio=reject",
+            "label": "claim-processing-100Multi-payment-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=payment&radio=queried",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-40-radio-reject",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=40&radio=reject",
+            "label": "claim-processing-60-payment-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=payment&radio=queried",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-100-radio-queried",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=100&radio=queried",
+            "label": "claim-processing-40PP-payment-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=payment&radio=queried",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-60-radio-queried",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=60&radio=queried",
+            "label": "claim-processing-100Single-payment-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=payment&radio=reject",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-40-radio-queried",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=40&radio=queried",
+            "label": "claim-processing-100Multi-payment-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=payment&radio=reject",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-100-cost-missing-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=100&radio=yes&error=costMissing",
+            "label": "claim-processing-60-payment-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=payment&radio=reject",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-60-cost-missing-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=60&radio=yes&error=costMissing",
+            "label": "claim-processing-40PP-payment-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=payment&radio=reject",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-100-cost-invalid-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=100&radio=yes&error=costInvalid",
+            "label": "claim-processing-100Single-completion",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=completion",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-60-cost-invalid-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=60&radio=yes&error=costInvalid",
+            "label": "claim-processing-100Multi-completion",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=completion",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-100-radio-reject-missing-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=100&radio=reject&error=rejectMissing",
+            "label": "claim-processing-100OMMTSingle-completion",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTSingle&step=completion",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-60-radio-reject-missing-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=60&radio=reject&error=rejectMissing",
+            "label": "claim-processing-100OMMTMulti-completion",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTMulti&step=completion",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-40-radio-reject-missing-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=40&radio=reject&error=rejectMissing",
+            "label": "claim-processing-40-completion",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=completion",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-100-radio-queried-missing-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=100&radio=queried&error=queriedMissing",
+            "label": "claim-processing-40PP-completion",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=completion",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-60-radio-queried-missing-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=60&radio=queried&error=queriedMissing",
+            "label": "claim-processing-100Single-completion-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=completion&radio=approve",
             "delay": 500
         },
         {
-            "label": "processor-claim-not-yet-processed-40-radio-queried-missing-error",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=submitted&type=40&radio=queried&error=queriedMissing",
+            "label": "claim-processing-100Multi-completion-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=completion&radio=approve",
             "delay": 500
         },
         {
-            "label": "processor-claim-approve-outcome-100",
-            "url": "http://localhost:3000/processing/v14/backstop/outcome?status=approve&type=100",
+            "label": "claim-processing-100OMMTSingle-completion-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTSingle&step=completion&radio=approve",
             "delay": 500
         },
         {
-            "label": "processor-claim-approve-outcome-100-ommt",
-            "url": "http://localhost:3000/processing/v14/backstop/outcome?status=approve&type=100&ommt=true",
+            "label": "claim-processing-100OMMTMulti-completion-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTMulti&step=completion&radio=approve",
             "delay": 500
         },
         {
-            "label": "processor-claim-approve-outcome-60",
-            "url": "http://localhost:3000/processing/v14/backstop/outcome?status=approve&type=60",
+            "label": "claim-processing-40-completion-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=completion&radio=approve",
             "delay": 500
         },
         {
-            "label": "processor-claim-approve-outcome-40",
-            "url": "http://localhost:3000/processing/v14/backstop/outcome?status=approve&type=40",
+            "label": "claim-processing-40PP-completion-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=completion&radio=approve",
             "delay": 500
         },
         {
-            "label": "processor-claim-needs-action-outcome-100",
-            "url": "http://localhost:3000/processing/v14/backstop/outcome?status=queried&type=100",
+            "label": "claim-processing-100Single-completion-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=completion&radio=queried",
             "delay": 500
         },
         {
-            "label": "processor-claim-needs-action-outcome-60",
-            "url": "http://localhost:3000/processing/v14/backstop/outcome?status=queried&type=60",
+            "label": "claim-processing-100Multi-completion-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=completion&radio=queried",
             "delay": 500
         },
         {
-            "label": "processor-claim-needs-action-outcome-40",
-            "url": "http://localhost:3000/processing/v14/backstop/outcome?status=queried&type=40",
+            "label": "claim-processing-100OMMTSingle-completion-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTSingle&step=completion&radio=queried",
             "delay": 500
         },
         {
-            "label": "processor-claim-reject-outcome-100",
-            "url": "http://localhost:3000/processing/v14/backstop/outcome?status=reject&type=100",
+            "label": "claim-processing-100OMMTMulti-completion-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTMulti&step=completion&radio=queried",
             "delay": 500
         },
         {
-            "label": "processor-claim-reject-outcome-60",
-            "url": "http://localhost:3000/processing/v14/backstop/outcome?status=reject&type=60",
+            "label": "claim-processing-40-completion-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=completion&radio=queried",
             "delay": 500
         },
         {
-            "label": "processor-claim-reject-outcome-40",
-            "url": "http://localhost:3000/processing/v14/backstop/outcome?status=reject&type=40",
+            "label": "claim-processing-40PP-completion-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=completion&radio=queried",
             "delay": 500
         },
         {
-            "label": "claim-needs-action-100-confirmation",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=queried&type=100&confirmation=true",
+            "label": "claim-processing-100Single-completion-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=completion&radio=reject",
             "delay": 500
         },
         {
-            "label": "claim-needs-action-60-confirmation",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=queried&type=60&confirmation=true",
+            "label": "claim-processing-100Multi-completion-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=completion&radio=reject",
             "delay": 500
         },
         {
-            "label": "claim-needs-action-40-confirmation",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=queried&type=40&confirmation=true",
+            "label": "claim-processing-100OMMTSingle-completion-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTSingle&step=completion&radio=reject",
             "delay": 500
         },
         {
-            "label": "claim-approved-100-confirmation",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=approved&type=100&confirmation=true",
+            "label": "claim-processing-100OMMTMulti-completion-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTMulti&step=completion&radio=reject",
             "delay": 500
         },
         {
-            "label": "claim-approved-60-confirmation",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=approved&type=60&confirmation=true",
+            "label": "claim-processing-40-completion-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=completion&radio=reject",
             "delay": 500
         },
         {
-            "label": "claim-approved-40-confirmation",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=approved&type=40&confirmation=true",
+            "label": "claim-processing-40PP-completion-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=completion&radio=reject",
             "delay": 500
         },
         {
-            "label": "claim-rejected-100-confirmation",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=rejected&type=100&confirmation=true",
+            "label": "claim-processing-100Single-progress",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=checkList",
             "delay": 500
         },
         {
-            "label": "claim-rejected-60-confirmation",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=rejected&type=60&confirmation=true",
+            "label": "claim-processing-100Multi-progress",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=checkList",
             "delay": 500
         },
         {
-            "label": "claim-rejected-40-confirmation",
-            "url": "http://localhost:3000/processing/v14/backstop/claim?userType=processor&status=rejected&type=40&confirmation=true",
+            "label": "claim-processing-100OMMTSingle-progress",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTSingle&step=checkList",
             "delay": 500
         },
         {
-            "label": "submissions-100",
-            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100",
+            "label": "claim-processing-100OMMTMulti-progress",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTMulti&step=checkList",
             "delay": 500
         },
         {
-            "label": "submissions-100-ommt-internal",
-            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100&ommt=1",
+            "label": "claim-processing-60-progress",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=checkList",
             "delay": 500
         },
         {
-            "label": "submissions-100-ommt-internal-change",
-            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100&ommt=2",
+            "label": "claim-processing-40-progress",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=checkList",
             "delay": 500
         },
         {
-            "label": "submissions-60",
-            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=60",
+            "label": "claim-processing-40PP-progress",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=checkList",
             "delay": 500
         },
         {
-            "label": "submissions-60-payment-plan",
-            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=60&paymentPlan=true",
+            "label": "claim-processing-100Single-outcome-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=confirmOutcome&result=approve",
             "delay": 500
         },
         {
-            "label": "submissions-40",
-            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=40",
+            "label": "claim-processing-100Multi-outcome-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=confirmOutcome&result=approve",
             "delay": 500
         },
         {
-            "label": "submissions-40-payment-plan",
-            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=40&paymentPlan=true",
+            "label": "claim-processing-100OMMTSingle-outcome-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTSingle&step=confirmOutcome&result=approve",
             "delay": 500
         },
         {
-            "label": "edit-note",
-            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100&note=true",
+            "label": "claim-processing-100OMMTMulti-outcome-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTMulti&step=confirmOutcome&result=approve",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-60-outcome-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=confirmOutcome&result=approve",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40-outcome-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=confirmOutcome&result=approve",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40PP-outcome-approve",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=confirmOutcome&result=approve",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Single-outcome-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=confirmOutcome&result=queried",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Multi-outcome-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=confirmOutcome&result=queried",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100OMMTSingle-outcome-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTSingle&step=confirmOutcome&result=queried",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100OMMTMulti-outcome-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTMulti&step=confirmOutcome&result=queried",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-60-outcome-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=confirmOutcome&result=queried",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40-outcome-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=confirmOutcome&result=queried",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40PP-outcome-queried",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=confirmOutcome&result=queried",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Single-outcome-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=confirmOutcome&result=reject",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Multi-outcome-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=confirmOutcome&result=reject",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100OMMTSingle-outcome-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTSingle&step=confirmOutcome&result=reject",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100OMMTMulti-outcome-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTMulti&step=confirmOutcome&result=reject",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-60-outcome-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=confirmOutcome&result=reject",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40-outcome-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=confirmOutcome&result=reject",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40PP-outcome-reject",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=confirmOutcome&result=reject",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Single-confirmation",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=confirmation&result=approve",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Multi-confirmation",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=confirmation&result=approve",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100OMMTSingle-confirmation",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTSingle&step=confirmation&result=approve",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100OMMTMulti-confirmation",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100OMMTMulti&step=confirmation&result=approve",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-60-confirmation",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=confirmation&result=approve",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40-confirmation",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=confirmation&result=approve",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40PP-confirmation",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=confirmation&result=approve",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Single-payment-missing-radio-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=payment&error=missing-radio",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-60-payment-missing-radio-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=payment&error=missing-radio",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40PP-payment-missing-radio-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=payment&error=missing-radio",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Single-payment-approve-missing-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=payment&radio=approve&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-60-payment-missing-approve-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=payment&radio=approve&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Single-payment-approve-invalid-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=payment&radio=approve&error=invalid-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-60-payment-missing-approve-invalid-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=payment&radio=approve&error=invalid-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Single-payment-queried-missing-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=payment&radio=queried&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-60-payment-missing-queried-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=payment&radio=queried&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40PP-payment-missing-queried-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=payment&radio=queried&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Single-payment-reject-missing-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=payment&radio=reject&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-60-payment-missing-reject-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=60&step=payment&radio=reject&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40PP-payment-missing-reject-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40PP&step=payment&radio=reject&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Single-completion-queried-missing-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=completion&radio=queried&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40-completion-missing-queried-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=completion&radio=queried&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100Single-completion-reject-missing-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=completion&radio=reject&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40-completion-missing-reject-input-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=completion&radio=reject&error=missing-input",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100-completion-missing-radio-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Single&step=completion&error=missing-radio",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-40-completion-missing-radio-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=40&step=completion&error=missing-radio",
+            "delay": 500
+        },
+        {
+            "label": "claim-processing-100-checklist-error",
+            "url": "http://localhost:3000/processing/v14/backstop/processing?type=100Multi&step=checkList&error=checkListError",
+            "delay": 500
+        },
+        {
+            "label": "submissions-100-filter-all",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "submissions-100-ommt-internal-filter-all",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100&ommt=true&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "submissions-60-filter-all",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=60&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "submissions-60-payment-plan-filter-all",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=60&paymentPlan=true&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "submissions-40-filter-all",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=40&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "submissions-40-payment-plan-filter-all",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=40&paymentPlan=true&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "submissions-100-filter-changed",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100&filter=changed",
+            "delay": 500
+        },
+        {
+            "label": "submissions-100-ommt-internal-filter-changed",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100&ommt=true&filter=changed",
+            "delay": 500
+        },
+        {
+            "label": "submissions-60-filter-changed",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=60&filter=changed",
+            "delay": 500
+        },
+        {
+            "label": "submissions-60-payment-plan-filter-changed",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=60&paymentPlan=true&filter=changed",
+            "delay": 500
+        },
+        {
+            "label": "submissions-40-filter-changed",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=40&filter=changed",
+            "delay": 500
+        },
+        {
+            "label": "submissions-40-payment-plan-filter-changed",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=40&paymentPlan=true&filter=changed",
+            "delay": 500
+        },
+        {
+            "label": "submissions-learners-100-filter-all",
+            "url": "http://localhost:3000/processing/v14/backstop/submission-learners?type=100&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "submissions-learners-100-filter-changed",
+            "url": "http://localhost:3000/processing/v14/backstop/submission-learners?type=100&filter=changed",
+            "delay": 500
+        },
+        {
+            "label": "needs-action-payment-note",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100&note=needs-action&section=payment&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "needs-action-completion-note-single-learner",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100&note=needs-action&section=completion&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "needs-action-completion-note-multi-learner",
+            "url": "http://localhost:3000/processing/v14/backstop/submission-learners?type=100&note=needs-action&section=completion&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "rejection-payment-note",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100&note=reject&section=payment&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "rejection-completion-note-single-learner",
+            "url": "http://localhost:3000/processing/v14/backstop/submissions?type=100&note=reject&section=completion&filter=everything",
+            "delay": 500
+        },
+        {
+            "label": "rejection-completion-note-multi-learner",
+            "url": "http://localhost:3000/processing/v14/backstop/submission-learners?type=100&note=reject&section=completion&filter=everything",
             "delay": 500
         },
         {

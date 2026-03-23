@@ -519,8 +519,6 @@ function checkProcessingState(claim) {
 
 function checkDone(review, type, claim, trainingCode) {
     let result = true
-    console.log(claim.isPaymentPlan)
-    console.log(review.outcome)
     if (type == "payment" && ((claim.claimType == "100" && !(isInternalOMMT(trainingCode))) || (claim.claimType == "60") || (claim.claimType == "40" && claim.isPaymentPlan) ) ) {
 
         if (review.outcome != null) {
