@@ -262,18 +262,13 @@
                                 <mark class="hods-highlight">
                                 <strong>{{ submission.evidenceOfCompletion }}</strong>
                                 </mark>
-                                (<a class="govuk-link" target="_blank"
-                                    href="/public/images/{{ submission.evidenceOfCompletion }}">
-                                open<span class="govuk-visually-hidden"> {{ submission.evidenceOfCompletion }}</span>
-                                </a>)
+                                (<a class="govuk-link" href="/public/images/{{submission.evidenceOfCompletion}}" target="_blank">open <span class="govuk-visually-hidden">{{submission.evidenceOfCompletion}} </span>in new tab</a>)
                             </td>
                             {% else %}
                             <td class="govuk-table__cell">
                                 {{ submission.evidenceOfCompletion }}
-                                (<a class="govuk-link" target="_blank"
-                                    href="/public/images/{{ submission.evidenceOfCompletion }}">
-                                open<span class="govuk-visually-hidden"> {{ submission.evidenceOfCompletion }}</span>
-                                </a>)
+                                (<a class="govuk-link" href="/public/images/{{submission.evidenceOfCompletion}}" target="_blank">open <span class="govuk-visually-hidden">{{submission.evidenceOfCompletion}} </span>in new tab</a>)
+
                             </td>
                             {% endif %}
                         {% else %}
