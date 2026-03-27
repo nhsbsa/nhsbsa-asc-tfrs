@@ -940,7 +940,33 @@ addFilter('claimsMatchAdvancedSearch', function (claims, training, learner, loca
 
         return check
     })
+
     return searched
+})
+
+
+addFilter('orderClaims', function (claims) {
+    
+    return claims.sort((a, b) => {
+        const statusOrder = { inProgress: 1, queried: 2, submitted: 3, rejected: 4, approved: 5};
+        
+        // Compare statuses based on order
+        const statusComparison = statusOrder[a.status] - statusOrder[b.status];
+        if (statusComparison !== 0) return statusComparison;
+        
+        // If statuses are the same, sort by corresponding date in descending order
+        const subA = getMostRelevantSubmission(a);
+        const subB = getMostRelevantSubmission(b);
+        const titleA = subA.trainingCode
+            ? (findCourseByCode(subA.trainingCode)?.title || "")
+            : "";
+
+        const titleB = subB.trainingCode
+            ? (findCourseByCode(subB.trainingCode)?.title || "")
+            : "";
+
+        return titleA.localeCompare(titleB);
+    });
 })
 
 addFilter('filteredClaims', function (claims, statuses, dates, types) {

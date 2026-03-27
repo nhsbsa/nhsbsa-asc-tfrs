@@ -137,7 +137,7 @@
         </thead>
         <tbody class="govuk-table__body">
 
-          {% for claim in matchedClaims %} 
+          {% for claim in matchedClaims | orderClaims %} 
             {% set submission = claim | getMostRelevantSubmission%}
             {% set training = submission.trainingCode | findTraining %}
 
