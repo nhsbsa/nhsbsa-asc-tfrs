@@ -429,7 +429,7 @@ function determineOutcome(claim) {
     const paymentResponse = submission.evidenceOfPaymentReview.outcome
     const learners = submission.learners
     
-    if (claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) {
+    if ((claim.claimType == "100" && !(isInternalOMMT(submission.trainingCode))) || (claim.claimType == "40" && claim.isPaymentPlan)) {
       if (paymentResponse == "fail" || getOverallStatus(learners) == "reject") {
         result = "reject";
       } else if (paymentResponse == "queried" || getOverallStatus(learners) == "queried") {
