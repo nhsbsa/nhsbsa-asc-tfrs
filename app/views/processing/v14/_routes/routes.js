@@ -3,6 +3,7 @@ const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
 const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode} = require('../_helpers/helpers.js');
+const { generateClaim } = require('../_helpers/generate-claims.js');
 
 router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
 router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));

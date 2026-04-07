@@ -822,3 +822,13 @@ addFilter('findOrderedIndex', function(learners, slotID) {
     const newSlot = order.findIndex(item => item.slotID === slotID);
     return newSlot + 1
 });
+
+addFilter('allInternalOMMT', function (submissions) {
+    for (const submission of submissions) {
+        if (!isInternalOMMT(submission.trainingCode)) {
+            return false
+        }
+    }
+    return true
+})
+

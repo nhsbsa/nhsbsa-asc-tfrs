@@ -149,7 +149,7 @@
                             </tr>
                         {% endif  %}
 
-                        {% if ((data.view == "100" and not internalOMMTCheck) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and claimFlags.paymentDate))%}
+                        {% if ((data.view == "100" and not (sortedSubmissions | allInternalOMMT)) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and claimFlags.paymentDate))%}
                             <tr class="govuk-table__row" id="paymentDate">
                                 <td class="govuk-table__cell"><strong>Payment date</strong></td>
                                 {% for submission in sortedSubmissions %}
@@ -166,7 +166,7 @@
                             </tr>
                         {% endif %}
 
-                        {% if ((data.view == "100" and not internalOMMTCheck) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and claimFlags.evidenceOfPayment))%}
+                        {% if ((data.view == "100" and not (sortedSubmissions | allInternalOMMT)) or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and claimFlags.evidenceOfPayment))%}
                             <tr class="govuk-table__row" id="paymentEvidence">
                                 <td class="govuk-table__cell"><strong>Payment evidence</strong></td>
                                 {% for submission in sortedSubmissions %}
@@ -193,7 +193,7 @@
                             </tr>
                         {% endif %}
 
-                        {% if (not (submission.trainingCode | isInternalOMMT)) and (data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and (claimFlags.training or claimFlags.startDate or claimFlags.paymentDate or claimFlags.evidenceOfPayment))) %}
+                        {% if (not (sortedSubmissions | allInternalOMMT)) and (data.view == "100" or data.view == "60" or (data.view == "40" and claim.isPaymentPlan == true)) and (data.filter == "everything" or (data.filter == "changed" and (claimFlags.training or claimFlags.startDate or claimFlags.paymentDate or claimFlags.evidenceOfPayment))) %}
                             <tr class="govuk-table__row">
                                 <td class="govuk-table__cell"><strong>Payment outcome</strong></td>
                                 {% set count = sortedSubmissions.length %}
