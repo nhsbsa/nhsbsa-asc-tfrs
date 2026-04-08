@@ -6,7 +6,7 @@
 
 {% block beforeContent %}
 <div >
-    <a href="SRO-confirmation" class="govuk-back-link">Back</a>
+    <a href="job-title" class="govuk-back-link">Back</a>
 </div>
 {% endblock %}
 
@@ -62,9 +62,14 @@
                         name="orgName" type="text" value="{{ data.orgName | default ('') }}">
                 </fieldset>
             </div>
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            <div class="govuk-button-group">
+              <button type="submit" class="govuk-button" data-module="govuk-button">
+                  Continue
+              </button>
+              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Save and finish later
+              </button>
+            </div>
         </form>
     </div>
 </div>

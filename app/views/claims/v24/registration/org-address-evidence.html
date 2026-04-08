@@ -1,0 +1,101 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+{% block pageTitle %}
+{% if data.orgNameEmptyError or data.orgNameInvalid %}Error: {% endif %}What is your job title? — Complete registration — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="org-address" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    {% if data.errorFileTooBig or data.errorWrongFileFormat or data.errorFileMissing %}
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            <li>
+              <a href="#upload">
+                {% if data.errorFileTooBig %}
+                The file must be smaller than 2MB
+                {% elif data.errorWrongFileFormat %}
+                The file must be a PDF, JPG, JPEG or PNG.
+                {% elif data.errorFileMissing %}
+                Select a file as evidence of {{data.type}}
+                {% endif %}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-l">Register a new organisation</span>
+    <h1 class="govuk-heading-l">Provide evidence of your organisation address</h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <p class="govuk-body">You must provide avidence of your organisations address. This can be one of the following:</p>
+      <ul class="govuk-list govuk-list--bullet">
+            <li>a recent council tax bill</li>
+            <li>a recent utility bill</li>
+            <li>lease agreement</li>
+            <li>public liability insurance certificate</li>
+        </ul>
+    <p class="govuk-body">These can be in PDF, JPG, JPEG or PNG format.</p>
+
+    <div id="upload"
+      class="govuk-form-group {% if data.errorFileTooBig or data.errorWrongFileFormat  or data.errorFileMissing %} govuk-form-group--error {% endif %}">
+      <label class="govuk-label" for="evidenceFile">
+        Upload a file
+      </label>
+      {% if data.errorFileTooBig or data.errorWrongFileFormat or data.errorFileMissing %}
+        <p id="upload" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span>
+          {% if data.errorFileTooBig %}
+            The file must be smaller than 2MB
+          {% elif data.errorWrongFileFormat %}
+            The file must be a PDF, JPG, JPEG or PNG.
+          {% elif data.errorFileMissing %}
+            Select an evidence of {{data.type}}
+          {% endif %}
+        </p>
+      {% endif %}
+      <input
+        class="govuk-file-upload {% if data.errorFileTooBig or data.errorWrongFileFormat  or data.errorFileMissing %} govuk-file-upload--error {% endif %}"
+        id="evidenceFile" name="evidenceFile" type="file" aria-describedby="evidenceFile-error">
+    </div>
+    <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to
+        update file upload progress</a>
+      </p>
+
+    <form action="asc-wds-id" method="post" novalidate>
+        <div class="govuk-button-group">
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Save and finish later
+            </button>
+        </div>
+    </form>
+
+  </div>
+
+{% endblock %}
