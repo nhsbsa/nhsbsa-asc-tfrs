@@ -1,0 +1,52 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+
+{% block pageTitle %}
+{{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="before-you-start" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Register a new organisation</span>
+        <form action="../confirmationResponse" method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="confirmation-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        Are you the senior responsible officer for the organisation you want to register
+                    </h1>
+                    </legend>
+                    <div id="confirmation-hint" class="govuk-hint">
+                    Only the senior responsible officer can register their organisation with our service. 
+                    </div>
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmationResponse" name="confirmationResponse" type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="confirmationResponse">
+                            Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmationResponse-2" name="confirmationResponse" type="radio" value="no">
+                            <label class="govuk-label govuk-radios__label" for="confirmationResponse-2">
+                            No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

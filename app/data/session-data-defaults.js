@@ -3,9 +3,19 @@ module.exports = {
         "claimsCurrent": "v23",
         "claimVersions": [
             {
-                "versionNo": "23",
+                "versionNo": "24",
                 "phase": "Beta",
                 "status": ["design"],
+                "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-24/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },
+            {
+                "versionNo": "23",
+                "phase": "Beta",
+                "status": ["UR"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-23/",
                 "tested": null,
                 "created": null,
