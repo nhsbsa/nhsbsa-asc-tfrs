@@ -28,16 +28,12 @@
 Duplicate claim - Claim: {{data.id}}
 {% endblock %}
 
-{% block beforeContent %}
-<a href="javascript:history.back()" class="govuk-back-link">Back</a>
-{% endblock %}
-
 {% block content %}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
-        <h1 class="govuk-heading-l">Claims already submitted for this training</h1>
+        <h1 class="govuk-heading-l">You cannot submit this claim</h1>
     </div>
     <div class="govuk-grid-column-two-thirds">
 
@@ -45,101 +41,67 @@ Duplicate claim - Claim: {{data.id}}
         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
         <strong class="govuk-warning-text__text">
           <span class="govuk-visually-hidden">Warning</span>
-          You cannot submit a claim for this training because claims have already been made for the learners below.
+          A claim has already been submitted for this combination of training and learners.
         </strong>
       </div>
-        
 
-        {# <h2 class="govuk-heading-m">Training</h2>
-        {% if data.changeTrainingCode != null or data.changeTrainingCode != "" %}
-            {% set training = data.changeTrainingCode | findTraining %}
-        {% else %}
-            {% set training = submission.trainingCode | findTraining %}
-        {% endif %}
-
-        <p class="govuk-body">{{training.title}}</p> #}
-
+      <p class="govuk-body">
+        You can only claim for the same training and learners once.
+      </p>
+      <p class="govuk-body">
+        Someone in your organisation, or a different organisation, may already have submitted a claim for this training and these learners:
+      </p>
 
       <dl class="govuk-summary-list">
-  <div class="govuk-summary-list__row">
-    <dt class="govuk-summary-list__key">
-      Training name
-    </dt>
-    <dd class="govuk-summary-list__value">
-      Level 3 Digital Skills Bootcamp
-    </dd>
-    {# <dd class="govuk-summary-list__actions">
-      <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a>
-    </dd> #}
-  </div>
-
-
-</dl>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Training
+          </dt>
+          <dd class="govuk-summary-list__value">
+            Level 3 Digital Skills Bootcamp
+          </dd>
+        </div>
+      </dl>
 
       <table class="govuk-table">
-  <caption class="govuk-table__caption govuk-table__caption--m">
-    Learners with existing claims
-  </caption>
-  <thead class="govuk-table__head">
-    <tr class="govuk-table__row">
-      <th scope="col" class="govuk-table__header">Learner name</th>
-      <th scope="col" class="govuk-table__header">National Insurance number</th>
-      {# <th scope="col" class="govuk-table__header">Action</th> #}
-    </tr>
-  </thead>
-  <tbody class="govuk-table__body">
 
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">Jane Smith</td>
-      <td class="govuk-table__cell">QQ123456C</td>
-      {# <td class="govuk-table__cell">
-        <a href="/remove-learner/jane-smith" class="govuk-link">
-          Remove<span class="govuk-visually-hidden"> Jane Smith</span>
-        </a>
-      </td> #}
-    </tr>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Learners</th>
+            <th scope="col" class="govuk-table__header">National Insurance number</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
 
-    <tr class="govuk-table__row">
-      <td class="govuk-table__cell">John Doe</td>
-      <td class="govuk-table__cell">AB987654D</td>
-      {# <td class="govuk-table__cell"> 
-        <a href="/remove-learner/john-doe" class="govuk-link">
-          Remove<span class="govuk-visually-hidden"> John Doe</span>
-        </a>
-      </td> #}
-    </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">Jane Smith</td>
+            <td class="govuk-table__cell">QQ123456C</td>
+          </tr>
 
-  </tbody>
-</table>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">John Doe</td>
+            <td class="govuk-table__cell">AB987654D</td>
+          </tr>
+
+        </tbody>
+      </table>
 
 
-<!-- Guidance section (dynamic) -->
-{# <div class="govuk-inset-text"> #}
-
-
-
-  <div class="govuk-inset-text">
   <p class="govuk-body">
-    {# Check that you selected the correct training and learner. You may need to go back and choose a different learner. #}
-        {# If you think this is a mistake check you have selected the correct training and learners, otherwise remove duplicated learners and try again #}
-    Check you hae selected the correct training, otherwise remove duplicated learners and try again
+    Go back to the claim and check that you have added the correct training and learners.
   </p>
-</div>
-
-{# <form action="/select-learner" method="post">
-  <button type="submit" class="govuk-button">
-    Change learner
-  </button>
-</form> #}
 
   <div class="govuk-button-group">
 
     <button type="submit" class="govuk-button" data-module="govuk-button">
-        Remove learners
+        Back to claim
     </button>
-    <a class="govuk-link govuk-link--no-visited-state"
-        href="../cancel-handler">Back to claim</a>
   </div>
+
+  <h2 class="govuk-heading-m">If you need support with this claim</h2>
+  <p class="govuk-body">
+    You can email us at <a href="mailto:ASClearninganddevelopmentsupport@nhsbsa.nhs.uk">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.
+  </p>
 
 </div>
 
