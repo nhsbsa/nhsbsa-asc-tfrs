@@ -1,0 +1,49 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+
+{% block pageTitle %}
+{{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="is-this-you" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Register a new organisation</span>
+        <form action="../companiesHouseResponse" method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="confirmation-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        Are you registered with companies house?
+                    </h1>
+                    </legend>
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="companiesHouseResponse" name="companiesHouseResponse" type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="companiesHouseResponse">
+                            Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="companiesHouseResponse-2" name="companiesHouseResponse" type="radio" value="no">
+                            <label class="govuk-label govuk-radios__label" for="companiesHouseResponse-2">
+                            No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

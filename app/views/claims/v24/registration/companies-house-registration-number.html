@@ -1,0 +1,74 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+{% block pageTitle %}
+{% if data.orgNameEmptyError or data.orgNameInvalid %}Error: {% endif %}What is your job title? — Complete registration — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="companies-house" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if data.companiesHouseRegNumberEmptyError or data.companiesHouseRegNumberInvalid %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                <li>
+                  <a href="#orgName">
+                    {% if data.companiesHouseRegNumberEmptyError %}
+                    The job title must not be empty
+                    {% elif data.companiesHouseRegNumberInvalid %}
+                    The job title must not include invalid characters
+                    {% endif %}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Register a new organisation</span>
+        <form action="cqc-registered" method="post" class="form">
+            <div class="govuk-form-group {% if data.companiesHouseRegNumberEmptyError or data.companiesHouseRegNumberInvalid %} govuk-form-group--error {% endif %}">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="companies-house-registration-number-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                      <h1 class="govuk-fieldset__heading">
+                            What is your companies house registration number?
+                      </h1>
+                    </legend>
+                    {% if data.companiesHouseRegNumberEmptyError or data.companiesHouseRegNumberInvalid %}
+                    <p id="companiesHouseRegNumber" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        {% if data.companiesHouseRegNumberEmptyError %}
+                        The job title must not be empty
+                        {% elif data.companiesHouseRegNumberInvalid %}
+                        The job title must not include invalid characters
+                        {% endif %}
+                    </p>
+                    {% endif %}
+                    <input class="govuk-input govuk-!-width-two-thirds {% if data.companiesHouseRegNumberEmptyError or  data.companiesHouseRegNumberInvalid %}govuk-input--error{% endif %}" aria-describedby="asc-wds-id-hint" id="orgName"
+                        name="companiesHouseRegNumber" type="text" value="{{ data.companiesHouseRegNumber | default ('') }}">
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
+              <button type="submit" class="govuk-button" data-module="govuk-button">
+                  Continue
+              </button>
+              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+                Save and finish later
+              </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

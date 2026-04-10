@@ -43,6 +43,50 @@ router.post('/confirmationResponse', function (req, res) {
   }
 });
 
+router.post('/detailsCorrectResponse', function (req, res) {
+  const isThisYouResponse = req.session.data.isThisYouResponse
+  delete req.session.data.isThisYouResponse
+
+  if (isThisYouResponse == "yes") {
+    res.redirect('registration/companies-house')
+  } else if (isThisYouResponse == "no") {
+    res.redirect('registration/not-you')
+  }
+});
+
+router.post('/companiesHouseResponse', function (req, res) {
+  const companiesHouseResponse = req.session.data.companiesHouseResponse
+  delete req.session.data.companiesHouseResponse
+
+  if (companiesHouseResponse == "yes") {
+    res.redirect('registration/companies-house-registration-number')
+  } else if (companiesHouseResponse == "no") {
+    res.redirect('registration/cqc-registered')
+  }
+});
+
+router.post('/cqcResponse', function (req, res) {
+  const cqcResponse = req.session.data.cqcResponse
+  delete req.session.data.cqcResponse
+
+  if (cqcResponse == "yes") {
+    res.redirect('registration/cqc-number')
+  } else if (cqcResponse == "no") {
+    res.redirect('registration/vat-registered')
+  }
+});
+
+router.post('/vatResponse', function (req, res) {
+  const vatRegisteredResponse = req.session.data.vatRegisteredResponse
+  delete req.session.data.vatRegisteredResponse
+
+  if (vatRegisteredResponse == "yes") {
+    res.redirect('registration/vat-registration-number')
+  } else if (vatRegisteredResponse == "no") {
+    res.redirect('registration/check-answers')
+  }
+});
+
 
 router.post('/verify-details-handler', function (req, res) {
   const confirmationAnswer = req.session.data.confirmation

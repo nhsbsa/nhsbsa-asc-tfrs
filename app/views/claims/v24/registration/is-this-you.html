@@ -1,0 +1,104 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+{% block pageTitle %}
+{% if data.orgNameEmptyError or data.orgNameInvalid %}Error: {% endif %}What is your job title? — Complete registration — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="asc-wds-id" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if data.submitError %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#error">
+                                Select whether the details are correct
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <span class="govuk-caption-l">Register a new organisation</span>
+        <h1 class="govuk-heading-l">Check these are your details</h1>
+        <p class="govuk-body">This is the information we have for your ASC-WDS Workplace ID.
+        </p>
+        <h2 class="govuk-heading-m" id="completion">Your organisation</h2>
+        <p class="govuk-body">These details are from the Adult Social Care Workforce Dataset.</p>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{data.org.workplaceID}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Organisation name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{data.org.name}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Organisation address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.org.address[0] }}<br>  {{ data.org.address[1] }}<br> {{ data.org.address[2] }}  
+                </dd>
+            </div>
+        </dl>
+        <form action="../detailsCorrectResponse" method="post" novalidate>
+            <div class="govuk-form-group {% if data.submitError %}govuk-form-group--error{% endif %}">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Are all these details correct?
+                    </legend>
+                    {% if data.submitError %}
+                    <p id="error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        Select whether the details are correct
+                    </p>
+                    {% endif %}
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="isThisYouResponse" name="isThisYouResponse" type="radio"
+                                value="yes">
+                            <label class="govuk-label govuk-radios__label" for="isThisYouResponse">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="isThisYouResponse-2" name="isThisYouResponse" type="radio"
+                                value="no">
+                            <label class="govuk-label govuk-radios__label" for="isThisYouResponse-2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
