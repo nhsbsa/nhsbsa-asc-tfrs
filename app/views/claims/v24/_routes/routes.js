@@ -118,27 +118,15 @@ router.post('/add-training', function (req, res) {
     } else {
       submission = getMostRelevantSubmission(claim)
     }
-
-    // add duplicate check here
-    let isDuplicateClaim = null
-    if (submission.learners.length > 0) {
-      isDuplicateClaim = checkDuplicateClaim(submission.learners, newTrainingCode, claim.claimID, req.session.data.claims);
+    if (!(["OMMT/T1/INT","OMMT/T2/INT"].includes(submission.trainingCode)) && (["OMMT/T1/INT","OMMT/T2/INT"].includes(newTrainingChoice.code)) ) {
+      submission.evidenceOfPayment = null
+      submission.costDate = null
     }
+    submission.trainingCode = newTrainingChoice.code
+    delete req.session.data['training-input'];
+    delete req.session.data['trainingSelection'];
+    res.redirect('claim/claim-details' + '?id=' + claim.claimID)
     
-    if (isDuplicateClaim && isDuplicateClaim.check) {
-        req.session.data.matchingIDs = isDuplicateClaim.ids
-        req.session.data.changeTrainingCode = newTrainingCode
-        res.redirect('claim/duplication')
-    } else {
-      if (!(["OMMT/T1/INT","OMMT/T2/INT"].includes(submission.trainingCode)) && (["OMMT/T1/INT","OMMT/T2/INT"].includes(newTrainingChoice.code)) ) {
-        submission.evidenceOfPayment = null
-        submission.costDate = null
-      }
-      submission.trainingCode = newTrainingChoice.code
-      delete req.session.data['training-input'];
-      delete req.session.data['trainingSelection'];
-      res.redirect('claim/claim-details' + '?id=' + claim.claimID)
-    }
   } else {
 
     if (newTrainingChoice.fundingModel == "full") {
@@ -754,64 +742,55 @@ router.post('/add-learner', function (req, res) {
         currentSubmission = getMostRelevantSubmission(c)
       }
 
-      isDuplicateClaim = checkDuplicateClaim(currentSubmission.learners, currentSubmission.trainingCode, c.claimID, req.session.data.claims);
-
-      if (isDuplicateClaim.check) {
-        req.session.data.matchingIDs = isDuplicateClaim.ids
-        res.redirect('claim/duplication')
-      } else {
-        const learner = {
-            "slotID": null,
-            "learnerID": newLearner.id,
-            "learnerChanged": null,
-            "completionDate": null,
-            "evidenceOfCompletion": null,
-            "evidenceOfCompletionReview": {
-              "outcome": null,
-              "note": null
+      const learner = {
+          "slotID": null,
+          "learnerID": newLearner.id,
+          "learnerChanged": null,
+          "completionDate": null,
+          "evidenceOfCompletion": null,
+          "evidenceOfCompletionReview": {
+            "outcome": null,
+            "note": null
+          }
+        }
+      if (currentSubmission.learners == null || currentSubmission.learners == []) {
+        learner.slotID = "1"
+        currentSubmission.learners = [learner]
+        if (c.claimType == "100") {
+            res.redirect('claim/add-another-learner')
+        } else {
+          res.redirect('claim/claim-details')
+        }
+      } else if (currentSubmission.learners != [] && change == "true") {
+        currentSubmission.learners = replaceLearnerID(currentSubmission.learners, changeLearnerID, newLearner.id)
+        if (currentSubmission.learners.length > 1) {
+          req.session.data.learnerConfirmation = {
+              type: "learner",
+              learner: newLearner.id,
             }
-          }
-        if (currentSubmission.learners == null || currentSubmission.learners == []) {
-          learner.slotID = "1"
-          currentSubmission.learners = [learner]
-          if (c.claimType == "100") {
-              res.redirect('claim/add-another-learner')
-          } else {
-            res.redirect('claim/claim-details')
-          }
-        } else if (currentSubmission.learners != [] && change == "true") {
-          currentSubmission.learners = replaceLearnerID(currentSubmission.learners, changeLearnerID, newLearner.id)
+            res.redirect('claim/claim-learners')
+        } else if (c.claimType == "100") {
+            res.redirect('claim/add-another-learner')
+        } else {
+          res.redirect('claim/claim-details')
+        }
+        
+      } else {
+          learnerSlotID = currentSubmission.learners.length + 1
+          learner.slotID = learnerSlotID.toString()
+          currentSubmission.learners.push(learner);
           if (currentSubmission.learners.length > 1) {
             req.session.data.learnerConfirmation = {
-                type: "learner",
-                learner: newLearner.id,
-              }
+              type: "learner",
+              learner: newLearner.id,
+            }
               res.redirect('claim/claim-learners')
           } else if (c.claimType == "100") {
-              res.redirect('claim/add-another-learner')
+            res.redirect('claim/add-another-learner')
           } else {
             res.redirect('claim/claim-details')
           }
-          
-        } else {
-            learnerSlotID = currentSubmission.learners.length + 1
-            learner.slotID = learnerSlotID.toString()
-            currentSubmission.learners.push(learner);
-            if (currentSubmission.learners.length > 1) {
-              req.session.data.learnerConfirmation = {
-                type: "learner",
-                learner: newLearner.id,
-              }
-                res.redirect('claim/claim-learners')
-            } else if (c.claimType == "100") {
-              res.redirect('claim/add-another-learner')
-            } else {
-              res.redirect('claim/claim-details')
-            }
-        }
-
       }
-
     }
   }
 });
