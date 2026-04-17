@@ -30,6 +30,7 @@ router.post('/accountResponse', function (req, res) {
 router.post('/confirmationResponse', function (req, res) {
   const confirmationResponse = req.session.data.confirmationResponse
   delete req.session.data.confirmationResponse
+  delete req.session.data.submitError
 
 
   if (confirmationResponse == "yes") {
@@ -46,6 +47,7 @@ router.post('/confirmationResponse', function (req, res) {
 router.post('/detailsCorrectResponse', function (req, res) {
   const isThisYouResponse = req.session.data.isThisYouResponse
   delete req.session.data.isThisYouResponse
+  delete req.session.data.detailCorrectRadioMissing
 
   if (isThisYouResponse == "" || isThisYouResponse == null) {
     res.redirect('registration/is-this-you?detailCorrectRadioMissing=true')
@@ -59,6 +61,7 @@ router.post('/detailsCorrectResponse', function (req, res) {
 router.post('/companiesHouseResponse', function (req, res) {
   const companiesHouseResponse = req.session.data.companiesHouseResponse
   delete req.session.data.companiesHouseResponse
+  delete req.session.data.chRadioMissing
 
   if (companiesHouseResponse == "" || companiesHouseResponse == null) {
     res.redirect('registration/companies-house?chRadioMissing=true')
@@ -72,6 +75,7 @@ router.post('/companiesHouseResponse', function (req, res) {
 router.post('/cqcResponse', function (req, res) {
   const cqcResponse = req.session.data.cqcResponse
   delete req.session.data.cqcResponse
+  delete req.session.data.cqcRadioMissing
 
   if (cqcResponse == "" || cqcResponse == null) {
     res.redirect('registration/cqc-registered?cqcRadioMissing=true')
@@ -85,6 +89,7 @@ router.post('/cqcResponse', function (req, res) {
 router.post('/vatResponse', function (req, res) {
   const vatRegisteredResponse = req.session.data.vatRegisteredResponse
   delete req.session.data.vatRegisteredResponse
+  delete req.session.data.vatRadioMissing
 
   if (vatRegisteredResponse == "" || vatRegisteredResponse == null) {
     res.redirect('registration/vat-registered?vatRadioMissing=true')
