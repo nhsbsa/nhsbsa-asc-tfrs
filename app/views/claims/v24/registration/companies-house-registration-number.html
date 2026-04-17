@@ -1,7 +1,7 @@
 {% extends "../_layouts/claims-account-setup.html" %}
 
 {% block pageTitle %}
-{% if data.orgNameEmptyError or data.orgNameInvalid %}Error: {% endif %}What is your job title? — Complete registration — {{serviceName}} — GOV.UK
+{% if data.companiesHouseRegNumberEmptyError or data.companiesHouseRegNumberInvalid %}Error: {% endif %}What is your Companies House registration number? — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -25,9 +25,9 @@
                 <li>
                   <a href="#orgName">
                     {% if data.companiesHouseRegNumberEmptyError %}
-                    The job title must not be empty
+                    The Companies House number must not be empty
                     {% elif data.companiesHouseRegNumberInvalid %}
-                    The job title must not include invalid characters
+                    The Companies House number must not include invalid characters
                     {% endif %}
                   </a>
                 </li>
@@ -37,7 +37,7 @@
         </div>
         {% endif %}
         <span class="govuk-caption-l">Register a new organisation</span>
-        <form action="cqc-registered" method="post" class="form">
+        <form action="../validate-companies-house" method="post" class="form">
             <div class="govuk-form-group {% if data.companiesHouseRegNumberEmptyError or data.companiesHouseRegNumberInvalid %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="companies-house-registration-number-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">

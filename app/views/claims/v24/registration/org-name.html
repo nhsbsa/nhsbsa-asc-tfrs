@@ -1,7 +1,7 @@
 {% extends "../_layouts/claims-account-setup.html" %}
 
 {% block pageTitle %}
-{% if data.orgNameEmptyError or data.orgNameInvalid %}Error: {% endif %}What is your job title? — Complete registration — {{serviceName}} — GOV.UK
+{% if data.orgNameEmptyError or data.orgNameInvalid %}Error: {% endif %}What is the name of your organisation? — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -25,9 +25,9 @@
                 <li>
                   <a href="#orgName">
                     {% if data.orgNameEmptyError %}
-                    The job title must not be empty
+                    The organisation name must not be empty
                     {% elif data.orgNameInvalid %}
-                    The job title must not include invalid characters
+                    The organisation name must not include invalid characters
                     {% endif %}
                   </a>
                 </li>
@@ -52,9 +52,9 @@
                     <p id="orgName" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
                         {% if data.orgNameEmptyError %}
-                        The job title must not be empty
+                        The organisation name must not be empty
                         {% elif data.orgNameInvalid %}
-                        The job title must not include invalid characters
+                        The organisation name must not include invalid characters
                         {% endif %}
                     </p>
                     {% endif %}

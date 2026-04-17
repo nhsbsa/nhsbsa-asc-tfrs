@@ -1,7 +1,7 @@
 {% extends "../_layouts/claims-account-setup.html" %}
 
 {% block pageTitle %}
-{% if data.vatRegNumberEmptyError or data.vatRegNumberInvalid %}Error: {% endif %}What is your job title? — Complete registration — {{serviceName}} — GOV.UK
+{% if data.vatRegNumberEmptyError or data.vatRegNumberInvalid %}Error: {% endif %}What is your VAT registration number? — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -25,9 +25,9 @@
                 <li>
                   <a href="#orgName">
                     {% if data.vatRegNumberEmptyError %}
-                    The job title must not be empty
+                    The VAT registration number must not be empty
                     {% elif data.vatRegNumberInvalid %}
-                    The job title must not include invalid characters
+                    The VAT registration number must not include invalid characters
                     {% endif %}
                   </a>
                 </li>
@@ -37,7 +37,7 @@
         </div>
         {% endif %}
         <span class="govuk-caption-l">Register a new organisation</span>
-        <form action="check-answers" method="post" class="form">
+        <form action="../validate-vat" method="post" class="form">
             <div class="govuk-form-group {% if data.vatRegNumberEmptyError or data.vatRegNumberInvalid %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="vat-registration-number-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -49,9 +49,9 @@
                     <p id="vatRegNumber" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
                         {% if data.vatRegNumberEmptyError %}
-                        The job title must not be empty
+                        The VAT registration number must not be empty
                         {% elif data.vatRegNumberInvalid %}
-                        The job title must not include invalid characters
+                        The VAT registration number must not include invalid characters
                         {% endif %}
                     </p>
                     {% endif %}

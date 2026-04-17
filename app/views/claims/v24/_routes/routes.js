@@ -39,7 +39,7 @@ router.post('/confirmationResponse', function (req, res) {
     req.session.data.journey = "creation"
     res.redirect('registration/not-SRO')
   } else {
-    res.redirect('registration/confirmationResponse?submitError=true')
+    res.redirect('registration/sro-confirmation?submitError=true')
   }
 });
 
@@ -47,7 +47,9 @@ router.post('/detailsCorrectResponse', function (req, res) {
   const isThisYouResponse = req.session.data.isThisYouResponse
   delete req.session.data.isThisYouResponse
 
-  if (isThisYouResponse == "yes") {
+  if (isThisYouResponse == "" || isThisYouResponse == null) {
+    res.redirect('registration/is-this-you?detailCorrectRadioMissing=true')
+  } else if (isThisYouResponse == "yes") {
     res.redirect('registration/companies-house')
   } else if (isThisYouResponse == "no") {
     res.redirect('registration/not-you')
@@ -58,7 +60,9 @@ router.post('/companiesHouseResponse', function (req, res) {
   const companiesHouseResponse = req.session.data.companiesHouseResponse
   delete req.session.data.companiesHouseResponse
 
-  if (companiesHouseResponse == "yes") {
+  if (companiesHouseResponse == "" || companiesHouseResponse == null) {
+    res.redirect('registration/companies-house?chRadioMissing=true')
+  } else if (companiesHouseResponse == "yes") {
     res.redirect('registration/companies-house-registration-number')
   } else if (companiesHouseResponse == "no") {
     res.redirect('registration/cqc-registered')
@@ -69,7 +73,9 @@ router.post('/cqcResponse', function (req, res) {
   const cqcResponse = req.session.data.cqcResponse
   delete req.session.data.cqcResponse
 
-  if (cqcResponse == "yes") {
+  if (cqcResponse == "" || cqcResponse == null) {
+    res.redirect('registration/cqc-registered?cqcRadioMissing=true')
+  } else if (cqcResponse == "yes") {
     res.redirect('registration/cqc-number')
   } else if (cqcResponse == "no") {
     res.redirect('registration/vat-registered')
@@ -80,7 +86,9 @@ router.post('/vatResponse', function (req, res) {
   const vatRegisteredResponse = req.session.data.vatRegisteredResponse
   delete req.session.data.vatRegisteredResponse
 
-  if (vatRegisteredResponse == "yes") {
+  if (vatRegisteredResponse == "" || vatRegisteredResponse == null) {
+    res.redirect('registration/vat-registered?vatRadioMissing=true')
+  } else if (vatRegisteredResponse == "yes") {
     res.redirect('registration/vat-registration-number')
   } else if (vatRegisteredResponse == "no") {
     res.redirect('registration/check-answers')
@@ -1316,8 +1324,25 @@ router.post('/validate-org-name', function (req, res) {
 });
 
 router.post('/validate-org-address', function (req, res) {
+  delete req.session.data.orgAddressEmptyError
+  delete req.session.data.orgAddressInvalid
+  delete req.session.data['declarationSubmitError'];
+  const addressLine1 = req.session.data.addressLine1
+  const addressLine2 = req.session.data.addressLine2
+  const town = req.session.data.addressTown
+  const county = req.session.data.addressCounty
+  const postcode = req.session.data.addressPostcode
 
+
+  if (addressLine1 == "" || addressLine2 == "" || town == "" || county == "" || postcode == "") {
+    res.redirect('registration/org-address?orgAddressEmptyError=true')
+  } else if (true == true) {
     res.redirect('registration/org-address-evidence')
+  } else {
+    res.redirect('registration/org-address?orgAddressInvalid=true')
+  }
+
+    
 
 });
 
@@ -1336,6 +1361,62 @@ router.post('/validate-job-title', function (req, res) {
   }
 });
 
+router.post('/validate-workplaceID', function (req, res) {
+  delete req.session.data.workplaceIDEmpty
+  delete req.session.data.workplaceIDInvalid
+  const orgID = req.session.data.orgID
+  var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
+  if (orgID == "") {
+    res.redirect('registration/asc-wds-id?workplaceIDEmpty=true')
+  } else if (validCharactersRegex.test(orgID) == true) {
+    res.redirect('registration/is-this-you')
+  } else {
+    res.redirect('registration/asc-wds-id?workplaceIDInvalid=true')
+  }
+});
+
+router.post('/validate-companies-house', function (req, res) {
+  delete req.session.data.companiesHouseRegNumberEmptyError
+  delete req.session.data.companiesHouseRegNumberInvalid
+  const companiesHouseRegNumber = req.session.data.companiesHouseRegNumber
+  // var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
+  if (companiesHouseRegNumber == "") {
+    res.redirect('registration/companies-house-registration-number?companiesHouseRegNumberEmptyError=true')
+  } else if (true == true) {
+    res.redirect('registration/cqc-registered')
+  } else {
+    res.redirect('registration/companies-house-registration-number?companiesHouseRegNumberInvalid=true')
+  }
+});
+
+router.post('/validate-cqc', function (req, res) {
+  delete req.session.data.cqcRegNumberEmptyError
+  delete req.session.data.cqcRegNumberInvalid
+  const cqcRegNumber = req.session.data.cqcRegNumber
+  // var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
+  if (cqcRegNumber == "") {
+    res.redirect('registration/cqc-number?cqcRegNumberEmptyError=true')
+  } else if (true == true) {
+    res.redirect('registration/vat-registered')
+  } else {
+    res.redirect('registration/cqc-number?cqcRegNumberInvalid=true')
+  }
+});
+
+router.post('/validate-vat', function (req, res) {
+  delete req.session.data.vatRegNumberEmptyError
+  delete req.session.data.vatRegNumberInvalid
+  const vatRegNumber = req.session.data.vatRegNumber
+  // var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
+  if (vatRegNumber == "") {
+    res.redirect('registration/vat-registration-number?vatRegNumberEmptyError=true')
+  } else if (true == true) {
+    res.redirect('registration/check-answers')
+  } else {
+    res.redirect('registration/vat-registration-number?vatRegNumberInvalid=true')
+  }
+});
+
 router.post('/declaration-confirmation', function (req, res) {
   delete req.session.data.declarationSubmitError
   const declarationConfirmed = req.session.data.declaration
@@ -1349,6 +1430,19 @@ router.post('/declaration-confirmation', function (req, res) {
   } else {
     req.session.data.declarationSubmitError = 'true'
     res.redirect('account-setup/declaration?declarationSubmitError=true')
+  }
+});
+
+router.post('/registation-declaration', function (req, res) {
+  delete req.session.data.declarationSubmitError
+  const declarationConfirmed = req.session.data.confirmation
+
+  if (declarationConfirmed != null) {
+    delete req.session.data.declarationConfirmed
+    res.redirect('registration/registration-submitted-confirmation')
+  } else {
+    req.session.data.declarationSubmitError = 'true'
+    res.redirect('registration/declaration?declarationSubmitError=true')
   }
 });
 

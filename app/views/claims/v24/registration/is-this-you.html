@@ -1,7 +1,7 @@
 {% extends "../_layouts/claims-account-setup.html" %}
 
 {% block pageTitle %}
-{% if data.orgNameEmptyError or data.orgNameInvalid %}Error: {% endif %}What is your job title? — Complete registration — {{serviceName}} — GOV.UK
+{% if data.detailCorrectRadioMissing %}Error: {% endif %}Is this information correct? — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -14,7 +14,7 @@
     <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-        {% if data.submitError %}
+        {% if data.detailCorrectRadioMissing %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
             <div role="alert">
                 <h2 class="govuk-error-summary__title">
@@ -64,12 +64,12 @@
             </div>
         </dl>
         <form action="../detailsCorrectResponse" method="post" novalidate>
-            <div class="govuk-form-group {% if data.submitError %}govuk-form-group--error{% endif %}">
+            <div class="govuk-form-group {% if data.detailCorrectRadioMissing %}govuk-form-group--error{% endif %}">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                         Are all these details correct?
                     </legend>
-                    {% if data.submitError %}
+                    {% if data.detailCorrectRadioMissing %}
                     <p id="error" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
                         Select whether the details are correct

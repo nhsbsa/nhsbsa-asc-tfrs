@@ -1,7 +1,7 @@
 {% extends "../_layouts/claims-account-setup.html" %}
 
 {% block pageTitle %}
-{% if data.orgNameEmptyError or data.orgNameInvalid %}Error: {% endif %}What is your job title? — Complete registration — {{serviceName}} — GOV.UK
+{% if data.orgAddressEmptyError or data.orgAddressInvalid %}Error: {% endif %}What is the registered address of your organisation? — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -14,7 +14,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-        {# {% if data.orgNameEmptyError or data.orgNameInvalid %}
+        {% if data.orgAddressEmptyError or data.orgAddressInvalid %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
           <div role="alert">
             <h2 class="govuk-error-summary__title">
@@ -23,11 +23,11 @@
             <div class="govuk-error-summary__body">
               <ul class="govuk-list govuk-error-summary__list">
                 <li>
-                  <a href="#orgName">
-                    {% if data.orgNameEmptyError %}
-                    The job title must not be empty
-                    {% elif data.orgNameInvalid %}
-                    The job title must not include invalid characters
+                  <a href="#orgAddress">
+                    {% if data.orgAddressEmptyError %}
+                    The organisation address must not be empty
+                    {% elif data.orgAddressInvalid %}
+                    The organisation address must not include invalid characters
                     {% endif %}
                   </a>
                 </li>
@@ -35,29 +35,29 @@
             </div>
           </div>
         </div>
-        {% endif %} #}
+        {% endif %}
         <span class="govuk-caption-l">Register a new organisation</span>
         <form action="../validate-org-address" method="post" class="form">
-            <div class="govuk-form-group {% if data.orgNameEmptyError or data.orgNameInvalid %} govuk-form-group--error {% endif %}">
+            <div class="govuk-form-group {% if data.orgAddressEmptyError or data.orgAddressInvalid %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="orgName-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                       <h1 class="govuk-fieldset__heading">
                             What is the registered address of your organisation?
                       </h1>
                     </legend>
-                    <div id="orgName-hint" class="govuk-hint">
+                    <div id="orgAddress-hint" class="govuk-hint">
                       This should match how it appears in the ASC-WDS.
                     </div>
-                    {# {% if data.orgNameEmptyError or data.orgNameInvalid %}
-                    <p id="orgName" class="govuk-error-message">
+                    {% if data.orgAddressEmptyError or data.orgAddressInvalid %}
+                    <p id="orgAddress" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
-                        {% if data.orgNameEmptyError %}
-                        The job title must not be empty
-                        {% elif data.orgNameInvalid %}
-                        The job title must not include invalid characters
+                        {% if data.orgAddressEmptyError %}
+                          The organisation address must not be empty
+                        {% elif data.orgAddressInvalid %}
+                          The organisation address must not include invalid characters
                         {% endif %}
                     </p>
-                    {% endif %} #}
+                    {% endif %}
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="address-line-1">
                         Address line 1

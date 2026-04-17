@@ -25,9 +25,9 @@
                 <li>
                   <a href="#orgName">
                     {% if data.cqcRegNumberEmptyError %}
-                    The job title must not be empty
+                    The CQC registration number must not be empty
                     {% elif data.cqcRegNumberInvalid %}
-                    The job title must not include invalid characters
+                    The CQC registration number must not include invalid characters
                     {% endif %}
                   </a>
                 </li>
@@ -37,7 +37,7 @@
         </div>
         {% endif %}
         <span class="govuk-caption-l">Register a new organisation</span>
-        <form action="vat-registered" method="post" class="form">
+        <form action="../validate-cqc" method="post" class="form">
             <div class="govuk-form-group {% if data.cqcRegNumberEmptyError or data.cqcRegNumberInvalid %} govuk-form-group--error {% endif %}">
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="cqc-registration-number-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
@@ -49,9 +49,9 @@
                     <p id="cqcRegNumber" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
                         {% if data.cqcRegNumberEmptyError %}
-                        The job title must not be empty
+                        The CQC registration number must not be empty
                         {% elif data.cqcRegNumberInvalid %}
-                        The job title must not include invalid characters
+                        The CQC registration number must not include invalid characters
                         {% endif %}
                     </p>
                     {% endif %}
