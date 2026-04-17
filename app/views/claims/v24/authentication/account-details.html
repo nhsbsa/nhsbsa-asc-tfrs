@@ -33,13 +33,13 @@
             <div
                 class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.givenName == 'missing' %} govuk-form-group--error {% endif %}">
                 <label class="govuk-label govuk-label--m" for="givenName">
-                    First (given) name
+                    First name
                 </label>
                 {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
                 data.submitError.givenName
                 == 'missing' %}
                 <p id="givenName-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> Enter a first (given) name
+                    <span class="govuk-visually-hidden">Error:</span> Enter a first name
                 </p>
                 {% endif %}
                 <input
@@ -50,12 +50,12 @@
             <div
                 class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
                 <label class="govuk-label govuk-label--m" for="familyName">
-                    Last (family) name
+                    Last name
                 </label>
                 {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
                 data.submitError.familyName == 'missing' %}
                 <p id="familyName-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> Enter a last (family) name
+                    <span class="govuk-visually-hidden">Error:</span> Enter a last name
                 </p>
                 {% endif %}
                 <input
@@ -68,9 +68,6 @@
                 <label class="govuk-label govuk-label--m" for="email">
                     Email address
                 </label>
-                <div id="email-hint" class="govuk-hint">
-                    We’ll send the invite to this address
-                </div>
                 {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
                 (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %}
                 <p id="email-error" class="govuk-error-message">
@@ -109,8 +106,8 @@
                     autocomplete="mobile" value="{{ mobile}}">
             </div>
 
-            <h2 class="govuk-heading-m">What happens</h2>
-            <p class="govuk-body">We'll use these details to create a user account for you. You'll get an email to with a link in to verify your email address and continue with the account creation process.</p>
+            <h2 class="govuk-heading-m">What happens next</h2>
+            <p class="govuk-body">We'll email you a link you can use to verify your email address. Once it's verified you can carry on setting up your account.</p>
 
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">

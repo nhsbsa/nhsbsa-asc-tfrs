@@ -37,14 +37,14 @@
             <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
             <strong class="govuk-warning-text__text">
                 <span class="govuk-visually-hidden">Warning</span>
-                <p><strong>I declare that the information I have given is correct and complete.</strong></p>
+                <p><strong>I confirm that the information I have provided is correct.</strong></p>
 
                 <p><strong>I understand that it may be subject to:</strong></p>
 
                 <ul class="govuk-list govuk-list--bullet">
-                    <li><strong>X</strong></li>
-                    <li><strong>Y</strong></li>
-                    <li><strong>Z</strong></li>
+                    <li><strong>verification checks</strong></li>
+                    <li><strong>audit review</strong></li>
+                    <li><strong>counter fraud checks</strong></li>
                 </ul>
 
             </strong>
@@ -74,7 +74,7 @@
             </div>
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
-                    {% if (claim.status == "queried") %}Resubmit{% else %}Submit{% endif %} claim
+                    Submit
                 </button>
                 <a class="govuk-link govuk-link--no-visited-state"
                     href="../cancel-handler">Cancel</a>

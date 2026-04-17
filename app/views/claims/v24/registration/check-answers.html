@@ -13,15 +13,23 @@
 {% block content %}
 <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l">Check your answers before sending your application</h1>
+        <h1 class="govuk-heading-l">Check your answers</h1>
         <h2 class="govuk-heading-m">Your details</h2>
         <dl class="govuk-summary-list govuk-!-margin-bottom-9">
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              SRO name
+              First name
             </dt>
             <dd class="govuk-summary-list__value">
-              {{data.givenName}} {{data.familyName}}
+              {{data.givenName}}
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Last name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.familyName}}
             </dd>
           </div>
           <div class="govuk-summary-list__row">
