@@ -1042,4 +1042,21 @@ function replaceLearnerID(learners, oldID, newID) {
   });
 }
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison}
+function saveRegistrationEnty(req) {
+    delete req.session.data.jobTitle
+    delete req.session.data.orgName
+    delete req.session.data.addressLine1
+    delete req.session.data.addressLine2
+    delete req.session.data.addressTown
+    delete req.session.data.addressCounty
+    delete req.session.data.addressPostcode
+    delete req.session.data.orgID
+    delete req.session.data.companiesHouseResponse
+    delete req.session.data.companiesHouseRegNumber
+    delete req.session.data.cqcResponse
+    delete req.session.data.cqcRegNumber
+    delete req.session.data.vatRegisteredResponse
+    delete req.session.data.vatRegNumber
+}
+
+module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}

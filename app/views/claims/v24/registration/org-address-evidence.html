@@ -55,7 +55,7 @@
       <ul class="govuk-list govuk-list--bullet">
             <li>a recent council tax bill</li>
             <li>a recent utility bill</li>
-            <li>business lease agreement</li>
+            <li>business premises lease agreement</li>
             <li>your organisation's public liability insurance certificate</li>
         </ul>
     <p class="govuk-body">These can be in PDF, JPG, JPEG or PNG format.</p>
@@ -85,12 +85,12 @@
         update file upload progress</a>
       </p>
 
-    <form action="asc-wds-id" method="post" novalidate>
+    <form action="../validate-address-evidence" method="post" novalidate>
         <div class="govuk-button-group">
-            <button type="submit" class="govuk-button" data-module="govuk-button">
+            <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
                 Continue
             </button>
-            <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
                 Save and finish later
             </button>
         </div>

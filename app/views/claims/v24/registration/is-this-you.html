@@ -67,12 +67,12 @@
             <div class="govuk-form-group {% if data.detailCorrectRadioMissing %}govuk-form-group--error{% endif %}">
                 <fieldset class="govuk-fieldset">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-                        Are all these details correct?
+                        Is this your organisation?
                     </legend>
                     {% if data.detailCorrectRadioMissing %}
                     <p id="error" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
-                        Select whether the details are correct
+                        Select whether this is your organisation
                     </p>
                     {% endif %}
                     <div class="govuk-radios" data-module="govuk-radios">
@@ -93,9 +93,14 @@
                     </div>
                 </fieldset>
             </div>
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
+                    Continue
+                </button>
+                <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
+                    Save and finish later
+                </button>
+            </div>
         </form>
     </div>
 </div>

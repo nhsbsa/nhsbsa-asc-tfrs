@@ -62,39 +62,39 @@
                         <label class="govuk-label" for="address-line-1">
                         Address line 1
                         </label>
-                        <input class="govuk-input" id="address-line-1" name="addressLine1" type="text" autocomplete="address-line1">
+                        <input class="govuk-input" id="address-line-1" name="addressLine1" type="text" autocomplete="address-line1" value="{{ data.addressLine1 | default ('') }}">
                     </div>
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="address-line-2">
                         Address line 2 (optional)
                         </label>
-                        <input class="govuk-input" id="address-line-2" name="addressLine2" type="text" autocomplete="address-line2">
+                        <input class="govuk-input" id="address-line-2" name="addressLine2" type="text" autocomplete="address-line2" value="{{ data.addressLine2 | default ('') }}">
                     </div>
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="address-town">
                         Town or city
                         </label>
-                        <input class="govuk-input govuk-!-width-two-thirds" id="address-town" name="addressTown" type="text" autocomplete="address-level2">
+                        <input class="govuk-input govuk-!-width-two-thirds" id="address-town" name="addressTown" type="text" autocomplete="address-level2" value="{{ data.addressTown | default ('') }}">
                     </div>
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="address-county">
                         County (optional)
                         </label>
-                        <input class="govuk-input govuk-!-width-two-thirds" id="address-county" name="addressCounty" type="text">
+                        <input class="govuk-input govuk-!-width-two-thirds" id="address-county" name="addressCounty" type="text" value="{{ data.addressCounty | default ('') }}">
                     </div>
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="address-postcode">
                         Postcode
                         </label>
-                        <input class="govuk-input govuk-input--width-10" id="address-postcode" name="addressPostcode" type="text" autocomplete="postal-code">
+                        <input class="govuk-input govuk-input--width-10" id="address-postcode" name="addressPostcode" type="text" autocomplete="postal-code" value="{{ data.addressPostcode | default ('') }}">
                     </div>
                 </fieldset>
             </div>
             <div class="govuk-button-group">
-              <button type="submit" class="govuk-button" data-module="govuk-button">
+              <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
                   Continue
               </button>
-              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+              <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
                 Save and finish later
               </button>
             </div>

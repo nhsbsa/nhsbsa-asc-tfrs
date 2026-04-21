@@ -39,7 +39,7 @@
                 <fieldset class="govuk-fieldset" aria-describedby="confirmation-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <h1 class="govuk-fieldset__heading">
-                        Are you VAT registered?
+                        Is your organisation VAT registered?
                     </h1>
                     </legend>
                     {% if data.vatRadioMissing %}
@@ -50,13 +50,13 @@
                     {% endif %}
                     <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="vatRegisteredResponse" name="vatRegisteredResponse" type="radio" value="yes">
+                            <input class="govuk-radios__input" id="vatRegisteredResponse" name="vatRegisteredResponse" type="radio" value="Yes">
                             <label class="govuk-label govuk-radios__label" for="vatRegisteredResponse">
                             Yes
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="vatRegisteredResponse-2" name="vatRegisteredResponse" type="radio" value="no">
+                            <input class="govuk-radios__input" id="vatRegisteredResponse-2" name="vatRegisteredResponse" type="radio" value="No">
                             <label class="govuk-label govuk-radios__label" for="vatRegisteredResponse-2">
                             No
                             </label>
@@ -64,9 +64,14 @@
                     </div>
                 </fieldset>
             </div>
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-                Continue
-            </button>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
+                    Continue
+                </button>
+                <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
+                    Save and finish later
+                </button>
+            </div>
         </form>
     </div>
 </div>

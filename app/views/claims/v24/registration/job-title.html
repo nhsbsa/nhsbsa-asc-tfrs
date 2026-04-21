@@ -46,7 +46,7 @@
                       </h1>
                     </legend>
                     <div id="jobTitle-hint" class="govuk-hint">
-                      We need this to make sure to have authority to sign legal documents on behalf of your organisation. 
+                      We need this to make sure you have authority to sign legal documents on behalf of your organisation. 
                     </div>
                     {% if data.jobTitleEmptyError or data.jobTitleInvalid %}
                     <p id="jobTitle" class="govuk-error-message">
@@ -63,10 +63,10 @@
                 </fieldset>
             </div>
             <div class="govuk-button-group">
-              <button type="submit" class="govuk-button" data-module="govuk-button">
+              <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
                   Continue
               </button>
-              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+              <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
                 Save and finish later
               </button>
             </div>

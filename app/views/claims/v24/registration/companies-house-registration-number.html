@@ -42,7 +42,7 @@
                 <fieldset class="govuk-fieldset" role="group" aria-describedby="companies-house-registration-number-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                       <h1 class="govuk-fieldset__heading">
-                            What is your Companies House registration number?
+                            What is your organisation's Companies House registration number?
                       </h1>
                     </legend>
                     {% if data.companiesHouseRegNumberEmptyError or data.companiesHouseRegNumberInvalid %}
@@ -60,10 +60,10 @@
                 </fieldset>
             </div>
             <div class="govuk-button-group">
-              <button type="submit" class="govuk-button" data-module="govuk-button">
+              <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
                   Continue
               </button>
-              <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+              <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
                 Save and finish later
               </button>
             </div>
