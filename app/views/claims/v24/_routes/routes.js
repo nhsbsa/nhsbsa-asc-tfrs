@@ -1414,7 +1414,7 @@ router.post('/validate-org-address', function (req, res) {
   delete req.session.data.action
 
   if (action =="continue") {
-    if (addressLine1 == "" || addressLine2 == "" || town == "" || county == "" || postcode == "") {
+    if (addressLine1 == "" || town == "" || postcode == "") {
       res.redirect('registration/org-address?orgAddressEmptyError=true')
     } else if (true == true) {
       if (change == "true") {
