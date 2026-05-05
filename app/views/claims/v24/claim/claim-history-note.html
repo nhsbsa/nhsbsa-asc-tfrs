@@ -39,7 +39,7 @@
     {% if data.reasonType == "queried" %}
         <h2 class="govuk-heading-l">{{timelineData.processStep.title}}</h2>
 
-        <p class="govuk-body-l">We processed your first {% if claim.claimType == "60" %}60 part {% elif claim.claimType == "40"%}40 part {% endif %}submission on {{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }} and requested the following edits.</p>
+        <p class="govuk-body-l">We processed your {{ data.loopCount | getSmartOrdinal(claim.submissions) }} {% if claim.claimType == "60" %}60 part {% elif claim.claimType == "40"%}40 part {% endif %}submission on {{ timelineData.processStep.date | govukDate }} at {{ timelineData.processStep.date | govukTime }} and requested the following edits.</p>
 
         {% if submission.evidenceOfPaymentReview.outcome == "queried" %}
             <h2 class="govuk-heading-m">Evidence of payment</h2>

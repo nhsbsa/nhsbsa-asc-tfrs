@@ -1626,3 +1626,25 @@ addFilter('findtabID', function (learnerID, filteredLearners) {
     // Return null if learnerID was not found in any group
     return null;
 })
+
+addFilter('getSmartOrdinal', function (index, list) {
+    const n = (list.length) - 1 - parseInt(index) + 1;
+  
+    // Array for spelled-out versions (1st through 9th)
+    const words = [
+        "first", "second", "third", "fourth", "fifth", 
+        "sixth", "seventh", "eighth", "ninth"
+    ];
+
+    // If n is between 1 and 9, return the word
+    if (n >= 1 && n <= 9) {
+        return words[n - 1];
+    }
+
+    // Otherwise, use the numeric suffix logic
+    const s = ["th", "st", "nd", "rd"];
+    const v = n % 100;
+    const suffix = (s[(v - 20) % 10] || s[v] || s[0]);
+    
+    return n + suffix;
+})
