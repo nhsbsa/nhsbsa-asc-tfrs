@@ -55,14 +55,28 @@
                 </dd>
             </div>
             {% if submission.evidenceOfPaymentReview.outcome == "pass"%}
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Cost per learner
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    {{submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}} </br>
-                </dd>
-            </div>
+                {% if claim.claimType == "60"%}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Was the training paid for in full?
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {% if submission.evidenceOfPaymentReview.paymentPlan == "yes" %}
+                                No
+                            {% elif submission.evidenceOfPaymentReview.paymentPlan == "no" %}
+                                Yes
+                            {% endif %}
+                        </dd>
+                    </div>
+                {% endif %}
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Cost per learner
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{submission.evidenceOfPaymentReview.costPerLearner | currency(trailingZeros=false)}} </br>
+                    </dd>
+                </div>
             {% endif %}
         </dl>
         {% endif %}
