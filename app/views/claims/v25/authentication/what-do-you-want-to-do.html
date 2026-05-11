@@ -1,0 +1,51 @@
+{% extends "../_layouts/main.html" %}
+
+{% block pageTitle %}
+    {{serviceName}} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="../eligibility/register-org" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="../accountResponse" method="post" novalidate>
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="signIn-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        Have you already got a user account?
+                    </h1>
+                    </legend>
+                    <div id="signIn-hint" class="govuk-hint">
+                    Select 'Yes' to sign in if you already have an account or 'No' to create an  account.
+                    </div>
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="accountResponse" name="accountResponse" type="radio" value="yes">
+                            <label class="govuk-label govuk-radios__label" for="accountResponse">
+                            Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="accountResponse-2" name="accountResponse" type="radio" value="no">
+                            <label class="govuk-label govuk-radios__label" for="accountResponse-2">
+                            No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+    
+
+{% endblock %}

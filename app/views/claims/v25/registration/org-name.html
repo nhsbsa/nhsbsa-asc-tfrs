@@ -1,0 +1,77 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+{% block pageTitle %}
+{% if data.orgNameEmptyError or data.orgNameInvalid %}Error: {% endif %}What is the name of your organisation? — Complete registration — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="job-title" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if data.orgNameEmptyError or data.orgNameInvalid %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                <li>
+                  <a href="#orgName">
+                    {% if data.orgNameEmptyError %}
+                    The organisation name must not be empty
+                    {% elif data.orgNameInvalid %}
+                    The organisation name must not include invalid characters
+                    {% endif %}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Register a new organisation</span>
+        <form action="../validate-org-name" method="post" class="form">
+            <div class="govuk-form-group {% if data.orgNameEmptyError or data.orgNameInvalid %} govuk-form-group--error {% endif %}">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="orgName-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                      <h1 class="govuk-fieldset__heading">
+                            What is the name of your organisation?
+                      </h1>
+                    </legend>
+                    <div id="orgName-hint" class="govuk-hint">
+                      This should match how it appears in the Adult Social Care Workforce Data Set (ASC-WDS).
+                    </div>
+                    {% if data.orgNameEmptyError or data.orgNameInvalid %}
+                    <p id="orgName" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        {% if data.orgNameEmptyError %}
+                        The organisation name must not be empty
+                        {% elif data.orgNameInvalid %}
+                        The organisation name must not include invalid characters
+                        {% endif %}
+                    </p>
+                    {% endif %}
+                    <input class="govuk-input govuk-!-width-two-thirds {% if data.orgNameEmptyError or  data.orgNameInvalid %}govuk-input--error{% endif %}" aria-describedby="asc-wds-id-hint" id="orgName"
+                        name="orgName" type="text" value="{{ data.orgName | default ('') }}">
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
+              <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
+                  Continue
+              </button>
+              <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
+                Save and finish later
+              </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
