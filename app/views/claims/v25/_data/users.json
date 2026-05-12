@@ -1,0 +1,25 @@
+[
+    {
+        "givenName": "Lionel",
+        "familyName": "Lowe",
+        "email": "lionel.lowe@caregroup.co.uk",
+        "description": "",
+        "organisations": [
+            {
+                "orgID": "A02944934",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "orgID": "B13299931",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "orgID": "F26738594",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    }
+]

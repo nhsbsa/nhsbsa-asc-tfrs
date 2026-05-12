@@ -859,7 +859,39 @@ function newClaim(req, input, type) {
     return claim.claimID
 }
 
+function loadScenarioData(req) {
+
+    const usersFile = 'users.json'
+    const orgFile = 'organisations.json'
+
+    req.session.data['users'] = loadJSONFromFile(usersFile, dataPath)
+    console.log('users file loaded')
+
+    req.session.data['organisations'] = loadJSONFromFile(orgFile, dataPath)
+    console.log('org file loaded')
+
+}
+
+function loadUserData(req, userID) {
+        
+    console.log('loading in user file')
+
+    for (const user of req.session.data.users) {
+        if (user.email == userID) {
+            req.session.data.user = user
+            break;
+        }
+    }
+
+    delete req.session.data.users
+    console.log('user file loaded')
+
+}
+
 function loadData(req, orgID) {
+
+    delete req.session.data.users
+    delete req.session.data.organisations
 
   const claimsFile = 'claims.json'
   const statusFile = 'claim-statuses.json'
@@ -1059,4 +1091,4 @@ function saveRegistrationEnty(req) {
     delete req.session.data.vatRegNumber
 }
 
-module.exports = {loadData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}
+module.exports = {loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}

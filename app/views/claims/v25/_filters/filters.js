@@ -1648,3 +1648,59 @@ addFilter('getSmartOrdinal', function (index, list) {
     
     return n + suffix;
 })
+
+addFilter('findOrg', function (id, orgs) {
+    return orgs.find(entry => entry.workplaceID === id);
+})
+
+addFilter('roleType', function (type) {
+    switch(type) {
+        case "signatory":
+            return "SRO"
+        case "submitter":
+            return "Submitter"
+    }
+})
+
+addFilter('orgInfo', function (org) {
+    let detailsStr = ""
+
+    if (org.status == "active") {
+        detailsStr = detailsStr.concat("<li>Active</li>")
+    } else if (org.status == "draft"){
+        detailsStr = detailsStr.concat("<li>Registration in draft</li>")
+    }
+    
+    if (org.numberOfClaims >0 ) {
+        detailsStr = detailsStr.concat("<li>has claims</li>")
+    } else {
+        detailsStr = detailsStr.concat("<li>has no claims</li>")
+    }
+
+    if (org.users.active.length > 0 && org.users.invited.length > 0) {
+        detailsStr = detailsStr.concat("<li>has " + (org.users.active.length + 1) + " active submitters (one of which is the SRO) with " + org.users.invited.length + " invited</li>")
+    } else if (org.users.active.length > 0) {
+        detailsStr = detailsStr.concat("<li>has " + (org.users.active.length + 1) + " active submitters (one of which is the SRO)</li>")
+    } else if (org.users.invited.length > 0)  {
+        detailsStr = detailsStr.concat("<li>has 1 submitter who is also the SRO with " + org.users.invited.length + " invited</li>")
+    } else {
+        detailsStr = detailsStr.concat("<li>has 1 submitter who is also the SRO, has no other submitters</li>")
+    }
+
+    if (org.validGDL && org.wokrplaceID == "D76397203") {
+        detailsStr = detailsStr.concat("<li>new GDLs has not been signed for the previous 2 years</li>")
+    } else if (org.validGDL) {
+        detailsStr = detailsStr.concat("<li>new GDL has been signed</li>")
+    } else {
+        detailsStr = detailsStr.concat("<li>new GDL has not been signed</li>")
+    }
+
+    if (org.bankDetails == null) {
+        detailsStr = detailsStr.concat("<li>bank details have been added</li>")
+    } else {
+        detailsStr = detailsStr.concat("<li>bank details have been added</li>")
+    }
+
+    return detailsStr
+
+}, { renderAsHtml: true })

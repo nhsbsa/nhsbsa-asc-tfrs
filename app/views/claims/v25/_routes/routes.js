@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty } = require('../_helpers/helpers.js');
+const { loadData, loadScenarioData, loadUserData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty } = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 
@@ -1942,12 +1942,28 @@ router.get('/view-previous-submissions-back-handler', function (req, res) {
 
 });
 
+router.post('/load-scenario-data', function (req, res) {
+  loadScenarioData(req);
+
+  res.redirect('scenario-picker')
+})
+
+router.post('/load-user-data', function (req, res) {
+  const userID = req.session.data['userID']
+  
+  loadUserData(req, userID)
+  
+  delete req.session.data['userID']
+
+  res.redirect('manage-organisations')
+})
+
 router.post('/load-data', function (req, res) {
   const orgID = req.session.data['orgID']
   loadData(req, orgID);
   delete req.session.data['orgID']
 
-  res.redirect('eligibility/overview.html')
+  res.redirect('manage-organisations-home')
 })
 
 router.get('/load-data-account-test', function (req, res) {
