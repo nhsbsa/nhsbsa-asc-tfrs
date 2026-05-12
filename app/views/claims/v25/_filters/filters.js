@@ -1704,3 +1704,36 @@ addFilter('orgInfo', function (org) {
     return detailsStr
 
 }, { renderAsHtml: true })
+
+addFilter('generateUserOrgList', function (user, organisations) {
+    const orgList = {
+        active: [],
+        inactive: [],
+        rejected: [],
+        submitted: [],
+        draft: []
+    }
+
+    for (const userOrg of user.organisations) {
+        const org = organisations.find(entry => entry.workplaceID === userOrg.orgID);
+        switch(org.status) {
+            case "active":
+                orgList.active.push(org.workplaceID)
+                break;
+            case "inactive":
+                orgList.inactive.push(org.workplaceID)
+                break;
+            case "rejected":
+                orgList.rejected.push(org.workplaceID)
+                break;
+            case "submitted":
+                orgList.submitted.push(org.workplaceID)
+                break;
+            case "draft":
+                orgList.draft.push(org.workplaceID)
+                break;
+        }
+    }
+
+    return orgList
+})
