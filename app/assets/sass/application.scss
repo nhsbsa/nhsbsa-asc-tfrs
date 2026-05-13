@@ -988,3 +988,27 @@ margin-right: govuk-spacing(3);
 .claim-history-title{
   @include govuk-font($size: 24, $weight: bold,);
 }
+
+.org-detail-key {
+  text-size-adjust: 100%;
+  font-family: "GDS Transport", arial, sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.3157894737;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.org-detail-value {
+  text-size-adjust: 100%;
+  font-family: "GDS Transport", arial, sans-serif;
+  font-size: 19px;
+  line-height: 1.3157894737;
+  border: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 0.2631578947em;
+  margin-bottom: 1.0526315789em;
+  font-weight: bold;
+}

@@ -1,5 +1,36 @@
-<div class="">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="govuk-heading-m"><a href="#" class="govuk-link">{{orgDetails.name}} ({{orgDetails.workplaceID}})</a></h2>
+        </div>
+        
+        <div class="govuk-grid-row">
+            <dl class="govuk-grid-column-one-third">
+                <dt class="org-detail-key">Status</dt>
+                <dd class="org-detail-value">
+                    {{orgDetails.status | orgTag}}
+                </dd>
+            </dl>
+            <dl class="govuk-grid-column-two-thirds">
+                <dt class="org-detail-key">Address</dt>
+                <dd class="org-detail-value">{{ orgDetails.address[0] }}, {{ orgDetails.address[1] }}, {{ orgDetails.address[2] }}</dd>
+            </dl>
+        </div>
+        <div class="govuk-grid-row">
+            <dl class="govuk-grid-column-one-third">
+                <dt class="org-detail-key">Role</dt>
+                <dd class="org-detail-value">
+                    {{orgDetails.userRole | roleType}}
+                </dd>
+            </dl>
+            <dl class="govuk-grid-column-two-thirds">
+                <dt class="org-detail-key">Senior responsible officer</dt>
+                <dd class="org-detail-value">{{orgDetails.signatory.active.givenName}} {{orgDetails.signatory.active.familyName}}{% if orgDetails.userRole == "signatory" %} (you){% endif %}</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="govuk-grid-column-one-third">
 
-
-
+    </div>
 </div>
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">

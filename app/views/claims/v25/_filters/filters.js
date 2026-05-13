@@ -1656,7 +1656,7 @@ addFilter('findOrg', function (id, orgs) {
 addFilter('roleType', function (type) {
     switch(type) {
         case "signatory":
-            return "SRO"
+            return "Senior responsible officer"
         case "submitter":
             return "Submitter"
     }
@@ -1716,6 +1716,7 @@ addFilter('generateUserOrgList', function (user, organisations) {
 
     for (const userOrg of user.organisations) {
         const org = organisations.find(entry => entry.workplaceID === userOrg.orgID);
+        org.userRole = userOrg.userType
         switch(org.status) {
             case "active":
                 orgList.active.push(org.workplaceID)
@@ -1737,3 +1738,21 @@ addFilter('generateUserOrgList', function (user, organisations) {
 
     return orgList
 })
+
+addFilter('orgTag', function (statusID) {
+    var statusName = null
+
+    if (statusID == 'active') {
+        return '<strong class="govuk-tag govuk-tag--green">Active</strong>'
+    } else if (statusID == 'inactive') {
+        return '<strong class="govuk-tag govuk-tag--grey">Inactive</strong>'
+    } else if (statusID == 'rejected') {
+        return '<strong class="govuk-tag govuk-tag--red">Rejected</strong>'
+    } else if (statusID == 'submitted') {
+        return '<strong class="govuk-tag govuk-tag--blue">Awaiting Approval</strong>'
+    } else if (statusID == 'draft') {
+        return '<strong class="govuk-tag govuk-tag--teal">Draft</strong>'
+    } else {
+        return '<strong class="govuk-tag govuk-tag--purple">Invalid Status</strong>'
+    }
+}, { renderAsHtml: true })
