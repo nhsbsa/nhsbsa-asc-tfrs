@@ -29,9 +29,11 @@ GOV.UK prototype - {{serviceName}}
             <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
                 <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Pre-login & account creation</h2>
                 <p class="govuk-body">This will start the journey on the public facing service landing pages and allow you test account creation and login.</p>
-                <a class="govuk-button govuk-!-margin-bottom-1" href="./load-scenario-data?journey=creation">
-                    Start from before login
-                </a>
+                <form action="./load-scenario-data?journey=creation" method="post" novalidate>
+                    <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" >
+                        Start from before login
+                    </button>
+                </form>
             </section>
         </article>
         <article class="moj-ticket-panel" aria-label="Sub navigation 1">
