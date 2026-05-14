@@ -1696,7 +1696,7 @@ addFilter('orgInfo', function (org) {
     }
 
     if (org.bankDetails == null) {
-        detailsStr = detailsStr.concat("<li>bank details have been added</li>")
+        detailsStr = detailsStr.concat("<li>bank details have not been added</li>")
     } else {
         detailsStr = detailsStr.concat("<li>bank details have been added</li>")
     }
