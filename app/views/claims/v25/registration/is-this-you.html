@@ -43,7 +43,7 @@
                     Workplace ID
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{data.org.workplaceID}}
+                    {{data.orgID}}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -51,7 +51,7 @@
                     Organisation name
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{data.org.name}}
+                    {{data.orgName}}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">
@@ -59,7 +59,7 @@
                     Organisation address
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.org.address[0] }}<br>  {{ data.org.address[1] }}<br> {{ data.org.address[2] }}  
+                    {{ data.addressLine1 }}<br>  {{ data.addressTown }}<br> {{ data.addressPostcode }}
                 </dd>
             </div>
         </dl>

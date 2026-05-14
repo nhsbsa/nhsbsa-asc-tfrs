@@ -17,6 +17,7 @@ router.post('/accountResponse', function (req, res) {
 
 
   if (accountResponse == "yes") {
+    loadData(req, "A02944934");
     req.session.data.journey = 'signin'
     res.redirect('authentication/sign-in')
   } else if (accountResponse == "no") {
@@ -1958,19 +1959,37 @@ router.post('/load-user-data', function (req, res) {
   res.redirect('manage-organisations')
 })
 
-router.post('/load-data', function (req, res) {
+router.get('/load-data', function (req, res) {
   const orgID = req.session.data['orgID']
   loadData(req, orgID);
   delete req.session.data['orgID']
 
-  res.redirect('manage-organisations-home')
+
+  res.redirect('manage-claims-home')
 })
 
 router.get('/load-data-account-test', function (req, res) {
-  const orgID = req.session.data['orgID']
-  loadData(req, orgID);
-  delete req.session.data['orgID']
-
+  if (req.session.data.selfServe == "true") {
+    loadScenarioData(req);
+    req.session.data.user = {
+        "givenName": req.session.data.givenName,
+        "familyName": req.session.data.familyName,
+        "email": req.session.data.email,
+        "organisations": []
+    }
+    delete req.session.data.givenName
+    delete req.session.data.familyName
+    delete req.session.data.email
+    delete req.session.data.mobile
+    delete req.session.data.users
+  } else {
+    const userID = req.session.data['userID']
+    loadUserData(req, userID)
+    delete req.session.data['userID']
+    const orgID = req.session.data['orgID']
+    loadData(req, orgID);
+    delete req.session.data['orgID']
+  }
   req.session.data.journey = "creation"
   res.redirect('./authentication/creation-link')
 })

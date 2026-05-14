@@ -57,9 +57,7 @@
             <p>Date: 10 April 2024</p>
         </div>
         <div class="content">
-            {% if data.org.workplaceID == 'E76904778' %}
-                {% include "../_components/invite-emails/scenario-1.html" %}
-            {% elif data.org.workplaceID == 'F15904728' %}
+            {% if data.org.workplaceID == 'F15904728' %}
                 {% include "../_components/invite-emails/scenario-2.html" %}
             {% elif data.org.workplaceID == 'F84625987' %}
                 {% include "../_components/invite-emails/scenario-3.html" %}
@@ -67,6 +65,8 @@
                 {% include "../_components/invite-emails/scenario-4.html" %}
             {% elif data.org.workplaceID == 'B52698456' %}
                 {% include "../_components/invite-emails/scenario-5.html" %}
+            {% else %}
+                {% include "../_components/invite-emails/scenario-1.html" %}
             {% endif %}
         </div>
         <div class="footer">

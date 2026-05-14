@@ -9,101 +9,48 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-        <div class="moj-page-header-actions">
-        <div class="moj-page-header-actions__title">
-            <h1 class="govuk-heading-l">Manage organisations</h1>
-        </div>
-        <div class="moj-page-header-actions__actions">
-            <div class="moj-button-group moj-button-group--inline">
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-                Register new organisation
-            </button>
-            </div>
-        </div>
-        </div>
+    <div class="govuk-grid-column-three-quarters">
 
-        {# <h1 class="govuk-heading-xl">Manage organisations</h1>
+        <h1 class="govuk-heading-xl">My organisations</h1>
         <a type="submit" class="govuk-button" data-module="govuk-button" href="registration/before-you-start">
             Register new organisation
-        </a> #}
-    </div>
-</div>
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+        </a>
 
-        <div class="govuk-tabs" data-module="govuk-tabs">
-  <h2 class="govuk-tabs__title">
-    Contents
-  </h2>
-  <ul class="govuk-tabs__list">
-    <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-      <a class="govuk-tabs__tab" href="#past-day">
-        Actve (2)
-      </a>
-    </li>
-    <li class="govuk-tabs__list-item">
-      <a class="govuk-tabs__tab" href="#past-week">
-        Awaiting approval
-      </a>
-    </li>
-    <li class="govuk-tabs__list-item">
-      <a class="govuk-tabs__tab" href="#past-month">
-        Draft (1)
-      </a>
-    </li>
-  </ul>
-  <div class="govuk-tabs__panel" id="past-day">
-    <h2 class="govuk-heading-l">Active</h2>
-                {% if orgList.active.length > 0 %}
+        {% if orgList.active.length > 0 %}
             {# <h1 class="govuk-heading-l">Active</h1> #}
             {% for workplaceID in orgList.active %}
                 {% set orgDetails = workplaceID | findOrg(data.organisations) %}
-                    {% include "./_components/org-card-2.html" %}
+                    {% include "./_components/org-card.html" %}
             {% endfor %}
         {% endif %}
-  </div>
-  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-week">
-    <h2 class="govuk-heading-l">Past week</h2>
         {% if orgList.submitted.length > 0 %}
             {# <h1 class="govuk-heading-l">Awaiting approval</h1> #}
             {% for workplaceID in orgList.submitted %}
                 {% set orgDetails = workplaceID | findOrg(data.organisations) %}
-                    {% include "./_components/org-card-2.html" %}
+                    {% include "./_components/org-card.html" %}
             {% endfor %}
         {% endif %}
         {% if orgList.draft.length > 0 %}
             {# <h1 class="govuk-heading-l">Draft</h1> #}
             {% for workplaceID in orgList.draft %}
                 {% set orgDetails = workplaceID | findOrg(data.organisations) %}
-                    {% include "./_components/org-card-2.html" %}
+                    {% include "./_components/org-card.html" %}
             {% endfor %}
         {% endif %}
         {% if orgList.rejected.length > 0 %}
             {# <h1 class="govuk-heading-l">Rejected</h1> #}
             {% for workplaceID in orgList.rejected %}
                 {% set orgDetails = workplaceID | findOrg(data.organisations) %}
-                    {% include "./_components/org-card-2.html" %}
+                    {% include "./_components/org-card.html" %}
             {% endfor %}
         {% endif %}
         {% if orgList.inactive.length > 0 %}
             {# <h1 class="govuk-heading-l">Inactive</h1> #}
             {% for workplaceID in orgList.inactive %}
                 {% set orgDetails = workplaceID | findOrg(data.organisations) %}
-                    {% include "./_components/org-card-2.html" %}
+                    {% include "./_components/org-card.html" %}
             {% endfor %}
         {% endif %}
-  </div>
-  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-month">
-    <h2 class="govuk-heading-l">Past month</h2>
-
-  </div>
-  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="past-year">
-    <h2 class="govuk-heading-l">Past year</h2>
-
-  </div>
-</div>
-
     </div>
 </div>
 

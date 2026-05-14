@@ -1,36 +1,60 @@
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2 class="govuk-heading-m"><a href="#" class="govuk-link">{{orgDetails.name}} ({{orgDetails.workplaceID}})</a></h2>
-        </div>
-        
-        <div class="govuk-grid-row">
-            <dl class="govuk-grid-column-one-third">
-                <dt class="org-detail-key">Status</dt>
-                <dd class="org-detail-value">
-                    {{orgDetails.status | orgTag}}
-                </dd>
-            </dl>
-            <dl class="govuk-grid-column-two-thirds">
-                <dt class="org-detail-key">Address</dt>
-                <dd class="org-detail-value">{{ orgDetails.address[0] }}, {{ orgDetails.address[1] }}, {{ orgDetails.address[2] }}</dd>
-            </dl>
-        </div>
-        <div class="govuk-grid-row">
-            <dl class="govuk-grid-column-one-third">
-                <dt class="org-detail-key">Role</dt>
-                <dd class="org-detail-value">
-                    {{orgDetails.userRole | roleType}}
-                </dd>
-            </dl>
-            <dl class="govuk-grid-column-two-thirds">
-                <dt class="org-detail-key">Senior responsible officer</dt>
-                <dd class="org-detail-value">{{orgDetails.signatory.active.givenName}} {{orgDetails.signatory.active.familyName}}{% if orgDetails.userRole == "signatory" %} (you){% endif %}</dd>
-            </dl>
-        </div>
-    </div>
-    <div class="govuk-grid-column-one-third">
-
-    </div>
+<div class="govuk-summary-card">
+  <div class="govuk-summary-card__title-wrapper">
+    <h2 class="govuk-summary-card__title">
+      {{orgDetails.name}}
+      <br><span class="govuk-!-font-weight-regular">({{orgDetails.workplaceID}})</span>
+    </h2>
+    <ul class="govuk-summary-card__actions govuk-summary-card__actions-flex-height">
+      {% if orgDetails.userRole == "signatory" and orgDetails.status == "active" %}
+        <li class="govuk-summary-card__action">
+          <a href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=users&userType={{orgDetails.userRole}}" class="govuk-link">Manage submitters</a>
+        </li>
+      {% endif %}
+        <li class="govuk-summary-card__action">
+          {% if orgDetails.status == "active" %}
+            <a href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}" class="govuk-link">Manage claims</a>
+              {% elif orgDetails.status == "draft" and orgDetails.userRole == "signatory"%}
+                  <a href="#" class="govuk-link">Continue registration</a>
+{#               {% elif (orgDetails.status == "submitted" or orgDetails.status == "rejected") and orgDetails.userRole == "signatory"%}
+                  <a href="#" class="govuk-link">View registration details</a> #}
+              {% endif %}
+        </li>
+    </ul>
+  </div>
+  <div class="govuk-summary-card__content">
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Status
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{orgDetails.status | orgTag}}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Address
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ orgDetails.address[0] }}, {{ orgDetails.address[1] }}, {{ orgDetails.address[2] }}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          My role
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{orgDetails.userRole | roleType}}
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Senior Responsible Officer
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{orgDetails.signatory.active.givenName}} {{orgDetails.signatory.active.familyName}}{% if orgDetails.userRole == "signatory" %} (you){% endif %}
+        </dd>
+      </div>
+    </dl>
+  </div>
 </div>
-<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">

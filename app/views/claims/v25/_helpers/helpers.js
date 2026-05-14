@@ -891,7 +891,6 @@ function loadUserData(req, userID) {
 function loadData(req, orgID) {
 
     delete req.session.data.users
-    delete req.session.data.organisations
 
   const claimsFile = 'claims.json'
   const statusFile = 'claim-statuses.json'
