@@ -1109,6 +1109,8 @@ router.get('/ready-to-declare', function (req, res) {
     delete req.session.data.submitError
     if (req.session.data.org.bankDetails == null) {
       res.redirect('claim/missing-bank-details')
+    } else if (req.session.data.org.bankDetails.verificationStatus == "submitted") {
+      res.redirect('claim/unverified-bank-details')
     } else if (req.session.data.org.validGDL == false &&  new Date(submission.costDate) > FYdate) {
       res.redirect('claim/missing-gdl')
     } else if (isDuplicateClaim.check) {

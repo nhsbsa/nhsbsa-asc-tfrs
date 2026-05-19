@@ -51,6 +51,11 @@
                       {% if data.orgTab == 'org-details'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Organisation details{% if data.orgTab == 'org-details'%}</strong>{%endif%}
                     </a>
                   </li>
+                  <li class="govuk-service-navigation__item {% if data.orgTab == 'bank-details'%}govuk-service-navigation__item--active{%endif%}">
+                    <a class="govuk-service-navigation__link" href="../org-tab-handler/bank-details">
+                      {% if data.orgTab == 'bank-details'%}<strong class="govuk-service-navigation__active-fallback">{%endif%}Bank details{% if data.orgTab == 'bank-details'%}</strong>{%endif%}
+                    </a>
+                  </li>
                 </ul>
               </nav>
     </div>

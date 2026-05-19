@@ -1,12 +1,35 @@
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l govuk-!-margin-top-6">Bank details</h1>
+<div class="govuk-grid-column-full">
+  <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+                <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+            </svg>
+                <div class="moj-banner__message">Bank details have been successfully rejected</div>
+            </div>
+   {# <a href="../claim-process-start-handler" class="govuk-back-link govuk-!-margin-bottom-6">Back</a> #}
+ <h1 class="govuk-heading-l">Bank details</h1>
+</div>
+</div>
 
-        {% if org.bankDetails != null %}
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds">
+       
+        {# <p class="govuk-body"><strong class="govuk-tag govuk-tag--red">Verification failed</strong></p> #}
+
           <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Name on account
+                Verification status
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <strong class="govuk-tag govuk-tag--red">Verification failed</strong>
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Account name
               </dt>
               <dd class="govuk-summary-list__value">
                 {{org.bankDetails.nameOnAccount}}
@@ -30,18 +53,48 @@
             </div>
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Building society roll number
+                Building society roll number (optional)
               </dt>
               <dd class="govuk-summary-list__value">
                 <p class="govuk-body">{{org.bankDetails.buildingSocietyNumber}}</p>
               </dd>
             </div>
           </dl>
-        {% elif (org.signatory.active.status == "invited") %}
-          <p class="govuk-body">Organisation has not yet completed registration so bank details have not yet been added.</p>
-        {% else %}
-          <p class="govuk-body">This organisation has not yet added their bank details.</p>
-        {% endif %}
+            {# <p class="govuk-body">This organisation's bank details have been submitted but still need to be verified.</p> #}
+          {# <div class="govuk-button-group">
+    <a class="govuk-button" href="../outcome-handler">Verify details</a>
+</div> #}
+
     </div>
+    {# <div class="govuk-grid-column-one-third">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset" aria-describedby="changedName-hint">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+            <h1 class="govuk-fieldset__heading">
+              Have you been able to verify the bank details?
+            </h1>
+          </legend>
+          <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="changedName" name="changedName" type="radio" value="yes">
+              <label class="govuk-label govuk-radios__label" for="changedName">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="changedName-2" name="changedName" type="radio" value="no">
+              <label class="govuk-label govuk-radios__label" for="changedName-2">
+                No - reject
+              </label>
+            </div>
+          </div>
+        </fieldset>
+        <div class="govuk-button-group" style="padding-top: 20px;">
+          <a class="govuk-button" href="../outcome-handler">Confirm outcome</a>
+        </div>
+</div>
+    </div> #}
+
     </div>
 </div>

@@ -11,6 +11,7 @@
     "name": "Evergreen Care home",
     "address": ["72 Guild Street", "London", "SE23 6FH"],
     "bankDetails": {
+      "verificationStatus": "verified",
       "nameOnAccount": "Evergreen Care Home",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -106,6 +107,7 @@
     "name": "Teatree Care",
     "address": ["32 The Lawn", "Birmingham", "BI23 6FH"],
     "bankDetails": {
+      "verificationStatus": "rejected",
       "nameOnAccount": "Teatree Care",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -158,6 +160,7 @@
     "name": "Anika Care Ltd",
     "address": ["13 Gandfield Street", "Wakefield", "WA23 6FH"],
     "bankDetails": {
+      "verificationStatus": "verified",
       "nameOnAccount": "Anika Care",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -192,6 +195,7 @@
     "name": "Fairfield Care Home",
     "address": ["12 Fairfield Road", "Scarborough", "SC23 6FH"],
     "bankDetails": {
+      "verificationStatus": "verified",
       "nameOnAccount": "caregroup Ltd",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -289,7 +293,13 @@
     "numberOfClaims": 0,
     "name": "Pinetree Manor Care Centre",
     "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
-    "bankDetails": null,
+    "bankDetails": {
+      "verificationStatus": "rejected",
+      "nameOnAccount": "caregroup Ltd",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    },
     "validGDL": true,
     "notes" : [],
     "signatory": {
@@ -354,6 +364,7 @@
     "name": "Yorkplace Care home",
     "address": ["12 Farifield Road", "York", "YO23 6FH"],
     "bankDetails": {
+      "verificationStatus": "verified",
       "nameOnAccount": "caregroup Care home Ltd",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -388,6 +399,7 @@
     "name": "Fandly Care",
     "address": ["12 Jack Street", "Liverpool", "LI12 8GB"],
     "bankDetails": {
+      "verificationStatus": "verified",
       "nameOnAccount": "Fandly Ltd",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -480,6 +492,7 @@
     "name": "Prickly Care home",
     "address": ["2 Prickly Street", "Harrogate", "HO23 6FH"],
     "bankDetails": {
+      "verificationStatus": "verified",
       "nameOnAccount": "Prickly care home Ltd",
       "sortCode": "235486",
       "accountNumber": "84526365",

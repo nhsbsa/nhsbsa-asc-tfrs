@@ -8,6 +8,7 @@ const addFilter = govukPrototypeKit.views.addFilter
 const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, buildSlotComparison } = require('../_helpers/helpers.js');
 
 const fs = require('fs');
+
 addFilter('statusTag', function (statusID, statuses) {
     var statusName = null
     for (const s of statuses) {
@@ -30,6 +31,20 @@ addFilter('statusTag', function (statusID, statuses) {
     }
 }, { renderAsHtml: true })
 
+addFilter('bankVerificationTag', function (verificationStatus) {
+    if (verificationStatus == null) {
+        return '<strong class="govuk-tag govuk-tag--light-blue">Not yet added</strong>'
+    } else if (verificationStatus == 'submitted') {
+        return '<strong class="govuk-tag govuk-tag--blue">Submitted</strong>'
+    } else if (verificationStatus == 'verified') {
+        return '<strong class="govuk-tag govuk-tag--green">Verified</strong>'
+    } else if (verificationStatus == 'rejected') {
+        return '<strong class="govuk-tag govuk-tag--red">Verification failed</strong>'
+    } else {
+        return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
+    }
+}, { renderAsHtml: true })
+
 addFilter('claimCount', function (statusID, claims, workplaceID) {
     let i = 0
     for (const c of claims) {
@@ -38,6 +53,16 @@ addFilter('claimCount', function (statusID, claims, workplaceID) {
         }
     }
     return i
+})
+
+addFilter('hasSubmittedAClaim', function (claims, workplaceID) {
+    let hasNotSubmitted = true
+    for (const c of claims) {
+        if (((c.status != "not-yet-submitted" ) && (c.workplaceID == workplaceID))) {
+            hasNotSubmitted = false
+        }
+    }
+    return hasNotSubmitted
 })
 
 addFilter('pageCount', function (content, perPage) {

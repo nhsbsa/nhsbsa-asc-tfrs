@@ -59,7 +59,7 @@ Manage claims - {{serviceName}} — GOV.UK
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    {% if data.org.bankDetails == null or data.org.validGDL == false %}
+    {% if data.org.bankDetails == null or data.org.validGDL == false or data.org.bankDetails.verificationStatus == "submitted" or data.org.bankDetails.verificationStatus == "rejected" or (data.org.bankDetails.verificationStatus == "verified" and (data.claims | hasSubmittedAClaim(data.org.workplaceID)))%}
     <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
       <div class="govuk-notification-banner__header">
         <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
@@ -67,8 +67,9 @@ Manage claims - {{serviceName}} — GOV.UK
         </h2>
       </div>
       <div class="govuk-notification-banner__content">
-        <h3 class="govuk-notification-banner__heading">Action needed</h3>
+
         {% if data.org.bankDetails == null %}
+          <h3 class="govuk-notification-banner__heading">Action needed</h3>
           <p class="govuk-body">
               {% if data.userType == "signatory" %}
               As Senior Responsible Officer you need to add your organisation's bank details before you can submit claims.
@@ -78,7 +79,38 @@ Manage claims - {{serviceName}} — GOV.UK
               {% endif %}
           </p>
         {% endif %}
+
+        {% if data.org.bankDetails.verificationStatus == "submitted" %}
+          {% if data.userType == "signatory" %}
+            <p class="govuk-body">We are now verifying your organisation's bank details. We will email you within 3-5 working days if any further action is needed.</p>  
+            <p class="govuk-body">You cannot submit any claims until the bank details are verified.</p>  
+          {% elif data.userType == "submitter" %}
+              <p class="govuk-body">We are now verifying your organisation's bank details. We will email your SRO within 3-5 working days if any further action is needed.</p>  
+              <p class="govuk-body">You cannot submit any claims until the bank details are verified.</p>  
+          {% endif %}
+        {% endif %}
+
+        {% if data.org.bankDetails.verificationStatus == "verified" %}
+          <p class="govuk-body">We have verified your bank details. You can now start submitting claims.</p>  
+        {% endif %}
+
+        {% if data.org.bankDetails.verificationStatus == "rejected" %}
+          {% if data.userType == "signatory" %}
+            <p class="govuk-body">We have not been able to verify your bank details, which means you cannot make claims using this service.</p>  
+            <p class="govuk-body">If you have any questions, you can email us at <a href="#">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>  
+          {% elif data.userType == "submitter" %}
+              <p class="govuk-body">We are now verifying your organisation's bank details. We will email your SRO within 3-5 working days if any further action is needed.</p>  
+              <p class="govuk-body">You cannot submit any claims until the bank details are verified.</p>  
+          {% endif %}
+        {% endif %}
+
+        {% if data.org.bankDetails.verificationStatus == "verified" %}
+          <p class="govuk-body">We have verified your bank details. You can now start submitting claims.</p>  
+        {% endif %}
+        
+
         {% if data.org.validGDL == false  %}
+        <h3 class="govuk-notification-banner__heading">Action needed</h3>
           <p class="govuk-body">
               {% if data.userType == "signatory" %}
               You can only submit claims that were paid for in the year starting 1&nbsp;April&nbsp;2026 once you, as Senior Responsible Officer, sign the new grant determination letter (GDL).
