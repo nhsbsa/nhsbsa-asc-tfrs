@@ -17,7 +17,6 @@ Banks details — {{serviceName}} — GOV.UK
             </div>
         {% endif %}
 
-
         <h1 class="govuk-heading-l">Bank details</h1>
         <p class="govuk-body">{{data.org.bankDetails.verificationStatus| bankVerificationTag}}{% if data.org.bankDetails != null %} on 30 June{% endif %}</p>
 
@@ -30,7 +29,7 @@ Banks details — {{serviceName}} — GOV.UK
                 </div>
                 <div class="moj-alert__content">
                     <h2 class="moj-alert__heading">Verification failed
-                    <p class="govuk-body">We have not been able to verify your bank details, which means you cannot make claim using this service.</p>
+                    <p class="govuk-body">We have not been able to verify your bank details. This means you cannot  submit any claims to this service.</p>
                     <p class="govuk-body">If you have any questions, you can email us at <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
                 </div>
             </div>

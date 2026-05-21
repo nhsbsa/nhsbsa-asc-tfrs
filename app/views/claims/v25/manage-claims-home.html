@@ -95,13 +95,8 @@ Manage claims - {{serviceName}} — GOV.UK
         {% endif %}
 
         {% if data.org.bankDetails.verificationStatus == "rejected" %}
-          {% if data.userType == "signatory" %}
-            <p class="govuk-body">We have not been able to verify your bank details, which means you cannot make claims using this service.</p>  
+            <p class="govuk-body">We have not been able to verify your organisation's bank details. This means you cannot submit any claims to this service.</p>  
             <p class="govuk-body">If you have any questions, you can email us at <a href="#">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>  
-          {% elif data.userType == "submitter" %}
-              <p class="govuk-body">We have not been able to verify your bank details, which means you cannot make claims using this service.</p>  
-            <p class="govuk-body">If you have any questions, you can email us at <a href="#">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>  
-          {% endif %}
         {% endif %}
 
         {% if data.org.validGDL == false %}
