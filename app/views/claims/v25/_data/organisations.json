@@ -293,13 +293,7 @@
     "numberOfClaims": 0,
     "name": "Pinetree Manor Care Centre",
     "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
-    "bankDetails": {
-      "verificationStatus": "rejected",
-      "nameOnAccount": "caregroup Ltd",
-      "sortCode": "272893",
-      "accountNumber": "12345678",
-      "buildingSocietyNumber": null
-    },
+    "bankDetails": null,
     "validGDL": true,
     "notes" : [],
     "signatory": {
@@ -498,7 +492,7 @@
       "accountNumber": "84526365",
       "buildingSocietyNumber": null
     },
-    "validGDL": false,
+    "validGDL": true,
     "notes" : [],
     "signatory": {
     "active": {        

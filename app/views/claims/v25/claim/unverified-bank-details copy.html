@@ -2,7 +2,7 @@
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 
 {% block pageTitle %}
-Missing bank details — {{serviceName}} — GOV.UK
+Unverified bank details — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block content %}
@@ -12,26 +12,31 @@ Missing bank details — {{serviceName}} — GOV.UK
         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
         <h1 class="govuk-heading-l">
             {% if data.userType == "signatory" %}
-            Add your organisation's bank details
+            Your bank details are awaiting verification
             {% elif data.userType == "submitter" %}
-            We need your organisation's bank details
+            Your bank details are awaiting verification
             {% endif %}
         </h1>
     </div>
     <div class="govuk-grid-column-two-thirds">
-        <p class="govuk-body">
         {% if data.userType == "signatory" %}
-            As the Senior Responsible Officer, you need to add your organisation's bank details before you can submit a claim.
+            <p class="govuk-body">
+                We will contact you, as Senior Responsible Officer, if there are any issues with your organisation's bank details.
+            </p>
         {% elif data.userType == "submitter" %}
-        Your Senior Responsible Officer needs to log in and add your organisation's bank details before you can submit a claim.
+            <p class="govuk-body">
+                We will email your Senior Responsible Officer within 3 to 5 days if there are any issues.
+            </p>
+            <p class="govuk-body">
+                You cannot submit any claims until the bank details are verified.
+            </p>
         {% endif %}
-        </p>
         <h2 class="govuk-heading-m">If you need support</h2>
         <p class="govuk-body">This service is managed by the NHS Business Services Authority. You can email us <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
         {% if data.userType == "signatory" %}
         <div class="govuk-button-group">
-            <a type="submit" class="govuk-button"  href="../org-admin/change-bank-details">
-                Add bank details
+            <a type="submit" class="govuk-button"  href="../org-admin/bank-details">
+                Go to bank details
             </a>
             <a class="govuk-link"  href="claim-details?id={{data.id}}">Go back to claim</a>
         </div>

@@ -82,15 +82,15 @@ Manage claims - {{serviceName}} — GOV.UK
 
         {% if data.org.bankDetails.verificationStatus == "submitted" %}
           {% if data.userType == "signatory" %}
-            <p class="govuk-body">We are now verifying your organisation's bank details. We will email you within 3-5 working days if any further action is needed.</p>  
+            <p class="govuk-body">We are now verifying your organisation's bank details. We will  email you within 3 to 5 days if any further action is needed. This will come from an address ending @nhsbsa.nhs.uk.</p>  
             <p class="govuk-body">You cannot submit any claims until the bank details are verified.</p>  
           {% elif data.userType == "submitter" %}
-              <p class="govuk-body">We are now verifying your organisation's bank details. We will email your SRO within 3-5 working days if any further action is needed.</p>  
+              <p class="govuk-body">We are now verifying your organisation's bank details. We will email your SRO within 3 to 5 days if any further action is needed.</p>  
               <p class="govuk-body">You cannot submit any claims until the bank details are verified.</p>  
           {% endif %}
         {% endif %}
 
-        {% if data.org.bankDetails.verificationStatus == "verified" %}
+        {% if data.org.bankDetails.verificationStatus == "verified" and data.org.validGDL == true %}
           <p class="govuk-body">We have verified your bank details. You can now start submitting claims.</p>  
         {% endif %}
 
@@ -99,17 +99,12 @@ Manage claims - {{serviceName}} — GOV.UK
             <p class="govuk-body">We have not been able to verify your bank details, which means you cannot make claims using this service.</p>  
             <p class="govuk-body">If you have any questions, you can email us at <a href="#">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>  
           {% elif data.userType == "submitter" %}
-              <p class="govuk-body">We are now verifying your organisation's bank details. We will email your SRO within 3-5 working days if any further action is needed.</p>  
-              <p class="govuk-body">You cannot submit any claims until the bank details are verified.</p>  
+              <p class="govuk-body">We have not been able to verify your bank details, which means you cannot make claims using this service.</p>  
+            <p class="govuk-body">If you have any questions, you can email us at <a href="#">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>  
           {% endif %}
         {% endif %}
 
-        {% if data.org.bankDetails.verificationStatus == "verified" %}
-          <p class="govuk-body">We have verified your bank details. You can now start submitting claims.</p>  
-        {% endif %}
-        
-
-        {% if data.org.validGDL == false  %}
+        {% if data.org.validGDL == false %}
         <h3 class="govuk-notification-banner__heading">Action needed</h3>
           <p class="govuk-body">
               {% if data.userType == "signatory" %}

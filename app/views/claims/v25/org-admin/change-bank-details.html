@@ -51,7 +51,7 @@
                 <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
                 <strong class="govuk-warning-text__text">
                     <span class="govuk-visually-hidden">Warning</span>
-                    Personal accounts must not be used.
+                    Use your organisation's business account, not a personal one.
                 </strong>
             </div>
             <div
@@ -105,7 +105,7 @@
             </div>
             <div class="govuk-form-group {% if data.submitError.bankDetailsValid != null and not data.submitError.bankDetailsValid and data.submitError.buildingSociety != 'valid' %}govuk-form-group--error{% endif %}">
                 <label class="govuk-label" for="roll-number">
-                    Building society roll number (if you have one)
+                    Building society roll number (optional)
                 </label>
                 <div id="roll-number-hint" class="govuk-hint">
                     You can find it on your card, statement or passbook
@@ -120,8 +120,8 @@
             </div>
 
             <h2 class="govuk-heading-m">What happens next</h2>
-            <p class="govuk-body">These bank details will now be verified and we will be in touch if there are any issues.</p>
-            <p class="govuk-body">You can start submitting claims, but you will not receive payment until verification is complete.</p>
+            <p class="govuk-body">We will now verify these bank details. We will email you within 3 to 5 days if any further action is needed.</p>
+            <p class="govuk-body">You cannot submit any claims until the bank details are verified.</p>
             <button type="submit" class="govuk-button" data-module="govuk-button">
                 Add bank details
             </button>
