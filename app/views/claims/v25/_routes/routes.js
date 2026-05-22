@@ -1966,11 +1966,16 @@ router.post('/load-user-data', function (req, res) {
 
 router.get('/load-data', function (req, res) {
   const orgID = req.session.data['orgID']
+  const tabLocation = req.session.data['tabLocation']
   loadData(req, orgID);
   delete req.session.data['orgID']
 
+  if (tabLocation == "users") {
+    res.redirect('org-admin/manage-team?tabLocation=users')
+  } else {
+    res.redirect('manage-claims-home?tabLocation=claims')
+  }
 
-  res.redirect('manage-claims-home')
 })
 
 router.get('/load-data-account-test', function (req, res) {

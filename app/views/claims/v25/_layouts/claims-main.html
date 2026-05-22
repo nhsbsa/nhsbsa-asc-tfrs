@@ -44,24 +44,24 @@
           </button>
           <ul class="govuk-service-navigation__list" id="navigation">
             <li class="govuk-service-navigation__item {% if data.tabLocation == 'claims' %}govuk-service-navigation__item--active{% endif %}">
-              <a class="govuk-service-navigation__link" href="/claims/v25/manage-claims-home?tabLocation=claims&submitError=" {% if data.tabLocation == 'claims' %}aria-current="true"{% endif %}>
+              <a class="govuk-service-navigation__link" href="/claims/v25/manage-claims-home?tabLocation=claims&submitError=&addbankdetailsSuccess=" {% if data.tabLocation == 'claims' %}aria-current="true"{% endif %}>
                 <strong class="govuk-service-navigation__active-fallback">Manage claims</strong>
               </a>
             </li>
             {% if data.userType == "signatory" %}
             <li class="govuk-service-navigation__item {% if data.tabLocation == 'users' %}govuk-service-navigation__item--active{% endif %}">
-              <a class="govuk-service-navigation__link" href="/claims/v25/org-admin/manage-team?tabLocation=users" {% if data.tabLocation == 'users' %}aria-current="true"{% endif %}>
+              <a class="govuk-service-navigation__link" href="/claims/v25/org-admin/manage-team?tabLocation=users&addbankdetailsSuccess=" {% if data.tabLocation == 'users' %}aria-current="true"{% endif %}>
                 {% if data.tabLocation == 'users' %}<strong class="govuk-service-navigation__active-fallback">{% endif %}Manage submitters{% if data.tabLocation == 'users' %}</strong>{% endif %}
               </a>
             </li>
             <li class="govuk-service-navigation__item {% if data.tabLocation == 'bankDetails' %}govuk-service-navigation__item--active{% endif %}">
-              <a class="govuk-service-navigation__link" href="/claims/v25/org-admin/bank-details?tabLocation=bankDetails" {% if data.tabLocation == 'bankDetails' %}aria-current="true"{% endif %}>
+              <a class="govuk-service-navigation__link" href="/claims/v25/org-admin/bank-details?tabLocation=bankDetails&addbankdetailsSuccess=" {% if data.tabLocation == 'bankDetails' %}aria-current="true"{% endif %}>
                 {% if data.tabLocation == 'bankDetails' %}<strong class="govuk-service-navigation__active-fallback">{% endif %}Bank details{% if data.tabLocation == 'bankDetails' %}</strong>{% endif %}
               </a>
             </li>
             {% endif %}
             <li class="govuk-service-navigation__item {% if data.tabLocation == 'orgDetails' %}govuk-service-navigation__item--active{% endif %}">
-              <a class="govuk-service-navigation__link" href="/claims/v25/org-admin/org-details?tabLocation=orgDetails" {% if data.tabLocation == 'orgDetails' %}aria-current="true"{% endif %}>
+              <a class="govuk-service-navigation__link" href="/claims/v25/org-admin/org-details?tabLocation=orgDetails&addbankdetailsSuccess=" {% if data.tabLocation == 'orgDetails' %}aria-current="true"{% endif %}>
                 {% if data.tabLocation == 'orgDetails' %}<strong class="govuk-service-navigation__active-fallback">{% endif %}Organisation details{% if data.tabLocation == 'orgDetails' %}</strong>{% endif %}
               </a>
             </li>
