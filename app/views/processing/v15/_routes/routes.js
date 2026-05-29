@@ -5,11 +5,11 @@ const fs = require('fs');
 const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode} = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
-router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
-router.use('/processing/v14/backstop', require('../_backstop/backstop-routes.js'));
+router.use('/processing/v15/backstop', require('../_backstop/backstop-routes.js'));
+router.use('/processing/v15/backstop', require('../_backstop/backstop-routes.js'));
 
-// v14 Prototype routes
-// v14 Prototype routes
+// v15 Prototype routes
+// v15 Prototype routes
 
 router.get('/load-data', function (req, res) {
   //Load data from JSON files
@@ -851,7 +851,7 @@ router.get('/showClaimPaymentNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
-      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
+      res.redirect('processing/v15/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
@@ -864,7 +864,7 @@ router.get('/hideClaimPaymentNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
-      res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
+      res.redirect('processing/v15/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
@@ -875,7 +875,7 @@ router.get('/showProcessorLearnerNote', function (req, res) {
   var claimID = req.session.data.id
   for (const c of req.session.data.claims ) {
     if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
-      res.redirect('processing/v14/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
+      res.redirect('processing/v15/organisation/org-view-main?subCount=' + subCount + '&orgTab=singleClaim' + '&id=' + claimID)
     }
   }
 });
@@ -892,18 +892,33 @@ router.get('/hideProcessorLearnerNote', function (req, res) {
     }
   }
   req.session.data.claimScreen = "learnerPreviousSubmissions"
-  res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
+  res.redirect('processing/v15/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID)
 });
 
-router.get('/applySubmissionsFilterProcessorv14', function (req, res) {
+router.get('/applySubmissionsFilterProcessorv15', function (req, res) {
   var claimID = req.session.data.id
   var filter = req.session.data.filter
-  res.redirect('processing/v14/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
+  res.redirect('processing/v15/organisation/org-view-main?orgTab=singleClaim' + '&id=' + claimID + "&filter=" + filter)
 })
+
+router.post('/verification-handler', function (req, res) {
+
+  delete req.session.data.verificationResponseIncomplete
+
+  const verificationResponse = req.session.data.verification
+
+  if (verificationResponse == "approve") {
+    res.redirect('/processing/v15/verify-bank-details/additional-information')
+  } else {
+    res.redirect('/bank-details')
+  }
+
+});
+
 
 //generate data
 router.post('/generate-handler', function (req, res) {
-  const jsonFilePath = './app/views/processing/v14/_data/claims.json';
+  const jsonFilePath = './app/views/processing/v15/_data/claims.json';
   const claims = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
 
   const claimType = req.session.data.claimType

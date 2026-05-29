@@ -5,6 +5,7 @@
     "name": "Evergreen Care home",
     "address": ["72 Guild Street", "London", "SE23 6FH"],
     "bankDetails": {
+      "verificationStatus": "verified",
       "nameOnAccount": "Evergreen Care Home",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -94,6 +95,7 @@
     "name": "Teatree Care",
     "address": ["32 The Lawn", "Birmingham", "BI23 6FH"],
     "bankDetails": {
+      "verificationStatus": "verified",
       "nameOnAccount": "Teatree Care",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -140,6 +142,7 @@
     "name": "Anika Care Ltd",
     "address": ["13 Gandfield Street", "Wakefield", "WA23 6FH"],
     "bankDetails": {
+      "verificationStatus": "verified",
       "nameOnAccount": "Anika Care",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -168,6 +171,7 @@
     "name": "Denhams Care Home",
     "address": ["12 Fairfield Road", "Scarborough", "SC23 6FH"],
     "bankDetails": {
+      "verificationStatus": "submitted",
       "nameOnAccount": "Denhams Ltd",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -270,7 +274,13 @@
     "numberOfClaims": 0,
     "name": "Kingscourt Care Home",
     "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
-    "bankDetails": null,
+    "bankDetails": {
+      "verificationStatus": "rejected",
+      "nameOnAccount": "Farifields Care home Ltd",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    },
     "validGDL": false,
     "notes" : [],
     "signatory": {
@@ -300,6 +310,7 @@
     "name": "Farifields Care home",
     "address": ["12 Farifield Road", "York", "YO23 6FH"],
     "bankDetails": {
+      "verificationStatus": "verified",
       "nameOnAccount": "Farifields Care home Ltd",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -328,6 +339,7 @@
     "name": "Fandly Care",
     "address": ["12 Jack Street", "Liverpool", "LI12 8GB"],
     "bankDetails": {
+      "verificationStatus": "verified",
       "nameOnAccount": "Fandly Ltd",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -376,7 +388,7 @@
     "validGDL": false,
     "notes" : [],
     "signatory": {
-    "active": {        
+    "active": {     
       "givenName": "Casey",
       "familyName": "Fedrisk",
       "email": "casey.fedrisk@halseycare.com",

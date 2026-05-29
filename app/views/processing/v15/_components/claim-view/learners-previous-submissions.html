@@ -18,7 +18,7 @@
             <h2 class="govuk-heading-l" id="training">Learners ({{sortedLearnerSlots.length}})</h2>
             <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} history with any learner edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>
 
-            <form action="/applySubmissionsFilterProcessorv14" method="post" novalidate>
+            <form action="/applySubmissionsFilterProcessorv15" method="post" novalidate>
                 <div class="govuk-form-group">
                     <label class="govuk-label" for="filter">
                     </label>
@@ -148,9 +148,11 @@
                     <tr class="govuk-table__row">
                     <td class="govuk-table__cell"><strong>Processed by</strong></td>
                     {% for submission in sortedSubmissions %}
-                        <td class="govuk-table__cell">
+                        <td class="govuk-table__cell" style="word-break: break-word;overflow-wrap: anywhere;">
                         {% if submission.processedDate %}
-                            Allan Connelly
+                            {# <a href="mailto:long.email-address@department.service.gov.uk"> #}
+                                long.email-address@department.service.gov.ukkkkkkkkk
+                                {# </a> #}
                         {% else %}
                             ---
                         {% endif %}

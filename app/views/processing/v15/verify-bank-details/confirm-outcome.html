@@ -1,0 +1,113 @@
+{% extends "../_layouts/org-view-layout.html" %}
+
+{% set org = data.organisations | findOrg(data.orgID) %}
+
+{% block pageTitle %}
+{% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}Error: {% endif %}{% if data.SROChange == 'edit' %}Edit {% else %}New {% endif %} SRO — {{data.processingServiceName}}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <h1 class="govuk-heading-l">Bank details</h1>
+    <p class="govuk-body">{{org.bankDetails.workplaceID}}</p>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-two-thirds">
+
+
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Account name
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{org.bankDetails.nameOnAccount}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Sort code
+              </dt>
+                <dd class="govuk-summary-list__value">
+                    {{org.bankDetails.sortCode | formatSortCode}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Account number
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if org.bankDetails.verificationStatus == "verified" %}
+                    {{org.bankDetails.accountNumber | maskCharacters(4)}}
+                {% else %}
+                    {{org.bankDetails.accountNumber}}
+                {% endif %}
+              </dd>
+            </div>
+            
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                 Building society roll number (if they have one)
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if org.bankDetails.buildingSocietyNumber == null  %}
+                    <p class="govuk-body">Not provided</p>
+                {% else %}
+                    {{org.bankDetails.buildingSocietyNumber}}
+                {% endif %}
+              </dd>
+            </div>
+          </dl>
+
+
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+      <form action="../verification-handler" method="post" novalidate>
+        <div class="govuk-form-group {% if data.verificationResponseIncomplete %}govuk-form-group--error {% endif %}" id="verification-review">
+          <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
+              <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                  Have you been able to verify the bank details?
+              </legend>
+              {% if data.verificationResponseIncomplete %}
+              <p id="verification-review-error" class="govuk-error-message">
+                  <span class="govuk-visually-hidden">Error:</span>Select an option for verification
+              </p>
+              {% endif %}
+              <div class="govuk-radios" data-module="govuk-radios">
+                  <div class="govuk-radios__item">
+                      <input class="govuk-radios__input " id="verificationYes" name="verification" type="radio" value="approve">
+                      <label class="govuk-label govuk-radios__label" for="verificationYes">
+                          Yes
+                      </label>
+                  </div>
+                  <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="verificationNo" name="verification" type="radio" value="reject">
+                      <label class="govuk-label govuk-radios__label" for="verificationNo">
+                          No – reject
+                      </label>
+                  </div>
+              </div>
+          </fieldset>
+        </div>
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button" data-module="govuk-button">
+              Continue
+          </button>
+              <a class="govuk-link" href="../organisation/org-view-main?orgTab=bank-details">Cancel</a>
+        </div>
+
+      </div>
+    </form>
+
+    </div>
+</div>
+
+
+{% endblock %}

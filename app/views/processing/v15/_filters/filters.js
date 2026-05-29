@@ -7,7 +7,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 const { formatDate, getMostRelevantSubmission, findLearnerById, findCourseByCode, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, loadJSONFromFile, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, buildSlotComparison, orderSubmissions } = require('../_helpers/helpers.js');
 const fs = require('fs');
-const dataPath = 'app/views/processing/v14/_data/'
+const dataPath = 'app/views/processing/v15/_data/'
 
 addFilter('processorstatusTag', function (statusID) {
     if (statusID == 'submitted') {
@@ -33,6 +33,36 @@ addFilter('findClaim', function (claimID, claims) {
         }
     }
     return claim;
+})
+
+addFilter('bankVerificationTag', function (verificationStatus) {
+    if (verificationStatus == null) {
+        return '<strong class="govuk-tag govuk-tag--light-blue">Not yet added</strong>'
+    } else if (verificationStatus == 'submitted') {
+        return '<strong class="govuk-tag govuk-tag--blue">Submitted</strong>'
+    } else if (verificationStatus == 'verified') {
+        return '<strong class="govuk-tag govuk-tag--green">Verified</strong>'
+    } else if (verificationStatus == 'rejected') {
+        return '<strong class="govuk-tag govuk-tag--red">Verification failed</strong>'
+    } else {
+        return '<strong class="govuk-tag govuk-tag--grey">Invalid Status</strong>'
+    }
+}, { renderAsHtml: true })
+
+addFilter('formatSortCode', function(sortCode) {
+    if (!/^\d{6}$/.test(sortCode)) {
+      throw new Error("Input must be a string of exactly 6 digits.");
+    }
+    return sortCode.match(/.{1,2}/g).join("-");
+})
+
+addFilter('maskCharacters', function(str, num) {
+    if (num <= 0) return str;
+    if (num >= str.length) return '*'.repeat(str.length);
+    
+    const masked = '*'.repeat(num);
+    const remainder = str.slice(num);
+    return masked + remainder;
 })
 
 addFilter('dateSort', function (notes) {
@@ -577,7 +607,7 @@ addFilter('formatCountToText', function (count) {
     if (count == 4) { return "Fourth"} 
 })
 addFilter('returntrainingType', function (code) {
-   const dataPath = 'app/views/processing/v14/_data/'
+   const dataPath = 'app/views/processing/v15/_data/'
     const trainingCourses = loadJSONFromFile('training.json', dataPath)
     for (const group of trainingCourses) {
         const course = group.courses.find(course=>course.code ==code);
