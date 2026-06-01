@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, loadScenarioData, loadUserData, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty } = require('../_helpers/helpers.js');
+const { loadData, loadScenarioData, loadUserData, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty } = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 
@@ -1927,6 +1927,11 @@ router.get('/applySubmissionsSort', function (req, res) {
 router.get('/applyLearnerSort', function (req, res) {
   var claimID = req.session.data.id
   res.redirect('claims/v25/claim/learnerSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
+});
+
+router.get('/change-organisation', function (req, res) {
+  clearSessionExcept(req, [])
+  res.redirect('claims/v25/manage-organisations')
 });
 
 router.get('/learner-previous-submissions-handler', function (req, res) {

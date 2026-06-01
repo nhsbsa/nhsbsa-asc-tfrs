@@ -1120,4 +1120,22 @@ function saveRegistrationEnty(req) {
     delete req.session.data.vatRegNumber
 }
 
-module.exports = {loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}
+function clearSessionExcept(req, keepList) {
+    const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes', 'CPDActivities', 'versionHistory', 'users', 'processingServiceName', 'organisations', 'user', 'area', 'journey']
+
+    keepList = keepList.concat(excludeKeys)
+    // Safety check: ensure session data exists
+    if (!req.session || !req.session.data) {
+        return;
+    }
+
+    // Iterate through all keys in the session data
+    Object.keys(req.session.data).forEach(key => {
+        // If the current key is NOT in the keepList, delete it
+        if (!keepList.includes(key)) {
+        delete req.session.data[key];
+        }
+    });
+}
+
+module.exports = {clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}
