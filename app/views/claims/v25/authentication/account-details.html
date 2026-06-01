@@ -29,7 +29,7 @@
         {% endif %}
         <span class="govuk-caption-l">Create a user account</span>
         <h1 class="govuk-heading-l">Your details</h1>
-        <form action="../load-data-account-test?orgID=E76904778&userType=signatory&selfServe=true" method="post" novalidate>
+        <form action="../load-data-account-test" method="post" novalidate>
             <div
                 class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.givenName == 'missing' %} govuk-form-group--error {% endif %}">
                 <label class="govuk-label govuk-label--m" for="givenName">

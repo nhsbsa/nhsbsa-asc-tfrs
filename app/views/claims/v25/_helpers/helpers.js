@@ -876,6 +876,12 @@ function loadUserData(req, userID) {
         
     console.log('loading in user file')
 
+    if (req.session.data.users == null) {
+        const usersFile = 'users.json'
+        req.session.data['users'] = loadJSONFromFile(usersFile, dataPath)
+        console.log('users file loaded')
+    }
+
     for (const user of req.session.data.users) {
         if (user.email == userID) {
             req.session.data.user = user

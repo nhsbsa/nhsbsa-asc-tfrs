@@ -57,7 +57,7 @@
             <p>Date: 10 April 2024</p>
         </div>
         <div class="content">
-            {% if data.org.workplaceID == 'F15904728' %}
+            {% if data.user.email == 'craig.willowtree@caregroup.com' %}
                 {% include "../_components/invite-emails/scenario-2.html" %}
             {% elif data.org.workplaceID == 'F84625987' %}
                 {% include "../_components/invite-emails/scenario-3.html" %}

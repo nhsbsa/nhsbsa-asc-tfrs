@@ -17,7 +17,6 @@ router.post('/accountResponse', function (req, res) {
 
 
   if (accountResponse == "yes") {
-    loadData(req, "A02944934");
     req.session.data.journey = 'signin'
     res.redirect('authentication/sign-in')
   } else if (accountResponse == "no") {
@@ -35,10 +34,8 @@ router.post('/confirmationResponse', function (req, res) {
 
 
   if (confirmationResponse == "yes") {
-    req.session.data.journey = 'signin'
     res.redirect('registration/job-title')
   } else if (confirmationResponse == "no") {
-    req.session.data.journey = "creation"
     res.redirect('registration/not-SRO')
   } else {
     res.redirect('registration/sro-confirmation?submitError=true')
@@ -1826,15 +1823,8 @@ router.get('/signin-handler', function (req, res) {
   const userType = req.session.data.userType
   const org = req.session.data.org
 
-  if (journey == 'creation' && userType == 'signatory') {
-      res.redirect('manage-organisations')
-  } else {
-    if (org.validGDL || userType == 'submitter') {
-      res.redirect('manage-claims-home?tabLocation=claims')
-    } else {
-      res.redirect('account-setup/sign-new-gdl')
-    }
-  } 
+  res.redirect('manage-organisations')
+
 });
 
 router.get('/from-learners-submission', function (req, res) {
@@ -1959,32 +1949,23 @@ router.post('/load-scenario-data', function (req, res) {
   res.redirect('scenario-picker')
 })
 
-router.post('/load-user-data', function (req, res) {
+router.get('/load-user-data', function (req, res) {
   const userID = req.session.data['userID']
-  
-  loadUserData(req, userID)
-  
-  delete req.session.data['userID']
 
-  res.redirect('manage-organisations')
-})
-
-router.get('/load-data', function (req, res) {
-  const orgID = req.session.data['orgID']
-  const tabLocation = req.session.data['tabLocation']
-  loadData(req, orgID);
-  delete req.session.data['orgID']
-
-  if (tabLocation == "users") {
-    res.redirect('org-admin/manage-team?tabLocation=users')
-  } else {
-    res.redirect('manage-claims-home?tabLocation=claims')
+  if (userID != null) {
+    loadUserData(req, userID)
   }
 
-})
+  delete req.session.data['userID']
 
-router.get('/load-data-account-test', function (req, res) {
-  if (req.session.data.selfServe == "true") {
+  if (req.session.data.user.journey == "post-login") {
+    res.redirect('manage-organisations')
+  } else if (req.session.data.user.journey == "pre-login") {
+    res.redirect('eligibility/overview')
+  } else if (req.session.data.user.journey == "self-serve") {
+    req.session.data.journey = "creation"
+    res.redirect('./authentication/creation-link')
+  } else {
     loadScenarioData(req);
     req.session.data.user = {
         "givenName": req.session.data.givenName,
@@ -1997,16 +1978,31 @@ router.get('/load-data-account-test', function (req, res) {
     delete req.session.data.email
     delete req.session.data.mobile
     delete req.session.data.users
-  } else {
-    const userID = req.session.data['userID']
-    loadUserData(req, userID)
-    delete req.session.data['userID']
-    const orgID = req.session.data['orgID']
-    loadData(req, orgID);
-    delete req.session.data['orgID']
+    req.session.data.journey = "creation"
+    res.redirect('./authentication/creation-link')
   }
-  req.session.data.journey = "creation"
-  res.redirect('./authentication/creation-link')
+
+  
+})
+
+router.get('/load-data', function (req, res) {
+  const orgID = req.session.data['orgID']
+  const tabLocation = req.session.data['tabLocation']
+  loadData(req, orgID);
+  delete req.session.data['orgID']
+
+  if (req.session.data.org.validGDL || req.session.data.userType == 'submitter') {
+      if (tabLocation == "users") {
+        res.redirect('org-admin/manage-team?tabLocation=users')
+      } else {
+        res.redirect('manage-claims-home?tabLocation=claims')
+      }
+    } else {
+      res.redirect('account-setup/sign-new-gdl')
+    }
+
+  
+
 })
 
 //generate data
