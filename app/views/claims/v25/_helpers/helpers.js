@@ -882,6 +882,24 @@ function loadUserData(req, userID) {
             break;
         }
     }
+    for (const organisation of req.session.data.organisations) {
+        const matchedOrg = req.session.data.user.organisations.find(org => org.orgID === organisation.workplaceID);
+        if (matchedOrg) {
+            if (matchedOrg.userType == "signatory") {
+                organisation.signatory.active.givenName = req.session.data.user.givenName
+                organisation.signatory.active.familyName = req.session.data.user.familyName
+                organisation.signatory.active.email = req.session.data.user.email
+            } else if (matchedOrg.userType == "submitter") {
+                const submitter = {
+                    "givenName": req.session.data.user.givenName,
+                    "familyName":req.session.data.user.familyName,
+                    "email": req.session.data.user.email
+                }
+                organisation.users.active.push(submitter)
+            }
+        }
+    }
+    
 
     delete req.session.data.users
     console.log('user file loaded')
@@ -904,6 +922,18 @@ function loadData(req, orgID) {
       req.session.data.org = organisation
       break;
     }
+  }
+  if (req.session.data.userType == "signatory") {
+    req.session.data.org.signatory.active.givenName = req.session.data.user.givenName
+    req.session.data.org.signatory.active.familyName = req.session.data.user.familyName
+    req.session.data.org.signatory.active.email = req.session.data.user.email
+  } else if (req.session.data.userType == "submitter") {
+    const submitter = {
+        "givenName": req.session.data.user.givenName,
+        "familyName":req.session.data.user.familyName,
+        "email": req.session.data.user.email
+    }
+    req.session.data.org.users.active.push(submitter)
   }
   console.log('organisation file loaded')
 
