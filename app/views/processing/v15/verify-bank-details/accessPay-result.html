@@ -73,7 +73,7 @@
         <div class="govuk-form-group {% if data.verificationResponseIncomplete %}govuk-form-group--error {% endif %}" id="verification-review">
           <fieldset class="govuk-fieldset" aria-describedby="completion-hint">
               <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                  Have you been able to verify the bank details?
+                  What is the AccessPay result?
               </legend>
               {% if data.verificationResponseIncomplete %}
               <p id="verification-review-error" class="govuk-error-message">
@@ -84,17 +84,55 @@
                   <div class="govuk-radios__item">
                       <input class="govuk-radios__input " id="verificationYes" name="verification" type="radio" value="approve">
                       <label class="govuk-label govuk-radios__label" for="verificationYes">
-                          Yes
+                          Full match
                       </label>
                   </div>
                   <div class="govuk-radios__item">
                       <input class="govuk-radios__input" id="verificationNo" name="verification" type="radio" value="reject">
                       <label class="govuk-label govuk-radios__label" for="verificationNo">
-                          No – reject
+                          Partial match
                       </label>
+                  </div>
+                  <div class="govuk-radios__item">
+                      <input class="govuk-radios__input" id="verificationNo" name="verification" type="radio" value="reject">
+                      <label class="govuk-label govuk-radios__label" for="verificationNo">
+                          No match
+                      </label>
+                  </div>
+                  <div class="govuk-form-group" style="padding-top: 20px;">
+                    <label class="govuk-label" for="file-upload-1">
+                      <strong>Add a screenshot of the AccessPay result</strong>
+                      <div id="user-type-hint" class="govuk-hint">
+                          This can be a .jpg, .pdf or .png
+                      </div>
+
+                    </label>
+                    <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
                   </div>
               </div>
           </fieldset>
+        </div>
+        <div class="govuk-form-group govuk-character-count {% if data.paymentQueriedNoteIncomplete or data.paymentQueriedNoteTooLong %}govuk-form-group--error{% endif %}" 
+        data-module="govuk-character-count" data-maxlength="1500">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                Why are the details to be verified?
+            </legend>
+            {% if data.paymentQueriedNoteIncomplete %}
+                <p id="payment-queried-note-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Enter action required for payment evidence 
+                </p>
+            {% endif %}
+            {% if data.paymentQueriedNoteTooLong %}
+                <p id="payment-queried-note-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Action note must be 1500 characters or less
+                </p>
+            {% endif %}
+            <textarea class="govuk-textarea govuk-js-character-count {% if data.paymentQueriedNoteIncomplete or data.paymentQueriedNoteTooLong %}govuk-textarea--error{% endif %}" 
+            id="paymentQueriedNote" name="paymentQueriedNote" rows="21" 
+            aria-describedby="paymentQueriedNote-info paymentQueriedNote-hint"></textarea>
+            <div id="paymentQueriedNote-info" class="govuk-hint govuk-character-count__message">
+                You can enter up to 1500 characters
+            </div>
         </div>
         <div class="govuk-button-group">
           <button type="submit" class="govuk-button" data-module="govuk-button">
