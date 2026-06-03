@@ -12,6 +12,18 @@
     <div class="govuk-grid-column-three-quarters">
 
         <h1 class="govuk-heading-xl">My organisations</h1>
+        
+
+        {% if orgList.active.length == 0 and orgList.submitted.length == 0 and orgList.draft.length == 0 and orgList.rejected.length == 0 and orgList.inactive.length == 0%}
+            <div class="govuk-warning-text">
+                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                <strong class="govuk-warning-text__text">
+                    <span class="govuk-visually-hidden">Warning</span>
+                    You currently don't have any registered organisations.
+                </strong>
+            </div>
+        {% endif %}
+
         <a type="submit" class="govuk-button" data-module="govuk-button" href="registration/before-you-start">
             Register new organisation
         </a>
