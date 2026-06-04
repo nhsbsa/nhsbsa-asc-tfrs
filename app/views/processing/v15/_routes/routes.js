@@ -905,13 +905,9 @@ router.post('/verification-handler', function (req, res) {
 
   delete req.session.data.verificationResponseIncomplete
 
-  const verificationResponse = req.session.data.verification
+  const verificationResponse = req.session.data.accessPayResult
 
-  if (verificationResponse == "approve") {
-    res.redirect('/processing/v15/verify-bank-details/additional-information')
-  } else {
-    res.redirect('/bank-details')
-  }
+  res.redirect('/processing/v15/verify-bank-details/outcome-bank-details')
 
 });
 

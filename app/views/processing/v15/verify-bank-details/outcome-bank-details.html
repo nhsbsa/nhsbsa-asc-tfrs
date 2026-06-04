@@ -1,0 +1,66 @@
+{% extends "../_layouts/org-view-layout.html" %}
+
+{% set org = data.organisations | findOrg(data.orgID) %}
+
+{% block pageTitle %}
+{% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}Error: {% endif %}{% if data.SROChange == 'edit' %}Edit {% else %}New {% endif %} SRO — {{data.processingServiceName}}
+{% endblock %}
+
+{% block beforeContent %}
+  <a href="./accessPay-result" class="govuk-back-link">Back</a>
+{% endblock %}  
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+       
+      
+       <h1 class="govuk-heading-l">Bank details</h1>
+        
+        {% if data.accessPayResult == "fullMatch" %}
+          
+          <p class="govuk-body">This organisation's bank details got a <span class="govuk-!-font-weight-bold">full match</span> result in AccessPay and will be <span class="govuk-!-font-weight-bold">verified</span>.</p>
+        
+        {% elif data.accessPayResult == "partialMatch" %}
+          
+          <p class="govuk-body">This organisation's bank details got a <span class="govuk-!-font-weight-bold">partial match</span> result in AccessPay, but can still be <span class="govuk-!-font-weight-bold">verified</span> for the reasons below.</p>
+
+          <div class='govuk-inset-text'>
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-three-quarters">
+                    <p class='govuk-body'>{{data.detailsPartialMatchNote}}</p>
+                </div>
+                <div class="govuk-grid-column-one-quarter">
+                    <a class="govuk-link govuk-link--no-visited-state" href="./accessPay-result">Edit<span class="govuk-visually-hidden"> payment evidence note</span></a>
+                </div>
+              </div>
+            </div>
+
+        {% elif data.accessPayResult == "noMatch" %}
+          
+          <p class="govuk-body">This organisation's bank details got a <span class="govuk-!-font-weight-bold">no match</span> result in AccessPay and will <span class="govuk-!-font-weight-bold">fail verification</span> for the reasons below.</p>
+
+
+          <div class='govuk-inset-text'>
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-three-quarters">
+                    <p class='govuk-body'>{{data.detailsNoMatchNote}}</p>
+                </div>
+                <div class="govuk-grid-column-one-quarter">
+                    <a class="govuk-link govuk-link--no-visited-state" href="./accessPay-result">Edit<span class="govuk-visually-hidden"> payment evidence note</span></a>
+                </div>
+              </div>
+            </div>
+
+
+        {% endif %}
+
+        <a class="govuk-button" data-module="govuk-button" href="../manage-claims-home?fundingPot={{data.fundingPot}}">
+            Confirm result
+        </a>
+    </div>
+</div>
+
+
+{% endblock %}
