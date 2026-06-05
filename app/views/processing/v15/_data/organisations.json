@@ -6,6 +6,9 @@
     "address": ["72 Guild Street", "London", "SE23 6FH"],
     "bankDetails": {
       "verificationStatus": "verified",
+      "accessPayResult": "fullMatch",
+      "accessPayEvidence": "full-match.pdf",
+      "verificationNote": null,
       "nameOnAccount": "Evergreen Care Home",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -96,6 +99,9 @@
     "address": ["32 The Lawn", "Birmingham", "BI23 6FH"],
     "bankDetails": {
       "verificationStatus": "verified",
+      "accessPayResult": "partialMatch",
+      "accessPayEvidence": "partial-match.pdf",
+      "verificationNote": "Account name slightly different but verified at risk",
       "nameOnAccount": "Teatree Care",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -143,6 +149,9 @@
     "address": ["13 Gandfield Street", "Wakefield", "WA23 6FH"],
     "bankDetails": {
       "verificationStatus": "verified",
+      "accessPayResult": "fullMatch",
+      "accessPayEvidence": "full-match.pdf",
+      "verificationNote": null,
       "nameOnAccount": "Anika Care",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -172,6 +181,9 @@
     "address": ["12 Fairfield Road", "Scarborough", "SC23 6FH"],
     "bankDetails": {
       "verificationStatus": "submitted",
+      "accessPayResult": null,
+      "accessPayEvidence": null,
+      "verificationNote": null,
       "nameOnAccount": "Denhams Ltd",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -276,6 +288,9 @@
     "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
     "bankDetails": {
       "verificationStatus": "rejected",
+      "accessPayResult": "noMatch",
+      "accessPayEvidence": "no-match.pdf",
+      "verificationNote": "Organisation have been emailed to provide additional details but they have not responded in 3 months so this has been rejected.",
       "nameOnAccount": "Farifields Care home Ltd",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -311,6 +326,9 @@
     "address": ["12 Farifield Road", "York", "YO23 6FH"],
     "bankDetails": {
       "verificationStatus": "verified",
+      "accessPayResult": "fullMatch",
+      "accessPayEvidence": "full-match.pdf",
+      "verificationNote": null,
       "nameOnAccount": "Farifields Care home Ltd",
       "sortCode": "272893",
       "accountNumber": "12345678",
@@ -340,6 +358,9 @@
     "address": ["12 Jack Street", "Liverpool", "LI12 8GB"],
     "bankDetails": {
       "verificationStatus": "verified",
+      "accessPayResult": "fullMatch",
+      "accessPayEvidence": "full-match.pdf",
+      "verificationNote": null,
       "nameOnAccount": "Fandly Ltd",
       "sortCode": "272893",
       "accountNumber": "12345678",

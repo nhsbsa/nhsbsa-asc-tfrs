@@ -911,6 +911,42 @@ router.post('/verification-handler', function (req, res) {
 
 });
 
+router.post('/confirm-details-outcome', function (req, res) {
+
+  const verificationResponse = req.session.data.accessPayResult
+
+  let org = null
+
+  for (const o of req.session.data.organisations) {
+    if (o.workplaceID == req.session.data.orgID) {
+      org = o
+    }
+  }
+
+  if (verificationResponse == "fullMatch") {
+    org.bankDetails.verificationStatus = "verified"
+    org.bankDetails.accessPayResult = verificationResponse
+    org.bankDetails.accessPayEvidence = "full-match.pdf"
+    org.bankDetails.verificationNote = null
+    res.redirect('/processing/v15/organisation/org-view-main?orgTab=bank-details&bankDetailsVerified=true')
+  } else if (verificationResponse == "partialMatch") {
+    org.bankDetails.verificationStatus = "verified"
+    org.bankDetails.accessPayResult = verificationResponse
+    org.bankDetails.accessPayEvidence = "partial-match.pdf"
+    org.bankDetails.verificationNote = req.session.data.detailsPartialMatchNote 
+    res.redirect('/processing/v15/organisation/org-view-main?orgTab=bank-details&bankDetailsVerified=true')
+  } else if (verificationResponse == "noMatch") {
+    org.bankDetails.verificationStatus = "rejected"
+    org.bankDetails.accessPayResult = verificationResponse
+    org.bankDetails.accessPayEvidence = "no-match.pdf"
+    org.bankDetails.verificationNote = req.session.data.detailsNoMatchNote 
+    res.redirect('/processing/v15/organisation/org-view-main?orgTab=bank-details&bankDetailsRejected=true')
+  }
+
+  
+
+});
+
 
 //generate data
 router.post('/generate-handler', function (req, res) {

@@ -12,7 +12,6 @@
   <div class="govuk-grid-column-full">
 
     <h1 class="govuk-heading-l">Bank details</h1>
-    <p class="govuk-body">{{org.bankDetails.workplaceID}}</p>
   </div>
 </div>
 
@@ -121,6 +120,9 @@
           <label class="govuk-label" for="file-upload-1">
             <strong>Add a screenshot of the AccessPay result</strong>
           </label>
+          <div id="fileUpload1-hint" class="govuk-hint">
+            Make sure this is the whole verification screen in a .jpg, .pdf or .png format
+            </div>
           <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
 
         </div>
@@ -133,6 +135,9 @@
         <label class="govuk-label" for="file-upload-1">
           <strong>Add a screenshot of the AccessPay result</strong>
         </label>
+        <div id="fileUpload1-hint" class="govuk-hint">
+            Make sure this is the whole verification screen in a .jpg, .pdf or .png format
+            </div>
         <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
       </div>
       <div class="govuk-form-group govuk-character-count {% if data.partialMatchNoteIncomplete or data.paymentQueriepartialMatchNoteTooLongdNoteTooLong %}govuk-form-group--error{% endif %}" 
@@ -141,7 +146,7 @@
                 Make a note of why you're verifying this partial match.
             </legend>
             <div id="detailsPartialMatchNote-hint" class="govuk-hint">
-                This is a internal facing note and won't be shown to the organisation
+                This is for colleagues only. The organisation will not see it.
             </div>
             {% if data.partialMatchNoteIncomplete %}
                 <p id="payment-queried-note-error" class="govuk-error-message">
@@ -169,6 +174,9 @@
         <label class="govuk-label" for="file-upload-1">
           <strong>Add a screenshot of the AccessPay result</strong>
         </label>
+        <div id="fileUpload1-hint" class="govuk-hint">
+            Make sure this is the whole verification screen in a .jpg, .pdf or .png format
+            </div>
         <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
       </div>
       <div class="govuk-form-group govuk-character-count {% if data.verificationNoteNoMatchIncomplete or data.paymentRejectNoteTooLong %}govuk-form-group--error{% endif %}" 
@@ -177,7 +185,7 @@
                 Make a note of why these bank details have failed verification.
             </legend>
             <div id="detailsNoMatchNote-hint" class="govuk-hint">
-                This is a internal facing note and won't be shown to the organisation
+                This is for colleagues only. The organisation will not see it.
             </div>
             {% if data.verificationNoteNoMatchIncomplete %}
                 <p id="detailsNoMatchNote-error" class="govuk-error-message">
@@ -201,9 +209,9 @@
 
     <div class="govuk-button-group"  style="align-items: center;">
         <button type="submit" class="govuk-button" data-module="govuk-button" name="actionType" value="continue">
-            Confirm outcome
+            Continue
         </button>
-        <a class="govuk-link" href="../org-tab-handler/bank-details">Cancel</a>
+        <a class="govuk-link" href="../org-tab-handler/bank-details?accessPayResult=">Cancel</a>
     </div>
 </form>
 

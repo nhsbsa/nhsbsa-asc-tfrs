@@ -15,7 +15,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
        
-      
+       <form action="../confirm-details-outcome" method="post" novalidate>
        <h1 class="govuk-heading-l">Bank details</h1>
         
         {% if data.accessPayResult == "fullMatch" %}
@@ -56,9 +56,13 @@
 
         {% endif %}
 
-        <a class="govuk-button" data-module="govuk-button" href="../manage-claims-home?fundingPot={{data.fundingPot}}">
-            Confirm result
-        </a>
+        <div class="govuk-button-group"  style="align-items: center;">
+          <button type="submit" class="govuk-button" data-module="govuk-button" name="actionType" value="continue">
+              Confirm result
+          </button>
+          <a class="govuk-link" href="../org-tab-handler/bank-details?accessPayResult=">Cancel</a>
+      </div>
+      </form>
     </div>
 </div>
 

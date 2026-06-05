@@ -2,23 +2,26 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    {% if data.bankDetailsRejected %}
+    {% if data.bankDetailsRejected or data.bankDetailsVerified %}
         <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
         <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
             <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
         </svg>
-          <div class="moj-banner__message">Bank details have been successfully rejected</div>
+        {% if data.bankDetailsRejected%}
+          <div class="moj-banner__message">Bank details have failed verification</div>
+        {% elif data.bankDetailsVerified %}
+          <div class="moj-banner__message">Bank details have been successfully verified</div>
+        {% endif %}
         </div>
     {% endif %}
     <h1 class="govuk-heading-l">Bank details</h1>
-    <p class="govuk-body">{{org.bankDetails.workplaceID}}</p>
   </div>
 </div>
 
 <div class="govuk-grid-row">
 
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-one-half">
         <p class="govuk-body">{{org.bankDetails.verificationStatus | bankVerificationTag}}{% if org.bankDetails != null %} on 30 June 2026{% endif %}</p>
 
         {% if org.bankDetails == null %}
@@ -51,7 +54,7 @@
                 Account number
               </dt>
               <dd class="govuk-summary-list__value">
-                {% if org.bankDetails.verificationStatus == "verified" %}
+                {% if org.bankDetails.verificationStatus == "verified" or (data.userType != "leadProcessor") %}
                     {{org.bankDetails.accountNumber | maskCharacters(4)}}
                 {% else %}
                     {{org.bankDetails.accountNumber}}
@@ -75,7 +78,7 @@
 
           {% endif %}
 
-          {% if org.bankDetails.verificationStatus == "submitted" %}
+          {% if org.bankDetails.verificationStatus == "submitted" and (data.userType == "leadProcessor") %}
             <p class="govuk-body">This organisation has submitted its bank details but they still need to be verified.</p>
             <div class="govuk-button-group">
               <a href="../verify-bank-details/accessPay-result" class="govuk-button" data-module="govuk-button">
@@ -85,6 +88,24 @@
           {% endif %}
 
     </div>
+
+    {% if org.bankDetails.verificationStatus != "submitted" %}
+      <div class="govuk-grid-column-one-half">
+        <span class="govuk-caption-m">Verify bank details</span>
+        <h3 class="govuk-heading-m">AccessPay result</h3>
+
+        <h3 class="govuk-heading-s">AccessPay result</h3>
+        <p class="govuk-body">{{org.bankDetails.accessPayResult | formatAccessPayResult}}</p>
+
+        <h3 class="govuk-heading-s">AccessPay result screenshot</h3>
+        <p><a class="govuk-link" href="/public/images/{{ org.bankDetails.accessPayEvidence }}" target="_blank">{{ org.bankDetails.accessPayEvidence }}  (opens in new tab)</a></p>
+
+        {% if org.bankDetails.verificationNote %}
+          <h3 class="govuk-heading-s">Note</h3>
+          <p class="govuk-body">{{org.bankDetails.verificationNote}}</p>
+        {% endif %}
+      </div>
+    {% endif %}
 
     </div>
 </div>

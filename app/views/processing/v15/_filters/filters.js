@@ -56,6 +56,16 @@ addFilter('formatSortCode', function(sortCode) {
     return sortCode.match(/.{1,2}/g).join("-");
 })
 
+addFilter('formatAccessPayResult', function(result) {
+    if (result == "fullMatch") {
+        return "Full match"
+    } else if (result == "partialMatch") {
+        return "Partial match"
+    } else if (result == "noMatch") {
+        return "No match"
+    }
+})
+
 addFilter('maskCharacters', function(str, num) {
     if (num <= 0) return str;
     if (num >= str.length) return '*'.repeat(str.length);
