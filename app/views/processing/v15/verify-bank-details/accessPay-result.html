@@ -11,7 +11,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
 
-    <h1 class="govuk-heading-l">Bank details</h1>
+    <h1 class="govuk-heading-l">Verify bank details</h1>
   </div>
 </div>
 
@@ -22,7 +22,7 @@
 
           <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
+              <dt class="govuk-summary-list__key" style="width: 40%;">
                 Account name
               </dt>
               <dd class="govuk-summary-list__value">
@@ -70,14 +70,11 @@
     <div class="govuk-grid-column-one-half">
 
       <form action="../verification-handler" method="post" novalidate>
-    <span class="govuk-caption-m">Verify bank details</span>
-    <h3 class="govuk-heading-m">AccessPay result</h3>
-
 
     <div class="govuk-form-group {% if data.bankDetailsVerificationIncomplete %}govuk-form-group--error {% endif %}" id="bankDetails-review">
         <fieldset class="govuk-fieldset" aria-describedby="accessPay-hint">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
-                What is the final AccessPay result?
+                What is the AccessPay result?
             </legend>
 
             {% if data.bankDetailsVerificationIncomplete %}
@@ -121,7 +118,7 @@
             <strong>Add a screenshot of the AccessPay result</strong>
           </label>
           <div id="fileUpload1-hint" class="govuk-hint">
-            Make sure this is the whole verification screen in a .jpg, .pdf or .png format
+            Make sure this is the whole verification screen in a .jpg or .png format
             </div>
           <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
 
@@ -136,7 +133,7 @@
           <strong>Add a screenshot of the AccessPay result</strong>
         </label>
         <div id="fileUpload1-hint" class="govuk-hint">
-            Make sure this is the whole verification screen in a .jpg, .pdf or .png format
+            Make sure this is the whole verification screen in a .jpg or .png format
             </div>
         <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
       </div>
@@ -146,7 +143,7 @@
                 Make a note of why you're verifying this partial match.
             </legend>
             <div id="detailsPartialMatchNote-hint" class="govuk-hint">
-                This is for colleagues only. The organisation will not see it.
+                This is for QA colleagues only - the organisation will not see it.
             </div>
             {% if data.partialMatchNoteIncomplete %}
                 <p id="payment-queried-note-error" class="govuk-error-message">
@@ -175,7 +172,7 @@
           <strong>Add a screenshot of the AccessPay result</strong>
         </label>
         <div id="fileUpload1-hint" class="govuk-hint">
-            Make sure this is the whole verification screen in a .jpg, .pdf or .png format
+            Make sure this is the whole verification screen in a .jpg or .png format
             </div>
         <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
       </div>
@@ -185,11 +182,11 @@
                 Make a note of why these bank details have failed verification.
             </legend>
             <div id="detailsNoMatchNote-hint" class="govuk-hint">
-                This is for colleagues only. The organisation will not see it.
+                This is for QA colleagues only - the organisation will not see it.
             </div>
             {% if data.verificationNoteNoMatchIncomplete %}
                 <p id="detailsNoMatchNote-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for payment evidence 
+                    <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for payment evidence
                 </p>
             {% endif %}
             {% if data.verificationNoteNoMatchTooLong %}

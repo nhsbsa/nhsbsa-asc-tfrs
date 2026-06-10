@@ -24,6 +24,10 @@
     <div class="govuk-grid-column-one-half">
         <p class="govuk-body">{{org.bankDetails.verificationStatus | bankVerificationTag}}{% if org.bankDetails != null %} on 30 June 2026{% endif %}</p>
 
+        {% if org.bankDetails.verificationStatus == "submitted"%}
+          <p class="govuk-body">This organisation has submitted its bank details but they still need to be verified.</p>
+        {% endif %}
+
         {% if org.bankDetails == null %}
 
             <p class="govuk-body">
@@ -34,7 +38,7 @@
 
           <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
+              <dt class="govuk-summary-list__key" style="width: 40%;">
                 Account name
               </dt>
               <dd class="govuk-summary-list__value">
@@ -79,7 +83,6 @@
           {% endif %}
 
           {% if org.bankDetails.verificationStatus == "submitted" and (data.userType == "leadProcessor") %}
-            <p class="govuk-body">This organisation has submitted its bank details but they still need to be verified.</p>
             <div class="govuk-button-group">
               <a href="../verify-bank-details/accessPay-result" class="govuk-button" data-module="govuk-button">
                 Verify bank details
@@ -89,19 +92,16 @@
 
     </div>
 
-    {% if org.bankDetails.verificationStatus != "submitted" %}
+    {% if org.bankDetails.verificationStatus != "submitted" and org.bankDetails != null and (data.userType == "leadProcessor")%}
       <div class="govuk-grid-column-one-half">
-        <span class="govuk-caption-m">Verify bank details</span>
-        <h3 class="govuk-heading-m">AccessPay result</h3>
-
         <h3 class="govuk-heading-s">AccessPay result</h3>
         <p class="govuk-body">{{org.bankDetails.accessPayResult | formatAccessPayResult}}</p>
 
-        <h3 class="govuk-heading-s">AccessPay result screenshot</h3>
+        <h3 class="govuk-heading-s">AccessPay screenshot</h3>
         <p><a class="govuk-link" href="/public/images/{{ org.bankDetails.accessPayEvidence }}" target="_blank">{{ org.bankDetails.accessPayEvidence }}  (opens in new tab)</a></p>
 
         {% if org.bankDetails.verificationNote %}
-          <h3 class="govuk-heading-s">Note</h3>
+          <h3 class="govuk-heading-s">QA's note</h3>
           <p class="govuk-body">{{org.bankDetails.verificationNote}}</p>
         {% endif %}
       </div>

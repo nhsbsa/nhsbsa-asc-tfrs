@@ -16,49 +16,74 @@
     <div class="govuk-grid-column-two-thirds">
        
        <form action="../confirm-details-outcome" method="post" novalidate>
-       <h1 class="govuk-heading-l">Bank details</h1>
+       <h1 class="govuk-heading-l">Verify bank details</h1>
         
         {% if data.accessPayResult == "fullMatch" %}
           
           <p class="govuk-body">This organisation's bank details got a <span class="govuk-!-font-weight-bold">full match</span> result in AccessPay and will be <span class="govuk-!-font-weight-bold">verified</span>.</p>
-        
+      
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                AccessPay screenshot
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <p class="govuk-body"><a class="govuk-link" href="/public/images/full-match.png" target="_blank">full-match.png  (opens in new tab)</a></p>
+              </dd>
+            </div>
+            </dl>
         {% elif data.accessPayResult == "partialMatch" %}
           
           <p class="govuk-body">This organisation's bank details got a <span class="govuk-!-font-weight-bold">partial match</span> result in AccessPay, but can still be <span class="govuk-!-font-weight-bold">verified</span> for the reasons below.</p>
 
-          <div class='govuk-inset-text'>
-            <div class="govuk-grid-row">
-                <div class="govuk-grid-column-three-quarters">
-                    <p class='govuk-body'>{{data.detailsPartialMatchNote}}</p>
-                </div>
-                <div class="govuk-grid-column-one-quarter">
-                    <a class="govuk-link govuk-link--no-visited-state" href="./accessPay-result">Edit<span class="govuk-visually-hidden"> payment evidence note</span></a>
-                </div>
+            <dl class="govuk-summary-list" >
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  AccessPay screenshot
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <a class="govuk-link" href="/public/images/partial-match.png" target="_blank">partial-match.png  (opens in new tab)</a>
+                </dd>
               </div>
-            </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  QA's note
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data.detailsPartialMatchNote}}
+                </dd>
+              </div>
+            </dl>
 
         {% elif data.accessPayResult == "noMatch" %}
           
           <p class="govuk-body">This organisation's bank details got a <span class="govuk-!-font-weight-bold">no match</span> result in AccessPay and will <span class="govuk-!-font-weight-bold">fail verification</span> for the reasons below.</p>
 
-
-          <div class='govuk-inset-text'>
-            <div class="govuk-grid-row">
-                <div class="govuk-grid-column-three-quarters">
-                    <p class='govuk-body'>{{data.detailsNoMatchNote}}</p>
-                </div>
-                <div class="govuk-grid-column-one-quarter">
-                    <a class="govuk-link govuk-link--no-visited-state" href="./accessPay-result">Edit<span class="govuk-visually-hidden"> payment evidence note</span></a>
-                </div>
+            <dl class="govuk-summary-list" >
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  AccessPay evidence
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <a class="govuk-link" href="/public/images/no-match.png" target="_blank">no-match.png  (opens in new tab)</a>
+                </dd>
               </div>
-            </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  QA's note
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{data.detailsNoMatchNote}}
+                </dd>
+              </div>
+            </dl>
 
 
         {% endif %}
 
-        <div class="govuk-button-group"  style="align-items: center;">
+        <div class="govuk-button-group"  style="align-items: center; padding-top: 20px;">
           <button type="submit" class="govuk-button" data-module="govuk-button" name="actionType" value="continue">
-              Confirm result
+              Confirm outcome
           </button>
           <a class="govuk-link" href="../org-tab-handler/bank-details?accessPayResult=">Cancel</a>
       </div>

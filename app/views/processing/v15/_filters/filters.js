@@ -39,7 +39,7 @@ addFilter('bankVerificationTag', function (verificationStatus) {
     if (verificationStatus == null) {
         return '<strong class="govuk-tag govuk-tag--light-blue">Not yet added</strong>'
     } else if (verificationStatus == 'submitted') {
-        return '<strong class="govuk-tag govuk-tag--blue">Submitted</strong>'
+        return '<strong class="govuk-tag govuk-tag--blue">Not yet verified</strong>'
     } else if (verificationStatus == 'verified') {
         return '<strong class="govuk-tag govuk-tag--green">Verified</strong>'
     } else if (verificationStatus == 'rejected') {
