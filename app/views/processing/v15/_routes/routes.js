@@ -903,11 +903,27 @@ router.get('/applySubmissionsFilterProcessorv15', function (req, res) {
 
 router.post('/verification-handler', function (req, res) {
 
-  delete req.session.data.verificationResponseIncomplete
+  delete req.session.data.bankDetailsVerificationIncomplete
+  delete req.session.data.partialMatchNoteIncomplete
+  delete req.session.data.noMatchNoteIncomplete
 
   const verificationResponse = req.session.data.accessPayResult
+  const partialMatchNote = req.session.data.detailsPartialMatchNote
+  const noMatchNote = req.session.data.detailsNoMatchNote
+  
 
-  res.redirect('/processing/v15/verify-bank-details/outcome-bank-details')
+
+  if (verificationResponse == null || verificationResponse == "") {
+    res.redirect('/processing/v15/verify-bank-details/accessPay-result?bankDetailsVerificationIncomplete=true')
+  } else if (verificationResponse == "partialMatch" && partialMatchNote == "") {
+    res.redirect('/processing/v15/verify-bank-details/accessPay-result?partialMatchNoteIncomplete=true')
+  } else if (verificationResponse == "noMatch" && noMatchNote == "") {
+    res.redirect('/processing/v15/verify-bank-details/accessPay-result?noMatchNoteIncomplete=true')
+  } else {
+    res.redirect('/processing/v15/verify-bank-details/outcome-bank-details')
+  }
+
+  
 
 });
 

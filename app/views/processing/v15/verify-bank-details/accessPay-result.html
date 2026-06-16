@@ -8,6 +8,43 @@
 
 {% block content %}
 
+{% if data.bankDetailsVerificationIncomplete or data.partialMatchNoteIncomplete or data.noMatchNoteIncomplete %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {% if (data.bankDetailsVerificationIncomplete) %}
+              <li>
+                <a href="#accessPayResult">
+                  Select an option for AccessPay result
+                </a>
+              </li>
+              {% elif (data.partialMatchNoteIncomplete) %}
+              <li>
+                <a href="#detailsPartialMatchNote">
+                  Enter verification note
+                </a>
+              </li>
+              {% elif (data.noMatchNoteIncomplete) %}
+              <li>
+                <a href="#detailsNoMatchNote">
+                  Enter reason details failed verification
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
 
@@ -73,7 +110,7 @@
 
     <div class="govuk-form-group {% if data.bankDetailsVerificationIncomplete %}govuk-form-group--error {% endif %}" id="bankDetails-review">
         <fieldset class="govuk-fieldset" aria-describedby="accessPay-hint">
-            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s" id="accessPayResult">
                 What is the AccessPay result?
             </legend>
 
@@ -112,7 +149,7 @@
     {# Full match #}
     <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-accessPay-fullMatch">
 
-        <div class="govuk-form-group {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %}govuk-form-group--error {% endif %}">
+        <div class="govuk-form-group">
 
           <label class="govuk-label" for="file-upload-1">
             <strong>Add a screenshot of the AccessPay result</strong>
@@ -128,7 +165,7 @@
     {# Partial match #}
     <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-accessPay-partialMatch" data-maxlength="1500">
         
-      <div class="govuk-form-group {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %}govuk-form-group--error {% endif %}">
+      <div class="govuk-form-group">
         <label class="govuk-label" for="file-upload-1">
           <strong>Add a screenshot of the AccessPay result</strong>
         </label>
@@ -137,7 +174,7 @@
             </div>
         <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
       </div>
-      <div class="govuk-form-group govuk-character-count {% if data.partialMatchNoteIncomplete or data.paymentQueriepartialMatchNoteTooLongdNoteTooLong %}govuk-form-group--error{% endif %}" 
+      <div class="govuk-form-group govuk-character-count {% if data.partialMatchNoteIncomplete or data.partialMatchNoteTooLong %}govuk-form-group--error{% endif %}" 
         data-module="govuk-character-count" data-maxlength="1500">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                 Make a note of why you're verifying this partial match.
@@ -147,17 +184,17 @@
             </div>
             {% if data.partialMatchNoteIncomplete %}
                 <p id="payment-queried-note-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span>Enter action required for payment evidence 
+                    <span class="govuk-visually-hidden">Error:</span>Enter verification note
                 </p>
             {% endif %}
             {% if data.partialMatchNoteTooLong %}
                 <p id="payment-queried-note-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span>Action note must be 1500 characters or less
+                    <span class="govuk-visually-hidden">Error:</span>Note must be 1500 characters or less
                 </p>
             {% endif %}
             <textarea class="govuk-textarea govuk-js-character-count {% if data.partialMatchNoteIncomplete or data.partialMatchNoteTooLong %}govuk-textarea--error{% endif %}" 
             id="detailsPartialMatchNote" name="detailsPartialMatchNote" rows="21" 
-            aria-describedby="detailsPartialMatchNote-info detailsPartialMatchNote-hint"></textarea>
+            aria-describedby="detailsPartialMatchNote-info detailsPartialMatchNote-hint">{% if data.detailsPartialMatchNote %}{{data.detailsPartialMatchNote}}{% endif %}</textarea>
             <div id="detailsPartialMatchNote-info" class="govuk-hint govuk-character-count__message">
                 You can enter up to 1500 characters
             </div>
@@ -167,7 +204,7 @@
     {# No match #}
     <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-payment-reject">
         
-      <div class="govuk-form-group {% if data.paymentReimbursementAmountIncomplete or data.paymentReimbursementAmountInvalid %}govuk-form-group--error {% endif %}">
+      <div class="govuk-form-group">
         <label class="govuk-label" for="file-upload-1">
           <strong>Add a screenshot of the AccessPay result</strong>
         </label>
@@ -176,7 +213,7 @@
             </div>
         <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
       </div>
-      <div class="govuk-form-group govuk-character-count {% if data.verificationNoteNoMatchIncomplete or data.paymentRejectNoteTooLong %}govuk-form-group--error{% endif %}" 
+      <div class="govuk-form-group govuk-character-count {% if data.noMatchNoteIncomplete or data.noMatchNoteTooLong %}govuk-form-group--error{% endif %}" 
             data-module="govuk-character-count" data-maxlength="1500">
              <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
                 Make a note of why these bank details have failed verification.
@@ -184,20 +221,20 @@
             <div id="detailsNoMatchNote-hint" class="govuk-hint">
                 This is for QA colleagues only - the organisation will not see it.
             </div>
-            {% if data.verificationNoteNoMatchIncomplete %}
+            {% if data.noMatchNoteIncomplete %}
                 <p id="detailsNoMatchNote-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for payment evidence
+                    <span class="govuk-visually-hidden">Error:</span>Enter reason details failed verification
                 </p>
             {% endif %}
-            {% if data.verificationNoteNoMatchTooLong %}
+            {% if data.noMatchNoteTooLong %}
                 <p id="detailsNoMatchNote-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span>Rejection note must be 1500 characters or less
+                    <span class="govuk-visually-hidden">Error:</span>Note must be 1500 characters or less
                 </p>
             {% endif %}
             <textarea
-                class="govuk-textarea govuk-js-character-count {% if data.verificationNoteNoMatchIncomplete or data.verificationNoteNoMatchTooLong%}govuk-textarea--error{% endif %}"
+                class="govuk-textarea govuk-js-character-count {% if data.noMatchNoteIncomplete or data.noMatchNoteTooLong%}govuk-textarea--error{% endif %}"
                 id="detailsNoMatchNote" name="detailsNoMatchNote" rows="21"
-                aria-describedby="detailsNoMatchNote-info detailsNoMatchNote-hint">{% if data.detailsNoMatchNote %}{{detailsNoMatchNote}}{% endif %}</textarea>
+                aria-describedby="detailsNoMatchNote-info detailsNoMatchNote-hint">{% if data.detailsNoMatchNote %}{{data.detailsNoMatchNote}}{% endif %}</textarea>
             <div id="detailsNoMatchNote-info" class="govuk-hint govuk-character-count__message">
                 You can enter up to 1500 characters
             </div>
@@ -208,7 +245,7 @@
         <button type="submit" class="govuk-button" data-module="govuk-button" name="actionType" value="continue">
             Continue
         </button>
-        <a class="govuk-link" href="../org-tab-handler/bank-details?accessPayResult=">Cancel</a>
+        <a class="govuk-link" href="../org-tab-handler/bank-details?accessPayResult=&detailsPartialMatchNote=&detailsNoMatchNote=">Cancel</a>
     </div>
 </form>
 
