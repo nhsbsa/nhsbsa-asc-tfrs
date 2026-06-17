@@ -76,7 +76,7 @@ router.post('/bank-details-handler', function (req, res) {
       nameOnAccount: accountName,
       sortCode: sortCode,
       accountNumber: accountNumber,
-      rollNumber: buildingSociety
+      buildingSocietyNumber: buildingSociety
     }
     
     req.session.data.org.bankDetails = bankDetails
