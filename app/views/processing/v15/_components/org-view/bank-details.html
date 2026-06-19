@@ -1,0 +1,111 @@
+{% set org = data.organisations | findOrg(data.orgID) %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    {% if data.bankDetailsRejected or data.bankDetailsVerified %}
+        <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+        <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+            <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+        </svg>
+        {% if data.bankDetailsRejected%}
+          <div class="moj-banner__message">Bank details have failed verification</div>
+        {% elif data.bankDetailsVerified %}
+          <div class="moj-banner__message">Bank details have been successfully verified</div>
+        {% endif %}
+        </div>
+    {% endif %}
+    <h1 class="govuk-heading-l">Bank details</h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-one-half">
+        <p class="govuk-body">{{org.bankDetails.verificationStatus | bankVerificationTag}}{% if org.bankDetails != null %} on 30 June 2026{% endif %}</p>
+
+        {% if org.bankDetails.verificationStatus == "submitted"%}
+          <p class="govuk-body">This organisation has submitted its bank details but they still need to be verified.</p>
+        {% endif %}
+
+        {% if org.bankDetails == null %}
+
+            <p class="govuk-body">
+                This organisation has not yet added their bank details.
+            </p>
+          
+        {% else %}
+
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key" style="width: 40%;">
+                Account name
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{org.bankDetails.nameOnAccount}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Sort code
+              </dt>
+                <dd class="govuk-summary-list__value">
+                    {{org.bankDetails.sortCode | formatSortCode}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Account number
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if org.bankDetails.verificationStatus == "verified" or (data.userType != "leadProcessor") %}
+                    {{org.bankDetails.accountNumber | maskCharacters(4)}}
+                {% else %}
+                    {{org.bankDetails.accountNumber}}
+                {% endif %}
+              </dd>
+            </div>
+            
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                 Building society roll number (if they have one)
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if org.bankDetails.buildingSocietyNumber == null  %}
+                    <p class="govuk-body">Not provided</p>
+                {% else %}
+                    {{org.bankDetails.buildingSocietyNumber}}
+                {% endif %}
+              </dd>
+            </div>
+          </dl>
+
+          {% endif %}
+
+          {% if org.bankDetails.verificationStatus == "submitted" and (data.userType == "leadProcessor") %}
+            <div class="govuk-button-group">
+              <a href="../verify-bank-details/accessPay-result" class="govuk-button" data-module="govuk-button">
+                Verify bank details
+              </a>
+            </div>
+          {% endif %}
+
+    </div>
+
+    {% if org.bankDetails.verificationStatus != "submitted" and org.bankDetails != null and (data.userType == "leadProcessor")%}
+      <div class="govuk-grid-column-one-half">
+        <h3 class="govuk-heading-s">AccessPay result</h3>
+        <p class="govuk-body">{{org.bankDetails.accessPayResult | formatAccessPayResult}}</p>
+
+        <h3 class="govuk-heading-s">AccessPay screenshot</h3>
+        <p><a class="govuk-link" href="/public/images/{{ org.bankDetails.accessPayEvidence }}" target="_blank">{{ org.bankDetails.accessPayEvidence }}  (opens in new tab)</a></p>
+
+        {% if org.bankDetails.verificationNote %}
+          <h3 class="govuk-heading-s">QA's note</h3>
+          <p class="govuk-body">{{org.bankDetails.verificationNote}}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    </div>
+</div>

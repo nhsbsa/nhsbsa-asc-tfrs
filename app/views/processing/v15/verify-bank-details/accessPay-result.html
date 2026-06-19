@@ -1,0 +1,256 @@
+{% extends "../_layouts/org-view-layout.html" %}
+
+{% set org = data.organisations | findOrg(data.orgID) %}
+
+{% block pageTitle %}
+{% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}Error: {% endif %}{% if data.SROChange == 'edit' %}Edit {% else %}New {% endif %} SRO — {{data.processingServiceName}}
+{% endblock %}
+
+{% block content %}
+
+{% if data.bankDetailsVerificationIncomplete or data.partialMatchNoteIncomplete or data.noMatchNoteIncomplete %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            There is a problem
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              {% if (data.bankDetailsVerificationIncomplete) %}
+              <li>
+                <a href="#accessPayResult">
+                  Select an option for AccessPay result
+                </a>
+              </li>
+              {% elif (data.partialMatchNoteIncomplete) %}
+              <li>
+                <a href="#detailsPartialMatchNote">
+                  Enter verification note
+                </a>
+              </li>
+              {% elif (data.noMatchNoteIncomplete) %}
+              <li>
+                <a href="#detailsNoMatchNote">
+                  Enter reason details failed verification
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <h1 class="govuk-heading-l">Verify bank details</h1>
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+
+    <div class="govuk-grid-column-one-half">
+
+
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key" style="width: 40%;">
+                Account name
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{org.bankDetails.nameOnAccount}}
+              </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Sort code
+              </dt>
+                <dd class="govuk-summary-list__value">
+                    {{org.bankDetails.sortCode | formatSortCode}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Account number
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if org.bankDetails.verificationStatus == "verified" %}
+                    {{org.bankDetails.accountNumber | maskCharacters(4)}}
+                {% else %}
+                    {{org.bankDetails.accountNumber}}
+                {% endif %}
+              </dd>
+            </div>
+            
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                 Building society roll number (if they have one)
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {% if org.bankDetails.buildingSocietyNumber == null  %}
+                    <p class="govuk-body">Not provided</p>
+                {% else %}
+                    {{org.bankDetails.buildingSocietyNumber}}
+                {% endif %}
+              </dd>
+            </div>
+          </dl>
+
+
+    </div>
+
+    <div class="govuk-grid-column-one-half">
+
+      <form action="../verification-handler" method="post" novalidate>
+
+    <div class="govuk-form-group {% if data.bankDetailsVerificationIncomplete %}govuk-form-group--error {% endif %}" id="bankDetails-review">
+        <fieldset class="govuk-fieldset" aria-describedby="accessPay-hint">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s" id="accessPayResult">
+                What is the AccessPay result?
+            </legend>
+
+            {% if data.bankDetailsVerificationIncomplete %}
+                <p id="bankDetails-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Select an option for AccessPay result
+                </p>
+            {% endif %}
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+
+                    <input class="govuk-radios__input" id="accessPayFullMatch" name="accessPayResult" type="radio" value="fullMatch" data-aria-controls="conditional-accessPay-fullMatch" {% if data.accessPayResult == 'fullMatch' %}checked{% endif %}>
+                    <label class="govuk-label govuk-radios__label" for="accessPayFullMatch">
+                        Full match
+                    </label>
+
+                </div>
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="accessPayPartialMatch" name="accessPayResult" type="radio" value="partialMatch" data-aria-controls="conditional-accessPay-partialMatch" {% if data.accessPayResult == 'partialMatch' %}checked{% endif %}>
+                    <label class="govuk-label govuk-radios__label" for="accessPayPartialMatch">
+                        Partial match
+                    </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                    <input class="govuk-radios__input" id="accessPayNoMatch" name="accessPayResult" type="radio" value="noMatch"
+                        data-aria-controls="conditional-payment-reject" {% if data.accessPayResult == 'noMatch' %}checked{% endif %}>
+                    <label class="govuk-label govuk-radios__label" for="accessPayNoMatch">
+                        No match
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    {# Full match #}
+    <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-accessPay-fullMatch">
+
+        <div class="govuk-form-group">
+
+          <label class="govuk-label" for="file-upload-1">
+            <strong>Add a screenshot of the AccessPay result</strong>
+          </label>
+          <div id="fileUpload1-hint" class="govuk-hint">
+            Make sure this is the whole verification screen in a .jpg or .png format
+            </div>
+          <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
+
+        </div>
+    </div>
+
+    {# Partial match #}
+    <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-accessPay-partialMatch" data-maxlength="1500">
+        
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="file-upload-1">
+          <strong>Add a screenshot of the AccessPay result</strong>
+        </label>
+        <div id="fileUpload1-hint" class="govuk-hint">
+            Make sure this is the whole verification screen in a .jpg or .png format
+            </div>
+        <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
+      </div>
+      <div class="govuk-form-group govuk-character-count {% if data.partialMatchNoteIncomplete or data.partialMatchNoteTooLong %}govuk-form-group--error{% endif %}" 
+        data-module="govuk-character-count" data-maxlength="1500">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                Make a note of why you're verifying this partial match.
+            </legend>
+            <div id="detailsPartialMatchNote-hint" class="govuk-hint">
+                This is for QA colleagues only - the organisation will not see it.
+            </div>
+            {% if data.partialMatchNoteIncomplete %}
+                <p id="payment-queried-note-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Enter verification note
+                </p>
+            {% endif %}
+            {% if data.partialMatchNoteTooLong %}
+                <p id="payment-queried-note-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Note must be 1500 characters or less
+                </p>
+            {% endif %}
+            <textarea class="govuk-textarea govuk-js-character-count {% if data.partialMatchNoteIncomplete or data.partialMatchNoteTooLong %}govuk-textarea--error{% endif %}" 
+            id="detailsPartialMatchNote" name="detailsPartialMatchNote" rows="21" 
+            aria-describedby="detailsPartialMatchNote-info detailsPartialMatchNote-hint">{% if data.detailsPartialMatchNote %}{{data.detailsPartialMatchNote}}{% endif %}</textarea>
+            <div id="detailsPartialMatchNote-info" class="govuk-hint govuk-character-count__message">
+                You can enter up to 1500 characters
+            </div>
+        </div>
+    </div>
+
+    {# No match #}
+    <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-payment-reject">
+        
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="file-upload-1">
+          <strong>Add a screenshot of the AccessPay result</strong>
+        </label>
+        <div id="fileUpload1-hint" class="govuk-hint">
+            Make sure this is the whole verification screen in a .jpg or .png format
+            </div>
+        <input class="govuk-file-upload" id="file-upload-1" name="fileUpload1" type="file">
+      </div>
+      <div class="govuk-form-group govuk-character-count {% if data.noMatchNoteIncomplete or data.noMatchNoteTooLong %}govuk-form-group--error{% endif %}" 
+            data-module="govuk-character-count" data-maxlength="1500">
+             <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                Make a note of why these bank details have failed verification.
+            </legend>
+            <div id="detailsNoMatchNote-hint" class="govuk-hint">
+                This is for QA colleagues only - the organisation will not see it.
+            </div>
+            {% if data.noMatchNoteIncomplete %}
+                <p id="detailsNoMatchNote-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Enter reason details failed verification
+                </p>
+            {% endif %}
+            {% if data.noMatchNoteTooLong %}
+                <p id="detailsNoMatchNote-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span>Note must be 1500 characters or less
+                </p>
+            {% endif %}
+            <textarea
+                class="govuk-textarea govuk-js-character-count {% if data.noMatchNoteIncomplete or data.noMatchNoteTooLong%}govuk-textarea--error{% endif %}"
+                id="detailsNoMatchNote" name="detailsNoMatchNote" rows="21"
+                aria-describedby="detailsNoMatchNote-info detailsNoMatchNote-hint">{% if data.detailsNoMatchNote %}{{data.detailsNoMatchNote}}{% endif %}</textarea>
+            <div id="detailsNoMatchNote-info" class="govuk-hint govuk-character-count__message">
+                You can enter up to 1500 characters
+            </div>
+        </div>
+    </div>
+
+    <div class="govuk-button-group"  style="align-items: center;">
+        <button type="submit" class="govuk-button" data-module="govuk-button" name="actionType" value="continue">
+            Continue
+        </button>
+        <a class="govuk-link" href="../org-tab-handler/bank-details?accessPayResult=&detailsPartialMatchNote=&detailsNoMatchNote=">Cancel</a>
+    </div>
+</form>
+
+    </div>
+</div>
+
+
+{% endblock %}

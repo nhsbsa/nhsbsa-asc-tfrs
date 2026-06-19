@@ -1,0 +1,10 @@
+{% set learnerInfo = learner.learnerID | findLearner %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+        <p class='govuk-body govuk-!-font-weight-bold govuk-!-margin-bottom-1'>{{learnerInfo.givenName}} {{learnerInfo.familyName}}</p>
+        <p class='govuk-body'>{{learner.evidenceOfCompletionReview.note}}</p>
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+        <a class="govuk-link govuk-link--no-visited-state" href="../process-step-handler?stage=completion&learnerNo={{loop.index}}">Edit<span class="govuk-visually-hidden"> {{learnerInfo.givenName}} {{learnerInfo.familyName}}</span></a>
+    </div>
+</div>

@@ -430,8 +430,18 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v14",
+        "processingCurrent": "v15",
         "processingVersions": [
+        {
+                "versionNo": "15",
+                "phase": "Beta",
+                "status": ["design"],
+                "designHistory":"https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/processing-version-14/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },
             {
                 "versionNo": "14",
                 "phase": "Beta",
