@@ -644,14 +644,6 @@ router.get('/view-bank-details', function (req, res) {
         case "2":
         orgID = "G91774723";
         break;
-
-        case "3":
-        orgID = "B13299931";
-        break;
-
-        case "4":
-        orgID = "G91371231";
-        break;
     }
 
     loadData(req, orgID)
