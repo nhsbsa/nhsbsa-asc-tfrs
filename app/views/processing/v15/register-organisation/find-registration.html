@@ -1,7 +1,7 @@
 {% extends "../_layouts/processing-main.html" %}
 
 {% block pageTitle %}
-{% if data.submitError == "invalid" or data.submitError == "missing" %}Error: {% endif %}What is the workplace ID for the organisation? — Register an organisation — {{data.processingServiceName}}
+{% if data.submitError == "invalid" or data.submitError == "missing" %}Error: {% endif %}What is the registration reference for the organisation? — Register an organisation — {{data.processingServiceName}}
 {% endblock %}
 
 {% block beforeContent %}
@@ -20,35 +20,34 @@
                 <div class="govuk-error-summary__body">
                     <ul class="govuk-list govuk-error-summary__list">
                         <li>
-                            <a href="#workplace-id-error">{{ data.submitError | orgErrorMessage }}</a>
+                            <a href="#reference-id-error">{{ data.submitError | orgErrorMessage }}</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
         {% endif %}
-        <form action="../check-org" method="post" class="form">
+        <form action="../check-registration-ref" method="post" class="form">
             <div
                 class="govuk-form-group {% if data.submitError == 'invalid' or data.submitError == 'missing' %}govuk-form-group--error{% endif %}">
-                <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="reference-id-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <span class="govuk-caption-l">Register an organisation</span>
                         <h1 class="govuk-fieldset__heading" for="orgID">
-                            What is the workplace ID for the organisation?
+                            What is the registration reference?
                         </h1>
                     </legend>
-                    <p class="govuk-body">Enter the workplace ID as it appears in the Adult Social Care Workforce Dataset (ASC-WDS).</p>
-                    <div id="asc-wds-id-hint" class="govuk-hint">
-                        For example, G03944234
+                    <div id="reference-id-hint" class="govuk-hint">
+                        Enter the reference for the registration you wish to find for example, R-ABCD-1234
                     </div>
                     {% if data.submitError == "invalid" or data.submitError == "missing" %}
-                    <p id="workplace-id-error" class="govuk-error-message">
+                    <p id="reference-id-error" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span> {{ data.submitError | orgErrorMessage }}
                     </p>
                     {% endif %}
                     <input
                         class="govuk-input govuk-input--width-10 {% if data.submitError == 'invalid' or data.submitError == 'missing' %}govuk-input--error{% endif %}"
-                        aria-describedby="asc-wds-id-hint" id="orgID" name="orgID" type="text" value="{{ data.orgID | default ('') }}">
+                        aria-describedby="reference-id-hint" id="referenceID" name="referenceID" type="text" value="{{ data.referenceID | default ('') }}">
                 </fieldset>
             </div>
             <button class="govuk-button" data-module="govuk-button">

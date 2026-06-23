@@ -2,13 +2,12 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, checkWDSFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode} = require('../_helpers/helpers.js');
+const { loadData, checkRefFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode} = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 router.use('/processing/v15/backstop', require('../_backstop/backstop-routes.js'));
 router.use('/processing/v15/backstop', require('../_backstop/backstop-routes.js'));
 
-// v15 Prototype routes
 // v15 Prototype routes
 
 router.get('/load-data', function (req, res) {
@@ -17,77 +16,75 @@ router.get('/load-data', function (req, res) {
   res.redirect('sign-in.html')
 })
 
-router.post('/check-org', function (req, res) {
-  const orgID = req.session.data.orgID
+router.post('/check-registration-ref', function (req, res) {
+  const referenceID = req.session.data.referenceID
   delete req.session.data.confirmation
   delete req.session.data.familyName
   delete req.session.data.givenName
   delete req.session.data.email
 
-  var orgRegistered = false
+  var regExists = false
 
-  for (const org of req.session.data.organisations) {
-    if (org.workplaceID == orgID) {
-      orgRegistered = true
+  for (const reg of req.session.data.registrations) {
+    if (reg.registrationRef == referenceID) {
+      regExists = true
     }
   }
 
-  if (orgID == "") {
+  if (referenceID == "") {
     req.session.data.submitError = 'missing'
-    res.redirect('register-organisation/organisation-details')
-  } else if (orgID == "timeout") {
-    req.session.data.submitError = 'timeout'
-    res.redirect('register-organisation/org-issue')
-  } else if (orgRegistered) {
-    req.session.data.submitError = 'duplicate'
-    res.redirect('register-organisation/org-issue')
-  } else if (checkWDSFormat(orgID)) {
-    delete req.session.data.submitError
-    res.redirect('register-organisation/confirm-organisation-details')
+    res.redirect('register-organisation/find-registration')
+  } else if (checkRefFormat(referenceID) || true) {
+    if (regExists) { 
+      delete req.session.data.submitError
+      res.redirect('register-organisation/registration-details')
+    } else {
+      req.session.data.submitError = 'noMatch'
+      res.redirect('register-organisation/find-registration')
+    }
   } else {
     req.session.data.submitError = 'invalid'
-    res.redirect('register-organisation/organisation-details')
+    res.redirect('register-organisation/find-registration')
   }
 });
 
-router.post('/confirm-org-handler', function (req, res) {
+router.post('/reg-decision-handler', function (req, res) {
   const confirmation = req.session.data.confirmation
   delete req.session.data.submitError
-  delete req.session.data.confirmation
 
-  if (confirmation == "yes") {
-    req.session.data.newOrg = 'true'
-    res.redirect('register-organisation/signatory-details')
-  } else if (confirmation == "no") {
-    req.session.data.submitError = 'incorrect'
-    res.redirect('register-organisation/org-issue')
+  if (confirmation == "onboard" || confirmation == "onboardrisk") {
+    res.redirect('register-organisation/confirm-decision')
+  } else if (confirmation == "onboardrisk") {
+    res.redirect('register-organisation/confirm-decision')
+    } else if (confirmation == "no") {
+    res.redirect('register-organisation/confirm-decision')
   } else if (confirmation == null) {
     req.session.data.submitError = 'missing'
-    res.redirect('register-organisation/confirm-organisation-details')
+    res.redirect('register-organisation/registration-decision')
   }
 });
 
-router.post('/signatory-handler', function (req, res) {
-  const familyName = req.session.data.familyName
-  const givenName = req.session.data.givenName
-  const email = req.session.data.email
-  const edited = req.session.data.edited
-  const newOrg = req.session.data.newOrg
+router.post('/reg-outcome-handler', function (req, res) {
+  const referenceID = req.session.data.referenceID
+  const confirmation = req.session.data.confirmation
+  const declineOnboardNote = req.session.data.declineOnboardNote
 
-  const result = signatoryCheck(familyName, givenName, email)
+  delete req.session.data.confirmation
+  delete req.session.data.declineOnboardNote
 
-  if (result.signatoryValid) {
-    delete req.session.data.submitError
-    if (newOrg == "true") {
-      res.redirect('register-organisation/confirm-signatory-details')
-    } else {
-      res.redirect('register-organisation/updated-signatory-invitation')
+  for (const reg of req.session.data.registrations) {
+    if (reg.registrationRef == referenceID) {
+      reg.decision.outcome = confirmation
+      reg.decision.decisionDate = new Date()
+      if (confirmation == "notOnboard") {
+        reg.decision.note = declineOnboardNote
+      }
+      reg.status = "processed"
     }
-    
-  } else {
-    req.session.data.submitError = result
-    res.redirect('register-organisation/signatory-details')
   }
+
+  req.session.data.processSuccess = "true"
+  res.redirect('register-organisation/registration-details')
 });
 
 router.post('/search-claim-id', function (req, res) {
@@ -790,18 +787,6 @@ router.get('/back-to-start-handler', function (req, res) {
   } else {
     res.redirect('./organisation/find-organisation')
   }
-});
-
-router.get('/confirm-signatory-handler', function (req, res) {
-
-  delete req.session.data.newOrg
-  delete req.session.data.orgID
-  delete req.session.data.email
-  delete req.session.data['answers-checked']
-
-  req.session.data.confirmation = 'register'
-
-  res.redirect('./home')
 });
 
 router.post('/change-sro-handler', function (req, res) {

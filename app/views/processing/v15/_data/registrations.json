@@ -1,0 +1,62 @@
+[
+    {
+        "registrationRef": "R-ABCD-1234",
+        "status": "submitted",
+        "requestSubmitted": "2026-06-10T06:52:47.938Z",
+        "name": "Evergreen Care home",
+        "address": ["72 Guild Street", "London", "SE23 6FH"],
+        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "ascwds": {
+            "workplaceId": "A02944934",
+            "workplaceName": "Evergreen Care home",
+            "workplaceAddress": ["72 Guild Street", "London", "SE23 6FH"],
+            "numberOfWorkplaceStaff": 14,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "Lionel",
+            "familyName": "Lowe",
+            "email": "lionel-lowel@evergreencare.co.uk",
+            "phonenumber": "01234567890"
+        },
+        "decision": {
+            "outcome": null,
+            "note": null,
+            "decisionDate": null
+        }
+    },
+    {
+        "registrationRef": "R-HFJS-1325",
+        "status": "processed",
+        "requestSubmitted": "2026-06-10T06:52:47.938Z",
+        "name": "Evergreen Care home",
+        "address": ["72 Guild Street", "London", "SE23 6FH"],
+        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "ascwds": {
+            "workplaceId": "A02944934",
+            "workplaceName": "Evergreen Care home",
+            "workplaceAddress": ["72 Guild Street", "London", "SE23 6FH"],
+            "numberOfWorkplaceStaff": 14,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "Lionel",
+            "familyName": "Lowe",
+            "email": "lionel-lowel@evergreencare.co.uk",
+            "phonenumber": "01234567890"
+        },
+        "decision": {
+            "outcome": "notOnboard",
+            "note": "This is a test note.",
+            "decisionDate": "2026-06-15T06:52:47.938Z"
+        }
+    }
+]

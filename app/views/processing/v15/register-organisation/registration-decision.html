@@ -1,0 +1,122 @@
+{% extends "../_layouts/processing-main.html" %}
+
+{% set reg = data.registrations | findReg(data.referenceID) %}
+
+{% block pageTitle %}
+{% if data.submitError == "missing" %}Error: {% endif %}Check registrations details are correct — Register an organisation — {{data.processingServiceName}}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.submitError == "missing" %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#error">Select whether we can onboard this organisation</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Register an organisation</span>
+        <h1 class="govuk-heading-l">Registration request: {{reg.registrationRef}}</h1>
+        <p class="govuk-body">Submitted on {{ reg.requestSubmitted | govukDateTime }}</p>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+        
+        {% include "../_components/reg-view/org-details.html" %}
+
+        {% include "../_components/reg-view/ascwds-details.html" %}
+
+        {% include "../_components/reg-view/sro-details.html" %}
+
+    </div>
+    <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-m">
+          Onboarding checks
+        </h2>
+        <p class="govuk-body">Follow the onboarding checks process and capture the results in the MS Form as per training. Record the overall decision about whether to onboard the org in the service here.</p>
+        <form action="../reg-decision-handler" method="post" novalidate>
+            <div class="govuk-form-group {% if data.submitError == 'missing' %}govuk-form-group--error{% endif %}">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                        Can we onboard this organisation?
+                    </legend>
+                    {% if data.submitError == "missing" %}
+                    <p id="error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        Select whether the details are correct
+                    </p>
+                    {% endif %}
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmation" name="confirmation" type="radio"
+                                value="onboard">
+                            <label class="govuk-label govuk-radios__label" for="confirmation">
+                                Yes - onboard
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmation" name="confirmation" type="radio"
+                                value="onboardrisk" aria-describedby="atRisk-item-hint">
+                            <label class="govuk-label govuk-radios__label" for="confirmation">
+                                Yes - onboard at risk
+                            </label>
+                            <div id="atRisk-item-hint" class="govuk-hint govuk-radios__hint">
+                                This will add a suspicious flag to the organisation.
+                            </div>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmation-2" name="confirmation" type="radio"
+                                value="notOnboard" data-aria-controls="conditional-reject-notes">
+                            <label class="govuk-label govuk-radios__label" for="confirmation-2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-reject-notes">
+                <div class="govuk-form-group govuk-character-count {% if data.declineOnboardNoteIncomplete %}govuk-form-group--error {% endif %}" data-module="govuk-character-count" data-maxlength="1000">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                        Why can't we onboard this organisation?
+                    </legend>
+                    <div id="declineOnboardNote-hint" class="govuk-hint">
+                        This note tells the SRO why we can't onboard the organisation based on this registration request
+                    </div>
+                    {% if data.declineOnboardNoteIncomplete %}
+                    <p id="completion-reject-note-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>Enter rejection reasons for completion evidence
+                    </p>
+                    {% endif %}
+                    <textarea
+                        class="govuk-textarea govuk-js-character-count {% if data.declineOnboardNoteIncomplete %}govuk-textarea--error{% endif %}"
+                        id="declineOnboardNote" name="declineOnboardNote" rows="21"
+                        aria-describedby="completionNote-info completionNote-hint">{% if learnerClaimData.evidenceOfCompletionReview.outcome=='fail' %}{{ data.declineOnboardNote or learnerClaimData.evidenceOfCompletionReview.note or '' }}{% else %}{{ data.declineOnboardNote or '' }}{% endif %}</textarea>
+                    <div id="completionNote-info" class="govuk-hint govuk-character-count__message">
+                        You can enter up to 1000 characters
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+                <a class="govuk-link" href="registration-details">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+{% endblock %}

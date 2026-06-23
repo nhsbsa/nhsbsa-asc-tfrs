@@ -1,0 +1,80 @@
+{% extends "../_layouts/processing-main.html" %}
+
+{% set reg = data.registrations | findReg(data.referenceID) %}
+
+{% block pageTitle %}
+{{reg.registrationRef}} registrations details— Register an organisation — {{data.processingServiceName}}
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="find-registration" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if data.processSuccess == "true" %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full-width">
+        <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+            <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                Success
+                </h2>
+            </div>
+            <div class="govuk-notification-banner__content">
+                <h3 class="govuk-notification-banner__heading">
+                Registration outcome recorded and shared with Senior Responsible Officer
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Register an organisation</span>
+        <h1 class="govuk-heading-l">Registration request: {{reg.registrationRef}}</h1>
+        <p class="govuk-body">Submitted on {{ reg.requestSubmitted | govukDateTime }}</p>
+        {% if reg.status == "submitted" %}
+            <a type="submit" class="govuk-button" data-module="govuk-button" href="registration-decision">
+                Make onboarding decision
+            </a>
+        {% endif %}
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        
+        {% include "../_components/reg-view/org-details.html" %}
+
+        {% include "../_components/reg-view/ascwds-details.html" %}
+
+        {% include "../_components/reg-view/sro-details.html" %} 
+        
+    </div>
+    {% if reg.status != "submitted" %}
+        <div class="govuk-grid-column-one-third">
+            <h2 class="govuk-heading-m">Completed onboarding check</h2>
+
+            <h3 class="govuk-heading-s">Can we onboard this organisation?</h3>
+
+            {% if reg.decision.outcome == "onboard" %}
+                <p class="govuk-body">Yes - onboard</p>
+            {% elif reg.decision.outcome == "onboardrisk" %}
+                <p class="govuk-body">Yes – onboard at risk</p>
+            {% else %}
+                <p class="govuk-body">No</br>{{reg.decision.note}}</p>
+            {% endif %}
+
+            {% if claim.claimType != "60" %}
+                <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+            {% endif %}
+
+        </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}
