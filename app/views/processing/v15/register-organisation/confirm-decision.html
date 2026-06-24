@@ -16,28 +16,29 @@ Check Senior Responsible Officer details are correct — Register an organisatio
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Register an organisation</span>
-        <h1 class="govuk-heading-l">Registration request: ABCD-1234</h1>
+        <h1 class="govuk-heading-l">Registration reference: ABCD-1234</h1>
 
         {% if data.confirmation == "onboard" %}
-            <p class="govuk-body">You have stated that after the onboarding checks you are making the decision to onbaord the org.</p>
+            <p class="govuk-body">Confirm that you've reviewed the registration details provided and the organisation can be <span class="govuk-!-font-weight-bold">registered</span>.</p>
+            <p class="govuk-body">The SRO will receive an email to let them know their organisation is now registered.</p>
         {% elif data.confirmation == "onboardrisk" %}
-            <p class="govuk-body">You have stated that after the onboarding checks you are making the decision to onbaord the organisation at risk. This will add a flag to the organisation which will be visible to processors when processing claims. This will not be visible to organisations. </p>
+            <p class="govuk-body">Confirm that you've reviewed the registration details provided and the organisation can be <span class="govuk-!-font-weight-bold">registered at risk</span>.</p>
+            <p class="govuk-body">This will add a flag to the organisation that will only be visible to other processors.</p>
+            <p class="govuk-body">The SRO will receive an email to let them know their organisation is now registered.</p>
         {% elif data.confirmation == "notOnboard" %}
-            <p class="govuk-body">You have stated that after the onboarding checks you are making the decision to not onbaord the org.</p>
-            <p class="govuk-body">The SRO will receive the following note to explain why the request was declined. The wording is taken from what you entered on the previous screen.</p>
+            <p class="govuk-body">Confirm that you have reviewed the registration details provided and the organisation <span class="govuk-!-font-weight-bold">cannot be registered</span>.</p>
+            <p class="govuk-body">The SRO will receive this note  explaining why we are unable to register their organisation.</p>
 
             <div class='govuk-inset-text'>
-                <h2 class='govuk-heading-s'>Request declined</h2>
+                <h2 class='govuk-heading-s'>Note to SRO</h2>
                 <p class="govuk-body">{{data.declineOnboardNote}}</p>
             </div>
         {% endif %}
 
-        <p class="govuk-body">Confirm that this organisation should be {% if data.confirmation == "onboard" %}onboarded{% elif data.confirmation == "onboardrisk" %}onboarded at risk{% elif data.confirmation == "notOnboard" %}not onboarded.{% endif %}. This outcome will be communicated to the organisation.</p>
-
         <form action="../reg-outcome-handler" method="post" novalidate>
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
-                    Confirm and {% if data.confirmation == "onboard" %}onboard{% elif data.confirmation == "onboardrisk" %}onboard at risk{% elif data.confirmation == "notOnboard" %}decline{% endif %}
+                    Confirm outcome
                 </button>
                 <a class="govuk-link" href="organisation-details?newOrg&orgID&edited">Cancel</a>
             </div>
