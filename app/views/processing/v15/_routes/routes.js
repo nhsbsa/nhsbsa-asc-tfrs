@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, checkRefFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode} = require('../_helpers/helpers.js');
+const { loadData, checkRefFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode, createOrg} = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 router.use('/processing/v15/backstop', require('../_backstop/backstop-routes.js'));
@@ -78,6 +78,9 @@ router.post('/reg-outcome-handler', function (req, res) {
       reg.decision.decisionDate = new Date()
       if (confirmation == "notOnboard") {
         reg.decision.note = declineOnboardNote
+      } else {
+        const org = createOrg(reg)
+        req.session.data.organisations.push(org)
       }
       reg.status = "processed"
     }

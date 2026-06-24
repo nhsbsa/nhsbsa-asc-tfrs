@@ -567,6 +567,34 @@ function findFirstLearnerWithoutOutcome(learners, startIndex = 0) {
   return -1;
 }
 
+function createOrg(registration) {
+  const org = {
+      "workplaceID": registration.ascwds.workplaceId,
+      "numberOfClaims": 0,
+      "name": registration.name,
+      "address": registration.address,
+      "bankDetails": null,
+      "validGDL": true,
+      "notes" : [],
+      "signatory": {
+        "active": {     
+          "givenName": registration.SRO.givenName,
+          "familyName": registration.SRO.familyName,
+          "email": registration.SRO.email,
+          "status": "active"
+        },  
+        "inactive": []
+      },
+      "users": {
+        "active": [],
+        "inactive": [],
+        "invited": []
+      }
+    }
+
+  return org
+}
 
 
-module.exports = { loadJSONFromFile, loadData, formatDate, checkRefFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildSlotComparison, orderSubmissions, findFirstLearnerWithoutOutcome }
+
+module.exports = { createOrg, loadJSONFromFile, loadData, formatDate, checkRefFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildSlotComparison, orderSubmissions, findFirstLearnerWithoutOutcome }
