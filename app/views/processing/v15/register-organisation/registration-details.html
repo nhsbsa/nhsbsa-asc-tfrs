@@ -35,7 +35,7 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-l">Register an organisation</span>
-        <h1 class="govuk-heading-l  govuk-!-margin-bottom-3">Registration request: {{reg.registrationRef}}</h1>
+        <h1 class="govuk-heading-l  govuk-!-margin-bottom-3">Registration reference: {{reg.registrationRef}}</h1>
         
         {% include "../_components/reg-view/reg-header.html" %} 
     </div>
@@ -52,16 +52,16 @@
     </div>
     {% if reg.status != "submitted" %}
         <div class="govuk-grid-column-one-third">
-            <h2 class="govuk-heading-m">Completed onboarding check</h2>
+            <h2 class="govuk-heading-m">Registration checks completed</h2>
 
-            <h3 class="govuk-heading-s">Can we onboard this organisation?</h3>
+            <h3 class="govuk-heading-s">Can we register this organisation?</h3>
 
             {% if reg.decision.outcome == "onboard" %}
-                <p class="govuk-body">Yes - onboard</p>
+                <p class="govuk-body">Yes - register</p>
             {% elif reg.decision.outcome == "onboardrisk" %}
-                <p class="govuk-body">Yes – onboard at risk</p>
+                <p class="govuk-body">Yes – register at risk</p>
             {% else %}
-                <p class="govuk-body">No</br>{{reg.decision.note}}</p>
+                <p class="govuk-body">No</br>Note to SRO: {{reg.decision.note}}</p>
             {% endif %}
 
             {% if claim.claimType != "60" %}
