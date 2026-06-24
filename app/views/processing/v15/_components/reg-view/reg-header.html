@@ -16,7 +16,7 @@
             <p class="govuk-body"><strong class="govuk-tag govuk-tag--orange">Registered at risk</strong> on {{ reg.decision.decisionDate | govukDateTime }} by test.user@nhsbsa.co.uk</p>
         {% endif %}
         <p class="govuk-body">Recieved on {{ reg.requestSubmitted | govukDateTime }}</p>
-        <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="#">
+        <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="../organisation/org-view-main?orgID={{reg.ascwds.workplaceId}}&orgTab=org-details">
             View organisation
         </a>
     {% else %}
