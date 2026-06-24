@@ -872,3 +872,12 @@ addFilter('allInternalOMMT', function (submissions) {
     return true
 })
 
+addFilter('findReg', function (registrations, id) {
+    var foundReg = null
+    for (const reg of registrations) {
+        if (reg.registrationRef == id) {
+            foundReg = reg
+        }
+    }
+    return foundReg
+})

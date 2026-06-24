@@ -1,0 +1,60 @@
+<h2 class="govuk-heading-m">ASC-WDS workplace details</h2>
+<p class="govuk-body">This information was returned from the ASC-WDS based on the workplace ID provided by the SRO.</p>
+<dl class="govuk-summary-list">
+{#     <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+        Workplace ID
+        </dt>
+        <dd class="govuk-summary-list__value">
+        {{reg.ascwds.workplaceId}}
+        </dd>
+    </div> #}
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Workplace name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{reg.ascwds.workplaceName}}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Workplace address
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ reg.ascwds.workplaceAddress[0] }}<br>  {{ reg.ascwds.workplaceAddress[1] }}<br> {{ reg.ascwds.workplaceAddress[2] }}  
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+        CQC location ID
+        </dt>
+        <dd class="govuk-summary-list__value">
+        {{reg.ascwds.locationID}}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+        Number of workplace staff
+        </dt>
+        <dd class="govuk-summary-list__value">
+        {{reg.ascwds.numberOfWorkplaceStaff}}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+        Service name
+        </dt>
+        <dd class="govuk-summary-list__value">
+        {{reg.ascwds.serviceName}}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+        Service category
+        </dt>
+        <dd class="govuk-summary-list__value">
+        {{reg.ascwds.serviceCategory}}
+        </dd>
+    </div>
+</dl>

@@ -13,6 +13,7 @@ function loadData(req) {
     var claimsFile = 'claims.json'
     var statusFile = 'claim-item-statuses.json'
     var organisationsFile = 'organisations.json'
+    var registrationsFile = 'registrations.json'
 
     console.log('loading in claims file')
     const claims = loadJSONFromFile(claimsFile, dataPath)
@@ -27,6 +28,10 @@ function loadData(req) {
     req.session.data['organisations'] = loadJSONFromFile(organisationsFile, dataPath)
     console.log('organisations file loaded')
 
+    console.log('loading in registrations file')
+    req.session.data['registrations'] = loadJSONFromFile(registrationsFile, dataPath)
+    console.log('registrations file loaded')
+
     return console.log('data updated')
 }
 
@@ -39,7 +44,7 @@ function formatDate(isoDate) {
     return `${day} ${month} ${year}`;
 }
 
-function checkWDSFormat(id) {
+function checkRefFormat(id) {
     var pattern = /^[B-I]\d{5,8}$/;
     return pattern.test(id);
 }
@@ -564,4 +569,4 @@ function findFirstLearnerWithoutOutcome(learners, startIndex = 0) {
 
 
 
-module.exports = { loadJSONFromFile, loadData, formatDate, checkWDSFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildSlotComparison, orderSubmissions, findFirstLearnerWithoutOutcome }
+module.exports = { loadJSONFromFile, loadData, formatDate, checkRefFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildSlotComparison, orderSubmissions, findFirstLearnerWithoutOutcome }

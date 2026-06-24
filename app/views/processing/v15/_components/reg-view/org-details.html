@@ -1,0 +1,74 @@
+<h2 class="govuk-heading-m">Organisation details</h2>
+<p class="govuk-body">This information was entered by the Senior responsible officer (SRO).</p>
+<dl class="govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Organisation name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{reg.name}}
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Organisation address
+        </dt>
+        <dd class="govuk-summary-list__value">
+            {{ reg.address[0] }}<br>  {{ reg.address[1] }}<br> {{ reg.address[2] }}  
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Evidence of address
+        </dt>
+        <dd class="govuk-summary-list__value">
+            <a class="govuk-link" href="/public/images/{{reg.evidenceOfAddress}}" target="_blank">{{reg.evidenceOfAddress}} (opens in new tab)</a>
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+        ASC-WDS Workplace ID
+        </dt>
+        <dd class="govuk-summary-list__value">
+        {{reg.ascwds.workplaceId}}
+        </dd>
+    </div>
+    {% if reg.chNumber != null %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+            Companies House number
+            </dt>
+            <dd class="govuk-summary-list__value">
+            {{reg.chNumber}}
+            </dd>
+        </div>
+    {% else %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+            Companies House registered?
+            </dt>
+            <dd class="govuk-summary-list__value">
+            No
+            </dd>
+        </div>
+    {% endif %}
+    {% if reg.vatNumber != null %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+            VAT registration number
+            </dt>
+            <dd class="govuk-summary-list__value">
+            {{reg.vatNumber}}
+            </dd>
+        </div>
+    {% else %}
+        <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+            VAT registered?
+            </dt>
+            <dd class="govuk-summary-list__value">
+            No
+            </dd>
+        </div>
+    {% endif %}
+</dl>
