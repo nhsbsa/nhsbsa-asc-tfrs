@@ -27,7 +27,8 @@
         {% endif %}
         <span class="govuk-caption-l">Register an organisation</span>
         <h1 class="govuk-heading-l">Registration request: {{reg.registrationRef}}</h1>
-        <p class="govuk-body">Submitted on {{ reg.requestSubmitted | govukDateTime }}</p>
+        {% set processing = true %}
+        {% include "../_components/reg-view/reg-header.html" %} 
     </div>
 </div>
 <div class="govuk-grid-row">

@@ -32,12 +32,12 @@ Check Senior Responsible Officer details are correct — Register an organisatio
             </div>
         {% endif %}
 
-        <p class="govuk-body">Confirm that this organisation should be {% if data.confirmation == "onboard" %}onboarded{% elif data.confirmation == "onboardrisk" %}onboarded at risk{% elif data.confirmation == "no" %}not onboarded.{% endif %}. This outcome will be communicated to the organisation.</p>
+        <p class="govuk-body">Confirm that this organisation should be {% if data.confirmation == "onboard" %}onboarded{% elif data.confirmation == "onboardrisk" %}onboarded at risk{% elif data.confirmation == "notOnboard" %}not onboarded.{% endif %}. This outcome will be communicated to the organisation.</p>
 
         <form action="../reg-outcome-handler" method="post" novalidate>
             <div class="govuk-button-group">
                 <button type="submit" class="govuk-button" data-module="govuk-button">
-                    Confirm and {% if data.confirmation == "onboard" %}onboard{% elif data.confirmation == "onboardrisk" %}onboard at risk{% elif data.confirmation == "no" %}decline{% endif %}
+                    Confirm and {% if data.confirmation == "onboard" %}onboard{% elif data.confirmation == "onboardrisk" %}onboard at risk{% elif data.confirmation == "notOnboard" %}decline{% endif %}
                 </button>
                 <a class="govuk-link" href="organisation-details?newOrg&orgID&edited">Cancel</a>
             </div>

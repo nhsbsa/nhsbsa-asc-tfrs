@@ -56,7 +56,7 @@ router.post('/reg-decision-handler', function (req, res) {
     res.redirect('register-organisation/confirm-decision')
   } else if (confirmation == "onboardrisk") {
     res.redirect('register-organisation/confirm-decision')
-    } else if (confirmation == "no") {
+    } else if (confirmation == "notOnboard") {
     res.redirect('register-organisation/confirm-decision')
   } else if (confirmation == null) {
     req.session.data.submitError = 'missing'
