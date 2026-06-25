@@ -107,9 +107,9 @@ addFilter('reimbursement', function (claim, paymentReimbursementAmount) {
 
 addFilter('orgErrorMessage', function (error) {
     if (error == "invalid") {
-        return "Enter a valid workplace ID"
+        return "Enter a valid registration reference"
     } else if ( error == "missing") {
-        return "Enter a workplace ID"
+        return "Enter a registration reference"
     }
 })
 
