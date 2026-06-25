@@ -22,10 +22,10 @@
 <div class="govuk-grid-row">
 
     <div class="govuk-grid-column-one-half">
-        <p class="govuk-body">{{org.bankDetails.verificationStatus | bankVerificationTag}}{% if org.bankDetails != null %} on 30 June 2026{% endif %}</p>
+        <p class="govuk-body">{{org.bankDetails.verificationStatus | bankVerificationTag}}{% if org.bankDetails != null and org.bankDetails.verificationStatus != "submitted" %} on 30 June 2026{% endif %}</p>
 
         {% if org.bankDetails.verificationStatus == "submitted"%}
-          <p class="govuk-body">This organisation has submitted its bank details but they still need to be verified.</p>
+          <p class="govuk-body">This organisation submitted its bank details on 30 June 2026 but they still need to be verified.</p>
         {% endif %}
 
         {% if org.bankDetails == null %}

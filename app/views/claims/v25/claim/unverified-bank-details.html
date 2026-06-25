@@ -21,16 +21,16 @@ Unverified bank details — {{serviceName}} — GOV.UK
     <div class="govuk-grid-column-two-thirds">
         {% if data.userType == "signatory" %}
             <p class="govuk-body">
-                We will contact you, as Senior Responsible Officer, if there are any issues with your organisation's bank details.
+                If there are any issues with your organisation's bank details we'll contact you, as Senior Responsible Officer, within 5 working days.
             </p>
         {% elif data.userType == "submitter" %}
             <p class="govuk-body">
-                We will email your Senior Responsible Officer within 3 to 5 days if there are any issues.
-            </p>
-            <p class="govuk-body">
-                You cannot submit any claims until the bank details are verified.
+                We'll email your Senior Responsible Officer within 5 working days if there are any issues.
             </p>
         {% endif %}
+        <p class="govuk-body">
+            You cannot submit any claims until the bank details are verified.
+        </p>
         <h2 class="govuk-heading-m">If you need support</h2>
         <p class="govuk-body">This service is managed by the NHS Business Services Authority. You can email us <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
         {% if data.userType == "signatory" %}
