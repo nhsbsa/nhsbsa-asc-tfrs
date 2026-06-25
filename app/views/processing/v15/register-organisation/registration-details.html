@@ -57,9 +57,9 @@
             <h3 class="govuk-heading-s">Can we register this organisation?</h3>
 
             {% if reg.decision.outcome == "onboard" %}
-                <p class="govuk-body">Yes - register</p>
+                <p class="govuk-body">Yes &ndash; register</p>
             {% elif reg.decision.outcome == "onboardrisk" %}
-                <p class="govuk-body">Yes – register at risk</p>
+                <p class="govuk-body">Yes &ndash; register at risk</p>
             {% else %}
                 <p class="govuk-body">No</br>Note to SRO: {{reg.decision.note}}</p>
             {% endif %}
