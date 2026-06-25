@@ -82,10 +82,10 @@ Manage claims - {{serviceName}} — GOV.UK
 
         {% if data.org.bankDetails.verificationStatus == "submitted" %}
           {% if data.userType == "signatory" %}
-            <p class="govuk-body">We are now verifying your organisation's bank details. We will  email you within 3 to 5 days if any further action is needed. This will come from an address ending @nhsbsa.nhs.uk.</p>  
+            <p class="govuk-body">We are now verifying your organisation's bank details. We'll email you within 5 working days if any further action is needed. This will come from an address ending @nhsbsa.nhs.uk.</p>  
             <p class="govuk-body">You cannot submit any claims until the bank details are verified.</p>  
           {% elif data.userType == "submitter" %}
-              <p class="govuk-body">We are now verifying your organisation's bank details. We will email your SRO within 3 to 5 days if any further action is needed.</p>  
+              <p class="govuk-body">We are now verifying your organisation's bank details. We'll email your SRO within 5 working days if any further action is needed.</p>  
               <p class="govuk-body">You cannot submit any claims until the bank details are verified.</p>  
           {% endif %}
         {% endif %}
