@@ -331,18 +331,28 @@
             "delay": 500
         },
         {
-            "label": "SRO-view-bank-details-complete",
+            "label": "SRO-view-bank-details-not-yet-added",
             "url": "http://localhost:3000/claims/v25/backstop/view-bank-details?scenario=1",
             "delay": 500
         },
         {
-            "label": "SRO-view-bank-details-missing",
+            "label": "SRO-view-bank-details-submitted",
             "url": "http://localhost:3000/claims/v25/backstop/view-bank-details?scenario=2",
             "delay": 500
         },
         {
+            "label": "SRO-view-bank-details-verified",
+            "url": "http://localhost:3000/claims/v25/backstop/view-bank-details?scenario=3",
+            "delay": 500
+        },
+        {
+            "label": "SRO-view-bank-details-failed-verification",
+            "url": "http://localhost:3000/claims/v25/backstop/view-bank-details?scenario=4",
+            "delay": 500
+        },
+        {
             "label": "SRO-view-bank-details-confirmation",
-            "url": "http://localhost:3000/claims/v25/backstop/view-bank-details?scenario=1&confirmation=true",
+            "url": "http://localhost:3000/claims/v25/backstop/view-bank-details?scenario=3&confirmation=true",
             "delay": 500
         },
         {
@@ -461,22 +471,22 @@
             "delay": 500
         },
         {
-            "label": "SRO-manage-claims-scenario-1",
+            "label": "SRO-manage-claims-scenario-1-bank-details-verified",
             "url": "http://localhost:3000/claims/v25/backstop/manage-claims?scenario=1&userType=signatory",
             "delay": 500
         },
         {
-            "label": "submitter-manage-claims-scenario-1",
+            "label": "submitter-manage-claims-scenario-1-bank-details-verified",
             "url": "http://localhost:3000/claims/v25/backstop/manage-claims?scenario=1&userType=submitter",
             "delay": 500
         },
         {
-            "label": "SRO-manage-claims-scenario-2",
+            "label": "SRO-manage-claims-scenario-2-not-yet-added",
             "url": "http://localhost:3000/claims/v25/backstop/manage-claims?scenario=2&userType=signatory",
             "delay": 500
         },
         {
-            "label": "submitter-manage-claims-scenario-2",
+            "label": "submitter-manage-claims-scenario-2-bank-details-not-yet-added",
             "url": "http://localhost:3000/claims/v25/backstop/manage-claims?scenario=2&userType=submitter",
             "delay": 500
         },
@@ -491,12 +501,22 @@
             "delay": 500
         },
         {
-            "label": "SRO-manage-claims-scenario-4",
+            "label": "SRO-manage-claims-scenario-4-bank-details-submitted",
+            "url": "http://localhost:3000/claims/v25/backstop/manage-claims?scenario=5&userType=signatory",
+            "delay": 500
+        },
+        {
+            "label": "submitter-manage-claims-scenario-4-bank-details-submitted",
+            "url": "http://localhost:3000/claims/v25/backstop/manage-claims?scenario=5&userType=submitter",
+            "delay": 500
+        },
+        {
+            "label": "SRO-manage-claims-scenario-4-bank-details-failed-verification",
             "url": "http://localhost:3000/claims/v25/backstop/manage-claims?scenario=4&userType=signatory",
             "delay": 500
         },
         {
-            "label": "submitter-manage-claims-scenario-4",
+            "label": "submitter-manage-claims-scenario-4-bank-details-failed-verification",
             "url": "http://localhost:3000/claims/v25/backstop/manage-claims?scenario=4&userType=submitter",
             "delay": 500
         },
@@ -1123,6 +1143,26 @@
         {
             "label": "submitter-claim-submission-missing-bank-details",
             "url": "http://localhost:3000/claims/v25/backstop/missing-bank-details?userType=submitter",
+            "delay": 500
+        },
+        {
+            "label": "SRO-claim-submission-not-yet-verified-bank-details",
+            "url": "http://localhost:3000/claims/v25/backstop/not-yet-verified-bank-details?userType=signatory",
+            "delay": 500
+        },
+        {
+            "label": "submitter-claim-submission-not-yet-verified-bank-details",
+            "url": "http://localhost:3000/claims/v25/backstop/not-yet-verified-bank-details?userType=submitter",
+            "delay": 500
+        },
+                {
+            "label": "SRO-claim-submission-rejected-bank-details",
+            "url": "http://localhost:3000/claims/v25/backstop/rejected-bank-details?userType=signatory",
+            "delay": 500
+        },
+        {
+            "label": "submitter-claim-submission-rejected-bank-details",
+            "url": "http://localhost:3000/claims/v25/backstop/rejected-bank-details?userType=submitter",
             "delay": 500
         },
         {
