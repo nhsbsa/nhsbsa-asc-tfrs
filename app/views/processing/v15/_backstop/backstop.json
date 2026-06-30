@@ -1326,12 +1326,22 @@
             "delay": 500
         },
         {
-            "label": "bank-details-verified",
+            "label": "bank-details-verified-full-match",
+            "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=leadProcessor&scenario=5",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-verified-full-match",
+            "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=processor&scenario=5",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-verified-partial-match",
             "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=leadProcessor&scenario=3",
             "delay": 500
         },
         {
-            "label": "bank-details-verified",
+            "label": "bank-details-verified-partial-match",
             "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=processor&scenario=3",
             "delay": 500
         },
