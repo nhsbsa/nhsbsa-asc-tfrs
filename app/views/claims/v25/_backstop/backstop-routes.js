@@ -638,11 +638,19 @@ router.get('/view-bank-details', function (req, res) {
 
     switch (scenario) {
         case "1":
-        orgID = "A02944934";
+        orgID = "E76904778";
         break;
 
         case "2":
-        orgID = "G91774723";
+        orgID = "C63281491";
+        break;
+
+        case "3":
+        orgID = "F87223491";
+        break;
+
+        case "4":
+        orgID = "G91371231";
         break;
     }
 
@@ -860,6 +868,10 @@ router.get('/manage-claims', function (req, res) {
 
         case "4":
         orgID = "G91371231";
+        break;
+
+        case "5":
+        orgID = "C63281491";
         break;
     }
 
@@ -1989,11 +2001,44 @@ router.get('/missing-bank-details', function (req, res) {
         tabLocation: "claims",
         id: 'G5W-W3VK-BLA1-A'
     };
-
     loadData(req, "F87223491")
 
     // Redirect to the page you want to screenshot
     res.redirect('../claim/missing-bank-details');
+});
+
+router.get('/not-yet-verified-bank-details', function (req, res) {
+    const userType = req.session.data.userType
+
+  delete req.session.data
+    req.session.data = {
+        area: 'Claims',
+        userType,
+        journey: 'signin',
+        tabLocation: "claims",
+        id: 'G5W-W3VK-BLA1-A'
+    };
+    loadData(req, "F87223491")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../claim/unverified-bank-details');
+});
+
+router.get('/rejected-bank-details', function (req, res) {
+    const userType = req.session.data.userType
+
+  delete req.session.data
+    req.session.data = {
+        area: 'Claims',
+        userType,
+        journey: 'signin',
+        tabLocation: "claims",
+        id: 'G5W-W3VK-BLA1-A'
+    };
+    loadData(req, "F87223491")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../claim/rejected-bank-details');
 });
 
 router.get('/claim-history', function (req, res) {
