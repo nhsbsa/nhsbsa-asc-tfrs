@@ -957,6 +957,123 @@ router.get('/view-org-claims', function (req, res) {
     res.redirect('../organisation/org-view-main');
 });
 
+router.get('/view-bank-details', function (req, res) {
+    const scenario = req.session.data.scenario
+    const userType = req.session.data.userType
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Processing',
+        userType: userType,
+        orgTab: "bank-details"
+    };
+
+    switch (scenario) {
+        case "1":
+        req.session.data.orgID = "E76904778";
+        break;
+
+        case "2":
+        req.session.data.orgID = "D62749203";
+        break;
+
+        case "3":
+        req.session.data.orgID = "B13299931";
+        break;
+
+        case "4":
+        req.session.data.orgID = "G91371231";
+        break;
+    }
+
+    loadData(req)
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../organisation/org-view-main');
+});
+
+router.get('/verify-bank-details', function (req, res) {
+    const accessPayResult = req.session.data.accessPayResult
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Processing',
+        userType: "leadProcessor",
+        orgTab: "bank-details",
+        orgID: "D62749203",
+        accessPayResult: accessPayResult
+    };
+
+    loadData(req)
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../verify-bank-details/accessPay-result');
+});
+
+router.get('/confirm-outcome-bank-details', function (req, res) {
+    const accessPayResult = req.session.data.accessPayResult
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Processing',
+        userType: "leadProcessor",
+        orgTab: "bank-details",
+        orgID: "D62749203",
+        accessPayResult: accessPayResult
+    };
+
+        switch (accessPayResult) {
+        case "partialMatch":
+        req.session.data.detailsPartialMatchNote = "partial match note";
+        break;
+
+        case "noMatch":
+        req.session.data.detailsNoMatchNote = "no match note";
+        break;
+    }
+
+    loadData(req)
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../verify-bank-details/outcome-bank-details');
+});
+
+router.get('/confirmed-bank-details', function (req, res) {
+    const scenario = req.session.data.scenario
+    const userType = req.session.data.userType
+    const bankDetailsVerified = req.session.data.bankDetailsVerified
+    const bankDetailsRejected = req.session.data.bankDetailsRejected
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Processing',
+        userType: userType,
+        orgTab: "bank-details",
+        bankDetailsRejected: bankDetailsRejected,
+        bankDetailsVerified: bankDetailsVerified
+    };
+
+    switch (scenario) {
+        case "1":
+        req.session.data.orgID = "C63281491";
+        break;
+
+        case "2":
+        req.session.data.orgID = "B13299931";
+        break;
+
+        case "3":
+        req.session.data.orgID = "G91371231";
+        break;
+
+    }
+
+    loadData(req)
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../organisation/org-view-main');
+});
+
 router.get('/change-SRO', function (req, res) {
     const error = req.session.data.error
     const scenario = req.session.data.error

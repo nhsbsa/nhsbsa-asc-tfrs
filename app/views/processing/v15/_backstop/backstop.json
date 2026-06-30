@@ -1304,6 +1304,91 @@
             "label": "change-SRO-invite-success-scenario-5",
             "url": "http://localhost:3000/processing/v15/backstop/view-org-users?userType=leadProcessor&scenario=5&resend=true",
             "delay": 500
+        },
+        {
+            "label": "bank-details-not-yet-added",
+            "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=leadProcessor&scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-not-yet-added",
+            "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=processor&scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-submitted",
+            "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=leadProcessor&scenario=2",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-submitted",
+            "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=processor&scenario=2",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-verified",
+            "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=leadProcessor&scenario=3",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-verified",
+            "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=processor&scenario=3",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-verification-failed",
+            "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=leadProcessor&scenario=4",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-verification-failed",
+            "url": "http://localhost:3000/processing/v15/backstop/view-bank-details?userType=processor&scenario=4",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-verify-full-match",
+            "url": "http://localhost:3000/processing/v15/backstop/verify-bank-details?accessPayResult=fullMatch",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-verify-partial-match",
+            "url": "http://localhost:3000/processing/v15/backstop/verify-bank-details?accessPayResult=partialMatch",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-verify-no-match",
+            "url": "http://localhost:3000/processing/v15/backstop/verify-bank-details?accessPayResult=noMatch",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-confirm-full-match",
+            "url": "http://localhost:3000/processing/v15/backstop/confirm-outcome-bank-details?accessPayResult=fullMatch",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-confirm-partial-match",
+            "url": "http://localhost:3000/processing/v15/backstop/confirm-outcome-bank-details?accessPayResult=partialMatch",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-confirm-no-match",
+            "url": "http://localhost:3000/processing/v15/backstop/confirm-outcome-bank-details?accessPayResult=noMatch",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-successful-banner-bank-details-full-match",
+            "url": "http://localhost:3000/processing/v15/backstop/confirmed-bank-details?accessPayResult=fullMatch&bankDetailsVerified=true&scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-successful-banner-bank-details-partial-match",
+            "url": "http://localhost:3000/processing/v15/backstop/confirmed-bank-details?accessPayResult=partialMatch&bankDetailsVerified=true&scenario=2",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-successful-banner-bank-details-no-match",
+            "url": "http://localhost:3000/processing/v15/backstop/confirmed-bank-details?accessPayResult=noMatch&bankDetailsRejected=true&scenario=3",
+            "delay": 500
         }
     ],
     "paths": {
