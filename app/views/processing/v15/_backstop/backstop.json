@@ -1346,6 +1346,11 @@
             "delay": 500
         },
         {
+            "label": "bank-details-no-radio-selected",
+            "url": "http://localhost:3000/processing/v15/backstop/verify-bank-details",
+            "delay": 500
+        },
+        {
             "label": "bank-details-verify-full-match",
             "url": "http://localhost:3000/processing/v15/backstop/verify-bank-details?accessPayResult=fullMatch",
             "delay": 500
