@@ -565,7 +565,12 @@ router.get('/registration-bank-details', function (req, res) {
         area: 'Claims',
         userType: 'signatory',
         journey,
-        tabLocation: "bankDetails"
+        tabLocation: "bankDetails",
+        user: {
+            givenName: "Roy",
+            familyName: "Hub",
+            email: "roy.hub@caregroup.co.uk"
+        }
     };
 
     switch (scenario) {
@@ -633,7 +638,12 @@ router.get('/view-bank-details', function (req, res) {
         area: 'Claims',
         userType: "signatory",
         journey: "signin",
-        tabLocation: "bankDetails"
+        tabLocation: "bankDetails",
+        user: {
+            givenName: "Roy",
+            familyName: "Hub",
+            email: "roy.hub@caregroup.co.uk"
+        }
     };
 
     switch (scenario) {
