@@ -1,0 +1,80 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+
+{% block pageTitle %}
+{% if data.chRadioMissing %}Error: {% endif %}Are you registered with Companies House? — Complete registration — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="is-this-you" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if data.chRadioMissing %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#error">
+                                Select whether you are registered with Companies House
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <span class="govuk-caption-l">Register a new organisation</span>
+        <form action="../companiesHouseResponse" method="post" novalidate>
+            <div class="govuk-form-group {% if data.chRadioMissing %}govuk-form-group--error{% endif %}">
+                <fieldset class="govuk-fieldset" aria-describedby="confirmation-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        Is your organisation registered with Companies House?
+                    </h1>
+                    </legend>
+                    {% if data.chRadioMissing %}
+                    <p id="error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        Select whether you are registered with Companies House
+                    </p>
+                    {% endif %}
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="companiesHouseResponse" name="companiesHouseResponse" type="radio" value="Yes">
+                            <label class="govuk-label govuk-radios__label" for="companiesHouseResponse">
+                            Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="companiesHouseResponse-2" name="companiesHouseResponse" type="radio" value="No">
+                            <label class="govuk-label govuk-radios__label" for="companiesHouseResponse-2">
+                            No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
+                    Continue
+                </button>
+                <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
+                    Save and finish later
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

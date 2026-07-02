@@ -1,0 +1,44 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+
+{% block pageTitle %}
+{{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="../manage-organisations" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Register a new organisation</span>
+        <h1 class="govuk-heading-l">Before you start</h1>
+
+        <p class="govuk-body">To register your organisation you need to provide:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>your role within the organisation</li>
+            <li>name and address of the organisation</li>
+            <li>proof of your organisation's address (for example, a recent utility or council tax bill)</li>
+            <li>your organisation’s workplace ID as it appears in the Adult Social Care Workforce Data Set</li>
+        </ul>
+
+        <p class="govuk-body">If you have them, we also request that you provide your organisation's:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>Companies House registration number</li>
+            <li>CQC registration number</li>
+            <li>VAT registration number</li>
+        </ul>
+        
+        <p class="govuk-body">You can save and return to this registration process at any point.</p>
+
+        <a type="submit" class="govuk-button" data-module="govuk-button" href="SRO-confirmation">
+            Continue
+        </a>
+
+        </div>
+</div>
+
+{% endblock %}

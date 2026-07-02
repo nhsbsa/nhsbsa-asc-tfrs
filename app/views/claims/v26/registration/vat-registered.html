@@ -1,0 +1,79 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+
+{% block pageTitle %}
+{% if data.vatRadioMissing %}Error: {% endif %}Are you VAT registered? — Complete registration — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="cqc-number" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if data.vatRadioMissing %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#error">
+                                Select whether you are VAT registered
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Register a new organisation</span>
+        <form action="../vatResponse" method="post" novalidate>
+            <div class="govuk-form-group {% if data.vatRadioMissing %}govuk-form-group--error{% endif %}">
+                <fieldset class="govuk-fieldset" aria-describedby="confirmation-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        Is your organisation VAT registered?
+                    </h1>
+                    </legend>
+                    {% if data.vatRadioMissing %}
+                    <p id="error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        Select whether you are VAT registered
+                    </p>
+                    {% endif %}
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="vatRegisteredResponse" name="vatRegisteredResponse" type="radio" value="Yes">
+                            <label class="govuk-label govuk-radios__label" for="vatRegisteredResponse">
+                            Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="vatRegisteredResponse-2" name="vatRegisteredResponse" type="radio" value="No">
+                            <label class="govuk-label govuk-radios__label" for="vatRegisteredResponse-2">
+                            No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
+                    Continue
+                </button>
+                <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
+                    Save and finish later
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

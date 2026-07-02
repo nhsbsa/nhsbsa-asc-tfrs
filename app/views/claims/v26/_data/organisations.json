@@ -1,0 +1,605 @@
+[
+  {
+    "workplaceID": "A02944934",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 200,
+    "name": "Evergreen Care home",
+    "address": ["72 Guild Street", "London", "SE23 6FH"],
+    "bankDetails": {
+      "verificationStatus": "verified",
+      "nameOnAccount": "Evergreen Care Home",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": "4598329056"
+    },
+    "validGDL": true,
+    "notes" : [],
+    "signatory": {
+      "active": 
+        {        
+          "givenName": "Lionel",
+          "familyName": "Lowe",
+          "email": "lionel-lowe@caregroup.co.uk",
+          "status": "active"
+        },  
+      "inactive": [
+        {        
+          "givenName": "Windler",
+          "familyName": "Marlene",
+          "email": "marlene-windler@caregroup.co.uk"
+        },
+        {        
+          "givenName": "Reilly",
+          "familyName": "Sim",
+          "email": "sim-reilly@caregroup.co.uk"
+        }
+      ]
+    },
+    "users": {
+      "active": [
+        {
+        "givenName": "Daniel",
+        "familyName": "Jones",
+        "email": "d.jones@caregroup.com"
+      }, 
+      {
+        "givenName": "Rachel",
+        "familyName": "Mcglee",
+        "email": "rachel.mcglee@caregroup.com"
+      },
+      {
+        "givenName": "Jasper",
+        "familyName": "Holloway",
+        "email": "jasper.holloway@caregroup.com"
+      },
+      {
+        "givenName": "Elias",
+        "familyName": "Thornton",
+        "email": "elias.thornton@caregroup.com"
+      },
+      {
+        "givenName": "Lena",
+        "familyName": "Caldwell",
+        "email": "lena.caldwell@caregroup.com"
+      },
+      {
+        "givenName": "Miles",
+        "familyName": "Whitaker",
+        "email": "miles.whitaker@caregroup.com"
+      },
+      {
+        "givenName": "Rosalie",
+        "familyName": "Finch",
+        "email": "rosalie.finch@caregroup.com"
+      }
+    ],
+      "inactive": [{
+        "givenName": "Fredrick",
+        "familyName": "Smith",
+        "email": "fredrick.smith@caregroup.com"
+      }],
+      "invited": [{
+        "givenName": "Charlotte",
+        "familyName": "Dandy",
+        "email": "charlotte.dandy@caregroup.com"
+      },
+      {
+        "givenName": "Abel",
+        "familyName": "Mellow",
+        "email": "abel.mellow@caregroup.com"
+      }]
+    }
+  },
+  {
+    "workplaceID": "B13299931",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Teatree Care",
+    "address": ["32 The Lawn", "Birmingham", "BI23 6FH"],
+    "bankDetails": {
+      "verificationStatus": "verified",
+      "nameOnAccount": "Teatree Care",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    },
+    "validGDL": true,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Cameron",
+      "familyName": "Bennett",
+      "email": "cameron.bennett@caregroup.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [
+      {
+        "givenName": "Lionel",
+        "familyName": "Lowe",
+        "email": "lionel.lowe@caregroup.co.uk"
+      }
+    ],
+    "inactive": [
+      {
+        "givenName": "Eleanor",
+        "familyName": "Morris",
+        "email": "eleanor.morris@caregroup.com"
+      }
+    ],
+    "invited": [
+      {
+        "givenName": "Zane",
+        "familyName": "Montgomery",
+        "email": "zane.montgomery@caregroup.com"
+      }
+    ]
+  }
+  },
+  {
+    "workplaceID": "C63281491",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Anika Care Ltd",
+    "address": ["13 Gandfield Street", "Wakefield", "WA23 6FH"],
+    "bankDetails": {
+      "verificationStatus": "submitted",
+      "nameOnAccount": "Anika Care",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    },
+    "validGDL": true,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Ivy",
+      "familyName": "Montgomery",
+      "email": "ivy.montgomery@caregroup.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "D62749203",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Fairfield Care Home",
+    "address": ["12 Fairfield Road", "Scarborough", "SC23 6FH"],
+    "bankDetails": {
+      "verificationStatus": "verified",
+      "nameOnAccount": "caregroup Ltd",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    },
+    "validGDL": true,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Theo",
+      "familyName": "Kingston",
+      "email": "theo.kingston@caregroup.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "E76904778",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Bright Horizons Care home",
+    "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
+    "bankDetails": null,
+    "validGDL": false,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Mira",
+      "familyName": "Caldwell",
+      "email": "mira.caldwell@caregroup.com",
+      "status": "invited"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "F15904728",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Purple Stones Care home",
+    "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
+    "bankDetails": null,
+    "validGDL": false,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Craig",
+      "familyName": "Helliwell",
+      "email": "craig.helliwell@caregroup.com",
+      "status": "invited"
+    },  
+    "inactive": [
+      {        
+      "givenName": "Mira",
+      "familyName": "Caldwell",
+      "email": "Mira.Caldwell@caregroup.com"
+      }
+    ]
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "G91774723",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Pinetree Manor Care Centre",
+    "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
+    "bankDetails": null,
+    "validGDL": true,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Lionel",
+        "familyName": "Lowe",
+        "email": "lionel.lowe@caregroup.co.uk",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "G91371231",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Hampton Care Home",
+    "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
+    "bankDetails": {
+      "verificationStatus": "rejected",
+      "nameOnAccount": "caregroup Ltd",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    },
+    "validGDL": true,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Lionel",
+        "familyName": "Lowe",
+        "email": "lionel.lowe@caregroup.co.uk",
+      "status": "active"
+    },  
+    "inactive": [
+      {        
+      "givenName": "Evelyn",
+      "familyName": "Brooks",
+      "email": "evelyn.brooks@caregroup.co.uk"
+      }
+    ]
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "F87223491",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Yorkplace Care home",
+    "address": ["12 Farifield Road", "York", "YO23 6FH"],
+    "bankDetails": {
+      "verificationStatus": "verified",
+      "nameOnAccount": "caregroup Care home Ltd",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    },
+    "validGDL": false,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Ivy",
+      "familyName": "Montgomery",
+      "email": "ivy.montgomery@caregroup.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "B52698456",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Fandly Care",
+    "address": ["12 Jack Street", "Liverpool", "LI12 8GB"],
+    "bankDetails": {
+      "verificationStatus": "verified",
+      "nameOnAccount": "Fandly Ltd",
+      "sortCode": "272893",
+      "accountNumber": "12345678",
+      "buildingSocietyNumber": null
+    },
+    "validGDL": true,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Jane",
+      "familyName": "Crow",
+      "email": "jane.crow@caregroup.com",
+      "status": "invited"
+    },  
+    "inactive": [{        
+      "givenName": "Cameron",
+      "familyName": "Bennett",
+      "email": "cameron.bennett@caregroup.com",
+      "status": "active"
+    }]
+  },
+  "users": {
+    "active": [
+      {
+        "givenName": "Oliver",
+        "familyName": "Grey",
+        "email": "oliver.grey@caregroup.com"
+      }
+    ],
+    "inactive": [
+      {
+        "givenName": "Eleanor",
+        "familyName": "Morris",
+        "email": "eleanor.morris@caregroup.com"
+      }
+    ],
+    "invited": [
+      {
+        "givenName": "Mark",
+        "familyName": "Montgomery",
+        "email": "zane.montgomery@caregroup.com"
+      }
+    ]
+  }
+  },
+  {
+    "workplaceID": "F84625987",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Halsey Care home",
+    "address": ["23 Halsey street", "Sunderland", "S31 5HG"],
+    "bankDetails": null,
+    "validGDL": false,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Casey",
+      "familyName": "Fedrisk",
+      "email": "casey.fedrisk@caregroup.com",
+      "status": "invited"
+    },  
+    "inactive": [
+      {        
+      "givenName": "Mira",
+      "familyName": "Caldwell",
+      "email": "Mira.Caldwell@caregroup.com"
+      }
+    ]
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "D76397203",
+    "status": "active",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Prickly Care home",
+    "address": ["2 Prickly Street", "Harrogate", "HO23 6FH"],
+    "bankDetails": {
+      "verificationStatus": "verified",
+      "nameOnAccount": "Prickly care home Ltd",
+      "sortCode": "235486",
+      "accountNumber": "84526365",
+      "buildingSocietyNumber": null
+    },
+    "validGDL": true,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Ivy",
+      "familyName": "Montgomery",
+      "email": "ivy.montgomery@caregroup.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "F26738594",
+    "status": "draft",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Kukri Care home",
+    "address": ["23 Kukri street", "Sunderland", "S31 5HG"],
+    "bankDetails": null,
+    "validGDL": false,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Lionel",
+      "familyName": "Lowe",
+      "email": "lionel.lowe@caregroup.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "D26738495",
+    "status": "rejected",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Helping hand Care home",
+    "address": ["23 Long street", "York", "YO23 2JD"],
+    "bankDetails": null,
+    "validGDL": false,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Lionel",
+      "familyName": "Lowe",
+      "email": "lionel.lowe@caregroup.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  },
+  {
+    "workplaceID": "C7284934",
+    "status": "submitted",
+    "addressEvidence": "insuranceCert.pdf",
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Warm Hoirzons Care home",
+    "address": ["10 Wide street", "Salford", "SA12 H62"],
+    "bankDetails": null,
+    "validGDL": false,
+    "notes" : [],
+    "signatory": {
+    "active": {        
+      "givenName": "Lionel",
+      "familyName": "Lowe",
+      "email": "lionel.lowe@caregroup.com",
+      "status": "active"
+    },  
+    "inactive": []
+  },
+  "users": {
+    "active": [],
+    "inactive": [],
+    "invited": []
+  }
+  }
+]
