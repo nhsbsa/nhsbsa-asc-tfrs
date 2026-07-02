@@ -171,20 +171,22 @@ Manage claims - {{serviceName}} — GOV.UK
         </div>
       </form>
     </div>
+    <div class="gem-c-cards">
+      <ul class="gem-c-cards__list gem-c-cards__list--one-column">
+          {% for status in data.statuses %}
+            {% set noClaims = status.id | claimCount(data.claims, data.org.workplaceID) %}
+            <li class="gem-c-cards__list-item">
+              <div class="gem-c-cards__list-item-wrapper">
+                  <h3 class="gem-c-cards__sub-heading govuk-heading-s">
+                      <a class="govuk-link gem-c-cards__link" data-track-label="{{ status.id }}" href="manage-claims?statusID={{ status.id }}&emptyError&invalidIDError&notFound&fromSearchId&fromSearchResults&deleteSuccess&currentPage=1">{{ status.name }} ({{ noClaims }})</a>
+                  </h3>
+                  <p class="govuk-body gem-c-cards__description">{{ status.description }}</p>
+              </div>
+            </li>
+          {% endfor %}
+      </ul>
+    </div>
 
-    <ul class="homepage-services-and-info__list">
-        {% for status in data.statuses %}
-        {% set noClaims = status.id | claimCount(data.claims, data.org.workplaceID) %}
-        <li class="chevron-card">
-          <div class="chevron-card__wrapper">
-              <h3 class="gem-c-heading govuk-heading-s   govuk-!-margin-bottom-2">
-                  <a class="govuk-link chevron-card__link" data-track-label="{{ status.id }}" href="manage-claims?statusID={{ status.id }}&emptyError&invalidIDError&notFound&fromSearchId&fromSearchResults&deleteSuccess&currentPage=1">{{ status.name }} ({{ noClaims }})</a>
-              </h3>
-              <p class="govuk-body chevron-card__description">{{ status.description }}</p>
-          </div>
-      </li>
-        {% endfor %}
-    </ul>
   </div>
   <div class="govuk-grid-column-one-third">
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
