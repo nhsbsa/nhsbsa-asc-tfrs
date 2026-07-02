@@ -1,0 +1,185 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+{% block pageTitle %}
+  Check your answers — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="vat-registration-number" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Check your answers</h1>
+        <h2 class="govuk-heading-m">Your details</h2>
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              First name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.givenName}}
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Last name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.familyName}}
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Job title
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.jobTitle}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="job-title?change=true">Change<span class="govuk-visually-hidden"> job title</span></a>
+            </dd>
+          </div>
+
+
+        </dl>
+
+        <h2 class="govuk-heading-m">Organisation details</h2>
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Organisation name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.orgName}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="org-name?change=true">Change<span class="govuk-visually-hidden"> organisation name</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Organisation address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.addressLine1}}<br>{{data.addressLine2}}<br>{{data.addressTown}}<br>{{data.addressCounty}}<br>{{data.addressPostcode}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="org-address?change=true">Change<span class="govuk-visually-hidden"> organisation address</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Organisation proof of address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">Utility-bill.pdf (opens in new tab)</a>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="org-address-evidence?change=true">Change<span class="govuk-visually-hidden"> organisation proof of address</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Workplace ID
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.orgID}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="asc-wds-id?change=true">Change<span class="govuk-visually-hidden"> workplace ID</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Registered with Companies House?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.companiesHouseResponse}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="companies-house?change=true">Change<span class="govuk-visually-hidden"> whether registered with companies house</span></a>
+            </dd>
+          </div>
+          {% if data.companiesHouseResponse == "Yes"  %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Companies House number
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data.companiesHouseRegNumber}}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="companies-house-registration-number?change=true">Change<span class="govuk-visually-hidden"> companies house registration number</span></a>
+              </dd>
+            </div>
+          {% endif %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Registered with the CQC?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.cqcResponse}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="cqc-registered?change=true">Change<span class="govuk-visually-hidden"> whether registered with the CQC?</span></a>
+            </dd>
+          </div>
+          {% if data.cqcResponse == "Yes"  %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                CQC number
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data.cqcRegNumber}}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="cqc-number?change=true">Change<span class="govuk-visually-hidden"> CQC registratio number</span></a>
+              </dd>
+            </div>
+          {% endif %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              VAT registered?
+            </dt>
+            <dd class="govuk-summary-list__value">
+               {{data.vatRegisteredResponse}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="vat-registered?change=true">Change<span class="govuk-visually-hidden"> whether VAT registered</span></a>
+            </dd>
+          </div>
+          {% if data.vatRegisteredResponse == "Yes"  %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                VAT number
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data.vatRegNumber}}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="vat-registration-number?change=true">Change<span class="govuk-visually-hidden"> VAT registration number</span></a>
+              </dd>
+            </div>
+          {% endif %}
+        </dl>
+        <h2 class="govuk-heading-m">What happens next</h2>
+        <p class="govuk-body">Once you've signed the declaration on the next page, we'll check your details and email you to confirm that your organisation has been registered with the service. </p>
+        <form action="../check-answer-confirmation" method="post" novalidate>
+          <input type="hidden" name="answers-checked" value="true">
+          <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
+                    Continue
+                </button>
+                <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
+                    Save and finish later
+                </button>
+            </div> 
+        </form>
+  </div>
+</div>
+
+{% endblock %}

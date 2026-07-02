@@ -1,0 +1,47 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+
+{% block pageTitle %}
+{{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">ASC-WDS workplace ID already in use</h1>
+        <p class="govuk-body">You cannot continue because an organisation with this workplace ID has already submitted its registration details or completed registration.</p>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{data.org.workplaceID}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Organisation name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{data.org.name}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Organisation address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.org.address[0] }}<br>  {{ data.org.address[1] }}<br> {{ data.org.address[2] }}  
+                </dd>
+            </div>
+        </dl>
+        <p class="govuk-body">You can either go back to 'Manage organisations' or, if you have any questions, email us at <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
+        <a type="submit" class="govuk-button" data-module="govuk-button" href="../manage-organisations">
+            Manage organisations
+        </a>
+
+        </div>
+</div>
+
+{% endblock %}

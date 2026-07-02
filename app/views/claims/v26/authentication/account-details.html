@@ -1,0 +1,122 @@
+{% extends "../_layouts/main.html" %}
+
+{% block pageTitle %}
+    {{serviceName}} - GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="what-do-you-want-to-do" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                {{ data.submitError | signatoryErrorMessage }}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Create a user account</span>
+        <h1 class="govuk-heading-l">Your details</h1>
+        <form action="../load-data-account-test" method="post" novalidate>
+            <div
+                class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.givenName == 'missing' %} govuk-form-group--error {% endif %}">
+                <label class="govuk-label govuk-label--m" for="givenName">
+                    First name
+                </label>
+                {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
+                data.submitError.givenName
+                == 'missing' %}
+                <p id="givenName-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter a first name
+                </p>
+                {% endif %}
+                <input
+                    class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.givenName == 'missing' %} govuk-input--error {% endif %}"
+                    id="givenName" name="givenName" type="text" spellcheck="false" autocomplete="name"
+                    value="{{givenName}}">
+            </div>
+            <div
+                class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
+                <label class="govuk-label govuk-label--m" for="familyName">
+                    Last name
+                </label>
+                {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
+                data.submitError.familyName == 'missing' %}
+                <p id="familyName-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> Enter a last name
+                </p>
+                {% endif %}
+                <input
+                    class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and data.submitError.familyName == 'missing' %} govuk-input--error {% endif %}"
+                    id="familyName" name="familyName" type="text" spellcheck="false" autocomplete="name"
+                    value="{{ familyName }}">
+            </div>
+            <div
+                class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-form-group--error {% endif %}">
+                <label class="govuk-label govuk-label--m" for="email">
+                    Email address
+                </label>
+                {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
+                (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %}
+                <p id="email-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> 
+                    {% if data.submitError.email == 'missing' %}
+                        Enter an email address
+                    {% elif data.submitError.email == 'invalid' %}
+                        Enter an email address in the correct format, like name@example.com
+                    {% endif %}
+                </p>
+                {% endif %}
+                <input
+                    class="govuk-input {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-input--error  {% endif %}"
+                    id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint"
+                    autocomplete="email" value="{{ email}}">
+            </div>
+            <div
+                class="govuk-form-group {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-form-group--error {% endif %}">
+                <label class="govuk-label govuk-label--m" for="mobile">
+                    Mobile number
+                </label>
+                {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid and
+                (data.submitError.mobile == 'missing' or data.submitError.mobile == 'invalid') %}
+                <p id="mobile-error" class="govuk-error-message">
+                    <span class="govuk-visually-hidden">Error:</span> 
+                    {% if data.submitError.mobile == 'missing' %}
+                        Enter an mobile number
+                    {% elif data.submitError.mobile == 'invalid' %}
+                        Enter an mobile number in the correct format, like name@example.com
+                    {% endif %}
+                </p>
+                {% endif %}
+                <input
+                    class="govuk-input govuk-input--width-10 {% if data.submitError.signatoryValid != null and not data.submitError.signatoryValid  and (data.submitError.mobile == 'missing' or data.submitError.mobile == 'invalid') %} govuk-input--error  {% endif %}"
+                    id="mobile" name="mobile" type="mobile" spellcheck="false" aria-describedby="mobile-hint"
+                    autocomplete="mobile" value="{{ mobile}}">
+            </div>
+
+            <h2 class="govuk-heading-m">What happens next</h2>
+            <p class="govuk-body">We'll email you a link you can use to verify your email address. Once it's verified you can carry on setting up your account.</p>
+
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+    
+
+{% endblock %}

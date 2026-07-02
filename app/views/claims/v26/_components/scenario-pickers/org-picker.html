@@ -1,0 +1,60 @@
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">Post-login test scenarios</h1>
+
+      <div id="org-hint" class="govuk-hint">
+        These different organisations show different states of the service.
+      </div>
+
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h2 class="govuk-heading-l">User profiles</h2>
+
+      {% for user in data.users %}
+        {% if user.journey == "post-login" %}
+          <h3 class="govuk-heading-m">{{user.givenName}}</h3>
+          <p class="govuk-body">{{user.description}}</p>
+          <ul class="govuk-list govuk-list--bullet">
+            {% for org in user.organisations %}
+              {% set orgDetails = org.orgID | findOrg(data.organisations) %}
+              <li>{{orgDetails.name}} ({{org.userType | roleType}})</li>
+            {% endfor %}
+          </ul>
+          <a type="submit" class="govuk-button" href="./load-user-data?userID={{user.email}}">
+              Continue as {{user.givenName}}
+          </a>
+          {% if not loop.last %}
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+          {% endif %}
+        {% endif %}
+
+      {% endfor %}
+
+    </div>
+    <div class="govuk-grid-column-one-third">
+        <h2 class="govuk-heading-m">Organisations</h2>
+        <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+          {% for org in data.organisations %}
+            <div class="govuk-accordion__section">
+              <div class="govuk-accordion__section-header">
+                <h3 class="govuk-accordion__section-heading">
+                  <span class="govuk-accordion__section-button" id="{{org.workplaceID}}">
+                    {{org.name}}
+                  </span>
+                </h3>
+              </div>
+              <div id="accordion-default-content-1" class="govuk-accordion__section-content">
+                <ul class="govuk-list govuk-list--bullet">
+                  {{org | orgInfo}}
+                </ul>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+    </div>
+</div>

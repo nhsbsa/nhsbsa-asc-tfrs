@@ -1,0 +1,139 @@
+[
+    {
+        "journey": "post-login",
+        "givenName": "Roy",
+        "familyName": "Hub",
+        "email": "roy.hub@caregroup.co.uk",
+        "description": "Roy is a user for many organisations covering every state an organisations can be in. He is a user of the following organsiations:",
+        "organisations": [
+            {
+                "orgID": "A02944934",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "orgID": "B13299931",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "orgID": "F26738594",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "orgID": "D26738495",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "orgID": "C7284934",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "orgID": "G91371231",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "orgID": "G91774723",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {   
+        "journey": "post-login",
+        "givenName": "Cynthia",
+        "familyName": "Bartoletti",
+        "email": "cynthia.bartoletti@caregroup.com",
+        "description": "Cynthia is a user of one organisations that is currently active and she is the SRO. She is a user of the following organsiation:",
+        "organisations": [
+            {
+                "orgID": "D76397203",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "post-login",
+        "givenName": "Valerie",
+        "familyName": "Altenwerth",
+        "email": "valerie.altenwerth@caregroup.com",
+        "description": "Valerie is currently in the processing of completeing the registration details for one organsiation. She is a user of the following organsiations:",
+        "organisations": [
+            {
+                "orgID": "F26738594",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "pre-login",
+        "givenName": "Mira",
+        "familyName": "Caldwell",
+        "email": "mira.caldwell@caregroup.com",
+        "description": "",
+        "organisations": []
+    },
+    {
+        "journey": "self-serve",
+        "givenName": "Craig",
+        "familyName": "Willowtree",
+        "email": "craig.willowtree@caregroup.com",
+        "description": "",
+        "organisations": [
+            {
+                "orgID": "F15904728",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "self-serve",
+        "givenName": "Calsey",
+        "familyName": "Huel",
+        "email": "calsey.huel@caregroup.com",
+        "description": "",
+        "organisations": [
+            {
+                "orgID": "F84625987",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "self-serve",
+        "givenName": "Jane",
+        "familyName": "Rempel",
+        "email": "jane.rempel@caregroup.com",
+        "description": "",
+        "organisations": [
+            {
+                "orgID": "B52698456",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "self-serve",
+        "givenName": "Mark",
+        "familyName": "Jacobs",
+        "email": "mark.jacobs@caregroup.com",
+        "description": "",
+        "organisations": [
+            {
+                "orgID": "B52698456",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    }
+
+]
