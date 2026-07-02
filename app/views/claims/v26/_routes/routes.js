@@ -91,35 +91,6 @@ router.post('/companiesHouseResponse', function (req, res) {
       if (change == "true") {
         res.redirect('registration/check-answers')
       } else {
-        res.redirect('registration/cqc-registered')
-      }
-    }
-  } else {
-    saveRegistrationEnty(req)
-    res.redirect('manage-organisations')
-  }
-});
-
-router.post('/cqcResponse', function (req, res) {
-  const cqcResponse = req.session.data.cqcResponse
-  delete req.session.data.cqcRadioMissing
-
-  const action = req.session.data.action
-  const change = req.session.data.change
-
-  delete req.session.data.action
-
-  if (action =="continue") {
-    if (cqcResponse == "" || cqcResponse == null) {
-      res.redirect('registration/cqc-registered?cqcRadioMissing=true')
-    } else if (cqcResponse == "Yes") {
-      res.redirect('registration/cqc-number')
-    } else if (cqcResponse == "No") {
-      delete req.session.data.change
-      delete req.session.data.cqcRegNumber
-      if (change == "true") {
-        res.redirect('registration/check-answers')
-      } else {
         res.redirect('registration/vat-registered')
       }
     }
@@ -1545,7 +1516,7 @@ router.post('/validate-companies-house', function (req, res) {
       if (change == "true") {
         res.redirect('registration/check-answers')
       } else {
-        res.redirect('registration/cqc-registered')
+        res.redirect('registration/vat-registered')
       }
     } else {
       res.redirect('registration/companies-house-registration-number?companiesHouseRegNumberInvalid=true')

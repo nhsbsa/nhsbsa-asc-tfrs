@@ -119,30 +119,6 @@
           {% endif %}
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Registered with the CQC?
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{data.cqcResponse}}
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="cqc-registered?change=true">Change<span class="govuk-visually-hidden"> whether registered with the CQC?</span></a>
-            </dd>
-          </div>
-          {% if data.cqcResponse == "Yes"  %}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                CQC number
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{data.cqcRegNumber}}
-              </dd>
-              <dd class="govuk-summary-list__actions">
-                <a class="govuk-link" href="cqc-number?change=true">Change<span class="govuk-visually-hidden"> CQC registratio number</span></a>
-              </dd>
-            </div>
-          {% endif %}
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
               VAT registered?
             </dt>
             <dd class="govuk-summary-list__value">
