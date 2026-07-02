@@ -1,0 +1,269 @@
+@mixin prefixed-transform($translateY: 0, $rotate: 0, $scale: 1) {
+  -webkit-transform: translateY($translateY) rotate($rotate) scale($scale);
+  -ms-transform: translateY($translateY) rotate($rotate) scale($scale);
+  transform: translateY($translateY) rotate($rotate) scale($scale);
+}
+
+.gem-c-cards__heading {
+  @include govuk-responsive-margin(6, "bottom");
+}
+
+.gem-c-cards__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-column-gap: govuk-spacing(6); // Use deprecated grid-column-gap for Grade C browser support
+  column-gap: govuk-spacing(6);
+
+  @include govuk-media-query($from: "desktop") {
+    // For browsers that don't support CSS grid, constrain the width to 50% to improve usability
+    // especially for screen magnifier users
+    width: 50%;
+
+    // Reset the width for browsers that support CSS grid
+    @supports (display: grid) {
+      width: initial;
+    }
+  }
+}
+
+.gem-c-cards__list--one-column {
+  .gem-c-cards__list-item {
+    &:first-child {
+      border-top: 0;
+
+      .gem-c-cards__list-item-wrapper {
+        padding-top: 0;
+      }
+    }
+  }
+}
+
+.gem-c-cards__heading--underline + .gem-c-cards__list {
+  border-top: 1px solid $govuk-border-colour;
+
+  .gem-c-cards__list-item {
+    &:first-child {
+      .gem-c-cards__list-item-wrapper {
+        padding-top: 19px;
+      }
+    }
+  }
+}
+
+.gem-c-cards__list--two-column-desktop {
+  @include govuk-media-query($from: "tablet") {
+    grid-auto-rows: fractions(1); // Set all rows to same fractional height of the complete grid
+    grid-template-columns: fractions(2); // Note that browsers that don't support CSS grid display the component as one column on all breakpoints
+  }
+}
+
+.gem-c-cards__list--three-column-desktop {
+  @include govuk-media-query($from: "desktop") {
+    grid-auto-rows: fractions(1); // Set all rows to same fractional height of the complete grid
+    grid-template-columns: fractions(3); // Note that browsers that don't support CSS grid display the component as one column on all breakpoints
+  }
+}
+
+.gem-c-cards--auto-layout {
+  .gem-c-cards__list {
+    container-type: inline-size;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 30px;
+
+    // pseudo elements form invisible elements to fill in
+    // the final row if it is incomplete, or fit below
+    &::before,
+    &::after {
+      content: "";
+      height: 0.1px;
+      opacity: 0;
+      order: 100;
+      transform: translateY(-5px);
+    }
+  }
+
+  .gem-c-cards__link {
+    &::before {
+      top: 27px;
+    }
+  }
+
+  .gem-c-cards__description {
+    max-width: none;
+    margin: 0;
+  }
+
+  .gem-c-cards__list::before,
+  .gem-c-cards__list::after,
+  .gem-c-cards__list-item {
+    box-sizing: border-box;
+    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  @include govuk-media-query($from: tablet) {
+    .gem-c-cards__list::before,
+    .gem-c-cards__list::after,
+    .gem-c-cards__list-item {
+      width: 25%;
+    }
+
+    @container (width < 560px) {
+      .gem-c-cards__list::before,
+      .gem-c-cards__list::after,
+      .gem-c-cards__list-item {
+        width: 30%;
+      }
+    }
+
+    @container (width < 360px) {
+      .gem-c-cards__list::before,
+      .gem-c-cards__list::after,
+      .gem-c-cards__list-item {
+        width: 100%;
+      }
+    }
+  }
+
+  @include govuk-media-query($from: desktop) {
+    @container (width < 660px) {
+      .gem-c-cards__list::before,
+      .gem-c-cards__list::after,
+      .gem-c-cards__list-item {
+        width: 31%;
+      }
+    }
+
+    @container (width < 360px) {
+      .gem-c-cards__list::before,
+      .gem-c-cards__list::after,
+      .gem-c-cards__list-item {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.gem-c-cards__list-item {
+  border-top: 1px solid $govuk-border-colour;
+  padding: govuk-spacing(1) 0 govuk-spacing(4) 0;
+}
+
+.gem-c-cards__list-item-wrapper {
+  // this wrapper ensures that the clickable area of the card only
+  // covers the area of the card containing text so in a grid of cards
+  // there is space above and below each link
+  padding: 19px 0 4px;
+  position: relative;
+}
+
+.gem-c-cards__sub-heading {
+  margin: 0 govuk-spacing(6) govuk-spacing(2) 0;
+
+  // Ensure card content width is constrained to two thirds on desktop
+  @include govuk-media-query($from: "desktop") {
+    max-width: 66.6667%;
+  }
+}
+
+.gem-c-cards__link {
+  // Make the entire list item area clickable
+  &::after {
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &::before {
+    $dimension: 7px;
+    $width: 3px;
+
+    border-right: $width solid $govuk-brand-colour;
+    border-top: $width solid $govuk-brand-colour;
+    content: "";
+    display: block;
+    height: $dimension;
+    position: absolute;
+    right: govuk-spacing(1);
+    top: 50%;
+    margin-top: 5px;
+    @include prefixed-transform($rotate: 45deg);
+    width: $dimension;
+  }
+
+  &:hover {
+    &::before {
+      border-color: $govuk-link-hover-colour;
+    }
+  }
+
+  &:focus {
+    &::before {
+      border-color: $govuk-focus-text-colour;
+    }
+  }
+}
+
+.gem-c-cards__description {
+  margin: 0 govuk-spacing(6) 0 0;
+
+/*   // Ensure card content width is constrained to two thirds on desktop
+  @include govuk-media-query($from: "desktop") {
+    max-width: 66.6667%;
+  } */
+}
+
+.gem-c-cards__list--two-column-desktop,
+.gem-c-cards__list--three-column-desktop {
+  .gem-c-cards__sub-heading {
+    max-width: 100%;
+  }
+
+  .gem-c-cards__description {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .gem-c-cards__link {
+    &::before {
+      top: 27px;
+      margin: 0;
+    }
+  }
+}
+
+@include govuk-media-query($media-type: print) {
+  .gem-c-cards__list {
+    display: block;
+  }
+
+  .gem-c-cards__list-item {
+    padding: 0;
+  }
+
+  .gem-c-cards__list-item-wrapper {
+    padding: 5mm 0;
+  }
+
+  .gem-c-cards__description {
+    margin: 0;
+  }
+
+  .gem-c-cards__link {
+    &::before {
+      display: none;
+    }
+
+    &::after {
+      position: static;
+    }
+  }
+}
