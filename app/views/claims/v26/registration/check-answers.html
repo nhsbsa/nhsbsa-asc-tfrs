@@ -21,7 +21,7 @@
               First name
             </dt>
             <dd class="govuk-summary-list__value">
-              {{data.givenName}}
+              {% if data.givenName != null  %}{{data.givenName}}{% else %}{{data.user.givenName}}{% endif %}
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -29,7 +29,7 @@
               Last name
             </dt>
             <dd class="govuk-summary-list__value">
-              {{data.familyName}}
+              {% if data.givenName != null  %}{{data.familyName}}{% else %}{{data.user.familyName}}{% endif %}
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -65,7 +65,7 @@
               Organisation address
             </dt>
             <dd class="govuk-summary-list__value">
-              {{data.addressLine1}}<br>{{data.addressLine2}}<br>{{data.addressTown}}<br>{{data.addressCounty}}<br>{{data.addressPostcode}}
+              {{data.addressLine1}}{% if data.addressLine2 != ""  %}<br>{{data.addressLine2}}{% endif %}{% if data.addressLine3 != ""  %}<br>{{data.addressLine3}}{% endif %}<br>{{data.addressTown}}<br>{{data.addressCounty}}<br>{{data.addressPostcode}}
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="org-address?change=true">Change<span class="govuk-visually-hidden"> organisation address</span></a>

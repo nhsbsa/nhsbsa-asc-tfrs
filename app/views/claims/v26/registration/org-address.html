@@ -71,6 +71,12 @@
                         <input class="govuk-input" id="address-line-2" name="addressLine2" type="text" autocomplete="address-line2" value="{{ data.addressLine2 | default ('') }}">
                     </div>
                     <div class="govuk-form-group">
+                        <label class="govuk-label" for="address-line-2">
+                        Address line 3 (optional)
+                        </label>
+                        <input class="govuk-input" id="address-line-3" name="addressLine3" type="text" autocomplete="address-line3" value="{{ data.addressLine3 | default ('') }}">
+                    </div>
+                    <div class="govuk-form-group">
                         <label class="govuk-label" for="address-town">
                         Town or city
                         </label>
