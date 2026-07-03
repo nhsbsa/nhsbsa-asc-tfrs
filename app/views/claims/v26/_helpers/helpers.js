@@ -1144,4 +1144,57 @@ function clearSessionExcept(req, keepList) {
     });
 }
 
-module.exports = {clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}
+function checkOrgs(organisations, orgID) {
+
+    for (const org of organisations) {
+        if (org.workplaceID == orgID && (org.status == "active" || org.status == "submitted")) {
+            return org
+        }
+    }
+     return null
+}
+
+function userCheck(familyName, givenName, email, phone) {
+    const result = {}
+
+    if (familyName =="") {
+        result.familyName = "missing"
+    } else {
+        result.familyName = "valid"
+    }
+
+    if (givenName =="") {
+        result.givenName = "missing"
+    } else {
+        result.givenName = "valid"
+    }
+
+    if (email == "") {
+        result.email = "missing"
+    } else if (!(emailFormat(email))) {
+        result.email = "invalid"
+    } else if (email == "duplicate@duplicate.com") {
+        result.email = "duplicate"
+    } else {
+        result.email = "valid"
+    }
+
+    if (phone == "") {
+        result.phone = "missing"
+    } else if (!(validateUKPhoneNumber(phone))) {
+        result.phone = "invalid"
+    } else {
+        result.phone = "valid"
+    }
+    
+    
+    result.userValid = result.familyName == "valid" && result.givenName == "valid" && result.email == "valid" && result.phone == "valid"
+    return result
+}
+
+function validateUKPhoneNumber(phoneNumber) {
+    const regex = /^(?:(?:\+44\s?|0)7\d{3}\s?\d{6}|(?:\+44\s?|0)[12358]\d{2,4}\s?\d{3,4}\s?\d{3,4})$/;
+    return regex.test(phoneNumber.trim());
+}
+
+module.exports = {userCheck, checkOrgs, clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}

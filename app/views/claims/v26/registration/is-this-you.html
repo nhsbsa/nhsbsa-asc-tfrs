@@ -54,14 +54,6 @@
                     {{data.orgName}}
                 </dd>
             </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                    Organisation address
-                </dt>
-                <dd class="govuk-summary-list__value">
-                    {{ data.addressLine1 }}<br>  {{ data.addressTown }}<br> {{ data.addressPostcode }}
-                </dd>
-            </div>
         </dl>
         <form action="../detailsCorrectResponse" method="post" novalidate>
             <div class="govuk-form-group {% if data.detailCorrectRadioMissing %}govuk-form-group--error{% endif %}">

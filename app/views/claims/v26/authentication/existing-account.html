@@ -1,0 +1,30 @@
+{% extends "../_layouts/main.html" %}
+
+
+{% block pageTitle %}
+{{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="account-details" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Email already in use</h1>
+
+        <p class="govuk-body">The email address {{user.email}} is already associated with another account.</p>
+
+        <p class="govuk-body">You will need to sign in to access thay account.</p>
+
+        <a type="submit" class="govuk-button" data-module="govuk-button" href="sign-in?journey=signin">
+            Continue to sign in
+        </a>
+
+        </div>
+</div>
+
+{% endblock %}

@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, loadScenarioData, loadUserData, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty } = require('../_helpers/helpers.js');
+const { loadData, loadScenarioData, loadUserData, userCheck, checkOrgs, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty } = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 
@@ -1481,14 +1481,19 @@ router.post('/validate-workplaceID', function (req, res) {
 
   delete req.session.data.action
 
+  const matchedOrg = checkOrgs(req.session.data.organisations, orgID)
   var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
+
   if (action =="continue") {
     if (orgID == "") {
       res.redirect('registration/asc-wds-id?workplaceIDEmpty=true')
-    } else if (validCharactersRegex.test(orgID) == true) {
-      res.redirect('registration/is-this-you')
-    } else {
+    } else if (validCharactersRegex.test(orgID) != true) {
       res.redirect('registration/asc-wds-id?workplaceIDInvalid=true')
+    } else if (matchedOrg != null) {
+      req.session.data.org = matchedOrg
+      res.redirect('registration/workplace-id-already-onboarded')
+    } else {
+      res.redirect('registration/is-this-you')
     }
   } else {
     saveRegistrationEnty(req)
@@ -1972,9 +1977,46 @@ router.get('/load-data', function (req, res) {
       res.redirect('account-setup/sign-new-gdl')
     }
 
-  
-
 })
+
+router.post('/create-user', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+  const phone = req.session.data.phone
+  delete req.session.data.submitError
+
+  const user = {
+        journey: "self-serve",
+        givenName,
+        familyName,
+        email,
+        phone,
+        description: "",
+        organisations: []
+    }
+
+  const result = userCheck(familyName, givenName, email, phone)
+
+  if (result.signatoryValid) {
+    req.session.data.user = user
+    delete req.session.data.familyName
+    delete req.session.data.givenName
+    delete req.session.data.email
+    delete req.session.data.phone
+    res.redirect('authentication/account-details')
+  } else if (result.email = "duplicate") {
+    delete req.session.data.familyName
+    delete req.session.data.givenName
+    delete req.session.data.email
+    delete req.session.data.phone
+    req.session.data.user = user
+    res.redirect('authentication/existing-account')
+  } else {
+    req.session.data.submitError = result
+    res.redirect('authentication/account-details')
+  }
+});
 
 //generate data
 router.post('/generate-handler', function (req, res) {
