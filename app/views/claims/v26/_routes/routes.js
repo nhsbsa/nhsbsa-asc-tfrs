@@ -1592,7 +1592,7 @@ router.post('/validate-vat', function (req, res) {
   }
 });
 
-router.post('/declaration-confirmation', function (req, res) {
+router.post('/gdl-confirmation', function (req, res) {
   delete req.session.data.declarationSubmitError
   const declarationConfirmed = req.session.data.declaration
   if (declarationConfirmed != null) {
@@ -1631,7 +1631,7 @@ router.post('/new-declaration-confirmation', function (req, res) {
     res.redirect('manage-claims-home?tabLocation=claims')
   } else {
     req.session.data.declarationSubmitError = 'true'
-    res.redirect('account-setup/sign-new-gdl')
+    res.redirect('org-admin/sign-new-gdl')
   }
 });
 
@@ -1974,7 +1974,7 @@ router.get('/load-data', function (req, res) {
         res.redirect('manage-claims-home?tabLocation=claims')
       }
     } else {
-      res.redirect('account-setup/sign-new-gdl')
+      res.redirect('org-admin/sign-new-gdl')
     }
 
 })
