@@ -49,13 +49,13 @@
                     <p id="companiesHouseRegNumber" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
                         {% if data.companiesHouseRegNumberEmptyError %}
-                        The job title must not be empty
+                        The Companies House registration number must not be empty
                         {% elif data.companiesHouseRegNumberInvalid %}
-                        The job title must not include invalid characters
+                        The Companies House registration number must not include invalid characters
                         {% endif %}
                     </p>
                     {% endif %}
-                    <input class="govuk-input govuk-!-width-two-thirds {% if data.companiesHouseRegNumberEmptyError or  data.companiesHouseRegNumberInvalid %}govuk-input--error{% endif %}" aria-describedby="asc-wds-id-hint" id="orgName"
+                    <input class="govuk-input govuk-!-width-two-thirds {% if data.companiesHouseRegNumberEmptyError or  data.companiesHouseRegNumberInvalid %}govuk-input--error{% endif %}" aria-describedby="asc-wds-id-hint" id="companiesHouseRegNumber"
                         name="companiesHouseRegNumber" type="text" value="{{ data.companiesHouseRegNumber | default ('') }}">
                 </fieldset>
             </div>

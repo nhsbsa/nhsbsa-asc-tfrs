@@ -65,7 +65,7 @@
               Organisation address
             </dt>
             <dd class="govuk-summary-list__value">
-              {{data.addressLine1}}{% if data.addressLine2 != ""  %}<br>{{data.addressLine2}}{% endif %}{% if data.addressLine3 != ""  %}<br>{{data.addressLine3}}{% endif %}<br>{{data.addressTown}}<br>{{data.addressCounty}}<br>{{data.addressPostcode}}
+              {{data.addressLine1}}{% if data.addressLine2 != "" and data.addressLine2 != null %}<br>{{data.addressLine2}}{% endif %}{% if data.addressLine3 != "" and data.addressLine3 != null %}<br>{{data.addressLine3}}{% endif %}<br>{{data.addressTown}}<br>{{data.addressCounty}}<br>{{data.addressPostcode}}
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="org-address?change=true">Change<span class="govuk-visually-hidden"> organisation address</span></a>

@@ -67,6 +67,7 @@ router.post('/detailsCorrectResponse', function (req, res) {
     }
   } else {
     saveRegistrationEnty(req)
+req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -96,6 +97,7 @@ router.post('/companiesHouseResponse', function (req, res) {
     }
   } else {
     saveRegistrationEnty(req)
+req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -121,6 +123,7 @@ router.post('/vatResponse', function (req, res) {
     }
   } else {
     saveRegistrationEnty(req)
+req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1368,6 +1371,7 @@ router.post('/validate-org-name', function (req, res) {
     }
   } else {
     saveRegistrationEnty(req)
+req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1401,6 +1405,7 @@ router.post('/validate-org-address', function (req, res) {
     }
   } else {
     saveRegistrationEnty(req)
+req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 
@@ -1435,6 +1440,7 @@ router.post('/validate-job-title', function (req, res) {
     }
   } else {
     saveRegistrationEnty(req)
+req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1455,6 +1461,7 @@ router.post('/validate-address-evidence', function (req, res) {
       }
   } else {
     saveRegistrationEnty(req)
+req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1469,6 +1476,7 @@ router.post('/check-answer-confirmation', function (req, res) {
     res.redirect('registration/declaration')
   } else {
     saveRegistrationEnty(req)
+req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1497,6 +1505,7 @@ router.post('/validate-workplaceID', function (req, res) {
     }
   } else {
     saveRegistrationEnty(req)
+req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 
@@ -1528,6 +1537,7 @@ router.post('/validate-companies-house', function (req, res) {
     }
   } else {
     saveRegistrationEnty(req)
+req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1557,6 +1567,7 @@ router.post('/validate-cqc', function (req, res) {
     }
   } else {
     saveRegistrationEnty(req)
+    req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1588,23 +1599,8 @@ router.post('/validate-vat', function (req, res) {
     }
   } else {
     saveRegistrationEnty(req)
+req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
-  }
-});
-
-router.post('/gdl-confirmation', function (req, res) {
-  delete req.session.data.declarationSubmitError
-  const declarationConfirmed = req.session.data.declaration
-  if (declarationConfirmed != null) {
-    req.session.data.org.validGDL = true
-    if (req.session.data.org.bankDetails == null) {
-      res.redirect('account-setup/bank-details-question')
-    } else {
-      res.redirect('manage-claims-home?tabLocation=claims')
-    }
-  } else {
-    req.session.data.declarationSubmitError = 'true'
-    res.redirect('account-setup/declaration?declarationSubmitError=true')
   }
 });
 
@@ -1617,8 +1613,43 @@ router.post('/registation-declaration', function (req, res) {
     res.redirect('registration/registration-submitted-confirmation')
   } else {
     req.session.data.declarationSubmitError = 'true'
-    res.redirect('registration/declaration?declarationSubmitError=true')
+    res.redirect('registration/declaration')
   }
+});
+
+router.get('/load-registration', function (req, res) {
+  
+  const orgID = req.session.data.orgID
+  delete req.session.data.orgID
+
+  const org = req.session.data.organisations.find(entry => entry.workplaceID === orgID);
+  const userOrg  = req.session.data.user.organisations.find(entry => entry.workplaceID === orgID);
+
+  req.session.data.jobTitle = userOrg.jobTitle
+  req.session.data.orgName = org.name
+  req.session.data.addressLine1 = org.address.addressLine1
+  req.session.data.addressLine2 = org.address.addressLine2
+  req.session.data.addressLine3 = org.address.addressLine3
+  req.session.data.addressTown = org.address.addressTown
+  req.session.data.addressCounty = org.address.addressCounty
+  req.session.data.addressPostcode = org.address.addressPostcode
+  req.session.data.orgID = orgID
+  if (org.CHregistered) {
+      req.session.data.companiesHouseResponse = "Yes"
+  } else if (!(org.CHregistered)) {
+      req.session.data.companiesHouseResponse = "No"
+  }
+  req.session.data.companiesHouseRegNumber = org.CHNumber
+  if (org.VATregistered) {
+      req.session.data.vatRegisteredResponse = "Yes"
+  } else if (!(org.VATregistered)) {
+      req.session.data.vatRegisteredResponse = "No"
+  }
+  req.session.data.vatRegNumber = org.VATNumber
+
+  req.session.data.editingID = orgID
+
+  res.redirect('registration/check-answers')
 });
 
 router.post('/new-declaration-confirmation', function (req, res) {

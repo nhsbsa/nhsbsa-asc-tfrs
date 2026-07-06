@@ -1740,7 +1740,7 @@ addFilter('generateUserOrgList', function (user, organisations) {
     }
     if (user.organisations.length >0) {
         for (const userOrg of user.organisations) {
-        const org = organisations.find(entry => entry.workplaceID === userOrg.orgID);
+        const org = organisations.find(entry => entry.workplaceID === userOrg.workplaceID);
         org.userRole = userOrg.userType
         switch(org.status) {
             case "active":
@@ -1807,4 +1807,26 @@ addFilter('userErrorMessage', function (submitError) {
     }
 
     return errorSummaryStr
+}, { renderAsHtml: true });
+
+addFilter('formatAddress', function (addressObj, separatorType = 'line') {
+    // Define the keys in the order you want them to appear
+    const addressKeys = [
+        'addressLine1',
+        'addressLine2',
+        'addressLine3',
+        'addressTown',
+        'addressCounty',
+        'addressPostcode'
+    ];
+
+    // Determine the delimiter based on the passed variable
+    const delimiter = separatorType === 'comma' ? ', ' : '<br>';
+
+    // Map the keys to values, strip out nulls/empties, and join
+    return addressKeys
+        .map(key => addressObj[key])
+        .filter(value => value !== null && value !== undefined && String(value).trim() !== '')
+        .join(delimiter);
+
 }, { renderAsHtml: true });

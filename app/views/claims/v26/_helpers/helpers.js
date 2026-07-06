@@ -889,7 +889,7 @@ function loadUserData(req, userID) {
         }
     }
     for (const organisation of req.session.data.organisations) {
-        const matchedOrg = req.session.data.user.organisations.find(org => org.orgID === organisation.workplaceID);
+        const matchedOrg = req.session.data.user.organisations.find(org => org.workplaceID === organisation.workplaceID);
         if (matchedOrg) {
             if (matchedOrg.userType == "signatory") {
                 organisation.signatory.active.givenName = req.session.data.user.givenName
@@ -1110,20 +1110,106 @@ function replaceLearnerID(learners, oldID, newID) {
 }
 
 function saveRegistrationEnty(req) {
+    const jobTitle = req.session.data.jobTitle
+    const orgName = req.session.data.orgName
+    const addressLine1 = req.session.data.addressLine1
+    const addressLine2 = req.session.data.addressLine2
+    const addressLine3 = req.session.data.addressLine3
+    const addressTown = req.session.data.addressTown
+    const addressCounty = req.session.data.addressCounty
+    const addressPostcode = req.session.data.addressPostcode
+    const orgID = req.session.data.orgID
+    let companiesHouseResponse = null
+    if (req.session.data.companiesHouseResponse == "Yes") {
+        companiesHouseResponse = true
+    } else if (req.session.data.companiesHouseResponse == "No") {
+        companiesHouseResponse = false
+    }
+    const companiesHouseRegNumber = req.session.data.companiesHouseRegNumber
+    let vatRegisteredResponse = null
+    if (req.session.data.vatRegisteredResponse == "Yes") {
+        vatRegisteredResponse = true
+    } else if (req.session.data.vatRegisteredResponse == "No") {
+        vatRegisteredResponse = false
+    }
+    const vatRegNumber = req.session.data.vatRegNumber
+
+    const editingID  = req.session.data.editingID
+
     delete req.session.data.jobTitle
     delete req.session.data.orgName
     delete req.session.data.addressLine1
     delete req.session.data.addressLine2
+    delete req.session.data.addressLine3
     delete req.session.data.addressTown
     delete req.session.data.addressCounty
     delete req.session.data.addressPostcode
     delete req.session.data.orgID
     delete req.session.data.companiesHouseResponse
     delete req.session.data.companiesHouseRegNumber
-    delete req.session.data.cqcResponse
-    delete req.session.data.cqcRegNumber
     delete req.session.data.vatRegisteredResponse
     delete req.session.data.vatRegNumber
+
+    const org = {
+            workplaceID: orgID,
+            status: "draft",
+            addressEvidence: "insuranceCert.pdf",
+            CHregistered: companiesHouseResponse,
+            CHNumber: companiesHouseRegNumber,
+            VATregistered: vatRegisteredResponse,
+            VATNumber: vatRegNumber,
+            numberOfClaims: 0,
+            name: orgName,
+            address: {
+                addressLine1,
+                addressLine2,
+                addressLine3,
+                addressTown,
+                addressCounty,
+                addressPostcode
+            },
+            bankDetails: null,
+            validGDL: false,
+            notes : [],
+            signatory: {
+            active: {        
+                    givenName: req.session.data.user.givenName,
+                    familyName: req.session.data.user.familyName,
+                    email: req.session.data.user.email,
+                    status: "active"
+                },  
+                inactive: []
+            },
+            "users": {
+                active: [],
+                inactive: [],
+                invited: []
+            }
+    }
+
+    const userOrg = {
+            workplaceID: orgID,
+            userType: "signatory",
+            jobTitle
+    }
+    upsertOrganization(req.session.data.organisations, org, editingID)
+    upsertOrganization(req.session.data.user.organisations, userOrg, editingID)
+
+}
+
+function upsertOrganization(orgList, newOrg, editingID) {
+  // Find the index of the existing organization by workplaceID
+  const index = orgList.findIndex(org => org.workplaceID === editingID);
+
+  if (index !== -1) {
+    // If it exists, replace it
+    orgList[index] = newOrg;
+  } else {
+    // If it doesn't exist, add it
+    orgList.push(newOrg);
+  }
+  
+  return orgList;
 }
 
 function clearSessionExcept(req, keepList) {
