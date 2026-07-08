@@ -66,8 +66,11 @@ router.post('/detailsCorrectResponse', function (req, res) {
       res.redirect('registration/not-you')
     }
   } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
     saveRegistrationEnty(req)
-req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -96,8 +99,11 @@ router.post('/companiesHouseResponse', function (req, res) {
       }
     }
   } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
     saveRegistrationEnty(req)
-req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -122,8 +128,11 @@ router.post('/vatResponse', function (req, res) {
       res.redirect('registration/check-answers')
     }
   } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
     saveRegistrationEnty(req)
-req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1370,8 +1379,11 @@ router.post('/validate-org-name', function (req, res) {
       res.redirect('registration/org-name?orgNameInvalid=true')
     }
   } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
     saveRegistrationEnty(req)
-req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1404,8 +1416,11 @@ router.post('/validate-org-address', function (req, res) {
       res.redirect('registration/org-address?orgAddressInvalid=true')
     }
   } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
     saveRegistrationEnty(req)
-req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 
@@ -1439,8 +1454,11 @@ router.post('/validate-job-title', function (req, res) {
       res.redirect('registration/job-title?jobTitleInvalid=true')
     }
   } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
     saveRegistrationEnty(req)
-req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1475,8 +1493,11 @@ router.post('/check-answer-confirmation', function (req, res) {
   if (action =="continue") {
     res.redirect('registration/declaration')
   } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
     saveRegistrationEnty(req)
-req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1504,8 +1525,11 @@ router.post('/validate-workplaceID', function (req, res) {
       res.redirect('registration/is-this-you')
     }
   } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
     saveRegistrationEnty(req)
-req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 
@@ -1536,8 +1560,11 @@ router.post('/validate-companies-house', function (req, res) {
       res.redirect('registration/companies-house-registration-number?companiesHouseRegNumberInvalid=true')
     }
   } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
     saveRegistrationEnty(req)
-req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1566,8 +1593,11 @@ router.post('/validate-cqc', function (req, res) {
       res.redirect('registration/cqc-number?cqcRegNumberInvalid=true')
     }
   } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
     saveRegistrationEnty(req)
-    req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1598,8 +1628,11 @@ router.post('/validate-vat', function (req, res) {
       res.redirect('registration/vat-registration-number?vatRegNumberInvalid=true')
     }
   } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
     saveRegistrationEnty(req)
-req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
