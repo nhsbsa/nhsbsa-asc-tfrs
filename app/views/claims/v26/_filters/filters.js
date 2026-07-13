@@ -1740,7 +1740,7 @@ addFilter('generateUserOrgList', function (user, organisations) {
     }
     if (user.organisations.length >0) {
         for (const userOrg of user.organisations) {
-        const org = organisations.find(entry => entry.workplaceID === userOrg.orgID);
+        const org = organisations.find(entry => entry.workplaceID === userOrg.workplaceID);
         org.userRole = userOrg.userType
         switch(org.status) {
             case "active":
@@ -1781,3 +1781,72 @@ addFilter('orgTag', function (statusID) {
         return '<strong class="govuk-tag govuk-tag--purple">Invalid Status</strong>'
     }
 }, { renderAsHtml: true })
+
+addFilter('userErrorMessage', function (submitError) {
+    let errorSummaryStr = ''
+
+
+    if (submitError.familyName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a last (family) name</a></li>')
+    }
+    
+    if (submitError.givenName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a first (given) name</a></li>')
+    }
+
+    if (submitError.email == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address</a></li>')
+    } else if (submitError.email == "invalid") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address in the correct format, like name@example.com</a></li>')
+    }
+
+    if (submitError.phone == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an phone number</a></li>')
+    } else if (submitError.phone == "invalid") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter a valid UK phone number</a></li>')
+    }
+
+    return errorSummaryStr
+}, { renderAsHtml: true });
+
+addFilter('addressErrorMessage', function (submitError) {
+    let errorSummaryStr = ''
+
+    if (submitError.addressLine1 == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#address-line-1-error">Enter address line 1, typically the building and street</a></li>')
+    }
+    
+    if (submitError.town == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#address-town-error">Enter town or city</a></li>')
+    }
+
+    if (submitError.postcode == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#address-postcode-error">Enter postcode</a></li>')
+    } else if (submitError.postcode == "invalid") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#address-postcode-error">Enter a full UK postcode</a></li>')
+    }
+
+    return errorSummaryStr
+}, { renderAsHtml: true });
+
+addFilter('formatAddress', function (addressObj, separatorType = 'line') {
+    // Define the keys in the order you want them to appear
+    const addressKeys = [
+        'addressLine1',
+        'addressLine2',
+        'addressLine3',
+        'addressTown',
+        'addressCounty',
+        'addressPostcode'
+    ];
+
+    // Determine the delimiter based on the passed variable
+    const delimiter = separatorType === 'comma' ? ', ' : '<br>';
+
+    // Map the keys to values, strip out nulls/empties, and join
+    return addressKeys
+        .map(key => addressObj[key])
+        .filter(value => value !== null && value !== undefined && String(value).trim() !== '')
+        .join(delimiter);
+
+}, { renderAsHtml: true });

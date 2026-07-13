@@ -31,7 +31,7 @@ Organisation details — {{serviceName}} — GOV.UK
                     Address 
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.org.address[0] }}<br>  {{ data.org.address[1] }}<br> {{ data.org.address[2] }}  
+                    {{ data.org.address  | formatAddress("line") }}
                 </dd>
             </div>
 <!--             <div class="govuk-summary-list__row">

@@ -21,7 +21,7 @@
           <p class="govuk-body">{{user.description}}</p>
           <ul class="govuk-list govuk-list--bullet">
             {% for org in user.organisations %}
-              {% set orgDetails = org.orgID | findOrg(data.organisations) %}
+              {% set orgDetails = org.workplaceID | findOrg(data.organisations) %}
               <li>{{orgDetails.name}} ({{org.userType | roleType}})</li>
             {% endfor %}
           </ul>

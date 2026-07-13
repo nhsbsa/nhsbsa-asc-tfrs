@@ -83,7 +83,7 @@ router.get('/sign-new-gdl', function (req, res) {
     loadData(req, org)
 
     // Redirect to the page you want to screenshot
-    res.redirect('../account-setup/sign-new-gdl');
+    res.redirect('../org-admin/sign-new-gdl');
 });
 
 router.get('/org-details', function (req, res) {

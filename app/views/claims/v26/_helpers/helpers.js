@@ -889,7 +889,7 @@ function loadUserData(req, userID) {
         }
     }
     for (const organisation of req.session.data.organisations) {
-        const matchedOrg = req.session.data.user.organisations.find(org => org.orgID === organisation.workplaceID);
+        const matchedOrg = req.session.data.user.organisations.find(org => org.workplaceID === organisation.workplaceID);
         if (matchedOrg) {
             if (matchedOrg.userType == "signatory") {
                 organisation.signatory.active.givenName = req.session.data.user.givenName
@@ -1110,20 +1110,106 @@ function replaceLearnerID(learners, oldID, newID) {
 }
 
 function saveRegistrationEnty(req) {
+    const jobTitle = req.session.data.jobTitle
+    const orgName = req.session.data.orgName
+    const addressLine1 = req.session.data.addressLine1
+    const addressLine2 = req.session.data.addressLine2
+    const addressLine3 = req.session.data.addressLine3
+    const addressTown = req.session.data.addressTown
+    const addressCounty = req.session.data.addressCounty
+    const addressPostcode = req.session.data.addressPostcode
+    const orgID = req.session.data.orgID
+    let companiesHouseResponse = null
+    if (req.session.data.companiesHouseResponse == "Yes") {
+        companiesHouseResponse = true
+    } else if (req.session.data.companiesHouseResponse == "No") {
+        companiesHouseResponse = false
+    }
+    const companiesHouseRegNumber = req.session.data.companiesHouseRegNumber
+    let vatRegisteredResponse = null
+    if (req.session.data.vatRegisteredResponse == "Yes") {
+        vatRegisteredResponse = true
+    } else if (req.session.data.vatRegisteredResponse == "No") {
+        vatRegisteredResponse = false
+    }
+    const vatRegNumber = req.session.data.vatRegNumber
+
+    const editingID  = req.session.data.editingID
+
     delete req.session.data.jobTitle
     delete req.session.data.orgName
     delete req.session.data.addressLine1
     delete req.session.data.addressLine2
+    delete req.session.data.addressLine3
     delete req.session.data.addressTown
     delete req.session.data.addressCounty
     delete req.session.data.addressPostcode
     delete req.session.data.orgID
     delete req.session.data.companiesHouseResponse
     delete req.session.data.companiesHouseRegNumber
-    delete req.session.data.cqcResponse
-    delete req.session.data.cqcRegNumber
     delete req.session.data.vatRegisteredResponse
     delete req.session.data.vatRegNumber
+
+    const org = {
+            workplaceID: orgID,
+            status: "draft",
+            addressEvidence: "insuranceCert.pdf",
+            CHregistered: companiesHouseResponse,
+            CHNumber: companiesHouseRegNumber,
+            VATregistered: vatRegisteredResponse,
+            VATNumber: vatRegNumber,
+            numberOfClaims: 0,
+            name: orgName,
+            address: {
+                addressLine1,
+                addressLine2,
+                addressLine3,
+                addressTown,
+                addressCounty,
+                addressPostcode
+            },
+            bankDetails: null,
+            validGDL: false,
+            notes : [],
+            signatory: {
+            active: {        
+                    givenName: req.session.data.user.givenName,
+                    familyName: req.session.data.user.familyName,
+                    email: req.session.data.user.email,
+                    status: "active"
+                },  
+                inactive: []
+            },
+            "users": {
+                active: [],
+                inactive: [],
+                invited: []
+            }
+    }
+
+    const userOrg = {
+            workplaceID: orgID,
+            userType: "signatory",
+            jobTitle
+    }
+    upsertOrganization(req.session.data.organisations, org, editingID)
+    upsertOrganization(req.session.data.user.organisations, userOrg, editingID)
+
+}
+
+function upsertOrganization(orgList, newOrg, editingID) {
+  // Find the index of the existing organization by workplaceID
+  const index = orgList.findIndex(org => org.workplaceID === editingID);
+
+  if (index !== -1) {
+    // If it exists, replace it
+    orgList[index] = newOrg;
+  } else {
+    // If it doesn't exist, add it
+    orgList.push(newOrg);
+  }
+  
+  return orgList;
 }
 
 function clearSessionExcept(req, keepList) {
@@ -1144,4 +1230,97 @@ function clearSessionExcept(req, keepList) {
     });
 }
 
-module.exports = {clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}
+function checkOrgs(organisations, orgID) {
+
+    for (const org of organisations) {
+        if (org.workplaceID == orgID && (org.status == "active" || org.status == "submitted")) {
+            return org
+        }
+    }
+     return null
+}
+
+function userCheck(familyName, givenName, email, phone) {
+    const result = {}
+
+    if (familyName =="") {
+        result.familyName = "missing"
+    } else {
+        result.familyName = "valid"
+    }
+
+    if (givenName =="") {
+        result.givenName = "missing"
+    } else {
+        result.givenName = "valid"
+    }
+
+    if (email == "") {
+        result.email = "missing"
+    } else if (!(emailFormat(email))) {
+        result.email = "invalid"
+    } else if (email == "duplicate@duplicate.com") {
+        result.email = "duplicate"
+    } else {
+        result.email = "valid"
+    }
+
+    if (phone == "") {
+        result.phone = "missing"
+    } else if (!(validateUKPhoneNumber(phone))) {
+        result.phone = "invalid"
+    } else {
+        result.phone = "valid"
+    }
+    
+    
+    result.userValid = result.familyName == "valid" && result.givenName == "valid" && result.email == "valid" && result.phone == "valid"
+    return result
+}
+
+function addressCheck(addressLine1, addressLine2, addressLine3, town, county, postcode) {
+    const result = {}
+
+    if (addressLine1 == "") {
+        result.addressLine1 = "missing"
+    } else {
+        result.addressLine1 = "valid"
+    }
+
+    if (town =="") {
+        result.town = "missing"
+    } else {
+        result.town = "valid"
+    }
+
+    if (postcode == "") {
+        result.postcode = "missing"
+    } else if (!(isValidUKPostcode(postcode))) {
+        result.postcode = "invalid"
+    } else {
+        result.postcode = "valid"
+    }
+    
+    
+    result.addressValid = result.addressLine1 == "valid" && result.town == "valid" && result.postcode == "valid"
+    return result
+}
+
+function validateUKPhoneNumber(phoneNumber) {
+    const regex = /^(?:(?:\+44\s?|0)7\d{3}\s?\d{6}|(?:\+44\s?|0)[12358]\d{2,4}\s?\d{3,4}\s?\d{3,4})$/;
+    return regex.test(phoneNumber.trim());
+}
+
+function isValidUKPostcode(postcode) {
+  if (typeof postcode !== 'string') return false;
+
+  // Clean whitespace from edges
+  const trimmed = postcode.trim();
+
+  // Regular expression for standard UK postcode formats + GIR 0AA
+  const ukPostcodeRegex = /^([A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}|GIR\s*0AA)$/i;
+
+  return ukPostcodeRegex.test(trimmed);
+}
+
+module.exports = {addressCheck, userCheck, checkOrgs, clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}

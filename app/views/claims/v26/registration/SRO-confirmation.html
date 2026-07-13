@@ -7,7 +7,7 @@
 
 {% block beforeContent %}
 <div >
-    <a href="before-you-start" class="govuk-back-link">Back</a>
+    <a href="org-name" class="govuk-back-link">Back</a>
 </div>
 {% endblock %}
 
@@ -24,10 +24,8 @@
             <div class="govuk-error-summary__body">
               <ul class="govuk-list govuk-error-summary__list">
                 <li>
-                  <a href="#jobTitle">
-                    {% if data.submitError %}
+                  <a href="#sroError">
                         You must select whether you are the Senior Responsible Officer (SRO)
-                    {% endif %}
                   </a>
                 </li>
               </ul>
@@ -41,14 +39,14 @@
                 <fieldset class="govuk-fieldset" aria-describedby="confirmation-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                     <h1 class="govuk-fieldset__heading">
-                        Are you the Senior Responsible Officer (SRO) for the organisation you want to register?
+                        Are you the Senior Responsible Officer (SRO) for {{data.orgName}}?
                     </h1>
                     </legend>
                     <div id="confirmation-hint" class="govuk-hint">
                     The SRO is a senior member of staff who takes responsibility for ensuring that your organisation follows all the scheme’s legal requirements and submits accurate, non-fraudulent claims. Only the SRO can register your organisation with this service.
                     </div>
                     {% if data.submitError %}
-                        <p id="workplace-id-error" class="govuk-error-message">
+                        <p id="sroError" class="govuk-error-message">
                             <span class="govuk-visually-hidden">Error:</span> Select whether you are the Senior Responsible Officer (SRO) 
                         </p>
                     {% endif %}

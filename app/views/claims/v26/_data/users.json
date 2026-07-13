@@ -7,37 +7,37 @@
         "description": "Roy is a user for many organisations covering every state an organisations can be in. He is a user of the following organsiations:",
         "organisations": [
             {
-                "orgID": "A02944934",
+                "workplaceID": "A02944934",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             },
             {
-                "orgID": "B13299931",
+                "workplaceID": "B13299931",
                 "userType": "submitter",
                 "jobTitle": "Senior manager"
             },
             {
-                "orgID": "F26738594",
+                "workplaceID": "F26738594",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             },
             {
-                "orgID": "D26738495",
+                "workplaceID": "D26738495",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             },
             {
-                "orgID": "C7284934",
+                "workplaceID": "C7284934",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             },
             {
-                "orgID": "G91371231",
+                "workplaceID": "G91371231",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             },
             {
-                "orgID": "G91774723",
+                "workplaceID": "G91774723",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             }
@@ -51,7 +51,7 @@
         "description": "Cynthia is a user of one organisations that is currently active and she is the SRO. She is a user of the following organsiation:",
         "organisations": [
             {
-                "orgID": "D76397203",
+                "workplaceID": "D76397203",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             }
@@ -65,7 +65,7 @@
         "description": "Valerie is currently in the processing of completeing the registration details for one organsiation. She is a user of the following organsiations:",
         "organisations": [
             {
-                "orgID": "F26738594",
+                "workplaceID": "F26738594",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             }
@@ -87,7 +87,7 @@
         "description": "",
         "organisations": [
             {
-                "orgID": "F15904728",
+                "workplaceID": "F15904728",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             }
@@ -101,7 +101,7 @@
         "description": "",
         "organisations": [
             {
-                "orgID": "F84625987",
+                "workplaceID": "F84625987",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             }
@@ -115,7 +115,7 @@
         "description": "",
         "organisations": [
             {
-                "orgID": "B52698456",
+                "workplaceID": "B52698456",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             }
@@ -129,7 +129,7 @@
         "description": "",
         "organisations": [
             {
-                "orgID": "B52698456",
+                "workplaceID": "B52698456",
                 "userType": "submitter",
                 "jobTitle": "Senior manager"
             }

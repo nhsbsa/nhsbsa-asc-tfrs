@@ -53,8 +53,9 @@
   <div class="govuk-grid-column-two-thirds">
     <p class="govuk-body">This can be one of the following:</p>
       <ul class="govuk-list govuk-list--bullet">
-            <li>a recent council tax bill</li>
+            <li>a recent business rates  bill</li>
             <li>a recent utility bill</li>
+            <li>a recent council tax bill</li>
             <li>business premises lease agreement</li>
             <li>your organisation's public liability insurance certificate</li>
         </ul>
@@ -81,9 +82,7 @@
         class="govuk-file-upload {% if data.errorFileTooBig or data.errorWrongFileFormat  or data.errorFileMissing %} govuk-file-upload--error {% endif %}"
         id="evidenceFile" name="evidenceFile" type="file" aria-describedby="evidenceFile-error">
     </div>
-    <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to
-        update file upload progress</a>
-      </p>
+    <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
 
     <form action="../validate-address-evidence" method="post" novalidate>
         <div class="govuk-button-group">

@@ -14,7 +14,7 @@
           {% if orgDetails.status == "active" %}
             <a href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}" class="govuk-link">Manage claims</a>
               {% elif orgDetails.status == "draft" and orgDetails.userRole == "signatory"%}
-                  <a href="#" class="govuk-link">Continue registration</a>
+                  <a href="./load-registration?orgID={{orgDetails.workplaceID}}" class="govuk-link">Continue registration</a>
 {#               {% elif (orgDetails.status == "submitted" or orgDetails.status == "rejected") and orgDetails.userRole == "signatory"%}
                   <a href="#" class="govuk-link">View registration details</a> #}
               {% endif %}
@@ -36,7 +36,7 @@
           Address
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ orgDetails.address[0] }}, {{ orgDetails.address[1] }}, {{ orgDetails.address[2] }}
+          {{ orgDetails.address | formatAddress("comma") }}
         </dd>
       </div>
       <div class="govuk-summary-list__row">
