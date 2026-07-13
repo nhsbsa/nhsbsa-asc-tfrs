@@ -25,9 +25,9 @@
                 <li>
                   <a href="#orgName">
                     {% if data.companiesHouseRegNumberEmptyError %}
-                    The Companies House number must not be empty
+                      Enter Companies House registration number
                     {% elif data.companiesHouseRegNumberInvalid %}
-                    The Companies House number must not include invalid characters
+                      Enter a valid Companies House registration number
                     {% endif %}
                   </a>
                 </li>
@@ -49,9 +49,9 @@
                     <p id="companiesHouseRegNumber" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
                         {% if data.companiesHouseRegNumberEmptyError %}
-                        The Companies House registration number must not be empty
+                          Enter Companies House registration number
                         {% elif data.companiesHouseRegNumberInvalid %}
-                        The Companies House registration number must not include invalid characters
+                          Enter a valid Companies House registration number
                         {% endif %}
                     </p>
                     {% endif %}

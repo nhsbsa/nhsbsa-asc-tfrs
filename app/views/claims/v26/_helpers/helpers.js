@@ -1278,9 +1278,49 @@ function userCheck(familyName, givenName, email, phone) {
     return result
 }
 
+function addressCheck(addressLine1, addressLine2, addressLine3, town, county, postcode) {
+    const result = {}
+
+    if (addressLine1 == "") {
+        result.addressLine1 = "missing"
+    } else {
+        result.addressLine1 = "valid"
+    }
+
+    if (town =="") {
+        result.town = "missing"
+    } else {
+        result.town = "valid"
+    }
+
+    if (postcode == "") {
+        result.postcode = "missing"
+    } else if (!(isValidUKPostcode(postcode))) {
+        result.postcode = "invalid"
+    } else {
+        result.postcode = "valid"
+    }
+    
+    
+    result.addressValid = result.addressLine1 == "valid" && result.town == "valid" && result.postcode == "valid"
+    return result
+}
+
 function validateUKPhoneNumber(phoneNumber) {
     const regex = /^(?:(?:\+44\s?|0)7\d{3}\s?\d{6}|(?:\+44\s?|0)[12358]\d{2,4}\s?\d{3,4}\s?\d{3,4})$/;
     return regex.test(phoneNumber.trim());
 }
 
-module.exports = {userCheck, checkOrgs, clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}
+function isValidUKPostcode(postcode) {
+  if (typeof postcode !== 'string') return false;
+
+  // Clean whitespace from edges
+  const trimmed = postcode.trim();
+
+  // Regular expression for standard UK postcode formats + GIR 0AA
+  const ukPostcodeRegex = /^([A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}|GIR\s*0AA)$/i;
+
+  return ukPostcodeRegex.test(trimmed);
+}
+
+module.exports = {addressCheck, userCheck, checkOrgs, clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}

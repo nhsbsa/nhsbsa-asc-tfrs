@@ -24,10 +24,10 @@
               <ul class="govuk-list govuk-error-summary__list">
                 <li>
                   <a href="#workplaceID">
-                    {% if data.workplaceIDEmpty %}
-                    The workplace ID must not be empty
+                     {% if data.workplaceIDEmpty %}
+                        Enter workplace ID
                     {% elif data.workplaceIDInvalid %}
-                    The workplace ID must not include invalid characters
+                        Enter a valid workplace ID
                     {% endif %}
                   </a>
                 </li>
@@ -53,7 +53,12 @@
                     </div>
                     {% if data.workplaceIDEmpty or data.workplaceIDInvalid %}
                     <p id="workplace-id-error" class="govuk-error-message">
-                        <span class="govuk-visually-hidden">Error:</span> Enter a valid workplace ID
+                        <span class="govuk-visually-hidden">Error:</span> 
+                        {% if data.workplaceIDEmpty %}
+                            Enter workplace ID
+                        {% elif data.workplaceIDInvalid %}
+                            Enter a valid workplace ID
+                        {% endif %}
                     </p>
                     {% endif %}
                     <input

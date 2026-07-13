@@ -1809,6 +1809,26 @@ addFilter('userErrorMessage', function (submitError) {
     return errorSummaryStr
 }, { renderAsHtml: true });
 
+addFilter('addressErrorMessage', function (submitError) {
+    let errorSummaryStr = ''
+
+    if (submitError.addressLine1 == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#address-line-1-error">Enter address line 1, typically the building and street</a></li>')
+    }
+    
+    if (submitError.town == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#address-town-error">Enter town or city</a></li>')
+    }
+
+    if (submitError.postcode == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#address-postcode-error">Enter postcode</a></li>')
+    } else if (submitError.postcode == "invalid") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#address-postcode-error">Enter a full UK postcode</a></li>')
+    }
+
+    return errorSummaryStr
+}, { renderAsHtml: true });
+
 addFilter('formatAddress', function (addressObj, separatorType = 'line') {
     // Define the keys in the order you want them to appear
     const addressKeys = [
