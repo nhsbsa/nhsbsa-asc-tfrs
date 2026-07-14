@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-three-quarters">
+    <div class="govuk-grid-column-two-thirds">
         {% if data.banner.action == "saveSuccess" %}
             <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
 
@@ -22,10 +22,55 @@
 
             </div>
         {% endif %}
-
-        <h1 class="govuk-heading-xl">My organisations</h1>
         
+        <h1 class="govuk-heading-xl">My account</h1>
+        <h2 class="govuk-heading-l">Account details</h2>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                First name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                {{data.user.givenName}}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> first name</span></a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Last name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                {{data.user.familyName}}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> last name</span></a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                <dt class="govuk-summary-list__key">
+                Email
+                </dt>
+                <dd class="govuk-summary-list__value">
+                {{data.user.email}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Phone number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                01234567890
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> phone number</span></a>
+                </dd>
+            </div>
+            </dl>
 
+        <h2 class="govuk-heading-l">Registered organisations</h2>
+        
         {% if orgList.active.length == 0 and orgList.submitted.length == 0 and orgList.draft.length == 0 and orgList.rejected.length == 0 and orgList.inactive.length == 0%}
             <div class="govuk-warning-text">
                 <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
@@ -41,36 +86,33 @@
         </a>
 
         {% if orgList.active.length > 0 %}
-            {# <h1 class="govuk-heading-l">Active</h1> #}
             {% for workplaceID in orgList.active %}
                 {% set orgDetails = workplaceID | findOrg(data.organisations) %}
                     {% include "./_components/org-card.html" %}
             {% endfor %}
+        {% else %}
+            <p class="govuk-body">You currently don't have any registered organisations.</p>
         {% endif %}
+
+        <h2 class="govuk-heading-l">Registrations</h2>
+
         {% if orgList.submitted.length > 0 %}
-            {# <h1 class="govuk-heading-l">Awaiting approval</h1> #}
+            <h3 class="govuk-heading-m">Awaiting approval</h3>
             {% for workplaceID in orgList.submitted %}
                 {% set orgDetails = workplaceID | findOrg(data.organisations) %}
                     {% include "./_components/org-card.html" %}
             {% endfor %}
         {% endif %}
         {% if orgList.draft.length > 0 %}
-            {# <h1 class="govuk-heading-l">Draft</h1> #}
+            <h3 class="govuk-heading-m">Draft</h3>
             {% for workplaceID in orgList.draft %}
                 {% set orgDetails = workplaceID | findOrg(data.organisations) %}
                     {% include "./_components/org-card.html" %}
             {% endfor %}
         {% endif %}
         {% if orgList.rejected.length > 0 %}
-            {# <h1 class="govuk-heading-l">Rejected</h1> #}
+            <h3 class="govuk-heading-m">Rejected</h3>
             {% for workplaceID in orgList.rejected %}
-                {% set orgDetails = workplaceID | findOrg(data.organisations) %}
-                    {% include "./_components/org-card.html" %}
-            {% endfor %}
-        {% endif %}
-        {% if orgList.inactive.length > 0 %}
-            {# <h1 class="govuk-heading-l">Inactive</h1> #}
-            {% for workplaceID in orgList.inactive %}
                 {% set orgDetails = workplaceID | findOrg(data.organisations) %}
                     {% include "./_components/org-card.html" %}
             {% endfor %}

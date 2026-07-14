@@ -2,7 +2,6 @@
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">
       {{orgDetails.name}}
-      <br><span class="govuk-!-font-weight-regular">({{orgDetails.workplaceID}})</span>
     </h2>
     <ul class="govuk-summary-card__actions govuk-summary-card__actions-flex-height">
       {% if orgDetails.userRole == "signatory" and orgDetails.status == "active" %}
@@ -15,8 +14,8 @@
             <a href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}" class="govuk-link">Manage claims</a>
               {% elif orgDetails.status == "draft" and orgDetails.userRole == "signatory"%}
                   <a href="./load-registration?orgID={{orgDetails.workplaceID}}" class="govuk-link">Continue registration</a>
-{#               {% elif (orgDetails.status == "submitted" or orgDetails.status == "rejected") and orgDetails.userRole == "signatory"%}
-                  <a href="#" class="govuk-link">View registration details</a> #}
+              {% elif (orgDetails.status == "submitted" or orgDetails.status == "rejected") and orgDetails.userRole == "signatory"%}
+                  <a href="#" class="govuk-link">View registration details</a>
               {% endif %}
         </li>
     </ul>
@@ -25,10 +24,10 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Status
+          Workplace ID
         </dt>
         <dd class="govuk-summary-list__value">
-          {{orgDetails.status | orgTag}}
+          {{orgDetails.workplaceID}}
         </dd>
       </div>
       <div class="govuk-summary-list__row">
@@ -39,22 +38,16 @@
           {{ orgDetails.address | formatAddress("comma") }}
         </dd>
       </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          My role
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{orgDetails.userRole | roleType}}
-        </dd>
-      </div>
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          Senior Responsible Officer
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{orgDetails.signatory.active.givenName}} {{orgDetails.signatory.active.familyName}}{% if orgDetails.userRole == "signatory" %} (you){% endif %}
-        </dd>
-      </div>
+      {% if orgDetails.status == "active" %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            My role
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{orgDetails.userRole | roleType}}
+          </dd>
+        </div>
+      {% endif %}
     </dl>
   </div>
 </div>

@@ -1830,7 +1830,6 @@ addFilter('addressErrorMessage', function (submitError) {
 }, { renderAsHtml: true });
 
 addFilter('formatAddress', function (addressObj, separatorType = 'line') {
-    // Define the keys in the order you want them to appear
     const addressKeys = [
         'addressLine1',
         'addressLine2',
@@ -1840,13 +1839,17 @@ addFilter('formatAddress', function (addressObj, separatorType = 'line') {
         'addressPostcode'
     ];
 
-    // Determine the delimiter based on the passed variable
-    const delimiter = separatorType === 'comma' ? ', ' : '<br>';
+    const isComma = separatorType === 'comma';
+    const delimiter = isComma ? ', ' : '<br>';
 
-    // Map the keys to values, strip out nulls/empties, and join
     return addressKeys
         .map(key => addressObj[key])
         .filter(value => value !== null && value !== undefined && String(value).trim() !== '')
+        .map(value => {
+            const trimmed = String(value).trim();
+            // Replace spaces inside address lines with &nbsp; when comma separated
+            return isComma ? trimmed.replace(/ /g, '&nbsp;') : trimmed;
+        })
         .join(delimiter);
 
 }, { renderAsHtml: true });
