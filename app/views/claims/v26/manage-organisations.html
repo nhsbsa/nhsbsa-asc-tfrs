@@ -23,8 +23,7 @@
             </div>
         {% endif %}
         
-        <h1 class="govuk-heading-xl">My account</h1>
-        <h2 class="govuk-heading-l">Account details</h2>
+        <h1 class="govuk-heading-l">My account</h1>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -69,17 +68,7 @@
             </div>
             </dl>
 
-        <h2 class="govuk-heading-l">Registered organisations</h2>
-        
-        {% if orgList.active.length == 0 and orgList.submitted.length == 0 and orgList.draft.length == 0 and orgList.rejected.length == 0 and orgList.inactive.length == 0%}
-            <div class="govuk-warning-text">
-                <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                <strong class="govuk-warning-text__text">
-                    <span class="govuk-visually-hidden">Warning</span>
-                    You currently don't have any registered organisations.
-                </strong>
-            </div>
-        {% endif %}
+        <h2 class="govuk-heading-m">Registered organisations</h2>
 
         <a type="submit" class="govuk-button" data-module="govuk-button" href="registration/before-you-start">
             Register new organisation
@@ -91,31 +80,30 @@
                     {% include "./_components/org-card.html" %}
             {% endfor %}
         {% else %}
-            <p class="govuk-body">You currently don't have any registered organisations.</p>
+            <p class="govuk-body">You don't have any registered organisations yet.</p>
         {% endif %}
 
-        <h2 class="govuk-heading-l">Registrations</h2>
+        {% if orgList.submitted.length > 0 or orgList.draft.length > 0 or orgList.rejected.length > 0 %}
+            <h2 class="govuk-heading-m">Registrations in progress</h2>
 
-        {% if orgList.submitted.length > 0 %}
-            <h3 class="govuk-heading-m">Awaiting approval</h3>
-            {% for workplaceID in orgList.submitted %}
-                {% set orgDetails = workplaceID | findOrg(data.organisations) %}
-                    {% include "./_components/org-card.html" %}
-            {% endfor %}
-        {% endif %}
-        {% if orgList.draft.length > 0 %}
-            <h3 class="govuk-heading-m">Draft</h3>
-            {% for workplaceID in orgList.draft %}
-                {% set orgDetails = workplaceID | findOrg(data.organisations) %}
-                    {% include "./_components/org-card.html" %}
-            {% endfor %}
-        {% endif %}
-        {% if orgList.rejected.length > 0 %}
-            <h3 class="govuk-heading-m">Rejected</h3>
-            {% for workplaceID in orgList.rejected %}
-                {% set orgDetails = workplaceID | findOrg(data.organisations) %}
-                    {% include "./_components/org-card.html" %}
-            {% endfor %}
+            {% if orgList.submitted.length > 0 %}
+                {% for workplaceID in orgList.submitted %}
+                    {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                        {% include "./_components/org-card.html" %}
+                {% endfor %}
+            {% endif %}
+            {% if orgList.draft.length > 0 %}
+                {% for workplaceID in orgList.draft %}
+                    {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                        {% include "./_components/org-card.html" %}
+                {% endfor %}
+            {% endif %}
+            {% if orgList.rejected.length > 0 %}
+                {% for workplaceID in orgList.rejected %}
+                    {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                        {% include "./_components/org-card.html" %}
+                {% endfor %}
+            {% endif %}
         {% endif %}
     </div>
 </div>

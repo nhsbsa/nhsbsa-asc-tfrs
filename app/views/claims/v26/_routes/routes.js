@@ -1963,7 +1963,7 @@ router.get('/applyLearnerSort', function (req, res) {
 
 router.get('/change-organisation', function (req, res) {
   clearSessionExcept(req, [])
-  res.redirect('claims/v26/manage-organisations')
+  res.redirect('./manage-organisations')
 });
 
 router.get('/learner-previous-submissions-handler', function (req, res) {

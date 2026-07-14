@@ -1776,7 +1776,7 @@ addFilter('orgTag', function (statusID) {
     } else if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Submitted</strong>'
     } else if (statusID == 'draft') {
-        return '<strong class="govuk-tag govuk-tag--light-blue">Draft</strong>'
+        return '<strong class="govuk-tag govuk-tag--light-blue">Not yet submitted</strong>'
     } else {
         return '<strong class="govuk-tag govuk-tag--purple">Invalid Status</strong>'
     }
