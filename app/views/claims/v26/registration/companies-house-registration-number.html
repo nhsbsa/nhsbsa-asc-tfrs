@@ -25,9 +25,9 @@
                 <li>
                   <a href="#orgName">
                     {% if data.companiesHouseRegNumberEmptyError %}
-                    The Companies House number must not be empty
+                      Enter Companies House registration number
                     {% elif data.companiesHouseRegNumberInvalid %}
-                    The Companies House number must not include invalid characters
+                      Enter a valid Companies House registration number
                     {% endif %}
                   </a>
                 </li>
@@ -49,13 +49,13 @@
                     <p id="companiesHouseRegNumber" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
                         {% if data.companiesHouseRegNumberEmptyError %}
-                        The job title must not be empty
+                          Enter Companies House registration number
                         {% elif data.companiesHouseRegNumberInvalid %}
-                        The job title must not include invalid characters
+                          Enter a valid Companies House registration number
                         {% endif %}
                     </p>
                     {% endif %}
-                    <input class="govuk-input govuk-!-width-two-thirds {% if data.companiesHouseRegNumberEmptyError or  data.companiesHouseRegNumberInvalid %}govuk-input--error{% endif %}" aria-describedby="asc-wds-id-hint" id="orgName"
+                    <input class="govuk-input govuk-!-width-two-thirds {% if data.companiesHouseRegNumberEmptyError or  data.companiesHouseRegNumberInvalid %}govuk-input--error{% endif %}" aria-describedby="asc-wds-id-hint" id="companiesHouseRegNumber"
                         name="companiesHouseRegNumber" type="text" value="{{ data.companiesHouseRegNumber | default ('') }}">
                 </fieldset>
             </div>

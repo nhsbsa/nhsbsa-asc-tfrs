@@ -4,15 +4,9 @@
 {% if data.declarationSubmitError %}Error: {% endif %}Declaration — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
-{% block beforeContent %}
-<div >
-    <a href="check-answers" class="govuk-back-link">Back</a>
-</div>
-{% endblock %}
-
 {% block content %}
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
         {% if data.declarationSubmitError %}
         <div class="govuk-error-summary" data-module="govuk-error-summary">
             <div role="alert">
@@ -31,26 +25,31 @@
         {% endif %}
         <span class="govuk-caption-l">Register a new organisation</span>
         <h1 class="govuk-heading-l">Declaration</h1>
-    </div>
-    <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-body">Before you submit your application, you must confirm you have read both grant determination letters (GDLs) for the financial years 2025 to 2026 and 2026 to 2027 in the <a href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/learning-and-development-support-scheme-for-the-adult-social-care-workforce-a-guide-for-employers" class="govuk-link" target="_blank" rel="noreferrer noopener">guide for employers (opens in new tab)</a>. These set out, on behalf of the Secretary of State for Health and Social Care, the conditions that you must meet for claims to be paid.</p>
+
+        <p class="govuk-body">Where you are submitting claims for the financial year 2025 to 2026, the GDL for 2025 to 2026 will apply. Where you are submitting claims for the financial year 2026 to 2027, the GDL for 2026 to 2027 will apply.</p>
+
         <div class="govuk-warning-text">
             <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-            <strong class="govuk-warning-text__text">
+            <div class="govuk-warning-text__text">
                 <span class="govuk-visually-hidden">Warning</span>
-                <p><strong>I confirm that the information I have provided is correct.</strong></p>
-
-                <p><strong>I understand that it may be subject to:</strong></p>
-
-                <ul class="govuk-list govuk-list--bullet">
-                    <li><strong>verification checks</strong></li>
-                    <li><strong>audit review</strong></li>
-                    <li><strong>counter fraud checks</strong></li>
+                
+                <p class="govuk-body govuk-!-font-weight-bold">By submitting this application you confirm that:</p>
+                <ul class="govuk-list govuk-list--bullet govuk-!-font-weight-bold">
+                <li>the information you have provided is correct</li>
+                <li>you accept the conditions in both GDLs</li>
                 </ul>
 
-            </strong>
+                <p class="govuk-body govuk-!-font-weight-bold govuk-!-margin-top-4">You understand that the information you provide may be subject to:</p>
+                <ul class="govuk-list govuk-list--bullet govuk-!-font-weight-bold">
+                <li>verification checks</li>
+                <li>audit review</li>
+                <li>counter fraud checks</li>
+                </ul>
+
+            </div>
         </div>
-    </div>
-    <div class="govuk-grid-column-two-thirds">
+
         <form action="../registation-declaration" method="post" novalidate>
             <div class="govuk-button-group {% if data.declarationSubmitError %} govuk-form-group--error {% endif %}"
                 id="declare-checkbox">
@@ -76,8 +75,7 @@
                 <button type="submit" class="govuk-button" data-module="govuk-button">
                     Submit
                 </button>
-                <a class="govuk-link govuk-link--no-visited-state"
-                    href="./check-answers">Cancel</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="./check-answers">Cancel</a>
             </div>
         </form>
     </div>

@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, loadScenarioData, loadUserData, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty } = require('../_helpers/helpers.js');
+const { loadData, loadScenarioData, loadUserData, userCheck, checkEvidence, addressCheck, checkOrgs, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty } = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 
@@ -14,7 +14,7 @@ router.use('/claims/v26/backstop', require('../_backstop/backstop-routes.js'));
 router.post('/accountResponse', function (req, res) {
   const accountResponse = req.session.data.accountResponse
   delete req.session.data.accountResponse
-
+  delete req.session.data.missingOption
 
   if (accountResponse == "yes") {
     req.session.data.journey = 'signin'
@@ -23,7 +23,8 @@ router.post('/accountResponse', function (req, res) {
     req.session.data.journey = "creation"
     res.redirect('authentication/account-details')
   } else {
-    res.redirect('authentication/what-do-you-want-to-do?submitError=true')
+    req.session.data.missingOption = true
+    res.redirect('authentication/what-do-you-want-to-do')
   }
 });
 
@@ -38,7 +39,8 @@ router.post('/confirmationResponse', function (req, res) {
   } else if (confirmationResponse == "no") {
     res.redirect('registration/not-SRO')
   } else {
-    res.redirect('registration/sro-confirmation?submitError=true')
+    req.session.data.submitError = true
+    res.redirect('registration/sro-confirmation')
   }
 });
 
@@ -66,7 +68,11 @@ router.post('/detailsCorrectResponse', function (req, res) {
       res.redirect('registration/not-you')
     }
   } else {
-    saveRegistrationEnty(req)
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -91,40 +97,15 @@ router.post('/companiesHouseResponse', function (req, res) {
       if (change == "true") {
         res.redirect('registration/check-answers')
       } else {
-        res.redirect('registration/cqc-registered')
-      }
-    }
-  } else {
-    saveRegistrationEnty(req)
-    res.redirect('manage-organisations')
-  }
-});
-
-router.post('/cqcResponse', function (req, res) {
-  const cqcResponse = req.session.data.cqcResponse
-  delete req.session.data.cqcRadioMissing
-
-  const action = req.session.data.action
-  const change = req.session.data.change
-
-  delete req.session.data.action
-
-  if (action =="continue") {
-    if (cqcResponse == "" || cqcResponse == null) {
-      res.redirect('registration/cqc-registered?cqcRadioMissing=true')
-    } else if (cqcResponse == "Yes") {
-      res.redirect('registration/cqc-number')
-    } else if (cqcResponse == "No") {
-      delete req.session.data.change
-      delete req.session.data.cqcRegNumber
-      if (change == "true") {
-        res.redirect('registration/check-answers')
-      } else {
         res.redirect('registration/vat-registered')
       }
     }
   } else {
-    saveRegistrationEnty(req)
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -149,7 +130,11 @@ router.post('/vatResponse', function (req, res) {
       res.redirect('registration/check-answers')
     }
   } else {
-    saveRegistrationEnty(req)
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -1377,36 +1362,32 @@ router.post('/validate-org-name', function (req, res) {
   delete req.session.data.orgNameInvalid
   delete req.session.data['declarationSubmitError'];
   const orgName = req.session.data.orgName
-  const action = req.session.data.action
   const change = req.session.data.change
 
-  delete req.session.data.change  
-  delete req.session.data.action
+  delete req.session.data.change
 
-  if (action =="continue") {
-    if (orgName == "") {
-      res.redirect('registration/org-name?orgNameEmptyError=true')
-    } else if (true == true) {
-      if (change == "true") {
-        res.redirect('registration/check-answers')
-      } else {
-        res.redirect('registration/org-address')
-      }
+  if (orgName == "") {
+    req.session.data.orgNameEmptyError = true
+    res.redirect('registration/org-name')
+  } else if (true == true) {
+    if (change == "true") {
+      res.redirect('registration/check-answers')
     } else {
-      res.redirect('registration/org-name?orgNameInvalid=true')
+      res.redirect('registration/SRO-confirmation')
     }
   } else {
-    saveRegistrationEnty(req)
-    res.redirect('manage-organisations')
+    req.session.data.orgNameInvalid = true
+    res.redirect('registration/org-name')
   }
+
 });
 
 router.post('/validate-org-address', function (req, res) {
-  delete req.session.data.orgAddressEmptyError
-  delete req.session.data.orgAddressInvalid
+  delete req.session.data.submitError
   delete req.session.data['declarationSubmitError'];
   const addressLine1 = req.session.data.addressLine1
   const addressLine2 = req.session.data.addressLine2
+  const addressLine3 = req.session.data.addressLine3
   const town = req.session.data.addressTown
   const county = req.session.data.addressCounty
   const postcode = req.session.data.addressPostcode
@@ -1416,20 +1397,26 @@ router.post('/validate-org-address', function (req, res) {
   delete req.session.data.change 
   delete req.session.data.action
 
+  const result = addressCheck(addressLine1, addressLine2, addressLine3, town, county, postcode)
+
   if (action =="continue") {
-    if (addressLine1 == "" || town == "" || postcode == "") {
-      res.redirect('registration/org-address?orgAddressEmptyError=true')
-    } else if (true == true) {
+    if (result.addressValid) {
       if (change == "true") {
         res.redirect('registration/check-answers')
       } else {
+        req.session.data.evidenceAddressCount = "first"
         res.redirect('registration/org-address-evidence')
       }
     } else {
-      res.redirect('registration/org-address?orgAddressInvalid=true')
+      req.session.data.submitError = result
+      res.redirect('registration/org-address')
     }
   } else {
-    saveRegistrationEnty(req)
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 
@@ -1451,19 +1438,25 @@ router.post('/validate-job-title', function (req, res) {
 
   if (action =="continue") {
     if (jobTitle == "") {
-      res.redirect('registration/job-title?jobTitleEmptyError=true')
+      req.session.data.jobTitleEmptyError = true
+      res.redirect('registration/job-title')
     } else if (validCharactersRegex.test(jobTitle) == true) {
       if (change == "true") {
         res.redirect('registration/check-answers')
       } else {
-        res.redirect('registration/org-name')
+        res.redirect('registration/org-address')
       }
       
     } else {
-      res.redirect('registration/job-title?jobTitleInvalid=true')
+      req.session.data.jobTitleInvalid = true
+      res.redirect('registration/job-title')
     }
   } else {
-    saveRegistrationEnty(req)
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -1472,18 +1465,48 @@ router.post('/validate-address-evidence', function (req, res) {
   const action = req.session.data.action
   const change = req.session.data.change
 
+  delete req.session.data.submitError
   delete req.session.data.change
   delete req.session.data.action
 
+  const result = checkEvidence(req.session.data.type, req.session.data.evidenceFile)
+  console.log(result)
 
   if (action =="continue") {
-    if (change == "true") {
+    if (result.evidenceValid) {
+      const evidence = {
+            type: req.session.data.type,
+            evidence: "file" + req.session.data.evidenceAddressCount + ".pdf"
+          }
+      delete req.session.data.type
+      delete req.session.data.evidenceFile
+      switch(req.session.data.evidenceAddressCount) {
+        case "first":
+          req.session.data.firstEvidence = evidence
+          break;
+        case "second":
+          req.session.data.secondEvidence = evidence
+          break;
+      }
+      if (change == "true") {
+        delete req.session.data.evidenceAddressCount
         res.redirect('registration/check-answers')
       } else {
-        res.redirect('registration/asc-wds-id')
+        if (req.session.data.evidenceAddressCount == "first") {
+          req.session.data.evidenceAddressCount = "second"
+          res.redirect('registration/org-address-evidence')
+        } else {
+          delete req.session.data.evidenceAddressCount
+          res.redirect('registration/asc-wds-id')
+        }
       }
+    } else {
+      req.session.data.submitError = result
+      res.redirect('registration/org-address-evidence')
+    }
   } else {
-    saveRegistrationEnty(req)
+    saveRegistrationEnty(req, "draft")
+    req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1497,7 +1520,11 @@ router.post('/check-answer-confirmation', function (req, res) {
   if (action =="continue") {
     res.redirect('registration/declaration')
   } else {
-    saveRegistrationEnty(req)
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -1510,17 +1537,28 @@ router.post('/validate-workplaceID', function (req, res) {
 
   delete req.session.data.action
 
-  var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
+  const matchedOrg = checkOrgs(req.session.data.organisations, orgID)
+  var validCharactersRegex = /[a-g]\d{1,10}/gi;
+
   if (action =="continue") {
     if (orgID == "") {
-      res.redirect('registration/asc-wds-id?workplaceIDEmpty=true')
-    } else if (validCharactersRegex.test(orgID) == true) {
-      res.redirect('registration/is-this-you')
+      req.session.data.workplaceIDEmpty = true
+      res.redirect('registration/asc-wds-id')
+    } else if (validCharactersRegex.test(orgID) != true) {
+      req.session.data.workplaceIDInvalid = true
+      res.redirect('registration/asc-wds-id')
+    } else if (matchedOrg != null) {
+      req.session.data.org = matchedOrg
+      res.redirect('registration/workplace-id-already-onboarded')
     } else {
-      res.redirect('registration/asc-wds-id?workplaceIDInvalid=true')
+      res.redirect('registration/is-this-you')
     }
   } else {
-    saveRegistrationEnty(req)
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 
@@ -1545,42 +1583,17 @@ router.post('/validate-companies-house', function (req, res) {
       if (change == "true") {
         res.redirect('registration/check-answers')
       } else {
-        res.redirect('registration/cqc-registered')
+        res.redirect('registration/vat-registered')
       }
     } else {
       res.redirect('registration/companies-house-registration-number?companiesHouseRegNumberInvalid=true')
     }
   } else {
-    saveRegistrationEnty(req)
-    res.redirect('manage-organisations')
-  }
-});
-
-router.post('/validate-cqc', function (req, res) {
-  delete req.session.data.cqcRegNumberEmptyError
-  delete req.session.data.cqcRegNumberInvalid
-  const cqcRegNumber = req.session.data.cqcRegNumber
-  const action = req.session.data.action
-  const change = req.session.data.change
-
-  delete req.session.data.change
-  delete req.session.data.action
-
-  // var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
-  if (action =="continue") {
-    if (cqcRegNumber == "") {
-      res.redirect('registration/cqc-number?cqcRegNumberEmptyError=true')
-    } else if (true == true) {
-      if (change == "true") {
-        res.redirect('registration/check-answers')
-      } else {
-        res.redirect('registration/vat-registered')
-      }
-    } else {
-      res.redirect('registration/cqc-number?cqcRegNumberInvalid=true')
-    }
-  } else {
-    saveRegistrationEnty(req)
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -1611,24 +1624,12 @@ router.post('/validate-vat', function (req, res) {
       res.redirect('registration/vat-registration-number?vatRegNumberInvalid=true')
     }
   } else {
-    saveRegistrationEnty(req)
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
-  }
-});
-
-router.post('/declaration-confirmation', function (req, res) {
-  delete req.session.data.declarationSubmitError
-  const declarationConfirmed = req.session.data.declaration
-  if (declarationConfirmed != null) {
-    req.session.data.org.validGDL = true
-    if (req.session.data.org.bankDetails == null) {
-      res.redirect('account-setup/bank-details-question')
-    } else {
-      res.redirect('manage-claims-home?tabLocation=claims')
-    }
-  } else {
-    req.session.data.declarationSubmitError = 'true'
-    res.redirect('account-setup/declaration?declarationSubmitError=true')
   }
 });
 
@@ -1638,11 +1639,48 @@ router.post('/registation-declaration', function (req, res) {
 
   if (declarationConfirmed != null) {
     delete req.session.data.declarationConfirmed
-    res.redirect('registration/registration-submitted-confirmation')
+  req.session.data.regRef = saveRegistrationEnty(req, "submitted")
+  res.redirect('registration/registration-submitted-confirmation')
   } else {
     req.session.data.declarationSubmitError = 'true'
     res.redirect('registration/declaration?declarationSubmitError=true')
   }
+
+});
+
+router.get('/load-registration', function (req, res) {
+  
+  const regRef = req.session.data.regRef
+  delete req.session.data.regRef
+
+  const org = req.session.data.organisations.find(entry => entry.regRef === regRef);
+  const userOrg  = req.session.data.user.organisations.find(entry => entry.regRef === regRef);
+
+  req.session.data.jobTitle = userOrg.jobTitle
+  req.session.data.orgName = org.name
+  req.session.data.addressLine1 = org.address.addressLine1
+  req.session.data.addressLine2 = org.address.addressLine2
+  req.session.data.addressLine3 = org.address.addressLine3
+  req.session.data.addressTown = org.address.addressTown
+  req.session.data.addressCounty = org.address.addressCounty
+  req.session.data.addressPostcode = org.address.addressPostcode
+  req.session.data.firstEvidence = org.addressEvidence[0]
+  req.session.data.secondEvidence = org.addressEvidence[1]
+  req.session.data.orgID = org.workplaceID
+  if (org.CHregistered) {
+      req.session.data.companiesHouseResponse = "Yes"
+  } else if (!(org.CHregistered)) {
+      req.session.data.companiesHouseResponse = "No"
+  }
+  req.session.data.companiesHouseRegNumber = org.CHNumber
+  if (org.VATregistered) {
+      req.session.data.vatRegisteredResponse = "Yes"
+  } else if (!(org.VATregistered)) {
+      req.session.data.vatRegisteredResponse = "No"
+  }
+  req.session.data.vatRegNumber = org.VATNumber
+
+  res.redirect('registration/check-answers')
 });
 
 router.post('/new-declaration-confirmation', function (req, res) {
@@ -1655,7 +1693,7 @@ router.post('/new-declaration-confirmation', function (req, res) {
     res.redirect('manage-claims-home?tabLocation=claims')
   } else {
     req.session.data.declarationSubmitError = 'true'
-    res.redirect('account-setup/sign-new-gdl')
+    res.redirect('org-admin/sign-new-gdl')
   }
 });
 
@@ -1921,7 +1959,7 @@ router.get('/applyLearnerSort', function (req, res) {
 
 router.get('/change-organisation', function (req, res) {
   clearSessionExcept(req, [])
-  res.redirect('claims/v26/manage-organisations')
+  res.redirect('./manage-organisations')
 });
 
 router.get('/learner-previous-submissions-handler', function (req, res) {
@@ -1998,12 +2036,49 @@ router.get('/load-data', function (req, res) {
         res.redirect('manage-claims-home?tabLocation=claims')
       }
     } else {
-      res.redirect('account-setup/sign-new-gdl')
+      res.redirect('org-admin/sign-new-gdl')
     }
 
-  
-
 })
+
+router.post('/create-user', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+  const phone = req.session.data.phone
+  delete req.session.data.submitError
+
+  const user = {
+        journey: "self-serve",
+        givenName,
+        familyName,
+        email,
+        phone,
+        description: "",
+        organisations: []
+    }
+
+  const result = userCheck(familyName, givenName, email, phone)
+
+  if (result.userValid) {
+    req.session.data.user = user
+    delete req.session.data.familyName
+    delete req.session.data.givenName
+    delete req.session.data.email
+    delete req.session.data.phone
+    res.redirect('authentication/creation-link')
+  } else if (result.email == "duplicate") {
+    delete req.session.data.familyName
+    delete req.session.data.givenName
+    delete req.session.data.email
+    delete req.session.data.phone
+    req.session.data.user = user
+    res.redirect('authentication/existing-account')
+  } else {
+    req.session.data.submitError = result
+    res.redirect('authentication/account-details')
+  }
+});
 
 //generate data
 router.post('/generate-handler', function (req, res) {

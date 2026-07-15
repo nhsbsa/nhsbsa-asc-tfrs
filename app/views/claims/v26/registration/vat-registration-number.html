@@ -25,9 +25,9 @@
                 <li>
                   <a href="#orgName">
                     {% if data.vatRegNumberEmptyError %}
-                    The VAT registration number must not be empty
+                      Enter VAT registration number
                     {% elif data.vatRegNumberInvalid %}
-                    The VAT registration number must not include invalid characters
+                      Enter a valid VAT registration number
                     {% endif %}
                   </a>
                 </li>
@@ -49,9 +49,9 @@
                     <p id="vatRegNumber" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
                         {% if data.vatRegNumberEmptyError %}
-                        The VAT registration number must not be empty
+                          Enter VAT registration number
                         {% elif data.vatRegNumberInvalid %}
-                        The VAT registration number must not include invalid characters
+                          Enter a valid VAT registration number
                         {% endif %}
                     </p>
                     {% endif %}
