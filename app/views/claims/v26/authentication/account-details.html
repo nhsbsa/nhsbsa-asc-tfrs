@@ -40,7 +40,7 @@
                     <span class="govuk-visually-hidden">Error:</span> Enter a first name
                 </p>
                 {% endif %}
-                <input class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.givenName == 'missing' %} govuk-input--error {% endif %}" id="givenName" name="givenName" type="text" spellcheck="false" autocomplete="name" value="{{givenName}}">
+                <input class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.givenName == 'missing' %} govuk-input--error {% endif %}" id="givenName" name="givenName" type="text" spellcheck="false" autocomplete="name" value="{{ data.givenName | default ('') }}">
             </div>
             <div
                 class="govuk-form-group {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
@@ -52,7 +52,7 @@
                     <span class="govuk-visually-hidden">Error:</span> Enter a last name
                 </p>
                 {% endif %}
-                <input class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.familyName == 'missing' %} govuk-input--error {% endif %}" id="familyName" name="familyName" type="text" spellcheck="false" autocomplete="name" value="{{ familyName }}">
+                <input class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.familyName == 'missing' %} govuk-input--error {% endif %}" id="familyName" name="familyName" type="text" spellcheck="false" autocomplete="name" value="{{ data.familyName | default ('') }}">
             </div>
             <div
                 class="govuk-form-group {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-form-group--error {% endif %}">
@@ -69,7 +69,7 @@
                     {% endif %}
                 </p>
                 {% endif %}
-                <input class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-input--error  {% endif %}" id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint" autocomplete="email" value="{{ email}}">
+                <input class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-input--error  {% endif %}" id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint" autocomplete="email" value="{{ data.email | default ('') }}">
             </div>
             <div class="govuk-form-group {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.email == 'missing' or data.submitError.email == 'invalid') %} govuk-form-group--error {% endif %}">
                 <label class="govuk-label govuk-label--m" for="phone">
@@ -85,7 +85,7 @@
                     {% endif %}
                 </p>
                 {% endif %}
-                <input class="govuk-input govuk-input--width-10 {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.phone == 'missing' or data.submitError.phone == 'invalid') %} govuk-input--error  {% endif %}" id="phone" name="phone" type="phone" spellcheck="false" aria-describedby="phone-hint" autocomplete="phone" value="{{ phone}}">
+                <input class="govuk-input govuk-input--width-10 {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.phone == 'missing' or data.submitError.phone == 'invalid') %} govuk-input--error  {% endif %}" id="phone" name="phone" type="phone" spellcheck="false" aria-describedby="phone-hint" autocomplete="phone" value="{{ data.phone | default ('') }}">
             </div>
 
             <h2 class="govuk-heading-m">What happens next</h2>

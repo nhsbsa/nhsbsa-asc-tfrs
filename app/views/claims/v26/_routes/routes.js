@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, loadScenarioData, loadUserData, userCheck, addressCheck, checkOrgs, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty } = require('../_helpers/helpers.js');
+const { loadData, loadScenarioData, loadUserData, userCheck, checkEvidence, addressCheck, checkOrgs, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty } = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 
@@ -72,7 +72,7 @@ router.post('/detailsCorrectResponse', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req)
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -105,7 +105,7 @@ router.post('/companiesHouseResponse', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req)
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -134,7 +134,7 @@ router.post('/vatResponse', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req)
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -1404,13 +1404,11 @@ router.post('/validate-org-address', function (req, res) {
       if (change == "true") {
         res.redirect('registration/check-answers')
       } else {
+        req.session.data.evidenceAddressCount = "first"
         res.redirect('registration/org-address-evidence')
       }
     } else {
       req.session.data.submitError = result
-      if (result.postcode == "invalid") {
-        req.session.data.addressPostcode = "Not a postcode"
-      }
       res.redirect('registration/org-address')
     }
   } else {
@@ -1418,7 +1416,7 @@ router.post('/validate-org-address', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req)
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 
@@ -1458,7 +1456,7 @@ router.post('/validate-job-title', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req)
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -1467,19 +1465,48 @@ router.post('/validate-address-evidence', function (req, res) {
   const action = req.session.data.action
   const change = req.session.data.change
 
+  delete req.session.data.submitError
   delete req.session.data.change
   delete req.session.data.action
 
+  const result = checkEvidence(req.session.data.type, req.session.data.evidenceFile)
+  console.log(result)
 
   if (action =="continue") {
-    if (change == "true") {
+    if (result.evidenceValid) {
+      const evidence = {
+            type: req.session.data.type,
+            evidence: "file" + req.session.data.evidenceAddressCount + ".pdf"
+          }
+      delete req.session.data.type
+      delete req.session.data.evidenceFile
+      switch(req.session.data.evidenceAddressCount) {
+        case "first":
+          req.session.data.firstEvidence = evidence
+          break;
+        case "second":
+          req.session.data.secondEvidence = evidence
+          break;
+      }
+      if (change == "true") {
+        delete req.session.data.evidenceAddressCount
         res.redirect('registration/check-answers')
       } else {
-        res.redirect('registration/asc-wds-id')
+        if (req.session.data.evidenceAddressCount == "first") {
+          req.session.data.evidenceAddressCount = "second"
+          res.redirect('registration/org-address-evidence')
+        } else {
+          delete req.session.data.evidenceAddressCount
+          res.redirect('registration/asc-wds-id')
+        }
       }
+    } else {
+      req.session.data.submitError = result
+      res.redirect('registration/org-address-evidence')
+    }
   } else {
-    saveRegistrationEnty(req)
-req.session.data.banner = "saveSuccess"
+    saveRegistrationEnty(req, "draft")
+    req.session.data.banner = "saveSuccess"
     res.redirect('manage-organisations')
   }
 });
@@ -1497,7 +1524,7 @@ router.post('/check-answer-confirmation', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req)
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -1531,7 +1558,7 @@ router.post('/validate-workplaceID', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req)
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 
@@ -1566,40 +1593,7 @@ router.post('/validate-companies-house', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req)
-    res.redirect('manage-organisations')
-  }
-});
-
-router.post('/validate-cqc', function (req, res) {
-  delete req.session.data.cqcRegNumberEmptyError
-  delete req.session.data.cqcRegNumberInvalid
-  const cqcRegNumber = req.session.data.cqcRegNumber
-  const action = req.session.data.action
-  const change = req.session.data.change
-
-  delete req.session.data.change
-  delete req.session.data.action
-
-  // var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
-  if (action =="continue") {
-    if (cqcRegNumber == "") {
-      res.redirect('registration/cqc-number?cqcRegNumberEmptyError=true')
-    } else if (true == true) {
-      if (change == "true") {
-        res.redirect('registration/check-answers')
-      } else {
-        res.redirect('registration/vat-registered')
-      }
-    } else {
-      res.redirect('registration/cqc-number?cqcRegNumberInvalid=true')
-    }
-  } else {
-    req.session.data.banner = {
-      action: "saveSuccess",
-      orgName: req.session.data.orgName
-    } 
-    saveRegistrationEnty(req)
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -1634,7 +1628,7 @@ router.post('/validate-vat', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req)
+    saveRegistrationEnty(req, "draft")
     res.redirect('manage-organisations')
   }
 });
@@ -1645,11 +1639,13 @@ router.post('/registation-declaration', function (req, res) {
 
   if (declarationConfirmed != null) {
     delete req.session.data.declarationConfirmed
-    res.redirect('registration/registration-submitted-confirmation')
+  req.session.data.regRef = saveRegistrationEnty(req, "submitted")
+  res.redirect('registration/registration-submitted-confirmation')
   } else {
     req.session.data.declarationSubmitError = 'true'
-    res.redirect('registration/declaration')
+    res.redirect('registration/declaration?declarationSubmitError=true')
   }
+
 });
 
 router.get('/load-registration', function (req, res) {
@@ -1963,7 +1959,7 @@ router.get('/applyLearnerSort', function (req, res) {
 
 router.get('/change-organisation', function (req, res) {
   clearSessionExcept(req, [])
-  res.redirect('claims/v26/manage-organisations')
+  res.redirect('./manage-organisations')
 });
 
 router.get('/learner-previous-submissions-handler', function (req, res) {
@@ -2064,14 +2060,14 @@ router.post('/create-user', function (req, res) {
 
   const result = userCheck(familyName, givenName, email, phone)
 
-  if (result.signatoryValid) {
+  if (result.userValid) {
     req.session.data.user = user
     delete req.session.data.familyName
     delete req.session.data.givenName
     delete req.session.data.email
     delete req.session.data.phone
-    res.redirect('authentication/account-details')
-  } else if (result.email = "duplicate") {
+    res.redirect('authentication/creation-link')
+  } else if (result.email == "duplicate") {
     delete req.session.data.familyName
     delete req.session.data.givenName
     delete req.session.data.email

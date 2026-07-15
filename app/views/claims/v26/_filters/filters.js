@@ -1764,6 +1764,48 @@ addFilter('generateUserOrgList', function (user, organisations) {
     return orgList
 })
 
+addFilter('generateMissingActionOrgs', function (activeOrganisations, organisations, type) {
+    const orgList = []
+
+    for (const activeOrg of activeOrganisations) {
+        const org = organisations.find(entry => entry.workplaceID === activeOrg);
+        if (type == "bank") {
+            if (org.bankDetails == null) {
+                orgList.push(org.workplaceID)
+            }
+        } else if (type == "gdl") {
+            if (org.validGDL == false) {
+                orgList.push(org.workplaceID)
+            }
+        }
+    }
+
+    return orgList
+})
+
+addFilter('evidenceType', function (type) {
+
+    switch(type) {
+        case "businessratesbill":
+            return "Business rates  bill"
+        case "utilitybill":
+            return "Utility bill"
+            break;
+        case "counciltaxbill":
+            return "Council tax bill"
+            break;
+        case "businessleaseagreement":
+            return "Business premises lease agreement"
+            break;
+        case "insurancecertificate":
+            return "Public liability insurance certificate"
+            break;
+        default:
+           return "Error"
+    }
+
+})
+
 addFilter('orgTag', function (statusID) {
     var statusName = null
 
@@ -1776,7 +1818,7 @@ addFilter('orgTag', function (statusID) {
     } else if (statusID == 'submitted') {
         return '<strong class="govuk-tag govuk-tag--blue">Submitted</strong>'
     } else if (statusID == 'draft') {
-        return '<strong class="govuk-tag govuk-tag--light-blue">Draft</strong>'
+        return '<strong class="govuk-tag govuk-tag--light-blue">Not yet submitted</strong>'
     } else {
         return '<strong class="govuk-tag govuk-tag--purple">Invalid Status</strong>'
     }
@@ -1830,7 +1872,6 @@ addFilter('addressErrorMessage', function (submitError) {
 }, { renderAsHtml: true });
 
 addFilter('formatAddress', function (addressObj, separatorType = 'line') {
-    // Define the keys in the order you want them to appear
     const addressKeys = [
         'addressLine1',
         'addressLine2',
@@ -1840,13 +1881,35 @@ addFilter('formatAddress', function (addressObj, separatorType = 'line') {
         'addressPostcode'
     ];
 
-    // Determine the delimiter based on the passed variable
-    const delimiter = separatorType === 'comma' ? ', ' : '<br>';
+    const isComma = separatorType === 'comma';
+    const delimiter = isComma ? ', ' : '<br>';
 
-    // Map the keys to values, strip out nulls/empties, and join
     return addressKeys
         .map(key => addressObj[key])
         .filter(value => value !== null && value !== undefined && String(value).trim() !== '')
+        .map(value => {
+            const trimmed = String(value).trim();
+            // Replace spaces inside address lines with &nbsp; when comma separated
+            return isComma ? trimmed.replace(/ /g, '&nbsp;') : trimmed;
+        })
         .join(delimiter);
+
+}, { renderAsHtml: true });
+
+addFilter('breakUpEmail', function (email, breakEvery = 6) {
+    if (!email || !email.includes('@')) {
+    return email;
+    }
+
+    // Split into local part (e.g., "communications") and domain (e.g., "llanfair...gov.uk")
+    const [localPart, ...domainParts] = email.split('@');
+    const domain = domainParts.join('@'); // Handles edge cases if multiple @ exist
+
+    // Insert <wbr> every 'breakEvery' characters in the domain
+    const regex = new RegExp(`.{1,${breakEvery}}`, 'g');
+    const formattedDomain = domain.match(regex).join('<wbr>');
+
+    // Combine into the required GOV.UK HTML structure
+    return `<span class="govuk-!-text-break-word">${localPart}@<wbr>${formattedDomain}</span>`;
 
 }, { renderAsHtml: true });

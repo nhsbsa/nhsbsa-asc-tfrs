@@ -54,7 +54,7 @@
               Organisation address
             </dt>
             <dd class="govuk-summary-list__value">
-              {{data.addressLine1}}{% if data.addressLine2 != "" and data.addressLine2 != null %}<br>{{data.addressLine2}}{% endif %}{% if data.addressLine3 != "" and data.addressLine3 != null %}<br>{{data.addressLine3}}{% endif %}<br>{{data.addressTown}}<br>{{data.addressCounty}}<br>{{data.addressPostcode}}
+              {{data.addressLine1}}{% if data.addressLine2 != "" and data.addressLine2 != null %}<br>{{data.addressLine2}}{% endif %}{% if data.addressLine3 != "" and data.addressLine3 != null %}<br>{{data.addressLine3}}{% endif %}<br>{{data.addressTown}}{% if data.addressCounty != "" and data.addressCounty != null %}<br>{{data.addressCounty}}{% endif %}<br>{{data.addressPostcode}}
             </dd>
             <dd class="govuk-summary-list__actions">
               <a class="govuk-link" href="org-address?change=true">Change<span class="govuk-visually-hidden"> organisation address</span></a>
@@ -62,13 +62,26 @@
           </div>
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Organisation proof of address
+              First proof of organisation address
             </dt>
             <dd class="govuk-summary-list__value">
-              <a class="govuk-link" href="/public/images/{{evidence}}" target="_blank">Utility-bill.pdf (opens in new tab)</a>
+              {{data.firstEvidence.type | evidenceType}}
+              <br><a class="govuk-link" href="/public/images/{{data.firstEvidence.evidence}}" target="_blank">{{data.firstEvidence.evidence}} (opens in new tab)</a>
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="org-address-evidence?change=true">Change<span class="govuk-visually-hidden"> organisation proof of address</span></a>
+              <a class="govuk-link" href="org-address-evidence?change=true&evidenceAddressCount=first">Change<span class="govuk-visually-hidden"> second proof of organisation address</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Second proof of organisation address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.secondEvidence.type | evidenceType}}
+              <br><a class="govuk-link" href="/public/images/{{data.secondEvidence.evidence}}" target="_blank">{{data.secondEvidence.evidence}} (opens in new tab)</a>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="org-address-evidence?change=true&evidenceAddressCount=second">Change<span class="govuk-visually-hidden"> first proof of organisation address</span></a>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
