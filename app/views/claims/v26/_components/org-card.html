@@ -14,7 +14,7 @@
           {% if orgDetails.status == "active" %}
             <a href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}" class="govuk-link">Manage claims</a>
               {% elif orgDetails.status == "draft" and orgDetails.userRole == "signatory"%}
-                  <a href="./load-registration?orgID={{orgDetails.workplaceID}}" class="govuk-link">Continue</a>
+                  <a href="./load-registration?regRef={{orgDetails.regRef}}" class="govuk-link">Continue</a>
               {% elif (orgDetails.status == "submitted" or orgDetails.status == "rejected") and orgDetails.userRole == "signatory"%}
                   <a href="#" class="govuk-link">View</a>
               {% endif %}

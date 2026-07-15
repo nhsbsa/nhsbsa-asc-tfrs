@@ -3,7 +3,16 @@
     "workplaceID": "A02944934",
     "regRef": "R-8K2M-9P",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -110,7 +119,16 @@
     "workplaceID": "B13299931",
     "regRef": "R-4T7W-2X",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -171,7 +189,16 @@
     "workplaceID": "C63281491",
     "regRef": "R-9Y3B-5N",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -214,7 +241,16 @@
     "workplaceID": "D62749203",
     "regRef": "R-1F8J-7K",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -257,7 +293,16 @@
     "workplaceID": "E76904778",
     "regRef": "R-6H2Q-4M",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -294,7 +339,16 @@
     "workplaceID": "F15904728",
     "regRef": "R-3Z9V-8L",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -337,7 +391,16 @@
     "workplaceID": "G91774723",
     "regRef": "R-7D4C-1A",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -374,7 +437,16 @@
     "workplaceID": "G91371231",
     "regRef": "R-2N8E-6R",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -423,7 +495,16 @@
     "workplaceID": "F87223491",
     "regRef": "R-5S1G-3P",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -466,7 +547,16 @@
     "workplaceID": "B52698456",
     "regRef": "R-9X6K-8W",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -534,7 +624,16 @@
     "workplaceID": "F84625987",
     "regRef": "R-8A4U-2Y",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -577,7 +676,16 @@
     "workplaceID": "D76397203",
     "regRef": "R-3M7T-9B",
     "status": "active",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -620,7 +728,16 @@
     "workplaceID": "F26738594",
     "regRef": "R-1C5V-7H",
     "status": "draft",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -657,7 +774,16 @@
     "workplaceID": "D26738495",
     "regRef": "R-6E8K-4J",
     "status": "rejected",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,
@@ -694,7 +820,16 @@
     "workplaceID": "C7284934",
     "regRef": "R-2P9F-5Z",
     "status": "submitted",
-    "addressEvidence": "insuranceCert.pdf",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
     "CHregistered": true,
     "CHNumber": "12345678",
     "VATregistered": true,

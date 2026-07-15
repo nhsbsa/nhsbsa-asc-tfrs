@@ -1650,11 +1650,11 @@ router.post('/registation-declaration', function (req, res) {
 
 router.get('/load-registration', function (req, res) {
   
-  const orgID = req.session.data.orgID
-  delete req.session.data.orgID
+  const regRef = req.session.data.regRef
+  delete req.session.data.regRef
 
-  const org = req.session.data.organisations.find(entry => entry.workplaceID === orgID);
-  const userOrg  = req.session.data.user.organisations.find(entry => entry.workplaceID === orgID);
+  const org = req.session.data.organisations.find(entry => entry.regRef === regRef);
+  const userOrg  = req.session.data.user.organisations.find(entry => entry.regRef === regRef);
 
   req.session.data.jobTitle = userOrg.jobTitle
   req.session.data.orgName = org.name
@@ -1664,7 +1664,9 @@ router.get('/load-registration', function (req, res) {
   req.session.data.addressTown = org.address.addressTown
   req.session.data.addressCounty = org.address.addressCounty
   req.session.data.addressPostcode = org.address.addressPostcode
-  req.session.data.orgID = orgID
+  req.session.data.firstEvidence = org.addressEvidence[0]
+  req.session.data.secondEvidence = org.addressEvidence[1]
+  req.session.data.orgID = org.workplaceID
   if (org.CHregistered) {
       req.session.data.companiesHouseResponse = "Yes"
   } else if (!(org.CHregistered)) {
@@ -1677,8 +1679,6 @@ router.get('/load-registration', function (req, res) {
       req.session.data.vatRegisteredResponse = "No"
   }
   req.session.data.vatRegNumber = org.VATNumber
-
-  req.session.data.editingID = orgID
 
   res.redirect('registration/check-answers')
 });
