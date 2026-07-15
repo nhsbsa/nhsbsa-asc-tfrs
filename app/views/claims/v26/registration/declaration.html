@@ -4,12 +4,6 @@
 {% if data.declarationSubmitError %}Error: {% endif %}Declaration — Complete registration — {{serviceName}} — GOV.UK
 {% endblock %}
 
-{% block beforeContent %}
-<div >
-    <a href="check-answers" class="govuk-back-link">Back</a>
-</div>
-{% endblock %}
-
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -56,43 +50,35 @@
             </div>
         </div>
 
-        <form action="/registation-declaration" method="post" novalidate>
-        <button type="submit" class="govuk-button" data-module="govuk-button">
-            Confirm and submit
-        </button>
+        <form action="../registation-declaration" method="post" novalidate>
+            <div class="govuk-button-group {% if data.declarationSubmitError %} govuk-form-group--error {% endif %}"
+                id="declare-checkbox">
+                <fieldset class="govuk-fieldset" aria-describedby="{% if data.declarationSubmitError %} declare-error {% endif %}">
+                    {% if data.declarationSubmitError %}
+                    <p id="declare-error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> You must confirm you understand before
+                        submitting
+                    </p>
+                    {% endif %}
+                    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                        <div class="govuk-checkboxes__item">
+                            <input class="govuk-checkboxes__input" id="confirmation" name="confirmation" type="checkbox"
+                                value="confirmation">
+                            <label class="govuk-label govuk-checkboxes__label" for="confirmation">
+                                I understand and accept.
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Submit
+                </button>
+                <a class="govuk-link govuk-link--no-visited-state" href="./check-answers">Cancel</a>
+            </div>
         </form>
     </div>
 </div>
-{# <div class="govuk-grid-column-two-thirds">
-    <form action="../registation-declaration" method="post" novalidate>
-        <div class="govuk-button-group {% if data.declarationSubmitError %} govuk-form-group--error {% endif %}"
-            id="declare-checkbox">
-            <fieldset class="govuk-fieldset" aria-describedby="{% if data.declarationSubmitError %} declare-error {% endif %}">
-                {% if data.declarationSubmitError %}
-                <p id="declare-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> You must confirm you understand before
-                    submitting
-                </p>
-                {% endif %}
-                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-                    <div class="govuk-checkboxes__item">
-                        <input class="govuk-checkboxes__input" id="confirmation" name="confirmation" type="checkbox"
-                            value="confirmation">
-                        <label class="govuk-label govuk-checkboxes__label" for="confirmation">
-                            I understand and accept.
-                        </label>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div class="govuk-button-group">
-            <button type="submit" class="govuk-button" data-module="govuk-button">
-                Submit
-            </button>
-            <a class="govuk-link govuk-link--no-visited-state"
-                href="./check-answers">Cancel</a>
-        </div>
-    </form>
-</div> #}
 
 {% endblock %}

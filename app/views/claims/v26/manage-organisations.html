@@ -2,6 +2,9 @@
 
 {% set orgList = data.user | generateUserOrgList(data.organisations) %}
 
+{% set activeOrgMissingbank = orgList.active | generateMissingActionOrgs(data.organisations, "bank") %}
+{% set activeOrgMissingGDL = orgList.active | generateMissingActionOrgs(data.organisations, "gdl") %}
+
 {% block pageTitle %}
 {{serviceName}} — GOV.UK
 {% endblock %}
@@ -22,6 +25,47 @@
 
             </div>
         {% endif %}
+
+        {% if activeOrgMissingbank.length > 0 or activeOrgMissingGDL.length > 0 %}
+            <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+            <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                Important
+                </h2>
+            </div>
+            <div class="govuk-notification-banner__content">
+
+                {% if activeOrgMissingbank.length > 0 %}
+                <h3 class="govuk-notification-banner__heading">Action needed</h3>
+                <p class="govuk-body">As Senior Responsible Officer you need to add your organisation's bank details before you can submit claims for the following organisations:</p>
+                    <ul class="govuk-list">
+                        {% for workplaceID in activeOrgMissingbank %}
+                            {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                            <li>
+                                <a class="govuk-notification-banner__link" href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}">{{orgDetails.name}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                
+                {% endif %}
+
+                {% if activeOrgMissingGDL.length > 0 %}
+                <h3 class="govuk-notification-banner__heading">Action needed</h3>
+                <p class="govuk-body">As Senior Responsible Officer you have not signed the new grant determination letter (GDL). You can only submit claims that were paid for in the year starting 1&nbsp;April&nbsp;2026 once you have done this. This affects the following organisations:</p>
+                    <ul class="govuk-list">
+                        {% for workplaceID in activeOrgMissingGDL %}
+                            {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                            <li>
+                                <a class="govuk-notification-banner__link" href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}">{{orgDetails.name}}</a>.
+                            </li>
+                        {% endfor %}
+                    </ul>
+                
+                {% endif %}
+
+            </div>
+            </div>
+            {% endif %}
         
         <h1 class="govuk-heading-l">My account</h1>
         <dl class="govuk-summary-list">
@@ -52,7 +96,7 @@
                 Email
                 </dt>
                 <dd class="govuk-summary-list__value">
-                {{data.user.email}}
+                {{data.user.email | breakUpEmail}}
                 </dd>
             </div>
             <div class="govuk-summary-list__row">

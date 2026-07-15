@@ -1,8 +1,8 @@
-<div class="govuk-summary-card">
+<div class="govuk-summary-card" id="{{orgDetails.regRef}}">
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">
       {{orgDetails.name}}
-      <br><span class="govuk-!-font-weight-regular">({{orgDetails.workplaceID}})</span>
+      <br><span class="govuk-!-font-weight-regular">({{orgDetails.workplaceID | default ('Workplace ID not added yet')}})</span>
     </h2>
     <ul class="govuk-summary-card__actions govuk-summary-card__actions-flex-height">
       {% if orgDetails.userRole == "signatory" and orgDetails.status == "active" %}
@@ -14,9 +14,9 @@
           {% if orgDetails.status == "active" %}
             <a href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}" class="govuk-link">Manage claims</a>
               {% elif orgDetails.status == "draft" and orgDetails.userRole == "signatory"%}
-                  <a href="./load-registration?orgID={{orgDetails.workplaceID}}" class="govuk-link">Continue registration</a>
+                  <a href="./load-registration?orgID={{orgDetails.workplaceID}}" class="govuk-link">Continue</a>
               {% elif (orgDetails.status == "submitted" or orgDetails.status == "rejected") and orgDetails.userRole == "signatory"%}
-                  <a href="#" class="govuk-link">View registration details</a>
+                  <a href="#" class="govuk-link">View</a>
               {% endif %}
         </li>
     </ul>
@@ -29,7 +29,7 @@
             Reference
           </dt>
           <dd class="govuk-summary-list__value">
-            R-ABCD-ABCD
+            {{orgDetails.regRef}}
           </dd>
         </div>
         <div class="govuk-summary-list__row">
@@ -46,7 +46,11 @@
           Address
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ orgDetails.address | formatAddress("comma") }}
+          {% if orgDetails.address.addressLine1 != null and orgDetails.address.addressLine1 != "" %}
+            {{ (orgDetails.address | formatAddress("comma")) }}
+          {% else %}
+            Not added yet
+          {% endif %}
         </dd>
       </div>
       {% if orgDetails.status == "active" %}

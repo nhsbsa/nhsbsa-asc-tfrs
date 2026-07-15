@@ -1109,7 +1109,17 @@ function replaceLearnerID(learners, oldID, newID) {
   });
 }
 
-function saveRegistrationEnty(req) {
+function generateRegRef() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  
+  // Helper to pick random characters from the lookup string
+  const getRandomChars = (length) => 
+    Array.from({ length }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
+
+  return `R-${getRandomChars(4)}-${getRandomChars(2)}`;
+}
+
+function saveRegistrationEnty(req, status) {
     const jobTitle = req.session.data.jobTitle
     const orgName = req.session.data.orgName
     const addressLine1 = req.session.data.addressLine1
@@ -1151,8 +1161,9 @@ function saveRegistrationEnty(req) {
     delete req.session.data.vatRegNumber
 
     const org = {
+            regRef: generateRegRef(),
             workplaceID: orgID,
-            status: "draft",
+            status,
             addressEvidence: "insuranceCert.pdf",
             CHregistered: companiesHouseResponse,
             CHNumber: companiesHouseRegNumber,
@@ -1195,6 +1206,7 @@ function saveRegistrationEnty(req) {
     upsertOrganization(req.session.data.organisations, org, editingID)
     upsertOrganization(req.session.data.user.organisations, userOrg, editingID)
 
+    return org.regRef
 }
 
 function upsertOrganization(orgList, newOrg, editingID) {
@@ -1306,6 +1318,19 @@ function addressCheck(addressLine1, addressLine2, addressLine3, town, county, po
     return result
 }
 
+function checkEvidence(type, evidenceFile) {
+    const result = {}
+
+    if (type == null) {
+        result.type = "missing"
+    } else {
+        result.type = "valid"
+    }
+    
+    result.evidenceValid = result.type == "valid"
+    return result
+}
+
 function validateUKPhoneNumber(phoneNumber) {
     const regex = /^(?:(?:\+44\s?|0)7\d{3}\s?\d{6}|(?:\+44\s?|0)[12358]\d{2,4}\s?\d{3,4}\s?\d{3,4})$/;
     return regex.test(phoneNumber.trim());
@@ -1323,4 +1348,4 @@ function isValidUKPostcode(postcode) {
   return ukPostcodeRegex.test(trimmed);
 }
 
-module.exports = {addressCheck, userCheck, checkOrgs, clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}
+module.exports = {addressCheck, checkEvidence, userCheck, checkOrgs, clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}
