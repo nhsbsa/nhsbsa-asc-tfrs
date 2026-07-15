@@ -56,16 +56,20 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <span class="govuk-caption-l">Register a new organisation</span>
-    <h1 class="govuk-heading-l">Provide your {{data.evidenceAddressCount}} proof of your organisation's address</h1>
+    <h1 class="govuk-heading-l">Upload {{data.evidenceAddressCount}} proof of organisation's address</h1>
 
     <form action="../validate-address-evidence" method="post" novalidate>
       <div class="govuk-form-group {% if data.submitError.type  == "missing" %} govuk-form-group--error {% endif %}">
         <fieldset class="govuk-fieldset" aria-describedby="type-hint type-error">
           <legend class="govuk-fieldset__legend">
-            What type of evidence are you uploading?
+            What type of document are you uploading?
           </legend>
           <div id="type-hint" class="govuk-hint">
-            You can only upload each type of evidence once. Bills must be dated within 3 months
+            {% if data.evidenceAddressCount == "first" %}
+              You can only upload each type of document once. Bills must be dated within the last 3 months
+            {% elif data.evidenceAddressCount == "second" %}
+              Bills must be dated within the last 3 months
+            {% endif %}
           </div>
           {% if data.submitError.type  == "missing" %}
             <p id="type-error" class="govuk-error-message">
