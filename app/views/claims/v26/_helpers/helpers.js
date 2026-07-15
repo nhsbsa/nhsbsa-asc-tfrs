@@ -1128,6 +1128,8 @@ function saveRegistrationEnty(req, status) {
     const addressTown = req.session.data.addressTown
     const addressCounty = req.session.data.addressCounty
     const addressPostcode = req.session.data.addressPostcode
+    const firstEvidence = req.session.data.firstEvidence
+    const secondEvidence = req.session.data.secondEvidence
     const orgID = req.session.data.orgID
     let companiesHouseResponse = null
     if (req.session.data.companiesHouseResponse == "Yes") {
@@ -1144,8 +1146,6 @@ function saveRegistrationEnty(req, status) {
     }
     const vatRegNumber = req.session.data.vatRegNumber
 
-    const editingID  = req.session.data.editingID
-
     delete req.session.data.jobTitle
     delete req.session.data.orgName
     delete req.session.data.addressLine1
@@ -1154,6 +1154,8 @@ function saveRegistrationEnty(req, status) {
     delete req.session.data.addressTown
     delete req.session.data.addressCounty
     delete req.session.data.addressPostcode
+    delete req.session.data.firstEvidence
+    delete req.session.data.secondEvidence
     delete req.session.data.orgID
     delete req.session.data.companiesHouseResponse
     delete req.session.data.companiesHouseRegNumber
@@ -1164,7 +1166,7 @@ function saveRegistrationEnty(req, status) {
             regRef: generateRegRef(),
             workplaceID: orgID,
             status,
-            addressEvidence: "insuranceCert.pdf",
+            addressEvidence: [firstEvidence, secondEvidence],
             CHregistered: companiesHouseResponse,
             CHNumber: companiesHouseRegNumber,
             VATregistered: vatRegisteredResponse,
@@ -1200,18 +1202,19 @@ function saveRegistrationEnty(req, status) {
 
     const userOrg = {
             workplaceID: orgID,
+            regRef: org.regRef,
             userType: "signatory",
             jobTitle
     }
-    upsertOrganization(req.session.data.organisations, org, editingID)
-    upsertOrganization(req.session.data.user.organisations, userOrg, editingID)
+    upsertOrganization(req.session.data.organisations, org, org.regRef)
+    upsertOrganization(req.session.data.user.organisations, userOrg, org.regRef)
 
     return org.regRef
 }
 
 function upsertOrganization(orgList, newOrg, editingID) {
-  // Find the index of the existing organization by workplaceID
-  const index = orgList.findIndex(org => org.workplaceID === editingID);
+  // Find the index of the existing organization by regRef
+  const index = orgList.findIndex(org => org.regRef === editingID);
 
   if (index !== -1) {
     // If it exists, replace it
