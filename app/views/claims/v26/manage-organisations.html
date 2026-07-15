@@ -37,7 +37,7 @@
 
                 {% if activeOrgMissingbank.length > 0 %}
                 <h3 class="govuk-notification-banner__heading">Action needed</h3>
-                <p class="govuk-body">As Senior Responsible Officer you need to add your organisation's bank details before you can submit claims for the following organisations:</p>
+                <p class="govuk-body">As Senior Responsible Officer you need to add bank details for the following organisations before you can submit claims:</p>
                     <ul class="govuk-list">
                         {% for workplaceID in activeOrgMissingbank %}
                             {% set orgDetails = workplaceID | findOrg(data.organisations) %}
@@ -51,7 +51,7 @@
 
                 {% if activeOrgMissingGDL.length > 0 %}
                 <h3 class="govuk-notification-banner__heading">Action needed</h3>
-                <p class="govuk-body">As Senior Responsible Officer you have not signed the new grant determination letter (GDL). You can only submit claims that were paid for in the year starting 1&nbsp;April&nbsp;2026 once you have done this. This affects the following organisations:</p>
+                <p class="govuk-body">As Senior Responsible Officer you need to sign the new grant determination letter (GDL). You can only submit claims paid for in the year starting 1&nbsp;April&nbsp;2026 once you have done this. This applies to the following organisations:</p>
                     <ul class="govuk-list">
                         {% for workplaceID in activeOrgMissingGDL %}
                             {% set orgDetails = workplaceID | findOrg(data.organisations) %}

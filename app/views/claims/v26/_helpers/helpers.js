@@ -1154,6 +1154,8 @@ function saveRegistrationEnty(req, status) {
     delete req.session.data.addressTown
     delete req.session.data.addressCounty
     delete req.session.data.addressPostcode
+    delete req.session.data.type
+    delete req.session.data.evidenceFile
     delete req.session.data.firstEvidence
     delete req.session.data.secondEvidence
     delete req.session.data.orgID
@@ -1161,6 +1163,7 @@ function saveRegistrationEnty(req, status) {
     delete req.session.data.companiesHouseRegNumber
     delete req.session.data.vatRegisteredResponse
     delete req.session.data.vatRegNumber
+    
 
     const org = {
             regRef: generateRegRef(),

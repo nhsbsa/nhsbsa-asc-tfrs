@@ -2,7 +2,7 @@
   <div class="govuk-summary-card__title-wrapper">
     <h2 class="govuk-summary-card__title">
       {{orgDetails.name}}
-      <br><span class="govuk-!-font-weight-regular">({{orgDetails.workplaceID | default ('Workplace ID not added yet')}})</span>
+      <br><span class="govuk-!-font-weight-regular">({{orgDetails.workplaceID | default ('Workplace ID not yet added')}})</span>
     </h2>
     <ul class="govuk-summary-card__actions govuk-summary-card__actions-flex-height">
       {% if orgDetails.userRole == "signatory" and orgDetails.status == "active" %}
@@ -13,12 +13,17 @@
         <li class="govuk-summary-card__action">
           {% if orgDetails.status == "active" %}
             <a href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}" class="govuk-link">Manage claims</a>
-              {% elif orgDetails.status == "draft" and orgDetails.userRole == "signatory"%}
-                  <a href="./load-registration?regRef={{orgDetails.regRef}}" class="govuk-link">Continue</a>
-              {% elif (orgDetails.status == "submitted" or orgDetails.status == "rejected") and orgDetails.userRole == "signatory"%}
-                  <a href="#" class="govuk-link">View</a>
-              {% endif %}
+          {% elif orgDetails.status == "draft" and orgDetails.userRole == "signatory"%}
+              <a href="./load-registration?regRef={{orgDetails.regRef}}" class="govuk-link">Continue</a>
+          {% elif (orgDetails.status == "submitted" or orgDetails.status == "rejected") and orgDetails.userRole == "signatory"%}
+              <a href="#" class="govuk-link">View</a>
+          {% endif %}
         </li>
+        {% if orgDetails.status == "draft" and orgDetails.userRole == "signatory"%}
+          <li class="govuk-summary-card__action">
+            <a href="#" class="govuk-link">Delete</a>
+          </li>
+        {% endif %}
     </ul>
   </div>
   <div class="govuk-summary-card__content">
@@ -46,10 +51,10 @@
           Address
         </dt>
         <dd class="govuk-summary-list__value">
-          {% if orgDetails.address.addressLine1 != null and orgDetails.address.addressLine1 != "" %}
+          {% if orgDetails.address.addressLine1 != null and orgDetails.address.addressLine1 != "" and orgDetails.address.addressTown != null and orgDetails.address.addressTown != "" and orgDetails.address.addressPostcode != null and orgDetails.address.addressPostcode != "" %}
             {{ (orgDetails.address | formatAddress("comma")) }}
           {% else %}
-            Not added yet
+            Not yet added
           {% endif %}
         </dd>
       </div>
