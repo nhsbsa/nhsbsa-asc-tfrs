@@ -5,7 +5,7 @@ module.exports = {
             {
                 "versionNo": "26",
                 "phase": "Beta",
-                "status": ["design"],
+                "status": ["UR"],
                 "designHistory": "https://asc-tfrs-design-history-689d381cad9a.herokuapp.com/tags/claims-version-26/",
                 "tested": null,
                 "created": null,
