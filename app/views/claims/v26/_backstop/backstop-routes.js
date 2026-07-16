@@ -114,7 +114,7 @@ router.get('/contact-us', function (req, res) {
     loadData(req, "B13299931")
 
     // Redirect to the page you want to screenshot
-    res.redirect('../contact');
+    res.redirect('../support-pages/contact');
 });
 
 router.get('/terms-of-use', function (req, res) {
