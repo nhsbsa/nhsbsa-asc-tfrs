@@ -48,7 +48,7 @@
             {% endif %}
 
         </div>
-        <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
+        <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../support-pages/contact">contact us</a>.</p>
     
         {% endif %}
 
@@ -91,7 +91,7 @@
             {% endif %}
         {% endif %}
 
-        <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../contact">contact us</a>.</p>
+        <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../support-pages/contact">contact us</a>.</p>
         
     {% endif %}
 
@@ -118,7 +118,7 @@
         {% endif %}
         </div>
 
-        <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
+        <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../support-pages/contact">contact us</a>.</p>
     {% endif %}
 
     {% if claim.status == "submitted"%}
@@ -134,7 +134,7 @@
         <h3 class="govuk-heading-s govuk-!-margin-bottom-1">Evidence of payment</h3>
         <p class="govuk-body">{{noteSubmission.evidenceOfPaymentReview.note}}</p>
         {% endif %}
-        <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../contact">contact us</a>.</p>
+        <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../support-pages/contact">contact us</a>.</p>
     {% endif %}
 
     {% if claim.status == "approved" %}
@@ -144,7 +144,7 @@
             <p class="govuk-body">You can now complete the <a class="govuk-link" href="#fourtyPartClaim">40 part</a> of this claim.</p>
             {% if pairClaim.isPaymentPlan == true %}
                 <p class="govuk-body">As you've only paid 60% of the training cost so far, you'll need to provide separate evidence of payment for the remaining 40% as well as evidence of completion. 
-                If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
+                If you have any questions you can <a class="govuk-link" href="../support-pages/contact">contact us</a>.</p>
             {% endif %}
         {% endif %}
 
@@ -189,7 +189,7 @@
 
         </div>
         
-            <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../contact">contact us</a>.</p>
+            <p class="govuk-body">If you have any questions you can <a class="govuk-link" href="../support-pages/contact">contact us</a>.</p>
         {% endif %}
 
         {% if pairClaim.status == "submitted"%}
@@ -231,7 +231,7 @@
                 {% endif %}
             {% endif %}
 
-            <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../contact">contact us</a>.</p>
+            <p class="govuk-body">If you'd like to query this you can <a class="govuk-link" href="../support-pages/contact">contact us</a>.</p>
         {% endif %}
 
         {% if pairClaim.status == "approved" %}
