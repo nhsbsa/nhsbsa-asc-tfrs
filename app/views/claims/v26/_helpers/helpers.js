@@ -1120,6 +1120,7 @@ function generateRegRef() {
 }
 
 function saveRegistrationEnty(req, status) {
+    let regRef = req.session.data.regRef
     const jobTitle = req.session.data.jobTitle
     const orgName = req.session.data.orgName
     const addressLine1 = req.session.data.addressLine1
@@ -1164,9 +1165,12 @@ function saveRegistrationEnty(req, status) {
     delete req.session.data.vatRegisteredResponse
     delete req.session.data.vatRegNumber
     
+    if (regRef == null) {
+        regRef = generateRegRef()
+    }
 
     const org = {
-            regRef: generateRegRef(),
+            regRef,
             workplaceID: orgID,
             status,
             addressEvidence: [firstEvidence, secondEvidence],

@@ -587,6 +587,7 @@
 @media (min-width: 40.0625em) {
   .app-organisation-actions__title {
     float: left;
+    width: 60%;
   }
 }
 
@@ -629,9 +630,11 @@
 @media (min-width: 40.0625em) {
   .app-organisation-actions__actions {
     display: table-cell;
+    width: 40%;
     padding-right: 0;
     margin-left: 0;
     text-align: right;
+    float: right;
   }
 }
 

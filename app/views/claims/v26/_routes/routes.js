@@ -72,7 +72,8 @@ router.post('/detailsCorrectResponse', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft")
+    req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
 });
@@ -105,7 +106,8 @@ router.post('/companiesHouseResponse', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft")
+    req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
 });
@@ -134,7 +136,8 @@ router.post('/vatResponse', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft")
+    req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
 });
@@ -1416,7 +1419,8 @@ router.post('/validate-org-address', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft")
+    req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
 
@@ -1456,7 +1460,8 @@ router.post('/validate-job-title', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft")
+    req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
 });
@@ -1505,8 +1510,12 @@ router.post('/validate-address-evidence', function (req, res) {
       res.redirect('registration/org-address-evidence')
     }
   } else {
-    saveRegistrationEnty(req, "draft")
-    req.session.data.banner = "saveSuccess"
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    const regRef = saveRegistrationEnty(req, "draft")
+    req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
 });
@@ -1524,7 +1533,8 @@ router.post('/check-answer-confirmation', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft")
+    req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
 });
@@ -1558,7 +1568,8 @@ router.post('/validate-workplaceID', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft")
+    req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
 
@@ -1593,7 +1604,8 @@ router.post('/validate-companies-house', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft")
+    req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
 });
@@ -1628,7 +1640,8 @@ router.post('/validate-vat', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft")
+    req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
 });
@@ -1651,7 +1664,6 @@ router.post('/registation-declaration', function (req, res) {
 router.get('/load-registration', function (req, res) {
   
   const regRef = req.session.data.regRef
-  delete req.session.data.regRef
 
   const org = req.session.data.organisations.find(entry => entry.regRef === regRef);
   const userOrg  = req.session.data.user.organisations.find(entry => entry.regRef === regRef);
