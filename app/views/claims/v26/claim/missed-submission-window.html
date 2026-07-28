@@ -1,0 +1,106 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% set training = submission.trainingCode | findTraining %}
+
+
+{% block pageTitle %}
+Claim window closed {{data.id}}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">You cannot submit this claim</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-visually-hidden">Warning</span>
+          The submission window for this claim has ended.
+        </strong>
+      </div>
+
+      <p class="govuk-body">
+       {% if (((claim.status == "not-yet-submitted")  
+          and claim.claimType== "100")
+          and submission.learners.length > 1) %}
+          For a 100 claim with multiple learners you need to submit the claim no more than 3 months after the last learner completes the training.
+        
+        {% elif ((claim.status == "not-yet-submitted")  
+            and claim.claimType== "60") %}
+            For the 60 part of a 60/40 claim you need to submit the claim within 3 months of the payment date or the learner's start date, whichever is latest.
+        
+            {% elif ((claim.status == "not-yet-submitted")  
+            and claim.claimType== "40") %}
+            For the 40 part of a 60/40 claim you need to submit the claim within 3 months of the learner's completion date.
+        
+        {% else %}
+          You need to submit the claim within 3 months of this completion date.
+
+        {% endif %}
+      </p>
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Training
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{submission.trainingCode}}</br>
+            {{training.title}}
+
+          </dd>
+        </div>
+      </dl>
+
+      <table class="govuk-table">
+
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">
+            {% if (submission.learners.length > 1) %}
+              Learners
+            {% else %}
+              Learner
+            {% endif %}
+          </th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for learner in data.matchingIDs%}
+          {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">{{claimLearner.givenName}} {{claimLearner.familyName}}</td>
+              <td class="govuk-table__cell">{{learner.learnerID}}</td>
+            </tr>
+          {% endfor%}
+
+        </tbody>
+      </table>
+
+
+  <p class="govuk-body">
+    Go back to the claim and check that you have added the correct training and learners.
+  </p>
+
+  <div class="govuk-button-group">
+    <form method="post" action="claim-details" class="govuk-!-margin-0">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Back to claim
+        </button>
+      </form>
+  </div>
+
+  <h2 class="govuk-heading-m">If you need support with this claim</h2>
+  <p class="govuk-body">
+    You can email us at <a href="mailto:ASClearninganddevelopmentsupport@nhsbsa.nhs.uk">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.
+  </p>
+
+</div>
+
+{% endblock %}
