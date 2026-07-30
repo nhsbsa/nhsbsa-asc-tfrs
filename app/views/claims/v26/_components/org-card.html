@@ -21,7 +21,7 @@
         </li>
         {% if orgDetails.status == "draft" and orgDetails.userRole == "signatory"%}
           <li class="govuk-summary-card__action">
-            <a href="#" class="govuk-link">Delete</a>
+            <a href="./manage-orgs/delete-registration-confirmation?regRef={{orgDetails.regRef}}" class="govuk-link">Delete</a>
           </li>
         {% endif %}
     </ul>
