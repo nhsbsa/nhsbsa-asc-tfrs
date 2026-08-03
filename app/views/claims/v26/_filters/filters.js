@@ -1913,3 +1913,31 @@ addFilter('breakUpEmail', function (email, breakEvery = 6) {
     return `<span class="govuk-!-text-break-word">${localPart}@<wbr>${formattedDomain}</span>`;
 
 }, { renderAsHtml: true });
+
+addFilter('dateRange', function (learners) {
+    const dates = learners.map(l => new Date(l.completionDate));
+    const firstDate = new Date(Math.min(...dates));
+    const lastDate = new Date(Math.max(...dates));
+
+    const formatDate = date =>
+        date.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+
+    const dateRange =
+    firstDate.getTime() === lastDate.getTime()
+    ? formatDate(firstDate)
+    : `${formatDate(firstDate)} to ${formatDate(lastDate)}`;
+
+    return dateRange
+})
+
+addFilter('currentDate', function (data) {
+const date = new Date()
+const day = date.getDate();       // 1-31 (no leading zero)
+const month = date.getMonth() + 1; // 0-11, so add 1 (no leading zero)
+const year = date.getFullYear();  // 4-digit year
+return`${day} ${month} ${year}`;
+});

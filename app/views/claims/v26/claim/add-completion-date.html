@@ -40,23 +40,26 @@
         {% endif %}
         <form action="../completion-date" method="post" class="form">
             <div class="govuk-form-group {% if data.submitError.dateValid != null and not data.submitError.dateValid %} govuk-form-group--error {% endif %}">
-                <fieldset class="govuk-fieldset" role="group" aria-describedby="start-date-issued-hint">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="completion-date-hint">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
                         <h1 class="govuk-fieldset__heading">
                             When did{% if ((submission.sharedCompletionDate and claim.status =="not-yet-submitted") or data.sharedDate == "yes") %} the learners{% else %} {{learnerInfo.givenName}} {{learnerInfo.familyName}}{% endif %} complete the course or qualification?
                         </h1>
                     </legend>
-                    <p class="govuk-body">
+                    <div id="completion-date-hint" class="govuk-hint">
                     
-                        {% if claim.claimType== "100"
-                            and submission.learners.length > 1 %}
+                    {% if claim.status == "not-yet-submitted" %}
+                        {% if claim.claimType == "100" and submission.learners.length > 1 %}
                             For a 100 claim with multiple learners you need to submit the claim no more than 3 months after the last learner completes the training.
+                            <br> For example, {{"" | currentDate}}
                         {% else %}
-                            You need to submit the claim within 3 months of this completion date.
+                            You need to submit the claim within 3 months of this completion date
+                            <br> For example, {{"" | currentDate}}
                         {% endif %}
+                    {% endif %}
 
-                    </p>
+                    </div>
                     {% if data.submitError.dateValid != null and not data.submitError.dateValid %}
                         {{data.submitError | dateErrorMessage("Completion date", "input") }}
                     {% endif %}
