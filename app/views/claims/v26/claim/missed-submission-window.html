@@ -24,6 +24,7 @@
 
 {% endif %}
 {% set training = submission.trainingCode | findTraining %}
+{% set sameCompletionDate = submission.learners | checkCompletionDates %}
 {# If at least one learner, learner key #}
 
 {% block pageTitle %}
@@ -86,7 +87,7 @@ Claim window closed {{data.id}}
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
            {# may need to remove depending on whether we show singular or plural  #}
-          {% if (submission.learners.length == 1 or submission.sharedCompletionDate) %} 
+          {% if (submission.learners.length == 1 or submission.sharedCompletionDate or sameCompletionDate) %} 
         
           Completion date
 
@@ -124,9 +125,9 @@ Claim window closed {{data.id}}
       </dl>
         
   <p class="govuk-body">
-   {% if (((claim.status == "not-yet-submitted")  
-          and claim.claimType== "100" or claim.claimType== "40")
-          and submission.learners.length == 1 or submission.sharedCompletionDate == true) %}
+   {% if (claim.status == "not-yet-submitted"
+          and (claim.claimType== "100" or claim.claimType== "40")
+          and (submission.learners.length == 1 or submission.sharedCompletionDate == true)) %}
           Go back to claim details and check you have entered the correct date, or delete the claim.
     
           {% elif claim.claimType== "100"

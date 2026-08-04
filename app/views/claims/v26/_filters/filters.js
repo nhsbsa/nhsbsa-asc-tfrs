@@ -1927,7 +1927,7 @@ addFilter('dateRange', function (learners) {
     });
 
     const dateRange =
-    firstDate.getTime() === lastDate.getTime()
+    firstDate.toISOString().split('T')[0] === lastDate.toISOString().split('T')[0]
     ? formatDate(firstDate)
     : `${formatDate(firstDate)} to ${formatDate(lastDate)}`;
 
@@ -1941,3 +1941,23 @@ const month = date.getMonth() + 1; // 0-11, so add 1 (no leading zero)
 const year = date.getFullYear();  // 4-digit year
 return`${day} ${month} ${year}`;
 });
+
+addFilter('checkCompletionDates', function (learners) {
+if (!Array.isArray(learners) || learners.length <= 1) return true;
+
+  // Extract the YYYY-MM-DD portion of the first date as the baseline
+  const baselineDate = learners[0].completionDate 
+    ? new Date(learners[0].completionDate).toISOString().split('T')[0] 
+    : null;
+
+  // If the first record lacks a completion date, return false
+  if (!baselineDate) return false;
+
+  // Check if every record's date matches the baseline date
+  return learners.every(item => {
+    if (!item.completionDate) return false;
+    const currentDate = new Date(item.completionDate).toISOString().split('T')[0];
+    return currentDate === baselineDate;
+  });
+});
+
