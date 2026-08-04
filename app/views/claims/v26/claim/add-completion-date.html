@@ -52,10 +52,10 @@
                     {% if claim.status == "not-yet-submitted" %}
                         {% if claim.claimType == "100" and submission.learners.length > 1 %}
                             For a 100 claim with multiple learners you need to submit the claim no more than 3 months after the last learner completes the training.
-                            <br> For example, {{"" | currentDate}}
+                            <br><br> For example, {{"" | currentDate}}
                         {% else %}
                             You need to submit the claim within 3 months of this completion date
-                            <br> For example, {{"" | currentDate}}
+                            <br><br> For example, {{"" | currentDate}}
                         {% endif %}
                     {% endif %}
 

@@ -1,6 +1,16 @@
 {% extends "../_layouts/claims-main.html" %}
 {% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
 
+{% if claim.claimType == "60" %}
+
+  {% set pairClaim = claim.claimID | findPair(data.claims) %}
+
+{% elif claim.claimType == "40" %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair(data.claims) %}
+
+{% endif %}
+
 {% if claim.claimType == "60" %}  
 
   {% if (claim.status == "queried") %}
@@ -60,12 +70,13 @@ Claim window closed {{data.id}}
           and submission.learners.length == 1) %}
           For 100 claims with a single learner you need to submit the claim within 3 months of the learner's completion date.
         
-        {% elif ((claim.status == "not-yet-submitted")  
-          and claim.claimType== "60") %}
+        {% elif (((claim.status == "not-yet-submitted")  
+          and claim.claimType== "60")
+          and submission.learners.length == 1) %}
           For the 60 part of a 60/40 claim you need to submit the claim within 3 months of the payment date or the learner's start date, whichever is latest.
         
-        {% elif (((claim.status == "not-yet-submitted")  
-          and claim.claimType== "40")
+        {% elif (((claim.status == "approved")  
+          and pairClaim.claimType== "40")
           and submission.learners.length == 1) %}
           For the 40 part of a 60/40 claim you need to submit the claim within 3 months of the learner's completion date.
 
@@ -83,12 +94,11 @@ Claim window closed {{data.id}}
 
           </dd>
         </div>
-      {% if ( claim.claimType== "100" or claim.claimType== "40") %}
+      {% if (claim.claimType== "100" or (claim.status == "approved" and pairClaim.claimType== "40")) %}
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
            {# may need to remove depending on whether we show singular or plural  #}
           {% if (submission.learners.length == 1 or submission.sharedCompletionDate or sameCompletionDate) %} 
-        
           Completion date
 
           {% elif submission.learners.length > 1 %}
@@ -97,13 +107,17 @@ Claim window closed {{data.id}}
           {% endif %}
           </dt>
           <dd class="govuk-summary-list__value">
+            {% if claim.claimType=="100" %}
             {{ submission.learners | dateRange }}
+            {% else %}
+            {{ pairSubmission.learners | dateRange }}
+            {% endif %}
           </dd>
       
       </div>
       {% endif %}
 
-      {% if ( claim.claimType== "60")  %}
+      {% if ( claim.claimType== "60" and claim.status == "not-yet-submitted")  %}
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Start date
@@ -134,7 +148,7 @@ Claim window closed {{data.id}}
           and submission.learners.length > 1 %}
           Go back to claim details and check you have entered the correct dates, or delete the claim.
           
-          {% elif claim.claimType== "60" %}
+          {% elif claim.claimType== "60" and claim.status == "not-yet-submitted" %}
           Go back to claim details and check you have entered the correct dates, or delete the claim.
     {% endif %}
   </p>
