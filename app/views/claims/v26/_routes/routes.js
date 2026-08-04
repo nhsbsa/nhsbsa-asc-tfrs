@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, loadScenarioData, loadUserData, userCheck, checkEvidence, addressCheck, checkOrgs, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty, checkSubmissionWindow } = require('../_helpers/helpers.js');
+const { loadData, loadScenarioData, loadUserData, userCheck, checkEvidence, addressCheck, checkOrgs, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty, findReg, checkSubmissionWindow } = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 
@@ -1869,6 +1869,27 @@ router.get('/confirm-delete-claim', function (req, res) {
         
     }
   }
+});
+
+router.get('/confirm-delete-registration', function (req, res) {
+  const user = req.session.data.user
+  const regRefToDelete = req.session.data.regRef
+
+  const index = user.organisations.findIndex(org => org.regRef === regRefToDelete);
+  const org = req.session.data.organisations.find(org => org.regRef === regRefToDelete);
+  const orgName = org.name
+  if (index !== -1) {
+      user.organisations.splice(index, 1);
+  }
+
+  req.session.data.banner = {
+    action: "deleteSuccess",
+    regRef: regRefToDelete,
+    orgName: orgName
+  } 
+  delete req.session.data.regRef
+  res.redirect('manage-organisations')
+
 });
 
 router.get('/signin-handler', function (req, res) {
