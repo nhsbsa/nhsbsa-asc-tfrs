@@ -41,7 +41,7 @@
 
 <body>
     <div id="yellow-banner">
-        <p>This screen is for testing only. There is no interaction. Please click the form image to continue or <a class="govuk-link" href="{% if data.journey == 'creation'%}verify-details{% else %}../index{% endif %}">go back</a>.</p>
+        <p>This screen is for testing only. There is no interaction. Please click the form image to continue or <a class="govuk-link" href="verify-details">go back</a>.</p>
     </div>
     <div id="image-link">
         <a id="image-link" href="{% if data.journey == 'creation'%} MFA {% else %} mfa-code  {% endif %}">

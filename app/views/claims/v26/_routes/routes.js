@@ -147,14 +147,12 @@ router.post('/verify-details-handler', function (req, res) {
   const confirmationAnswer = req.session.data.confirmation
   delete req.session.data.confirmation
   delete req.session.data.submitError
-  console.log(confirmationAnswer)
-  if (confirmationAnswer == "yes") {
-    res.redirect('change-sro/job-title')
-  } else if (confirmationAnswer == "no") {
-    res.redirect('change-sro/account-issue')
+  if (confirmationAnswer == "Yes") {
+    res.redirect('account-setup/job-title')
+  } else if (confirmationAnswer == "No") {
+    res.redirect('account-setup/account-issue')
   } else {
-    req.session.data.submitError = true
-    res.redirect('change-sro/verify-details')
+    res.redirect('account-setup/verify-details?submitError=true')
   }
   delete req.session.data['confirmation'];
 });
@@ -1468,27 +1466,6 @@ router.post('/validate-job-title', function (req, res) {
   }
 });
 
-router.post('/validate-job-title-change-sro', function (req, res) {
-  delete req.session.data.jobTitleEmptyError
-  delete req.session.data.jobTitleInvalid
-  delete req.session.data['declarationSubmitError'];
-
-  const jobTitle = req.session.data.jobTitle
-
-  var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
-
-  if (jobTitle == "") {
-    req.session.data.jobTitleEmptyError = true
-    res.redirect('change-sro/job-title')
-  } else if (validCharactersRegex.test(jobTitle) == true) {
-      res.redirect('change-sro/declaration')
-  } else {
-    req.session.data.jobTitleInvalid = true
-    res.redirect('change-sro/job-title')
-  }
-
-});
-
 router.post('/validate-address-evidence', function (req, res) {
   const action = req.session.data.action
   const change = req.session.data.change
@@ -1732,21 +1709,6 @@ router.post('/new-declaration-confirmation', function (req, res) {
   }
 });
 
-router.post('/declaration-confirmation-change-sro', function (req, res) {
-  delete req.session.data.declarationSubmitError
-  const declarationConfirmed = req.session.data.declaration
-
-  if (declarationConfirmed != null) {
-    delete req.session.data.declarationConfirmed
-    req.session.data.org.validGDL = true
-    req.session.data.org.newSRO = false
-    res.redirect('manage-claims-home?tabLocation=claims')
-  } else {
-    req.session.data.declarationSubmitError = 'true'
-    res.redirect('change-sro/declaration')
-  }
-});
-
 router.post('/bank-details-question-handler', function (req, res) {
   delete req.session.data.submitError
 
@@ -1929,14 +1891,10 @@ router.get('/confirm-delete-registration', function (req, res) {
 
 router.get('/signin-handler', function (req, res) {
   const journey = req.session.data.journey
-  const user = req.session.data.user
+  const userType = req.session.data.userType
+  const org = req.session.data.org
 
-  if (user.journey == invite && req.session.data.scenarios == prelogin) {
-
-    res.redirect('manage-organisations')
-  } else {
-    res.redirect('manage-organisations')
-  }
+  res.redirect('manage-organisations')
 
 });
 
@@ -2075,7 +2033,7 @@ router.get('/load-user-data', function (req, res) {
     res.redirect('manage-organisations')
   } else if (req.session.data.user.journey == "pre-login") {
     res.redirect('eligibility/overview')
-  } else if (req.session.data.user.journey == "invite") {
+  } else if (req.session.data.user.journey == "self-serve") {
     req.session.data.journey = "creation"
     res.redirect('./authentication/creation-link')
   } else {
@@ -2104,17 +2062,15 @@ router.get('/load-data', function (req, res) {
   loadData(req, orgID);
   delete req.session.data['orgID']
 
-  if ((!req.session.data.org.validGDL) && req.session.data.userType == 'signatory') {
-    res.redirect('org-admin/sign-new-gdl')
-  } else if (req.session.data.org.newSRO && req.session.data.userType == 'signatory') {
-    res.redirect('change-sro/verify-details')
-  } else {
-    if (tabLocation == "users") {
-      res.redirect('org-admin/manage-team?tabLocation=users')
+  if (req.session.data.org.validGDL || req.session.data.userType == 'submitter') {
+      if (tabLocation == "users") {
+        res.redirect('org-admin/manage-team?tabLocation=users')
+      } else {
+        res.redirect('manage-claims-home?tabLocation=claims')
+      }
     } else {
-      res.redirect('manage-claims-home?tabLocation=claims')
+      res.redirect('org-admin/sign-new-gdl')
     }
-  }
 
 })
 

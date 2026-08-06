@@ -4,7 +4,6 @@
 
 {% set activeOrgMissingbank = orgList.active | generateMissingActionOrgs(data.organisations, "bank") %}
 {% set activeOrgMissingGDL = orgList.active | generateMissingActionOrgs(data.organisations, "gdl") %}
-{% set activeOrgNewSRO = orgList.active | generateMissingActionOrgs(data.organisations, "newSRO") %}
 
 {% block pageTitle %}
 {{serviceName}} — GOV.UK
@@ -37,7 +36,7 @@
             </div>
         {% endif %}
 
-        {% if activeOrgMissingbank.length > 0 or activeOrgMissingGDL.length > 0 or activeOrgNewSRO.length > 0  %}
+        {% if activeOrgMissingbank.length > 0 or activeOrgMissingGDL.length > 0 %}
             <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
             <div class="govuk-notification-banner__header">
                 <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
@@ -67,21 +66,7 @@
                         {% for workplaceID in activeOrgMissingGDL %}
                             {% set orgDetails = workplaceID | findOrg(data.organisations) %}
                             <li>
-                                <a class="govuk-notification-banner__link" href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}">{{orgDetails.name}}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                
-                {% endif %}
-
-                {% if activeOrgNewSRO.length > 0 %}
-                <h3 class="govuk-notification-banner__heading">Action needed</h3>
-                <p class="govuk-body">As the new Senior Responsible Officer you need to complete registration for the following organisations before you can submit claims:</p>
-                    <ul class="govuk-list">
-                        {% for workplaceID in activeOrgNewSRO %}
-                            {% set orgDetails = workplaceID | findOrg(data.organisations) %}
-                            <li>
-                                <a class="govuk-notification-banner__link" href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}">{{orgDetails.name}}</a>
+                                <a class="govuk-notification-banner__link" href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}">{{orgDetails.name}}</a>.
                             </li>
                         {% endfor %}
                     </ul>

@@ -89,49 +89,52 @@
         "organisations": []
     },
     {
-        "journey": "invite",
+        "journey": "self-serve",
         "givenName": "Craig",
         "familyName": "Willowtree",
         "email": "craig.willowtree@caregroup.com",
         "description": "",
         "organisations": [
             {
-                "workplaceID": "D76397203",
-                "regRef": "R-3M7T-9B",
+                "workplaceID": "F15904728",
+                "regRef": "R-3Z9V-8L",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
             }
         ]
     },
     {
-        "journey": "invite",
+        "journey": "self-serve",
         "givenName": "Calsey",
         "familyName": "Huel",
         "email": "calsey.huel@caregroup.com",
         "description": "",
         "organisations": [
             {
-                "workplaceID": "D76397203",
-                "regRef": "R-3M7T-9B",
+                "workplaceID": "F84625987",
+                "regRef": "R-8A4U-2Y",
                 "userType": "signatory",
-                "jobTitle": "Senior manager"
-            },
-            {
-                "workplaceID": "A02944934",
-                "regRef": "R-8K2M-9P",
-                "userType": "signatory",
-                "jobTitle": "Senior manager"
-            },
-            {
-                "workplaceID": "B13299931",
-                "regRef": "R-4T7W-2X",
-                "userType": "submitter",
                 "jobTitle": "Senior manager"
             }
         ]
     },
     {
-        "journey": "invite",
+        "journey": "self-serve",
+        "givenName": "Jane",
+        "familyName": "Rempel",
+        "email": "jane.rempel@caregroup.com",
+        "description": "",
+        "organisations": [
+            {
+                "workplaceID": "B52698456",
+                "regRef": "R-9X6K-8W",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "self-serve",
         "givenName": "Mark",
         "familyName": "Jacobs",
         "email": "mark.jacobs@caregroup.com",
