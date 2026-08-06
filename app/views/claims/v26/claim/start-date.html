@@ -39,8 +39,6 @@
                             Start date of course or qualification
                         </h1>
                     </legend>
-                    <p class="govuk-body">This is the date that the course took place. For qualifications and longer
-                        courses it is the date it started on.</p>
                     <div class="govuk-warning-text">
                         <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
                         <strong class="govuk-warning-text__text">
@@ -48,9 +46,15 @@
                             You can only claim for training that started and was paid for on or after 1 April 2024.
                         </strong>
                     </div>
-                    <div id="start-date-issued-hint" class="govuk-hint">
-                        For example, 12 5 2024
+                     <div id="completion-date-hint" class="govuk-hint">
+                        {% if claim.status == "not-yet-submitted" %}
+                            {% if claim.claimType == "60" and submission.learners.length == 1 %}
+                               For the 60 part of a 60/40 claim you need to submit the claim within 3 months of the payment date or the learner's start date, whichever is latest
+                               <br><br> For example, {{"" | currentDate}}
+                    {% endif %}
+                    {% endif %}
                     </div>
+            
                     {% if data.submitError.dateValid != null and not data.submitError.dateValid %}
                     {{data.submitError | dateErrorMessage("Start date", "input") }}
                     {% endif %}

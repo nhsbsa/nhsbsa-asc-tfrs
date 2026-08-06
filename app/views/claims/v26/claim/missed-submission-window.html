@@ -1,0 +1,171 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if claim.claimType == "60" %}
+
+  {% set pairClaim = claim.claimID | findPair(data.claims) %}
+
+{% elif claim.claimType == "40" %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair(data.claims) %}
+
+{% endif %}
+
+{% if claim.claimType == "60" %}  
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+  {% if (pairClaim and pairClaim.status == "queried") %}
+    {% set pairSubmission = pairClaim | getDraftSubmission %}
+  {% else %}
+    {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% else %}
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% endif %}
+{% set training = submission.trainingCode | findTraining %}
+{% set sameCompletionDate = submission.learners | checkCompletionDates %}
+{# If at least one learner, learner key #}
+
+{% block pageTitle %}
+Claim window closed {{data.id}}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">You cannot submit this claim</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-visually-hidden">Warning</span>
+          The submission window for this claim has ended.
+        </strong>
+      </div>
+      
+
+      <p class="govuk-body">
+       {% if (((claim.status == "not-yet-submitted")  
+          and claim.claimType== "100")
+          and submission.learners.length > 1) %}
+          For a 100 claim with multiple learners you need to submit the claim no more than 3 months after the last learner completes the training.
+        
+        {% elif (((claim.status == "not-yet-submitted")
+          and claim.claimType== "100")
+          and submission.learners.length == 1) %}
+          For 100 claims with a single learner you need to submit the claim within 3 months of the learner's completion date.
+        
+        {% elif (((claim.status == "not-yet-submitted")  
+          and claim.claimType== "60")
+          and submission.learners.length == 1) %}
+          For the 60 part of a 60/40 claim you need to submit the claim within 3 months of the payment date or the learner's start date, whichever is latest.
+        
+        {% elif (((claim.status == "approved")  
+          and pairClaim.claimType== "40")
+          and submission.learners.length == 1) %}
+          For the 40 part of a 60/40 claim you need to submit the claim within 3 months of the learner's completion date.
+
+        {% endif %}
+      </p>
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Training
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{submission.trainingCode}}</br>
+            {{training.title}}
+
+          </dd>
+        </div>
+      {% if (claim.claimType== "100" or (claim.status == "approved" and pairClaim.claimType== "40")) %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+           {# may need to remove depending on whether we show singular or plural  #}
+          {% if (submission.learners.length == 1 or submission.sharedCompletionDate or sameCompletionDate) %} 
+          Completion date
+
+          {% elif submission.learners.length > 1 %}
+            Completion dates
+
+          {% endif %}
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {% if claim.claimType=="100" %}
+            {{ submission.learners | dateRange }}
+            {% else %}
+            {{ pairSubmission.learners | dateRange }}
+            {% endif %}
+          </dd>
+      
+      </div>
+      {% endif %}
+
+      {% if ( claim.claimType== "60" and claim.status == "not-yet-submitted")  %}
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Start date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{submission.startDate | govukDate }}
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Payment date
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{submission.costDate | govukDate }}
+          </dd>
+        </div>
+
+        {% endif %}
+      </dl>
+        
+  <p class="govuk-body">
+   {% if (claim.status == "not-yet-submitted"
+          and (claim.claimType== "100" or claim.claimType== "40")
+          and (submission.learners.length == 1 or submission.sharedCompletionDate == true)) %}
+          Go back to claim details and check you have entered the correct date, or delete the claim.
+    
+          {% elif claim.claimType== "100"
+          and submission.learners.length > 1 %}
+          Go back to claim details and check you have entered the correct dates, or delete the claim.
+          
+          {% elif claim.claimType== "60" and claim.status == "not-yet-submitted" %}
+          Go back to claim details and check you have entered the correct dates, or delete the claim.
+    {% endif %}
+  </p>
+
+  <div class="govuk-button-group">
+    <form method="post" action="claim-details" class="govuk-!-margin-0">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Back to claim
+        </button>
+      </form>
+  </div>
+
+  <h2 class="govuk-heading-m">If you need support with this claim</h2>
+  <p class="govuk-body">
+    You can email us at <a href="mailto:ASClearninganddevelopmentsupport@nhsbsa.nhs.uk">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.
+  </p>
+
+</div>
+
+{% endblock %}

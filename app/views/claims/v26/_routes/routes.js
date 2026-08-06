@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, loadScenarioData, loadUserData, userCheck, checkEvidence, addressCheck, checkOrgs, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty, findReg } = require('../_helpers/helpers.js');
+const { loadData, loadScenarioData, loadUserData, userCheck, checkEvidence, addressCheck, checkOrgs, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty, findReg, checkSubmissionWindow } = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 
@@ -1088,8 +1088,9 @@ router.get('/ready-to-declare', function (req, res) {
     }
 
   let isDuplicateClaim = checkDuplicateClaim(submission.learners, submission.trainingCode, claim.claimID, req.session.data.claims);
+  const submissionWindow = checkSubmissionWindow(claim.claimType, submission)
   const submitError = checkClaim(claim)
-  const FYdate = new Date('2024-03-03')
+  const FYdate = new Date('2024-03-03')       
 
   if (submitError.claimValid) {
     delete req.session.data.submitError
@@ -1104,6 +1105,8 @@ router.get('/ready-to-declare', function (req, res) {
     } else if (isDuplicateClaim.check) {
       req.session.data.matchingIDs = isDuplicateClaim.ids
       res.redirect('claim/duplication')
+    } else if ((!submissionWindow) && claim.status == "not-yet-submitted") {
+      res.redirect('claim/missed-submission-window')
     } else {
       res.redirect('claim/declaration')
     }
