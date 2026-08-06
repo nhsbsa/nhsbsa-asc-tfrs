@@ -5,7 +5,7 @@
 
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const { removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, buildSlotComparison } = require('../_helpers/helpers.js');
+const { findReg, removeSpacesAndCharactersAndLowerCase, getMostRelevantSubmission, findCourseByCode, findLearnerById, loadLearners, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, sortSubmissionsForTable, findPair, findUser, findStatus, capitalizeFirstLetter, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, buildSlotComparison } = require('../_helpers/helpers.js');
 
 const fs = require('fs');
 
@@ -1913,3 +1913,7 @@ addFilter('breakUpEmail', function (email, breakEvery = 6) {
     return `<span class="govuk-!-text-break-word">${localPart}@<wbr>${formattedDomain}</span>`;
 
 }, { renderAsHtml: true });
+
+addFilter('findReg', function (regRef, orgs) {
+    return findReg(regRef, orgs)
+})
