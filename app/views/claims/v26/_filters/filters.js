@@ -1917,3 +1917,11 @@ addFilter('breakUpEmail', function (email, breakEvery = 6) {
 addFilter('findReg', function (regRef, orgs) {
     return findReg(regRef, orgs)
 })
+
+addFilter('booleanToAnswer', function (boolean) {
+    if (boolean) {
+        return "Yes"
+    } else {
+        return "No"
+    }
+})

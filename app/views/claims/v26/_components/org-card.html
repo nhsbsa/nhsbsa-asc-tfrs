@@ -18,7 +18,7 @@
           {% elif orgDetails.status == "draft" and orgDetails.userRole == "signatory"%}
               <a href="./load-registration?regRef={{orgDetails.regRef}}" class="govuk-link">Continue</a>
           {% elif (orgDetails.status == "submitted" or orgDetails.status == "rejected") and orgDetails.userRole == "signatory"%}
-              <a href="#" class="govuk-link">View</a>
+              <a href="./registration/registration-details?regRef={{orgDetails.regRef}}" class="govuk-link">View</a>
           {% endif %}
         </li>
         {% if orgDetails.status == "draft" and orgDetails.userRole == "signatory"%}
