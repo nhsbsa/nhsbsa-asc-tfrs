@@ -59,11 +59,11 @@
         <div class="content">
             {% if data.user.email == 'craig.willowtree@caregroup.com' %}
                 {% include "../_components/invite-emails/scenario-2.html" %}
-            {% elif data.org.workplaceID == 'F84625987' %}
+            {% elif data.user.email == 'calsey.huel@caregroup.com' %}
                 {% include "../_components/invite-emails/scenario-3.html" %}
-            {% elif data.org.workplaceID == 'B52698456' %}
+            {% elif data.user.email == 'mark.jacobs@caregroup.com' %}
                 {% include "../_components/invite-emails/scenario-4.html" %}
-            {% elif data.org.workplaceID == 'B52698456' %}
+            {% elif data.user.email == 'terri.jeffords@caregroup.com' %}
                 {% include "../_components/invite-emails/scenario-5.html" %}
             {% else %}
                 {% include "../_components/invite-emails/scenario-1.html" %}

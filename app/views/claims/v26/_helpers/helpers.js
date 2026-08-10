@@ -1119,7 +1119,7 @@ function generateRegRef() {
   return `R-${getRandomChars(4)}-${getRandomChars(2)}`;
 }
 
-function saveRegistrationEnty(req, status) {
+function saveRegistrationEnty(req, status, savePoint) {
     let regRef = req.session.data.regRef
     const jobTitle = req.session.data.jobTitle
     const orgName = req.session.data.orgName
@@ -1190,7 +1190,7 @@ function saveRegistrationEnty(req, status) {
             },
             bankDetails: null,
             validGDL: false,
-            notes : [],
+            savePoint,
             signatory: {
             active: {        
                     givenName: req.session.data.user.givenName,
@@ -1427,4 +1427,8 @@ function checkSubmissionWindow(claimType, submission) {
   }
 }
 
-module.exports = {findReg,addressCheck, checkEvidence, userCheck, checkOrgs, clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty, checkSubmissionWindow}
+function findOrg(workplaceID, orgs) {
+    return orgs.find(entry => entry.workplaceID === workplaceID);
+}
+
+module.exports = {findOrg, findReg,addressCheck, checkEvidence, userCheck, checkOrgs, clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty, checkSubmissionWindow}

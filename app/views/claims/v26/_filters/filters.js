@@ -1769,12 +1769,12 @@ addFilter('generateMissingActionOrgs', function (activeOrganisations, organisati
 
     for (const activeOrg of activeOrganisations) {
         const org = organisations.find(entry => entry.workplaceID === activeOrg);
-        if (type == "bank") {
-            if (org.bankDetails == null) {
+        if (org.userRole =="signatory") {
+            if (type == "bank" && org.bankDetails == null) {
                 orgList.push(org.workplaceID)
-            }
-        } else if (type == "gdl") {
-            if (org.validGDL == false) {
+            } else if (type == "gdl" && org.validGDL == false) {
+                orgList.push(org.workplaceID)
+            } else if (type == "newSRO" && org.newSRO) {
                 orgList.push(org.workplaceID)
             }
         }
@@ -1965,3 +1965,12 @@ if (!Array.isArray(learners) || learners.length <= 1) return true;
   });
 });
 
+
+
+addFilter('booleanToAnswer', function (boolean) {
+    if (boolean) {
+        return "Yes"
+    } else {
+        return "No"
+    }
+})
