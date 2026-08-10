@@ -90,7 +90,7 @@ Manage claims - {{serviceName}} — GOV.UK
           {% endif %}
         {% endif %}
 
-        {% if data.org.bankDetails.verificationStatus == "verified" and data.org.validGDL == true %}
+        {% if data.org.bankDetails.verificationStatus == "verified" and data.org.validGDL == true and not data.org.newSRO  %}
           <p class="govuk-body">We have verified your bank details. You can now start submitting claims.</p>  
         {% endif %}
 
@@ -110,6 +110,19 @@ Manage claims - {{serviceName}} — GOV.UK
               {% endif %}
           </p>
         {% endif %}
+
+        {% if data.org.newSRO %}
+          <h3 class="govuk-notification-banner__heading">Action needed</h3>
+          <p class="govuk-body">
+              {% if data.userType == "signatory" %}
+              As the new Senior Responsible Officer you need to complete registration before you can submit claims.
+              <a class="govuk-notification-banner__link" href="./change-sro/verify-details">Complete registration</a>.
+              {% elif data.userType == "submitter" %}
+              Please alert your new Senior Responsible Officer that they need to complete registration so that you can start submitting claims.
+              {% endif %}
+          </p>
+        {% endif %}
+
       </div>
     </div>
     {% endif %}

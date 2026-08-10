@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, loadScenarioData, loadUserData, userCheck, checkEvidence, addressCheck, checkOrgs, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty, findReg } = require('../_helpers/helpers.js');
+const { loadData, loadScenarioData, loadUserData, userCheck, checkEvidence, addressCheck, checkOrgs, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty, findReg, findOrg} = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 
@@ -72,7 +72,7 @@ router.post('/detailsCorrectResponse', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    const regRef = saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft", "isThisYou")
     req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
@@ -106,7 +106,7 @@ router.post('/companiesHouseResponse', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    const regRef = saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft", "companiesHouseQ")
     req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
@@ -136,7 +136,7 @@ router.post('/vatResponse', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    const regRef = saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft", "VATnumberQ")
     req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
@@ -1103,6 +1103,8 @@ router.get('/ready-to-declare', function (req, res) {
       res.redirect('claim/rejected-bank-details')
     } else if (req.session.data.org.validGDL == false &&  new Date(submission.costDate) > FYdate) {
       res.redirect('claim/missing-gdl')
+    } else if (req.session.data.org.newSRO) {
+      res.redirect('claim/change-sro-incomplete')
     } else if (isDuplicateClaim.check) {
       req.session.data.matchingIDs = isDuplicateClaim.ids
       res.redirect('claim/duplication')
@@ -1421,7 +1423,7 @@ router.post('/validate-org-address', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    const regRef = saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft", "orgAddress")
     req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
@@ -1462,7 +1464,7 @@ router.post('/validate-job-title', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    const regRef = saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft", "jobTitle")
     req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
@@ -1537,7 +1539,7 @@ router.post('/validate-address-evidence', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    const regRef = saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft", "addressEvidence")
     req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
@@ -1556,7 +1558,7 @@ router.post('/check-answer-confirmation', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    const regRef = saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft", "checkAnswers")
     req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
@@ -1591,7 +1593,7 @@ router.post('/validate-workplaceID', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    const regRef = saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft", "workplaceID")
     req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
@@ -1627,7 +1629,7 @@ router.post('/validate-companies-house', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    const regRef = saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft", "companiesHouseNumber")
     req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
@@ -1663,7 +1665,7 @@ router.post('/validate-vat', function (req, res) {
       action: "saveSuccess",
       orgName: req.session.data.orgName
     } 
-    const regRef = saveRegistrationEnty(req, "draft")
+    const regRef = saveRegistrationEnty(req, "draft", "VATnumber")
     req.session.data.banner.regRef = regRef
     res.redirect('manage-organisations')
   }
@@ -1687,6 +1689,7 @@ router.post('/registation-declaration', function (req, res) {
 router.get('/load-registration', function (req, res) {
   
   const regRef = req.session.data.regRef
+  let redirectURL = "registration/check-answers"
 
   const org = req.session.data.organisations.find(entry => entry.regRef === regRef);
   const userOrg  = req.session.data.user.organisations.find(entry => entry.regRef === regRef);
@@ -1715,7 +1718,40 @@ router.get('/load-registration', function (req, res) {
   }
   req.session.data.vatRegNumber = org.VATNumber
 
-  res.redirect('registration/check-answers')
+  switch (org.savePoint) {
+    case "jobTitle":
+      redirectURL = "registration/job-title"
+      break;
+    case "orgAddress":
+      redirectURL = "registration/org-address"
+      break;
+    case "addressEvidence":
+      redirectURL = "registration/org-address-evidence"
+      break;
+    case "workplaceID":
+      redirectURL = "registration/asc-wds-id"
+      break;
+    case "isThisYou":
+      redirectURL = "registration/is-this-you"
+      break;
+    case "companiesHouseQ":
+      redirectURL = "registration/companies-house"
+      break;
+    case "companiesHouseNumber":
+      redirectURL = "registration/companies-house-registration-number"
+      break;
+    case "VATnumberQ":
+      redirectURL = "registration/vat-registered"
+      break;
+    case "VATnumber":
+      redirectURL = "registration/vat-registration-number"
+      break;
+    case "checkAnswers":
+      redirectURL = "registration/check-answers"
+      break;
+  }
+  
+  res.redirect(redirectURL)
 });
 
 router.post('/new-declaration-confirmation', function (req, res) {
@@ -1930,13 +1966,24 @@ router.get('/confirm-delete-registration', function (req, res) {
 router.get('/signin-handler', function (req, res) {
   const journey = req.session.data.journey
   const user = req.session.data.user
+  let redirectURL = "manage-organisations"
 
-  if (user.journey == invite && req.session.data.scenarios == prelogin) {
-
-    res.redirect('manage-organisations')
-  } else {
-    res.redirect('manage-organisations')
+  if (user.journey == "invite" && req.session.data.scenarios == "prelogin") {
+    for (const userOrg of user.organisations) {
+      const org = findOrg(userOrg.workplaceID, req.session.data.organisations)
+      if (org.newSRO) {
+        loadData(req, userOrg.workplaceID);
+        req.session.data.userType = userOrg.userType
+        if (userOrg.userType == "signatory") {
+          redirectURL = 'change-sro/verify-details'
+        } else {
+          redirectURL = 'manage-claims-home'
+        }
+        
+      }
+    }
   }
+  res.redirect(redirectURL)
 
 });
 

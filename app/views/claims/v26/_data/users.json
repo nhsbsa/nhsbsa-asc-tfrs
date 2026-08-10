@@ -65,6 +65,33 @@
             }
         ]
     },
+    {   
+        "journey": "post-login",
+        "givenName": "Jehan",
+        "familyName": "Pohstra",
+        "email": "jehan.pohstra@caregroup.com",
+        "description": "Cynthia is a user of one organisations that is currently active and she is the SRO. She is a user of the following organsiation:",
+        "organisations": [
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "D76397203",
+                "regRef": "R-3M7T-9B",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "B13299931",
+                "regRef": "R-4T7W-2X",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
     {
         "journey": "post-login",
         "givenName": "Valerie",
@@ -138,8 +165,35 @@
         "description": "",
         "organisations": [
             {
-                "workplaceID": "B52698456",
-                "regRef": "R-9X6K-8W",
+                "workplaceID": "D76397203",
+                "regRef": "R-3M7T-9B",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "invite",
+        "givenName": "Terri",
+        "familyName": "Jeffords",
+        "email": "terri.jeffords@caregroup.com",
+        "description": "",
+        "organisations": [
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "B13299931",
+                "regRef": "R-4T7W-2X",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "D76397203",
+                "regRef": "R-3M7T-9B",
                 "userType": "submitter",
                 "jobTitle": "Senior manager"
             }
