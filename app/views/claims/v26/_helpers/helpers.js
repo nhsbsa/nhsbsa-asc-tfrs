@@ -1152,6 +1152,7 @@ function saveRegistrationEnty(req, status, savePoint) {
     }
     const vatRegNumber = req.session.data.vatRegNumber
 
+    delete req.session.data.confirmationResponse
     delete req.session.data.jobTitle
     delete req.session.data.orgName
     delete req.session.data.addressLine1

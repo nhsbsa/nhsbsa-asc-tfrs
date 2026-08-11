@@ -52,13 +52,13 @@
                     {% endif %}
                     <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="confirmationResponse" name="confirmationResponse" type="radio" value="yes">
+                            <input class="govuk-radios__input" id="confirmationResponse" name="confirmationResponse" type="radio" value="yes" {% if data.confirmationResponse == "yes" %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="confirmationResponse">
                             Yes
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="confirmationResponse-2" name="confirmationResponse" type="radio" value="no">
+                            <input class="govuk-radios__input" id="confirmationResponse-2" name="confirmationResponse" type="radio" value="no" {% if data.confirmationResponse == "no" %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="confirmationResponse-2">
                             No
                             </label>
