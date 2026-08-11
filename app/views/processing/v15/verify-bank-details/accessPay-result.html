@@ -208,14 +208,14 @@
             {% endif %}
             {% if data.partialMatchNoteTooLong %}
                 <p id="payment-queried-note-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span>Note must be 1500 characters or less
+                    <span class="govuk-visually-hidden">Error:</span>Note must be 1,500 characters or less
                 </p>
             {% endif %}
             <textarea class="govuk-textarea govuk-js-character-count {% if data.partialMatchNoteIncomplete or data.partialMatchNoteTooLong %}govuk-textarea--error{% endif %}" 
             id="detailsPartialMatchNote" name="detailsPartialMatchNote" rows="21" 
             aria-describedby="detailsPartialMatchNote-info detailsPartialMatchNote-hint">{% if data.detailsPartialMatchNote %}{{data.detailsPartialMatchNote}}{% endif %}</textarea>
             <div id="detailsPartialMatchNote-info" class="govuk-hint govuk-character-count__message">
-                You can enter up to 1500 characters
+                You can enter up to 1,500 characters
             </div>
         </div>
     </div>
@@ -252,7 +252,7 @@
             {% endif %}
             {% if data.noMatchNoteTooLong %}
                 <p id="detailsNoMatchNote-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span>Note must be 1500 characters or less
+                    <span class="govuk-visually-hidden">Error:</span>Note must be 1,500 characters or less
                 </p>
             {% endif %}
             <textarea
@@ -260,7 +260,7 @@
                 id="detailsNoMatchNote" name="detailsNoMatchNote" rows="21"
                 aria-describedby="detailsNoMatchNote-info detailsNoMatchNote-hint">{% if data.detailsNoMatchNote %}{{data.detailsNoMatchNote}}{% endif %}</textarea>
             <div id="detailsNoMatchNote-info" class="govuk-hint govuk-character-count__message">
-                You can enter up to 1500 characters
+                You can enter up to 1,500 characters
             </div>
         </div>
     </div>
