@@ -30,7 +30,6 @@ router.post('/accountResponse', function (req, res) {
 
 router.post('/confirmationResponse', function (req, res) {
   const confirmationResponse = req.session.data.confirmationResponse
-  delete req.session.data.confirmationResponse
   delete req.session.data.submitError
 
 
@@ -1697,6 +1696,7 @@ router.get('/load-registration', function (req, res) {
   const org = req.session.data.organisations.find(entry => entry.regRef === regRef);
   const userOrg  = req.session.data.user.organisations.find(entry => entry.regRef === regRef);
 
+  req.session.data.confirmationResponse = "yes"
   req.session.data.jobTitle = userOrg.jobTitle
   req.session.data.orgName = org.name
   req.session.data.addressLine1 = org.address.addressLine1

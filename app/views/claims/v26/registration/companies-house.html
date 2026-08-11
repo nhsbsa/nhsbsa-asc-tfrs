@@ -51,13 +51,13 @@
                     {% endif %}
                     <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="companiesHouseResponse" name="companiesHouseResponse" type="radio" value="Yes">
+                            <input class="govuk-radios__input" id="companiesHouseResponse" name="companiesHouseResponse" type="radio" value="Yes" {% if data.companiesHouseResponse == "Yes" %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="companiesHouseResponse">
                             Yes
                             </label>
                         </div>
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="companiesHouseResponse-2" name="companiesHouseResponse" type="radio" value="No">
+                            <input class="govuk-radios__input" id="companiesHouseResponse-2" name="companiesHouseResponse" type="radio" value="No" {% if data.companiesHouseResponse == "No" %}checked{% endif %}>
                             <label class="govuk-label govuk-radios__label" for="companiesHouseResponse-2">
                             No
                             </label>
