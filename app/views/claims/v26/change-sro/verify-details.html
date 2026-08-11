@@ -35,8 +35,7 @@
 
         <span class="govuk-caption-l">Complete registration</span>
         <h1 class="govuk-heading-l">Check details are correct</h1>
-        <p class="govuk-body">You have been invited to be Senior Responsible Officer for the following organisation. Please check the details are correct before proceeding?
-        </p>
+        <p class="govuk-body">You are invited to be Senior Responsible Officer for the following organisation. Please check all the details below are correct.</p>
         <h2 class="govuk-heading-m" id="completion">Organisation details</h2>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
@@ -55,10 +54,6 @@
                     {{ (data.org.address | formatAddress("line")) }}
                 </dd>
             </div>
-        </dl>
-        <h2 class="govuk-heading-m" id="completion">ASC-WDS details</h2>
-        <p class="govuk-body">These details are from the Adult Social Care Workforce Dataset.</p>
-        <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                 ASC-WDS workplace ID
@@ -67,6 +62,11 @@
                 {{data.org.workplaceID}}
                 </dd>
             </div>
+        </dl>
+        <h2 class="govuk-heading-m" id="completion">ASC-WDS details</h2>
+        <p class="govuk-body">These details are from the ASC-WDS using the workplace ID for your organisation detailed above.</p>
+        <dl class="govuk-summary-list">
+            
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                     Workplace name
