@@ -537,12 +537,17 @@ function flattenUsers(data) {
 
 function findUser(email, org) {
     users = flattenUsers(org)
-    let user = null;
+    let user = {
+        givenName: "Roy",
+        familyName: "hub",
+        email: "roy.hub@caregroup.com"
+    };
     for (let u of users) {
         if (u.email == email) {
             user = u
         }
     }
+    console.log(user)
     return user;
 }
 

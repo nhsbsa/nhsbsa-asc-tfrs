@@ -941,11 +941,15 @@ margin-right: govuk-spacing(3);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px; /* optional */
+  margin-bottom: govuk-spacing(4);
 }
 
 .completion-header .govuk-button {
   margin: 0; /* removes the default top margin */
+}
+
+.completion-header .govuk-heading-m {
+  margin-bottom: 0; /* removes the default bottom margin */
 }
 
 .govuk-accordion__controls {
