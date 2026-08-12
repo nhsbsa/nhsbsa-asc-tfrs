@@ -1985,6 +1985,10 @@ router.get('/signin-handler', function (req, res) {
         
       }
     }
+  } else if (user.organisations.length == 1 ) {
+    loadData(req, user.organisations[0].workplaceID);
+    req.session.data.userType = user.organisations[0].userType
+    redirectURL = 'manage-claims-home'
   }
   res.redirect(redirectURL)
 
@@ -2114,20 +2118,31 @@ router.post('/load-scenario-data', function (req, res) {
 
 router.get('/load-user-data', function (req, res) {
   const userID = req.session.data['userID']
+  const scenario = req.session.data.scenarios
+  let redirectURL = "./authentication/creation-link"
+  let user = null
 
   if (userID != null) {
     loadUserData(req, userID)
+    user = req.session.data.user
   }
 
   delete req.session.data['userID']
 
-  if (req.session.data.user.journey == "post-login") {
-    res.redirect('manage-organisations')
-  } else if (req.session.data.user.journey == "pre-login") {
-    res.redirect('eligibility/overview')
-  } else if (req.session.data.user.journey == "invite") {
+  if (scenario == "postlogin") {
+    console.log(user.organisations.length)
+    if (user.organisations.length == 1 ) {
+      loadData(req, user.organisations[0].workplaceID);
+      req.session.data.userType = user.organisations[0].userType
+      redirectURL = 'manage-claims-home'
+    } else {
+      redirectURL = "manage-organisations"
+    }
+  } else if (scenario == "prelogin") {
+    redirectURL = "eligibility/overview"
+  } else if (scenario == "invite") {
     req.session.data.journey = "creation"
-    res.redirect('./authentication/creation-link')
+    redirectURL = "./authentication/creation-link"
   } else {
     loadScenarioData(req);
     req.session.data.user = {
@@ -2142,10 +2157,10 @@ router.get('/load-user-data', function (req, res) {
     delete req.session.data.mobile
     delete req.session.data.users
     req.session.data.journey = "creation"
-    res.redirect('./authentication/creation-link')
+    redirectURL = "./authentication/creation-link"
   }
 
-  
+  res.redirect(redirectURL)
 })
 
 router.get('/load-data', function (req, res) {
