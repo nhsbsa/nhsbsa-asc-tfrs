@@ -1,0 +1,26 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+{% block pageTitle %}
+Details are incorrect — Complete registration — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<a href="verify-details" class="govuk-back-link">Back</a>
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Details are incorrect</h1>
+
+        <h2 class="govuk-heading-m">If your organisation details are incorrect</h2>
+        <p class="govuk-body">For example, if your organisation name is incorrect, you can email us at <a href="#">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk </a> or phone 0300 330 0522.</p>
+
+        <h2 class="govuk-heading-m">If your ASC-WDS details are incorrect</h2>
+        <p class="govuk-body">For example, if your workplace address is incorrect, you'll need to correct this in the Adult Social Care Workforce Dataset &ndash; go to the <a href="https://www.skillsforcare.org.uk/Adult-Social-Care-Workforce-Data/Adult-Social-Care-Workforce-Data-Set/Adult-Social-Care-Workforce-Data-Set.aspx" target="_blank">Skills for Care website (opens in new tab)</a>.</p>
+        <p class="govuk-body">Once you have made these corrections you can use the link we have already emailed to you to access the service.</p>
+        <p class="govuk-body">If you have any further problems accessing the service, you can email us at <a href="#">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
+    </div>
+</div>
+{% endblock %}

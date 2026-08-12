@@ -1,0 +1,180 @@
+{% extends "./_layouts/claims-account-setup.html" %}
+
+{% set orgList = data.user | generateUserOrgList(data.organisations) %}
+
+{% set activeOrgMissingbank = orgList.active | generateMissingActionOrgs(data.organisations, "bank") %}
+{% set activeOrgMissingGDL = orgList.active | generateMissingActionOrgs(data.organisations, "gdl") %}
+{% set activeOrgNewSRO = orgList.active | generateMissingActionOrgs(data.organisations, "newSRO") %}
+
+{% block pageTitle %}
+{{serviceName}} — GOV.UK
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.banner.action == "saveSuccess" %}
+            <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+
+                <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+                    <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+                </svg>
+
+                <div class="moj-banner__message">Registration details for <a class="govuk-link" href="#{{data.banner.regRef}}">{{data.banner.orgName}}</a></a> saved</div>
+
+            </div>
+        {% endif %}
+
+        {% if data.banner.action == "deleteSuccess" %}
+            <div class="moj-banner moj-banner--success" role="region" aria-label="Success">
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+                <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
+            </svg>
+            <div class="moj-banner__message">{{data.banner.orgName}} has been successfully deleted.</div>
+            </div>
+        {% endif %}
+
+        {% if activeOrgMissingbank.length > 0 or activeOrgMissingGDL.length > 0 or activeOrgNewSRO.length > 0  %}
+            <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+            <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                Important
+                </h2>
+            </div>
+            <div class="govuk-notification-banner__content">
+
+                {% if activeOrgMissingbank.length > 0 %}
+                <h3 class="govuk-notification-banner__heading">Action needed</h3>
+                <p class="govuk-body">As Senior Responsible Officer you need to add bank details for the following organisations before you can submit claims:</p>
+                    <ul class="govuk-list">
+                        {% for workplaceID in activeOrgMissingbank %}
+                            {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                            <li>
+                                <a class="govuk-notification-banner__link" href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}">{{orgDetails.name}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                
+                {% endif %}
+
+                {% if activeOrgMissingGDL.length > 0 %}
+                <h3 class="govuk-notification-banner__heading">Action needed</h3>
+                <p class="govuk-body">As Senior Responsible Officer you need to sign the new grant determination letter (GDL). You can only submit claims paid for in the year starting 1&nbsp;April&nbsp;2026 once you have done this. This applies to the following organisations:</p>
+                    <ul class="govuk-list">
+                        {% for workplaceID in activeOrgMissingGDL %}
+                            {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                            <li>
+                                <a class="govuk-notification-banner__link" href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}">{{orgDetails.name}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                
+                {% endif %}
+
+                {% if activeOrgNewSRO.length > 0 %}
+                <h3 class="govuk-notification-banner__heading">Action needed</h3>
+                <p class="govuk-body">As the new Senior Responsible Officer you need to complete registration for the following organisations before you can submit claims:</p>
+                    <ul class="govuk-list">
+                        {% for workplaceID in activeOrgNewSRO %}
+                            {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                            <li>
+                                <a class="govuk-notification-banner__link" href="./load-data?orgID={{orgDetails.workplaceID}}&tabLocation=claims&userType={{orgDetails.userRole}}">{{orgDetails.name}}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                
+                {% endif %}
+
+            </div>
+            </div>
+            {% endif %}
+        
+        <h1 class="govuk-heading-l">My account</h1>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                First name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                {{data.user.givenName}}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> first name</span></a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Last name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                {{data.user.familyName}}
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> last name</span></a>
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row govuk-summary-list__row--no-actions">
+                <dt class="govuk-summary-list__key">
+                Email
+                </dt>
+                <dd class="govuk-summary-list__value">
+                {{data.user.email | breakUpEmail}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Phone number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                01234567890
+                </dd>
+                <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> phone number</span></a>
+                </dd>
+            </div>
+            </dl>
+
+        <h2 class="govuk-heading-m">Registered organisations</h2>
+
+        <a type="submit" class="govuk-button" data-module="govuk-button" href="registration/before-you-start">
+            Register new organisation
+        </a>
+
+        {% if orgList.active.length > 0 %}
+            {% for workplaceID in orgList.active %}
+                {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                    {% include "./_components/org-card.html" %}
+            {% endfor %}
+        {% else %}
+            <p class="govuk-body">You don't have any registered organisations yet.</p>
+        {% endif %}
+
+        {% if orgList.submitted.length > 0 or orgList.draft.length > 0 or orgList.rejected.length > 0 %}
+            <h2 class="govuk-heading-m">Registrations in progress</h2>
+
+            {% if orgList.submitted.length > 0 %}
+                {% for workplaceID in orgList.submitted %}
+                    {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                        {% include "./_components/org-card.html" %}
+                {% endfor %}
+            {% endif %}
+            {% if orgList.draft.length > 0 %}
+                {% for workplaceID in orgList.draft %}
+                    {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                        {% include "./_components/org-card.html" %}
+                {% endfor %}
+            {% endif %}
+            {% if orgList.rejected.length > 0 %}
+                {% for workplaceID in orgList.rejected %}
+                    {% set orgDetails = workplaceID | findOrg(data.organisations) %}
+                        {% include "./_components/org-card.html" %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

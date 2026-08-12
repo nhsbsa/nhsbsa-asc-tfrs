@@ -1,0 +1,163 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+{% block pageTitle %}
+  Check your answers — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="vat-registration-number" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Check your answers</h1>
+
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Organisation name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.orgName}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="org-name?change=true">Change<span class="govuk-visually-hidden"> organisation name</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Are you the Senior Responsible Officer?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              Yes
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="SRO-confirmation?change=true">Change<span class="govuk-visually-hidden"> whether you are a Senior Responsible Officer</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Job title
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.jobTitle}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="job-title?change=true">Change<span class="govuk-visually-hidden"> job title</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Organisation address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.addressLine1}}{% if data.addressLine2 != "" and data.addressLine2 != null %}<br>{{data.addressLine2}}{% endif %}{% if data.addressLine3 != "" and data.addressLine3 != null %}<br>{{data.addressLine3}}{% endif %}<br>{{data.addressTown}}{% if data.addressCounty != "" and data.addressCounty != null %}<br>{{data.addressCounty}}{% endif %}<br>{{data.addressPostcode}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="org-address?change=true">Change<span class="govuk-visually-hidden"> organisation address</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              First proof of address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.firstEvidence.type | evidenceType}}
+              <br><a class="govuk-link" href="/public/images/{{data.firstEvidence.evidence}}" target="_blank">{{data.firstEvidence.evidence}} (opens in new tab)</a>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="org-address-evidence?change=true&evidenceAddressCount=first">Change<span class="govuk-visually-hidden"> second proof of organisation address</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Second proof of address
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.secondEvidence.type | evidenceType}}
+              <br><a class="govuk-link" href="/public/images/{{data.secondEvidence.evidence}}" target="_blank">{{data.secondEvidence.evidence}} (opens in new tab)</a>
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="org-address-evidence?change=true&evidenceAddressCount=second">Change<span class="govuk-visually-hidden"> first proof of organisation address</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Workplace ID
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.orgID}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="asc-wds-id?change=true">Change<span class="govuk-visually-hidden"> workplace ID</span></a>
+            </dd>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Registered with Companies House?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data.companiesHouseResponse}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="companies-house?change=true">Change<span class="govuk-visually-hidden"> whether registered with companies house</span></a>
+            </dd>
+          </div>
+          {% if data.companiesHouseResponse == "Yes"  %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Companies House number
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data.companiesHouseRegNumber}}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="companies-house-registration-number?change=true">Change<span class="govuk-visually-hidden"> companies house registration number</span></a>
+              </dd>
+            </div>
+          {% endif %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              VAT registered?
+            </dt>
+            <dd class="govuk-summary-list__value">
+               {{data.vatRegisteredResponse}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a class="govuk-link" href="vat-registered?change=true">Change<span class="govuk-visually-hidden"> whether VAT registered</span></a>
+            </dd>
+          </div>
+          {% if data.vatRegisteredResponse == "Yes"  %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                VAT number
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{data.vatRegNumber}}
+              </dd>
+              <dd class="govuk-summary-list__actions">
+                <a class="govuk-link" href="vat-registration-number?change=true">Change<span class="govuk-visually-hidden"> VAT registration number</span></a>
+              </dd>
+            </div>
+          {% endif %}
+        </dl>
+        <h2 class="govuk-heading-m">What happens next</h2>
+        <p class="govuk-body">Once you've signed the declaration on the next page, we'll check your details and email you to confirm that your organisation has been registered with the service. </p>
+        <form action="../check-answer-confirmation" method="post" novalidate>
+          <input type="hidden" name="answers-checked" value="true">
+          <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
+                    Continue
+                </button>
+                <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
+                    Save and finish later
+                </button>
+            </div> 
+        </form>
+  </div>
+</div>
+
+{% endblock %}

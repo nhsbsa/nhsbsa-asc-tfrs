@@ -1,0 +1,96 @@
+{% extends "../_layouts/claims-main.html" %}
+
+
+{% block pageTitle %}
+{% if data.submitError.userValid != null and not data.submitError.userValid %}Error: {% endif %}Enter contact details — Invite new team member — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {% if data.submitError.userValid != null and not data.submitError.userValid %}
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            {{ data.submitError | userErrorMessage }}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <h1 class="govuk-heading-l">Invite new submitter</h1>
+    <p class="govuk-body">Enter the details of the team member you're inviting to be a submitter.</p>
+    <form action="../check-user" method="post" novalidate>
+      <div
+        class="govuk-form-group {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.familyName == 'missing' %} govuk-form-group--error {% endif %}">
+        <label class="govuk-label govuk-label--s" for="familyName">
+          Last (family) name
+        </label>
+        {% if data.submitError.userValid != null and not data.submitError.userValid and
+        data.submitError.familyName == 'missing' %}
+        <p id="familyName-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Enter a last (family) name
+        </p>
+        {% endif %}
+        <input
+          class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.familyName == 'missing' %} govuk-input--error {% endif %}"
+          id="familyName" name="familyName" type="text" spellcheck="false" autocomplete="name"
+          value="{{ data.familyName | default ('') }}">
+      </div>
+      <div
+        class="govuk-form-group {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.givenName == 'missing' %} govuk-form-group--error {% endif %}">
+        <label class="govuk-label govuk-label--s" for="givenName">
+          First (given) name
+        </label>
+        {% if data.submitError.userValid != null and not data.submitError.userValid and data.submitError.givenName
+        == 'missing' %}
+        <p id="givenName-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> Enter a first (given) name
+        </p>
+        {% endif %}
+        <input
+          class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.givenName == 'missing' %} govuk-input--error {% endif %}"
+          id="givenName" name="givenName" type="text" spellcheck="false" autocomplete="name"
+          value="{{ data.givenName | default ('') }}">
+      </div>
+      <div
+        class="govuk-form-group {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.email == 'missing' or data.submitError.email == 'match' or data.submitError.email == 'invalid') %} govuk-form-group--error {% endif %}">
+        <label class="govuk-label govuk-label--s" for="email">
+          Email address
+        </label>
+        <div id="email-hint" class="govuk-hint">
+          We’ll only use this to send the invite
+        </div>
+        {% if data.submitError.userValid != null and not data.submitError.userValid and
+          (data.submitError.email == 'missing' or data.submitError.email == 'invalid' or data.submitError.email == 'match')  %}
+          <p id="email-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span>
+            {% if data.submitError.email == 'missing' %}
+                Enter an email address
+            {% elif data.submitError.email == 'match' %}
+                An invite has already been sent to this email
+            {% elif data.submitError.email == 'invalid' %}
+                Enter an email address in the correct format, like name@example.com
+            {% endif %}
+          </p>
+          {% endif %}
+        <input
+          class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and (data.submitError.email == 'missing'  or data.submitError.email == 'match' or data.submitError.email == 'invalid') %} govuk-input--error {% endif %}"
+          id="email" name="email" type="email" spellcheck="false" aria-describedby="email-hint" autocomplete="email" value="{{ data.email | default ('') }}">
+      </div>
+
+      <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Continue
+        </button>
+        <a class="govuk-link govuk-link--no-visited-state" href="manage-team?tabLocation=users&invite&submitError&resendEmail">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

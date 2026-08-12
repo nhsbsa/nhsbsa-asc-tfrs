@@ -1,0 +1,2246 @@
+const govukPrototypeKit = require('govuk-prototype-kit')
+const router = govukPrototypeKit.requests.setupRouter()
+const { faker } = require('@faker-js/faker');
+const fs = require('fs');
+const { loadData, loadScenarioData, loadUserData, userCheck, checkEvidence, addressCheck, checkOrgs, clearSessionExcept, newClaim, checkClaim, compareNINumbers, sortByCreatedDate, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, findLearnerById, loadLearners, checkUserForm, getMostRelevantSubmission, getDraftSubmission, findPair, findUser, findCourseByCode, replaceLearnerID, saveRegistrationEnty, findReg, checkSubmissionWindow, findOrg} = require('../_helpers/helpers.js');
+const { generateClaim } = require('../_helpers/generate-claims.js');
+
+
+router.use('/claims/v27/backstop', require('../_backstop/backstop-routes.js'));
+
+// v27 Prototype routes
+
+
+router.post('/accountResponse', function (req, res) {
+  const accountResponse = req.session.data.accountResponse
+  delete req.session.data.accountResponse
+  delete req.session.data.missingOption
+
+  if (accountResponse == "yes") {
+    req.session.data.journey = 'signin'
+    res.redirect('authentication/sign-in')
+  } else if (accountResponse == "no") {
+    req.session.data.journey = "creation"
+    res.redirect('authentication/account-details')
+  } else {
+    req.session.data.missingOption = true
+    res.redirect('authentication/what-do-you-want-to-do')
+  }
+});
+
+router.post('/confirmationResponse', function (req, res) {
+  const confirmationResponse = req.session.data.confirmationResponse
+  delete req.session.data.submitError
+
+
+  if (confirmationResponse == "yes") {
+    res.redirect('registration/job-title')
+  } else if (confirmationResponse == "no") {
+    res.redirect('registration/not-SRO')
+  } else {
+    req.session.data.submitError = true
+    res.redirect('registration/sro-confirmation')
+  }
+});
+
+router.post('/detailsCorrectResponse', function (req, res) {
+  const isThisYouResponse = req.session.data.isThisYouResponse
+  delete req.session.data.isThisYouResponse
+  delete req.session.data.detailCorrectRadioMissing
+
+  const action = req.session.data.action
+  const change = req.session.data.change
+
+  delete req.session.data.change
+  delete req.session.data.action
+
+  if (action =="continue") {
+    if (isThisYouResponse == "" || isThisYouResponse == null) {
+      res.redirect('registration/is-this-you?detailCorrectRadioMissing=true')
+    } else if (isThisYouResponse == "yes") {
+      if (change == "true") {
+        res.redirect('registration/check-answers')
+      } else {
+        res.redirect('registration/companies-house')
+      }
+    } else if (isThisYouResponse == "no") {
+      res.redirect('registration/not-you')
+    }
+  } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    const regRef = saveRegistrationEnty(req, "draft", "isThisYou")
+    req.session.data.banner.regRef = regRef
+    res.redirect('manage-organisations')
+  }
+});
+
+router.post('/companiesHouseResponse', function (req, res) {
+  const companiesHouseResponse = req.session.data.companiesHouseResponse
+  delete req.session.data.chRadioMissing
+
+  const action = req.session.data.action
+  const change = req.session.data.change
+
+  delete req.session.data.action
+
+  if (action =="continue") {
+    if (companiesHouseResponse == "" || companiesHouseResponse == null) {
+      res.redirect('registration/companies-house?chRadioMissing=true')
+    } else if (companiesHouseResponse == "Yes") {
+      res.redirect('registration/companies-house-registration-number')
+    } else if (companiesHouseResponse == "No") {
+      delete req.session.data.change
+      delete req.session.data.companiesHouseRegNumber
+      if (change == "true") {
+        res.redirect('registration/check-answers')
+      } else {
+        res.redirect('registration/vat-registered')
+      }
+    }
+  } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    const regRef = saveRegistrationEnty(req, "draft", "companiesHouseQ")
+    req.session.data.banner.regRef = regRef
+    res.redirect('manage-organisations')
+  }
+});
+
+router.post('/vatResponse', function (req, res) {
+  const vatRegisteredResponse = req.session.data.vatRegisteredResponse
+  delete req.session.data.vatRadioMissing
+
+  const action = req.session.data.action
+  const change = req.session.data.change
+
+  delete req.session.data.action
+
+  if (action =="continue") {
+    if (vatRegisteredResponse == "" || vatRegisteredResponse == null) {
+      res.redirect('registration/vat-registered?vatRadioMissing=true')
+    } else if (vatRegisteredResponse == "Yes") {
+      res.redirect('registration/vat-registration-number')
+    } else if (vatRegisteredResponse == "No") {
+      delete req.session.data.change
+      delete req.session.data.vatRegNumber
+      res.redirect('registration/check-answers')
+    }
+  } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    const regRef = saveRegistrationEnty(req, "draft", "VATnumberQ")
+    req.session.data.banner.regRef = regRef
+    res.redirect('manage-organisations')
+  }
+});
+
+
+router.post('/verify-details-handler', function (req, res) {
+  const confirmationAnswer = req.session.data.confirmation
+  delete req.session.data.confirmation
+  delete req.session.data.submitError
+  console.log(confirmationAnswer)
+  if (confirmationAnswer == "yes") {
+    res.redirect('change-sro/job-title')
+  } else if (confirmationAnswer == "no") {
+    res.redirect('change-sro/account-issue')
+  } else {
+    req.session.data.submitError = true
+    res.redirect('change-sro/verify-details')
+  }
+  delete req.session.data['confirmation'];
+});
+
+router.post('/add-training', function (req, res) {
+  const newTrainingCode = req.session.data.trainingSelection
+  const newTrainingChoice = findCourseByCode(newTrainingCode)
+
+  var claim = null
+  if (req.session.data.id) {
+    claim = req.session.data.claims.find(c => c.claimID.replace(/[-\s]+/g, '') == req.session.data.id.replace(/[-\s]+/g, '')  && (c.workplaceID == req.session.data.org.workplaceID) && (c.status == "queried" || c.status == "not-yet-submitted"));
+  }
+
+  if (claim) {
+    let submission = null
+    if(claim.status =="queried") {
+      submission = getDraftSubmission(claim)
+    } else {
+      submission = getMostRelevantSubmission(claim)
+    }
+    if (!(["OMMT/T1/INT","OMMT/T2/INT"].includes(submission.trainingCode)) && (["OMMT/T1/INT","OMMT/T2/INT"].includes(newTrainingChoice.code)) ) {
+      submission.evidenceOfPayment = null
+      submission.costDate = null
+    }
+    submission.trainingCode = newTrainingChoice.code
+    delete req.session.data['training-input'];
+    delete req.session.data['trainingSelection'];
+    res.redirect('claim/claim-details' + '?id=' + claim.claimID)
+    
+  } else {
+
+    if (newTrainingChoice.fundingModel == "full") {
+      delete req.session.data['training-input'];
+      delete req.session.data['trainingSelection'];
+      const claimID = newClaim(req, newTrainingChoice, "100")
+      res.redirect('claim/claim-details' + '?id=' + claimID)
+    } else {
+      res.redirect('claim/split-decision')
+    }
+
+  }
+});
+
+router.post('/bank-details-handler', function (req, res) {
+  const accountName = req.session.data.nameOnTheAccount
+  const sortCode = req.session.data.sortCode
+  const accountNumber = req.session.data.accountNumber
+  const buildingSociety = req.session.data.rollNumber
+  delete req.session.data.submitError
+  const check = checkBankDetailsForm(accountName, sortCode, accountNumber, buildingSociety)
+
+  if (check.bankDetailsValid) {
+    const bankDetails = {
+      verificationStatus: "submitted",
+      nameOnAccount: accountName,
+      sortCode: sortCode,
+      accountNumber: accountNumber,
+      rollNumber: buildingSociety
+    }
+    
+    req.session.data.org.bankDetails = bankDetails
+
+    delete req.session.data.nameOnTheAccount
+    delete req.session.data.sortCode
+    delete req.session.data.accountNumber
+    delete req.session.data.rollNumber
+
+    if (req.session.data.journey == 'signin') {
+      req.session.data.addbankdetailsSuccess = 'true'
+      res.redirect('org-admin/bank-details?tabLocation=bankDetails')
+    } else {
+      req.session.data.journey = 'signin'
+      res.redirect('manage-claims-home?tabLocation=claims')
+    }
+    
+  } else {
+    req.session.data.submitError = check
+    res.redirect('org-admin/change-bank-details')
+  }
+});
+
+router.post('/search_id_result', function (req, res) {
+  delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['notFound'];
+  delete req.session.data['fromSearchId'];
+  delete req.session.data['fromSearchResults'];
+  delete req.session.data['deleteSuccess'];
+
+  var claimID = req.session.data.searchClaimId.replace(/[-\s]+/g, '');
+
+  const emptyRegex = /\S/;
+  if (!emptyRegex.test(claimID)) {
+    return res.redirect('manage-claims-home?emptyError=true');
+  }
+
+  const letterORegex = /o/i;
+  if (letterORegex.test(claimID)) {
+    return res.redirect('manage-claims-home?invalidIDError=true');
+  }
+
+  const lengthRegex = /^[A-NP-Z0-9]{3}(-)?[A-NP-Z0-9]{4}(-)?[A-NP-Z0-9]{4}(-)?([ABC])?$/;
+  if (!lengthRegex.test(claimID)) {
+    return res.redirect('manage-claims-home?invalidIDError=true');
+  }
+
+  var foundClaim = null
+  for (const c of req.session.data['claims']) {
+    var removeDash = c.claimID.replace(/-/g, '')
+    if ((removeDash.includes(claimID) && (req.session.data.org.workplaceID == c.workplaceID)) ) {
+      foundClaim = c
+    }
+}
+
+  // handle the claim id searched on won't be the one on a specific claim
+
+  if (foundClaim == null) {
+    return res.redirect('manage-claims-home?notFound=true');
+  } else {
+    delete req.session.data.searchClaimId
+    req.session.data.fromSearchId = 'true'
+    res.redirect('claim/claim-details?id=' + foundClaim.claimID);
+  }
+});
+
+router.post('/advanced-search-handler', function (req, res) {
+  delete req.session.data['noInputs'];
+  delete req.session.data['notFound'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['emptyError'];
+  delete req.session.data['fromSearchId'];
+  delete req.session.data['fromSearchResults'];
+  // delete req.session.data['trainingSearchLengthInsufficient'];
+  // delete req.session.data['learnerSearchLengthInsufficient'];
+
+  const training = req.session.data.trainingName
+  const learner = req.session.data.learner
+
+  let errorQuery = ""
+  if (training == "" && learner == "") {
+    errorQuery += "noInputs=true&"
+  }
+  // if ((training != "" && training.length < 3)) {
+  //   errorQuery += "trainingSearchLengthInsufficient=true&"
+  // }
+  // if ((learner != "" && learner.length < 3)) {
+  //   errorQuery += "learnerSearchLengthInsufficient=true&"
+  // } 
+  if (errorQuery == "") {
+    delete req.session.data['noInputs'];
+    delete req.session.data['notFound'];
+    delete req.session.data['invalidIDError'];
+    delete req.session.data['emptyError'];
+    delete req.session.data['fromSearchId'];
+    delete req.session.data['fromSearchResults'];
+    // delete req.session.data['trainingSearchLengthInsufficient'];
+    // delete req.session.data['learnerSearchLengthInsufficient'];
+    
+    res.redirect('claim/advanced-search?fromSearchResults=true#searchResults');
+  } else {
+    res.redirect('claim/advanced-search?' + errorQuery)
+  }
+});
+
+router.post('/split-decision-handler', function (req, res) {
+  const trainingCode = req.session.data.trainingSelection
+  const trainingChoice = findCourseByCode(trainingCode)
+  const choice = req.session.data.splitDecision
+
+  if (choice == "no") {
+    delete req.session.data['training-input'];
+    delete req.session.data['trainingSelection'];
+    delete req.session.data.splitDecision;
+    const claimID = newClaim(req, trainingChoice, "100")
+    res.redirect('claim/claim-details' + '?id=' + claimID)
+  } else if (choice == "yes") {
+    delete req.session.data['training-input'];
+    delete req.session.data['trainingSelection'];
+    delete req.session.data.splitDecision;
+    const claimID = newClaim(req, trainingChoice, "60")
+    res.redirect('claim/claim-details' + '?id=' + claimID)
+
+  } else {
+    res.redirect('claim/split-decision?submitError=true')
+  }
+});
+
+router.post('/new-claim', function (req, res) {
+  delete req.session.data['emptyError'];
+  delete req.session.data['invalidIDError'];
+  delete req.session.data['notFound'];
+  delete req.session.data['id'];
+  delete req.session.data['statusID'];
+  delete req.session.data['fromSearchId'];
+  delete req.session.data['fromSearchResults'];
+  delete req.session.data['confirmation'];
+  delete req.session.data['type'];
+  
+
+  res.redirect('claim/select-training')
+});
+
+router.post('/add-start-date', function (req, res) {
+  const day = req.session.data['activity-date-started-day']
+  const month = req.session.data['activity-date-started-month']
+  const year = req.session.data['activity-date-started-year']
+  const claimID = req.session.data.id
+
+  const startDate = new Date(year, month - 1, day)
+  delete req.session.data.submitError
+
+  const error = validateDate(day, month, year, "start");
+  if (error.dateValid == true) {
+    delete req.session.data['activity-date-started-day'];
+    delete req.session.data['activity-date-started-month'];
+    delete req.session.data['activity-date-started-year'];
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        let submission = null
+        if (c.status == "queried") {
+          submission = getDraftSubmission(c)
+        } else {
+          submission = getMostRelevantSubmission(c)
+        }
+        submission.startDate = startDate
+      }
+    }
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#training')
+
+  } else {
+    req.session.data.submitError = error
+    res.redirect('claim/start-date')
+  }
+});
+
+router.post('/cost-date', function (req, res) {
+  const day = req.session.data['payment-date-started-day']
+  const month = req.session.data['payment-date-started-month']
+  const year = req.session.data['payment-date-started-year']
+  const claimID = req.session.data.id
+  const costDate = new Date(year, month - 1, day)
+
+
+  const { claims, org } = req.session.data
+  const workplaceID = org.workplaceID
+  let claim = null
+  let sixtyClaim = null
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+    if (claimID == c.claimID && isSameWorkplace) {
+      claim = c
+    }
+    if (claimID[claimID.length - 1] === 'C') {
+      let sixtyId = claimID.slice(0, -1) + 'B'
+      if (sixtyId == c.claimID && isSameWorkplace) {
+        sixtyClaim = c
+      }
+    }
+  }
+  delete req.session.data.submitError
+
+  const error = validateDate(day, month, year, "payment", claim, sixtyClaim);
+
+  if (error.dateValid == true) {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        let submission = null
+        if (c.status == "queried") {
+          submission = getDraftSubmission(c)
+        } else {
+          submission = getMostRelevantSubmission(c)
+        }
+        submission.costDate = costDate
+      }
+    }
+    delete req.session.data['payment-date-started-day'];
+    delete req.session.data['payment-date-started-month'];
+    delete req.session.data['payment-date-started-year'];
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#payment')
+  } else {
+    req.session.data.submitError = error
+    res.redirect('claim/cost-date')
+  }
+});
+
+router.get('/completion-date-handler', function (req, res) {
+  let claimID = req.session.data.id
+
+  if (claimID[claimID.length - 1] === 'B') {
+    claimID =  claimID.slice(0, -1) + 'C';
+  }
+  // claim will always be 100 or 40
+
+  const { claims, org } = req.session.data
+  const workplaceID = org.workplaceID
+  let claim = null
+  let sixtyClaim = null
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+    if (claimID == c.claimID && isSameWorkplace) {
+      claim = c
+    }
+    if (claimID[claimID.length - 1] === 'C') {
+      let sixtyId = claimID.slice(0, -1) + 'B'
+      if (sixtyId == c.claimID && isSameWorkplace) {
+        sixtyClaim = c
+      }
+    }
+  }
+
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim)
+  } else {
+    submission = getMostRelevantSubmission(claim)
+  }
+
+  if (submission.sharedCompletionDate == null) {
+    res.redirect('claim/shared-completion-date')
+  } else {
+    res.redirect('claim/add-completion-date')
+  }
+
+});
+
+router.get('/remove-learner', function (req, res) {
+  const claimID = req.session.data.id
+  const learnerID = req.session.data.learner
+  delete req.session.data.learnerConfirmation
+
+  const { claims, org } = req.session.data
+  const workplaceID = org.workplaceID
+  let claim = null
+  let mainClaim = null;
+  let cClaim = null;
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+
+    if (!isSameWorkplace) continue;
+
+    if (c.claimID === claimID) {
+      mainClaim = c;
+    }
+
+    if (c.claimID === claimID.slice(0, -1) + "C" && 
+        c.claimType === "60" && 
+        c.status === "approved") {
+      cClaim = c;
+    }
+  }
+
+  // Prefer C-claim if available
+  claim = cClaim || mainClaim;
+
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim)
+  } else {
+    submission = getMostRelevantSubmission(claim)
+  }
+
+
+  // Ensure removedLearners array exists
+  submission.removedLearners = submission.removedLearners || [];
+
+  // Find the learner being removed
+  const removedLearner = submission.learners.find(
+    item => item.learnerID === learnerID
+  );
+
+  // Filter out the learner
+  submission.learners = submission.learners.filter(
+    item => item.learnerID !== learnerID
+  );
+
+  if (!((claim.claimType == "100" || claim.claimType == "60") && claim.status == "not-yet-submitted")) {
+    // If a learner was actually removed, push it into removedLearners
+    if (removedLearner) {
+      submission.removedLearners.push(removedLearner);
+    }
+  }
+
+  req.session.data.learnerConfirmation = {
+      type: "removal",
+      learner: learnerID,
+    }
+
+  if (submission.learners.length > 1 || submission.removedLearners.length > 1) {
+    res.redirect('claim/claim-learners')
+  } else {
+    res.redirect('claim/claim-details')
+  }
+  
+
+
+});
+
+router.get('/claim-learner-back-handler', function (req, res) {
+  delete req.session.data.learnerConfirmation
+  res.redirect('claim/claim-details');
+});
+
+router.get('/readd-learner', function (req, res) {
+  const claimID = req.session.data.id;
+  const learnerID = req.session.data.learner;
+  delete req.session.data.learnerConfirmation
+
+  const { claims, org } = req.session.data;
+  const workplaceID = org.workplaceID;
+  let claim = null;
+  let mainClaim = null;
+  let cClaim = null;
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+    if (!isSameWorkplace) continue;
+
+    if (c.claimID === claimID) {
+      mainClaim = c;
+    }
+
+    if (
+      c.claimID === claimID.slice(0, -1) + "C" &&
+      c.claimType === "60" &&
+      c.status === "approved"
+    ) {
+      cClaim = c;
+    }
+  }
+
+  // Prefer C-claim if available
+  claim = cClaim || mainClaim;
+
+  let submission;
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim);
+  } else {
+    submission = getMostRelevantSubmission(claim);
+  }
+
+  // to readd previous submissions removed learners:
+  // to re-add learners that were on first submission, that are only in the removed learners array on first submission
+  // find all the removed learners on any submission
+  // find the one that is being readded
+  // add them to the most recent submission
+  // account in the submissions table design if they were removed in previous submissions then re-added
+
+  // Ensure removedLearners array exists
+  submission.removedLearners = submission.removedLearners || [];
+
+  // Find the learner being re-added
+  const learnerToReadd = submission.removedLearners.find(
+    item => item.learnerID === learnerID
+  );
+
+  if (learnerToReadd) {
+    // Remove from removedLearners
+    submission.removedLearners = submission.removedLearners.filter(
+      item => item.learnerID !== learnerID
+    );
+
+    // Add back to learners
+    submission.learners = submission.learners || [];
+    submission.learners.push(learnerToReadd);
+  }
+
+  req.session.data.learnerConfirmation = {
+    type: "readd",
+    learner: learnerID,
+  }
+
+  res.redirect('claim/claim-learners');
+});
+
+router.post('/shared-completion-date', function (req, res) {
+  let claimID = req.session.data.id
+  let response = req.session.data.sharedDate
+  let change = req.session.data.change
+  delete req.session.data.submitError
+
+  if (claimID[claimID.length - 1] === 'B') {
+    claimID =  claimID.slice(0, -1) + 'C';
+  }
+  // claim will always be 100 or 40
+
+  const { claims, org } = req.session.data
+  const workplaceID = org.workplaceID
+  let claim = null
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+    if (claimID == c.claimID && isSameWorkplace) {
+      claim = c
+    }
+  }
+
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim)
+  } else {
+    submission = getMostRelevantSubmission(claim)
+  }
+
+  if (response != null) {
+    
+
+    if ((change == "true" && response != "yes")) {
+      delete req.session.data.sharedDate
+      delete req.session.data.change
+      submission.sharedCompletionDate = false
+      res.redirect('claim/claim-learners')
+    } else {
+      res.redirect('claim/add-completion-date')
+    }
+
+  } else {
+    req.session.data.submitError = true
+    res.redirect('claim/shared-completion-date')
+  }
+
+  
+
+});
+
+router.post('/completion-date', function (req, res) {
+  const day = req.session.data['completion-date-started-day']
+  const month = req.session.data['completion-date-started-month']
+  const year = req.session.data['completion-date-started-year']
+  const learnerID = req.session.data.learnerID
+  const response = req.session.data.sharedDate
+  const change = req.session.data.change
+  let claimID = req.session.data.id
+  const completionDate = new Date(year, month - 1, day)
+  delete req.session.data.learnerConfirmation
+
+  if (claimID[claimID.length - 1] === 'B') {
+    claimID =  claimID.slice(0, -1) + 'C';
+  }
+  // claim will always be 100 or 40
+
+  const { claims, org } = req.session.data
+  const workplaceID = org.workplaceID
+  let claim = null
+  let sixtyClaim = null
+
+  for (const c of claims) {
+    const isSameWorkplace = c.workplaceID === workplaceID;
+    if (claimID == c.claimID && isSameWorkplace) {
+      claim = c
+    }
+    if (claimID[claimID.length - 1] === 'C') {
+      let sixtyId = claimID.slice(0, -1) + 'B'
+      if (sixtyId == c.claimID && isSameWorkplace) {
+        sixtyClaim = c
+      }
+    }
+  }
+  delete req.session.data.submitError
+
+  const error = validateDate(day, month, year, "completion", claim, sixtyClaim);
+
+  if (error.dateValid == true) {
+    if (claim.status == "queried") {
+      submission = getDraftSubmission(claim)
+    } else {
+      submission = getMostRelevantSubmission(claim)
+    }
+    if (submission.sharedCompletionDate == null || change == "true") {
+      switch (response) {
+        case "yes":
+          submission.sharedCompletionDate = true
+          break;
+        case "no":
+          submission.sharedCompletionDate = false
+          break;
+      }
+    }
+    delete req.session.data.change
+    delete req.session.data.sharedDate
+
+    for (const learner of submission.learners) {
+      if ((submission.sharedCompletionDate && claim.status == "not-yet-submitted") || learner.learnerID == learnerID) {
+          learner.completionDate = completionDate
+      }
+    }
+
+    delete req.session.data['completion-date-started-day'];
+    delete req.session.data['completion-date-started-month'];
+    delete req.session.data['completion-date-started-year'];
+    if (submission.sharedCompletionDate && claim.status == "not-yet-submitted") {
+      delete req.session.data.learnerID
+      req.session.data.learnerConfirmation = {
+        type: "date",
+        allLearners: true,
+      }
+      res.redirect('claim/claim-learners')
+    } else {
+      if (submission.learners.length > 1) {
+          req.session.data.learnerConfirmation = {
+            type: "date",
+            learner: learnerID,
+          }
+        delete req.session.data.learnerID
+        res.redirect('claim/claim-learners')
+      } else {
+        delete req.session.data.learnerID
+        res.redirect('claim/claim-details#completion')
+      }
+    }
+  } else {
+    req.session.data.submitError = error
+    res.redirect('claim/add-completion-date')
+  }
+});
+
+router.post('/add-learner', function (req, res) {
+  var claimID = req.session.data.id
+  var newLearner = findLearnerById(req.session.data.learnerSelection, req.session.data.learners)
+  var change = req.session.data.change
+  var changeLearnerID = req.session.data.changeID
+
+  delete req.session.data.change
+  delete req.session.data.changeID
+  delete req.session.data.existingLearner
+  delete req.session.data.learnerInput;
+  delete req.session.data.learnerSelection;
+  delete req.session.data.submitError
+  delete req.session.data.inClaim
+  delete req.session.data.familyName
+  delete req.session.data.givenName
+  delete req.session.data.jobTitle
+  delete req.session.data.nationalInsuranceNumber
+  delete req.session.data.learnerConfirmation
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+      let currentSubmission = null
+      let isDuplicateClaim = null
+
+      if (c.status == "queried") {
+        currentSubmission = getDraftSubmission(c)
+      } else {
+        currentSubmission = getMostRelevantSubmission(c)
+      }
+
+      const learner = {
+          "slotID": null,
+          "learnerID": newLearner.id,
+          "learnerChanged": null,
+          "completionDate": null,
+          "evidenceOfCompletion": null,
+          "evidenceOfCompletionReview": {
+            "outcome": null,
+            "note": null
+          }
+        }
+      if (currentSubmission.learners == null || currentSubmission.learners == []) {
+        learner.slotID = "1"
+        currentSubmission.learners = [learner]
+        if (c.claimType == "100") {
+            res.redirect('claim/add-another-learner')
+        } else {
+          res.redirect('claim/claim-details')
+        }
+      } else if (currentSubmission.learners != [] && change == "true") {
+        currentSubmission.learners = replaceLearnerID(currentSubmission.learners, changeLearnerID, newLearner.id)
+        if (currentSubmission.learners.length > 1) {
+          req.session.data.learnerConfirmation = {
+              type: "learner",
+              learner: newLearner.id,
+            }
+            res.redirect('claim/claim-learners')
+        } else if (c.claimType == "100") {
+            res.redirect('claim/add-another-learner')
+        } else {
+          res.redirect('claim/claim-details')
+        }
+        
+      } else {
+          learnerSlotID = currentSubmission.learners.length + 1
+          learner.slotID = learnerSlotID.toString()
+          currentSubmission.learners.push(learner);
+          if (currentSubmission.learners.length > 1) {
+            req.session.data.learnerConfirmation = {
+              type: "learner",
+              learner: newLearner.id,
+            }
+              res.redirect('claim/claim-learners')
+          } else if (c.claimType == "100") {
+            res.redirect('claim/add-another-learner')
+          } else {
+            res.redirect('claim/claim-details')
+          }
+      }
+    }
+  }
+});
+
+router.post('/add-another-learner', function (req, res) {
+  const choice = req.session.data.anotherlearner
+
+  if (choice == "no") {
+    delete req.session.data.anotherlearner;
+    res.redirect('claim/claim-details#learner')
+  } else if (choice == "yes") {
+    delete req.session.data.anotherlearner;
+    res.redirect('claim/select-learner')
+  } else {
+    res.redirect('claim/add-another-learner?submitError=true')
+  }
+});
+
+router.get('/mark-as-actioned', function (req, res) {
+  const learnerID = req.session.data.learnerID
+  const claimID = req.session.data.id 
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
+      for (const learner of submission.learners) {
+        if (learner.learnerID == learnerID) {
+            learner.actioned = true
+          break;
+        }
+      }
+      break;
+    }
+  }
+
+  req.session.data.learnerConfirmation = {
+    type: "actioned",
+    learner: learnerID,
+  }
+    res.redirect('claim/claim-learners')
+});
+
+router.get('/mark-as-needs-action', function (req, res) {
+  const learnerID = req.session.data.learnerID
+  const claimID = req.session.data.id 
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
+      for (const learner of submission.learners) {
+        if (learner.learnerID == learnerID) {
+            delete learner.actioned
+          break;
+        }
+      }
+      break;
+    }
+  }
+
+  req.session.data.learnerConfirmation = {
+    type: "needsaction",
+    learner: learnerID,
+  }
+    res.redirect('claim/claim-learners')
+});
+
+router.post('/add-evidence', function (req, res) {
+  delete req.session.data.deleteSuccess
+  var type = req.session.data.type
+  var claimID = req.session.data.id 
+  const learnerID = req.session.data.learnerID
+
+  if (claimID[claimID.length - 1] === 'B' && type == 'completion') {
+    claimID =  claimID.slice(0, -1) + 'C';
+  }
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
+      if (type == 'payment') {
+        if (submission.evidenceOfPayment == null) {
+            submission.evidenceOfPayment = ['invoice1.pdf']
+        } else {
+          submission.evidenceOfPayment.push('invoice' + (submission.evidenceOfPayment.length + 1) + '.pdf')
+        }
+      } else if (type == 'completion') {
+        for (const learner of submission.learners) {
+          if (learner.learnerID == learnerID) {
+              learner.evidenceOfCompletion = ('certificate_training.pdf')
+          }
+        }
+      }
+      break;
+    }
+  }
+  delete req.session.data.type;
+  delete req.session.data.learnerID;
+  delete req.session.data.submitError
+
+  if (type == 'payment') {
+    res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
+  } else if (type == "completion") {
+    if (submission.learners.length > 1) {
+        req.session.data.learnerConfirmation = {
+          type: "evidence",
+          learner: learnerID,
+        }
+        res.redirect('claim/claim-learners')
+      } else {
+        res.redirect('claim/claim-details#completion')
+      }
+  }
+})
+
+router.post('/evidence-add-another-handler', function (req, res) {
+  delete req.session.data.deleteSuccess
+  delete req.session.data.allDeleteSuccess
+  delete req.session.data.missingOption
+  var type = req.session.data.type
+  var claimID = req.session.data.id
+
+  if (req.session.data.another == 'yes') {
+    delete req.session.data.another
+    res.redirect('claim/add-evidence' + '?id=' + claimID + '&type=' + type)
+  } else if (req.session.data.another == 'no') {
+    delete req.session.data.another
+    res.redirect('claim/claim-details' + '?id=' + claimID + '#' + type)
+  } else {
+    req.session.data.missingOption = true
+    res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type)
+  }
+})
+
+router.post('/remove-evidence', function (req, res) {
+  var type = req.session.data.type
+  var claimID = req.session.data.id
+  let paymentCount = 0
+  let completionCount = 0
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID) {
+      let submission = null
+      if (c.status == "queried") {
+          submission = getDraftSubmission(c)
+      } else {
+          submission = getMostRelevantSubmission(c)
+      }
+      if (type == 'payment') {
+        submission.evidenceOfPayment.pop()
+        paymentCount = submission.evidenceOfPayment.length
+      } else if (type == 'completion') {
+        submission.evidenceOfCompletion.pop()
+        completionCount = submission.evidenceOfCompletion.length
+      }
+      break;
+    }
+  }
+  delete req.session.data.learnerID;
+  delete req.session.data.submitError
+  delete req.session.data.deleteSuccess
+  if ((type == "payment" && paymentCount == 0) || (type == "completion" && completionCount == 0)) {
+    res.redirect('claim/add-evidence' + '?id=' + claimID + '&type=' + type + '&allDeleteSuccess=true')
+  } else {
+    res.redirect('claim/add-evidence-edit' + '?id=' + claimID + '&type=' + type + '&deleteSuccess=true')
+  }
+})
+
+router.get('/save-claim', function (req, res) {
+  const claimID = req.session.data.id
+  var status
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID) ) {
+      status = c.status
+      break;
+    }
+  }
+  req.session.data.claims = sortByCreatedDate(req.session.data.claims);
+
+  delete req.session.data.id
+  delete req.session.data.submitError
+  delete req.session.data.learnerConfirmation
+  delete req.session.data['completion-date-started-day'];
+  delete req.session.data['completion-date-started-month'];
+  delete req.session.data['completion-date-started-year'];
+  delete req.session.data['payment-date-started-day'];
+  delete req.session.data['payment-date-started-month'];
+  delete req.session.data['payment-date-started-year'];
+  delete req.session.data['activity-date-started-day'];
+  delete req.session.data['activity-date-started-month'];
+  delete req.session.data['activity-date-started-year'];
+
+  req.session.data.currentPage = "1"
+
+  res.redirect('manage-claims?statusID=' + status)
+
+});
+
+router.get('/ready-to-declare', function (req, res) {
+  let claimID = req.session.data.id
+  delete req.session.data.org.matchingIDs
+
+  let claim = {}
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+      claim = c
+    }
+  }
+
+  if (claim.claimType == "60" && claim.status == "approved") {
+    claimID =  claimID.slice(0, -1) + 'C';
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        claim = c
+      }
+    }
+  }
+
+  let submission = null
+    if (claim.status == "queried") {
+        submission = getDraftSubmission(claim)
+    } else {
+        submission = getMostRelevantSubmission(claim)
+    }
+
+  let isDuplicateClaim = checkDuplicateClaim(submission.learners, submission.trainingCode, claim.claimID, req.session.data.claims);
+  const submissionWindow = checkSubmissionWindow(claim.claimType, submission)
+  const submitError = checkClaim(claim)
+  const FYdate = new Date('2024-03-03')       
+
+  if (submitError.claimValid) {
+    delete req.session.data.submitError
+    if (req.session.data.org.bankDetails == null) {
+      res.redirect('claim/missing-bank-details')
+    } else if (req.session.data.org.bankDetails.verificationStatus == "submitted") {
+      res.redirect('claim/unverified-bank-details')
+    } else if (req.session.data.org.bankDetails.verificationStatus == "rejected") {
+      res.redirect('claim/rejected-bank-details')
+    } else if (req.session.data.org.validGDL == false &&  new Date(submission.costDate) > FYdate) {
+      res.redirect('claim/missing-gdl')
+    } else if (req.session.data.org.newSRO) {
+      res.redirect('claim/change-sro-incomplete')
+    } else if (isDuplicateClaim.check) {
+      req.session.data.matchingIDs = isDuplicateClaim.ids
+      res.redirect('claim/duplication')
+    } else if ((!submissionWindow) && claim.status == "not-yet-submitted") {
+      res.redirect('claim/missed-submission-window')
+    } else {
+      res.redirect('claim/declaration')
+    }
+    
+  } else {
+    req.session.data.submitError = submitError
+    res.redirect('claim/claim-details' + '?id=' + claimID)
+  }
+
+});
+
+router.post('/submit-claim', function (req, res) {
+  const claimID = req.session.data.id
+  const d = new Date()
+  const dStr = d.toISOString();
+
+  let hundredClaim = null
+
+  let sixtyClaim = null
+  let fourtyClaim = null
+
+  if (req.session.data.confirmation == null) {
+    res.redirect('claim/declaration?submitError=true')
+  } else {
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID && (c.workplaceID == req.session.data.org.workplaceID)) {
+        if (c.claimType == "100") {
+          hundredClaim = c
+        } else if (c.claimType == "60") {
+          sixtyClaim = c
+        } else if (c.claimType == "40") {
+          fourtyClaim = c
+        }
+      }
+    }
+
+    if (sixtyClaim) {
+      fourtyClaim = findPair(sixtyClaim.claimID, req.session.data.claims)
+    } else if (fourtyClaim) {
+      sixtyClaim = findPair(fourtyClaim.claimID, req.session.data.claims)
+    }
+
+    let submission = null
+
+    if (hundredClaim && hundredClaim.status == "queried") {
+      submission = getDraftSubmission(hundredClaim)
+      hundredClaim.status = 'submitted'
+    } else if (hundredClaim) {
+      submission = getMostRelevantSubmission(hundredClaim)
+      hundredClaim.status = 'submitted'
+    }
+
+    if (sixtyClaim && fourtyClaim == null) {
+      if (sixtyClaim.status == "queried") {
+        submission = getDraftSubmission(sixtyClaim)
+        sixtyClaim.status = 'submitted'
+      } else {
+        submission = getMostRelevantSubmission(sixtyClaim)
+        sixtyClaim.status = 'submitted'
+      }
+    }
+
+    if (fourtyClaim) {
+      if (fourtyClaim.status == "queried") {
+        submission = getDraftSubmission(fourtyClaim)
+        fourtyClaim.status = 'submitted'
+      } else {
+        submission = getMostRelevantSubmission(fourtyClaim)
+        fourtyClaim.status = 'submitted'
+      }
+    }
+
+
+    submission.submittedDate = dStr
+    let org = req.session.data.org
+    submission.submitter = org.signatory.active.email
+    delete req.session.data.submitError
+    delete req.session.data.confirmation
+    res.redirect('claim/confirmation')
+
+
+  }
+});
+
+router.get('/cancel-handler', function (req, res) {
+  const claimID = req.session.data.id
+
+  delete req.session.data['training-input'];
+  delete req.session.data['trainingSelection'];
+  delete req.session.data['activity-date-started-day'];
+  delete req.session.data['activity-date-started-month'];
+  delete req.session.data['activity-date-started-year'];
+  delete req.session.data['payment-date-started-day'];
+  delete req.session.data['payment-date-started-month'];
+  delete req.session.data['payment-date-started-year'];
+  delete req.session.data['completion-date-started-day'];
+  delete req.session.data['completion-date-started-month'];
+  delete req.session.data['completion-date-started-year'];
+  delete req.session.data['learner-input'];
+  delete req.session.data['learner-selection'];
+  delete req.session.data['learnerSelected'];
+  delete req.session.data['learner-choice'];
+  delete req.session.data['add-another'];
+  delete req.session.data['answers-checked'];
+  delete req.session.data['evidenceType'];
+  delete req.session.data['totalAmount'];
+  delete req.session.data['EvidenceNoLearners'];
+  delete req.session.data['evidenceFile'];
+  delete req.session.data['selectedClaims'];
+  delete req.session.data['selectedClaimsConfirmed'];
+  delete req.session.data['activityType'];
+  delete req.session.data['submitError'];
+  delete req.session.data['deleteSuccess'];
+  delete req.session.data['allDeleteSuccess'];
+  delete req.session.data['errorWrongFileFormat'];
+  delete req.session.data['errorFileTooBig'];
+  delete req.session.data['errorFileMissing'];
+  delete req.session.data['deleteError'];
+  delete req.session.data['jobTitleEmptyError'];
+  delete req.session.data['jobTitle'];
+  delete req.session.data['jobTitleInvalid'];
+  delete req.session.data['declarationSubmitError']
+  delete req.session.data['learnerID'];
+  delete req.session.data['learnerConfirmation'];
+
+  let claim = null
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+      claim = c
+    }
+  }
+
+  if (claim.claimType == "60" && claim.status == "approved") {
+    claimID =  claimID.slice(0, -1) + 'C';
+    for (const c of req.session.data.claims) {
+      if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+        claim = c
+      }
+    }
+  }
+
+  let submission = null
+  if (claim.status == "queried") {
+    submission = getDraftSubmission(claim)
+  } else {
+    submission = getMostRelevantSubmission(claim)
+  }
+  if (req.session.data.sharedDate != null) {
+    delete req.session.data['sharedDate'];
+    res.redirect('claim/shared-completion-date')
+  } else {
+    delete req.session.data['change'];
+    delete req.session.data['sharedDate'];
+    if (req.session.data.learner == "true" && submission.learners.length > 1) {
+      delete req.session.data.learner
+      res.redirect('claim/claim-learners')
+    } else {
+      res.redirect('claim/claim-details' + '?id=' + claimID)
+    }
+  }
+
+});
+
+router.post('/create-learner', function (req, res) {
+  var claimID = req.session.data.id
+  delete req.session.data.existingLearner
+  delete req.session.data.submitError
+  const nationalInsuranceNumber = req.session.data.nationalInsuranceNumber
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const jobTitle = req.session.data.jobTitle
+
+  var change = req.session.data.change
+  var changeLearnerID = req.session.data.changeID
+
+  delete req.session.data.change
+  delete req.session.data.changeID
+
+  const learners = loadLearners(req.session.data.learners)
+
+  const submitError = checkLearnerForm(nationalInsuranceNumber, familyName, givenName, jobTitle)
+  const dupeLearner = compareNINumbers(req.session.data.nationalInsuranceNumber, learners)
+
+  if (submitError.learnerValid) {
+    if (req.session.data.inClaim == 'true' && !dupeLearner.check) {
+      const learner = {
+        id: nationalInsuranceNumber,
+        familyName: familyName,
+        givenName: givenName,
+        jobTitle: jobTitle
+      };
+      req.session.data.learners.push(learner)
+
+      for (const c of req.session.data.claims) {
+        if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+          let submission = null
+          if (c.status == "queried") {
+            submission = getDraftSubmission(c)
+          } else {
+            submission = getMostRelevantSubmission(c)
+          }
+          const submissionLearner = {
+            "learnerID": learner.id,
+            "completionDate": null,
+            "evidenceOfCompletion": null,
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          }
+          delete req.session.data.inClaim
+          delete req.session.data.familyName
+          delete req.session.data.givenName
+          delete req.session.data.jobTitle
+          delete req.session.data.nationalInsuranceNumber
+          delete req.session.data.learnerInput
+        if (submission.learners == null || submission.learners == []) {
+          submission.learners = [submissionLearner]
+          res.redirect('claim/claim-details?id=' + claimID + '#learner')
+        } else if (submission.learners != [] && change == "true") {
+          submission.learners = replaceLearnerID(submission.learners, changeLearnerID, learner.id)
+          if (submission.learners.length > 1) {
+            req.session.data.learnerConfirmation = {
+                type: "learner",
+                learner: learner.id,
+              }
+              res.redirect('claim/claim-learners')
+          } else {
+              res.redirect('claim/claim-details?id=' + claimID + '#learner')
+          }
+          
+        } else {
+            submission.learners.push(submissionLearner);
+            if (submission.learners.length > 1) {
+              req.session.data.learnerConfirmation = {
+                type: "learner",
+                learner: learner.id,
+              }
+                res.redirect('claim/claim-learners')
+            } else {
+                res.redirect('claim/claim-details?id=' + claimID + '#learner')
+            }
+        }
+        }
+      }
+
+    } else {
+      req.session.data.learnerMatch = dupeLearner.learner
+      res.redirect('learner/duplication')
+    }
+  } else {
+    req.session.data.submitError = submitError
+    res.redirect('learner/add-learner?inClaim=' + req.session.data.inClaim)
+  }
+});
+
+router.post('/validate-org-name', function (req, res) {
+  delete req.session.data.orgNameEmptyError
+  delete req.session.data.orgNameInvalid
+  delete req.session.data['declarationSubmitError'];
+  const orgName = req.session.data.orgName
+  const change = req.session.data.change
+
+  delete req.session.data.change
+
+  if (orgName == "") {
+    req.session.data.orgNameEmptyError = true
+    res.redirect('registration/org-name')
+  } else if (true == true) {
+    if (change == "true") {
+      res.redirect('registration/check-answers')
+    } else {
+      res.redirect('registration/SRO-confirmation')
+    }
+  } else {
+    req.session.data.orgNameInvalid = true
+    res.redirect('registration/org-name')
+  }
+
+});
+
+router.post('/validate-org-address', function (req, res) {
+  delete req.session.data.submitError
+  delete req.session.data['declarationSubmitError'];
+  const addressLine1 = req.session.data.addressLine1
+  const addressLine2 = req.session.data.addressLine2
+  const addressLine3 = req.session.data.addressLine3
+  const town = req.session.data.addressTown
+  const county = req.session.data.addressCounty
+  const postcode = req.session.data.addressPostcode
+  const action = req.session.data.action
+  const change = req.session.data.change
+
+  delete req.session.data.change 
+  delete req.session.data.action
+
+  const result = addressCheck(addressLine1, addressLine2, addressLine3, town, county, postcode)
+
+  if (action =="continue") {
+    if (result.addressValid) {
+      if (change == "true") {
+        res.redirect('registration/check-answers')
+      } else {
+        req.session.data.evidenceAddressCount = "first"
+        res.redirect('registration/org-address-evidence')
+      }
+    } else {
+      req.session.data.submitError = result
+      res.redirect('registration/org-address')
+    }
+  } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    const regRef = saveRegistrationEnty(req, "draft", "orgAddress")
+    req.session.data.banner.regRef = regRef
+    res.redirect('manage-organisations')
+  }
+
+});
+
+router.post('/validate-job-title', function (req, res) {
+  delete req.session.data.jobTitleEmptyError
+  delete req.session.data.jobTitleInvalid
+  delete req.session.data['declarationSubmitError'];
+
+  const jobTitle = req.session.data.jobTitle
+  const action = req.session.data.action
+  const change = req.session.data.change
+
+  delete req.session.data.change
+  delete req.session.data.action
+
+  var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
+
+  if (action =="continue") {
+    if (jobTitle == "") {
+      req.session.data.jobTitleEmptyError = true
+      res.redirect('registration/job-title')
+    } else if (validCharactersRegex.test(jobTitle) == true) {
+      if (change == "true") {
+        res.redirect('registration/check-answers')
+      } else {
+        res.redirect('registration/org-address')
+      }
+      
+    } else {
+      req.session.data.jobTitleInvalid = true
+      res.redirect('registration/job-title')
+    }
+  } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    const regRef = saveRegistrationEnty(req, "draft", "jobTitle")
+    req.session.data.banner.regRef = regRef
+    res.redirect('manage-organisations')
+  }
+});
+
+router.post('/validate-job-title-change-sro', function (req, res) {
+  delete req.session.data.jobTitleEmptyError
+  delete req.session.data.jobTitleInvalid
+  delete req.session.data['declarationSubmitError'];
+
+  const jobTitle = req.session.data.jobTitle
+
+  var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
+
+  if (jobTitle == "") {
+    req.session.data.jobTitleEmptyError = true
+    res.redirect('change-sro/job-title')
+  } else if (validCharactersRegex.test(jobTitle) == true) {
+      res.redirect('change-sro/declaration')
+  } else {
+    req.session.data.jobTitleInvalid = true
+    res.redirect('change-sro/job-title')
+  }
+
+});
+
+router.post('/validate-address-evidence', function (req, res) {
+  const action = req.session.data.action
+  const change = req.session.data.change
+
+  delete req.session.data.submitError
+  delete req.session.data.change
+  delete req.session.data.action
+
+  const result = checkEvidence(req.session.data.type, req.session.data.evidenceFile)
+  console.log(result)
+
+  if (action =="continue") {
+    if (result.evidenceValid) {
+      const evidence = {
+            type: req.session.data.type,
+            evidence: "file" + req.session.data.evidenceAddressCount + ".pdf"
+          }
+      delete req.session.data.type
+      delete req.session.data.evidenceFile
+      switch(req.session.data.evidenceAddressCount) {
+        case "first":
+          req.session.data.firstEvidence = evidence
+          break;
+        case "second":
+          req.session.data.secondEvidence = evidence
+          break;
+      }
+      if (change == "true") {
+        delete req.session.data.evidenceAddressCount
+        res.redirect('registration/check-answers')
+      } else {
+        if (req.session.data.evidenceAddressCount == "first") {
+          req.session.data.evidenceAddressCount = "second"
+          res.redirect('registration/org-address-evidence')
+        } else {
+          delete req.session.data.evidenceAddressCount
+          res.redirect('registration/asc-wds-id')
+        }
+      }
+    } else {
+      req.session.data.submitError = result
+      res.redirect('registration/org-address-evidence')
+    }
+  } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    const regRef = saveRegistrationEnty(req, "draft", "addressEvidence")
+    req.session.data.banner.regRef = regRef
+    res.redirect('manage-organisations')
+  }
+});
+
+router.post('/check-answer-confirmation', function (req, res) {
+  const action = req.session.data.action
+
+  delete req.session.data.action
+
+
+  if (action =="continue") {
+    res.redirect('registration/declaration')
+  } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    const regRef = saveRegistrationEnty(req, "draft", "checkAnswers")
+    req.session.data.banner.regRef = regRef
+    res.redirect('manage-organisations')
+  }
+});
+
+router.post('/validate-workplaceID', function (req, res) {
+  delete req.session.data.workplaceIDEmpty
+  delete req.session.data.workplaceIDInvalid
+  const orgID = req.session.data.orgID
+  const action = req.session.data.action
+
+  delete req.session.data.action
+
+  const matchedOrg = checkOrgs(req.session.data.organisations, orgID)
+  var validCharactersRegex = /[a-g]\d{1,10}/gi;
+
+  if (action =="continue") {
+    if (orgID == "") {
+      req.session.data.workplaceIDEmpty = true
+      res.redirect('registration/asc-wds-id')
+    } else if (validCharactersRegex.test(orgID) != true) {
+      req.session.data.workplaceIDInvalid = true
+      res.redirect('registration/asc-wds-id')
+    } else if (matchedOrg != null) {
+      req.session.data.org = matchedOrg
+      res.redirect('registration/workplace-id-already-onboarded')
+    } else {
+      res.redirect('registration/is-this-you')
+    }
+  } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    const regRef = saveRegistrationEnty(req, "draft", "workplaceID")
+    req.session.data.banner.regRef = regRef
+    res.redirect('manage-organisations')
+  }
+
+});
+
+router.post('/validate-companies-house', function (req, res) {
+  delete req.session.data.companiesHouseRegNumberEmptyError
+  delete req.session.data.companiesHouseRegNumberInvalid
+  const companiesHouseRegNumber = req.session.data.companiesHouseRegNumber
+  const action = req.session.data.action
+  const change = req.session.data.change
+
+  delete req.session.data.change
+  delete req.session.data.action
+
+  // var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
+
+  if (action =="continue") {
+    if (companiesHouseRegNumber == "") {
+      res.redirect('registration/companies-house-registration-number?companiesHouseRegNumberEmptyError=true')
+    } else if (true == true) {
+      if (change == "true") {
+        res.redirect('registration/check-answers')
+      } else {
+        res.redirect('registration/vat-registered')
+      }
+    } else {
+      res.redirect('registration/companies-house-registration-number?companiesHouseRegNumberInvalid=true')
+    }
+  } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    const regRef = saveRegistrationEnty(req, "draft", "companiesHouseNumber")
+    req.session.data.banner.regRef = regRef
+    res.redirect('manage-organisations')
+  }
+});
+
+router.post('/validate-vat', function (req, res) {
+  delete req.session.data.vatRegNumberEmptyError
+  delete req.session.data.vatRegNumberInvalid
+  const vatRegNumber = req.session.data.vatRegNumber
+
+  const action = req.session.data.action
+  const change = req.session.data.change
+
+  delete req.session.data.change
+  delete req.session.data.action
+
+  // var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
+
+  if (action =="continue") {
+    if (vatRegNumber == "") {
+      res.redirect('registration/vat-registration-number?vatRegNumberEmptyError=true')
+    } else if (true == true) {
+      if (change == "true") {
+        res.redirect('registration/check-answers')
+      } else {
+        res.redirect('registration/check-answers')
+      }
+    } else {
+      res.redirect('registration/vat-registration-number?vatRegNumberInvalid=true')
+    }
+  } else {
+    req.session.data.banner = {
+      action: "saveSuccess",
+      orgName: req.session.data.orgName
+    } 
+    const regRef = saveRegistrationEnty(req, "draft", "VATnumber")
+    req.session.data.banner.regRef = regRef
+    res.redirect('manage-organisations')
+  }
+});
+
+router.post('/registation-declaration', function (req, res) {
+  delete req.session.data.declarationSubmitError
+  const declarationConfirmed = req.session.data.confirmation
+
+  if (declarationConfirmed != null) {
+    delete req.session.data.declarationConfirmed
+  req.session.data.regRef = saveRegistrationEnty(req, "submitted")
+  res.redirect('registration/registration-submitted-confirmation')
+  } else {
+    req.session.data.declarationSubmitError = 'true'
+    res.redirect('registration/declaration?declarationSubmitError=true')
+  }
+
+});
+
+router.get('/load-registration', function (req, res) {
+  
+  const regRef = req.session.data.regRef
+  let redirectURL = "registration/check-answers"
+
+  const org = req.session.data.organisations.find(entry => entry.regRef === regRef);
+  const userOrg  = req.session.data.user.organisations.find(entry => entry.regRef === regRef);
+
+  req.session.data.confirmationResponse = "yes"
+  req.session.data.jobTitle = userOrg.jobTitle
+  req.session.data.orgName = org.name
+  req.session.data.addressLine1 = org.address.addressLine1
+  req.session.data.addressLine2 = org.address.addressLine2
+  req.session.data.addressLine3 = org.address.addressLine3
+  req.session.data.addressTown = org.address.addressTown
+  req.session.data.addressCounty = org.address.addressCounty
+  req.session.data.addressPostcode = org.address.addressPostcode
+  req.session.data.firstEvidence = org.addressEvidence[0]
+  req.session.data.secondEvidence = org.addressEvidence[1]
+  req.session.data.orgID = org.workplaceID
+  if (org.CHregistered) {
+      req.session.data.companiesHouseResponse = "Yes"
+  } else if (!(org.CHregistered)) {
+      req.session.data.companiesHouseResponse = "No"
+  }
+  req.session.data.companiesHouseRegNumber = org.CHNumber
+  if (org.VATregistered) {
+      req.session.data.vatRegisteredResponse = "Yes"
+  } else if (!(org.VATregistered)) {
+      req.session.data.vatRegisteredResponse = "No"
+  }
+  req.session.data.vatRegNumber = org.VATNumber
+
+  switch (org.savePoint) {
+    case "jobTitle":
+      redirectURL = "registration/job-title"
+      break;
+    case "orgAddress":
+      redirectURL = "registration/org-address"
+      break;
+    case "addressEvidence":
+      redirectURL = "registration/org-address-evidence"
+      break;
+    case "workplaceID":
+      redirectURL = "registration/asc-wds-id"
+      break;
+    case "isThisYou":
+      redirectURL = "registration/is-this-you"
+      break;
+    case "companiesHouseQ":
+      redirectURL = "registration/companies-house"
+      break;
+    case "companiesHouseNumber":
+      redirectURL = "registration/companies-house-registration-number"
+      break;
+    case "VATnumberQ":
+      redirectURL = "registration/vat-registered"
+      break;
+    case "VATnumber":
+      redirectURL = "registration/vat-registration-number"
+      break;
+    case "checkAnswers":
+      redirectURL = "registration/check-answers"
+      break;
+  }
+  
+  res.redirect(redirectURL)
+});
+
+router.post('/new-declaration-confirmation', function (req, res) {
+  delete req.session.data.declarationSubmitError
+  const declarationConfirmed = req.session.data.declaration
+
+  if (declarationConfirmed != null) {
+    delete req.session.data.declarationConfirmed
+    req.session.data.org.validGDL = true
+    res.redirect('manage-claims-home?tabLocation=claims')
+  } else {
+    req.session.data.declarationSubmitError = 'true'
+    res.redirect('org-admin/sign-new-gdl')
+  }
+});
+
+router.post('/declaration-confirmation-change-sro', function (req, res) {
+  delete req.session.data.declarationSubmitError
+  const declarationConfirmed = req.session.data.declaration
+
+  if (declarationConfirmed != null) {
+    delete req.session.data.declarationConfirmed
+    req.session.data.org.validGDL = true
+    req.session.data.org.newSRO = false
+    res.redirect('manage-claims-home?tabLocation=claims')
+  } else {
+    req.session.data.declarationSubmitError = 'true'
+    res.redirect('change-sro/declaration')
+  }
+});
+
+router.post('/bank-details-question-handler', function (req, res) {
+  delete req.session.data.submitError
+
+  const answer = req.session.data.bankDetailsQuestion
+
+  if (answer != null) {
+    if (answer == "yes") {
+      res.redirect('org-admin/change-bank-details')
+    } else if (answer == "no") {
+      delete req.session.data.journey
+      res.redirect('manage-claims-home?tabLocation=claims')
+    }
+  } else {
+    res.redirect('account-setup/bank-details-question?submitError=true')
+  }
+});
+
+router.post('/check-user', function (req, res) {
+  delete req.session.data.submitError
+  delete req.session.data.name
+  delete req.session.data.invite
+  const email = req.session.data.email
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+
+  const submitError = checkUserForm(familyName, givenName, email, req.session.data.org)
+
+  if (submitError.userValid) {
+    res.redirect('org-admin/confirm-user-details')
+  } else {
+    req.session.data.submitError = submitError
+    res.redirect('org-admin/user-details')
+  }
+});
+
+router.post('/invite-user', function (req, res) {
+  delete req.session.data.checkBoxSubmitError
+  delete req.session.data.name
+  delete req.session.data.invite
+  
+  const email = req.session.data.email
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+
+  const confirmationChecked = req.session.data.confirmation
+
+  
+
+  if (confirmationChecked != null) {
+    const user = {
+        familyName: familyName,
+        givenName: givenName,
+        email: email,
+    };
+    req.session.data.org.users.invited.push(user)
+    delete req.session.data.familyName
+    delete req.session.data.givenName
+    delete req.session.data.email
+    delete req.session.data.deleteSuccess
+    delete req.session.data.deletedUser
+    req.session.data.matchResendUser = findUser(email,req.session.data.org)
+    req.session.data.invite = 'success'
+    res.redirect('org-admin/manage-team?tabLocation=users')
+  } else {
+    req.session.data.checkBoxSubmitError = 'true'
+    res.redirect('org-admin/confirm-user-details')
+  }
+});
+
+router.get('/reinvite-user', function (req, res) {
+  req.session.data.invite = "success"
+
+  req.session.data.matchResendUser = findUser(req.session.data.email,req.session.data.org)
+
+  if (req.session.data.resendList) {
+    req.session.data.resendList.push(req.session.data.email)
+  } else {
+    req.session.data.resendList = [req.session.data.email]
+  }
+
+  delete req.session.data.email
+  res.redirect('org-admin/manage-team?tabLocation=users')
+
+});
+
+router.get('/confirm-delete-user', function (req, res) {
+  const deletedEmail = req.session.data.deletedEmail
+  let query = null
+
+  let index = req.session.data.org.users.invited.findIndex(obj => obj['email'] === deletedEmail);
+  if (index !== -1) {
+    req.session.data.org.users.inactive.push(req.session.data.org.users.invited[index]);
+    req.session.data.org.users.invited.splice(index, 1);
+    query = 'invited'
+  }
+  
+  index = req.session.data.org.users.active.findIndex(obj => obj['email'] === deletedEmail);
+  if (index !== -1) {
+    req.session.data.org.users.inactive.push(req.session.data.org.users.active[index]);
+    req.session.data.org.users.active.splice(index, 1);
+    query = 'active'
+  }
+
+  delete req.session.data.invite
+  delete req.session.data.deletedEmail
+
+  req.session.data.matchDeletedUser = findUser(deletedEmail,req.session.data.org)
+  req.session.data.deletedUser = query
+  req.session.data.deleteSuccess = 'true'
+
+  res.redirect('org-admin/manage-team?tabLocation=users')
+});
+
+router.get('/showComparisonNote', function (req, res) {
+  req.session.data['showNote'] = req.session.data['noteType']
+  let subCount = req.session.data['count']
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claim/previousSubmissionsTable?subCount=' + subCount + '&id=' + claimID)
+    }
+  }
+});
+
+router.get('/hideComparisonNote', function (req, res) {
+  req.session.data['showNote'] = null
+  req.session.data['noteType'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID)
+    }
+  }
+});
+
+router.get('/confirm-delete-claim', function (req, res) {
+  var claimID = req.session.data.id
+  var claims = req.session.data.claims
+  var fromSearchId = req.session.data.fromSearchId
+  var fromSearchResults = req.session.data.fromSearchResults
+
+  for (let i = 0; i < claims.length; i++) {
+    if (claims[i].claimID === claimID) {
+        claims.splice(i, 1);
+        if (fromSearchId || fromSearchResults) {
+          res.redirect('manage-claims-home?&deleteSuccess=true&fromSearchId&deletedID='+ claimID)
+        } else {
+          req.session.data.deleteSuccess = "true"
+          req.session.data.deletedID = claimID
+          req.session.data.currentPage = "1"
+          res.redirect('manage-claims?statusID=not-yet-submitted')
+        }
+        
+    }
+  }
+});
+
+router.get('/confirm-delete-registration', function (req, res) {
+  const user = req.session.data.user
+  const regRefToDelete = req.session.data.regRef
+
+  const index = user.organisations.findIndex(org => org.regRef === regRefToDelete);
+  const org = req.session.data.organisations.find(org => org.regRef === regRefToDelete);
+  const orgName = org.name
+  if (index !== -1) {
+      user.organisations.splice(index, 1);
+  }
+
+  req.session.data.banner = {
+    action: "deleteSuccess",
+    regRef: regRefToDelete,
+    orgName: orgName
+  } 
+  delete req.session.data.regRef
+  res.redirect('manage-organisations')
+
+});
+
+router.get('/signin-handler', function (req, res) {
+  const journey = req.session.data.journey
+  const user = req.session.data.user
+  let redirectURL = "manage-organisations"
+
+  if (user.journey == "invite" && req.session.data.scenarios == "prelogin") {
+    for (const userOrg of user.organisations) {
+      const org = findOrg(userOrg.workplaceID, req.session.data.organisations)
+      if (org.newSRO) {
+        loadData(req, userOrg.workplaceID);
+        req.session.data.userType = userOrg.userType
+        if (userOrg.userType == "signatory") {
+          redirectURL = 'change-sro/verify-details'
+        } else {
+          redirectURL = 'manage-claims-home'
+        }
+        
+      }
+    }
+  }
+  res.redirect(redirectURL)
+
+});
+
+router.get('/from-learners-submission', function (req, res) {
+  claimID = req.session.data.id
+  var foundClaim = null
+  for (const claim of req.session.data['claims']) {
+    if (claim.claimID == claimID) {
+      foundClaim = claim
+    }
+  } 
+  res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
+});
+
+router.get('/showPaymentNote', function (req, res) {
+  req.session.data['showNote'] = true
+  let subCount = req.session.data['count']
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claims/v27/claim/previousSubmissionsTable?subCount=' + subCount + '&id=' + claimID + "#claimDetails")
+    }
+  }
+});
+
+router.get('/hidePaymentNote', function (req, res) {
+  req.session.data['showNote'] = null
+  req.session.data['noteType'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claims/v27/claim/previousSubmissionsTable' + '?id=' + claimID + "#claimDetails")
+    }
+  }
+});
+
+
+router.get('/showLearnerNote', function (req, res) {
+  req.session.data['showLearnerNote'] = true
+  let subCount = req.session.data['count']
+  var claimID = req.session.data.id
+  for (const c of req.session.data.claims ) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.org.workplaceID)) {
+      res.redirect('claims/v27/claim/learnerSubmissionsTable?subCount=' + subCount + '&id=' + claimID + "#" + req.session.data.slotID)
+    }
+  }
+});
+
+router.get('/hideLearnerNote', function (req, res) {
+  req.session.data['showLearnerNote'] = null
+  req.session.data['submissionDate'] = null
+  req.session.data['submittedDate'] = null
+  var claimID = req.session.data.id
+  var foundClaim = null
+  for (const c of req.session.data.claims) {
+    if (claimID.replace(/[-\s]+/g, '') == c.claimID.replace(/[-\s]+/g, '') && (c.workplaceID == req.session.data.orgID)) {
+      foundClaim = c
+    }
+  }
+  req.session.data.claimScreen = "learnerPreviousSubmissions"
+  res.redirect('claims/v27/claim/learnerSubmissionsTable' + '?id=' + claimID + "#" + req.session.data.slotID)
+});
+
+router.post('/add-supporting-note', function (req, res) {
+  var note = req.session.data.supportingNote
+  var claimID = req.session.data.id
+
+  for (const c of req.session.data.claims) {
+    if (claimID == c.claimID && c.workplaceID == req.session.data.org.workplaceID) {
+      let submission = null
+      if (c.status == "queried") {
+        submission = getDraftSubmission(c)
+      } else {
+        submission = getMostRelevantSubmission(c)
+      }
+      submission.supportingNote = note
+      break;
+    }
+  }
+  delete req.session.data.supportingNote
+  res.redirect('claim/claim-details'+'?id='+claimID+'#notes')
+});
+
+router.get('/applySubmissionsSort', function (req, res) {
+  var claimID = req.session.data.id
+  res.redirect('claims/v27/claim/previousSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
+});
+
+router.get('/applyLearnerSort', function (req, res) {
+  var claimID = req.session.data.id
+  res.redirect('claims/v27/claim/learnerSubmissionsTable' + '?id=' + claimID + "&filter=" + req.session.data.filter)
+});
+
+router.get('/change-organisation', function (req, res) {
+  clearSessionExcept(req, [])
+  res.redirect('./manage-organisations')
+});
+
+router.get('/learner-previous-submissions-handler', function (req, res) {
+
+  claimID = req.session.data.id
+  var foundClaim = null
+  for (const claim of req.session.data['claims']) {
+    if (claim.claimID == claimID) {
+      foundClaim = claim
+    }
+  }
+  res.redirect('claim/learnerSubmissionsTable' + '?id=' + claimID )
+});
+
+router.get('/view-previous-submissions-back-handler', function (req, res) {
+  
+  claimID = req.session.data.id
+  res.redirect('claim/previousSubmissionsTable' + '?id=' + claimID )
+
+});
+
+router.post('/load-scenario-data', function (req, res) {
+  loadScenarioData(req);
+
+  res.redirect('scenario-picker')
+})
+
+router.get('/load-user-data', function (req, res) {
+  const userID = req.session.data['userID']
+
+  if (userID != null) {
+    loadUserData(req, userID)
+  }
+
+  delete req.session.data['userID']
+
+  if (req.session.data.user.journey == "post-login") {
+    res.redirect('manage-organisations')
+  } else if (req.session.data.user.journey == "pre-login") {
+    res.redirect('eligibility/overview')
+  } else if (req.session.data.user.journey == "invite") {
+    req.session.data.journey = "creation"
+    res.redirect('./authentication/creation-link')
+  } else {
+    loadScenarioData(req);
+    req.session.data.user = {
+        "givenName": req.session.data.givenName,
+        "familyName": req.session.data.familyName,
+        "email": req.session.data.email,
+        "organisations": []
+    }
+    delete req.session.data.givenName
+    delete req.session.data.familyName
+    delete req.session.data.email
+    delete req.session.data.mobile
+    delete req.session.data.users
+    req.session.data.journey = "creation"
+    res.redirect('./authentication/creation-link')
+  }
+
+  
+})
+
+router.get('/load-data', function (req, res) {
+  const orgID = req.session.data['orgID']
+  const tabLocation = req.session.data['tabLocation']
+  loadData(req, orgID);
+  delete req.session.data['orgID']
+
+  if ((!req.session.data.org.validGDL) && req.session.data.userType == 'signatory') {
+    res.redirect('org-admin/sign-new-gdl')
+  } else if (req.session.data.org.newSRO && req.session.data.userType == 'signatory') {
+    res.redirect('change-sro/verify-details')
+  } else {
+    if (tabLocation == "users") {
+      res.redirect('org-admin/manage-team?tabLocation=users')
+    } else {
+      res.redirect('manage-claims-home?tabLocation=claims')
+    }
+  }
+
+})
+
+router.post('/create-user', function (req, res) {
+  const familyName = req.session.data.familyName
+  const givenName = req.session.data.givenName
+  const email = req.session.data.email
+  const phone = req.session.data.phone
+  delete req.session.data.submitError
+
+  const user = {
+        journey: "self-serve",
+        givenName,
+        familyName,
+        email,
+        phone,
+        description: "",
+        organisations: []
+    }
+
+  const result = userCheck(familyName, givenName, email, phone)
+
+  if (result.userValid) {
+    req.session.data.user = user
+    delete req.session.data.familyName
+    delete req.session.data.givenName
+    delete req.session.data.email
+    delete req.session.data.phone
+    res.redirect('authentication/creation-link')
+  } else if (result.email == "duplicate") {
+    delete req.session.data.familyName
+    delete req.session.data.givenName
+    delete req.session.data.email
+    delete req.session.data.phone
+    req.session.data.user = user
+    res.redirect('authentication/existing-account')
+  } else {
+    req.session.data.submitError = result
+    res.redirect('authentication/account-details')
+  }
+});
+
+//generate data
+router.post('/generate-handler', function (req, res) {
+  const jsonFilePath = './app/views/claims/v27/_data/claims.json';
+  const claims = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
+
+  const claimType = req.session.data.claimType
+  const claimStatus = req.session.data.claimStatus
+  const submissions = parseInt(req.session.data.submissions, 10)
+  const learners = parseInt(req.session.data.learners, 10)
+  const compDate = req.session.data.compDate
+
+  console.log(compDate)
+  const claim = generateClaim(claimType, claimStatus, submissions, learners, compDate, null)
+  claims.push(claim)
+
+  if (claimType == "40" ) {
+    const pairClaim = generateClaim("60", "approved", 1, learners, null, claim)
+    claims.push(pairClaim)
+  } else if (claimType == "40PP") {
+    const pairClaim = generateClaim("60PP", "approved", 1, learners, null, claim)
+    claims.push(pairClaim)
+  }
+
+  fs.writeFileSync(jsonFilePath, JSON.stringify(claims, null, 2));
+
+  req.session.data.confirmationID = claim.claimID
+
+  delete req.session.data.claimType
+  delete req.session.data.claimStatus
+  delete req.session.data.submissions
+  delete req.session.data.learners
+  delete req.session.data.compDate
+
+  res.redirect('./_claim-generation/generate-confirmation')
+})
+
+module.exports = router

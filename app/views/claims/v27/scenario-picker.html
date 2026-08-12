@@ -1,0 +1,15 @@
+{% extends "../../_layouts/main.html" %}
+
+{% block pageTitle %}
+Test scenarios - {{serviceName}}
+{% endblock %}
+
+{% block content %}
+
+    {% if data.scenarios == "prelogin" %}
+        {% include "./_components/scenario-pickers/account-creation-picker.html" %}
+    {% elif data.scenarios == "postlogin" %}
+        {% include "./_components/scenario-pickers/org-picker.html" %}
+    {% endif %}
+
+{% endblock %}
