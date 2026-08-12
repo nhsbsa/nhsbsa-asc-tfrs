@@ -1,0 +1,84 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if claim.claimType == "60" %}
+  {% set pairClaim = claim.claimID | findPair(data.claims) %}
+{% elif claim.claimType == "40" %}
+  {% set pairClaim = claim %}
+  {% set claim = pairClaim.claimID | findPair(data.claims) %}
+{% endif %}
+
+{% block pageTitle %}
+    Claim history — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<p class="govuk-body"><a href="claim-details" class="govuk-back-link">Back to claim details</a></p>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds"> 
+    
+      <span class="govuk-caption-l">
+        {% if (claim.claimType == "100") %}
+          {{ claim.claimID }}
+        {% else %}
+          Combined claim: {{ claim.claimID | removeClaimSuffix }}
+        {% endif %}
+      </span>
+    <h1 class="govuk-heading-l">Claim history</h1>
+    <div class="moj-timeline">
+
+      {% if pairClaim != null %}
+        {% for submission in pairClaim.submissions | orderByMostRecent %}
+              {% set type = pairClaim.claimType %}
+              {% set loopCount = loop.index0 %}
+              {% include "../_components/claim-sections/claim-history/timeline-items.html" %}
+        {% endfor %}
+      {% endif %}
+
+      {% for submission in claim.submissions | orderByMostRecent %}
+          {% set type = claim.claimType %}
+          {% set loopCount = loop.index0 %}
+          {% include "../_components/claim-sections/claim-history/timeline-items.html" %}
+      {% endfor %}
+
+      <div class="moj-timeline__item">
+        <div class="moj-timeline__header">
+          <h2 class="moj-timeline__title">Created</h2>
+          <p class="moj-timeline__byline">by {{(claim.createdBy | findUser(data.org)).givenName}} {{(claim.createdBy| findUser(data.org)).familyName}}</p>
+        </div>
+        <p class="moj-timeline__date">
+          <time datetime="{{ claim.createdDate }}">{{ claim.createdDate | govukDate }} at {{ claim.createdDate | govukTime }}</time>
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

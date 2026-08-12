@@ -1,0 +1,129 @@
+{% extends "./main.html" %}
+
+{% block header %}
+  {{ govukHeader({
+    rebrand: true,
+    serviceName: serviceName,
+    navigation: [
+      {
+        href: "/claims/v27/change-organisation",
+        text: "My account"
+      },{
+        href: "#",
+        text: "Sign out"
+      }
+      ]
+    }) 
+  }}
+  <div class="moj-organisation-nav govuk-width-container moj-organisation-nav-override" aria-label="Organisation switcher">
+    <strong class="govuk-body govuk-!-font-weight-bold">{{data.org.name}} <span class="app-organisation-caption">({{data.org.workplaceID}})</span></strong>
+    {# <a href="/claims/v27/change-organisation" class="govuk-link">Change organisation</a> #}
+  </div>
+
+  {# 1. Define base items that are always visible #}
+  {% set navItems = [
+    {
+      text: "Manage claims",
+      href: "/claims/v27/manage-claims-home?tabLocation=claims&submitError=&addbankdetailsSuccess=",
+      active: data.tabLocation == "claims"
+    }
+  ] %}
+
+  {# 2. Conditionally append signatory-only items #}
+  {% if data.userType == "signatory" %}
+    {% set navItems = (navItems.push(
+      {
+        text: "Manage submitters",
+        href: "/claims/v27/org-admin/manage-team?tabLocation=users&addbankdetailsSuccess=",
+        active: data.tabLocation == "users"
+      },
+      {
+        text: "Bank details",
+        href: "/claims/v27/org-admin/bank-details?tabLocation=bankDetails&addbankdetailsSuccess=",
+        active: data.tabLocation == "bankDetails"
+      }
+    ), navItems) %}
+  {% endif %}
+
+  {# 3. Append remaining universal items #}
+  {% set navItems = (navItems.push(
+    {
+      text: "Organisation details",
+      href: "/claims/v27/org-admin/org-details?tabLocation=orgDetails&addbankdetailsSuccess=",
+      active: data.tabLocation == "orgDetails"
+    }
+  ), navItems) %}
+
+  {# 4. Render the macro #}
+  {{ govukServiceNavigation({
+    navigation: navItems
+  }) }}
+
+  {{ govukPhaseBanner({
+    tag: {
+      text: "Prototype"
+    },
+    html: 'This is a new service. Help us improve it and <a class="govuk-link" href="#">give your feedback by email</a>.',
+    classes: "govuk-width-container"
+  }) }}
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+// 1. Left column links behavior
+document.querySelectorAll('a.learner-jump-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    const href = this.getAttribute('href');
+    if (!href) return;
+
+    const cardId = href.substring(1); // get ID from href
+    const tabId = this.dataset.tab;
+    if (!tabId) return;
+
+    // Trigger a click on the tab link
+    const tabLink = document.querySelector(`.govuk-tabs__tab[href="#${tabId}"]`);
+    if (tabLink) {
+      tabLink.click();
+
+      // Wait for the tab panel to become visible
+      setTimeout(() => {
+        // Decode cardId to handle URL-encoded spaces (%20)
+        const decodedCardId = decodeURIComponent(cardId);
+
+        // Use querySelector to find the element with spaces in ID
+        const card = document.querySelector(`[id="${decodedCardId}"]`);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + decodedCardId); // Update URL hash
+        }
+      }, 100);
+    }
+  });
+});
+
+
+window.addEventListener('load', () => {
+  // Decode hash to handle %20 and other encoded characters
+  const hash = decodeURIComponent(window.location.hash.substring(1));
+  if (!hash) return;
+
+  const card = document.querySelector(`[id="${hash}"]`);
+  if (!card) return;
+
+  const tabPanel = card.closest('.govuk-tabs__panel');
+  if (!tabPanel) return;
+
+  const tabId = tabPanel.id;
+  const tabLink = document.querySelector(`.govuk-tabs__tab[href="#${tabId}"]`);
+  if (!tabLink) return;
+
+  tabLink.click();
+
+  setTimeout(() => {
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "./main.html" %}
+
+{% block header %}
+{{ govukHeader({
+    rebrand: true,
+    serviceName: serviceName,
+    navigation: [
+      {
+        href: "/claims/v27/change-organisation",
+        text: "My account"
+      },{
+        href: "#",
+        text: "Sign out"
+      }
+      ]
+    }) 
+  }}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "Prototype"
+    },
+    html: 'This is a new service. Help us improve it and <a class="govuk-link" href="#">give your feedback by email</a>.',
+    classes: "govuk-width-container"
+  }) }}
+{% endblock %}
