@@ -1,6 +1,6 @@
 module.exports = {
     "versionHistory": {
-        "claimsCurrent": "v26",
+        "claimsCurrent": "v27",
         "claimVersions": [
             {
                 "versionNo": "27",
