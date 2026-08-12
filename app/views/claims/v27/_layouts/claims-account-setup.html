@@ -3,18 +3,27 @@
 {% block header %}
 {{ govukHeader({
     rebrand: true,
-    serviceName: serviceName,
+    navigationClasses: "app-header-account-nav",
     navigation: [
       {
-        href: "/claims/v27/change-organisation",
-        text: "My account"
-      },{
-        href: "#",
-        text: "Sign out"
+        href: "/claims/v27/eligibility/overview",
+        text: "Sign out",
+        classes: "app-header-account-nav__link"
       }
-      ]
+    ]
     }) 
   }}
+  {{ govukServiceNavigation({
+    serviceName: serviceName,
+    serviceUrl: "/claims/v27/eligibility/overview",
+    slots: {
+      navigationEnd: '
+        <div class="app-service-nav-account-row">
+          <a class="govuk-service-navigation__link" href="/claims/v27/manage-organisations">My account</a>
+        </div>
+      '
+    }
+  }) }}
   {{ govukPhaseBanner({
     tag: {
       text: "Prototype"
