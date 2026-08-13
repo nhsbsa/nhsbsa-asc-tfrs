@@ -450,13 +450,23 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v15",
+        "processingCurrent": "v16",
         "processingVersions": [
-        {
+            {
+                "versionNo": "16",
+                "phase": "Beta",
+                "status": ["design"],
+                "designHistory":"https://asc-ldss-design-history-5a6efa20721c.herokuapp.com/tags/processing-version-16/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },
+            {
                 "versionNo": "15",
                 "phase": "Beta",
                 "status": ["dev"],
-                "designHistory":"https://asc-ldss-design-history-5a6efa20721c.herokuapp.com/tags/processing-version-14/",
+                "designHistory":"https://asc-ldss-design-history-5a6efa20721c.herokuapp.com/tags/processing-version-15/",
                 "tested": null,
                 "created": null,
                 "aims": null,

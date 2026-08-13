@@ -1,0 +1,49 @@
+{% extends "../_layouts/processing-main.html" %}
+
+{% set reg = data.registrations | findReg(data.referenceID) %}
+
+{% block pageTitle %}
+Check Senior Responsible Officer details are correct — Register an organisation — {{data.processingServiceName}}
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="registration-decision" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Register an organisation</span>
+        <h1 class="govuk-heading-l">Registration reference: ABCD-1234</h1>
+
+        {% if data.confirmation == "onboard" %}
+            <p class="govuk-body">Confirm that you've reviewed the registration details provided and the organisation can be <span class="govuk-!-font-weight-bold">registered</span>.</p>
+            <p class="govuk-body">The SRO will receive an email to let them know their organisation is now registered.</p>
+        {% elif data.confirmation == "onboardrisk" %}
+            <p class="govuk-body">Confirm that you've reviewed the registration details provided and the organisation can be <span class="govuk-!-font-weight-bold">registered at risk</span>.</p>
+            <p class="govuk-body">This will add a flag to the organisation that will only be visible to other processors.</p>
+            <p class="govuk-body">The SRO will receive an email to let them know their organisation is now registered.</p>
+        {% elif data.confirmation == "notOnboard" %}
+            <p class="govuk-body">Confirm that you have reviewed the registration details provided and the organisation <span class="govuk-!-font-weight-bold">cannot be registered</span>.</p>
+            <p class="govuk-body">The SRO will receive this note  explaining why we are unable to register their organisation.</p>
+
+            <div class='govuk-inset-text'>
+                <h2 class='govuk-heading-s'>Note to SRO</h2>
+                <p class="govuk-body">{{data.declineOnboardNote}}</p>
+            </div>
+        {% endif %}
+
+        <form action="../reg-outcome-handler" method="post" novalidate>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Confirm outcome
+                </button>
+                <a class="govuk-link" href="organisation-details?newOrg&orgID&edited">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

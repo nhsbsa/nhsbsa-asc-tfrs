@@ -1,0 +1,26 @@
+{% if reg.status == "submitted"  and not processing %}
+    <p class="govuk-body"><strong class="govuk-tag govuk-tag--blue">Not yet processed</strong></p>
+    <p class="govuk-body">Recieved on {{ reg.requestSubmitted | govukDateTime }}</p>
+    <a type="submit" class="govuk-button" data-module="govuk-button" href="registration-decision">
+        Record outcome
+    </a>
+{% endif %}
+{% if processing  %}
+    <p class="govuk-body">Recieved on {{ reg.requestSubmitted | govukDateTime }}</p>
+{% endif %}
+{% if reg.status == "processed"%}
+    {% if reg.decision.outcome != "notOnboard" %}
+        {% if reg.decision.outcome == "onboard" %}
+            <p class="govuk-body"><strong class="govuk-tag govuk-tag--green">Registered</strong> on {{ reg.decision.decisionDate | govukDateTime }} by test.user@nhsbsa.co.uk</p>
+        {% else %}
+            <p class="govuk-body"><strong class="govuk-tag govuk-tag--orange">Registered at risk</strong> on {{ reg.decision.decisionDate | govukDateTime }} by test.user@nhsbsa.co.uk</p>
+        {% endif %}
+        <p class="govuk-body">Recieved on {{ reg.requestSubmitted | govukDateTime }}</p>
+        <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="../organisation/org-view-main?orgID={{reg.ascwds.workplaceId}}&orgTab=org-details">
+            View organisation
+        </a>
+    {% else %}
+        <p class="govuk-body"><strong class="govuk-tag govuk-tag--red">Rejected</strong> on {{ reg.decision.decisionDate | govukDateTime }} by test.user@nhsbsa.co.uk</p>
+        <p class="govuk-body">Recieved on {{ reg.requestSubmitted | govukDateTime }}</p>
+    {% endif %}
+{% endif %}
