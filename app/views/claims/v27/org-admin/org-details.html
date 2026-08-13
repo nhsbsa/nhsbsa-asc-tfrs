@@ -8,7 +8,6 @@ Organisation details — {{serviceName}} — GOV.UK
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">Organisation details</h1>
-        <p class="govuk-body">We take this information from ASC-WDS. If it's incorrect, you need to update your ASC-WDS account.</p>
         <dl class="govuk-summary-list">
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -20,7 +19,15 @@ Organisation details — {{serviceName}} — GOV.UK
             </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Workplace ID
+                    Address 
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ data.org.address  | formatAddress("line") }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    ASC-WDS Workplace ID
                 </dt>
                 <dd class="govuk-summary-list__value">
                     {{data.org.workplaceID}}
@@ -28,21 +35,43 @@ Organisation details — {{serviceName}} — GOV.UK
             </div>
             <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Address 
+                Registered with Companies House?
                 </dt>
                 <dd class="govuk-summary-list__value">
-                    {{ data.org.address  | formatAddress("line") }}
+                {{data.org.CHregistered | booleanToAnswer}}
                 </dd>
             </div>
-<!--             <div class="govuk-summary-list__row">
+            {% if data.org.CHregistered  %}
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        Companies House number
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{data.org.CHNumber}}
+                    </dd>
+                </div>
+            {% endif %}
+            <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                    Senior Responsible officer 
+                VAT registered?
                 </dt>
                 <dd class="govuk-summary-list__value">
-                        {{data.org.signatory.active.givenName}} {{data.org.signatory.active.familyName}} <br> <a class="govuk-link" href="mailto:example@example.com">{{data.org.signatory.active.email}}</a>
+                {{data.org.VATregistered  | booleanToAnswer}}
                 </dd>
-            </div> -->
+            </div>
+            {% if data.org.VATregistered %}
+                <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">
+                        VAT number
+                    </dt>
+                    <dd class="govuk-summary-list__value">
+                        {{data.org.VATNumber}}
+                    </dd>
+                </div>
+            {% endif %}
         </dl>
+        <p class="govuk-body">If you need to change your organisation details, email us at <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
+        <p class="govuk-body">To register another organisation, or switch to a different one, go to <a href="../manage-organisations">My account</a>.</p>
     </div>
 </div>
 

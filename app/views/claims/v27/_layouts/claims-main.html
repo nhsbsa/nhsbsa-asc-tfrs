@@ -3,18 +3,18 @@
 {% block header %}
   {{ govukHeader({
     rebrand: true,
-    serviceName: serviceName,
+    collapseNavigationOn: false,
+    navigationClasses: "app-header-account-nav",
     navigation: [
       {
-        href: "/claims/v27/change-organisation",
-        text: "My account"
-      },{
-        href: "#",
-        text: "Sign out"
+        href: "/claims/v27/eligibility/overview",
+        text: "Sign out",
+        classes: "app-header-account-nav__link"
       }
-      ]
+    ]
     }) 
   }}
+  
   <div class="moj-organisation-nav govuk-width-container moj-organisation-nav-override" aria-label="Organisation switcher">
     <strong class="govuk-body govuk-!-font-weight-bold">{{data.org.name}} <span class="app-organisation-caption">({{data.org.workplaceID}})</span></strong>
     {# <a href="/claims/v27/change-organisation" class="govuk-link">Change organisation</a> #}
@@ -56,7 +56,16 @@
 
   {# 4. Render the macro #}
   {{ govukServiceNavigation({
-    navigation: navItems
+    serviceName: serviceName,
+    serviceUrl: "/claims/v27/eligibility/overview",
+    navigation: navItems,
+    slots: {
+      navigationEnd: '
+        <div class="app-service-nav-account-row">
+          <a class="govuk-service-navigation__link" href="/claims/v27/manage-organisations">My account</a>
+        </div>
+      '
+    }
   }) }}
 
   {{ govukPhaseBanner({

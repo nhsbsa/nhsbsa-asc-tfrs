@@ -8,15 +8,13 @@
 
 {% block header %}
   {{ govukHeader({
-    rebrand: true,
-    serviceName: serviceName,
-    navigation: [{
-        href: "#",
-        text: "Sign out"
-      }
-      ]
+    rebrand: true
     }) 
   }}
+  {{ govukServiceNavigation({
+    serviceName: serviceName,
+    serviceUrl: "/claims/v27/eligibility/overview"
+  }) }}
   {{ govukPhaseBanner({
     tag: {
       text: "Prototype"

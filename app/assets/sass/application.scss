@@ -1025,3 +1025,52 @@ margin-right: govuk-spacing(3);
   padding-bottom: 0;
 }
 
+/* Account row sitting left-aligned on its own row */
+.app-service-nav-account-row {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 15px 0; /* Vertical spacing between title above and nav below */
+
+  .govuk-service-navigation__link {
+    line-height: 29px;
+  }
+}
+
+/* GOV.UK Header Extensions - Retains standard 960px width container */
+
+/* Float the account nav block to the right within the existing width container */
+.app-header-account-nav {
+  float: right;
+  margin-top: 2px;
+  padding: 0;
+
+  // Specificity + Media Query boost for desktop
+  @include govuk-media-query($from: tablet) { // Or @media (min-width: 48.0625em)
+    .govuk-template--rebranded & {
+      padding: 15px 0 15px 0;
+      margin-top: 2px;
+    }
+  }
+
+}
+
+.app-header-account-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.app-header-account-nav__item {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.govuk-header__link {
+
+  .govuk-template--rebranded .app-header-account-nav & {
+    font-weight: bold;
+    height: 30px;
+    font-size: 16px;
+  }
+}
