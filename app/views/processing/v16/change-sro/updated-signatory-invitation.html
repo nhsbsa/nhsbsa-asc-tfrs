@@ -1,0 +1,181 @@
+{% extends "../_layouts/processing-main.html" %}
+
+{% set foundOrganisation = data.organisations | findOrg(data.orgID) %}
+
+
+{% block pageTitle %}
+    Workplace ID - Register an organisation
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.invite == "failure" %}
+    
+        <div class="moj-banner moj-banner--warning" role="region" aria-label="Warning">
+    
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+            <path d="M13.6,15.4h-2.3v-4.5h2.3V15.4z M13.6,19.8h-2.3v-2.2h2.3V19.8z M0,23.2h25L12.5,2L0,23.2z" />
+            </svg>
+        
+            <div class="moj-banner__message">Invitation {{matchResendUser.givenName}} {{matchResendUser.familyName}} wasn't sent - try again</div>
+        
+        </div>
+    
+        {% endif %}
+        <h1 class="govuk-heading-l">Check {% if data.SROChange == 'edit' %}updated {% else %}new {% endif %}SRO details</h1>
+        {% if data.SROChange == 'edit' %}
+        <p class="govuk-body">Check this information is correct before sending a new invite.</p>
+        {% else %}
+        <p class="govuk-body">Check this information is correct before sending them an invite.</p>
+        {% endif %}
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+              <h2 class="govuk-summary-card__title">
+                Organisation details
+              </h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Workplace ID
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ foundOrganisation.workplaceID }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ foundOrganisation.name }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Address
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {%for line in foundOrganisation.address %}
+                                {{ line }}<br>
+                            {% endfor %}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+
+        {% if data.SROChange == 'replace' %}
+
+        {% set givenName = foundOrganisation.signatory.active.givenName %}
+        {% set familyName = foundOrganisation.signatory.active.familyName  %}
+        {% set email = foundOrganisation.signatory.active.email %}
+
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+              <h2 class="govuk-summary-card__title">
+                Previous SRO details
+              </h2>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Last (family) name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ familyName }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            First (given) name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ givenName}}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Email address
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ email }}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="govuk-summary-card">
+            <div class="govuk-summary-card__title-wrapper">
+              <h2 class="govuk-summary-card__title">
+                {% if data.SROChange == 'edit' %}Updated {% else %}New {% endif %}SRO details
+              </h2>
+              <ul class="govuk-summary-card__actions">
+                <li class="govuk-summary-card__action">
+                  <a class="govuk-link" href="signatory-details">Edit<span class="govuk-visually-hidden"> SRO details</span></a>
+                </li>
+              </ul>
+            </div>
+            <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Last (family) name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.familyName }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            First (given) name
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.givenName }}
+                        </dd>
+                    </div>
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Email address
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{ data.email }}
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+        {% if data.SROChange == 'edit' %}
+            <p class="govuk-body">The SRO still needs to complete registration. This includes signing the GDL and providing the organisation's bank details.</p>
+        {% else %}
+            <p class="govuk-body">Sending this invite to a new SRO will automatically deactivate the previous SRO's account.</p>
+
+            {% if foundOrganisation.bankDetails == null %}
+                <p class="govuk-body">The new SRO will need to complete registration. This includes confirming they have read the GDL and providing the organisation's bank details.</p>
+            {% else %}
+                <p class="govuk-body">The new SRO will need to complete registration and confirm they have read the GDL. They do not need to provide bank details.</p>
+            {% endif %}
+
+        {% endif %}
+
+        <form action="../update-signatory-invite" method="post" novalidate>
+            <input type="hidden" name="answers-checked" value="true">
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Confirm and send invite
+                </button>
+                {% if data.SROChange == 'edit' %}
+                    <a class="govuk-link" href="../organisation/org-view-main?orgTab=users">Cancel</a>
+                {% else %}
+                    <a class="govuk-link" href="../organisation/org-view-main?orgTab=users&givenName=&email=&familyName=">Cancel</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
