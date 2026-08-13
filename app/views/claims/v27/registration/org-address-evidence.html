@@ -51,7 +51,7 @@
                 {% if data.submitError.second.type == "missing" %}
                   Select the type of proof of address
                 {% elif data.submitError.second.type == "notDifferent" %}
-                  Select a different type of evidence for your second document
+                  Select a different type of document for your second proof of address
                 {% endif %}
                 </a>
               </li>
@@ -170,7 +170,7 @@
               {% if data.submitError.second.type == "missing" %}
                   <span class="govuk-visually-hidden">Error:</span> Select the type of the second proof of address
                 {% elif data.submitError.second.type == "notDifferent" %}
-                  <span class="govuk-visually-hidden">Error:</span> Select a different type of evidence for your second document
+                  <span class="govuk-visually-hidden">Error:</span> Select a different type of document for your second proof of address
                 {% endif %}
             </p>
           {% endif %}

@@ -1671,6 +1671,7 @@ router.get('/load-registration', function (req, res) {
   
   const regRef = req.session.data.regRef
   let redirectURL = "registration/check-answers"
+  delete req.session.data.banner
 
   const org = req.session.data.organisations.find(entry => entry.regRef === regRef);
   const userOrg  = req.session.data.user.organisations.find(entry => entry.regRef === regRef);
@@ -1684,8 +1685,10 @@ router.get('/load-registration', function (req, res) {
   req.session.data.addressTown = org.address.addressTown
   req.session.data.addressCounty = org.address.addressCounty
   req.session.data.addressPostcode = org.address.addressPostcode
-  req.session.data.firstEvidence = org.addressEvidence[0]
-  req.session.data.secondEvidence = org.addressEvidence[1]
+  req.session.data.firstType = org.addressEvidence[0].type
+  req.session.data.firstEvidenceFile = org.addressEvidence[0].file
+  req.session.data.secondType = org.addressEvidence[1].type
+  req.session.data.secondEvidenceFile = org.addressEvidence[0].file
   req.session.data.orgID = org.workplaceID
   if (org.CHregistered) {
       req.session.data.companiesHouseResponse = "Yes"
@@ -2146,7 +2149,8 @@ router.get('/load-data', function (req, res) {
   const orgID = req.session.data['orgID']
   const tabLocation = req.session.data['tabLocation']
   loadData(req, orgID);
-  delete req.session.data['orgID']
+  delete req.session.data.orgID
+  delete req.session.data.banner
 
   if ((!req.session.data.org.validGDL) && req.session.data.userType == 'signatory') {
     res.redirect('org-admin/sign-new-gdl')
