@@ -62,26 +62,17 @@
           </div>
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              First proof of address
+              Proof of address
             </dt>
             <dd class="govuk-summary-list__value">
-              {{data.firstEvidence.type | evidenceType}}
-              <br><a class="govuk-link" href="/public/images/{{data.firstEvidence.evidence}}" target="_blank">{{data.firstEvidence.evidence}} (opens in new tab)</a>
+              {{data.firstType | evidenceType}}
+              <br><a class="govuk-link" href="/public/images/{{data.firstType}}.pdf" target="_blank">{{data.firstType}}.pdf (opens in new tab)</a>
+              <hr class="govuk-section-break">
+              {{data.secondType | evidenceType}}
+              <br><a class="govuk-link" href="/public/images/{{data.firstType}}.pdf" target="_blank">{{data.secondType}}.pdf (opens in new tab)</a>
             </dd>
             <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="org-address-evidence?change=true&evidenceAddressCount=first">Change<span class="govuk-visually-hidden"> second proof of organisation address</span></a>
-            </dd>
-          </div>
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key">
-              Second proof of address
-            </dt>
-            <dd class="govuk-summary-list__value">
-              {{data.secondEvidence.type | evidenceType}}
-              <br><a class="govuk-link" href="/public/images/{{data.secondEvidence.evidence}}" target="_blank">{{data.secondEvidence.evidence}} (opens in new tab)</a>
-            </dd>
-            <dd class="govuk-summary-list__actions">
-              <a class="govuk-link" href="org-address-evidence?change=true&evidenceAddressCount=second">Change<span class="govuk-visually-hidden"> first proof of organisation address</span></a>
+              <a class="govuk-link" href="org-address-evidence?change=true">Change<span class="govuk-visually-hidden"> proof of address</span></a>
             </dd>
           </div>
           <div class="govuk-summary-list__row">

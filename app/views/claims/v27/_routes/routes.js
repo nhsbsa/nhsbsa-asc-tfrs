@@ -1501,36 +1501,15 @@ router.post('/validate-address-evidence', function (req, res) {
   delete req.session.data.change
   delete req.session.data.action
 
-  const result = checkEvidence(req.session.data.type, req.session.data.evidenceFile)
+  const result = checkEvidence(req.session.data.firstType, req.session.data.firstEvidenceFile, req.session.data.secondType, req.session.data.secondEvidenceFile)
   console.log(result)
 
   if (action =="continue") {
     if (result.evidenceValid) {
-      const evidence = {
-            type: req.session.data.type,
-            evidence: "file" + req.session.data.evidenceAddressCount + ".pdf"
-          }
-      delete req.session.data.type
-      delete req.session.data.evidenceFile
-      switch(req.session.data.evidenceAddressCount) {
-        case "first":
-          req.session.data.firstEvidence = evidence
-          break;
-        case "second":
-          req.session.data.secondEvidence = evidence
-          break;
-      }
       if (change == "true") {
-        delete req.session.data.evidenceAddressCount
         res.redirect('registration/check-answers')
       } else {
-        if (req.session.data.evidenceAddressCount == "first") {
-          req.session.data.evidenceAddressCount = "second"
-          res.redirect('registration/org-address-evidence')
-        } else {
-          delete req.session.data.evidenceAddressCount
-          res.redirect('registration/asc-wds-id')
-        }
+        res.redirect('registration/asc-wds-id')
       }
     } else {
       req.session.data.submitError = result

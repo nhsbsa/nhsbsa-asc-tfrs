@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { faker } = require('@faker-js/faker');
+const { type } = require('os');
 const dataPath = 'app/views/claims/v27/_data/'
 
 function checkClaim(claim) {
@@ -1134,8 +1135,14 @@ function saveRegistrationEnty(req, status, savePoint) {
     const addressTown = req.session.data.addressTown
     const addressCounty = req.session.data.addressCounty
     const addressPostcode = req.session.data.addressPostcode
-    const firstEvidence = req.session.data.firstEvidence
-    const secondEvidence = req.session.data.secondEvidence
+    const firstEvidence = {
+        type: req.session.data.firstType,
+        evidence: req.session.data.firstType + ".pdf"
+    }
+    const secondEvidence = {
+        type: req.session.data.secondType,
+        evidence: req.session.data.secondType + ".pdf"
+    }
     const orgID = req.session.data.orgID
     let companiesHouseResponse = null
     if (req.session.data.companiesHouseResponse == "Yes") {
@@ -1163,8 +1170,8 @@ function saveRegistrationEnty(req, status, savePoint) {
     delete req.session.data.addressPostcode
     delete req.session.data.type
     delete req.session.data.evidenceFile
-    delete req.session.data.firstEvidence
-    delete req.session.data.secondEvidence
+    delete req.session.data.firstType
+    delete req.session.data.secondType
     delete req.session.data.orgID
     delete req.session.data.companiesHouseResponse
     delete req.session.data.companiesHouseRegNumber
@@ -1334,16 +1341,34 @@ function addressCheck(addressLine1, addressLine2, addressLine3, town, county, po
     return result
 }
 
-function checkEvidence(type, evidenceFile) {
-    const result = {}
+function checkEvidence(firstType, firstEvidenceFile, secondType, secondEvidenceFile) {
+    const result = {
+        first: {
+            type: null,
+            file: null
+        },
+        second: {
+            type: null,
+            file: null
+        }
+    }
 
-    if (type == null) {
-        result.type = "missing"
+    if (firstType == null) {
+        result.first.type = "missing"
     } else {
-        result.type = "valid"
+        result.first.type = "valid"
+    }
+
+    if (secondType == null) {
+        result.second.type = "missing"
+    } else if (firstType == secondType) {
+        result.second.type = "notDifferent"
+    } else {
+        result.second.type = "valid"
     }
     
-    result.evidenceValid = result.type == "valid"
+    result.evidenceValid = result.first.type == "valid" && result.second.type == "valid"
+
     return result
 }
 
