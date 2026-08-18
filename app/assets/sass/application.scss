@@ -1025,3 +1025,192 @@ margin-right: govuk-spacing(3);
   padding-bottom: 0;
 }
 
+// Whitehall style button with icons
+
+.gem-c-print-link .gem-c-notify-link {
+  display: none;
+}
+
+.gem-c-print-link.gem-c-print-link--show-without-js .gem-c-print-link.gem-c-notify-link--show-without-js {
+  display: block;
+}
+
+.govuk-frontend-supported .gem-c-print-link .gem-c-notify-link {
+  display: block;
+}
+
+.gem-c-print-link__link,
+.gem-c-print-link__button,
+.gem-c-notify-link__button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 10px 50%;
+  background-size: 16px 18px;
+  padding: 10px 10px 10px 36px;
+  text-decoration: none;
+  font-family: "GDS Transport", arial, sans-serif;
+  @include govuk-font-size($size: 16);
+  border: 1px solid #505a5f;
+  color: #1d70b8;
+  cursor: pointer;
+  margin: 0;
+}
+
+// Default Print Icon
+.gem-c-print-link__link,
+.gem-c-print-link__button {
+  background-image: url(https://www.gov.uk/assets/government-frontend/govuk_publishing_components/icon-print-9785e3a205c49d1efe1bfe07f3b60cafe820be2d0ca670aa2f4565f5deed4d5f.png);
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .gem-c-print-link__link,
+  .gem-c-print-link__button {
+    background-image: url(https://www.gov.uk/assets/government-frontend/govuk_publishing_components/icon-print-2x-6661abfcb4d537563f5c4ae06a8ddf7623de6ec39b860ca84169b68f5de775c1.png);
+  }
+}
+
+.gem-c-notify-link__button {
+  background-image: url('../images/bell.svg');
+}
+
+// Shared state styles
+.gem-c-print-link__button:hover,
+.gem-c-notify-link__button:hover {
+  background-color: #f3f2f1;
+}
+
+.gem-c-print-link__button:focus,
+.gem-c-notify-link__button:focus {
+  outline: 3px solid rgba(0, 0, 0, 0);
+  color: #0b0c0c;
+  background-color: #fd0;
+  box-shadow: 0 -2px #fd0, 0 4px #0b0c0c;
+  text-decoration: none;
+  border-color: rgba(0, 0, 0, 0);
+}
+
+@supports not (text-wrap: balance) {
+  .gem-c-print-link__button:focus,
+  .gem-c-notify-link__button:focus {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+}
+
+// sidebar container
+.govuk-related-navigation {
+  border-top: 2px solid #1d70b8; 
+  padding-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: "GDS Transport", arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+.govuk-related-navigation__title {
+  font-size: 19px;
+  font-size: 1.1875rem;
+  line-height: 1.3157894737;
+  font-weight: 700;
+  color: #0b0c0c; 
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.govuk-related-navigation__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.govuk-related-navigation__list-item {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+  margin-bottom: 15px;
+}
+
+.govuk-related-navigation__link {
+  color: #1d70b8;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.1em;
+}
+
+.govuk-related-navigation__link:hover {
+  color: #003078;
+  text-decoration-thickness: 3px;
+}
+
+.govuk-related-navigation__link:focus {
+  outline: 3px solid transparent;
+  color: #0b0c0c;
+  background-color: #ffdd00;
+  box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+  text-decoration: none;
+}
+
+.govuk-related-navigation__link:visited {
+  color: #4c2c92;
+}
+
+//summary list - Whitehall publishing styling
+
+.summary-list-wrapper-custom .govuk-summary-list__key {
+display: grid;
+width: 120px;
+align-items: baseline;
+}
+
+.govuk-summary-list__key {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.govuk-summary-list__actions {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// sticky container
+.gem-c-contents-list-with-body__link-wrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  background-color: #f3f3f3;
+  width: 100%;
+  margin: 0;
+  padding: 10px 0;
+}
+
+@media (min-width: 40.0625em) {
+  .gem-c-contents-list-with-body__link-wrapper {
+    padding-left: 10px;
+  }
+}
+
+// link styling
+.gem-c-back-to-top-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: bold;
+  color: #0b0c0c;
+  margin-left: 15px;
+}
+
+.gem-c-back-to-top-link:hover {
+  color: #003078;
+}
+
+.gem-c-back-to-top-link__icon {
+  margin-right: 0.4em;
+  width: 0.8em;
+  height: 0.968em;
+  fill: currentColor;
+}
