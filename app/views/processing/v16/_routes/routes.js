@@ -52,11 +52,12 @@ router.post('/reg-decision-handler', function (req, res) {
   const confirmation = req.session.data.confirmation
   delete req.session.data.submitError
 
-  if (confirmation == "onboard" || confirmation == "onboardrisk") {
+  if (confirmation == "onboard") {
     res.redirect('register-organisation/confirm-decision')
   } else if (confirmation == "onboardrisk") {
+    
     res.redirect('register-organisation/confirm-decision')
-    } else if (confirmation == "notOnboard") {
+  } else if (confirmation == "notOnboard") {
     res.redirect('register-organisation/confirm-decision')
   } else if (confirmation == null) {
     req.session.data.submitError = 'missing'
