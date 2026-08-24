@@ -1109,14 +1109,21 @@ align-items: baseline;
   bottom: 0;
   z-index: 10;
   background-color: #f3f3f3;
-  width: 100%;
-  margin: 0;
+  // ensures sticky container spans full width of viewport
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
   padding: 10px 0;
 }
 
 @media (min-width: 40.0625em) {
   .gem-c-contents-list-with-body__link-wrapper {
     padding-left: 10px;
+    // align inner content to grid
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: calc(50vw - 50%);
+  padding-right: calc(50vw - 50%);
   }
 }
 
