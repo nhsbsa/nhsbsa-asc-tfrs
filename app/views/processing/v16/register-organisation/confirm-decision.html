@@ -25,6 +25,11 @@ Check Senior Responsible Officer details are correct — Register an organisatio
             <p class="govuk-body">Confirm that you've reviewed the registration details provided and the organisation can be <span class="govuk-!-font-weight-bold">registered at risk</span>.</p>
             <p class="govuk-body">This will add a flag to the organisation that will only be visible to other processors.</p>
             <p class="govuk-body">The SRO will receive an email to let them know their organisation is now registered.</p>
+
+            <div class='govuk-inset-text'>
+                <h2 class='govuk-heading-s'>Internal note</h2>
+                <p class="govuk-body">{{data.onboardriskNote}}</p>
+            </div>
         {% elif data.confirmation == "notOnboard" %}
             <p class="govuk-body">Confirm that you have reviewed the registration details provided and the organisation <span class="govuk-!-font-weight-bold">cannot be registered</span>.</p>
             <p class="govuk-body">The SRO will receive this note  explaining why we are unable to register their organisation.</p>

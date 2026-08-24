@@ -50,14 +50,32 @@ router.post('/check-registration-ref', function (req, res) {
 
 router.post('/reg-decision-handler', function (req, res) {
   const confirmation = req.session.data.confirmation
+  const onboardriskNote = req.session.data.onboardriskNote
+  const declineOnboardNote = req.session.data.declineOnboardNote
   delete req.session.data.submitError
 
-  if (confirmation == "onboard" || confirmation == "onboardrisk") {
+  if (confirmation == "onboard") {
     res.redirect('register-organisation/confirm-decision')
   } else if (confirmation == "onboardrisk") {
-    res.redirect('register-organisation/confirm-decision')
-    } else if (confirmation == "notOnboard") {
-    res.redirect('register-organisation/confirm-decision')
+    if (onboardriskNote == null || onboardriskNote == "") {
+      req.session.data.submitError = "onboardriskNoteIncomplete"
+      res.redirect('register-organisation/registration-decision')
+    } else if (onboardriskNote.length > 1500) {
+      req.session.data.submitError = "onboardriskNoteTooLong"
+      res.redirect('register-organisation/registration-decision')
+    } else {
+      res.redirect('register-organisation/confirm-decision')
+    }
+  } else if (confirmation == "notOnboard") {
+    if (declineOnboardNote == null || declineOnboardNote == "") {
+      req.session.data.submitError = "declineOnboardNoteIncomplete"
+      res.redirect('register-organisation/registration-decision')
+    } else if (declineOnboardNote.length > 1500) {
+      req.session.data.submitError = "declineOnboardNoteTooLong"
+      res.redirect('register-organisation/registration-decision')
+    } else {
+      res.redirect('register-organisation/confirm-decision')
+    }
   } else if (confirmation == null) {
     req.session.data.submitError = 'missing'
     res.redirect('register-organisation/registration-decision')
@@ -68,6 +86,7 @@ router.post('/reg-outcome-handler', function (req, res) {
   const referenceID = req.session.data.referenceID
   const confirmation = req.session.data.confirmation
   const declineOnboardNote = req.session.data.declineOnboardNote
+  const onboardriskNote = req.session.data.onboardriskNote
 
   delete req.session.data.confirmation
   delete req.session.data.declineOnboardNote
@@ -79,6 +98,9 @@ router.post('/reg-outcome-handler', function (req, res) {
       if (confirmation == "notOnboard") {
         reg.decision.note = declineOnboardNote
       } else {
+        if (confirmation == "onboardrisk") {
+          reg.decision.note = onboardriskNote
+        }
         const org = createOrg(reg)
         req.session.data.organisations.push(org)
       }
