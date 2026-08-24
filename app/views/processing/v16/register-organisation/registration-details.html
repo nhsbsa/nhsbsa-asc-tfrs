@@ -60,8 +60,10 @@
                 <p class="govuk-body">Yes &ndash; register</p>
             {% elif reg.decision.outcome == "onboardrisk" %}
                 <p class="govuk-body">Yes &ndash; register at risk</p>
+                <p class="govuk-body">Internal note:</br>{{reg.decision.note}}</p>
             {% else %}
-                <p class="govuk-body">No</br>Note to SRO: {{reg.decision.note}}</p>
+                <p class="govuk-body">No</p>
+                <p class="govuk-body">Note to SRO:</br>{{reg.decision.note}}</p>
             {% endif %}
 
             {% if claim.claimType != "60" %}

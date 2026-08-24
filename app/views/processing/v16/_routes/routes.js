@@ -86,6 +86,7 @@ router.post('/reg-outcome-handler', function (req, res) {
   const referenceID = req.session.data.referenceID
   const confirmation = req.session.data.confirmation
   const declineOnboardNote = req.session.data.declineOnboardNote
+  const onboardriskNote = req.session.data.onboardriskNote
 
   delete req.session.data.confirmation
   delete req.session.data.declineOnboardNote
@@ -97,6 +98,9 @@ router.post('/reg-outcome-handler', function (req, res) {
       if (confirmation == "notOnboard") {
         reg.decision.note = declineOnboardNote
       } else {
+        if (confirmation == "onboardrisk") {
+          reg.decision.note = onboardriskNote
+        }
         const org = createOrg(reg)
         req.session.data.organisations.push(org)
       }
