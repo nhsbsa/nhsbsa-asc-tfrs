@@ -120,6 +120,246 @@
         }
     },
     {
+        "registrationRef": "R-KJD1-JD82",
+        "status": "processed",
+        "requestSubmitted": "2026-06-10T06:52:47.938Z",
+        "name": "Teatree Care",
+        "address": ["32 The Lawn", "Birmingham", "BI23 6FH"],
+        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "ascwds": {
+            "workplaceId": "B13299931",
+            "workplaceName": "Teatree Care",
+            "workplaceAddress": ["32 The Lawn", "Birmingham", "BI23 6FH"],
+            "numberOfWorkplaceStaff": 14,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "Cameron",
+            "familyName": "Bennett",
+            "email": "cameron.bennett@teatree.com",
+            "phonenumber": "01234567890"
+        },
+        "decision": {
+            "outcome": "onboard",
+            "note": null,
+            "decisionDate": "2026-06-15T06:52:47.938Z"
+        }
+    },
+    {
+        "registrationRef": "R-LDK2-12HS",
+        "status": "processed",
+        "requestSubmitted": "2026-06-10T06:52:47.938Z",
+        "name": "Anika Care Ltd",
+        "address": ["13 Gandfield Street", "Wakefield", "WA23 6FH"],
+        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "ascwds": {
+            "workplaceId": "C63281491",
+            "workplaceName": "Anika Care Ltd",
+            "workplaceAddress": ["13 Gandfield Street", "Wakefield", "WA23 6FH"],
+            "numberOfWorkplaceStaff": 14,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "Cameron",
+            "familyName": "Bennett",
+            "email": "cameron.bennett@teatree.com",
+            "phonenumber": "01234567890"
+        },
+        "decision": {
+            "outcome": "onboard",
+            "note": null,
+            "decisionDate": "2026-06-15T06:52:47.938Z"
+        }
+    },
+    {
+        "registrationRef": "R-UI23-CV2P",
+        "status": "processed",
+        "requestSubmitted": "2026-06-10T06:52:47.938Z",
+        "name": "Denhams Care Home",
+        "address": ["12 Fairfield Road", "Scarborough", "SC23 6FH"],
+        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "ascwds": {
+            "workplaceId": "D62749203",
+            "workplaceName": "Denhams Care Home",
+            "workplaceAddress": ["12 Fairfield Road", "Scarborough", "SC23 6FH"],
+            "numberOfWorkplaceStaff": 14,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "Cameron",
+            "familyName": "Bennett",
+            "email": "cameron.bennett@teatree.com",
+            "phonenumber": "01234567890"
+        },
+        "decision": {
+            "outcome": "onboard",
+            "note": null,
+            "decisionDate": "2026-06-15T06:52:47.938Z"
+        }
+    },
+    {
+        "registrationRef": "R-HDI2-9K8D",
+        "status": "processed",
+        "requestSubmitted": "2026-06-10T06:52:47.938Z",
+        "name": "Purple Stones Care home",
+        "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
+        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "ascwds": {
+            "workplaceId": "F15904728",
+            "workplaceName": "Purple Stones Care home",
+            "workplaceAddress": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
+            "numberOfWorkplaceStaff": 14,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "Mira",
+            "familyName": "Caldwell",
+            "email": "Mira.Caldwell@purplestonecare.com",
+            "phonenumber": "01234567890"
+        },
+        "decision": {
+            "outcome": "onboard",
+            "note": null,
+            "decisionDate": "2026-06-15T06:52:47.938Z"
+        }
+    },
+    {
+        "registrationRef": "R-52GD-734H",
+        "status": "processed",
+        "requestSubmitted": "2026-06-10T06:52:47.938Z",
+        "name": "Kingscourt Care Home",
+        "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
+        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "ascwds": {
+            "workplaceId": "G91371231",
+            "workplaceName": "Kingscourt Care Home",
+            "workplaceAddress": ["9 Hampton Avenue", "London", "S1 8SJ"],
+            "numberOfWorkplaceStaff": 14,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "Mira",
+            "familyName": "Caldwell",
+            "email": "Mira.Caldwell@purplestonecare.com",
+            "phonenumber": "01234567890"
+        },
+        "decision": {
+            "outcome": "onboard",
+            "note": null,
+            "decisionDate": "2026-06-15T06:52:47.938Z"
+        }
+    },
+    {
+        "registrationRef": "R-53GD-6HD3",
+        "status": "processed",
+        "requestSubmitted": "2026-06-10T06:52:47.938Z",
+        "name": "Farifields Care home",
+        "address": ["12 Farifield Road", "York", "YO23 6FH"],
+        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "ascwds": {
+            "workplaceId": "F87223491",
+            "workplaceName": "Farifields Care home",
+            "workplaceAddress": ["12 Farifield Road", "York", "YO23 6FH"],
+            "numberOfWorkplaceStaff": 14,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "Ivy",
+            "familyName": "Montgomery",
+            "email": "ivy.montgomery@farifields.com",
+            "phonenumber": "01234567890"
+        },
+        "decision": {
+            "outcome": "onboard",
+            "note": null,
+            "decisionDate": "2026-06-15T06:52:47.938Z"
+        }
+    },
+    {
+        "registrationRef": "R-WE72-7H4F",
+        "status": "processed",
+        "requestSubmitted": "2026-06-10T06:52:47.938Z",
+        "name": "Fandly Care",
+        "address": ["12 Jack Street", "Liverpool", "LI12 8GB"],
+        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "ascwds": {
+            "workplaceId": "F87223491",
+            "workplaceName": "Fandly Care",
+            "workplaceAddress": ["12 Jack Street", "Liverpool", "LI12 8GB"],
+            "numberOfWorkplaceStaff": 14,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "Cameron",
+            "familyName": "Bennett",
+            "email": "cameron.bennett@fandly.com",
+            "phonenumber": "01234567890"
+        },
+        "decision": {
+            "outcome": "onboard",
+            "note": null,
+            "decisionDate": "2026-06-15T06:52:47.938Z"
+        }
+    },
+    {
+        "registrationRef": "R-83JD-3JD3",
+        "status": "processed",
+        "requestSubmitted": "2026-06-10T06:52:47.938Z",
+        "name": "Halsey Care home",
+        "address": ["23 Halsey street", "Sunderland", "S31 5HG"],
+        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "ascwds": {
+            "workplaceId": "F84625987",
+            "workplaceName": "Halsey Care home",
+            "workplaceAddress": ["23 Halsey street", "Sunderland", "S31 5HG"],
+            "numberOfWorkplaceStaff": 14,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "Cameron",
+            "familyName": "Bennett",
+            "email": "cameron.bennett@fandly.com",
+            "phonenumber": "01234567890"
+        },
+        "decision": {
+            "outcome": "onboard",
+            "note": null,
+            "decisionDate": "2026-06-15T06:52:47.938Z"
+        }
+    },
+    {
         "registrationRef": "R-KD92-8492",
         "status": "processed",
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
@@ -153,13 +393,13 @@
         "registrationRef": "R-S2PD-3728",
         "status": "processed",
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
-        "name": "Teatree Care",
-        "address": ["32 The Lawn", "Birmingham", "BI23 6FH"],
+        "name": "Bright Horizons Care home",
+        "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
         "evidenceOfAddress": "insuranceCertificate.pdf",
         "ascwds": {
-            "workplaceId": "B13299931",
-            "workplaceName": "Teatree Care",
-            "workplaceAddress": ["72 Guild Street", "London", "SE23 6FH"],
+            "workplaceId": "E76904778",
+            "workplaceName": "Bright Horizons Care home",
+            "workplaceAddress": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
             "numberOfWorkplaceStaff": 14,
             "serviceName": "Carers support",
             "serviceCategory": "Adult community care",
@@ -168,14 +408,44 @@
         "chNumber": "0378628",
         "vatNumber": "027838921",
         "SRO": {     
-            "givenName": "Cameron",
-            "familyName": "Bennett",
-            "email": "cameron.bennett@teatree.com",
+            "givenName": "Mira",
+            "familyName": "Caldwell",
+            "email": "mira.caldwell@brighthorizons.com",
             "phonenumber": "01234567890"
         },
         "decision": {
             "outcome": "onboardrisk",
-            "note": null,
+            "note": "The evidence of address did not match the ASC-WDS address.",
+            "decisionDate": "2026-06-15T06:52:47.938Z"
+        }
+    },
+    {
+        "registrationRef": "R-GD62-32HD",
+        "status": "processed",
+        "requestSubmitted": "2026-06-10T06:52:47.938Z",
+        "name": "Pinetree Manor Care Centre",
+        "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
+        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "ascwds": {
+            "workplaceId": "G91774723",
+            "workplaceName": "Pinetree Manor Care Centre",
+            "workplaceAddress": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
+            "numberOfWorkplaceStaff": 14,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "Hadyn",
+            "familyName": "Lacy",
+            "email": "hadyn-lacey@pinetreecare.co.uk",
+            "phonenumber": "01234567890"
+        },
+        "decision": {
+            "outcome": "onboardrisk",
+            "note": "The evidence of address did not match the ASC-WDS address.",
             "decisionDate": "2026-06-15T06:52:47.938Z"
         }
     }
