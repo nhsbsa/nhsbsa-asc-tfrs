@@ -1,0 +1,171 @@
+{% extends "../_layouts/processing-main.html" %}
+
+{% set reg = data.registrations | findReg(data.referenceID) %}
+
+{% block pageTitle %}
+{% if data.submitError == "missing" %}Error: {% endif %}Check registrations details are correct — Register an organisation — {{data.processingServiceName}}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if data.submitError != null %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+            <div role="alert">
+                <h2 class="govuk-error-summary__title">
+                    There is a problem
+                </h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        {% if data.submitError == "missing" %}
+                            <li>
+                                <a href="#error">Select whether we can onboard this organisation</a>
+                            </li>
+                        {% elif data.submitError == "onboardriskNoteIncomplete" %}
+                            <li>
+                                <a href="#onboardriskNote-error">Enter why this organisation is being registered at risk</a>
+                            </li>
+                        {% elif data.submitError == "onboardriskNoteTooLong" %}
+                            <li>
+                                <a href="#onboardriskNote-error">Enter a note that is 1,500 characters or less </a>
+                            </li>
+                        {% elif data.submitError == "declineOnboardNoteIncomplete" %}
+                            <li>
+                                <a href="#declineOnboardNote-error">Enter why this organisation is being registered at risk</a>
+                            </li>
+                        {% elif data.submitError == "declineOnboardNoteTooLong" %}
+                            <li>
+                                <a href="#declineOnboardNote-error">Enter a note that is 1,500 characters or less </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <span class="govuk-caption-l">Register an organisation</span>
+        <h1 class="govuk-heading-l">Registration reference: {{reg.registrationRef}}</h1>
+        {% set processing = true %}
+        {% include "../_components/reg-view/reg-header.html" %} 
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+        
+        {% include "../_components/reg-view/org-details.html" %}
+
+        {% include "../_components/reg-view/ascwds-details.html" %}
+
+        {% include "../_components/reg-view/sro-details.html" %}
+
+    </div>
+    <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-m">
+          Registration checks
+        </h2>
+        <p class="govuk-body">Once you've finished checking the organisation's registration details, record the outcome below.</p>
+        <form action="../reg-decision-handler" method="post" novalidate>
+            <div class="govuk-form-group {% if data.submitError == 'missing' %}govuk-form-group--error{% endif %}">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                        Can we register this organisation?
+                    </legend>
+                    {% if data.submitError == "missing" %}
+                    <p id="error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        Select whether we can onboard this organisation
+                    </p>
+                    {% endif %}
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmation" name="confirmation" type="radio"
+                                value="onboard" {% if data.confirmation =='onboard' %}checked{% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="confirmation">
+                                Yes &ndash; register
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmation" name="confirmation" type="radio"
+                                value="onboardrisk" data-aria-controls="conditional-onboardriskNote" aria-describedby="atRisk-item-hint" {% if data.confirmation =='onboardrisk' %}checked{% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="confirmation">
+                                Yes &ndash; register at risk
+                            </label>
+                            <div id="atRisk-item-hint" class="govuk-hint govuk-radios__hint">
+                                This will add a flag to the organisation
+                            </div>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmation-2" name="confirmation" type="radio"
+                                value="notOnboard" data-aria-controls="conditional-declineOnboardNote" {% if data.confirmation =='notOnboard' %}checked{% endif %}>
+                            <label class="govuk-label govuk-radios__label" for="confirmation-2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-onboardriskNote">
+                <div class="govuk-form-group govuk-character-count {% if data.submitError == "onboardriskNoteIncomplete" or data.submitError == "onboardriskNoteTooLong" %}govuk-form-group--error {% endif %}" data-module="govuk-character-count" data-maxlength="1500">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                        Why is the organisation being registered at risk?
+                    </legend>
+                    <div id="onboardriskNote-hint" class="govuk-hint">
+                        This note is for NHS BSA colleagues only - the organisation will not see it
+                    </div>
+                    {% if data.submitError == "onboardriskNoteIncomplete" or data.submitError == "onboardriskNoteTooLong" %}
+                    <p id="onboardriskNote-error" class="govuk-error-message">
+                        {% if data.submitError == "onboardriskNoteIncomplete" %}
+                            <span class="govuk-visually-hidden">Error:</span>Enter why this organisation is being registered at risk
+                        {% elif data.submitError == "onboardriskNoteTooLong" %}
+                            <span class="govuk-visually-hidden">Error:</span>Enter a note that is 1,500 characters or less   
+                        {% endif %}
+                    </p>
+                    {% endif %}
+                    <textarea
+                        class="govuk-textarea govuk-js-character-count {% if data.submitError == "onboardriskNoteIncomplete" or data.submitError == "onboardriskNoteTooLong" %}govuk-textarea--error{% endif %}"
+                        id="onboardriskNote" name="onboardriskNote" rows="30"
+                        aria-describedby="onboardriskNote-info onboardriskNote-hint onboardriskNote-error">{{ data.onboardriskNote or '' }}</textarea>
+                    <div id="onboardriskNote-info" class="govuk-hint govuk-character-count__message">
+                        You can enter up to 1,500 characters
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden processing__conditional" id="conditional-declineOnboardNote">
+                <div class="govuk-form-group govuk-character-count {% if data.submitError == "declineOnboardNoteIncomplete" or data.submitError == "declineOnboardNoteTooLong" %}govuk-form-group--error {% endif %}" data-module="govuk-character-count" data-maxlength="1500">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                        Why can't we register this organisation?
+                    </legend>
+                    <div id="declineOnboardNote-hint" class="govuk-hint">
+                        This note tells the SRO why we can't register this organisation based on the details provided
+                    </div>
+                    {% if data.submitError == "declineOnboardNoteIncomplete" or data.submitError == "declineOnboardNoteTooLong" %}
+                    <p id="declineOnboardNote-error" class="govuk-error-message">
+                        {% if data.submitError == "declineOnboardNoteIncomplete" %}
+                            <span class="govuk-visually-hidden">Error:</span>Enter why this organisation can't be registered
+                        {% elif data.submitError == "declineOnboardNoteTooLong" %}
+                            <span class="govuk-visually-hidden">Error:</span>Enter a note that is 1,500 characters or less   
+                        {% endif %}
+                    </p>
+                    {% endif %}
+                    <textarea
+                        class="govuk-textarea govuk-js-character-count {% if data.submitError == "declineOnboardNoteIncomplete" or data.submitError == "declineOnboardNoteTooLong" %}govuk-textarea--error{% endif %}"
+                        id="declineOnboardNote" name="declineOnboardNote" rows="30"
+                        aria-describedby="declineOnboardNote-info declineOnboardNote-error declineOnboardNote-hint">{{ data.declineOnboardNote or '' }}</textarea>
+                    <div id="declineOnboardNote-info" class="govuk-hint govuk-character-count__message">
+                        You can enter up to 1,500 characters
+                    </div>
+                </div>
+            </div>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button" data-module="govuk-button">
+                    Continue
+                </button>
+                <a class="govuk-link" href="registration-details">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+{% endblock %}

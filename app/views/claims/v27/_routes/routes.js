@@ -1501,36 +1501,15 @@ router.post('/validate-address-evidence', function (req, res) {
   delete req.session.data.change
   delete req.session.data.action
 
-  const result = checkEvidence(req.session.data.type, req.session.data.evidenceFile)
+  const result = checkEvidence(req.session.data.firstType, req.session.data.firstEvidenceFile, req.session.data.secondType, req.session.data.secondEvidenceFile)
   console.log(result)
 
   if (action =="continue") {
     if (result.evidenceValid) {
-      const evidence = {
-            type: req.session.data.type,
-            evidence: "file" + req.session.data.evidenceAddressCount + ".pdf"
-          }
-      delete req.session.data.type
-      delete req.session.data.evidenceFile
-      switch(req.session.data.evidenceAddressCount) {
-        case "first":
-          req.session.data.firstEvidence = evidence
-          break;
-        case "second":
-          req.session.data.secondEvidence = evidence
-          break;
-      }
       if (change == "true") {
-        delete req.session.data.evidenceAddressCount
         res.redirect('registration/check-answers')
       } else {
-        if (req.session.data.evidenceAddressCount == "first") {
-          req.session.data.evidenceAddressCount = "second"
-          res.redirect('registration/org-address-evidence')
-        } else {
-          delete req.session.data.evidenceAddressCount
-          res.redirect('registration/asc-wds-id')
-        }
+        res.redirect('registration/asc-wds-id')
       }
     } else {
       req.session.data.submitError = result
@@ -1692,6 +1671,7 @@ router.get('/load-registration', function (req, res) {
   
   const regRef = req.session.data.regRef
   let redirectURL = "registration/check-answers"
+  delete req.session.data.banner
 
   const org = req.session.data.organisations.find(entry => entry.regRef === regRef);
   const userOrg  = req.session.data.user.organisations.find(entry => entry.regRef === regRef);
@@ -1705,8 +1685,10 @@ router.get('/load-registration', function (req, res) {
   req.session.data.addressTown = org.address.addressTown
   req.session.data.addressCounty = org.address.addressCounty
   req.session.data.addressPostcode = org.address.addressPostcode
-  req.session.data.firstEvidence = org.addressEvidence[0]
-  req.session.data.secondEvidence = org.addressEvidence[1]
+  req.session.data.firstType = org.addressEvidence[0].type
+  req.session.data.firstEvidenceFile = org.addressEvidence[0].file
+  req.session.data.secondType = org.addressEvidence[1].type
+  req.session.data.secondEvidenceFile = org.addressEvidence[0].file
   req.session.data.orgID = org.workplaceID
   if (org.CHregistered) {
       req.session.data.companiesHouseResponse = "Yes"
@@ -1985,6 +1967,10 @@ router.get('/signin-handler', function (req, res) {
         
       }
     }
+  } else if (user.organisations.length == 1 ) {
+    loadData(req, user.organisations[0].workplaceID);
+    req.session.data.userType = user.organisations[0].userType
+    redirectURL = 'manage-claims-home'
   }
   res.redirect(redirectURL)
 
@@ -2114,20 +2100,31 @@ router.post('/load-scenario-data', function (req, res) {
 
 router.get('/load-user-data', function (req, res) {
   const userID = req.session.data['userID']
+  const scenario = req.session.data.scenarios
+  let redirectURL = "./authentication/creation-link"
+  let user = null
 
   if (userID != null) {
     loadUserData(req, userID)
+    user = req.session.data.user
   }
 
   delete req.session.data['userID']
 
-  if (req.session.data.user.journey == "post-login") {
-    res.redirect('manage-organisations')
-  } else if (req.session.data.user.journey == "pre-login") {
-    res.redirect('claim-for-adult-social-care-learning-and-development')
-  } else if (req.session.data.user.journey == "invite") {
+  if (scenario == "postlogin") {
+    console.log(user.organisations.length)
+    if (user.organisations.length == 1 ) {
+      loadData(req, user.organisations[0].workplaceID);
+      req.session.data.userType = user.organisations[0].userType
+      redirectURL = 'manage-claims-home'
+    } else {
+      redirectURL = "manage-organisations"
+    }
+  } else if (scenario == "prelogin") {
+    redirectURL = "claim-for-adult-social-care-learning-and-development"
+  } else if (scenario == "invite") {
     req.session.data.journey = "creation"
-    res.redirect('./authentication/creation-link')
+    redirectURL = "./authentication/creation-link"
   } else {
     loadScenarioData(req);
     req.session.data.user = {
@@ -2142,17 +2139,18 @@ router.get('/load-user-data', function (req, res) {
     delete req.session.data.mobile
     delete req.session.data.users
     req.session.data.journey = "creation"
-    res.redirect('./authentication/creation-link')
+    redirectURL = "./authentication/creation-link"
   }
 
-  
+  res.redirect(redirectURL)
 })
 
 router.get('/load-data', function (req, res) {
   const orgID = req.session.data['orgID']
   const tabLocation = req.session.data['tabLocation']
   loadData(req, orgID);
-  delete req.session.data['orgID']
+  delete req.session.data.orgID
+  delete req.session.data.banner
 
   if ((!req.session.data.org.validGDL) && req.session.data.userType == 'signatory') {
     res.redirect('org-admin/sign-new-gdl')

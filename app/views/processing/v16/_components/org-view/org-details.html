@@ -1,0 +1,130 @@
+{% set org = data.organisations | findOrg(data.orgID) %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Organisation details</h1>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{org.name}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Address 
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ org.address[0] }}<br>  {{ org.address[1] }}<br> {{ org.address[2] }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    ASC-WDS Workplace ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{org.workplaceID}}
+                </dd>
+            </div>
+        </dl>
+
+        <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="../register-organisation/registration-details?referenceID={{org.registrationRef}}">
+            View registration details
+        </a>
+
+        <h2 class="govuk-heading-m">ASC-WDS workplace details</h2>
+        <p class="govuk-body">This information is checked and updated from the ASC-WDS each time the organisation submits a claim.</p>
+        <p class="govuk-body">Last checked on 15 June 2026 at 7:52am.</p>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{org.name}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ org.address[0] }}<br>  {{ org.address[1] }}<br> {{ org.address[2] }} 
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                CQC location ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                1-263763829
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Number of workplace employees
+                </dt>
+                <dd class="govuk-summary-list__value">
+                200
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Service provided
+                </dt>
+                <dd class="govuk-summary-list__value">
+                Carers support
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                Service category
+                </dt>
+                <dd class="govuk-summary-list__value">
+                Adult community care
+                </dd>
+            </div>
+        </dl>
+
+        <h2 class="govuk-heading-s">ASC-WDS timeline</h2>
+        <div class="moj-timeline">
+            <div class="moj-timeline__item">
+                <div class="moj-timeline__header">
+                    <h2 class="moj-timeline__title">Organisation details changed</h2>
+                </div>
+                <p class="moj-timeline__date">
+                    <time datetime="2019-06-14T14:01:00.000Z">14 June 2025 at 2:01pm</time>
+                </p>
+                <div class="moj-timeline__description">
+                    <p>Name changed to:</br> Evergreen Care home </p>
+                </div>
+            </div>
+            <div class="moj-timeline__item">
+                <div class="moj-timeline__header">
+                    <h2 class="moj-timeline__title">Organisation details changed</h2>
+                </div>
+                <p class="moj-timeline__date">
+                    <time datetime="2019-06-14T14:01:00.000Z">23 May 2025 at 3:21pm</time>
+                </p>
+                <div class="moj-timeline__description">
+                    <p>Name changed to:</br> Evergreen Care home Ltd</p>
+                    <p>Address changed to:</br>{{ org.address[0] }}<br>  {{ org.address[1] }}<br> {{ org.address[2] }}</p>
+                </div>
+            </div>
+            <div class="moj-timeline__item">
+                <div class="moj-timeline__header">
+                    <h2 class="moj-timeline__title">Organisation registered</h2>
+                </div>
+                <p class="moj-timeline__date">
+                    <time datetime="2019-06-14T14:01:00.000Z">8 April 2025 at 12:53pm</time>
+                </p>
+                <div class="moj-timeline__description">
+                    <p>Name:</br> Avery Place Care home</p>
+                    <p>Address:</br>52 Major Road<br>London<br>SE15 3SK</p>
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>
