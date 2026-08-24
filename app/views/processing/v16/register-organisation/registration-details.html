@@ -7,9 +7,11 @@
 {% endblock %}
 
 {% block beforeContent %}
-<div >
+{% if data.orgID != null %}
+    <a href="../organisation/org-view-main?orgID={{reg.ascwds.workplaceId}}&orgTab=org-details" class="govuk-back-link">Back</a>
+{% else %}
     <a href="find-registration" class="govuk-back-link">Back</a>
-</div>
+{% endif %}
 {% endblock %}
 
 {% block content %}

@@ -800,6 +800,7 @@ router.get('/back-to-start-handler', function (req, res) {
   delete req.session.data.currentPage
   delete req.session.data.orgTab
   delete req.session.data.orgID
+  delete req.session.data.referenceID
 
   delete req.session.data.result
 

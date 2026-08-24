@@ -1,6 +1,7 @@
 [
   {
     "workplaceID": "A02944934",
+    "registrationRef": "R-HFJS-1325",
     "numberOfClaims": 300,
     "name": "Evergreen Care home",
     "address": ["72 Guild Street", "London", "SE23 6FH"],
@@ -94,6 +95,7 @@
   },
   {
     "workplaceID": "B13299931",
+    "registrationRef": "R-KJD1-JD82",
     "numberOfClaims": 75,
     "name": "Teatree Care",
     "address": ["32 The Lawn", "Birmingham", "BI23 6FH"],
@@ -144,6 +146,7 @@
   },
   {
     "workplaceID": "C63281491",
+    "registrationRef": "R-LDK2-12HS",
     "numberOfClaims": 10,
     "name": "Anika Care Ltd",
     "address": ["13 Gandfield Street", "Wakefield", "WA23 6FH"],
@@ -176,6 +179,7 @@
   },
   {
     "workplaceID": "D62749203",
+    "registrationRef": "R-UI23-CV2P",
     "numberOfClaims": 0,
     "name": "Denhams Care Home",
     "address": ["12 Fairfield Road", "Scarborough", "SC23 6FH"],
@@ -208,6 +212,7 @@
   },
   {
     "workplaceID": "E76904778",
+    "registrationRef": "R-S2PD-3728",
     "numberOfClaims": 0,
     "name": "Bright Horizons Care home",
     "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
@@ -219,7 +224,7 @@
       "givenName": "Mira",
       "familyName": "Caldwell",
       "email": "mira.caldwell@brighthorizons.com",
-      "status": "invited"
+      "status": "active"
     },  
     "inactive": []
   },
@@ -231,6 +236,7 @@
   },
   {
     "workplaceID": "F15904728",
+    "registrationRef": "R-HDI2-9K8D",
     "numberOfClaims": 0,
     "name": "Purple Stones Care home",
     "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
@@ -260,6 +266,7 @@
   },
   {
     "workplaceID": "G91774723",
+    "registrationRef": "R-GD62-32HD",
     "numberOfClaims": 0,
     "name": "Pinetree Manor Care Centre",
     "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
@@ -283,6 +290,7 @@
   },
   {
     "workplaceID": "G91371231",
+    "registrationRef": "R-52GD-734H",
     "numberOfClaims": 0,
     "name": "Kingscourt Care Home",
     "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
@@ -321,6 +329,7 @@
   },
   {
     "workplaceID": "F87223491",
+    "registrationRef": "R-53GD-6HD3",
     "numberOfClaims": 10,
     "name": "Farifields Care home",
     "address": ["12 Farifield Road", "York", "YO23 6FH"],
@@ -352,7 +361,8 @@
   }
   },
   {
-    "workplaceID": "B52698456",
+    "workplaceID": "F87223491",
+    "registrationRef": "R-WE72-7H4F",
     "numberOfClaims": 75,
     "name": "Fandly Care",
     "address": ["12 Jack Street", "Liverpool", "LI12 8GB"],
@@ -402,6 +412,7 @@
   },
   {
     "workplaceID": "F84625987",
+    "registrationRef": "R-83JD-3JD3",
     "numberOfClaims": 0,
     "name": "Halsey Care home",
     "address": ["23 Halsey street", "Sunderland", "S31 5HG"],

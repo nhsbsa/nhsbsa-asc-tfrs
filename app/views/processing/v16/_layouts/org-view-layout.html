@@ -23,6 +23,9 @@
     <div class="app-organisation-actions__title">
       <span class="govuk-caption-xl">({{org.workplaceID}})</span>
       <span class="govuk-heading-xl govuk-!-static-margin-bottom-2">{{org.name}}</span>
+      {% if reg.decision.outcome == "onboardrisk" %}
+        <p class="govuk-body"><strong class="govuk-tag govuk-tag--orange">Registered at risk</strong></p>
+      {% endif %}
       </div>
       <div class="app-organisation-actions__actions">
           <a href="../back-to-start-handler" class="govuk-link app-organisation-actions__link">Back to start</a>
