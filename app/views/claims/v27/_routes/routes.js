@@ -2124,7 +2124,7 @@ router.get('/load-user-data', function (req, res) {
   if (req.session.data.user.journey == "post-login") {
     res.redirect('manage-organisations')
   } else if (req.session.data.user.journey == "pre-login") {
-    res.redirect('eligibility/overview')
+    res.redirect('claim-for-adult-social-care-learning-and-development')
   } else if (req.session.data.user.journey == "invite") {
     req.session.data.journey = "creation"
     res.redirect('./authentication/creation-link')

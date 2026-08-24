@@ -1,4 +1,4 @@
-{% extends "../_layouts/main.html" %}
+{% extends "./_layouts/main.html" %}
 
 {% block pageTitle %}
  Claim for adult social care learning and development - {{serviceName}} - GOV.UK
@@ -28,10 +28,10 @@
         <div class="govuk-grid-column-two-thirds govuk-!-padding-bottom-5">
                 <div class="summary-list-wrapper-custom">
                     <div class="govuk-summary-list__row govuk-summary-list__row--no-border">
-                        <dt class="govuk-summary-list__key govuk-body-s govuk-!-font-weight-regular govuk-!-padding-bottom-0 govuk-!-margin-bottom-2">
+                        <dt class="govuk-summary-list__key gem-c-summary-list__key govuk-body-s govuk-!-font-weight-regular govuk-!-padding-bottom-0 govuk-!-margin-bottom-2">
                         From:
                         </dt>
-                        <dd class="govuk-summary-list__actions govuk-body-s govuk-!-text-align-left govuk-!-padding-bottom-0 govuk-!-margin-bottom-2">
+                        <dd class="govuk-summary-list__actions gem-c-summary-list__actions govuk-body-s govuk-!-text-align-left govuk-!-padding-bottom-0 govuk-!-margin-bottom-2">
                             <a class="govuk-link govuk-link--no-visited-state" href="https://www.gov.uk/government/organisations/department-of-health-and-social-care">
                             <b>Department for Health and Social Care</b></a>
                         </dd>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="summary-list-wrapper-custom">
                     <div class="govuk-summary-list__row govuk-summary-list__row--no-border">
-                        <dt class="govuk-summary-list__key govuk-body-s govuk-!-font-weight-regular govuk-!-padding-bottom-0 govuk-!-margin-bottom-2">
+                        <dt class="govuk-summary-list__key gem-c-summary-list__key govuk-body-s govuk-!-font-weight-regular govuk-!-padding-bottom-0 govuk-!-margin-bottom-2">
                         Published:
                         </dt>
                         <dd class="govuk-summary-list__value govuk-body-s govuk-!-padding-bottom-0 govuk-!-margin-bottom-2">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="summary-list-wrapper-custom">
                     <div class="govuk-summary-list__row govuk-summary-list__row--no-border">
-                        <dt class="govuk-summary-list__key govuk-body-s govuk-!-font-weight-regular govuk-!-padding-bottom-0 govuk-!-margin-bottom-2">
+                        <dt class="govuk-summary-list__key gem-c-summary-list__key govuk-body-s govuk-!-font-weight-regular govuk-!-padding-bottom-0 govuk-!-margin-bottom-2">
                         Last updated:
                         </dt>
                         <dd class="govuk-summary-list__value govuk-body-s govuk-!-padding-bottom-0 govuk-!-margin-bottom-2">
@@ -63,7 +63,7 @@
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
             <section class="govuk-section govuk-!-padding-top-4 govuk-!-padding-bottom-4 govuk-!-padding-left-6 govuk-!-padding-right-6 govuk-!-margin-bottom-8" style="background: #f3f3f3;">
-                <h1 class="govuk-heading-s">Applies to England only</h1>
+                <h1 class="govuk-heading-s govuk-!-margin-bottom-0">Applies to England only</h1>
             </section>
 
             <nav class="contents-list" id="contents" role="navigation" aria-label="Contents">
@@ -114,6 +114,19 @@
                 <h2 class="gem-c-heading__text govuk-heading-m" id="what-you-can-claim-for">What you can claim for</h2>
                     <p class="govuk-body">To find out which courses and qualifications you can claim for check this list of <a class="govuk-link govuk-link--no-visited-state" href="https://www.gov.uk/government/publications/adult-social-care-learning-and-development-support-scheme/eligible-training-courses-and-qualifications">eligible training courses and qualifications</a>.</p>
                     <p class="govuk-body">The list also shows the maximum reimbursement amounts available for each learner.</p>
+
+                    <h3 class="gem-c-heading__text govuk-heading-s">Who you can claim for</h3>
+                        <p class="govuk-body">You can claim for:
+                            <ul class="govuk-list govuk-list--bullet">
+                                <li>staff who provide direct care and are not registered with a professional body</li>
+                                <li>registered managers, including aspiring managers who are working towards registration</li>
+                            </ul>
+                        </p>
+                        <p class="govuk-body">However, if you're claiming for Oliver McGowan Mandatory Training (OMMT), you can claim for any member of staff.</p>
+                        <p class="govuk-body">See more about <a href="../guidance/ommt">claiming for OMMT</a>.</p>
+                        <div class="govuk-inset-text">
+                                You can only claim reimbursement towards the cost of the training itself, not extras like travel expenses.
+                        </div>
                     
                     <h3 class="gem-c-heading__text govuk-heading-s" id="how-much-you-can-claim">How much you can claim</h3>
                         <p class="govuk-body">Every course or qualification has a maximum reimbursement amount per learner. This may be less than the training actually cost.</p>
@@ -164,8 +177,8 @@
                     <p class="govuk-body">For more information about how we use your data, see our <a class="govuk-link govuk-link--no-visited-state" href="https://www.nhsbsa.nhs.uk/our-policies/privacy/claim-adult-social-care-learning-and-development-and-assessed-and-support-year-employment-privacy">privacy notice</a>.</p>
 
                     {{ govukButton({
-                    text: "Register",
-                    href: "../authentication/what-do-you-want-to-do",
+                    text: "Start now",
+                    href: "./authentication/what-do-you-want-to-do",
                     isStartButton: true
                     }) }}
 
