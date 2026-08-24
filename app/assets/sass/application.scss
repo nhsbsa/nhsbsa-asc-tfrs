@@ -1157,11 +1157,8 @@ align-items: baseline;
   bottom: 0;
   z-index: 10;
   background-color: #f3f3f3;
-  // ensures sticky container spans full width of viewport
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
   padding: 10px 0;
+
 }
 
 @media (min-width: 40.0625em) {
@@ -1170,28 +1167,21 @@ align-items: baseline;
     // align inner content to grid
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: calc(50vw - 50%);
-  padding-right: calc(50vw - 50%);
   }
 }
 
 // link styling
 .gem-c-back-to-top-link {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  font-weight: bold;
-  color: #0b0c0c;
-  margin-left: 15px;
-}
-
-.gem-c-back-to-top-link:hover {
-  color: #003078;
+  display: inline-block;
+  margin-top: govuk-spacing(2);
+  margin-bottom: govuk-spacing(2);
+  margin-left: govuk-spacing(3);
+  margin-right: govuk-spacing(3);
 }
 
 .gem-c-back-to-top-link__icon {
-  margin-right: 0.4em;
-  width: 0.8em;
-  height: 0.968em;
-  fill: currentColor;
+  float: left;
+  margin-right: .3em;
+  width: .8em;
+  height: .968em;
 }
