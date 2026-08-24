@@ -2121,7 +2121,7 @@ router.get('/load-user-data', function (req, res) {
       redirectURL = "manage-organisations"
     }
   } else if (scenario == "prelogin") {
-    redirectURL = "eligibility/overview"
+    redirectURL = "claim-for-adult-social-care-learning-and-development"
   } else if (scenario == "invite") {
     req.session.data.journey = "creation"
     redirectURL = "./authentication/creation-link"

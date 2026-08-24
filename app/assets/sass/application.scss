@@ -1073,4 +1073,115 @@ margin-right: govuk-spacing(3);
     height: 30px;
     font-size: 16px;
   }
+}// sidebar container
+.govuk-related-navigation {
+  border-top: 2px solid #1d70b8; 
+  padding-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: "GDS Transport", arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+.govuk-related-navigation__title {
+  font-size: 19px;
+  font-size: 1.1875rem;
+  line-height: 1.3157894737;
+  font-weight: 700;
+  color: #0b0c0c; 
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.govuk-related-navigation__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.govuk-related-navigation__list-item {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+  margin-bottom: 15px;
+}
+
+.govuk-related-navigation__link {
+  color: #1d70b8;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.1em;
+}
+
+.govuk-related-navigation__link:hover {
+  color: #003078;
+  text-decoration-thickness: 3px;
+}
+
+.govuk-related-navigation__link:focus {
+  outline: 3px solid transparent;
+  color: #0b0c0c;
+  background-color: #ffdd00;
+  box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+  text-decoration: none;
+}
+
+.govuk-related-navigation__link:visited {
+  color: #4c2c92;
+}
+
+//summary list - Whitehall publishing styling
+
+.summary-list-wrapper-custom .govuk-summary-list__key {
+display: grid;
+width: 120px;
+align-items: baseline;
+}
+
+.gem-c-summary-list__key {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.gem-c-summary-list__actions {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// sticky container
+.gem-c-contents-list-with-body__link-wrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  background-color: #f3f3f3;
+  padding: 10px 0;
+
+}
+
+@media (min-width: 40.0625em) {
+  .gem-c-contents-list-with-body__link-wrapper {
+    padding-left: 10px;
+    // align inner content to grid
+  padding-top: 10px;
+  padding-bottom: 10px;
+  }
+}
+
+// link styling
+.gem-c-back-to-top-link {
+  display: inline-block;
+  margin-top: govuk-spacing(2);
+  margin-bottom: govuk-spacing(2);
+  margin-left: govuk-spacing(3);
+  margin-right: govuk-spacing(3);
+}
+
+.gem-c-back-to-top-link__icon {
+  float: left;
+  margin-right: .3em;
+  width: .8em;
+  height: .968em;
 }
