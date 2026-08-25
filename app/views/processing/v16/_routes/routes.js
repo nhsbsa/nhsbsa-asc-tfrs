@@ -917,6 +917,8 @@ router.post('/verification-handler', function (req, res) {
   delete req.session.data.bankDetailsVerificationIncomplete
   delete req.session.data.partialMatchNoteIncomplete
   delete req.session.data.noMatchNoteIncomplete
+  delete req.session.data.partialMatchNoteTooLong
+  delete req.session.data.noMatchNoteTooLong
 
   const verificationResponse = req.session.data.accessPayResult
   const partialMatchNote = req.session.data.detailsPartialMatchNote
@@ -925,13 +927,17 @@ router.post('/verification-handler', function (req, res) {
 
 
   if (verificationResponse == null || verificationResponse == "") {
-    res.redirect('/processing/v16/verify-bank-details/accessPay-result?bankDetailsVerificationIncomplete=true')
+    res.redirect('/processing/v15/verify-bank-details/accessPay-result?bankDetailsVerificationIncomplete=true')
   } else if (verificationResponse == "partialMatch" && partialMatchNote == "") {
-    res.redirect('/processing/v16/verify-bank-details/accessPay-result?partialMatchNoteIncomplete=true')
+    res.redirect('/processing/v15/verify-bank-details/accessPay-result?partialMatchNoteIncomplete=true')
   } else if (verificationResponse == "noMatch" && noMatchNote == "") {
-    res.redirect('/processing/v16/verify-bank-details/accessPay-result?noMatchNoteIncomplete=true')
+    res.redirect('/processing/v15/verify-bank-details/accessPay-result?noMatchNoteIncomplete=true')
+  } else if (verificationResponse == "partialMatch" && partialMatchNote.length > 1500) {
+    res.redirect('/processing/v15/verify-bank-details/accessPay-result?partialMatchNoteTooLong=true')
+  } else if (verificationResponse == "noMatch" && noMatchNote.length > 1500) {
+    res.redirect('/processing/v15/verify-bank-details/accessPay-result?noMatchNoteTooLong=true')
   } else {
-    res.redirect('/processing/v16/verify-bank-details/outcome-bank-details')
+    res.redirect('/processing/v15/verify-bank-details/outcome-bank-details')
   }
 
   
