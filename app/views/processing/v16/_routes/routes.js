@@ -34,7 +34,7 @@ router.post('/check-registration-ref', function (req, res) {
   if (referenceID == "") {
     req.session.data.submitError = 'missing'
     res.redirect('register-organisation/find-registration')
-  } else if (checkRefFormat(referenceID) || true) {
+  } else if (checkRefFormat(referenceID)) {
     if (regExists) { 
       delete req.session.data.submitError
       res.redirect('register-organisation/registration-details')

@@ -45,7 +45,7 @@ function formatDate(isoDate) {
 }
 
 function checkRefFormat(id) {
-    var pattern = /^[B-I]\d{5,8}$/;
+    var pattern = /^R-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}$/;
     return pattern.test(id);
 }
 
