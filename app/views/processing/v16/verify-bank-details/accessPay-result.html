@@ -8,7 +8,7 @@
 
 {% block content %}
 
-{% if data.bankDetailsVerificationIncomplete or data.partialMatchNoteIncomplete or data.noMatchNoteIncomplete or data.fullMatchScreenshotMissing or data.partialMatchScreenshotMissing or data.noMatchScreenshotMissing %}
+{% if data.bankDetailsVerificationIncomplete or data.partialMatchNoteIncomplete or data.noMatchNoteIncomplete or data.partialMatchNoteTooLong or data.noMatchNoteTooLong or data.fullMatchScreenshotMissing or data.partialMatchScreenshotMissing or data.noMatchScreenshotMissing %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <div class="govuk-error-summary" data-module="govuk-error-summary">
@@ -34,18 +34,32 @@
               {% endif %}
               {% if (data.partialMatchNoteIncomplete) %}
               <li>
-                <a href="#detailsPartialMatchNote">
+                <a href="#partial-match-note-error">
                   Enter verification outcome note
                 </a>
               </li>
               {% endif %}
+              {% if data.partialMatchNoteTooLong %}
+                <li>
+                <a href="#partial-match-note-error">
+                  Note must be 1,500 characters or less
+                </a>
+              </li>
+            {% endif %}
               {% if (data.noMatchNoteIncomplete) %}
               <li>
-                <a href="#detailsNoMatchNote">
+                <a href="#no-match-note-error">
                   Enter verification outcome note
                 </a>
               </li>
               {% endif %}
+              {% if data.noMatchNoteTooLong %}
+                <li>
+                <a href="#no-match-note-error">
+                  Note must be 1,500 characters or less
+                </a>
+              </li>
+            {% endif %}
             </ul>
           </div>
         </div>
@@ -202,18 +216,18 @@
                 This is for QA colleagues only - the organisation will not see it
             </div>
             {% if data.partialMatchNoteIncomplete %}
-                <p id="payment-queried-note-error" class="govuk-error-message">
+                <p id="partial-match-note-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span>Enter verification outcome note
                 </p>
             {% endif %}
             {% if data.partialMatchNoteTooLong %}
-                <p id="payment-queried-note-error" class="govuk-error-message">
+                <p id="partial-match-note-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span>Note must be 1,500 characters or less
                 </p>
             {% endif %}
             <textarea class="govuk-textarea govuk-js-character-count {% if data.partialMatchNoteIncomplete or data.partialMatchNoteTooLong %}govuk-textarea--error{% endif %}" 
             id="detailsPartialMatchNote" name="detailsPartialMatchNote" rows="21" 
-            aria-describedby="detailsPartialMatchNote-info detailsPartialMatchNote-hint">{% if data.detailsPartialMatchNote %}{{data.detailsPartialMatchNote}}{% endif %}</textarea>
+            aria-describedby="detailsPartialMatchNote-info detailsPartialMatchNote-hint partial-match-note-error">{% if data.detailsPartialMatchNote %}{{data.detailsPartialMatchNote}}{% endif %}</textarea>
             <div id="detailsPartialMatchNote-info" class="govuk-hint govuk-character-count__message">
                 You can enter up to 1,500 characters
             </div>
@@ -246,19 +260,19 @@
                 This is for QA colleagues only - the organisation will not see it
             </div>
             {% if data.noMatchNoteIncomplete %}
-                <p id="detailsNoMatchNote-error" class="govuk-error-message">
+                <p id="no-match-note-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span>Enter verification outcome note
                 </p>
             {% endif %}
             {% if data.noMatchNoteTooLong %}
-                <p id="detailsNoMatchNote-error" class="govuk-error-message">
+                <p id="no-match-note-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span>Note must be 1,500 characters or less
                 </p>
             {% endif %}
             <textarea
                 class="govuk-textarea govuk-js-character-count {% if data.noMatchNoteIncomplete or data.noMatchNoteTooLong%}govuk-textarea--error{% endif %}"
                 id="detailsNoMatchNote" name="detailsNoMatchNote" rows="21"
-                aria-describedby="detailsNoMatchNote-info detailsNoMatchNote-hint">{% if data.detailsNoMatchNote %}{{data.detailsNoMatchNote}}{% endif %}</textarea>
+                aria-describedby="detailsNoMatchNote-info detailsNoMatchNote-hint no-match-note-error">{% if data.detailsNoMatchNote %}{{data.detailsNoMatchNote}}{% endif %}</textarea>
             <div id="detailsNoMatchNote-info" class="govuk-hint govuk-character-count__message">
                 You can enter up to 1,500 characters
             </div>
