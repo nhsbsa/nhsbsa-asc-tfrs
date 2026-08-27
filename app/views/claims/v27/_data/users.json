@@ -108,6 +108,48 @@
         ]
     },
     {
+        "journey": "post-login",
+        "givenName": "Harriet",
+        "familyName": "Gondray",
+        "email": "harriet.gondray@caregroup.com",
+        "description": "She is a user of the following organsiations:",
+        "organisations": [
+            {
+                "workplaceID": "F15904728",
+                "regRef": "R-3Z9V-8L",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "post-login",
+        "givenName": "Hamish",
+        "familyName": "Settle",
+        "email": "hamish.settle@caregroup.com",
+        "description": "He is a user of the following organsiations:",
+        "organisations": [
+            {
+                "workplaceID": "F87223491",
+                "regRef": "R-5S1G-3P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
         "journey": "pre-login",
         "givenName": "Mira",
         "familyName": "Caldwell",
