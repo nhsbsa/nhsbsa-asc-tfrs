@@ -16,7 +16,7 @@
       <h2 class="govuk-heading-l">User profiles</h2>
 
       {% for user in data.users %}
-        {% if user.journey == "post-login" %}
+        {% if user.journey == "postlogin" %}
           <h3 class="govuk-heading-m">{{user.givenName}}</h3>
           <p class="govuk-body">{{user.description}}</p>
           <ul class="govuk-list govuk-list--bullet">

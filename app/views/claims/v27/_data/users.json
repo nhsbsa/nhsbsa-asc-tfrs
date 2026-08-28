@@ -1,6 +1,6 @@
 [
     {
-        "journey": "post-login",
+        "journey": "postlogin",
         "givenName": "Roy",
         "familyName": "Hub",
         "email": "roy.hub@caregroup.co.uk",
@@ -51,7 +51,7 @@
         ]
     },
     {   
-        "journey": "post-login",
+        "journey": "postlogin",
         "givenName": "Cynthia",
         "familyName": "Bartoletti",
         "email": "cynthia.bartoletti@caregroup.com",
@@ -66,7 +66,7 @@
         ]
     },
     {   
-        "journey": "post-login",
+        "journey": "postlogin",
         "givenName": "Jehan",
         "familyName": "Pohstra",
         "email": "jehan.pohstra@caregroup.com",
@@ -93,7 +93,7 @@
         ]
     },
     {
-        "journey": "post-login",
+        "journey": "postlogin",
         "givenName": "Valerie",
         "familyName": "Altenwerth",
         "email": "valerie.altenwerth@caregroup.com",
@@ -108,7 +108,7 @@
         ]
     },
     {
-        "journey": "post-login",
+        "journey": "postlogin",
         "givenName": "Harriet",
         "familyName": "Gondray",
         "email": "harriet.gondray@caregroup.com",
@@ -129,7 +129,7 @@
         ]
     },
     {
-        "journey": "post-login",
+        "journey": "postlogin",
         "givenName": "Hamish",
         "familyName": "Settle",
         "email": "hamish.settle@caregroup.com",
@@ -150,7 +150,7 @@
         ]
     },
     {
-        "journey": "pre-login",
+        "journey": "prelogin",
         "givenName": "Mira",
         "familyName": "Caldwell",
         "email": "mira.caldwell@caregroup.com",

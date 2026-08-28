@@ -881,3 +881,26 @@ addFilter('findReg', function (registrations, id) {
     }
     return foundReg
 })
+
+addFilter('evidenceType', function (type) {
+
+    switch(type) {
+        case "businessratesbill":
+            return "Business rates  bill"
+        case "utilitybill":
+            return "Utility bill"
+            break;
+        case "counciltaxbill":
+            return "Council tax bill"
+            break;
+        case "businessleaseagreement":
+            return "Business premises lease agreement"
+            break;
+        case "insurancecertificate":
+            return "Public liability insurance certificate"
+            break;
+        default:
+           return "Error"
+    }
+
+})

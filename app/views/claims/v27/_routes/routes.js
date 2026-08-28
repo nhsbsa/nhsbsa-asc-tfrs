@@ -1627,12 +1627,12 @@ router.post('/validate-vat', function (req, res) {
   delete req.session.data.change
   delete req.session.data.action
 
-  // var validCharactersRegex = /^[a-zA-Z0-9-\s]+$/;
+  const validCharactersRegex = /^(?:GB)?(?:[0-9]{9}|[0-9]{12}|GD[0-9]{3}|HA[0-9]{3})$/i;
 
   if (action =="continue") {
     if (vatRegNumber == "") {
       res.redirect('registration/vat-registration-number?vatRegNumberEmptyError=true')
-    } else if (true == true) {
+    } else if (validCharactersRegex.test(vatRegNumber.trim())) {
       if (change == "true") {
         res.redirect('registration/check-answers')
       } else {
@@ -1962,6 +1962,7 @@ router.get('/signin-handler', function (req, res) {
         if (userOrg.userType == "signatory") {
           redirectURL = 'change-sro/verify-details'
         } else {
+          req.session.data.tabLocation = "claims"
           redirectURL = 'manage-claims-home'
         }
         
@@ -1972,6 +1973,7 @@ router.get('/signin-handler', function (req, res) {
     if (org.status == "active") {
       loadData(req, user.organisations[0].workplaceID);
       req.session.data.userType = user.organisations[0].userType
+      req.session.data.tabLocation = "claims"
       redirectURL = 'manage-claims-home'
     }    
   }
@@ -2103,7 +2105,6 @@ router.post('/load-scenario-data', function (req, res) {
 
 router.get('/load-user-data', function (req, res) {
   const userID = req.session.data['userID']
-  const scenario = req.session.data.scenarios
   let redirectURL = "./authentication/creation-link"
   let user = null
 
@@ -2114,7 +2115,7 @@ router.get('/load-user-data', function (req, res) {
 
   delete req.session.data['userID']
 
-  if (scenario == "postlogin") {
+  if (user.journey == "postlogin") {
     console.log(user.organisations.length)
     if (user.organisations.length == 1 ) {
       const org = findOrg(user.organisations[0].workplaceID, req.session.data.organisations)
@@ -2128,9 +2129,9 @@ router.get('/load-user-data', function (req, res) {
     } else {
       redirectURL = "manage-organisations"
     }
-  } else if (scenario == "prelogin") {
+  } else if (user.journey == "prelogin") {
     redirectURL = "claim-for-adult-social-care-learning-and-development"
-  } else if (scenario == "invite") {
+  } else if (user.journey == "invite") {
     req.session.data.journey = "creation"
     redirectURL = "./authentication/creation-link"
   } else {
