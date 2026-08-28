@@ -122,9 +122,15 @@
                 <dt class="govuk-summary-list__key">
                 Phone number
                 </dt>
-                <dd class="govuk-summary-list__value">
-                01234567890
-                </dd>
+                {% if data.user.phoneNumber != null %}
+                    <dd class="govuk-summary-list__value">
+                    {{data.user.phoneNumber}}
+                    </dd>
+                {% else %}
+                    <dd class="govuk-summary-list__value">
+                        <a href="./manage-orgs/add-phone-number" class="govuk-link">Add phone number</a>
+                    </dd>
+                {% endif %}
             </div>
             </dl>
         
@@ -133,10 +139,13 @@
         <hr class="govuk-section-break govuk-section-break--m">
 
         <h2 class="govuk-heading-m">Registered organisations</h2>
-
-        <a type="submit" class="govuk-button" data-module="govuk-button" href="registration/before-you-start">
-            Register new organisation
-        </a>
+        {% if data.user.phoneNumber != null %}
+            <a type="submit" class="govuk-button" data-module="govuk-button" href="registration/before-you-start">
+                Register new organisation
+            </a>
+        {% else %}
+            <p class="govuk-body">To register a new organisation you must first <a href="./manage-orgs/add-phone-number" class="govuk-link">add your phone number</a>.</p>
+        {% endif %}
 
         {% if orgList.active.length > 0 %}
             {% for workplaceID in orgList.active %}
