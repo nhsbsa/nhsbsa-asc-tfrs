@@ -33,44 +33,48 @@ Organisation details — {{serviceName}} — GOV.UK
                     {{data.org.workplaceID}}
                 </dd>
             </div>
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                Registered with Companies House?
-                </dt>
-                <dd class="govuk-summary-list__value">
-                {{data.org.CHregistered | booleanToAnswer}}
-                </dd>
-            </div>
-            {% if data.org.CHregistered  %}
+{#             {% if data.userType == "signatory" %}
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        Companies House number
+                    Registered with Companies House?
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{data.org.CHNumber}}
+                    {{data.org.CHregistered | booleanToAnswer}}
                     </dd>
                 </div>
-            {% endif %}
-            <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                VAT registered?
-                </dt>
-                <dd class="govuk-summary-list__value">
-                {{data.org.VATregistered  | booleanToAnswer}}
-                </dd>
-            </div>
-            {% if data.org.VATregistered %}
+                {% if data.org.CHregistered  %}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            Companies House number
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{data.org.CHNumber}}
+                        </dd>
+                    </div>
+                {% endif %}
                 <div class="govuk-summary-list__row">
                     <dt class="govuk-summary-list__key">
-                        VAT number
+                    VAT registered?
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {{data.org.VATNumber}}
+                    {{data.org.VATregistered  | booleanToAnswer}}
                     </dd>
                 </div>
-            {% endif %}
+                {% if data.org.VATregistered %}
+                    <div class="govuk-summary-list__row">
+                        <dt class="govuk-summary-list__key">
+                            VAT number
+                        </dt>
+                        <dd class="govuk-summary-list__value">
+                            {{data.org.VATNumber}}
+                        </dd>
+                    </div>
+                {% endif %}
+            {% endif %} #}
         </dl>
-        <p class="govuk-body">If you need to change your organisation details, email us at <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
+        {% if data.userType == "signatory" %}
+            <p class="govuk-body">If you need to change your organisation details, email us at <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
+        {% endif %}
         <p class="govuk-body">To register another organisation, or switch to a different one, go to <a href="../manage-organisations">My account</a>.</p>
     </div>
 </div>

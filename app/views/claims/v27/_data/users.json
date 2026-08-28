@@ -1,6 +1,6 @@
 [
     {
-        "journey": "post-login",
+        "journey": "postlogin",
         "givenName": "Roy",
         "familyName": "Hub",
         "email": "roy.hub@caregroup.co.uk",
@@ -51,7 +51,7 @@
         ]
     },
     {   
-        "journey": "post-login",
+        "journey": "postlogin",
         "givenName": "Cynthia",
         "familyName": "Bartoletti",
         "email": "cynthia.bartoletti@caregroup.com",
@@ -66,7 +66,7 @@
         ]
     },
     {   
-        "journey": "post-login",
+        "journey": "postlogin",
         "givenName": "Jehan",
         "familyName": "Pohstra",
         "email": "jehan.pohstra@caregroup.com",
@@ -93,7 +93,7 @@
         ]
     },
     {
-        "journey": "post-login",
+        "journey": "postlogin",
         "givenName": "Valerie",
         "familyName": "Altenwerth",
         "email": "valerie.altenwerth@caregroup.com",
@@ -108,7 +108,49 @@
         ]
     },
     {
-        "journey": "pre-login",
+        "journey": "postlogin",
+        "givenName": "Harriet",
+        "familyName": "Gondray",
+        "email": "harriet.gondray@caregroup.com",
+        "description": "She is a user of the following organsiations:",
+        "organisations": [
+            {
+                "workplaceID": "F15904728",
+                "regRef": "R-3Z9V-8L",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "postlogin",
+        "givenName": "Hamish",
+        "familyName": "Settle",
+        "email": "hamish.settle@caregroup.com",
+        "description": "He is a user of the following organsiations:",
+        "organisations": [
+            {
+                "workplaceID": "F87223491",
+                "regRef": "R-5S1G-3P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "prelogin",
         "givenName": "Mira",
         "familyName": "Caldwell",
         "email": "mira.caldwell@caregroup.com",

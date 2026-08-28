@@ -22,7 +22,11 @@
             Evidence of address
         </dt>
         <dd class="govuk-summary-list__value">
-            <a class="govuk-link" href="/public/images/{{reg.evidenceOfAddress}}" target="_blank">{{reg.evidenceOfAddress}} (opens in new tab)</a>
+            {{reg.evidenceOfAddress[0].type | evidenceType}}
+            <br><a class="govuk-link" href="/public/images/{{reg.evidenceOfAddress[0].evidence}}.pdf" target="_blank">{{reg.evidenceOfAddress[0].evidence}} (opens in new tab)</a>
+            <hr class="govuk-section-break govuk-section-break--m">
+            {{reg.evidenceOfAddress[1].type | evidenceType}}
+            <br><a class="govuk-link" href="/public/images/{{reg.evidenceOfAddress[0].evidence}}.pdf" target="_blank">{{reg.evidenceOfAddress[1].evidence}} (opens in new tab)</a>
         </dd>
     </div>
     <div class="govuk-summary-list__row">

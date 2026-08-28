@@ -9,7 +9,7 @@
     <p class="govuk-body">Recieved on {{ reg.requestSubmitted | govukDateTime }}</p>
 {% endif %}
 {% if reg.status == "processed"%}
-    {% if reg.decision.outcome != "notOnboard" %}
+    {% if reg.decision.outcome != "notonboard" %}
         {% if reg.decision.outcome == "onboard" %}
             <p class="govuk-body"><strong class="govuk-tag govuk-tag--green">Registered</strong> on {{ reg.decision.decisionDate | govukDateTime }} by test.user@nhsbsa.co.uk</p>
         {% else %}

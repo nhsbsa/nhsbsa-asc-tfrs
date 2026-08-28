@@ -5,7 +5,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Horizons Care home",
         "address": ["72 Guild Street", "Halifax", "HE42 4JD"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "G16372832",
             "workplaceName": "Horizons Care home",
@@ -35,7 +44,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Horizons Care home",
         "address": ["72 Guild Street", "Halifax", "HE42 4JD"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "D7482938",
             "workplaceName": "Horizons Care home",
@@ -65,7 +83,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Horizons Care home",
         "address": ["72 Guild Street", "Halifax", "HE42 4JD"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "B2839494",
             "workplaceName": "Horizons Care home",
@@ -95,7 +122,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Evergreen Care home",
         "address": ["72 Guild Street", "London", "SE23 6FH"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "A02944934",
             "workplaceName": "Evergreen Care home",
@@ -125,7 +161,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Teatree Care",
         "address": ["32 The Lawn", "Birmingham", "BI23 6FH"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "B13299931",
             "workplaceName": "Teatree Care",
@@ -155,7 +200,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Anika Care Ltd",
         "address": ["13 Gandfield Street", "Wakefield", "WA23 6FH"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "C63281491",
             "workplaceName": "Anika Care Ltd",
@@ -185,7 +239,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Denhams Care Home",
         "address": ["12 Fairfield Road", "Scarborough", "SC23 6FH"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "D62749203",
             "workplaceName": "Denhams Care Home",
@@ -215,7 +278,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Purple Stones Care home",
         "address": ["23 Trinity Cross", "Somerset", "S24 8SJ"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "F15904728",
             "workplaceName": "Purple Stones Care home",
@@ -245,7 +317,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Kingscourt Care Home",
         "address": ["9 Hampton Avenue", "London", "S1 8SJ"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "G91371231",
             "workplaceName": "Kingscourt Care Home",
@@ -275,7 +356,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Farifields Care home",
         "address": ["12 Farifield Road", "York", "YO23 6FH"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "F87223491",
             "workplaceName": "Farifields Care home",
@@ -305,7 +395,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Fandly Care",
         "address": ["12 Jack Street", "Liverpool", "LI12 8GB"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "F87223491",
             "workplaceName": "Fandly Care",
@@ -335,7 +434,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Halsey Care home",
         "address": ["23 Halsey street", "Sunderland", "S31 5HG"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "F84625987",
             "workplaceName": "Halsey Care home",
@@ -365,7 +473,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Chrome Care services",
         "address": ["32 Dylion Street", "Newcastle", "NE23 6FH"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "D2627384",
             "workplaceName": "Chrome Care services",
@@ -395,7 +512,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Bright Horizons Care home",
         "address": ["106 Brown Heath Lane", "Kent", "K3 8SJ"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "E76904778",
             "workplaceName": "Bright Horizons Care home",
@@ -425,7 +551,16 @@
         "requestSubmitted": "2026-06-10T06:52:47.938Z",
         "name": "Pinetree Manor Care Centre",
         "address": ["12 Hatchcourt Road", "Essex", "SX4 9XJ"],
-        "evidenceOfAddress": "insuranceCertificate.pdf",
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
         "ascwds": {
             "workplaceId": "G91774723",
             "workplaceName": "Pinetree Manor Care Centre",

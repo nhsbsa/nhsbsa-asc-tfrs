@@ -1345,7 +1345,7 @@ function checkEvidence(firstType, firstEvidenceFile, secondType, secondEvidenceF
     const result = {
         first: {
             type: null,
-            file: null
+            file: "null"
         },
         second: {
             type: null,
