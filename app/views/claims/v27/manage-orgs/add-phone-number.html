@@ -1,0 +1,71 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+{% block pageTitle %}
+{% if data.submitError %}Error: {% endif %}What is your phone number? — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="../manage-organisations" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if data.submitError %}
+        <div class="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 class="govuk-error-summary__title">
+              There is a problem
+            </h2>
+            <div class="govuk-error-summary__body">
+              <ul class="govuk-list govuk-error-summary__list">
+                <li>
+                  <a href="#phoneNumber">
+                    {% if data.submitError == 'missing' %}
+                        Enter a phone number
+                    {% elif data.submitError == 'invalid' %}
+                        Enter a valid UK phone number
+                    {% endif %}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <form action="../validate-phone-number" method="post" class="form">
+            <div class="govuk-form-group {% if data.submitError %} govuk-form-group--error {% endif %}">
+                <fieldset class="govuk-fieldset" role="group" aria-describedby="phoneNumber-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                      <h1 class="govuk-fieldset__heading">
+                            What is your phone number?
+                      </h1>
+                    </legend>
+                    <div id="phoneNumber-hint" class="govuk-hint">
+                      We need this so we can contact you if there are any issues with the service or registration details you have submitted. 
+                    </div>
+                    {% if data.submitError %}
+                    <p id="phoneNumber" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        {% if data.submitError == 'missing' %}
+                        Enter a phone number
+                    {% elif data.submitError == 'invalid' %}
+                        Enter a valid UK phone number
+                    {% endif %}
+                    </p>
+                    {% endif %}
+                    <input class="govuk-input govuk-input--width-10  {% if data.submitError %}govuk-input--error{% endif %}" aria-describedby="phoneNumber-hint" id="phoneNumber"
+                        name="phoneNumber" type="text" value="{{ data.phoneNumber | default ('') }}">
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

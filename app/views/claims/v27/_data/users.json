@@ -4,6 +4,7 @@
         "givenName": "Roy",
         "familyName": "Hub",
         "email": "roy.hub@caregroup.co.uk",
+        "phoneNumber": "01234567890",
         "description": "Roy is a user for many organisations covering every state an organisations can be in. He is a user of the following organsiations:",
         "organisations": [
             {
@@ -55,6 +56,7 @@
         "givenName": "Cynthia",
         "familyName": "Bartoletti",
         "email": "cynthia.bartoletti@caregroup.com",
+        "phoneNumber": "01234567890",
         "description": "Cynthia is a user of one organisations that is currently active and she is the SRO. She is a user of the following organsiation:",
         "organisations": [
             {
@@ -70,6 +72,7 @@
         "givenName": "Jehan",
         "familyName": "Pohstra",
         "email": "jehan.pohstra@caregroup.com",
+        "phoneNumber": "01234567890",
         "description": "Cynthia is a user of one organisations that is currently active and she is the SRO. She is a user of the following organsiation:",
         "organisations": [
             {
@@ -97,6 +100,7 @@
         "givenName": "Valerie",
         "familyName": "Altenwerth",
         "email": "valerie.altenwerth@caregroup.com",
+        "phoneNumber": "01234567890",
         "description": "Valerie is currently in the processing of completeing the registration details for one organsiation. She is a user of the following organsiations:",
         "organisations": [
             {
@@ -112,6 +116,7 @@
         "givenName": "Harriet",
         "familyName": "Gondray",
         "email": "harriet.gondray@caregroup.com",
+        "phoneNumber": "01234567890",
         "description": "She is a user of the following organsiations:",
         "organisations": [
             {
@@ -133,6 +138,7 @@
         "givenName": "Hamish",
         "familyName": "Settle",
         "email": "hamish.settle@caregroup.com",
+        "phoneNumber": "01234567890",
         "description": "He is a user of the following organsiations:",
         "organisations": [
             {
@@ -154,6 +160,7 @@
         "givenName": "Mira",
         "familyName": "Caldwell",
         "email": "mira.caldwell@caregroup.com",
+        "phoneNumber": "01234567890",
         "description": "",
         "organisations": []
     },
@@ -162,6 +169,7 @@
         "givenName": "Craig",
         "familyName": "Willowtree",
         "email": "craig.willowtree@caregroup.com",
+        "phoneNumber": "01234567890",
         "description": "",
         "organisations": [
             {
@@ -177,6 +185,7 @@
         "givenName": "Calsey",
         "familyName": "Huel",
         "email": "calsey.huel@caregroup.com",
+        "phoneNumber": "01234567890",
         "description": "",
         "organisations": [
             {
@@ -204,6 +213,7 @@
         "givenName": "Mark",
         "familyName": "Jacobs",
         "email": "mark.jacobs@caregroup.com",
+        "phoneNumber": null,
         "description": "",
         "organisations": [
             {
@@ -219,6 +229,7 @@
         "givenName": "Terri",
         "familyName": "Jeffords",
         "email": "terri.jeffords@caregroup.com",
+        "phoneNumber": "01234567890",
         "description": "",
         "organisations": [
             {
@@ -241,5 +252,4 @@
             }
         ]
     }
-
 ]

@@ -1472,6 +1472,27 @@ router.post('/validate-job-title', function (req, res) {
   }
 });
 
+router.post('/validate-phone-number', function (req, res) {
+  delete req.session.data.submitError
+
+  const phoneNumber = req.session.data.phoneNumber
+
+  var validCharactersRegex = /^(?:(?:\+44\s?|0)7\d{3}\s?\d{6}|(?:\+44\s?|0)[12358]\d{2,4}\s?\d{3,4}\s?\d{3,4})$/;
+
+  if (phoneNumber == "") {
+    req.session.data.submitError = "missing"
+    res.redirect('manage-orgs/add-phone-number')
+  } else if (validCharactersRegex.test(phoneNumber.trim()) == true) {
+    req.session.data.user.phoneNumber = phoneNumber
+    delete req.session.data.phoneNumber
+    res.redirect('manage-organisations')
+  } else {
+    req.session.data.submitError = "invalid"
+    res.redirect('manage-orgs/add-phone-number')
+  }
+
+});
+
 router.post('/validate-job-title-change-sro', function (req, res) {
   delete req.session.data.jobTitleEmptyError
   delete req.session.data.jobTitleInvalid
