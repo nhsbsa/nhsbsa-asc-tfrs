@@ -1843,7 +1843,7 @@ addFilter('userErrorMessage', function (submitError) {
     }
 
     if (submitError.phone == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an phone number</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter a phone number</a></li>')
     } else if (submitError.phone == "invalid") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter a valid UK phone number</a></li>')
     }
