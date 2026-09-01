@@ -25,9 +25,7 @@
                 <li>
                   <a href="#jobTitle">
                     {% if data.jobTitleEmptyError %}
-                    The job title must not be empty
-                    {% elif data.jobTitleInvalid %}
-                    The job title must not include invalid characters
+                      Enter your job title
                     {% endif %}
                   </a>
                 </li>
@@ -52,9 +50,7 @@
                     <p id="jobTitle" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
                         {% if data.jobTitleEmptyError %}
-                        The job title must not be empty
-                        {% elif data.jobTitleInvalid %}
-                        The job title must not include invalid characters
+                          Enter your job title
                         {% endif %}
                     </p>
                     {% endif %}

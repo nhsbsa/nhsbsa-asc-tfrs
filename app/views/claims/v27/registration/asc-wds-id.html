@@ -25,7 +25,7 @@
                 <li>
                   <a href="#workplaceID">
                      {% if data.workplaceIDEmpty %}
-                        Enter workplace ID
+                        Enter your organisation's workplace ID
                     {% elif data.workplaceIDInvalid %}
                         Enter a valid workplace ID
                     {% endif %}
@@ -56,7 +56,7 @@
                     <p id="workplace-id-error" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span> 
                         {% if data.workplaceIDEmpty %}
-                            Enter workplace ID
+                            Enter your organisation's workplace ID
                         {% elif data.workplaceIDInvalid %}
                             Enter a valid workplace ID
                         {% endif %}

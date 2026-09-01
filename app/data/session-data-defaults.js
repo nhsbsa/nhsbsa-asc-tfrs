@@ -5,7 +5,7 @@ module.exports = {
             {
                 "versionNo": "27",
                 "phase": "Beta",
-                "status": ["design"],
+                "status": ["dev"],
                 "designHistory": "https://asc-ldss-design-history-5a6efa20721c.herokuapp.com/tags/claims-version-27/",
                 "tested": null,
                 "created": null,
@@ -455,7 +455,7 @@ module.exports = {
             {
                 "versionNo": "16",
                 "phase": "Beta",
-                "status": ["design"],
+                "status": ["dev"],
                 "designHistory":"https://asc-ldss-design-history-5a6efa20721c.herokuapp.com/tags/processing-version-16/",
                 "tested": null,
                 "created": null,

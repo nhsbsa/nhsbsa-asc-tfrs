@@ -25,7 +25,7 @@
                 <li>
                   <a href="#phoneNumber">
                     {% if data.submitError == 'missing' %}
-                        Enter a phone number
+                        Enter your phone number
                     {% elif data.submitError == 'invalid' %}
                         Enter a valid UK phone number
                     {% endif %}
@@ -51,10 +51,10 @@
                     <p id="phoneNumber" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
                         {% if data.submitError == 'missing' %}
-                        Enter a phone number
-                    {% elif data.submitError == 'invalid' %}
-                        Enter a valid UK phone number
-                    {% endif %}
+                          Enter your phone number
+                        {% elif data.submitError == 'invalid' %}
+                          Enter a valid UK phone number
+                        {% endif %}
                     </p>
                     {% endif %}
                     <input class="govuk-input govuk-input--width-10  {% if data.submitError %}govuk-input--error{% endif %}" aria-describedby="phoneNumber-hint" id="phoneNumber"

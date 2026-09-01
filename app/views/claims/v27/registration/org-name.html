@@ -25,9 +25,7 @@
                 <li>
                   <a href="#orgName">
                     {% if data.orgNameEmptyError %}
-                    The organisation name must not be empty
-                    {% elif data.orgNameInvalid %}
-                    The organisation name must not include invalid characters
+                    Enter the name of your organisation
                     {% endif %}
                   </a>
                 </li>
@@ -52,9 +50,7 @@
                     <p id="orgName" class="govuk-error-message">
                         <span class="govuk-visually-hidden">Error:</span>
                         {% if data.orgNameEmptyError %}
-                        The organisation name must not be empty
-                        {% elif data.orgNameInvalid %}
-                        The organisation name must not include invalid characters
+                        Enter the name of your organisation
                         {% endif %}
                     </p>
                     {% endif %}
