@@ -22,7 +22,7 @@
                     <path d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" />
                 </svg>
 
-                <div class="moj-banner__message">Registration details for <a class="govuk-link" href="#{{data.banner.regRef}}">{{data.banner.orgName}}</a></a> saved</div>
+                <div class="moj-banner__message">Registration details for <a class="govuk-link" href="#{{data.banner.regRef}}">{{data.banner.orgName}}</a></a> saved.</div>
 
             </div>
         {% endif %}
@@ -62,7 +62,7 @@
 
                 {% if activeOrgMissingGDL.length > 0 %}
                 <h3 class="govuk-notification-banner__heading">Action needed</h3>
-                <p class="govuk-body">As Senior Responsible Officer you need to sign the new grant determination letter (GDL). You can only submit claims paid for in the year starting 1&nbsp;April&nbsp;2026 once you have done this. This applies to the following organisations:</p>
+                <p class="govuk-body">As Senior Responsible Officer you need to sign the new grant determination letter. You can only submit claims paid for in the year starting 1&nbsp;April&nbsp;2026 once you have done this. This applies to the following organisations:</p>
                     <ul class="govuk-list">
                         {% for workplaceID in activeOrgMissingGDL %}
                             {% set orgDetails = workplaceID | findOrg(data.organisations) %}
@@ -153,7 +153,7 @@
                     {% include "./_components/org-card.html" %}
             {% endfor %}
         {% else %}
-            <p class="govuk-body">You don't have any registered organisations yet.</p>
+            <p class="govuk-body">You do not have any registered organisations yet.</p>
         {% endif %}
 
         {% if orgList.submitted.length > 0 or orgList.draft.length > 0 or orgList.rejected.length > 0 %}

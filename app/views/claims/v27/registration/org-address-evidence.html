@@ -38,7 +38,7 @@
                   {% if data.submitError.first.file == "errorFileTooBig" %}
                   The first file must be smaller than 2MB
                   {% elif data.submitError.first.file == "errorWrongFileFormat" %}
-                  The first file must be a PDF, JPG, JPEG or PNG.
+                  The first file must be a PDF, JPG, JPEG or PNG
                   {% elif data.submitError.first.file == "errorFileMissing" %}
                   Select first proof of address file
                   {% endif %}
@@ -64,7 +64,7 @@
                   {% if data.submitError.second.file == "errorFileTooBig" %}
                   The second file must be smaller than 2MB
                   {% elif data.submitError.second.file == "errorWrongFileFormat" %}
-                  The second file must be a PDF, JPG, JPEG or PNG.
+                  The second file must be a PDF, JPG, JPEG or PNG
                   {% elif data.submitError.second.file == "errorFileMissing" %}
                   Select second proof of address file
                   {% endif %}
@@ -140,7 +140,7 @@
           Upload the first file
         </label>
         <div id="first-upload-hint" class="govuk-hint">
-          This must be in PDF, JPG, JPEG or PNG format.
+          This must be in PDF, JPG, JPEG or PNG format
         </div>
         {% if data.submitError.first.file %}
           <p id="first-upload-error" class="govuk-error-message">
@@ -148,7 +148,7 @@
             {% if data.submitError.first.file == "errorFileTooBig" %}
             The first file must be smaller than 2MB
             {% elif data.submitError.first.file == "errorWrongFileFormat" %}
-            The first file must be a PDF, JPG, JPEG or PNG.
+            The first file must be a PDF, JPG, JPEG or PNG
             {% elif data.submitError.first.file == "errorFileMissing" %}
             Select first proof of address file
             {% endif %}
@@ -214,7 +214,7 @@
           Upload the second file
         </label>
         <div id="second-upload-hint" class="govuk-hint">
-          This must be in PDF, JPG, JPEG or PNG format.
+          This must be in PDF, JPG, JPEG or PNG format
         </div>
         {% if data.submitError.second.file %}
           <p id="second-upload-error" class="govuk-error-message">
@@ -222,7 +222,7 @@
             {% if data.submitError.second.file == "errorFileTooBig" %}
             The second file must be smaller than 2MB
             {% elif data.submitError.second.file == "errorWrongFileFormat" %}
-            The second file must be a PDF, JPG, JPEG or PNG.
+            The second file must be a PDF, JPG, JPEG or PNG
             {% elif data.submitError.second.file == "errorFileMissing" %}
             Select second proof of address file
             {% endif %}
