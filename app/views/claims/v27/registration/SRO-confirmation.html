@@ -25,7 +25,7 @@
               <ul class="govuk-list govuk-error-summary__list">
                 <li>
                   <a href="#sroError">
-                        Select whether you are the Senior Responsible Officer (SRO)
+                        Select whether you are the SRO
                   </a>
                 </li>
               </ul>
@@ -34,20 +34,18 @@
         </div>
         {% endif %}
         <span class="govuk-caption-l">Register a new organisation</span>
+        <h1 class="govuk-heading-l">Senior Responsible Officer (SRO)</h1>
+        <p class="govuk-body">The SRO is a senior member of staff who takes responsibility for ensuring that your organisation follows all the scheme’s legal requirements and submits accurate, non-fraudulent claims.</p>
+        <p class="govuk-body">Only the SRO can register your organisation with this service.</p>
         <form action="../confirmationResponse" method="post" novalidate>
             <div class="govuk-form-group {% if data.submitError %}govuk-form-group--error{% endif %}">
                 <fieldset class="govuk-fieldset" aria-describedby="confirmation-hint">
-                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-                    <h1 class="govuk-fieldset__heading">
-                        Are you the Senior Responsible Officer (SRO) for {{data.orgName}}?
-                    </h1>
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Are you the SRO for {{data.orgName}}?
                     </legend>
-                    <div id="confirmation-hint" class="govuk-hint">
-                    The SRO is a senior member of staff who takes responsibility for ensuring that your organisation follows all the scheme’s legal requirements and submits accurate, non-fraudulent claims. Only the SRO can register your organisation with this service.
-                    </div>
                     {% if data.submitError %}
                         <p id="sroError" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span> Select whether you are the Senior Responsible Officer (SRO) 
+                            <span class="govuk-visually-hidden">Error:</span> Select whether you are the SRO
                         </p>
                     {% endif %}
                     <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">

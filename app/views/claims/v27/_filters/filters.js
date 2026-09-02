@@ -1827,23 +1827,22 @@ addFilter('orgTag', function (statusID) {
 addFilter('userErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
+    if (submitError.givenName == "missing") {
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter first name</a></li>')
+    }
 
     if (submitError.familyName == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter a last (family) name</a></li>')
-    }
-    
-    if (submitError.givenName == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#givenName-error">Enter a first (given) name</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#familyName-error">Enter last name</a></li>')
     }
 
     if (submitError.email == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter email address</a></li>')
     } else if (submitError.email == "invalid") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter an email address in the correct format, like name@example.com</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter email address in the correct format, like name@example.com</a></li>')
     }
 
     if (submitError.phone == "missing") {
-        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter a phone number</a></li>')
+        errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter phone number</a></li>')
     } else if (submitError.phone == "invalid") {
         errorSummaryStr = errorSummaryStr.concat('<li><a href="#email-error">Enter a valid UK phone number</a></li>')
     }

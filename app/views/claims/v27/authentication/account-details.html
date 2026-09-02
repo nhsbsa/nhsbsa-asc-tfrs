@@ -37,7 +37,7 @@
                 </label>
                 {% if data.submitError.userValid != null and not data.submitError.userValid and data.submitError.givenName == 'missing' %}
                 <p id="givenName-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> Enter a first name
+                    <span class="govuk-visually-hidden">Error:</span> Enter first name
                 </p>
                 {% endif %}
                 <input class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.givenName == 'missing' %} govuk-input--error {% endif %}" id="givenName" name="givenName" type="text" spellcheck="false" autocomplete="name" value="{{ data.givenName | default ('') }}">
@@ -49,7 +49,7 @@
                 </label>
                 {% if data.submitError.userValid != null and not data.submitError.userValid and data.submitError.familyName == 'missing' %}
                 <p id="familyName-error" class="govuk-error-message">
-                    <span class="govuk-visually-hidden">Error:</span> Enter a last name
+                    <span class="govuk-visually-hidden">Error:</span> Enter last name
                 </p>
                 {% endif %}
                 <input class="govuk-input {% if data.submitError.userValid != null and not data.submitError.userValid  and data.submitError.familyName == 'missing' %} govuk-input--error {% endif %}" id="familyName" name="familyName" type="text" spellcheck="false" autocomplete="name" value="{{ data.familyName | default ('') }}">
@@ -63,7 +63,7 @@
                 <p id="email-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span> 
                     {% if data.submitError.email == 'missing' %}
-                        Enter an email address
+                        Enter email address
                     {% elif data.submitError.email == 'invalid' %}
                         Enter an email address in the correct format, like name@example.com
                     {% endif %}
@@ -79,7 +79,7 @@
                 <p id="phone-error" class="govuk-error-message">
                     <span class="govuk-visually-hidden">Error:</span> 
                     {% if data.submitError.phone == 'missing' %}
-                        Enter a phone number
+                        Enter phone number
                     {% elif data.submitError.phone == 'invalid' %}
                         Enter a valid UK phone number
                     {% endif %}
