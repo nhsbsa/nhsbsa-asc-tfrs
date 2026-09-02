@@ -85,7 +85,7 @@
     {% endif %}
     <h1 class="govuk-heading-xl">
       {% if (claim.claimType == "100") %}
-        {{ claim.claimID }}
+        Claim reference: {{ claim.claimID }}
       {% else %}
         Combined claim: {{ claim.claimID | removeClaimSuffix }}
       {% endif %}
