@@ -112,7 +112,7 @@
                 </li>
               </ul>
             </dd>
-          {% elif claim.status == "queried" or pairClaim.status == "queried" or pairClaim.status == "not-yet-submitted"%}
+          {% elif claim.status == "queried" %}
             <dd class="govuk-summary-list__actions">
             {# To change one learner #}
             {% if submission.learners.length == 1 and pairSubmission.removedLearners.length == 0 and submission.removedLearners.length == 0 %}

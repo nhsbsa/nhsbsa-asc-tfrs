@@ -1,0 +1,32 @@
+{% extends "../_layouts/main.html" %}
+
+{% block pageTitle %}
+Contact — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<a href="javascript:history.back()" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Contact</h1>
+
+        <h2 class="govuk-heading-m">If you need help using this service</h2>
+        <p class="govuk-body">This service is managed by the NHS Business Services Authority. To get in touch:</p>
+        <div class="govuk-inset-text">
+            <p class="govuk-body">Email <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a></p>
+            <p class="govuk-body">Phone 0300 330 0522</p>
+        </div>
+
+        <h2 class="govuk-heading-m">If you need support with your Adult Social Care Workforce Data Set (ASC-WDS) account</h2>
+        <div class="govuk-inset-text">
+            <p class="govuk-body">The following links open in a new tab:</p>
+            <p class="govuk-body">Visit the <a href="https://www.skillsforcare.org.uk/Adult-Social-Care-Workforce-Data/Adult-Social-Care-Workforce-Data-Set/Adult-Social-Care-Workforce-Data-Set.aspx" target="_blank">Skills for Care website<span class="govuk-visually-hidden"> (opens in new tab)</span></a></p>
+            <p class="govuk-body">Contact <a href="https://asc-wds.skillsforcare.org.uk/contact-us-or-leave-feedback" target="_blank">Skills for Care<span class="govuk-visually-hidden"> (opens in new tab)</span></a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,255 @@
+[
+    {
+        "journey": "postlogin",
+        "givenName": "Roy",
+        "familyName": "Hub",
+        "email": "roy.hub@caregroup.co.uk",
+        "phoneNumber": "01234567890",
+        "description": "Roy is a user for many organisations covering every state an organisations can be in. He is a user of the following organsiations:",
+        "organisations": [
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "B13299931",
+                "regRef": "R-4T7W-2X",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "F26738594",
+                "regRef": "R-1C5V-7H",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "D26738495",
+                "regRef": "R-6E8K-4J",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "C7284934",
+                "regRef": "R-2P9F-5Z",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "G91371231",
+                "regRef": "R-2N8E-6R",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "G91774723",
+                "regRef": "R-7D4C-1A",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {   
+        "journey": "postlogin",
+        "givenName": "Cynthia",
+        "familyName": "Bartoletti",
+        "email": "cynthia.bartoletti@caregroup.com",
+        "phoneNumber": "01234567890",
+        "description": "Cynthia is a user of one organisations that is currently active and she is the SRO. She is a user of the following organsiation:",
+        "organisations": [
+            {
+                "workplaceID": "D76397203",
+                "regRef": "R-3M7T-9B",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {   
+        "journey": "postlogin",
+        "givenName": "Jehan",
+        "familyName": "Pohstra",
+        "email": "jehan.pohstra@caregroup.com",
+        "phoneNumber": "01234567890",
+        "description": "Cynthia is a user of one organisations that is currently active and she is the SRO. She is a user of the following organsiation:",
+        "organisations": [
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "D76397203",
+                "regRef": "R-3M7T-9B",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "B13299931",
+                "regRef": "R-4T7W-2X",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "postlogin",
+        "givenName": "Valerie",
+        "familyName": "Altenwerth",
+        "email": "valerie.altenwerth@caregroup.com",
+        "phoneNumber": "01234567890",
+        "description": "Valerie is currently in the processing of completeing the registration details for one organsiation. She is a user of the following organsiations:",
+        "organisations": [
+            {
+                "workplaceID": "F26738594",
+                "regRef": "R-1C5V-7H",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "postlogin",
+        "givenName": "Harriet",
+        "familyName": "Gondray",
+        "email": "harriet.gondray@caregroup.com",
+        "phoneNumber": "01234567890",
+        "description": "She is a user of the following organsiations:",
+        "organisations": [
+            {
+                "workplaceID": "F15904728",
+                "regRef": "R-3Z9V-8L",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "postlogin",
+        "givenName": "Hamish",
+        "familyName": "Settle",
+        "email": "hamish.settle@caregroup.com",
+        "phoneNumber": "01234567890",
+        "description": "He is a user of the following organsiations:",
+        "organisations": [
+            {
+                "workplaceID": "F87223491",
+                "regRef": "R-5S1G-3P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "prelogin",
+        "givenName": "Mira",
+        "familyName": "Caldwell",
+        "email": "mira.caldwell@caregroup.com",
+        "phoneNumber": "01234567890",
+        "description": "",
+        "organisations": []
+    },
+    {
+        "journey": "invite",
+        "givenName": "Craig",
+        "familyName": "Willowtree",
+        "email": "craig.willowtree@caregroup.com",
+        "phoneNumber": "01234567890",
+        "description": "",
+        "organisations": [
+            {
+                "workplaceID": "D76397203",
+                "regRef": "R-3M7T-9B",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "invite",
+        "givenName": "Calsey",
+        "familyName": "Huel",
+        "email": "calsey.huel@caregroup.com",
+        "phoneNumber": "01234567890",
+        "description": "",
+        "organisations": [
+            {
+                "workplaceID": "D76397203",
+                "regRef": "R-3M7T-9B",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "B13299931",
+                "regRef": "R-4T7W-2X",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "invite",
+        "givenName": "Mark",
+        "familyName": "Jacobs",
+        "email": "mark.jacobs@caregroup.com",
+        "phoneNumber": null,
+        "description": "",
+        "organisations": [
+            {
+                "workplaceID": "D76397203",
+                "regRef": "R-3M7T-9B",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "invite",
+        "givenName": "Terri",
+        "familyName": "Jeffords",
+        "email": "terri.jeffords@caregroup.com",
+        "phoneNumber": "01234567890",
+        "description": "",
+        "organisations": [
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "B13299931",
+                "regRef": "R-4T7W-2X",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            },
+            {
+                "workplaceID": "D76397203",
+                "regRef": "R-3M7T-9B",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    }
+]

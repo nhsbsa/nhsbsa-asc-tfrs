@@ -1,0 +1,249 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+
+
+{% block pageTitle %}
+{% if data.submitError %}Error: {% endif %}Provide your {{data.evidenceAddressCount}} proof of your organisation's address? — Complete registration — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div >
+    <a href="org-address" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    {% if data.submitError %}
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">
+          There is a problem
+        </h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            {% if data.submitError.first.type == "missing" %}
+              <li>
+                <a href="#first-type-error">
+                  Select the type of the first proof of address
+                </a>
+              </li>
+            {% endif %}
+            {% if data.submitError.first.file %}
+              <li>
+                <a href="#first-upload-error">
+                  {% if data.submitError.first.file == "errorFileTooBig" %}
+                  The first file must be smaller than 2MB
+                  {% elif data.submitError.first.file == "errorWrongFileFormat" %}
+                  The first file must be a PDF, JPG, JPEG or PNG
+                  {% elif data.submitError.first.file == "errorFileMissing" %}
+                  Select first proof of address file
+                  {% endif %}
+                </a>
+              </li>
+            {% endif %}
+            {% if data.submitError.second.type %}
+              <li>
+                <a href="#second-type-error">
+                {% if data.submitError.second.type == "missing" %}
+                  Select the type of the second proof of address
+                {% elif data.submitError.second.type == "notDifferent" %}
+                  Select a different type of document for your second proof of address
+                {% endif %}
+                </a>
+              </li>
+            {% endif %}
+            {% if data.submitError.second.type == "missing" %}
+            {% endif %}
+            {% if data.submitError.second.file %}
+              <li>
+                <a href="#second-upload-error">
+                  {% if data.submitError.second.file == "errorFileTooBig" %}
+                  The second file must be smaller than 2MB
+                  {% elif data.submitError.second.file == "errorWrongFileFormat" %}
+                  The second file must be a PDF, JPG, JPEG or PNG
+                  {% elif data.submitError.second.file == "errorFileMissing" %}
+                  Select second proof of address file
+                  {% endif %}
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <span class="govuk-caption-l">Register a new organisation</span>
+    <h1 class="govuk-heading-l">Upload proof of organisation's address</h1>
+
+    <p class="govuk-body">You need to upload 2 proof of address documents – see which documents we accept below.</p>
+    <p class="govuk-body">The 2 documents must be <span class="govuk-!-font-weight-bold">different</span>, for example, a business rates  bill and a utility bill.</p>
+
+    <form action="../validate-address-evidence" method="post" novalidate>
+      <hr class="govuk-section-break govuk-section-break--m">
+      <h2 class="govuk-heading-m">First proof of address</h2>
+      <div class="govuk-form-group {% if data.submitError.first.type  == "missing" %} govuk-form-group--error {% endif %}">
+        <fieldset class="govuk-fieldset" aria-describedby="first-type-error">
+          <legend class="govuk-fieldset__legend">
+            What is the first type of document you are uploading?
+          </legend>
+          {% if data.submitError.first.type  == "missing" %}
+            <p id="first-type-error" class="govuk-error-message">
+              <span class="govuk-visually-hidden">Error:</span> Select the type of the first proof of address
+            </p>
+          {% endif %}
+          <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="firstType" name="firstType" type="radio" value="businessratesbill" {% if data.firstType  == "businessratesbill" %}checked{% endif %}>
+                <label class="govuk-label govuk-radios__label" for="firstType">
+                  Business rates  bill (dated within last 3 months)
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="firstType-2" name="firstType" type="radio" value="utilitybill" {% if data.firstType  == "utilitybill" %}checked{% endif %}>
+                <label class="govuk-label govuk-radios__label" for="firstType-2">
+                  Utility bill (dated within last 3 months)
+                </label>
+              </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="firstType-3" name="firstType" type="radio" value="counciltaxbill" {% if data.firstType  == "counciltaxbill" %}checked{% endif %}>
+              <label class="govuk-label govuk-radios__label" for="firstType-3">
+                Council tax bill (dated within last 3 months)
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="firstType-4" name="firstType" type="radio" value="businessleaseagreement" {% if data.firstType  == "businessleaseagreement" %}checked{% endif %}>
+              <label class="govuk-label govuk-radios__label" for="firstType-4">
+                Business premises lease agreement
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="firstType-5" name="firstType" type="radio" value="insurancecertificate" {% if data.firstType  == "insurancecertificate" %}checked{% endif %}>
+              <label class="govuk-label govuk-radios__label" for="firstType-5">
+                Public liability insurance certificate
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div id="upload" class="govuk-form-group {% if data.submitError.first.file %} govuk-form-group--error {% endif %}">
+        <label class="govuk-label" for="firstEvidenceFile">
+          Upload the first file
+        </label>
+        <div id="first-upload-hint" class="govuk-hint">
+          This must be in PDF, JPG, JPEG or PNG format
+        </div>
+        {% if data.submitError.first.file %}
+          <p id="first-upload-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span>
+            {% if data.submitError.first.file == "errorFileTooBig" %}
+            The first file must be smaller than 2MB
+            {% elif data.submitError.first.file == "errorWrongFileFormat" %}
+            The first file must be a PDF, JPG, JPEG or PNG
+            {% elif data.submitError.first.file == "errorFileMissing" %}
+            Select first proof of address file
+            {% endif %}
+          </p>
+        {% endif %}
+        <input class="govuk-file-upload {% if data.submitError.first.file %} govuk-file-upload--error {% endif %}" id="firstEvidenceFile" name="firstEvidenceFile" type="file" aria-describedby="first-upload-hint first-upload-error">
+      </div>
+
+      <hr class="govuk-section-break govuk-section-break--m">
+      <h2 class="govuk-heading-m">Second proof of address</h2>
+
+      <div class="govuk-form-group {% if data.submitError.second.type %} govuk-form-group--error {% endif %}">
+        <fieldset class="govuk-fieldset" aria-describedby="second-type-error">
+          <legend class="govuk-fieldset__legend">
+            What is the second type of document you are uploading?
+          </legend>
+          {% if data.submitError.second.type  %}
+            <p id="second-type-error" class="govuk-error-message">
+              {% if data.submitError.second.type == "missing" %}
+                  <span class="govuk-visually-hidden">Error:</span> Select the type of the second proof of address
+                {% elif data.submitError.second.type == "notDifferent" %}
+                  <span class="govuk-visually-hidden">Error:</span> Select a different type of document for your second proof of address
+                {% endif %}
+            </p>
+          {% endif %}
+          <div class="govuk-radios" data-module="govuk-radios">
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="firstTsecondTypeype" name="secondType" type="radio" value="businessratesbill" {% if data.secondType  == "businessratesbill" %}checked{% endif %}>
+                <label class="govuk-label govuk-radios__label" for="secondType">
+                  Business rates  bill (dated within last 3 months)
+                </label>
+              </div>
+              <div class="govuk-radios__item">
+                <input class="govuk-radios__input" id="secondType-2" name="secondType" type="radio" value="utilitybill" {% if data.secondType  == "utilitybill" %}checked{% endif %}>
+                <label class="govuk-label govuk-radios__label" for="secondType-2">
+                  Utility bill (dated within last 3 months)
+                </label>
+              </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="secondType-3" name="secondType" type="radio" value="counciltaxbill" {% if data.secondType  == "counciltaxbill" %}checked{% endif %}>
+              <label class="govuk-label govuk-radios__label" for="secondType-3">
+                Council tax bill (dated within last 3 months)
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="secondType-4" name="secondType" type="radio" value="businessleaseagreement" {% if data.secondType  == "businessleaseagreement" %}checked{% endif %}>
+              <label class="govuk-label govuk-radios__label" for="secondType-4">
+                Business premises lease agreement
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="secondType-5" name="secondType" type="radio" value="insurancecertificate" {% if data.secondType  == "insurancecertificate" %}checked{% endif %}>
+              <label class="govuk-label govuk-radios__label" for="secondType-5">
+                Public liability insurance certificate
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div id="upload" class="govuk-form-group {% if data.submitError.second.file %} govuk-form-group--error {% endif %}">
+        <label class="govuk-label" for="secondEvidenceFile">
+          Upload the second file
+        </label>
+        <div id="second-upload-hint" class="govuk-hint">
+          This must be in PDF, JPG, JPEG or PNG format
+        </div>
+        {% if data.submitError.second.file %}
+          <p id="second-upload-error" class="govuk-error-message">
+            <span class="govuk-visually-hidden">Error:</span>
+            {% if data.submitError.second.file == "errorFileTooBig" %}
+            The second file must be smaller than 2MB
+            {% elif data.submitError.second.file == "errorWrongFileFormat" %}
+            The second file must be a PDF, JPG, JPEG or PNG
+            {% elif data.submitError.second.file == "errorFileMissing" %}
+            Select second proof of address file
+            {% endif %}
+          </p>
+        {% endif %}
+        <input class="govuk-file-upload {% if data.submitError.first.file %} govuk-file-upload--error {% endif %}" id="secondEvidenceFile" name="secondEvidenceFile" type="file" aria-describedby="second-upload-hint second-upload-error">
+      </div>
+      
+
+      <hr class="govuk-section-break govuk-section-break--l">
+
+      <div class="govuk-button-group">
+          <button type="submit" class="govuk-button" name="action" value="continue" data-module="govuk-button">
+              Continue
+          </button>
+          <button type="submit" class="govuk-button govuk-button--secondary" name="action" value="save" data-module="govuk-button">
+              Save and finish later
+          </button>
+      </div>
+    </form>
+
+  </div>
+
+{% endblock %}

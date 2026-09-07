@@ -1628,7 +1628,7 @@ addFilter('findtabID', function (learnerID, filteredLearners) {
 })
 
 addFilter('getSmartOrdinal', function (index, list) {
-    const n = (list.length) - 1 - parseInt(index) + 1;
+    const n = (list.length) - 1 - parseInt(index);
   
     // Array for spelled-out versions (1st through 9th)
     const words = [

@@ -1,0 +1,111 @@
+{% extends "../_layouts/claims-main.html" %}
+{% set claim = data.id | findClaim(data.claims, data.org.workplaceID) %}
+
+{% if claim.claimType == "60" %}  
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+  {% if (pairClaim and pairClaim.status == "queried") %}
+    {% set pairSubmission = pairClaim | getDraftSubmission %}
+  {% else %}
+    {% set pairSubmission = pairClaim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% else %}
+
+  {% if (claim.status == "queried") %}
+    {% set submission = claim | getDraftSubmission %}
+  {% else %}
+    {% set submission = claim | getMostRelevantSubmission %}
+  {% endif %}
+
+{% endif %}
+
+{% set training = submission.trainingCode | findTraining %}
+
+
+{% block pageTitle %}
+Duplicate claim - Claim: {{data.id}}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <h1 class="govuk-heading-l">You cannot submit this claim</h1>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-visually-hidden">Warning</span>
+          A claim has already been submitted for this combination of training and learners.
+        </strong>
+      </div>
+
+      <p class="govuk-body">
+        You can only claim for the same training and learners once.
+      </p>
+      <p class="govuk-body">
+        Someone in your organisation, or a different organisation, may already have submitted a claim for this training and these learners:
+      </p>
+
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Training
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{submission.trainingCode}}</br>
+            {{training.title}}
+
+          </dd>
+        </div>
+      </dl>
+
+      <table class="govuk-table">
+
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Learners</th>
+            <th scope="col" class="govuk-table__header">National Insurance number</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for learner in data.matchingIDs%}
+          {% set claimLearner = learner.learnerID | findLearner(data.learners) %}
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">{{claimLearner.givenName}} {{claimLearner.familyName}}</td>
+              <td class="govuk-table__cell">{{learner.learnerID}}</td>
+            </tr>
+          {% endfor%}
+
+        </tbody>
+      </table>
+
+
+  <p class="govuk-body">
+    Go back to the claim and check that you have added the correct training and learners.
+  </p>
+
+  <div class="govuk-button-group">
+    <form method="post" action="claim-details" class="govuk-!-margin-0">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+          Back to claim
+        </button>
+      </form>
+  </div>
+
+  <h2 class="govuk-heading-m">If you need support with this claim</h2>
+  <p class="govuk-body">
+    You can email us at <a href="mailto:ASClearninganddevelopmentsupport@nhsbsa.nhs.uk">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.
+  </p>
+
+</div>
+
+{% endblock %}

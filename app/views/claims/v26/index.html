@@ -1,4 +1,4 @@
-{% extends "./_layouts/main.html" %}
+{% extends "../../_layouts/main.html" %}
 
 {% block pageTitle %}
 GOV.UK prototype - {{serviceName}}
@@ -18,7 +18,7 @@ GOV.UK prototype - {{serviceName}}
             <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
                 <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Post-login</h2>
                 <p class="govuk-body">This will take to the prototype after the login screens and landing on the manage organisations view.</p>
-                <form action="./load-scenario-data?journey=signin" method="post" novalidate>
+                <form action="./load-scenario-data?scenarios=postlogin" method="post" novalidate>
                     <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" >
                         Start from after login
                     </button>
@@ -29,7 +29,7 @@ GOV.UK prototype - {{serviceName}}
             <section class="moj-ticket-panel__content moj-ticket-panel__content--blue" aria-label="Section 1">
                 <h2 class="govuk-heading-m govuk-!-margin-bottom-2">Pre-login & account creation</h2>
                 <p class="govuk-body">This will start the journey on the public facing service landing pages and allow you test account creation and login.</p>
-                <form action="./load-scenario-data?journey=creation" method="post" novalidate>
+                <form action="./load-scenario-data?scenarios=prelogin" method="post" novalidate>
                     <button class="govuk-button govuk-!-margin-bottom-1" data-module="govuk-button" >
                         Start from before login
                     </button>

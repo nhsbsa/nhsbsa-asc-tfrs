@@ -1,0 +1,51 @@
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
+{% set govukRebrand = true %}
+
+{% block pageTitle %}
+{{ serviceName }} — GOV.UK
+{% endblock %}
+
+{% block header %}
+  {{ govukHeader({
+    rebrand: true
+    }) 
+  }}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "Prototype"
+    },
+    html: 'This is a new service. Help us improve it and <a class="govuk-link" href="#">give your feedback by email</a>.',
+    classes: "govuk-width-container"
+  }) }}
+{% endblock %}
+
+{% block footer %}
+  {{ govukFooter({
+    rebrand: true,
+    meta: {
+      items: [
+      {
+        href: "/claims/v27/support-pages/contact",
+        text: "Contact us"
+      }, {
+        href: "",
+        text: "Cookies"
+      }, {
+        href: "/claims/v27/support-pages/accessibility-statement",
+        text: "Accessibility"
+      }, {
+        href: "/claims/v27/support-pages/terms-of-use",
+        text: "Terms of use"
+      }, {
+        href: "https://www.nhsbsa.nhs.uk/our-policies/privacy/claim-adult-social-care-learning-and-development-privacy-notice",
+        text: "Privacy notice"
+      }, {
+        href: "/manage-prototype/clear-data",
+        text: "Clear data"
+      }
+    ] ,
+      visuallyHiddenTitle: "Footer links"
+    }
+  }) }}
+{% endblock %}

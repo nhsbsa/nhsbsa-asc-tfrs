@@ -1,0 +1,124 @@
+{% extends "../_layouts/claims-account-setup.html" %}
+
+{% block pageTitle %}
+{% if data.submitError %}Error: {% endif %}Check details are correct — Complete registration — {{serviceName}} — GOV.UK
+{% endblock %}
+
+{% block beforeContent %}
+<div>
+    <a href="../manage-organisations" class="govuk-back-link">Back</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if data.submitError %}
+            <div class="govuk-error-summary" data-module="govuk-error-summary">
+                <div role="alert">
+                    <h2 class="govuk-error-summary__title">
+                        There is a problem
+                    </h2>
+                    <div class="govuk-error-summary__body">
+                        <ul class="govuk-list govuk-error-summary__list">
+                            <li>
+                                <a href="#error">
+                                    Select whether the details are correct
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <span class="govuk-caption-l">Complete registration</span>
+        <h1 class="govuk-heading-l">Check details are correct</h1>
+        <p class="govuk-body">You are invited to be Senior Responsible Officer for the following organisation. Please check all the details below are correct.</p>
+        <h2 class="govuk-heading-m" id="completion">Organisation details</h2>
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Organisation name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{data.org.name}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Organisation address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ (data.org.address | formatAddress("line")) }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                ASC-WDS workplace ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                {{data.org.workplaceID}}
+                </dd>
+            </div>
+        </dl>
+        <h2 class="govuk-heading-m" id="completion">ASC-WDS details</h2>
+        <p class="govuk-body">These details are from the ASC-WDS using the workplace ID for your organisation detailed above.</p>
+        <dl class="govuk-summary-list">
+            
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{data.org.name}}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ (data.org.address | formatAddress("line")) }}
+                </dd>
+            </div>
+        </dl>
+        <form action="../verify-details-handler" method="post" novalidate>
+            <div class="govuk-form-group {% if data.submitError %}govuk-form-group--error{% endif %}">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Are all these details correct?
+                    </legend>
+                    {% if data.submitError %}
+                    <p id="error" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span>
+                        Select whether the details are correct
+                    </p>
+                    {% endif %}
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmation" name="confirmation" type="radio"
+                                value="yes">
+                            <label class="govuk-label govuk-radios__label" for="confirmation">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="confirmation-2" name="confirmation" type="radio"
+                                value="no">
+                            <label class="govuk-label govuk-radios__label" for="confirmation-2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <button type="submit" class="govuk-button" data-module="govuk-button">
+                Continue
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

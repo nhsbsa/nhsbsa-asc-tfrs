@@ -1,0 +1,20 @@
+# Query: related content
+# Including: claims/v26
+# ContextLines: 1
+
+3 results - 3 files
+
+app/views/claims/v26/manage-claims-home.html:
+  192      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+  193:     <h2 class="govuk-heading-m">Help and guidance</h2>
+  194      <p class="govuk-body"><a href="./guidance/help-start-tu-claim" class="govuk-link">Help with starting a new claim</a></p>
+
+app/views/claims/v26/claim/add-evidence-edit.html:
+  148      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+  149:     <h2 class="govuk-heading-m">Help and guidance</h2>
+  150      <p class="govuk-body"><a href="../guidance/tu-evidence-requirements" class="govuk-link">What evidence you need to provide</a></p>
+
+app/views/claims/v26/claim/add-evidence.html:
+  121      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+  122:     <h2 class="govuk-heading-m">Help and guidance</h2>
+  123      <p class="govuk-body"><a href="../guidance/tu-evidence-requirements" class="govuk-link">What evidence you need to provide</a></p>

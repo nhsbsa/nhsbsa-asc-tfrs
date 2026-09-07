@@ -537,12 +537,17 @@ function flattenUsers(data) {
 
 function findUser(email, org) {
     users = flattenUsers(org)
-    let user = null;
+    let user = {
+        givenName: "Roy",
+        familyName: "hub",
+        email: "roy.hub@caregroup.com"
+    };
     for (let u of users) {
         if (u.email == email) {
             user = u
         }
     }
+    console.log(user)
     return user;
 }
 
@@ -1119,7 +1124,7 @@ function generateRegRef() {
   return `R-${getRandomChars(4)}-${getRandomChars(2)}`;
 }
 
-function saveRegistrationEnty(req, status) {
+function saveRegistrationEnty(req, status, savePoint) {
     let regRef = req.session.data.regRef
     const jobTitle = req.session.data.jobTitle
     const orgName = req.session.data.orgName
@@ -1147,6 +1152,7 @@ function saveRegistrationEnty(req, status) {
     }
     const vatRegNumber = req.session.data.vatRegNumber
 
+    delete req.session.data.confirmationResponse
     delete req.session.data.jobTitle
     delete req.session.data.orgName
     delete req.session.data.addressLine1
@@ -1190,7 +1196,7 @@ function saveRegistrationEnty(req, status) {
             },
             bankDetails: null,
             validGDL: false,
-            notes : [],
+            savePoint,
             signatory: {
             active: {        
                     givenName: req.session.data.user.givenName,
@@ -1362,4 +1368,73 @@ function findReg(regRef, orgs) {
     return orgs.find(entry => entry.regRef === regRef);
 }
 
-module.exports = {findReg, addressCheck, checkEvidence, userCheck, checkOrgs, clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty}
+
+// Helper: checks if candidateDate is within 3 calendar months BEFORE refDate
+function isWithinThreeMonths(candidateDateString) {
+    if (!candidateDateString) return false;
+
+    const candidateDate = new Date(candidateDateString);
+    const threeMonthsPrior = new Date();
+    threeMonthsPrior.setMonth(threeMonthsPrior.getMonth() - 3);
+
+    // Candidate date must be on or after 3 months prior
+    return candidateDate >= threeMonthsPrior
+}
+
+function checkSubmissionWindow(claimType, submission) {
+
+  // Extract learner completion dates
+  const completionDates = (submission.learners || [])
+    .map(l => l.completionDate)
+    .filter(Boolean);
+
+  switch (claimType) {
+    case '100': {
+      if (completionDates.length === 0) return false;
+
+      if (submission.learners.length === 1) {
+        // Single learner: completion date must be within 3 months
+        return isWithinThreeMonths(completionDates[0]);
+      } else {
+        // Multiple learners: latest completion date must be within 3 months
+        const latestCompletionDate = completionDates.reduce((latest, current) => 
+          new Date(current) > new Date(latest) ? current : latest
+        );
+        return isWithinThreeMonths(latestCompletionDate);
+      }
+    }
+
+    case '60': {
+      // Start date or payment date (costDate), whichever is most recent
+      const startDate = submission.startDate ? new Date(submission.startDate) : null;
+      const costDate = submission.costDate ? new Date(submission.costDate) : null;
+
+      if (!startDate && !costDate) return false;
+
+      let mostRecentDate;
+      if (startDate && costDate) {
+        mostRecentDate = startDate > costDate ? submission.startDate : submission.costDate;
+      } else {
+        mostRecentDate = submission.startDate || submission.costDate;
+      }
+
+      return isWithinThreeMonths(mostRecentDate);
+    }
+
+    case '40': {
+      // Completion date must be within 3 months
+      if (completionDates.length === 0) return false;
+        // Single learner: completion date must be within 3 months
+        return isWithinThreeMonths(completionDates[0]);
+    }
+
+    default:
+      throw new Error(`Unknown claim type: ${claimType}`);
+  }
+}
+
+function findOrg(workplaceID, orgs) {
+    return orgs.find(entry => entry.workplaceID === workplaceID);
+}
+
+module.exports = {findOrg, findReg,addressCheck, checkEvidence, userCheck, checkOrgs, clearSessionExcept, loadData, loadScenarioData, loadUserData, newClaim, findPair, checkClaim, compareNINumbers, removeSpacesAndCharactersAndLowerCase, sortByCreatedDate, generateUniqueID, validateDate, checkDuplicateClaim, checkLearnerForm, checkBankDetailsForm, loadJSONFromFile, checkUserForm, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, getDraftSubmission, sortClaimsByStatusSubmission, sortSubmissionsByDate, findUser, sortSubmissionsForTable, findStatus, capitalizeFirstLetter, generatecreatedByList, loadLearners, loadTraining, isInternalOMMT, sortAlphabetically, getLearnersNotInBoth, getLearnerFieldByID, getOverallCompletionOutcome, getLearnersFromDraft, replaceLearnerID, buildSlotComparison, saveRegistrationEnty, checkSubmissionWindow}
