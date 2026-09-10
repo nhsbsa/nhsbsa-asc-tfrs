@@ -364,7 +364,7 @@ router.post('/claim-payment-handler', function (req, res) {
 
   if (errorParamaters == "" || actionType == "later") {
 
-    let submission = getMostRelevantSubmission(claim) 
+    let submission = getMostRelevantSubmission(claim)
     if (paymentResponse == "approve") {
             submission.evidenceOfPaymentReview.outcome = "pass"
             if (claim.claimType == "100" || claim.claimType == "60") {
@@ -394,6 +394,8 @@ router.post('/claim-payment-handler', function (req, res) {
 
       if (actionType == "later") {
         const claimID = req.session.data.id
+        submission.inProgress ??= {};
+        submission.inProgress.payment = true;
         delete req.session.data.learnerCount
         delete req.session.data.claimStep
         delete req.session.data.result
@@ -404,6 +406,9 @@ router.post('/claim-payment-handler', function (req, res) {
         res.redirect('organisation/org-view-main' + '?orgTab=singleClaim&id=' + claimID + '#tab-content')
 
       } else if (claim.claimType == "100" || (claim.claimType == "40" && claim.isPaymentPlan) ) {
+        if (submission.inProgress) {
+          submission.inProgress.payment = false;
+        }
         req.session.data.claimStep = "completion"
         const index = findFirstLearnerWithoutOutcome(sortAlphabetically(submission.learners))
         if (index == -1) {
@@ -417,6 +422,9 @@ router.post('/claim-payment-handler', function (req, res) {
         }
 
       } else {
+        if (submission.inProgress) {
+          submission.inProgress.payment = false;
+        }
         req.session.data.result = determineOutcome(claim, submission.evidenceOfPaymentReview.outcome, null)
         req.session.data.claimScreen = "checkList"
         delete req.session.data.claimStep
@@ -488,6 +496,13 @@ router.post('/claim-completion-handler', function (req, res) {
 
       if (actionType == "later") {
         const claimID = req.session.data.id
+        // 1. Ensure inProgress exists as an object
+        submission.inProgress ??= {};
+        // 2. Ensure completion exists as an array
+        submission.inProgress.completion ??= [];
+        // 3. Append the learnerCount
+        submission.inProgress.completion.push(learnerCount);
+
         delete req.session.data.learnerCount
         delete req.session.data.claimStep
         delete req.session.data.result
@@ -500,6 +515,11 @@ router.post('/claim-completion-handler', function (req, res) {
 
         // TODO - else if a learner after doesn't have a outcome yet  
       } else if (findFirstLearnerWithoutOutcome(sortAlphabetically(submission.learners), learnerCount) != -1) {
+        if (submission.inProgress?.completion) {
+          submission.inProgress.completion = submission.inProgress.completion.filter(
+            item => item !== learnerCount
+          );
+        }
 
         // TODO - cycle through learners after learner count, go to next learner without a outcome, 
         req.session.data.learnerCount = findFirstLearnerWithoutOutcome(sortAlphabetically(submission.learners), learnerCount) + 1
@@ -508,6 +528,11 @@ router.post('/claim-completion-handler', function (req, res) {
 
       // TODO - else last learner go to checklist 
       } else {
+        if (submission.inProgress?.completion) {
+          submission.inProgress.completion = submission.inProgress.completion.filter(
+            item => item !== learnerCount
+          );
+        }
         delete req.session.data.learnerCount
         delete req.session.data.claimStep
         req.session.data.claimScreen = "checkList"

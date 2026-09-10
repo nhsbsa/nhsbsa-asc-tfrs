@@ -496,7 +496,7 @@ function checkProcessingState(claim) {
     const learners = sortAlphabetically(submission.learners)
     
     const paymentCheck = checkDone(submission.evidenceOfPaymentReview, "payment", claim, submission.trainingCode)
-    if (!paymentCheck) {
+    if (!paymentCheck && submission.inProgress?.payment) {
       result.check = false
       const listItem = {
         id: "payment",
@@ -508,7 +508,7 @@ function checkProcessingState(claim) {
     let count = 1
     for (const learner of learners) {
       const completionCheck = checkDone(learner.evidenceOfCompletionReview, "completion", claim, submission.trainingCode)
-      if (!completionCheck) {
+      if (!completionCheck || submission.inProgress?.completion?.includes(count)) {
       result.check = false
       const listItem = {
         id: learner.learnerID,

@@ -21,7 +21,9 @@
                         {% endif %}
                     </div>
                     {% set paymentIsDone = submission.evidenceOfPaymentReview | checkDone("payment", claim, submission.trainingCode) %}
-                    {% if (paymentIsDone) %}
+                    {% if (submission.inProgress.payment) %}
+                        <strong class="govuk-tag govuk-tag--light-blue">In progress</strong>
+                    {% elif (paymentIsDone) %}
                         <div class="govuk-task-list__status outcome-wrapper">
                             <div id="learner-{{loop.index}}-status">{{ submission.evidenceOfPaymentReview.outcome | learnerProcessedTag }}</div>
                         </div>
@@ -48,10 +50,13 @@
                         
                         </div>
                         {% set completionIsDone = learner.evidenceOfCompletionReview | checkDone ("completion", claim, submission.trainingCode) %}
-                        {% if (completionIsDone) %}
+                        {% if (submission.inProgress.completion != null and loop.index in submission.inProgress.completion) %}
+                            <strong class="govuk-tag govuk-tag--light-blue">In progress</strong>
+                        {% elif (completionIsDone) %}
                             <div class="govuk-task-list__status outcome-wrapper">
                                 <div id="learner-{{loop.index}}-status">{{ learner.evidenceOfCompletionReview.outcome | learnerProcessedTag }}</div>
                             </div>
+                        
                         {% else %}
                             {% set learnersCompleted = false %}
                         {% endif %}
