@@ -450,8 +450,18 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v16",
+        "processingCurrent": "v17",
         "processingVersions": [
+            {
+                "versionNo": "17",
+                "phase": "Beta",
+                "status": ["design"],
+                "designHistory":"https://asc-ldss-design-history-5a6efa20721c.herokuapp.com/tags/processing-version-17/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
+            },
             {
                 "versionNo": "16",
                 "phase": "Beta",
