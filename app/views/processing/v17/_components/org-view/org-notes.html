@@ -1,0 +1,26 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l">
+      Notes
+    </h1>
+
+    <div class="moj-filters-layout">
+      <div class="moj-filter-layout__top-splitter">
+        <div class="govuk-button-group">
+          {{ govukButton({
+              text: "Show filters",
+              classes: "govuk-button--secondary moj-action-bar__filter-toggle",
+              attributes: {
+                "data-module": "govuk-button"
+           }
+          }) }}
+          {{ govukButton({
+            text: "Add a note (opens in a new tab)"
+          }) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include "../notes/note.html" %}

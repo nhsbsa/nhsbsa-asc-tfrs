@@ -1185,3 +1185,21 @@ align-items: baseline;
   width: .8em;
   height: .968em;
 }
+
+.metadata-text {
+  font-size: 16px;
+  color: #484949;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0;
+
+  // Added & + to target siblings after the first item
+  & + .metadata-text::before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 16px;
+    margin: 0 govuk-spacing(2); // 10px spacing
+    background-color: govuk-colour("mid-grey");
+  }
+}
