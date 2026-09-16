@@ -154,11 +154,14 @@ Claim window closed {{data.id}}
   </p>
 
   <div class="govuk-button-group">
-    <form method="post" action="claim-details" class="govuk-!-margin-0">
-        <button type="submit" class="govuk-button" data-module="govuk-button">
+        <a type="submit" class="govuk-button" data-module="govuk-button" href="claim-details">
           Back to claim
-        </button>
-      </form>
+        </a>
+      {% if claim.status == "not-yet-submitted" and (claim.claimType== "100" or claim.claimType== "60") %}
+          <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="delete-claim-confirmation">
+          Delete claim
+          </a>
+      {% endif %}
   </div>
 
   <h2 class="govuk-heading-m">If you need support with this claim</h2>
