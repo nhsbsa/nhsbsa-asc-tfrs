@@ -394,8 +394,10 @@ router.post('/claim-payment-handler', function (req, res) {
 
       if (actionType == "later") {
         const claimID = req.session.data.id
-        submission.inProgress ??= {};
-        submission.inProgress.payment = true;
+        if (paymentResponse != null) {
+          submission.inProgress ??= {};
+          submission.inProgress.payment = true;
+        }
         delete req.session.data.learnerCount
         delete req.session.data.claimStep
         delete req.session.data.result
@@ -496,13 +498,14 @@ router.post('/claim-completion-handler', function (req, res) {
 
       if (actionType == "later") {
         const claimID = req.session.data.id
-        // 1. Ensure inProgress exists as an object
-        submission.inProgress ??= {};
-        // 2. Ensure completion exists as an array
-        submission.inProgress.completion ??= [];
-        // 3. Append the learnerCount
-        submission.inProgress.completion.push(learnerCount);
-
+        if (completionResponse != null) {
+          // 1. Ensure inProgress exists as an object
+          submission.inProgress ??= {};
+          // 2. Ensure completion exists as an array
+          submission.inProgress.completion ??= [];
+          // 3. Append the learnerCount
+          submission.inProgress.completion.push(learnerCount);
+        }
         delete req.session.data.learnerCount
         delete req.session.data.claimStep
         delete req.session.data.result
