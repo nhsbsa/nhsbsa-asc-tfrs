@@ -147,54 +147,60 @@
             </div>
         {% endif %}
         {% if (data.claimScreen != "confirmOutcome" and data.claimScreen != "checkList") %}
-            <h2 class="govuk-heading-s">{{claim.claimType | claimTypeText (false)}}</h2>
-            <div class="moj-page-header-actions">
+            <div class="moj-page-header-actions govuk-!-margin-bottom-4">
                 <div class="moj-page-header-actions__title">
-                    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Claim: {{ claim.claimID }}</h1>
+                    <h1 class="govuk-heading-l">Claim: {{ claim.claimID }}</h1>
                 </div>
-                <div class="moj-page-header-actions__actions">
-                    <div class="moj-button-group moj-button-group--inline">
-                     {% if (claim.status == "submitted" or claim.status == 'inProgress') and data.claimScreen != "inProgress" and (data.userType == "processor" or data.userType == "leadProcessor") %}
-                    <a type="submit" href="../claim-process-start-handler" class="govuk-button" data-module="govuk-button" data-module="govuk-button">
-                    {% if (claim.status == 'inProgress') %}Continue processing{% else %}Process claim{% endif %}
-                    </a>
-                {% endif %}
-                    <div class="moj-button-menu" data-module="moj-button-menu" data-button-text="More claim actions" data-button-classes="govuk-button--secondary">
-                    <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button">
-                        View claim notes
-                    </button>
-                    <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button">
-                        Add a new note (opens in a new tab)
-                    </button>
-                    {% if ((claim.submissions |sortProcessedClaims) | length > 1) and (data.claimScreen == "claim") %}
-                    <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button">
-                        View claim history
-                    </button>
+                    <div class="moj-page-header-actions__actions">
+                        <div class="moj-button-group moj-button-group--inline">
+                            {% if (claim.status == "submitted" or claim.status == 'inProgress') and data.claimScreen != "inProgress" and (data.userType == "processor" or data.userType == "leadProcessor") %}
+                                <a type="submit" href="../claim-process-start-handler" class="govuk-button" data-module="govuk-button" data-module="govuk-button">
+                            {% if (claim.status == 'inProgress') %}Continue processing{% else %}Process claim{% endif %}
+                                </a>
+                            {% endif %}
+
+                            <div class="moj-button-menu" data-module="moj-button-menu" data-button-text="More claim actions" data-button-classes="govuk-button--secondary">
+                                <a type="submit" href="#" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button">
+                                View claim notes
+                                </a>
+
+                                <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button">
+                                Add a new note (opens in a new tab)
+                                </button>
+
+                                {% if ((claim.submissions |sortProcessedClaims) | length > 1) and (data.claimScreen == "claim") %}
+                                <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button">
+                                View claim history
+                                </button>
+                                {% endif %}
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="govuk-grid-column-two-thirds">
+                    <div class="govuk-tag-group govuk-!-margin-bottom-7">
+                        <span class="govuk-!-padding-right-1">{{ claim.claimType | claimTypeTag }} </span>
+                        <span>{{ claim.status | processorstatusTag }}{% if claim.status != 'submitted' and claim.status != 'inProgress' %} on {{ submission.processedDate | govukDate }}{% endif %}</span>
+                    </div>
+                
+                    {% if (pairClaim != null and claim.claimType == "60") or claim.claimType == "40" %}
+                        <p class="govuk-body govuk-!-margin-bottom-7">View the <a href="../claim-switch?pairID={{pairClaim.claimID}}" class="govuk-link">{{pairClaim.claimType | claimTypeText (false)}} of the claim</a>.</p>
+                    {% elif claim.claimType == "60" %}
+                        <p class="govuk-body govuk-!-margin-bottom-7">The 40 part of the claim has not been submitted yet.</p>
                     {% endif %}
-                    </div>
-                    </div>
+
+                    {% if (claim.submissions |sortProcessedClaims) | length <= 1 %}
+                        <p class="govuk-body govuk-!-margin-bottom-7">This is the <strong>first</strong> time this has been submitted.</p>
+                    {%else%}
+                        <p class="govuk-body govuk-!-margin-bottom-7">This {{claim.claimType | claimTypeText (true)}} has been submitted <strong>{{ (claim.submissions |sortProcessedClaims) | length }}</strong> times.</p>
+                    {% endif %}
+
+                    {% endif %}
+                    {% if (data.claimScreen == "checkList") %}
+                        <p class="govuk-body govuk-!-margin-top-6">Check the claim’s progress and finish any incomplete evidence checks.</p>
+                    {% endif %}
                 </div>
-                </div>
-            
-             <p class="govuk-body">{{ claim.status | processorstatusTag }}{% if claim.status != 'submitted' and claim.status != 'inProgress' %} on {{ submission.processedDate | govukDate }}{% endif %}</p>
-
-            
-            {% if (pairClaim != null and claim.claimType == "60") or claim.claimType == "40" %}
-                <p class="govuk-body">View the <a href="../claim-switch?pairID={{pairClaim.claimID}}" class="govuk-link">{{pairClaim.claimType | claimTypeText (false)}} of the claim</a>.</p>
-            {% elif claim.claimType == "60" %}
-                <p class="govuk-body">The 40 part of the claim has not been submitted yet.</p>
-            {% endif %}
-
-            {% if (claim.submissions |sortProcessedClaims) | length <= 1 %}
-                <p class="govuk-body">This is the <strong>first</strong> time this has been submitted.</p>
-            {%else%}
-                <p class="govuk-body">This {{claim.claimType | claimTypeText (true)}} has been submitted <strong>{{ (claim.submissions |sortProcessedClaims) | length }}</strong> times.</p>
-            {% endif %}
-
-        {% endif %}
-        {% if (data.claimScreen == "checkList") %}
-            <p class="govuk-body govuk-!-margin-top-6">Check the claim’s progress and finish any incomplete evidence checks.</p>
-        {% endif %}
-    </div>
-</div>
+            </div>
+        </div
 

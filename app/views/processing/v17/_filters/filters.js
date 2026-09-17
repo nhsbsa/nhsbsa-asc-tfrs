@@ -27,11 +27,11 @@ addFilter('processorstatusTag', function (statusID) {
 
 addFilter('claimTypeTag', function (statusID) {
     if (statusID == '100') {
-        return '<strong class="govuk-tag govuk-tag--blue">100 claim</strong>'
+        return '<strong class="govuk-tag govuk-tag--orange">100 claim</strong>'
     } else if (statusID == '60') {
-        return '<strong class="govuk-tag govuk-tag--light-blue">60 part</strong>' 
+        return '<strong class="govuk-tag govuk-tag--yellow">60 part</strong>' 
     } else if (statusID == '40') {
-        return '<strong class="govuk-tag govuk-tag--yellow">40 part</strong>' 
+        return '<strong class="govuk-tag govuk-tag--purple">40 part</strong>' 
     } else {
         return '<strong class="govuk-tag govuk-tag--grey">Invalid Type</strong>'
     }
