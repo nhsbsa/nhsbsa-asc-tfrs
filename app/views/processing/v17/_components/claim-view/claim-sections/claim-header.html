@@ -146,16 +146,36 @@
                 </div>
             </div>
         {% endif %}
-
-        <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Claim: {{ claim.claimID }}</h1>
         {% if (data.claimScreen != "confirmOutcome" and data.claimScreen != "checkList") %}
-            <p class="govuk-body">{{ claim.status | processorstatusTag }}{% if claim.status != 'submitted' and claim.status != 'inProgress' %} on {{ submission.processedDate | govukDate }}{% endif %}</p>
-
             <h2 class="govuk-heading-s">{{claim.claimType | claimTypeText (false)}}</h2>
+            <div class="moj-page-header-actions">
+                <div class="moj-page-header-actions__title">
+                    <h1 class="govuk-heading-l govuk-!-margin-bottom-3">Claim: {{ claim.claimID }}</h1>
+                </div>
+                <div class="moj-page-header-actions__actions">
+                    <div class="moj-button-group moj-button-group--inline">
+                     {% if (claim.status == "submitted" or claim.status == 'inProgress') and data.claimScreen != "inProgress" and (data.userType == "processor" or data.userType == "leadProcessor") %}
+                    <a type="submit" href="../claim-process-start-handler" class="govuk-button" data-module="govuk-button" data-module="govuk-button">
+                    {% if (claim.status == 'inProgress') %}Continue processing{% else %}Process claim{% endif %}
+                    </a>
+                {% endif %}
+                    <div class="moj-button-menu" data-module="moj-button-menu" data-button-text="More claim actions" data-button-classes="govuk-button--secondary">
+                    <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button">
+                        View claim notes
+                    </button>
+                    <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button">
+                    Add a new note (opens in a new tab)
+                    </button>
+                    <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button">
+                        Menu item 3
+                    </button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            
+             <p class="govuk-body">{{ claim.status | processorstatusTag }}{% if claim.status != 'submitted' and claim.status != 'inProgress' %} on {{ submission.processedDate | govukDate }}{% endif %}</p>
 
-            {% if (claim.status == "submitted" or claim.status == 'inProgress') and data.claimScreen != "inProgress" and (data.userType == "processor" or data.userType == "leadProcessor") %}
-                    <a href="../claim-process-start-handler" class="govuk-button" role="button" draggable="false" data-module="govuk-button">{% if (claim.status == 'inProgress') %}Continue processing{% else %}Process claim{% endif %}</a>
-            {% endif %}
             
             {% if (pairClaim != null and claim.claimType == "60") or claim.claimType == "40" %}
                 <p class="govuk-body">View the <a href="../claim-switch?pairID={{pairClaim.claimID}}" class="govuk-link">{{pairClaim.claimType | claimTypeText (false)}} of the claim</a>.</p>
