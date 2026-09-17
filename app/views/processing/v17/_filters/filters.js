@@ -25,6 +25,18 @@ addFilter('processorstatusTag', function (statusID) {
     }
 }, { renderAsHtml: true })
 
+addFilter('claimTypeTag', function (statusID) {
+    if (statusID == '100') {
+        return '<strong class="govuk-tag govuk-tag--blue">100 claim</strong>'
+    } else if (statusID == '60') {
+        return '<strong class="govuk-tag govuk-tag--light-blue">60 part</strong>' 
+    } else if (statusID == '40') {
+        return '<strong class="govuk-tag govuk-tag--yellow">40 part</strong>' 
+    } else {
+        return '<strong class="govuk-tag govuk-tag--grey">Invalid Type</strong>'
+    }
+}, { renderAsHtml: true })
+
 addFilter('findClaim', function (claimID, claims) {
     let claim = null;
     for (let c of claims) {

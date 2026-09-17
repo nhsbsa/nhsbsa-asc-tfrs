@@ -164,11 +164,13 @@
                         View claim notes
                     </button>
                     <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button">
-                    Add a new note (opens in a new tab)
+                        Add a new note (opens in a new tab)
                     </button>
+                    {% if ((claim.submissions |sortProcessedClaims) | length > 1) and (data.claimScreen == "claim") %}
                     <button type="submit" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button">
-                        Menu item 3
+                        View claim history
                     </button>
+                    {% endif %}
                     </div>
                     </div>
                 </div>
@@ -187,10 +189,6 @@
                 <p class="govuk-body">This is the <strong>first</strong> time this has been submitted.</p>
             {%else%}
                 <p class="govuk-body">This {{claim.claimType | claimTypeText (true)}} has been submitted <strong>{{ (claim.submissions |sortProcessedClaims) | length }}</strong> times.</p>
-                
-                {% if data.claimScreen == "claim" %}
-                    <a href="../view-previous-submissions-handler" class="govuk-button govuk-button--secondary" role="button" draggable="false" data-module="govuk-button">View claim history</a>
-                {% endif %}
             {% endif %}
 
         {% endif %}
