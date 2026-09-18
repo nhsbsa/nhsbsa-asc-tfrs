@@ -17,5 +17,248 @@
                 "noteContent": "SRO responded. Not further action needed."
             }
         ]
+    },
+    {
+        "noteID": "ABC-124",
+        "noteType": "claimNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Maya Lin",
+        "roleType": "ccs",
+        "noteCategories": ["CSS referral"],
+        "dateAdded": "2026-06-03T13:12:47.938Z",
+        "noteContent": "Submitter called due to confusion on evidence requested. They advised trainer number is there however assessment disagrees. Sent referral to check evidence and clarify what it is supposed to look like",
+        "replies": []
+    },
+    {
+        "noteID": "ABC-125",
+        "noteType": "claimNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Samira Khan",
+        "roleType": "processor",
+        "noteCategories": ["Claim update"],
+        "dateAdded": "2026-06-03T11:45:47.938Z",
+        "noteContent": "Bank statement didn’t show who account belonged to but an email was included from training provider to say the invoice had been in full so I was happy with that",
+        "replies": []
+    },
+    {
+        "noteID": "ABC-126",
+        "noteType": "claimNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Elena Rostova",
+        "roleType": "processor",
+        "noteCategories": ["Claim update"],
+        "dateAdded": "2026-06-02T11:02:47.938Z",
+        "noteContent": "Rejected as no paid date. Asked for a bank statement or receipt.",
+        "replies": [
+            {
+                "author": "Elena Rostova",
+                "roleType": "processor",
+                "dateAdded": "2026-06-04T17:02:47.938Z",
+                "noteContent": "Will also email out to advise they need to upload a cover letter when resubmitting due to the course name not being clear on the invoice."
+            }
+        ]
+    },
+    {
+        "noteID": "ABC-127",
+        "noteType": "claimNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Aaron Patel",
+        "roleType": "processor",
+        "noteCategories": ["Claim update"],
+        "dateAdded": "2026-06-02T14:32:47.938Z",
+        "noteContent": "The training provider has submitted the claim, so we have to push this claim back so it can be resubmitted by a submitter or employee from the organisation.",
+        "replies": []
+    },
+    {
+        "noteID": "ABC-128",
+        "noteType": "claimNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Noah Campbell",
+        "roleType": "leadProcessor",
+        "noteCategories": ["QA check", "Rework", "Processing error"],
+        "dateAdded": "2026-06-01T09:07:47.938Z",
+        "noteContent": "Quality check approved incorrectly, rework raised. Rework for original check will need raising.",
+        "replies": [
+            {
+                "author": "Noah Campbell",
+                "roleType": "leadProcessor",
+                "dateAdded": "2026-06-01T09:48:47.938Z",
+                "noteContent": "Reply from note author: No evidence to confirm the name discrepancy in the further evidence folder. Please email the organisation to ask them to confirm the correct name for learner and clarify if same person."
+            }
+        ]
+    },
+    {
+        "noteID": "ABC-129",
+        "noteType": "claimNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Ingrid Berg",
+        "roleType": "processor",
+        "noteCategories": ["Claim update"],
+        "dateAdded": "2026-06-01T10:32:47.938Z",
+        "noteContent": "Had to send back for 2nd time as still haven’t sent an invoice or receipt that shows the course name. They have only added a word document that has the learner’s name and ULN on it.",
+        "replies": [
+            {
+                "author": "Ingrid Berg",
+                "roleType": "leadProcessor",
+                "dateAdded": "2026-06-02T11:12:47.938Z",
+                "noteContent": "the correct evidence has now been uploaded."
+            }
+        ]
+    },
+    {
+        "noteID": "ABC-130",
+        "noteType": "claimNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Aaron Patel",
+        "roleType": "processor",
+        "noteCategories": ["Claim update", "Organisation communication"],
+        "dateAdded": "2026-05-29T11:57:47.938Z",
+        "noteContent": "Submitter contacted as they do not understand how the documents provided are not sufficient. Advised what was on the note and what to obtain. They still did not understand how that was not enough so I sent referral to processing team to explain why they need more.",
+        "replies": []
+    },
+    {
+        "noteID": "ABC-131",
+        "noteType": "claimNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Miguel Torres",
+        "roleType": "processor",
+        "noteCategories": ["Claim update", "Organisation communication"],
+        "dateAdded": "2026-05-28T12:03:47.938Z",
+        "noteContent": "Org have paid 60/40 payment plan. Have emailed to inform SRO to inform him he need to provide evidence of the remaining 40% payment plan",
+        "replies": []
+    },
+    {
+        "noteID": "ABC-132",
+        "noteType": "claimNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Miguel Torres",
+        "roleType": "processor",
+        "noteCategories": ["Claim update", "Processing error"],
+        "dateAdded": "2026-05-26T13:32:47.938Z",
+        "noteContent": "I have approved their 40 claims. Issue – on their 60 claims that was processed over a year ago it showed that they didn’t pay the full 60% of the cost as the amounts on the invoice were incorrect. That wasn’t noticed at the time but has been now as the evidence they sent for their 40 claims prove that had paid remaining 40% showed the correct amounts that should’ve been part of the 60 claim evidence.",
+        "replies": []
+    },
+    {
+        "noteID": "ABC-133",
+        "noteType": "claimNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Jasper Reed",
+        "roleType": "processor",
+        "noteCategories": ["Claim update"],
+        "dateAdded": "2026-05-25T15:41:47.938Z",
+        "noteContent": "Emailed out to the org to request cost per learner as not included in the 60 evidence and nothing in evidence file.",
+        "replies": []
+    },
+
+
+
+    {
+        "noteID": "ABC-134",
+        "noteType": "organisationNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Jasper Reed",
+        "roleType": "ccs",
+        "noteCategories": ["Organisation update", "Organisation communication", "CCS referral"],
+        "dateAdded": "2026-05-29T10:11:47.938Z",
+        "noteContent": "Have emailed the SRO information about making the appointment for the call to change SRO details.",
+        "replies": []
+    },
+    {
+        "noteID": "ABC-135",
+        "noteType": "organisationNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Michael Macleod",
+        "roleType": "processor",
+        "noteCategories": ["Organisation update", "Escalation"],
+        "dateAdded": "2026-05-29T09:23:47.938Z",
+        "noteContent": "All claims rejected and fraud template sent.",
+        "replies": []
+    },
+    {
+        "noteID": "ABC-136",
+        "noteType": "organisationNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Gillian Carpenter",
+        "roleType": "processor",
+        "noteCategories": ["Organisation update", "Organisation communication"],
+        "dateAdded": "2026-05-27T15:20:47.938Z",
+        "noteContent": "We received a call referral from them asking when their claims would be dealt with. I have emailed them saying that all claims will be processed shortly.",
+        "replies": []
+    },
+    {
+        "noteID": "ABC-137",
+        "noteType": "organisationNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Grace O'Connor",
+        "roleType": "processor",
+        "noteCategories": ["Organisation update", "Organisation communication"],
+        "dateAdded": "2026-05-26T10:28:47.938Z",
+        "noteContent": "Have emailed SRO advising them to make sure their work place data set with Skills for Care is over 90% complete. This ensures they are able to submit claims.",
+        "replies": []
+    },
+    {
+        "noteID": "ABC-138",
+        "noteType": "organisationNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "Jamie Davies",
+        "roleType": "processor",
+        "noteCategories": ["Organisation update", "Organisation communication"],
+        "dateAdded": "2026-05-26T10:28:47.938Z",
+        "noteContent": "Rejected all claims with email note template.",
+        "replies": [
+            {
+                "author": "Jamie Davies",
+                "roleType": "processor",
+                "dateAdded": "2026-06-01T10:09:47.938Z",
+                "noteContent": "Evidence has been altered after they were told a level 2 diploma is not eligible. Total cost paid keeps changing. Uses two different address on bank statements. Bank statements are same bank but change styles etc."
+
+            },
+            {
+                "author": "Pamela Green",
+                "roleType": "leadProcessor",
+                "dateAdded": "2026-06-01T10:09:47.938Z",
+                "noteContent": "Do not disclose with org, address of training provider matches a fraud org."
+
+            }
+
+        ]
     }
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 ]
