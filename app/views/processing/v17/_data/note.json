@@ -1,0 +1,21 @@
+[
+    {
+        "noteID": "ABC-123",
+        "noteType": "claimNote",
+        "orgID": "A02944934",
+        "claimID": "DEU-QBG9-WJ3U-A",
+        "author": "John Smith",
+        "roleType": "ccs",
+        "noteCategories": ["CSS referral"],
+        "dateAdded": "2026-06-04T14:13:47.938Z",
+        "noteContent": "SRO contacted to query rejection. Advised deadline of 3 months but they insist they can still claim. Sent referral to clarify rejection and to make sure there is no procedure left.",
+        "replies": [
+            {
+                "author": "John Smith",
+                "roleType": "ccs",
+                "dateAdded": "2026-06-04T15:13:47.938Z",
+                "noteContent": "SRO responded. Not further action needed."
+            }
+        ]
+    }
+]

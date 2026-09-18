@@ -1187,7 +1187,7 @@ align-items: baseline;
 }
 
 .note-list {
-  max-width: 535px;
+  max-width: 640px;
 }
 
 .metadata-text {
@@ -1205,5 +1205,16 @@ align-items: baseline;
     height: 16px;
     margin: 0 govuk-spacing(2); // 10px spacing
     background-color: govuk-colour("mid-grey");
+  }
+}
+
+.moj-filter__tag {
+
+    &::after {
+    background-image: url(../images/icon-tag-remove-cross.svg);
+  }
+
+  &:hover::after {
+    background-image: url(../images/icon-tag-remove-cross-white.svg);
   }
 }
