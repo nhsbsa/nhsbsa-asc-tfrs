@@ -1,8 +1,11 @@
 <div class="internal-note-component govuk-!-margin-top-6">
-  <div class="govuk-tag-group  govuk-!-margin-bottom-7">
-    <strong class="govuk-tag govuk-tag--purple govuk-!-margin-right-2">Organisation update</strong>
-    <strong class="govuk-tag govuk-tag--purple">Organisation communication</strong>
-  </div>
+  {% if (note.noteCategories.length > 0 ) %}
+    <div class="govuk-tag-group  govuk-!-margin-bottom-7">
+      {% for category in note.noteCategories %}
+        <strong class="govuk-tag govuk-tag--purple">{{category}}</strong>
+      {% endfor %}
+    </div>
+  {% endif %}
   {% include "./note-content.html" %}
 
   <div class="internal-note-replies">

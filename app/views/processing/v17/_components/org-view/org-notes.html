@@ -112,7 +112,14 @@
                     }) }}
                 </div>
                 <div class="note-list">
-                    {% include "../notes/note.html" %}
+                    {% set sortedOrgNotes = data.notes | findOrgNotes(data.orgID) %}
+                    {% if (sortedOrgNotes.length > 0 ) %}
+                        {% for note in sortedOrgNotes%}
+                            {% include "../notes/note.html" %}
+                        {% endfor%}
+                    {% else %}
+                        <p class="govuk-body">There are no notes</p>
+                    {% endif %}
                 </div>
         </div>
     </div>

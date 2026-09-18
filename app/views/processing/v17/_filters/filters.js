@@ -916,3 +916,30 @@ addFilter('evidenceType', function (type) {
     }
 
 })
+
+addFilter('findOrgNotes', function (notes, orgID) {
+
+    if (!Array.isArray(notes)) return [];
+
+    return notes
+    .filter(note => note && note.orgID === orgID)
+    .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+
+})
+
+addFilter('roleType', function (type) {
+
+    switch(type) {
+        case "ccs":
+            return "CCS"
+        case "processor":
+            return "Processer"
+            break;
+        case "leadProcessor":
+            return "QS"
+            break;
+        default:
+           return "Error"
+    }
+
+})
