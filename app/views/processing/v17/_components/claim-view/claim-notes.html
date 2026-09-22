@@ -31,7 +31,7 @@
         {% endif %}
         
         <h1 class="govuk-heading-l">
-            <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+            <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
             Notes
         </h1>
         <div class="moj-filter-layout">
@@ -153,7 +153,7 @@
             <div class="moj-filter-layout__content">
                 <div class="moj-action-bar">
                     <div class="moj-action-bar__filter"></div>
-                        <a href="./create-note?noteClaimID={{data.id}}" draggable="false" class="govuk-button" data-module="govuk-button" onclick="window.open(this.href, 'popupWindow', 'width=600,height=800,scrollbars=yes'); return false;">
+                        <a href="./create-note" draggable="false" class="govuk-button" data-module="govuk-button" onclick="window.open(this.href, 'popupWindow', 'width=600,height=800,scrollbars=yes'); return false;">
                             Add a new note (opens in a new tab)
                         </a>
                 </div>

@@ -8,5 +8,8 @@
         {% if (noteContent.noteID != null) %}
         <span class="govuk-body metadata-text">Note ID: {{noteContent.noteID}}</span>
         {% endif %}
+        {% if (data.orgTab == "org-notes" and noteContent.claimID != null) %}
+        <span class="govuk-body metadata-text">Claim: {{noteContent.claimID}}</span>
+        {% endif %}
     </div>
 </div>

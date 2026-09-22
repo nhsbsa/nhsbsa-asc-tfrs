@@ -600,6 +600,40 @@ function createOrg(registration) {
   return org
 }
 
+function checkNote(noteContent, noteCategories) {
+  const submitError = {
+    noteContent: null,
+    noteCategories: null, 
+    valid: null
+  }
 
+  if (noteContent == "") {
+    submitError.noteContent = "missing"
+  } else if (noteContent.length > 1500) {
+    submitError.noteContent = "tooLong"
+  } else {
+    submitError.noteContent = "valid"
+  }
 
-module.exports = { createOrg, loadJSONFromFile, loadData, formatDate, checkRefFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildSlotComparison, orderSubmissions, findFirstLearnerWithoutOutcome }
+  if (noteCategories == null) {
+    submitError.noteCategories = "missing"
+  } else {
+    submitError.noteCategories = "valid"
+  }
+
+  submitError.valid = (submitError.noteCategories == "valid") && (submitError.noteContent == "valid")
+
+  return submitError
+}
+
+function generateNoteID() {
+  const letters = Array.from({ length: 3 }, () => 
+    String.fromCharCode(65 + Math.floor(Math.random() * 26))
+  ).join('');
+  
+  const numbers = Math.floor(100 + Math.random() * 900);
+
+  return `${letters}-${numbers}`;
+}
+
+module.exports = { checkNote, generateNoteID, createOrg, loadJSONFromFile, loadData, formatDate, checkRefFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildSlotComparison, orderSubmissions, findFirstLearnerWithoutOutcome }

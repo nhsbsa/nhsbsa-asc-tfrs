@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, checkRefFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode, createOrg} = require('../_helpers/helpers.js');
+const { loadData, generateNoteID, checkNote, checkRefFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode, createOrg} = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 router.use('/processing/v17/backstop', require('../_backstop/backstop-routes.js'));
@@ -158,6 +158,51 @@ router.get('/cancel-reply-handler', function (req, res) {
 
 
   res.redirect('organisation/org-view-main')
+});
+
+router.post('/note-handler', function (req, res) {
+
+  delete req.session.data.noteSubmitError
+
+  const noteContent = req.session.data.noteContent
+  const noteCategories = req.session.data.noteCategories
+
+
+  const submitError = checkNote(noteContent, noteCategories)
+
+  if (submitError.valid) {
+
+    
+
+    const note = {
+      noteID: generateNoteID(),
+      noteType: null,
+      orgID: req.session.data.orgID,
+      claimID: null,
+      author: "Test user",
+      roleType: req.session.data.userType,
+      noteCategories,
+      dateAdded: new Date(),
+      noteContent,
+      replies: []
+    }
+
+    if (req.session.data.orgTab == "org-notes") {
+      note.noteType = "organisationNote"
+    } else {
+      note.noteType = "claimNote"
+      note.claimID = req.session.data.id
+    }
+
+    req.session.data.notes.push(note)
+    delete req.session.data.noteContent
+    delete req.session.data.noteCategories
+    res.redirect('./organisation/note-confirmation')
+  } else {
+    req.session.data.noteSubmitError = submitError
+    res.redirect('./organisation/create-note')
+  }
+
 });
 
 router.get('/api/filter-notes', async function (req, res) {

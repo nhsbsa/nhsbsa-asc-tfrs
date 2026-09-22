@@ -166,7 +166,7 @@
                             View claim notes
                             </a>
 
-                            <a href="./create-note?noteClaimID={{data.id}}" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button" onclick="window.open(this.href, 'popupWindow', 'width=600,height=800,scrollbars=yes'); return false;">
+                            <a href="./create-note" draggable="false" class="govuk-button moj-button-menu__item govuk-button--secondary" data-module="govuk-button" onclick="window.open(this.href, 'popupWindow', 'width=600,height=800,scrollbars=yes'); return false;">
                             Add a new note (opens in a new tab)
                             </a>
 
@@ -182,7 +182,7 @@
 
             <div class="govuk-tag-group govuk-!-margin-bottom-7">
                 <span class="govuk-!-padding-right-1">{{ claim.claimType | claimTypeTag }}</span>
-                <span>{{ claim.status | processorstatusTag }}{% if claim.status != 'submitted' and claim.status != 'inProgress' %} on {{ submission.processedDate | govukDate }}{% endif %}</span>
+                <span class="govuk-body govuk-!-margin-bottom-0">{{ claim.status | processorstatusTag }}{% if claim.status != 'submitted' and claim.status != 'inProgress' %} on {{ submission.processedDate | govukDate }}{% endif %}</span>
             </div>
         
             {% if (pairClaim != null and claim.claimType == "60") or claim.claimType == "40" %}

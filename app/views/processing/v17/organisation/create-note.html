@@ -5,17 +5,65 @@
 Add a note — {{data.processingServiceName}}
 {% endblock %}
 
+{% if data.noteSubmitError != null %}
+    {% if data.noteSubmitError.noteContent != "valid" %}
+        {% if (data.noteSubmitError.noteContent == 'missing') %}
+            {% set noteContentErrorMessage = { text: "Enter a note" } %}
+            {% set noteContentErrorSummary = "Enter a note" %}
+        {% elif (data.noteSubmitError.noteContent == 'tooLong') %}
+            {% set noteContentErrorMessage = { text:  "Note must be 1,500 characters or less" } %}
+            {% set noteContentErrorSummary = "Note must be 1,500 characters or less" %}
+        {% endif %}
+    {% endif %}
+    {% if data.noteSubmitError.noteCategories != "valid" %}
+        {% set noteCategoriesErrorMessage =  { text: "Select at least one category" } %}
+        {% set noteCategoriesErrorSummary = "Select at least one category" %}
+    {% endif %} 
+{% endif %}
 
 {% block content %}
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-        <h1 class="govuk-heading-l">Add a note</h1>
-    </div>
-</div>
+    <div class="govuk-grid-column-full">
 
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+        {% if data.noteSubmitError != null %}
+            <div class="govuk-error-summary" data-module="govuk-error-summary">
+                <div role="alert">
+                    <h2 class="govuk-error-summary__title">
+                    There is a problem
+                    </h2>
+                    <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        {% if data.noteSubmitError.noteContent != "valid" %}
+                        <li>
+                            <a href="#note-content-error">
+                                {{noteContentErrorSummary}}
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if data.noteSubmitError.noteCategories != "valid" %}
+                        <li>
+                            <a href="#noteCategories-error">
+                                {{noteCategoriesErrorSummary}}
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if data.orgTab == "org-notes" %}
+            {% set org = data.organisations | findOrg(data.orgID) %}
+            <span class="govuk-caption-l">{{org.name}}</span>
+            <h1 class="govuk-heading-l">Add a note</h1>
+        {% else %}
+            <span class="govuk-caption-l">Claim: {{ data.id }}</span>
+            <h1 class="govuk-heading-l">Add a note</h1>
+        {% endif %}
+
         <form action="../note-handler" method="POST" class="govuk-reply-form">
+
             {{ govukCharacterCount({
             name: "noteContent",
             id: "note-content",
@@ -24,33 +72,34 @@ Add a note — {{data.processingServiceName}}
                 text: "Enter your note below",
                 classes: "govuk-label--m",
                 isPageHeading: false
-            }
+            },
+            errorMessage: noteContentErrorMessage
             }) }}
 
 
-            {% if data.noteClaimID == null %}
+            {% if  data.orgTab == "org-notes" %}
                 {% set categoryItems = [
-                    { value: "organisation-update", text: "Organisation update" },
-                    { value: "organisation-communication", text: "Organisation communication" },
-                    { value: "escalation", text: "Escalation" },
-                    { value: "ccs-referral", text: "CCS referral" },
-                    { value: "onboarding", text: "Onboarding" },
-                    { value: "other", text: "Other" }
+                    { value: "Organisation update", text: "Organisation update" },
+                    { value: "Organisation communication", text: "Organisation communication" },
+                    { value: "Escalation", text: "Escalation" },
+                    { value: "CCS referral", text: "CCS referral" },
+                    { value: "Onboarding", text: "Onboarding" },
+                    { value: "Other", text: "Other" }
                 ] %}
             {% else %}
                 {% set categoryItems = [
-                    { value: "claim-update", text: "Claim update" },
-                    { value: "rework", text: "Rework" },
-                    { value: "quality-check", text: "Quality check" },
-                    { value: "processing-error", text: "Processing error" },
-                    { value: "escalation", text: "Escalation" },
-                    { value: "ccs-referral", text: "CCS referral" },
-                    { value: "other", text: "Other" }
+                    { value: "Claim update", text: "Claim update" },
+                    { value: "Rework", text: "Rework" },
+                    { value: "Quality check", text: "Quality check" },
+                    { value: "Processing error", text: "Processing error" },
+                    { value: "Escalation", text: "Escalation" },
+                    { value: "CCS referral", text: "CCS referral" },
+                    { value: "Other", text: "Other" }
                 ] %}
             {% endif %}
 
             {{ govukCheckboxes({
-            name: "noteCategory",
+            name: "noteCategories",
             fieldset: {
                 legend: {
                 text: "What is your note about?",
@@ -58,6 +107,7 @@ Add a note — {{data.processingServiceName}}
                 classes: "govuk-fieldset__legend--m"
                 }
             },
+            errorMessage: noteCategoriesErrorMessage,
             items: categoryItems
             }) }}
 
