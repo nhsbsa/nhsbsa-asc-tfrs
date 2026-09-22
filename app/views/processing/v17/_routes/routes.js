@@ -160,6 +160,99 @@ router.get('/cancel-reply-handler', function (req, res) {
   res.redirect('organisation/org-view-main')
 });
 
+router.get('/api/filter-notes', async function (req, res) {
+
+  try {
+    // 1. Fetch form inputs from request query parameters
+    const keywords = req.query.keywords ? req.query.keywords.trim().toLowerCase() : ''
+    const sortByDate = req.query.sortByDate
+    
+    // 1. Convert to array and filter out any '_unchecked' values added by the kit
+    const selectedCategories = [].concat(req.query.category || [])
+      .filter(val => val && !val.startsWith('_'))
+
+    const selectedNoteTypes = [].concat(req.query['note-type'] || [])
+      .filter(val => val && !val.startsWith('_'))
+
+    // 2. Retrieve base notes array from session data
+    const rawNotes = req.session.data.notes || []
+    const orgID = req.session.data.orgID
+    const claimID = req.session.data.id
+
+    // 3. Base org filter (replicating your Nunjucks 'findOrgNotes' filter)
+    let filteredNotes = rawNotes.filter(note => note.orgID === orgID)
+
+    if (req.session.data.claimScreen == "claimNotes") {
+      filteredNotes = filteredNotes.filter(note => note.claimID === claimID)
+    }
+
+    // 4. Keyword filter - checks within note.noteContent
+    if (keywords) {
+      filteredNotes = filteredNotes.filter(note => 
+        note.noteContent && note.noteContent.toLowerCase().includes(keywords)
+      )
+    }
+
+    // 5. Category filter - includes note if AT LEAST ONE checked category is in note.noteCategories
+    if (selectedCategories.length > 0) {
+      filteredNotes = filteredNotes.filter(note => {
+        if (!Array.isArray(note.noteCategories)) return false
+        
+        // Returns true if there is any overlap between selected categories and the note's categories
+        return selectedCategories.some(cat => note.noteCategories.includes(cat))
+      })
+    }
+
+    // 6. Note Type filter
+    /* if (selectedNoteTypes.length > 0) {
+      filteredNotes = filteredNotes.filter(note => selectedNoteTypes.includes(note.type))
+    } */
+
+    // 7. Date Sorting
+    if (sortByDate === 'Oldest first') {
+      filteredNotes.sort((a, b) => new Date(a.dateAdded) - new Date(b.dateAdded))
+    } else if (sortByDate === 'Newest first')  {
+      // Default to Newest first
+      filteredNotes.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded))
+    }
+
+  // Helper function to render a partial into an HTML string
+    const renderPartial = (templatePath, templateData) => {
+      return new Promise((resolve, reject) => {
+        // Passing a 3rd argument (callback) stops Express from automatically sending the response
+        res.render(templatePath, templateData, (err, html) => {
+          if (err) return reject(err)
+          resolve(html)
+        })
+      })
+    }
+
+    // Compile both partial templates into HTML strings concurrently
+    const [notesHtml, filtersHtml] = await Promise.all([
+      renderPartial('processing/v17/_components/notes/notes-list.html', {
+        sortedNotes: filteredNotes,
+        data: req.session.data
+      }),
+      renderPartial('processing/v17/_components/notes/notes-selected-filters.html', {
+        selectedCategories,
+        selectedNoteTypes,
+        keywords,
+        sortByDate
+      })
+    ])
+
+    // Send BOTH rendered HTML strings back as a single JSON object
+    res.json({
+      notesHtml: notesHtml,
+      filtersHtml: filtersHtml
+    })
+
+  } catch (err) {
+    console.error('Render Error:', err)
+    res.status(500).json({ error: err.message })
+  }
+})
+
 router.post('/search-claim-id', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];
@@ -843,6 +936,13 @@ router.get('/org-tab-handler/:tab', function (req, res) {
   delete req.session.data.paymentRejectNoteIncomplete
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionRejectNoteIncomplete
+
+  delete req.session.data.keywords
+  delete req.session.data.sortByDate
+  delete req.session.data.category
+  delete req.session.data.selectedCategories
+  delete req.session.data.selectedNoteTypes
+  delete req.session.data['note-type']
 
   req.session.data.orgTab = orgTab
 

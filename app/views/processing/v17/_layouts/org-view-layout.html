@@ -206,6 +206,71 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+async function applyFilters() {
+    const form = document.getElementById('filter-form');
+    const formData = new FormData(form);
+    const queryParams = new URLSearchParams(formData).toString();
+
+    try {
+      const response = await fetch(`/api/filter-notes?${queryParams}`);
+      const data = await response.json();
+
+      // Update both containers without full page reloads
+      document.getElementById('notes-container').innerHTML = data.notesHtml;
+      document.getElementById('selected-filters-container').innerHTML = data.filtersHtml;
+    } catch (err) {
+      console.error('Failed to update filters:', err);
+    }
+  }
+
+  // 1. Submit form event listener
+  document.getElementById('filter-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    applyFilters();
+  });
+
+  // 2. Event delegation for dynamically added tags and "Clear filters" link
+  document.getElementById('selected-filters-container').addEventListener('click', function(e) {
+    const tag = e.target.closest('.moj-filter__tag');
+    const clearAll = e.target.closest('#clear-all-filters');
+
+    // Handle single tag removal
+    if (tag) {
+      e.preventDefault();
+      const filterType = tag.getAttribute('data-filter-type');
+      const filterVal = tag.getAttribute('data-filter-val');
+
+      if (filterType === 'keywords') {
+        document.getElementById('keywords').value = '';
+      } else if (filterType === 'category') {
+        const checkbox = document.querySelector(`input[name="category"][value="${filterVal}"]`);
+        if (checkbox) checkbox.checked = false;
+      } else if (filterType === 'note-type') {
+        const checkbox = document.querySelector(`input[name="note-type"][value="${filterVal}"]`);
+        if (checkbox) checkbox.checked = false;
+      }
+
+      // Re-trigger filter apply
+      applyFilters();
+    }
+
+    // Handle Clear All
+    if (clearAll) {
+      e.preventDefault();
+      
+      // Reset inputs
+      document.getElementById('keywords').value = '';
+      document.querySelectorAll('input[name="category"]').forEach(cb => cb.checked = false);
+      document.querySelectorAll('input[name="note-type"]').forEach(cb => cb.checked = false);
+      
+      // Reset radio sorting to default
+      const defaultSort = document.getElementById('newest');
+      if (defaultSort) defaultSort.checked = true;
+
+      applyFilters();
+    }
+  });
+
 </script>
 <script type="text/javascript" src="/public/javascripts/processing/v17/filter.js"></script>
 {% endblock %}

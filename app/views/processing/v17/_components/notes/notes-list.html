@@ -1,0 +1,7 @@
+{% if (sortedNotes.length > 0 ) %}
+    {% for note in sortedNotes%}
+        {% include "./note.html" %}
+    {% endfor%}
+{% else %}
+    <p class="govuk-body">There are no notes</p>
+{% endif %}
