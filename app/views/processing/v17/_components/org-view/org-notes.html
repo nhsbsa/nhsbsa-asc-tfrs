@@ -179,9 +179,9 @@
             <div class="moj-filter-layout__content">
                 <div class="moj-action-bar">
                     <div class="moj-action-bar__filter"></div>
-                        {{ govukButton({
-                                text: "Add a note (opens in a new tab)"
-                            }) }}
+                        <a href="./create-note" draggable="false" class="govuk-button" data-module="govuk-button" onclick="window.open(this.href, 'popupWindow', 'width=600,height=800,scrollbars=yes'); return false;">
+                            Add a new note (opens in a new tab)
+                        </a>
                 </div>
                 <div class="note-list">
                     {% set sortedOrgNotes = data.notes | findOrgNotes(data.orgID) %}

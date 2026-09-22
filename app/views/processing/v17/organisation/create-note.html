@@ -1,0 +1,77 @@
+{% extends "../_layouts/processing-main.html" %}
+{% set govukRebrand = true %}
+
+{% block pageTitle %}
+Add a note — {{data.processingServiceName}}
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Add a note</h1>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form action="../note-handler" method="POST" class="govuk-reply-form">
+            {{ govukCharacterCount({
+            name: "noteContent",
+            id: "note-content",
+            maxlength: 1500,
+            label: {
+                text: "Enter your note below",
+                classes: "govuk-label--m",
+                isPageHeading: false
+            }
+            }) }}
+
+
+            {% if data.noteClaimID == null %}
+                {% set categoryItems = [
+                    { value: "organisation-update", text: "Organisation update" },
+                    { value: "organisation-communication", text: "Organisation communication" },
+                    { value: "escalation", text: "Escalation" },
+                    { value: "ccs-referral", text: "CCS referral" },
+                    { value: "onboarding", text: "Onboarding" },
+                    { value: "other", text: "Other" }
+                ] %}
+            {% else %}
+                {% set categoryItems = [
+                    { value: "claim-update", text: "Claim update" },
+                    { value: "rework", text: "Rework" },
+                    { value: "quality-check", text: "Quality check" },
+                    { value: "processing-error", text: "Processing error" },
+                    { value: "escalation", text: "Escalation" },
+                    { value: "ccs-referral", text: "CCS referral" },
+                    { value: "other", text: "Other" }
+                ] %}
+            {% endif %}
+
+            {{ govukCheckboxes({
+            name: "noteCategory",
+            fieldset: {
+                legend: {
+                text: "What is your note about?",
+                isPageHeading: true,
+                classes: "govuk-fieldset__legend--m"
+                }
+            },
+            items: categoryItems
+            }) }}
+
+
+            <div class="govuk-button-group">
+                {{ govukButton({
+                    text: "Submit note",
+                    type: "submit"
+                }) }}
+
+                <a class="govuk-link" href="javascript:window.close();">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
