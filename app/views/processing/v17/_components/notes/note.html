@@ -29,7 +29,6 @@
   
   <div class="reply-container">
     {% if (data.submitError != null and data.submitError.noteID == note.noteID) %}
-      {% set replyContentLabel = "replyTextarea" + note.noteID %}
       <form action="../note-reply-handler" method="POST" class="govuk-reply-form govuk-!-margin-top-3">
         <input type="hidden" name="noteID" value="{{note.noteID}}">
 
@@ -39,12 +38,12 @@
           </label>
           <p id="reply-textarea-{{note.noteID}}-error" class="govuk-error-message">
             {% if (data.submitError.type == 'noteTooLong') %}
-              <span class="govuk-visually-hidden">Error:</span> Note must be must be 1,500 characters or less
+              <span class="govuk-visually-hidden">Error:</span> Note must be 1,500 characters or less
             {% elif (data.submitError.type == 'noteMissing') %}
               <span class="govuk-visually-hidden">Error:</span> Enter a note
             {% endif %}
           </p>
-          <textarea class="govuk-textarea govuk-textarea--error govuk-js-character-count"  id="reply-textarea-{{note.noteID}}" aria-describedby="reply-textarea-{{note.noteID}}-info reply-textarea-{{note.noteID}}-error" name="replyTextarea"  rows="5">{{data[replyContentLabel]}}</textarea>
+          <textarea class="govuk-textarea govuk-textarea--error govuk-js-character-count"  id="reply-textarea-{{note.noteID}}" aria-describedby="reply-textarea-{{note.noteID}}-info reply-textarea-{{note.noteID}}-error" name="replyTextarea"  rows="5">{{data.replyTextarea}}</textarea>
           <div id="reply-textarea-{{note.noteID}}-info" class="govuk-hint govuk-character-count__message">
               You can enter up to 1,500 characters
           </div>

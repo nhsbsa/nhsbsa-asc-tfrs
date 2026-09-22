@@ -6,6 +6,29 @@
         {% else %}
             <a href="org-view-main?claimScreen=claim" class="govuk-back-link govuk-!-margin-bottom-6">Back to claim details</a>
         {% endif %}
+
+        {% if data.submitError != null %}
+            <div class="govuk-error-summary" data-module="govuk-error-summary">
+                <div role="alert">
+                    <h2 class="govuk-error-summary__title">
+                    There is a problem
+                    </h2>
+                    <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#reply-textarea-{{data.submitError.noteID}}-error">
+                                {% if (data.submitError.type == 'noteTooLong') %}
+                                    Note must be 1,500 characters or less
+                                {% elif (data.submitError.type == 'noteMissing') %}
+                                    Enter a note
+                                {% endif %}
+                            </a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         
         <h1 class="govuk-heading-l">
             <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>

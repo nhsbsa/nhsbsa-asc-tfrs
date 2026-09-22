@@ -115,7 +115,7 @@ router.post('/reg-outcome-handler', function (req, res) {
 router.post('/note-reply-handler', function (req, res) {
   const noteID = req.session.data.noteID
   const replyNote = req.session.data.replyTextarea
-
+  let redirectLink = 'organisation/org-view-main'
   delete req.session.data.submitError
 
   if (replyNote == "") {
@@ -141,12 +141,13 @@ router.post('/note-reply-handler', function (req, res) {
           note.replies.push(reply)
         }
     }
+    redirectLink = 'organisation/org-view-main#' + noteID
     delete req.session.data.noteID
-    delete req.session.data.reply_text
+    delete req.session.data.replyTextarea
 
   }
 
-  res.redirect('organisation/org-view-main')
+  res.redirect(redirectLink)
 });
 
 router.get('/cancel-reply-handler', function (req, res) {
