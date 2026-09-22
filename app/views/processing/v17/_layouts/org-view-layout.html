@@ -115,7 +115,6 @@ window.addEventListener('load', () => {
     }
 });
 
-// --- REPLY TO NOTE TOGGLE (ROBUST VERSION) ---
 document.addEventListener('click', function (event) {
   // 1. Detect Reply Button (by class OR by button text)
   const btn = event.target.closest('button');
@@ -178,6 +177,35 @@ document.addEventListener('click', function (event) {
   }
 
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Extract the hash value from the URL (e.g. '#ABC-123' -> 'ABC-123')
+  const hash = window.location.hash.substring(1);
+
+  if (hash) {
+    const targetElement = document.getElementById(hash);
+
+    if (targetElement) {
+      // 1. If the target IS the details component itself
+      if (targetElement.tagName === 'DETAILS') {
+        targetElement.open = true;
+      } 
+
+      // 2. If the target is a PARENT containing a details component (matches your structure)
+      const childDetails = targetElement.querySelector('details.govuk-details');
+      if (childDetails) {
+        childDetails.open = true;
+      }
+
+      // 3. If the target is INSIDE a details component
+      const parentDetails = targetElement.closest('details');
+      if (parentDetails) {
+        parentDetails.open = true;
+      }
+    }
+  }
+});
+
 </script>
 <script type="text/javascript" src="/public/javascripts/processing/v17/filter.js"></script>
 {% endblock %}
