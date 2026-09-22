@@ -1,28 +1,16 @@
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-        {% if data.submitError != null %}
-            <div class="govuk-error-summary" data-module="govuk-error-summary">
-                <div role="alert">
-                    <h2 class="govuk-error-summary__title">
-                    There is a problem
-                    </h2>
-                    <div class="govuk-error-summary__body">
-                    <ul class="govuk-list govuk-error-summary__list">
-                        <li>
-                            <a href="#reply-textarea-{{data.submitError.noteID}}-error">
-                                {% if (data.submitError.type == 'noteTooLong') %}
-                                    Note must be must be 1,500 characters or less
-                                {% elif (data.submitError.type == 'noteMissing') %}
-                                    Enter a note
-                                {% endif %}
-                            </a>
-                        </li>
-                    </ul>
-                    </div>
-                </div>
-            </div>
+        {% if data.claimProcessing == 'true' %}
+            <a href="../claim-process-start-handler" class="govuk-back-link govuk-!-margin-bottom-6">Back to processing claim</a>
+        {% else %}
+            <a href="org-view-main?claimScreen=claim" class="govuk-back-link govuk-!-margin-bottom-6">Back to claim details</a>
         {% endif %}
-        <h1 class="govuk-heading-l">Notes</h1>
+        
+        <h1 class="govuk-heading-l">
+            <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+            Notes
+        </h1>
         <div class="moj-filter-layout">
             <div class="moj-filter-layout__filter">
                 <div class="moj-filter" data-module="moj-filter">
@@ -184,9 +172,9 @@
                             }) }}
                 </div>
                 <div class="note-list">
-                    {% set sortedOrgNotes = data.notes | findOrgNotes(data.orgID) %}
-                    {% if (sortedOrgNotes.length > 0 ) %}
-                        {% for note in sortedOrgNotes%}
+                    {% set sortedClaimNotes = data.notes | findClaimNotes(data.id) %}
+                    {% if (sortedClaimNotes.length > 0 ) %}
+                        {% for note in sortedClaimNotes%}
                             {% include "../notes/note.html" %}
                         {% endfor%}
                     {% else %}
@@ -197,3 +185,4 @@
         </div>
     </div>
 </div>
+

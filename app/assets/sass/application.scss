@@ -1204,8 +1204,14 @@ align-items: baseline;
     width: 1px;
     height: 16px;
     margin: 0 govuk-spacing(2); // 10px spacing
-    background-color: govuk-colour("mid-grey");
+    background-color: var(--govuk-border-colour, #cecece);
   }
+}
+
+.note-reply-container {
+  display: flex;
+  flex-direction: column;
+  gap: govuk-spacing(6);
 }
 
 .moj-filter__tag {

@@ -73,6 +73,7 @@
 
 {% block pageScripts %}
 <script>
+// --- YOUR EXISTING SCRIPT (UNTOUCHED) ---
 const nav = document.getElementById('sideNav');
 const navContent = document.getElementById('moj-side-navigation');
 const navHeader = document.getElementById('side-nav-header');
@@ -81,43 +82,102 @@ const minimiseBtnClose = document.getElementById('minimiseBtnClose');
 
 let expandedHeight = null;
 
-minimiseBtnOpen.addEventListener('click', () => {
-  // Capture the current nav height
-  expandedHeight = nav.offsetHeight + "px";
+if (minimiseBtnOpen) {
+  minimiseBtnOpen.addEventListener('click', () => {
+    expandedHeight = nav.offsetHeight + "px";
+    nav.style.height = expandedHeight;
+    nav.classList.add('minimised');
+    navContent.classList.add('minimised');
+    navHeader.classList.add('minimised');
+    minimiseBtnClose.classList.add('minimised');
+    minimiseBtnOpen.classList.add('minimised');
+  });
+}
 
-  nav.style.height = expandedHeight; // lock height before collapsing
-  nav.classList.add('minimised');
-  navContent.classList.add('minimised');
-  navHeader.classList.add('minimised');
-  minimiseBtnClose.classList.add('minimised');
-  minimiseBtnOpen.classList.add('minimised');
-});
-
-minimiseBtnClose.addEventListener('click', () => {
-  nav.classList.remove('minimised');
-  navContent.classList.remove('minimised');
-  navHeader.classList.remove('minimised');
-  minimiseBtnClose.classList.remove('minimised');
-  minimiseBtnOpen.classList.remove('minimised');
-
-  // Let height be variable again
-  nav.style.height = ""; 
-});
-
+if (minimiseBtnClose) {
+  minimiseBtnClose.addEventListener('click', () => {
+    nav.classList.remove('minimised');
+    navContent.classList.remove('minimised');
+    navHeader.classList.remove('minimised');
+    minimiseBtnClose.classList.remove('minimised');
+    minimiseBtnOpen.classList.remove('minimised');
+    nav.style.height = ""; 
+  });
+}
 
 window.addEventListener('load', () => {
-    // Check if the URL has a hash (like #section3)
     const hash = window.location.hash;
-
     if (hash) {
-      // Find the target element inside the scrollable div
       const target = document.querySelector(hash);
-
       if (target) {
-        // Scroll it into view, but only within the container
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 });
+
+// --- REPLY TO NOTE TOGGLE (ROBUST VERSION) ---
+document.addEventListener('click', function (event) {
+  // 1. Detect Reply Button (by class OR by button text)
+  const btn = event.target.closest('button');
+  const isReplyBtn = btn && (
+    btn.classList.contains('reply-to-note-btn') || 
+    btn.innerText.trim().toLowerCase().includes('reply to note')
+  );
+
+  if (isReplyBtn) {
+    console.log('Reply button clicked!'); // Open browser console (F12) to verify this fires
+
+    // Find closest container or use button's immediate parent
+    const container = btn.closest('.reply-container') || btn.parentElement;
+    const noteElement = btn.closest('[data-note-id]') || btn.closest('[id]');
+    const noteID = noteElement ? (noteElement.dataset.noteID || noteElement.id) : '1';
+
+    // Store original button HTML so cancel can revert to exact original state
+    container.setAttribute('data-original-html', container.innerHTML);
+
+    container.innerHTML = `
+      <form action="../note-reply-handler" method="POST" class="govuk-reply-form govuk-!-margin-top-3">
+        <input type="hidden" name="noteID" value="${noteID}">
+
+        <div class="govuk-form-group govuk-character-count"  data-module="govuk-character-count" data-maxlength="1500">
+          <label class="govuk-label govuk-label--s" for="reply-textarea-${noteID}">
+            What is your note?
+          </label>
+          <textarea class="govuk-textarea govuk-js-character-count"  id="reply-textarea-${noteID}" aria-describedby="reply-textarea-${noteID}-info" name="replyTextarea"  rows="5"></textarea>
+          <div id="reply-textarea-${noteID}-info" class="govuk-hint govuk-character-count__message">
+              You can enter up to 1,500 characters
+          </div>
+        </div>
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Submit reply
+          </button>
+          <a class="govuk-link cancel-reply-link" href="../cancel-reply-handler">Cancel</a>
+        </div>
+      </form>
+    `;
+
+    // 2. INITIALIZE GOV.UK COMPONENTS ON THE NEW ELEMENT
+    const characterCountModule = container.querySelector('[data-module="govuk-character-count"]');
+
+    if (characterCountModule) {
+      // Option A: Prototype Kit v13+ / GOV.UK Frontend v5+ (Modern)
+      if (window.GOVUKFrontend && typeof window.GOVUKFrontend.CharacterCount === 'function') {
+        new window.GOVUKFrontend.CharacterCount(characterCountModule).init();
+      } 
+      // Option B: Prototype Kit v12 / GOV.UK Frontend v4 (Legacy)
+      else if (window.GOVUKFrontend && typeof window.GOVUKFrontend.initAll === 'function') {
+        window.GOVUKFrontend.initAll(container);
+      }
+    }
+
+    const textarea = container.querySelector('textarea');
+    if (textarea) textarea.focus();
+    return;
+  }
+
+});
 </script>
+<script type="text/javascript" src="/public/javascripts/processing/v17/filter.js"></script>
 {% endblock %}

@@ -1,8 +1,12 @@
-<p class="govuk-body">{{note.noteContent}}</p>
-    
-<div class="note-metadata govuk-!-margin-bottom-4">
-    <span class="govuk-body metadata-text">{{note.author}}</span>
-    <span class="govuk-body metadata-text">{{note.roleType | roleType}}</span>
-    <span class="govuk-body metadata-text">{{ note.dateAdded| govukDateTime }}</span>
-    <span class="govuk-body metadata-text">Note ID: {{note.noteID}}</span>
+<div>
+    <p class="govuk-body">{{noteContent.noteContent}}</p>
+        
+    <div class="note-metadata govuk-!-margin-bottom-4">
+        <span class="govuk-body metadata-text">{{noteContent.author}}</span>
+        <span class="govuk-body metadata-text">{{noteContent.roleType | roleType}}</span>
+        <span class="govuk-body metadata-text">{{ noteContent.dateAdded| govukDateTime }}</span>
+        {% if (noteContent.noteID != null) %}
+        <span class="govuk-body metadata-text">Note ID: {{noteContent.noteID}}</span>
+        {% endif %}
+    </div>
 </div>

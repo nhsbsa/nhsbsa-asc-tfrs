@@ -112,6 +112,53 @@ router.post('/reg-outcome-handler', function (req, res) {
   res.redirect('register-organisation/registration-details')
 });
 
+router.post('/note-reply-handler', function (req, res) {
+  const noteID = req.session.data.noteID
+  const replyNote = req.session.data.replyTextarea
+
+  delete req.session.data.submitError
+
+  if (replyNote == "") {
+    req.session.data.submitError = {
+      noteID: noteID,
+      type: "noteMissing"
+    }
+  } else if (replyNote.length > 1400) {
+    req.session.data.submitError = {
+      noteID: noteID,
+      type: "noteTooLong"
+    }
+  } else {
+
+    for (const note of req.session.data.notes) {
+        if (note.noteID == noteID) {
+          reply = {
+                author: "Test user",
+                roleType: req.session.data.userType,
+                dateAdded: new Date(),
+                noteContent: replyNote
+          }
+          note.replies.push(reply)
+        }
+    }
+    delete req.session.data.noteID
+    delete req.session.data.reply_text
+
+  }
+
+  res.redirect('organisation/org-view-main')
+});
+
+router.get('/cancel-reply-handler', function (req, res) {
+
+  delete req.session.data.submitError
+  delete req.session.data.noteID
+  delete req.session.data.replyTextarea
+
+
+  res.redirect('organisation/org-view-main')
+});
+
 router.post('/search-claim-id', function (req, res) {
   delete req.session.data['emptyError'];
   delete req.session.data['invalidIDError'];

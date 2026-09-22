@@ -5,14 +5,14 @@
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
         "author": "John Smith",
-        "roleType": "ccs",
+        "roleType": "ccsAgent",
         "noteCategories": ["CSS referral"],
         "dateAdded": "2026-06-04T14:13:47.938Z",
         "noteContent": "SRO contacted to query rejection. Advised deadline of 3 months but they insist they can still claim. Sent referral to clarify rejection and to make sure there is no procedure left.",
         "replies": [
             {
                 "author": "John Smith",
-                "roleType": "ccs",
+                "roleType": "ccsAgent",
                 "dateAdded": "2026-06-04T15:13:47.938Z",
                 "noteContent": "SRO responded. Not further action needed."
             }
@@ -24,7 +24,7 @@
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
         "author": "Maya Lin",
-        "roleType": "ccs",
+        "roleType": "ccsAgent",
         "noteCategories": ["CSS referral"],
         "dateAdded": "2026-06-03T13:12:47.938Z",
         "noteContent": "Submitter called due to confusion on evidence requested. They advised trainer number is there however assessment disagrees. Sent referral to check evidence and clarify what it is supposed to look like",
@@ -168,8 +168,8 @@
         "orgID": "A02944934",
         "claimID": null,
         "author": "Jasper Reed",
-        "roleType": "ccs",
-        "noteCategories": ["Organisation update", "Organisation communication", "CCS referral"],
+        "roleType": "ccsAgent",
+        "noteCategories": ["Organisation update", "Organisation communication", "ccsAgent referral"],
         "dateAdded": "2026-05-29T10:11:47.938Z",
         "noteContent": "Have emailed the SRO information about making the appointment for the call to change SRO details.",
         "replies": []

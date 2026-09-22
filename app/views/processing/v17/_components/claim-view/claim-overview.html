@@ -18,8 +18,12 @@
 
     {% include "./claim-previous-submissions.html" %}
 
-    {% elif (data.claimScreen == "learnerPreviousSubmissions") %}
+{% elif (data.claimScreen == "learnerPreviousSubmissions") %}
 
     {% include "./learners-previous-submissions.html" %}
+
+{% elif (data.claimScreen == "claimNotes") %}
+
+    {% include "./claim-notes.html" %}
 
 {% endif %}

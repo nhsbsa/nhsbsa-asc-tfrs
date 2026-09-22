@@ -1,4 +1,4 @@
-<div class="internal-note-component govuk-!-margin-top-6">
+<div class="internal-note-component govuk-!-margin-top-6" id="{{note.noteID}}" data-note-id="{{note.noteID}}">
   {% if (note.noteCategories.length > 0 ) %}
     <div class="govuk-tag-group  govuk-!-margin-bottom-7">
       {% for category in note.noteCategories %}
@@ -6,26 +6,66 @@
       {% endfor %}
     </div>
   {% endif %}
+  {% set noteContent = note %}
   {% include "./note-content.html" %}
 
+  {% if (note.replies.length > 0 ) %}
   <div class="internal-note-replies">
     <details class="govuk-details">
       <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
-        Show 1 reply
+        Show {{note.replies.length}} repl{% if (note.replies.length > 1 ) %}ies{% else %}y{% endif %}
         </span>
       </summary>
-        <div class="govuk-details__text">
-          {% include "./note-content.html" %}
+        <div class="govuk-details__text note-reply-container">
+          {% for reply in note.replies %}
+          {% set noteContent = reply %}
+            {% include "./note-content.html" %}
+          {% endfor %}
         </div>
     </details>
   </div>
-  {% from "govuk/components/button/macro.njk" import govukButton %}
-  {{ govukButton({
-    text: "Reply to note",
-    classes: "govuk-button--secondary"
-  }) }}
-  </button>
+  {% endif %}
+  
+  <div class="reply-container">
+    {% if (data.submitError != null and data.submitError.noteID == note.noteID) %}
+      {% set replyContentLabel = "replyTextarea" + note.noteID %}
+      <form action="../note-reply-handler" method="POST" class="govuk-reply-form govuk-!-margin-top-3">
+        <input type="hidden" name="noteID" value="{{note.noteID}}">
+
+        <div class="govuk-form-group govuk-form-group--error govuk-character-count"  data-module="govuk-character-count" data-maxlength="1500">
+          <label class="govuk-label govuk-label--s" for="reply-textarea-{{note.noteID}}">
+            What is your note?
+          </label>
+          <p id="reply-textarea-{{note.noteID}}-error" class="govuk-error-message">
+            {% if (data.submitError.type == 'noteTooLong') %}
+              <span class="govuk-visually-hidden">Error:</span> Note must be must be 1,500 characters or less
+            {% elif (data.submitError.type == 'noteMissing') %}
+              <span class="govuk-visually-hidden">Error:</span> Enter a note
+            {% endif %}
+          </p>
+          <textarea class="govuk-textarea govuk-textarea--error govuk-js-character-count"  id="reply-textarea-{{note.noteID}}" aria-describedby="reply-textarea-{{note.noteID}}-info reply-textarea-{{note.noteID}}-error" name="replyTextarea"  rows="5">{{data[replyContentLabel]}}</textarea>
+          <div id="reply-textarea-{{note.noteID}}-info" class="govuk-hint govuk-character-count__message">
+              You can enter up to 1,500 characters
+          </div>
+        </div>
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Submit reply
+          </button>
+          <a class="govuk-link cancel-reply-link" href="../cancel-reply-handler">Cancel</a>
+        </div>
+      </form>
+    {% else %}
+      <!-- Initial State: Reply Button -->
+      <button type="button" class="govuk-button govuk-button--secondary reply-to-note-btn" data-module="govuk-button">
+        Reply to note
+      </button>
+    {% endif %}
+
+  </div>
+
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 </div>
 
