@@ -3,7 +3,7 @@
         {% include "./note.html" %}
     {% endfor%}
 {% elif data.keywords != null or data.sortByDate != null or data.category != null %}
-    <p class="govuk-body">No notes match your filter</p>
+    <p class="govuk-body">No matches found.</p>
 {% else %}
-    <p class="govuk-body">There are no notes</p>
+    <p class="govuk-body">There are no notes yet.</p>
 {% endif %}
