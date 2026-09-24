@@ -249,9 +249,9 @@ router.get('/api/filter-notes', async function (req, res) {
     }
 
     // 6. Note Type filter
-    /* if (selectedNoteTypes.length > 0) {
-      filteredNotes = filteredNotes.filter(note => selectedNoteTypes.includes(note.type))
-    } */
+    if (selectedNoteTypes.includes("Exclude claim notes")) {
+      filteredNotes = filteredNotes.filter(note => note.claimID == null)
+    }
 
     // 7. Date Sorting
     if (sortByDate === 'Oldest first') {
