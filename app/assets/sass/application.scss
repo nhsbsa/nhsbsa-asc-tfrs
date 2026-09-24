@@ -1190,21 +1190,25 @@ align-items: baseline;
   max-width: 640px;
 }
 
-.metadata-text {
-  font-size: 16px;
-  color: #484949;
-  display: inline-flex;
+.note-metadata {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 0;
+  row-gap: 5px; // 5px padding when metadata content wraps
 
-  // Added & + to target siblings after the first item
-  & + .metadata-text::before {
-    content: "";
-    display: inline-block;
-    width: 1px;
-    height: 16px;
-    margin: 0 govuk-spacing(2); // 10px spacing
-    background-color: var(--govuk-border-colour, #cecece);
+  .metadata-text {
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    color: #484949;
+    margin-bottom: 0;
+
+    // Apply right border to all items except the last child
+    &:not(:last-child) {
+      border-right: 1px solid var(--govuk-border-colour, #cecece);
+      padding-right: govuk-spacing(2); // 10px spacing inside border
+      margin-right: govuk-spacing(2);  // 10px spacing outside border
+    }
   }
 }
 
