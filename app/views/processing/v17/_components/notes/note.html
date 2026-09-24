@@ -2,7 +2,7 @@
   {% if (note.noteCategories.length > 0 ) %}
     <div class="govuk-tag-group  govuk-!-margin-bottom-7">
       {% for category in note.noteCategories %}
-        <strong class="govuk-tag govuk-tag--purple">{{category}}</strong>
+        <strong class="govuk-tag govuk-tag--purple" style="max-width: none;">{{category}}</strong>
       {% endfor %}
     </div>
   {% endif %}

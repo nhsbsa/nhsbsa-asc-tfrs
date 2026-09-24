@@ -118,7 +118,7 @@
         "claimID": "DEU-QBG9-WJ3U-A",
         "author": "Aaron Patel",
         "roleType": "processor",
-        "noteCategories": ["Claim update", "Organisation communication"],
+        "noteCategories": ["Claim update", "Org communication"],
         "dateAdded": "2026-05-29T11:57:47.938Z",
         "noteContent": "Submitter contacted as they do not understand how the documents provided are not sufficient. Advised what was on the note and what to obtain. They still did not understand how that was not enough so I sent referral to processing team to explain why they need more.",
         "replies": []
@@ -130,7 +130,7 @@
         "claimID": "DEU-QBG9-WJ3U-A",
         "author": "Miguel Torres",
         "roleType": "processor",
-        "noteCategories": ["Claim update", "Organisation communication"],
+        "noteCategories": ["Claim update", "Org communication"],
         "dateAdded": "2026-05-28T12:03:47.938Z",
         "noteContent": "Org have paid 60/40 payment plan. Have emailed to inform SRO to inform him he need to provide evidence of the remaining 40% payment plan",
         "replies": []
@@ -169,7 +169,7 @@
         "claimID": null,
         "author": "Jasper Reed",
         "roleType": "ccsAgent",
-        "noteCategories": ["Organisation update", "Organisation communication", "CCS referral"],
+        "noteCategories": ["Org update", "Org communication", "CCS referral"],
         "dateAdded": "2026-05-29T10:11:47.938Z",
         "noteContent": "Have emailed the SRO information about making the appointment for the call to change SRO details.",
         "replies": []
@@ -181,7 +181,7 @@
         "claimID": null,
         "author": "Michael Macleod",
         "roleType": "processor",
-        "noteCategories": ["Organisation update", "Escalation"],
+        "noteCategories": ["Org update", "Escalation"],
         "dateAdded": "2026-05-29T09:23:47.938Z",
         "noteContent": "All claims rejected and fraud template sent.",
         "replies": []
@@ -193,7 +193,7 @@
         "claimID": null,
         "author": "Gillian Carpenter",
         "roleType": "processor",
-        "noteCategories": ["Organisation update", "Organisation communication"],
+        "noteCategories": ["Org update", "Org communication"],
         "dateAdded": "2026-05-27T15:20:47.938Z",
         "noteContent": "We received a call referral from them asking when their claims would be dealt with. I have emailed them saying that all claims will be processed shortly.",
         "replies": []
@@ -205,7 +205,7 @@
         "claimID": null,
         "author": "Grace O'Connor",
         "roleType": "processor",
-        "noteCategories": ["Organisation update", "Organisation communication"],
+        "noteCategories": ["Org update", "Org communication"],
         "dateAdded": "2026-05-26T10:28:47.938Z",
         "noteContent": "Have emailed SRO advising them to make sure their work place data set with Skills for Care is over 90% complete. This ensures they are able to submit claims.",
         "replies": []
@@ -217,7 +217,7 @@
         "claimID": null,
         "author": "Jamie Davies",
         "roleType": "processor",
-        "noteCategories": ["Organisation update", "Organisation communication"],
+        "noteCategories": ["Org update", "Org communication"],
         "dateAdded": "2026-05-26T10:28:47.938Z",
         "noteContent": "Rejected all claims with email note template.",
         "replies": [
