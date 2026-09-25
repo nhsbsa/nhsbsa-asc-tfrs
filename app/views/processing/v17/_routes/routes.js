@@ -238,13 +238,13 @@ router.get('/api/filter-notes', async function (req, res) {
       )
     }
 
-    // 5. Category filter - includes note if AT LEAST ONE checked category is in note.noteCategories
+    // 5. Category filter - includes note if ALL checked categories are in note.noteCategories
     if (selectedCategories.length > 0) {
       filteredNotes = filteredNotes.filter(note => {
         if (!Array.isArray(note.noteCategories)) return false
         
-        // Returns true if there is any overlap between selected categories and the note's categories
-        return selectedCategories.some(cat => note.noteCategories.includes(cat))
+        // Returns true if ALL selected categories are present in the note's categories
+        return selectedCategories.every(cat => note.noteCategories.includes(cat))
       })
     }
 
