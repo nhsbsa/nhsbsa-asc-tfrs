@@ -8,8 +8,8 @@ Add a note — {{data.processingServiceName}}
 {% if data.noteSubmitError != null %}
     {% if data.noteSubmitError.noteContent != "valid" %}
         {% if (data.noteSubmitError.noteContent == 'missing') %}
-            {% set noteContentErrorMessage = { text: "Enter a note" } %}
-            {% set noteContentErrorSummary = "Enter a note" %}
+            {% set noteContentErrorMessage = { text: "Enter note" } %}
+            {% set noteContentErrorSummary = "Enter note" %}
         {% elif (data.noteSubmitError.noteContent == 'tooLong') %}
             {% set noteContentErrorMessage = { text:  "Note must be 1,500 characters or less" } %}
             {% set noteContentErrorSummary = "Note must be 1,500 characters or less" %}

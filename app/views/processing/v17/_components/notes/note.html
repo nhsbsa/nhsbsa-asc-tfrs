@@ -34,13 +34,13 @@
 
         <div class="govuk-form-group govuk-form-group--error govuk-character-count"  data-module="govuk-character-count" data-maxlength="1500">
           <label class="govuk-label govuk-label--s" for="reply-textarea-{{note.noteID}}">
-            Type your note reply
+            Type your reply
           </label>
           <p id="reply-textarea-{{note.noteID}}-error" class="govuk-error-message">
             {% if (data.submitError.type == 'noteTooLong') %}
               <span class="govuk-visually-hidden">Error:</span> Note must be 1,500 characters or less
             {% elif (data.submitError.type == 'noteMissing') %}
-              <span class="govuk-visually-hidden">Error:</span> Enter a note
+              <span class="govuk-visually-hidden">Error:</span> Enter reply
             {% endif %}
           </p>
           <textarea class="govuk-textarea govuk-textarea--error govuk-js-character-count"  id="reply-textarea-{{note.noteID}}" aria-describedby="reply-textarea-{{note.noteID}}-info reply-textarea-{{note.noteID}}-error" name="replyTextarea"  rows="5">{{data.replyTextarea}}</textarea>
