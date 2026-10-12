@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, getMostRelevantSubmission, getDraftSubmission } = require('../_helpers/helpers.js');
+const { loadData, loadUserData, loadScenarioData, getMostRelevantSubmission, getDraftSubmission } = require('../_helpers/helpers.js');
 
 
 router.get('/before-you-start', function (req, res) {
@@ -13,8 +13,84 @@ router.get('/before-you-start', function (req, res) {
         journey: "signin"
     };
 
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
     // Redirect to the page you want to screenshot
-    res.redirect('../before-you-start');
+    res.redirect('../claim-for-adult-social-care-learning-and-development');
+});
+
+router.get('/account-question', function (req, res) {
+    const error = req.session.data.error
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error== "true") {
+        req.session.data.missingOption = true
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../authentication/what-do-you-want-to-do');
+});
+
+router.get('/account-details', function (req, res) {
+    const error = req.session.data.error
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error== "missing") {
+        req.session.data.givenName = "",
+        req.session.data.familyName= "",
+        req.session.data.email= "",
+        req.session.data.phone= "",
+        req.session.data.submitError= {
+            familyName: "missing",
+            givenName: "missing",
+            email: "missing",
+            phone: "missing",
+            userValid: false
+        }
+    } else if (error== "invalid") {
+        req.session.data.givenName = "John",
+        req.session.data.familyName= "Smith",
+        req.session.data.email= "john.smithfakecarehome.com",
+        req.session.data.phone= "7823598235905038",
+        req.session.data.submitError= {
+            familyName: "valid",
+            givenName: "valid",
+            email: "invalid",
+            phone: "invalid",
+            userValid: false
+        }
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../authentication/account-details');
+});
+
+router.get('/existing-account', function (req, res) {
+    delete req.session.data
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../authentication/existing-account');
 });
 
 router.get('/sign-in', function (req, res) {
@@ -24,6 +100,9 @@ router.get('/sign-in', function (req, res) {
         userType: "signatory",
         journey: "signin"
     };
+
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
 
     // Redirect to the page you want to screenshot
     res.redirect('../authentication/sign-in');
@@ -37,6 +116,9 @@ router.get('/account-creation-incomplete', function (req, res) {
         journey: "signin"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
+
     // Redirect to the page you want to screenshot
     res.redirect('../authentication/account-creation-incomplete');
 });
@@ -48,6 +130,27 @@ router.get('/mfa-code', function (req, res) {
         userType: "signatory",
         journey: "signin"
     };
+
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../authentication/mfa-code');
+});
+
+router.get('/my-account', function (req, res) {
+    const scenario = req.session.data.scenario
+    
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims',
+        userType: "signatory",
+        journey: "signin"
+    };
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
 
     // Redirect to the page you want to screenshot
     res.redirect('../authentication/mfa-code');
@@ -80,6 +183,8 @@ router.get('/sign-new-gdl', function (req, res) {
         req.session.data.declarationSubmitError = "true"
     }
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, org)
 
     // Redirect to the page you want to screenshot
@@ -97,6 +202,8 @@ router.get('/org-details', function (req, res) {
         tabLocation: "orgDetails"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "B13299931")
 
     // Redirect to the page you want to screenshot
@@ -110,7 +217,9 @@ router.get('/contact-us', function (req, res) {
         userType: "signatory",
         journey: "signin"
     };
-
+    
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "B13299931")
 
     // Redirect to the page you want to screenshot
@@ -125,10 +234,28 @@ router.get('/terms-of-use', function (req, res) {
         journey: "signin"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "B13299931")
 
     // Redirect to the page you want to screenshot
-    res.redirect('../terms-of-use');
+    res.redirect('../support-pages/terms-of-use');
+});
+
+router.get('/accessibility', function (req, res) {
+  delete req.session.data
+    req.session.data = {
+        area: 'Claims',
+        userType: "signatory",
+        journey: "signin"
+    };
+
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadData(req, "B13299931")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../support-pages/accessibility-statement');
 });
 
 router.get('/email', function (req, res) {
@@ -170,6 +297,8 @@ router.get('/email', function (req, res) {
         break;
     }
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, orgID)
 
     // Redirect to the page you want to screenshot
@@ -184,6 +313,8 @@ router.get('/email-expiry', function (req, res) {
         journey: "creation"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "B13299931")
 
     // Redirect to the page you want to screenshot
@@ -191,381 +322,96 @@ router.get('/email-expiry', function (req, res) {
 });
 
 router.get('/authentication-verify-details', function (req, res) {
-    let orgID = null
-    let userType = null
-    const scenario = req.session.data.scenario
-    if (scenario == "5") {
-        userType = "submitter"
-    } else {
-        userType = "signatory"
-    }
+    const userType = req.session.data.userType
 
-  delete req.session.data
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
-        journey: "creation"
+        journey: "creation",
+        orgID: "E76904778"
     };
 
-    switch (scenario) {
-        case "1":
-        orgID = "E76904778";
-        break;
-
-        case "2":
-        orgID = "F15904728";
-        break;
-
-        case "3":
-        orgID = "F84625987";
-        break;
-
-        case "4":
-        orgID = "B52698456";
-        break;
-
-        case "5":
-        orgID = "B52698456";
-        break;
-    }
-
-    loadData(req, orgID)
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadData(req, "E76904778")
 
     // Redirect to the page you want to screenshot
     res.redirect('../authentication/verify-details');
 });
 
 router.get('/sign-in', function (req, res) {
-    let orgID = null
-    let userType = null
-    const scenario = req.session.data.scenario
-    if (scenario == "5") {
-        userType = "submitter"
-    } else {
-        userType = "signatory"
-    }
 
-  delete req.session.data
+    const userType = req.session.data.userType
+
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
-        journey: "creation"
+        journey: "creation",
+        orgID: "E76904778"
     };
 
-    switch (scenario) {
-        case "1":
-        orgID = "E76904778";
-        break;
-
-        case "2":
-        orgID = "F15904728";
-        break;
-
-        case "3":
-        orgID = "F84625987";
-        break;
-
-        case "4":
-        orgID = "B52698456";
-        break;
-
-        case "5":
-        orgID = "B52698456";
-        break;
-    }
-
-    loadData(req, orgID)
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadData(req, "E76904778")
 
     // Redirect to the page you want to screenshot
     res.redirect('../authentication/sign-in');
 });
 
 router.get('/mfa', function (req, res) {
-    let orgID = null
-    let userType = null
-    const scenario = req.session.data.scenario
-    if (scenario == "5") {
-        userType = "submitter"
-    } else {
-        userType = "signatory"
-    }
 
-  delete req.session.data
+    const userType = req.session.data.userType
+
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
-        journey: "creation"
+        journey: "creation",
+        orgID: "E76904778"
     };
 
-    switch (scenario) {
-        case "1":
-        orgID = "E76904778";
-        break;
-
-        case "2":
-        orgID = "F15904728";
-        break;
-
-        case "3":
-        orgID = "F84625987";
-        break;
-
-        case "4":
-        orgID = "B52698456";
-        break;
-
-        case "5":
-        orgID = "B52698456";
-        break;
-    }
-
-    loadData(req, orgID)
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadData(req, "E76904778")
 
     // Redirect to the page you want to screenshot
     res.redirect('../authentication/mfa');
 });
 
 router.get('/mfa-code', function (req, res) {
-    let orgID = null
-    let userType = null
-    const scenario = req.session.data.scenario
-    if (scenario == "5") {
-        userType = "submitter"
-    } else {
-        userType = "signatory"
-    }
 
-  delete req.session.data
+    const userType = req.session.data.userType
+
+    delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType,
-        journey: "creation"
+        journey: "creation",
+        orgID: "E76904778"
     };
 
-    switch (scenario) {
-        case "1":
-        orgID = "E76904778";
-        break;
-
-        case "2":
-        orgID = "F15904728";
-        break;
-
-        case "3":
-        orgID = "F84625987";
-        break;
-
-        case "4":
-        orgID = "B52698456";
-        break;
-
-        case "5":
-        orgID = "B52698456";
-        break;
-    }
-
-    loadData(req, orgID)
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadData(req, "E76904778")
 
     // Redirect to the page you want to screenshot
     res.redirect('../authentication/mfa-code');
 });
 
-router.get('/registration-verify-details', function (req, res) {
-    let orgID = null
-    const scenario = req.session.data.scenario
-
-    const error = req.session.data.error
-
-  delete req.session.data
-    req.session.data = {
-        area: 'Claims',
-        userType: 'signatory',
-        journey: "creation"
-    };
-
-    switch (scenario) {
-        case "1":
-        orgID = "E76904778";
-        break;
-
-        case "2":
-        orgID = "F15904728";
-        break;
-
-        case "3":
-        orgID = "F84625987";
-        break;
-
-        case "4":
-        orgID = "B52698456";
-        break;
-    }
-
-    loadData(req, orgID)
-
-    if ( error == "true") {
-        req.session.data.submitError = "true"
-    }
-
-    // Redirect to the page you want to screenshot
-    res.redirect('../account-setup/verify-details');
-});
-
-router.get('/registration-account-issue', function (req, res) {
-    delete req.session.data
-    req.session.data = {
-        area: 'Claims',
-        userType: "signatory",
-        journey: "creation"
-    };
-
-    // Redirect to the page you want to screenshot
-    res.redirect('../account-setup/account-issue');
-});
-
-router.get('/registration-job-title', function (req, res) {
-    let orgID = null
-    const scenario = req.session.data.scenario
-
-    const error = req.session.data.error
-
-  delete req.session.data
-    req.session.data = {
-        area: 'Claims',
-        userType: 'signatory',
-        journey: "creation"
-    };
-
-    switch (scenario) {
-        case "1":
-        orgID = "E76904778";
-        break;
-
-        case "2":
-        orgID = "F15904728";
-        break;
-
-        case "3":
-        orgID = "F84625987";
-        break;
-
-        case "4":
-        orgID = "B52698456";
-        break;
-    }
-
-    loadData(req, orgID)
-
-    if ( error == "jobTitleEmptyError") {
-        req.session.data.jobTitleEmptyError = "true"
-    } else if ( error == "jobTitleInvalid") {
-        req.session.data.jobTitleInvalid = "true"
-        req.session.data.jobTitle = "%%%"
-    }
-
-    // Redirect to the page you want to screenshot
-    res.redirect('../account-setup/job-title');
-});
-
-router.get('/registration-sign-gdl', function (req, res) {
-    let orgID = null
-    const scenario = req.session.data.scenario
-
-    const error = req.session.data.error
-
-  delete req.session.data
-    req.session.data = {
-        area: 'Claims',
-        userType: 'signatory',
-        journey: "creation"
-    };
-
-    switch (scenario) {
-        case "1":
-        orgID = "E76904778";
-        break;
-
-        case "2":
-        orgID = "F15904728";
-        break;
-
-        case "3":
-        orgID = "F84625987";
-        break;
-
-        case "4":
-        orgID = "B52698456";
-        break;
-    }
-
-    loadData(req, orgID)
-
-    if ( error == "true") {
-        req.session.data.declarationSubmitError = "true"
-    }
-
-    // Redirect to the page you want to screenshot
-    res.redirect('../account-setup/declaration');
-});
-
-router.get('/registration-bank-details-choice', function (req, res) {
-    let orgID = null
-    const scenario = req.session.data.scenario
-
-    const error = req.session.data.error
-
-  delete req.session.data
-    req.session.data = {
-        area: 'Claims',
-        userType: 'signatory',
-        journey: "creation"
-    };
-
-    switch (scenario) {
-        case "1":
-        orgID = "E76904778";
-        break;
-
-        case "2":
-        orgID = "F15904728";
-        break;
-
-        case "3":
-        orgID = "F84625987";
-        break;
-    }
-
-    loadData(req, orgID)
-
-    if ( error == "true") {
-        req.session.data.submitError = "true"
-    }
-
-    // Redirect to the page you want to screenshot
-    res.redirect('../account-setup/bank-details-question');
-});
-
 router.get('/registration-bank-details', function (req, res) {
-    let orgID = null
-    let journey = null
-    const scenario = req.session.data.scenario
 
     const error = req.session.data.error
 
-    const registered = req.session.data.registered
-
-    if (registered == "true") {
-        journey = "signin"
-    } else {
-        journey = "creation"
-    }
 
   delete req.session.data
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
-        journey,
+        journey: "creation",
         tabLocation: "bankDetails",
+        orgID: "E76904778",
         user: {
             givenName: "Roy",
             familyName: "Hub",
@@ -573,21 +419,9 @@ router.get('/registration-bank-details', function (req, res) {
         }
     };
 
-    switch (scenario) {
-        case "1":
-        orgID = "E76904778";
-        break;
-
-        case "2":
-        orgID = "F15904728";
-        break;
-
-        case "3":
-        orgID = "F84625987";
-        break;
-    }
-
-    loadData(req, orgID)
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadData(req, "E76904778")
 
     if ( error == "missing") {
         req.session.data.submitError = {
@@ -595,6 +429,7 @@ router.get('/registration-bank-details', function (req, res) {
             sortCode: "missing",
             accountNumber: "missing",
             buildingSociety: "valid",
+            api: "valid",
             bankDetailsValid: false
         }
     } else if ( error == "invalid") {
@@ -603,6 +438,7 @@ router.get('/registration-bank-details', function (req, res) {
             sortCode: "invalid",
             accountNumber: "invalid",
             buildingSociety: "invalid",
+            api: "valid",
             bankDetailsValid: false
         }
         req.session.data.nameOnTheAccount = "John Smith",
@@ -615,12 +451,25 @@ router.get('/registration-bank-details', function (req, res) {
             sortCode: "lengthIssue",
             accountNumber: "lengthIssue",
             buildingSociety: "lengthIssue",
+            api: "valid",
             bankDetailsValid: false
         }
         req.session.data.nameOnTheAccount = "John Smith",
         req.session.data.sortCode = "1234567",
         req.session.data.accountNumber = "123456789",
         req.session.data.rollNumber = "12345678901234567890"
+    } else if ( error == "api") {
+        req.session.data.submitError = {
+            accountName: "valid",
+            sortCode: "valid",
+            accountNumber: "valid",
+            buildingSociety: "valid",
+            api: "invalid",
+            bankDetailsValid: false
+        }
+        req.session.data.nameOnTheAccount = "John Smith",
+        req.session.data.sortCode = "123456",
+        req.session.data.accountNumber = "12345678"
     }
 
     // Redirect to the page you want to screenshot
@@ -664,6 +513,8 @@ router.get('/view-bank-details', function (req, res) {
         break;
     }
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, orgID)
 
     if ( confirmation == "true") {
@@ -702,15 +553,17 @@ router.get('/manage-submitters', function (req, res) {
         break;
     }
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, orgID)
 
     if ( resend == "success") {
         req.session.data.invite = "success"
-        req.session.data.resendList = ["zane.montgomery@teatree.com"]
+        req.session.data.resendList = ["zane.montgomery@caregroup.com"]
         req.session.data.matchResendUser = {
             givenName: "Zane",
             familyName: "Montgomery",
-            email: "zane.montgomery@teatree.com",
+            email: "zane.montgomery@caregroup.com",
             status: "invited"
         }
     } else if (resend == "fail") {
@@ -718,7 +571,7 @@ router.get('/manage-submitters', function (req, res) {
         req.session.data.matchResendUser = {
             givenName: "Zane",
             familyName: "Montgomery",
-            email: "zane.montgomery@teatree.com",
+            email: "zane.montgomery@caregroup.com",
             status: "invited"
         }
     }
@@ -729,7 +582,7 @@ router.get('/manage-submitters', function (req, res) {
         req.session.data.matchDeletedUser = {
             givenName: "John",
             familyName: "Smith",
-            email: "john.smith@teatree.com",
+            email: "john.smith@caregroup.com",
             status: "inactive"
         }
     } else if (deleteType == "registered") {
@@ -738,7 +591,7 @@ router.get('/manage-submitters', function (req, res) {
         req.session.data.matchDeletedUser = {
             givenName: "John",
             familyName: "Smith",
-            email: "john.smith@teatree.com",
+            email: "john.smith@caregroup.com",
             status: "inactive"
         }
     }
@@ -759,6 +612,8 @@ router.get('/new-submitter-details', function (req, res) {
 
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "B13299931")
 
     if ( error == "missing") {
@@ -787,8 +642,11 @@ router.get('/new-submitter-details', function (req, res) {
         }
         req.session.data.familyName = "Montgomery",
         req.session.data.givenName = "Zane",
-        req.session.data.email = "zane.montgomery@teatree.com"
+        req.session.data.email = "zane.montgomery@caregroup.com"
     }
+
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
 
     // Redirect to the page you want to screenshot
     res.redirect('../org-admin/user-details');
@@ -809,6 +667,8 @@ router.get('/check-submitter-details', function (req, res) {
 
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "B13299931")
 
     if ( error == "missing") {
@@ -833,12 +693,14 @@ router.get('/delete-submitters', function (req, res) {
         tabLocation: "users",
     };
 
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "B13299931")
 
     if (scenario == "registered") {
-        req.session.data.deletedEmail = "oliver.grey@teatree.com"
+        req.session.data.deletedEmail = "lionel.lowe@caregroup.co.uk"
     } else if (scenario == "invited") {
-        req.session.data.deletedEmail = "zane.montgomery@teatree.com"
+        req.session.data.deletedEmail = "zane.montgomery@caregroup.com"
     }
 
     if (error == "true") {
@@ -851,6 +713,7 @@ router.get('/delete-submitters', function (req, res) {
 
 router.get('/manage-claims', function (req, res) {
     let orgID = null
+    let email = null
     const scenario = req.session.data.scenario
     const userType = req.session.data.userType
     const error = req.session.data.error
@@ -866,25 +729,42 @@ router.get('/manage-claims', function (req, res) {
     switch (scenario) {
         case "1":
         orgID = "A02944934";
+        email = "roy.hub@caregroup.co.uk";
         break;
 
         case "2":
         orgID = "G91774723";
+        email = "roy.hub@caregroup.co.uk";
         break;
 
         case "3":
         orgID = "F87223491";
+        email = "roy.hub@caregroup.co.uk";
         break;
 
         case "4":
         orgID = "G91371231";
+        email = "roy.hub@caregroup.co.uk";
         break;
 
         case "5":
         orgID = "C63281491";
+        email = "roy.hub@caregroup.co.uk";
+        break;
+
+        case "6":
+        orgID = "H26749203";
+        email = "hamish.settle@caregroup.com";
+        break;
+
+        case "7":
+        orgID = "F84625987";
+        email = "hamish.settle@caregroup.com";
         break;
     }
 
+    loadScenarioData(req)
+    loadUserData(req, email)
     loadData(req, orgID)
 
     if (error == "missing") {
@@ -913,6 +793,8 @@ router.get('/advanced-search', function (req, res) {
         tabLocation: "claims",
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if (results == "yes") {
@@ -968,6 +850,8 @@ router.get('/manage-claims-status', function (req, res) {
         break;
     }
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, orgID)
 
     if (deleteClaim == "true") {
@@ -1194,6 +1078,8 @@ router.get('/claim', function (req, res) {
 
     req.session.data.id = id
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if (error == "missing1") {
@@ -1372,6 +1258,8 @@ router.get('/delete-claim', function (req, res) {
 
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if ( error == "fail") {
@@ -1395,6 +1283,8 @@ router.get('/select-training', function (req, res) {
         tabLocation: "claims"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if (results == "yes") {
@@ -1427,13 +1317,19 @@ router.get('/funding-model-choice', function (req, res) {
         area: 'Claims',
         userType: "signatory",
         journey: "signin",
-        tabLocation: "claims"
+        tabLocation: "claims",
+        trainingSelection: "601/7262/9",
+        viewOnly: "false"
     };
+
+    req.session.data["training-input"] = "manage"
 
     if ( error == "true") {
         req.session.data.submitError = "true"
     }
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "F87223491")
 
     // Redirect to the page you want to screenshot
@@ -1454,6 +1350,8 @@ router.get('/select-learner', function (req, res) {
         id: "Z76-PS55-Q2K7-A"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if (results == "yes") {
@@ -1485,6 +1383,8 @@ router.get('/add-another-learner', function (req, res) {
         id: "4RE-EHMM-1W4J-A"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if (error == "true") {
@@ -1508,6 +1408,8 @@ router.get('/add-new-learner', function (req, res) {
         inClaim: "true"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if (error == "missing") {
@@ -1552,6 +1454,8 @@ router.get('/duplicate-learner', function (req, res) {
         jobTitle: "Senior Caregiver"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
@@ -1570,6 +1474,8 @@ router.get('/start-date', function (req, res) {
         id: "5S9-K4V3-KS56-B"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if ( error == "missing") {
@@ -1632,6 +1538,8 @@ router.get('/payment-date', function (req, res) {
 
     req.session.data.id = id
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if (error == "missing") {
@@ -1718,6 +1626,8 @@ router.get('/completion-date', function (req, res) {
     }
 
     req.session.data.id = id
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if ( error == "missing") {
@@ -1772,6 +1682,8 @@ router.get('/evidence', function (req, res) {
         type
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if ( error == "missing") {
@@ -1813,6 +1725,8 @@ router.get('/evidence-edit', function (req, res) {
         type
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if ( error == "missing") {
@@ -1843,6 +1757,8 @@ router.get('/declaration', function (req, res) {
         
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if (status == "not-yet-submitted") {
@@ -1872,6 +1788,8 @@ router.get('/confirmation', function (req, res) {
         id: "7JP-X9LK-1QXE-A"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
@@ -1888,6 +1806,8 @@ router.get('/help-new-claim', function (req, res) {
         tabLocation: "claims"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
@@ -1904,6 +1824,8 @@ router.get('/help-evidence', function (req, res) {
         tabLocation: "claims"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
@@ -1920,6 +1842,8 @@ router.get('/help-reimbursement-amounts', function (req, res) {
         tabLocation: "claims"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
@@ -1934,11 +1858,79 @@ router.get('/duplicate-claim', function (req, res) {
         userType: 'signatory',
         journey: 'signin',
         tabLocation: "claims",
-        id: 'GE2-UA5D-4K6C-A',
-        dupeID: 'HMJ-74V3-T8V5-A',
-        matchType: '100'
+        id: "JD3-HDT3-JDK2-A",
+        matchingIDs: [
+            {
+                slotID: 1,
+                learnerID: "KQ 01 7F 72 D",
+                learnerChanged: null,
+                completionDate: "2025-11-23T07:19:31.596Z",
+                evidenceOfCompletion: "certificate-212.pdf",
+                evidenceOfCompletionReview: {
+                outcome: null,
+                note: null
+                }
+            },
+            {
+                slotID: 2,
+                learnerID: "GR 03 6F 10 P",
+                learnerChanged: null,
+                completionDate: "2025-11-16T07:19:31.596Z",
+                evidenceOfCompletion: "certificate-212.pdf",
+                evidenceOfCompletionReview: {
+                outcome: null,
+                note: null
+                }
+            },
+            {
+                slotID: 4,
+                learnerID: "FI 50 5F 30 D",
+                learnerChanged: null,
+                completionDate: "2025-11-16T07:19:31.596Z",
+                evidenceOfCompletion: "certificate-212.pdf",
+                evidenceOfCompletionReview: {
+                outcome: null,
+                note: null
+                }
+            },
+            {
+                slotID: 6,
+                learnerID: "QB 54 8F 21 X",
+                learnerChanged: null,
+                completionDate: "2025-11-20T07:19:31.596Z",
+                evidenceOfCompletion: "certificate-212.pdf",
+                evidenceOfCompletionReview: {
+                outcome: null,
+                note: null
+                }
+            },
+            {
+                slotID: 3,
+                learnerID: "FS 47 4F 68 U",
+                learnerChanged: null,
+                completionDate: "2025-11-17T07:19:31.596Z",
+                evidenceOfCompletion: "certificate-212.pdf",
+                evidenceOfCompletionReview: {
+                outcome: null,
+                note: null
+                }
+            },
+            {
+                slotID: 5,
+                learnerID: "WV 15 0F 13 V",
+                learnerChanged: null,
+                completionDate: "2025-11-16T07:19:31.596Z",
+                evidenceOfCompletion: "certificate-212.pdf",
+                evidenceOfCompletionReview: {
+                outcome: null,
+                note: null
+                }
+            }
+        ]
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
@@ -1956,6 +1948,8 @@ router.get('/asc-wds-check', function (req, res) {
         id: '7JP-X9LK-1QXE-A'
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
@@ -1974,6 +1968,8 @@ router.get('/missing-GDL', function (req, res) {
         id: 'G5W-W3VK-BLA1-A'
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "F87223491")
 
     // Redirect to the page you want to screenshot
@@ -1994,6 +1990,8 @@ router.get('/help-ommt', function (req, res) {
         req.session.data.tabLocation = "claims"
     }
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
@@ -2011,6 +2009,9 @@ router.get('/missing-bank-details', function (req, res) {
         tabLocation: "claims",
         id: 'G5W-W3VK-BLA1-A'
     };
+
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "F87223491")
 
     // Redirect to the page you want to screenshot
@@ -2028,6 +2029,8 @@ router.get('/not-yet-verified-bank-details', function (req, res) {
         tabLocation: "claims",
         id: 'G5W-W3VK-BLA1-A'
     };
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "F87223491")
 
     // Redirect to the page you want to screenshot
@@ -2045,6 +2048,8 @@ router.get('/rejected-bank-details', function (req, res) {
         tabLocation: "claims",
         id: 'G5W-W3VK-BLA1-A'
     };
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "F87223491")
 
     // Redirect to the page you want to screenshot
@@ -2112,6 +2117,8 @@ router.get('/claim-history', function (req, res) {
 
     req.session.data.id = id
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
@@ -2162,6 +2169,8 @@ router.get('/claim-history-note', function (req, res) {
             break;
     }
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
@@ -2190,7 +2199,7 @@ router.get('/manage-learners', function (req, res) {
             id = "7JP-X9LK-1QXE-A"
             break;
         case "queried":
-            id = "HZE-PYRI-EN4T-A"
+            id = "1IT-6S33-FB36-A"
             break;
         case "submitted":
             id = "LE5-VQJS-FPSB-A"
@@ -2206,6 +2215,8 @@ router.get('/manage-learners', function (req, res) {
 
 
     req.session.data.id = id
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if (status == "not-yet-submitted" && ((tab == "todo" && learners == "full") || (tab == "done" && learners == "empty"))) {
@@ -2338,6 +2349,8 @@ router.get('/remove-learner-confirmation', function (req, res) {
         learner: "AJ 54 4F 01 I"
     };
 
+    loadScenarioData(req)
+loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     res.redirect('../claim/remove-learner-confirmation');
