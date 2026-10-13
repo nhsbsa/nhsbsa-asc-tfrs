@@ -42,12 +42,6 @@
                 "regRef": "R-2N8E-6R",
                 "userType": "signatory",
                 "jobTitle": "Senior manager"
-            },
-            {
-                "workplaceID": "G91774723",
-                "regRef": "R-7D4C-1A",
-                "userType": "signatory",
-                "jobTitle": "Senior manager"
             }
         ]
     },
@@ -56,7 +50,7 @@
         "givenName": "Cynthia",
         "familyName": "Bartoletti",
         "email": "cynthia.bartoletti@caregroup.com",
-        "phoneNumber": "01234567890",
+        "phoneNumber": null,
         "description": "Cynthia is a user of one organisations that is currently active and she is the SRO. She is a user of the following organsiation:",
         "organisations": [
             {
@@ -260,6 +254,22 @@
                 "workplaceID": "D76397203",
                 "regRef": "R-3M7T-9B",
                 "userType": "submitter",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "postlogin",
+        "givenName": "John",
+        "familyName": "Prism",
+        "email": "john.prism@caregroup.com",
+        "phoneNumber": "01234567890",
+        "description": "",
+        "organisations": [
+            {
+                "workplaceID": "A02944934",
+                "regRef": "R-8K2M-9P",
+                "userType": "signatory",
                 "jobTitle": "Senior manager"
             }
         ]

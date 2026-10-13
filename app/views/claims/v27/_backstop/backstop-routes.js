@@ -140,20 +140,592 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
 
 router.get('/my-account', function (req, res) {
     const scenario = req.session.data.scenario
+    const banner = req.session.data.banner
+    let email = null
     
     delete req.session.data
 
+    switch (scenario) {
+        case "1":
+            email = "mira.caldwell@caregroup.com";
+            break;
+        case "2":
+            email = "valerie.altenwerth@caregroup.com";
+            break;
+        case "3":
+            email = "john.prism@caregroup.com";
+            break;
+        case "4":
+            email = "roy.hub@caregroup.co.uk";
+            break;
+        case "5":
+            email = "hamish.settle@caregroup.com";
+            break;
+        case "6":
+            email = "cynthia.bartoletti@caregroup.com";
+            break;
+        case "7":
+            email = "mark.jacobs@caregroup.com";
+            break;
+    }
+
     req.session.data = {
-        area: 'Claims',
-        userType: "signatory",
-        journey: "signin"
+        area: 'Claims'
+    };
+
+    if (banner == "saved") {
+        req.session.data.banner = {
+            action: "saveSuccess",
+            orgName: "Kukri Care home",
+            regRef: "R-8K0C-X5"
+            }
+    } else if (banner == "delete") {
+        req.session.data.banner = {
+            action: "deleteSuccess",
+            orgName: "Juniper Care home",
+            regRef: "R-175D-3H"
+            }
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, email)
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../manage-organisations');
+});
+
+router.get('/before-you-start-registration', function (req, res) {
+    delete req.session.data
+    req.session.data = {
+        area: 'Claims'
     };
 
     loadScenarioData(req)
     loadUserData(req, "roy.hub@caregroup.co.uk")
 
     // Redirect to the page you want to screenshot
-    res.redirect('../authentication/mfa-code');
+    res.redirect('../registration/before-you-start');
+});
+
+router.get('/org-name', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.orgNameEmptyError = true
+    }
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/org-name');
+});
+
+router.get('/sro-confirmation', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims',
+        orgName: "Kukri Care home"
+    };
+
+    if (error == "missing") {
+        req.session.data.submitError = true
+    }
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/SRO-confirmation');
+});
+
+router.get('/not-sro', function (req, res) {
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims',
+        orgName: "Kukri Care home"
+    };
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/not-SRO');
+});
+
+router.get('/job-title', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.jobTitleEmptyError = true
+    }
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/job-title');
+});
+
+router.get('/org-address', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.submitError = {
+            addressLine1: "missing",
+            town: "missing",
+            postcode: "missing",
+            addressValid: false
+        }
+    } else if (error == "invalid") {
+        req.session.data.addressLine1 = "4 Street"
+        req.session.data.addressLine2 = ""
+        req.session.data.addressLine3 = ""
+        req.session.data.addressTown = "Town"
+        req.session.data.addressCounty = ""
+        req.session.data.addressPostcode = "Not a postcode"
+        req.session.data.submitError = {
+            addressLine1: "valid",
+            town: "valid",
+            postcode: "invalid",
+            addressValid: false
+        }
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/org-address');
+});
+
+router.get('/org-address-proof', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.submitError = {
+            first: {
+                type: "missing",
+                file: "errorFileMissing"
+            },
+            second: {
+                type: "missing",
+                file: "errorFileMissing"
+            },
+            evidenceValid: false
+        }
+    } else if (error == "errorFileTooBig") {
+        req.session.data.firstType = "businessratesbill"
+        req.session.data.secondType = "utilitybill"
+        req.session.data.firstEvidenceFile = "file1.pdf",
+        req.session.data.secondEvidenceFile = "file2.pdf",
+        req.session.data.submitError = {
+            first: {
+                type: "valid",
+                file: "errorFileTooBig"
+            },
+            second: {
+                type: "valid",
+                file: "errorFileTooBig"
+            },
+            evidenceValid: false
+        }
+    } else if (error == "errorWrongFileFormat") {
+        req.session.data.firstType = "businessratesbill"
+        req.session.data.secondType = "utilitybill"
+        req.session.data.firstEvidenceFile = "file1.pdf",
+        req.session.data.secondEvidenceFile = "file2.pdf",
+        req.session.data.submitError = {
+            first: {
+                type: "valid",
+                file: "errorWrongFileFormat"
+            },
+            second: {
+                type: "valid",
+                file: "errorWrongFileFormat"
+            },
+            evidenceValid: false
+        }
+    } else if (error == "sametype") {
+        req.session.data.firstType = "businessratesbill"
+        req.session.data.secondType = "businessratesbill"
+        req.session.data.firstEvidenceFile = "file1.pdf",
+        req.session.data.secondEvidenceFile = "file2.pdf",
+        req.session.data.submitError = {
+            first: {
+                type: "valid",
+                file: null
+            },
+            second: {
+                type: "notDifferent",
+                file: null
+            },
+            evidenceValid: false
+        }
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/org-address-evidence');
+});
+
+router.get('/asc-wds-id', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.workplaceIDEmpty = true
+    } else if (error == "invalid") {
+        req.session.data.orgID = "£75F:F",
+        req.session.data.workplaceIDInvalid = true
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/asc-wds-id');
+});
+
+router.get('/is-this-you', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims',
+        orgID: "G03944234",
+        orgName: "Kukri Care home"
+    };
+
+    if (error == "missing") {
+        req.session.data.detailCorrectRadioMissing = "true"
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/is-this-you');
+});
+
+router.get('/not-you', function (req, res) {
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims',
+        orgName: "Kukri Care home"
+    };
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/not-you');
+});
+
+router.get('/asc-wds-already-in-use', function (req, res) {
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims',
+        orgID: "A02944934"
+    };
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/workplace-id-already-onboarded');
+});
+
+router.get('/companies-house', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.chRadioMissing = "true"
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/companies-house');
+});
+
+router.get('/companies-house-number', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.companiesHouseRegNumberEmptyError = "true"
+    } else if (error == "invalid") {
+        req.session.data.companiesHouseRegNumber = "1235412351235"
+        req.session.data.companiesHouseRegNumberInvalid = "true"
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/companies-house-registration-number');
+});
+
+router.get('/vat-registered', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.vatRadioMissing = "true"
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/vat-registered');
+});
+
+router.get('/vat-number', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.vatRegNumberEmptyError = "true"
+    } else if (error == "invalid") {
+        req.session.data.vatRegNumber = "24356457$%^"
+        req.session.data.vatRegNumberInvalid = "true"
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/vat-registration-number');
+});
+
+router.get('/check-your-answers', function (req, res) {
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../load-registration?regRef=R-1C5V-7H');
+});
+
+router.get('/registration-declaration', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.declarationSubmitError = "true"
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/declaration');
+});
+
+router.get('/registration-confirmation', function (req, res) {
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims',
+        regRef: "R-1C5V-7H"
+    };
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/registration-submitted-confirmation');
+});
+
+router.get('/view-registration', function (req, res) {
+    const scenario = req.session.data.scenario
+    delete req.session.data
+    let regRef = null
+
+    switch (scenario) {
+        case "1":
+            regRef = "R-2P9F-5Z";
+            break;
+        case "2":
+            regRef = "R-6E8K-4J";
+            break;
+    }
+
+    req.session.data = {
+        area: 'Claims',
+        regRef
+    };
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../registration/registration-details');
+});
+
+router.get('/delete-registration', function (req, res) {
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims',
+        regRef: 'R-1C5V-7H'
+    };
+
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../manage-orgs/delete-registration-confirmation');
+});
+
+router.get('/add-phone-number', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims',
+        phoneNumber: "sldhshg"
+    };
+
+    if (error == "missing") {
+        req.session.data.submitError = "missing"
+    } else if (error == "invalid") {
+        req.session.data.submitError = "invalid"
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "mark.jacobs@caregroup.com")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../manage-orgs/add-phone-number');
+});
+
+router.get('/verify-details-registration', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.submitError = true
+    }
+
+    loadScenarioData(req)
+    loadUserData(req, "cynthia.bartoletti@caregroup.com")
+    loadData(req, "D76397203")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../change-sro/verify-details');
+});
+
+router.get('/incorrect-details-registration', function (req, res) {
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    loadScenarioData(req)
+    loadUserData(req, "cynthia.bartoletti@caregroup.com")
+    loadData(req, "D76397203")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../change-sro/account-issue');
+});
+
+router.get('/job-title-complete-registration', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.jobTitleEmptyError = true
+    }
+    loadScenarioData(req)
+    loadUserData(req, "cynthia.bartoletti@caregroup.com")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../change-sro/job-title');
+});
+
+router.get('/gdl-complete-registration', function (req, res) {
+    const error = req.session.data.error
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims'
+    };
+
+    if (error == "missing") {
+        req.session.data.declarationSubmitError = "true"
+    }
+    loadScenarioData(req)
+    loadUserData(req, "cynthia.bartoletti@caregroup.com")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../change-sro/declaration');
 });
 
 router.get('/sign-new-gdl', function (req, res) {
@@ -259,47 +831,38 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
 });
 
 router.get('/email', function (req, res) {
-    let orgID = null
-    let userType = null
+    let email = null
     const scenario = req.session.data.scenario
-    if (scenario == "5") {
-        userType = "submitter"
-    } else {
-        userType = "signatory"
-    }
 
   delete req.session.data
     req.session.data = {
-        area: 'Claims',
-        userType,
-        journey: "creation"
+        area: 'Claims'
     };
 
     switch (scenario) {
         case "1":
-        orgID = "E76904778";
+        email = "roy.hub@caregroup.co.uk";
         break;
 
         case "2":
-        orgID = "F15904728";
+        email = "craig.willowtree@caregroup.com";
         break;
 
         case "3":
-        orgID = "F84625987";
+        email = "calsey.huel@caregroup.com";
         break;
 
         case "4":
-        orgID = "B52698456";
+        email = "mark.jacobs@caregroup.com";
         break;
 
         case "5":
-        orgID = "B52698456";
+        email = "terri.jeffords@caregroup.com";
         break;
     }
 
     loadScenarioData(req)
-loadUserData(req, "roy.hub@caregroup.co.uk")
-    loadData(req, orgID)
+    loadUserData(req, email)
 
     // Redirect to the page you want to screenshot
     res.redirect('../authentication/creation-link');
