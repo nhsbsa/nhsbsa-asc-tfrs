@@ -50,7 +50,13 @@
           "bank-statement-212-1.pdf",
           "invoice-212.pdf",
           "receipt-212.pdf",
-          "bank-statement-212.pdf"
+          "bank-statement-212.pdf",
+          "bank-statement-412-1.pdf",
+          "invoice-2512.pdf",
+          "receipt-2212.pdf",
+          "bank-statement-2412.pdf",
+          "bank-statement-21232-1.pdf",
+          "invoice-21422.pdf"
         ],
         "evidenceOfPaymentReview": {
           "outcome": null,
@@ -3518,6 +3524,107 @@
             "evidenceOfCompletion": "certificate-212.pdf",
             "evidenceOfCompletionReview": {
               "outcome": "pass",
+              "note": null
+            }
+          }
+        ],
+        "removedLearners": []
+      }
+    ]
+  },
+  {
+    "claimID": "JD3-HDT3-JDK2-A",
+    "claimType": "100",
+    "workplaceID": "A02944934",
+    "createdBy": "lena.caldwell@evergreencare.com",
+    "status": "not-yet-submitted",
+    "isPaymentPlan": null,
+    "createdDate": "2025-11-12T23:59:29.632Z",
+    "submissions": [
+      {
+        "submitter": null,
+        "submittedDate": null,
+        "processedBy": null,
+        "processedDate": null,
+        "trainingCode": "MU",
+        "startDate": "2025-10-24T14:34:13.692Z",
+        "costDate": "2025-12-21T21:01:07.472Z",
+        "evidenceOfPayment": [
+          "invoice-212.pdf",
+          "receipt-212.pdf",
+          "bank-statement-212.pdf"
+        ],
+        "evidenceOfPaymentReview": {
+          "outcome": null,
+          "note": null,
+          "paymentPlan": null,
+          "costPerLearner": null
+        },
+        "sharedCompletionDate": false,
+        "learners": [
+          {
+            "slotID": 1,
+            "learnerID": "KQ 01 7F 72 D",
+            "learnerChanged": null,
+            "completionDate": "2025-11-23T07:19:31.596Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": 2,
+            "learnerID": "GR 03 6F 10 P",
+            "learnerChanged": null,
+            "completionDate": "2025-11-16T07:19:31.596Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": 3,
+            "learnerID": "FS 47 4F 68 U",
+            "learnerChanged": null,
+            "completionDate": "2025-11-17T07:19:31.596Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": 4,
+            "learnerID": "FI 50 5F 30 D",
+            "learnerChanged": null,
+            "completionDate": "2025-11-16T07:19:31.596Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": 5,
+            "learnerID": "WV 15 0F 13 V",
+            "learnerChanged": null,
+            "completionDate": "2025-11-16T07:19:31.596Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
+              "note": null
+            }
+          },
+          {
+            "slotID": 6,
+            "learnerID": "QB 54 8F 21 X",
+            "learnerChanged": null,
+            "completionDate": "2025-11-20T07:19:31.596Z",
+            "evidenceOfCompletion": "certificate-212.pdf",
+            "evidenceOfCompletionReview": {
+              "outcome": null,
               "note": null
             }
           }
