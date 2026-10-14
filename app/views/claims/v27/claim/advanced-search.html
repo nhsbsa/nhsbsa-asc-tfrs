@@ -6,7 +6,7 @@
 
 
 {% block pageTitle %}
-{% if data.noInputs or data.trainingSearchLengthInsufficient or data.learnerSearchLengthInsufficient %}Error: {% endif %}Advanced search ({{ matchedClaims.length }} results) — {{serviceName}} — GOV.UK
+{% if data.noInputs or data.trainingSearchLengthInsufficient or data.learnerSearchLengthInsufficient %}Error: {% endif %}Advanced search — {{serviceName}} — GOV.UK
 {% endblock %}
 
 {% block beforeContent %}
@@ -112,20 +112,29 @@
     </form>
   </div>
 </div>
-
-{% if (data['trainingName'] or data['learner']) and (resultCount != 0) %}
-  <div class="govuk-grid-row" id="searchResults">
+{# Check if any search has been performed #}
+{% if data['trainingName'] or data['learner'] %}
+  <div class="govuk-grid-row" id="searchResults" tabindex="-1">
     <div class="govuk-grid-column-full">
-      <h2 class="govuk-heading-m">Search results</h2>
-      <p class="govuk-body">{{ resultCount }} {% if resultCount == 1 %}result{% else %}results{% endif %}</p>
-      <p class="govuk-body">
-      Improve your search results by:
-    </p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>entering more characters</li>
-      <li>checking you entered the whole NI number, course code or qualification number</li>
-    </ul>
-      <table class="govuk-table" data-module="moj-sortable-table">
+      <div aria-live="polite" aria-atomic="true">
+        <h2 class="govuk-heading-m">Search results</h2>
+
+        {% if resultCount > 0 %}
+        {# Results found #}
+          <p class="govuk-body"> Found {{ resultCount }} {% if resultCount == 1 %}result{% else %}results{% endif %}
+            {% if data['trainingName'] and data['learner'] %} for '{{ data['trainingName'] }}' and '{{ data['learner'] }}'.
+            {% else %}
+              for '{{ data['trainingName'] or data['learner'] }}'.
+            {% endif %}
+          </p>
+          <p class="govuk-body">
+            Improve your search results by:
+          </p>
+          <ul class="govuk-list govuk-list--bullet">
+            <li>entering more characters</li>
+            <li>checking you entered the whole NI number, course code or qualification number</li>
+        </ul>
+        <table class="govuk-table" data-module="moj-sortable-table">
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
             <th class="govuk-table__header" scope="col" width="20%">Claim reference</th>
@@ -185,26 +194,25 @@
           
         </tbody>
       </table>
+      {% else %}
+{# --- NO RESULTS FOUND --- #}
+      <p class="govuk-body">
+        No matches returned for your search
+        {% if data['trainingName'] and data['learner'] %} for '{{ data['trainingName'] }}' and '{{ data['learner'] }}'.
+        {% else %}
+        for '{{ data['trainingName'] or data['learner'] }}'.
+        {% endif %}
+      </p>
+      <p class="govuk-body">
+        Improve your search results by:
+        </p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>entering more characters</li>
+          <li>checking you entered the whole NI number, course code or qualification number</li>
+        </ul>
+        {% endif %}
+      </div>
     </div>
   </div>
-{% elif (data['trainingName'] or data['learner']) and (resultCount == 0) %}
-<div class="govuk-grid-row" id="searchResults">
-  <div class="govuk-grid-column-full">
-    <h2 class="govuk-heading-m">Search results</h2>
-    <p class="govuk-body">
-      No matches returned for your search.
-    </p>
-    <p class="govuk-body">
-      Improve your search results by:
-    </p>
-    <ul class="govuk-list govuk-list--bullet">
-      <li>checking your spelling</li>
-      <li>checking you entered the whole NI number, course code or qualification number</li>
-    </ul>
-  </div>
-</div>
 {% endif %}
-
-
-
 {% endblock %}
