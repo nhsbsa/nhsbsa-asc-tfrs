@@ -626,14 +626,6 @@ function checkNote(noteContent, noteCategories) {
   return submitError
 }
 
-function generateNoteID() {
-  const letters = Array.from({ length: 3 }, () => 
-    String.fromCharCode(65 + Math.floor(Math.random() * 26))
-  ).join('');
-  
-  const numbers = Math.floor(100 + Math.random() * 900);
 
-  return `${letters}-${numbers}`;
-}
 
-module.exports = { checkNote, generateNoteID, createOrg, loadJSONFromFile, loadData, formatDate, checkRefFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildSlotComparison, orderSubmissions, findFirstLearnerWithoutOutcome }
+module.exports = { checkNote, createOrg, loadJSONFromFile, loadData, formatDate, checkRefFormat, signatoryCheck, validNumberCheck, isValidOrgSearch, getMostRelevantSubmission, findCourseByCode, findLearnerById, flattenUsers, sortSubmissionsByDate, findUser, findOrg, sortSubmissionsForTable, checkClaimProcess, determineOutcome, isInternalOMMT, getOverallStatus, sortAlphabetically, checkDone, checkProcessingState, buildSlotComparison, orderSubmissions, findFirstLearnerWithoutOutcome }

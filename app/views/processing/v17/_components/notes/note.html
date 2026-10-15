@@ -1,8 +1,10 @@
-<div class="internal-note-component govuk-!-margin-top-6" id="{{note.noteID}}" data-note-id="{{note.noteID}}">
+<div class="internal-note-component govuk-!-margin-top-6">
   {% if (note.noteCategories.length > 0 ) %}
     <div class="govuk-tag-group  govuk-!-margin-bottom-7">
       {% for category in note.noteCategories %}
-        <strong class="govuk-tag govuk-tag--purple" style="max-width: none;">{{category}}</strong>
+        {% if category != "Claim note" %}
+          <strong class="govuk-tag govuk-tag--purple" style="max-width: none;">{{category}}</strong>
+        {% endif %}
       {% endfor %}
     </div>
   {% endif %}
