@@ -694,6 +694,11 @@ addFilter('trainingSearch', function (search, training, claim, allTraining) {
 addFilter('bankErrorMessage', function (bankErrorObject) {
     const errorMessages = [];
 
+
+    if (bankErrorObject.api === 'invalid') {
+        errorMessages.push('<li><a href="#api-error">Enter a valid sort code and account number</a></li>');
+    }
+
     if (bankErrorObject.accountName === 'missing') {
         errorMessages.push('<li><a href="#accountName-error">Enter the name on the account</a></li>');
     } else if (bankErrorObject.accountName === 'tooLong') {
@@ -871,7 +876,7 @@ addFilter('userStatusTag', function (status) {
     }
 }, { renderAsHtml: true })
 
-addFilter('userErrorMessage', function (submitError) {
+addFilter('submitterErrorMessage', function (submitError) {
     let errorSummaryStr = ''
 
     if (submitError.familyName == "missing") {

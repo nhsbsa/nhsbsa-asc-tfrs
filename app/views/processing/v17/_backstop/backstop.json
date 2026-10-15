@@ -16,68 +16,113 @@
             "delay": 500
         },
         {
-            "label": "register-org-org-details",
-            "url": "http://localhost:3000/processing/v17/backstop/org-details",
+            "label": "register-org-find-reg",
+            "url": "http://localhost:3000/processing/v17/backstop/find-reg",
             "delay": 500
         },
         {
-            "label": "register-org-org-details-missing-error",
-            "url": "http://localhost:3000/processing/v17/backstop/org-details?error=missing",
+            "label": "register-org-find-reg-missing-error",
+            "url": "http://localhost:3000/processing/v17/backstop/find-reg?error=missing",
             "delay": 500
         },
         {
-            "label": "register-org-org-details-invalid-error",
-            "url": "http://localhost:3000/processing/v17/backstop/org-details?error=invalid",
+            "label": "register-org-find-reg-invalid-error",
+            "url": "http://localhost:3000/processing/v17/backstop/find-reg?error=invalid",
             "delay": 500
         },
         {
-            "label": "register-org-api-timeout",
-            "url": "http://localhost:3000/processing/v17/backstop/org-issue?issue=timeout",
+            "label": "register-org-registration-details-not-yet-processed",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-details?scenario=1",
             "delay": 500
         },
         {
-            "label": "register-org-already-invited",
-            "url": "http://localhost:3000/processing/v17/backstop/org-issue?issue=dupe",
+            "label": "register-org-registration-details-registered",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-details?scenario=2",
             "delay": 500
         },
         {
-            "label": "register-org-confirm-org-details",
-            "url": "http://localhost:3000/processing/v17/backstop/confirm-org-details",
+            "label": "register-org-registration-details-registered-at-risk",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-details?scenario=3",
             "delay": 500
         },
         {
-            "label": "register-org-confirm-org-details-missing-error",
-            "url": "http://localhost:3000/processing/v17/backstop/confirm-org-details?error=missing",
+            "label": "register-org-registration-details-rejected",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-details?scenario=4",
             "delay": 500
         },
         {
-            "label": "register-org-asc-wds-incorrect",
-            "url": "http://localhost:3000/processing/v17/backstop/org-issue?issue=incorrect",
+            "label": "register-org-registration-decision",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-decision",
             "delay": 500
         },
         {
-            "label": "register-org-SRO-details",
-            "url": "http://localhost:3000/processing/v17/backstop/SRO-details",
+            "label": "register-org-registration-decision-error-missing-selection",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-decision?error=missingInput",
             "delay": 500
         },
         {
-            "label": "register-org-SRO-details-missing-error",
-            "url": "http://localhost:3000/processing/v17/backstop/SRO-details?error=missing",
+            "label": "register-org-registration-decision-onboard",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-decision?scenario=1",
             "delay": 500
         },
         {
-            "label": "register-org-SRO-details-invalid-error",
-            "url": "http://localhost:3000/processing/v17/backstop/SRO-details?error=invalid",
+            "label": "register-org-registration-decision-onboard-at-risk",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-decision?scenario=2",
             "delay": 500
         },
         {
-            "label": "register-org-confirm-SRO-details",
-            "url": "http://localhost:3000/processing/v17/backstop/confirm-SRO-details",
+            "label": "register-org-registration-decision-onboard-at-risk-error-missing-note",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-decision?scenario=2&error=missingNote",
             "delay": 500
         },
         {
-            "label": "register-org-confirmation",
-            "url": "http://localhost:3000/processing/v17/backstop/landing-screen?scenario=1",
+            "label": "register-org-registration-decision-onboard-at-risk-error-longnote",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-decision?scenario=2&error=noteTooLong",
+            "delay": 500
+        },
+        {
+            "label": "register-org-registration-decision-reject",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-decision?scenario=3",
+            "delay": 500
+        },
+        {
+            "label": "register-org-registration-decision-reject-error-missing-note",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-decision?scenario=3&error=missingNote",
+            "delay": 500
+        },
+        {
+            "label": "register-org-registration-decision-reject-error-longnote",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-decision?scenario=3&error=noteTooLong",
+            "delay": 500
+        },
+        {
+            "label": "register-org-confirm-decision-register",
+            "url": "http://localhost:3000/processing/v17/backstop/confirm-decision?scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "register-org-confirm-decision-register-at-risk",
+            "url": "http://localhost:3000/processing/v17/backstop/confirm-decision?scenario=2",
+            "delay": 500
+        },
+        {
+            "label": "register-org-confirm-decision-reject",
+            "url": "http://localhost:3000/processing/v17/backstop/confirm-decision?scenario=3",
+            "delay": 500
+        },
+        {
+            "label": "register-org-registration-details-registered-confirmation",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-details?scenario=2&banner=confirmation",
+            "delay": 500
+        },
+        {
+            "label": "register-org-registration-details-registered-at-risk-confirmation",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-details?scenario=3&banner=confirmation",
+            "delay": 500
+        },
+        {
+            "label": "register-org-registration-details-rejected-confirmation",
+            "url": "http://localhost:3000/processing/v17/backstop/registration-details?scenario=4&banner=confirmation",
             "delay": 500
         },
         {
@@ -983,6 +1028,16 @@
         {
             "label": "leadProcessor-view-org-users-scenario-4-resend-invite-failure",
             "url": "http://localhost:3000/processing/v17/backstop/view-org-users?userType=leadProcessor&scenario=4&resend=fail",
+            "delay": 500
+        },
+        {
+            "label": "view-org-org-details",
+            "url": "http://localhost:3000/processing/v17/backstop/view-org-org-details?scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "view-org-org-details-registered-at-risk",
+            "url": "http://localhost:3000/processing/v17/backstop/view-org-org-details?scenario=2",
             "delay": 500
         },
         {

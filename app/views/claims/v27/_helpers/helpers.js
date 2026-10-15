@@ -365,6 +365,7 @@ function checkBankDetailsForm(accountName, sortCode, accountNumber, buildingSoci
         result.buildingSociety = "valid"
     }
 
+    result.api = "valid"
     result.bankDetailsValid = result.accountName == "valid" && result.sortCode == "valid" && result.accountNumber == "valid" && result.buildingSociety == "valid"
 
     return result
@@ -548,7 +549,7 @@ function findUser(email, org) {
             user = u
         }
     }
-    console.log(user)
+
     return user;
 }
 
@@ -1065,19 +1066,26 @@ function getLearnerFieldByID(learners, learnerID, field) {
 }
 
 function getOverallCompletionOutcome(learners) {
-    let hasFail = false;
-    let hasQuery = false;
+    if (!learners || learners.length === 0) return "pass";
+
+    let passCount = 0;
+    let failCount = 0;
+    let queryCount = 0;
 
     for (const learner of learners) {
         const outcome = learner.evidenceOfCompletionReview?.outcome;
 
-        if (outcome === "fail") hasFail = true;
-        else if (outcome === "queried") hasQuery = true;
+        if (outcome === "fail") failCount++;
+        else if (outcome === "queried") queryCount++;
+        else if (outcome === "pass") passCount++;
     }
 
-    if (hasFail) return "fail";
-    if (hasQuery) return "queried";
-    return "pass";
+    if (failCount === learners.length) return "fail";
+    if (failCount > 0 || queryCount > 0) return "queried";
+    if (passCount === learners.length) return "pass";
+
+    // Fallback for cases with unexpected/missing outcomes
+    return "queried"; 
 }
 
 function getLearnersFromDraft(baseSubmission, draftSubmission) {
