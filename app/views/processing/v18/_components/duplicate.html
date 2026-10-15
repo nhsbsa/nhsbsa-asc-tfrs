@@ -1,0 +1,52 @@
+<h1 class="govuk-heading-l">Organisation has already been invited</h1>
+
+{% set foundOrganisation = data.organisations | findOrg(data.orgID) %}
+
+<div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        Organisation details
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Workplace ID
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.workplaceID | default('') }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {{ foundOrganisation.name }}
+                </dd>
+            </div>
+            <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                    Address
+                </dt>
+                <dd class="govuk-summary-list__value">
+                    {%for line in foundOrganisation.address %}
+                        {{ line }}<br>
+                    {% endfor %}
+                </dd>
+            </div>
+        </dl>
+    </div>
+</div>
+<form action="../search-org?orgSearchInput={{data.orgID}}" method="post">
+    <div class="govuk-button-group">
+        <button type="submit" class="govuk-button" data-module="govuk-button">
+        View details
+        </button>
+        <a class="govuk-link" href="organisation-details?orgID">
+            Go back
+        </a>
+    </div>
+</form>
+

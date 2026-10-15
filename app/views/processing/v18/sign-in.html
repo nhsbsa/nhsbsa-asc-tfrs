@@ -1,0 +1,26 @@
+{% extends "./_layouts/main.html" %}
+{% set govukRebrand = true %}
+
+{% block pageTitle %}
+Sign in - {{data.processingServiceName}}
+{% endblock %}
+
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Sign in</h1>
+        <p class="govuk-body">Please click "Sign in" button to continue.</p>
+
+        {% if (data.userType == "ccsAgent") %}
+            <a class="govuk-button" data-module="govuk-button" href="organisation/find-organisation">
+                Sign-in
+            </a>
+        {% else %}
+            <a class="govuk-button" data-module="govuk-button" href="home">
+                Sign-in
+            </a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,148 @@
+
+{% set org = data.organisations | findOrg(data.orgID) %}
+
+{% set nameColumnWidth = "20%" %}
+{% set emailColumnWidth = "45%" %}
+{% set statusColumnWidth = "10%" %}
+{% set actionsColumnWidth = "25%" %}
+
+{% if (org.signatory.active.status != "invited") %}
+    {% set nameColumnWidth = "30%" %}
+    {% set emailColumnWidth = "55%" %}
+{% endif %}
+
+<div class="govuk-grid-row">
+    <div class="{% if (org.signatory.active.status == 'invited') %}govuk-grid-column-full{% else %}govuk-grid-column-three-quarters{% endif %}">
+        
+        {% if data.confirmation == "invited" or data.invite == "success"%}
+            <div class="govuk-notification-banner govuk-notification-banner--success" role="alert"
+                aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+                <div class="govuk-notification-banner__header">
+                    <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                        Success
+                    </h2>
+                </div>
+                <div class="govuk-notification-banner__content">
+                    <h3 class="govuk-notification-banner__heading">
+                        Invite sent
+                        <p class="govuk-body">An email has been sent to {{ data.givenName | default(org.signatory.active.givenName) }} {{data.familyName | default(org.signatory.active.familyName) }} inviting them to create an SRO account for {{org.name}}.</p>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if data.invite == "failure" %}
+    
+        <div class="moj-banner moj-banner--warning" role="region" aria-label="Warning">
+    
+            <svg class="moj-banner__icon" fill="currentColor" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+            <path d="M13.6,15.4h-2.3v-4.5h2.3V15.4z M13.6,19.8h-2.3v-2.2h2.3V19.8z M0,23.2h25L12.5,2L0,23.2z" />
+            </svg>
+        
+            <div class="moj-banner__message">Invitation {{matchResendUser.givenName}} {{matchResendUser.familyName}} wasn't sent - try again</div>
+        
+        </div>
+    
+        {% endif %}
+        
+        <h2 class="govuk-heading-l">Contacts</h2>   
+        <h3 class="govuk-heading-m govuk-!-margin-top-6">Senior Responsible Officer (SRO)</h3>
+        {% if (data.userType == "leadProcessor") %}
+        <a href="../change-sro/signatory-details?SROChange=replace" class="govuk-button" data-module="govuk-button">
+            Add new SRO
+        </a>
+        {% endif %}
+            <table class="govuk-table {% if (data.userType != 'leadProcessor') %}govuk-!-margin-top-6{% endif %}">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th class="govuk-table__header" scope="col" width="{{nameColumnWidth}}">Name</th>
+                        <th class="govuk-table__header" scope="col" width="{{emailColumnWidth}}">Email</th>
+                        <th class="govuk-table__header" scope="col" width="{{statusColumnWidth}}">Status</th>
+                        {% if (org.signatory.active.status == "invited") %} <th class="govuk-table__header" scope="col" width="{{actionsColumnWidth}}"><span class="govuk-visually-hidden">Actions</span></th>{% endif %}
+                    </tr>
+                    </thead>
+                <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row" id="{{ org.workplaceID }}">
+                            <td class="govuk-table__cell">{{ org.signatory.active.givenName}} {{ org.signatory.active.familyName}}</td>
+                            <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ org.signatory.active.email }}</a></td>
+                            <td class="govuk-table__cell">{{ org.signatory.active.status | userStatusTag }}</td>
+                            {% if (org.signatory.active.status == "invited") %}<td class="govuk-table__cell" style="text-align: right;">{% if (not (data.resendList | matchResend(org.signatory.active.email))) %}<a class="govuk-link govuk-link--no-visited-state" href="../reinvite-signatory?name={{org.signatory.active.email}}">Resend invite<span class="govuk-visually-hidden">to {{org.signatory.active.givenName}} {{org.signatory.active.familyName}}</span></a>{% else %}Invite sent{% endif %}{% if (data.userType == "leadProcessor") %}<a class="govuk-link govuk-link--no-visited-state" style="display: inline-block; margin-left: 10px; padding-left: 10px; border-left: 1px solid #b1b4b6;" href="../change-sro/signatory-details?SROChange=edit">Edit SRO<span class="govuk-visually-hidden">{{org.signatory.active.givenName}} {{org.signatory.active.familyName}}</span></a>{% endif %}</td>{% endif %}
+                        </tr>
+                        {% if  org.signatory.inactive != null %}
+                            {% for sig in (org.signatory.inactive | sortByFirstName) %}
+                                <tr class="govuk-table__row" id="{{ sig.email }}">
+                                    <td class="govuk-table__cell">{{ sig.givenName}} {{ sig.familyName}}</td>
+                                    <td class="govuk-table__cell" ><a href="#" class="govuk-link">{{ sig.email }}</a></td>
+                                    <td class="govuk-table__cell">{{ sig.status | userStatusTag }}</td>
+                                    {% if (org.signatory.active.status == "invited") %}<td class="govuk-table__cell"></td>{% endif %}
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                </tbody>
+            </table>
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+        <h2 class="govuk-heading-m govuk-!-margin-top-6">Submitters</h3> 
+        {% if (org.users.active.length == 0 and org.users.invited.length == 0 and org.users.inactive.length == 0) %} 
+        <p class="govuk-body">No submitters added yet.</p>
+        {% else %}
+        {% if (org.users.active.length > 0 or org.users.invited.length > 0) %} 
+            <table class="govuk-table">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th class="govuk-table__header" scope="col" width="{{nameColumnWidth}}">Name</th>
+                        <th class="govuk-table__header" scope="col" width="{{emailColumnWidth}}">Email</th>
+                        <th class="govuk-table__header" scope="col" width="{{statusColumnWidth}}">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    {% for user in (org.users.active | sortByFirstName) %}
+                        <tr class="govuk-table__row" id="{{ user.givenName}} {{ user.familyName}}">
+                            <td class="govuk-table__cell">{{ user.givenName}} {{ user.familyName}}</td>
+                            <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
+                            <td class="govuk-table__cell">{{ "active" | userStatusTag }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% for user in (org.users.invited | sortByFirstName) %}
+                    <tr class="govuk-table__row" id="{{ user.givenName}} {{ user.familyName}}">
+                        <td class="govuk-table__cell">{{ user.givenName}} {{ user.familyName}}</td>
+                        <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
+                        <td class="govuk-table__cell">{{ "invited" | userStatusTag }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="govuk-body">There are currently no active or invited submitters.</p>
+        {% endif %}
+    </div>
+</div>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+        {% if (org.users.inactive.length > 0) %} 
+        <p class="govuk-body govuk-!-margin-top-6">These submitters have been deleted by the SRO:</p>
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header" scope="col" width="{{nameColumnWidth}}">Name</th>
+                    <th class="govuk-table__header" scope="col" width="{{emailColumnWidth}}">Email</th>
+                    <th class="govuk-table__header" scope="col" width="{{statusColumnWidth}}">Status</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                {% for user in (org.users.inactive | sortByFirstName) %}
+                    <tr class="govuk-table__row" id="{{ user.givenName}} {{ user.familyName}}">
+                        <td class="govuk-table__cell">{{ user.givenName}} {{ user.familyName}}</td>
+                        <td class="govuk-table__cell"><a href="#" class="govuk-link">{{ user.email }}</a></td>
+                        <td class="govuk-table__cell">{{ "inactive" | userStatusTag }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="govuk-body govuk-!-margin-top-6">No submitters have been deleted by the SRO.</p>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>

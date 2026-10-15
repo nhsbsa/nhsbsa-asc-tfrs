@@ -450,8 +450,22 @@ module.exports = {
                 ]
             }
         ],
-        "processingCurrent": "v17",
+        "processingCurrent": "v18",
         "processingVersions": [
+            {
+                "versionNo": "18",
+                "status": ["design"],
+                "tested": "TBC",
+                "created": [
+                    "TBC"
+                ],
+                "aims": [
+                    "TBC"
+                ],
+                "learnt": [
+                "TBC"
+            ]
+            },
             {
                 "versionNo": "17",
                 "phase": "Beta",
