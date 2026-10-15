@@ -94,27 +94,28 @@ Claim window closed {{data.id}}
 
           </dd>
         </div>
+        
       {% if (claim.claimType== "100" or (claim.status == "approved" and pairClaim.claimType== "40")) %}
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-           {# may need to remove depending on whether we show singular or plural  #}
-          {% if (submission.learners.length == 1 or submission.sharedCompletionDate or sameCompletionDate) %} 
-          Completion date
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            {# may need to remove depending on whether we show singular or plural  #}
+            {% if (submission.learners.length == 1 or submission.sharedCompletionDate or sameCompletionDate) %} 
+            Completion date
 
-          {% elif submission.learners.length > 1 %}
-            Completion dates
+            {% elif submission.learners.length > 1 %}
+              Completion dates
 
-          {% endif %}
-          </dt>
-          <dd class="govuk-summary-list__value">
-            {% if claim.claimType=="100" %}
-            {{ submission.learners | dateRange }}
-            {% else %}
-            {{ pairSubmission.learners | dateRange }}
             {% endif %}
-          </dd>
-      
-      </div>
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {% if claim.claimType=="100" %}
+              {{ submission.learners | dateRange }}
+              {% else %}
+              {{ pairSubmission.learners | dateRange }}
+              {% endif %}
+            </dd>
+        
+        </div>
       {% endif %}
 
       {% if ( claim.claimType== "60" and claim.status == "not-yet-submitted")  %}
@@ -135,7 +136,7 @@ Claim window closed {{data.id}}
           </dd>
         </div>
 
-        {% endif %}
+      {% endif %}
       </dl>
         
   <p class="govuk-body">
@@ -161,13 +162,13 @@ Claim window closed {{data.id}}
           <a type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button" href="delete-claim-confirmation">
           Delete claim
           </a>
-      {% endif %}
+    {% endif %}
   </div>
-
-  <h2 class="govuk-heading-m">If you need support with this claim</h2>
-  <p class="govuk-body">
-    This service is managed by the NHS Business Services Authority. You can email us at <a href="mailto:ASClearninganddevelopmentsupport@nhsbsa.nhs.uk">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.
-  </p>
+    <h2 class="govuk-heading-m">If you need support with this claim</h2>
+    <p class="govuk-body">
+      This service is managed by the NHS Business Services Authority. You can email us at <a href="mailto:ASClearninganddevelopmentsupport@nhsbsa.nhs.uk">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.
+    </p>
+ 
 
 </div>
 
