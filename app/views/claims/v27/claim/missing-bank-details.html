@@ -26,8 +26,6 @@ Missing bank details — {{serviceName}} — GOV.UK
         Your Senior Responsible Officer needs to log in and add your organisation's bank details before you can submit a claim.
         {% endif %}
         </p>
-        <h2 class="govuk-heading-m">If you need support</h2>
-        <p class="govuk-body">This service is managed by the NHS Business Services Authority. You can email us <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
         {% if data.userType == "signatory" %}
         <div class="govuk-button-group">
             <a type="submit" class="govuk-button"  href="../org-admin/change-bank-details">
@@ -40,6 +38,8 @@ Missing bank details — {{serviceName}} — GOV.UK
             Go back to claim
         </a>
         {% endif %}
+        <h2 class="govuk-heading-m">If you need support</h2>
+        <p class="govuk-body">This service is managed by the NHS Business Services Authority. You can email us <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
     </div>
 </div>
 
