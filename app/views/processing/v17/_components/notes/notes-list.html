@@ -1,0 +1,9 @@
+{% if (sortedNotes.length > 0 ) %}
+    {% for note in sortedNotes%}
+        {% include "./note.html" %}
+    {% endfor%}
+{% elif data.keywords != null or data.sortByDate != null or data.category != null %}
+    <p class="govuk-body">No matches found.</p>
+{% else %}
+    <p class="govuk-body">There are no notes yet.</p>
+{% endif %}

@@ -6,7 +6,6 @@ const { loadData, findLearnerById, getMostRelevantSubmission, findUser, findCour
 
 
 router.get('/landing-screen', function (req, res) {
-    const scenario = req.session.data.scenario
 
     delete req.session.data
     req.session.data = {
@@ -14,21 +13,13 @@ router.get('/landing-screen', function (req, res) {
         userType: "processor"
     };
 
-    switch (scenario) {
-        case "1":
-        req.session.data.familyName = "Smith"
-        req.session.data.givenName = "John"
-        req.session.data.confirmation = "register"
-        break;
-    }
-
     loadData(req)
 
     // Redirect to the page you want to screenshot
     res.redirect('../home');
 });
 
-router.get('/org-details', function (req, res) {
+router.get('/find-reg', function (req, res) {
     const error = req.session.data.error
 
     delete req.session.data
@@ -41,16 +32,19 @@ router.get('/org-details', function (req, res) {
         req.session.data.submitError = "missing"
     } else if ( error == "invalid") {
         req.session.data.submitError = "invalid"
+        req.session.data.referenceID = "12345678"
     }
 
     loadData(req)
 
     // Redirect to the page you want to screenshot
-    res.redirect('../register-organisation/organisation-details');
+    res.redirect('../register-organisation/find-registration');
 });
 
-router.get('/org-issue', function (req, res) {
-    const issue = req.session.data.issue
+router.get('/registration-details', function (req, res) {
+    const scenario = req.session.data.scenario
+    const banner = req.session.data.banner
+    let reg = null
 
     delete req.session.data
     req.session.data = {
@@ -58,96 +52,113 @@ router.get('/org-issue', function (req, res) {
         userType: "processor"
     };
 
-    if ( issue == "timeout") {
-        req.session.data.submitError = "timeout"
-    } else if ( issue == "dupe") {
-        req.session.data.orgID = "A02944934"
-        req.session.data.submitError = "duplicate"
-    } else if ( issue == "incorrect") {
-        req.session.data.orgID = "G03944234"
-        req.session.data.submitError = "incorrect"
-    }
+    switch (scenario) {
+            case "1":
+                reg = "R-ABCD-1234"
+                break;
 
+            case "2":
+                reg = "R-HFJS-1325"
+                break;
+
+            case "3":
+                reg = "R-GD62-32HD"
+                break;
+
+            case "4":
+                reg = "R-KD92-8492"
+                break;
+        }
+
+    req.session.data.referenceID = reg
+
+    if (banner == "confirmation") {
+        req.session.data.processSuccess = "true"
+    }
     loadData(req)
 
     // Redirect to the page you want to screenshot
-    res.redirect('../register-organisation/org-issue');
+    res.redirect('../register-organisation/registration-details');
 });
 
-router.get('/confirm-org-details', function (req, res) {
+router.get('/registration-decision', function (req, res) {
+    const scenario = req.session.data.scenario
     const error = req.session.data.error
 
     delete req.session.data
     req.session.data = {
         area: 'Processing',
         userType: "processor",
-        orgID: "G03944234"
+        referenceID: "R-ABCD-1234"
     };
 
-    if ( error == "missing") {
+    switch (scenario) {
+            case "1":
+                req.session.data.confirmation = "onboard"
+                break;
+
+            case "2":
+                req.session.data.confirmation = "onboardrisk"
+                if ( error == "missingNote") {
+                    req.session.data.submitError = "onboardriskNoteIncomplete"
+                } else if (error == "noteTooLong") {
+                    req.session.data.submitError = "onboardriskNoteTooLong"
+                    req.session.data.onboardriskNote = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, met."
+                }
+                break;
+
+            case "3":
+                req.session.data.confirmation = "notOnboard"
+                if ( error == "missingNote") {
+                    req.session.data.submitError = "declineOnboardNoteIncomplete"
+                } else if (error == "noteTooLong") {
+                    req.session.data.submitError = "declineOnboardNoteTooLong"
+                    req.session.data.declineOnboardNote = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, met."
+                }
+                break;
+        }
+    
+    if ( error == "missingInput") {
         req.session.data.submitError = "missing"
     }
 
     loadData(req)
 
     // Redirect to the page you want to screenshot
-    res.redirect('../register-organisation/confirm-organisation-details');
+    res.redirect('../register-organisation/registration-decision');
 });
 
-router.get('/SRO-details', function (req, res) {
-    const error = req.session.data.error
+router.get('/confirm-decision', function (req, res) {
+    const scenario = req.session.data.scenario
 
     delete req.session.data
     req.session.data = {
         area: 'Processing',
-        userType: "processor",
-        orgID: "G03944234",
-        newOrg: "true"
+        userType: "processor"
     };
 
-   if ( error == "missing") {
-        req.session.data.submitError = {
-            familyName: "missing",
-            givenName: "missing",
-            email: "missing",
-            signatoryValid: false
-            }
-    } else if ( error == "invalid") {
-        req.session.data.submitError = {
-            familyName: "valid",
-            givenName: "valid",
-            email: "invalid",
-            signatoryValid: false
-            }
-        req.session.data.familyName = "Smith"
-        req.session.data.givenName = "John"
-        req.session.data.email = "john.smith"
-    }
+    switch (scenario) {
+            case "1":
+                req.session.data.confirmation = "onboard"
+                break;
+
+            case "2":
+                req.session.data.confirmation = "onboardrisk"
+                req.session.data.onboardriskNote = "This is a note."
+                break;
+
+            case "3":
+                req.session.data.confirmation = "notOnboard"
+                req.session.data.declineOnboardNote = "This is a note."
+                break;
+        }
 
     loadData(req)
 
     // Redirect to the page you want to screenshot
-    res.redirect('../register-organisation/signatory-details');
+    res.redirect('../register-organisation/confirm-decision');
 });
 
-router.get('/confirm-SRO-details', function (req, res) {
-
-    delete req.session.data
-    req.session.data = {
-        area: 'Processing',
-        userType: "processor",
-        orgID: "G03944234",
-        newOrg: "true",
-        familyName: "Smith",
-        givenName: "John",
-        email: "john.smith@fakecarehome.com"
-    };
-
-    loadData(req)
-
-    // Redirect to the page you want to screenshot
-    res.redirect('../register-organisation/confirm-signatory-details');
-});
 
 router.get('/find-claim', function (req, res) {
     const error = req.session.data.error
@@ -949,6 +960,33 @@ router.get('/view-org-claims', function (req, res) {
     }  else if ( error == "nomatch") {
         req.session.data.claimID = "ABC-ABCD-ABCD-A"
         req.session.data.notFound = "true"
+    }
+
+    loadData(req)
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../organisation/org-view-main');
+});
+
+router.get('/view-org-org-details', function (req, res) {
+    const scenario = req.session.data.scenario
+    const error = req.session.data.error
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Processing',
+        userType: 'processor',
+        orgTab: "org-details"
+    };
+
+    switch (scenario) {
+        case "1":
+        req.session.data.orgID = "A02944934";
+        break;
+
+        case "2":
+        req.session.data.orgID = "G91774723";
+        break;
     }
 
     loadData(req)

@@ -2,7 +2,7 @@ const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 const { faker } = require('@faker-js/faker');
 const fs = require('fs');
-const { loadData, checkRefFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode, createOrg} = require('../_helpers/helpers.js');
+const { loadData, generateNoteID, checkNote, checkRefFormat, signatoryCheck, findOrg, isValidOrgSearch, getMostRelevantSubmission, checkClaimProcess, determineOutcome, isInternalOMMT, sortAlphabetically, checkProcessingState, findFirstLearnerWithoutOutcome, findCourseByCode, createOrg} = require('../_helpers/helpers.js');
 const { generateClaim } = require('../_helpers/generate-claims.js');
 
 router.use('/processing/v17/backstop', require('../_backstop/backstop-routes.js'));
@@ -111,6 +111,192 @@ router.post('/reg-outcome-handler', function (req, res) {
   req.session.data.processSuccess = "true"
   res.redirect('register-organisation/registration-details')
 });
+
+router.post('/note-reply-handler', function (req, res) {
+  const noteID = req.session.data.noteID
+  const replyNote = req.session.data.replyTextarea
+  let redirectLink = 'organisation/org-view-main'
+  delete req.session.data.submitError
+
+  if (replyNote == "") {
+    req.session.data.submitError = {
+      noteID: noteID,
+      type: "noteMissing"
+    }
+  } else if (replyNote.length > 1400) {
+    req.session.data.submitError = {
+      noteID: noteID,
+      type: "noteTooLong"
+    }
+  } else {
+
+    for (const note of req.session.data.notes) {
+        if (note.noteID == noteID) {
+          reply = {
+                author: "Test user",
+                roleType: req.session.data.userType,
+                dateAdded: new Date(),
+                noteContent: replyNote
+          }
+          note.replies.push(reply)
+        }
+    }
+    redirectLink = 'organisation/org-view-main#' + noteID
+    delete req.session.data.noteID
+    delete req.session.data.replyTextarea
+
+  }
+
+  res.redirect(redirectLink)
+});
+
+router.get('/cancel-reply-handler', function (req, res) {
+
+  delete req.session.data.submitError
+  delete req.session.data.noteID
+  delete req.session.data.replyTextarea
+
+
+  res.redirect('organisation/org-view-main')
+});
+
+router.post('/note-handler', function (req, res) {
+
+  delete req.session.data.noteSubmitError
+
+  const noteContent = req.session.data.noteContent
+  const noteCategories = req.session.data.noteCategories
+
+
+  const submitError = checkNote(noteContent, noteCategories)
+
+  if (submitError.valid) {
+
+    
+
+    const note = {
+      noteID: generateNoteID(),
+      noteType: null,
+      orgID: req.session.data.orgID,
+      claimID: null,
+      author: "Test user",
+      roleType: req.session.data.userType,
+      noteCategories,
+      dateAdded: new Date(),
+      noteContent,
+      replies: []
+    }
+
+    if (req.session.data.orgTab == "org-notes") {
+      note.noteType = "organisationNote"
+    } else {
+      note.noteType = "claimNote"
+      note.claimID = req.session.data.id
+    }
+
+    req.session.data.notes.push(note)
+    delete req.session.data.noteContent
+    delete req.session.data.noteCategories
+    res.redirect('./organisation/note-confirmation')
+  } else {
+    req.session.data.noteSubmitError = submitError
+    res.redirect('./organisation/create-note')
+  }
+
+});
+
+router.get('/api/filter-notes', async function (req, res) {
+
+  try {
+    // 1. Fetch form inputs from request query parameters
+    const keywords = req.query.keywords ? req.query.keywords.trim().toLowerCase() : ''
+    const sortByDate = req.query.sortByDate
+    
+    // 1. Convert to array and filter out any '_unchecked' values added by the kit
+    const selectedCategories = [].concat(req.query.category || [])
+      .filter(val => val && !val.startsWith('_'))
+
+    const selectedNoteTypes = [].concat(req.query['note-type'] || [])
+      .filter(val => val && !val.startsWith('_'))
+
+    // 2. Retrieve base notes array from session data
+    const rawNotes = req.session.data.notes || []
+    const orgID = req.session.data.orgID
+    const claimID = req.session.data.id
+
+    // 3. Base org filter (replicating your Nunjucks 'findOrgNotes' filter)
+    let filteredNotes = rawNotes.filter(note => note.orgID === orgID)
+
+    if (req.session.data.claimScreen == "claimNotes") {
+      filteredNotes = filteredNotes.filter(note => note.claimID === claimID)
+    }
+
+    // 4. Keyword filter - checks within note.noteContent
+    if (keywords) {
+      filteredNotes = filteredNotes.filter(note => 
+        note.noteContent && note.noteContent.toLowerCase().includes(keywords)
+      )
+    }
+
+    // 5. Category filter - includes note if ALL checked categories are in note.noteCategories
+    if (selectedCategories.length > 0) {
+      filteredNotes = filteredNotes.filter(note => {
+        if (!Array.isArray(note.noteCategories)) return false
+        
+        // Returns true if ALL selected categories are present in the note's categories
+        return selectedCategories.every(cat => note.noteCategories.includes(cat))
+      })
+    }
+
+    // 6. Note Type filter
+    if (selectedNoteTypes.includes("Exclude claim notes")) {
+      filteredNotes = filteredNotes.filter(note => note.claimID == null)
+    }
+
+    // 7. Date Sorting
+    if (sortByDate === 'Oldest first') {
+      filteredNotes.sort((a, b) => new Date(a.dateAdded) - new Date(b.dateAdded))
+    } else if (sortByDate === 'Newest first')  {
+      // Default to Newest first
+      filteredNotes.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded))
+    }
+
+  // Helper function to render a partial into an HTML string
+    const renderPartial = (templatePath, templateData) => {
+      return new Promise((resolve, reject) => {
+        // Passing a 3rd argument (callback) stops Express from automatically sending the response
+        res.render(templatePath, templateData, (err, html) => {
+          if (err) return reject(err)
+          resolve(html)
+        })
+      })
+    }
+
+    // Compile both partial templates into HTML strings concurrently
+    const [notesHtml, filtersHtml] = await Promise.all([
+      renderPartial('processing/v17/_components/notes/notes-list.html', {
+        sortedNotes: filteredNotes,
+        data: req.session.data
+      }),
+      renderPartial('processing/v17/_components/notes/notes-selected-filters.html', {
+        selectedCategories,
+        selectedNoteTypes,
+        keywords,
+        sortByDate
+      })
+    ])
+
+    // Send BOTH rendered HTML strings back as a single JSON object
+    res.json({
+      notesHtml: notesHtml,
+      filtersHtml: filtersHtml
+    })
+
+  } catch (err) {
+    console.error('Render Error:', err)
+    res.status(500).json({ error: err.message })
+  }
+})
 
 router.post('/search-claim-id', function (req, res) {
   delete req.session.data['emptyError'];
@@ -795,6 +981,13 @@ router.get('/org-tab-handler/:tab', function (req, res) {
   delete req.session.data.paymentRejectNoteIncomplete
   delete req.session.data.completionResponseIncomplete
   delete req.session.data.completionRejectNoteIncomplete
+
+  delete req.session.data.keywords
+  delete req.session.data.sortByDate
+  delete req.session.data.category
+  delete req.session.data.selectedCategories
+  delete req.session.data.selectedNoteTypes
+  delete req.session.data['note-type']
 
   req.session.data.orgTab = orgTab
 

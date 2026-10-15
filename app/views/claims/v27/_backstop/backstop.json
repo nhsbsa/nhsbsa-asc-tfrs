@@ -16,13 +16,38 @@
             "delay": 500
         },
         {
-            "label": "sign-in",
-            "url": "http://localhost:3000/claims/v27/backstop/sign-in",
+            "label": "account-question",
+            "url": "http://localhost:3000/claims/v27/backstop/account-question",
             "delay": 500
         },
         {
-            "label": "account-creation-incomplete",
-            "url": "http://localhost:3000/claims/v27/backstop/account-creation-incomplete",
+            "label": "account-question-error",
+            "url": "http://localhost:3000/claims/v27/backstop/account-question?error=true",
+            "delay": 500
+        },
+        {
+            "label": "account-details",
+            "url": "http://localhost:3000/claims/v27/backstop/account-details",
+            "delay": 500
+        },
+        {
+            "label": "account-details-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/account-details?error=missing",
+            "delay": 500
+        },
+        {
+            "label": "account-details-error-invalid",
+            "url": "http://localhost:3000/claims/v27/backstop/account-details?error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "existing-account",
+            "url": "http://localhost:3000/claims/v27/backstop/existing-account",
+            "delay": 500
+        },
+        {
+            "label": "sign-in",
+            "url": "http://localhost:3000/claims/v27/backstop/sign-in",
             "delay": 500
         },
         {
@@ -66,6 +91,11 @@
             "delay": 500
         },
         {
+            "label": "acessibility-statement",
+            "url": "http://localhost:3000/claims/v27/backstop/accessibility",
+            "delay": 500
+        },
+        {
             "label": "SRO-email-scenario-1",
             "url": "http://localhost:3000/claims/v27/backstop/email?scenario=1",
             "delay": 500
@@ -81,12 +111,12 @@
             "delay": 500
         },
         {
-            "label": "SRO-email-scenario-4",
+            "label": "submitter-email-scenario-1",
             "url": "http://localhost:3000/claims/v27/backstop/email?scenario=4",
             "delay": 500
         },
         {
-            "label": "submitter-email",
+            "label": "submitter-email-scenario-2",
             "url": "http://localhost:3000/claims/v27/backstop/email?scenario=5",
             "delay": 500
         },
@@ -96,238 +126,318 @@
             "delay": 500
         },
         {
-            "label": "SRO-authentication-verify-details-scenario-1",
-            "url": "http://localhost:3000/claims/v27/backstop/authentication-verify-details?scenario=1",
+            "label": "authentication-verify-details",
+            "url": "http://localhost:3000/claims/v27/backstop/authentication-verify-details?userType=signatory",
             "delay": 500
         },
         {
-            "label": "SRO-authentication-verify-details-scenario-2",
-            "url": "http://localhost:3000/claims/v27/backstop/authentication-verify-details?scenario=2",
+            "label": "sign-in",
+            "url": "http://localhost:3000/claims/v27/backstop/sign-in?userType=signatory",
             "delay": 500
         },
         {
-            "label": "SRO-authentication-verify-details-scenario-3",
-            "url": "http://localhost:3000/claims/v27/backstop/authentication-verify-details?scenario=3",
+            "label": "mfa-setup",
+            "url": "http://localhost:3000/claims/v27/backstop/mfa?userType=signatory",
             "delay": 500
         },
         {
-            "label": "SRO-authentication-verify-details-scenario-4",
-            "url": "http://localhost:3000/claims/v27/backstop/authentication-verify-details?scenario=4",
+            "label": "mfa-code",
+            "url": "http://localhost:3000/claims/v27/backstop/mfa-code?userType=signatory",
             "delay": 500
         },
         {
-            "label": "submitter-authentication-verify-details",
-            "url": "http://localhost:3000/claims/v27/backstop/authentication-verify-details?scenario=5",
+            "label": "complete-registration-verify-details",
+            "url": "http://localhost:3000/claims/v27/backstop/verify-details-registration",
             "delay": 500
         },
         {
-            "label": "SRO-sign-in-scenario-1",
-            "url": "http://localhost:3000/claims/v27/backstop/sign-in?scenario=1",
+            "label": "complete-registration-verify-details-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/verify-details-registration?error=missing",
             "delay": 500
         },
         {
-            "label": "SRO-sign-in-scenario-2",
-            "url": "http://localhost:3000/claims/v27/backstop/sign-in?scenario=2",
+            "label": "complete-registration-details-are-incorrect",
+            "url": "http://localhost:3000/claims/v27/backstop/incorrect-details-registration",
             "delay": 500
         },
         {
-            "label": "SRO-sign-in-scenario-3",
-            "url": "http://localhost:3000/claims/v27/backstop/sign-in?scenario=3",
+            "label": "complete-registration-job-title",
+            "url": "http://localhost:3000/claims/v27/backstop/job-title-complete-registration",
             "delay": 500
         },
         {
-            "label": "SRO-sign-in-scenario-4",
-            "url": "http://localhost:3000/claims/v27/backstop/sign-in?scenario=4",
+            "label": "complete-registration-job-title-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/job-title-complete-registration?error=missing",
             "delay": 500
         },
         {
-            "label": "submitter-sign-in",
-            "url": "http://localhost:3000/claims/v27/backstop/sign-in?scenario=5",
+            "label": "complete-registration-gdl",
+            "url": "http://localhost:3000/claims/v27/backstop/gdl-complete-registration",
             "delay": 500
         },
         {
-            "label": "SRO-mfa-setup-scenario-1",
-            "url": "http://localhost:3000/claims/v27/backstop/mfa?scenario=1",
+            "label": "complete-registration-gdl-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/gdl-complete-registration?error=missing",
             "delay": 500
         },
         {
-            "label": "SRO-mfa-setup-scenario-2",
-            "url": "http://localhost:3000/claims/v27/backstop/mfa?scenario=2",
+            "label": "my-account-scenario-1",
+            "url": "http://localhost:3000/claims/v27/backstop/my-account?scenario=1",
             "delay": 500
         },
         {
-            "label": "SRO-mfa-setup-scenario-3",
-            "url": "http://localhost:3000/claims/v27/backstop/mfa?scenario=3",
+            "label": "my-account-scenario-2",
+            "url": "http://localhost:3000/claims/v27/backstop/my-account?scenario=2",
             "delay": 500
         },
         {
-            "label": "SRO-mfa-setup-scenario-4",
-            "url": "http://localhost:3000/claims/v27/backstop/mfa?scenario=4",
+            "label": "my-account-scenario-3",
+            "url": "http://localhost:3000/claims/v27/backstop/my-account?scenario=3",
             "delay": 500
         },
         {
-            "label": "submitter-mfa-setup",
-            "url": "http://localhost:3000/claims/v27/backstop/mfa?scenario=5",
+            "label": "my-account-scenario-4",
+            "url": "http://localhost:3000/claims/v27/backstop/my-account?scenario=4",
             "delay": 500
         },
         {
-            "label": "SRO-mfa-code-scenario-1",
-            "url": "http://localhost:3000/claims/v27/backstop/mfa-code?scenario=1",
+            "label": "my-account-scenario-5",
+            "url": "http://localhost:3000/claims/v27/backstop/my-account?scenario=5",
             "delay": 500
         },
         {
-            "label": "SRO-mfa-code-scenario-2",
-            "url": "http://localhost:3000/claims/v27/backstop/mfa-code?scenario=2",
+            "label": "my-account-scenario-6",
+            "url": "http://localhost:3000/claims/v27/backstop/my-account?scenario=6",
             "delay": 500
         },
         {
-            "label": "SRO-mfa-code-scenario-3",
-            "url": "http://localhost:3000/claims/v27/backstop/mfa-code?scenario=3",
+            "label": "my-account-scenario-7",
+            "url": "http://localhost:3000/claims/v27/backstop/my-account?scenario=7",
             "delay": 500
         },
         {
-            "label": "SRO-mfa-code-scenario-4",
-            "url": "http://localhost:3000/claims/v27/backstop/mfa-code?scenario=4",
+            "label": "register-new-organisation-before-you-start",
+            "url": "http://localhost:3000/claims/v27/backstop/before-you-start-registration",
             "delay": 500
         },
         {
-            "label": "submitter-mfa-code",
-            "url": "http://localhost:3000/claims/v27/backstop/mfa-code?scenario=5",
+            "label": "register-new-organisation-org-name",
+            "url": "http://localhost:3000/claims/v27/backstop/org-name",
             "delay": 500
         },
         {
-            "label": "SRO-registration-verify-details-scenario-1",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-verify-details?scenario=1",
+            "label": "register-new-organisation-org-name-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/org-name?error=missing",
             "delay": 500
         },
         {
-            "label": "SRO-registration-verify-details-scenario-2",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-verify-details?scenario=2",
+            "label": "register-new-organisation-sro-confirmation",
+            "url": "http://localhost:3000/claims/v27/backstop/sro-confirmation",
             "delay": 500
         },
         {
-            "label": "SRO-registration-verify-details-scenario-3",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-verify-details?scenario=3",
+            "label": "register-new-organisation-sro-confirmation-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/sro-confirmation?error=missing",
             "delay": 500
         },
         {
-            "label": "SRO-registration-verify-details-scenario-4",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-verify-details?scenario=4",
+            "label": "register-new-organisation-not-sro",
+            "url": "http://localhost:3000/claims/v27/backstop/not-sro",
             "delay": 500
         },
         {
-            "label": "SRO-registration-verify-details-error",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-verify-details?scenario=1&error=true",
+            "label": "register-new-organisation-job-title",
+            "url": "http://localhost:3000/claims/v27/backstop/job-title",
             "delay": 500
         },
         {
-            "label": "SRO-registration-account-issue",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-account-issue",
+            "label": "register-new-organisation-job-title-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/job-title?error=missing",
             "delay": 500
         },
         {
-            "label": "SRO-registration-job-title-scenario-1",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-job-title?scenario=1",
+            "label": "register-new-organisation-org-address",
+            "url": "http://localhost:3000/claims/v27/backstop/org-address",
             "delay": 500
         },
         {
-            "label": "SRO-registration-job-title-scenario-2",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-job-title?scenario=2",
+            "label": "register-new-organisation-org-address-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/org-address?error=missing",
             "delay": 500
         },
         {
-            "label": "SRO-registration-job-title-scenario-3",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-job-title?scenario=3",
+            "label": "register-new-organisation-org-address-error-invalid",
+            "url": "http://localhost:3000/claims/v27/backstop/org-address?error=invalid",
             "delay": 500
         },
         {
-            "label": "SRO-registration-job-title-scenario-4",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-job-title?scenario=4",
+            "label": "register-new-organisation-org-address-proof",
+            "url": "http://localhost:3000/claims/v27/backstop/org-address-proof",
             "delay": 500
         },
         {
-            "label": "SRO-registration-job-title-missing-error",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-job-title?scenario=1&error=jobTitleEmptyError",
+            "label": "register-new-organisation-org-address-proof-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/org-address-proof?error=missing",
             "delay": 500
         },
         {
-            "label": "SRO-registration-job-title-invalid-error",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-job-title?scenario=1&error=jobTitleInvalid",
+            "label": "register-new-organisation-org-address-proof-error-filesize",
+            "url": "http://localhost:3000/claims/v27/backstop/org-address-proof?error=errorFileTooBig",
             "delay": 500
         },
         {
-            "label": "SRO-registration-sign-gdl-scenario-1",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-sign-gdl?scenario=1",
+            "label": "register-new-organisation-org-address-proof-error-fileformat",
+            "url": "http://localhost:3000/claims/v27/backstop/org-address-proof?error=errorWrongFileFormat",
             "delay": 500
         },
         {
-            "label": "SRO-registration-sign-gdl-scenario-2",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-sign-gdl?scenario=2",
+            "label": "register-new-organisation-org-address-proof-error-sametype",
+            "url": "http://localhost:3000/claims/v27/backstop/org-address-proof?error=sametype",
             "delay": 500
         },
         {
-            "label": "SRO-registration-sign-gdl-scenario-3",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-sign-gdl?scenario=3",
+            "label": "register-new-organisation-asc-wds-id",
+            "url": "http://localhost:3000/claims/v27/backstop/asc-wds-id",
             "delay": 500
         },
         {
-            "label": "SRO-registration-sign-gdl-scenario-4",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-sign-gdl?scenario=4",
+            "label": "register-new-organisation-asc-wds-id-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/asc-wds-id?error=missing",
             "delay": 500
         },
         {
-            "label": "SRO-registration-sign-gdl-error",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-sign-gdl?scenario=1&error=true",
+            "label": "register-new-organisation-asc-wds-id-error-invalid",
+            "url": "http://localhost:3000/claims/v27/backstop/asc-wds-id?error=invalid",
             "delay": 500
         },
         {
-            "label": "SRO-registration-bank-details-choice-scenario-1",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details-choice?scenario=1",
+            "label": "register-new-organisation-is-this-you",
+            "url": "http://localhost:3000/claims/v27/backstop/is-this-you",
             "delay": 500
         },
         {
-            "label": "SRO-registration-bank-details-choice-scenario-2",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details-choice?scenario=2",
+            "label": "register-new-organisation-is-this-you-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/is-this-you?error=missing",
             "delay": 500
         },
         {
-            "label": "SRO-registration-bank-details-choice-scenario-3",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details-choice?scenario=3",
+            "label": "register-new-organisation-asc-wds-already-in-use",
+            "url": "http://localhost:3000/claims/v27/backstop/asc-wds-already-in-use",
             "delay": 500
         },
         {
-            "label": "SRO-registration-bank-details-choice-error",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details-choice?scenario=3&error=true",
+            "label": "register-new-organisation-not-you",
+            "url": "http://localhost:3000/claims/v27/backstop/not-you",
             "delay": 500
         },
         {
-            "label": "SRO-registration-bank-details-scenario-1",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?scenario=1",
+            "label": "register-new-organisation-companies-house",
+            "url": "http://localhost:3000/claims/v27/backstop/companies-house",
             "delay": 500
         },
         {
-            "label": "SRO-registration-bank-details-scenario-2",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?scenario=2",
+            "label": "register-new-organisation-companies-house-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/companies-house?error=missing",
             "delay": 500
         },
         {
-            "label": "SRO-registration-bank-details-scenario-3",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?scenario=3",
+            "label": "register-new-organisation-companies-house-number",
+            "url": "http://localhost:3000/claims/v27/backstop/companies-house-number",
             "delay": 500
         },
         {
-            "label": "SRO-registration-bank-details-missing-error",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?scenario=3&error=missing",
+            "label": "register-new-organisation-companies-house-number-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/companies-house-number?error=missing",
             "delay": 500
         },
         {
-            "label": "SRO-registration-bank-details-invalid-error",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?scenario=3&error=invalid",
+            "label": "register-new-organisation-companies-house-number-error-invalid",
+            "url": "http://localhost:3000/claims/v27/backstop/companies-house-number?error=invalid",
             "delay": 500
         },
         {
-            "label": "SRO-registration-bank-details-length-error",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?scenario=3&error=toolong",
+            "label": "register-new-organisation-vat-registered",
+            "url": "http://localhost:3000/claims/v27/backstop/vat-registered",
+            "delay": 500
+        },
+        {
+            "label": "register-new-organisation-vat-registered-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/vat-registered?error=missing",
+            "delay": 500
+        },
+        {
+            "label": "register-new-organisation-vat-number",
+            "url": "http://localhost:3000/claims/v27/backstop/vat-number",
+            "delay": 500
+        },
+        {
+            "label": "register-new-organisation-vat-number-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/vat-number?error=missing",
+            "delay": 500
+        },
+        {
+            "label": "register-new-organisation-vat-number-error-invalid",
+            "url": "http://localhost:3000/claims/v27/backstop/vat-number?error=invalid",
+            "delay": 500
+        },
+        {
+            "label": "register-new-organisation-check-your-answers",
+            "url": "http://localhost:3000/claims/v27/backstop/check-your-answers",
+            "delay": 500
+        },
+        {
+            "label": "register-new-organisation-declaration",
+            "url": "http://localhost:3000/claims/v27/backstop/registration-declaration",
+            "delay": 500
+        },
+        {
+            "label": "register-new-organisation-declaration-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/registration-declaration?error=missing",
+            "delay": 500
+        },
+        {
+            "label": "register-new-organisation-confirmation",
+            "url": "http://localhost:3000/claims/v27/backstop/registration-confirmation",
+            "delay": 500
+        },
+        {
+            "label": "register-new-organisation-save-confirmation",
+            "url": "http://localhost:3000/claims/v27/backstop/my-account?scenario=4&banner=saved",
+            "delay": 500
+        },
+        {
+            "label": "view-registration-submitted",
+            "url": "http://localhost:3000/claims/v27/backstop/view-registration?scenario=1",
+            "delay": 500
+        },
+        {
+            "label": "view-registration-rejected",
+            "url": "http://localhost:3000/claims/v27/backstop/view-registration?scenario=2",
+            "delay": 500
+        },
+        {
+            "label": "delete-registration",
+            "url": "http://localhost:3000/claims/v27/backstop/delete-registration",
+            "delay": 500
+        },
+        {
+            "label": "delete-registration-confirmation",
+            "url": "http://localhost:3000/claims/v27/backstop/my-account?scenario=4&banner=delete",
+            "delay": 500
+        },
+        {
+            "label": "add-phone-number",
+            "url": "http://localhost:3000/claims/v27/backstop/add-phone-number",
+            "delay": 500
+        },
+        {
+            "label": "add-phone-number-error-missing",
+            "url": "http://localhost:3000/claims/v27/backstop/add-phone-number?error=missing",
+            "delay": 500
+        },
+        {
+            "label": "add-phone-number-error-invalid",
+            "url": "http://localhost:3000/claims/v27/backstop/add-phone-number?error=invalid",
             "delay": 500
         },
         {
@@ -352,27 +462,32 @@
         },
         {
             "label": "SRO-view-bank-details-confirmation",
-            "url": "http://localhost:3000/claims/v27/backstop/view-bank-details?scenario=3&confirmation=true",
+            "url": "http://localhost:3000/claims/v27/backstop/view-bank-details?scenario=2&confirmation=true",
             "delay": 500
         },
         {
             "label": "SRO-registered-bank-details",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?scenario=1&registered=true",
+            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?registered=true",
             "delay": 500
         },
         {
             "label": "SRO-registered-bank-details-missing-error",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?scenario=3&error=missing&registered=true",
+            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?error=missing&registered=true",
             "delay": 500
         },
         {
             "label": "SRO-registered-bank-details-invalid-error",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?scenario=3&error=invalid&registered=true",
+            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?error=invalid&registered=true",
             "delay": 500
         },
         {
             "label": "SRO-registered-bank-details-length-error",
-            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?scenario=3&error=toolong&registered=true",
+            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?error=toolong&registered=true",
+            "delay": 500
+        },
+        {
+            "label": "SRO-registered-bank-details-api-error",
+            "url": "http://localhost:3000/claims/v27/backstop/registration-bank-details?error=api&registered=true",
             "delay": 500
         },
         {
@@ -501,12 +616,12 @@
             "delay": 500
         },
         {
-            "label": "SRO-manage-claims-scenario-4-bank-details-submitted",
+            "label": "SRO-manage-claims-scenario-5-bank-details-submitted",
             "url": "http://localhost:3000/claims/v27/backstop/manage-claims?scenario=5&userType=signatory",
             "delay": 500
         },
         {
-            "label": "submitter-manage-claims-scenario-4-bank-details-submitted",
+            "label": "submitter-manage-claims-scenario-5-bank-details-submitted",
             "url": "http://localhost:3000/claims/v27/backstop/manage-claims?scenario=5&userType=submitter",
             "delay": 500
         },
@@ -518,6 +633,26 @@
         {
             "label": "submitter-manage-claims-scenario-4-bank-details-failed-verification",
             "url": "http://localhost:3000/claims/v27/backstop/manage-claims?scenario=4&userType=submitter",
+            "delay": 500
+        },
+        {
+            "label": "SRO-manage-claims-scenario-6-bank-details-verified",
+            "url": "http://localhost:3000/claims/v27/backstop/manage-claims?scenario=6&userType=signatory",
+            "delay": 500
+        },
+        {
+            "label": "submitter-manage-claims-scenario-6-bank-details-verified",
+            "url": "http://localhost:3000/claims/v27/backstop/manage-claims?scenario=6&userType=submitter",
+            "delay": 500
+        },
+        {
+            "label": "SRO-manage-claims-scenario-7",
+            "url": "http://localhost:3000/claims/v27/backstop/manage-claims?scenario=7&userType=signatory",
+            "delay": 500
+        },
+        {
+            "label": "submitter-manage-claims-scenario-7",
+            "url": "http://localhost:3000/claims/v27/backstop/manage-claims?scenario=7&userType=submitter",
             "delay": 500
         },
         {

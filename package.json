@@ -13,7 +13,8 @@
     "@x-govuk/govuk-prototype-filters": "1.5.0",
     "fs": "^0.0.1-security",
     "govuk-frontend": "^5.10.2",
-    "govuk-prototype-kit": "13.18.1"
+    "govuk-prototype-kit": "13.18.1",
+    "jquery": "4.0.0"
   },
   "devDependencies": {
     "backstopjs": "^6.3.6"

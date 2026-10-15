@@ -18,6 +18,7 @@ addFilter('processorstatusTag', function (statusID) {
     }
 }, { renderAsHtml: true })
 
+
 addFilter('sectionCheck', function (state) {
     if (state != null) {
         return "Completed"

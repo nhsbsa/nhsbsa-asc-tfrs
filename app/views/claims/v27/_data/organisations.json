@@ -725,6 +725,58 @@
     }
   },
   {
+    "workplaceID": "H26749203",
+    "regRef": "R-64LD-8K",
+    "status": "active",
+    "addressEvidence": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
+    "CHregistered": true,
+    "CHNumber": "12345678",
+    "VATregistered": true,
+    "VATNumber": "12345678",
+    "numberOfClaims": 0,
+    "name": "Green pastures care provider",
+    "address": {
+      "addressLine1": "2 June Street",
+      "addressLine2": null,
+      "addressLine3": null,
+      "addressTown": "Boston Spa",
+      "addressCounty": "Yokrshire",
+      "addressPostcode": "B023 6FH"
+    },
+    "bankDetails": {
+      "verificationStatus": "verified",
+      "nameOnAccount": "Green pastures care provider Ltd",
+      "sortCode": "235486",
+      "accountNumber": "84526365",
+      "buildingSocietyNumber": null
+    },
+    "validGDL": true,
+    "newSRO": false,
+    "signatory": {
+      "active": {
+        "givenName": "Ivy",
+        "familyName": "Montgomery",
+        "email": "ivy.montgomery@caregroup.com",
+        "status": "active"
+      },
+      "inactive": []
+    },
+    "users": {
+      "active": [],
+      "inactive": [],
+      "invited": []
+    }
+  },
+  {
     "workplaceID": "F26738594",
     "regRef": "R-1C5V-7H",
     "status": "draft",

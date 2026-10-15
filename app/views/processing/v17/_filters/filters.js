@@ -25,6 +25,18 @@ addFilter('processorstatusTag', function (statusID) {
     }
 }, { renderAsHtml: true })
 
+addFilter('claimTypeTag', function (statusID) {
+    if (statusID == '100') {
+        return '<strong class="govuk-tag govuk-tag--orange">100 claim</strong>'
+    } else if (statusID == '60') {
+        return '<strong class="govuk-tag govuk-tag--yellow">60 part</strong>' 
+    } else if (statusID == '40') {
+        return '<strong class="govuk-tag govuk-tag--purple">40 part</strong>' 
+    } else {
+        return '<strong class="govuk-tag govuk-tag--grey">Invalid Type</strong>'
+    }
+}, { renderAsHtml: true })
+
 addFilter('findClaim', function (claimID, claims) {
     let claim = null;
     for (let c of claims) {
@@ -898,6 +910,43 @@ addFilter('evidenceType', function (type) {
             break;
         case "insurancecertificate":
             return "Public liability insurance certificate"
+            break;
+        default:
+           return "Error"
+    }
+
+})
+
+addFilter('findOrgNotes', function (notes, orgID) {
+
+    if (!Array.isArray(notes)) return [];
+
+    return notes
+    .filter(note => note && note.orgID === orgID)
+    .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+
+})
+
+addFilter('findClaimNotes', function (notes, claimID) {
+
+    if (!Array.isArray(notes)) return [];
+
+    return notes
+    .filter(note => note && note.claimID === claimID)
+    .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+
+})
+
+addFilter('roleType', function (type) {
+
+    switch(type) {
+        case "ccsAgent":
+            return "CCS"
+        case "processor":
+            return "Processer"
+            break;
+        case "leadProcessor":
+            return "QA"
             break;
         default:
            return "Error"

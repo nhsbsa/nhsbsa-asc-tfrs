@@ -1,0 +1,177 @@
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% if data.submitError != null %}
+            <div class="govuk-error-summary" data-module="govuk-error-summary">
+                <div role="alert">
+                    <h2 class="govuk-error-summary__title">
+                    There is a problem
+                    </h2>
+                    <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                            <a href="#reply-textarea-{{data.submitError.noteID}}-error">
+                                {% if (data.submitError.type == 'noteTooLong') %}
+                                    Note must be 1,500 characters or less
+                                {% elif (data.submitError.type == 'noteMissing') %}
+                                    Type your note
+                                {% endif %}
+                            </a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <h1 class="govuk-heading-l">Notes</h1>
+        <div class="moj-filter-layout">
+            <div class="moj-filter-layout__filter">
+                <div class="moj-filter" data-module="moj-filter">
+                    <div class="moj-filter__header">
+                        <div class="moj-filter__header-title">
+                        <h2 class="govuk-heading-m">Filter</h2>
+                        </div>
+                        <div class="moj-filter__header-action">
+                        </div>
+                    </div>
+                    <div class="moj-filter__content">
+                        <div id="selected-filters-container">
+                            {% include "../notes/notes-selected-filters.html" %}
+                        </div>
+                        <div class="moj-filter__options">
+                        <form id="filter-form">
+                            <button type="submit" class="govuk-button" data-module="govuk-button">
+                                Apply filters
+                            </button>
+                            <div class="govuk-form-group">
+                                <label class="govuk-label govuk-label--m" for="keywords">
+                                Keywords
+                                </label>
+                                <input class="govuk-input" id="keywords" name="keywords" type="text">
+                            </div>
+                            <div class="govuk-form-group">
+                                <fieldset class="govuk-fieldset">
+                                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                                        Sort by date
+                                    </legend>
+                                    <div class="govuk-radios govuk-radios--small" data-module="govuk-radios">
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="newest" name="sortByDate" type="radio" value="Newest first" checked>
+                                            <label class="govuk-label govuk-radios__label" for="newest">
+                                                Newest first  
+                                            </label>
+                                        </div>
+                                        <div class="govuk-radios__item">
+                                            <input class="govuk-radios__input" id="oldest" name="sortByDate" type="radio" value="Oldest first">
+                                            <label class="govuk-label govuk-radios__label" for="oldest">
+                                                Oldest first  
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="govuk-form-group">
+                                <fieldset class="govuk-fieldset">
+                                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                                        Category
+                                    </legend>
+                                    <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                                        <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="category" name="category" type="checkbox" value="Claim update">
+                                        <label class="govuk-label govuk-checkboxes__label" for="category">
+                                            Claim update
+                                        </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="category-2" name="category" type="checkbox" value="Rework">
+                                        <label class="govuk-label govuk-checkboxes__label" for="category-2">
+                                            Rework
+                                        </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="category-3" name="category" type="checkbox" value="Org update">
+                                        <label class="govuk-label govuk-checkboxes__label" for="category-3">
+                                            Org update
+                                        </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="category-4" name="category" type="checkbox" value="Org communication">
+                                        <label class="govuk-label govuk-checkboxes__label" for="category-4">
+                                            Org communication
+                                        </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="category-3" name="category" type="checkbox" value="Quality check">
+                                        <label class="govuk-label govuk-checkboxes__label" for="category-3">
+                                            Quality check
+                                        </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="category-5" name="category" type="checkbox" value="Onboarding">
+                                        <label class="govuk-label govuk-checkboxes__label" for="category-5">
+                                            Onboarding
+                                        </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="category-6" name="category" type="checkbox" value="Processing error">
+                                        <label class="govuk-label govuk-checkboxes__label" for="category-6">
+                                            Processing error
+                                        </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="category-7" name="category" type="checkbox" value="Escalation">
+                                        <label class="govuk-label govuk-checkboxes__label" for="category-7">
+                                            Escalation
+                                        </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="category-8" name="category" type="checkbox" value="CCS referral">
+                                        <label class="govuk-label govuk-checkboxes__label" for="category-8">
+                                            CCS referral
+                                        </label>
+                                        </div>
+                                        <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="category-9" name="category" type="checkbox" value="Other">
+                                        <label class="govuk-label govuk-checkboxes__label" for="category-9">
+                                            Other
+                                        </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="govuk-form-group">
+                                <fieldset class="govuk-fieldset">
+                                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                                        Note type
+                                    </legend>
+                                    <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                                        <div class="govuk-checkboxes__item">
+                                        <input class="govuk-checkboxes__input" id="note-type" name="note-type" type="checkbox" value="Exclude claim notes">
+                                        <label class="govuk-label govuk-checkboxes__label" for="note-type">
+                                            Exclude claim notes
+                                        </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        
+
+            <div class="moj-filter-layout__content">
+                <div class="moj-action-bar">
+                    <div class="moj-action-bar__filter"></div>
+                        <a href="./create-note" draggable="false" class="govuk-button" data-module="govuk-button" onclick="window.open(this.href, 'popupWindow', 'width=600,height=800,scrollbars=yes'); return false;">
+                            Add a new note (opens in a new tab)
+                        </a>
+                </div>
+                <div class="note-list" id="notes-container">
+                    {% set sortedNotes = data.notes | findOrgNotes(data.orgID) %}
+                    {% include "../notes/notes-list.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

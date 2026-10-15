@@ -11,7 +11,7 @@
             <a href="org-view-main?claimScreen=claim" class="govuk-back-link govuk-!-margin-bottom-6">Back to claim details</a>
         {% endif %}
 
-        <span class="govuk-caption-l">Claim reference number: {{ claim.claimID }}</span>
+        <span class="govuk-caption-l">Claim: {{ claim.claimID }}</span>
         <h2 class="govuk-heading-l" id="training">{% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% else %}Claim{% endif %} history</h2>
 
         <p class="govuk-body">This table shows all {% if data.view == "60" %}60 part{% elif data.view == "40" %}40 part{% endif %} history with any edits <mark class="hods-highlight"><strong>highlighted</strong></mark>.</p>

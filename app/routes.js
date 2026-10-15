@@ -83,7 +83,7 @@ router.use((req, res, next) => {
   }
 
   // Define keys to exclude from logging
-  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes', 'CPDActivities', 'versionHistory', 'users', 'processingServiceName', 'organisations', 'registrations', 'org', 'user'];
+  const excludeKeys = ['training', 'claims', 'learners', 'statuses', 'roleTypes', 'CPDActivities', 'versionHistory', 'users', 'processingServiceName', 'organisations', 'registrations', 'org', 'user', 'notes'];
 
   // Create a copy of req.session.data with excluded keys removed
   const filteredData = Object.keys(req.session.data)
