@@ -18,20 +18,12 @@ Add a note — {{data.processingServiceName}}
             {% else %}
             <div class="moj-banner__message">Note added to claim</div>
             {% endif %}
-            </div>
-
-        {% if  data.orgTab == "org-notes" %}    
-        <p class="govuk-body">Refresh the organisation notes page to view your note.</p>
-        
-        {% else %}
-        <p class="govuk-body">Refresh the claim notes page to view your note.
-        </p>
-        {% endif %}
+        </div>
 
         <p class="govuk-body">
             You can now <a href="javascript:window.close();" class="govuk-link">close this tab</a>.
         </p>
 
-            </div>
-
+    </div>
+</div>
 {% endblock %}
