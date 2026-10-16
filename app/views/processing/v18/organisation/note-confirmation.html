@@ -20,10 +20,14 @@ Add a note — {{data.processingServiceName}}
             {% endif %}
         </div>
 
-        <p class="govuk-body">
-            You can now <a href="javascript:window.close();" class="govuk-link">close this tab</a>.
-        </p>
-
+       <script>
+        // Refresh main window if it exists
+        if (window.opener && !window.opener.closed) {
+            window.opener.location.reload();
+        }
+        // Close child tab
+        window.close();
+        </script>
     </div>
 </div>
 {% endblock %}
