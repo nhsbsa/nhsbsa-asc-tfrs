@@ -188,11 +188,13 @@ router.post('/note-handler', function (req, res) {
     }
 
     if (req.session.data.orgTab == "org-notes") {
-      note.noteType = "organisationNote"
+      note.noteCategories = "Org note"
     } else {
-      note.noteType = "claimNote"
+      note.noteCategories = "Claim note"
       note.claimID = req.session.data.id
     }
+
+    
 
     req.session.data.notes.push(note)
     delete req.session.data.noteContent

@@ -80,6 +80,7 @@ Add a note — {{data.processingServiceName}}
 
             {% if  data.orgTab == "org-notes" %}
                 {% set categoryItems = [
+                    { value: "Org note", text: "Organisation note" },
                     { value: "Org update", text: "Organisation update" },
                     { value: "Org communication", text: "Organisation communication" },
                     { value: "Escalation", text: "Escalation" },
@@ -89,6 +90,7 @@ Add a note — {{data.processingServiceName}}
                 ] %}
             {% else %}
                 {% set categoryItems = [
+                    { value: "Claim note", text: "Claim note" },
                     { value: "Claim update", text: "Claim update" },
                     { value: "Rework", text: "Rework" },
                     { value: "Quality check", text: "Quality check" },

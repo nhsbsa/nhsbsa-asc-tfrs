@@ -1,5 +1,6 @@
 [
     {
+        "noteID": "ABC-123",
         "noteType": "claimNote",
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
@@ -18,6 +19,7 @@
         ]
     },
     {
+        "noteID": "ABC-124",
         "noteType": "claimNote",
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
@@ -29,6 +31,7 @@
         "replies": []
     },
     {
+        "noteID": "ABC-125",
         "noteType": "claimNote",
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
@@ -40,6 +43,7 @@
         "replies": []
     },
     {
+        "noteID": "ABC-126",
         "noteType": "claimNote",
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
@@ -58,6 +62,7 @@
         ]
     },
     {
+        "noteID": "ABC-127",
         "noteType": "claimNote",
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
@@ -69,6 +74,7 @@
         "replies": []
     },
     {
+        "noteID": "ABC-128",
         "noteType": "claimNote",
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
@@ -87,6 +93,7 @@
         ]
     },
     {
+        "noteID": "ABC-129",
         "noteType": "claimNote",
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
@@ -105,6 +112,7 @@
         ]
     },
     {
+        "noteID": "ABC-130",
         "noteType": "claimNote",
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
@@ -116,17 +124,19 @@
         "replies": []
     },
     {
+        "noteID": "ABC-131",
         "noteType": "claimNote",
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
         "author": "Miguel Torres",
         "roleType": "processor",
-        "noteCategories": ["Claim update", "Org communication"],
+        "noteCategories": ["Claim note","Claim update", "Org communication"],
         "dateAdded": "2026-05-28T12:03:47.938Z",
         "noteContent": "Org have paid 60/40 payment plan. Have emailed to inform SRO to inform him he need to provide evidence of the remaining 40% payment plan",
         "replies": []
     },
     {
+        "noteID": "ABC-132",
         "noteType": "claimNote",
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
@@ -138,6 +148,7 @@
         "replies": []
     },
     {
+        "noteID": "ABC-133",
         "noteType": "claimNote",
         "orgID": "A02944934",
         "claimID": "DEU-QBG9-WJ3U-A",
@@ -152,6 +163,7 @@
 
 
     {
+        "noteID": "ABC-134",
         "noteType": "organisationNote",
         "orgID": "A02944934",
         "claimID": null,
@@ -163,6 +175,7 @@
         "replies": []
     },
     {
+        "noteID": "ABC-135",
         "noteType": "organisationNote",
         "orgID": "A02944934",
         "claimID": null,
@@ -174,17 +187,19 @@
         "replies": []
     },
     {
+        "noteID": "ABC-136",
         "noteType": "organisationNote",
         "orgID": "A02944934",
         "claimID": null,
         "author": "Gillian Carpenter",
         "roleType": "processor",
-        "noteCategories": ["Org update", "Org communication"],
+        "noteCategories": ["Org note","Org update", "Org communication"],
         "dateAdded": "2026-05-27T15:20:47.938Z",
         "noteContent": "We received a call referral from them asking when their claims would be dealt with. I have emailed them saying that all claims will be processed shortly.",
         "replies": []
     },
     {
+        "noteID": "ABC-137",
         "noteType": "organisationNote",
         "orgID": "A02944934",
         "claimID": null,
@@ -196,6 +211,7 @@
         "replies": []
     },
     {
+        "noteID": "ABC-138",
         "noteType": "organisationNote",
         "orgID": "A02944934",
         "claimID": null,

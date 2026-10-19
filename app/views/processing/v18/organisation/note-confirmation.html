@@ -19,15 +19,15 @@ Add a note — {{data.processingServiceName}}
             <div class="moj-banner__message">Note added to claim</div>
             {% endif %}
         </div>
-
-       <script>
+    </div>
+</div>
+    <script>
         // Refresh main window if it exists
         if (window.opener && !window.opener.closed) {
             window.opener.location.reload();
         }
         // Close child tab
         window.close();
-        </script>
-    </div>
-</div>
+    </script>
+
 {% endblock %}
