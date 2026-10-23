@@ -188,9 +188,9 @@ router.post('/note-handler', function (req, res) {
     }
 
     if (req.session.data.orgTab == "org-notes") {
-      note.noteCategories = "Org note"
+      note.noteCategories.unshift("Org note")
     } else {
-      note.noteCategories = "Claim note"
+      note.noteCategories.unshift("Claim note")
       note.claimID = req.session.data.id
     }
 

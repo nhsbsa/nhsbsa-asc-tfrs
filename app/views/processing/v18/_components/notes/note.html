@@ -2,10 +2,8 @@
   {% if (note.noteCategories.length > 0 ) %}
     <div class="govuk-tag-group  govuk-!-margin-bottom-7">
       {% for category in note.noteCategories %}
-        {% if not (category == "Claim note") %}
-          <strong class="govuk-tag govuk-tag--purple" style="max-width: none;">{{category}}</strong>
-        {% elif (data.orgTab == "org-notes") %}
-          <strong class="govuk-tag govuk-tag--purple" style="max-width: none;">{{category}}</strong>
+        {% if data.orgTab == "org-notes" or (category != "Claim note" and category != "Org note") %} 
+        <strong class="govuk-tag govuk-tag--purple" style="max-width: none;">{{category}}</strong>
         {% endif %}
       {% endfor %}
     </div>
