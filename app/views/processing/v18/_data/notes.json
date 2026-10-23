@@ -37,7 +37,7 @@
         "claimID": "DEU-QBG9-WJ3U-A",
         "author": "Samira Khan",
         "roleType": "processor",
-        "noteCategories": ["Claim note", "Claim update"],
+        "noteCategories": ["Claim note", "Claim update", "Quality check"],
         "dateAdded": "2026-06-03T11:45:47.938Z",
         "noteContent": "Bank statement didn’t show who account belonged to but an email was included from training provider to say the invoice had been in full so I was happy with that",
         "replies": []
@@ -49,7 +49,7 @@
         "claimID": "DEU-QBG9-WJ3U-A",
         "author": "Elena Rostova",
         "roleType": "processor",
-        "noteCategories": ["Claim note", "Claim update"],
+        "noteCategories": ["Claim note", "Claim update", "Quality check"],
         "dateAdded": "2026-06-02T11:02:47.938Z",
         "noteContent": "Rejected as no paid date. Asked for a bank statement or receipt.",
         "replies": [
@@ -80,7 +80,7 @@
         "claimID": "DEU-QBG9-WJ3U-A",
         "author": "Noah Campbell",
         "roleType": "leadProcessor",
-        "noteCategories": ["Claim note", "QA check", "Rework", "Processing error"],
+        "noteCategories": ["Claim note", "Quality check"],
         "dateAdded": "2026-06-01T09:07:47.938Z",
         "noteContent": "Quality check approved incorrectly, rework raised. Rework for original check will need raising.",
         "replies": [
@@ -142,7 +142,7 @@
         "claimID": "DEU-QBG9-WJ3U-A",
         "author": "Miguel Torres",
         "roleType": "processor",
-        "noteCategories": ["Claim note", "Claim update", "Processing error"],
+        "noteCategories": ["Claim note", "Claim update", "Quality check"],
         "dateAdded": "2026-05-26T13:32:47.938Z",
         "noteContent": "I have approved their 40 claims. Issue – on their 60 claims that was processed over a year ago it showed that they didn’t pay the full 60% of the cost as the amounts on the invoice were incorrect. That wasn’t noticed at the time but has been now as the evidence they sent for their 40 claims prove that had paid remaining 40% showed the correct amounts that should’ve been part of the 60 claim evidence.",
         "replies": []
