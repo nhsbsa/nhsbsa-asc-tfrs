@@ -74,6 +74,7 @@ Add a note — {{data.processingServiceName}}
                 classes: "govuk-label--m",
                 isPageHeading: false
             },
+            value: data['noteContent'],
             errorMessage: noteContentErrorMessage
             }) }}
 
@@ -107,6 +108,7 @@ Add a note — {{data.processingServiceName}}
                 classes: "govuk-fieldset__legend--m"
                 }
             },
+            values: data['noteCategories'],
             errorMessage: noteCategoriesErrorMessage,
             items: categoryItems
             }) }}
