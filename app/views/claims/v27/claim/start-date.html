@@ -39,16 +39,9 @@
                             Start date of course or qualification
                         </h1>
                     </legend>
-                    <div class="govuk-warning-text">
-                        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-                        <strong class="govuk-warning-text__text">
-                            <span class="govuk-visually-hidden">Warning</span>
-                            You can only claim for training that started and was paid for on or after 1 April 2024.
-                        </strong>
-                    </div>
                      <div id="completion-date-hint" class="govuk-hint">
                         {% if claim.status == "not-yet-submitted" %}
-                            {% if claim.claimType == "60" and submission.learners.length == 1 %}
+                            {% if claim.claimType == "60"%}
                                For the 60 part of a 60/40 claim you need to submit the claim within 3 months of the payment date or the learner's start date, whichever is latest
                                <br><br> For example, {{"" | currentDate}}
                     {% endif %}
