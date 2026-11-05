@@ -1459,6 +1459,11 @@
             "label": "bank-details-successful-banner-bank-details-no-match",
             "url": "http://localhost:3000/processing/v18/backstop/confirmed-bank-details?accessPayResult=noMatch&bankDetailsRejected=true&scenario=3",
             "delay": 500
+        },
+        {
+            "label": "claim-notes",
+            "url": "http://localhost:3000/processing/v18/backstop/claim-notes?Notes=true",
+            "delay": 500
         }
     ],
     "paths": {

@@ -1240,5 +1240,29 @@ router.get('/confirm-SRO-details-change', function (req, res) {
     res.redirect('../change-sro/updated-signatory-invitation');
 });
 
+router.get('/claim-notes', function (req, res) {
+    const scenario = req.session.data.scenario
+    const notes = req.session.data.notes
+    const error = req.session.data.error
+    let id = null
+
+    delete req.session.data
+    req.session.data = {
+        area: 'Processing',
+        userType: 'processor',
+        orgTab: "singleClaim",
+        id: "DEU-QBG9-WJ3U-A",
+        orgID: "A02944934",
+        claimScreen: "claimNotes",
+        view: "100",
+        filter: "everything"
+    }
+
+    loadData(req)
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../organisation/org-view-main');
+});
+
 
 module.exports = router
