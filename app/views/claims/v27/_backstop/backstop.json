@@ -1055,6 +1055,13 @@
             "url": "http://localhost:3000/claims/v27/backstop/start-date",
             "delay": 500
         },
+
+        {
+            "label": "claim-add-start-date-not-yet-submitted",
+            "url": "http://localhost:3000/claims/v27/backstop/start-date-not-yet-submitted",
+            "delay": 500
+        },
+
         {
             "label": "claim-add-start-date-missing-error",
             "url": "http://localhost:3000/claims/v27/backstop/start-date?error=missing",
@@ -1115,6 +1122,12 @@
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100",
             "delay": 500
         },
+        {
+            "label": "claim-add-completion-date-multiple-learners",
+            "url": "http://localhost:3000//claims/v27/claim/add-completion-date?type=100&learnerCount=multi",
+            "delay": 500
+        },
+        
         {
             "label": "claim-add-completion-date-missing-error",
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&error=missing",
@@ -1583,6 +1596,16 @@
         {
             "label": "claim-remove-learner-confirmation",
             "url": "http://localhost:3000/claims/v27/backstop/remove-learner-confirmation",
+            "delay": 500
+        },
+        {
+            "label": "claim-missed-submission-window",
+            "url": "http://localhost:3000/claims/v27/backstop/missed-submission-window?type=100",
+            "delay": 500
+        },
+        {
+            "label": "claim-missed-submission-window-multiple-learners-one-date",
+            "url": "http://localhost:3000/claims/v27/backstop/missed-submission-window?type=100&learnerCount=multi&sharedDate=true",
             "delay": 500
         }
     ],

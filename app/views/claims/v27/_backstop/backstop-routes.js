@@ -2913,10 +2913,32 @@ router.get('/remove-learner-confirmation', function (req, res) {
     };
 
     loadScenarioData(req)
-loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     res.redirect('../claim/remove-learner-confirmation');
 });
+
+router.get('/missed-submission-window', function (req, res) {
+    
+    const type = req.session.data.type
+   
+    delete req.session.data
+
+    req.session.data = {
+        area: 'Claims',
+        userType: 'signatory',
+        journey: 'signin',
+        tabLocation: "claims"
+    };
+// switch statement - if type = 100 use x ID 
+    loadScenarioData(req)
+    loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadData(req, "A02944934")
+
+    res.redirect('../claim/missed-submission-window');
+});
+
+
 
 module.exports = router
