@@ -2171,6 +2171,7 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
 router.get('/completion-date', function (req, res) {
     const error = req.session.data.error
     const type = req.session.data.type
+    const learnerCount = req.session.data.learnerCount
     let id = null
 
   delete req.session.data
@@ -2182,10 +2183,20 @@ router.get('/completion-date', function (req, res) {
         learnerID: "CM 61 1F 12 E"
     };
 
-    if (type == "100") {
-        id = "G5W-W3VK-BLA1-A"
-    } else if (type == "40") {
-        id = "U97-SJ15-4GZU-C"
+    switch (type) {
+        case "100":
+            if (learnerCount=="single") {
+                id = "G5W-W3VK-BLA1-A"
+            } else if (learnerCount=="multi") {
+                id = "7JP-X9LK-1QXE-A";
+            }
+            break;
+        case "40":
+            id = "U97-SJ15-4GZU-C"
+            break;
+        case "60":
+            id = "VKA-JZM3-64J1-B"
+            break;
     }
 
     req.session.data.id = id

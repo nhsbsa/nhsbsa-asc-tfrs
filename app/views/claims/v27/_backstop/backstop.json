@@ -1119,12 +1119,12 @@
         },
         {
             "label": "claim-add-completion-date",
-            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&learnerCount=single",
             "delay": 500
         },
         {
             "label": "claim-add-completion-date-multiple-learners",
-            "url": "http://localhost:3000//claims/v27/claim/add-completion-date?type=100&learnerCount=multi",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&learnerCount=multi",
             "delay": 500
         },
         
