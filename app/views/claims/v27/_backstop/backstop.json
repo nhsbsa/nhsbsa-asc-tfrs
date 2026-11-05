@@ -1599,15 +1599,31 @@
             "delay": 500
         },
         {
-            "label": "claim-missed-submission-window",
-            "url": "http://localhost:3000/claims/v27/backstop/missed-submission-window?type=100",
+            "label": "claim-missed-submission-window-100-single-learner",
+            "url": "http://localhost:3000/claims/v27/backstop/missed-submission-window?type=100&learner=single",
             "delay": 500
         },
         {
-            "label": "claim-missed-submission-window-multiple-learners-one-date",
-            "url": "http://localhost:3000/claims/v27/backstop/missed-submission-window?type=100&learnerCount=multi&sharedDate=true",
+            "label": "claim-missed-submission-window-100-multi-learner-shared-completion",
+            "url": "http://localhost:3000/claims/v27/backstop/missed-submission-window?type=100&learner=multi&completion=shared",
+            "delay": 500
+        },
+        {
+            "label": "claim-missed-submission-window-100-multi-learner-different-completion",
+            "url": "http://localhost:3000/claims/v27/backstop/missed-submission-window?type=100&learner=multi&completion=different",
+            "delay": 500
+        },
+        {
+            "label": "claim-missed-submission-window-60",
+            "url": "http://localhost:3000/claims/v27/backstop/missed-submission-window?type=60",
+            "delay": 500
+        },
+        {
+            "label": "claim-missed-submission-window-40",
+            "url": "http://localhost:3000/claims/v27/backstop/missed-submission-window?type=40",
             "delay": 500
         }
+
     ],
     "paths": {
         "bitmaps_reference": "app/views/claims/v27/_backstop/screenshots",

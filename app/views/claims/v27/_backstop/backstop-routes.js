@@ -2920,18 +2920,40 @@ router.get('/remove-learner-confirmation', function (req, res) {
 });
 
 router.get('/missed-submission-window', function (req, res) {
-    
     const type = req.session.data.type
-   
+    const learner = req.session.data.learner
+    const completion = req.session.data.completion
+    let id = null
     delete req.session.data
 
     req.session.data = {
         area: 'Claims',
         userType: 'signatory',
-        journey: 'signin',
-        tabLocation: "claims"
+        scenarios: 'postlogin',
+        tabLocation: "claims",
     };
-// switch statement - if type = 100 use x ID 
+
+    switch (type) {
+        case "100":
+            if (learner == "single") {
+                id = "G5W-W3VK-BLA1-A"
+            } else if (learner == "multi") {
+                if (completion == "shared") {
+                    id = "4RE-EHMM-1W4J-A"
+                } else if (completion == "different") {
+                    id = "7JP-X9LK-1QXE-A"
+                }
+            }
+            break;
+        case "60":
+            id = "VKA-JZM3-64J1-B"
+            break;
+        case "40":
+            id = "U97-SJ15-4GZU-C"
+            break;
+    }
+
+    req.session.data.id = id
     loadScenarioData(req)
     loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
