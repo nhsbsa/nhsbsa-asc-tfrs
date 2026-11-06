@@ -1316,36 +1316,43 @@ router.get('/create-note', function (req, res) {
     const error = req.query.error || req.session.data?.error;
     
     delete req.session.data;
-
-    if (orgTab === "org-notes") {
-        req.session.data = {
-            area: 'Processing',
-            userType: "processor",
-            orgID: "A02944934",
-        };
+   if (orgTab === "org-notes") {
+    req.session.data = {
+        area: 'Processing',
+        userType: "processor",
+        orgID: "A02944934",
+        orgTab: orgTab
+    };
     } else if (orgTab === "singleClaim") {
         req.session.data = {
-            area: 'Processing',
-            userType: "processor",
-            orgID: "A02944934",
-            id: "DEU-QBG9-WJ3U-A",
-            claimScreen: "claimNotes",
-        };
+        area: 'Processing',
+        userType: "processor",
+        orgID: "A02944934",
+        id: "DEU-QBG9-WJ3U-A",
+        claimScreen: "claimNotes",
+        orgTab: orgTab
+    };
     } else {
         req.session.data = {
             area: 'Processing',
             userType: "processor",
-            orgID: "A02944934"
+            orgID: "A02944934",
+            orgTab: orgTab
         };
     }
 // Error states
     if (error === "missing-note") {
         req.session.data.noteContent = "";
-        req.session.data.noteCategories = ["Org update"];
+        req.session.data.noteCategories = ["Org update","Claim update"];
         req.session.data.noteSubmitError = {
+            area: 'Processing',
+            userType: "processor",
+            orgID: "A02944934",
+            orgTab: "org-notes",
             noteContent: "missing",
             noteCategories: "valid",
             valid: false
+
         };
     }
     else if (error === "missing-category") {
