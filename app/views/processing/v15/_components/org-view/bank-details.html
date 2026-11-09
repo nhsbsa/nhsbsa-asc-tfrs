@@ -82,7 +82,7 @@
 
           {% endif %}
 
-          {% if org.bankDetails.verificationStatus == "submitted" and (data.userType == "leadProcessor") %}
+          {% if (org.bankDetails.verificationStatus == "submitted" or org.bankDetails.verificationStatus == "legacyVerified") and (data.userType == "leadProcessor") %}
             <div class="govuk-button-group">
               <a href="../verify-bank-details/accessPay-result" class="govuk-button" data-module="govuk-button">
                 Verify bank details

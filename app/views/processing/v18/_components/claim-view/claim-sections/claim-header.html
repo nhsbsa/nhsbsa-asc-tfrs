@@ -155,7 +155,7 @@
                 <div class="moj-page-header-actions__actions">
                     <div class="moj-button-group moj-button-group--inline">
 
-                        {% if (claim.status == "submitted" or claim.status == 'inProgress') and data.claimScreen != "inProgress" and (data.userType == "processor" or data.userType == "leadProcessor") %}
+                        {% if (claim.status == "submitted" or claim.status == 'inProgress') and data.claimScreen != "inProgress" and (data.userType == "processor" or data.userType == "leadProcessor") and (org.bankDetails.verificationStatus == "legacyVerified" or org.bankDetails.verificationStatus == "verified") %}
                             <a href="../claim-process-start-handler" class="govuk-button" data-module="govuk-button">
                                 {% if (claim.status == 'inProgress') %}Continue processing{% else %}Process claim{% endif %}
                             </a>

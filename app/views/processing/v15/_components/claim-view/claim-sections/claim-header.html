@@ -153,7 +153,7 @@
 
             <h2 class="govuk-heading-s">{{claim.claimType | claimTypeText (false)}}</h2>
 
-            {% if (claim.status == "submitted" or claim.status == 'inProgress') and data.claimScreen != "inProgress" and (data.userType == "processor" or data.userType == "leadProcessor") %}
+            {% if (claim.status == "submitted" or claim.status == 'inProgress') and data.claimScreen != "inProgress" and (data.userType == "processor" or data.userType == "leadProcessor") and (org.bankDetails.verificationStatus == "legacyVerified" or org.bankDetails.verificationStatus == "verified") %}
                     <a href="../claim-process-start-handler" class="govuk-button" role="button" draggable="false" data-module="govuk-button">{% if (claim.status == 'inProgress') %}Continue processing{% else %}Process claim{% endif %}</a>
             {% endif %}
             
