@@ -1371,7 +1371,7 @@
             "delay": 500
         },
         {
-            "label": "bank-details-submitted",
+            "label": "bank-details-submitted-full-view",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=leadProcessor&scenario=2",
             "delay": 500
         },
