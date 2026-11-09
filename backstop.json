@@ -1466,7 +1466,7 @@
             "delay": 500
         },
         {
-            "label": "org-view-main-single-claim-no-notes",
+            "label": "org-view-main-org-notes-no-notes",
             "url": "http://localhost:3000/processing/v18/backstop/org-view-main?orgTab=org-notes&notes=none",
             "delay": 500
         },
