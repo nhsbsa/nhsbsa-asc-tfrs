@@ -55,7 +55,7 @@ addFilter('bankVerificationTag', function (verificationStatus) {
     } else if (verificationStatus == 'verified') {
         return '<strong class="govuk-tag govuk-tag--green">Verified</strong>'
     } else if (verificationStatus == 'legacyVerified') {
-        return '<strong class="govuk-tag govuk-tag--green">Legacy Verified</strong>'
+        return '<strong class="govuk-tag govuk-tag--green">Legacy verified</strong>'
     } else if (verificationStatus == 'rejected') {
         return '<strong class="govuk-tag govuk-tag--red">Verification failed</strong>'
     } else {
