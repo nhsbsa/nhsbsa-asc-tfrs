@@ -2027,9 +2027,13 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
 
 router.get('/start-date', function (req, res) {
     const error = req.session.data.error
+    const statusID = req.query.statusID
 
-  delete req.session.data
-    req.session.data = {
+  delete req.session.data;
+
+    if (statusID == 'not-yet-submitted') {
+        req.session.data = {
+        statusID: 'not-yet-submitted',
         area: 'Claims',
         userType: 'signatory',
         journey: 'signin',
@@ -2037,31 +2041,84 @@ router.get('/start-date', function (req, res) {
         id: "5S9-K4V3-KS56-B"
     };
 
+    } else if (statusID == 'queried') {
+        req.session.data = {
+        statusID: 'queried',
+        area: 'Claims',
+        userType: 'signatory',
+        journey: 'signin',
+        tabLocation: "claims",
+        id: "VIM-5JSV-GQUS"
+    };
+
+    } else { 
+        req.session.data = {
+        area: 'Claims',
+        userType: 'signatory',
+        journey: 'signin',
+        tabLocation: "claims",
+        id: "5S9-K4V3-KS56-B"
+    };
+    }
+
     loadScenarioData(req)
 loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
-    if ( error == "missing") {
+    if ( statusID == "queried" && error == "missing") {
         req.session.data.submitError = {
+            statusID: "queried",
             year: "missing",
             month: "missing",
             day: "missing",
             date: "allMissing",
             policy: "valid",
+            id: "VIM-5JSV-GQUS",
             dateValid: false
             }
-    } else if (error == "policy") {
+
+    } else if ( statusID == "not-yet-submitted" && error == "missing" ) {
         req.session.data.submitError = {
+            statusID: "not-yet-submitted",
+            year: "missing",
+            month: "missing",
+            day: "missing",
+            date: "allMissing",
+            policy: "valid",
+            id: "5S9-K4V3-KS56-B",
+            dateValid: false
+            }
+
+    } if (statusID =="queried" && error ==  "policy") {
+        req.session.data.submitError = {
+            statusID: "queried",
             year: "valid",
             month: "valid",
             day: "valid",
             date: "valid",
             policy: "invalidPolicy",
+            id: "VIM-5JSV-GQUS",
             dateValid: false
             }
             req.session.data["activity-date-started-day"] = "02"
             req.session.data["activity-date-started-month"] = "04"
             req.session.data["activity-date-started-year"] = "2023"
+        
+    } else if (statusID =="not-yet-submitted" && error == "policy") {
+        req.session.data.submitError = {
+            statusID: "not-yet-submitted",
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "valid",
+            policy: "invalidPolicy",
+            id: "5S9-K4V3-KS56-B",
+            dateValid: false
+            }
+            req.session.data["activity-date-started-day"] = "02"
+            req.session.data["activity-date-started-month"] = "04"
+            req.session.data["activity-date-started-year"] = "2023"
+
     }  else if (error == "future") {
         req.session.data.submitError = {
             year: "valid",
@@ -2169,9 +2226,10 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
 });
 
 router.get('/completion-date', function (req, res) {
-    const error = req.session.data.error
-    const type = req.session.data.type
-    const learnerCount = req.session.data.learnerCount
+    const error = req.session?.data.error
+    const type = req.session?.data.type
+    const statusID = req.query.statusID
+    const learnerCount = req.session.data?.learnerCount
     let id = null
 
   delete req.session.data
@@ -2185,26 +2243,39 @@ router.get('/completion-date', function (req, res) {
 
     switch (type) {
         case "100":
-            if (learnerCount=="single") {
-                id = "G5W-W3VK-BLA1-A"
-            } else if (learnerCount=="multi") {
+            if (statusID == "not-yet-submitted" && learnerCount=="single") {
+                id = "G5W-W3VK-BLA1-A";
+            } else if (statusID == "not-yet-submitted" && learnerCount=="multi") {
                 id = "7JP-X9LK-1QXE-A";
+            } else if (statusID=="queried" && learnerCount=="single") {
+                id = "XBZ-TWKP-T5GC-A";
+            } else if (statusID=="queried" && learnerCount=="multi") {
+                id = "HZE-PYRI-EN4T-A";
             }
+
             break;
-        case "40":
-            id = "U97-SJ15-4GZU-C"
+
+            case "40":
+            if (statusID == "not-yet-submitted") {
+                id = "U97-SJ15-4GZU-C";
+            } else if (statusID == "queried") {
+                id = "WVN-NHAU-TTES";
+            }
+
             break;
-        case "60":
-            id = "VKA-JZM3-64J1-B"
+            
+            case "60":
+            id = "VKA-JZM3-64J1-B";
             break;
     }
 
     req.session.data.id = id
+    req.session?.data.error
     loadScenarioData(req)
 loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
-    if ( error == "missing") {
+    if ( type=="100" && error == "missing") {
         req.session.data.submitError = {
             year: "missing",
             month: "missing",
@@ -2213,7 +2284,7 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
             policy: "valid",
             dateValid: false
             }
-    } else if (error == "policy") {
+    } else if (type=="40" && error == "policy") {
         req.session.data.submitError = {
             year: "valid",
             month: "valid",
@@ -2222,7 +2293,7 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
             policy: "invalidAfterStart",
             dateValid: false
         }
-    } else if (error == "future") {
+    } else if (type=="100" &&error == "future") {
         req.session.data.submitError = {
             year: "valid",
             month: "valid",

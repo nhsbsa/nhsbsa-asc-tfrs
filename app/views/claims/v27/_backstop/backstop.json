@@ -1051,20 +1051,25 @@
             "delay": 500
         },
         {
-            "label": "claim-add-start-date",
-            "url": "http://localhost:3000/claims/v27/backstop/start-date",
+            "label": "claim-add-start-date-queried",
+            "url": "http://localhost:3000/claims/v27/backstop/start-date?statusID=queried",
             "delay": 500
         },
 
         {
             "label": "claim-add-start-date-not-yet-submitted",
-            "url": "http://localhost:3000/claims/v27/backstop/start-date-not-yet-submitted",
+            "url": "http://localhost:3000/claims/v27/backstop/start-date?statusID=not-yet-submitted",
             "delay": 500
         },
 
         {
-            "label": "claim-add-start-date-missing-error",
-            "url": "http://localhost:3000/claims/v27/backstop/start-date?error=missing",
+            "label": "claim-add-start-date-queried-missing-error",
+            "url": "http://localhost:3000/claims/v27/backstop/start-date?statusID=queried&&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-start-date-not-yet-submitted-missing-error",
+            "url": "http://localhost:3000/claims/v27/backstop/start-date?statusID=not-yet-submitted&&error=missing",
             "delay": 500
         },
         {
@@ -1073,8 +1078,18 @@
             "delay": 500
         },
         {
+            "label": "claim-add-start-date-not-yet-submitted-policy-error",
+            "url": "http://localhost:3000/claims/v27/backstop/start-date?statusID=not-yet-submitted?error=policy",
+            "delay": 500
+        },
+        {
             "label": "claim-add-start-date-future-error",
             "url": "http://localhost:3000/claims/v27/backstop/start-date?error=future",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-start-date-not-yet-submitted-future-error",
+            "url": "http://localhost:3000/claims/v27/backstop/start-date?statusID=not-yet-submitted?error=future",
             "delay": 500
         },
         {
@@ -1118,16 +1133,26 @@
             "delay": 500
         },
         {
-            "label": "claim-add-completion-date",
-            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&learnerCount=single",
+            "label": "claim-add-completion-date-100-queried-single-learner",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=queried&learnerCount=single",
             "delay": 500
         },
         {
-            "label": "claim-add-completion-date-multiple-learners",
-            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&learnerCount=multi",
+            "label": "claim-add-completion-date-100-not-yet-submitted-single-learner",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=single",
             "delay": 500
         },
-        
+        {
+            "label": "claim-add-completion-date-100-not-yet-submitted-multiple-learners",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=multi",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-completion-date-100-queried-multiple-learners",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=queried&learnerCount=multi",
+            "delay": 500
+        },
+    
         {
             "label": "claim-add-completion-date-missing-error",
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&error=missing",
