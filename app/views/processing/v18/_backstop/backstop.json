@@ -1371,7 +1371,7 @@
             "delay": 500
         },
         {
-            "label": "bank-details-submitted",
+            "label": "bank-details-submitted-full-view",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=leadProcessor&scenario=2",
             "delay": 500
         },
@@ -1461,10 +1461,77 @@
             "delay": 500
         },
         {
-            "label": "claim-notes",
-            "url": "http://localhost:3000/processing/v18/backstop/claim-notes?scenario=1",
+            "label": "org-view-main-org-notes",
+            "url": "http://localhost:3000/processing/v18/backstop/org-view-main?orgTab=org-notes",
+            "delay": 500
+        },
+        {
+            "label": "org-view-main-org-notes-no-notes",
+            "url": "http://localhost:3000/processing/v18/backstop/org-view-main?orgTab=org-notes&notes=none",
+            "delay": 500
+        },
+        {
+            "label": "org-view-main-org-notes-reply-error",
+            "url": "http://localhost:3000/processing/v18/backstop/org-view-main?orgTab=org-notes&error=noreply",
+            "delay": 500
+        },
+        {
+            "label": "org-view-main-single-claim",
+            "url": "http://localhost:3000/processing/v18/backstop/org-view-main?orgTab=singleClaim",
+            "delay": 500
+        },
+        {
+            "label": "org-view-main-single-claim-no-notes",
+            "url": "http://localhost:3000/processing/v18/backstop/org-view-main?orgTab=singleClaim&notes=none",
+            "delay": 500
+        },
+        {
+            "label": "org-view-main-single-claim-reply-error",
+            "url": "http://localhost:3000/processing/v18/backstop/org-view-main?orgTab=singleClaim&error=noreply",
+            "delay": 500
+        }, 
+        {
+            "label": "create-org-note",
+            "url": "http://localhost:3000/processing/v18/backstop/create-note?orgTab=org-notes",
+            "delay": 500
+        },
+        {
+            "label": "create-org-note-error-no-note",
+            "url": "http://localhost:3000/processing/v18/backstop/create-note?orgTab=org-notes&error=missing-note",
+            "delay": 500
+        },
+        {
+            "label": "create-org-note-error-no-category",
+            "url": "http://localhost:3000/processing/v18/backstop/create-note?orgTab=org-notes&error=missing-category",
+            "delay": 500
+        },
+                {
+            "label": "create-org-note-error-no-note-or-category",
+            "url": "http://localhost:3000/processing/v18/backstop/create-note?orgTab=org-notes&error=missing-note-and-missing-category",
+            "delay": 500
+        },
+        {
+            "label": "create-claim-note",
+            "url": "http://localhost:3000/processing/v18/backstop/create-note?orgTab=singleClaim",
+            "delay": 500
+        },
+        {
+            "label": "create-claim-note-error-no-note",
+            "url": "http://localhost:3000/processing/v18/backstop/create-note?orgTab=singleClaim&error=missing-note",
+            "delay": 500
+        },
+        {
+            "label": "create-claim-note-error-no-category",
+            "url": "http://localhost:3000/processing/v18/backstop/create-note?orgTab=singleClaim&error=missing-category",
+            "delay": 500
+        },
+                {
+            "label": "create-claim-note-error-no-note-or-category",
+            "url": "http://localhost:3000/processing/v18/backstop/create-note?orgTab=singleClaim&error=missing-note-and-missing-category",
             "delay": 500
         }
+        
+       
     ],
     "paths": {
         "bitmaps_reference": "app/views/processing/v18/_backstop/screenshots",

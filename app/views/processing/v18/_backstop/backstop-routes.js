@@ -1240,5 +1240,143 @@ router.get('/confirm-SRO-details-change', function (req, res) {
     res.redirect('../change-sro/updated-signatory-invitation');
 });
 
+router.get('/org-view-main', function (req, res) {
+
+    const orgTab = req.query.orgTab || req.session.data?.orgTab;
+    const error = req.query.error || req.session.data?.error;
+    const notes = req.query.notes || req.session.data?.notes;
+    
+    delete req.session.data;
+
+    if (orgTab === "org-notes") {
+    req.session.data = {
+        area: 'Processing',
+        userType: "processor",
+        orgID: "A02944934",
+        orgTab: orgTab
+    };
+    } else if (orgTab === "singleClaim") {
+        req.session.data = {
+        area: 'Processing',
+        userType: "processor",
+        orgID: "A02944934",
+        id: "DEU-QBG9-WJ3U-A",
+        claimScreen: "claimNotes",
+        orgTab: orgTab
+    };
+    } else {
+        req.session.data = {
+            area: 'Processing',
+            userType: "processor",
+            orgID: "A02944934"
+        };
+}
+
+// No notes
+    if (orgTab === "org-notes" && notes === "none") {
+        req.session.data = {
+            notes: "none",
+            area: 'Processing',
+            userType: "processor",
+            orgID: "G91371231",
+            orgTab: orgTab
+    
+        };
+    } else if (orgTab === "singleClaim" && notes === "none") {  
+        req.session.data = {
+            notes: "none",
+            area: 'Processing',
+            userType: "processor",
+            orgID: "A02944934",
+            id: "1VL-F4AI-31U6-A",
+            claimScreen: "claimNotes",
+            orgTab: orgTab
+           
+        };
+    }
+// Error state
+    if (error === "noreply") {
+        req.session.data.noteID = "ABC-123";
+        req.session.data.Textarea = "";
+            req.session.data.submitError = {
+                replyTextarea: "",
+                noteID: "ABC-123",
+                type: "noteMissing"
+        };
+
+    }
+    loadData(req, "A02944934")
+
+    // Redirect to the page you want to screenshot
+    res.redirect('../organisation/org-view-main');
+});
+
+router.get('/create-note', function (req, res) {
+    const orgTab = req.query.orgTab || req.session.data?.orgTab;
+    const error = req.query.error || req.session.data?.error;
+    
+    delete req.session.data;
+   if (orgTab === "org-notes") {
+    req.session.data = {
+        area: 'Processing',
+        userType: "processor",
+        orgID: "A02944934",
+        orgTab: orgTab
+    };
+    } else if (orgTab === "singleClaim") {
+        req.session.data = {
+        area: 'Processing',
+        userType: "processor",
+        orgID: "A02944934",
+        id: "DEU-QBG9-WJ3U-A",
+        claimScreen: "claimNotes",
+        orgTab: orgTab
+    };
+    } else {
+        req.session.data = {
+            area: 'Processing',
+            userType: "processor",
+            orgID: "A02944934",
+            orgTab: orgTab
+        };
+    }
+// Error states
+    if (error === "missing-note") {
+        req.session.data.noteContent = "";
+        req.session.data.noteCategories = ["Org update","Claim update"];
+        req.session.data.noteSubmitError = {
+            area: 'Processing',
+            userType: "processor",
+            orgID: "A02944934",
+            orgTab: "org-notes",
+            noteContent: "missing",
+            noteCategories: "valid",
+            valid: false
+
+        };
+    }
+    else if (error === "missing-category") {
+        req.session.data.noteContent = "This is a test note.";
+        req.session.data.noteCategories = [];
+        req.session.data.noteSubmitError = {
+            noteContent: "valid",
+            noteCategories: "missing",
+            valid: false
+        };
+    }
+    else if (error === "missing-note-and-missing-category") {
+        req.session.data.noteContent = "";
+        req.session.data.noteCategories = [];
+        req.session.data.noteSubmitError = {
+            noteContent: "missing",
+            noteCategories: "missing",
+            valid: false
+        };
+    }
+        loadData(req, "A02944934")
+    // Redirect to the page you want to screenshot
+    res.redirect('../organisation/create-note');
+});
+
 
 module.exports = router

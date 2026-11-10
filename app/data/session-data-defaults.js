@@ -454,22 +454,18 @@ module.exports = {
         "processingVersions": [
             {
                 "versionNo": "18",
+                "phase": "Beta",
                 "status": ["design"],
-                "tested": "TBC",
-                "created": [
-                    "TBC"
-                ],
-                "aims": [
-                    "TBC"
-                ],
-                "learnt": [
-                "TBC"
-            ]
+                "designHistory":"https://asc-ldss-design-history-5a6efa20721c.herokuapp.com/tags/processing-version-18/",
+                "tested": null,
+                "created": null,
+                "aims": null,
+                "learnt": null
             },
             {
                 "versionNo": "17",
                 "phase": "Beta",
-                "status": ["design"],
+                "status": ["dev"],
                 "designHistory":"https://asc-ldss-design-history-5a6efa20721c.herokuapp.com/tags/processing-version-17/",
                 "tested": null,
                 "created": null,
