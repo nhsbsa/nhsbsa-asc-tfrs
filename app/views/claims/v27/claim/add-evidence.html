@@ -68,10 +68,21 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <p class="govuk-body">
-      {% if data.type == 'payment' %} You may upload up to 10 files.{% endif %} These can be in PDF, JPG, JPEG or PNG format.
+    <p>Your evidence must include the payment date.</p>
+    <p>We also need evidence of the payment transaction between your organisation and the training provider.
     </p>
-
+    <div class="govuk-inset-text"><p>For example:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>an invoice that is marked as paid and includes the payment date</li>
+        <li>an invoice and a separate receipt</li>
+        <li>an invoice and a bank statement</li>
+      </ul>
+    </div>
+    <p class="govuk-body">Any documents that include the payment date must show the same date. This date must match the one you enter on the claim details.</p>
+    <h3 class="govuk-heading-s">Upload your evidence</h3>
+    <p class="govuk-body">
+      {% if data.type == 'payment' %} You can upload up to 10 files.{% endif %} These can be in PDF, JPG, JPEG or PNG format.
+    </p>
     <div id="upload"
       class="govuk-form-group {% if data.errorFileTooBig or data.errorWrongFileFormat  or data.errorFileMissing %} govuk-form-group--error {% endif %}">
       <label class="govuk-label" for="evidenceFile">
@@ -103,7 +114,8 @@
           Continue
         </button>
         <a class="govuk-link govuk-link--no-visited-state" href="../cancel-handler">Cancel</a>
-      </div>
+    </div>
+      <p class="govuk-body">If you need help with evidence, you can email us at <a href="#" class="govuk-link">ASClearninganddevelopmentsupport@nhsbsa.nhs.uk</a> or phone 0300 330 0522.</p>
     </form>
     {% else %}
     <form action="../add-evidence?type=completion&id={{id}}" method="post" novalidate>
