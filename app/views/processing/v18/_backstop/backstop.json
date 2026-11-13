@@ -1361,52 +1361,52 @@
             "delay": 500
         },
         {
-            "label": "bank-details-not-yet-added",
+            "label": "bank-details-not-yet-added-qa",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=leadProcessor&scenario=1",
             "delay": 500
         },
         {
-            "label": "bank-details-not-yet-added",
+            "label": "bank-details-not-yet-added-processor",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=processor&scenario=1",
             "delay": 500
         },
         {
-            "label": "bank-details-submitted-full-view",
+            "label": "bank-details-submitted-full-view-qa",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=leadProcessor&scenario=2",
             "delay": 500
         },
         {
-            "label": "bank-details-submitted",
+            "label": "bank-details-submitted-processor",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=processor&scenario=2",
             "delay": 500
         },
         {
-            "label": "bank-details-verified-full-match",
+            "label": "bank-details-verified-full-match-qa",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=leadProcessor&scenario=5",
             "delay": 500
         },
         {
-            "label": "bank-details-verified-full-match",
+            "label": "bank-details-verified-full-match-processor",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=processor&scenario=5",
             "delay": 500
         },
         {
-            "label": "bank-details-verified-partial-match",
+            "label": "bank-details-verified-partial-match-qa",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=leadProcessor&scenario=3",
             "delay": 500
         },
         {
-            "label": "bank-details-verified-partial-match",
+            "label": "bank-details-verified-partial-match-processor",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=processor&scenario=3",
             "delay": 500
         },
         {
-            "label": "bank-details-verification-failed",
+            "label": "bank-details-verification-failed-qa",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=leadProcessor&scenario=4",
             "delay": 500
         },
         {
-            "label": "bank-details-verification-failed",
+            "label": "bank-details-verification-failed-processor",
             "url": "http://localhost:3000/processing/v18/backstop/view-bank-details?userType=processor&scenario=4",
             "delay": 500
         },
