@@ -1346,7 +1346,7 @@
         },
         {
             "label": "submitter-claim-submission-not-yet-verified-bank-details",
-            "url": "≈",
+            "url": "http://localhost:3000/claims/v27/backstop/not-yet-verified-bank-details?userType=submitter",
             "delay": 500
         },
                 {
