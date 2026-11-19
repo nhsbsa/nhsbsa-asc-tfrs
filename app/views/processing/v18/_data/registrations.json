@@ -583,5 +583,44 @@
             "note": "The evidence of address did not match the ASC-WDS address.",
             "decisionDate": "2026-06-15T06:52:47.938Z"
         }
+    },
+    {
+        "registrationRef": "P-SFJS-1325",
+        "status": "submitted",
+        "requestSubmitted": "2026-18-10T06:52:47.938Z",
+        "name": "Yorkplace Care home",
+        "address": ["82 Rose Street", "London", "SE22 6FH"],
+        "evidenceOfAddress": [
+      {
+        "type": "businessratesbill",
+        "evidence": "businessratesbill.pdf"
+      },
+      {
+        "type": "businessleaseagreement",
+        "evidence": "businessleaseagreement.pdf"
+      }
+    ],
+        "ascwds": {
+            "workplaceId": "Y02044938",
+            "workplaceName": "Yorkplace Care home",
+            "workplaceAddress": ["82 Rose Street", "London", "SE22 6FH"],
+            "numberOfWorkplaceStaff": 2,
+            "serviceName": "Carers support",
+            "serviceCategory": "Adult community care",
+            "locationID": "1-263763829"
+        },
+        "chNumber": "0378628",
+        "vatNumber": "027838921",
+        "SRO": {     
+            "givenName": "James",
+            "familyName": "Coleman",
+            "email": "james-coleman@yorkplacecarehome.co.uk",
+            "phonenumber": "01234567890"
+			},
+        "decision": {
+            "outcome": "onboard",
+            "note": null,
+            "decisionDate": "2026-06-15T06:52:47.938Z"
+        }
     }
 ]

@@ -273,5 +273,37 @@
                 "jobTitle": "Senior manager"
             }
         ]
+    },
+    {
+        "journey": "postlogin",
+        "givenName": "James",
+        "familyName": "Coleman",
+        "email": "james-coleman@yorkplacecarehome.co.uk",
+        "phoneNumber": "01234567890",
+        "description": "James is a user for one organisation.",
+        "organisations": [
+            {
+                "workplaceID": "Y02044938",
+                "regRef": "P-SFJS-1325",
+                "userType": "signatory",
+                "jobTitle": "Senior manager"
+            }
+        ]
+    },
+    {
+        "journey": "postlogin",
+        "givenName": "Chloe",
+        "familyName": "Waters",
+        "email": "chloe.waters@yorkplacecarehome.co.uk",
+        "phoneNumber": "01234567890",
+        "description": "Chloe is a user for one organisation.",
+        "organisations": [
+            {
+                "workplaceID": "Y02044938",
+                "regRef": "P-SFJS-1325",
+                "userType": "submitter",
+                "jobTitle": "Senior manager"
+            }
+        ]
     }
 ]

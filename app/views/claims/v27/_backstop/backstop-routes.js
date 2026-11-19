@@ -2275,7 +2275,7 @@ router.get('/completion-date', function (req, res) {
 loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
-    if ( type=="100" && error == "missing") {
+    if ( type=="100" && statusID== "queried" && learnerCount == "single" && error == "missing") {
         req.session.data.submitError = {
             year: "missing",
             month: "missing",
@@ -2284,7 +2284,17 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
             policy: "valid",
             dateValid: false
             }
-    } else if (type=="40" && error == "policy") {
+    } else if ( type=="100" && statusID== "not-yet-submitted" && learnerCount == "single" && error == "missing") {
+        req.session.data.submitError = {
+            year: "missing",
+            month: "missing",
+            day: "missing",
+            date: "allMissing",
+            policy: "valid",
+
+            dateValid: false
+            }
+    } if (type=="40" && statusID == "queried" && error == "policy") {
         req.session.data.submitError = {
             year: "valid",
             month: "valid",
@@ -2293,7 +2303,30 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
             policy: "invalidAfterStart",
             dateValid: false
         }
-    } else if (type=="100" &&error == "future") {
+    } else if (type=="40" && statusID == "not-yet-submitted" && error == "policy") {
+        req.session.data.submitError = {
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "valid",
+            policy: "invalidAfterStart",
+            dateValid: false
+        }
+        req.session.data["completion-date-started-day"] = "02"
+        req.session.data["completion-date-started-month"] = "04"
+        req.session.data["completion-date-started-year"] = "2029"
+
+    } if (type=="100" && statusID== "queried" && learnerCount == "single" && error == "future") {
+        req.session.data.submitError = {
+            year: "valid",
+            month: "valid",
+            day: "valid",
+            date: "inFuture",
+            policy: "valid",
+            dateValid: false
+    }
+    
+    } else if (type=="100" && statusID== "not-yet-submitted" && learnerCount == "single" && error == "future") {
         req.session.data.submitError = {
             year: "valid",
             month: "valid",
@@ -2608,14 +2641,15 @@ router.get('/missing-GDL', function (req, res) {
     req.session.data = {
         area: 'Claims',
         userType,
+        validGDL: "false",
         journey: 'signin',
         tabLocation: "claims",
-        id: 'G5W-W3VK-BLA1-A'
+        id: 'E72-PS45-Q2K7-B'
     };
 
     loadScenarioData(req)
-loadUserData(req, "roy.hub@caregroup.co.uk")
-    loadData(req, "F87223491")
+loadUserData(req, "james-coleman@yorkplacecarehome.co.uk")
+    loadData(req, "Y02044938")
 
     // Redirect to the page you want to screenshot
     res.redirect('../claim/missing-gdl');
@@ -2650,14 +2684,15 @@ router.get('/missing-bank-details', function (req, res) {
     req.session.data = {
         area: 'Claims',
         userType,
+        verificationStatus: 'Rejected',
         journey: 'signin',
         tabLocation: "claims",
-        id: 'G5W-W3VK-BLA1-A'
+        id: 'E72-PS45-Q2K7-B'
     };
 
     loadScenarioData(req)
-loadUserData(req, "roy.hub@caregroup.co.uk")
-    loadData(req, "F87223491")
+loadUserData(req, "james-coleman@yorkplacecarehome.co.uk")
+    loadData(req, "Y02044938")
 
     // Redirect to the page you want to screenshot
     res.redirect('../claim/missing-bank-details');
@@ -2672,11 +2707,11 @@ router.get('/not-yet-verified-bank-details', function (req, res) {
         userType,
         journey: 'signin',
         tabLocation: "claims",
-        id: 'G5W-W3VK-BLA1-A'
+        id: 'P72-PS55-Q2K7-B'
     };
     loadScenarioData(req)
-loadUserData(req, "roy.hub@caregroup.co.uk")
-    loadData(req, "F87223491")
+loadUserData(req, "james-coleman@yorkplacecarehome.co.uk")
+    loadData(req, "Y02044938")
 
     // Redirect to the page you want to screenshot
     res.redirect('../claim/unverified-bank-details');
@@ -2691,11 +2726,11 @@ router.get('/rejected-bank-details', function (req, res) {
         userType,
         journey: 'signin',
         tabLocation: "claims",
-        id: 'G5W-W3VK-BLA1-A'
+        id: 'P72-PS55-Q2K7-B'
     };
     loadScenarioData(req)
-loadUserData(req, "roy.hub@caregroup.co.uk")
-    loadData(req, "F87223491")
+loadUserData(req, "chloe.waters@yorkplacecarehome.co.uk")
+    loadData(req, "Y02044938")
 
     // Redirect to the page you want to screenshot
     res.redirect('../claim/rejected-bank-details');
