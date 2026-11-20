@@ -1412,12 +1412,38 @@
         },
         {
             "label": "bank-details-no-radio-selected",
-            "url": "http://localhost:3000/processing/v18/backstop/verify-bank-details",
+            "url": "http://localhost:3000/processing/v18/backstop/verify-bank-details?error=bankDetailsVerificationIncomplete",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-partial-match-note-incomplete-error",
+            "url": "http://localhost:3000/processing/v18/backstop/verify-bank-details?accessPayResult=partialMatch&error=partialMatchNoteIncomplete",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-partial-match-note-incomplete-screenshotmissing-error",
+            "url": "http://localhost:3000/processing/v18/backstop/verify-bank-details?accessPayResult=partialMatch&error=partialMatchScreenshotMissing&partialMatchNoteIncomplete",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-no-match-note-incomplete-screenshot-missing-error",
+            "url": "http://localhost:3000/processing/v18/backstop/verify-bank-details?accessPayResult=noMatch&error=noMatchScreenshotMissing&noMatchNoteIncomplete",
+            "delay": 500
+        },
+
+        {
+            "label": "bank-details-full-match-no-screenshot-error",
+            "url": "http://localhost:3000/processing/v18/backstop/verify-bank-details?accessPayResult=fullMatch&error=fullMatchScreenshotMissing",
+            "delay": 500
+        },
+        {
+            "label": "bank-details-partial-match-note-incomplete-screenshot-missing-error",
+            "url": "http://localhost:3000/processing/v18/backstop/verify-bank-details?accessPayResult=partialMatch&error=partialMatchScreenshotMissing",
             "delay": 500
         },
         {
             "label": "bank-details-verify-full-match",
-            "url": "http://localhost:3000/processing/v18/backstop/verify-bank-details?accessPayResult=fullMatch",
+            "url": "http://localhost:3000/processing/v18/backstop/verify-bank-details?accessPayResult=null&accessPayResult=fullMatch",
             "delay": 500
         },
         {

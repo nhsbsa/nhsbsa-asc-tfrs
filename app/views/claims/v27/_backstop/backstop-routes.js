@@ -2648,7 +2648,7 @@ router.get('/missing-GDL', function (req, res) {
     };
 
     loadScenarioData(req)
-loadUserData(req, "james-coleman@yorkplacecarehome.co.uk")
+loadUserData(req, "james-coleman@hawthorncarehome.co.uk")
     loadData(req, "Y02044938")
 
     // Redirect to the page you want to screenshot
@@ -2691,7 +2691,7 @@ router.get('/missing-bank-details', function (req, res) {
     };
 
     loadScenarioData(req)
-loadUserData(req, "james-coleman@yorkplacecarehome.co.uk")
+loadUserData(req, "james-coleman@hawthorncarehome.co.uk")
     loadData(req, "Y02044938")
 
     // Redirect to the page you want to screenshot
@@ -2710,7 +2710,7 @@ router.get('/not-yet-verified-bank-details', function (req, res) {
         id: 'P72-PS55-Q2K7-B'
     };
     loadScenarioData(req)
-loadUserData(req, "james-coleman@yorkplacecarehome.co.uk")
+loadUserData(req, "james-coleman@hawthorncarehome.co.uk")
     loadData(req, "Y02044938")
 
     // Redirect to the page you want to screenshot
@@ -2729,7 +2729,7 @@ router.get('/rejected-bank-details', function (req, res) {
         id: 'P72-PS55-Q2K7-B'
     };
     loadScenarioData(req)
-loadUserData(req, "chloe.waters@yorkplacecarehome.co.uk")
+loadUserData(req, "chloe.waters@hawthorncarehome.co.uk")
     loadData(req, "Y02044938")
 
     // Redirect to the page you want to screenshot

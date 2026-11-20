@@ -538,14 +538,14 @@
     "workplaceID": "Y02044938",
     "registrationRef": "P-SFJS-1325",
     "numberOfClaims": 2,
-    "name": "Yorkplace Care home",
+    "name": "Hawthorn Care home",
     "address": ["82 Rose Street", "London", "SE22 6FH"],
     "bankDetails": {
       "verificationStatus": "sumbmitted",
       "accessPayResult": "fullMatch",
       "accessPayEvidence": "full-match.png",
       "verificationNote": null,
-      "nameOnAccount": "Yorkplace care home",
+      "nameOnAccount": "Hawthorn care home",
       "sortCode": "282596",
       "accountNumber": "12345678",
       "buildingSocietyNumber": "4594359056"
@@ -557,7 +557,7 @@
         {        
           "givenName": "James",
           "familyName": "Coleman",
-          "email": "james-coleman@yorkplacecarehome.co.uk",
+          "email": "james-coleman@hawthorncarehome.co.uk",
           "status": "active"
         },
           "inactive": []
@@ -567,7 +567,7 @@
         {
           "givenName": "Chloe",
           "familyName": "Waters",
-          "email": "chloe.waters@yorkplacecarehome.co.uk"
+          "email": "chloe.waters@hawthorncarehome.co.uk"
         },
         {
          "inactive": []

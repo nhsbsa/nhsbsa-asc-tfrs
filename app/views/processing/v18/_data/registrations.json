@@ -588,7 +588,7 @@
         "registrationRef": "P-SFJS-1325",
         "status": "submitted",
         "requestSubmitted": "2026-18-10T06:52:47.938Z",
-        "name": "Yorkplace Care home",
+        "name": "Hawthorn Care home",
         "address": ["82 Rose Street", "London", "SE22 6FH"],
         "evidenceOfAddress": [
       {
@@ -602,7 +602,7 @@
     ],
         "ascwds": {
             "workplaceId": "Y02044938",
-            "workplaceName": "Yorkplace Care home",
+            "workplaceName": "Hawthorn Care home",
             "workplaceAddress": ["82 Rose Street", "London", "SE22 6FH"],
             "numberOfWorkplaceStaff": 2,
             "serviceName": "Carers support",
@@ -614,7 +614,7 @@
         "SRO": {     
             "givenName": "James",
             "familyName": "Coleman",
-            "email": "james-coleman@yorkplacecarehome.co.uk",
+            "email": "james-coleman@hawthorncarehome.co.uk",
             "phonenumber": "01234567890"
 			},
         "decision": {

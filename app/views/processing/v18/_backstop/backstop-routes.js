@@ -1037,6 +1037,8 @@ router.get('/view-bank-details', function (req, res) {
 
 router.get('/verify-bank-details', function (req, res) {
     const accessPayResult = req.session.data.accessPayResult
+    const error = req.query.error || req.session.data?.error;
+    const partialMatchNote = req.session.data.partialMatchNote
 
     delete req.session.data
     req.session.data = {
@@ -1048,6 +1050,29 @@ router.get('/verify-bank-details', function (req, res) {
     };
 
     loadData(req)
+    // Error state
+    if (error === "bankDetailsVerificationIncomplete") {
+        req.session.data.bankDetailsVerificationIncomplete = "true";
+    
+    } else if (error === "partialMatchNoteIncomplete") {
+        req.session.data.partialMatchNoteIncomplete = "true";
+
+    } if (error === "fullMatchScreenshotMissing") {
+        req.session.data.fullMatch = "true";
+        req.session.data.fullMatchScreenshotMissing = "true";
+        
+    } if (error === "partialMatchScreenshotMissing" && "partialMatchNoteIncomplete") {
+        req.session.data.partialMatch = "true";
+        req.session.data.partialMatchScreenshotMissing = "true";
+        req.session.data.partialMatchNoteIncomplete = "true";
+
+    } if (error === "noMatchScreenshotMissing" && "noMatchNoteIncomplete") {
+        req.session.data.partialMatch = "true";
+        req.session.data.noMatchScreenshotMissing = "true";
+        req.session.data.noMatchNoteIncomplete = "true";
+    }
+
+    
 
     // Redirect to the page you want to screenshot
     res.redirect('../verify-bank-details/accessPay-result');
