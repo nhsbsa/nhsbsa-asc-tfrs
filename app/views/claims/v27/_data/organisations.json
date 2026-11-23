@@ -914,45 +914,5 @@
       "inactive": [],
       "invited": []
     }
-  },
-  {
-    "workplaceID": "Y02044938",
-    "registrationRef": "P-SFJS-1325",
-    "numberOfClaims": 2,
-    "name": "Yorkplace Care home",
-    "address": ["82 Rose Street", "London", "SE22 6FH"],
-    "bankDetails": {
-      "verificationStatus": "submitted",
-      "accessPayResult": "fullMatch",
-      "accessPayEvidence": "full-match.png",
-      "verificationNote": null,
-      "nameOnAccount": "Yorkplace care home",
-      "sortCode": "282596",
-      "accountNumber": "12345678",
-      "buildingSocietyNumber": "4594359056"
-    },
-    "validGDL": false,
-    "notes" : [],
-    "signatory": {
-      "active": 
-        {        
-          "givenName": "James",
-          "familyName": "Coleman",
-          "email": "james-coleman@yorkplacecarehome.co.uk",
-          "status": "active"
-        },
-          "inactive": []
-        },
-        "users": {
-          "active": [
-        {
-          "givenName": "Chloe",
-          "familyName": "Waters",
-          "email": "chloe.waters@yorkplacecarehome.co.uk"
-        },
-        {
-         "inactive": []
-        }]
-    }
   }
 ]
