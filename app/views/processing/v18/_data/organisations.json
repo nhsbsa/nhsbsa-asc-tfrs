@@ -224,7 +224,7 @@
       "givenName": "Mira",
       "familyName": "Caldwell",
       "email": "mira.caldwell@brighthorizons.com",
-      "status": "invited"
+      "status": "active"
     },  
     "inactive": []
   },
@@ -334,7 +334,7 @@
     "name": "Farifields Care home",
     "address": ["12 Farifield Road", "York", "YO23 6FH"],
     "bankDetails": {
-      "verificationStatus": "submitted",
+      "verificationStatus": "verified",
       "accessPayResult": "fullMatch",
       "accessPayEvidence": "full-match.png",
       "verificationNote": null,
@@ -533,49 +533,5 @@
         "email": "abel.mellow@evergreencare.com"
       }]
     }
-  },
-  {
-    "workplaceID": "Y02044938",
-    "registrationRef": "P-SFJS-1325",
-    "numberOfClaims": 2,
-    "name": "Hawthorn Care home",
-    "address": ["82 Rose Street", "London", "SE22 6FH"],
-    "bankDetails": {
-      "verificationStatus": "sumbmitted",
-      "accessPayResult": "fullMatch",
-      "accessPayEvidence": "full-match.png",
-      "verificationNote": null,
-      "nameOnAccount": "Hawthorn care home",
-      "sortCode": "282596",
-      "accountNumber": "12345678",
-      "buildingSocietyNumber": "4594359056"
-      },
-    "validGDL": false,
-    "notes" : [],
-    "signatory": {
-      "active": 
-        {        
-          "givenName": "James",
-          "familyName": "Coleman",
-          "email": "james-coleman@hawthorncarehome.co.uk",
-          "status": "active"
-        },
-          "inactive": []
-        },
-        "users": {
-          "active": [
-        {
-          "givenName": "Chloe",
-          "familyName": "Waters",
-          "email": "chloe.waters@hawthorncarehome.co.uk"
-        },
-        {
-         "inactive": []
-        }]
-    }
   }
-  ]
-
-
-
-  
+]
