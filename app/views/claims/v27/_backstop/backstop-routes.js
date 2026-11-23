@@ -2641,15 +2641,14 @@ router.get('/missing-GDL', function (req, res) {
     req.session.data = {
         area: 'Claims',
         userType,
-        validGDL: "false",
         journey: 'signin',
         tabLocation: "claims",
-        id: 'E72-PS45-Q2K7-B'
+        id: 'G5W-W3VK-BLA1-A'
     };
 
     loadScenarioData(req)
-loadUserData(req, "james-coleman@hawthorncarehome.co.uk")
-    loadData(req, "Y02044938")
+loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
     res.redirect('../claim/missing-gdl');
@@ -2684,15 +2683,14 @@ router.get('/missing-bank-details', function (req, res) {
     req.session.data = {
         area: 'Claims',
         userType,
-        verificationStatus: 'Rejected',
         journey: 'signin',
         tabLocation: "claims",
-        id: 'E72-PS45-Q2K7-B'
+        id: 'G5W-W3VK-BLA1-A'
     };
 
     loadScenarioData(req)
-loadUserData(req, "james-coleman@hawthorncarehome.co.uk")
-    loadData(req, "Y02044938")
+loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
     res.redirect('../claim/missing-bank-details');
@@ -2707,11 +2705,11 @@ router.get('/not-yet-verified-bank-details', function (req, res) {
         userType,
         journey: 'signin',
         tabLocation: "claims",
-        id: 'P72-PS55-Q2K7-B'
+        id: 'G5W-W3VK-BLA1-A'
     };
     loadScenarioData(req)
-loadUserData(req, "james-coleman@hawthorncarehome.co.uk")
-    loadData(req, "Y02044938")
+loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
     res.redirect('../claim/unverified-bank-details');
@@ -2726,11 +2724,11 @@ router.get('/rejected-bank-details', function (req, res) {
         userType,
         journey: 'signin',
         tabLocation: "claims",
-        id: 'P72-PS55-Q2K7-B'
+        id: 'G5W-W3VK-BLA1-A'
     };
     loadScenarioData(req)
-loadUserData(req, "chloe.waters@hawthorncarehome.co.uk")
-    loadData(req, "Y02044938")
+loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadData(req, "A02944934")
 
     // Redirect to the page you want to screenshot
     res.redirect('../claim/rejected-bank-details');
