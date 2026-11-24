@@ -1149,9 +1149,20 @@
         },
         {
             "label": "claim-add-completion-date-100-not-yet-submitted-multiple-learners",
-            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=multi",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=multi&sharedCompletionDate=false",
             "delay": 500
         },
+        {
+            "label": "claim-add-completion-date-100-not-yet-submitted-multiple-learners-shared-completion",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=multi&sharedCompletionDate=true",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-completion-date-100-queried-multiple-learners-shared-completion",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=queried&learnerCount=multi&sharedCompletionDate=true",
+            "delay": 500
+        },
+
         {
             "label": "claim-add-completion-date-100-queried-multiple-learners",
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=queried&learnerCount=multi",
@@ -1161,6 +1172,16 @@
         {
             "label": "claim-add-completion-date-missing-error-not-yet-submitted",
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=single&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-completion-date-missing-error-not-yet-submitted-multi-learner-shared-completion-date",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=multi&sharedCompletionDate=true&error=missing",
+            "delay": 500
+        },
+        {
+            "label": "claim-add-completion-date-missing-error-not-yet-submitted-shared-completion-date",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=multi&sharedCompletionDate=true&error=missing",
             "delay": 500
         },
         {

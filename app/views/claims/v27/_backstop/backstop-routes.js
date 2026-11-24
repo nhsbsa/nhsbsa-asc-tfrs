@@ -2230,6 +2230,7 @@ router.get('/completion-date', function (req, res) {
     const type = req.session?.data.type
     const statusID = req.query.statusID
     const learnerCount = req.session.data?.learnerCount
+    const sharedCompletionDate = req.session.data?.sharedCompletionDate
     let id = null
 
   delete req.session.data
@@ -2245,11 +2246,13 @@ router.get('/completion-date', function (req, res) {
         case "100":
             if (statusID == "not-yet-submitted" && learnerCount=="single") {
                 id = "G5W-W3VK-BLA1-A";
-            } else if (statusID == "not-yet-submitted" && learnerCount=="multi") {
-                id = "7JP-X9LK-1QXE-A";
+            } else if (statusID == "not-yet-submitted" && learnerCount=="multi" && sharedCompletionDate == "true") {
+                id = "4RE-EHMM-1W4J-A";
             } else if (statusID=="queried" && learnerCount=="single") {
                 id = "XBZ-TWKP-T5GC-A";
-            } else if (statusID=="queried" && learnerCount=="multi") {
+             } else if (statusID == "queried" && learnerCount=="multi" && sharedCompletionDate == "true") {
+                id = "1KF-1BHM-U4SU-A";
+            } else if (statusID =="queried" && learnerCount=="multi") {
                 id = "HZE-PYRI-EN4T-A";
             }
 
@@ -2294,6 +2297,17 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
 
             dateValid: false
             }
+    } else if ( type=="100" && statusID== "not-yet-submitted" && learnerCount == "multi" && sharedCompletionDate == "true" && error == "missing") {
+        req.session.data.submitError = {
+            year: "missing",
+            month: "missing",
+            day: "missing",
+            date: "allMissing",
+            policy: "valid",
+
+            dateValid: false
+            }
+            
     } if (type=="40" && statusID == "queried" && error == "policy") {
         req.session.data.submitError = {
             year: "valid",
