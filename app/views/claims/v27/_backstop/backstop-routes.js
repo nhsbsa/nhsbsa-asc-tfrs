@@ -2250,8 +2250,6 @@ router.get('/completion-date', function (req, res) {
                 id = "4RE-EHMM-1W4J-A";
             } else if (statusID=="queried" && learnerCount=="single") {
                 id = "XBZ-TWKP-T5GC-A";
-             } else if (statusID == "queried" && learnerCount=="multi" && sharedCompletionDate == "true") {
-                id = "1KF-1BHM-U4SU-A";
             } else if (statusID =="queried" && learnerCount=="multi") {
                 id = "HZE-PYRI-EN4T-A";
             }
@@ -2262,7 +2260,7 @@ router.get('/completion-date', function (req, res) {
             if (statusID == "not-yet-submitted") {
                 id = "U97-SJ15-4GZU-C";
             } else if (statusID == "queried") {
-                id = "WVN-NHAU-TTES";
+                id = "WVN-NHAU-TTES-C";
             }
 
             break;
@@ -2275,7 +2273,7 @@ router.get('/completion-date', function (req, res) {
     req.session.data.id = id
     req.session?.data.error
     loadScenarioData(req)
-loadUserData(req, "roy.hub@caregroup.co.uk")
+    loadUserData(req, "roy.hub@caregroup.co.uk")
     loadData(req, "A02944934")
 
     if ( type=="100" && statusID== "queried" && learnerCount == "single" && error == "missing") {
@@ -2286,17 +2284,8 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
             date: "allMissing",
             policy: "valid",
             dateValid: false
-            }
-    } else if ( type=="100" && statusID== "not-yet-submitted" && learnerCount == "single" && error == "missing") {
-        req.session.data.submitError = {
-            year: "missing",
-            month: "missing",
-            day: "missing",
-            date: "allMissing",
-            policy: "valid",
-
-            dateValid: false
-            }
+            };
+    
     } else if ( type=="100" && statusID== "not-yet-submitted" && learnerCount == "multi" && sharedCompletionDate == "true" && error == "missing") {
         req.session.data.submitError = {
             year: "missing",
@@ -2306,8 +2295,35 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
             policy: "valid",
 
             dateValid: false
-            }
+            };
+    
+    } else if ( type=="100" && statusID== "not-yet-submitted" && learnerCount == "multi" && sharedCompletionDate == "true" && error == "future") {
+        req.session.data.submitError = {
+            year: "missing",
+            month: "missing",
+            day: "missing",
+            date: "allMissing",
+            policy: "valid",
+            dateValid: false
             
+        };
+    req.session.data["completion-date-started-day"] = "02"
+    req.session.data["completion-date-started-month"] = "04"
+    req.session.data["completion-date-started-year"] = "2029"
+            
+    
+    } else if ( type=="100" && statusID== "not-yet-submitted" && learnerCount == "single" && error == "missing") {
+        req.session.data.submitError = {
+            year: "missing",
+            month: "missing",
+            day: "missing",
+            date: "allMissing",
+            policy: "valid",
+
+            dateValid: false
+            };
+
+     
     } if (type=="40" && statusID == "queried" && error == "policy") {
         req.session.data.submitError = {
             year: "valid",
@@ -2325,10 +2341,7 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
             date: "valid",
             policy: "invalidAfterStart",
             dateValid: false
-        }
-        req.session.data["completion-date-started-day"] = "02"
-        req.session.data["completion-date-started-month"] = "04"
-        req.session.data["completion-date-started-year"] = "2029"
+        };
 
     } if (type=="100" && statusID== "queried" && learnerCount == "single" && error == "future") {
         req.session.data.submitError = {
@@ -2338,7 +2351,10 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
             date: "inFuture",
             policy: "valid",
             dateValid: false
-    }
+    };
+    req.session.data["completion-date-started-day"] = "02"
+    req.session.data["completion-date-started-month"] = "04"
+    req.session.data["completion-date-started-year"] = "2029"
     
     } else if (type=="100" && statusID== "not-yet-submitted" && learnerCount == "single" && error == "future") {
         req.session.data.submitError = {
@@ -2348,7 +2364,7 @@ loadUserData(req, "roy.hub@caregroup.co.uk")
             date: "inFuture",
             policy: "valid",
             dateValid: false
-        }
+        };
         req.session.data["completion-date-started-day"] = "02"
         req.session.data["completion-date-started-month"] = "04"
         req.session.data["completion-date-started-year"] = "2029"

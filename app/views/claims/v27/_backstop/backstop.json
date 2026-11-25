@@ -1158,50 +1158,44 @@
             "delay": 500
         },
         {
-            "label": "claim-add-completion-date-100-queried-multiple-learners-shared-completion",
-            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=queried&learnerCount=multi&sharedCompletionDate=true",
-            "delay": 500
-        },
-
-        {
             "label": "claim-add-completion-date-100-queried-multiple-learners",
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=queried&learnerCount=multi",
             "delay": 500
         },
     
         {
-            "label": "claim-add-completion-date-missing-error-not-yet-submitted",
+            "label": "claim-add-completion-date-error-not-yet-submitted-missing",
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=single&error=missing",
             "delay": 500
         },
         {
-            "label": "claim-add-completion-date-missing-error-not-yet-submitted-multi-learner-shared-completion-date",
+            "label": "claim-add-completion-date-error-not-yet-submitted-multi-learner-shared-completion-date-missing",
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=multi&sharedCompletionDate=true&error=missing",
             "delay": 500
         },
         {
-            "label": "claim-add-completion-date-missing-error-not-yet-submitted-shared-completion-date",
-            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=multi&sharedCompletionDate=true&error=missing",
-            "delay": 500
-        },
-        {
-            "label": "claim-add-completion-date-missing-error-queried",
+            "label": "claim-add-completion-date-error-queried-missing",
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=queried&learnerCount=single&error=missing",
             "delay": 500
         },
         {
-            "label": "claim-add-completion-date-queried-future-error-",
+            "label": "claim-add-completion-date-error-queried-future-date",
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=queried&learnerCount=single&error=future",
             "delay": 500
         },
         {
-            "label": "claim-add-completion-date-not-yet-submitted-future-error",
+            "label": "claim-add-completion-date-error-not-yet-submitted-future-date",
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=single&error=future",
+            "delay": 500
+        },
+             {
+            "label": "claim-add-completion-date-error-not-yet-submitted-multi-learner-shared-completion-future-date",
+            "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=100&statusID=not-yet-submitted&learnerCount=multi&sharedCompletionDate=true&error=future",
             "delay": 500
         },
 
         {
-            "label": "claim-add-completion-date-40-not-yet-submitted-policy-error",
+            "label": "claim-add-completion-date--error-40-not-yet-submitted-policy",
             "url": "http://localhost:3000/claims/v27/backstop/completion-date?type=40&statusID=not-yet-submitted&error=policy",
             "delay": 500
         },
